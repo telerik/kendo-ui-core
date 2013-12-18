@@ -49,14 +49,16 @@
                 url: "AjaxView1.html",
                 responseText: 'Text 1',
                 mockProgress: true,
-                responseTime: 1500
+                responseTime: 2500,
+                progressWait: 1000
             });
 
             $.mockjax({
                 url: "AjaxView2.html",
                 responseText: 'Text 2',
                 mockProgress: true,
-                responseTime: 750
+                responseTime: 1000,
+                progressWait: 500
             });
 
             $(document).ready(function() {

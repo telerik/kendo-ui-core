@@ -30,6 +30,18 @@
     display: ~"@{type}-flex";
 }
 
+.animation(...) {
+    animation: @arguments;
+    -moz-animation: @arguments;
+    -webkit-animation: @arguments;
+}
+
+.animation-delay(...) {
+    animation-delay: @arguments;
+    -moz-animation-delay: @arguments;
+    -webkit-animation-delay: @arguments;
+}
+
 .box-orient(@direction) {
     -moz-box-orient: @direction;
     -webkit-box-orient: @direction;
@@ -951,7 +963,6 @@ div.k-window-iframecontent
 {
     top: 0;
     left: 0;
-    width: 0;
     height: 0;
     width: 20%;
     position: absolute;
@@ -959,17 +970,18 @@ div.k-window-iframecontent
     border-top: 1px solid transparent;
     border-color: inherit;
     .transition("width 200ms linear");
-    -webkit-animation: k-tab-loader 1s ease-in-out infinite;
-    -moz-animation: k-tab-loader 1s ease-in-out infinite;
-    animation: k-tab-loader 1s ease-in-out infinite;
+    .animation(k-tab-loader 1s ease-in-out infinite);
+}
+
+.k-tabstrip-items .k-progress
+{
+    .animation(none);
 }
 
 .k-tabstrip-items .k-loading.k-complete
 {
     width: 100%;
-    -webkit-animation: none;
-    -moz-animation: none;
-    animation: none;
+    .animation(none);
 }
 
 .k-tabstrip > .k-content,

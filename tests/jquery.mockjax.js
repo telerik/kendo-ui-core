@@ -196,15 +196,18 @@
             progress = (function(that) {
                             return function() {
                                 return (function() {
-                                    mockHandler.progress({
-                                        lengthComputable: true,
-                                        loaded: percentage,
-                                        total: 100
-                                    });
-                                    percentage += 10;
-                                    if (percentage < 100) {
-                                        this.progressTimer = setTimeout(progress, mockHandler.responseTime / 10);
-                                    }
+                                    this.progressTimer = setTimeout(function () {
+                                        mockHandler.progress({
+                                            lengthComputable: true,
+                                            loaded: percentage,
+                                            total: 100
+                                        });
+                                        percentage += 10;
+                                        if (percentage < 100) {
+                                            that.progressTimer = setTimeout(progress, (mockHandler.responseTime - mockHandler.progressWait) / 10);
+                                        }
+                                    }, mockHandler.progressRan ? 0 : mockHandler.progressWait || 0);
+                                    mockHandler.progressRan = true;
                                 }).apply(that);
                             };
                         })(this);
