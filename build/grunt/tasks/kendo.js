@@ -49,6 +49,16 @@ module.exports = function(grunt) {
         var destMin = PATH.join(task.options().destDir, bundleMin);
         var files = components.map(function(f){ return PATH.join("src", f) });
 
+        if (grunt.option("show")) {
+            META.loadComponents(components).forEach(function(f){
+                var comp = META.getKendoFile(f);
+                if (!comp.isSubfile()) {
+                    console.log(comp.filename());
+                }
+            });
+            return;
+        }
+
         if (force || outdated(files, dest)) {
             grunt.log.writeln("Making bundle " + dest);
             var data = META.bundleFiles(components, bundle);
