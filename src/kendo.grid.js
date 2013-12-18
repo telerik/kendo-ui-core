@@ -3540,11 +3540,14 @@ var __meta__ = {
             colgroup = table.find("colgroup");
             tr = table.find("tr");
 
+            that.footer.find(".k-grid-footer-wrap>table>colgroup>.k-group-col,.k-hierarchy-col").appendTo(colgroup)
+            that.footer.find(".k-footer-template>.k-group-cell,.k-hierarchy-cell").appendTo(tr);
+
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].static) {
 
-                    that.footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)").eq(idx).appendTo(colgroup);
-                    that.footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)").eq(idx).appendTo(tr);
+                    that.footer.find(".k-grid-footer-wrap>table>colgroup>col").eq(idx).appendTo(colgroup);
+                    that.footer.find(".k-footer-template>td").eq(idx).appendTo(tr);
                     hasStaticColumns = true;
                 }
             }

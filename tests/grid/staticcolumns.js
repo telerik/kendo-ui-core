@@ -5,7 +5,7 @@
 
     module("grid static columns", {
         setup: function() {
-            div = $("<div></div>");
+            div = $("<div></div>").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.destroy(div);
@@ -183,4 +183,28 @@
         ok(!grid.content.find("td.k-group-cell").length);
     });
 
+    test("group cell is added to the static footer", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.staticFooter.find("col.k-group-col").length, 1);
+        equal(grid.staticFooter.find("td.k-group-cell").length, 1);
+    });
+
+    test("no group cell is added to the non static footer", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        var nonStaticFooter = grid.footer.find(".k-grid-footer-wrap");
+        ok(!nonStaticFooter.find("col.k-group-col").length);
+        ok(!nonStaticFooter.find("td.k-group-cell").length);
+    });
 })();
