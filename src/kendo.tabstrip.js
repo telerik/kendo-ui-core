@@ -1013,7 +1013,7 @@ kendo_module({
                 progress: function(evt) {
                     if (evt.lengthComputable) {
                         var percent = parseInt((evt.loaded / evt.total * 100), 10) + "%";
-                        statusIcon.width(percent);
+                        statusIcon.width(percent).addClass("k-progress");
                     }
                 },
 
