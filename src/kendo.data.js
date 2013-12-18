@@ -1499,6 +1499,8 @@ kendo_module({
 
             parameterMap = options.parameterMap;
 
+            that.push = isFunction(options.push) ? options.push : identity;
+
             that.parameterMap = isFunction(parameterMap) ? parameterMap : function(options) {
                 var result = {};
 
@@ -2029,6 +2031,14 @@ kendo_module({
 
             that.transport = Transport.create(options, data);
 
+            if (isFunction(that.transport.push)) {
+                that.transport.push({
+                    pushCreate: proxy(that._pushCreate, that),
+                    pushUpdate: proxy(that._pushUpdate, that),
+                    pushDestroy: proxy(that._pushDestroy, that)
+                });
+            }
+
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
             model = that.reader.model || {};
@@ -2055,6 +2065,22 @@ kendo_module({
             var group = this.group() || [];
 
             return this.options.serverGrouping && group.length;
+        },
+
+        _pushCreate: function(result) {
+            var data = this._readData(result);
+
+            for (var idx = 0; idx < data.length; idx++) {
+                this.pushCreate(data[idx]);
+            }
+        },
+
+        _pushUpdate: function() {
+
+        },
+
+        _pushDestroy: function() {
+
         },
 
         _flatData: function(data) {
@@ -2147,6 +2173,20 @@ kendo_module({
             }
 
             return model;
+        },
+
+        pushCreate: function(item) {
+            var result = this.add(item);
+
+            var pristine = result.toJSON();
+
+            if (this.options.serverGrouping) {
+                pristine = wrapInEmptyGroup(this.group(), pristine);
+            }
+
+            this._pristineData.push(pristine);
+
+            return result;
         },
 
         remove: function(model) {
