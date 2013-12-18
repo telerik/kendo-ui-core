@@ -458,7 +458,7 @@ kendo_module({
             else {
                 bounds = this._bounds;
             }
-            if (!this.shapeVisual._measured && this.options.width === DEFAULT_SHAPE_WIDTH && options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
+            if (!this.shapeVisual._measured) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
                     if (this.shapeVisual.options.autoSize) {
@@ -1242,21 +1242,28 @@ kendo_module({
             }
             return json;
         },
-        load: function (json) {
-            var i, options, con;
+        load: function (json, loadShape, loadConnection) { // loadShape/loadConnection - process the options, so that you can set function for complex visual templates.
+            var i, options, con, shape;
             this.options = deepExtend(this.options, json.options);
             this.clear();
             this._fetchFreshData();
             for (i = 0; i < json.shapes.length; i++) {
                 options = json.shapes[i].options;
                 options.undoable = false;
-                this.addShape(new Shape(options));
+                if (loadShape) {
+                    loadShape(options);
+                }
+                shape = new Shape(options);
+                this.addShape(shape);
             }
 
             for (i = 0; i < json.connections.length; i++) {
                 con = json.connections[i];
                 options = con.options;
                 options.undoable = false;
+                if (loadConnection) {
+                    loadConnection(options);
+                }
                 var from = deserializeConnector(this, con.from);
                 var to = deserializeConnector(this, con.to);
                 this.addConnection(new Connection(from, to, options));
