@@ -541,6 +541,10 @@ kendo_module({
                 that._word = "";
             }, that.options.delay);
 
+            if (index === -1) {
+                index = 0;
+            }
+
             if (!that.ul[0].firstChild) {
                 dataSource.one(CHANGE, function () {
                     if (dataSource.data()[0] && index > -1) {
