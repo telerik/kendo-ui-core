@@ -16,8 +16,6 @@ function withSandbox(callback) {
 
     var jQueryUrl = $("script[src*=jquery]").attr("src");
 
-    console.log(jQueryUrl);
-
     doc.open();
     doc.write(
         "<!doctype html>" +

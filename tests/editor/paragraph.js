@@ -330,6 +330,21 @@ test('exec at beginning of header adds header above', function() {
     equal(editor.value(), '<h1></h1><h1><a></a>foo</h1>');
 });
 
+test("exec in header among BOMs goes in new paragraph", function() {
+    editor.value('<h1>foo\ufeff\ufeff</h1>');
+
+    var range = editor.createRange();
+    range.setStart(editor.body.firstChild.firstChild, 4);
+    range.collapse(true);
+    var command = createParagraphCommand(range);
+
+    command.exec();
+
+    insertCaretAnchor();
+
+    equal(editor.value(), '<h1>foo</h1><p><a></a></p>');
+});
+
 test('exec in list before image', function() {
     editor.value('<ul><li><img src="foo" /></li></ul>');
     var range = editor.createRange();
