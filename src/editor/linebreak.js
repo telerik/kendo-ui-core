@@ -63,6 +63,14 @@ var ParagraphCommand = Command.extend({
         return (startInBlock && !endInBlock) || (!startInBlock && endInBlock);
     },
 
+    _blankAfter: function (node) {
+        while (node && (dom.isMarker(node) || dom.stripBom(node.nodeValue) === "")) {
+            node = node.nextSibling;
+        }
+
+        return !node;
+    },
+
     exec: function () {
         var range = this.getRange(),
             doc = RangeUtils.documentFromRange(range),
@@ -95,7 +103,7 @@ var ParagraphCommand = Command.extend({
                 paragraph.innerHTML = emptyParagraphContent;
                 next = paragraph;
             }
-        } else if (heading && !marker.nextSibling) {
+        } else if (heading && this._blankAfter(marker)) {
             paragraph = dom.create(doc, 'p');
 
             dom.insertAfter(paragraph, heading);
