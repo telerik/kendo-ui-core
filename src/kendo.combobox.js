@@ -692,10 +692,14 @@ kendo_module({
 
             that._typing = setTimeout(function() {
                 var value = that.text();
+
+                that._selectedValue = value;
+
                 if (that._prev !== value) {
                     that._prev = value;
                     that.search(value);
                 }
+
                 that._typing = null;
             }, that.options.delay);
         },
