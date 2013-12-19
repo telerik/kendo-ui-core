@@ -41,7 +41,12 @@ kendo_module({
         ToFrontUnit = diagram.ToFrontUnit,
         Dictionary = diagram.Dictionary,
         PolylineRouter = diagram.PolylineRouter,
-        CascadingRouter = diagram.CascadingRouter;
+        CascadingRouter = diagram.CascadingRouter,
+        isUndefined = Utils.isUndefined,
+        isDefined = Utils.isDefined,
+        isArray = $.isArray,
+        isFunction = kendo.isFunction,
+        isString = Utils.isString;
 
     // Constants ==============================================================
     var NS = ".kendoDiagram",
@@ -63,6 +68,9 @@ kendo_module({
         ZOOM = "zoom",
         CONNECTION_CSS = "k-connection",
         SHAPE_CSS = "k-shape",
+        SINGLE = "single",
+        NONE = "none",
+        MULTIPLE = "multiple",
         CONNECTOR_CSS = "k-connector",
         DEFAULT_SHAPE_TYPE = "rectangle",
         DEFAULT_SHAPE_WIDTH = 100,
@@ -255,7 +263,13 @@ kendo_module({
         options: {
             background: "Green",
             hoveredBackground: "#70CAFF",
-            cursor: Cursors.grip
+            cursor: Cursors.grip,
+            content: {
+                align: "center middle",
+                text: ""
+            },
+            editable: true,
+            selectable: true
         },
         _getCursor: function (point) {
             if (this.adorner) {
@@ -264,7 +278,7 @@ kendo_module({
             return Cursors.select;
         },
         visible: function (value) {
-            if (Utils.isUndefined(value)) {
+            if (isUndefined(value)) {
                 return this.visual.visible();
             }
             else {
@@ -292,40 +306,22 @@ kendo_module({
             }
             return json;
         },
-        content: function (content) {
-            if (content !== undefined) {
-                if (!content) {
-                    if (this.contentVisual) {
-                        this.visual.remove(this.contentVisual);
-                    }
-                    this.contentVisual = undefined;
-                    this.options.content = "";
+        content: function (text) {
+            if (text !== undefined) {
+                text = text || "";
+                var bounds = this.bounds(),
+                    options = deepExtend(this.options.content, {text: text.toString(), width: bounds.width, height: bounds.height});
+                if (this.shapeVisual instanceof TextBlock) {
+                    this._contentVisual = this.shapeVisual;
                 }
-                else {
-                    var bounds = this.bounds();
-                    if (this.contentVisual && this.contentVisual instanceof TextBlock) {
-                        this.contentVisual.options.text = content.toString();
-                    }
-                    else {
-                        this.contentVisual = new TextBlock({
-                            text: content.toString(),
-                            align: "center middle",
-                            x: bounds.x,
-                            y: bounds.y,
-                            width: bounds.width,
-                            height: bounds.height,
-                            autoSize: this.options.autoSize
-                        });
-
-                        this.visual.append(this.contentVisual);
-                    }
-                    this.options.content = content.toString();
-                    this.contentVisual.redraw();
-                    this.refresh();
+                if (!this._contentVisual) {
+                    this._contentVisual = new TextBlock();
+                    this.visual.append(this._contentVisual);
                 }
+                this._contentVisual.redraw(options);
             }
 
-            return this.contentVisual ? this.contentVisual.content() : "";
+            return this.options.content.text;
         },
         _hitTest: function (point) {
             var bounds = this.bounds();
@@ -334,8 +330,11 @@ kendo_module({
         _template: function () {
             var that = this;
             if (that.options.template && that.model) {
-                that.options.content = kendo.template(that.options.template, {paramName: "item"})(that.model);
+                that.options.content.text = kendo.template(that.options.template, {paramName: "item"})(that.model);
             }
+        },
+        _canSelect: function () {
+            return this.options.selectable === true && this.diagram.options.selectable.type !== NONE;
         }
     });
 
@@ -398,9 +397,7 @@ kendo_module({
             that.isContainer = false;
             that.isCollapsed = false;
             that.id = that.visual.native.id;
-            if (Utils.isDefined(options.content)) {
-                that.content(options.content);
-            }
+            that.content(that.content());
             that._rotate();
         },
         options: {
@@ -421,14 +418,13 @@ kendo_module({
             connectors: diagram.DefaultConnectors,
             rotation: {
                 angle: 0
-            },
-            content: ""
+            }
         },
         bounds: function (value) {
             var point, size, bounds, options;
             options = this.options;
             if (value) {
-                if (Utils.isString(value)) {
+                if (isString(value)) {
                     switch (value) {
                         case TRANSFORMED :
                             bounds = this._transformedBounds();
@@ -447,18 +443,14 @@ kendo_module({
                     }
                 }
                 else { // we assume Rect.
-                    if (this.contentVisual) {
-                        this.contentVisual.redraw(this._bounds);
-                    }
                     point = value.topLeft();
                     options.x = point.x;
                     options.y = point.y;
                     options.width = Math.max(value.width, options.minWidth);
                     options.height = Math.max(value.height, options.minHeight);
                     this._bounds = new Rect(options.x, options.y, options.width, options.height);
-
                     this.visual.position(point);
-                    this.shapeVisual.redraw({ width: options.width, height: options.height });
+                    this.redraw({ width: options.width, height: options.height });
                     this.refreshConnections();
                     this._triggerBoundsChange();
                 }
@@ -466,10 +458,7 @@ kendo_module({
             else {
                 bounds = this._bounds;
             }
-            if (this.contentVisual && !this.contentVisual._measured) {
-                this.contentVisual.redraw(this._bounds);
-            }
-            if (!this.shapeVisual._measured && this.options.width === DEFAULT_SHAPE_WIDTH && options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
+            if (!this.shapeVisual._measured) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
                     if (this.shapeVisual.options.autoSize) {
@@ -505,23 +494,30 @@ kendo_module({
             return clone;
         },
         select: function (value) {
-            var diagram = this.diagram, selected, deselected;
-            if (Utils.isUndefined(value)) {
+            var diagram = this.diagram, selected, deselected, type;
+            if (isUndefined(value)) {
                 value = true;
             }
-            if (this.isSelected != value) {
-                selected = [];
-                deselected = [];
-                this.isSelected = value;
-                if (this.isSelected) {
-                    diagram._selectedItems.push(this);
-                    selected.push(this);
-                } else {
-                    diagram._selectedItems.remove(this);
-                    deselected.push(this);
-                }
-                if (!diagram._internalSelection) {
-                    diagram._selectionChanged(selected, deselected);
+            if (this._canSelect()) {
+                if (this.isSelected != value) {
+                    type = this.diagram.options.selectable.type;
+                    selected = [];
+                    deselected = [];
+                    this.isSelected = value;
+                    if (this.isSelected) {
+                        if (type === SINGLE) {
+                            this.diagram.select(false);
+                        }
+                        diagram._selectedItems.push(this);
+                        selected.push(this);
+                    } else {
+                        diagram._selectedItems.remove(this);
+                        deselected.push(this);
+                    }
+                    if (!diagram._internalSelection) {
+                        diagram._selectionChanged(selected, deselected);
+                    }
+                    return true;
                 }
             }
         },
@@ -593,7 +589,7 @@ kendo_module({
          */
         getConnector: function (nameOrPoint) {
             var i, ctr;
-            if (Utils.isString(nameOrPoint)) {
+            if (isString(nameOrPoint)) {
                 nameOrPoint = nameOrPoint.toLocaleLowerCase();
                 for (i = 0; i < this.connectors.length; i++) {
                     ctr = this.connectors[i];
@@ -612,7 +608,7 @@ kendo_module({
         getPosition: function (side) {
             var b = this.bounds(),
                 fnName = side[0].toLowerCase() + side.slice(1);
-            if (Utils.isFunction(b[fnName])) {
+            if (isFunction(b[fnName])) {
                 return this._transformPoint(b[fnName]());
             }
             return b.center();
@@ -621,8 +617,9 @@ kendo_module({
             if (options) {
                 this.options = deepExtend({}, this.options, options);
             }
-            if (Utils.isDefined(this.options.content)) {
-                this.content(this.options.content);
+
+            if (this._contentVisual) {
+                this._contentVisual.redraw({ width: this.options.width, height: this.options.height });
             }
             this.shapeVisual.redraw(options);
         },
@@ -685,20 +682,20 @@ kendo_module({
     Shape.createShapeVisual = function (options) {
         var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }),
             visualTemplate = shapeOptions.data; // Shape visual should not have position in its parent group.
-        if (Utils.isString(visualTemplate)) {
+        if (isString(visualTemplate)) {
             switch (shapeOptions.data.toLocaleLowerCase()) {
                 case "rectangle":
                     return new Rectangle(shapeOptions);
                 case "circle":
                     return new Circle(shapeOptions);
                 case "text": // Maybe should be something else.
-                    return new Rectangle(shapeOptions);
+                    return new TextBlock(shapeOptions);
                 default:
                     var p = new Path(shapeOptions);
                     return p;
             }
         }
-        else if (Utils.isFunction(visualTemplate)) {// custom template
+        else if (isFunction(visualTemplate)) {// custom template
             return visualTemplate(shapeOptions.context);
         }
         return new Rectangle(shapeOptions);
@@ -718,9 +715,9 @@ kendo_module({
             that._sourcePoint = that._targetPoint = new Point();
             that.source(from);
             that.target(to);
-            that.content(that.options.content);
+            that.content(that.options.content.text);
             that.definers = [];
-            if (Utils.isDefined(options) && options.points) {
+            if (isDefined(options) && options.points) {
                 that.points(options.points);
             }
             that.refresh();
@@ -749,7 +746,7 @@ kendo_module({
          * @param undoable Whether the change or assignment should be undoable.
          */
         source: function (source, undoable) {
-            if (Utils.isDefined(source)) {
+            if (isDefined(source)) {
                 if (undoable && this.diagram) {
                     this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
                 }
@@ -821,7 +818,7 @@ kendo_module({
          * @param undoable  Whether the change or assignment should be undoable.
          */
         target: function (target, undoable) {
-            if (Utils.isDefined(target)) {
+            if (isDefined(target)) {
                 if (undoable && this.diagram) {
                     this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
                 }
@@ -886,27 +883,34 @@ kendo_module({
          * @param value True to select, false to unselect.
          */
         select: function (value) {
-            var diagram = this.diagram, selected, deselected;
-            if (this.isSelected !== value) {
-                this.isSelected = value;
-                selected = [];
-                deselected = [];
-                if (this.isSelected) {
-                    this.adorner = new ConnectionEditAdorner(this);
-                    diagram._adorn(this.adorner, true);
-                    diagram._selectedItems.push(this);
-                    selected.push(this);
-                } else {
-                    if (this.adorner) {
-                        diagram._adorn(this.adorner, false);
-                        diagram._selectedItems.remove(this);
-                        this.adorner = undefined;
-                        deselected.push(this);
+            var diagram = this.diagram, selected, deselected, type;
+            if (this._canSelect()) {
+                if (this.isSelected !== value) {
+                    this.isSelected = value;
+                    selected = [];
+                    deselected = [];
+                    type = this.diagram.options.selectable.type;
+                    if (this.isSelected) {
+                        if (type === SINGLE) {
+                            this.diagram.select(false);
+                        }
+                        this.adorner = new ConnectionEditAdorner(this);
+                        diagram._adorn(this.adorner, true);
+                        diagram._selectedItems.push(this);
+                        selected.push(this);
+                    } else {
+                        if (this.adorner) {
+                            diagram._adorn(this.adorner, false);
+                            diagram._selectedItems.remove(this);
+                            this.adorner = undefined;
+                            deselected.push(this);
+                        }
                     }
-                }
-                this.refresh();
-                if (!diagram._internalSelection) {
-                    diagram._selectionChanged(selected, deselected);
+                    this.refresh();
+                    if (!diagram._internalSelection) {
+                        diagram._selectionChanged(selected, deselected);
+                    }
+                    return true;
                 }
             }
         },
@@ -974,7 +978,7 @@ kendo_module({
 
             } else {
                 var pts = [];
-                if (Utils.isDefined(this.definers)) {
+                if (isDefined(this.definers)) {
                     for (var k = 0; k < this.definers.length; k++) {
                         pts.push(this.definers[k].point);
                     }
@@ -1001,15 +1005,14 @@ kendo_module({
             var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
                 boundsTopLeft, localSourcePoint, localSinkPoint, middle;
 
-            // this.visual.position(boundsTopLeft);    //global coordinates!
             this._refreshPath();
 
             boundsTopLeft = this._bounds.topLeft();
             localSourcePoint = globalSourcePoint.minus(boundsTopLeft);
             localSinkPoint = globalSinkPoint.minus(boundsTopLeft);
-            if (this.contentVisual) {
+            if (this._contentVisual) {
                 middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
-                this.contentVisual.position(new Point(middle.x + boundsTopLeft.x, middle.y + boundsTopLeft.y));
+                this._contentVisual.position(new Point(middle.x + boundsTopLeft.x, middle.y + boundsTopLeft.y));
             }
 
             if (this.adorner) {
@@ -1018,8 +1021,8 @@ kendo_module({
         },
         redraw: function (options) {
             this.options = deepExtend({}, this.options, options);
-            this.content(this.options.content);
-            if (Utils.isDefined(this.options.points) && this.options.points.length > 0) {
+            this.content(this.options.content.text);
+            if (isDefined(this.options.points) && this.options.points.length > 0) {
                 this.points(this.options.points);
                 this._refreshPath();
             }
@@ -1099,7 +1102,7 @@ kendo_module({
             return data + " L" + pr(end);
         },
         _refreshPath: function () {
-            if (Utils.isUndefined(this.path)) {
+            if (isUndefined(this.path)) {
                 return;
             }
             this._drawPath(this._calcPathData());
@@ -1185,7 +1188,14 @@ kendo_module({
                 height: 20,
                 margin: 10,
                 fontSize: 15
-            }
+            },
+            selectable: { // none, extended, multiple
+                type: MULTIPLE,
+                inclusive: true
+            },
+            snapping: true,
+            snapSize: 10,
+            snapAngle: 10
         },
 
         events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
@@ -1196,7 +1206,6 @@ kendo_module({
 
             that.clear();
             that.element.off(NS);
-            // TODO: Destroy all the shapes, connections and the tons of other stuff!
             that.canvas.element.removeChild(that.canvas.native);
             that.canvas = undefined;
 
@@ -1233,21 +1242,28 @@ kendo_module({
             }
             return json;
         },
-        load: function (json) {
-            var i, options, con;
-            this.options = json.options;
+        load: function (json, loadShape, loadConnection) { // loadShape/loadConnection - process the options, so that you can set function for complex visual templates.
+            var i, options, con, shape;
+            this.options = deepExtend(this.options, json.options);
             this.clear();
             this._fetchFreshData();
             for (i = 0; i < json.shapes.length; i++) {
                 options = json.shapes[i].options;
                 options.undoable = false;
-                this.addShape(new Shape(options));
+                if (loadShape) {
+                    loadShape(options);
+                }
+                shape = new Shape(options);
+                this.addShape(shape);
             }
 
             for (i = 0; i < json.connections.length; i++) {
                 con = json.connections[i];
                 options = con.options;
                 options.undoable = false;
+                if (loadConnection) {
+                    loadConnection(options);
+                }
                 var from = deserializeConnector(this, con.from);
                 var to = deserializeConnector(this, con.to);
                 this.addConnection(new Connection(from, to, options));
@@ -1326,7 +1342,7 @@ kendo_module({
             var shape;
             options = deepExtend({undoable: true}, options);
 
-            if (Utils.isUndefined(item)) {
+            if (isUndefined(item)) {
                 item = new Point(0, 0);
             }
             if (item instanceof Shape) {
@@ -1347,6 +1363,7 @@ kendo_module({
             }
 
             this._raiseItemsAdded([shape]);
+            shape.redraw();
 
             return shape;
         },
@@ -1356,9 +1373,9 @@ kendo_module({
          * @param undoable.
          */
         remove: function (items, undoable) {
-            var isMultiple = $.isArray(items);
+            var isMultiple = isArray(items);
 
-            if (Utils.isUndefined(undoable)) {
+            if (isUndefined(undoable)) {
                 undoable = true;
             }
             if (undoable) {
@@ -1398,7 +1415,7 @@ kendo_module({
          * @returns {Array}
          */
         select: function (itemsOrRect, options) {
-            var i, item, items, rect, selected, deselected;
+            var i, item, items, rect, selected, deselected, valueString;
             options = deepExtend({  addToSelection: false }, options);
             var addToSelection = options.addToSelection;
             if (itemsOrRect !== undefined) {
@@ -1408,24 +1425,14 @@ kendo_module({
                 if (!addToSelection) {
                     while (this._selectedItems.length > 0) {
                         item = this._selectedItems[0];
-                        item.select(false);
-                        deselected.push(item);
+                        if (item.select(false)) {
+                            deselected.push(item);
+                        }
                     }
                 }
                 if (Utils.isBoolean(itemsOrRect)) {
                     if (itemsOrRect !== false) {
                         this.select(ALL);
-                    }
-                }
-                else if (itemsOrRect.toString().toLowerCase() === "none") {
-                    this.select(false);
-                }
-                else if (itemsOrRect.toString().toLowerCase() === ALL) {
-                    items = this.shapes.concat(this.connections);
-                    for (i = 0; i < items.length; i++) {
-                        item = items[i];
-                        item.select(true);
-                        selected.push(item);
                     }
                 }
                 else if (itemsOrRect instanceof Rect) {
@@ -1434,8 +1441,9 @@ kendo_module({
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
                         if (!rect || item._hitTest(rect)) {
-                            item.select(true);
-                            selected.push(item);
+                            if (item.select(true)) {
+                                selected.push(item);
+                            }
                         }
                     }
                 }
@@ -1443,14 +1451,31 @@ kendo_module({
                     for (i = 0; i < itemsOrRect.length; i++) {
                         item = items[i];
                         if (item instanceof DiagramElement) {
-                            item.select(true);
-                            selected.push(item);
+                            if (item.select(true)) {
+                                selected.push(item);
+                            }
                         }
                     }
                 }
                 else if (itemsOrRect instanceof DiagramElement) {
-                    itemsOrRect.select(true);
-                    selected.push(itemsOrRect);
+                    if (itemsOrRect.select(true)) {
+                        selected.push(itemsOrRect);
+                    }
+                }
+                else { // string with special meaning...
+                    valueString = itemsOrRect.toString().toLowerCase();
+                    if (valueString === NONE) {
+                        this.select(false);
+                    }
+                    else if (valueString === ALL) {
+                        items = this.shapes.concat(this.connections);
+                        for (i = 0; i < items.length; i++) {
+                            item = items[i];
+                            if (item.select(true)) {
+                                selected.push(item);
+                            }
+                        }
+                    }
                 }
                 if (selected.length > 0 || deselected.length > 0) {
                     this._selectionChanged(selected, deselected);
@@ -1468,7 +1493,7 @@ kendo_module({
          */
         toFront: function (items, undoable) {
             var result = this._getDiagramItems(items), indices;
-            if (Utils.isUndefined(undoable) || undoable) {
+            if (isUndefined(undoable) || undoable) {
                 indices = indicesOfItems(this.mainLayer.native, result.visuals);
                 var unit = new ToFrontUnit(this, items, indices);
                 this.undoRedoService.add(unit);
@@ -1485,7 +1510,7 @@ kendo_module({
          */
         toBack: function (items, undoable) {
             var result = this._getDiagramItems(items), indices;
-            if (Utils.isUndefined(undoable) || undoable) {
+            if (isUndefined(undoable) || undoable) {
                 indices = indicesOfItems(this.mainLayer.native, result.visuals);
                 var unit = new ToBackUnit(this, items, indices);
                 this.undoRedoService.add(unit);
@@ -1509,7 +1534,7 @@ kendo_module({
             if (item instanceof DiagramElement) {
                 rect = item.bounds(TRANSFORMED);
             }
-            else if (Utils.isArray(item)) {
+            else if (isArray(item)) {
                 rect = this.getBoundingBox(item);
             }
             else if (item instanceof Rect) {
@@ -1525,14 +1550,14 @@ kendo_module({
                 align.align(rect, options.align);
 
                 var newPan = rect.topLeft().minus(old.topLeft());
-                if(!this.options.useScroller) {
+                if (!this.options.useScroller) {
                     newPan = this.pan().plus(newPan);
                 }
                 this.pan(newPan, options.animate);
             }
         },
         alignShapes: function (direction) {
-            if (Utils.isUndefined(direction)) {
+            if (isUndefined(direction)) {
                 direction = "Left";
             }
             var items = this.select(),
@@ -1594,28 +1619,37 @@ kendo_module({
             var unit = new kendo.diagram.TransformUnit(shapes, undoStates);
             this.undoRedoService.add(unit, false);
         },
-        zoom: function (zoom, staticPoint) {
+        zoom: function (zoom, options) {
             if (zoom) {
+                var staticPoint = options ? options.location : new kendo.diagram.Point(0, 0);
+                // var meta = options ? options.meta : 0;
                 var currentZoom = this._zoom;
                 zoom = this._zoom = this._getValidZoom(zoom);
 
-                if (!Utils.isUndefined(staticPoint)) {//Viewpoint vector is constant
+                if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
+                    staticPoint = new kendo.diagram.Point(Math.round(staticPoint.x), Math.round(staticPoint.y));
                     var zoomedPoint = staticPoint.times(zoom);
                     var viewportVector = staticPoint.times(currentZoom).plus(this._pan);
-                    this._storePan(viewportVector.minus(zoomedPoint));//pan + zoomed point = viewpoint vector
+                    var raw = viewportVector.minus(zoomedPoint);//pan + zoomed point = viewpoint vector
+                    this._storePan(new kendo.diagram.Point(Math.round(raw.x), Math.round(raw.y)));
+                }
+                if (options) {
+                    options.zoom = zoom;
                 }
 
                 this._panTransform();
-                this.trigger(ZOOM);
+                this.trigger(ZOOM, options);
             }
             return this._zoom;
         },
-        pan: function (pan, animated) {
+        pan: function (pan, options) {
+            options = options || {animated: false};
+            var animated = options.animated;
             if (pan instanceof Point && !pan.equals(this._pan)) {
+                this._animatePan(pan, !animated);
                 this._storePan(pan);
-                this._panTransform(pan, animated);
 
-                this.trigger(PAN);
+                this.trigger(PAN, {total: pan, delta: options.delta});
             }
 
             return this._pan;
@@ -1697,7 +1731,6 @@ kendo_module({
                     copied.select(true);
                 }
                 this._copyOffset += 1;
-
             }
         },
         // Miro: I would make that private and/or use toOrigin instead.
@@ -1719,7 +1752,7 @@ kendo_module({
          */
         getBoundingBox: function (items, origin) {
             var rect = Rect.empty(), temp,
-                di = Utils.isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
+                di = isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
                 if (origin === true) {
@@ -1774,7 +1807,7 @@ kendo_module({
             this.isLayouting = true;
             // TODO: raise layout event?
             var type;
-            if (Utils.isUndefined(options) || Utils.isUndefined(options.type)) {
+            if (isUndefined(options) || isUndefined(options.type)) {
                 type = "Tree";
             }
             else {
@@ -1834,15 +1867,16 @@ kendo_module({
          */
         editor: function (item, options) { // support custome editors via the options for vNext
             var editor = this._editor;
-
-            editor.options = deepExtend(this.options.editor, options);
-            this._editItem = item;
-            this._showEditor();
-            var shapeContent = item.content();
-            item.content("");
-            editor.originalContent = shapeContent;
-            editor.content(shapeContent);
-            editor.focus();
+            if (isUndefined(item.options.editable) || item.options.editable === true) {
+                editor.options = deepExtend(this.options.editor, options);
+                this._editItem = item;
+                this._showEditor();
+                var shapeContent = item.content();
+                editor._originalContent = shapeContent;
+                editor.content(shapeContent);
+                editor.focus();
+            }
+            return editor;
         },
         _initEditor: function () {
             this._editor = new diagram.TextBlockEditor();
@@ -1873,7 +1907,7 @@ kendo_module({
         _finishEditShape: function () {
             var editor = this._editor, item = this._editItem;
             if (item) {
-                var unit = new diagram.ContentChangedUndoUnit(item, editor.originalContent, editor.content());
+                var unit = new diagram.ContentChangedUndoUnit(item, editor._originalContent, editor.content());
                 this.undoRedoService.add(unit);
                 editor.visible(false);
             }
@@ -1882,28 +1916,43 @@ kendo_module({
             this.trigger(SELECT, {selected: selected, deselected: deselected});
         },
         _getValidZoom: function (zoom) {
-            return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
+            return Math.min(Math.max(zoom, 0.7), 2.0);
         },
-        _panTransform: function (pos, animated) {
+        _panTransform: function (pos) {
             var diagram = this,
                 pan = pos || diagram._pan;
 
             if (this.scroller) {
-                var scrollMethod = (animated === true ? "animatedScrollTo" : "scrollTo");
-
-                diagram.scroller[scrollMethod](pan.x, pan.y);
-                this._zoomMainLayer();
+                diagram.scroller.scrollTo(pan.x, pan.y);
+                diagram._zoomMainLayer();
             }
             else {
-                if (animated) {
-                    var t = new Ticker();
-                    t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
-                    t.play();
+                diagram._transformMainLayer();
+            }
+        },
+        _animatePan: function (pan, skipAnimation) {
+            var diagram = this;
+
+            if (skipAnimation) {
+                this._panTransform(pan);
+            }
+            else {
+                if (diagram.scroller) {
+                    diagram.scroller.animatedScrollTo(pan.x, pan.y);
+                    diagram._zoomMainLayer();
                 }
                 else {
-                    diagram._transformMainLayer();
+                    var t = new Ticker();
+                    t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
+                    t.onStep = function () {
+                        diagram._finishPan();
+                    };
+                    t.play();
                 }
             }
+        },
+        _finishPan: function () {
+            this.trigger(PAN, {total: this._pan, delta: Number.NaN});
         },
         _storePan: function (pan) {
             this._pan = pan;
@@ -1970,7 +2019,7 @@ kendo_module({
             if (!items) {
                 args = this._selectedItems;
             }
-            else if (!Utils.isArray(items)) {
+            else if (!isArray(items)) {
                 args = [items];
             }
             for (i = 0; i < args.length; i++) {
@@ -2042,6 +2091,10 @@ kendo_module({
                 this.connections.remove(connection);
             }
         },
+        _canRectSelect: function () {
+            var type = this.options.selectable.type;
+            return type === MULTIPLE;
+        },
         _refreshSource: function (e) {
             var that = this,
                 node = e.node,
@@ -2051,7 +2104,7 @@ kendo_module({
                 i;
 
             function addShape(node) {
-                if (Utils.isUndefined(node)) { // happens on updating dataSource
+                if (isUndefined(node)) { // happens on updating dataSource
                     return;
                 }
                 var shape = that._dataMap.first(function (item) {
@@ -2198,7 +2251,7 @@ kendo_module({
                 options = that.options,
                 dataSource = options.dataSource;
 
-            dataSource = Utils.isArray(dataSource) ? { data: dataSource } : dataSource;
+            dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
             if (!dataSource.fields) {
                 dataSource.fields = [
@@ -2248,6 +2301,7 @@ kendo_module({
         },
         _autosizeCanvas: function (args) {
             var diagram = args.sender || this,
+                editor = this._editor,
                 zoom = diagram.zoom(),
                 viewport = diagram.element,
                 viewportSize = new Rect(0, 0, viewport.width(), viewport.height()),
@@ -2259,7 +2313,7 @@ kendo_module({
             cumulativeSize = cumulativeSize.union(viewportSize);
 
             diagram.canvas.size(cumulativeSize);
-            if (this._editor.visible()) {
+            if (editor && editor.visible()) {
                 this._positionEditor();
             }
         },

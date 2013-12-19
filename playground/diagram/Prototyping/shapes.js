@@ -1,19 +1,6 @@
 var shapesSource = [
     {
         options: {
-            name: "Text",
-            content: "Text",
-            data: "text",
-            connectors: [],
-            background: "white",
-            hoveredBackground: "white",
-            fillOpacity: 0,
-            autoSize: true,
-            //height: 30
-        }
-    },
-    {
-        options: {
             name: "Circle",
             data: "Circle",
             rx: 50,
@@ -40,7 +27,6 @@ var shapesSource = [
             name: "Pie Chart",
             data: function () {
                 var g = new kendo.diagram.Group({
-//                    autoSize: true,
                     height: 100,
                     width: 100
                 });

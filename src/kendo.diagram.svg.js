@@ -18,6 +18,7 @@ kendo_module({
         RectAlign = diagram.RectAlign,
         Matrix = diagram.Matrix,
         Utils = diagram.Utils,
+        isUndefined = Utils.isUndefined,
         MatrixVector = diagram.MatrixVector;
 
     // Constants ==============================================================
@@ -152,9 +153,24 @@ kendo_module({
         }
     });
 
+    function sizeTransform(element) {
+        var scaleX = element.options.width / element._originWidth,
+            scaleY = element.options.height / element._originHeight,
+            x = element.options.x || 0,
+            y = element.options.y || 0;
+
+        scaleX = scaleX ? scaleX : 1;
+        scaleY = scaleY ? scaleY : 1;
+
+        element._transform.translate = new Translation(x, y);
+        element._transform.scale = new Scale(scaleX, scaleY);
+        element._renderTransform();
+    }
+
     var Element = Class.extend({
         init: function (native, options) {
             var element = this;
+            this._originSize = Rect.empty();
             this._originWidth = DEFAULTWIDTH;
             this._originHeight = DEFAULTHEIGHT;
             this._visible = true;
@@ -164,7 +180,7 @@ kendo_module({
             element.redraw();
         },
         visible: function (value) {
-            if (Utils.isUndefined(value)) {
+            if (isUndefined(value)) {
                 return this._visible;
             }
             else {
@@ -173,7 +189,7 @@ kendo_module({
             }
         },
         setAtr: function (atr, prop) {
-            if (Utils.isUndefined(prop) || Utils.isUndefined(this.options[prop])) {
+            if (isUndefined(prop) || isUndefined(this.options[prop])) {
                 return;
             }
             if (this.options[prop] !== undefined) {
@@ -182,7 +198,7 @@ kendo_module({
         },
         redraw: function (options) {
             if (options) {
-                this.options = deepExtend({}, this.options, options);
+                deepExtend(this.options, options);
             }
             this.setAtr("id", "id");
             this.setAtr("class", "cssClass");
@@ -214,12 +230,13 @@ kendo_module({
         },
         _hover: function () {
         },
-        _measure: function () {
+        _measure: function (force) {
             var box, n = this.native;
-            if (!this._measured) {
+            if (!this._measured || force) {
                 try {
-                    box = this._originSize = n.getBBox();
+                    box = n.getBBox();
                     if (box.width && box.height) {
+                        this._originSize = new Rect(box.left, box.right, box.width, box.height);
                         this._originWidth = box.width;
                         this._originHeight = box.height;
                         this._measured = true;
@@ -300,6 +317,7 @@ kendo_module({
             this._sz = { width: this.options.width, height: this.options.height };
             this.setAtr("width", "width");
             this.setAtr("height", "height");
+            this.setAtr("background", "background");
             return this._sz;
         }
     });
@@ -307,8 +325,8 @@ kendo_module({
     var TextBlock = VisualBase.extend({
         init: function (options) {
             var that = this;
-            that._originSize = Rect.empty();
             Visual.fn.init.call(that, document.createElementNS(SVGNS, "text"), options);
+            this.native.setAttribute("dominant-baseline", "hanging");
         },
         options: {
             stroke: "none",
@@ -338,11 +356,11 @@ kendo_module({
             this.content(this.options.text);
         },
         size: function () {
-            // TODO: scale texta to fit the rectangle in case of text shape.
+            sizeTransform(this);
         },
         bounds: function () {
             var o = this.options,
-                containerRect = new Rect(o.x, o.y, o.width, o.height);
+                containerRect = new Rect(0, 0, o.width, o.height);
             return containerRect;
         },
         align: function (alignment) {
@@ -350,17 +368,19 @@ kendo_module({
             this._align(alignment);
         },
         _align: function () {
-            this._measure();
+            if (!this.options.align) {
+                return;
+            }
+            this._measure(true);
             var o = this.options,
                 containerRect = this.bounds(),
                 aligner = new RectAlign(containerRect),
                 contentBounds = aligner.align(this._originSize, o.align);
 
-            if (!this.options.align) {
-                return;
-            }
-            contentBounds.y += contentBounds.height;
             this.position(contentBounds.topLeft());
+            o.width = contentBounds.width;
+            o.height = contentBounds.height;
+            this.size();
         }
     });
 
@@ -417,7 +437,7 @@ kendo_module({
             $(this.native).focus();
         },
         content: function (text) {
-            if (!Utils.isUndefined(text)) {
+            if (!isUndefined(text)) {
                 this.native.value = this.options.text = text;
             }
 
@@ -441,6 +461,10 @@ kendo_module({
                         if (e.keyCode == kendo.keys.ENTER) {
                             that.trigger("finishEdit", e);
                         }
+                        e.stopPropagation();
+                    })
+                    .on("focusout", function (e) {
+                        that.trigger("finishEdit", e);
                         e.stopPropagation();
                     });
             return input[0];
@@ -483,18 +507,7 @@ kendo_module({
             }
         },
         size: function () {
-            var that = this;
-            var scaleX = that.options.width / that._originWidth,
-                scaleY = that.options.height / that._originHeight,
-                x = that.options.x || 0,
-                y = that.options.y || 0;
-
-            scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
-            scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
-
-            this._transform.translate = new Translation(x, y);
-            this._transform.scale = new Scale(scaleX, scaleY);
-            this._renderTransform();
+            sizeTransform(this);
         },
         redraw: function (options) {
             var that = this;
@@ -552,6 +565,40 @@ kendo_module({
             }
             this.setAtr("orient", "orientation");
             this.setAtr("viewBox", "viewBox");
+        }
+    });
+
+    var Mask = Element.extend({
+        init: function (options) {
+            var that = this, childElement;
+            Element.fn.init.call(that, document.createElementNS(SVGNS, "mask"), options);
+            var o = that.options;
+
+            if (o.path) {
+                childElement = new Path(o.path);
+            }
+            else if (o.circle) {
+                childElement = new Circle(o.circle);
+            }
+            else if (o.rectangle) {
+                childElement = new Rectangle(o.rectangle);
+            }
+            if (childElement) {
+                this.native.appendChild(childElement.native);
+            }
+            this.setAtr("id", "id");
+        },
+        redraw: function (options) {
+            Element.fn.redraw.call(this, options);
+            var that = this, o = that.options;
+
+            if (o.width) {
+                that.native.width.baseVal.value = o.width;
+            }
+            if (o.height) {
+                that.native.height.baseVal.value = o.height;
+            }
+
         }
     });
 
@@ -617,7 +664,7 @@ kendo_module({
 
         },
         points: function (value) {
-            if (Utils.isUndefined(value)) {
+            if (isUndefined(value)) {
                 return this._points;
             }
             else {
@@ -703,23 +750,11 @@ kendo_module({
             }
         },
         size: function () {
-            var scaleX = this.options.width / this._originWidth,
-                scaleY = this.options.height / this._originHeight,
-                x = this.options.x || 0,
-                y = this.options.y || 0;
-
-            scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
-            scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
-
-            this._transform.translate = new Translation(x, y);
-            this._transform.scale = new Scale(scaleX, scaleY);
-            this._renderTransform();
+            sizeTransform(this);
         },
         redraw: function (options) {
             Element.fn.redraw.call(this, options);
-            //if (this.options.autoSize) {
             this.size();
-            //}
         }
     });
 
@@ -784,6 +819,7 @@ kendo_module({
             this.native.setAttribute('xmlns:xlink', SVGXLINK);
             this.element.setAttribute("tabindex", "0"); //ensure tabindex so the the canvas receives key events
             this._markers();
+            this.masks = [];
         },
         options: {
             width: "100%",
@@ -818,7 +854,7 @@ kendo_module({
         viewBox: function (rect) {
             var canvas = this;
 
-            if (Utils.isUndefined(rect)) {
+            if (isUndefined(rect)) {
                 return canvas.native.viewBox.baseVal ? Rect.toRect(canvas.native.viewBox.baseVal) : Rect.empty();
             }
 
@@ -857,6 +893,16 @@ kendo_module({
                 this.markers.remove(marker);
             }
         },
+        addMask: function (mask) {
+            this.defsNode.appendChild(mask.native);
+            this.masks.push(mask);
+        },
+        removeMask: function (mask) {
+            if (mask && this.masks.contains(mask)) {
+                this.defsNode.removeChild(mask.native);
+                this.masks.remove(mask);
+            }
+        },
         removeGradient: function (gradient) {
             if (gradient && this.gradients.contains(gradient)) {
                 this.defsNode.removeChild(gradient.native);
@@ -881,6 +927,15 @@ kendo_module({
             while (this.visuals.length) {
                 this.remove(this.visuals[0]);
             }
+        },
+        mask: function (mask) {
+            if (mask === null) {
+                this.native.removeAttribute("mask");
+            }
+            else {
+                this.native.setAttribute("mask", "url(#" + mask.native.id + ")");
+            }
+
         },
         _markers: function () {
             this.addMarker(new Marker({
@@ -940,7 +995,8 @@ kendo_module({
         CompositeTransform: CompositeTransform,
         TextBlock: TextBlock,
         TextBlockEditor: TextBlockEditor,
-        Image: Image
+        Image: Image,
+        Mask: Mask
     });
 })
     (window.kendo.jQuery);

@@ -17,7 +17,7 @@
         }
 
         #canvasDiv {
-
+            background-color: #FFF;
         }
 
         #canvas {
@@ -120,11 +120,9 @@
 
         .group {
             border-right: 3px solid #38546d;
-
             padding-left: 10px;
             padding-right: 10px;
             float: left;
-
         }
     </style>
 
@@ -156,7 +154,6 @@
 
     <script src="../Generic/jquery.hotkeys.js"></script>
     <script src="tools.js"></script>
-
     <script src="shapes.js"></script>
 </head>
 <body>
@@ -249,7 +246,12 @@
                 </li>
             </ul>
         </div>
+
         <div id="canvasDiv">
+            <canvas id="backgroundGrid" style="z-index: 0; position: absolute;top: 0;left: 0;"></canvas>
+            <canvas id='ruler' style="position: absolute;top: 0;left: 0;"></canvas>
+            <canvas id='guides' style="z-index:0; position: absolute;top: 0;left: 0;"></canvas>
+
             <div id="canvas"></div>
         </div>
     </div>
@@ -263,7 +265,7 @@
 </body>
 <script type="text/x-kendo-tmpl" id="template">
     <div class="shape">
-        <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200">
+        <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" width="100" height="100">
             <g>
                 <title>#:options.name#</title>
                 #= new XMLSerializer().serializeToString((new kendo.diagram.Shape(options)).visual.native) #
@@ -274,6 +276,189 @@
 </script>
 
 <script>
+
+var backgroundGridElement = document.getElementById('backgroundGrid'),
+        rulerElement = document.getElementById('ruler'),
+        guidesElement = document.getElementById('guides'),
+        diagramElement = document.getElementById('canvas'),
+        gridContext = backgroundGridElement.getContext('2d'),
+        rulerContext = rulerElement.getContext('2d'),
+        guidesContext = guidesElement.getContext('2d'),
+        ruler,
+        verticalGuides = [],
+        horizontalGuides = [],
+        volatileGuide,
+        GUTTERSIZE = 20;
+
+function updateGuides(zoom) {
+    if (!zoom) {
+        zoom = 1.0;
+    }
+    guidesElement.width = diagramElement.clientWidth;
+    guidesElement.height = diagramElement.clientHeight;
+    guidesContext.clear();
+    if (verticalGuides.length > 0) {
+        guidesContext.beginPath();
+        for (var i = 0; i < verticalGuides.length; i++) {
+            var location = verticalGuides[i];
+            guidesContext.moveTo(location * zoom, 0.5);
+            guidesContext.lineTo(location * zoom, guidesElement.height + 0.5)
+        }
+        guidesContext.strokeStyle = 'LimeGreen';
+        guidesContext.lineWidth = 1.5;
+        guidesContext.stroke();
+    }
+    if (horizontalGuides.length > 0) {
+        guidesContext.beginPath();
+        for (var i = 0; i < horizontalGuides.length; i++) {
+            var location = horizontalGuides[i];
+            guidesContext.moveTo(0.5, location * zoom);
+            guidesContext.lineTo(guidesElement.width + 0.5, location * zoom);
+        }
+        guidesContext.strokeStyle = 'LimeGreen';
+        guidesContext.lineWidth = 1.5;
+        guidesContext.stroke();
+    }
+
+
+    if (volatileGuide !== null) {
+        guidesContext.beginPath();
+        if (volatileGuide.x >= 0) {
+            guidesContext.moveTo(volatileGuide.x, 0.5);
+            guidesContext.lineTo(volatileGuide.x, guidesElement.height + 0.5)
+        }
+        if (volatileGuide.y >= 0) {
+            guidesContext.moveTo(0.5, volatileGuide.y);
+            guidesContext.lineTo(guidesElement.width + 0.5, volatileGuide.y);
+        }
+        guidesContext.strokeStyle = 'Orange';
+        guidesContext.lineWidth = 1.5;
+        guidesContext.stroke();
+    }
+}
+
+function updateGrid(zoom) {
+    if (!zoom) {
+        zoom = 1.0;
+    }
+    backgroundGridElement.width = diagramElement.clientWidth;
+    backgroundGridElement.height = diagramElement.clientHeight;
+    gridContext.clear();
+    gridContext.beginPath();
+
+    var width = backgroundGridElement.width;
+    var height = backgroundGridElement.height;
+    var delta = zoom <= 0.7 ? 20 : 10;
+    for (var i = 0; i < width; i += (zoom * delta)) {
+        if (i % (zoom * 100) === 0) continue;
+        gridContext.moveTo(i + 0.5, 0);
+        gridContext.lineTo(i + 0.5, height)
+    }
+
+    for (var i = 0; i < height; i += (zoom * delta)) {
+        if (i % (zoom * 100) === 0) continue;
+        gridContext.moveTo(0, i + 0.5);
+        gridContext.lineTo(width, i + 0.5)
+    }
+    gridContext.lineWidth = 0.5;
+    gridContext.strokeStyle = 'rgba(0, 0, 0, 0.2);'
+    gridContext.stroke();
+
+    gridContext.beginPath();
+    for (var i = 0; i < width; i += (zoom * 100)) {
+        gridContext.moveTo(i + 0.5, 0);
+        gridContext.lineTo(i + 0.5, height)
+    }
+    gridContext.strokeStyle = 'rgba(0, 0, 0, 0.3);'
+    gridContext.lineWidth = 1.2;
+    gridContext.stroke();
+
+    gridContext.beginPath();
+    for (var i = 0; i < height; i += (zoom * 100)) {
+        gridContext.moveTo(0, i + 0.5);
+        gridContext.lineTo(width, i + 0.5)
+    }
+    gridContext.strokeStyle = 'rgba(0, 0, 0, 0.3);'
+    gridContext.lineWidth = 1.2;
+    gridContext.stroke();
+
+}
+
+
+/**
+ * Transforms screen coordinates to diagram coordinates
+ */
+function getDiagramCoordinates(event) {
+    var totalOffsetX = 0;
+    var totalOffsetY = 0;
+    var canvasX = 0;
+    var canvasY = 0;
+    var currentElement = diagramElement;
+
+    do {
+        totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+        totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+    }
+    while (currentElement = currentElement.offsetParent)
+
+    canvasX = event.pageX - totalOffsetX;
+    canvasY = event.pageY - totalOffsetY;
+
+    return {x: canvasX, y: canvasY}
+}
+
+HTMLCanvasElement.prototype.getDiagramCoordinates = getDiagramCoordinates;
+
+function updateRuler(v) {
+
+    var diagramElement = document.getElementById('canvas');
+    rulerElement.width = diagramElement.clientWidth;
+    rulerElement.height = diagramElement.clientHeight;
+    this.rulerContext.clear();
+    this.rulerContext.fillStyle = "rgb(33, 42, 51)";
+    this.rulerContext.fillRect(0, 0, this.rulerElement.width, GUTTERSIZE);
+    this.rulerContext.fillRect(0, 0, GUTTERSIZE, this.rulerElement.height);
+
+    gridContext.beginPath();
+    this.rulerContext.strokeStyle = "#aaaaaa";
+
+    var width = backgroundGridElement.width;
+    var height = backgroundGridElement.height;
+    var delta = v <= 0.7 ? 20 : 10;
+    for (var i = 0; i < width; i += (v * delta)) {
+        if (i % (v * 100) === 0 || i <= GUTTERSIZE) continue;
+        rulerContext.moveTo(i + 0.5, 0);
+        rulerContext.lineTo(i + 0.5, 10)
+    }
+
+    for (var i = 0; i < height; i += (v * delta)) {
+        if (i % (v * 100) === 0 || i <= GUTTERSIZE) continue;
+        rulerContext.moveTo(0, i + 0.5);
+        rulerContext.lineTo(10, i + 0.5)
+    }
+    rulerContext.lineWidth = 0.5;
+
+    rulerContext.stroke();
+
+    rulerContext.beginPath();
+    for (var i = 0; i < width; i += (v * 100)) {
+        rulerContext.moveTo(i + 0.5, 0);
+        rulerContext.lineTo(i + 0.5, 15)
+    }
+
+    rulerContext.lineWidth = 1.2;
+    rulerContext.stroke();
+
+    rulerContext.beginPath();
+    for (var i = 0; i < height; i += (v * 100)) {
+        rulerContext.moveTo(0, i + 0.5);
+        rulerContext.lineTo(15, i + 0.5)
+    }
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.3);'
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+}
+
 
 var Shapes = {
 };
@@ -296,8 +481,23 @@ function loadDiagram() {
     $('#upload-field').click();
 }
 
+CanvasRenderingContext2D.prototype.clear =
+        CanvasRenderingContext2D.prototype.clear || function (preserveTransform) {
+            if (preserveTransform) {
+                this.save();
+                this.setTransform(1, 0, 0, 1, 0, 0);
+            }
+
+            this.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+            if (preserveTransform) {
+                this.restore();
+            }
+        };
+
 $(function () {
     function onload() {
+        updateGrid(1.0);
     }
 
     function createSplitters() {
@@ -378,6 +578,7 @@ $(function () {
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
+            updateGrid(this._zoom);
         },
         select: function (e) {
             var items = e.selected;
@@ -445,7 +646,8 @@ $(function () {
                     g.append(im);
                     return g;
                 },
-                connectors: []
+                connectors: [],
+                editable: false
             };
             $(img).data("data", options);
 

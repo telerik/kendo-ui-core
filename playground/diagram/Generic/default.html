@@ -137,7 +137,6 @@
             padding-left: 10px;
             padding-right: 10px;
             float: left;
-
         }
     </style>
 
@@ -257,8 +256,8 @@
             <input type="button" class="k-button" id="undoButton" title="Undo (CTRL+Z)" value="Undo"/>
             <input type="button" class="k-button" id="redoButton" title="Redo (CTRL+Y)" value="Redo"/>
             <input type="button" class="k-button" id="deleteButton" title="Delete (DEL)" value="Delete"/>
-            <input type="button" class="k-button" id="selectAllButton" title="Select All (CTRL+A)"
-                   value="SelectAll"/>
+            <!--<input type="button" class="k-button" id="selectAllButton" title="Select All (CTRL+A)"-->
+                   <!--value="SelectAll"/>-->
         </div>
         <div class="group">
             <a type="button" class="k-button" id="saveButton" title="Save As (CTRL + S)" href="#">Save</a>
@@ -270,8 +269,11 @@
             </div>
         </div>
         <div class="group">
-            <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
+            <input id="Layouts" value="1"/>
             <input type="button" class="k-button" id="layoutButton" title="Layout" value="Layout"/>
+        </div>
+        <div class="group">
+            <input id="Selection" value="1"/>
         </div>
         <div class="group">
             <input type="button" class="k-button" id="toFrontButton" title="To Front" value="To Front"/>
@@ -324,10 +326,7 @@ function createSplitters() {
             { collapsible: false, resizable: false, size: "32px" },
             { collapsible: false, resizable: false, scrollable: false },
             { collapsible: false, resizable: false, size: "50px" }
-        ],
-        resize: function() {
-            console.log(arguments);
-        }
+        ]
     });
     $("#splitter").kendoSplitter({
         orientation: "horizontal",
@@ -348,21 +347,18 @@ for (var i = 0; i < shapesSource.length; i++) {
     Shapes[shape.name] = shape;
 }
 
-
 function receivedText() {
-    //result = fr.result;
-    document.getElementById('editor').appendChild(document.createTextNode(fr.result))
+    $('editor').appendChild(document.createTextNode(fr.result))
 }
 
 function loadDiagram() {
-    document.getElementById('upload-field').click();
+    $('upload-field').click();
 }
 
 $(function () {
     function onload() {
         load("Flowchart.json");
     }
-
 
     $(document).bind('keydown', 'Ctrl+s', function () {
         saveDiagram();
@@ -457,8 +453,8 @@ $(function () {
         }
     });
     var diagram = $("#canvas").data("kendoDiagram"),
-            kendo = window.kendo,
-            Point = kendo.diagram.Point;
+        kendo = window.kendo,
+        Point = kendo.diagram.Point;
 
 
     var list = $("#toolBox").kendoListView({
@@ -560,29 +556,36 @@ $(function () {
         slide: onZoom
     }).data("kendoSlider");
 
-    var layouts = [
-        {value: "TreeDown", text: "Tree Down"},
-        {value: "TreeUp", text: "Tree Up"},
-        {value: "TreeLeft", text: "Tree Left"},
-        {value: "TreeRight", text: "Tree Right"},
-        {value: "RadialTree", text: "Radial Tree"},
-        {value: "TipOverTree", text: "Tip-Over Tree"},
-        {value: "LayeredHorizontal", text: "Layered Horizontal"},
-        {value: "LayeredVertical", text: "Layered Vertical"},
-        {value: "ForceDirected", text: "Force directed"},
-        {value: "MindmapVertical", text: "Mindmap Vertical"},
-        {value: "MindmapHorizontal", text: "Mindmap Horizontal"}
-    ];
+    var onSelectionTypeChanged = function(e){
+        var type = $("#Selection").data("kendoDropDownList").value();
+        diagram.options.selectable.type = type;
+        diagram.select(false);
+    };
+
+    var selectionDropDown = $("#Selection").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+            {value: "none", text: "None"},
+            {value: "single", text: "Single"},
+            {value: "multiple", text: "Multiple"}
+        ],
+        change: onSelectionTypeChanged
+    }).data("kendoDropDownList");
+
+    selectionDropDown.select(2);
+    onSelectionTypeChanged();
 
     var onLayoutChanged = function (e) {
         layout($("#Layouts").data("kendoDropDownList").value());
     };
+
     var layout = function (name) {
         switch (name) {
             case "TreeDown":
                 diagram.layout(
                         {
-                            type:"Tree",
+                            type: "Tree",
                             subtype: "Down",
                             animate: true
                         });
@@ -646,7 +649,7 @@ $(function () {
             case "ForceDirected":
                 diagram.layout(
                         {
-                            type:"Force",
+                            type: "Force",
                             animate: true
                         });
                 break;
@@ -668,17 +671,28 @@ $(function () {
                 break;
         }
     };
-    var dropDown = $("#Layouts").kendoDropDownList({
+    $("#Layouts").kendoDropDownList({
         dataTextField: "text",
         dataValueField: "value",
-        dataSource: layouts
+        dataSource: [
+            {value: "TreeDown", text: "Tree Down"},
+            {value: "TreeUp", text: "Tree Up"},
+            {value: "TreeLeft", text: "Tree Left"},
+            {value: "TreeRight", text: "Tree Right"},
+            {value: "RadialTree", text: "Radial Tree"},
+            {value: "TipOverTree", text: "Tip-Over Tree"},
+            {value: "LayeredHorizontal", text: "Layered Horizontal"},
+            {value: "LayeredVertical", text: "Layered Vertical"},
+            {value: "ForceDirected", text: "Force directed"},
+            {value: "MindmapVertical", text: "Mindmap Vertical"},
+            {value: "MindmapHorizontal", text: "Mindmap Horizontal"}
+        ],
+        change: onLayoutChanged
     });
-    dropDown.bind("change", onLayoutChanged);
 
     $("#Layouts").data("kendoDropDownList").select(function (dataItem) {
         return dataItem.value === "TreeRight";
     });
-
 
     var caps = [
         {value: kendo.diagram.Markers.none},
@@ -822,7 +836,6 @@ $(function () {
         $.ajax({
             dataType: "json",
             url: url,
-
             success: function (data) {
                 diagram.load(data);
             }

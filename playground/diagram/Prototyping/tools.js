@@ -45,26 +45,28 @@
 
     var LinkTool = ToolBase.extend({
         shapeOptions: function (rect) {
-            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0.2, content: "link"});
+            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0.2, content: {text: "link"}});
         }
     });
 
     var TextTool = ToolBase.extend({
         shapeOptions: function (rect) {
-            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0});
+            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {data: "text", content: {align: "stretch"}});
         },
         end: function (p) {
             var d = this.toolService.diagram,
                 rect;
             if (this._started) {
                 rect = diagram.Rect.fromPoints(this.sp, p);
-                var shape = d.addShape(rect.topLeft(), this.shapeOptions(rect));
+                this.shape = d.addShape(rect.topLeft(), this.shapeOptions(rect));
                 d.selector.end();
-                d.editor(shape);
+                var editor = d.editor(this.shape);
+                editor.bind("finishEdit", $.proxy(this._finishEditShape, this));
                 this._started = undefined;
             }
         }
     });
+
 
     kendo.deepExtend(diagram, {
         ShapeTool: ShapeTool,
