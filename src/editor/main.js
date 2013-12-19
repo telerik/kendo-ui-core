@@ -322,6 +322,7 @@ kendo_module({
                     "span{-ms-high-contrast-adjust:none;}" +
                     "a{color:#00a}" +
                     "code{font-size:1.23em}" +
+                    "telerik\\3Ascript{display: none;}" +
                     ".k-table{width:100%;border-spacing:0;margin: 0 0 1em;}" +
                     ".k-table td{min-width:1px;padding:.2em .3em;}" +
                     ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
