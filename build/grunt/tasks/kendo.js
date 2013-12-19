@@ -29,13 +29,15 @@ module.exports = function(grunt) {
                 var basename = PATH.basename(f, PATH.extname(f));
                 var dest = PATH.join(destDir, basename + ext);
                 if (outdated(f, dest)) {
+                    grunt.log.writeln("Making " + dest);
                     var comp = META.getKendoFile(f.replace(/^src\//, "")), code;
                     if (task.target == "min") {
                         code = comp.buildMinSource();
+                        var map = comp.buildMinSourceMap();
+                        grunt.file.write(dest + ".map", map);
                     } else if (task.target == "full") {
                         code = comp.buildFullSource();
                     }
-                    grunt.log.writeln("Writing " + dest);
                     grunt.file.write(dest, code);
                 }
             });
@@ -69,6 +71,7 @@ module.exports = function(grunt) {
             grunt.log.writeln("Making bundle " + destMin);
             var data = META.bundleFiles(components, bundleMin, true);
             grunt.file.write(destMin, data.code);
+            grunt.file.write(destMin + ".map", data.map);
         }
     }
 
@@ -78,7 +81,7 @@ module.exports = function(grunt) {
         if (outdated(files, dest)) {
             grunt.log.writeln("Building kendo-config.json");
             var data = META.buildKendoConfig();
-            grunt.file.write(dest, data);
+            grunt.file.write(dest, JSON.stringify(data, null, 2));
         }
     }
 

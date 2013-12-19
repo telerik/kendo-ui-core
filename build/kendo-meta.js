@@ -57,60 +57,20 @@ var getKendoFile = (function() {
                     self._meta_node = node;
                     var meta = (1,eval)("(" + node.definitions[0].value.print_to_string() + ")");
                     meta.source = self.filename().replace(/\.js$/i, ".min.js");
-                    meta.widgets = extract_widget_info(self.buildFullAST());
+                    meta.widgets = extract_widget_info(self.getFullAST());
                     this.exit(meta);
                 }
             });
             return meta;
         }),
 
-        getMetaStartPos: function() {
-            this.getMeta();
-            return this._meta_startpos;
-        },
-
-        getMetaEndPos: function() {
-            this.getMeta();
-            return this._meta_endpos;
-        },
-
-        // // returns as UglifyJS AST the function that's being passed to `define`.
-        // // populates internal properties _main_closure_node and _amd_deps_node.
-        // getFactoryAST: cachedProperty("getFactoryAST", function(){
-        //     var self = this;
-        //     return walkAST(this.getOrigAST(), function(node){
-        //         if (node instanceof U2.AST_SimpleStatement) {
-        //             node = node.body;
-        //             if (node instanceof U2.AST_Call &&
-        //                 node.expression instanceof U2.AST_Function &&
-        //                 node.expression.argnames.length == 2 &&
-        //                 node.expression.argnames[1].name == "define") {
-        //                 var comp_closure = node.args[0];
-        //                 this.exit(walkAST(node.expression, function(node){
-        //                     if (node instanceof U2.AST_SimpleStatement &&
-        //                         node.body instanceof U2.AST_Call &&
-        //                         node.body.expression instanceof U2.AST_SymbolRef &&
-        //                         node.body.expression.name == "define")
-        //                     {
-        //                         var comp_files = node.body.args[0];
-        //                         self._main_closure_node = comp_closure;
-        //                         self._amd_deps_node = comp_files;
-        //                         this.exit(comp_closure);
-        //                     }
-        //                 }));
-        //             }
-        //         }
-        //     });
-        // }),
-
         // get the direct AMD dependencies, as extracted from the
         // code.  They will be relative to this component and without
         // .js extension.
         getAMDDeps: cachedProperty("getAMDDeps", function(){
-            var self = this;
-            function define(deps, factory) {
-                self._amd_deps = deps;
-                self._amd_factory = factory.toString();
+            var deps = [];
+            function define(d, factory) {
+                if (Array.isArray(d)) deps = d;
             }
             define.amd = true;
             try {
@@ -119,14 +79,11 @@ var getKendoFile = (function() {
                 SYS.error("*** Can't determine AMD deps for " + this.filename() + ".  Failed to evaluate.");
                 console.log("    [", ex, "]");
             }
-            if (!self._amd_deps)
-                self._amd_deps = [];
-            return self._amd_deps;
+            return deps;
         }),
 
         getAMDFactory: cachedProperty("getAMDFactory", function(){
-            this.getAMDDeps();
-            return this._amd_factory;
+            return walkAST(this.getOrigAST(), findDefine);
         }),
 
         _getAllFileDeps: function(maxLevel) {
@@ -160,17 +117,6 @@ var getKendoFile = (function() {
             });
         }),
 
-        // getDirectCompDeps: cachedProperty("getDirectCompDeps", function(){
-        //     var meta = this.getMeta();
-        //     var deps = meta.depends.slice();
-        //     if (meta.features) meta.features.forEach(function(f){
-        //         if (f.depends) f.depends.forEach(function(d){
-        //             pushUniq(deps, d);
-        //         });
-        //     });
-        //     return deps;
-        // }),
-
         // Generates the complete (readable) source of this component.
         // Merge any subfiles, and remove them from the `define` list,
         // leaving there only other toplevel components.  Drops
@@ -182,24 +128,19 @@ var getKendoFile = (function() {
             );
         }),
 
-        buildFullAST: cachedProperty("buildFullAST", function(){
-            return U2_parse(this.buildFullSource(), {
-                filename: this.filename()
-            });
-        }),
-
         buildMinAST: cachedProperty("buildMinAST", function(){
-            var code = wrapAMD(
-                fileNamesToAMDDeps(this.getDirectCompDeps(), true),
-                this.getFullCode()
-            );
-            return minify(code, this.filename());
+            var ast = cloneAST(this.getFullAST());
+            var deps = fileNamesToAMDDeps(this.getDirectCompDeps(), true);
+            ast = get_wrapper().wrap(deps, ast);
+            return minify(ast);
         }),
 
         buildMinSource: cachedProperty("buildMinSource", function(){
             var source_map = this._source_map = U2.SourceMap({
                 file: this.filename().replace(/\.js$/i, ".min.js"),
-                //root: "../src/js" // XXX: what's the source map root?
+                // orig_line_diff: 8,
+                // dest_line_diff: 8,
+                root: "../../src/" // XXX: what's the source map root?
             });
             return this.buildMinAST().print_to_string({
                 source_map: source_map
@@ -211,14 +152,53 @@ var getKendoFile = (function() {
             return this._source_map.toString();
         }),
 
+        getFullAST: cachedProperty("getFullAST", function(){
+            var self = this;
+            if (self.isSubfile()) {
+                throw new Error("getFullAST doesn't make sense for subfiles: " + self.filename());
+            }
+            var deps = this.getCompFiles();
+            var ast = this.getAMDFactory().factory;
+            if (deps.length == 0) return ast;
+            ast = cloneAST(ast);
+            ast.transform(new U2.TreeTransformer(function(node, descend){
+                if (node === ast) {
+                    descend(node, this);
+                    var stats = [];
+                    deps.forEach(function(f){
+                        var comp = getKendoFile(f);
+                        var f = comp.getAMDFactory().factory;
+                        stats.push.apply(stats, f.body);
+                    });
+                    node.body.unshift.apply(node.body, stats);
+                    return node;
+                }
+                if (isMetaNode(node))
+                    return U2.MAP.skip;
+                if (node instanceof U2.AST_Return && (/^return (window\.)?kendo/.test(node.print_to_string())))
+                    return U2.MAP.skip;
+                if (node instanceof U2.AST_Statement)
+                    return node;
+            }));
+            return ast;
+        }),
+
         getFullCode: cachedProperty("getFullCode", function() {
             var self = this;
             if (self.isSubfile()) {
-                throw new Error("buildFullSource doesn't make sense for subfiles: " + self.filename());
+                throw new Error("getFullCode doesn't make sense for subfiles: " + self.filename());
             }
-            var my_code = this.getAMDFactory();
-            var ast = U2_parse(my_code, { expression: true });
-            var replacements = [];
+            var my_code = this.getOrigCode();
+            var ast = this.getAMDFactory().factory;
+            var replacements = [
+                { begin : 0,
+                  end   : ast.body[0].start.pos,
+                  text  : ""
+                },
+                { begin : ast.body[ast.body.length - 1].end.endpos,
+                  end   : my_code.length,
+                  text  : "" }
+            ];
             walkAST(ast, function(node){
                 if (isMetaNode(node)) {
                     replacements.push({
@@ -241,7 +221,7 @@ var getKendoFile = (function() {
                     return true; // don't dive
             });
 
-            my_code = replaceInString(my_code, replacements).replace(/^[^\{]*?{|}[^\}]*?$/g, "").trim();
+            my_code = replaceInString(my_code, replacements);
 
             var files = this.getCompFiles().map(function(f){
                 var comp = getKendoFile(f);
@@ -253,7 +233,9 @@ var getKendoFile = (function() {
         }),
 
         getMainCode: cachedProperty("getMainCode", function(){
-            return this.getAMDFactory().replace(/^[^\{]*?{|}[^\}]*?$/g, "").trim();
+            var ast = this.getAMDFactory().factory;
+            if (ast.body.length == 0) return "";
+            return this.getOrigCode().substring(ast.body[0].start.pos, ast.body[ast.body.length - 1].end.endpos);
         }),
 
         // return true if this is a "subfile", i.e. editor/main.js
@@ -262,6 +244,10 @@ var getKendoFile = (function() {
             return !(dir == "." || dir == "");
         }
     };
+
+    function unwrapFunction(code) {
+        return code.replace(/^[^\{]*?{|}[^\}]*?$/g, "").trim();
+    }
 
     var FILES = {};
     function getKendoFile(filename) {
@@ -274,6 +260,9 @@ var getKendoFile = (function() {
 })();
 
 function U2_parse(code, options) {
+    // if (options) {
+    //     SYS.error("--- parsing " + options.filename);
+    // }
     try {
         code = code.replace(/\r/g, ""); // <sigh>
         return U2.parse(code, options);
@@ -284,6 +273,33 @@ function U2_parse(code, options) {
         }
     }
 }
+
+var get_wrapper = (function(wrapper){
+    return function() {
+        if (wrapper) return wrapper;
+        wrapper = U2_parse(AMD_WRAPPER);
+        wrapper.wrap = function(deps, cont) {
+            return wrapper.transform(new U2.TreeTransformer(
+                null,           // need no 'before'
+                function after(node){
+                    if (node instanceof U2.AST_SymbolRef && node.name == "$DEPS") {
+                        return new U2.AST_Array({
+                            elements: deps.map(function(x){
+                                return new U2.AST_String({ value: x });
+                            })
+                        });
+                    }
+                    if (node instanceof U2.AST_SimpleStatement
+                        && node.body instanceof U2.AST_SymbolRef
+                        && node.body.name == "$CODE") {
+                        return U2.MAP.splice(cont.body);
+                    }
+                }
+            ));
+        };
+        return wrapper;
+    };
+})();
 
 function wrapAMD(deps, code) {
     var v = {
@@ -352,6 +368,53 @@ function walkAST(ast, walker) {
     }
 }
 
+function findDefine(node) {
+    // (function(f, define){ define([ deps... ], f) })(FACTORY);
+    if (node instanceof U2.AST_Call
+        && node.args[0] instanceof U2.AST_Function
+        && node.expression instanceof U2.AST_Function
+        && node.expression.argnames.length == 2
+        && node.expression.argnames[1].name == "define"
+        && node.expression.body[0] instanceof U2.AST_SimpleStatement
+        && node.expression.body[0].body instanceof U2.AST_Call
+        && node.expression.body[0].body.expression instanceof U2.AST_SymbolRef
+        && node.expression.body[0].body.expression.name == "define"
+        && node.expression.body[0].body.args[1] instanceof U2.AST_SymbolRef
+        && node.expression.body[0].body.args[1].name == node.expression.argnames[0].name)
+    {
+        this.exit({
+            factory  : node.args[0],
+            requires : node.expression.body[0].body.args[0],
+        });
+    }
+
+    // define([ deps... ], FACTORY)
+    if (node instanceof U2.AST_Call
+        && node.expression instanceof U2.AST_SymbolRef
+        && node.expression.name == "define"
+        && node.args.length == 2
+        && node.args[0] instanceof U2.AST_Array
+        && node.args[1] instanceof U2.AST_Function)
+    {
+        this.exit({
+            factory  : node.args[1],
+            requires : node.args[0],
+        });
+    }
+
+    // define(FACTORY)
+    if (node instanceof U2.AST_Call
+        && node.expression instanceof U2.AST_SymbolRef
+        && node.expression.name == "define"
+        && node.args.length == 1
+        && node.args[0] instanceof U2.AST_Function)
+    {
+        this.exit({
+            factory : node.args[0],
+        });
+    }
+}
+
 function contains(a, x) {
     return a.indexOf(x) >= 0;
 }
@@ -375,7 +438,12 @@ function beautify(obj) {
 }
 
 function minify(code, filename) {
-    var ast = U2_parse(code, { filename: filename });
+    var ast;
+    if (code instanceof U2.AST_Node) {
+        ast = code;
+    } else {
+        ast = U2_parse(code, { filename: filename });
+    }
     var compressor = U2.Compressor({
         unsafe       : true,
         hoist_vars   : true,
@@ -445,6 +513,7 @@ function listKendoFiles(suite) {
 }
 
 function extract_widget_info(ast) {
+    ast = new U2.AST_Toplevel(ast);
     ast.figure_out_scope();
     var widgets = [];
     var scope = null;
@@ -553,20 +622,41 @@ function loadComponents(files, maxLevel) {
 // makes a bundle loading files and any dependencies in the right order
 // adds the AMD wrapper, but depend on nothing since we bundle everything needed.
 function bundleFiles(files, filename, min) {
-    var code = loadComponents(files).reduce(function(a, f){
-        var comp = getKendoFile(f);
-        if (!comp.isSubfile()) {
-            a.push(comp.getFullCode());
-        }
-        return a;
-    }, []).join("\n\n");
-    code = wrapAMD([], code);
     if (min) {
-        var ast = minify(code, filename);
-        // XXX: see if source maps are needed any longer
-        code = ast.print_to_string();
+        var code = loadComponents(files).reduce(function(a, f){
+            var comp = getKendoFile(f);
+            if (!comp.isSubfile()) {
+                var ast = comp.buildMinAST();
+                var body = walkAST(ast, findDefine).factory.body;
+                a.push.apply(a, body);
+            }
+            return a;
+        }, []);
+        var ast = get_wrapper().wrap([], { body: code });
+        var map = U2.SourceMap({
+            file: filename,
+            // orig_line_diff: 8,
+            // dest_line_diff: 8,
+            root: "../../src/" // XXX: what's the source map root?
+        });
+        code = ast.print_to_string({ source_map: map });
+        return {
+            code : code,
+            map  : map.toString(),
+        };
     }
-    return { code: code };
+    else {
+        var code = loadComponents(files).reduce(function(a, f){
+            var comp = getKendoFile(f);
+            if (!comp.isSubfile()) {
+                a.push(comp.getFullCode());
+            }
+            return a;
+        }, []).join("\n\n");
+        return {
+            code: wrapAMD([], code)
+        };
+    }
 }
 
 function loadAll() {
@@ -769,6 +859,10 @@ exports.wrapAMD = wrapAMD;
 exports.minify = minify;
 
 /* -----[ CLI interface ]----- */
+
+// var comp = getKendoFile("kendo.editor.js");
+// console.log( comp.buildMinSource() );
+// process.exit(0);
 
 if (require.main === module) (function(){
     // invoked as CLI
