@@ -967,11 +967,22 @@ kendo_module({
                 xhr = $.ajaxSettings.xhr,
                 link = element.find("." + LINK),
                 data = {},
+                halfWidth = element.width() / 2,
                 fakeProgress = false,
                 statusIcon = element.find(".k-loading").removeClass("k-complete");
 
             if (!statusIcon[0]) {
                 statusIcon = $("<span class='k-loading'/>").prependTo(element);
+            }
+
+            var endState = halfWidth * 2 - statusIcon.width();
+
+            var oldProgressAnimation = function() {
+                statusIcon.animate({ marginLeft: (parseInt(statusIcon.css("marginLeft"), 10) || 0) < halfWidth ? endState : 0 }, 500, oldProgressAnimation);
+            };
+
+            if (kendo.support.browser.msie && kendo.support.browser.version < 10) {
+                oldProgressAnimation();
             }
 
             url = url || link.data(CONTENTURL) || link.attr(HREF);
@@ -1013,7 +1024,13 @@ kendo_module({
                 progress: function(evt) {
                     if (evt.lengthComputable) {
                         var percent = parseInt((evt.loaded / evt.total * 100), 10) + "%";
-                        statusIcon.width(percent).addClass("k-progress");
+                        statusIcon
+                            .stop(true)
+                            .addClass("k-progress")
+                            .css({
+                                "width": percent,
+                                "marginLeft": 0
+                            });
                     }
                 },
 
@@ -1026,7 +1043,13 @@ kendo_module({
                 complete: function () {
                     that.inRequest = false;
                     clearInterval(fakeProgress);
-                    statusIcon.css("width", "");
+                    statusIcon
+                        .stop(true)
+                        .addClass("k-progress")
+                        .css({
+                            "width": "",
+                            "marginLeft": 0
+                        });
                 },
 
                 success: function (data) {

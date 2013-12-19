@@ -204,7 +204,7 @@
                                         });
                                         percentage += 10;
                                         if (percentage < 100) {
-                                            that.progressTimer = setTimeout(progress, (mockHandler.responseTime - mockHandler.progressWait) / 10);
+                                            that.progressTimer = setTimeout(progress, (mockHandler.responseTime - mockHandler.progressWait) / 10 - 10);
                                         }
                                     }, mockHandler.progressRan ? 0 : mockHandler.progressWait || 0);
                                     mockHandler.progressRan = true;
