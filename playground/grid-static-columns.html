@@ -70,6 +70,10 @@
                     border-right: solid 1px #c5c5c5;
                 }
 
+                .k-grid-header .k-header .k-link {
+                    line-height: 20px;
+                }
+
             </style>
 
             <div style="width: 600px">
@@ -84,7 +88,7 @@
                             transport: {
                                 read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
                             },
-                            pageSize: 100
+                            pageSize: 10
                         },
                         groupable: true,
                         sortable: true,
@@ -94,16 +98,17 @@
                         },
                         columns: [{
                             field: "ContactName",
-                            template: "#=ContactName# <br/> #=ContactName#",
-                            title: "Contact Name",
+                            template: "[static 1] #=ContactName# <br/> #=ContactName#",
+                            title: "[static 1] Contact Name",
                             static: true,
-                            footerTemplate: "foo",
+                            footerTemplate: "[static 1]",
                             width: 140
                         }, {
                             field: "ContactTitle",
+                            template: "[static 2] #=ContactTitle#",
                             static: true,
-                            footerTemplate: "bar",
-                            title: "Contact Title",
+                            footerTemplate: "[static 2]",
+                            title: "[static 2] Contact Title",
                             width: 290
                         }, {
                             field: "CompanyName",

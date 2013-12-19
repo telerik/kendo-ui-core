@@ -3508,15 +3508,14 @@ var __meta__ = {
         _appendStaticColumnContent: function() {
             var columns = this.columns,
                 idx,
-                length,
                 hasStaticColumns;
 
             table = $('<div class="k-grid-content-static"><table><colgroup/><tbody></tbody></table></div>');
             colgroup = table.find("colgroup");
 
-            for (idx = 0, length = columns.length; idx < length; idx++) {
+            for (idx = columns.length - 1; idx >= 0; idx--) {
                 if (columns[idx].static) {
-                    this.table.find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).appendTo(colgroup);
+                    this.table.find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).prependTo(colgroup);
                     hasStaticColumns = true;
                 }
             }
@@ -3530,7 +3529,6 @@ var __meta__ = {
             var that = this,
                 columns = this.columns,
                 idx,
-                length,
                 html,
                 colgroup,
                 tr,
@@ -3547,11 +3545,11 @@ var __meta__ = {
             that.footer.find(".k-grid-footer-wrap>table>colgroup>.k-group-col,.k-hierarchy-col").appendTo(colgroup)
             that.footer.find(".k-footer-template>.k-group-cell,.k-hierarchy-cell").appendTo(tr);
 
-            for (idx = 0, length = columns.length; idx < length; idx++) {
+            for (idx = columns.length - 1; idx >= 0; idx--) {
                 if (columns[idx].static) {
 
-                    that.footer.find(".k-grid-footer-wrap>table>colgroup>col").eq(idx).appendTo(colgroup);
-                    that.footer.find(".k-footer-template>td").eq(idx).appendTo(tr);
+                    that.footer.find(".k-grid-footer-wrap>table>colgroup>col").eq(idx).prependTo(colgroup);
+                    that.footer.find(".k-footer-template>td").eq(idx).prependTo(tr);
                     hasStaticColumns = true;
                 }
             }
@@ -3566,7 +3564,6 @@ var __meta__ = {
             var that = this,
                 columns = this.columns,
                 idx,
-                length,
                 html,
                 colgroup,
                 tr,
@@ -3581,10 +3578,10 @@ var __meta__ = {
             colgroup = table.find("colgroup");
             tr = table.find("thead tr");
 
-            for (idx = 0, length = columns.length; idx < length; idx++) {
+            for (idx = columns.length - 1; idx >= 0; idx--) {
                 if (columns[idx].static) {
-                    that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).appendTo(colgroup);
-                    that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(idx).appendTo(tr);
+                    that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).prependTo(colgroup);
+                    that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(idx).prependTo(tr);
                     hasStaticColumns = true;
                 }
             }

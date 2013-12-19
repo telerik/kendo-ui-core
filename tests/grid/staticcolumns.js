@@ -62,6 +62,19 @@
         ok(grid.element.find(".k-grid-header-wrap th[data-field=baz]").length);
     });
 
+    test("correct th elements are created when multiple static columns", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", { field: "baz", static: true }]
+        });
+
+        equal(grid.element.find(".k-grid-header-static th").length, 2);
+        equal(grid.element.find(".k-grid-header-static th").eq(0).data("field"), "foo");
+        equal(grid.element.find(".k-grid-header-static th").eq(1).data("field"), "baz");
+
+        equal(grid.element.find(".k-grid-header-wrap th").length, 1);
+        equal(grid.element.find(".k-grid-header-wrap th").eq(0).data("field"), "bar");
+    });
+
     test("correct number of col elements are created", function() {
         var grid = setup({
             columns: [{ field: "foo", static: true }, "bar", "baz"]
@@ -70,6 +83,23 @@
         equal(grid.element.find(".k-grid-header-static col").length, 1);
 
         equal(grid.element.find(".k-grid-header-wrap col").length, 2);
+    });
+
+    test("correct header col elements are created when multiple static columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true, width: 10 },
+                { field: "bar", width: 20 },
+                { field: "baz", static: true, width: 30 }
+            ]
+        });
+
+        equal(grid.element.find(".k-grid-header-static col").length, 2);
+        equal(grid.element.find(".k-grid-header-static col")[0].style.width, "10px");
+        equal(grid.element.find(".k-grid-header-static col")[1].style.width, "30px");
+
+        equal(grid.element.find(".k-grid-header-wrap col").length, 1);
+        equal(grid.element.find(".k-grid-header-wrap col")[0].style.width, "20px");
     });
 
     test("content is prepend with static column table", function() {
@@ -118,6 +148,23 @@
         equal(grid.content.find("tr:first").height(), grid.staticContent.find("tr:first").height());
     });
 
+    test("correct content col elements are created when multiple static columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true, width: 10 },
+                { field: "bar", width: 20 },
+                { field: "baz", static: true, width: 30 }
+            ]
+        });
+
+        equal(grid.element.find(".k-grid-content-static col").length, 2);
+        equal(grid.element.find(".k-grid-content-static col")[0].style.width, "10px");
+        equal(grid.element.find(".k-grid-content-static col")[1].style.width, "30px");
+
+        equal(grid.element.find(".k-grid-content col").length, 1);
+        equal(grid.element.find(".k-grid-content col")[0].style.width, "20px");
+    });
+
     test("correct number of col elements are created in the static footer", function() {
         var grid = setup({
             columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
@@ -125,6 +172,39 @@
         equal(grid.element.find(".k-grid-footer-static col").length, 1);
 
         equal(grid.element.find(".k-grid-footer-wrap col").length, 2);
+    });
+
+    test("correct col elements are created in the static footer when multiple static columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true, footerTemplate: "foo", width: 10 },
+                "bar",
+                { field: "baz", static: true, footerTemplate: "baz", width: 20 }
+            ]
+        });
+
+        equal(grid.element.find(".k-grid-footer-static col").length, 2);
+        equal(grid.element.find(".k-grid-footer-static col")[0].style.width, "10px");
+        equal(grid.element.find(".k-grid-footer-static col")[1].style.width, "20px");
+
+        equal(grid.element.find(".k-grid-footer-wrap col").length, 1);
+    });
+
+    test("correct td elements are created in the static footer when multiple static columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true, footerTemplate: "foo", width: 10 },
+                { field: "bar", footerTemplate: "bar" },
+                { field: "baz", static: true, footerTemplate: "baz", width: 20 }
+            ]
+        });
+
+        equal(grid.element.find(".k-grid-footer-static td").length, 2);
+        equal(grid.element.find(".k-grid-footer-static td").eq(0).text(), "foo");
+        equal(grid.element.find(".k-grid-footer-static td").eq(1).text(), "baz");
+
+        equal(grid.element.find(".k-grid-footer-wrap td").length, 1);
+        equal(grid.element.find(".k-grid-footer-wrap td").eq(0).text(), "bar");
     });
 
     test("width is set to static footer", function() {
@@ -271,4 +351,5 @@
         ok(grid.staticContent.find(".k-grouping-row:first").next().is(":visible"));
         ok(grid.content.find(".k-grouping-row:first").next().is(":visible"));
     });
+
 })();
