@@ -27,7 +27,7 @@
 <body>
     @Html.Partial("Telerik-Navigation")
     @Html.Partial("Header")
-    <div class="demos-nav widgetGrid">
+    <div class="demos-nav widgetGrid @ViewBag.Suite">
         <div class="centerWrap floatWrap@(ViewBag.Suite.Contains("dataviz") ? " dataviz" : "")">
         @foreach (string category in ViewBag.Navigation.Keys)
         {

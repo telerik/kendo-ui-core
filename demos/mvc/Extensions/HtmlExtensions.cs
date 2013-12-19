@@ -107,7 +107,7 @@ namespace Kendo.Extensions
             {
                 classNames.Add("custom-themes");
             }
-            else if (category.Contains("framework"))
+            else if (category.Equals("framework"))
             {
                 classNames.Add("framework");
             }
@@ -127,7 +127,7 @@ namespace Kendo.Extensions
             {
                 classNames.Add("gauges");
             }
-            else if (category.Contains("qrcodes"))
+            else if (category.Contains("qr codes"))
             {
                 classNames.Add("qrcodes");
             }
