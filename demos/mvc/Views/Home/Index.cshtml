@@ -16,10 +16,26 @@
     @Html.Partial("GoogleAnalytics")
 </head>
 <body class="overview">
-@Html.Partial("Telerik-Navigation")
-<div id="header">
+ @Html.Partial("Telerik-Navigation")
+
+    <div class="suite-demos-nav">
+      <ul class="centerWrap floatWrap">
+             <li class="active header">Kendo UI Demos</li>
+            <li><a href="@Url.Content("~")">Overview</a><em></em></li>
+            <li@(Html.ActiveSuiteClass(Url.Content("~/web")))>@Html.SuiteLink("Web", "Web Demos")</li>
+            <li@(Html.ActiveSuiteClass(Url.Content("~/mobile")))>@Html.SuiteLink("Mobile", "Mobile Demos")</li>
+            <li@(Html.ActiveSuiteClass(Url.Content("~/DataViz")))>@Html.SuiteLink("DataViz", "DataViz Demos")</li>   
+            <li><a href="http://www.kendoui.com/download.aspx" class="get-kendoui" onclick="_gaq.push(['_trackPageview','/download-button']);">Download</a></li>    
+      </ul>
+    </div>
+
+
+
+
+@* @Html.Partial("Header")*@
+@*<div id="header">
     <div class="centerWrap floatWrap">
-        <h1><a href="http://www.kendoui.com/" id="logo">Kendo UI - the Art of Web Development</a></h1>
+       <h1><a href="http://www.kendoui.com/" id="logo">Kendo UI - the Art of Web Development</a></h1>
         <ul class="main-nav">
             <li><a href="http://www.kendoui.com/blogs">Blogs</a></li>
             <li><a href="http://docs.kendoui.com">Documentation</a></li>
@@ -56,13 +72,8 @@
         </ul>
         @Html.Partial("Products")
     </div>
-</div>
-
-<div id="banner"><div id="bannerInner"><div class="centerWrap"><h1>Kendo UI Demos</h1></div></div>
-    <!--<div class="centerWrap" style="position:relative"><a id="betabutton" href="http://demos.kendoui.com/beta/">See Q2'13 BETA Demos</a></div>-->
-</div>
-
-<div class="suite-demos-nav">
+</div>*@
+@*<div class="suite-demos-nav">
     <ul class="centerWrap floatWrap">
         <li class="active"><a href="#">Overview</a></li>
         <li><a href="web/overview/index.html">Web Demos</a></li>
@@ -70,7 +81,13 @@
         <li><a href="dataviz/overview/index.html">DataViz Demos</a></li>
         <li><a href="themebuilder/web.html">Theme Builders</a></li>
     </ul>
+</div>*@
+
+<div id="banner"><div id="bannerInner"><div class="centerWrap"><h1>Kendo UI Demos</h1></div></div>
+    <!--<div class="centerWrap" style="position:relative"><a id="betabutton" href="http://demos.kendoui.com/beta/">See Q2'13 BETA Demos</a></div>-->
 </div>
+
+
 
 <div class="section section--white">
 <div class="demos-nav">
@@ -195,7 +212,6 @@
     </div>
 
 @*</div>*@
-
 @Html.Partial("Footer")
 
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
