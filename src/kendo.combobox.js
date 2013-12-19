@@ -247,7 +247,8 @@ kendo_module({
                 state = that._state,
                 data = that._data(),
                 length = data.length,
-                hasChild, value, open, custom;
+                keepState = true,
+                hasChild, open, custom;
 
             that.trigger("dataBinding");
 
@@ -263,7 +264,6 @@ kendo_module({
 
                 if (state === STATE_REBIND) {
                     that._state = "";
-                    value = that.value();
                 }
 
                 custom = that._option;
@@ -271,9 +271,9 @@ kendo_module({
                 that._options(data);
 
                 if (custom && custom[0].selected) {
-                    that._custom(custom.val());
+                    that._custom(custom.val(), keepState);
                 } else if (!that._bound && !hasChild) {
-                    that._custom("");
+                    that._custom("", keepState);
                 }
             }
 
@@ -484,12 +484,12 @@ kendo_module({
             }
         },
 
-        _custom: function(value) {
-            var that = this,
-                element = that.element,
-                custom = that._option;
+        _custom: function(value, keepState) {
+            var that = this;
+            var element = that.element;
+            var custom = that._option;
 
-            if (that._state === STATE_FILTER) {
+            if (that._state === STATE_FILTER && !keepState) {
                 that._state = STATE_ACCEPT;
             }
 
@@ -692,8 +692,6 @@ kendo_module({
 
             that._typing = setTimeout(function() {
                 var value = that.text();
-
-                that._selectedValue = value;
 
                 if (that._prev !== value) {
                     that._prev = value;
