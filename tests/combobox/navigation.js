@@ -430,7 +430,31 @@ asyncTest("clearing custom value does not re-enter the old value", 1, function()
     setTimeout(function() {
         start();
         equal(combobox.input.val(), "", "input is not cleared");
-    }, 100);
+    });
+});
+
+asyncTest("clearing custom value does not re-enter the old value (SELECT)", 1, function() {
+    var select = $("<select />").appendTo(QUnit.fixture);
+    var selectCombo = select.kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "startswith",
+        delay: 0
+    }).data("kendoComboBox");
+
+    selectCombo.dataSource.read();
+
+    selectCombo.value("test");
+    selectCombo.input.focus().val("").press(keys.BACKSPACE);
+
+    setTimeout(function() {
+        start();
+        equal(selectCombo.input.val(), "", "input is not cleared");
+
+        selectCombo.destroy();
+        kendo.destroy(QUnit.fixture);
+    });
 });
 
 })();
