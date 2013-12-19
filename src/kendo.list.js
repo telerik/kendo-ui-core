@@ -483,9 +483,11 @@ kendo_module({
 
         _toggle: function(open) {
             var that = this;
+            var touchEnabled = support.touch && support.MSPointers && support.pointers;
+
             open = open !== undefined? open : !that.popup.visible();
 
-            if (!support.touch && that._focused[0] !== activeElement()) {
+            if (!touchEnabled && that._focused[0] !== activeElement()) {
                 that._focused.focus();
             }
 
