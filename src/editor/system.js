@@ -378,7 +378,11 @@ var Keyboard = Class.extend({
 var Clipboard = Class.extend({
     init: function(editor) {
         this.editor = editor;
-        this.cleaners = [new MSWordFormatCleaner(), new WebkitFormatCleaner()];
+        this.cleaners = [
+            new ScriptCleaner(),
+            new MSWordFormatCleaner(),
+            new WebkitFormatCleaner()
+        ];
     },
 
     htmlToFragment: function(html) {
@@ -647,6 +651,18 @@ var Cleaner = Class.extend({
         }
 
         return html;
+    }
+});
+
+var ScriptCleaner = Cleaner.extend({
+    init: function() {
+        this.replacements = [
+            /<(\/?)script([^>]*)>/i, "<$1telerik:script$2>"
+        ];
+    },
+
+    applicable: function(html) {
+        return (/<script[^>]*>/i).test(html);
     }
 });
 

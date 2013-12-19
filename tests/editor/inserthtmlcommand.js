@@ -78,4 +78,13 @@ test("insertHtml tool gets snippets from its legacy configuration", function() {
     equal(data[0].value, "bar");
 });
 
+test("exec inserts telerik:script", function() {
+    editor.value("");
+
+    var script = "<script>alert('foo');</script>";
+    editor.exec("insertHtml", { value: script });
+
+    equal(kendo.ui.editor.Dom.name(editor.body.firstChild), "telerik:script");
+});
+
 }());
