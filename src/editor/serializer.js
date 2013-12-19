@@ -23,11 +23,27 @@ var Serializer = {
     domToXhtml: function(root) {
         var result = [];
         var tagMap = {
-            'telerik:script': { start: function (node) { result.push('<script'); attr(node); result.push('>'); }, end: function () { result.push('</script>'); } },
-            b: { start: function () { result.push('<strong>'); }, end: function () { result.push('</strong>'); } },
-            i: { start: function () { result.push('<em>'); }, end: function () { result.push('</em>'); } },
-            u: { start: function () { result.push('<span style="text-decoration:underline;">'); }, end: function () { result.push('</span>'); } },
-            iframe: { start: function (node) { result.push('<iframe'); attr(node); result.push('>'); }, end: function () { result.push('</iframe>'); } },
+            'telerik:script': {
+                start: function (node) { result.push('<script'); attr(node); result.push('>'); },
+                end: function () { result.push('</script>'); },
+                skipEncoding: true
+            },
+            b: {
+                start: function () { result.push('<strong>'); },
+                end: function () { result.push('</strong>'); }
+            },
+            i: {
+                start: function () { result.push('<em>'); },
+                end: function () { result.push('</em>'); }
+            },
+            u: {
+                start: function () { result.push('<span style="text-decoration:underline;">'); },
+                end: function () { result.push('</span>'); }
+            },
+            iframe: {
+                start: function (node) { result.push('<iframe'); attr(node); result.push('>'); },
+                end: function () { result.push('</iframe>'); }
+            },
             font: {
                 start: function (node) {
                     result.push('<span style="');
@@ -192,9 +208,9 @@ var Serializer = {
             }
         }
 
-        function children(node, skip) {
+        function children(node, skip, skipEncoding) {
             for (var childNode = node.firstChild; childNode; childNode = childNode.nextSibling) {
-                child(childNode, skip);
+                child(childNode, skip, skipEncoding);
             }
         }
 
@@ -202,7 +218,7 @@ var Serializer = {
             return node.nodeValue.replace(/\ufeff/g, "");
         }
 
-        function child(node, skip) {
+        function child(node, skip, skipEncoding) {
             var nodeType = node.nodeType,
                 tagName, mapper,
                 parent, value, previous;
@@ -222,7 +238,7 @@ var Serializer = {
 
                 if (mapper) {
                     mapper.start(node);
-                    children(node);
+                    children(node, false, mapper.skipEncoding);
                     mapper.end(node);
                     return;
                 }
@@ -259,7 +275,7 @@ var Serializer = {
                     value = value.replace(/ +/, ' ');
                 }
 
-                result.push(dom.encode(value));
+                result.push(skipEncoding ? value : dom.encode(value));
 
             } else if (nodeType == 4) {
                 result.push('<![CDATA[');

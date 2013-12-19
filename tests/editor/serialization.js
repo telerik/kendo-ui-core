@@ -135,6 +135,12 @@ test('script tag not executed', function() {
     ok(undefined === window.answer);
 });
 
+test("script tag contents are not HTML-encoded", function() {
+    var originalValue = '<script>$.load("foo?bar=1&baz=2");</script>';
+    editor.value(originalValue);
+    equal(editor.value(), originalValue);
+});
+
 test('br moz dirty removed', function() {
     editor.value('<br _moz_dirty="">');
     equal(editor.value(), '');
