@@ -419,4 +419,18 @@ test("Empty comboBox does not raise exception on navigate", 1, function() {
     ok(true);
 });
 
+asyncTest("clearing custom value does not re-enter the old value", 1, function() {
+    combobox.options.delay = 0;
+    combobox.options.filter = "startswith";
+    combobox.dataSource.read();
+
+    combobox.value("test");
+    combobox.input.focus().val("").press(keys.BACKSPACE);
+
+    setTimeout(function() {
+        start();
+        equal(combobox.input.val(), "", "input is not cleared");
+    }, 100);
+});
+
 })();
