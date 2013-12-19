@@ -727,6 +727,7 @@ function pad(number, digits, end) {
             }
 
             number = round(number, precision);
+            negative = number < 0;
             number = number.split(POINT);
 
             integer = number[0];
@@ -917,6 +918,10 @@ function pad(number, digits, end) {
 
             integerLength = integer.length;
             fractionLength = fraction.length;
+
+            if (negative && (number * -1) >= 0) {
+                negative = false;
+            }
 
             //add group separator to the number if it is longer enough
             if (hasGroup) {
