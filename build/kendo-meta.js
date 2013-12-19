@@ -627,8 +627,21 @@ function bundleFiles(files, filename, min) {
             var comp = getKendoFile(f);
             if (!comp.isSubfile()) {
                 var ast = comp.buildMinAST();
-                var body = walkAST(ast, findDefine).factory.body;
-                a.push.apply(a, body);
+                ast = walkAST(ast, findDefine).factory;
+                var body = ast.body.filter(function(node){ return !(node instanceof U2.AST_EmptyStatement) });
+                if (body[0] instanceof U2.AST_Return
+                    && body[0].value instanceof U2.AST_Seq
+                    && body[0].value.car instanceof U2.AST_Call
+                    && body[0].value.cdr.print_to_string() == "window.kendo") {
+                    a.push(new U2.AST_SimpleStatement({ body: body[0].value.car }));
+                } else {
+                    a.push(new U2.AST_SimpleStatement({
+                        body: new U2.AST_Call({
+                            expression: ast,
+                            args: [],
+                        })
+                    }));
+                }
             }
             return a;
         }, []);
@@ -859,10 +872,6 @@ exports.wrapAMD = wrapAMD;
 exports.minify = minify;
 
 /* -----[ CLI interface ]----- */
-
-// var comp = getKendoFile("kendo.editor.js");
-// console.log( comp.buildMinSource() );
-// process.exit(0);
 
 if (require.main === module) (function(){
     // invoked as CLI
