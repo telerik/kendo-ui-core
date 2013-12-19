@@ -102,9 +102,9 @@ var __meta__ = {
                 placeholder = this.placeholder,
                 excluded = this.options.excluded;
 
-            target = $(target).closest("li");
+            //target = $(target).closest("li");
 
-            if(target.length && !(excluded && target.is(excluded))) {
+            if(target && !(excluded && target.is(excluded))) {
                 targetOffset = kendo.getOffset(target);
                 hintOffset = kendo.getOffset(e.sender.hint);
 
@@ -135,17 +135,24 @@ var __meta__ = {
         },
 
         _findTarget: function(e) {
-            var target = kendo.elementUnderCursor(e),
-                draggable = e.sender;
+            var elementUnderCursor = kendo.elementUnderCursor(e),
+                target,
+                draggable = e.sender,
+                excluded = this.options.excluded,
+                items = excluded ? this.element.children().not(excluded) : this.element.children();
 
-            if(contains(draggable.hint[0], target)) {
+            if(contains(draggable.hint[0], elementUnderCursor)) {
                 draggable.hint.hide();
-                target = kendo.elementUnderCursor(e);
+                elementUnderCursor = kendo.elementUnderCursor(e);
                 // IE8 does not return the element in iframe from first attempt
-                if (!target) {
-                    target = kendo.elementUnderCursor(e);
+                if (!elementUnderCursor) {
+                    elementUnderCursor = kendo.elementUnderCursor(e);
                 }
                 draggable.hint.show();
+            }
+
+            if(items.find(elementUnderCursor).length) {
+                target = $(elementUnderCursor).parentsUntil(this.element);
             }
 
             return target;
