@@ -160,6 +160,10 @@ test("toString decimal number -123", function() {
     equal(toString(-123, "####;-(#.00)"), "-(123.00)");
 });
 
+test("toString method clears negative sign if rounded number is positive", function() {
+    equal(toString(-0.00001, "#.##"), "0.00");
+});
+
 //zero custom toString
 test("toString decimal number 0", function() {
     equal(toString(0, "####;-(#.#);ZERO"), "ZERO");
@@ -249,6 +253,10 @@ test("N3 toString", function() {
 test("N0 toString", function() {
     var number = 10.3337;
     equal(toString(number, "N0"), "10");
+});
+
+test("toString method clears sign if rounded number is zero", function() {
+    equal(toString(-0.00001, "n2"), "0.00");
 });
 
 test("C toString", function() {
