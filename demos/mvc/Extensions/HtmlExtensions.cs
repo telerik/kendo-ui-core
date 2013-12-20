@@ -60,6 +60,10 @@ namespace Kendo.Extensions
             {
                 className = "new-widget";
             }
+            else if (widget.Text == "Theme Builder")
+            {
+                className = "theme-builder";
+            }
 
             var text = widget.Text;
             if (widget.Tablet)
@@ -82,6 +86,13 @@ namespace Kendo.Extensions
                     text
                 )
             );
+        }
+
+        public static bool MergesWithNext(this HtmlHelper html, string category)
+        {
+            category = category.ToLower();
+
+            return category.Contains("applications") || category.Contains("gauges") || category.Contains("financial");
         }
 
         public static string NavigationWrapperClass(this HtmlHelper html, string category)

@@ -1,21 +1,10 @@
-@*<div id="header">
-    <div class="centerWrap floatWrap">
-        <h1><a href="@Url.Content("~")" id="logo">Kendo UI - the Art of Web Development</a></h1>
-        @Html.Partial("Products")
-    </div>
-</div>*@
-
-@*<div id="banner"></div>*@
-
 <div class="suite-demos-nav">
-<div id="header">
-    <div class="centerWrap floatWrap">
-       @* <h1><a href="@Url.Content("~")" id="logo">Kendo UI - the Art of Web Development</a></h1>*@
-       @* @Html.Partial("Products")*@
+    <div id="header">
+        <div class="centerWrap floatWrap">
+        </div>
     </div>
-</div>
     <ul class="centerWrap floatWrap">
-        <li class="active header"><a href="http://demos.kendoui.com/">Kendo UI Demos</a></li>
+        <li class="active header"><a href="@Url.Content("~")">Kendo UI Demos</a></li>
         <li><a href="@Url.Content("~")">Overview</a><em></em></li>
         <li@(Html.ActiveSuiteClass(Url.Content("~/web")))>@Html.SuiteLink("Web", "Web Demos")</li>
         <li@(Html.ActiveSuiteClass(Url.Content("~/mobile")))>@Html.SuiteLink("Mobile", "Mobile Demos")</li>
