@@ -283,6 +283,7 @@
     <Content Include="content\shared\js\people.js" />
     <Content Include="content\shared\js\prettify.js" />
     <Content Include="content\shared\js\products.js" />
+    <Content Include="content\shared\js\telerik-navigation.js" />
     <Content Include="content\shared\styles\aeroviewr.png" />
     <Content Include="content\shared\styles\bg-glossy.png" />
     <Content Include="content\shared\styles\blackberrySkin.png" />
