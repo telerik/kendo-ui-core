@@ -27,12 +27,6 @@ src/**/*.min.js
 src/**/*.min.js.map
 src/*.min.js
 src/*.min.js.map
-src/kendo.all.js
-src/kendo.winjs.js
-src/kendo.dataviz.js
-src/kendo.mobile.js
-src/kendo.web.js
-src/kendo.icenium.js
 styles/web/*.css
 styles/mobile/*.css
 styles/dataviz/*.min.css

@@ -42,19 +42,25 @@ var getKendoFile = (function() {
         }),
 
         getOrigAST: cachedProperty("getOrigAST", function(){
-            //SYS.error("Parsing: " + this.filename());
             return U2_parse(this.getOrigCode(), {
                 filename: this.filename()
             });
+        }),
+
+        isBundle: cachedProperty("isBundle", function(){
+            var ast = this.getAMDFactory().factory;
+            return walkAST(ast, function(node){
+                if (node instanceof U2.AST_Directive && node.value == "bundle all")
+                    this.exit(true);
+                if (node !== ast)
+                    return true; // don't go inside
+            }) || false;
         }),
 
         getMeta: cachedProperty("getMeta", function(){
             var self = this;
             var meta = walkAST(self.getOrigAST(), function(node){
                 if (isMetaNode(node)) {
-                    self._meta_startpos = node.start.pos;
-                    self._meta_endpos = node.end.endpos;
-                    self._meta_node = node;
                     var meta = (1,eval)("(" + node.definitions[0].value.print_to_string() + ")");
                     meta.source = self.filename().replace(/\.js$/i, ".min.js");
                     meta.widgets = extract_widget_info(self.getFullAST());
@@ -86,15 +92,15 @@ var getKendoFile = (function() {
             return walkAST(this.getOrigAST(), findDefine);
         }),
 
-        _getAllFileDeps: function(maxLevel) {
+        _makeAllDeps: function(maxLevel) {
             return loadComponent(this.filename(), this.dirname(), [], maxLevel);
         },
 
         // returns an array of file names -- *all* files required to
         // load this component, including internal files (for split
         // components).
-        getAllFileDeps: cachedProperty("getAllDeps", function(){
-            return this._getAllFileDeps();
+        getAllFileDeps: cachedProperty("getAllFileDeps", function(){
+            return this._makeAllDeps();
         }),
 
         // returns an array of file names -- only the files that this
@@ -103,14 +109,14 @@ var getKendoFile = (function() {
         // src/ dir, but in some subdirectory -- hence we get all
         // names and filter out those directly in src/.
         getCompFiles: cachedProperty("getCompFiles", function(){
-            return this.getAllFileDeps().filter(function(f){
+            return this._makeAllDeps(2).filter(function(f){
                 var dir = PATH.dirname(f);
                 return dir != "." && dir != "";
             });
         }),
 
         getDirectCompDeps: cachedProperty("getDirectCompDeps", function(){
-            var self = this, a = self._getAllFileDeps(2); // level 2 means load upto directly required components.
+            var self = this, a = self._makeAllDeps(2); // level 2 means load upto directly required components.
             return a.filter(function(f){
                 comp = getKendoFile(f);
                 return comp !== self && !comp.isSubfile();
@@ -122,17 +128,25 @@ var getKendoFile = (function() {
         // leaving there only other toplevel components.  Drops
         // __meta__ too.  Drops `define` wrapper from the subfiles.
         buildFullSource: cachedProperty("buildFullSource", function(){
-            return wrapAMD(
-                fileNamesToAMDDeps(this.getDirectCompDeps()),
-                this.getFullCode()
-            );
+            if (this.isBundle()) {
+                return bundleFiles(this.getDirectCompDeps(), this.filename()).code;
+            } else {
+                return wrapAMD(
+                    fileNamesToAMDDeps(this.getDirectCompDeps()),
+                    this.getFullCode()
+                );
+            }
         }),
 
         buildMinAST: cachedProperty("buildMinAST", function(){
-            var ast = cloneAST(this.getFullAST());
-            var deps = fileNamesToAMDDeps(this.getDirectCompDeps(), true);
-            ast = get_wrapper().wrap(deps, ast);
-            return minify(ast);
+            if (this.isBundle()) {
+                return bundleFiles_getMinAST(this.getDirectCompDeps());
+            } else {
+                var ast = cloneAST(this.getFullAST());
+                var deps = fileNamesToAMDDeps(this.getDirectCompDeps(), true);
+                ast = get_wrapper().wrap(deps, ast);
+                return minify(ast);
+            }
         }),
 
         buildMinSource: cachedProperty("buildMinSource", function(){
@@ -188,40 +202,47 @@ var getKendoFile = (function() {
             if (self.isSubfile()) {
                 throw new Error("getFullCode doesn't make sense for subfiles: " + self.filename());
             }
-            var my_code = this.getOrigCode();
-            var ast = this.getAMDFactory().factory;
-            var replacements = [
-                { begin : 0,
-                  end   : ast.body[0].start.pos,
-                  text  : ""
-                },
-                { begin : ast.body[ast.body.length - 1].end.endpos,
-                  end   : my_code.length,
-                  text  : "" }
-            ];
-            walkAST(ast, function(node){
-                if (isMetaNode(node)) {
-                    replacements.push({
-                        begin : node.start.pos,
-                        end   : node.end.endpos,
-                        text  : ""
-                    });
-                    return true;
-                }
-                if (node instanceof U2.AST_Return &&
-                    (/^return (window\.)?kendo/.test(node.print_to_string()))) {
-                    replacements.push({
-                        begin : node.start.pos,
-                        end   : node.end.endpos,
-                        text  : ""
-                    });
-                    return true;
-                }
-                if (node instanceof U2.AST_Statement && node !== ast)
-                    return true; // don't dive
-            });
 
-            my_code = replaceInString(my_code, replacements);
+            var my_code = "";
+            var ast = this.getAMDFactory().factory;
+            if (ast.body.length > 0) {
+                my_code = this.getOrigCode();
+
+                var replacements = [];
+                replacements.push(
+                    { begin : 0,
+                      end   : ast.body[0].start.pos,
+                      text  : ""
+                    },
+                    { begin : ast.body[ast.body.length - 1].end.endpos,
+                      end   : my_code.length,
+                      text  : "" }
+                );
+
+                walkAST(ast, function(node){
+                    if (isMetaNode(node)) {
+                        replacements.push({
+                            begin : node.start.pos,
+                            end   : node.end.endpos,
+                            text  : ""
+                        });
+                        return true;
+                    }
+                    if (node instanceof U2.AST_Return &&
+                        (/^return (window\.)?kendo/.test(node.print_to_string()))) {
+                        replacements.push({
+                            begin : node.start.pos,
+                            end   : node.end.endpos,
+                            text  : ""
+                        });
+                        return true;
+                    }
+                    if (node instanceof U2.AST_Statement && node !== ast)
+                        return true; // don't dive
+                });
+
+                my_code = replaceInString(my_code, replacements);
+            }
 
             var files = this.getCompFiles().map(function(f){
                 var comp = getKendoFile(f);
@@ -484,21 +505,10 @@ function loadComponent(filename, basedir, files, maxLevel) {
     return files;
 }
 
-function listKendoFiles(suite) {
-    switch (suite) {
-      case "all"     : return ALL_JS;
-      case "web"     : return WEB_JS;
-      case "mobile"  : return MOBILE_JS;
-      case "icenium" : return ICENIUM_JS;
-      case "dataviz" : return DATAVIZ_JS;
-      case "win"     : return WIN_JS;
-    }
+function listKendoFiles() {
     var js_files = FS.readdirSync(SRCDIR)
         .filter(function(filename){
             return /^kendo\..*\.js$/i.test(filename) && !/\.min\.js$/i.test(filename);
-        })
-        .filter(function(filename){
-            return !/^kendo\.(web|dataviz|mobile|all|winjs)\.js$/.test(filename);
         })
         .filter(function(filename){
             var code = FS.readFileSync(PATH.join(SRCDIR, filename), "utf8");
@@ -619,33 +629,37 @@ function loadComponents(files, maxLevel) {
     return loads;
 }
 
+function bundleFiles_getMinAST(files) {
+    var code = loadComponents(files).reduce(function(a, f){
+        var comp = getKendoFile(f);
+        if (!comp.isSubfile()) {
+            var ast = comp.buildMinAST();
+            ast = walkAST(ast, findDefine).factory;
+            var body = ast.body.filter(function(node){ return !(node instanceof U2.AST_EmptyStatement) });
+            if (body[0] instanceof U2.AST_Return
+                && body[0].value instanceof U2.AST_Seq
+                && body[0].value.car instanceof U2.AST_Call
+                && body[0].value.cdr.print_to_string() == "window.kendo") {
+                a.push(new U2.AST_SimpleStatement({ body: body[0].value.car }));
+            } else {
+                a.push(new U2.AST_SimpleStatement({
+                    body: new U2.AST_Call({
+                        expression: ast,
+                        args: [],
+                    })
+                }));
+            }
+        }
+        return a;
+    }, []);
+    return get_wrapper().wrap([], { body: code });
+}
+
 // makes a bundle loading files and any dependencies in the right order
 // adds the AMD wrapper, but depend on nothing since we bundle everything needed.
 function bundleFiles(files, filename, min) {
     if (min) {
-        var code = loadComponents(files).reduce(function(a, f){
-            var comp = getKendoFile(f);
-            if (!comp.isSubfile()) {
-                var ast = comp.buildMinAST();
-                ast = walkAST(ast, findDefine).factory;
-                var body = ast.body.filter(function(node){ return !(node instanceof U2.AST_EmptyStatement) });
-                if (body[0] instanceof U2.AST_Return
-                    && body[0].value instanceof U2.AST_Seq
-                    && body[0].value.car instanceof U2.AST_Call
-                    && body[0].value.cdr.print_to_string() == "window.kendo") {
-                    a.push(new U2.AST_SimpleStatement({ body: body[0].value.car }));
-                } else {
-                    a.push(new U2.AST_SimpleStatement({
-                        body: new U2.AST_Call({
-                            expression: ast,
-                            args: [],
-                        })
-                    }));
-                }
-            }
-            return a;
-        }, []);
-        var ast = get_wrapper().wrap([], { body: code });
+        var ast = bundleFiles_getMinAST(files);
         var map = U2.SourceMap({
             file: filename,
             // orig_line_diff: 8,

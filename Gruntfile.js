@@ -154,15 +154,6 @@ module.exports = function(grunt) {
                        "!src/cultures/kendo.culture.*.min.js" ],
                 dest: "<%= kendo.options.destDir %>/cultures",
             },
-
-            // these just need to be listed here, though everything
-            // needed to build these targets is in the task definition.
-            web: {},
-            mobile: {},
-            win: {},
-            icenium: {},
-            dataviz: {},
-            all: {},
         },
 
         custom: {

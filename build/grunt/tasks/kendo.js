@@ -123,15 +123,6 @@ module.exports = function(grunt) {
             makeSources(task);
             break;
 
-          case "web":
-          case "mobile":
-          case "win":
-          case "icenium":
-          case "dataviz":
-          case "all":
-            makeBundle(task, task.target, META.listKendoFiles(task.target));
-            break;
-
           case "config":
             makeKendoConfig(task);
             break;
