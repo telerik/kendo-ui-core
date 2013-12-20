@@ -139,8 +139,6 @@
             float: left;
         }
     </style>
-
-
     <script src="../../../src/jquery.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.data.js"></script>
@@ -337,14 +335,10 @@ function createSplitters() {
     });
 }
 
-var Shapes = {
-};
-
 for (var i = 0; i < shapesSource.length; i++) {
     shape = shapesSource[i].options;
     shape.background = 'steelblue';
     shape.strokeWidth = 0;
-    Shapes[shape.name] = shape;
 }
 
 function receivedText() {
@@ -455,7 +449,6 @@ $(function () {
     var diagram = $("#canvas").data("kendoDiagram"),
         kendo = window.kendo,
         Point = kendo.diagram.Point;
-
 
     var list = $("#toolBox").kendoListView({
         dataSource: {

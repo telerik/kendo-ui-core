@@ -154,13 +154,10 @@ kendo_module({
     });
 
     function sizeTransform(element) {
-        var scaleX = element.options.width / element._originWidth,
-            scaleY = element.options.height / element._originHeight,
+        var scaleX = element._originWidth ? element.options.width / element._originWidth : 1,
+            scaleY = element._originHeight ? element.options.height / element._originHeight : 1,
             x = element.options.x || 0,
             y = element.options.y || 0;
-
-        scaleX = scaleX ? scaleX : 1;
-        scaleY = scaleY ? scaleY : 1;
 
         element._transform.translate = new Translation(x, y);
         element._transform.scale = new Scale(scaleX, scaleY);
@@ -171,8 +168,6 @@ kendo_module({
         init: function (native, options) {
             var element = this;
             this._originSize = Rect.empty();
-            this._originWidth = DEFAULTWIDTH;
-            this._originHeight = DEFAULTHEIGHT;
             this._visible = true;
             this._transform = new CompositeTransform();
             element.native = native;
