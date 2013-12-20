@@ -632,7 +632,7 @@ function loadComponents(files, maxLevel) {
 function bundleFiles_getMinAST(files) {
     var code = loadComponents(files).reduce(function(a, f){
         var comp = getKendoFile(f);
-        if (!comp.isSubfile()) {
+        if (!comp.isSubfile() && !comp.isBundle()) {
             var ast = comp.buildMinAST();
             ast = walkAST(ast, findDefine).factory;
             var body = ast.body.filter(function(node){ return !(node instanceof U2.AST_EmptyStatement) });
@@ -675,7 +675,7 @@ function bundleFiles(files, filename, min) {
     else {
         var code = loadComponents(files).reduce(function(a, f){
             var comp = getKendoFile(f);
-            if (!comp.isSubfile()) {
+            if (!comp.isSubfile() && !comp.isBundle()) {
                 a.push(comp.getFullCode());
             }
             return a;
