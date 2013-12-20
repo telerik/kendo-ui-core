@@ -982,7 +982,7 @@ kendo_module({
             };
 
             if (kendo.support.browser.msie && kendo.support.browser.version < 10) {
-                oldProgressAnimation();
+                setTimeout(oldProgressAnimation, 40);
             }
 
             url = url || link.data(CONTENTURL) || link.attr(HREF);
@@ -997,7 +997,6 @@ kendo_module({
                 xhr: function() {
                     var current = this,
                         request = xhr(),
-                        loaded = 10,
                         event = current.progressUpload ? "progressUpload" : current.progress ? "progress" : false;
 
                     if (request) {
@@ -1012,12 +1011,7 @@ kendo_module({
                         });
                     }
 
-                    if (!current.progress) {
-                        fakeProgress = setInterval(function () {
-                            current.progress({ lengthComputable: true, loaded: Math.min(loaded, 100), total: 100 });
-                        }, 100);
-                        loaded += 10;
-                    }
+                    current.noProgress = !(window.XMLHttpRequest && ('upload' in new XMLHttpRequest()));
                     return request;
                 },
 
@@ -1040,21 +1034,37 @@ kendo_module({
                     }
                 },
 
-                complete: function () {
-                    that.inRequest = false;
+                stopProgress: function () {
                     clearInterval(fakeProgress);
                     statusIcon
                         .stop(true)
                         .addClass("k-progress")
-                        .css({
-                            "width": "",
-                            "marginLeft": 0
-                        });
+                        [0].style.cssText = "";
+                },
+
+                complete: function () {
+                    that.inRequest = false;
+                    if (this.noProgress) {
+                        setTimeout(this.stopProgress, 500);
+                    } else {
+                        this.stopProgress();
+                    }
                 },
 
                 success: function (data) {
                     statusIcon.addClass("k-complete");
                     try {
+                        var current = this,
+                            loaded = 10;
+
+                        if (current.noProgress) {
+                            statusIcon.width(loaded+"%");
+                            fakeProgress = setInterval(function () {
+                                current.progress({ lengthComputable: true, loaded: Math.min(loaded, 100), total: 100 });
+                                loaded += 10;
+                            }, 40);
+                        }
+
                         content.html(data);
                     } catch (e) {
                         var console = window.console;
