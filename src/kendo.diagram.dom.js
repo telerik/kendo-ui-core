@@ -631,6 +631,9 @@ var __meta__ = {
                 this._contentVisual.redraw({ width: this.options.width, height: this.options.height });
             }
             this.shapeVisual.redraw(options);
+            if (options && options.content) {
+                this.content(options.content);
+            }
         },
         _triggerBoundsChange: function () {
             if (this.diagram) {
