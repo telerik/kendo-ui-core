@@ -520,7 +520,7 @@ div.submenu-box ol {
 
 .overview #bannerInner
 {
-    padding: 30px 0 10px 0;
+    padding: 29px 0;
 
 }
 
@@ -531,12 +531,9 @@ div.submenu-box ol {
 
 #banner h1
 {
-    font-size: 30px;
-    line-height: 32px;
-    margin-bottom: 20px;
-	color: white;
-	font-weight: normal;
-	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    color: white;
+    font: normal 60px/1 "MetricWeb-Semibold", Arial, Helverica, sans-serif;
+    letter-spacing: -.03em;
 }
 
 /*suite demos nav*/
@@ -545,7 +542,6 @@ div.submenu-box ol {
     position: relative;
     z-index: 1;
     min-height: 70px;
-    border-bottom: 1px solid #e5e5e5;
     background-color: white;
     background-color: rgba(255, 255, 255, 0.95); 
 }
