@@ -250,24 +250,18 @@ h3
     margin-right: 50px;
 }
 
-.overview .teampulse .feedback-portal
-{
-    text-decoration: none;
-}
-
 .overview .teampulse .column13 p
 {
-    margin-right: 112px;
+    margin-right: 560px;
 }
 .overview .teampulse .imgPlate
 {
-    margin-bottom: 0;
+    margin-top: 140px;
 }
 
 .compatibility p
 {
-    font-size: 12px;
-    color: #565656;
+    color: #555555;
 }
 
 
@@ -769,13 +763,19 @@ div.submenu-box ol {
     text-align:left;
 }
 
-/*.overview .box h2,*/
-.overview .demos-nav h2,
 .overview .box h3,
 .column13 h3
 {
     margin-top:20px;
     font-size:24px;
+}
+
+/*.overview .box h2,*/
+.overview .demos-nav h2
+{
+    margin:0 0 20px;
+    font-size:32px;
+    text-align: center;
 }
 
 .overview .box p
@@ -790,13 +790,17 @@ div.submenu-box ol {
 }
 
 .box h2,
-.box h2 a,
 .box h3,
-.box h3 a,
 .column13 h3,
 .column23 h3
 {
     color:#000;
+}
+
+.box h2 a,
+.box h3 a
+{
+    color:#0487c4;
 }
 
 .overview .box:first-child,
@@ -850,6 +854,11 @@ div.submenu-box ol {
     width:370px;
     height: 170px;
     border: 0;
+}
+
+.overview .demos-nav .box p
+{
+    text-align: center;
 }
 
 .narrowbox .imgPlate
