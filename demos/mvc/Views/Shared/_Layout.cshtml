@@ -6,17 +6,22 @@
     <meta name="description" content="@ViewBag.Meta">
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")"/>
-    @foreach (string styleName in ViewBag.styles) {
+    @foreach (string styleName in ViewBag.styles)
+    {
     <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
     <link href="@Url.Content("~/content/shared/styles/telerik-navigation.css")" rel="stylesheet" />
-    @if (ViewBag.Debug) {
+    @if (ViewBag.Debug)
+    {
     <script src="@Url.Content("~/content/shared/js/less.js")"></script>
-    } else {
+    }
+    else
+    {
     @Html.Partial("GoogleAnalytics")
     }
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
-    @foreach (string scriptName in ViewBag.scripts) {
+    @foreach (string scriptName in ViewBag.scripts)
+    {
     <script src="@Url.Script(scriptName)"></script>
     }
     <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
@@ -27,59 +32,64 @@
 <body>
     @Html.Partial("Telerik-Navigation")
     @Html.Partial("Header")
-
-    <div class="demos-nav widgetGrid">
+    <div class="demos-nav widgetGrid @ViewBag.Suite">
         <div class="centerWrap floatWrap@(ViewBag.Suite.Contains("dataviz") ? " dataviz" : "")">
+        @{ var merging = false; }
         @foreach (string category in ViewBag.Navigation.Keys)
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().Contains("application") ? "dashboards" : "")@(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Equals("framework") ? "framework" : "")@(category.ToLower().Contains("mobile widgets") ? "mobile-widgets" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")@(category.ToLower().Contains("chart") ? "chart" : "")@(category.ToLower().Contains("gauges") ? "gauges" : "")@(category.ToLower().Contains("qr codes") ? "qrcodes" : "")@(category.ToLower().Contains("financial") ? "financial" : "")@(category.ToLower().Contains("geoviz") ? "geoviz" : "")">
-                    <h2>@category</h2>
-                    @{ var idx = 0; }
-                    <ul>
-                        @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                if (merging)
+                {
+                    merging = false;
+                }
+                else
+                {
+                    @Html.Raw("<div class='" + Html.NavigationWrapperClass(category) + "'>");
+                }
+                
+                <h2 class="@category.Trim().ToLower().Replace(" ", "-").Replace("&", "")-cat">@category</h2>
+                
+                var idx = 0;
+                var maxItemsPerColumn = 7;
+                
+                <ul>
+                    @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                    {
+                        if (!widget.ShouldInclude) { continue; }
+
+                        if (widget.Name != "overview")
                         {
-                            if (!widget.ShouldInclude) { continue; }
+                            var isActive = false;
 
-                            if (widget.Name != "overview")
+                            if (ViewBag.Section == "dashboards")
                             {
-                                var isActive = false;
-
-                                if (ViewBag.Section == "dashboards")
-                                {
-                                    isActive = ViewBag.Example == widget.Name;
-                                }
-                                else
-                                {
-                                    isActive = ViewBag.Section == widget.Name;
-                                }
-
-                                <li @Html.Raw(isActive ? "class=\"active\"" : "")>
-                                @if (category.ToLower().Contains("dashboard"))
-                                {
-                                    <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">
-                                        <img src="@(Url.Content("~") + widget.ThumbnailUrl)" alt="@widget.Name" />
-                                    </a>
-                                }
-                                @if (category.ToLower().Contains("application"))
-                                {
-                                    <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="_blank">
-                                        <img src="@(Url.Content("~") + widget.ThumbnailUrl)" alt="@widget.Name" />
-                                    </a>
-                                }
-                                    <a @Html.Raw(widget.Beta ? "class=\"beta-widget\"" : "") @Html.Raw(widget.New ? "class=\"new-widget\"" : "") href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="@(category.ToLower().Contains("application") ? "_blank" : "")" >@widget.Text @(widget.Tablet ? "(tablet)" : "")</a>
-                                </li>
-
-                                idx++;
-                                var divisor = 7;
-                                if (idx > 0 && idx % divisor == 0)
-                                {
-                                    @Html.Raw("</ul><ul>")
-                                }
+                                isActive = ViewBag.Example == widget.Name;
                             }
-                        }</ul>
-                </div>
+                            else
+                            {
+                                isActive = ViewBag.Section == widget.Name;
+                            }
+
+                            <li @Html.Raw(isActive ? "class=\"active\"" : "")>
+                                @Html.WidgetLink(widget, category)
+                            </li>
+
+                            idx++;
+                            if (idx > 0 && idx % maxItemsPerColumn == 0)
+                            {
+                                @Html.Raw("</ul><ul>")
+                            }
+                        }
+                    }
+                </ul>
+            
+                merging = Html.MergesWithNext(category);
+
+                if (!merging)
+                {
+                    @Html.Raw("</div>");
+                }
             }
         }
 
@@ -98,18 +108,16 @@
 
             </div>
         }
-
         </div>
     </div>
 
-    <div class="flowers-left"><div class="flowers-right">
 @{
-var ignored = Request.Path.IndexOf("overview") > -1 ||  Request.Path.IndexOf("dashboard") > -1;
+    var ignored = Request.Path.IndexOf("overview") > -1 || Request.Path.IndexOf("dashboard") > -1;
 }
-        <div class='centerWrap floatWrap@(ignored ?" widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
+        <div class='centerWrap floatWrap@(ignored ? " widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
             <div id="themeWrap" style="@(ignored ? "display:none" : "")">
                 <span id="themeChooser" style="@(ViewBag.suite == "mobile" ? "display:none" : "")"></span>
-                <a href="http://docs.kendoui.com/api/@ViewBag.Documentation" class="get-kendoui" style="display:@(ignored || string.IsNullOrEmpty(ViewBag.Documentation) ? "none": "inline-block")">Documentation</a>
+                <a href="http://docs.kendoui.com/api/@ViewBag.Documentation" class="get-kendoui" style="display:@(ignored || string.IsNullOrEmpty(ViewBag.Documentation) ? "none" : "inline-block")">Documentation</a>
             </div>
 
             <div id="mainWrapInner" class="floatWrap clear">
@@ -123,7 +131,7 @@ var ignored = Request.Path.IndexOf("overview") > -1 ||  Request.Path.IndexOf("da
             </div>
 
         </div>
-    </div></div>
+   
 
     @Html.Partial("Footer")
 
@@ -154,7 +162,8 @@ var ignored = Request.Path.IndexOf("overview") > -1 ||  Request.Path.IndexOf("da
             container: "#mobile-application-container"
         });
 
-        @if (ViewBag.suite != "mobile") {
+        @if (ViewBag.suite != "mobile")
+        {
             <text>
                 applyCurrentTheme();
             </text>

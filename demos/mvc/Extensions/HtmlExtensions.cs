@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using Kendo.Models;
 
 namespace Kendo.Extensions
 {
@@ -16,7 +18,8 @@ namespace Kendo.Extensions
             var selectedClass = viewBag.Suite == suite ? " selected" : "";
             var href = "~/" + suite;
 
-            if (suite != "mobile") {
+            if (suite != "mobile")
+            {
                 href = "~/" + suite + "/overview/index.html";
             }
 
@@ -38,6 +41,117 @@ namespace Kendo.Extensions
             }
 
             return html.Raw("");
+        }
+
+        public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget, string category)
+        {
+            var Url = new UrlHelper(html.ViewContext.RequestContext);
+            var viewBag = html.ViewContext.Controller.ViewBag;
+            var href = Url.Content("~/" + viewBag.Suite + "/" + widget.Items[0].Url);
+
+            category = category.ToLower();
+
+            var className = "";
+            if (widget.Beta)
+            {
+                className = "beta-widget";
+            }
+            else if (widget.New)
+            {
+                className = "new-widget";
+            }
+            else if (widget.Text == "Theme Builder")
+            {
+                className = "theme-builder";
+            }
+
+            var text = widget.Text;
+            if (widget.Tablet)
+            {
+                text += "(tablet)";
+            }
+
+            var target = "";
+
+            if (category.Contains("application") || category.Contains("custom themes"))
+            {
+                target = "_blank";
+            }
+
+            return html.Raw(
+                string.Format("<a class=\"{0}\" href=\"{1}\" target=\"{2}\">{3}</a>",
+                    className,
+                    href,
+                    target,
+                    text
+                )
+            );
+        }
+
+        public static bool MergesWithNext(this HtmlHelper html, string category)
+        {
+            category = category.ToLower();
+
+            return category.Contains("applications") || category.Contains("gauges") || category.Contains("financial");
+        }
+
+        public static string NavigationWrapperClass(this HtmlHelper html, string category)
+        {
+            var classNames = new List<string> { "floatWrap" };
+
+            category = category.ToLower();
+
+            if (category.Contains("ui") || category.Contains("dashboard"))
+            {
+                classNames.Add("wideCol");
+            }
+            else
+            {
+                classNames.Add("narrowCol");
+            }
+
+            if (category.Contains("application") || category.Contains("dashboard"))
+            {
+                classNames.Add("dashboards");
+            }
+            else if (category.Contains("themes"))
+            {
+                classNames.Add("custom-themes");
+            }
+            else if (category.Equals("framework"))
+            {
+                classNames.Add("framework");
+            }
+            else if (category.Contains("mobile widgets"))
+            {
+                classNames.Add("mobile-widgets");
+            }
+            else if (category.Contains("mobile framework"))
+            {
+                classNames.Add("mobile-framework");
+            }
+            else if (category.Contains("chart"))
+            {
+                classNames.Add("chart");
+            }
+            else if (category.Contains("gauges"))
+            {
+                classNames.Add("gauges");
+            }
+            else if (category.Contains("qr codes"))
+            {
+                classNames.Add("qrcodes");
+            }
+            else if (category.Contains("financial"))
+            {
+                classNames.Add("financial");
+            }
+            else if (category.Contains("geoviz"))
+            {
+                classNames.Add("geoviz");
+            }
+
+            return String.Join(" ", classNames);
         }
     }
 }
