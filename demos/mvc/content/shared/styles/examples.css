@@ -527,7 +527,7 @@ div.submenu-box ol {
 
 .overview #bannerInner
 {
-    padding: 29px 0;
+    padding: 57px 0 0;
 
 }
 
@@ -539,7 +539,7 @@ div.submenu-box ol {
 #banner h1
 {
     color: white;
-    font: normal 60px/1 "MetricWeb-Semibold", Arial, Helverica, sans-serif;
+    font: normal 80px/1 "MetricWeb-Semibold", Arial, Helverica, sans-serif;
     letter-spacing: -.03em;
     text-align: center;
 }
@@ -828,7 +828,8 @@ div.submenu-box ol {
     color:#0487c4;
 }
 
-.overview .box h2 a
+.overview .box h2 a,
+.overview .box.centerAlign p
 {
    color: #fff;
 }
