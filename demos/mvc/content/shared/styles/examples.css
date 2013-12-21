@@ -25,7 +25,7 @@ body {
     background-color: #fff;
     color: #e0e0e0;
     font: 400 16px/1.25 Arial, Helvetica, sans-serif;
-    min-width: 1170px;
+    min-width: 1230px;
 }
 
 img
@@ -69,33 +69,6 @@ a
 a:hover
 {
     text-decoration: underline;
-}
-
-h2, h3
-{
-    color: #000;
-    font-size: 24px;
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
-    margin: 0;
-    display: block;
-    font-weight: bold;
-}
-
-h2
-{
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
-    line-height: 1;
-    margin: 0 0 40px;
-    font: 400 40px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
-    letter-spacing: -0.04em;   
-}
-
-h3
-{
-    font: 24px/1.2 Arial, Helvetica, sans-serif;
-    letter-spacing: -0.04em;   
 }
 
 .kendo-nav,
@@ -243,9 +216,17 @@ h3
     background-color: #fff;
 }
 
-.teampulse h2
+.teampulse h2,
+.section--white .centerWrap h2
 {
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    line-height: 1;
+    margin: 0 0 40px;
+    font: 400 40px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
+    letter-spacing: -0.04em; 
     margin-bottom: 50px;
+    color: #000;
 }
 
 .overview .teampulse p
@@ -778,11 +759,16 @@ div.submenu-box ol {
 
 .demos-nav.widgetGrid h2
 {
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;   
+    letter-spacing: -0.04em; 
+    color: #000;
+    line-height: 1.5;
     font-size: 12px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    clear: left;
+    clear: left;    
 }
 
 .overview > .centerWrap > h2
@@ -798,11 +784,16 @@ div.submenu-box ol {
 {
     margin-top:20px;
     font-size:24px;
+    font: 24px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: -0.04em; 
 }
 
-/*.overview .box h2,*/
 .overview .demos-nav h2
 {
+    word-wrap: break-word;
+    line-height: 1;
+    font: 400 40px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
+    letter-spacing: -0.04em;
     margin:30px 0 10px;
     font-size:32px;
     text-align: center;
@@ -817,6 +808,8 @@ div.submenu-box ol {
 {
     margin-top:2.4em;
     font-weight:normal;
+    font: 24px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: -0.04em; 
 }
 
 .box h2,
