@@ -95,6 +95,7 @@ h2
 h3
 {
     font: 24px/1.2 Arial, Helvetica, sans-serif;
+    letter-spacing: -0.04em;   
 }
 
 .kendo-nav,
@@ -246,7 +247,7 @@ h3
 {
     font-size: 22px;
     font-weight: normal;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-right: 50px;
 }
 
@@ -552,12 +553,6 @@ div.submenu-box ol {
     table-layout: auto;
 }
 
-.suite-demos-nav .get-kendoui
-{
-    position: absolute;
-    right: 0;
-}
-
 .suite-demos-nav .get-kendoui:hover
 {
     color: #fff;
@@ -594,6 +589,30 @@ div.submenu-box ol {
     color: #3d3d3d;
 }
 
+.demos-title
+{
+    float: left;
+    display: inline-block;
+}
+    
+.demos-list
+{
+    float: right;
+    display: inline-block;
+    width: auto;
+}    
+ 
+ .demos-list .get-kendoui
+ {
+     position:relative;
+ }
+ 
+ .suite-demos-nav
+ {
+    width: 1170px;
+    margin: 0 auto;
+    padding: 0;
+ }
 
 /*featured demos and demos-nav*/
 .sourceChooser,
@@ -700,7 +719,7 @@ div.submenu-box ol {
 
 .overview .box
 {
-    line-height:1.4; 
+    line-height:1.25; 
     vertical-align: top;
 }
 
@@ -814,6 +833,12 @@ div.submenu-box ol {
     padding:0 0 72px;
     margin-bottom:-72px;
     text-align:left;
+}
+
+.overview .widebox p,
+.box.narrowbox p
+{
+    margin-bottom: 20px;
 }
 
 .box h2,

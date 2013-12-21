@@ -19,8 +19,7 @@
  @Html.Partial("Telerik-Navigation")
 
     <div class="suite-demos-nav">
-      <ul class="centerWrap floatWrap">
-            <li class="active header">Kendo UI Demos</li>
+      <ul class="demos-list centerWrap floatWrap">
             <li><a href="@Url.Content("~")">Overview</a><em></em></li>
             <li@(Html.ActiveSuiteClass(Url.Content("~/web")))>@Html.SuiteLink("Web", "Web Demos")</li>
             <li@(Html.ActiveSuiteClass(Url.Content("~/mobile")))>@Html.SuiteLink("Mobile", "Mobile Demos")</li>
@@ -31,8 +30,6 @@
 
 <div id="banner"><div id="bannerInner"><div class="centerWrap"><h1>Kendo UI Demos</h1></div></div>
 </div>
-
-
 
 <div class="section section--white">
 <div class="demos-nav">
@@ -50,7 +47,7 @@
         <div class="box centerAlign right-box">
             <a href="dataviz/overview/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-dataviz.png")" alt="DataViz Demos" /></a>
             <h2><a href="dataviz/overview/index.html">DataViz demos</a></h2>
-            <p>You won't believe this is just HTML5. <br />Rich, interactive, touch-enabled charts. <!--a href="dataviz/overview/index.html" class="launchButton">Launch Demos</a--></p>
+            <p>You won't believe this is just HTML5. Rich, interactive, touch-enabled charts. <!--a href="dataviz/overview/index.html" class="launchButton">Launch Demos</a--></p>
         </div>
     </div>
 </div>
@@ -73,7 +70,7 @@
             <a href="@Url.Content("~/bootstrap/")" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/kendoui-bootstrap.jpg")" alt="Kendo UI and Bootstrap" /></a>
             <h3 class="centerAlign"><a href="@Url.Content("~/bootstrap/")">Telerik Kendo UI and <br />Bootstrap</a></h3>
             <p>Explore how you can easily use Kendo UI and Twitter Bootstrap on the same page. </p>
-	    <p><br />Preview Kendo UI widgets that are adapted to the responsive layouts of Bootstrap, see how they look and feel with different font size and dimensions.</p>
+	        <p>Preview Kendo UI widgets that are adapted to the responsive layouts of Bootstrap, see how they look and feel with different font size and dimensions.</p>
             <!--a href="@Url.Content("~/bootstrap/")" class="launchButton">Launch!</a-->
         </div>
 
@@ -90,7 +87,7 @@
             <a href="@Url.Content("~/mobile/simulator/")" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/sushi-mobile.jpg")" alt="Sushi Mobile Application" /></a>
             <h3 class="centerAlign"><a href="@Url.Content("~/mobile/simulator/")">Sushi <br />Mobile Application</a></h3>
             <p>Native UI widgets for building HTML5-powered apps and sites for modern mobile devices. Making your mobile user interface touch responsive and with native look and feel.</p>
-            <p><br /><em>Only Webkit based browsers are fully supported.</em></p>
+            <p><em>Only Webkit based browsers are fully supported.</em></p>
             <!--a href="@Url.Content("~/mobile/simulator/")" class="launchButton">Launch!</a-->
         </div>
     </div>
@@ -107,7 +104,7 @@
         <div class="column13">
 	<h2>Telerik's project management <br />software - TeamPulse</h2>
         <p>TeamPulse is an end-to-end Agile project management solution based on Agile best practices. It allows you to capture ideas, manage feedback, requirements and bugs, plan releases and track progress in real time. Integrates with GIT and TFS.</p>
-	<p><br />TeamPulse uses the 20+ Kendo UI widgets for its fast and highly adaptable UI. The team leverages Kendo UI's powerful MVVM framework. It reads the data through the DataSources and extensively uses the templates to decouple the UI from the business logic.</p>
+	<p>TeamPulse uses the 20+ Kendo UI widgets for its fast and highly adaptable UI. The team leverages Kendo UI's powerful MVVM framework. It reads the data through the DataSources and extensively uses the templates to decouple the UI from the business logic.</p>
         <a href="http://demos.telerik.com/teampulse-demo/xview" class="launchButton">Try Ideas&Feedback Portal</a>
         </div>
     </div>
@@ -188,6 +185,10 @@ $(document).ready(function(){
 });
 
 </script>
+
+<style>
+
+</style>
 
 </body>
 </html>
