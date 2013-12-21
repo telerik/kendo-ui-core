@@ -889,18 +889,15 @@ kendo_module({
         var idx = 0;
         var length;
         var date;
+        var result = [].concat(dates);
 
-        if (!$.isArray(dates)) {
-            dates = [dates];
-        }
-
-        for (length = dates.length; idx < length; idx++) {
-            date = dates[idx];
+        for (length = result.length; idx < length; idx++) {
+            date = result[idx];
             date = kendo.timezone.convert(date, zone || date.getTimezoneOffset(), "Etc/UTC");
-            dates[idx] = kendo.toString(date, RECURRENCE_DATE_FORMAT);
+            result[idx] = kendo.toString(date, RECURRENCE_DATE_FORMAT);
         }
 
-        return dates.join(";") + ";";
+        return result.join(";") + ";";
     }
 
     function startPeriodByFreq(start, rule) {
@@ -1006,7 +1003,7 @@ kendo_module({
     }
 
     function expand(event, start, end, zone) {
-        var rule = parseRule(event.recurrenceRule),
+        var rule = parseRule(event.recurrenceRule, zone),
             startTime, endTime, endDate,
             hours, minutes, seconds,
             durationMS, startPeriod, inPeriod,

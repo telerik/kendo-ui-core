@@ -976,6 +976,21 @@
         equal(events[0].endTime.getHours(), 8);
     });
 
+    test("DAILY occurrences method honours", function() {
+        var schedulerEvent = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2000, 10, 10, 16, 30),
+            end: new Date(2000, 10, 10, 17, 0),
+            recurrenceRule: "DTSTART;VALUE=DATE:20001010T070000Z DTEND;VALUE=DATE:20001010T080000Z FREQ=DAILY"
+        });
+
+        var events = schedulerEvent.expand(new Date(2000, 10, 11), new Date(2000, 10, 11, 17), "Etc/UTC");
+
+        deepEqual(events[0].start, new Date(2000, 10, 11, 7));
+        deepEqual(events[0].end, new Date(2000, 10, 11, 8));
+    });
+
     /*
     //Uncomment when timezone is Brasilia (-06:00).
     test("DAILY method honours DST in Brasilia", function() {
@@ -2291,7 +2306,6 @@
 
         equal(event.recurrenceException, exception + ";");
     });
-    return;
 
     test("Remove event which exist in EXDATE rule", function() {
         var expDate1 = new Date(2013, 0, 1, 10, 30),
