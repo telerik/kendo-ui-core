@@ -227,6 +227,12 @@ h3
     background-color: #f3f5f7
 }
 
+.section--green,
+.overview .section--green .demos-nav
+{
+   background-color: #2db245;
+}
+
 .section--white
 {
     background-color: #fff;
@@ -535,6 +541,7 @@ div.submenu-box ol {
     color: white;
     font: normal 60px/1 "MetricWeb-Semibold", Arial, Helverica, sans-serif;
     letter-spacing: -.03em;
+    text-align: center;
 }
 
 /*suite demos nav*/
@@ -819,6 +826,16 @@ div.submenu-box ol {
 .box h3 a
 {
     color:#0487c4;
+}
+
+.overview .box h2 a
+{
+   color: #fff;
+}
+
+.overview .demos-nav .box
+{
+    color: #000;
 }
 
 .overview .box:first-child,
@@ -1508,7 +1525,7 @@ p#copy
 {
     content: "";
     display: inline-block;
-    background: #fff url(tag-new--sidebar.png) no-repeat center center;
+    background: #fff url(tag-new.png) no-repeat center center;
     margin-left: 4px;
     width: 18px;
     height: 9px;
@@ -1656,7 +1673,7 @@ p#copy
 .widgetGrid .narrowCol.mobile-devices
 {
     margin-bottom: 0;
-    height: 191px;
+    height: 186px;
 }
 
 .web.widgetGrid .dashboards
@@ -1735,6 +1752,7 @@ p#copy
     width:500px;
     position: relative;
     border-left: none;
+    margin: 22px 0 0;
 }
 
 .widgetGrid.dataviz .narrowCol.gauges,
