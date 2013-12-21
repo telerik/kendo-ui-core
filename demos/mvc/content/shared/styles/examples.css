@@ -278,7 +278,7 @@ h3
     color: #000;
     font-weight: bold;
     font-size: 18px;
-    line-height: 70px;
+    line-height: 66px;
     letter-spacing: -0.05em; 
 }
 
@@ -542,9 +542,10 @@ div.submenu-box ol {
 {
     position: relative;
     z-index: 1;
-    min-height: 70px;
+    min-height: 66px;
     background-color: white;
-    background-color: rgba(255, 255, 255, 0.95); 
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 4px solid #2db245;
 }
 
 .suite-demos-nav>.centerWrap
@@ -574,7 +575,7 @@ div.submenu-box ol {
     display: inline-block;
     padding: 0 13px;
     font-size: 13px;
-    line-height: 70px;
+    line-height: 66px;
     text-decoration: none;
     color: #3d3d3d;
     transition: color 0.2s ease, opacity 0.2s ease;
@@ -624,7 +625,7 @@ div.submenu-box ol {
 
 .demos-nav
 {
-    background: #eff1f4;
+    background: #f3f5f7;
     color: #555;
 }
 
@@ -706,7 +707,8 @@ div.submenu-box ol {
 
 .widgetOverview .box
 {
-    min-height: 390px;
+    min-height: 300px;
+    padding-bottom: 60px;
 }
 
 .test-left{padding-left:0;}
@@ -849,7 +851,7 @@ div.submenu-box ol {
 
 .box h3
 {
-    margin-bottom:14px;
+    margin-bottom:7px;
 }
 
 .overview .widebox h2,
@@ -863,9 +865,7 @@ div.submenu-box ol {
     display:block;
     position:relative;
     text-align:center;
-    text-decoration:none;
-    margin-bottom: 37px;
-    
+    text-decoration:none;    
 }
 
 .k-web .imgPlate img,
@@ -926,7 +926,7 @@ div.submenu-box ol {
 {
     display: inline-block;
     min-width: 100px;
-    margin: 17px auto 0 auto;
+    margin: 15px auto 0 auto;
     text-decoration: none;
     color: #fff;
     text-align: center;
@@ -1640,33 +1640,33 @@ p#copy
 {
     float: left;
     width:650px;
-    margin: 27px 0;
+    margin: 22px 0 30px;
     height: 156px;
 }
 
 .widgetGrid .narrowCol
 {
-    float: left;   
-    margin: 27px 0 0;
-    border-left: 1px solid #d3d7db;
+    float: left;
+    margin: 22px 0 30px;
+    border-left: 1px solid #dfdfdf;
     height: 156px; 
 }
 
 .widgetGrid .narrowCol.mobile-devices
 {
     margin-bottom: 0;
-    height: 183px;
+    height: 191px;
 }
 
 .web.widgetGrid .dashboards
 {
-     border-left: 1px solid #d3d7db;
+     border-left: 1px solid #dfdfdf;
      width: 169px;
 }
 
 .dataviz.widgetGrid .dashboards
 {
-    border-left: 1px solid #d3d7db;
+    border-left: 1px solid #dfdfdf;
 }
 
 .widgetGrid .narrowCol.chart,
@@ -1693,7 +1693,7 @@ p#copy
 .widgetGrid .narrowCol.custom-themes
 {
     width: 169px;
-    margin-top: 27px;
+    margin-top: 22px;
 }
 
 .web.widgetGrid .narrowCol.custom-themes
@@ -1889,30 +1889,28 @@ p#copy
 
 .custom-themes-cat,
 .bar--qr-codes-cat,
-.geoviz-cat
-{
-    padding-top: 28px;
-}
-
+.geoviz-cat,
 .web .custom-themes-cat
 {
-    padding-top: 23px;
+    padding-top: 15px;
 }
 
 a.theme-builder {
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 2px 2px 2px 2px;
-    color: #FFFFFF;
+    color: #fff;
     display: inline-block;
     font-size: 15px;
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 2px;
+    margin-top: 7px;
     padding: 9px 23px;
     position: relative;
     text-align: center;
     text-decoration: none;
-    transition: color 0.2s ease 0s, opacity 0.2s ease 0s;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
     word-wrap: break-word;
     width: 106px;
 }
@@ -1922,6 +1920,7 @@ a.theme-builder:hover
     background-color: #444;
     background-color: rgba(0,0,0,.6);
     text-decoration: none;
+    color: #fff;
 }
 
 
@@ -1949,6 +1948,7 @@ a.theme-builder:hover
 {
     color: #036c9c;
 }
+
 .osName,
 .osThumb
 {
