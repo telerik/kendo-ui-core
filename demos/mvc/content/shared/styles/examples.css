@@ -590,7 +590,7 @@ div.submenu-box ol {
 .suite-demos-nav .active
 {
     background-color: #eaecef;
-    background-color: rgba(225, 229, 234, 0.6);
+    background-color: rgba(225, 229, 234, 0.5);
     color: #3d3d3d;
 }
 
@@ -605,8 +605,8 @@ div.submenu-box ol {
 
 .demos-nav
 {
-    background: #2db245;
-    color: #fff;
+    background: #eff1f4;
+    color: #555;
 }
 
 .overview .demos-nav,
@@ -1623,7 +1623,7 @@ p#copy
 {
     float: left;   
     margin: 27px 0;
-    border-left: 1px solid rgba(210,210,210,.5);
+    border-left: 1px solid #d3d7db;
     height: 156px; 
 }
 
@@ -1635,13 +1635,13 @@ p#copy
 
 .web.widgetGrid .dashboards
 {
-     border-left: 1px solid rgba(210,210,210,.5);
+     border-left: 1px solid #d3d7db;
      width: 169px;
 }
 
 .dataviz.widgetGrid .dashboards
 {
-    border-left: 1px solid rgba(210,210,210,.5);
+    border-left: 1px solid #d3d7db;
 }
 
 .widgetGrid .narrowCol.chart,
@@ -1728,7 +1728,7 @@ p#copy
     line-height:1.5;
     text-transform:uppercase;
     font-weight: normal;
-    letter-spacing: 1px;
+    letter-spacing: normal;
 }
 
 .widgetGrid ul
@@ -1763,13 +1763,15 @@ p#copy
 .widgetGrid a
 {
     display: inline-block;
-    color:#fff;
-    font-size: 13px;
+    color:#0487c4;
+    font-size: 12px;
     line-height: 13px;
+    font-weight: bold;
 }
 
 .widgetGrid a:hover
 {
+    color: #036c9c;
     text-decoration: underline;
 }
 
@@ -1905,7 +1907,7 @@ a.theme-builder:hover
     position: absolute;
     bottom: 0;
     padding-bottom: 0;
-    color: #fff;
+    color: #0487c4;
 }
 
 #deviceList li
@@ -1918,6 +1920,10 @@ a.theme-builder:hover
     text-align:center;
 }
 
+#deviceList li:hover
+{
+    color: #036c9c;
+}
 .osName,
 .osThumb
 {
@@ -1958,11 +1964,6 @@ a.theme-builder:hover
     -ms-transition: all 0.1s ease 0s;
     -o-transition: all 0.1s ease 0s;
     transition: all 0.1s ease 0s;
-}
-
-#deviceList li:hover
-{
-    text-decoration: underline;
 }
 
 #deviceList .ios7Thumb{background-position: 0 25px;}
