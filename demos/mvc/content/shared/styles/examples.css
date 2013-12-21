@@ -545,7 +545,6 @@ div.submenu-box ol {
     min-height: 66px;
     background-color: white;
     background-color: rgba(255, 255, 255, 0.95);
-    border-bottom: 4px solid #2db245;
 }
 
 .suite-demos-nav>.centerWrap
@@ -626,7 +625,8 @@ div.submenu-box ol {
 .demos-nav
 {
     background: #f3f5f7;
-    color: #555;
+    color: #555; 
+    border-top: 4px solid #2db245;
 }
 
 .overview .demos-nav,
@@ -641,6 +641,7 @@ div.submenu-box ol {
 .overview .demos-nav
 {
     background-color: #fff;
+    border: 0;
 }
 
 .dojo-banner
