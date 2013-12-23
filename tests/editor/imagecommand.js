@@ -166,6 +166,96 @@ test('title text box is filled from alt', function() {
     equal($('#k-editor-image-title').val(), 'bar');
 });
 
+test('setting width sets width attribute', function() {
+    var range = createRangeFromText(editor, '|foo|');
+    execImageCommandOnRange(range);
+
+    $('#k-editor-image-url').val('foo');
+
+    $('#k-editor-image-width').val('1');
+
+    $('.k-dialog-insert').click();
+    equal(editor.value(), '<img alt="" src="foo" width="1" />');
+});
+
+test('setting string width sets correct numeric width attribute', function() {
+    var range = createRangeFromText(editor, '|foo|');
+    execImageCommandOnRange(range);
+
+    $('#k-editor-image-url').val('foo');
+
+    $('#k-editor-image-width').val('1px');
+
+    $('.k-dialog-insert').click();
+    equal(editor.value(), '<img alt="" src="foo" width="1" />');
+});
+
+test('width text box is filled from width attribute', function() {
+    editor.value('<img src="foo" width="1" />');
+    var range = editor.createRange();
+    range.selectNode(editor.body.firstChild);
+    execImageCommandOnRange(range);
+
+    equal($('#k-editor-image-width').val(), '1');
+});
+
+test('clearing width text box removes width attribute', function() {
+    editor.value('<img src="http://foo" width="1" />');
+    var range = editor.createRange();
+    range.selectNode(editor.body.firstChild);
+    execImageCommandOnRange(range);
+
+    $('#k-editor-image-width').val('');
+
+    $('.k-dialog-insert').click();
+    equal(editor.value(), '<img alt="" src="http://foo" />');
+});
+
+test('setting height sets height attribute', function() {
+    var range = createRangeFromText(editor, '|foo|');
+    execImageCommandOnRange(range);
+
+    $('#k-editor-image-url').val('foo');
+
+    $('#k-editor-image-height').val('1');
+
+    $('.k-dialog-insert').click();
+    equal(editor.value(), '<img alt="" height="1" src="foo" />');
+});
+
+test('setting string height sets correct numeric height attribute', function() {
+    var range = createRangeFromText(editor, '|foo|');
+    execImageCommandOnRange(range);
+
+    $('#k-editor-image-url').val('foo');
+
+    $('#k-editor-image-height').val('1px');
+
+    $('.k-dialog-insert').click();
+    equal(editor.value(), '<img alt="" height="1" src="foo" />');
+});
+
+test('height text box is filled from height attribute', function() {
+    editor.value('<img src="foo" height="1" />');
+    var range = editor.createRange();
+    range.selectNode(editor.body.firstChild);
+    execImageCommandOnRange(range);
+
+    equal($('#k-editor-image-height').val(), '1');
+});
+
+test('clearing height text box removes height attribute', function() {
+    editor.value('<img height="1" src="http://foo" />');
+    var range = editor.createRange();
+    range.selectNode(editor.body.firstChild);
+    execImageCommandOnRange(range);
+
+    $('#k-editor-image-height').val('');
+
+    $('.k-dialog-insert').click();
+    equal(editor.value(), '<img alt="" src="http://foo" />');
+});
+
 test('undo restores content', function() {
     var range = createRangeFromText(editor, '|foo|');
 
