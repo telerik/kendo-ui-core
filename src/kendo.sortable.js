@@ -50,7 +50,8 @@ var __meta__ = {
             excluded: null,
             holdToDrag: false,
             container: null,
-            connectWith: null
+            connectWith: null,
+            handler: null
         },
 
         destroy: function() {
@@ -77,11 +78,15 @@ var __meta__ = {
 
         _dragstart: function(e) {
             var draggedElement = this.draggedElement = e.currentTarget,
+                target = e.target || kendo.elementUnderCursor(e),
                 excluded = this.options.excluded,
+                handler = this.options.handler,
                 _placeholder = this.options.placeholder,
                 placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : _placeholder;
 
             if(excluded && draggedElement.is(excluded)) {
+                e.preventDefault();
+            } else if(handler && !$(target).is(handler)) {
                 e.preventDefault();
             } else {
                 draggedElement.css("display", "none");
