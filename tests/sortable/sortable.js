@@ -25,6 +25,10 @@
         element.data("kendoDraggable").trigger(type, e);
     }
 
+    function trigger(type, e, element) {
+        element.trigger($.Event(type, e));
+    }
+
     test("widget creates draggable component", 1, function() {
         element.kendoSortable();
         ok(element.data("kendoDraggable") instanceof Draggable);
@@ -35,7 +39,7 @@
             sortable = element.kendoSortable().data("kendoSortable");
 
         triggerDraggableEvent("dragstart", { currentTarget: draggedElement }, element);
-        
+
         equal(element.children().length, 5, "placeholder is attached to the sortable element");
         equal(draggedElement.text(), draggedElement.prev().text(), "placeholder is attached before draggedElement");
         equal(sortable.placeholder.css("visibility"), "hidden", "placeholder element have visibility: hidden");
@@ -46,7 +50,7 @@
             sortable = element.kendoSortable().data("kendoSortable");
 
         triggerDraggableEvent("dragstart", { currentTarget: draggedElement }, element);
-        
+
         ok(!draggedElement.is(":visible"), "draggedElement is hidden");
     });
 
@@ -57,9 +61,31 @@
 
         triggerDraggableEvent("dragstart", { currentTarget: draggedElement }, element);
         triggerDraggableEvent("dragcancel", {}, element);
-        
+
         ok(draggedElement.is(":visible"), "draggableElement is shown");
         ok(initialChildrenCount === element.children().length, "placeholder element is removed");
+    });
+
+    test("placeholder is moved while user drags", 2, function() {
+        var draggableElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggableElement),
+            targetElement = element.children().eq(1),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable().data("kendoSortable");
+
+        //simulate press and move to trigger draggable's hint initialization
+        press(draggableElement, draggableOffset.left, draggableOffset.top);
+        move(draggableElement, targetOffset.left, targetOffset.top + 10);
+
+        //hint is re-located after move
+        equal(sortable.placeholder.index(), 1);
+
+        triggerDraggableEvent("drag",  {
+            x: { client: targetOffset.left },
+            y: { client: targetOffset.top + 10 }
+        }, element);
+
+        equal(sortable.placeholder.index(), 2, "placeholder is moved under the element under cursor");
     });
 
 })();
