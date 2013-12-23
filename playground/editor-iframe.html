@@ -55,19 +55,33 @@
 </head>
 <body>
 
-    <div id="page">
-        <div id="window">
-            <textarea id="editor" rows="10" cols="30" style="height:440px">test</textarea>
-        </div>
+    <div id='container'>
+        <textarea id="txtEditTopPriority" data-bind="value: TopPriority" data-tools='["bold", "italic", "underline", "insertUnorderedList", "insertOrderedList"]' data-role="editor"></textarea>
+        <div id="gluh"></div>
     </div>
 
     <script>
-        $(document).ready(function() {
-            var editor = $("#editor").kendoEditor();
+        $(window).load(function(){
+            var vm = new kendo.observable({
+                    TopPriority: "Filler Text",
+                    electricity: new kendo.data.DataSource({
+                    data: [1, 4, 3]
+                })
+            });
 
-            // create window
-            $("#window").kendoWindow({ width: 600 }).data("kendoWindow").center();
+
+            kendo.bind($('#container'), vm);
+
+            var ue = new kendo.UserEvents($("#gluh")[0], {
+                global: true
+            });
+
+            ue.destroy();
+            //if (chart._userEvents) {
+                //chart._userEvents.destroy();
+            //}
         });
-</script>
+
+    </script>
 </body>
 </html>
