@@ -131,6 +131,8 @@ kendo_module({
         directoryNotFound: "A directory with this name was not found.",
         imageWebAddress: "Web address",
         imageAltText: "Alternate text",
+        imageWidth: "Width (px)",
+        imageHeight: "Height (px)",
         linkWebAddress: "Web address",
         linkText: "Text",
         linkToolTip: "ToolTip",
@@ -630,7 +632,9 @@ kendo_module({
                         node = node.firstChild;
                     }
 
-                    node.innerHTML = kendo.ui.editor.emptyElementContent;
+                    if (node.nodeType == 1 && node.tagName.toLowerCase() != "img") {
+                        node.innerHTML = kendo.ui.editor.emptyElementContent;
+                    }
                 }
             });
         },
