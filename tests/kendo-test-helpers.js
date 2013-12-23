@@ -142,27 +142,29 @@ $('head')
     QUnit.testDone(function( details ) {
         QUnit.fixture.empty().attr("class", "").attr("style", "").css("height", "100px");
 
-        var length = getDomContentsLength();
+        if (!QUnit.suppressCleanupCheck) {
+            var length = getDomContentsLength();
 
-        if (length > domContentsLength) {
-            console.warn(details.module, details.name, 'test did not clean DOM contents properly');
+            if (length > domContentsLength) {
+                console.warn(details.module, details.name, 'test did not clean DOM contents properly');
+            }
+
+            if (widgets.length) {
+                console.error.apply(console, [ details.module, details.name, 'active widgets left'].concat(widgets.map(function(widget) {
+                    var name = widget.options.name;
+
+                    if (widget.element[0].className) {
+                        name = name + "(" + widget.element[0].className + ")";
+                    }
+
+                    return name;
+                })));
+
+                widgets = [];
+            }
+
+            domContentsLength = length;
         }
-
-        if (widgets.length) {
-            console.error.apply(console, [ details.module, details.name, 'active widgets left'].concat(widgets.map(function(widget) {
-                var name = widget.options.name;
-
-                if (widget.element[0].className) {
-                    name = name + "(" + widget.element[0].className + ")";
-                }
-
-                return name;
-            })));
-
-            widgets = [];
-        }
-
-        domContentsLength = length;
     });
 })();
 
