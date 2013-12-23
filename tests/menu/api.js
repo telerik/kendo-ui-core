@@ -183,10 +183,7 @@ asyncTest('open should open item even if disabled', function() {
     }, 1);
 });
 
-asyncTest('open should apply max-height and overflow styles to group UL', 0, function() {
-    console.warn('SKIP: menu api', 'open should apply max-height and overflow styles to group UL');
-    start();
-    return;
+asyncTest('open should apply max-height and overflow styles to group UL', 3, function() {
     var item = getRootItem(1).parent(),
         ul = item.find(".k-group");
 
@@ -201,7 +198,7 @@ asyncTest('open should apply max-height and overflow styles to group UL', 0, fun
         equal(overflowStyle, "auto");
         equal(maxHeightStyle, windowHeight);
         start();
-    }, 1);
+    }, 30);
 });
 
 asyncTest('open should not apply max-height and overflow styles to group UL if it has children groups', function() {
