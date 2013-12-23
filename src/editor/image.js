@@ -42,7 +42,7 @@ var ImageCommand = Command.extend({
 
                     img.removeAttribute("complete");
                 });
-            }
+            };
 
             if (!img) {
                 img = dom.create(doc, "img", attributes);
