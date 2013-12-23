@@ -155,7 +155,9 @@ var __meta__ = {
         },
 
         _findDraggableNode: function(element) {
-            var items;
+            var items,
+                connectWith = this.options.connectWith,
+                connected;
 
             if($.contains(this.element[0], element)) { //the element is part of the sortable container
                 items = this.items();
@@ -163,6 +165,18 @@ var __meta__ = {
                 //$(elementUnderCursor).closest(filter, this.element)
                 console.log(items.filter(element)[0] || items.has(element)[0]);
                 return items.filter(element)[0] || items.has(element)[0];
+            } else if (connectWith) {
+                connected = $(connectWith);
+
+                for (var i = 0; i < connected.length; i++) {
+                    if($.contains(connected[i], element)) {
+                        var sortable = connected.eq(i).data("kendoSortable");
+                        if(sortable) {
+                            items = sortable.items();
+                            return items.filter(element)[0] || items.has(element)[0];
+                        }
+                    }
+                }
             }
         },
 
