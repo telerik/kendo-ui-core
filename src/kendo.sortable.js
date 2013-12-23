@@ -14,7 +14,7 @@ var __meta__ = {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget;
 
-    function contains(parent, child) {
+    function containsOrEqualTo(parent, child) {
         try {
             return $.contains(parent, child) || parent == child;
         } catch (e) {
@@ -49,7 +49,8 @@ var __meta__ = {
             filter: ">*",
             excluded: null,
             holdToDrag: false,
-            container: null
+            container: null,
+            connectWith: null
         },
 
         destroy: function() {
@@ -95,20 +96,18 @@ var __meta__ = {
 
         _drag: function(e) {
             var draggedElement = this.draggedElement,
-                target = this._findTarget(e),
+                target = $(this._findTarget(e)),
                 targetOffset,
                 hintOffset,
                 offsetDelta,
                 placeholder = this.placeholder,
                 excluded = this.options.excluded;
 
-            //target = $(target).closest("li");
-
-            if(target && !(excluded && target.is(excluded))) {
+            if(target.length && !(excluded && target.is(excluded))) {
                 targetOffset = kendo.getOffset(target);
                 hintOffset = kendo.getOffset(e.sender.hint);
-
                 offsetDelta = hintOffset.top - targetOffset.top;
+
                 if(offsetDelta <= 0) { //for negative delta the tooltip should be appended before the target
                     target.before(placeholder);
                 } else { //for positive delta the tooptip should be appended after the target
@@ -139,9 +138,10 @@ var __meta__ = {
                 target,
                 draggable = e.sender,
                 excluded = this.options.excluded,
-                items = excluded ? this.element.children().not(excluded) : this.element.children();
+                filter = this.options.filter,
+                items = this.items();
 
-            if(contains(draggable.hint[0], elementUnderCursor)) {
+            if(containsOrEqualTo(draggable.hint[0], elementUnderCursor)) {
                 draggable.hint.hide();
                 elementUnderCursor = kendo.elementUnderCursor(e);
                 // IE8 does not return the element in iframe from first attempt
@@ -151,11 +151,29 @@ var __meta__ = {
                 draggable.hint.show();
             }
 
-            if(items.find(elementUnderCursor).length) {
-                target = $(elementUnderCursor).parentsUntil(this.element);
-            }
+            return this._findDraggableNode(elementUnderCursor);
+        },
 
-            return target;
+        _findDraggableNode: function(element) {
+            var items;
+
+            if($.contains(this.element[0], element)) { //the element is part of the sortable container
+                items = this.items();
+
+                //$(elementUnderCursor).closest(filter, this.element)
+                console.log(items.filter(element)[0] || items.has(element)[0]);
+                return items.filter(element)[0] || items.has(element)[0];
+            }
+        },
+
+        items: function() {
+            var filter = this.options.filter;
+
+            if(filter) {
+                return this.element.find(filter);
+            } else {
+                return this.element.children();
+            }
         }
 
     });
