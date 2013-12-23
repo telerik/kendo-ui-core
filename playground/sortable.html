@@ -77,12 +77,6 @@
                     <img src="http://www.img2icnsapp.com/img/img2icns_icon.png" width="64" height="64" alt="image" />
                 </div>
             </li>
-            <li>
-                <div class="product">
-                    <span>Product 5</span>
-                    <img src="http://www.img2icnsapp.com/img/img2icns_icon.png" width="64" height="64" alt="image" />
-                </div>
-            </li>
         </ul>
     </div>
 
@@ -114,7 +108,28 @@
         </ul>
     </div>
 
+    <div class="example">
+        <h2>Sortable list with handlers</h2>
+        <ul id="handlers">
+            <li class="listitem"><span class="handler"></span>Item 1</li>
+            <li class="listitem"><span class="handler"></span>Item 2</li>
+            <li class="listitem"><span class="handler"></span>Item 3</li>
+            <li class="listitem"><span class="handler"></span>Item 4</li>
+            <li class="listitem"><span class="handler"></span>Item 5</li>
+            <li class="listitem"><span class="handler"></span>Item 6</li>
+            <li class="listitem"><span class="handler"></span>Item 7</li>
+            <li class="listitem"><span class="handler"></span>Item 8</li>
+        </ul>
+    </div>
+
     <style>
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
         .example {
             width: 500px;
             float: left;
@@ -169,6 +184,25 @@
         #list2 li {
             background-color: cyan;
         }
+
+        .listitem {
+            line-height: 40px;
+            height: 40px;
+            padding: 0;
+            background: #CCFF33;
+            overflow: hidden;
+        }
+
+        span.handler {
+            width: 16px;
+            height: 40px;
+            background: #9933FF url("https://cdn1.iconfinder.com/data/icons/iconic/raster/16/move_alt1.png") no-repeat center center;
+            display: block;
+            float: left;
+            padding: 0 6px;
+            margin-right: 10px;
+            border-right: 1px solid black;
+        }
     </style>
     <script>
         $("#basic").kendoSortable();
@@ -202,6 +236,10 @@
 
         $("#list2").kendoSortable({
             connectWith: "#list1"
+        });
+
+        $("#handlers").kendoSortable({
+            handler: ".handler"
         });
     </script>
 </body>
