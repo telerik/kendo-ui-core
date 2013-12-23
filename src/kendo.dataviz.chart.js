@@ -10417,8 +10417,13 @@ kendo_module({
                 firstDataItem = data.dataItems[0],
                 result = {};
 
-            if (!isNumber(firstDataItem) && !isArray(firstDataItem)) {
-                result = shallowCopy(firstDataItem);
+            if (firstDataItem && !isNumber(firstDataItem) && !isArray(firstDataItem)) {
+		var fn = firstDataItem.__fn;
+		if (!fn) {
+		    fn = firstDataItem.__fn = function() {};
+		    fn.prototype = firstDataItem;
+		}
+                result = new fn();
             }
 
             for (i = 0; i < seriesFields.length; i++) {
