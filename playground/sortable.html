@@ -8,33 +8,201 @@
     <script src="../src/kendo.sortable.js"></script>
 </head>
 <body>
-    <ul id="list">
-        <li class="item"><div class="inner">item1</div></li>
-        <li class="item"><div class="inner">item2</div></li>
-        <li class="item"><div class="inner">item3</div></li>
-        <li class="item"><div class="inner">item4</div></li>
-        <li class="item"><div class="inner">item5</div></li>
-        <li class="item"><div class="inner">item6</div></li>
-        <li class="item"><div class="inner">item7</div></li>
-        <li class="item"><div class="inner">item8</div></li>
-    </ul>
+    <div class="example">
+        <h2>Basic reordering</h2>
+        <ul id="basic">
+            <li>Item1</li>
+            <li>Item2</li>
+            <li>Item3</li>
+            <li>Item4</li>
+            <li>Item5</li>
+            <li>Item6</li>
+            <li>Item7</li>
+            <li>Item8</li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>Filtering and excluding items</h2>
+        <ul id="filtering">
+            <li class="item excluded"><div class="inner">Excluded</div></li>
+            <li class="filtered"><div class="inner">Filtered</div></li>
+            <li class="item"><div class="inner">item3</div></li>
+            <li class="item excluded"><div class="inner">Excluded</div></li>
+            <li class="item"><div class="inner">item5</div></li>
+            <li class="item"><div class="inner">item6</div></li>
+            <li class="item"><div class="inner">item7</div></li>
+            <li class="item excluded"><div class="inner">Excluded</div></li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>container restriction</h2>
+        <ul id="container">
+            <li><div>item10</div></li>
+            <li><div>item20</div></li>
+            <li><div>item30</div></li>
+            <li><div>item40</div></li>
+            <li><div>item50</div></li>
+            <li><div>item60</div></li>
+            <li><div>item70</div></li>
+            <li><div>item80</div></li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>Placeholder and hint customization</h2>
+        <ul id="customization">
+            <li>
+                <div class="product">
+                    <span>Product 1</span>
+                    <img src="http://www.img2icnsapp.com/img/img2icns_icon.png" width="64" height="64" alt="image" />
+                </div>
+            </li>
+            <li>
+                <div class="product">
+                    <span>Product 2</span>
+                    <img src="http://www.img2icnsapp.com/img/img2icns_icon.png" width="64" height="64" alt="image" />
+                </div>
+            </li>
+            <li>
+                <div class="product">
+                    <span>Product 3</span>
+                    <img src="http://www.img2icnsapp.com/img/img2icns_icon.png" width="64" height="64" alt="image" />
+                </div>
+            </li>
+            <li>
+                <div class="product">
+                    <span>Product 4</span>
+                    <img src="http://www.img2icnsapp.com/img/img2icns_icon.png" width="64" height="64" alt="image" />
+                </div>
+            </li>
+            <li>
+                <div class="product">
+                    <span>Product 5</span>
+                    <img src="http://www.img2icnsapp.com/img/img2icns_icon.png" width="64" height="64" alt="image" />
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>Linked lists - List 1</h2>
+        <ul id="list1">
+            <li><div>List1: item1</div></li>
+            <li><div>List1: item2</div></li>
+            <li><div>List1: item3</div></li>
+            <li><div>List1: item4</div></li>
+            <li><div>List1: item5</div></li>
+            <li><div>List1: item6</div></li>
+            <li><div>List1: item7</div></li>
+            <li><div>List1: item8</div></li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>Linked lists - List 2</h2>
+        <ul id="list2">
+            <li><div>List2: item1</div></li>
+            <li><div>List2: item2</div></li>
+            <li><div>List2: item3</div></li>
+            <li><div>List2: item4</div></li>
+            <li><div>List2: item5</div></li>
+            <li><div>List2: item6</div></li>
+            <li><div>List2: item7</div></li>
+            <li><div>List2: item8</div></li>
+        </ul>
+    </div>
+
     <style>
-        #list {
-            list-style-type: none;
-            margin: 0px;
-            padding: 0px;
+        .example {
+            width: 500px;
+            float: left;
         }
 
-        .item {
+        ul {
+            list-style-type: none;
+            margin: 0px;
+            padding: 0 10px;
+            width: 230px;
+            border: 1px solid red;
+        }
+
+        li {
+            list-style-type: none;
             padding: 10px;
             margin: 5px;
             border: 1px solid black;
             background-color: green;
             width: 200px;
         }
+
+        #filtering .filtered {
+            background-color: yellow;
+        }
+
+        #filtering .excluded {
+            opacity: 0.3;
+            background-color: gray;
+        }
+
+        #container li {
+            background-color: #00CC00;
+        }
+
+        #customization li {
+            background-color: orange;
+        }
+
+        #customization .product {
+            overflow: hidden;
+        }
+
+        #customization img {
+            float: right;
+        }
+
+        #list1 li {
+            background-color: brown;
+        }
+
+        #list2 li {
+            background-color: cyan;
+        }
     </style>
     <script>
-        $("#list").kendoSortable();
+        $("#basic").kendoSortable();
+
+        $("#filtering").kendoSortable({
+            filter: ".item",
+            excluded: ".excluded"
+        });
+
+        $("#container").kendoSortable({
+            container: $("#container")
+        });
+
+        $("#customization").kendoSortable({
+            hint: function(element) {
+                return element.clone()
+                    .html("<span>hint: </span>" + element.text())
+                    .css("background-color", "red");
+            },
+            placeholder: function(element) {
+                return element.clone().css({
+                    "opacity": 0.3,
+                    "background-color": "gray"
+                });
+            }
+        });
+
+        $("#list1").kendoSortable({
+            connectWith: "#list2"
+        });
+
+        $("#list2").kendoSortable({
+            connectWith: "#list1"
+        });
     </script>
 </body>
 </html>
