@@ -607,6 +607,10 @@ kendo_module({
             items.each(function () {
                 var li = $(this);
 
+                if (that._isRootItem(li)) {
+                    that.clicked = false;
+                }
+
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {

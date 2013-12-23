@@ -119,42 +119,63 @@ test('click method on item with URL shouldn\'t call preventDefault method', func
 });
 
 test('hovering root item does not open it', function() {
-    var opend = false;
+    var opened = false,
+        item = $("li:first", menu.element)[0],
+        menuElement = menu.wrapper[0],
+        e = {target: item, currentTarget: item, delegateTarget: menuElement, relatedTarget: menuElement, preventDefault: $.noop, stopPropagation: $.noop };
 
-    menu.open = function() { opend = true };
-    menu._mouseenter({}, $("li:first", menu.element)[0]);
+    menu.open = function() { opened = true };
 
-    ok(!opend);
+    menu._mouseenter(e, item);
+
+    ok(!opened);
+});
+
+test('hovering root item does not open it after using close method', 2, function() {
+    var opened,
+        item = $("li:first", menu.element)[0],
+        menuElement = menu.wrapper[0],
+        e = {target: item, currentTarget: item, delegateTarget: menuElement, relatedTarget: menuElement, preventDefault: $.noop, stopPropagation: $.noop };
+
+    menu.open = function() { opened = true };
+
+    menu._click(e, item);
+    opened = false;
+    menu.close(item);
+    menu._mouseenter(e, item);
+
+    ok(!opened);
+    equal(menu.clicked, false);
 });
 
 test('clicking root item should open it', function() {
-    var opend = false;
-    menu.open = function() { opend = true };
+    var opened = false;
+    menu.open = function() { opened = true };
     var element = $("li:first", menu.element)[0];
     menu._click({ target: element, preventDefault: function () { }, stopPropagation: function () { } }, element);
-    ok(opend);
+    ok(opened);
     ok(menu.clicked);
 });
 
 test('leaving opened item does not close it', function() {
-    var opend = false;
+    var opened = false;
     menu.clicked = true;
-    menu.open = function() { opend = true };
+    menu.open = function() { opened = true };
 
     menu._mouseleave({}, $("li:first", menu.element)[0]);
 
-    ok(!opend);
+    ok(!opened);
 });
 
 test('leaving opened and hovering a sibling closes it and opens the sibling', function() {
-    var opend = false;
+    var opened = false;
     menu.clicked = true;
-    menu.open = function() { opend = true };
+    menu.open = function() { opened = true };
 
     var element = $("li:first", menu.element)[0];
     menu._mouseenter({ currentTarget: element, delegateTarget: menu.element[0], indexOf: function() { }, type:'mouseenter' }, element.nextSibling);
 
-    ok(opend);
+    ok(opened);
 });
 
 test('clicking the document closes the open item', function() {
