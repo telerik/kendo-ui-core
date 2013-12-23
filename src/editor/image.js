@@ -11,9 +11,7 @@ var kendo = window.kendo,
     Command = Editor.Command,
     keys = kendo.keys,
     KEDITORIMAGEURL = "#k-editor-image-url",
-    KEDITORIMAGETITLE = "#k-editor-image-title",
-    KEDITORIMAGEWIDTH = "#k-editor-image-width",
-    KEDITORIMAGEHEIGHT = "#k-editor-image-height";
+    KEDITORIMAGETITLE = "#k-editor-image-title";
 
 var ImageCommand = Command.extend({
     init: function(options) {
@@ -27,28 +25,15 @@ var ImageCommand = Command.extend({
     insertImage: function(img, range) {
         var attributes = this.attributes;
         var doc = RangeUtils.documentFromRange(range);
-        
+
         if (attributes.src && attributes.src != "http://") {
-
-            var removeIEAttributes = function() {
-                setTimeout(function(){
-                    if (!attributes.width) {
-                        img.removeAttribute("width");
-                    }
-
-                    if (!attributes.height) {
-                        img.removeAttribute("height");
-                    }
-
-                    img.removeAttribute("complete");
-                });
-            };
-
             if (!img) {
                 img = dom.create(doc, "img", attributes);
                 img.onload = img.onerror = function () {
-                    removeIEAttributes();
-                };
+                        img.removeAttribute("complete");
+                        img.removeAttribute("width");
+                        img.removeAttribute("height");
+                    };
 
                 range.deleteContents();
                 range.insertNode(img);
@@ -57,15 +42,12 @@ var ImageCommand = Command.extend({
                     dom.insertAfter(doc.createTextNode("\ufeff"), img);
                 }
 
-                removeIEAttributes();
-
                 range.setStartAfter(img);
                 range.setEndAfter(img);
                 RangeUtils.selectRange(range);
                 return true;
             } else {
                 dom.attr(img, attributes);
-                removeIEAttributes();
             }
         }
 
@@ -89,18 +71,6 @@ var ImageCommand = Command.extend({
                 "</div>" +
                 "<div class='k-edit-field'>" +
                     '<input type="text" class="k-input k-textbox" id="k-editor-image-title">' +
-                "</div>" +
-                "<div class='k-edit-label'>" +
-                    '<label for="k-editor-image-width">#: messages.imageWidth #</label>' +
-                "</div>" +
-                "<div class='k-edit-field'>" +
-                    '<input type="text" class="k-input k-textbox" id="k-editor-image-width">' +
-                "</div>" +
-                "<div class='k-edit-label'>" +
-                    '<label for="k-editor-image-height">#: messages.imageHeight #</label>' +
-                "</div>" +
-                "<div class='k-edit-field'>" +
-                    '<input type="text" class="k-input k-textbox" id="k-editor-image-height">' +
                 "</div>" +
                 '<div class="k-edit-buttons k-state-default">' +
                     '<button class="k-dialog-insert k-button">#: messages.dialogInsert #</button>' +
@@ -134,25 +104,12 @@ var ImageCommand = Command.extend({
             showBrowser = !!(kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined);
 
         function apply(e) {
-            var element = dialog.element,
-                w = parseInt(element.find(KEDITORIMAGEWIDTH).val(), 10),
-                h = parseInt(element.find(KEDITORIMAGEHEIGHT).val(), 10);
+            var element = dialog.element;
 
             that.attributes = {
                 src: element.find(KEDITORIMAGEURL).val().replace(/ /g, "%20"),
                 alt: element.find(KEDITORIMAGETITLE).val()
             };
-
-            that.attributes.width = null;
-            that.attributes.height = null;
-
-            if (!isNaN(w) && w > 0) {
-                that.attributes.width = w;
-            }
-
-            if (!isNaN(h) && h > 0) {
-                that.attributes.height = h;
-            }
 
             applied = that.insertImage(img, range);
 
@@ -194,8 +151,6 @@ var ImageCommand = Command.extend({
             // IE < 8 returns absolute url if getAttribute is not used
             .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
             .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()
-            .find(KEDITORIMAGEWIDTH).val(img && img.getAttribute("width") ? img.width : "").end()
-            .find(KEDITORIMAGEHEIGHT).val(img && img.getAttribute("height") ? img.height : "").end()
             .data("kendoWindow");
 
         if (showBrowser) {
