@@ -14,14 +14,14 @@
     }
 
     function contains(obj, set) {
-	for (var key in set) {
+        for (var key in set) {
             var val = set[key];
             if (val.toString() == "[object Object]") {
                 contains(obj[key], val);
             } else {
                 equal(obj[key], val);
             }
-	}	
+        }
     }
 
     // ------------------------------------------------------------
