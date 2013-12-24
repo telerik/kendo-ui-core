@@ -10418,8 +10418,8 @@ kendo_module({
                 result = {};
 
             if (firstDataItem && !isNumber(firstDataItem) && !isArray(firstDataItem)) {
-		var fn = function() {};
-		fn.prototype = firstDataItem;
+                var fn = function() {};
+                fn.prototype = firstDataItem;
                 result = new fn();
             }
 
