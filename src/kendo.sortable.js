@@ -52,7 +52,8 @@ var __meta__ = {
             container: null,
             connectWith: null,
             handler: null,
-            cursorOffset: null
+            cursorOffset: null,
+            axis: null
         },
 
         destroy: function() {
@@ -71,6 +72,7 @@ var __meta__ = {
                 holdToDrag: options.holdToDrag,
                 container: options.container,
                 cursorOffset: options.cursorOffset,
+                axis: options.axis,
                 dragstart: $.proxy(that._dragstart, that),
                 dragcancel: $.proxy(that._dragcancel, that),
                 drag: $.proxy(that._drag, that),
