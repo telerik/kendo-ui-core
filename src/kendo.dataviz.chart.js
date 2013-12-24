@@ -422,6 +422,8 @@ kendo_module({
         },
 
         _redraw: function() {
+console.time("Foo");
+
             var chart = this,
                 model = chart._getModel(),
                 view;
@@ -441,6 +443,8 @@ kendo_module({
                 chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
             }
+
+console.timeEnd("Foo");
         },
 
         _sharedTooltip: function() {
@@ -10418,11 +10422,8 @@ kendo_module({
                 result = {};
 
             if (firstDataItem && !isNumber(firstDataItem) && !isArray(firstDataItem)) {
-		var fn = firstDataItem.__fn;
-		if (!fn) {
-		    fn = firstDataItem.__fn = function() {};
-		    fn.prototype = firstDataItem;
-		}
+		var fn = function() {};
+		fn.prototype = firstDataItem;
                 result = new fn();
             }
 
