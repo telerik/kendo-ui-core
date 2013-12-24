@@ -8,6 +8,7 @@
     <script src="../src/kendo.sortable.js"></script>
 </head>
 <body>
+
     <div class="example">
         <h2>Basic reordering</h2>
         <ul id="basic">
@@ -108,6 +109,8 @@
         </ul>
     </div>
 
+    <br />
+
     <div class="example">
         <h2>Sortable list with handlers</h2>
         <ul id="handlers">
@@ -119,6 +122,48 @@
             <li class="listitem"><span class="handler"></span>Item 6</li>
             <li class="listitem"><span class="handler"></span>Item 7</li>
             <li class="listitem"><span class="handler"></span>Item 8</li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>Cursor offset & HoldToDrag</h2>
+        <ul id="offset">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+            <li>Item 6</li>
+            <li>Item 7</li>
+            <li>Item 8</li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>Axis constraints</h2>
+        <ul id="axis">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+            <li>Item 6</li>
+            <li>Item 7</li>
+            <li>Item 8</li>
+        </ul>
+    </div>
+
+    <div class="example">
+        <h2>Events</h2>
+        <ul id="events">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Prevented</li>
+            <li>Item 5</li>
+            <li>Item 6</li>
+            <li>Item 7</li>
+            <li>Item 8</li>
         </ul>
     </div>
 
@@ -203,6 +248,15 @@
             margin-right: 10px;
             border-right: 1px solid black;
         }
+
+        #offset li {
+            background: #707070;
+        }
+
+        #axis li {
+            background: #3300FF;
+            color: white;
+        }
     </style>
     <script>
         $("#basic").kendoSortable();
@@ -240,6 +294,24 @@
 
         $("#handlers").kendoSortable({
             handler: ".handler"
+        });
+
+        $("#offset").kendoSortable({
+            cursorOffset: { top: 30, left: 30 },
+            holdToDrag: true
+        });
+
+        $("#axis").kendoSortable({
+            axis: "y"
+        });
+
+        $("#events").kendoSortable({
+            start: function(e) {
+                console.log("dragstart: ", e.item, e.placeholder);
+                if(e.item.text() === "Prevented") {
+                    e.preventDefault();
+                }
+            }
         });
     </script>
 </body>
