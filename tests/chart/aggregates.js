@@ -13,6 +13,17 @@
         return sa.aggregatePoints(indexes || [0, 1]);
     }
 
+    function contains(obj, set) {
+	for (var key in set) {
+            var val = set[key];
+            if (val.toString() == "[object Object]") {
+                contains(obj[key], val);
+            } else {
+                equal(obj[key], val);
+            }
+	}	
+    }
+
     // ------------------------------------------------------------
     module("SeriesAggregator / Simple aggregates", {
         setup: function() {
@@ -36,11 +47,11 @@
     test("accepts named aggregates", function() {
         series.aggregate = "min";
 
-        deepEqual(aggregate(series), { value: 1 });
+        contains(aggregate(series), { value: 1 });
     });
 
     test("default aggregate is max", function() {
-        deepEqual(aggregate(series), { value: 2 });
+        contains(aggregate(series), { value: 2 });
     });
 
     test("accepts function aggregates", function() {
@@ -48,7 +59,7 @@
             return 5;
         };
 
-        deepEqual(aggregate(series), { value: 5 });
+        contains(aggregate(series), { value: 5 });
     });
 
     test("allows function aggregates to return data items", function() {
@@ -59,18 +70,11 @@
         deepEqual(aggregate(series), { value: 5, bar: 1 });
     });
 
-    test("extends first dataItem", function() {
+    test("fields from first dataItem are accessible", function() {
         series.data[0].bar = true;
 
-        deepEqual(aggregate(series), { value: 2, bar: true });
+        equal(aggregate(series).bar, true);
         ok(aggregate !== series.data[0]);
-    });
-
-    test("overwrites only item", function() {
-        var aggr = aggregate(series, [0]);
-        console.warn("Chart: Skipping aggreate overwrite test until this optimization is fixed");
-        ok(true);
-        //ok(aggr === series.data[0]);
     });
 
     test("returns empty aggregate for empty source points array", function() {
@@ -103,17 +107,17 @@
     test("accepts named aggregates", function() {
         series.aggregate = "min";
 
-        deepEqual(aggregate(series), { fooValue: 1 });
+        contains(aggregate(series), { fooValue: 1 });
     });
 
     test("default aggregate is max", function() {
-        deepEqual(aggregate(series), { fooValue: 2 });
+        contains(aggregate(series), { fooValue: 2 });
     });
 
     test("accepts function aggregates", function() {
         series.aggregate = function(values) { return 5; };
 
-        deepEqual(aggregate(series), { fooValue: 5 });
+        contains(aggregate(series), { fooValue: 5 });
     });
 
     test("allows function aggregates to return data items", function() {
@@ -124,10 +128,10 @@
         deepEqual(aggregate(series), { fooValue: 5, bar: 1 });
     });
 
-    test("extends first dataItem", function() {
+    test("fields from first dataItem are accessible", function() {
         series.data[0].bar = true;
 
-        deepEqual(aggregate(series), { fooValue: 2, bar: true });
+        equal(aggregate(series).bar, true);
     });
 
     test("returns empty aggregate for empty source points array", function() {
@@ -164,17 +168,17 @@
     test("accepts named aggregates", function() {
         series.aggregate = "min";
 
-        deepEqual(aggregate(series), { foo: { value: 1 } });
+        contains(aggregate(series), { foo: { value: 1 } });
     });
 
     test("default aggregate is max", function() {
-        deepEqual(aggregate(series), { foo: { value: 2 } });
+        contains(aggregate(series), { foo: { value: 2 } });
     });
 
     test("accepts function aggregates", function() {
         series.aggregate = function(values) { return 5; };
 
-        deepEqual(aggregate(series), { foo: { value: 5 } });
+        contains(aggregate(series), { foo: { value: 5 } });
     });
 
     test("allows function aggregates to return data items", function() {
@@ -185,10 +189,10 @@
         deepEqual(aggregate(series), { foo: { value: 5 }, bar: 1 });
     });
 
-    test("extends first dataItem", function() {
+    test("fields from first dataItem are accessible", function() {
         series.data[0].bar = true;
 
-        deepEqual(aggregate(series), { foo: { value: 2 }, bar: true });
+        equal(aggregate(series).bar, true);
     });
 
     test("returns empty aggregate for empty source points array", function() {
@@ -274,11 +278,11 @@
             close: "max"
         };
 
-        deepEqual(aggregate(series), { open: 1, close: 20 });
+        contains(aggregate(series), { open: 1, close: 20 });
     });
 
     test("applies default aggregates", function() {
-        deepEqual(aggregate(series), { open: 10, close: 20, color: "red" });
+        contains(aggregate(series), { open: 10, close: 20, color: "red" });
     });
 
     test("accepts function aggregates", function() {
@@ -287,7 +291,7 @@
             close: "max"
         };
 
-        deepEqual(aggregate(series), { open: 5, close: 20 });
+        contains(aggregate(series), { open: 5, close: 20 });
     });
 
     test("accepts data items from top-level aggregate", function() {
@@ -298,15 +302,15 @@
         deepEqual(aggregate(series), { open: 5, close: 5 });
     });
 
-    test("extends first dataItem", function() {
+    test("fields from first dataItem are accessible", function() {
         series.data[0].bar = true;
-        deepEqual(aggregate(series), { open: 10, close: 20, color: "red", bar: true });
+        equal(aggregate(series).bar, true);
     });
 
     test("root-level named aggregate is applied to value fields only", function() {
         series.aggregate = "max";
 
-        deepEqual(aggregate(series), { open: 10, close: 20 });
+        contains(aggregate(series), { open: 10, close: 20 });
     });
 
     // ------------------------------------------------------------
@@ -339,11 +343,11 @@
             close: "max"
         };
 
-        deepEqual(aggregate(series), { fooOpen: 1, fooClose: 20 });
+        contains(aggregate(series), { fooOpen: 1, fooClose: 20 });
     });
 
     test("applies default aggregates", function() {
-        deepEqual(aggregate(series), { fooOpen: 10, fooClose: 20 });
+        contains(aggregate(series), { fooOpen: 10, fooClose: 20 });
     });
 
     test("accepts function aggregates", function() {
@@ -352,12 +356,12 @@
             close: "max"
         };
 
-        deepEqual(aggregate(series), { fooOpen: 5, fooClose: 20 });
+        contains(aggregate(series), { fooOpen: 5, fooClose: 20 });
     });
 
-    test("extends first dataItem", function() {
+    test("fields from first dataItem are accessible", function() {
         series.data[0].bar = true;
-        deepEqual(aggregate(series), { fooOpen: 10, fooClose: 20, bar: true });
+        equal(aggregate(series).bar, true);
     });
 
     test("accepts data items from top-level aggregate", function() {
