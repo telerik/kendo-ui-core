@@ -113,7 +113,7 @@ var FormattingTool = DelayedExecutionTool.extend({
             },
             highlightFirst: false,
             template: kendo.template(
-                '<span unselectable="on" style="display:block;#=(data.style || "").replace(\'"\',"\'")#">#:data.text#</span>'
+                '<span unselectable="on" style="display:block;#=(data.style||"")#">#:data.text#</span>'
             )
         });
 

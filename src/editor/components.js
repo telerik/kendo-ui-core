@@ -103,12 +103,17 @@ var SelectBox = DropDownList.extend({
     decorate: function(doc) {
         var items = this.dataSource.data(),
             i, tag, className;
+        var style;
 
         for (i = 0; i < items.length; i++) {
             tag = items[i].tag || "span";
             className = items[i].className;
 
-            items[i].style = dom.inlineStyle(doc, tag, { className : className }) + ";display:inline-block";
+            style = dom.inlineStyle(doc, tag, { className : className });
+
+            style = style.replace(/"/g, "'");
+
+            items[i].style = style + ";display:inline-block";
         }
 
         this.dataSource.trigger("change");
