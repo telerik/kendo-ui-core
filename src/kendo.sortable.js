@@ -14,10 +14,10 @@ var __meta__ = {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
 
-        DRAGSTART = "dragstart",
-        DRAG = "drag",
-        DRAGEND = "dragend",
-        DRAGCANCEL = "dragcancel",
+        START = "start",
+        CHANGE = "change",
+        END = "end",
+        CANCEL = "cancel",
 
         DEFAULT_FILTER = ">*";
 
@@ -44,14 +44,10 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
 
             that._draggable = that._createDraggable();
-
         },
 
         events: [
-            DRAGSTART,
-            DRAG,
-            DRAGEND,
-            DRAGCANCEL
+            START
         ],
 
         options: {
@@ -105,8 +101,14 @@ var __meta__ = {
             } else if(handler && !$(target).is(handler)) {
                 e.preventDefault();
             } else {
-                draggedElement.css("display", "none");
-                draggedElement.before(placeholder);
+
+                if(this.trigger(START, { item: draggedElement, placeholder: placeholder, draggableEvent: e })) {
+                    e.preventDefault();
+                } else {
+                    draggedElement.css("display", "none");
+                    draggedElement.before(placeholder);
+                }
+
             }
         },
 
@@ -134,6 +136,7 @@ var __meta__ = {
                 } else { //for positive delta the tooptip should be appended after the target
                     target.after(placeholder);
                 }
+
             }
         },
 
@@ -183,8 +186,6 @@ var __meta__ = {
             if($.contains(this.element[0], element)) { //the element is part of the sortable container
                 items = this.items();
 
-                //$(elementUnderCursor).closest(filter, this.element)
-                console.log(items.filter(element)[0] || items.has(element)[0]);
                 return items.filter(element)[0] || items.has(element)[0];
             } else if (connectWith) {
                 connected = $(connectWith);
