@@ -12,7 +12,14 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
-        Widget = kendo.ui.Widget;
+        Widget = kendo.ui.Widget,
+
+        DRAGSTART = "dragstart",
+        DRAG = "drag",
+        DRAGEND = "dragend",
+        DRAGCANCEL = "dragcancel",
+
+        DEFAULT_FILTER = ">*";
 
     function containsOrEqualTo(parent, child) {
         try {
@@ -20,6 +27,14 @@ var __meta__ = {
         } catch (e) {
             return false;
         }
+    }
+
+    function defaultHint(element) {
+        return element.clone();
+    }
+
+    function defaultPlaceholder(element) {
+        return element.clone().removeAttr("id").css("visibility", "hidden");
     }
 
     var Sortable = Widget.extend({
@@ -33,22 +48,19 @@ var __meta__ = {
         },
 
         events: [
-
+            DRAGSTART,
+            DRAG,
+            DRAGEND,
+            DRAGCANCEL
         ],
 
         options: {
             name: "Sortable",
-            hint: function(element) {
-                return element.clone();
-            },
-            placeholder: function(element) {
-                return element.clone()
-                        .removeAttr("id")
-                        .css("visibility", "hidden");
-            },
-            filter: ">*",
-            excluded: null,
+            hint: defaultHint,
+            placeholder: defaultPlaceholder,
+            filter: DEFAULT_FILTER,
             holdToDrag: false,
+            excluded: null,
             container: null,
             connectWith: null,
             handler: null,
