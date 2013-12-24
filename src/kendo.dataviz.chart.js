@@ -422,8 +422,6 @@ kendo_module({
         },
 
         _redraw: function() {
-console.time("Foo");
-
             var chart = this,
                 model = chart._getModel(),
                 view;
@@ -443,8 +441,6 @@ console.time("Foo");
                 chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
             }
-
-console.timeEnd("Foo");
         },
 
         _sharedTooltip: function() {
@@ -11178,17 +11174,6 @@ console.timeEnd("Foo");
                 path += ".";
             }
         }
-    }
-
-    function shallowCopy(src) {
-        var dst = {};
-        for (var prop in src) {
-            if (src.hasOwnProperty(prop)) {
-                dst[prop] = src[prop];
-            }
-        }
-
-        return dst;
     }
 
     // Exports ================================================================
