@@ -66,6 +66,22 @@
         ok(!draggedElement.is(":visible"), "draggedElement is hidden");
     });
 
+    test("start event fires on dragstart", 2, function() {
+        var draggedElement = element.children().eq(0),
+            sortable = element.kendoSortable().data("kendoSortable");
+
+        sortable.bind("start", function(e) {
+            ok(true, "Start event is fired");
+            ok(e.item[0] == draggedElement[0], "Correct item is passed in the event parameters");
+        });
+
+        triggerDraggableEvent(
+            "dragstart",
+            { currentTarget: draggedElement, target: draggedElement },
+            element
+        );
+    })
+
     test("placeholder is removed and dragged element is shown on dragcancel", 2, function() {
         var draggedElement = element.children().eq(0),
             sortable = element.kendoSortable().data("kendoSortable"),
@@ -218,7 +234,7 @@
 
         equal(draggableElement.index(), excludedIndex, "draggableElement did not change its position");
     });
-/*
+
     test("excluded items are not valid drop targets and does not move then users drags an item onto them", 2, function() {
         var draggableElement = element.children().eq(0),
             draggableOffset = kendo.getOffset(draggableElement),
@@ -228,19 +244,151 @@
                     excluded: ".excluded"
                 }).data("kendoSortable");
 
-        sortable.bind("start", function(e) {
-            ok(false, "start event is not fired");
-        });
-
         press(draggableElement, draggableOffset.left, draggableOffset.top);
         moveToSort(draggableElement, targetOffset.left, targetOffset.top + 10);
 
         //+1 is added because placeholder is appended to the element which changes the index
         equal(targetElement.index(), excludedIndex + 1, "The excluded item did not change its position");
 
-        release(draggableElement, targetElement.left, targetOffset,top + 10);
+        release(draggableElement, targetElement.left, targetOffset.top + 10);
         equal(draggableElement.index(), 0, "draggableElement did not change its position");
     });
-*/
+
+    module("Sortable - placeholder and hint customization", {
+        setup: function() {
+            QUnit.fixture.append(
+                '<ul id="sortable">' +
+                    '<li>foo</li>' +
+                    '<li>bar</li>' +
+                    '<li>baz</li>' +
+                    '<li>qux</li>' +
+                '</ul>'
+            );
+
+            element = $("#sortable");
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("hint can be initialized as jQuery object", 1, function() {
+        var draggableElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggableElement);
+
+        element.kendoSortable({
+            hint: $("<li class='hint'>hint</li>")
+        });
+
+        press(draggableElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggableElement, 100, 100);
+
+        equal($(".hint").length, 1, "Hint is initialized");
+    });
+
+    test("placeholder can be initialized as jQuery object", 1, function() {
+        var draggableElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggableElement);
+
+        element.kendoSortable({
+            placeholder: $("<li class='placeholder'>placeholder</li>")
+        });
+
+        press(draggableElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggableElement, 100, 100);
+
+        equal(element.find(".placeholder").length, 1, "Placeholder is appended to the sortable container");
+    });
+
+    test("hint can be initialized as function and is run when user moves an item", 2, function() {
+        var draggableElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggableElement);
+
+        element.kendoSortable({
+            hint: function(element) {
+                ok(element[0] == $("#sortable").children()[0], "hint function received the correct argument");
+
+                return element.clone().addClass('hint');
+            }
+        });
+
+        press(draggableElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggableElement, 100, 100);
+
+        equal($(".hint").length, 1, "Hint is appended to the DOM");
+    });
+
+    test("Placeholder can be initialized as function and is run when user moves an item", 2, function() {
+        var draggableElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggableElement);
+
+        element.kendoSortable({
+            placeholder: function(element) {
+                ok(element[0] == $("#sortable").children()[0], "Placeholder function received the correct argument");
+
+                return element.clone().addClass('placeholder');
+            }
+        });
+
+        press(draggableElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggableElement, 100, 100);
+
+        equal(element.find(".placeholder").length, 1, "Placeholder is appended to the sortable container");
+    });
+
+    module("Sortable - draggable handler", {
+        setup: function() {
+            QUnit.fixture.append(
+                '<ul id="sortable">' +
+                    '<li><span class="handler">*</span><p>foo</p></li>' +
+                    '<li><span class="handler">*</span><p>bar</p></li>' +
+                    '<li><span class="handler">*</span><p>baz</p></li>' +
+                    '<li><span class="handler">*</span><p>qux</p></li>' +
+                '</ul>'
+            );
+
+            element = $("#sortable");
+
+            element.kendoSortable({
+                handler: ".handler",
+                hint: $("<div class='hint'>hint</div>")
+            });
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("If mouse is not over the handler the element cannot be dragged", 3, function() {
+        var draggableElement = element.children().eq(0).find("p"),
+            draggableOffset = kendo.getOffset(draggableElement);
+
+        element.data("kendoSortable").bind("start", function(e) {
+            ok(false, "start event is not fired");
+        });
+
+        press(draggableElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggableElement, 100, 100);
+
+        equal($(".hint").length, 0, "Hint is not appended to the DOM");
+        equal(element.children().length, 4, "Placeholder is not appended to the sortable container");
+        ok(draggableElement.is(":visible"), "Draggable element is not hidden");
+    });
+
+    test("If mouse is over the handler the element can be dragged", 4, function() {
+        var draggableElement = element.children().eq(0).find(".handler"),
+            draggableOffset = kendo.getOffset(draggableElement);
+
+        element.data("kendoSortable").bind("start", function(e) {
+            ok(true, "start event is fired");
+        });
+
+        press(draggableElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggableElement, 100, 100);
+
+        equal($(".hint").length, 1, "Hint is not appended to the DOM");
+        equal(element.children().length, 5, "Placeholder is appended to the sortable container");
+        ok(!draggableElement.is(":visible"), "Draggable element is hidden");
+    });
 
 })();
