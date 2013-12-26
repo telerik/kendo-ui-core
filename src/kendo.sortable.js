@@ -47,7 +47,8 @@ var __meta__ = {
         },
 
         events: [
-            START
+            START,
+            CHANGE
         ],
 
         options: {
@@ -143,7 +144,8 @@ var __meta__ = {
         _dragend: function(e) {
             var placeholder = this.placeholder,
                 next = placeholder.next(),
-                draggedElement = this.draggedElement;
+                draggedElement = this.draggedElement,
+                initialIndex = this.items().index(draggedElement);
 
             placeholder.remove();
 
@@ -155,6 +157,12 @@ var __meta__ = {
 
             draggedElement.show();
             this._draggable.dropped = true;
+
+            this.trigger(CHANGE, {
+                item: draggedElement,
+                index: this.items().index(draggedElement),
+                initialIndex: initialIndex
+            });
         },
 
         _findTarget: function(e) {
