@@ -418,6 +418,21 @@
         );
     });
 
+    test("start action can be prevented at start event", 2, function() {
+        var draggedElement = element.children().eq(1),
+            draggableOffset = kendo.getOffset(draggedElement),
+            sortable = element.data("kendoSortable");
+
+        sortable.bind("start", function(e) {
+            e.preventDefault();
+        });
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggedElement, 100, 100);
+        ok(!this.placeholder, "Placeholder is not initialized");
+        ok(!$(".hint").length, "Hint is not initialized");
+    });
+
     test("change event fires on dragend after DOM changes", 3, function() {
         var draggedElement = element.children().eq(3),
             draggableOffset = kendo.getOffset(draggedElement),
@@ -456,6 +471,29 @@
         press(draggedElement, draggableOffset.left, draggableOffset.top);
         moveToSort(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
         release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
+    });
+
+    test("Change action can be prevented at the beforeChange event", 2, function() {
+        var draggedElement = element.children().eq(3),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(1),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.data("kendoSortable");
+
+        sortable.bind("beforeChange", function(e) {
+            e.preventDefault();
+        });
+
+        sortable.bind("change", function(e) {
+            ok(false, "Change event is not fired");
+        });
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
+        release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
+
+        ok(element.children().index(draggedElement) == 3, "draggedElement did not change its position.");
+        ok(element.children().index(targetElement) == 1, "targetElement did not change its position.");
     })
 
     test("items method returns the sortable items collection", 3, function() {
