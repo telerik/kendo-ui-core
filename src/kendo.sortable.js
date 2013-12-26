@@ -203,13 +203,21 @@ var __meta__ = {
         },
 
         items: function() {
-            var filter = this.options.filter;
+            var filter = this.options.filter,
+                placeholder = this.placeholder,
+                items;
 
             if(filter) {
-                return this.element.find(filter);
+                items = this.element.find(filter);
             } else {
-                return this.element.children();
+                items = this.element.children();
             }
+
+            if(placeholder) {
+                items = items.not(placeholder);
+            }
+
+            return items;
         }
 
     });

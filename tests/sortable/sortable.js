@@ -391,4 +391,44 @@
         ok(!draggableElement.is(":visible"), "Draggable element is hidden");
     });
 
+    module("Sortable - methods", {
+        setup: function() {
+            QUnit.fixture.append(
+                '<div id="sortable">' +
+                    '<p class="filtered">foo</p>' +
+                    '<p class="item">bar</p>' +
+                    '<p class="item excluded">baz</p>' +
+                    '<p class="item">qux</p>' +
+                '</div>'
+            );
+
+            element = $("#sortable");
+
+            element.kendoSortable({
+                hint: $("<p class='hint'>hint</p>"),
+                placeholder: function(element) {
+                    return element.clone().addClass("placeholder").text("placeholder");
+                },
+                filter: ".item",
+                exclude: ".excluded"
+            });
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("items method returns the sortable items collection", 2, function() {
+        var draggableElement = element.children().eq(1),
+            draggableOffset = kendo.getOffset(draggableElement),
+            sortable = element.data("kendoSortable");
+
+        equal(sortable.items().length, 3, "Method returns correct amount of items before placeholder is initialized.");
+
+        press(draggableElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggableElement, 10, 10);
+
+        equal(sortable.items().length, 3, "Method returns correct amount of items after placeholder is initialized.");
+    });
+
 })();
