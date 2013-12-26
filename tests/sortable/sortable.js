@@ -494,7 +494,22 @@
 
         ok(element.children().index(draggedElement) == 3, "draggedElement did not change its position.");
         ok(element.children().index(targetElement) == 1, "targetElement did not change its position.");
-    })
+    });
+
+    test("Cancel event is fired when item drag is cancelled by the user", 2, function() {
+        var draggedElement = element.children().eq(1),
+            draggableOffset = kendo.getOffset(draggedElement),
+            sortable = element.data("kendoSortable");
+
+        sortable.bind("cancel", function(e) {
+            ok(true, "Cancel event is fired");
+            ok(e.item[0] == draggedElement[0], "Correct item is passed");
+        });
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggedElement, 100, 100);
+        triggerDraggableEvent("dragcancel", {}, element);
+    });
 
     test("items method returns the sortable items collection", 3, function() {
         var draggedElement = element.children().eq(1),

@@ -16,8 +16,8 @@ var __meta__ = {
 
         START = "start",
         BEFOREEND = "beforeEnd",
-        CHANGE = "change",
         END = "end",
+        CHANGE = "change",
         CANCEL = "cancel",
 
         DEFAULT_FILTER = ">*";
@@ -50,7 +50,8 @@ var __meta__ = {
         events: [
             START,
             BEFOREEND,
-            END
+            END,
+            CANCEL
         ],
 
         options: {
@@ -116,6 +117,7 @@ var __meta__ = {
         },
 
         _dragcancel: function(e) {
+            this.trigger(CANCEL, { item: this.draggedElement });
             this._cancel();
         },
 
