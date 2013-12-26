@@ -430,7 +430,7 @@
             ok(e.item[0] == draggedElement[0], "Correct item is passed");
 
             //initial index should be 2 because filtered items does not count
-            ok(e.index == 1 && e.initialIndex == 2, "Index and initialIndex are correct");
+            ok(e.index == 1 && e.oldIndex == 2, "Index and oldIndex are correct");
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
@@ -438,7 +438,27 @@
         release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
     });
 
-    test("items method returns the sortable items collection", 2, function() {
+    test("beforeChange event fires on dragend before DOM changes", 3, function() {
+        var draggedElement = element.children().eq(3),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(1),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.data("kendoSortable");
+
+        sortable.bind("beforeChange", function(e) {
+            ok(true, "beforeChange event is fired");
+            ok(e.item[0] == draggedElement[0], "Correct item is passed");
+
+            //index should be 2 because filtered items does not count
+            ok(e.index == 2 && e.newIndex == 1, "Index and oldIndex are correct");
+        });
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
+        release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
+    })
+
+    test("items method returns the sortable items collection", 3, function() {
         var draggedElement = element.children().eq(1),
             draggableOffset = kendo.getOffset(draggedElement),
             sortable = element.data("kendoSortable");
@@ -449,6 +469,7 @@
         moveToSort(draggedElement, 10, 10);
 
         equal(sortable.items().length, 3, "Method returns correct amount of items after placeholder is initialized.");
+        equal(sortable.items().find(sortable.placeholder).length, 0, "Placeholder is not part of the items collection");
     });
 
 })();

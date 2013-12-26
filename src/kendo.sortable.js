@@ -15,6 +15,7 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
 
         START = "start",
+        BEFORECHANGE = "beforeChange",
         CHANGE = "change",
         END = "end",
         CANCEL = "cancel",
@@ -48,6 +49,7 @@ var __meta__ = {
 
         events: [
             START,
+            BEFORECHANGE,
             CHANGE
         ],
 
@@ -114,8 +116,7 @@ var __meta__ = {
         },
 
         _dragcancel: function(e) {
-            this.draggedElement.show();
-            this.placeholder.remove();
+            this._cancel();
         },
 
         _drag: function(e) {
@@ -145,7 +146,14 @@ var __meta__ = {
             var placeholder = this.placeholder,
                 next = placeholder.next(),
                 draggedElement = this.draggedElement,
-                initialIndex = this.items().index(draggedElement);
+                index = this._indexOf(draggedElement),
+                e;
+
+            e = { item: draggedElement, index: index, newIndex: this._indexOf(placeholder) };
+            if(this.trigger(BEFORECHANGE, e)) {
+                this._cancel();
+                return;
+            }
 
             placeholder.remove();
 
@@ -158,11 +166,8 @@ var __meta__ = {
             draggedElement.show();
             this._draggable.dropped = true;
 
-            this.trigger(CHANGE, {
-                item: draggedElement,
-                index: this.items().index(draggedElement),
-                initialIndex: initialIndex
-            });
+            e = { item: draggedElement, index: this._indexOf(draggedElement), oldIndex: index };
+            this.trigger(CHANGE, e);
         },
 
         _findTarget: function(e) {
@@ -210,7 +215,20 @@ var __meta__ = {
             }
         },
 
-        items: function() {
+        _cancel: function() {
+            this.draggedElement.show();
+            this.placeholder.remove();
+        },
+
+        _indexOf: function(element) {
+            if(element[0] == this.placeholder[0]) {
+                return this.items(true).index(element);
+            } else {
+                return this.items(false).index(element);
+            }
+        },
+
+        items: function(/*internal*/ active) {
             var filter = this.options.filter,
                 placeholder = this.placeholder,
                 items;
@@ -221,8 +239,12 @@ var __meta__ = {
                 items = this.element.children();
             }
 
-            if(placeholder) {
+            if(!active && placeholder) {
                 items = items.not(placeholder);
+            }
+
+            if(active) {
+                items = items.not(this.draggedElement);
             }
 
             return items;
