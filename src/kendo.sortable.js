@@ -149,10 +149,10 @@ var __meta__ = {
                 next = placeholder.next(),
                 draggedElement = this.draggedElement,
                 index = this._indexOf(draggedElement),
-                e;
+                eventData;
 
-            e = { item: draggedElement, index: index, newIndex: this._indexOf(placeholder) };
-            if(this.trigger(BEFOREEND, e)) {
+            eventData = { item: draggedElement, index: index, newIndex: this._indexOf(placeholder), draggableEvent: e };
+            if(this.trigger(BEFOREEND, eventData)) {
                 this._cancel();
                 return;
             }
@@ -168,8 +168,8 @@ var __meta__ = {
             draggedElement.show();
             this._draggable.dropped = true;
 
-            e = { item: draggedElement, index: this._indexOf(draggedElement), oldIndex: index };
-            this.trigger(END, e);
+            eventData = { item: draggedElement, index: this._indexOf(draggedElement), oldIndex: index, draggableEvent: e };
+            this.trigger(END, eventData);
         },
 
         _findTarget: function(e) {
