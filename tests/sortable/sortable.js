@@ -433,15 +433,15 @@
         ok(!$(".hint").length, "Hint is not initialized");
     });
 
-    test("change event fires on dragend after DOM changes", 3, function() {
+    test("end event fires on dragend after DOM changes", 3, function() {
         var draggedElement = element.children().eq(3),
             draggableOffset = kendo.getOffset(draggedElement),
             targetElement = element.children().eq(1),
             targetOffset = kendo.getOffset(targetElement),
             sortable = element.data("kendoSortable");
 
-        sortable.bind("change", function(e) {
-            ok(true, "Change event is fired");
+        sortable.bind("end", function(e) {
+            ok(true, "End event is fired");
             ok(e.item[0] == draggedElement[0], "Correct item is passed");
 
             //initial index should be 2 because filtered items does not count
@@ -453,15 +453,15 @@
         release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
     });
 
-    test("beforeChange event fires on dragend before DOM changes", 3, function() {
+    test("beforeEnd event fires on dragend before DOM changes", 3, function() {
         var draggedElement = element.children().eq(3),
             draggableOffset = kendo.getOffset(draggedElement),
             targetElement = element.children().eq(1),
             targetOffset = kendo.getOffset(targetElement),
             sortable = element.data("kendoSortable");
 
-        sortable.bind("beforeChange", function(e) {
-            ok(true, "beforeChange event is fired");
+        sortable.bind("beforeEnd", function(e) {
+            ok(true, "beforeEnd event is fired");
             ok(e.item[0] == draggedElement[0], "Correct item is passed");
 
             //index should be 2 because filtered items does not count
@@ -473,19 +473,19 @@
         release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
     });
 
-    test("Change action can be prevented at the beforeChange event", 2, function() {
+    test("Sort action can be prevented at the beforeEnd event", 2, function() {
         var draggedElement = element.children().eq(3),
             draggableOffset = kendo.getOffset(draggedElement),
             targetElement = element.children().eq(1),
             targetOffset = kendo.getOffset(targetElement),
             sortable = element.data("kendoSortable");
 
-        sortable.bind("beforeChange", function(e) {
+        sortable.bind("beforeEnd", function(e) {
             e.preventDefault();
         });
 
-        sortable.bind("change", function(e) {
-            ok(false, "Change event is not fired");
+        sortable.bind("end", function(e) {
+            ok(false, "End event is not fired");
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);

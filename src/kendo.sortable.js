@@ -15,7 +15,7 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
 
         START = "start",
-        BEFORECHANGE = "beforeChange",
+        BEFOREEND = "beforeEnd",
         CHANGE = "change",
         END = "end",
         CANCEL = "cancel",
@@ -49,8 +49,8 @@ var __meta__ = {
 
         events: [
             START,
-            BEFORECHANGE,
-            CHANGE
+            BEFOREEND,
+            END
         ],
 
         options: {
@@ -150,7 +150,7 @@ var __meta__ = {
                 e;
 
             e = { item: draggedElement, index: index, newIndex: this._indexOf(placeholder) };
-            if(this.trigger(BEFORECHANGE, e)) {
+            if(this.trigger(BEFOREEND, e)) {
                 this._cancel();
                 return;
             }
@@ -167,7 +167,7 @@ var __meta__ = {
             this._draggable.dropped = true;
 
             e = { item: draggedElement, index: this._indexOf(draggedElement), oldIndex: index };
-            this.trigger(CHANGE, e);
+            this.trigger(END, e);
         },
 
         _findTarget: function(e) {
