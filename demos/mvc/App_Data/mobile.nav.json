@@ -525,15 +525,5 @@
                 }
             ]
         }
-    ],
-	"Custom Themes": [
-		{
-            "text": "Theme Builder",
-            "packages": [ "online" ],
-            "items": [{
-                "url": "../themebuilder/mobile.html"
-            }],
-            "name": "themebuildermobile"
-		}
-	]
+    ]
 }

@@ -852,15 +852,5 @@
             }],
             "name": "climate-control"
         }
-    ],
-	"Custom Themes": [
-		{
-            "text": "Theme Builder",
-            "packages": [ "online" ],
-            "items": [{
-                "url": "../themebuilder/dataviz.html"
-            }],
-            "name": "themebuilderdataviz"
-		}
-	]
+    ]
 }
