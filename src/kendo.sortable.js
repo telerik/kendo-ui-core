@@ -15,9 +15,9 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
 
         START = "start",
-        CHANGE = "change",
-        BEFOREEND = "beforeEnd",
+        MOVE = "move",
         END = "end",
+        CHANGE = "change",
         CANCEL = "cancel",
 
         DEFAULT_FILTER = ">*";
@@ -49,9 +49,9 @@ var __meta__ = {
 
         events: [
             START,
-            CHANGE,
-            BEFOREEND,
+            MOVE,
             END,
+            CHANGE,
             CANCEL
         ],
 
@@ -143,12 +143,12 @@ var __meta__ = {
                 if(offsetDelta <= 0) { //for negative delta the tooltip should be appended before the target
                     if(prev[0] != placeholder[0]) {
                         target.before(placeholder);
-                        this.trigger(CHANGE, { item: draggedElement, target: target });
+                        this.trigger(MOVE, { item: draggedElement, target: target });
                     }
                 } else { //for positive delta the tooptip should be appended after the target
                     if(next[0] != placeholder[0]) {
                         target.after(placeholder);
-                        this.trigger(CHANGE, { item: draggedElement, target: target });
+                        this.trigger(MOVE, { item: draggedElement, target: target });
                     }
                 }
             }
@@ -161,7 +161,7 @@ var __meta__ = {
                 eventData;
 
             eventData = { item: draggedElement, index: index, newIndex: this._indexOf(placeholder), draggableEvent: e };
-            if(this.trigger(BEFOREEND, eventData)) {
+            if(this.trigger(END, eventData)) {
                 this._cancel();
                 return;
             }
@@ -172,7 +172,7 @@ var __meta__ = {
             this._draggable.dropped = true;
 
             eventData = { item: draggedElement, index: this._indexOf(draggedElement), oldIndex: index, draggableEvent: e };
-            this.trigger(END, eventData);
+            this.trigger(CHANGE, eventData);
         },
 
         _findTarget: function(e) {
