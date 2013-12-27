@@ -2068,23 +2068,23 @@ kendo_module({
         },
 
         _pushCreate: function(result) {
-            var data = this._readData(result);
-
-            for (var idx = 0; idx < data.length; idx++) {
-                this.pushCreate(data[idx]);
-            }
+            this._push(result, "pushCreate");
         },
 
         _pushUpdate: function(result) {
+            this._push(result, "pushUpdate");
+        },
+
+        _pushDestroy: function(result) {
+            this._push(result, "pushDestroy");
+        },
+
+        _push: function(result, operation) {
             var data = this._readData(result);
 
             for (var idx = 0; idx < data.length; idx++) {
-                this.pushUpdate(data[idx]);
+                this[operation](data[idx]);
             }
-        },
-
-        _pushDestroy: function() {
-
         },
 
         _flatData: function(data) {
@@ -2205,6 +2205,21 @@ kendo_module({
             } else {
                 this.pushCreate(item);
             }
+        },
+
+        pushDestroy: function(item) {
+            var model = this._createNewModel(item);
+
+            this._eachItem(this._data, function(items){
+                for (var idx = 0; idx < items.length; idx++) {
+                    if (items[idx].id === model.id) {
+                        items.splice(idx, 1);
+                        break;
+                    }
+                }
+            });
+
+            this._removePristineForModel(model);
         },
 
         remove: function(model) {

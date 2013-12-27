@@ -152,6 +152,32 @@ test("pushUpdate updates an existing item", function() {
     equal(dataSource.at(0).foo, "bar");
 });
 
+test("pushDestroy removes an existing item", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushDestroy({ id: 1 });
+
+    equal(dataSource.data().length, 0);
+});
+
+test("pushDestroy removes an existing from the pristine collection", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushDestroy({ id: 1 });
+
+    equal(dataSource._pristineData.length, 0);
+});
+
 test("pushUpdate doesn't set the dirty flag", function() {
     var dataSource = new DataSource({
         schema: { model: { id: "id" } },
@@ -304,4 +330,21 @@ test("_pushUpdate calls pushUpdate for every item when data is returned accordin
     equal(dataSource.args("pushUpdate", 1)[0], data[1]);
 });
 
+test("_pushDestroy calls pushDestroy for every item when data is returned according to the schema", function() {
+    var dataSource = new DataSource({
+        schema: {
+            data: "d"
+        }
+    });
+
+    dataSource = stub(dataSource, "pushDestroy");
+
+    var data = [ { }, { }];
+
+    dataSource._pushDestroy( { d: data });
+
+    equal(dataSource.calls("pushDestroy"), data.length);
+    equal(dataSource.args("pushDestroy", 0)[0], data[0]);
+    equal(dataSource.args("pushDestroy", 1)[0], data[1]);
+});
 }());
