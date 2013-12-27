@@ -156,14 +156,14 @@
     <div class="example">
         <h2>Events</h2>
         <ul id="events">
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
-            <li>Prevented</li>
-            <li>Item 5</li>
-            <li>Item 6</li>
-            <li>Item 7</li>
-            <li>Item 8</li>
+            <li class="item">Item 1</li>
+            <li class="item">Item 2</li>
+            <li class="item excluded">Item 3</li>
+            <li class="item">Prevented</li>
+            <li class="item excluded">Item 5</li>
+            <li class="filtered">Item 6</li>
+            <li class="item">Item 7</li>
+            <li class="item">Item 8</li>
         </ul>
     </div>
 
@@ -197,11 +197,11 @@
             width: 200px;
         }
 
-        #filtering .filtered {
+        #filtering .filtered, #events .filtered {
             background-color: yellow;
         }
 
-        #filtering .excluded {
+        #filtering .excluded, #events .excluded {
             opacity: 0.3;
             background-color: gray;
         }
@@ -306,11 +306,25 @@
         });
 
         $("#events").kendoSortable({
+            filter: ".item",
+            excluded: ".excluded",
             start: function(e) {
-                console.log("dragstart: ", e.item, e.placeholder);
+                console.log("dragstart");
                 if(e.item.text() === "Prevented") {
                     e.preventDefault();
                 }
+            },
+            change: function(e) {
+                console.log("change", e.oldIndex, e.index);
+            },
+            end: function(e) {
+                console.log("end", e.index, e.newIndex);
+            },
+            cancel: function(e) {
+                console.log("cancel", e.item);
+            },
+            move: function(e) {
+                console.log("move", e.item[0], e.target[0]);
             }
         });
     </script>
