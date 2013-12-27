@@ -15,9 +15,9 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
 
         START = "start",
+        CHANGE = "change",
         BEFOREEND = "beforeEnd",
         END = "end",
-        CHANGE = "change",
         CANCEL = "cancel",
 
         DEFAULT_FILTER = ">*";
@@ -49,6 +49,7 @@ var __meta__ = {
 
         events: [
             START,
+            CHANGE,
             BEFOREEND,
             END,
             CANCEL
@@ -127,6 +128,8 @@ var __meta__ = {
                 targetOffset,
                 hintOffset,
                 offsetDelta,
+                prev,
+                next,
                 placeholder = this.placeholder,
                 excluded = this.options.excluded;
 
@@ -134,19 +137,25 @@ var __meta__ = {
                 targetOffset = kendo.getOffset(target);
                 hintOffset = kendo.getOffset(e.sender.hint);
                 offsetDelta = hintOffset.top - targetOffset.top;
+                prev = target.prev();
+                next = target.next();
 
                 if(offsetDelta <= 0) { //for negative delta the tooltip should be appended before the target
-                    target.before(placeholder);
+                    if(prev[0] != placeholder[0]) {
+                        target.before(placeholder);
+                        this.trigger(CHANGE, { item: draggedElement, target: target });
+                    }
                 } else { //for positive delta the tooptip should be appended after the target
-                    target.after(placeholder);
+                    if(next[0] != placeholder[0]) {
+                        target.after(placeholder);
+                        this.trigger(CHANGE, { item: draggedElement, target: target });
+                    }
                 }
-
             }
         },
 
         _dragend: function(e) {
             var placeholder = this.placeholder,
-                next = placeholder.next(),
                 draggedElement = this.draggedElement,
                 index = this._indexOf(draggedElement),
                 eventData;
@@ -157,13 +166,7 @@ var __meta__ = {
                 return;
             }
 
-            placeholder.remove();
-
-            if(next.length) {
-                next.before(draggedElement);
-            } else {
-                this.element.append(draggedElement);
-            }
+            placeholder.replaceWith(draggedElement);
 
             draggedElement.show();
             this._draggable.dropped = true;
