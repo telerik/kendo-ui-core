@@ -2075,8 +2075,12 @@ kendo_module({
             }
         },
 
-        _pushUpdate: function() {
+        _pushUpdate: function(result) {
+            var data = this._readData(result);
 
+            for (var idx = 0; idx < data.length; idx++) {
+                this.pushUpdate(data[idx]);
+            }
         },
 
         _pushDestroy: function() {
@@ -2180,13 +2184,27 @@ kendo_module({
 
             var pristine = result.toJSON();
 
-            if (this.options.serverGrouping) {
+            if (this._isServerGrouped()) {
                 pristine = wrapInEmptyGroup(this.group(), pristine);
             }
 
             this._pristineData.push(pristine);
 
             return result;
+        },
+
+        pushUpdate: function(item) {
+            var model = this._createNewModel(item);
+
+            var target = this.get(model.id);
+
+            if (target) {
+                target.accept(item);
+
+                this._updatePristineForModel(target, item);
+            } else {
+                this.pushCreate(item);
+            }
         },
 
         remove: function(model) {

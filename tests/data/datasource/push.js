@@ -134,11 +134,35 @@ test("pushDestroy option calls _pushDestroy of the data source", function() {
 test("pushCreate inserts a new item to the data source", function() {
     var dataSource = new DataSource();
 
-    var item = { foo: "foo" };
-
-    dataSource.pushCreate(item);
+    dataSource.pushCreate({ foo: "foo" });
 
     equal(dataSource.at(0).foo, "foo");
+});
+
+test("pushUpdate updates an existing item", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate({ id: 1, foo: "bar" });
+
+    equal(dataSource.at(0).foo, "bar");
+});
+
+test("pushUpdate doesn't set the dirty flag", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate({ id: 1, foo: "bar" });
+
+    equal(dataSource.at(0).dirty, false);
 });
 
 test("pushCreate returns the inserted item", function() {
@@ -171,7 +195,33 @@ test("pushCreate doesn't wrap if the inserted item is already observable object"
     strictEqual(result, item);
 });
 
-test("pushCreate insert the item in the pristine collection", function() {
+test("pushUpdate with observable object instance as parameter", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate(new kendo.data.ObservableObject({ id: 1, foo: "bar" }));
+
+    equal(dataSource.at(0).foo, "bar");
+});
+
+test("pushUpdate with model instance as parameter", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate(new kendo.data.Model({ id: 1, foo: "bar" }));
+
+    equal(dataSource.at(0).foo, "bar");
+});
+
+test("pushCreate inserts the item in the pristine collection", function() {
     var dataSource = new DataSource();
 
     var item = { foo: "foo" };
@@ -179,6 +229,19 @@ test("pushCreate insert the item in the pristine collection", function() {
     result = dataSource.pushCreate(item);
 
     equal(dataSource._pristineData[0].foo, item.foo);
+});
+
+test("pushUpdate updates the model instance in the pristine collection", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate({ id: 1, foo: "bar" });
+
+    equal(dataSource._pristineData[0].foo, "bar");
 });
 
 test("items inserted via pushCreate remain in the data source after cancelChanges", function() {
@@ -191,6 +254,18 @@ test("items inserted via pushCreate remain in the data source after cancelChange
     dataSource.cancelChanges();
 
     equal(dataSource.at(0).foo, "foo");
+});
+
+test("pushUpdate inserts the item if a model with corresponding id isn't found", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } }
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate({ id: 1, foo: "bar" });
+
+    equal(dataSource.at(0).foo, "bar");
 });
 
 test("_pushCreate calls pushCreate for every item when data is returned according to the schema", function() {
@@ -209,6 +284,24 @@ test("_pushCreate calls pushCreate for every item when data is returned accordin
     equal(dataSource.calls("pushCreate"), data.length);
     equal(dataSource.args("pushCreate", 0)[0], data[0]);
     equal(dataSource.args("pushCreate", 1)[0], data[1]);
+});
+
+test("_pushUpdate calls pushUpdate for every item when data is returned according to the schema", function() {
+    var dataSource = new DataSource({
+        schema: {
+            data: "d"
+        }
+    });
+
+    dataSource = stub(dataSource, "pushUpdate");
+
+    var data = [ { }, { }];
+
+    dataSource._pushUpdate( { d: data });
+
+    equal(dataSource.calls("pushUpdate"), data.length);
+    equal(dataSource.args("pushUpdate", 0)[0], data[0]);
+    equal(dataSource.args("pushUpdate", 1)[0], data[1]);
 });
 
 }());
