@@ -167,6 +167,35 @@
         </ul>
     </div>
 
+    <div style="clear: both; width: 100%; margin-bottom: 20px;"></div>
+
+    <div class="gridview-wrapper">
+        <h2>Grid View</h2>
+        <ul id="gridview">
+            <li class="tile">1</li>
+            <li class="tile">2</li>
+            <li class="tile">3</li>
+            <li class="tile">4</li>
+            <li class="tile">5</li>
+            <li class="tile">6</li>
+            <li class="tile">7</li>
+            <li class="tile">8</li>
+        </ul>
+    </div>
+
+    <div class="gridview-wrapper">
+        <h2>Horizontal</h2>
+        <ul id="horizontal">
+            <li class="tile">1</li>
+            <li class="tile">2</li>
+            <li class="tile">3</li>
+            <li class="tile">4</li>
+            <li class="tile">5</li>
+            <li class="tile">6</li>
+            <li class="tile">7</li>
+        </ul>
+    </div>
+
     <style>
         body {
             -webkit-user-select: none;
@@ -257,6 +286,27 @@
             background: #3300FF;
             color: white;
         }
+
+        #gridview, #horizontal {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 450px;
+        }
+
+        li.tile {
+            width: 100px;
+            height: 90px;
+            float: left;
+            border: 1px solid black;
+            background: #CCCCCC;
+            text-align: center;
+        }
+
+        #horizontal .tile {
+            width: 30px;
+            height: 20px;
+        }
     </style>
     <script>
         $("#basic").kendoSortable();
@@ -325,6 +375,19 @@
             },
             move: function(e) {
                 console.log("move", e.item[0], e.target[0]);
+            }
+        });
+
+        $("#gridview").kendoSortable();
+
+        $("#horizontal").kendoSortable({
+            axis: "x",
+            hint: function(element) {
+                return element.clone().css({
+                    width: "30px",
+                    height: "20px",
+                    background: "red"
+                });
             }
         });
     </script>

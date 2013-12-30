@@ -127,7 +127,8 @@ var __meta__ = {
                 target = $(this._findTarget(e)),
                 targetOffset,
                 hintOffset,
-                offsetDelta,
+                offsetTopDelta,
+                offsetLeftDelta,
                 prev,
                 next,
                 placeholder = this.placeholder,
@@ -136,16 +137,19 @@ var __meta__ = {
             if(target.length && !(excluded && target.is(excluded))) {
                 targetOffset = kendo.getOffset(target);
                 hintOffset = kendo.getOffset(e.sender.hint);
-                offsetDelta = hintOffset.top - targetOffset.top;
+                offsetTopDelta = hintOffset.top - targetOffset.top;
+                offsetLeftDelta = hintOffset.left - targetOffset.left;
                 prev = target.prev();
                 next = target.next();
 
-                if(offsetDelta <= 0) { //for negative delta the tooltip should be appended before the target
+                console.log(offsetLeftDelta, offsetTopDelta);
+
+                if(offsetTopDelta < 0 || offsetLeftDelta < 0) { //for negative delta the tooltip should be appended before the target
                     if(prev[0] != placeholder[0]) {
                         target.before(placeholder);
                         this.trigger(MOVE, { item: draggedElement, target: target });
                     }
-                } else { //for positive delta the tooptip should be appended after the target
+                } else if(offsetTopDelta > 0 || offsetLeftDelta > 0) { //for positive delta the tooptip should be appended after the target
                     if(next[0] != placeholder[0]) {
                         target.after(placeholder);
                         this.trigger(MOVE, { item: draggedElement, target: target });
