@@ -2211,6 +2211,11 @@ kendo_module({
                 if (target) {
                     target.accept(item);
 
+                    this.trigger("change", {
+                       action: "itemchange",
+                       items: [target]
+                    });
+
                     this._updatePristineForModel(target, item);
                 } else {
                     this.pushCreate(item);
