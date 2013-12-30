@@ -9,6 +9,7 @@
         <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.reorderable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
@@ -88,7 +89,7 @@
                             transport: {
                                 read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
                             },
-                            pageSize: 10
+                            pageSize: 5
                         },
                         groupable: true,
                         sortable: true,
@@ -96,6 +97,9 @@
                             refresh: true,
                             buttonCount: 5
                         },
+                        selectable: "multiple row",
+                        reorderable: true,
+                        resizable: true,
                         columns: [{
                             field: "ContactName",
                             template: "[static 1] #=ContactName# <br/> #=ContactName#",

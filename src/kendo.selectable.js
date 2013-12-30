@@ -15,6 +15,7 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         abs = Math.abs,
+        shift = Array.prototype.shift,
         ARIASELECTED = "aria-selected",
         SELECTED = "k-state-selected",
         ACTIVE = "k-state-selecting",
@@ -48,6 +49,8 @@ var __meta__ = {
             that._lastActive = null;
             that.element.addClass(SELECTABLE);
 
+            that.relatedTarget = that.options.relatedTarget;
+
             multiple = that.options.multiple;
             that.userEvents = new kendo.UserEvents(that.element, {
                 global: true,
@@ -70,7 +73,24 @@ var __meta__ = {
         options: {
             name: "Selectable",
             filter: ">*",
-            multiple: false
+            multiple: false,
+            relatedTarget: $.noop
+        },
+
+        _isElement: function(target) {
+            var elements = this.element;
+            var idx, length = elements.length, result = false;
+
+            target = target[0];
+
+            for (idx = 0; idx < length; idx ++) {
+                if (elements[idx] === target) {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
         },
 
         _tap: function(e) {
@@ -84,7 +104,7 @@ var __meta__ = {
                 buttonCode = e.event.button;
 
             //in case of hierarchy or right-click
-            if (target.closest("." + SELECTABLE)[0] !== that.element[0] || whichCode && whichCode == 3 || buttonCode && buttonCode == 2) {
+            if (!that._isElement(target.closest("." + SELECTABLE)) || whichCode && whichCode == 3 || buttonCode && buttonCode == 2) {
                 return;
             }
 
@@ -92,6 +112,8 @@ var __meta__ = {
             if (!multiple || !ctrlKey) {
                 that.clear();
             }
+
+            target = target.add(that.relatedTarget(target));
 
             if (shiftKey) {
                 that.selectRange(that._firstSelectee(), target);
@@ -111,15 +133,22 @@ var __meta__ = {
             var that = this,
                 target = $(e.target),
                 selected = target.hasClass(SELECTED),
+                currentElement,
                 ctrlKey = e.event.ctrlKey || e.event.metaKey;
 
             that._downTarget = target;
 
             //in case of hierarchy
-            if (target.closest("." + SELECTABLE)[0] !== that.element[0]) {
+            if (!that._isElement(target.closest("." + SELECTABLE))) {
                 that.userEvents.cancel();
-                that._downTarget = null;
                 return;
+            }
+
+            if (that.options.useAllItems) {
+                that._items = that.element.find(that.options.filter);
+            } else {
+                currentElement = target.closest(that.element),
+                that._items = currentElement.find(that.options.filter);
             }
 
             that._marquee
@@ -135,6 +164,7 @@ var __meta__ = {
                 that.clear();
             }
 
+            target = target.add(that.relatedTarget(target));
             if (selected) {
                 that._selectElement(target, true);
                 if (ctrlKey) {
@@ -150,12 +180,11 @@ var __meta__ = {
                     top: e.y.startLocation > e.y.location ? e.y.location : e.y.startLocation,
                     width: abs(e.x.initialDelta),
                     height: abs(e.y.initialDelta)
-                },
-                items = that.element.find(that.options.filter);
+                };
 
             that._marquee.css(position);
 
-            invalidateSelectables(items, that._downTarget[0], position, (e.event.ctrlKey || e.event.metaKey));
+            that._invalidateSelectables(position, (e.event.ctrlKey || e.event.metaKey));
 
             e.preventDefault();
         },
@@ -169,8 +198,44 @@ var __meta__ = {
                 .find(that.options.filter + "." + UNSELECTING))
                 .removeClass(UNSELECTING);
 
-            that.value(that.element.find(that.options.filter + "." + ACTIVE));
+
+            var target = that.element.find(that.options.filter + "." + ACTIVE);
+            target = target.add(that.relatedTarget(target));
+
+            that.value(target);
             that._lastActive = that._downTarget;
+            that._items = null;
+        },
+
+
+        _invalidateSelectables: function(position, ctrlKey) {
+            var idx,
+                length,
+                target = this._downTarget[0],
+                items = this._items,
+                related,
+                toSelect;
+
+            for (idx = 0, length = items.length; idx < length; idx ++) {
+                toSelect = items.eq(idx);
+                related = toSelect.add(this.relatedTarget(toSelect));
+
+                if (collision(toSelect, position)) {
+                    if(toSelect.hasClass(SELECTED)) {
+                        if(ctrlKey && target !== toSelect[0]) {
+                            related.removeClass(SELECTED).addClass(UNSELECTING);
+                        }
+                    } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING)) {
+                        related.addClass(ACTIVE);
+                    }
+                } else {
+                    if (toSelect.hasClass(ACTIVE)) {
+                        related.removeClass(ACTIVE);
+                    } else if(ctrlKey && toSelect.hasClass(UNSELECTING)) {
+                        related.removeClass(UNSELECTING).addClass(SELECTED);
+                    }
+                }
+            }
         },
 
         value: function(val) {
@@ -306,32 +371,6 @@ var __meta__ = {
             elementPosition.right < position.left ||
             elementPosition.top > bottom ||
             elementPosition.bottom < position.top);
-    }
-
-    function invalidateSelectables(items, target, position, ctrlKey) {
-        var idx,
-            length,
-            toSelect;
-
-        for (idx = 0, length = items.length; idx < length; idx ++) {
-            toSelect = items.eq(idx);
-
-            if (collision(toSelect, position)) {
-                if(toSelect.hasClass(SELECTED)) {
-                    if(ctrlKey && target !== toSelect[0]) {
-                        toSelect.removeClass(SELECTED).addClass(UNSELECTING);
-                    }
-                } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING)) {
-                    toSelect.addClass(ACTIVE);
-                }
-            } else {
-                if (toSelect.hasClass(ACTIVE)) {
-                    toSelect.removeClass(ACTIVE);
-                } else if(ctrlKey && toSelect.hasClass(UNSELECTING)) {
-                    toSelect.removeClass(UNSELECTING).addClass(SELECTED);
-                }
-            }
-        }
     }
 
     kendo.ui.plugin(Selectable);

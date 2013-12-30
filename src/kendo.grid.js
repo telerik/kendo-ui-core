@@ -2050,12 +2050,46 @@ var __meta__ = {
                     notString = ":not(" + notString + ")";
                 }
 
-                that.selectable = new kendo.ui.Selectable(that.table, {
-                    filter: ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr" + notString),
+                var elements = that.table;
+                if (that.staticContent) {
+                    elements = elements.add(that.staticContent.children("table"));
+                }
+                var filter = ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr" + notString);
+                that.selectable = new kendo.ui.Selectable(elements, {
+                    filter: filter,
                     aria: true,
                     multiple: multi,
                     change: function() {
                         that.trigger(CHANGE);
+                    },
+                    useAllItems: cell,
+                    relatedTarget: function(items) {
+                        if (cell || !that.staticContent) {
+                            return;
+                        }
+
+                        var table = {};
+                        var element;
+
+                        items.each(function() {
+                            var element = $(this).closest(elements);
+                            var idx = $.inArray(this, element.find(filter));
+
+                            if (table[idx]) {
+                                delete table[idx];
+                            } else {
+                                table[idx] = element;
+                            }
+                        });
+
+                        items = $();
+                        for (var key in table) {
+                            element = elements.not(table[key]);
+                            items = items.add(element.find(filter).eq(key));
+                        }
+
+                        table = null;
+                        return items;
                     }
                 });
 
