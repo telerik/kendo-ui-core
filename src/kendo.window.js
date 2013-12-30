@@ -537,10 +537,12 @@ kendo_module({
 
         center: function () {
             var that = this,
+                position = that.options.position,
                 wrapper = that.wrapper,
                 documentWindow = $(window),
                 scrollTop = 0,
-                scrollLeft = 0;
+                scrollLeft = 0,
+                newTop, newLeft;
 
             if (that.options.isMaximized) {
                 return that;
@@ -551,10 +553,16 @@ kendo_module({
                 scrollLeft = documentWindow.scrollLeft();
             }
 
+            newLeft = scrollLeft + Math.max(0, (documentWindow.width() - wrapper.width()) / 2);
+            newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.height()) / 2);
+
             wrapper.css({
-                left: scrollLeft + Math.max(0, (documentWindow.width() - wrapper.width()) / 2),
-                top: scrollTop + Math.max(0, (documentWindow.height() - wrapper.height()) / 2)
+                left: newLeft,
+                top: newTop
             });
+
+            position.top = newTop;
+            position.left = newLeft;
 
             return that;
         },
