@@ -434,6 +434,7 @@ kendo_module({
                 thresholdPassed = Math.abs(offset) >= width / 3,
                 ease = bounce ? kendo.effects.Transition.easeOutBack : kendo.effects.Transition. easeOutExpo,
                 isEndReached = that.page + 2 > that.buffer.total(),
+                nextPage,
                 delta = 0;
 
             if(swipeType === RIGHT_SWIPE) {
@@ -450,7 +451,12 @@ kendo_module({
                 }
             }
 
-            if(callback && callback()) {
+            nextPage = that.page;
+            if(delta) {
+                nextPage = (delta > 0) ? nextPage + 1 : nextPage - 1;
+            }
+
+            if(callback && callback({ currentPage: that.page, nextPage: nextPage })) {
                 delta = 0;
             }
 
