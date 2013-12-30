@@ -131,12 +131,23 @@ test("pushDestroy option calls _pushDestroy of the data source", function() {
     }
 });
 
-test("pushCreate inserts a new item to the data source", function() {
+test("pushCreate inserts a new item in the data source", function() {
     var dataSource = new DataSource();
 
     dataSource.pushCreate({ foo: "foo" });
 
     equal(dataSource.at(0).foo, "foo");
+});
+
+test("pushCreate inserts an array of items in the data source", function() {
+    var dataSource = new DataSource();
+
+    dataSource.pushCreate([
+        { foo: "foo" },
+        { foo: "bar" }
+    ]);
+
+    equal(dataSource.at(1).foo, "bar");
 });
 
 test("pushUpdate updates an existing item", function() {
@@ -152,6 +163,25 @@ test("pushUpdate updates an existing item", function() {
     equal(dataSource.at(0).foo, "bar");
 });
 
+test("pushUpdate updates an array of existing items", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [
+            { id: 1, foo: "foo" },
+            { id: 2, foo: "foo" }
+        ]
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate([
+        { id: 1, foo: "bar" },
+        { id: 2, foo: "bar" }
+    ]);
+
+    equal(dataSource.at(1).foo, "bar");
+});
+
 test("pushDestroy removes an existing item", function() {
     var dataSource = new DataSource({
         schema: { model: { id: "id" } },
@@ -161,6 +191,25 @@ test("pushDestroy removes an existing item", function() {
     dataSource.read();
 
     dataSource.pushDestroy({ id: 1 });
+
+    equal(dataSource.data().length, 0);
+});
+
+test("pushDestroy removes an array of existing items", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [
+            { id: 1, foo: "foo" },
+            { id: 2, foo: "foo" }
+        ]
+    });
+
+    dataSource.read();
+
+    dataSource.pushDestroy([
+        { id: 1 },
+        { id: 2 }
+    ]);
 
     equal(dataSource.data().length, 0);
 });
@@ -189,36 +238,6 @@ test("pushUpdate doesn't set the dirty flag", function() {
     dataSource.pushUpdate({ id: 1, foo: "bar" });
 
     equal(dataSource.at(0).dirty, false);
-});
-
-test("pushCreate returns the inserted item", function() {
-    var dataSource = new DataSource();
-
-    var item = { foo: "foo" };
-
-    var result = dataSource.pushCreate(item);
-
-    equal(result.foo, "foo");
-});
-
-test("pushCreate wraps the inserted item as observable object", function() {
-    var dataSource = new DataSource();
-
-    var item = { foo: "foo" };
-
-    var result = dataSource.pushCreate(item);
-
-    equal(result instanceof kendo.data.ObservableObject, true);
-});
-
-test("pushCreate doesn't wrap if the inserted item is already observable object", function() {
-    var dataSource = new DataSource();
-
-    var item = new kendo.data.Model();
-
-    var result = dataSource.pushCreate(item);
-
-    strictEqual(result, item);
 });
 
 test("pushUpdate with observable object instance as parameter", function() {
@@ -307,9 +326,9 @@ test("_pushCreate calls pushCreate for every item when data is returned accordin
 
     dataSource._pushCreate( { d: data });
 
-    equal(dataSource.calls("pushCreate"), data.length);
-    equal(dataSource.args("pushCreate", 0)[0], data[0]);
-    equal(dataSource.args("pushCreate", 1)[0], data[1]);
+    equal(dataSource.calls("pushCreate"), 1);
+    equal(dataSource.args("pushCreate", 0)[0][0], data[0]);
+    equal(dataSource.args("pushCreate", 0)[0][1], data[1]);
 });
 
 test("_pushUpdate calls pushUpdate for every item when data is returned according to the schema", function() {
@@ -325,9 +344,9 @@ test("_pushUpdate calls pushUpdate for every item when data is returned accordin
 
     dataSource._pushUpdate( { d: data });
 
-    equal(dataSource.calls("pushUpdate"), data.length);
-    equal(dataSource.args("pushUpdate", 0)[0], data[0]);
-    equal(dataSource.args("pushUpdate", 1)[0], data[1]);
+    equal(dataSource.calls("pushUpdate"), 1);
+    equal(dataSource.args("pushUpdate", 0)[0][0], data[0]);
+    equal(dataSource.args("pushUpdate", 0)[0][1], data[1]);
 });
 
 test("_pushDestroy calls pushDestroy for every item when data is returned according to the schema", function() {
@@ -343,8 +362,8 @@ test("_pushDestroy calls pushDestroy for every item when data is returned accord
 
     dataSource._pushDestroy( { d: data });
 
-    equal(dataSource.calls("pushDestroy"), data.length);
-    equal(dataSource.args("pushDestroy", 0)[0], data[0]);
-    equal(dataSource.args("pushDestroy", 1)[0], data[1]);
+    equal(dataSource.calls("pushDestroy"), 1);
+    equal(dataSource.args("pushDestroy", 0)[0][0], data[0]);
+    equal(dataSource.args("pushDestroy", 0)[0][1], data[1]);
 });
 }());

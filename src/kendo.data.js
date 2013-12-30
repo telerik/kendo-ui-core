@@ -2082,9 +2082,7 @@ kendo_module({
         _push: function(result, operation) {
             var data = this._readData(result);
 
-            for (var idx = 0; idx < data.length; idx++) {
-                this[operation](data[idx]);
-            }
+            this[operation](data);
         },
 
         _flatData: function(data) {
@@ -2179,47 +2177,67 @@ kendo_module({
             return model;
         },
 
-        pushCreate: function(item) {
-            var result = this.add(item);
-
-            var pristine = result.toJSON();
-
-            if (this._isServerGrouped()) {
-                pristine = wrapInEmptyGroup(this.group(), pristine);
+        pushCreate: function(items) {
+            if (!isArray(items)) {
+                items = [items];
             }
 
-            this._pristineData.push(pristine);
+            for (var idx = 0; idx < items.length; idx ++) {
+                var item = items[idx];
 
-            return result;
-        },
+                var result = this.add(item);
 
-        pushUpdate: function(item) {
-            var model = this._createNewModel(item);
+                var pristine = result.toJSON();
 
-            var target = this.get(model.id);
-
-            if (target) {
-                target.accept(item);
-
-                this._updatePristineForModel(target, item);
-            } else {
-                this.pushCreate(item);
-            }
-        },
-
-        pushDestroy: function(item) {
-            var model = this._createNewModel(item);
-
-            this._eachItem(this._data, function(items){
-                for (var idx = 0; idx < items.length; idx++) {
-                    if (items[idx].id === model.id) {
-                        items.splice(idx, 1);
-                        break;
-                    }
+                if (this._isServerGrouped()) {
+                    pristine = wrapInEmptyGroup(this.group(), pristine);
                 }
-            });
 
-            this._removePristineForModel(model);
+                this._pristineData.push(pristine);
+            }
+        },
+
+        pushUpdate: function(items) {
+            if (!isArray(items)) {
+                items = [items];
+            }
+
+            for (var idx = 0; idx < items.length; idx ++) {
+                var item = items[idx];
+                var model = this._createNewModel(item);
+
+                var target = this.get(model.id);
+
+                if (target) {
+                    target.accept(item);
+
+                    this._updatePristineForModel(target, item);
+                } else {
+                    this.pushCreate(item);
+                }
+            }
+        },
+
+        pushDestroy: function(items) {
+            if (!isArray(items)) {
+                items = [items];
+            }
+
+            for (var idx = 0; idx < items.length; idx ++) {
+                var item = items[idx];
+                var model = this._createNewModel(item);
+
+                this._eachItem(this._data, function(items){
+                    for (var idx = 0; idx < items.length; idx++) {
+                        if (items[idx].id === model.id) {
+                            items.splice(idx, 1);
+                            break;
+                        }
+                    }
+                });
+
+                this._removePristineForModel(model);
+            }
         },
 
         remove: function(model) {
@@ -2333,7 +2351,7 @@ kendo_module({
 
                 response = that.reader.data(response);
 
-                if (!$.isArray(response)) {
+                if (!isArray(response)) {
                     response = [response];
                 }
             } else {
