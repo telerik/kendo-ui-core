@@ -1983,6 +1983,10 @@ function pad(number, digits, end) {
             return result;
         })();
 
+        input.style.cssText = "float:left;";
+
+        support.cssFloat = !!input.style.cssFloat;
+
         input = null;
 
         support.stableSort = (function() {
