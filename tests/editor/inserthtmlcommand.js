@@ -84,7 +84,7 @@ test("exec inserts telerik:script", function() {
     var script = "<script>alert('foo');</script>";
     editor.exec("insertHtml", { value: script });
 
-    equal(kendo.ui.editor.Dom.name(editor.body.firstChild), "telerik:script");
+    equal($("telerik\\:script", editor.body).length, 1);
 });
 
 }());

@@ -127,6 +127,8 @@ var ImageCommand = Command.extend({
             range = that.lockRange(),
             applied = false,
             img = RangeUtils.image(range),
+            imageWidth = img && img.getAttribute("width") || "",
+            imageHeight = img && img.getAttribute("height") || "",
             dialog,
             options = that.editor.options,
             messages = options.messages,
@@ -194,8 +196,8 @@ var ImageCommand = Command.extend({
             // IE < 8 returns absolute url if getAttribute is not used
             .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
             .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()
-            .find(KEDITORIMAGEWIDTH).val(img && img.getAttribute("width") ? img.width : "").end()
-            .find(KEDITORIMAGEHEIGHT).val(img && img.getAttribute("height") ? img.height : "").end()
+            .find(KEDITORIMAGEWIDTH).val(imageWidth).end()
+            .find(KEDITORIMAGEHEIGHT).val(imageHeight).end()
             .data("kendoWindow");
 
         if (showBrowser) {
