@@ -1831,6 +1831,8 @@ function pad(number, digits, end) {
                     playbook: /(PlayBook).*?Tablet\s*OS\s*(\d+)\.(\d+(\.\d+)?)/,
                     wp: /(Windows Phone(?: OS)?)\s(\d+)\.(\d+(\.\d+)?)/,
                     windows: /(MSIE)\s+(\d+)\.(\d+(\.\d+)?)/,
+                    tizen: /(tizen).*?Version\/(\d+)\.(\d+(\.\d+)?)/i,
+                    sailfish: /(sailfish).*rv:(\d+)\.(\d+(\.\d+)?).*firefox/i,
                     ffos: /(Mobile).*rv:(\d+)\.(\d+(\.\d+)?).*Firefox/
                 },
                 osRxs = {
@@ -1839,7 +1841,8 @@ function pad(number, digits, end) {
                     blackberry: /^blackberry|playbook/i,
                     windows: /windows/,
                     wp: /wp/,
-                    meego: /meego|ffos/
+                    flat: /sailfish|ffos|tizen/i,
+                    meego: /meego/
                 },
                 formFactorRxs = {
                     tablet: /playbook|ipad|fire/i
