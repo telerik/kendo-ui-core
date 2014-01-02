@@ -453,4 +453,30 @@ test("text field does not show bom text (focus caret gets lost)", function() {
     equal($("#k-editor-link-text").val().replace(/\ufeff/g, "BOM"), "");
 });
 
+test("text box is not shown if executing over image", function() {
+    editor.value("<img />");
+    var range = editor.createRange();
+    range.selectNodeContents(editor.body);
+    editor.selectRange(range);
+
+    execLinkCommandOnRange(range);
+
+    equal($("#k-editor-link-text:visible").length, 0);
+    equal($(".k-editor-link-text-row:visible").length, 0);
+});
+
+test("exec over image selection", function() {
+    editor.value("<img />");
+    var range = editor.createRange();
+    range.selectNodeContents(editor.body);
+    editor.selectRange(range);
+
+    execLinkCommandOnRange(range);
+
+    $("#k-editor-link-url").val("baz");
+    $(".k-dialog-insert").click();
+
+    equal(editor.value(), '<a href="baz"><img /></a>');
+});
+
 }());

@@ -99,10 +99,10 @@ var LinkCommand = Command.extend({
                 "<div class='k-edit-field'>" +
                     "<input type='text' class='k-input k-textbox' id='k-editor-link-url'>" +
                 "</div>" +
-                "<div class='k-edit-label'>" +
+                "<div class='k-edit-label k-editor-link-text-row'>" +
                     "<label for='k-editor-link-text'>#: messages.linkText #</label>" +
                 "</div>" +
-                "<div class='k-edit-field'>" +
+                "<div class='k-edit-field k-editor-link-text-row'>" +
                     "<input type='text' class='k-input k-textbox' id='k-editor-link-text'>" +
                 "</div>" +
                 "<div class='k-edit-label'>" +
@@ -134,15 +134,16 @@ var LinkCommand = Command.extend({
         this._range = this.lockRange(true);
         var nodes = textNodes(this._range);
 
-
         var a = nodes.length ? this.formatter.finder.findSuitable(nodes[0]) : null;
-        //var img = nodes.length && dom.name(nodes[0]) == "img";
+        var img = nodes.length && dom.name(nodes[0]) == "img";
 
-        var dialog = this._dialog = this.createDialog(this._dialogTemplate(), {
+        var dialog = this.createDialog(this._dialogTemplate(), {
             title: messages.createLink,
             close: proxy(this._close, this),
             visible: false
-        })
+        });
+
+        dialog
             .find(".k-dialog-insert").click(proxy(this._apply, this)).end()
             .find(".k-dialog-close").click(proxy(this._close, this)).end()
             .find(".k-edit-field input").keydown(proxy(this._keydown, this)).end()
@@ -150,14 +151,16 @@ var LinkCommand = Command.extend({
             .find("#k-editor-link-text").val(this.linkText(nodes)).end()
             .find("#k-editor-link-title").val(a ? a.title : "").end()
             .find("#k-editor-link-target").attr("checked", a ? a.target == "_blank" : false).end()
-            .data("kendoWindow")
-            .center().open();
+            .find(".k-editor-link-text-row").toggle(!img);
+
 
         if (nodes.length > 0 && !collapsed) {
-            this._initialText = $("#k-editor-link-text", dialog.element).val();
+            this._initialText = $("#k-editor-link-text", dialog).val();
         }
 
-        $("#k-editor-link-url", dialog.element).focus().select();
+        this._dialog = dialog.data("kendoWindow").center().open();
+
+        $("#k-editor-link-url", dialog).focus().select();
     },
 
     _keydown: function (e) {
@@ -174,6 +177,7 @@ var LinkCommand = Command.extend({
         var element = this._dialog.element;
         var href = $("#k-editor-link-url", element).val();
         var title, text, target;
+        var textInput = $("#k-editor-link-text", element);
 
         if (href && href != "http://") {
 
@@ -188,11 +192,13 @@ var LinkCommand = Command.extend({
                 this.attributes.title = title;
             }
 
-            text = $("#k-editor-link-text", element).val();
-            if (!text && !this._initialText) {
-                this.attributes.innerHTML = href;
-            } else if (text && (text !== this._initialText)) {
-                this.attributes.innerHTML = dom.stripBom(text);
+            if (textInput.is(":visible")) {
+                text = textInput.val();
+                if (!text && !this._initialText) {
+                    this.attributes.innerHTML = href;
+                } else if (text && (text !== this._initialText)) {
+                    this.attributes.innerHTML = dom.stripBom(text);
+                }
             }
 
             target = $("#k-editor-link-target", element).is(":checked");
