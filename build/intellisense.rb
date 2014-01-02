@@ -18,7 +18,9 @@ module CodeGen::IntelliSense
         end
 
         def plugin
-            'kendo' + @name
+            prefix = ""
+            prefix = "Mobile" if @full_name =~ /mobile\./
+            'kendo' + prefix + @name
         end
 
         def method_class
