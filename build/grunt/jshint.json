@@ -12,6 +12,6 @@
     "themebuilder/scripts/constants.js"
     ],
     "options": {
-        "ignores": ["**/*.min.js", "src/kendo.web.js", "src/kendo.aspnetmvc.js", "src/kendo.all.js", "src/kendo.mobile.js", "src/kendo.dataviz.js", "src/kendo.timezones.js", "src/kendo.model.js", "src/kendo.winjs.js", "src/kendo.editor.js" ]
+        "ignores": ["**/*.min.js", "src/kendo.web.js", "src/kendo.aspnetmvc.js", "src/kendo.all.js", "src/kendo.mobile.js", "src/kendo.dataviz.js", "src/kendo.timezones.js", "src/kendo.icenium.js", "src/kendo.model.js", "src/kendo.winjs.js", "src/kendo.editor.js" ]
     }
 }
