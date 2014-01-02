@@ -3,7 +3,7 @@
         Draggable = kendo.ui.Draggable,
         element,
         filteredIndex,
-        excludedIndex;
+        disabledIndex;
 
     function triggerDraggableEvent(type, e, element) {
         element.data("kendoDraggable").trigger(type, e);
@@ -152,13 +152,13 @@
                     '<li class="item">foo</li>' +
                     '<li class="filtered">bar</li>' +
                     '<li class="item">baz</li>' +
-                    '<li class="item excluded">qux</li>' +
+                    '<li class="item disabled">qux</li>' +
                 '</ul>'
             );
 
             element = $("#sortable");
             filteredIndex = $("#sortable .filtered").index();
-            excludedIndex = $("#sortable .excluded").index();
+            disabledIndex = $("#sortable .disabled").index();
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -200,13 +200,13 @@
         notEqual(targetElement.index(), filteredIndex, "filtered item changes its position");
     });
 
-    test("user is not able to drag excluded items", 1, function() {
-        var draggedElement = element.children().eq(excludedIndex),
+    test("user is not able to drag disabled items", 1, function() {
+        var draggedElement = element.children().eq(disabledIndex),
             draggableOffset = kendo.getOffset(draggedElement),
             targetElement = element.children().eq(0),
             targetOffset = kendo.getOffset(targetElement),
             sortable = element.kendoSortable({
-                    excluded: ".excluded"
+                    disabled: ".disabled"
                 }).data("kendoSortable");
 
         sortable.bind("start", function(e) {
@@ -216,23 +216,23 @@
         press(draggedElement, draggableOffset.left, draggableOffset.top);
         moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
 
-        equal(draggedElement.index(), excludedIndex, "draggedElement did not change its position");
+        equal(draggedElement.index(), disabledIndex, "draggedElement did not change its position");
     });
 
-    test("excluded items are valid drop targets and move then users drags an item onto them", 2, function() {
+    test("disabled items are valid drop targets and move then users drags an item onto them", 2, function() {
         var draggedElement = element.children().eq(0),
             draggableOffset = kendo.getOffset(draggedElement),
-            targetElement = element.children().eq(excludedIndex),
+            targetElement = element.children().eq(disabledIndex),
             targetOffset = kendo.getOffset(targetElement),
             sortable = element.kendoSortable({
-                    excluded: ".excluded"
+                    disabled: ".disabled"
                 }).data("kendoSortable");
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
         moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
 
         //+1 is added because placeholder is appended to the element which changes the index
-        equal(targetElement.index(), excludedIndex, "The excluded item changes its position");
+        equal(targetElement.index(), disabledIndex, "The disabled item changes its position");
 
         release(draggedElement, targetElement.left, targetOffset.top + 10);
         equal(draggedElement.index(), 3, "draggedElement did not change its position");
@@ -381,7 +381,7 @@
                 '<div id="sortable">' +
                     '<p class="filtered">foo</p>' +
                     '<p class="item">bar</p>' +
-                    '<p class="item excluded">baz</p>' +
+                    '<p class="item disabled">baz</p>' +
                     '<p class="item">qux</p>' +
                 '</div>'
             );
@@ -394,7 +394,7 @@
                     return element.clone().addClass("placeholder").text("placeholder");
                 },
                 filter: ".item",
-                exclude: ".excluded"
+                disabled: ".disabled"
             });
         },
         teardown: function() {

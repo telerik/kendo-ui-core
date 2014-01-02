@@ -61,7 +61,7 @@ var __meta__ = {
             placeholder: defaultPlaceholder,
             filter: DEFAULT_FILTER,
             holdToDrag: false,
-            excluded: null,
+            disabled: null,
             container: null,
             connectWith: null,
             handler: null,
@@ -96,12 +96,12 @@ var __meta__ = {
         _dragstart: function(e) {
             var draggedElement = this.draggedElement = e.currentTarget,
                 target = e.target || kendo.elementUnderCursor(e),
-                excluded = this.options.excluded,
+                disabled = this.options.disabled,
                 handler = this.options.handler,
                 _placeholder = this.options.placeholder,
                 placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : _placeholder;
 
-            if(excluded && draggedElement.is(excluded)) {
+            if(disabled && draggedElement.is(disabled)) {
                 e.preventDefault();
             } else if(handler && !$(target).is(handler)) {
                 e.preventDefault();
@@ -132,7 +132,7 @@ var __meta__ = {
                 prev,
                 next,
                 placeholder = this.placeholder,
-                excluded = this.options.excluded;
+                disabled = this.options.disabled;
 
             if(target.length) {
                 targetOffset = kendo.getOffset(target);
@@ -181,7 +181,7 @@ var __meta__ = {
             var elementUnderCursor = kendo.elementUnderCursor(e),
                 target,
                 draggable = e.sender,
-                excluded = this.options.excluded,
+                disabled = this.options.disabled,
                 filter = this.options.filter,
                 items = this.items();
 
