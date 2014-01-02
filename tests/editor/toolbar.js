@@ -235,7 +235,7 @@ function getTool(className) {
 test("expands tool configuration for default tool", function() {
     bindToMock([ "bold" ]);
 
-    ok($.isPlainObject(toolbar.tools.bold));
+    ok(toolbar.tools.bold);
     equal(toolbar.tools.bold.options.name, "bold");
     equal(dom.find(".k-bold").length, 1);
 });
@@ -243,7 +243,7 @@ test("expands tool configuration for default tool", function() {
 test("expands tool configuration for custom tool", function() {
     bindToMock([ { name: "foo" } ]);
 
-    ok($.isPlainObject(toolbar.tools.foo));
+    ok(toolbar.tools.foo);
     equal(toolbar.tools.foo.options.name, "foo");
     equal(toolbar.tools.foo.options.type, "button");
     equal(dom.find(".k-foo").length, 1);

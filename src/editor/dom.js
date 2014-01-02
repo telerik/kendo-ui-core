@@ -200,7 +200,7 @@ var Dom = {
             var value = node[key];
 
             if (key == FLOAT) {
-                value = node[$.support.cssFloat ? CSSFLOAT : STYLEFLOAT];
+                value = node[kendo.support.cssFloat ? CSSFLOAT : STYLEFLOAT];
             }
 
             if (typeof value == "object") {
@@ -558,7 +558,7 @@ var Dom = {
     unstyle: function (node, value) {
         for (var key in value) {
             if (key == FLOAT) {
-                key = $.support.cssFloat ? CSSFLOAT : STYLEFLOAT;
+                key = kendo.support.cssFloat ? CSSFLOAT : STYLEFLOAT;
             }
 
             node.style[key] = "";
