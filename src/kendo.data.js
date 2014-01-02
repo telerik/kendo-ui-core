@@ -1779,35 +1779,41 @@ kendo_module({
         }
     });
 
-    function mergeGroups(target, dest, start, count) {
+    function mergeGroups(target, dest, skip, take) {
         var group,
             idx = 0,
             items;
 
-        while (dest.length && count) {
+        while (dest.length && take) {
             group = dest[idx];
             items = group.items;
 
+            var length = items.length;
+
             if (target && target.field === group.field && target.value === group.value) {
                 if (target.hasSubgroups && target.items.length) {
-                    mergeGroups(target.items[target.items.length - 1], group.items, start, count);
+                    mergeGroups(target.items[target.items.length - 1], group.items, skip, take);
                 } else {
-                    items = items.slice(start, count);
-                    count -= items.length;
+                    items = items.slice(skip, skip + take);
                     target.items = target.items.concat(items);
                 }
                 dest.splice(idx--, 1);
             } else {
-                items = items.slice(start, count);
-                count -= items.length;
+                items = items.slice(skip, skip + take);
                 group.items = items;
+
                 if (!group.items.length) {
                     dest.splice(idx--, 1);
-                    count -= start;
                 }
             }
 
-            start = 0;
+            if (items.length == 0) {
+                skip -= length;
+            } else {
+                skip = 0;
+                take -= items.length;
+            }
+
             if (++idx >= dest.length) {
                 break;
             }
@@ -3018,7 +3024,7 @@ kendo_module({
             return [];
         },
 
-        _mergeGroups: function(data, range, startIndex, endIndex) {
+        _mergeGroups: function(data, range, skip, take) {
             if (this._isServerGrouped()) {
                 var temp = range.toJSON(),
                     prevGroup;
@@ -3027,11 +3033,11 @@ kendo_module({
                     prevGroup = data[data.length - 1];
                 }
 
-                mergeGroups(prevGroup, temp, startIndex, endIndex);
+                mergeGroups(prevGroup, temp, skip, take);
 
                 return data.concat(temp);
             }
-            return data.concat(range.slice(startIndex, endIndex));
+            return data.concat(range.slice(skip, take));
         },
 
         skip: function() {

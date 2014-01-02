@@ -813,7 +813,7 @@ test("mergeGroup returns a subset of the data", function() {
 
     var result = dataSource._mergeGroups([], new kendo.data.ObservableArray(data), 1, 2);
 
-    equal(result[0].items.length, 1);
+    equal(result[0].items.length, 2);
 });
 
 test("mergeGroup returns a subset of the data if range is of multiple groups skipping the last group data if not required", function() {
@@ -832,6 +832,24 @@ test("mergeGroup returns a subset of the data if range is of multiple groups ski
     equal(result.length, 2);
     equal(result[0].items.length, 2);
     equal(result[1].items.length, 2);
+});
+
+test("mergeGroup skips more than one group", function() {
+    var dataSource = new DataSource({
+            serverGrouping: true,
+            group: "foo"
+        }),
+        data = [
+            { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+            { field: "foo", value:"2", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+            { field: "foo", value:"3", items: [{ foo: 31 },{ foo: 32 },{ foo: 33 }] }
+        ];
+
+    var result = dataSource._mergeGroups([], new kendo.data.ObservableArray(data), 6, 2);
+
+    equal(result.length, 1);
+    equal(result[0].items.length, 2);
+    equal(result[0].items[1].foo, 32);
 });
 
 test("mergeGroup returns a subset of the data if range is of multiple groups", function() {
@@ -884,6 +902,45 @@ test("mergeGroup merges group with previous data", function() {
     equal(result[0].items.length, 3);
     equal(result[1].items.length, 2);
     equal(result[2].items.length, 2);
+});
+
+test("mergeGroup merges group with previous data and skips", function() {
+    var dataSource = new DataSource({
+            serverGrouping: true,
+            group: "foo"
+        }),
+        data = [
+            { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+            { field: "foo", value:"2", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+            { field: "foo", value:"3", items: [{ foo: 1 },{ foo: 32 },{ foo: 3 }] }
+            ],
+        originalData = [ { field: "foo", value:"3", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }];
+
+    var result = dataSource._mergeGroups(originalData, new kendo.data.ObservableArray(data), 7, 1);
+
+    equal(result.length, 1);
+    equal(result[0].items.length, 4);
+    equal(result[0].items[3].foo, 32);
+});
+
+test("mergeGroup merges group with previous data and skips", function() {
+    var dataSource = new DataSource({
+            serverGrouping: true,
+            group: "foo"
+        }),
+        data = [
+            { field: "foo", value:"3", items: [{ foo: 1 },{ foo: 32 },{ foo: 3 }] },
+            { field: "foo", value:"1", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] },
+            { field: "foo", value:"2", items: [{ foo: 1 },{ foo: 22 },{ foo: 3 }] }
+        ],
+        originalData = [ { field: "foo", value:"3", items: [{ foo: 1 },{ foo: 2 },{ foo: 3 }] }];
+
+    var result = dataSource._mergeGroups(originalData, new kendo.data.ObservableArray(data), 7, 1);
+
+    equal(result.length, 2);
+    equal(result[0].items.length, 3);
+    equal(result[1].items.length, 1);
+    equal(result[1].items[0].foo, 22);
 });
 
 test("mergeGroup merges group with previous data if from the same group", function() {
