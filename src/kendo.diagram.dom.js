@@ -1228,7 +1228,7 @@ kendo_module({
         },
         save: function (options) { // options = {saveOptions = true|false}
             var json = {}, i, shape, con;
-            if (!options || !options.saveOptions || options.saveOptions === true) {
+            if (isUndefined(options) || isUndefined(options.saveOptions) || options.saveOptions === true) {
                 json.options = this.options;
             }
             json.shapes = [];
