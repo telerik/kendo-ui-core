@@ -1226,9 +1226,11 @@ kendo_module({
             scroller.element.remove();
             this.scroller = null;
         },
-        save: function () {
+        save: function (options) { // options = {saveOptions = true|false}
             var json = {}, i, shape, con;
-            json.options = this.options;
+            if (!options || !options.saveOptions || options.saveOptions === true) {
+                json.options = this.options;
+            }
             json.shapes = [];
             json.connections = [];
             for (i = 0; i < this.shapes.length; i++) {
@@ -1242,31 +1244,32 @@ kendo_module({
             }
             return json;
         },
-        load: function (json, loadShape, loadConnection) { // loadShape/loadConnection - process the options, so that you can set function for complex visual templates.
-            var i, options, con, shape;
-            this.options = deepExtend(this.options, json.options);
+        load: function (json, options) { // options = {loadShape/loadConnection - process the options, so that you can set function for complex visual templates}
+            var i, itemOptions, item, from, to;
+            if (json.options) {
+                this.options = deepExtend(this.options, json.options);
+            }
             this.clear();
             this._fetchFreshData();
             for (i = 0; i < json.shapes.length; i++) {
-                options = json.shapes[i].options;
-                options.undoable = false;
-                if (loadShape) {
-                    loadShape(options);
+                itemOptions = json.shapes[i].options;
+                itemOptions.undoable = false;
+                if (options && isFunction(options.loadShape)) {
+                    options.loadShape(itemOptions);
                 }
-                shape = new Shape(options);
-                this.addShape(shape);
+                this.addShape(new Shape(itemOptions));
             }
 
             for (i = 0; i < json.connections.length; i++) {
-                con = json.connections[i];
-                options = con.options;
-                options.undoable = false;
-                if (loadConnection) {
-                    loadConnection(options);
+                item = json.connections[i];
+                itemOptions = item.options;
+                itemOptions.undoable = false;
+                if (options && isFunction(options.loadConnection)) {
+                    options.loadConnection(itemOptions);
                 }
-                var from = deserializeConnector(this, con.from);
-                var to = deserializeConnector(this, con.to);
-                this.addConnection(new Connection(from, to, options));
+                from = deserializeConnector(this, item.from);
+                to = deserializeConnector(this, item.to);
+                this.addConnection(new Connection(from, to, itemOptions));
             }
         },
         focus: function () {
