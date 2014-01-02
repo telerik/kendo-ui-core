@@ -1807,7 +1807,7 @@ kendo_module({
                 }
             }
 
-            if (items.length == 0) {
+            if (items.length === 0) {
                 skip -= length;
             } else {
                 skip = 0;
