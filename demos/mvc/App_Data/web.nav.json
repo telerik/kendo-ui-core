@@ -2068,6 +2068,33 @@
         },
         {
             "packages": ["!mvc"],
+            "text": "Sortable",
+            "name": "sortable",
+            "documentation": "framework/sortable",
+            "spriteCssClass": "sortableIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "sortable/index.html",
+                    "title": "Demo for Sortable Component in Kendo UI jQuery framework",
+                    "meta": "This example illustrates the basic functionality of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Filter / Disable items",
+                    "url": "sortable/filter-disable.html",
+                    "title": "Demo for filter and disable items functionality of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the filter and disable items functionality of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Placeholder / Hint customization",
+                    "url": "sortable/customization.html",
+                    "title": "Demo for placeholder and filter customization of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the placeholder and filter customization feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                }
+            ]
+        },
+        {
+            "packages": ["!mvc"],
             "text": "Validator",
             "name": "validator",
             "documentation": "framework/validator",

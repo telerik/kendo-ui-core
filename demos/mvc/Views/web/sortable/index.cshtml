@@ -1,0 +1,46 @@
+
+        <div id="example">
+
+            <ul id="sortable-basic">
+                <li class="sortable">Item1</li>
+                <li class="sortable">Item2</li>
+                <li class="sortable">Item3</li>
+                <li class="sortable">Item4</li>
+                <li class="sortable">Item5</li>
+                <li class="sortable">Item6</li>
+                <li class="sortable">Item7</li>
+                <li class="sortable">Item8</li>
+            </ul>
+
+            <script>
+                $(document).ready(function() {
+                    $("#sortable-basic").kendoSortable();
+                });
+            </script>
+
+            <style scoped>
+                #example {
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+                #sortable-basic {
+                    padding: 0;
+                    margin: 0 auto;
+                    width: 235px;
+                }
+
+                li.sortable {
+                    list-style-type: none;
+                    padding: 10px;
+                    margin: 5px;
+                    border: 1px solid black;
+                    background-color: green;
+                    width: 200px;
+                    text-align: center;
+                }
+
+            </style>
+        </div>
