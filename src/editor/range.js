@@ -450,7 +450,11 @@ var W3CSelection = Class.extend({
     },
 
     removeAllRanges: function () {
-        this.ownerDocument.selection.empty();
+        var selection = this.ownerDocument.selection;
+
+        if (selection.type != "None") {
+            selection.empty();
+        }
     },
 
     getRangeAt: function () {
