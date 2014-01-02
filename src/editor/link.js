@@ -3,6 +3,7 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
+    proxy = $.proxy,
     Editor = kendo.ui.editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
@@ -126,113 +127,122 @@ var LinkCommand = Command.extend({
     },
 
     exec: function () {
-        var that = this,
-            range = that.getRange(),
-            collapsed = range.collapsed,
-            nodes,
-            initialText = "",
-            messages = that.editor.options.messages;
+        var collapsed = this.getRange().collapsed;
+        var messages = this.editor.options.messages;
 
-        range = that.lockRange(true);
-        nodes = textNodes(range);
+        this._initialText = "";
+        this._range = this.lockRange(true);
+        var nodes = textNodes(this._range);
 
-        function apply(e) {
-            var element = dialog.element,
-                href = $("#k-editor-link-url", element).val(),
-                title, text, target;
 
-            if (href && href != "http://") {
+        var a = nodes.length ? this.formatter.finder.findSuitable(nodes[0]) : null;
+        //var img = nodes.length && dom.name(nodes[0]) == "img";
 
-                if (href.indexOf("@") > 0 && !/^(\w+:)|(\/\/)/i.test(href)) {
-                    href = "mailto:" + href;
-                }
-
-                that.attributes = { href: href };
-
-                title = $("#k-editor-link-title", element).val();
-                if (title) {
-                    that.attributes.title = title;
-                }
-
-                text = $("#k-editor-link-text", element).val();
-                if (!text && !initialText) {
-                    that.attributes.innerHTML = href;
-                } else if (text && (text !== initialText)) {
-                    that.attributes.innerHTML = dom.stripBom(text);
-                }
-
-                target = $("#k-editor-link-target", element).is(":checked");
-                that.attributes.target = target ? "_blank" : null;
-
-                that.formatter.apply(range, that.attributes);
-            }
-
-            close(e);
-
-            if (that.change) {
-                that.change();
-            }
-        }
-
-        function close(e) {
-            e.preventDefault();
-            dialog.destroy();
-
-            dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
-
-            that.releaseRange(range);
-        }
-
-        function linkText(nodes) {
-            var text = "";
-
-            if (nodes.length == 1) {
-                text = nodes[0].nodeValue;
-            } else if (nodes.length) {
-                text = nodes[0].nodeValue + nodes[1].nodeValue;
-            }
-
-            return dom.stripBom(text);
-        }
-
-        var a = nodes.length ? that.formatter.finder.findSuitable(nodes[0]) : null;
-
-        var dialog = this.createDialog(that._dialogTemplate(), {
+        var dialog = this._dialog = this.createDialog(this._dialogTemplate(), {
             title: messages.createLink,
-            close: close,
+            close: proxy(this._close, this),
             visible: false
         })
-            .find(".k-dialog-insert").click(apply).end()
-            .find(".k-dialog-close").click(close).end()
-            .find(".k-edit-field input").keydown(function (e) {
-                var keys = kendo.keys;
-                if (e.keyCode == keys.ENTER) {
-                    apply(e);
-                } else if (e.keyCode == keys.ESC) {
-                    close(e);
-                }
-            }).end()
-            // IE < 8 returns absolute url if getAttribute is not used
-            .find("#k-editor-link-url").val(a ? a.getAttribute("href", 2) : "http://").end()
-            .find("#k-editor-link-text").val(linkText(nodes)).end()
+            .find(".k-dialog-insert").click(proxy(this._apply, this)).end()
+            .find(".k-dialog-close").click(proxy(this._close, this)).end()
+            .find(".k-edit-field input").keydown(proxy(this._keydown, this)).end()
+            .find("#k-editor-link-url").val(this.linkUrl(a)).end()
+            .find("#k-editor-link-text").val(this.linkText(nodes)).end()
             .find("#k-editor-link-title").val(a ? a.title : "").end()
             .find("#k-editor-link-target").attr("checked", a ? a.target == "_blank" : false).end()
             .data("kendoWindow")
             .center().open();
 
         if (nodes.length > 0 && !collapsed) {
-            initialText = $("#k-editor-link-text", dialog.element).val();
+            this._initialText = $("#k-editor-link-text", dialog.element).val();
         }
 
         $("#k-editor-link-url", dialog.element).focus().select();
     },
 
-    redo: function () {
-        var that = this,
-            range = that.lockRange(true);
+    _keydown: function (e) {
+        var keys = kendo.keys;
 
-        that.formatter.apply(range, that.attributes);
-        that.releaseRange(range);
+        if (e.keyCode == keys.ENTER) {
+            this._apply(e);
+        } else if (e.keyCode == keys.ESC) {
+            this._close(e);
+        }
+    },
+
+    _apply: function (e) {
+        var element = this._dialog.element;
+        var href = $("#k-editor-link-url", element).val();
+        var title, text, target;
+
+        if (href && href != "http://") {
+
+            if (href.indexOf("@") > 0 && !/^(\w+:)|(\/\/)/i.test(href)) {
+                href = "mailto:" + href;
+            }
+
+            this.attributes = { href: href };
+
+            title = $("#k-editor-link-title", element).val();
+            if (title) {
+                this.attributes.title = title;
+            }
+
+            text = $("#k-editor-link-text", element).val();
+            if (!text && !this._initialText) {
+                this.attributes.innerHTML = href;
+            } else if (text && (text !== this._initialText)) {
+                this.attributes.innerHTML = dom.stripBom(text);
+            }
+
+            target = $("#k-editor-link-target", element).is(":checked");
+            this.attributes.target = target ? "_blank" : null;
+
+            this.formatter.apply(this._range, this.attributes);
+        }
+
+        this._close(e);
+
+        if (this.change) {
+            this.change();
+        }
+    },
+
+    _close: function (e) {
+        e.preventDefault();
+        this._dialog.destroy();
+
+        dom.windowFromDocument(RangeUtils.documentFromRange(this._range)).focus();
+
+        this.releaseRange(this._range);
+    },
+
+    linkUrl: function(anchor) {
+        if (anchor) {
+            // IE < 8 returns absolute url if getAttribute is not used
+            return anchor.getAttribute("href", 2);
+        }
+
+        return "http://";
+    },
+
+    linkText: function (nodes) {
+        var text = "";
+
+        if (nodes.length == 1) {
+            text = nodes[0].nodeValue;
+        } else if (nodes.length) {
+            text = nodes[0].nodeValue + nodes[1].nodeValue;
+        }
+
+        return dom.stripBom(text || "");
+    },
+
+    redo: function () {
+        var range = this.lockRange(true);
+
+        this.formatter.apply(range, this.attributes);
+        this.releaseRange(range);
     }
 
 });
