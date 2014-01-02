@@ -134,15 +134,13 @@ var __meta__ = {
                 placeholder = this.placeholder,
                 excluded = this.options.excluded;
 
-            if(target.length && !(excluded && target.is(excluded))) {
+            if(target.length) {
                 targetOffset = kendo.getOffset(target);
                 hintOffset = kendo.getOffset(e.sender.hint);
                 offsetTopDelta = hintOffset.top - targetOffset.top;
                 offsetLeftDelta = hintOffset.left - targetOffset.left;
                 prev = target.prev();
                 next = target.next();
-
-                console.log(offsetLeftDelta, offsetTopDelta);
 
                 if(offsetTopDelta < 0 || offsetLeftDelta < 0) { //for negative delta the tooltip should be appended before the target
                     if(prev[0] != placeholder[0]) {

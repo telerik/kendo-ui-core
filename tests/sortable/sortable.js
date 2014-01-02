@@ -219,7 +219,7 @@
         equal(draggedElement.index(), excludedIndex, "draggedElement did not change its position");
     });
 
-    test("excluded items are not valid drop targets and does not move then users drags an item onto them", 2, function() {
+    test("excluded items are valid drop targets and move then users drags an item onto them", 2, function() {
         var draggedElement = element.children().eq(0),
             draggableOffset = kendo.getOffset(draggedElement),
             targetElement = element.children().eq(excludedIndex),
@@ -232,10 +232,10 @@
         moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
 
         //+1 is added because placeholder is appended to the element which changes the index
-        equal(targetElement.index(), excludedIndex + 1, "The excluded item did not change its position");
+        equal(targetElement.index(), excludedIndex, "The excluded item changes its position");
 
         release(draggedElement, targetElement.left, targetOffset.top + 10);
-        equal(draggedElement.index(), 0, "draggedElement did not change its position");
+        equal(draggedElement.index(), 3, "draggedElement did not change its position");
     });
 
     module("Sortable - placeholder and hint customization", {
