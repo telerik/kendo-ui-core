@@ -409,4 +409,40 @@ test("_pushDestroy calls pushDestroy for every item when data is returned accord
     equal(dataSource.args("pushDestroy", 0)[0][0], data[0]);
     equal(dataSource.args("pushDestroy", 0)[0][1], data[1]);
 });
+
+test("_push accepts array of items even if the schema expects an object", function() {
+    var dataSource = new DataSource({
+        schema: {
+            data: "d"
+        }
+    });
+
+    dataSource = stub(dataSource, "pushCreate");
+
+    var data = [ { }, { }];
+
+    dataSource._push( data, "pushCreate" );
+
+    equal(dataSource.calls("pushCreate"), 1);
+    equal(dataSource.args("pushCreate", 0)[0][0], data[0]);
+    equal(dataSource.args("pushCreate", 0)[0][1], data[1]);
+});
+
+test("_push accepts a single item even if the schema expects an object", function() {
+    var dataSource = new DataSource({
+        schema: {
+            data: "d"
+        }
+    });
+
+    dataSource = stub(dataSource, "pushCreate");
+
+    var item = { };
+
+    dataSource._push(item, "pushCreate" );
+
+    equal(dataSource.calls("pushCreate"), 1);
+    equal(dataSource.args("pushCreate", 0)[0], item);
+});
+
 }());

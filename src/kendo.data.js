@@ -2082,6 +2082,10 @@ kendo_module({
         _push: function(result, operation) {
             var data = this._readData(result);
 
+            if (!data) {
+                data = result;
+            }
+
             this[operation](data);
         },
 
