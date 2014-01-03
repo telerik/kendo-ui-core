@@ -290,7 +290,7 @@
 .k-rtl .k-menu .k-item > .k-link > .k-i-arrow-e
 {
     right: auto;
-    left: 2px;
+    left: .2rem;
 }
 
 .k-rtl .k-menu .k-group .k-item > .k-link
