@@ -82,4 +82,17 @@ test("first cell is focused after insertion", function() {
     equal(editor.value(), "foo<table><tbody><tr><td><a></a></td></tr></tbody></table>");
 });
 
+test("table holds its position after undo/redo", function() {
+    editor.selectRange(createRangeFromText(editor, '<p>foo||bar</p>'));
+
+    editor.exec("createTable");
+    editor.exec("undo");
+
+    equal(editor.value(), "<p>foobar</p>");
+
+    editor.exec("redo");
+
+    equal(editor.value(), "<p>foo</p><table><tbody><tr><td></td></tr></tbody></table><p>bar</p>");
+});
+
 }());
