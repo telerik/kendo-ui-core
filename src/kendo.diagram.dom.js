@@ -1355,6 +1355,7 @@ kendo_module({
             }
             if (item instanceof Shape) {
                 shape = item;
+                shape.redraw(shapeOptions);
             }
             else { // consider it a point
                 deepExtend(shapeOptions, { x: item.x, y: item.y });
