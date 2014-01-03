@@ -114,15 +114,8 @@ kendo_module({
                 var start = event.start;
                 var end = event.end;
 
-                if (event.isAllDay) {
-                    end = kendo.date.nextDay(end);
-                }
-
-                var eventDurationInDays = Math.ceil((end - start) / kendo.date.MS_PER_DAY);
-
-                if (!event.isAllDay && eventDurationInDays === 1 && kendo.date.getDate(end).getTime() !== kendo.date.getDate(start).getTime()) {
-                    eventDurationInDays += 1;
-                }
+                var eventDurationInDays =
+                    (kendo.date.getDate(end) - kendo.date.getDate(start)) / kendo.date.MS_PER_DAY + 1;
 
                 var task = event.clone();
                 task.startDate = kendo.date.getDate(start);
