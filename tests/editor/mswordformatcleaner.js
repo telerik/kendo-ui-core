@@ -336,4 +336,20 @@ test("persists HTML in text", function() {
     equal(clean('<p class="MsoNormal">&lt;label class="whatever"&gt;<o:p></o:p></p>'), '<p>&lt;label class="whatever"&gt;</p>');
 });
 
+test("replace phantom line feeds with space", function() {
+    equal(clean('<p class="MsoNormal">foo\nbar</p>'), '<p>foo bar</p>');
+});
+
+test("do not replace line feeds with space after <br>", function() {
+    equal(clean('<p class="MsoNormal">foo<br>\nbar</p>'), '<p>foo<br>bar</p>');
+});
+
+test("do not replace line feeds with space after <br/>", function() {
+    equal(clean('<p class="MsoNormal">foo<br/>\nbar</p>'), '<p>foo<br>bar</p>');
+});
+
+test("do not replace line feeds with space after <br />", function() {
+    equal(clean('<p class="MsoNormal">foo<br />\nbar</p>'), '<p>foo<br>bar</p>');
+});
+
 }());

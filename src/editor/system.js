@@ -686,7 +686,8 @@ var MSWordFormatCleaner = Cleaner.extend({
             /<(\/?)b(\s[^>]*)?>/ig, '<$1strong$2>',
             /<(\/?)i(\s[^>]*)?>/ig, '<$1em$2>',
             /<\/?(meta|link|style|o:|v:|x:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:|x:)[^>]*>)?/ig, '', /* external references and namespaced tags */
-            /style=(["|'])\s*\1/g, '' /* empty style attributes */
+            /style=(["|'])\s*\1/g, '', /* empty style attributes */
+            /(<br[^>]*>)?\n/g, function ($0, $1) { return $1 ? $0 : ' '; } /* phantom extra line feeds */
         ];
     },
 
