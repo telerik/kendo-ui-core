@@ -390,6 +390,25 @@
         equal(table.find(".k-si-close").length, 0);
     });
 
+    test("agenda view WTF", function() {
+        var agenda = agendaView({ date: new Date("2014/1/3") });
+
+debugger;
+        agenda.render([
+            new Event({
+                start: new Date("2014/1/1 11:00"),
+                end: new Date("2014/1/3 9:00"),
+                title: ""
+            })
+        ]);
+
+        var table = agenda.element.find(".k-scheduler-table");
+
+        var timeCell = table.find("td.k-scheduler-timecolumn");
+
+        equal(timeCell.text(), "9:00 AM");
+    });
+
     test("clicking the delete icon fires the remove event", 1, function() {
         var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
         var event = new Event({
