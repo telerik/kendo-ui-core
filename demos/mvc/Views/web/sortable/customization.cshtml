@@ -15,7 +15,12 @@
             <script>
                 $(document).ready(function() {
                     $("#sortable-customization").kendoSortable({
-                        
+                        placeholder: function(element) {
+                            return element.clone().addClass("placeholder").text("Drop here");
+                        },
+                        hint: function(element) {
+                            return element.clone().addClass("hint");
+                        }
                     });
                 });
             </script>
@@ -29,13 +34,23 @@
                 }
 
                 .item {
-                    padding: 5px;
-                    margin: 3px;
+                    padding: 7px;
+                    margin: 5px;
                     border: 1px solid black;
                     background-color: green;
                     width: 200px;
                     text-align: center;
                     border-radius: 3px;
                 }
+
+                .placeholder {
+                    background-color: yellow;
+                    border-color: orange;
+                }
+
+                .hint {
+                    opacity: 0.8;
+                }
+
             </style>
         </div>

@@ -1,0 +1,94 @@
+
+        <div id="example">
+            <div class="list-wrapper">
+                <ul id="sortable-left">
+                    <li class="list-left">Item1</li>
+                    <li class="list-left">Item2</li>
+                    <li class="list-left">Item3</li>
+                </ul>
+
+                <ul id="sortable-right">
+                    <li class="list-right">Item1</li>
+                    <li class="list-right">Item2</li>
+                    <li class="list-right">Item3</li>
+                </ul>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#sortable-left").kendoSortable({
+                        connectWith: "#sortable-right",
+                        start: onStart,
+                        move: onMove,
+                        end: onEnd,
+                        change: onChange
+                    });
+
+                    $("#sortable-right").kendoSortable({
+                        connectWith: "#sortable-left",
+                        start: onStart,
+                        move: onMove,
+                        end: onEnd,
+                        change: onChange
+                    });
+                });
+
+                function onStart(e) {
+                    var id = e.sender.element.attr("id");
+                    kendoConsole.log(id + " start: " + e.item.text());
+                }
+
+                function onMove(e) {
+                    kendoConsole.log("move")
+                }
+
+                function onEnd(e) {
+                    kendoConsole.log("end");
+                }
+
+                function onChange(e) {
+                    kendoConsole.log("change");
+                }
+
+            </script>
+
+            <div class="console"></div>
+
+            <style scoped>
+                #example {
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+                .list-wrapper {
+                    overflow: hidden;
+                }
+
+                #sortable-left, #sortable-right {
+                    width: 50%;
+                    margin: 0;
+                    padding: 0;
+                    float: left;
+                }
+
+                .list-right, .list-left {
+                    list-style-type: none;
+                    margin: 5px;
+                    line-height: 30px;
+                    width: 200px;
+                    text-align: center;
+                    border: 1px solid black;
+                    color: white;
+                }
+
+                .list-left {
+                    background-color: #0033FF;
+                }
+
+                .list-right {
+                    background-color: #CC0033;
+                }
+            </style>
+        </div>

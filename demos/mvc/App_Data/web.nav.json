@@ -2090,6 +2090,30 @@
                     "url": "sortable/customization.html",
                     "title": "Demo for placeholder and filter customization of Kendo UI Sortable Component",
                     "meta": "This example illustrates the placeholder and filter customization feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Handlers",
+                    "url": "sortable/handlers.html",
+                    "title": "Demo for handler functionality of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the handler feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Axis / Container constraints",
+                    "url": "sortable/constraints.html",
+                    "title": "Demo for axis / container functionality of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the axis / container restriction feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Linked Lists",
+                    "url": "sortable/linkedlists.html",
+                    "title": "Demo for linked list functionality of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the linked lists feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Events",
+                    "url": "sortable/events.html",
+                    "title": "Events example for Kendo UI Sortable Component",
+                    "meta": "This example shows events of Kendo UI Sortable widget."
                 }
             ]
         },
