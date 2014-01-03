@@ -275,7 +275,7 @@ kendo_module({
             if (this.adorner) {
                 return this.adorner._getCursor(point);
             }
-            return Cursors.select;
+            return this.options.cursor;
         },
         visible: function (value) {
             if (isUndefined(value)) {
