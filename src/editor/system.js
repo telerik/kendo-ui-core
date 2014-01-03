@@ -89,13 +89,19 @@ var InsertHtmlCommand = Command.extend({
         var editor = this.editor;
         var options = this.options;
         var range = options.range;
-        var startRestorePoint = new RestorePoint(range);
+        var body = editor.body;
+        var startRestorePoint = new RestorePoint(range, body);
         var html = options.html || options.value || '';
 
         editor.selectRange(range);
 
         editor.clipboard.paste(html, options);
-        var genericCommand = new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange()));
+
+        if (options.postProcess) {
+            options.postProcess(editor, editor.getRange());
+        }
+
+        var genericCommand = new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange(), body));
         genericCommand.editor = editor;
         editor.undoRedoStack.push(genericCommand);
 

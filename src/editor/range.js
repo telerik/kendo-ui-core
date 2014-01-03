@@ -650,11 +650,11 @@ var RangeEnumerator = Class.extend({
 });
 
 var RestorePoint = Class.extend({
-    init: function(range) {
+    init: function(range, body) {
         var that = this;
         that.range = range;
         that.rootNode = RangeUtils.documentFromRange(range);
-        that.body = that.getEditable(range);
+        that.body = body || that.getEditable(range);
         if (dom.name(that.body) != "body") {
             that.rootNode = that.body;
         }

@@ -12,6 +12,7 @@ var kendo = window.kendo,
     SELECTEDSTATE = "k-state-selected",
     Tool = Editor.Tool,
     ToolTemplate = Editor.ToolTemplate,
+    InsertHtmlCommand = Editor.InsertHtmlCommand,
     BlockFormatFinder = Editor.BlockFormatFinder,
     registerTool = Editor.EditorUtils.registerTool;
 
@@ -19,7 +20,7 @@ var editableCell = "<td contentEditable='true'>" + Editor.emptyElementContent + 
 
 var tableFormatFinder = new BlockFormatFinder([{tags:["table"]}]);
 
-var TableCommand = Command.extend({
+var TableCommand = InsertHtmlCommand.extend({
     _tableHtml: function(rows, columns) {
         rows = rows || 1;
         columns = columns || 1;
@@ -29,23 +30,20 @@ var TableCommand = Command.extend({
                "</table>";
     },
 
-    exec: function() {
-        var options = this.options,
-            editor = this.editor,
-            range,
-            tableHtml = this._tableHtml(options.rows, options.columns),
-            insertedTable;
-
-        editor.selectRange(options.range);
-        editor.clipboard.paste(tableHtml);
-
-        range = editor.getRange();
-
-        insertedTable = $("table[data-last]", editor.document).removeAttr("data-last");
+    postProcess: function(editor, range) {
+        var insertedTable = $("table[data-last]", editor.document).removeAttr("data-last");
 
         range.selectNodeContents(insertedTable.find("td")[0]);
 
         editor.selectRange(range);
+    },
+
+    exec: function() {
+        var options = this.options;
+        options.html = this._tableHtml(options.rows, options.columns);
+        options.postProcess = this.postProcess;
+
+        InsertHtmlCommand.fn.exec.call(this);
     }
 });
 
