@@ -1628,7 +1628,7 @@ kendo_module({
                 }
                 this.refresh();
             } else {
-                if (this.diagram.options.snapping) {
+                if (this.diagram.options.snap.enabled === true) {
                     var thr = this._truncateDistance(p.minus(this._lp));
                     // threshold
                     if (thr.x === 0 && thr.y === 0) {
@@ -1716,15 +1716,15 @@ kendo_module({
             return bounds;
         },
         _truncateAngle: function (a) {
-            var snapAngle = Math.max(this.diagram.options.snapAngle, 5);
-            return this.diagram.options.snapping ? Math.floor((a % 360) / snapAngle) * snapAngle : (a % 360);
+            var snapAngle = Math.max(this.diagram.options.snap.angle, 5);
+            return this.diagram.options.snap.enabled === true ? Math.floor((a % 360) / snapAngle) * snapAngle : (a % 360);
         },
         _truncateDistance: function (d) {
             if (d instanceof kendo.diagram.Point) {
                 return new kendo.diagram.Point(this._truncateDistance(d.x), this._truncateDistance(d.y));
             } else {
-                var snapSize = Math.max(this.diagram.options.snapSize, 5);
-                return this.diagram.options.snapping ? Math.floor(d / snapSize) * snapSize : d;
+                var snapSize = Math.max(this.diagram.options.snap.size, 5);
+                return this.diagram.options.snap.enabled === true ? Math.floor(d / snapSize) * snapSize : d;
             }
         },
 

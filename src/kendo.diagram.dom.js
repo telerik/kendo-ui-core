@@ -1193,9 +1193,13 @@ kendo_module({
                 type: MULTIPLE,
                 inclusive: true
             },
-            snapping: true,
-            snapSize: 10,
-            snapAngle: 10
+            snap: {
+                enabled: true,
+                size: 10,
+                angle: 10
+            },
+            shapeOptions: {},
+            connectionOptions: {}
         },
 
         events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
@@ -1269,7 +1273,7 @@ kendo_module({
                 }
                 from = deserializeConnector(this, item.from);
                 to = deserializeConnector(this, item.to);
-                this.addConnection(new Connection(from, to, itemOptions));
+                this.connect(from, to, itemOptions);
             }
         },
         focus: function () {
@@ -1295,7 +1299,8 @@ kendo_module({
          * @returns The newly created connection.
          */
         connect: function (source, target, options) {
-            var connection = new Connection(source, target, options);
+            var conOptions = deepExtend({}, this.options.connectionOptions, options),
+                connection = new Connection(source, target, conOptions);
             return this.addConnection(connection);
         },
         /**
@@ -1342,8 +1347,8 @@ kendo_module({
          * @returns The newly created shape.
          */
         addShape: function (item, options) {
-            var shape;
-            options = deepExtend({undoable: true}, options);
+            var shape,
+                shapeOptions = deepExtend({}, this.options.shapeOptions, {undoable: true}, options);
 
             if (isUndefined(item)) {
                 item = new Point(0, 0);
@@ -1352,10 +1357,10 @@ kendo_module({
                 shape = item;
             }
             else { // consider it a point
-                options = deepExtend(options, { x: item.x, y: item.y });
-                shape = new Shape(options);
+                deepExtend(shapeOptions, { x: item.x, y: item.y });
+                shape = new Shape(shapeOptions);
             }
-            if (options.undoable === true) {
+            if (shapeOptions.undoable === true) {
                 var unit = new kendo.diagram.AddShapeUnit(shape, this);
                 this.undoRedoService.add(unit);
             }
