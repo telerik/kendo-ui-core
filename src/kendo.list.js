@@ -860,7 +860,6 @@ kendo_module({
         _selectItem: function() {
             var that = this,
                 options = that.options,
-                index = that.selectedIndex,
                 useOptionIndex,
                 value;
 
@@ -872,12 +871,8 @@ kendo_module({
 
             if (value) {
                 that.value(value);
-            } else if (!that._bound || index > -1) {
-                if (!that._bound) {
-                    index = options.index;
-                }
-
-                that.select(index);
+            } else if (that._bound === undefined) {
+                that.select(options.index);
             }
         },
 
@@ -910,7 +905,6 @@ kendo_module({
         _options: function(data, optionLabel) {
             var that = this,
                 element = that.element,
-                selectedIndex = element[0].selectedIndex,
                 length = data.length,
                 options = "",
                 option,
@@ -922,10 +916,6 @@ kendo_module({
             if (optionLabel) {
                 idx = 1;
                 options = optionLabel;
-
-                if (optionLabel.indexOf($(element[0].firstChild).text()) === -1) {
-                    selectedIndex += 1;
-                }
             }
 
             for (; idx < length; idx++) {
@@ -955,7 +945,6 @@ kendo_module({
             }
 
             element.html(options);
-            element[0].selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
         },
 
         _reset: function() {

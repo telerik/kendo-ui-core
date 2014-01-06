@@ -177,7 +177,9 @@ kendo_module({
             var that = this,
                 data = that._data(),
                 length = data.length,
-                optionLabel = that.options.optionLabel;
+                optionLabel = that.options.optionLabel,
+                element = that.element[0],
+                selectedIndex;
 
             that.trigger("dataBinding");
             if (that._current) {
@@ -192,12 +194,20 @@ kendo_module({
             }
 
             if (that._isSelect) {
+                selectedIndex = element.selectedIndex;
+
                 if (optionLabel && length) {
                     optionLabel = that._optionLabelText(optionLabel);
+
+                    if (optionLabel === $(element.firstChild).text()) {
+                        selectedIndex += 1;
+                    }
+
                     optionLabel = '<option value="">' + optionLabel + "</option>";
                 }
 
                 that._options(data, optionLabel);
+                element.selectedIndex = selectedIndex === -1 ? 0 : selectedIndex;
             }
 
             if (that._open) {
@@ -423,6 +433,14 @@ kendo_module({
             }
 
             return data;
+        },
+
+        _selectItem: function() {
+            Select.fn._selectItem.call(this);
+
+            if (!this.current()) {
+                this.select(0);
+            }
         },
 
         _keydown: function(e) {

@@ -517,7 +517,7 @@ test("Calling triggerHandler('focus') focuses visible one", function() {
 });
 
 test("resetting dataSource detaches the previouse events", 0, function() {
-    combobox = new ComboBox($("<input/>"));
+    combobox = new ComboBox($("<input/>").appendTo(QUnit.fixture));
 
     var dataSource = combobox.dataSource;
 
@@ -531,7 +531,7 @@ test("resetting dataSource detaches the previouse events", 0, function() {
 });
 
 test("resetting DataSource rebinds the widget", function() {
-    combobox = new ComboBox($("<input/>"),{
+    combobox = new ComboBox($("<input/>").appendTo(QUnit.fixture),{
         dataTextField: "text",
         dataValueField: "value"
     });
@@ -543,8 +543,26 @@ test("resetting DataSource rebinds the widget", function() {
     equal(combobox.ul.children().length, 2);
 });
 
+test("Set data source does not change selected index", function() {
+   var select = $("<select></select>").appendTo(QUnit.fixture);
+
+   combobox = new ComboBox(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        index: -1
+   });
+
+   combobox.setDataSource(new kendo.data.DataSource({
+       data:[{text: 1, value: 1}, {text:2, value:2}]
+   }));
+
+   combobox.open();
+
+   equal(combobox.value(), "");
+});
+
 test("persist tabIndex of the original element", function() {
-    combobox = new ComboBox($("<input tabindex='5'/>"));
+    combobox = new ComboBox($("<input tabindex='5'/>").appendTo(QUnit.fixture));
 
     var text = combobox.input;
 
@@ -552,7 +570,7 @@ test("persist tabIndex of the original element", function() {
 });
 
 test("move accesskey to the visible input", function() {
-    combobox = new ComboBox($("<input accesskey='w'/>"));
+    combobox = new ComboBox($("<input accesskey='w'/>").appendTo(QUnit.fixture));
 
     var text = combobox.input;
 
@@ -569,7 +587,7 @@ test("ComboBox sets element value if option.value is defined", function() {
 });
 
 test("ComboBox sets element value if option.value is defined (select)", function() {
-    combobox = $("<select/>").kendoComboBox({
+    combobox = $("<select/>").appendTo(QUnit.fixture).kendoComboBox({
         dataSource: ["Item1", "Item2"],
         value: "Item2",
     }).data("kendoComboBox");
