@@ -24,7 +24,7 @@ body,h1,h2,h3,p,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#
 body {
     background-color: #fff;
     color: #e0e0e0;
-    font: 400 16px/1.25 Arial, Helvetica, sans-serif;
+    font: 400 12px Arial, Helvetica, sans-serif;
     min-width: 1230px;
 }
 
@@ -757,6 +757,11 @@ div.submenu-box ol {
     font: 24px/1.2 Arial, Helvetica, sans-serif;
 }
 
+.demos-nav.widgetGrid
+{
+    line-height: 20px;
+}
+
 .demos-nav.widgetGrid h2
 {
     -ms-word-wrap: break-word;
@@ -987,6 +992,7 @@ div.submenu-box ol {
 {
     float:left;
     width:48%;
+    font-size: 16px;
 }
 
 .compatibility .column13 a
@@ -997,9 +1003,10 @@ div.submenu-box ol {
 .compatibility .column23
 {
     float:left;
-     width:48%;
+    width:48%;
     margin-right:35px;
     margin-top: 0;
+    font-size: 16px;
 }
 
 .widebox .column23
@@ -1474,6 +1481,7 @@ p#copy
 
 #nav-pager a
 {
+    font-size: 14px;
     text-transform:uppercase;
     display: inline-block;
     position:relative;
