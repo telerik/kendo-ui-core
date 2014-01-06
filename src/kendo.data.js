@@ -1798,6 +1798,8 @@ kendo_module({
                     target.items = target.items.concat(items);
                 }
                 dest.splice(idx--, 1);
+            } else if (group.hasSubgroups && items.length) {
+                mergeGroups(group, items, skip, take);
             } else {
                 items = items.slice(skip, skip + take);
                 group.items = items;

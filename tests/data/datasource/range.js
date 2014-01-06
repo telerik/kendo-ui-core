@@ -988,4 +988,98 @@ test("mergeGroup merges group with previous data if from the same group and mult
     equal(result[1].items.length, 2);
 });
 
+test("mergeGroup merges group with nested groups", function() {
+    var dataSource = new DataSource({
+            serverGrouping: true,
+            group: "foo"
+        }),
+        data = [
+            {
+                field: "foo", value:"1",
+                hasSubgroups: true,
+                items: [
+                    { field: "bar", value: 1, items: [ { foo: 11 }, { foo: 12}] },
+                    { field: "bar", value: 2, items: [ { foo: 21 }, { foo: 22}] }
+                ]
+            }
+        ];
+
+
+    var result = dataSource._mergeGroups([], new kendo.data.ObservableArray(data), 1, 2);
+
+    equal(result.length, 1);
+    equal(result[0].items.length, 2);
+    equal(result[0].items[0].items.length, 1);
+    equal(result[0].items[1].items.length, 1);
+    equal(result[0].items[0].items[0].foo, 12);
+    equal(result[0].items[1].items[0].foo, 21);
+});
+
+test("mergeGroup merges group with two levels of nested groups", function() {
+    var dataSource = new DataSource({
+            serverGrouping: true,
+            group: "foo"
+        }),
+        data = [
+            {
+                field: "foo", value:"1",
+                hasSubgroups: true,
+                items: [
+                    { field: "bar", value: 1, hasSubgroups: true, items: [ { field: "baz", value: 1,  items: [ { foo: 11 }, { foo: 12}] } ] },
+                    { field: "bar", value: 2, hasSubgroups: true, items: [ { field: "baz", value: 2,  items: [ { foo: 21 }, { foo: 22}] } ] }
+                ]
+            }
+        ];
+
+
+    var result = dataSource._mergeGroups([], new kendo.data.ObservableArray(data), 1, 2);
+
+    result = result[0].items;
+
+    equal(result.length, 2);
+    equal(result[0].items.length, 1);
+    equal(result[0].items[0].items[0].foo, 12);
+    equal(result[1].items[0].items[0].foo, 21);
+});
+
+test("range returns requested size when one group is in multiple ranges", function() {
+    var count = 0;
+    var dataSource = new DataSource({
+        transport: {
+            read: function(options) {
+               count ++;
+
+               options.success({
+                   data: [ {
+                       field: "foo",
+                       value: 1,
+                       items: [
+                           { foo: count + "1"},
+                           { foo: count + "2"}
+                       ]
+                   } ],
+                   total: 4
+               });
+            }
+        },
+        serverGrouping: true,
+        serverPaging: true,
+        pageSize: 2,
+        schema: {
+            groups: "data",
+            total: "total"
+        },
+        group: "foo"
+    });
+
+    dataSource.read();
+    dataSource.range(1, 2)
+    var data = dataSource.view();
+
+    equal(data.length, 1);
+    equal(data[0].items.length, 2);
+    equal(data[0].items[0].foo, 12);
+    equal(data[0].items[1].foo, 21);
+});
+
 }());
