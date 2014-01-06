@@ -165,4 +165,35 @@
         equal(sortable.items().find(sortable.placeholder).length, 0, "Placeholder is not part of the items collection");
     });
 
+    test("indexOf method works as expected", 4, function() {
+        var item = element.children().eq(1),
+            filtered = element.find(".filtered"),
+            disabled = element.find(".disabled"),
+            dummy = $("<li>dummy</li>"),
+            sortable = element.data("kendoSortable");
+
+        equal(sortable.indexOf(item), 0, "indexOf returns the correct position");
+        equal(sortable.indexOf(dummy), -1, "indexOf returns -1 if element cannot be found");
+        equal(sortable.indexOf(filtered), -1, "filtered items are excluded");
+        equal(sortable.indexOf(disabled), 1, "disabled items are included");
+    });
+
+    test("indexOf method works as expected if sorting was started", 5, function() {
+        var item = element.children().eq(1),
+            filtered = element.find(".filtered"),
+            disabled = element.find(".disabled"),
+            dummy = $("<li>dummy</li>"),
+            sortable = element.data("kendoSortable");
+
+        press(item, kendo.getOffset(item).left, kendo.getOffset(item).top);
+        moveToSort(item, 10, 10)
+
+        equal(sortable.indexOf(sortable.placeholder), 0, "index of the placeholder is returned correctly");
+
+        equal(sortable.indexOf(item), 0, "indexOf returns the correct position");
+        equal(sortable.indexOf(dummy), -1, "indexOf returns -1 if element cannot be found");
+        equal(sortable.indexOf(filtered), -1, "filtered items are excluded");
+        equal(sortable.indexOf(disabled), 1, "disabled items are included");
+    });
+
 })();
