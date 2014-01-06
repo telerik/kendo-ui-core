@@ -3624,20 +3624,26 @@ function pad(number, digits, end) {
         });
     };
 
-    kendo.parseQueryStringParams = function(url) {
-        var queryString = url.split('?')[1] || "",
-            params = {},
-            paramParts = queryString.split(/&|=/),
-            length = paramParts.length,
-            idx = 0;
+    var URL_PARTS = ["source", "protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+        urlPartsRegExp = /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/,
+        queryStringRegExp = /(?:^|&)([^&=]*)=?([^&]*)/g;
 
-        for (; idx < length; idx += 2) {
-            if(paramParts[idx] !== "") {
-                params[decodeURIComponent(paramParts[idx])] = decodeURIComponent(paramParts[idx + 1]);
-            }
+    kendo.parseUri = function(urlString) {
+        var parts = urlPartsRegExp.exec(urlString),
+           uri = {string: urlString, queryStringParams: {}},
+           idx = URL_PARTS.length - 1;
+
+        while(idx --) {
+            uri[URL_PARTS[idx]] = parts[idx] || "";
         }
 
-        return params;
+        uri.query.replace(queryStringRegExp, function(_, key, value) {
+            if (key) {
+                uri.queryStringParams[decodeURIComponent(key)] = decodeURIComponent(value);
+            }
+        });
+
+        return uri;
     };
 
 })(jQuery);

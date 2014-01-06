@@ -243,10 +243,6 @@ kendo_module({
             .replace(splatParam, '(.*?)') + '$');
     }
 
-    function stripUrl(url) {
-        return url.replace(/(\?.*)|(#.*)/g, "");
-    }
-
     var Route = kendo.Class.extend({
         init: function(route, callback) {
             if (!(route instanceof RegExp)) {
@@ -260,11 +256,9 @@ kendo_module({
         callback: function(url) {
             var params,
                 idx = 0,
-                length,
-                queryStringParams = kendo.parseQueryStringParams(url);
+                length;
 
-            url = stripUrl(url);
-            params = this.route.exec(url).slice(1);
+            params = this.route.exec(url.path).slice(1);
             length = params.length;
 
             for (; idx < length; idx ++) {
@@ -273,13 +267,13 @@ kendo_module({
                 }
             }
 
-            params.push(queryStringParams);
+            params.push(url.queryStringParams);
 
             this._callback.apply(null, params);
         },
 
         worksWith: function(url) {
-            if (this.route.test(url)) {
+            if (this.route.test(url.path || "/")) {
                 this.callback(url);
                 return true;
             } else {
@@ -342,13 +336,9 @@ kendo_module({
         },
 
         _urlChanged: function(e) {
-            var url = e.url;
+            var url = kendo.parseUri(e.url);
 
-            if (!url) {
-                url = "/";
-            }
-
-            if (this.trigger(CHANGE, { url: e.url, params: kendo.parseQueryStringParams(e.url) })) {
+            if (this.trigger(CHANGE, { url: url.string, params: url.queryStringParams })) {
                 e.preventDefault();
                 return;
             }
@@ -366,7 +356,7 @@ kendo_module({
                  }
             }
 
-            if (this.trigger(ROUTE_MISSING, { url: url, params: kendo.parseQueryStringParams(url) })) {
+            if (this.trigger(ROUTE_MISSING, { url: url.path || "/", params: url.queryStringParams })) {
                 e.preventDefault();
             }
         }
