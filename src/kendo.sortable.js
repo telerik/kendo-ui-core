@@ -107,7 +107,7 @@ var __meta__ = {
                 e.preventDefault();
             } else {
 
-                if(this.trigger(START, { item: draggedElement, placeholder: placeholder, draggableEvent: e })) {
+                if(this.trigger(START, { item: draggedElement, draggableEvent: e })) {
                     e.preventDefault();
                 } else {
                     draggedElement.css("display", "none");
@@ -159,10 +159,10 @@ var __meta__ = {
         _dragend: function(e) {
             var placeholder = this.placeholder,
                 draggedElement = this.draggedElement,
-                index = this._indexOf(draggedElement),
+                index = this.indexOf(draggedElement),
                 eventData;
 
-            eventData = { item: draggedElement, index: index, newIndex: this._indexOf(placeholder), draggableEvent: e };
+            eventData = { item: draggedElement, index: index, newIndex: this.indexOf(placeholder), draggableEvent: e };
             if(this.trigger(END, eventData)) {
                 this._cancel();
                 return;
@@ -173,7 +173,7 @@ var __meta__ = {
             draggedElement.show();
             this._draggable.dropped = true;
 
-            eventData = { item: draggedElement, index: this._indexOf(draggedElement), oldIndex: index, draggableEvent: e };
+            eventData = { item: draggedElement, index: this.indexOf(draggedElement), oldIndex: index, draggableEvent: e };
             this.trigger(CHANGE, eventData);
         },
 
@@ -227,17 +227,8 @@ var __meta__ = {
             this.placeholder.remove();
         },
 
-        _indexOf: function(element) {
-            if(element[0] == this.placeholder[0]) {
-                return this.items(true).index(element);
-            } else {
-                return this.items(false).index(element);
-            }
-        },
-
-        items: function(/*internal*/ active) {
+        _items: function() {
             var filter = this.options.filter,
-                placeholder = this.placeholder,
                 items;
 
             if(filter) {
@@ -246,12 +237,27 @@ var __meta__ = {
                 items = this.element.children();
             }
 
-            if(!active && placeholder) {
-                items = items.not(placeholder);
-            }
+            return items;
+        },
 
-            if(active) {
-                items = items.not(this.draggedElement);
+        indexOf: function(element) {
+            var items = this._items(),
+                placeholder = this.placeholder,
+                draggedElement = this.draggedElement;
+
+            if(placeholder && element[0] == placeholder[0]) {
+                return items.not(draggedElement).index(element);
+            } else {
+                return items.not(placeholder).index(element);
+            }
+        },
+
+        items: function() {
+            var placeholder = this.placeholder,
+                items = this._items();
+
+            if(placeholder) {
+                items = items.not(placeholder);
             }
 
             return items;
