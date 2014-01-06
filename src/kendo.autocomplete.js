@@ -559,6 +559,7 @@ kendo_module({
                     }
 
                     that._accessor(text);
+                    that._prev = that._accessor();
                     that.current(li.addClass(SELECTED));
                 }
             }

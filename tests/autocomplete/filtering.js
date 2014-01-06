@@ -196,4 +196,26 @@ test("do not append autocomplete filter twice", function() {
     equal(autocomplete.dataSource.filter().filters.length, 2);
 });
 
+asyncTest("Prevent filtration after item is selected", 0, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"],
+        delay: 0
+    });
+
+    input.val("f").focus();
+    autocomplete.search();
+    autocomplete.ul.find("li:first").click();
+
+    autocomplete.dataSource.bind("change", function() {
+        ok(false);
+    });
+
+    input.trigger("keydown");
+
+    setTimeout(function() {
+        start();
+    }, 100);
+});
+
+
 }());
