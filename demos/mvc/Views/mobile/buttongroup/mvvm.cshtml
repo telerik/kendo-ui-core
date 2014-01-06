@@ -1,4 +1,4 @@
-<div data-model="viewModel" data-role="view" id="button-events" data-title="ButtonGroup MVVM">
+<div data-model="viewModel" data-role="view" id="buttongroup-mvvm" data-title="ButtonGroup MVVM">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             ButtonGroup
@@ -42,7 +42,7 @@
         onSelect: function(e) {
             var buttonGroup = e.sender;
             var index = buttonGroup.current().index();
-            kendoConsole.log("event :: select (" + index + ")");
+            kendoConsole.log("event :: select (" + index + ")", false, "#buttongroup-mvvm");
         }
     });
 </script>

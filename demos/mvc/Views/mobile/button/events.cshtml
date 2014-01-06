@@ -1,4 +1,4 @@
-<div data-role="view"id="button-events" data-title="Button Events">
+<div data-role="view" id="button-events" data-title="Button Events">
     <a id="mobile-button1" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 1</a>
     <a id="mobile-button2" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 2</a>
     <a id="mobile-button3" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 3</a>
@@ -7,6 +7,6 @@
 
 <script>
     function logClick(e) {
-        kendoConsole.log(this.element.prop("id") + " was clicked!");
+        kendoConsole.log(this.element.prop("id") + " was clicked!", false, "#button-events");
     }
 </script>
