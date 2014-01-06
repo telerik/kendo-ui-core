@@ -2,7 +2,6 @@
     <div class="map-wrapper" style="margin: auto;">
         <div id="map"></div>
     </div>
-    <script src="../../content/dataviz/map/js/chroma.min.js"></script>
     <script>
         function createMap() {
             $("#map").kendoMap({
@@ -82,7 +81,7 @@
             kendoConsole.log(kendo.format(
                 "Shape mouseLeave :: {0}", e.shape.dataItem.properties.name
             ));
-        }        
+        }
 
         function onZoomStart(e) {
             kendoConsole.log("Zoom start");

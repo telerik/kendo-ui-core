@@ -6,7 +6,10 @@
 <c:url value="/resources/dataviz/map/countries-users.geo.json" var="readUrl" />
 <c:url value="/resources/dataviz/map/js/chroma.min.js" var="chroma" />
 
-<kendo:map name="map" center="<%= new double[] {30.2681, -97.7448} %>" zoom="3" shapeCreated="onShapeCreated" shapeMouseEnter="onShapeMouseEnter" shapeMouseLeave="onShapeMouseLeave">
+<kendo:map name="map" center="<%= new double[] {30.2681, -97.7448} %>" zoom="3"
+           shapeCreated="onShapeCreated"
+           shapeMouseEnter="onShapeMouseEnter"
+           shapeMouseLeave="onShapeMouseLeave">
     <kendo:map-layers>
         <kendo:map-layer type="shape">
             <kendo:dataSource type="geojson">

@@ -6,22 +6,29 @@
 <c:url value="/resources/dataviz/map/us.geo.json" var="readUrl" />
 
 <kendo:map name="map" center="<%= new double[] {39.6924, -97.3370} %>" zoom="4"
- 	click="onClick" reset="onReset" pan="onPan" panEnd="onPanEnd" 
- 	shapeClick="onShapeClick" shapeCreated="onShapeCreated" shapeMouseEnter="onShapeMouseEnter" shapeMouseLeave="onShapeMouseLeave"
- 	zoomStart="onZoomStart" zoomEnd="onZoomEnd">
-	<kendo:map-layers>
-		<kendo:map-layer type="shape">
-			<kendo:dataSource type="geojson">
-				<kendo:dataSource-transport>
-					<kendo:dataSource-transport-read url="${readUrl}" />
-				</kendo:dataSource-transport>
-			</kendo:dataSource>
-			<kendo:map-layer-style>
-				<kendo:map-layer-style-stroke color="#ccebc5"/>
-				<kendo:map-layer-style-fill color="#b3cde3"/>
-			</kendo:map-layer-style>
-		</kendo:map-layer>
-	</kendo:map-layers>
+    click="onClick"
+    reset="onReset"
+    pan="onPan"
+    panEnd="onPanEnd"
+    shapeClick="onShapeClick"
+    shapeCreated="onShapeCreated"
+    shapeMouseEnter="onShapeMouseEnter"
+    shapeMouseLeave="onShapeMouseLeave"
+    zoomStart="onZoomStart"
+    zoomEnd="onZoomEnd">
+    <kendo:map-layers>
+        <kendo:map-layer type="shape">
+            <kendo:dataSource type="geojson">
+                <kendo:dataSource-transport>
+                    <kendo:dataSource-transport-read url="${readUrl}" />
+                </kendo:dataSource-transport>
+            </kendo:dataSource>
+            <kendo:map-layer-style>
+                <kendo:map-layer-style-stroke color="#ccebc5"/>
+                <kendo:map-layer-style-fill color="#b3cde3"/>
+            </kendo:map-layer-style>
+        </kendo:map-layer>
+    </kendo:map-layers>
 </kendo:map>
 
 <div class="console"></div>
@@ -64,7 +71,7 @@ function onShapeMouseLeave(e) {
     kendoConsole.log(kendo.format(
         "Shape mouseLeave :: {0}", e.shape.dataItem.properties.name
     ));
-}        
+}
 
 function onZoomStart(e) {
     kendoConsole.log("Zoom start");

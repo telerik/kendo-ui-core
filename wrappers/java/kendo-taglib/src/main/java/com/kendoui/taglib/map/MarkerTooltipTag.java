@@ -9,6 +9,8 @@ import com.kendoui.taglib.BaseTag;
 
 
 
+import com.kendoui.taglib.json.Template;
+
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
@@ -128,5 +130,17 @@ public class MarkerTooltipTag extends  BaseTag  /* interfaces */ /* interfaces *
     }
 
 //<< Attributes
+    
+    public void setContent(Template value) {
+        setProperty("content", value);        
+    }
+    
+    public void setContent(String value) {        
+        setProperty("content", value);        
+    }
+    
+    public void setContent(Object value) {        
+        setProperty("content", value);        
+    }
 
 }
