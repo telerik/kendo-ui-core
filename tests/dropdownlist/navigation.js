@@ -327,7 +327,6 @@
         ok(dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
     });
 
-
     test("DropDownList selects by index after continues selection", 2, function() {
         var dropdownlist = input.kendoDropDownList({
             optionLabel: "Any",
