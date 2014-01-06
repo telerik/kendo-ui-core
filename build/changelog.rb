@@ -117,7 +117,7 @@ class ChangeLog
     end
 
     def client
-        @client ||= Github.new :oauth_token => "5dd646a3d9d8d5fb69fe59c163fc84b76fc67fcb", :user => "telerik", :repo => "kendo"
+        @client ||= Github.new :oauth_token => "88b65b5ddb933dcff847eb9b148449283b22e3f2", :user => "telerik", :repo => "kendo"
     end
 
     def closed_issues
