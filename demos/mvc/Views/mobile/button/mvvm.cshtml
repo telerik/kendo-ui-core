@@ -1,4 +1,4 @@
-<div data-model="viewModel" data-role="view" id="button-events" data-title="Button MVVM">
+<div data-model="viewModel" data-role="view" id="button-mvvm" data-title="Button MVVM">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             Button
@@ -37,7 +37,7 @@
         isEnabled: true,
         isVisible: true,
         onClick: function(e) {
-            kendoConsole.log("event :: click");
+            kendoConsole.log("event :: click", false, "#button-mvvm");
         }
     });
 </script>

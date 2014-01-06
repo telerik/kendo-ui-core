@@ -1,5 +1,5 @@
 
-<div data-model="viewModel" data-role="view" id="button-events" data-title="Switch MVVM">
+<div data-model="viewModel" data-role="view" id="switch-mvvm" data-title="Switch MVVM">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             Switch
@@ -41,7 +41,7 @@
         isEnabled: true,
         isVisible: true,
         onChange: function(e) {
-            kendoConsole.log("event :: change (" +  (e.checked ? "checked" : "unchecked") + ")");
+            kendoConsole.log("event :: change (" +  (e.checked ? "checked" : "unchecked") + ")", false, "#switch-mvvm");
         }
     });
 </script>

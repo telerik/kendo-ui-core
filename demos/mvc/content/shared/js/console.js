@@ -1,14 +1,16 @@
-(function($){
-    var count = 0,
-        oldMessage;
+(function($, undefined){
+    var count = 0;
 
     window.kendoConsole = {
-        log: function(message, isError) {
-            var oldContainer = $(".console div:first"),
-                counter = oldContainer.find(".count");
+        log: function(message, isError, container) {
+            var lastContainer = $(".console div:first", container),
+                counter = lastContainer.find(".count").detach(),
+                lastMessage = lastContainer.text(),
+                count = 1 * counter.text() || 0;
 
-            if (!oldContainer.length || message != oldMessage) {
-                oldMessage = message;
+            lastContainer.append(counter);
+
+            if (!lastContainer.length || message !== lastMessage) {
                 count = 1;
 
                 $("<div" + (isError ? " class='error'" : "") + "/>")
@@ -17,7 +19,7 @@
                         backgroundColor: isError ? "#ffbbbb" : "#bbddff"
                     })
                     .html(message)
-                    .prependTo(".console")
+                    .prependTo($(".console", container))
                     .animate({ marginTop: 0 }, 300)
                     .animate({ backgroundColor: isError ? "#ffdddd" : "#ffffff" }, 800);
             } else {
@@ -26,7 +28,7 @@
                 if (counter.length) {
                     counter.html(count);
                 } else {
-                    oldContainer.html(oldMessage)
+                    lastContainer.html(lastMessage)
                         .append("<span class='count'>" + count + "</span>");
                 }
             }
