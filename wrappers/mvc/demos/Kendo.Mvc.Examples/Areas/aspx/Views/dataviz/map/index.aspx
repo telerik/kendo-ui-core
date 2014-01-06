@@ -10,7 +10,7 @@
             layers.Add()
                 .Type(MapLayerType.Tile)
                 .UrlTemplateId("http://tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png")
-                .Subdomains(new string[] { "a", "b", "c" })
+                .Subdomains("a", "b", "c")
                 .Attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>." +
                                 "Tiles courtesy of <a href='http://www.opencyclemap.org/'>Andy Allan</a>");
         })

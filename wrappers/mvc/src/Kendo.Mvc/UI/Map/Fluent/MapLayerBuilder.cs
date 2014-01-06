@@ -34,7 +34,7 @@ using System.Web.Mvc;
         /// Configures of the subdomains.
         /// </summary>
         /// <param name="subdomains">The subdomains</param>
-        public MapLayerBuilder Subdomains(string[] subdomains)
+        public MapLayerBuilder Subdomains(params string[] subdomains)
         {
             container.Subdomains = subdomains;
 
