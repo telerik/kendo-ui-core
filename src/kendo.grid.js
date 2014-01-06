@@ -2569,7 +2569,7 @@ kendo_module({
                 resizable = that.resizable,
                 expander;
 
-            if (that.options.scrollable) {
+            if (that.options.scrollable && that.wrapper.is(":visible")) {
                 expander = that.table.parent().children('.' + hiddenDivClass);
                 that._setContentWidthHandler = proxy(that._setContentWidth, that);
                 if (!that.dataSource || !that.dataSource.view().length) {
@@ -2598,7 +2598,7 @@ kendo_module({
                 header = that.wrapper.children(".k-grid-header"),
                 scrollbar = kendo.support.scrollbar();
 
-            if (options.scrollable) {
+            if (options.scrollable && that.wrapper.is(":visible")) {
 
                 height -= header.outerHeight();
 
