@@ -14250,7 +14250,12 @@ will disable all animations in the widget.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
-
+        <attribute>
+            <description>Specifies if the tooltip content.</description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
     <tag>
