@@ -972,6 +972,7 @@ kendo_module({
                     value = that._value,
                     baseUnit,
                     border = that.options.border || {},
+                    padding = that.options.padding || 0,
                     borderWidth = border.width || 0,
                     quietZoneSize,
                     matrix,
@@ -987,11 +988,11 @@ kendo_module({
 
                 matrix = encodeData(value, that.options.errorCorrection, that.options.encoding);
                 size = that._getSize();
-                contentSize = size - 2 * borderWidth;
+                contentSize = size - 2 * (borderWidth + padding);
                 baseUnit = that._calculateBaseUnit(contentSize, matrix.length);
                 dataSize =  matrix.length * baseUnit;
-
-                quietZoneSize = that._calculateQuietZone(dataSize, contentSize, borderWidth);
+                
+                quietZoneSize = that._calculateQuietZone(dataSize, contentSize, borderWidth, padding);
 
                 view.children = [];
                 view.options.width = size;
@@ -1034,8 +1035,8 @@ kendo_module({
 
                 return baseUnit;
             },
-            _calculateQuietZone: function(dataSize, contentSize, border){
-                return border + (contentSize - dataSize) / 2;
+            _calculateQuietZone: function(dataSize, contentSize, border, padding){
+                return border + padding + (contentSize - dataSize) / 2;
             },
 
             _renderMatrix: function(view, matrix, baseUnit, quietZoneSize){
@@ -1110,6 +1111,7 @@ kendo_module({
                 background: QRCodeDefaults.DEFAULT_BACKGROUND,
                 color: QRCodeDefaults.DEFAULT_DARK_MODULE_COLOR,
                 size: "",
+                padding: 0,
                 border: {
                     color: "",
                     width: 0

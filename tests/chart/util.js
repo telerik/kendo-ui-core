@@ -19,6 +19,7 @@ function ViewStub() {
     log.sector = [];
     log.ring = [];
     log.cubicCurve = [];
+    log.multiLine = [];
 }
 
 ViewStub.prototype = {
@@ -50,6 +51,11 @@ ViewStub.prototype = {
 
     createLine: function(x1, y1, x2, y2, options) {
         this.log.line.push({ x1: x1, y1: y1, x2: x2, y2: y2, options: options });
+        return new kendo.dataviz.ViewElement(options);
+    },
+    
+    createMultiLine: function(elements, options) {
+        this.log.multiLine.push({lines: elements, options: options});
         return new kendo.dataviz.ViewElement(options);
     },
 

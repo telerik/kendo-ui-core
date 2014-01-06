@@ -24,104 +24,18 @@
 <div id="qrCode"></div>      
 <script>             
 $("#qrCode").kendoQRCode({
-    value: new Array(500).join("A"),
-    erroCorrection: "L",
-    size: 65,
-    renderAs: "svg"
-    //encoding: "utf-8"
+    value: "asds",
+    border: {
+        width: 4,
+        color: "black"
+    },
+    padding: 10,
+    size: 240
 });
 </script>
         
         <script>             
-           var utf8Encoder = function(){}
-            
-            utf8Encoder.fn = utf8Encoder.prototype = {
-                encode: function(character){
-                    var code = character.charCodeAt(0),
-                        bytesCount = this.getBytesCount(code),
-                        bc = bytesCount - 1,
-                        result = "";
-
-                    if(bytesCount == 1){
-                        result = toBitsString(code, 8);
-                    }       
-                    else{
-                        var significantOnes = 8 - bytesCount;                
-                        
-                        for(var i = 0; i < bc; i++){
-                            result = toBitsString(code >> (i * 6) & 63 | 128, 8) + result;
-                        }
-                        
-                        result = ((code >> bc * 6) | ((255 >> significantOnes) << significantOnes)).toString(2) + result;
-                    }
-                    return result;
-                },
-                getBytesCount: function(code){
-                    var ranges = this.ranges;
-                    for(var i = 0; i < ranges.length;i++){
-                        if(code < ranges[i]){
-                            return i + 1;
-                        }
-                    }
-                },
-                ranges: [128,2048,65536,2097152,67108864]
-            };
-            var encoder = new utf8Encoder(); 
-          
-
-        function toBitsString(value, length){
-            var result = Number(value).toString(2);
-            if(result.length < length){
-                result = new Array(length - result.length + 1).join(0) + result;
-            }
-            return result;
-        }
-          
-        function printMatrix(matrix){
-            console.log("");
-            var str = "";
-            for(var i = 0; i < matrix.length; i++){              
-                for(var j = 0; j < matrix[i].length; j++){
-                    str += (matrix[i][j] !== undefined ? matrix[i][j]: "x") + " ";
-                }
-                str += "\n";
-            }
-             console.log(str);
-        }   
-            
-            var chars = {"0":0,"1": 1,"2": 2,"3": 3,"4": 4,"5": 5,"6": 6,"7": 7,"8": 8,"9": 9,"A": 10,"B": 11,"C": 12,"D": 13,"E": 14,"F": 15,"G": 16,"H": 17,"I": 18,"J": 19,"K": 20,"L": 21,"M": 22,"N": 23,"O": 24,"P": 25,"Q": 26,"R": 27,"S": 28,"T": 29,"U": 30,"V": 31,"W": 32,"X": 33,"Y": 34,"Z": 35," ": 36,"$": 37,"%": 38,"*": 39,"+": 40,"-": 41,".": 42,"/": 43,":": 44},
-                charArray = [];
-            for(var character in chars){
-                charArray.push(character);            
-            }
-            var start = new Date().getTime();            
-            function randomNum(){
-                var min = 0;
-                var max = 255;
-                var num;
-                    do{
-                        num = Math.floor(Math.random() * (max - min + 1)) + min;
-                    }while(127 < num && num < 160)
-                return num;
-            }
-            
-            function getCodewords(n){
-                var result = [],
-                    code;
-                for(var i =0; i< n;i++){34
-                    code = String.fromCharCode(randomNum());
-                    if(code=='"'){
-                        debugger;
-                        code = '\\\"';
-                    }
-                    if(code == '\\'){
-                        code = "\\\\";
-                    }
-                    result.push(code);
-                }
-                return result
-            }
-         
+        
 
             //alert("rendering took: " + (new Date().getTime() - start) + " miliseconds");
         </script>
