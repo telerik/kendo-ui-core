@@ -224,7 +224,8 @@ kendo_module({
         },
 
         _appLinkClick: function (e) {
-            var remote = e.currentTarget.href && e.currentTarget.href[0] !== "#" && this.options.serverNavigation;
+            var href = $(e.currentTarget).attr("href");
+            var remote = href && href[0] !== "#" && this.options.serverNavigation;
 
             if(!remote && attrValue($(e.currentTarget), "rel") != EXTERNAL) {
                 e.preventDefault();
