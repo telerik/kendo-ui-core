@@ -1893,7 +1893,7 @@ function pad(number, digits, end) {
 
         support.hasNativeScrolling = false;
 
-        if ((mobileOS.ios && mobileOS.majorVersion > 4) || (mobileOS.android && mobileOS.majorVersion > 2) || mobileOS.wp) {
+        if (mobileOS.ios || (mobileOS.android && mobileOS.majorVersion > 2) || mobileOS.wp) {
             support.hasNativeScrolling = mobileOS;
         }
 
@@ -2040,18 +2040,6 @@ function pad(number, digits, end) {
 
         var result = element[type](),
             mobileOS = support.mobileOS;
-
-        if (support.touch && mobileOS.ios && mobileOS.flatVersion < 410) { // Extra processing only in broken iOS'
-            var offset = type == "offset" ? result : element.offset(),
-                position = (result.left == offset.left && result.top == offset.top);
-
-            if (position) {
-                return {
-                    top: result.top - window.scrollY,
-                    left: result.left - window.scrollX
-                };
-            }
-        }
 
         // IE10 touch zoom is living in a separate viewport
         if (support.browser.msie && (support.pointers || support.msPointers) && !positioned && type != "position") {
