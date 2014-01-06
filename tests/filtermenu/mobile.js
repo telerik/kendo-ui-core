@@ -31,6 +31,7 @@
                     left: "",
                     right: ""
                 },
+                pane: pane,
                 dataSource: {
                     schema: {
                         model: {
@@ -65,7 +66,7 @@
         return menu;
     }
 
-    test("find its parent pane", function() {
+    test("uses provided pane", function() {
         var menu = setup();
 
         ok(menu.pane);
@@ -77,9 +78,8 @@
         equal(menu.form.closest(roleSelector("view")).length, 1);
     });
 
-    test("mobile view doesn't wrap the form if pane not found", function() {
-        pane.destroy();
-        var menu = setup();
+    test("mobile view doesn't wrap the form if no pane available", function() {
+        var menu = setup(container, { pane: null });
 
         equal(menu.form.closest(roleSelector("view")).length, 0);
     });
