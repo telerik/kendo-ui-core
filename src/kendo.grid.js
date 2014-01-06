@@ -2878,7 +2878,7 @@ kendo_module({
                                 menu.destroy();
                             }
                             sortable = column.sortable !== false && columnMenu.sortable !== false ? options.sortable : false;
-                            filterable = options.filterable && column.filterable !== false && columnMenu.filterable !== false ? extend({}, column.filterable, options.filterable) : false;
+                            filterable = options.filterable && column.filterable !== false && columnMenu.filterable !== false ? extend({ pane: that.pane }, column.filterable, options.filterable) : false;
                             menuOptions = {
                                 dataSource: that.dataSource,
                                 values: column.values,
@@ -2932,7 +2932,8 @@ kendo_module({
                                     closeCallback: closeCallback,
                                     init: function(e) {
                                         that.trigger(FILTERMENUINIT, { field: e.field, container: e.container });
-                                    }
+                                    },
+                                    pane: that.pane
                                 }
                             );
 
