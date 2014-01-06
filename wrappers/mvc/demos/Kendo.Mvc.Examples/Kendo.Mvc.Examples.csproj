@@ -206,6 +206,7 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
     <Compile Include="Controllers\DataViz\Map\BingController.cs" />
+    <Compile Include="Controllers\DataViz\Map\ApiController.cs" />
     <Compile Include="Controllers\DataViz\Map\EventsController.cs" />
     <Compile Include="Controllers\DataViz\Map\GeojsonController.cs" />
     <Compile Include="Controllers\DataViz\Map\IndexController.cs" />
@@ -728,6 +729,7 @@
     <Content Include="Areas\aspx\Views\dataviz\line_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\step_line.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\map\api.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\pie_labels.aspx" />
@@ -2356,7 +2358,9 @@
     </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\map\api.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
