@@ -1,6 +1,26 @@
+<?php
+require_once '../../lib/Kendo/Autoload.php';
+
+require_once '../../include/header.php';
+
+$layer = new \Kendo\Dataviz\UI\MapLayer();
+$layer->type("tile")
+      ->urlTemplate("http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+      ->subdomains(array('a', 'b', 'c'))
+      ->attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors");
+
+$map = new \Kendo\Dataviz\UI\Map('map');
+$map->center(array(30.2681, -97.7448))
+    ->zoom(3)
+    ->addLayer($layer)
+    ->panEnd('updateControls')
+    ->zoomEnd('updateControls');
+
+?>
+
 <div id="example" class="k-content absConf">
     <div class="map-wrapper" style="margin: auto;">
-        <div id="map"></div>
+        <?php echo $map->render(); ?>
     </div>
     <div class="configuration-horizontal" id="mapConfig">
         <div class="config-section">
@@ -45,36 +65,21 @@
         </div>
     </div>
     <script>
-        function createMap() {
-            $("#map").kendoMap({
-                center: [30.2681, -97.7448],
-                zoom: 3,
-                layers: [{
-                    type: "tile",
-                    urlTemplate: "http://tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
-                    subdomains: ["a", "b", "c"],
-                    attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-                }],
-                panEnd: updateControls,
-                zoomEnd: updateControls
+        $(document).ready(function() {
+            kendo.init($("#mapConfig"));
+
+            $("#center").click( function (e) {
+                $("#map").data("kendoMap").center([
+                    parseFloat($("#centerLat").val()),
+                    parseFloat($("#centerLng").val())
+                ]);
             });
-        }
 
-        $(document).ready(createMap);
-
-        kendo.init($("#mapConfig"));
-
-        $("#center").click( function (e) {
-            $("#map").data("kendoMap").center([
-                parseFloat($("#centerLat").val()),
-                parseFloat($("#centerLng").val())
-            ]);
-        });
-
-        $("#zoom").click( function (e) {
-            $("#map").data("kendoMap").zoom(
-                parseInt($("#zoomLevel").val(), 10)
-            );
+            $("#zoom").click( function (e) {
+                $("#map").data("kendoMap").zoom(
+                    parseInt($("#zoomLevel").val(), 10)
+                );
+            });
         });
 
         function updateControls() {
@@ -87,7 +92,6 @@
                 $("#zoomLevel").data("kendoDropDownList").value(map.zoom());
             }
         }
-
     </script>
     <style scoped>
         .demo-section {
@@ -95,3 +99,4 @@
         }
     </style>
 </div>
+<?php require_once '../../include/footer.php'; ?>
