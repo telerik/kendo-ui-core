@@ -243,6 +243,10 @@ kendo_module({
             .replace(splatParam, '(.*?)') + '$');
     }
 
+    function stripUrl(url) {
+        return url.replace(/(\?.*)|(#.*)/g, "");
+    }
+
     var Route = kendo.Class.extend({
         init: function(route, callback) {
             if (!(route instanceof RegExp)) {
@@ -256,9 +260,11 @@ kendo_module({
         callback: function(url) {
             var params,
                 idx = 0,
-                length;
+                length,
+                queryStringParams = kendo.parseQueryStringParams(url);
 
-            params = this.route.exec(url.path).slice(1);
+            url = stripUrl(url);
+            params = this.route.exec(url).slice(1);
             length = params.length;
 
             for (; idx < length; idx ++) {
@@ -267,13 +273,13 @@ kendo_module({
                 }
             }
 
-            params.push(url.queryStringParams);
+            params.push(queryStringParams);
 
             this._callback.apply(null, params);
         },
 
         worksWith: function(url) {
-            if (this.route.test(url.path || "/")) {
+            if (this.route.test(stripUrl(url))) {
                 this.callback(url);
                 return true;
             } else {
@@ -336,9 +342,13 @@ kendo_module({
         },
 
         _urlChanged: function(e) {
-            var url = kendo.parseUri(e.url);
+            var url = e.url;
 
-            if (this.trigger(CHANGE, { url: url.string, params: url.queryStringParams })) {
+            if (!url) {
+                url = "/";
+            }
+
+            if (this.trigger(CHANGE, { url: e.url, params: kendo.parseQueryStringParams(e.url) })) {
                 e.preventDefault();
                 return;
             }
@@ -356,7 +366,7 @@ kendo_module({
                  }
             }
 
-            if (this.trigger(ROUTE_MISSING, { url: url.path || "/", params: url.queryStringParams })) {
+            if (this.trigger(ROUTE_MISSING, { url: url, params: kendo.parseQueryStringParams(url) })) {
                 e.preventDefault();
             }
         }
