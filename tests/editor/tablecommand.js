@@ -92,7 +92,7 @@ test("table holds its position after undo/redo", function() {
 
     editor.exec("redo");
 
-    equal(editor.value(), "<p>foo</p><table><tbody><tr><td></td></tr></tbody></table><p>bar</p>");
+    equal(editor.value().replace(/<br[^>]*>/g, ""), "<p>foo</p><table><tbody><tr><td></td></tr></tbody></table><p>bar</p>");
 });
 
 }());
