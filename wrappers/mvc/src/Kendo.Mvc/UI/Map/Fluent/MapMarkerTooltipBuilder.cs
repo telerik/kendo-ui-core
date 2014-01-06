@@ -10,9 +10,22 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class MapMarkerTooltipBuilder: TooltipSettingsBuilder<MapMarkerTooltipBuilder>
     {
-        public MapMarkerTooltipBuilder(Tooltip container) :
-            base(container)
+        public MapMarkerTooltipBuilder(MapMarkerTooltip tooltip) :
+            base(tooltip)
         {
+            Tooltip = tooltip;
+        }
+
+        private MapMarkerTooltip Tooltip
+        {
+            get;
+            set;
+        }
+
+        public MapMarkerTooltipBuilder Template(string value)
+        {
+            Tooltip.Template = value;
+            return this;
         }
     }
 }

@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI
             base.WriteInitializationScript(writer);
         }
 
-        public IDictionary<string, object> ToJson()
+        public virtual IDictionary<string, object> ToJson()
         {
             var options = new Dictionary<string, object>(Events);
 
