@@ -66,13 +66,14 @@
 
 .km-vertical .km-collapsible-pane {
     position: absolute;
-    z-index: 2;
+    z-index: 2 !important;
     -webkit-transition: -webkit-transform 350ms ease-out;
-    -webkit-transform: translatex(-100%);
+    -ms-transition: -ms-transform 350ms ease-out;
+    .transform(translatex(-100%));
 }
 
 .km-vertical .km-expanded-splitview .km-collapsible-pane {
-    -webkit-transform: translatex(0);
+    .transform(translatex(0));
 }
 
 .km-expanded-pane-shim {
@@ -86,6 +87,7 @@
 
 .km-expanded-splitview .km-expanded-pane-shim {
     display: block;
+    z-index: 1;
 }
 
 .km-root > *
