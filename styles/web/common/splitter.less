@@ -1,0 +1,146 @@
+/* Splitter */
+
+.k-splitter
+{
+    position: relative;
+    height: 300px;
+}
+
+.k-pane > .k-splitter
+{
+    border-width: 0;
+    overflow: hidden;
+}
+
+.k-splitter .k-pane
+{
+    overflow: hidden;
+}
+
+.k-splitter .k-scrollable
+{
+    overflow: auto;
+}
+
+.k-splitter .k-pane-loading
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+}
+
+.k-ghost-splitbar,
+.k-splitbar
+{
+    position: absolute;
+    border-style: solid;
+    font-size: 0;
+    outline: 0;
+    .prohibit-selection;
+}
+
+.k-splitter .k-ghost-splitbar-horizontal,
+.k-splitter .k-splitbar-horizontal
+{
+    top: 0;
+    width: 5px;
+    border-width: 0 1px;
+    background-repeat: repeat-y;
+}
+
+.k-ghost-splitbar-vertical,
+.k-splitbar-vertical
+{
+    left: 0;
+    height: 5px;
+    border-width: 1px 0;
+    background-repeat: repeat-x;
+}
+
+.k-splitbar-draggable-horizontal
+{
+    cursor: w-resize;
+}
+
+.k-splitbar-draggable-vertical
+{
+    cursor: n-resize;
+}
+
+.k-splitbar .k-resize-handle
+{
+    display: none;
+}
+
+.k-restricted-size-horizontal,
+.k-restricted-size-vertical
+{
+    background-color: #f00;
+}
+
+.k-splitbar-horizontal .k-icon
+{
+    position: absolute;
+    top: 50%;
+    width: 5px;
+    height: 20px;
+    margin-top: -10px;
+}
+
+.k-collapse-prev, .k-collapse-next,
+.k-expand-prev, .k-expand-next { cursor: pointer; }
+
+.k-splitbar-horizontal .k-collapse-prev { margin-top: -31px; }
+.k-splitbar-horizontal .k-collapse-next { margin-top: 11px; }
+
+.k-splitbar-static-horizontal
+{
+    width:1px;
+}
+
+.k-splitbar-static-vertical
+{
+    height:1px;
+}
+
+.k-splitbar-vertical .k-icon
+{
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    height: 5px;
+    margin-left: -10px;
+}
+
+.k-splitbar-vertical .k-collapse-prev { margin-left: -31px; }
+.k-splitbar-vertical .k-collapse-next { margin-left: 11px; }
+
+.k-splitbar-draggable-vertical .k-resize-handle,
+.k-splitbar-draggable-horizontal .k-resize-handle
+{
+    display: inline-block;
+}
+
+.k-splitbar-horizontal .k-resize-handle { background-position: -165px -6px; }
+.k-splitbar-horizontal-hover > .k-resize-handle { background-position: -181px -6px; }
+.k-splitbar-horizontal .k-collapse-prev,
+.k-splitbar-horizontal .k-expand-next { background-position: -6px -174px; }
+.k-splitbar-horizontal-hover > .k-collapse-prev,
+.k-splitbar-horizontal-hover > .k-expand-next { background-position: -22px -174px; }
+.k-splitbar-horizontal .k-collapse-next,
+.k-splitbar-horizontal .k-expand-prev { background-position: -5px -142px; }
+.k-splitbar-horizontal-hover > .k-collapse-next,
+.k-splitbar-horizontal-hover > .k-expand-prev { background-position: -21px -142px; }
+
+.k-splitbar-vertical .k-resize-handle { background-position: -38px -309px; }
+.k-splitbar-vertical-hover > .k-resize-handle { background-position: -70px -309px; }
+.k-splitbar-vertical .k-collapse-prev,
+.k-splitbar-vertical .k-expand-next { background-position: 2px -134px; }
+.k-splitbar-vertical-hover > .k-collapse-prev,
+.k-splitbar-vertical-hover > .k-expand-next { background-position: -14px -134px; }
+.k-splitbar-vertical .k-collapse-next,
+.k-splitbar-vertical .k-expand-prev { background-position: 2px -165px; }
+.k-splitbar-vertical-hover > .k-collapse-next,
+.k-splitbar-vertical-hover > .k-expand-prev { background-position: -14px -165px; }
+

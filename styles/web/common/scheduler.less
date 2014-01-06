@@ -1,0 +1,932 @@
+/* Scheduler */
+
+.k-scheduler-toolbar,
+.k-scheduler-footer
+{
+    border-style:solid;
+}
+
+.k-scheduler-toolbar,
+.k-scheduler-footer
+{
+    line-height:28px;
+    padding:6px;
+}
+
+.k-scheduler-toolbar
+{
+    border-width:0 0 1px;
+}
+
+.k-edit-field.k-scheduler-toolbar
+{
+    border-width: 0;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.k-scheduler-header
+{
+    text-align:center;
+}
+
+.k-scheduler-footer
+{
+    border-width:1px 0 0;
+}
+
+.k-scheduler-toolbar > ul
+{
+    float:right;
+}
+
+.k-scheduler-toolbar > ul:first-child
+{
+    float:left;
+}
+
+.k-scheduler-toolbar > ul > li,
+.k-scheduler-footer > ul > li
+{
+    display:inline-block;
+    border-style:solid;
+    border-width:1px 1px 1px 0;
+}
+
+.k-scheduler .k-scheduler-toolbar .k-nav-current
+{
+    border-width:0;
+}
+
+.k-scheduler-toolbar > ul > li:first-child
+{
+    border-left-width:1px;
+}
+
+.k-scheduler div.k-scheduler-footer ul li
+{
+    margin-right:.6em;
+    border-width:1px;
+}
+
+.k-scheduler-toolbar .k-link,
+.k-scheduler-footer .k-link
+{
+    display: inline-block;
+    padding: @scheduler-link-padding;
+}
+
+.k-scheduler-toolbar .k-nav-prev .k-link,
+.k-scheduler-toolbar .k-nav-next .k-link
+{
+    padding-left:.6em;
+    padding-right:.6em;
+}
+
+.k-ie7 .k-scheduler-toolbar .k-nav-prev .k-link,
+.k-ie7 .k-scheduler-toolbar .k-nav-next .k-link
+{
+    height: 2.3em;
+    margin-top: -1px;
+    vertical-align: middle;
+}
+
+.k-ie7 .k-scheduler-toolbar .k-nav-prev .k-link .k-icon,
+.k-ie7 .k-scheduler-toolbar .k-nav-next .k-link .k-icon
+{
+    margin-top: .5em;
+}
+
+.k-scheduler-toolbar .k-nav-current .k-link
+{
+    padding:0;
+}
+
+.k-scheduler-toolbar .k-nav-current
+{
+    margin:0 1.1em;
+}
+
+.k-scheduler div.k-scheduler-toolbar > ul > li.k-nav-current,
+.k-scheduler .k-nav-current > .k-state-active
+{
+    background: none;
+}
+
+.k-scheduler-mobile .k-scheduler-toolbar+.k-scheduler-toolbar .k-scheduler-navigation
+{
+    width: 100%;
+    text-align: center;
+}
+
+.k-scheduler-mobile .k-scheduler-toolbar+.k-scheduler-toolbar .k-scheduler-navigation > li
+{
+    background: none;
+    border: 0;
+}
+
+.k-scheduler-mobile .k-toolbar .k-nav-next
+{
+    float: right;
+}
+
+.k-scheduler-mobile .k-toolbar .k-nav-prev
+{
+    float: left;
+}
+
+.k-scheduler-toolbar .k-i-calendar,
+.k-scheduler-footer .k-icon
+{
+    margin:-2px 6px 0 0;
+}
+
+.k-scheduler-header,
+.k-scheduler-header-wrap
+{
+    overflow:hidden;
+}
+
+.k-scheduler-header-wrap
+{
+    position:relative;
+    border-style: solid;
+    border-width: 0;
+}
+
+.k-scheduler .k-scrollbar-v .k-scheduler-header-wrap
+{
+    border-right-width: 1px;
+}
+
+.k-scheduler-times,
+.k-scheduler-content
+{
+    position:relative;
+}
+
+.k-scheduler-times
+{
+    overflow:hidden;
+    white-space: nowrap;
+    border-style:solid;
+    border-width:0;
+}
+
+.k-scheduler-content
+{
+    overflow:auto;
+}
+
+.k-scheduler-layout,
+.k-scheduler-table
+{
+    border-spacing:0;
+    width:100%;
+    margin:0;
+    border-collapse:separate;
+}
+
+.k-ie7 .k-scheduler-content .k-scheduler-table
+{
+    width: auto;
+}
+
+.k-scheduler-layout > tbody > tr > td
+{
+    padding: 0;
+    vertical-align: top;
+}
+
+/* fix smashed second layout column in iPad */
+.k-safari .k-scheduler-layout > tbody > tr > td + td
+{
+    width: 100%;
+}
+
+.k-scheduler-table
+{
+    table-layout:fixed;
+}
+
+.k-scheduler-times .k-scheduler-table
+{
+    table-layout:auto;
+}
+
+.k-scheduler-monthview .k-scheduler-content .k-scheduler-table
+{
+    height: 100%;
+}
+
+.k-scheduler-table td,
+.k-scheduler-table th
+{
+    height:1.5em;
+    padding:.334em .5em;
+    font-size: 100%;
+}
+
+.k-scheduler .k-scheduler-table td,
+.k-scheduler .k-scheduler-table th
+{
+    .box-sizing(content-box);
+}
+
+.k-scheduler-monthview .k-hidden,
+.k-scheduler-monthview .k-hidden > div
+{
+    width: 0 !important;
+    overflow: hidden !important;
+}
+
+.k-scheduler-monthview .k-hidden
+{
+    height: 60px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-right-width: 0 !important;
+}
+
+.k-scheduler-monthview > tbody > tr:first-child .k-scheduler-times
+{
+    margin-right: 1px;
+}
+
+.k-scheduler-monthview > tbody > tr:first-child .k-scheduler-times .k-hidden
+{
+    height: auto;
+}
+
+.k-scheduler-monthview .k-scheduler-table td
+{
+    height: 80px;
+    text-align:right;
+}
+
+.k-scheduler-mobile .k-scheduler-monthview .k-scheduler-table td
+{
+    height: 40px;
+}
+
+.k-scheduler-table td,
+.k-scheduler-layout tr + tr .k-scheduler-times th:last-child,
+.k-slot-cell
+{
+    vertical-align: top;
+}
+
+.k-scheduler-mobile .k-scheduler-monthview .k-scheduler-table td
+{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.k-scheduler-mobile .k-scheduler-monthview .k-scheduler-table td span
+{
+    font-size: 1.5em;
+}
+
+.k-scheduler-header th
+{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.k-scheduler-table td,
+.k-scheduler-header th
+{
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+}
+
+.k-scheduler-table td:first-child,
+.k-scheduler-header th:first-child
+{
+    border-left-width: 0;
+}
+
+.k-scheduler-agendaview .k-scheduler-table td:first-child
+{
+    border-left-width: 1px;
+}
+
+.k-scheduler-agendaview .k-scheduler-table td.k-first
+{
+    border-left-width: 0;
+}
+
+.k-scheduler-layout tr + tr .k-scheduler-times tr:last-child > th,
+.k-scheduler-layout tr + tr .k-scheduler-table > tbody > tr:last-child > td,
+.k-scheduler-table > tbody > tr > .k-last
+{
+    border-bottom-width: 0;
+}
+
+.k-scrollbar-h tr + tr .k-scheduler-times,
+.k-scrollbar-h .k-scheduler-content .k-scheduler-table > tbody > tr:last-child > td,
+.k-scheduler-agendaview.k-scrollbar-h .k-scheduler-table > tbody > tr > td.k-last
+{
+    border-bottom-width: 1px;
+}
+
+.k-scheduler-times th
+{
+    text-align:right;
+    padding-right:.6em;
+    border-style:solid;
+    border-width:0 1px 1px 0;
+    border-color:transparent;
+}
+
+.k-scheduler-layout tr + tr .k-scheduler-times th
+{
+    border-bottom-color: transparent;
+}
+
+.k-scheduler-layout tr + tr .k-scheduler-times th.k-slot-cell,
+.k-scheduler-layout tr + tr .k-scheduler-times th.k-scheduler-times-all-day
+{
+    border-bottom-color: inherit;
+}
+
+.k-scheduler .k-middle-row td
+{
+    border-bottom-style:dotted;
+}
+
+.k-scheduler-now-arrow,
+.k-scheduler-now-line
+{
+    position:absolute;
+}
+
+.k-scheduler-now-arrow
+{
+    width:0;
+    height:0;
+    border:solid 5px transparent;
+    left:0;
+}
+
+.k-scheduler-now-line
+{
+    left:5px;
+    right:0;
+    height:1px;
+}
+
+.k-task
+{
+    position:relative;
+}
+
+div.k-more-events
+{
+    text-align:center;
+    font-size:18px;
+    line-height:1.2;
+    padding:0;
+}
+
+.k-more-events > span
+{
+    display:block;
+    margin-top:-.6em;
+}
+
+.k-event,
+.k-more-events
+{
+    position:absolute;
+    border-style:solid;
+    border-width:1px;
+    text-align:left;
+    overflow: hidden;
+}
+
+.k-event
+{
+    cursor: default;
+    min-height: 1.3em;
+}
+
+.k-event-drag-hint
+{
+    filter: alpha(opacity=60);
+    opacity: .6;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+}
+
+.k-scheduler-header .k-event
+{
+    white-space: nowrap;
+}
+
+.k-event-template
+{
+    padding:.3em 1.4em .3em .6em;
+}
+
+.k-event-time
+{
+    display: none;
+    padding-bottom: 0;
+    font-size: .9em;
+}
+
+.k-event-drag-hint .k-event-time
+{
+    display: block;
+}
+
+.k-event-actions,
+.k-event > .k-link,
+.k-task > .k-link
+{
+    position: absolute;
+    top: 3px;
+    right:4px;
+    white-space: nowrap;
+}
+
+.k-event-actions
+{
+    z-index: 1;
+}
+
+.k-scheduler-agendaview .k-task > .k-link
+{
+    top: 0;
+    right: 0;
+}
+
+.k-event-actions:first-child
+{
+    position: static;
+    float: left;
+    margin: 4px 2px 0 4px;
+}
+
+.k-webkit .k-event-actions:first-child
+{
+    margin-top: 3px;
+}
+
+.k-event-actions:first-child > .k-link
+{
+    display: inline-block;
+}
+
+.k-event-delete
+{
+    display: none;
+}
+
+.k-event:hover .k-event-delete,
+tr:hover > td > .k-task .k-event-delete
+{
+    display: inline-block;
+}
+
+.k-event .k-event-top-actions,
+.k-event .k-event-bottom-actions
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.k-event .k-event-bottom-actions
+{
+    top: auto;
+    bottom: 0;
+}
+
+.k-event .k-resize-handle,
+.k-scheduler-mobile .k-event:hover .k-resize-handle
+{
+    position: absolute;
+    visibility: hidden;
+    z-index: 2;
+}
+
+.k-event:hover .k-resize-handle,
+.k-event-active .k-resize-handle,
+.k-scheduler-mobile .k-event-active:hover .k-resize-handle
+{
+    visibility: visible;
+}
+
+.k-event .k-resize-handle:after
+{
+    content: "";
+    position: absolute;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+.k-scheduler-mobile .k-event .k-resize-handle:after
+{
+    filter: none;
+    opacity: 1;
+}
+
+.k-event > .k-resize-n
+{
+    top: 0;
+    left: 0;
+    right: 0;
+    height: .4em;
+}
+
+.k-event > .k-resize-s
+{
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: .4em;
+}
+
+.k-event > .k-resize-e
+{
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: .4em;
+}
+
+.k-event > .k-resize-w
+{
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: .4em;
+}
+
+.k-event > .k-resize-n:after,
+.k-event > .k-resize-s:after
+{
+    top: 1px;
+    left: 50%;
+    margin-left: -1em;
+    width: 2em;
+    height: 1px;
+}
+
+.k-event > .k-resize-s:after
+{
+    top: auto;
+    bottom: 1px;
+}
+
+.k-event > .k-resize-e:after,
+.k-event > .k-resize-w:after
+{
+    left: 1px;
+    top: 50%;
+    margin-top: -.7em;
+    height: 1.4em;
+    width: 1px;
+}
+
+.k-event > .k-resize-e:after
+{
+    left: auto;
+    right: 1px;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-n,
+.k-scheduler-mobile .k-event > .k-resize-s
+{
+    height: .6em;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-e,
+.k-scheduler-mobile .k-event > .k-resize-w
+{
+    width: .6em;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-n:after,
+.k-scheduler-mobile .k-event > .k-resize-s:after
+{
+    top: 0;
+    margin-left: -3em;
+    width: 4em;
+    height: .6em;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-s:after
+{
+    bottom: 0;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-e:after,
+.k-scheduler-mobile .k-event > .k-resize-w:after
+{
+    left: 0;
+    margin-top: -.7em;
+    height: 1.4em;
+    width: .6em;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-e:after
+{
+    right: 0;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-n:after
+{
+    border-radius: 0 0 4px 4px;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-s:after
+{
+    border-radius: 4px 4px 0 0;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-w:after
+{
+    border-radius: 0 4px 4px 0;
+}
+
+.k-scheduler-mobile .k-event > .k-resize-e:after
+{
+    border-radius: 4px 0 0 4px;
+}
+
+.k-scheduler-mobile .k-scheduler-monthview .k-events-container
+{
+    position: absolute;
+    text-align: center;
+    height: 6px;
+    line-height: 6px;
+}
+
+.k-scheduler-mobile .k-scheduler-monthview .k-event
+{
+    position: static;
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    min-height: 0;
+    margin: 1px;
+}
+
+.k-scheduler-marquee
+{
+    border-style: solid;
+    border-width: 0;
+}
+
+.k-scheduler-marquee.k-first:before,
+.k-scheduler-marquee.k-last:after
+{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 3px;
+}
+
+div.k-scheduler-marquee:before
+{
+    top: 0;
+    left: 0;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+}
+
+div.k-scheduler-marquee:after
+{
+    bottom: 0;
+    right: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+
+.k-scheduler-marquee .k-label-top
+{
+    position: absolute;
+    top: .3em;
+    left: .8em;
+    font-size: .8em;
+}
+
+.k-scheduler-marquee .k-label-bottom
+{
+    position: absolute;
+    bottom: .3em;
+    right: .81em;
+    font-size: .8em;
+}
+
+.k-scheduler-quickedit .k-textbox
+{
+    width: 200px;
+}
+
+.k-tooltip-bottom
+{
+    text-align: left;
+}
+
+.k-tooltip-bottom .k-button
+{
+    float: left;
+    margin-right: .3em;
+}
+
+.k-tooltip-bottom .k-quickedit-details
+{
+    float: right;
+    margin-right:0;
+}
+
+.k-scheduler-agendaview .k-scheduler-table th,
+.k-scheduler-agendaview .k-scheduler-table td
+{
+    text-align:left;
+}
+
+.k-scheduler-times .k-slot-cell,
+.k-scheduler-groupcolumn
+{
+    width: 6em;
+}
+
+.k-scheduler-datecolumn
+{
+    width: 12em;
+}
+
+.k-scheduler-timecolumn
+{
+    width: 11em;
+}
+
+.k-scheduler-timecolumn > div
+{
+    position:relative;
+    vertical-align: top;
+}
+
+.k-webkit .k-scheduler-timecolumn > div > .k-icon
+{
+    vertical-align: top;
+}
+
+.k-scheduler-timecolumn > div > .k-i-arrow-e
+{
+    position: absolute;
+    right: -4px;
+}
+
+.k-scheduler-timecolumn .k-i-arrow-w
+{
+    margin-left: -4px;
+}
+
+.k-scheduler-mark
+{
+    display:inline-block;
+    width:1em;
+    height:1em;
+    vertical-align:middle;
+    margin-right:.5em;
+}
+
+.k-scheduler-agendaday
+{
+    float:left;
+    margin:0 .2em 0 0;
+    font-size:3em;
+    font-weight:normal;
+}
+
+.k-scheduler-agendaweek
+{
+    display:block;
+    margin:.4em 0 0;
+    font-size:1.1em;
+    font-style:normal;
+}
+
+.k-scheduler-agendadate
+{
+    font-size:.8em;
+}
+
+.k-scheduler-timecolumn
+{
+    white-space:nowrap;
+}
+
+.k-scheduler-edit-form .k-edit-form-container,
+.k-scheduler-timezones .k-edit-form-container
+{
+    width: 520px;
+}
+
+.k-scheduler-edit-form .k-edit-label
+{
+    width: 17%;
+}
+
+.k-scheduler-edit-form .k-edit-field
+{
+    width: 77%;
+}
+
+.k-scheduler-edit-form .k-textbox[name="title"],
+.k-scheduler-edit-form textarea.k-textbox
+{
+    width: 100%;
+}
+
+.k-scheduler-edit-form textarea.k-textbox
+{
+    min-height: 4em;
+    resize: vertical;
+}
+
+.k-scheduler-edit-form > .k-edit-box:first-child .k-datetimepicker
+{
+    margin-right: 1em;
+}
+
+.km-pane-wrapper .k-scheduler-edit-form .k-edit-buttons
+{
+    clear: right;
+    margin-right: 2%;
+    margin-left: 2%;
+    padding: 0 0 .6em;
+}
+
+.k-edit-box
+{
+    float: left;
+}
+
+.k-edit-box + .k-edit-box
+{
+    float: right;
+}
+
+.k-scheduler-edit-form label + input
+{
+    margin-left: 1em;
+}
+
+.k-edit-field > ul.k-reset > li
+{
+    margin: .2em 0 .4em;
+    line-height: 2.4;
+}
+
+.k-edit-field > ul.k-reset.k-toolbar > li
+{
+    margin: 0;
+}
+
+.k-edit-field > ul.k-reset .k-widget
+{
+    margin-left: .8em;
+}
+
+.k-edit-field > ul.k-reset .k-numerictextbox,
+.k-edit-field span.k-recur-interval
+{
+    width: 5em;
+}
+
+.k-edit-field > ul.k-reset .k-dropdown,
+.k-edit-field > ul.k-reset .k-datepicker,
+div[name="recurrenceRule"] > .k-dropdown
+{
+    width: 9em;
+}
+
+.k-popup-message
+{
+    margin:0;
+    padding: 1em 0 2em;
+    text-align: center;
+}
+
+.k-scheduler-timezones .k-dropdown:first-child
+{
+    width: 100%;
+}
+
+.k-scheduler-timezones .k-dropdown + .k-dropdown
+{
+    margin: .5em 0 .7em;
+}
+

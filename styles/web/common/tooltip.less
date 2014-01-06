@@ -1,0 +1,101 @@
+/* Tooltip */
+
+.k-tooltip
+{
+    position: absolute;
+    z-index: 12000;
+    border-style: solid;
+    border-width: 1px;
+    padding: 4px 5px 4px 6px;
+    background-repeat: repeat-x;
+
+    min-width: 20px; /*slider tooltip only*/
+    text-align: center; /*slider tooltip only*/
+}
+
+.k-tooltip-button
+{
+    text-align: right;
+    height: 0;
+}
+
+.k-tooltip-content
+{
+    height: 100%;
+}
+
+.k-tooltip-closable .k-tooltip-content
+{
+    padding-right: 20px;
+}
+
+span.k-tooltip
+{
+    position: static;
+    display: inline-block;
+    border-width: 1px;
+    padding: 2px 5px 1px 6px;
+}
+
+.k-invalid-msg
+{
+    display: none;
+}
+
+.k-callout
+{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px;
+    border-color: transparent;
+}
+
+.k-callout-n
+{
+    top: -13px;
+    left: 50%;
+}
+
+.k-callout-w
+{
+    top: 50%;
+    left: -13px;
+}
+
+.k-callout-s
+{
+    left: 50%;
+    bottom: -13px;
+}
+
+.k-callout-e
+{
+    top: 50%;
+    right: -13px;
+}
+
+.k-slider-tooltip .k-callout-n,
+.k-slider-tooltip .k-callout-s
+{
+    margin-left: -6px;
+}
+
+.k-slider-tooltip .k-callout-w,
+.k-slider-tooltip .k-callout-e
+{
+    margin-top: -6px;
+}
+
+.k-tooltip-validation .k-warning
+{
+    vertical-align: text-top;
+    margin-right: 3px;
+}
+
+.k-tooltip-validation
+{
+    z-index: 9999;
+}
+

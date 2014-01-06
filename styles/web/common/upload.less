@@ -1,0 +1,193 @@
+/* Upload */
+
+html .k-upload
+{
+    position: relative;
+}
+
+html .k-upload-empty
+{
+    border-width: 0;
+    background: none;
+}
+
+.k-dropzone em,
+.k-upload-button
+{
+    vertical-align: middle;
+}
+
+.k-ie7 .k-dropzone em, .k-ie7 .k-upload-button { vertical-align: baseline; }
+
+.k-dropzone,
+.k-file
+{
+    position: relative;
+}
+
+.k-dropzone
+{
+    border-style: solid;
+    border-width: 0;
+    padding: .8em;
+    background-color: transparent;
+}
+
+.k-dropzone em
+{
+    visibility: hidden;
+    margin-left: .6em;
+}
+
+.k-dropzone-active em
+{
+    visibility: visible;
+}
+
+.k-upload-button
+{
+    position: relative;
+    min-width: 7.167em;
+    overflow: hidden !important; /* important required by IE7 */
+    direction: ltr;
+}
+
+.k-upload-sync .k-upload-button,
+.k-ie7 .k-upload-button,
+.k-ie8 .k-upload-button,
+.k-ie9 .k-upload-button
+{
+    margin: .8em;
+}
+
+.k-upload-button input
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    font: 200px monospace !important; /* critical for correct operation */
+    filter: alpha(opacity=0);
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.k-upload-files
+{
+    margin: 0 0 .6em;
+    line-height: 2.66;
+    border-style: solid;
+    border-width: 1px 0 0;
+}
+
+.k-upload-files .k-button
+{
+    padding: 0;
+}
+
+.k-upload-files .k-button,
+.k-upload-status-total .k-icon
+{
+    margin-left: 8px;
+}
+
+.k-ie7 .k-upload-files .k-button{line-height: 1;} /*IE7*/
+
+.k-upload .k-fail
+{
+    background-position: -161px -111px;
+}
+
+.k-si-refresh { .sprite-hoverable(10, 8); }
+.k-si-tick, .k-success { .sprite-hoverable(10, 6); }
+.k-si-cancel { .sprite-hoverable(10, 7); }
+
+.k-file
+{
+    border-style: solid;
+    border-width: 0 0 1px;
+    padding: .167em .167em .167em .8em;
+}
+
+.k-file .k-icon
+{
+    position: relative;
+}
+
+.k-file > .k-icon
+{
+    .sprite-hoverable(7, 18);
+}
+
+.k-filename
+{
+    position: relative;
+    display: inline-block;
+    min-width: 10em;
+    max-width: 16.667em;
+    vertical-align: middle;
+    margin-left: 1em;
+    padding-bottom: 0.167em;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.k-upload-status
+{
+    position: absolute;
+    right: 12px;
+    top: .6em;
+    line-height: .7em;
+}
+
+.k-upload-status .k-button,
+.k-upload-status .k-warning
+{
+    vertical-align: text-bottom;
+}
+
+.k-dropzone .k-upload-status
+{
+    line-height: 2.4;
+}
+
+.k-ie8 .k-upload-status-total
+{
+    line-height: 29px;
+}
+
+.k-progress
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.k-upload-selected
+{
+    min-width: 7.167em;
+    margin: 0.25em 0 0;
+
+    .box-sizing(content-box);
+}
+.k-ie7 .k-upload-selected { min-width: 100px; }
+
+.k-upload-selected,
+.k-upload-cancel
+{
+    margin-bottom: .8em;
+}
+
+.k-upload-selected
+{
+    margin-left: .8em;
+    margin-right: .2em;
+}
+
+

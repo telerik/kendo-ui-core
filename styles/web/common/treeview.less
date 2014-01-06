@@ -1,0 +1,100 @@
+/* TreeView */
+
+div.k-treeview
+{
+    /* due to k-widget */
+    border-width: 0;
+    background: none;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.k-treeview .k-item
+{
+    display: block;
+    border-width: 0;
+    margin: 0;
+    padding: 0 0 0 16px;
+}
+
+.k-treeview > .k-group,
+.k-treeview .k-item > .k-group,
+.k-treeview .k-content
+{
+    margin: 0;
+    padding: 0;
+    background: none;
+    list-style-type: none;
+    position: relative;
+}
+
+.k-treeview .k-icon,
+.k-treeview .k-image,
+.k-treeview .k-sprite,
+.k-treeview .k-checkbox,
+.k-treeview .k-in
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.k-treeview .k-icon,
+.k-treeview .k-in
+{
+    vertical-align: middle;
+}
+
+.k-treeview .k-request-retry
+{
+    vertical-align: baseline;
+}
+
+.k-treeview .k-plus,
+.k-treeview .k-minus,
+.k-treeview .k-plus-disabled,
+.k-treeview .k-minus-disabled
+{
+    margin-top: 0.25em;
+    margin-left: -16px;
+    cursor: pointer;
+}
+
+.k-treeview .k-plus-disabled,
+.k-treeview .k-minus-disabled
+{
+    cursor: default;
+}
+
+.k-treeview .k-sprite,
+.k-treeview .k-image
+{
+    margin-right: 3px;
+}
+
+.k-treeview .k-in
+{
+    margin: @treeview-inner-margin;
+    padding: @treeview-inner-padding;
+    line-height: 1.3333em;
+    text-decoration: none;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.k-treeview span.k-in
+{
+    cursor: default;
+}
+
+.k-treeview .k-drop-hint
+{
+    position: absolute;
+    z-index: 10000;
+    visibility: hidden;
+    width: 80px;
+    height: 5px;
+    margin-top: -3px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+

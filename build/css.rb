@@ -62,9 +62,9 @@ def find_less_prerequisites(lessfile)
 
     less = File.read(src)
 
-    prerequisites = FileList[less.scan(/@import "(.+)";/).flatten].pathmap("#{dirname}/%f")
+    prerequisites = FileList[less.scan(/@import "(.+)";/).flatten].pathmap("#{dirname}/%p")
 
-    [lessfile].concat(prerequisites)
+    [lessfile, prerequisites, prerequisites.map(&method(:find_less_prerequisites)) ].flatten.uniq
 end
 
 #Build styles/kendo*.css files by running less over styles/kendo*.less
