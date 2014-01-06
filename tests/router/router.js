@@ -144,6 +144,22 @@ test("parses optional params", 4, function() {
     navigate("/foo");
 });
 
+test("parses optional params when query string is present", 2, function() {
+    var router = new kendo.Router();
+
+    router.route("/items(/:foo)", function(foo) {
+        if (foo) {
+            equal(foo, "foo");
+        } else {
+            ok(true);
+        }
+    });
+
+    router.start();
+    navigate("/items/foo?a=2");
+    navigate("/items?a=2");
+});
+
 test("parses optional params and query string params", 7, function() {
     var router = new kendo.Router();
 
