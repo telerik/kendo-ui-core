@@ -10,10 +10,10 @@ namespace Kendo.Mvc.UI
     {
         public MapMarkerDefaultsSettings(Map map)
         {
-            Tooltip = new Tooltip(map.ViewContext, map.Initializer, map.ViewData);
+            Tooltip = new MapMarkerTooltip(map.ViewContext, map.Initializer, map.ViewData);
         }
 
-        public Tooltip Tooltip { get; set; }
+        public MapMarkerTooltip Tooltip { get; set; }
         public MapMarkersShape? Shape { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)

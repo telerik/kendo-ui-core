@@ -870,6 +870,7 @@
     <Compile Include="UI\HierarchicalDataSource\Fluent\HierarchicalModelDescriptorBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSource.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptor.cs" />
+    <Compile Include="UI\Map\MapMarkerTooltip.cs" />
     <Compile Include="UI\Map\Fluent\MapMarkerTooltipBuilder.cs" />
     <Compile Include="UI\Map\Fluent\GeoJsonDataSourceBuilder.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDataSourceBuilder.cs" />

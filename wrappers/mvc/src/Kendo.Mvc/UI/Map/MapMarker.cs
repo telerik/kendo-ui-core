@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI
     {
         public MapMarker(Map map)
         {
-            Tooltip = new Tooltip(map.ViewContext, map.Initializer, map.ViewData);
+            Tooltip = new MapMarkerTooltip(map.ViewContext, map.Initializer, map.ViewData);
             HtmlAttributes = new RouteValueDictionary();
         }
 
@@ -26,7 +26,7 @@ namespace Kendo.Mvc.UI
 
         public double[] Location { get; set; }
 
-        public Tooltip Tooltip { get; set; }
+        public MapMarkerTooltip Tooltip { get; set; }
 
         public MapMarkersShape? Shape { get; set; }
 
