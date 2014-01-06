@@ -185,7 +185,7 @@
         equal(draggedElement.index(), filteredIndex, "draggedElement did not change its position");
     });
 
-    test("filtered items are valid drop targets", 1, function() {
+    test("filtered items are not valid drop targets", 1, function() {
         var draggedElement = element.children().eq(2),
             draggableOffset = kendo.getOffset(draggedElement),
             targetElement = element.children().eq(filteredIndex),
