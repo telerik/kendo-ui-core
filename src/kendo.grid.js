@@ -3154,7 +3154,7 @@ var __meta__ = {
             return group ? group.length : 0;
         },
 
-        _tmpl: function(rowTemplate, columns, alt, skipGroupCell) {
+        _tmpl: function(rowTemplate, columns, alt, skipGroupCells) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 idx,
@@ -3188,7 +3188,7 @@ var __meta__ = {
 
                 rowTemplate += " role='row'>";
 
-                if (groups > 0 && !skipGroupCell) {
+                if (groups > 0 && !skipGroupCells) {
                     rowTemplate += groupCells(groups);
                 }
 
@@ -3323,23 +3323,27 @@ var __meta__ = {
             if ((that._group && !isEmptyObject(aggregates)) || (!isEmptyObject(aggregates) && !footer.length) ||
                 grep(that.columns, function(column) { return column.footerTemplate; }).length) {
 
-                that.footerTemplate = that._footerTmpl(aggregates, "footerTemplate", "k-footer-template");
+                that.footerTemplate = that._footerTmpl(that.columns, aggregates, "footerTemplate", "k-footer-template");
             }
 
             if (groups && grep(that.columns, function(column) { return column.groupFooterTemplate; }).length) {
                 aggregates = $.map(groups, function(g) { return g.aggregates; });
-                that.groupFooterTemplate = that._footerTmpl(aggregates, "groupFooterTemplate", "k-group-footer");
+
+                that.groupFooterTemplate = that._footerTmpl(columns, aggregates, "groupFooterTemplate", "k-group-footer", columnsStatic.length);
+
+                if (columnsStatic.length) {
+                    that.staticGroupFooterTemplate = that._footerTmpl(columnsStatic, aggregates, "groupFooterTemplate", "k-group-footer");
+                }
             }
         },
 
-        _footerTmpl: function(aggregates, templateName, rowClass) {
+        _footerTmpl: function(columns, aggregates, templateName, rowClass, skipGroupCells) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 paramName = settings.paramName,
                 html = "",
                 idx,
                 length,
-                columns = that.columns,
                 template,
                 type,
                 storage = {},
@@ -3351,7 +3355,7 @@ var __meta__ = {
 
             html += '<tr class="' + rowClass + '">';
 
-            if (groups > 0) {
+            if (groups > 0 && !skipGroupCells) {
                 html += groupCells(groups);
             }
 
@@ -3359,7 +3363,7 @@ var __meta__ = {
                 html += '<td class="k-hierarchy-cell">&nbsp;</td>';
             }
 
-            for (idx = 0, length = that.columns.length; idx < length; idx++) {
+            for (idx = 0, length = columns.length; idx < length; idx++) {
                 column = columns[idx];
                 template = column[templateName];
                 type = typeof template;
@@ -3745,10 +3749,12 @@ var __meta__ = {
             }
         },
 
-        _rowsHtml: function(data, rowTemplate, altRowTemplate) {
+        _rowsHtml: function(data, templates) {
             var that = this,
                 html = "",
                 idx,
+                rowTemplate = templates.rowTemplate,
+                altRowTemplate = templates.altRowTemplate,
                 length;
 
             for (idx = 0, length = data.length; idx < length; idx++) {
@@ -3764,7 +3770,7 @@ var __meta__ = {
             return html;
         },
 
-        _groupRowHtml: function(group, colspan, level, groupHeaderBuilder, rowTemplate, altRowTemplate) {
+        _groupRowHtml: function(group, colspan, level, groupHeaderBuilder, templates) {
             var that = this,
                 html = "",
                 idx,
@@ -3775,6 +3781,9 @@ var __meta__ = {
                 text =  (column.title || field) + ': ' + formatGroupValue(group.value, column.format, column.values),
                 data = extend({}, { field: group.field, value: group.value }, group.aggregates[group.field]),
                 footerDefaults = that._groupAggregatesDefaultObject || {},
+                rowTemplate = templates.rowTemplate,
+                altRowTemplate = templates.altRowTemplate,
+                groupFooterTemplate = templates.groupFooterTemplate,
                 groupItems = group.items;
 
             if (template) {
@@ -3785,14 +3794,14 @@ var __meta__ = {
 
             if(group.hasSubgroups) {
                 for(idx = 0, length = groupItems.length; idx < length; idx++) {
-                    html += that._groupRowHtml(groupItems[idx], colspan - 1, level + 1, groupHeaderBuilder, rowTemplate, altRowTemplate);
+                    html += that._groupRowHtml(groupItems[idx], colspan - 1, level + 1, groupHeaderBuilder, templates);
                 }
             } else {
-                html += that._rowsHtml(groupItems, rowTemplate, altRowTemplate);
+                html += that._rowsHtml(groupItems, templates);
             }
 
-            if (that.groupFooterTemplate) {
-                html += that.groupFooterTemplate(extend(footerDefaults, group.aggregates));
+            if (groupFooterTemplate) {
+                html += groupFooterTemplate(extend(footerDefaults, group.aggregates));
             }
             return html;
         },
@@ -4202,8 +4211,12 @@ var __meta__ = {
                 idx,
                 length,
                 html = "",
-                isStatic = that.staticContent != null;
-
+                isStatic = that.staticContent != null,
+                templates = {
+                        rowTemplate: that.rowTemplate,
+                        altRowTemplate: that.altRowTemplate,
+                        groupFooterTemplate: that.groupFooterTemplate
+                    };
 
             colspan = isStatic ? colspan - staticColumns(that.columns).length : colspan;
 
@@ -4220,10 +4233,10 @@ var __meta__ = {
                 }
 
                 for (idx = 0, length = data.length; idx < length; idx++) {
-                    html += that._groupRowHtml(data[idx], colspan, 0,  isStatic ? groupRowStaticContentBuilder : groupRowBuilder, that.rowTemplate, that.altRowTemplate);
+                    html += that._groupRowHtml(data[idx], colspan, 0,  isStatic ? groupRowStaticContentBuilder : groupRowBuilder, templates);
                 }
             } else {
-                html += that._rowsHtml(data, that.rowTemplate, that.altRowTemplate);
+                html += that._rowsHtml(data, templates);
             }
 
             that.tbody = appendContent(that.tbody, that.table, html);
@@ -4232,18 +4245,24 @@ var __meta__ = {
        _renderStaticContent: function(data, colspan, groups) {
            var html = "",
                idx,
-               length;
+               length,
+               templates = {
+                   rowTemplate: this.staticRowTemplate,
+                   altRowTemplate: this.staticAltRowTemplate,
+                   groupFooterTemplate: this.staticGroupFooterTemplate
+               };
 
            if (this.staticContent) {
 
                var table = this.staticContent.children("table");
+
                if (groups > 0) {
                    colspan = colspan - nonStaticColumns(this.columns).length;
                    for (idx = 0, length = data.length; idx < length; idx++) {
-                       html += this._groupRowHtml(data[idx], colspan, 0, groupRowBuilder, this.staticRowTemplate, this.staticAltRowTemplate);
+                       html += this._groupRowHtml(data[idx], colspan, 0, groupRowBuilder, templates);
                    }
                } else {
-                   html = this._rowsHtml(data, this.staticRowTemplate, this.staticAltRowTemplate);
+                   html = this._rowsHtml(data, templates);
                }
                appendContent(table.children("tbody"), table, html);
 

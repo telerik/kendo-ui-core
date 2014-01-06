@@ -352,4 +352,38 @@
         ok(grid.content.find(".k-grouping-row:first").next().is(":visible"));
     });
 
+    test("group footer is added to the static content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true, groupFooterTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.staticContent.find(".k-group-footer").length, 1);
+        equal(grid.content.find(".k-group-footer").length, 1);
+    });
+
+    test("group cell is added to the group footers in the static content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true, groupFooterTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.staticContent.find("tr.k-group-footer .k-group-cell").length, 1);
+    });
+
+    test("group cell is not added to the group footers in the content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true, groupFooterTemplate: "foo" }, "bar", "baz"]
+        });
+
+        ok(!grid.content.find("tr.k-group-footer .k-group-cell").length);
+    });
+
 })();
