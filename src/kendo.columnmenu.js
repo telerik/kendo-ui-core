@@ -60,7 +60,7 @@ kendo_module({
         _init: function() {
             var that = this;
 
-            that.pane = that.element.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
+            that.pane = that.options.pane;
             if (that.pane) {
                 that._isMobile = true;
             }

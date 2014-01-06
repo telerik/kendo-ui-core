@@ -2889,6 +2889,7 @@ kendo_module({
                                 owner: that,
                                 closeCallback: closeCallback,
                                 init: initCallback,
+                                pane: that.pane,
                                 filter: isMobile ? ":not(.k-column-active)" : ""
                             };
 
