@@ -4913,9 +4913,8 @@ kendo_module({
                 series = segment.series,
                 defaults = series._defaults,
                 color = series.color,
-                lineOptions,
-                linePoints = segment._linePoints(),
-                areaPoints = segment.points();
+                elements = [],
+                line;
 
             ChartElement.fn.getViewElements.call(segment, view);
 
@@ -4923,22 +4922,27 @@ kendo_module({
                 color = defaults.color;
             }
 
-            lineOptions = deepExtend({
-                    color: color,
-                    opacity: series.opacity
-                }, series.line
-            );
+            elements.push(this.createArea(view, color));
+            line = this.createLine(view, color);
+            if (line) {
+                elements.push(line);
+            }
 
-            return [
-                view.createPolyline(areaPoints, false, {
-                    id: segment.id,
-                    fillOpacity: series.opacity,
-                    fill: color,
-                    stack: series.stack,
-                    data: { modelId: segment.modelId },
-                    zIndex: -1
-                }),
-                view.createPolyline(linePoints, false, {
+            return elements;
+        },
+
+        createLine: function(view, color) {
+            var segment = this,
+                series = segment.series,
+                lineOptions = deepExtend({
+                        color: color,
+                        opacity: series.opacity
+                    }, series.line
+                ),
+                element;
+
+            if (lineOptions.visible !== false && lineOptions.width > 0) {
+                element = view.createPolyline(segment._linePoints(), false, {
                     stroke: lineOptions.color,
                     strokeWidth: lineOptions.width,
                     strokeOpacity: lineOptions.opacity,
@@ -4947,8 +4951,24 @@ kendo_module({
                     strokeLineCap: "butt",
                     zIndex: -1,
                     align: false
-                })
-            ];
+                });
+            }
+
+            return element;
+        },
+
+        createArea: function(view, color) {
+            var segment = this,
+                series = segment.series;
+
+            return view.createPolyline(segment.points(), false, {
+                id: segment.id,
+                fillOpacity: series.opacity,
+                fill: color,
+                stack: series.stack,
+                data: { modelId: segment.modelId },
+                zIndex: -1
+            });
         }
     };
 
@@ -5062,6 +5082,7 @@ kendo_module({
 
             return areaPoints;
         },
+
         getViewElements: function(view) {
             var segment = this,
                 series = segment.series,

@@ -708,7 +708,7 @@
                 ]
             });
 
-            equal(view.log.path.length, 2);
+            equal(view.log.path.length, 1);
         });
 
         test("area continues after missing value", function() {

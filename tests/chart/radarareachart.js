@@ -68,7 +68,7 @@
     });
 
     test("stacked series close around inner series", function() {
-        arrayClose(mapPoints(view.log.path[2].points), [
+        arrayClose(mapPoints(view.log.path[1].points), [
             [400, 168], [630, 433], [285, 366], [400, 168],
             [400, 234], [343, 333], [515, 366], [400, 234]
         ], TOLERANCE);
