@@ -714,6 +714,7 @@ if (require.main === module) (function(){
         .describe("build", "Build a given component")
         .describe("full", "Full build")
         .describe("min", "Minified build")
+        .describe("kendo-config", "Generate kendo-config.json")
         .boolean("all-deps")
         .boolean("direct-deps")
         .boolean("bundle-all")
@@ -722,6 +723,12 @@ if (require.main === module) (function(){
         .string("build")
         .wrap(80)
         .argv;
+
+    if (ARGV["kendo-config"]) {
+        var cf = buildKendoConfig();
+        SYS.puts(JSON.stringify(cf, null, 2));
+        return;
+    }
 
     var REST = ARGV._.slice();
 
