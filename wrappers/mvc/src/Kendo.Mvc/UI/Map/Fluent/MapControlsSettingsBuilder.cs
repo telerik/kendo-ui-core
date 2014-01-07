@@ -22,11 +22,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Enables or disables the built-in attribution control.
         /// </summary>
-        /// <param name="value">The value that configures the attribution.</param>
-        public MapControlsSettingsBuilder Attribution(bool value)
+        /// <param name="configurator">The action that configures the attribution.</param>
+        public MapControlsSettingsBuilder Attribution(Action<MapControlsAttributionSettingsBuilder> configurator)
         {
-            container.Attribution = value;
-
+            configurator(new MapControlsAttributionSettingsBuilder(container.Attribution));
             return this;
         }
         

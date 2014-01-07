@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Attribution = new MapControlsAttributionSettings();
+                
             Navigator = new MapControlsNavigatorSettings();
                 
             Zoom = new MapControlsZoomSettings();
@@ -25,7 +27,11 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public bool? Attribution { get; set; }
+        public MapControlsAttributionSettings Attribution
+        {
+            get;
+            private set;
+        }
         
         public MapControlsNavigatorSettings Navigator
         {
@@ -45,9 +51,10 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Attribution.HasValue)
+            var attribution = Attribution.ToJson();
+            if (attribution.Any())
             {
-                json["attribution"] = Attribution;
+                json["attribution"] = attribution;
             }
                 
             var navigator = Navigator.ToJson();
