@@ -258,10 +258,7 @@ namespace Kendo.Mvc.Extensions
         {
             IQueryable query = source;
 
-            if (pageIndex > 0)
-            {
-                query = query.Skip(pageIndex * pageSize);
-            }
+            query = query.Skip(pageIndex * pageSize);
 
             if (pageSize > 0)
             {
