@@ -5,7 +5,6 @@ var editor;
 editor_module("editor clipboard", {
    setup: function() {
        editor = $("#editor-fixture").data("kendoEditor");
-       QUnit.fixture.append('<div id="inline" contentEditable="true"></div>');
    },
    teardown: function() {
        kendo.destroy(QUnit.fixture);
@@ -135,11 +134,21 @@ test("paste of special characters", function() {
 });
 
 test("paste in root of inline editor does not replace its body", function() {
-    var inline = new kendo.ui.Editor("#inline");
+    QUnit.fixture.append('<div id="inline" contentEditable="true"></div>');
+    var inline = new kendo.ui.Editor("#inline", { tools: [] });
 
     pasteIn(inline, 'f||oo', '<p>bar</p>');
 
     equal(inline.value(), 'f<p>bar</p>oo');
+});
+
+test("paste list in root of inline editor within list", function() {
+    QUnit.fixture.append('<ul><li><div id="inline" contentEditable="true"></div></li></ul>');
+    var inline = new kendo.ui.Editor("#inline", { tools: [] });
+
+    pasteIn(inline, '||', '<ul><li>bar</li></ul>');
+
+    equal(inline.value(), '<ul><li>bar</li></ul>');
 });
 
 test("paste of table adds k-table class", function() {
