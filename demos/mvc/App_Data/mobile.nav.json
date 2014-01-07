@@ -72,7 +72,7 @@
                     "meta": "This sample demonstrates which events can be triggered in Kendo UI Mobile Button. The component has events enabled for your ease of use and flexibility."
                 },
                 {
-                    "text": "Customizing Appearance",
+                    "text": "Customizing appearance",
                     "url": "button/appearance.html",
                     "title": "Customizing the appearance of Kendo UI mobile button",
                     "meta": "This demo shows how you can easily customize the appearance and styling of Kendo UI Mobile Button to deliver rich experience for end users of the mobile app."
@@ -116,7 +116,7 @@
                     "meta": "This demo shows the events which can be bound to Kendo UI ButtonGroup widget."
                 },
                 {
-                    "text": "Customizing Appearance",
+                    "text": "Customizing appearance",
                     "url": "buttongroup/appearance.html",
                     "title": "Kendo UI Mobile Button Group Theming",
                     "meta": "This demo shows how you can customize the appearance of Kendo UI ButtonGroup mobile widget. You have full control over the style of the buttons group."
@@ -391,7 +391,7 @@
                     "meta": "This sample demonstrates how Kendo UI Mobile TabStrip widget can show badges on its buttons."
                 },
                 {
-                    "text": "Customizing Appearance",
+                    "text": "Customizing appearance",
                     "url": "tabstrip/appearance.html",
                     "title": "Example of Kendo UI TabStrip Customized Appearance",
                     "meta": "This demo shows how the application-wide group of navigation buttons in Kendo UI TabStrip can be easily customized by using custom icons."
@@ -447,7 +447,7 @@
                     "meta": "This demo illustrates how checkboxes and radio buttons are enabled in Kendo UI Mobile Application."
                 },
                 {
-                    "text": "Customizing Appearance",
+                    "text": "Customizing appearance",
                     "url": "forms/appearance.html",
                     "title": "Kendo UI Mobile Customizing Form Appearance Demo",
                     "meta": "This demo shows how you can style the labels and form elements in a Kendo UI Mobile application to appear on separate rows."
@@ -504,7 +504,7 @@
                     "meta": "This example illustrates the core functionality of Kendo UI SplitView which is a tablet-specific view, consisting of two or more jQuery-based mobile pane widgets."
                 },
                 {
-                    "text": "Customizing Appearance",
+                    "text": "Customizing appearance",
                     "url": "splitview/appearance.html",
                     "title": "Customizing the appearance of Kendo UI Mobile SplitView",
                     "meta": "This demo shows how the appearance of Kendo UI SplitView widget can be easily customized."
