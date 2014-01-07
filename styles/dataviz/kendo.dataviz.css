@@ -268,10 +268,21 @@ span.k-sparkline,
     }
 }
 
-.k-map .k-navigator {
-    position: absolute;
+/* Control positions */
+.k-map .k-pos-top {
     top: 20px;
+}
+
+.k-map .k-pos-bottom {
+    bottom: 20px;
+}
+
+.k-map .k-pos-left {
     left: 20px;
+}
+
+.k-map .k-pos-right {
+    right: 20px;
 }
 
 /* Map navigator */
@@ -281,7 +292,7 @@ span.k-sparkline,
     width: 50px;
     height: 50px;
     border-radius: 80px;
-    position: relative;
+    position: absolute;
 }
 
 .k-navigator > button
