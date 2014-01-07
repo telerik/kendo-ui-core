@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../demos/mvc/content/shared/js/console.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.touch.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.scrollview.js"></script>
+        <script src="../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.switch.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+    </head>
+
+    <div data-role="view" data-title="Touch Events">
+        <div
+            id="touchSurface"
+            data-role="touch"
+            data-enable-swipe="1"
+            data-touchstart="listener.touchstart"
+            data-dragstart="listener.dragstart"
+            data-dragend="listener.dragend"
+            data-swipe="listener.swipe"
+            data-tap="listener.tap"
+            data-hold="listener.hold"
+            >
+            Touch, swipe, double-tap, tap, and hold me
+        </div>
+        <div class="console"></div>
+        </div>
+    </div>
+    <script>
+        var listener = {};
+        ["touchstart", "dragstart", "dragend", "swipe", "tap", "hold"].forEach(function(event) {
+            listener[event] = function(e) {
+                kendoConsole.log(event);
+                if (e.event) {
+                    kendoConsole.log(e.event.type);
+                }
+            }
+        });
+
+
+        new kendo.mobile.Application();
+    </script>
+
+
+    <style>
+        #touchSurface {
+            background: black;
+            color: white;
+            padding: 20px;
+            line-height: 20em;
+            text-align: center;
+            font-style: italic;
+            font-size: .9em;
+        }
+    </style>
+</html>
