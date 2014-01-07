@@ -201,6 +201,9 @@ kendo_module({
 
             if (that._finished) { return; }
 
+            // Mark the object as finished if there are blocking operations in the event handlers (alert/confirm)
+            that._finished = true;
+
             if (that._moved) {
                 that._trigger(END, touchInfo);
             } else {
