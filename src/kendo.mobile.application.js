@@ -281,7 +281,7 @@ kendo_module({
             }
 
             if (BROKEN_WEBVIEW_RESIZE) {
-                this._resizeToScreenHeight();
+                that._resizeToScreenHeight();
             }
 
             kendo.onResize(function() {
@@ -294,7 +294,7 @@ kendo_module({
                 }
 
                 if (BROKEN_WEBVIEW_RESIZE) {
-                    this._resizeToScreenHeight();
+                    that._resizeToScreenHeight();
                 }
 
                 if (BERRYPHONEGAP) {
