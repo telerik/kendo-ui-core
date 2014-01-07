@@ -149,6 +149,39 @@ var getKendoFile = (function() {
             }
         }),
 
+        buildMinAST_noAMD: cachedProperty("buildMinAST_noAMD", function(){
+            var ast = this.buildMinAST();
+            var f = walkAST(ast, findDefine).factory;
+            var stats = [];
+            walkAST(f, function(node){
+                if (node !== f) {
+                    if (node instanceof U2.AST_Return) {
+                        var p = node.value;
+                        while (p instanceof U2.AST_Seq) {
+                            stats.push(new U2.AST_SimpleStatement({ body: p.car }));
+                            p = p.cdr;
+                        }
+                        if (p && p.has_side_effects(U2.Compressor({ unsafe: true, pure_getters: true }))) {
+                            stats.push(new U2.AST_SimpleStatement({ body: p }));
+                        }
+                        this.exit();
+                    }
+                    else if (node instanceof U2.AST_Statement) {
+                        stats.push(node);
+                        return true;
+                    }
+                }
+            });
+            if (stats.length == 0) {
+                throw new Error("Can't find main code for " + this.filename());
+            }
+            return new U2.AST_Toplevel({ body: stats });
+        }),
+
+        buildMinSource_noAMD: cachedProperty("buildMinSource_noAMD", function(){
+            return this.buildMinAST_noAMD().print_to_string();
+        }),
+
         buildMinSource: cachedProperty("buildMinSource", function(){
             var source_map = this._source_map = U2.SourceMap({
                 file: this.filename().replace(/\.js$/i, ".min.js"),

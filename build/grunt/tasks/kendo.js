@@ -29,14 +29,20 @@ module.exports = function(grunt) {
                 var basename = PATH.basename(f, PATH.extname(f));
                 var dest = PATH.join(destDir, basename + ext);
                 if (outdated(f, dest)) {
-                    grunt.log.writeln("Making " + dest);
                     var comp = META.getKendoFile(f.replace(/^src\//, "")), code;
+
+                    if (comp.isBundle() && task.target == "download_builder")
+                        return; // bundles not needed here
+
+                    grunt.log.writeln("Making " + dest);
                     if (task.target == "min") {
                         code = comp.buildMinSource();
                         var map = comp.buildMinSourceMap();
                         grunt.file.write(dest + ".map", map);
                     } else if (task.target == "full") {
                         code = comp.buildFullSource();
+                    } else if (task.target == "download_builder") {
+                        code = comp.buildMinSource_noAMD();
                     }
                     grunt.file.write(dest, code);
                 }
@@ -120,6 +126,7 @@ module.exports = function(grunt) {
         switch (task.target) {
           case "min":
           case "full":
+          case "download_builder":
             makeSources(task);
             break;
 

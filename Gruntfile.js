@@ -145,6 +145,11 @@ module.exports = function(grunt) {
                 dest: "<%= kendo.options.destDir %>",
                 ext: ".js",
             },
+            download_builder: {
+                src: main_kendo_files,
+                ext: ".min.js",
+                dest: PATH.join("dist", "download-builder", "js"),
+            },
             config: {
                 src: main_kendo_files,
                 dest: "download-builder/config/kendo-config.json"
