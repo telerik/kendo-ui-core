@@ -8,6 +8,8 @@ BUILDER_CONFIG_NAME = File.join('config', 'kendo-config.json')
 
 BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.html.erb')))
 
+KENDO_META = File.join(Rake.application.original_dir, "build", "kendo-meta.js");
+
 #Build minified version with no AMD headers for use by the download builder
 rule /^dist\/download-builder.+\.min\.js$/ =>
     lambda { |t| t.sub(/^dist\/download-builder.+\/js/, 'src').sub('.min.js', '.js') } do |t|
@@ -42,7 +44,7 @@ namespace :download_builder do
         config_file_path = File.join(config_file_dir,  "kendo-config.#{VERSION}.json")
         directory config_file_dir
         task config_file_path => config_file_dir do |t|
-            sh "node #{COMPILEJS} --kendo-config > #{config_file_path}", :verbose => VERBOSE
+            sh "node #{KENDO_META} --kendo-config > #{config_file_path}", :verbose => VERBOSE
         end
 
         index_path = File.join(dist_path, 'index.html')
@@ -84,7 +86,7 @@ namespace :download_builder do
 
         task config_file_path do |t|
             sh "rm -f #{dist_path}kendo-config.*", :verbose => VERBOSE
-            sh "node #{COMPILEJS} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
+            sh "node #{KENDO_META} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
         end
 
         [js_path, css_path, config_file_path]
