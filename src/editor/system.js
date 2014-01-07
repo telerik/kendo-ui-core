@@ -551,7 +551,7 @@ var Clipboard = Class.extend({
         var parentNode, body;
 
         if (block) {
-            return dom.parentOfType(node, ['p', 'ul', 'ol']) || node.parentNode;
+            return dom.closestEditableOfType(node, ['p', 'ul', 'ol']) || node.parentNode;
         }
 
         parentNode = node.parentNode;
