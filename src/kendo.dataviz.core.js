@@ -53,6 +53,7 @@ var __meta__ = {
         ID_PREFIX = "k",
         ID_POOL_SIZE = 1000,
         ID_START = 10000,
+        COORDINATE_LIMIT = 100000,
         INITIAL_ANIMATION_DURATION = 600,
         INSIDE = "inside",
         LEFT = "left",
@@ -2285,11 +2286,11 @@ var __meta__ = {
             if (!defined(b)) {
                 b = a || 0;
             }
-
+          
             if (limit) {
                 a = math.max(math.min(a, options.max), options.min);
                 b = math.max(math.min(b, options.max), options.min);
-            }
+            }            
 
             if (vertical) {
                 p1 = options.max - math.max(a, b);
@@ -2299,8 +2300,8 @@ var __meta__ = {
                 p2 = math.max(a, b) - options.min;
             }
 
-            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
-            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
+            slotBox[valueAxis + 1] = math.max(math.min(lineStart + step * (reverse ? p2 : p1), COORDINATE_LIMIT), -COORDINATE_LIMIT);
+            slotBox[valueAxis + 2] = math.max(math.min(lineStart + step * (reverse ? p1 : p2), COORDINATE_LIMIT), -COORDINATE_LIMIT);
 
             return slotBox;
         },

@@ -794,8 +794,8 @@ var __meta__ = {
                     "<#= d.tagName # #= d.renderId() #" +
                         "style='position:absolute; " +
                         "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
-                        "top:#= d.box.y1 #px; " +
-                        "left:#= d.box.x1 #px; " +
+                        "top:0px; " +
+                        "left:0px; " +
                         "clip:#= d._renderClip() #;' >" +
                     "#= d.renderContent() #</#= d.tagName #>"
                 );

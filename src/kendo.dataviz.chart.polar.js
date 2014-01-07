@@ -790,6 +790,9 @@ var __meta__ = {
         reflowPoint: function(point, pointSlot) {
             point.sector = pointSlot;
             point.reflow();
+        },
+        options: {
+            clip: false
         }
     });
 
@@ -873,11 +876,17 @@ var __meta__ = {
                 slot = Point2D.onCircle(slotX.c, slotX.startAngle, valueRadius);
 
             return new Box2D(slot.x, slot.y, slot.x, slot.y);
+        },
+        options: {
+            clip: false
         }
     });
 
     var PolarLineChart = ScatterLineChart.extend({
-        pointSlot: PolarScatterChart.fn.pointSlot
+        pointSlot: PolarScatterChart.fn.pointSlot,
+        options: {
+            clip: false
+        }
     });
 
     var PolarAreaSegment = AreaSegment.extend({
