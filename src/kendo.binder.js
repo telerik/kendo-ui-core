@@ -1112,6 +1112,9 @@ kendo_module({
                         var newValue;
                         var found;
 
+                        var oldIdx = 0;
+                        var oldLength = oldValues.length + 1;
+
                         while (old) {
                             found = false;
                             for (j = 0; j < newLength; j++) {
@@ -1141,6 +1144,11 @@ kendo_module({
                             }
 
                             old = oldValues[i];
+                            oldIdx++;
+
+                            if (oldIdx > oldLength) {
+                                break;
+                            }
                         }
 
                         splice.apply(oldValues, [oldValues.length, 0].concat(newValues));
