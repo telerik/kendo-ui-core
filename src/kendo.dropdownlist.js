@@ -197,13 +197,7 @@ kendo_module({
                 selectedIndex = element.selectedIndex;
 
                 if (optionLabel && length) {
-                    optionLabel = that._optionLabelText(optionLabel);
-
-                    if (optionLabel === $(element.firstChild).text()) {
-                        selectedIndex += 1;
-                    }
-
-                    optionLabel = '<option value="">' + optionLabel + "</option>";
+                    optionLabel = '<option value="">' + that._optionLabelText(optionLabel) + "</option>";
                 }
 
                 that._options(data, optionLabel);

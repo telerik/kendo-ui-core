@@ -1,19 +1,24 @@
 (function() {
     var DropDownList = kendo.ui.DropDownList,
+    select,
     input;
 
     module("kendo.ui.DropDownList initialization", {
         setup: function() {
             kendo.ns = "kendo-";
             input = $("<input class='test'/>").appendTo(QUnit.fixture);
+            select = $("<select></select>").appendTo(QUnit.fixture);
         },
         teardown: function() {
             var element = $(document.body).find("[data-kendo-role=dropdownlist]")
+
             if (element[0]) {
                 element.data("kendoDropDownList").destroy();
                 element.closest(".k-dropdown").remove();
             }
+
             $(".test").remove();
+
             kendo.support.touch = false;
             kendo.support.mobileOS = false;
             kendo.ns = "";
@@ -422,6 +427,20 @@
         dropdownlist.refresh();
 
         equal(dropdownlist.list.height(), 50);
+    });
+
+    test("persist selected index on rebind", function() {
+        var dropdownlist = new DropDownList(select, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: 1, value: 1}, {text:2, value:2}],
+            optionLabel: "Select..."
+        });
+
+        dropdownlist.dataSource.fetch();
+
+        equal(dropdownlist.value(), "");
+        equal(dropdownlist.text(), "Select...");
     });
 
     test("optionLabel should create empty item", function() {
