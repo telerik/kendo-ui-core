@@ -143,9 +143,12 @@
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptorBuilderTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptorTests.cs" />
+    <Compile Include="UI\Map\MapControlsSettingsBuilderTests.cs" />
     <Compile Include="UI\Map\MapTestHelper.cs" />
     <Compile Include="UI\Map\MapMarkerBuilderTests.cs" />
     <Compile Include="UI\Map\MapMarkerTests.cs" />
+    <Compile Include="UI\Map\Serialization\AttributionSettingsTests.cs" />
+    <Compile Include="UI\Map\Serialization\MapControlsSettingsTests.cs" />
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorHtmlBuilderTests.cs" />
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorTestHelper.cs" />
     <Compile Include="UI\Scheduler\SchedulerBuilderTests.cs" />

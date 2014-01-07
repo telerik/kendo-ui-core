@@ -22,10 +22,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The position of the attribution control. Possible values include:
         /// </summary>
-        /// <param name="value">The value that configures the position.</param>
-        public MapControlsAttributionSettingsBuilder Position(string value)
+        /// <param name="position">The desired position.</param>
+        public MapControlsAttributionSettingsBuilder Position(MapControlPosition position)
         {
-            container.Position = value;
+            container.Position = position;
 
             return this;
         }

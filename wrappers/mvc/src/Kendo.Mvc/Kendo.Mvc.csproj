@@ -870,11 +870,14 @@
     <Compile Include="UI\HierarchicalDataSource\Fluent\HierarchicalModelDescriptorBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSource.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptor.cs" />
+    <Compile Include="UI\Map\MapControlPosition.cs" />
+    <Compile Include="UI\Map\Fluent\MapControlsAttributionSettingsBuilder.cs" />
     <Compile Include="UI\Map\MapMarkerTooltip.cs" />
     <Compile Include="UI\Map\Fluent\MapMarkerTooltipBuilder.cs" />
     <Compile Include="UI\Map\Fluent\GeoJsonDataSourceBuilder.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDataSourceBuilder.cs" />
     <Compile Include="UI\Map\Map.cs" />
+    <Compile Include="UI\Map\Settings\MapControlsAttributionSettings.cs" />
     <Compile Include="UI\Map\Settings\MapMarkerDefaultsSettings.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
     <Compile Include="UI\MobileListView\Fluent\MobileListViewLinkItemBuilder.cs" />
@@ -1795,7 +1798,7 @@
     <Compile Include="UI\Map\Html\MapHtmlBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\Map\MapShape.cs" />
+    <Compile Include="UI\Map\MapMarkersShape.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\Map\Settings\MapLayerDefaultsShapeStyleSettings.cs" />
