@@ -12,4 +12,8 @@
     test("renderPos renders multiple position classes", function() {
         equal(util.renderPos("topLeft"), "k-pos-top k-pos-left");
     });
+
+    test("renderPos returns empty string", function() {
+        eqial(uti.renderPos(), "");
+    });
 })();

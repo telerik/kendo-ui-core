@@ -70,11 +70,14 @@
     }
 
     function renderPos(pos) {
-        var parts = kendo.toHyphens(pos).split("-");
         var result = [];
 
-        for (var i = 0; i < parts.length; i++) {
-            result.push("k-pos-" + parts[i]);
+        if (pos) {
+            var parts = kendo.toHyphens(pos).split("-");
+
+            for (var i = 0; i < parts.length; i++) {
+                result.push("k-pos-" + parts[i]);
+            }
         }
 
         return result.join(" ");

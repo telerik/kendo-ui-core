@@ -12,6 +12,7 @@ kendo_module({
         template = kendo.template,
 
         dataviz = kendo.dataviz,
+        renderPos = dataviz.util.renderPos,
         valueOrDefault = dataviz.util.valueOrDefault;
 
     var Attribution = Widget.extend({
@@ -19,23 +20,16 @@ kendo_module({
             Widget.fn.init.call(this, element, options);
             this._initOptions(options);
             this.items = [];
-            this.element.addClass("k-widget k-attribution");
-
-            if (options.position === "topLeft") {
-                this.element.addClass("k-top k-left");
-            } else if (options.position === "topRight") {
-                this.element.addClass("k-top k-right");
-            } else if (options.position === "bottomLeft") {
-                this.element.addClass("k-bottom k-left");
-            } else {
-                this.element.addClass("k-bottom k-right");
-            }
+            this.element
+                .addClass("k-widget k-attribution")
+                .addClass(renderPos(this.options.position));
         },
 
         options: {
             name: "Attribution",
             separator: "&nbsp;|&nbsp;",
-            itemTemplate: "#= text #"
+            itemTemplate: "#= text #",
+            position: "bottomRight"
         },
 
         filter: function(extent, zoom) {
