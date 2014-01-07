@@ -347,4 +347,8 @@ test("toString rounds up correctly", function() {
     equal(toString(1.23125, "C4"), "$1.2313");
 });
 
+test("toString formats correctly big integer", function() {
+    equal(toString(5285654313, "#.########0"), "5285654313.000000000");
+});
+
 }());
