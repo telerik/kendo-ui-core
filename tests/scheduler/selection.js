@@ -537,6 +537,36 @@
         equal(scheduler.calls("removeEvent"), 1);
     });
 
+    test("delete key does not delete event if editable:false", function() {
+        var e = createSampleEvent();
+        var view = scheduler.view();
+
+        view.options.editable = false;
+
+        stub(scheduler, "removeEvent");
+
+        selectEvent(e);
+
+        keydown(keys.DELETE);
+
+        equal(scheduler.calls("removeEvent"), 0);
+    });
+
+    test("delete key does not delete event if destroy is disabled", function() {
+        var e = createSampleEvent();
+        var view = scheduler.view();
+
+        view.options.editable = { destroy: false };
+
+        stub(scheduler, "removeEvent");
+
+        selectEvent(e);
+
+        keydown(keys.DELETE);
+
+        equal(scheduler.calls("removeEvent"), 0);
+    });
+
     module("Selection events", {
         setup: function() {
             container = $("<div />");

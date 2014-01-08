@@ -1719,7 +1719,7 @@ kendo_module({
 
                     that.addEvent(extend({}, selection, view._resourceBySlot(selection)));
                 }
-            } else if (key === keys.DELETE) {
+            } else if (key === keys.DELETE && editable !== false && editable.destroy !== false) {
                 that.removeEvent(selection.events[0]);
             } else if (key >= 49 && key <= 57) {
                 // switch to view 1-9
