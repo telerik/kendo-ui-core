@@ -134,7 +134,7 @@ var __meta__ = {
                 placeholder = this.placeholder,
                 disabled = this.options.disabled;
 
-            if(target && target.element.length) {
+            if(target) {
                 targetOffset = kendo.getOffset(target.element);
                 hintOffset = kendo.getOffset(e.sender.hint);
                 offsetTopDelta = hintOffset.top - targetOffset.top;
@@ -150,7 +150,7 @@ var __meta__ = {
 
                     if(prevVisible[0] != placeholder[0]) {
                         target.element.before(placeholder);
-                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element });
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this });
                     }
 
                 } else if(offsetTopDelta > 0 || offsetLeftDelta > 0) { //for positive delta the tooptip should be appended after the target
@@ -161,7 +161,7 @@ var __meta__ = {
 
                     if(nextVisible[0] != placeholder[0]) {
                         target.element.after(placeholder);
-                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element });
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this });
                     }
                 }
             }
@@ -211,16 +211,14 @@ var __meta__ = {
         _findDraggableNode: function(element) {
             var items,
                 connectWith = this.options.connectWith,
-                connected;
+                connected,
+                node;
 
             if($.contains(this.element[0], element)) { //the element is part of the sortable container
                 items = this.items();
+                node = items.filter(element).eq(0) || items.has(element).eq(0);
 
-                return {
-                    element: items.filter(element).eq(0) || items.has(element).eq(0),
-                    sortable: this
-                };
-
+                return node.length ? { element: node, sortable: this } : null;
             } else if (connectWith) {
                 connected = $(connectWith);
 
@@ -229,12 +227,14 @@ var __meta__ = {
                         var sortable = connected.eq(i).getKendoSortable();
                         if(sortable) {
                             items = sortable.items();
+                            node = items.filter(element).eq(0) || items.has(element).eq(0);
 
-                            return {
-                                element: items.filter(element).eq(0) || items.has(element).eq(0),
-                                sortable: sortable
-                            };
-
+                            if(node.length) {
+                                sortable.placeholder = this.placeholder;
+                                return { element: node, sortable: sortable };
+                            } else {
+                                return null;
+                            }
                         }
                     }
                 }
