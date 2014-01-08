@@ -383,9 +383,13 @@ kendo_module({
             } catch(e) { }
 
             if (kendo.support.touch) {
-                $(doc).on("selectionchange" + NS, function() {
-                    editor._selectionChange();
-                });
+                $(doc).on("selectionchange" + NS, function() { editor._selectionChange(); })
+                      .on("keydown" + NS, function() {
+                          // necessary in iOS when touch events are bound to the page
+                          if (kendo._activeElement() != doc.body) {
+                              editor.window.focus();
+                          }
+                      });
             }
 
             $(editor.body)
