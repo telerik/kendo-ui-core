@@ -65,6 +65,23 @@
         deepEqual(selection.end, slot.endDate());
     });
 
+    test("constrainSelection sets isAllDay to false if no daySlots", function() {
+        var view = setup({
+            dates: [new Date(2013, 6, 7)],
+            allDaySlot: false
+        });
+
+        var selection = createSelection({
+            start: new Date(2013, 6, 7, 10),
+            end: new Date(2013, 6, 7, 10),
+            isAllDay: true
+        });
+
+        view.constrainSelection(selection);
+
+        equal(selection.isAllDay, false);
+    });
+
     test("View selects cell", function() {
         var view = setup({ dates: [new Date(2013, 6, 7)] }),
             selection = createSelection(new Date(2013, 6, 7));
