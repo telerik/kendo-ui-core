@@ -73,6 +73,36 @@
         ok(!$(".hint").length, "Hint is not initialized");
     });
 
+    test("move event fires while the user rearrange items with the mouse", 4, function() {
+        var children = element.children(),
+            draggedElement = children.eq(1),
+            draggableOffset = kendo.getOffset(draggedElement),
+            target,
+            targetOffset,
+            sortable = element.data("kendoSortable");
+
+        sortable.bind("move", function(e) {
+            console.log("move");
+            ok(true, "move event is fired");
+        });
+
+        target = children.eq(2);
+        targetOffset = kendo.getOffset(target);
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        //move is trigerred once
+        equal(target.next()[0], sortable.placeholder[0], "Placeholder is inserted after the target");
+
+        target = children.eq(3);
+        targetOffset = kendo.getOffset(target);
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        //move is trigerred once
+        equal(target.next()[0], sortable.placeholder[0], "Placeholder is inserted after the target");
+    });
+
     test("change event fires on dragend after DOM changes", 3, function() {
         var draggedElement = element.children().eq(3),
             draggableOffset = kendo.getOffset(draggedElement),
