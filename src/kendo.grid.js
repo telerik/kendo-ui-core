@@ -3612,7 +3612,7 @@ var __meta__ = {
             colgroup = table.find("colgroup");
             tr = table.find("tr");
 
-            that.footer.find(".k-grid-footer-wrap>table>colgroup>.k-group-col,.k-hierarchy-col").appendTo(colgroup)
+            that.footer.find(".k-grid-footer-wrap>table>colgroup>.k-group-col,.k-hierarchy-col").appendTo(colgroup);
             that.footer.find(".k-footer-template>.k-group-cell,.k-hierarchy-cell").appendTo(tr);
 
             for (idx = columns.length - 1; idx >= 0; idx--) {

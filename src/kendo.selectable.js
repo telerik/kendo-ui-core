@@ -147,7 +147,7 @@ var __meta__ = {
             if (that.options.useAllItems) {
                 that._items = that.element.find(that.options.filter);
             } else {
-                currentElement = target.closest(that.element),
+                currentElement = target.closest(that.element);
                 that._items = currentElement.find(that.options.filter);
             }
 
