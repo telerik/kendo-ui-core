@@ -124,33 +124,44 @@ var __meta__ = {
 
         _drag: function(e) {
             var draggedElement = this.draggedElement,
-                target = $(this._findTarget(e)),
+                target = this._findTarget(e),
                 targetOffset,
                 hintOffset,
                 offsetTopDelta,
                 offsetLeftDelta,
-                prev,
-                next,
+                prevVisible,
+                nextVisible,
                 placeholder = this.placeholder,
                 disabled = this.options.disabled;
 
-            if(target.length) {
-                targetOffset = kendo.getOffset(target);
+            if(target && target.element.length) {
+                targetOffset = kendo.getOffset(target.element);
                 hintOffset = kendo.getOffset(e.sender.hint);
                 offsetTopDelta = hintOffset.top - targetOffset.top;
                 offsetLeftDelta = hintOffset.left - targetOffset.left;
-                prev = target.prev();
-                next = target.next();
+                prevVisible = target.element.prev();
+                nextVisible = target.element.next();
 
                 if(offsetTopDelta < 0 || offsetLeftDelta < 0) { //for negative delta the tooltip should be appended before the target
-                    if(prev[0] != placeholder[0]) {
-                        target.before(placeholder);
-                        this.trigger(MOVE, { item: draggedElement, target: target });
+
+                    while(prevVisible.length && !prevVisible.is(":visible")) {
+                        prevVisible = prevVisible.prev();
                     }
+
+                    if(prevVisible[0] != placeholder[0]) {
+                        target.element.before(placeholder);
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element });
+                    }
+
                 } else if(offsetTopDelta > 0 || offsetLeftDelta > 0) { //for positive delta the tooptip should be appended after the target
-                    if(next[0] != placeholder[0]) {
-                        target.after(placeholder);
-                        this.trigger(MOVE, { item: draggedElement, target: target });
+
+                    while(nextVisible.length && !nextVisible.is(":visible")) {
+                        nextVisible = nextVisible.next();
+                    }
+
+                    if(nextVisible[0] != placeholder[0]) {
+                        target.element.after(placeholder);
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element });
                     }
                 }
             }
@@ -179,7 +190,6 @@ var __meta__ = {
 
         _findTarget: function(e) {
             var elementUnderCursor = kendo.elementUnderCursor(e),
-                target,
                 draggable = e.sender,
                 disabled = this.options.disabled,
                 filter = this.options.filter,
@@ -206,16 +216,25 @@ var __meta__ = {
             if($.contains(this.element[0], element)) { //the element is part of the sortable container
                 items = this.items();
 
-                return items.filter(element)[0] || items.has(element)[0];
+                return {
+                    element: items.filter(element).eq(0) || items.has(element).eq(0),
+                    sortable: this
+                };
+
             } else if (connectWith) {
                 connected = $(connectWith);
 
                 for (var i = 0; i < connected.length; i++) {
                     if($.contains(connected[i], element)) {
-                        var sortable = connected.eq(i).data("kendoSortable");
+                        var sortable = connected.eq(i).getKendoSortable();
                         if(sortable) {
                             items = sortable.items();
-                            return items.filter(element)[0] || items.has(element)[0];
+
+                            return {
+                                element: items.filter(element).eq(0) || items.has(element).eq(0),
+                                sortable: sortable
+                            };
+
                         }
                     }
                 }
