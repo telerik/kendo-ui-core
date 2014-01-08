@@ -54,14 +54,14 @@ $(function() {
                         recurrenceRule: { from: "RecurrenceRule" },
                         recurrenceException: { from: "RecurrenceException" },
                         roomId: { from: "RoomID", nullable: true },
-                        atendees: { from: "Atendees", nullable: true },
+                        attendees: { from: "Attendees", nullable: true },
                         isAllDay: { type: "boolean", from: "IsAllDay" }
                     }
                 }
             }
         },
         group: {
-            resources: ["Rooms", "Atendees"],
+            resources: ["Rooms", "Attendees"],
             orientation: "vertical"
         },
         resources: [
@@ -75,15 +75,15 @@ $(function() {
                 title: "Room"
             },
             {
-                field: "atendees",
-                name: "Atendees",
+                field: "attendees",
+                name: "Attendees",
                 dataSource: [
                     { text: "Alex", value: 1, color: "#f8a398" },
                     { text: "Bob", value: 2, color: "#51a0ed" },
                     { text: "Charlie", value: 3, color: "#56ca85" }
                 ],
                 multiple: true,
-                title: "Atendees"
+                title: "Attendees"
             }
         ]
     });
