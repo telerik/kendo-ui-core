@@ -72,22 +72,6 @@ span.k-sparkline,
     padding: .1em .2em;
 }
 
-.k-left {
-    left: 0;
-}
-
-.k-right {
-    right: 0;
-}
-
-.k-bottom {
-    bottom: 0;
-}
-
-.k-top {
-    top: 0;
-}
-
 /*Stock Charts*/
 
 /* Selection */
@@ -268,10 +252,21 @@ span.k-sparkline,
     }
 }
 
-.k-map .k-navigator {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+/* Control positions */
+.k-map .k-pos-top {
+    top: 0;
+}
+
+.k-map .k-pos-bottom {
+    bottom: 0;
+}
+
+.k-map .k-pos-left {
+    left: 0;
+}
+
+.k-map .k-pos-right {
+    right: 0;
 }
 
 /* Map navigator */
@@ -280,8 +275,9 @@ span.k-sparkline,
 {
     width: 50px;
     height: 50px;
+    margin: 20px;
     border-radius: 80px;
-    position: relative;
+    position: absolute;
 }
 
 .k-navigator > button

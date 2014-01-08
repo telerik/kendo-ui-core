@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Attribution = new MapControlsAttributionSettings();
+                
             Navigator = new MapControlsNavigatorSettings();
                 
             Zoom = new MapControlsZoomSettings();
@@ -25,18 +27,22 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public bool? Attribution { get; set; }
+        public MapControlsAttributionSettings Attribution
+        {
+            get;
+            set;
+        }
         
         public MapControlsNavigatorSettings Navigator
         {
             get;
-            private set;
+            set;
         }
         
         public MapControlsZoomSettings Zoom
         {
             get;
-            private set;
+            set;
         }
         
         //<< Fields
@@ -44,25 +50,46 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-        
-            if (Attribution.HasValue)
+            //<< Serialization
+
+            if (Attribution != null)
             {
-                json["attribution"] = Attribution;
+                var attribution = Attribution.ToJson();
+                if (attribution.Any())
+                {
+                    json["attribution"] = attribution;
+                }
             }
-                
-            var navigator = Navigator.ToJson();
-            if (navigator.Any())
+            else
             {
-                json["navigator"] = navigator;
+                json["attribution"] = false;
             }
-                
-            var zoom = Zoom.ToJson();
-            if (zoom.Any())
+
+            if (Navigator != null)
             {
-                json["zoom"] = zoom;
+                var navigator = Navigator.ToJson();
+                if (navigator.Any())
+                {
+                    json["navigator"] = navigator;
+                }
             }
-                
-        //<< Serialization
+            else
+            {
+                json["navigator"] = false;
+            }
+
+            if (Zoom != null)
+            {
+                var zoom = Zoom.ToJson();
+                if (zoom.Any())
+                {
+                    json["zoom"] = zoom;
+                }
+            }
+            else
+            {
+                json["zoom"] = false;
+            }
         }
     }
 }

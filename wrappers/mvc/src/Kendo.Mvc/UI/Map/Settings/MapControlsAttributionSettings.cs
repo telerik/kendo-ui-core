@@ -1,22 +1,23 @@
 namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class MapControlsNavigatorSettings : JsonObject
+    public class MapControlsAttributionSettings : JsonObject
     {
-        public MapControlsNavigatorSettings()
+        public MapControlsAttributionSettings()
         {
-            //>> Initialization        
-            //<< Initialization            
+            //>> Initialization
+            //<< Initialization
         }
 
         //>> Fields       
         //<< Fields
         public MapControlPosition? Position { get; set; }
-
+        
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
