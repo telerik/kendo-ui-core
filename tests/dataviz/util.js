@@ -14,6 +14,6 @@
     });
 
     test("renderPos returns empty string", function() {
-        eqial(uti.renderPos(), "");
+        equal(util.renderPos(), "");
     });
 })();
