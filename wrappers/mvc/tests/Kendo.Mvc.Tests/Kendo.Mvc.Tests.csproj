@@ -148,6 +148,8 @@
     <Compile Include="UI\Map\MapMarkerBuilderTests.cs" />
     <Compile Include="UI\Map\MapMarkerTests.cs" />
     <Compile Include="UI\Map\Serialization\AttributionSettingsTests.cs" />
+    <Compile Include="UI\Map\Serialization\ZoomSettingsTests.cs" />
+    <Compile Include="UI\Map\Serialization\NavigatorSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\MapControlsSettingsTests.cs" />
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorHtmlBuilderTests.cs" />
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorTestHelper.cs" />

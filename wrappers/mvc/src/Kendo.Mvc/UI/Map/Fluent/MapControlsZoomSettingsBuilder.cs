@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The position of the zoom control. Possible values include:
         /// </summary>
         /// <param name="value">The value that configures the position.</param>
-        public MapControlsZoomSettingsBuilder Position(string value)
+        public MapControlsZoomSettingsBuilder Position(MapControlPosition value)
         {
             container.Position = value;
 

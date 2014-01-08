@@ -42,6 +42,20 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new MapControlsAttributionSettingsBuilder(container.Attribution));
             return this;
         }
+
+        /// <summary>
+        /// Enables or disables the built-in navigator control.
+        /// </summary>
+        /// <param name="visible">A value indicating if the navigator control should be visible.</param>
+        public MapControlsSettingsBuilder Navigator(bool visible)
+        {
+            if (!visible)
+            {
+                container.Navigator = null;
+            }
+
+            return this;
+        }
         
         /// <summary>
         /// Enables or disables the built-in navigator control (directional pad).
@@ -50,6 +64,20 @@ namespace Kendo.Mvc.UI.Fluent
         public MapControlsSettingsBuilder Navigator(Action<MapControlsNavigatorSettingsBuilder> configurator)
         {
             configurator(new MapControlsNavigatorSettingsBuilder(container.Navigator));
+            return this;
+        }
+
+        /// <summary>
+        /// Enables or disables the built-in zoom control.
+        /// </summary>
+        /// <param name="visible">A value indicating if the zoom control should be visible.</param>
+        public MapControlsSettingsBuilder Zoom(bool visible)
+        {
+            if (!visible)
+            {
+                container.Zoom = null;
+            }
+
             return this;
         }
         
@@ -63,9 +91,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        //<< Fields
-
-        
+        //<< Fields        
     }
 }
 

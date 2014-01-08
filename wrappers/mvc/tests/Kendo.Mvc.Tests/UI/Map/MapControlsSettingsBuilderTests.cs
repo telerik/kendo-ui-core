@@ -28,5 +28,33 @@ namespace Kendo.Mvc.UI.Tests.Map
             builder.Attribution(cfg => cfg.Position(MapControlPosition.TopLeft));
             settings.Attribution.Position.ShouldEqual(MapControlPosition.TopLeft);
         }
+
+        [Fact]
+        public void Clears_navigator_settings()
+        {
+            builder.Navigator(false);
+            settings.Navigator.ShouldBeNull();
+        }
+
+        [Fact]
+        public void Sets_navigator_position()
+        {
+            builder.Navigator(cfg => cfg.Position(MapControlPosition.TopLeft));
+            settings.Navigator.Position.ShouldEqual(MapControlPosition.TopLeft);
+        }
+
+        [Fact]
+        public void Clears_zoom_settings()
+        {
+            builder.Zoom(false);
+            settings.Zoom.ShouldBeNull();
+        }
+
+        [Fact]
+        public void Sets_zoom_position()
+        {
+            builder.Zoom(cfg => cfg.Position(MapControlPosition.TopLeft));
+            settings.Zoom.Position.ShouldEqual(MapControlPosition.TopLeft);
+        }
     }
 }

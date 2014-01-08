@@ -50,6 +50,7 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
+            //<< Serialization
 
             if (Attribution != null)
             {
@@ -63,20 +64,32 @@ namespace Kendo.Mvc.UI
             {
                 json["attribution"] = false;
             }
-                
-            var navigator = Navigator.ToJson();
-            if (navigator.Any())
+
+            if (Navigator != null)
             {
-                json["navigator"] = navigator;
+                var navigator = Navigator.ToJson();
+                if (navigator.Any())
+                {
+                    json["navigator"] = navigator;
+                }
             }
-                
-            var zoom = Zoom.ToJson();
-            if (zoom.Any())
+            else
             {
-                json["zoom"] = zoom;
+                json["navigator"] = false;
             }
-                
-        //<< Serialization
+
+            if (Zoom != null)
+            {
+                var zoom = Zoom.ToJson();
+                if (zoom.Any())
+                {
+                    json["zoom"] = zoom;
+                }
+            }
+            else
+            {
+                json["zoom"] = false;
+            }
         }
     }
 }
