@@ -386,4 +386,39 @@
         ok(!grid.content.find("tr.k-group-footer .k-group-cell").length);
     });
 
+    test("static columns are first in the columns collection", function() {
+        var grid = setup({
+            columns: ["bar", { field: "moo", static: true }, "baz", { field: "foo", static: true }]
+        });
+
+        ok(grid.columns[0].static);
+        equal(grid.columns[0].field, "moo");
+
+        ok(grid.columns[1].static);
+        equal(grid.columns[1].field, "foo");
+
+        equal(grid.columns[2].field, "bar");
+        equal(grid.columns[3].field, "baz");
+    });
+
+    test("cellIndex returns correct index of static column", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        var td = grid.staticContent.find("tr:first td");
+        var index = grid.cellIndex(td);
+        equal(index, 0);
+    });
+
+    test("cellIndex returns correct index of non static column", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        var td = grid.tbody.find("tr:first td");
+        var index = grid.cellIndex(td);
+        equal(index, 1);
+    });
+
 })();

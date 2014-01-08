@@ -1158,7 +1158,13 @@ var __meta__ = {
         },
 
         cellIndex: function(td) {
-            return $(td).parent().children('td:not(.k-group-cell,.k-hierarchy-cell)').index(td);
+            var staticColumnOffset = 0;
+
+            if (this.staticTable && !$.contains(this.staticTable[0], td[0])) {
+                staticColumnOffset = staticColumns(this.columns).length;
+            }
+
+            return $(td).parent().children('td:not(.k-group-cell,.k-hierarchy-cell)').index(td) + staticColumnOffset;
         },
 
         _modelForContainer: function(container) {
@@ -1990,7 +1996,7 @@ var __meta__ = {
             }
 
             if (that._isStatic()) {
-                that.staticContent.find("table").on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
+                that.staticTable.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
             } else {
                 that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
             }
@@ -2052,7 +2058,7 @@ var __meta__ = {
 
                 var elements = that.table;
                 if (that.staticContent) {
-                    elements = elements.add(that.staticContent.children("table"));
+                    elements = elements.add(that.staticTable);
                 }
                 var filter = ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr" + notString);
                 var staticColumnsCount = function() {
@@ -3157,6 +3163,8 @@ var __meta__ = {
 
             encoded = !(that.table.find("tbody tr").length > 0 && (!dataSource || !dataSource.transport));
 
+            columns = staticColumns(columns).concat(nonStaticColumns(columns));
+
             that.columns = map(columns, function(column) {
                 column = typeof column === STRING ? { field: column } : column;
                 if (column.hidden) {
@@ -3567,10 +3575,12 @@ var __meta__ = {
         _appendStaticColumnContent: function() {
             var columns = this.columns,
                 idx,
-                hasStaticColumns;
+                hasStaticColumns,
+                colgroup,
+                container;
 
-            table = $('<div class="k-grid-content-static"><table><colgroup/><tbody></tbody></table></div>');
-            colgroup = table.find("colgroup");
+            container = $('<div class="k-grid-content-static"><table><colgroup/><tbody></tbody></table></div>');
+            colgroup = container.find("colgroup");
 
             for (idx = columns.length - 1; idx >= 0; idx--) {
                 if (columns[idx].static) {
@@ -3580,7 +3590,8 @@ var __meta__ = {
             }
 
             if (hasStaticColumns) {
-                this.staticContent = table.insertBefore(this.content);
+                this.staticContent = container.insertBefore(this.content);
+                this.staticTable = container.children("table");
             }
         },
 
@@ -3741,7 +3752,7 @@ var __meta__ = {
 
         _updateStaticCols: function() {
             if (this._isStatic()) {
-                normalizeCols(this.staticHeader.find("table").add(this.staticContent.find("table")), staticColumns(this.columns), this._hasDetails(), this._groups());
+                normalizeCols(this.staticHeader.find("table").add(this.staticTable), staticColumns(this.columns), this._hasDetails(), this._groups());
             }
         },
 
@@ -3841,7 +3852,7 @@ var __meta__ = {
             if (this._isStatic()) {
                 if (!group.closest("div").hasClass("k-grid-content-static")) {
                     relatedGroup = group.nextAll("tr");
-                    group = this.staticContent.find(">table>tbody>tr:eq(" + group.index() + ")");
+                    group = this.staticTable.find(">tbody>tr:eq(" + group.index() + ")");
                 } else {
                     relatedGroup = this.tbody.children("tr:eq(" + group.index() + ")").nextAll("tr");
                 }
@@ -3886,7 +3897,7 @@ var __meta__ = {
             if (this._isStatic()) {
                 if (!group.closest("div").hasClass("k-grid-content-static")) {
                     relatedGroup = group.nextAll("tr");
-                    group = this.staticContent.find(">table>tbody>tr:eq(" + group.index() + ")");
+                    group = this.staticTable.find(">tbody>tr:eq(" + group.index() + ")");
                 } else {
                     relatedGroup = this.tbody.children("tr:eq(" + group.index() + ")").nextAll("tr");
                 }
@@ -4275,7 +4286,7 @@ var __meta__ = {
 
            if (this.staticContent) {
 
-               var table = this.staticContent.children("table");
+               var table = this.staticTable;
 
                if (groups > 0) {
                    colspan = colspan - nonStaticColumns(this.columns).length;
