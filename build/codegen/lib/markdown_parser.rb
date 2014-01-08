@@ -249,8 +249,8 @@ class MarkdownParser
         if element.children.any?
             element.children.map { |child| element_text(child) }.join
         else
-            element.value
-        end
+            element.value || ""
+        end 
     end
 
     def element_value(element)
