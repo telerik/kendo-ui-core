@@ -1077,12 +1077,17 @@ kendo_module({
         },
 
         constrainSelection: function(selection) {
+            var group = this.groups[0];
+            var slot;
+
             if (!this.inRange(selection)) {
-                var slot = this.groups[0].firstSlot();
+                slot = group.firstSlot();
 
                 selection.isAllDay = slot.isDaySlot;
                 selection.start = slot.startDate();
                 selection.end = slot.endDate();
+            } else if (!group.daySlotCollectionCount()) {
+                selection.isAllDay = false;
             }
         },
 
