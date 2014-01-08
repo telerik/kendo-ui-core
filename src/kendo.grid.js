@@ -2055,6 +2055,9 @@ var __meta__ = {
                     elements = elements.add(that.staticContent.children("table"));
                 }
                 var filter = ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr" + notString);
+                var staticColumnsCount = function() {
+                    return staticColumns(that.columns).length;
+                };
                 that.selectable = new kendo.ui.Selectable(elements, {
                     filter: filter,
                     aria: true,
@@ -2062,7 +2065,7 @@ var __meta__ = {
                     change: function() {
                         that.trigger(CHANGE);
                     },
-                    useAllItems: cell,
+                    useAllItems: that.staticContent && multi && cell,
                     relatedTarget: function(items) {
                         if (cell || !that.staticContent) {
                             return;
@@ -2090,6 +2093,24 @@ var __meta__ = {
 
                         table = null;
                         return items;
+                    },
+                    continuousItems: function() {
+                        if (!that.staticContent) {
+                            return;
+                        }
+
+                        var items1 = $(filter, elements[0]);
+                        var items2 = $(filter, elements[1]);
+                        var staticColumns = cell ? staticColumnsCount() : 1;
+                        var nonStaticColumns = cell ? that.columns.length - staticColumns : 1;
+                        var result = [];
+
+                        for (var idx = 0; idx < items1.length; idx += staticColumns) {
+                            [].push.apply(result, items1.slice(idx, idx + staticColumns));
+                            [].push.apply(result, items2.splice(0, nonStaticColumns));
+                        }
+
+                        return result;
                     }
                 });
 

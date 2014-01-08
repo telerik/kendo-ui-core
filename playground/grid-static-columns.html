@@ -77,7 +77,7 @@
 
             </style>
 
-            <div style="width: 600px">
+            <div style="width: 900px">
                 <div id="grid" style="height: 880px;"></div>
             </div>
 
@@ -101,6 +101,10 @@
                         reorderable: true,
                         resizable: true,
                         columns: [{
+                            field: "CustomerID",
+                            static: true,
+                            width: 100
+                        }, {
                             field: "ContactName",
                             template: "[static 1] #=ContactName# <br/> #=ContactName#",
                             title: "[static 1] Contact Name",

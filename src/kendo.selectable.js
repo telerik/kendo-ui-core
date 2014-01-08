@@ -265,7 +265,7 @@ var __meta__ = {
             selected = that.value();
             return selected.length > 0 ?
                     selected[0] :
-                    that.element.find(that.options.filter);
+                    that.element.find(that.options.filter)[0];
         },
 
         _selectElement: function(element, preventNotify) {
@@ -315,34 +315,35 @@ var __meta__ = {
 
         selectRange: function(start, end) {
             var that = this,
-                found = false,
                 idx,
-                length,
                 tmp,
-                toSelect,
-                items = that.element.find(that.options.filter),
-                selectElement = proxy(that._selectElement, that);
+                items;
 
-            start = $(start)[0];
-            end = $(end)[0];
+            that.clear();
 
-            for (idx = 0, length = items.length; idx < length; idx ++) {
-                toSelect = items[idx];
-                if(found) {
-                    selectElement(toSelect);
-                    found = toSelect !== end;
-                } else if(toSelect === start) {
-                    found = start !== end;
-                    selectElement(toSelect);
-                } else if(toSelect === end) {
-                    tmp = start;
-                    start = end;
-                    end = tmp;
-                    found = true;
-                    selectElement(toSelect);
-                } else {
-                    $(toSelect).removeClass(SELECTED);
-                }
+            if (that.element.length > 1) {
+                items = that.options.continuousItems();
+            }
+
+            if (!items || !items.length) {
+                items = that.element.find(that.options.filter);
+            }
+
+            start = $.inArray($(start)[0], items);
+            end = $.inArray($(end)[0], items);
+
+            if (start > end) {
+                tmp = start;
+                start = end;
+                end = tmp;
+            }
+
+            if (!that.options.useAllItems) {
+                end += that.element.length - 1;
+            }
+
+            for (idx = start; idx <= end; idx ++ ) {
+                that._selectElement(items[idx]);
             }
 
             that._notify(CHANGE);
