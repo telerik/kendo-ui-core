@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Attribution = new MapControlsAttributionSettings();
+                
             Navigator = new MapControlsNavigatorSettings();
                 
         //<< Initialization
@@ -23,12 +25,16 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public bool? Attribution { get; set; }
+        public MapControlsAttributionSettings Attribution
+        {
+            get;
+            set;
+        }
         
         public MapControlsNavigatorSettings Navigator
         {
             get;
-            private set;
+            set;
         }
         
         //<< Fields
@@ -36,19 +42,33 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-        
-            if (Attribution.HasValue)
+            //<< Serialization
+
+            if (Attribution != null)
             {
-                json["attribution"] = Attribution;
+                var attribution = Attribution.ToJson();
+                if (attribution.Any())
+                {
+                    json["attribution"] = attribution;
+                }
             }
-                
-            var navigator = Navigator.ToJson();
-            if (navigator.Any())
+            else
             {
-                json["navigator"] = navigator;
+                json["attribution"] = false;
             }
-                
-        //<< Serialization
+
+            if (Navigator != null)
+            {
+                var navigator = Navigator.ToJson();
+                if (navigator.Any())
+                {
+                    json["navigator"] = navigator;
+                }
+            }
+            else
+            {
+                json["navigator"] = false;
+            }
         }
     }
 }

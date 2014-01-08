@@ -69,6 +69,20 @@
         return size;
     }
 
+    function renderPos(pos) {
+        var result = [];
+
+        if (pos) {
+            var parts = kendo.toHyphens(pos).split("-");
+
+            for (var i = 0; i < parts.length; i++) {
+                result.push("k-pos-" + parts[i]);
+            }
+        }
+
+        return result.join(" ");
+    }
+
     // Mixins =================================================================
     function geometryChange() {
         if (this.observer) {
@@ -92,6 +106,7 @@
             rad: rad,
             renderAttr: renderAttr,
             renderAllAttr: renderAllAttr,
+            renderPos: renderPos,
             renderSize: renderSize,
             valueOrDefault: valueOrDefault
         }
