@@ -138,7 +138,7 @@ var ParagraphCommand = Command.extend({
             dom.remove(parent);
 
             this.clean(previous);
-            this.clean(next);
+            this.clean(next, { links: true });
 
             // normalize updates the caret display in Gecko
             normalize(previous);
@@ -155,7 +155,9 @@ var ParagraphCommand = Command.extend({
         RangeUtils.selectRange(range);
     },
 
-    clean: function(node) {
+    clean: function(node, options) {
+        var root = node;
+
         if (node.firstChild && dom.is(node.firstChild, 'br')) {
             dom.remove(node.firstChild);
         }
@@ -171,6 +173,16 @@ var ParagraphCommand = Command.extend({
 
             if (!dom.isEmpty(node) && /^\s*$/.test(node.innerHTML)) {
                 node.innerHTML = editorNS.emptyElementContent;
+            }
+
+            if (options && options.links) {
+                while (node != root) {
+                    if (dom.is(node, "a")) {
+                        dom.unwrap(node);
+                        break;
+                    }
+                    node = node.parentNode;
+                }
             }
         }
     }
