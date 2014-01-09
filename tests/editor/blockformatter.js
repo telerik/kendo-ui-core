@@ -265,4 +265,20 @@ test("does not apply formatting on inline editor body", function() {
     equal(inline.value(), '<div style="text-align:center;">foo</div>');
 });
 
+test("applying right align to lists adds list-style-position:inside", function() {
+    editor.value("<ul><li>foo</li></ul>");
+
+    justifyRight.apply([editor.body.firstChild.firstChild.firstChild]);
+
+    equal(editor.value(), '<ul><li style="text-align:right;list-style-position:inside;">foo</li></ul>');
+});
+
+test("applying left align to lists removes list-style-position", function() {
+    editor.value('<ul><li style="text-align:right;list-style-position:inside;">foo</li></ul>');
+
+    justifyLeft.apply([editor.body.firstChild.firstChild.firstChild]);
+
+    equal(editor.value(), '<ul><li style="text-align:left;">foo</li></ul>');
+});
+
 }());
