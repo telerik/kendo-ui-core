@@ -38,13 +38,13 @@
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "dd/MM/yyyy",
-                    D: "MMMM-dd-yy",
-                    F: "MMMM-dd-yy h:mm:ss tt",
-                    g: "dd/MM/yyyy h:mm tt",
-                    G: "dd/MM/yyyy h:mm:ss tt",
-                    m: "MMMM dd",
-                    M: "MMMM dd",
+                    d: "yyyy-MM-dd",
+                    D: "MMMM d, yyyy",
+                    F: "MMMM d, yyyy h:mm:ss tt",
+                    g: "yyyy-MM-dd h:mm tt",
+                    G: "yyyy-MM-dd h:mm:ss tt",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "h:mm tt",
                     T: "h:mm:ss tt",
@@ -52,7 +52,7 @@
                     y: "MMMM, yyyy",
                     Y: "MMMM, yyyy"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
                 firstDay: 0
             }
