@@ -123,8 +123,8 @@ var __meta__ = {
         },
 
         _dragcancel: function(e) {
-            this.trigger(CANCEL, { item: this.draggedElement });
             this._cancel();
+            this.trigger(CANCEL, { item: this.draggedElement });
         },
 
         _drag: function(e) {
@@ -201,7 +201,7 @@ var __meta__ = {
                 );
             }
 
-            if(isDefaultPrevented) {
+            if(isDefaultPrevented || placeholderIndex === draggedIndex) {
                 this._cancel();
                 return;
             }
@@ -219,16 +219,14 @@ var __meta__ = {
                 draggableEvent: e
             };
 
-            if(eventData.oldIndex != eventData.newIndex) {
-                this.trigger(CHANGE, eventData);
+            this.trigger(CHANGE, eventData);
 
-                if(connectedList) {
-                    connectedList.trigger(CHANGE, $.extend(eventData, {
-                        action: ACTION_RECEIVE,
-                        oldIndex: MISSING_INDEX,
-                        newIndex: connectedList.indexOf(draggedElement)
-                    }));
-                }
+            if(connectedList) {
+                connectedList.trigger(CHANGE, $.extend(eventData, {
+                    action: ACTION_RECEIVE,
+                    oldIndex: MISSING_INDEX,
+                    newIndex: connectedList.indexOf(draggedElement)
+                }));
             }
 
         },
