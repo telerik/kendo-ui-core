@@ -48,20 +48,20 @@
                 function onEnd(e) {
                     var id = e.sender.element.attr("id"),
                         text = e.item.text(),
-                        index = e.index,
+                        oldIndex = e.oldIndex,
                         newIndex = e.newIndex;
 
-                    kendoConsole.log(id + " end: " + text + " index: " + index + " newIndex: " + newIndex + " action: " + e.action);
+                    kendoConsole.log(id + " end: " + text + " oldIndex: " + oldIndex + " newIndex: " + newIndex + " action: " + e.action);
                     console.log(e.action);
                 }
 
                 function onChange(e) {
                     var id = e.sender.element.attr("id"),
                         text = e.item.text(),
-                        index = e.index,
+                        newIndex = e.newIndex,
                         oldIndex = e.oldIndex;
 
-                    kendoConsole.log(id + " change: " + text + " index: " + index + " oldIndex: " + oldIndex + " action: " + e.action);
+                    kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
                     console.log(e.action);
                 }
 

@@ -185,7 +185,7 @@ var __meta__ = {
             eventData = {
                 action: ACTION_SORT,
                 item: draggedElement,
-                index: draggedIndex,
+                oldIndex: draggedIndex,
                 newIndex: placeholderIndex,
                 draggableEvent: e
             };
@@ -197,7 +197,7 @@ var __meta__ = {
 
                 isDefaultPrevented = !(
                     !this.trigger(END, $.extend(eventData, { action: ACTION_REMOVE }))
-                    && !connectedList.trigger(END, $.extend(eventData, { action: ACTION_RECEIVE, index: MISSING_INDEX, newIndex: connectedList.indexOf(placeholder) }))
+                    && !connectedList.trigger(END, $.extend(eventData, { action: ACTION_RECEIVE, oldIndex: MISSING_INDEX, newIndex: connectedList.indexOf(placeholder) }))
                 );
             }
 
@@ -214,8 +214,8 @@ var __meta__ = {
             eventData = {
                 action: this.indexOf(draggedElement) != MISSING_INDEX ? ACTION_SORT : ACTION_REMOVE,
                 item: draggedElement,
-                index: this.indexOf(draggedElement),
                 oldIndex: draggedIndex,
+                newIndex: this.indexOf(draggedElement),
                 draggableEvent: e
             };
 
@@ -224,8 +224,8 @@ var __meta__ = {
             if(connectedList) {
                 connectedList.trigger(CHANGE, $.extend(eventData, {
                     action: ACTION_RECEIVE,
-                    index: connectedList.indexOf(draggedElement),
-                    oldIndex: MISSING_INDEX
+                    oldIndex: MISSING_INDEX,
+                    newIndex: connectedList.indexOf(draggedElement)
                 }));
             }
         },

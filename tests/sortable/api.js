@@ -115,7 +115,7 @@
             ok(e.item[0] == draggedElement[0], "Correct item is passed");
 
             //initial index should be 2 because filtered items does not count
-            ok(e.index == 1 && e.oldIndex == 2, "Index and oldIndex are correct");
+            ok(e.newIndex == 1 && e.oldIndex == 2, "newIndex and oldIndex are correct");
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
@@ -135,7 +135,7 @@
             ok(e.item[0] == draggedElement[0], "Correct item is passed");
 
             //index should be 2 because filtered items does not count
-            ok(e.index == 2 && e.newIndex == 1, "Index and oldIndex are correct");
+            ok(e.oldIndex == 2 && e.newIndex == 1, "newIndex and oldIndex are correct");
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
