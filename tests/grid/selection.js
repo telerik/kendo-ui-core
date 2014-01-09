@@ -544,10 +544,10 @@
 
     test("detail cell is not focused", function() {
         var grid = setup({ detailTemplate: "<input class='foo' />" });
-        grid.expandRow(table.find(".k-master-row:first"));
+        grid.expandRow(div.find(".k-master-row:first"));
         grid.table.find(".foo").focus().mousedown();
 
-        ok(!table.find(".k-detail-cell").hasClass("k-state-focused"));
+        ok(!div.find(".k-detail-cell").hasClass("k-state-focused"));
     });
 
     test("enter key on header on sortable grid", function() {
