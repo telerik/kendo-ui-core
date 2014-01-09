@@ -403,6 +403,41 @@ test("change max date shows all hours", function() {
     equal(datetimepicker.timeView.ul.children(":last").html(), "11:30 PM");
 });
 
+test("max method limits start hours if current value is equal to min", function() {
+    var date = new Date(2010, 10, 10, 10);
+
+    var datetimepicker = input.kendoDateTimePicker({
+            min: date,
+            max: date,
+            value: date
+        }).data("kendoDateTimePicker");
+
+    var max = new Date(2020, 10, 10, 10, 10, 0);
+
+    datetimepicker.max(max);
+
+    var li = datetimepicker.timeView.ul.find("li");
+
+    equal(li.first().html(), "10:00 AM");
+    equal(li.last().html(), "11:30 PM");
+});
+
+test("max method rebinds list if min and max are in the same day", function() {
+    var datetimepicker = new kendo.ui.DateTimePicker(input, {
+        min: new Date(2010, 10, 10, 10),
+        max: new Date(2010, 10, 12, 10),
+        value: new Date(2010, 10, 10)
+    });
+
+    datetimepicker.max(new Date(2010, 10, 10, 11));
+
+    var li = datetimepicker.timeView.ul.find("li");
+
+    equal(li.length, 3);
+    equal(li.first().html(), "10:00 AM");
+    equal(li.last().html(), "11:00 AM");
+});
+
 test("min method shows all hours in timeView if not edge date", function() {
     var datetimepicker = new kendo.ui.DateTimePicker(input, {
         value: new Date(2010, 10, 10)
@@ -439,7 +474,7 @@ test("min method rebinds timeView to honor min value if current value is min", f
     var ul = datetimepicker.timeView.ul;
 
     equal(ul.children(":first").html(), "10:00 AM");
-    equal(ul.children(":last").html(), "12:00 AM");
+    equal(ul.children(":last").html(), "11:30 PM");
 });
 
 test("max method rebinds timeView to honor max value if current value is max", function() {
