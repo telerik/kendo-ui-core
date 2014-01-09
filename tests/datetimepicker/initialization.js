@@ -288,4 +288,18 @@ test("DateTimePicker does not remove input text on initialization if not valid v
     equal(input.val(), "test");
 });
 
+test("DateTimePicker renders only one possible time option if min and max are equal", function() {
+    var date = new Date(2013, 10, 10, 10);
+    var datetimepicker = new DateTimePicker(input, {
+        min: date,
+        max: date
+    });
+
+    datetimepicker._timeIcon.click();
+
+    var li = datetimepicker.timeView.ul.find("li");
+    equal(li.length, 1);
+    equal(li.html(), "10:00 AM");
+});
+
 })();
