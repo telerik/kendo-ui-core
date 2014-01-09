@@ -9,7 +9,7 @@ tree :to => NUGET_CSS,
 
 tree :to => NUGET_JS,
      :from => WEB_MIN_JS,
-     :root => 'src'
+     :root => DIST_JS_ROOT
 
 
 desc 'Publish a NuGet package for Kendo UI Web GPL'

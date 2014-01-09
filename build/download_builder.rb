@@ -33,7 +33,7 @@ namespace :download_builder do
 
         assets_path = File.join(dist_path, 'service', 'App_Data', VERSION)
         js_assets_path = File.join(assets_path, 'js')
-        task js_assets_path => MIN_JS.sub('src', js_assets_path)
+        task js_assets_path => MIN_JS.sub(DIST_JS_ROOT, js_assets_path)
 
         styles_assets_path = File.join(assets_path, 'styles')
         tree :to => styles_assets_path,
@@ -74,7 +74,7 @@ namespace :download_builder do
 
         tree :to => js_path,
              :from => MIN_JS,
-             :root => "src"
+             :root => DIST_JS_ROOT
 
         css_path = File.join(dist_path, 'styles')
 

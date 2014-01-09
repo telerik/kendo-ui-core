@@ -54,7 +54,7 @@ MVC_DEMOS_SRC = FileList[MVC_DEMOS_ROOT + '**/*.cs']
 # The list of files to deploy in the demos
 MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                 .include(FileList[MVC_MIN_JS]
-                    .sub('src', MVC_DEMOS_ROOT + 'Scripts')
+                    .sub(DIST_JS_ROOT, MVC_DEMOS_ROOT + 'Scripts')
                 )
                 .include(FileList[MIN_CSS_RESOURCES]
                     .sub('styles', MVC_DEMOS_ROOT + 'Content')
@@ -170,7 +170,7 @@ namespace :mvc do
 
     tree :to => MVC_DEMOS_ROOT + 'Scripts',
          :from => MVC_MIN_JS,
-         :root => 'src/'
+         :root => DIST_JS_ROOT
 
     tree :to => MVC_DEMOS_ROOT + 'Scripts',
          :from => DEMO_SHARED_ROOT + 'shared/js/**/*',

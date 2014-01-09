@@ -1,6 +1,5 @@
 require 'rake/clean'
 require 'rake/testtask'
-
 require 'bundler/setup'
 require 'tempfile'
 require 'erb'
@@ -15,6 +14,8 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), "build", "codegen", "lib")
 CDN_ROOT = 'http://cdn.kendostatic.com/'
 KENDO_ORIGIN_HOST = 'kendoorigin'
 STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
+DIST_JS_ROOT = "dist/js"
+KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
 PLATFORM = RbConfig::CONFIG['host_os']
 
@@ -62,9 +63,9 @@ require 'playground'
 
 ROOT_MAP = {
     '.' => /(src|styles\/.+?)\//,
-    'js' => 'src/',
+    'js' => DIST_JS_ROOT,
     'styles' => /styles\/.+?\//,
-    'src/js' => 'src/',
+    'src/js' => DIST_JS_ROOT,
     'src/styles' => /styles\/.+?\//,
     'src/Kendo.Mvc/Kendo.Mvc' => 'wrappers/mvc/src/Kendo.Mvc/',
     'src/Kendo.Mvc/packages' => 'wrappers/mvc/packages/',
@@ -123,9 +124,17 @@ PHP_CONTENT = {
     'wrappers/php' => PHP_DEMOS_SRC
 }
 
+
+file KENDO_CONFIG_FILE do |t|
+    sh "grunt kendo:config"
+end
+
 # Rake tasks
 desc('JavaScript')
-task :js => [MIN_JS, JS_BUNDLES, KENDO_CONFIG_FILE].flatten
+
+task :js do
+    sh 'grunt kendo'
+end
 
 desc('Less')
 multitask :less => [MIN_CSS].flatten
