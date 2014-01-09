@@ -51,6 +51,23 @@ kendo_module({
             if (client.destroy) {
                 this.hub.on(client.destroy, options.pushDestroy);
             }
+        },
+        read: function(options) {
+            var hub = this.hub;
+
+            var server = this.options.server;
+
+            if (!server || !server.read) {
+                throw new Error('Reading data from hub needs the "server.read" option to be set.');
+            }
+
+            var data = this.parameterMap(options.data, "read");
+
+            this.promise.done(function() {
+                hub.invoke(server.read, data)
+                   .done(options.success)
+                   .fail(options.error);
+            });
         }
     });
 })();

@@ -5,7 +5,12 @@ var transport;
 
 function promise() {
     return  {
-        done: $.noop,
+        done: function(callback) {
+            if (callback) {
+                callback();
+            }
+            return this;
+        },
         fail: $.noop
     };
 }
@@ -13,7 +18,9 @@ function promise() {
 function hub() {
     return {
         on: $.noop,
-        invoke: $.noop
+        invoke: function() {
+            return promise();
+        }
     };
 }
 
@@ -225,6 +232,176 @@ test("the context of the custom push method is the transport itself", 1, functio
     });
 
     transport.push();
+});
+
+test("the read method invokes the read server method", function() {
+    var hub = stub( {
+        on: $.noop
+    }, {
+        invoke: function() {
+            return promise();
+        }
+    });
+
+    transport = new SignalR({
+        promise: {
+            done: function(callback) {
+                callback();
+
+                equal(hub.calls("invoke"), 1);
+                equal(hub.args("invoke", 0)[0], "r");
+            },
+            fail: $.noop
+        },
+        hub: hub,
+        server: {
+            read: "r"
+        }
+    });
+
+    transport.read({});
+});
+
+test("the read method throws error if server configuration is not specified", 1, function() {
+    try {
+        transport.read();
+    } catch (e) {
+        equal(e.toString(), 'Error: Reading data from hub needs the "server.read" option to be set.');
+    }
+});
+
+test("the read method passes the data field of the options to the server read method", function() {
+    var hub = stub( {
+        on: $.noop
+    }, {
+        invoke: function() {
+            return promise();
+        }
+    });
+
+    var options = { data: {} };
+
+    transport = new SignalR({
+        promise: {
+            done: function(callback) {
+                callback();
+
+                equal(hub.args("invoke", 0)[1], options.data);
+            },
+            fail: $.noop
+        },
+        hub: hub,
+        server: {
+            read: "r"
+        }
+    });
+
+    transport.read(options);
+});
+
+test("the read method invokes the parameterMap", function() {
+    var transportOptions = {
+        promise: promise(),
+        hub: hub(),
+        server: {
+            read: "r"
+        }
+    };
+
+    stub(transportOptions, "parameterMap");
+
+    transport = new SignalR(transportOptions);
+
+    transport.read({});
+
+    equal(transportOptions.calls("parameterMap"), 1);
+});
+
+test("the read method passes options.data to the parameterMap", function() {
+    var transportOptions = {
+        promise: promise(),
+        hub: hub(),
+        server: {
+            read: "r"
+        }
+    };
+
+    stub(transportOptions, "parameterMap");
+
+    transport = new SignalR(transportOptions);
+
+    var options = { data: {} };
+
+    transport.read(options);
+
+    equal(transportOptions.args("parameterMap", 0)[0], options.data);
+});
+
+test("the read method invokes parameterMap and passes 'read' as the type of operation", function() {
+    var transportOptions = {
+        promise: promise(),
+        hub: hub(),
+        server: {
+            read: "r"
+        }
+    };
+
+    stub(transportOptions, "parameterMap");
+
+    transport = new SignalR(transportOptions);
+
+    transport.read({});
+
+    equal(transportOptions.args("parameterMap", 0)[1], "read");
+});
+
+test("read calls options.success when invoke is done", function() {
+    transport = new SignalR({
+        promise: promise(),
+        hub: {
+            invoke: function() {
+               return promise();
+            },
+            on: $.noop
+        },
+        server: {
+            read: "r"
+        }
+    });
+
+    var options = stub({}, "success");
+
+    transport.read(options);
+
+    equal(options.calls("success"), 1);
+});
+
+test("read calls options.error when invoke fails", function() {
+    transport = new SignalR({
+        promise: promise(),
+        hub: {
+            invoke: function() {
+               return {
+                   done: function() {
+                       return this;
+                   },
+                   fail: function(callback) {
+                       callback();
+                   }
+               };
+            },
+            on: $.noop
+        },
+        server: {
+            read: "r"
+        }
+    });
+
+    var options = stub({}, "error");
+
+    transport.read(options);
+
+    equal(options.calls("error"), 1);
 });
 
 }());
