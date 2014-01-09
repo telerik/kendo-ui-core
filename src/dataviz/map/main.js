@@ -16,8 +16,9 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Navigator = dataviz.ui.Navigator,
         Attribution = dataviz.ui.Attribution,
+        Navigator = dataviz.ui.Navigator,
+        Zoom = dataviz.ui.Zoom,
         defined = dataviz.defined,
 
         g = dataviz.geometry,
@@ -129,6 +130,10 @@
 
             if (this.attribution) {
                 this.attribution.destroy();
+            }
+
+            if (this.zoomControls) {
+                this.zoomControls.destroy();
             }
 
             Widget.fn.destroy.call(this);

@@ -358,3 +358,52 @@ div.k-navigator .k-navigator-w
     position: absolute;
     z-index: 1000;
 }
+
+/* Zoom */
+
+.k-zoom
+{
+    width: 25px;
+    height: 25px;
+    margin: 32px 20px 20px 85px;
+    padding: 2px;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.k-zoom > button
+{
+    border-color: transparent;
+    background: none;
+}
+
+.k-ie7 .k-zoom > button
+{
+    border-width: 0;
+    display: block;
+}
+
+.k-ie7 .k-zoom > button > span
+{
+    vertical-align: middle;
+    display: block;
+}
+
+div.k-zoom > .k-button
+{
+    margin: 0;
+    padding: 0;
+    border-radius: 16px;
+    position: absolute;
+}
+
+div.k-zoom .k-zoom-in
+{
+    left: 0;
+}
+
+div.k-zoom .k-zoom-out
+{
+    right: 0;
+}
+
