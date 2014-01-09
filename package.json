@@ -18,6 +18,7 @@
        "grunt": "~0.4.2",
        "grunt-cli": "~0.1.0",
        "grunt-contrib-jshint": "~0.7.2",
+       "grunt-contrib-copy": "~0.5.0",
        "grunt-karma": "*",
 
        "qunitjs": "~1.12.0",

@@ -4,6 +4,8 @@ var PATH = require("path");
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
     grunt.loadTasks('build/grunt/tasks');
 
     function addSrc(f) {
@@ -131,18 +133,30 @@ module.exports = function(grunt) {
             }
         },
 
+        copy: {
+            jquery: {
+                files: [{
+                    expand: true,
+                    cwd: "src/",
+                    src: [ "jquery.*" ],
+                    dest: '<%= kendo.options.jsDestDir %>/',
+                }]
+            },
+        },
+
         kendo: {
             options: {
-                destDir: PATH.join("dist", "js"),
+                jsDestDir: PATH.join("dist", "js"),
+                destDir: PATH.join("dist"),
             },
             min: {
                 src: main_kendo_files,
-                dest: "<%= kendo.options.destDir %>",
+                dest: "<%= kendo.options.jsDestDir %>",
                 ext: ".min.js",
             },
             full: {
                 src: main_kendo_files,
-                dest: "<%= kendo.options.destDir %>",
+                dest: "<%= kendo.options.jsDestDir %>",
                 ext: ".js",
             },
             download_builder: {
@@ -157,18 +171,28 @@ module.exports = function(grunt) {
             cultures: {
                 src: [ "src/cultures/kendo.culture.*.js",
                        "!src/cultures/kendo.culture.*.min.js" ],
-                dest: "<%= kendo.options.destDir %>/cultures",
+                dest: "<%= kendo.options.jsDestDir %>/cultures",
             },
         },
 
         custom: {
             options: {
+                destDir: "<%= kendo.options.jsDestDir %>",
+            },
+        },
+
+        less: {
+            options: {
                 destDir: "<%= kendo.options.destDir %>",
             },
+            compile: {
+                src: [ "styles/**/kendo*.less" ],
+            }
         },
 
     });
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
+    grunt.registerTask("all", [ "kendo", "copy" ]);
 };
