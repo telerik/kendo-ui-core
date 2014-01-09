@@ -38,7 +38,13 @@ var BlockFormatFinder = Class.extend({
             i, len, candidate;
 
         for (i = 0, len = nodes.length; i < len; i++) {
-            candidate = dom.ofType(nodes[i], format[0].tags) ? nodes[i] : dom.parentOfType(nodes[i], format[0].tags);
+            for (var f = format.length - 1; f >= 0; f--) {
+                candidate = dom.ofType(nodes[i], format[f].tags) ? nodes[i] : dom.parentOfType(nodes[i], format[f].tags);
+                if (candidate) {
+                    break;
+                }
+            }
+
             if (!candidate || candidate.contentEditable === 'true') {
                 return [];
             }
@@ -277,8 +283,7 @@ var FormatCommand = Command.extend({
     }
 });
 
-var BlockFormatTool = FormatTool.extend({
-    init: function (options) {
+var BlockFormatTool = FormatTool.extend({ init: function (options) {
         FormatTool.fn.init.call(this, extend(options, {
             finder: new BlockFormatFinder(options.format),
             formatter: function () {
@@ -296,16 +301,29 @@ extend(Editor, {
     BlockFormatTool: BlockFormatTool
 });
 
-registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: "left"}} }, { tags: ["img"], attr: { style: { "float": "left"}} } ]);
+registerFormat("justifyLeft", [
+    { tags: dom.blockElements, attr: { style: { textAlign: "left", listStylePosition: "" }} },
+    { tags: ["img"], attr: { style: { "float": "left"}} }
+]);
 registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));
 
-registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: "center"}} }, { tags: ["img"], attr: { style: { display: "block", marginLeft: "auto", marginRight: "auto"}} } ]);
+registerFormat("justifyCenter", [
+    { tags: dom.nonListBlockElements, attr: { style: { textAlign: "center" }} },
+    { tags: ["ul","ol","li"], attr: { style: { textAlign: "center", listStylePosition: "inside" }} },
+    { tags: ["img"], attr: { style: { display: "block", marginLeft: "auto", marginRight: "auto"}} }
+]);
 registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Center"})}));
 
-registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: "right"}} }, { tags: ["img"], attr: { style: { "float": "right"}} } ]);
+registerFormat("justifyRight", [
+    { tags: dom.nonListBlockElements, attr: { style: { textAlign: "right" }} },
+    { tags: ["ul","ol","li"], attr: { style: { textAlign: "right", listStylePosition: "inside" }} },
+    { tags: ["img"], attr: { style: { "float": "right"}} }
+]);
 registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Right"})}));
 
-registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: "justify"}} } ]);
+registerFormat("justifyFull", [
+    { tags: dom.blockElements, attr: { style: { textAlign: "justify", listStylePosition: "" }} },
+]);
 registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
 })(window.kendo.jQuery);
