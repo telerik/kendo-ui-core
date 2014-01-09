@@ -142,6 +142,12 @@ module.exports = function(grunt) {
                     dest: '<%= kendo.options.jsDestDir %>/',
                 }]
             },
+            timezones: {
+                files: [{
+                    src: "src/kendo.timezones.js" ,
+                    dest: '<%= kendo.options.jsDestDir %>/',
+                }]
+            },
         },
 
         kendo: {
