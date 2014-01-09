@@ -78,18 +78,6 @@ def uglifyjs(from, to)
     sh cmd, :verbose => VERBOSE
 end
 
-def compilejs(from, options=nil)
-    cmd = "node #{COMPILEJS} #{from} #{options}"
-    sh cmd, :verbose => VERBOSE
-end
-
-def compilejs_bundle(t)
-    deps = t.prerequisites.join(" ")
-    file = t.name
-    cmd = "node #{COMPILEJS} #{file} --bundle #{deps}"
-    sh cmd, :verbose => VERBOSE
-end
-
 def less(from, to)
     sh "node #{LESSC} #{from} #{to}", :verbose => VERBOSE
 end
