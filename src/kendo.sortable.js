@@ -219,15 +219,18 @@ var __meta__ = {
                 draggableEvent: e
             };
 
-            this.trigger(CHANGE, eventData);
+            if(eventData.oldIndex != eventData.newIndex) {
+                this.trigger(CHANGE, eventData);
 
-            if(connectedList) {
-                connectedList.trigger(CHANGE, $.extend(eventData, {
-                    action: ACTION_RECEIVE,
-                    oldIndex: MISSING_INDEX,
-                    newIndex: connectedList.indexOf(draggedElement)
-                }));
+                if(connectedList) {
+                    connectedList.trigger(CHANGE, $.extend(eventData, {
+                        action: ACTION_RECEIVE,
+                        oldIndex: MISSING_INDEX,
+                        newIndex: connectedList.indexOf(draggedElement)
+                    }));
+                }
             }
+
         },
 
         _findTarget: function(e) {
