@@ -85,7 +85,7 @@ test("the push method listens for create notifications from the hub", function()
         }
     });
 
-    transport.push();
+    transport.push({});
 
     equal(proxy.calls("on"), 1);
     equal(proxy.args("on", 0)[0], "create");
@@ -105,7 +105,7 @@ test("the push method listens for update notifications from the hub", function()
         }
     });
 
-    transport.push();
+    transport.push({});
 
     equal(proxy.calls("on"), 1);
     equal(proxy.args("on", 0)[0], "update");
@@ -125,7 +125,7 @@ test("the push method listens for destroy notifications from the hub", function(
         }
     });
 
-    transport.push();
+    transport.push({});
 
     equal(proxy.calls("on"), 1);
     equal(proxy.args("on", 0)[0], "destroy");

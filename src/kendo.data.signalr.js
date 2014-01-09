@@ -7,8 +7,6 @@ kendo_module({
 });
 
 (function() {
-    var operations = { create: "Create", update: "Update", destroy: "Destroy" };
-
     kendo.data.transports.signalr = kendo.data.RemoteTransport.extend({
         init: function (options) {
             options = options || {};
@@ -42,16 +40,16 @@ kendo_module({
         push: function(options) {
             var client = this.options.client || {};
 
-            function push(operation) {
-                return function(result) {
-                    options["push" + operation](result);
-                };
+            if (client.create) {
+                this.hub.on(client.create, options.pushCreate);
             }
 
-            for (var operation in operations) {
-                if (client[operation]) {
-                    this.hub.on(client[operation], push(operations[operation]));
-                }
+            if (client.update) {
+                this.hub.on(client.update, options.pushUpdate);
+            }
+
+            if (client.destroy) {
+                this.hub.on(client.destroy, options.pushDestroy);
             }
         }
     });
