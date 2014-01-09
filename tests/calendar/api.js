@@ -531,6 +531,18 @@ test("min method navigates when custom template is defined", function() {
      equal(cal.calls("_animate"), 1);
 });
 
+test("max method persists selected value when max is in current month", function() {
+     var value = new Date(2000, 10, 10),
+     cal = new Calendar(div, {
+        max: value,
+        value: value
+     });
+
+     cal.max(new Date(2000, 10, 11));
+
+     equal(div.find("td.k-state-selected").length, 1);
+});
+
 test("Should navigate if min is bigger then _current", function() {
      var value = new Date(2000, 10, 10),
          cal = new Calendar(div, {value: value});
