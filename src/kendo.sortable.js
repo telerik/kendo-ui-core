@@ -20,7 +20,12 @@ var __meta__ = {
         CHANGE = "change",
         CANCEL = "cancel",
 
-        DEFAULT_FILTER = ">*";
+        ACTION_SORT = "sort",
+        ACTION_REMOVE = "remove",
+        ACTION_RECEIVE = "receive",
+
+        DEFAULT_FILTER = ">*",
+        MISSING_INDEX = -1;
 
     function containsOrEqualTo(parent, child) {
         try {
@@ -150,7 +155,7 @@ var __meta__ = {
 
                     if(prevVisible[0] != placeholder[0]) {
                         target.element.before(placeholder);
-                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this });
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
                     }
 
                 } else if(offsetTopDelta > 0 || offsetLeftDelta > 0) { //for positive delta the tooptip should be appended after the target
@@ -161,7 +166,7 @@ var __meta__ = {
 
                     if(nextVisible[0] != placeholder[0]) {
                         target.element.after(placeholder);
-                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this });
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
                     }
                 }
             }
@@ -170,11 +175,33 @@ var __meta__ = {
         _dragend: function(e) {
             var placeholder = this.placeholder,
                 draggedElement = this.draggedElement,
-                index = this.indexOf(draggedElement),
+                draggedIndex = this.indexOf(draggedElement),
+                placeholderIndex = this.indexOf(placeholder),
+                connectWith = this.options.connectWith,
+                connectedList,
+                isDefaultPrevented,
                 eventData;
 
-            eventData = { item: draggedElement, index: index, newIndex: this.indexOf(placeholder), draggableEvent: e };
-            if(this.trigger(END, eventData)) {
+            eventData = {
+                action: ACTION_SORT,
+                item: draggedElement,
+                index: draggedIndex,
+                newIndex: placeholderIndex,
+                draggableEvent: e
+            };
+
+            if(placeholderIndex >= 0) {
+                isDefaultPrevented = this.trigger(END, eventData);
+            } else {
+                connectedList = placeholder.parents(connectWith).getKendoSortable();
+
+                isDefaultPrevented = !(
+                    !this.trigger(END, $.extend(eventData, { action: ACTION_REMOVE }))
+                    && !connectedList.trigger(END, $.extend(eventData, { action: ACTION_RECEIVE, index: MISSING_INDEX, newIndex: connectedList.indexOf(placeholder) }))
+                );
+            }
+
+            if(isDefaultPrevented) {
                 this._cancel();
                 return;
             }
@@ -184,8 +211,23 @@ var __meta__ = {
             draggedElement.show();
             this._draggable.dropped = true;
 
-            eventData = { item: draggedElement, index: this.indexOf(draggedElement), oldIndex: index, draggableEvent: e };
+            eventData = {
+                action: this.indexOf(draggedElement) != MISSING_INDEX ? ACTION_SORT : ACTION_REMOVE,
+                item: draggedElement,
+                index: this.indexOf(draggedElement),
+                oldIndex: draggedIndex,
+                draggableEvent: e
+            };
+
             this.trigger(CHANGE, eventData);
+
+            if(connectedList) {
+                connectedList.trigger(CHANGE, $.extend(eventData, {
+                    action: ACTION_RECEIVE,
+                    index: connectedList.indexOf(draggedElement),
+                    oldIndex: MISSING_INDEX
+                }));
+            }
         },
 
         _findTarget: function(e) {
