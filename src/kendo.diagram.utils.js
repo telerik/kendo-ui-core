@@ -18,8 +18,8 @@ var __meta__ = {
         EPSILON = 1e-06;
 
     /*-------------------Diverse utilities----------------------------*/
-    var Utils = Class.extend({
-    });
+    var Utils = {
+    };
 
     deepExtend(Utils, {
         isNearZero: function (num) {
@@ -135,7 +135,7 @@ var __meta__ = {
         if (typeof start == 'undefined' || typeof stop == 'undefined') {
             return [];
         }
-        if (step && Math.sign(stop - start) != Math.sign(step)) {
+        if (step && Utils.sign(stop - start) != Utils.sign(step)) {
             throw "The sign of the increment should allow to reach the stop-value.";
         }
         step = step || 1;
@@ -176,12 +176,7 @@ var __meta__ = {
 
     /*-------------------Diverse math functions----------------------------*/
 
-    Math.sign = function (number) {
-        return number ? number < 0 ? -1 : 1 : 0;
-    };
-    Math.epsilon = 0.000001;
-
-    Math.findRadian = function (start, end) {
+    function findRadian(start, end) {
         if (start == end) {
             return 0;
         }
@@ -192,13 +187,18 @@ var __meta__ = {
             return sngXComp < 0 ? atan + (2 * Math.PI) : atan;
         }
         return atan + Math.PI;
+    }
+
+    Utils.sign = function (number) {
+        return number ? number < 0 ? -1 : 1 : 0;
     };
 
-    Math.findAngle = function (center, end) {
-        return Math.findRadian(center, end) * 180 / Math.PI;
+    Utils.findAngle = function (center, end) {
+        return findRadian(center, end) * 180 / Math.PI;
     };
 
-    /*-------------------Array Extensions ----------------------------*/
+    /*-------------------Array Helpers ----------------------------*/
+
 
     if (!Array.prototype.any) {
         Array.prototype.any = function (predicate, thisRef) {

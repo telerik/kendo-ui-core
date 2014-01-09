@@ -22,7 +22,8 @@ var __meta__ = {
         Set = diagram.Set,
         HyperTree = diagram.Graph,
         Utils = diagram.Utils,
-        Point = diagram.Point;
+        Point = diagram.Point,
+        EPSILON = 1e-06;
 
     /**
      * Base class for layout algorithms.
@@ -1340,8 +1341,8 @@ var __meta__ = {
 
             if (node.children.isEmpty()) {
                 result = new Size(
-                    Math.abs(shapeWidth) < Math.epsilon ? 50 : shapeWidth,
-                    Math.abs(shapeHeight) < Math.epsilon ? 25 : shapeHeight);
+                    Math.abs(shapeWidth) < EPSILON ? 50 : shapeWidth,
+                    Math.abs(shapeHeight) < EPSILON ? 25 : shapeHeight);
             }
             else if (node.children.length === 1) {
                 switch (node.treeDirection) {
@@ -1601,7 +1602,7 @@ var __meta__ = {
                         n.x = selfLocation.x;
                         n.y = selfLocation.y;
                         n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
-                        if (Math.abs(selfLocation.x - p.x) < Math.epsilon) {
+                        if (Math.abs(selfLocation.x - p.x) < EPSILON) {
                             childrenwidth = 0;
                             // means there is an aberration due to the oversized Element with respect to the children
                             for (i = 0; i < n.children.length; i++) {
@@ -1650,7 +1651,7 @@ var __meta__ = {
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
-                                if (Math.abs(selfLocation.x - p.x) < Math.epsilon) {
+                                if (Math.abs(selfLocation.x - p.x) < EPSILON) {
                                     childrenwidth = 0;
                                     // means there is an aberration due to the oversized Element with respect to the children
                                     for (i = 0; i < n.children.length; i++) {
@@ -2002,7 +2003,7 @@ var __meta__ = {
             sortedNodes.sort(function (o1, o2) {
                 var o1layer = layerMap.get(o1);
                 var o2layer = layerMap.get(o2);
-                return Math.sign(o2layer - o1layer);
+                return Utils.sign(o2layer - o1layer);
             });
 
             for (var n = 0; n < sortedNodes.length; ++n) {

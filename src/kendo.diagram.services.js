@@ -1633,7 +1633,7 @@ var __meta__ = {
                 scaleY;
             if (handle.y === -2 && handle.x === -1) {
                 center = this._innerBounds.center();
-                this._angle = this._truncateAngle(Math.findAngle(center, p));
+                this._angle = this._truncateAngle(Utils.findAngle(center, p));
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
