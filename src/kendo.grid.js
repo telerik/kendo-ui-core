@@ -72,6 +72,7 @@ var __meta__ = {
         grep = $.grep,
         isArray = $.isArray,
         inArray = $.inArray,
+        push = Array.prototype.push,
         proxy = $.proxy,
         isFunction = kendo.isFunction,
         isEmptyObject = $.isEmptyObject,
@@ -2077,43 +2078,32 @@ var __meta__ = {
                             return;
                         }
 
-                        var table = {};
-                        var element;
+                        var related;
+                        var result = $();
+                        for (var idx = 0, length = items.length; idx < length; idx ++) {
+                            related = that._relatedRow(items[idx]);
 
-                        items.each(function() {
-                            var element = $(this).closest(elements);
-                            var idx = $.inArray(this, element.find(filter));
-
-                            if (table[idx]) {
-                                delete table[idx];
-                            } else {
-                                table[idx] = element;
+                            if (inArray(related[0], items) < 0) {
+                                result = result.add(related);
                             }
-                        });
-
-                        items = $();
-                        for (var key in table) {
-                            element = elements.not(table[key]);
-                            items = items.add(element.find(filter).eq(key));
                         }
 
-                        table = null;
-                        return items;
+                        return result;
                     },
                     continuousItems: function() {
                         if (!that.staticContent) {
                             return;
                         }
 
-                        var items1 = $(filter, elements[0]);
-                        var items2 = $(filter, elements[1]);
+                        var staticItems = $(filter, elements[0]);
+                        var nonStaticItems = $(filter, elements[1]);
                         var staticColumns = cell ? staticColumnsCount() : 1;
                         var nonStaticColumns = cell ? that.columns.length - staticColumns : 1;
                         var result = [];
 
-                        for (var idx = 0; idx < items1.length; idx += staticColumns) {
-                            [].push.apply(result, items1.slice(idx, idx + staticColumns));
-                            [].push.apply(result, items2.splice(0, nonStaticColumns));
+                        for (var idx = 0; idx < staticItems.length; idx += staticColumns) {
+                            push.apply(result, staticItems.slice(idx, idx + staticColumns));
+                            push.apply(result, nonStaticItems.splice(0, nonStaticColumns));
                         }
 
                         return result;
@@ -2149,6 +2139,22 @@ var __meta__ = {
                     });
                 }
             }
+        },
+
+        _relatedRow: function(row) {
+            var staticTable = this.staticTable;
+            row = $(row);
+
+            if (!staticTable) {
+                return row;
+            }
+
+            var table = row.closest(this.table.add(this.staticTable));
+            var index = table.find(">tbody>tr").index(row);
+
+            table = table[0] === this.table[0] ? staticTable : this.table;
+
+            return table.find(">tbody>tr").eq(index);
         },
 
         clearSelection: function() {

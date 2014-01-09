@@ -421,4 +421,47 @@
         equal(index, 1);
     });
 
+    test("relatedRow returns same row when no static columns", function() {
+        var grid = setup({
+            columns: ["foo", "bar", "baz"]
+        });
+
+        var row = grid.tbody.find("tr:first");
+        var related = grid._relatedRow(row);
+
+        equal(related[0], row[0]);
+    });
+
+    test("relatedRow accepts DOM element", function() {
+        var grid = setup({
+            columns: ["foo", "bar", "baz"]
+        });
+
+        var row = grid.tbody.find("tr")[0];
+        var related = grid._relatedRow(row);
+
+        equal(related[0], row);
+    });
+
+    test("relatedRow returns related row in the non-static table", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        var row = grid.tbody.find("tr:first");
+        var related = grid._relatedRow(grid.staticTable.find("tr").first());
+
+        equal(related[0], row[0]);
+    });
+
+    test("relatedRow returns related row in the static table", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        var row = grid.staticTable.find("tr:first");
+        var related = grid._relatedRow(grid.table.find("tr").first());
+
+        equal(related[0], row[0]);
+    });
 })();
