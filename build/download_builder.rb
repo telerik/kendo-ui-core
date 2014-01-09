@@ -10,20 +10,16 @@ BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.
 
 KENDO_META = File.join(Rake.application.original_dir, "build", "kendo-meta.js");
 
-#Build minified version with no AMD headers for use by the download builder
-rule /^dist\/download-builder.+\.min\.js$/ =>
-    lambda { |t| t.sub(/^dist\/download-builder.+\/js/, 'src').sub('.min.js', '.js') } do |t|
-        FileUtils.mkdir_p File.dirname(t.name)
-        File.open t.name, 'w' do |f|
-            contents = File.read(t.source)
-            contents.sub!("$KENDO_VERSION", VERSION)
-
-            f.write contents;
-        end
-        compilejs(t.name, "--no-amd --no-srcmap")
-    end
-
 namespace :download_builder do
+
+    task :sources do
+        sh "grunt kendo:download_builder"
+        core = File.join(BUILDER_DEPLOY_PATH, 'js/kendo.core.min.js')
+
+        contents = File.read(core)
+        contents.sub!("$KENDO_VERSION", VERSION)
+        File.write(core, contents)
+    end
 
     def download_builder_prerequisites(path, service_url)
         dist_path = File.join('dist', path)
@@ -32,8 +28,12 @@ namespace :download_builder do
             :root => BUILDER_SOURCE_PATH
 
         assets_path = File.join(dist_path, 'service', 'App_Data', VERSION)
+
         js_assets_path = File.join(assets_path, 'js')
-        task js_assets_path => MIN_JS.sub(DIST_JS_ROOT, js_assets_path)
+
+        tree :to => js_assets_path,
+             :from  => MIN_JS.sub(DIST_JS_ROOT, File.join(BUILDER_DEPLOY_PATH, "js")),
+             :root => File.join(BUILDER_DEPLOY_PATH, "js")
 
         styles_assets_path = File.join(assets_path, 'styles')
         tree :to => styles_assets_path,
@@ -61,7 +61,7 @@ namespace :download_builder do
             rm_rf FileList[File.join(dist_path, "{service/App_Data,config}/*")].keep_if { |file| !file.include? VERSION }
         end
 
-        [dist_path, clean_task, index_path, config_file_path, js_assets_path, styles_assets_path]
+        ["download_builder:sources", dist_path, clean_task, index_path, config_file_path, js_assets_path, styles_assets_path]
     end
 
     task :build_staging => download_builder_prerequisites('download-builder-staging', BUILDER_STAGING_SERVICE) do
@@ -70,11 +70,6 @@ namespace :download_builder do
 
     def download_builder_zip_prerequisites
         dist_path = 'dist/download-builder/'
-        js_path = File.join(dist_path, 'js')
-
-        tree :to => js_path,
-             :from => MIN_JS,
-             :root => DIST_JS_ROOT
 
         css_path = File.join(dist_path, 'styles')
 
@@ -89,7 +84,7 @@ namespace :download_builder do
             sh "node #{KENDO_META} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
         end
 
-        [js_path, css_path, config_file_path]
+        ["download_builder:sources", css_path, config_file_path]
     end
 
     zip 'dist/download-builder.zip' => download_builder_zip_prerequisites
