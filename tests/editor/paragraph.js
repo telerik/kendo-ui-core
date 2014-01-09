@@ -431,4 +431,18 @@ test("does not break out of inline editor within list", function() {
     }
 });
 
+test("paragraph at end of link does not transfer it", function() {
+    editor.value('<p><a href="#bar">foo</a></p>');
+
+    var range = editor.createRange();
+    range.setStart(editor.body.firstChild.firstChild.firstChild, 3);
+    range.collapse(true);
+
+    createParagraphCommand(range).exec();
+
+    insertCaretAnchor();
+
+    equal(editor.value(), '<p><a href="#bar">foo</a></p><p><a></a></p>');
+});
+
 }());
