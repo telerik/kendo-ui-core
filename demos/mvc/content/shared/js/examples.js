@@ -76,6 +76,9 @@
             this.href = href;
 
             $.get(href, { partial: 1 }, function (html) {
+
+                $("[data-role=themechooser]").kendoThemeChooser("reset");
+
                 exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function () {
                     var items = $("#examples-nav li").removeClass("active"),
                         item = $($.grep(items, function (li) { return href.indexOf($(li).find("a").attr("href")) > -1; })).addClass("active");
@@ -129,6 +132,8 @@
                 }
 
                 $("#mainWrap").toggleClass("widgetOverview", href.indexOf("overview") > -1);
+
+                $("[data-role=themechooser]").kendoThemeChooser("reset");
 
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function () {
                     kendo.culture("en-US");
@@ -189,7 +194,7 @@
             }, 100);
         },
 
-        getCurrentCommonLink: function() {
+        getCurrentCommonLink: function () {
             return $("head link").filter(function () {
                 return (/kendo\.common/gi).test(this.href);
             });
@@ -610,6 +615,12 @@
                 }, this));
             },
 
+            reset: function () {
+                var icon = this.element.find(".tc-link .k-icon");
+
+                icon.removeClass("k-i-arrow-n").addClass("k-i-arrow-s");
+            },
+
             _getThemeContainer: function () {
                 var themeChooser = this,
                     options = this.options,
@@ -683,7 +694,7 @@
                 name: "ThemeChooser",
                 label: "Choose theme:",
                 theme: "silver",
-                listContainer: "#mainWrapInner",
+                listContainer: "#theme-list-container",
                 itemTemplate: kendo.template(
                     "<li class='tc-theme'>" +
                         "<a href='\\#' class='tc-link#= data.selected ? ' active' : '' #' data-value='#= data.value #'>" +
