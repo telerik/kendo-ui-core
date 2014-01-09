@@ -399,6 +399,10 @@ kendo_module({
             that.id = that.visual.native.id;
             that.content(that.content());
             that._rotate();
+            if (options.hasOwnProperty("layout")) {
+                // pass the defined shape layout, it overtakes the default resizing
+                that.layout = options.layout.bind(options);
+            }
         },
         options: {
             type: "Shape",
@@ -418,7 +422,8 @@ kendo_module({
             connectors: diagram.DefaultConnectors,
             rotation: {
                 angle: 0
-            }
+            },
+            editable: true
         },
         bounds: function (value) {
             var point, size, bounds, options;
@@ -1166,6 +1171,7 @@ kendo_module({
             that._clipboard = [];
             that._drop();
             that._initEditor();
+            this.pauseMouseHandlers = false;
         },
         options: {
             name: "Diagram",
@@ -1374,6 +1380,9 @@ kendo_module({
             this._raiseItemsAdded([shape]);
             shape.redraw();
 
+            // for shapes which have their own internal layout mechanism
+            if (shape.hasOwnProperty("layout"))
+                shape.layout(shape);
             return shape;
         },
         /**
@@ -1925,7 +1934,7 @@ kendo_module({
             this.trigger(SELECT, {selected: selected, deselected: deselected});
         },
         _getValidZoom: function (zoom) {
-            return Math.min(Math.max(zoom, 0.7), 2.0);
+            return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
         },
         _panTransform: function (pos) {
             var diagram = this,
@@ -2172,6 +2181,9 @@ kendo_module({
             }
         },
         _mouseDown: function (e) {
+            if (this.pauseMouseHandlers) {
+                return;
+            }
             var p = this._calculatePosition(e);
             if (e.button === 0 && this.toolService.start(p, this._meta(e))) {
                 e.preventDefault();
@@ -2186,12 +2198,18 @@ kendo_module({
             }
         },
         _mouseUp: function (e) {
+            if (this.pauseMouseHandlers) {
+                return;
+            }
             var p = this._calculatePosition(e);
             if (e.button === 0 && this.toolService.end(p, this._meta(e))) {
                 e.preventDefault();
             }
         },
         _mouseMove: function (e) {
+            if (this.pauseMouseHandlers) {
+                return;
+            }
             var p = this._calculatePosition(e);
             if (e.button === 0 && this.toolService.move(p, this._meta(e))) {
                 e.preventDefault();

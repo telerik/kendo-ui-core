@@ -43,6 +43,7 @@ kendo_module({
         LEFT = "Left",
         BOTTOM = "Bottom",
         DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO];
+        ZOOM_RATE = 1.1;
 
     diagram.Cursors = Cursors;
 
@@ -287,6 +288,9 @@ kendo_module({
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
                 shape.bounds(this.redoStates[i]);
+                // the 'layout' property, if implemented, lets the shape itself work out what to do with the new bounds
+                if (shape.hasOwnProperty("layout"))
+                    shape.layout(shape, this.undoStates[i], this.redoStates[i]);
             }
             if (this.adorner) {
                 this.adorner.refreshBounds();
@@ -530,7 +534,7 @@ kendo_module({
         },
         doubleClick: function () {
         },
-        tryActivate: function () {
+        tryActivate: function (p, meta) {
             return false;
         },
         getCursor: function () {
@@ -626,7 +630,7 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        tryActivate: function () {
+        tryActivate: function (p, meta) {
             return true; // the pointer tool is last and handles all others requests.
         },
         start: function (p, meta) {
@@ -674,7 +678,7 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        tryActivate: function () {
+        tryActivate: function (p, meta) {
             return this.toolService.diagram._canRectSelect() && this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
         },
         start: function (p) {
@@ -741,7 +745,7 @@ kendo_module({
             this.toolService = toolService;
             this.type = "ConnectionTool";
         },
-        tryActivate: function () {
+        tryActivate: function (p, meta) {
             var item = this.toolService.hoveredItem,
                 isActive = item && item.path; // means it is connection
             if (isActive) {
@@ -1416,8 +1420,8 @@ kendo_module({
                 that.rotationThumb = new Path(that.options.rotationThumb);
                 that.visual.append(that.rotationThumb);
             }
-            that.diagram.bind("select", function () {
-                that._initialize();
+            that.diagram.bind("select", function (e) {
+                that._initialize(e.selected);
             });
 
             that._refreshHandler = function () {
@@ -1686,7 +1690,10 @@ kendo_module({
                             newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
                         }
                         if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
+                            var oldBounds = bounds;
                             shape.bounds(this._truncateSizeToGuides(newBounds));
+                            if (shape.hasOwnProperty("layout"))
+                                shape.layout(shape, oldBounds, newBounds);
                             shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                             changed += 1;
                         }

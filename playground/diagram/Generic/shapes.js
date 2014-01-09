@@ -1,4 +1,175 @@
+/*
+ Defines some methods which are generic to a Shape implementing its own inner layout on resize.
+ * */
+var SelfLayoutShape = window.kendo.Class.extend({
+        init: function (options) {
+        },
+
+        DFT: function (el, func) {
+            func(el);
+            if (el.childNodes) {
+                for (var i = 0; i < el.childNodes.length; i++) {
+                    var item = el.childNodes[i];
+                    this.DFT(item, func);
+                }
+            }
+        },
+
+        /*
+         Returns the angle in degrees for the given matrix
+         */
+        getMatrixAngle: function (m) {
+            if (m === null || m.d === 0) return 0;
+            return Math.atan2(m.b, m.d) * 180 / Math.PI;
+        },
+
+        /*
+         Returns the scaling factors for the given matrix.
+         */
+        getMatrixScaling: function (m) {
+            var sX = Math.sqrt(m.a * m.a + m.c * m.c);
+            var sY = Math.sqrt(m.b * m.b + m.d * m.d);
+            return [sX, sY];
+        }
+
+    })
+    ;
+
+var mediaPlayerShape = SelfLayoutShape.extend({
+    init: function (options) {
+        SelfLayoutShape.fn.init.call(this, options);
+    },
+    options: {
+        name: "Special",
+        data: function (data) {
+
+            // define the elements of the shape and in the layout method define how they are positioned upon resize
+
+            var g = new kendo.diagram.Group({
+                autoSize: true,
+                id: "shapeRoot"
+            });
+            var background = new kendo.diagram.Rectangle({
+                width: 100,
+                height: 100,
+                background: "dimgray",
+                id: "background"
+            });
+            g.append(background);
+
+            var view = new kendo.diagram.Rectangle({
+                width: 90,
+                height: 60,
+                background: "silver",
+                id: "view"
+            });
+            view.native.setAttribute("transform", "translate(5,5)");
+            g.append(view);
+
+            var playBar = new kendo.diagram.Rectangle({
+                width: 90,
+                height: 10,
+                background: "steelblue",
+                cornerRadius: 6,
+                id: "playBar"
+            });
+            playBar.native.setAttribute("transform", "translate(5,78)");
+            g.append(playBar);
+
+            var playGroup = new kendo.diagram.Group({
+                id: "playGroup"
+            });
+            playGroup.native.setAttribute("transform", "translate(35,70)");
+            g.append(playGroup);
+
+            var playCircle = new kendo.diagram.Circle({
+                radius: 15,
+                background: "silver",
+                id: "playCircle"
+            });
+            playGroup.append(playCircle);
+
+            var playIcon = new kendo.diagram.Path({
+                data: "m7.5,5.5l0,18l18.25,-9.69231l-18.25,-8.30769z",
+                background: "orange"
+            });
+            playGroup.append(playIcon);
+            return g;
+        },
+        connectors: [],
+
+
+        layout: function (shape, oldBounds, newBounds) {
+            var that = shape.options.parent();
+            if (!kendo.diagram.Utils.isDefined(newBounds)) {
+                newBounds = shape.bounds();
+            }
+            if (!kendo.diagram.Utils.isDefined(oldBounds)) {
+                oldBounds = shape.bounds();
+            }
+            var c = newBounds.center();
+            //var sx = newBounds.width / oldBounds.width;
+            var sy = newBounds.height / oldBounds.height;
+            var svg = shape.visual.native.ownerSVGElement;
+            var consolidatedMatrix = svg.createSVGTransform().matrix;
+            var p = new kendo.diagram.Point(c.x - newBounds.x - 25, c.y - newBounds.y - 25);
+
+            // do not use this since it will access the item in the toolbox...!
+            // var special = document.getElementById("special");
+
+            var shapeRoot;
+            that.DFT(shape.visual.native, function (n) {
+                if (n.id === "shapeRoot") {
+                    shapeRoot = n;
+                    n.removeAttribute("transform");
+                }
+                if (n.id === "background") {
+                    n.removeAttribute("transform");
+                    n.setAttribute("width", newBounds.width);
+                    n.setAttribute("height", newBounds.height);
+                }
+                if (n.id === "playBar") {
+                    n.removeAttribute("transform");
+                    n.setAttribute("width", newBounds.width - 20);
+                    n.setAttribute("x", 10);
+                    n.setAttribute("y", newBounds.height - 30);
+                }
+                if (n.id === "playGroup") {
+                    /*n.setAttribute("cx", newBounds.width/2);
+                     n.setAttribute("cy", newBounds.height-25);*/
+                    n.setAttribute("transform", "translate(" + (newBounds.width / 2 - 15) + "," + (newBounds.height - 40) + ")");
+                }
+                if (n.id === "view") {
+                    n.removeAttribute("transform");
+                    n.setAttribute("width", newBounds.width - 10);
+                    n.setAttribute("height", newBounds.height - 50);
+                    n.setAttribute("x", 5);
+                    n.setAttribute("y", 5);
+
+                    /*
+                     // the following undoes the scaling of the parent if it's not reset earlier
+                     var resetScaling = svg.createSVGTransform();
+                     var s = that.getMatrixScaling(shapeRoot.getCTM());
+                     resetScaling.setScale(1 / s[0], 1 / s[1]);
+                     consolidatedMatrix = consolidatedMatrix.multiply(resetScaling.matrix);*/
+
+                    /* var shift = svg.createSVGTransform();
+                     shift.setTranslate(p.x, p.y);
+                     consolidatedMatrix = consolidatedMatrix.multiply(shift.matrix);
+
+                     var m = consolidatedMatrix;
+                     n.setAttribute("transform", "matrix(" + m.a + " " + m.b + " " + m.c + " " + m.d + " " + m.e + " " + m.f + ")");*/
+                }
+            });
+
+
+        }
+
+    }
+});
 var shapesSource = [
+    new mediaPlayerShape()
+    ,
     {
         options: {
             name: "Circle",
