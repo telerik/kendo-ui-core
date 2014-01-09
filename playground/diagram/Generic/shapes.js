@@ -167,9 +167,109 @@ var mediaPlayerShape = SelfLayoutShape.extend({
 
     }
 });
+var tabControl = SelfLayoutShape.extend({
+    init: function (options) {
+        SelfLayoutShape.fn.init.call(this, options);
+    },
+    options: {
+        name: "Special",
+        data: function (data) {
+            function makeTab (index, title) {
+                var g = new kendo.diagram.Group({
+                    autoSize: true,
+                    id: "tabGroup" + index
+                });
+                var tabRectangle = new kendo.diagram.Rectangle({
+                    width: 100,
+                    height: 30,
+                    background: "silver",
+                    id: "tabRectangle" + index
+                });
+                //tabRectangle.native.setAttribute("transform", "translate(0,0)");
+                g.append(tabRectangle);
+
+                var text = new kendo.diagram.TextBlock();
+                text.content(title);
+                text.native.setAttribute("transform", "translate(10,10)");
+                g.append(text);
+
+                return g;
+            }
+            var g = new kendo.diagram.Group({
+                autoSize: true,
+                id: "shapeRoot"
+            });
+            var background = new kendo.diagram.Rectangle({
+                width: 100,
+                height: 100,
+                background: "dimgray",
+                id: "background"
+            });
+            g.append(background);
+
+            var tab1 = makeTab(1, "Tab1");
+            tab1.native.setAttribute("transform", "translate(5,0)");
+            g.append(tab1);
+
+            var tab2 = makeTab(2, "Tab2");
+            tab2.native.setAttribute("transform", "translate(105,0)");
+            g.append(tab2);
+
+
+            return g;
+        },
+        connectors: [],
+
+
+        layout: function (shape, oldBounds, newBounds) {
+            var that = shape.options.parent();
+            if (!kendo.diagram.Utils.isDefined(newBounds)) {
+                newBounds = shape.bounds();
+            }
+            if (!kendo.diagram.Utils.isDefined(oldBounds)) {
+                oldBounds = shape.bounds();
+            }
+            var c = newBounds.center();
+            var svg = shape.visual.native.ownerSVGElement;
+
+            var p = new kendo.diagram.Point(c.x - newBounds.x - 25, c.y - newBounds.y - 25);
+
+            var shapeRoot;
+            that.DFT(shape.visual.native, function (n) {
+                if (n.id === "shapeRoot") {
+                    shapeRoot = n;
+                    n.removeAttribute("transform");
+                }
+                if (n.id === "background") {
+                    n.removeAttribute("transform");
+                    n.setAttribute("width", newBounds.width);
+                    n.setAttribute("height", newBounds.height - 35);
+                    n.setAttribute("x", 0);
+                    n.setAttribute("y", 30);
+                }
+
+                if (n.id === "tab1") {
+                    n.removeAttribute("transform");
+                    n.setAttribute("width", 100);
+                    n.setAttribute("height", 30);
+                    n.setAttribute("transform", "translate(" + 5 + "," + 0 + ")");
+                }
+                if (n.id === "tab2") {
+                    n.removeAttribute("transform");
+                    n.setAttribute("width", 100);
+                    n.setAttribute("height", 30);
+                    n.setAttribute("transform", "translate(" + 205 + "," + 0 + ")");
+                }
+            });
+
+
+        }
+
+    }
+});
 var shapesSource = [
-    new mediaPlayerShape()
-    ,
+    new mediaPlayerShape(),
+    new tabControl()     ,
     {
         options: {
             name: "Circle",
