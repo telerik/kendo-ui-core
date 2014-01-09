@@ -12,3 +12,43 @@
       :values:
           - pin
           - circle
+    - :name: markers.tooltip.position
+      :type: String
+      :description: The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+      :values:
+          - bottom
+          - top
+          - left
+          - right
+    - :name: markerDefaults.tooltip.position
+      :type: String
+      :description: The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+      :values:
+          - bottom
+          - top
+          - left
+          - right
+    - :name: controls.attribution.position
+      :type: String
+      :description: The position of the attribution control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :values:
+          - topLeft
+          - topRight
+          - bottomRight
+          - bottomLeft
+    - :name: controls.navigator.position
+      :type: String
+      :description: The position of the navigator control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :values:
+          - topLeft
+          - topRight
+          - bottomRight
+          - bottomLeft
+    - :name: controls.zoom.position
+      :type: String
+      :description: The position of the zoom control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :values:
+          - topLeft
+          - topRight
+          - bottomRight
+          - bottomLeft
