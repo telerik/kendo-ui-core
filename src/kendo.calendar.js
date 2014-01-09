@@ -721,7 +721,9 @@ kendo_module({
             }
 
             if (isBigger || isEqualMonth(currentValue, value)) {
-                that._value = null;
+                if (isBigger) {
+                    that._value = null;
+                }
                 that._changeView = true;
             }
 
