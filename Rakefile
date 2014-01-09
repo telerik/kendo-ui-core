@@ -133,7 +133,7 @@ end
 desc('JavaScript')
 
 task :js do
-    sh 'grunt kendo'
+    sh 'grunt all'
 end
 
 desc('Less')
