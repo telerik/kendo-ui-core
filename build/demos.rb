@@ -172,7 +172,11 @@ def demos(options)
 
         # Create offline demos by processing the corresponding .cshtml files
         rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| DEMOS_BULDFILES.include(find_demo_src(t, path)) } do |t|
-            body = File.read(find_demo_src(t.name, path))
+            body = ""
+            File.open(find_demo_src(t.name, path), 'r:bom|utf-8') do |file|
+                body = file.read
+            end
+
             body.gsub!(/@section \w+ {(.|\n|\r)+?}/, '')
             body.gsub!(/@{(.|\n|\r)+?}/, '')
             body.gsub!(/@@/, '')
