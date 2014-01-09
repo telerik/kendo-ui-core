@@ -1368,7 +1368,9 @@ kendo_module({
                         $(document.documentElement).one("selectstart", kendo.preventDefault);
                     })
                     .on(TRACK_MOUSE_UP, function() {
-                        that._activeDragHandle._end();
+                        if (that._activeDragHandle) {
+                            that._activeDragHandle._end();
+                        }
                     });
 
             that.wrapper
