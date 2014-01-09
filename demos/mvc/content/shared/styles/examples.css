@@ -1242,6 +1242,7 @@ p#copy
     letter-spacing: -0.04em;
     display: block;
     font-weight: 400;
+    
 }
 
 #exampleTitle strong
@@ -1355,17 +1356,21 @@ p#copy
 #themeWrap
 {
     font-size: .9em;
-    line-height: 26px;
+    line-height: 23px;
     float: right;
     margin-right: 200px;
 }
 
 #themeWrap .get-kendoui
 {
-    line-height: 24px;
+    line-height: 9px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
+    padding: 7px 11px 8px;
+    font-weight: normal;
+    margin: 22px 0 0 3px;
+    font-size: 12px;
 }
 
 .k-theme-chooser,
@@ -1601,7 +1606,7 @@ p#copy
 #example
 {
     position:relative;
-    padding:15px 0 18px 15px;
+    padding:15px 0 18px 0;
     min-height:200px;
     font-size: 12px;
 }
