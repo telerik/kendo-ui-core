@@ -1200,7 +1200,8 @@ var __meta__ = {
                 if (mode === "incell") {
                     if (editable.update !== false) {
                         that.wrapper.on(CLICK + NS, "tr:not(.k-grouping-row) > td", function(e) {
-                            var td = $(this);
+                            var td = $(this),
+                                isStaticCell = that.staticTable && td.closest("table")[0] === that.staticTable[0];
 
                             if (td.hasClass("k-hierarchy-cell") ||
                                 td.hasClass("k-detail-cell") ||
@@ -1208,7 +1209,8 @@ var __meta__ = {
                                 td.hasClass("k-edit-cell") ||
                                 td.has("a.k-grid-delete").length ||
                                 td.has("button.k-grid-delete").length ||
-                                td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
+                                (td.closest("tbody")[0] !== that.tbody[0] && !isStaticCell) ||
+                                $(e.target).is(":input")) {
                                 return;
                             }
 
@@ -1285,9 +1287,19 @@ var __meta__ = {
                         }
                     }).data("kendoEditable");
 
-                cell.parent().addClass("k-grid-edit-row");
+                var tr = cell.parent().addClass("k-grid-edit-row");
+
+                if (that.staticContent) {
+                    adjustRowHeight(tr[0], that._relatedRow(tr).addClass("k-grid-edit-row")[0]);
+                }
 
                 that.trigger(EDIT, { container: cell, model: model });
+            }
+        },
+
+        _syncStaicContentHeight: function() {
+            if (this.staticTable) {
+                adjustRowsHeight(this.table, this.staticTable);
             }
         },
 
@@ -1351,6 +1363,7 @@ var __meta__ = {
                 cell = that._editContainer,
                 id,
                 column,
+                tr,
                 model;
 
             if (!cell) {
@@ -1367,7 +1380,7 @@ var __meta__ = {
             cell.removeClass("k-edit-cell");
             column = that.columns[that.cellIndex(cell)];
 
-            cell.parent().removeClass("k-grid-edit-row");
+            tr = cell.parent().removeClass("k-grid-edit-row");
 
             that._destroyEditable(); // editable should be destoryed before content of the container is changed
 
@@ -1375,6 +1388,10 @@ var __meta__ = {
 
             if (cell.hasClass("k-dirty-cell")) {
                 $('<span class="k-dirty"/>').prependTo(cell);
+            }
+
+            if (that.staticContent) {
+                adjustRowHeight(tr.css("height", "")[0], that._relatedRow(tr).css("height", "")[0]);
             }
         },
 
@@ -1856,7 +1873,8 @@ var __meta__ = {
 
                 var model = dataSource.insert(index, {}),
                     id = model.uid,
-                    row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
+                    table = that.staticContent ? that.staticTable : that.table,
+                    row = table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
                     cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").eq(that._firstEditableColumnIndex(row));
 
                 if (mode === "inline" && row.length) {
@@ -4302,25 +4320,35 @@ var __meta__ = {
                } else {
                    html = this._rowsHtml(data, templates);
                }
+
                appendContent(table.children("tbody"), table, html);
 
-               adjustRowHeight(this.table, table);
+               this._syncStaicContentHeight();
            }
        }
    });
 
-   function adjustRowHeight(table1, table2) {
+   function adjustRowHeight(row1, row2) {
+       var height;
+
+       if (row1.clientHeight > row2.clientHeight) {
+           height = row1.clientHeight + "px";
+       } else if (row1.clientHeight < row2.clientHeight) {
+           height = row2.clientHeight + "px";
+       }
+       row1.style.height = row2.style.height = height;
+   }
+
+   function adjustRowsHeight(table1, table2) {
       var rows = table1[0].rows,
         length = rows.length,
         idx,
         rows2 = table2[0].rows;
 
+      table1.add(table2).find(">tbody>tr").css("height", "");
+
       for (idx = 0; idx < length; idx++) {
-        if (rows[idx].clientHeight > rows2[idx].clientHeight) {
-            rows2[idx].style.height = rows[idx].clientHeight + "px";
-        } else if (rows[idx].clientHeight < rows2[idx].clientHeight) {
-            rows[idx].style.height = rows2[idx].clientHeight + "px";
-        }
+        adjustRowHeight(rows[idx], rows2[idx]);
       }
    }
 

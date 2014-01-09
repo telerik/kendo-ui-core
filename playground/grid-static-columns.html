@@ -89,7 +89,19 @@
                             transport: {
                                 read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
                             },
-                            pageSize: 5
+                            pageSize: 5,
+                            schema: {
+                                model: {
+                                    id: "CustomerID",
+                                    fields: {
+                                        CustomerID: { type: "number" },
+                                        ContactName: { type: "string" },
+                                        ContactTitle: { type: "string"},
+                                        CompanyName: { type: "string"},
+                                        Country: { type: "string"}
+                                    }
+                                }
+                            }
                         },
                         groupable: true,
                         sortable: true,
@@ -97,19 +109,18 @@
                             refresh: true,
                             buttonCount: 5
                         },
+                        editable: true,
                         selectable: "multiple row",
                         reorderable: true,
                         resizable: true,
+                        toolbar: ["create"],
                         columns: [{
-                            field: "CustomerID",
-                            static: true,
-                            width: 100
-                        }, {
                             field: "ContactName",
                             template: "[static 1] #=ContactName# <br/> #=ContactName#",
                             title: "[static 1] Contact Name",
                             static: true,
                             footerTemplate: "[static 1]",
+                            editor: "<textarea style='height:300px'/>",
                             width: 140
                         }, {
                             field: "ContactTitle",
@@ -124,7 +135,11 @@
                             title: "Company Name",
                             footerTemplate: "baz",
                             width: 250
-                        }, {
+                        },{
+                            field: "CustomerID",
+                            static: true,
+                            width: 100
+                        },  {
                             field: "Country",
                             width: 110
                         }]

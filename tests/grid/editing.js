@@ -54,6 +54,63 @@
         ok(cell.find(":input").length);
     });
 
+    test("static cell click enters edit mode", function() {
+        var grid = setup({ columns: [{ field: "foo", static: true }, "name"] });
+
+        var cell = grid.staticTable.find("td:first").click();
+
+        ok(cell.find(":input").length);
+    });
+
+    test("editing static cell sync row height", function() {
+        var grid = setup({ columns: [{ field: "foo", static: true, editor: "<input style='height:200px'>" }, "name"] });
+
+        var cell = grid.staticTable.find("td:first").click();
+
+        var tr = cell.parent();
+        var related = grid._relatedRow(tr);
+
+        equal(tr.height(), related.height());
+    });
+
+    test("closeCell on static cell sync row height", function() {
+        var grid = setup({ columns: [{ field: "foo", static: true, editor: "<input style='height:200px'>" }, "name"] });
+
+        var cell = grid.staticTable.find("td:first");
+
+        var originalHeight = cell.parent().height();
+
+        grid.editCell(cell);
+        grid.closeCell(cell);
+
+        var tr = cell.parent();
+        var related = grid._relatedRow(tr);
+
+        equal(tr.height(), related.height());
+        equal(tr.height(), originalHeight);
+    });
+
+
+    test("editing static cell both rows have css class set", function() {
+        var grid = setup({ columns: [{ field: "foo", static: true }, "name"] });
+
+        var cell = grid.staticTable.find("td:first").click();
+
+        var tr = cell.parent();
+        var related = grid._relatedRow(tr);
+
+        ok(tr.hasClass("k-grid-edit-row"));
+        ok(related.hasClass("k-grid-edit-row"));
+    });
+
+    test("editing static cell add css class", function() {
+        var grid = setup({ columns: [{ field: "foo", static: true }, "name"] });
+
+        var cell = grid.staticTable.find("td:first").click();
+
+        ok(cell.hasClass("k-edit-cell"));
+    });
+
     test("clicking next to a cell with additional table is switched to edit mode", function() {
         setup({
             columns: [
