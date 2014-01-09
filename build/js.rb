@@ -8,7 +8,7 @@ def in_dist(list)
     list.pathmap File.join(DIST_JS_ROOT, "%f")
 end
 
-CULTURES_AND_TIMEZONES = FileList['src/cultures/*.js'].pathmap(File.join(DIST_JS_ROOT, "cultures", "%f")
+CULTURES_AND_TIMEZONES = FileList['src/cultures/*.js'].pathmap(File.join(DIST_JS_ROOT, "cultures", "%f"))
 
 def dependencies(component)
     in_dist(FileList[YAML.load(`node #{METAJS} --all-deps kendo.#{component}.js`).keep_if { |file| file.include? "kendo" }]).include(CULTURES_AND_TIMEZONES)
@@ -27,7 +27,7 @@ JQUERY_MAP = FileList[File.join(DIST_JS_ROOT, 'jquery.min.map')]
 # Suites
 COMPLETE_JS = dependencies("all")
 
-MIN_JS = FileList[COMPLETE_JS].include(ASPNET_MVC).exclude(JS_BUNDLES).ext('min.js')
+MIN_JS = FileList[COMPLETE_JS - JS_BUNDLES - CULTURES_AND_TIMEZONES].include(ASPNET_MVC).ext('min.js')
 
 WEB_SRC_JS = dependencies("web")
 WEB_MIN_JS = WEB_SRC_JS.ext('min.js').include(JQUERY)
