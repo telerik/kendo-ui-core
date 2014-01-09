@@ -61,3 +61,8 @@ function propertyFrom(className, property) {
     return result;
 }
 
+window.EditorHelpers = {
+    serialize: function(dom) {
+        return kendo.ui.editor.Serializer.domToXhtml(dom);
+    }
+};
