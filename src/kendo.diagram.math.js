@@ -19,7 +19,8 @@ var __meta__ = {
         Utils = diagram.Utils,
         Point = dataviz.Point2D,
         isFunction = kendo.isFunction,
-        contains = Utils.contains;
+        contains = Utils.contains,
+        map = $.map;
 
     // Constants ==============================================================
     var HITTESTAREA = 3,
@@ -605,13 +606,13 @@ var __meta__ = {
                     nums = v.slice(7, v.length - 1).trim();
                     parts = nums.split(",");
                     if (parts.length === 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                        return Matrix.fromList(map(parts, function (p) {
                             return parseFloat(p);
                         }));
                     }
                     parts = nums.split(" ");
                     if (parts.length === 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                        return Matrix.fromList(map(parts, function (p) {
                             return parseFloat(p);
                         }));
                     }
@@ -623,7 +624,7 @@ var __meta__ = {
                 if (v.indexOf(",") > 0) {
                     parts = v.split(",");
                     if (parts.length === 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                        return Matrix.fromList(map(parts, function (p) {
                             return parseFloat(p);
                         }));
                     }
@@ -631,7 +632,7 @@ var __meta__ = {
                 if (v.indexOf(" ") > 0) {
                     parts = v.split(" ");
                     if (parts.length === 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                        return Matrix.fromList(map(parts, function (p) {
                             return parseFloat(p);
                         }));
                     }

@@ -236,10 +236,6 @@ var __meta__ = {
         };
     }
 
-    if (!Array.prototype.each) {
-        Array.prototype.each = Array.prototype.forEach;
-    }
-
     if (!Array.prototype.map) {
         /**
          Maps the given functional to each element of the array. See also the 'apply' method which accepts in addition some parameters.
