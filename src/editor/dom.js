@@ -62,7 +62,7 @@ if (browser.msie && browser.version >= 8) {
 var whitespace = /^\s+$/,
     rgb = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
     bom = /\ufeff/g,
-    whitespaceOrBom = /^\s+|\ufeff$/,
+    whitespaceOrBom = /^(\s+|\ufeff)$/,
     persistedScrollTop,
     cssAttributes =
            ("color,padding-left,padding-right,padding-top,padding-bottom," +
