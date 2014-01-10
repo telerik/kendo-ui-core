@@ -259,9 +259,9 @@ var __meta__ = {
 
             if($.contains(this.element[0], element)) { //the element is part of the sortable container
                 items = this.items();
-                node = items.filter(element).eq(0) || items.has(element).eq(0);
+                node = items.filter(element)[0] || items.has(element)[0];
 
-                return node.length ? { element: node, sortable: this } : null;
+                return node ? { element: $(node), sortable: this } : null;
             } else if (connectWith) {
                 connected = $(connectWith);
 
@@ -270,11 +270,11 @@ var __meta__ = {
                         var sortable = connected.eq(i).getKendoSortable();
                         if(sortable) {
                             items = sortable.items();
-                            node = items.filter(element).eq(0) || items.has(element).eq(0);
+                            node = items.filter(element)[0] || items.has(element)[0];
 
-                            if(node.length) {
+                            if(node) {
                                 sortable.placeholder = this.placeholder;
-                                return { element: node, sortable: sortable };
+                                return { element: $(node), sortable: sortable };
                             } else {
                                 return null;
                             }
