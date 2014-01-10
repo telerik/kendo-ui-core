@@ -1338,7 +1338,7 @@ kendo_module({
                 for (var idx = resources.length - 1; idx >=0; idx--) {
                     var resource = resources[idx];
 
-                    var value = this._resourceValue(resource, resource.dataSource.at(resourceIndex % resource.dataSource.total()));
+                    var value = this._resourceValue(resource, resource.dataSource.view()[resourceIndex % resource.dataSource.total()]);
 
                     if (resource.multiple) {
                         value = [value];

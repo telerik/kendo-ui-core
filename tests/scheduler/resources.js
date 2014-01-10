@@ -1935,6 +1935,57 @@
         cell.trigger({ type: "dblclick", pageX: offset.left, pageY: offset.top });
     });
 
+    test("double clicking a week view cell get correct resources information with horizontal multiple grouping if resources are sorted", 4, function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 2:00"),
+            endTime: new Date("2013/6/6 3:00"),
+            group: {
+                resources: ["ResourceName", "ResourceName2"]
+            },
+            resources: [
+                {
+                    field: "foo",
+                    name: "ResourceName",
+                    dataSource: {
+                        sort: { field: "text", dir: "desc" },
+                        data: [
+                            { text: "Foo 1", value: 1, color: "red" },
+                            { text: "Foo 2", value: 2, color: "green" }
+                        ]
+                    }
+                },
+                {
+                    field: "bar",
+                    name: "ResourceName2",
+                    dataSource: [
+                        { text: "Foo 1", value: 1, color: "red" },
+                        { text: "Foo 2", value: 2, color: "green" }
+                    ]
+                }
+
+            ],
+            dataSource: [ ],
+            views: ["week"]
+        });
+
+        var view = scheduler.view();
+
+        view.bind("add", function(e) {
+            var event = e.eventInfo;
+
+            deepEqual(event.start, new Date(2013, 5, 6, 2, 0, 0));
+            deepEqual(event.end, new Date(2013, 5, 6, 2, 30, 0));
+
+            equal(event.foo, 1);
+            equal(event.bar, 2);
+        });
+
+        var cell = view.content.find("tr:eq(0) td:eq(25)");
+        var offset = cell.offset();
+        cell.trigger({ type: "dblclick", pageX: offset.left, pageY: offset.top });
+    });
+
     test("double clicking a week view cell triggers add event with resources information and horizontal multiple grouping - resource set as multiple", 4, function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
