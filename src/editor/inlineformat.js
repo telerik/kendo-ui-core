@@ -477,4 +477,4 @@ registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", 
 
 })(window.kendo.jQuery);
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
