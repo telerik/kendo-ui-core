@@ -173,6 +173,15 @@ test("fix tag nesting", function() {
     equal(clipboard._fixTagNesting("<p><b>foo</b></b></p>"), "<p><b>foo</b></p>");
     equal(clipboard._fixTagNesting("<b><p>foo</b></p>"), "<b></b><p>foo</p>");
     equal(clipboard._fixTagNesting("<p data-bar>foo</b></p>"), "<p data-bar>foo</p>");
+    equal(clipboard._fixTagNesting(
+        "<table><tbody><tr><td>foo</td></tr></tbody></table>"),
+        "<table><tbody><tr><td>foo</td></tr></tbody></table>");
+    equal(clipboard._fixTagNesting(
+        "<table><tbody><tr><td><p>foo</p></td></tr></tbody></table><p>bar</p>"),
+        "<table><tbody><tr><td><p>foo</p></td></tr></tbody></table><p>bar</p>");
+    equal(clipboard._fixTagNesting(
+        "<p>bar</p><table><tbody><tr><td><p>foo</p></td></tr></tbody></table>"),
+        "<p>bar</p><table><tbody><tr><td><p>foo</p></td></tr></tbody></table>");
 });
 
 }());
