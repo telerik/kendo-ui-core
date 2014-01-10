@@ -5,6 +5,7 @@
         "kendo.data.odata.js",
         "kendo.data.xml.js",
         "kendo.data.js",
+        "kendo.data.signalr.js",
         "kendo.binder.js",
         "kendo.validator.js",
         "kendo.router.js",
