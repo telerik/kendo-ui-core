@@ -9,10 +9,19 @@ namespace :timezone do
     end
 
 TIMEZONE_TEMPLATE = ERB.new(
-%{kendo.timezone.zones=<%= zones.to_json.gsub(/,null\\]/, ']') %>;
+%{
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+var kendo = window.kendo;
+
+kendo.timezone.zones=<%= zones.to_json.gsub(/,null\\]/, ']') %>;
 kendo.timezone.rules=<%= rules.to_json.gsub(/,null\\]/, ']') %>;
 kendo.timezone.zones_titles=<%= zones_titles.to_json %>;
 kendo.timezone.windows_zones=<%= windows_zones.to_json %>;
+
+return kendo;
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
 }, 0, '<%>')
 
     desc 'Generate timezone JavaScript files'
