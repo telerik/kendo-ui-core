@@ -1834,3 +1834,11 @@ div.k-imagebrowser-dropzone em
         .border-radius(@inner-border-radius 0 0 @inner-border-radius);
     }
 }
+
+// High contrast mode
+@media screen and (-ms-high-contrast: active) {
+    .k-secondary .k-dropdown-wrap.k-state-focused,
+    .k-secondary .k-button-group .k-tool:focus {
+        border-color: #fff;
+    }
+}
