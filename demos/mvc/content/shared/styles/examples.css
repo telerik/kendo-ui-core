@@ -611,8 +611,9 @@ div.submenu-box ol {
 .sourceChooser,
 #codeStrip .k-content.k-tabstrip .k-tabstrip-items
 {
-    border-bottom:1px solid #b2b2b2;
-    background: #f3f5f7;
+    border:1px solid #dfdfdf;
+    border-top: none;
+    background: #fbfbfc;
 }
 
 .demos-nav
@@ -1232,8 +1233,6 @@ p#copy
 #exampleTitle
 {
     color:#000;
-    padding-bottom: 50px;
-    margin: 50px 0 0 0;
     font-style: normal;
     font-variant: normal;
     font-size: 24px;
@@ -1242,7 +1241,10 @@ p#copy
     letter-spacing: -0.04em;
     display: block;
     font-weight: 400;
-    
+    position: absolute;
+    top: 23px;
+    left: 0;
+    z-index: 100;    
 }
 
 #exampleTitle strong
@@ -1333,16 +1335,21 @@ p#copy
 
 #examples-nav
 {
-    float:right;
     width:169px;
     text-align:left;
+    margin-top: -65px;
+    border-left: 1px solid #dfdfdf;
+    position: absolute;
+    right: 0;
+    height: 100%;
 }
 
 #main
 {
     float:left;
-    width:1000px;
-    border-right: 1px solid #dbdbde;
+    width:970px;
+    margin-right:30px;
+    border-top: 1px solid #dfdfdf;
 }
 
 .widgetOverview #main
@@ -1353,9 +1360,20 @@ p#copy
     margin:0;
 }
 
+.widgetOverview #mainWrapInner
+{
+    margin-top: 50px;
+}
+
+.widgetOverview #exampleTitle
+{
+    position:relative;
+    top:0;
+    margin-bottom:50px;
+}
+
 #themeWrap
 {
-    font-size: .9em;
     line-height: 23px;
     float: right;
     margin-right: 200px;
@@ -1413,7 +1431,7 @@ p#copy
 {
     display: none;
     list-style-type: none;
-    margin: 0 0 18px;
+    margin: 18px 0;
     padding: 0 0 18px 10px;
     border-bottom: 1px solid #dfdfdf;
 }
@@ -1448,6 +1466,7 @@ p#copy
     -moz-box-shadow: 0 0 7px rgba(0,0,0,.15);
     -webkit-box-shadow: 0 0 7px rgba(0,0,0,.15);
     box-shadow: 0 0 7px rgba(0,0,0,.15);
+    text-decoration: none;
 }
 
 .tc-theme .tc-link.active
@@ -1480,7 +1499,7 @@ p#copy
 #nav-pager
 {
     font-size:.9em;
-    margin-top: 20px;
+    padding-top: 20px;
     margin-left: 13px;
 }
 
@@ -1503,11 +1522,6 @@ p#copy
 #nav-pager .next
 {
     padding-right:11px;
-}
-
-#exampleWrap
-{
-    padding-right: 30px;
 }
 
 .widgetOverview #exampleWrap
@@ -2284,19 +2298,17 @@ pre.prettyprint
 #codeStrip
 {
     border:0;
-    margin-right: 30px;
     margin-bottom: 84px;
     font-size: 12px;
 }
 
 #codeStrip .k-tabstrip-items
 {
-    border-bottom:1px solid #c7c7c7;
+    border-bottom:1px solid #dfdfdf;
     padding: 0;
     position: relative;
     z-index:1;
-
-    background: #f7f7f6; /* Old browsers */
+    background: #fff; /* Old browsers */
 }
 
 #codeStrip .k-item .k-loading
@@ -2308,7 +2320,6 @@ pre.prettyprint
     display: block;
     float: right;
     position: relative;
-    background: #d3d3d3;
     z-index: 2
 }
 
@@ -2343,9 +2354,20 @@ pre.prettyprint
 {
     background:none;
     border-width:0;
-    color:#4e4e4e;
+    color:#428bca;
     font-size:1.1em;
     padding:.9em 1.1em .7em;
+}
+
+#codeStrip .k-link:hover
+{
+    text-decoration:underline;
+}
+
+#codeStrip .k-link:active
+{
+    color:#000;
+    text-decoration: none;
 }
 
 #codeStrip li.k-state-active
@@ -2388,9 +2410,10 @@ pre.prettyprint
     margin:10px 0 10px 14px;
     font-size:1em;
     line-height:1.2;
+    color: #0487c4;
 }
 
-#codeStrip .k-tabstrip .k-link:hover,
+/*#codeStrip .k-tabstrip .k-link:hover,
 #codeStrip .k-tabstrip .k-state-active .k-link,
 #codeStrip .k-tabstrip .k-state-active .k-link:hover
 {
@@ -2398,30 +2421,31 @@ pre.prettyprint
     border-radius:14px;
     padding:6px 10px;
 
-    background:#ececec;
-    background: -moz-linear-gradient(top, #f5f5f5 0%, #e3e3e3 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e3e3e3)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #f5f5f5 0%, #e3e3e3 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #f5f5f5 0%, #e3e3e3 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #f5f5f5 0%, #e3e3e3 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #f5f5f5 0%, #e3e3e3 100%); /* W3C */
+    background:#ececec;*/
+    /* background: -moz-linear-gradient(top, #f5f5f5 0%, #e3e3e3 100%); /* FF3.6+ */
+    /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e3e3e3)); /* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top, #f5f5f5 0%, #e3e3e3 100%); /* Chrome10+,Safari5.1+ */
+    /*background: -o-linear-gradient(top, #f5f5f5 0%, #e3e3e3 100%); /* Opera 11.10+ */
+    /*background: -ms-linear-gradient(top, #f5f5f5 0%, #e3e3e3 100%); /* IE10+ */
+    /*background: linear-gradient(to bottom, #f5f5f5 0%, #e3e3e3 100%); /* W3C */
+/*}*/
+
+#codeStrip .k-tabstrip .k-state-active .k-link
+{
+    color: #000;
 }
 
 #codeStrip .k-tabstrip .k-link:hover
 {
-    border:1px solid #d0d0d0;
-    padding:5px 9px;
-    box-shadow:0 0 2px #dadada;
-}
-
-#codeStrip .k-tabstrip .k-state-active .k-link
-{
-    box-shadow:inset 0 1px 1px #b0b0b0,0 1px 0 #fff;
+   color: #036c9c;
+   text-decoration: underline;
 }
 
 #codeStrip .k-content .k-content
 {
     background: #fff;
+    border: 1px solid #dfdfdf;
+    border-top: none;
 }
 
 #codeStrip .k-content
@@ -2613,6 +2637,11 @@ pre.prettyprint
 {
     margin: 0;
     box-shadow: none;
+}
+
+#mainWrapInner
+{
+    padding-top: 18px;
 }
 
 .nomargin dd
