@@ -143,9 +143,9 @@ var __meta__ = {
             }
 
             // calculate and cache the bounds of the components
-            components.forEach(function (c) {
-                c.calcBounds();
-            });
+            for (var i = 0; i < components.length; i++) {
+                components[i].calcBounds();
+            }
 
             // order by decreasing width
             components.sort(function (a, b) {
@@ -160,7 +160,6 @@ var __meta__ = {
                 startY = this.options.totalMargin.height,
                 x = startX,
                 y = startY,
-                i,
                 resultLinkSet = [],
                 resultNodeSet = [];
 
@@ -896,21 +895,27 @@ var __meta__ = {
         _repulsion: function (n) {
             n.dx = 0;
             n.dy = 0;
-            this.graph.nodes.forEach(function (m) {
+
+            for (var i = 0; i < this.graph.nodes.length; i++) {
+                var m = this.graph.nodes[i];
+
                 if (m === n) {
-                    return;
+                    continue;
                 }
+
                 while (n.x === m.x && n.y === m.y) {
                     this._shake(m);
                 }
+
                 var vx = n.x - m.x;
                 var vy = n.y - m.y;
                 var distance = Math.sqrt(vx * vx + vy * vy);
                 var r = this._SquareForce(distance, n, m) * 2;
                 n.dx += (vx / distance) * r;
                 n.dy += (vy / distance) * r;
-            }, this);
+            }
         },
+
         _attraction: function (link) {
             var t = link.target;
             var s = link.source;
@@ -1960,6 +1965,8 @@ var __meta__ = {
         },
         _prepare: function (graph) {
             var current = [], i, l, link;
+            var node;
+
             for (l = 0; l < graph.links.length; l++) {
                 // of many dummies have been inserted to make things work
                 graph.links[l].depthOfDumminess = 0;
@@ -1968,12 +1975,13 @@ var __meta__ = {
             // defines a mapping of a node to the layer index
             var layerMap = new Dictionary();
 
-            graph.nodes.forEach(function (node) {
+            for (i = 0; i < graph.nodes.length; i++) {
+                node = graph.nodes[i];
                 if (node.incoming.length === 0) {
                     layerMap.set(node, 0);
                     current.push(node);
                 }
-            });
+            }
 
             while (current.length > 0) {
                 var next = current.shift();
@@ -2008,7 +2016,7 @@ var __meta__ = {
             });
 
             for (var n = 0; n < sortedNodes.length; ++n) {
-                var node = sortedNodes[n];
+                node = sortedNodes[n];
                 var minLayer = Number.MAX_VALUE;
 
                 if (node.outgoing.length === 0) {
@@ -2080,11 +2088,12 @@ var __meta__ = {
             this._dedummify();
 
             // re-reverse the links which were switched earlier
-            reversedEdges.forEach(function (e) {
+            for (var i = 0; i < reversedEdges.length; i++) {
+                var e = reversedEdges[i];
                 if (e.points) {
                     e.points.reverse();
                 }
-            });
+            }
         },
 
         setMinDist: function (m, n, minDist) {
@@ -2316,11 +2325,14 @@ var __meta__ = {
 
             this.downNodes = new Dictionary();
             this.upNodes = new Dictionary();
-            this.graph.nodes.forEach(function (node) {
+            for (i = 0; i < this.graph.nodes.length; i++) {
+                node = this.graph.nodes[i];
                 this.downNodes.set(node, []);
                 this.upNodes.set(node, []);
-            }, this);
-            this.graph.links.forEach(function (link) {
+            }
+
+            for (i = 0; i < this.graph.links.length; i++) {
+                var link = this.graph.links[i];
                 var origin = link.source;
                 var dest = link.target;
                 var down = null, up = null;
@@ -2334,10 +2346,12 @@ var __meta__ = {
                 }
                 this.downNodes.get(up).push(down);
                 this.upNodes.get(down).push(up);
-            }, this);
+            }
+
             this.downNodes.forEachValue(function (list) {
                 list.sort(this._gridPositionComparer);
             });
+
             this.upNodes.forEachValue(function (list) {
                 list.sort(this._gridPositionComparer);
             });
@@ -2389,10 +2403,11 @@ var __meta__ = {
             var leftPos = this.placeLeftToRight(leftClasses);
             var rightPos = this.placeRightToLeft(rightClasses);
             var x = new Dictionary();
-            this.graph.nodes.forEach(function (node) {
-                x.set(node, (leftPos.get(node) + rightPos.get(node)) / 2);
-            });
 
+            for (i = 0; i < this.graph.nodes.length; i++) {
+                node = this.graph.nodes[i];
+                x.set(node, (leftPos.get(node) + rightPos.get(node)) / 2);
+            }
 
             var order = new Dictionary();
             var placed = new Dictionary();
@@ -2425,10 +2440,11 @@ var __meta__ = {
                 }
             }
             var directions = [1, -1];
-            directions.forEach(function (d) {
+            for (i = 0; i < directions.length; i++) {
+                var d = directions[i];
                 var start = d === 1 ? 0 : this.layers.length - 1;
-                for (var l = start; 0 <= l && l < this.layers.length; l += d) {
-                    var layer = this.layers[l];
+                for (l = start; 0 <= l && l < this.layers.length; l += d) {
+                    layer = this.layers[l];
                     var virtualStartIndex = this._firstVirtualNode(layer);
                     var virtualStart = null;
                     var sequence = null;
@@ -2485,8 +2501,7 @@ var __meta__ = {
                     }
                     this.adjustDirections(l, d, order, placed);
                 }
-            }, this);
-
+            }
 
             var fromLayerIndex = this._isIncreasingLayout() ? 0 : this.layers.length - 1;
             var reachedFinalLayerIndex = function (k, ctx) {
@@ -2707,7 +2722,11 @@ var __meta__ = {
 
         placeLeft: function (node, leftPos, leftClass) {
             var pos = Number.NEGATIVE_INFINITY;
-            this._getComposite(node).forEach(function (v) {
+            var composite = this._getComposite(node);
+            var v;
+
+            for (var i = 0; i < composite.length; i++) {
+                v = composite[i];
                 var leftSibling = this.leftSibling(v);
                 if (leftSibling && this.nodeLeftClass.get(leftSibling) === this.nodeLeftClass.get(v)) {
                     if (!leftPos.containsKey(leftSibling)) {
@@ -2715,18 +2734,25 @@ var __meta__ = {
                     }
                     pos = Math.max(pos, leftPos.get(leftSibling) + this.getMinDist(leftSibling, v));
                 }
-            }, this);
+            }
+
             if (pos === Number.NEGATIVE_INFINITY) {
                 pos = 0;
             }
-            this._getComposite(node).forEach(function (v) {
+
+            for (i = 0; i < composite.length; i++) {
+                v = composite[i];
                 leftPos.set(v, pos);
-            });
+            }
         },
 
         placeRight: function (node, rightPos, rightClass) {
             var pos = Number.POSITIVE_INFINITY;
-            this._getComposite(node).forEach(function (v) {
+            var composite = this._getComposite(node);
+            var v;
+
+            for (var i = 0; i < composite.length; i++) {
+                v = composite[i];
                 var rightSibling = this.rightSibling(v);
                 if (rightSibling && this.nodeRightClass.get(rightSibling) === this.nodeRightClass.get(v)) {
                     if (!rightPos.containsKey(rightSibling)) {
@@ -2734,13 +2760,16 @@ var __meta__ = {
                     }
                     pos = Math.min(pos, rightPos.get(rightSibling) - this.getMinDist(v, rightSibling));
                 }
-            }, this);
+            }
+
             if (pos === Number.POSITIVE_INFINITY) {
                 pos = 0;
             }
-            this._getComposite(node).forEach(function (v) {
+
+            for (i = 0; i < composite.length; i++) {
+                v = composite[i];
                 rightPos.set(v, pos);
-            });
+            }
         },
 
         leftSibling: function (node) {
@@ -2846,7 +2875,8 @@ var __meta__ = {
             });
 
             // each node strives for its barycenter; high priority nodes start first
-            sorted.forEach(function (node) {
+            for (var i = 0; i < sorted.length; i++) {
+                var node = sorted[i];
                 var nodeGridPos = node.gridPosition;
                 var nodeBaryCenter = this.calcBaryCenter(node);
                 var nodePriority = (node.upstreamPriority + node.downstreamPriority) / 2;
@@ -2883,7 +2913,7 @@ var __meta__ = {
                         nodeGridPos = node.gridPosition;
                     }
                 }
-            }, this);
+            }
 
             // after the layer has been rearranged we need to recalculate the barycenters
             // of the nodes in the surrounding layers

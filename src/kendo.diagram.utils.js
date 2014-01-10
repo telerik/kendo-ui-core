@@ -550,11 +550,11 @@ var __meta__ = {
             });
         },
         trigger: function () {
-            var _this = this;
             if (this.handlers) {
-                this.handlers.forEach(function (h) {
-                    return h.call(_this.caller !== null ? _this.caller : _this);
-                });
+                for (var i = 0; i < this.handlers.length; i++) {
+                    var h = this.handlers[i];
+                    h.call(this.caller !== null ? this.caller : this);
+                }
             }
         },
         onStep: function () {
