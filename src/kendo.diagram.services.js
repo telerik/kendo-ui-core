@@ -1,9 +1,13 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.diagram.svg" ], f);
+})(function(){
+
+var __meta__ = {
     id: "diagram.services",
     name: "Diagram Services",
     category: "diagram",
-    depends: ["diagram.svg"]
-});
+    depends: [ "diagram.svg" ]
+};
 
 (function ($, undefined) {
     // Imports ================================================================
@@ -1888,3 +1892,7 @@ kendo_module({
         SelectionTool: SelectionTool
     });
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.popup" ], f);
+})(function(){
+
+var __meta__ = {
     id: "tooltip",
     name: "Tooltip",
     category: "web",
     description: "The Tooltip widget displays a popup hint for a given html element.",
     depends: [ "core", "popup" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -427,3 +431,7 @@ kendo_module({
 
     kendo.ui.plugin(Tooltip);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,11 +1,15 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "scheduler.view",
     name: "Scheduler View",
     category: "web",
     description: "The Scheduler Common View",
     depends: [ "core" ],
     hidden: true
-});
+};
 
 (function($) {
     var kendo = window.kendo,
@@ -2008,3 +2012,7 @@ kendo_module({
     });
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

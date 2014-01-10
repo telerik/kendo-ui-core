@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./lists" ], f);
+})(function(){
+
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -284,3 +288,5 @@ registerTool("createLink", new Tool({ key: "K", ctrl: true, command: LinkCommand
 registerTool("unlink", new UnlinkTool({ key: "K", ctrl: true, shift: true, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

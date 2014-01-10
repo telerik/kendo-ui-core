@@ -1,10 +1,6 @@
-kendo_module({
-    id: "aspnetmvc",
-    name: "ASP.NET MVC",
-    category: "wrappers",
-    description: "Scripts required by Kendo UI for ASP.NET MVC",
-    depends: [ "data", "combobox", "multiselect", "validator" ] //define all dependencies here because all files are combined in kendo.aspnetmvc.js
-});
+(function(f, define){
+    define([ "../kendo.data", "../kendo.combobox", "../kendo.multiselect", "../kendo.validator" ], f);
+})(function(){
 
 (function ($, undefined) {
     var kendo = window.kendo,
@@ -347,3 +343,5 @@ kendo_module({
         }
     });
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

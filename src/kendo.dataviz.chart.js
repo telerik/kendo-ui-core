@@ -1,26 +1,27 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.dataviz.svg", "./kendo.dataviz.themes" ], f);
+})(function(){
+
+var __meta__ = {
     id: "dataviz.chart",
     name: "Chart",
     category: "dataviz",
-    description: "The Chart widget uses modern browser technologies to " +
-                 "render high-quality data visualizations in the browser.",
+    description: "The Chart widget uses modern browser technologies to render high-quality data visualizations in the browser.",
     depends: [ "data", "userevents", "dataviz.core", "dataviz.svg", "dataviz.themes" ],
-    features: [{
+    features: [ {
         id: "dataviz.chart-polar",
         name: "Polar & Radar",
         description: "Support for Polar and Radar charts.",
-        depends: ["dataviz.chart.polar"],
-        requireJS: false /* don't make dataviz.chart depend on
-                          * dataviz.chart.polar to avoid circular dependency.
-                          * Ticket 725435 */
+        depends: [ "dataviz.chart.polar" ],
+        requireJS: false
     }, {
         id: "dataviz.chart-funnel",
         name: "Funnel chart",
         description: "Support for Funnel chart.",
-        depends: ["dataviz.chart.funnel"],
+        depends: [ "dataviz.chart.funnel" ],
         requireJS: false
-    }]
-});
+    } ]
+};
 
 (function ($, undefined) {
     // Imports ================================================================
@@ -11354,3 +11355,7 @@ kendo_module({
     });
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

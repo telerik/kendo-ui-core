@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.popup" ], f);
+})(function(){
+
+var __meta__ = {
     id: "timepicker",
     name: "TimePicker",
     category: "web",
     description: "The TimePicker widget allows the end user to select a value from a list of predefined values or to type a new value.",
     depends: [ "popup" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -887,3 +891,7 @@ kendo_module({
     ui.plugin(TimePicker);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

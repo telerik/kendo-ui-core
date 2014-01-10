@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.popover", "./kendo.mobile.shim" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.actionsheet",
     name: "ActionSheet",
     category: "mobile",
     description: "The mobile ActionSheet widget displays a set of choices related to a task the user initiates.",
     depends: [ "mobile.popover", "mobile.shim" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -120,3 +124,7 @@ kendo_module({
 
     ui.plugin(ActionSheet);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

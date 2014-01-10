@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "../kendo.imagebrowser", "./link" ], f);
+})(function(){
+
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -223,3 +227,5 @@ kendo.ui.editor.ImageCommand = ImageCommand;
 registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Insert Image" }) }));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

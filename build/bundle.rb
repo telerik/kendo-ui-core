@@ -29,13 +29,14 @@ def bundle(options)
         file_license license => File.join(legal_dir, "#{options[:license]}.txt")
     end
 
+
     options[:contents].each do |target, contents|
 
         root = ROOT_MAP[target]
 
         raise "Nothing specified for '#{target}' in ROOT_MAP" unless root
 
-        to = "#{path}/#{target}"
+        to = File.join(path, target)
 
         tree :to => to,
              :from => contents,

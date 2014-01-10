@@ -1,11 +1,15 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dataviz.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "dataviz.themes",
     name: "Themes",
     description: "Built-in themes for the DataViz widgets",
     category: "dataviz",
     depends: [ "dataviz.core" ],
     hidden: true
-});
+};
 
 (function () {
 
@@ -1786,3 +1790,6 @@ kendo_module({
 
 })(window.kendo.jQuery);
 
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

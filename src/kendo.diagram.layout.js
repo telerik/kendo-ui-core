@@ -1,9 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.diagram.math" ], f);
+})(function(){
+
+var __meta__ = {
     id: "diagram",
     name: "Diagram Layout",
     category: "diagram",
-    depends: ["diagram.math"]
-});
+    depends: [ "diagram.math" ]
+};
+
 (function ($, undefined) {
     var kendo = window.kendo,
         diagram = kendo.diagram,
@@ -3797,3 +3802,7 @@ kendo_module({
         PositionAdapter: PositionAdapter
     });
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

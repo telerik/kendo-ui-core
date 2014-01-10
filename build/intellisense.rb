@@ -67,9 +67,9 @@ def get_intellisense(sources)
     classes = sources.map do |source|
         parser = CodeGen::MarkdownParser.new
 
-        markdown = File.read(source)
-
-        parser.parse(File.read(source), CodeGen::IntelliSense::Component)
+        File.open(source, 'r:bom|utf-8') do |file|
+            parser.parse(file.read, CodeGen::IntelliSense::Component)
+        end
     end
 
     classes.sort! {|a, b| a.full_name <=> b.full_name }

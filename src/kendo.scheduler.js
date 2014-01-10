@@ -1,11 +1,13 @@
-/*jshint eqnull: true */
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dropdownlist", "./kendo.editable", "./kendo.multiselect", "./kendo.window", "./kendo.datepicker", "./kendo.scheduler.recurrence", "./kendo.scheduler.view", "./kendo.scheduler.dayview", "./kendo.scheduler.agendaview", "./kendo.scheduler.monthview", "./kendo.mobile.actionsheet", "./kendo.mobile.pane" ], f);
+})(function(){
+
+var __meta__ = {
     id: "scheduler",
     name: "Scheduler",
     category: "web",
     description: "The Scheduler is an event calendar.",
-    depends: [ "dropdownlist", "editable", "multiselect", "window", "datepicker", "scheduler.recurrence",
-        "scheduler.view" ],
+    depends: [ "dropdownlist", "editable", "multiselect", "window", "datepicker", "scheduler.recurrence", "scheduler.view" ],
     features: [ {
         id: "scheduler-dayview",
         name: "Scheduler Day View",
@@ -27,8 +29,9 @@ kendo_module({
         description: "Support for adaptive rendering",
         depends: [ "mobile.actionsheet", "mobile.pane" ]
     } ]
-});
+};
 
+/*jshint eqnull: true */
 (function($, undefined) {
     var kendo = window.kendo,
         date = kendo.date,
@@ -3390,3 +3393,7 @@ kendo_module({
     ui.plugin(MobileTimezoneEditor);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

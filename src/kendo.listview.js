@@ -1,4 +1,8 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.data", "./kendo.editable", "./kendo.selectable" ], f);
+})(function(){
+
+var __meta__ = {
     id: "listview",
     name: "ListView",
     category: "web",
@@ -15,7 +19,7 @@ kendo_module({
         description: "Support for selection",
         depends: [ "selectable" ]
     } ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -655,3 +659,7 @@ kendo_module({
 
     kendo.ui.plugin(ListView);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,11 +1,15 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.popup" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.shim",
     name: "Shim",
     category: "mobile",
     description: "Mobile Shim",
     depends: [ "popup" ],
     hidden: true
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -98,3 +102,7 @@ kendo_module({
 
     ui.plugin(Shim);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

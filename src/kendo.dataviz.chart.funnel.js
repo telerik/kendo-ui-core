@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dataviz.chart" ], f);
+})(function(){
+
+var __meta__ = {
     id: "dataviz.chart.funnel",
     name: "Funnel Chart",
     category: "dataviz",
-    depends: ["dataviz.chart"],
+    depends: [ "dataviz.chart" ],
     hidden: true
-});
+};
 
 (function ($, undefined) {
 
@@ -492,3 +496,7 @@ kendo_module({
     });
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

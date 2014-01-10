@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.userevents" ], f);
+})(function(){
+
+var __meta__ = {
     id: "numerictextbox",
     name: "NumericTextBox",
     category: "web",
     description: "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
     depends: [ "core", "userevents" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -681,3 +685,7 @@ kendo_module({
 
     ui.plugin(NumericTextBox);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

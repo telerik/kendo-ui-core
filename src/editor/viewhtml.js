@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./indent" ], f);
+})(function(){
+
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -80,3 +84,5 @@ kendo.ui.editor.ViewHtmlCommand = ViewHtmlCommand;
 Editor.EditorUtils.registerTool("viewHtml", new Tool({ command: ViewHtmlCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "View HTML"})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

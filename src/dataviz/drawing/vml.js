@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./svg" ], f);
+})(function(){
+
 (function ($) {
 
     // Imports ================================================================
@@ -524,3 +528,5 @@
     });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

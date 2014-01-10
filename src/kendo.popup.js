@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "popup",
     name: "Pop-up",
     category: "framework",
     depends: [ "core" ],
     advanced: true
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -556,3 +560,7 @@ kendo_module({
 
     ui.plugin(Popup);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

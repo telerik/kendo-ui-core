@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.userevents" ], f);
+})(function(){
+
+var __meta__ = {
     id: "selectable",
     name: "Selectable",
     category: "framework",
     depends: [ "core", "userevents" ],
     advanced: true
-});
+};
 
 (function ($, undefined) {
     var kendo = window.kendo,
@@ -334,3 +338,6 @@ kendo_module({
 
 })(window.kendo.jQuery);
 
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

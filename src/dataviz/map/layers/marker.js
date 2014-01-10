@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./tile" ], f);
+})(function(){
+
 (function ($, undefined) {
     // Imports ================================================================
     var doc = document,
@@ -200,3 +204,5 @@
     });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

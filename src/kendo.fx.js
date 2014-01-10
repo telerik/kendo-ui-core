@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "fx",
     name: "Effects",
     category: "framework",
     description: "Required for animation effects in all Kendo UI widgets.",
     depends: [ "core" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -1512,3 +1516,7 @@ kendo_module({
     fx.Transition = Transition;
     fx.createEffect = createEffect;
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

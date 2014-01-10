@@ -23,7 +23,7 @@ tree :to => PHP_DEMOS_RESOURCES,
 
 tree :to => PHP_DEMOS_RESOURCES + "js",
      :from => FileList[MIN_JS].include('src/jquery.min.js'),
-     :root => 'src/'
+     :root => DIST_JS_ROOT
 
 tree :to => PHP_DEMOS_RESOURCES + "css",
      :from => MIN_CSS_RESOURCES,

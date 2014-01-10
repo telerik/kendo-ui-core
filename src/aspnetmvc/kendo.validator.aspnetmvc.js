@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./kendo.imagebrowser.aspnetmvc" ], f);
+})(function(){
+
 (function ($, undefined) {
     var nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g;
 
@@ -209,3 +213,5 @@
         }
     });
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

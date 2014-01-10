@@ -1,12 +1,16 @@
-/*jshint eqnull: true */
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.data" ], f);
+})(function(){
+
+var __meta__ = {
     id: "binder",
     name: "MVVM",
     category: "framework",
     description: "Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model (the data) from the View (the UI).",
     depends: [ "core", "data" ]
-});
+};
 
+/*jshint eqnull: true */
 (function ($, undefined) {
     var kendo = window.kendo,
         Observable = kendo.Observable,
@@ -1598,3 +1602,7 @@ kendo_module({
     };
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
