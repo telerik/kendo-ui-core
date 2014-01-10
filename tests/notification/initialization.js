@@ -66,11 +66,11 @@
         equal(fooFunc({}), "bar");
     });
 
-    asyncTest("opened popup notifications are hidden after set timeout", function() {
-        var timeout = 10;
+    asyncTest("opened popup notifications are hidden after set autoHideAfter", function() {
+        var autoHideAfter = 10;
 
         createNotification({
-            timeout: timeout
+            autoHideAfter: autoHideAfter
         });
         
         notification.show("foo");
@@ -78,16 +78,16 @@
         setTimeout(function(){
             start();
             equal($(".k-notification").length, 0);
-        }, timeout + 10);
+        }, autoHideAfter + 10);
 
     });
 
-    asyncTest("opened static notifications are hidden after set timeout", function() {
-        var timeout = 10;
+    asyncTest("opened static notifications are hidden after set autoHideAfter", function() {
+        var autoHideAfter = 10;
 
         createNotification({
             appendTo: QUnit.fixture,
-            timeout: timeout
+            autoHideAfter: autoHideAfter
         });
         
         notification.show("foo");
@@ -95,13 +95,13 @@
         setTimeout(function(){
             start();
             equal($(".k-notification").length, 0);
-        }, timeout + 10);
+        }, autoHideAfter + 10);
 
     });
 
     test("clicking on popup notification hides it when hideOnClick is true (default)", function() {
         createNotification({
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show("foo");
@@ -114,7 +114,7 @@
     test("clicking on static notification hides it when hideOnClick is true (default)", function() {
         createNotification({
             appendTo: QUnit.fixture,
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show("foo");
@@ -126,7 +126,7 @@
 
     test("clicking on notification popup does not hide it when hideOnClick is false", function() {
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             hideOnClick: false
         });
         
@@ -140,7 +140,7 @@
     test("clicking on static notification does not hide it when hideOnClick is false", function() {
         createNotification({
             appendTo: QUnit.fixture,
-            timeout: 0,
+            autoHideAfter: 0,
             hideOnClick: false
         });
         
@@ -153,7 +153,7 @@
 
     test("notification width and height are null by default", 2, function() {
         createNotification({
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show("foo");
@@ -170,7 +170,7 @@
         createNotification({
             width: size,
             height: size,
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show("foo");
@@ -187,7 +187,7 @@
         createNotification({
             width: size,
             height: size,
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show("foo");
@@ -204,7 +204,7 @@
         createNotification({
             width: size,
             height: size,
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show("foo");
@@ -236,7 +236,7 @@
     test("clicking on static notification hides it when button is pressed", function() {
         createNotification({
             appendTo: QUnit.fixture,
-            timeout: 0,
+            autoHideAfter: 0,
             hideOnClick: false,
             button: true
         });
@@ -250,7 +250,7 @@
 
     test("clicking on popup notification hides it when button is pressed", function() {
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             hideOnClick: false,
             button: true
         });
@@ -427,7 +427,7 @@
     test("down static stacking is applied by default", 2, function() {
         createNotification({
             appendTo: QUnit.fixture,
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show('<span id="foo">foo</span>');
@@ -440,7 +440,7 @@
     test("right static stacking behaves as down stacking", 2, function() {
         createNotification({
             appendTo: QUnit.fixture,
-            timeout: 0,
+            autoHideAfter: 0,
             stacking: "right"
         });
         
@@ -454,7 +454,7 @@
     test("up static stacking is applied", 2, function() {
         createNotification({
             appendTo: QUnit.fixture,
-            timeout: 0,
+            autoHideAfter: 0,
             stacking: "up"
         });
         
@@ -468,7 +468,7 @@
     test("left static stacking behaves as up stacking", 2, function() {
         createNotification({
             appendTo: QUnit.fixture,
-            timeout: 0,
+            autoHideAfter: 0,
             stacking: "left"
         });
         
@@ -481,7 +481,7 @@
     
     test("up popup stacking is applied by default", 2, function() {
         createNotification({
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show('<span id="foo">foo</span>');
@@ -496,7 +496,7 @@
 
     test("down popup stacking is applied", 2, function() {
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             stacking: "down"
         });
         
@@ -512,7 +512,7 @@
 
     test("down popup stacking is applied by default if position.top is set", 2, function() {
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             position: {
                 top: 1
             }
@@ -530,7 +530,7 @@
 
     test("right popup stacking is applied", 2, function() {
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             stacking: "right"
         });
         
@@ -546,7 +546,7 @@
 
     test("left popup stacking is applied", 2, function() {
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             stacking: "left"
         });
         
@@ -564,7 +564,7 @@
         var allowHideAfter = 300;
 
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             allowHideAfter: allowHideAfter
         });
         
@@ -589,7 +589,7 @@
         var allowHideAfter = 300;
 
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             hideOnClick: false,
             button: true,
             allowHideAfter: allowHideAfter

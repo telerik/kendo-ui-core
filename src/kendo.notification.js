@@ -15,6 +15,7 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         extend = $.extend,
+        setTimeout = window.setTimeout,
         CLICK = "click",
         SHOW = "show",
         HIDE = "hide",
@@ -67,7 +68,7 @@ var __meta__ = {
             hideOnClick: true,
             button: false,
             allowHideAfter: 0,
-            timeout: 5000,            
+            autoHideAfter: 5000,            
             appendTo: null,
             width: null,
             height: null,
@@ -141,13 +142,17 @@ var __meta__ = {
             that._popupPosition = position;
         },
 
+        _attachEvents: function() {
+
+        },
+
         _showPopup: function(wrapper, options) {
             var that = this,
-                timeout = options.timeout,
+                autoHideAfter = options.autoHideAfter,
                 x = options.position.left,
                 y = options.position.top,
                 allowHideAfter = options.allowHideAfter,
-                popup, openPopup;
+                popup, openPopup, attachClick, closeIcon;
             
             openPopup = $("." + that._guid).last();
 
@@ -168,33 +173,38 @@ var __meta__ = {
                 }
             });
 
+            that._attachEvents();
+
+            /// start
+
+            attachClick = function(target) {
+                target.on(CLICK + NS, function() {
+                    popup.close();
+                });
+            };
+
             if (options.hideOnClick) {
                 popup.bind("activate", function(e) {
                     if (!isNaN(allowHideAfter) && allowHideAfter > 0) {
                         setTimeout(function(){
-                            e.sender.element.on(CLICK + NS, function() {
-                                e.sender.close();
-                            });
+                            attachClick(popup.element);
                         }, allowHideAfter);
                     } else {
-                        e.sender.element.on(CLICK + NS, function() {
-                            e.sender.close();
-                        });
+                        attachClick(popup.element);
                     }
                 });
             } else if (options.button) {
+                closeIcon = popup.element.find(KICLOSE);
                 if (!isNaN(allowHideAfter) && allowHideAfter > 0) {
                     setTimeout(function(){
-                        popup.element.find(KICLOSE).on(CLICK + NS, function() {
-                            popup.close();
-                        });
+                        attachClick(closeIcon);
                     }, allowHideAfter);
                 } else {
-                    popup.element.find(KICLOSE).on(CLICK + NS, function() {
-                        popup.close();
-                    });
+                    attachClick(closeIcon);
                 }
             }
+
+            /// end
 
             if (openPopup[0]) {
                 popup.open();
@@ -221,10 +231,10 @@ var __meta__ = {
                 that._togglePin(popup.wrapper, false);
             }
 
-            if (timeout > 0) {
+            if (autoHideAfter > 0) {
                 setTimeout(function(){
                     popup.close();
-                }, timeout);
+                }, autoHideAfter);
             }
         },
 
@@ -240,9 +250,10 @@ var __meta__ = {
 
         _showStatic: function(wrapper, options) {
             var that = this,
-                timeout = options.timeout,
+                autoHideAfter = options.autoHideAfter,
                 animation = options.animation,
-                insertionMethod = options.stacking == "up" || options.stacking == "left" ? "prependTo" : "appendTo";
+                insertionMethod = options.stacking == "up" || options.stacking == "left" ? "prependTo" : "appendTo",
+                attachClick;
 
             wrapper
                 .addClass(that._guid)
@@ -250,16 +261,26 @@ var __meta__ = {
                 .hide()
                 .kendoAnimate(animation.open);
 
+            that._attachEvents();
+
+            /// start
+
+            attachClick = function(target) {
+                target.on(CLICK + NS, proxy(that._hideStatic, that, wrapper));
+            };
+
             if (options.hideOnClick) {
-                wrapper.on(CLICK + NS, proxy(that._hideStatic, that, wrapper));
+                attachClick(wrapper);
             } else if (options.button) {
-                wrapper.find(KICLOSE).on(CLICK + NS, proxy(that._hideStatic, that, wrapper));
+                attachClick(wrapper.find(KICLOSE));
             }
 
-            if (timeout > 0) {
+            /// end
+
+            if (autoHideAfter > 0) {
                 setTimeout(function(){
                     that._hideStatic(wrapper);
-                }, timeout);
+                }, autoHideAfter);
             }
         },
 

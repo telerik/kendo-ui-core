@@ -181,7 +181,7 @@
 
     test("hide method hides all popup notifications", function() {
         createNotification({
-            timeout: 0
+            autoHideAfter: 0
         });
         
         notification.show("foo");
@@ -195,7 +195,7 @@
 
     test("hide method hides all static notifications", function() {
         createNotification({
-            timeout: 0,
+            autoHideAfter: 0,
             appendTo: QUnit.fixture
         });
         
