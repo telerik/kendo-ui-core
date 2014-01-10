@@ -431,6 +431,16 @@ test("does not break out of inline editor within list", function() {
     }
 });
 
+test("does not remove text with bom", function() {
+    var range =  createRangeFromText(editor, '<p>foo</p><ul><li>bar\ufeff|\ufeff|</li></ul>');
+
+    createParagraphCommand(range).exec();
+
+    insertCaretAnchor();
+
+    equal(editor.value(), '<p>foo</p><ul><li>bar</li><li><a></a></li></ul>');
+});
+
 test("paragraph at end of link does not transfer it", function() {
     editor.value('<p><a href="#bar">foo</a></p>');
 
