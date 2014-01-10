@@ -23,7 +23,8 @@ var __meta__ = {
         HyperTree = diagram.Graph,
         Utils = diagram.Utils,
         Point = diagram.Point,
-        EPSILON = 1e-06;
+        EPSILON = 1e-06,
+        contains = Utils.contains;
 
     /**
      * Base class for layout algorithms.
@@ -407,7 +408,7 @@ var __meta__ = {
          */
         mapConnection: function (connection) {
             return this.edgeMap.first(function (edge) {
-                return this.edgeMap.get(edge).contains(connection);
+                return contains(this.edgeMap.get(edge), connection);
             });
         },
 
@@ -420,7 +421,7 @@ var __meta__ = {
             var keys = this.nodeMap.keys();
             for (var i = 0, len = keys.length; i < len; i++) {
                 var key = keys[i];
-                if (this.nodeMap.get(key).contains(shape)) {
+                if (contains(this.nodeMap.get(key), shape)) {
                     return key;
                 }
             }
@@ -503,7 +504,7 @@ var __meta__ = {
             if (scope === a) {
                 return false;
             }
-            if (scope.children.contains(a)) {
+            if (contains(scope.children, a)) {
                 return true;
             }
             var containers = [];
@@ -665,11 +666,11 @@ var __meta__ = {
                     continue;
                 }
 
-                if (this.ignoredShapes.contains(source) && !this.shapeMap.containsKey(source)) {
+                if (contains(this.ignoredShapes, source) && !this.shapeMap.containsKey(source)) {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
-                if (this.ignoredShapes.contains(sink) && !this.shapeMap.containsKey(sink)) {
+                if (contains(this.ignoredShapes, sink) && !this.shapeMap.containsKey(sink)) {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
@@ -974,7 +975,7 @@ var __meta__ = {
                 return;
             }
 
-            if (!this.graph.nodes.contains(root)) {
+            if (!contains(this.graph.nodes, root)) {
                 throw "The given root is not in the graph.";
             }
 
@@ -1986,7 +1987,7 @@ var __meta__ = {
                         layerMap.set(target, layerMap.get(next) + 1);
                     }
 
-                    if (!current.contains(target)) {
+                    if (!contains(current, target)) {
                         current.push(target);
                     }
                 }

@@ -887,7 +887,7 @@ var __meta__ = {
             this.markers.push(marker);
         },
         removeMarker: function (marker) {
-            if (marker && this.markers.contains(marker)) {
+            if (marker && Utils.contains.contains(this.markers, marker)) {
                 this.defsNode.removeChild(marker.native);
                 Utils.remove(this.markers, marker);
             }
@@ -897,13 +897,13 @@ var __meta__ = {
             this.masks.push(mask);
         },
         removeMask: function (mask) {
-            if (mask && this.masks.contains(mask)) {
+            if (mask && Utils.contains(this.masks, mask)) {
                 this.defsNode.removeChild(mask.native);
                 Utils.remove(this.masks, mask);
             }
         },
         removeGradient: function (gradient) {
-            if (gradient && this.gradients.contains(gradient)) {
+            if (gradient && Utils.contains(this.gradients, gradient)) {
                 this.defsNode.removeChild(gradient.native);
                 Utils.remove(this.gradients, gradient);
             }

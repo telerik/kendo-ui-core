@@ -15,6 +15,8 @@
     var Point = kendo.diagram.Point;
     var Set = kendo.diagram.Set;
     var Utils = diagram.Utils;
+    var contains = Utils.contains;
+
     /*-------------Testing Utils----------------------------------*/
 
     QUnit.testSkip = function () {
@@ -299,9 +301,9 @@
         var n5 = g.getNode("5");
 
         var n2Parents = n2.getParents();
-        ok(n2Parents.length == 2 && n2Parents.contains(n0) && n2Parents.contains(n1), "Parents of n2.");
+        ok(n2Parents.length == 2 && contains(n2Parents, n0) && contains(n2Parents, n1), "Parents of n2.");
         var n2Children = n2.getChildren();
-        ok(n2Children.length == 1 && n2Children.contains(n3), "Children of n2.");
+        ok(n2Children.length == 1 && contains(n2Children, n3), "Children of n2.");
         var n3Children = n3.getChildren();
         ok(n3Children.length == 3, "Children of n3.");
         ok(n5.getParents().length == 1, "Parent of n5.");
@@ -403,7 +405,7 @@
         var l12 = g.addLink(n1, "n2");
         var n2 = g.getNode("n2");
         ok(Utils.isDefined(n2), "The link target should be added automatically.");
-        ok(g.links.contains(l12), "The link should be in the links.");
+        ok(contains(g.links, l12), "The link should be in the links.");
         ok(l12.source.id == "n1" && l12.target.id == "n2", "Check of the identifiers.");
         ok(g.isHealthy(), "The graph is healthy.");
         g.removeLink(l12);
@@ -472,11 +474,11 @@
         var components = simple.getConnectedComponents();
         ok(components.length == 2, "Should be two components.");
         var g1 = components[0];
-        ok(g1.nodes.contains(simple.getNode("1")));
-        ok(g1.nodes.contains(simple.getNode("2")));
+        ok(contains(g1.nodes, simple.getNode("1")));
+        ok(contains(g1.nodes, simple.getNode("2")));
         var g2 = components[1];
-        ok(g2.nodes.contains(simple.getNode("3")));
-        ok(g2.nodes.contains(simple.getNode("4")));
+        ok(contains(g2.nodes, simple.getNode("3")));
+        ok(contains(g2.nodes, simple.getNode("4")));
 
         simple = parse(["1->2", "2->3", "3->4", "5->6", "6->5", "9->12"]);
         components = simple.getConnectedComponents();

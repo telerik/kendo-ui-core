@@ -216,17 +216,9 @@ var __meta__ = {
         return arr;
     };
 
-    if (!Array.prototype.contains) {
-        Array.prototype.contains = function (obj) {
-            var i = this.length;
-            while (i--) {
-                if (this[i] == obj) {
-                    return true;
-                }
-            }
-            return false;
-        };
-    }
+    Utils.contains = function (arr, obj) {
+        return Utils.indexOf(arr, obj) !== -1;
+    };
 
     Utils.indexOf = function(arr, what) {
         return $.inArray(what, arr);

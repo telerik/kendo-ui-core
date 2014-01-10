@@ -18,7 +18,8 @@ var __meta__ = {
         dataviz = kendo.dataviz,
         Utils = diagram.Utils,
         Point = dataviz.Point2D,
-        isFunction = kendo.isFunction;
+        isFunction = kendo.isFunction,
+        contains = Utils.contains;
 
     // Constants ==============================================================
     var HITTESTAREA = 3,
@@ -1393,7 +1394,7 @@ var __meta__ = {
          * Returns whether this node is either the source or the target of the given link.
          */
         incidentWith: function (link) {
-            return this.links.contains(link);
+            return contains(this.links, link);
         },
 
         /**
@@ -1517,7 +1518,7 @@ var __meta__ = {
          * via an incoming or outgoing link.
          */
         adjacentTo: function (link) {
-            return this.source.links.contains(link) || this.target.links.contains(link);
+            return contains(this.source.links, link) || contains(this.target.links, link);
         },
 
         /**
@@ -1839,7 +1840,7 @@ var __meta__ = {
                 for (var ni = 0; ni < next.links.length; ni++) {
                     var link = next.links[ni];
                     var cn = link.getComplement(next);
-                    if (visited.contains(cn)) {
+                    if (contains(visited, cn)) {
                         continue;
                     }
 
@@ -1847,10 +1848,10 @@ var __meta__ = {
                     if (levelCount < cn.level + 1) {
                         levelCount = cn.level + 1;
                     }
-                    if (!remaining.contains(cn)) {
+                    if (!contains(remaining, cn)) {
                         remaining.add(cn);
                     }
-                    if (!visited.contains(cn)) {
+                    if (!contains(visited, cn)) {
                         visited.add(cn);
                     }
                     if (map.containsKey(next)) {
@@ -1908,10 +1909,10 @@ var __meta__ = {
                 return null;
             }
             if (this.nodes.length === 1) {
-                return excludedNodes.contains(this.nodes[0]) ? null : this.nodes[0];
+                return contains(excludedNodes, this.nodes[0]) ? null : this.nodes[0];
             }
             var pool = this.nodes.where(function (node) {
-                return !excludedNodes.contains(node) && node.degree() <= incidenceLessThan;
+                return !contains(excludedNodes, node) && node.degree() <= incidenceLessThan;
             });
             if (pool.isEmpty()) {
                 return null;
@@ -1931,7 +1932,7 @@ var __meta__ = {
          */
         isHealthy: function () {
             return this.links.all(function (link) {
-                return this.nodes.contains(link.source) && this.nodes.contains(link.target);
+                return contains(this.nodes, link.source) && contains(this.nodes, link.target);
             }, this);
         },
 
@@ -2063,7 +2064,7 @@ var __meta__ = {
                 });
             }
             if (linkOrId.type === "Link") {
-                return this.links.contains(linkOrId);
+                return contains(this.links, linkOrId);
             }
             throw "The given object is neither an identifier nor a Link.";
         },
@@ -2198,7 +2199,7 @@ var __meta__ = {
          */
         addNodeAndOutgoings: function (node) {
 
-            if (!this.nodes.contains(node)) {
+            if (!contains(this.nodes, node)) {
                 this.nodes.push(node);
             }
 
@@ -2293,7 +2294,7 @@ var __meta__ = {
             var children = node.getChildren();
             for (var i = 0, len = children.length; i < len; i++) {
                 var child = children[i];
-                if (visited.contains(child)) {
+                if (contains(visited, child)) {
                     continue;
                 }
                 this._dftIterator(child, action, visited);
@@ -2329,7 +2330,7 @@ var __meta__ = {
                 var children = node.getChildren();
                 for (var i = 0, len = children.length; i < len; i++) {
                     var child = children[i];
-                    if (visited.contains(child) || queue.contains(child)) {
+                    if (contains(visited, child) || contains(queue, child)) {
                         continue;
                     }
                     queue.enqueue(child);
@@ -2363,7 +2364,7 @@ var __meta__ = {
                     this._stronglyConnectedComponents(excludeSingleItems, next, indices, lowLinks, connected, stack, index);
                     lowLinks.add(node, Math.min(lowLinks.get(node), lowLinks.get(next)));
                 }
-                else if (stack.contains(next)) {
+                else if (contains(stack, next)) {
                     lowLinks.add(node, Math.min(lowLinks.get(node), indices.get(next)));
                 }
             }
@@ -2421,7 +2422,7 @@ var __meta__ = {
             var otherArray = other.linearize();
             var thisArray = this.linearize();
             return otherArray.all(function (s) {
-                return thisArray.contains(s);
+                return contains(thisArray, s);
             });
         },
 
