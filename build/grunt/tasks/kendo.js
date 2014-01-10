@@ -30,12 +30,14 @@ module.exports = function(grunt) {
             f.src.forEach(function(f){
                 var basename = PATH.basename(f, PATH.extname(f));
                 var dest = PATH.join(destDir, basename + ext);
-                if (outdated(f, dest)) {
-                    var comp = META.getKendoFile(f.replace(/^src\//, "")), code;
-
-                    if (comp.isBundle() && task.target == "download_builder")
+                var comp = META.getKendoFile(f.replace(/^src\//, "")), code;
+                var srcFiles = comp.getBuildDeps().map(function(f){
+                    return "src/" + f;
+                });
+                if (outdated(srcFiles, dest)) {
+                    if (comp.isBundle() && task.target == "download_builder") {
                         return; // bundles not needed here
-
+                    }
                     grunt.log.writeln("Making " + dest);
                     if (task.target == "min") {
                         code = comp.buildMinSource();

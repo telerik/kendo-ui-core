@@ -149,6 +149,10 @@ var getKendoFile = (function() {
             }
         }),
 
+        getBuildDeps: cachedProperty("getBuildDeps", function(){
+            return loadComponents([ this.filename() ], this.isBundle() ? null : 2);
+        }),
+
         buildMinAST_noAMD: cachedProperty("buildMinAST_noAMD", function(){
             var ast = this.buildMinAST();
             var f = walkAST(ast, findDefine).factory;
