@@ -951,7 +951,7 @@ var __meta__ = {
             if (N === 0) {
                 return size;
             }
-            size = this.graph.nodes.fold(function (s, node) {
+            size = Utils.fold(this.graph.nodes, function (s, node) {
                 var area = node.width * node.height;
                 if (area > 0) {
                     s += Math.sqrt(area);

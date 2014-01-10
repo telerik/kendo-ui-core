@@ -249,32 +249,26 @@ var __meta__ = {
         };
     }
 
-    if (!Array.prototype.reduce) {
-        Array.prototype.reduce = function (iterator, acc, context) {
-            var initial = arguments.length > 1;
-            this.forEach(function (value, index, list) {
-                if (!initial) {
-                    acc = value;
-                    initial = true;
-                }
-                else {
-                    acc = iterator.call(context, acc, value, index, list);
-                }
-            });
+    Utils.fold = function (list, iterator, acc, context) {
+        var initial = arguments.length > 2;
+
+        for (var i = 0; i < list.length; i++) {
+            var value = list[i];
             if (!initial) {
-                throw 'Reduce of empty array with no initial value';
+                acc = value;
+                initial = true;
             }
-            return acc;
-        };
-    }
+            else {
+                acc = iterator.call(context, acc, value, i, list);
+            }
+        }
 
-    if (!Array.prototype.fold) {
-        Array.prototype.fold = Array.prototype.reduce;
-    }
+        if (!initial) {
+            throw 'Reduce of empty array with no initial value';
+        }
 
-    if (!Array.prototype.foldl) {
-        Array.prototype.foldl = Array.prototype.reduce;
-    } // aka fold left
+        return acc;
+    };
 
     if (!Array.prototype.sameAs) {
         Array.prototype.sameAs = function (array) {

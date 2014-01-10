@@ -44,18 +44,18 @@ test('indexOf', function () {
 
 test('Fold', function () {
     var a = new Range(1, 4);
-    var sum = a.fold(function (a, x) {
+    var sum = Utils.fold(a, function (a, x) {
         return a + x;
     });
     ok(sum == 10);
 
-    sum = a.fold(function (a, x) {
+    sum = Utils.fold(a, function (a, x) {
         return a + x;
     }, 10);
     ok(sum == 20);
 
     a = ['Niko', 'Miro', 'Swa'];
-    sum = a.fold(function (a, x) {
+    sum = Utils.fold(a, function (a, x) {
         return a + ', ' + x;
     }, 'D^3 team: ');
     ok(sum == 'D^3 team: , Niko, Miro, Swa');
