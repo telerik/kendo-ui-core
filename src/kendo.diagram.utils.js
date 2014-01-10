@@ -189,27 +189,24 @@ var __meta__ = {
         return atan + Math.PI;
     }
 
-    Utils.sign = function (number) {
+    Utils.sign = function(number) {
         return number ? number < 0 ? -1 : 1 : 0;
     };
 
-    Utils.findAngle = function (center, end) {
+    Utils.findAngle = function(center, end) {
         return findRadian(center, end) * 180 / Math.PI;
     };
 
     /*-------------------Array Helpers ----------------------------*/
 
-
-    if (!Array.prototype.any) {
-        Array.prototype.any = function (predicate, thisRef) {
-            for (var i = 0; i < this.length; ++i) {
-                if (predicate.call(thisRef, this[i])) {
-                    return this[i];
-                }
+    Utils.any = function(arr, predicate) {
+        for (var i = 0; i < arr.length; ++i) {
+            if (predicate(arr[i])) {
+                return arr[i];
             }
-            return null;
-        };
-    }
+        }
+        return null;
+    };
 
     if (!Array.prototype.remove) {
         Array.prototype.remove = function () {
@@ -348,7 +345,7 @@ var __meta__ = {
     if (!Array.prototype.find) {
         Array.prototype.find = function (iterator, context) {
             var result;
-            this.any(function (value, index, list) {
+            Utils.any(this, function (value, index, list) {
                 if (iterator.call(context, value, index, list)) {
                     result = value;
                     return true;

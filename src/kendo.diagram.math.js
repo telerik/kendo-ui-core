@@ -1287,9 +1287,9 @@ var __meta__ = {
          * incoming or outgoing link.
          */
         isLinkedTo: function (node) {
-            var thisRef = this;
-            return this.links.any(function (link) {
-                return link.getComplement(thisRef) === node;
+            var that = this;
+            return Utils.any(that.links, function (link) {
+                return link.getComplement(that) === node;
             });
         },
 
@@ -1377,7 +1377,7 @@ var __meta__ = {
          * Returns whether there is a (outgoing) link from the current node to the given one.
          */
         hasLinkTo: function (node) {
-            return this.outgoing.any(function (link) {
+            return Utils.any(this.outgoing, function (link) {
                 return link.target === node;
             });
         },
@@ -2058,7 +2058,7 @@ var __meta__ = {
          */
         hasLink: function (linkOrId) {
             if (Utils.isString(linkOrId)) {
-                return this.links.any(function (link) {
+                return Utils.any(this.links, function (link) {
                     return link.id === linkOrId;
                 });
             }
@@ -2094,12 +2094,12 @@ var __meta__ = {
          */
         hasNode: function (nodeOrId) {
             if (Utils.isString(nodeOrId)) {
-                return this.nodes.any(function (n) {
+                return Utils.any(this.nodes, function (n) {
                     return n.id === nodeOrId;
                 });
             }
             if (Utils.isObject(nodeOrId)) {
-                return this.nodes.any(function (n) {
+                return Utils.any(this.nodes, function (n) {
                     return n === nodeOrId;
                 });
             }
@@ -2134,7 +2134,7 @@ var __meta__ = {
          * Returns whether the given nodes are connected with a least one link independently of the direction.
          */
         areConnected: function (n1, n2) {
-            return this.links.any(function (link) {
+            return Utils.any(this.links, function (link) {
                 return link.source == n1 && link.target == n2 || link.source == n2 && link.target == n1;
             });
         },

@@ -710,7 +710,7 @@ var __meta__ = {
         },
 
         areConnectedAlready: function (n, m) {
-            return this.edges.any(function (l) {
+            return Utils.any(this.edges, function (l) {
                 return l.source === n && l.target === m || l.source === m && l.target === n;
             });
         }

@@ -41,7 +41,7 @@ test('Any', function () {
     a.push('Swa');
     a.push('Miro');
     a.push('Niko');
-    ok(a.any(function (x) {
+    ok(Utils.any(a, function (x) {
         return x == 'Swa';
     }), 'Should find element Swa in the array.');
 });
@@ -52,7 +52,7 @@ test('Remove', function () {
     var find = function (x) {
         return x == 7 || x == 13;
     };
-    ok(!a.any(find), 'Elements 7 and 13 should have been removed.')
+    ok(!Utils.any(a, find), 'Elements 7 and 13 should have been removed.')
 });
 
 test('Distinct and contains', function () {
