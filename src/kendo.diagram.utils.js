@@ -216,19 +216,6 @@ var __meta__ = {
         return arr;
     };
 
-    if (!Array.prototype.distinct) {
-        Array.prototype.distinct = function () {
-            var a = this;
-            var r = [];
-            for (var i = 0; i < a.length; i++) {
-                if (Utils.indexOf(r, a[i]) < 0) {
-                    r.push(a[i]);
-                }
-            }
-            return r;
-        };
-    }
-
     if (!Array.prototype.contains) {
         Array.prototype.contains = function (obj) {
             var i = this.length;

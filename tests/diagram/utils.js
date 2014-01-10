@@ -7,12 +7,6 @@ var diagram = kendo.diagram,
 /*-----------Utilities tests------------------------------------*/
 QUnit.module("Utilities tests");
 
-test("Distinct array", function () {
-    var ar = [1, 2, 1, 3, 5, 4, 4];
-    var dis = ar.distinct();
-    ok(dis.length == 5, "Should have been reduced to distinct elements.");
-});
-
 test('Random id', function () {
     var a = new Range(0, 20);
     var counter = 0;
@@ -40,13 +34,6 @@ test('Remove', function () {
         return x == 7;
     };
     ok(!Utils.any(a, find), 'Elements 7 should have been removed.')
-});
-
-test('Distinct and contains', function () {
-    var a = [1, 3, 7, 5, 7, 5, 3];
-    var ds = a.distinct();
-    ok(ds.length == 4, 'Only 1,3,5,7 should remain.');
-    ok(ds.contains(1, 3, 5, 7), 'Found the distinct elements.')
 });
 
 test('indexOf', function () {
