@@ -276,32 +276,28 @@ var GreedyInlineFormatFinder = InlineFormatFinder.extend({
 
 var GreedyInlineFormatter = InlineFormatter.extend({
     init: function(format, values, greedyProperty) {
-        var that = this;
+        InlineFormatter.fn.init.call(this, format, values);
 
-        InlineFormatter.fn.init.call(that, format, values);
+        this.values = values;
+        this.finder = new GreedyInlineFormatFinder(format, greedyProperty);
 
-        that.greedyProperty = greedyProperty;
-        that.values = values;
-        that.finder = new GreedyInlineFormatFinder(format, greedyProperty);
+        if (greedyProperty) {
+            this.greedyProperty = kendo.toCamelCase(greedyProperty);
+        }
+
     },
 
     activate: function(range, nodes) {
-        var that = this,
-            camelCase,
-            greedyProperty = that.greedyProperty,
-            action = "apply";
+        var greedyProperty = this.greedyProperty;
+        var action = "apply";
 
-        that.split(range);
+        this.split(range);
 
-        if (greedyProperty) {
-            camelCase = greedyProperty.replace(/-([a-z])/, function(all, letter) { return letter.toUpperCase(); });
-
-            if (that.values.style[camelCase] == "inherit") {
-                action = "remove";
-            }
+        if (greedyProperty && this.values.style[greedyProperty] == "inherit") {
+            action = "remove";
         }
 
-        that[action](nodes);
+        this[action](nodes);
     }
 });
 
