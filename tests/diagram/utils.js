@@ -7,19 +7,6 @@ var diagram = kendo.diagram,
 /*-----------Utilities tests------------------------------------*/
 QUnit.module("Utilities tests");
 
-test("Flatten Array", function () {
-    var ar = [
-        [1],
-        [2, 3],
-        [4],
-        [1],
-        []
-    ];
-    var res = ar.flatten();
-    ok(res.length == 5, "Should have length 4.");
-    deepEqual(res, [1, 2, 3, 4, 1], "Should be merged to a flattened array.");
-});
-
 test("Distinct array", function () {
     var ar = [1, 2, 1, 3, 5, 4, 4];
     var dis = ar.distinct();

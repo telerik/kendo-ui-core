@@ -216,12 +216,6 @@ var __meta__ = {
         return arr;
     };
 
-    if (!Array.prototype.flatten) {
-        Array.prototype.flatten = function () {
-            return Array.prototype.concat.apply([], this);
-        };
-    }
-
     if (!Array.prototype.distinct) {
         Array.prototype.distinct = function () {
             var a = this;
