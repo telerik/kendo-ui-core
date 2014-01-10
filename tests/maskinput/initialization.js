@@ -45,4 +45,16 @@
 
         ok(wrapper.hasClass("test"));
     });
+
+    test("MaskInput add k-input class to the element", function() {
+        var maskinput = new MaskInput(input);
+
+        ok(input.hasClass("k-input"));
+    });
+
+    test("MaskInput add autocomplete='off' attr", function() {
+        var maskinput = new MaskInput(input);
+
+        ok(input.attr("autocomplete"), "off");
+    });
 })();
