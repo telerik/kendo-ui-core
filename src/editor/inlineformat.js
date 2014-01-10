@@ -1,3 +1,6 @@
+(function(f, define){
+    define([ "./system" ], f);
+})(function(){
 (function($) {
 
 var kendo = window.kendo,
@@ -473,3 +476,5 @@ registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFami
 registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", defaultValue: [{ text: "fontSizeInherit",  value: "inherit" }], template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size"})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

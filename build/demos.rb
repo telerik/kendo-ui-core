@@ -172,7 +172,11 @@ def demos(options)
 
         # Create offline demos by processing the corresponding .cshtml files
         rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| DEMOS_BULDFILES.include(find_demo_src(t, path)) } do |t|
-            body = File.read(find_demo_src(t.name, path))
+            body = ""
+            File.open(find_demo_src(t.name, path), 'r:bom|utf-8') do |file|
+                body = file.read
+            end
+
             body.gsub!(/@section \w+ {(.|\n|\r)+?}/, '')
             body.gsub!(/@{(.|\n|\r)+?}/, '')
             body.gsub!(/@@/, '')
@@ -186,9 +190,9 @@ def demos(options)
             ensure_path(t.name)
 
             item = find_navigation_item(navigation, t.name)
-			
+
 			requiresServer = item['requiresServer'].nil? ? false : item['requiresServer']
-			
+
             File.open(t.name, 'w') do |file|
                 title = item['text'] # used by the template and passed via 'binding'
 
@@ -273,7 +277,7 @@ end
 
 tree :to => 'dist/demos/staging/content/cdn/js',
      :from => COMPLETE_MIN_JS + MVC_MIN_JS,
-     :root => 'src/'
+     :root => DIST_JS_ROOT
 
 tree :to => 'dist/demos/staging/content/cdn/styles',
      :from => MIN_CSS_RESOURCES,

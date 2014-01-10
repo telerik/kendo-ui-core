@@ -1,9 +1,13 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dataviz.core", "./kendo.diagram.utils" ], f);
+})(function(){
+
+var __meta__ = {
     id: "diagram.math",
     name: "Math",
     category: "diagram",
-    depends: ["dataviz.core", "diagram.utils"]
-});
+    depends: [ "dataviz.core", "diagram.utils" ]
+};
 
 (function ($, undefined) {
     // Imports ================================================================
@@ -3078,3 +3082,7 @@ kendo_module({
         PathDefiner: PathDefiner
     });
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

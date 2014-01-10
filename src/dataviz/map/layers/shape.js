@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "../crs" ], f);
+})(function(){
+
 (function ($, undefined) {
     // Imports ================================================================
     var proxy = $.proxy,
@@ -344,3 +348,5 @@
     });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

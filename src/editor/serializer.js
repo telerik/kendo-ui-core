@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./dom" ], f);
+})(function(){
+
 (function($, undefined) {
 
 // Imports ================================================================
@@ -317,3 +321,8 @@ extend(Editor, {
 });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+
+
+

@@ -1,11 +1,15 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "router",
     name: "Router",
     category: "framework",
     description: "The Router class is responsible for tracking the application state and navigating between the application states.",
     depends: [ "core" ],
     hidden: false
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -374,3 +378,7 @@ kendo_module({
 
     kendo.Router = Router;
 })();
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

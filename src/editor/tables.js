@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./toolbar" ], f);
+})(function(){
+
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -372,3 +376,5 @@ registerTool("deleteColumn", new TableModificationTool({ type: "column", action:
 //registerTool("mergeCells", new Tool({ template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Merge cells"})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "calendar",
     name: "Calendar",
     category: "web",
     description: "The Calendar widget renders a graphical calendar that supports navigation and selection.",
     depends: [ "core" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -1305,3 +1309,7 @@ kendo_module({
 
     kendo.calendar = calendar;
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

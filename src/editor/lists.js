@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./linebreak" ], f);
+})(function(){
+
 (function($) {
 
 // Imports ================================================================
@@ -435,3 +439,5 @@ registerTool("insertUnorderedList", new ListTool({tag:'ul', template: new ToolTe
 registerTool("insertOrderedList", new ListTool({tag:'ol', template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

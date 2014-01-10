@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./formatblock" ], f);
+})(function(){
+
 (function($) {
 
 // Imports ================================================================
@@ -229,3 +233,5 @@ registerTool("insertLineBreak", new Tool({ key: 13, shift: true, command: NewLin
 registerTool("insertParagraph", new Tool({ key: 13, command: ParagraphCommand }));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.datepicker", "./kendo.timepicker" ], f);
+})(function(){
+
+var __meta__ = {
     id: "datetimepicker",
     name: "DateTimePicker",
     category: "web",
     description: "The DateTimePicker allows the end user to select a value from a calendar or a time drop-down list.",
     depends: [ "datepicker", "timepicker" ]
-});
+};
 
 (function($, undefined) {
 
@@ -721,3 +725,7 @@ kendo_module({
     ui.plugin(DateTimePicker);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,11 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dataviz.core", "./kendo.dataviz.svg", "./kendo.dataviz.canvas" ], f);
+})(function(){
+
+var __meta__ = {
     id: "dataviz.qrcode",
     name: "QRCode",
     category: "dataviz",
     description: "QRCode widget.",
-    depends: ["dataviz.core", "dataviz.svg", "dataviz.canvas"]
-});
-
+    depends: [ "dataviz.core", "dataviz.svg", "dataviz.canvas" ]
+};
 
 (function ($, undefined) {
     var kendo = window.kendo,
@@ -1162,3 +1165,7 @@ kendo_module({
       });
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

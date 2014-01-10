@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dataviz.core", "./kendo.dataviz.svg", "./kendo.dataviz.themes" ], f);
+})(function(){
+
+var __meta__ = {
     id: "dataviz.gauge",
     name: "Gauge",
     category: "dataviz",
     description: "Radial gauge.",
     depends: [ "dataviz.core", "dataviz.svg", "dataviz.themes" ]
-});
+};
 
 (function ($, undefined) {
 
@@ -1423,3 +1427,7 @@ kendo_module({
     });
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

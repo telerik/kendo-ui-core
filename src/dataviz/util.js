@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "../kendo.data", "../kendo.userevents", "../kendo.tooltip", "../kendo.dataviz.core", "../kendo.mobile.scroller" ], f);
+})(function(){
+
 (function () {
 
     // TODO
@@ -113,3 +117,5 @@
     });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

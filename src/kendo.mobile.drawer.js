@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.application" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.drawer",
     name: "Drawer",
     category: "mobile",
     description: "The Kendo Mobile Drawer widget provides slide to reveal global application toolbox",
     depends: [ "mobile.application" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -281,3 +285,7 @@ kendo_module({
 
     ui.plugin(Drawer);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

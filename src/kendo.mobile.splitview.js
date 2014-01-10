@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.application" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.splitview",
     name: "SplitView",
     category: "mobile",
     description: "The mobile SplitView is a tablet-specific view that consists of two or more mobile Pane widgets.",
     depends: [ "mobile.application" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -104,3 +108,7 @@ kendo_module({
 
     ui.plugin(SplitView);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dataviz.chart" ], f);
+})(function(){
+
+var __meta__ = {
     id: "dataviz.stockchart",
     name: "StockChart",
     category: "dataviz",
     description: "StockChart widget and associated financial series.",
     depends: [ "dataviz.chart" ]
-});
+};
 
 (function ($, undefined) {
     // Imports ================================================================
@@ -868,3 +872,7 @@ kendo_module({
     });
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./core" ], f);
+})(function(){
+
 (function () {
 
     // Imports ================================================================
@@ -235,3 +239,5 @@
     });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.data" ], f);
+})(function(){
+
+var __meta__ = {
     id: "pager",
     name: "Pager",
     category: "framework",
     depends: [ "data" ],
     advanced: true
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -385,3 +389,7 @@ kendo_module({
 
     ui.plugin(Pager);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

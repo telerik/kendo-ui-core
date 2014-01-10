@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.popup", "./kendo.filtermenu", "./kendo.menu" ], f);
+})(function(){
+
+var __meta__ = {
     id: "columnmenu",
     name: "Column Menu",
     category: "framework",
     depends: [ "popup", "filtermenu", "menu" ],
     advanced: true
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -524,3 +528,7 @@ kendo_module({
 
     ui.plugin(ColumnMenu);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

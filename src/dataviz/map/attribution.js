@@ -1,10 +1,6 @@
-kendo_module({
-    id: "dataviz.attribution",
-    name: "Attribution",
-    category: "dataviz",
-    depends: [ "dataviz.core" ],
-    advanced: true
-});
+(function(f, define){
+    define([ "./navigator" ], f);
+})(function(){
 
 (function() {
     var kendo = window.kendo,
@@ -121,3 +117,5 @@ kendo_module({
 
     kendo.dataviz.ui.plugin(Attribution);
 })(jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.fx", "./kendo.draganddrop" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.scroller",
     name: "Scroller",
     category: "mobile",
     description: "The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.",
     depends: [ "core", "fx", "draganddrop" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -577,3 +581,7 @@ kendo_module({
 
     ui.plugin(Scroller);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

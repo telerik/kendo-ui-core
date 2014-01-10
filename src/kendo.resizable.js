@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.draganddrop" ], f);
+})(function(){
+
+var __meta__ = {
     id: "resizable",
     name: "Resizable",
     category: "framework",
     depends: [ "core", "draganddrop" ],
     advanced: true
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -186,3 +190,7 @@ kendo_module({
     kendo.ui.plugin(Resizable);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

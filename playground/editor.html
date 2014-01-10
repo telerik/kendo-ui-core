@@ -13,37 +13,7 @@
     <script src="../demos/mvc/content/shared/js/less.js"></script>
 
     <script src="../src/jquery.js"></script>
-    <script src="../src/module.js"></script>
-    <!-- <script src="../src/kendo.core.js"></script> -->
-    <!-- <script src="../src/kendo.data.js"></script> -->
-    <!-- <script src="../src/kendo.draganddrop.js"></script> -->
-    <!-- <script src="../src/kendo.binder.js"></script> -->
-    <!-- <script src="../src/kendo.popup.js"></script> -->
-    <!-- <script src="../src/kendo.list.js"></script> -->
-    <!-- <script src="../src/kendo.dropdownlist.js"></script> -->
-    <!-- <script src="../src/kendo.combobox.js"></script> -->
-    <!-- <script src="../src/kendo.fx.js"></script> -->
-    <!-- <script src="../src/kendo.window.js"></script> -->
-
-    <!-- <script src="../src/kendo.editor.js"></script> -->
-
-    <script src="../src/editor/main.js"></script>
-    <script src="../src/editor/dom.js"></script>
-    <script src="../src/editor/serializer.js"></script>
-    <script src="../src/editor/range.js"></script>
-    <script src="../src/editor/system.js"></script>
-    <script src="../src/editor/inlineformat.js"></script>
-    <script src="../src/editor/formatblock.js"></script>
-    <script src="../src/editor/linebreak.js"></script>
-    <script src="../src/editor/lists.js"></script>
-    <script src="../src/editor/link.js"></script>
-    <script src="../src/editor/image.js"></script>
-    <script src="../src/editor/components.js"></script>
-    <script src="../src/editor/indent.js"></script>
-    <script src="../src/editor/viewhtml.js"></script>
-    <script src="../src/editor/formatting.js"></script>
-    <script src="../src/editor/toolbar.js"></script>
-    <script src="../src/editor/tables.js"></script>
+    <script src="require.js"></script>
 
     <style>
         html {
@@ -88,35 +58,36 @@
     </div>
 
     <script>
-        var editor;
+        require([ "../src/kendo.editor" ], function(){
+            var editor;
 
-        function showHTML() {
-            $("#content").text(editor.value());
-        }
+            function showHTML() {
+                $("#content").text(editor.value());
+            }
 
-        $("#title").kendoEditor();
+            $("#title").kendoEditor();
 
-        editor = $("#comment")
-            .html("<p>foo bar baz</p>")
-            .kendoEditor({
-                select: showHTML
-                /*tools: [
-                    "bold", "italic", "underline", "strikethrough",
-                    "justifyLeft", "justifyCenter", "justifyRight", "justifyFull",
-                    "insertUnorderedList", "insertOrderedList", "indent", "outdent",
-                    "createLink", "unlink", "insertImage",
-                    "subscript", "superscript",
-                    "createTable",
-                    "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight",
-                    "deleteRow", "deleteColumn",
-                    "viewHtml",
-                    "formatting", "fontName", "fontSize",
-                    "foreColor", "backColor"
-                ]*/
-            }).data("kendoEditor");
+            editor = $("#comment")
+                .html("<p>foo bar baz</p>")
+                .kendoEditor({
+                    select: showHTML
+                    /*tools: [
+                        "bold", "italic", "underline", "strikethrough",
+                        "justifyLeft", "justifyCenter", "justifyRight", "justifyFull",
+                        "insertUnorderedList", "insertOrderedList", "indent", "outdent",
+                        "createLink", "unlink", "insertImage",
+                        "subscript", "superscript",
+                        "createTable",
+                        "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight",
+                        "deleteRow", "deleteColumn",
+                        "viewHtml",
+                        "formatting", "fontName", "fontSize",
+                        "foreColor", "backColor"
+                    ]*/
+                }).data("kendoEditor");
 
-        showHTML();
-
+            showHTML();
+        });
     </script>
 </body>
 </html>

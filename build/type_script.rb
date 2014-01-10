@@ -497,7 +497,9 @@ def get_type_script(name, sources, jsdoc)
     components = sources.map do |source|
         parser = CodeGen::MarkdownParser.new
 
-        parser.parse(File.read(source), CodeGen::TypeScript::Component)
+        File.open(source, 'r:bom|utf-8') do |file|
+            parser.parse(file.read, CodeGen::TypeScript::Component)
+        end
     end
 
     components = components.sort { |a, b| a.plugin <=> b.plugin }
