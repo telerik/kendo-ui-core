@@ -603,7 +603,7 @@ kendo_module({
 
             content = scrollContainer[0] ? scrollContainer : content;
 
-            if (!html) {
+            if (!defined(html)) {
                 return content.html();
             }
 
