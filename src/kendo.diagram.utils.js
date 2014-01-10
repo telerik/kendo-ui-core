@@ -270,29 +270,6 @@ var __meta__ = {
         return acc;
     };
 
-    if (!Array.prototype.sameAs) {
-        Array.prototype.sameAs = function (array) {
-            if (!array) {
-                return false;
-            }
-            if (this.length != array.length) {
-                return false;
-            }
-            for (var i = 0; i < this.length; i++) {
-                if (this[i] instanceof Array && array[i] instanceof Array) {
-                    if (!this[i].compare(array[i])) {
-                        return false;
-                    }
-                }
-                else if (this[i] != array[i]) {
-                    // Warning - two different object instances will never be equal: {x:20} != {x:20}
-                    return false;
-                }
-            }
-            return true;
-        };
-    }
-
     if (!Array.prototype.find) {
         Array.prototype.find = function (iterator, context) {
             var result;

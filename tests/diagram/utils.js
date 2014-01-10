@@ -61,22 +61,13 @@ test('Fold', function () {
     ok(sum == 'D^3 team: , Niko, Miro, Swa');
 });
 
-test('sameAs', function () {
-    var a = new Range(1, 5);
-    var b = new Range(1, 5);
-    var c = new Range(1, 7);
-
-    ok(a.sameAs(b), 'They are the same.')
-    ok(!a.sameAs(c), 'They are not the same.')
-});
-
 test('Map', function () {
     var a = new Range(1, 5);
     var b = a.map(function (x) {
         return x + 1;
     });
     var shouldbe = new Range(2, 6);
-    ok(b.sameAs(shouldbe), 'Shifted array are the same.')
+    deepEqual(b, shouldbe, 'Shifted array are the same.')
 });
 
 test('Find', function () {
@@ -106,7 +97,7 @@ test('Bi-sort', function () {
         return m.localeCompare(n);
     });
     var shouldbe = new Range(1, 4);
-    ok(b.sameAs(shouldbe), "Reordering works.");
+    deepEqual(b, shouldbe, "Reordering works.");
 });
 
 test('Call $*!', function () {
@@ -121,21 +112,21 @@ test('Insert', function () {
     var a = new Range(1, 5);
     var shouldbe = [1, 2, 3, 17, 4, 5];
     var b = a.insert(17, 3);
-    ok(b.sameAs(shouldbe));
+    deepEqual(b, shouldbe);
 });
 
 test('Prepend', function () {
     var a = new Range(1, 5);
     var shouldbe = new Range(0, 5);
     var b = a.prepend(0);
-    ok(b.sameAs(shouldbe));
+    deepEqual(b, shouldbe);
 });
 
 test('Append', function () {
     var a = new Range(1, 5);
     var shouldbe = new Range(1, 6);
     var b = a.append(6);
-    ok(b.sameAs(shouldbe));
+    deepEqual(b, shouldbe);
 });
 
 test('Apply', function () {
@@ -145,7 +136,7 @@ test('Apply', function () {
     };
     var b = a.apply(func, 3);
     var shouldbe = new Range(6, 25);
-    ok(b.sameAs(shouldbe), 'Functional is lovely.');
+    deepEqual(b, shouldbe, 'Functional is lovely.');
 });
 
 test('isObject', function () {
@@ -181,7 +172,7 @@ test('filter', function () {
         return x >= 50;
     });
     var shouldbe = new Range(50, 55);
-    ok(b.sameAs(shouldbe), "Should have filtered out.");
+    deepEqual(b, shouldbe, "Should have filtered out.");
 });
 
 test('where', function () {

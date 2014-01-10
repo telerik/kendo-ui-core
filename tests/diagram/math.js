@@ -160,7 +160,7 @@
             }
         });
         var shouldbe = ["Geri", "Niko", "Swa"];
-        ok(r.sameAs(shouldbe));
+        deepEqual(r, shouldbe);
 
         dic = new Dictionary();
         var n = new Node("1");
@@ -183,7 +183,7 @@
         dic.forEach(acc);
         ok(vals.length == 10, "Accumulation of ids.");
         shouldbe = new Range(0, 9);
-        ok(shouldbe.sameAs(vals), "Should be just a range.");
+        deepEqual(shouldbe, vals, "Should be just a range.");
 
         vals = [];
         var acc = function (v) {
@@ -192,7 +192,7 @@
         dic.forEachValue(acc);
         ok(vals.length == 10, "Accumulation of ids.");
         shouldbe = new Range(0, 9);
-        ok(shouldbe.sameAs(vals), "Should be just a range again.");
+        deepEqual(shouldbe, vals, "Should be just a range again.");
     });
 
     test('Load from existing dictionary', function () {
@@ -220,7 +220,7 @@
             rev.push(q.dequeue());
         }
         var shouldbe = new Range(1, 5);
-        ok(rev.sameAs(shouldbe), "The same really.");
+        deepEqual(rev, shouldbe, "The same really.");
     });
 
     QUnit.module("Set tests");
@@ -285,9 +285,9 @@
         var ori = new Node();
         var clone = ori.clone();
         ok(ori.id != clone.id, "The clone should not have the same identifier.");
-        ok(ori.links.sameAs(clone.links));
-        ok(ori.outgoing.sameAs(clone.outgoing));
-        ok(ori.incoming.sameAs(clone.incoming));
+        deepEqual(ori.links, clone.links);
+        deepEqual(ori.outgoing, clone.outgoing);
+        deepEqual(ori.incoming, clone.incoming);
     });
 
     test('Parents and children', function () {
@@ -317,14 +317,14 @@
         }
         var n0 = g.getNode("0");
         g.depthFirstTraversal(n0, acc);
-        var shouldbe = [0, 1, 3, 7, 4, 2, 5, 6];
-        ok(path.sameAs(shouldbe), "Should be unique in this case.");
+        var shouldbe = ["0", "1", "3", "7", "4", "2", "5", "6"];
+        deepEqual(path, shouldbe, "Should be unique in this case.");
         g = parse(["0->7", "0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
-        shouldbe = [0, 7, 1, 3, 4, 2, 5, 6];
+        shouldbe = ["0", "7", "1", "3", "4", "2", "5", "6"];
         path = [];
         n0 = g.getNode("0");
         g.depthFirstTraversal(n0, acc);
-        ok(path.sameAs(shouldbe), "No revisit please.");
+        deepEqual(path, shouldbe, "No revisit please.");
     });
 
     test('Subgraphs', function () {
@@ -343,14 +343,14 @@
         }
         var n0 = g.getNode("0");
         g.breadthFirstTraversal(n0, acc);
-        var shouldbe = new Range(0, 7);
-        ok(path.sameAs(shouldbe), "Should be unique in this case.");
+        var shouldbe = ["0", "1", "2", "3", "4", "5", "6", "7"];
+        deepEqual(path, shouldbe, "Should be unique in this case.");
         g = parse(["0->7", "0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
-        shouldbe = [0, 7, 1, 2, 3, 4, 5, 6];
+        shouldbe = ["0", "7", "1", "2", "3", "4", "5", "6"];
         path = [];
         n0 = g.getNode("0");
         g.breadthFirstTraversal(n0, acc);
-        ok(path.sameAs(shouldbe), "No revisit please.");
+        deepEqual(path, shouldbe, "No revisit please.");
     });
 
     test('Link basics', function () {
@@ -458,7 +458,7 @@
         secondLink.id = "44";
         var s = g.linearize();
         var shouldbe = ["n12->n13", "n17->n22"];
-        ok(s.sameAs(shouldbe));
+        deepEqual(s, shouldbe);
 
         s = g.linearize(true);
         shouldbe = ["n12->n13", {id: "33"}, "n17->n22", {id: "44"}];
@@ -833,7 +833,7 @@
         }
         equal(ids.length, 4);
         ids.sort();
-        ok(["a", "b", "c", "d"].sameAs(ids));
+        deepEqual(["a", "b", "c", "d"], ids);
     });
 
     test('Ensure random id transfer across the analysis', function () {
@@ -865,6 +865,6 @@
         equal(idsafter.length, 4);
         idsbefore.sort();
         idsafter.sort();
-        ok(idsbefore.sameAs(idsafter));
+        deepEqual(idsbefore, idsafter);
     });
 })();
