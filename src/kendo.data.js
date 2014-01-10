@@ -1503,7 +1503,13 @@ var __meta__ = {
 
             parameterMap = options.parameterMap;
 
-            that.push = isFunction(options.push) ? options.push : identity;
+            if (isFunction(options.push)) {
+                that.push = options.push;
+            }
+
+            if (!that.push) {
+                that.push = identity;
+            }
 
             that.parameterMap = isFunction(parameterMap) ? parameterMap : function(options) {
                 var result = {};
