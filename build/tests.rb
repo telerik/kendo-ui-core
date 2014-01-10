@@ -18,20 +18,20 @@ namespace :tests do
     desc "Run tests in supported jQuery versions"
     task :jquery => DEPS do
         SUPPORTED_JQUERY_VERSIONS.each do |version|
-            sh *(GRUNT_CMD + [ "karma", "--junit-results=jquery-#{version}-test-results.xml", "--single-run=true", "--jquery=#{version}" ])
+            sh *(GRUNT_CMD + [ "ci", "--junit-results=jquery-#{version}-test-results.xml", "--jquery=#{version}" ])
         end
     end
 
     desc "Run tests in firefox"
     task :firefox => DEPS do
-        sh *(GRUNT_CMD + [ "karma", "--junit-results=firefox-test-results.xml", "--single-run=true", "--browser=Firefox" ])
+        sh *(GRUNT_CMD + [ "ci", "--junit-results=firefox-test-results.xml", "--browser=Firefox" ])
     end
 
     %w[CI Production TZ].each do |env|
         output = "#{env}-test-results.xml"
 
         file output => DEPS do |t|
-            sh *(GRUNT_CMD + [ "jshint", "karma", "--junit-results=#{output}", "--single-run=true" ])
+            sh *(GRUNT_CMD + [ "ci", "karma", "--junit-results=#{output}" ])
         end
 
         desc "Run #{env} tests"

@@ -44,91 +44,95 @@ module.exports = function(grunt) {
     jshint.files = files ? files.split(",") : jshint.files;
 
     // all files (including subfiles like editor/main.js etc.)
-    var all_kendo_files = META.loadAll().map(addSrc);
+    var allKendoFiles = META.loadAll().map(addSrc);
 
     // files directly in src/
     var main_kendo_files = META.listKendoFiles().map(addSrc);
+
+    var beforeTestFiles = [
+        { pattern: 'styles/**/*.*', watched: true, included: false },
+        { pattern: 'tests/router/sandbox.html', watched: true, included: false },
+        { pattern: 'tests/window/blank.html', watched: true, included: false },
+        { pattern: 'tests/editor/editorStyles.css', included: false },
+        { pattern: 'tests/**/*-fixture.html' },
+        { pattern: 'demos/mvc/App_Data/*json', included: false },
+        jquery,
+        'tests/jquery.mockjax.js',
+    ];
+
+    var afterTestFiles = [
+        'src/kendo.timezones.js',
+        'src/cultures/kendo.culture.de-DE.js',
+        'src/cultures/kendo.culture.bg-BG.js',
+        'src/cultures/kendo.culture.en-ZA.js',
+        "src/cultures/kendo.culture.es-ES.js",
+
+        'tests/kendo-test-helpers.js',
+        'tests/**/test-helper.js',
+        'demos/mvc/content/shared/js/less.js',
+        'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
+        'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
+
+        'tests/chart/util.js',
+        'tests/map/util.js',
+
+        'themebuilder/scripts/themebuilder.js',
+
+        'tests/chart/util.js',
+        'tests/upload/helper.js',
+        'tests/upload/select.js',
+        'tests/upload/selection.js',
+        'tests/upload/async.js',
+        'tests/upload/asyncnomultiple.js',
+        'tests/upload/asyncnoauto.js',
+        'tests/upload/upload.js',
+        'tests/upload/success.js',
+        'tests/upload/error.js',
+        'tests/upload/cancel.js',
+        'tests/upload/remove.js',
+
+        { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
+        { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
+
+        'download-builder/scripts/script-resolver.js',
+        'tests/diagram/common.js'
+    ];
 
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: jshint,
         karma: {
-            unit: {
+            options: {
+                reportSlowerThan: 500,
+                basePath: '',
+                frameworks: ['qunit'],
+                preprocessors: {
+                    'tests/**/.html': [],
+                    'tests/**/*-fixture.html': ['html2js'],
+                },
+                reporters: ['progress'],
+                colors: true,
+                autoWatch: true,
+                browsers: browsers,
+                captureTimeout: 60000,
+                singleRun: grunt.option('single-run')
+            },
+            ci: {
                 options: {
-                    reportSlowerThan: 500,
-                    basePath: '',
-                    frameworks: ['qunit'],
-                    preprocessors: {
-                        'tests/**/.html': [],
-                        'tests/**/*-fixture.html': ['html2js'],
-                    },
-                    files: [
-                        { pattern: 'styles/**/*.*', watched: true, included: false },
-                        { pattern: 'tests/router/sandbox.html', watched: true, included: false },
-                        { pattern: 'tests/window/blank.html', watched: true, included: false },
-                        { pattern: 'tests/editor/editorStyles.css', included: false },
-                        { pattern: 'tests/**/*-fixture.html' },
-                        jquery,
-                        'tests/jquery.mockjax.js',
-
-                    ].concat(all_kendo_files).concat([
-
-                        'src/kendo.timezones.js',
-                        'src/cultures/kendo.culture.de-DE.js',
-                        'src/cultures/kendo.culture.bg-BG.js',
-                        'src/cultures/kendo.culture.en-ZA.js',
-                        "src/cultures/kendo.culture.es-ES.js",
-
-                        'tests/kendo-test-helpers.js',
-                        'tests/**/test-helper.js',
-                        'demos/mvc/content/shared/js/less.js',
-                        { pattern: 'demos/mvc/App_Data/*json', included: false },
-                        'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
-                        'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
-
-                        'tests/chart/util.js',
-                        'tests/map/util.js',
-
-                        'themebuilder/scripts/themebuilder.js',
-
-                        'tests/chart/util.js',
-                        'tests/upload/helper.js',
-                        'tests/upload/select.js',
-                        'tests/upload/selection.js',
-                        'tests/upload/async.js',
-                        'tests/upload/asyncnomultiple.js',
-                        'tests/upload/asyncnoauto.js',
-                        'tests/upload/upload.js',
-                        'tests/upload/success.js',
-                        'tests/upload/error.js',
-                        'tests/upload/cancel.js',
-                        'tests/upload/remove.js',
-
-                        { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
-                        { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
-
-                        'download-builder/scripts/script-resolver.js',
-                        'tests/diagram/common.js'
-                    ]).concat(tests),
-
-                    exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js' ],
-
-                    reporters: reporters,
+                    reporters: ['progress', 'junit'],
 
                     junitReporter: {
                       outputFile: grunt.option('junit-results')
                     },
 
-                    colors: true,
-
-                    autoWatch: true,
-
-                    browsers: browsers,
-
-                    captureTimeout: 60000,
-
-                    singleRun: grunt.option('single-run')
+                    singleRun: true,
+                    files: beforeTestFiles.concat([ 'dist/js/kendo.all.min.js' ]).concat(afterTestFiles).concat(tests)
+                }
+            },
+            unit: {
+                options: {
+                    files: beforeTestFiles.concat(allKendoFiles).concat(afterTestFiles).concat(tests)
                 }
             }
         },
@@ -144,7 +148,9 @@ module.exports = function(grunt) {
             },
             timezones: {
                 files: [{
-                    src: "src/kendo.timezones.js" ,
+                    expand: true,
+                    cwd: "src/",
+                    src: "kendo.timezones.js" ,
                     dest: '<%= kendo.options.jsDestDir %>/',
                 }]
             },
@@ -200,5 +206,7 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
+    grunt.registerTask("ci", [ "kendo", "copy", 'karma:ci' ]);
+    grunt.registerTask("tests", [ 'karma:unit' ]);
     grunt.registerTask("all", [ "kendo", "copy" ]);
 };
