@@ -456,13 +456,13 @@ var Clipboard = Class.extend({
                     return "";
                 }
 
-                do {
-                    if (dom.block[stack[stack.length-1]] && inline) {
-                        return result;
+                if (stack[stack.length] != tagName) {
+                    if (inline) {
+                        return "";
                     }
+                }
 
-                    closeLastTag();
-                } while (stack.length && stack[stack.length-1] != tagName);
+                return "</" + stack.pop() + ">";
             } else {
                 if (!inline) {
                     while (dom.inline[stack[stack.length-1]]) {
