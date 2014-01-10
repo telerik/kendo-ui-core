@@ -6,13 +6,11 @@
             var lastContainer = $(".console div:first", container),
                 counter = lastContainer.find(".count").detach(),
                 lastMessage = lastContainer.text(),
-                count = 1 * counter.text() || 0;
+                count = 1 * (counter.text() || 1);
 
             lastContainer.append(counter);
 
             if (!lastContainer.length || message !== lastMessage) {
-                count = 1;
-
                 $("<div" + (isError ? " class='error'" : "") + "/>")
                     .css({
                         marginTop: -24,
