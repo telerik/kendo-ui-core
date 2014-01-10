@@ -2,7 +2,7 @@ kendo_module({
     id: "data.signalr",
     name: "SignalR",
     category: "framework",
-    depends: [ "core" ],
+    depends: [ "data" ],
     hidden: true
 });
 
@@ -37,6 +37,7 @@ kendo_module({
 
             kendo.data.RemoteTransport.fn.init.call(this, options);
         },
+
         push: function(options) {
             var client = this.options.client || {};
 
@@ -52,22 +53,45 @@ kendo_module({
                 this.hub.on(client.destroy, options.pushDestroy);
             }
         },
-        read: function(options) {
+
+        _crud: function(options, type) {
             var hub = this.hub;
 
             var server = this.options.server;
 
-            if (!server || !server.read) {
-                throw new Error('Reading data from hub needs the "server.read" option to be set.');
+            if (!server || !server[type]) {
+                throw new Error(kendo.format('The "server.{0}" option must be set.', type));
             }
 
-            var data = this.parameterMap(options.data, "read");
+            var args = [server[type]];
+
+            var data = this.parameterMap(options.data, type);
+
+            if (!$.isEmptyObject(data)) {
+                args.push(data);
+            }
 
             this.promise.done(function() {
-                hub.invoke(server.read, data)
-                   .done(options.success)
-                   .fail(options.error);
+                hub.invoke.apply(hub, args)
+                          .done(options.success)
+                          .fail(options.error);
             });
+        },
+
+        read: function(options) {
+            this._crud(options, "read");
+        },
+
+        create: function(options) {
+            this._crud(options, "create");
+        },
+
+        update: function(options) {
+            this._crud(options, "update");
+        },
+
+        destroy: function(options) {
+            this._crud(options, "destroy");
         }
     });
 })();
