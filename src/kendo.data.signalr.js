@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.data" ], f);
+})(function(){
+
+var __meta__ = {
     id: "data.signalr",
     name: "SignalR",
     category: "framework",
     depends: [ "data" ],
     hidden: true
-});
+};
 
 (function() {
     kendo.data.transports.signalr = kendo.data.RemoteTransport.extend({
@@ -95,3 +99,7 @@ kendo_module({
         }
     });
 })();
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
