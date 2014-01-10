@@ -1,3 +1,6 @@
+(function(f, define){
+    define([ ], f);
+})(function(){
 /*
  - print
  - ruler
@@ -43,3 +46,5 @@
         }
     });
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

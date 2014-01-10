@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.diagram.svg", "./kendo.diagram.services", "./kendo.data", "./kendo.draganddrop" ], f);
+    define([ "./kendo.diagram.svg", "./kendo.diagram.services", "./kendo.diagram.layout", "./kendo.diagram.extensions", "./kendo.data", "./kendo.draganddrop" ], f);
 })(function(){
 
 var __meta__ = {

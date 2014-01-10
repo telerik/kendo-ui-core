@@ -26,7 +26,8 @@
         "kendo.dataviz.svg.js",
         "kendo.dataviz.vml.js",
         "kendo.dataviz.canvas.js",
-        "kendo.dataviz.map.js"
+        "kendo.dataviz.map.js",
+        "kendo.diagram.dom.js"
     ], f);
 })(function(){
     "bundle all";
