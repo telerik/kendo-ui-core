@@ -1060,6 +1060,20 @@
             ]
         },
         {
+            "text": "Notification",
+            "name": "notification",
+            "documentation": "web/notification",
+            "spriteCssClass": "notificationIcon",
+            items: [
+                {
+                    "text": "Basic usage",
+                    "url": "notification/index.html",
+                    "title": "Overview of Kendo UI Notification | Kendo UI Web demo",
+                    "meta": "This demo shows the core functionality of Kendo UI Notification component."
+                }
+            ]
+        },
+        {
             "text": "NumericTextBox",
             "name": "numerictextbox",
             "documentation": "web/numerictextbox",

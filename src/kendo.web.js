@@ -1,5 +1,6 @@
 (function(f, define){
     define([
+<<<<<<< HEAD
         "./kendo.core",
         "./kendo.router",
         "./kendo.view",
@@ -21,6 +22,7 @@
         "./kendo.button",
         "./kendo.pager",
         "./kendo.popup",
+        "./kendo.notification",
         "./kendo.tooltip",
         "./kendo.list",
         "./kendo.calendar",
