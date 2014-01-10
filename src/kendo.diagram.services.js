@@ -278,6 +278,8 @@ kendo_module({
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
                 shape.bounds(this.undoStates[i]);
+                if (shape.hasOwnProperty("layout"))
+                    shape.layout(shape, this.redoStates[i], this.undoStates[i]);
             }
             if (this.adorner) {
                 this.adorner.refreshBounds();
@@ -361,6 +363,8 @@ kendo_module({
             for (i = 0; i < this.shapes.length; i++) {
                 shape = this.shapes[i];
                 shape.rotate(this.undoRotates[i], this.center);
+                if (shape.hasOwnProperty("layout"))
+                    shape.layout(shape);
             }
             if (this.adorner) {
                 this.adorner._initialize();
@@ -372,6 +376,8 @@ kendo_module({
             for (i = 0; i < this.shapes.length; i++) {
                 shape = this.shapes[i];
                 shape.rotate(this.redoRotates[i], this.center);
+                if (shape.hasOwnProperty("layout"))
+                    shape.layout(shape);
             }
             if (this.adorner) {
                 this.adorner._initialize();
@@ -1628,6 +1634,8 @@ kendo_module({
                     shape = this.shapes[i];
                     angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
                     shape.rotate(angle, center);
+                    if (shape.hasOwnProperty("layout"))
+                        shape.layout(shape);
                     this._rotating = true;
                 }
                 this.refresh();
