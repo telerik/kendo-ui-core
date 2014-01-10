@@ -386,6 +386,11 @@
                             return new Box2D();
                         }
                     };
+                },
+                pane: {
+                    chartContainer: {
+                        clipBox: new Box2D(0, 0, 100, 100)
+                    }
                 }
             }
 

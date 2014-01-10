@@ -20,6 +20,7 @@ function ViewStub() {
     log.ring = [];
     log.cubicCurve = [];
     log.multiLine = [];
+    log.clipPath = [];
 }
 
 ViewStub.prototype = {
@@ -47,6 +48,11 @@ ViewStub.prototype = {
     createGroup: function(options) {
         this.log.group.push({options: options});
         return new kendo.dataviz.ViewElement(options);
+    },
+    
+    createClipPath: function(id, box) {
+        this.log.clipPath.push({id: id, box: box});
+        return new kendo.dataviz.ViewElement({});
     },
 
     createLine: function(x1, y1, x2, y2, options) {

@@ -1127,11 +1127,11 @@
         });
 
         test("renders top", function() {
-            ok(clipRect.render().indexOf("top:20px;") > -1);
+            ok(clipRect.render().indexOf("top:0px;") > -1);
         });
 
         test("renders left", function() {
-            ok(clipRect.render().indexOf("left:10px;") > -1);
+            ok(clipRect.render().indexOf("left:0px;") > -1);
         });
 
         test("renders width", function() {
@@ -1139,7 +1139,7 @@
         });
 
         test("renders height", function() {
-            ok(clipRect.render().indexOf("height:200px") > -1);
+            ok(clipRect.render().indexOf("height:220px") > -1);
         });
 
         test("renders clip", function() {

@@ -55,7 +55,8 @@ var __meta__ = {
 
             view.decorators.push(
                 new VMLOverlayDecorator(view),
-                new VMLGradientDecorator(view)
+                new VMLGradientDecorator(view),
+                new VMLClipDecorator(view)
             );
 
             if (dataviz.ui.Chart) {
@@ -196,27 +197,21 @@ var __meta__ = {
         },
 
         createGroup: function(options) {
-            var view = this,
-                group = view.decorate(new VMLGroup(view.setDefaults(options))),
-                clipPathId = options.clipPathId,
-                clipPath = view.definitions[clipPathId];
-                
-            if (clipPath) {                
-                clipPath.children.push(group);
-                group = clipPath;                
-            }
-            
-            return group;
+            return this.decorate(
+                new VMLGroup(this.setDefaults(options))
+            );
         },
         
         createClipPath: function(id, box) {
             var view = this,
-                clipPath;
+                clipPath = view.definitions[id];
    
-            if(!view.definitions[id]) {
+            if(!clipPath) {
                 clipPath = view.decorate(new VMLClipRect(box, {id: id}));                
                 view.definitions[id] = clipPath;
             }
+            
+            return clipPath;
         },        
 
         createGradient: function(options) {
@@ -792,8 +787,8 @@ var __meta__ = {
             if (!clipRect.template) {
                 clipRect.template = VMLClipRect.template = renderTemplate(
                     "<#= d.tagName # #= d.renderId() #" +
-                        "style='position:absolute; " +
-                        "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
+                        "style='position:absolute;" +
+                        "width:#= d.box.width() #px; height:#= d.box.height() + d.box.y1#px; " +
                         "top:0px; " +
                         "left:0px; " +
                         "clip:#= d._renderClip() #;' >" +
@@ -981,6 +976,25 @@ var __meta__ = {
                 }
             }
 
+            return element;
+        }
+    };
+    
+    function VMLClipDecorator(view) {
+        this.view = view;
+    }
+    
+    VMLClipDecorator.prototype = {
+        decorate: function (element) {
+            var decorator = this,
+                view = decorator.view,
+                clipPath = view.definitions[element.options.clipPathId];
+            if (clipPath) {                  
+                clipPath = clipPath.clone();
+                clipPath.options.id = uniqueId();
+                clipPath.children.push(element);
+                return clipPath;
+            }      
             return element;
         }
     };

@@ -12,51 +12,136 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
-        <script src="../src/kendo.dataviz.canvas.js"></script>        
+        <script src="../src/kendo.dataviz.canvas.js"></script>  
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet">
+        <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet">
+        <style>
+            .k-chart{
+                min-height: 400px;
+            }
+        </style>
 </head>
 <body>
-   
- <!--<div id="chart" style="margin-top:100px; width: 800px;"></div>
- <div id="stock" style="height: 500px;margin-top":"></div>-->
- <div id="testRange"></div>
-<!--<div id="multiplePanes"></div>
+ <--
+<div id="radarColumn"></div>
+    <div id="testRange" style="height: 500px;margin-top:200px;"></div>
+<div id="chart" style="margin-top:100px; width: 800px;"></div>
+
+ -->
+
+ <div id="stock" style="height: 500px;margin-top:200px;"></div>
     
-  <div id="scatterChart"></div>
+ <-- <div id="multiplePanes"></div>
+ <div id="scatterChart"></div>
  
  <div id="sparkline"></div>
   <div id="radarChart"></div> 
   <div id="polarChart"></div>
   <div id="bubble"></div>-->
   <script>
+   $("#radarColumn").kendoChart({
+            title: {
+                text: "Nutrient balance: Apples, raw"
+            },
+            legend: {
+                visible: false
+            },
+            series: [{
+                type: "radarColumn",
+                name: "Nutrients",
+                data: [
+                    5, 1, 1, 5, 0, 1,
+                    1, 2, 1, 2, 1, 0,
+                    0, 2, 1, 0, 3, 1,
+                    1, 1, 0, 0, 0
+                ]
+            }],
+            categoryAxis: {
+                categories: [
+                    "Df", "Pr", "A", "C", "D", "E",
+                    "Th", "Ri", "Ni", "B", "F", "B",
+                    "Se", "Mn", "Cu", "Zn", "K", "P",
+                    "Fe", "Ca", "Na", "Ch", "Sf"
+                ]
+            },
+            tooltip: {
+                visible: true
+            },
+            valueAxis: {
+                visible: false
+            }
+        });
     var renderAs = "svg";
     $("#chart").kendoChart({
         series: [{
             type: "line",
+            style: "step",
             data: [1, 100, 1, 50, 80]
+        }, {
+            type: "column",
+            data: [1, 50, 1, 50, 40]
         }],
         valueAxis: {
             max: 80,
             min: 30,
-           // axisCrossingValue: 50
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    format: "n1"
+                }
+            }            
         },
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    format: "n1"
+                }
+            }
+        },        
         tooltip: {
-            visible: true
+            visible: true//,
+            //shared: true
         },
         renderAs: renderAs
     });    
     
     $("#testRange").kendoChart({
         series: [{
-            type: "line",            
-            data: [1, 1000000, -1000000, 5]
+            type: "column",            
+            data: [1, 100, -100, 5]
+        }, {
+            type: "line",
+            style: "smooth",            
+            data: [1, 100, -100, 5]
         }],
         tooltip: {
-            visible: true
+            visible: true//,
+            //shared: true
+        },
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    format: "n1"
+                }
+            }
         },
         valueAxis: {
             min: -5,
-            max: 5
-        }
+            max: 5,
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    format: "n1"
+                }
+            }
+        },
+        renderAs: renderAs
         
     });
     
@@ -67,8 +152,7 @@
                             url: "../demos/mvc/content/dataviz/js/boeing-stock.json",
                             dataType: "json"
                         }
-                    },
-                  
+                    }
                 },
                 title: {
                     text: "The Boeing Company (NYSE:BA)"
@@ -77,7 +161,7 @@
                 panes: [{
                     name: "volumePane",
                     title: "Volume",
-                    height: 150 // pixels
+                    height: 150 
                 },{
                     title: "Value",
                     name: "stock"
@@ -85,8 +169,7 @@
                 categoryAxis: {
                     pane: "volumePane"
                 },
-                valueAxes: [{
-                    // Default axis
+                valueAxes: [{                  
                     max: 40,
                     min: 24,
                     line: {
@@ -115,7 +198,8 @@
                     tooltip: {
                         format: "{0:C0}"
                     }
-                }]
+                }],
+                renderAs: renderAs
             });
     
     $("#scatterChart").kendoChart({
@@ -165,21 +249,18 @@
     
     $("#multiplePanes").kendoChart({                
         series: [{
-            type: "line",
-            data: [60,1,100],
-            axis: "top"
-        },
-        {
             type: "column",
             data: [60,25,80],
             axis: "top"
-        },
-        {
+        },{
+            type: "line",
+            data: [60,1,100],
+            axis: "top"
+        },{
              type: "line",
              data: [100,1,100, 50, 60],
              axis: "bottom"
-        },
-        {
+        },{
             type: "column",
             data: [60,1,100, 50, 60],
             axis: "bottom"
@@ -192,7 +273,7 @@
         }, {
             min: 40,
             max: 80,
-            pane: "bottom",
+             pane: "bottom",
             name: "bottom"
         }],
           categoryAxis: [{
@@ -214,21 +295,38 @@
     });
     
     $("#radarChart").kendoChart({
+        title: {
+            text: "Market Value of Major Banks"
+        },
+        legend: {
+            position: "bottom"
+        },
         seriesDefaults: {
-            type: "radarLine"
+            type: "radarLine",
+            style: "smooth"
         },
         series: [{
             name: "Market value as of 2007",
-            data: [1, 100, 1]
+            data: [116, 165, 215, 75, 100, 49, 80, 116, 108, 90, 67, 76, 91, 255, 120]
+        },{
+            name: "Market value as of 2009",
+            data: [64, 85, 97, 27, 16, 26, 35, 32, 26, 17, 10, 7, 19, 5]
         }],
         categoryAxis: {
-            categories: ["Santander", "JP Morgan", "HSBC"]
+            categories: ["Santander", "JP Morgan", "HSBC", "Credit Suisse",
+                "Goldman Sachs", "Morgan Stanley", "Societe Generale", "UBS",
+                "BNP Paribas", "Unicredit", "Credit Agricole", "Deutsche Bank",
+                "Barclays", "Citigroup", "RBS"]
         },
         valueAxis: {
-            max: 80,
-            min: 30
+            labels: {
+                format: "${0}"
+            }
         },
-        renderAs: renderAs
+        tooltip: {
+            visible: true,
+            format: "${0} bln"
+        }
     });
     
       $("#polarChart").kendoChart({
@@ -252,6 +350,9 @@
                 min: 20,
                 max: 40
             }],
+            tooltip: {
+                visible: true
+            },
             renderAs: renderAs
         });
         

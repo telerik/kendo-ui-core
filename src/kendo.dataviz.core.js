@@ -633,7 +633,7 @@ var __meta__ = {
                 i,
                 child,
                 childrenCount = children.length;
-
+          
             for (i = 0; i < childrenCount; i++) {
                 child = children[i];
 

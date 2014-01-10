@@ -835,7 +835,7 @@ var __meta__ = {
                 highlight = chart._highlight,
                 tooltipOptions = chart.options.tooltip,
                 point;
-
+      
             if (chart._suppressHover || !highlight ||
                 inArray(e.target, highlight._overlays) || chart._sharedTooltip()) {
                 return;
@@ -846,7 +846,7 @@ var __meta__ = {
                 point.hover(chart, e);
                 if (!e.isDefaultPrevented()) {
                     chart._activePoint = point;
-
+                    
                     tooltipOptions = deepExtend({}, tooltipOptions, point.options.tooltip);
                     if (tooltipOptions.visible) {
                         tooltip.show(point);
@@ -2932,7 +2932,7 @@ var __meta__ = {
 
         reflow: function(targetBox) {
             this.render();
-
+            
             var bar = this,
                 options = bar.options,
                 label = bar.label;
@@ -2998,8 +2998,7 @@ var __meta__ = {
             var bar = this,
                 box = bar.box;
 
-            options = deepExtend({ data: { modelId: bar.modelId } }, options);
-
+            options = deepExtend({ data: { modelId: bar.modelId } }, options);            
             return view.createRect(box, options);
         },
 
@@ -3025,19 +3024,19 @@ var __meta__ = {
                 box = bar.box,
                 vertical = options.vertical,
                 aboveAxis = bar.aboveAxis,
-                range = options.range,
+                clipBox = bar.owner.pane.chartContainer.clipBox,
                 x,
                 y;
-        
+            
             if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
-                y = aboveAxis ? math.max(box.y1, range.yMax) : box.y2 - tooltipHeight;
+                y = aboveAxis ? math.max(box.y1, clipBox.y1) : box.y2 - tooltipHeight;
             } else {
                 if (options.isStacked) {
                     x = aboveAxis ? box.x2 - tooltipWidth : box.x1;
                     y = box.y1 - tooltipHeight - TOOLTIP_OFFSET;
                 } else {
-                    x = aboveAxis ? math.min(box.x2, range.xMax) + TOOLTIP_OFFSET : box.x1 - tooltipWidth - TOOLTIP_OFFSET;
+                    x = aboveAxis ? math.min(box.x2, clipBox.x2) + TOOLTIP_OFFSET : box.x1 - tooltipWidth - TOOLTIP_OFFSET;
                     y = box.y1;
                 }
             }
@@ -3357,6 +3356,7 @@ var __meta__ = {
                 chartPoints = chart.points,
                 categoryAxis = chart.categoryAxis,
                 value, valueAxis, axisCrossingValue,
+                clip = chart.options.clip,
                 point;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
@@ -3380,32 +3380,12 @@ var __meta__ = {
                     var valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue);
                     var pointSlot = chart.pointSlot(categorySlot, valueSlot);
                     var aboveAxis = valueAxis.options.reverse ?
-                                        value < axisCrossingValue : value >= axisCrossingValue,                        
-                        categoryBox = categoryAxis.box,
-                        range,                        
-                        min = valueAxis.options.min,
-                        max = valueAxis.options.max;
+                                        value < axisCrossingValue : value >= axisCrossingValue;
                  
                     point.aboveAxis = aboveAxis;
-                    if (!point.options.range) {                        
-                        if (valueAxis.options.vertical) {
-                            range = {
-                                xMin: categoryBox.x1, 
-                                xMax: categoryBox.x2,
-                                yMin: valueAxis.getSlot(min).y1,
-                                yMax: valueAxis.getSlot(max).y1
-                            };
-                        }
-                        else {
-                            range = {
-                                xMin: valueAxis.getSlot(min).x1, 
-                                xMax: valueAxis.getSlot(max).x1,
-                                yMin: categoryBox.y2,
-                                yMax: categoryBox.y1
-                            };                            
-                        }
-                        point.options.range = range;
-                    }
+                    // if (clip && !point.options.clipBox) {
+                        // point.options.clipBox = chart.pane.chartContainer.clipBox();
+                    // }                    
                     
                     chart.reflowPoint(point, pointSlot);
                 }
@@ -3480,18 +3460,9 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.value;
-        },
-        
-        getViewElements: function (view) {
-            var chart = this,
-                group = view.createGroup({
-                    id: uniqueId(),
-                    clipPathId: chart.options.clip ? chart.pane.clipPath(view) : undefined
-                });
-            group.children = ChartElement.fn.getViewElements.call(chart, view);
-            return [group];
-        }         
+        }       
     });
+        
 
     var BarChart = CategoricalChart.extend({
         init: function(plotArea, options) {
@@ -4043,7 +4014,7 @@ var __meta__ = {
                 vertical = options.vertical,
                 aboveAxis = bar.aboveAxis,
                 x, y;
-
+            
             if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
                 y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
@@ -4411,7 +4382,7 @@ var __meta__ = {
                 highlight = element.options.highlight,
                 markers = highlight.markers,
                 defaultColor = element.markerBorder().color;
-
+      
             options = deepExtend({ data: { modelId: element.modelId } }, options, {
                 fill: markers.color || defaultColor,
                 stroke: markers.border.color,
@@ -4432,8 +4403,8 @@ var __meta__ = {
                 aboveAxis = point.aboveAxis,
                 x = markerBox.x2 + TOOLTIP_OFFSET,
                 y = aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2,
-                range = point.options.range,                
-                showTooltip = markerBox.y1 <= range.yMin && range.yMax <= markerBox.y2 && range.xMin <= markerBox.x2 && markerBox.x1 <= range.xMax;
+                clipBox = point.owner.pane.chartContainer.clipBox,                
+                showTooltip = !clipBox || !(markerBox.y2 < clipBox.y1 || clipBox.y2 < markerBox.y1 || markerBox.x2 < clipBox.x1 || clipBox.x2 < markerBox.x1);
            
             if (showTooltip) { 
                 return Point2D(x, y);                
@@ -5406,6 +5377,7 @@ var __meta__ = {
                 pointIx = 0,
                 point,
                 seriesAxes,
+                clip = chart.options.clip,               
                 limit = !chart.options.clip;
 
             chart.traverseDataPoints(function(value, fields) {
@@ -5415,17 +5387,11 @@ var __meta__ = {
                 var slotX = seriesAxes.x.getSlot(value.x, value.x, limit),
                     slotY = seriesAxes.y.getSlot(value.y, value.y, limit),
                     pointSlot = chart.pointSlot(slotX, slotY);                    
-         
-                if (point) {
-                    if (!point.options.range) {                        
-                        point.options.range = {
-                            xMin: seriesAxes.x.getSlot(seriesAxes.x.options.min).x1,
-                            xMax: seriesAxes.x.getSlot(seriesAxes.x.options.max).x1,
-                            yMin: seriesAxes.y.getSlot(seriesAxes.y.options.min).y1,
-                            yMax: seriesAxes.y.getSlot(seriesAxes.y.options.max).y1
-                        };
-                    }
-                  
+               
+                if (point) {                  
+                    // if (clip && !point.options.clipBox) {
+                        // point.options.clipBox = chart.pane.chartContainer.clipBox();
+                    // }
                     point.reflow(pointSlot);
                 }
             });
@@ -5443,8 +5409,7 @@ var __meta__ = {
                 group = view.createGroup({
                     animation: {
                         type: CLIP
-                    },
-                    clipPathId: chart.options.clip ? chart.pane.clipPath(view) : undefined
+                    }
                 });
 
             group.children = elements;
@@ -5655,9 +5620,7 @@ var __meta__ = {
         getViewElements: function(view) {
             var chart = this,
                 elements = ChartElement.fn.getViewElements.call(chart, view),
-                group = view.createGroup({
-                    clipPathId: chart.options.clip ? chart.pane.clipPath(view) : undefined
-                });
+                group = view.createGroup();
 
             group.children = elements;
             return [group];
@@ -5855,9 +5818,9 @@ var __meta__ = {
         tooltipAnchor: function() {
             var point = this,
                 box = point.box,
-                range = point.options.range;
+                clipBox = point.owner.pane.chartContainer.clipBox;                
             
-            return new Point2D(box.x2 + TOOLTIP_OFFSET, math.max(box.y1, range.yMax) + TOOLTIP_OFFSET);
+            return new Point2D(box.x2 + TOOLTIP_OFFSET, math.max(box.y1, clipBox.y1) + TOOLTIP_OFFSET);
         },
 
         formatValue: function(format) {
@@ -6679,7 +6642,7 @@ var __meta__ = {
         tooltipAnchor: function(width, height) {
             var point = this,
                 box = point.sector.adjacentBox(TOOLTIP_OFFSET, width, height);
-
+            
             return new Point2D(box.x1, box.y1);
         },
 
@@ -7354,6 +7317,8 @@ var __meta__ = {
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
 
             pane.content = new ChartElement();
+            pane.chartContainer = new ChartContainer({}, pane);
+            pane.content.append(pane.chartContainer);
             pane.append(pane.content);
 
             pane.axes = [];
@@ -7379,9 +7344,9 @@ var __meta__ = {
 
         appendChart: function(chart) {
             var pane = this;
-
+            
             pane.charts.push(chart);
-            pane.content.append(chart);
+            pane.chartContainer.append(chart);
             chart.pane = pane;
         },
 
@@ -7389,7 +7354,7 @@ var __meta__ = {
             var pane = this,
                 plotArea = pane.parent,
                 i;
-
+            
             if (plotArea) {
                 for (i = 0; i < pane.axes.length; i++) {
                     plotArea.removeAxis(pane.axes[i]);
@@ -7402,11 +7367,13 @@ var __meta__ = {
 
             pane.axes = [];
             pane.charts = [];
-
+        
             pane.content.destroy();
             pane.content.children = [];
+            pane.chartContainer.children = [];
+            pane.content.append(pane.chartContainer);
         },
-
+        
         reflow: function(targetBox) {
             var pane = this;
 
@@ -7420,53 +7387,7 @@ var __meta__ = {
             if (pane.title) {
                 pane.contentBox.y1 += pane.title.box.height();
             }
-        },
-        
-        clipPath: function(view) {
-            var pane = this,
-                axes = pane.axes,
-                length = axes.length,
-                idx = 0,
-                options,
-                min, max,
-                valueBox,
-                currentBox,
-                targetBox,
-                axis,
-                vertical,
-                clipPathId = pane.clipPathId;
-                
-            if (clipPathId) {
-                return clipPathId;
-            }
-       
-            for (; idx < length; idx++) {
-                axis = axes[idx];
-                options = axis.options;
-                min = options.min; max = options.max;
-                if (defined(min) && defined(max)) {
-                    currentBox = axis.getSlot(min, max);
-                    vertical = axis.options.vertical;
-                    //needs further calculations
-                    targetBox = defined(valueBox) ? valueBox : pane.box;
-                    
-                    if (vertical) {
-                        currentBox.x1 = axis.box.x2;
-                        currentBox.x2 = targetBox.x2;
-                    } else {
-                        currentBox.y1 = targetBox.y1;
-                        currentBox.y2 = axis.box.y1;
-                    }
-                    valueBox = currentBox;
-                }
-            }            
-            
-            clipPathId = uniqueId(); 
-            view.createClipPath(clipPathId, valueBox);         
-            pane.clipPathId = clipPathId;
-            
-            return clipPathId;
-        },        
+        },                
 
         getViewElements: function(view) {
             var pane = this,
@@ -7475,7 +7396,7 @@ var __meta__ = {
                     id: pane.id
                 }),
                 result = [];
-
+           
             group.children = elements.concat(
                 pane.renderGridLines(view),
                 pane.content.getViewElements(view)
@@ -7527,6 +7448,85 @@ var __meta__ = {
         }
     });
 
+    var ChartContainer = ChartElement.extend({
+        init: function(options, pane) {
+            var container = this;
+            ChartElement.fn.init.call(container, options);
+            container.pane = pane;                       
+        },
+        
+        shouldClip: function () {
+            var container = this,
+                children = container.children,
+                length = children.length,
+                i;
+            for (i = 0; i < length; i++) { 
+                if (children[i].options.clip === false) {
+                    return false;
+                }
+            }
+            return length > 0;
+        },
+        
+        _clipBox: function() {
+            var container = this,
+                pane = container.pane,
+                axes = pane.axes,
+                length = axes.length,
+                idx = 0,
+                options,
+                min, max,
+                valueBox,
+                currentBox,
+                targetBox,
+                axis,
+                vertical,
+                clipBox;
+                
+       
+            for (; idx < length; idx++) {
+                axis = axes[idx];
+                options = axis.options;
+                min = options.min; max = options.max;
+                if (defined(min) && defined(max)) {
+                    currentBox = axis.getSlot(min, max);
+                    vertical = axis.options.vertical;
+                    //needs further calculations
+                    targetBox = defined(clipBox) ? clipBox : pane.box;
+                    
+                    if (vertical) {
+                        currentBox.x1 = axis.box.x2;
+                        currentBox.x2 = targetBox.x2;
+                    } else {
+                        currentBox.y1 = targetBox.y1;
+                        currentBox.y2 = axis.box.y1;
+                    }
+                    clipBox = currentBox;
+                }
+            }                        
+            
+            return clipBox;
+        },        
+        
+        getViewElements: function (view) {
+            var container = this,
+                clipPathId = container.shouldClip() ? container.clipPathId || uniqueId() : "",
+                group = view.createGroup({
+                    id: uniqueId(),
+                    clipPathId: clipPathId
+                }); 
+            
+            if (clipPathId && !container.clipPathId) {
+                container.clipBox = container._clipBox();
+                container.clipPathId = clipPathId;
+                view.createClipPath(clipPathId, container.clipBox);
+            }
+            
+            group.children = ChartElement.fn.getViewElements.call(container, view);
+            return [group];            
+        }
+    });    
+    
     var PlotAreaBase = ChartElement.extend({
         init: function(series, options) {
             var plotArea = this;
@@ -9267,7 +9267,7 @@ var __meta__ = {
                 overlays = highlight._overlays,
                 overlayElement, i, point,
                 pointOptions;
-          
+            
             highlight.hide();
             highlight._points = points = [].concat(points);
 
@@ -9277,7 +9277,7 @@ var __meta__ = {
                     pointOptions = point.options;
                     
                     if (!pointOptions || (pointOptions.highlight || {}).visible) {
-                        if (point.highlightOverlay) {
+                        if (point.highlightOverlay) {                   
                             overlay = point.highlightOverlay(view, highlight.options);
                             
                             if (overlay) {
@@ -9359,12 +9359,18 @@ var __meta__ = {
             }
         },
 
-        move: function() {
+        move: function() {            
             var tooltip = this,
                 options = tooltip.options,
                 element = tooltip.element,
-                offset = tooltip._offset();
-
+                offset;
+            
+            if (!tooltip.anchor) {
+                return;
+            }
+            
+            offset = tooltip._offset();
+            
             if (!tooltip.visible) {
                 element.css({ top: offset.top, left: offset.left });
             }
@@ -9430,7 +9436,7 @@ var __meta__ = {
 
         show: function() {
             var tooltip = this;
-
+            
             tooltip.showTimeout = setTimeout(tooltip._moveProxy, TOOLTIP_SHOW_DELAY);
         },
 
@@ -9826,7 +9832,7 @@ var __meta__ = {
             tooltip.point = point;
             tooltip.element.html(tooltip.content(point));
             tooltip.anchor = tooltip.getAnchor(element.outerWidth(), element.outerHeight());
-
+           
             tooltip.move();
         },
 

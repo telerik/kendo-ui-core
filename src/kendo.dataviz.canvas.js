@@ -100,31 +100,45 @@ var __meta__ = {
             var element = this,
                 sortedChildren = element.sortChildren(),
                 childrenCount = sortedChildren.length,
+                clipPath = element.clipPath,
                 i;
-
+          
+            if (clipPath) {
+                context.save();
+                clipPath.render(context);
+            }
+            
             for (i = 0; i < childrenCount; i++) {
                 sortedChildren[i].render(context);
             }
+            
+            if (clipPath) {
+                context.restore();
+            }
+        },
+        
+        applyDefinitions: function (element) {
+            if (element.options.clipPathId) {
+                element.clipPath = this.definitions[element.options.clipPathId];
+            }
+            return element;
         },
 
         createGroup: function(options) {
-            var group = new CanvasGroup(options),
-                clipPathId = options.clipPathId;
-            if (clipPathId) {
-                group.clipPath = this.definitions[clipPathId];
-            }
-            return group;
+             return this.applyDefinitions(new CanvasGroup(options));
         },
         
         createClipPath: function(id, box) {
             var view = this,
-                clipPath;
+                clipPath = view.definitions[id];
        
-            if(!view.definitions[id]) {
+            if(!clipPath) {
                 clipPath = new CanvasClipPath({id: id});
                 clipPath.children.push(view.createRect(box, {fill: "none"}));
                 view.definitions[id] = clipPath;
             }
+            
+            return clipPath;
         },        
 
         createText: function(content, options) {
@@ -187,16 +201,7 @@ var __meta__ = {
 
     var CanvasGroup = ViewElement.extend({
         render: function(context) {
-            var group = this,
-                clipPath = group.clipPath;
-            if (clipPath) {
-                context.save();
-                clipPath.render(context)
-            }
-            group.renderContent(context);
-            if (clipPath) {
-                context.restore();                
-            }
+            this.renderContent(context);
         },
 
         renderContent: CanvasView.fn.renderContent

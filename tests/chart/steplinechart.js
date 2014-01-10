@@ -39,7 +39,7 @@
 
             this.namedCategoryAxes = {};
             this.namedValueAxes = {};
-
+ 
             this.seriesCategoryAxis = function(series) {
                 return series.categoryAxis ?
                     this.namedCategoryAxes[series.categoryAxis] : this.primaryCategoryAxis;
@@ -737,6 +737,7 @@
                     dashType: "dot"
                 }, options)]
             });
+           
             linePoint = lineChart.points[0];
         }
 
@@ -771,7 +772,7 @@
             equal(linePoint.options.markers.visible, false);
         });
 
-        test("applies series color to point markers border", function() {
+        test("applies series color to point markers border", function() {            
             createLineChart({ markers: { visible: true } });
             lineChart.reflow(chartBox);
             equal(linePoint.marker.options.border.color, "#f00");
@@ -888,8 +889,13 @@
             point.owner = {
                 formatPointValue: function(point, tooltipFormat) {
                     return kendo.dataviz.autoFormat(tooltipFormat, point.value);
+                },
+                pane: {
+                    chartContainer: {
+                        clipBox: new Box2D(0, 0, 100, 100)
+                    }
                 }
-            }
+            };
 
             box = new Box2D(0, 0, 100, 100);
             point.reflow(box);
@@ -1053,6 +1059,7 @@
         });
 
         test("tooltipAnchor is at bottom right of marker / below axis", function() {
+            debugger;
             createPoint({ aboveAxis: false });
             var anchor = point.tooltipAnchor(10, 10);
             deepEqual([anchor.x, anchor.y],

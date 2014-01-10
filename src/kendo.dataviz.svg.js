@@ -160,12 +160,14 @@ var __meta__ = {
         
         createClipPath: function(id, box) {
             var view = this,
-                clipPath;
-            if(!view.definitions[id]) {
+                clipPath = view.definitions[id];
+            if(!clipPath) {
                 clipPath = new SVGClipPath({id: id});
                 clipPath.children.push(view.createRect(box, {}));
                 view.definitions[id] = clipPath;
             }
+            
+            return clipPath;
         },        
 
         createText: function(content, options) {
@@ -738,7 +740,7 @@ var __meta__ = {
                 renderTemplate(
                     "<g#= d.renderId() #" +
                     "#= d.renderDataAttributes() #" +
-                    "#= d.renderClipPath() # >" +
+                    "#= d.renderClipPath() #>" +
                     "#= d.renderContent() #</g>"
                 );
             }
