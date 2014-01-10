@@ -36,6 +36,11 @@ kendo_module({
             }
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
+            wrapper.attr({
+                tabindex: -1,
+                role: "presentation"
+            });
+
             element.css({
                 width: "100%",
                 height: DOMelement.style.height
