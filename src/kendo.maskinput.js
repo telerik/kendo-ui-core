@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "maskinput",
     name: "MaskInput",
     category: "web",
     description: "The MaskInput widget allows to specify a mask type on an input field.",
     depends: [ "core" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo;
@@ -55,3 +59,7 @@ kendo_module({
     ui.plugin(MaskInput);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
