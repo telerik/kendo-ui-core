@@ -1361,14 +1361,14 @@ var __meta__ = {
          */
         removeLink: function (link) {
             if (link.source === this) {
-                this.links.remove(link);
-                this.outgoing.remove(link);
+                Utils.remove(this.links, link);
+                Utils.remove(this.outgoing, link);
                 link.source = null;
             }
 
             if (link.target === this) {
-                this.links.remove(link);
-                this.incoming.remove(link);
+                Utils.remove(this.links, link);
+                Utils.remove(this.incoming, link);
                 link.target = null;
             }
         },
@@ -1524,8 +1524,8 @@ var __meta__ = {
          * Changes the source-node of this link.
          */
         changeSource: function (node) {
-            this.source.links.remove(this);
-            this.source.outgoing.remove(this);
+            Utils.remove(this.source.links, this);
+            Utils.remove(this.source.outgoing, this);
 
             node.links.push(this);
             node.outgoing.push(this);
@@ -1538,8 +1538,8 @@ var __meta__ = {
          * @param node
          */
         changeTarget: function (node) {
-            this.target.links.remove(this);
-            this.target.incoming.remove(this);
+            Utils.remove(this.target.links, this);
+            Utils.remove(this.target.incoming, this);
 
             node.links.push(this);
             node.incoming.push(this);
@@ -1567,11 +1567,11 @@ var __meta__ = {
             var oldTarget = this.target;
 
             this.source = oldTarget;
-            oldSource.outgoing.remove(this);
+            Utils.remove(oldSource.outgoing, this);
             this.source.outgoing.push(this);
 
             this.target = oldSource;
-            oldTarget.incoming.remove(this);
+            Utils.remove(oldTarget.incoming, this);
             this.target.incoming.push(this);
             return this;
         },
@@ -2123,7 +2123,7 @@ var __meta__ = {
                     var link = links[i];
                     this.removeLink(link);
                 }
-                this.nodes.remove(n);
+                Utils.remove(this.nodes, n);
             }
             else {
                 throw "The identifier should be a Node or the Id (string) of a node.";
@@ -2147,12 +2147,12 @@ var __meta__ = {
              throw "The given link is not part of the Graph.";
              }
              */
-            this.links.remove(link);
+            Utils.remove(this.links, link);
 
-            link.source.outgoing.remove(link);
-            link.source.links.remove(link);
-            link.target.incoming.remove(link);
-            link.target.links.remove(link);
+            Utils.remove(link.source.outgoing, link);
+            Utils.remove(link.source.links, link);
+            Utils.remove(link.target.incoming, link);
+            Utils.remove(link.target.links, link);
         },
 
         /**
@@ -2505,11 +2505,11 @@ var __meta__ = {
                             var targetLink = target.links[li];
                             source = targetLink.getComplement(target);
                             intensity = flowIntensity(source, N);
-                            intensityCatalog.get(intensity).remove(source);
+                            Utils.remove(intensityCatalog.get(intensity), source);
                             source.removeLink(targetLink);
                             catalogEqualIntensity(source, intensityCatalog);
                         }
-                        copy.nodes.remove(target);
+                        Utils.remove(copy.nodes, target);
                         targetStack.unshift(target);
                     }
                 }
@@ -2523,12 +2523,12 @@ var __meta__ = {
                             var sourceLink = source.links[si];
                             target = sourceLink.getComplement(source);
                             intensity = flowIntensity(target, N);
-                            intensityCatalog.get(intensity).remove(target);
+                            Utils.remove(intensityCatalog.get(intensity), target);
                             target.removeLink(sourceLink);
                             catalogEqualIntensity(target, intensityCatalog);
                         }
                         sourceStack.push(source);
-                        copy.nodes.remove(source);
+                        Utils.remove(copy.nodes, source);
                     }
                 }
 
@@ -2542,12 +2542,12 @@ var __meta__ = {
                                 var ril = v.links[ri];
                                 var u = ril.getComplement(v);
                                 intensity = flowIntensity(u, N);
-                                intensityCatalog.get(intensity).remove(u);
+                                Utils.remove(intensityCatalog.get(intensity), u);
                                 u.removeLink(ril);
                                 catalogEqualIntensity(u, intensityCatalog);
                             }
                             sourceStack.push(v);
-                            copy.nodes.remove(v);
+                            Utils.remove(copy.nodes, v);
                             break;
                         }
                     }

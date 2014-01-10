@@ -1720,10 +1720,10 @@ var __meta__ = {
                         // odd number will give one more at the right
                         leftcount = children.length / 2;
                         male = this.center.children.where(function (n) {
-                            return children.indexOf(n) < leftcount;
+                            return Utils.indexOf(children, n) < leftcount;
                         });
                         female = this.center.children.where(function (n) {
-                            return children.indexOf(n) >= leftcount;
+                            return Utils.indexOf(children, n) >= leftcount;
                         });
 
                         this.layoutLeft(male);
@@ -1741,10 +1741,10 @@ var __meta__ = {
                         // odd number will give one more at the right
                         leftcount = children.length / 2;
                         male = this.center.children.where(function (n) {
-                            return children.indexOf(n) < leftcount;
+                            return Utils.indexOf(children, n) < leftcount;
                         });
                         female = this.center.children.where(function (n) {
-                            return children.indexOf(n) >= leftcount;
+                            return Utils.indexOf(children, n) >= leftcount;
                         });
                         this.layoutUp(male);
                         this.layoutDown(female);
@@ -2901,7 +2901,7 @@ var __meta__ = {
         /// <param name="layer">The layer.</param>
         /// <returns>Returns <c>true</c> if the shift was possible, otherwise <c>false</c>.</returns>
         moveRight: function (node, layer, priority) {
-            var index = layer.indexOf(node);
+            var index = Utils.indexOf(layer, node);
             if (index === layer.length - 1) {
                 // this is the last node in the layer, so we can move to the right without troubles
                 node.gridPosition = node.gridPosition + 0.5;
@@ -2939,7 +2939,7 @@ var __meta__ = {
         /// <param name="layer">The layer.</param>
         /// <returns>Returns <c>true</c> if the shift was possible, otherwise <c>false</c>.</returns>
         moveLeft: function (node, layer, priority) {
-            var index = layer.indexOf(node);
+            var index = Utils.indexOf(layer, node);
             if (index === 0) {
                 // this is the last node in the layer, so we can move to the left without troubles
                 node.gridPosition = node.gridPosition - 0.5;

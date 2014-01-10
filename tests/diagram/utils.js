@@ -48,11 +48,11 @@ test('Any', function () {
 
 test('Remove', function () {
     var a = new Range(1, 105);
-    a.remove(7, 13);
+    Utils.remove(a, 7);
     var find = function (x) {
-        return x == 7 || x == 13;
+        return x == 7;
     };
-    ok(!Utils.any(a, find), 'Elements 7 and 13 should have been removed.')
+    ok(!Utils.any(a, find), 'Elements 7 should have been removed.')
 });
 
 test('Distinct and contains', function () {

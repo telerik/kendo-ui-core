@@ -208,18 +208,13 @@ var __meta__ = {
         return null;
     };
 
-    if (!Array.prototype.remove) {
-        Array.prototype.remove = function () {
-            var what, a = arguments, L = a.length, ax;
-            while (L && this.length) {
-                what = a[--L];
-                while ((ax = this.indexOf(what)) !== -1) {
-                    this.splice(ax, 1);
-                }
-            }
-            return this;
-        };
-    }
+    Utils.remove = function (arr, what) {
+        var ax;
+        while ((ax = Utils.indexOf(arr, what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+        return arr;
+    };
 
     if (!Array.prototype.flatten) {
         Array.prototype.flatten = function () {
@@ -232,7 +227,7 @@ var __meta__ = {
             var a = this;
             var r = [];
             for (var i = 0; i < a.length; i++) {
-                if (r.indexOf(a[i]) < 0) {
+                if (Utils.indexOf(r, a[i]) < 0) {
                     r.push(a[i]);
                 }
             }
@@ -252,16 +247,9 @@ var __meta__ = {
         };
     }
 
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (element) {
-            for (var i = 0; i < this.length; ++i) {
-                if (this[i] === element) {
-                    return i;
-                }
-            }
-            return -1;
-        };
-    }
+    Utils.indexOf = function(arr, what) {
+        return $.inArray(what, arr);
+    };
 
     if (!Array.prototype.forEach) {
         Array.prototype.forEach = function (predicate, thisRef) {

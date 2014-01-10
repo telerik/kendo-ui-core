@@ -869,10 +869,10 @@ var __meta__ = {
             return this;
         },
         remove: function (visual) {
-            if (this.visuals.indexOf(visual) >= 0) {
+            if (Utils.indexOf(this.visuals, visual) >= 0) {
                 this.native.removeChild(visual.native);
                 visual.canvas = undefined;
-                this.visuals.remove(visual);
+                Utils.remove(this.visuals, visual);
                 return this;
             }
         },
@@ -889,7 +889,7 @@ var __meta__ = {
         removeMarker: function (marker) {
             if (marker && this.markers.contains(marker)) {
                 this.defsNode.removeChild(marker.native);
-                this.markers.remove(marker);
+                Utils.remove(this.markers, marker);
             }
         },
         addMask: function (mask) {
@@ -899,13 +899,13 @@ var __meta__ = {
         removeMask: function (mask) {
             if (mask && this.masks.contains(mask)) {
                 this.defsNode.removeChild(mask.native);
-                this.masks.remove(mask);
+                Utils.remove(this.masks, mask);
             }
         },
         removeGradient: function (gradient) {
             if (gradient && this.gradients.contains(gradient)) {
                 this.defsNode.removeChild(gradient.native);
-                this.gradients.remove(gradient);
+                Utils.remove(this.gradients, gradient);
             }
         },
         addGradient: function (gradient) {
