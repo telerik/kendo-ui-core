@@ -47,7 +47,18 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         private static IDictionary<string, IList<MethodInfo>> GetInternal(Type controllerType)
         {
-            Func<MethodInfo, bool> isActionMethod = method => actionResultType.IsAssignableFrom(method.ReturnType) && !method.IsDefined(nonActionAttributeType, false);
+            Func<MethodInfo, bool> isActionMethod = method => 
+            {
+                Type[] genericArguments = method.ReturnType.GetGenericArguments();
+                bool isActionResultType = actionResultType.IsAssignableFrom(method.ReturnType);
+
+                if (!isActionResultType && genericArguments.Length > 0)
+                {
+                    isActionResultType = actionResultType.IsAssignableFrom(genericArguments[0]);
+                }
+
+                return isActionResultType && !method.IsDefined(nonActionAttributeType, false);
+            };
 
             IDictionary<string, IList<MethodInfo>> actionMethods = new Dictionary<string, IList<MethodInfo>>(StringComparer.OrdinalIgnoreCase);
 
