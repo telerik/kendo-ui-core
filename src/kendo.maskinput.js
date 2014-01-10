@@ -21,6 +21,9 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
+            that.element.addClass("k-input")
+                .attr("autocomplete", "off");
+
             that._wrapper();
         },
 
