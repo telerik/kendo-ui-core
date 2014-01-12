@@ -412,7 +412,7 @@ var __meta__ = {
                 plotArea;
 
             chart._applyDefaults(chart.options);
-            
+
             if (paneName) {
                 plotArea = chart._model._plotArea;
                 pane = plotArea.findPane(paneName);
@@ -835,7 +835,7 @@ var __meta__ = {
                 highlight = chart._highlight,
                 tooltipOptions = chart.options.tooltip,
                 point;
-      
+
             if (chart._suppressHover || !highlight ||
                 inArray(e.target, highlight._overlays) || chart._sharedTooltip()) {
                 return;
@@ -846,7 +846,7 @@ var __meta__ = {
                 point.hover(chart, e);
                 if (!e.isDefaultPrevented()) {
                     chart._activePoint = point;
-                    
+
                     tooltipOptions = deepExtend({}, tooltipOptions, point.options.tooltip);
                     if (tooltipOptions.visible) {
                         tooltip.show(point);
@@ -2932,7 +2932,7 @@ var __meta__ = {
 
         reflow: function(targetBox) {
             this.render();
-            
+
             var bar = this,
                 options = bar.options,
                 label = bar.label;
@@ -2998,7 +2998,7 @@ var __meta__ = {
             var bar = this,
                 box = bar.box;
 
-            options = deepExtend({ data: { modelId: bar.modelId } }, options);            
+            options = deepExtend({ data: { modelId: bar.modelId } }, options);
             return view.createRect(box, options);
         },
 
@@ -3018,7 +3018,7 @@ var __meta__ = {
             return borderColor;
         },
 
-        tooltipAnchor: function(tooltipWidth, tooltipHeight) {   
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var bar = this,
                 options = bar.options,
                 box = bar.box,
@@ -3027,7 +3027,7 @@ var __meta__ = {
                 clipBox = bar.owner.pane.chartContainer.clipBox,
                 x,
                 y;
-            
+
             if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
                 y = aboveAxis ? math.max(box.y1, clipBox.y1) : box.y2 - tooltipHeight;
@@ -3369,25 +3369,25 @@ var __meta__ = {
                 if (point && point.plotValue) {
                     value = point.plotValue;
                 }
-                
+
                 var categorySlot = categorySlots[categoryIx];
                 if (!categorySlot) {
                     categorySlots[categoryIx] = categorySlot =
                         chart.categorySlot(categoryAxis, categoryIx, valueAxis);
                 }
 
-                if (point) {                        
+                if (point) {
                     var valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue);
                     var pointSlot = chart.pointSlot(categorySlot, valueSlot);
                     var aboveAxis = valueAxis.options.reverse ?
                                         value < axisCrossingValue : value >= axisCrossingValue;
-                 
-                    point.aboveAxis = aboveAxis;             
-                    
+
+                    point.aboveAxis = aboveAxis;
+
                     chart.reflowPoint(point, pointSlot);
                 }
             });
-            
+
             chart.reflowCategories(categorySlots);
 
             chart.box = targetBox;
@@ -3457,9 +3457,9 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.value;
-        }       
+        }
     });
-        
+
 
     var BarChart = CategoricalChart.extend({
         init: function(plotArea, options) {
@@ -4011,7 +4011,7 @@ var __meta__ = {
                 vertical = options.vertical,
                 aboveAxis = bar.aboveAxis,
                 x, y;
-            
+
             if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
                 y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
@@ -4379,7 +4379,7 @@ var __meta__ = {
                 highlight = element.options.highlight,
                 markers = highlight.markers,
                 defaultColor = element.markerBorder().color;
-      
+
             options = deepExtend({ data: { modelId: element.modelId } }, options, {
                 fill: markers.color || defaultColor,
                 stroke: markers.border.color,
@@ -4400,12 +4400,12 @@ var __meta__ = {
                 aboveAxis = point.aboveAxis,
                 x = markerBox.x2 + TOOLTIP_OFFSET,
                 y = aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2,
-                clipBox = point.owner.pane.chartContainer.clipBox,                
+                clipBox = point.owner.pane.chartContainer.clipBox,
                 showTooltip = !clipBox || !(markerBox.y2 < clipBox.y1 || clipBox.y2 < markerBox.y1 || markerBox.x2 < clipBox.x1 || clipBox.x2 < markerBox.x1);
-           
-            if (showTooltip) { 
-                return Point2D(x, y);                
-            }                       
+
+            if (showTooltip) {
+                return Point2D(x, y);
+            }
         },
 
         formatValue: function(format) {
@@ -4672,7 +4672,7 @@ var __meta__ = {
                 fields = data.fields,
                 point,
                 pointOptions;
-            
+
             if (!defined(value) || value === null) {
                 if (missingValues === ZERO) {
                     value = 0;
@@ -5374,7 +5374,7 @@ var __meta__ = {
                 pointIx = 0,
                 point,
                 seriesAxes,
-                clip = chart.options.clip,               
+                clip = chart.options.clip,
                 limit = !chart.options.clip;
 
             chart.traverseDataPoints(function(value, fields) {
@@ -5383,15 +5383,15 @@ var __meta__ = {
 
                 var slotX = seriesAxes.x.getSlot(value.x, value.x, limit),
                     slotY = seriesAxes.y.getSlot(value.y, value.y, limit),
-                    pointSlot = chart.pointSlot(slotX, slotY);                    
-               
-                if (point) {                  
+                    pointSlot = chart.pointSlot(slotX, slotY);
+
+                if (point) {
                     point.reflow(pointSlot);
                 }
             });
 
             chart.box = targetBox;
-        },               
+        },
 
         pointSlot: function(slotX, slotY) {
             return new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
@@ -5679,7 +5679,7 @@ var __meta__ = {
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
                 points = [], mid, ocSlot, lhSlot;
-            
+
             ocSlot = valueAxis.getSlot(value.open, value.close);
             lhSlot = valueAxis.getSlot(value.low, value.high);
 
@@ -5813,8 +5813,8 @@ var __meta__ = {
         tooltipAnchor: function() {
             var point = this,
                 box = point.box,
-                clipBox = point.owner.pane.chartContainer.clipBox;                
-            
+                clipBox = point.owner.pane.chartContainer.clipBox;
+
             return new Point2D(box.x2 + TOOLTIP_OFFSET, math.max(box.y1, clipBox.y1) + TOOLTIP_OFFSET);
         },
 
@@ -6637,7 +6637,7 @@ var __meta__ = {
         tooltipAnchor: function(width, height) {
             var point = this,
                 box = point.sector.adjacentBox(TOOLTIP_OFFSET, width, height);
-            
+
             return new Point2D(box.x1, box.y1);
         },
 
@@ -7310,9 +7310,9 @@ var __meta__ = {
             pane.id = uniqueId();
 
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
-            
+
             pane.content = new ChartElement();
-            pane.chartContainer = new ChartContainer({}, pane);            
+            pane.chartContainer = new ChartContainer({}, pane);
             pane.append(pane.content);
 
             pane.axes = [];
@@ -7337,7 +7337,7 @@ var __meta__ = {
         },
 
         appendChart: function(chart) {
-            var pane = this;            
+            var pane = this;
             if (pane.chartContainer.parent !== pane.content) {
                 pane.content.append(pane.chartContainer);
             }
@@ -7350,7 +7350,7 @@ var __meta__ = {
             var pane = this,
                 plotArea = pane.parent,
                 i;
-            
+
             if (plotArea) {
                 for (i = 0; i < pane.axes.length; i++) {
                     plotArea.removeAxis(pane.axes[i]);
@@ -7363,12 +7363,12 @@ var __meta__ = {
 
             pane.axes = [];
             pane.charts = [];
-          
+
             pane.content.destroy();
             pane.content.children = [];
-            pane.chartContainer.children = [];            
+            pane.chartContainer.children = [];
         },
-        
+
         reflow: function(targetBox) {
             var pane = this;
 
@@ -7376,13 +7376,13 @@ var __meta__ = {
             if (last(pane.children) === pane.content) {
                 pane.children.pop();
             }
-            
+
             BoxElement.fn.reflow.call(pane, targetBox);
 
             if (pane.title) {
                 pane.contentBox.y1 += pane.title.box.height();
             }
-        },                
+        },
 
         getViewElements: function(view) {
             var pane = this,
@@ -7391,7 +7391,7 @@ var __meta__ = {
                     id: pane.id
                 }),
                 result = [];
-                                      
+
             group.children = elements.concat(
                 pane.renderGridLines(view),
                 pane.content.getViewElements(view)
@@ -7447,22 +7447,22 @@ var __meta__ = {
         init: function(options, pane) {
             var container = this;
             ChartElement.fn.init.call(container, options);
-            container.pane = pane;                       
+            container.pane = pane;
         },
-        
+
         shouldClip: function () {
             var container = this,
                 children = container.children,
                 length = children.length,
                 i;
-            for (i = 0; i < length; i++) { 
+            for (i = 0; i < length; i++) {
                 if (children[i].options.clip === false) {
                     return false;
                 }
             }
             return length > 0;
         },
-        
+
         _clipBox: function() {
             var container = this,
                 pane = container.pane,
@@ -7477,8 +7477,8 @@ var __meta__ = {
                 axis,
                 vertical,
                 clipBox;
-                
-       
+
+
             for (; idx < length; idx++) {
                 axis = axes[idx];
                 options = axis.options;
@@ -7488,7 +7488,7 @@ var __meta__ = {
                     vertical = axis.options.vertical;
                     //needs further calculations
                     targetBox = defined(clipBox) ? clipBox : pane.box;
-                    
+
                     if (vertical) {
                         currentBox.x1 = axis.box.x2;
                         currentBox.x2 = targetBox.x2;
@@ -7498,37 +7498,37 @@ var __meta__ = {
                     }
                     clipBox = currentBox;
                 }
-            }                        
-            
+            }
+
             return clipBox;
-        },        
-        
+        },
+
         getViewElements: function (view) {
             var container = this,
                 clipPathId = container.shouldClip() ? container.clipPathId || uniqueId() : "",
-                group; 
-            
+                group;
+
             if (clipPathId && !container.clipPathId) {
                 container.clipBox = container._clipBox();
                 container.clipPathId = clipPathId;
                 view.createClipPath(clipPathId, container.clipBox);
             }
-            
-            group = view.createGroup({                    
+
+            group = view.createGroup({
                 clipPathId: clipPathId
             });
-            
+
             group.children = ChartElement.fn.getViewElements.call(container, view);
-            return [group];            
+            return [group];
         },
-        
+
         destroy: function() {
-            var container = this;            
+            var container = this;
             ChartElement.fn.destroy.call(container);
             container.parent = undefined;
         }
-    });    
-    
+    });
+
     var PlotAreaBase = ChartElement.extend({
         init: function(series, options) {
             var plotArea = this;
@@ -7842,9 +7842,9 @@ var __meta__ = {
         redraw: function(panes) {
             var plotArea = this,
                 i;
-            
+
             panes = [].concat(panes);
-            
+
             for (i = 0; i < panes.length; i++) {
                 panes[i].empty();
             }
@@ -9269,7 +9269,7 @@ var __meta__ = {
                 overlays = highlight._overlays,
                 overlayElement, i, point,
                 pointOptions;
-            
+
             highlight.hide();
             highlight._points = points = [].concat(points);
 
@@ -9277,14 +9277,14 @@ var __meta__ = {
                 point = points[i];
                 if (point) {
                     pointOptions = point.options;
-                    
+
                     if (!pointOptions || (pointOptions.highlight || {}).visible) {
-                        if (point.highlightOverlay) {                   
+                        if (point.highlightOverlay) {
                             overlay = point.highlightOverlay(view, highlight.options);
-                            
+
                             if (overlay) {
                                 overlayElement = view.renderElement(overlay);
-                                $("#" + point.id).parent().append(overlayElement);                                
+                                $("#" + point.id).parent().append(overlayElement);
                                 overlays.push(overlayElement);
                             }
                         }
@@ -9360,18 +9360,18 @@ var __meta__ = {
             }
         },
 
-        move: function() {            
+        move: function() {
             var tooltip = this,
                 options = tooltip.options,
                 element = tooltip.element,
                 offset;
-            
+
             if (!tooltip.anchor) {
                 return;
             }
-            
+
             offset = tooltip._offset();
-            
+
             if (!tooltip.visible) {
                 element.css({ top: offset.top, left: offset.left });
             }
@@ -9437,7 +9437,7 @@ var __meta__ = {
 
         show: function() {
             var tooltip = this;
-            
+
             tooltip.showTimeout = setTimeout(tooltip._moveProxy, TOOLTIP_SHOW_DELAY);
         },
 
@@ -9534,14 +9534,14 @@ var __meta__ = {
         show: function(point) {
             var tooltip = this,
                 options = deepExtend({}, tooltip.options, point.options.tooltip);
-            
+
             if (!point) {
                 return;
             }
 
-           
+
             tooltip.anchor = tooltip._pointAnchor(point);
-            
+
             if (tooltip.anchor) {
                 tooltip.element.html(tooltip._pointContent(point));
                 tooltip._updateStyle(options, point.options);
@@ -9833,7 +9833,7 @@ var __meta__ = {
             tooltip.point = point;
             tooltip.element.html(tooltip.content(point));
             tooltip.anchor = tooltip.getAnchor(element.outerWidth(), element.outerHeight());
-           
+
             tooltip.move();
         },
 

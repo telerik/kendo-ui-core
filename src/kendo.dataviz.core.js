@@ -633,7 +633,7 @@ var __meta__ = {
                 i,
                 child,
                 childrenCount = children.length;
-          
+
             for (i = 0; i < childrenCount; i++) {
                 child = children[i];
 
@@ -2286,11 +2286,11 @@ var __meta__ = {
             if (!defined(b)) {
                 b = a || 0;
             }
-          
+
             if (limit) {
                 a = math.max(math.min(a, options.max), options.min);
                 b = math.max(math.min(b, options.max), options.min);
-            }            
+            }
 
             if (vertical) {
                 p1 = options.max - math.max(a, b);

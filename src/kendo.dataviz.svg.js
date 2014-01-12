@@ -157,7 +157,7 @@ var __meta__ = {
                 new SVGGroup(options)
             );
         },
-        
+
         createClipPath: function(id, box) {
             var view = this,
                 clipPath = view.definitions[id];
@@ -166,9 +166,9 @@ var __meta__ = {
                 clipPath.children.push(view.createRect(box, {}));
                 view.definitions[id] = clipPath;
             }
-            
+
             return clipPath;
-        },        
+        },
 
         createText: function(content, options) {
             return this.decorate(
@@ -263,7 +263,7 @@ var __meta__ = {
             }
         }
     });
-    
+
     var SVGViewElement = ViewElement.extend({
         renderClipPath: function () {
             var element = this,
@@ -274,7 +274,7 @@ var __meta__ = {
             }
             return clipPath;
         }
-    });    
+    });
 
     var SVGText = SVGViewElement.extend({
         init: function(content, options) {

@@ -201,18 +201,18 @@ var __meta__ = {
                 new VMLGroup(this.setDefaults(options))
             );
         },
-        
+
         createClipPath: function(id, box) {
             var view = this,
                 clipPath = view.definitions[id];
-   
+
             if(!clipPath) {
-                clipPath = view.decorate(new VMLClipRect(box, {id: id}));                
+                clipPath = view.decorate(new VMLClipRect(box, {id: id}));
                 view.definitions[id] = clipPath;
             }
-            
+
             return clipPath;
-        },        
+        },
 
         createGradient: function(options) {
             var validRadial = defined(options.cx) && defined(options.cy) && defined(options.bbox);
@@ -979,22 +979,22 @@ var __meta__ = {
             return element;
         }
     };
-    
+
     function VMLClipDecorator(view) {
         this.view = view;
     }
-    
+
     VMLClipDecorator.prototype = {
         decorate: function (element) {
             var decorator = this,
                 view = decorator.view,
                 clipPath = view.definitions[element.options.clipPathId];
-            if (clipPath) {                  
+            if (clipPath) {
                 clipPath = clipPath.clone();
                 clipPath.options.id = uniqueId();
                 clipPath.children.push(element);
                 return clipPath;
-            }      
+            }
             return element;
         }
     };
