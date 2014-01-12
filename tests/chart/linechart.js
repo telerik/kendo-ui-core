@@ -893,8 +893,13 @@
             point.owner = {
                 formatPointValue: function(point, tooltipFormat) {
                     return kendo.dataviz.autoFormat(tooltipFormat, point.value);
+                },
+                pane: {
+                    chartContainer: {
+                        clipBox: new Box2D(0, 0, 100, 100)
+                    }
                 }
-            }
+            };
 
             box = new Box2D(0, 0, 100, 100);
             point.reflow(box);

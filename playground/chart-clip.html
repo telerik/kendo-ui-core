@@ -22,7 +22,8 @@
         </style>
 </head>
 <body>
- <--
+<button type="button" onclick="test()">test</button>
+ <!--
 <div id="radarColumn"></div>
     <div id="testRange" style="height: 500px;margin-top:200px;"></div>
 <div id="chart" style="margin-top:100px; width: 800px;"></div>
@@ -31,7 +32,7 @@
 
  <div id="stock" style="height: 500px;margin-top:200px;"></div>
     
- <-- <div id="multiplePanes"></div>
+ <!-- <div id="multiplePanes"></div>
  <div id="scatterChart"></div>
  
  <div id="sparkline"></div>
@@ -39,6 +40,28 @@
   <div id="polarChart"></div>
   <div id="bubble"></div>-->
   <script>
+    function test(){
+        sc = $("#stock").data().kendoStockChart;
+        sc._navigator.redrawSlaves();
+        sc._navigator.redrawSlaves();
+        sc._navigator.redrawSlaves();
+        sc._navigator.redrawSlaves();
+        sc._navigator.redrawSlaves();
+        sc._navigator.redrawSlaves();
+        //call one more time sc._navigator.redrawSlaves();
+    }
+    
+    // k10137
+
+    // refresh: function() {
+        // var pane = this,
+            // view = pane.view;
+
+        // if (view) {
+            // view.replace(pane);
+        // }
+    // }
+  
    $("#radarColumn").kendoChart({
             title: {
                 text: "Nutrient balance: Apples, raw"

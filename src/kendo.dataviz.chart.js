@@ -412,7 +412,7 @@ var __meta__ = {
                 plotArea;
 
             chart._applyDefaults(chart.options);
-
+            
             if (paneName) {
                 plotArea = chart._model._plotArea;
                 pane = plotArea.findPane(paneName);
@@ -3382,10 +3382,7 @@ var __meta__ = {
                     var aboveAxis = valueAxis.options.reverse ?
                                         value < axisCrossingValue : value >= axisCrossingValue;
                  
-                    point.aboveAxis = aboveAxis;
-                    // if (clip && !point.options.clipBox) {
-                        // point.options.clipBox = chart.pane.chartContainer.clipBox();
-                    // }                    
+                    point.aboveAxis = aboveAxis;             
                     
                     chart.reflowPoint(point, pointSlot);
                 }
@@ -5389,9 +5386,6 @@ var __meta__ = {
                     pointSlot = chart.pointSlot(slotX, slotY);                    
                
                 if (point) {                  
-                    // if (clip && !point.options.clipBox) {
-                        // point.options.clipBox = chart.pane.chartContainer.clipBox();
-                    // }
                     point.reflow(pointSlot);
                 }
             });
@@ -5742,7 +5736,8 @@ var __meta__ = {
                 group = view.createGroup({
                     animation: {
                         type: CLIP
-                    }
+                    },
+                    id: point.id
                 });
 
             if (options.overlay) {
@@ -7315,10 +7310,9 @@ var __meta__ = {
             pane.id = uniqueId();
 
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
-
+            
             pane.content = new ChartElement();
-            pane.chartContainer = new ChartContainer({}, pane);
-            pane.content.append(pane.chartContainer);
+            pane.chartContainer = new ChartContainer({}, pane);            
             pane.append(pane.content);
 
             pane.axes = [];
@@ -7343,8 +7337,10 @@ var __meta__ = {
         },
 
         appendChart: function(chart) {
-            var pane = this;
-            
+            var pane = this;            
+            if (pane.chartContainer.parent !== pane.content) {
+                pane.content.append(pane.chartContainer);
+            }
             pane.charts.push(chart);
             pane.chartContainer.append(chart);
             chart.pane = pane;
@@ -7367,11 +7363,10 @@ var __meta__ = {
 
             pane.axes = [];
             pane.charts = [];
-        
+          
             pane.content.destroy();
             pane.content.children = [];
-            pane.chartContainer.children = [];
-            pane.content.append(pane.chartContainer);
+            pane.chartContainer.children = [];            
         },
         
         reflow: function(targetBox) {
@@ -7381,7 +7376,7 @@ var __meta__ = {
             if (last(pane.children) === pane.content) {
                 pane.children.pop();
             }
-
+            
             BoxElement.fn.reflow.call(pane, targetBox);
 
             if (pane.title) {
@@ -7396,7 +7391,7 @@ var __meta__ = {
                     id: pane.id
                 }),
                 result = [];
-           
+                                      
             group.children = elements.concat(
                 pane.renderGridLines(view),
                 pane.content.getViewElements(view)
@@ -7511,10 +7506,7 @@ var __meta__ = {
         getViewElements: function (view) {
             var container = this,
                 clipPathId = container.shouldClip() ? container.clipPathId || uniqueId() : "",
-                group = view.createGroup({
-                    id: uniqueId(),
-                    clipPathId: clipPathId
-                }); 
+                group; 
             
             if (clipPathId && !container.clipPathId) {
                 container.clipBox = container._clipBox();
@@ -7522,8 +7514,18 @@ var __meta__ = {
                 view.createClipPath(clipPathId, container.clipBox);
             }
             
+            group = view.createGroup({                    
+                clipPathId: clipPathId
+            });
+            
             group.children = ChartElement.fn.getViewElements.call(container, view);
             return [group];            
+        },
+        
+        destroy: function() {
+            var container = this;            
+            ChartElement.fn.destroy.call(container);
+            container.parent = undefined;
         }
     });    
     
@@ -7840,9 +7842,9 @@ var __meta__ = {
         redraw: function(panes) {
             var plotArea = this,
                 i;
-
+            
             panes = [].concat(panes);
-
+            
             for (i = 0; i < panes.length; i++) {
                 panes[i].empty();
             }
@@ -9282,8 +9284,7 @@ var __meta__ = {
                             
                             if (overlay) {
                                 overlayElement = view.renderElement(overlay);
-                                $("#" + point.id).parent().append(overlayElement);
-                                //viewElement.appendChild(overlayElement);
+                                $("#" + point.id).parent().append(overlayElement);                                
                                 overlays.push(overlayElement);
                             }
                         }

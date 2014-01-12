@@ -2019,7 +2019,14 @@
             bar.category = CATEGORY;
             bar.dataItem = { value: VALUE };
             bar.series = { name: SERIES_NAME };
-
+            bar.owner = {
+                pane: {
+                    chartContainer: {
+                        clipBox: new Box2D(0, 0, 100, 100)
+                    }
+                }            
+            };
+            
             root = new dataviz.RootElement();
             root.append(bar);
 
