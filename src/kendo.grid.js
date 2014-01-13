@@ -1738,7 +1738,8 @@ var __meta__ = {
         cancelRow: function() {
             var that = this,
                 container = that._editContainer,
-                model;
+                model,
+                tr;
 
             if (container) {
                 model = that._modelForContainer(container);
@@ -1770,10 +1771,24 @@ var __meta__ = {
 
         _displayRow: function(row) {
             var that = this,
-                model = that._modelForContainer(row);
+                model = that._modelForContainer(row),
+                related,
+                tmp,
+                isAlt = row.hasClass("k-alt");
 
             if (model) {
-                row.replaceWith($((row.hasClass("k-alt") ? that.altRowTemplate : that.rowTemplate)(model)));
+
+                if (that.staticContent) {
+                    related = $((isAlt ? that.staticAltRowTemplate : that.staticRowTemplate)(model));
+                    that._relatedRow(row).replaceWith(related);
+                }
+
+                tmp = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
+                row.replaceWith(tmp);
+
+                if (related) {
+                    adjustRowHeight(tmp[0], related[0]);
+                }
             }
         },
 
@@ -2899,10 +2914,25 @@ var __meta__ = {
                 });
 
             } else if (!row.hasClass("k-grid-edit-row")) {
+
+                if (that.staticContent) {
+                    tmp = (isAlt ? that.staticAltRowTemplate : that.staticRowTemplate)(model);
+
+                    that._relatedRow(row).replaceWith(tmp);
+                }
+
                 tmp = (isAlt ? that.altRowTemplate : that.rowTemplate)(model);
 
                 row.replaceWith(tmp);
+
                 tmp = that.items().eq(idx);
+
+                if (that.staticContent) {
+                    var related = that._relatedRow(tmp)[0];
+                    adjustRowHeight(tmp[0], related);
+
+                    tmp = tmp.add(related);
+                }
 
                 for (idx = 0, length = that.columns.length; idx < length; idx++) {
                     column = that.columns[idx];
@@ -2912,6 +2942,7 @@ var __meta__ = {
                         $('<span class="k-dirty"/>').prependTo(cell);
                     }
                 }
+
                 that.trigger("itemChange", { item: tmp, data: model, ns: ui });
             }
 

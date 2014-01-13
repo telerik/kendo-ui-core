@@ -28,6 +28,7 @@
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
         <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
@@ -109,7 +110,7 @@
                             refresh: true,
                             buttonCount: 5
                         },
-                        editable: true,
+                        editable: "popup",
                         selectable: "multiple row",
                         reorderable: true,
                         resizable: true,
@@ -142,7 +143,72 @@
                         },  {
                             field: "Country",
                             width: 110
+                            }, {
+                            command: "edit", width: 100
                         }]
+                    });
+                });
+            </script>
+
+            <div style="width:600px">
+                <div id="editableGrid"></div>
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+                        dataSource = new kendo.data.DataSource({
+                            transport: {
+                                read:  {
+                                    url: crudServiceBaseUrl + "/Products",
+                                    dataType: "jsonp"
+                                },
+                                update: {
+                                    url: crudServiceBaseUrl + "/Products/Update",
+                                    dataType: "jsonp"
+                                },
+                                destroy: {
+                                    url: crudServiceBaseUrl + "/Products/Destroy",
+                                    dataType: "jsonp"
+                                },
+                                create: {
+                                    url: crudServiceBaseUrl + "/Products/Create",
+                                    dataType: "jsonp"
+                                },
+                                parameterMap: function(options, operation) {
+                                    if (operation !== "read" && options.models) {
+                                        return {models: kendo.stringify(options.models)};
+                                    }
+                                }
+                            },
+                            batch: true,
+                            pageSize: 20,
+                            schema: {
+                                model: {
+                                    id: "ProductID",
+                                    fields: {
+                                        ProductID: { editable: false, nullable: true },
+                                        ProductName: { validation: { required: true } },
+                                        UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                                        Discontinued: { type: "boolean" },
+                                        UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                                    }
+                                }
+                            }
+                        });
+
+                    $("#editableGrid").kendoGrid({
+                        dataSource: dataSource,
+                        pageable: true,
+                        height: 430,
+                        toolbar: ["create"],
+                        columns: [
+                            { field:"ProductName", title: "Product Name", static: true, width: 100 },
+                            { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "100px" },
+                            { field: "UnitsInStock", title:"Units In Stock", width: "200px" },
+                            { field: "Discontinued", width: "100px" },
+                            { command: ["edit", "destroy"], title: "&nbsp;", width: "160px" }],
+                        editable: "popup"
                     });
                 });
             </script>
