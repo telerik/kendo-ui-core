@@ -473,7 +473,7 @@ kendo_module({
 
             var that = this,
                 parent = element.parentsUntil(that.element, allItemsSelector),
-                group = element.parent("ul");
+                group = element.parent("ul:not(.k-menu)");
 
             element.remove();
 
