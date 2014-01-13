@@ -126,14 +126,14 @@ PHP_CONTENT = {
 
 
 file KENDO_CONFIG_FILE do |t|
-    sh "grunt kendo:config"
+    sh "./node_modules/.bin/grunt kendo:config"
 end
 
 # Rake tasks
 desc('JavaScript')
 
 task :js do
-    sh 'grunt all'
+    sh './node_modules/.bin/grunt all'
 end
 
 desc('Less')
