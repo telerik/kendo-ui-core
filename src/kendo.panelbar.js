@@ -392,7 +392,9 @@ kendo_module({
                         return that;
                     }
 
-                    that._updateSelected(link);
+                    if (!that._triggerEvent(SELECT, item)) {
+                        that._updateSelected(link);
+                    }
                 });
 
             return that;
