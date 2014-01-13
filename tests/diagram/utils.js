@@ -184,7 +184,7 @@ test('all', function () {
 
 test('first', function () {
     var ar = [1, 2, 3, , 11];
-    equal(ar.first(), 1);
+    equal(Utils.first(ar), 1);
     var objs = [
         {name: "A", age: 33},
         {name: "D", age: 12},
@@ -192,7 +192,7 @@ test('first', function () {
         {name: "C", age: 47},
         {name: "B", age: 61}
     ];
-    var b = objs.first(function (d) {
+    var b = Utils.first(objs, function (d) {
         return d.name == "B";
     });
     equal(b.age, 34);

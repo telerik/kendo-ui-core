@@ -1875,13 +1875,13 @@ var __meta__ = {
          */
         getId: function (id) {
             var found;
-            found = this.shapes.first(function (s) {
+            found = Utils.first(this.shapes, function (s) {
                 return s.visual.native.id === id;
             });
             if (found) {
                 return found;
             }
-            found = this.connections.first(function (c) {
+            found = Utils.first(this.connections, function (c) {
                 return c.visual.native.id === id;
             });
             return found;
@@ -2132,7 +2132,7 @@ var __meta__ = {
                 if (isUndefined(node)) { // happens on updating dataSource
                     return;
                 }
-                var shape = that._dataMap.first(function (item) {
+                var shape = Utils.first(that._dataMap, function (item) {
                     return item.uid === node.uid;
                 });
                 if (shape) {

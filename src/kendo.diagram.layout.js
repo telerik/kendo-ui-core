@@ -433,7 +433,7 @@ var __meta__ = {
          * @param b
          */
         getEdge: function (a, b) {
-            return a.links.first(function (link) {
+            return Utils.first(a.links, function (link) {
                 return link.getComplement(a) === b;
             });
         },

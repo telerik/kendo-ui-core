@@ -1740,13 +1740,13 @@ var __meta__ = {
             if (Utils.isUndefined(value)) {
                 if (!this._root) {
                     // TODO: better to use the longest path for the most probable root?
-                    var found = this.nodes.first(function (n) {
+                    var found = Utils.first(this.nodes, function (n) {
                         return n.incoming.length === 0;
                     });
                     if (found) {
                         return found;
                     }
-                    return this.nodes.first();
+                    return Utils.first(this.nodes);
                 }
                 else {
                     return this._root;

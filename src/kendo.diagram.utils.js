@@ -257,25 +257,16 @@ var __meta__ = {
         return result;
     };
 
-    if (!Array.prototype.first) {
-        Array.prototype.first = function (constraint, context) {
-            if (this.length === 0) {
-                return null;
-            }
-            if (Utils.isUndefined(constraint)) {
-                return this[0];
-            }
-            else {
-                for (var i = 0; i < this.length; i++) {
-                    var item = this[i];
-                    if (constraint.call(context, item, i, this)) {
-                        return item;
-                    }
-                }
-                return null;
-            }
-        };
-    }
+    Utils.first = function (arr, constraint, context) {
+        if (arr.length === 0) {
+            return null;
+        }
+        if (Utils.isUndefined(constraint)) {
+            return arr[0];
+        }
+
+        return Utils.find(arr, constraint, context);
+    };
 
     if (!Array.prototype.insert) {
         /**
