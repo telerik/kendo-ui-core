@@ -163,6 +163,9 @@
             "@error-text-color":                constant(COLOR, ".k-state-error"),
 
             "@disabled-text-color":             constant(COLOR, ".k-state-disabled"),
+			"@disabled-gradient":               gradientConstant(".k-state-disabled"),
+            "@disabled-border-color":           constant(BORDERCOLOR, ".k-state-disabled"),
+			"@disabled-background-color":       constant(BGCOLOR, ".k-state-disabled"), 
 
             "@validation-background-color":     constant(BGCOLOR, ".k-tooltip-validation"),
             "@validation-border-color":         constant(BORDERCOLOR, ".k-tooltip-validation"),
@@ -289,7 +292,8 @@
             },
             "Buttons": {
                 "@button-background-color":       "Background",
-                "@button-text-color":             "Text color"
+                "@button-text-color":             "Text color",
+                "@button-border-color":           "Border color" 
             },
             "Groups and content areas": {
                 "@group-background-color":        "Group background",
@@ -306,18 +310,19 @@
 
                 "@input-text-color":              "Text color"
             },
-			"Calendar": {
+            "Calendar": {
                 "@calendar-footer-hover-background": "Calendar footer hover background"
             },
             "Drop-downs": {
+                "@drop-down-text-color":          "Text color", 
                 "@drop-down-background":          "Background color",
-				"@drop-down-border-color":        "Border color"
+                "@drop-down-border-color":        "Border color"
             },
             "TabStrip": {
                 "@tabstrip-active-background":   "Tabstrip active content background",
-				"@tabstrip-items-border":        "Tabstrip inactive tabs border",
-				"@header-background-color":      "Tabstrip inactive tabs background",
-				"@tabstrip-tabs-color":          "Tabstrip tabs color"
+                "@tabstrip-items-border":        "Tabstrip inactive tabs border",
+                "@header-background-color":      "Tabstrip inactive tabs background",
+                "@tabstrip-tabs-color":          "Tabstrip tabs color"
             },
             "Panelbar": {
                 "@panelbar-content-background":  "Background color"
