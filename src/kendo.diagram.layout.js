@@ -24,7 +24,8 @@ var __meta__ = {
         Utils = diagram.Utils,
         Point = diagram.Point,
         EPSILON = 1e-06,
-        contains = Utils.contains;
+        contains = Utils.contains,
+        grep = $.grep;
 
     /**
      * Base class for layout algorithms.
@@ -574,7 +575,7 @@ var __meta__ = {
                 return this.hyperTree.root.data;
             }
             else {
-                return this.hyperTree.nodes.where(function (n) {
+                return grep(this.hyperTree.nodes, function (n) {
                     return  n.data.container === found;
                 });
             }
@@ -1725,10 +1726,10 @@ var __meta__ = {
                     else {
                         // odd number will give one more at the right
                         leftcount = children.length / 2;
-                        male = this.center.children.where(function (n) {
+                        male = grep(this.center.children, function (n) {
                             return Utils.indexOf(children, n) < leftcount;
                         });
-                        female = this.center.children.where(function (n) {
+                        female = grep(this.center.children, function (n) {
                             return Utils.indexOf(children, n) >= leftcount;
                         });
 
@@ -1746,10 +1747,10 @@ var __meta__ = {
                     else {
                         // odd number will give one more at the right
                         leftcount = children.length / 2;
-                        male = this.center.children.where(function (n) {
+                        male = grep(this.center.children, function (n) {
                             return Utils.indexOf(children, n) < leftcount;
                         });
-                        female = this.center.children.where(function (n) {
+                        female = grep(this.center.children, function (n) {
                             return Utils.indexOf(children, n) >= leftcount;
                         });
                         this.layoutUp(male);

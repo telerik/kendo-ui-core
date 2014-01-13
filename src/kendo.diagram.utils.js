@@ -224,31 +224,6 @@ var __meta__ = {
         return $.inArray(what, arr);
     };
 
-    if (!Array.prototype.forEach) {
-        Array.prototype.forEach = function (predicate, thisRef) {
-            var result = [];
-            for (var i = 0; i < this.length; ++i) {
-                if (predicate.call(thisRef, this[i])) {
-                    result.push(this[i]);
-                }
-            }
-            return result;
-        };
-    }
-
-    if (!Array.prototype.map) {
-        /**
-         Maps the given functional to each element of the array. See also the 'apply' method which accepts in addition some parameters.
-         */
-        Array.prototype.map = function (iterator, context) {
-            var results = [];
-            this.forEach(function (value, index, list) {
-                results.push(iterator.call(context, value, index, list));
-            });
-            return results;
-        };
-    }
-
     Utils.fold = function (list, iterator, acc, context) {
         var initial = arguments.length > 2;
 
@@ -343,31 +318,6 @@ var __meta__ = {
         };
     }
 
-    if (!Array.prototype.filter) {
-        Array.prototype.filter = function (iterator, context) {
-            var results = [];
-            this.forEach(function (value, index, list) {
-                if (iterator.call(context, value, index, list)) {
-                    results.push(value);
-                }
-            });
-            return results;
-        };
-    }
-
-    if (!Array.prototype.select) {
-        Array.prototype.select = Array.prototype.filter;
-    }
-
-    if (!Array.prototype.where) {
-        Array.prototype.where = function (constraint, first) {
-            if (Utils.isUndefined(constraint)) {
-                return first ? void 0 : [];
-            }
-            return first ? this.first(constraint) : this.filter(constraint);
-        };
-    }
-
     if (!Array.prototype.add) {
         Array.prototype.add = Array.prototype.push;
     }
@@ -378,17 +328,20 @@ var __meta__ = {
         };
     }
 
-    if (!Array.prototype.all) {
-        Array.prototype.all = function (iterator, context) {
-            var result = true;
-            this.forEach(function (value, index, list) {
-                if (!(result = result && iterator.call(context, value, index, list))) {
-                    return {};
-                }
-            });
-            return !!result;
+    Utils.all = function (arr, iterator, context) {
+        var result = true;
+
+        for (var i = 0; i < arr.length; i++) {
+            value = arr[i];
+            result = result && iterator.call(context, value, i, arr);
+
+            if (!result) {
+                break;
+            }
         };
-    }
+
+        return result;
+    };
 
     if (!Array.prototype.every) {
         Array.prototype.every = Array.prototype.all;
@@ -512,7 +465,7 @@ var __meta__ = {
             this.handlers.push(handler);
         },
         removeHandler: function (handler) {
-            this.handlers = this.handlers.filter(function (h) {
+            this.handlers = $.grep(this.handlers, function (h) {
                 return h !== handler;
             });
         },

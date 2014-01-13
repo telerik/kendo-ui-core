@@ -198,9 +198,10 @@
     test('Load from existing dictionary', function () {
         var from = new Dictionary();
         var data = new Range(0, 14);
-        data.forEach(function (x) {
+        for (var i = 0; i < data.length; i++) {
+            var x = data[i];
             from.add(x, x.toString());
-        });
+        };
         var to = new Dictionary(from);
         ok(to.length == 15, "Copied from the source dic.");
         ok(to.get(10) == "10");
@@ -212,9 +213,9 @@
     test('Basics', function () {
         var q = new Queue();
         var r = new Range(1, 5);
-        r.forEach(function (x) {
-            q.enqueue(x);
-        });
+        for (var i = 0; i < r.length; i++) {
+            q.enqueue(r[i]);
+        };
         var rev = [];
         while (q.length > 0) {
             rev.push(q.dequeue());

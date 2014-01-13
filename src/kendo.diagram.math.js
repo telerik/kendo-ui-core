@@ -964,9 +964,15 @@ var __meta__ = {
             this._hashTable = new HashTable();
             this.length = 0;
             if (Utils.isDefined(dictionary)) {
-                dictionary.forEach(function (k, v) {
-                    this.add(k, v);
-                }, this);
+                if ($.isArray(dictionary)) {
+                    for (var i = 0; i < dictionary.length; i++) {
+                        this.add(dictionary[i]);
+                    };
+                } else {
+                    dictionary.forEach(function (k, v) {
+                        this.add(k, v);
+                    }, this);
+                }
             }
         },
 
@@ -1402,7 +1408,7 @@ var __meta__ = {
          * Returns the links between this node and the given one.
          */
         getLinksWith: function (node) {
-            return this.links.all(function (link) {
+            return Utils.all(this.links, function (link) {
                 return link.getComplement(this) === node;
             }, this);
         },
@@ -1921,7 +1927,7 @@ var __meta__ = {
             if (this.nodes.length === 1) {
                 return contains(excludedNodes, this.nodes[0]) ? null : this.nodes[0];
             }
-            var pool = this.nodes.where(function (node) {
+            var pool = $.grep(this.nodes, function (node) {
                 return !contains(excludedNodes, node) && node.degree() <= incidenceLessThan;
             });
             if (pool.isEmpty()) {
@@ -1941,7 +1947,7 @@ var __meta__ = {
          * Checks whether the endpoints of the links are all in the nodes collection.
          */
         isHealthy: function () {
-            return this.links.all(function (link) {
+            return Utils.all(this.links, function (link) {
                 return contains(this.nodes, link.source) && contains(this.nodes, link.target);
             }, this);
         },
@@ -2435,7 +2441,7 @@ var __meta__ = {
         isSubGraph: function (other) {
             var otherArray = other.linearize();
             var thisArray = this.linearize();
-            return otherArray.all(function (s) {
+            return Utils.all(otherArray, function (s) {
                 return contains(thisArray, s);
             });
         },

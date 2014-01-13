@@ -166,43 +166,17 @@ test('NaN', function () {
     ok(isNaN(Number.NaN), "Bad bad math behavior.");
 });
 
-test('filter', function () {
-    var a = new Range(1, 55);
-    var b = a.filter(function (x) {
-        return x >= 50;
-    });
-    var shouldbe = new Range(50, 55);
-    deepEqual(b, shouldbe, "Should have filtered out.");
-});
-
-test('where', function () {
-    var stuff = [
-        {"name": "Ian", "age": 12},
-        {"name": "Ian", "age": 47},
-        {"name": "Mary", "age": 27}
-    ];
-
-    var subset = stuff.where(function (x) {
-        return x.name == "Ian";
-    });
-    ok(subset.length == 2, "Should have two items.");
-    var item = stuff.where(function (x) {
-        return x.name == "Ian";
-    }, true);
-    ok(Utils.isObject(item) && !$.isArray(item) && item["age"] == 12, "Should be one item.");
-});
-
 test('all', function () {
     var a = [1, 1, 1, 1, 1, 1];
-    ok(a.all(function (x) {
+    ok(Utils.all(a, function (x) {
         return x == 1;
     }), "All ones.");
     a.add(2);
-    ok(!a.all(function (x) {
+    ok(!Utils.all(a, function (x) {
         return x == 1;
     }), "Not all ones.");
 
-    ok([].all(function (x) {
+    ok(Utils.all([], function (x) {
         return x > 1;
     }), "Empty fulfills all the requirements.");
 
