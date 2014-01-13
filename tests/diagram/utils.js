@@ -111,7 +111,7 @@ test('Call $*!', function () {
 test('Insert', function () {
     var a = new Range(1, 5);
     var shouldbe = [1, 2, 3, 17, 4, 5];
-    var b = a.insert(17, 3);
+    var b = Utils.insert(a, 17, 3);
     deepEqual(b, shouldbe);
 });
 

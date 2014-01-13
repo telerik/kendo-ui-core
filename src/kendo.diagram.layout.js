@@ -3068,7 +3068,7 @@ var __meta__ = {
                         newNode.gridPosition = pos;
                         newNode.isVirtual = true;
 
-                        layer.insert(newNode, pos);
+                        Utils.insert(layer, newNode, pos);
 
                         // translate rightwards nodes' positions
                         for (r = pos + 1; r < layer.length; r++) {
@@ -3127,7 +3127,7 @@ var __meta__ = {
                         newNode.isVirtual = true;
 
                         pos &= pos; // truncates to int
-                        layer.insert(newNode, pos);
+                        Utils.insert(layer, newNode, pos);
 
                         // translate rightwards nodes' positions
                         for (r = pos + 1; r < layer.length; r++) {

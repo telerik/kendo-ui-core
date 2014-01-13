@@ -268,15 +268,13 @@ var __meta__ = {
         return Utils.find(arr, constraint, context);
     };
 
-    if (!Array.prototype.insert) {
-        /**
-         * Inserts the given element at the specified position and returns the result.
-         */
-        Array.prototype.insert = function (element, position) {
-            this.splice(position, 0, element);
-            return this;
-        };
-    }
+    /**
+     * Inserts the given element at the specified position and returns the result.
+     */
+    Utils.insert = function (arr, element, position) {
+        arr.splice(position, 0, element);
+        return arr;
+    };
 
     if (!Array.prototype.prepend) {
         /**

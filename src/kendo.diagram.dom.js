@@ -2028,12 +2028,12 @@ var __meta__ = {
             for (i = 0; i < result.shapes.length; i++) {
                 item = result.shapes[i];
                 Utils.remove(this.shapes, item);
-                this.shapes.insert(item, shapePos);
+                Utils.insert(this.shapes, item, shapePos);
             }
             for (i = 0; i < result.cons.length; i++) {
                 item = result.cons[i];
                 Utils.remove(this.connections, item);
-                this.connections.insert(item, conPos);
+                Utils.insert(this.connections, item, conPos);
             }
         },
         _getDiagramItems: function (items) {
