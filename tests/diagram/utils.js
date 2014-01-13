@@ -7,25 +7,6 @@ var diagram = kendo.diagram,
 /*-----------Utilities tests------------------------------------*/
 QUnit.module("Utilities tests");
 
-test("Flatten Array", function () {
-    var ar = [
-        [1],
-        [2, 3],
-        [4],
-        [1],
-        []
-    ];
-    var res = ar.flatten();
-    ok(res.length == 5, "Should have length 4.");
-    deepEqual(res, [1, 2, 3, 4, 1], "Should be merged to a flattened array.");
-});
-
-test("Distinct array", function () {
-    var ar = [1, 2, 1, 3, 5, 4, 4];
-    var dis = ar.distinct();
-    ok(dis.length == 5, "Should have been reduced to distinct elements.");
-});
-
 test('Random id', function () {
     var a = new Range(0, 20);
     var counter = 0;
@@ -41,25 +22,18 @@ test('Any', function () {
     a.push('Swa');
     a.push('Miro');
     a.push('Niko');
-    ok(a.any(function (x) {
+    ok(Utils.any(a, function (x) {
         return x == 'Swa';
     }), 'Should find element Swa in the array.');
 });
 
 test('Remove', function () {
     var a = new Range(1, 105);
-    a.remove(7, 13);
+    Utils.remove(a, 7);
     var find = function (x) {
-        return x == 7 || x == 13;
+        return x == 7;
     };
-    ok(!a.any(find), 'Elements 7 and 13 should have been removed.')
-});
-
-test('Distinct and contains', function () {
-    var a = [1, 3, 7, 5, 7, 5, 3];
-    var ds = a.distinct();
-    ok(ds.length == 4, 'Only 1,3,5,7 should remain.');
-    ok(ds.contains(1, 3, 5, 7), 'Found the distinct elements.')
+    ok(!Utils.any(a, find), 'Elements 7 should have been removed.')
 });
 
 test('indexOf', function () {
@@ -70,30 +44,21 @@ test('indexOf', function () {
 
 test('Fold', function () {
     var a = new Range(1, 4);
-    var sum = a.fold(function (a, x) {
+    var sum = Utils.fold(a, function (a, x) {
         return a + x;
     });
     ok(sum == 10);
 
-    sum = a.fold(function (a, x) {
+    sum = Utils.fold(a, function (a, x) {
         return a + x;
     }, 10);
     ok(sum == 20);
 
     a = ['Niko', 'Miro', 'Swa'];
-    sum = a.fold(function (a, x) {
+    sum = Utils.fold(a, function (a, x) {
         return a + ', ' + x;
     }, 'D^3 team: ');
     ok(sum == 'D^3 team: , Niko, Miro, Swa');
-});
-
-test('sameAs', function () {
-    var a = new Range(1, 5);
-    var b = new Range(1, 5);
-    var c = new Range(1, 7);
-
-    ok(a.sameAs(b), 'They are the same.')
-    ok(!a.sameAs(c), 'They are not the same.')
 });
 
 test('Map', function () {
@@ -102,16 +67,16 @@ test('Map', function () {
         return x + 1;
     });
     var shouldbe = new Range(2, 6);
-    ok(b.sameAs(shouldbe), 'Shifted array are the same.')
+    deepEqual(b, shouldbe, 'Shifted array are the same.')
 });
 
 test('Find', function () {
     var a = ['Niko', 'Miro', 'Swa'];
-    ok(a.find(function (x) {
+    ok(Utils.find(a, function (x) {
         return x == 'Niko';
     }), 'Found Niko.');
 
-    ok(!a.find(function (x) {
+    ok(!Utils.find(a, function (x) {
         return x == 'Itzo';
     }), 'Itzo not supposed to be in there.');
     var stuff = [
@@ -119,7 +84,7 @@ test('Find', function () {
         {"name": "Ian", "age": 47},
         {"name": "Mary", "age": 27}
     ];
-    var first = stuff.find(function (item) {
+    var first = Utils.find(stuff, function (item) {
         return item["name"] == "Ian";
     });
     ok(first && first["age"] == 12);
@@ -128,11 +93,11 @@ test('Find', function () {
 test('Bi-sort', function () {
     var a = ['d', 'a', 'c', 'b'];
     var b = [4, 1, 3, 2];
-    Array.prototype.bisort(a, b, function (m, n) {
+    Utils.bisort(a, b, function (m, n) {
         return m.localeCompare(n);
     });
     var shouldbe = new Range(1, 4);
-    ok(b.sameAs(shouldbe), "Reordering works.");
+    deepEqual(b, shouldbe, "Reordering works.");
 });
 
 test('Call $*!', function () {
@@ -146,32 +111,8 @@ test('Call $*!', function () {
 test('Insert', function () {
     var a = new Range(1, 5);
     var shouldbe = [1, 2, 3, 17, 4, 5];
-    var b = a.insert(17, 3);
-    ok(b.sameAs(shouldbe));
-});
-
-test('Prepend', function () {
-    var a = new Range(1, 5);
-    var shouldbe = new Range(0, 5);
-    var b = a.prepend(0);
-    ok(b.sameAs(shouldbe));
-});
-
-test('Append', function () {
-    var a = new Range(1, 5);
-    var shouldbe = new Range(1, 6);
-    var b = a.append(6);
-    ok(b.sameAs(shouldbe));
-});
-
-test('Apply', function () {
-    var a = new Range(3, 22);
-    var func = function (x, r) {
-        return x + r;
-    };
-    var b = a.apply(func, 3);
-    var shouldbe = new Range(6, 25);
-    ok(b.sameAs(shouldbe), 'Functional is lovely.');
+    var b = Utils.insert(a, 17, 3);
+    deepEqual(b, shouldbe);
 });
 
 test('isObject', function () {
@@ -201,43 +142,17 @@ test('NaN', function () {
     ok(isNaN(Number.NaN), "Bad bad math behavior.");
 });
 
-test('filter', function () {
-    var a = new Range(1, 55);
-    var b = a.filter(function (x) {
-        return x >= 50;
-    });
-    var shouldbe = new Range(50, 55);
-    ok(b.sameAs(shouldbe), "Should have filtered out.");
-});
-
-test('where', function () {
-    var stuff = [
-        {"name": "Ian", "age": 12},
-        {"name": "Ian", "age": 47},
-        {"name": "Mary", "age": 27}
-    ];
-
-    var subset = stuff.where(function (x) {
-        return x.name == "Ian";
-    });
-    ok(subset.length == 2, "Should have two items.");
-    var item = stuff.where(function (x) {
-        return x.name == "Ian";
-    }, true);
-    ok(Utils.isObject(item) && !$.isArray(item) && item["age"] == 12, "Should be one item.");
-});
-
 test('all', function () {
     var a = [1, 1, 1, 1, 1, 1];
-    ok(a.all(function (x) {
+    ok(Utils.all(a, function (x) {
         return x == 1;
     }), "All ones.");
-    a.add(2);
-    ok(!a.all(function (x) {
+    a.push(2);
+    ok(!Utils.all(a, function (x) {
         return x == 1;
     }), "Not all ones.");
 
-    ok([].all(function (x) {
+    ok(Utils.all([], function (x) {
         return x > 1;
     }), "Empty fulfills all the requirements.");
 
@@ -245,7 +160,7 @@ test('all', function () {
 
 test('first', function () {
     var ar = [1, 2, 3, , 11];
-    equal(ar.first(), 1);
+    equal(Utils.first(ar), 1);
     var objs = [
         {name: "A", age: 33},
         {name: "D", age: 12},
@@ -253,7 +168,7 @@ test('first', function () {
         {name: "C", age: 47},
         {name: "B", age: 61}
     ];
-    var b = objs.first(function (d) {
+    var b = Utils.first(objs, function (d) {
         return d.name == "B";
     });
     equal(b.age, 34);

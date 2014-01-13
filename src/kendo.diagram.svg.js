@@ -869,10 +869,10 @@ var __meta__ = {
             return this;
         },
         remove: function (visual) {
-            if (this.visuals.indexOf(visual) >= 0) {
+            if (Utils.indexOf(this.visuals, visual) >= 0) {
                 this.native.removeChild(visual.native);
                 visual.canvas = undefined;
-                this.visuals.remove(visual);
+                Utils.remove(this.visuals, visual);
                 return this;
             }
         },
@@ -887,9 +887,9 @@ var __meta__ = {
             this.markers.push(marker);
         },
         removeMarker: function (marker) {
-            if (marker && this.markers.contains(marker)) {
+            if (marker && Utils.contains.contains(this.markers, marker)) {
                 this.defsNode.removeChild(marker.native);
-                this.markers.remove(marker);
+                Utils.remove(this.markers, marker);
             }
         },
         addMask: function (mask) {
@@ -897,15 +897,15 @@ var __meta__ = {
             this.masks.push(mask);
         },
         removeMask: function (mask) {
-            if (mask && this.masks.contains(mask)) {
+            if (mask && Utils.contains(this.masks, mask)) {
                 this.defsNode.removeChild(mask.native);
-                this.masks.remove(mask);
+                Utils.remove(this.masks, mask);
             }
         },
         removeGradient: function (gradient) {
-            if (gradient && this.gradients.contains(gradient)) {
+            if (gradient && Utils.contains(this.gradients, gradient)) {
                 this.defsNode.removeChild(gradient.native);
-                this.gradients.remove(gradient);
+                Utils.remove(this.gradients, gradient);
             }
         },
         addGradient: function (gradient) {

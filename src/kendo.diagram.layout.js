@@ -22,7 +22,10 @@ var __meta__ = {
         Set = diagram.Set,
         HyperTree = diagram.Graph,
         Utils = diagram.Utils,
-        Point = diagram.Point;
+        Point = diagram.Point,
+        EPSILON = 1e-06,
+        contains = Utils.contains,
+        grep = $.grep;
 
     /**
      * Base class for layout algorithms.
@@ -141,7 +144,7 @@ var __meta__ = {
             }
 
             // calculate and cache the bounds of the components
-            components.forEach(function (c) {
+            Utils.forEach(components, function (c) {
                 c.calcBounds();
             });
 
@@ -406,7 +409,7 @@ var __meta__ = {
          */
         mapConnection: function (connection) {
             return this.edgeMap.first(function (edge) {
-                return this.edgeMap.get(edge).contains(connection);
+                return contains(this.edgeMap.get(edge), connection);
             });
         },
 
@@ -419,7 +422,7 @@ var __meta__ = {
             var keys = this.nodeMap.keys();
             for (var i = 0, len = keys.length; i < len; i++) {
                 var key = keys[i];
-                if (this.nodeMap.get(key).contains(shape)) {
+                if (contains(this.nodeMap.get(key), shape)) {
                     return key;
                 }
             }
@@ -431,7 +434,7 @@ var __meta__ = {
          * @param b
          */
         getEdge: function (a, b) {
-            return a.links.first(function (link) {
+            return Utils.first(a.links, function (link) {
                 return link.getComplement(a) === b;
             });
         },
@@ -465,10 +468,10 @@ var __meta__ = {
             if (!s) {
                 return list;
             }
-            list.add(s);
+            list.push(s);
             while (s.parentContainer) {
                 s = s.parentContainer;
-                list.add(s);
+                list.push(s);
             }
             list.reverse();
             return list;
@@ -502,7 +505,7 @@ var __meta__ = {
             if (scope === a) {
                 return false;
             }
-            if (scope.children.contains(a)) {
+            if (contains(scope.children, a)) {
                 return true;
             }
             var containers = [];
@@ -554,7 +557,7 @@ var __meta__ = {
             var al = this.listToRoot(a);
             var bl = this.listToRoot(b);
             var found = null;
-            if (al.isEmpty() || bl.isEmpty()) {
+            if (Utils.isEmpty(al) || Utils.isEmpty(bl)) {
                 return this.hyperTree.root.data;
             }
             var xa = al[0];
@@ -573,7 +576,7 @@ var __meta__ = {
                 return this.hyperTree.root.data;
             }
             else {
-                return this.hyperTree.nodes.where(function (n) {
+                return grep(this.hyperTree.nodes, function (n) {
                     return  n.data.container === found;
                 });
             }
@@ -623,7 +626,7 @@ var __meta__ = {
 
                     // if not visible (and ignoring the invisible ones) or a container we skip
                     if ((this.options.ignoreInvisible && !this._isVisible(shape)) || shape.isContainer) {
-                        this.ignoredShapes.add(shape);
+                        this.ignoredShapes.push(shape);
                         continue;
                     }
                     var node = new Node(shape.id, shape);
@@ -631,7 +634,7 @@ var __meta__ = {
 
                     // the mapping will always contain singletons and the hyperTree will be null
                     this.nodeMap.add(node, [shape]);
-                    this.nodes.add(node);
+                    this.nodes.push(node);
                 }
             }
             else {
@@ -651,7 +654,7 @@ var __meta__ = {
                 var conn = this.diagram.connections[i];
 
                 if (this.isIgnorableItem(conn)) {
-                    this.ignoredConnections.add(conn);
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
 
@@ -660,16 +663,16 @@ var __meta__ = {
 
                 // no layout for floating connections
                 if (!source || !sink) {
-                    this.ignoredConnections.add(conn);
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
 
-                if (this.ignoredShapes.contains(source) && !this.shapeMap.containsKey(source)) {
-                    this.ignoredConnections.add(conn);
+                if (contains(this.ignoredShapes, source) && !this.shapeMap.containsKey(source)) {
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
-                if (this.ignoredShapes.contains(sink) && !this.shapeMap.containsKey(sink)) {
-                    this.ignoredConnections.add(conn);
+                if (contains(this.ignoredShapes, sink) && !this.shapeMap.containsKey(sink)) {
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
 
@@ -684,7 +687,7 @@ var __meta__ = {
                 var sourceNode = this.mapShape(source);
                 var sinkNode = this.mapShape(sink);
                 if ((sourceNode === sinkNode) || this.areConnectedAlready(sourceNode, sinkNode)) {
-                    this.ignoredConnections.add(conn);
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
 
@@ -694,13 +697,13 @@ var __meta__ = {
                 if (this.options.ignoreContainers) {
                     // much like a floating connection here since at least one end is attached to a container
                     if (sourceNode.isVirtual || sinkNode.isVirtual) {
-                        this.ignoredConnections.add(conn);
+                        this.ignoredConnections.push(conn);
                         continue;
                     }
                     var newEdge = new Link(sourceNode, sinkNode, conn.id, conn);
 
                     this.edgeMap.add(newEdge, [conn]);
-                    this.edges.add(newEdge);
+                    this.edges.push(newEdge);
                 }
                 else {
                     throw "Containers are not supported yet, but stay tuned.";
@@ -709,7 +712,7 @@ var __meta__ = {
         },
 
         areConnectedAlready: function (n, m) {
-            return this.edges.any(function (l) {
+            return Utils.any(this.edges, function (l) {
                 return l.source === n && l.target === m || l.source === m && l.target === n;
             });
         }
@@ -773,7 +776,7 @@ var __meta__ = {
             }
             // split into connected components
             var components = graph.getConnectedComponents();
-            if (components.isEmpty()) {
+            if (Utils.isEmpty(components)) {
                 return;
             }
             for (var i = 0; i < components.length; i++) {
@@ -894,7 +897,7 @@ var __meta__ = {
         _repulsion: function (n) {
             n.dx = 0;
             n.dy = 0;
-            this.graph.nodes.forEach(function (m) {
+            Utils.forEach(this.graph.nodes, function (m) {
                 if (m === n) {
                     return;
                 }
@@ -944,7 +947,7 @@ var __meta__ = {
             if (N === 0) {
                 return size;
             }
-            size = this.graph.nodes.fold(function (s, node) {
+            size = Utils.fold(this.graph.nodes, function (s, node) {
                 var area = node.width * node.height;
                 if (area > 0) {
                     s += Math.sqrt(area);
@@ -973,7 +976,7 @@ var __meta__ = {
                 return;
             }
 
-            if (!this.graph.nodes.contains(root)) {
+            if (!contains(this.graph.nodes, root)) {
                 throw "The given root is not in the graph.";
             }
 
@@ -1214,11 +1217,11 @@ var __meta__ = {
                 angle[i] = this.normalizeAngle(-basevalue + Math.atan2(l.y - l.y, l.x - l.x));
             }
 
-            Array.prototype.bisort(angle, idx);
+            Utils.bisort(angle, idx);
             var col = []; // list of nodes
             var children = n.children;
             for (i = 0; i < count; ++i) {
-                col.add(children[idx[i]]);
+                col.push(children[idx[i]]);
             }
 
             return col;
@@ -1338,10 +1341,10 @@ var __meta__ = {
                 node.treeDirection = parent.treeDirection;
             }
 
-            if (node.children.isEmpty()) {
+            if (Utils.isEmpty(node.children)) {
                 result = new Size(
-                    Math.abs(shapeWidth) < Math.epsilon ? 50 : shapeWidth,
-                    Math.abs(shapeHeight) < Math.epsilon ? 25 : shapeHeight);
+                    Math.abs(shapeWidth) < EPSILON ? 50 : shapeWidth,
+                    Math.abs(shapeHeight) < EPSILON ? 25 : shapeHeight);
             }
             else if (node.children.length === 1) {
                 switch (node.treeDirection) {
@@ -1502,7 +1505,7 @@ var __meta__ = {
             var i, pp, child, node, childrenwidth, b = n.associatedShape.bounds();
             var shapeWidth = b.width;
             var shapeHeight = b.height;
-            if (n.children.isEmpty()) {
+            if (Utils.isEmpty(n.children)) {
                 n.x = p.x;
                 n.y = p.y;
                 n.BoundingRectangle = new Rect(p.x, p.y, shapeWidth, shapeHeight);
@@ -1601,7 +1604,7 @@ var __meta__ = {
                         n.x = selfLocation.x;
                         n.y = selfLocation.y;
                         n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
-                        if (Math.abs(selfLocation.x - p.x) < Math.epsilon) {
+                        if (Math.abs(selfLocation.x - p.x) < EPSILON) {
                             childrenwidth = 0;
                             // means there is an aberration due to the oversized Element with respect to the children
                             for (i = 0; i < n.children.length; i++) {
@@ -1650,7 +1653,7 @@ var __meta__ = {
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
-                                if (Math.abs(selfLocation.x - p.x) < Math.epsilon) {
+                                if (Math.abs(selfLocation.x - p.x) < EPSILON) {
                                     childrenwidth = 0;
                                     // means there is an aberration due to the oversized Element with respect to the children
                                     for (i = 0; i < n.children.length; i++) {
@@ -1692,7 +1695,7 @@ var __meta__ = {
                 return;
             }
 
-            if (this.center.children.isEmpty()) {
+            if (Utils.isEmpty(this.center.children)) {
                 return;
             }
 
@@ -1718,11 +1721,11 @@ var __meta__ = {
                     else {
                         // odd number will give one more at the right
                         leftcount = children.length / 2;
-                        male = this.center.children.where(function (n) {
-                            return children.indexOf(n) < leftcount;
+                        male = grep(this.center.children, function (n) {
+                            return Utils.indexOf(children, n) < leftcount;
                         });
-                        female = this.center.children.where(function (n) {
-                            return children.indexOf(n) >= leftcount;
+                        female = grep(this.center.children, function (n) {
+                            return Utils.indexOf(children, n) >= leftcount;
                         });
 
                         this.layoutLeft(male);
@@ -1739,11 +1742,11 @@ var __meta__ = {
                     else {
                         // odd number will give one more at the right
                         leftcount = children.length / 2;
-                        male = this.center.children.where(function (n) {
-                            return children.indexOf(n) < leftcount;
+                        male = grep(this.center.children, function (n) {
+                            return Utils.indexOf(children, n) < leftcount;
                         });
-                        female = this.center.children.where(function (n) {
-                            return children.indexOf(n) >= leftcount;
+                        female = grep(this.center.children, function (n) {
+                            return Utils.indexOf(children, n) >= leftcount;
                         });
                         this.layoutUp(male);
                         this.layoutDown(female);
@@ -1827,7 +1830,7 @@ var __meta__ = {
 
             // split into connected components
             var components = this.graph.getConnectedComponents();
-            if (components.isEmpty()) {
+            if (Utils.isEmpty(components)) {
                 return;
             }
 
@@ -1922,7 +1925,7 @@ var __meta__ = {
             }
             // split into connected components
             var components = graph.getConnectedComponents();
-            if (components.isEmpty()) {
+            if (Utils.isEmpty(components)) {
                 return;
             }
             for (var i = 0; i < components.length; i++) {
@@ -1966,7 +1969,7 @@ var __meta__ = {
             // defines a mapping of a node to the layer index
             var layerMap = new Dictionary();
 
-            graph.nodes.forEach(function (node) {
+            Utils.forEach(graph.nodes, function (node) {
                 if (node.incoming.length === 0) {
                     layerMap.set(node, 0);
                     current.push(node);
@@ -1985,7 +1988,7 @@ var __meta__ = {
                         layerMap.set(target, layerMap.get(next) + 1);
                     }
 
-                    if (!current.contains(target)) {
+                    if (!contains(current, target)) {
                         current.push(target);
                     }
                 }
@@ -1998,11 +2001,11 @@ var __meta__ = {
             });
 
             var sortedNodes = [];
-            sortedNodes.addRange(layerMap.keys());
+            Utils.addRange(sortedNodes, layerMap.keys());
             sortedNodes.sort(function (o1, o2) {
                 var o1layer = layerMap.get(o1);
                 var o2layer = layerMap.get(o2);
-                return Math.sign(o2layer - o1layer);
+                return Utils.sign(o2layer - o1layer);
             });
 
             for (var n = 0; n < sortedNodes.length; ++n) {
@@ -2078,7 +2081,7 @@ var __meta__ = {
             this._dedummify();
 
             // re-reverse the links which were switched earlier
-            reversedEdges.forEach(function (e) {
+            Utils.forEach(reversedEdges, function (e) {
                 if (e.points) {
                     e.points.reverse();
                 }
@@ -2134,8 +2137,8 @@ var __meta__ = {
                     for (n = 0; n < classNodes.length; n++) {
                         node = classNodes[n];
                         var neighbors = [];
-                        neighbors.addRange(this.upNodes.get(node));
-                        neighbors.addRange(this.downNodes.get(node));
+                        Utils.addRange(neighbors, this.upNodes.get(node));
+                        Utils.addRange(neighbors, this.downNodes.get(node));
 
                         for (var e = 0; e < neighbors.length; e++) {
                             var neighbor = neighbors[e];
@@ -2192,8 +2195,8 @@ var __meta__ = {
                     for (n = 0; n < classNodes.length; n++) {
                         node = classNodes[n];
                         var neighbors = [];
-                        neighbors.addRange(this.upNodes.get(node));
-                        neighbors.addRange(this.downNodes.get(node));
+                        Utils.addRange(neighbors, this.upNodes.get(node));
+                        Utils.addRange(neighbors, this.downNodes.get(node));
 
                         for (var e = 0; e < neighbors.length; e++) {
                             var neighbor = neighbors[e];
@@ -2314,11 +2317,11 @@ var __meta__ = {
 
             this.downNodes = new Dictionary();
             this.upNodes = new Dictionary();
-            this.graph.nodes.forEach(function (node) {
+            Utils.forEach(this.graph.nodes, function (node) {
                 this.downNodes.set(node, []);
                 this.upNodes.set(node, []);
             }, this);
-            this.graph.links.forEach(function (link) {
+            Utils.forEach(this.graph.links, function (link) {
                 var origin = link.source;
                 var dest = link.target;
                 var down = null, up = null;
@@ -2387,7 +2390,7 @@ var __meta__ = {
             var leftPos = this.placeLeftToRight(leftClasses);
             var rightPos = this.placeRightToLeft(rightClasses);
             var x = new Dictionary();
-            this.graph.nodes.forEach(function (node) {
+            Utils.forEach(this.graph.nodes, function (node) {
                 x.set(node, (leftPos.get(node) + rightPos.get(node)) / 2);
             });
 
@@ -2423,7 +2426,7 @@ var __meta__ = {
                 }
             }
             var directions = [1, -1];
-            directions.forEach(function (d) {
+            Utils.forEach(directions, function (d) {
                 var start = d === 1 ? 0 : this.layers.length - 1;
                 for (var l = start; 0 <= l && l < this.layers.length; l += d) {
                     var layer = this.layers[l];
@@ -2705,7 +2708,7 @@ var __meta__ = {
 
         placeLeft: function (node, leftPos, leftClass) {
             var pos = Number.NEGATIVE_INFINITY;
-            this._getComposite(node).forEach(function (v) {
+            Utils.forEach(this._getComposite(node), function (v) {
                 var leftSibling = this.leftSibling(v);
                 if (leftSibling && this.nodeLeftClass.get(leftSibling) === this.nodeLeftClass.get(v)) {
                     if (!leftPos.containsKey(leftSibling)) {
@@ -2717,14 +2720,14 @@ var __meta__ = {
             if (pos === Number.NEGATIVE_INFINITY) {
                 pos = 0;
             }
-            this._getComposite(node).forEach(function (v) {
+            Utils.forEach(this._getComposite(node), function (v) {
                 leftPos.set(v, pos);
             });
         },
 
         placeRight: function (node, rightPos, rightClass) {
             var pos = Number.POSITIVE_INFINITY;
-            this._getComposite(node).forEach(function (v) {
+            Utils.forEach(this._getComposite(node), function (v) {
                 var rightSibling = this.rightSibling(v);
                 if (rightSibling && this.nodeRightClass.get(rightSibling) === this.nodeRightClass.get(v)) {
                     if (!rightPos.containsKey(rightSibling)) {
@@ -2736,7 +2739,7 @@ var __meta__ = {
             if (pos === Number.POSITIVE_INFINITY) {
                 pos = 0;
             }
-            this._getComposite(node).forEach(function (v) {
+            Utils.forEach(this._getComposite(node), function (v) {
                 rightPos.set(v, pos);
             });
         },
@@ -2844,7 +2847,7 @@ var __meta__ = {
             });
 
             // each node strives for its barycenter; high priority nodes start first
-            sorted.forEach(function (node) {
+            Utils.forEach(sorted, function (node) {
                 var nodeGridPos = node.gridPosition;
                 var nodeBaryCenter = this.calcBaryCenter(node);
                 var nodePriority = (node.upstreamPriority + node.downstreamPriority) / 2;
@@ -2900,7 +2903,7 @@ var __meta__ = {
         /// <param name="layer">The layer.</param>
         /// <returns>Returns <c>true</c> if the shift was possible, otherwise <c>false</c>.</returns>
         moveRight: function (node, layer, priority) {
-            var index = layer.indexOf(node);
+            var index = Utils.indexOf(layer, node);
             if (index === layer.length - 1) {
                 // this is the last node in the layer, so we can move to the right without troubles
                 node.gridPosition = node.gridPosition + 0.5;
@@ -2938,7 +2941,7 @@ var __meta__ = {
         /// <param name="layer">The layer.</param>
         /// <returns>Returns <c>true</c> if the shift was possible, otherwise <c>false</c>.</returns>
         moveLeft: function (node, layer, priority) {
-            var index = layer.indexOf(node);
+            var index = Utils.indexOf(layer, node);
             if (index === 0) {
                 // this is the last node in the layer, so we can move to the left without troubles
                 node.gridPosition = node.gridPosition - 0.5;
@@ -3035,7 +3038,7 @@ var __meta__ = {
                         newNode.gridPosition = pos;
                         newNode.isVirtual = true;
 
-                        layer.insert(newNode, pos);
+                        Utils.insert(layer, newNode, pos);
 
                         // translate rightwards nodes' positions
                         for (r = pos + 1; r < layer.length; r++) {
@@ -3094,7 +3097,7 @@ var __meta__ = {
                         newNode.isVirtual = true;
 
                         pos &= pos; // truncates to int
-                        layer.insert(newNode, pos);
+                        Utils.insert(layer, newNode, pos);
 
                         // translate rightwards nodes' positions
                         for (r = pos + 1; r < layer.length; r++) {
@@ -3139,8 +3142,8 @@ var __meta__ = {
                     var points = [];
 
                     // add points in reverse order
-                    points.prepend({ x: link.target.x, y: link.target.y });
-                    points.prepend({ x: link.source.x, y: link.source.y });
+                    points.unshift({ x: link.target.x, y: link.target.y });
+                    points.unshift({ x: link.source.x, y: link.source.y });
 
                     // _dedummify the link
                     var temp = link;
@@ -3149,7 +3152,7 @@ var __meta__ = {
                         var node = temp.source;
                         var prevLink = node.incoming[0];
 
-                        points.prepend({ x: prevLink.source.x, y: prevLink.source.y });
+                        points.unshift({ x: prevLink.source.x, y: prevLink.source.y });
 
                         temp = prevLink;
                     }
@@ -3528,8 +3531,8 @@ var __meta__ = {
 
             upperLayer.forEach(function (node) {
                 //throw "";
-                temp.addRange(node.incoming);
-                temp.addRange(node.outgoing);
+                Utils.addRange(temp, node.incoming);
+                Utils.addRange(temp, node.outgoing);
             });
 
             for (var ti = 0; ti < temp.length; ti++) {

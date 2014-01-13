@@ -15,6 +15,8 @@
     var Point = kendo.diagram.Point;
     var Set = kendo.diagram.Set;
     var Utils = diagram.Utils;
+    var contains = Utils.contains;
+
     /*-------------Testing Utils----------------------------------*/
 
     QUnit.testSkip = function () {
@@ -100,7 +102,7 @@
         }
         var vals = [];
         var acc = function (x) {
-            vals.add(x.value);
+            vals.push(x.value);
         };
         ht.forEach(acc);
         ok(vals.length == 10, "Accumulation of ids.");
@@ -158,7 +160,7 @@
             }
         });
         var shouldbe = ["Geri", "Niko", "Swa"];
-        ok(r.sameAs(shouldbe));
+        deepEqual(r, shouldbe);
 
         dic = new Dictionary();
         var n = new Node("1");
@@ -176,29 +178,30 @@
         }
         var vals = [];
         var acc = function (k, v) {
-            vals.add(v);
+            vals.push(v);
         };
         dic.forEach(acc);
         ok(vals.length == 10, "Accumulation of ids.");
         shouldbe = new Range(0, 9);
-        ok(shouldbe.sameAs(vals), "Should be just a range.");
+        deepEqual(shouldbe, vals, "Should be just a range.");
 
         vals = [];
         var acc = function (v) {
-            vals.add(v);
+            vals.push(v);
         };
         dic.forEachValue(acc);
         ok(vals.length == 10, "Accumulation of ids.");
         shouldbe = new Range(0, 9);
-        ok(shouldbe.sameAs(vals), "Should be just a range again.");
+        deepEqual(shouldbe, vals, "Should be just a range again.");
     });
 
     test('Load from existing dictionary', function () {
         var from = new Dictionary();
         var data = new Range(0, 14);
-        data.forEach(function (x) {
+        for (var i = 0; i < data.length; i++) {
+            var x = data[i];
             from.add(x, x.toString());
-        });
+        };
         var to = new Dictionary(from);
         ok(to.length == 15, "Copied from the source dic.");
         ok(to.get(10) == "10");
@@ -210,15 +213,15 @@
     test('Basics', function () {
         var q = new Queue();
         var r = new Range(1, 5);
-        r.forEach(function (x) {
-            q.enqueue(x);
-        });
+        for (var i = 0; i < r.length; i++) {
+            q.enqueue(r[i]);
+        };
         var rev = [];
         while (q.length > 0) {
             rev.push(q.dequeue());
         }
         var shouldbe = new Range(1, 5);
-        ok(rev.sameAs(shouldbe), "The same really.");
+        deepEqual(rev, shouldbe, "The same really.");
     });
 
     QUnit.module("Set tests");
@@ -275,17 +278,17 @@
             },
             'Should throw an error since it is neither a Node nor an identifier.'
         );
-        ok(b7.links.isEmpty(), "No links defined yet.");
-        ok(b7.outgoing.isEmpty(), "No links defined yet.");
-        ok(b7.incoming.isEmpty(), "No links defined yet.");
+        ok(Utils.isEmpty(b7.links), "No links defined yet.");
+        ok(Utils.isEmpty(b7.outgoing), "No links defined yet.");
+        ok(Utils.isEmpty(b7.incoming), "No links defined yet.");
         ok(b7.weight == 1, "No weight set by default.");
 
         var ori = new Node();
         var clone = ori.clone();
         ok(ori.id != clone.id, "The clone should not have the same identifier.");
-        ok(ori.links.sameAs(clone.links));
-        ok(ori.outgoing.sameAs(clone.outgoing));
-        ok(ori.incoming.sameAs(clone.incoming));
+        deepEqual(ori.links, clone.links);
+        deepEqual(ori.outgoing, clone.outgoing);
+        deepEqual(ori.incoming, clone.incoming);
     });
 
     test('Parents and children', function () {
@@ -299,9 +302,9 @@
         var n5 = g.getNode("5");
 
         var n2Parents = n2.getParents();
-        ok(n2Parents.length == 2 && n2Parents.contains(n0) && n2Parents.contains(n1), "Parents of n2.");
+        ok(n2Parents.length == 2 && contains(n2Parents, n0) && contains(n2Parents, n1), "Parents of n2.");
         var n2Children = n2.getChildren();
-        ok(n2Children.length == 1 && n2Children.contains(n3), "Children of n2.");
+        ok(n2Children.length == 1 && contains(n2Children, n3), "Children of n2.");
         var n3Children = n3.getChildren();
         ok(n3Children.length == 3, "Children of n3.");
         ok(n5.getParents().length == 1, "Parent of n5.");
@@ -311,18 +314,18 @@
         var g = parse(["0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
         var path = [];
         var acc = function (node) {
-            path.add(node.id);
+            path.push(node.id);
         }
         var n0 = g.getNode("0");
         g.depthFirstTraversal(n0, acc);
-        var shouldbe = [0, 1, 3, 7, 4, 2, 5, 6];
-        ok(path.sameAs(shouldbe), "Should be unique in this case.");
+        var shouldbe = ["0", "1", "3", "7", "4", "2", "5", "6"];
+        deepEqual(path, shouldbe, "Should be unique in this case.");
         g = parse(["0->7", "0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
-        shouldbe = [0, 7, 1, 3, 4, 2, 5, 6];
+        shouldbe = ["0", "7", "1", "3", "4", "2", "5", "6"];
         path = [];
         n0 = g.getNode("0");
         g.depthFirstTraversal(n0, acc);
-        ok(path.sameAs(shouldbe), "No revisit please.");
+        deepEqual(path, shouldbe, "No revisit please.");
     });
 
     test('Subgraphs', function () {
@@ -337,18 +340,18 @@
         var g = parse(["0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
         var path = [];
         var acc = function (node) {
-            path.add(node.id);
+            path.push(node.id);
         }
         var n0 = g.getNode("0");
         g.breadthFirstTraversal(n0, acc);
-        var shouldbe = new Range(0, 7);
-        ok(path.sameAs(shouldbe), "Should be unique in this case.");
+        var shouldbe = ["0", "1", "2", "3", "4", "5", "6", "7"];
+        deepEqual(path, shouldbe, "Should be unique in this case.");
         g = parse(["0->7", "0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
-        shouldbe = [0, 7, 1, 2, 3, 4, 5, 6];
+        shouldbe = ["0", "7", "1", "2", "3", "4", "5", "6"];
         path = [];
         n0 = g.getNode("0");
         g.breadthFirstTraversal(n0, acc);
-        ok(path.sameAs(shouldbe), "No revisit please.");
+        deepEqual(path, shouldbe, "No revisit please.");
     });
 
     test('Link basics', function () {
@@ -403,14 +406,14 @@
         var l12 = g.addLink(n1, "n2");
         var n2 = g.getNode("n2");
         ok(Utils.isDefined(n2), "The link target should be added automatically.");
-        ok(g.links.contains(l12), "The link should be in the links.");
+        ok(contains(g.links, l12), "The link should be in the links.");
         ok(l12.source.id == "n1" && l12.target.id == "n2", "Check of the identifiers.");
         ok(g.isHealthy(), "The graph is healthy.");
         g.removeLink(l12);
         ok(g.nodes.length == 2, "Should still have the nodes.");
         ok(n1.isIsolated(), "Should have no links.");
         ok(n2.isIsolated(), "Should have no links.");
-        ok(g.links.isEmpty(), "No links.");
+        ok(Utils.isEmpty(g.links), "No links.");
         var n3 = new Node("n3");
         var link = new Link(n1, n3);
         g.addLink(link);
@@ -456,7 +459,7 @@
         secondLink.id = "44";
         var s = g.linearize();
         var shouldbe = ["n12->n13", "n17->n22"];
-        ok(s.sameAs(shouldbe));
+        deepEqual(s, shouldbe);
 
         s = g.linearize(true);
         shouldbe = ["n12->n13", {id: "33"}, "n17->n22", {id: "44"}];
@@ -472,11 +475,11 @@
         var components = simple.getConnectedComponents();
         ok(components.length == 2, "Should be two components.");
         var g1 = components[0];
-        ok(g1.nodes.contains(simple.getNode("1")));
-        ok(g1.nodes.contains(simple.getNode("2")));
+        ok(contains(g1.nodes, simple.getNode("1")));
+        ok(contains(g1.nodes, simple.getNode("2")));
         var g2 = components[1];
-        ok(g2.nodes.contains(simple.getNode("3")));
-        ok(g2.nodes.contains(simple.getNode("4")));
+        ok(contains(g2.nodes, simple.getNode("3")));
+        ok(contains(g2.nodes, simple.getNode("4")));
 
         simple = parse(["1->2", "2->3", "3->4", "5->6", "6->5", "9->12"]);
         components = simple.getConnectedComponents();
@@ -831,7 +834,7 @@
         }
         equal(ids.length, 4);
         ids.sort();
-        ok(["a", "b", "c", "d"].sameAs(ids));
+        deepEqual(["a", "b", "c", "d"], ids);
     });
 
     test('Ensure random id transfer across the analysis', function () {
@@ -863,6 +866,6 @@
         equal(idsafter.length, 4);
         idsbefore.sort();
         idsafter.sort();
-        ok(idsbefore.sameAs(idsafter));
+        deepEqual(idsbefore, idsafter);
     });
 })();

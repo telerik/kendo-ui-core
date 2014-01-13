@@ -18,7 +18,9 @@ var __meta__ = {
         dataviz = kendo.dataviz,
         Utils = diagram.Utils,
         Point = dataviz.Point2D,
-        isFunction = kendo.isFunction;
+        isFunction = kendo.isFunction,
+        contains = Utils.contains,
+        map = $.map;
 
     // Constants ==============================================================
     var HITTESTAREA = 3,
@@ -604,13 +606,13 @@ var __meta__ = {
                     nums = v.slice(7, v.length - 1).trim();
                     parts = nums.split(",");
                     if (parts.length === 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                        return Matrix.fromList(map(parts, function (p) {
                             return parseFloat(p);
                         }));
                     }
                     parts = nums.split(" ");
                     if (parts.length === 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                        return Matrix.fromList(map(parts, function (p) {
                             return parseFloat(p);
                         }));
                     }
@@ -622,7 +624,7 @@ var __meta__ = {
                 if (v.indexOf(",") > 0) {
                     parts = v.split(",");
                     if (parts.length === 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                        return Matrix.fromList(map(parts, function (p) {
                             return parseFloat(p);
                         }));
                     }
@@ -630,7 +632,7 @@ var __meta__ = {
                 if (v.indexOf(" ") > 0) {
                     parts = v.split(" ");
                     if (parts.length === 6) {
-                        return Matrix.fromList(parts.map(function (p) {
+                        return Matrix.fromList(map(parts, function (p) {
                             return parseFloat(p);
                         }));
                     }
@@ -962,9 +964,15 @@ var __meta__ = {
             this._hashTable = new HashTable();
             this.length = 0;
             if (Utils.isDefined(dictionary)) {
-                dictionary.forEach(function (k, v) {
-                    this.add(k, v);
-                }, this);
+                if ($.isArray(dictionary)) {
+                    for (var i = 0; i < dictionary.length; i++) {
+                        this.add(dictionary[i]);
+                    }
+                } else {
+                    dictionary.forEach(function (k, v) {
+                        this.add(k, v);
+                    }, this);
+                }
             }
         },
 
@@ -1264,7 +1272,7 @@ var __meta__ = {
          * Returns whether this node has no links attached.
          */
         isIsolated: function () {
-            return this.links.isEmpty();
+            return Utils.isEmpty(this.links);
         },
 
         /**
@@ -1287,9 +1295,9 @@ var __meta__ = {
          * incoming or outgoing link.
          */
         isLinkedTo: function (node) {
-            var thisRef = this;
-            return this.links.any(function (link) {
-                return link.getComplement(thisRef) === node;
+            var that = this;
+            return Utils.any(that.links, function (link) {
+                return link.getComplement(that) === node;
             });
         },
 
@@ -1304,7 +1312,7 @@ var __meta__ = {
             var children = [];
             for (var i = 0, len = this.outgoing.length; i < len; i++) {
                 var link = this.outgoing[i];
-                children.add(link.getComplement(this));
+                children.push(link.getComplement(this));
             }
             return children;
         },
@@ -1320,7 +1328,7 @@ var __meta__ = {
             var parents = [];
             for (var i = 0, len = this.incoming.length; i < len; i++) {
                 var link = this.incoming[i];
-                parents.add(link.getComplement(this));
+                parents.push(link.getComplement(this));
             }
             return parents;
         },
@@ -1361,14 +1369,14 @@ var __meta__ = {
          */
         removeLink: function (link) {
             if (link.source === this) {
-                this.links.remove(link);
-                this.outgoing.remove(link);
+                Utils.remove(this.links, link);
+                Utils.remove(this.outgoing, link);
                 link.source = null;
             }
 
             if (link.target === this) {
-                this.links.remove(link);
-                this.incoming.remove(link);
+                Utils.remove(this.links, link);
+                Utils.remove(this.incoming, link);
                 link.target = null;
             }
         },
@@ -1377,7 +1385,7 @@ var __meta__ = {
          * Returns whether there is a (outgoing) link from the current node to the given one.
          */
         hasLinkTo: function (node) {
-            return this.outgoing.any(function (link) {
+            return Utils.any(this.outgoing, function (link) {
                 return link.target === node;
             });
         },
@@ -1393,14 +1401,14 @@ var __meta__ = {
          * Returns whether this node is either the source or the target of the given link.
          */
         incidentWith: function (link) {
-            return this.links.contains(link);
+            return contains(this.links, link);
         },
 
         /**
          * Returns the links between this node and the given one.
          */
         getLinksWith: function (node) {
-            return this.links.all(function (link) {
+            return Utils.all(this.links, function (link) {
                 return link.getComplement(this) === node;
             }, this);
         },
@@ -1410,10 +1418,10 @@ var __meta__ = {
          */
         getNeighbors: function () {
             var neighbors = [];
-            this.incoming.forEach(function (e) {
+            Utils.forEach(this.incoming, function (e) {
                 neighbors.push(e.getComplement(this));
             }, this);
-            this.outgoing.forEach(function (e) {
+            Utils.forEach(this.outgoing, function (e) {
                 neighbors.push(e.getComplement(this));
             }, this);
             return neighbors;
@@ -1448,10 +1456,10 @@ var __meta__ = {
 
             this.source = sourceFound;
             this.target = targetFound;
-            this.source.links.add(this);
-            this.target.links.add(this);
-            this.source.outgoing.add(this);
-            this.target.incoming.add(this);
+            this.source.links.push(this);
+            this.target.links.push(this);
+            this.source.outgoing.push(this);
+            this.target.incoming.push(this);
             if (Utils.isDefined(id)) {
                 this.id = id;
             }
@@ -1517,15 +1525,15 @@ var __meta__ = {
          * via an incoming or outgoing link.
          */
         adjacentTo: function (link) {
-            return this.source.links.contains(link) || this.target.links.contains(link);
+            return contains(this.source.links, link) || contains(this.target.links, link);
         },
 
         /**
          * Changes the source-node of this link.
          */
         changeSource: function (node) {
-            this.source.links.remove(this);
-            this.source.outgoing.remove(this);
+            Utils.remove(this.source.links, this);
+            Utils.remove(this.source.outgoing, this);
 
             node.links.push(this);
             node.outgoing.push(this);
@@ -1538,8 +1546,8 @@ var __meta__ = {
          * @param node
          */
         changeTarget: function (node) {
-            this.target.links.remove(this);
-            this.target.incoming.remove(this);
+            Utils.remove(this.target.links, this);
+            Utils.remove(this.target.incoming, this);
 
             node.links.push(this);
             node.incoming.push(this);
@@ -1567,11 +1575,11 @@ var __meta__ = {
             var oldTarget = this.target;
 
             this.source = oldTarget;
-            oldSource.outgoing.remove(this);
+            Utils.remove(oldSource.outgoing, this);
             this.source.outgoing.push(this);
 
             this.target = oldSource;
-            oldTarget.incoming.remove(this);
+            Utils.remove(oldTarget.incoming, this);
             this.target.incoming.push(this);
             return this;
         },
@@ -1698,7 +1706,7 @@ var __meta__ = {
             this.cacheRelationships();
             if (Utils.isUndefined(visited)) {
                 visited = new Dictionary();
-                this.nodes.forEach(function (n) {
+                Utils.forEach(this.nodes, function (n) {
                     visited.add(n, false);
                 });
             }
@@ -1724,13 +1732,13 @@ var __meta__ = {
             if (Utils.isUndefined(value)) {
                 if (!this._root) {
                     // TODO: better to use the longest path for the most probable root?
-                    var found = this.nodes.first(function (n) {
+                    var found = Utils.first(this.nodes, function (n) {
                         return n.incoming.length === 0;
                     });
                     if (found) {
                         return found;
                     }
-                    return this.nodes.first();
+                    return Utils.first(this.nodes);
                 }
                 else {
                     return this._root;
@@ -1777,7 +1785,7 @@ var __meta__ = {
         _collectConnectedNodes: function (setIds, nodeIndex) {
             setIds[nodeIndex] = this.componentIndex; // part of the current component
             var node = this.nodes[nodeIndex];
-            node.links.forEach(
+            Utils.forEach(node.links,
                 function (link) {
                     var next = link.getComplement(node);
                     var nextId = next.index;
@@ -1829,9 +1837,9 @@ var __meta__ = {
 
             var visited = [];
             var remaining = [];
-            tree.nodes.add(tree.root);
-            visited.add(root);
-            remaining.add(root);
+            tree.nodes.push(tree.root);
+            visited.push(root);
+            remaining.push(root);
 
             var levelCount = 1;
             while (remaining.length > 0) {
@@ -1839,7 +1847,7 @@ var __meta__ = {
                 for (var ni = 0; ni < next.links.length; ni++) {
                     var link = next.links[ni];
                     var cn = link.getComplement(next);
-                    if (visited.contains(cn)) {
+                    if (contains(visited, cn)) {
                         continue;
                     }
 
@@ -1847,11 +1855,11 @@ var __meta__ = {
                     if (levelCount < cn.level + 1) {
                         levelCount = cn.level + 1;
                     }
-                    if (!remaining.contains(cn)) {
-                        remaining.add(cn);
+                    if (!contains(remaining, cn)) {
+                        remaining.push(cn);
                     }
-                    if (!visited.contains(cn)) {
-                        visited.add(cn);
+                    if (!contains(visited, cn)) {
+                        visited.push(cn);
                     }
                     if (map.containsKey(next)) {
                         source = map.get(next);
@@ -1879,11 +1887,11 @@ var __meta__ = {
 
             var treeLevels = [];
             for (var i = 0; i < levelCount; i++) {
-                treeLevels.add([]);
+                treeLevels.push([]);
             }
 
-            tree.nodes.forEach(function (node) {
-                treeLevels[node.level].add(node);
+            Utils.forEach(tree.nodes, function (node) {
+                treeLevels[node.level].push(node);
             });
 
             tree.treeLevels = treeLevels;
@@ -1908,12 +1916,12 @@ var __meta__ = {
                 return null;
             }
             if (this.nodes.length === 1) {
-                return excludedNodes.contains(this.nodes[0]) ? null : this.nodes[0];
+                return contains(excludedNodes, this.nodes[0]) ? null : this.nodes[0];
             }
-            var pool = this.nodes.where(function (node) {
-                return !excludedNodes.contains(node) && node.degree() <= incidenceLessThan;
+            var pool = $.grep(this.nodes, function (node) {
+                return !contains(excludedNodes, node) && node.degree() <= incidenceLessThan;
             });
-            if (pool.isEmpty()) {
+            if (Utils.isEmpty(pool)) {
                 return null;
             }
             return pool[Utils.randomInteger(0, pool.length)];
@@ -1923,15 +1931,15 @@ var __meta__ = {
          * Returns whether this is an empty graph.
          */
         isEmpty: function () {
-            return this.nodes.isEmpty();
+            return Utils.isEmpty(this.nodes);
         },
 
         /**
          * Checks whether the endpoints of the links are all in the nodes collection.
          */
         isHealthy: function () {
-            return this.links.all(function (link) {
-                return this.nodes.contains(link.source) && this.nodes.contains(link.target);
+            return Utils.all(this.links, function (link) {
+                return contains(this.nodes, link.source) && contains(this.nodes, link.target);
             }, this);
         },
 
@@ -2058,12 +2066,12 @@ var __meta__ = {
          */
         hasLink: function (linkOrId) {
             if (Utils.isString(linkOrId)) {
-                return this.links.any(function (link) {
+                return Utils.any(this.links, function (link) {
                     return link.id === linkOrId;
                 });
             }
             if (linkOrId.type === "Link") {
-                return this.links.contains(linkOrId);
+                return contains(this.links, linkOrId);
             }
             throw "The given object is neither an identifier nor a Link.";
         },
@@ -2075,7 +2083,7 @@ var __meta__ = {
                 throw "No identifier or Node specified.";
             }
             if (Utils.isString(nodeOrId)) {
-                return this.nodes.find(function (n) {
+                return Utils.find(this.nodes, function (n) {
                     return n.id == nodeOrId;
                 });
             }
@@ -2094,12 +2102,12 @@ var __meta__ = {
          */
         hasNode: function (nodeOrId) {
             if (Utils.isString(nodeOrId)) {
-                return this.nodes.any(function (n) {
+                return Utils.any(this.nodes, function (n) {
                     return n.id === nodeOrId;
                 });
             }
             if (Utils.isObject(nodeOrId)) {
-                return this.nodes.any(function (n) {
+                return Utils.any(this.nodes, function (n) {
                     return n === nodeOrId;
                 });
             }
@@ -2123,7 +2131,7 @@ var __meta__ = {
                     var link = links[i];
                     this.removeLink(link);
                 }
-                this.nodes.remove(n);
+                Utils.remove(this.nodes, n);
             }
             else {
                 throw "The identifier should be a Node or the Id (string) of a node.";
@@ -2134,7 +2142,7 @@ var __meta__ = {
          * Returns whether the given nodes are connected with a least one link independently of the direction.
          */
         areConnected: function (n1, n2) {
-            return this.links.any(function (link) {
+            return Utils.any(this.links, function (link) {
                 return link.source == n1 && link.target == n2 || link.source == n2 && link.target == n1;
             });
         },
@@ -2147,12 +2155,12 @@ var __meta__ = {
              throw "The given link is not part of the Graph.";
              }
              */
-            this.links.remove(link);
+            Utils.remove(this.links, link);
 
-            link.source.outgoing.remove(link);
-            link.source.links.remove(link);
-            link.target.incoming.remove(link);
-            link.target.links.remove(link);
+            Utils.remove(link.source.outgoing, link);
+            Utils.remove(link.source.links, link);
+            Utils.remove(link.target.incoming, link);
+            Utils.remove(link.target.links, link);
         },
 
         /**
@@ -2189,7 +2197,7 @@ var __meta__ = {
             if (Utils.isDefined(owner)) {
                 newNode.owner = owner;
             }
-            this.nodes.add(newNode);
+            this.nodes.push(newNode);
             return newNode;
         },
 
@@ -2198,13 +2206,13 @@ var __meta__ = {
          */
         addNodeAndOutgoings: function (node) {
 
-            if (!this.nodes.contains(node)) {
+            if (!contains(this.nodes, node)) {
                 this.nodes.push(node);
             }
 
             var newLinks = node.outgoing;
             node.outgoing = [];
-            newLinks.forEach(function (link) {
+            Utils.forEach(newLinks, function (link) {
                 this.addExistingLink(link);
             }, this);
         },
@@ -2235,7 +2243,7 @@ var __meta__ = {
             }
             // we need a map even if the saveMapping is not set
             var map = new Dictionary();
-            this.nodes.forEach(function (nOriginal) {
+            Utils.forEach(this.nodes, function (nOriginal) {
                 var nCopy = nOriginal.clone();
                 map.set(nOriginal, nCopy);
                 copy.nodes.push(nCopy);
@@ -2245,7 +2253,7 @@ var __meta__ = {
                 }
             });
 
-            this.links.forEach(function (linkOriginal) {
+            Utils.forEach(this.links, function (linkOriginal) {
                 if (map.containsKey(linkOriginal.source) && map.containsKey(linkOriginal.target)) {
                     var linkCopy = copy.addLink(map.get(linkOriginal.source), map.get(linkOriginal.target));
                     if (save) {
@@ -2289,11 +2297,11 @@ var __meta__ = {
         _dftIterator: function (node, action, visited) {
 
             action(node);
-            visited.add(node);
+            visited.push(node);
             var children = node.getChildren();
             for (var i = 0, len = children.length; i < len; i++) {
                 var child = children[i];
-                if (visited.contains(child)) {
+                if (contains(visited, child)) {
                     continue;
                 }
                 this._dftIterator(child, action, visited);
@@ -2325,11 +2333,11 @@ var __meta__ = {
             while (queue.length > 0) {
                 var node = queue.dequeue();
                 action(node);
-                visited.add(node);
+                visited.push(node);
                 var children = node.getChildren();
                 for (var i = 0, len = children.length; i < len; i++) {
                     var child = children[i];
-                    if (visited.contains(child) || queue.contains(child)) {
+                    if (contains(visited, child) || contains(queue, child)) {
                         continue;
                     }
                     queue.enqueue(child);
@@ -2363,7 +2371,7 @@ var __meta__ = {
                     this._stronglyConnectedComponents(excludeSingleItems, next, indices, lowLinks, connected, stack, index);
                     lowLinks.add(node, Math.min(lowLinks.get(node), lowLinks.get(next)));
                 }
-                else if (stack.contains(next)) {
+                else if (contains(stack, next)) {
                     lowLinks.add(node, Math.min(lowLinks.get(node), indices.get(next)));
                 }
             }
@@ -2372,11 +2380,11 @@ var __meta__ = {
                 var component = [];
                 do {
                     next = stack.pop();
-                    component.add(next);
+                    component.push(next);
                 }
                 while (next !== node);
                 if (!excludeSingleItems || (component.length > 1)) {
-                    connected.add(component);
+                    connected.push(component);
                 }
             }
         },
@@ -2410,7 +2418,7 @@ var __meta__ = {
          * @returns {*}
          */
         isAcyclic: function () {
-            return this.findCycles().isEmpty();
+            return Utils.isEmpty(this.findCycles());
         },
 
         /**
@@ -2420,8 +2428,8 @@ var __meta__ = {
         isSubGraph: function (other) {
             var otherArray = other.linearize();
             var thisArray = this.linearize();
-            return otherArray.all(function (s) {
-                return thisArray.contains(s);
+            return Utils.all(otherArray, function (s) {
+                return contains(thisArray, s);
             });
         },
 
@@ -2446,7 +2454,7 @@ var __meta__ = {
                             continue;
                         }
                         var rev = link.reverse();
-                        result.add(rev);
+                        result.push(rev);
                     }
                 }
                 return result;
@@ -2488,7 +2496,7 @@ var __meta__ = {
                 intensityCatalog.get(intensity).push(node);
             };
 
-            copy.nodes.forEach(function (v) {
+            Utils.forEach(copy.nodes, function (v) {
                 catalogEqualIntensity(v, intensityCatalog);
             });
 
@@ -2505,11 +2513,11 @@ var __meta__ = {
                             var targetLink = target.links[li];
                             source = targetLink.getComplement(target);
                             intensity = flowIntensity(source, N);
-                            intensityCatalog.get(intensity).remove(source);
+                            Utils.remove(intensityCatalog.get(intensity), source);
                             source.removeLink(targetLink);
                             catalogEqualIntensity(source, intensityCatalog);
                         }
-                        copy.nodes.remove(target);
+                        Utils.remove(copy.nodes, target);
                         targetStack.unshift(target);
                     }
                 }
@@ -2523,12 +2531,12 @@ var __meta__ = {
                             var sourceLink = source.links[si];
                             target = sourceLink.getComplement(source);
                             intensity = flowIntensity(target, N);
-                            intensityCatalog.get(intensity).remove(target);
+                            Utils.remove(intensityCatalog.get(intensity), target);
                             target.removeLink(sourceLink);
                             catalogEqualIntensity(target, intensityCatalog);
                         }
                         sourceStack.push(source);
-                        copy.nodes.remove(source);
+                        Utils.remove(copy.nodes, source);
                     }
                 }
 
@@ -2542,12 +2550,12 @@ var __meta__ = {
                                 var ril = v.links[ri];
                                 var u = ril.getComplement(v);
                                 intensity = flowIntensity(u, N);
-                                intensityCatalog.get(intensity).remove(u);
+                                Utils.remove(intensityCatalog.get(intensity), u);
                                 u.removeLink(ril);
                                 catalogEqualIntensity(u, intensityCatalog);
                             }
                             sourceStack.push(v);
-                            copy.nodes.remove(v);
+                            Utils.remove(copy.nodes, v);
                             break;
                         }
                     }
@@ -2562,7 +2570,7 @@ var __meta__ = {
             }
 
             var reversedEdges = [];
-            this.links.forEach(function (link) {
+            Utils.forEach(this.links, function (link) {
                 if (vertexOrder.get(link.source) > vertexOrder.get(link.target)) {
                     link.reverse();
                     reversedEdges.push(link);
@@ -2755,9 +2763,9 @@ var __meta__ = {
             var lin = [];
             for (var i = 0, len = graph.links.length; i < len; i++) {
                 var link = graph.links[i];
-                lin.add(link.source.id + "->" + link.target.id);
+                lin.push(link.source.id + "->" + link.target.id);
                 if (addIds) {
-                    lin.add({id: link.id});
+                    lin.push({id: link.id});
                 }
             }
             return lin;
@@ -2919,7 +2927,7 @@ var __meta__ = {
             var root = new Node((++counter).toString());
             g.addNode(root);
             g.root = root;
-            lastAdded.add(root);
+            lastAdded.push(root);
             for (var i = 0; i < levels; i++) {
                 news = [];
                 for (var j = 0; j < lastAdded.length; j++) {
@@ -2927,7 +2935,7 @@ var __meta__ = {
                     for (var k = 0; k < siblingsCount; k++) {
                         var item = new Node((++counter).toString());
                         g.addLink(parent, item);
-                        news.add(item);
+                        news.push(item);
                     }
                 }
                 lastAdded = news;
@@ -2971,7 +2979,7 @@ var __meta__ = {
                         for (var k = 0; k < siblingsCount; k++) {
                             var item = new Node((++counter).toString());
                             g.addLink(parent, item);
-                            news.add(item);
+                            news.push(item);
                         }
                     }
                     lastAdded = news;

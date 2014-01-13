@@ -520,7 +520,7 @@ var __meta__ = {
                         diagram._selectedItems.push(this);
                         selected.push(this);
                     } else {
-                        diagram._selectedItems.remove(this);
+                        Utils.remove(diagram._selectedItems, this);
                         deselected.push(this);
                     }
                     if (!diagram._internalSelection) {
@@ -631,6 +631,9 @@ var __meta__ = {
                 this._contentVisual.redraw({ width: this.options.width, height: this.options.height });
             }
             this.shapeVisual.redraw(options);
+            if (options && options.content) {
+                this.content(options.content);
+            }
         },
         _triggerBoundsChange: function () {
             if (this.diagram) {
@@ -910,7 +913,7 @@ var __meta__ = {
                     } else {
                         if (this.adorner) {
                             diagram._adorn(this.adorner, false);
-                            diagram._selectedItems.remove(this);
+                            Utils.remove(diagram._selectedItems, this);
                             this.adorner = undefined;
                             deselected.push(this);
                         }
@@ -1121,12 +1124,12 @@ var __meta__ = {
             this.path.redraw({ data: data  });
         },
         _clearSourceConnector: function () {
-            this.sourceConnector.connections.remove(this);
+            Utils.remove(this.sourceConnector.connections, this);
             this.sourceConnector = undefined;
             this._resolvedSourceConnector = undefined;
         },
         _clearTargetConnector: function () {
-            this.targetConnector.connections.remove(this);
+            Utils.remove(this.targetConnector.connections, this);
             this.targetConnector = undefined;
             this._resolvedTargetConnector = undefined;
         }
@@ -1683,7 +1686,7 @@ var __meta__ = {
         },
         copy: function () {
             if (this.options.copy.enabled) {
-                this._clipboard.clear();
+                this._clipboard = [];
                 this._copyOffset = 1;
                 for (var i = 0; i < this._selectedItems.length; i++) {
                     var item = this._selectedItems[i];
@@ -1693,7 +1696,7 @@ var __meta__ = {
         },
         cut: function () {
             if (this.options.copy.enabled) {
-                this._clipboard.clear();
+                this._clipboard = [];
                 this._copyOffset = 0;
                 for (var i = 0; i < this._selectedItems.length; i++) {
                     var item = this._selectedItems[i];
@@ -1872,13 +1875,13 @@ var __meta__ = {
          */
         getId: function (id) {
             var found;
-            found = this.shapes.first(function (s) {
+            found = Utils.first(this.shapes, function (s) {
                 return s.visual.native.id === id;
             });
             if (found) {
                 return found;
             }
-            found = this.connections.first(function (c) {
+            found = Utils.first(this.connections, function (c) {
                 return c.visual.native.id === id;
             });
             return found;
@@ -2024,13 +2027,13 @@ var __meta__ = {
                 i, item;
             for (i = 0; i < result.shapes.length; i++) {
                 item = result.shapes[i];
-                this.shapes.remove(item);
-                this.shapes.insert(item, shapePos);
+                Utils.remove(this.shapes, item);
+                Utils.insert(this.shapes, item, shapePos);
             }
             for (i = 0; i < result.cons.length; i++) {
                 item = result.cons[i];
-                this.connections.remove(item);
-                this.connections.insert(item, conPos);
+                Utils.remove(this.connections, item);
+                Utils.insert(this.connections, item, conPos);
             }
         },
         _getDiagramItems: function (items) {
@@ -2078,7 +2081,7 @@ var __meta__ = {
                 this.undoRedoService.addCompositeItem(new DeleteShapeUnit(shape));
             }
             else {
-                this.shapes.remove(shape);
+                Utils.remove(this.shapes, shape);
             }
             for (i = 0; i < shape.connectors.length; i++) {
                 connector = shape.connectors[i];
@@ -2101,16 +2104,16 @@ var __meta__ = {
         },
         _removeConnection: function (connection, undoable) {
             if (connection.sourceConnector) {
-                connection.sourceConnector.connections.remove(connection);
+                Utils.remove(connection.sourceConnector.connections, connection);
             }
             if (connection.targetConnector) {
-                connection.targetConnector.connections.remove(connection);
+                Utils.remove(connection.targetConnector.connections, connection);
             }
             if (undoable) {
                 this.undoRedoService.addCompositeItem(new DeleteConnectionUnit(connection));
             }
             else {
-                this.connections.remove(connection);
+                Utils.remove(this.connections, connection);
             }
         },
         _canRectSelect: function () {
@@ -2129,7 +2132,7 @@ var __meta__ = {
                 if (isUndefined(node)) { // happens on updating dataSource
                     return;
                 }
-                var shape = that._dataMap.first(function (item) {
+                var shape = Utils.first(that._dataMap, function (item) {
                     return item.uid === node.uid;
                 });
                 if (shape) {
@@ -2318,7 +2321,7 @@ var __meta__ = {
                     this.adornerLayer.append(adorner.visual);
                 }
                 else {
-                    this._adorners.remove(adorner);
+                    Utils.remove(this._adorners, adorner);
                     this.adornerLayer.remove(adorner.visual);
                 }
             }
