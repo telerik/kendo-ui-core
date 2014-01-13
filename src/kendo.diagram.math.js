@@ -1418,18 +1418,12 @@ var __meta__ = {
          */
         getNeighbors: function () {
             var neighbors = [];
-            var e;
-
-            for (var i = 0; i < this.incoming.length; i++) {
-                e = this.incoming[i];
+            this.incoming.forEach(function (e) {
                 neighbors.push(e.getComplement(this));
-            }
-
-            for (i = 0; i < this.outgoing.length; i++) {
-                e = this.outgoing[i];
+            }, this);
+            this.outgoing.forEach(function (e) {
                 neighbors.push(e.getComplement(this));
-            }
-
+            }, this);
             return neighbors;
         }
     });
@@ -1712,11 +1706,9 @@ var __meta__ = {
             this.cacheRelationships();
             if (Utils.isUndefined(visited)) {
                 visited = new Dictionary();
-
-                for (i = 0; i < this.nodes.length; i++) {
-                    var n = this.nodes[i];
+                this.nodes.forEach(function (n) {
                     visited.add(n, false);
-                }
+                });
             }
             visited.set(startNode, true);
             startNode.level = offset;
@@ -1793,14 +1785,14 @@ var __meta__ = {
         _collectConnectedNodes: function (setIds, nodeIndex) {
             setIds[nodeIndex] = this.componentIndex; // part of the current component
             var node = this.nodes[nodeIndex];
-            for (var i = 0; i < node.links.length; i++) {
-                var link = node.links[i];
-                var next = link.getComplement(node);
-                var nextId = next.index;
-                if (setIds[nextId] === -1) {
-                    this._collectConnectedNodes(setIds, nextId);
-                }
-            }
+            node.links.forEach(
+                function (link) {
+                    var next = link.getComplement(node);
+                    var nextId = next.index;
+                    if (setIds[nextId] === -1) {
+                        this._collectConnectedNodes(setIds, nextId);
+                    }
+                }, this);
         },
 
         /**
@@ -1898,10 +1890,9 @@ var __meta__ = {
                 treeLevels.push([]);
             }
 
-            for (i = 0; i < tree.nodes.length; i++) {
-                var node = tree.nodes[i];
+            tree.nodes.forEach(function (node) {
                 treeLevels[node.level].push(node);
-            }
+            });
 
             tree.treeLevels = treeLevels;
             tree.cacheRelationships();
@@ -2221,9 +2212,9 @@ var __meta__ = {
 
             var newLinks = node.outgoing;
             node.outgoing = [];
-            for (var i = 0; i < newLinks.length; i++) {
-                this.addExistingLink(newLinks[i]);
-            }
+            newLinks.forEach(function (link) {
+                this.addExistingLink(link);
+            }, this);
         },
 
         /**
@@ -2252,10 +2243,7 @@ var __meta__ = {
             }
             // we need a map even if the saveMapping is not set
             var map = new Dictionary();
-            var i;
-
-            for (i = 0; i < this.nodes.length; i++) {
-                var nOriginal = this.nodes[i];
+            this.nodes.forEach(function (nOriginal) {
                 var nCopy = nOriginal.clone();
                 map.set(nOriginal, nCopy);
                 copy.nodes.push(nCopy);
@@ -2263,17 +2251,16 @@ var __meta__ = {
                 if (save) {
                     copy.nodeMap.set(nCopy, nOriginal);
                 }
-            }
+            });
 
-            for (i = 0; i < this.links.length; i++) {
-                var linkOriginal = this.links[i];
+            this.links.forEach(function (linkOriginal) {
                 if (map.containsKey(linkOriginal.source) && map.containsKey(linkOriginal.target)) {
                     var linkCopy = copy.addLink(map.get(linkOriginal.source), map.get(linkOriginal.target));
                     if (save) {
                         copy.linkMap.set(linkCopy, linkOriginal);
                     }
                 }
-            }
+            });
 
             return copy;
         },
@@ -2451,9 +2438,6 @@ var __meta__ = {
          * * @returns {Array} The reversed links.
          */
         makeAcyclic: function () {
-            var i;
-            var link;
-
             // if empty or almost empty
             if (this.isEmpty() || this.nodes.length <= 1 || this.links.length <= 1) {
                 return [];
@@ -2464,8 +2448,8 @@ var __meta__ = {
                 if (this.links.length > 1) {
                     var oneLink = this.links[0];
                     var oneNode = oneLink.source;
-                    for (i = 0, len = this.links.length; i < len; i++) {
-                        link = this.links[i];
+                    for (var i = 0, len = this.links.length; i < len; i++) {
+                        var link = this.links[i];
                         if (link.source == oneNode) {
                             continue;
                         }
@@ -2512,9 +2496,9 @@ var __meta__ = {
                 intensityCatalog.get(intensity).push(node);
             };
 
-            for (i = 0; i < copy.nodes.length; i++) {
-                catalogEqualIntensity(copy.nodes[i], intensityCatalog);
-            }
+            copy.nodes.forEach(function (v) {
+                catalogEqualIntensity(v, intensityCatalog);
+            });
 
             var sourceStack = [];
             var targetStack = [];
@@ -2586,14 +2570,12 @@ var __meta__ = {
             }
 
             var reversedEdges = [];
-            for (i = 0; i < this.links.length; i++) {
-                link = this.links[i];
+            this.links.forEach(function (link) {
                 if (vertexOrder.get(link.source) > vertexOrder.get(link.target)) {
                     link.reverse();
                     reversedEdges.push(link);
                 }
-            }
-
+            });
             return reversedEdges;
         }
     });
