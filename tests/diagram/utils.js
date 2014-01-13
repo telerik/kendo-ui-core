@@ -115,13 +115,6 @@ test('Insert', function () {
     deepEqual(b, shouldbe);
 });
 
-test('Append', function () {
-    var a = new Range(1, 5);
-    var shouldbe = new Range(1, 6);
-    var b = a.append(6);
-    deepEqual(b, shouldbe);
-});
-
 test('isObject', function () {
     ok(Utils.isObject({"stuff": 14}), "Should be considered as an object.")
     ok(!Utils.isObject(3.1415), "Should not be considered as an object.")

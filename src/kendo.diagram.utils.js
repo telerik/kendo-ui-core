@@ -276,13 +276,6 @@ var __meta__ = {
         return arr;
     };
 
-    if (!Array.prototype.append) {
-        Array.prototype.append = function (x) {
-            this.splice(this.length, 0, x);
-            return this;
-        };
-    }
-
     if (!Array.prototype.add) {
         Array.prototype.add = Array.prototype.push;
     }
