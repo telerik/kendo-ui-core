@@ -93,7 +93,7 @@ test('Find', function () {
 test('Bi-sort', function () {
     var a = ['d', 'a', 'c', 'b'];
     var b = [4, 1, 3, 2];
-    Array.prototype.bisort(a, b, function (m, n) {
+    Utils.bisort(a, b, function (m, n) {
         return m.localeCompare(n);
     });
     var shouldbe = new Range(1, 4);

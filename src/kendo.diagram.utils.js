@@ -295,27 +295,26 @@ var __meta__ = {
         arr.splice(0, arr.length);
     };
 
-    if (!Array.prototype.bisort) {
-        /**
-         * Sort the arrays on the basis of the first one (considered as keys and the other array as values).
-         * @param a
-         * @param b
-         * @param sortfunc (optiona) sorting function for the values in the first array
-         */
-        Array.prototype.bisort = function (a, b, sortfunc) {
-            if (Utils.isUndefined(a)) {
-                throw "First array is not specified.";
-            }
-            if (Utils.isUndefined(b)) {
-                throw "Second array is not specified.";
-            }
-            if (a.length != b.length) {
-                throw "The two arrays should have equal length";
-            }
+    /**
+     * Sort the arrays on the basis of the first one (considered as keys and the other array as values).
+     * @param a
+     * @param b
+     * @param sortfunc (optiona) sorting function for the values in the first array
+     */
+    Utils.bisort = function (a, b, sortfunc) {
+        if (Utils.isUndefined(a)) {
+            throw "First array is not specified.";
+        }
+        if (Utils.isUndefined(b)) {
+            throw "Second array is not specified.";
+        }
+        if (a.length != b.length) {
+            throw "The two arrays should have equal length";
+        }
 
-            var all = [], i;
+        var all = [], i;
 
-            // Miro - not used.
+        // Miro - not used.
 //            var sort_by = function (field, reverse, primer) {
 //
 //                var key = function (x) {
@@ -328,29 +327,28 @@ var __meta__ = {
 //                };
 //            };
 
-            for (i = 0; i < a.length; i++) {
-                all.push({ 'x': a[i], 'y': b[i] });
-            }
-            if (Utils.isUndefined(sortfunc)) {
-                all.sort(function (m, n) {
-                    return m.x - n.x;
-                });
-            }
-            else {
-                all.sort(function (m, n) {
-                    return sortfunc(m.x, n.x);
-                });
-            }
+        for (i = 0; i < a.length; i++) {
+            all.push({ 'x': a[i], 'y': b[i] });
+        }
+        if (Utils.isUndefined(sortfunc)) {
+            all.sort(function (m, n) {
+                return m.x - n.x;
+            });
+        }
+        else {
+            all.sort(function (m, n) {
+                return sortfunc(m.x, n.x);
+            });
+        }
 
-            Utils.clear(a);
-            Utils.clear(b);
+        Utils.clear(a);
+        Utils.clear(b);
 
-            for (i = 0; i < all.length; i++) {
-                a.push(all[i].x);
-                b.push(all[i].y);
-            }
-        };
-    }
+        for (i = 0; i < all.length; i++) {
+            a.push(all[i].x);
+            b.push(all[i].y);
+        }
+    };
 
     if (!Array.prototype.addRange) {
         Array.prototype.addRange = function (range) {

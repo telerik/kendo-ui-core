@@ -1222,7 +1222,7 @@ var __meta__ = {
                 angle[i] = this.normalizeAngle(-basevalue + Math.atan2(l.y - l.y, l.x - l.x));
             }
 
-            Array.prototype.bisort(angle, idx);
+            Utils.bisort(angle, idx);
             var col = []; // list of nodes
             var children = n.children;
             for (i = 0; i < count; ++i) {
