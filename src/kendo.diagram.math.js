@@ -1418,10 +1418,10 @@ var __meta__ = {
          */
         getNeighbors: function () {
             var neighbors = [];
-            this.incoming.forEach(function (e) {
+            Utils.forEach(this.incoming, function (e) {
                 neighbors.push(e.getComplement(this));
             }, this);
-            this.outgoing.forEach(function (e) {
+            Utils.forEach(this.outgoing, function (e) {
                 neighbors.push(e.getComplement(this));
             }, this);
             return neighbors;
@@ -1706,7 +1706,7 @@ var __meta__ = {
             this.cacheRelationships();
             if (Utils.isUndefined(visited)) {
                 visited = new Dictionary();
-                this.nodes.forEach(function (n) {
+                Utils.forEach(this.nodes, function (n) {
                     visited.add(n, false);
                 });
             }
@@ -1785,7 +1785,7 @@ var __meta__ = {
         _collectConnectedNodes: function (setIds, nodeIndex) {
             setIds[nodeIndex] = this.componentIndex; // part of the current component
             var node = this.nodes[nodeIndex];
-            node.links.forEach(
+            Utils.forEach(node.links,
                 function (link) {
                     var next = link.getComplement(node);
                     var nextId = next.index;
@@ -1890,7 +1890,7 @@ var __meta__ = {
                 treeLevels.push([]);
             }
 
-            tree.nodes.forEach(function (node) {
+            Utils.forEach(tree.nodes, function (node) {
                 treeLevels[node.level].push(node);
             });
 
@@ -2212,7 +2212,7 @@ var __meta__ = {
 
             var newLinks = node.outgoing;
             node.outgoing = [];
-            newLinks.forEach(function (link) {
+            Utils.forEach(newLinks, function (link) {
                 this.addExistingLink(link);
             }, this);
         },
@@ -2243,7 +2243,7 @@ var __meta__ = {
             }
             // we need a map even if the saveMapping is not set
             var map = new Dictionary();
-            this.nodes.forEach(function (nOriginal) {
+            Utils.forEach(this.nodes, function (nOriginal) {
                 var nCopy = nOriginal.clone();
                 map.set(nOriginal, nCopy);
                 copy.nodes.push(nCopy);
@@ -2253,7 +2253,7 @@ var __meta__ = {
                 }
             });
 
-            this.links.forEach(function (linkOriginal) {
+            Utils.forEach(this.links, function (linkOriginal) {
                 if (map.containsKey(linkOriginal.source) && map.containsKey(linkOriginal.target)) {
                     var linkCopy = copy.addLink(map.get(linkOriginal.source), map.get(linkOriginal.target));
                     if (save) {
@@ -2496,7 +2496,7 @@ var __meta__ = {
                 intensityCatalog.get(intensity).push(node);
             };
 
-            copy.nodes.forEach(function (v) {
+            Utils.forEach(copy.nodes, function (v) {
                 catalogEqualIntensity(v, intensityCatalog);
             });
 
@@ -2570,7 +2570,7 @@ var __meta__ = {
             }
 
             var reversedEdges = [];
-            this.links.forEach(function (link) {
+            Utils.forEach(this.links, function (link) {
                 if (vertexOrder.get(link.source) > vertexOrder.get(link.target)) {
                     link.reverse();
                     reversedEdges.push(link);

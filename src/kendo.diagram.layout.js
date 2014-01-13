@@ -144,7 +144,7 @@ var __meta__ = {
             }
 
             // calculate and cache the bounds of the components
-            components.forEach(function (c) {
+            Utils.forEach(components, function (c) {
                 c.calcBounds();
             });
 
@@ -897,7 +897,7 @@ var __meta__ = {
         _repulsion: function (n) {
             n.dx = 0;
             n.dy = 0;
-            this.graph.nodes.forEach(function (m) {
+            Utils.forEach(this.graph.nodes, function (m) {
                 if (m === n) {
                     return;
                 }
@@ -1969,7 +1969,7 @@ var __meta__ = {
             // defines a mapping of a node to the layer index
             var layerMap = new Dictionary();
 
-            graph.nodes.forEach(function (node) {
+            Utils.forEach(graph.nodes, function (node) {
                 if (node.incoming.length === 0) {
                     layerMap.set(node, 0);
                     current.push(node);
@@ -2081,7 +2081,7 @@ var __meta__ = {
             this._dedummify();
 
             // re-reverse the links which were switched earlier
-            reversedEdges.forEach(function (e) {
+            Utils.forEach(reversedEdges, function (e) {
                 if (e.points) {
                     e.points.reverse();
                 }
@@ -2317,11 +2317,11 @@ var __meta__ = {
 
             this.downNodes = new Dictionary();
             this.upNodes = new Dictionary();
-            this.graph.nodes.forEach(function (node) {
+            Utils.forEach(this.graph.nodes, function (node) {
                 this.downNodes.set(node, []);
                 this.upNodes.set(node, []);
             }, this);
-            this.graph.links.forEach(function (link) {
+            Utils.forEach(this.graph.links, function (link) {
                 var origin = link.source;
                 var dest = link.target;
                 var down = null, up = null;
@@ -2390,7 +2390,7 @@ var __meta__ = {
             var leftPos = this.placeLeftToRight(leftClasses);
             var rightPos = this.placeRightToLeft(rightClasses);
             var x = new Dictionary();
-            this.graph.nodes.forEach(function (node) {
+            Utils.forEach(this.graph.nodes, function (node) {
                 x.set(node, (leftPos.get(node) + rightPos.get(node)) / 2);
             });
 
@@ -2426,7 +2426,7 @@ var __meta__ = {
                 }
             }
             var directions = [1, -1];
-            directions.forEach(function (d) {
+            Utils.forEach(directions, function (d) {
                 var start = d === 1 ? 0 : this.layers.length - 1;
                 for (var l = start; 0 <= l && l < this.layers.length; l += d) {
                     var layer = this.layers[l];
@@ -2708,7 +2708,7 @@ var __meta__ = {
 
         placeLeft: function (node, leftPos, leftClass) {
             var pos = Number.NEGATIVE_INFINITY;
-            this._getComposite(node).forEach(function (v) {
+            Utils.forEach(this._getComposite(node), function (v) {
                 var leftSibling = this.leftSibling(v);
                 if (leftSibling && this.nodeLeftClass.get(leftSibling) === this.nodeLeftClass.get(v)) {
                     if (!leftPos.containsKey(leftSibling)) {
@@ -2720,14 +2720,14 @@ var __meta__ = {
             if (pos === Number.NEGATIVE_INFINITY) {
                 pos = 0;
             }
-            this._getComposite(node).forEach(function (v) {
+            Utils.forEach(this._getComposite(node), function (v) {
                 leftPos.set(v, pos);
             });
         },
 
         placeRight: function (node, rightPos, rightClass) {
             var pos = Number.POSITIVE_INFINITY;
-            this._getComposite(node).forEach(function (v) {
+            Utils.forEach(this._getComposite(node), function (v) {
                 var rightSibling = this.rightSibling(v);
                 if (rightSibling && this.nodeRightClass.get(rightSibling) === this.nodeRightClass.get(v)) {
                     if (!rightPos.containsKey(rightSibling)) {
@@ -2739,7 +2739,7 @@ var __meta__ = {
             if (pos === Number.POSITIVE_INFINITY) {
                 pos = 0;
             }
-            this._getComposite(node).forEach(function (v) {
+            Utils.forEach(this._getComposite(node), function (v) {
                 rightPos.set(v, pos);
             });
         },
@@ -2847,7 +2847,7 @@ var __meta__ = {
             });
 
             // each node strives for its barycenter; high priority nodes start first
-            sorted.forEach(function (node) {
+            Utils.forEach(sorted, function (node) {
                 var nodeGridPos = node.gridPosition;
                 var nodeBaryCenter = this.calcBaryCenter(node);
                 var nodePriority = (node.upstreamPriority + node.downstreamPriority) / 2;

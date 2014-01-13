@@ -199,6 +199,12 @@ var __meta__ = {
 
     /*-------------------Array Helpers ----------------------------*/
 
+    Utils.forEach = function(arr, iterator, thisRef) {
+        for (var i = 0; i < arr.length; i++) {
+            iterator.call(thisRef, arr[i], i, arr);
+        }
+    };
+
     Utils.any = function(arr, predicate) {
         for (var i = 0; i < arr.length; ++i) {
             if (predicate(arr[i])) {
@@ -388,7 +394,7 @@ var __meta__ = {
         trigger: function () {
             var _this = this;
             if (this.handlers) {
-                this.handlers.forEach(function (h) {
+                Utils.forEach(this.handlers, function (h) {
                     return h.call(_this.caller !== null ? _this.caller : _this);
                 });
             }
