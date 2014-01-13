@@ -276,11 +276,9 @@ var __meta__ = {
         return arr;
     };
 
-    if (!Array.prototype.isEmpty) {
-        Array.prototype.isEmpty = function () {
-            return this.length === 0;
-        };
-    }
+    Utils.isEmpty = function (arr) {
+        return arr.length === 0;
+    };
 
     Utils.all = function (arr, iterator, context) {
         var result = true;
@@ -292,7 +290,7 @@ var __meta__ = {
             if (!result) {
                 break;
             }
-        };
+        }
 
         return result;
     };

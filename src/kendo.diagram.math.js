@@ -967,7 +967,7 @@ var __meta__ = {
                 if ($.isArray(dictionary)) {
                     for (var i = 0; i < dictionary.length; i++) {
                         this.add(dictionary[i]);
-                    };
+                    }
                 } else {
                     dictionary.forEach(function (k, v) {
                         this.add(k, v);
@@ -1272,7 +1272,7 @@ var __meta__ = {
          * Returns whether this node has no links attached.
          */
         isIsolated: function () {
-            return this.links.isEmpty();
+            return Utils.isEmpty(this.links);
         },
 
         /**
@@ -1930,7 +1930,7 @@ var __meta__ = {
             var pool = $.grep(this.nodes, function (node) {
                 return !contains(excludedNodes, node) && node.degree() <= incidenceLessThan;
             });
-            if (pool.isEmpty()) {
+            if (Utils.isEmpty(pool)) {
                 return null;
             }
             return pool[Utils.randomInteger(0, pool.length)];
@@ -1940,7 +1940,7 @@ var __meta__ = {
          * Returns whether this is an empty graph.
          */
         isEmpty: function () {
-            return this.nodes.isEmpty();
+            return Utils.isEmpty(this.nodes);
         },
 
         /**
@@ -2431,7 +2431,7 @@ var __meta__ = {
          * @returns {*}
          */
         isAcyclic: function () {
-            return this.findCycles().isEmpty();
+            return Utils.isEmpty(this.findCycles());
         },
 
         /**

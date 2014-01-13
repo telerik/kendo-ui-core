@@ -556,7 +556,7 @@ var __meta__ = {
             var al = this.listToRoot(a);
             var bl = this.listToRoot(b);
             var found = null;
-            if (al.isEmpty() || bl.isEmpty()) {
+            if (Utils.isEmpty(al) || Utils.isEmpty(bl)) {
                 return this.hyperTree.root.data;
             }
             var xa = al[0];
@@ -775,7 +775,7 @@ var __meta__ = {
             }
             // split into connected components
             var components = graph.getConnectedComponents();
-            if (components.isEmpty()) {
+            if (Utils.isEmpty(components)) {
                 return;
             }
             for (var i = 0; i < components.length; i++) {
@@ -1346,7 +1346,7 @@ var __meta__ = {
                 node.treeDirection = parent.treeDirection;
             }
 
-            if (node.children.isEmpty()) {
+            if (Utils.isEmpty(node.children)) {
                 result = new Size(
                     Math.abs(shapeWidth) < EPSILON ? 50 : shapeWidth,
                     Math.abs(shapeHeight) < EPSILON ? 25 : shapeHeight);
@@ -1510,7 +1510,7 @@ var __meta__ = {
             var i, pp, child, node, childrenwidth, b = n.associatedShape.bounds();
             var shapeWidth = b.width;
             var shapeHeight = b.height;
-            if (n.children.isEmpty()) {
+            if (Utils.isEmpty(n.children)) {
                 n.x = p.x;
                 n.y = p.y;
                 n.BoundingRectangle = new Rect(p.x, p.y, shapeWidth, shapeHeight);
@@ -1700,7 +1700,7 @@ var __meta__ = {
                 return;
             }
 
-            if (this.center.children.isEmpty()) {
+            if (Utils.isEmpty(this.center.children)) {
                 return;
             }
 
@@ -1835,7 +1835,7 @@ var __meta__ = {
 
             // split into connected components
             var components = this.graph.getConnectedComponents();
-            if (components.isEmpty()) {
+            if (Utils.isEmpty(components)) {
                 return;
             }
 
@@ -1930,7 +1930,7 @@ var __meta__ = {
             }
             // split into connected components
             var components = graph.getConnectedComponents();
-            if (components.isEmpty()) {
+            if (Utils.isEmpty(components)) {
                 return;
             }
             for (var i = 0; i < components.length; i++) {
