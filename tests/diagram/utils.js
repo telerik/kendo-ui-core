@@ -72,11 +72,11 @@ test('Map', function () {
 
 test('Find', function () {
     var a = ['Niko', 'Miro', 'Swa'];
-    ok(a.find(function (x) {
+    ok(Utils.find(a, function (x) {
         return x == 'Niko';
     }), 'Found Niko.');
 
-    ok(!a.find(function (x) {
+    ok(!Utils.find(a, function (x) {
         return x == 'Itzo';
     }), 'Itzo not supposed to be in there.');
     var stuff = [
@@ -84,7 +84,7 @@ test('Find', function () {
         {"name": "Ian", "age": 47},
         {"name": "Mary", "age": 27}
     ];
-    var first = stuff.find(function (item) {
+    var first = Utils.find(stuff, function (item) {
         return item["name"] == "Ian";
     });
     ok(first && first["age"] == 12);

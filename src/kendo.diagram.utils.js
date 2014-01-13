@@ -245,19 +245,17 @@ var __meta__ = {
         return acc;
     };
 
-    if (!Array.prototype.find) {
-        Array.prototype.find = function (iterator, context) {
-            var result;
-            Utils.any(this, function (value, index, list) {
-                if (iterator.call(context, value, index, list)) {
-                    result = value;
-                    return true;
-                }
-                return false;
-            });
-            return result;
-        };
-    }
+    Utils.find = function (arr, iterator, context) {
+        var result;
+        Utils.any(arr, function (value, index, list) {
+            if (iterator.call(context, value, index, list)) {
+                result = value;
+                return true;
+            }
+            return false;
+        });
+        return result;
+    };
 
     if (!Array.prototype.first) {
         Array.prototype.first = function (constraint, context) {

@@ -2092,7 +2092,7 @@ var __meta__ = {
                 throw "No identifier or Node specified.";
             }
             if (Utils.isString(nodeOrId)) {
-                return this.nodes.find(function (n) {
+                return Utils.find(this.nodes, function (n) {
                     return n.id == nodeOrId;
                 });
             }
