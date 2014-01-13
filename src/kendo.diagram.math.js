@@ -1312,7 +1312,7 @@ var __meta__ = {
             var children = [];
             for (var i = 0, len = this.outgoing.length; i < len; i++) {
                 var link = this.outgoing[i];
-                children.add(link.getComplement(this));
+                children.push(link.getComplement(this));
             }
             return children;
         },
@@ -1328,7 +1328,7 @@ var __meta__ = {
             var parents = [];
             for (var i = 0, len = this.incoming.length; i < len; i++) {
                 var link = this.incoming[i];
-                parents.add(link.getComplement(this));
+                parents.push(link.getComplement(this));
             }
             return parents;
         },
@@ -1462,10 +1462,10 @@ var __meta__ = {
 
             this.source = sourceFound;
             this.target = targetFound;
-            this.source.links.add(this);
-            this.target.links.add(this);
-            this.source.outgoing.add(this);
-            this.target.incoming.add(this);
+            this.source.links.push(this);
+            this.target.links.push(this);
+            this.source.outgoing.push(this);
+            this.target.incoming.push(this);
             if (Utils.isDefined(id)) {
                 this.id = id;
             }
@@ -1845,9 +1845,9 @@ var __meta__ = {
 
             var visited = [];
             var remaining = [];
-            tree.nodes.add(tree.root);
-            visited.add(root);
-            remaining.add(root);
+            tree.nodes.push(tree.root);
+            visited.push(root);
+            remaining.push(root);
 
             var levelCount = 1;
             while (remaining.length > 0) {
@@ -1864,10 +1864,10 @@ var __meta__ = {
                         levelCount = cn.level + 1;
                     }
                     if (!contains(remaining, cn)) {
-                        remaining.add(cn);
+                        remaining.push(cn);
                     }
                     if (!contains(visited, cn)) {
-                        visited.add(cn);
+                        visited.push(cn);
                     }
                     if (map.containsKey(next)) {
                         source = map.get(next);
@@ -1895,12 +1895,12 @@ var __meta__ = {
 
             var treeLevels = [];
             for (var i = 0; i < levelCount; i++) {
-                treeLevels.add([]);
+                treeLevels.push([]);
             }
 
             for (i = 0; i < tree.nodes.length; i++) {
                 var node = tree.nodes[i];
-                treeLevels[node.level].add(node);
+                treeLevels[node.level].push(node);
             }
 
             tree.treeLevels = treeLevels;
@@ -2206,7 +2206,7 @@ var __meta__ = {
             if (Utils.isDefined(owner)) {
                 newNode.owner = owner;
             }
-            this.nodes.add(newNode);
+            this.nodes.push(newNode);
             return newNode;
         },
 
@@ -2310,7 +2310,7 @@ var __meta__ = {
         _dftIterator: function (node, action, visited) {
 
             action(node);
-            visited.add(node);
+            visited.push(node);
             var children = node.getChildren();
             for (var i = 0, len = children.length; i < len; i++) {
                 var child = children[i];
@@ -2346,7 +2346,7 @@ var __meta__ = {
             while (queue.length > 0) {
                 var node = queue.dequeue();
                 action(node);
-                visited.add(node);
+                visited.push(node);
                 var children = node.getChildren();
                 for (var i = 0, len = children.length; i < len; i++) {
                     var child = children[i];
@@ -2393,11 +2393,11 @@ var __meta__ = {
                 var component = [];
                 do {
                     next = stack.pop();
-                    component.add(next);
+                    component.push(next);
                 }
                 while (next !== node);
                 if (!excludeSingleItems || (component.length > 1)) {
-                    connected.add(component);
+                    connected.push(component);
                 }
             }
         },
@@ -2470,7 +2470,7 @@ var __meta__ = {
                             continue;
                         }
                         var rev = link.reverse();
-                        result.add(rev);
+                        result.push(rev);
                     }
                 }
                 return result;
@@ -2781,9 +2781,9 @@ var __meta__ = {
             var lin = [];
             for (var i = 0, len = graph.links.length; i < len; i++) {
                 var link = graph.links[i];
-                lin.add(link.source.id + "->" + link.target.id);
+                lin.push(link.source.id + "->" + link.target.id);
                 if (addIds) {
-                    lin.add({id: link.id});
+                    lin.push({id: link.id});
                 }
             }
             return lin;
@@ -2945,7 +2945,7 @@ var __meta__ = {
             var root = new Node((++counter).toString());
             g.addNode(root);
             g.root = root;
-            lastAdded.add(root);
+            lastAdded.push(root);
             for (var i = 0; i < levels; i++) {
                 news = [];
                 for (var j = 0; j < lastAdded.length; j++) {
@@ -2953,7 +2953,7 @@ var __meta__ = {
                     for (var k = 0; k < siblingsCount; k++) {
                         var item = new Node((++counter).toString());
                         g.addLink(parent, item);
-                        news.add(item);
+                        news.push(item);
                     }
                 }
                 lastAdded = news;
@@ -2997,7 +2997,7 @@ var __meta__ = {
                         for (var k = 0; k < siblingsCount; k++) {
                             var item = new Node((++counter).toString());
                             g.addLink(parent, item);
-                            news.add(item);
+                            news.push(item);
                         }
                     }
                     lastAdded = news;

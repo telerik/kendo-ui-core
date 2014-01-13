@@ -467,10 +467,10 @@ var __meta__ = {
             if (!s) {
                 return list;
             }
-            list.add(s);
+            list.push(s);
             while (s.parentContainer) {
                 s = s.parentContainer;
-                list.add(s);
+                list.push(s);
             }
             list.reverse();
             return list;
@@ -625,7 +625,7 @@ var __meta__ = {
 
                     // if not visible (and ignoring the invisible ones) or a container we skip
                     if ((this.options.ignoreInvisible && !this._isVisible(shape)) || shape.isContainer) {
-                        this.ignoredShapes.add(shape);
+                        this.ignoredShapes.push(shape);
                         continue;
                     }
                     var node = new Node(shape.id, shape);
@@ -633,7 +633,7 @@ var __meta__ = {
 
                     // the mapping will always contain singletons and the hyperTree will be null
                     this.nodeMap.add(node, [shape]);
-                    this.nodes.add(node);
+                    this.nodes.push(node);
                 }
             }
             else {
@@ -653,7 +653,7 @@ var __meta__ = {
                 var conn = this.diagram.connections[i];
 
                 if (this.isIgnorableItem(conn)) {
-                    this.ignoredConnections.add(conn);
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
 
@@ -662,16 +662,16 @@ var __meta__ = {
 
                 // no layout for floating connections
                 if (!source || !sink) {
-                    this.ignoredConnections.add(conn);
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
 
                 if (contains(this.ignoredShapes, source) && !this.shapeMap.containsKey(source)) {
-                    this.ignoredConnections.add(conn);
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
                 if (contains(this.ignoredShapes, sink) && !this.shapeMap.containsKey(sink)) {
-                    this.ignoredConnections.add(conn);
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
 
@@ -686,7 +686,7 @@ var __meta__ = {
                 var sourceNode = this.mapShape(source);
                 var sinkNode = this.mapShape(sink);
                 if ((sourceNode === sinkNode) || this.areConnectedAlready(sourceNode, sinkNode)) {
-                    this.ignoredConnections.add(conn);
+                    this.ignoredConnections.push(conn);
                     continue;
                 }
 
@@ -696,13 +696,13 @@ var __meta__ = {
                 if (this.options.ignoreContainers) {
                     // much like a floating connection here since at least one end is attached to a container
                     if (sourceNode.isVirtual || sinkNode.isVirtual) {
-                        this.ignoredConnections.add(conn);
+                        this.ignoredConnections.push(conn);
                         continue;
                     }
                     var newEdge = new Link(sourceNode, sinkNode, conn.id, conn);
 
                     this.edgeMap.add(newEdge, [conn]);
-                    this.edges.add(newEdge);
+                    this.edges.push(newEdge);
                 }
                 else {
                     throw "Containers are not supported yet, but stay tuned.";
@@ -1226,7 +1226,7 @@ var __meta__ = {
             var col = []; // list of nodes
             var children = n.children;
             for (i = 0; i < count; ++i) {
-                col.add(children[idx[i]]);
+                col.push(children[idx[i]]);
             }
 
             return col;

@@ -276,10 +276,6 @@ var __meta__ = {
         return arr;
     };
 
-    if (!Array.prototype.add) {
-        Array.prototype.add = Array.prototype.push;
-    }
-
     if (!Array.prototype.isEmpty) {
         Array.prototype.isEmpty = function () {
             return this.length === 0;

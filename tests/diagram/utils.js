@@ -147,7 +147,7 @@ test('all', function () {
     ok(Utils.all(a, function (x) {
         return x == 1;
     }), "All ones.");
-    a.add(2);
+    a.push(2);
     ok(!Utils.all(a, function (x) {
         return x == 1;
     }), "Not all ones.");

@@ -102,7 +102,7 @@
         }
         var vals = [];
         var acc = function (x) {
-            vals.add(x.value);
+            vals.push(x.value);
         };
         ht.forEach(acc);
         ok(vals.length == 10, "Accumulation of ids.");
@@ -178,7 +178,7 @@
         }
         var vals = [];
         var acc = function (k, v) {
-            vals.add(v);
+            vals.push(v);
         };
         dic.forEach(acc);
         ok(vals.length == 10, "Accumulation of ids.");
@@ -187,7 +187,7 @@
 
         vals = [];
         var acc = function (v) {
-            vals.add(v);
+            vals.push(v);
         };
         dic.forEachValue(acc);
         ok(vals.length == 10, "Accumulation of ids.");
@@ -314,7 +314,7 @@
         var g = parse(["0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
         var path = [];
         var acc = function (node) {
-            path.add(node.id);
+            path.push(node.id);
         }
         var n0 = g.getNode("0");
         g.depthFirstTraversal(n0, acc);
@@ -340,7 +340,7 @@
         var g = parse(["0->1", "0->2", "1->3", "1->4", "2->5", "2->6", "3->7"]);
         var path = [];
         var acc = function (node) {
-            path.add(node.id);
+            path.push(node.id);
         }
         var n0 = g.getNode("0");
         g.breadthFirstTraversal(n0, acc);
