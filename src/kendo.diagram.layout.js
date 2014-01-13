@@ -2009,7 +2009,7 @@ var __meta__ = {
             });
 
             var sortedNodes = [];
-            sortedNodes.addRange(layerMap.keys());
+            Utils.addRange(sortedNodes, layerMap.keys());
             sortedNodes.sort(function (o1, o2) {
                 var o1layer = layerMap.get(o1);
                 var o2layer = layerMap.get(o2);
@@ -2146,8 +2146,8 @@ var __meta__ = {
                     for (n = 0; n < classNodes.length; n++) {
                         node = classNodes[n];
                         var neighbors = [];
-                        neighbors.addRange(this.upNodes.get(node));
-                        neighbors.addRange(this.downNodes.get(node));
+                        Utils.addRange(neighbors, this.upNodes.get(node));
+                        Utils.addRange(neighbors, this.downNodes.get(node));
 
                         for (var e = 0; e < neighbors.length; e++) {
                             var neighbor = neighbors[e];
@@ -2204,8 +2204,8 @@ var __meta__ = {
                     for (n = 0; n < classNodes.length; n++) {
                         node = classNodes[n];
                         var neighbors = [];
-                        neighbors.addRange(this.upNodes.get(node));
-                        neighbors.addRange(this.downNodes.get(node));
+                        Utils.addRange(neighbors, this.upNodes.get(node));
+                        Utils.addRange(neighbors, this.downNodes.get(node));
 
                         for (var e = 0; e < neighbors.length; e++) {
                             var neighbor = neighbors[e];
@@ -3561,8 +3561,8 @@ var __meta__ = {
 
             upperLayer.forEach(function (node) {
                 //throw "";
-                temp.addRange(node.incoming);
-                temp.addRange(node.outgoing);
+                Utils.addRange(temp, node.incoming);
+                Utils.addRange(temp, node.outgoing);
             });
 
             for (var ti = 0; ti < temp.length; ti++) {

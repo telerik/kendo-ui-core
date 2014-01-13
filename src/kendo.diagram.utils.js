@@ -350,18 +350,8 @@ var __meta__ = {
         }
     };
 
-    if (!Array.prototype.addRange) {
-        Array.prototype.addRange = function (range) {
-            for (var i = 0; i < range.length; i++) {
-                this.push(range[i]);
-            }
-        };
-    }
-
-    var Easing = {
-        easeInOut: function (pos) {
-            return ((-Math.cos(pos * Math.PI) / 2) + 0.5);
-        }
+    Utils.addRange = function (arr, range) {
+        arr.push.apply(arr, range);
     };
 
     /**
