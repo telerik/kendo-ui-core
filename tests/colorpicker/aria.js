@@ -1,17 +1,19 @@
 (function() {
-    var cp;
+    var colorPicker;
+    var element;
 
-    module("Color tools", {
+    module("colorpalette", {
         setup: function() {
-            cp = $("<div>").kendoColorPalette().data("kendoColorPalette");
+            element = $("<div>").kendoColorPalette();
+            colorPicker = element.data("kendoColorPalette");
         },
         teardown: function() {
-            cp.destroy();
+            colorPicker.destroy();
         }
     });
 
-    test("Simple color selector renders aria-label for each color", function(){
-        cp.element.find(".k-item").each(function(){
+    test("renders aria-label for each color", function(){
+        element.find(".k-item").each(function(){
             var label = $(this).attr("aria-label");
             ok(label, "aria-label defined on cells"); // label defined
             var bg = $(this);
@@ -21,14 +23,24 @@
         });
     });
 
-    test("Simple color selector maintains aria-selected attribute consistent with selection", function(){
-        var items = cp.element.find(".k-item");
-        for (var i = 0; i < 5; ++i) {
-            var index = Math.floor(items.length * Math.random());
-            var cell = $(items[index]);
-            cell.click();
-            var a = cp.element.find("[aria-selected]");
-            ok(a.length == 1 && a[0] === cell[0]);
-        }
+    test("maintains aria-selected attribute consistent with selection", function(){
+        var items = element.find(".k-item");
+
+        equal(element.find("[aria-selected=true]").length, 0);
+
+        items.last().click();
+
+        var selected = element.find("[aria-selected=true]");
+        ok(selected[0] === items.last()[0]);
+        equal(selected.length, 1);
+    });
+
+    test("sets aria-activedescendant based on selection", function() {
+        var lastColor = element.find(".k-item").last();
+
+        lastColor.click();
+
+        ok(element.is("[aria-activedescendant]"));
+        equal(element.attr("aria-activedescendant"), lastColor.attr("id"));
     });
 })();
