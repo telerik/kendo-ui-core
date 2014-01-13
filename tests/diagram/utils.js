@@ -115,28 +115,11 @@ test('Insert', function () {
     deepEqual(b, shouldbe);
 });
 
-test('Prepend', function () {
-    var a = new Range(1, 5);
-    var shouldbe = new Range(0, 5);
-    var b = a.prepend(0);
-    deepEqual(b, shouldbe);
-});
-
 test('Append', function () {
     var a = new Range(1, 5);
     var shouldbe = new Range(1, 6);
     var b = a.append(6);
     deepEqual(b, shouldbe);
-});
-
-test('Apply', function () {
-    var a = new Range(3, 22);
-    var func = function (x, r) {
-        return x + r;
-    };
-    var b = a.apply(func, 3);
-    var shouldbe = new Range(6, 25);
-    deepEqual(b, shouldbe, 'Functional is lovely.');
 });
 
 test('isObject', function () {

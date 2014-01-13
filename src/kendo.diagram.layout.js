@@ -3172,8 +3172,8 @@ var __meta__ = {
                     var points = [];
 
                     // add points in reverse order
-                    points.prepend({ x: link.target.x, y: link.target.y });
-                    points.prepend({ x: link.source.x, y: link.source.y });
+                    points.unshift({ x: link.target.x, y: link.target.y });
+                    points.unshift({ x: link.source.x, y: link.source.y });
 
                     // _dedummify the link
                     var temp = link;
@@ -3182,7 +3182,7 @@ var __meta__ = {
                         var node = temp.source;
                         var prevLink = node.incoming[0];
 
-                        points.prepend({ x: prevLink.source.x, y: prevLink.source.y });
+                        points.unshift({ x: prevLink.source.x, y: prevLink.source.y });
 
                         temp = prevLink;
                     }

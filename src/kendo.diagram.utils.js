@@ -276,32 +276,10 @@ var __meta__ = {
         return arr;
     };
 
-    if (!Array.prototype.prepend) {
-        /**
-         * Inserts the given item at begin of array.
-         */
-        Array.prototype.prepend = function () {
-            this.unshift.apply(this, arguments); // tricky way to prepend any number of arguments. by Niko :)
-            // this.splice(0, 0, x);
-            return this;
-        };
-    }
-
     if (!Array.prototype.append) {
         Array.prototype.append = function (x) {
             this.splice(this.length, 0, x);
             return this;
-        };
-    }
-
-    if (!Array.prototype.apply) {
-        Array.prototype.apply = function (method) {
-            var args = Array.prototype.slice.call(arguments, 1).prepend(0);  // dummy holder at first position to replace in apply below
-            var isFunc = kendo.isFunction(method);
-            return this.map(function (value) {
-                args.splice(0, 1, value);
-                return (isFunc ? method : value[method]).apply(method, args);
-            });
         };
     }
 
