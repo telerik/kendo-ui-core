@@ -21,7 +21,7 @@ var __meta__ = {
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
         DEFAULT_MIN_HOLD = 800,
-        DEFAULT_THRESHOLD = support.browser.ie ? 5 : 0, // WP8 and W8 are very sensitive and always report move.
+        DEFAULT_THRESHOLD = support.browser.msie ? 5 : 0, // WP8 and W8 are very sensitive and always report move.
 
         // UserEvents events
         PRESS = "press",
