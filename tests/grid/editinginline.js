@@ -502,4 +502,60 @@
         grid.saveRow();
         equal(row.find("input").length, 2);
     });
+
+    test("editRow sets static column in edit mode", function() {
+        var grid = setup({
+            columns: [ { field: "foo", static: true }, "name"],
+            editable: "inline"
+        });
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        ok(grid.staticTable.find("tr:first").hasClass("k-grid-edit-row"));
+        ok(grid.staticTable.find("tr:first td").find("input").length);
+    });
+
+    test("same editable instance is attached to static and non static columns", function() {
+        var grid = setup({
+            columns: [ { field: "foo", static: true }, "name"],
+            editable: "inline"
+        });
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        deepEqual(grid.staticTable.find("tr:first").data("kendoEditable"), grid.table.find("tr:first").data("kendoEditable"));
+        deepEqual(grid.staticTable.find("tr:first").data("kendoEditable"), grid.editable);
+    });
+
+    test("edit event is raised with both static and non static row as container", 3, function() {
+        var grid = setup({
+            columns: [ { field: "foo", static: true }, "name"],
+            editable: "inline",
+            edit: function(e) {
+                equal(e.container.length, 2);
+                equal(e.container.eq(0)[0], grid.staticTable.find("tr:first")[0]);
+                equal(e.container.eq(1)[0], grid.table.find("tr:first")[0]);
+            }
+        });
+
+        grid.editRow(grid.table.find("tr:first"));
+    });
+
+    test("cancel event adjusts the height of the edited static and non static row", function() {
+        var grid = setup({
+            columns: [ { field: "foo", static: true, editor: "<textarea style='height:200px'></textarea>"}, "name"],
+            editable: "inline"
+        });
+
+        var originalHeigth = grid.table.find("tr:first").height();
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        grid.cancelRow();
+
+        equal(grid.staticTable.find("tr:first").height(), grid.table.find("tr:first").height());
+        equal(grid.table.find("tr:first").height(), originalHeigth);
+    });
+
+
 })();

@@ -203,12 +203,12 @@
                         height: 430,
                         toolbar: ["create"],
                         columns: [
-                            { field:"ProductName", title: "Product Name", static: true, width: 100 },
+                            { field:"ProductName", title: "Product Name", static: true, width: 100, editor: "<textarea style='height: 200px'></textarea>" },
                             { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "100px" },
                             { field: "UnitsInStock", title:"Units In Stock", width: "200px" },
                             { field: "Discontinued", width: "100px" },
                             { command: ["edit", "destroy"], title: "&nbsp;", width: "160px" }],
-                        editable: "popup"
+                        editable: "inline"
                     });
                 });
             </script>

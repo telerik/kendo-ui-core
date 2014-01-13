@@ -1688,6 +1688,11 @@ var __meta__ = {
                 command,
                 fields = [];
 
+
+            if (that.staticContent) {
+                row = row.add(that._relatedRow(row));
+            }
+
             row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                 cell = $(this);
                 column = that.columns[that.cellIndex(cell)];
@@ -1724,13 +1729,16 @@ var __meta__ = {
 
             that._editContainer = row;
 
-            that.editable = row
-                .addClass("k-grid-edit-row")
-                .kendoEditable({
+            that.editable = new kendo.ui.Editable(row
+                .addClass("k-grid-edit-row"),{
                     fields: fields,
                     model: model,
                     clearContainer: false
-                }).data("kendoEditable");
+                });
+
+            if (row.length > 1) {
+                adjustRowHeight(row[0], row[1]);
+            }
 
             that.trigger(EDIT, { container: row, model: model });
         },
@@ -1780,7 +1788,7 @@ var __meta__ = {
 
                 if (that.staticContent) {
                     related = $((isAlt ? that.staticAltRowTemplate : that.staticRowTemplate)(model));
-                    that._relatedRow(row).replaceWith(related);
+                    that._relatedRow(row.last()).replaceWith(related);
                 }
 
                 tmp = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));

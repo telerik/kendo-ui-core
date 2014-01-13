@@ -259,6 +259,17 @@
         ok(span.eq(1).text(), "invalid");
     });
 
+    test("existing error message element in multiple containers is reused", function() {
+        container.append($('<div></div><div><input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/></div>')),
+        validator = setup(container.find("div"), { errorTemplate: "<span>${message}</span>" });
+        validator.validate();
+
+        var span = container.find("span");
+        ok(!span.eq(0).hasClass("k-invalid-msg"));
+        ok(span.eq(1).hasClass("k-invalid-msg"));
+        ok(span.eq(1).text(), "invalid");
+    });
+
     test("existing error message element container is reused on multiple validate calls", function() {
         container.append($('<input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/>')),
         validator = setup(container, { errorTemplate: "<span>${message}</span>" });
