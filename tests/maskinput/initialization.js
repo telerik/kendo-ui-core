@@ -57,4 +57,16 @@
 
         ok(input.attr("autocomplete"), "off");
     });
+
+    test("MaskInput tokenize specified mask", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0-0"
+        });
+
+        var tokens = maskinput.tokens;
+
+        equal(tokens[0], maskinput.rules["0"]);
+        equal(tokens[1], "-");
+        equal(tokens[2], maskinput.rules["0"]);
+    });
 })();
