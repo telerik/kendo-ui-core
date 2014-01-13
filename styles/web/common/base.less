@@ -235,12 +235,12 @@ html body .k-button-bare.k-upload-button:hover
 }
 
 // outputs background-position in a grid
-.sprite-position(@row, @column) when not (ispixel(@column)) {
-    background-position: (-@row * @grid-size) (-@column * @grid-size);
+.sprite-position(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
+    background-position: (-@row * @size) (-@column * @size);
 }
 
 // outputs background-position and hover state background position
-.sprite-hoverable(@row, @column, @grid-size: 16px) when (ispixel(@column)) {
+.sprite-hoverable(@row, @column, @size: @grid-size) when (ispixel(@column)) {
     .sprite-position(@row, @column);
 
     .k-link:not(.k-state-disabled):hover > &,
@@ -249,12 +249,12 @@ html body .k-button-bare.k-upload-button:hover
     .k-button:hover &,
     .k-textbox:hover &,
     .k-button:active & {
-        .sprite-position(@row - @grid-size, @column);
+        .sprite-position(@row - @size, @column);
     }
 }
 
 // outputs background-position and hover state background position
-.sprite-hoverable-rtl(@row, @column, @grid-size: 16px) when (ispixel(@column)) {
+.sprite-hoverable-rtl(@row, @column, @size: @grid-size) when (ispixel(@column)) {
 
     .k-rtl & {
         .sprite-position(@row, @column);
@@ -266,13 +266,13 @@ html body .k-button-bare.k-upload-button:hover
     .k-rtl .k-button:hover &,
     .k-rtl .k-textbox:hover &,
     .k-rtl .k-button:active & {
-        .sprite-position(@row - @grid-size, @column);
+        .sprite-position(@row - @size, @column);
     }
 }
 
 // outputs background-position and hover state background position, aligned in a grid
-.sprite-hoverable(@row, @column) when not (ispixel(@column)) {
-    .sprite-position(@row, @column);
+.sprite-hoverable(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
+    .sprite-position(@row, @column, @size);
 
     .k-link:not(.k-state-disabled):hover > &,
     .k-state-hover > &,
@@ -280,14 +280,14 @@ html body .k-button-bare.k-upload-button:hover
     .k-button:hover &,
     .k-textbox:hover &,
     .k-button:active & {
-        .sprite-position(@row + 1, @column);
+        .sprite-position(@row + 1, @column, @size);
     }
 }
 
 // outputs background-position and hover state background position, aligned in a grid
-.sprite-hoverable-rtl(@row, @column) when not (ispixel(@column)) {
+.sprite-hoverable-rtl(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
     .k-rtl & {
-        .sprite-position(@row, @column);
+        .sprite-position(@row, @column, @size);
     }
 
     .k-rtl .k-link:not(.k-state-disabled):hover > &,
@@ -296,7 +296,7 @@ html body .k-button-bare.k-upload-button:hover
     .k-rtl .k-button:hover &,
     .k-rtl .k-textbox:hover &,
     .k-rtl .k-button:active & {
-        .sprite-position(@row + 1, @column);
+        .sprite-position(@row + 1, @column, @size);
     }
 }
 

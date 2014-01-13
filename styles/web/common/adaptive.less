@@ -461,13 +461,83 @@
     margin: .26em 1em .26em 0;
 }
 
+.k-ie .km-pane-wrapper .k-icon,
 .k-ie .km-pane-wrapper .k-mobile-list .k-link .k-check,
 .k-ie .km-pane-wrapper .k-mobile-list .k-label .k-check,
 .k-ie .k-mobile-list .k-edit-field [type=checkbox],
 .k-ie .k-mobile-list .k-edit-field [type=radio]
 {
-    width: 12px;
-    height: 12px;
+    font-size: inherit;
+    text-indent: -9999px;
+    width: 1.01em;
+    height: 1em;
+}
+
+/* IE Adaptive icons in em */
+@media screen and (-ms-high-contrast: active)
+              and (-ms-high-contrast: none) {
+    .km-pane-wrapper .k-numerictextbox .k-select .k-link span.k-i-arrow-n  { .sprite-hoverable(0, 0, 1em); }
+    .km-pane-wrapper .k-numerictextbox .k-select .k-link span.k-i-arrow-s { .sprite-hoverable(0, 2, 1em); }
+    .km-pane-wrapper .k-state-selected .k-i-arrow-n { .sprite-hoverable(1, 0, 1em); }
+    .km-pane-wrapper .k-numerictextbox .k-link.k-state-selected span.k-i-arrow-n,
+    .k-numerictextbox .k-state-hover .k-link span.k-i-arrow-n  { .sprite-hoverable(1, 0, 1em); }
+    .km-pane-wrapper .k-state-selected .k-i-arrow-s { .sprite-hoverable(1, 2, 1em); }
+    .km-pane-wrapper .k-numerictextbox .k-link.k-state-selected span.k-i-arrow-s,
+    .k-numerictextbox .k-state-hover .k-link span.k-i-arrow-s { .sprite-hoverable(1, 2, 1em); }
+
+    .km-pane-wrapper .k-i-arrow-n { .sprite-hoverable(0, 0, 1em); }
+    .km-pane-wrapper .k-i-arrow-e { .sprite-hoverable(0, 1, 1em); }
+    .km-pane-wrapper .k-i-arrow-w { .sprite-hoverable-rtl(0, 1, 1em); }
+    .km-pane-wrapper .k-i-arrow-s { .sprite-hoverable(0, 2, 1em); }
+    .km-pane-wrapper .k-i-arrow-w { .sprite-hoverable(0, 3, 1em); }
+    .km-pane-wrapper .k-i-arrow-e { .sprite-hoverable-rtl(0, 3, 1em); }
+
+    .km-pane-wrapper .k-i-seek-n { .sprite-hoverable(0, 4, 1em); }
+    .km-pane-wrapper .k-i-seek-e { .sprite-hoverable(0, 5, 1em); }
+    .km-pane-wrapper .k-i-seek-w { .sprite-hoverable-rtl(0, 5, 1em); }
+    .km-pane-wrapper .k-i-seek-s { .sprite-hoverable(0, 6, 1em); }
+    .km-pane-wrapper .k-i-seek-w { .sprite-hoverable(0, 7, 1em); }
+    .km-pane-wrapper .k-i-seek-e { .sprite-hoverable-rtl(0, 7, 1em); }
+
+    .km-pane-wrapper .k-i-arrowhead-n { .sprite-hoverable(0, 16, 1em); }
+    .km-pane-wrapper .k-i-arrowhead-e { .sprite-hoverable(0, 17, 1em); }
+    .km-pane-wrapper .k-i-arrowhead-s { .sprite-hoverable(0, 18, 1em); }
+    .km-pane-wrapper .k-i-arrowhead-w { .sprite-hoverable(0, 19, 1em); }
+
+    .km-pane-wrapper .k-i-expand, .k-plus, .k-plus-disabled { .sprite-hoverable(0, 12, 1em); }
+    .km-pane-wrapper .k-i-expand-w, .k-rtl .k-i-expand, .k-rtl .k-plus, .k-rtl .k-plus-disabled { .sprite-hoverable(0, 13, 1em); }
+    .km-pane-wrapper .k-i-collapse, .k-minus, .k-minus-disabled { .sprite-hoverable(0, 14, 1em); }
+    .km-pane-wrapper .k-i-collapse-w, .k-rtl .k-i-collapse, .k-rtl .k-minus, .k-rtl .k-minus-disabled { .sprite-hoverable(0, 15, 1em); }
+
+    .km-pane-wrapper .k-i-pencil, .k-edit { .sprite-hoverable(2, 0, 1em); }
+    .km-pane-wrapper .k-i-close, .k-delete, .k-group-delete { .sprite-hoverable(2, 1, 1em); }
+    .km-pane-wrapper .k-si-close { .sprite-hoverable(10, 5, 1em); }
+    .km-pane-wrapper .k-multiselect .k-delete { .sprite-position(10, 5, 1em); }
+    .km-pane-wrapper .k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5, 1em); }
+
+    .km-pane-wrapper .k-i-tick, .k-insert, .k-update{ .sprite-hoverable(2, 2, 1em); }
+    .km-pane-wrapper .k-check:checked,
+    .km-pane-wrapper .k-mobile-list .k-edit-field [type=checkbox],
+    .km-pane-wrapper .k-mobile-list .k-edit-field [type=radio] { .sprite-hoverable(2, 2, 1em); }
+
+    .km-pane-wrapper .k-i-cancel, .k-cancel, .k-denied { .sprite-hoverable(2, 3, 1em); }
+    .km-pane-wrapper .k-i-plus, .k-add { .sprite-hoverable(2, 4, 1em); }
+    .km-pane-wrapper .k-i-funnel, .k-filter { .sprite-hoverable(2, 5, 1em); }
+    .km-pane-wrapper .k-i-funnel-clear, .k-clear-filter { .sprite-hoverable(2, 6, 1em); }
+
+    .km-pane-wrapper .k-i-refresh { .sprite-hoverable(2, 7, 1em); }
+    .km-pane-wrapper .k-i-exception { .sprite-hoverable(10, 19, 1em); }
+    .km-pane-wrapper .k-i-restore { .sprite-hoverable(2, 8, 1em); }
+    .km-pane-wrapper .k-i-maximize { .sprite-hoverable(2, 9, 1em); }
+    .km-pane-wrapper .k-i-minimize { .sprite-hoverable(4, 18, 1em); }
+    .km-pane-wrapper .k-i-pin { .sprite-hoverable(10, 16, 1em); }
+    .km-pane-wrapper .k-i-unpin { .sprite-hoverable(10, 17, 1em); }
+    .km-pane-wrapper .k-resize-se { .sprite-hoverable(2, 10, 1em); }
+
+    .km-pane-wrapper .k-i-calendar { .sprite-hoverable(2, 11, 1em); }
+    .km-pane-wrapper .k-i-clock { .sprite-hoverable(2, 12, 1em); }
+    .km-pane-wrapper .k-si-plus { .sprite-hoverable(2, 13, 1em); }
+    .km-pane-wrapper .k-si-minus { .sprite-hoverable(2, 14, 1em); }
 }
 
 .km-pane-wrapper .km-pane .k-mobile-list input:not([type="checkbox"]):not([type="radio"]),
@@ -534,7 +604,7 @@
 
 .km-pane-wrapper .k-scheduler-views
 {
-    width: 300px;
+    width: 18em;
 }
 
 .km-pane-wrapper .k-mobile-list .k-edit-field.k-scheduler-toolbar
@@ -670,7 +740,10 @@
     line-height: 2.4em;
 }
 
-@media all and (max-width: 699px) {
+@media all and (max-width: 699px),
+               (-ms-high-contrast: active) and
+               (-ms-high-contrast: none) and
+               (max-width: 800px) {
     .km-pane-wrapper *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
     .km-pane-wrapper .k-mobile-list select:not([multiple]),
     .km-pane-wrapper .k-mobile-list textarea,
