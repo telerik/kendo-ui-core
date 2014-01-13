@@ -278,9 +278,9 @@
             },
             'Should throw an error since it is neither a Node nor an identifier.'
         );
-        ok(b7.links.isEmpty(), "No links defined yet.");
-        ok(b7.outgoing.isEmpty(), "No links defined yet.");
-        ok(b7.incoming.isEmpty(), "No links defined yet.");
+        ok(Utils.isEmpty(b7.links), "No links defined yet.");
+        ok(Utils.isEmpty(b7.outgoing), "No links defined yet.");
+        ok(Utils.isEmpty(b7.incoming), "No links defined yet.");
         ok(b7.weight == 1, "No weight set by default.");
 
         var ori = new Node();
@@ -413,7 +413,7 @@
         ok(g.nodes.length == 2, "Should still have the nodes.");
         ok(n1.isIsolated(), "Should have no links.");
         ok(n2.isIsolated(), "Should have no links.");
-        ok(g.links.isEmpty(), "No links.");
+        ok(Utils.isEmpty(g.links), "No links.");
         var n3 = new Node("n3");
         var link = new Link(n1, n3);
         g.addLink(link);

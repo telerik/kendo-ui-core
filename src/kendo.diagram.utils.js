@@ -276,10 +276,6 @@ var __meta__ = {
         return arr;
     };
 
-    Utils.isEmpty = function (arr) {
-        return arr.length === 0;
-    };
-
     Utils.all = function (arr, iterator, context) {
         var result = true;
 
@@ -295,29 +291,9 @@ var __meta__ = {
         return result;
     };
 
-    if (!Array.prototype.every) {
-        Array.prototype.every = Array.prototype.all;
-    }
-
-    if (!Array.prototype.shuffle) {
-        /**
-         * Shuffles the elements of this array in a random order.
-         */
-        Array.prototype.shuffle = function () {
-            this.sort(function () {
-                return 0.5 - Math.random();
-            });
-        };
-    }
-
-    if (!Array.prototype.clear) {
-        //why not just setting the variable to []? It causes problems if used as byref argument; it will be another object than the one passed.
-        Array.prototype.clear = function () {
-            while (this.length > 0) {
-                this.pop();
-            }
-        };
-    }
+    Utils.clear = function (arr) {
+        arr.splice(0, arr.length);
+    };
 
     if (!Array.prototype.bisort) {
         /**
@@ -366,8 +342,8 @@ var __meta__ = {
                 });
             }
 
-            a.clear(); // do not set to [], the ref will be gone
-            b.clear();
+            Utils.clear(a);
+            Utils.clear(b);
 
             for (i = 0; i < all.length; i++) {
                 a.push(all[i].x);

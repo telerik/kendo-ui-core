@@ -1686,7 +1686,7 @@ var __meta__ = {
         },
         copy: function () {
             if (this.options.copy.enabled) {
-                this._clipboard.clear();
+                this._clipboard = [];
                 this._copyOffset = 1;
                 for (var i = 0; i < this._selectedItems.length; i++) {
                     var item = this._selectedItems[i];
@@ -1696,7 +1696,7 @@ var __meta__ = {
         },
         cut: function () {
             if (this.options.copy.enabled) {
-                this._clipboard.clear();
+                this._clipboard = [];
                 this._copyOffset = 0;
                 for (var i = 0; i < this._selectedItems.length; i++) {
                     var item = this._selectedItems[i];
