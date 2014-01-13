@@ -167,7 +167,10 @@ kendo_module({
                 colors = $.map(colors, function(x) { return parse(x); });
             }
 
+            this._selectedID = (options.ariaId || kendo.guid()) + "_selected";
+
             element.addClass("k-widget k-colorpalette")
+                .attr("role", "grid")
                 .append($(that._template({
                     colors   : colors,
                     columns  : options.columns,
@@ -212,8 +215,7 @@ kendo_module({
         },
         _keydown: function(e) {
             var selected,
-                that = this,
-                wrapper = that.wrapper,
+                wrapper = this.wrapper,
                 items = wrapper.find(".k-item"),
                 current = items.filter("." + ITEMSELECTEDCLASS).get(0),
                 keyCode = e.keyCode;
@@ -223,9 +225,9 @@ kendo_module({
             } else if (keyCode == KEYS.RIGHT) {
                 selected = relative(items, current, 1);
             } else if (keyCode == KEYS.DOWN) {
-                selected = relative(items, current, that.options.columns);
+                selected = relative(items, current, this.options.columns);
             } else if (keyCode == KEYS.UP) {
-                selected = relative(items, current, -that.options.columns);
+                selected = relative(items, current, -this.options.columns);
             } else if (keyCode == KEYS.ENTER) {
                 preventDefault(e);
                 if (current) {
@@ -238,41 +240,54 @@ kendo_module({
             if (selected) {
                 preventDefault(e);
 
-                selected = $(selected);
-
-                $(current).removeClass(ITEMSELECTEDCLASS).removeAttr("aria-selected");
-
-                selected.addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
+                this._current(selected);
 
                 try {
                     var color = parse(selected.css(BACKGROUNDCOLOR));
-                    that._triggerSelect(color);
+                    this._triggerSelect(color);
                 } catch(ex) {}
             }
         },
-        _updateUI: function(color) {
-            var that = this,
-                el = null;
-
-            that.wrapper.find(".k-item." + ITEMSELECTEDCLASS)
+        _current: function(item) {
+            this.wrapper.find("." + ITEMSELECTEDCLASS)
                 .removeClass(ITEMSELECTEDCLASS)
-                .removeAttr("aria-selected");
+                .attr("aria-selected", false)
+                .removeAttr("id");
 
-            that.wrapper.find(".k-item").each(function(){
+            $(item)
+                .addClass(ITEMSELECTEDCLASS)
+                .attr("aria-selected", true)
+                .attr("id", this._selectedID);
+
+            this.element
+                .removeAttr("aria-activedescendant")
+                .attr("aria-activedescendant", this._selectedID);
+        },
+        _updateUI: function(color) {
+            var item = null;
+
+            this.wrapper.find(".k-item").each(function(){
                 var c = parse($(this).css(BACKGROUNDCOLOR));
 
                 if (c && c.equals(color)) {
-                    el = this;
+                    item = this;
+
+                    return false;
                 }
             });
 
-            $(el).addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
+            this._current(item);
         },
         _template: kendo.template(
             '<table class="k-palette k-reset"><tr>' +
               '# for (var i = 0; i < colors.length; ++i) { #' +
+                '# var selected = colors[i].equals(value); #' +
                 '# if (i && i % columns == 0) { # </tr><tr> # } #' +
-                '<td unselectable="on" style="background-color:#= colors[i].toCss() #" #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #"></td>' +
+                '<td unselectable="on" style="background-color:#= colors[i].toCss() #"' +
+                    'aria-selected=#= selected ? true : false # ' +
+                    '#=(id && i === 0) ? "id=\\""+id+"\\" " : "" # ' +
+                    'class="k-item#= selected ? " ' + ITEMSELECTEDCLASS + '" : "" #" ' +
+                    'aria-label="#= colors[i].toCss() #"></td>' +
               '# } #' +
             '</tr></table>'
         )
