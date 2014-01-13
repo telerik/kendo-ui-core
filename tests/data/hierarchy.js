@@ -600,6 +600,34 @@ test("load calls the read method of the transport after setting loaded to false"
     dataSource.data()[0].load();
 });
 
+test("load calls the read method of the transport after setting loaded to false and items have been destroyed", function() {
+    var dataSource = new HierarchicalDataSource({
+        data: [
+            { hasChildren: true, id: 1 }
+        ],
+        schema: {
+            model: {
+                children: {
+                    transport: {
+                        read: function(options) {
+                            options.success([ { id: 2 }, { id: 3 } ]);
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    dataSource.fetch();
+
+    var root = dataSource.data()[0];
+    root.load();
+    dataSource.remove(dataSource.get(2));
+    root.loaded(false);
+    root.load();
+    equal(root.children.data().length, 2);
+});
+
 test("parentNode returns the parent of a child node", function() {
     var dataSource = categories();
 

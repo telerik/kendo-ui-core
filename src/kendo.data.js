@@ -3513,27 +3513,33 @@ var __meta__ = {
             this[fieldName || "items"] = this.children.data();
         },
 
+        _childrenLoaded: function() {
+            this._loaded = true;
+
+            this._updateChildrenField();
+        },
+
         load: function() {
-            var that = this,
-                options = {};
+            var options = {};
+            var method = "_query";
+            var children;
 
-            if (that.hasChildren) {
-                that._initChildren();
+            if (this.hasChildren) {
+                this._initChildren();
 
-                options[that.idField || "id"] = that.id;
+                children = this.children;
 
-                if (!that._loaded) {
-                    that.children._data = undefined;
+                options[this.idField || "id"] = this.id;
+
+                if (!this._loaded) {
+                    children._data = undefined;
+                    method = "read";
                 }
 
-                that.children.one(CHANGE, function() {
-                            that._loaded = true;
-
-                            that._updateChildrenField();
-                        })
-                        ._query(options);
+                children.one(CHANGE, proxy(this._childrenLoaded, this));
+                children[method](options);
             } else {
-                that.loaded(true);
+                this.loaded(true);
             }
         },
 
