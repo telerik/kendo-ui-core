@@ -324,6 +324,12 @@ namespace :demos do
 
     desc('Build debug demo site')
     task :debug => 'demos/mvc/Kendo.csproj' do |t|
+
+        File.open('demos/mvc/content/all-scripts.txt', 'w') do |file|
+            file.write "jquery.js\n"
+            file.write FileList[YAML.load(`node #{METAJS} --all-deps kendo.all.js`)].join("\n")
+        end
+
         msbuild t.prerequisites[0], '/p:Configuration=Debug'
     end
 

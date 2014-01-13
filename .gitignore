@@ -63,3 +63,4 @@ build/code-reports/internals.html
 .vagrant
 test-results.xml
 debug.js
+demos/mvc/content/all-scripts.txt
