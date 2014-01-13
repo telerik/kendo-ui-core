@@ -95,18 +95,20 @@ namespace Company.KendoBootstrapper
         /// </summary>
         private void ShowToolWindow(object sender, EventArgs e)
         {
+            HashSet<string> extensionsToLint = new HashSet<string>() { ".js", ".aspx", ".html", ".cshtml", ".master", ".ascx" };
+            List<ProjectItem> filesToLint = new List<ProjectItem>();
+
             string npm = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "npm");
 
             foreach (var projectItem in SolutionFiles())
             {
-                //Debug.WriteLine(projectItem.Name);
-                if (projectItem.Name == "Index.cshtml")
+                if (extensionsToLint.Contains(Path.GetExtension(projectItem.Name)))
                 {
-                    Lint(npm, projectItem);
+                    filesToLint.Add(projectItem);
                 }
             }
 
-
+            Lint(npm, filesToLint);
             /*
                         // Get the instance number 0 of this tool window. This window is single instance so this instance
                         // is actually the only one.
@@ -121,77 +123,136 @@ namespace Company.KendoBootstrapper
             */
         }
 
-        private void Lint(string npm, ProjectItem projectItem)
+        private void LintCurrentFile(object sender, EventArgs e)
         {
-            string path = (string)projectItem.Properties.Item("FullPath").Value;
+            string npm = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "npm");
+            List<ProjectItem> filesToLint = new List<ProjectItem>();
 
-            var process = new System.Diagnostics.Process();
+            foreach (SelectedItem selectedItem in DTE.SelectedItems)
+            {
+                filesToLint.Add(selectedItem.ProjectItem);
+            }
 
-            var node = Path.Combine(AssemblyDirectory(), "node", "node");
-            var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
+            Lint(npm, filesToLint);
+        }
 
-            process.StartInfo.FileName = node;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.Arguments = string.Format(@"""{0}"" --html ""{1}""", lint, path);
-            process.Start();
-            process.WaitForExit();
-
-            //OutputWindow outputWindow = (OutputWindow)DTE.Windows.Item(EnvDTE.Constants.vsWindowKindOutput).Object;
-            //outputWindow.ActivePane.Activate();
-            //outputWindow.ActivePane.OutputString(output);
-            // Debug.WriteLine(process.StandardError.ReadToEnd());
-
-            /*
-            ErrorListProvider provider = ErrorProvider;
-            provider.ProviderGuid = Guid.NewGuid();
-            provider.ProviderName = "Kendo Lint";
-
-            provider.Tasks.Clear();
-            */
-
+        private void Lint(string npm, List<ProjectItem> projectItems)
+        {
             OutputPane.Clear();
             OutputPane.Activate();
 
-            while (!process.StandardOutput.EndOfStream)
+            foreach (ProjectItem projectItem in projectItems)
             {
-                var output = process.StandardOutput.ReadLine();
+                string path = (string)projectItem.Properties.Item("FullPath").Value;
 
-                var lineAndColumn = Regex.Match(output, @"\[(\d+),(\d+)\]");
+                var process = new System.Diagnostics.Process();
 
-                var line = Convert.ToInt32(lineAndColumn.Groups[1].Value);
+                var node = Path.Combine(AssemblyDirectory(), "node", "node");
+                var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
 
-                var column = Convert.ToInt32(lineAndColumn.Groups[2].Value);
+                process.StartInfo.FileName = node;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.Arguments = string.Format(@"""{0}"" --html ""{1}""", lint, path);
+                process.Start();
+                process.WaitForExit();
 
-                var message = output.Replace("[", "(").Replace("]", ")");
+                while (!process.StandardOutput.EndOfStream)
+                {
+                    var output = process.StandardOutput.ReadLine();
 
-                var description = message.Split(new[] { "):" }, StringSplitOptions.None).Last();
+                    var lineAndColumn = Regex.Match(output, @"\[(\d+),(\d+)\]");
 
-                OutputPane.OutputTaskItemString(message + Environment.NewLine,
-                    vsTaskPriority.vsTaskPriorityMedium,
-                    "Kendo Lint", vsTaskIcon.vsTaskIconCompile,
-                    path, line, description, true);
+                    var line = Convert.ToInt32(lineAndColumn.Groups[1].Value);
 
-                /*
-                ErrorTask task = new ErrorTask();
+                    var column = Convert.ToInt32(lineAndColumn.Groups[2].Value);
 
-                task.Text = description;
-                task.Document = path;
-                task.Line = line;
-                task.Column = column;
-                task.ErrorCategory = TaskErrorCategory.Warning;
+                    var message = output.Replace("[", "(").Replace("]", ")");
 
-                provider.Tasks.Add(task);
-                */
+                    var description = message.Split(new[] { "):" }, StringSplitOptions.None).Last();
+
+                    OutputPane.OutputTaskItemString(message + Environment.NewLine,
+                        vsTaskPriority.vsTaskPriorityMedium,
+                        "Kendo Lint", vsTaskIcon.vsTaskIconCompile,
+                        path, line, description, true);
+
+                }
             }
-
-            //pane.ForceItemsToTaskList();
-
-            //outputWindow.ActivePane.Activate();
-            //outputWindow.ActivePane.OutputString(output);
         }
+
+        //private void Lint(string npm, ProjectItem projectItem)
+        //{
+        //    string path = (string)projectItem.Properties.Item("FullPath").Value;
+
+        //    var process = new System.Diagnostics.Process();
+
+        //    var node = Path.Combine(AssemblyDirectory(), "node", "node");
+        //    var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
+
+        //    process.StartInfo.FileName = node;
+        //    process.StartInfo.CreateNoWindow = true;
+        //    process.StartInfo.UseShellExecute = false;
+        //    process.StartInfo.RedirectStandardOutput = true;
+        //    process.StartInfo.RedirectStandardError = true;
+        //    process.StartInfo.Arguments = string.Format(@"""{0}"" --html ""{1}""", lint, path);
+        //    process.Start();
+        //    process.WaitForExit();
+
+        //    //OutputWindow outputWindow = (OutputWindow)DTE.Windows.Item(EnvDTE.Constants.vsWindowKindOutput).Object;
+        //    //outputWindow.ActivePane.Activate();
+        //    //outputWindow.ActivePane.OutputString(output);
+        //    // Debug.WriteLine(process.StandardError.ReadToEnd());
+
+        //    /*
+        //    ErrorListProvider provider = ErrorProvider;
+        //    provider.ProviderGuid = Guid.NewGuid();
+        //    provider.ProviderName = "Kendo Lint";
+
+        //    provider.Tasks.Clear();
+        //    */
+
+        //    OutputPane.Clear();
+        //    OutputPane.Activate();
+
+        //    while (!process.StandardOutput.EndOfStream)
+        //    {
+        //        var output = process.StandardOutput.ReadLine();
+
+        //        var lineAndColumn = Regex.Match(output, @"\[(\d+),(\d+)\]");
+
+        //        var line = Convert.ToInt32(lineAndColumn.Groups[1].Value);
+
+        //        var column = Convert.ToInt32(lineAndColumn.Groups[2].Value);
+
+        //        var message = output.Replace("[", "(").Replace("]", ")");
+
+        //        var description = message.Split(new[] { "):" }, StringSplitOptions.None).Last();
+
+        //        OutputPane.OutputTaskItemString(message + Environment.NewLine,
+        //            vsTaskPriority.vsTaskPriorityMedium,
+        //            "Kendo Lint", vsTaskIcon.vsTaskIconCompile,
+        //            path, line, description, true);
+
+        //        /*
+        //        ErrorTask task = new ErrorTask();
+
+        //        task.Text = description;
+        //        task.Document = path;
+        //        task.Line = line;
+        //        task.Column = column;
+        //        task.ErrorCategory = TaskErrorCategory.Warning;
+
+        //        provider.Tasks.Add(task);
+        //        */
+        //    }
+
+        //    //pane.ForceItemsToTaskList();
+            
+        //    //outputWindow.ActivePane.Activate();
+        //    //outputWindow.ActivePane.OutputString(output);
+        //}
 
         private DTE2 dte;
 
@@ -272,6 +333,11 @@ namespace Company.KendoBootstrapper
                 CommandID menuCommandID = new CommandID(GuidList.guidKendoBootstrapperCmdSet, (int)PkgCmdIDList.IdKendoLintCommand);
                 MenuCommand menuItem = new MenuCommand(ShowToolWindow, menuCommandID);
                 mcs.AddCommand(menuItem);
+
+                //Create the command for the context menu item
+                CommandID contextCommandID = new CommandID(GuidList.guidKendoBootstrapperCmdSet, (int)PkgCmdIDList.IdKendoLintCommandContext);
+                MenuCommand contextCommand = new MenuCommand(LintCurrentFile, contextCommandID);
+                mcs.AddCommand(contextCommand);
 
                 // Create the command for the tool window
                 CommandID toolwndCommandID = new CommandID(GuidList.guidKendoBootstrapperCmdSet, (int)PkgCmdIDList.cmdidMyTool);

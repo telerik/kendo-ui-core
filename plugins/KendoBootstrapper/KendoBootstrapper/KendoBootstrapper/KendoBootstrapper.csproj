@@ -450,6 +450,7 @@
   <ItemGroup>
     <VSCTCompile Include="KendoBootstrapper.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>

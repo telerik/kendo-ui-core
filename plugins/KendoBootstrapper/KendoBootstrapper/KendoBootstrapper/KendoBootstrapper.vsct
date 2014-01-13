@@ -15,6 +15,14 @@
           <CommandName>Kendo UI Bootstrapper</CommandName>
         </Strings>
       </Menu>
+      
+      <!--<Menu guid="guidKendoBootstrapperCmdSet" type="Menu" id="IdKendoBootstrapperContextMenu" priority="0x0100">
+        <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroupContext" />
+        <CommandFlag>AlwaysCreate</CommandFlag>
+        <Strings>
+          <ButtonText>Lint Context Test</ButtonText>
+        </Strings>
+      </Menu>-->
     </Menus>
     
     <Groups>
@@ -22,21 +30,35 @@
         <Parent guid="guidTelerik_CommonPackageCmdSet" id="TelerikMainMenu"/>
       </Group>
       
-      <Group guid="guidKendoBootstrapperCmdSet" id="IdKendoBootStrapperCommandsGroup" priority="0x0600">
+      <Group guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperCommandsGroup" priority="0x0600">
         <Parent guid="guidKendoBootstrapperCmdSet" id="IdMenuKendoBootstrapper"/>
+      </Group>
+
+      <!-- Context menu groups -->
+      <Group guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroupContext" priority="0x0100">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
       </Group>
     </Groups>
     
     <Buttons>
       <Button type="Button" guid="guidKendoBootstrapperCmdSet" id="IdKendoLintCommand" priority="0x0100">
-        <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootStrapperCommandsGroup" />
+        <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperCommandsGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <CommandName>Kendo Lint</CommandName>
-          <ButtonText>Kendo Lint</ButtonText>
+          <CommandName>Lint Solution</CommandName>
+          <ButtonText>Lint Solution</ButtonText>
         </Strings>
       </Button>
 
+      <Button type="Button" guid="guidKendoBootstrapperCmdSet" id="IdKendoLintCommandContext" priority="0x0100">
+        <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroupContext" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <CommandName>Lint selected file</CommandName>
+          <ButtonText>Lint selected file</ButtonText>
+        </Strings>
+      </Button>
+      
       <!--<Button guid="guidKendoBootstrapperCmdSet" id="cmdidMyTool" priority="0x0100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
         <Icon guid="guidImages" id="bmpPic2" />
@@ -59,11 +81,19 @@
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidKendoBootstrapperCmdSet" value="{be6bca02-8fe6-4d9e-8f12-c66589190e94}">
       
+      <!-- Top Level Group and Menu in the main Telerik menu -->
       <IDSymbol name="IdKendoBootstrapperGroup" value="0x1020"/>
       <IDSymbol name="IdMenuKendoBootstrapper" value="0x1000" />
       
-      <IDSymbol name="IdKendoBootStrapperCommandsGroup" value="0x1030" />
+      <!-- Groups and commands that are in the KendoBootstrapper submenu -->
+      <IDSymbol name="IdKendoBootstrapperCommandsGroup" value="0x1030" />
       <IDSymbol name="IdKendoLintCommand" value="0x0100" />
+      
+      <!-- Context Menu entries -->
+      <IDSymbol name="IdKendoBootstrapperContextMenu" value="0x2000" />
+      <IDSymbol name="IdKendoBootstrapperGroupContext" value="0x2100" />
+      <IDSymbol name="IdKendoBootstrapperTestContext" value="0x2110" />
+      <IDSymbol name="IdKendoLintCommandContext" value="0x2120" />
       
       <IDSymbol name="cmdidMyTool" value="0x0101" />
     </GuidSymbol>
