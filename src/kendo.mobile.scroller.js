@@ -480,6 +480,7 @@ kendo_module({
             that.hintContainer.html(that.pullTemplate({}));
             that.yinertia.onEnd();
             that.xinertia.onEnd();
+            that.userEvents.cancel();
         },
 
         destroy: function() {
