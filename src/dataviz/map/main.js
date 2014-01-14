@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./layers/marker" ], f);
+    define([ "./main" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -18,7 +18,7 @@
         dataviz = kendo.dataviz,
         Attribution = dataviz.ui.Attribution,
         Navigator = dataviz.ui.Navigator,
-        Zoom = dataviz.ui.Zoom,
+        ZoomControl = dataviz.ui.ZoomControl,
         defined = dataviz.defined,
 
         g = dataviz.geometry,
@@ -71,10 +71,11 @@
         options: {
             name: "Map",
             controls: {
+                attribution: true,
                 navigator: {
                     panStep: 100
                 },
-                attribution: true
+                zoom: true
             },
             layers: [],
             layerDefaults: {
@@ -132,8 +133,8 @@
                 this.attribution.destroy();
             }
 
-            if (this.zoomControls) {
-                this.zoomControls.destroy();
+            if (this.zoomControl) {
+                this.zoomControl.destroy();
             }
 
             Widget.fn.destroy.call(this);
@@ -289,6 +290,15 @@
             if (Attribution && controls.attribution) {
                 this._createAttribution(controls.attribution);
             }
+
+            if (ZoomControl && controls.zoom) {
+                this._createZoomControl(controls.zoom);
+            }
+        },
+
+        _createAttribution: function(options) {
+            var element = $(doc.createElement("div")).appendTo(this.element);
+            this.attribution = new Attribution(element, options);
         },
 
         _createNavigator: function(options) {
@@ -325,9 +335,16 @@
             this.center(this.options.center);
         },
 
-        _createAttribution: function(options) {
+        _createZoomControl: function(options) {
             var element = $(doc.createElement("div")).appendTo(this.element);
-            this.attribution = new Attribution(element, options);
+            var zoomControl = this.zoomControl = new ZoomControl(element, options);
+
+            this._zoomControlChange = proxy(this._zoomControlChange, this);
+            zoomControl.bind("change", this._zoomControlChange);
+        },
+
+        _zoomControlChange: function(e) {
+            this.zoom(this.zoom() + e.delta);
         },
 
         _initScroller: function() {
