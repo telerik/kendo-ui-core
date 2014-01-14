@@ -21,7 +21,8 @@
                         start: onStart,
                         move: onMove,
                         end: onEnd,
-                        change: onChange
+                        change: onChange,
+                        cancel: onCancel
                     });
 
                     $("#sortable-right").kendoSortable({
@@ -29,7 +30,8 @@
                         start: onStart,
                         move: onMove,
                         end: onEnd,
-                        change: onChange
+                        change: onChange,
+                        cancel: onCancel
                     });
                 });
 
@@ -63,6 +65,10 @@
 
                     kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
                     console.log(e.action);
+                }
+
+                function onCancel(e) {
+                    kendoConsole.log("cancel");
                 }
 
             </script>
