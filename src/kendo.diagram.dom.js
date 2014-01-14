@@ -701,7 +701,7 @@ var __meta__ = {
             visualTemplate = shapeOptions.data; // Shape visual should not have position in its parent group.
 
         // if external serializationSource we need to consult the attached libraries
-        if (!kendo.isFunction(shapeOptions.data) && shapeOptions.hasOwnProperty("serializationSource") && shapeOptions["serializationSource"] === "external") {
+        if (!kendo.isFunction(shapeOptions.data) && shapeOptions.hasOwnProperty("serializationSource") && shapeOptions.serializationSource === "external") {
             // shapeOptions.diagram is set when the diagram starts deserializing
             if (diagram.libraries && diagram.libraries.length > 0) {
                 for (var i = 0; i < diagram.libraries.length; i++) {
