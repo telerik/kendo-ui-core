@@ -943,9 +943,9 @@ var __meta__ = {
                 if (this._isInputTypeColor() || value.a == 1) {
                     // seems that input type="color" doesn't support opacity
                     // in colors; the only accepted format is hex #RRGGBB
-                    formattedValue = value.toCss()
+                    formattedValue = value.toCss();
                 } else {
-                    formattedValue = value.toCssRgba()
+                    formattedValue = value.toCssRgba();
                 }
 
                 this.element.val(formattedValue);
