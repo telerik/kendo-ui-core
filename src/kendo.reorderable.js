@@ -12,6 +12,7 @@ var __meta__ = {
 
 (function ($, undefined) {
     var kendo = window.kendo,
+        getOffset = kendo.getOffset,
         Widget = kendo.ui.Widget,
         CHANGE =  "change",
         KREORDERABLE = "k-reorderable";
@@ -44,7 +45,8 @@ var __meta__ = {
 
             that.reorderDropCue = $('<div class="k-reorder-cue"><div class="k-icon k-i-arrow-s"></div><div class="k-icon k-i-arrow-n"></div></div>');
 
-            element.find(draggable.options.filter).kendoDropTarget({
+            var elements = element.find(draggable.options.filter);
+            elements.kendoDropTarget({
                 group: draggable.options.group,
                 dragenter: function(e) {
                     if (!that._draggable) {
@@ -56,12 +58,21 @@ var __meta__ = {
 
                     toggleHintClass(e.draggable.hint, same);
                     if (!same) {
-                        offset = kendo.getOffset(dropTarget);
+                        offset = getOffset(dropTarget);
+                        var left = offset.left;
+
+                        if (options.inSameContainer && !options.inSameContainer(dropTarget, that._draggable)) {
+                            that._dropTarget = dropTarget;
+                        } else {
+                            if (elements.index(dropTarget) > elements.index(that._draggable)) {
+                                left += dropTarget.outerWidth();
+                            }
+                        }
 
                         that.reorderDropCue.css({
                              height: dropTarget.outerHeight(),
                              top: offset.top,
-                             left: offset.left + (dropTarget.index() > that._draggable.index() ? dropTarget.outerWidth() : 0)
+                             left: left
                         })
                         .appendTo(document.body);
                     }
@@ -69,28 +80,34 @@ var __meta__ = {
                 dragleave: function(e) {
                     toggleHintClass(e.draggable.hint, true);
                     that.reorderDropCue.remove();
+                    that._dropTarget = null;
                 },
                 drop: function() {
+                    that._dropTarget = null;
                     if (!that._draggable) {
                         return;
                     }
+                    var dropTarget = this.element;
+                    var draggable = that._draggable;
+                    var containerChange = false;
 
-                    var draggableElement = that._draggable[0],
-                        dropTarget = this.element[0],
-                        container;
+                    if (draggable[0] !== dropTarget[0]) {
+                        if (options.inSameContainer) {
+                            containerChange = !options.inSameContainer(dropTarget, draggable);
+                        }
 
-                    if (draggableElement !== dropTarget) {
-                        container = element.find(draggable.options.filter);
                         that.trigger(CHANGE, {
                             element: that._draggable,
-                            oldIndex: container.index(draggableElement),
-                            newIndex: container.index(dropTarget)
+                            oldIndex: elements.index(draggable),
+                            newIndex: elements.index(dropTarget),
+                            containerChange: containerChange,
+                            position: getOffset(that.reorderDropCue).left > getOffset(dropTarget).left ? "after" : "before"
                         });
                     }
                 }
             });
 
-            draggable.bind([ "dragcancel", "dragend", "dragstart" ],
+            draggable.bind([ "dragcancel", "dragend", "dragstart", "drag" ],
                 {
                     dragcancel: function() {
                         that.reorderDropCue.remove();
@@ -102,6 +119,20 @@ var __meta__ = {
                     },
                     dragstart: function(e) {
                         that._draggable = e.currentTarget;
+                    },
+                    drag: function(e) {
+                        if (!that._dropTarget || this.hint.find(".k-drag-status").hasClass("k-denied")) {
+                            return;
+                        }
+
+                        var dropStartOffset = getOffset(that._dropTarget).left;
+                        var width = that._dropTarget.outerWidth();
+
+                        if (e.pageX > dropStartOffset + width / 2) {
+                            that.reorderDropCue.css({ left: dropStartOffset + width });
+                        } else {
+                            that.reorderDropCue.css({ left: dropStartOffset });
+                        }
                     }
                 }
             );
@@ -136,3 +167,4 @@ var __meta__ = {
 return window.kendo;
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+
