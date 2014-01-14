@@ -13,7 +13,7 @@ KENDO_META = File.join(Rake.application.original_dir, "build", "kendo-meta.js");
 namespace :download_builder do
 
     task :sources do
-        sh "grunt kendo:download_builder"
+        sh "./node_modules/.bin/grunt kendo:download_builder"
         core = File.join(BUILDER_DEPLOY_PATH, 'js/kendo.core.min.js')
 
         contents = File.read(core)
