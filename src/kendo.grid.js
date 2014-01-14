@@ -2767,6 +2767,8 @@ var __meta__ = {
                     }
                     this.staticHeader.width(width);
                     this.staticContent.width(width);
+                    this.content.width(this.wrapper.width() - width - 1);
+
                     if (this.staticFooter) {
                         this.staticFooter.width(width);
                     }
@@ -2822,10 +2824,11 @@ var __meta__ = {
 
                 if (isGridHeightSet(that.wrapper)) { // set content height only if needed
                     if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
-                        that.content.height(height);
                         if (that.staticContent) {
-                            that.staticContent.height(height - scrollbar);
+                            that.staticContent.height(height - (that.content[0].offsetHeight - that.content[0].clientHeight > 0 ? scrollbar : 0));
                         }
+
+                        that.content.height(height);
                     } else {
                         that.content.height(scrollbar * 2 + 1);
                     }
