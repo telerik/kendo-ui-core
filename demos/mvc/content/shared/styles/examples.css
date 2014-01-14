@@ -1385,10 +1385,11 @@ p#copy
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
-    padding: 7px 11px 8px;
+    padding: 8px 1px;
     font-weight: normal;
     margin: 22px 0 0 3px;
     font-size: 12px;
+    vertical-align: bottom;
 }
 
 .k-theme-chooser,
@@ -1413,7 +1414,7 @@ p#copy
 .k-theme-chooser .tc-link
 {
     vertical-align: middle;
-    line-height: 23px;
+    line-height: 24px;
     padding: 0 4px 0 8px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -1620,7 +1621,8 @@ p#copy
 #example
 {
     position:relative;
-    padding:15px 0 18px 0;
+    padding:0;
+    margin: 15px 0;
     min-height:200px;
     font-size: 12px;
 }
@@ -1639,11 +1641,11 @@ p#copy
 {
     margin: 0 auto 15px auto;
     padding: 10px;
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    /*-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.2);
-    -moz-border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);*/
+    border: 1px solid rgba(0,0,0,0.05);
+    /*-moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
     background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.07) 100%);
@@ -1651,7 +1653,8 @@ p#copy
     background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
     background: -o-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
     background: -ms-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);*/
+    background-color: rgba(0,0,0,0.01)
 }
 
 .demo-section h2
@@ -2145,11 +2148,11 @@ pre.prettyprint
     float: right;
     margin: 0 0 0 15px;
     padding: 0 10px 10px 10px;
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    /*-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.2);
-    -moz-border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);*/
+    border: 1px solid rgba(0,0,0,0.1);
+    /*-moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
     background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.07) 100%);
@@ -2157,7 +2160,8 @@ pre.prettyprint
     background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
     background: -o-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
     background: -ms-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);*/
+    background-color: rgba(0,0,0,0.01);
     min-width: 170px;
     max-width: 300px;
 }
@@ -2177,8 +2181,8 @@ pre.prettyprint
     position: static;
     height: auto;
     min-height: 0;
-    max-width: 700px;
-    margin: 0 auto 15px auto;
+    max-width: 948px;
+    margin: 0 auto;
     float:none;
     zoom: 1;
 }
@@ -2810,23 +2814,12 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 .chart-wrapper,
 .map-wrapper {
     position: relative;
-    width: 700px;
-    height: 430px;
-    margin: 0 auto 15px auto;
+    width: 948px;
+    height: 470px;
+    margin: 0 auto;
     padding: 10px;
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.2);
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.07) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.01)), color-stop(100%,rgba(0,0,0,0.07)));
-    background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
-    background: -o-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
-    background: -ms-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
-    background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.07) 100%);
+    border: 1px solid rgba(0,0,0,0.05);
+    background-color: rgba(0,0,0,0.01)
 }
 
 #example.absConf .chart-wrapper,
@@ -2837,8 +2830,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 .chart-wrapper .k-chart,
 .map-wrapper .k-map {
-    width: 700px;
-    height: 430px;
+    width: 948px;
+    height: 470px;
 }
 
 #device-wrapper {
@@ -3257,12 +3250,8 @@ div.old-browser
     border-radius: 2px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#e2e2e2));
-    background-image: -moz-linear-gradient(bottom, #e2e2e2, #f5f5f5);
-    background-image: -o-linear-gradient(bottom, #e2e2e2, #f5f5f5);
-    background-image: -ms-linear-gradient(bottom, #e2e2e2, #f5f5f5);
-    box-shadow: inset 0 1px 0 #fff, 0 0 0 1px rgba(0,0,0,0.1), 0 1px 0 1px rgba(0,0,0,0.1), 0 1px 0 rgba(0,0,0,0.3);
-    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    background: #eee;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,0.1), 0 2px 0 rgba(0,0,0,0.1);
 }
 .widest {}
 .wider {}
