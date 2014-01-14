@@ -24,10 +24,6 @@
         LessTheme.prototype._updateStyleSheet(cssText, doc);
     }
 
-    sandboxed_test("themebuilder object is available", function(wnd, doc, $) {
-        ok(typeof wnd.kendo.ThemeBuilder == "function");
-    });
-
     sandboxed_test("updateStyleSheet() adds CSS to document", function(wnd, doc, $) {
         updateStyleSheet(".foo { font-size: 8px; }", doc);
 
