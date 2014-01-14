@@ -2224,6 +2224,7 @@ var __meta__ = {
                 try {
                     that._preventRefresh = true;
                     event.update(eventInfo);
+                    that._convertDates(event);
                 } finally {
                     that._preventRefresh = false;
                 }
