@@ -29,6 +29,7 @@ var __meta__ = {
         LEFT = "left",
         BOTTOM = "bottom",
         RIGHT = "right",
+        UP = "up",
         NS = ".kendoNotification",
         WRAPPER = '<div class="k-widget k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
@@ -123,7 +124,7 @@ var __meta__ = {
                     origin = TOP + " " + LEFT;
                     position = TOP + " " + RIGHT;
                 break;
-                case "up":
+                case UP:
                     origin = TOP + " " + LEFT;
                     position = BOTTOM + " " + LEFT;
                 break;
@@ -142,8 +143,38 @@ var __meta__ = {
             that._popupPosition = position;
         },
 
-        _attachEvents: function() {
+        _attachPopupEvents: function(options, popup) {
+            var that = this,
+                allowHideAfter = options.allowHideAfter,
+                attachDelay = !isNaN(allowHideAfter) && allowHideAfter > 0,
+                closeIcon;
 
+            function attachClick(target) {
+                target.on(CLICK + NS, function() {
+                    popup.close();
+                });
+            }
+
+            if (options.hideOnClick) {
+                popup.bind("activate", function(e) {
+                    if (attachDelay) {
+                        setTimeout(function(){
+                            attachClick(popup.element);
+                        }, allowHideAfter);
+                    } else {
+                        attachClick(popup.element);
+                    }
+                });
+            } else if (options.button) {
+                closeIcon = popup.element.find(KICLOSE);
+                if (attachDelay) {
+                    setTimeout(function(){
+                        attachClick(closeIcon);
+                    }, allowHideAfter);
+                } else {
+                    attachClick(closeIcon);
+                }
+            }
         },
 
         _showPopup: function(wrapper, options) {
@@ -173,47 +204,16 @@ var __meta__ = {
                 }
             });
 
-            that._attachEvents();
-
-            /// start
-
-            attachClick = function(target) {
-                target.on(CLICK + NS, function() {
-                    popup.close();
-                });
-            };
-
-            if (options.hideOnClick) {
-                popup.bind("activate", function(e) {
-                    if (!isNaN(allowHideAfter) && allowHideAfter > 0) {
-                        setTimeout(function(){
-                            attachClick(popup.element);
-                        }, allowHideAfter);
-                    } else {
-                        attachClick(popup.element);
-                    }
-                });
-            } else if (options.button) {
-                closeIcon = popup.element.find(KICLOSE);
-                if (!isNaN(allowHideAfter) && allowHideAfter > 0) {
-                    setTimeout(function(){
-                        attachClick(closeIcon);
-                    }, allowHideAfter);
-                } else {
-                    attachClick(closeIcon);
-                }
-            }
-
-            /// end
+            that._attachPopupEvents(options, popup);
 
             if (openPopup[0]) {
                 popup.open();
             } else {
-                if (x == null) {
+                if (x === null) {
                     x = $(window).width() - wrapper.width() - options.position.right;
                 }
 
-                if (y == null) {
+                if (y === null) {
                     y = $(window).height() - wrapper.height() - options.position.bottom;
                 }
 
@@ -248,11 +248,39 @@ var __meta__ = {
             });
         },
 
+        _attachStaticEvents: function(options, wrapper) {
+            var that = this,
+                allowHideAfter = options.allowHideAfter,
+                attachDelay = !isNaN(allowHideAfter) && allowHideAfter > 0;
+
+            function attachClick(target) {
+                target.on(CLICK + NS, proxy(that._hideStatic, that, wrapper));
+            }
+
+            if (options.hideOnClick) {
+                if (attachDelay) {
+                    setTimeout(function(){
+                        attachClick(wrapper);
+                    }, allowHideAfter);
+                } else {
+                    attachClick(wrapper);
+                }
+            } else if (options.button) {
+                if (attachDelay) {
+                    setTimeout(function(){
+                        attachClick(wrapper.find(KICLOSE));
+                    }, allowHideAfter);
+                } else {
+                    attachClick(wrapper.find(KICLOSE));
+                }
+            }
+        },
+
         _showStatic: function(wrapper, options) {
             var that = this,
                 autoHideAfter = options.autoHideAfter,
                 animation = options.animation,
-                insertionMethod = options.stacking == "up" || options.stacking == "left" ? "prependTo" : "appendTo",
+                insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo",
                 attachClick;
 
             wrapper
@@ -261,21 +289,7 @@ var __meta__ = {
                 .hide()
                 .kendoAnimate(animation.open);
 
-            that._attachEvents();
-
-            /// start
-
-            attachClick = function(target) {
-                target.on(CLICK + NS, proxy(that._hideStatic, that, wrapper));
-            };
-
-            if (options.hideOnClick) {
-                attachClick(wrapper);
-            } else if (options.button) {
-                attachClick(wrapper.find(KICLOSE));
-            }
-
-            /// end
+            that._attachStaticEvents(options, wrapper);
 
             if (autoHideAfter > 0) {
                 setTimeout(function(){
@@ -319,7 +333,7 @@ var __meta__ = {
 
                 wrapper
                     .addClass(KNOTIFICATION + "-" + type)
-                    .toggleClass("k-notification-button", options.button)
+                    .toggleClass(KNOTIFICATION + "-button", options.button)
                     .css({width: options.width, height: options.height})
                     .append(that._getCompiled(type)(args));
                 
