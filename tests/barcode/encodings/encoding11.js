@@ -24,21 +24,21 @@
             expectedResult.push(options.quietZoneLength);
         }
 
-        expectedResult.push.apply(START);
+        expectedResult.push.apply(expectedResult, START);
         expectedResult.push(GAP);
         for( var i = 0; i < value.length; i++){
-            expectedResult.push.apply(characters[value.charAt(i)]);
+            expectedResult.push.apply(expectedResult, characters[value.charAt(i)]);
             expectedResult.push(GAP);
         }
 
         if(options.checkValues){
             for(var i = 0; i< options.checkValues.length; i++){
-                expectedResult.push.apply(characters[options.checkValues[i]]);
+                expectedResult.push.apply(expectedResult, characters[options.checkValues[i]]);
                 expectedResult.push(GAP);
             }
         }
 
-        expectedResult.push.apply(START);
+        expectedResult.push.apply(expectedResult, START);
 
         if(options.quietZoneLength){
             expectedResult.push(options.quietZoneLength);

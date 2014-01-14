@@ -54,15 +54,15 @@
             expectedResult.push(options.quietZoneLength);
         }
 
-        expectedResult.push.apply(characters.START(ratio));
+        expectedResult.push.apply(expectedResult, characters.START(ratio));
         expectedResult.push(characters.GAP);
 
         for( var i = 0; i < value.length; i++){
-            expectedResult.push.apply(characters[value.charCodeAt(i)](ratio));
+            expectedResult.push.apply(expectedResult, characters[value.charCodeAt(i)](ratio));
             expectedResult.push(characters.GAP);
         }
 
-        expectedResult.push.apply(characters.START(encoding.ratio));
+        expectedResult.push.apply(expectedResult, characters.START(encoding.ratio));
 
         if(options.quietZoneLength){
             expectedResult.push(options.quietZoneLength);

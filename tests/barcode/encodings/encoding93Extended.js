@@ -65,23 +65,23 @@
             expectedResult.push(options.quietZoneLength);
         }
 
-        expectedResult.push.apply(characters.START);
+        expectedResult.push.apply(expectedResult, characters.START);
 
         for( var i = 0; i < value.length; i++){
-            expectedResult.push.apply(characters[value.charCodeAt(i)]);
+            expectedResult.push.apply(expectedResult, characters[value.charCodeAt(i)]);
         }
 
         for( var i = 0; i < options.checkCharacters.length; i++){
             if(options.checkCharacters[i].length > 1){
-                expectedResult.push.apply(characters[options.checkCharacters[i]]);
+                expectedResult.push.apply(expectedResult, characters[options.checkCharacters[i]]);
             }
             else{
-                expectedResult.push.apply(characters[options.checkCharacters[i].charCodeAt(0)]);
+                expectedResult.push.apply(expectedResult, characters[options.checkCharacters[i].charCodeAt(0)]);
             }
         }
 
 
-        expectedResult.push.apply(characters.START);
+        expectedResult.push.apply(expectedResult, characters.START);
         expectedResult.push(characters.TERMINATION_BAR);
 
         if(options.quietZoneLength){
