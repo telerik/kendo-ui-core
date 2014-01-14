@@ -34,6 +34,12 @@
         equal(kendo.toString(event.end, "yyyy/M/d hh:mm"), "2013/6/6 12:00");
     });
 
+    test("_defaultId field is not serialized", function() {
+        var event = new SchedulerEvent();
+
+        ok(!("_defaultId" in event.toJSON()));
+    });
+
     test("setting isAllDay to false of a single day event doesn't change start and end", function() {
         var event = new SchedulerEvent({
             start: new Date("2013/6/6 10:00 AM"),
