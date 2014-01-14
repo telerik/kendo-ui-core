@@ -284,11 +284,11 @@ var __meta__ = {
             this._current(item);
         },
         _template: kendo.template(
-            '<table class="k-palette k-reset" role="presentation"><tr>' +
+            '<table class="k-palette k-reset" role="presentation"><tr role="row">' +
               '# for (var i = 0; i < colors.length; ++i) { #' +
                 '# var selected = colors[i].equals(value); #' +
-                '# if (i && i % columns == 0) { # </tr><tr> # } #' +
-                '<td unselectable="on" style="background-color:#= colors[i].toCss() #"' +
+                '# if (i && i % columns == 0) { # </tr><tr role="row"> # } #' +
+                '<td role="gridcell" unselectable="on" style="background-color:#= colors[i].toCss() #"' +
                     '#= selected ? " aria-selected=true" : "" # ' +
                     '#=(id && i === 0) ? "id=\\""+id+"\\" " : "" # ' +
                     'class="k-item#= selected ? " ' + ITEMSELECTEDCLASS + '" : "" #" ' +
@@ -863,7 +863,7 @@ var __meta__ = {
             }
 
             that.element.attr("disabled", !enable);
-            wrapper.attr("disabled", !enable);
+            wrapper.attr("aria-disabled", !enable);
 
             icon.off(NS).on("mousedown" + NS, preventDefault);
 
@@ -887,7 +887,7 @@ var __meta__ = {
         },
 
         _template: kendo.template(
-            '<span class="k-widget k-colorpicker k-header">' +
+            '<span role="textbox" aria-haspopup="true" class="k-widget k-colorpicker k-header">' +
                 '<span class="k-picker-wrap k-state-default">' +
                     '# if (toolIcon) { #' +
                         '<span class="k-tool-icon #= toolIcon #">' +
@@ -912,7 +912,8 @@ var __meta__ = {
             messages: APPLY_CANCEL,
             opacity: false,
             buttons: true,
-            preview: true
+            preview: true,
+            ARIATemplate: 'Current selected color is #=data || ""#'
         },
 
         events: [ "activate", "change", "select", "open", "close" ],
@@ -934,16 +935,28 @@ var __meta__ = {
             var el = this.element[0];
             return (/^input$/i).test(el.tagName) && (/^color$/i).test(el.type);
         },
+
         _updateUI: function(value) {
+            var formattedValue = "";
+
             if (value) {
                 if (this._isInputTypeColor() || value.a == 1) {
                     // seems that input type="color" doesn't support opacity
                     // in colors; the only accepted format is hex #RRGGBB
-                    this.element.val(value.toCss());
+                    formattedValue = value.toCss()
                 } else {
-                    this.element.val(value.toCssRgba());
+                    formattedValue = value.toCssRgba()
                 }
+
+                this.element.val(formattedValue);
             }
+
+            if (!this._ariaTemplate) {
+                this._ariaTemplate = kendo.template(this.options.ARIATemplate);
+            }
+
+            this.wrapper.attr("aria-label", this._ariaTemplate(formattedValue));
+
             this._triggerSelect(value);
             this.wrapper.find(".k-selected-color").css(
                 BACKGROUNDCOLOR,
@@ -969,7 +982,7 @@ var __meta__ = {
             var that = this, popup = that._popup;
 
             if (!popup) {
-                var options = this.options;
+                var options = that.options;
                 var selectorType;
 
                 if (options.palette) {
@@ -983,11 +996,15 @@ var __meta__ = {
                 delete options.change;
                 delete options.cancel;
 
-                var selector = this._selector = new selectorType($("<div />").appendTo(document.body), options);
+                var id = kendo.guid();
+                var selector = that._selector = new selectorType($('<div id="' + id +'"/>').appendTo(document.body), options);
+
+                that.wrapper.attr("aria-owns", id);
 
                 that._popup = popup = selector.wrapper.kendoPopup({
                     anchor: that.wrapper
                 }).data("kendoPopup");
+
                 selector.bind({
                     select: function(ev){
                         that._updateUI(parse(ev.value));
