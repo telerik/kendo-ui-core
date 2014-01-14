@@ -188,11 +188,12 @@ module.exports = function(grunt) {
                         "src/dataviz/map/location.js",
                         "src/dataviz/map/crs.js",
                         "src/dataviz/map/navigator.js",
+                        "src/dataviz/map/attribution.js",
+                        "src/dataviz/map/zoom.js",
                         "src/dataviz/map/layers/shape.js",
                         "src/dataviz/map/layers/tile.js",
                         "src/dataviz/map/layers/marker.js",
                         "src/dataviz/map/main.js",
-                        "src/dataviz/map/attribution.js",
                         'tests/map/util.js',
 
                         'src/kendo.diagram.services.js',

@@ -20,8 +20,9 @@ kendo_module({
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Navigator = dataviz.ui.Navigator,
         Attribution = dataviz.ui.Attribution,
+        Navigator = dataviz.ui.Navigator,
+        ZoomControl = dataviz.ui.ZoomControl,
         defined = dataviz.defined,
 
         g = dataviz.geometry,
@@ -33,6 +34,7 @@ kendo_module({
 
         util = dataviz.util,
         limit = util.limitValue,
+        renderPos = util.renderPos,
         valueOrDefault = util.valueOrDefault;
 
     // Constants ==============================================================
@@ -74,10 +76,11 @@ kendo_module({
         options: {
             name: "Map",
             controls: {
+                attribution: true,
                 navigator: {
                     panStep: 100
                 },
-                attribution: true
+                zoom: true
             },
             layers: [],
             layerDefaults: {
@@ -133,6 +136,10 @@ kendo_module({
 
             if (this.attribution) {
                 this.attribution.destroy();
+            }
+
+            if (this.zoomControl) {
+                this.zoomControl.destroy();
             }
 
             Widget.fn.destroy.call(this);
@@ -281,17 +288,41 @@ kendo_module({
         _initControls: function() {
             var controls = this.options.controls;
 
-            if (Navigator && controls.navigator && !kendo.support.mobileOS) {
-                this._createNavigator(controls.navigator);
-            }
-
             if (Attribution && controls.attribution) {
                 this._createAttribution(controls.attribution);
             }
+
+            if (!kendo.support.mobileOS) {
+                if (Navigator && controls.navigator) {
+                    this._createNavigator(controls.navigator);
+                }
+
+                if (ZoomControl && controls.zoom) {
+                    this._createZoomControl(controls.zoom);
+                }
+            }
+        },
+
+        _createControlElement: function(options, defaultPos) {
+            var pos = options.position || defaultPos;
+            var posSelector = "." + renderPos(pos).replace(" ", ".");
+            var wrap = $(".k-map-controls" + posSelector, this.element);
+            if (wrap.length === 0) {
+                wrap = $("<div>")
+                       .addClass("k-map-controls " + renderPos(pos))
+                       .appendTo(this.element);
+            }
+
+            return $("<div>").appendTo(wrap);
+        },
+
+        _createAttribution: function(options) {
+            var element = this._createControlElement(options, "bottomRight");
+            this.attribution = new Attribution(element, options);
         },
 
         _createNavigator: function(options) {
-            var element = $(doc.createElement("div")).appendTo(this.element);
+            var element = this._createControlElement(options, "topLeft");
             var navigator = this.navigator = new Navigator(element, options);
 
             this._navigatorPan = proxy(this._navigatorPan, this);
@@ -324,9 +355,19 @@ kendo_module({
             this.center(this.options.center);
         },
 
-        _createAttribution: function(options) {
-            var element = $(doc.createElement("div")).appendTo(this.element);
-            this.attribution = new Attribution(element, options);
+        _createZoomControl: function(options) {
+            var element = this._createControlElement(options, "topLeft");
+            var zoomControl = this.zoomControl = new ZoomControl(element, options);
+
+            this._zoomControlChange = proxy(this._zoomControlChange, this);
+            zoomControl.bind("change", this._zoomControlChange);
+        },
+
+        _zoomControlChange: function(e) {
+            if (!this.trigger("zoomStart", { originalEvent: e })) {
+                this.zoom(this.zoom() + e.delta);
+                this.trigger("zoomEnd", { originalEvent: e });
+            }
         },
 
         _initScroller: function() {

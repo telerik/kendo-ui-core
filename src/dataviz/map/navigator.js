@@ -9,7 +9,6 @@ kendo_module({
 (function ($) {
     var kendo = window.kendo;
     var Widget = kendo.ui.Widget;
-    var renderPos = kendo.dataviz.util.renderPos;
     var NS = ".kendoNavigator";
 
     function button(dir) {
@@ -27,15 +26,13 @@ kendo_module({
             this._initOptions(options);
 
             this.element.addClass("k-widget k-header k-shadow k-navigator")
-                        .addClass(renderPos(this.options.position))
                         .append(BUTTONS)
                         .on("click" + NS, ".k-button", $.proxy(this, "_click"));
         },
 
         options: {
             name: "Navigator",
-            panStep: 1,
-            position: "topLeft"
+            panStep: 1
         },
 
         events: [
