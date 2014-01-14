@@ -131,6 +131,10 @@ kendo_module({
                 this.navigator.destroy();
             }
 
+            if (this.attribution) {
+                this.attribution.destroy();
+            }
+
             Widget.fn.destroy.call(this);
         },
 
