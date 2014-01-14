@@ -35,18 +35,6 @@
         ok(attr.element.is(".k-widget.k-attribution"));
     });
 
-    test("adds default position css classes to wrapper", function() {
-        dom = $("<div>").kendoAttribution();
-
-        ok(dom.is(".k-pos-right.k-pos-bottom"));
-    });
-
-    test("adds custom position css classes to wrapper", function() {
-        dom = $("<div>").kendoAttribution({ position: "bottomLeft" });
-
-        ok(dom.is(".k-pos-left.k-pos-bottom"));
-    });
-
     test("should update extent and the zoom level", function() {
         attr.filter(new Location(0,0), 3);
 

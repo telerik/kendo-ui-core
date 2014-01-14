@@ -284,16 +284,18 @@
         _initControls: function() {
             var controls = this.options.controls;
 
-            if (Navigator && controls.navigator && !kendo.support.mobileOS) {
-                this._createNavigator(controls.navigator);
-            }
-
             if (Attribution && controls.attribution) {
                 this._createAttribution(controls.attribution);
             }
 
-            if (ZoomControl && controls.zoom) {
-                this._createZoomControl(controls.zoom);
+            if (!kendo.support.mobileOS) {
+                if (Navigator && controls.navigator) {
+                    this._createNavigator(controls.navigator);
+                }
+
+                if (ZoomControl && controls.zoom) {
+                    this._createZoomControl(controls.zoom);
+                }
             }
         },
 
@@ -358,7 +360,10 @@
         },
 
         _zoomControlChange: function(e) {
-            this.zoom(this.zoom() + e.delta);
+            if (!this.trigger("zoomStart", { originalEvent: e })) {
+                this.zoom(this.zoom() + e.delta);
+                this.trigger("zoomEnd", { originalEvent: e });
+            }
         },
 
         _initScroller: function() {

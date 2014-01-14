@@ -122,4 +122,46 @@
             map.navigator.trigger("center");
         });
     })();
+
+    (function() {
+        // ------------------------------------------------------------
+        module("Map / ZoomControl", {
+            setup: createMap,
+            teardown: destroyMap
+        });
+
+        test("zoomControl is created by default", function() {
+            ok(map.zoomControl);
+        });
+
+        test("zoomControl is not created on mobile devices", function() {
+            var mobileOS = kendo.support.mobileOS;
+
+            kendo.support.mobileOS = true;
+            createMap();
+            ok(!map.zoomControl);
+            kendo.support.mobileOS = mobileOS;
+        });
+
+        test("zoomControl is not created if disabled", function() {
+            createMap({ controls: { zoom: false } });
+            ok(!map.zoomControl);
+        });
+
+        test("zoomControl options are passed", function() {
+            createMap({ controls: { zoom: { foo: true } } });
+            ok(map.zoomControl.options.foo);
+        });
+
+        test("zooming triggers zoomStart and zoomEnd", 2, function() {
+            map.bind("zoomStart", function() {
+                map.bind("zoomEnd", function() {
+                    ok(true);
+                });
+
+                ok(true);
+            });
+            map.zoomControl.trigger("change", { delta: 1 });
+        });
+    })();
 })();
