@@ -253,7 +253,9 @@
             opacity: options.opacity,
             subdomain: options.subdomain,
             urlTemplate: options.urlTemplate,
-            errorUrlTemplate: options.errorUrlTemplate
+            errorUrlTemplate: options.errorUrlTemplate,
+            quadkey: "quadkey",
+            culture: "culture"
         });
     }
 
@@ -279,7 +281,11 @@
                 s: "a",
                 subdomain: "a",
                 z: 1,
-                zoom: 1
+                zoom: 1,
+                quadkey: "quadkey",
+                q: "quadkey",
+                culture: "culture",
+                c: "culture"
             });
         });
 
