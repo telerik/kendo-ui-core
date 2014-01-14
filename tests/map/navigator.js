@@ -14,18 +14,6 @@
         ok(dom.is(".k-widget.k-navigator.k-header.k-shadow"));
     });
 
-    test("adds default position css classes to wrapper", function() {
-        dom = $("<div>").kendoNavigator();
-
-        ok(dom.is(".k-pos-left.k-pos-top"));
-    });
-
-    test("adds custom position css classes to wrapper", function() {
-        dom = $("<div>").kendoNavigator({ position: "bottomLeft" });
-
-        ok(dom.is(".k-pos-left.k-pos-bottom"));
-    });
-
     test("creates north button", function() {
         dom = $("<div>").kendoNavigator();
 

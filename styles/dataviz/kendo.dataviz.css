@@ -269,6 +269,18 @@ span.k-sparkline,
     right: 0;
 }
 
+.k-map-controls {
+    position: absolute;
+}
+
+.k-map-controls.k-pos-left .k-widget:first-child {
+    margin-right: 0;
+}
+
+.k-map-controls.k-pos-right .k-widget:first-child {
+    margin-left: 0;
+}
+
 /* Map navigator */
 
 .k-navigator
@@ -277,7 +289,9 @@ span.k-sparkline,
     height: 50px;
     margin: 20px;
     border-radius: 80px;
-    position: absolute;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .k-navigator > button
@@ -355,6 +369,91 @@ div.k-navigator .k-navigator-w
     background-color: rgba(255, 255, 255, 0.8);
     font-size: 10px;
     padding: 2px 4px;
-    position: absolute;
     z-index: 1000;
 }
+
+/* Zoom */
+
+.k-zoom-control {
+    margin: 20px;
+    vertical-align: middle;
+}
+
+.k-button-wrap
+{
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.k-buttons-horizontal :first-child
+{
+    border-radius: 4px 0 0 4px;
+}
+
+.k-buttons-horizontal :first-child + .k-zoom-in
+{
+    border-radius: 0;
+    margin-left: -1px;
+}
+
+.k-buttons-horizontal .k-zoom-out
+{
+    border-radius: 0 4px 4px 0;
+    margin-left: -1px;
+}
+
+.k-button-wrap .k-button
+{
+    position: relative;
+    font: bold 17px/1.18 monospace;
+}
+
+.k-button-wrap .k-button:hover
+{
+    z-index:1;
+}
+
+.k-buttons-vertical .k-button
+{
+    display: block;
+}
+
+.k-buttons-vertical :first-child
+{
+    border-radius: 4px 4px 0 0;
+}
+
+.k-buttons-vertical .k-zoom-out
+{
+    border-radius: 0 0 4px 4px;
+    margin-top: -1px;
+}
+
+.k-zoom-text
+{
+    margin: 0;
+    width: 4.3em;
+    vertical-align: top;
+}
+
+/* RTL */
+
+.k-rtl .k-buttons-horizontal :first-child
+{
+    border-radius: 0 4px 4px 0;
+}
+
+.k-rtl .k-buttons-horizontal :first-child + .k-zoom-in
+{
+    border-radius: 0;
+    margin-left: 0;
+    margin-right: -1px;
+}
+
+.k-rtl .k-buttons-horizontal .k-zoom-out
+{
+    border-radius: 4px 0 0 4px;
+    margin-left: 0;
+    margin-right: -1px;
+}
+
