@@ -314,9 +314,11 @@ var __meta__ = {
                         var velocityX = abs(e.x.velocity),
                             velocityY = abs(e.y.velocity),
                             horizontalSwipe  = velocityX * 2 >= velocityY,
+                            originatedFromFixedContainer = $.contains(that.fixedContainer[0], e.event.target),
                             verticalSwipe = velocityY * 2 >= velocityX;
 
-                        if (!avoidScrolling(e) && that.enabled && (dimensions.x.enabled && horizontalSwipe || dimensions.y.enabled && verticalSwipe)) {
+
+                        if (!originatedFromFixedContainer && !avoidScrolling(e) && that.enabled && (dimensions.x.enabled && horizontalSwipe || dimensions.y.enabled && verticalSwipe)) {
                             userEvents.capture();
                         } else {
                             userEvents.cancel();
