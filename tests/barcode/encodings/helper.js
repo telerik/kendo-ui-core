@@ -19,10 +19,6 @@ function comparePatterns(pattern1, pattern2){
     return true;
 }
 
-Array.prototype.pushArray = function(arr){
-    this.push.apply(this, arr);
-}
-
 function fixed(value, length){
     return parseFloat(value.toFixed(length));
 }

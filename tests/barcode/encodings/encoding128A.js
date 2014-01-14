@@ -52,16 +52,16 @@ var dataviz = kendo.dataviz,
             expectedResult.push(options.quietZoneLength);
         }
 
-        expectedResult.pushArray(characters.START);
+        expectedResult.push.array(characters.START);
 
         for( var i = 0; i < value.length; i++){
-            expectedResult.pushArray(characters[value.charCodeAt(i)]);
+            expectedResult.push.array(characters[value.charCodeAt(i)]);
         }
 
-        expectedResult.pushArray(characters[checkValue.charCodeAt(0)]);
+        expectedResult.push.array(characters[checkValue.charCodeAt(0)]);
 
 
-        expectedResult.pushArray(characters.STOP);
+        expectedResult.push.array(characters.STOP);
 
         if(options.quietZoneLength){
             expectedResult.push(options.quietZoneLength);

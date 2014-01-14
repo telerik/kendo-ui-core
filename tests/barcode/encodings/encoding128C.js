@@ -68,16 +68,16 @@
             expectedResult.push(options.quietZoneLength);
         }
 
-        expectedResult.pushArray(characters.START);
+        expectedResult.push.array(characters.START);
 
         for( var i = 0; i < value.length; i+=2){
-            expectedResult.pushArray(characters[value.substring(i, i + 2)]);
+            expectedResult.push.array(characters[value.substring(i, i + 2)]);
         }
 
-        expectedResult.pushArray(characters[checkValue]);
+        expectedResult.push.array(characters[checkValue]);
 
 
-        expectedResult.pushArray(characters.STOP);
+        expectedResult.push.array(characters.STOP);
 
         if(options.quietZoneLength){
             expectedResult.push(options.quietZoneLength);
