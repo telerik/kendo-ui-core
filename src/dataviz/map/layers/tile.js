@@ -149,20 +149,22 @@
         },
 
         _success: function(data) {
-            var resource = this.resource = data.resourceSets[0].resources[0];
+            if (data && data.resourceSets.length) {
+                var resource = this.resource = data.resourceSets[0].resources[0];
 
-            TileLayer.fn.init.call(this, this.map, {
-                urlTemplate: resource.imageUrl
-                    .replace("{subdomain}", "#= subdomain #")
-                    .replace("{quadkey}", "#= quadkey #")
-                    .replace("{culture}", "#= culture #"),
-                subdomains: resource.imageUrlSubdomains,
-                maxZoom: resource.zoomMax,
-                minZoom: resource.zoomMin
-            });
+                TileLayer.fn.init.call(this, this.map, {
+                    urlTemplate: resource.imageUrl
+                        .replace("{subdomain}", "#= subdomain #")
+                        .replace("{quadkey}", "#= quadkey #")
+                        .replace("{culture}", "#= culture #"),
+                    subdomains: resource.imageUrlSubdomains,
+                    maxZoom: resource.zoomMax,
+                    minZoom: resource.zoomMin
+                });
 
-            this._addAttribution();
-            this.reset();
+                this._addAttribution();
+                this.reset();
+            }
         },
 
         _viewType: function() {
@@ -291,7 +293,7 @@
                         y: firstTileIndex.y + y
                     });
 
-                    if (!tile.visible) {
+                    if (!tile.options.visible) {
                         this.element.append(tile.element);
                         tile.options.visible = true;
                     }
@@ -300,21 +302,26 @@
         },
 
         createTile: function(currentIndex) {
+            var options = this.tileOptions(currentIndex);
+
+            return this.pool.get(this._center, options);
+        },
+
+        tileOptions: function(currentIndex) {
             var index = this.wrapIndex(currentIndex),
                 point = this.indexToPoint(currentIndex),
-                offset = point.clone().subtract(this.basePoint),
-                tileOptions = {
-                    index: index,
-                    currentIndex: currentIndex,
-                    point: point,
-                    offset: roundPoint(offset),
-                    zoom: this._zoom,
-                    subdomain: this.subdomainText(),
-                    urlTemplate: this.options.urlTemplate,
-                    errorUrlTemplate: this.options.errorUrlTemplate
-                };
+                offset = point.clone().subtract(this.basePoint);
 
-            return this.pool.get(this._center, tileOptions);
+            return {
+                index: index,
+                currentIndex: currentIndex,
+                point: point,
+                offset: roundPoint(offset),
+                zoom: this._zoom,
+                subdomain: this.subdomainText(),
+                urlTemplate: this.options.urlTemplate,
+                errorUrlTemplate: this.options.errorUrlTemplate
+            };
         },
 
         wrapIndex: function(index) {
@@ -342,12 +349,13 @@
             culture: "en-Us"
         },
 
-        tileUrlOptions: function(index) {
-            return {
-                quadkey: this.tileQuadKey(index),
-                subdomain: this.subdomainText(),
-                culture: this.options.culture
-            };
+        tileOptions: function(currentIndex) {
+            var options = TileView.fn.tileOptions.call(this, currentIndex);
+
+            options.culture = this.options.culture;
+            options.quadkey = this.tileQuadKey(this.wrapIndex(currentIndex));
+
+            return options;
         },
 
         tileQuadKey: function(index) {
@@ -430,7 +438,11 @@
                 z: options.zoom,
                 x: options.index.x,
                 y: options.index.y,
-                s: options.subdomain
+                s: options.subdomain,
+                quadkey: options.quadkey,
+                q: options.quadkey,
+                culture: options.culture,
+                c: options.culture
             };
         },
 
