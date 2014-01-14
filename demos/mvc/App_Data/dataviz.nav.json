@@ -794,6 +794,9 @@
                 "title": "Example of Kendo UI Map with a simple tile layer",
                 "meta": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Map widget can be implemented for tile maps."
             }, {
+                "text": "Bing",
+                "url": "map/bing.html"
+            }, {
                 "text": "Binding to GeoJSON",
                 "url": "map/geojson.html",
                 "title": "Displaying GeoJSON shapes Kendo UI map layer",
