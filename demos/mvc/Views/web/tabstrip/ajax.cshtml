@@ -12,14 +12,17 @@
 
 <script>
     $(document).ready(function () {
-        $("#tabstrip").kendoTabStrip({
+        var ts = $("#tabstrip").kendoTabStrip({
             animation: { open: { effects: "fadeIn"} },
             contentUrls: [
                         '../../content/web/tabstrip/ajax/ajaxContent1.html',
                         '../../content/web/tabstrip/ajax/ajaxContent2.html',
                         '../../content/web/tabstrip/ajax/ajaxContent3.html'
                     ]
-        });
+        }).data('kendoTabStrip');
+        setTimeout(function () {
+            ts.reload($('#tabstrip li:last'));
+        })        
     });
 </script>
 

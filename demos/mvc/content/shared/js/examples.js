@@ -390,6 +390,9 @@
                             element.add(sibling).bind("click", stopDefaults);
                             Application.loadWidget(navigateUrl);
                         }
+                    })
+                    .on('click', '.try-kendo', function () {
+                        dojo.startFrom($('#HTML-1').data('html'), "http://127.0.0.1:3000");
                     });
 
                 $(window).bind("popstate", function (e) {
@@ -731,7 +734,19 @@
 
     kendo.ui.plugin(ThemeChooser);
 
+    var dojo = {
+        startFrom: function (snippet, url) {
+            url = url || "http://try.kendoui.com";
+
+            var form = $('<form method="post" action="' + url + '" />');
+            $("<input name='snippet'>").val(snippet).appendTo(form);
+
+            form.submit();
+        }
+    }
+
     extend(window, {
+        dojo : dojo,
         Application: Application,
         applyCurrentMobileOS: applyCurrentMobileOS,
         applyCurrentTheme: applyCurrentTheme,
