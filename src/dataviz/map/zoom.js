@@ -1,10 +1,6 @@
-kendo_module({
-    id: "dataviz.zoom",
-    name: "Zoom",
-    category: "dataviz",
-    depends: [ "dataviz.core" ],
-    advanced: true
-});
+(function(f, define){
+    define([ "./zoom" ], f);
+})(function(){
 
 (function ($) {
     var kendo = window.kendo;
@@ -14,9 +10,8 @@ kendo_module({
 
     function button(dir, symbol) {
        return kendo.format(
-           '<button class="k-button k-zoom-{0}">' +
-               '<span>{1}</span>' +
-           '</button>', dir, symbol);
+           '<button class="k-button k-zoom-{0}" title="zoom-{0}">{1}</button>',
+           dir, symbol);
     }
 
     var BUTTONS = button("in", "+") + button("out", "-");
@@ -26,7 +21,7 @@ kendo_module({
             Widget.fn.init.call(this, element, options);
             this._initOptions(options);
 
-            this.element.addClass("k-widget k-header k-shadow k-zoom")
+            this.element.addClass("k-widget k-zoom k-button-wrap k-buttons-horizontal")
                         .addClass(renderPos(this.options.position))
                         .append(BUTTONS)
                         .on("click" + NS, ".k-button", $.proxy(this, "_click"));
@@ -59,3 +54,5 @@ kendo_module({
 
     kendo.dataviz.ui.plugin(Zoom);
 })(jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

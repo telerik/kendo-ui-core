@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./navigator" ], f);
+    define([ "./attribution" ], f);
 })(function(){
 
 (function() {
