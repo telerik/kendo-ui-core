@@ -557,5 +557,18 @@
         equal(grid.table.find("tr:first").height(), originalHeigth);
     });
 
+    test("Validator instance has both static and non static rows as target", function() {
+        var grid = setup({
+            columns: [ { field: "foo", static: true }, "name"],
+            editable: "inline"
+        });
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        equal(grid.editable.validatable.element.length, 2);
+
+        deepEqual(grid.staticTable.find("tr:first")[0], grid.editable.validatable.element[0]);
+        deepEqual(grid.table.find("tr:first")[0], grid.editable.validatable.element[1]);
+    });
 
 })();
