@@ -177,13 +177,19 @@ var __meta__ = {
             this._undoContent = oldcontent;
             this._redoContent = newcontent;
             this.title = "Content Editing";
+            this.rebuild = this.item.options.hasOwnProperty("rebuild") ? this.item.options.rebuild : null;
         },
         undo: function () {
             this.item.content(this._undoContent);
+            if (this.rebuild)
+                this.rebuild.call(this.item, this.item);
         },
         redo: function () {
             this.item.content(this._redoContent);
+            if (this.rebuild)
+                this.rebuild.call(this.item, this.item);
         }
+
     });
 
     var ConnectionEditUnit = Class.extend({

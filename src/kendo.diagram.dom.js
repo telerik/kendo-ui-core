@@ -384,7 +384,10 @@ var __meta__ = {
     var Shape = DiagramElement.extend({
         init: function (options, model) {
             var that = this, connector, i;
+            var diagram = options.diagram;
+            delete options.diagram; // avoid stackoverflow and reassign later on again
             DiagramElement.fn.init.call(that, options, model);
+            that.options.diagram = diagram;
             options = that.options;
             that.connectors = [];
             that.type = options.type;
@@ -692,8 +695,30 @@ var __meta__ = {
     });
 
     Shape.createShapeVisual = function (options) {
+        var diagram = options.diagram;
+        delete options.diagram; // avoid stackoverflow and reassign later on again
         var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }),
             visualTemplate = shapeOptions.data; // Shape visual should not have position in its parent group.
+
+        // if external serializationSource we need to consult the attached libraries
+        if (!kendo.isFunction(shapeOptions.data) && shapeOptions.hasOwnProperty("serializationSource") && shapeOptions["serializationSource"] === "external") {
+            // shapeOptions.diagram is set when the diagram starts deserializing
+            if (diagram.libraries && diagram.libraries.length > 0) {
+                for (var i = 0; i < diagram.libraries.length; i++) {
+                    var library = diagram.libraries[i];
+                    for (var j = 0; j < library.length; j++) {
+                        var shapeDefinition = library[j];
+                        if (shapeDefinition.options.name === shapeOptions.name && shapeDefinition.options.serializationSource === "external") {
+                            // the JSON options do not contain the funcs managing the complex layout, so need to transfer them
+                            options.layout = shapeDefinition.options.layout;
+                            options.data = shapeDefinition.options.data;
+                            options.rebuild = shapeDefinition.options.rebuild;
+                            return shapeDefinition.options.data(shapeOptions);
+                        }
+                    }
+                }
+            }
+        }
         if (isString(visualTemplate)) {
             switch (shapeOptions.data.toLocaleLowerCase()) {
                 case "rectangle":
@@ -708,7 +733,7 @@ var __meta__ = {
             }
         }
         else if (isFunction(visualTemplate)) {// custom template
-            return visualTemplate(shapeOptions.context);
+            return visualTemplate.call(this, shapeOptions);
         }
         return new Rectangle(shapeOptions);
     };
@@ -1157,7 +1182,7 @@ var __meta__ = {
                 id: "adorner-layer"
             });
             this.canvas.append(this.adornerLayer);
-
+            this.libraries = []; // shape libraries needed to deserialize complex shapes/controls with composite geometries and layout
             this.toolService = new ToolService(this);
             this._attachEvents();
             that._initialize();
@@ -1274,6 +1299,7 @@ var __meta__ = {
                 if (options && isFunction(options.loadShape)) {
                     options.loadShape(itemOptions);
                 }
+                itemOptions.diagram = this; // complex shapes need access to the external shape libraries
                 this.addShape(new Shape(itemOptions));
             }
 

@@ -121,7 +121,36 @@ var __meta__ = {
          */
         randomInteger: function (lower, upper) {
             return parseInt(Math.floor(Math.random() * upper) + lower, 10);
+        } ,
+        /*
+         Depth-first traversal of the given node.
+         */
+        DFT: function (el, func) {
+            func(el);
+            if (el.childNodes) {
+                for (var i = 0; i < el.childNodes.length; i++) {
+                    var item = el.childNodes[i];
+                    this.DFT(item, func);
+                }
+            }
+        },
+        /*
+         Returns the angle in degrees for the given matrix
+         */
+        getMatrixAngle: function (m) {
+            if (m === null || m.d === 0) return 0;
+            return Math.atan2(m.b, m.d) * 180 / Math.PI;
+        },
+
+        /*
+         Returns the scaling factors for the given matrix.
+         */
+        getMatrixScaling: function (m) {
+            var sX = Math.sqrt(m.a * m.a + m.c * m.c);
+            var sY = Math.sqrt(m.b * m.b + m.d * m.d);
+            return [sX, sY];
         }
+
     });
 
     /**

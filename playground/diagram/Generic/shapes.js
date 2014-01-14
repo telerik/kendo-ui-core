@@ -1,52 +1,30 @@
-/*
- Defines some methods which are generic to a Shape implementing its own inner layout on resize.
- * */
-var SelfLayoutShape = window.kendo.Class.extend({
-        init: function (options) {
-        },
+var getCleanedTabs = function (text) {
 
-        DFT: function (el, func) {
-            func(el);
-            if (el.childNodes) {
-                for (var i = 0; i < el.childNodes.length; i++) {
-                    var item = el.childNodes[i];
-                    this.DFT(item, func);
-                }
-            }
-        },
-
-        /*
-         Returns the angle in degrees for the given matrix
-         */
-        getMatrixAngle: function (m) {
-            if (m === null || m.d === 0) return 0;
-            return Math.atan2(m.b, m.d) * 180 / Math.PI;
-        },
-
-        /*
-         Returns the scaling factors for the given matrix.
-         */
-        getMatrixScaling: function (m) {
-            var sX = Math.sqrt(m.a * m.a + m.c * m.c);
-            var sY = Math.sqrt(m.b * m.b + m.d * m.d);
-            return [sX, sY];
-        }
-
-    })
-    ;
-
-var mediaPlayerShape = SelfLayoutShape.extend({
+    if (text === null) return [];
+    if (text.trim().length === 0) return ["Tab"];
+    var tbs = text.trim().split(",");
+    var result = [];
+    for (var i = 0; i < tbs.length; i++) {
+        if (tbs[i].trim().length === 0) continue;
+        result.push(tbs[i].trim());
+    }
+    return result;
+}
+var mediaPlayerShape = window.kendo.Class.extend({
     init: function (options) {
-        SelfLayoutShape.fn.init.call(this, options);
+
     },
     options: {
-        name: "Special",
+        name: "MediaPlayer",
+        minHeight: 50,
+        minWidth: 120,
+        serializationSource: "external",
+        autoSize: false,
         data: function (data) {
 
             // define the elements of the shape and in the layout method define how they are positioned upon resize
 
             var g = new kendo.diagram.Group({
-                autoSize: true,
                 id: "shapeRoot"
             });
             var background = new kendo.diagram.Rectangle({
@@ -98,9 +76,8 @@ var mediaPlayerShape = SelfLayoutShape.extend({
         },
         connectors: [],
 
-
         layout: function (shape, oldBounds, newBounds) {
-            var that = shape.options.parent();
+            //var that = shape.options.parent();
             if (!kendo.diagram.Utils.isDefined(newBounds)) {
                 newBounds = shape.bounds();
             }
@@ -118,7 +95,7 @@ var mediaPlayerShape = SelfLayoutShape.extend({
             // var special = document.getElementById("special");
 
             var shapeRoot;
-            that.DFT(shape.visual.native, function (n) {
+            kendo.diagram.Utils.DFT(shape.visual.native, function (n) {
                 if (n.id === "shapeRoot") {
                     shapeRoot = n;
                     n.removeAttribute("transform");
@@ -167,16 +144,20 @@ var mediaPlayerShape = SelfLayoutShape.extend({
 
     }
 });
-var tabControl = SelfLayoutShape.extend({
+var tabControl = window.kendo.Class.extend({
     init: function (options) {
-        SelfLayoutShape.fn.init.call(this, options);
+
     },
+
     options: {
-        name: "Special",
+        name: "TabControl",
+        serializationSource: "external", // tells the deserialization that this shape lib will be needed
+
         data: function (data) {
-            function makeTab (index, title) {
+            var text = data.hasOwnProperty("content") ? (window.kendo.isFunction(data.content) ? data.content() : data.content.text) : "Tab1, Tab2, Tab3";
+
+            function makeTab(index, title) {
                 var g = new kendo.diagram.Group({
-                    autoSize: true,
                     id: "tabGroup" + index
                 });
                 var tabRectangle = new kendo.diagram.Rectangle({
@@ -188,15 +169,15 @@ var tabControl = SelfLayoutShape.extend({
                 //tabRectangle.native.setAttribute("transform", "translate(0,0)");
                 g.append(tabRectangle);
 
-                var text = new kendo.diagram.TextBlock();
-                text.content(title);
-                text.native.setAttribute("transform", "translate(10,10)");
-                g.append(text);
+                var textBlock = new kendo.diagram.TextBlock();
+                textBlock.content(title);
+                textBlock.native.setAttribute("transform", "translate(10,10)");
+                g.append(textBlock);
 
                 return g;
             }
+
             var g = new kendo.diagram.Group({
-                autoSize: true,
                 id: "shapeRoot"
             });
             var background = new kendo.diagram.Rectangle({
@@ -207,35 +188,53 @@ var tabControl = SelfLayoutShape.extend({
             });
             g.append(background);
 
-            var tab1 = makeTab(1, "Tab1");
-            tab1.native.setAttribute("transform", "translate(5,0)");
-            g.append(tab1);
 
-            var tab2 = makeTab(2, "Tab2");
-            tab2.native.setAttribute("transform", "translate(105,0)");
-            g.append(tab2);
-
+            var tabTitles = getCleanedTabs(text);
+            for (var i = 0; i < tabTitles.length; i++) {
+                var title = tabTitles[i];
+                if(title===null) continue;
+                if(title.trim().length===0) continue;
+                var tab = makeTab(i, title);
+                tab.native.setAttribute("transform", "translate(" + (i * 103) + ",0)");
+                g.append(tab);
+            }
 
             return g;
         },
+        minWidth: (3 * 103 + 30),
+        autoSize: false,
+        content: {
+            align: "center middle",
+            text: "Tab1, Tab2, Tab3"
+        },
         connectors: [],
-
-
         layout: function (shape, oldBounds, newBounds) {
-            var that = shape.options.parent();
+            //var that = shape.options.parent();
+            var text= shape.options.content.text;
+            var tabTitles = getCleanedTabs(text);
+
+            shape.options.minWidth = tabTitles.length * 103 + 30;
+            shape.options.minHeight = 50;
+            // remove the textblock
+            $(shape.visual.native.childNodes[1]).remove();
+
             if (!kendo.diagram.Utils.isDefined(newBounds)) {
                 newBounds = shape.bounds();
+                newBounds.width = Math.max(tabTitles.length*103+30, newBounds.width);
+                shape.bounds(newBounds);
             }
             if (!kendo.diagram.Utils.isDefined(oldBounds)) {
                 oldBounds = shape.bounds();
             }
-            var c = newBounds.center();
-            var svg = shape.visual.native.ownerSVGElement;
 
-            var p = new kendo.diagram.Point(c.x - newBounds.x - 25, c.y - newBounds.y - 25);
+
+            var c = newBounds.center();
+            /*   var svg = shape.visual.native.ownerSVGElement;
+
+             var p = new kendo.diagram.Point(c.x - newBounds.x - 25, c.y - newBounds.y - 25);*/
 
             var shapeRoot;
-            that.DFT(shape.visual.native, function (n) {
+            kendo.diagram.Utils.DFT(shape.visual.native, function (n) {
                 if (n.id === "shapeRoot") {
                     shapeRoot = n;
                     n.removeAttribute("transform");
@@ -248,20 +247,17 @@ var tabControl = SelfLayoutShape.extend({
                     n.setAttribute("y", 30);
                 }
 
-                if (n.id === "tab1") {
-                    n.removeAttribute("transform");
-                    n.setAttribute("width", 100);
-                    n.setAttribute("height", 30);
-                    n.setAttribute("transform", "translate(" + 5 + "," + 0 + ")");
-                }
-                if (n.id === "tab2") {
-                    n.removeAttribute("transform");
-                    n.setAttribute("width", 100);
-                    n.setAttribute("height", 30);
-                    n.setAttribute("transform", "translate(" + 205 + "," + 0 + ")");
-                }
             });
 
+
+        },
+
+        rebuild: function (shape) {
+            shape.visual.clear();
+            shape.shapeVisual = this.options.data(shape.options);
+            shape.visual.append(shape.shapeVisual);
+
+            this.layout(shape);
 
         }
 
@@ -795,7 +791,8 @@ var shapesSource = [
     {
         options: {
             name: "Rectangle Shape",
-            data: "m0,0 L0,100 L100,100 L100,0z"
+            data: "m0,0 L0,100 L100,100 L100,0z",
+            autoSize: false
         }
     }
 ];

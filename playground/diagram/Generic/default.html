@@ -156,6 +156,7 @@
     <script src="../../../src/kendo.menu.js"></script>
     <script src="../../../src/kendo.fx.js"></script>
     <script src="../../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../../src/kendo.button.js"></script>
 
     <script src="../../../src/kendo.diagram.utils.js"></script>
     <script src="../../../src/kendo.diagram.math.js"></script>
@@ -255,16 +256,17 @@
             <input type="button" class="k-button" id="redoButton" title="Redo (CTRL+Y)" value="Redo"/>
             <input type="button" class="k-button" id="deleteButton" title="Delete (DEL)" value="Delete"/>
             <!--<input type="button" class="k-button" id="selectAllButton" title="Select All (CTRL+A)"-->
-                   <!--value="SelectAll"/>-->
+            <!--value="SelectAll"/>-->
         </div>
         <div class="group">
             <a type="button" class="k-button" id="saveButton" title="Save As (CTRL + S)" href="#">Save</a>
-            <input type="button" class="k-button" value="Load" title="Load (CTRL+O)"
-                   id="loadButton" onclick="loadDiagram();"/>
-
+            <!-- <input type="button" class="k-button" value="Load" title="Load (CTRL+O)"
+                    id="loadButton" onclick="loadDiagram();"/>
+ -->
             <div id="upload-wrap">
                 <input type="file" id="upload-field"/>
             </div>
+            <button type="button" id="loadButton">Open</button>
         </div>
         <div class="group">
             <input id="Layouts" value="1"/>
@@ -346,7 +348,7 @@ function receivedText() {
 }
 
 function loadDiagram() {
-    $('upload-field').click();
+    $('#upload-field').click();
 }
 
 $(function () {
@@ -447,9 +449,10 @@ $(function () {
         }
     });
     var diagram = $("#canvas").data("kendoDiagram"),
-        kendo = window.kendo,
-        Point = kendo.diagram.Point;
+            kendo = window.kendo,
+            Point = kendo.diagram.Point;
 
+    diagram.libraries.push(shapesSource); // libs for controls and complex shapes
     var list = $("#toolBox").kendoListView({
         dataSource: {
             data: shapesSource
@@ -490,6 +493,9 @@ $(function () {
         selectAll();
     });
 
+    $("#loadButton").kendoButton({
+        click: loadDiagram
+    });
     function saveDiagram() {
         window.URL = window.URL || window.webkitURL;
         var save = $("#savelink"),
@@ -549,7 +555,7 @@ $(function () {
         slide: onZoom
     }).data("kendoSlider");
 
-    var onSelectionTypeChanged = function(e){
+    var onSelectionTypeChanged = function (e) {
         var type = $("#Selection").data("kendoDropDownList").value();
         diagram.options.selectable.type = type;
         diagram.select(false);
