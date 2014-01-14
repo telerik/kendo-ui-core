@@ -1,6 +1,4 @@
 require 'codegen/lib/string.rb'
-require 'component'
-
 
 module CodeGen
   module ASPX

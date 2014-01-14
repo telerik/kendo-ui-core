@@ -25,6 +25,8 @@ require 'codegen/lib/php/component'
 require 'codegen/lib/php/php'
 require 'codegen/lib/php/api'
 
+require 'codegen/lib/aspx/aspx'
+
 namespace :generate do
     def import_metadata(component)
         metadata = "build/codegen/#{component.name.downcase}.yml"
@@ -38,6 +40,28 @@ namespace :generate do
 
     desc 'Generate all server wrappers and their API reference'
     task :all => [:php, :jsp, 'mvc:wrappers', 'mvc:api']
+
+    namespace :aspx do
+
+        desc 'Generate ASP.NET WebForms wrappers'
+        task :wrappers do
+          markdown = FileList['docs/api/dataviz/connector.md']#, 'docs/api/dataviz/diagram.md']
+
+          components = markdown.map { |file| CodeGen::MarkdownParser.read(file, CodeGen::ASPX::Wrappers::Component) }
+
+          components.each do |component|
+              generator = CodeGen::ASPX::Wrappers::Generator.new('wrappers/aspx/src/')
+
+              generator.component(component)
+          end
+        end
+
+        desc 'Temp task that cleans the ASPX\'s output  folder!'
+        task :clean do
+          sh 'rm -rd wrappers/aspx/src/*'
+        end
+
+    end
 
     namespace :mvc do
 
