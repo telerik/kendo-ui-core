@@ -28,11 +28,11 @@
         expectedResult.push(START(height));
         expectedResult.push(GAP);
         for( var i = 0; i < value.length; i++){
-            expectedResult.push.array(characters[value.charAt(i)](height));
+            expectedResult.push.apply(characters[value.charAt(i)](height));
         }
 
         if(options.checkValue !== undefined){
-            expectedResult.push.array(characters[options.checkValue](height));
+            expectedResult.push.apply(characters[options.checkValue](height));
         }
 
         expectedResult.push(START(height));
