@@ -171,6 +171,7 @@ kendo_module({
 
             element.addClass("k-widget k-colorpalette")
                 .attr("role", "grid")
+                .attr("aria-readonly", "true")
                 .append($(that._template({
                     colors   : colors,
                     columns  : options.columns,
@@ -279,12 +280,12 @@ kendo_module({
             this._current(item);
         },
         _template: kendo.template(
-            '<table class="k-palette k-reset"><tr>' +
+            '<table class="k-palette k-reset" role="presentation"><tr>' +
               '# for (var i = 0; i < colors.length; ++i) { #' +
                 '# var selected = colors[i].equals(value); #' +
                 '# if (i && i % columns == 0) { # </tr><tr> # } #' +
                 '<td unselectable="on" style="background-color:#= colors[i].toCss() #"' +
-                    'aria-selected=#= selected ? true : false # ' +
+                    '#= selected ? " aria-selected=true" : "" # ' +
                     '#=(id && i === 0) ? "id=\\""+id+"\\" " : "" # ' +
                     'class="k-item#= selected ? " ' + ITEMSELECTEDCLASS + '" : "" #" ' +
                     'aria-label="#= colors[i].toCss() #"></td>' +
