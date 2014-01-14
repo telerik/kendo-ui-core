@@ -1163,6 +1163,7 @@
              "text": "ProgressBar",
              "name": "progressbar",
              "new": "true",
+			 "documentation": "web/progressbar",
              "spriteCssClass": "progressBarIcon",
              "items": [
                  {
