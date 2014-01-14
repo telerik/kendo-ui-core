@@ -490,6 +490,10 @@ var __meta__ = {
             return obj;
         },
 
+        shouldSerialize: function(field) {
+            return kendo.data.Model.fn.shouldSerialize.call(this, field) && field !== "_defaultId";
+        },
+
         set: function(key, value) {
             var isAllDay = this.isAllDay || false;
 
