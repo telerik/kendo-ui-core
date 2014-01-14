@@ -12,8 +12,10 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo;
+    var keys = kendo.keys;
     var ui = kendo.ui;
     var Widget = ui.Widget;
+    var ns = ".kendoNumericTextBox";
 
     var MaskInput = Widget.extend({
         init: function(element, options) {
@@ -21,18 +23,23 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("k-input")
-                .attr("autocomplete", "off")
-                .focus(function() {
-                    that.element.val(that._emptyMask);
-                })
-                .blur(function() {
-                    that.element.val("");
-                });
+            element = that.element;
 
             that._tokenize();
 
             that._wrapper();
+
+            that.element.addClass("k-input")
+                .attr("autocomplete", "off")
+                .on("keydown" + ns, $.proxy(that._keydown, that))
+                .on("keypress" + ns, $.proxy(that._keypress, that))
+                .on("focus" + ns, function() {
+                    element.val(that._emptyMask);
+                    caret(element[0], 0);
+                })
+                .on("blur" + ns, function() {
+                    element.val("");
+                });
         },
 
         options: {
@@ -45,6 +52,88 @@ var __meta__ = {
 
         rules: {
             "0": /\d/
+        },
+
+        _keydown: function(e) {
+            var key = e.keyCode;
+            var element = this.element;
+            var selection = caret(element[0]);
+            var selectionStart = selection[0];
+            var selectionEnd = selection[1];
+            var equal = selectionStart === selectionEnd;
+
+            var value = element.val();
+
+            //TODO: Test this!
+            if (key == keys.BACKSPACE) {
+                if (equal) {
+                    selectionStart -= 1;
+
+                    var currentChar = value.charAt(selectionStart);
+                    var token = this.tokens[selectionStart];
+
+                    while (currentChar && currentChar === token) {
+                        selectionStart -= 1;
+                        currentChar = value.charAt(selectionStart);
+                        token = this.tokens[selectionStart];
+                    }
+
+                    if (currentChar && (token.test || $.isFunction(token))) {
+                        element.val(value.substring(0, selectionStart) + this.options.emptySymbol + value.substring(selectionStart + 1));
+                        caret(element[0], selectionStart - 1);
+                    }
+
+                    e.preventDefault();
+                }
+            }
+        },
+
+        _keypress: function(e) {
+
+            var element = this.element;
+            var selection = caret(element[0]);
+            var selectionStart = selection[0];
+            //var selectionEnd = selection[1];
+            //
+            var character = String.fromCharCode(e.which);
+
+            var value = element.val();
+            var currentChar = value.charAt(selectionStart);
+            var token = this.tokens[selectionStart];
+
+            while (currentChar && currentChar === token) {
+                selectionStart += 1;
+                currentChar = value.charAt(selectionStart);
+                token = this.tokens[selectionStart];
+            }
+
+            var valid = false;
+
+            if (token) {
+                if (token.test) {
+                    valid = token.test(character);
+                } /*else if ($.isFunction(token)) {
+                    valid = token(character);
+                }*/
+            }
+
+            if (valid) {
+                element.val(value.substring(0, selectionStart) + character + value.substring(selectionStart + 1));
+
+                selectionStart += 1;
+                currentChar = value.charAt(selectionStart);
+                token = this.tokens[selectionStart];
+
+                while (currentChar && currentChar === token) {
+                    selectionStart += 1;
+                    currentChar = value.charAt(selectionStart);
+                    token = this.tokens[selectionStart];
+                }
+
+                caret(element[0], selectionStart);
+            }
+
+            e.preventDefault();
         },
 
         _tokenize: function() {
@@ -101,6 +190,42 @@ var __meta__ = {
                             .addClass(DOMelement.className);
         }
     });
+
+    function caret(element, position) {
+        var range,
+            isPosition = position !== undefined;
+
+        if (element.selectionStart !== undefined) {
+            if (isPosition) {
+                element.focus();
+                element.setSelectionRange(position, position);
+            } else {
+                position = [element.selectionStart, element.selectionEnd];
+            }
+        } else if (document.selection) {
+            if ($(element).is(":visible")) {
+                element.focus();
+            }
+            range = document.selection.createRange();
+            if (isPosition) {
+                range.move("character", position);
+                range.select();
+            } else {
+                var rangeElement = element.createTextRange(),
+                    rangeDuplicated = rangeElement.duplicate(),
+                    selectionStart, selectionEnd;
+
+                    rangeElement.moveToBookmark(range.getBookmark());
+                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+                    selectionStart = rangeDuplicated.text.length;
+                    selectionEnd = selectionStart + rangeElement.text.length;
+
+                position = [selectionStart, selectionEnd];
+            }
+        }
+
+        return position;
+    }
 
     ui.plugin(MaskInput);
 
