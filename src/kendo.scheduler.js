@@ -656,6 +656,11 @@ var __meta__ = {
             var zone = this.reader.timezone;
             var head = this.get(model.recurrenceId);
             var recurrenceException = head.recurrenceException || "";
+            /*var modelTimezone = head.startTimezone || head.endTimezone;
+
+            if (modelTimezone) {
+                start = kendo.timezone.convert(start, modelTimezone, zone);
+            }*/
 
             if (!recurrence.isException(recurrenceException, start, zone)) {
                 head.set(RECURRENCE_EXCEPTION, recurrenceException + recurrence.toExceptionString(start, zone));
@@ -2261,11 +2266,17 @@ var __meta__ = {
                     }
                 }
 
+                //that.dataSource._removeExceptions(head);
+
                 updateEvent(head);
             };
 
-            var updateOcurrence = function() {
-                var exception = recurrenceHead(event).toOccurrence({ start: event.start, end: event.end });
+            var updateOccurrence = function() {
+                var head = recurrenceHead(event);
+
+                //that._convertDates(head);
+
+                var exception = head.toOccurrence({ start: event.start, end: event.end });
                 updateEvent(that.dataSource.add(exception));
             };
 
@@ -2276,7 +2287,7 @@ var __meta__ = {
                     title: recurrenceMessages.editWindowTitle,
                     text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
                     buttons: [
-                        { text: recurrenceMessages.editWindowOccurrence, click: updateOcurrence },
+                        { text: recurrenceMessages.editWindowOccurrence, click: updateOccurrence },
                         { text: recurrenceMessages.editWindowSeries, click: updateSeries }
                     ]
                 });
@@ -2621,6 +2632,9 @@ var __meta__ = {
 
             var deleteOcurrence = function() {
                 var occurrence = currentModel.recurrenceId ? currentModel : currentModel.toOccurrence();
+                //var head = that.dataSource.get(occurrence.recurrenceId);
+
+                //that._convertDates(head);
                 that._removeEvent(occurrence);
             };
 

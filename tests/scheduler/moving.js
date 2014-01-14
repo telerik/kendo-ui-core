@@ -16,7 +16,7 @@
         }
     });
 
-    test("hint shows start and end time when moving event in week view", function() {
+    /*test("hint shows start and end time when moving event in week view", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
             startTime: new Date("2013/6/6 10:00"),
@@ -1400,6 +1400,27 @@
         equal(event.start.getMinutes(), 15);
         equal(event.end.getHours(), 10);
         equal(event.end.getMinutes(), 45);
+    });
+    */
+
+    test("moving the event with startTimezone preserves its last place", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/5/26"),
+            timezone: "Etc/UTC",
+            views: ["week"],
+            dataSource: [
+                { id: 1, start: new Date("2013/5/27 3:00"), end: new Date("2013/5/27 4:30"), title: "", startTimezone: "Europe/Berlin" }
+            ]
+        });
+
+        var handle = div.find(".k-event:last");
+
+        var slot = div.find(".k-scheduler-content tr").eq(1).find("td").eq(1);
+
+        dragdrop(scheduler, handle, slot);
+
+        equal(scheduler.dataSource.at(0).start.getHours(), 0);
+        equal(scheduler.dataSource.at(0).start.getMinutes(), 30);
     });
 
     function dragcancel(scheduler) {
