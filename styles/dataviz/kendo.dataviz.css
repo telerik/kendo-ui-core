@@ -269,6 +269,18 @@ span.k-sparkline,
     right: 0;
 }
 
+.k-map-controls {
+    position: absolute;
+}
+
+.k-map-controls.k-pos-left .k-widget:first-child {
+    margin-right: 0;
+}
+
+.k-map-controls.k-pos-right .k-widget:first-child {
+    margin-left: 0;
+}
+
 /* Map navigator */
 
 .k-navigator
@@ -277,7 +289,9 @@ span.k-sparkline,
     height: 50px;
     margin: 20px;
     border-radius: 80px;
-    position: absolute;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .k-navigator > button
@@ -355,11 +369,15 @@ div.k-navigator .k-navigator-w
     background-color: rgba(255, 255, 255, 0.8);
     font-size: 10px;
     padding: 2px 4px;
-    position: absolute;
     z-index: 1000;
 }
 
 /* Zoom */
+
+.k-zoom-control {
+    margin: 20px;
+    vertical-align: middle;
+}
 
 .k-button-wrap
 {

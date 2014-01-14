@@ -5,7 +5,6 @@
 (function ($) {
     var kendo = window.kendo;
     var Widget = kendo.ui.Widget;
-    var renderPos = kendo.dataviz.util.renderPos;
     var NS = ".kendoZoomControl";
 
     function button(dir, symbol) {
@@ -22,15 +21,13 @@
             this._initOptions(options);
 
             this.element.addClass("k-widget k-zoom-control k-button-wrap k-buttons-horizontal")
-                        .addClass(renderPos(this.options.position))
                         .append(BUTTONS)
                         .on("click" + NS, ".k-button", $.proxy(this, "_click"));
         },
 
         options: {
             name: "ZoomControl",
-            zoomStep: 1,
-            position: "topLeft"
+            zoomStep: 1
         },
 
         events: [
