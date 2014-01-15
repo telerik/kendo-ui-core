@@ -2939,6 +2939,9 @@
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\map\bing.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\dataviz\map\bing.aspx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
