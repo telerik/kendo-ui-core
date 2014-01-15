@@ -315,6 +315,27 @@
         equal(scheduler.dataSource.at(1).start.getMonth(), 4);
     });
 
+    test("moving the recurrence head removes all exceptions", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/5/26"),
+            views: ["week"],
+            dataSource: [
+                { id: 1, start: new Date("2013/5/26 11:00"), end: new Date("2013/5/26 11:30"), title: "", recurrenceRule: "FREQ=DAILY;COUNT=2" },
+                { id: 2, recurrenceId: 1, start: new Date("2013/5/26 11:00"), end: new Date("2013/5/26 11:30"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-event:first");
+
+        var slot = div.find(".k-scheduler-content tr").eq(0).find("td").eq(0);
+
+        dragdrop(scheduler, handle, slot);
+
+        $(".k-window .k-button:last").click();
+
+        equal(scheduler.dataSource.data().length, 1);
+    });
+
     test("hint shows east icon when the end time is after the end of the month view", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),

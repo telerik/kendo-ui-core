@@ -2265,7 +2265,7 @@ var __meta__ = {
                     }
                 }
 
-                //that.dataSource._removeExceptions(head);
+                that.dataSource._removeExceptions(head);
 
                 updateEvent(head);
             };

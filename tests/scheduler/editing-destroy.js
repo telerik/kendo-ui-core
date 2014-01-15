@@ -8,7 +8,7 @@
 
     module("editing destroy", {
         setup: function() {
-            container = $("<div>").appendTo(QUnit.fixture);
+            container = $("<div>");
         },
         teardown: function() {
             kendo.destroy(container);
