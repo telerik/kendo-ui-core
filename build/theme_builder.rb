@@ -82,6 +82,9 @@ file_merge 'themebuilder/scripts/themebuilder.all.js' => [
     'themebuilder/scripts/template.js'
 ]
 file 'themebuilder/scripts/themebuilder.all.js' => THEME_BUILDER_BUILDFILE
+file 'themebuilder/scripts/themebuilder.all.min.js' => 'themebuilder/scripts/themebuilder.all.js' do
+    uglifyjs('themebuilder/scripts/themebuilder.all.js', 'themebuilder/scripts/themebuilder.all.min.js');
+end
 
 CLEAN.include('themebuilder/scripts/themebuilder.all*js')
 CLEAN.include('themebuilder/scripts/themebuilder.all*css')
