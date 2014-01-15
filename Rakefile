@@ -62,7 +62,7 @@ require 'winrm_tools'
 require 'playground'
 
 ROOT_MAP = {
-    '.' => /(src|styles\/.+?)\//,
+    '.' => /(dist\/js|styles\/.+?)\//,
     'js' => DIST_JS_ROOT,
     'styles' => /styles\/.+?\//,
     'src/js' => DIST_JS_ROOT,

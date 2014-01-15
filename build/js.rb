@@ -57,7 +57,6 @@ CDN_MIN_JS_MAP = FileList[MVC_MIN_JS_MAP]
 
 WIN_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.winjs.min.js')]
 WIN_SRC_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.winjs.js')]
-WIN_MIN_JS_MAP = maps(WIN_SRC_JS)
 
 ICENIUM_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.icenium.min.js')].include(JQUERY)
 
