@@ -4,3 +4,4 @@
 *
 * The use of Kendo UI Mobile and Kendo UI DataViz in Telerik AppBuilder is governed by the Telerik End User License Agreement for Telerik AppBuilder at
 * http://www.telerik.com/license-agreement/appbuilder
+*/
