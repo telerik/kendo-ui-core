@@ -12,7 +12,7 @@ namespace Kendo.Models
             "web/kendo.common.less",
             "web/kendo.rtl.css",
             "web/kendo.silver.less",
-            "dataviz/kendo.dataviz.css",
+            "dataviz/kendo.dataviz.less",
             "dataviz/kendo.dataviz.silver.css"
 #else
             "kendo.common.min.css",
@@ -29,7 +29,7 @@ namespace Kendo.Models
             "web/kendo.common.less",
             "web/kendo.rtl.css",
             "web/kendo.metro.less",
-            "dataviz/kendo.dataviz.css",
+            "dataviz/kendo.dataviz.less",
             "dataviz/kendo.dataviz.metro.css"
 #else
             "kendo.common.min.css",
@@ -69,7 +69,7 @@ namespace Kendo.Models
 #if DEBUG
             "web/kendo.common-bootstrap.less",
             "web/kendo.bootstrap.less",
-            "dataviz/kendo.dataviz.css",
+            "dataviz/kendo.dataviz.less",
             "dataviz/kendo.dataviz.bootstrap.css"
 #else
             "kendo.common-bootstrap.min.css",
