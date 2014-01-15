@@ -29,7 +29,6 @@ def bundle(options)
         file_license license => File.join(legal_dir, "#{options[:license]}.txt")
     end
 
-
     options[:contents].each do |target, contents|
 
         root = ROOT_MAP[target]
