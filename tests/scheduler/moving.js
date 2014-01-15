@@ -315,6 +315,27 @@
         equal(scheduler.dataSource.at(1).start.getMonth(), 4);
     });
 
+    test("moving the recurrence head removes all exceptions", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/5/26"),
+            views: ["week"],
+            dataSource: [
+                { id: 1, start: new Date("2013/5/26 11:00"), end: new Date("2013/5/26 11:30"), title: "", recurrenceRule: "FREQ=DAILY;COUNT=2" },
+                { id: 2, recurrenceId: 1, start: new Date("2013/5/26 11:00"), end: new Date("2013/5/26 11:30"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-event:first");
+
+        var slot = div.find(".k-scheduler-content tr").eq(0).find("td").eq(0);
+
+        dragdrop(scheduler, handle, slot);
+
+        $(".k-window .k-button:last").click();
+
+        equal(scheduler.dataSource.data().length, 1);
+    });
+
     test("hint shows east icon when the end time is after the end of the month view", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
@@ -1400,6 +1421,96 @@
         equal(event.start.getMinutes(), 15);
         equal(event.end.getHours(), 10);
         equal(event.end.getMinutes(), 45);
+    });
+
+    test("moving the event with startTimezone preserves its last place", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/5/26"),
+            timezone: "Etc/UTC",
+            views: ["week"],
+            dataSource: [
+                { id: 1, start: new Date("2013/5/27 3:00"), end: new Date("2013/5/27 4:30"), title: "", startTimezone: "Europe/Berlin" }
+            ]
+        });
+
+        var handle = div.find(".k-event:last");
+
+        var slot = div.find(".k-scheduler-content tr").eq(1).find("td").eq(1);
+
+        dragdrop(scheduler, handle, slot);
+
+        equal(scheduler.dataSource.at(0).start.getHours(), 0);
+        equal(scheduler.dataSource.at(0).start.getMinutes(), 30);
+    });
+
+    test("moving an occurrence with startTimezone preserves series place", function() {
+        var start = new Date("2013/5/27 6:00");
+        var end = new Date("2013/5/27 6:30");
+        var berlinTZ = "Europe/Berlin";
+        var utcTZ = "Etc/UTC";
+
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/5/26"),
+            timezone: utcTZ,
+            views: ["week"],
+            dataSource: [
+                { id: 1, start: start, end: end, title: "", startTimezone: berlinTZ, recurrenceRule: "FREQ=DAILY;COUNT=2" }
+            ]
+        });
+
+        start = scheduler.dataSource.at(0).start;
+
+        var handle = div.find(".k-event:last");
+
+        var slot = div.find(".k-scheduler-content tr").eq(1).find("td").eq(2);
+
+        dragdrop(scheduler, handle, slot);
+
+        $(".k-window").find(".k-button:first").click()
+
+        var occurrence = scheduler.occurrenceByUid(div.find(".k-event:last").attr("data-uid"));
+
+        equal(div.find(".k-event").length, 2);
+
+        equal(occurrence.start.getHours(), 0);
+        equal(occurrence.start.getMinutes(), 30);
+
+        equal(scheduler.dataSource.at(0).start.getHours(), start.getHours());
+        equal(scheduler.dataSource.at(0).start.getMinutes(), start.getMinutes());
+    });
+
+    test("moving a head occurrence with startTimezone preserves series place", function() {
+        var start = new Date("2013/5/27 6:00");
+        var end = new Date("2013/5/27 6:30");
+        var berlinTZ = "Europe/Berlin";
+        var utcTZ = "Etc/UTC";
+
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/5/26"),
+            timezone: utcTZ,
+            views: ["week"],
+            dataSource: [
+                { id: 1, start: start, end: end, title: "", startTimezone: berlinTZ, recurrenceRule: "FREQ=DAILY;COUNT=2" }
+            ]
+        });
+
+        start = scheduler.dataSource.at(0).start;
+
+        var handle = div.find(".k-event:first");
+
+        var slot = div.find(".k-scheduler-content tr").eq(1).find("td").eq(1);
+
+        dragdrop(scheduler, handle, slot);
+
+        $(".k-window").find(".k-button:first").click()
+
+        equal(div.find(".k-event").length, 2);
+
+        equal(scheduler.dataSource.at(0).start.getHours(), start.getHours());
+        equal(scheduler.dataSource.at(0).start.getMinutes(), start.getMinutes());
+
+        equal(scheduler.dataSource.at(1).start.getHours(), 0);
+        equal(scheduler.dataSource.at(1).start.getMinutes(), 30);
     });
 
     function dragcancel(scheduler) {
