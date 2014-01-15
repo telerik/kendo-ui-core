@@ -281,7 +281,7 @@ tree :to => 'dist/demos/staging/content/cdn/js',
 
 tree :to => 'dist/demos/staging/content/cdn/styles',
      :from => MIN_CSS_RESOURCES,
-     :root => /styles\/.+?\//
+     :root => ROOT_MAP['styles']
 
 tree :to => 'dist/demos/staging/content/cdn/styles/telerik',
      :from => FileList['wrappers/mvc/legacy-themes/**/*'].include(LEGACY_MIN_CSS),

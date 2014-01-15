@@ -57,7 +57,7 @@ MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                     .sub(DIST_JS_ROOT, MVC_DEMOS_ROOT + 'Scripts')
                 )
                 .include(FileList[MIN_CSS_RESOURCES]
-                    .sub('styles', MVC_DEMOS_ROOT + 'Content')
+                    .sub('dist/styles', MVC_DEMOS_ROOT + 'Content')
                 )
                 .include(FileList[DEMO_SHARED_ROOT + 'shared/js/**/*']
                     .reject { |f| File.directory? f }
@@ -130,7 +130,7 @@ assembly_info_file 'wrappers/mvc/src/shared/CommonAssemblyInfo.cs'
 namespace :mvc do
     tree :to => MVC_DEMOS_ROOT + 'Content',
          :from => MIN_CSS_RESOURCES,
-         :root => 'styles/'
+         :root => ROOT_MAP['styles']
 
     tree :to => MVC_DEMOS_ROOT + 'App_Data',
          :from => 'demos/mvc/App_Data/*.nav.json',

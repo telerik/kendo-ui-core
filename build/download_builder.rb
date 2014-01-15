@@ -13,7 +13,7 @@ KENDO_META = File.join(Rake.application.original_dir, "build", "kendo-meta.js");
 namespace :download_builder do
 
     task :sources do
-        sh "./node_modules/.bin/grunt kendo:download_builder"
+        grunt "kendo:download_builder"
         core = File.join(BUILDER_DEPLOY_PATH, 'js/kendo.core.min.js')
 
         contents = File.read(core)
@@ -38,7 +38,7 @@ namespace :download_builder do
         styles_assets_path = File.join(assets_path, 'styles')
         tree :to => styles_assets_path,
             :from => MIN_CSS_RESOURCES,
-            :root => /styles\/.+?\//
+            :root => ROOT_MAP['styles']
 
         config_file_dir = File.join(dist_path, 'config')
         config_file_path = File.join(config_file_dir,  "kendo-config.#{VERSION}.json")
@@ -75,7 +75,7 @@ namespace :download_builder do
 
         tree :to => css_path,
              :from => MIN_CSS_RESOURCES,
-             :root => /styles\/.+?\//
+             :root => ROOT_MAP['styles']
 
         config_file_path = File.join(dist_path,  "kendo-config.#{VERSION}.json").sub(/((\w+|\.){6})\./, '\1 ')
 

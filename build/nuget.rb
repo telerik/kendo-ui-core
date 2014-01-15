@@ -5,7 +5,7 @@ NUGET_SPEC = 'dist/nuget/KendoUIWeb.nuspec'
 
 tree :to => NUGET_CSS,
      :from => WEB_MIN_CSS,
-     :root => 'styles/web'
+     :root => 'dist/styles/web'
 
 tree :to => NUGET_JS,
      :from => WEB_MIN_JS,

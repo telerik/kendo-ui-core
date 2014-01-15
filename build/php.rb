@@ -27,7 +27,7 @@ tree :to => PHP_DEMOS_RESOURCES + "js",
 
 tree :to => PHP_DEMOS_RESOURCES + "css",
      :from => MIN_CSS_RESOURCES,
-     :root => 'styles/'
+     :root => ROOT_MAP['styles']
 
 tree :to => PHP_DEMOS_RESOURCES,
      :from => PHP_DEMOS_NAVIGATION,

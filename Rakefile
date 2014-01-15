@@ -15,6 +15,7 @@ CDN_ROOT = 'http://cdn.kendostatic.com/'
 KENDO_ORIGIN_HOST = 'kendoorigin'
 STAGING_CDN_ROOT = 'http://cdn.kendostatic.com/staging/'
 DIST_JS_ROOT = "dist/js"
+DIST_STYLES_ROOT = "dist/styles/"
 KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
 PLATFORM = RbConfig::CONFIG['host_os']
@@ -34,6 +35,28 @@ else
 end
 
 ADMIN_PASS = 'ultra'
+
+ROOT_MAP = {
+    '.' => /(dist\/js|dist\/styles\/.+?)\//,
+    'js' => DIST_JS_ROOT,
+    'styles' => /dist\/styles\/.+?\//,
+    'src/js' => DIST_JS_ROOT,
+    'src/styles' => /dist\/styles\/.+?\//,
+    'src/Kendo.Mvc/Kendo.Mvc' => 'wrappers/mvc/src/Kendo.Mvc/',
+    'src/Kendo.Mvc/packages' => 'wrappers/mvc/packages/',
+    'wrappers/aspnetmvc/LegacyThemes' => 'wrappers/mvc/legacy-themes/',
+    'styles/telerik' => 'wrappers/mvc/legacy-themes/',
+    'wrappers/aspnetmvc/EditorTemplates/ascx' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
+    'wrappers/aspnetmvc/EditorTemplates/razor' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
+    'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/',
+    'wrappers/aspnetmvc/Binaries/Mvc4' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
+    'wrappers/aspnetmvc/Binaries/Mvc5' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/',
+    'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
+    'src/kendo-taglib' => 'wrappers/java/kendo-taglib/',
+    'src/php' => 'wrappers/php/',
+    'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/',
+    'wrappers/php' => 'wrappers/php'
+}
 
 require 'version'
 require 'timezone'
@@ -60,28 +83,6 @@ require 'codegen'
 require 'nuget'
 require 'winrm_tools'
 require 'playground'
-
-ROOT_MAP = {
-    '.' => /(dist\/js|styles\/.+?)\//,
-    'js' => DIST_JS_ROOT,
-    'styles' => /styles\/.+?\//,
-    'src/js' => DIST_JS_ROOT,
-    'src/styles' => /styles\/.+?\//,
-    'src/Kendo.Mvc/Kendo.Mvc' => 'wrappers/mvc/src/Kendo.Mvc/',
-    'src/Kendo.Mvc/packages' => 'wrappers/mvc/packages/',
-    'wrappers/aspnetmvc/LegacyThemes' => 'wrappers/mvc/legacy-themes/',
-    'styles/telerik' => 'wrappers/mvc/legacy-themes/',
-    'wrappers/aspnetmvc/EditorTemplates/ascx' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
-    'wrappers/aspnetmvc/EditorTemplates/razor' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
-    'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/',
-    'wrappers/aspnetmvc/Binaries/Mvc4' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
-    'wrappers/aspnetmvc/Binaries/Mvc5' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/',
-    'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
-    'src/kendo-taglib' => 'wrappers/java/kendo-taglib/',
-    'src/php' => 'wrappers/php/',
-    'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/',
-    'wrappers/php' => 'wrappers/php'
-}
 
 MVC_BINARIES = {
     'wrappers/aspnetmvc/Binaries/Mvc3' => MVC3_DLL,
@@ -133,11 +134,13 @@ end
 desc('JavaScript')
 
 task :js do
-    sh './node_modules/.bin/grunt all'
+    grunt :all
 end
 
-desc('Less')
-multitask :less => [MIN_CSS].flatten
+desc "Build less files in dist/styles"
+task :less do
+    grunt :styles
+end
 
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
