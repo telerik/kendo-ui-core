@@ -464,4 +464,16 @@
 
         equal(related[0], row[0]);
     });
+
+    test("grid is resized on window resize", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        var resize = stub(grid, "resize");
+
+        $(window).trigger("resize");
+
+        equal(resize.calls("resize"),1);
+    });
 })();

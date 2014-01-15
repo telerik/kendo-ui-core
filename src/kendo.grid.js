@@ -653,6 +653,11 @@ var __meta__ = {
                 that._footer();
             }
 
+            if (that.staticContent) {
+                that._resizeHandler = function()  { that.resize(); };
+                $(window).on("resize" + NS, that._resizeHandler);
+            }
+
             kendo.notify(that);
         },
 
@@ -730,6 +735,10 @@ var __meta__ = {
                 element;
 
             Widget.fn.destroy.call(that);
+
+            if (that._resizeHandler) {
+                $(window).off("resize" + NS, that._resizeHandler);
+            }
 
             if (that.pager) {
                 that.pager.destroy();
@@ -1738,6 +1747,8 @@ var __meta__ = {
 
             if (row.length > 1) {
                 adjustRowHeight(row[0], row[1]);
+
+                that._setStaticContainersWidth();
             }
 
             that.trigger(EDIT, { container: row, model: model });
@@ -2765,9 +2776,11 @@ var __meta__ = {
                     for (var idx = 0, length = columns.length; idx < length; idx++) {
                         width += columns[idx].width;
                     }
+
                     this.staticHeader.width(width);
                     this.staticContent.width(width);
-                    this.content.width(this.wrapper.width() - width - 1);
+
+                    this.content[0].style.width = this.wrapper[0].clientWidth - width - 1 + "px";
 
                     if (this.staticFooter) {
                         this.staticFooter.width(width);
