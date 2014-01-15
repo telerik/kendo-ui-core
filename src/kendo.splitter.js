@@ -521,7 +521,7 @@ var __meta__ = {
             config = config || {};
 
             var that = this,
-                idx = referencePane.index(".k-pane"),
+                idx = that.wrapper.children(".k-pane").index(referencePane),
                 paneElement = $("<div />").insertBefore($(referencePane));
 
             return that._addPane(config, idx, paneElement);
@@ -532,7 +532,7 @@ var __meta__ = {
             config = config || {};
 
             var that = this,
-                idx = referencePane.index(".k-pane"),
+                idx = that.wrapper.children(".k-pane").index(referencePane),
                 paneElement = $("<div />").insertAfter($(referencePane));
 
             return that._addPane(config, idx + 1, paneElement);
@@ -546,7 +546,7 @@ var __meta__ = {
             if (pane.length) {
                 kendo.destroy(pane);
                 pane.each(function(idx, element){
-                    that.options.panes.splice($(element).index(".k-pane"), 1);
+                    that.options.panes.splice(that.wrapper.children(".k-pane").index(element), 1);
                     $(element).remove();
                 });
 
