@@ -1058,8 +1058,7 @@
     vertical-align: middle;
     -webkit-transform-origin: 160% 50%;
     transform-origin: 160% 50%;
-    -webkit-animation: km-ios-spin 1s infinite linear;
-    animation: km-ios-spin 1s infinite linear;
+    .animation(km-ios-spin2 1s infinite steps(8));
 }
 
 .km-ios .km-loading,
@@ -1120,22 +1119,16 @@
 .km-ios .km-scroller-refresh .km-loading-left
 {
     margin-left: -.6em;
-    background: rgba(0,0,0,.55);
-    -webkit-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-    -webkit-animation: km-ios-spin1 1s infinite linear;
-    animation: km-ios-spin1 1s infinite linear;
+    background: rgba(0,0,0,.5);
+    .animation(km-ios-spin1 1s infinite steps(8));
 }
 
 .km-ios .km-loader .km-loading-right,
 .km-ios .km-scroller-refresh .km-loading-right
 {
     margin-left: -.6em;
-    background: rgba(0,0,0,.2);
-    -webkit-transform: rotate(-270deg);
-    transform: rotate(-270deg);
-    -webkit-animation: km-ios-spin2 1s infinite linear;
-    animation: km-ios-spin2 1s infinite linear;
+    background: rgba(0,0,0,.5);
+    .animation(km-ios-spin2 1s infinite steps(8));
 }
 
 .km-ios .km-loader .km-loading-right:before,
@@ -1152,65 +1145,20 @@
 
 @-webkit-keyframes km-ios-spin
 {
-    0% { -webkit-transform: rotate(0deg); }
-    12.49% { -webkit-transform: rotate(0deg); }
-    12.5% { -webkit-transform: rotate(45deg); }
-    24.99% { -webkit-transform: rotate(45deg); }
-    25% { -webkit-transform: rotate(90deg); }
-    37.49% { -webkit-transform: rotate(90deg); }
-    37.5% { -webkit-transform: rotate(135deg); }
-    49.99% { -webkit-transform: rotate(135deg); }
-    50% { -webkit-transform: rotate(180deg); }
-    62.49% { -webkit-transform: rotate(180deg); }
-    62.5% { -webkit-transform: rotate(225deg); }
-    74.99% { -webkit-transform: rotate(225deg); }
-    75% { -webkit-transform: rotate(270deg); }
-    87.49% { -webkit-transform: rotate(270deg); }
-    87.5% { -webkit-transform: rotate(315deg); }
-    99.99% { -webkit-transform: rotate(315deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
 }
 
 @-webkit-keyframes km-ios-spin1
 {
-    0% { -webkit-transform: rotate(-135deg); }
-    12.49% { -webkit-transform: rotate(-135deg); }
-    12.5% { -webkit-transform: rotate(-90deg); }
-    24.99% { -webkit-transform: rotate(-90deg); }
-    25% { -webkit-transform: rotate(-45deg); }
-    37.49% { -webkit-transform: rotate(-45deg); }
-    37.5% { -webkit-transform: rotate(0deg); }
-    49.99% { -webkit-transform: rotate(0deg); }
-    50% { -webkit-transform: rotate(45deg); }
-    62.49% { -webkit-transform: rotate(45deg); }
-    62.5% { -webkit-transform: rotate(90deg); }
-    74.99% { -webkit-transform: rotate(90deg); }
-    75% { -webkit-transform: rotate(135deg); }
-    87.49% { -webkit-transform: rotate(135deg); }
-    87.5% { -webkit-transform: rotate(180deg); }
-    99.99% { -webkit-transform: rotate(180deg); }
-    100% { -webkit-transform: rotate(225deg); }
+    from { -webkit-transform: rotate(-135deg); }
+    to { -webkit-transform: rotate(225deg); }
 }
 
 @-webkit-keyframes km-ios-spin2
 {
-    0% { -webkit-transform: rotate(-270deg); }
-    12.49% { -webkit-transform: rotate(-270deg); }
-    12.5% { -webkit-transform: rotate(-225deg); }
-    24.99% { -webkit-transform: rotate(-225deg); }
-    25% { -webkit-transform: rotate(-180deg); }
-    37.49% { -webkit-transform: rotate(-180deg); }
-    37.5% { -webkit-transform: rotate(-135deg); }
-    49.99% { -webkit-transform: rotate(-135deg); }
-    50% { -webkit-transform: rotate(-90deg); }
-    62.49% { -webkit-transform: rotate(-90deg); }
-    62.5% { -webkit-transform: rotate(-45deg); }
-    74.99% { -webkit-transform: rotate(-45deg); }
-    75% { -webkit-transform: rotate(0deg); }
-    87.49% { -webkit-transform: rotate(0deg); }
-    87.5% { -webkit-transform: rotate(45deg); }
-    99.99% { -webkit-transform: rotate(45deg); }
-    100% { -webkit-transform: rotate(90deg); }
+    from { -webkit-transform: rotate(-270deg); }
+    to { -webkit-transform: rotate(90deg); }
 }
 
 @-moz-keyframes km-ios-spin
