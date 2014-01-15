@@ -227,6 +227,52 @@
         equal(grid.staticHeader.find("th.k-group-cell").length, 1);
     });
 
+    test("group row in static content has correct colspan", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.staticTable.find(".k-grouping-row > td:first").attr("colspan"), 2); // groupcell + static column
+    });
+
+    test("group row in non static content has correct colspan", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.table.find(".k-grouping-row > td:first").attr("colspan"), 2); // two non static columns
+    });
+
+    test("group row in non static content has correct colspan with multiple groups", function() {
+        var grid = setup({
+            dataSource: {
+                group: [ {field: "foo" }, { field: "bar" }]
+            },
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.table.find(".k-grouping-row:first > td:first").attr("colspan"), 2); // two non static columns
+        equal(grid.table.find(".k-grouping-row:eq(1) > td:first").attr("colspan"), 2); // two non static columns
+    });
+
+    test("group row in static content has correct colspan with multiple groups", function() {
+        var grid = setup({
+            dataSource: {
+                group: [ {field: "foo" }, { field: "bar" }]
+            },
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.staticTable.find(".k-grouping-row:first > td:first").attr("colspan"), 3); // two groupcells + static column
+        equal(grid.staticTable.find(".k-grouping-row:eq(1) > td:eq(1)").attr("colspan"), 2); // single groupcell + static column
+    });
+
     test("no group cell is added to the non static header", function() {
         var grid = setup({
             dataSource: {

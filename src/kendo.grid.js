@@ -1746,8 +1746,8 @@ var __meta__ = {
                 });
 
             if (row.length > 1) {
-                adjustRowHeight(row[0], row[1]);
 
+                adjustRowHeight(row[0], row[1]);
                 that._setStaticContainersWidth();
             }
 
@@ -3881,7 +3881,7 @@ var __meta__ = {
             return html;
         },
 
-        _groupRowHtml: function(group, colspan, level, groupHeaderBuilder, templates) {
+        _groupRowHtml: function(group, colspan, level, groupHeaderBuilder, templates, skipColspan) {
             var that = this,
                 html = "",
                 idx,
@@ -3905,7 +3905,7 @@ var __meta__ = {
 
             if(group.hasSubgroups) {
                 for(idx = 0, length = groupItems.length; idx < length; idx++) {
-                    html += that._groupRowHtml(groupItems[idx], colspan - 1, level + 1, groupHeaderBuilder, templates);
+                    html += that._groupRowHtml(groupItems[idx], skipColspan ? colspan : colspan - 1, level + 1, groupHeaderBuilder, templates, skipColspan);
                 }
             } else {
                 html += that._rowsHtml(groupItems, templates);
@@ -4344,7 +4344,7 @@ var __meta__ = {
                 }
 
                 for (idx = 0, length = data.length; idx < length; idx++) {
-                    html += that._groupRowHtml(data[idx], colspan, 0,  isStatic ? groupRowStaticContentBuilder : groupRowBuilder, templates);
+                    html += that._groupRowHtml(data[idx], colspan, 0, isStatic ? groupRowStaticContentBuilder : groupRowBuilder, templates, isStatic);
                 }
             } else {
                 html += that._rowsHtml(data, templates);
