@@ -55,6 +55,15 @@ class QRCode extends \Kendo\UI\Widget {
     }
 
     /**
+    * Sets the minimum distance in pixels that should be left between the border and the QR modules.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\QRCode
+    */
+    public function padding($value) {
+        return $this->setProperty('padding', $value);
+    }
+
+    /**
     * Sets the preferred rendering engine.
 If it is not supported by the browser, the QRCode will switch to the first available mode.The supported values are:
     * @param string $value

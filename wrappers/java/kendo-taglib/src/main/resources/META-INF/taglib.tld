@@ -15472,6 +15472,12 @@ is closed. Options include "fadeOut".</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Sets the minimum distance in pixels that should be left between the border and the QR modules.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>Sets the preferred rendering engine.
 If it is not supported by the browser, the QRCode will switch to the first available mode.The supported values are:</description>
             <name>renderAs</name>
