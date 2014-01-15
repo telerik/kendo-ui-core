@@ -97,6 +97,7 @@
                         if (content.is("#HTML-1")) {
                             var html = content.find('.prettyprint').text();
                             html = html.replace("<head>", "<head>" + '<base href="http://@(Request.Headers["host"] + Url.Content("~/"))">'); 
+                            html = html.replace(/\n/g, '&#10;');
                             content.data("html", html);
                         }
                         prettyPrint();
