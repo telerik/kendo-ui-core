@@ -58,6 +58,7 @@ namespace Kendo.Models
             "dataviz/map/location.js",
             "dataviz/map/navigator.js",
             "dataviz/map/attribution.js",
+            "dataviz/map/zoom.js",
             "dataviz/map/crs.js",
             "dataviz/map/layers/shape.js",
             "dataviz/map/layers/tile.js",
