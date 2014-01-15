@@ -108,7 +108,7 @@ function mousewheel(element, delta) {
 $('head')
     .append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" type="text/css" />')
     .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.common.less" type="text/css" />')
-    .append('<link rel="stylesheet" href="/base/styles/dataviz/kendo.dataviz.css" type="text/css" />')
+    .append('<link rel="stylesheet/less" href="/base/styles/dataviz/kendo.dataviz.less" type="text/css" />')
     .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.rtl.css" type="text/css" />');
 
 (function() {
