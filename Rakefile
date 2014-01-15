@@ -506,6 +506,7 @@ bundle :name => 'winjs.commercial',
        }
 
 bundle :name => 'icenium',
+       :license => 'src-license-icenium',       
        :type_script => { %w(mobile framework) => 'icenium' },
        :contents => {
             'styles' => ICENIUM_MIN_CSS,
