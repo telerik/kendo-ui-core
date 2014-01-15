@@ -230,6 +230,31 @@
         }
 
         /// <summary>
+        /// Sets the padding of the QR code.
+        /// </summary>
+        /// <param name="padding">The QR padding.</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().QRCode()
+        ///     .Name(&quot;qrCode&quot;)
+        ///     .Padding(5)
+        /// )
+        /// </code>
+        /// <code lang="ASPX">
+        /// &lt;%:Html.Kendo().QRCode()
+        ///     .Name(&quot;qrCode&quot;)
+        ///     .Padding(5)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public QRCodeBuilder Padding(int padding)
+        {
+            Component.Padding = padding;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the preferred rendering engine.
         /// If it is not supported by the browser, the Chart will switch to the first available mode.
         /// </summary>
