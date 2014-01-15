@@ -104,6 +104,14 @@ module.exports = function(grunt) {
             var destMin = dest.replace(/\.js$/, ".min.js");
             if (outdated(f, dest)) {
                 var code = grunt.file.read(f, { encoding: "utf8" });
+
+                // cultures depend on kendo.core but we can't declare that in the AMD wrapper because people would
+                // frequently load cultures along with kendo.all.js which already includes kendo.core.  Therefore we
+                // initialize window.kendo here if it's not present.
+                code = code.replace(/^(\s*)kendo\.cultures\[.*?\]\s*=/m, function(s, indent){
+                    return indent + "var kendo = window.kendo || (window.kendo = { cultures: {} });\n" + s;
+                });
+
                 code = META.wrapAMD([], code);
                 grunt.log.writeln("Writing " + dest);
                 grunt.file.write(dest, code);
