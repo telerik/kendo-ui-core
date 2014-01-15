@@ -1815,4 +1815,8 @@
   <ItemGroup>
     <Compile Include="UI\Map\MapType.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Map\Settings\MapLayerDefaultsBingSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsBingSettingsBuilder.cs" />
+  </ItemGroup>
 </Project>

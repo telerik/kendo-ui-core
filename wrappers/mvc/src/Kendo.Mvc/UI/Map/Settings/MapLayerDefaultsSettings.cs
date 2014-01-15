@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Bing = new MapLayerDefaultsBingSettings();
+                
             Shape = new MapLayerDefaultsShapeSettings();
                 
             Tile = new MapLayerDefaultsTileSettings();
@@ -37,6 +39,12 @@ namespace Kendo.Mvc.UI
             private set;
         }
         
+        public MapLayerDefaultsBingSettings Bing
+        {
+            get;
+            private set;
+        }
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -53,6 +61,12 @@ namespace Kendo.Mvc.UI
             if (tile.Any())
             {
                 json["tile"] = tile;
+            }
+                
+            var bing = Bing.ToJson();
+            if (bing.Any())
+            {
+                json["bing"] = bing;
             }
                 
         //<< Serialization
