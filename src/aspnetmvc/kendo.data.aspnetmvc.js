@@ -75,7 +75,7 @@
        delete options.take;
        delete options.skip;
 
-       return extend({}, options, result);
+       return result;
     }
 
     function convertNumber(value){
