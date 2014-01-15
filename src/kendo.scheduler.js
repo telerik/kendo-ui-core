@@ -2220,10 +2220,11 @@ var __meta__ = {
         _updateEvent: function(dir, event, eventInfo) {
             var that = this;
 
-            var updateEvent = function(event) {
+            var updateEvent = function(event, callback) {
                 try {
                     that._preventRefresh = true;
                     event.update(eventInfo);
+                    that._convertDates(event);
                 } finally {
                     that._preventRefresh = false;
                 }
@@ -2231,6 +2232,10 @@ var __meta__ = {
                 that.refresh();
 
                 if (!that.trigger(SAVE, { event: event })) {
+                    if (callback) {
+                        callback();
+                    }
+
                     that._updateSelection(event);
                     that.dataSource.sync();
                 }
@@ -2260,12 +2265,20 @@ var __meta__ = {
                     }
                 }
 
+                that.dataSource._removeExceptions(head);
+
                 updateEvent(head);
             };
 
-            var updateOcurrence = function() {
-                var exception = recurrenceHead(event).toOccurrence({ start: event.start, end: event.end });
-                updateEvent(that.dataSource.add(exception));
+            var updateOccurrence = function() {
+                var head = recurrenceHead(event);
+
+                var callback = function() {
+                    that._convertDates(head);
+                };
+
+                var exception = head.toOccurrence({ start: event.start, end: event.end });
+                updateEvent(that.dataSource.add(exception), callback);
             };
 
             var recurrenceMessages = that.options.messages.recurrenceMessages;
@@ -2275,7 +2288,7 @@ var __meta__ = {
                     title: recurrenceMessages.editWindowTitle,
                     text: recurrenceMessages.editRecurring ? recurrenceMessages.editRecurring : EDITRECURRING,
                     buttons: [
-                        { text: recurrenceMessages.editWindowOccurrence, click: updateOcurrence },
+                        { text: recurrenceMessages.editWindowOccurrence, click: updateOccurrence },
                         { text: recurrenceMessages.editWindowSeries, click: updateSeries }
                     ]
                 });
@@ -2618,8 +2631,11 @@ var __meta__ = {
 
             var currentModel = model;
 
-            var deleteOcurrence = function() {
+            var deleteOccurrence = function() {
                 var occurrence = currentModel.recurrenceId ? currentModel : currentModel.toOccurrence();
+                var head = that.dataSource.get(occurrence.recurrenceId);
+
+                that._convertDates(head);
                 that._removeEvent(occurrence);
             };
 
@@ -2637,7 +2653,7 @@ var __meta__ = {
                 title: recurrenceMessages.deleteWindowTitle,
                 text: recurrenceMessages.deleteRecurring ? recurrenceMessages.deleteRecurring : DELETERECURRING,
                 buttons: [
-                   { text: recurrenceMessages.deleteWindowOccurrence, click: deleteOcurrence },
+                   { text: recurrenceMessages.deleteWindowOccurrence, click: deleteOccurrence },
                    { text: recurrenceMessages.deleteWindowSeries, click: deleteSeries }
                 ]
             });
