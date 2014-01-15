@@ -53,7 +53,6 @@ span.k-sparkline,
 .k-stockchart .k-tooltip table {
     border-spacing: 0;
     border-collapse: collapse;
-    margin: auto;
 }
 
 .k-chart .k-tooltip th,
