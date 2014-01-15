@@ -5965,19 +5965,20 @@ kendo_module({
             var point = this,
                 options = point.options,
                 elements = [],
+                lineOptions = options.line,
                 lineStyle = {
-                    strokeOpacity: options.opacity,
+                    strokeOpacity: lineOptions.opacity || options.opacity,
                     zIndex: -1,
-                    strokeWidth: options.width,
-                    stroke: options.color,
-                    dashType: options.dashType
+                    strokeWidth: lineOptions.width,
+                    stroke: options.color || lineOptions.color,
+                    dashType: lineOptions.dashType
                 },
                 group = view.createGroup({
                     animation: {
                         type: CLIP
                     }
                 });
-
+            
             elements.push(point.createOverlayRect(view, options));
             elements.push(view.createPolyline(point.oPoints, true, lineStyle));
             elements.push(view.createPolyline(point.cPoints, true, lineStyle));

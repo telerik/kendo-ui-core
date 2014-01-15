@@ -172,17 +172,19 @@
             setup: function() {
                 setupOHLCChart(plotArea, {
                     series: [ $.extend({
-                        width: 4,
+                        line: {
+                            width: 4,
+                            dashType: "dot"
+                        },
                         color: "lineColor",
-                        opacity: 0.5,
-                        dashType: "dot"
+                        opacity: 0.5                        
                     },
                     series)]
                 });
             }
         });
 
-        test("sets line width", function() {
+        test("sets line width", function() {            
             equal(view.log.path[0].style.strokeWidth, 4);
         });
 
