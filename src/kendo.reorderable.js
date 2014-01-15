@@ -149,14 +149,21 @@ var __meta__ = {
 
        destroy: function() {
            var that = this;
+           var item;
 
            Widget.fn.destroy.call(that);
 
+           that.element.find(that.draggable.options.filter).each(function() {
+               item = $(this);
+               if (item.data("kendoDropTarget")) {
+                   item.data("kendoDropTarget").destroy();
+               }
+           });
+
            if (that.draggable) {
                that.draggable.destroy();
+               that.draggable = null;
            }
-
-           kendo.destroy(that.element);
        }
     });
 

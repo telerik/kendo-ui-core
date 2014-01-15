@@ -65,6 +65,28 @@
         ok(div.data("kendoReorderable") instanceof Reorderable);
     });
 
+    test("draggable is destroyed", function() {
+        var reorderable = new Reorderable(div);
+        var draggable = stub(reorderable.draggable, {
+            destroy: reorderable.draggable.destroy
+        });
+
+        reorderable.destroy();
+
+        equal(draggable.calls("destroy"), 1);
+    });
+
+    test("drop targets are destroyed", function() {
+        var reorderable = new Reorderable(div);
+
+        reorderable.destroy();
+
+        var dropTargets = div.children();
+        ok(!dropTargets.eq(0).data("kendoDropTarget"));
+        ok(!dropTargets.eq(1).data("kendoDropTarget"));
+        ok(!dropTargets.eq(2).data("kendoDropTarget"));
+    });
+
     test("adds class k-reorderable to element", function() {
         div.kendoReorderable();
 
@@ -306,4 +328,5 @@
 
         equal(args.position, "after");
     });
+
 })();
