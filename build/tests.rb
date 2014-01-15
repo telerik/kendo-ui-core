@@ -1,5 +1,6 @@
+require 'tasks'
+
 TESTS = FileList["tests/**/*"]
-GRUNT = "./node_modules/.bin/grunt"
 XVFB_RUN = "xvfb-run"
 GRUNT_CMD = system("which", XVFB_RUN, :out => "/dev/null") ? [XVFB_RUN, "-a", GRUNT] : [GRUNT]
 DEPS = [MIN_JS.sub("dist/js", "src").sub("min.js", "js"), MIN_CSS, KENDO_CONFIG_FILE, TESTS].flatten

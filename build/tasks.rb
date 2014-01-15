@@ -2,6 +2,7 @@ require 'rbconfig'
 
 README_DIR = 'resources'
 THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
+GRUNT = File.join(Rake.application.original_dir, "node_modules", ".bin", "grunt")
 LESSC = File.join(Rake.application.original_dir, "build", "less-js", "bin", "lessc")
 CSSMIN = File.join(Rake.application.original_dir, "node_modules", "cssmin", "bin", "cssmin")
 COMPILEJS = File.join(Rake.application.original_dir, "build", "compile.js");
@@ -70,6 +71,10 @@ def mvn(name, options)
     cmd = cmd + '-q ' unless VERBOSE
 
     sh "#{cmd}-f #{name} #{options}", :verbose => VERBOSE
+end
+
+def grunt(*args)
+    sh *([GRUNT] + args.map { |arg| arg.to_s })
 end
 
 def uglifyjs(from, to)
