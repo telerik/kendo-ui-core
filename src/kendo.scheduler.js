@@ -656,11 +656,6 @@ var __meta__ = {
             var zone = this.reader.timezone;
             var head = this.get(model.recurrenceId);
             var recurrenceException = head.recurrenceException || "";
-            /*var modelTimezone = head.startTimezone || head.endTimezone;
-
-            if (modelTimezone) {
-                start = kendo.timezone.convert(start, modelTimezone, zone);
-            }*/
 
             if (!recurrence.isException(recurrenceException, start, zone)) {
                 head.set(RECURRENCE_EXCEPTION, recurrenceException + recurrence.toExceptionString(start, zone));
@@ -2225,7 +2220,7 @@ var __meta__ = {
         _updateEvent: function(dir, event, eventInfo) {
             var that = this;
 
-            var updateEvent = function(event) {
+            var updateEvent = function(event, callback) {
                 try {
                     that._preventRefresh = true;
                     event.update(eventInfo);
@@ -2237,6 +2232,10 @@ var __meta__ = {
                 that.refresh();
 
                 if (!that.trigger(SAVE, { event: event })) {
+                    if (callback) {
+                        callback();
+                    }
+
                     that._updateSelection(event);
                     that.dataSource.sync();
                 }
@@ -2274,10 +2273,12 @@ var __meta__ = {
             var updateOccurrence = function() {
                 var head = recurrenceHead(event);
 
-                //that._convertDates(head);
+                var callback = function() {
+                    that._convertDates(head);
+                };
 
                 var exception = head.toOccurrence({ start: event.start, end: event.end });
-                updateEvent(that.dataSource.add(exception));
+                updateEvent(that.dataSource.add(exception), callback);
             };
 
             var recurrenceMessages = that.options.messages.recurrenceMessages;
