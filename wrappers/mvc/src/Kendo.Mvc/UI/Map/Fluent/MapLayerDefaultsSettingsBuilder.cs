@@ -39,6 +39,16 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// The default configuration for bing layers.
+        /// </summary>
+        /// <param name="configurator">The action that configures the bing.</param>
+        public MapLayerDefaultsSettingsBuilder Bing(Action<MapLayerDefaultsBingSettingsBuilder> configurator)
+        {
+            configurator(new MapLayerDefaultsBingSettingsBuilder(container.Bing));
+            return this;
+        }
+        
         //<< Fields
 
         
