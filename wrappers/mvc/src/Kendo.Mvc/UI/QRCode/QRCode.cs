@@ -104,6 +104,16 @@
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the QRCode padding.
+        /// </summary>
+        /// <value>The QRCode padding.</value>
+        public int? Padding
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
             if (ErrorCorrection != DefaultErrorCorrection)
@@ -143,6 +153,11 @@
             if (this.Border.ShouldSerialize())
             {
                 Options["border"] = Border.ToJson();
+            }
+
+            if (Padding.HasValue)
+            {
+                Options["padding"] = Padding;
             }
 
             writer.Write(Initializer.Initialize(Selector, "QRCode", Options));
