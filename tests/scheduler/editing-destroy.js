@@ -8,7 +8,7 @@
 
     module("editing destroy", {
         setup: function() {
-            container = $("<div>");
+            container = $("<div>").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.destroy(container);
@@ -192,6 +192,27 @@
         $(".k-window").find(".k-button:first").click();
 
         ok(scheduler.dataSource.args("remove")[0].isOccurrence());
+    });
+
+    test("Remove an occurrence with startTimezone does not move head start date", 1, function() {
+        var start = new Date(2013, 10, 10, 5);
+        var end = new Date(2013, 10, 10, 6);
+
+        var scheduler = setup({
+            timezone: "Etc/UTC",
+            views: ["week"],
+            dataSource: {
+                data: [ { startTimezone: "Europe/Berlin", id: 1, recurrenceRule: "FREQ=DAILY", start: new Date(start), end: new Date(end), title: "my event" } ]
+            },
+            editable: true
+        });
+
+        start = new Date(scheduler.dataSource.at(0).start);
+
+        scheduler.removeEvent(scheduler.wrapper.find(".k-event:last").data("uid"));
+        $(".k-window").find(".k-button:first").click();
+
+        deepEqual(scheduler.dataSource.data()[0].start, start);
     });
 
     test("Remove recurrence head will remove the corresponding series", 1, function() {

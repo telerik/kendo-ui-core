@@ -2631,11 +2631,11 @@ var __meta__ = {
 
             var currentModel = model;
 
-            var deleteOcurrence = function() {
+            var deleteOccurrence = function() {
                 var occurrence = currentModel.recurrenceId ? currentModel : currentModel.toOccurrence();
-                //var head = that.dataSource.get(occurrence.recurrenceId);
+                var head = that.dataSource.get(occurrence.recurrenceId);
 
-                //that._convertDates(head);
+                that._convertDates(head);
                 that._removeEvent(occurrence);
             };
 
@@ -2653,7 +2653,7 @@ var __meta__ = {
                 title: recurrenceMessages.deleteWindowTitle,
                 text: recurrenceMessages.deleteRecurring ? recurrenceMessages.deleteRecurring : DELETERECURRING,
                 buttons: [
-                   { text: recurrenceMessages.deleteWindowOccurrence, click: deleteOcurrence },
+                   { text: recurrenceMessages.deleteWindowOccurrence, click: deleteOccurrence },
                    { text: recurrenceMessages.deleteWindowSeries, click: deleteSeries }
                 ]
             });
