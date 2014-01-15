@@ -413,6 +413,13 @@ test("parameterMap transforms multiple nested levels or filters", function() {
     equal(result.filter, "(foo~eq~'bar'~or~(baz~eq~1~or~baz2~eq~1))~or~moo~contains~'boo'");
 });
 
+test("parameterMap returns only the serialized values", function() {
+    var transport = new Transport({}),
+        result = transport.parameterMap({foo: {bar: 1}}, "update");
+    
+    equal(result.foo, undefined);
+});
+
 test("parameterMap serializes objects using dot notation", function() {
     var transport = new Transport({}),
         result = transport.parameterMap({foo: {bar: 1}}, "update");
