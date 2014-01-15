@@ -5,6 +5,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
     grunt.loadTasks('build/grunt/tasks');
 
@@ -154,12 +155,21 @@ module.exports = function(grunt) {
                     dest: '<%= kendo.options.jsDestDir %>/',
                 }]
             },
+            css_assets: {
+                files: [{
+                    expand: true,
+                    cwd: "styles",
+                    src: ["**/*.less", "**/*.woff", "**/*.ttf", "**/*.png", "**/*.gif", "**/*.css" ],
+                    dest: '<%= kendo.options.stylesDestDir %>/',
+                }]
+            }
         },
 
         kendo: {
             options: {
+                destDir: "dist",
                 jsDestDir: PATH.join("dist", "js"),
-                destDir: PATH.join("dist"),
+                stylesDestDir: PATH.join("dist", "styles")
             },
             min: {
                 src: main_kendo_files,
@@ -206,7 +216,8 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
-    grunt.registerTask("ci", [ "kendo", "copy", 'karma:ci' ]);
-    grunt.registerTask("tests", [ 'karma:unit' ]);
-    grunt.registerTask("all", [ "kendo", "copy" ]);
+    grunt.registerTask("ci", [ 'kendo', 'copy:jquery', 'copy:timezones', 'karma:ci' ]);
+    grunt.registerTask('tests', [ 'karma:unit' ]);
+    grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
+    grunt.registerTask('all', [ 'kendo', 'copy:jquery', 'copy:timezones' ]);
 };
