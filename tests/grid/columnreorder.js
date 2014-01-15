@@ -1,16 +1,17 @@
 (function() {
    var Grid = kendo.ui.Grid,
-        table,
+        div,
         data,
         DataSource = kendo.data.DataSource;
 
     module("grid column reorder", {
         setup: function() {
             data = [{ foo: "foo", bar: "bar" }];
-            table = $("<table></table>").appendTo(QUnit.fixture);
+            div = $("<div />").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
+            div.remove();
         }
     });
 
@@ -19,7 +20,7 @@
     });
 
     test("Reorderable widget is initialized in Grid wrapper", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: ["foo", "bar"],
             dataSource: data
@@ -29,7 +30,7 @@
     });
 
     test("Reorderable widget is initialized in Grid wrapper when no columns are defined", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             dataSource: data
         });
@@ -38,7 +39,7 @@
     });
 
     test("columnReorder reorder col elements", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: [{
                 field: "foo",
                 width: 10
@@ -59,7 +60,7 @@
     });
 
     test("columnReorder reorders col elements in scrollable grid", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: [{
                 field: "foo",
                 width: 10
@@ -81,7 +82,7 @@
     });
 
     test("columnReorder reorders col elements in groupable grid", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: [{
                 field: "foo",
                 width: 10
@@ -105,7 +106,7 @@
     });
 
     test("columnReorder reorders col elements in hierarchical grid", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: [{
                 field: "foo",
                 width: 10
@@ -127,7 +128,7 @@
     });
 
     test("columnReorder moves col at first position", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: [{
                 field: "foo",
                 width: 10
@@ -148,7 +149,7 @@
     });
 
     test("columnReorder does not move if destIndex same as column index", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: [{
                 field: "foo",
                 width: 10
@@ -169,7 +170,7 @@
     });
 
     test("columnReorder reorder column headers", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: ["foo", "bar"],
             dataSource: data
@@ -183,7 +184,7 @@
     });
 
     test("columnReorder skips group and detail column headers", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: ["foo", "bar"],
             dataSource: {
@@ -201,7 +202,7 @@
     });
 
     test("columnReorder reorder colum cells", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: ["foo", "bar"],
             dataSource: data
@@ -215,7 +216,7 @@
     });
 
     test("columnReorder skips group cells", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: ["foo", "bar"],
             dataSource: {
@@ -232,7 +233,7 @@
     });
 
     test("columnReorder skips detail cells", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: ["foo", "bar"],
             dataSource: data,
@@ -247,7 +248,7 @@
     });
 
     test("columnReorder reorder colum footer cells", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: [{
                 field: "foo",
@@ -268,7 +269,7 @@
     });
 
     test("columnReorder reorder colum footer cols", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: [{
                 field: "foo",
@@ -291,7 +292,7 @@
     });
 
     test("columnReorder reorder grid columns collection", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             reorderable: true,
             columns: ["foo", "bar"],
             dataSource: data
@@ -304,7 +305,7 @@
     });
 
     test("column order is peristed on refresh", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: ["foo", "bar"],
             dataSource: data
         });
@@ -318,7 +319,7 @@
     });
 
     test("reorder when hidden column", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: [
                 { field: "foo", width: 10 },
                 { field: "bar", hidden: true, width: 20 },
@@ -343,7 +344,7 @@
     });
 
     test("reorder to right when hidden column", function() {
-        var grid = new Grid(table, {
+        var grid = new Grid(div, {
             columns: [
                 { field: "foo", width: 10, hidden: true },
                 { field: "bar", width: 20 },
@@ -364,7 +365,7 @@
     });
 
     test("Reorderable destroy is called on grid destroy", function() {
-        var grid = new Grid(table, { reorderable: true }),
+        var grid = new Grid(div, { reorderable: true }),
             reorderable = grid.wrapper.data("kendoReorderable");
 
         reorderable = stub(reorderable, { destroy:  reorderable.destroy} );

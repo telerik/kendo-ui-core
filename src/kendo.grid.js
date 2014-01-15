@@ -1112,6 +1112,10 @@ var __meta__ = {
         _reorderable: function() {
             var that = this;
             if (that.options.reorderable) {
+                if (that.wrapper.data("kendoReorderable")) {
+                    that.wrapper.data("kendoReorderable").destroy();
+                }
+
                 that.wrapper.kendoReorderable({
                     draggable: that._draggableInstance,
                     change: function(e) {
