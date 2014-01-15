@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Which platform look to force on the application. Supported values are "ios" (meaning iOS 6 look), "ios7","android", "blackberry" and "wp8".
+        /// Which platform look to force on the application. Supported values are "ios" (meaning iOS 6 look), "ios7","android", "blackberry" and "wp".
         /// </summary>
         /// <param name="value">The value that configures the platform.</param>
         public MobileApplicationBuilder Platform(string value)

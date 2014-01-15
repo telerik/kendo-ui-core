@@ -56,6 +56,17 @@ using System.Web.Mvc;
         }
         
         /// <summary>
+        /// The key of the bing layer.
+        /// </summary>
+        /// <param name="value">The value that configures the key.</param>
+        public MapLayerBuilder Key(string value)
+        {
+            container.Key = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The attribution for the layer. Accepts valid HTML.
         /// </summary>
         /// <param name="value">The value that configures the attribution.</param>

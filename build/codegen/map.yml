@@ -3,6 +3,7 @@
       :type: String
       :description: The layer type. Supported types are "tile" and "shape".
       :values:
+          - bing
           - tile
           - shape
     - :name: markers.shape

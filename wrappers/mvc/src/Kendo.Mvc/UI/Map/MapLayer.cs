@@ -41,6 +41,8 @@ namespace Kendo.Mvc.UI
         
         public bool? AutoBind { get; set; }
         
+        public string Key { get; set; }
+        
         public string Attribution { get; set; }
         
         public string Opacity { get; set; }
@@ -78,6 +80,11 @@ namespace Kendo.Mvc.UI
                 json["autoBind"] = AutoBind;
             }
                 
+            if (Key.HasValue())
+            {
+                json["key"] = Key;
+            }
+            
             if (Attribution.HasValue())
             {
                 json["attribution"] = Attribution;
