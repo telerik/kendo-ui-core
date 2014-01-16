@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using Kendo.Models;
+using System.Collections.Specialized;
 
 namespace Kendo.Extensions
 {
@@ -12,22 +13,20 @@ namespace Kendo.Extensions
         public static IHtmlString SuiteLink(this HtmlHelper html, string suite, string title = "", string cssClass = "")
         {
             title = string.IsNullOrEmpty(title) ? suite : title;
-            suite = suite.ToLowerInvariant();
-            var Url = new UrlHelper(html.ViewContext.RequestContext);
-            var viewBag = html.ViewContext.Controller.ViewBag;
-            var selectedClass = viewBag.Suite == suite ? " selected" : "";
-            var href = "~/" + suite;
 
-            if (suite != "mobile")
-            {
-                href = "~/" + suite + "/overview/index.html";
-            }
+            suite = suite.ToLowerInvariant();
+
+            var Url = new UrlHelper(html.ViewContext.RequestContext);
+
+            var viewBag = html.ViewContext.Controller.ViewBag;
+
+            var selectedClass = viewBag.Suite == suite ? " selected" : "";
 
             return html.Raw(
                 string.Format("<a id=\"{0}\" class=\"{1}\" href=\"{2}\">{3}</a>",
                     suite,
                     (cssClass + selectedClass).Trim(),
-                    Url.Content(href),
+                    Url.Suite(suite),
                     title
                 )
             );
@@ -42,16 +41,37 @@ namespace Kendo.Extensions
 
             return html.Raw("");
         }
+        
+        public static IHtmlString ExampleLink(this HtmlHelper html, NavigationExample example, string suite)
+        {
+            var Url = new UrlHelper(html.ViewContext.RequestContext);
+
+            var href = Url.Content("~/" + suite + "/" + example.Url);
+
+            href = Url.ApplyProduct(href);
+
+            return html.Raw(string.Format("<a {0} {1} href=\"{2}\">{3}</a>",
+                    example.New ? "class=\"new-example\"" : "",
+                    example.External ? "rel=\"external\"" : "",
+                    href,
+                    example.Text
+            ));
+        }
 
         public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget, string category)
         {
             var Url = new UrlHelper(html.ViewContext.RequestContext);
+
             var viewBag = html.ViewContext.Controller.ViewBag;
-            var href = Url.Content("~/" + viewBag.Suite + "/" + widget.Items[0].Url);
+
+            var href = Url.Content("~/" + (string)viewBag.Suite + "/" + widget.Items[0].Url);
+
+            href = Url.ApplyProduct(href);
 
             category = category.ToLower();
 
             var className = "";
+
             if (widget.Beta)
             {
                 className = "beta-widget";
