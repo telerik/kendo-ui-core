@@ -13771,6 +13771,34 @@ Cancelling the event will prevent the user action.</description>
     </tag>
 
     <tag>
+        <description>The default configuration for bing layers.</description>
+        <name>map-layerDefaults-bing</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsBingTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The attribution of all bing layers.</description>
+            <name>attribution</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The key of all bing layers.</description>
+            <name>key</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The the opacity of all bing layers.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The default configuration for shape layers.</description>
         <name>map-layerDefaults-shape</name>
         <tag-class>com.kendoui.taglib.map.LayerDefaultsShapeTag</tag-class>
@@ -13927,6 +13955,12 @@ instance.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The key of the bing layer.</description>
+            <name>key</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The the opacity for the layer.</description>
