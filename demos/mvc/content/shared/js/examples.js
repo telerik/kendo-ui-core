@@ -392,7 +392,7 @@
                         }
                     })
                     .on('click', '.try-kendo', function () {
-                        dojo.startFrom($('#HTML-1').data('html'), "http://127.0.0.1:3000");
+                        dojo.startFrom($('#HTML-1').data('html'), window.location.href);
                     });
 
                 $(window).bind("popstate", function (e) {
@@ -735,13 +735,17 @@
     kendo.ui.plugin(ThemeChooser);
 
     var dojo = {
-        startFrom: function (snippet, url) {
-            url = url || "http://try.kendoui.com";
+        startFrom: function (snippet, baseUrl) {
+            snippet = dojo.prepareDojoSnippet(snippet, baseUrl);
 
-            var form = $('<form method="post" action="' + url + '" />');
+            var form = $('<form method="post" action="' + dojo.configuration.url + '" />');
             $("<input name='snippet'>").val(snippet).appendTo(form);
 
             form.submit();
+        },
+        prepareDojoSnippet: function (code, baseUrl) {
+            return code.replace("<head>", "<head>\n" + '<base href="' + baseUrl + '">')
+                       .replace(/\n/g, '&#10;');
         }
     }
 

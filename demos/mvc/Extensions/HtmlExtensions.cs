@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Collections.Generic;
 using Kendo.Models;
 using System.Collections.Specialized;
+using System.Configuration;
 
 namespace Kendo.Extensions
 {
@@ -56,6 +57,20 @@ namespace Kendo.Extensions
                     href,
                     example.Text
             ));
+        }
+
+        public static String CdnRoot(this HtmlHelper html)
+        {
+            return ConfigurationManager.AppSettings["CDN_ROOT"];
+        }
+
+        public static String ScratchpadRoot(this HtmlHelper html)
+        {
+#if DEBUG
+            return "http://127.0.0.1:3000/";
+#else
+            return ConfigurationManager.AppSettings["SCRATCHPAD_ROOT"];
+#endif
         }
 
         public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget, string category)
