@@ -22,6 +22,7 @@
         defined = dataviz.defined,
 
         g = dataviz.geometry,
+        Point = g.Point,
 
         map = dataviz.map,
         Extent = map.Extent,
@@ -193,6 +194,7 @@
 
         layerToLocation: function(point, zoom) {
             var clamp = !this.options.wraparound;
+            point = Point.create(point);
             return  this.crs.toLocation(point, this._layerSize(zoom), clamp);
         },
 
@@ -206,6 +208,7 @@
 
         viewToLocation: function(point, zoom) {
             var origin = this.locationToLayer(this._getOrigin(), zoom);
+            point = Point.create(point);
             point = point.clone().add(origin);
             return this.layerToLocation(point, zoom);
         },
