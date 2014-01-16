@@ -259,10 +259,6 @@ a:hover
 
 
 /* Header navigation */
-.suite-demos-nav .header
-{
-    margin-right: 400px;
-}
 
 .suite-demos-nav .header,
 .suite-demos-nav .header a
@@ -1228,6 +1224,7 @@ p#copy
 #mainWrap
 {
     position:relative;
+    padding-top: 45px;
 }
 
 #exampleTitle
@@ -1362,14 +1359,15 @@ p#copy
 
 .widgetOverview #mainWrapInner
 {
-    margin-top: 50px;
+    margin-top:0;
+    padding-top:0;
 }
 
 .widgetOverview #exampleTitle
 {
     position:relative;
     top:0;
-    margin-bottom:50px;
+    margin-bottom:45px;
 }
 
 #themeWrap
@@ -1377,6 +1375,7 @@ p#copy
     line-height: 23px;
     float: right;
     margin-right: 200px;
+    margin-top: -25px;
 }
 
 #themeWrap .get-kendoui
@@ -1387,7 +1386,7 @@ p#copy
     border-radius:3px;
     padding: 8px 1px;
     font-weight: normal;
-    margin: 22px 0 0 3px;
+    margin: 0;
     font-size: 12px;
     vertical-align: bottom;
 }
@@ -2582,6 +2581,7 @@ pre.prettyprint
 #mainWrapInner
 {
     padding-top: 18px;
+    
 }
 
 .nomargin dd
