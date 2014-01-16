@@ -80,7 +80,7 @@ namespace :download_builder do
 
         task config_file_path do |t|
             sh "rm -f #{dist_path}kendo-config.*", :verbose => VERBOSE
-            sh "node #{KENDO_META} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
+            sh "node #{METAJS} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
         end
 
         ["download_builder:sources", css_path, config_file_path]
