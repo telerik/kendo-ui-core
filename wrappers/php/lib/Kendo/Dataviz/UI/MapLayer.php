@@ -16,6 +16,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * The key of the bing layer.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function key($value) {
+        return $this->setProperty('key', $value);
+    }
+
+    /**
     * Sets the data source of the MapLayer.
     * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\Dataviz\UI\MapLayer

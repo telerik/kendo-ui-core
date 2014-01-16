@@ -23,6 +23,15 @@ class MapLayerDefaults extends \Kendo\SerializableObject {
         return $this->setProperty('tile', $value);
     }
 
+    /**
+    * The default configuration for bing layers.
+    * @param \Kendo\Dataviz\UI\MapLayerDefaultsBing|array $value
+    * @return \Kendo\Dataviz\UI\MapLayerDefaults
+    */
+    public function bing($value) {
+        return $this->setProperty('bing', $value);
+    }
+
 //<< Properties
 }
 

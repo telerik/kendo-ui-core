@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         //>> Fields
-        
+
         /// <summary>
         /// The attribution of all bing layers.
         /// </summary>
@@ -29,7 +29,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
         /// <summary>
         /// The the opacity of all bing layers.
         /// </summary>
@@ -40,8 +40,19 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
+
+        /// <summary>
+        /// The key of all bing layers.
+        /// </summary>
+        /// <param name="value">The value that configures the key.</param>
+        public MapLayerDefaultsBingSettingsBuilder Key(string value)
+        {
+            container.Key = value;
+
+            return this;
+        }
+
         //<< Fields
     }
 }
-
