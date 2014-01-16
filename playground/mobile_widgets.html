@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.router.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.binder.js"></script>
+    <script src="../src/kendo.list.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.mobile.button.js"></script>
+    <script src="../src/kendo.mobile.buttongroup.js"></script>
+    <script src="../src/kendo.mobile.scroller.js"></script>
+    <script src="../src/kendo.mobile.navbar.js"></script>
+    <script src="../src/kendo.mobile.shim.js"></script>
+    <script src="../src/kendo.mobile.switch.js"></script>
+    <script src="../src/kendo.mobile.view.js"></script>
+    <script src="../src/kendo.mobile.loader.js"></script>
+    <script src="../src/kendo.mobile.tabstrip.js"></script>
+    <script src="../src/kendo.mobile.pane.js"></script>
+    <script src="../src/kendo.mobile.modalview.js"></script>
+    <script src="../src/kendo.mobile.popover.js"></script>
+    <script src="../src/kendo.mobile.application.js"></script>
+    <script src="../src/kendo.mobile.listview.js"></script>
+
+    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+    <title>Test separate mobile widgets</title>
+</head>
+<body>
+    <div id="container">
+        <input data-role="switch" />
+    </div>
+
+    <script>
+        var viewModel = kendo.observable({
+        });
+
+        kendo.bind("#container", viewModel, kendo.mobile.ui);
+    </script>
+</body>
+</html>

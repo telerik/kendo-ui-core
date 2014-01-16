@@ -1,0 +1,88 @@
+/* PopUp + ActionSheet */
+
+.km-root .km-popup .k-item,
+.km-pane .km-actionsheet > li
+{
+    list-style-type: none;
+    padding: inherit 1em;
+    border-bottom: 1px solid #555;
+    .box-sizing(border-box);
+}
+
+.km-pane .km-actionsheet > li
+{
+    line-height: 2em;
+    border-bottom: 0;
+}
+
+.km-pane .km-actionsheet > li > a
+{
+    line-height: 1.5em;
+    text-align: left;
+    background: transparent;
+}
+
+.km-root .km-popup .k-list,
+.km-pane .km-actionsheet
+{
+    padding: 0;
+    margin: 0;
+}
+
+.km-root .km-popup .k-item:last-child,
+.km-pane .km-actionsheet > li:last-child
+{
+    border: 0;
+}
+
+.km-shim
+{
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 100% !important;
+    background: rgba(0,0,0,.6);
+    z-index:10001;
+    .box-sizing(border-box);
+}
+
+.km-shim:before
+{
+    content: "\a0";
+    height: 100%;
+    width: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.km-shim .k-animation-container,
+.km-pane .km-actionsheet-wrapper
+{
+    width: 100%;
+    .box-shadow(none);
+    border: 0;
+}
+
+.km-shim .k-animation-container
+{
+    width: auto;
+}
+
+.km-actionsheet-root.km-shim .k-animation-container
+{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.km-tablet .km-pane div.km-actionsheet-phone
+{
+    background: transparent;
+}
+
+.km-tablet .km-actionsheet-phone li.km-actionsheet-title,
+.km-tablet div.km-actionsheet-phone li.km-actionsheet-cancel
+{
+    display: block;
+}
+

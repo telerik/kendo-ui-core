@@ -1,0 +1,83 @@
+/* DetailButtons */
+.km-detail
+{
+    position: absolute;
+    float: right;
+    right: .8rem;
+    top: 50%;
+    margin-top: -.7rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    font-size: 1rem;
+    .box-sizing(border-box);
+}
+
+.km-root .km-detaildisclose
+{
+    font-size: .8em;
+}
+
+.k-ff .km-detail
+{
+    width: 1rem;
+    height: 1rem;
+}
+
+.km-detail .km-text {
+    display: none;
+}
+
+.km-root .km-rowinsert:after,
+.km-root .km-rowdelete:after,
+.km-root .km-contactadd:after,
+.km-root .km-detaildisclose:after,
+.km-root .km-rowinsert:before,
+.km-root .km-rowdelete:before,
+.km-root .km-contactadd:before,
+.km-root .km-detaildisclose:before,
+.km-detail .km-icon
+{
+    left: .15em;
+    top: .15em;
+    line-height: 1em;
+    font-size: 1em;
+    position: absolute;
+}
+
+.km-root .km-detaildisclose:after
+{
+    left: .1em;
+    top: .25em;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Buttons */
+.km-button
+{
+    cursor: pointer;
+    outline: 0;
+}
+
+.km-button::-moz-focus-inner
+{
+    padding: 0;
+    border: 0;
+}
+
+.km-ios .km-state-disabled .km-button,
+.km-android .km-state-disabled .km-button,
+.km-blackberry .km-state-disabled .km-button,
+.km-meego .km-state-disabled .km-button
+{
+    color: #aaa;
+    text-shadow: none;
+}
+
+.km-root .km-pane .k-button:focus,
+.km-root .km-pane .k-button:active,
+.km-root .km-pane .k-button:focus:active
+{
+    .box-shadow(none);
+}
+
