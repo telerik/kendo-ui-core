@@ -25,8 +25,8 @@ namespace Kendo.Mvc.Examples
                         "~/Scripts/kendo.aspnetmvc.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/demo").Include(
-                        "~/Scripts/console.min.js",
-                        "~/Scripts/prettify.min.js"));
+                        "~/Scripts/console.js",
+                        "~/Scripts/prettify.js"));
 
             bundles.Add(new StyleBundle("~/Content/web/css").Include(
                         "~/Content/web/kendo.common.min.css",
