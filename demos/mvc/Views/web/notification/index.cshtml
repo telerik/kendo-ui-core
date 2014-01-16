@@ -12,21 +12,34 @@
                 $(document).ready(function() {
 
                     function onShow(e) {
+                        if (!$("." + e.sender._guid)[1]) {
+                            var element = e.element.parent(),
+                                eWidth = element.width(),
+                                eHeight = element.height(),
+                                wWidth = $(window).width(),
+                                wHeight = $(window).height(),
+                                newTop, newLeft;
+                        
+                            newLeft = wWidth / 2 - eWidth / 2;
+                            newTop = wHeight / 2 - eHeight / 2;
+
+                            e.element.parent().css({top: newTop, left: newLeft});
+                        }
                     }
 
                     var notification = $("#notification").kendoNotification({
                         position: {
                             pinned: true,
-                            //top: 0,
-                            left: 0
+                            top: 20,
+                            left: 20
                         },
-                        allowHideAfter: 4000,
-                        autoHideAfter: 8000,
+                        //allowHideAfter: 4000,
+                        autoHideAfter: 0,
                         //width: "100%",
                         //height: "40px",
-                        //stacking: "up",
+                        stacking: "down",
                         //timeout: 0,
-//                        show: onShow,
+                        //show: onShow,
 //                        button: true,
 //                        hideOnClick: true,
 //                        position: {
