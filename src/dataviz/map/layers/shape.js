@@ -72,7 +72,10 @@
         },
 
         reset: function() {
-            this.surface.translate({ x: 0, y: 0 });
+            if (this.surface.translate) {
+                this.surface.translate({ x: 0, y: 0 });
+            }
+
             this.movable.moveTo({ x: 0, y: 0 });
 
             if (this._data) {
@@ -161,8 +164,10 @@
             var map = this.map;
             var nw = map.locationToView(map.extent().nw);
 
-            this.surface.translate(nw);
-            this.movable.moveTo(nw);
+            if (this.surface.translate) {
+                this.surface.translate(nw);
+                this.movable.moveTo(nw);
+            }
         },
 
         _handler: function(event) {
