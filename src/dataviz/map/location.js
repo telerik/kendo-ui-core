@@ -1,7 +1,7 @@
-(function(f, define){
-    define([ "../drawing/vml" ], f);
-})(function(){
-
+(function(f, define){
+    define([ "../drawing/vml" ], f);
+})(function(){
+
 (function ($, undefined) {
     // Imports ================================================================
     var math = Math,
@@ -162,5 +162,5 @@
     });
 
 })(window.kendo.jQuery);
-
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
