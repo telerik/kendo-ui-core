@@ -375,6 +375,160 @@
         equal(reorderable.calls("destroy"), 1);
     });
 
+    test("move column after its right adjacent column", function() {
+        var grid = new Grid(div, {
+            columns: ["foo", "bar", "baz"]
+        });
+
+        grid.reorderColumn(1, grid.columns[0], false);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "bar");
+        equal(columns[1].field, "foo");
+        equal(columns[2].field, "baz");
+    });
+
+    test("move column after its left adjacent column", function() {
+        var grid = new Grid(div, {
+            columns: ["foo", "bar", "baz"]
+        });
+
+        grid.reorderColumn(0, grid.columns[1], false);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        equal(columns[1].field, "bar");
+        equal(columns[2].field, "baz");
+    });
+
+    test("move column before its adjacent column when current is before adjecent", function() {
+        var grid = new Grid(div, {
+            columns: ["foo", "bar", "baz"]
+        });
+
+        grid.reorderColumn(1, grid.columns[0], true);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        equal(columns[1].field, "bar");
+        equal(columns[2].field, "baz");
+    });
+
+    test("move column before its adjacent column when current is after adjacent", function() {
+        var grid = new Grid(div, {
+            columns: ["foo", "bar", "baz"]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        equal(columns[1].field, "baz");
+        equal(columns[2].field, "bar");
+    });
+
+    test("move column after another column", function() {
+        var grid = new Grid(div, {
+            columns: ["foo", "bar", "baz", "bax"]
+        });
+
+        grid.reorderColumn(2, grid.columns[0]);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "bar");
+        equal(columns[1].field, "baz");
+        equal(columns[2].field, "foo");
+        equal(columns[3].field, "bax");
+    });
+
+    test("move column before column which is after the current", function() {
+        var grid = new Grid(div, {
+            columns: ["foo", "bar", "baz", "bax"]
+        });
+
+        grid.reorderColumn(2, grid.columns[0], true);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "bar");
+        equal(columns[1].field, "foo");
+        equal(columns[2].field, "baz");
+        equal(columns[3].field, "bax");
+    });
+
+    test("move column before column which is before the current", function() {
+        var grid = new Grid(div, {
+            columns: ["foo", "bar", "baz", "bax"]
+        });
+
+        grid.reorderColumn(1, grid.columns[3], true);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        equal(columns[1].field, "bax");
+        equal(columns[2].field, "bar");
+        equal(columns[3].field, "baz");
+    });
+
+    test("reorder headers with static columns", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", static: true },
+                "foo",
+                "bar",
+                "baz"
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        var th = div.find("th");
+        equal(th.length, 4);
+        equal(th.eq(0).text(), "bax");
+        equal(th.eq(1).text(), "bar");
+        equal(th.eq(2).text(), "foo");
+        equal(th.eq(3).text(), "baz");
+    });
+
+    test("non static header is moved to static headers", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", static: true },
+                "foo",
+                "bar",
+                "baz"
+            ]
+        });
+
+        grid.reorderColumn(0, grid.columns[1], false);
+
+        var th = div.find("th");
+        equal(th.eq(0).text(), "bax");
+        equal(th.eq(1).text(), "foo");
+        equal(th.eq(2).text(), "bar");
+        equal(th.eq(3).text(), "baz");
+        equal(th.eq(0).next()[0], th[1]);
+    });
+
+    test("static header is moved to non static headers", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", static: true },
+                { field: "foo", static: true },
+                "bar",
+                "baz"
+            ]
+        });
+
+        grid.reorderColumn(2, grid.columns[1], true);
+
+        var th = div.find("th");
+        equal(th.eq(0).text(), "bax");
+        equal(th.eq(1).text(), "foo");
+        equal(th.eq(2).text(), "bar");
+        equal(th.eq(3).text(), "baz");
+        equal(th.eq(1).next()[0], th[2]);
+    });
+
     function moveOverDropTarget(draggable, dropTarget) {
         var position = dropTarget.position();
 

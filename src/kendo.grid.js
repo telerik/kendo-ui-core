@@ -439,11 +439,15 @@ var __meta__ = {
             return fieldsMap;
     }
 
-    function reorder(selector, sourceIndex, destIndex) {
+    function reorder(selector, sourceIndex, destIndex, before) {
         var source = selector.eq(sourceIndex),
             dest = selector.eq(destIndex);
 
-        source[sourceIndex > destIndex ? "insertBefore" : "insertAfter"](dest);
+        source[before ? "insertBefore" : "insertAfter"](dest);
+    }
+
+    function elements(staticContent, content, filter) {
+        return $(staticContent).add(content).find(filter);
     }
 
     function attachCustomCommandEvent(context, container, commands) {
@@ -1118,26 +1122,37 @@ var __meta__ = {
 
                 that.wrapper.kendoReorderable({
                     draggable: that._draggableInstance,
+                    inSameContainer: function(dropTarget, draggable) {
+                        return dropTarget.parent()[0] === draggable.parent()[0];
+                    },
                     change: function(e) {
                         var newIndex = inArray(that.columns[e.newIndex], that.columns),
                             column = that.columns[e.oldIndex];
 
+                        if (e.containerChange) {
+                            column.static = that.columns[e.newIndex].static;
+                        }
                         that.trigger(COLUMNREORDER, {
                             newIndex: newIndex,
                             oldIndex: inArray(column, that.columns),
                             column: column
                         });
-                        that.reorderColumn(newIndex, column);
+                        that.reorderColumn(newIndex, column, e.position === "before");
                     }
                 });
             }
         },
 
-        reorderColumn: function(destIndex, column) {
+        _elements: function(container, filter) {
+            return container.find(filter);
+        },
+
+        reorderColumn: function(destIndex, column, before) {
             var that = this,
                 sourceIndex = inArray(column, that.columns),
                 colSourceIndex = inArray(column, visibleColumns(that.columns)),
                 colDestIndex = inArray(that.columns[destIndex], visibleColumns(that.columns)),
+                staticRows = $(),
                 rows,
                 idx,
                 length,
@@ -1149,26 +1164,45 @@ var __meta__ = {
 
             that._hideResizeHandle();
 
-            that.columns.splice(sourceIndex, 1);
-            that.columns.splice(destIndex, 0, column);
-            that._templates();
-
-            reorder(that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex);
-            if (that.options.scrollable) {
-                reorder(that.tbody.prev().find("col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex);
+            if (before === undefined) {
+                before = destIndex < sourceIndex;
             }
 
-            reorder(that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+            if (before) {
+                if (destIndex - 1 !== sourceIndex) {
+                    that.columns.splice(sourceIndex, 1);
+                    var index = sourceIndex < destIndex ? destIndex - 1 : destIndex;
+                    that.columns.splice(index, 0, column);
+                }
+            } else if (destIndex + 1 !==  sourceIndex) {
+                that.columns.splice(sourceIndex, 1);
+                that.columns.splice(destIndex, 0, column);
+            }
+            that._templates();
+
+            reorder(elements(that.staticHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+            if (that.options.scrollable) {
+                reorder(elements(that.staticTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+            }
+
+            reorder(elements(that.staticHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
 
             if (footer && footer.length) {
-                reorder(footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex);
-                reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+                reorder(footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+                reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
             rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
-            for (idx = 0, length = rows.length; idx < length; idx += 1) {
-                reorder(rows.eq(idx).find(">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex);
+            if (that.staticTable) {
+                staticRows = that.staticTable.find(">tbody>tr:not(.k-grouping-row,.k-detail-row)");
             }
+
+            for (idx = 0, length = rows.length; idx < length; idx += 1) {
+                reorder(elements(staticRows[idx], rows[idx], ">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+            }
+
+            that._setStaticContainersWidth();
+            that._syncStaicContentHeight();
         },
 
         cellIndex: function(td) {
