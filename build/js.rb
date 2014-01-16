@@ -2,8 +2,6 @@ require 'tasks'
 
 CLEAN.include(DIST_JS_ROOT)
 
-METAJS = File.join(Rake.application.original_dir, "build", "kendo-meta.js");
-
 def in_dist(list)
     list.pathmap File.join(DIST_JS_ROOT, "%f")
 end
