@@ -3,6 +3,7 @@ require 'rbconfig'
 README_DIR = 'resources'
 THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')
 GRUNT = File.join(Rake.application.original_dir, "node_modules", ".bin", "grunt")
+METAJS = File.join(Rake.application.original_dir, "build", "kendo-meta.js");
 LESSC = File.join(Rake.application.original_dir, "build", "less-js", "bin", "lessc")
 CSSMIN = File.join(Rake.application.original_dir, "node_modules", "cssmin", "bin", "cssmin")
 COMPILEJS = File.join(Rake.application.original_dir, "build", "compile.js");

@@ -1,4 +1,5 @@
 require 'erb'
+require 'tasks'
 BUILDER_STAGING_SERVICE =  'http://mvc-kendobuild/staging/download-builder-service'
 BUILDER_DEPLOY_SERVICE = 'http://www.kendoui.com/services/kendo-download'
 BUILDER_SOURCE_PATH = 'download-builder'
@@ -7,8 +8,6 @@ BUILDER_DEPLOY_PATH = File.join('dist', 'download-builder')
 BUILDER_CONFIG_NAME = File.join('config', 'kendo-config.json')
 
 BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.html.erb')))
-
-KENDO_META = File.join(Rake.application.original_dir, "build", "kendo-meta.js");
 
 namespace :download_builder do
 
@@ -44,7 +43,7 @@ namespace :download_builder do
         config_file_path = File.join(config_file_dir,  "kendo-config.#{VERSION}.json")
         directory config_file_dir
         task config_file_path => config_file_dir do |t|
-            sh "node #{KENDO_META} --kendo-config > #{config_file_path}", :verbose => VERBOSE
+            sh "node #{METAJS} --kendo-config > #{config_file_path}", :verbose => VERBOSE
         end
 
         index_path = File.join(dist_path, 'index.html')
