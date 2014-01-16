@@ -58,6 +58,7 @@
 
     @if (ViewBag.ShowCodeStrip == true)
     {
+        <button class="k-button try-kendo">Try Kendo</button>
         <div id="codeStrip">
             @if (!string.IsNullOrEmpty(ViewBag.Documentation))
             {
@@ -91,7 +92,14 @@
                     contentUrls: [
                         @Html.Raw(String.Join(",", framework.Files.Select(file => "\"" + Url.Action("index", "source", new { path = file.Url } ) + "\"").ToArray()))
                     ],
-                    contentLoad: function(e) {
+                   contentLoad: function (e) {
+                        var baseUrl = "http://@(Request.Headers["host"] + Url.Content("~/"))";
+                        var content = $(e.contentElement);
+                        if (content.is("#HTML-1")) {                            
+                            var html = content.find('.prettyprint').text();
+                            content.data("html", content.find('.prettyprint').text());
+                        }
+
                         prettyPrint();
                         if (!minHeightFlag) {
                             var cs = $("#codeStrip");
@@ -99,6 +107,11 @@
                         }
                     }
                });
+
+                   dojo.configuration = {
+                       url: "@Html.ScratchpadRoot()",
+                       cdnRoot: '@Html.CdnRoot()'
+                   };
                </script>
             }
         </div>
