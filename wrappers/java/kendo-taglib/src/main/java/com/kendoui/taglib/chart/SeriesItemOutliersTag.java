@@ -67,10 +67,6 @@ public class SeriesItemOutliersTag extends  BaseTag  /* interfaces */ /* interfa
         setEvent("type", value.getBody());
     }
 
-    public void setVisible(SeriesItemOutliersVisibleFunctionTag value) {
-        setEvent("visible", value.getBody());
-    }
-
     public void setRotation(SeriesItemOutliersRotationFunctionTag value) {
         setEvent("rotation", value.getBody());
     }
@@ -117,14 +113,6 @@ public class SeriesItemOutliersTag extends  BaseTag  /* interfaces */ /* interfa
 
     public void setType(java.lang.String value) {
         setProperty("type", value);
-    }
-
-    public boolean getVisible() {
-        return (boolean)getProperty("visible");
-    }
-
-    public void setVisible(boolean value) {
-        setProperty("visible", value);
     }
 
 //<< Attributes

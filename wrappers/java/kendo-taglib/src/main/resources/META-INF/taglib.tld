@@ -693,6 +693,16 @@ If it is not supported by the browser, the Chart will switch to the first availa
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the user clicks one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>noteClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user hovers one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>noteHover</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user clicks the plot area.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>plotAreaClick</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3212,7 +3222,7 @@ The last element is always created like a rectangle since there is no following 
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A value indicating if the series should be stacked. String value indicates that the series should be stacked in a group with the specified name.</description>
+            <description>A value indicating if the series should be stacked.String value indicates that the series should be stacked in a group with the specified name.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -3522,12 +3532,6 @@ or series name (for other available series types) in the legend.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-        <attribute>
-            <description>If set to true the chart will display the series extremes. By default chart series extremes are not displayed.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
 
     </tag>
 
@@ -3586,12 +3590,6 @@ or series name (for other available series types) in the legend.</description>
 * "cross" - the marker shape is cross.</description>
         <name>chart-seriesItem-extremes-type</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesTypeFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>If set to true the chart will display the series extremes. By default chart series extremes are not displayed.</description>
-        <name>chart-seriesItem-extremes-visible</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesVisibleFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -4361,12 +4359,6 @@ By default chart series highlighting is enabled.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-        <attribute>
-            <description>If set to true the chart will display the series outliers. By default chart series outliers are not displayed.</description>
-            <name>visible</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
 
     </tag>
 
@@ -4425,12 +4417,6 @@ By default chart series highlighting is enabled.</description>
 * "cross" - the marker shape is cross.</description>
         <name>chart-seriesItem-outliers-type</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersTypeFunctionTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-    <tag>
-        <description>If set to true the chart will display the series outliers. By default chart series outliers are not displayed.</description>
-        <name>chart-seriesItem-outliers-visible</name>
-        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersVisibleFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -8916,6 +8902,18 @@ body of the chart.</description>
         <description>Fired when the user starts dragging the chart.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>chart-dragStart</name>
         <tag-class>com.kendoui.taglib.chart.DragStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>chart-noteClick</name>
+        <tag-class>com.kendoui.taglib.chart.NoteClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user hovers one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>chart-noteHover</name>
+        <tag-class>com.kendoui.taglib.chart.NoteHoverFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -21747,6 +21745,16 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the user clicks one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>noteClick</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user hovers one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>noteHover</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fires when plot area is clicked.</description>
             <name>plotAreaClick</name>
             <rtexprvalue>true</rtexprvalue>
@@ -28186,6 +28194,18 @@ and is about to render it.</description>
         <description>Fires when the user stops dragging the chart.</description>
         <name>stockChart-dragEnd</name>
         <tag-class>com.kendoui.taglib.stockchart.DragEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>stockChart-noteClick</name>
+        <tag-class>com.kendoui.taglib.stockchart.NoteClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user hovers one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>stockChart-noteHover</name>
+        <tag-class>com.kendoui.taglib.stockchart.NoteHoverFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

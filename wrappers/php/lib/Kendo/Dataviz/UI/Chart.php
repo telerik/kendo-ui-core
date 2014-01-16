@@ -280,6 +280,34 @@ If it is not supported by the browser, the Chart will switch to the first availa
     }
 
     /**
+    * Sets the noteClick event of the Chart.
+    * Fired when the user clicks one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Chart
+    */
+    public function noteClick($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('noteClick', $value);
+    }
+
+    /**
+    * Sets the noteHover event of the Chart.
+    * Fired when the user hovers one of the notes.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Chart
+    */
+    public function noteHover($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('noteHover', $value);
+    }
+
+    /**
     * Sets the plotAreaClick event of the Chart.
     * Fired when the user clicks the plot area.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
