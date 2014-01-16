@@ -3,43 +3,32 @@
 <head>
     <title>Map sandbox</title>
     <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-    <script src="../../src/jquery.js"></script>
-    <script src="../../src/kendo.core.js"></script>
-    <script src="../../src/kendo.fx.js"></script>
-    <script src="../../src/kendo.userevents.js"></script>
-    <script src="../../src/kendo.draganddrop.js"></script>
-    <script src="../../src/kendo.popup.js"></script>
-    <script src="../../src/kendo.tooltip.js"></script>
-    <script src="../../src/kendo.mobile.scroller.js"></script>
-    <script src="../../src/kendo.data.js"></script>
-    <script src="../../src/kendo.dataviz.core.js"></script>
-    <script src="../../src/dataviz/util.js"></script>
-    <script src="../../src/dataviz/geometry.js"></script>
-    <script src="../../src/dataviz/drawing/core.js"></script>
-    <script src="../../src/dataviz/drawing/shapes.js"></script>
-    <script src="../../src/dataviz/drawing/svg.js"></script>
-    <script src="../../src/dataviz/drawing/vml.js"></script>
-    <script src="../../src/dataviz/drawing/canvas.js"></script>
-    <script src="../../src/dataviz/map/location.js"></script>
-    <script src="../../src/dataviz/map/crs.js"></script>
-    <script src="../../src/dataviz/map/layers/tile.js"></script>
-    <script src="../../src/dataviz/map/layers/shape.js"></script>
-    <script src="../../src/dataviz/map/layers/marker.js"></script>
-    <script src="../../src/dataviz/map/attribution.js"></script>
-    <script src="../../src/dataviz/map/main.js"></script>
-    <script src="chroma.min.js"></script>
-    <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
-    <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.default.css">
+    <link rel="stylesheet/less" type="text/css" href="../../styles/web/kendo.common.less" />
+    <link rel="stylesheet/less" type="text/css" href="../../styles/web/kendo.default.less" />
+    <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz.less" />
+    <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz.default.less" />
     <style>
         #map {
             width: 800px;
             height: 600px;
         }
     </style>
+    <script src="../../demos/mvc/content/shared/js/less.js"></script>
+    <script src="../require.js"></script>
+    <script src="chroma.min.js"></script>
+    <script>
+      require.config({
+          baseUrl: "../../src",
+          paths: {
+              cultures: "cultures",
+          }
+      });
+    </script>
 </head>
 <body>
     <div id="map"></div>
     <script>
+    require([ "jquery.min", "kendo.dataviz.map" ], function(){
         var scale = chroma
             .scale(["white", "green"])
             .domain([1, 1000]);
@@ -140,7 +129,9 @@
 
             map.resize();
         }
+    });
     </script>
 </body>
 </html>
 
+ 
