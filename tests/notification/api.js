@@ -58,6 +58,72 @@
         ok($(document.body).find(".k-notification").data("kendoPopup"));
     });
 
+    test("show method creates a Kendo UI Popup with zero margin", function() {
+        createNotification();
+
+        notification.show("foo");
+
+        equal($(document.body).find(".k-notification").parent().css("margin"), "0px");
+    });
+
+    test("show method creates a Kendo UI Popup with three zero paddings, except top by default", 3, function() {
+        createNotification();
+
+        notification.show("foo");
+
+        equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
+    });
+
+    test("show method creates a Kendo UI Popup with three zero paddings, except top", 3, function() {
+        createNotification({
+            stacking: "up"
+        });
+
+        notification.show("foo");
+
+        equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
+    });
+
+    test("show method creates a Kendo UI Popup with three zero paddings, except bottom", 3, function() {
+        createNotification({
+            stacking: "down"
+        });
+
+        notification.show("foo");
+
+        equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
+    });
+
+    test("show method creates a Kendo UI Popup with three zero paddings, except left", 3, function() {
+        createNotification({
+            stacking: "left"
+        });
+
+        notification.show("foo");
+
+        equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingRight"), "0px");
+    });
+
+    test("show method creates a Kendo UI Popup with three zero paddings, except right", 3, function() {
+        createNotification({
+            stacking: "right"
+        });
+
+        notification.show("foo");
+
+        equal($(document.body).find(".k-notification").parent().css("paddingTop"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingBottom"), "0px");
+        equal($(document.body).find(".k-notification").parent().css("paddingLeft"), "0px");
+    });
+
     test("show method does not create a Kendo UI Popup when appendTo is set", function() {
         createNotification({
             appendTo: QUnit.fixture

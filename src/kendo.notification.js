@@ -109,38 +109,46 @@ var __meta__ = {
 
         _compileStacking: function(stacking, top) {
             var that = this,
+                paddings = { paddingTop: 0, paddingRight: 0, paddingBottom: 0, paddingLeft: 0 },
                 origin, position;
 
             switch (stacking) {
                 case "down":
                     origin = BOTTOM + " " + LEFT;
                     position = TOP + " " + LEFT;
+                    delete paddings.paddingBottom;
                 break;
                 case RIGHT:
                     origin = TOP + " " + RIGHT;
                     position = TOP + " " + LEFT;
+                    delete paddings.paddingRight;
                 break;
                 case LEFT:
                     origin = TOP + " " + LEFT;
                     position = TOP + " " + RIGHT;
+                    delete paddings.paddingLeft;
                 break;
                 case UP:
                     origin = TOP + " " + LEFT;
                     position = BOTTOM + " " + LEFT;
+                    delete paddings.paddingTop;
                 break;
                 default:
                     if (top !== null) {
                         origin = BOTTOM + " " + LEFT;
                         position = TOP + " " + LEFT;
+                        delete paddings.paddingBottom;
                     } else {
                         origin = TOP + " " + LEFT;
                         position = BOTTOM + " " + LEFT;
+                        delete paddings.paddingTop;
                     }
                 break;
             }
 
             that._popupOrigin = origin;
             that._popupPosition = position;
+            that._popupPaddings = paddings;
         },
 
         _attachPopupEvents: function(options, popup) {
@@ -220,7 +228,7 @@ var __meta__ = {
                 popup.open(x, y);
             }
 
-            popup.wrapper.addClass(that._guid).css({margin: 0, padding: 0});
+            popup.wrapper.addClass(that._guid).css(extend({margin:0}, that._popupPaddings));
 
             if (options.position.pinned) {
                 popup.wrapper.css("position", "fixed");

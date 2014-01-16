@@ -42,6 +42,69 @@
         equal(regex.exec(position), position);
     });
 
+    test("initialization compiles popup padding settings", 4, function() {
+        createNotification();
+
+        var paddings = notification._popupPaddings,
+            size = 0,
+            allZero = true,
+            key;
+        
+        for (key in paddings) {
+            if (paddings.hasOwnProperty(key)) {
+                size++;
+            }
+            if (paddings[key] != 0) {
+                allZero = false;
+            }
+        }
+
+        equal(typeof paddings, "object");
+        equal(size, 3);
+        ok(allZero);
+        ok(!paddings.hasOwnProperty("paddingTop"));
+    });
+
+    test("up stacking removes top popup padding", function() {
+        createNotification({
+            stacking: "up"
+        });
+
+        var paddings = notification._popupPaddings;
+        
+        ok(!paddings.hasOwnProperty("paddingTop"));
+    });
+
+    test("down stacking removes bottom popup padding", function() {
+        createNotification({
+            stacking: "down"
+        });
+
+        var paddings = notification._popupPaddings;
+        
+        ok(!paddings.hasOwnProperty("paddingBottom"));
+    });
+
+    test("right stacking removes right popup padding", function() {
+        createNotification({
+            stacking: "right"
+        });
+
+        var paddings = notification._popupPaddings;
+        
+        ok(!paddings.hasOwnProperty("paddingRight"));
+    });
+
+    test("left stacking removes right popup padding", function() {
+        createNotification({
+            stacking: "left"
+        });
+
+        var paddings = notification._popupPaddings;
+        
+        ok(!paddings.hasOwnProperty("paddingLeft"));
+    });
+
     test("initialization compiles default template function", 2, function() {
         createNotification();
         
@@ -219,7 +282,6 @@
         createNotification();
 
         notification.show("foo");
-        debugger;
         ok(!$(".k-notification").find(".k-i-close").is(":visible"));
     });
 
