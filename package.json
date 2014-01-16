@@ -15,7 +15,7 @@
        "jshint": "1.1.0"
    },
    "devDependencies": {
-       "less": "telerik/less.js",
+       "less": "git+https://github.com/telerik/less.js.git",
        "grunt": "~0.4.2",
        "grunt-cli": "~0.1.0",
        "grunt-contrib-jshint": "~0.7.2",
