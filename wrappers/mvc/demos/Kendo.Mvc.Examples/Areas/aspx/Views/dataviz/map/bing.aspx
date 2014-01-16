@@ -10,6 +10,8 @@
             {
                 layers.Add()
                       .Type(MapLayerType.Bing)
+                      // IMPORTANT: This key is locked to demos.kendoui.com
+                      // Please replace with your own Bing Key
                       .Key("AjQF548guEF8MWgEspVokNny7l_GULKsZ81tR-LvPK96Bm3REkCjNHs2aC_b7nvF");
             })
     %>
