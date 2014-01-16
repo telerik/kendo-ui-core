@@ -56,84 +56,173 @@ var __meta__ = {
 
         _keydown: function(e) {
             var key = e.keyCode;
-            var element = this.element;
-            var selection = caret(element[0]);
-            var selectionStart = selection[0];
-            var selectionEnd = selection[1];
-            var equal = selectionStart === selectionEnd;
+            var selection = caret(this.element[0]);
+            var start = selection[0];
+            var end = selection[1];
 
-            var value = element.val();
-
-            //TODO: Test this!
             if (key == keys.BACKSPACE) {
-                if (equal) {
-                    selectionStart -= 1;
-
-                    var currentChar = value.charAt(selectionStart);
-                    var token = this.tokens[selectionStart];
-
-                    while (currentChar && currentChar === token) {
-                        selectionStart -= 1;
-                        currentChar = value.charAt(selectionStart);
-                        token = this.tokens[selectionStart];
-                    }
-
-                    if (currentChar && (token.test || $.isFunction(token))) {
-                        element.val(value.substring(0, selectionStart) + this.options.emptySymbol + value.substring(selectionStart + 1));
-                        caret(element[0], selectionStart - 1);
-                    }
-
-                    e.preventDefault();
+                if (start === end) {
+                    start -= 1;
                 }
+
+                if (start > -1) {
+                    this._mask(end, start);
+                }
+
+                e.preventDefault();
             }
         },
 
         _keypress: function(e) {
+            var selection = caret(this.element[0]);
+            var start = selection[0];
+            var end = selection[1];
 
-            var element = this.element;
-            var selection = caret(element[0]);
-            var selectionStart = selection[0];
-            //var selectionEnd = selection[1];
-            //
-            var character = String.fromCharCode(e.which);
-
-            var value = element.val();
-            var currentChar = value.charAt(selectionStart);
-            var token = this.tokens[selectionStart];
-
-            while (currentChar && currentChar === token) {
-                selectionStart += 1;
-                currentChar = value.charAt(selectionStart);
-                token = this.tokens[selectionStart];
+            if (start === end) {
+                end += 1;
             }
 
-            var valid = false;
+            this._mask(start, end, String.fromCharCode(e.which));
 
-            if (token) {
-                if (token.test) {
-                    valid = token.test(character);
-                } /*else if ($.isFunction(token)) {
-                    valid = token(character);
-                }*/
+            e.preventDefault();
+        },
+
+        _replace: function(start, end, newValue) {
+            var tokens = this.tokens;
+            var element = this.element[0];
+            var value = element.value;
+            var length = value.length;
+            var idx = start;
+
+            if (start === end) {
+                end += 1;
+            }
+
+            if (end < length) {
+                length = end;
+            }
+
+            var valid = true;
+
+            var token;
+            var current;
+            var newChar;
+
+            var charIdx = 0;
+            var result = [];
+
+            var caretIdx = start;
+
+            for (; idx < length; idx++) {
+                token = tokens[idx];
+
+                if (token === value.charAt(idx)) {
+                    length += 1;
+                    if (charIdx === 0) {
+                        caretIdx += 1;
+                    }
+
+                    result.push(token);
+                    continue;
+                }
+
+                current = newValue.charAt(charIdx);
+                charIdx += 1;
+
+                if (!current) {
+                    current = this.options.emptySymbol;
+                } else if (token.test) {
+                    valid = token.test(current);
+
+                    if (!valid) {
+                        break;
+                    }
+                }
+
+                result.push(current);
             }
 
             if (valid) {
-                element.val(value.substring(0, selectionStart) + character + value.substring(selectionStart + 1));
+                element.value = value.substring(0, start) + result.join("") + value.substring(length);
 
-                selectionStart += 1;
-                currentChar = value.charAt(selectionStart);
-                token = this.tokens[selectionStart];
-
-                while (currentChar && currentChar === token) {
-                    selectionStart += 1;
-                    currentChar = value.charAt(selectionStart);
-                    token = this.tokens[selectionStart];
-                }
-
-                caret(element[0], selectionStart);
+                caretIdx += newValue.length;
+                caret(element, caretIdx, caretIdx);
             }
 
-            e.preventDefault();
+            return valid;
+        },
+
+        _mask: function(start, end, newVal) {
+            newVal = newVal || "";
+
+            var tokens = this.tokens;
+            var element = this.element[0];
+            var oldValue = element.value;
+
+            var backward = start > end;
+            var direction = 1;
+
+            if (backward) {
+                direction = -1;
+                start -= 1;
+            }
+
+            var result = [];
+            var charIdx = 0;
+            var valid = true;
+
+            var idx = start;
+
+            var maskLength = this._emptyMaskLength;
+            if (maskLength < start || maskLength < end) {
+                return;
+            }
+
+            var current;
+
+            while ((backward && idx >= end) || (!backward && idx != end)) {
+                var token = tokens[idx];
+
+                if (token === oldValue.charAt(idx)) {
+                    current = token;
+                    end += direction;
+                } else {
+                    var current = newVal.charAt(charIdx);
+                    charIdx += 1;
+
+                    if (!current) {
+                        current = this.options.emptySymbol;
+                    } else if (token.test) {
+                        valid = token.test(current);
+
+                        if (!valid) {
+                            break;
+                        }
+                    }
+
+                }
+
+                result.push(current);
+                idx += direction;
+            }
+
+            if (valid) {
+                charIdx = end;
+
+                if (backward) {
+                    direction = start;
+
+                    start = end;
+                    end = direction;
+
+                    end += 1; //include end char when delete
+                    result = result.reverse();
+                }
+
+                element.value = oldValue.substring(0, start) + result.join("") + oldValue.substring(end);
+
+                caret(element, charIdx, charIdx);
+            }
         },
 
         _tokenize: function() {
@@ -161,8 +250,9 @@ var __meta__ = {
                 }
             }
 
-            this._emptyMask = emptyMask;
             this.tokens = tokens;
+            this._emptyMask = emptyMask;
+            this._emptyMaskLength = emptyMask.length;
         },
 
         _wrapper: function() {
