@@ -430,7 +430,9 @@ var __meta__ = {
             rotation: {
                 angle: 0
             },
-            editable: true
+            editable: true,
+            resizable: true,
+            rotatable: true
         },
         bounds: function (value) {
             var point, size, bounds, options;
