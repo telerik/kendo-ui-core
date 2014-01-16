@@ -6,7 +6,7 @@ module CodeGen
 
       TYPES_MAP = {
           'String' => 'string',
-          'Number' => 'decimal',
+          'Number' => 'double',
           'Boolean' => 'bool',
           'Object' => 'object',
           'Function' => 'string',
@@ -50,26 +50,85 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
       {
         ViewState["<%= name.pascalize %>"] = value;
       }
-    }
-')
+    }')
 
-      class CodeGen::Option
-        def get_binding
-          binding
+      COMPOSITE_PROPERTY_TEMPLATE = ERB.new('
+    private <%= csharp_class %> _<%= name %>; 
+    /// <summary>
+    /// <%= description %>
+    /// </summary>
+    [DefaultValue("<%= name.pascalize %>")]
+    public <%= csharp_class %> <%= name.pascalize %>
+    {
+      get
+      {
+        if (this._<%= name %> == null)
+        {
+            this._<%= name %> = new <%= csharp_class %>(ViewState);
+        }
+        return this._<%= name %>;
+      }
+    }')
+
+    module Options
+        def component_class
+            Component
         end
+
+        def composite_option_class
+            CompositeOption
+        end
+
+        def option_class
+            Option
+        end
+    end
+
+      class Option < CodeGen::Option
+        include Options
 
         def csharp_type
           TYPES_MAP[type[0]]
+        end
+
+        def to_declaration
+            PROPERTY_TEMPLATE.result(get_binding)
         end
 
         def csharp_default
           return default if type[0] == 'String'
           return default.to_f if type[0] == 'Number'
         end
+        def get_binding
+            binding
+        end
       end
 
 
+    class CompositeOption < CodeGen::CompositeOption
+        include Options
+
+        def csharp_class
+            prefix = owner.csharp_class.sub('Settings', '')
+            "#{prefix}#{name.pascalize}Settings"
+        end
+
+        def to_declaration
+            COMPOSITE_PROPERTY_TEMPLATE.result(get_binding)
+        end
+
+        def get_binding
+            binding
+        end
+    end
+
       class Component < CodeGen::Component
+        include Options
+
+        def csharp_class
+            name
+        end
+
         def get_binding
           binding
         end
@@ -109,8 +168,9 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
           file_path = File.join(@path, component.name.pascalize + '.cs')
 
           properties_content = ''
+
           component.options.each do |option|
-            properties_content += PROPERTY_TEMPLATE.result(option.get_binding)
+            properties_content += option.to_declaration
           end
 
           write_file(file_path, properties_content, '#region [ Properties ]')

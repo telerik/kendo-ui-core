@@ -45,7 +45,7 @@ namespace :generate do
 
         desc 'Generate ASP.NET WebForms wrappers'
         task :wrappers do
-          markdown = FileList['docs/api/dataviz/connector.md']#, 'docs/api/dataviz/diagram.md']
+          markdown = FileList['docs/api/dataviz/diagram/*.md']#, 'docs/api/dataviz/diagram.md']
 
           components = markdown.map { |file| CodeGen::MarkdownParser.read(file, CodeGen::ASPX::Wrappers::Component) }
 
