@@ -104,7 +104,15 @@
         fetchWidget: function (href) {
             var wrapInner = $("#mainWrapInner");
 
-            $.get(href + "?nav=true", function (html) {
+            if (href.indexOf("?") > 0) {
+                href += "&";
+            } else {
+                href += "?";
+            }
+
+            href += "nav=true";
+
+            $.get(href, function (html) {
                 var parts = href.split("/"),
                     widget = parts[parts.length - 2],
                     dashboards = $(".dashboards li").removeClass("active"),
@@ -729,6 +737,16 @@
         applyCurrentTheme: applyCurrentTheme,
         preventFOUC: function () {
             $("#exampleWrap").css("visibility", "hidden");
+        },
+        tabToSelect: function () {
+            var queryString = location.search.replace("?", "");
+
+            return { "mvc": 1, "jsp": 2, "php": 3}[queryString] || 0;
+        },
+        addProductToLinks: function () {
+            $("#example a").attr("href", function (index, href) {
+                return href + location.search;
+            });
         }
     });
 })(jQuery, window);
