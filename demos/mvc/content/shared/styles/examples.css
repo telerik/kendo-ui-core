@@ -1678,7 +1678,6 @@ p#copy
 
 .demo-section p a.hyperlink,
 .config-section a {
-    color: #e15613;
     text-decoration: none;
 }
 
@@ -2148,7 +2147,7 @@ pre.prettyprint
     float: right;
     margin: 0 0 0 15px;
     padding: 0 10px 10px 10px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
     background-color: rgba(0,0,0,0.01);
     min-width: 170px;
     max-width: 300px;
@@ -2753,7 +2752,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     position: relative;
     width: 948px;
     height: 470px;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     padding: 10px;
     border: 1px solid rgba(0,0,0,0.05);
     background-color: rgba(0,0,0,0.01)
@@ -2769,6 +2768,12 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 .map-wrapper .k-map {
     width: 948px;
     height: 470px;
+}
+
+.config-section .k-chart,
+.config-section .k-map {
+    width: 480px;
+    height: 240px;
 }
 
 #device-wrapper {

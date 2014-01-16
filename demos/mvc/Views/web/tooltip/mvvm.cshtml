@@ -6,7 +6,7 @@
                   title="Hello!"
                   data-role="tooltip"
                   data-auto-hide="false"
-                  data-position="right"
+                  data-position="top"
                   data-bind="events: { show: onShow, hide: onHide }"
             >Hover me!</span>
         </div>
@@ -33,4 +33,12 @@
     });
     kendo.bind($("#example"), viewModel);
 </script>
+<style scoped>
+    .key-button {
+        margin: 40px 60px;
+        width: 300px;
+        height: 100px;
+        line-height: 100px;
+    }
+</style>
 </div>
