@@ -737,7 +737,7 @@
     var dojo = {
         postSnippet: function (snippet, baseUrl) {
             snippet = dojo.fixCDNReferences(snippet);
-            snippet = dojo.addBaseRedirectTag(snippet, baseUrl)
+            snippet = dojo.addBaseRedirectTag(snippet, baseUrl);
             snippet = dojo.fixLineEndings(snippet);
             var form = $('<form method="post" action="' + dojo.configuration.url + '" />');
             $("<input name='snippet'>").val(snippet).appendTo(form);
@@ -757,7 +757,7 @@
                     .replace(/href="/g, "href=\"" + dojo.configuration.cdnRoot + "/");
             });
         }
-    }
+    };
 
     extend(window, {
         dojo : dojo,
