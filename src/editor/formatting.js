@@ -142,7 +142,7 @@ var FormattingTool = DelayedExecutionTool.extend({
             }
 
             for (var n = 1; n < nodes.length; n++) {
-                if ($(nodes[n]).closest(selector)[0] != element) {
+                if (!$(nodes[n]).closest(selector)[0]) {
                     break;
                 } else if (n == nodes.length - 1) {
                     return item.value;

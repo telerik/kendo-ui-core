@@ -190,4 +190,20 @@ test("applying format does not replace outer wrapper", function() {
     equal(inline.value(), "<h1>foo</h1>");
 });
 
+test("tool shows current if range spans between elements format", function() {
+    setFormattingItems(inline, [
+        { text: "red", value: "h1.red" },
+        { text: "blue", value: "p.blue" },
+        { text: "heading 2", value: "h2" }
+    ]);
+
+    var tool = formattingTool(inline);
+
+    selectFromValue(inline, '<h2>f|oo</h2><h2>ba|r</h2>');
+    equal(tool.text(), "heading 2");
+
+    selectFromValue(inline, '<h2>f|oo</h2><p class="blue">ba|r</p>');
+    equal(tool.text(), tool.options.title);
+});
+
 }());
