@@ -293,6 +293,11 @@ span.k-sparkline,
     vertical-align: middle;
 }
 
+.k-ie7 .k-navigator {
+    zoom: 1;
+    display: inline;
+}
+
 .k-navigator > button
 {
     border-color: transparent;
@@ -384,6 +389,22 @@ div.k-navigator .k-navigator-w
     display: inline-block;
 }
 
+.k-ie7 .k-button-wrap {
+    zoom: 1;
+    display: inline;
+}
+
+.k-button-wrap .k-button
+{
+    position: relative;
+    font: bold 17px/1.18 monospace;
+}
+
+.k-ie7 .k-button-wrap .k-button
+{
+    margin: 0;
+}
+
 .k-buttons-horizontal :first-child
 {
     border-radius: 4px 0 0 4px;
@@ -399,12 +420,6 @@ div.k-navigator .k-navigator-w
 {
     border-radius: 0 4px 4px 0;
     margin-left: -1px;
-}
-
-.k-button-wrap .k-button
-{
-    position: relative;
-    font: bold 17px/1.18 monospace;
 }
 
 .k-button-wrap .k-button:hover
@@ -455,4 +470,3 @@ div.k-navigator .k-navigator-w
     margin-left: 0;
     margin-right: -1px;
 }
-
