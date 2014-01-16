@@ -135,6 +135,18 @@
         return x + separator + y;
     };
 
+    Point.create = function(arg0, arg1) {
+        if (defined(arg0)) {
+            if (arg0 instanceof Point) {
+                return arg0.clone();
+            } else if (arguments.length === 1 && arg0.length === 2) {
+                return new Point(arg0[0], arg0[1]);
+            } else {
+                return new Point(arg0, arg1);
+            }
+        }
+    };
+
     var Rect = Class.extend({
         init: function(p0, p1) {
             this.p0 = p0 || new Point();

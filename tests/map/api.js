@@ -162,6 +162,11 @@
         ok(loc.round().equals(new Location(85, 240)));
     });
 
+    test("layerToLocation accepts x, y array", function() {
+        var loc = map.layerToLocation([597, 0]);
+        ok(loc.round().equals(new Location(85, 240)));
+    });
+
     test("layerToLocation maps layer coordinates to location at specified zoom", function() {
         var loc = map.layerToLocation(new Point(1024, 1024), 3);
         ok(loc.round().equals(new Location(0, 0)));
@@ -193,6 +198,11 @@
 
     test("viewToLocation maps view coordinates to location", function() {
         var loc = map.viewToLocation(new Point(597, 0));
+        ok(loc.round().equals(new Location(85, 240)));
+    });
+
+    test("viewToLocation accepts x, y array", function() {
+        var loc = map.viewToLocation([597, 0]);
         ok(loc.round().equals(new Location(85, 240)));
     });
 

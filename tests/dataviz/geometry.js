@@ -32,6 +32,27 @@
         equal(new Point().y, 0);
     });
 
+    test("create from x, y", function() {
+        ok(Point.create(10, 20).equals(new Point(10, 20)));
+    });
+
+    test("create from x, y array", function() {
+        ok(Point.create([10, 20]).equals(new Point(10, 20)));
+    });
+
+    test("create from Point", function() {
+        ok(Point.create(new Point(10, 20)).equals(new Point(10, 20)));
+    });
+
+    test("create from Point clones instance", function() {
+        var loc = new Point(10, 20);
+        ok(Point.create(loc) !== loc);
+    });
+
+    test("create from undefined", function() {
+        equal(Point.create(undefined), undefined);
+    });
+
     test("sets x", function() {
         point.set("x", 10);
         equal(point.x, 10);
