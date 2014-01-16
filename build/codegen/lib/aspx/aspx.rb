@@ -167,17 +167,35 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         def write_properties(component)
           file_path = File.join(@path, component.name.pascalize + '.cs')
 
-          properties_content = ''
-
-          component.options.each do |option|
-            properties_content += option.to_declaration
-          end
+          properties_content = write_options(component.options)
 
           write_file(file_path, properties_content, '#region [ Properties ]')
         end
 
         def write_events(component)
 
+        end
+
+        def write_options(options)
+            content = ''
+
+            options.each do |option|
+                content += write_option(option)
+            end
+
+            content
+        end
+
+        def write_option(option)
+            write_composite_option_file(option) if option.class == CompositeOption
+ 
+            option.to_declaration
+        end
+
+        def write_composite_option_file(composite)
+            composite_content = write_options(composite.options)
+
+            create_file(File.join(@path, "#{composite.csharp_class}.cs"), composite_content)
         end
 
         def write_file(file_path, content, marker)
