@@ -392,7 +392,7 @@
                         }
                     })
                     .on('click', '.try-kendo', function () {
-                        dojo.startFrom($('#HTML-1').data('html'), window.location.href);
+                        dojo.postSnippet($('#HTML-1').data('html'), window.location.href);
                     });
 
                 $(window).bind("popstate", function (e) {
@@ -735,17 +735,27 @@
     kendo.ui.plugin(ThemeChooser);
 
     var dojo = {
-        startFrom: function (snippet, baseUrl) {
-            snippet = dojo.prepareDojoSnippet(snippet, baseUrl);
-
+        postSnippet: function (snippet, baseUrl) {
+            snippet = dojo.fixCDNReferences(snippet);
+            snippet = dojo.addBaseRedirectTag(snippet, baseUrl)
+            snippet = dojo.fixLineEndings(snippet);
             var form = $('<form method="post" action="' + dojo.configuration.url + '" />');
             $("<input name='snippet'>").val(snippet).appendTo(form);
 
             form.submit();
         },
-        prepareDojoSnippet: function (code, baseUrl) {
-            return code.replace("<head>", "<head>\n" + '<base href="' + baseUrl + '">')
-                       .replace(/\n/g, '&#10;');
+        addBaseRedirectTag: function (code, baseUrl) {
+            return code.replace("<head>", "<head>\n" + '<base href="' + baseUrl + '">');                       
+        },
+        fixLineEndings: function (code, baseUrl) {
+            return code.replace(/\n/g, "&#10;");
+        },
+        fixCDNReferences: function (code) {
+            return code.replace(/<head>[\s\S]*<\/head>/, function (match) {
+                return match
+                    .replace(/src="/g, "src=\"" + dojo.configuration.cdnRoot + "/")
+                    .replace(/href="/g, "href=\"" + dojo.configuration.cdnRoot + "/");
+            });
         }
     }
 
