@@ -58,10 +58,6 @@
             return new Point(this.x, this.y);
         },
 
-        toArray: function() {
-            return [this.x, this.y];
-        },
-
         rotate: function(center, degrees) {
             var theta = rad(degrees);
             var cosT = math.cos(theta);

@@ -53,10 +53,6 @@
         equal(Point.create(undefined), undefined);
     });
 
-    test("toArray returns x, y array", function() {
-        deepEqual(point.toArray(), [10, 20]);
-    });
-
     test("sets x", function() {
         point.set("x", 10);
         equal(point.x, 10);
