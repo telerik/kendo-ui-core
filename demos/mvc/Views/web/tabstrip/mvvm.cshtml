@@ -1,8 +1,7 @@
 <div id="example" class="k-content">
     <div class="configuration-horizontal">
         <div class="config-section">
-            <span class="configHead">TabStrip</span>
-            <p>Select a tab</p>
+            <span class="configHead">Select a tab</span>
             <div data-role="tabstrip"
                  data-bind="events: { select: onSelect },
                  visible: isVisible">
@@ -90,17 +89,10 @@
     kendo.bind($("#example"), viewModel);
 </script>
 <style scoped>
-#forecast {
-    width: 360px;
-    height: 337px;
-    margin: 30px auto;
-    padding: 80px 15px 0 15px;
-    background: url('../../content/web/tabstrip/forecast.png') transparent no-repeat 0 0;
-}
 
 .sunny, .cloudy, .rainy {
     display: inline-block;
-    margin: 20px 0 20px 10px;
+    margin: 10px 0 20px 5px;
     width: 128px;
     height: 128px;
     background: url('../../content/web/tabstrip/weather.png') transparent no-repeat 0 0;
@@ -115,28 +107,10 @@
 }
 
 .weather {
-    width: 160px;
-    padding: 40px 0 0 0;
+    width: 250px;
+    padding: 60px 0 0 30px;
     float: right;
 }
 
-#forecast h2 {
-    font-weight: lighter;
-    font-size: 5em;
-    padding: 0;
-    margin: 0;
-}
-
-#forecast h2 span {
-    background: none;
-    padding-left: 5px;
-    font-size: .5em;
-    vertical-align: top;
-}
-
-#forecast p {
-    margin: 0;
-    padding: 0;
-}
 </style>
 </div>

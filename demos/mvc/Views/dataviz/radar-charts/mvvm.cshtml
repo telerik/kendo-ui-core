@@ -1,10 +1,9 @@
 <div id="example" class="k-content">
     <div class="configuration-horizontal">
-        <div class="config-section" style="width: 440px">
-            <span class="configHead">Chart</span>
-            <p>Hover some series</p>
+        <div class="config-section">
+            <span class="configHead">Hover some series</span>
             <div data-role="chart"
-                 data-title="{ text: 'Budget report' }"
+                 data-legend="{ position: 'right' }"
                  data-series-defaults="{ type: 'radarLine' }"
                  data-series="[
                                  { name: 'Budget', field: 'budget' },
@@ -15,7 +14,7 @@
                             source: budgetReport,
                             events: { seriesHover: onSeriesHover }"></div>
         </div>
-        <div class="config-section" style="width: 200px">
+        <div class="config-section console-section">
             <div class="configHead">Console</div>
             <div class="console"></div>
         </div>
