@@ -294,12 +294,17 @@ tree :to => 'dist/demos/staging/content/cdn/themebuilder',
      :root => 'dist/themebuilder/staging/'
 
 class PatchedWebConfigTask < Rake::FileTask
-    attr_accessor :cdn_root, :themebuilder_root
+    attr_accessor :cdn_root, :themebuilder_root, :scratchpad_root
     def execute(args=nil)
         ensure_path(name)
 
         File.open(name, "w") do |file|
-            file.write(File.read(prerequisites[0]).sub('$CDN_ROOT', cdn_root).sub('$THEMEBUILDER_ROOT', themebuilder_root))
+            source = File.read(prerequisites[0])
+            source
+                .sub!('$CDN_ROOT', cdn_root)
+                .sub!('$THEMEBUILDER_ROOT', themebuilder_root)
+                .sub!('$SCRATCHPAD_ROOT', scratchpad_root)
+            file.write(source)
         end
     end
 
@@ -310,10 +315,11 @@ class PatchedWebConfigTask < Rake::FileTask
     end
 end
 
-def patched_web_config(name, source, cdn_root, themebuilder_root)
+def patched_web_config(name, source, cdn_root, themebuilder_root, scratchpad_root)
     task = PatchedWebConfigTask.define_task(name => source)
     task.cdn_root = cdn_root
     task.themebuilder_root = themebuilder_root
+    task.scratchpad_root = scratchpad_root
     task
 end
 
@@ -367,7 +373,7 @@ namespace :demos do
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
         'dist/demos/staging/content/cdn/styles/telerik',
-        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', STAGING_CDN_ROOT + CURRENT_COMMIT, STAGING_CDN_ROOT + CURRENT_COMMIT + '/themebuilder')
+        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', STAGING_CDN_ROOT + CURRENT_COMMIT, STAGING_CDN_ROOT + CURRENT_COMMIT + '/themebuilder', '/scratchpad-staging')
     ]
 
     zip 'dist/demos/staging.zip' => :staging_site
@@ -412,7 +418,7 @@ namespace :demos do
         'dist/demos/production/src/aspnetmvc/controllers/mobile',
         'dist/demos/production/src/aspnetmvc/views/aspx',
         'dist/demos/production/src/aspnetmvc/views/razor',
-        patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT)
+        patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT, 'http://try.kendoui.com/')
     ]
 
     zip 'dist/demos/production.zip' => :production_site
