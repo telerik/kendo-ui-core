@@ -898,7 +898,6 @@
                 else if (key === 27) {// ESC: stop any action
                     this._discardNewConnection();
                     diagram.select(false);
-                    diagram.refresh();
                     return true;
                 }
             },
