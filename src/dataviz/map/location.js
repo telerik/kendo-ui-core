@@ -152,13 +152,21 @@
             var nw = this.nw,
                 se = this.se;
 
+            return {nw: this.nw, ne: new Location(nw.lat, se.lng),
+                    se: this.se, sw: new Location(nw.lng, se.lat)};
+        },
+
+        toArray: function() {
+            var nw = this.nw,
+                se = this.se;
+
             return [nw, new Location(nw.lat, se.lng),
                     se, new Location(nw.lng, se.lat)];
         },
 
         overlaps: function(extent) {
-            return this.containsAny(extent.edges()) ||
-                   extent.containsAny(this.edges());
+            return this.containsAny(extent.toArray()) ||
+                   extent.containsAny(this.toArray());
         }
     });
 

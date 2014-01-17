@@ -468,6 +468,41 @@
         });
 
         // ------------------------------------------------------------
+        module("Extent / edges", {
+            setup: function() {
+                extent = new Extent([10, -10], [-10, 10]);
+            }
+        });
+
+        test("nw edge", function() {
+            ok(extent.edges().nw.equals(new Location(10, -10)));
+        });
+
+        test("ne edge", function() {
+            ok(extent.edges().ne.equals(new Location(10, 10)));
+        });
+
+        test("se edge", function() {
+            ok(extent.edges().se.equals(new Location(-10, 10)));
+        });
+
+        test("sw edge", function() {
+            ok(extent.edges().sw.equals(new Location(-10, -10)));
+        });
+
+        // ------------------------------------------------------------
+        module("Extent / toArray", {
+            setup: function() {
+                extent = new Extent([10, -10], [-10, 10]);
+            }
+        });
+
+        test("returns edges", function() {
+            var edges = extent.edges();
+            deepEqual(extent.toArray(), [edges.nw, edges.ne, edges.se, edges.sw]);
+        });
+
+        // ------------------------------------------------------------
         module("Extent / Constants");
 
         test("WORLD", function() {
