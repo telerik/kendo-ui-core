@@ -1,0 +1,68 @@
+<div id="example" class="k-content">
+    <div id="grid" style="margin-bottom:20px"></div>
+    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
+    <script>
+        $(function(){
+            var hubUrl = "http://demos.kendoui.com/service/signalr/hubs";
+            var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
+            var hub = connection.createHubProxy("productHub");
+            var hubStart = connection.start({ jsonp: true });
+
+            $("#grid").kendoGrid({
+                height: 300,
+                editable: true,
+                sortable: true,
+                columns: [
+                    { field: "UnitPrice" },
+                    { field: "ProductName" },
+                    { command: "destroy", width: 100}
+                ],
+                toolbar: ["create"],
+                dataSource: {
+                    type: "signalr",
+                    autoSync: true,
+                    schema: {
+                        model: {
+                            id: "ID",
+                            fields: {
+                                "ID": { editable: false, nullable: true },
+                                "CreatedAt": { type: "date" },
+                                "UnitPrice": { type: "number" }
+                            }
+                        }
+                    },
+                    sort: [ { field: "CreatedAt", dir: "desc" }],
+                    transport: {
+                        promise: hubStart,
+                        hub: hub,
+                        server: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        },
+                        client: {
+                            read: "read",
+                            update: "update",
+                            destroy: "destroy",
+                            create: "create"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <div class="configuration-horizontal">
+        <span class="configHead">Information</span>
+        <p>
+        This demo demonstrates real-time push-notifications from <a href="http://signalr.net/">SignalR</a>.
+        </p>
+        <p>
+            To see the real-time updates:
+        </p>
+        <ol>
+            <li>Open this page in another browser window by clicking <a href="./signalr.html" target="_new">here</a></li>
+            <li>Create, update or destroy grid items.</li>
+        </ol>
+    </div>
+</div>

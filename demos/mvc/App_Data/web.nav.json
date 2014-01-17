@@ -621,7 +621,14 @@
                     "url": "grid/everlive.html",
                     "title": "Binding to Everlive | Kendo UI Grid demo",
                     "meta": "This example shows how the Kendo UI Grid can be bound to Telerik Everlive which will provide the backend functionality",
-                    "new": "true",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                },
+                {
+                    "text": "Binding to SignalR",
+                    "url": "grid/signalr.html",
+                    "new": true,
+                    "title": "Real-time Binding to SignalR Hub",
+                    "meta": "This example shows how the Kendo UI Grid can be bound to SignalR Hub for real-time push notifications",
                     "packages": ["!mvc", "!jsp", "!php"]
                 },
                 {
@@ -1163,7 +1170,7 @@
              "text": "ProgressBar",
              "name": "progressbar",
              "new": "true",
-			 "documentation": "web/progressbar",
+             "documentation": "web/progressbar",
              "spriteCssClass": "progressBarIcon",
              "items": [
                  {
