@@ -2225,10 +2225,7 @@ var __meta__ = {
                 if (target) {
                     target.accept(item);
 
-                    this.trigger("change", {
-                       action: "itemchange",
-                       items: [target]
-                    });
+                    target.trigger("change");
 
                     this._updatePristineForModel(target, item);
                 } else {
