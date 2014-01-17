@@ -185,10 +185,10 @@
         input.pressKey(kendo.keys.BACKSPACE, "keydown");
 
         equal(input.val(), "_-_");
-        equal(caret(input[0])[0], 0);
+        equal(caret(input[0])[0], 1);
     });
 
-    test("MaskInput clears first possible position on BACKSPACE", function() {
+    test("MaskInput honours static chars on BACKSPACE", function() {
         var maskinput = new MaskInput(input, {
             mask: "0-0"
         });
@@ -198,8 +198,56 @@
         caret(input[0], 2);
 
         input.pressKey(kendo.keys.BACKSPACE, "keydown");
+        input.pressKey(kendo.keys.BACKSPACE, "keydown");
 
         equal(input.val(), "_-2");
         equal(caret(input[0])[0], 0);
+    });
+
+    test("MaskInput removes symbol on DELETE", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0-0"
+        });
+
+        input.focus();
+        input.val("2-2");
+        caret(input[0], 0);
+
+        input.pressKey(kendo.keys.DELETE, "keydown");
+
+        equal(input.val(), "_-2");
+        equal(caret(input[0])[0], 1);
+    });
+
+    test("MaskInput removes selected text on DELETE", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0--0"
+        });
+
+        input.focus();
+        input.val("2--2");
+        caret(input[0], 0, 4);
+
+        input.pressKey(kendo.keys.DELETE, "keydown");
+
+        equal(input.val(), "_--_");
+        equal(caret(input[0])[0], 0);
+    });
+
+    test("MaskInput honours all static characters on DELETE", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0--00"
+        });
+
+        input.focus();
+        input.val("2--22");
+        caret(input[0], 1);
+
+        input.pressKey(kendo.keys.DELETE, "keydown");
+        input.pressKey(kendo.keys.DELETE, "keydown");
+        input.pressKey(kendo.keys.DELETE, "keydown");
+
+        equal(input.val(), "2--_2");
+        equal(caret(input[0])[0], 4);
     });
 })();
