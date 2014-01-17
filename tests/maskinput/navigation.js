@@ -86,7 +86,7 @@
         equal(caret(input[0])[0], 2);
     });
 
-    /*test("MaskInput moves the rest of input value", function() {
+    test("MaskInput replace next symbol on keypress", function() {
         var maskinput = new MaskInput(input, {
             mask: "0-000"
         });
@@ -97,8 +97,8 @@
         input.pressKey("0");
 
         equal(caret(input[0])[0], 3);
-        equal(input.val(), "0-012");
-    });*/
+        equal(input.val(), "0-023");
+    });
 
     test("MaskInput prevents user input if end of mask is reached", function() {
         var maskinput = new MaskInput(input, {
@@ -129,14 +129,28 @@
 
     test("MaskInput prevents user input on BACKSPACE if start is reached", function() {
         var maskinput = new MaskInput(input, {
-            mask: "0-0"
+            mask: "(0-0)"
         });
 
         input.focus();
 
         input.pressKey(kendo.keys.BACKSPACE, "keydown");
 
-        equal(input.val(), "_-_");
+        equal(input.val(), "(_-_)");
+        equal(caret(input[0])[0], 0);
+    });
+
+    test("MaskInput does not add empty symbol on BACKSPACE when start is reached", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(0-0)"
+        });
+
+        input.focus();
+        caret(input[0], 1);
+
+        input.pressKey(kendo.keys.BACKSPACE, "keydown");
+
+        equal(input.val(), "(_-_)");
         equal(caret(input[0])[0], 0);
     });
 
