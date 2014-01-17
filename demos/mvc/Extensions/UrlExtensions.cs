@@ -38,7 +38,7 @@ namespace Kendo.Extensions
 
         public static string ApplyProduct(this UrlHelper url, string href)
         {
-            var product = url.RequestContext.HttpContext.Request.QueryString.ToString().Replace("&nav=true", "");
+            var product = url.RequestContext.HttpContext.Request.QueryString.ToString().Replace("&nav=true", "").Replace("nav=true", "");
 
             if (!string.IsNullOrEmpty(product))
             {
