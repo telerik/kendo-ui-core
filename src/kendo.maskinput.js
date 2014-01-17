@@ -87,71 +87,6 @@ var __meta__ = {
             e.preventDefault();
         },
 
-        _replace: function(start, end, newValue) {
-            var tokens = this.tokens;
-            var element = this.element[0];
-            var value = element.value;
-            var length = value.length;
-            var idx = start;
-
-            if (start === end) {
-                end += 1;
-            }
-
-            if (end < length) {
-                length = end;
-            }
-
-            var valid = true;
-
-            var token;
-            var current;
-            var newChar;
-
-            var charIdx = 0;
-            var result = [];
-
-            var caretIdx = start;
-
-            for (; idx < length; idx++) {
-                token = tokens[idx];
-
-                if (token === value.charAt(idx)) {
-                    length += 1;
-                    if (charIdx === 0) {
-                        caretIdx += 1;
-                    }
-
-                    result.push(token);
-                    continue;
-                }
-
-                current = newValue.charAt(charIdx);
-                charIdx += 1;
-
-                if (!current) {
-                    current = this.options.emptySymbol;
-                } else if (token.test) {
-                    valid = token.test(current);
-
-                    if (!valid) {
-                        break;
-                    }
-                }
-
-                result.push(current);
-            }
-
-            if (valid) {
-                element.value = value.substring(0, start) + result.join("") + value.substring(length);
-
-                caretIdx += newValue.length;
-                caret(element, caretIdx, caretIdx);
-            }
-
-            return valid;
-        },
-
         _mask: function(start, end, newVal) {
             newVal = newVal || "";
 
@@ -180,7 +115,7 @@ var __meta__ = {
 
             var current;
 
-            while ((backward && idx >= end) || (!backward && idx != end)) {
+            while ((backward && idx >= end && end > -1) || (!backward && idx != end)) {
                 var token = tokens[idx];
 
                 if (token === oldValue.charAt(idx)) {
