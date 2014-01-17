@@ -104,21 +104,30 @@
         </div>
 
         <script>
-            $("#codeStrip").kendoTabStrip({
-                animation: {
-                    open: {
-                        effects: "fadeIn"
-                    }
-                },
-                select: function(e) {
-                    var tabstrip = $(e.contentElement).data("kendoTabStrip");
-                    if (tabstrip.select().length == 0) {
-                        tabstrip.select(0);
-                    }
+            (function () {
+                var codeviewer = $("#codeStrip");
+                var selectedTabIndex = tabToSelect();
+
+                if (codeviewer.find(">ul>li").length - 1 < selectedTabIndex) {
+                    selectedTabIndex = 0;
                 }
-            })
-            .data("kendoTabStrip")
-            .select(tabToSelect());
+
+                codeviewer.kendoTabStrip({
+                    animation: {
+                        open: {
+                            effects: "fadeIn"
+                        }
+                    },
+                    select: function (e) {
+                        var tabstrip = $(e.contentElement).data("kendoTabStrip");
+                        if (tabstrip.select().length == 0) {
+                            tabstrip.select(0);
+                        }
+                    }
+                })
+                .data("kendoTabStrip")
+                .select(selectedTabIndex);
+            } ());
         </script>
     }
 </div>
