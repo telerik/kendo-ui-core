@@ -212,6 +212,15 @@ module.exports = function(grunt) {
             }
         },
 
+        license: {
+            apply: {
+                src:  [ "<%= kendo.options.destDir %>/**/*" ],
+                filter: function(src) {
+                    return PATH.basename(src).match(/^kendo(.+)(js|css|less)$/);
+                }
+            }
+        }
+
     });
 
     // Default task(s).
@@ -220,4 +229,5 @@ module.exports = function(grunt) {
     grunt.registerTask('tests', [ 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'copy:jquery', 'copy:timezones' ]);
+    grunt.registerTask('build', [ 'all', 'styles', 'license' ]);
 };
