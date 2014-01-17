@@ -150,6 +150,10 @@
         equal(map.zoom(), 12);
     });
 
+    test("setter returns Map", function() {
+        equal(map.extent(new Extent([0, 0], [-10, 10])), map);
+    });
+
     // ------------------------------------------------------------
     module("Map / Location <-> Layer", {
         setup: function() {

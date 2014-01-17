@@ -171,32 +171,10 @@
 
         extent: function(extent) {
             if (extent) {
-                this.center(extent.center());
-
-                var width = this.element.width();
-                var height = this.element.height();
-                for (var zoom = this.options.maxZoom; zoom >= this.options.minZoom; zoom--) {
-                    var nw = this.locationToLayer(extent.nw, zoom);
-                    var se = this.locationToLayer(extent.se, zoom);
-                    var layerWidth = math.abs(se.x - nw.x);
-                    var layerHeight = math.abs(se.y - nw.y);
-
-                    if (layerWidth <= width && layerHeight <= height) {
-                        break;
-                    }
-                }
-
-                this.zoom(zoom);
+                this._setExtent(extent);
+                return this;
             } else {
-                var nw = this._getOrigin();
-                var bottomRight = this.locationToLayer(nw);
-                var size = this.viewSize();
-
-                bottomRight.x += size.width;
-                bottomRight.y += size.height;
-
-                var se = this.layerToLocation(bottomRight);
-                return new Extent(nw, se);
+                return this._getExtent();
             }
         },
 
@@ -296,6 +274,37 @@
             }
 
             return this._origin;
+        },
+
+        _setExtent: function(extent) {
+            this.center(extent.center());
+
+            var width = this.element.width();
+            var height = this.element.height();
+            for (var zoom = this.options.maxZoom; zoom >= this.options.minZoom; zoom--) {
+                var nw = this.locationToLayer(extent.nw, zoom);
+                var se = this.locationToLayer(extent.se, zoom);
+                var layerWidth = math.abs(se.x - nw.x);
+                var layerHeight = math.abs(se.y - nw.y);
+
+                if (layerWidth <= width && layerHeight <= height) {
+                    break;
+                }
+            }
+
+            this.zoom(zoom);
+        },
+
+        _getExtent: function() {
+            var nw = this._getOrigin();
+            var bottomRight = this.locationToLayer(nw);
+            var size = this.viewSize();
+
+            bottomRight.x += size.width;
+            bottomRight.y += size.height;
+
+            var se = this.layerToLocation(bottomRight);
+            return new Extent(nw, se);
         },
 
         _zoomAround: function(pivot, level) {
