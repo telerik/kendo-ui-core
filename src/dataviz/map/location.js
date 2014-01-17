@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../drawing/vml" ], f);
+    define([ "./location" ], f);
 })(function(){
 
 (function ($, undefined) {

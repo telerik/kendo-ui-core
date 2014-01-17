@@ -133,6 +133,23 @@
         equal(map.extent().se.round().lng, 135);
     });
 
+    test("setting extent sets center", function() {
+        map.extent(new Extent([0, 10], [10, 0]));
+        ok(map.center().equals(new Location(5, 5)));
+    });
+
+    test("setting extent sets min zoom", function() {
+        createMap({ minZoom: 10, zoom: 11, maxZoom: 12 });
+        map.extent(new Extent([90, -180], [-90, 180]));
+        equal(map.zoom(), 10);
+    });
+
+    test("setting extent sets max zoom", function() {
+        createMap({ minZoom: 10, zoom: 11, maxZoom: 12 });
+        map.extent(new Extent([-0.1, 0.1], [0, 0]));
+        equal(map.zoom(), 12);
+    });
+
     // ------------------------------------------------------------
     module("Map / Location <-> Layer", {
         setup: function() {
