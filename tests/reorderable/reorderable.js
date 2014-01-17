@@ -329,4 +329,19 @@
         equal(args.position, "after");
     });
 
+    test("reorder twice adjecent elements", function() {
+        var args;
+        new Reorderable(div, {
+            change: function() {
+                args = arguments[0];
+            }
+        });
+
+        div.children().eq(1).insertBefore(div.children().eq(0));
+        moveOverDropTarget(div.children().eq(1), div.children().eq(0), 1);
+
+        equal(args.newIndex, 0);
+        equal(args.oldIndex, 1);
+    });
+
 })();

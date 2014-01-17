@@ -45,8 +45,7 @@ var __meta__ = {
 
             that.reorderDropCue = $('<div class="k-reorder-cue"><div class="k-icon k-i-arrow-s"></div><div class="k-icon k-i-arrow-n"></div></div>');
 
-            var elements = element.find(draggable.options.filter);
-            elements.kendoDropTarget({
+            element.find(draggable.options.filter).kendoDropTarget({
                 group: draggable.options.group,
                 dragenter: function(e) {
                     if (!that._draggable) {
@@ -64,7 +63,7 @@ var __meta__ = {
                         if (options.inSameContainer && !options.inSameContainer(dropTarget, that._draggable)) {
                             that._dropTarget = dropTarget;
                         } else {
-                            if (elements.index(dropTarget) > elements.index(that._draggable)) {
+                            if (that._elements.index(dropTarget) > that._elements.index(that._draggable)) {
                                 left += dropTarget.outerWidth();
                             }
                         }
@@ -98,8 +97,8 @@ var __meta__ = {
 
                         that.trigger(CHANGE, {
                             element: that._draggable,
-                            oldIndex: elements.index(draggable),
-                            newIndex: elements.index(dropTarget),
+                            oldIndex: that._elements.index(draggable),
+                            newIndex: that._elements.index(dropTarget),
                             containerChange: containerChange,
                             position: getOffset(that.reorderDropCue).left > getOffset(dropTarget).left ? "after" : "before"
                         });
@@ -112,13 +111,16 @@ var __meta__ = {
                     dragcancel: function() {
                         that.reorderDropCue.remove();
                         that._draggable = null;
+                        that._elements = null;
                     },
                     dragend: function() {
                         that.reorderDropCue.remove();
                         that._draggable = null;
+                        that._elements = null;
                     },
                     dragstart: function(e) {
                         that._draggable = e.currentTarget;
+                        that._elements = that.element.find(draggable.options.filter);
                     },
                     drag: function(e) {
                         if (!that._dropTarget || this.hint.find(".k-drag-status").hasClass("k-denied")) {
