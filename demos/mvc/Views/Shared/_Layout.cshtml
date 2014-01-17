@@ -100,7 +100,7 @@
         
         <h2 class="custom-themes-cat">Custom Themes</h2>
         <ul>
-            <li><a class="theme-builder" href="/kendo-demos/themebuilder/@(ViewBag.Suite).html" target="_blank">Theme Builder</a> </li>
+            <li><a class="theme-builder" href="@Url.Content("~/themebuilder/" + ViewBag.Suite + ".html")" target="_blank">Theme Builder</a> </li>
         </ul>
 
         @Html.Raw("</div>")
