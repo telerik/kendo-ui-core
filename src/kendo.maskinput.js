@@ -114,13 +114,16 @@ var __meta__ = {
             }
 
             var current;
+            var multipleSelection = Math.abs(end - start) > 1;
 
             while ((backward && idx >= end && end > -1) || (!backward && idx != end)) {
                 var token = tokens[idx];
 
                 if (token === oldValue.charAt(idx)) {
                     current = token;
-                    end += direction;
+                    if (!multipleSelection) {
+                        end += direction;
+                    }
                 } else {
                     var current = newVal.charAt(charIdx);
                     charIdx += 1;
@@ -134,7 +137,6 @@ var __meta__ = {
                             break;
                         }
                     }
-
                 }
 
                 result.push(current);
@@ -143,6 +145,9 @@ var __meta__ = {
 
             if (valid) {
                 charIdx = end;
+                if (multipleSelection && !backward) {
+                    charIdx = start + newVal.length;
+                }
 
                 if (backward) {
                     direction = start;

@@ -28,16 +28,20 @@
         }
     });
 
-    function caret(element, position) {
-        var range,
-            isPosition = position !== undefined;
+    function caret(element, start, end) {
+        var range;
+        var isPosition = start !== undefined;
+
+        if (end === undefined) {
+            end = start;
+        }
 
         if (element.selectionStart !== undefined) {
             if (isPosition) {
                 element.focus();
-                element.setSelectionRange(position, position);
+                element.setSelectionRange(start, end);
             } else {
-                position = [element.selectionStart, element.selectionEnd];
+                start = [element.selectionStart, element.selectionEnd];
             }
         } else if (document.selection) {
             if ($(element).is(":visible")) {
@@ -45,7 +49,9 @@
             }
             range = document.selection.createRange();
             if (isPosition) {
-                range.move("character", position);
+                range.collapse(true);
+                range.moveStart("character", start);
+                range.moveEnd("character", end - start);
                 range.select();
             } else {
                 var rangeElement = element.createTextRange(),
@@ -57,11 +63,11 @@
                     selectionStart = rangeDuplicated.text.length;
                     selectionEnd = selectionStart + rangeElement.text.length;
 
-                position = [selectionStart, selectionEnd];
+                start = [selectionStart, selectionEnd];
             }
         }
 
-        return position;
+        return start;
     }
 
     test("MaskInput replace empty symbol if valid", function() {
@@ -98,6 +104,20 @@
 
         equal(caret(input[0])[0], 3);
         equal(input.val(), "0-023");
+    });
+
+    test("MaskInput replaces first symbol of selected text on keypress", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0-000"
+        });
+
+        input.focus();
+        input.val("0-123");
+        caret(input[0], 2, 5);
+        input.pressKey("0");
+
+        equal(caret(input[0])[0], 3);
+        equal(input.val(), "0-0__");
     });
 
     test("MaskInput prevents user input if end of mask is reached", function() {
