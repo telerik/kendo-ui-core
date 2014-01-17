@@ -529,6 +529,66 @@
         equal(th.eq(1).next()[0], th[2]);
     });
 
+    test("reorder colum footer cells with static columns", function() {
+        var grid = new Grid(div, {
+            reorderable: true,
+            columns: [{
+                field: "foo",
+                footerTemplate: "foo footer",
+                static: true
+            },
+            {
+                field: "baz",
+                static: true,
+                footerTemplate: "baz footer"
+            },
+            {
+                field: "bar",
+                footerTemplate: "bar footer"
+            }],
+            dataSource: data
+        });
+
+        grid.reorderColumn(0, grid.columns[1]);
+
+        var footer = grid.footer.find(".k-footer-template>td");
+        equal(footer.eq(0).text(), "baz footer");
+        equal(footer.eq(1).text(), "foo footer");
+        equal(footer.eq(2).text(), "bar footer");
+    });
+
+    test("reorder colum footer cols with static columns", function() {
+        var grid = new Grid(div, {
+            reorderable: true,
+            columns: [{
+                field: "foo",
+                footerTemplate: "foo footer",
+                static: true,
+                width: 10
+            },
+            {
+                field: "baz",
+                static: true,
+                footerTemplate: "baz footer",
+                width: 20
+            },
+            {
+                field: "bar",
+                footerTemplate: "bar footer",
+                width: 30
+            }],
+            dataSource: data
+        });
+
+        grid.reorderColumn(0, grid.columns[1]);
+
+        var cols = grid.footer.find("colgroup>col");
+        equal(cols.length, 3);
+        equal(cols[0].style.width, "20px");
+        equal(cols[1].style.width, "10px");
+        equal(cols[2].style.width, "30px");
+    });
+
     function moveOverDropTarget(draggable, dropTarget) {
         var position = dropTarget.position();
 
