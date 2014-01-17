@@ -101,6 +101,10 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         def option_class
             Option
         end
+
+        def array_option_class
+            ArrayOption
+        end
     end
 
       class Option < CodeGen::Option
@@ -149,7 +153,6 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         end
       end
 
-
     class CompositeOption < CodeGen::CompositeOption
         include Options
 
@@ -166,6 +169,20 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         def get_binding
             binding
         end
+    end
+
+    class ArrayOption < CodeGen::ArrayOption
+        include Options
+
+        def csharp_class
+            prefix = owner.csharp_class.sub('Collection', '')
+            "#{prefix}#{name.pascalize}Collection"
+        end
+
+        def to_declaration
+
+        end
+
     end
 
       class Component < CodeGen::Component
@@ -233,6 +250,11 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
           file_path = File.join(@path, component.name.pascalize + '.cs')
 
           properties_content = write_options(component.options)
+
+          component.options.each do |option|
+              #debugger if option.is_a?(ArrayOption)
+            properties_content += option.to_declaration
+          end
 
           write_file(file_path, properties_content, '#region [ Properties ]')
         end
