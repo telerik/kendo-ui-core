@@ -466,5 +466,13 @@
                new Location(0, 0)
             ));
         });
+
+        // ------------------------------------------------------------
+        module("Extent / Constants");
+
+        test("WORLD", function() {
+            ok(Extent.World.nw.equals(new Location(90, -180)));
+            ok(Extent.World.se.equals(new Location(-90, 180)));
+        });
     })();
 })();
