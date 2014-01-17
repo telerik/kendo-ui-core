@@ -413,7 +413,29 @@ test("parameterMap transforms multiple nested levels or filters", function() {
     equal(result.filter, "(foo~eq~'bar'~or~(baz~eq~1~or~baz2~eq~1))~or~moo~contains~'boo'");
 });
 
-test("parameterMap returns only the serialized values", function() {
+test("parameterMap includes additional data on read", function() {
+    var transport = new Transport({}),
+        result = transport.parameterMap({foo: {bar: 1}}, "read");
+    
+    equal(result["foo.bar"], 1);
+});
+
+test("parameterMap returns only serialized values on read", function() {
+    var transport = new Transport({}),
+        result = transport.parameterMap({foo: {bar: 1}}, "read");
+    
+    equal(result["foo"], undefined);
+});
+
+test("parameterMap includes additional data when using batch updates", function() {
+    var transport = new Transport({}),
+        result = transport.parameterMap({models: [{bar: 1}], foo: "test"}, "update");
+ 
+    equal(result.foo, "test");
+    equal(result["models[0].bar"], 1);
+});
+
+test("parameterMap returns only the serialized values on update", function() {
     var transport = new Transport({}),
         result = transport.parameterMap({foo: {bar: 1}}, "update");
     
@@ -473,14 +495,6 @@ test("parameterMap serializes models array", function() {
 
     equal(result["models[0].foo"], 1);
     equal(result["models[1].foo"], 2);
-});
-
-test("parameterMap removes models array from the data", function() {
-    var transport = new Transport({}),
-        data = {models: [{foo: 1}, {foo: 2}]},
-        result = transport.parameterMap(data, "update");
-
-    ok(!data.models);
 });
 
 test("parameterMap does not override a nested field with a field that has the full path name", function() {
