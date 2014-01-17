@@ -502,15 +502,9 @@ div.submenu-box ol {
     min-height:5px;
 }
 
-.overview #banner
-{
-    
-}
-
 .overview #bannerInner
 {
     padding: 67px 0 0;
-
 }
 
 #bannerInner>.centerWrap
@@ -1225,6 +1219,7 @@ p#copy
 {
     position:relative;
     padding-top: 45px;
+    padding-bottom: 45px;
 }
 
 #exampleTitle
@@ -1334,7 +1329,7 @@ p#copy
 {
     width:169px;
     text-align:left;
-    margin-top: -65px;
+    margin-top: -63px;
     border-left: 1px solid #dfdfdf;
     position: absolute;
     right: 0;
@@ -1620,8 +1615,8 @@ p#copy
 #example
 {
     position:relative;
-    padding:0;
-    margin: 15px 0;
+    padding: 15px 0;
+  
     min-height:200px;
     font-size: 12px;
 }
