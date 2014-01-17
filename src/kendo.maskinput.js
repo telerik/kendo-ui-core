@@ -70,6 +70,14 @@ var __meta__ = {
                 }
 
                 e.preventDefault();
+            } else if (key == keys.DELETE) {
+                if (start === end) {
+                    end += 1;
+                }
+
+                this._mask(start, end);
+
+                e.preventDefault();
             }
         },
 
@@ -121,7 +129,7 @@ var __meta__ = {
 
                 if (token === oldValue.charAt(idx)) {
                     current = token;
-                    if (!multipleSelection) {
+                    if (!multipleSelection && newVal) {
                         end += direction;
                     }
                 } else {
@@ -161,7 +169,7 @@ var __meta__ = {
 
                 element.value = oldValue.substring(0, start) + result.join("") + oldValue.substring(end);
 
-                caret(element, charIdx, charIdx);
+                caret(element, charIdx);
             }
         },
 
