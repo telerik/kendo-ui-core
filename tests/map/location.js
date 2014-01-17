@@ -157,6 +157,14 @@
             ok(extent.nw.equals(new Location(45, -90)));
         });
 
+        test("constructor swaps Locations", function() {
+            extent = new Extent(
+                new Location(-45, 90),
+                new Location(45, -90)
+            );
+            ok(extent.nw.equals(new Location(45, -90)));
+        });
+
         test("constructor accepts [lat,lng]", function() {
             extent = new Extent([10, 20], [30, 40]);
             ok(extent.nw.equals(new Location(10, 20)));

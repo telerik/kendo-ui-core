@@ -85,8 +85,17 @@
 
     var Extent = Class.extend({
         init: function(nw, se) {
-            this.nw = Location.create(nw);
-            this.se = Location.create(se);
+            nw = Location.create(nw);
+            se = Location.create(se);
+
+            if (nw.lng + 180 > se.lng + 180 &&
+                nw.lat + 90 < se.lat + 90) {
+                this.se = nw;
+                this.nw = se;
+            } else {
+                this.se = se;
+                this.nw = nw;
+            }
         },
 
         contains: function(loc) {
