@@ -101,10 +101,24 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
+
         pkg: grunt.file.readJSON('package.json'),
         jshint: jshint,
         karma: {
             options: {
+                browserStack: {
+                  username: 'petyoivanov',
+                  accessKey: 'NNjxPWSAqAAyY1Zq2yT2'
+                },
+                customLaunchers: {
+                    bs_chrome: {
+                        base: 'BrowserStack',
+                        browser: 'chrome',
+                        browser_version: 'latest',
+                        os: 'OS X',
+                        os_version: 'Lion'
+                    }
+                },
                 reportSlowerThan: 500,
                 basePath: '',
                 frameworks: ['qunit'],
