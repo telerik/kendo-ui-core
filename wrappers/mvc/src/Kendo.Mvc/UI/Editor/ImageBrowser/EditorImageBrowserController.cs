@@ -183,7 +183,7 @@ namespace Kendo.Mvc.UI
                     DeleteDirectory(path);
                 }
 
-                return Json(null);
+                return Json(new object[0]);
             }
             throw new HttpException(404, "File Not Found");
         }
