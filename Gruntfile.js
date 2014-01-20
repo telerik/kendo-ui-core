@@ -51,6 +51,10 @@ module.exports = function(grunt) {
     var main_kendo_files = META.listKendoFiles().map(addSrc);
 
     var beforeTestFiles = [
+        'styles/mobile/kendo.mobile.all.less',
+        'styles/web/kendo.common.less',
+        'styles/dataviz/kendo.dataviz.less',
+        'styles/web/kendo.rtl.css',
         { pattern: 'styles/**/*.*', watched: true, included: false },
         { pattern: 'tests/router/sandbox.html', watched: true, included: false },
         { pattern: 'tests/window/blank.html', watched: true, included: false },
@@ -70,7 +74,6 @@ module.exports = function(grunt) {
 
         'tests/kendo-test-helpers.js',
         'tests/**/test-helper.js',
-        'demos/mvc/content/shared/js/less.js',
         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
 
@@ -106,6 +109,10 @@ module.exports = function(grunt) {
         jshint: jshint,
         karma: {
             options: {
+                plugins: [
+                    'karma-*',
+                    require("./build/grunt/karma-less-preprocessor.js")
+                ],
                 browserStack: {
                   username: 'petyoivanov',
                   accessKey: 'NNjxPWSAqAAyY1Zq2yT2'
@@ -123,6 +130,9 @@ module.exports = function(grunt) {
                 basePath: '',
                 frameworks: ['qunit'],
                 preprocessors: {
+                    'styles/mobile/kendo.mobile.all.less': ['less'],
+                    'styles/web/kendo.common.less': ['less'],
+                    'styles/dataviz/kendo.dataviz.less': ['less'],
                     'tests/**/.html': [],
                     'tests/**/*-fixture.html': ['html2js'],
                 },
