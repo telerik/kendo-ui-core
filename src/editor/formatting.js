@@ -213,7 +213,7 @@ function deprecatedFormattingTool(name, property, finder) {
             }
 
             if (console) {
-                console.warn("The `" + this.options.name + "` tool has been deprecated in favor of the `formatting` tool. See http://docs.kendoui.com/getting-started/changes-and-backward-compatibility for more information");
+                console.warn("The `" + this.options.name + "` tool has been deprecated in favor of the `formatting` tool. See http://docs.telerik.com/kendo-ui/getting-started/changes-and-backward-compatibility for more information");
             }
 
             FormattingTool.fn.initialize.call(this, ui, initOptions);
