@@ -52,8 +52,8 @@ var __meta__ = {
                         return;
                     }
 
-                    var dropTarget = this.element, offset,
-                        same = dropTarget[0] === that._draggable[0];
+                    var dropTarget = this.element, offset;
+                    var same = dropTarget[0] === that._draggable[0] || that._isLastDraggable();
 
                     toggleHintClass(e.draggable.hint, same);
                     if (!same) {
@@ -90,7 +90,7 @@ var __meta__ = {
                     var draggable = that._draggable;
                     var containerChange = false;
 
-                    if (draggable[0] !== dropTarget[0]) {
+                    if (draggable[0] !== dropTarget[0] && !that._isLastDraggable()) {
                         if (options.inSameContainer) {
                             containerChange = !options.inSameContainer(dropTarget, draggable);
                         }
@@ -149,7 +149,26 @@ var __meta__ = {
             CHANGE
         ],
 
-       destroy: function() {
+        _isLastDraggable: function() {
+            var inSameContainer = this.options.inSameContainer,
+                draggable = this._draggable[0],
+                elements = this._elements.get(),
+                found = false,
+                item;
+
+            if (!inSameContainer) {
+                return false;
+            }
+
+            while (!found && elements.length > 0) {
+                item = elements.pop();
+                found = draggable !== item && inSameContainer(draggable, item);
+            }
+
+            return !found;
+        },
+
+        destroy: function() {
            var that = this;
            var item;
 

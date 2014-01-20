@@ -1122,8 +1122,8 @@ var __meta__ = {
 
                 that.wrapper.kendoReorderable({
                     draggable: that._draggableInstance,
-                    inSameContainer: function(dropTarget, draggable) {
-                        return dropTarget.parent()[0] === draggable.parent()[0];
+                    inSameContainer: function(x, y) {
+                        return $(x).parent()[0] === $(y).parent()[0];
                     },
                     change: function(e) {
                         var newIndex = inArray(that.columns[e.newIndex], that.columns),

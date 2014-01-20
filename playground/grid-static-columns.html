@@ -79,7 +79,7 @@
             </style>
 
             <!--div style="width: 900px"-->
-                <div id="grid" style="width:900px;"></div>
+                <div id="grid" style="width:1035px;"></div>
             <!--/div-->
 
             <script>
@@ -134,17 +134,19 @@
                         }, {
                             field: "CompanyName",
                             title: "Company Name",
+                            static: true,
                       //      footerTemplate: "baz",
                             width: 250
                         },{
                             field: "CustomerID",
-                            static: true,
                             width: 100
                         },  {
                             field: "Country",
-                            width: 110
+                            width: 203
                             }, {
-                            command: "edit", width: 100
+                            command: "edit",
+                            width: 128,
+                            title: "&nbsp;"
                         }]
                     });
                 });

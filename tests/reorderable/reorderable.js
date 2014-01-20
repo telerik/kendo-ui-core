@@ -204,49 +204,51 @@
         equal(args.newIndex, 1);
     });
 
-    test("calls inSameContainer", 1, function() {
+    test("calls inSameContainer", function() {
+        var wasCalled = false;
         var reorderable = new Reorderable(div, {
             hint: $("<div />"),
             inSameContainer: function() {
-                ok(true);
+                wasCalled = true;
             }
         }),
         target = div.children().eq(1);
 
         moveOverDropTarget(div.children().eq(0), target);
+        ok(wasCalled);
     });
 
     test("drop cue is positioned at the end of the drop target when not in same container", function() {
         div.empty()
-            .append("<div><div>1</div><div>2</div></div><div><div>11</div></div>")
+            .append("<div><div>1</div><div>2</div></div><div><div>11</div><div>12</div></div>")
             .find("div")
             .css({float: "left"});
 
         var reorderable = new Reorderable(div, {
             filter: ">div>*",
             hint: $("<div />"),
-            inSameContainer: function() {
-                return false;
+            inSameContainer: function(x, y) {
+                return $(x).parent()[0] == $(y).parent()[0];
             }
         }),
         target = div.find(">div:eq(0)>div:last");
 
-        moveOverDropTarget(div.find(">div:eq(1)>div:last"), target, target.outerWidth() - 1);
+        moveOverDropTarget(div.find(">div:eq(1)>div:last"), target, target.outerWidth());
 
         equalPositions(reorderable.reorderDropCue, target);
     });
 
     test("drop cue is positioned at the beging of the drop target when not in same container", function() {
         div.empty()
-            .append("<div><div>1</div><div>2</div></div><div><div>11</div></div>")
+        .append("<div><div>1</div><div>2</div></div><div><div>11</div><div>12</div></div>")
             .find("div")
             .css({float: "left"});
 
         var reorderable = new Reorderable(div, {
             filter: ">div>*",
             hint: $("<div />"),
-            inSameContainer: function() {
-                return false;
+            inSameContainer: function(x, y) {
+                return $(x).parent()[0] == $(y).parent()[0];
             }
         }),
         target = div.find(">div:eq(0)>div:last");
@@ -287,8 +289,8 @@
             reorderable = new Reorderable(div, {
                 filter: ">div>*",
                 hint: $("<div />"),
-                inSameContainer: function() {
-                    return false;
+                inSameContainer: function(x, y) {
+                    return $(x).parent()[0] == $(y).parent()[0];
                 },
                 change: function() {
                     args = arguments[0];
@@ -342,6 +344,29 @@
 
         equal(args.newIndex, 0);
         equal(args.oldIndex, 1);
+    });
+
+    test("will not trigger change if only one element in the right container", function() {
+        div.empty()
+            .append("<div><div>1</div><div>2</div></div><div><div>11</div></div>")
+            .find("div")
+            .css({float: "left"});
+
+        var called = false,
+            reorderable = new Reorderable(div, {
+                filter: ">div>*",
+                hint: $("<div />"),
+                inSameContainer: function() {
+                    return false;
+                },
+                change: function() {
+                    called = true;
+                }
+            });
+
+        moveOverDropTarget(div.find(">div:eq(1)>div"), div.find(">div:eq(0)>div:first"), 1);
+
+        strictEqual(called, false);
     });
 
 })();
