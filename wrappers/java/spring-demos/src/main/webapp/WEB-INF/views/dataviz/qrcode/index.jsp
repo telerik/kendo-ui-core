@@ -6,7 +6,7 @@
 
 <div class="demo-section">
     <h3>E-mail</h3>
-    <kendo:qRCode name="qrMail" color="#e15613" background="transparent" value="mailto:clientservice@kendoui.com" size="120" >
+    <kendo:qRCode name="qrMail" color="#e15613" background="transparent" value="mailto:clientservice@telerik.com" size="120" >
     </kendo:qRCode>
 </div>
 <div class="demo-section">
