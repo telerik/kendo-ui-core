@@ -68,7 +68,7 @@ require_once '../../lib/Kendo/Autoload.php';
         desktop and mobile web applications by leveraging your web
         development skills while unlocking the power of JavaScript,
         HTML5 &amp; CSS3, and using the intuitive <br />
-        <a href="http://www.kendoui.com/web.aspx" title="Kendo UI Web">Kendo UI Web</a>.
+        <a href="http://www.telerik.com/kendo-ui-web" title="Kendo UI Web">Kendo UI Web</a>.
     </p>
 <?php
     $editor->endContent();
@@ -92,7 +92,7 @@ require_once '../../lib/Kendo/Autoload.php';
         and deliver unmatched user experience without any extra coding.
     </p>
     <p>
-        <a href="http://www.kendoui.com/mobile.aspx" title="Kendo UI Mobile">Kendo UI Mobile</a>
+        <a href="http://www.telerik.com/kendo-ui-mobile" title="Kendo UI Mobile">Kendo UI Mobile</a>
         is packed with easy-to-use jQuery-based widgets and built-in
         rich components for your fast mobile application development.
     </p>
@@ -120,7 +120,7 @@ require_once '../../lib/Kendo/Autoload.php';
         including jQuery charts, gauges, and more.
     </p>
     <p>
-        <a href="http://www.kendoui.com/dataviz.aspx" title="Kendo UI DataViz">Kendo UI DataViz</a>
+        <a href="http://www.telerik.com/kendo-ui-dataviz" title="Kendo UI DataViz">Kendo UI DataViz</a>
         uses automatic hardware acceleration for all animations and rendering,
         maximizing performance and minimizing the impact on CPU resources.
     </p>
