@@ -12,7 +12,7 @@ namespace Kendo.Controllers
     public class SuiteController : BaseController
     {
         private List<string> examplesUrl = new List<string>();
-        protected static readonly string docsURL = "http://docs.kendoui.com/api/{0}/{1}";
+        protected static readonly string docsURL = "http://docs.telerik.com/kendo-ui/api/{0}/{1}";
 
         protected static readonly IDictionary<String, String> Docs =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
