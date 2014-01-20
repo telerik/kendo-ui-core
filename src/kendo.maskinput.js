@@ -34,11 +34,18 @@ var __meta__ = {
                 .on("keydown" + ns, $.proxy(that._keydown, that))
                 .on("keypress" + ns, $.proxy(that._keypress, that))
                 .on("focus" + ns, function() {
-                    element.val(that._emptyMask);
-                    caret(element[0], 0);
+                    if (!element.val()) {
+                        element.val(that._emptyMask);
+                        caret(element[0], 0);
+                    } else {
+                        element.select();
+                    }
                 })
                 .on("blur" + ns, function() {
-                    element.val("");
+                    var value = element.val();
+                    if (value === that._emptyMask || value.indexOf(that.options.emptySymbol) !== -1) {
+                        element.val("");
+                    }
                 });
         },
 
