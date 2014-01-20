@@ -231,7 +231,7 @@ function calculateOffset(dataItem) {
 
 
 function urlProxy(url) {
-    return "http://demos.kendoui.com/service/RedditImages?url=" + escape(url) + "&width=160&height=160";
+    return "http://demos.telerik.com/kendo-ui/service/RedditImages?url=" + escape(url) + "&width=160&height=160";
 }
 
 function updateSrc(e) {
