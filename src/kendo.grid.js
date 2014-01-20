@@ -2825,7 +2825,8 @@ var __meta__ = {
                 }
 
                 if (footerWrap) {
-                    footerWrap.scrollLeft(that.content.scrollLeft());
+                    var offset = options.scrollable ? that.wrapper.find('.k-virtual-scrollable-wrap').scrollLeft() : that.content.scrollLeft();
+                    footerWrap.scrollLeft(offset);
                 }
             }
         },
