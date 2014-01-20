@@ -115,7 +115,13 @@ module.exports = function(grunt) {
                 ],
                 browserStack: {
                   username: 'petyoivanov',
-                  accessKey: 'NNjxPWSAqAAyY1Zq2yT2'
+                  accessKey: 'ikqBdUZ5w2TyTv4iGsWu'
+                },
+                sauceLabs: {
+                    username: 'petyosi',
+                    accessKey: '2e136bfe-8507-4ac2-b201-1c2f53003669',
+                    startConnect: true,
+                    testName: 'zergling'
                 },
                 customLaunchers: {
                     bs_chrome: {
@@ -123,7 +129,12 @@ module.exports = function(grunt) {
                         browser: 'chrome',
                         browser_version: 'latest',
                         os: 'OS X',
-                        os_version: 'Lion'
+                        os_version: 'Mavericks'
+                    },
+                    sl_chrome: {
+                        base: 'SauceLabs',
+                        browserName: 'chrome',
+                        version: '31'
                     }
                 },
                 reportSlowerThan: 500,
@@ -141,6 +152,7 @@ module.exports = function(grunt) {
                 autoWatch: true,
                 browsers: browsers,
                 captureTimeout: 60000,
+                browserNoActivityTimeout: 30000,
                 singleRun: grunt.option('single-run')
             },
             ci: {
