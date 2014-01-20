@@ -103,8 +103,6 @@
 
         fetchWidget: function (href) {
             var wrapInner = $("#mainWrapInner");
-            console.log("foo");
-            console.trace();
 
             if (href.indexOf("?") > 0) {
                 href += "&";
