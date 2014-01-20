@@ -137,6 +137,7 @@
             "@active-text-color":               constant(COLOR, ".k-state-active"),
             "@active-gradient":                 gradientConstant(".k-state-active"),
             "@active-shadow":                   { readonly: true, value: "none" },
+            "@active-filter-background-color":  constant(BGCOLOR, ".k-state-active"),
 
             "@focused-border-color":            constant(BORDERCOLOR, ".k-state-focused"),
             "@focused-item-shadow":             {
@@ -289,6 +290,9 @@
                 "@link-text-color":               "Link text color",
 
                 "@fallback-texture":              "Texture"
+            },
+            "Grid": {
+                "@active-filter-background-color":"Filters active background"
             },
             "Buttons": {
                 "@button-background-color":       "Background",
