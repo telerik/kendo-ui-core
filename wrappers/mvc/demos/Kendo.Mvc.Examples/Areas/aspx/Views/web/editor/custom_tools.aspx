@@ -55,7 +55,7 @@
             &lt;/ul&gt;
             &lt;p&gt;
                 Read &lt;a href="http://www.kendoui.com/documentation/introduction.aspx"&gt;more details&lt;/a&gt; or send us your
-                &lt;a href="http://www.kendoui.com/forums.aspx"&gt;feedback&lt;/a&gt;!
+                &lt;a href="http://www.telerik.com/forums"&gt;feedback&lt;/a&gt;!
             &lt;/p&gt;
       <% })
          .Render();
