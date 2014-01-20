@@ -54,6 +54,16 @@ var __meta__ = {
             "0": /\d/
         },
 
+        value: function(value) {
+            if (value === undefined) {
+                return this.element.val();
+            }
+
+            value = this._normalize(value);
+
+            this._mask(0, this._emptyMaskLength, value);
+        },
+
         _keydown: function(e) {
             var key = e.keyCode;
             var selection = caret(this.element[0]);
@@ -100,7 +110,7 @@ var __meta__ = {
 
             var tokens = this.tokens;
             var element = this.element[0];
-            var oldValue = element.value;
+            var oldValue = element.value || this._emptyMask;
 
             var backward = start > end;
             var direction = 1;
@@ -169,8 +179,52 @@ var __meta__ = {
 
                 element.value = oldValue.substring(0, start) + result.join("") + oldValue.substring(end);
 
-                caret(element, charIdx);
+                if (kendo._activeElement() === element) { //TODO: not tested
+                    caret(element, charIdx);
+                }
             }
+        },
+
+        _normalize: function(value) {
+            value = ((value || "") + "").split("");
+
+            var result = "";
+
+            var charIdx = 0;
+            var tokenIdx = 0;
+
+            var tokensLength = this.tokens.length;
+            var valueLength = value.length;
+
+            var char;
+            var token;
+
+            while (tokenIdx < tokensLength) { // || charIdx < valueLength) {
+                char = value[charIdx];
+                token = this.tokens[tokenIdx];
+
+                if (char === token) { //char is equal to static token. move forward
+                    charIdx += 1;
+                    tokenIdx += 1;
+                } else if (typeof token !== "string") { //token is rule
+
+                    if (token.test(char)) { //check if valid
+                        result += char;
+
+                        tokenIdx += 1;
+                    }
+
+                    charIdx += 1;
+                } else { //token is static string
+                    tokenIdx += 1;
+                }
+
+                if (charIdx >= valueLength) { //test this
+                    break;
+                }
+            }
+
+            return result;
         },
 
         _tokenize: function() {
@@ -199,6 +253,7 @@ var __meta__ = {
             }
 
             this.tokens = tokens;
+
             this._emptyMask = emptyMask;
             this._emptyMaskLength = emptyMask.length;
         },
