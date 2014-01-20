@@ -1502,7 +1502,7 @@ var __meta__ = {
                 }
                 else if (itemsOrRect instanceof Array) {
                     for (i = 0; i < itemsOrRect.length; i++) {
-                        item = items[i];
+                        item = itemsOrRect[i];
                         if (item instanceof DiagramElement) {
                             if (item.select(true)) {
                                 selected.push(item);
