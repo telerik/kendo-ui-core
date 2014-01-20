@@ -23,7 +23,7 @@ require_once '../../include/header.php';
             ->width(5);
 
         $qrUrl = new \Kendo\Dataviz\UI\QRCode('qrUrl');
-        $qrUrl->value("http://demos.kendoui.com/dataviz/overview/index.html")
+        $qrUrl->value("http://demos.telerik.com/kendo-ui/dataviz/overview/index.html")
             ->size(120)
             ->errorCorrection("M")
             ->border($qrUrlBorder);

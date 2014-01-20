@@ -46,8 +46,8 @@ $transport = new \Kendo\Data\DataSourceTransport();
 
 $read = new \Kendo\Data\DataSourceTransportRead();
 
-// Connecting to live service on demos.kendoui.com
-// $read->url('http://demos.kendoui.com/service/Employees')
+// Connecting to live service on demos.telerik.com/kendo-ui
+// $read->url('http://demos.telerik.com/kendo-ui/service/Employees')
 //     ->dataType('jsonp');
 
 // Bind to self

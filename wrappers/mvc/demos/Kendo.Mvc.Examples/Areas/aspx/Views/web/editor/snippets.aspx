@@ -12,7 +12,7 @@
         .Clear()
         .Snippets(snippets => snippets
             .Add("Signature", "<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>")
-            .Add("Kendo online demos", " <a href='http://demos.kendoui.com'>Kendo online demos</a> ")
+            .Add("Kendo online demos", " <a href='http://demos.telerik.com/kendo-ui'>Kendo online demos</a> ")
         )
       )
       .Value(() =>

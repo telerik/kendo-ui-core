@@ -18,7 +18,7 @@
     <%=
     Html.Kendo().QRCode()
         .Name("qrUrl")
-        .Value("http://demos.kendoui.com/dataviz/overview/index.html")
+        .Value("http://demos.telerik.com/kendo-ui/dataviz/overview/index.html")
         .ErrorCorrection(QRErrorCorrectionLevel.M)
         .Size(120)
         .Border(border => border.Color("#000000").Width(5))
