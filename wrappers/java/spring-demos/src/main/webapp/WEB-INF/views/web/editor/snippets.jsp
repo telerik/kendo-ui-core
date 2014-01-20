@@ -10,7 +10,7 @@
 	         	<kendo:editor-tool-item 
 	         		value="<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>" 
 	         		text="Signature" />
-	         	<kendo:editor-tool-item value=" <a href='http://demos.kendoui.com'>Kendo online demos</a> " text="Kendo online demos" />
+	         	<kendo:editor-tool-item value=" <a href='http://demos.telerik.com/kendo-ui'>Kendo online demos</a> " text="Kendo online demos" />
 	         </kendo:editor-tool-items>
          </kendo:editor-tool>     
     </kendo:editor-tools>

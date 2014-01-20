@@ -13,7 +13,7 @@ require_once '../../lib/Kendo/Autoload.php';
     $signature->text("Signature")->value("<p>Regards,<br /> John Doe,<br /><a href='mailto:john.doe@example.com'>john.doe@example.com</a></p>");
 
     $onlineDemosLink = new \Kendo\UI\EditorToolItem();
-    $onlineDemosLink->text("Kendo online demos")->value("<a href='http://demos.kendoui.com'>Kendo online demos</a> ");
+    $onlineDemosLink->text("Kendo online demos")->value("<a href='http://demos.telerik.com/kendo-ui'>Kendo online demos</a> ");
 
     // add snippets to insertHtml tool
     $insertHtml = new \Kendo\UI\EditorTool();

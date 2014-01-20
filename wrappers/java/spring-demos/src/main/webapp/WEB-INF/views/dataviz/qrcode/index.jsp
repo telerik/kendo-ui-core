@@ -11,7 +11,7 @@
 </div>
 <div class="demo-section">
     <h3>URL</h3>
-    <kendo:qRCode name="qrUrl" value="http://demos.kendoui.com/dataviz/overview/index.html" size="120" errorCorrection="M" >
+    <kendo:qRCode name="qrUrl" value="http://demos.telerik.com/kendo-ui/dataviz/overview/index.html" size="120" errorCorrection="M" >
         <kendo:qRCode-border color="#000000" width="5"/>
     </kendo:qRCode>
 </div>
