@@ -1,7 +1,7 @@
 require 'erb'
 require 'tasks'
 BUILDER_STAGING_SERVICE =  'http://mvc-kendobuild/staging/download-builder-service'
-BUILDER_DEPLOY_SERVICE = 'http://www.kendoui.com/services/kendo-download'
+BUILDER_DEPLOY_SERVICE = 'http://www.telerik.com/services/kendo-download'
 BUILDER_SOURCE_PATH = 'download-builder'
 
 BUILDER_DEPLOY_PATH = File.join('dist', 'download-builder')
