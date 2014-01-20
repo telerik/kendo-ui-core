@@ -6,7 +6,7 @@ def in_dist(list)
     list.pathmap File.join(DIST_JS_ROOT, "%f")
 end
 
-CULTURES_AND_TIMEZONES = FileList['src/cultures/*.js'].include('src/kendo.timezones.js').pathmap(File.join(DIST_JS_ROOT, "cultures", "%f"))
+CULTURES_AND_TIMEZONES = FileList['src/cultures/*.js'].pathmap(File.join(DIST_JS_ROOT, "cultures", "%f")).include('dist/js/kendo.timezones.js')
 
 def dependencies(component)
     in_dist(FileList[YAML.load(`node #{METAJS} --all-deps kendo.#{component}.js`).keep_if { |file| file.include? "kendo" }]).include(CULTURES_AND_TIMEZONES)
