@@ -827,7 +827,7 @@
                         id: "download-overlay",
                         overlay: true,
                         toolbar: button({ action: "back", text: "Back" }) +
-                                 "<a href='http://www.kendoui.com/documentation/themebuilder.aspx' id='docs-link' target='_blank'>What should I do with this?</a>",
+                                 "<a href='http://docs.telerik.com/kendo-ui/getting-started/themebuilder' id='docs-link' target='_blank'>What should I do with this?</a>",
                         content: "<textarea readonly></textarea>"
                     }) +
 
