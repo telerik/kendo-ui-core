@@ -91,15 +91,10 @@ var __meta__ = {
                     var containerChange = false;
 
                     if (draggable[0] !== dropTarget[0] && !that._isLastDraggable()) {
-                        if (options.inSameContainer) {
-                            containerChange = !options.inSameContainer(dropTarget, draggable);
-                        }
-
                         that.trigger(CHANGE, {
                             element: that._draggable,
                             oldIndex: that._elements.index(draggable),
                             newIndex: that._elements.index(dropTarget),
-                            containerChange: containerChange,
                             position: getOffset(that.reorderDropCue).left > getOffset(dropTarget).left ? "after" : "before"
                         });
                     }

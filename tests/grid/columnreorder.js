@@ -469,6 +469,98 @@
         equal(columns[3].field, "baz");
     });
 
+    test("move static column before non static column", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                { field: "baz" },
+                { field: "bax" }
+            ]
+        });
+
+        grid.reorderColumn(2, grid.columns[1], true);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        ok(columns[0].static, true);
+        equal(columns[1].field, "bar");
+        ok(!columns[1].static);
+        equal(columns[2].field, "baz");
+        ok(!columns[2].static);
+        equal(columns[3].field, "bax");
+        ok(!columns[3].static);
+    });
+
+    test("move static column after non static column", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                { field: "baz" },
+                { field: "bax" }
+            ]
+        });
+
+        grid.reorderColumn(2, grid.columns[1], false);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        ok(columns[0].static, true);
+        equal(columns[1].field, "baz");
+        ok(!columns[1].static);
+        equal(columns[2].field, "bar");
+        ok(!columns[2].static);
+        equal(columns[3].field, "bax");
+        ok(!columns[3].static);
+    });
+
+    test("move non static column before static column", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                { field: "baz" },
+                { field: "bax" }
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        ok(columns[0].static, true);
+        equal(columns[1].field, "baz");
+        ok(columns[1].static);
+        equal(columns[2].field, "bar");
+        ok(columns[2].static);
+        equal(columns[3].field, "bax");
+        ok(!columns[3].static);
+    });
+
+    test("move non static column after static column", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                { field: "baz" },
+                { field: "bax" }
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], false);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        ok(columns[0].static, true);
+        equal(columns[1].field, "bar");
+        ok(columns[1].static);
+        equal(columns[2].field, "baz");
+        ok(columns[2].static);
+        equal(columns[3].field, "bax");
+        ok(!columns[3].static);
+    });
+
     test("reorder headers with static columns", function() {
         var grid = new Grid(div, {
             columns: [
@@ -587,6 +679,65 @@
         equal(cols[0].style.width, "20px");
         equal(cols[1].style.width, "10px");
         equal(cols[2].style.width, "30px");
+    });
+
+    test("columns are not reordered if only one static column", function() {
+        var grid = new Grid(div, {
+            reorderable: true,
+            columns: [{
+                field: "foo",
+                footerTemplate: "foo footer",
+                static: true,
+                width: 10
+            },
+            {
+                field: "baz",
+                footerTemplate: "baz footer",
+                width: 20
+            },
+            {
+                field: "bar",
+                footerTemplate: "bar footer",
+                width: 30
+            }],
+            dataSource: data
+        });
+
+        grid.reorderColumn(1, grid.columns[0], false);
+
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].field, "baz");
+        equal(grid.columns[2].field, "bar");
+    });
+
+    test("columns are not reordered if only one non static column", function() {
+        var grid = new Grid(div, {
+            reorderable: true,
+            columns: [{
+                field: "foo",
+                footerTemplate: "foo footer",
+                static: true,
+                width: 10
+            },
+            {
+                field: "baz",
+                static: true,
+                footerTemplate: "baz footer",
+                width: 20
+            },
+            {
+                field: "bar",
+                footerTemplate: "bar footer",
+                width: 30
+            }],
+            dataSource: data
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].field, "baz");
+        equal(grid.columns[2].field, "bar");
     });
 
     function moveOverDropTarget(draggable, dropTarget) {

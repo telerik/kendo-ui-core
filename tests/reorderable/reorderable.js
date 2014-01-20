@@ -258,51 +258,6 @@
         equalPositions(reorderable.reorderDropCue, target, true);
     });
 
-    test("containerChange is not set in change event arguments", function() {
-        div.empty()
-            .append("<div><div>1</div><div>2</div></div><div><div>11</div></div>")
-            .find("div")
-            .css({float: "left"});
-
-        var args,
-            reorderable = new Reorderable(div, {
-                filter: ">div>*",
-                hint: $("<div />"),
-                change: function() {
-                    args = arguments[0];
-                }
-            }),
-            target = div.find(">div:eq(0)>div:last");
-
-        moveOverDropTarget(div.find(">div:eq(0)>div:first"), target);
-
-        strictEqual(args.containerChange, false);
-    });
-
-    test("containerChange is set in change event arguments", function() {
-        div.empty()
-            .append("<div><div>1</div><div>2</div></div><div><div>11</div></div>")
-            .find("div")
-            .css({float: "left"});
-
-        var args,
-            reorderable = new Reorderable(div, {
-                filter: ">div>*",
-                hint: $("<div />"),
-                inSameContainer: function(x, y) {
-                    return $(x).parent()[0] == $(y).parent()[0];
-                },
-                change: function() {
-                    args = arguments[0];
-                }
-            }),
-            target = div.find(">div:eq(1)>div");
-
-        moveOverDropTarget(div.find(">div:eq(0)>div:first"), target, 1);
-
-        strictEqual(args.containerChange, true);
-    });
-
     test("position is set to before", function() {
         var args,
             reorderable = new Reorderable(div, {

@@ -1129,14 +1129,12 @@ var __meta__ = {
                         var newIndex = inArray(that.columns[e.newIndex], that.columns),
                             column = that.columns[e.oldIndex];
 
-                        if (e.containerChange) {
-                            column.static = that.columns[e.newIndex].static;
-                        }
                         that.trigger(COLUMNREORDER, {
                             newIndex: newIndex,
                             oldIndex: inArray(column, that.columns),
                             column: column
                         });
+
                         that.reorderColumn(newIndex, column, e.position === "before");
                     }
                 });
@@ -1149,18 +1147,30 @@ var __meta__ = {
 
         reorderColumn: function(destIndex, column, before) {
             var that = this,
-                sourceIndex = inArray(column, that.columns),
-                colSourceIndex = inArray(column, visibleColumns(that.columns)),
-                colDestIndex = inArray(that.columns[destIndex], visibleColumns(that.columns)),
+                columns = that.columns,
+                sourceIndex = inArray(column, columns),
+                colSourceIndex = inArray(column, visibleColumns(columns)),
+                colDestIndex = inArray(columns[destIndex], visibleColumns(columns)),
                 staticRows = $(),
                 rows,
                 idx,
                 length,
+                isStatic = !!columns[destIndex].static,
                 footer = that.footer || that.wrapper.find(".k-grid-footer");
 
             if (sourceIndex === destIndex) {
                 return;
             }
+
+            if (!column.static && isStatic && nonStaticColumns(columns).length == 1) {
+                return;
+            }
+
+            if (column.static && !isStatic && staticColumns(columns).length == 1) {
+                return;
+            }
+
+            column.static = isStatic;
 
             that._hideResizeHandle();
 
@@ -1170,13 +1180,13 @@ var __meta__ = {
 
             if (before) {
                 if (destIndex - 1 !== sourceIndex) {
-                    that.columns.splice(sourceIndex, 1);
+                    columns.splice(sourceIndex, 1);
                     var index = sourceIndex < destIndex ? destIndex - 1 : destIndex;
-                    that.columns.splice(index, 0, column);
+                    columns.splice(index, 0, column);
                 }
             } else if (destIndex + 1 !==  sourceIndex) {
-                that.columns.splice(sourceIndex, 1);
-                that.columns.splice(destIndex, 0, column);
+                columns.splice(sourceIndex, 1);
+                columns.splice(destIndex, 0, column);
             }
             that._templates();
 
