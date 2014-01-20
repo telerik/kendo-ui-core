@@ -90,7 +90,7 @@ require_once '../../lib/Kendo/Autoload.php';
     &lt;/ul&gt;
     &lt;p&gt;
         Read &lt;a href=&quot;http://docs.kendoui.com&quot;&gt;more details&lt;/a&gt; or send us your
-        &lt;a href=&quot;http://www.kendoui.com/forums.aspx&quot;&gt;feedback&lt;/a&gt;!
+        &lt;a href=&quot;http://www.telerik.com/forums&quot;&gt;feedback&lt;/a&gt;!
     &lt;/p&gt;
 
 <?php
