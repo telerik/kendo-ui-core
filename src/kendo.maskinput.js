@@ -47,6 +47,8 @@ var __meta__ = {
                         element.val("");
                     }
                 });
+
+            this.value(that.options.value);
         },
 
         options: {
@@ -193,7 +195,11 @@ var __meta__ = {
         },
 
         _normalize: function(value) {
-            value = ((value || "") + "").split("");
+            if (!value) {
+                return "";
+            }
+
+            value = (value + "").split("");
 
             var result = "";
 

@@ -69,4 +69,13 @@
         equal(tokens[1], "-");
         equal(tokens[2], maskinput.rules["0"]);
     });
+
+    test("MaskInput sets value on init", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "00-00",
+            value: "9999"
+        });
+
+        equal(input.val(), "99-99");
+    });
 })();
