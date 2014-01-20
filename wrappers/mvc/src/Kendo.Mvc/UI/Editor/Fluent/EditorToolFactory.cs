@@ -173,13 +173,13 @@ namespace Kendo.Mvc.UI.Fluent
             return SelectBox("formatting", items);
         }
 
-        [Obsolete("The FormatBlock tool is deprecated, please use the Formatting tool instead. For more information, visit http://docs.kendoui.com/getting-started/changes-and-backward-compatibility")]
+        [Obsolete("The FormatBlock tool is deprecated, please use the Formatting tool instead. For more information, visit http://docs.telerik.com/kendo-ui/getting-started/changes-and-backward-compatibility")]
         public EditorToolFactory FormatBlock()
         {
             return SelectBox("formatBlock", null);
         }
 
-        [Obsolete("The FormatBlock tool is deprecated, please use the Formatting tool instead. For more information, visit http://docs.kendoui.com/getting-started/changes-and-backward-compatibility")]
+        [Obsolete("The FormatBlock tool is deprecated, please use the Formatting tool instead. For more information, visit http://docs.telerik.com/kendo-ui/getting-started/changes-and-backward-compatibility")]
         public EditorToolFactory FormatBlock(Action<EditorDropDownItemBuilder> configurator)
         {
             var items = new List<DropDownListItem>();
@@ -201,7 +201,7 @@ namespace Kendo.Mvc.UI.Fluent
             return SelectBox("insertHtml", items);
         }
 
-        [Obsolete("The Styles tool is deprecated, please use the Formatting tool instead. For more information, visit http://docs.kendoui.com/getting-started/changes-and-backward-compatibility")]
+        [Obsolete("The Styles tool is deprecated, please use the Formatting tool instead. For more information, visit http://docs.telerik.com/kendo-ui/getting-started/changes-and-backward-compatibility")]
         public EditorToolFactory Styles(Action<EditorDropDownItemBuilder> configurator)
         {
             var items = new List<DropDownListItem>();
