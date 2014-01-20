@@ -575,11 +575,11 @@ var Dom = {
         }
     },
 
-    inlineStyle: function(document, name, attributes) {
-        var span = $(Dom.create(document, name, attributes)),
+    inlineStyle: function(body, name, attributes) {
+        var span = $(Dom.create(body.ownerDocument, name, attributes)),
             style;
 
-        document.body.appendChild(span[0]);
+        body.appendChild(span[0]);
 
         style = map(cssAttributes, function(value) {
             if (browser.msie && value == "line-height" && span.css(value) == "1px") {
@@ -592,6 +592,18 @@ var Dom = {
         span.remove();
 
         return style;
+    },
+
+    getEffectiveBackground: function(element) {
+        var backgroundStyle = element.css("background-color");
+
+        if (backgroundStyle.indexOf("rgba(0, 0, 0, 0") < 0) {
+            return backgroundStyle;
+        } else if (element[0].tagName.toLowerCase() === "html") {
+            return "Window";
+        } else {
+            return Dom.getEffectiveBackground(element.parent());
+        }
     },
 
     removeClass: function(node, classNames) {

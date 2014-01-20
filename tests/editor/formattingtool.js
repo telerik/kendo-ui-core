@@ -38,7 +38,7 @@ function setFormattingItems(editor, array) {
         data: array
     });
 
-    tool.decorate(editor.document);
+    tool.decorate(editor.body);
 }
 
 function selectFromValue(editor, value) {
@@ -100,6 +100,37 @@ test("drop-down items are decorated", function() {
 
     equal(formatSpan.length, 1);
     equal(formatSpan.css("color"), propertyFrom("red", "color"));
+});
+
+// identical test for iframe Editor are in components.js
+test("inline editor background color is applied to drop-down item wrapper", function() {
+    var backgroundProperty = "background-color",
+        backgroundValue = "rgb(1, 1, 1)",
+        oldBackgroundValue = inline.element.css(backgroundProperty);
+
+    inline.element.css(backgroundProperty, backgroundValue);
+
+    var tool = formattingTool(inline);
+    tool.decorate(inline.body);
+
+    equal(tool.list.css(backgroundProperty), backgroundValue);
+
+    inline.element.css(backgroundProperty, oldBackgroundValue);
+});
+
+test("inline editor parent's background color is applied to drop-down item wrapper", function() {
+    var backgroundProperty = "background-color",
+        backgroundValue = "rgb(1, 1, 1)",
+        oldBackgroundValue = inline.element.parent().css(backgroundProperty);
+
+    inline.element.parent().css(backgroundProperty, backgroundValue);
+
+    var tool = formattingTool(inline);
+    tool.decorate(inline.body);
+
+    equal(tool.list.css(backgroundProperty), backgroundValue);
+
+    inline.element.parent().css(backgroundProperty, oldBackgroundValue);
 });
 
 test("styles handle quotes in item decoration", function() {
