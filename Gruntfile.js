@@ -3,6 +3,7 @@ var PATH = require("path");
 
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-debug-task');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
@@ -100,10 +101,24 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
+
         pkg: grunt.file.readJSON('package.json'),
         jshint: jshint,
         karma: {
             options: {
+                browserStack: {
+                  username: 'petyoivanov',
+                  accessKey: 'NNjxPWSAqAAyY1Zq2yT2'
+                },
+                customLaunchers: {
+                    bs_chrome: {
+                        base: 'BrowserStack',
+                        browser: 'chrome',
+                        browser_version: 'latest',
+                        os: 'OS X',
+                        os_version: 'Lion'
+                    }
+                },
                 reportSlowerThan: 500,
                 basePath: '',
                 frameworks: ['qunit'],
@@ -211,6 +226,15 @@ module.exports = function(grunt) {
             }
         },
 
+        license: {
+            apply: {
+                src:  [ "<%= kendo.options.destDir %>/**/*" ],
+                filter: function(src) {
+                    return PATH.basename(src).match(/^kendo(.+)(js|css|less)$/);
+                }
+            }
+        }
+
     });
 
     // Default task(s).
@@ -219,4 +243,5 @@ module.exports = function(grunt) {
     grunt.registerTask('tests', [ 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'copy:jquery', 'copy:timezones' ]);
+    grunt.registerTask('build', [ 'all', 'styles', 'license' ]);
 };

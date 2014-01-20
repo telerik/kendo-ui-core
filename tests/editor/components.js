@@ -104,4 +104,21 @@ test('FormatBlock dropdown accepts custom item collections', function() {
     equal(dataItems[0].value, "bar");
 });
 
+// identical test for inline Editor are in formattingtool.js
+test("editor's body background color is applied to drop-down item wrapper", function() {
+    var backgroundProperty = "background-color",
+        backgroundValue = "rgb(1, 1, 1)",
+        $body = $(editor.body),
+        oldBackgroundValue = $body.css(backgroundProperty);
+
+    $body.css(backgroundProperty, backgroundValue);
+
+    var tool = editor.toolbar.items().filter(".k-formatting").data("kendoSelectBox");
+    tool.decorate(editor.body);
+
+    equal(tool.list.css(backgroundProperty), backgroundValue);
+
+    $body.css(backgroundProperty, oldBackgroundValue);
+});
+
 }());

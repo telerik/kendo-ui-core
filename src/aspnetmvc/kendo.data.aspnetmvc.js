@@ -62,18 +62,10 @@
            delete options.filter;
        }
 
-       if (operation != "read" ) {
-           if (options.models) {
-               serializeArray(result, options.models, "models", stringifyDates);
-           } else if (options) {
-               serializeItem(result, options, "", stringifyDates);
-           }
-
-           delete options.models;
-       }
-
        delete options.take;
        delete options.skip;
+
+       serializeItem(result, options, "", stringifyDates);
 
        return result;
     }

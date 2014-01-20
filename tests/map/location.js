@@ -157,6 +157,14 @@
             ok(extent.nw.equals(new Location(45, -90)));
         });
 
+        test("constructor swaps Locations", function() {
+            extent = new Extent(
+                new Location(-45, 90),
+                new Location(45, -90)
+            );
+            ok(extent.nw.equals(new Location(45, -90)));
+        });
+
         test("constructor accepts [lat,lng]", function() {
             extent = new Extent([10, 20], [30, 40]);
             ok(extent.nw.equals(new Location(10, 20)));
@@ -457,6 +465,49 @@
             ok(new Extent([10, 0], [-10, 0]).center().equals(
                new Location(0, 0)
             ));
+        });
+
+        // ------------------------------------------------------------
+        module("Extent / edges", {
+            setup: function() {
+                extent = new Extent([10, -10], [-10, 10]);
+            }
+        });
+
+        test("nw edge", function() {
+            ok(extent.edges().nw.equals(new Location(10, -10)));
+        });
+
+        test("ne edge", function() {
+            ok(extent.edges().ne.equals(new Location(10, 10)));
+        });
+
+        test("se edge", function() {
+            ok(extent.edges().se.equals(new Location(-10, 10)));
+        });
+
+        test("sw edge", function() {
+            ok(extent.edges().sw.equals(new Location(-10, -10)));
+        });
+
+        // ------------------------------------------------------------
+        module("Extent / toArray", {
+            setup: function() {
+                extent = new Extent([10, -10], [-10, 10]);
+            }
+        });
+
+        test("returns edges", function() {
+            var edges = extent.edges();
+            deepEqual(extent.toArray(), [edges.nw, edges.ne, edges.se, edges.sw]);
+        });
+
+        // ------------------------------------------------------------
+        module("Extent / Constants");
+
+        test("WORLD", function() {
+            ok(Extent.World.nw.equals(new Location(90, -180)));
+            ok(Extent.World.se.equals(new Location(-90, 180)));
         });
     })();
 })();

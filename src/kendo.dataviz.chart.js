@@ -10574,7 +10574,7 @@ var __meta__ = {
             seriesType = series[i].type || options.seriesDefaults.type;
 
             var baseOptions = deepExtend(
-                {},
+                { data: [] },
                 commonThemeDefaults,
                 themeSeriesDefaults[seriesType],
                 { tooltip: options.tooltip },
