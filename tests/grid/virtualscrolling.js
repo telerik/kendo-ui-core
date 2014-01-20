@@ -338,4 +338,22 @@
         equal(data.skip(), 200);
     });
 
+    test("Scrolls horizontally the footer according to the content", function() {
+        QUnit.fixture.html('<div id="grid"></div>');
+
+        var grid = $('#grid').kendoGrid({
+            dataSource: { data: [ { foo: "foo", bar: "bar" } ], pageSize: 1 },
+            resizable: true,
+            scrollable: {
+                virtual: true
+            },
+            columns: [{ field: "foo", footerTemplate: "foo" }, "bar"]
+        }).data('kendoGrid');
+
+        grid.content.scrollLeft(10);
+        grid.refresh();
+
+        equal(grid.content.scrollLeft(), grid.footer.find(".k-grid-footer-wrap").scrollLeft());
+    });
+
 })();

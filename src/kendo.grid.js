@@ -2827,7 +2827,7 @@ var __meta__ = {
                 if (footerWrap) {
                     var offset = that.content.scrollLeft();
 
-                    var hasVirtualScroll = options.scrollable !== true && scrollable.virtual && !that.virtualScrollable;
+                    var hasVirtualScroll = options.scrollable !== true && options.scrollable.virtual && !that.virtualScrollable;
                     if(hasVirtualScroll){
                         offset = that.wrapper.find('.k-virtual-scrollable-wrap').scrollLeft();
                     }
