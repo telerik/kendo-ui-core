@@ -100,23 +100,28 @@ var SelectBox = DropDownList.extend({
         }
     },
 
-    decorate: function(doc) {
-        var items = this.dataSource.data(),
-            i, tag, className;
-        var style;
+    decorate: function(body) {
+        var that = this,
+            dataSource = that.dataSource,
+            items = dataSource.data(),
+            i, tag, className, style;
+
+        if (body) {
+            that.list.css("background-color", dom.getEffectiveBackground($(body)));
+        }
 
         for (i = 0; i < items.length; i++) {
             tag = items[i].tag || "span";
             className = items[i].className;
 
-            style = dom.inlineStyle(doc, tag, { className : className });
+            style = dom.inlineStyle(body, tag, { className : className });
 
             style = style.replace(/"/g, "'");
 
             items[i].style = style + ";display:inline-block";
         }
 
-        this.dataSource.trigger("change");
+        dataSource.trigger("change");
     }
 });
 

@@ -305,7 +305,7 @@ kendo_module({
 
             $(iframe).one("load", function() {
                 var styleTools = editor.toolbar.items().filter(".k-decorated");
-                styleTools.kendoSelectBox("decorate", doc);
+                styleTools.kendoSelectBox("decorate", doc.body);
             });
 
             doc.open();
@@ -363,7 +363,7 @@ kendo_module({
                 blurTrigger = editor.body;
 
                 var styleTools = editor.toolbar.items().filter(".k-decorated");
-                styleTools.kendoSelectBox("decorate", doc);
+                styleTools.kendoSelectBox("decorate", editor.body);
             }
 
             $(blurTrigger)
