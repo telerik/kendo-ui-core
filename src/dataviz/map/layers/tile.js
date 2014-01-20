@@ -133,7 +133,7 @@
             var settingsTemplate = template(this.options.settingsUrl),
                 settingsUrl = settingsTemplate({
                     key: this.options.key,
-                    mapType: this.options.mapType
+                    imagerySet: this.options.imagerySet
                 });
 
             this.map = map;
@@ -148,8 +148,8 @@
         },
 
         options: {
-            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&include=ImageryProviders&key=#= key #",
-            mapType: "road"
+            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= imagerySet #?output=json&jsonp=bingTileParams&include=ImageryProviders&key=#= key #",
+            imagerySet: "road"
         },
 
         _success: function(data) {
