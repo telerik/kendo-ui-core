@@ -2447,7 +2447,7 @@ var __meta__ = {
             }
 
             if (!options.roundToBaseUnit && !dateEquals(last(groups), max)) {
-                if (max < nextDate) {
+                if (max < nextDate && options._collapse !== false) {
                     this._srcMaxDate = max;
                 } else {
                     groups.push(max);

@@ -133,6 +133,22 @@
             close(ticks[2], 411, 1);
         });
 
+        test("last category is not collapsed (months)", function() {
+            setup({
+                navigator: {
+                    categoryAxis: {
+                        categories: [
+                            new Date("2012/02/01 00:00"),
+                            new Date("2013/01/31 00:00")
+                        ]
+                    }
+                }
+            });
+
+            var labelAxis = chart._plotArea.namedCategoryAxes["_navigator_labels"];
+            deepEqual(dataviz.last(labelAxis.options.categories), new Date("2013/01/31 00:00"));
+        });
+
         // ------------------------------------------------------------
         module("Selection / Event proxy", {
             setup: function() {
