@@ -172,4 +172,17 @@
 
         grid.thead.find("th:first").data("kendoColumnMenu").link.click();
     });
+
+    test("column menu initialization over static columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar" }
+            ]
+        });
+
+        var th = grid.wrapper.find("th");
+        ok(th.eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu, "static column doesn't have column menu");
+        ok(th.eq(1).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu, "non static column doesn't have column menu");
+    });
 })();

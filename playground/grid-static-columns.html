@@ -15,18 +15,20 @@
         <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.filtermenu.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.menu.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.filtermenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnmenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
         <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
@@ -99,8 +101,10 @@
                             buttonCount: 5
                         },
                         editable: "popup",
-                        selectable: "multiple row",
+                        //selectable: "multiple row",
                         reorderable: true,
+                        //filterable: true,
+                        columnMenu: true,
                         resizable: true,
                         toolbar: ["create"],
                         columns: [{

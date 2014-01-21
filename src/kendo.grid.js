@@ -3891,6 +3891,8 @@ var __meta__ = {
 
             that._updateCols();
 
+            that._columnMenu();
+
             if (this.options.scrollable) {
 
                 that._appendStaticColumnHeader(that.thead.closest(".k-grid-header"));
@@ -3909,8 +3911,6 @@ var __meta__ = {
             if (that.groupable) {
                 that._attachGroupable();
             }
-
-            that._columnMenu();
         },
 
         _isStatic: function() {
