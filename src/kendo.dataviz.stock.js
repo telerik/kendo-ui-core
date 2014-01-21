@@ -664,6 +664,7 @@ kendo_module({
             pane: NAVIGATOR_PANE,
             roundToBaseUnit: !justifyAxis,
             justified: justifyAxis,
+            _collapse: false,
             tooltip: { visible: false },
             labels: { step: 1 },
             autoBind: !naviOptions.dataSource,

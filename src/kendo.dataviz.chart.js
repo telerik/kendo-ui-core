@@ -2374,7 +2374,7 @@ kendo_module({
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
                 timeRange;
 
-            if (options.justified) {
+            if (options.justified && options._collapse !== false) {
                 var categoryLimits = this._categoryRange(options.categories);
                 var maxCategory = toTime(categoryLimits.max);
                 timeRange = toDate(maxCategory) - range.min;
@@ -2398,9 +2398,9 @@ kendo_module({
                     reverse = options.reverse,
                     lineBox = axis.lineBox(),
                     startTime = categories[0].getTime(),
-                    collapse = options.justified,
+                    collapse = valueOrDefault(options._collapse, options.justified),
                     divisions = categories.length - (collapse ? 1 : 0),
-                    scale= axis._timeScale(),
+                    scale = axis._timeScale(),
                     dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                     startEdge = dir === 1 ? 1 : 2,
                     endEdge = dir === 1 ? 2 : 1,
