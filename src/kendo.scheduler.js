@@ -1129,7 +1129,7 @@ var __meta__ = {
 
             html += this._buildEditTemplate(model, fields, editableFields);
 
-            if (!model.isNew()) {
+            if (!model.isNew() && this.options.editable && this.options.editable.destroy !== false) {
                 html += '<div class="k-edit-buttons"><a href="#" class="k-scheduler-delete k-button">' + removeText + '</a></div>';
             }
 
@@ -1340,7 +1340,7 @@ var __meta__ = {
             html += '<div class="k-edit-buttons k-state-default">';
             html += this.createButton({ name: "update", text: updateText, attr: attr }) + this.createButton({ name: "canceledit", text: cancelText, attr: attr });
 
-            if (!model.isNew()) {
+            if (!model.isNew() && editable.destroy !== false) {
                 html += this.createButton({ name: "delete", text: deleteText, attr: attr });
             }
 

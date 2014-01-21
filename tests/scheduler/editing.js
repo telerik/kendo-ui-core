@@ -277,6 +277,20 @@
         scheduler.editEvent(scheduler.dataSource.at(0).uid);
     });
 
+    test("destroy button is not added to the popUp editor if destroy is disabled", 1, function() {
+        var scheduler = setup({
+            editable: {
+                destroy: false
+            },
+            edit: function(e) {
+                ok(!e.container.find("a.k-scheduler-delete").length);
+            }
+        });
+
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
+    });
+
+
     test("destroy button is added to the popUp editor if template is set", 1, function() {
         var scheduler = setup({
             editable: { template:"<div>#=title#</div>" },
