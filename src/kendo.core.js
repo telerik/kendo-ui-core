@@ -1094,6 +1094,7 @@ function pad(number, digits, end) {
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"],
         numberRegExp = {
             2: /^\d{1,2}/,
+            3: /^\d{1,3}/,
             4: /^\d{4}/
         },
         objectToString = {}.toString;
@@ -1214,7 +1215,7 @@ function pad(number, digits, end) {
             pmHour, UTC, ISO8601, matches,
             amDesignators, pmDesignators,
             hoursOffset, minutesOffset,
-            hasTime;
+            hasTime, match;
 
         if (!format) {
             format = "d"; //shord date format
@@ -1308,10 +1309,20 @@ function pad(number, digits, end) {
                     }
                 } else if (ch === "f") {
                     count = lookAhead("f");
+
+                    match = value.substr(valueIdx, count).match(numberRegExp[3]);
                     milliseconds = getNumber(count);
 
-                    if (milliseconds !== null && count > 3) {
-                        milliseconds = parseInt(milliseconds.toString().substring(0, 3), 10);
+                    if (milliseconds !== null) {
+                        match = match[0].length;
+
+                        if (match < 3) {
+                            milliseconds *= Math.pow(10, (3 - match));
+                        }
+
+                        if (count > 3) {
+                            milliseconds = parseInt(milliseconds.toString().substring(0, 3), 10);
+                        }
                     }
 
                     if (milliseconds === null || outOfRange(milliseconds, 0, 999)) {
