@@ -26,6 +26,8 @@ namespace Kendo.Mvc.UI
 
         private const string DefaultRefresh = "Refresh";
 
+        private const string DefaultMorePages = "More pages";
+
         public PageableMessages()
         {
             Display = Messages.Pager_Display;
@@ -38,6 +40,7 @@ namespace Kendo.Mvc.UI
             Next = Messages.Pager_Next;
             Last = Messages.Pager_Last;
             Refresh = Messages.Pager_Refresh;
+            MorePages = Messages.Pager_MorePages;
         }
 
         public string Display { get; set; }
@@ -59,6 +62,8 @@ namespace Kendo.Mvc.UI
         public string Last { get; set; }
 
         public string Refresh { get; set; }
+
+        public string MorePages { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -111,6 +116,12 @@ namespace Kendo.Mvc.UI
             {
                 json["refresh"] = Refresh;
             }
+
+            if (MorePages != DefaultMorePages)
+            {
+                json["morePages"] = MorePages;
+            }
+        
         }
     }
 }

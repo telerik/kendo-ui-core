@@ -78,5 +78,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public PageableMessagesBuilder MorePages(string message)
+        {
+            messages.MorePages = message;
+
+            return this;
+        }
     }
 }
