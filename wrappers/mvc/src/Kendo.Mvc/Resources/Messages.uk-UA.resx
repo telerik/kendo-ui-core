@@ -702,4 +702,7 @@
   <data name="Editor_Formatting" xml:space="preserve">
     <value>Format</value>
   </data>
+  <data name="Pager_MorePages" xml:space="preserve">
+    <value>Більше сторінок</value>
+  </data>
 </root>

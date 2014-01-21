@@ -22,12 +22,13 @@ kendo_module({
         DISABLED = "disabled",
         iconTemplate = kendo.template('<a href="\\#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #">#=text#</span></a>');
 
-    function button(template, idx, text, numeric) {
+    function button(template, idx, text, numeric, title) {
         return template( {
             idx: idx,
             text: text,
             ns: kendo.ns,
-            numeric: numeric
+            numeric: numeric,
+            title: title || ""
         });
     }
 
@@ -194,7 +195,7 @@ kendo_module({
         options: {
             name: "Pager",
             selectTemplate: '<li><span class="k-state-selected">#=text#</span></li>',
-            linkTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#">#=text#</a></li>',
+            linkTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
             buttonCount: 10,
             autoBind: true,
             numeric: true,
@@ -213,7 +214,8 @@ kendo_module({
                 previous: "Go to the previous page",
                 next: "Go to the next page",
                 last: "Go to the last page",
-                refresh: "Refresh"
+                refresh: "Refresh",
+                morePages: "More pages"
             }
         },
 
@@ -258,7 +260,7 @@ kendo_module({
                 end = Math.min((start + buttonCount) - 1, totalPages);
 
                 if (start > 1) {
-                    html += button(linkTemplate, start - 1, "...", false);
+                    html += button(linkTemplate, start - 1, "...", false, options.messages.morePages);
                 }
 
                 for (idx = start; idx <= end; idx++) {
@@ -266,7 +268,7 @@ kendo_module({
                 }
 
                 if (end < totalPages) {
-                    html += button(linkTemplate, idx, "...", false);
+                    html += button(linkTemplate, idx, "...", false, options.messages.morePages);
                 }
 
                 if (html === "") {

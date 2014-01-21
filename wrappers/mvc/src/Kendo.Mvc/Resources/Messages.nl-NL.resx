@@ -690,4 +690,7 @@
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
     <value>Bestanden uploaden</value>
   </data>
+  <data name="Pager_MorePages" xml:space="preserve">
+    <value>Meer pagina</value>
+  </data>
 </root>
