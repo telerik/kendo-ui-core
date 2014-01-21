@@ -677,18 +677,20 @@ kendo_module({
                 years: [1]
             },
             _overlap: false
-        }, naviOptions.categoryAxis);
+        });
+        var user = naviOptions.categoryAxis;
 
         categoryAxes.push(
             deepExtend({}, base, {
+                    // TODO: Width based
+                    maxDateGroups: 200,
+                }, user, {
                 name: NAVIGATOR_AXIS,
                 baseUnit: "fit",
-                // TODO: Width based
-                maxDateGroups: 200,
                 baseUnitStep: "auto",
                 labels: { visible: false },
                 majorTicks: { visible: false }
-            }), deepExtend({}, base, {
+            }), deepExtend({}, base, user, {
                 name: NAVIGATOR_AXIS + "_labels",
                 // TODO: Width based
                 maxDateGroups: 20,
@@ -697,7 +699,7 @@ kendo_module({
                     minutes: []
                 },
                 majorTicks: { visible: true }
-            }), deepExtend({}, base, {
+            }), deepExtend({}, base, user, {
                 name: NAVIGATOR_AXIS + "_ticks",
                 // TODO: Width based
                 maxDateGroups: 200,

@@ -200,6 +200,18 @@
             });
         });
 
+        test("maxDateGroups can be set on categoryAxis", function() {
+            createStockChart({
+                navigator: {
+                    categoryAxis: {
+                        maxDateGroups: 100
+                    }
+                }
+            });
+
+            equal(chart._plotArea.axes[2].options.maxDateGroups, 100);
+        });
+
         // ------------------------------------------------------------
         var support = deepExtend({}, kendo.support);
         var browserOptions = deepExtend({}, kendo.support.browser);
