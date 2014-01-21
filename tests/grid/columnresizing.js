@@ -262,6 +262,35 @@
         equal(grid.staticTable.find("tr:first > td:first").width(), initialWidth + 10);
     });
 
+    test("static column footer cell width is incremented when handler is moved to the right", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: ["foo", { static: true, field: "bar", footerTemplate: "bar", width:100 }]
+        }),
+        firstColumn = grid.staticHeader.find("th:first"),
+        footer = grid.footer.find(".k-grid-footer-static"),
+        initialWidth = footer.find("tr:first > td:first").width();
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+
+        equal(footer.find("tr:first > td:first").width(), initialWidth + 10);
+    });
+
+    test("non static column footer cell width is incremented when handler is moved to the right", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: [ { field: "foo", width: 200 }, { static: true, field: "bar", footerTemplate: "bar", width:100 }]
+        }),
+        firstColumn = grid.thead.find("th:first"),
+        initialWidth = grid.footer.find(".k-grid-footer-wrap tr:first > td:first").width();
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+
+        QUnit.close(grid.footer.find(".k-grid-footer-wrap").find("tr:first > td:first").width(), initialWidth + 10, 2);
+    });
+
     test("static header is not resized pass the grid container width", function() {
         table.style.width = "200px";
 

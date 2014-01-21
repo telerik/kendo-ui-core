@@ -1036,11 +1036,16 @@ var __meta__ = {
                         }
 
                         var index = $.inArray(th[0], th.parent().children(":visible")),
-                            footer = that.footer || $(),
                             header = th.closest("table");
 
                         isStatic = header.parent().hasClass("k-grid-header-static");
                         var contentTable =  isStatic ? that.staticTable : that.table;
+
+                        var footer = that.footer || $();
+
+                        if (that.footer && that.staticContent) {
+                            footer = isStatic ? that.footer.children(".k-grid-footer-static") : that.footer.children(".k-grid-footer-wrap");
+                        }
 
                         cursor(that.wrapper, 'col-resize');
 
