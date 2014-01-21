@@ -138,6 +138,20 @@
         equal(grid.staticHeader.width(), 140);
     });
 
+    test("width is set to non static containers", function() {
+        div.width(300);
+
+        var grid = setup({
+            columns: [{ field: "foo", static: true, width: 150, footerTemplate: "foo" }, { width: 100, field: "bar"}, { width: 100, field: "baz" }]
+        });
+
+        var headerWidth = grid.wrapper.find(".k-grid-header-wrap").width();
+        var footerWidth = grid.wrapper.find(".k-grid-footer-wrap").width();
+        equal(headerWidth, grid.content.width() - kendo.support.scrollbar() - 1);
+        equal(headerWidth, footerWidth);
+        equal(headerWidth, 150 - kendo.support.scrollbar() - 2);
+    });
+
     test("row height is in sync", function() {
         div.appendTo(QUnit.fixture);
 

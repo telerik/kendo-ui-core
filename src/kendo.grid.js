@@ -2855,6 +2855,7 @@ var __meta__ = {
             if (this.options.scrollable) {
                 if (this.staticHeader) {
                     var columns = staticColumns(this.columns),
+                        headerWrap = this.thead.closest(".k-grid-header-wrap"),
                         width = 0;
 
                     for (var idx = 0, length = columns.length; idx < length; idx++) {
@@ -2869,11 +2870,13 @@ var __meta__ = {
                         .add(this.staticContent)
                         .width(width);
 
-                    this.thead.closest(".k-grid-header-wrap")[0].style.width = this.thead.closest(".k-grid-header").width() - width - 2 + "px";
+                    headerWrap[0].style.width = this.thead.closest(".k-grid-header").width() - width - 2 + "px";
+
                     this.content[0].style.width = this.wrapper[0].clientWidth - width - 1 + "px";
 
-                    if (this.staticFooter) {
+                    if (this.staticFooter && this.staticFooter.length) {
                         this.staticFooter.width(width);
+                        this.footer.find(".k-grid-footer-wrap")[0].style.width = headerWrap[0].clientWidth + "px";
                     }
                 }
             }
