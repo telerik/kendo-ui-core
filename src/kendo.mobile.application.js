@@ -136,11 +136,11 @@ kendo_module({
                 element = $(element);
                 that.element = element[0] ? element : $(document.body);
                 that._setupPlatform();
+                that._attachMeta();
                 that._setupElementClass();
                 that._attachHideBarHandlers();
                 that.pane = new Pane(that.element, that.options);
                 that.pane.navigateToInitial();
-                that._attachMeta();
 
                 if (that.options.updateDocumentTitle) {
                     that._setupDocumentTitle();
@@ -253,7 +253,13 @@ kendo_module({
         },
 
         _resizeToScreenHeight: function() {
-            this.element.height(isOrientationHorizontal(this.element) ? window.outerWidth : window.outerHeight);
+            var statusBarOverlaps = $("meta[name=apple-mobile-web-app-status-bar-style]").attr("content") === "black-translucent";
+
+            if (isOrientationHorizontal(this.element)) {
+                this.element.height(window.screen.availWidth - (statusBarOverlaps ? 0 : STATUS_BAR_HEIGHT));
+            } else {
+                this.element.height(window.screen.availHeight + (statusBarOverlaps ? STATUS_BAR_HEIGHT : 0));
+            }
         },
 
         _setupElementClass: function() {
