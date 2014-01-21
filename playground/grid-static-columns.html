@@ -33,13 +33,8 @@
   </head>
     <body>
             <style scoped>
-
-                #clientsDb {
-                    width: 692px;
-                    height: 413px;
-                    margin: 30px auto;
-                    padding: 51px 4px 0 4px;
-                    background: url('../../content/web/grid/clientsDb.png') no-repeat 0 0;
+                .k-resize-handle {
+                    background: red;
                 }
 
                 .k-grid-header-static {
@@ -52,13 +47,6 @@
                     border-width: 0 1px 0 0;
                 }
 
-                div.k-grid-header-wrap,
-                div.k-grid-footer-wrap,
-                div.k-grid-content
-                {
-                    width: auto;
-                }
-
                 .k-grid-footer-static {
                     float:left;
                 }
@@ -68,6 +56,10 @@
                     overflow: hidden;
                     float: left;
                     border-right: solid 1px #c5c5c5;
+                }
+
+                .k-grid-content-static > table {
+                    table-layout: fixed;
                 }
 
                 .k-grid-header .k-header .k-link {
@@ -117,10 +109,10 @@
                         toolbar: ["create"],
                         columns: [{
                             field: "ContactName",
-                            template: "[static 1] #=ContactName# <br/> #=ContactName#",
+                            template: "[static 1] #=ContactName# #=ContactName#",
                             title: "[static 1] Contact Name",
                             static: true,
-                    //        footerTemplate: "[static 1]",
+                   //        footerTemplate: "[static 1]",
                             editor: "<textarea style='height:300px'/>",
                             width: 140
                         }, {

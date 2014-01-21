@@ -897,6 +897,11 @@ var __meta__ = {
             var resizeHandle = that.resizeHandle;
             var left;
 
+            if (resizeHandle && that.staticContent) {
+                resizeHandle.remove();
+                resizeHandle = null;
+            }
+
             if (!resizeHandle) {
                 resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"><div class="k-resize-handle-inner"></div></div>');
                 container.append(resizeHandle);
@@ -909,10 +914,11 @@ var __meta__ = {
                     left += this.offsetWidth;
                 });
             } else {
-                var headerWrap = th.closest(".k-grid-header-wrap"),
-                ieCorrection = browser.msie ? headerWrap.scrollLeft() : 0,
-                webkitCorrection = browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
-                firefoxCorrection = browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
+                var headerWrap = th.closest(".k-grid-header-wrap, .k-grid-header-static"),
+                    ieCorrection = browser.msie ? headerWrap.scrollLeft() : 0,
+                    webkitCorrection = browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
+                    firefoxCorrection = browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
+
                 left = th.position().left - webkitCorrection + firefoxCorrection - ieCorrection;
             }
 
@@ -928,19 +934,19 @@ var __meta__ = {
 
         _positionColumnResizeHandle: function(container) {
             var that = this,
-                resizeHandle = that.resizeHandle,
-                indicatorWidth = that.options.columnResizeHandleWidth;
+                indicatorWidth = that.options.columnResizeHandleWidth,
+                staticHead = that.staticHeader ? that.staticHeader.first("thead") : $();
 
-            that.thead.on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
+            that.thead.add(staticHead).on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
                 var th = $(this),
                     clientX = e.clientX,
                     winScrollLeft = $(window).scrollLeft(),
                     position = th.offset().left + (!isRtl ? this.offsetWidth : 0);
 
-                if(clientX + winScrollLeft > position - indicatorWidth &&  clientX + winScrollLeft < position + indicatorWidth) {
-                    that._createResizeHandle(container, th);
-                } else if (resizeHandle) {
-                    resizeHandle.hide();
+                if(clientX + winScrollLeft > position - indicatorWidth && clientX + winScrollLeft < position + indicatorWidth) {
+                    that._createResizeHandle(th.closest("div"), th);
+                } else if (that.resizeHandle) {
+                    that.resizeHandle.hide();
                 } else {
                     cursor(that.wrapper, "");
                 }
@@ -961,7 +967,13 @@ var __meta__ = {
             if (this.resizeHandle) {
                 this.resizeHandle.data("th")
                     .removeClass("k-column-active");
-                this.resizeHandle.hide();
+
+                if (this.staticContent) {
+                    this.resizeHandle.remove();
+                    this.resizeHandle = null;
+                } else {
+                    this.resizeHandle.hide();
+                }
             }
         },
 
@@ -996,6 +1008,8 @@ var __meta__ = {
                 columnWidth,
                 gridWidth,
                 isMobile = this._isMobile,
+                scrollbar = !kendo.support.mobileOS ? kendo.support.scrollbar() : 0,
+                isStatic,
                 col, th;
 
             if (options.resizable) {
@@ -1007,7 +1021,7 @@ var __meta__ = {
                     that._positionColumnResizeHandle(container);
                 }
 
-                that.resizable = new ui.Resizable(container, {
+                that.resizable = new ui.Resizable(container.add(that.staticHeader), {
                     handle: ".k-resize-handle",
                     hint: function(handle) {
                         return $('<div class="k-grid-resize-indicator" />').css({
@@ -1022,13 +1036,16 @@ var __meta__ = {
                         }
 
                         var index = $.inArray(th[0], th.parent().children(":visible")),
-                            contentTable = that.tbody.parent(),
-                            footer = that.footer || $();
+                            footer = that.footer || $(),
+                            header = th.closest("table");
+
+                        isStatic = header.parent().hasClass("k-grid-header-static");
+                        var contentTable =  isStatic ? that.staticTable : that.table;
 
                         cursor(that.wrapper, 'col-resize');
 
                         if (options.scrollable) {
-                            col = that.thead.parent().find("col:eq(" + index + ")")
+                            col = header.find("col:eq(" + index + ")")
                                 .add(contentTable.children("colgroup").find("col:eq(" + index + ")"))
                                 .add(footer.find("colgroup").find("col:eq(" + index + ")"));
                         } else {
@@ -1037,21 +1054,34 @@ var __meta__ = {
 
                         columnStart = e.x.location;
                         columnWidth = th.outerWidth();
-                        gridWidth = that.tbody.outerWidth(); // IE returns 0 if grid is empty and scrolling is enabled
+                        gridWidth = isStatic ? contentTable.children("tbody").outerWidth() : that.tbody.outerWidth(); // IE returns 0 if grid is empty and scrolling is enabled
                     },
                     resize: function(e) {
-
                         var rtlMultiplier = isRtl ? -1 : 1,
                             width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier),
-                            footer = that.footer || $();
+                            footer = that.footer || $(), widte,
+                            header = th.closest("table"),
+                            contentTable = isStatic ? that.staticTable : that.table,
+                            constrain = false,
+                            totalWidth = that.wrapper.width() - scrollbar;
+
+                        if (isStatic && gridWidth - columnWidth + width > totalWidth) {
+                            width = columnWidth + (totalWidth - gridWidth - scrollbar*2);
+                            constrain = true;
+                        }
 
                         if (width > 10) {
                             col.css('width', width);
 
                             if (options.scrollable && gridWidth) {
-                                that._footerWidth = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
-                                that.tbody.parent()
-                                    .add(that.thead.parent())
+                                if (constrain) {
+                                    that._footerWidth = totalWidth;
+                                } else {
+                                    that._footerWidth = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
+                                }
+
+                                contentTable
+                                    .add(header)
                                     .add(footer.find("table"))
                                     .css('width', that._footerWidth);
                             }
@@ -1064,7 +1094,9 @@ var __meta__ = {
                         cursor(that.wrapper, "");
 
                         if (columnWidth != newWidth) {
-                            column = that.columns[th.parent().find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)];
+                            var header = that.staticHeader ? that.staticHeader.first("thead").add(that.thead) : th.parent();
+
+                            column = that.columns[header.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)];
 
                             column.width = newWidth;
 
@@ -1073,6 +1105,9 @@ var __meta__ = {
                                 oldWidth: columnWidth,
                                 newWidth: newWidth
                             });
+
+                            that._setStaticContainersWidth();
+                            that._syncStaicContentHeight();
                         }
 
                         that._hideResizeHandle();
@@ -2818,16 +2853,23 @@ var __meta__ = {
 
         _setStaticContainersWidth: function() {
             if (this.options.scrollable) {
-                var columns = staticColumns(this.columns);
                 if (this.staticHeader) {
-                    var width = 0;
+                    var columns = staticColumns(this.columns),
+                        width = 0;
+
                     for (var idx = 0, length = columns.length; idx < length; idx++) {
                         width += columns[idx].width;
                     }
 
-                    this.staticHeader.width(width);
-                    this.staticContent.width(width);
+                    if (width >= this.wrapper[0].clientWidth) {
+                        width = this.wrapper[0].clientWidth - kendo.support.scrollbar();
+                    }
 
+                    this.staticHeader
+                        .add(this.staticContent)
+                        .width(width);
+
+                    this.thead.closest(".k-grid-header-wrap")[0].style.width = this.thead.closest(".k-grid-header").width() - width - 2 + "px";
                     this.content[0].style.width = this.wrapper[0].clientWidth - width - 1 + "px";
 
                     if (this.staticFooter) {
@@ -3846,6 +3888,15 @@ var __meta__ = {
 
             that._updateCols();
 
+            if (this.options.scrollable) {
+
+                that._appendStaticColumnHeader(that.thead.closest(".k-grid-header"));
+
+                that._appendStaticColumnContent();
+
+                that._setStaticContainersWidth();
+            }
+
             that._resizable();
 
             that._draggable();
@@ -3857,14 +3908,6 @@ var __meta__ = {
             }
 
             that._columnMenu();
-
-            if (this.options.scrollable) {
-                that._appendStaticColumnHeader(that.thead.closest(".k-grid-header"));
-
-                that._appendStaticColumnContent();
-
-                that._setStaticContainersWidth();
-            }
         },
 
         _isStatic: function() {

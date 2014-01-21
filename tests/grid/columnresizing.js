@@ -128,6 +128,53 @@
         equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
     });
 
+    test("handler is position over the th right side of a static column", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", { static: true, field: "bar" }]
+        });
+        var firstColumn = grid.staticHeader.find("th:first");
+
+        $(firstColumn).trigger({ type: "mousemove", clientX: firstColumn.offset().left + firstColumn.outerWidth(), clientY: 0});
+
+        equal(grid.wrapper.find(".k-grid-header-static").children(".k-resize-handle").first()[0].offsetTop, firstColumn[0].offsetTop);
+        equal(grid.wrapper.find(".k-grid-header-static").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
+    });
+
+    test("handler is position over the th right side of non static", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", { static: true, field: "bar" }]
+        });
+        var firstColumn = grid.thead.find("th:first");
+
+        $(firstColumn).trigger({ type: "mousemove", clientX: firstColumn.offset().left + firstColumn.outerWidth(), clientY: 0});
+
+        equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetTop, firstColumn[0].offsetTop);
+        equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
+    });
+
+    test("handler is position over the th right side of static column after hovering over a non static one", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", { static: true, field: "bar" }]
+        });
+
+        var nonStaticColumn = grid.thead.find("th:first");
+
+        $(nonStaticColumn).trigger({ type: "mousemove", clientX: nonStaticColumn.offset().left + nonStaticColumn.outerWidth(), clientY: 0});
+
+        var staticColumn = grid.staticHeader.find("th:first");
+
+        $(staticColumn).trigger({ type: "mousemove", clientX: staticColumn.offset().left + staticColumn.outerWidth(), clientY: 0});
+
+        equal(grid.wrapper.find(".k-grid-header-static").children(".k-resize-handle").first()[0].offsetTop, staticColumn[0].offsetTop);
+        equal(grid.wrapper.find(".k-grid-header-static").children(".k-resize-handle").first()[0].offsetLeft, staticColumn[0].offsetLeft + staticColumn[0].offsetWidth - indicatorWidth);
+    });
+
     test("handler is position over the th right side when prev column is hidden", function() {
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar" } ],
@@ -168,6 +215,15 @@
         ok(grid.wrapper.find(".k-grid-header-wrap").data("kendoResizable"));
     });
 
+    test("resizable is attached to the static header", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", { static: true, field: "bar" }]
+        });
+        ok(grid.wrapper.find(".k-grid-header-static").data("kendoResizable"));
+    });
+
     test("resizable is attached to the header if scrolling is disabled", function() {
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar" } ],
@@ -190,6 +246,39 @@
         resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
 
         equal(firstColumn[0].offsetWidth, initialWidth + 10);
+    });
+
+    test("static column body cell width is incremented when handler is moved to the right", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: ["foo", { static: true, field: "bar", width:100 }]
+        }),
+        firstColumn = grid.staticHeader.find("th:first"),
+        initialWidth = grid.staticTable.find("tr:first > td:first").width();
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+
+        equal(grid.staticTable.find("tr:first > td:first").width(), initialWidth + 10);
+    });
+
+    test("static header is not resized pass the grid container width", function() {
+        table.style.width = "200px";
+
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: [{ width: 200, field: "foo"}, { static: true, field: "bar", width:100 }]
+        }),
+        firstColumn = grid.staticHeader.find("th:first"),
+        initialWidth = grid.staticTable.find("tr:first > td:first").width();
+
+        grid.wrapper.width(200);
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 200);
+
+        equal(grid.staticTable.width(), 200 - kendo.support.scrollbar());
+        equal(grid.staticHeader.width(), 200 - kendo.support.scrollbar());
     });
 
     test("column body cell width is incremented when handler is moved to the right", function() {
