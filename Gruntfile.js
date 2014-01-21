@@ -70,6 +70,7 @@ module.exports = function(grunt) {
 
         'tests/kendo-test-helpers.js',
         'tests/**/test-helper.js',
+        'demos/mvc/content/shared/js/less.js',
         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
 
@@ -165,7 +166,7 @@ module.exports = function(grunt) {
             },
             unit: {
                 options: {
-                    files: beforeTestFiles.concat(allKendoFiles).concat(afterTestFiles).concat(['demos/mvc/content/shared/js/less.js']).concat(tests)
+                    files: beforeTestFiles.concat(allKendoFiles).concat(afterTestFiles).concat(tests)
                 }
             }
         },
