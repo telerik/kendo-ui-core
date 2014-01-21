@@ -70,9 +70,28 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
       }
     }')
 
+    ENUM_TEMPLATE = ERB.new('
+        /// <summary>
+        /// <%= description %>
+        /// </summary>
+        public enum <%= csharp_type %>
+        {
+            <% values.each_with_index do |value, index| %>
+            ///<summary>
+            ///<%= value_desc_to_s value %>
+            ///</summary>
+            <%= value_to_s(value).pascalize %> <%= \',\' if index < values.length - 1 %>
+            <% end %>
+        }
+    ')
+
     module Options
         def component_class
             Component
+        end
+
+        def csharp_name
+            name.pascalize
         end
 
         def composite_option_class
@@ -88,7 +107,8 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         include Options
 
         def csharp_type
-          TYPES_MAP[type[0]]
+            return "#{owner.csharp_class}#{name.pascalize}" if values
+            return TYPES_MAP[type[0]]
         end
 
         def to_declaration
@@ -99,6 +119,31 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
           return default if type[0] == 'String'
           return default.to_f if type[0] == 'Number'
         end
+
+        def values
+            @values if self.respond_to?(:values)
+        end
+
+        def values_to_s
+            values.map { |value|
+                value.to_s.pascalize
+            }.join ",\n"
+        end
+
+        def value_to_s(value)
+            value.split(' - ')[0]
+        end
+
+        def value_desc_to_s(value)
+            s = value.split(' - ')
+            #rejoin the remaining parts in case the description contains the split string itself
+            return s[1..s.length].join(' - ') if value.index(' - ')
+        end
+
+        def to_enum
+            ENUM_TEMPLATE.result(binding)
+        end
+ 
         def get_binding
             binding
         end
@@ -117,6 +162,7 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
             COMPOSITE_PROPERTY_TEMPLATE.result(get_binding)
         end
 
+
         def get_binding
             binding
         end
@@ -131,6 +177,19 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
 
         def get_binding
           binding
+        end
+
+        def enum_options
+            enums = simple_options.select{ |o| !o.values.nil? }
+            composite = composite_options.flat_map { |o| o.options }
+
+            composite.each do |item|
+                composite.push(*item.options) if item.composite?
+
+                enums.push(item) if !item.values.nil?
+            end
+
+            enums
         end
       end
 
@@ -161,7 +220,13 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         end
 
         def write_enums(component)
+            options = component.enum_options
 
+            options.each do |option|
+                filename = "#{@path}/#{component.csharp_class}#{option.csharp_name}.cs"
+
+                create_file(filename, option.to_enum)
+            end 
         end
 
         def write_properties(component)

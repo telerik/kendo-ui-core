@@ -50,6 +50,7 @@ namespace :generate do
           components = markdown.map { |file| CodeGen::MarkdownParser.read(file, CodeGen::ASPX::Wrappers::Component) }
 
           components.each do |component|
+            import_metadata(component)
               generator = CodeGen::ASPX::Wrappers::Generator.new('wrappers/aspx/src/')
 
               generator.component(component)
