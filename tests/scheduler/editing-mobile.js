@@ -162,6 +162,16 @@
         equal(scheduler._editor.container.find(kendo.roleSelector("content")).text(), "my custom edit formDelete");
     });
 
+    test("delete button is not shown if destroy is disabled", function() {
+        var scheduler = setup({ editable: { destroy: false } });
+
+        var remove = stub(scheduler, "removeEvent");
+
+        scheduler.editEvent(scheduler.dataSource.at(0));
+
+        ok(!scheduler._editor.container.find(".k-scheduler-delete").length);
+    });
+
     test("delete button is not shown for new events", function() {
         var scheduler = setup();
 
