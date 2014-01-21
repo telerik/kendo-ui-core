@@ -20,8 +20,8 @@
                                 wHeight = $(window).height(),
                                 newTop, newLeft;
                         
-                            newLeft = wWidth / 2 - eWidth / 2;
-                            newTop = wHeight / 2 - eHeight / 2;
+                            newLeft = Math.floor(wWidth / 2 - eWidth / 2);
+                            newTop = Math.floor(wHeight / 2 - eHeight / 2);
 
                             e.element.parent().css({top: newTop, left: newLeft});
                         }
