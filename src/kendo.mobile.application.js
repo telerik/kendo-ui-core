@@ -286,7 +286,7 @@ var __meta__ = {
             if (that.options.useNativeScrolling) {
                 element.parent().addClass("km-native-scrolling");
             } else if (ENABLE_CLIP) {
-                size = (window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight) + 200;
+                size = (screen.availWidth > screen.availHeight ? screen.availWidth : screen.availHeight) + 200;
                 $(clipTemplate({ width: size, height: size })).appendTo(HEAD);
             }
 
