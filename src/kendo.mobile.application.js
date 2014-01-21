@@ -257,7 +257,7 @@ var __meta__ = {
         },
 
         _resizeToScreenHeight: function() {
-            this.element.height(isOrientationHorizontal(this.element) ? window.screen.availWidth - STATUS_BAR_HEIGHT : window.screen.availHeight);
+            this.element.height(isOrientationHorizontal(this.element) ? window.outerWidth : window.outerHeight);
         },
 
         _setupElementClass: function() {
