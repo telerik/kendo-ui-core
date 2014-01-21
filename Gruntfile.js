@@ -70,7 +70,6 @@ module.exports = function(grunt) {
 
         'tests/kendo-test-helpers.js',
         'tests/**/test-helper.js',
-        'demos/mvc/content/shared/js/less.js',
         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
 
@@ -99,6 +98,13 @@ module.exports = function(grunt) {
         'tests/diagram/common.js'
     ];
 
+    var compiledStyleSheets = [
+        'dist/styles/mobile/kendo.mobile.all.css',
+        'dist/styles/web/kendo.common.css',
+        'dist/styles/dataviz/kendo.dataviz.css',
+        'dist/styles/web/kendo.rtl.css'
+    ];
+
     // Project configuration.
     grunt.initConfig({
 
@@ -108,7 +114,7 @@ module.exports = function(grunt) {
             options: {
                 browserStack: {
                   username: 'petyoivanov',
-                  accessKey: 'ikqBdUZ5w2TyTv4iGsWu'
+                  accessKey: 'QBgixFUrxrEQyY2nKVqb'
                 },
                 sauceLabs: {
                     username: 'petyosi',
@@ -154,12 +160,12 @@ module.exports = function(grunt) {
                     },
 
                     singleRun: true,
-                    files: beforeTestFiles.concat([ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js' ]).concat(afterTestFiles).concat(tests)
+                    files: beforeTestFiles.concat([ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js' ]).concat(compiledStyleSheets).concat(afterTestFiles).concat(tests)
                 }
             },
             unit: {
                 options: {
-                    files: beforeTestFiles.concat(allKendoFiles).concat(afterTestFiles).concat(tests)
+                    files: beforeTestFiles.concat(allKendoFiles).concat(afterTestFiles).concat(['demos/mvc/content/shared/js/less.js']).concat(tests)
                 }
             }
         },
@@ -251,7 +257,7 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
-    grunt.registerTask("ci", [ 'kendo', 'copy:jquery', 'copy:timezones', 'karma:ci' ]);
+    grunt.registerTask("ci", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:ci' ]);
     grunt.registerTask('tests', [ 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'copy:jquery', 'copy:timezones' ]);
