@@ -96,7 +96,10 @@ module.exports = function(grunt) {
         { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
 
         'download-builder/scripts/script-resolver.js',
-        'tests/diagram/common.js'
+        'tests/diagram/common.js',
+
+        'demos/mvc/content/shared/js/trykendo.js',
+        'tests/demos/trykendo.js'
     ];
 
     var compiledStyleSheets = [
