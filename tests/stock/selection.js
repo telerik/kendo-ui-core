@@ -116,6 +116,23 @@
             deepEqual(sOpts.max, new Date("2012/01/11 00:00"));
         });
 
+        test("last category is not collapsed", function() {
+            setup({
+                navigator: {
+                    categoryAxis: {
+                        categories: [
+                            new Date("2012/01/01 00:00"),
+                            new Date("2012/01/03 23:00")
+                        ]
+                    }
+                }
+            });
+
+            var labelAxis = chart._plotArea.namedCategoryAxes["_navigator_labels"];
+            var ticks = labelAxis.getTickPositions();
+            close(ticks[2], 411, 1);
+        });
+
         // ------------------------------------------------------------
         module("Selection / Event proxy", {
             setup: function() {
