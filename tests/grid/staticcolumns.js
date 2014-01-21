@@ -536,4 +536,34 @@
 
         equal(resize.calls("resize"),1);
     });
+
+    test("correct number of cells are added to the row if static columns as set and grid is not scrollable", function() {
+        var grid = setup({
+            scrollable: false,
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        equal(grid.tbody.find("tr:first td").length, 3);
+    });
+
+    test("static containers are not create if grid is not scrollable", function() {
+        var grid = setup({
+            scrollable: false,
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        ok(!grid.staticHeader);
+        ok(!grid.staticContent);
+        ok(!grid.staticFooter);
+    });
+
+    test("static row templates are not created if grid is not scrollable", function() {
+        var grid = setup({
+            scrollable: false,
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        ok(!grid.staticRowTemplate);
+        ok(!grid.staticAltRowTemplate);
+    });
 })();

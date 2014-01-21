@@ -3335,7 +3335,9 @@ var __meta__ = {
 
             encoded = !(that.table.find("tbody tr").length > 0 && (!dataSource || !dataSource.transport));
 
-            columns = staticColumns(columns).concat(nonStaticColumns(columns));
+            if (that.options.scrollable) {
+                columns = staticColumns(columns).concat(nonStaticColumns(columns));
+            }
 
             that.columns = map(columns, function(column) {
                 column = typeof column === STRING ? { field: column } : column;
@@ -3504,9 +3506,9 @@ var __meta__ = {
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 aggregates = dataSource.aggregate(),
                 columnsStatic = staticColumns(that.columns),
-                columns = nonStaticColumns(that.columns);
+                columns = options.scrollable ? nonStaticColumns(that.columns) : that.columns;
 
-            if (columnsStatic.length) {
+            if (options.scrollable && columnsStatic.length) {
                 that.rowTemplate = that._tmpl(options.rowTemplate, columns, false, true);
                 that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true, true);
 
@@ -3532,7 +3534,7 @@ var __meta__ = {
 
                 that.groupFooterTemplate = that._footerTmpl(columns, aggregates, "groupFooterTemplate", "k-group-footer", columnsStatic.length);
 
-                if (columnsStatic.length) {
+                if (options.scrollable && columnsStatic.length) {
                     that.staticGroupFooterTemplate = that._footerTmpl(columnsStatic, aggregates, "groupFooterTemplate", "k-group-footer");
                 }
             }
@@ -4316,8 +4318,15 @@ var __meta__ = {
         },
 
         _progress: function(toggle) {
-            var that = this,
-                element = that.element.is("table") ? that.element.parent() : (that.content && that.content.length ? that.content : that.element);
+            var element = this.element;
+
+            if (this.staticContent) {
+                element = this.wrapper;
+            } else if (this.element.is("table")) {
+                element = this.element.parent();
+            } else if (this.content && this.content.length) {
+                element = this.content;
+            }
 
             kendo.ui.progress(element, toggle);
         },
