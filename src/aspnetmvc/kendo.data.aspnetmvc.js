@@ -278,6 +278,86 @@
     });
 
     extend(true, kendo.data, {
+       schemas: {
+           "webapi": kendo.data.schemas["aspnetmvc-ajax"]
+       }
+    })
+
+    extend(true, kendo.data, {
+        transports: {
+            "webapi": kendo.data.RemoteTransport.extend({
+                init: function(options) {
+                    var that = this;
+                    var stringifyDates = (options || {}).stringifyDates;
+
+                    if (options.update) {
+                        var updateUrl = typeof options.update === "string" ? options.update : options.update.url;
+
+                        options.update = extend(options.update, {url: function (data) {
+                            return kendo.format(updateUrl, data[options.idField]);
+                        }});
+                    }
+
+                    if (options.destroy) {
+                        var destroyUrl = typeof options.destroy === "string" ? options.destroy : options.destroy.url;
+
+                        options.destroy = extend(options.destroy, {url: function (data) {
+                            return kendo.format(destroyUrl, data[options.idField]);
+                        }});
+                    }
+
+                    if(options.create && typeof options.create === "string") {
+                        options.create = {
+                            url: options.create
+                        };
+                    }
+
+                    kendo.data.RemoteTransport.fn.init.call(this,
+                        extend(true, {}, this.options, options, {
+                            parameterMap: function(options, operation) {
+                                return parameterMap.call(that, options, operation, false, stringifyDates);
+                            }
+                        })
+                    );
+                },
+                read: function(options) {
+                    var data = this.options.data,
+                        url = this.options.read.url;
+                    if (data) {
+                        if (url) {
+                            this.options.data = null;
+                        }
+
+                        if (!data.Data.length && url) {
+                            kendo.data.RemoteTransport.fn.read.call(this, options);
+                        } else {
+                            options.success(data);
+                        }
+                    } else {
+                        kendo.data.RemoteTransport.fn.read.call(this, options);
+                    }
+                },
+                options: {
+                    read: {
+                        type: "GET"
+                    },
+                    update: {
+                        type: "PUT"
+                    },
+                    create: {
+                        type: "POST"
+                    },
+                    destroy: {
+                        type: "DELETE"
+                    },
+                    parameterMap: parameterMap,
+                    prefix: ""
+                }
+            })
+        }
+    });
+
+    extend(true, kendo.data, {
         transports: {
             "aspnetmvc-server": kendo.data.RemoteTransport.extend({
                 init: function(options) {

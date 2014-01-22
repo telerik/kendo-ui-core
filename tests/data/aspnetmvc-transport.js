@@ -148,6 +148,74 @@ test("stringifyDates parameter is correctly set in the transport and dates are c
         equal(requestData.Start, currentDate.toJSON());
 });
 
+test("Update url is correctly formatted with model ID", function() {
+       transport = new kendo.data.transports["webapi"]({
+            update: "/update/{0}",
+            idField: "id"
+        });
+
+        var generatedUrl = transport.options.update.url({id: "1"});
+
+        equal(generatedUrl.indexOf(1) > -1,true);
+});
+
+test("Destroy url is correctly formatted with model ID", function() {
+        transport = new kendo.data.transports["webapi"]({
+            destroy: "/destroy/{0}",
+            idField: "id"
+        });
+
+        var generatedUrl = transport.options.destroy.url({id: "1"});
+
+        equal(generatedUrl.indexOf(1) > -1,true);
+});
+
+test("Read is using correct Http method", function() {
+        var requestData;
+        var currentMethod;
+
+        var transport = new kendo.data.transports["webapi"]({
+            read: {
+                url: "/read"
+            }
+        });
+
+        equal(transport.options.read.type,"GET");
+});
+
+test("Create is using correct Http method", function() {
+        var requestData;
+        var currentMethod;
+
+        var transport = new kendo.data.transports["webapi"]({
+            create: "/create"
+        });
+
+        equal(transport.options.create.type,"POST");
+});
+
+test("Update is using correct Http method", function() {
+        var requestData;
+        var currentMethod;
+
+        var transport = new kendo.data.transports["webapi"]({
+            update: "/update"
+        });
+
+        equal(transport.options.update.type,"PUT");
+});
+
+test("Delete is using correct Http method", function() {
+        var requestData;
+        var currentMethod;
+
+        var transport = new kendo.data.transports["webapi"]({
+            destroy: "/delete"
+        });
+
+        equal(transport.options.destroy.type,"DELETE");
+});
+
 test("data is loaded from the url if both data and url are set on the second request", 2, function() {
     var data = [{foo: "bar" }],
         transport = new Transport({
