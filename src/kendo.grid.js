@@ -638,6 +638,29 @@ var __meta__ = {
         }
     }
 
+    function showColumnCells(rows, columnIndex) {
+        var idx = 0,
+            length = rows.length,
+            cell;
+
+        for ( ; idx < length; idx += 1) {
+            row = rows.eq(idx);
+            if (row.is(".k-grouping-row,.k-detail-row")) {
+                cell = row.children(":not(.k-group-cell):first,.k-detail-cell").last();
+                cell.attr("colspan", parseInt(cell.attr("colspan"), 10) + 1);
+            } else {
+                if (row.hasClass("k-grid-edit-row") && (cell = row.children(".k-edit-container")[0])) {
+                    cell = $(cell);
+                    cell.attr("colspan", parseInt(cell.attr("colspan"), 10) + 1);
+                    normalizeCols(cell.find(">form>table"), visibleColumns(columns), false,  0);
+                    row = cell.find("tr:first");
+                }
+
+                setCellVisibility(row[0].cells, columnIndex, true);
+            }
+        }
+    }
+
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -4265,10 +4288,8 @@ var __meta__ = {
 
         showColumn: function(column) {
             var that = this,
-                rows,
                 idx,
                 length,
-                row,
                 cell,
                 tables,
                 width,
@@ -4276,6 +4297,7 @@ var __meta__ = {
                 cols,
                 columns = that.columns,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
+                staticColumnsCount = staticColumns(columns).length,
                 columnIndex;
 
             if (typeof column == "number") {
@@ -4298,49 +4320,44 @@ var __meta__ = {
             that._templates();
 
             that._updateCols();
-            setCellVisibility(that.thead.find(">tr")[0].cells, columnIndex, true);
+            that._updateStaticCols();
+            setCellVisibility(elements($(">table>thead", that.staticHeader), that.thead, ">tr>th"), columnIndex, true);
             if (footer[0]) {
-                that._appendCols(footer.find("table:first"));
-                setCellVisibility(footer.find(".k-footer-template")[0].cells, columnIndex, true);
+                that._updateCols(footer.find(">.k-grid-footer-wrap>table"));
+                that._updateStaticCols(footer.find(">.k-grid-footer-static>table"));
+                setCellVisibility(footer.find(".k-footer-template>td"), columnIndex, true);
             }
 
-            rows = that.tbody.children();
-            for (idx = 0, length = rows.length; idx < length; idx += 1) {
-                row = rows.eq(idx);
-                if (row.is(".k-grouping-row,.k-detail-row")) {
-                    cell = row.children(":not(.k-group-cell):first,.k-detail-cell").last();
-                    cell.attr("colspan", parseInt(cell.attr("colspan"), 10) + 1);
-                } else {
-                    if (row.hasClass("k-grid-edit-row") && (cell = row.children(".k-edit-container")[0])) {
-                        cell = $(cell);
-                        cell.attr("colspan", parseInt(cell.attr("colspan"), 10) + 1);
-                        normalizeCols(cell.find(">form>table"), visibleColumns(columns), false,  0);
-                        row = cell.find("tr:first");
-                    }
-
-                    setCellVisibility(row[0].cells, columnIndex, true);
-                }
-            }
-
-            tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
-            if (!column.width) {
-                tables.width("");
+            if (that.staticTable && staticColumnsCount > columnIndex) {
+                showColumnCells(that.staticTable.find(">tbody>tr"), columnIndex);
             } else {
-                width = 0;
-                cols = that.thead.prev().find("col");
-                for (idx = 0, length = cols.length; idx < length; idx += 1) {
-                    colWidth = cols[idx].style.width;
-                    if (colWidth.indexOf("%") > -1) {
-                        width = 0;
-                        break;
-                    }
-                    width += parseInt(colWidth, 10);
-                }
+                showColumnCells(that.tbody.children(), columnIndex - staticColumnsCount);
+            }
 
-                that._footerWidth = null;
-                if (width) {
-                    tables.width(width);
-                    that._footerWidth = width;
+            if (that.staticTable) {
+                that._setStaticContainersWidth();
+                that._syncStaicContentHeight();
+            } else {
+                tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
+                if (!column.width) {
+                    tables.width("");
+                } else {
+                    width = 0;
+                    cols = that.thead.prev().find("col");
+                    for (idx = 0, length = cols.length; idx < length; idx += 1) {
+                        colWidth = cols[idx].style.width;
+                        if (colWidth.indexOf("%") > -1) {
+                            width = 0;
+                            break;
+                        }
+                        width += parseInt(colWidth, 10);
+                    }
+
+                    that._footerWidth = null;
+                    if (width) {
+                        tables.width(width);
+                        that._footerWidth = width;
+                    }
                 }
             }
 
