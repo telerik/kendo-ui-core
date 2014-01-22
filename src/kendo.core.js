@@ -1080,6 +1080,7 @@ function pad(number, digits, end) {
         shortTimeZoneRegExp = /[+|\-]\d{1,2}/,
         longTimeZoneRegExp = /[+|\-]\d{1,2}:\d{2}/,
         dateRegExp = /^\/Date\((.*?)\)\/$/,
+        tzOffsetRegExp = /[+-]{1}\d+/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"],
         numberRegExp = {
             2: /^\d{1,2}/,
@@ -1430,14 +1431,24 @@ function pad(number, digits, end) {
             return value;
         }
 
-        var idx = 0,
-            date = null,
-            length, patterns;
+        var idx = 0;
+        var date = null;
+        var length, patterns;
+        var tzoffset;
 
         if (value && value.indexOf("/D") === 0) {
             date = dateRegExp.exec(value);
             if (date) {
-                return new Date(parseInt(date[1], 10));
+                date = date[1];
+
+                tzoffset = tzOffsetRegExp.exec(date);
+                date = parseInt(date, 10);
+
+                if (tzoffset) {
+                    date -= (parseInt(tzoffset[0], 10) * kendo.date.MS_PER_MINUTE);
+                }
+
+                return new Date(date);
             }
         }
 

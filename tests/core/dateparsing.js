@@ -1,5 +1,6 @@
 (function(){
 var parse = kendo.parseDate;
+var date;
 
 function isValidDate(year, month, day, date) {
     var isValid = true;
@@ -665,9 +666,16 @@ test("parseDate parses ISO format without need of format", function() {
 
 test("parseDate parses /Date(milliseconds)/ string", function() {
     var date = new Date();
-        dateString = "/Date(" + +date + ")/";
+    var dateString = "/Date(" + +date + ")/";
 
     equal(+parse(dateString), +date);
+});
+
+test("parseDate parses /Date(milliseconds+offset)/ string", function() {
+    var result = new Date(1390386182022);
+    var dateString = "/Date(1390393382022+0120)/";
+
+    equal(+parse(dateString), +result);
 });
 
 test("parseDate does not parse ISO8601 with format dd.MM.yyyy", function() {
