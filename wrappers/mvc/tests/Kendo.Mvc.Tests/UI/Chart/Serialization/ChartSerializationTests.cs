@@ -217,7 +217,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.DataSource.Transport.Read.Url = "/Action";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("\"dataSource\":{\"transport\":{\"prefix\":\"\",\"read\":{\"url\":\"/Action\",\"type\":\"POST\"}}");
+            output.ShouldContain("\"dataSource\":{\"type\":\"aspnetmvc-ajax\",\"transport\":{\"prefix\":\"\",\"read\":{\"url\":\"/Action\",\"type\":\"POST\"}}");
         }
 
         [Fact]

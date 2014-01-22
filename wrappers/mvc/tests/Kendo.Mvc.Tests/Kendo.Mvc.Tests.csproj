@@ -138,6 +138,11 @@
     <Compile Include="UI\Chart\Serialization\ChartFunnelSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ScatterErrorBarsSerializerTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxSerializationTests.cs" />
+    <Compile Include="UI\DataSource\ListViewAjaxDataSourceBuilderTests.cs" />
+    <Compile Include="UI\DataSource\SchedulerAjaxDataSourceBuilderTests.cs" />
+    <Compile Include="UI\DataSource\SchedulerWebApiDataSourceBuilderTests.cs" />
+    <Compile Include="UI\DataSource\WebApiDataSourceBuilderBaseTests.cs" />
+    <Compile Include="UI\DataSource\WebApiDataSourceBuilderTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceBuilderTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceTests.cs" />
@@ -157,6 +162,7 @@
     <Compile Include="UI\Scheduler\SchedulerEditableBuilderTests.cs" />
     <Compile Include="UI\Scheduler\SchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\SchedulerTestHelper.cs" />
+    <Compile Include="UI\DataSource\WebApiDataSourceBuilderBaseTestDouble.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesDefaultsBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineHtmlBuilderTests.cs" />
