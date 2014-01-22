@@ -1,5 +1,5 @@
 (function(f, define) {
-    define([ "./shape" ], f);
+    define([ "../location", "../../geometry" ], f);
 })(function() {
 
 (function ($, undefined) {

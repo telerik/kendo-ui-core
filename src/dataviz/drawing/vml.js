@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./svg" ], f);
+    define([ "./shapes" ], f);
 })(function(){
 
 (function ($) {

@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./attribution" ], f);
+    define([ "./location" ], f);
 })(function(){
 
 (function ($, undefined) {

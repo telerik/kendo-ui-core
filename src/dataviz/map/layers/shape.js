@@ -1,7 +1,7 @@
-(function(f, define){
-    define([ "../crs" ], f);
-})(function(){
-
+(function(f, define){
+    define([ "../location", "../../geometry", "../../drawing/shapes" ], f);
+})(function(){
+
 (function ($, undefined) {
     // Imports ================================================================
     var proxy = $.proxy,
@@ -353,5 +353,5 @@
     });
 
 })(window.kendo.jQuery);
-
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
