@@ -310,11 +310,19 @@ var __meta__ = {
             }
             return json;
         },
-        content: function (text) {
-            if (text !== undefined) {
-                text = text || "";
-                var bounds = this.bounds(),
-                    options = deepExtend(this.options.content, {text: text.toString(), width: bounds.width, height: bounds.height});
+        content: function (content) {
+             if (content !== undefined) {
+                var bounds = this.bounds();
+                if(kendo.diagram.Utils.isString(content)){
+                    this.options.content.text = content;
+                    options = deepExtend({text: "", width: bounds.width, height: bounds.height}, this.options.content);
+                }
+                else{
+                    options = deepExtend({text: "", width: bounds.width, height: bounds.height}, this.options.content);
+                    this.options.content = options;
+                }
+
+
                 if (this.shapeVisual instanceof TextBlock) {
                     this._contentVisual = this.shapeVisual;
                 }
