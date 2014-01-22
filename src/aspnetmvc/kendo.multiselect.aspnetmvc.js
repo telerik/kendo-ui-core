@@ -4,7 +4,10 @@
 
     if (ui && ui.MultiSelect) {
         ui.MultiSelect.requestData = function (selector) {
-            return { text: $(selector).data("kendoMultiSelect").input.val() };
+            var multiselect = $(selector).data("kendoMultiSelect");
+            var text = multiselect.input.val();
+            
+            return { text: text !== multiselect.options.placeholder ? text : "" };
         };
     }
 
