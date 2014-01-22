@@ -77,13 +77,13 @@ var __meta__ = {
         },
 
         refresh: function() {
-            var that = this;
+            var that = this,
+                handleWidth = that.handle.outerWidth(true)
 
             that.width = that.wrapper.width();
-            that.handleWidth = that.handle.outerWidth(true);
 
-            that.constrain = that.width - that.handleWidth;
-            that.snapPoint = that.width / 2 - that.handleWidth / 2;
+            that.constrain  = that.width - handleWidth;
+            that.snapPoint = that.constrain / 2;
 
             if (typeof that.origin != "number") {
                 that.origin = parseInt(that.background.css(MARGINLEFT), 10);
