@@ -40,7 +40,7 @@
             desktop and mobile web applications by leveraging your web
             development skills while unlocking the power of JavaScript,
             HTML5 &amp;amp; CSS3, and using the intuitive &lt;br /&gt;
-            &lt;a href=&quot;http://www.kendoui.com/web.aspx&quot; title=&quot;Kendo UI Web&quot;&gt;Kendo UI Web&lt;/a&gt;.
+            &lt;a href=&quot;http://www.telerik.com/kendo-ui-web&quot; title=&quot;Kendo UI Web&quot;&gt;Kendo UI Web&lt;/a&gt;.
         &lt;/p&gt;
     </kendo:editor-value>
 </kendo:editor>
@@ -54,7 +54,7 @@
             and deliver unmatched user experience without any extra coding.
         &lt;/p&gt;
         &lt;p&gt;
-            &lt;a href=&quot;http://www.kendoui.com/mobile.aspx&quot; title=&quot;Kendo UI Mobile&quot;&gt;Kendo UI Mobile&lt;/a&gt;
+            &lt;a href=&quot;http://www.telerik.com/kendo-ui-mobile&quot; title=&quot;Kendo UI Mobile&quot;&gt;Kendo UI Mobile&lt;/a&gt;
             is packed with easy-to-use jQuery-based widgets and built-in
             rich components for your fast mobile application development.
         &lt;/p&gt;
@@ -72,7 +72,7 @@
             including jQuery charts, gauges, and more.
         &lt;/p&gt;
         &lt;p&gt;
-            &lt;a href=&quot;http://www.kendoui.com/dataviz.aspx&quot; title=&quot;Kendo UI DataViz&quot;&gt;Kendo UI DataViz&lt;/a&gt;
+            &lt;a href=&quot;http://www.telerik.com/kendo-ui-dataviz&quot; title=&quot;Kendo UI DataViz&quot;&gt;Kendo UI DataViz&lt;/a&gt;
             uses automatic hardware acceleration for all animations and rendering,
             maximizing performance and minimizing the impact on CPU resources.
         &lt;/p&gt;

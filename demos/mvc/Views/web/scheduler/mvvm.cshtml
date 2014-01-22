@@ -1,8 +1,7 @@
 <div id="example" class="k-content">
     <div class="configuration-horizontal">
         <div class="config-section">
-            <span class="configHead">Scheduler</span>
-            <p>Add an event</p>
+            <span class="configHead">Add an event</span>
             <div data-role="scheduler"
                  data-views="['day']"
                  data-bind="source: tasks,
@@ -10,11 +9,11 @@
                             events: {
                               save: onSave
                             }"
-                 style="width: 430px; height: 600px"></div>
+                 style="width: 480px; height: 400px"></div>
         </div>
-        <div class="config-section" style="width: 200px">
+        <div class="config-section console-section">
             <div class="configHead">Console</div>
-            <div class="console"></div>
+            <div class="console" style="height: 400px;"></div>
         </div>
     </div>
     <div class="configuration-horizontal">
@@ -27,9 +26,9 @@
         <div class="config-section" style="width: 440px">
             <span class="configHead">Information</span>
             Kendo UI Scheduler supports the
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a> and
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
         </div>
     </div>
 <script>
@@ -42,19 +41,19 @@
             batch: true,
             transport: {
                 read: {
-                    url: "http://demos.kendoui.com/service/tasks",
+                    url: "http://demos.telerik.com/kendo-ui/service/tasks",
                     dataType: "jsonp"
                 },
                 update: {
-                    url: "http://demos.kendoui.com/service/tasks/update",
+                    url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
                     dataType: "jsonp"
                 },
                 create: {
-                    url: "http://demos.kendoui.com/service/tasks/create",
+                    url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
                     dataType: "jsonp"
                 },
                 destroy: {
-                    url: "http://demos.kendoui.com/service/tasks/destroy",
+                    url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
                     dataType: "jsonp"
                 },
                 parameterMap: function(options, operation) {

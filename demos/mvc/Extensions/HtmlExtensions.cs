@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using Kendo.Models;
+using System.Collections.Specialized;
 
 namespace Kendo.Extensions
 {
@@ -10,21 +13,20 @@ namespace Kendo.Extensions
         public static IHtmlString SuiteLink(this HtmlHelper html, string suite, string title = "", string cssClass = "")
         {
             title = string.IsNullOrEmpty(title) ? suite : title;
-            suite = suite.ToLowerInvariant();
-            var Url = new UrlHelper(html.ViewContext.RequestContext);
-            var viewBag = html.ViewContext.Controller.ViewBag;
-            var selectedClass = viewBag.Suite == suite ? " selected" : "";
-            var href = "~/" + suite;
 
-            if (suite != "mobile") {
-                href = "~/" + suite + "/overview/index.html";
-            }
+            suite = suite.ToLowerInvariant();
+
+            var Url = new UrlHelper(html.ViewContext.RequestContext);
+
+            var viewBag = html.ViewContext.Controller.ViewBag;
+
+            var selectedClass = viewBag.Suite == suite ? " selected" : "";
 
             return html.Raw(
                 string.Format("<a id=\"{0}\" class=\"{1}\" href=\"{2}\">{3}</a>",
                     suite,
                     (cssClass + selectedClass).Trim(),
-                    Url.Content(href),
+                    Url.Suite(suite),
                     title
                 )
             );
@@ -38,6 +40,138 @@ namespace Kendo.Extensions
             }
 
             return html.Raw("");
+        }
+        
+        public static IHtmlString ExampleLink(this HtmlHelper html, NavigationExample example, string suite)
+        {
+            var Url = new UrlHelper(html.ViewContext.RequestContext);
+
+            var href = Url.Content("~/" + suite + "/" + example.Url);
+
+            href = Url.ApplyProduct(href);
+
+            return html.Raw(string.Format("<a {0} {1} href=\"{2}\">{3}</a>",
+                    example.New ? "class=\"new-example\"" : "",
+                    example.External ? "rel=\"external\"" : "",
+                    href,
+                    example.Text
+            ));
+        }
+
+        public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget, string category)
+        {
+            var Url = new UrlHelper(html.ViewContext.RequestContext);
+
+            var viewBag = html.ViewContext.Controller.ViewBag;
+
+            var href = Url.Content("~/" + (string)viewBag.Suite + "/" + widget.Items[0].Url);
+
+            href = Url.ApplyProduct(href);
+
+            category = category.ToLower();
+
+            var className = "";
+
+            if (widget.Beta)
+            {
+                className = "beta-widget";
+            }
+            else if (widget.New)
+            {
+                className = "new-widget";
+            }
+            else if (widget.Text == "Theme Builder")
+            {
+                className = "theme-builder";
+            }
+
+            var text = widget.Text;
+            if (widget.Tablet)
+            {
+                text += "(tablet)";
+            }
+
+            var target = "";
+
+            if (category.Contains("application") || category.Contains("custom themes"))
+            {
+                target = "_blank";
+            }
+
+            return html.Raw(
+                string.Format("<a class=\"{0}\" href=\"{1}\" target=\"{2}\">{3}</a>",
+                    className,
+                    href,
+                    target,
+                    text
+                )
+            );
+        }
+
+        public static bool MergesWithNext(this HtmlHelper html, string category)
+        {
+            category = category.ToLower();
+
+            return category.Contains("applications") || category.Contains("gauges") || category.Contains("financial");
+        }
+
+        public static string NavigationWrapperClass(this HtmlHelper html, string category)
+        {
+            var classNames = new List<string> { "floatWrap" };
+
+            category = category.ToLower();
+
+            if (category.Contains("ui") || category.Contains("dashboard"))
+            {
+                classNames.Add("wideCol");
+            }
+            else
+            {
+                classNames.Add("narrowCol");
+            }
+
+            if (category.Contains("application") || category.Contains("dashboard"))
+            {
+                classNames.Add("dashboards");
+            }
+            else if (category.Contains("themes"))
+            {
+                classNames.Add("custom-themes");
+            }
+            else if (category.Equals("framework"))
+            {
+                classNames.Add("framework");
+            }
+            else if (category.Contains("mobile widgets"))
+            {
+                classNames.Add("mobile-widgets");
+            }
+            else if (category.Contains("mobile framework"))
+            {
+                classNames.Add("mobile-framework");
+            }
+            else if (category.Contains("chart"))
+            {
+                classNames.Add("chart");
+            }
+            else if (category.Contains("gauges"))
+            {
+                classNames.Add("gauges");
+            }
+            else if (category.Contains("qr codes"))
+            {
+                classNames.Add("qrcodes");
+            }
+            else if (category.Contains("financial"))
+            {
+                classNames.Add("financial");
+            }
+            else if (category.Contains("geoviz"))
+            {
+                classNames.Add("geoviz");
+            }
+
+            return String.Join(" ", classNames);
         }
     }
 }

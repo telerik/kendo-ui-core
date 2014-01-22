@@ -695,6 +695,13 @@ namespace :build do
         task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
     end
 
+    namespace :rebranding do
+        desc 'Update the /rebranding build machine web site'
+        task :demos => [ 'demos:staging', 'download_builder:staging' ] do
+            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/rebranding/"
+        end
+    end
+
     namespace :master do
         desc 'Runs test suite over the master branch'
         task :tests => ["tests:CI", "vsdoc:master:test", "intellisense:master:test", "type_script:master:test"]

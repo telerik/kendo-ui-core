@@ -174,15 +174,15 @@
 <style scoped>
     h3 {
         font: normal 16px/1.5 Arial,sans-serif;
-        margin: 20px 0 13px;
+        margin: 20px 0 13px;       
     }
-
-    #instructions-box {
-        border-left: 5px solid rgba(0,0,0,.5);
-        padding-left: 1em;
-        margin-left: 2%;
+    
+    #instructions-box h3
+    {
+        margin: 20px 0 13px 20px;
+        font-weight: bold;
     }
-
+     
     #instructions-list li {
         padding: .4em 0;
     }
@@ -397,7 +397,7 @@
             value: 2000
         }]);
 
-        var serviceBaseUrl = "http://demos.kendoui.com/service";
+        var serviceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
         $("#scheduler").kendoScheduler({
             date: new Date("2013/6/13"),
             startTime: new Date("2013/6/13 07:00 AM"),

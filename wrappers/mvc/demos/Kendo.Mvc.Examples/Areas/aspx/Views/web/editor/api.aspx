@@ -45,8 +45,8 @@
                 &lt;li&gt;Gracefully degrades to a &lt;code&gt;textarea&lt;/code&gt; when JavaScript is turned off&lt;/li&gt;
             &lt;/ul&gt;
             &lt;p&gt;
-                Read &lt;a href="http://www.kendoui.com/documentation/introduction.aspx"&gt;more details&lt;/a&gt; or send us your
-                &lt;a href="http://www.kendoui.com/forums.aspx"&gt;feedback&lt;/a&gt;!
+                Read &lt;a href="http://docs.telerik.com/kendo-ui"&gt;more details&lt;/a&gt; or send us your
+                &lt;a href="http://www.telerik.com/forums"&gt;feedback&lt;/a&gt;!
             &lt;/p&gt;
       <% })
          .Render();

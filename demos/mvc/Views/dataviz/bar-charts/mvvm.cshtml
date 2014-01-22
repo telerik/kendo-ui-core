@@ -1,22 +1,20 @@
 <div id="example" class="k-content">
     <div class="configuration-horizontal">
         <div class="config-section" style="width: 440px">
-            <span class="configHead">Chart</span>
-            <p>Hover some series</p>
+            <span class="configHead">Hover some series</span>
             <div data-role="chart"
-                 data-title="{ text: 'Spain electricity production' }"
-                 data-legend="{ position: 'top' }"
+                 data-legend="{ position: 'bottom' }"
                  data-series-defaults="{ type: 'column' }"
                  data-series="[
-                                 { field: 'nuclear', name: 'Nuclear' },
-                                 { field: 'hydro', name: 'Hydro' },
-                                 { field: 'wind', name: 'Wind' }
+                                 { field: 'nuclear', name: 'Nuclear electricity' },
+                                 { field: 'hydro', name: 'Hydro electricity' },
+                                 { field: 'wind', name: 'Wind electricity' }
                              ]"
                  data-bind="visible: isVisible,
                             source: electricity,
                             events: { seriesHover: onSeriesHover }"></div>
         </div>
-        <div class="config-section" style="width: 200px">
+        <div class="config-section console-section">
             <div class="configHead">Console</div>
             <div class="console"></div>
         </div>
@@ -31,9 +29,9 @@
         <div class="config-section" style="width: 440px">
             <span class="configHead">Information</span>
             Kendo UI Chart supports the
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a> and
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
         </div>
     </div>
 <script>

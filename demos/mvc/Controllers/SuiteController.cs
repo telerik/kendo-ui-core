@@ -5,13 +5,14 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using Kendo.Models;
+using Kendo.Extensions;
 
 namespace Kendo.Controllers
 {
     public class SuiteController : BaseController
     {
         private List<string> examplesUrl = new List<string>();
-        protected static readonly string docsURL = "http://docs.kendoui.com/api/{0}/{1}";
+        protected static readonly string docsURL = "http://docs.telerik.com/kendo-ui/api/{0}/{1}";
 
         protected static readonly IDictionary<String, String> Docs =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
@@ -112,7 +113,7 @@ namespace Kendo.Controllers
         {
             var isMobileDevice = IsMobileDevice();
 
-            var redirect = RedirectPermanent(Url.Action("Index", new { suite = suite, section = section, example = "index" }));
+            var redirect = Redirect(Url.ApplyProduct(Url.Action("Index", new { suite = suite, section = section, example = "index" })));
 
             if (suite == "mobile" && isMobileDevice)
             {

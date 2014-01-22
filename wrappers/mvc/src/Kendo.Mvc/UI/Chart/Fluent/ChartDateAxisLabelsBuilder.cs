@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         /// <summary>
         /// Culture to use for formatting the dates.
-        /// See <a href="http://www.kendoui.com/documentation/framework/globalization/overview.aspx">Globalization</a>
+        /// See <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/globalization/overview">Globalization</a>
         /// for more information.
         /// </summary>
         /// <param name="configurator">Culture to use for formatting the dates.</param>

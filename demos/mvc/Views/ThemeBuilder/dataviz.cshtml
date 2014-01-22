@@ -62,14 +62,14 @@
 
     h3 {
         font: normal 16px/1.5 Arial,sans-serif;
-        margin: 20px 0 13px;
+        margin: 20px 0 13px 20px;
     }
 
-    #instructions-box {
-        border-left: 5px solid rgba(0,0,0,.5);
-        padding-left: 1em;
-        margin-left: 2%;
+    #instructions-box h3
+    {
+        font-weight: bold;
     }
+     
 
     #instructions-list li {
         padding: .4em 0;
@@ -135,7 +135,7 @@
                 text: "Hybrid car mileage report"
             },
             legend: {
-                position: "top"
+                position: "bottom"
             },
             series: [{
                 type: "column",
@@ -170,6 +170,9 @@
 
         $("#bubble-chart").kendoChart({
             transitions: false,
+            title: {
+                text: "Crime statistics"
+            },
             legend: {
                 visible: false
             },
@@ -221,9 +224,15 @@
                     template: "#= text # (#= value #%)"
                 }
             },
+            seriesDefaults: {
+                labels: {
+                    visible: true,
+                    background: "transparent"
+                }
+            },
             series: [{
                 type: "pie",
-                data: [ {
+                data: [{
                     category: "Hydro",
                     value: 22
                 }, {
@@ -235,7 +244,7 @@
                 }, {
                     category: "Wind",
                     value: 27
-                } ]
+                }]
             }],
             tooltip: {
                 visible: true,

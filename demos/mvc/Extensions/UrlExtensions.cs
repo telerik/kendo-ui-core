@@ -22,6 +22,32 @@ namespace Kendo.Extensions
             return ResourceUrl(url, "js", file);
         }
 
+        public static string Suite(this UrlHelper url, string suite)
+        {
+            suite = suite.ToLowerInvariant();
+
+            var href = "~/" + suite;
+
+            if (suite != "mobile")
+            {
+                href = "~/" + suite + "/overview/index.html";
+            }
+
+            return url.Content(url.ApplyProduct(href));
+        }
+
+        public static string ApplyProduct(this UrlHelper url, string href)
+        {
+            var product = url.RequestContext.HttpContext.Request.QueryString.ToString().Replace("&nav=true", "").Replace("nav=true", "");
+
+            if (!string.IsNullOrEmpty(product))
+            {
+                return href + "?" + product;
+            }
+
+            return href;
+        }
+
         public static string Style(this UrlHelper url, string file)
         {
             return ResourceUrl(url, "styles", file);

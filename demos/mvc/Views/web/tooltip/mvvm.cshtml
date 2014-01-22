@@ -6,11 +6,11 @@
                   title="Hello!"
                   data-role="tooltip"
                   data-auto-hide="false"
-                  data-position="right"
+                  data-position="top"
                   data-bind="events: { show: onShow, hide: onHide }"
             >Hover me!</span>
         </div>
-        <div class="config-section" style="width: 400px">
+        <div class="config-section console-section">
             <div class="configHead">Console</div>
             <div class="console"></div>
         </div>
@@ -19,7 +19,7 @@
         <div class="config-section" style="width: 440px">
             <span class="configHead">Information</span>
             Kendo UI Tooltip supports the
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> binding.
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a> binding.
         </div>
     </div>
 <script>
@@ -33,4 +33,12 @@
     });
     kendo.bind($("#example"), viewModel);
 </script>
+<style scoped>
+    .key-button {
+        margin: 40px 60px;
+        width: 300px;
+        height: 100px;
+        line-height: 100px;
+    }
+</style>
 </div>

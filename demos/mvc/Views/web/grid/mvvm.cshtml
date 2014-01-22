@@ -1,8 +1,7 @@
 <div id="example" class="k-content">
     <div class="configuration-horizontal">
         <div class="config-section">
-            <span class="configHead">Grid</span>
-            <p>Add or update a record</p>
+            <span class="configHead">Add or update a record</span>
             <div data-role="grid"
                  date-scrollable="true"
                  data-editable="true"
@@ -16,9 +15,9 @@
                             events: {
                               save: onSave
                             }"
-                 style="width: 380px; height: 200px"></div>
+                 style="width: 480px; height: 200px"></div>
         </div>
-        <div class="config-section" style="width: 200px">
+        <div class="config-section console-section">
             <div class="configHead">Console</div>
             <div class="console"></div>
         </div>
@@ -33,9 +32,9 @@
         <div class="config-section" style="width: 440px">
             <span class="configHead">Information</span>
             Kendo UI Grid supports the
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a> and
-            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
         </div>
     </div>
 <script>
@@ -53,15 +52,15 @@
             batch: true,
             transport: {
                 read: {
-                    url: "http://demos.kendoui.com/service/products",
+                    url: "http://demos.telerik.com/kendo-ui/service/products",
                     dataType: "jsonp"
                 },
                 update: {
-                    url: "http://demos.kendoui.com/service/products/update",
+                    url: "http://demos.telerik.com/kendo-ui/service/products/update",
                     dataType: "jsonp"
                 },
                 create: {
-                    url: "http://demos.kendoui.com/service/products/create",
+                    url: "http://demos.telerik.com/kendo-ui/service/products/create",
                     dataType: "jsonp"
                 },
                 parameterMap: function(options, operation) {
