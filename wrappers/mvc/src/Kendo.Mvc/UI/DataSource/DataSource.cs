@@ -37,6 +37,23 @@ namespace Kendo.Mvc.UI
                 Transport.Read.Url = "";
             }
 
+            if (Type != null)
+            {
+                if (Type == DataSourceType.Ajax || Type == DataSourceType.Server)
+                {
+                    json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
+                }
+                else
+                {
+                    json["type"] = Type.ToString().ToLower();
+
+                    if (Type == DataSourceType.WebApi && Schema.Model.Id != null)
+                    {
+                        Transport.IdField = Schema.Model.Id.Name;
+                    }
+                }
+            }
+
             var transport = Transport.ToJson();
 
             if (transport.Keys.Any())
@@ -74,18 +91,6 @@ namespace Kendo.Mvc.UI
             if (ServerAggregates)
             {
                 json["serverAggregates"] = ServerAggregates;
-            }
-
-            if (Type != null)
-            {
-                if (Type == DataSourceType.Ajax || Type == DataSourceType.Server)
-                {
-                    json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
-                }
-                else
-                {
-                    json["type"] = Type.ToString().ToLower();
-                }
             }
 
             if (OrderBy.Any())
@@ -133,7 +138,7 @@ namespace Kendo.Mvc.UI
                     { Schema.Total, Total }
                 };
             }
-            else if (Type == DataSourceType.Ajax && !IsClientOperationMode && Data != null)
+            else if (IsClientBinding && !IsClientOperationMode && Data != null)
             {
                 json["data"] = new Dictionary<string, object>()
                 {
@@ -165,7 +170,15 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Type == DataSourceType.Ajax && !(ServerPaging && ServerSorting && ServerGrouping && ServerFiltering && ServerAggregates);
+                return IsClientBinding && !(ServerPaging && ServerSorting && ServerGrouping && ServerFiltering && ServerAggregates);
+            }
+        }
+
+        public bool IsClientBinding
+        {
+            get
+            {
+                return Type == DataSourceType.Ajax || Type == DataSourceType.WebApi;
             }
         }
 

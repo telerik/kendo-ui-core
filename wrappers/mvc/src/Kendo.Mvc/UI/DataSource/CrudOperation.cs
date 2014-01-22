@@ -23,6 +23,7 @@ namespace Kendo.Mvc.UI
             value = Regex.Replace(value, "(%20)*%23(%20)*", "#", RegexOptions.IgnoreCase);
             value = Regex.Replace(value, "(%20)*%24%7B(%20)*", "${", RegexOptions.IgnoreCase);
             value = Regex.Replace(value, "(%20)*%7D(%20)*", "}", RegexOptions.IgnoreCase);
+            value = Regex.Replace(value, "(%20)*%7B0(%20)*", "{0", RegexOptions.IgnoreCase);
 
             return value;
         }

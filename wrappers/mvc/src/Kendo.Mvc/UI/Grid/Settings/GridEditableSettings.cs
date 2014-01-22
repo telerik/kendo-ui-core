@@ -233,7 +233,7 @@ namespace Kendo.Mvc.UI
                 //TODO: Implement GridBeginEditEvent option                
                 //.Add("beginEdit", BeginEdit == GridBeginEditEvent.Click ? "click" : "dblclick", () => BeginEdit != GridBeginEditEvent.Auto)                               
                 .Add("createAt", CreateAt.ToString().ToLower(), () => CreateAt != GridInsertRowPosition.Top)
-                .Add("window", SerializePopUp(), () => Mode == GridEditMode.PopUp && grid.DataSource.Type == DataSourceType.Ajax)
+                .Add("window", SerializePopUp(), () => Mode == GridEditMode.PopUp && IsClientBinding)
                 .Add("create", IsClientBinding)
                 .Add("update", IsClientBinding)
                 .Add("destroy", IsClientBinding);
@@ -243,7 +243,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return grid.DataSource.Type == DataSourceType.Ajax;
+                return grid.DataSource.Type == DataSourceType.Ajax || grid.DataSource.Type == DataSourceType.WebApi;
             }
         }
     }

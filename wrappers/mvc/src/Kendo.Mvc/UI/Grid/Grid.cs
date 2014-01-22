@@ -1242,7 +1242,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return DataSource.Type == DataSourceType.Ajax;                
+                return DataSource.Type == DataSourceType.Ajax || DataSource.Type == DataSourceType.WebApi;
             }
         }
         

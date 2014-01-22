@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI
     {
         Ajax,
         Server,
-        GeoJson
+        GeoJson,
+        WebApi
     }
 }

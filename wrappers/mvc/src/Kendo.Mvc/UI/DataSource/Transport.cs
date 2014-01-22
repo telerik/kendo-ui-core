@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI
 
         public string Prefix { get; set; }
         public bool StringifyDates { get; set; }
+        public string IdField { get; set; }
         
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -52,6 +53,11 @@ namespace Kendo.Mvc.UI
             if (StringifyDates)
             {
                 json["stringifyDates"] = true;
+            }
+
+            if (!string.IsNullOrEmpty(IdField))
+            {
+                json["idField"] = IdField;
             }
         }
 

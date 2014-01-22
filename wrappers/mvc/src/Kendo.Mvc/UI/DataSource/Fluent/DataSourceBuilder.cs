@@ -40,5 +40,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new ServerDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
+
+        /// <summary>
+        /// Use it to configure WebApi binding.
+        /// </summary>
+        public AjaxDataSourceBuilder<TModel> WebApi()
+        {
+            dataSource.Type = DataSourceType.WebApi;
+
+            return new AjaxDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
+        }
     }
 }

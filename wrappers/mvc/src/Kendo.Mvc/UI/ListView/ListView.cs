@@ -165,10 +165,18 @@
 
             if (AutoBind.HasValue)
             {
-                if (DataSource.Type != DataSourceType.Ajax || (DataSource.Type == DataSourceType.Ajax && DataSource.Data != null))
+                if (!IsClientBinding || (IsClientBinding && DataSource.Data != null))
                 {
                     throw new NotSupportedException(Exceptions.CannotSetAutoBindIfBoundDuringInitialization);
                 }
+            }
+        }
+
+        private bool IsClientBinding
+        {
+            get
+            {
+                return DataSource.Type == DataSourceType.Ajax || DataSource.Type == DataSourceType.WebApi;
             }
         }
 

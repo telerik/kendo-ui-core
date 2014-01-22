@@ -263,9 +263,9 @@
             return this;
         }
 
-        public ListViewBuilder<T> DataSource(Action<AjaxDataSourceBuilder<T>> configurator)
+        public ListViewBuilder<T> DataSource(Action<ListViewAjaxDataSourceBuilder<T>> configurator)
         {
-            configurator(new AjaxDataSourceBuilder<T>(Component.DataSource, Component.ViewContext, Component.UrlGenerator));
+            configurator(new ListViewAjaxDataSourceBuilder<T>(Component.DataSource, Component.ViewContext, Component.UrlGenerator));
 
             return this;
         }
