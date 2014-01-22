@@ -147,7 +147,7 @@ tree :to => SPRING_DEMOS_RESOURCES,
      :root => 'demos/mvc/content/'
 
 tree :to => SPRING_DEMOS_RESOURCES + "js",
-     :from => FileList[MIN_JS].include('dist/js/jquery.min.js'),
+     :from => COMPLETE_MIN_JS,
      :root => DIST_JS_ROOT
 
 tree :to => SPRING_DEMOS_RESOURCES + "css",
