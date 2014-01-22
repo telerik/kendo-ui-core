@@ -36,10 +36,11 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
 
             that._wrapper();
-            that._drag();
             that._background();
-            that.origin = parseInt(that.background.css(MARGINLEFT), 10);
             that._handle();
+
+            that._drag();
+            that.origin = parseInt(that.background.css(MARGINLEFT), 10);
 
             that.constrain = 0;
             that.snapPoint = 0;
