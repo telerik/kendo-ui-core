@@ -1,8 +1,23 @@
 :options:
     - :name: type
       :type: String
-      :description: The layout type
+      :description: The type of the layout algorythm to use.
       :values:
           - tree - organizes a diagram in a hierarchical way and is typically used in organizational representations.
           - force - The force-directed layout algorithm (also known as the spring-embedder algorithm) is based on a physical simulation of forces acting on the nodes whereby the links define whether two nodes act upon each other. Each link effectively is like a spring embedded in the diagram. The simulation attempts to find a minimum energy state in such a way that the springs are in their base-state and thus do not pull or push any (linked) node.
           - layered - Layered graph layout is a type of graph layout in which the nodes of a (directed) graph are drawn in horizontal or vertical layers with the links directed in the complementary direction. It is also known as Sugiyama or hierarchical graph layout. When the graph is a tree the layout reduces to a standard tree layout and thus can be considered as an extension to the classic tree layout.
+    - :name: subtype
+      :type: String
+      :description: The subtype further defines the layout type by specifying in greater detail the behaviour expected by the layout algorithm.
+      :values:
+          - down - tree layout specific subtype. The tree is arranged with the root at the top and its children downwards.
+          - up - tree layout specific subtype. The tree is arranged with the root at the bottom and its children upwards.
+          - left - tree layout specific subtype. The tree is arranged with the root at the left and its children sideways to the right.
+          - right - tree layout specific subtype. The tree is arranged with the root at the right and its children sideways to the left. 
+          - mindmapHorizontal - tree layout specific subtype. The root sits at the center and its children are spread equally to the left and right.
+          - mindmapVertical - tree layout specific subtype. The root sits at the center and its children are spread equally above and below.
+          - radial - tree layout specific subtype. The root sits at the center and its children are spread radially around.
+          - tipOver - tree layout specific subtype. A special version of the tree-down layout where the grand-children (and iteratively) are arranged vertically while the direct children are arranged horizontally. This arrangement has the advantage that it doesn't spread as much as the classic tree-down layout. See below for a concrete example.
+          - horizontal - layered layout specific subtype. The preferred direction of the links is horizontal.
+          - vertical - layered layout specific subtype. The preferred direction of the links is vertical.
+
