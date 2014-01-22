@@ -35,7 +35,7 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
 }
 ')
 
-      PROPERTY_TEMPLATE = ERB.new('
+      PROPERTY_WITH_DEFAULT_VALUE_TEMPLATE = ERB.new('
     /// <summary>
     /// <%= description %>
     /// </summary>
@@ -45,6 +45,22 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
       get
       {
         return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"] ?? <%= csharp_default %>);
+      }
+      set
+      {
+        ViewState["<%= name.pascalize %>"] = value;
+      }
+    }')
+
+      PROPERTY_TEMPLATE = ERB.new('
+    /// <summary>
+    /// <%= description %>
+    /// </summary>
+    public <%= csharp_type %> <%= name.pascalize %>
+    {
+      get
+      {
+        return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"]);
       }
       set
       {
@@ -151,7 +167,8 @@ namespace --NamespacePlaceHolder--
         end
 
         def to_declaration
-            PROPERTY_TEMPLATE.result(get_binding)
+            return PROPERTY_WITH_DEFAULT_VALUE_TEMPLATE.result(get_binding) if csharp_default
+            return PROPERTY_TEMPLATE.result(get_binding)
         end
 
         def csharp_default
