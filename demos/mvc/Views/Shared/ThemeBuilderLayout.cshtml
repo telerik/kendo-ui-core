@@ -21,8 +21,9 @@
 <body>
     @Html.Partial("Telerik-Navigation")
     @Html.Partial("Header")
+    <div class="brand-line"></div>
+    <div id="example" class="themebuilder-layout">
 
-    <div id="example" class="floatWrap centerWrap">
         <div id="themebuilder-chooser">
             <a href="web.html"@(Html.ActiveSuiteClass(Url.Content("themebuilder/web")))><img src="@Url.Content("~/content/shared/images/themebuilder-web-logo.png")" alt="ThemeBuilder for Kendo UI Web"></a>
             <a href="dataviz.html"@(Html.ActiveSuiteClass(Url.Content("themebuilder/dataviz")))><img src="@Url.Content("~/content/shared/images/themebuilder-dataviz-logo.png")" alt="ThemeBuilder for Kendo UI DataViz"></a>
@@ -34,5 +35,19 @@
 
     @Html.Partial("Footer")
     <script src="@Url.Content("~/content/shared/js/telerik-navigation.js")"></script>
+
+    <style>
+   #instructions-box,
+   .themebuilder-layout>.k-content,
+   #mobile-landing {
+       width: 1170px;
+       margin: 0 auto;
+       padding: 0 0 15px 12px;
+    }
+        
+   #example.themebuilder-layout {
+       padding: 0;
+   }
+    </style>
 </body>
 </html>

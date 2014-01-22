@@ -23,7 +23,7 @@ body,h1,h2,h3,p,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#
 
 body {
     background-color: #fff;
-    color: #e0e0e0;
+    color: #555;
     font: 400 12px Arial, Helvetica, sans-serif;
     min-width: 1230px;
 }
@@ -3126,10 +3126,16 @@ div.old-browser
     border-bottom: 1px solid #e1e1e1;
 }
 
+.brand-line 
+{
+    border-bottom:4px solid #2db245;
+}
+
 #themebuilder-chooser {
     text-align: center;
     font: italic 14px 'Lucida Sans',serif;
     color: #8e8e8e;
+    background-color: #f3f5f7;
 }
 
 #themebuilder-chooser a {
@@ -3157,10 +3163,10 @@ div.old-browser
     box-shadow: inset 0 1px 5px #aaa, inset 0 0 20px #bcbcbc;
 }
 
-.separator-shadow {
+/*.separator-shadow {
     background: url("../images/separator-shadow.jpg") no-repeat 50% 0;
     height: 60px;
-}
+}*/
 
 #mobile-landing {
     background: url("../images/mobile-landing.jpg") no-repeat 50% 0;
