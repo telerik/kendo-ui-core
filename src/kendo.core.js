@@ -12,7 +12,7 @@
         support = {},
         percentRegExp = /%/,
         formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
-        boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
+        boxShadowRegExp = /(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+(?:\.?)\d*)px\s*(\d+)?/i,
         numberRegExp = /^(\+|-?)\d+(\.?)\d*$/,
         FUNCTION = "function",
         STRING = "string",
