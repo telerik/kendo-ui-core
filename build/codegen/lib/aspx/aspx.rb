@@ -85,6 +85,41 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         }
     ')
 
+    COLLECTION_TEMPLATE = ERB.new('
+    private <%= csharp_class %> _<%= name %>;
+    /// <summary>
+    /// <%= description %>
+    /// </summary>
+    [DefaultValue(<%= csharp_default %>)]
+    [PersistenceMode(PersistenceMode.InnerProperty)]
+    public <%= csharp_class %> <%= name.pascalize %>
+    {
+      get
+      {
+        if (this._<%= name %> == null)
+        {
+            this._<%= name %> = new <%= csharp_class %>();
+        }
+        return this._<%= name %>;
+      }
+    }
+')
+    ARRAY_ITEM_CLASS_TEMPLATE = ERB.new('
+namespace --NamespacePlaceHolder--
+{
+    /// <summary>
+    /// --DescriptionPlaceHolder--
+    /// </summary>
+    public class <%= csharp_class %>
+    {
+        public <%= csharp_class %>() {}
+
+        #region [ Properties ]
+        #endregion [ Properties ]
+    }
+}
+')
+
     module Options
         def component_class
             Component
@@ -171,16 +206,35 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         end
     end
 
-    class ArrayOption < CodeGen::ArrayOption
-        include Options
+    class ArrayOption < CompositeOption
+        include Options, CodeGen::Array
+
+        def item_class
+            ArrayItem
+        end
 
         def csharp_class
-            prefix = owner.csharp_class.sub('Collection', '')
-            "#{prefix}#{name.pascalize}Collection"
+            "List<#{item.csharp_class}>"
+        end
+
+        def csharp_default
+            'null'
         end
 
         def to_declaration
+            COLLECTION_TEMPLATE.result(binding)
+        end
 
+    end
+
+    class ArrayItem < CompositeOption
+
+        def csharp_class
+            "#{owner.owner.name.pascalize.sub('Collection', '')}#{name.pascalize}"
+        end
+
+        def to_class
+            ARRAY_ITEM_CLASS_TEMPLATE.result(binding)
         end
 
     end
@@ -203,7 +257,7 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
             composite.each do |item|
                 composite.push(*item.options) if item.composite?
 
-                enums.push(item) if !item.values.nil?
+                enums.push(item) if item.respond_to?(:values) && !item.values.nil?
             end
 
             enums
@@ -219,6 +273,7 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         end
 
         def component(component)
+
           write_class(component)
           write_enums(component)
           write_properties(component)
@@ -251,11 +306,6 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
 
           properties_content = write_options(component.options)
 
-          component.options.each do |option|
-              #debugger if option.is_a?(ArrayOption)
-            properties_content += option.to_declaration
-          end
-
           write_file(file_path, properties_content, '#region [ Properties ]')
         end
 
@@ -274,7 +324,12 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
         end
 
         def write_option(option)
-            write_composite_option_file(option) if option.class == CompositeOption
+            if option.class == CompositeOption && option.owner.class != ArrayItem
+                write_composite_option_file(option)
+            end
+            if option.class == ArrayOption
+                write_array_item_class(option.item)
+            end
  
             option.to_declaration
         end
@@ -283,6 +338,16 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
             composite_content = write_options(composite.options)
 
             create_file(File.join(@path, "#{composite.csharp_class}.cs"), composite_content)
+        end
+
+        def write_array_item_class(item)
+            file_name = File.join(@path, "#{item.csharp_class}.cs")
+
+            create_file(file_name, item.to_class)
+
+            content = write_options(item.options[0].options)
+
+            write_file(file_name, content, '#region [ Properties ]')
         end
 
         def write_file(file_path, content, marker)
