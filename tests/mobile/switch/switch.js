@@ -44,15 +44,6 @@
         equal(dom[0].type, "checkbox");
     });
 
-    test("Switch does not wraps the input twice", function() {
-        expect(1);
-        dom.wrap("<span />");
-
-        theSwitch = new Switch(dom);
-
-        equal(dom.parent("span").length, 1);
-    });
-
     test("Switch creates a toggle handle", function() {
         expect(1);
 

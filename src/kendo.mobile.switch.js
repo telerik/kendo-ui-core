@@ -234,15 +234,7 @@ var __meta__ = {
         },
 
         _wrapper: function() {
-            var that = this,
-                element = that.element,
-                wrapper = element.parent("span.km-switch");
-
-            if (!wrapper[0]) {
-                wrapper = element.wrap('<span class="km-switch"/>').parent();
-            }
-
-            that.wrapper = wrapper.addClass("km-widget");
+            this.wrapper = this.element.wrap('<span class="km-switch km-widget" />').parent();
         },
 
         _drag: function() {
