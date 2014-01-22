@@ -492,6 +492,12 @@ var __meta__ = {
         });
     }
 
+    function visibleStaticColumns(columns) {
+        return grep(columns, function(column) {
+            return column.static && !column.hidden;
+        });
+    }
+
     function appendContent(tbody, table, html) {
         var placeholder,
             tmp = tbody;
@@ -606,6 +612,29 @@ var __meta__ = {
             }
 
             cell = cells[++pad];
+        }
+    }
+
+    function hideColumnCells(rows, columnIndex) {
+        var idx = 0,
+            length = rows.length,
+            cell;
+
+        for ( ; idx < length; idx += 1) {
+            row = rows.eq(idx);
+            if (row.is(".k-grouping-row,.k-detail-row")) {
+                cell = row.children(":not(.k-group-cell):first,.k-detail-cell").last();
+                cell.attr("colspan", parseInt(cell.attr("colspan"), 10) - 1);
+            } else {
+                if (row.hasClass("k-grid-edit-row") && (cell = row.children(".k-edit-container")[0])) {
+                    cell = $(cell);
+                    cell.attr("colspan", parseInt(cell.attr("colspan"), 10) - 1);
+                    cell.find("col").eq(columnIndex).remove();
+                    row = cell.find("tr:first");
+                }
+
+                setCellVisibility(row[0].cells, columnIndex, false);
+            }
         }
     }
 
@@ -3924,21 +3953,23 @@ var __meta__ = {
             return this.staticHeader != null;
         },
 
-        _updateCols: function() {
-            var that = this;
+        _updateCols: function(table) {
+            table = table || this.thead.parent().add(this.table);
 
-            that._appendCols(that.thead.parent().add(that.table), that._isStatic());
+            this._appendCols(table, this._isStatic());
         },
 
-        _updateStaticCols: function() {
+        _updateStaticCols: function(table) {
             if (this._isStatic()) {
-                normalizeCols(this.staticHeader.find("table").add(this.staticTable), staticColumns(this.columns), this._hasDetails(), this._groups());
+                table = table || this.staticHeader.find("table").add(this.staticTable);
+
+                normalizeCols(table, visibleStaticColumns(this.columns), this._hasDetails(), this._groups());
             }
         },
 
         _appendCols: function(table, static) {
             if (static) {
-                normalizeCols(table, nonStaticColumns(this.columns), this._hasDetails(), 0);
+                normalizeCols(table, visibleNonStaticColumns(this.columns), this._hasDetails(), 0);
             } else {
                 normalizeCols(table, visibleColumns(this.columns), this._hasDetails(), this._groups());
             }
@@ -4151,8 +4182,6 @@ var __meta__ = {
 
         hideColumn: function(column) {
             var that = this,
-                rows,
-                row,
                 cell,
                 tables,
                 idx,
@@ -4162,6 +4191,7 @@ var __meta__ = {
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
+                visibleStatic = visibleStaticColumns(columns).length,
                 columnIndex;
 
             if (typeof column == "number") {
@@ -4184,55 +4214,50 @@ var __meta__ = {
             that._templates();
 
             that._updateCols();
-            setCellVisibility(that.thead.find(">tr")[0].cells, columnIndex, false);
+            that._updateStaticCols();
+            setCellVisibility(elements($(">table>thead", that.staticHeader), that.thead, ">tr>th"), columnIndex, false);
             if (footer[0]) {
-                that._appendCols(footer.find("table:first"));
-                setCellVisibility(footer.find(".k-footer-template")[0].cells, columnIndex, false);
+                that._updateCols(footer.find(">.k-grid-footer-wrap>table"));
+                that._updateStaticCols(footer.find(">.k-grid-footer-static>table"));
+                setCellVisibility(footer.find(".k-footer-template>td"), columnIndex, false);
             }
 
-            rows = that.tbody.children();
+            if (that.staticTable && visibleStatic > columnIndex) {
+                hideColumnCells(that.staticTable.find(">tbody>tr"), columnIndex);
+            } else {
+                hideColumnCells(that.tbody.children(), columnIndex - visibleStatic);
+            }
 
-            for (idx = 0, length = rows.length; idx < length; idx += 1) {
-                row = rows.eq(idx);
-                if (row.is(".k-grouping-row,.k-detail-row")) {
-                    cell = row.children(":not(.k-group-cell):first,.k-detail-cell").last();
-                    cell.attr("colspan", parseInt(cell.attr("colspan"), 10) - 1);
-                } else {
-                    if (row.hasClass("k-grid-edit-row") && (cell = row.children(".k-edit-container")[0])) {
-                        cell = $(cell);
-                        cell.attr("colspan", parseInt(cell.attr("colspan"), 10) - 1);
-                        cell.find("col").eq(columnIndex).remove();
-                        row = cell.find("tr:first");
+            if (that.staticTable) {
+                that._setStaticContainersWidth();
+                that._syncStaicContentHeight();
+            } else {
+                cols = that.thead.prev().find("col");
+                for (idx = 0, length = cols.length; idx < length; idx += 1) {
+                    colWidth = cols[idx].style.width;
+                    if (colWidth && colWidth.indexOf("%") == -1) {
+                        width += parseInt(colWidth, 10);
+                    } else {
+                        width = 0;
+                        break;
                     }
-
-                    setCellVisibility(row[0].cells, columnIndex, false);
                 }
-            }
 
-            cols = that.thead.prev().find("col");
-            for (idx = 0, length = cols.length; idx < length; idx += 1) {
-                colWidth = cols[idx].style.width;
-                if (colWidth && colWidth.indexOf("%") == -1) {
-                    width += parseInt(colWidth, 10);
-                } else {
-                    width = 0;
-                    break;
+                tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper)
+                .add(that.table);
+                that._footerWidth = null;
+
+                if (width) {
+                    tables.width(width);
+                    that._footerWidth = width;
                 }
-            }
 
-            tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
-            that._footerWidth = null;
-
-            if (width) {
-                tables.width(width);
-                that._footerWidth = width;
-            }
-
-            if(browser.msie && browser.version == 8) {
-                tables.css("display", "inline-table");
-                setTimeout(function() {
-                    tables.css("display", "table");
-                }, 1);
+                if(browser.msie && browser.version == 8) {
+                    tables.css("display", "inline-table");
+                    setTimeout(function() {
+                        tables.css("display", "table");
+                    }, 1);
+                }
             }
 
             that.trigger(COLUMNHIDE, { column: column });
@@ -4393,7 +4418,7 @@ var __meta__ = {
 
             if(that._group) {
                 that._templates();
-                that._updateCols(that._isStatic());
+                that._updateCols();
                 that._updateStaticCols();
                 that._updateHeader(groups);
                 that._group = groups > 0;

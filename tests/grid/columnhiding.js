@@ -664,4 +664,192 @@
         equal(grid.tbody.find("td:visible").length, 1, "visible column cells");
         equal(grid.tbody.find("td:not(:visible)").length, 2, "hidden column cells");
     });
+
+    test("hide static column header", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).is(":visible"), false);
+        equal(th.eq(1).is(":visible"), true);
+        equal(th.eq(2).is(":visible"), true);
+    });
+
+    test("hide non static column header in grid with static column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).is(":visible"), true);
+        equal(th.eq(1).is(":visible"), false);
+        equal(th.eq(2).is(":visible"), true);
+    });
+
+    test("hide static column col", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var cols = grid.wrapper.find("colgroup>col");
+        equal(cols.length, 4);
+        equal(cols[0].style.width, "20px");
+        equal(cols[1].style.width, "30px");
+        equal(cols[2].style.width, "20px");
+        equal(cols[3].style.width, "30px");
+    });
+
+    test("hide non static column col in grid with static column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var cols = grid.wrapper.find("colgroup>col");
+        equal(cols.length, 4);
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "30px");
+        equal(cols[2].style.width, "10px");
+        equal(cols[3].style.width, "30px");
+    });
+
+    test("hide static column footer", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var td = grid.wrapper.find(".k-footer-template>td");
+        equal(td.eq(0).is(":visible"), false);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("hide non static column footer in grid with static column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", footerTemplate: "bar" }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var td = grid.wrapper.find(".k-footer-template>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), false);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("hide static column footer col", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var cols = grid.footer.find("colgroup>col");
+        equal(cols.length, 2);
+        equal(cols[0].style.width, "20px");
+        equal(cols[1].style.width, "30px");
+    });
+
+    test("hide non static column footer col in grid with static column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", footerTemplate: "bar" }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var cols = grid.footer.find("colgroup>col");
+        equal(cols.length, 2);
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "30px");
+    });
+
+    test("hide static column cell", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var td = grid.staticTable.find("td").add(grid.table.find("td"));
+        equal(td.eq(0).is(":visible"), false);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("hide non static column cell in grid with static column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var td = grid.staticTable.find("td").add(grid.table.find("td"));
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), false);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("hide static column with grouping", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true }
+            ],
+            dataSource: {
+                group: { field: "foo" }
+            }
+        });
+
+        grid.hideColumn(0);
+        var td = grid.staticTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.staticTable.add(grid.table).find(".k-grouping-row>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), false);
+        equal(td.eq(2).is(":visible"), true);
+        equal(td.eq(3).is(":visible"), true);
+        equal(parseInt(groupCell.eq(0).attr("colspan"), 10), 1);
+        equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 2);
+    });
+
+    test("hide non static column in grid with static column and grouping", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true }
+            ],
+            dataSource: {
+                group: { field: "foo" }
+            }
+        });
+
+        grid.hideColumn(1);
+        var td = grid.staticTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.staticTable.add(grid.table).find(".k-grouping-row>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), false);
+        equal(td.eq(3).is(":visible"), true);
+        equal(parseInt(groupCell.eq(0).attr("colspan"), 10), 2);
+        equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 1);
+    });
 })();
