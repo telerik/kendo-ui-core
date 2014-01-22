@@ -70,12 +70,13 @@
             </style>
 
             <!--div style="width: 900px"-->
-                <div id="grid" style="width:1035px;"></div>
+                <div id="grid"></div>
             <!--/div-->
 
             <script>
                 $(document).ready(function () {
                     $("#grid").kendoGrid({
+                        height: 500,
                         dataSource: {
                             type: "odata",
                             transport: {

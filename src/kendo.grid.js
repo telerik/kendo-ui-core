@@ -2840,7 +2840,6 @@ var __meta__ = {
 
                 that.scrollables = header.children(".k-grid-header-wrap");
 
-
                 // the footer may exists if rendered from the server
                 var footer = that.wrapper.find(".k-grid-footer"),
                     webKitRtlCorrection = (isRtl && browser.webkit) ? scrollbar : 0;
@@ -2909,32 +2908,35 @@ var __meta__ = {
         },
 
         _setStaticContainersWidth: function() {
-            if (this.options.scrollable) {
-                if (this.staticHeader) {
-                    var columns = staticColumns(this.columns),
-                        headerWrap = this.thead.closest(".k-grid-header-wrap"),
-                        width = 0;
+            if (this.options.scrollable && this.staticHeader) {
+                var columns = staticColumns(this.columns),
+                    headerWrap = this.thead.closest(".k-grid-header-wrap"),
+                    contentWidth = this.wrapper[0].clientWidth,
+                    width = 0;
 
-                    for (var idx = 0, length = columns.length; idx < length; idx++) {
-                        width += columns[idx].width;
-                    }
+                for (var idx = 0, length = columns.length; idx < length; idx++) {
+                    width += columns[idx].width;
+                }
 
-                    if (width >= this.wrapper[0].clientWidth) {
-                        width = this.wrapper[0].clientWidth - kendo.support.scrollbar();
-                    }
+                if (width >= contentWidth) {
+                    width = contentWidth - kendo.support.scrollbar();
+                }
 
-                    this.staticHeader
-                        .add(this.staticContent)
-                        .width(width);
+                this.staticHeader
+                    .add(this.staticContent)
+                    .width(width);
 
-                    headerWrap[0].style.width = this.thead.closest(".k-grid-header").width() - width - 2 + "px";
+                headerWrap[0].style.width = this.thead.closest(".k-grid-header").width() - width - 2 + "px";
 
-                    this.content[0].style.width = this.wrapper[0].clientWidth - width - 1 + "px";
+                if (this.virtualScrollable) {
+                    contentWidth -= kendo.support.scrollbar();
+                }
 
-                    if (this.staticFooter && this.staticFooter.length) {
-                        this.staticFooter.width(width);
-                        this.footer.find(".k-grid-footer-wrap")[0].style.width = headerWrap[0].clientWidth + "px";
-                    }
+                this.content[0].style.width = contentWidth - width - 2 + "px";
+
+                if (this.staticFooter && this.staticFooter.length) {
+                    this.staticFooter.width(width);
+                    this.footer.find(".k-grid-footer-wrap")[0].style.width = headerWrap[0].clientWidth + "px";
                 }
             }
         },
