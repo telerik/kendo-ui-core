@@ -784,6 +784,18 @@
 
 /* Loader & Pull-to-refresh */
 
+.km-flat .km-loader:before
+{
+  position: absolute;
+  top: -5000px;
+  left: -5000px;
+  width: 10000px;
+  height: 10000px;
+  content: "\a0";
+  background: rgba(0,0,0,.05);
+  z-index: -1;
+}
+
 .km-flat .km-load-more
 {
     height: 3.4em;
