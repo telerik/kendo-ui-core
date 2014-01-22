@@ -161,12 +161,24 @@ module.exports = function(grunt) {
                     },
 
                     singleRun: true,
-                    files: beforeTestFiles.concat([ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js' ]).concat(compiledStyleSheets).concat(afterTestFiles).concat(tests)
+
+                    files: [].concat(
+                        compiledStyleSheets,
+                        beforeTestFiles,
+                        [ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js' ],
+                        afterTestFiles,
+                        tests
+                    )
                 }
             },
             unit: {
                 options: {
-                    files: beforeTestFiles.concat(allKendoFiles).concat(afterTestFiles).concat(tests)
+                    files: [].concat(
+                        beforeTestFiles,
+                        allKendoFiles,
+                        afterTestFiles,
+                        tests
+                    )
                 }
             }
         },
