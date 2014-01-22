@@ -29,17 +29,29 @@ var __meta__ = {
         return Math.max(minLimit, Math.min(maxLimit, value));
     }
 
+    var SWITCH_MARKUP = '<span class="km-switch km-widget">\
+        <span class="km-switch-wrapper"><span class="km-switch-background"></span></span> \
+        <span class="km-switch-container"><span class="km-switch-handle" > \
+            <span class="km-switch-label-on">{0}</span> \
+            <span class="km-switch-label-off">{1}</span> \
+        </span> \
+    </span>'
+
     var Switch = Widget.extend({
         init: function(element, options) {
             var that = this, checked;
 
             Widget.fn.init.call(that, element, options);
 
-            that._wrapper();
-            that._background();
-            that._handle();
+            options = that.options;
+
+            that.wrapper = $(kendo.format(SWITCH_MARKUP, options.onLabel, options.offLabel));
+            that.handle = that.wrapper.find(".km-switch-handle");
+            that.background = that.wrapper.find(".km-switch-background");
+            that.wrapper.insertBefore(that.element).prepend(that.element);
 
             that._drag();
+
             that.origin = parseInt(that.background.css(MARGINLEFT), 10);
 
             that.constrain = 0;
@@ -142,6 +154,7 @@ var __meta__ = {
         _resize: function() {
             this.refresh();
         },
+
         _move: function(e) {
             var that = this;
             e.preventDefault();
@@ -209,32 +222,6 @@ var __meta__ = {
                         }
                     }
                 });
-        },
-
-        _background: function() {
-            var that = this,
-                background;
-
-            background = $("<span class='km-switch-wrapper'><span class='km-switch-background'></span></span>")
-                            .appendTo(that.wrapper)
-                            .children(".km-switch-background");
-
-            that.background = background;
-        },
-
-        _handle: function() {
-            var that = this,
-                options = that.options;
-
-            that.handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
-                            .appendTo(that.wrapper)
-                            .children(".km-switch-handle");
-
-            that.handle.append('<span class="km-switch-label-on">' + options.onLabel + '</span><span class="km-switch-label-off">' + options.offLabel + '</span>');
-        },
-
-        _wrapper: function() {
-            this.wrapper = this.element.wrap('<span class="km-switch km-widget" />').parent();
         },
 
         _drag: function() {
