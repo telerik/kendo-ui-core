@@ -4,28 +4,28 @@ html, body {
 }
 
 a {
-    color: #e15613;
+    color: #0487C4;
     text-decoration: none;
 }
 
 a:hover {
+    color: #036c9c;
     text-decoration: underline;
 }
 
 html {
-    font: 75% 'Lucida Sans Unicode', 'Lucida Grande', Arial, Helvetica, sans-serif;
-    background: #fff url("flowers-right.png") no-repeat fixed 100% -174px;
+    font: 75% Arial, Helvetica, sans-serif;
+    background: #fff;
     height: 100%;
     line-height: 1.5;
 }
 
 body {
-    background: url("flowers-left.png") no-repeat fixed 0 400px transparent;
     min-height: 100%;
 }
 
 h1, h2 {
-    font-family: 'Lucida Sans Unicode', 'Lucida Grande', Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: normal;
 }
 
@@ -37,7 +37,7 @@ h1 {
 h2 {
     font-size: 23px;
     width: 45%;
-    text-align: right;
+    text-align: left;
     float: left;
     margin: 0;
     padding: 0 9% 0 0;
@@ -52,17 +52,23 @@ h2 {
 .offline-button {
     display: inline-block;
     margin: 30px 0;
-    padding: 0 16px;
-    height: 32px;
-    line-height: 30px;
-    background: #313131;
-    border-radius: 16px;
+    padding: 9px 23px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
     color: #fff;
     text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    transition-duration: 0.2s;
+    transition-property: background-color;
+    transition-timing-function: ease;
 }
 
 .offline-button:hover {
-    background: #e36028;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-decoration: none;
 }
 
 ul {
@@ -82,7 +88,7 @@ li {
     width: 30%;
     min-width: 375px;
     padding: 30px 0;
-    margin: 1.5%;
+    margin: 0 3% 0 0;
     border-top: 1px solid #dfdfdf;
 }
 
