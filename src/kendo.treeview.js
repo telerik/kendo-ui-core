@@ -1355,6 +1355,10 @@ var __meta__ = {
                 i;
 
             if (e.field) {
+                if (!items[0].level) {
+                    return;
+                }
+
                 return that._updateNode(e.field, items);
             }
 

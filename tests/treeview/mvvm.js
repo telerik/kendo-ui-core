@@ -196,6 +196,21 @@
         equal(dom.find(".k-item:last").text(), "foo");
     });
 
+    test("does not handle changes for items in nested ObservableArray", function() {
+        var dom = $('<div data-bind="source: src" data-role="treeview" />').appendTo(QUnit.fixture);
+
+        var viewModel = kendo.observable({
+            src: kendo.observableHierarchy([
+                { text: "foo", collection: [ "bar" ] }
+            ])
+        });
+
+        kendo.bind(dom, viewModel);
+
+        viewModel.src[0].collection.push("baz");
+
+        equal(dom.find(".k-item").length, 1);
+    });
 
 
     (function() {
