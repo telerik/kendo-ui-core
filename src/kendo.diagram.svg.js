@@ -354,6 +354,7 @@ var __meta__ = {
             this.setAtr("font-weight", "fontWeight");
             this.setAtr("font-style", "fontStyle");
             this.setAtr("text-decoration", "textDecoration");
+            this.setAtr("fill", "fontFill");
             this.content(this.options.text);
         },
         size: function () {
