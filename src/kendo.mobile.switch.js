@@ -1,3 +1,4 @@
+/* jshint multistr: true */
 (function(f, define){
     define([ "./kendo.mobile.application" ], f);
 })(function(){
@@ -35,7 +36,7 @@ var __meta__ = {
             <span class="km-switch-label-on">{0}</span> \
             <span class="km-switch-label-off">{1}</span> \
         </span> \
-    </span>'
+    </span>';
 
     var Switch = Widget.extend({
         init: function(element, options) {
@@ -78,7 +79,7 @@ var __meta__ = {
 
         refresh: function() {
             var that = this,
-                handleWidth = that.handle.outerWidth(true)
+                handleWidth = that.handle.outerWidth(true);
 
             that.width = that.wrapper.width();
 
