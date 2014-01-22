@@ -181,7 +181,7 @@
                     return element.find(".field-validation-valid[data-valmsg-for=" + fieldName + "], .field-validation-error[data-valmsg-for=" + fieldName + "]");
                 },
                 decorate: function (message, fieldName) {
-                    message.addClass("field-validation-error").attr("data-valmsg-for", fieldName || "");
+                    message.addClass("field-validation-error").attr("data-val-msg-for", fieldName || "");
                 }
             },
             mvcMetadataLocator: {
