@@ -1126,7 +1126,7 @@ kendo_module({
                         endTime: endTime
                     }));
                 } else {
-                    event.startTime = startTime;
+                    event.startTime = new Date(startTime);
                     event.endTime = endTime;
                     events.push(event);
                 }

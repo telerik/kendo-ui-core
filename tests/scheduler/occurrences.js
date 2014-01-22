@@ -43,6 +43,9 @@
 
         equal(events.length, 3);
 
+        equal(events[0].start.getTime(), +new Date(2000, 10, 10, 16, 0));
+        equal(events[0].startTime.getHours(), 16);
+
         equal(events[1].start.getTime(), +new Date(2000, 10, 10, 17, 0));
         equal(events[1].end.getTime(), +new Date(2000, 10, 10, 18, 0));
 
