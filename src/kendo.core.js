@@ -1975,7 +1975,7 @@ function pad(number, digits, end) {
         support.zoomLevel = function() {
             try {
                 return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
-                       support.browser.msie && support.browser.version >= 10 ? ((top || window).outerWidth / (top || window).innerWidth) : 1;
+                       support.browser.msie && support.browser.version >= 10 ? ((top || window).document.documentElement.offsetWidth / (top || window).innerWidth) : 1;
             } catch(e) {
                 return 1;
             }
@@ -2086,7 +2086,7 @@ function pad(number, digits, end) {
             mobileOS = support.mobileOS;
 
         // IE10 touch zoom is living in a separate viewport
-        if (support.browser.msie && (support.pointers || support.msPointers) && !positioned && type != "position") {
+        if (support.browser.msie && (support.pointers || support.msPointers) && !positioned) {
             result.top -= (window.pageYOffset - document.documentElement.scrollTop);
             result.left -= (window.pageXOffset - document.documentElement.scrollLeft);
         }
