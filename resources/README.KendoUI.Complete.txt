@@ -1,8 +1,9 @@
 Kendo UI server wrappers are not included in this version of Kendo UI. To access the Kendo UI server wrappers, you must purchase and download one of the following:
  
-- Kendo UI Complete for ASP.NET MVC
-- Kendo UI Complete for JSP
-- Telerik DevCraft Premium or Ultimate
+- Telerik UI for ASP.NET MVC
+- Telerik UI for JSP
+- Telerik UI for PHP
+- Telerik DevCraft or MobileCraft Collection
  
-If you would like a free trial of the Kendo UI server wrappers, please visit KendoUI.com
+If you would like a free trial of the Kendo UI server wrappers, please visit http://www.telerik.com/kendo-ui
 
