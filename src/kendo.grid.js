@@ -987,7 +987,7 @@ var __meta__ = {
         _positionColumnResizeHandle: function(container) {
             var that = this,
                 indicatorWidth = that.options.columnResizeHandleWidth,
-                staticHead = that.staticHeader ? that.staticHeader.first("thead") : $();
+                staticHead = that.staticHeader ? that.staticHeader.find("thead:first") : $();
 
             that.thead.add(staticHead).on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
                 var th = $(this),
@@ -1151,7 +1151,7 @@ var __meta__ = {
                         cursor(that.wrapper, "");
 
                         if (columnWidth != newWidth) {
-                            var header = that.staticHeader ? that.staticHeader.first("thead").add(that.thead) : th.parent();
+                            var header = that.staticHeader ? that.staticHeader.find("thead:first").add(that.thead) : th.parent();
 
                             column = that.columns[header.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)];
 
@@ -2909,13 +2909,18 @@ var __meta__ = {
 
         _setStaticContainersWidth: function() {
             if (this.options.scrollable && this.staticHeader) {
-                var columns = staticColumns(this.columns),
+                var columns = visibleStaticColumns(this.columns),
                     headerWrap = this.thead.closest(".k-grid-header-wrap"),
                     contentWidth = this.wrapper[0].clientWidth,
+                    groups = this._groups(),
                     width = 0;
 
                 for (var idx = 0, length = columns.length; idx < length; idx++) {
                     width += columns[idx].width;
+                }
+
+                if (groups > 0) {
+                   width += this.staticHeader.find(".k-group-cell:first").width() * groups;
                 }
 
                 if (width >= contentWidth) {

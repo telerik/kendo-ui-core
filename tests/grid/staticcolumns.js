@@ -138,6 +138,27 @@
         equal(grid.staticHeader.width(), 140);
     });
 
+    test("width is set to static containers with grouping applied", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true, width: 140 }, "bar", "baz"]
+        });
+
+        grid.dataSource.group({ field: "foo" });
+
+        equal(grid.staticHeader.width(), grid.staticContent.width());
+        equal(grid.staticHeader.width(), 140 + 8);
+    });
+
+    test("width is set to static containers with multiple grouping applied", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true, width: 140 }, "bar", "baz"]
+        });
+
+        grid.dataSource.group([{ field: "foo" }, { field: "bar" }]);
+
+        equal(grid.staticHeader.width(), grid.staticContent.width());
+        equal(grid.staticHeader.width(), 140 + 16);
+    });
     test("width is set to non static containers", function() {
         div.width(300);
 
