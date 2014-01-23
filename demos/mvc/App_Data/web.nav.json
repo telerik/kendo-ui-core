@@ -632,6 +632,14 @@
                     "packages": ["!mvc", "!jsp", "!php"]
                 },
                 {
+                    "text": "Binding to WebSocket",
+                    "url": "grid/web-socket.html",
+                    "new": true,
+                    "title": "Real-time Binding to WebSocket",
+                    "meta": "This example shows how the Kendo UI Grid can be bound to a WebSocket for real-time push notifications",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                },
+                {
                     "text": "Custom ajax binding",
                     "url": "grid/customajaxbinding.html",
                     "packages": ["mvc"]

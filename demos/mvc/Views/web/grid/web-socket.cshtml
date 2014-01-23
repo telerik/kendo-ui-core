@@ -1,0 +1,102 @@
+<div id="example" class="k-content">
+    <div id="grid" style="margin-bottom:20px"></div>
+    <script>
+        $(function(){
+            var host = "ws://korchev:5000";
+            var ws = new WebSocket(host);
+            ws.onopen = function() {
+                $("#grid").data("kendoGrid").dataSource.fetch();
+            };
+
+            $("#grid").kendoGrid({
+                height: 300,
+                autoBind: false,
+                editable: true,
+                sortable: true,
+                columns: [
+                    { field: "UnitPrice" },
+                    { field: "ProductName" },
+                    { command: "destroy", width: 100}
+                ],
+                toolbar: ["create"],
+                dataSource: {
+                    autoSync: true,
+                    schema: {
+                        model: {
+                            id: "ProductID",
+                            fields: {
+                                "ProductID": { editable: false, nullable: true },
+                                "CreatedAt": { type: "date" },
+                                "UnitPrice": { type: "number" }
+                            }
+                        },
+                        data: "data"
+                    },
+                    sort: [ { field: "CreatedAt", dir: "desc" }],
+                    transport: {
+                        push: function(options) {
+                            ws.addEventListener("message", function(e) {
+                                var result = JSON.parse(e.data);
+
+                                if (result.type == "update") {
+                                    options.pushUpdate(result);
+                                }
+
+                            });
+                        },
+                        read: function(options) {
+                            var requestId = kendo.guid();
+
+                            ws.send(JSON.stringify({
+                                type: "read",
+                                id: requestId
+                            }));
+
+                            ws.addEventListener("message", function(e) {
+                                var result = JSON.parse(e.data);
+
+                                if (result.id == requestId) {
+                                    ws.removeEventListener("message", arguments.callee);
+
+                                    options.success(result);
+                                }
+                            });
+                        },
+                        update: function(options) {
+                            var requestId = kendo.guid();
+                            var request = {
+                                type: "update",
+                                id: requestId,
+                                data: [options.data]
+                            };
+
+                            ws.send(JSON.stringify(request));
+                            ws.addEventListener("message", function(e) {
+                                var result = JSON.parse(e.data);
+
+                                if (result.id == requestId) {
+                                    ws.removeEventListener("message", arguments.callee);
+
+                                    options.success(result);
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <div class="configuration-horizontal">
+        <span class="configHead">Information</span>
+        <p>
+        This demo demonstrates real-time push-notifications from WebSocket.
+        </p>
+        <p>
+            To see the real-time updates:
+        </p>
+        <ol>
+            <li>Open this page in another browser window by clicking <a href="./web-socket.html" target="_new">here</a></li>
+            <li>Create, update or destroy grid items.</li>
+        </ol>
+    </div>
+</div>
