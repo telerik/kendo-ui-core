@@ -17,7 +17,7 @@ CURRENT_COMMIT = `git rev-parse HEAD`.strip
 BETA = !!ENV['BETA']
 
 def prefix_bundle_name(bundle)
-    prefix = (bundle =~ /mvc|php|jsp/) ? 'telerik.ui.for.' : 'kendoui.'
+    prefix = (bundle =~ /mvc|php|jsp/) ? 'telerik.ui.for.' : 'telerik.kendoui.'
 
     prefix + bundle
 end
