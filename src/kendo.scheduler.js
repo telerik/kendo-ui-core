@@ -2397,6 +2397,11 @@ var __meta__ = {
             if (container) {
                 model = this._modelForContainer(container);
 
+                if (model.isOccurrence()) {
+                    this._convertDates(model, "remove");
+                    this._convertDates(this.dataSource.get(model.recurrenceId), "remove");
+                }
+
                 this.dataSource.cancelChanges(model);
 
                 //TODO: handle the cancel in UI
@@ -2560,7 +2565,10 @@ var __meta__ = {
         _createPopupEditor: function(model) {
             var editor = this._editor;
 
-            if (!model.isNew()) {
+            if (!model.isNew() || model.isOccurrence()) {
+                if (model.isOccurrence()) {
+                    this._convertDates(model.recurrenceId ? this.dataSource.get(model.recurrenceId) : model);
+                }
                 this._convertDates(model);
             }
 

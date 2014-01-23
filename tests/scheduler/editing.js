@@ -1290,6 +1290,108 @@
         deepEqual(model.end, timezone.convert(end, "Etc/UTC", zone));
     });
 
+    test("edit occurrence converts date from timezone to  startTimezone/endTimezone", function() {
+        var start = new Date(2013, 10, 10, 12);
+        var end = new Date(2013, 10, 10, 14);
+        var startTimezone = "Europe/Berlin";
+        var endTimezone = "Asia/Beirut";
+
+        var scheduler = setup({
+            date: new Date(start),
+            dataSource: {
+                data: [ {
+                    id:1,
+                    recurrenceRule: "FREQ=DAILY;COUNT=2;",
+                    start: new Date(start),
+                    end: new Date(end),
+                    startTimezone: startTimezone,
+                    endTimezone: endTimezone,
+                    title: "my event"
+                } ]
+            },
+            timezone: "Etc/UTC"
+        });
+
+        var uid = scheduler.wrapper.find(".k-event:last").data("uid");
+        var occurrence = scheduler.occurrenceByUid(uid);
+
+        scheduler.editEvent(uid);
+        $(".k-popup-edit-form").find(".k-button:first").click();
+
+        deepEqual(occurrence.start, kendo.timezone.apply(start, startTimezone));
+        deepEqual(occurrence.end, kendo.timezone.apply(end, endTimezone));
+    });
+
+    test("edit occurrence converts head start/end date from timezone to  startTimezone/endTimezone", function() {
+        var start = new Date(2013, 10, 10, 12);
+        var end = new Date(2013, 10, 10, 14);
+        var startTimezone = "Europe/Berlin";
+        var endTimezone = "Asia/Beirut";
+
+        var scheduler = setup({
+            date: new Date(start),
+            dataSource: {
+                data: [ {
+                    id:1,
+                    recurrenceRule: "FREQ=DAILY;COUNT=2;",
+                    start: new Date(start),
+                    end: new Date(end),
+                    startTimezone: startTimezone,
+                    endTimezone: endTimezone,
+                    title: "my event"
+                } ]
+            },
+            timezone: "Etc/UTC"
+        });
+
+        var uid = scheduler.wrapper.find(".k-event:last").data("uid");
+        var head = scheduler.dataSource.data()[0];
+
+        scheduler.editEvent(uid);
+        $(".k-popup-edit-form").find(".k-button:first").click();
+
+        deepEqual(head.start, kendo.timezone.apply(start, startTimezone));
+        deepEqual(head.end, kendo.timezone.apply(end, endTimezone));
+    });
+
+    test("edit occurrence converts back head and occurrence on cancel", function() {
+        var start = new Date(2013, 10, 10, 12);
+        var end = new Date(2013, 10, 10, 14);
+        var startTimezone = "Europe/Berlin";
+        var endTimezone = "Asia/Beirut";
+
+        var scheduler = setup({
+            date: new Date(start),
+            dataSource: {
+                data: [ {
+                    id:1,
+                    recurrenceRule: "FREQ=DAILY;COUNT=2;",
+                    start: new Date(start),
+                    end: new Date(end),
+                    startTimezone: startTimezone,
+                    endTimezone: endTimezone,
+                    title: "my event"
+                } ]
+            },
+            timezone: "Etc/UTC"
+        });
+
+        var uid = scheduler.wrapper.find(".k-event:last").data("uid");
+        var occurrenceStart = new Date(scheduler.occurrenceByUid(uid).start);
+        var headStart = new Date(scheduler.dataSource.data()[0].start);
+
+        scheduler.editEvent(uid);
+        $(".k-popup-edit-form").find(".k-button:first").click();
+        $(".k-popup-edit-form").find(".k-scheduler-cancel").click();
+
+        var uid = scheduler.wrapper.find(".k-event:last").data("uid");
+        var occurrence = scheduler.occurrenceByUid(uid);
+        var head = scheduler.dataSource.data()[0];
+
+        deepEqual(occurrence.start, occurrenceStart);
+        deepEqual(head.start, headStart);
+    });
+
     test("saveEvent reverts applied StartTimezone if no changes have been made", function() {
         var start = new Date(2013, 10, 10, 10),
             end = new Date(2013, 10, 10, 11),
