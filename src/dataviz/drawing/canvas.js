@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./shapes" ], f);
+})(function(){
+
 (function () {
 
     // Imports ================================================================
@@ -329,3 +333,5 @@
     });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
