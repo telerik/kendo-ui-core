@@ -139,7 +139,7 @@
     });
 
     test("hides element", function() {
-        equal(layer.element.css("display"), "none");
+        equal(layer.element.css("visibility"), "hidden");
     });
 
     test("detaches map event handlers", 0, function() {
@@ -156,19 +156,28 @@
             map = new MapMock();
             layer = new ShapeLayer(map);
             layer.hide();
-            layer.show();
         }
     });
 
     test("shows element", function() {
-        equal(layer.element.css("display"), "block");
+        layer.show();
+        equal(layer.element.css("visibility"), "visible");
     });
 
     test("re-attaches map event handlers", function() {
         stubMethod(ShapeLayer.fn, "_load", function() {
             ok(true);
         }, function() {
+            layer.show();
             map.trigger("reset");
+        });
+    });
+
+    test("triggers reset", function() {
+        stubMethod(ShapeLayer.fn, "_load", function() {
+            ok(true);
+        }, function() {
+            layer.show();
         });
     });
 

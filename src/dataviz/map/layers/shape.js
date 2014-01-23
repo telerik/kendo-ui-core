@@ -50,7 +50,7 @@
 
             this.reset = proxy(this.reset, this);
             this.resize = proxy(this.resize, this);
-            this._panEnd = proxy(this._panEnd, this);
+            this._panEnd = proxy(this._position, this);
             this._activate();
 
             this._loader = new GeoJSONLoader(this.map, this.options.style, this);
@@ -72,12 +72,7 @@
         },
 
         reset: function() {
-            if (this.surface.translate) {
-                this.surface.translate({ x: 0, y: 0 });
-            }
-
-            this.movable.moveTo({ x: 0, y: 0 });
-
+            this._position();
             if (this._data) {
                 this._load(this._data);
             }
@@ -94,12 +89,13 @@
         },
 
         show: function() {
-            this.element.css("display", "block");
+            this.reset();
             this._activate();
+            this.element.css("visibility", "");
         },
 
         hide: function() {
-            this.element.css("display", "none");
+            this.element.css("visibility", "hidden");
             this._deactivate();
         },
 
@@ -184,7 +180,7 @@
             this._markers = [];
         },
 
-        _panEnd: function() {
+        _position: function() {
             var map = this.map;
             var nw = map.locationToView(map.extent().nw);
 
