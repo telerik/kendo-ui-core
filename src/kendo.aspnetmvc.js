@@ -14,7 +14,7 @@ var __meta__ = {
     id: "aspnetmvc",
     name: "ASP.NET MVC",
     category: "wrappers",
-    description: "Scripts required by Kendo UI for ASP.NET MVC",
+    description: "Scripts required by Telerik UI for ASP.NET MVC",
     depends: [ "data", "combobox", "multiselect", "validator" ]
 };
 
