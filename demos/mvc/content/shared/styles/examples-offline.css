@@ -393,6 +393,12 @@ ul.keyboard-legend li a {
     height: 430px;
 }
 
+.config-section.console-section
+{
+    width: 400px;
+    float: right;
+}
+
 #page > h2 {
     float: none;
     text-align: center;
