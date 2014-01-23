@@ -193,7 +193,7 @@ var __meta__ = {
         setNext: function(nextViewID, transition) {
             this.nextViewID = nextViewID;
             this.backTransition = transition;
-        }
+        },
 
         switchWith: function(view, transition, params, callback) {
             var that = this,
