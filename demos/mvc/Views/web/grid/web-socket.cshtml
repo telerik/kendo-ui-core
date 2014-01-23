@@ -2,11 +2,41 @@
     <div id="grid" style="margin-bottom:20px"></div>
     <script>
         $(function(){
-            var host = "ws://korchev:5000";
+            var host = "wss://kendoui-ws-demo.herokuapp.com";
             var ws = new WebSocket(host);
+
+            //Bind the grid when the socket connects
             ws.onopen = function() {
                 $("#grid").data("kendoGrid").dataSource.fetch();
             };
+
+            //Close the socket when the browser window is closed.
+            window.onbeforeunload = function() {
+                ws.close();
+            }
+
+            //Helper function to send data through the socket
+            function send(ws, request, callback) {
+                //Assign unique id to the request. Will use that to distinguish the response.
+                request.id = kendo.guid();
+
+                //Listen to the "message" event to get server response
+                ws.addEventListener("message", function(e) {
+                    var result = JSON.parse(e.data);
+
+                    //Check if the response is for the current request
+                    if (result.id == request.id) {
+                        //Stop listening
+                        ws.removeEventListener("message", arguments.callee);
+
+                        //Invoke the callback with the result
+                        callback(result);
+                    }
+                });
+
+                //Send the data to the server
+                ws.send(JSON.stringify(request));
+            }
 
             $("#grid").kendoGrid({
                 height: 300,
@@ -35,51 +65,39 @@
                     sort: [ { field: "CreatedAt", dir: "desc" }],
                     transport: {
                         push: function(options) {
+                            //Listen to the "message" event fired when the server pushes data
                             ws.addEventListener("message", function(e) {
                                 var result = JSON.parse(e.data);
 
-                                if (result.type == "update") {
+                                //Check what the push type is and invoke the corresponding callback.
+                                if (result.type == "push-update") {
                                     options.pushUpdate(result);
+                                } else if (result.type == "push-destroy") {
+                                    options.pushDestroy(result);
+                                } else if (result.type == "push-create") {
+                                    options.pushCreate(result);
                                 }
-
                             });
                         },
                         read: function(options) {
-                            var requestId = kendo.guid();
+                            var request = { type: "read" };
 
-                            ws.send(JSON.stringify({
-                                type: "read",
-                                id: requestId
-                            }));
-
-                            ws.addEventListener("message", function(e) {
-                                var result = JSON.parse(e.data);
-
-                                if (result.id == requestId) {
-                                    ws.removeEventListener("message", arguments.callee);
-
-                                    options.success(result);
-                                }
-                            });
+                            send(ws, request, options.success);
                         },
                         update: function(options) {
-                            var requestId = kendo.guid();
-                            var request = {
-                                type: "update",
-                                id: requestId,
-                                data: [options.data]
-                            };
+                            var request = { type: "update", data: [options.data] };
 
-                            ws.send(JSON.stringify(request));
-                            ws.addEventListener("message", function(e) {
-                                var result = JSON.parse(e.data);
+                            send(ws, request, options.success);
+                        },
+                        destroy: function(options) {
+                            var request = { type: "destroy", data: [options.data] };
 
-                                if (result.id == requestId) {
-                                    ws.removeEventListener("message", arguments.callee);
+                            send(ws, request, options.success);
+                        },
+                        create: function(options) {
+                            var request = { type: "create", data: [options.data] };
 
-                                    options.success(result);
-                                }
-                            });
+                            send(ws, request, options.success);
                         }
                     }
                 }
@@ -89,7 +107,7 @@
     <div class="configuration-horizontal">
         <span class="configHead">Information</span>
         <p>
-        This demo demonstrates real-time push-notifications from WebSocket.
+            This demo demonstrates real-time push-notifications from a WebSocket.
         </p>
         <p>
             To see the real-time updates:
