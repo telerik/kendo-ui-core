@@ -120,6 +120,13 @@ var __meta__ = {
             this.element.remove();
         },
 
+        _beforeShow: function() {
+            if (this.trigger(BEFORE_SHOW, { view: this })) {
+                return false;
+            }
+            return true;
+        },
+
         showStart: function() {
             var that = this;
             that.element.css("display", "");
@@ -138,26 +145,19 @@ var __meta__ = {
             kendo.resize(that.element);
         },
 
+        showEnd: function() {
+            this.trigger(AFTER_SHOW, {view: this});
+            this._padIfNativeScrolling();
+        },
+
         hideStart: function() {
             this.trigger(BEFORE_HIDE, {view: this});
         },
 
-        hideComplete: function() {
+        hideEnd: function() {
             var that = this;
             that.element.hide();
             that.trigger(HIDE, {view: that});
-        },
-
-        switchWithSelf: function(transition, params, callback) {
-            // If the newly passed parameters equal the last but one parameters, we are going back
-            // 1 -> 2 -> 1 is considered back navigation to self
-            if (this._paramsHistory[this._paramsHistory.length - 2] === JSON.stringify(params)) {
-                this._paramsHistory.pop();
-                this.nextViewID = this.id;
-                this.backTransition = this.transition;
-            }
-
-            this.switchWith(new ViewClone(this), transition, params, callback);
         },
 
         _padIfNativeScrolling: function() {
@@ -169,15 +169,19 @@ var __meta__ = {
             }
         },
 
-        _beforeShow: function() {
-            return !this.trigger(BEFORE_SHOW, { view: this });
-        },
-
-        _updateParams: function(params) {
+        _updateParams: function(params, withSelf) {
             var paramsHistory = this._paramsHistory,
                 stringified = JSON.stringify(params);
 
-            if (paramsHistory[paramsHistory.length - 1] === stringified) { // back navigation
+            // If the newly passed parameters equal the last but one parameters, we are going back
+            // 1 -> 2 -> 1 is considered back navigation to self
+            if (withSelf && paramsHistory[paramsHistory.length - 2] === stringified) {
+                paramsHistory.pop();
+                return false;
+            }
+
+            // back navigation
+            if (paramsHistory[paramsHistory.length - 1] === stringified) {
                 return false;
             }
 
@@ -188,18 +192,24 @@ var __meta__ = {
 
         switchWith: function(view, transition, params, callback) {
             var that = this,
-                back,
-                complete = function() {
-                    that.trigger(AFTER_SHOW, {view: that});
-                    that._padIfNativeScrolling();
-                    callback();
-                };
+                withSelf = view === this,
+                back;
 
             if (!this._beforeShow()) {
                 return;
             }
 
-            back = !this._updateParams(params);
+            back = !this._updateParams(params, withSelf);
+
+            if (withSelf) {
+                if (back) {
+                    // nasty side effecting here, should be refactored
+                    this.nextViewID = this.id;
+                    this.backTransition = this.transition;
+                }
+
+                view = new ViewClone(this);
+            }
 
             if (view) {
                 // layout needs to be detached first, then reattached
@@ -212,11 +222,12 @@ var __meta__ = {
                     reverse: back,
                     transition: transition,
                     defaultTransition: view.options.defaultTransition,
-                    complete: complete
+                    complete: callback
                 });
             } else {
                 that.showStart();
-                complete();
+                that.showEnd();
+                callback();
             }
         },
 
@@ -355,7 +366,7 @@ var __meta__ = {
 
         hideStart: $.noop,
 
-        hideComplete: function() {
+        hideEnd: function() {
             this.element.remove();
         }
     });
@@ -408,15 +419,17 @@ var __meta__ = {
             }
         },
 
+        _complete: function() {
+            this.next.showEnd();
+            this.current.hideEnd();
+            this.complete();
+        },
+
         _transition: function() {
             var that = this,
                 current = that.current,
                 next = that.next,
-                back = that.back(),
-                complete = function() {
-                    current.hideComplete();
-                    that.complete();
-                },
+                back = that.back();
 
                 viewTransition = back ? next.backTransition : next.transition,
                 transition = that.transition || viewTransition || that.defaultTransition,
@@ -435,7 +448,7 @@ var __meta__ = {
                 effects: animationType,
                 reverse: reverse,
                 parallax: parallax,
-                complete: complete,
+                complete: $.proxy(this, "_complete"),
                 transition: transition,
                 duration: TRANSITION_DURATION
             };
@@ -746,16 +759,10 @@ var __meta__ = {
         _show: function(view, transition, params) {
             var that = this;
 
-            if (that._view !== view) {
-                view.switchWith(that._view, transition, params, function() {
-                    that._view = view;
-                    that.trigger(VIEW_SHOW, {view: view});
-                });
-            } else {
-                that._view.switchWithSelf(transition, params, function() {
-                    that.trigger(VIEW_SHOW, { view: that._view });
-                });
-            }
+            view.switchWith(that._view, transition, params, function() {
+                that._view = view;
+                that.trigger(VIEW_SHOW, {view: view});
+            });
         },
 
         _hideViews: function(container) {
