@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./zoom" ], f);
+    define([ "../../kendo.dataviz.core" ], f);
 })(function(){
 
 (function ($) {

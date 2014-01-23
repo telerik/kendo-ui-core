@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../kendo.data", "../kendo.userevents", "../kendo.tooltip", "../kendo.dataviz.core", "../kendo.mobile.scroller" ], f);
+    define([ "../kendo.dataviz.core" ], f);
 })(function(){
 
 (function () {

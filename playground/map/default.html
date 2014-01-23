@@ -5,7 +5,7 @@
         <link rel="stylesheet/less" type="text/css" href="../../styles/web/kendo.common.less" />
         <link rel="stylesheet/less" type="text/css" href="../../styles/web/kendo.default.less" />
         <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz.less" />
-        <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz..default.less" />
+        <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz.default.less" />
         <style>
             .zip-label {
                 position: absolute;
@@ -30,12 +30,21 @@
     <script>
     require([ "jquery.min", "kendo.dataviz.map" ], function(){
         $("#map").kendoMap({
-            center: [ 33.67946, -117.98569],
-            zoom: 12,
+            center: [30.268107, -97.744821],
+            zoom: 3,
             layers: [{
-                type: "bing",
-                key: "AqaPuZWytKRUA8Nm5nqvXHWGL8BDCXvK8onCl2PkC581Zp3T_fYAQBiwIphJbRAK",
-                imagerySet: "aerial"
+                type: "tile",
+                urlTemplate: "http://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
+                subdomains: ["a", "b", "c"],
+                attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>." +
+                             "Tiles courtesy of <a href='http://www.opencyclemap.org/'>Andy Allan</a>"
+            }],
+            markers: [{
+                location: [30.268107, -97.744821],
+                shape: "pinTarget",
+                tooltip: {
+                    content: "Austin, TX"
+                }
             }]
         });
     });
