@@ -146,7 +146,7 @@
         grid.dataSource.group({ field: "foo" });
 
         equal(grid.staticHeader.width(), grid.staticContent.width());
-        equal(grid.staticHeader.width(), 140 + 8);
+        equal(grid.staticHeader.width(), 140 + 27);
     });
 
     test("width is set to static containers with multiple grouping applied", function() {
@@ -157,7 +157,7 @@
         grid.dataSource.group([{ field: "foo" }, { field: "bar" }]);
 
         equal(grid.staticHeader.width(), grid.staticContent.width());
-        equal(grid.staticHeader.width(), 140 + 16);
+        equal(grid.staticHeader.width(), 140 + 54);
     });
     test("width is set to non static containers", function() {
         div.width(300);

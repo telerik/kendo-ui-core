@@ -1163,7 +1163,7 @@ var __meta__ = {
                                 newWidth: newWidth
                             });
 
-                            that._setStaticContainersWidth();
+                            that._applyStaticContainersWidth();
                             that._syncStaicContentHeight();
                         }
 
@@ -1303,7 +1303,7 @@ var __meta__ = {
                 reorder(elements(staticRows[idx], rows[idx], ">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
-            that._setStaticContainersWidth();
+            that._applyStaticContainersWidth();
             that._syncStaicContentHeight();
         },
 
@@ -1888,7 +1888,7 @@ var __meta__ = {
             if (row.length > 1) {
 
                 adjustRowHeight(row[0], row[1]);
-                that._setStaticContainersWidth();
+                that._applyStaticContainersWidth();
             }
 
             that.trigger(EDIT, { container: row, model: model });
@@ -2903,11 +2903,11 @@ var __meta__ = {
                     }
                 }
 
-                that._setStaticContainersWidth();
+                that._applyStaticContainersWidth();
            }
         },
 
-        _setStaticContainersWidth: function() {
+        _applyStaticContainersWidth: function() {
             if (this.options.scrollable && this.staticHeader) {
                 var columns = visibleStaticColumns(this.columns),
                     headerWrap = this.thead.closest(".k-grid-header-wrap"),
@@ -2920,7 +2920,10 @@ var __meta__ = {
                 }
 
                 if (groups > 0) {
-                   width += this.staticHeader.find(".k-group-cell:first").width() * groups;
+                   var groupCell = this.staticHeader.find(".k-group-cell:first");
+                   if (groupCell.length) {
+                       width +=  groupCell[0].clientWidth * groups;
+                   }
                 }
 
                 if (width >= contentWidth) {
@@ -3208,7 +3211,7 @@ var __meta__ = {
 
             if (that.staticContent) {
                 that._appendStaticColumnFooter();
-                that._setStaticContainersWidth();
+                that._applyStaticContainersWidth();
             }
         },
 
@@ -3969,7 +3972,7 @@ var __meta__ = {
 
                 that._appendStaticColumnContent();
 
-                that._setStaticContainersWidth();
+                that._applyStaticContainersWidth();
             }
 
             that._resizable();
@@ -4263,7 +4266,7 @@ var __meta__ = {
             }
 
             if (that.staticTable) {
-                that._setStaticContainersWidth();
+                that._applyStaticContainersWidth();
                 that._syncStaicContentHeight();
             } else {
                 cols = that.thead.prev().find("col");
@@ -4346,7 +4349,7 @@ var __meta__ = {
             }
 
             if (that.staticTable) {
-                that._setStaticContainersWidth();
+                that._applyStaticContainersWidth();
                 that._syncStaicContentHeight();
             } else {
                 tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
