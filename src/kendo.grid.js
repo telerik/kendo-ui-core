@@ -3709,6 +3709,10 @@ var __meta__ = {
         _details: function() {
             var that = this;
 
+            if (that.options.scrollable && that._hasDetails() && staticColumns(that.columns).length) {
+                throw new Error("Having both detail template and static columns is not supported");
+            }
+
             that.table.on(CLICK + NS, ".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", function(e) {
                 var button = $(this),
                     expanding = button.hasClass("k-plus"),

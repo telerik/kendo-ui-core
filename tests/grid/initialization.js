@@ -1262,4 +1262,14 @@
 
         equal(grid.tbody.find(".k-grouping-row>td").attr("colspan"), "2");
     });
+
+    test("error is thrown if static columns and detail template are set", function() {
+        throws(function() {
+            debugger;
+            var grid = new Grid(table, {
+                detailTemplate: "foo",
+                columns: [ { static: true } ]
+            });
+        });
+    });
 })();
