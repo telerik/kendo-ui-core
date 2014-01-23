@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../location", "../../geometry", "../../drawing/shapes" ], f);
+    define([ "../location", "../../geometry", "../../drawing/shapes", "../../../kendo.data" ], f);
 })(function(){
 
 (function ($, undefined) {
