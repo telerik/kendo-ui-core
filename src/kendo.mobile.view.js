@@ -190,6 +190,11 @@ var __meta__ = {
             return true;
         },
 
+        setNext: function(nextViewID, transition) {
+            this.nextViewID = nextViewID;
+            this.backTransition = transition;
+        }
+
         switchWith: function(view, transition, params, callback) {
             var that = this,
                 withSelf = view === this,
@@ -204,8 +209,7 @@ var __meta__ = {
             if (withSelf) {
                 if (back) {
                     // nasty side effecting here, should be refactored
-                    this.nextViewID = this.id;
-                    this.backTransition = this.transition;
+                    this.setNext(this.id, this.transition);
                 }
 
                 view = new ViewClone(this);
@@ -414,8 +418,7 @@ var __meta__ = {
             currentContent.kendoAnimateTo(nextContent, transition);
 
             if (!that.back()) {
-                current.nextViewID = next.id;
-                current.backTransition = transition.transition;
+                current.setNext(next.id, transition.transition);
             }
         },
 
