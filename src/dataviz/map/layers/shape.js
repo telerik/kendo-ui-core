@@ -48,9 +48,10 @@
             this._mouseleave = this._handler("shapeMouseLeave");
             this.surface.bind("mouseleave", this._mouseleave);
 
-            map.bind("reset", proxy(this.reset, this));
-            map.bind("resize", proxy(this.resize, this));
-            map.bind("panEnd", proxy(this._panEnd, this));
+            this.reset = proxy(this.reset, this);
+            this.resize = proxy(this.resize, this);
+            this._panEnd = proxy(this._panEnd, this);
+            this._activate();
 
             this._loader = new GeoJSONLoader(this.map, this.options.style, this);
             this._initDataSource();
@@ -91,6 +92,30 @@
 
         polygon: function(coords, style) {
             this.surface.draw(this._buildPolygon(coords, style));
+        },
+
+        show: function() {
+            this.element.css("display", "block");
+            this._activate();
+        },
+
+        hide: function() {
+            this.element.css("display", "none");
+            this._deactivate();
+        },
+
+        _activate: function() {
+            var map = this.map;
+            map.bind("reset", this.reset);
+            map.bind("resize", this.resize);
+            map.bind("panEnd", this._panEnd);
+        },
+
+        _deactivate: function() {
+            var map = this.map;
+            map.unbind("reset", this.reset);
+            map.unbind("resize", this.resize);
+            map.unbind("panEnd", this._panEnd);
         },
 
         _initDataSource: function() {
