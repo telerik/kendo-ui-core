@@ -120,7 +120,7 @@ var __meta__ = {
             this.element.remove();
         },
 
-        _beforeShow: function() {
+        triggerBeforeShow: function() {
             if (this.trigger(BEFORE_SHOW, { view: this })) {
                 return false;
             }
@@ -195,7 +195,7 @@ var __meta__ = {
                 withSelf = view === this,
                 back;
 
-            if (!this._beforeShow()) {
+            if (!this.triggerBeforeShow()) {
                 return;
             }
 
