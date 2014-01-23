@@ -1,0 +1,50 @@
+@import "base.less";
+@import "../../mobile/common/button.less";
+
+/* Button */
+
+.km-button
+{
+    padding: .5em .8em;
+    border-width: @flat-border-width;
+    border-style: solid;
+    .border-radius(@flat-border-radius);
+}
+
+.km-tabstrip .km-button
+{
+    background: none;
+}
+
+/* Detail Button */
+
+.km-detail
+{
+    .border-radius(5em);
+    min-width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
+    border-width: @flat-border-width;
+    border-style: solid;
+}
+
+.km-detaildisclose
+{
+    min-width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+}
+
+.km-detaildisclose:after,
+.km-detaildisclose:before
+{
+    left: .1em;
+    top: 0.35em;
+}
+
+.km-detail .km-icon:before
+{
+    display: none;
+}
+
+

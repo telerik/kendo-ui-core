@@ -1,0 +1,44 @@
+@import "../../mobile/common/mixins.less";
+@import "../../mobile/common/base.less";
+@import "common_flat.less";
+
+@flat-border-width: 1px;
+
+.km-widget
+{
+    font-size: 1em;
+}
+
+.km-root .km-pane,
+.km-root .km-view,
+.km-root .km-slider,
+.km-root .km-switch,
+.km-root .km-group-title,
+.km-root .km-filter-reset,
+.km-root .km-shim .k-animation-container
+{
+    -webkit-transform: none;
+}
+
+.km-widget,
+.km-widget *
+{
+    .box-sizing(border-box);
+    .background-clip(border-box);
+}
+
+.km-toolbar,
+.km-navbar,
+.km-tabstrip,
+.km-tabstrip .km-button
+{
+    .border-radius(0);
+}
+
+.km-touch-scrollbar
+{
+    border: 0;
+    .box-sizing(border-box);
+    .border-radius(1em);
+}
+
