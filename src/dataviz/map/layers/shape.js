@@ -1,5 +1,7 @@
 (function(f, define){
-    define([ "../location", "../../geometry", "../../drawing/shapes", "../../../kendo.data", "../../../kendo.draganddrop" ], f);
+    define(["./base", "../location",
+            "../../geometry", "../../drawing/shapes",
+            "../../../kendo.data", "../../../kendo.draganddrop" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -20,16 +22,13 @@
         Group = d.Group,
 
         map = dataviz.map,
-        Location = map.Location;
+        Location = map.Location,
+        Layer = map.layers.Layer;
 
     // Implementation =========================================================
-    var ShapeLayer = Class.extend({
+    var ShapeLayer = Layer.extend({
         init: function(map, options) {
-            this._initOptions(options);
-            this.map = map;
-
-            this.element = $("<div class='k-layer'></div>")
-                .appendTo(map.scrollElement);
+            Layer.fn.init.call(this, map, options);
 
             this.surface = d.Surface.create(this.element[0], {
                 width: map.scrollElement.width(),
@@ -48,15 +47,8 @@
             this._mouseleave = this._handler("shapeMouseLeave");
             this.surface.bind("mouseleave", this._mouseleave);
 
-            this.reset = proxy(this.reset, this);
-            this.resize = proxy(this.resize, this);
-            this._panEnd = proxy(this._position, this);
-            this._activate();
-
             this._loader = new GeoJSONLoader(this.map, this.options.style, this);
             this._initDataSource();
-
-            this._updateAttribution();
         },
 
         options: {
@@ -65,9 +57,9 @@
         },
 
         destroy: function() {
-            this._deactivate();
-            this.surface.destroy();
+            Layer.fn.destroy.call(this);
 
+            this.surface.destroy();
             this.dataSource.unbind("change", this._dataChange);
         },
 
@@ -88,29 +80,20 @@
             this.surface.draw(this._buildPolygon(coords, style));
         },
 
-        show: function() {
-            this.reset();
-            this._activate();
-            this.element.css("visibility", "");
-        },
-
-        hide: function() {
-            this.element.css("visibility", "hidden");
-            this._deactivate();
-        },
-
         _activate: function() {
-            var map = this.map;
-            map.bind("reset", this.reset);
-            map.bind("resize", this.resize);
-            map.bind("panEnd", this._panEnd);
+            Layer.fn._activate.call(this);
+
+            if (!this._panEnd) {
+                this._panEnd = proxy(this._position, this);
+            }
+
+            this.map.bind("panEnd", this._panEnd);
         },
 
         _deactivate: function() {
-            var map = this.map;
-            map.unbind("reset", this.reset);
-            map.unbind("resize", this.resize);
-            map.unbind("panEnd", this._panEnd);
+            Layer.fn._deactivate.call(this);
+
+            this.map.unbind("panEnd", this._panEnd);
         },
 
         _initDataSource: function() {
@@ -203,14 +186,6 @@
                     layer.map.trigger(event, args);
                 }
             };
-        },
-
-        _updateAttribution: function() {
-            var attr = this.map.attribution;
-
-            if (attr) {
-                attr.add(this.options.attribution);
-            }
         }
     });
 
