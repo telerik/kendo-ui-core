@@ -5,17 +5,20 @@
     using System.Linq;
     using System.Text;
     using System.Globalization;
+    using System.Collections.Generic;
 
     class Program
     {
         static string filePrefix = "kendo.culture";
-        static string outputPath = "C:\\work\\kendo\\cultures";
+        static string outputPath = "C:\\work\\kendo\\src\\cultures";
         static string culturePatternPath = "kendo.culture.format.txt";
         static string culturePattern = "";
 
         static void Main(string[] args)
         {
             Console.WriteLine("/*** Culture Generator ***/");
+
+            List<CultureInfo> cultures = null;
 
             foreach (string param in args)
             {
@@ -27,6 +30,20 @@
                 {
                     culturePatternPath = param.Substring("--pattern-path=".Length);
                 }
+                else if (param.StartsWith("--culture="))
+                {
+                    try
+                    {
+                        cultures = new List<CultureInfo> {
+                            new CultureInfo(param.Substring("--culture=".Length))
+                        };
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        return;
+                    }
+                }
                 else if (param.StartsWith("--file-prefix="))
                 {
                     filePrefix = param.Substring("--file-prefix=".Length);
@@ -37,7 +54,9 @@
 Usage:CultureGenerator [<options>]
 
 options:
-    --path=<PATH> The output path where the file will be created. Default: C:\Work\Kendo\cultures
+    --culture=<CultureName> The name of the culture to generate script from
+
+    --path=<PATH> The output path where the file will be created. Default: C:\Work\Kendo\src\cultures
 
     --pattern-path=<PATH> Full Path to the culture pattern used to generate culture.js files. Default: current folder\pattern name => .\kendo.culture.format.txt
 
@@ -64,10 +83,13 @@ options:
 
             Console.WriteLine("Start generating culture files...");
 
+            if (cultures == null)
+            {
+                cultures = CultureInfo.GetCultures(CultureTypes.AllCultures).ToList();
+            }
+
             //Generate {filePrefix}.culture.{cultureName}.js for all cultures.
-            CultureInfo.GetCultures(CultureTypes.AllCultures)
-                       .ToList()
-                       .ForEach(WriteCulture);
+            cultures.ForEach(WriteCulture);
 
             Console.WriteLine("End...");
         }
