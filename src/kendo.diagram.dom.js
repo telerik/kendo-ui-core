@@ -1988,6 +1988,7 @@ var __meta__ = {
                 diagram._zoomMainLayer();
             }
             else {
+                diagram._pan = pan;
                 diagram._transformMainLayer();
             }
         },
