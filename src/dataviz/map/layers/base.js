@@ -20,7 +20,11 @@
             this.map = map;
 
             this.element = $("<div class='k-layer'></div>")
-                .appendTo(map.scrollElement);
+               .css({
+                   "zIndex": this.options.zIndex,
+                   "opacity": this.options.opacity
+               })
+               .appendTo(map.scrollElement);
 
             this.reset = proxy(this.reset, this);
             this._resize = proxy(this._resize, this);

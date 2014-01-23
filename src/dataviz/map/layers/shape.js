@@ -70,7 +70,7 @@
             }
         },
 
-        resize: function() {
+        _resize: function() {
             this.surface.setSize(
                 this.map.getSize()
             );
