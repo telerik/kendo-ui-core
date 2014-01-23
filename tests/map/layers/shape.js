@@ -172,4 +172,30 @@
         });
     });
 
+    // ------------------------------------------------------------
+    module("Shape Layer / destroy", {
+        setup: function() {
+            map = new MapMock();
+            layer = new ShapeLayer(map);
+        }
+    });
+
+    test("detaches map event handlers", 0, function() {
+        stubMethod(ShapeLayer.fn, "_load", function() {
+            ok(false);
+        }, function() {
+            layer.destroy();
+            map.trigger("reset");
+        });
+    });
+
+    test("destroys surface", function() {
+        stubMethod(d.Surface.fn, "destroy", function() {
+            ok(true);
+        }, function() {
+            layer.destroy();
+            map.trigger("reset");
+        });
+    });
+
 })();

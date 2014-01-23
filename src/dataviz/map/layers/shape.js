@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../location", "../../geometry", "../../drawing/shapes", "../../../kendo.data" ], f);
+    define([ "../location", "../../geometry", "../../drawing/shapes", "../../../kendo.data", "../../../kendo.draganddrop" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -64,12 +64,11 @@
             dataSource: {}
         },
 
-        _updateAttribution: function() {
-            var attr = this.map.attribution;
+        destroy: function() {
+            this._deactivate();
+            this.surface.destroy();
 
-            if (attr) {
-                attr.add(this.options.attribution);
-            }
+            this.dataSource.unbind("change", this._dataChange);
         },
 
         reset: function() {
@@ -208,6 +207,14 @@
                     layer.map.trigger(event, args);
                 }
             };
+        },
+
+        _updateAttribution: function() {
+            var attr = this.map.attribution;
+
+            if (attr) {
+                attr.add(this.options.attribution);
+            }
         }
     });
 
