@@ -16,9 +16,7 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Attribution = dataviz.ui.Attribution,
-        Navigator = dataviz.ui.Navigator,
-        ZoomControl = dataviz.ui.ZoomControl,
+        ui = dataviz.ui,
         defined = dataviz.defined,
 
         g = dataviz.geometry,
@@ -315,16 +313,16 @@
         _initControls: function() {
             var controls = this.options.controls;
 
-            if (Attribution && controls.attribution) {
+            if (ui.Attribution && controls.attribution) {
                 this._createAttribution(controls.attribution);
             }
 
             if (!kendo.support.mobileOS) {
-                if (Navigator && controls.navigator) {
+                if (ui.Navigator && controls.navigator) {
                     this._createNavigator(controls.navigator);
                 }
 
-                if (ZoomControl && controls.zoom) {
+                if (ui.ZoomControl && controls.zoom) {
                     this._createZoomControl(controls.zoom);
                 }
             }
@@ -345,12 +343,12 @@
 
         _createAttribution: function(options) {
             var element = this._createControlElement(options, "bottomRight");
-            this.attribution = new Attribution(element, options);
+            this.attribution = new ui.Attribution(element, options);
         },
 
         _createNavigator: function(options) {
             var element = this._createControlElement(options, "topLeft");
-            var navigator = this.navigator = new Navigator(element, options);
+            var navigator = this.navigator = new ui.Navigator(element, options);
 
             this._navigatorPan = proxy(this._navigatorPan, this);
             navigator.bind("pan", this._navigatorPan);
@@ -384,7 +382,7 @@
 
         _createZoomControl: function(options) {
             var element = this._createControlElement(options, "topLeft");
-            var zoomControl = this.zoomControl = new ZoomControl(element, options);
+            var zoomControl = this.zoomControl = new ui.ZoomControl(element, options);
 
             this._zoomControlChange = proxy(this._zoomControlChange, this);
             zoomControl.bind("change", this._zoomControlChange);
