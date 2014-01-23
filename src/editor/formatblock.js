@@ -303,27 +303,51 @@ extend(Editor, {
 
 registerFormat("justifyLeft", [
     { tags: dom.blockElements, attr: { style: { textAlign: "left", listStylePosition: "" }} },
-    { tags: ["img"], attr: { style: { "float": "left"}} }
+    { tags: ["img"], attr: { style: { "float": "left", display: "", marginLeft: "", marginRight: "" }} }
 ]);
-registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));
+registerTool("justifyLeft", new BlockFormatTool({
+    format: formats.justifyLeft,
+    template: new ToolTemplate({
+        template: EditorUtils.buttonTemplate,
+        title: "Justify Left"
+    })
+}));
 
 registerFormat("justifyCenter", [
     { tags: dom.nonListBlockElements, attr: { style: { textAlign: "center" }} },
-    { tags: ["ul","ol","li"], attr: { style: { textAlign: "center", listStylePosition: "inside" }} },
-    { tags: ["img"], attr: { style: { display: "block", marginLeft: "auto", marginRight: "auto"}} }
+    { tags: ["img"], attr: { style: { display: "block", marginLeft: "auto", marginRight: "auto", "float": "" }} },
+    { tags: ["ul","ol","li"], attr: { style: { textAlign: "center", listStylePosition: "inside" }} }
 ]);
-registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Center"})}));
+registerTool("justifyCenter", new BlockFormatTool({
+    format: formats.justifyCenter,
+    template: new ToolTemplate({
+        template: EditorUtils.buttonTemplate,
+        title: "Justify Center"
+    })
+}));
 
 registerFormat("justifyRight", [
     { tags: dom.nonListBlockElements, attr: { style: { textAlign: "right" }} },
-    { tags: ["ul","ol","li"], attr: { style: { textAlign: "right", listStylePosition: "inside" }} },
-    { tags: ["img"], attr: { style: { "float": "right"}} }
+    { tags: ["img"], attr: { style: { "float": "right", display: "", marginLeft: "", marginRight: "" }} },
+    { tags: ["ul","ol","li"], attr: { style: { textAlign: "right", listStylePosition: "inside" }} }
 ]);
-registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Right"})}));
+registerTool("justifyRight", new BlockFormatTool({
+    format: formats.justifyRight,
+    template: new ToolTemplate({
+        template: EditorUtils.buttonTemplate,
+        title: "Justify Right"
+    })
+}));
 
 registerFormat("justifyFull", [
     { tags: dom.blockElements, attr: { style: { textAlign: "justify", listStylePosition: "" }} },
 ]);
-registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
+registerTool("justifyFull", new BlockFormatTool({
+    format: formats.justifyFull,
+    template: new ToolTemplate({
+        template: EditorUtils.buttonTemplate,
+        title: "Justify Full"
+    })
+}));
 
 })(window.kendo.jQuery);
