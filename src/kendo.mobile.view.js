@@ -148,8 +148,8 @@ var __meta__ = {
             that.trigger(HIDE, {view: that});
         },
 
-        updateParams: function(transition, params, callback) {
-            // the newly passed parameters equal the last parameters of the view - we are going back
+        switchWithSelf: function(transition, params, callback) {
+            // If the newly passed parameters equal the last but one parameters, we are going back
             // 1 -> 2 -> 1 is considered back navigation to self
             if (this._paramsHistory[this._paramsHistory.length - 2] === JSON.stringify(params)) {
                 this._paramsHistory.pop();
@@ -739,7 +739,7 @@ var __meta__ = {
                     that.trigger(VIEW_SHOW, {view: view});
                 });
             } else {
-                that._view.updateParams(transition, params, function() {
+                that._view.switchWithSelf(transition, params, function() {
                     that.trigger(VIEW_SHOW, { view: that._view });
                 });
             }
