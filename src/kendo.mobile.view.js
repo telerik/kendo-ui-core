@@ -169,26 +169,37 @@ var __meta__ = {
             }
         },
 
+        _beforeShow: function() {
+            return !this.trigger(BEFORE_SHOW, { view: this });
+        },
+
+        _updateParams: function(params) {
+            var paramsHistory = this._paramsHistory,
+                stringified = JSON.stringify(params);
+
+            if (paramsHistory[paramsHistory.length - 1] === stringified) { // back navigation
+                return false;
+            }
+
+            paramsHistory.push(stringified);
+            this.params = params;
+            return true;
+        },
+
         switchWith: function(view, transition, params, callback) {
             var that = this,
-                paramsHistory = this._paramsHistory,
+                back,
                 complete = function() {
                     that.trigger(AFTER_SHOW, {view: that});
                     that._padIfNativeScrolling();
                     callback();
                 };
 
-            if (that.trigger(BEFORE_SHOW, {view: that})) {
+            if (!this._beforeShow()) {
                 return;
             }
 
-            that._back = paramsHistory[paramsHistory.length - 1] === JSON.stringify(params);
-
-            if (!that._back) {
-                paramsHistory.push(JSON.stringify(params));
-            }
-
-            that.params = params;
+            back = !this._updateParams(params);
 
             if (view) {
                 // layout needs to be detached first, then reattached
@@ -198,6 +209,7 @@ var __meta__ = {
                 new ViewTransition({
                     current: view,
                     next: that,
+                    reverse: back,
                     transition: transition,
                     defaultTransition: view.options.defaultTransition,
                     complete: complete
@@ -413,7 +425,9 @@ var __meta__ = {
                 parallax = /^slide/.test(animationType),
                 reverse = animationData[1] === "reverse";
 
-            if (that.back() && !that.transition) {
+            // Reverse the transition if going back and the transition is not *explicitly* set,
+            // for example from the navigate method call, or from the navigation element data-transition attribute.
+            if (back && !that.transition) {
                 reverse = !reverse;
             }
 
@@ -428,10 +442,9 @@ var __meta__ = {
         },
 
         back: function() {
-            var next = this.next,
-                current = this.current;
+            var nextViewID  = this.next.nextViewID;
 
-            return next.nextViewID && next.nextViewID === current.id && next._back;
+            return this.reverse && nextViewID && nextViewID === this.current.id;
         }
     });
 
