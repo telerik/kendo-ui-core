@@ -2,6 +2,10 @@
 
 var XmlDataReader = kendo.data.XmlDataReader;
 
+module("XmlDataReader", {
+});
+
+
 test("parse of empty element", function() {
     var reader = new XmlDataReader({});
 
@@ -327,6 +331,18 @@ test("model is initialized from options", function() {
     });
 
     ok(new reader.model instanceof kendo.data.Model);
+});
+
+test("model is initialized from options modelBase", function() {
+    var ModelBase = kendo.data.Model.define({});
+
+    var reader = new XmlDataReader({
+        modelBase: ModelBase,
+        model: {
+        }
+    });
+
+    ok(new reader.model instanceof ModelBase);
 });
 
 test("parse model id", function() {

@@ -33,6 +33,8 @@ var __meta__ = {
 
             if (model) {
                 if (isPlainObject(model)) {
+                    base = options.modelBase || kendo.data.Model;
+
                     if (model.fields) {
                         each(model.fields, function(field, value) {
                             if (isPlainObject(value) && value.field) {
@@ -43,6 +45,7 @@ var __meta__ = {
                             model.fields[field] = value;
                         });
                     }
+
                     var id = model.id;
                     if (id) {
                         var idField = {};
@@ -51,7 +54,7 @@ var __meta__ = {
                         model.fields = extend(idField, model.fields);
                         model.id = that.xpathToMember(id);
                     }
-                    model = kendo.data.Model.define(model);
+                    model = base.define(model);
                 }
 
                 that.model = model;
