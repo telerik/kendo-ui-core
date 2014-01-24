@@ -15,7 +15,7 @@
 
 /* Slider */
 
-.km-root .k-slider
+.km-widget .k-slider
 {
     line-height: .6em;
     position: relative;
@@ -24,7 +24,7 @@
     text-align: center;
 }
 
-.km-root .k-slider-horizontal
+.km-widget .k-slider-horizontal
 {
     width: 50%;
     height: .6em;
@@ -50,36 +50,36 @@
     border-width: .5em 0;
 }
 
-.km-root .k-slider-horizontal .k-slider-track
+.km-widget .k-slider-horizontal .k-slider-track
 {
     width: auto !important;
 }
 
-.km-root .km-pane .k-slider-track
+.km-widget .k-slider .k-slider-track
 {
     background-clip: padding-box;
 }
 
-.km-root .k-slider-track,
-.km-root .k-slider-selection
+.km-widget .k-slider-track,
+.km-widget .k-slider-selection
 {
     margin-top: 0;
     .border-radius(5px);
     .box-shadow(inset 0 0 1px rgba(0,0,0,.3));
 }
 
-.km-root .k-slider-horizontal .k-slider-selection
+.km-widget .k-slider-horizontal .k-slider-selection
 {
     top: 0;
     height: 100%;
 }
 
-.km-root .k-slider-items
+.km-widget .k-slider-items
 {
     margin: 0;
 }
 
-.km-root .k-slider .k-draghandle
+.km-widget .k-slider .k-draghandle
 {
     text-indent: -3333px;
     left: 0;
@@ -89,7 +89,7 @@
     position: absolute;
 }
 
-.km-root .k-slider-tooltip
+.km-widget .k-slider-tooltip
 {
     display: none;
 }
@@ -173,9 +173,9 @@
     margin-top: -1em;
 }
 
-.km-root .k-slider .k-tick,
-.km-root .k-slider .k-label,
-.km-root .k-slider .k-button
+.km-widget .k-slider .k-tick,
+.km-widget .k-slider .k-label,
+.km-widget .k-slider .k-button
 {
     display: none;
 }
@@ -210,14 +210,14 @@
     background: none;
 }
 
-.km-root input,
-.km-root textarea
+.km-widget input,
+.km-widget textarea
 {
     .user-select(text);
 }
 
-.km-root input[readonly],
-.km-root select:not([multiple])
+.km-widget input[readonly],
+.km-widget select:not([multiple])
 {
     .user-select(none);
 }
@@ -238,27 +238,27 @@
     background-color: transparent;
 }
 
-.km-root .k-dropdown-wrap
+.km-widget .k-dropdown-wrap
 {
     display: inline-block;
 }
 
-.km-root .km-listview-label:after,
-.km-root input ~ .km-listview-link:after,
-.km-root textarea ~ .km-listview-link:after,
-.km-root select ~ .km-listview-link:after,
-.km-root .k-dropdown ~ .km-listview-link:after
+.km-widget .km-listview-label:after,
+.km-widget input ~ .km-listview-link:after,
+.km-widget textarea ~ .km-listview-link:after,
+.km-widget select ~ .km-listview-link:after,
+.km-widget .k-dropdown ~ .km-listview-link:after
 {
     display: none;
 }
 
-.km-root .k-dropdown select,
-.km-root .k-dropdown .k-select
+.km-widget .k-dropdown select,
+.km-widget .k-dropdown .k-select
 {
     display: none;
 }
 
-.km-root .km-list textarea
+.km-widget .km-list textarea
 {
     position: relative;
     float: right;

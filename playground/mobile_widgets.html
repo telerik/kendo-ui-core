@@ -32,6 +32,12 @@
 </head>
 <body>
     <div id="container">
+        <div data-role="navbar">
+            <a data-align="left" data-icon="home" data-role="button">Button</a>
+            <span data-role="view-title">NavBar</span>
+            <a data-align="right" data-icon="home" data-role="button">Button</a>
+        </div>
+        <br/>
         <input data-role="switch" />
         <a data-icon="home" data-role="button">Button</a>
         <ul data-role="buttongroup">
@@ -39,15 +45,14 @@
             <li data-icon="favorites">Button 2</li>
             <li data-icon="phone">Button 3</li>
         </ul>
-        <br/>
-        <br/>
+        <br/><br/>
         <div data-role="scroller" style="width: 400px; height: 300px; border: 1px solid lightgray">
-            <ul data-role="listview" data-type="group" data-style="inset">
+            <ul data-role="listview" data-type="group" data-style="inset" data-filterable="true">
                 <li>Group 1
                     <ul>
-                        <li>Test 1</li>
-                        <li>Test 2</li>
-                        <li>Test 3</li>
+                        <li>Test 1<input data-role="switch" /></li>
+                        <li>Test 2<input data-role="switch" /></li>
+                        <li>Test 3<input type="text"/></li>
                         <li>Test 4</li>
                         <li>Test 5</li>
                         <li>Test 6</li>
@@ -92,6 +97,11 @@
                     </ul>
                 </li>
             </ul>
+        </div>
+        <br/>
+        <div data-role="tabstrip">
+            <a data-icon="phone">Phone</a>
+            <a data-icon="settings">Settings</a>
         </div>
     </div>
 

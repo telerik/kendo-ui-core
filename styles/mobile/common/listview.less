@@ -50,8 +50,8 @@
 }
 
 .km-list > li,
-.km-root .km-listview-link,
-.km-root .km-listview-label
+.km-widget .km-listview-link,
+.km-widget .km-listview-label
 {
     margin: 0;
     display: block;
@@ -83,7 +83,8 @@
     -webkit-transform: translateZ(0);
 }
 
-.km-root .km-list .km-load-more
+.km-widget.km-list .km-load-more,
+.km-widget .km-list .km-load-more
 {
     border-bottom: 0;
 }
@@ -117,8 +118,8 @@
     border-bottom: 0;
 }
 
-.km-root .km-listview-link,
-.km-root .km-listview-label
+.km-widget .km-listview-link,
+.km-widget .km-listview-label
 {
     line-height: inherit;
     text-decoration: none;
@@ -156,7 +157,7 @@
     border: 1px solid transparent;
 }
 
-.km-root .km-filter-wrap:before
+.km-widget .km-filter-wrap:before
 {
     display: inline-block;
     vertical-align: middle;
