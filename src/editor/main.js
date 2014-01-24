@@ -167,7 +167,6 @@
 
             Widget.fn.init.call(that, element, options);
 
-
             that.options = deepExtend({}, that.options, options);
 
             element = that.element;
@@ -190,7 +189,7 @@
                     toolbarContainer.attr("aria-controls", element[0].id);
                 }
             } else {
-                that.element.addClass("k-widget k-editor k-editor-inline");
+                that.element.attr("contenteditable", true).addClass("k-widget k-editor k-editor-inline");
 
                 toolbarOptions.popup = true;
 
