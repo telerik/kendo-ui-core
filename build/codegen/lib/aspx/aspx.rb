@@ -14,15 +14,15 @@ module CodeGen
       }
 
       CLASS_TEMPLATE = ERB.new('
-namespace Telerik.Web.UI //full_name: <%= full_name %>
+namespace <%= csharp_namespace %>
 {
   /// <summary>
-  /// Summary description for MyControl
+  ///
   /// </summary>
-  public class <%= name.pascalize %> : Telerik.Web.StateManager
+  public class <%= csharp_class %> : Telerik.Web.StateManager
   {
     #region [ Constructor ]
-    public class <%= name.pascalize %>() {}
+    public class <%= csharp_class %>() {}
     #endregion [ Constructor ]
 
     #region [ Properties ]
@@ -87,18 +87,21 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
     }')
 
     ENUM_TEMPLATE = ERB.new('
-        /// <summary>
-        /// <%= description %>
-        /// </summary>
-        public enum <%= csharp_type %>
-        {
-            <% values.each_with_index do |value, index| %>
-            ///<summary>
-            ///<%= value_desc_to_s value %>
-            ///</summary>
-            <%= value_to_s(value).pascalize %> <%= \',\' if index < values.length - 1 %>
-            <% end %>
-        }
+namespace <%= csharp_namespace %>
+{
+    /// <summary>
+    /// <%= description %>
+    /// </summary>
+    public enum <%= csharp_type %>
+    {
+        <% values.each_with_index do |value, index| %>
+        ///<summary>
+        ///<%= value_desc_to_s value %>
+        ///</summary>
+        <%= value_to_s(value).pascalize %> <%= \',\' if index < values.length - 1 %>
+        <% end %>
+    }
+}
     ')
 
     COLLECTION_TEMPLATE = ERB.new('
@@ -121,10 +124,10 @@ namespace Telerik.Web.UI //full_name: <%= full_name %>
     }
 ')
     ARRAY_ITEM_CLASS_TEMPLATE = ERB.new('
-namespace --NamespacePlaceHolder--
+namespace <%= csharp_namespace %>
 {
     /// <summary>
-    /// --DescriptionPlaceHolder--
+    /// <%= description %>
     /// </summary>
     public class <%= csharp_class %>
     {
@@ -155,6 +158,20 @@ namespace --NamespacePlaceHolder--
 
         def array_option_class
             ArrayOption
+        end
+
+        def csharp_namespace
+            "Telerik.Web.UI.#{root_component.name.pascalize}" if root_component.widget?
+            "Telerik.Web.UI"
+        end
+
+        def root_component
+            parent = owner
+            while !parent.is_a?(Component) && !parent.owner.nil?
+                parent = parent.owner
+            end
+
+            parent if parent.is_a?(Component)
         end
     end
 
@@ -217,7 +234,6 @@ namespace --NamespacePlaceHolder--
             COMPOSITE_PROPERTY_TEMPLATE.result(get_binding)
         end
 
-
         def get_binding
             binding
         end
@@ -232,6 +248,10 @@ namespace --NamespacePlaceHolder--
 
         def csharp_class
             "List<#{item.csharp_class}>"
+        end
+
+        def csharp_namespace
+            'Telerik.Web.UI'
         end
 
         def csharp_default
@@ -253,14 +273,34 @@ namespace --NamespacePlaceHolder--
         def to_class
             ARRAY_ITEM_CLASS_TEMPLATE.result(binding)
         end
-
     end
 
       class Component < CodeGen::Component
         include Options
 
         def csharp_class
-            name
+            return "Rad#{name.pascalize}" if widget?
+
+            name.pascalize
+        end
+
+        def csharp_namespace
+            prefix = "Telerik.Web.UI"
+
+            return "#{prefix}.#{owner_namespace}" unless widget?
+
+            prefix
+        end
+
+        def owner_namespace
+            full_name.sub(".#{name}", '')
+                        .sub('kendo.ui.', '')
+                        .sub('kendo.dataviz.ui.', '')
+                        .sub('kendo.dataviz.', '')
+                        .sub('kendo.mobile.ui.', '')
+                        .sub('kendo.mobile.', '')
+                        .sub('kendo.', '')
+                        .pascalize
         end
 
         def get_binding
@@ -290,7 +330,6 @@ namespace --NamespacePlaceHolder--
         end
 
         def component(component)
-
           write_class(component)
           write_enums(component)
           write_properties(component)
