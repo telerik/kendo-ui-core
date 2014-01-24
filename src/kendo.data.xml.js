@@ -25,10 +25,14 @@ kendo_module({
                 parse = options.parse,
                 errors = options.errors,
                 serialize = options.serialize,
+                base,
                 data = options.data;
 
             if (model) {
                 if (isPlainObject(model)) {
+
+                    base = options.modelBase || kendo.data.Model;
+
                     if (model.fields) {
                         each(model.fields, function(field, value) {
                             if (isPlainObject(value) && value.field) {
@@ -47,7 +51,7 @@ kendo_module({
                         model.fields = extend(idField, model.fields);
                         model.id = that.xpathToMember(id);
                     }
-                    model = kendo.data.Model.define(model);
+                    model = base.define(model);
                 }
 
                 that.model = model;
