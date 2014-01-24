@@ -70,14 +70,14 @@
             }
         },
 
+        polygon: function(coords, style) {
+            this.surface.draw(this._buildPolygon(coords, style));
+        },
+
         _resize: function() {
             this.surface.setSize(
                 this.map.getSize()
             );
-        },
-
-        polygon: function(coords, style) {
-            this.surface.draw(this._buildPolygon(coords, style));
         },
 
         _activate: function() {

@@ -40,11 +40,11 @@
         show: function() {
             this.reset();
             this._activate();
-            this.element.css("visibility", "");
+            this.element.css("display", "");
         },
 
         hide: function() {
-            this.element.css("visibility", "hidden");
+            this.element.css("display", "none");
             this._deactivate();
         },
 

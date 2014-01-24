@@ -27,7 +27,10 @@
 </head>
 <body>
     <div id="map"></div>
+    <button id="show">Show</button>
+    <button id="hide">Hide</button>
     <script>
+    var map;
     require([ "jquery.min", "kendo.dataviz.map" ], function(){
         var scale = chroma
             .scale(["white", "green"])
@@ -118,7 +121,7 @@
             }
         });
 
-        var map = $("#map").data("kendoMap");
+        map = $("#map").data("kendoMap");
 
         function flip() {
             var size = map.getSize();
@@ -129,6 +132,14 @@
 
             map.resize();
         }
+
+        $("#show").click(function() {
+            map.layers[0].show();
+        });
+
+        $("#hide").click(function() {
+            map.layers[0].hide();
+        });
     });
     </script>
 </body>
