@@ -25,75 +25,30 @@
         <script src="../../src/kendo.mobile.navbar.js"></script>
     </head>
     <body>
-        <div id="Div1" data-role="view" data-transition="fade" data-title="Data" data-model="viewModel">
+
+        <div id="Div1" data-role="view" id="index" data-title="Data" data-model="viewModel">
             <div data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
                 </div>
             </div>
-            <a data-role="button" href="#foo">Foo</a>
-            <ul data-role="listview" data-template="template" data-bind="source: items"></ul>
+            <a data-role="button" href="#/?foo=bar">index?foo=bar</a>
+            <a data-role="button" href="#/">index</a>
         </div>
 
         <div data-role="view" id="foo">
+            <div data-role="header">
+                <a data-role="backbutton" data-align="left">Back</a>
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+
             Foo
         </div>
 
-        <script id="template" type="text/x-kendo-template">
-            <label>
-                <input type="checkbox" data-bind="checked: isSelected" onclick="return false;">
-                ${name}
-            </label>
-        </script>
-
         <script type="text/javascript">
-            var mobileApp = new kendo.mobile.Application($(document.body));
-
-            var viewModel = kendo.observable({
-                items: [
-                    { name: 'checkbox 1', isSelected: true },
-                    /*
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    { name: 'checkbox 1', isSelected: true },
-                    */
-                    { name: 'checkbox 2', isSelected: false }
-                ]
-            });
+            var mobileApp = new kendo.mobile.Application($(document.body), { transition: "slide" });
         </script>
     </body>
 </html>

@@ -6,41 +6,64 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.fx.js"></script>
+        <link href="fx.less" rel="stylesheet/less" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <title>Transition</title>
         <style>
             body {
                 width: 500px;
                 margin: 20px auto;
             }
-            #a-container, #b-container {
-                width: 100px;
-                height: 100px;
-                position: absolute;
+
+            #container {
+                width: 200px;
+                height: 200px;
+            }
+
+            #a, #b {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .content {
+                flex-grow: 1;
             }
 
             #a {
-                width: 100px;
-                height: 100px;
-                background: red;
+                width: 200px;
+                height: 200px;
                 position: absolute;
             }
 
+            #a .header, #a .footer, #a .content {
+                background: orange;
+            }
+
             #b {
-                width: 100px;
-                height: 100px;
+                width: 200px;
+                height: 200px;
                 position: absolute;
-                background: blue;
+            }
+
+            #b .header, #b .footer, #b .content {
+                background: yellow;
             }
         </style>
     </head>
     <body>
 
-        <div id="a-container">
-            <div id="a"> A div </div>
-        </div>
+        <div id="container">
+            <div id="a">
+                <div class="header">Header</div>
+                <div class="content">Content</div>
+                <div class="footer">Footer</div>
+            </div>
 
-        <div id="b-container">
-            <div id="b"> B div </div>
+            <div id="b">
+                <div class="header">Header</div>
+                <div class="content">Content</div>
+                <div class="footer">Footer</div>
+            </div>
         </div>
 
         <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -50,25 +73,77 @@
             <dt>Animation type:</dt>
             <dd>
             <select id="animation-type">
-                <option>overlay:up</option>
-                <option>slide</option>
                 <option>zoom</option>
                 <option>fade</option>
+                <option>slide</option>
+                <option>overlay</option>
             </select>
             </dd>
+
+            <dt>Direction</dt>
+            <dd>
+            <select id="animation-direction">
+                <option>up</option>
+                <option>down</option>
+                <option>left</option>
+                <option>right</option>
+            </select>
+            </dd>
+            <dt>Reverse</dt>
+
+            <dd>
+                <input type="checkbox" id="reverse" />
+            </dd>
         </dl>
-        <label><input type="checkbox" id="reverse" checked />Reverse</label>
         <button id="apply">Apply</button>
 
         <script>
 
-            $("#apply").click(function() {
-                $("#b, #a").css({"top":0, "left":0});
-                $("#a").css("top");
+            function classAnimate(options) {
+                var current = options.current,
+                    next = options.next,
+                    container = options.container,
+                    reverse = options.reverse;
 
-                $("#a").kendoAnimateTo($("#b"), { effects: $("#animation-type").val(), duration: 1000, reverse: $("#reverse")[0].checked });
+                current.css('display', '');
+                next.css('display', '');
+
+                var containerClass = "k-fx-start k-fx-" + options.type;
+
+                if (options.direction) {
+                    containerClass += " k-fx-" + options.direction;
+                }
+
+                if (reverse) {
+                    containerClass += " k-fx-reverse";
+                }
+
+                container.addClass(containerClass);
+                current.addClass("k-fx-current");
+                next.addClass("k-fx-next");
+
+                container.one('webkitTransitionEnd', function(e) {
+                    container.removeClass("k-fx-end").removeClass(containerClass);
+                    current.removeClass("k-fx-current");
+                    next.removeClass("k-fx-next");
+                    (reverse ? next : current).hide();
+                });
+
+                container.css("left"); // hack to refresh webkit
+
+                container.removeClass("k-fx-start").addClass("k-fx-end");
+            }
+
+            $("#apply").click(function() {
+                classAnimate({
+                    container: $("#container"),
+                    current: $("#a"),
+                    next: $("#b"),
+                    type: $("#animation-type").val(),
+                    direction: $("#animation-direction").val(),
+                    reverse: $("#reverse")[0].checked
+                });
             });
-            $("#apply").click();
         </script>
     </body>
 </html>
