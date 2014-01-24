@@ -16,20 +16,23 @@ module CodeGen
       CLASS_TEMPLATE = ERB.new('
 namespace <%= csharp_namespace %>
 {
-  /// <summary>
-  ///
-  /// </summary>
-  public class <%= csharp_class %> : Telerik.Web.StateManager
-  {
-    #region [ Constructor ]
-    public class <%= csharp_class %>() {}
-    #endregion [ Constructor ]
 
-    #region [ Properties ]
-    #endregion [ Properties ]
+    using System.ComponentModel;
 
-    #region [ Events ]
-    #endregion [ Events ]
+    /// <summary>
+    /// 
+    /// </summary>
+    public class <%= csharp_class %> : Telerik.Web.StateManager
+    {
+        #region [ Constructor ]
+        public class <%= csharp_class %>() {}
+        #endregion [ Constructor ]
+    
+        #region [ Properties ]
+        #endregion [ Properties ]
+    
+        #region [ Events ]
+        #endregion [ Events ]
 
   }
 }
