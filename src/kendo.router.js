@@ -142,6 +142,7 @@ var __meta__ = {
             }
 
             this.root = root;
+            this.historyLength = history.length;
             this.current = this.adapter.current();
             this.locations = [this.current];
             this.adapter.change($.proxy(this, "_checkUrl"));
@@ -180,17 +181,23 @@ var __meta__ = {
 
             this.current = this.adapter.navigate(to);
 
+            this.historyLength = history.length;
+
             this.locations.push(this.current);
         },
 
         _checkUrl: function() {
             var current = this.adapter.current(),
-                back = current === this.locations[this.locations.length - 2],
+                newLength = history.length,
+                navigatingInExisting = this.historyLength === newLength,
+                back = current === this.locations[this.locations.length - 2] && navigatingInExisting,
                 prev = this.current;
 
             if (this.current === current || this.current === decodeURIComponent(current)) {
                 return;
             }
+
+            this.historyLength = newLength;
 
             this.current = current;
 
@@ -205,6 +212,7 @@ var __meta__ = {
                     history.forward();
                 } else {
                     history.back();
+                    this.historyLength --;
                 }
                 this.current = prev;
                 return;

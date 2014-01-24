@@ -183,6 +183,26 @@
         }, 300);
     });
 
+    asyncTest("Allows prevention of navigating to previous URL (not back) if preventDefault called", 1, function() {
+        startWithHash();
+
+        kendoHistory.navigate("/initial-location");
+        kendoHistory.navigate("/new-location");
+
+        kendoHistory.change(function(e) {
+            e.preventDefault();
+        });
+
+        setTimeout(function() {
+            loc.href = initial + "#/initial-location";
+        }, 300);
+
+        setTimeout(function() {
+            start();
+            url(initial + "#/new-location");
+        }, 600);
+    });
+
     asyncTest("Triggers back", 2, function() {
         startWithHash();
 

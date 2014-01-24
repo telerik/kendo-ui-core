@@ -20,36 +20,92 @@
     <script src="../demos/mvc/content/shared/js/less.js"></script>
 </head>
 <body>
-  <script type="text/x-kendoui-template" id="kitten-list-item-template">
-    <img data-bind="attr: {src: url}" width="150px" />
+
+  <div id="myRoot" class="container">
+  </div>
+
+  <script type="text/x-kendo-template" id="layout-template">
+    <ul data-role="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#/orders">Orders</a></li>
+      <li><a href="#/products">Products</a></li>
+    </ul>
+    <div id="myContent"></div>
   </script>
 
-  <script type="text/x-kendoui-template" id="kitten-list-template">
-      <div
-          data-role="kendo.ui.ListView"
-          data-template="kitten-list-item-template"
-          data-bind="source: imageDataSource">
-      </div>
+  <script type="text/x-kendo-template" id="home-template">
+    <h2>Home Page</h2>
   </script>
 
-  <div id="image-list"></div>
+  <script type="text/x-kendo-template" id="orders-template">
+    <h2>Orders Page</h2>
+  </script>
 
+  <script type="text/x-kendo-template" id="products-template">
+    <h2>Products Page</h2>
+  </script>
 
   <script>
-      var image = new kendo.observable({
-          url: "http://placekitten.com/301/200",
-          imageDataSource: new kendo.data.DataSource({
-              data: [
-              { url: "http://placekitten.com/301/201" },
-              { url: "http://placekitten.com/300/201" },
-              { url: "http://placekitten.com/301/200" },
-              { url: "http://placekitten.com/300/200" }
-              ]
-          })
-      });
+      (function() {
 
-      var listview = new kendo.View("kitten-list-template", { model: image });
-      $("#image-list").html(listview.render());
+          // Define layout
+          var layout = new kendo.Layout("#layout-template");
+
+          var canLeaveCallback = null;
+
+          var canLeaveHome = function () {
+              return true;
+          };
+
+          var canLeaveOrders = function () {
+              return true;
+          };
+
+          var canLeaveProducts = function () {
+              return false;
+          };
+
+          // Define Router
+          var router = new kendo.Router({
+              init: function () {
+                  layout.render("#myRoot");
+              },
+              change: function (e) {
+                  console.log("change event fired");
+
+                  if (canLeaveCallback !== null && canLeaveCallback() !== true) {
+                      e.preventDefault();
+                      console.log("route cancelled");
+                  }
+              }
+          });
+
+          // Define Views
+          var views = {
+              home: new kendo.View('#home-template'),
+              orders: new kendo.View('#orders-template'),
+              products: new kendo.View('#products-template')
+          };
+
+          // Configure routes
+          router.route('/', function() {
+              layout.showIn('#myContent', views.home);
+              canLeaveCallback = canLeaveHome;
+          });
+
+          router.route('/orders', function() {
+              layout.showIn('#myContent', views.orders);
+              canLeaveCallback = canLeaveOrders;
+          });
+
+          router.route('/products', function() {
+              layout.showIn('#myContent', views.products);
+              canLeaveCallback = canLeaveProducts;
+          });
+
+          router.start();
+
+      }());
   </script>
 </body>
 </html>
