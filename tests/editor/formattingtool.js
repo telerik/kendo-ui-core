@@ -4,7 +4,7 @@ var inline;
 
 module("editor formatting tools", {
     setup: function() {
-        QUnit.fixture.append('<div id="inline" contentEditable="true"></div>');
+        QUnit.fixture.append('<div id="inline"></div>');
         inline = new kendo.ui.Editor("#inline", {
             tools: [
                 { name: "formatting", items: [
@@ -46,6 +46,10 @@ function selectFromValue(editor, value) {
     editor.selectRange(range);
     editor.trigger("select");
 }
+
+test("Inline Editor sets a contentEditable attribute", function() {
+    equal(inline.element.attr("contenteditable"), "true");
+});
 
 test("tool items are filtered depending on selection", function() {
     selectFromValue(inline, '<h1>fo||o</h1><p>bar</p>');
