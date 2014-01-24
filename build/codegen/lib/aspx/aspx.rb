@@ -34,6 +34,22 @@ namespace <%= csharp_namespace %>
   }
 }
 ')
+      
+      COMPOSITE_CLASS_TEMPLATE = ERB.new('
+namespace <%= csharp_namespace %>
+{
+    using System.ComponentModel;
+
+    /// <summary>
+    /// <%= description %>
+    /// </summary>
+    public class <%= csharp_class %> : Telerik.Web.StateManager
+    {
+        #region [ Properties ]
+        #endregion [ Properties ]
+    }
+}
+')
 
       PROPERTY_WITH_DEFAULT_VALUE_TEMPLATE = ERB.new('
     /// <summary>
@@ -234,6 +250,14 @@ namespace <%= csharp_namespace %>
             COMPOSITE_PROPERTY_TEMPLATE.result(get_binding)
         end
 
+        def to_class_declaration
+            COMPOSITE_CLASS_TEMPLATE.result(get_binding)
+        end
+
+        def description
+            @description.gsub(/\n/, '')
+        end
+
         def get_binding
             binding
         end
@@ -391,9 +415,12 @@ namespace <%= csharp_namespace %>
         end
 
         def write_composite_option_file(composite)
-            composite_content = write_options(composite.options)
+            filename = File.join(@path, "#{composite.csharp_class}.cs")
+            create_file(filename, composite.to_class_declaration)
 
-            create_file(File.join(@path, "#{composite.csharp_class}.cs"), composite_content)
+            composite_content = write_options(composite.options)
+            
+            write_file(filename, composite_content, '#region [ Properties ]')
         end
 
         def write_array_item_class(item)
