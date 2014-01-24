@@ -1629,6 +1629,7 @@ p#copy
 .widgetOverview #example
 {
     padding:0;
+    background-color: #fff;
 }
 
 .demo-section
@@ -1942,7 +1943,9 @@ p#copy
     padding-top: 15px;
 }
 
-a.theme-builder {
+a.theme-builder 
+{
+    background-color: #929394;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 2px 2px 2px 2px;
     color: #fff;
