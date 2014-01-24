@@ -11,7 +11,8 @@ module.exports = function(grunt) {
                 var base = PATH.dirname(f);
                 var p = new LESS.Parser({
                     paths    : [ base ],
-                    filename : PATH.basename(f)
+                    filename : PATH.basename(f),
+                    syncImport: true
                 });
                 grunt.log.writeln("Compiling stylesheet: " + f);
                 p.parse(grunt.file.read(f), function(err, tree){
