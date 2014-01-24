@@ -1,0 +1,15 @@
+:options:
+    - :name: startCap
+      :type: String
+      :description: The start cap (arrow, head or decoration) of the connection.
+      :values:
+          - none - no cap
+          - ArrowStart - a filled arrow
+          - FilledCircle - a filled circle
+    - :name: endCap
+      :type: String
+      :description: The start cap (arrow, head or decoration) of the connection.
+      :values:
+          - none - no cap
+          - ArrowStart - a filled arrow
+          - FilledCircle - a filled circle
