@@ -1524,38 +1524,39 @@ kendo_module({
         }
     });
 
-   extend(true, ui, {
-       MultiDayView: MultiDayView,
-       DayView: MultiDayView.extend({
-           options: {
-               title: "Day"
-           },
-           name: "day"
-       }),
-       WeekView: MultiDayView.extend({
-           options: {
-               title: "Week",
-               selectedDateFormat: "{0:D} - {1:D}"
-           },
-           name: "week",
-           calculateDateRange: function() {
-               var selectedDate = this.options.date,
-                   start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
-                   idx, length,
-                   dates = [];
+    extend(true, ui, {
+        MultiDayView: MultiDayView,
+        DayView: MultiDayView.extend({
+            options: {
+                title: "Day"
+            },
+            name: "day"
+        }),
+        WeekView: MultiDayView.extend({
+            options: {
+                title: "Week",
+                selectedDateFormat: "{0:D} - {1:D}"
+            },
+            name: "week",
+            calculateDateRange: function() {
+                var selectedDate = this.options.date,
+                    start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
+                    idx, length,
+                    dates = [];
 
-               for (idx = 0, length = 7; idx < length; idx++) {
-                   dates.push(start);
-                   start = kendo.date.nextDay(start);
-               }
-               this._render(dates);
-           }
-       }),
-       WorkWeekView: MultiDayView.extend({
-           options: {
-              title: "Work Week",
-              selectedDateFormat: "{0:D} - {1:D}"
-           },
+                for (idx = 0, length = 7; idx < length; idx++) {
+                    dates.push(start);
+                    start = kendo.date.nextDay(start);
+                }
+                this._render(dates);
+            }
+        }),
+        WorkWeekView: MultiDayView.extend({
+            options: {
+                title: "Work Week",
+                selectedDateFormat: "{0:D} - {1:D}"
+            },
+            name: "workweeek",
             nextDate: function() {
                 return kendo.date.dayOfWeek(kendo.date.nextDay(this.endDate()), this.options.workWeekStart, 1);
             },
@@ -1574,7 +1575,7 @@ kendo_module({
                 }
                 this._render(dates);
             }
-       })
-
+        })
     });
+
 })(window.kendo.jQuery);
