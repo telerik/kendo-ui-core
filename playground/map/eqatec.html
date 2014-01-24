@@ -74,6 +74,27 @@
                     }
                 },
                 copyright: "&copy; FooBar"
+            }, {
+                dataSource: {
+                    type: "geojson",
+                    transport: {
+                        read: "countries.geo.json"
+                    }
+                },
+                coverage: [{
+                    extent: [
+                        45.3444, 20.8960, /* NW */
+                        40.5222, 29.6850  /* SE */
+                    ],
+                    minZoom: 5,
+                    maxZoom: 10
+                }],
+                style: {
+                    fill: {
+                        color: "red",
+                        opacity: 0.5
+                    }
+                }
             }],
             markers: [{
                 position: [51.5, -0.09],
