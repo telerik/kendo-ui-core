@@ -392,11 +392,13 @@
         test("destroy detaches handlers", function() {
             map.unbind = function(name, handler) {
                 if (name === "reset") {
-                    equal(handler, layer.reset);
+                    ok(true);
                 }
             };
 
             layer.destroy();
         });
     })();
+
+    baseLayerTests("Marker Layer", MarkerLayer);
 })();

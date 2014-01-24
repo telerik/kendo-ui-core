@@ -13,6 +13,7 @@
         "./dataviz/map/navigator",
         "./dataviz/map/zoom",
         "./dataviz/map/crs",
+        "./dataviz/map/layers/base",
         "./dataviz/map/layers/shape",
         "./dataviz/map/layers/tile",
         "./dataviz/map/layers/marker",

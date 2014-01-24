@@ -1,5 +1,7 @@
 (function(f, define){
-    define([ "../location", "../../geometry", "../../drawing/shapes", "../../../kendo.data" ], f);
+    define(["./base", "../location",
+            "../../geometry", "../../drawing/shapes",
+            "../../../kendo.data", "../../../kendo.draganddrop" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -20,16 +22,13 @@
         Group = d.Group,
 
         map = dataviz.map,
-        Location = map.Location;
+        Location = map.Location,
+        Layer = map.layers.Layer;
 
     // Implementation =========================================================
-    var ShapeLayer = Class.extend({
+    var ShapeLayer = Layer.extend({
         init: function(map, options) {
-            this._initOptions(options);
-            this.map = map;
-
-            this.element = $("<div class='k-layer'></div>")
-                .appendTo(map.scrollElement);
+            Layer.fn.init.call(this, map, options);
 
             this.surface = d.Surface.create(this.element[0], {
                 width: map.scrollElement.width(),
@@ -48,14 +47,8 @@
             this._mouseleave = this._handler("shapeMouseLeave");
             this.surface.bind("mouseleave", this._mouseleave);
 
-            map.bind("reset", proxy(this.reset, this));
-            map.bind("resize", proxy(this.resize, this));
-            map.bind("panEnd", proxy(this._panEnd, this));
-
             this._loader = new GeoJSONLoader(this.map, this.options.style, this);
             this._initDataSource();
-
-            this._updateAttribution();
         },
 
         options: {
@@ -63,34 +56,44 @@
             dataSource: {}
         },
 
-        _updateAttribution: function() {
-            var attr = this.map.attribution;
+        destroy: function() {
+            Layer.fn.destroy.call(this);
 
-            if (attr) {
-                attr.add(this.options.attribution);
-            }
+            this.surface.destroy();
+            this.dataSource.unbind("change", this._dataChange);
         },
 
         reset: function() {
-            if (this.surface.translate) {
-                this.surface.translate({ x: 0, y: 0 });
-            }
-
-            this.movable.moveTo({ x: 0, y: 0 });
-
+            this._position();
             if (this._data) {
                 this._load(this._data);
             }
         },
 
-        resize: function() {
+        polygon: function(coords, style) {
+            this.surface.draw(this._buildPolygon(coords, style));
+        },
+
+        _resize: function() {
             this.surface.setSize(
                 this.map.getSize()
             );
         },
 
-        polygon: function(coords, style) {
-            this.surface.draw(this._buildPolygon(coords, style));
+        _activate: function() {
+            Layer.fn._activate.call(this);
+
+            if (!this._panEnd) {
+                this._panEnd = proxy(this._position, this);
+            }
+
+            this.map.bind("panEnd", this._panEnd);
+        },
+
+        _deactivate: function() {
+            Layer.fn._deactivate.call(this);
+
+            this.map.unbind("panEnd", this._panEnd);
         },
 
         _initDataSource: function() {
@@ -160,7 +163,7 @@
             this._markers = [];
         },
 
-        _panEnd: function() {
+        _position: function() {
             var map = this.map;
             var nw = map.locationToView(map.extent().nw);
 

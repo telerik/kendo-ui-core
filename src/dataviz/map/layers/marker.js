@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../location" ], f);
+    define([ "./base", "../location" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -17,25 +17,20 @@
         deepExtend = kendo.deepExtend,
 
         map = dataviz.map,
-        Location = map.Location;
+        Location = map.Location,
+        Layer = map.layers.Layer;
 
     // Implementation =========================================================
-    var MarkerLayer = Class.extend({
+    var MarkerLayer = Layer.extend({
         init: function(map, options) {
-            this._initOptions(options);
+            Layer.fn.init.call(this, map, options);
 
             this.items = [];
-            this.map = map;
-            this.element = $("<div class='k-layer'></div>")
-                            .css("zIndex", this.options.zIndex)
-                            .appendTo(map.scrollElement);
-
-            this.reset = proxy(this.reset, this);
-            map.bind("reset", this.reset);
         },
 
         destroy: function() {
-            this.map.unbind("reset", this.reset);
+            Layer.fn.destroy.call(this);
+
             this.clear();
         },
 

@@ -76,6 +76,7 @@ module.exports = function(grunt) {
 
         'tests/chart/util.js',
         'tests/map/util.js',
+        'tests/map/layers/base.js',
 
         'themebuilder/scripts/themebuilder.js',
 

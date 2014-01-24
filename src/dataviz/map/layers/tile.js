@@ -1,5 +1,5 @@
 (function(f, define) {
-    define([ "../location", "../../geometry" ], f);
+    define([ "./base", "../location", "../../geometry" ], f);
 })(function() {
 
 (function ($, undefined) {
@@ -21,6 +21,7 @@
 
         Extent = dataviz.map.Extent,
         Location = dataviz.map.Location,
+        Layer = dataviz.map.layers.Layer,
 
         util = dataviz.util,
         renderSize = util.renderSize,
@@ -31,53 +32,55 @@
         DEFAULT_HEIGHT = 400;
 
     // Image tile layer =============================================================
-    var TileLayer = Class.extend({
+    var TileLayer = Layer.extend({
         init: function(map, options) {
-            var layer = this,
-                viewType = layer._viewType();
+            Layer.fn.init.call(this, map, options);
 
-            options = deepExtend({}, options, {
-                width: map.element.width() || DEFAULT_WIDTH,
-                height: map.element.height() || DEFAULT_HEIGHT
-            });
-
-            layer._initOptions(options);
-            layer.map = map;
-
-            layer.element = $("<div class='k-layer'></div>")
-                           .css({
-                               "zIndex": layer.options.zIndex,
-                               "opacity": layer.options.opacity
-                           })
-                           .appendTo(map.scrollElement);
-
-            if (typeof layer.options.subdomains === "string") {
-                layer.options.subdomains = layer.options.subdomains.split("");
+            if (typeof this.options.subdomains === "string") {
+                this.options.subdomains = this.options.subdomains.split("");
             }
 
-            layer._view = new viewType(layer.element, layer.options);
-
-            map.bind("reset", proxy(layer.reset, layer));
-            map.bind("resize", proxy(this.resize, layer));
-            if (kendo.support.mobileOS) {
-                map.bind("panEnd", proxy(layer._render, layer));
-            } else {
-                map.bind("pan", proxy(layer._pan, layer));
-            }
-
-            this._updateAttribution();
+            var viewType = this._viewType();
+            this._view = new viewType(this.element, this.options);
         },
 
-        _updateAttribution: function() {
-            var attr = this.map.attribution;
+        destroy: function() {
+            Layer.fn.destroy.call(this);
 
-            if (attr) {
-                attr.add(this.options.attribution);
-            }
+            this._view.destroy();
+            this._view = null;
+        },
+
+        reset: function() {
+            this._updateView();
+            this._view.clear();
+            this._view.reset();
         },
 
         _viewType: function() {
             return TileView;
+        },
+
+        _activate: function() {
+            Layer.fn._activate.call(this);
+
+            if (!this._panEnd) {
+                this._panEnd = proxy(this._render, this);
+                this._pan = proxy(this._pan, this);
+            }
+
+            if (kendo.support.mobileOS) {
+                this.map.bind("panEnd", this._panEnd);
+            } else {
+                this.map.bind("pan", this._pan);
+            }
+        },
+
+        _deactivate: function() {
+            Layer.fn._deactivate.call(this);
+
+            this.map.unbind("panEnd", this._panEnd);
+            this.map.unbind("pan", this._pan);
         },
 
         _updateView: function() {
@@ -94,18 +97,7 @@
             view.zoom(map.zoom());
         },
 
-        destroy: function() {
-            this._view.destroy();
-            this._view = null;
-        },
-
-        reset: function() {
-            this._updateView();
-            this._view.clear();
-            this._view.reset();
-        },
-
-        resize: function() {
+        _resize: function() {
             this._render();
         },
 
@@ -572,13 +564,5 @@
     });
 
 })(window.kendo.jQuery);
-
-    var __meta__ = {
-        id: "dataviz.map",
-        name: "Map",
-        category: "dataviz",
-        description: "The Kendo DataViz Map displays spatial data",
-        depends: [ "data", "userevents", "tooltip", "dataviz.core", "mobile.scroller" ]
-    };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

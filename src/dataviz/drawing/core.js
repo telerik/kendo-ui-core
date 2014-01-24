@@ -2,11 +2,10 @@
     define([ "../geometry" ], f);
 })(function(){
 
-(function () {
+(function ($) {
 
     // Imports ================================================================
-    var $ = jQuery,
-        doc = document,
+    var doc = document,
         noop = $.noop,
         toString = Object.prototype.toString,
 
