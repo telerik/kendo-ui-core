@@ -846,6 +846,8 @@ kendo_module({
         _toggleItem: function (element, isVisible) {
             var that = this,
                 childGroup = element.find(GROUPS),
+                link = element.find(LINKSELECTOR),
+                url = link.attr(HREF),
                 prevent, content;
 
             if (childGroup.length) {
@@ -857,7 +859,7 @@ kendo_module({
                 if (content.length) {
                     prevent = true;
 
-                    if (!content.is(EMPTY)) {
+                    if (!content.is(EMPTY) || url === undefined) {
                         that._toggleGroup(content, isVisible);
                     } else {
                         that._ajaxRequest(element, content, isVisible);
