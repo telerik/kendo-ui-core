@@ -72,7 +72,7 @@ require_once '../../lib/Kendo/Autoload.php';
         ->attr('style', 'width:100%;height:400px')
         ->startContent();
 ?>
-    &lt;p&gt;&lt;img src=&quot;http://www.kendoui.com/Image/kendo-logo.png&quot; alt=&quot;Editor for ASP.NET MVC logo&quot; style=&quot;display:block;margin-left:auto;margin-right:auto;&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;img src=&quot;../../content/web/editor/kendo-ui-web.png&quot; alt=&quot;Editor for ASP.NET MVC logo&quot; style=&quot;display:block;margin-left:auto;margin-right:auto;&quot; /&gt;&lt;/p&gt;
     &lt;p&gt;
         Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.&lt;br /&gt;
         In this version, the Editor provides the core HTML editing engine, which includes basic text formatting, hyperlinks, lists,

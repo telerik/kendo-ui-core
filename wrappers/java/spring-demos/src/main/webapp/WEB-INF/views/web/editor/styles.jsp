@@ -16,7 +16,7 @@
     </kendo:editor-tools>
     <kendo:editor-value>
             <p>
-               <img src="http://www.kendoui.com/Image/kendo-logo.png" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" />
+               <img src="../../content/web/editor/kendo-ui-web.png" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" />
             </p>
             <p>
                 Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.<br />
