@@ -1,95 +1,93 @@
-@flat-main-color: #4c5356;
-@flat-second-color: #bababa;
-@flat-background: #f4f4f4;
-@flat-dark-background: #363940;
-@flat-list-background: #fcfcfc;
-@flat-button-background: rgba(0,0,0,.1);
-@flat-border-color: rgba(0,0,0,.1);
-@flat-border-radius: 3px;
-@flat-inline-border-radius: @flat-border-radius - 1px;
-@flat-active-color: #fff;
-@flat-active-background: #10c4b2;
-@flat-second-active-background: #da2228;
-@flat-light-shadow: rgba(255,255,255,.2);
-@flat-overlay-background: rgba(0,0,0,.4);
+@mobile-main-color: #4c5356;
+@mobile-second-color: #bababa;
+@mobile-background: #f4f4f4;
+@mobile-dark-background: #363940;
+@mobile-list-background: #fcfcfc;
+@mobile-button-background: rgba(0,0,0,.1);
+@mobile-border-color: rgba(0,0,0,.1);
+@mobile-active-color: #fff;
+@mobile-active-background: #10c4b2;
+@mobile-second-active-background: #da2228;
+@mobile-light-shadow: rgba(255,255,255,.2);
+@mobile-overlay-background: rgba(0,0,0,.4);
 
 /* override transform options for performance */
 .km-widget,
 .km-content
 {
-    color: @flat-main-color;
-    background: @flat-background;
+    color: @mobile-main-color;
+    background: @mobile-background;
 }
 
 /* NavBar */
 
 .km-navbar
 {
-    border-color: @flat-border-color;
+    border-color: @mobile-border-color;
 }
 
 /* Button */
 
 .km-button
 {
-    background: @flat-button-background;
-    border-color: @flat-border-color;
+    background: @mobile-button-background;
+    border-color: @mobile-border-color;
 }
 
 .km-state-active[style*=background]
 {
-    .box-shadow(inset 0 0 0 1000px lighten(@flat-overlay-background, 50%));
+    .box-shadow(inset 0 0 0 1000px lighten(@mobile-overlay-background, 50%));
 }
 
 /* Badges and Details */
 
 .km-detail
 {
-    color: @flat-main-color;
-    border-color: @flat-border-color;
-    background-color: @flat-background;
+    color: @mobile-main-color;
+    border-color: @mobile-border-color;
+    background-color: @mobile-background;
 }
 
 .km-detail:active,
 .km-state-active .km-detail
 {
-    .box-shadow(inset 0 0 0 1000px @flat-button-background);
+    .box-shadow(inset 0 0 0 1000px @mobile-button-background);
 }
 
 /* Switch */
 
 .km-switch-wrapper
 {
-    background-color: @flat-second-color;
+    background-color: @mobile-second-color;
 }
 
 .km-switch-background,
 .k-slider-selection
 {
-    .linear-gradient-image(top, @flat-second-color, @flat-second-color);
+    .linear-gradient-image(top, @mobile-second-color, @mobile-second-color);
 }
 
 .km-switch-handle
 {
-    background: @flat-background;
+    background: @mobile-background;
 }
 
 .km-switch-off .km-switch-handle
 {
-    -webkit-box-shadow: 0 1px 0 1px @flat-second-color, 0 -1px 0 1px @flat-second-color;
-    box-shadow: 0 1px 0 1px @flat-second-color, 0 -1px 0 1px @flat-second-color;
+    -webkit-box-shadow: 0 1px 0 1px @mobile-second-color, 0 -1px 0 1px @mobile-second-color;
+    box-shadow: 0 1px 0 1px @mobile-second-color, 0 -1px 0 1px @mobile-second-color;
 }
 
 .km-switch-wrapper,
 .km-switch-container,
 .km-switch-background
 {
-    .border-radius(@flat-border-radius + 1px);
+    .border-radius(@mobile-border-radius + 1px);
 }
 
 .km-switch-handle
 {
-    .border-radius(@flat-border-radius);
+    .border-radius(@mobile-border-radius);
 }
 
 .km-switch-container,
@@ -102,46 +100,46 @@
 
 .k-slider-track
 {
-    background-color: @flat-second-color;
+    background-color: @mobile-second-color;
 }
 
 /* ListView */
 
 .km-list > li
 {
-    background: @flat-list-background;
-    border-color: @flat-border-color;
-    .box-shadow(inset 0 @flat-border-width 0 @flat-light-shadow);
+    background: @mobile-list-background;
+    border-color: @mobile-border-color;
+    .box-shadow(inset 0 @mobile-border-width 0 @mobile-light-shadow);
 }
 
 .km-listinset > li:first-child,
 .km-listgroupinset .km-list > li:first-child
 {
-    border-color: @flat-border-color;
+    border-color: @mobile-border-color;
 }
 
 .km-listinset > li:last-child,
 .km-listgroupinset .km-list > li:last-child
 {
-    border-color: @flat-border-color;
+    border-color: @mobile-border-color;
 }
 
 .km-listview-link:after
 {
-    color: lighten(@flat-main-color, 30);
+    color: lighten(@mobile-main-color, 30);
 }
 
 .km-group-title
 {
-    background: @flat-background;
-    border-color: @flat-border-color;
+    background: @mobile-background;
+    border-color: @mobile-border-color;
 }
 
 /* ScrollView */
 
 .km-pages li
 {
-    background: @flat-border-color;
+    background: @mobile-border-color;
 }
 
 /* Filter box */
@@ -149,13 +147,13 @@
 .km-filter-wrap:before,
 .km-filter-reset .km-clear
 {
-	color: @flat-main-color;
+	color: @mobile-main-color;
 }
 
 .km-filter-wrap > input
 {
-    color: @flat-main-color;
-    border-color: @flat-border-color;
+    color: @mobile-main-color;
+    border-color: @mobile-border-color;
 }
 
 .km-filter-wrap > input:focus
@@ -183,12 +181,12 @@
 .km-list .k-dropdown-wrap,
 .km-list textarea
 {
-    color: @flat-main-color;
+    color: @mobile-main-color;
 }
 
 .km-list .k-dropdown-wrap .k-input
 {
-    color: @flat-main-color;
+    color: @mobile-main-color;
 }
 
 .km-list select:not([multiple]) option
@@ -221,8 +219,8 @@
 .km-listview-label input[type=radio],
 .km-listview-label input[type=checkbox]
 {
-    border-color: @flat-border-color;
-    background: @flat-background;
+    border-color: @mobile-border-color;
+    background: @mobile-background;
 }
 
 .km-listview-label input[type=checkbox]:checked:after
@@ -235,7 +233,7 @@
 .km-shim,
 .km-phone .km-actionsheet-wrapper
 {
-    background: @flat-overlay-background;
+    background: @mobile-overlay-background;
 }
 
 /* PopUp + ActionSheet */
@@ -243,32 +241,32 @@
 .km-popup .k-item,
 .km-actionsheet > li > a
 {
-    background: @flat-dark-background;
-    border-bottom-color: @flat-light-shadow;
+    background: @mobile-dark-background;
+    border-bottom-color: @mobile-light-shadow;
 }
 
 li.km-actionsheet-cancel > a
 {
-    color: @flat-second-color;
+    color: @mobile-second-color;
 }
 
 .km-popup
 {
-    background: @flat-overlay-background;
+    background: @mobile-overlay-background;
 }
 
 .km-actionsheet-wrapper,
 .km-popup .k-list-container
 {
-    background: @flat-overlay-background;
-    border-top-color: @flat-light-shadow;
+    background: @mobile-overlay-background;
+    border-top-color: @mobile-light-shadow;
 }
 
 /* PopOver */
 
 .km-popup.km-pane
 {
-    background-color: @flat-dark-background;
+    background-color: @mobile-dark-background;
 }
 
 .km-popup-arrow:after,
@@ -279,25 +277,25 @@ li.km-actionsheet-cancel > a
 
 .km-popup-arrow:after
 {
-    border-color: @flat-dark-background transparent;
+    border-color: @mobile-dark-background transparent;
 }
 
 .km-left .km-popup-arrow:after,
 .km-right .km-popup-arrow:after
 {
-    border-color: transparent @flat-dark-background;
+    border-color: transparent @mobile-dark-background;
 }
 
 .km-down .km-popup-arrow:after
 {
-    border-color: @flat-dark-background transparent;
+    border-color: @mobile-dark-background transparent;
 }
 
 /* Loader & Pull-to-refresh */
 
 .km-loader h1
 {
-    color: @flat-main-color;
+    color: @mobile-main-color;
 }
 
 /* Active States */
@@ -327,7 +325,7 @@ li.km-state-active .km-listview-link,
 li.km-state-active .km-listview-label,
 .km-state-active .km-listview-link:after
 {
-    color: @flat-active-color;
+    color: @mobile-active-color;
 }
 
 .km-loader > *:not(h1),
@@ -335,14 +333,14 @@ li.km-state-active .km-listview-label,
 .km-switch-handle.km-state-active,
 .km-root .km-scroller-refresh span:not(.km-template)
 {
-    background: @flat-active-color;
+    background-color: @mobile-active-color;
 }
 
 .km-switch-handle,
 .k-slider-selection,
 .km-switch-background
 {
-    color: @flat-active-background;
+    color: @mobile-active-background;
 }
 
 .km-loader,
@@ -366,16 +364,16 @@ li.km-state-active .km-listview-label,
 .km-listview-label input[type=radio]:checked,
 .km-listview-label input[type=checkbox]:checked
 {
-    background: @flat-active-background;
+    background: @mobile-active-background;
 }
 
 .km-filter-wrap > input:focus
 {
-    border-color: @flat-active-background;
+    border-color: @mobile-active-background;
 }
 
 .km-badge,
 .km-rowdelete
 {
-    background: @flat-second-active-background;
+    background: @mobile-second-active-background;
 }

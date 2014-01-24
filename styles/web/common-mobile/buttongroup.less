@@ -4,6 +4,19 @@
 
 /* ButtonGroup */
 
+.km-buttongroup
+{
+    vertical-align: middle;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.km-buttongroup > *
+{
+    padding: .36em .8em;
+}
+
 .km-buttongroup > *:not(:first-child):not(:last-child)
 {
     .border-radius(0);
@@ -11,17 +24,17 @@
 
 .km-buttongroup > *:first-child
 {
-    .border-radius(@flat-border-radius 0 0 @flat-border-radius);
+    .border-radius(@mobile-border-radius 0 0 @mobile-border-radius);
 }
 
 .km-buttongroup > *:last-child
 {
-    .border-radius(0 @flat-border-radius @flat-border-radius 0);
+    .border-radius(0 @mobile-border-radius @mobile-border-radius 0);
 }
 
 .km-buttongroup > *.km-state-active
 {
-    border-right-width: @flat-border-width;
+    border-right-width: @mobile-border-width;
 }
 
 .km-buttongroup > *.km-state-active + *

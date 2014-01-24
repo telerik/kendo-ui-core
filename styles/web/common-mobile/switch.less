@@ -9,6 +9,7 @@
     height: 1.9rem;
     line-height: 1.76rem;
     overflow: hidden;
+    vertical-align: middle;
 }
 
 .km-switch-wrapper
@@ -19,7 +20,9 @@
 .km-switch-background,
 .k-slider-selection
 {
-    background: 4.25em 0 no-repeat currentcolor;
+    background-position: 4.25em 0;
+    background-repeat: no-repeat;
+    background-color: currentcolor;
     margin-left: -3.4rem;
 }
 
@@ -33,8 +36,8 @@
 {
     width: 1.6em;
     margin: 0 4px 0 0;
-    border-width: @flat-border-width;
-    border-style: solid;
+    border: @mobile-border-width solid transparent;
+    background-clip: padding-box;
     -webkit-box-shadow: 0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
     box-shadow:0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
 }
@@ -63,19 +66,19 @@
 .km-switch-container,
 .km-switch-background
 {
-    .border-radius(@flat-border-radius + 1px);
+    .border-radius(@mobile-border-radius + 1px);
 }
 
 .km-switch-handle
 {
-    .border-radius(@flat-border-radius);
+    .border-radius(@mobile-border-radius);
 }
 
 .km-switch-container,
 .km-switch-wrapper
 {
     .box-sizing(border-box);
-    border-width: @flat-border-width;
+    border-width: @mobile-border-width;
     border-style: solid;
     background-clip: content-box;
 }

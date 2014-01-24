@@ -1,7 +1,8 @@
 @import "../../mobile/common/base.less";
-@import "mobile-template.less";
 
-@flat-border-width: 1px;
+@mobile-border-width: 1px;
+@mobile-border-radius: 3px;
+@mobile-inline-border-radius: @mobile-border-radius - 1px;
 
 .km-widget
 {
@@ -53,7 +54,7 @@
     padding: .5em 0 .5em .6em;
     border: 0;
     .border-radius(0);
-    border-bottom-width: @flat-border-width;
+    border-bottom-width: @mobile-border-width;
     border-bottom-style: solid;
     .box-sizing(border-box);
 }
@@ -63,7 +64,7 @@
 {
     bottom: 0;
     border: 0;
-    border-bottom-width: @flat-border-width;
+    border-bottom-width: @mobile-border-width;
     border-bottom-style: solid;
     .border-radius(0);
     .box-sizing(border-box);
@@ -209,3 +210,6 @@
     66% { height: .6em; margin-top: -.3em; }
 }
 
+
+/* Color Template */
+@import "mobile-template.less";
