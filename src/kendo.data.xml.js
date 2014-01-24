@@ -33,7 +33,7 @@ var __meta__ = {
 
             if (model) {
                 if (isPlainObject(model)) {
-                    base = options.modelBase || kendo.data.Model;
+                    var base = options.modelBase || kendo.data.Model;
 
                     if (model.fields) {
                         each(model.fields, function(field, value) {
