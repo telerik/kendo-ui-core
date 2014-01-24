@@ -130,72 +130,11 @@
     });
 
     // ------------------------------------------------------------
-    module("Shape Layer / hide", {
-        setup: function() {
-            map = new MapMock();
-            layer = new ShapeLayer(map);
-            layer.hide();
-        }
-    });
-
-    test("hides element", function() {
-        equal(layer.element.css("visibility"), "hidden");
-    });
-
-    test("detaches map event handlers", 0, function() {
-        stubMethod(ShapeLayer.fn, "_load", function() {
-            ok(false);
-        }, function() {
-            map.trigger("reset");
-        });
-    });
-
-    // ------------------------------------------------------------
-    module("Shape Layer / show", {
-        setup: function() {
-            map = new MapMock();
-            layer = new ShapeLayer(map);
-            layer.hide();
-        }
-    });
-
-    test("shows element", function() {
-        layer.show();
-        equal(layer.element.css("visibility"), "visible");
-    });
-
-    test("re-attaches map event handlers", function() {
-        stubMethod(ShapeLayer.fn, "_load", function() {
-            ok(true);
-        }, function() {
-            layer.show();
-            map.trigger("reset");
-        });
-    });
-
-    test("triggers reset", function() {
-        stubMethod(ShapeLayer.fn, "_load", function() {
-            ok(true);
-        }, function() {
-            layer.show();
-        });
-    });
-
-    // ------------------------------------------------------------
     module("Shape Layer / destroy", {
         setup: function() {
             map = new MapMock();
             layer = new ShapeLayer(map);
         }
-    });
-
-    test("detaches map event handlers", 0, function() {
-        stubMethod(ShapeLayer.fn, "_load", function() {
-            ok(false);
-        }, function() {
-            layer.destroy();
-            map.trigger("reset");
-        });
     });
 
     test("destroys surface", function() {
@@ -207,4 +146,5 @@
         });
     });
 
+    baseLayerTests("Shape Layer", ShapeLayer);
 })();

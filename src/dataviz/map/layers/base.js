@@ -26,7 +26,7 @@
                })
                .appendTo(map.scrollElement);
 
-            this.reset = proxy(this.reset, this);
+            this._reset = proxy(this.reset, this);
             this._resize = proxy(this._resize, this);
             this._activate();
 
@@ -54,14 +54,14 @@
 
         _activate: function() {
             var map = this.map;
-            map.bind("reset", this.reset);
+            map.bind("reset", this._reset);
             map.bind("resize", this._resize);
             map.bind("panEnd", this._panEnd);
         },
 
         _deactivate: function() {
             var map = this.map;
-            map.unbind("reset", this.reset);
+            map.unbind("reset", this._reset);
             map.unbind("resize", this._resize);
             map.unbind("panEnd", this._panEnd);
         },

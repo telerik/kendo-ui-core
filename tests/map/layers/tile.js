@@ -416,4 +416,6 @@
         });
 
     })();
+
+    baseLayerTests("Tile Layer", TileLayer);
 })();
