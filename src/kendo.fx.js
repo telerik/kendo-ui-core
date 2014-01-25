@@ -109,6 +109,44 @@ var __meta__ = {
 
         kendo.directions = directions;
 
+        function classAnimate(options) {
+            var current = options.current,
+                next = options.next,
+                container = options.container,
+                callback = options.callback,
+                reverse = options.reverse;
+
+            console.log(current, next);
+            current.css('display', '');
+            next.css('display', '');
+
+            var containerClass = "k-fx-start k-fx-" + options.type;
+
+            if (options.direction) {
+                containerClass += " k-fx-" + options.direction;
+            }
+
+            if (reverse) {
+                containerClass += " k-fx-reverse";
+            }
+
+            container.addClass(containerClass);
+            current.addClass("k-fx-current");
+            next.addClass("k-fx-next");
+
+            container.one('webkitTransitionEnd', function(e) {
+                container.removeClass("k-fx-end").removeClass(containerClass);
+                current.removeClass("k-fx-current");
+                next.removeClass("k-fx-next");
+                (reverse ? next : current).hide();
+                callback();
+            });
+
+            container.css("left"); // hack to refresh webkit
+
+            container.removeClass("k-fx-start").addClass("k-fx-end");
+        }
+
     extend($.fn, {
         kendoStop: function(clearQueue, gotoEnd) {
             if (transitions) {
@@ -219,38 +257,6 @@ var __meta__ = {
 
     function parseCSS(element, property) {
         return parseInteger(element.css(property));
-    }
-
-
-    function parseTransitionEffects(options) {
-        var effects = options.effects;
-
-        if (effects === "zoom") {
-            effects = "zoom:in fade:in";
-        }
-        if (effects === "fade") {
-            effects = "fade:in";
-        }
-        if (effects === "slide") {
-            effects = "tile:left";
-        }
-        if (/^slide:(.+)$/.test(effects)) {
-            effects = "tile:" + RegExp.$1;
-        }
-        if (effects === "overlay") {
-            effects = "slideIn:left";
-        }
-        if (/^overlay:(.+)$/.test(effects)) {
-            effects = "slideIn:" + RegExp.$1;
-        }
-
-        options.effects = kendo.parseEffects(effects);
-
-        if (ios7 && effects == "tile:left") {
-            options.previousDivisor = 3;
-        }
-
-        return options;
     }
 
     function keys(obj) {
@@ -721,15 +727,10 @@ var __meta__ = {
                 both.css(POSITION, "absolute");
             }
 
-            options = parseTransitionEffects(options);
             if (!support.mobileOS.android) {
                 originalOverflow = commonParent.css(OVERFLOW);
                 commonParent.css(OVERFLOW, "hidden");
             }
-
-            $.each(options.effects, function(name, definition) {
-                direction = direction || definition.direction;
-            });
 
             function complete(animatedElement) {
                 destination[0].style.cssText = "";
@@ -745,16 +746,15 @@ var __meta__ = {
                 }
             }
 
-            options.complete = browser.msie ? function() { setTimeout(complete, 0); } : complete;
-            options.previous = (options.reverse ? destination : element);
+            var callback = browser.msie ? function() { setTimeout(complete, 0); } : complete;
 
-            options.reset = true; // Reset transforms if there are any.
-
-            // execute callback only once, and hook up derived animations to previous view only once.
-            (options.reverse ? element : destination).each(function() {
-                $(this).kendoAnimate(extend(true, {}, options));
-                options.complete = null;
-                options.previous = null;
+            classAnimate({
+                type: options.effects,
+                container: commonParent,
+                current: element,
+                next: destination,
+                callback: callback,
+                reverse: options.reverse
             });
         }
     });

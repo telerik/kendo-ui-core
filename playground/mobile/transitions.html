@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.all.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+
+        <title>Mobile Transitions Playground</title>
+    </head>
+
+    <body>
+        <div data-role="view" data-title="Index">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="button" data-align="left">Hi!</a>
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+
+            <ul data-role="listview">
+                <li><a href="#detail">Go to detail</a></li>
+            </ul>
+
+            <div data-role="footer">
+                <div data-role="tabstrip">
+                    <a href="#tabstrip-profile" data-icon="contacts">Profile
+                        </a><a href="#tabstrip-sales" data-icon="history">Sales
+                        </a><a href="#tabstrip-rating" data-icon="favorites">Rating
+                    </a><a href="#tabstrip-settings" data-icon="settings">Settings</a>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="view" data-title="Detail" id="detail" data-transition="slide">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-role="backbutton" data-align="left">Index</a>
+                    <span data-role="view-title"></span>
+                </div>
+            </div>
+
+            <img src="http://i.imgur.com/n6bF2Vx.jpg" alt="" />
+
+            <div data-role="footer">
+                <div data-role="tabstrip">
+                    <a href="#tabstrip-profile" data-icon="contacts">Ingredients
+                        </a><a href="#tabstrip-sales" data-icon="history">Contents
+                        </a><a href="#tabstrip-rating" data-icon="favorites">Etc
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            require.config({
+                baseUrl: "../../src"
+            });
+
+            require(['jquery', 'kendo.mobile.navbar', 'kendo.mobile.tabstrip', 'kendo.mobile.button', 'kendo.mobile.listview'], function($, kendo) {
+                new kendo.mobile.Application();
+            });
+        </script>
+    </body>
+</html>

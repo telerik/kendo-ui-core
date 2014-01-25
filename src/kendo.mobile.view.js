@@ -396,24 +396,7 @@ var __meta__ = {
                 next = that.next,
                 currentContent = current.element,
                 nextContent = next.element,
-                upper = next,
-                lower = current,
                 transition = that._transition();
-
-            if (transition.reverse) {
-                upper = current;
-                lower = next;
-            }
-
-            upper.element.css(Z_INDEX, 1);
-            lower.element.css(Z_INDEX, 0);
-
-            if (transition.parallax) {
-                fade(current.footer, next.footer, transition.reverse);
-                fade(current.header, next.header, transition.reverse);
-                currentContent = current.parallaxContents(next);
-                nextContent = next.parallaxContents(current);
-            }
 
             currentContent.kendoAnimateTo(nextContent, transition);
 
@@ -438,7 +421,6 @@ var __meta__ = {
                 transition = that.transition || viewTransition || that.defaultTransition,
                 animationData = transition.split(' '),
                 animationType = animationData[0],
-                parallax = /^slide/.test(animationType),
                 reverse = animationData[1] === "reverse";
 
             // Reverse the transition if going back and the transition is not *explicitly* set,
@@ -450,7 +432,6 @@ var __meta__ = {
             return {
                 effects: animationType,
                 reverse: reverse,
-                parallax: parallax,
                 complete: $.proxy(this, "_complete"),
                 transition: transition,
                 duration: TRANSITION_DURATION
