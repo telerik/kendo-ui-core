@@ -415,8 +415,7 @@ var __meta__ = {
             var that = this,
                 current = that.current,
                 next = that.next,
-                back = that.back();
-
+                back = that.back(),
                 viewTransition = back ? next.backTransition : next.transition,
                 transition = that.transition || viewTransition || that.defaultTransition,
                 animationData = transition.split(' '),

@@ -157,7 +157,7 @@ var __meta__ = {
         detach: function() {
             console.log('detach', arguments);
         },
-    })
+    });
 
     kendo.Fragment = Fragment;
     kendo.Layout = Layout;
