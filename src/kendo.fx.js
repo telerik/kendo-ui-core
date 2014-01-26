@@ -107,7 +107,6 @@ var __meta__ = {
             }
         };
 
-        kendo.directions = directions;
 
         function classAnimate(options) {
             var current = options.current,
@@ -146,6 +145,7 @@ var __meta__ = {
 
             container.removeClass("k-fx-start").addClass("k-fx-end");
         }
+    kendo.directions = directions;
 
     extend($.fn, {
         kendoStop: function(clearQueue, gotoEnd) {

@@ -2146,7 +2146,7 @@ function pad(number, digits, end) {
             this.element = $(element);
         },
 
-        promise: function (element, options) {
+        promise: function(element, options) {
             if (!element.is(":visible")) {
                 element.css({ display: element.data("olddisplay") || "block" }).css("display");
             }
@@ -2283,6 +2283,7 @@ function pad(number, digits, end) {
             kendoAddClass: function(classes, options){
                 return kendo.toggleClass(this, classes, options, true);
             },
+
             kendoRemoveClass: function(classes, options){
                 return kendo.toggleClass(this, classes, options, false);
             },
