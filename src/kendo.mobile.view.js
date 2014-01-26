@@ -19,7 +19,6 @@ var __meta__ = {
         Class = kendo.Class,
         Widget = ui.Widget,
         INIT = "init",
-        TRANSITION_DURATION = 320,
         UI_OVERLAY = '<div style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; z-index: 20000; display: none" />',
         BEFORE_SHOW = "beforeShow",
         SHOW = "show",
@@ -208,7 +207,6 @@ var __meta__ = {
 
             if (withSelf) {
                 if (back) {
-                    // nasty side effecting here, should be refactored
                     this.setNext(this.id, this.transition);
                 }
 
@@ -220,7 +218,7 @@ var __meta__ = {
                 view.hideStart();
                 that.showStart();
 
-                new ViewTransition({
+                ViewTransition({
                     current: view,
                     next: that,
                     reverse: back,
@@ -228,6 +226,7 @@ var __meta__ = {
                     defaultTransition: view.options.defaultTransition,
                     complete: callback
                 });
+
             } else {
                 that.showStart();
                 that.showEnd();
@@ -375,74 +374,52 @@ var __meta__ = {
         }
     });
 
-    function fade(source, destination, reverse) {
-        if (source[0] && destination[0] && source[0] != destination[0]) {
-            source.kendoAnimateTo(destination, {effects: "fade", duration: TRANSITION_DURATION, reverse: reverse });
-        }
-    }
-
     function initWidgets(collection) {
         collection.each(function() {
             kendo.initWidget($(this), {}, ui.roles);
         });
     }
 
-    var ViewTransition = Class.extend({
-        init: function (options) {
-            $.extend(this, options);
+    function parseTransition(transition) {
+        var matches = /^(\w+)(:(\w+))?( (\w+))?$/.match(transition);
+        return {
+            type: matches[1],
+            direction: matches[3],
+            reverse: matches[5] === "reverse"
+        };
+    }
 
-            var that = this,
-                current = that.current,
-                next = that.next,
-                currentContent = current.element,
-                nextContent = next.element,
-                transition = that._transition();
+    function ViewTransition(options) {
+        var current = options.current,
+            next = options.next,
 
-            currentContent.kendoAnimateTo(nextContent, transition);
+            nextViewID  = next.nextViewID,
+            back = options.reverse && nextViewID && nextViewID === current.id,
 
-            if (!that.back()) {
-                current.setNext(next.id, transition.transition);
-            }
-        },
+            viewTransition = back ? next.backTransition : next.transition,
+            transition = options.transition || viewTransition || options.defaultTransition,
+            transitionData = parseTransition(transition);
 
-        _complete: function() {
-            this.next.showEnd();
-            this.current.hideEnd();
-            this.complete();
-        },
-
-        _transition: function() {
-            var that = this,
-                current = that.current,
-                next = that.next,
-                back = that.back(),
-                viewTransition = back ? next.backTransition : next.transition,
-                transition = that.transition || viewTransition || that.defaultTransition,
-                animationData = transition.split(' '),
-                animationType = animationData[0],
-                reverse = animationData[1] === "reverse";
-
-            // Reverse the transition if going back and the transition is not *explicitly* set,
-            // for example from the navigate method call, or from the navigation element data-transition attribute.
-            if (back && !that.transition) {
-                reverse = !reverse;
-            }
-
-            return {
-                effects: animationType,
-                reverse: reverse,
-                complete: $.proxy(this, "_complete"),
-                transition: transition,
-                duration: TRANSITION_DURATION
-            };
-        },
-
-        back: function() {
-            var nextViewID  = this.next.nextViewID;
-
-            return this.reverse && nextViewID && nextViewID === this.current.id;
+        // Reverse the transition if going back and the transition is not *explicitly* set,
+        // for example from the navigate method call, or from the navigation element data-transition attribute.
+        if (back && !options.transition) {
+            transitionData.reverse = !transitionData.reverse;
         }
-    });
+
+        if (!back) {
+            current.setNext(next.id, transition);
+        }
+
+        kendo.fx(next.element).replace(current.element, transitionData.type)
+            .direction(transitionData.direction)
+            .setReverse(transitionData.reverse)
+            .run()
+            .then(function() {
+                next.showEnd();
+                current.hideEnd();
+                options.complete();
+            });
+    }
 
     var Layout = Widget.extend({
         init: function(element, options) {
