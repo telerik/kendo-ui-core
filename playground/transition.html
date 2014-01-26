@@ -6,7 +6,7 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.fx.js"></script>
-        <link href="fx.less" rel="stylesheet/less" />
+        <link href="../../styles/mobile/common/transitions.less" rel="stylesheet/less" />
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <title>Transition</title>
         <style>
@@ -25,7 +25,7 @@
                 flex-direction: column;
             }
 
-            .content {
+            .km-content {
                 flex-grow: 1;
             }
 
@@ -35,34 +35,40 @@
                 position: absolute;
             }
 
-            #a .header, #a .footer, #a .content {
-                background: orange;
+            #a .km-header, #a .km-footer, #a .km-content {
+                background: yellow;
             }
 
             #b {
+
                 width: 200px;
                 height: 200px;
                 position: absolute;
             }
 
-            #b .header, #b .footer, #b .content {
-                background: yellow;
+            #b .km-header, #b .km-footer {
+                background: #e4e4e4;
             }
+
+            #b .km-content {
+                background: orange;
+            }
+
         </style>
     </head>
     <body>
 
         <div id="container">
             <div id="a">
-                <div class="header">Header</div>
-                <div class="content">Content</div>
-                <div class="footer">Footer</div>
+                <div class="km-header">Index</div>
+                <div class="km-content">Index content</div>
+                <div class="km-footer">Index footer</div>
             </div>
 
             <div id="b">
-                <div class="header">Header</div>
-                <div class="content">Content</div>
-                <div class="footer">Footer</div>
+                <div class="km-header">Detail Header</div>
+                <div class="km-content">Detail Content</div>
+                <div class="km-footer">Detail Footer</div>
             </div>
         </div>
 
@@ -98,52 +104,16 @@
         <button id="apply">Apply</button>
 
         <script>
+        $("#apply").click(function() {
+            console.log($("#reverse")[0].checked);
 
-            function classAnimate(options) {
-                var current = options.current,
-                    next = options.next,
-                    container = options.container,
-                    reverse = options.reverse;
-
-                current.css('display', '');
-                next.css('display', '');
-
-                var containerClass = "k-fx-start k-fx-" + options.type;
-
-                if (options.direction) {
-                    containerClass += " k-fx-" + options.direction;
-                }
-
-                if (reverse) {
-                    containerClass += " k-fx-reverse";
-                }
-
-                container.addClass(containerClass);
-                current.addClass("k-fx-current");
-                next.addClass("k-fx-next");
-
-                container.one('webkitTransitionEnd', function(e) {
-                    container.removeClass("k-fx-end").removeClass(containerClass);
-                    current.removeClass("k-fx-current");
-                    next.removeClass("k-fx-next");
-                    (reverse ? next : current).hide();
+            kendo.fx("#b").replace("#a", $("#animation-type").val())
+                .direction($("#animation-direction").val())
+                .setReverse($("#reverse")[0].checked)
+                .run().then(function() {
+                    console.log("animation complete")
                 });
-
-                container.css("left"); // hack to refresh webkit
-
-                container.removeClass("k-fx-start").addClass("k-fx-end");
-            }
-
-            $("#apply").click(function() {
-                classAnimate({
-                    container: $("#container"),
-                    current: $("#a"),
-                    next: $("#b"),
-                    type: $("#animation-type").val(),
-                    direction: $("#animation-direction").val(),
-                    reverse: $("#reverse")[0].checked
-                });
-            });
+        });
         </script>
     </body>
 </html>
