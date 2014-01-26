@@ -107,44 +107,6 @@ var __meta__ = {
             }
         };
 
-
-        function classAnimate(options) {
-            var current = options.current,
-                next = options.next,
-                container = options.container,
-                callback = options.callback,
-                reverse = options.reverse;
-
-            console.log(current, next);
-            current.css('display', '');
-            next.css('display', '');
-
-            var containerClass = "k-fx-start k-fx-" + options.type;
-
-            if (options.direction) {
-                containerClass += " k-fx-" + options.direction;
-            }
-
-            if (reverse) {
-                containerClass += " k-fx-reverse";
-            }
-
-            container.addClass(containerClass);
-            current.addClass("k-fx-current");
-            next.addClass("k-fx-next");
-
-            container.one('webkitTransitionEnd', function(e) {
-                container.removeClass("k-fx-end").removeClass(containerClass);
-                current.removeClass("k-fx-current");
-                next.removeClass("k-fx-next");
-                (reverse ? next : current).hide();
-                callback();
-            });
-
-            container.css("left"); // hack to refresh webkit
-
-            container.removeClass("k-fx-start").addClass("k-fx-end");
-        }
     kendo.directions = directions;
 
     extend($.fn, {
@@ -614,11 +576,6 @@ var __meta__ = {
         }
     };
 
-    fx.transitionPromise = function(element, destination, options) {
-        fx.animateTo(element, destination, options);
-        return element;
-    };
-
     extend(fx, {
         animate: function(elements, properties, options) {
             var useTransition = options.transition !== false;
@@ -713,54 +670,10 @@ var __meta__ = {
                     });
                 }
             }
-        },
-
-        animateTo: function(element, destination, options) {
-            var direction,
-                commonParent = element.parents().filter(destination.parents()).first(),
-                both = $().add(element.parent()).add(destination.parent()),
-                isAbsolute = element.css(POSITION) == "absolute",
-                originalOverflow, originalPosition;
-
-            if (!isAbsolute) {
-                originalPosition = both.css(POSITION);
-                both.css(POSITION, "absolute");
-            }
-
-            if (!support.mobileOS.android) {
-                originalOverflow = commonParent.css(OVERFLOW);
-                commonParent.css(OVERFLOW, "hidden");
-            }
-
-            function complete(animatedElement) {
-                destination[0].style.cssText = "";
-                element.each(function() { this.style.cssText = ""; });
-                if (!support.mobileOS.android) {
-                    commonParent.css(OVERFLOW, originalOverflow);
-                }
-                if (!isAbsolute) {
-                    both.css(POSITION, originalPosition);
-                }
-                if (options.completeCallback) {
-                    options.completeCallback.call(element, animatedElement);
-                }
-            }
-
-            var callback = browser.msie ? function() { setTimeout(complete, 0); } : complete;
-
-            classAnimate({
-                type: options.effects,
-                container: commonParent,
-                current: element,
-                next: destination,
-                callback: callback,
-                reverse: options.reverse
-            });
         }
     });
 
     fx.animatedPromise = fx.promise;
-    fx.animatedTransitionPromise = fx.transitionPromise;
 
     var Effect = kendo.Class.extend({
         init: function(element, direction) {
