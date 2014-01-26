@@ -776,7 +776,7 @@ var __meta__ = {
                 start = strip3DTransforms(start);
             }
 
-            element.css(start).css(TRANSFORM); // Nudge
+            element.css(start).css(TRANSFORM); // Trick webkit into re-rendering
 
             that.setup();
 
