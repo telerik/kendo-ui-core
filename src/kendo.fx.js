@@ -1336,6 +1336,95 @@ var __meta__ = {
         }
     });
 
+    createEffect("replace", {
+        init: function(element, previous, transitionClass) {
+            Effect.prototype.init.call(this, element);
+            this._previous = $(previous);
+            this._transitionClass = transitionClass;
+        },
+
+        duration: function() {
+            throw new Error("The replace effect does not support duration setting; the effect duration may be customized through the transition class rule");
+        },
+
+        run: function() {
+            if (this._additionalEffects && this._additionalEffects[0]) {
+                return this.compositeRun();
+            }
+
+            var that = this,
+                element = that.element,
+                previous = that._previous,
+                direction = that._direction,
+                container = element.parents().filter(previous.parents()).first(),
+                both = $().add(element.parent()).add(previous.parent()),
+                deferred = $.Deferred(),
+                isAbsolute = element.css(POSITION) == "absolute",
+                restoreOverflow = !support.mobileOS.android,
+                originalOverflow,
+                originalPosition;
+
+            // TODO: - container and both should be identical!
+            console.warn(container, both);
+
+            if (!isAbsolute) {
+                originalPosition = both.css(POSITION);
+                both.css(POSITION, "absolute");
+            }
+
+            if (restoreOverflow) {
+                originalOverflow = container.css(OVERFLOW);
+                container.css(OVERFLOW, "hidden");
+            }
+
+            function complete() {
+                if (restoreOverflow) {
+                    container.css(OVERFLOW, originalOverflow);
+                }
+
+                if (!isAbsolute) {
+                    both.css(POSITION, originalPosition);
+                }
+
+                deferred.resolve();
+            }
+
+            var containerClass = "k-fx k-fx-start k-fx-" + that._transitionClass;
+
+            if (direction) {
+                containerClass += " k-fx-" + direction;
+            }
+
+            if (that._reverse) {
+                containerClass += " k-fx-reverse";
+            }
+
+            container.addClass(containerClass);
+
+            previous.css('display', '').addClass("k-fx-current");
+
+            element.css('display', '').addClass("k-fx-next");
+
+            container.one(transitions.event, function(e) {
+                container.removeClass("k-fx-end").removeClass(containerClass);
+                previous.hide().removeClass("k-fx-current");
+                element.removeClass("k-fx-next");
+
+                if (browser.msie) {
+                    setTimeout(complete, 0);
+                } else {
+                    complete();
+                }
+            });
+
+            container.css("left"); // hack to refresh webkit
+
+            container.removeClass("k-fx-start").addClass("k-fx-end");
+
+            return deferred.promise();
+        }
+    });
+
     var Animation = kendo.Class.extend({
         init: function() {
             var that = this;
