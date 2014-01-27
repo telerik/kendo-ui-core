@@ -87,6 +87,26 @@ namespace Kendo.Mvc.UI.Tests
             json["encoded"].ShouldEqual(false);
         }
 
+        [Fact]
+        public void Should_serialize_static_true()
+        {
+            column.Object.Static = true;
+
+            var json = column.Object.ToJson();
+
+            json["static"].ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Should_not_serialize_static_false()
+        {
+            column.Object.Static = false;
+
+            var json = column.Object.ToJson();
+
+            json.ContainsKey("static").ShouldBeFalse();
+        }
+
         private IHtmlNode GetSpan(IHtmlNode cell)
         {
             return cell.Children[0];

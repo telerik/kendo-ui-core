@@ -64,7 +64,14 @@ namespace Kendo.Mvc.UI.Tests.Grid
             builder.Encoded(false);
             Assert.False(column.Encoded);
         }        
-        
+ 
+        [Fact]
+        public void Static_sets_the_encoded_property()
+        {
+            builder.Static();
+            column.Static.ShouldBeTrue();
+        }               
+
         [Fact]
         public void HtmlAttributes_sets_the_html_attributes_of_the_column()
         {

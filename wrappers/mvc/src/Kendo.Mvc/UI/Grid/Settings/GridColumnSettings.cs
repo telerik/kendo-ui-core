@@ -83,6 +83,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool Static
+        {
+            get;
+            set;
+        }
+
         public bool Filterable
         {
             get;

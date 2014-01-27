@@ -57,7 +57,13 @@ namespace Kendo.Mvc.UI
             get; 
             set; 
         }
-       
+
+        bool Static 
+        { 
+            get; 
+            set; 
+        }
+
         bool IncludeInMenu
         {
             get;

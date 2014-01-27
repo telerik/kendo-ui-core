@@ -144,6 +144,11 @@ namespace Kendo.Mvc.UI
             {
                 json["encoded"] = Encoded;
             }
+
+            if (Static)
+            {
+                json["static"] = Static;
+            }
         }       
         
         /// <summary>
@@ -256,7 +261,19 @@ namespace Kendo.Mvc.UI
                 Settings.IncludeInMenu = value;
             }
         }
-  
+   
+        public virtual bool Static
+        {
+            get
+            {
+                return Settings.Static;
+            }
+            
+            set
+            {
+                Settings.Static = value;
+            }
+        }
         public virtual bool Encoded
         {
             get
