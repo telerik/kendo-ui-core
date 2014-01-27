@@ -11,5 +11,5 @@
       :description: The start cap (arrow, head or decoration) of the connection.
       :values:
           - none - no cap
-          - ArrowStart - a filled arrow
+          - ArrowEnd - a filled arrow
           - FilledCircle - a filled circle
