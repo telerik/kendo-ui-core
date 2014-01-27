@@ -234,21 +234,6 @@ var __meta__ = {
             }
         },
 
-        parallaxContents: function(other) {
-            var that = this,
-                contents = that.content;
-
-            if (!other.header[0]) {
-                contents = contents.add(that.header);
-            }
-
-            if (!other.footer[0]) {
-                contents = contents.add(that.footer);
-            }
-
-            return contents;
-        },
-
         contentElement: function() {
             var that = this;
 
@@ -353,19 +338,14 @@ var __meta__ = {
 
             $.extend(this, {
                 element: elementClone,
-                header: elementClone.children(roleSelector("header")),
-                content: elementClone.children(roleSelector("content")),
-                footer: elementClone.children(roleSelector("footer")),
                 transition: view.transition,
                 options: { defaultTransition: view.options.defaultTransition },
                 params: JSON.stringify(view.params),
                 id: view.id
             });
 
-            view.element.parent().append(this.element);
+            view.element.parent().append(elementClone);
         },
-
-        parallaxContents: View.prototype.parallaxContents,
 
         hideStart: $.noop,
 
