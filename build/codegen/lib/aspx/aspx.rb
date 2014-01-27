@@ -25,7 +25,7 @@ namespace <%= csharp_namespace %>
     public class <%= csharp_class %> : Telerik.Web.StateManager
     {
         #region [ Constructor ]
-        public class <%= csharp_class %>() {}
+        public <%= csharp_class %>() {}
         #endregion [ Constructor ]
     
         #region [ Properties ]
