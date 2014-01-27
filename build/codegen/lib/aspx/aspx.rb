@@ -117,7 +117,7 @@ namespace <%= csharp_namespace %>
         ///<summary>
         ///<%= value_desc_to_s value %>
         ///</summary>
-        <%= value_to_s(value).pascalize %> <%= \',\' if index < values.length - 1 %>
+        <%= value_to_s(value).pascalize %><%= \',\' if index < values.length - 1 %>
         <% end %>
     }
 }
