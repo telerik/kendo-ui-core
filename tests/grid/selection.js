@@ -4,7 +4,12 @@
         div;
 
     function setup(options) {
-        options = $.extend({ dataSource: [{foo: 1, bar: 1}, {foo: 2, bar:2}, {foo: 3, bar:3}], navigatable: true }, options);
+        options = $.extend(true, {
+            columns: [ "foo", "bar" ],
+            dataSource: [{foo: 1, bar: 1}, {foo: 2, bar:2}, {foo: 3, bar:3}],
+            navigatable: true
+        },
+        options);
         return new Grid(div, options);
     }
 
@@ -129,6 +134,17 @@
     test("moving down from header", function() {
         var grid = setup({
             columns: [{ field: "foo" }]
+        });
+
+        grid.thead.parent().focus().press(kendo.keys.DOWN);
+
+        ok(grid.table.find("td:first").hasClass("k-state-focused"));
+    });
+
+    test("moving down from header in non scrollable grid", function() {
+        var grid = setup({
+            columns: [{ field: "foo" }],
+            scrollable: false
         });
 
         grid.thead.parent().focus().press(kendo.keys.DOWN);
@@ -753,25 +769,186 @@
         equal(items[4], staticCells[3]);
         equal(items[5], nonStaticCells[1]);
     });
+
+    test("moving down from static header", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.staticHeader.find(">table").focus().press(kendo.keys.DOWN);
+
+        ok(grid.staticTable.find("td:first").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), -1);
+        equal(grid.staticTable.attr("tabIndex"), 0);
+        equal(grid.thead.parent().attr("tabIndex"), -1);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+    });
+
+    test("moving down from non-static header", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.thead.parent().focus().press(kendo.keys.DOWN);
+
+        ok(grid.table.find("td:first").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), 0);
+        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.thead.parent().attr("tabIndex"), -1);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+    });
+
+    test("moving up from static body", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.staticTable.focus().press(kendo.keys.UP);
+
+        ok(grid.staticHeader.find(">table th:first").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), -1);
+        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.thead.parent().attr("tabIndex"), -1);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), 0);
+    });
+
+    test("moving up from non-static body", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.table.focus().press(kendo.keys.UP);
+
+        ok(grid.thead.find("th:first").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), -1);
+        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.thead.parent().attr("tabIndex"), 0);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+    });
+
+    test("moving up from header", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.staticHeader.find(">table").focus().press(kendo.keys.UP);
+
+        ok(grid.staticHeader.find(">table th:first").hasClass("k-state-focused"));
+    });
+
+    test("moving down from body", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.staticTable.focus().find("td:last").addClass("k-state-focused").press(kendo.keys.DOWN);
+
+        ok(grid.staticTable.find("td:last").hasClass("k-state-focused"));
+    });
+
+    test("moving to right from static header", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.staticHeader.find(">table").focus().press(kendo.keys.RIGHT);
+
+        ok(grid.thead.find("th:first").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), -1);
+        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.thead.parent().attr("tabIndex"), 0);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+    });
+
+    test("moving to right from static body", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.staticTable.focus().press(kendo.keys.RIGHT);
+
+        ok(grid.table.find("td:first").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), 0);
+        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.thead.parent().attr("tabIndex"), -1);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+    });
+
+    test("moving to right from non-static body", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.table.focus().find("td:last").addClass("k-state-focused").press(kendo.keys.RIGHT);
+
+        ok(grid.table.find("td:last").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), 0);
+        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.thead.parent().attr("tabIndex"), -1);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+    });
+
+    test("moving to left from non-static header", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.thead.parent().focus().press(kendo.keys.LEFT);
+
+        ok(grid.staticHeader.find("th:first").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), -1);
+        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.thead.parent().attr("tabIndex"), -1);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), 0);
+    });
+
+    test("moving to left from non-static body", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.table.focus().press(kendo.keys.LEFT);
+
+        ok(grid.staticTable.find("tr:first>td:last").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), -1);
+        equal(grid.staticTable.attr("tabIndex"), 0);
+        equal(grid.thead.parent().attr("tabIndex"), -1);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+    });
+
+    test("moving to left from static body", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }]
+        });
+
+        grid.staticTable.focus().find("td:first").addClass("k-state-focused").press(kendo.keys.LEFT);
+
+        ok(grid.staticTable.find("td:first").hasClass("k-state-focused"));
+        equal(grid.table.attr("tabIndex"), -1);
+        equal(grid.staticTable.attr("tabIndex"), 0);
+        equal(grid.thead.parent().attr("tabIndex"), -1);
+        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+    });
 })();
-            /*
-            test("group footer row is skipped when up arrow is pressed", function() {
-                var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
-                grid.dataSource.group({ field: "foo" });
 
-                grid.current(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(1)").find("td:not(.k-group-cell):first"));
-                grid.table.focus().press(kendo.keys.UP);
+/*
+test("group footer row is skipped when up arrow is pressed", function() {
+var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
+grid.dataSource.group({ field: "foo" });
 
-                ok(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(0)").find("td:not(.k-group-cell):first").hasClass("k-state-focused"));
+grid.current(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(1)").find("td:not(.k-group-cell):first"));
+grid.table.focus().press(kendo.keys.UP);
+
+ok(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(0)").find("td:not(.k-group-cell):first").hasClass("k-state-focused"));
             });
 
-            test("group footer row is skipped when down arrow is pressed", function() {
-                var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
-                grid.dataSource.group({ field: "foo" });
+test("group footer row is skipped when down arrow is pressed", function() {
+var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
+grid.dataSource.group({ field: "foo" });
 
-                grid.current(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(0)").find("td:not(.k-group-cell):first"));
-                grid.table.focus().press(kendo.keys.DOWN);
+grid.current(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(0)").find("td:not(.k-group-cell):first"));
+grid.table.focus().press(kendo.keys.DOWN);
 
-                ok(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(1)").find("td:not(.k-group-cell):first").hasClass("k-state-focused"));
+ok(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(1)").find("td:not(.k-group-cell):first").hasClass("k-state-focused"));
             });
-            */
+*/

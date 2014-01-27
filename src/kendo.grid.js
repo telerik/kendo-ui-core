@@ -2447,8 +2447,9 @@ var __meta__ = {
         _navigatable: function() {
             var that = this,
                 currentProxy = proxy(that.current, that),
-                table = that.table,
-                headerTable = that.thead.parent(),
+                table = that.table.add(that.staticTable),
+                headerTable = that.thead.parent().add($(">table", that.staticHeader)),
+                isStatic = that._isStatic(),
                 dataTable = table,
                 isRtl = kendo.support.isRtl(that.element);
 
@@ -2459,9 +2460,6 @@ var __meta__ = {
             if (that.options.scrollable) {
                 dataTable = table.add(headerTable);
                 headerTable.attr(TABINDEX, -1);
-
-                //required for FF
-                //that.content.attr("tabindex", -1);
             }
 
             headerTable.on("keydown" + NS, function(e) {
@@ -2494,13 +2492,9 @@ var __meta__ = {
                     currentProxy($(this).find(FIRSTNAVITEM));
                 }
 
-                if (this == table[0]) {
-                    headerTable.attr(TABINDEX, -1);
-                    table.attr(TABINDEX, 0);
-                } else {
-                    table.attr(TABINDEX, -1);
-                    headerTable.attr(TABINDEX, 0);
-                }
+                table.attr(TABINDEX, -1);
+                headerTable.attr(TABINDEX, -1);
+                $(this).attr(TABINDEX, 0);
             })
             .on("focusout" + NS, function() {
                 var current = currentProxy();
@@ -2528,57 +2522,17 @@ var __meta__ = {
                 }
 
                 if (canHandle && key == keys.UP) {
-                    if (current) {
-                        row = current.parent().prevAll(NAVROW).first();
-                        if (!row[0]) {
-                            tableToFocus = that.thead.parent();
-                            focusTable(tableToFocus, true);
-                            row = tableToFocus.find(NAVROW).first();
-                        }
-
-                        index = current.index();
-                        current = row.children().eq(index);
-                        if (!current[0] || !current.is(NAVCELL)) {
-                            current = row.children(NAVCELL).first();
-                        }
-                    } else {
-                        current = table.find(FIRSTNAVITEM);
-                    }
-
+                    currentProxy(currentUpDown(current, e.currentTarget, table, headerTable, true));
                     handled = true;
-                    currentProxy(current);
                 } else if (canHandle && key == keys.DOWN) {
-                    if (current) {
-                        row = current.parent().nextAll(NAVROW).first();
-                        if (!row[0] && current.is("th")) {
-                            focusTable(that.tbody.parent());
-                            row = that.tbody.find(NAVROW).first();
-                        }
-                        index = current.index();
-                        current = row.children().eq(index);
-                        if (!current[0] || !current.is(NAVCELL)) {
-                            current = row.children(NAVCELL).first();
-                        }
-                    } else {
-                        current = table.find(FIRSTNAVITEM);
-                    }
-
+                    currentProxy(currentUpDown(current, e.currentTarget, table, headerTable));
                     handled = true;
-                    currentProxy(current);
                 } else if (canHandle && key == (isRtl ? keys.RIGHT : keys.LEFT)) {
-                    currentProxy(current ? current.prevAll(DATA_CELL + ":first") : table.find(FIRSTNAVITEM));
+                    currentProxy(currentLeft(current, e.currentTarget, table, headerTable, proxy(that._relatedRow, that)));
                     handled = true;
                 } else if (canHandle && key == (isRtl ? keys.LEFT : keys.RIGHT)) {
-                    if (current) {
-                        if (current.next()[0]) {
-                            current = current.nextAll(DATA_CELL + ":first");
-                        }
-                    } else {
-                        current = table.find(FIRSTNAVITEM);
-                    }
-
+                    currentProxy(currentRight(current, e.currentTarget, table, headerTable, proxy(that._relatedRow, that)));
                     handled = true;
-                    currentProxy(current);
                 } else if (canHandle && pageable && keys.PAGEDOWN == key) {
                     dataSource.page(dataSource.page() + 1);
                     handled = true;
@@ -2604,14 +2558,14 @@ var __meta__ = {
                                 container = current;
                             }
 
-                            that._handleEditing(container);
+                            that._handleEditing(container, false, e.currentTarget);
                             handled = true;
                         }
                     }
                 } else if (keys.ESC == key) {
                     active = activeElement();
                     if (current && $.contains(current[0], active) && !current.hasClass("k-edit-cell") && !current.parent().hasClass("k-grid-edit-row")) {
-                        focusTable(that.table[0], true);
+                        focusTable(e.currentTarget, true);
                         handled = true;
                     } else if (that._editContainer && (!current || that._editContainer.has(current[0]) || current[0] === that._editContainer[0])) {
                         if (isInCell) {
@@ -2630,7 +2584,7 @@ var __meta__ = {
                         if (browser.msie && browser.version < 9) {
                             document.body.focus();
                         }
-                        focusTable(table, true);
+                        focusTable(e.currentTarget, true);
                         handled = true;
                     }
                 } else if (keys.TAB == key) {
@@ -2652,7 +2606,7 @@ var __meta__ = {
                     }
 
                     if (!current.is("th") && cell.length && that.options.editable && isInCell) {
-                        that._handleEditing(current, cell);
+                        that._handleEditing(current, cell, e.currentTarget);
                         handled = true;
                     }
                 }
@@ -2666,7 +2620,7 @@ var __meta__ = {
             });
         },
 
-        _handleEditing: function(current, next) {
+        _handleEditing: function(current, next, table) {
             var that = this,
                 active = $(activeElement()),
                 mode = that._editMode(),
@@ -2676,6 +2630,7 @@ var __meta__ = {
                 focusable,
                 isEdited;
 
+            table = $(table);
             if (mode == "incell") {
                 isEdited = current.hasClass("k-edit-cell");
             } else {
@@ -2697,7 +2652,7 @@ var __meta__ = {
                 }
 
                 if (!that.editable) {
-                    focusTable(that.table);
+                    focusTable(table);
                     return;
                 }
 
@@ -2729,7 +2684,7 @@ var __meta__ = {
             if (oldIE) {
                 document.body.focus();
             }
-            focusTable(that.table, true);
+            focusTable(table, true);
             if ((!isEdited && !next) || next) {
                 if (mode == "incell") {
                     that.editCell(that.current());
@@ -4637,13 +4592,15 @@ var __meta__ = {
    function tableClick(e) {
        var currentTarget = $(e.currentTarget),
            isHeader = currentTarget.is("th"),
+           table = this.table.add(this.staticTable),
+           headerTable = this.thead.parent().add($(">table", this.staticHeader)),
            currentTable = currentTarget.closest("table")[0];
 
        if (kendo.support.touch) {
            return;
        }
 
-       if (currentTable !== this.table[0] && currentTable !== this.thead.parent()[0]) {
+       if (currentTable !== table[0] && currentTable !== table[1] && currentTable !== headerTable[0] && currentTable !== headerTable[1]) {
            return;
        }
 
@@ -4664,6 +4621,88 @@ var __meta__ = {
        }
    }
 
+   function tableUpDown(current, downTable, upTable, up) {
+       current = $(current);
+       if (up) {
+           var temp = downTable;
+           downTable = upTable;
+           upTable = temp;
+       }
+
+       if (downTable.not(current).length != downTable.length) {
+           return current;
+       }
+
+       return current[0] == upTable[0] ?
+                   downTable.eq(0) : downTable.eq(1);
+   }
+
+   function currentUpDown(current, currentTable, dataTable, headerTable, up) {
+       var row, index;
+       var nextFn = up ? "prevAll" : "nextAll";
+
+       if (current) {
+           row = current.parent()[nextFn](NAVROW).first();
+           if (!row[0] && (up || current.is("th"))) {
+               currentTable = tableUpDown(currentTable, dataTable, headerTable, up);
+               focusTable(currentTable);
+               row = currentTable.find((up ? ">thead>" : ">tbody>") + NAVROW).first();
+           }
+           index = current.index();
+           current = row.children().eq(index);
+           if (!current[0] || !current.is(NAVCELL)) {
+               current = row.children(NAVCELL).first();
+           }
+       } else {
+           current = dataTable.find(FIRSTNAVITEM);
+       }
+
+       return current;
+   }
+
+   function currentLeft(current, currentTable, dataTable, headerTable, relatedRow) {
+       var isStatic = dataTable.length > 1;
+
+       if (current) {
+           if (current.prev()[0]) {
+               current = current.prevAll(DATA_CELL).first();
+           } else if (isStatic) {
+               if (currentTable == dataTable[1]) {
+                   focusTable(dataTable[0]);
+                   current = relatedRow(current.parent()).children(DATA_CELL).last();
+               } else if (currentTable == headerTable[1]) {
+                   focusTable(headerTable[0]);
+                   current = headerTable.eq(0).find("tr>" + DATA_CELL).last();
+               }
+           }
+       } else {
+           current = dataTable.find(FIRSTNAVITEM);
+       }
+
+       return current;
+   }
+
+   function currentRight(current, currentTable, dataTable, headerTable, relatedRow) {
+       var isStatic = dataTable.length > 1;
+
+       if (current) {
+           if (current.next()[0]) {
+               current = current.nextAll(DATA_CELL).first();
+           } else if (isStatic) {
+               if (currentTable == dataTable[0]) {
+                   focusTable(dataTable[1]);
+                   current = relatedRow(current.parent()).children(DATA_CELL).first();
+               } else if (currentTable == headerTable[0]) {
+                   focusTable(headerTable[1]);
+                   current = headerTable.eq(1).find("tr>" + DATA_CELL).first();
+               }
+           }
+       } else {
+           current = dataTable.find(FIRSTNAVITEM);
+       }
+
+       return current;
+   }
 
    function groupRowBuilder(colspan, level, text) {
        return '<tr class="k-grouping-row">' + groupCells(level) +
