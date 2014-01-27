@@ -1,0 +1,85 @@
+
+        <div id="example" class="k-content">
+
+        <style scoped>
+        
+        #example label
+        {
+            display: inline-block;
+            width: 130px;
+            padding-right: 1em;
+            text-align: right;
+        }
+        
+        .num
+        {
+            width: 6em;
+        }
+        
+        </style>
+
+        <span id="centeredNotification" style="display:none;"></span>
+        <span id="configurableNotification" style="display:none;"></span>
+
+        <p>
+            <button id="showNotification" class="k-button">Show centered notification</button>
+            <button id="hideAllNotifications" class="k-button">Hide All Notifications</button>
+        </p>
+
+        <p>
+            <label for="left">Left position:</label> <input type="number" id="left" class="num" />
+            <label for="left">Top position:</label> <input type="number" id="top" class="num" />
+        </p>
+
+        <p>
+            <label for="left">Right position:</label> <input type="number" id="right" class="num" />
+            <label for="left">Bottom position:</label> <input type="number" id="bottom" class="num" />
+        </p>
+            <script>
+                $(document).ready(function() {
+
+                    function onShow(e) {
+                        if (!$("." + e.sender._guid)[1]) {
+                            var element = e.element.parent(),
+                                eWidth = element.width(),
+                                eHeight = element.height(),
+                                wWidth = $(window).width(),
+                                wHeight = $(window).height(),
+                                newTop, newLeft;
+                        
+                            newLeft = Math.floor(wWidth / 2 - eWidth / 2);
+                            newTop = Math.floor(wHeight / 2 - eHeight / 2);
+
+                            e.element.parent().css({top: newTop, left: newLeft});
+                        }
+                    }
+
+                    var centered = $("#centeredNotification").kendoNotification({
+                        stacking: "down",
+                        show: onShow,
+                        button: true
+                    }).data("kendoNotification");
+
+                    $("#showNotification").click(function(){
+                        centered.show((new Date()).getTime(), "note");
+                    });
+
+                    var configurable = $("#configurableNotification").kendoNotification().data("kendoNotification");
+
+                    $("#hideAllNotifications").click(function(){
+                        centered.hide();
+                        configurable.hide();
+                    });
+
+                    var config = {
+                        decimals: 0,
+                        min: 0,
+                        format: "n0"
+                    };
+
+                    $(".num").each(function(){
+                        $(this).kendoNumericTextBox(config);
+                    });
+                });
+            </script>
+        </div>

@@ -1070,6 +1070,18 @@
                     "url": "notification/index.html",
                     "title": "Overview of Kendo UI Notification | Kendo UI Web demo",
                     "meta": "This demo shows the core functionality of Kendo UI Notification component."
+                },
+                {
+                    "text": "Position and stacking",
+                    "url": "notification/position-stacking.html",
+                    "title": "Position and stacking of Kendo UI Notification | Kendo UI Web demo",
+                    "meta": "This demo shows the position and stacking behavior of the Kendo UI Notification component."
+                },
+                {
+                    "text": "Templates",
+                    "url": "notification/templates.html",
+                    "title": "Templates of Kendo UI Notification | Kendo UI Web demo",
+                    "meta": "Demo about using templates with the Kendo UI Notification component."
                 }
             ]
         },
