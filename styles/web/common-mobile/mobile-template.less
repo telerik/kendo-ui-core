@@ -13,7 +13,8 @@
 
 /* override transform options for performance */
 .km-widget,
-.km-content
+.km-content,
+.km-popover-root .km-content .km-widget
 {
     color: @mobile-main-color;
     background: @mobile-background;
@@ -318,9 +319,7 @@ li.km-actionsheet-cancel > a
 .k-slider .k-draghandle,
 .k-slider .k-draghandle:hover,
 .km-scroller-pull .km-icon,
-.km-popup.km-pane .km-navbar,
-.km-popup.km-pane .km-toolbar,
-.km-popup.km-pane .km-tabstrip,
+.km-popover-root .km-widget,
 .km-popup .k-state-hover,
 .km-popup .k-state-focused,
 .km-popup .k-state-selected,

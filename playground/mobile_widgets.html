@@ -34,9 +34,9 @@
 <body>
     <div id="container">
         <div data-role="navbar">
-            <a data-align="left" data-icon="home" data-role="button">Button</a>
+            <a data-align="left" data-icon="home" data-role="button" data-bind="click: openPop">PopOver</a>
             <span data-role="view-title">NavBar</span>
-            <a data-align="right" data-icon="home" data-role="button" data-bind="click: openAction">Button</a>
+            <a data-align="right" data-icon="home" data-role="button" data-bind="click: openAction">ActionSheet</a>
         </div>
         <br/>
         <input data-role="switch" />
@@ -111,10 +111,42 @@
             <li><a href="#" data-action="archive">Archive</a></li>
         </ul>
 
+        <div data-role="popover" id="popover-people" data-popup='{"height": "16em", "width": "20em"}'>
+            <div data-role="view" data-title="People">
+                <div data-role="header">
+                    <div data-role="navbar">
+                        <span data-role="view-title"></span>
+                        <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
+                    </div>
+                </div>
+                <ul data-role="listview">
+                    <li><label>Isabella Anderson<input type="checkbox"></label></li>
+                    <li><label>Josh Anderson<input type="checkbox"></label></li>
+                    <li><label>Linda Anderson<input type="checkbox"></label></li>
+                    <li><label>Oliver Anderson<input type="checkbox"></label></li>
+                    <li><label>James Williams<input type="checkbox"></label></li>
+                    <li><label>Barbara Williams<input type="checkbox"></label></li>
+                </ul>
+            </div>
+        </div>
+
+        <div data-role="popover" id="popover-location" data-popup='{"width": "20em"}'>
+            <div data-role="view">
+                <ul data-role="listview" data-click="closeParentPopover">
+                    <li><label>Sydney, Australia <input name="location" type="radio"></label></li>
+                    <li><label>New York, USA <input name="location" type="radio"></label></li>
+                    <li><label>Miami, USA <input name="location" type="radio"></label></li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <script>
         var viewModel = kendo.observable({
+            openPop: function (e) {
+                $("#popover-people").data("kendoMobilePopOver").open(e.button);
+            },
             openAction: function (e) {
                 $("#action").data("kendoMobileActionSheet").open(e.button);
             }
@@ -123,6 +155,13 @@
         function reply() {}
         function replyAll() {}
         function archive() {}
+
+        function closeParentPopover(e) {
+
+            var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
+
+            popover.close();
+        }
 
         kendo.bind("#container", viewModel, kendo.mobile.ui);
 
