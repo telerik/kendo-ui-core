@@ -40,25 +40,25 @@
         </div>
         <br/>
         <input data-role="switch" />
-        <a data-icon="home" data-role="button">Button</a>
+        <a data-icon="home" data-role="button" data-badge="7">Button</a>
         <ul data-role="buttongroup">
             <li data-icon="home">Button 1</li>
             <li data-icon="favorites">Button 2</li>
-            <li data-icon="phone">Button 3</li>
+            <li data-icon="phone" data-badge="5">Button 3</li>
         </ul>
         <br/><br/>
         <div data-role="scroller" style="width: 400px; height: 300px; border: 1px solid lightgray">
             <ul data-role="listview" data-type="group" data-style="inset" data-filterable="true">
                 <li>Group 1
                     <ul>
-                        <li>Test 1<input data-role="switch" /></li>
-                        <li>Test 2<input data-role="switch" /></li>
+                        <li>Test 1<a href="" data-role="detailbutton" data-style="detaildisclose"></a></li>
+                        <li>Test 2</li>
                         <li>Test 3<input type="text"/></li>
                         <li>Test 4</li>
                         <li>Test 5</li>
-                        <li>Test 6</li>
+                        <li>Test 6<input data-role="switch" /></li>
                         <li>Test 7</li>
-                        <li>Test 8</li>
+                        <li>Test 8<input data-role="switch" /></li>
                         <li>Test 9</li>
                         <li>Test 10</li>
                         <li>Test 11</li>
@@ -101,7 +101,7 @@
         </div>
         <br/>
         <div data-role="tabstrip">
-            <a data-icon="phone">Phone</a>
+            <a data-icon="phone" data-badge="3">Phone</a>
             <a data-icon="settings">Settings</a>
         </div>
         <ul data-role="actionsheet" id="action" data-open="onOpen" data-popup='{"direction": "left"}'>
