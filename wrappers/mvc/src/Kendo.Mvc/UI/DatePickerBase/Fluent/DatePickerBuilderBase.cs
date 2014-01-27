@@ -104,7 +104,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the date format, which will be used to parse and format the machine date.
+        /// Sets the date format, which will be used to parse and format the machine date. Defaults to CultureInfo.DateTimeFormat.ShortDatePattern.
         /// </summary>
         public TPickerBuilder Format(string format)
         {
