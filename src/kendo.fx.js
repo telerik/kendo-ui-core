@@ -1357,18 +1357,14 @@ var __meta__ = {
                 previous = that._previous,
                 direction = that._direction,
                 container = element.parents().filter(previous.parents()).first(),
-                both = $().add(element.parent()).add(previous.parent()),
+                both = $().add(element).add(previous),
                 deferred = $.Deferred(),
-                isAbsolute = element.css(POSITION) == "absolute",
+                originalPosition = element.css(POSITION),
+                isAbsolute = originalPosition  == "absolute",
                 restoreOverflow = !support.mobileOS.android,
-                originalOverflow,
-                originalPosition;
-
-            // TODO: - container and both should be identical!
-            console.warn(container, both);
+                originalOverflow;
 
             if (!isAbsolute) {
-                originalPosition = both.css(POSITION);
                 both.css(POSITION, "absolute");
             }
 
