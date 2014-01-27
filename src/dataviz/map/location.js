@@ -71,14 +71,14 @@
         return new Location(ll[0], ll[1]);
     };
 
-    Location.create = function(arg0, arg1) {
-        if (defined(arg0)) {
-            if (arg0 instanceof Location) {
-                return arg0.clone();
-            } else if (arguments.length === 1 && arg0.length === 2) {
-                return Location.fromLatLng(arg0);
+    Location.create = function(a, b) {
+        if (defined(a)) {
+            if (a instanceof Location) {
+                return a.clone();
+            } else if (arguments.length === 1 && a.length === 2) {
+                return Location.fromLatLng(a);
             } else {
-                return new Location(arg0, arg1);
+                return new Location(a, b);
             }
         }
     };
@@ -171,6 +171,14 @@
     });
 
     Extent.World = new Extent([90, -180], [-90, 180]);
+
+    Extent.create = function(a, b) {
+        if (a && b) {
+            return new Extent(a, b);
+        } else if (a && a.length === 4) {
+            return new Extent([a[0], a[1]], [a[2], a[3]]);
+        }
+    };
 
     // Exports ================================================================
     deepExtend(dataviz, {
