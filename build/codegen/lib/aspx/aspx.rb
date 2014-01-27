@@ -158,6 +158,40 @@ namespace <%= csharp_namespace %>
 }
 ')
 
+    CONVERTER_CLASS_TEMPLATE = ERB.new('
+namespace <%= csharp_namespace %>
+{
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Serialization JS converter class for <%= csharp_class %>
+    /// </summary>
+    public class <%= csharp_converter_class %>: ExplicitJavaScriptConverter
+    {
+        public override void PopulateProperties(IDictionary<string, object> state, object obj)
+        {
+			var convertable = obj as LayoutGridSettings;
+			
+            #region [ SerializedProperties ]
+            #endregion [ SerializedProperties ]
+		}
+
+		public override IEnumerable<System.Type> SupportedTypes
+		{
+			get
+			{
+				return new[] { typeof(<%= csharp_class %>) };
+			}
+		}
+    }
+}
+')
+
+    CONVERTER_PROPERTY_TEMPLATE = ERB.new('
+            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
+    CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
+            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>.ToString().ToLower(), <%= values[0] %>);')
+
     module Options
         def component_class
             Component
@@ -207,6 +241,11 @@ namespace <%= csharp_namespace %>
             return PROPERTY_TEMPLATE.result(get_binding)
         end
 
+        def to_converter
+            return CONVERTER_ENUM_PROPERTY_TEMPLATE.result(get_binding) if values
+            return CONVERTER_PROPERTY_TEMPLATE.result(get_binding) if csharp_default
+        end
+
         def csharp_default
           return default if type[0] == 'String'
           return default.to_f if type[0] == 'Number'
@@ -249,12 +288,20 @@ namespace <%= csharp_namespace %>
             "#{prefix}#{name.pascalize}Settings"
         end
 
+        def csharp_converter_class
+            "#{csharp_class}Converter"
+        end
+
         def to_declaration
             COMPOSITE_PROPERTY_TEMPLATE.result(get_binding)
         end
 
         def to_class_declaration
             COMPOSITE_CLASS_TEMPLATE.result(get_binding)
+        end
+
+        def to_converter_class_declaration
+            CONVERTER_CLASS_TEMPLATE.result(get_binding)
         end
 
         def description
@@ -424,6 +471,31 @@ namespace <%= csharp_namespace %>
             composite_content = write_options(composite.options)
             
             write_file(filename, composite_content, '#region [ Properties ]')
+
+            write_composite_option_converter_file(composite)
+        end
+
+        def write_converter_options(options)
+            content = ''
+
+            options.each do |option|
+                content += write_converter_option(option)
+            end
+
+            content
+        end
+
+        def write_converter_option(option)
+            option.to_converter
+        end
+
+        def write_composite_option_converter_file(composite)
+            filename = File.join(@path, "#{composite.csharp_converter_class}.cs")
+            create_file(filename, composite.to_converter_class_declaration)
+
+            composite_content = write_converter_options(composite.options)
+            
+            write_file(filename, composite_content, '#region [ SerializedProperties ]')
         end
 
         def write_array_item_class(item)
