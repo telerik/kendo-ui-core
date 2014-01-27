@@ -9,16 +9,17 @@
     </head>
 
     <body>
-        <div data-role="view" data-title="Index">
+        <div data-role="view" data-title="Index" id="index" data-transition="slide">
             <div data-role="header">
                 <div data-role="navbar">
-                    <a data-role="button" data-align="left">Hi!</a>
+                    <a data-role="backbutton" data-align="left">Back</a>
                     <span data-role="view-title"></span>
                 </div>
             </div>
 
             <ul data-role="listview">
                 <li><a href="#detail">Go to detail</a></li>
+                <li><a href="#index?foo=bar">Go to self (foo=bar)</a></li>
             </ul>
 
             <div data-role="footer">

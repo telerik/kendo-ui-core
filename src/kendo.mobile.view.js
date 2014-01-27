@@ -207,6 +207,7 @@ var __meta__ = {
 
             if (withSelf) {
                 if (back) {
+                    // FIXME: this.transition is not correct, it should be the calculated transition
                     this.setNext(this.id, this.transition);
                 }
 
@@ -348,6 +349,7 @@ var __meta__ = {
         },
 
         hideStart: $.noop,
+        setNext: $.noop,
 
         hideEnd: function() {
             this.element.remove();
