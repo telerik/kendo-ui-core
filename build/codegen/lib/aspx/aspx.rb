@@ -99,7 +99,7 @@ namespace <%= csharp_namespace %>
       {
         if (this._<%= name %> == null)
         {
-            this._<%= name %> = new <%= csharp_class %>(ViewState);
+            this._<%= name %> = new <%= csharp_class %>();
         }
         return this._<%= name %>;
       }
