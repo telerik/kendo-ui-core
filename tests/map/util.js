@@ -11,6 +11,12 @@
             this.element = $("<div class='k-map'></div>").appendTo(QUnit.fixture);
             this.scrollElement = $("<div id='scroll-element'></div>").appendTo(this.element);
             this.options = {};
+            this._zoom = 3;
+            this._extent = new m.Extent(
+                new m.Location(50, -180),
+                new m.Location(-50, 180)
+            );
+
             Observable.fn.init.call(this);
         },
 
@@ -30,15 +36,12 @@
             return new m.Location(0, 0);
         },
 
-        zoom: function() {
-            return 3;
+        zoom: function(zoom) {
+            return this._zoom;
         },
 
         extent: function() {
-            return new m.Extent(
-                new m.Location(50, -180),
-                new m.Location(-50, 180)
-            );
+            return this._extent;
         }
     });
 

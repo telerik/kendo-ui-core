@@ -64,7 +64,8 @@
         },
 
         reset: function() {
-            this._panEnd();
+            Layer.fn.reset.call(this);
+            this._translateSurface();
             if (this._data) {
                 this._load(this._data);
             }
@@ -149,7 +150,10 @@
 
         _panEnd: function(e) {
             Layer.fn._panEnd.call(this, e);
+            this._translateSurface();
+        },
 
+        _translateSurface: function() {
             var map = this.map;
             var nw = map.locationToView(map.extent().nw);
 

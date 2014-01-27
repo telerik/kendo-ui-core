@@ -46,6 +46,7 @@
         },
 
         reset: function() {
+            Layer.fn.reset.call(this);
             this._updateView();
             this._view.clear();
             this._view.reset();

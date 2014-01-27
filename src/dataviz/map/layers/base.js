@@ -48,7 +48,7 @@
         show: function() {
             this.reset();
             this._activate();
-            this.setCoverage(true);
+            this._applyCoverage(true);
         },
 
         hide: function() {
@@ -56,7 +56,9 @@
             this._setVisibility(false);
         },
 
-        reset: $.noop,
+        reset: function() {
+            this._applyCoverage();
+        },
 
         _resize: $.noop,
 
