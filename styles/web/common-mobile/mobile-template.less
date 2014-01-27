@@ -230,8 +230,7 @@
 
 /* Shim */
 
-.km-shim,
-.km-phone .km-actionsheet-wrapper
+.km-shim
 {
     background: @mobile-overlay-background;
 }
@@ -239,7 +238,8 @@
 /* PopUp + ActionSheet */
 
 .km-popup .k-item,
-.km-actionsheet > li > a
+.km-widget.km-actionsheet-wrapper,
+.km-widget.km-actionsheet > li > a
 {
     background: @mobile-dark-background;
     border-bottom-color: @mobile-light-shadow;
