@@ -380,8 +380,11 @@ var __meta__ = {
         });
     }
 
+    var transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
+
     function parseTransition(transition) {
-        var matches = /^(\w+)(:(\w+))?( (\w+))?$/.match(transition);
+        var matches = transition.match(transitionRegExp);
+
         return {
             type: matches[1],
             direction: matches[3],
