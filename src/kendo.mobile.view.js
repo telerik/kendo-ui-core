@@ -168,73 +168,6 @@ var __meta__ = {
             }
         },
 
-        _updateParams: function(params, withSelf) {
-            var paramsHistory = this._paramsHistory,
-                stringified = JSON.stringify(params);
-
-            // If the newly passed parameters equal the last but one parameters, we are going back
-            // 1 -> 2 -> 1 is considered back navigation to self
-            if (withSelf && paramsHistory[paramsHistory.length - 2] === stringified) {
-                paramsHistory.pop();
-                return false;
-            }
-
-            // back navigation
-            if (paramsHistory[paramsHistory.length - 1] === stringified) {
-                return false;
-            }
-
-            paramsHistory.push(stringified);
-            this.params = params;
-            return true;
-        },
-
-        setNext: function(nextViewID, transition) {
-            this.nextViewID = nextViewID;
-            this.backTransition = transition;
-        },
-
-        switchWith: function(view, transition, params, callback) {
-            var that = this,
-                withSelf = view === this,
-                back;
-
-            if (!this.triggerBeforeShow()) {
-                return;
-            }
-
-            back = !this._updateParams(params, withSelf);
-
-            if (withSelf) {
-                if (back) {
-                    // FIXME: this.transition is not correct, it should be the calculated transition
-                    this.setNext(this.id, this.transition);
-                }
-
-                view = new ViewClone(this);
-            }
-
-            if (view) {
-                // layout needs to be detached first, then reattached
-                view.hideStart();
-                that.showStart();
-
-                ViewTransition({
-                    current: view,
-                    next: that,
-                    reverse: back,
-                    transition: transition,
-                    defaultTransition: view.options.defaultTransition,
-                    complete: callback
-                });
-
-            } else {
-                that.showStart();
-                that.showEnd();
-                callback();
-            }
-        },
-
         contentElement: function() {
             var that = this;
 
@@ -349,7 +282,6 @@ var __meta__ = {
         },
 
         hideStart: $.noop,
-        setNext: $.noop,
 
         hideEnd: function() {
             this.element.remove();
@@ -360,50 +292,6 @@ var __meta__ = {
         collection.each(function() {
             kendo.initWidget($(this), {}, ui.roles);
         });
-    }
-
-    var transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
-
-    function parseTransition(transition) {
-        var matches = transition.match(transitionRegExp);
-
-        return {
-            type: matches[1],
-            direction: matches[3],
-            reverse: matches[5] === "reverse"
-        };
-    }
-
-    function ViewTransition(options) {
-        var current = options.current,
-            next = options.next,
-
-            nextViewID  = next.nextViewID,
-            back = options.reverse && nextViewID && nextViewID === current.id,
-
-            viewTransition = back ? next.backTransition : next.transition,
-            transition = options.transition || viewTransition || options.defaultTransition,
-            transitionData = parseTransition(transition);
-
-        // Reverse the transition if going back and the transition is not *explicitly* set,
-        // for example from the navigate method call, or from the navigation element data-transition attribute.
-        if (back && !options.transition) {
-            transitionData.reverse = !transitionData.reverse;
-        }
-
-        if (!back) {
-            current.setNext(next.id, transition);
-        }
-
-        kendo.fx(next.element).replace(current.element, transitionData.type)
-            .direction(transitionData.direction)
-            .setReverse(transitionData.reverse)
-            .run()
-            .then(function() {
-                next.showEnd();
-                current.hideEnd();
-                options.complete();
-            });
     }
 
     var Layout = Widget.extend({
@@ -478,27 +366,24 @@ var __meta__ = {
     });
 
     var Observable = kendo.Observable,
-        BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
+        bodyRegExp = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
         LOAD_START = "loadStart",
         LOAD_COMPLETE = "loadComplete",
         SHOW_START = "showStart",
         SAME_VIEW_REQUESTED = "sameViewRequested",
-        VIEW_SHOW = "viewShow";
-/*
-    function urlParams(url) {
-        var queryString = url.split('?')[1] || "",
-            params = {},
-            paramParts = queryString.split(/&|=/),
-            length = paramParts.length,
-            idx = 0;
+        VIEW_SHOW = "viewShow",
+        transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
 
-        for (; idx < length; idx += 2) {
-            params[paramParts[idx]] = paramParts[idx + 1];
-        }
+    function parseTransition(transition) {
+        var matches = transition.match(transitionRegExp) || [];
 
-        return params;
+        return {
+            type: matches[1],
+            direction: matches[3],
+            reverse: matches[5] === "reverse"
+        };
     }
-*/
+
     var ViewEngine = Observable.extend({
         init: function(options) {
             var that = this,
@@ -527,8 +412,10 @@ var __meta__ = {
             that._view = null;
 
             that.layouts = {};
+            that.locations = [];
 
             that._setupLayouts(container);
+
             initWidgets(container.children(roleSelector("modalview drawer")));
 
             if (that.loader) {
@@ -600,7 +487,7 @@ var __meta__ = {
                 modalViews,
                 view;
 
-            if (BODY_REGEX.test(html)) {
+            if (bodyRegExp.test(html)) {
                 html = RegExp.$1;
             }
 
@@ -702,12 +589,73 @@ var __meta__ = {
         },
 
         _show: function(view, transition, params) {
-            var that = this;
+            if (!view.triggerBeforeShow()) {
+                return;
+            }
 
-            view.switchWith(that._view, transition, params, function() {
+            var that = this,
+                current = that._view,
+                locations = that.locations,
+                url = that.url,
+                withSelf = view === current,
+                back = locations[locations.length - 2] === url,
+                viewTransition = back ? view.backTransition : view.transition,
+                theTransition = transition || viewTransition || view.options.defaultTransition,
+                transitionData = parseTransition(theTransition);
+
+            var after = function() {
+                if (!back) {
+                    that.locations.push(url);
+                } else {
+                    that.locations.pop();
+                }
+
                 that._view = view;
                 that.trigger(VIEW_SHOW, {view: view});
-            });
+            }
+
+            var end = function() {
+                view.showEnd();
+                current.hideEnd();
+                after();
+            }
+
+            view.params = params;
+
+            if (withSelf) {
+                view.backTransition = view.transition;
+                current = new ViewClone(view, back);
+            }
+
+            if (current) {
+                // layout needs to be detached first, then reattached
+                current.hideStart();
+                view.showStart();
+
+                if (!theTransition) {
+                    end();
+                } else {
+                    if (back && !transition) {
+                        transitionData.reverse = !transitionData.reverse;
+                    }
+
+                    if (!back) {
+                        current.backTransition = theTransition;
+                    }
+
+                    kendo.fx(view.element).replace(current.element, transitionData.type)
+                        .direction(transitionData.direction)
+                        .setReverse(transitionData.reverse)
+                        .run()
+                        .then(end);
+                }
+
+
+            } else {
+                view.showStart();
+                view.showEnd();
+                after();
+            }
         },
 
         _hideViews: function(container) {
