@@ -275,6 +275,7 @@
         },
 
         _setExtent: function(extent) {
+            // TODO Use Extent.create
             this.center(extent.center());
 
             var width = this.element.width();

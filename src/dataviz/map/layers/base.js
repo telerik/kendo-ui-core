@@ -80,6 +80,7 @@
                 for (var i = 0; i < coverage.length; i++) {
                     var rule = coverage[i];
                     var ruleExtent = Extent.create(rule.extent);
+                    // TODO Refactor
                     if (defined(rule.minZoom) && zoom < rule.minZoom) {
                         inCoverage = false;
                         break;
@@ -95,6 +96,7 @@
                 };
 
             }
+            // TODO Investigate multiple calls
             this._setVisibility(inCoverage);
         },
 
