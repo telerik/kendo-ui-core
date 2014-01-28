@@ -67,8 +67,13 @@ namespace :download_builder do
         msbuild File.join('dist', 'download-builder-staging', File.join('service', 'Download.csproj')), "'/t:Clean;Build' '/p:Configuration=Release'"
     end
 
-    def download_builder_zip_prerequisites
-        dist_path = 'dist/download-builder/'
+    def download_builder_version
+        "#{VERSION}".sub(/((\w+|\.){6})\./, '\1 ')
+    end
+
+    def download_builder_resources
+        dist_path = "dist/download-builder/#{download_builder_version}/"
+        mkdir_p dist_path, :verbose => false
 
         css_path = File.join(dist_path, 'styles')
 
@@ -76,20 +81,36 @@ namespace :download_builder do
              :from => MIN_CSS_RESOURCES,
              :root => ROOT_MAP['styles']
 
-        config_file_path = File.join(dist_path,  "kendo-config.#{VERSION}.json").sub(/((\w+|\.){6})\./, '\1 ')
+        js_path = File.join(dist_path, 'js')
+
+        task js_path => :sources do
+            mv File.join(BUILDER_DEPLOY_PATH, 'js'), js_path
+        end
+
+        [js_path, css_path]
+    end
+
+    def download_builder_config
+        dist_path = BUILDER_DEPLOY_PATH
+
+        config_file_path = File.join(dist_path, "kendo-config.#{download_builder_version}.js")
 
         task config_file_path do |t|
             sh "rm -f #{dist_path}kendo-config.*", :verbose => VERBOSE
             sh "node #{METAJS} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
         end
 
-        ["download_builder:sources", css_path, config_file_path]
+        config_file_path
     end
 
-    zip 'dist/download-builder.zip' => download_builder_zip_prerequisites
+    zip "dist/download-builder/#{download_builder_version}.zip" => download_builder_resources
+
+    task :clean_zip_sources => "dist/download-builder/#{download_builder_version}.zip" do
+        rm_rf FileList[File.join(BUILDER_DEPLOY_PATH, download_builder_version)]
+    end
 
     desc 'Build download builder deploy bundle'
-    task :bundle => 'dist/download-builder.zip'
+    task :bundle => ["dist/download-builder/#{download_builder_version}.zip", download_builder_config, :clean_zip_sources]
 
     desc 'Build staging download builder site'
     task :staging => :build_staging

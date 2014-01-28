@@ -639,10 +639,12 @@ namespace :build do
 
         zip_bundles.push(zip_demos)
 
-        zip_download_builder = "#{ARCHIVE_ROOT}/#{destination}/download-builder.zip"
-        file_copy :to => zip_download_builder,
-                  :from => "dist/download-builder.zip"
-        zip_bundles.push(zip_download_builder)
+        tree :to => "#{ARCHIVE_ROOT}/#{destination}/download-builder",
+             :from => FileList["dist/download-builder/**/*"],
+             :root => 'dist/download-builder'
+
+        zip_bundles.push("#{ARCHIVE_ROOT}/#{destination}/download-builder")
+
 
         tree :to => "#{ARCHIVE_ROOT}/WinJS/#{destination}",
              :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
