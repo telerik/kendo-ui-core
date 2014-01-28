@@ -13,6 +13,15 @@ module CodeGen
           'Date' => 'DateTime'
       }
 
+      TYPES_DEFAULT_MAP = {
+          'String' => 'null',
+          'Number' => '0.0',
+          'Boolean' => 'false',
+          'Object' => 'null',
+          'Function' => 'null',
+          'Date' => 'null'
+      }
+
       CLASS_TEMPLATE = ERB.new('
 namespace <%= csharp_namespace %>
 {
@@ -248,8 +257,9 @@ namespace <%= csharp_namespace %>
         end
 
         def csharp_default
-          return default if type[0] == 'String'
-          return default.to_f if type[0] == 'Number'
+            return TYPES_DEFAULT_MAP[type[0]] if !default
+            return default.to_f if type[0] == 'Number'
+            default
         end
 
         def values
