@@ -27,6 +27,8 @@ namespace <%= csharp_namespace %>
 {
 
     using System.ComponentModel;
+    using System.Collections.Generic;
+    using System.Web.UI;
 
     /// <summary>
     /// 
@@ -154,10 +156,12 @@ namespace <%= csharp_namespace %>
     ARRAY_ITEM_CLASS_TEMPLATE = ERB.new('
 namespace <%= csharp_namespace %>
 {
+    using System.ComponentModel;
+
     /// <summary>
     /// <%= description %>
     /// </summary>
-    public class <%= csharp_class %>
+    public class <%= csharp_class %> : Telerik.Web.StateManager
     {
         public <%= csharp_class %>() {}
 
@@ -398,6 +402,10 @@ namespace <%= csharp_namespace %>
                         .sub('kendo.mobile.', '')
                         .sub('kendo.', '')
                         .pascalize
+        end
+
+        def description
+            @description.gsub(/\n/, '')
         end
 
         def get_binding
