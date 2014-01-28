@@ -5,6 +5,7 @@ var tool;
 var dom;
 var editorNS = kendo.ui.editor;
 var toolTemplate = kendo.template(editorNS.EditorUtils.buttonTemplate, { useWithBlock: false });
+var keys = kendo.keys;
 
 module("editor insert table tool", {
     setup: function() {
@@ -12,6 +13,19 @@ module("editor insert table tool", {
         tool = new editorNS.InsertTableTool();
         dom = $(toolTemplate({ popup: true, title: "createTable", cssClass: "createTable" }))
             .appendTo(QUnit.fixture);
+
+        $.fn.press = function (key) {
+            var options = {
+                type: "keydown",
+                keyCode: key
+            };
+
+            if ($.isPlainObject(key)) {
+                $.extend(options, key);
+            }
+
+            $(this).trigger(options);
+        };
         tool.initialize(dom, { title: "", editor: { exec: $.noop } });
     },
     teardown: function() {
@@ -50,6 +64,74 @@ test("clicking the tool while it is disabled does not toggle the popup", functio
 
     dom.click();
     equal($(".k-ct-popup:visible").length, 0);
+});
+
+test("tool can be opened with the keyboard", function() {
+    dom.press({ altKey: true, keyCode: keys.DOWN });
+
+    var element = tool.popup().element;
+    ok(element.is(":visible"));
+    ok(element.find(".k-ct-cell:first").is(".k-state-selected"));
+});
+
+test("tool can be closed with the keyboard", function() {
+    dom.press({ keyCode: keys.ESC });
+
+    ok(!tool.popup().element.is(":visible"));
+});
+
+function selectedIndices(cells) {
+    return $.map(cells, function(element, index) {
+        if ($(element).hasClass("k-state-selected")) {
+            return index;
+        }
+    });
+}
+
+test("up / down keys control row selection", function() {
+    var popup = tool.popup();
+
+    popup.open();
+
+    var cells = popup.element.find(".k-ct-cell");
+
+    dom.press({ keyCode: keys.DOWN });
+    deepEqual(selectedIndices(cells), [ 0, 8 ]);
+
+    dom.press({ keyCode: keys.DOWN });
+    deepEqual(selectedIndices(cells), [ 0, 8, 16 ]);
+
+    dom.press({ keyCode: keys.UP });
+    deepEqual(selectedIndices(cells), [ 0, 8 ]);
+
+    dom.press({ keyCode: keys.UP });
+    deepEqual(selectedIndices(cells), [ 0 ]);
+
+    dom.press({ keyCode: keys.UP });
+    deepEqual(selectedIndices(cells), [ 0 ]);
+});
+
+test("left / right keys control column selection", function() {
+    var popup = tool.popup();
+
+    popup.open();
+
+    var cells = popup.element.find(".k-ct-cell");
+
+    dom.press({ keyCode: keys.RIGHT });
+    deepEqual(selectedIndices(cells), [ 0, 1 ]);
+
+    dom.press({ keyCode: keys.RIGHT });
+    deepEqual(selectedIndices(cells), [ 0, 1, 2 ]);
+
+    dom.press({ keyCode: keys.LEFT });
+    deepEqual(selectedIndices(cells), [ 0, 1 ]);
+
+    dom.press({ keyCode: keys.LEFT });
+    deepEqual(selectedIndices(cells), [ 0 ]);
+
+    dom.press({ keyCode: keys.LEFT });
+    deepEqual(selectedIndices(cells), [ 0 ]);
 });
 
 }());
