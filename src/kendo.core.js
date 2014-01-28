@@ -3671,11 +3671,11 @@ function pad(number, digits, end) {
         return params;
     };
 
-    kendo.elementUnderCursor = function(e) {
-        var OS = kendo.support.mobileOS,
-            invalidZeroEvents = OS && OS.android,
-            mobileChrome = (invalidZeroEvents && OS.browser == "chrome");
+    var OS = kendo.support.mobileOS,
+        invalidZeroEvents = OS && OS.android,
+        mobileChrome = (invalidZeroEvents && OS.browser == "chrome");
 
+    kendo.elementUnderCursor = function(e) {
         if (mobileChrome) {
             return document.elementFromPoint(e.x.screen, e.y.screen);
         } else {
