@@ -161,6 +161,7 @@ namespace <%= csharp_namespace %>
     CONVERTER_CLASS_TEMPLATE = ERB.new('
 namespace <%= csharp_namespace %>
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -170,19 +171,19 @@ namespace <%= csharp_namespace %>
     {
         public override void PopulateProperties(IDictionary<string, object> state, object obj)
         {
-			var convertable = obj as LayoutGridSettings;
-			
+            var convertable = obj as <%= csharp_class %>;
+            
             #region [ SerializedProperties ]
             #endregion [ SerializedProperties ]
-		}
+        }
 
-		public override IEnumerable<System.Type> SupportedTypes
-		{
-			get
-			{
-				return new[] { typeof(<%= csharp_class %>) };
-			}
-		}
+        public override IEnumerable<System.Type> SupportedTypes
+        {
+            get
+            {
+                return new[] { typeof(<%= csharp_class %>) };
+            }
+        }
     }
 }
 ')
@@ -190,7 +191,7 @@ namespace <%= csharp_namespace %>
     CONVERTER_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
     CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>.ToString().ToLower(), <%= values[0] %>);')
+            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
 
     module Options
         def component_class
@@ -292,6 +293,10 @@ namespace <%= csharp_namespace %>
             "#{csharp_class}Converter"
         end
 
+        def to_converter
+            ''
+        end
+
         def to_declaration
             COMPOSITE_PROPERTY_TEMPLATE.result(get_binding)
         end
@@ -358,6 +363,14 @@ namespace <%= csharp_namespace %>
             name.pascalize
         end
 
+        def csharp_converter_class
+            "#{csharp_class}Converter"
+        end
+
+        def to_converter_class_declaration
+            CONVERTER_CLASS_TEMPLATE.result(get_binding)
+        end
+
         def csharp_namespace
             prefix = "Telerik.Web.UI"
 
@@ -405,6 +418,7 @@ namespace <%= csharp_namespace %>
 
         def component(component)
           write_class(component)
+          write_converter(component)
           write_enums(component)
           write_properties(component)
           write_events(component)
@@ -429,6 +443,10 @@ namespace <%= csharp_namespace %>
 
                 create_file(filename, option.to_enum)
             end 
+        end
+
+        def write_converter(component)
+            write_composite_option_converter_file(component)
         end
 
         def write_properties(component)
