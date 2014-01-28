@@ -66,7 +66,7 @@ var __meta__ = {
         },
 
         hide: function() {
-            that._eachFragment(DETACH);
+            this._eachFragment(DETACH);
             this.element.detach();
             this.trigger(HIDE);
         },
