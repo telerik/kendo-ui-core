@@ -67,6 +67,20 @@
                         read: "countries.geo.json"
                     }
                 },
+                style: {
+                    fill: {
+                        color: "#cf0",
+                        opacity: 0.5
+                    }
+                },
+                copyright: "&copy; FooBar"
+            }, {
+                dataSource: {
+                    type: "geojson",
+                    transport: {
+                        read: "countries.geo.json"
+                    }
+                },
                 coverage: [{
                     extent: [
                         45.3444, 20.8960, /* NW */
@@ -78,7 +92,7 @@
                 style: {
                     fill: {
                         color: "red",
-                        opacity: 0.5
+                        opacity: 1
                     }
                 }
             }],
@@ -108,7 +122,7 @@
             shapeCreated: function(e) {
                 var users = e.shape.dataItem.properties.users;
                 if (users) {
-                    setColor(e.shape, users);
+                    //setColor(e.shape, users);
                 }
             },
             shapeMouseEnter: function(e) {
