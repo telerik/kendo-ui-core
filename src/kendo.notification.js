@@ -391,6 +391,23 @@ var __meta__ = {
             }
 
             return that;
+        },
+
+        setOptions: function(newOptions) {
+            var that = this,
+                options;
+
+            Widget.fn.setOptions.call(that, newOptions);
+
+            options = that.options;
+
+            if (newOptions.templates !== undefined) {
+                that._compileTemplates(options.templates);
+            }
+
+            if (newOptions.stacking !== undefined || newOptions.position !== undefined) {
+                that._compileStacking(options.stacking, options.position.top);
+            }
         }
     });
 

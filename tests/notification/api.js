@@ -274,5 +274,34 @@
         equal($(".k-notification").length, 0);
     });
 
+    test("setOptions updates popup stacking settings", 3, function() {
+        createNotification({
+            stacking: "left"
+        });
+
+        notification.setOptions({
+            stacking: "right"
+        });
+
+        equal(notification._popupOrigin, "top right");
+        equal(notification._popupPosition, "top left");
+        equal(typeof notification._popupPaddings.paddingRight, "undefined");
+    });
+
+    test("setOptions recompiles templates", function() {
+        createNotification({
+            templates: {
+                info: "foo"
+            }
+        });
+
+        notification.setOptions({
+            templates: {
+                info: "bar"
+            }
+        });
+
+        equal(notification._compiled.info({}), "bar");
+    });
 
 })();
