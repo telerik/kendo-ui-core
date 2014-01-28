@@ -23,6 +23,11 @@
 .k-loading,
 .k-widget .k-loading { background: transparent url('Black/loading.gif') no-repeat 0 0; }
 
+html .k-tabstrip-items .k-loading
+{
+    border-color: #555;
+}
+
 .k-widget,
 .k-link,
 .k-popup,
