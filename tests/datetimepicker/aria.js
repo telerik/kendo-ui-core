@@ -7,6 +7,7 @@ module("kendo.ui.DateTimePicker ARIA", {
     setup: function() {
         input = $("<input id='test' />").appendTo(QUnit.fixture);
 
+        kendo.effects.disable();
         instance = new DateTimePicker(input, {
             ARIATemplate: "#=kendo.toString(current, 'G')#"
         });
