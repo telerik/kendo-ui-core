@@ -79,17 +79,14 @@
 
                 for (var i = 0; i < coverage.length; i++) {
                     var rule = coverage[i];
+
+                    var below = defined(rule.minZoom) && zoom < rule.minZoom;
+                    var above = defined(rule.maxZoom) && zoom > rule.maxZoom;
+
                     var ruleExtent = Extent.create(rule.extent);
-                    // TODO Refactor
-                    if (defined(rule.minZoom) && zoom < rule.minZoom) {
-                        inCoverage = false;
-                        break;
-                    }
-                    if (defined(rule.maxZoom) && zoom > rule.maxZoom) {
-                        inCoverage = false;
-                        break;
-                    }
-                    if (ruleExtent && !ruleExtent.overlaps(extent)) {
+                    var outside = ruleExtent && !ruleExtent.overlaps(extent);
+
+                    if (below || above || outside) {
                         inCoverage = false;
                         break;
                     }
