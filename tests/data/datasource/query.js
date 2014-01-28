@@ -1122,6 +1122,20 @@ test("cancelChanges refresh the total if serverpaging is enabled", function() {
     equal(dataSource.total(), 2);
 });
 
+test("cancelChanges refresh the total if bound to an observablearray", function() {
+    var data = new kendo.data.ObservableArray([{ id:1, bar: "foo" },{ id: 2, bar: "baz" }]),
+        dataSource = new DataSource({
+            data: data
+        });
+
+    dataSource.read();
+
+    dataSource.add({});
+    dataSource.cancelChanges();
+    equal(dataSource.total(), 2);
+});
+
+
 test("cancelChanges refresh the total if serverpaging is enabled and grouping is applied", function() {
     var dataSource = new DataSource({
         transport: {
@@ -1737,6 +1751,8 @@ test("pushing multiple records to the observable array updates the total - total
             }
         }
     });
+
+    dataSource.read();
 
     dataSource.data().push({ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" });
 

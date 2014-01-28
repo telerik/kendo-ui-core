@@ -653,7 +653,7 @@ test("pristine data is not change if data is modified", function() {
 
     dataSource.data()[0] = 6;
     equal(dataSource.data()[0], 6);
-    equal(dataSource._pristine[0], 1);
+    equal(dataSource._pristineData[0], 1);
 });
 
 test("paging info is not passed to the transport if serverpaging is false", 4, function() {

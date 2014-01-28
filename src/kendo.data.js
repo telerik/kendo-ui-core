@@ -2027,7 +2027,7 @@ var __meta__ = {
             that._pristineData = [];
             that._ranges = [];
             that._view = [];
-            that._pristine = [];
+            that._pristineTotal = 0;
             that._destroyed = [];
             that._pageSize = options.pageSize;
             that._page = options.page  || (options.pageSize ? 1 : undefined);
@@ -2322,7 +2322,7 @@ var __meta__ = {
                 that._destroyed = [];
                 that._data = that._observe(that._pristineData);
                 if (that.options.serverPaging) {
-                    that._total = that.reader.total(that._pristine);
+                    that._total = that._pristineTotal;
                 }
                 that._change();
             }
@@ -2544,9 +2544,8 @@ var __meta__ = {
                 return;
             }
 
-            that._pristine = isPlainObject(data) ? $.extend(true, {}, data) : data.slice ? data.slice(0) : data;
-
             that._total = that.reader.total(data);
+            that._pristineTotal = that._total;
 
             if (that._aggregate && options.serverAggregates) {
                 that._aggregateResult = that.reader.aggregates(data);
@@ -2701,13 +2700,13 @@ var __meta__ = {
             if (that.options.autoSync && (action === "add" || action === "remove" || action === "itemchange")) {
                 that.sync();
             } else {
-                var total = parseInt(that._total || that.reader.total(that._pristine), 10);
+                var total = parseInt(that._total || that._pristineTotal, 10);
                 if (action === "add") {
                     total += e.items.length;
                 } else if (action === "remove") {
                     total -= e.items.length;
                 } else if (action !== "itemchange" && action !== "sync" && !that.options.serverPaging) {
-                    total = that.reader.total(that._pristine);
+                    total = that._pristineTotal;
                 }
 
                 that._total = total;
