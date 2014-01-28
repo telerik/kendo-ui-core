@@ -1375,11 +1375,11 @@ var __meta__ = {
 
             function complete() {
                 if (restoreOverflow) {
-                    container.css(OVERFLOW, originalOverflow);
+                    container.css(OVERFLOW, '');
                 }
 
                 if (!isAbsolute) {
-                    both.css(POSITION, originalPosition);
+                    both.css(POSITION, '');
                 }
 
                 deferred.resolve();
