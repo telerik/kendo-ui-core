@@ -82,7 +82,6 @@
             sortable = element.data("kendoSortable");
 
         sortable.bind("move", function(e) {
-            console.log("move");
             ok(true, "move event is fired");
         });
 

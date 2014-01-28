@@ -67,12 +67,12 @@
         press(draggedElement, draggableOffset.left, draggableOffset.top + 10);
         moveToSort(draggedElement, 10, 10);
 
-        ok(listA.children().first().is(":visible") && listA.children().first().text() === "B1", "Placeholder is moved to the ListA");
+        ok(listA.children().first().is(":visible") && listA.children().first().text() == "B1", "Placeholder is moved to the ListA");
 
         moveToSort(draggedElement, 10, 220);
 
         ok(listA.children().first().is(":visible"), "Placeholder is removed from ListA");
-        ok(listC.children().last().is(":visible") && listC.children().last().text() === "B1", "Placeholder is moved to the ListC");
+        ok(listC.children().last().is(":visible") && listC.children().last().text() == "B1", "Placeholder is moved to the ListC");
     });
 
     test("Item can be dragged from one list to another", 4, function() {
@@ -96,6 +96,24 @@
 
         ok(listA.children().length == 4, "Item is removed from ListA");
         ok(listC.children().length == 5 && listC.children().eq(0).text() == "B1", "Item from ListA is appended to ListC");
+    });
+
+    test("Move event fires with correct arguments", 4, function() {
+         var options = { connectWith: "#listA, #listB, #listC" },
+            sortableA = listA.kendoSortable(options).getKendoSortable(),
+            sortableB = listB.kendoSortable(options).getKendoSortable(),
+            sortableC = listC.kendoSortable(options).getKendoSortable(),
+            onMove = function (e) {
+                ok(true, "SortableA fires move event");
+                equal(e.item[0], draggedElement[0], "Item parameter is correct");
+                ok(listA.has(e.target).length, "Target is part of ListA");
+                equal(e.list.element.attr("id"), "listB", "List parameter points to the correct list");
+            };
+
+        sortableA.bind("move", onMove);
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top + 10);
+        moveToSort(draggedElement, 10, 20);
     });
 
 })();
