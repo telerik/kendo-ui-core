@@ -196,8 +196,7 @@ var __meta__ = {
                 connectedList = placeholder.parents(connectWith).getKendoSortable();
 
                 isDefaultPrevented = !(
-                    !this.trigger(END, $.extend(eventData, { action: ACTION_REMOVE }))
-                    && !connectedList.trigger(END, $.extend(eventData, { action: ACTION_RECEIVE, oldIndex: MISSING_INDEX, newIndex: connectedList.indexOf(placeholder) }))
+                    !this.trigger(END, $.extend(eventData, { action: ACTION_REMOVE })) && !connectedList.trigger(END, $.extend(eventData, { action: ACTION_RECEIVE, oldIndex: MISSING_INDEX, newIndex: connectedList.indexOf(placeholder) }))
                 );
             }
 
