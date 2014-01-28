@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller" ], f);
+    define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller", "./kendo.view" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "View",
     category: "mobile",
     description: "Mobile View",
-    depends: [ "core", "fx", "mobile.scroller" ],
+    depends: [ "core", "fx", "mobile.scroller", "view" ],
     hidden: true
 };
 
@@ -172,6 +172,10 @@ var __meta__ = {
             var that = this;
 
             return that.options.stretch ? that.content : that.scrollerContent;
+        },
+
+        clone: function(back) {
+            return new ViewClone(this);
         },
 
         _scroller: function() {
@@ -371,96 +375,7 @@ var __meta__ = {
         LOAD_COMPLETE = "loadComplete",
         SHOW_START = "showStart",
         SAME_VIEW_REQUESTED = "sameViewRequested",
-        VIEW_SHOW = "viewShow",
-        transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
-
-    function parseTransition(transition) {
-        var matches = transition.match(transitionRegExp) || [];
-
-        return {
-            type: matches[1],
-            direction: matches[3],
-            reverse: matches[5] === "reverse"
-        };
-    }
-
-    var ViewContainer = Observable.extend({
-
-        init: function(container) {
-            Observable.fn.init.call(this);
-            this.container = container;
-            this.history = [];
-            this.view = null;
-        },
-
-        show: function(view, transition, locationID) {
-            if (!view.triggerBeforeShow()) {
-                return;
-            }
-
-            var that = this,
-                current = that.view,
-                history = that.history,
-                withSelf = view === current,
-                back = history[history.length - 2] === locationID,
-                viewTransition = back ? view.backTransition : view.transition,
-                theTransition = transition || viewTransition || view.options.defaultTransition,
-                transitionData = parseTransition(theTransition);
-
-            that.trigger("accepted", { view: view });
-
-            var after = function() {
-                if (!back) {
-                    history.push(locationID);
-                } else {
-                    history.pop();
-                }
-
-                that.view = view;
-
-                that.trigger("complete", {view: view});
-            }
-
-            var end = function() {
-                view.showEnd();
-                current.hideEnd();
-                after();
-            }
-
-            if (withSelf) {
-                view.backTransition = view.transition;
-                current = new ViewClone(view, back);
-            }
-
-            if (current) {
-                // layout needs to be detached first, then reattached
-                current.hideStart();
-                view.showStart();
-
-                if (!theTransition) {
-                    end();
-                } else {
-                    if (back && !transition) {
-                        transitionData.reverse = !transitionData.reverse;
-                    }
-
-                    if (!back) {
-                        current.backTransition = theTransition;
-                    }
-
-                    kendo.fx(view.element).replace(current.element, transitionData.type)
-                        .direction(transitionData.direction)
-                        .setReverse(transitionData.reverse)
-                        .run()
-                        .then(end);
-                }
-            } else {
-                view.showStart();
-                view.showEnd();
-                after();
-            }
-        }
-    });
+        VIEW_SHOW = "viewShow";
 
     var ViewEngine = Observable.extend({
         init: function(options) {
@@ -489,7 +404,7 @@ var __meta__ = {
 
             that.layouts = {};
 
-            that.viewContainer = new ViewContainer(that.container);
+            that.viewContainer = new kendo.ViewContainer(that.container);
 
             that.viewContainer.bind("accepted", function(e) {
                 e.view.params = that.params;

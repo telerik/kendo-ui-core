@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.binder" ], f);
+    define([ "./kendo.core", "./kendo.binder", "./kendo.fx" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "View",
     category: "framework",
     description: "The View class instantiates and handles the events of a certain screen from the application.",
-    depends: [ "core", "binder" ],
+    depends: [ "core", "binder", "fx" ],
     hidden: false
 };
 
@@ -160,9 +160,100 @@ var __meta__ = {
         },
     });
 
+    var transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
+
+    function parseTransition(transition) {
+        var matches = transition.match(transitionRegExp) || [];
+
+        return {
+            type: matches[1],
+            direction: matches[3],
+            reverse: matches[5] === "reverse"
+        };
+    }
+
+    var ViewContainer = Observable.extend({
+
+        init: function(container) {
+            Observable.fn.init.call(this);
+            this.container = container;
+            this.history = [];
+            this.view = null;
+        },
+
+        show: function(view, transition, locationID) {
+            if (!view.triggerBeforeShow()) {
+                return;
+            }
+
+            locationID = locationID || view.id;
+
+            var that = this,
+                current = that.view,
+                history = that.history,
+                withSelf = view === current,
+                previousEntry = history[history.length - 2] || {},
+                back = previousEntry.id === locationID,
+                theTransition = transition || ( back ? previousEntry.transition : view.transition ) || view.options.defaultTransition,
+                transitionData = parseTransition(theTransition);
+
+            console.log('back', back);
+
+            that.trigger("accepted", { view: view });
+
+            var after = function() {
+                if (!back) {
+                    history.push({ id: locationID, transition: theTransition });
+                } else {
+                    history.pop();
+                }
+
+                that.view = view;
+
+                that.trigger("complete", {view: view});
+            }
+
+            var end = function() {
+                view.showEnd();
+                current.hideEnd();
+                after();
+            }
+
+            if (withSelf) {
+                current = view.clone();
+            }
+
+            if (current) {
+                // layout needs to be detached first, then reattached
+                current.hideStart();
+                view.showStart();
+
+                if (!theTransition) {
+                    end();
+                } else {
+                    if (back) {
+                        transitionData.reverse = !transitionData.reverse;
+                    }
+
+                    kendo.fx(view.element).replace(current.element, transitionData.type)
+                        .direction(transitionData.direction)
+                        .setReverse(transitionData.reverse)
+                        .run()
+                        .then(end);
+                }
+            } else {
+                view.showStart();
+                view.showEnd();
+                after();
+            }
+        }
+    });
+
+    kendo.ViewContainer = ViewContainer;
     kendo.Fragment = Fragment;
     kendo.Layout = Layout;
     kendo.View = View;
+
 })(window.kendo.jQuery);
 
 return window.kendo;
