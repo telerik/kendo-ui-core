@@ -30,6 +30,7 @@ var __meta__ = {
 
             Observable.fn.init.call(that);
             that.content = content;
+            that.id = kendo.guid();
             that.tagName = options.tagName || "div";
             that.model = options.model;
             that._wrap = options.wrap !== false;
@@ -63,6 +64,26 @@ var __meta__ = {
             }
 
             return that.element;
+        },
+
+        triggerBeforeShow: function() {
+            return true;
+        },
+
+        showStart: function() {
+
+        },
+
+        showEnd: function() {
+
+        },
+
+        hideStart: function() {
+
+        },
+
+        hideEnd: function() {
+            this.hide();
         },
 
         hide: function() {
@@ -135,18 +156,33 @@ var __meta__ = {
     var Layout = View.extend({
         init: function(content, options) {
             View.fn.init.call(this, content, options);
-            this.regions = {};
+            this.containers = {};
         },
 
-        showIn: function(container, view) {
-            var previousView = this.regions[container];
+        container: function(selector) {
+            var container = this.containers[selector];
 
-            if (previousView) {
-                previousView.hide();
+            if (!container) {
+                container = this._createContainer(selector);
+                this.containers[selector] = container;
             }
 
-            view.render(this.render().find(container), previousView);
-            this.regions[container] = view;
+            return container;
+        },
+
+        showIn: function(selector, view, transition) {
+            this.container(selector).show(view, transition);
+        },
+
+        _createContainer: function(selector) {
+            var element = this.render().find(selector),
+                container = new ViewContainer(element);
+
+            container.bind("accepted", function(e) {
+                element.append(e.view.render());
+            });
+
+            return container;
         }
     });
 
