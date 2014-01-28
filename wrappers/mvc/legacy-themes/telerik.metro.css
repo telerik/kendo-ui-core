@@ -24,6 +24,11 @@
 .k-loading,
 .k-widget .k-loading { background: transparent url('Metro/loading.gif') no-repeat 0 0; }
 
+html .k-tabstrip-items .k-loading
+{
+    border-color: #77d5ff;
+}
+
 .k-dropdown .k-input,
 .k-header.k-link,
 .k-group .k-header.k-link,

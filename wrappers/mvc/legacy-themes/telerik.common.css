@@ -489,12 +489,11 @@ div.k-window-content
     display: inline-block;
     border-width: 1px 1px 0;
     border-style: solid;
-    margin: .1em .3em 0 0;
+    margin: .13em .3em 0 0;
     padding: 0;
     position: relative;
-    
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
+    overflow: hidden;
+
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -511,8 +510,8 @@ div.k-window-content
 .k-tabstrip-items .k-state-active,
 .k-panelbar .k-tabstrip-items .k-state-active
 {
-    padding-bottom: 1px;
-    margin-bottom: -1px;
+    position: relative;
+    z-index: 1;
 }
 
 .k-tabstrip-items .k-link,
@@ -561,7 +560,8 @@ div.k-window-content
     border-style: solid;
     margin: 0 .3em .3em;
     padding: .3em 1em;
-    position: static;
+    position: relative;
+    margin-top: -1px;
     zoom: 1;
 }
 
@@ -569,6 +569,58 @@ div.k-window-content
 .k-panelbar .k-tabstrip>.k-content
 {
     display: none;
+}
+
+/* TabStrip Loading Progress */
+html .k-tabstrip-items .k-loading
+{
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 20%;
+    position: absolute;
+    background: transparent;
+    border-style: solid;
+    border-color: transparent;
+    border-color: inherit;
+    border-width: 1px 0 0;
+    -webkit-transition: width 200ms linear;
+    -moz-transition: width 200ms linear;
+    transition: width 200ms linear;
+    -webkit-animation: k-tab-loader 1s ease-in-out infinite;
+    -moz-animation: k-tab-loader 1s ease-in-out infinite;
+    animation: k-tab-loader 1s ease-in-out infinite;
+}
+
+html .k-tabstrip-items .k-progress,
+.k-tabstrip-items .k-loading.k-complete
+{
+    -webkit-animation: none;
+    -moz-animation: none;
+    animation: none;
+}
+
+.k-tabstrip-items .k-loading.k-complete
+{
+    width: 100%;
+}
+
+@-webkit-keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
+}
+
+@-moz-keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
+}
+
+@keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
 }
 
 /* PanelBar */
