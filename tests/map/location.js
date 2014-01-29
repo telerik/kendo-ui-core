@@ -191,6 +191,11 @@
             ok(extent.se.equals(new Location(30, 40)));
         });
 
+        test("create from Extent", function() {
+            result = Extent.create(extent);
+            equal(result, extent);
+        });
+
         test("create from undefined", function() {
             extent = Extent.create();
             equal(extent, undefined);

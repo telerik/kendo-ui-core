@@ -173,9 +173,11 @@
     Extent.World = new Extent([90, -180], [-90, 180]);
 
     Extent.create = function(a, b) {
-        if (a && b) {
+        if (a instanceof Extent) {
+            return a;
+        } else if (a && b) {
             return new Extent(a, b);
-        } else if (a && a.length === 4) {
+        } else if (a && a.length === 4 && !b) {
             return new Extent([a[0], a[1]], [a[2], a[3]]);
         }
     };
