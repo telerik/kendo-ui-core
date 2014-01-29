@@ -182,7 +182,7 @@ namespace <%= csharp_namespace %>
     /// </summary>
     public class <%= csharp_converter_class %>: ExplicitJavaScriptConverter
     {
-        public override void PopulateProperties(IDictionary<string, object> state, object obj)
+        protected override void PopulateProperties(IDictionary<string, object> state, object obj)
         {
             var convertable = obj as <%= csharp_class %>;
             
