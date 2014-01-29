@@ -847,6 +847,13 @@ var __meta__ = {
                         .add(that.content.find(">.k-virtual-scrollable-wrap"));
             }
 
+            if (that.staticHeader) {
+                element = element
+                    .add(that.staticHeader)
+                    .add(that.staticContent)
+                    .add(that.staticFooter);
+            }
+
             if (that.pane) {
                 that.pane.destroy();
             }
