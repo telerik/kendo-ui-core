@@ -98,7 +98,9 @@
 <script type="text/javascript">
 var diagram, utils = kendo.diagram.Utils;
 
-function getVisual(data) {
+function getVisual(item) {
+    var data = item.context;
+
     var g = new kendo.diagram.Group({
         autoSize: true
     });
