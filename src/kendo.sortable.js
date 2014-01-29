@@ -142,8 +142,8 @@ var __meta__ = {
             if(target) {
                 targetOffset = kendo.getOffset(target.element);
                 hintOffset = kendo.getOffset(e.sender.hint);
-                offsetTopDelta = hintOffset.top - targetOffset.top;
-                offsetLeftDelta = hintOffset.left - targetOffset.left;
+                offsetTopDelta = Math.round(hintOffset.top - targetOffset.top);
+                offsetLeftDelta = Math.round(hintOffset.left - targetOffset.left);
                 prevVisible = target.element.prev();
                 nextVisible = target.element.next();
 
