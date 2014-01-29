@@ -210,7 +210,7 @@ file 'demos/mvc/bin/Kendo.dll' => DEMOS_CS do |t|
     msbuild 'demos/mvc/Kendo.csproj'
 end
 
-THEME_BUILDER_ROOT = 'http://themebuilder.kendoui.com'
+THEME_BUILDER_ROOT = 'http://kendoui-themebuilder.telerik.com'
 
 PRODUCTION_RESOURCES = FileList['demos/mvc/**/*']
             .exclude('**/*.cs')
