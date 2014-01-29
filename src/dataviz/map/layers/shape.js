@@ -64,7 +64,8 @@
         },
 
         reset: function() {
-            this._position();
+            Layer.fn.reset.call(this);
+            this._translateSurface();
             if (this._data) {
                 this._load(this._data);
             }
@@ -78,22 +79,6 @@
             this.surface.setSize(
                 this.map.getSize()
             );
-        },
-
-        _activate: function() {
-            Layer.fn._activate.call(this);
-
-            if (!this._panEnd) {
-                this._panEnd = proxy(this._position, this);
-            }
-
-            this.map.bind("panEnd", this._panEnd);
-        },
-
-        _deactivate: function() {
-            Layer.fn._deactivate.call(this);
-
-            this.map.unbind("panEnd", this._panEnd);
         },
 
         _initDataSource: function() {
@@ -163,7 +148,12 @@
             this._markers = [];
         },
 
-        _position: function() {
+        _panEnd: function(e) {
+            Layer.fn._panEnd.call(this, e);
+            this._translateSurface();
+        },
+
+        _translateSurface: function() {
             var map = this.map;
             var nw = map.locationToView(map.extent().nw);
 

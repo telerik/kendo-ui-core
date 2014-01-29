@@ -150,6 +150,11 @@
         equal(map.zoom(), 12);
     });
 
+    test("setter accepts [nw_lat, nw_lng, se_lat, se_lng] array", function() {
+        map.extent([0, 10, 10, 0]);
+        ok(map.center().equals(new Location(5, 5)));
+    });
+
     test("setter returns Map", function() {
         equal(map.extent(new Extent([0, 0], [-10, 10])), map);
     });

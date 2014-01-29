@@ -74,6 +74,27 @@
                     }
                 },
                 copyright: "&copy; FooBar"
+            }, {
+                dataSource: {
+                    type: "geojson",
+                    transport: {
+                        read: "countries.geo.json"
+                    }
+                },
+                coverage: [{
+                    extent: [
+                        45.3444, 20.8960, /* NW */
+                        40.5222, 29.6850  /* SE */
+                    ],
+                    minZoom: 5,
+                    maxZoom: 10
+                }],
+                style: {
+                    fill: {
+                        color: "red",
+                        opacity: 1
+                    }
+                }
             }],
             markers: [{
                 position: [51.5, -0.09],
@@ -101,7 +122,7 @@
             shapeCreated: function(e) {
                 var users = e.shape.dataItem.properties.users;
                 if (users) {
-                    setColor(e.shape, users);
+                    //setColor(e.shape, users);
                 }
             },
             shapeMouseEnter: function(e) {

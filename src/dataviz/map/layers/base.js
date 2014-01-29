@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../../../kendo.core" ], f);
+    define([ "../../../kendo.core", "../location" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -11,7 +11,13 @@
         Class = kendo.Class,
 
         dataviz = kendo.dataviz,
-        deepExtend = kendo.deepExtend;
+        deepExtend = kendo.deepExtend,
+        defined = dataviz.defined,
+
+        Extent = dataviz.map.Extent,
+
+        util = dataviz.util,
+        valueOrDefault = util.valueOrDefault;
 
     // Implementation =========================================================
     var Layer = Class.extend({
@@ -28,6 +34,7 @@
 
             this._reset = proxy(this.reset, this);
             this._resize = proxy(this._resize, this);
+            this._panEnd = proxy(this._panEnd, this);
             this._activate();
 
             this._updateAttribution();
@@ -40,17 +47,54 @@
         show: function() {
             this.reset();
             this._activate();
-            this.element.css("display", "");
+            this._applyCoverage(true);
         },
 
         hide: function() {
-            this.element.css("display", "none");
             this._deactivate();
+            this._setVisibility(false);
         },
 
-        reset: $.noop,
+        reset: function() {
+            this._applyCoverage();
+        },
 
         _resize: $.noop,
+
+        _panEnd: function() {
+            this._applyCoverage();
+        },
+
+        _applyCoverage: function() {
+            var coverage = this.options.coverage;
+            var inCoverage = true;
+            if (coverage) {
+                var zoom = this.map.zoom();
+                var extent = this.map.extent();
+
+                for (var i = 0; i < coverage.length; i++) {
+                    var rule = coverage[i];
+
+                    var below = defined(rule.minZoom) && zoom < rule.minZoom;
+                    var above = defined(rule.maxZoom) && zoom > rule.maxZoom;
+
+                    var ruleExtent = Extent.create(rule.extent);
+                    var outside = ruleExtent && !ruleExtent.overlaps(extent);
+
+                    if (below || above || outside) {
+                        inCoverage = false;
+                        break;
+                    }
+                };
+
+            }
+
+            this._setVisibility(inCoverage);
+        },
+
+        _setVisibility: function(visible) {
+            this.element.css("display", visible ? "" : "none");
+        },
 
         _activate: function() {
             var map = this.map;

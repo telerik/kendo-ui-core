@@ -171,6 +171,36 @@
             ok(extent.se.equals(new Location(30, 40)));
         });
 
+        test("create from two locations", function() {
+            extent = Extent.create(
+                new Location(45, -90),
+                new Location(-45, 90)
+            );
+            ok(extent.nw.equals(new Location(45, -90)));
+        });
+
+        test("create from two [lat, lnt] arrays", function() {
+            extent = Extent.create([10, 20], [30, 40]);
+            ok(extent.nw.equals(new Location(10, 20)));
+            ok(extent.se.equals(new Location(30, 40)));
+        });
+
+        test("create from flat array", function() {
+            extent = Extent.create([10, 20, 30, 40]);
+            ok(extent.nw.equals(new Location(10, 20)));
+            ok(extent.se.equals(new Location(30, 40)));
+        });
+
+        test("create from Extent", function() {
+            result = Extent.create(extent);
+            equal(result, extent);
+        });
+
+        test("create from undefined", function() {
+            extent = Extent.create();
+            equal(extent, undefined);
+        });
+
         test("contains for negative longitude", function() {
             ok(extent.contains(new Location(0, -89)));
         });
