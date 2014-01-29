@@ -129,7 +129,7 @@ namespace :themebuilder do
     desc('Deploy the ThemeBuilder to live site')
     task :upload => [ :less, :sources, :production ] do
         local = 'dist/themebuilder/production'
-        remote = 'themebuilder'
+        remote = 'kendoui-themebuilder.telerik.com'
         system("lftp 172.16.80.87:33 -e 'mirror -R -p --delete #{local} #{remote}; bye'")
     end
 
