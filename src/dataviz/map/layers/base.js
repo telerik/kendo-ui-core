@@ -85,8 +85,7 @@
                         inCoverage = false;
                         break;
                     }
-                };
-
+                }
             }
 
             this._setVisibility(inCoverage);
