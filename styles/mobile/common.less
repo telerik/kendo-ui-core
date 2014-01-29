@@ -1952,14 +1952,15 @@
     right: 0;
 }
 
-.km-native-scrolling,
-.km-native-scrolling .km-view,
-.km-native-scrolling .km-splitview .km-pane
+.km-root.km-native-scrolling,
+.km-root.km-native-scrolling .km-view,
+.km-root.km-native-scrolling .km-splitview .km-pane
 {
     min-height: 100%;
     height: auto;
     -ms-touch-action: auto !important;
     -webkit-transform: none;
+    overflow-x: visible;
 }
 
 .km-native-scrolling .km-blackberry .km-content
