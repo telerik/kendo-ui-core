@@ -134,4 +134,16 @@ test("left / right keys control column selection", function() {
     deepEqual(selectedIndices(cells), [ 0 ]);
 });
 
+test("enter key triggers createTable command", function() {
+    var execArgs;
+
+    withMock(tool._editor, "exec", function() { execArgs = arguments; }, function() {
+        dom.press({ keyCode: keys.ENTER });
+
+        ok(execArgs);
+        equal(execArgs[0], "createTable");
+        deepEqual(execArgs[1], { rows: 1, columns: 1 });
+    });
+});
+
 }());

@@ -163,20 +163,22 @@ var InsertTableTool = PopupTool.extend({
                 that._setTableSize();
             })
             .on("mouseup" + NS, function(e) {
-                var t = tableFromLocation(e);
-
-                if (that._valid(t)) {
-                    that._editor.exec("createTable", {
-                        rows: t.row,
-                        columns: t.col
-                    });
-                    that._popup.close();
-                }
+                that._exec(tableFromLocation(e));
             });
     },
 
     _valid: function(size) {
         return size.row > 0 && size.col > 0 && size.row <= this.rows && size.col <= this.cols;
+    },
+
+    _exec: function(size) {
+        if (this._valid(size)) {
+            this._editor.exec("createTable", {
+                rows: size.row,
+                columns: size.col
+            });
+            this._popup.close();
+        }
     },
 
     _setTableSize: function(size) {
@@ -208,10 +210,8 @@ var InsertTableTool = PopupTool.extend({
         var key = e.keyCode;
         var cells = this._popup.element.find(".k-ct-cell");
         var focus = Math.max(cells.filter(".k-state-selected").last().index(), 0);
-        var rows = this.rows;
-        var cols = this.cols;
-        var selectedRows = Math.floor(focus / rows);
-        var selectedColumns = focus % cols;
+        var selectedRows = Math.floor(focus / this.cols);
+        var selectedColumns = focus % this.cols;
 
         var changed = false;
 
@@ -229,10 +229,16 @@ var InsertTableTool = PopupTool.extend({
             selectedColumns--;
         }
 
-        this._setTableSize({
-            row: Math.max(0, Math.min(rows, selectedRows)) + 1,
-            col: Math.max(0, Math.min(cols, selectedColumns)) + 1
-        });
+        var tableSize = {
+            row: Math.max(1, Math.min(this.rows, selectedRows + 1)),
+            col: Math.max(1, Math.min(this.cols, selectedColumns + 1))
+        };
+
+        if (key == keys.ENTER) {
+            this._exec(tableSize);
+        } else {
+            this._setTableSize(tableSize);
+        }
 
         if (changed) {
             e.preventDefault();
