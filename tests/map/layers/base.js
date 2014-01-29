@@ -235,15 +235,6 @@ function baseLayerTests(name, TLayer) {
         });
     });
 
-    test("coverage is evaluated on zoomEnd", function() {
-        layer = new TLayer(map, { coverage: [{ minZoom: 5 }] });
-        stubMethod(TLayer.fn, "_setVisibility", function(visible) {
-            ok(true);
-        }, function() {
-            map.trigger("zoomEnd");
-        });
-    });
-
     test("coverage is evaluated on panEnd", function() {
         layer = new TLayer(map, { coverage: [{ minZoom: 5 }] });
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {

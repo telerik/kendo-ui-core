@@ -35,7 +35,6 @@
             this._reset = proxy(this.reset, this);
             this._resize = proxy(this._resize, this);
             this._panEnd = proxy(this._panEnd, this);
-            this._zoomEnd = proxy(this._zoomEnd, this);
             this._activate();
 
             this._updateAttribution();
@@ -66,10 +65,6 @@
             this._applyCoverage();
         },
 
-        _zoomEnd: function() {
-            this._applyCoverage();
-        },
-
         _applyCoverage: function() {
             var coverage = this.options.coverage;
             var inCoverage = true;
@@ -93,7 +88,7 @@
                 };
 
             }
-            // TODO Investigate multiple calls
+
             this._setVisibility(inCoverage);
         },
 
@@ -106,7 +101,6 @@
             map.bind("reset", this._reset);
             map.bind("resize", this._resize);
             map.bind("panEnd", this._panEnd);
-            map.bind("zoomEnd", this._zoomEnd);
         },
 
         _deactivate: function() {
@@ -114,7 +108,6 @@
             map.unbind("reset", this._reset);
             map.unbind("resize", this._resize);
             map.unbind("panEnd", this._panEnd);
-            map.unbind("zoomEnd", this._zoomEnd);
         },
 
         _updateAttribution: function() {
