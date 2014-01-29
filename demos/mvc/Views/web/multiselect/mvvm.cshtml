@@ -2,7 +2,7 @@
     <div class="configuration-horizontal">
         <div class="config-section" data-bind="visible: isPrimitive">
             <span class="configHead">MultiSelect</span>
-            <input data-role="multiselect"
+            <select data-role="multiselect"
                    data-placeholder="Type a product e.g. 'Chai'"
                    data-value-primitive="true"
                    data-text-field="ProductName"
@@ -17,14 +17,14 @@
                                 close: onClose
                               }"
                    style="width: 300px"
-            />
+            ></select>
             <p>
                 <strong>data-value-primitive</strong> is set to <strong>true</strong>
             </p>
         </div>
         <div class="config-section" data-bind="invisible: isPrimitive">
             <span class="configHead">MultiSelect</span>
-            <input data-role="multiselect"
+            <select data-role="multiselect"
                    data-placeholder="Type a product e.g. 'Chai'"
                    data-text-field="ProductName"
                    data-value-field="ProductID"
@@ -38,7 +38,7 @@
                                 close: onClose
                               }"
                    style="width: 300px"
-            />
+            ></select>
             <p>
                 <strong>data-value-primitive</strong> is <strong>not</strong> set.
             </p>
