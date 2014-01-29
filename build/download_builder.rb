@@ -11,7 +11,7 @@ BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.
 
 namespace :download_builder do
 
-    task :sources do
+    task :sources => :less do
         grunt "kendo:download_builder"
         core = File.join(BUILDER_DEPLOY_PATH, 'js/kendo.core.min.js')
 
@@ -67,13 +67,8 @@ namespace :download_builder do
         msbuild File.join('dist', 'download-builder-staging', File.join('service', 'Download.csproj')), "'/t:Clean;Build' '/p:Configuration=Release'"
     end
 
-    def download_builder_version
-        "#{VERSION}".sub(/((\w+|\.){6})\./, '\1 ')
-    end
-
     def download_builder_resources
-        dist_path = "dist/download-builder/#{download_builder_version}/"
-        mkdir_p dist_path, :verbose => false
+        dist_path = BUILDER_DEPLOY_PATH
 
         css_path = File.join(dist_path, 'styles')
 
@@ -81,36 +76,17 @@ namespace :download_builder do
              :from => MIN_CSS_RESOURCES,
              :root => ROOT_MAP['styles']
 
-        js_path = File.join(dist_path, 'js')
-
-        task js_path => :sources do
-            mv File.join(BUILDER_DEPLOY_PATH, 'js'), js_path
-        end
-
-        [js_path, css_path]
-    end
-
-    def download_builder_config
-        dist_path = BUILDER_DEPLOY_PATH
-
-        config_file_path = File.join(dist_path, "kendo-config.#{download_builder_version}.js")
+        config_file_path = File.join(dist_path, "kendo-config.js")
 
         task config_file_path do |t|
-            sh "rm -f #{dist_path}kendo-config.*", :verbose => VERBOSE
             sh "node #{METAJS} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
         end
 
-        config_file_path
-    end
-
-    zip "dist/download-builder/#{download_builder_version}.zip" => download_builder_resources
-
-    task :clean_zip_sources => "dist/download-builder/#{download_builder_version}.zip" do
-        rm_rf FileList[File.join(BUILDER_DEPLOY_PATH, download_builder_version)]
+        ["download_builder:sources", css_path, config_file_path]
     end
 
     desc 'Build download builder deploy bundle'
-    task :bundle => ["dist/download-builder/#{download_builder_version}.zip", download_builder_config, :clean_zip_sources]
+    task :bundle => download_builder_resources
 
     desc 'Build staging download builder site'
     task :staging => :build_staging

@@ -639,12 +639,20 @@ namespace :build do
 
         zip_bundles.push(zip_demos)
 
-        tree :to => "#{ARCHIVE_ROOT}/#{destination}/download-builder",
-             :from => FileList["dist/download-builder/**/*"],
-             :root => 'dist/download-builder'
+        db_version = "#{VERSION}".sub(/((\w+|\.){6})\./, '\1 ')
+        db_root = "#{ARCHIVE_ROOT}/#{destination}/download-builder"
 
-        zip_bundles.push("#{ARCHIVE_ROOT}/#{destination}/download-builder")
+        tree :to => db_root,
+             :from => FileList['dist/download-builder/js/**/*'].include('/dist/download-builder/styles/**/*'),
+             :root => "dist/download-builder"
 
+        zip File.join(db_root, db_version + '.zip')
+
+        db_config_file = File.join(db_root, "kendo-config.#{db_version}.js")
+        file_copy :to => db_config_file,
+                  :from => "dist/download-builder/kendo-config.js"
+
+        zip_bundles.push(db_config_file, File.join(db_root, db_version + '.zip'))
 
         tree :to => "#{ARCHIVE_ROOT}/WinJS/#{destination}",
              :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
