@@ -1388,6 +1388,24 @@ test("binding ignores text nodes", 1, function() {
     ok(true);
 });
 
+test("source binding destroy unbinds other change handlers", 1, function() {
+    dom = $('<select data-bind="source:foo"/>');
+
+    var viewModel = kendo.observable( {
+        foo: [1, 2]
+    });
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.get("foo").bind("change", function() {
+        ok(true);
+    });
+
+    kendo.unbind(dom);
+
+    viewModel.get("foo").push(3);
+});
+
 if (kendo.support.input.date) {
     test("input type date value binding", function() {
         dom = $('<input type="date" data-bind="value: date">');

@@ -494,12 +494,6 @@ kendo_module({
             return template;
         },
 
-        destroy: function() {
-            var source = this.bindings.source.get();
-
-            source.unbind(CHANGE, this._change);
-        },
-
         add: function(index, items) {
             var element = this.container(),
                 parents,
