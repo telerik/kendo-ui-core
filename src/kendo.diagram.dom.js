@@ -273,7 +273,9 @@ var __meta__ = {
                 text: ""
             },
             editable: true,
-            selectable: true
+            selectable: true,
+            isSerializable: true,
+            isHitTestVisible: true
         },
         _getCursor: function (point) {
             if (this.adorner) {
@@ -337,7 +339,7 @@ var __meta__ = {
         },
         _hitTest: function (point) {
             var bounds = this.bounds();
-            return this.visible() && bounds.contains(point);
+            return this.visible() && bounds.contains(point) && this.options.isHitTestVisible;
         },
         _template: function () {
             var that = this;
@@ -1287,7 +1289,9 @@ var __meta__ = {
             json.connections = [];
             for (i = 0; i < this.shapes.length; i++) {
                 shape = this.shapes[i];
-                json.shapes.push({options: shape.options});
+                if (shape.options.isSerializable) {
+                    json.shapes.push({options: shape.options});
+                }
             }
 
             for (i = 0; i < this.connections.length; i++) {
@@ -1501,7 +1505,7 @@ var __meta__ = {
                     items = this.shapes.concat(this.connections);
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
-                        if (!rect || item._hitTest(rect)) {
+                         if ((!rect || item._hitTest(rect)) && item.options.isHitTestVisible) {
                             if (item.select(true)) {
                                 selected.push(item);
                             }
