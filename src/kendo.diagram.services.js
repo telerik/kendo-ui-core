@@ -1141,7 +1141,7 @@
                     return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
                 }
 
-                if (sourceConnectorName !== null && targetConnectorName !== null && DEFAULTCONNECTORNAMES.contains(sourceConnectorName) && DEFAULTCONNECTORNAMES.contains(targetConnectorName)) {
+                if (sourceConnectorName !== null && targetConnectorName !== null && Utils.contains(DEFAULTCONNECTORNAMES, sourceConnectorName) && Utils.contains(DEFAULTCONNECTORNAMES, targetConnectorName)) {
                     // custom routing for the default connectors
                     if (sourceConnectorName === TOP || sourceConnectorName == BOTTOM) {
                         if (targetConnectorName == TOP || targetConnectorName == BOTTOM) {
