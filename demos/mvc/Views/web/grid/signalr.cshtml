@@ -3,7 +3,7 @@
     <script src="../../content/web/integration/jquery.signalr-1.1.3.min.js"></script>
     <script>
         $(function(){
-            var hubUrl = "http://demos.kendoui.com/service/signalr/hubs";
+            var hubUrl = "http://demos.telerik.com/kendo-ui/service/signalr/hubs";
             var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
             var hub = connection.createHubProxy("productHub");
             var hubStart = connection.start({ jsonp: true });
