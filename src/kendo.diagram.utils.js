@@ -389,6 +389,12 @@ var __meta__ = {
         arr.push.apply(arr, range);
     };
 
+    var Easing = {
+        easeInOut: function (pos) {
+            return ((-Math.cos(pos * Math.PI) / 2) + 0.5);
+        }
+    };
+
     /**
      * An animation ticker driving an adapter which sets a particular
      * property in function of the tick.
