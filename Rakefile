@@ -639,20 +639,18 @@ namespace :build do
 
         zip_bundles.push(zip_demos)
 
-        db_version = "#{VERSION}".sub(/((\w+|\.){6})\./, '\1 ')
         db_root = "#{ARCHIVE_ROOT}/#{destination}/download-builder"
+        db_version = "#{VERSION}".sub(/((\w+|\.){6})\./, '\1 ')
 
-        tree :to => db_root,
-             :from => FileList['dist/download-builder/js/**/*'].include('/dist/download-builder/styles/**/*'),
-             :root => "dist/download-builder"
-
-        zip File.join(db_root, db_version + '.zip')
+        db_content = "#{db_root}/#{db_version}.zip"
+        file_copy :to => db_content,
+                  :from => "dist/download-builder/content.zip"
 
         db_config_file = File.join(db_root, "kendo-config.#{db_version}.js")
         file_copy :to => db_config_file,
                   :from => "dist/download-builder/kendo-config.js"
 
-        zip_bundles.push(db_config_file, File.join(db_root, db_version + '.zip'))
+        zip_bundles.push(db_config_file, db_content)
 
         tree :to => "#{ARCHIVE_ROOT}/WinJS/#{destination}",
              :from => FileList[WIN_JS_RESOURCES].pathmap('dist/bundles/winjs.commercial/%f'),
@@ -756,7 +754,8 @@ namespace :build do
         end
 
         desc 'Package and publish bundles to the Stable directory'
-        task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
+        task :bundles => [#:get_binaries, 'bundles:all', 'demos:production',
+                          'download_builder:bundle', zip_targets("Stable")].flatten
     end
 
 end

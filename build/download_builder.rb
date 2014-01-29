@@ -13,7 +13,7 @@ namespace :download_builder do
 
     task :sources => :less do
         grunt "kendo:download_builder"
-        core = File.join(BUILDER_DEPLOY_PATH, 'js/kendo.core.min.js')
+        core = File.join(BUILDER_DEPLOY_PATH, 'content/js/kendo.core.min.js')
 
         contents = File.read(core)
         contents.sub!("$KENDO_VERSION", VERSION)
@@ -31,8 +31,8 @@ namespace :download_builder do
         js_assets_path = File.join(assets_path, 'js')
 
         tree :to => js_assets_path,
-             :from  => MIN_JS.sub(DIST_JS_ROOT, File.join(BUILDER_DEPLOY_PATH, "js")),
-             :root => File.join(BUILDER_DEPLOY_PATH, "js")
+             :from  => MIN_JS.sub(DIST_JS_ROOT, File.join(BUILDER_DEPLOY_PATH, 'content', "js")),
+             :root => File.join(BUILDER_DEPLOY_PATH, 'content', "js")
 
         styles_assets_path = File.join(assets_path, 'styles')
         tree :to => styles_assets_path,
@@ -70,7 +70,7 @@ namespace :download_builder do
     def download_builder_resources
         dist_path = BUILDER_DEPLOY_PATH
 
-        css_path = File.join(dist_path, 'styles')
+        css_path = File.join(dist_path, 'content', 'styles')
 
         tree :to => css_path,
              :from => MIN_CSS_RESOURCES,
@@ -85,8 +85,10 @@ namespace :download_builder do
         ["download_builder:sources", css_path, config_file_path]
     end
 
+    zip "#{BUILDER_DEPLOY_PATH}/content.zip" => download_builder_resources
+
     desc 'Build download builder deploy bundle'
-    task :bundle => download_builder_resources
+    task :bundle => "#{BUILDER_DEPLOY_PATH}/content.zip"
 
     desc 'Build staging download builder site'
     task :staging => :build_staging

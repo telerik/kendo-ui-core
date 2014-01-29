@@ -233,7 +233,7 @@ module.exports = function(grunt) {
             download_builder: {
                 src: main_kendo_files,
                 ext: ".min.js",
-                dest: PATH.join("dist", "download-builder", "js"),
+                dest: PATH.join("dist", "download-builder", "content", "js"),
             },
             config: {
                 src: main_kendo_files,
