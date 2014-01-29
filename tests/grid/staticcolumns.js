@@ -239,6 +239,18 @@
         equal(grid.element.find(".k-grid-footer-wrap col").length, 2);
     });
 
+    test("col elements are position correctly in the static footer with grouping", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        grid.dataSource.group({ field: "foo" });
+
+        ok(grid.element.find(".k-grid-footer-static col").first().hasClass("k-group-col"));
+        ok(grid.element.find(".k-grid-footer-static td").first().hasClass("k-group-cell"));
+        equal(grid.element.find(".k-grid-footer-static td").eq(1).text(), "foo");
+    });
+
     test("correct col elements are created in the static footer when multiple static columns", function() {
         var grid = setup({
             columns: [

@@ -3843,6 +3843,7 @@ var __meta__ = {
         _appendStaticColumnFooter: function() {
             var that = this,
                 columns = this.columns,
+                groups = that._groups(),
                 idx,
                 html,
                 colgroup,
@@ -3857,17 +3858,17 @@ var __meta__ = {
             colgroup = table.find("colgroup");
             tr = table.find("tr");
 
-            that.footer.find(".k-grid-footer-wrap>table>colgroup>.k-group-col,.k-hierarchy-col").appendTo(colgroup);
-            that.footer.find(".k-footer-template>.k-group-cell,.k-hierarchy-cell").appendTo(tr);
-
             for (idx = columns.length - 1; idx >= 0; idx--) {
                 if (columns[idx].static) {
 
-                    that.footer.find(".k-grid-footer-wrap>table>colgroup>col").eq(idx).prependTo(colgroup);
-                    that.footer.find(".k-footer-template>td").eq(idx).prependTo(tr);
+                    that.footer.find(".k-grid-footer-wrap>table>colgroup>col").eq(idx + groups).prependTo(colgroup);
+                    that.footer.find(".k-footer-template>td").eq(idx+groups).prependTo(tr);
                     hasStaticColumns = true;
                 }
             }
+
+            that.footer.find(".k-grid-footer-wrap>table>colgroup>.k-group-col,.k-hierarchy-col").prependTo(colgroup);
+            that.footer.find(".k-footer-template>.k-group-cell,.k-hierarchy-cell").prependTo(tr);
 
             if (hasStaticColumns) {
                 this.staticFooter = table.prependTo(that.footer);
