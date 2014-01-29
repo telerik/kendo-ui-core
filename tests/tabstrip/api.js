@@ -315,6 +315,19 @@ test('remove method removes several tabs and their content elements', 2, functio
     }
 });
 
+test('insertAfter method moves a tab and its content elements if called with existing tab', 2, function() {
+    var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li></ul><div>Content 1</div><div>Content 2</div></div>").kendoTabStrip().data("kendoTabStrip");
+
+    try {
+        tabStrip.insertAfter("li:contains(Tab 1)", "li:last-child");
+
+        ok(tabStrip.tabGroup.children("li:last-child").text() == "Tab 1");
+        ok(tabStrip.element.children("div:last-child").text() == "Content 1");
+    } finally {
+        tabStrip.destroy();
+    }
+});
+
 test('select method ignores nested TabStrips', function() {
     var parentTabstrip = getTabStrip("#parent-tabstrip"),
         idx = parentTabstrip.select().index();

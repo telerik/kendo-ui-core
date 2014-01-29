@@ -574,6 +574,8 @@ var __meta__ = {
         },
 
         insertBefore: function (tab, referenceTab) {
+            referenceTab = this.tabGroup.find(referenceTab);
+
             var that = this,
                 inserted = that._create(tab),
                 referenceContent = $(that.contentElement(referenceTab.index()));
@@ -590,6 +592,8 @@ var __meta__ = {
         },
 
         insertAfter: function (tab, referenceTab) {
+            referenceTab = this.tabGroup.find(referenceTab);
+
             var that = this,
                 inserted = that._create(tab),
                 referenceContent = $(that.contentElement(referenceTab.index()));
@@ -629,7 +633,7 @@ var __meta__ = {
 
         _create: function (tab) {
             var plain = $.isPlainObject(tab),
-                that = this, tabs, contents;
+                that = this, tabs, contents, content;
 
             if (plain || $.isArray(tab)) {
                 tab = $.isArray(tab) ? tab : [tab];
@@ -650,7 +654,14 @@ var __meta__ = {
                         });
             } else {
                 tabs = $(tab);
-                contents = $("<div class='" + CONTENT + "'/>");
+                contents = $();
+                tabs.each(function () {
+                    content = $("<div class='" + CONTENT + "'/>");
+                    if (/k-tabstrip-items/.test(this.parentNode.className)) {
+                        content = $(that.contentElement($(this).index()));
+                    }
+                    contents = contents.add(content);
+                });
 
                 updateTabClasses(tabs);
             }
