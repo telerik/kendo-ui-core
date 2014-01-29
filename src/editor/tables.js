@@ -63,7 +63,8 @@ var PopupTool = Tool.extend({
             close: proxy(this._close, this)
         }).data("kendoPopup");
 
-        ui.click(proxy(this._toggle, this));
+        ui.click(proxy(this._toggle, this))
+          .keydown(proxy(this._keydown, this));
 
         this._editor = options.editor;
         this._popup = popup;
@@ -81,6 +82,17 @@ var PopupTool = Tool.extend({
 
     _close: function() {
         this._popup.options.anchor.removeClass(ACTIVESTATE);
+    },
+
+    _keydown: function(e) {
+        var keys = kendo.keys;
+        var key = e.keyCode;
+
+        if (key == keys.DOWN && e.altKey) {
+            this._popup.open();
+        } else if (key == keys.ESC) {
+            this._popup.close();
+        }
     },
 
     _toggle: function(e) {
@@ -120,7 +132,6 @@ var InsertTableTool = PopupTool.extend({
     _activate: function() {
         var that = this,
             element = that._popup.element,
-            status = element.find(".k-status"),
             cells = element.find(".k-ct-cell"),
             firstCell = cells.eq(0),
             lastCell = cells.eq(cells.length - 1),
@@ -144,43 +155,95 @@ var InsertTableTool = PopupTool.extend({
             };
         }
 
-        function valid(p) {
-            return p.row > 0 && p.col > 0 && p.row <= rows && p.col <= cols;
-        }
-
         element
             .on("mousemove" + NS, function(e) {
-                var t = tableFromLocation(e);
-
-                if (valid(t)) {
-                    status.text(kendo.format("Create a {0} x {1} table", t.row, t.col));
-
-                    cells.each(function(i) {
-                        $(this).toggleClass(
-                            SELECTEDSTATE,
-                            i % cols < t.col && i / cols < t.row
-                        );
-                    });
-                } else {
-                    status.text("Cancel");
-                    cells.removeClass(SELECTEDSTATE);
-                }
+                that._setTableSize(tableFromLocation(e));
             })
             .on("mouseleave" + NS, function() {
-                cells.removeClass(SELECTEDSTATE);
-                status.text("Cancel");
+                that._setTableSize();
             })
             .on("mouseup" + NS, function(e) {
-                var t = tableFromLocation(e);
-
-                if (valid(t)) {
-                    that._editor.exec("createTable", {
-                        rows: t.row,
-                        columns: t.col
-                    });
-                    that._popup.close();
-                }
+                that._exec(tableFromLocation(e));
             });
+    },
+
+    _valid: function(size) {
+        return size.row > 0 && size.col > 0 && size.row <= this.rows && size.col <= this.cols;
+    },
+
+    _exec: function(size) {
+        if (this._valid(size)) {
+            this._editor.exec("createTable", {
+                rows: size.row,
+                columns: size.col
+            });
+            this._popup.close();
+        }
+    },
+
+    _setTableSize: function(size) {
+        var element = this._popup.element; 
+        var status = element.find(".k-status");
+        var cells = element.find(".k-ct-cell");
+        var rows = this.rows;
+        var cols = this.cols;
+
+        if (this._valid(size)) {
+            status.text(kendo.format("Create a {0} x {1} table", size.row, size.col));
+
+            cells.each(function(i) {
+                $(this).toggleClass(
+                    SELECTEDSTATE,
+                    i % cols < size.col && i / cols < size.row
+                );
+            });
+        } else {
+            status.text("Cancel");
+            cells.removeClass(SELECTEDSTATE);
+        }
+    },
+
+    _keydown: function(e) {
+        PopupTool.fn._keydown.call(this, e);
+
+        var keys = kendo.keys;
+        var key = e.keyCode;
+        var cells = this._popup.element.find(".k-ct-cell");
+        var focus = Math.max(cells.filter(".k-state-selected").last().index(), 0);
+        var selectedRows = Math.floor(focus / this.cols);
+        var selectedColumns = focus % this.cols;
+
+        var changed = false;
+
+        if (key == keys.DOWN && !e.altKey) {
+            changed = true;
+            selectedRows++;
+        } else if (key == keys.UP) {
+            changed = true;
+            selectedRows--;
+        } else if (key == keys.RIGHT) {
+            changed = true;
+            selectedColumns++;
+        } else if (key == keys.LEFT) {
+            changed = true;
+            selectedColumns--;
+        }
+
+        var tableSize = {
+            row: Math.max(1, Math.min(this.rows, selectedRows + 1)),
+            col: Math.max(1, Math.min(this.cols, selectedColumns + 1))
+        };
+
+        if (key == keys.ENTER) {
+            this._exec(tableSize);
+        } else {
+            this._setTableSize(tableSize);
+        }
+
+        if (changed) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+        }
     },
 
     _open: function() {
