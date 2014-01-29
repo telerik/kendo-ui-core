@@ -6,7 +6,7 @@
                 <ul>
                     <li><label>Add item: <input type="text" placeholder="item name&hellip;" data-bind="value: newItemValue" /></label></li>
                 </ul>
-                <button type="submit" class="km-button" style="width: 100%; margin: 1em 0; font-weight: bold; font-size: 1.1em;"><span class="km-text">Add</span></button>
+                <button type="submit" class="km-widget km-button" style="display: block; margin: 1em auto; font-size: 1.1em;">Add</button>
             </li>
 
             <li>
@@ -28,6 +28,18 @@
             <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
         </p>
     </form>
+    <style scoped>
+        .km-ios .km-listview .km-button,
+        .km-ios7 .km-listview .km-button,
+        .km-blackberry .km-listview .km-button,
+        .km-android .km-listview .km-button {
+                width: 90%;
+            }
+        .km-flat .km-listview .km-button,
+        .km-wp .km-listview .km-button {
+                width: 100%;
+            }
+    </style>
 </div>
 
 <script>
