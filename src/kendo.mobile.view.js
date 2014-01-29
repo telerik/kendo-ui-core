@@ -442,7 +442,6 @@ var __meta__ = {
 
             element = that.element;
 
-            that.element = element.detach();
             that.header = element.children(roleSelector("header")).addClass("km-header");
             that.footer = element.children(roleSelector("footer")).addClass("km-footer");
             that.elements = that.header.add(that.footer);
@@ -450,6 +449,7 @@ var __meta__ = {
             initPopOvers(element);
 
             kendo.mobile.init(that.element.children());
+            that.element.detach();
             that.trigger(INIT, {layout: that});
         },
 
