@@ -304,4 +304,27 @@
         equal(notification._compiled.info({}), "bar");
     });
 
+    test("getNotifications returns open popup notifications", function() {
+        createNotification({
+            autoHideAfter: 0
+        });
+
+        notification.show("foo");
+        notification.show("bar");
+
+        equal(notification.getNotifications().length, 2);
+    });
+
+    test("getNotifications returns open static notifications", function() {
+        createNotification({
+            autoHideAfter: 0,
+            appendTo: QUnit.fixture
+        });
+
+        notification.show("foo");
+        notification.show("bar");
+
+        equal(notification.getNotifications().length, 2);
+    });
+
 })();

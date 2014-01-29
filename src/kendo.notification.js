@@ -375,14 +375,14 @@ var __meta__ = {
 
         hide: function() {
             var that = this,
-                guidClass = "." + that._guid;
+                openedNotifications = that.getNotifications();
 
             if (that.options.appendTo) {
-                $(guidClass).each(function(idx, element){
+                openedNotifications.each(function(idx, element){
                     that._hideStatic($(element));
                 });
             } else {
-                $(guidClass).children("." + KNOTIFICATION).each(function(idx, element){
+                openedNotifications.each(function(idx, element){
                     var popup = $(element).data("kendoPopup");
                     if (popup) {
                         popup.close();
@@ -391,6 +391,17 @@ var __meta__ = {
             }
 
             return that;
+        },
+
+        getNotifications: function() {
+            var that = this,
+                guidElements = $("." + that._guid);
+                
+            if (that.options.appendTo) {
+                return guidElements;
+            } else {
+                return guidElements.children("." + KNOTIFICATION);
+            }
         },
 
         setOptions: function(newOptions) {
