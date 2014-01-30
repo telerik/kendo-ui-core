@@ -2242,17 +2242,22 @@ var __meta__ = {
             for (var idx = 0; idx < items.length; idx ++) {
                 var item = items[idx];
                 var model = this._createNewModel(item);
+                var found = false;
 
                 this._eachItem(this._data, function(items){
                     for (var idx = 0; idx < items.length; idx++) {
                         if (items[idx].id === model.id) {
                             items.splice(idx, 1);
+                            found = true;
                             break;
                         }
                     }
                 });
 
-                this._removePristineForModel(model);
+                if (found) {
+                    this._removePristineForModel(model);
+                    this._destroyed.pop();
+                }
             }
         },
 

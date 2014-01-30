@@ -139,6 +139,26 @@ test("pushCreate inserts a new item in the data source", function() {
     equal(dataSource.at(0).foo, "foo");
 });
 
+test("hasChanges returns false after pushCreate", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } }
+    });
+
+    dataSource.pushCreate({ id: 1, foo: "foo" });
+
+    equal(dataSource.hasChanges(), false);
+});
+
+test("isNew returns false after pushCreate", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } }
+    });
+
+    dataSource.pushCreate({ id: 1, foo: "foo" });
+
+    equal(dataSource.at(0).isNew(), false);
+});
+
 test("pushCreate raises the change event", 2, function() {
     var dataSource = new DataSource({
         change: function(e) {
@@ -172,6 +192,19 @@ test("pushUpdate updates an existing item", function() {
     dataSource.pushUpdate({ id: 1, foo: "bar" });
 
     equal(dataSource.at(0).foo, "bar");
+});
+
+test("hasChanges returns false after pushUpdate", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate({ id: 1, foo: "bar" });
+
+    equal(dataSource.hasChanges(), false);
 });
 
 test("pushUpdate raises the change event", 2, function() {
@@ -220,6 +253,19 @@ test("pushDestroy removes an existing item", function() {
     dataSource.pushDestroy({ id: 1 });
 
     equal(dataSource.data().length, 0);
+});
+
+test("hasChanges returns false after pushDestroy", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+
+    dataSource.pushDestroy({ id: 1 });
+
+    equal(dataSource.hasChanges(), false);
 });
 
 test("pushDestroy raises the change event", 2, function() {
