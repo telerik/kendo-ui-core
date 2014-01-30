@@ -61,6 +61,25 @@ function propertyFrom(className, property) {
     return result;
 }
 
+function rangeFromHtml(html) {
+    QUnit.fixture.append(html.replace(/\|/g, '<span class="t-marker"></span>'));
+
+    var markers = QUnit.fixture.find('.t-marker');
+
+    var range = kendo.ui.editor.RangeUtils.createRange(document);
+    range.setStartBefore(markers[0]);
+    range.setEndAfter(markers[1]);
+
+    var marker = new kendo.ui.editor.Marker();
+
+    marker.start = markers[0];
+    marker.end = markers[1];
+
+    marker.remove(range);
+
+    return range;
+}
+
 window.EditorHelpers = {
     serialize: function(dom) {
         return kendo.ui.editor.Serializer.domToXhtml(dom);

@@ -1,10 +1,39 @@
 (function(){
 
-var editor;
+var LinkFormatter = kendo.ui.editor.LinkFormatter;
+var formatter;
+var fixture;
 
-function initKeyboard(handlers) {
-    keyboard = new kendo.ui.editor.Keyboard(handlers);
-}
+module("editor link formatter", {
+    setup: function() {
+        formatter = new LinkFormatter();
+        fixture = QUnit.fixture;
+    }
+});
+
+test("apply on range", function() {
+    formatter.apply(rangeFromHtml("|foo|"), { href: "/foo" });
+
+    equal(fixture.find("a").length, 1);
+    equal(fixture.find("a").text(), "foo");
+    equal(fixture.find("a").attr("href"), "/foo");
+    equal(fixture.text(), "foo");
+});
+
+test("apply on empty range with innerHTML", function() {
+    formatter.apply(rangeFromHtml("||"), { innerHTML: "bar", href: "foo" });
+
+    equal(fixture.find("a").length, 1);
+    equal(fixture.find("a").text(), "bar");
+    equal(fixture.find("a").attr("href"), "foo");
+    equal(fixture.text(), "bar");
+});
+
+}());
+
+(function(){
+
+var editor;
 
 editor_module("editor link command", {
     setup: function() {
