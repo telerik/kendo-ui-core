@@ -53,6 +53,7 @@ var __meta__ = {
             }
 
             this.history = [];
+
             this.historyCallback = function(url, params) {
                 var transition = that.transition;
                 that.transition = null;
@@ -98,8 +99,8 @@ var __meta__ = {
                 that.trigger(VIEW_SHOW, e);
             });
 
-            that.viewEngine.bind(SAME_VIEW_REQUESTED, function(e) {
-                that.trigger(SAME_VIEW_REQUESTED, e);
+            that.viewEngine.bind(SAME_VIEW_REQUESTED, function() {
+                that.trigger(SAME_VIEW_REQUESTED);
             });
 
             that.viewEngine.bind("viewTypeDetermined", function(e) {
@@ -187,6 +188,10 @@ var __meta__ = {
 
             router.bind("routeMissing", function(e) {
                 that.historyCallback(e.url, e.params);
+            });
+
+            router.bind("same", function() {
+                that.trigger(SAME_VIEW_REQUESTED);
             });
 
             that._historyNavigate = function(url) {
