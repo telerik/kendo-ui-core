@@ -11,6 +11,7 @@ kendo_module({
     var kendo = window.kendo,
         CHANGE = "change",
         BACK = "back",
+        SAME = "same",
         support = kendo.support,
         location = window.location,
         history = window.history,
@@ -101,7 +102,7 @@ kendo_module({
         start: function(options) {
             options = options || {};
 
-            this.bind([CHANGE, BACK], options);
+            this.bind([CHANGE, BACK, SAME], options);
 
             if (this._started) {
                 return;
@@ -157,6 +158,14 @@ kendo_module({
             this.bind(CHANGE, callback);
         },
 
+        same: function(url) {
+            if (this.current === url || this.current === decodeURIComponent(url)) {
+                this.trigger(SAME);
+                return true;
+            }
+            return false;
+        },
+
         navigate: function(to, silent) {
             if (to === "#:back") {
                 history.back();
@@ -165,7 +174,7 @@ kendo_module({
 
             to = to.replace(hashStrip, '');
 
-            if (this.current === to || this.current === decodeURIComponent(to)) {
+            if (this.same(to)) {
                 return;
             }
 
@@ -189,7 +198,7 @@ kendo_module({
                 back = current === this.locations[this.locations.length - 2] && navigatingInExisting,
                 prev = this.current;
 
-            if (this.current === current || this.current === decodeURIComponent(current)) {
+            if (this.same(current)) {
                 return;
             }
 
@@ -234,6 +243,7 @@ kendo_module({
         ROUTE_MISSING = "routeMissing",
         CHANGE = "change",
         BACK = "back",
+        SAME = "same",
         optionalParam = /\((.*?)\)/g,
         namedParam = /(\(\?)?:\w+/g,
         splatParam = /\*\w+/g,
@@ -304,21 +314,24 @@ kendo_module({
             if (options && options.root) {
                 this.root = options.root;
             }
-            this.bind([INIT, ROUTE_MISSING, CHANGE], options);
+            this.bind([INIT, ROUTE_MISSING, CHANGE, SAME], options);
         },
 
         destroy: function() {
             history.unbind(CHANGE, this._urlChangedProxy);
+            history.unbind(SAME, this._sameProxy);
             history.unbind(BACK, this._backProxy);
             this.unbind();
         },
 
         start: function() {
             var that = this,
+                sameProxy = function() { that._same(); },
                 backProxy = function(e) { that._back(e); },
                 urlChangedProxy = function(e) { that._urlChanged(e); };
 
             history.start({
+                same: sameProxy,
                 change: urlChangedProxy,
                 back: backProxy,
                 pushState: that.pushState,
@@ -347,6 +360,10 @@ kendo_module({
             if (this.trigger(BACK, { url: e.url, to: e.to })) {
                 e.preventDefault();
             }
+        },
+
+        _same: function(e) {
+            this.trigger(SAME);
         },
 
         _urlChanged: function(e) {
