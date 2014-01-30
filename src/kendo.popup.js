@@ -194,6 +194,7 @@ kendo_module({
             }
 
             kendo.destroy(that.element.children());
+            element.removeData();
 
             if (options.appendTo[0] === document.body) {
                 parent = element.parent(".k-animation-container");
