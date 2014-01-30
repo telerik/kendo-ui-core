@@ -31,11 +31,8 @@
 
     <div data-role="drawer" id="my-drawer" style="width: 150px">
         <ul data-role="listview" data-style="inset">
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
+            <li><a href="#foo">Foo</a></li>
+            <li><a href="#bar">Bar</a></li>
         </ul>
     </div>
 
@@ -174,7 +171,7 @@
     </div>
 
     <script type="text/javascript">
-        new kendo.mobile.Application(document.body, { skin: "flat", layout: "default", transition: "slide" });
+        new kendo.mobile.Application(document.body, { skin: "flat", layout: "default" });
     </script>
 </body>
 </html>

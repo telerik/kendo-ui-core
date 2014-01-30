@@ -49,6 +49,7 @@ kendo_module({
             }
 
             this.history = [];
+
             this.historyCallback = function(url, params) {
                 var transition = that.transition;
                 that.transition = null;
@@ -94,8 +95,8 @@ kendo_module({
                 that.trigger(VIEW_SHOW, e);
             });
 
-            that.viewEngine.bind(SAME_VIEW_REQUESTED, function(e) {
-                that.trigger(SAME_VIEW_REQUESTED, e);
+            that.viewEngine.bind(SAME_VIEW_REQUESTED, function() {
+                that.trigger(SAME_VIEW_REQUESTED);
             });
 
             that.viewEngine.bind("viewTypeDetermined", function(e) {
@@ -183,6 +184,10 @@ kendo_module({
 
             router.bind("routeMissing", function(e) {
                 that.historyCallback(e.url, e.params);
+            });
+
+            router.bind("same", function() {
+                that.trigger(SAME_VIEW_REQUESTED);
             });
 
             that._historyNavigate = function(url) {
