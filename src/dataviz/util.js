@@ -51,6 +51,10 @@
         return defined(value) ? value : defaultValue;
     }
 
+    function sqr(value) {
+        return value * value;
+    }
+
     // Template helpers =======================================================
     function renderAttr(name, value) {
         return defined(value) ? " " + name + "='" + value + "' " : "";
@@ -112,6 +116,7 @@
             renderAllAttr: renderAllAttr,
             renderPos: renderPos,
             renderSize: renderSize,
+            sqr: sqr,
             valueOrDefault: valueOrDefault
         }
     });

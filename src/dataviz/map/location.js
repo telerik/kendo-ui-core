@@ -5,8 +5,13 @@
 (function ($, undefined) {
     // Imports ================================================================
     var math = Math,
+        abs = math.abs,
+        atan = math.atan,
+        cos = math.cos,
         max = math.max,
         min = math.min,
+        sin = math.sin,
+        tan = math.tan,
 
         kendo = window.kendo,
         Class = kendo.Class,
@@ -16,7 +21,9 @@
 
         util = dataviz.util,
         defined = util.defined,
+        rad = util.rad,
         round = util.round,
+        sqr = util.sqr,
         valueOrDefault = util.valueOrDefault;
 
     // Implementation =========================================================
@@ -55,7 +62,81 @@
             this.lng = this.lng % 180;
             this.lat = this.lat % 90;
             return this;
-        }
+        },
+
+        DISTANCE_ITERATIONS: 100,
+        DISTANCE_CONVERGENCE: 1e-12,
+        DISTANCE_PRECISION: 2,
+
+        distanceTo: function(dest, datum) {
+            dest = Location.create(dest);
+            datum = datum || dataviz.map.datums.WGS84;
+
+            // See http://en.wikipedia.org/wiki/Vincenty's_formulae#Notation
+            // o == sigma
+            // A == alpha
+            var a = datum.a;
+            var b = datum.b;
+            var f = datum.f;
+
+            var L = rad(dest.lng - this.lng);
+
+            var U1 = atan((1 - f) * tan(rad(this.lat)));
+            var sinU1 = sin(U1);
+            var cosU1 = cos(U1);
+
+            var U2 = atan((1 - f) * tan(rad(dest.lat)));
+            var sinU2 = sin(U2);
+            var cosU2 = cos(U2);
+
+            var lambda = L;
+            var prevLambda;
+
+            var i = this.DISTANCE_ITERATIONS;
+            var converged = false;
+
+            while (!converged && i-- > 0) {
+                var sinLambda = sin(lambda);
+                var cosLambda = cos(lambda);
+                var sino = math.sqrt(
+                    sqr(cosU2 * sinLambda) + sqr(cosU1 * sinU2 - sinU1 * cosU2 * cosLambda)
+                );
+
+                if (sino === 0) {
+                    return 0;
+                }
+
+                var coso = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
+                var sigma = math.atan2(sino, coso);
+                var sinA = cosU1 * cosU2 * sinLambda / sino;
+                var cosSqrA = 1 - sinA * sinA;
+                var cos2om = 0;
+                if (cosSqrA !== 0) {
+                    cos2om = coso - 2 * sinU1 * sinU2 / cosSqrA;
+                }
+
+                var C = f / 16 * cosSqrA * (4 + f * (4 - 3 * cosSqrA));
+                prevLambda = lambda;
+                lambda = L + (1 - C) * f * sinA * (
+                    sigma + C * sino * (cos2om + C * coso * (-1 + 2 * sqr(cos2om)))
+                );
+
+                converged = abs(lambda - prevLambda) <= this.DISTANCE_CONVERGENCE;
+            }
+
+            var uSqr = cosSqrA * (sqr(a) - sqr(b)) / sqr(b);
+            var A = 1 + uSqr / 16384 * (4096 + uSqr * (-768 + uSqr * (320 - 175 * uSqr)));
+            var B = uSqr / 1024 * (256 + uSqr * (-128 + uSqr * (74 - 47 * uSqr)));
+            var deltao = B * sino * (cos2om + B / 4 * (
+                coso * (-1 + 2 * sqr(cos2om)) - B / 6 * cos2om * (-3 + 4 * sqr(sino)) * (-3 + 4 * sqr(cos2om))
+            ));
+
+            return round(b * A * (sigma - deltao), this.DISTANCE_PRECISION);
+        },
+
+        // TODO bearingTo
+        // TODO bearingFrom
+        // TODO greatCircleTo -> { distance: x, initialBearing: y, finalBearing: z }
     });
 
     // IE < 9 doesn't allow to override toString on definition

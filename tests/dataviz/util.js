@@ -3,6 +3,13 @@
         util = dataviz.util;
 
     // ------------------------------------------------------------
+    module("Helpers");
+
+    test("sqr returns a * a", function() {
+        equal(util.sqr(2), 4);
+    });
+
+    // ------------------------------------------------------------
     module("Template helpers");
 
     test("renderPos renders position class", function() {
