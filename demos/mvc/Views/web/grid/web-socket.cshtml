@@ -1,5 +1,6 @@
 <div id="example" class="k-content">
     <div id="grid" style="margin-bottom:20px"></div>
+    <span id="notification"></span>
     <script>
         $(function(){
             if (typeof WebSocket === "undefined") {
@@ -22,6 +23,11 @@
 
             //Helper function to send data through the socket
             function send(ws, request, callback) {
+                if (ws.readyState != 1) {
+                    alert("Socket was closed. Please reload the page.");
+                    return;
+                }
+
                 //Assign unique id to the request. Will use that to distinguish the response.
                 request.id = kendo.guid();
 
@@ -42,6 +48,14 @@
                 //Send the data to the server
                 ws.send(JSON.stringify(request));
             }
+
+            $("#notification").kendoNotification({
+                width: "100%",
+                position: {
+                    top: 0,
+                    left: 0
+                }
+            });
 
             $("#grid").kendoGrid({
                 height: 300,
@@ -70,16 +84,20 @@
                     sort: [ { field: "CreatedAt", dir: "desc" }],
                     transport: {
                         push: function(options) {
+                            var notification = $("#notification").data("kendoNotification");
                             //Listen to the "message" event fired when the server pushes data
                             ws.addEventListener("message", function(e) {
                                 var result = JSON.parse(e.data);
 
                                 //Check what the push type is and invoke the corresponding callback.
                                 if (result.type == "push-update") {
+                                    notification.success("update");
                                     options.pushUpdate(result);
                                 } else if (result.type == "push-destroy") {
+                                    notification.success("destroy");
                                     options.pushDestroy(result);
                                 } else if (result.type == "push-create") {
+                                    notification.success("create");
                                     options.pushCreate(result);
                                 }
                             });
