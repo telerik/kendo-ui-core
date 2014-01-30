@@ -906,6 +906,18 @@ test("binding target is assign to the element", function() {
     ok(dom[0].kendoBindingTarget);
 });
 
+test("binding target expando is removed after kendo.unbind", function() {
+    dom = $('<div data-bind="text:foo"/>');
+
+    var viewModel = {
+        bar: "bar"
+    };
+
+    kendo.bind(dom, viewModel);
+    kendo.unbind(dom);
+    equal(dom[0].kendoBindingTarget, undefined);
+});
+
 test("binding are removed if element is rebind", 1, function() {
     dom = $('<div data-bind="text:foo"/>');
 
