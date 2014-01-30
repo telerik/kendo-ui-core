@@ -2,6 +2,11 @@
     <div id="grid" style="margin-bottom:20px"></div>
     <script>
         $(function(){
+            if (typeof WebSocket === "undefined") {
+                $("#grid").html('This demo requires <a href="http://en.wikipedia.org/wiki/WebSocket">WebSocket</a> support.<a href="http://updateyourbrowser.net/" title="Update Your Browser"><img src="http://updateyourbrowser.net/uyb.jpg" border="0" alt="Update Your Browser" /></a>');
+                return;
+            }
+
             var host = "wss://kendoui-ws-demo.herokuapp.com";
             var ws = new WebSocket(host);
 
