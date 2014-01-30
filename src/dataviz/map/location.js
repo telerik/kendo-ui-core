@@ -95,10 +95,16 @@
             var i = this.DISTANCE_ITERATIONS;
             var converged = false;
 
+            var sino;
+            var cosSqrA;
+            var coso;
+            var cos2om;
+            var sigma;
+
             while (!converged && i-- > 0) {
                 var sinLambda = sin(lambda);
                 var cosLambda = cos(lambda);
-                var sino = math.sqrt(
+                sino = math.sqrt(
                     sqr(cosU2 * sinLambda) + sqr(cosU1 * sinU2 - sinU1 * cosU2 * cosLambda)
                 );
 
@@ -106,16 +112,18 @@
                     return 0;
                 }
 
-                var coso = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
-                var sigma = math.atan2(sino, coso);
+                coso = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
+                sigma = math.atan2(sino, coso);
+
                 var sinA = cosU1 * cosU2 * sinLambda / sino;
-                var cosSqrA = 1 - sinA * sinA;
-                var cos2om = 0;
+                cosSqrA = 1 - sqr(sinA);
+                cos2om = 0;
                 if (cosSqrA !== 0) {
                     cos2om = coso - 2 * sinU1 * sinU2 / cosSqrA;
                 }
 
                 var C = f / 16 * cosSqrA * (4 + f * (4 - 3 * cosSqrA));
+
                 prevLambda = lambda;
                 lambda = L + (1 - C) * f * sinA * (
                     sigma + C * sino * (cos2om + C * coso * (-1 + 2 * sqr(cos2om)))
