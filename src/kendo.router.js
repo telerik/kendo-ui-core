@@ -15,6 +15,7 @@ var __meta__ = {
     var kendo = window.kendo,
         CHANGE = "change",
         BACK = "back",
+        SAME = "same",
         support = kendo.support,
         location = window.location,
         history = window.history,
@@ -105,7 +106,7 @@ var __meta__ = {
         start: function(options) {
             options = options || {};
 
-            this.bind([CHANGE, BACK], options);
+            this.bind([CHANGE, BACK, SAME], options);
 
             if (this._started) {
                 return;
@@ -161,6 +162,14 @@ var __meta__ = {
             this.bind(CHANGE, callback);
         },
 
+        same: function(url) {
+            if (this.current === url || this.current === decodeURIComponent(url)) {
+                this.trigger(SAME);
+                return true;
+            }
+            return false;
+        },
+
         navigate: function(to, silent) {
             if (to === "#:back") {
                 history.back();
@@ -169,7 +178,7 @@ var __meta__ = {
 
             to = to.replace(hashStrip, '');
 
-            if (this.current === to || this.current === decodeURIComponent(to)) {
+            if (this.same(to)) {
                 return;
             }
 
@@ -193,7 +202,7 @@ var __meta__ = {
                 back = current === this.locations[this.locations.length - 2] && navigatingInExisting,
                 prev = this.current;
 
-            if (this.current === current || this.current === decodeURIComponent(current)) {
+            if (this.same(current)) {
                 return;
             }
 
@@ -238,6 +247,7 @@ var __meta__ = {
         ROUTE_MISSING = "routeMissing",
         CHANGE = "change",
         BACK = "back",
+        SAME = "same",
         optionalParam = /\((.*?)\)/g,
         namedParam = /(\(\?)?:\w+/g,
         splatParam = /\*\w+/g,
@@ -308,21 +318,24 @@ var __meta__ = {
             if (options && options.root) {
                 this.root = options.root;
             }
-            this.bind([INIT, ROUTE_MISSING, CHANGE], options);
+            this.bind([INIT, ROUTE_MISSING, CHANGE, SAME], options);
         },
 
         destroy: function() {
             history.unbind(CHANGE, this._urlChangedProxy);
+            history.unbind(SAME, this._sameProxy);
             history.unbind(BACK, this._backProxy);
             this.unbind();
         },
 
         start: function() {
             var that = this,
+                sameProxy = function() { that._same(); },
                 backProxy = function(e) { that._back(e); },
                 urlChangedProxy = function(e) { that._urlChanged(e); };
 
             history.start({
+                same: sameProxy,
                 change: urlChangedProxy,
                 back: backProxy,
                 pushState: that.pushState,
@@ -351,6 +364,10 @@ var __meta__ = {
             if (this.trigger(BACK, { url: e.url, to: e.to })) {
                 e.preventDefault();
             }
+        },
+
+        _same: function(e) {
+            this.trigger(SAME);
         },
 
         _urlChanged: function(e) {
