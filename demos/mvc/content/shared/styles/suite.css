@@ -128,14 +128,13 @@ h2+.box
 {
     display:block;
     position:relative;
-    width:288px;
-    height:146px;
+    width:370px;
+    height:170px;
     border:1px solid;
     border-color:#f4f4f4 #e3e3e3 #bdbdbd #dfdfdf;
     text-align:center;
     margin: 0 auto;
     text-decoration:none;
-
     -moz-box-shadow:1px 1px 2px -1px #b2b2b2;
     -webkit-box-shadow:1px 1px 2px -1px #b2b2b2;
     box-shadow:1px 1px 2px -1px #b2b2b2;
