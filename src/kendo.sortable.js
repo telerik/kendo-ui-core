@@ -50,6 +50,7 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
 
             that._draggable = that._createDraggable();
+            that.floating = false;
         },
 
         events: [
@@ -115,6 +116,7 @@ var __meta__ = {
                 if(this.trigger(START, { item: draggedElement, draggableEvent: e })) {
                     e.preventDefault();
                 } else {
+                    this.floating = this._isFloating(draggedElement);
                     draggedElement.css("display", "none");
                     draggedElement.before(placeholder);
                 }
@@ -131,24 +133,43 @@ var __meta__ = {
             var draggedElement = this.draggedElement,
                 target = this._findTarget(e),
                 targetOffset,
-                hintOffset,
-                offsetTopDelta,
-                offsetLeftDelta,
+                cursorOffset = { left: e.x.location, top: e.y.location },
+                offsetDelta,
+                xAxisDelta = e.x.delta,
+                yAxisDelta = e.y.delta,
                 prevVisible,
                 nextVisible,
                 placeholder = this.placeholder,
-                disabled = this.options.disabled;
+                direction;
 
             if(target) {
                 targetOffset = kendo.getOffset(target.element);
-                hintOffset = kendo.getOffset(e.sender.hint);
-                offsetTopDelta = Math.round(hintOffset.top - targetOffset.top);
-                offsetLeftDelta = Math.round(hintOffset.left - targetOffset.left);
+                targetOffset.top += target.element.outerHeight() / 2;
+                targetOffset.left += target.element.outerWidth() / 2;
+
+                offsetDelta = {
+                    left: Math.round(cursorOffset.left - targetOffset.left),
+                    top: Math.round(cursorOffset.top - targetOffset.top)
+                };
+
                 prevVisible = target.element.prev();
                 nextVisible = target.element.next();
 
-                if(offsetTopDelta < 0 || offsetLeftDelta < 0) { //for negative delta the tooltip should be appended before the target
+                if(this.floating) { //horizontal
+                    if(xAxisDelta < 0 && offsetDelta.left < 0) {
+                        direction = "prev";
+                    } else if(xAxisDelta > 0 && offsetDelta.left > 0) {
+                        direction = "next";
+                    }
+                } else { //vertical
+                    if(yAxisDelta < 0 && offsetDelta.top < 0) {
+                        direction = "prev";
+                    } else if(yAxisDelta > 0 && offsetDelta.top > 0) {
+                        direction = "next";
+                    }
+                }
 
+                if(direction === "prev") {
                     while(prevVisible.length && !prevVisible.is(":visible")) {
                         prevVisible = prevVisible.prev();
                     }
@@ -157,9 +178,7 @@ var __meta__ = {
                         target.element.before(placeholder);
                         target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
                     }
-
-                } else if(offsetTopDelta > 0 || offsetLeftDelta > 0) { //for positive delta the tooptip should be appended after the target
-
+                } else if(direction === "next") {
                     while(nextVisible.length && !nextVisible.is(":visible")) {
                         nextVisible = nextVisible.next();
                     }
@@ -281,6 +300,10 @@ var __meta__ = {
                     }
                 }
             }
+        },
+
+        _isFloating: function(item) {
+            return (/left|right/).test(item.css("float")) || (/inline|table-cell/).test(item.css("display"));
         },
 
         _cancel: function() {
