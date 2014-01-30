@@ -2515,6 +2515,7 @@ var __meta__ = {
                     index,
                     tableToFocus,
                     shiftKey = e.shiftKey,
+                    relatedRow = proxy(that._relatedRow, that),
                     current = currentProxy();
 
                 if (current && current.is("th")) {
@@ -2528,10 +2529,10 @@ var __meta__ = {
                     currentProxy(currentUpDown(current, e.currentTarget, table, headerTable));
                     handled = true;
                 } else if (canHandle && key == (isRtl ? keys.RIGHT : keys.LEFT)) {
-                    currentProxy(currentLeft(current, e.currentTarget, table, headerTable, proxy(that._relatedRow, that)));
+                    currentProxy(currentLeft(current, e.currentTarget, table, headerTable, relatedRow));
                     handled = true;
                 } else if (canHandle && key == (isRtl ? keys.LEFT : keys.RIGHT)) {
-                    currentProxy(currentRight(current, e.currentTarget, table, headerTable, proxy(that._relatedRow, that)));
+                    currentProxy(currentRight(current, e.currentTarget, table, headerTable, relatedRow));
                     handled = true;
                 } else if (canHandle && pageable && keys.PAGEDOWN == key) {
                     dataSource.page(dataSource.page() + 1);
@@ -2599,14 +2600,10 @@ var __meta__ = {
                          }
                     }
 
-                    cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
-                    if (!cell.length) {
-                        cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row):not(.k-detail-row):visible:first")
-                        .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
-                    }
+                    cell = tabNext(current, e.currentTarget, table, relatedRow, shiftKey);
 
                     if (!current.is("th") && cell.length && that.options.editable && isInCell) {
-                        that._handleEditing(current, cell, e.currentTarget);
+                        that._handleEditing(current, cell, cell.closest(table));
                         handled = true;
                     }
                 }
@@ -4702,6 +4699,27 @@ var __meta__ = {
        }
 
        return current;
+   }
+
+   function tabNext(current, currentTable, dataTable, relatedRow, back) {
+       var isStatic = dataTable.length == 2;
+       var switchRow = true;
+       var next = back ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
+
+       if (!next.length) {
+           next = current.parent();
+           if (isStatic) {
+               switchRow = (back && currentTable == dataTable[0]) || (!back && currentTable == dataTable[1]);
+               next = relatedRow(next);
+           }
+
+           if (switchRow) {
+               next = next[back ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row):not(.k-detail-row):visible:first");
+           }
+           next = next.children(DATA_CELL + (back ? ":last" : ":first"));
+       }
+
+       return next;
    }
 
    function groupRowBuilder(colspan, level, text) {

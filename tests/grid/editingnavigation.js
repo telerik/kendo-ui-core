@@ -1,9 +1,17 @@
 (function() {
-   var Grid = kendo.ui.Grid, table, DataSource = kendo.data.DataSource, Model = kendo.data.Model, dataSource; function setup(options) {
+    var Grid = kendo.ui.Grid,
+        div,
+        table,
+        staticTable,
+        DataSource = kendo.data.DataSource,
+        Model = kendo.data.Model,
+        dataSource;
+
+    function setup(options) {
         options = $.extend({}, {
-        editable: true,
-        navigatable: true,
-        dataSource: new DataSource({
+            editable: true,
+            navigatable: true,
+            dataSource: {
                 schema: {
                     model: {
                         id: "id",
@@ -14,12 +22,20 @@
                         }
                     }
                 },
-                data: [{ foo: "bar", name: "tom", id: 0 }, { foo: "baz", name: "jerry", id: 1 }, { foo: "baz", name: "foo", id: 2 }]
-            })
-        }, options);
-        dataSource = options.dataSource;
+                data: [
+                    { foo: "bar", name: "tom", id: 0 },
+                    { foo: "baz", name: "jerry", id: 1 },
+                    { foo: "baz", name: "foo", id: 2 }
+                ]
+            }
+        },
+        options);
 
-        return table.kendoGrid(options).data("kendoGrid");
+        var grid = new Grid(div, options);
+        dataSource = grid.dataSource;
+        table = grid.table;
+        staticTable = grid.staticTable;
+        return grid;
     }
 
     function focusCell(grid, selector) {
@@ -31,18 +47,15 @@
 
     module("grid editing navigation", {
         setup: function() {
-            table = document.createElement("table");
-            QUnit.fixture[0].appendChild(table);
+            div = $("<div />").appendTo(QUnit.fixture);
 
             $.fn.press = function(key, ctrl, shift) {
                 return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
             }
-
-            table = $(table);
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
-            table.closest(".k-grid").remove();
+            div.remove();
         }
     });
 
@@ -163,7 +176,7 @@
         var grid = setup();
 
         grid.current(table.find("tr:first>td:last"));
-        grid.element.focus().press(kendo.keys.TAB);
+        table.focus().press(kendo.keys.TAB);
 
         ok(table.find("tr:nth(1)>td:first").hasClass("k-edit-cell"));
         ok(table.find("tr:nth(1)>td>input:first")[0] === document.activeElement);
@@ -173,7 +186,7 @@
         var grid = setup();
 
         grid.current(table.find("tr>td").eq(1));
-        grid.element.focus().press(kendo.keys.TAB, false, true);
+        table.focus().press(kendo.keys.TAB, false, true);
 
         ok(table.find("tr>td").eq(0).hasClass("k-edit-cell"));
     });
@@ -182,7 +195,7 @@
         var grid = setup();
 
         grid.current(table.find("tr:eq(2)>td:first"));
-        grid.element.focus().press(kendo.keys.TAB, false, true);
+        table.focus().press(kendo.keys.TAB, false, true);
 
         ok(table.find("tr:eq(1)>td:last")[0] === grid.current()[0]);
     });
@@ -365,5 +378,85 @@
         focusCell(grid).table.press(kendo.keys.ENTER).find(".k-grid-delete").click();
 
         ok(!grid._current);
+    });
+
+    test("pressing tab in static table incell edit mode", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "name", static: true },
+                { field: "id", static: false }
+            ]
+        });
+
+        staticTable.focus().press(kendo.keys.TAB);
+
+        equal(staticTable.find("tr:first>td:last")[0], grid.current()[0]);
+        ok(staticTable.find("tr:first>td:last").hasClass("k-edit-cell"));
+    });
+
+    test("pressing tab moves from static to non-static table", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "name", static: true },
+                { field: "id", static: false }
+            ]
+        });
+
+        staticTable.focus().press(kendo.keys.TAB).press(kendo.keys.TAB);
+
+        equal(table.find("tr:first>td")[0], grid.current()[0]);
+        equal(table.attr("tabIndex"), "0");
+        equal(staticTable.attr("tabIndex"), "-1");
+    });
+
+    test("pressing shift+tab moves from non-static to static table", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "name", static: true },
+                { field: "id", static: false }
+            ]
+        });
+
+        table.focus().press(kendo.keys.TAB, false, true);
+
+        equal(staticTable.find("tr:first>td:last")[0], grid.current()[0]);
+        equal(table.attr("tabIndex"), "-1");
+        equal(staticTable.attr("tabIndex"), "0");
+    });
+
+    test("pressing tab moves from non-static to next row in static table", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "name", static: true },
+                { field: "id", static: false }
+            ]
+        });
+
+        table.focus().press(kendo.keys.TAB);
+
+        equal(staticTable.find("tr:eq(1)>td")[0], grid.current()[0]);
+        equal(table.attr("tabIndex"), "-1");
+        equal(staticTable.attr("tabIndex"), "0");
+    });
+
+    test("pressing shift+tab moves from static to prev row in non-static table", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "name", static: true },
+                { field: "id", static: false }
+            ]
+        });
+
+        grid.current(staticTable.find("tr:eq(1)>td:first"));
+        staticTable.focus().press(kendo.keys.TAB, false, true);
+
+        equal(table.find("tr:eq(0)>td:last")[0], grid.current()[0]);
+        equal(table.attr("tabIndex"), "0");
+        equal(staticTable.attr("tabIndex"), "-1");
     });
 })();
