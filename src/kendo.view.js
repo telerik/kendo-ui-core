@@ -209,12 +209,12 @@ var __meta__ = {
     }
 
     var ViewContainer = Observable.extend({
-
         init: function(container) {
             Observable.fn.init.call(this);
             this.container = container;
             this.history = [];
             this.view = null;
+            this._inProgress = false;
         },
 
         show: function(view, transition, locationID) {
@@ -233,19 +233,22 @@ var __meta__ = {
                 theTransition = transition || ( back ? previousEntry.transition : view.transition ) || view.options.defaultTransition,
                 transitionData = parseTransition(theTransition);
 
-            console.log('back', back);
+            if (that._inProgress) {
+                that.effect.stop();
+            }
 
             that.trigger("accepted", { view: view });
+            that.view = view;
+            that._inProgress = true;
+
+            if (!back) {
+                history.push({ id: locationID, transition: theTransition });
+            } else {
+                history.pop();
+            }
 
             var after = function() {
-                if (!back) {
-                    history.push({ id: locationID, transition: theTransition });
-                } else {
-                    history.pop();
-                }
-
-                that.view = view;
-
+                that._inProgress = false;
                 that.trigger("complete", {view: view});
             }
 
@@ -271,11 +274,11 @@ var __meta__ = {
                         transitionData.reverse = !transitionData.reverse;
                     }
 
-                    kendo.fx(view.element).replace(current.element, transitionData.type)
+                    this.effect = kendo.fx(view.element).replace(current.element, transitionData.type)
                         .direction(transitionData.direction)
-                        .setReverse(transitionData.reverse)
-                        .run()
-                        .then(end);
+                        .setReverse(transitionData.reverse);
+
+                    this.effect.run().then(end);
                 }
             } else {
                 view.showStart();
