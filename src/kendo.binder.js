@@ -26,14 +26,22 @@ var __meta__ = {
         SOURCE = "source",
         EVENTS = "events",
         CHECKED = "checked",
+        deleteExpando = true,
         CHANGE = "change";
 
     (function() {
         var a = document.createElement("a");
+
         if (a.innerText !== undefined) {
             innerText = "innerText";
         } else if (a.textContent !== undefined) {
             innerText = "textContent";
+        }
+
+        try {
+            delete a.test;
+        } catch(e) {
+            deleteExpando = false;
         }
     })();
 
@@ -1508,7 +1516,7 @@ var __meta__ = {
         if (bindingTarget) {
             bindingTarget.destroy();
 
-            if ($.support.deleteExpando) {
+            if (deleteExpando) {
                 delete element.kendoBindingTarget;
             } else if (element.removeAttribute) {
                 element.removeAttribute("kendoBindingTarget");
