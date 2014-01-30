@@ -1,19 +1,24 @@
+///<reference path="qunit-1.12.0.js" />
+///<reference path="../refs/kendo.core.js" />
+///<reference path="../refs/kendo.dataviz.core.js" />
+///<reference path="../js/diagram.math.js" />
+
 (function() {
     var diagram = kendo.diagram;
-    var Range = kendo.diagram.Range;
-    var Graph = kendo.diagram.Graph;
-    var Node = kendo.diagram.Node;
-    var Link = kendo.diagram.Link;
-    var Dictionary = kendo.diagram.Dictionary;
-    var HashTable = kendo.diagram.HashTable;
-    var Queue = kendo.diagram.Queue;
-    var Predefined = kendo.diagram.Graph.Predefined;
-    var GraphUtils = kendo.diagram.Graph.Utils;
-    var parse = kendo.diagram.Graph.Utils.parse;
-    var linearize = kendo.diagram.Graph.Utils.linearize;
-    var Adapter = kendo.diagram.GraphAdapter;
-    var Point = kendo.diagram.Point;
-    var Set = kendo.diagram.Set;
+    var Range = diagram.Range;
+    var Graph = diagram.Graph;
+    var Node = diagram.Node;
+    var Link = diagram.Link;
+    var Dictionary = diagram.Dictionary;
+    var HashTable = diagram.HashTable;
+    var Queue = diagram.Queue;
+    var Predefined = diagram.Graph.Predefined;
+    var GraphUtils = diagram.Graph.Utils;
+    var parse = diagram.Graph.Utils.parse;
+    var linearize = diagram.Graph.Utils.linearize;
+    var Adapter = diagram.GraphAdapter;
+    var Point = diagram.Point;
+    var Set = diagram.Set;
     var Utils = diagram.Utils;
     var randomDiagram = diagram.Graph.Utils.randomDiagram;
     /*-------------Testing Utils----------------------------------*/
@@ -22,7 +27,9 @@
         QUnit.test(arguments[0] + ' [SKIPPED]', function () {
             var li = document.getElementById(QUnit.config.current.id);
             QUnit.done(function () {
-                li.style.background = '#FFFF99';
+                if(li) {
+                    li.style.background = '#FFFF99';
+                }
             });
             ok(true);
         });
@@ -31,7 +38,7 @@
     /*
      Defines a test which has to be skipped during a run.
      */
-    testSkip = QUnit.testSkip;
+    var testSkip = QUnit.testSkip;
 
     function lexicCount(c, name) {
         switch (c) {
@@ -156,8 +163,10 @@
             map[i] = shape;
         }
         diagram.layout( {
-                componentMargin: new kendo.diagram.Size(0, 0)
-
+                grid: {
+                    componentSpacingX: 0,
+                    componentSpacingY: 0
+                }
             }
         );
         ok(true);
@@ -387,4 +396,4 @@
         );
         ok(true);
     });
-});
+})();

@@ -237,9 +237,13 @@ function layout() {
                         subtype: "Down",
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
-                        componentsGridWidth: 5000,
-                        totalMargin: new kendo.diagram.Size(50, 50),
-                        componentMargin: new kendo.diagram.Size(20, 20),
+                        grid: {
+                            width: 5000,
+                            offsetX: 50,
+                            offsetY: 50,
+                            componentSpacingX: 20,
+                            componentSpacingY: 20
+                        },
                         roots: [knownRoot],
                         animate: animateTransitions
                     }
@@ -357,8 +361,12 @@ function layout() {
             diagram.layout(
                     {
                         type: "ForceDirected",
-                        totalMargin: new kendo.diagram.Size(50, 50),
-                        componentMargin: new kendo.diagram.Size(120, 20),
+                        grid: {
+                            offsetX: 50,
+                            offsetY: 50,
+                            componentSpacingX: 20,
+                            componentSpacingY: 20
+                        },
                         nodeDistance: 50,
                         roots: [knownRoot],
                         animate: animateTransitions

@@ -81,18 +81,30 @@ var __meta__ = {
                 underneathVerticalSeparation: 15,
                 //-------------------------------------------------------------------
                 /**
-                 * General Grid option: the width of the grid in which components are arranged. Beyond this width a
-                 * component will be on the next row.
+                 * Settings object to organize the different components of the diagram in a grid layout structure
                  */
-                componentsGridWidth: 1500,
-                /**
-                 * General Grid option: the margin around the total grid.
-                 */
-                totalMargin: new Size(50, 50),
-                /**
-                 * General Grid option: the padding within a cell of the grid where a single component resides.
-                 */
-                componentMargin: new Size(20, 20),
+                grid: {
+                    /**
+                     * The width of the grid in which components are arranged. Beyond this width a component will be on the next row.
+                     */
+                    width: 1500,
+                    /**
+                     * The left offset of the grid.
+                     */
+                    offsetX: 50,
+                    /**
+                     * The top offset of the grid.
+                     */
+                    offsetY: 50,
+                    /**
+                     * The horizontal padding within a cell of the grid where a single component resides.
+                     */
+                    componentSpacingX: 20,
+                    /**
+                     * The vertical padding within a cell of the grid where a single component resides.
+                     */
+                    componentSpacingY: 20
+                },
 
                 //-------------------------------------------------------------------
                 /**
@@ -153,12 +165,12 @@ var __meta__ = {
                 return b.bounds.width - a.bounds.width;
             });
 
-            var maxWidth = this.options.componentsGridWidth,
-                offsetX = this.options.componentMargin.width,
-                offsetY = this.options.componentMargin.height,
+            var maxWidth = this.options.grid.width,
+                offsetX = this.options.grid.componentSpacingX,
+                offsetY = this.options.grid.componentSpacingY,
                 height = 0,
-                startX = this.options.totalMargin.width,
-                startY = this.options.totalMargin.height,
+                startX = this.options.grid.offsetX,
+                startY = this.options.grid.offsetY,
                 x = startX,
                 y = startY,
                 i,
@@ -233,7 +245,7 @@ var __meta__ = {
                     link.points = newpoints;
                 }
             }
-            this.currentHorizontalOffset += bounds.width + this.options.totalMargin.width;
+            this.currentHorizontalOffset += bounds.width + this.options.grid.offsetX;
             return new Point(deltax, deltay);
         },
 
@@ -241,20 +253,11 @@ var __meta__ = {
 
             // Size options lead to stackoverflow and need special handling
 
-            this.options = this.defaultOptions;
+            this.options = kendo.deepExtend({}, this.defaultOptions);
             if (Utils.isUndefined(options)) {
                 return;
             }
-            if (options) {
-                if (options.totalMargin) {
-                    this.options.totalMargin = options.totalMargin;
-                    delete options.totalMargin;
-                }
-                if (options.componentMargin) {
-                    this.options.componentMargin = options.componentMargin;
-                    delete options.componentMargin;
-                }
-            }
+
             this.options = kendo.deepExtend(this.options, options || {});
         }
     });
