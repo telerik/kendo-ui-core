@@ -1,6 +1,5 @@
 (function(f, define){
     define([
-<<<<<<< HEAD
         "./kendo.core",
         "./kendo.router",
         "./kendo.view",
