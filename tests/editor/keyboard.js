@@ -316,4 +316,8 @@ test("keyup passes the argument to handler", function() {
     equal(arg, e);
 });
 
+test("IME keyCodes is considered as characters", function() {
+    ok(keyboard.isCharacter(229));
+});
+
 }());
