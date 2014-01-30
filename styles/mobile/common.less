@@ -1810,8 +1810,11 @@
     vertical-align: middle;
 }
 
-.km-modalview .km-content {
+.km-modalview .km-content,
+.km-popover-root .km-content
+{
     box-flex: 1;
+    -ms-flex: auto;
 }
 
 .km-modalview-root:before,
