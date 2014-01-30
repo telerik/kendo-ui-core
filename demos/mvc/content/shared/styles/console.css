@@ -50,4 +50,9 @@
     background-clip: border-box;
     font-weight: bold;
 }
+
+.km-root .km-wp .console .count
+{
+    font-size: 1em;
+}
 /*configurator*/
