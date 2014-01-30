@@ -8,7 +8,9 @@
     <script type="text/javascript" src="../src/kendo.fx.js"></script>
     <script type="text/javascript" src="../src/kendo.panelbar.js"></script>
     <script type="text/javascript" src="../src/kendo.data.js"></script>
+    <script type="text/javascript" src="../src/kendo.binder.js"></script>
     <script type="text/javascript" src="../src/kendo.treeview.js"></script>
+    <script type="text/javascript" src="../src/kendo.button.js"></script>
     <style type="text/css">
         html
         {
@@ -24,11 +26,19 @@
             margin-left: 7px;
         }
     </style>
-    <link type="text/css" href="../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/web/kendo.common.less" rel="stylesheet/less"/>
     <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
     <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
     <script type="text/javascript">
+        function moveItem(e) {
+            panel1.insertAfter(panel1.element.children().eq(0), "> li:nth-child(3)");
+        }
+
+        var panel1;
+
         $(document).ready(function() {
+            kendo.bind(document.body);
+
             panel1 = $("#PanelBar1").kendoPanelBar().data("kendoPanelBar");
             $("#PanelBar2").kendoPanelBar({ animation: { expand: { effects: "fadeIn expand:vertical" } } });
             $("#PanelBar3").kendoPanelBar({ animation: { expand: { effects: "fadeIn expand:vertical" } }, expandMode: 0 });
@@ -422,7 +432,11 @@
             <div style="display:none" id="PanelBar4-5" class="k-content"></div>
         </li>
     </ul>
-<br />
+    <br />
+    <button data-role="button" data-click="moveItem">Move an item</button>
+
+    <br /><br />
+
     <ul id="Panel">
         <li class="k-state-active">
             <img src="Icons/Suites/mvc.png" alt="image">ASP.NET MVC

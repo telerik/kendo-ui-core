@@ -340,5 +340,18 @@ test("Adding dynamic contentUrl element renders contents on root and inner level
     ok(m.element.find("> li:last > ul > li:first").children("div.k-content")[0]);
     m.destroy();
 });
+
+    test('insertAfter method moves an item if called with existing item', 1, function() {
+        var menu = $("<ul><li>Item 1</li><li>Item 2</li></ul>").kendoMenu().data("kendoMenu");
+
+        try {
+            menu.insertAfter("li:first-child", "li:last-child");
+
+            ok(menu.element.children("li:last-child").text() == "Item 1");
+        } finally {
+            menu.destroy();
+        }
+    });
+
 })();
 

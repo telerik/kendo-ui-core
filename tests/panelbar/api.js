@@ -301,4 +301,17 @@
         ok(empty_panelbar.children("li:first").children("div.k-content")[0]);
         ok(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
     });
+
+    test('insertAfter method moves an item if called with existing item', 1, function() {
+        var panel = $("<ul><li>Item 1</li><li>Item 2</li></ul>").kendoPanelBar().data("kendoPanelBar");
+
+        try {
+            panel.insertAfter("li:first-child", "li:last-child");
+
+            ok(panel.element.children("li:last-child").text() == "Item 1");
+        } finally {
+            panel.destroy();
+        }
+    });
+
 })();

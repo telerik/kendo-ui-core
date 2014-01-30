@@ -668,7 +668,11 @@ var __meta__ = {
                     referenceItem.attr(ARIA_EXPANDED, false);
                 }
             } else {
-                items = $(item);
+                if (typeof item == "string" && item[0] != "<") {
+                    items = that.element.find(item);
+                } else {
+                    items = $(item);
+                }
                 that._updateItemsClasses(items);
             }
 

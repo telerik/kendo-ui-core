@@ -653,7 +653,11 @@ var __meta__ = {
                             }
                         });
             } else {
-                tabs = $(tab);
+                if (typeof tab == "string" && tab[0] != "<") {
+                    tabs = that.element.find(tab);
+                } else {
+                    tabs = $(tab);
+                }
                 contents = $();
                 tabs.each(function () {
                     content = $("<div class='" + CONTENT + "'/>");

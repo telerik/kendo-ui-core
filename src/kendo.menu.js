@@ -457,7 +457,12 @@ var __meta__ = {
                             }
                         }));
             } else {
-                items = $(item);
+                if (typeof item == "string" && item[0] != "<") {
+                    items = that.element.find(item);
+                } else {
+                    items = $(item);
+                }
+
                 groups = items.find("> ul")
                                 .addClass("k-group")
                                 .attr("role", "menu");
