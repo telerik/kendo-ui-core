@@ -1336,6 +1336,8 @@ var __meta__ = {
         }
     });
 
+    var RESTORE_OVERFLOW = !support.mobileOS.android;
+
     createEffect("replace", {
         init: function(element, previous, transitionClass) {
             Effect.prototype.init.call(this, element);
@@ -1345,6 +1347,43 @@ var __meta__ = {
 
         duration: function() {
             throw new Error("The replace effect does not support duration setting; the effect duration may be customized through the transition class rule");
+        },
+
+        _both: function() {
+            return $().add(this._element).add(this._previous);
+        },
+
+        _containerClass: function() {
+            var direction = this._directon,
+                containerClass = "k-fx k-fx-start k-fx-" + this._transitionClass;
+
+            if (direction) {
+                containerClass += " k-fx-" + direction;
+            }
+
+            if (this._reverse) {
+                containerClass += " k-fx-reverse";
+            }
+
+            return containerClass;
+        },
+
+        complete: function() {
+            var container = this.container;
+
+            container.removeClass("k-fx-end").removeClass(this._containerClass());
+            this._previous.hide().removeClass("k-fx-current");
+            this.element.removeClass("k-fx-next");
+
+            if (RESTORE_OVERFLOW) {
+                container.css(OVERFLOW, "");
+            }
+
+            if (!this.isAbsolute) {
+                this._both().css(POSITION, "");
+            }
+
+            this.deferred.resolve();
         },
 
         run: function() {
@@ -1357,67 +1396,41 @@ var __meta__ = {
                 previous = that._previous,
                 direction = that._direction,
                 container = element.parents().filter(previous.parents()).first(),
-                both = $().add(element).add(previous),
+                both = that._both(),
                 deferred = $.Deferred(),
                 originalPosition = element.css(POSITION),
-                isAbsolute = originalPosition  == "absolute",
-                restoreOverflow = !support.mobileOS.android,
                 originalOverflow;
 
-            if (!isAbsolute) {
+            this.container = container;
+            this.deferred = deferred;
+            this.isAbsolute = originalPosition  == "absolute";
+
+            if (!this.isAbsolute) {
                 both.css(POSITION, "absolute");
             }
 
-            if (restoreOverflow) {
+            if (RESTORE_OVERFLOW) {
                 originalOverflow = container.css(OVERFLOW);
                 container.css(OVERFLOW, "hidden");
             }
 
-            function complete() {
-                if (restoreOverflow) {
-                    container.css(OVERFLOW, '');
-                }
+            container.addClass(this._containerClass());
 
-                if (!isAbsolute) {
-                    both.css(POSITION, '');
-                }
+            previous.css("display", "").addClass("k-fx-current");
 
-                deferred.resolve();
-            }
+            element.css("display", "").addClass("k-fx-next");
 
-            var containerClass = "k-fx k-fx-start k-fx-" + that._transitionClass;
-
-            if (direction) {
-                containerClass += " k-fx-" + direction;
-            }
-
-            if (that._reverse) {
-                containerClass += " k-fx-reverse";
-            }
-
-            container.addClass(containerClass);
-
-            previous.css('display', '').addClass("k-fx-current");
-
-            element.css('display', '').addClass("k-fx-next");
-
-            container.one(transitions.event, function(e) {
-                container.removeClass("k-fx-end").removeClass(containerClass);
-                previous.hide().removeClass("k-fx-current");
-                element.removeClass("k-fx-next");
-
-                if (browser.msie) {
-                    setTimeout(complete, 0);
-                } else {
-                    complete();
-                }
-            });
+            container.one(transitions.event, $.proxy(this, "complete"));
 
             container.css("left"); // hack to refresh webkit
 
             container.removeClass("k-fx-start").addClass("k-fx-end");
 
             return deferred.promise();
+        },
+
+        stop: function() {
+            this.complete();
         }
     });
 
