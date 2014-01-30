@@ -2374,7 +2374,7 @@ kendo_module({
             if (container && editable && editable.end() &&
                 !this.trigger(SAVE, { container: container, event: model } )) {
 
-                if (!model.dirty) {
+                if (!model.dirty && !model.isOccurrence()) {
                     this._convertDates(model, "remove");
                 }
 
