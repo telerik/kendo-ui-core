@@ -1,0 +1,35 @@
+
+        <div id="example" class="k-content">
+
+        <span id="popupNotification" style="display:none;"></span>
+        <span id="staticNotification" style="display:none;"></span>
+
+        <button id="showPopupNotification" class="k-button">Popup notifications at bottom-right</button>
+        <button id="showStaticNotification" class="k-button">Static notifications below</button>
+        <button id="hideAllNotifications" class="k-button">Hide All Notifications</button>
+
+        <div id="appendto" class="k-block" style="width:auto;height:auto;min-height:14em;margin:1em 0"></div>
+
+            <script>
+                $(document).ready(function() {
+                    var popupNotification = $("#popupNotification").kendoNotification().data("kendoNotification");
+                    var staticNotification = $("#staticNotification").kendoNotification({
+                        appendTo: "#appendto"
+                    }).data("kendoNotification");
+
+                    $("#showPopupNotification").click(function(){
+                        popupNotification.show((new Date()).getTime(), "error");
+                    });
+
+                    $("#showStaticNotification").click(function(){
+                        staticNotification.show((new Date()).getTime(), "note");
+                    });
+
+                    $("#hideAllNotifications").click(function(){
+                        popupNotification.hide();
+                        staticNotification.hide();
+                    });
+
+                });
+            </script>
+        </div>

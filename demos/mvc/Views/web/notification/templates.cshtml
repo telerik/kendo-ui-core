@@ -1,0 +1,58 @@
+
+        <div id="example" class="k-content">
+
+        <span id="notification" style="display:none;"></span>
+
+        <button id="showNotification" class="k-button">Show Notification</button>
+        <button id="hideAllNotifications" class="k-button">Hide All Notifications</button>
+
+        <div id="appendto"></div>
+
+            <script>
+                $(document).ready(function() {
+
+                    function onShow(e) {
+                        if (!$("." + e.sender._guid)[1]) {
+                            var element = e.element.parent(),
+                                eWidth = element.width(),
+                                eHeight = element.height(),
+                                wWidth = $(window).width(),
+                                wHeight = $(window).height(),
+                                newTop, newLeft;
+                        
+                            newLeft = Math.floor(wWidth / 2 - eWidth / 2);
+                            newTop = Math.floor(wHeight / 2 - eHeight / 2);
+
+                            e.element.parent().css({top: newTop, left: newLeft});
+                        }
+                    }
+
+                    var notification = $("#notification").kendoNotification({
+                        position: {
+                            pinned: true,
+                            top: 20,
+                            left: 20
+                        },
+                        //allowHideAfter: 4000,
+                        autoHideAfter: 0,
+                        //width: "100%",
+                        //height: "40px",
+                        stacking: "down",
+                        //show: onShow,
+//                        button: true,
+//                        hideOnClick: true,
+                        //appendTo: "#appendto",
+                        foo: "bar"
+                    }).data("kendoNotification");
+
+                    $("#showNotification").click(function(){
+                        notification.show((new Date()).getTime(), "note");
+                    });
+
+                    $("#hideAllNotifications").click(function(){
+                        notification.hide();
+                    });
+
+                });
+            </script>
+        </div>

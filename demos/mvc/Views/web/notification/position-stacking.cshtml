@@ -1,0 +1,124 @@
+
+        <div id="example" class="k-content">
+
+            <span id="centeredNotification" style="display:none;"></span>
+            <span id="configurableNotification" style="display:none;"></span>
+
+            <p>
+                <button id="showNotification" class="k-button">Show centered notification</button>
+                <button id="showConfigurable" class="k-button">Show notifications with below settings</button>
+                <button id="hideAllNotifications" class="k-button">Hide all</button>
+            </p>
+
+            <p>
+                <label for="left">Left position:</label> <input type="number" id="left" class="num" />
+                <label for="left">Top position:</label> <input type="number" id="top" class="num" />
+            </p>
+
+            <p>
+                <label for="left">Right position:</label> <input type="number" id="right" class="num" value="20" />
+                <label for="left">Bottom position:</label> <input type="number" id="bottom" class="num" value="20" />
+            </p>
+
+            <p>
+                <label for="stacking">Notification stacking:</label>
+                <select id="stacking" style="width:6em"><option selected="selected">up</option><option>right</option><option>down</option><option>left</option></select>
+            </p>
+
+            <p>
+                Top / Left position settings take precedence over Bottom / Right, if both pairs are set.
+            </p>
+
+            <script>
+                $(document).ready(function() {
+
+                    function onShow(e) {
+                        if (!$("." + e.sender._guid)[1]) {
+                            var element = e.element.parent(),
+                                eWidth = element.width(),
+                                eHeight = element.height(),
+                                wWidth = $(window).width(),
+                                wHeight = $(window).height(),
+                                newTop, newLeft;
+                        
+                            newLeft = Math.floor(wWidth / 2 - eWidth / 2);
+                            newTop = Math.floor(wHeight / 2 - eHeight / 2);
+
+                            e.element.parent().css({top: newTop, left: newLeft});
+                        }
+                    }
+
+                    var centered = $("#centeredNotification").kendoNotification({
+                        stacking: "down",
+                        show: onShow,
+                        button: true
+                    }).data("kendoNotification");
+
+                    $("#showNotification").click(function(){
+                        centered.show((new Date()).getTime(), "note");
+                    });
+
+                    var configurable = $("#configurableNotification").kendoNotification().data("kendoNotification");
+
+                    $("#hideAllNotifications").click(function(){
+                        centered.hide();
+                        configurable.hide();
+                    });
+
+                    function applyConfiguration() {
+                        configurable.hide();
+                        configurable.setOptions({
+                            position: {
+                                top: $("#top").data("kendoNumericTextBox").value(),
+                                left: $("#left").data("kendoNumericTextBox").value(),
+                                bottom: $("#bottom").data("kendoNumericTextBox").value(),
+                                right: $("#right").data("kendoNumericTextBox").value()
+                            },
+                            stacking: $("#stacking").data("kendoDropDownList").value()
+                        });
+                    }
+
+                    var config = {
+                        decimals: 0,
+                        min: 0,
+                        format: "n0",
+                        change: applyConfiguration
+                    };
+
+                    $(".num").each(function(){
+                        $(this).kendoNumericTextBox(config);
+                    });
+
+                    $("#stacking").kendoDropDownList({
+                        change: applyConfiguration
+                    });
+
+                    $("#showConfigurable").click(function(){
+                        configurable.show((new Date()).getTime(), "note");
+                    });
+                });
+            </script>
+
+            <style scoped>
+        
+            #example p
+            {
+                margin: 1em 0;
+            }
+        
+            #example label
+            {
+                display: inline-block;
+                width: 12em;
+                padding-right: .8em;
+                text-align: right;
+            }
+        
+            .num
+            {
+                width: 6em;
+            }
+        
+            </style>
+
+        </div>
