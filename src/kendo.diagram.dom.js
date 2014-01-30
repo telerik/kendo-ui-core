@@ -1176,7 +1176,7 @@
             init: function (element, options) {
                 var that = this;
                 Widget.fn.init.call(that, element, options);
-
+                that._extendLayoutOptions(that.options);
                 element = that.element; // the hosting element
 
                 that.element.addClass("k-widget k-diagram").attr("role", "diagram");
@@ -1215,6 +1215,10 @@
                 that._clipboard = [];
                 that._drop();
                 that._initEditor();
+
+                if(that.options.layout) {
+                    that.layout(that.options.layout);
+                }
                 this.pauseMouseHandlers = false;
             },
             options: {
@@ -1871,6 +1875,9 @@
                 this.isLayouting = true;
                 // TODO: raise layout event?
                 var type;
+                if(isUndefined(options)) {
+                    options = this.options.layout;
+                }
                 if (isUndefined(options) || isUndefined(options.type)) {
                     type = "Tree";
                 }
@@ -1967,6 +1974,11 @@
                 editor.size((bounds.width - 2 * options.margin), options.height);
                 editor.position(bounds.topLeft().plus(formattingOffset));
                 nativeEditor.css({ fontSize: options.fontSize });
+            },
+            _extendLayoutOptions: function(options) {
+                if(options.layout) {
+                    options.layout = deepExtend(diagram.LayoutBase.fn.defaultOptions || {}, options.layout);
+                }
             },
             _finishEditShape: function () {
                 var editor = this._editor, item = this._editItem;

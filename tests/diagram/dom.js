@@ -1,5 +1,18 @@
-﻿﻿(function() {
-    var diagram = kendo.diagram, kdiagram, tolerance = 0.0001, Point = diagram.Point, QUnit = window.QUnit, test = QUnit.test, ok = QUnit.ok;
+﻿///<reference path="qunit-1.12.0.js" />
+///<reference path="../refs/kendo.core.js" />
+///<reference path="../refs/kendo.dataviz.core.js" />
+///<reference path="../js/diagram.math.js" />
+///<reference path="mock-helper.js" />
+
+(function() {
+    var diagram = window.kendo.diagram,
+        kdiagram,
+        tolerance = 0.0001,
+        Point = diagram.Point,
+        QUnit = window.QUnit,
+        test = QUnit.test,
+        ok = QUnit.ok,
+        equal = QUnit.equal;
 
     /*-----------Diagram tests------------------------------------*/
     QUnit.module("Diagram tests", {
@@ -150,6 +163,34 @@
         kdiagram.bringIntoView([s], {align: "center bottom"});
         equal(kdiagram.pan().x, newPan.x);
         equal(kdiagram.pan().y, newPan.y);
+    });
+
+    QUnit.module("initialization", {
+        setup: function() {
+            QUnit.fixture.html('<div id=canvas />');
+            window.initLayoutDiagram = function(options) {
+                kdiagram = $("#canvas").kendoDiagram({layout: options }).data("kendoDiagram");
+            };
+        },
+        teardown: function() {
+            window.removeMocksIn(window.kendo.ui.Diagram.fn);
+            delete window.initDiagram;
+            kdiagram.destroy();
+        }
+    });
+
+    test("grid layout", function () {
+        var diagramFn = kendo.ui.Diagram.prototype;
+        debugger;
+        diagramFn.layout = diagramFn.layout.mock();
+        window.initLayoutDiagram({
+            grid: {
+                width: 600
+            }
+        });
+
+        equal(kdiagram.options.layout.grid.width, 600, "grid width option should be stored");
+        ok(diagramFn.layout.called);
     });
 
     QUnit.module("event handling", {

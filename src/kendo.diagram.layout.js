@@ -32,117 +32,116 @@ var __meta__ = {
      * @type {*}
      */
     var LayoutBase = kendo.Class.extend({
-        defaultOptions: null,
+        defaultOptions: {
+            type: "Tree",
+            subtype: "Down",
+            roots: null,
+            animate: false,
+            //-------------------------------------------------------------------
+            /**
+             * Force-directed option: whether the motion of the nodes should be limited by the boundaries of the diagram surface.
+             */
+            limitToView: false,
+            /**
+             * Force-directed option: the amount of friction applied to the motion of the nodes.
+             */
+            friction: 0.9,
+            /**
+             * Force-directed option: the optimal distance between nodes (minimum energy).
+             */
+            nodeDistance: 50,
+            /**
+             * Force-directed option: the number of time things are being calculated.
+             */
+            iterations: 300,
+            //-------------------------------------------------------------------
+            /**
+             * Tree option: the separation in one direction (depends on the subtype what direction this is).
+             */
+            horizontalSeparation: 90,
+            /**
+             * Tree option: the separation in the complementary direction (depends on the subtype what direction this is).
+             */
+            verticalSeparation: 50,
+
+            //-------------------------------------------------------------------
+            /**
+             * Tip-over tree option: children-to-parent vertical distance.
+             */
+            underneathVerticalTopOffset: 15,
+            /**
+             * Tip-over tree option: children-to-parent horizontal distance.
+             */
+            underneathHorizontalOffset: 15,
+            /**
+             * Tip-over tree option: leaf-to-next-branch vertical distance.
+             */
+            underneathVerticalSeparation: 15,
+            //-------------------------------------------------------------------
+            /**
+             * Settings object to organize the different components of the diagram in a grid layout structure
+             */
+            grid: {
+                /**
+                 * The width of the grid in which components are arranged. Beyond this width a component will be on the next row.
+                 */
+                width: 1500,
+                /**
+                 * The left offset of the grid.
+                 */
+                offsetX: 50,
+                /**
+                 * The top offset of the grid.
+                 */
+                offsetY: 50,
+                /**
+                 * The horizontal padding within a cell of the grid where a single component resides.
+                 */
+                componentSpacingX: 20,
+                /**
+                 * The vertical padding within a cell of the grid where a single component resides.
+                 */
+                componentSpacingY: 20
+            },
+
+            //-------------------------------------------------------------------
+            /**
+             * Layered option: the separation height/width between the layers.
+             */
+            layerSeparation: 50,
+            /**
+             * Layered option: how many rounds of shifting and fine-tuning.
+             */
+            layeredIterations: 2,
+            /**
+             * Tree-radial option: the angle at which the layout starts.
+             */
+            startRadialAngle: 0,
+            /**
+             * Tree-radial option: the angle at which the layout starts.
+             */
+            endRadialAngle: 2 * Math.PI,
+            /**
+             * Tree-radial option: the separation between levels.
+             */
+            radialSeparation: 150,
+            /**
+             * Tree-radial option: the separation between the root and the first level.
+             */
+            radialFirstLevelSeparation: 200,
+            /**
+             * Tree-radial option: whether a virtual roots bing the components in one radial layout.
+             */
+            keepComponentsInOneRadialLayout: false,
+            //-------------------------------------------------------------------
+
+            // TODO: ensure to change this to false when containers are around
+            ignoreContainers: true,
+            layoutContainerChildren: false,
+            ignoreInvisible: true,
+            animateTransitions: false
+        },
         init: function () {
-            this.defaultOptions = {
-                type: "Tree",
-                subtype: "Down",
-                roots: null,
-                animate: false,
-                //-------------------------------------------------------------------
-                /**
-                 * Force-directed option: whether the motion of the nodes should be limited by the boundaries of the diagram surface.
-                 */
-                limitToView: false,
-                /**
-                 * Force-directed option: the amount of friction applied to the motion of the nodes.
-                 */
-                friction: 0.9,
-                /**
-                 * Force-directed option: the optimal distance between nodes (minimum energy).
-                 */
-                nodeDistance: 50,
-                /**
-                 * Force-directed option: the number of time things are being calculated.
-                 */
-                iterations: 300,
-                //-------------------------------------------------------------------
-                /**
-                 * Tree option: the separation in one direction (depends on the subtype what direction this is).
-                 */
-                horizontalSeparation: 90,
-                /**
-                 * Tree option: the separation in the complementary direction (depends on the subtype what direction this is).
-                 */
-                verticalSeparation: 50,
-
-                //-------------------------------------------------------------------
-                /**
-                 * Tip-over tree option: children-to-parent vertical distance.
-                 */
-                underneathVerticalTopOffset: 15,
-                /**
-                 * Tip-over tree option: children-to-parent horizontal distance.
-                 */
-                underneathHorizontalOffset: 15,
-                /**
-                 * Tip-over tree option: leaf-to-next-branch vertical distance.
-                 */
-                underneathVerticalSeparation: 15,
-                //-------------------------------------------------------------------
-                /**
-                 * Settings object to organize the different components of the diagram in a grid layout structure
-                 */
-                grid: {
-                    /**
-                     * The width of the grid in which components are arranged. Beyond this width a component will be on the next row.
-                     */
-                    width: 1500,
-                    /**
-                     * The left offset of the grid.
-                     */
-                    offsetX: 50,
-                    /**
-                     * The top offset of the grid.
-                     */
-                    offsetY: 50,
-                    /**
-                     * The horizontal padding within a cell of the grid where a single component resides.
-                     */
-                    componentSpacingX: 20,
-                    /**
-                     * The vertical padding within a cell of the grid where a single component resides.
-                     */
-                    componentSpacingY: 20
-                },
-
-                //-------------------------------------------------------------------
-                /**
-                 * Layered option: the separation height/width between the layers.
-                 */
-                layerSeparation: 50,
-                /**
-                 * Layered option: how many rounds of shifting and fine-tuning.
-                 */
-                layeredIterations: 2,
-                /**
-                 * Tree-radial option: the angle at which the layout starts.
-                 */
-                startRadialAngle: 0,
-                /**
-                 * Tree-radial option: the angle at which the layout starts.
-                 */
-                endRadialAngle: 2 * Math.PI,
-                /**
-                 * Tree-radial option: the separation between levels.
-                 */
-                radialSeparation: 150,
-                /**
-                 * Tree-radial option: the separation between the root and the first level.
-                 */
-                radialFirstLevelSeparation: 200,
-                /**
-                 * Tree-radial option: whether a virtual roots bing the components in one radial layout.
-                 */
-                keepComponentsInOneRadialLayout: false,
-                //-------------------------------------------------------------------
-
-                // TODO: ensure to change this to false when containers are around
-                ignoreContainers: true,
-                layoutContainerChildren: false,
-                ignoreInvisible: true,
-                animateTransitions: false
-            };
         },
 
         /**
