@@ -8,7 +8,7 @@
 <demo:header />
     <div class="demo-section">
         <h2>Products</h2>
-        <kendo:multiSelect name="products" dataTextField="productName" dataValueField="productId" filter="startswith">
+        <kendo:multiSelect name="products" dataTextField="productName" value="${value }" dataValueField="productId" filter="startswith">
             <kendo:dataSource serverFiltering="true">
                 <kendo:dataSource-transport>
                    <kendo:dataSource-transport-read url="${readUrl}" type="POST" contentType="application/json"/>
