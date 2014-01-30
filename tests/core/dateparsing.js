@@ -671,6 +671,13 @@ test("parseDate parses /Date(milliseconds)/ string", function() {
     equal(+parse(dateString), +date);
 });
 
+test("parseDate parses /Date(-milliseconds)/ string", function() {
+    var result = new Date(1965, 0, 1);
+    var dateString = "/Date(" + result.getTime() + ")/";
+
+    deepEqual(parse(dateString), result);
+});
+
 test("parseDate parses /Date(milliseconds+offset)/ string", function() {
     var result = new Date(1390386182022);
     var dateString = "/Date(1390393382022+0120)/";
