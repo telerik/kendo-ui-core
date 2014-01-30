@@ -245,8 +245,19 @@ namespace <%= csharp_namespace %>
       class Option < CodeGen::Option
         include Options
 
+        def enum?
+            root_component.enum_options.include?(self)
+        end
+
+=begin
+        def csharp_name
+            return "#{owner.name.sub('Settings','').sub('Collection','')}#{name.pascalize}" if enum?
+            name.pascalize
+        end
+=end
+
         def csharp_type
-            return "#{owner.csharp_class}#{name.pascalize}" if values
+            return "#{owner.csharp_name.sub('Settings','').sub('Collection','')}#{name.pascalize}" if enum?
             return TYPES_MAP[type[0]]
         end
 
@@ -457,7 +468,7 @@ namespace <%= csharp_namespace %>
             options = component.enum_options
 
             options.each do |option|
-                filename = "#{@path}/#{component.csharp_class}#{option.csharp_name}.cs"
+                filename = "#{@path}/#{option.csharp_type}.cs"
 
                 create_file(filename, option.to_enum)
             end 
