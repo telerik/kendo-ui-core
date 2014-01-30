@@ -17,7 +17,7 @@
                         <kendo:dataSource-schema-model-field name="productName" type="string" />
                         <kendo:dataSource-schema-model-field name="unitPrice" type="number" />
                         <kendo:dataSource-schema-model-field name="unitsInStock" type="number" />
-                        <kendo:dataSource-schema-model-field name="discontinued" type="bool" />
+                        <kendo:dataSource-schema-model-field name="discontinued" type="boolean" />
                     </kendo:dataSource-schema-model-fields>
                 </kendo:dataSource-schema-model>
             </kendo:dataSource-schema>
