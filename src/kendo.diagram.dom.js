@@ -1804,7 +1804,7 @@
                 return this.documentToViewportPoint(dPoint).minus(scroll);
             },
             documentToViewportPoint: function (point) {
-                var containerOffset = this.element.offset();
+                var containerOffset = $(this.canvas.element).offset();
 
                 return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
             },
