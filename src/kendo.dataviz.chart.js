@@ -2859,6 +2859,7 @@ var __meta__ = {
 
             bar.options = options;
             bar.color = options.color || WHITE;
+            bar.aboveAxis = valueOrDefault(bar.options.aboveAxis, true);
             bar.value = value;
             bar.id = uniqueId();
             bar.enableDiscovery();
@@ -2872,7 +2873,6 @@ var __meta__ = {
             overlay: {
                 gradient: GLASS
             },
-            aboveAxis: true,
             labels: {
                 visible: false
             },
@@ -2938,7 +2938,7 @@ var __meta__ = {
             bar.box = targetBox;
 
             if (label) {
-                label.options.aboveAxis = options.aboveAxis;
+                label.options.aboveAxis = bar.aboveAxis;
                 label.reflow(targetBox);
             }
 
@@ -2970,7 +2970,7 @@ var __meta__ = {
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     vertical: options.vertical,
-                    aboveAxis: options.aboveAxis,
+                    aboveAxis: bar.aboveAxis,
                     stackBase: options.stackBase,
                     animation: options.animation,
                     data: { modelId: bar.modelId }
@@ -3022,7 +3022,7 @@ var __meta__ = {
                 options = bar.options,
                 box = bar.box,
                 vertical = options.vertical,
-                aboveAxis = options.aboveAxis,
+                aboveAxis = bar.aboveAxis,
                 x,
                 y;
 
@@ -3378,7 +3378,7 @@ var __meta__ = {
                     var aboveAxis = valueAxis.options.reverse ?
                                         value < axisCrossingValue : value >= axisCrossingValue;
 
-                    point.options.aboveAxis = aboveAxis;
+                    point.aboveAxis = aboveAxis;
                     chart.reflowPoint(point, pointSlot);
                 }
             });
@@ -3874,6 +3874,7 @@ var __meta__ = {
             ChartElement.fn.init.call(bullet, options);
 
             bullet.value = value;
+            bullet.aboveAxis = bullet.options.aboveAxis;
             bullet.id = uniqueId();
             bullet.enableDiscovery();
         },
@@ -3976,7 +3977,7 @@ var __meta__ = {
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     vertical: options.vertical,
-                    aboveAxis: options.aboveAxis,
+                    aboveAxis: bullet.aboveAxis,
                     animation: options.animation,
                     data: { modelId: bullet.modelId }
                 }, border),
@@ -4002,7 +4003,7 @@ var __meta__ = {
                 options = bar.options,
                 box = bar.box,
                 vertical = options.vertical,
-                aboveAxis = options.aboveAxis,
+                aboveAxis = bar.aboveAxis,
                 x, y;
 
             if (vertical) {
@@ -4171,13 +4172,13 @@ var __meta__ = {
             point.value = value;
             point.options = options;
             point.color = options.color;
+            point.aboveAxis = valueOrDefault(point.options.aboveAxis, true);
             point.id = uniqueId();
 
             point.enableDiscovery();
         },
 
         defaults: {
-            aboveAxis: true,
             vertical: true,
             markers: {
                 visible: true,
@@ -4304,7 +4305,7 @@ var __meta__ = {
             var point = this,
                 options = point.options,
                 vertical = options.vertical,
-                aboveAxis = options.aboveAxis,
+                aboveAxis = point.aboveAxis,
                 childBox, center;
 
             point.render();
@@ -4389,7 +4390,7 @@ var __meta__ = {
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var point = this,
                 markerBox = point.markerBox(),
-                aboveAxis = point.options.aboveAxis;
+                aboveAxis = point.aboveAxis;
 
             return Point2D(
                 markerBox.x2 + TOOLTIP_OFFSET,
