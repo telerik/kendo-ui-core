@@ -617,21 +617,6 @@
             return false;
         },
 
-        _fillEmptyElements: function(body) {
-            $(body).find("p").each(function() {
-                if (/^\s*$/g.test($(this).text())) {
-                    var node = this;
-                    while (node.firstChild && node.firstChild.nodeType != 3) {
-                        node = node.firstChild;
-                    }
-
-                    if (node.nodeType == 1 && node.tagName.toLowerCase() != "img") {
-                        node.innerHTML = kendo.ui.editor.emptyElementContent;
-                    }
-                }
-            });
-        },
-
         value: function (html) {
             var body = this.body,
                 editorNS = kendo.ui.editor,
@@ -646,76 +631,7 @@
                 return;
             }
 
-            var onerrorRe = /onerror\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/i;
-
-            // handle null value passed as a parameter
-            html = (html || "")
-                // Some browsers do not allow setting CDATA sections through innerHTML so we encode them
-                .replace(/<!\[CDATA\[(.*)?\]\]>/g, "<!--[CDATA[$1]]-->")
-                // Encode script tags to avoid execution and lost content (IE)
-                .replace(/<script([^>]*)>(.*)?<\/script>/ig, "<telerik:script $1>$2<\/telerik:script>")
-                .replace(/<img([^>]*)>/ig, function(match) {
-                    return match.replace(onerrorRe, "");
-                })
-                // <img>\s+\w+ creates invalid nodes after cut in IE
-                .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
-
-            if (browser.msie && browser.version < 9) {
-                // Internet Explorer removes comments from the beginning of the html
-                html = "<br/>" + html;
-
-                var originalSrc = "originalsrc",
-                    originalHref = "originalhref";
-
-                // IE < 8 makes href and src attributes absolute
-                html = html.replace(/href\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/, originalHref + '="$1"');
-                html = html.replace(/src\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/, originalSrc + '="$1"');
-
-                body.innerHTML = html;
-                dom.remove(body.firstChild);
-
-                $(body).find("telerik\\:script,script,link,img,a").each(function () {
-                    var node = this;
-                    if (node[originalHref]) {
-                        node.setAttribute("href", node[originalHref]);
-                        node.removeAttribute(originalHref);
-                    }
-                    if (node[originalSrc]) {
-                        node.setAttribute("src", node[originalSrc]);
-                        node.removeAttribute(originalSrc);
-                    }
-                });
-            } else {
-                body.innerHTML = html;
-
-                if (browser.msie) {
-                    // having unicode characters creates denormalized DOM tree in IE9
-                    dom.normalize(body);
-
-                    setTimeout(function() {
-                        // fix for IE9 OL bug -- https://connect.microsoft.com/IE/feedback/details/657695/ordered-list-numbering-changes-from-correct-to-0-0
-                        var ols = body.getElementsByTagName("ol"), i, ol, originalStart;
-
-                        for (i = 0; i < ols.length; i++) {
-                            ol = ols[i];
-                            originalStart = ol.getAttribute("start");
-
-                            ol.setAttribute("start", 1);
-
-                            if (originalStart) {
-                                ol.setAttribute("start", originalStart);
-                            } else {
-                                ol.removeAttribute(originalStart);
-                            }
-                        }
-                    }, 1);
-                }
-            }
-
-            this._fillEmptyElements(this.body);
-
-            // add k-table class to all tables
-            $("table", this.body).addClass("k-table");
+            editorNS.Serializer.htmlToDom(html, body);
 
             this.selectionRestorePoint = null;
             this.update();

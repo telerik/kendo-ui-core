@@ -1,6 +1,7 @@
 (function(){
 
 var editor;
+var Serializer = kendo.ui.editor.Serializer;
 
 editor_module("editor serialization", {
     setup: function() {
@@ -95,11 +96,6 @@ test('comments', function() {
     equal(editor.value(), '<!-- comment -->');
 });
 
-test('cdata encoding', function() {
-    editor.value('<![CDATA[test]]>');
-    ok(editor.body.innerHTML.indexOf('<!--[CDATA[test]]-->') > -1);
-});
-
 test('cdata', function() {
     editor.value('<![CDATA[test]]>');
     equal(editor.value(), '<![CDATA[test]]>');
@@ -174,26 +170,6 @@ test('type text attribute', function() {
 test('style ending with whitespace', function() {
     editor.value('<hr style="display:none; " />');
     equal(editor.value(), '<hr style="display:none;" />');
-});
-
-test('a href is not made absolute', function() {
-    editor.value('<a href="foo">a</a>');
-    equal(editor.value(), '<a href="foo">a</a>');
-});
-
-test('link href is not made absolute', function() {
-    editor.value('<link href="foo" />');
-    equal(editor.value(), '<link href="foo" />');
-});
-
-test('img src is not made absolute', function() {
-    editor.value('<img src="foo" />');
-    equal(editor.value(), '<img src="foo" />');
-});
-
-test('script src is not made absolute', function() {
-    editor.value('<script src="foo"><\/script>');
-    equal(editor.value(), '<script src="foo"><\/script>');
 });
 
 test('href without quotes', function() {
@@ -475,16 +451,42 @@ test("absolute background-image values are properly serialized", function() {
     equal(editor.value(), '<div style="background-image:url(http://example.com/foo.gif);">foo</div>');
 });
 
-var glob = false;
+module("editor content parsing");
 
-asyncTest("onerror image attribute is not serialized to prevent XSS", function() {
-    editor.value("<img src='x' onerror='window.parent.glob = true' />");
+test("removes onerror attribute to prevent XSS", function() {
+    equal(Serializer.toEditableHtml('<img src="foo" onerror="alert(1)">'), '<img src="foo">');
+});
 
-    setTimeout(function() {
-        start();
-        ok(!glob, "onError handler is executed");
-        ok(editor.value(), "<img src='x' />");
-    }, 300);
+test("removes whitespace after images", function() {
+    // whitespace after images create invalid nodes after cut in IE
+    equal(Serializer.toEditableHtml('<img src="foo"> foo'), '<img src="foo">foo');
+    equal(Serializer.toEditableHtml('<img src="foo">\nfoo'), '<img src="foo">foo');
+    equal(Serializer.toEditableHtml('<img src="foo">\tfoo'), '<img src="foo">foo');
+    equal(Serializer.toEditableHtml('<img src="foo">\r\n foo'), '<img src="foo">foo');
+});
+
+test("encodes scripts", function() {
+    // prevent execution and losing content in IE
+    equal(Serializer.toEditableHtml('<script>alert(1)</script>'), '<telerik:script>alert(1)</telerik:script>');
+    equal(Serializer.toEditableHtml('<script src="inline.js"></script>'), '<telerik:script src="inline.js"></telerik:script>');
+});
+
+test("encodes CDATA sections as comments", function() {
+    // some browsers do not allow setting CDATA sections through innerHTML
+    equal(Serializer.toEditableHtml('<![CDATA[ whatever ]]>'), '<!--[CDATA[ whatever ]]-->');
+});
+
+function serializeCycle(html) {
+    var cycled = Serializer.domToXhtml(Serializer.htmlToDom(html, QUnit.fixture[0]));
+    equal(cycled, html);
+}
+
+test("does not convert relative href/src URLs to absolute", function() {
+    // valid for IE < 8
+    serializeCycle('<a href="foo">a</a>');
+    serializeCycle('<link href="foo" />');
+    serializeCycle('<img src="foo" />');
+    serializeCycle('<script src="foo"><\/script>');
 });
 
 }());
