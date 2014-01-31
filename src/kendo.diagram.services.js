@@ -1714,7 +1714,7 @@
                         shape = this.shapes[i];
                         bounds = shape.bounds();
                         if (dragging) {
-                            newBounds = this._truncatePositionToGuides(this._displaceBounds(bounds, dtl, dbr, dragging));
+                            newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
                         }
                         else {
                             newBounds = bounds.clone();
@@ -1725,7 +1725,7 @@
                         }
                         if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
                             var oldBounds = bounds;
-                            shape.bounds(this._truncateSizeToGuides(newBounds));
+                            shape.bounds(newBounds);
                             if (shape.hasOwnProperty("layout"))
                                 shape.layout(shape, oldBounds, newBounds);
                             shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
@@ -1788,6 +1788,16 @@
                         this._rotating = false;
                     }
                     else {
+                        if (this.diagram.ruler) {
+                            for (var i = 0; i < this.shapes.length; i++) {
+                                var shape = this.shapes[i];
+                                var bounds = shape.bounds();
+                                bounds = this._truncateSizeToGuides(this._truncatePositionToGuides(bounds));
+                                shape.bounds(bounds);
+                                this.refreshBounds();
+                                this.refresh();
+                            }
+                        }
                         unit = new TransformUnit(this.shapes, this.shapeStates, this);
                     }
                 }
