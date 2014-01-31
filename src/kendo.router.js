@@ -162,14 +162,6 @@ var __meta__ = {
             this.bind(CHANGE, callback);
         },
 
-        same: function(url) {
-            if (this.current === url || this.current === decodeURIComponent(url)) {
-                this.trigger(SAME);
-                return true;
-            }
-            return false;
-        },
-
         navigate: function(to, silent) {
             if (to === "#:back") {
                 history.back();
@@ -178,7 +170,8 @@ var __meta__ = {
 
             to = to.replace(hashStrip, '');
 
-            if (this.same(to)) {
+            if (this.current === to || this.current === decodeURIComponent(to)) {
+                this.trigger(SAME);
                 return;
             }
 
@@ -202,8 +195,8 @@ var __meta__ = {
                 back = current === this.locations[this.locations.length - 2] && navigatingInExisting,
                 prev = this.current;
 
-            if (this.same(current)) {
-                return;
+            if (this.current === current || this.current === decodeURIComponent(current)) {
+                return true;
             }
 
             this.historyLength = newLength;
