@@ -44,18 +44,12 @@
     box-pack: @pack;
 }
 
-.border-radius(...) {
-    -moz-border-radius: @arguments;
-    -webkit-border-radius: @arguments;
-    border-radius: @arguments;
-}
-
 .guarded-border-radius(@value) when (@value < 0) {
-    .border-radius(0);
+    border-radius: 0;
 }
 
 .guarded-border-radius(@value) when (@value >= 0) {
-    .border-radius(@value);
+    border-radius: @value;
 }
 
 .box-shadow(...) {
@@ -1128,7 +1122,7 @@ div.k-imagebrowser-dropzone em
 .k-window-maximized .k-window-titlebar,
 .k-window-maximized .k-window-content
 {
-    .border-radius(0);
+    border-radius: 0;
 }
 
 .k-shadow
@@ -1184,7 +1178,7 @@ div.k-imagebrowser-dropzone em
 .k-slider-selection,
 .k-upload
 {
-    .border-radius(@main-border-radius);
+    border-radius: @main-border-radius;
 }
 
 .k-tool {
@@ -1194,27 +1188,27 @@ div.k-imagebrowser-dropzone em
 
 .k-tool.k-group-start
 {
-    .border-radius(@main-border-radius 0 0 @main-border-radius);
+    border-radius: @main-border-radius 0 0 @main-border-radius;
 }
 
 .k-rtl .k-tool.k-group-start
 {
-    .border-radius(0 @main-border-radius @main-border-radius 0);
+    border-radius: 0 @main-border-radius @main-border-radius 0;
 }
 
 .k-tool.k-group-end
 {
-    .border-radius(0 @main-border-radius @main-border-radius 0);
+    border-radius: 0 @main-border-radius @main-border-radius 0;
 }
 
 .k-rtl .k-tool.k-group-end
 {
-    .border-radius(@main-border-radius 0 0 @main-border-radius);
+    border-radius: @main-border-radius 0 0 @main-border-radius;
 }
 
 .k-group-start.k-group-end.k-tool
 {
-    .border-radius(@main-border-radius);
+    border-radius: @main-border-radius;
 }
 
 .k-calendar-container.k-state-border-up,
@@ -1227,7 +1221,7 @@ div.k-imagebrowser-dropzone em
 .k-window-content,
 .k-filter-menu
 {
-    .border-radius(0 0 @main-border-radius @main-border-radius);
+    border-radius: 0 0 @main-border-radius @main-border-radius;
 }
 
 .k-autocomplete.k-state-border-up .k-input,
@@ -1236,12 +1230,12 @@ div.k-imagebrowser-dropzone em
 .k-picker-wrap.k-state-border-up .k-selected-color,
 .k-numeric-wrap.k-state-border-up .k-input
 {
-    .border-radius(0 0 0 @main-border-radius);
+    border-radius: 0 0 0 @main-border-radius;
 }
 
 .k-multiselect.k-state-border-up .k-multiselect-wrap,
 {
-    .border-radius(0 0 @main-border-radius @main-border-radius);
+    border-radius: 0 0 @main-border-radius @main-border-radius;
 }
 
 .k-window-titlebar,
@@ -1257,39 +1251,39 @@ div.k-imagebrowser-dropzone em
 .k-picker-wrap.k-state-border-down,
 .k-numeric-wrap.k-state-border-down
 {
-    .border-radius(@main-border-radius @main-border-radius 0 0);
+    border-radius: @main-border-radius @main-border-radius 0 0;
 }
 
 .k-dropdown-wrap .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input
 {
-    .border-radius(@inner-border-radius 0 0 @inner-border-radius);
+    border-radius: @inner-border-radius 0 0 @inner-border-radius;
 }
 
 .k-numeric-wrap .k-link
 {
-    .border-radius(0 @inner-border-radius 0 0);
+    border-radius: 0 @inner-border-radius 0 0;
 }
 
 .k-numeric-wrap .k-link + .k-link
 {
-    .border-radius(0 0 @inner-border-radius 0);
+    border-radius: 0 0 @inner-border-radius 0;
 }
 
 .k-colorpicker .k-selected-color
 {
-    .border-radius(@inner-border-radius 0 0 @inner-border-radius);
+    border-radius: @inner-border-radius 0 0 @inner-border-radius;
 }
 
 .k-rtl .k-colorpicker .k-selected-color
 {
-    .border-radius(0 @inner-border-radius @inner-border-radius 0);
+    border-radius: 0 @inner-border-radius @inner-border-radius 0;
 }
 
 .k-autocomplete.k-state-border-down .k-input
 {
-    .border-radius(@main-border-radius @main-border-radius 0 0);
+    border-radius: @main-border-radius @main-border-radius 0 0;
 }
 
 .k-dropdown-wrap.k-state-border-down .k-input,
@@ -1297,7 +1291,7 @@ div.k-imagebrowser-dropzone em
 .k-picker-wrap.k-state-border-down .k-selected-color,
 .k-numeric-wrap.k-state-border-down .k-input
 {
-    .border-radius(@main-border-radius 0 0 0);
+    border-radius: @main-border-radius 0 0 0;
 }
 
 .k-numeric-wrap .k-link.k-state-selected
@@ -1307,7 +1301,7 @@ div.k-imagebrowser-dropzone em
 
 .k-multiselect.k-state-border-down .k-multiselect-wrap,
 {
-    .border-radius(@inner-border-radius @inner-border-radius 0 0);
+    border-radius: @inner-border-radius @inner-border-radius 0 0;
 }
 
 .k-dropdown-wrap .k-select,
@@ -1316,7 +1310,7 @@ div.k-imagebrowser-dropzone em
 .k-datetimepicker .k-select+.k-select,
 .k-list-container.k-state-border-right
 {
-    .border-radius(0 @main-border-radius @main-border-radius 0);
+    border-radius: 0 @main-border-radius @main-border-radius 0;
 }
 
 .k-rtl .k-dropdown-wrap .k-select,
@@ -1325,7 +1319,7 @@ div.k-imagebrowser-dropzone em
 .k-rtl .k-datetimepicker .k-select+.k-select,
 .k-rtl .k-list-container.k-state-border-right
 {
-    .border-radius(@main-border-radius 0 0 @main-border-radius);
+    border-radius: @main-border-radius 0 0 @main-border-radius;
 }
 
 .k-numeric-wrap.k-expand-padding .k-input
@@ -1352,18 +1346,18 @@ div.k-imagebrowser-dropzone em
 .k-slider .k-button,
 .k-grid .k-slider .k-button
 {
-    .border-radius(@slider-border-radius);
+    border-radius: @slider-border-radius;
 }
 
 .k-draghandle
 {
-    .border-radius(@draghandle-border-radius);
+    border-radius: @draghandle-border-radius;
 }
 
 .k-scheduler-toolbar > ul li:first-child,
 .k-scheduler-toolbar > ul li:first-child .k-link
 {
-    .border-radius(@main-border-radius 0 0 @main-border-radius);
+    border-radius: @main-border-radius 0 0 @main-border-radius;
 }
 
 .k-rtl .k-scheduler-toolbar > ul li:first-child,
@@ -1371,14 +1365,14 @@ div.k-imagebrowser-dropzone em
 .km-view.k-popup-edit-form .k-scheduler-toolbar > ul li:last-child,
 .km-view.k-popup-edit-form .k-scheduler-toolbar > ul li:last-child .k-link
 {
-    .border-radius(0 @main-border-radius @main-border-radius 0);
+    border-radius: 0 @main-border-radius @main-border-radius 0;
 }
 
 .k-scheduler-mobile .k-scheduler-toolbar > ul li.k-nav-today,
 .k-scheduler-mobile .k-scheduler-toolbar > ul li.k-nav-today .k-link,
 .k-edit-field > .k-scheduler-navigation
 {
-    .border-radius(@main-border-radius);
+    border-radius: @main-border-radius;
 }
 
 .k-scheduler-toolbar .k-nav-next,
@@ -1408,12 +1402,12 @@ div.k-imagebrowser-dropzone em
 .k-event,
 .k-event .k-link
 {
-    .border-radius(@inner-border-radius);
+    border-radius: @inner-border-radius;
 }
 
 .k-scheduler-mobile .k-event
 {
-    .border-radius(@inner-border-radius - 1);
+    border-radius: @inner-border-radius - 1;
 }
 
 /* Adaptive Grid */
@@ -1862,7 +1856,7 @@ div.k-imagebrowser-dropzone em
     .k-picker-wrap .k-input,
     .k-numeric-wrap .k-input
     {
-        .border-radius(@inner-border-radius 0 0 @inner-border-radius);
+        border-radius: @inner-border-radius 0 0 @inner-border-radius;
     }
 }
 
