@@ -1560,7 +1560,7 @@ var __meta__ = {
                 title: "Work Week",
                 selectedDateFormat: "{0:D} - {1:D}"
             },
-            name: "workweeek",
+            name: "workweek",
             nextDate: function() {
                 return kendo.date.dayOfWeek(kendo.date.nextDay(this.endDate()), this.options.workWeekStart, 1);
             },
