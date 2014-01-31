@@ -1114,16 +1114,18 @@ test("filter on nested objects", function () {
 });
 
 test("filter on dotnet date literals", function () {
-    var data = [{ bar: new Date(1996, 11, 9)},{ bar: new Date(1996, 11, 12)}];
+    var firstDate = new Date(1996, 11, 9);
+    var data = [{ bar: firstDate },{ bar: new Date(1996, 11, 12)}];
+
 
     var result = new Query(data).filter( {
         operator: "eq",
         field: "bar",
-        value: "/Date(850082400000)/"
+        value: "/Date(" + firstDate.getTime() + ")/"
     }).toArray();
 
     equal(result.length, 1);
-    equal(result[0].bar.getTime(), 850082400000);
+    equal(result[0].bar.getTime(), firstDate.getTime());
 });
 
 test("filter on nested nullable objects", function () {
