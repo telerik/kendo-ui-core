@@ -114,7 +114,7 @@ module.exports = function(grunt) {
                     files: [].concat(
                         TESTS.compiledStyleSheets,
                         TESTS.beforeTestFiles,
-                        [ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js' ],
+                        TESTS.ciFiles,
                         TESTS.afterTestFiles,
                         tests
                     )
