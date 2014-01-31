@@ -2055,7 +2055,7 @@ var __meta__ = {
 
             that._data = that._observe(that._data);
 
-            that.bind([ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND, PROGRESS], options);
+            that.bind(["push", ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND, PROGRESS], options);
         },
 
         options: {
@@ -2196,10 +2196,14 @@ var __meta__ = {
                 items = [items];
             }
 
+            var pushed = [];
+
             for (var idx = 0; idx < items.length; idx ++) {
                 var item = items[idx];
 
                 var result = this.add(item);
+
+                pushed.push(result);
 
                 var pristine = result.toJSON();
 
@@ -2209,12 +2213,21 @@ var __meta__ = {
 
                 this._pristineData.push(pristine);
             }
+
+            if (pushed.length) {
+                this.trigger("push", {
+                    type: "create",
+                    items: pushed
+                });
+            }
         },
 
         pushUpdate: function(items) {
             if (!isArray(items)) {
                 items = [items];
             }
+
+            var pushed = [];
 
             for (var idx = 0; idx < items.length; idx ++) {
                 var item = items[idx];
@@ -2223,6 +2236,8 @@ var __meta__ = {
                 var target = this.get(model.id);
 
                 if (target) {
+                    pushed.push(target);
+
                     target.accept(item);
 
                     target.trigger("change");
@@ -2232,6 +2247,13 @@ var __meta__ = {
                     this.pushCreate(item);
                 }
             }
+
+            if (pushed.length) {
+                this.trigger("push", {
+                    type: "update",
+                    items: pushed
+                });
+            }
         },
 
         pushDestroy: function(items) {
@@ -2239,6 +2261,7 @@ var __meta__ = {
                 items = [items];
             }
 
+            var pushed = [];
             var autoSync = this.options.autoSync;
             this.options.autoSync = false;
             try {
@@ -2250,6 +2273,7 @@ var __meta__ = {
                     this._eachItem(this._data, function(items){
                         for (var idx = 0; idx < items.length; idx++) {
                             if (items[idx].id === model.id) {
+                                pushed.push(items[idx]);
                                 items.splice(idx, 1);
                                 found = true;
                                 break;
@@ -2264,6 +2288,13 @@ var __meta__ = {
                 }
             } finally {
                 this.options.autoSync = autoSync;
+            }
+
+            if (pushed.length) {
+                this.trigger("push", {
+                    type: "destroy",
+                    items: pushed
+                });
             }
         },
 

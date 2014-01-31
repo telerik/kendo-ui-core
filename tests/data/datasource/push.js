@@ -181,6 +181,23 @@ test("pushCreate inserts an array of items in the data source", function() {
     equal(dataSource.at(1).foo, "bar");
 });
 
+test("pushCreate fires the push event", 5, function() {
+    var dataSource = new DataSource({
+        push: function(e) {
+            equal(e.items.length, 2);
+            equal(e.type, "create");
+            equal(e.items[0] instanceof kendo.data.ObservableObject, true);
+            equal(e.items[0].foo, "foo");
+            equal(e.items[1].foo, "bar");
+        }
+    });
+
+    dataSource.pushCreate([
+        { foo: "foo" },
+        { foo: "bar" }
+    ]);
+});
+
 test("pushUpdate updates an existing item", function() {
     var dataSource = new DataSource({
         schema: { model: { id: "id" } },
@@ -242,6 +259,30 @@ test("pushUpdate updates an array of existing items", function() {
     equal(dataSource.at(1).foo, "bar");
 });
 
+test("pushUpdate fires the push event", 5, function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        push: function(e) {
+            equal(e.items.length, 2);
+            equal(e.type, "update");
+            equal(e.items[0] instanceof kendo.data.ObservableObject, true);
+            equal(e.items[0].foo, "bar");
+            equal(e.items[1].foo, "bar");
+        },
+        data: [
+            { id: 1, foo: "foo" },
+            { id: 2, foo: "foo" }
+        ]
+    });
+
+    dataSource.read();
+
+    dataSource.pushUpdate([
+        { id: 1, foo: "bar" },
+        { id: 2, foo: "bar" }
+    ]);
+});
+
 test("pushDestroy removes an existing item", function() {
     var dataSource = new DataSource({
         schema: { model: { id: "id" } },
@@ -301,6 +342,30 @@ test("pushDestroy removes an array of existing items", function() {
     ]);
 
     equal(dataSource.data().length, 0);
+});
+
+test("pushDestroy fires the push event", 5, function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        push: function(e) {
+            equal(e.items.length, 2);
+            equal(e.type, "destroy");
+            equal(e.items[0] instanceof kendo.data.ObservableObject, true);
+            equal(e.items[0].foo, "foo");
+            equal(e.items[1].foo, "foo");
+        },
+        data: [
+            { id: 1, foo: "foo" },
+            { id: 2, foo: "foo" }
+        ]
+    });
+
+    dataSource.read();
+
+    dataSource.pushDestroy([
+        { id: 1 },
+        { id: 2 }
+    ]);
 });
 
 test("pushDestroy removes an existing from the pristine collection", function() {
