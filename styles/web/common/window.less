@@ -1,0 +1,159 @@
+/* Window */
+
+@window-titlebar-size: 2em;
+
+div.k-window
+{
+    display: inline-block;
+    position: absolute;
+    z-index: 10001;
+    border-style: solid;
+    border-width: 1px;
+    padding-top: @window-titlebar-size;
+}
+
+.k-block > .k-header,
+.k-window-titlebar
+{
+    position: absolute;
+    width: 100%;
+    height: 1.1em;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    margin-top: -@window-titlebar-size;
+    padding: .4em 0;
+    font-size: 1.2em;
+    white-space: nowrap;
+    min-height: 16px; /* icon size */
+}
+
+.k-block > .k-header
+{
+    position: relative;
+    margin: -2px 0 10px -2px;
+    padding: .3em 2px;
+}
+
+.k-window-title
+{
+    position: absolute;
+    left: .44em;
+    right: .44em;
+    overflow: hidden;
+    cursor: default;
+    text-overflow: ellipsis;
+}
+
+.k-window-title .k-image
+{
+    margin: 0 5px 0 0;
+    vertical-align: middle;
+}
+
+div.k-window-titleless
+{
+    padding-top: 0;
+}
+
+div.k-window-content
+{
+    position: relative;
+    height: 100%;
+    padding: .58em;
+    overflow: auto;
+    outline: 0;
+}
+
+div.k-window-iframecontent
+{
+    padding: 0;
+    overflow: visible;
+}
+
+.k-window-content > .km-scroll-container
+{
+    height:100%;
+}
+
+/* Compensate for content padding in IE7 */
+.k-ie7 .k-window { padding-bottom: 1.16em; }
+
+.k-window-titlebar .k-window-actions
+{
+    position: absolute;
+    top: 0;
+    right: .3em;
+    padding-top: .3em;
+    white-space: nowrap;
+}
+
+.k-window-titlebar .k-window-action
+{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    text-decoration: none;
+    vertical-align: middle;
+    opacity: .7;
+}
+
+.k-window-titlebar .k-state-hover
+{
+    border-style: solid;
+    border-width: 1px;
+    padding:1px;
+    opacity: 1;
+}
+
+.k-window-action .k-icon
+{
+    margin: 0;
+    vertical-align: top;
+}
+
+.k-window .k-resize-handle
+{
+    position: absolute;
+    z-index: 1;
+    background-color: #fff;
+    font-size: 0;
+    line-height: 6px;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    zoom: 1;
+}
+
+.k-resize-n { top: -3px; left: 0; width: 100%; height: 6px; cursor: n-resize; }
+.k-resize-e { top: 0; right: -3px; width: 6px; height: 100%; cursor: e-resize; }
+.k-resize-s { bottom: -3px; left: 0; width: 100%; height: 6px; cursor: s-resize; }
+.k-resize-w { top: 0; left: -3px; width: 6px; height: 100%; cursor: w-resize; }
+.k-resize-se { bottom: -3px; right: -3px; width: 16px; height: 16px; cursor: se-resize; }
+.k-resize-sw { bottom: -3px; left: -3px; width: 6px; height: 6px; cursor: sw-resize; }
+.k-resize-ne { top: -3px; right: -3px; width: 6px; height: 6px; cursor: ne-resize; }
+.k-resize-nw { top: -3px; left: -3px; width: 6px; height: 6px; cursor: nw-resize; }
+
+.k-overlay
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+.k-window .k-overlay
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+

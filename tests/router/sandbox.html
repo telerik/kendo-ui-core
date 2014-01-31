@@ -1,0 +1,10 @@
+<html><head>
+    <script>
+        var jQuerySrc = window.parent.document.querySelector('script[src*=jquery]').src;
+        document.write('<script src="' + jQuerySrc + '"></scr' + 'ipt>');
+        var kendoScripts = window.parent.document.querySelectorAll('script[src*=kendo]');
+        for (var i = 0; i < kendoScripts.length; i ++) {
+            document.write('<script src="' + kendoScripts[i].src + '"></scr' + 'ipt>');
+        }
+    </script>
+</head><body></body></html>

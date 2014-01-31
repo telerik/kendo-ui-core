@@ -1,0 +1,142 @@
+/* TabStrip */
+
+.k-tabstrip
+{
+    margin: 0;
+    padding: 0;
+    zoom: 1;
+}
+
+.k-tabstrip .k-tabstrip-items
+{
+    padding: 0.3em 0.3em 0;
+}
+
+.k-tabstrip-items .k-item,
+.k-panelbar .k-tabstrip-items .k-item
+{
+    list-style-type: none;
+    display: inline-block;
+    position: relative;
+    border-style: solid;
+    border-width: 1px 1px 0;
+    margin: 0 -1px 0 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+.k-tabstrip-items .k-tab-on-top,
+.k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-items .k-state-active
+{
+    margin-bottom: -1px;
+    padding-bottom: 1px;
+}
+
+.k-tabstrip-items .k-tab-on-top
+{
+    z-index: 1;
+}
+
+.k-tabstrip-items .k-link,
+.k-panelbar .k-tabstrip-items .k-link
+{
+    display: inline-block;
+    border-bottom-width: 0;
+    padding: .5em .92em;
+}
+
+.k-tabstrip-items .k-icon,
+.k-panelbar .k-tabstrip-items .k-icon
+{
+    margin: -1px 4px 0 -3px;
+    vertical-align: top;
+}
+
+.k-tabstrip-items .k-item .k-image,
+.k-tabstrip-items .k-item .k-sprite,
+.k-panelbar .k-tabstrip-items .k-item .k-image,
+.k-panelbar .k-tabstrip-items .k-item .k-sprite
+{
+    margin: -3px 3px 0 -6px;
+    vertical-align: middle;
+}
+
+.k-ie7 .k-tabstrip-items .k-item .k-image,
+.k-ie7 .k-tabstrip-items .k-item .k-sprite
+{
+    margin-top: -1px;
+    vertical-align: top;
+}
+
+/* TabStrip Loading Progress */
+.k-tabstrip-items .k-loading
+{
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 20%;
+    position: absolute;
+    background: transparent;
+    border-top: 1px solid transparent;
+    border-color: inherit;
+    .transition("width 200ms linear");
+    .animation(k-tab-loader 1s ease-in-out infinite);
+}
+
+.k-tabstrip-items .k-progress
+{
+    .animation(none);
+}
+
+.k-tabstrip-items .k-loading.k-complete
+{
+    width: 100%;
+    .animation(none);
+}
+
+.k-tabstrip > .k-content,
+.k-panelbar .k-tabstrip > .k-content
+{
+    position: static;
+    border-style: solid;
+    border-width: 1px;
+    margin: 0 .29em .3em;
+    padding: .3em .92em;
+    zoom: 1;
+}
+
+.k-tabstrip > .k-content
+{
+    display: none;
+}
+
+.k-tabstrip > .k-content.km-scroll-wrapper
+{
+    padding: 0;
+}
+
+.k-tabstrip > .k-content > .km-scroll-container
+{
+    padding: .3em .92em;
+}
+
+@-webkit-keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
+}
+
+@-moz-keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
+}
+
+@keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
+}
+
+

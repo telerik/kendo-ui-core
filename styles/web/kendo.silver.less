@@ -1,0 +1,174 @@
+@image-folder: "Silver";
+@texture: none;
+@tooltip-texture: url('textures/highlight.png');
+@fallback-texture: url('textures/highlight.png');
+
+/* Widget Base Styles */
+@widget-text-color: #515967;
+@widget-gradient: "rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 100%";
+@widget-background-color: #ffffff;
+@widget-border-color: #dbdbde;
+@widget-shadow: none;
+
+/* Selects, Dropdowns */
+@select-background-color: @header-background-color;
+@select-border-color: @hover-border-color;
+@select-hover-background-color: @hover-background-color;
+@select-group-background-color: @select-background-color;
+
+/* Inputs */
+@input-text-color: @widget-text-color;
+@input-background-color: #fff;
+
+/* Links */
+@link-text-color: @widget-text-color;
+
+/* Headers */
+@header-text-color: @widget-text-color;
+@header-background-color: #f3f3f4;
+
+/* Buttons */
+@button-text-color: @widget-text-color;
+@button-background-color: @header-background-color;
+
+/* Group Base Styles */
+@group-background-color: @widget-background-color;
+@group-border-color: @widget-border-color;
+
+/* Content */
+@content-background-color: @widget-background-color;
+
+
+/* Widget States */
+
+/* Hover State */
+@hover-text-color: #263248;
+@hover-gradient: "rgba(255,255,255,.3) 0%, rgba(255,255,255,0) 100%";
+@hover-background-color: #b6bdca;
+@hover-border-color: @hover-background-color;
+@hover-shadow: none;
+
+/* Selected State */
+@selected-text-color: #fff;
+@selected-gradient: "rgba(255,255,255,0) 0%, rgba(255,255,255,.2) 100%";
+@selected-background-color: #1984c8;
+@selected-border-color: @selected-background-color;
+@selected-shadow: none;
+
+/*Focused State*/
+@focused-border-color: @hover-border-color;
+@focused-shadow: 0 0 3px 0 @shadow-color;
+@focused-item-shadow: inset 0 0 6px 0 @hover-border-color;
+@focused-active-item-shadow: inset 0 0 15px 5px darken(@selected-border-color, 8%);
+
+/* Active State */
+@active-text-color: @widget-text-color;
+@active-gradient:  none;
+@active-background-color: #fff;
+@active-border-color: #a6afbe;
+@active-shadow: none;
+
+/* Error State */
+@error-text-color: #f00;
+@error-background-color: #fff;
+@error-border-color: #f00;
+
+/* Disabled State */
+@disabled-text-color: #b3bac7;
+
+/* ToolTip */
+@tooltip-text-color: #fff;
+@tooltip-background-color: @selected-border-color;
+@tooltip-border-color: @selected-border-color;
+
+/* Validation Message */
+@validation-text-color: #263248;
+@validation-background-color: #fff4c9;
+@validation-border-color: #ffe79e;
+
+/* Splitter */
+@splitbar-background-color: @header-background-color;
+
+/* Slider */
+@draghandle-border-radius: 7px;
+@draghandle-border-color: @widget-border-color;
+@draghandle-background-color: @widget-background-color;
+@draghandle-shadow: none;
+@draghandle-hover-border-color: @hover-border-color;
+@draghandle-hover-background-color: @hover-background-color;
+@draghandle-hover-shadow: none;
+
+/* Grid */
+@alt-background-color: #f9f9f9;
+@cell-border-color: #dbdbde;
+@column-highlight-background-color: #fbfbfb;
+@active-filter-background-color: @active-background-color;
+
+/* Scheduler */
+@scheduler-background-color: #fff;
+@current-time-color: @error-border-color;
+@event-background-color: #b2e1ff;
+@event-text-color: @widget-text-color;
+@event-inverse-text-color: @scheduler-background-color;
+@scheduler-nonwork-background-color: #f7f7f7;
+@resize-background-color: #0879c1;
+
+/* Upload */
+@upload-progress-background-color: #d0f8ff;
+@upload-progress-text-color: #06c;
+@upload-success-background-color: #ddffd0;
+@upload-success-text-color: #28760b;
+@upload-error-background-color: #ffded7;
+@upload-error-text-color: #c00;
+
+/* Loading Indicators */
+@loading-panel-color: #fff;
+
+/* Shadows */
+@shadow-color: rgba(82, 90, 104, .2);
+@shadow-inset-color: rgba(82, 90, 104, .2);
+
+/* Border Radii */
+@main-border-radius: 4px;
+@list-border-radius: @main-border-radius - 1;
+@inner-border-radius: @main-border-radius - 1;
+@slider-border-radius: 13px;
+
+/* Icons */
+@default-icon-opacity: 0.9;
+
+@calendar-border-radius: 4px;
+@calendar-content-text-color: @widget-text-color;
+@calendar-footer-background: @widget-background-color;
+@calendar-footer-text-decoration: none;
+@calendar-footer-hover-text-decoration: underline;
+@calendar-footer-hover-background: @widget-background-color;
+@calendar-header-hover-text-decoration: none;
+@calendar-header-hover-background: @hover-background-color;
+@calendar-footer-active-background: @widget-background-color; 
+@calendar-group-background-color: @group-background-color; 
+@button-border-color: @widget-border-color;
+@menu-border-color: @widget-border-color;
+@tabstrip-items-border: @widget-border-color;
+@tabstrip-active-background: @active-background-color;
+@tabstrip-tabs-color: @widget-text-color;
+@form-widget-color: @widget-text-color;
+@drop-down-border-color: @widget-border-color;
+@drop-down-hover-border-color: @hover-border-color;
+@drop-down-focused-border-color: @focused-border-color;
+@drop-down-background: #f3f3f4;
+@drop-down-text-color: @widget-text-color;
+@secondary-border-color: @widget-border-color;
+@secondary-text-color: @widget-text-color;
+@numeric-selected-background: @selected-background-color; 
+@panelbar-items-border: @widget-border-color;
+@panelbar-content-background: @content-background-color;
+@panelbar-content-color: @widget-text-color;
+@window-shadow-style: 0 0 6px 0;
+@filter-menu-content-background: @content-background-color;
+@icon-background-color: transparent;
+@disabled-background-color: @button-background-color;
+@disabled-border-color: @widget-border-color;
+@disabled-gradient: @widget-gradient;
+
+@import "theme-template.less";

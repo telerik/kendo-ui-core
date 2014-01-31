@@ -1,0 +1,180 @@
+/* Menu */
+
+.k-menu
+{
+    cursor: default;
+}
+
+.k-menu,
+.k-menu .k-group
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    zoom: 1;
+}
+
+.k-menu:after /* clear fix to expand content */
+{
+    content: '';
+    display: block;
+    width: 99%;
+    height: 0;
+    float: inherit;
+    overflow: hidden;
+}
+
+.k-menu .k-item .k-item,
+ul.k-menu-vertical > .k-item
+{
+    display: block;
+    float: none;
+    border-width: 0;
+}
+
+.k-ie7 .k-menu .k-item .k-item
+{
+    zoom: normal;
+}
+
+.k-menu .k-item > .k-link > .k-icon,
+.k-menu .k-image,
+.k-menu .k-sprite
+{
+    margin: -2px 4px 0 -4px;
+    vertical-align: middle;
+}
+
+.k-menu .k-item > .k-link > .k-icon
+{
+    margin: -2px 0 0;
+}
+
+.k-ie7 .k-menu .k-item > .k-link > .k-i-arrow-s,
+.k-ie7 .k-menu .k-image,
+.k-ie7 .k-menu .k-sprite { margin-top: 0; }
+
+.k-menu .k-item > .k-link
+{
+    display: block;
+    padding: @menu-link-padding;
+    line-height: 1.34em;
+    .prohibit-selection;
+}
+
+.k-menu .k-group
+{
+    display: none;
+    border-style: solid;
+    border-width: 1px;
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.k-menu .k-group .k-item
+{
+    display: block;
+    border-width: 0;
+}
+
+.k-menu .k-item,
+.k-widget.k-menu-horizontal > .k-item
+{
+    position: relative;
+    float: left;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+    vertical-align: top;
+    zoom: 1;
+    .box-sizing(content-box);
+}
+
+.k-menu .k-group .k-item > .k-link
+{
+    padding: .28em 1.8em .38em .9em;
+}
+
+.k-ie7 .k-menu .k-group .k-link
+{
+    width: 100%;
+}
+
+.k-menu .k-item > .k-link > .k-i-arrow-s
+{
+    margin-right: -8px;
+}
+
+.k-menu .k-item > .k-link > .k-i-arrow-e
+{
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    right: .2rem;
+}
+
+.k-menu .k-animation-container
+{
+    border: 0;
+}
+
+.k-menu .k-animation-container,
+.k-menu .k-group
+{
+    position: absolute;
+    left: 0;
+}
+
+.k-menu .k-animation-container .k-animation-container,
+.k-menu .k-group .k-group,
+.k-menu-vertical .k-animation-container,
+.k-menu-vertical .k-group
+{
+    top: 0;
+    left: 0;
+}
+
+.k-menu .k-animation-container .k-group
+{
+    top: auto;
+    left: auto;
+    margin-left: -1px;
+}
+
+.k-menu .k-animation-container,
+.k-popup .k-animation-container
+{
+    margin-top: -1px;
+    padding-left: 1px;
+}
+
+.k-ie .k-menu .k-animation-container,
+.k-ie .k-popup .k-animation-container
+{
+    margin-top: -2px;
+}
+
+.k-popup .k-animation-container .k-popup
+{
+    margin-left: -1px;
+}
+
+ul.k-menu .k-separator
+{
+    padding: 0.25em 0;
+    height: 100%;
+    width: 1px;
+    font-size: 0;
+    line-height: 0;
+    border-width: 0 1px 0 0;
+}
+
+ul.k-menu-vertical .k-separator,
+.k-menu .k-group .k-separator
+{
+    padding: 0;
+    height: 1px;
+    width: 100%;
+    border-width: 1px 0 0;
+}
+
+

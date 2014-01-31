@@ -1,0 +1,642 @@
+/* Kendo base CSS */
+
+.fake{color:red;}
+
+.k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
+
+.k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after{content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
+.k-floatwrap,.k-slider-items,.k-grid-toolbar{display:inline-block;}
+.k-floatwrap,.k-slider-items,.k-grid-toolbar{display:block;}
+
+/* main gradient */
+
+.k-block,
+.k-button,
+.k-header,
+.k-grid-header,
+.k-toolbar,
+.k-grouping-header,
+.k-tooltip,
+.k-pager-wrap,
+.k-tabstrip-items .k-item,
+.k-link.k-state-hover,
+.k-textbox,
+.k-textbox:hover,
+.k-autocomplete,
+.k-dropdown-wrap,
+.k-picker-wrap,
+.k-numeric-wrap,
+.k-autocomplete.k-state-hover,
+.k-dropdown-wrap.k-state-hover,
+.k-picker-wrap.k-state-hover,
+.k-numeric-wrap.k-state-hover,
+.k-draghandle
+{
+    background-repeat: repeat;
+    background-position: 0 center;
+}
+
+.k-link:hover
+{
+    text-decoration: none;
+}
+
+.k-state-highlight > .k-link
+{
+    color: inherit;
+}
+
+/* widget */
+
+.k-textbox > input,
+.k-input[type="text"],
+.k-input[type="number"],
+.k-textbox,
+.k-picker-wrap .k-input,
+.k-button
+{
+    font-size: 100%;
+    font-family: inherit;
+    border-style: solid;
+    border-width: 1px;
+    -webkit-appearance: none;
+}
+
+.k-widget,
+.k-block,
+.k-inline-block,
+.k-draghandle
+{
+    border-style: solid;
+    border-width: 1px;
+    -webkit-appearance: none;
+}
+
+.k-block,
+.k-widget
+{
+    line-height: normal;
+    outline: 0;
+}
+
+/* Block */
+
+.k-block
+{
+    padding: 2px;
+}
+
+/* button */
+
+.k-button
+{
+    display: inline-block;
+    margin: 0;
+    padding: @button-padding;
+    font-family: inherit;
+    line-height: 1.66em;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.k-ie7 .k-button { line-height: normal; }
+
+a.k-button
+{
+    .prohibit-selection;
+    text-decoration: none;
+}
+
+/* Override the important default line-height in Firefox 4+ */
+.k-ff input.k-button {
+    padding-bottom: 0.37em;
+    padding-top: 0.37em;
+}
+
+.k-ie7 .k-button { overflow: visible; margin-right: 4px; }
+.k-ie7 a.k-button { line-height: 1.6; padding-left: 7px; padding-right: 7px;/*+1*/ }
+.k-ie7 .k-slider a.k-button { height: 22px; line-height: 22px; padding: 0; }
+.k-ie7 .k-button-expand { margin-left: 0; margin-right: 0; }
+
+button.k-button::-moz-focus-inner,
+input.k-button::-moz-focus-inner
+{
+    padding: 0;
+    border: 0;
+}
+
+a.k-button-expand
+{
+    display: block;
+}
+
+button.k-button-expand,
+input[type="submit"].k-button-expand,
+input[type="button"].k-button-expand,
+input[type="reset"].k-button-expand
+{
+    width: 100%;
+}
+
+body .k-button-icon
+{
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.k-ie7 a.k-button-icon { padding-left: 5px; padding-right: 5px;/*+1*/ }
+
+.k-button-icontext
+{
+    padding-right: 8px;
+    overflow: visible; /*IE9*/
+}
+
+.k-button-icontext .k-icon,
+.k-button-icontext .k-image
+{
+    margin-right: .2rem;
+    margin-left: -.2rem;
+    vertical-align: text-top;
+}
+
+.k-ie8 .k-button-icontext .k-icon,
+.k-ie8 .k-button-icontext .k-image
+{
+    margin-right: 3px;
+    margin-left: -3px;
+	vertical-align: text-top;
+}
+
+html body .k-button-bare
+{
+    background: none !important; /*spares long selectors*/
+    color: inherit;
+    border-width: 0;
+}
+
+html body .k-button-bare.k-upload-button:hover
+{
+    color: inherit;
+}
+
+/* link */
+
+.k-link
+{
+    cursor: pointer;
+    outline: 0;
+    text-decoration: none;
+}
+
+.k-grid-header span.k-link
+{
+    cursor: default;
+}
+
+/* states */
+
+.k-state-disabled,
+.k-state-disabled .k-link,
+.k-state-disabled .k-icon,
+.k-state-disabled .k-button,
+.k-state-disabled .k-draghandle,
+.k-state-disabled .k-upload-button input
+{
+    cursor: default !important;
+    outline: 0;
+}
+
+@media print {
+    .k-state-disabled,
+    .k-state-disabled .k-input
+    {
+        opacity:1 !important;
+    }
+}
+
+.k-state-error
+{
+    border-style: ridge;
+}
+
+.k-state-empty
+{
+    font-style: italic;
+}
+
+/* icons */
+
+@grid-size: 16px;
+
+// outputs background-position
+.sprite-position(@row, @column) when (ispixel(@column)) {
+    background-position: @row @column;
+}
+
+// outputs background-position in a grid
+.sprite-position(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
+    background-position: (-@row * @size) (-@column * @size);
+}
+
+// outputs background-position and hover state background position
+.sprite-hoverable(@row, @column, @size: @grid-size) when (ispixel(@column)) {
+    .sprite-position(@row, @column);
+
+    .k-link:not(.k-state-disabled):hover > &,
+    .k-state-hover > &,
+    .k-state-hover > * > &,
+    .k-button:hover &,
+    .k-textbox:hover &,
+    .k-button:active & {
+        .sprite-position(@row - @size, @column);
+    }
+}
+
+// outputs background-position and hover state background position
+.sprite-hoverable-rtl(@row, @column, @size: @grid-size) when (ispixel(@column)) {
+
+    .k-rtl & {
+        .sprite-position(@row, @column);
+    }
+
+    .k-rtl .k-link:not(.k-state-disabled):hover > &,
+    .k-rtl .k-state-hover > &,
+    .k-rtl .k-state-hover > * > &,
+    .k-rtl .k-button:hover &,
+    .k-rtl .k-textbox:hover &,
+    .k-rtl .k-button:active & {
+        .sprite-position(@row - @size, @column);
+    }
+}
+
+// outputs background-position and hover state background position, aligned in a grid
+.sprite-hoverable(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
+    .sprite-position(@row, @column, @size);
+
+    .k-link:not(.k-state-disabled):hover > &,
+    .k-state-hover > &,
+    .k-state-hover > * > &,
+    .k-button:hover &,
+    .k-textbox:hover &,
+    .k-button:active & {
+        .sprite-position(@row + 1, @column, @size);
+    }
+}
+
+// outputs background-position and hover state background position, aligned in a grid
+.sprite-hoverable-rtl(@row, @column, @size: @grid-size) when not (ispixel(@column)) {
+    .k-rtl & {
+        .sprite-position(@row, @column, @size);
+    }
+
+    .k-rtl .k-link:not(.k-state-disabled):hover > &,
+    .k-rtl .k-state-hover > &,
+    .k-rtl .k-state-hover > * > &,
+    .k-rtl .k-button:hover &,
+    .k-rtl .k-textbox:hover &,
+    .k-rtl .k-button:active & {
+        .sprite-position(@row + 1, @column, @size);
+    }
+}
+
+.k-icon,
+.k-sprite,
+.k-button-group .k-tool-icon
+{
+    display: inline-block;
+    width: @grid-size;
+    height: @grid-size;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    font-size: 0;
+    line-height: 0;
+    text-align: center;
+    .disable-high-contrast();
+}
+
+/* In IE7 vertical align: middle can't be overridden */
+.k-ie8 .k-icon,
+.k-ie8 .k-sprite,
+.k-ie8 .k-button-group .k-tool-icon
+{
+    vertical-align: middle;
+}
+
+:root *> .k-icon,
+:root *> .k-sprite,
+:root *> .k-button-group .k-tool-icon
+{
+    vertical-align: middle;
+}
+
+.k-icon,
+.k-sprite
+{
+    background-color: transparent;
+}
+.k-ie7 .k-icon, .k-ie7 .k-sprite { text-indent: 0; }
+
+.k-numerictextbox .k-select .k-link span.k-i-arrow-n  { background-position: 0 -3px; }
+.k-numerictextbox .k-select .k-link span.k-i-arrow-s { background-position: 0 -35px; }
+.k-state-selected .k-i-arrow-n { .sprite-hoverable(1, 0); }
+.k-numerictextbox .k-link.k-state-selected span.k-i-arrow-n, .k-numerictextbox .k-state-hover .k-link span.k-i-arrow-n  { background-position: -16px -3px; }
+.k-state-selected .k-i-arrow-s { .sprite-hoverable(1, 2); }
+.k-numerictextbox .k-link.k-state-selected span.k-i-arrow-s, .k-numerictextbox .k-state-hover .k-link span.k-i-arrow-s { background-position: -16px -35px; }
+
+// Remove sorting arrows hover state in grid headers
+.k-grid-header .k-link:hover span.k-i-arrow-n { .sprite-position(0, 0) }
+.k-grid-header .k-link:hover span.k-i-arrow-s { .sprite-position(0, 2) }
+.k-group-indicator .k-link:hover span.k-si-arrow-n { .sprite-position(0, -129px) }
+.k-group-indicator .k-link:hover span.k-si-arrow-s { .sprite-position(0, -159px) }
+.k-group-indicator .k-button:hover span.k-group-delete { .sprite-position(2, 1) }
+.k-scheduler .k-scheduler-toolbar .k-nav-current .k-link .k-i-calendar { .sprite-position(2, 11); }
+
+.k-i-arrow-n { .sprite-hoverable(0, 0); }
+.k-i-arrow-e { .sprite-hoverable(0, 1); }
+.k-i-arrow-w { .sprite-hoverable-rtl(0, 1); }
+.k-i-arrow-s { .sprite-hoverable(0, 2); }
+.k-i-arrow-w { .sprite-hoverable(0, 3); }
+.k-i-arrow-e { .sprite-hoverable-rtl(0, 3); }
+
+.k-i-seek-n { .sprite-hoverable(0, 4); }
+.k-i-seek-e { .sprite-hoverable(0, 5); }
+.k-i-seek-w { .sprite-hoverable-rtl(0, 5); }
+.k-i-seek-s { .sprite-hoverable(0, 6); }
+.k-i-seek-w { .sprite-hoverable(0, 7); }
+.k-i-seek-e { .sprite-hoverable-rtl(0, 7); }
+
+.k-si-arrow-n { .sprite-hoverable(0, -129px); }
+.k-si-arrow-e { .sprite-hoverable(0, 9); }
+.k-si-arrow-s { .sprite-hoverable(0, -159px); }
+.k-si-arrow-w { .sprite-hoverable(0, 11); }
+
+.k-i-arrowhead-n { .sprite-hoverable(0, 16); }
+.k-i-arrowhead-e { .sprite-hoverable(0, 17); }
+.k-i-arrowhead-s { .sprite-hoverable(0, 18); }
+.k-i-arrowhead-w { .sprite-hoverable(0, 19); }
+
+.k-i-expand, .k-plus, .k-plus-disabled { .sprite-hoverable(0, 12); }
+.k-i-expand-w, .k-rtl .k-i-expand, .k-rtl .k-plus, .k-rtl .k-plus-disabled { .sprite-hoverable(0, 13); }
+.k-i-collapse, .k-minus, .k-minus-disabled { .sprite-hoverable(0, 14); }
+.k-i-collapse-w, .k-rtl .k-i-collapse, .k-rtl .k-minus, .k-rtl .k-minus-disabled { .sprite-hoverable(0, 15); }
+
+.k-i-pencil, .k-edit { .sprite-hoverable(2, 0); }
+.k-i-close, .k-delete, .k-group-delete { .sprite-hoverable(2, 1); }
+.k-si-close { .sprite-hoverable(10, 5); }
+.k-multiselect .k-delete { .sprite-position(10, 5); }
+.k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5); }
+
+.k-i-tick, .k-insert, .k-update{ .sprite-hoverable(2, 2); }
+.k-check:checked,
+.k-mobile-list .k-edit-field [type=checkbox],
+.k-mobile-list .k-edit-field [type=radio] { .sprite-hoverable(2, 2); }
+
+.k-i-cancel, .k-cancel, .k-denied { .sprite-hoverable(2, 3); }
+.k-i-plus, .k-add { .sprite-hoverable(2, 4); }
+.k-i-funnel, .k-filter { .sprite-hoverable(2, 5); }
+.k-i-funnel-clear, .k-clear-filter { .sprite-hoverable(2, 6); }
+
+.k-i-refresh { .sprite-hoverable(2, 7); }
+.k-i-exception { .sprite-hoverable(10, 19); }
+.k-i-restore { .sprite-hoverable(2, 8); }
+.k-i-maximize { .sprite-hoverable(2, 9); }
+.k-i-minimize { .sprite-hoverable(4, 18); }
+.k-i-pin { .sprite-hoverable(10, 16); }
+.k-i-unpin { .sprite-hoverable(10, 17); }
+.k-resize-se { .sprite-hoverable(2, 10); }
+
+.k-i-calendar { .sprite-hoverable(2, 11); }
+.k-i-clock { .sprite-hoverable(2, 12); }
+.k-si-plus { .sprite-hoverable(2, 13); }
+.k-si-minus { .sprite-hoverable(2, 14); }
+
+.k-i-search { .sprite-hoverable(2, 15); }
+.k-i-custom { .sprite-hoverable(-115px, -113px, 26); }
+.k-editor .k-i-custom { background-position: -111px -109px; }
+.k-viewHtml { background-position: -288px -120px; }
+
+.k-i-insert-n, .k-insert-top { .sprite-hoverable(10, 2); }
+.k-i-insert-m, .k-insert-middle { .sprite-hoverable(10, 3); }
+.k-i-insert-s, .k-insert-bottom { .sprite-hoverable(10, 4); }
+.k-drop-hint { background-position: 0 -326px; }
+
+.k-i-note, .k-warning { .sprite-hoverable(10, 15); }
+
+.k-i-sort-asc { .sprite-hoverable(7, 15); }
+.k-i-sort-desc { .sprite-hoverable(7, 16); }
+.k-i-group { .sprite-hoverable(7, 17); }
+.k-i-ungroup { .sprite-hoverable(7, 18); }
+.k-i-columns { .sprite-hoverable(7, 19); }
+
+.k-file { .sprite-hoverable(0, 0); }
+.k-i-folder-add, .k-addfolder { .sprite-hoverable(2, 17); }
+.k-i-folder-up, .k-goup { .sprite-hoverable(2, 18); }
+
+.k-file > .k-icon
+{
+    background-position:-115px -91px;
+}
+
+.k-image
+{
+    border: 0;
+}
+
+/* Colors */
+
+html .k-success-colored
+{
+    color: #507f50;
+    border-color: #d0dfd0;
+    background-color: #f0fff0;
+}
+
+html .k-info-colored
+{
+    color: #50607f;
+    border-color: #d0d9df;
+    background-color: #f0f9ff;
+}
+
+html .k-error-colored
+{
+    color: #7f5050;
+    border-color: #dfd0d0;
+    background-color: #fff0f0;
+}
+
+.k-inline-block
+{
+    padding: 0 2px;
+}
+
+/* loading */
+
+.k-loading,
+.k-loading-image
+{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.k-loading-mask,
+.k-loading-image,
+.k-loading-text
+{
+    position: absolute;
+}
+
+.k-loading-text
+{
+    text-indent: -4000px;
+    text-align: center; /*rtl*/
+}
+
+.k-loading-image,
+.k-loading-color
+{
+    width: 100%;
+    height: 100%;
+}
+
+.k-loading-image
+{
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.k-loading-color
+{
+    filter: alpha(opacity=30);
+    opacity: .3;
+}
+
+.k-content-frame {
+    border: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.k-pane > .k-splitter-overlay {
+    filter: alpha(opacity=0);
+    opacity: 0;
+    position: absolute;
+}
+
+/* drag n drop */
+
+.k-drag-clue
+{
+    position: absolute;
+    z-index: 10003;
+    border-style: solid;
+    border-width: 1px;
+    font-size: .9em;
+    padding: .2em .4em;
+    white-space: nowrap;
+    cursor: default;
+}
+
+.k-drag-status
+{
+    margin-top: -3px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.k-reorder-cue
+{
+    position: absolute;
+    width: 1px;
+    overflow: visible;
+}
+
+.k-reorder-cue .k-icon
+{
+    position: absolute;
+    left: -4px;
+    width: 8px;
+    height: 4px;
+}
+
+.k-reorder-cue .k-i-arrow-s { top: -4px; background-position: -4px -166px; }
+.k-reorder-cue .k-i-arrow-n { bottom: -4px; background-position: -4px -134px; }
+
+/* virtual scrollbar */
+
+.k-scrollbar
+{
+    position: absolute;
+    overflow: scroll;
+}
+
+.k-scrollbar-vertical
+{
+    top: 0;
+    right: 0;
+    width: 17px; /* scrollbar width */
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.k-touch-scrollbar
+{
+    display: none;
+    position: absolute;
+    z-index: 200000;
+    height: 8px;
+    width: 8px;
+    border: 1px solid #8a8a8a;
+    background-color: #858585;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    body .k-touch-scrollbar
+    {
+        height: 12px;
+        width: 12px;
+        .border-radius(7px);
+    }
+}
+
+.k-virtual-scrollable-wrap
+{
+    overflow-x:auto; /*needed by IE8*/
+}
+
+/* override box sizing for grid layout framework integration (Bootstrap 3, Foundation 4) */
+
+.k-animation-container,
+.k-widget,
+.k-widget *,
+.k-animation-container *,
+.k-widget *:before,
+.k-animation-container *:after,
+.k-block .k-header
+{
+    .box-sizing(content-box);
+}
+
+.k-button,
+.k-textbox,
+.k-autocomplete,
+div.k-window-content,
+.k-tabstrip > .k-content > .km-scroll-container,
+.k-block,
+.k-edit-cell .k-widget,
+.k-grid-edit-row .k-widget,
+.k-grid-edit-row .text-box,
+.km-actionsheet > li,
+.km-shim
+{
+    .box-sizing(border-box);
+}
+
+/* Fix for Bootstrap 3 */
+.input-group .form-control
+{
+	.box-sizing(border-box);
+}
