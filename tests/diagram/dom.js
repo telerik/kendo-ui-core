@@ -181,8 +181,8 @@
 
     test("grid layout", function () {
         var diagramFn = kendo.ui.Diagram.prototype;
-        debugger;
         diagramFn.layout = diagramFn.layout.mock();
+
         window.initLayoutDiagram({
             grid: {
                 width: 600
@@ -190,7 +190,7 @@
         });
 
         equal(kdiagram.options.layout.grid.width, 600, "grid width option should be stored");
-        ok(diagramFn.layout.called);
+        ok(diagramFn.layout.called, "the layout method of the diagram should be called");
     });
 
     QUnit.module("event handling", {
