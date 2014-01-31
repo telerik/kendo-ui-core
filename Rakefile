@@ -369,7 +369,7 @@ bundle :name => 'aspnetmvc.commercial',
            ],
            :template_dir => 'mvc'
        },
-       :product => 'Telerik UI for ASP.NET MVC',
+       :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => false,
        :contents => {
             'js' => MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
@@ -415,7 +415,7 @@ bundle :name => 'aspnetmvc.internal.commercial',
        },
        :type_script => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
-       :product => 'Telerik UI for ASP.NET MVC',
+       :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => true,
        :contents => {
             'js' => MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
@@ -456,7 +456,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
        },
        :type_script => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
-       :product => 'Telerik UI for ASP.NET MVC',
+       :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => true,
        :vs_extension => true,
        :contents => {
@@ -503,7 +503,7 @@ bundle :name => 'icenium',
             'js' => ICENIUM_MIN_JS + JQUERY_MAP
        }
 
-# Telerik UI for JSP
+# UI for JSP
 bundle :name => 'jsp.trial',
        :license => 'src-license-complete',
        :eula => 'jsp',
@@ -525,7 +525,7 @@ bundle :name => 'jsp.commercial',
        :license => 'src-license-complete',
        :eula => 'jsp',
        :changelog => %w(web mobile dataviz framework jsp),
-       :product => 'Telerik UI for JSP',
+       :product => 'UI for JSP',
        :upload_as_internal_build => true,
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :contents => {
@@ -541,7 +541,7 @@ bundle :name => 'jsp.commercial',
            "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml",
            "dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml"
        ]
-# Telerik UI for PHP
+# UI for PHP
 bundle :name => 'php.trial',
        :license => 'src-license-complete',
        :eula => 'php',
@@ -561,7 +561,7 @@ bundle :name => 'php.commercial',
        :license => 'src-license-complete',
        :eula => 'php',
        :changelog => %w(web mobile dataviz framework php),
-       :product => 'Telerik UI for PHP',
+       :product => 'UI for PHP',
        :upload_as_internal_build => true,
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :contents => {
