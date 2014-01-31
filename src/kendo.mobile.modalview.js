@@ -49,6 +49,10 @@ var __meta__ = {
                 className: "km-modalview-root"
             });
 
+            if (kendo.support.mobileOS.wp) {
+                that.shim.shim.on("click", false);
+            }
+
             that._layout();
             that._scroller();
             that._model();
