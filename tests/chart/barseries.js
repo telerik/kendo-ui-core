@@ -165,14 +165,14 @@
         });
 
         test("sets bar aboveAxis", function() {
-            equal(series.points[0].options.aboveAxis, true);
+            equal(series.points[0].aboveAxis, true);
         });
 
         test("sets bar aboveAxis for reversed value axis", function() {
             plotArea.valueAxis.options.reverse = true;
 
             setupBarChart(plotArea, { series: [ positiveSeries ] });
-            equal(series.points[0].options.aboveAxis, false);
+            equal(series.points[0].aboveAxis, false);
 
             plotArea.valueAxis.options.reverse = false;
         });
@@ -225,14 +225,14 @@
         });
 
         test("sets bar aboveAxis", function() {
-            equal(series.points[0].options.aboveAxis, false);
+            equal(series.points[0].aboveAxis, false);
         });
 
         test("sets bar aboveAxis for reversed value axis", function() {
             plotArea.valueAxis.options.reverse = true;
 
             setupBarChart(plotArea, { series: [ negativeSeries ] });
-            equal(series.points[0].options.aboveAxis, true);
+            equal(series.points[0].aboveAxis, true);
 
             plotArea.valueAxis.options.reverse = false;
         });
@@ -270,6 +270,11 @@
             equal(categoriesCount(series.options.series), positiveSeries.data.length);
         });
 
+        test("aboveAxis is set independently for each bar", function() {
+            equal(series.points[0].aboveAxis, false);
+            equal(series.points[2].aboveAxis, false);
+        });
+
         // ------------------------------------------------------------
         var chart;
         module("Bar Chart / Multiple Category Axes", {
@@ -301,7 +306,7 @@
         });
 
         test("bar is marked as above axis with respect to its category axis", function() {
-            equal(series.points[0].options.aboveAxis, true);
+            equal(series.points[0].aboveAxis, true);
         });
 
         test("bar is rendered from its category axis", function() {
@@ -313,7 +318,7 @@
             chart.refresh();
             series = chart._model._plotArea.charts[0];
 
-            equal(series.points[0].options.aboveAxis, true);
+            equal(series.points[0].aboveAxis, true);
         });
 
         test("axisCrossingValues alias is accepted with precedence", function() {
@@ -321,7 +326,7 @@
             chart.refresh();
             series = chart._model._plotArea.charts[0];
 
-            equal(series.points[0].options.aboveAxis, false);
+            equal(series.points[0].aboveAxis, false);
         });
 
         test("hides the series if the visible is set to false", function() {
@@ -2035,6 +2040,15 @@
 
         test("sets value", function() {
             equal(bar.value, VALUE);
+        });
+
+        test("aboveAxis is true by default", function() {
+            equal(bar.aboveAxis, true);
+        });
+
+        test("aboveAxis is set from options", function() {
+            createBar({ aboveAxis: false });
+            equal(bar.aboveAxis, false);
         });
 
         test("fills target box", function() {

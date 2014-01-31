@@ -252,7 +252,7 @@
         });
 
         test("line is marked as above axis with respect to its category axis", function() {
-            equal(series.points[0].options.aboveAxis, true);
+            equal(series.points[0].aboveAxis, true);
         });
 
         // ------------------------------------------------------------
