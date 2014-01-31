@@ -1,4 +1,5 @@
 var META = require("./build/kendo-meta.js");
+var TESTS = require("./build/grunt/tests.js");
 var PATH = require("path");
 
 module.exports = function(grunt) {
@@ -6,7 +7,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-debug-task');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
-
     grunt.loadTasks('build/grunt/tasks');
 
     function addSrc(f) {
@@ -30,6 +30,9 @@ module.exports = function(grunt) {
         jquery = "http://code.jquery.com/jquery-" + jqueryOption + ".min.js";
     }
 
+    TESTS.beforeTestFiles.push(jquery);
+    TESTS.beforeTestFiles.push('tests/jquery.mockjax.js');
+
     if (browserOption) {
         browsers = [ browserOption ];
     }
@@ -41,7 +44,9 @@ module.exports = function(grunt) {
     }
 
     var jshint = grunt.file.readJSON('build/grunt/jshint.json');
+
     var files = grunt.option('files');
+
     jshint.files = files ? files.split(",") : jshint.files;
 
     // all files (including subfiles like editor/main.js etc.)
@@ -49,66 +54,6 @@ module.exports = function(grunt) {
 
     // files directly in src/
     var mainKendoFiles = META.listKendoFiles().map(addSrc);
-
-    var beforeTestFiles = [
-        { pattern: 'styles/**/*.*', watched: true, included: false },
-        { pattern: 'tests/router/sandbox.html', watched: true, included: false },
-        { pattern: 'tests/window/blank.html', watched: true, included: false },
-        { pattern: 'tests/editor/editorStyles.css', included: false },
-        { pattern: 'tests/**/*-fixture.html' },
-        { pattern: 'demos/mvc/App_Data/*json', included: false },
-        jquery,
-        'tests/jquery.mockjax.js',
-    ];
-
-    var afterTestFiles = [
-        'src/kendo.timezones.js',
-        'src/cultures/kendo.culture.de-DE.js',
-        'src/cultures/kendo.culture.bg-BG.js',
-        'src/cultures/kendo.culture.en-ZA.js',
-        "src/cultures/kendo.culture.es-ES.js",
-
-        'tests/kendo-test-helpers.js',
-        'tests/**/test-helper.js',
-        'demos/mvc/content/shared/js/less.js',
-        'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
-        'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
-
-        'tests/chart/util.js',
-        'tests/map/util.js',
-        'tests/map/layers/base.js',
-
-        'themebuilder/scripts/themebuilder.js',
-
-        'tests/chart/util.js',
-        'tests/upload/helper.js',
-        'tests/upload/select.js',
-        'tests/upload/selection.js',
-        'tests/upload/async.js',
-        'tests/upload/asyncnomultiple.js',
-        'tests/upload/asyncnoauto.js',
-        'tests/upload/upload.js',
-        'tests/upload/success.js',
-        'tests/upload/error.js',
-        'tests/upload/cancel.js',
-        'tests/upload/remove.js',
-
-        { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
-        { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
-
-        'download-builder/scripts/script-resolver.js',
-        'tests/diagram/common.js',
-
-        'demos/mvc/content/shared/js/trykendo.js',
-        'tests/demos/trykendo.js'
-    ];
-
-    var compiledStyleSheets = [
-        'dist/styles/mobile/kendo.mobile.all.css',
-        'dist/styles/web/kendo.common.css',
-        'dist/styles/dataviz/kendo.dataviz.css',
-        'dist/styles/web/kendo.rtl.css'
-    ];
 
     // Project configuration.
     grunt.initConfig({
@@ -167,10 +112,10 @@ module.exports = function(grunt) {
                     singleRun: true,
 
                     files: [].concat(
-                        compiledStyleSheets,
-                        beforeTestFiles,
+                        TESTS.compiledStyleSheets,
+                        TESTS.beforeTestFiles,
                         [ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js' ],
-                        afterTestFiles,
+                        TESTS.afterTestFiles,
                         tests
                     )
                 }
@@ -178,9 +123,9 @@ module.exports = function(grunt) {
             unit: {
                 options: {
                     files: [].concat(
-                        beforeTestFiles,
+                        TESTS.beforeTestFiles,
                         allKendoFiles,
-                        afterTestFiles,
+                        TESTS.afterTestFiles,
                         tests
                     )
                 }
