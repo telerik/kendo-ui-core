@@ -66,12 +66,6 @@ module.exports = function(grunt) {
                   username: 'petyoivanov',
                   accessKey: 'QBgixFUrxrEQyY2nKVqb'
                 },
-                sauceLabs: {
-                    username: 'petyosi',
-                    accessKey: '2e136bfe-8507-4ac2-b201-1c2f53003669',
-                    startConnect: true,
-                    testName: 'zergling'
-                },
                 customLaunchers: {
                     bs_chrome: {
                         base: 'BrowserStack',
@@ -79,11 +73,6 @@ module.exports = function(grunt) {
                         browser_version: 'latest',
                         os: 'OS X',
                         os_version: 'Mavericks'
-                    },
-                    sl_chrome: {
-                        base: 'SauceLabs',
-                        browserName: 'chrome',
-                        version: '31'
                     }
                 },
                 reportSlowerThan: 500,
