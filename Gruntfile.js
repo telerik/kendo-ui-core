@@ -64,7 +64,7 @@ module.exports = function(grunt) {
             options: {
                 browserStack: {
                   username: 'telerik1',
-                  accessKey: process.env.BROWSER_STACK_ACCESS_KEY
+                  accessKey: process.env.BS_ACCESS_KEY
                 },
                 customLaunchers: {
                     bs_chrome: {
