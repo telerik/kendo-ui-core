@@ -456,7 +456,7 @@ namespace <%= csharp_namespace %>
         private
 
         def write_class(component)
-          file_path = File.join(@path, component.name.pascalize + '.cs')
+          file_path = File.join(@path, component.csharp_class + '.cs')
           return if File.exists?(file_path)
 
           class_content = CLASS_TEMPLATE.result(component.get_binding)
@@ -479,7 +479,7 @@ namespace <%= csharp_namespace %>
         end
 
         def write_properties(component)
-          file_path = File.join(@path, component.name.pascalize + '.cs')
+          file_path = File.join(@path, component.csharp_class + '.cs')
 
           properties_content = write_options(component.options)
 
