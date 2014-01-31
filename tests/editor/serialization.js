@@ -477,16 +477,27 @@ test("encodes CDATA sections as comments", function() {
 });
 
 function serializeCycle(html) {
-    var cycled = Serializer.domToXhtml(Serializer.htmlToDom(html, QUnit.fixture[0]));
-    equal(cycled, html);
+    return Serializer.domToXhtml(Serializer.htmlToDom(html, QUnit.fixture[0]));
+}
+
+function verifyCycle(html) {
+    equal(serializeCycle(html), html);
 }
 
 test("does not convert relative href/src URLs to absolute", function() {
     // valid for IE < 8
-    serializeCycle('<a href="foo">a</a>');
-    serializeCycle('<link href="foo" />');
-    serializeCycle('<img src="foo" />');
-    serializeCycle('<script src="foo"><\/script>');
+    verifyCycle('<a href="foo">a</a>');
+    verifyCycle('<link href="foo" />');
+    verifyCycle('<img src="foo" />');
+    verifyCycle('<script src="foo"><\/script>');
+});
+
+test("removes k-paste-container elements from content", function() {
+    equal(serializeCycle('foo<p class="k-paste-container">bar</p>baz'), "foobaz");
+});
+
+test("removes k-marker elements from content", function() {
+    equal(serializeCycle('f<span class="k-marker"></span>oob<span class="k-marker"></span>az'), "foobaz");
 });
 
 }());

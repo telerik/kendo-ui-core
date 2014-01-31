@@ -38,6 +38,7 @@ var Serializer = {
     },
 
     _fillEmptyElements: function(body) {
+        // fills empty elements to allow them to be focused
         $(body).find("p").each(function() {
             if (/^\s*$/g.test($(this).text())) {
                 var node = this;
@@ -50,6 +51,11 @@ var Serializer = {
                 }
             }
         });
+    },
+
+    _removeSystemElements: function(body) {
+        // removes persisted system elements
+        $(".k-paste-container", body).remove();
     },
 
     _resetOrderedLists: function(body){
@@ -116,6 +122,8 @@ var Serializer = {
         }
 
         Serializer._fillEmptyElements(root);
+
+        Serializer._removeSystemElements(root);
 
         // add k-table class to all tables
         $("table", root).addClass("k-table");
