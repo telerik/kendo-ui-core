@@ -164,7 +164,7 @@
     });
 
     test("get canvas point of mouse event", function () {
-        var offset = $("#canvas").offset();
+        var offset = $(".k-canvas-container").offset();
         var point = kdiagram.documentToCanvasPoint(new Point(200, 200));
 
         ok(point.equals(new Point(200 - offset.left, 200 - offset.top)));
