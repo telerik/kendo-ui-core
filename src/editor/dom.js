@@ -593,7 +593,7 @@ var Dom = {
     getEffectiveBackground: function(element) {
         var backgroundStyle = element.css("background-color");
 
-        if (backgroundStyle.indexOf("rgba(0, 0, 0, 0") < 0) {
+        if (backgroundStyle.indexOf("rgba(0, 0, 0, 0") < 0 && backgroundStyle !== "transparent") {
             return backgroundStyle;
         } else if (element[0].tagName.toLowerCase() === "html") {
             return "Window";
