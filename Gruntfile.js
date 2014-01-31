@@ -101,6 +101,9 @@ module.exports = function(grunt) {
                     singleRun: true,
 
                     browsers: [ 'bs_chrome' ],
+
+                    reporters: ['dots'],
+
                     files: [].concat(
                         TESTS.compiledStyleSheets,
                         TESTS.beforeTestFiles,
