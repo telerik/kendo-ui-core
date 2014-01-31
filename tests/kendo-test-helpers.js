@@ -183,7 +183,7 @@ QUnit.extend( QUnit, {
 });
 
 QUnit.brazilTimezoneTest = brazilTimezoneTest;
-QUnit.config.testTimeout = 1500;
+QUnit.config.testTimeout = 2500;
 QUnit.config.reorder = false;
 
 var close = QUnit.close,
