@@ -2523,16 +2523,16 @@ var __meta__ = {
                 }
 
                 if (canHandle && key == keys.UP) {
-                    currentProxy(currentUpDown(current, e.currentTarget, table, headerTable, true));
+                    currentProxy(moveVertical(current, e.currentTarget, table, headerTable, true));
                     handled = true;
                 } else if (canHandle && key == keys.DOWN) {
-                    currentProxy(currentUpDown(current, e.currentTarget, table, headerTable));
+                    currentProxy(moveVertical(current, e.currentTarget, table, headerTable));
                     handled = true;
                 } else if (canHandle && key == (isRtl ? keys.RIGHT : keys.LEFT)) {
-                    currentProxy(currentLeft(current, e.currentTarget, table, headerTable, relatedRow));
+                    currentProxy(moveLeft(current, e.currentTarget, table, headerTable, relatedRow));
                     handled = true;
                 } else if (canHandle && key == (isRtl ? keys.LEFT : keys.RIGHT)) {
-                    currentProxy(currentRight(current, e.currentTarget, table, headerTable, relatedRow));
+                    currentProxy(moveRight(current, e.currentTarget, table, headerTable, relatedRow));
                     handled = true;
                 } else if (canHandle && pageable && keys.PAGEDOWN == key) {
                     dataSource.page(dataSource.page() + 1);
@@ -4554,37 +4554,37 @@ var __meta__ = {
        return null;
    }
 
-    function focusTable(table, direct) {
-        var msie = browser.msie;
-        if (direct === true) {
-            table = $(table);
-            var condition = msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),
-                scrollTop, scrollLeft;
-                if (condition) {
-                    scrollTop = table.parent().scrollTop();
-                    scrollLeft = table.parent().scrollLeft();
-                }
+   function focusTable(table, direct) {
+       var msie = browser.msie;
+       if (direct === true) {
+           table = $(table);
+           var condition = msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),
+               scrollTop, scrollLeft;
+           if (condition) {
+               scrollTop = table.parent().scrollTop();
+               scrollLeft = table.parent().scrollLeft();
+           }
 
-                if (msie) {
-                    try {
-                        //The setActive method does not cause the document to scroll to the active object in the current page
-                        table[0].setActive();
-                    } catch(e) {
-                        table[0].focus();
-                    }
-                } else {
-                    table[0].focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
-                }
+           if (msie) {
+               try {
+                   //The setActive method does not cause the document to scroll to the active object in the current page
+                   table[0].setActive();
+               } catch(e) {
+                   table[0].focus();
+               }
+           } else {
+               table[0].focus(); //because preventDefault bellow, IE cannot focus the table alternative is unselectable=on
+           }
 
-                if (condition) {
-                    table.parent().scrollTop(scrollTop);
-                    table.parent().scrollLeft(scrollLeft);
-                }
+           if (condition) {
+               table.parent().scrollTop(scrollTop);
+               table.parent().scrollLeft(scrollLeft);
+           }
 
-        } else {
-            $(table).one("focusin", function(e) { e.preventDefault(); }).focus();
-        }
-    }
+       } else {
+           $(table).one("focusin", function(e) { e.preventDefault(); }).focus();
+       }
+   }
 
    function tableClick(e) {
        var currentTarget = $(e.currentTarget),
@@ -4618,7 +4618,7 @@ var __meta__ = {
        }
    }
 
-   function tableUpDown(current, downTable, upTable, up) {
+   function verticalTable(current, downTable, upTable, up) {
        current = $(current);
        if (up) {
            var temp = downTable;
@@ -4634,14 +4634,14 @@ var __meta__ = {
                    downTable.eq(0) : downTable.eq(1);
    }
 
-   function currentUpDown(current, currentTable, dataTable, headerTable, up) {
+   function moveVertical(current, currentTable, dataTable, headerTable, up) {
        var row, index;
        var nextFn = up ? "prevAll" : "nextAll";
 
        if (current) {
            row = current.parent()[nextFn](NAVROW).first();
            if (!row[0] && (up || current.is("th"))) {
-               currentTable = tableUpDown(currentTable, dataTable, headerTable, up);
+               currentTable = verticalTable(currentTable, dataTable, headerTable, up);
                focusTable(currentTable);
                row = currentTable.find((up ? ">thead>" : ">tbody>") + NAVROW).first();
            }
@@ -4657,7 +4657,7 @@ var __meta__ = {
        return current;
    }
 
-   function currentLeft(current, currentTable, dataTable, headerTable, relatedRow) {
+   function moveLeft(current, currentTable, dataTable, headerTable, relatedRow) {
        var isStatic = dataTable.length > 1;
 
        if (current) {
@@ -4679,7 +4679,7 @@ var __meta__ = {
        return current;
    }
 
-   function currentRight(current, currentTable, dataTable, headerTable, relatedRow) {
+   function moveRight(current, currentTable, dataTable, headerTable, relatedRow) {
        var isStatic = dataTable.length > 1;
 
        if (current) {
