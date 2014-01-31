@@ -89,7 +89,7 @@
         targetOffset = kendo.getOffset(target);
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        moveToSort(draggedElement, targetOffset.left, targetOffset.top + target.height());
         //move is trigerred once
         equal(target.next()[0], sortable.placeholder[0], "Placeholder is inserted after the target");
 
@@ -97,7 +97,7 @@
         targetOffset = kendo.getOffset(target);
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        moveToSort(draggedElement, targetOffset.left, targetOffset.top + target.height());
         //move is trigerred once
         equal(target.next()[0], sortable.placeholder[0], "Placeholder is inserted after the target");
     });
@@ -114,12 +114,12 @@
             ok(e.item[0] == draggedElement[0], "Correct item is passed");
 
             //initial index should be 2 because filtered items does not count
-            ok(e.newIndex == 1 && e.oldIndex == 2, "newIndex and oldIndex are correct");
+            ok(e.newIndex == 0 && e.oldIndex == 2, "newIndex and oldIndex are correct");
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
-        release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
+        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        release(draggedElement, targetOffset.left, targetOffset.top);
     });
 
     test("end event fires on dragend before DOM changes", 3, function() {
@@ -134,12 +134,12 @@
             ok(e.item[0] == draggedElement[0], "Correct item is passed");
 
             //index should be 2 because filtered items does not count
-            ok(e.oldIndex == 2 && e.newIndex == 1, "newIndex and oldIndex are correct");
+            ok(e.oldIndex == 2 && e.newIndex == 0, "newIndex and oldIndex are correct");
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
-        release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
+        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        release(draggedElement, targetOffset.left, targetOffset.top);
     });
 
     test("Sort action can be prevented at the end event", 2, function() {

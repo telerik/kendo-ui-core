@@ -75,30 +75,21 @@
         ok(listC.children().last().is(":visible") && listC.children().last().text() == "B1", "Placeholder is moved to the ListC");
     });
 
-    test("Item can be dragged from one list to another", 4, function() {
+    test("Item can be dragged from one list to another", 2, function() {
         var options = { connectWith: "#listA, #listB, #listC" },
             sortableA = listA.kendoSortable(options),
             sortableB = listB.kendoSortable(options),
             sortableC = listC.kendoSortable(options);
 
-        press(draggedElement, draggableOffset.left, draggableOffset.top + 10);
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
         moveToSort(draggedElement, 10, 30);
         release(draggedElement, 10, 30);
 
         ok(listB.children().length == 3, "Item is removed from ListB");
         ok(listA.children().length == 5 && listA.children().eq(1).text() == "B1", "Item from listB is appended to ListA");
-
-        draggableOffset = kendo.getOffset(draggedElement);
-
-        press(draggedElement, draggableOffset.left, draggableOffset.top + 10);
-        moveToSort(draggedElement, 10, 160);
-        release(draggedElement, 10, 160);
-
-        ok(listA.children().length == 4, "Item is removed from ListA");
-        ok(listC.children().length == 5 && listC.children().eq(0).text() == "B1", "Item from ListA is appended to ListC");
     });
 
-    test("Move event fires with correct arguments", 4, function() {
+    test("Move event fires with correct arguments", 5, function() {
          var options = { connectWith: "#listA, #listB, #listC" },
             sortableA = listA.kendoSortable(options).getKendoSortable(),
             sortableB = listB.kendoSortable(options).getKendoSortable(),
@@ -106,14 +97,14 @@
             onMove = function (e) {
                 ok(true, "SortableA fires move event");
                 equal(e.item[0], draggedElement[0], "Item parameter is correct");
+                equal(this.indexOf(this.placeholder), 0, "Placeholder is placed at the correct position");
                 ok(listA.has(e.target).length, "Target is part of ListA");
                 equal(e.list.element.attr("id"), "listB", "List parameter points to the correct list");
             };
 
         sortableA.bind("move", onMove);
-
-        press(draggedElement, draggableOffset.left, draggableOffset.top + 10);
-        moveToSort(draggedElement, 10, 20);
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        moveToSort(draggedElement, 10, 10);
     });
 
 })();

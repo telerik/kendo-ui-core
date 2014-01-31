@@ -123,8 +123,8 @@
 
         //simulate press to trigger draggable's hint initialization
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top - 10);
-        release(draggedElement, targetOffset.left, targetOffset.top - 10);
+        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        release(draggedElement, targetOffset.left, targetOffset.top);
 
         equal(draggedElement.index(), 1, "draggedElement changes its position");
     });
