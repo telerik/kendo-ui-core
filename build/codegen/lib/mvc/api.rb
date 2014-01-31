@@ -60,7 +60,7 @@ METHOD = ERB.new(%{
 ### <%= method_name %>
 <%= summary %>
 <% if owner.name.include?('EventBuilder') %>
-For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
+For additional information check the [<%= js_name %>](/kendo-ui/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
 <% end %>
 <% if !parameters.empty? %>
 #### Parameters
@@ -109,7 +109,7 @@ PARAMETER = ERB.new(%{
                 if type.include?(namespace)
                     known = true
 
-                    type = type.sub(/#{namespace}\.(\w+)/, "[#{namespace}.\\1](/api/wrappers/aspnet-mvc/#{namespace}/\\1)")
+                    type = type.sub(/#{namespace}\.(\w+)/, "[#{namespace}.\\1](/kendo-ui/api/wrappers/aspnet-mvc/#{namespace}/\\1)")
                     break
                 end
             end

@@ -88,7 +88,7 @@ EVENT = ERB.new(%{
 <%= description %>
 
 <% if owner.instance_of? Component %>
-For additional information check the [<%= name %>](/api/<%= suite %>/<%= owner.name.downcase %>#events-<%= name %>) event documentation.
+For additional information check the [<%= name %>](/kendo-ui/api/<%= suite %>/<%= owner.name.downcase %>#events-<%= name %>) event documentation.
 <% end %>
 #### Example
     <kendo:<%= owner.tag_name %>>
@@ -108,7 +108,7 @@ EVENT_SECTION = ERB.new(%{
 <%= description %>
 
 <% if owner.instance_of? Component %>
-For additional information check the [<%= name %>](/api/<%= suite %>/<%= owner.name.downcase %>#events-<%= name %>) event documentation.
+For additional information check the [<%= name %>](/kendo-ui/api/<%= suite %>/<%= owner.name.downcase %>#events-<%= name %>) event documentation.
 <% end %>
 #### Example
     <kendo:<%= owner.tag_name %> <%= name %>="handle_<%= name %>">
@@ -180,7 +180,7 @@ COMPOSITE_OPTION_SECTION = ERB.new(%{
 
 <%= description %>
 
-More documentation is available at [kendo:<%= tag_name %>](/api/wrappers/jsp/<%= namespace %>/<%= tag_name.downcase.sub(namespace + '-', '') %>).
+More documentation is available at [kendo:<%= tag_name %>](/kendo-ui/api/wrappers/jsp/<%= namespace %>/<%= tag_name.downcase.sub(namespace + '-', '') %>).
 
 #### Example
 
