@@ -42,11 +42,16 @@ function withSandbox(callback) {
 }
 
 function sandboxed_test(name, testMethod) {
+    var oldTimeout = QUnit.config.testTimeout;
+    QUnit.config.testTimeout = 3000;
+
     asyncTest(name, function() {
         withSandbox(function(wnd, doc) {
             start();
             testMethod.call(this, wnd, doc, wnd.$);
         });
     });
+
+    QUnit.config.testTimeout = oldTimeout;
 }
 
