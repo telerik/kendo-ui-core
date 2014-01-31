@@ -4,3 +4,7 @@ node_js:
 env:
   global:
     secure: phfORHjutjEjyAmd8ADZD9sALN3xjZG/iSheyU16qRicG7EyaqKDLhX+eqETbqnJP+qQ6v8kJDtNRtqhpzmlgB8eMmioA0ieOgOPK1sElmm3KBoWbtcwel8Rr2/Qmz140mt+6ujYtEjOQ5HZIpAsvXouCSuJM5YmMB9o3Ky4pvE=
+
+cache:
+  directories:
+    - node_modules
