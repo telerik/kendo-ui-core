@@ -94,7 +94,7 @@ kendo_module({
         },
 
         hide: function() {
-            if (this._transitioning) {
+            if (this._transitioning || !this.currentView) {
                 return;
             }
 
