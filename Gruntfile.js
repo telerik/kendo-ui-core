@@ -63,8 +63,8 @@ module.exports = function(grunt) {
         karma: {
             options: {
                 browserStack: {
-                  username: 'petyoivanov',
-                  accessKey: 'QBgixFUrxrEQyY2nKVqb'
+                  username: 'telerik1',
+                  accessKey: process.env.BROWSER_STACK_ACCESS_KEY
                 },
                 customLaunchers: {
                     bs_chrome: {
