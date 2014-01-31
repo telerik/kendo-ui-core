@@ -19,17 +19,17 @@
 
 .km-buttongroup > *:not(:first-child):not(:last-child)
 {
-    .border-radius(0);
+    border-radius: 0;
 }
 
 .km-buttongroup > *:first-child
 {
-    .border-radius(@mobile-border-radius 0 0 @mobile-border-radius);
+    border-radius: @mobile-border-radius 0 0 @mobile-border-radius;
 }
 
 .km-buttongroup > *:last-child
 {
-    .border-radius(0 @mobile-border-radius @mobile-border-radius 0);
+    border-radius: 0 @mobile-border-radius @mobile-border-radius 0;
 }
 
 .km-buttongroup > *.km-state-active
