@@ -1,5 +1,4 @@
 var META = require("./build/kendo-meta.js");
-var TESTS = require("./build/grunt/tests.js");
 var PATH = require("path");
 
 module.exports = function(grunt) {
@@ -8,6 +7,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadTasks('build/grunt/tasks');
+
+    // support different test sets for public|private repo
+    var TESTS = require(grunt.file.expand('./build/grunt/test-paths-*.js')[0]);
 
     function addSrc(f) {
         return PATH.join("src", f);
