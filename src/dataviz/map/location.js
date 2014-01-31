@@ -5,8 +5,14 @@
 (function ($, undefined) {
     // Imports ================================================================
     var math = Math,
+        abs = math.abs,
+        atan = math.atan,
+        atan2 = math.atan2,
+        cos = math.cos,
         max = math.max,
         min = math.min,
+        sin = math.sin,
+        tan = math.tan,
 
         kendo = window.kendo,
         Class = kendo.Class,
@@ -16,7 +22,9 @@
 
         util = dataviz.util,
         defined = util.defined,
+        rad = util.rad,
         round = util.round,
+        sqr = util.sqr,
         valueOrDefault = util.valueOrDefault;
 
     // Implementation =========================================================
@@ -55,6 +63,98 @@
             this.lng = this.lng % 180;
             this.lat = this.lat % 90;
             return this;
+        },
+
+        DISTANCE_ITERATIONS: 100,
+        DISTANCE_CONVERGENCE: 1e-12,
+        DISTANCE_PRECISION: 2,
+
+        distanceTo: function(dest, datum) {
+            return this.greatCircleTo(dest, datum).distance;
+        },
+
+        greatCircleTo: function(dest, datum) {
+            dest = Location.create(dest);
+            datum = datum || dataviz.map.datums.WGS84;
+
+            if (!dest || this.clone().round(8).equals(dest.clone().round(8))) {
+                return {
+                    distance: 0,
+                    azimuthFrom: 0,
+                    azimuthTo: 0
+                }
+            }
+
+            // See http://en.wikipedia.org/wiki/Vincenty's_formulae#Notation
+            // o == sigma
+            // A == alpha
+            var a = datum.a;
+            var b = datum.b;
+            var f = datum.f;
+
+            var L = rad(dest.lng - this.lng);
+
+            var U1 = atan((1 - f) * tan(rad(this.lat)));
+            var sinU1 = sin(U1);
+            var cosU1 = cos(U1);
+
+            var U2 = atan((1 - f) * tan(rad(dest.lat)));
+            var sinU2 = sin(U2);
+            var cosU2 = cos(U2);
+
+            var lambda = L;
+            var prevLambda;
+
+            var i = this.DISTANCE_ITERATIONS;
+            var converged = false;
+
+            var sino;
+            var cosA2;
+            var coso;
+            var cos2om;
+            var sigma;
+
+            while (!converged && i-- > 0) {
+                var sinLambda = sin(lambda);
+                var cosLambda = cos(lambda);
+                sino = math.sqrt(
+                    sqr(cosU2 * sinLambda) + sqr(cosU1 * sinU2 - sinU1 * cosU2 * cosLambda)
+                );
+
+                coso = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
+                sigma = atan2(sino, coso);
+
+                var sinA = cosU1 * cosU2 * sinLambda / sino;
+                cosA2 = 1 - sqr(sinA);
+                cos2om = 0;
+                if (cosA2 !== 0) {
+                    cos2om = coso - 2 * sinU1 * sinU2 / cosA2;
+                }
+
+                prevLambda = lambda;
+                var C = f / 16 * cosA2 * (4 + f * (4 - 3 * cosA2));
+                lambda = L + (1 - C) * f * sinA * (
+                    sigma + C * sino * (cos2om + C * coso * (-1 + 2 * sqr(cos2om)))
+                );
+
+                converged = abs(lambda - prevLambda) <= this.DISTANCE_CONVERGENCE;
+            }
+
+            var u2 = cosA2 * (sqr(a) - sqr(b)) / sqr(b);
+            var A = 1 + u2 / 16384 * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)));
+            var B = u2 / 1024 * (256 + u2 * (-128 + u2 * (74 - 47 * u2)));
+            var deltao = B * sino * (cos2om + B / 4 * (
+                coso * (-1 + 2 * sqr(cos2om)) - B / 6 * cos2om * (-3 + 4 * sqr(sino)) * (-3 + 4 * sqr(cos2om))
+            ));
+
+            var azimuthFrom = atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda);
+            var azimuthTo = atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda);
+
+            return {
+                distance: round(b * A * (sigma - deltao), this.DISTANCE_PRECISION),
+                azimuthFrom: util.deg(azimuthFrom),
+                azimuthTo: util.deg(azimuthTo)
+            };
         }
     });
 
