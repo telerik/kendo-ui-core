@@ -7,12 +7,13 @@ var dom = Editor.Dom;
 var extend = $.extend;
 
 var fontSizeMappings = 'xx-small,x-small,small,medium,large,x-large,xx-large'.split(',');
-var quoteRe = /"/g;
+var quoteRe = /"/g; //"
 var brRe = /<br[^>]*>/i;
 var pixelRe = /^\d+(\.\d*)?(px)?$/i;
 var emptyPRe = /<p><\/p>/i;
 var cssDeclaration = /([\w|\-]+)\s*:\s*([^;]+);?/i;
 var sizzleAttr = /^sizzle-\d+/i;
+var onerrorRe = /\s*onerror\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/i;
 
 var div = document.createElement("div");
 div.innerHTML = " <hr>";
@@ -20,6 +21,104 @@ var supportsLeadingWhitespace = div.firstChild.nodeType === 3;
 div = null;
 
 var Serializer = {
+    toEditableHtml: function(html) {
+        html = html || "";
+
+        return html
+            .replace(/<!\[CDATA\[(.*)?\]\]>/g, "<!--[CDATA[$1]]-->")
+            .replace(/<script([^>]*)>(.*)?<\/script>/ig, "<telerik:script$1>$2<\/telerik:script>")
+            .replace(/<img([^>]*)>/ig, function(match) {
+                return match.replace(onerrorRe, "");
+            })
+            .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
+    },
+
+    _fillEmptyElements: function(body) {
+        $(body).find("p").each(function() {
+            if (/^\s*$/g.test($(this).text())) {
+                var node = this;
+                while (node.firstChild && node.firstChild.nodeType != 3) {
+                    node = node.firstChild;
+                }
+
+                if (node.nodeType == 1 && node.tagName.toLowerCase() != "img") {
+                    node.innerHTML = kendo.ui.editor.emptyElementContent;
+                }
+            }
+        });
+    },
+
+    _resetOrderedLists: function(body){
+        // fix for IE9 OL bug -- https://connect.microsoft.com/IE/feedback/details/657695/ordered-list-numbering-changes-from-correct-to-0-0
+        setTimeout(function() {
+            var ols = root.getElementsByTagName("ol"), i, ol, originalStart;
+
+            for (i = 0; i < ols.length; i++) {
+                ol = ols[i];
+                originalStart = ol.getAttribute("start");
+
+                ol.setAttribute("start", 1);
+
+                if (originalStart) {
+                    ol.setAttribute("start", originalStart);
+                } else {
+                    ol.removeAttribute(originalStart);
+                }
+            }
+        }, 1);
+    },
+
+    htmlToDom: function(html, root) {
+        var browser = kendo.support.browser;
+        var msie = browser.msie;
+        var legacyIE = msie && browser.version < 9;
+
+        html = Serializer.toEditableHtml(html);
+
+        if (legacyIE) {
+            // Internet Explorer removes comments from the beginning of the html
+            html = "<br/>" + html;
+
+            var originalSrc = "originalsrc",
+                originalHref = "originalhref";
+
+            // IE < 8 makes href and src attributes absolute
+            html = html.replace(/href\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/, originalHref + '="$1"');
+            html = html.replace(/src\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/, originalSrc + '="$1"');
+
+        }
+
+        root.innerHTML = html;
+
+        if (legacyIE) {
+            dom.remove(root.firstChild);
+
+            $(root).find("telerik\\:script,script,link,img,a").each(function () {
+                var node = this;
+                if (node[originalHref]) {
+                    node.setAttribute("href", node[originalHref]);
+                    node.removeAttribute(originalHref);
+                }
+                if (node[originalSrc]) {
+                    node.setAttribute("src", node[originalSrc]);
+                    node.removeAttribute(originalSrc);
+                }
+            });
+        } else if (msie) {
+            // having unicode characters creates denormalized DOM tree in IE9
+            dom.normalize(root);
+
+            Serializer._resetOrderedLists(root);
+        }
+
+        Serializer._fillEmptyElements(root);
+
+        // add k-table class to all tables
+        $("table", root).addClass("k-table");
+
+        return root;
+    },
+
     domToXhtml: function(root) {
         var result = [];
         var tagMap = {
