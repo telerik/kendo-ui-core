@@ -11,6 +11,8 @@ module.exports = function(grunt) {
     // support different test sets for public|private repo
     var TESTS = require(grunt.file.expand('./build/grunt/test-paths-*.js')[0]);
 
+    console.log()
+
     function addSrc(f) {
         return PATH.join("src", f);
     }
@@ -236,10 +238,10 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
-    grunt.registerTask("ci", [ 'kendo:min', 'styles', 'copy:jquery', 'copy:timezones', 'karma:ci' ]);
+    grunt.registerTask("ci", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:jenkins' ]);
     grunt.registerTask("travis", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:travis' ]);
     grunt.registerTask('tests', [ 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:timezones' ]);
-    grunt.registerTask('build', ['copy:jquery', 'kendo:min', 'kendo:full', 'kendo:cultures', 'styles', 'license']);
+    grunt.registerTask('build', [ 'all', 'styles', 'license' ]);
 };
