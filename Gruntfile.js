@@ -48,7 +48,7 @@ module.exports = function(grunt) {
     var allKendoFiles = META.loadAll().map(addSrc);
 
     // files directly in src/
-    var main_kendo_files = META.listKendoFiles().map(addSrc);
+    var mainKendoFiles = META.listKendoFiles().map(addSrc);
 
     var beforeTestFiles = [
         { pattern: 'styles/**/*.*', watched: true, included: false },
@@ -221,22 +221,22 @@ module.exports = function(grunt) {
                 stylesDestDir: PATH.join("dist", "styles")
             },
             min: {
-                src: main_kendo_files,
+                src: mainKendoFiles,
                 dest: "<%= kendo.options.jsDestDir %>",
                 ext: ".min.js",
             },
             full: {
-                src: main_kendo_files,
+                src: mainKendoFiles,
                 dest: "<%= kendo.options.jsDestDir %>",
                 ext: ".js",
             },
             download_builder: {
-                src: main_kendo_files,
+                src: mainKendoFiles,
                 ext: ".min.js",
                 dest: PATH.join("dist", "download-builder", "content", "js"),
             },
             config: {
-                src: main_kendo_files,
+                src: mainKendoFiles,
                 dest: "download-builder/config/kendo-config.json"
             },
             cultures: {
