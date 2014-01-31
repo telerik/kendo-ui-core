@@ -82,7 +82,7 @@
                     distance: 0,
                     azimuthFrom: 0,
                     azimuthTo: 0
-                }
+                };
             }
 
             // See http://en.wikipedia.org/wiki/Vincenty's_formulae#Notation
@@ -108,6 +108,8 @@
             var i = this.DISTANCE_ITERATIONS;
             var converged = false;
 
+            var sinLambda;
+            var cosLambda;
             var sino;
             var cosA2;
             var coso;
@@ -115,8 +117,8 @@
             var sigma;
 
             while (!converged && i-- > 0) {
-                var sinLambda = sin(lambda);
-                var cosLambda = cos(lambda);
+                sinLambda = sin(lambda);
+                cosLambda = cos(lambda);
                 sino = math.sqrt(
                     sqr(cosU2 * sinLambda) + sqr(cosU1 * sinU2 - sinU1 * cosU2 * cosLambda)
                 );
