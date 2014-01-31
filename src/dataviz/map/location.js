@@ -7,6 +7,7 @@
     var math = Math,
         abs = math.abs,
         atan = math.atan,
+        atan2 = math.atan2,
         cos = math.cos,
         max = math.max,
         min = math.min,
@@ -69,8 +70,20 @@
         DISTANCE_PRECISION: 2,
 
         distanceTo: function(dest, datum) {
+            return this.greatCircleTo(dest, datum).distance;
+        },
+
+        greatCircleTo: function(dest, datum) {
             dest = Location.create(dest);
             datum = datum || dataviz.map.datums.WGS84;
+
+            if (!dest || this.clone().round(8).equals(dest.clone().round(8))) {
+                return {
+                    distance: 0,
+                    azimuthFrom: 0,
+                    azimuthTo: 0
+                }
+            }
 
             // See http://en.wikipedia.org/wiki/Vincenty's_formulae#Notation
             // o == sigma
@@ -96,7 +109,7 @@
             var converged = false;
 
             var sino;
-            var cosSqrA;
+            var cosA2;
             var coso;
             var cos2om;
             var sigma;
@@ -108,23 +121,18 @@
                     sqr(cosU2 * sinLambda) + sqr(cosU1 * sinU2 - sinU1 * cosU2 * cosLambda)
                 );
 
-                if (sino === 0) {
-                    return 0;
-                }
-
                 coso = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
-                sigma = math.atan2(sino, coso);
+                sigma = atan2(sino, coso);
 
                 var sinA = cosU1 * cosU2 * sinLambda / sino;
-                cosSqrA = 1 - sqr(sinA);
+                cosA2 = 1 - sqr(sinA);
                 cos2om = 0;
-                if (cosSqrA !== 0) {
-                    cos2om = coso - 2 * sinU1 * sinU2 / cosSqrA;
+                if (cosA2 !== 0) {
+                    cos2om = coso - 2 * sinU1 * sinU2 / cosA2;
                 }
 
-                var C = f / 16 * cosSqrA * (4 + f * (4 - 3 * cosSqrA));
-
                 prevLambda = lambda;
+                var C = f / 16 * cosA2 * (4 + f * (4 - 3 * cosA2));
                 lambda = L + (1 - C) * f * sinA * (
                     sigma + C * sino * (cos2om + C * coso * (-1 + 2 * sqr(cos2om)))
                 );
@@ -132,19 +140,22 @@
                 converged = abs(lambda - prevLambda) <= this.DISTANCE_CONVERGENCE;
             }
 
-            var uSqr = cosSqrA * (sqr(a) - sqr(b)) / sqr(b);
-            var A = 1 + uSqr / 16384 * (4096 + uSqr * (-768 + uSqr * (320 - 175 * uSqr)));
-            var B = uSqr / 1024 * (256 + uSqr * (-128 + uSqr * (74 - 47 * uSqr)));
+            var u2 = cosA2 * (sqr(a) - sqr(b)) / sqr(b);
+            var A = 1 + u2 / 16384 * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)));
+            var B = u2 / 1024 * (256 + u2 * (-128 + u2 * (74 - 47 * u2)));
             var deltao = B * sino * (cos2om + B / 4 * (
                 coso * (-1 + 2 * sqr(cos2om)) - B / 6 * cos2om * (-3 + 4 * sqr(sino)) * (-3 + 4 * sqr(cos2om))
             ));
 
-            return round(b * A * (sigma - deltao), this.DISTANCE_PRECISION);
-        },
+            var azimuthFrom = atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda);
+            var azimuthTo = atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda);
 
-        // TODO bearingTo
-        // TODO bearingFrom
-        // TODO greatCircleTo -> { distance: x, initialBearing: y, finalBearing: z }
+            return {
+                distance: round(b * A * (sigma - deltao), this.DISTANCE_PRECISION),
+                azimuthFrom: util.deg(azimuthFrom),
+                azimuthTo: util.deg(azimuthTo)
+            };
+        }
     });
 
     // IE < 9 doesn't allow to override toString on definition

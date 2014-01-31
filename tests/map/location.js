@@ -160,6 +160,10 @@
         equal(from.distanceTo(from), 0);
     });
 
+    test("distanceTo almost same point", function() {
+        equal(from.distanceTo(new Location(from.lat + 1e-8, from.lng + 1e-8)), 0);
+    });
+
     test("distanceTo on equator", function() {
         equal(new Location(0, 0).distanceTo([0, 10]), 1113194.91);
     });
@@ -169,6 +173,30 @@
 
         // Precision suffers dramatically for antipodal points
         close(from.distanceTo([-43.53, 172]), 19951000, 100);
+    });
+
+    test("distanceTo undefined", function() {
+        equal(from.distanceTo(), 0);
+    });
+
+    // ------------------------------------------------------------
+    module("Location / greatCircleTo", {
+        setup: function() {
+            from = new Location(42.7000, 23.3333);
+            to = new Location(-33.8600, 151.2111);
+        }
+    });
+
+    test("greatCircleTo reports distance", function() {
+        equal(from.greatCircleTo(to).distance, 15431830.77);
+    });
+
+    test("greatCircleTo reports azimuthFrom", function() {
+        close(from.greatCircleTo(to).azimuthFrom, 95.338, 1e-3);
+    });
+
+    test("greatCircleTo reports azimuthTo", function() {
+        close(from.greatCircleTo(to).azimuthTo, 118.162, 1e-3);
     });
 
     var extent;
