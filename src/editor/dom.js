@@ -730,6 +730,14 @@ var Dom = {
         }
 
         return result;
+    },
+
+    ensureTrailingBreak: function(node) {
+        if (!Dom.is(node.lastChild, "br")) {
+            var br = node.ownerDocument.createElement("br");
+            br.setAttribute("_moz_dirty", true);
+            node.appendChild(br);
+        }
     }
 };
 
