@@ -286,7 +286,8 @@ end
         csproj.gsub!(/<Content Include=".*?validator\.aspnetmvc\.js"(.|\r|\n)*?<\/Content>/, '<Content Include="..\\js\\kendo.aspnetmvc.js"><Link>Scripts\\kendo.aspnetmvc.js</Link></Content>')
         csproj.gsub!('<Link>Kendo.snk</Link>', '')
         csproj.gsub!(/\.\.\\shared\\CommonAssemblyInfo\.cs/, 'CommonAssemblyInfo.cs')
-        csproj.gsub!('<Link>CommonAssemblyInfo.cs</Link>', '');
+        csproj.gsub!('<Link>CommonAssemblyInfo.cs</Link>', '')
+        csproj.gsub!('..\\..\\packages', '..\\packages')
 
         File.open(t.name, 'w') do |file|
             file.write csproj
