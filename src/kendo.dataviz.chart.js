@@ -1989,6 +1989,8 @@ var __meta__ = {
                 p2,
                 slotSize;
 
+            var singleSlot = !defined(to);
+
             from = valueOrDefault(from, 0);
             to = valueOrDefault(to, from);
             from = limitValue(from, 0, intervals);
@@ -2005,7 +2007,7 @@ var __meta__ = {
                 p2 = majorTicks[to + 1] || lineEnd;
             }
 
-            if (justified) {
+            if (singleSlot && justified) {
                 if (from === intervals) {
                     p1 = p2;
                 } else {

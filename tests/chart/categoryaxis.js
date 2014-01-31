@@ -1,5 +1,6 @@
 (function() {
-    var dataviz = kendo.dataviz,
+    var deepExtend = kendo.deepExtend,
+        dataviz = kendo.dataviz,
         getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),
@@ -1147,7 +1148,7 @@
             }];
 
         function createPlotArea(series, chartOptions) {
-            plotArea = new dataviz.CategoricalPlotArea(series, {
+            plotArea = new dataviz.CategoricalPlotArea(series, deepExtend({
                 categoryAxis: {
                     categories: ["A"],
                     plotBands: [{
@@ -1167,7 +1168,7 @@
                         font: "16px Verdana, sans-serif"
                     }
                 }
-            });
+            }, chartOptions));
 
             view = new ViewStub();
 
@@ -1201,6 +1202,18 @@
         });
 
         // ------------------------------------------------------------
+        module("Category Axis / Plot Bands / Horizontal / Justified", {
+            setup: function() {
+                createPlotArea(lineSeriesData, { categoryAxis: { justified: true } });
+            }
+        });
+
+        test("renders box", function() {
+            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                 [ 39, 9, 419, 573 ], TOLERANCE);
+        });
+
+        // ------------------------------------------------------------
         module("Category Axis / Plot Bands / Vertical", {
             setup: function() {
                 createPlotArea(barSeriesData);
@@ -1222,6 +1235,22 @@
 
         test("renders z index", function() {
             equal(plotBands.style.zIndex, -1);
+        });
+
+        // ------------------------------------------------------------
+        module("Category Axis / Plot Bands / Vertical / Justified", {
+            setup: function() {
+                createPlotArea([{
+                    name: "Value A",
+                    type: "verticalLine",
+                    data: [100, 200, 300]
+                }], { categoryAxis: { justified: true } });
+            }
+        });
+
+        test("renders box", function() {
+            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                 [ 20, 0, 785, 286.5 ], TOLERANCE);
         });
     })();
 
