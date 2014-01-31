@@ -2374,12 +2374,12 @@ kendo_module({
             if (container && editable && editable.end() &&
                 !this.trigger(SAVE, { container: container, event: model } )) {
 
-                if (!model.dirty && !model.isOccurrence()) {
-                    this._convertDates(model, "remove");
-                }
-
                 if (model.isRecurrenceHead()) {
                     this.dataSource._removeExceptions(model);
+                }
+
+                if (!model.dirty && !model.isOccurrence()) {
+                    this._convertDates(model, "remove");
                 }
 
                 this.dataSource.sync();

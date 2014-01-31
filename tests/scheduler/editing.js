@@ -1430,6 +1430,52 @@
         deepEqual(head.start, headStart);
     });
 
+    test("save a recurring head honors start/end timezone", function() {
+        var start = new Date(2013, 10, 10, 12);
+        var end = new Date(2013, 10, 10, 14);
+        var startTimezone = "Europe/Berlin";
+        var endTimezone = "Asia/Beirut";
+
+        var scheduler = setup({
+            date: new Date(start),
+            dataSource: {
+                data: [ {
+                    id:1,
+                    recurrenceRule: "FREQ=DAILY;COUNT=2;",
+                    start: new Date(start),
+                    end: new Date(end),
+                    startTimezone: startTimezone,
+                    endTimezone: endTimezone,
+                    title: "my event"
+                }, {
+                    id:2,
+                    recurrenceId: 1,
+                    start: new Date(start),
+                    end: new Date(end),
+                    startTimezone: startTimezone,
+                    endTimezone: endTimezone,
+                    title: "my event"
+                } ]
+            },
+            timezone: "Etc/UTC"
+        });
+
+        var uid = scheduler.wrapper.find(".k-event:last").data("uid");
+        var occurrenceStart = new Date(scheduler.occurrenceByUid(uid).start);
+        var headStart = new Date(scheduler.dataSource.data()[0].start);
+
+        scheduler.editEvent(uid);
+        $(".k-popup-edit-form").find(".k-button:last").click();
+        $(".k-popup-edit-form").find(".k-scheduler-update").click();
+
+        var uid = scheduler.wrapper.find(".k-event:first").data("uid");
+        var occurrence = scheduler.occurrenceByUid(uid);
+        var head = scheduler.dataSource.data()[0];
+
+        deepEqual(occurrence.start, occurrenceStart);
+        deepEqual(head.start, headStart);
+    });
+
     test("saveEvent reverts applied StartTimezone if no changes have been made", function() {
         var start = new Date(2013, 10, 10, 10),
             end = new Date(2013, 10, 10, 11),
