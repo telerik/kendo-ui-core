@@ -255,23 +255,14 @@ var __meta__ = {
         init: function(element, options) {
             var that = this,
                 disabled,
-                min, max,
                 div;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
 
-            min = parse(element.attr("min"));
-            max = parse(element.attr("max"));
-
-            if (min) {
-                options.min = min;
-            }
-
-            if (max) {
-                options.max = max;
-            }
+            options.min = parse(element.attr("min")) || parse(options.min);
+            options.max = parse(element.attr("max")) || parse(options.max);
 
             normalize(options);
 
@@ -375,6 +366,9 @@ var __meta__ = {
             Widget.fn.setOptions.call(that, options);
 
             options = that.options;
+
+            options.min = parse(options.min);
+            options.max = parse(options.max);
 
             normalize(options);
 
