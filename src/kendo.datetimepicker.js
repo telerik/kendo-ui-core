@@ -140,9 +140,10 @@ var __meta__ = {
 
             options = that.options;
 
+            options.min = min = parse(options.min);
+            options.max = max = parse(options.max);
+
             normalize(options);
-            min = options.min;
-            max = options.max;
 
             currentValue = options.value || that._value || that.dateView._current;
 
