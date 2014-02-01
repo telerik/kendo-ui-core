@@ -299,6 +299,9 @@ var __meta__ = {
         setOptions: function(options) {
             var old = this.options;
 
+            options.min = parse(options.min);
+            options.max = parse(options.max);
+
             this.options = extend(old, options, {
                 active: old.active,
                 change: old.change,
