@@ -312,4 +312,22 @@ test("DatePicker does not remove input text on initialization if not valid value
     equal(input.val(), "test");
 });
 
+test("DatePicker sets min from min attribute", function() {
+    var date = new Date(2000, 9, 10);
+    input.attr("min", kendo.toString(date, "yyyy-MM-dd"));
+
+    var datepicker = new DatePicker(input);
+
+    deepEqual(datepicker.min(), date);
+});
+
+test("DatePicker sets max from max attribute", function() {
+    var date = new Date(2000, 9, 10);
+    input.attr("max", kendo.toString(date, "yyyy-MM-dd"));
+
+    var datepicker = new DatePicker(input);
+
+    deepEqual(datepicker.max(), date);
+});
+
 })();
