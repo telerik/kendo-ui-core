@@ -302,4 +302,22 @@ test("DateTimePicker renders only one possible time option if min and max are eq
     equal(li.html(), "10:00 AM");
 });
 
+test("DateTimePicker sets min from min attribute", function() {
+    var date = new Date(2000, 9, 10, 10, 0, 0);
+    input.attr("min", kendo.toString(date, "yyyy-MM-ddTHH:mm:ss"));
+
+    var datetimepicker = new DateTimePicker(input);
+
+    deepEqual(datetimepicker.min(), date);
+});
+
+test("DateTimePicker sets max from max attribute", function() {
+    var date = new Date(2013, 9, 10, 21, 30);
+    input.attr("max", kendo.toString(date, "yyyy-MM-ddTHH:mm:ss"));
+
+    var datetimepicker = new DateTimePicker(input);
+
+    deepEqual(datetimepicker.max(), date);
+});
+
 })();
