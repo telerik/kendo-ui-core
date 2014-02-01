@@ -34,6 +34,31 @@ test("initializes a options from data attributes", function() {
     equal(datetimepicker.dateView.options.start, "year");
 });
 
+test("initializes min and max options from data attributes", function() {
+    dom = $('<input data-role="datetimepicker" data-min="2000-10-10T10:00" data-max="2010-10-10T20:00" />');
+    dom.appendTo(QUnit.fixture);
+
+    kendo.bind(dom);
+
+    var datetimepicker = dom.data("kendoDateTimePicker");
+
+    deepEqual(datetimepicker.min(), new Date(2000, 9, 10, 10));
+    deepEqual(datetimepicker.max(), new Date(2010, 9, 10, 20));
+});
+
+test("initializes min and max options from data attributes after init of the widget", function() {
+    dom = $('<input data-role="datetimepicker" data-min="2000-10-10T10:00" data-max="2010-10-10T20:00" />');
+    dom.appendTo(QUnit.fixture);
+    dom.kendoDateTimePicker();
+
+    kendo.bind(dom);
+
+    var datetimepicker = dom.data("kendoDateTimePicker");
+
+    deepEqual(datetimepicker.min(), new Date(2000, 9, 10, 10));
+    deepEqual(datetimepicker.max(), new Date(2010, 9, 10, 20));
+});
+
 test("Preserve options after widget init", function() {
     dom = $('<input data-role="datetimepicker" />');
     dom.kendoDateTimePicker({
