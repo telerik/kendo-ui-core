@@ -42,6 +42,14 @@ test("parse should use calendar.patterns if no format is provided", function() {
     equal(+result, +(new Date(2000,9,12,10,10,10)));
 });
 
+test("parse should pasrse time iso string if no format is provided", function() {
+    var result = parse("10:10:10");
+    var today = kendo.date.today();
+    today.setHours(10, 10, 10);
+
+    deepEqual(result, today);
+});
+
 test("parse method returns null if not value", function() {
     var result = parse();
 
