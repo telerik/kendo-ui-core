@@ -1,5 +1,6 @@
 (function() {
     var TimeView = kendo.TimeView,
+        TimePicker = kendo.ui.TimePicker,
         MIDNIGHT = new Date(0, 0, 0, 0, 0, 0),
         div, input;
 
@@ -280,5 +281,26 @@
         equal(input.val(), "test");
     });
 
+    test("TimePicker sets min from min attribute", function() {
+        var date = kendo.date.today();
+        date.setHours(10, 0, 0);
+
+        input.attr("min", kendo.toString(date, "10:00"));
+
+        var timepicker = new TimePicker(input);
+
+        deepEqual(timepicker.min(), date);
+    });
+
+    test("TimePicker sets max from max attribute", function() {
+        var date = kendo.date.today();
+        date.setHours(20, 0, 0);
+
+        input.attr("max", kendo.toString(date, "20:00"));
+
+        var timepicker = new TimePicker(input);
+
+        deepEqual(timepicker.max(), date);
+    });
 
 })();
