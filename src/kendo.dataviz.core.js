@@ -2389,6 +2389,180 @@ var __meta__ = {
         }
     });
 
+    LogarithmicAxis = Axis.extend({
+        init: function(seriesMin, seriesMax, options) {
+            this.options = this._initOptions(seriesMin, seriesMax, options);
+            Axis.fn.init.call(this, options);
+        },
+
+        options: {
+            type: "logarithmic",
+            logarithmBase: 10,
+            axisCrossingValue: 0.1,
+            vertical: true,
+            majorGridLines: {
+                visible: true,
+                width: 1,
+                color: BLACK
+            },
+            zIndex: 1
+        },
+
+        range: function() {
+            var options = this.options;
+            return { min: options.min, max: options.max };
+        },
+
+        labelsCount: function() {
+            return this.getDivisions() + 1;
+        },
+
+        getMajorTickPositions: function() {
+            return this.getTickPositions();
+        },
+
+        getMinorTickPositions: function(){
+            return [];
+        },
+
+        _initOptions: function(seriesMin, seriesMax, options) {
+            var axis = this,
+                axisOptions = deepExtend({}, axis.options, {min: seriesMin, max: seriesMax}, options),
+                min = axisOptions.min,
+                max = axisOptions.max,
+                base = axisOptions.logarithmBase;
+
+            if (min <= 0 || max <= 0) {
+                throw new Error("Non positive values cannot be used for a logarithmic axis.");
+            }
+
+            axis.logMin = math.floor(axis._log(min, base));
+            axis.logMax = math.ceil(axis._log(max, base));
+            axisOptions.min = math.pow(base, axis.logMin);
+            axisOptions.max = math.pow(base, axis.logMax);
+
+            return axisOptions;
+        },
+
+        getSlot: function(a, b) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                dir = reverse ? -1 : 1,
+                base = options.logarithmBase,
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                step = dir * (lineSize / (logMax - logMin)),
+                p1, p2,
+                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
+
+            if (!defined(a)) {
+                a = b || 0;
+            }
+
+            if (!defined(b)) {
+                b = a || 0;
+            }
+
+            a = axis._log(a, base);
+            b = axis._log(b, base);
+
+            a = math.max(math.min(a, logMax), logMin);
+            b = math.max(math.min(b, logMax), logMin);
+
+            if (vertical) {
+                p1 = logMax - math.max(a, b);
+                p2 = logMax - math.min(a, b);
+            } else {
+                p1 = math.min(a, b) - logMin;
+                p2 = math.max(a, b) - logMin;
+            }
+
+            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
+            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
+
+            return slotBox;
+        },
+
+        getValue: function(point) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                max = options.max * 1,
+                min = options.min * 1,
+                base = options.logarithmBase,
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                dir = reverse ? -1 : 1,
+                offset = dir * (point[valueAxis] - lineStart),
+                step = dir * ((logMax - logMin) / (lineSize)),
+                valueOffset = offset * step,
+                value;
+
+            if (offset < 0 || offset > lineSize) {
+                return null;
+            }
+
+            value = vertical ?
+                    logMax - valueOffset :
+                    logMin + valueOffset;
+
+            return round(math.pow(base, value), DEFAULT_PRECISION);
+        },
+
+        getDivisions: function() {
+            return this.logMax - this.logMin;
+        },
+
+        _log: function (y, x) {
+            return math.log(y) / math.log(x);
+        },
+
+        getTickPositions: function() {
+            var axis = this,
+                options = axis.options,
+                vertical = options.vertical,
+                reverse = options.reverse,
+                lineBox = axis.lineBox(),
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                divisions = axis.getDivisions(),
+                step = lineSize / divisions,
+                dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
+                startEdge = dir === 1 ? 1 : 2,
+                pos = lineBox[(vertical ? Y : X) + startEdge],
+                positions = [],
+                length = divisions + 1,
+                i;
+
+            for (i = 0; i < length; i++) {
+                positions.push(round(pos, COORD_PRECISION));
+
+                pos = pos + step * dir;
+            }
+
+            return positions;
+        },
+
+        createAxisLabel: function(index, labelOptions) {
+            var axis = this,
+                options = axis.options,
+                value = round(Math.pow(options.logarithmBase, axis.logMin + index), DEFAULT_PRECISION),
+                text = axis.axisLabelText(value, null, labelOptions);
+
+            return new AxisLabel(value, text, index, null, labelOptions);
+        }
+    });
+
     // View base classes ======================================================
     var ViewElement = Class.extend({
         init: function(options) {
@@ -4072,6 +4246,7 @@ var __meta__ = {
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
         IDPool: IDPool,
+        LogarithmicAxis: LogarithmicAxis,
         LRUCache: LRUCache,
         Matrix: Matrix,
         Note: Note,

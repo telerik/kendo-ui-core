@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>Spline</title>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+         <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+         <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="CurveProcessor.js"></script>
+    </head>
+    <body>
+
+        <div id="log" style="height: 600px;"></div>
+       <script>
+        $("#log").kendoChart({
+            seriesDefaults: {
+                type: "line",    
+                labels: {
+                    visible: true
+                },
+                style: "smooth"
+            },
+            series: [{               
+                data: [0.1, 11, 100, 234, 1000, 2345, 10000, 23456, 1, 0.01],//error when no data ??? check for type before setting the defaults
+                axis: "top"
+            }, {                      
+                data: [2, 5, 15, 24, 44, 55, 32, 1, 0.1],
+                axis: "bottom"
+            }],           
+            valueAxis: [{  
+                name: "top",
+                pane: "top",
+                type: "logarithmic"
+            },{
+                name: "bottom",
+                pane: "bottom",
+                type: "logarithmic",
+                logarithmBase: 2    
+            }],
+            
+            panes: [{name: "top"}, {name: "bottom"}],
+            
+            tooltip:{
+                visible: true
+            },
+            
+            plotAreaClick: function(e) {
+                console.log(e.value);
+            }
+        });
+        
+        
+       </script>
+    </body>
+</html>

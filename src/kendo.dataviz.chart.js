@@ -53,6 +53,7 @@ var __meta__ = {
         CurveProcessor = dataviz.CurveProcessor,
         ElementAnimation = dataviz.ElementAnimation,
         Note = dataviz.Note,
+        LogarithmicAxis = dataviz.LogarithmicAxis,
         NumericAxis = dataviz.NumericAxis,
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
@@ -8689,6 +8690,7 @@ var __meta__ = {
                 baseOptions = { vertical: !invertAxes },
                 axisOptions, axisPane, valueAxis,
                 primaryAxis, axes = [], range,
+                axisType,
                 name, i;
 
             if (plotArea.stack100) {
@@ -8709,7 +8711,13 @@ var __meta__ = {
                         range.max = math.max(range.max, defaultRange.max);
                     }
 
-                    valueAxis = new NumericAxis(range.min, range.max,
+                    if (axisOptions.type === "logarithmic") {
+                        axisType = LogarithmicAxis;
+                    } else {
+                        axisType = NumericAxis;
+                    }
+
+                    valueAxis = new axisType(range.min, range.max,
                         deepExtend({}, baseOptions, axisOptions)
                     );
 
