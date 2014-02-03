@@ -225,4 +225,14 @@
         equal(sortable.indexOf(disabled), 1, "disabled items are included");
     });
 
+    test("isEmpty method works as expected", 2, function() {
+        var sortable = element.data("kendoSortable");
+
+        ok(!sortable.isEmpty());
+
+        sortable.element.empty();
+
+        ok(sortable.isEmpty());
+    })
+
 })();

@@ -187,6 +187,9 @@ var __meta__ = {
                         target.element.after(placeholder);
                         target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
                     }
+                } else if(target.element.getKendoSortable()) {
+                    target.element.append(placeholder);
+                    target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
                 }
             }
         },
@@ -297,6 +300,11 @@ var __meta__ = {
                                 return null;
                             }
                         }
+                    } else if(connected[i] == element) {
+                        var sortable = connected.eq(i).getKendoSortable();
+                        if(sortable && sortable.isEmpty()) {
+                            return { element: connected.eq(i), sortable: sortable }
+                        }
                     }
                 }
             }
@@ -345,6 +353,10 @@ var __meta__ = {
             }
 
             return items;
+        },
+
+        isEmpty: function() {
+            return !this.items().length;
         }
 
     });

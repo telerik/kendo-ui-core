@@ -107,4 +107,23 @@
         moveToSort(draggedElement, 10, 10);
     });
 
+    test("Item is appended to the botton of an empty connected list", 2, function() {
+         var options = { connectWith: "#listA, #listB, #listC" },
+            sortableA = listA.kendoSortable(options).getKendoSortable(),
+            sortableB = listB.kendoSortable(options).getKendoSortable(),
+            sortableC = listC.kendoSortable(options).getKendoSortable();
+
+        listC.css("min-height", 20);
+        listC.empty();
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, 10, 155);
+
+        equal(listC.children()[0], sortableB.placeholder[0], "Placeholder is appended to the ListC");
+
+        release(draggedElement, 10, 155);
+
+        equal(listC.children().length, 1, "Item is appended to the ListC");
+    });
+
 })();
