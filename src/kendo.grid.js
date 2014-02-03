@@ -4377,6 +4377,16 @@ var __meta__ = {
             }
         },
 
+        _isActiveInTable: function() {
+            var active = activeElement();
+
+            return this.table[0] === active ||
+                $.contains(this.table[0], active) ||
+                (this._isStatic() &&
+                    (this.staticTable[0] === active || $.contains(this.staticTable[0], active))
+                );
+        },
+
         refresh: function(e) {
             var that = this,
                 length,
@@ -4388,8 +4398,7 @@ var __meta__ = {
                 current = $(that.current()),
                 isCurrentInHeader = false,
                 groups = (that.dataSource.group() || []).length,
-                colspan = groups + visibleColumns(that.columns).length,
-                active;
+                colspan = groups + visibleColumns(that.columns).length;
 
             if (e && e.action === "itemchange" && that.editable) { // skip rebinding if editing is in progress
                 return;
@@ -4401,8 +4410,7 @@ var __meta__ = {
                 return;
             }
 
-            active = activeElement();
-            if (navigatable && (that.table[0] === active || $.contains(that.table[0], active) || (that._editContainer && that._editContainer.data("kendoWindow")))) {
+            if (navigatable && (that._isActiveInTable() || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
                 if (isCurrentInHeader) {
@@ -4446,7 +4454,7 @@ var __meta__ = {
             if (currentIndex >= 0) {
                 that._removeCurrent();
                 if (!isCurrentInHeader) {
-                    that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
+                    that.current(that.table.add(that.staticTable).find(FIRSTNAVITEM).first());
                 } else {
                     that.current(that.thead.find("th:not(.k-group-cell)").eq(currentIndex));
                 }
