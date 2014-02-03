@@ -61,6 +61,9 @@ var __meta__ = {
             element = that.element;
             options = that.options;
 
+            options.min = parse(element.attr("min")) || parse(options.min);
+            options.max = parse(element.attr("max")) || parse(options.max);
+
             normalize(options);
 
             that._wrapper();
@@ -137,9 +140,10 @@ var __meta__ = {
 
             options = that.options;
 
+            options.min = min = parse(options.min);
+            options.max = max = parse(options.max);
+
             normalize(options);
-            min = options.min;
-            max = options.max;
 
             currentValue = options.value || that._value || that.dateView._current;
 

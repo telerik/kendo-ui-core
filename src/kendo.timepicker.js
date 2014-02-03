@@ -13,6 +13,7 @@ var __meta__ = {
 (function($, undefined) {
     var kendo = window.kendo,
         keys = kendo.keys,
+        parse = kendo.parseDate,
         activeElement = kendo._activeElement,
         extractFormat = kendo._extractFormat,
         support = kendo.support,
@@ -298,6 +299,9 @@ var __meta__ = {
         setOptions: function(options) {
             var old = this.options;
 
+            options.min = parse(options.min);
+            options.max = parse(options.max);
+
             this.options = extend(old, options, {
                 active: old.active,
                 change: old.change,
@@ -361,7 +365,7 @@ var __meta__ = {
                 return value;
             }
 
-            value = kendo.parseDate(value, options.parseFormats, options.culture);
+            value = parse(value, options.parseFormats, options.culture);
 
             if (value) {
                 value = new DATE(current.getFullYear(),
@@ -511,6 +515,9 @@ var __meta__ = {
 
             element = that.element;
             options = that.options;
+
+            options.min = parse(element.attr("min")) || parse(options.min);
+            options.max = parse(element.attr("max")) || parse(options.max);
 
             normalize(options);
 
