@@ -11,6 +11,8 @@ module.exports = function(grunt) {
     // support different test sets for public|private repo
     var TESTS = require(grunt.file.expand('./build/grunt/test-paths-*.js')[0]);
 
+    console.log()
+
     function addSrc(f) {
         return PATH.join("src", f);
     }
@@ -113,7 +115,7 @@ module.exports = function(grunt) {
                     )
                 }
             },
-            jenkins: {
+            travis: {
                 options: {
                     reporters: ['dots'],
 

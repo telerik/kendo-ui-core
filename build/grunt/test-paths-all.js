@@ -56,4 +56,4 @@ exports.compiledStyleSheets = [
     'dist/styles/web/kendo.rtl.css'
 ];
 
-exports.ciFiles = [ 'dist/js/kendo.ui.core.min.js' ];
+exports.ciFiles = [ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js'  ];
