@@ -46,19 +46,21 @@
                     },
                     sort: [ { field: "CreatedAt", dir: "desc" }],
                     transport: {
-                        promise: hubStart,
-                        hub: hub,
-                        server: {
-                            read: "read",
-                            update: "update",
-                            destroy: "destroy",
-                            create: "create"
-                        },
-                        client: {
-                            read: "read",
-                            update: "update",
-                            destroy: "destroy",
-                            create: "create"
+                        signalr: {
+                            promise: hubStart,
+                            hub: hub,
+                            server: {
+                                read: "read",
+                                update: "update",
+                                destroy: "destroy",
+                                create: "create"
+                            },
+                            client: {
+                                read: "read",
+                                update: "update",
+                                destroy: "destroy",
+                                create: "create"
+                            }
                         }
                     }
                 }

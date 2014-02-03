@@ -13,9 +13,9 @@ var __meta__ = {
 (function() {
     kendo.data.transports.signalr = kendo.data.RemoteTransport.extend({
         init: function (options) {
-            options = options || {};
+            var signalr = options && options.signalr ? options.signalr : {};
 
-            var promise = options.promise;
+            var promise = signalr.promise;
 
             if (!promise) {
                 throw new Error('The "promise" option must be set.');
@@ -27,7 +27,7 @@ var __meta__ = {
 
             this.promise = promise;
 
-            var hub = options.hub;
+            var hub = signalr.hub;
 
             if (!hub) {
                 throw new Error('The "hub" option must be set.');
@@ -42,26 +42,26 @@ var __meta__ = {
             kendo.data.RemoteTransport.fn.init.call(this, options);
         },
 
-        push: function(options) {
-            var client = this.options.client || {};
+        push: function(callbacks) {
+            var client = this.options.signalr.client || {};
 
             if (client.create) {
-                this.hub.on(client.create, options.pushCreate);
+                this.hub.on(client.create, callbacks.pushCreate);
             }
 
             if (client.update) {
-                this.hub.on(client.update, options.pushUpdate);
+                this.hub.on(client.update, callbacks.pushUpdate);
             }
 
             if (client.destroy) {
-                this.hub.on(client.destroy, options.pushDestroy);
+                this.hub.on(client.destroy, callbacks.pushDestroy);
             }
         },
 
         _crud: function(options, type) {
             var hub = this.hub;
 
-            var server = this.options.server;
+            var server = this.options.signalr.server;
 
             if (!server || !server[type]) {
                 throw new Error(kendo.format('The "server.{0}" option must be set.', type));
