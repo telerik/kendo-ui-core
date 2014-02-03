@@ -36,6 +36,6 @@
        "karma-ie-launcher": "~0.1"
    },
    "scripts": {
-       "test": "./node_modules/.bin/grunt ci"
+       "test": "./node_modules/.bin/grunt travis"
    }
 }

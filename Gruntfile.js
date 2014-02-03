@@ -92,9 +92,30 @@ module.exports = function(grunt) {
                 browserNoActivityTimeout: 30000,
                 singleRun: grunt.option('single-run')
             },
-            ci: {
+            jenkins: {
                 options: {
-                    reporters: ['progress', 'junit'],
+                    reporters: ['dots', 'junit'],
+
+                    junitReporter: {
+                      outputFile: grunt.option('junit-results')
+                    },
+
+                    singleRun: true,
+
+                    browsers: browsers,
+
+                    files: [].concat(
+                        TESTS.compiledStyleSheets,
+                        TESTS.beforeTestFiles,
+                        TESTS.ciFiles,
+                        TESTS.afterTestFiles,
+                        tests
+                    )
+                }
+            },
+            jenkins: {
+                options: {
+                    reporters: ['dots'],
 
                     junitReporter: {
                       outputFile: grunt.option('junit-results')
@@ -103,8 +124,6 @@ module.exports = function(grunt) {
                     singleRun: true,
 
                     browsers: [ 'bs_chrome' ],
-
-                    reporters: ['dots'],
 
                     files: [].concat(
                         TESTS.compiledStyleSheets,
@@ -214,7 +233,8 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
-    grunt.registerTask("ci", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:ci' ]);
+    grunt.registerTask("ci", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:jenkins' ]);
+    grunt.registerTask("travis", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:travis' ]);
     grunt.registerTask('tests', [ 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'copy:jquery', 'copy:timezones' ]);
