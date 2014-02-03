@@ -69,6 +69,11 @@
                 ],
                 toolbar: ["create"],
                 dataSource: {
+                    // Handle the push event to display notifications when push updates arrive
+                    push: function(e) {
+                        var notification = $("#notification").data("kendoNotification");
+                        notification.success(e.type);
+                    },
                     autoSync: true,
                     schema: {
                         model: {
@@ -84,20 +89,16 @@
                     sort: [ { field: "CreatedAt", dir: "desc" }],
                     transport: {
                         push: function(options) {
-                            var notification = $("#notification").data("kendoNotification");
                             //Listen to the "message" event fired when the server pushes data
                             ws.addEventListener("message", function(e) {
                                 var result = JSON.parse(e.data);
 
                                 //Check what the push type is and invoke the corresponding callback.
                                 if (result.type == "push-update") {
-                                    notification.success("update");
                                     options.pushUpdate(result);
                                 } else if (result.type == "push-destroy") {
-                                    notification.success("destroy");
                                     options.pushDestroy(result);
                                 } else if (result.type == "push-create") {
-                                    notification.success("create");
                                     options.pushCreate(result);
                                 }
                             });
@@ -105,7 +106,9 @@
                         read: function(options) {
                             var request = { type: "read" };
 
-                            send(ws, request, options.success);
+                            send(ws, request, function(result) {
+                                options.success(result);
+                            });
                         },
                         update: function(options) {
                             var request = { type: "update", data: [options.data] };

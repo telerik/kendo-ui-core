@@ -3325,7 +3325,9 @@ var __meta__ = {
     };
 
     DataSource.create = function(options) {
-        options = options && options.push ? { data: options } : options;
+        if (isArray(options) || options instanceof ObservableArray) {
+           options = { data: options };
+        }
 
         var dataSource = options || {},
         data = dataSource.data,
