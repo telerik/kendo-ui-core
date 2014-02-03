@@ -2404,13 +2404,17 @@ var __meta__ = {
                     table.attr("aria-activedescendant", that._cellId);
 
                     if(element.length && scrollable) {
-                        if ($.contains(that.content[0], element[0])) {
+                        var content = element.closest("table").parent();
+                        if (content.is(".k-grid-content,.k-grid-content-static")) {
                             that._scrollTo(element.parent()[0], that.content[0]);
                         }
-                        if (scrollable.virtual) {
-                            that._scrollTo(element[0], that.content.find(">.k-virtual-scrollable-wrap")[0]);
-                        } else {
-                            that._scrollTo(element[0], that.content[0]);
+
+                        if (!content.is(".k-grid-content-static,.k-grid-header-static")) {
+                            if (scrollable.virtual) {
+                                that._scrollTo(element[0], that.content.find(">.k-virtual-scrollable-wrap")[0]);
+                            } else {
+                                that._scrollTo(element[0], that.content[0]);
+                            }
                         }
                     }
                 }
