@@ -191,19 +191,22 @@ module.exports = function(grunt) {
                 dest: "<%= kendo.options.jsDestDir %>",
                 ext: ".js",
             },
-            download_builder: {
+            cultures: {
+                src: [ "src/cultures/kendo.culture.*.js",
+                       "!src/cultures/kendo.culture.*.min.js" ],
+                dest: "<%= kendo.options.jsDestDir %>/cultures",
+            },
+        },
+
+        download_builder: {
+            min: {
                 src: mainKendoFiles,
                 ext: ".min.js",
                 dest: PATH.join("dist", "download-builder", "content", "js"),
             },
             config: {
                 src: mainKendoFiles,
-                dest: "download-builder/config/kendo-config.json"
-            },
-            cultures: {
-                src: [ "src/cultures/kendo.culture.*.js",
-                       "!src/cultures/kendo.culture.*.min.js" ],
-                dest: "<%= kendo.options.jsDestDir %>/cultures",
+                dest: "download-builder/config/kendo-config.json",
             },
         },
 
@@ -239,6 +242,6 @@ module.exports = function(grunt) {
     grunt.registerTask("travis", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:travis' ]);
     grunt.registerTask('tests', [ 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
-    grunt.registerTask('all', [ 'kendo', 'copy:jquery', 'copy:timezones' ]);
+    grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:timezones' ]);
     grunt.registerTask('build', [ 'all', 'styles', 'license' ]);
 };
