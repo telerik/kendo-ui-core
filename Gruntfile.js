@@ -113,7 +113,7 @@ module.exports = function(grunt) {
                     )
                 }
             },
-            jenkins: {
+            travis: {
                 options: {
                     reporters: ['dots'],
 
