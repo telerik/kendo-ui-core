@@ -831,9 +831,11 @@ var __meta__ = {
 
             that._destroyEditable();
 
-            that.dataSource.unbind(CHANGE, that._refreshHandler)
+            if (that.dataSource) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler)
                            .unbind(PROGRESS, that._progressHandler)
                            .unbind(ERROR, that._errorHandler);
+            }
 
             element = that.element
                 .add(that.wrapper)
@@ -879,6 +881,10 @@ var __meta__ = {
             var that = this;
 
             that.resizeHandle = null;
+
+            if (!that.thead) {
+                return;
+            }
 
             that.thead.find("th").each(function(){
                 var th = $(this),
@@ -3331,6 +3337,7 @@ var __meta__ = {
                 table = that.table,
                 encoded,
                 cols = table.find("col"),
+                staticCols,
                 dataSource = that.options.dataSource;
 
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
@@ -3362,7 +3369,14 @@ var __meta__ = {
             encoded = !(that.table.find("tbody tr").length > 0 && (!dataSource || !dataSource.transport));
 
             if (that.options.scrollable) {
-                columns = staticColumns(columns).concat(nonStaticColumns(columns));
+                staticCols = staticColumns(columns);
+                columns = nonStaticColumns(columns);
+
+                if (staticCols.length > 0 && columns.length === 0) {
+                    throw new Error("There should be at least one non static columns");
+                }
+
+                columns = staticCols.concat(columns);
             }
 
             that.columns = map(columns, function(column) {

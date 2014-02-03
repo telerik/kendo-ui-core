@@ -1267,7 +1267,7 @@
         throws(function() {
             var grid = new Grid(table, {
                 detailTemplate: "foo",
-                columns: [ { static: true } ]
+                columns: [ { static: true }, "foo" ]
             });
         });
     });
@@ -1276,7 +1276,7 @@
         throws(function() {
             var grid = new Grid(table, {
                 rowTemplate: "foo",
-                columns: [ { static: true } ]
+                columns: [ { static: true }, "foo" ]
             });
         });
     });
@@ -1285,9 +1285,16 @@
         throws(function() {
             var grid = new Grid(table, {
                 altRowTemplate: "foo",
-                columns: [ { static: true } ]
+                columns: [ { static: true }, "foo" ]
             });
         });
     });
 
+    test("error is thrown if all columns are set as static columns", function() {
+        throws(function() {
+            var grid = new Grid(table, {
+                columns: [ { static: true } ]
+            });
+        });
+    });
 })();
