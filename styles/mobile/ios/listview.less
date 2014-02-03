@@ -1,0 +1,167 @@
+@import "../common/icons.less";
+@import "../common/listview.less";
+@import "base.less";
+
+.km-ios li.km-state-active
+{
+    border-width: 0;
+}
+
+.km-ios .km-listview .km-switch
+{
+    margin-top: -.85rem;
+}
+
+/* Filter box */
+
+.km-ios .km-filter-form
+{
+    border-color: currentcolor;
+    background-color: currentcolor;
+}
+
+.km-ios .km-filter-wrap
+{
+    color: inherit;
+    border-radius: 2em;
+    .box-shadow(inset 0 1px 3px @ios-list-border-color);
+    .box-shadow(inset 0 1px 3px currentcolor);
+    border-color: currentcolor;
+    background: transparent;
+}
+
+.km-ios .km-filter-wrap .km-clear:after
+{
+    content: "\e031";
+}
+
+.km-ios .km-list
+{
+    overflow: visible;
+}
+
+.km-ios .km-listinset > li:first-child,
+.km-ios .km-listgroupinset .km-list > li:first-child
+{
+    border-width: 1px 1px 0;
+    border-style: solid;
+    border-radius: @ios-border-radius @ios-border-radius 0 0;
+}
+
+.km-ios .km-list > li
+{
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+.km-ios .km-listinset > li,
+.km-ios .km-listgroupinset .km-list > li
+{
+    border-style: solid;
+    border-width: 0 1px;
+}
+
+.km-ios .km-listinset > li:last-child,
+.km-ios .km-listgroupinset .km-list > li:last-child
+{
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    border-radius: 0 0 @ios-border-radius @ios-border-radius;
+}
+
+.km-ios .km-listinset > li:first-child:last-child,
+.km-ios .km-listgroupinset .km-list > li:first-child:last-child
+{
+    border-width: 1px;
+    border-radius: @ios-border-radius;
+}
+
+.km-ios .km-state-active .km-listview-link:after
+{
+    border-color: inherit;
+}
+
+.km-on-ios.km-ios .km-listview-link:after
+{
+    width: .66rem;
+    height: .64rem;
+    border-width: 0;
+    box-shadow: inset -.2rem .2rem 0;
+}
+
+.km-ios .km-listinset > li:first-child,
+.km-ios .km-listgroupinset .km-list > li:first-child,
+.km-ios .km-listinset li:first-child > .km-listview-link,
+.km-ios .km-listgroupinset li:first-child > .km-listview-link,
+.km-ios .km-listinset li:first-child > .km-listview-label,
+.km-ios .km-listgroupinset li:first-child > .km-listview-label
+{
+    border-radius: @ios-inline-border-radius @ios-inline-border-radius 0 0;
+}
+
+.km-ios .km-listinset li:last-child > .km-listview-link,
+.km-ios .km-listgroupinset li:last-child > .km-listview-link,
+.km-ios .km-listinset li:last-child > .km-listview-label,
+.km-ios .km-listgroupinset li:last-child > .km-listview-label
+{
+    border-radius: 0 0 @ios-inline-border-radius @ios-inline-border-radius;
+}
+
+.km-ios .km-listinset li:first-child:last-child > .km-listview-link,
+.km-ios .km-listgroupinset li:first-child:last-child > .km-listview-link,
+.km-ios .km-listinset li:first-child:last-child > .km-listview-label,
+.km-ios .km-listgroupinset li:first-child:last-child > .km-listview-label
+{
+    border-radius: @ios-inline-border-radius;
+}
+
+.km-ios .km-group-title
+{
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    position: relative;
+}
+
+.km-ios .km-listgroupinset .km-group-title
+{
+    font-size: 1.2em;
+    padding: 0;
+    background: none;
+    border: none;
+    .box-shadow(none);
+}
+
+.km-ios .km-list > li
+{
+    display: block;
+    vertical-align: middle;
+    line-height: 1.6em;
+    font-size: 1.2em;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.km-ios .km-insetcontent .km-content
+{
+    background: none;
+}
+
+/* Pull To Refresh */
+
+.km-root .km-ios .km-load-more,
+.km-ios .km-scroller-pull
+{
+    font-size: 1em;
+    background: none;
+}
+
+.km-ios .km-load-more .km-icon,
+.km-ios .km-scroller-pull .km-icon
+{
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+}
+

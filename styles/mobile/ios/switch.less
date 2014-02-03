@@ -1,0 +1,107 @@
+@import "../common/switch.less";
+@import "base.less";
+
+/* Switch */
+
+.km-ios .km-switch
+{
+    width: 5rem;
+    height: 1.8rem;
+    line-height: 1.65rem;
+    overflow: hidden;
+    font-family: HelveticaNeue, Arial, sans-serif;
+}
+
+.km-ios .km-switch-wrapper
+{
+    overflow: hidden;
+}
+
+.km-ios .km-switch-background,
+.km-ios .k-slider-selection
+{
+    background-position: 4.25em 0;
+    background-repeat: no-repeat;
+}
+
+.km-ios .km-switch-background,
+.km-ios .k-slider-horizontal .k-slider-selection
+{
+    margin-left: -3.4rem;
+}
+
+.km-ios .km-switch-background:after
+{
+    content: "\a0";
+    display: inline-block;
+    margin: 0 0 0 .3rem;
+    width: 78%;
+    height: 50%;
+    line-height: 100%;
+    vertical-align: bottom;
+}
+
+.km-ios .km-switch-container
+{
+    padding: 1px 0 1px 1px;
+    border-width: 0;
+}
+
+.km-ios .km-checkbox
+{
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 15px;
+    .transition(~"all 100ms ease-out");
+}
+
+.km-ios .km-switch-handle
+{
+    width: 1.6em;
+    margin: -1px 3px 0 -1px;
+    border-width: @ios-border-width;
+    border-style: solid;;
+}
+
+.km-ios .km-switch-label-off
+{
+    left: 1.5em;
+}
+
+.km-ios .km-switch-label-on
+{
+    left: -3em;
+}
+
+.km-ios .km-switch-label-on,
+.km-ios .km-switch-label-off
+{
+    width: 195%;
+    font-size: 1em;
+    line-height: 1.5em;
+    vertical-align: middle;
+}
+
+.km-ios .km-switch-handle,
+.km-ios .km-switch-wrapper,
+.km-ios .km-switch-container,
+.km-ios .km-switch-background
+{
+    border-radius: 1.3em;
+}
+
+.km-ios .km-switch-container,
+.km-ios .km-switch-wrapper
+{
+    border-radius: 1.5em;
+    .box-sizing(border-box);
+    border-width: @ios-border-width;
+    border-style: solid;
+    background-clip: content-box;
+}
+
+.km-ios .km-switch-background:after
+{
+    border-radius: ~"1em 1em .5em .5em";
+}
+

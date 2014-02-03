@@ -1,0 +1,47 @@
+@import "../common/icons.less";
+@import "../common/tabstrip.less";
+@import "base.less";
+
+.km-ios .km-tabstrip
+{
+    padding: .1em 0;
+    border-top-width: 1px;
+    border-top-style: solid;
+}
+
+.km-phone .km-ios .km-tabstrip
+{
+    display: table;
+    border-collapse: separate;
+    border-spacing: 3px 0;
+}
+
+.km-phone .km-ios .km-tabstrip .km-button
+{
+    display: table-cell;
+}
+
+.km-root .km-ios .km-tabstrip
+{
+    border-spacing: 0;
+    padding: 0;
+}
+
+.km-ios .km-tabstrip .km-button
+{
+    .box-shadow(none);
+    background: transparent;
+    border: 0;
+    font-size: .7em;
+    min-width: 6em;
+    text-shadow: inherit;
+    margin: 0;
+    padding: .1em .3em .4em;
+    border-radius: 0;
+}
+
+.km-ios .km-tabstrip .km-button:last-child
+{
+    .box-shadow(none);
+}
+
