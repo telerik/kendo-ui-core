@@ -15,5 +15,15 @@ namespace Kendo.Mvc.UI.Fluent
             : base(dataSource, viewContext, urlGenerator)
         {
         }
+
+        /// <summary>
+        /// Use it to configure WebApi binding.
+        /// </summary>
+        public ReadOnlyWebApiDataSourceBuilder<TModel> WebApi()
+        {
+            dataSource.Type = DataSourceType.WebApi;
+
+            return new ReadOnlyWebApiDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
+        }
     }
 }

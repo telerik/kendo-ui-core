@@ -139,6 +139,7 @@
     <Compile Include="UI\Chart\Serialization\ScatterErrorBarsSerializerTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxSerializationTests.cs" />
     <Compile Include="UI\DataSource\ListViewAjaxDataSourceBuilderTests.cs" />
+    <Compile Include="UI\DataSource\ReadOnlyAjaxDataSourceBuilderTests.cs" />
     <Compile Include="UI\DataSource\SchedulerAjaxDataSourceBuilderTests.cs" />
     <Compile Include="UI\DataSource\SchedulerWebApiDataSourceBuilderTests.cs" />
     <Compile Include="UI\DataSource\WebApiDataSourceBuilderBaseTests.cs" />

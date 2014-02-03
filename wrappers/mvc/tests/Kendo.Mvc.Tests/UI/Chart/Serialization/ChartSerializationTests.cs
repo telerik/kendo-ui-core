@@ -246,5 +246,15 @@ namespace Kendo.Mvc.UI.Tests.Chart
 
             output.ShouldContain("{\"transitions\":false}");
         }
+
+        [Fact]
+        public void WebApi_data_source_type_should_be_serialized()
+        {
+            chart.DataSource.Type = DataSourceType.WebApi;
+            chart.DataSource.Transport.Read.Url = "Test";
+            chart.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"dataSource\":{\"type\":\"webapi\"");
+        }
     }
 }

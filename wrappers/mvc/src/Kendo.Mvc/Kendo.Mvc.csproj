@@ -681,6 +681,7 @@
     <Compile Include="UI\DataSource\Fluent\ListViewAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerModelDescriptorFactory.cs" />
+    <Compile Include="UI\DataSource\Fluent\ReadOnlyWebApiDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\SchedulerWebApiDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\WebApiDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\WebApiDataSourceBuilderBase.cs" />

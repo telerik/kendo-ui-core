@@ -356,12 +356,15 @@ namespace Kendo.Mvc.UI
         {
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
             {
-                if (!DataSource.Transport.Read.Type.HasValue())
+                if (DataSource.Type == null)
                 {
-                    DataSource.Transport.Read.Type = "POST";
-                }
+                    if (!DataSource.Transport.Read.Type.HasValue())
+                    {
+                        DataSource.Transport.Read.Type = "POST";
+                    }
 
-                DataSource.Type = DataSourceType.Ajax;
+                    DataSource.Type = DataSourceType.Ajax;
+                }
                 options.Add("dataSource", DataSource.ToJson());
             }
             else if (Data != null)
