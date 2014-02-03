@@ -218,5 +218,5 @@ module.exports = function(grunt) {
     grunt.registerTask('tests', [ 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'copy:jquery', 'copy:timezones' ]);
-    grunt.registerTask('build', ['copy:jquery', 'copy:timezones', 'kendo:min', 'kendo:full', 'kendo:cultures', 'styles', 'license']);
+    grunt.registerTask('build', ['copy:jquery', 'kendo:min', 'kendo:full', 'kendo:cultures', 'styles', 'license']);
 };

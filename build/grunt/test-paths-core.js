@@ -6,7 +6,6 @@ exports.beforeTestFiles = [
 ];
 
 exports.afterTestFiles = [
-    'src/kendo.timezones.js',
     'src/cultures/kendo.culture.de-DE.js',
     'src/cultures/kendo.culture.bg-BG.js',
     'src/cultures/kendo.culture.en-ZA.js',
