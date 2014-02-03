@@ -155,6 +155,12 @@ var __meta__ = {
                 prevVisible = target.element.prev();
                 nextVisible = target.element.next();
 
+                if(target.sortable.isEmpty()) {
+                    target.element.append(placeholder);
+                    target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                    return;
+                }
+
                 if(this.floating) { //horizontal
                     if(xAxisDelta < 0 && offsetDelta.left < 0) {
                         direction = "prev";
@@ -187,9 +193,6 @@ var __meta__ = {
                         target.element.after(placeholder);
                         target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
                     }
-                } else if(target.element.getKendoSortable()) {
-                    target.element.append(placeholder);
-                    target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
                 }
             }
         },
