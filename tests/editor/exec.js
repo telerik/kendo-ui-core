@@ -107,7 +107,7 @@ test("exec outdent creates indent command", function() {
 });
 
 function innerHTML(element) {
-    return element.innerHTML.toLowerCase().replace(/\ufeff/g, "BOM");
+    return element.innerHTML.toLowerCase().replace(/\ufeff/g, "BOM").replace(/<br[^>]*>/g, "");
 }
 
 test("exec bold on empty range inserts tag", function() {

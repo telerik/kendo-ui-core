@@ -277,7 +277,7 @@ test("BOM nodes are not accumulated when executing sequential commands", functio
     editor.exec("bold");
     editor.exec("italic");
 
-    equal(editor.body.lastChild.childNodes.length, 1);
+    equal($("strong", editor.body)[0].childNodes.length, 1);
 });
 
 }());
