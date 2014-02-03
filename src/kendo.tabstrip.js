@@ -1061,12 +1061,16 @@ var __meta__ = {
                         [0].style.cssText = "";
                 },
 
-                complete: function () {
+                complete: function (xhr) {
                     that.inRequest = false;
                     if (this.noProgress) {
                         setTimeout(this.stopProgress, 500);
                     } else {
                         this.stopProgress();
+                    }
+
+                    if (xhr.statusText == "abort") {
+                        statusIcon.remove();
                     }
                 },
 
