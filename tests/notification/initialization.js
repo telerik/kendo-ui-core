@@ -21,7 +21,7 @@
 
     test("initialization creates an internal GUID", 3, function() {
         createNotification();
-        
+
         var guid = notification._guid;
 
         equal(typeof guid, "string");
@@ -49,7 +49,7 @@
             size = 0,
             allZero = true,
             key;
-        
+
         for (key in paddings) {
             if (paddings.hasOwnProperty(key)) {
                 size++;
@@ -71,7 +71,7 @@
         });
 
         var paddings = notification._popupPaddings;
-        
+
         ok(!paddings.hasOwnProperty("paddingTop"));
     });
 
@@ -81,7 +81,7 @@
         });
 
         var paddings = notification._popupPaddings;
-        
+
         ok(!paddings.hasOwnProperty("paddingBottom"));
     });
 
@@ -91,7 +91,7 @@
         });
 
         var paddings = notification._popupPaddings;
-        
+
         ok(!paddings.hasOwnProperty("paddingRight"));
     });
 
@@ -101,13 +101,13 @@
         });
 
         var paddings = notification._popupPaddings;
-        
+
         ok(!paddings.hasOwnProperty("paddingLeft"));
     });
 
     test("initialization compiles default template function", 2, function() {
         createNotification();
-        
+
         var defaultFunc = notification._getCompiled();
         var params = {typeIcon: "info", content: "foo"};
         var defaultOutput = '<div class="k-notification-wrap"><span class="k-icon k-i-note">info</span>foo<span class="k-icon k-i-close">Hide</span></div>';
@@ -124,7 +124,7 @@
         });
 
         var fooFunc = notification._getCompiled("foo");
-        
+
         equal(typeof fooFunc, "function");
         equal(fooFunc({}), "bar");
     });
@@ -135,7 +135,7 @@
         createNotification({
             autoHideAfter: autoHideAfter
         });
-        
+
         notification.show("foo");
 
         setTimeout(function(){
@@ -152,7 +152,7 @@
             appendTo: QUnit.fixture,
             autoHideAfter: autoHideAfter
         });
-        
+
         notification.show("foo");
 
         setTimeout(function(){
@@ -166,7 +166,7 @@
         createNotification({
             autoHideAfter: 0
         });
-        
+
         notification.show("foo");
 
         $(".k-notification").click();
@@ -179,7 +179,7 @@
             appendTo: QUnit.fixture,
             autoHideAfter: 0
         });
-        
+
         notification.show("foo");
 
         $(".k-notification").click();
@@ -192,7 +192,7 @@
             autoHideAfter: 0,
             hideOnClick: false
         });
-        
+
         notification.show("foo");
 
         $(".k-notification").click();
@@ -206,7 +206,7 @@
             autoHideAfter: 0,
             hideOnClick: false
         });
-        
+
         notification.show("foo");
 
         $(".k-notification").click();
@@ -218,7 +218,7 @@
         createNotification({
             autoHideAfter: 0
         });
-        
+
         notification.show("foo");
 
         var notificationElement = $(".k-notification")[0];
@@ -235,7 +235,7 @@
             height: size,
             autoHideAfter: 0
         });
-        
+
         notification.show("foo");
 
         var notificationElement = $(".k-notification")[0];
@@ -252,7 +252,7 @@
             height: size,
             autoHideAfter: 0
         });
-        
+
         notification.show("foo");
 
         var notificationElement = $(".k-notification")[0];
@@ -269,7 +269,7 @@
             height: size,
             autoHideAfter: 0
         });
-        
+
         notification.show("foo");
 
         var notificationElement = $(".k-notification")[0];
@@ -302,7 +302,7 @@
             hideOnClick: false,
             button: true
         });
-        
+
         notification.show("foo");
 
         $(".k-notification").find(".k-i-close").click();
@@ -316,7 +316,7 @@
             hideOnClick: false,
             button: true
         });
-        
+
         notification.show("foo");
 
         $(".k-notification").find(".k-i-close").click();
@@ -326,7 +326,7 @@
 
     test("popup notifications have fixed position style by default", function() {
         createNotification();
-        
+
         notification.show("foo");
 
         equal($(".k-notification").closest(".k-animation-container").css("position"), "fixed");
@@ -338,7 +338,7 @@
                 pinned: false
             }
         });
-        
+
         notification.show("foo");
 
         equal($(".k-notification").closest(".k-animation-container").css("position"), "absolute");
@@ -351,7 +351,7 @@
                 left: 2
             }
         });
-        
+
         notification.show("foo");
 
         var popupContainer = $(".k-notification").parent();
@@ -367,7 +367,7 @@
                 left: "2px"
             }
         });
-        
+
         notification.show("foo");
 
         var popupContainer = $(".k-notification").parent();
@@ -383,7 +383,7 @@
                 left: 0
             }
         });
-        
+
         notification.show("foo");
 
         var popupContainer = $(".k-notification").parent();
@@ -400,7 +400,7 @@
                 pinned: false
             }
         });
-        
+
         notification.show("foo");
 
         var popupContainer = $(".k-notification").parent();
@@ -417,7 +417,7 @@
                 pinned: false
             }
         });
-        
+
         notification.show("foo");
 
         var popupContainer = $(".k-notification").parent();
@@ -434,7 +434,7 @@
                 pinned: false
             }
         });
-        
+
         notification.show("foo");
 
         var popupContainer = $(".k-notification").parent();
@@ -455,7 +455,7 @@
                 left: 2
             }
         });
-        
+
         notification.show("foo");
 
         var popupContainer = $(".k-notification").parent();
@@ -477,7 +477,7 @@
                 pinned: false
             }
         });
-        
+
         notification.show("foo");
 
         var popupContainer = $(".k-notification").parent();
@@ -491,7 +491,7 @@
             appendTo: QUnit.fixture,
             autoHideAfter: 0
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         notification.show('<span id="bar">bar</span>');
 
@@ -505,7 +505,7 @@
             autoHideAfter: 0,
             stacking: "right"
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         notification.show('<span id="bar">bar</span>');
 
@@ -519,7 +519,7 @@
             autoHideAfter: 0,
             stacking: "up"
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         notification.show('<span id="bar">bar</span>');
 
@@ -533,19 +533,19 @@
             autoHideAfter: 0,
             stacking: "left"
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         notification.show('<span id="bar">bar</span>');
 
         equal(QUnit.fixture.children(".k-notification").last().find("#foo").length, 1);
         equal(QUnit.fixture.children(".k-notification").first().find("#bar").length, 1);
     });
-    
+
     test("up popup stacking is applied by default", 2, function() {
         createNotification({
             autoHideAfter: 0
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         var fooNotificationWrapper = $("#foo").closest(".k-notification").parent();
 
@@ -561,7 +561,7 @@
             autoHideAfter: 0,
             stacking: "down"
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         var fooNotificationWrapper = $("#foo").closest(".k-notification").parent();
 
@@ -579,7 +579,7 @@
                 top: 1
             }
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         var fooNotificationWrapper = $("#foo").closest(".k-notification").parent();
 
@@ -595,15 +595,15 @@
             autoHideAfter: 0,
             stacking: "right"
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         var fooNotificationWrapper = $("#foo").closest(".k-notification").parent();
 
         notification.show('<span id="bar">bar</span>');
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
-        ok(fooNotificationWrapper.css("left") < barNotificationWrapper.css("left"));
-        equal(fooNotificationWrapper.css("top"), barNotificationWrapper.css("top"));
+        ok(fooNotificationWrapper.offset().left < barNotificationWrapper.offset().left);
+        equal(fooNotificationWrapper.offset().top, barNotificationWrapper.offset().top);
     });
 
     test("left popup stacking is applied", 2, function() {
@@ -611,7 +611,7 @@
             autoHideAfter: 0,
             stacking: "left"
         });
-        
+
         notification.show('<span id="foo">foo</span>');
         var fooNotificationWrapper = $("#foo").closest(".k-notification").parent();
 
@@ -629,7 +629,7 @@
             autoHideAfter: 0,
             allowHideAfter: allowHideAfter
         });
-        
+
         notification.show("foo");
 
         $(".k-notification").click();
@@ -656,7 +656,7 @@
             button: true,
             allowHideAfter: allowHideAfter
         });
-        
+
         notification.show("foo");
 
         $(".k-notification").find(".k-i-close").click();
@@ -667,7 +667,7 @@
 
         setTimeout(function(){
             start();
-            
+
             $(".k-notification").find(".k-i-close").click();
             equal($(".k-notification").length, 0);
 
