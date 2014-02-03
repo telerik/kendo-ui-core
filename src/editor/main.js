@@ -242,6 +242,10 @@
         },
 
         _selectionChange: function() {
+            if (!bomFill) {
+                kendo.ui.editor.Dom.ensureTrailingBreaks(this.body);
+            }
+
             this._selectionStarted = false;
             this.saveSelection();
             this.trigger("select", {});
