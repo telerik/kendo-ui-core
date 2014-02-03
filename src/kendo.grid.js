@@ -2578,13 +2578,13 @@ var __meta__ = {
                         if (isInCell) {
                             that.closeCell(true);
                         } else {
-                            currentIndex = that.items().index($(current).parent());
+                            currentIndex = $(current).parent().index();
                             if (active) {
                                 active.blur();
                             }
                             that.cancelRow();
                             if (currentIndex >= 0) {
-                                that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                                that.current(dataTable.find(">tbody>tr").eq(currentIndex).children().filter(NAVCELL).first());
                             }
                         }
 
