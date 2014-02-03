@@ -1480,7 +1480,9 @@ function pad(number, digits, end) {
                 "yyyy-MM-ddTHH:mm",
                 "yyyy-MM-dd HH:mm:ss",
                 "yyyy-MM-dd HH:mm",
-                "yyyy-MM-dd"
+                "yyyy-MM-dd",
+                "HH:mm:ss",
+                "HH:mm"
             ].concat(formats);
         }
 

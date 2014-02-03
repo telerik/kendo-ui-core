@@ -52,6 +52,41 @@
         equal(timepicker.timeView.options.format, "hh:mm");
     });
 
+    test("initializes min and max options from data attributes", function() {
+        dom = $('<input data-role="timepicker" data-min="09:00" data-max="21:30" />');
+        dom.appendTo(QUnit.fixture);
+
+        kendo.bind(dom);
+
+        var timepicker = dom.data("kendoTimePicker");
+        var min = kendo.date.today();
+        var max = kendo.date.today();
+
+        min.setHours(9, 0, 0);
+        max.setHours(21, 30, 0);
+
+        deepEqual(timepicker.min(), min);
+        deepEqual(timepicker.max(), max);
+    });
+
+    test("initializes min and max options from data attributes after init of the widget", function() {
+        dom = $('<input data-role="timepicker" data-min="09:00" data-max="21:30" />');
+        dom.appendTo(QUnit.fixture);
+        dom.kendoTimePicker();
+
+        kendo.bind(dom);
+
+        var timepicker = dom.data("kendoTimePicker");
+        var min = kendo.date.today();
+        var max = kendo.date.today();
+
+        min.setHours(9, 0, 0);
+        max.setHours(21, 30, 0);
+
+        deepEqual(timepicker.min(), min);
+        deepEqual(timepicker.max(), max);
+    });
+
     test("Preserve options after widget init", function() {
         dom = $('<input data-role="timepicker" />');
         dom.kendoTimePicker({
