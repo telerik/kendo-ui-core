@@ -12,7 +12,7 @@ BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.
 namespace :download_builder do
 
     task :sources => :less do
-        grunt "kendo:download_builder"
+        grunt "download_builder"
         core = File.join(BUILDER_DEPLOY_PATH, 'content/js/kendo.core.min.js')
 
         contents = File.read(core)
