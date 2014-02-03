@@ -3535,6 +3535,10 @@ var __meta__ = {
                 columns = options.scrollable ? nonStaticColumns(that.columns) : that.columns;
 
             if (options.scrollable && columnsStatic.length) {
+                if (options.rowTemplate || options.altRowTemplate) {
+                    throw new Error("Having both row template and static columns is not supported");
+                }
+
                 that.rowTemplate = that._tmpl(options.rowTemplate, columns, false, true);
                 that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true, true);
 

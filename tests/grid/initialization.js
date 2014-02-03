@@ -1265,11 +1265,29 @@
 
     test("error is thrown if static columns and detail template are set", function() {
         throws(function() {
-            debugger;
             var grid = new Grid(table, {
                 detailTemplate: "foo",
                 columns: [ { static: true } ]
             });
         });
     });
+
+    test("error is thrown if static columns and row template are set", function() {
+        throws(function() {
+            var grid = new Grid(table, {
+                rowTemplate: "foo",
+                columns: [ { static: true } ]
+            });
+        });
+    });
+
+    test("error is thrown if static columns and alt row template are set", function() {
+        throws(function() {
+            var grid = new Grid(table, {
+                altRowTemplate: "foo",
+                columns: [ { static: true } ]
+            });
+        });
+    });
+
 })();
