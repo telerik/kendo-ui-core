@@ -1,23 +1,7 @@
 var FS = require("fs");
 var PATH = require("path");
 var META = require("../../kendo-meta.js");
-
-function outdated(source, dest) {
-    if (Array.isArray(source)) {
-        for (var i = 0; i < source.length; ++i) {
-            if (outdated(source[i], dest))
-                return true;
-        }
-        return false;
-    }
-    try {
-        var sstat = FS.statSync(source);
-        var dstat = FS.statSync(dest);
-        return sstat.mtime.getTime() > dstat.mtime.getTime();
-    } catch(ex) {
-        return true;
-    }
-}
+var UTILS = require("./utils.js");
 
 module.exports = function(grunt) {
 
@@ -32,10 +16,7 @@ module.exports = function(grunt) {
                 var srcFiles = comp.getBuildDeps().map(function(f){
                     return "src/" + f;
                 });
-                if (outdated(srcFiles, dest)) {
-                    if (comp.isBundle() && task.target == "download_builder") {
-                        return; // bundles not needed here
-                    }
+                if (UTILS.outdated(srcFiles, dest)) {
                     grunt.log.writeln("Making " + dest);
                     if (task.target == "min") {
                         code = comp.buildMinSource();
@@ -43,8 +24,6 @@ module.exports = function(grunt) {
                         grunt.file.write(dest + ".map", map);
                     } else if (task.target == "full") {
                         code = comp.buildFullSource();
-                    } else if (task.target == "download_builder") {
-                        code = comp.buildMinSource_noAMD();
                     }
                     grunt.file.write(dest, code);
                 }
@@ -69,13 +48,13 @@ module.exports = function(grunt) {
             return;
         }
 
-        if (force || outdated(files, dest)) {
+        if (force || UTILS.outdated(files, dest)) {
             grunt.log.writeln("Making bundle " + dest);
             var data = META.bundleFiles(components, bundle);
             grunt.file.write(dest, data.code);
         }
 
-        if (force || outdated(files, destMin)) {
+        if (force || UTILS.outdated(files, destMin)) {
             grunt.log.writeln("Making bundle " + destMin);
             var data = META.bundleFiles(components, bundleMin, true);
             grunt.file.write(destMin, data.code);
@@ -83,24 +62,14 @@ module.exports = function(grunt) {
         }
     }
 
-    function makeKendoConfig(task) {
-        var files = getSrc(task);
-        var dest = task.files[0].dest;
-        if (outdated(files, dest)) {
-            grunt.log.writeln("Building kendo-config.json");
-            var data = META.buildKendoConfig();
-            grunt.file.write(dest, JSON.stringify(data, null, 2));
-        }
-    }
-
     function makeCultures(task) {
         var destDir = task.files[0].dest;
-        var files = getSrc(task);
+        var files = UTILS.getSrc(task);
         files.forEach(function(f){
             var basename = PATH.basename(f);
             var dest = PATH.join(destDir, basename);
             var destMin = dest.replace(/\.js$/, ".min.js");
-            if (outdated(f, dest)) {
+            if (UTILS.outdated(f, dest)) {
                 var code = grunt.file.read(f, { encoding: "utf8" });
 
                 // cultures depend on kendo.core but we can't declare that in the AMD wrapper because people would
@@ -122,26 +91,12 @@ module.exports = function(grunt) {
         });
     }
 
-    function getSrc(task) {
-        return task.files.reduce(function(a, f){
-            f.src.forEach(function(f){
-                a.push(f);
-            });
-            return a;
-        }, []);
-    }
-
     grunt.registerMultiTask("kendo", "Kendo UI build task", function(){
         var task = this;
         switch (task.target) {
           case "min":
           case "full":
-          case "download_builder":
             makeSources(task);
-            break;
-
-          case "config":
-            makeKendoConfig(task);
             break;
 
           case "cultures":
