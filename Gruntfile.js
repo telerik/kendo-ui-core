@@ -117,10 +117,6 @@ module.exports = function(grunt) {
                 options: {
                     reporters: ['dots'],
 
-                    junitReporter: {
-                      outputFile: grunt.option('junit-results')
-                    },
-
                     singleRun: true,
 
                     browsers: [ 'bs_chrome' ],
