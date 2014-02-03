@@ -246,6 +246,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Makes the column static or not. By default all columns are not static.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid(Model)
+        ///             .Name("Grid")
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).Static((bool)ViewData["static"]))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TColumnBuilder Static(bool value)
+        {
+            Column.Static = value;
+
+            return this as TColumnBuilder;
+        }
+
+        /// <summary>
         /// Makes the column hidden or not. By default all columns are not hidden. Hidden columns are rendered in the output HTML but are hidden.
         /// </summary>
         /// <example>

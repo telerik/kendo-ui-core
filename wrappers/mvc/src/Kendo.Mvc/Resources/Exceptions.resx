@@ -328,4 +328,13 @@ The request for '{0}' has found the following matching controllers:{2}</value>
   <data name="CannotUsePushStateWithServerNavigation" xml:space="preserve">
     <value>Cannot use PushState with server navigation.</value>
   </data>
+  <data name="CannotUseDetailTemplateAndStaticColumns" xml:space="preserve">
+    <value>Cannot use both Detail template and static columns</value>
+  </data>
+  <data name="CannotUseRowTemplateAndStaticColumns" xml:space="preserve">
+    <value>Cannot use both Row template and static columns</value>
+  </data>
+  <data name="CannotUseStaticColumnsAndServerBinding" xml:space="preserve">
+    <value>Static columns are not supported in server binding mode</value>
+  </data>
 </root>

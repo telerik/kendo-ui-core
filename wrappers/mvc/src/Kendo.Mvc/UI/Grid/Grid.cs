@@ -1265,6 +1265,11 @@ namespace Kendo.Mvc.UI
                 }
             }
 
+            if (Columns.Any(c => c.Static) && !IsClientBinding)
+            {
+                throw new NotSupportedException(Exceptions.CannotUseStaticColumnsAndServerBinding);
+            }
+
             if (IsClientBinding)
             {
                 if (Columns.OfType<IGridTemplateColumn<T>>().Where(c => c.Template != null && string.IsNullOrEmpty(c.ClientTemplate)).Any())
@@ -1275,6 +1280,19 @@ namespace Kendo.Mvc.UI
                 if (DetailTemplate != null && DetailTemplate.HasValue() && string.IsNullOrEmpty(ClientDetailTemplateId))
                 {
                     throw new NotSupportedException(Exceptions.CannotUseTemplatesInAjaxOrWebService);
+                }
+
+                if (Columns.Any(c => c.Static)) 
+                { 
+                    if (DetailTemplate != null && DetailTemplate.HasValue() || ClientDetailTemplateId.HasValue())
+                    {
+                        throw new NotSupportedException(Exceptions.CannotUseDetailTemplateAndStaticColumns);
+                    }
+
+                    if (ClientRowTemplate.HasValue() || RowTemplate != null && RowTemplate.HasValue())
+                    {
+                        throw new NotSupportedException(Exceptions.CannotUseRowTemplateAndStaticColumns);
+                    }
                 }
 
                 if (Columns.OfType<IGridActionColumn>().Any(c => c.Commands.OfType<GridCustomActionCommand<T>>().Any(command => command.HasValue())))
