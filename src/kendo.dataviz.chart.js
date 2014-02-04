@@ -3217,6 +3217,43 @@ var __meta__ = {
             return options;
         },
 
+        plotRange: function(point) {
+            var categoryIx = point.categoryIx;
+            var categoryPts = this.categoryPoints[categoryIx];
+
+            if (this.options.isStacked) {
+                var plotValue = point.value;
+                var prevValue = 0;
+
+                for (var i = 0; i < categoryPts.length; i++) {
+                    var neighbour = categoryPts[i];
+
+                    if (point === neighbour) {
+                        break;
+                    }
+
+                    if ((point.series.stack && neighbour.series.stack) &&
+                        point.series.stack !== neighbour.series.stack) {
+                        continue;
+                    }
+
+                    if ((neighbour.value > 0 && point.value > 0) ||
+                        (neighbour.value < 0 && point.value < 0)) {
+                        prevValue += neighbour.value;
+                        plotValue += neighbour.value;
+                    }
+                };
+
+                return [prevValue, plotValue];
+            } else {
+                var series = point.series;
+                var valueAxis = this.seriesValueAxis(series);
+                var axisCrossingValue = this.categoryAxisCrossingValue(valueAxis);
+
+                return [axisCrossingValue, point.value];
+            }
+        },
+
         addErrorBar: function(point, data, categoryIx) {
             var chart = this,
                 value = point.value,
@@ -3288,6 +3325,7 @@ var __meta__ = {
             point = chart.createPoint(data, category, categoryIx, series, seriesIx);
             if (point) {
                 point.category = category;
+                point.categoryIx = categoryIx;
                 point.series = series;
                 point.seriesIx = seriesIx;
                 point.owner = chart;

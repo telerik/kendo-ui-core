@@ -2544,4 +2544,6 @@
             });
         });
     })();
+
+    categoricalChartTests("Bar Chart", dataviz.BarChart);
 })();
