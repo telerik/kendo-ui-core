@@ -1,0 +1,101 @@
+@import "../common/forms.less";
+@import "base.less";
+
+/* Slider */
+
+.km-ios7 .k-slider
+{
+    margin-top: -.15em;
+    height: .2em;
+}
+
+.km-ios7 .k-slider .k-draghandle,
+.km-ios7 .k-slider .k-draghandle:hover
+{
+    top: -.8em;
+    border: 0;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 5em;
+}
+
+.km-ios7 .k-slider-track
+{
+    margin: -.5em .5em 0 -.5em;
+    .box-sizing(content-box);
+}
+
+.km-ios7 .k-slider-selection
+{
+    margin-left: 0;
+}
+
+/* Checkboxes and Radios */
+
+.km-ios7 .km-listview-label input[type=radio]:checked,
+.km-ios7 .km-listview-label input[type=checkbox]:checked
+{
+    font-size: 1.2em;
+}
+
+/* Forms */
+
+.km-ios7 .km-list input[type=password],
+.km-ios7 .km-list input[type=search],
+.km-ios7 .km-list input[type=number],
+.km-ios7 .km-list input[type=tel],
+.km-ios7 .km-list input[type=url],
+.km-ios7 .km-list input[type=email],
+.km-ios7 .km-list input[type=month],
+.km-ios7 .km-list input[type=color],
+.km-ios7 .km-list input[type=week],
+.km-ios7 .km-list input[type=date],
+.km-ios7 .km-list input[type=time],
+.km-ios7 .km-list input[type=datetime],
+.km-ios7 .km-list input[type=datetime-local],
+.km-ios7 .km-list input[type=text]:not(.k-input),
+.km-ios7 .km-list select:not([multiple]),
+.km-ios7 .km-list .k-dropdown-wrap,
+.km-ios7 .km-list textarea
+{
+    .appearance(none);
+    font-size: 1.1rem;
+    min-width: 6em;
+    border: 0;
+    padding: .4em;
+    outline: none;
+    right: .8em;
+    background: transparent;
+}
+
+.km-ios7 .km-list .k-dropdown-wrap
+{
+	padding: .2em;
+}
+
+.km-ios7 .km-list .k-dropdown
+{
+    margin-top: -1.05em;
+    font-weight: normal;
+}
+
+.km-ios7 .km-list input[type=color],
+.km-ios7 .km-list input[type=week],
+.km-ios7 .km-list input[type=date],
+.km-ios7 .km-list input[type=time],
+.km-ios7 .km-list input[type=month],
+.km-ios7 .km-list input[type=datetime],
+.km-ios7 .km-list input[type=datetime-local],
+.km-ios7 .km-list .k-dropdown
+{
+    text-align: right;
+}
+
+.km-ios7 .km-list .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    border-radius: 0;
+    background: transparent;
+    .box-shadow(none);
+}
+
