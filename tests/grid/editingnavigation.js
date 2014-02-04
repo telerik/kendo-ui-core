@@ -459,4 +459,19 @@
         equal(table.attr("tabIndex"), "0");
         equal(staticTable.attr("tabIndex"), "-1");
     });
+
+    test("focus first column when static columns", function() {
+        var grid = setup({
+            editable: "inline",
+            columns: [
+                { field: "foo", static: true },
+                { field: "name", static: false },
+                { field: "id", static: false }
+            ]
+        });
+
+        staticTable.focus().press(kendo.keys.ENTER);
+
+        strictEqual(document.activeElement, staticTable.find("input")[0]);
+    });
 })();

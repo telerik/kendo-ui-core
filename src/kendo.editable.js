@@ -289,7 +289,7 @@ var __meta__ = {
                 errorTemplate: that.options.errorTemplate || undefined,
                 rules: rules });
 
-            var focusable = container.find(":kendoFocusable:first").focus();
+            var focusable = container.find(":kendoFocusable").eq(0).focus();
             if (oldIE) {
                 focusable.focus();
             }
