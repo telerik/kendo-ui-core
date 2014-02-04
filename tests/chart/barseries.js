@@ -66,13 +66,12 @@
                     return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                     categoryIndex + 1, CATEGORY_AXIS_Y);
                 },
-                function(a, b) {
-                    var a = typeof a === "undefined" ? 0 : a,
-                        b = typeof b === "undefined" ? a : b,
-                        top = VALUE_AXIS_MAX - Math.max(a, b),
-                        bottom = VALUE_AXIS_MAX - Math.min(a, b),
-                        slotTop = Math.min(CATEGORY_AXIS_Y, top),
-                        slotBottom = Math.max(CATEGORY_AXIS_Y, bottom);
+                function(from, to) {
+                    var reverse = this.options.reverse,
+                        fromY = CATEGORY_AXIS_Y + (reverse ? from : -from),
+                        toY = CATEGORY_AXIS_Y + (reverse ? to : -to),
+                        slotTop = Math.min(fromY, toY),
+                        slotBottom = Math.max(fromY, toY);
 
                     return new Box2D(0, slotTop, 0, slotBottom);
                 },
@@ -960,11 +959,11 @@
                 return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                                  categoryIndex + 100, CATEGORY_AXIS_Y);
             },
-            function(value) {
-                var value = typeof value === "undefined" ? 0 : value,
-                    valueY = VALUE_AXIS_MAX - value,
-                    slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
-                    slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+            function(from, to) {
+                var fromY = CATEGORY_AXIS_Y + from,
+                    toY = CATEGORY_AXIS_Y + to,
+                    slotTop = Math.min(fromY, toY),
+                    slotBottom = Math.max(fromY, toY);
 
                 return new Box2D(0, slotTop, 0, slotBottom);
             },
@@ -1421,10 +1420,11 @@
                 return new Box2D(CATEGORY_AXIS_X, categoryIndex,
                                CATEGORY_AXIS_X, categoryIndex + 1);
             },
-            function(value) {
-                var valueX = CATEGORY_AXIS_X + value,
-                    slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
-                    slotRight = Math.max(CATEGORY_AXIS_X, valueX);
+            function(from, to) {
+                var fromX = CATEGORY_AXIS_X + from,
+                    toX = CATEGORY_AXIS_X + to,
+                    slotLeft = Math.min(fromX, toX),
+                    slotRight = Math.max(fromX, toX);
 
                 return new Box2D(slotLeft, 0, slotRight, 0);
             },
@@ -1809,9 +1809,9 @@
             stackBox = new Box2D(50, 50, 100, 100);
 
         // ------------------------------------------------------------
-        module("Stack Layout / Vertical", {
+        module("Stack Wrap / Vertical", {
             setup: function() {
-                stack = new dataviz.StackLayout();
+                stack = new dataviz.StackWrap();
 
                 stack.children.push(
                     new BarStub(new Box2D(0, 90, 100, 100)),
@@ -1821,35 +1821,6 @@
 
                 stack.reflow(stackBox);
             }
-        });
-
-        test("first bar remains at its position", function() {
-            equal(stack.children[0].box.y1, 90);
-        });
-
-        test("first bar height is not changed", function() {
-            equal(stack.children[0].box.height(), 10);
-        });
-
-        test("second bar is placed on top of the first", function() {
-            equal(stack.children[1].box.y2, stack.children[0].box.y1);
-        });
-
-        test("second bar height is not changed", function() {
-            equal(stack.children[1].box.height(), 20);
-        });
-
-        test("third bar is placed on top of the second", function() {
-            equal(stack.children[2].box.y2, stack.children[1].box.y1);
-        });
-
-        test("third bar height is not changed", function() {
-            equal(stack.children[2].box.height(), 30);
-        });
-
-        test("reports final box after layout", function() {
-            deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                 [50, 40, 100, 100]);
         });
 
         test("updates children width to fit box", function() {
@@ -1863,63 +1834,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Stack Layout / Vertical / Reversed", {
+        module("Stack Wrap / Horizontal", {
             setup: function() {
-                stack = new dataviz.StackLayout({ isReversed: true });
-
-                stack.children.push(
-                    new BarStub(new Box2D(0, 90, 100, 100)),
-                    new BarStub(new Box2D(0, 80, 100, 100)),
-                    new BarStub(new Box2D(0, 70, 100, 100))
-                );
-
-                stack.reflow(stackBox);
-            }
-        });
-
-        test("first bar remains at its position", function() {
-            equal(stack.children[0].box.y1, 90);
-        });
-
-        test("first bar height is not changed", function() {
-            equal(stack.children[0].box.height(), 10);
-        });
-
-        test("second bar is placed below the first", function() {
-            equal(stack.children[1].box.y1, stack.children[0].box.y2);
-        });
-
-        test("second bar height is not changed", function() {
-            equal(stack.children[1].box.height(), 20);
-        });
-
-        test("third bar is placed below the second", function() {
-            equal(stack.children[2].box.y1, stack.children[1].box.y2);
-        });
-
-        test("third bar height is not changed", function() {
-            equal(stack.children[2].box.height(), 30);
-        });
-
-        test("reports final box after layout", function() {
-            deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                 [50, 90, 100, 150]);
-        });
-
-        test("updates children width to fit box", function() {
-            equal(stack.children[0].box.width(), stackBox.width());
-            equal(stack.children[1].box.width(), stackBox.width());
-        });
-
-        test("updates children X position to match targetBox", function() {
-            equal(stack.children[0].box.x1, stackBox.x1);
-            equal(stack.children[1].box.x1, stackBox.x1);
-        });
-
-        // ------------------------------------------------------------
-        module("Stack Layout / Horizontal", {
-            setup: function() {
-                stack = new dataviz.StackLayout({ vertical: false });
+                stack = new dataviz.StackWrap({ vertical: false });
                 stack.children.push(
                     new BarStub(new Box2D(0, 0, 20, 10)),
                     new BarStub(new Box2D(0, 0, 30, 10)),
@@ -1928,88 +1845,6 @@
 
                 stack.reflow(stackBox);
             }
-        });
-
-        test("first bar remains at its position", function() {
-            equal(stack.children[0].box.x1, 0);
-        });
-
-        test("first bar width is not changed", function() {
-            equal(stack.children[0].box.width(), 20);
-        });
-
-        test("second bar is placed to the right of the first", function() {
-            equal(stack.children[1].box.x1, stack.children[0].box.x2);
-        });
-
-        test("second bar width is not changed", function() {
-            equal(stack.children[1].box.width(), 30);
-        });
-
-        test("third bar is placed to the right of the second", function() {
-            equal(stack.children[2].box.x1, stack.children[1].box.x2);
-        });
-
-        test("third bar width is not changed", function() {
-            equal(stack.children[2].box.width(), 40);
-        });
-
-        test("reports final box after layout", function() {
-            deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                 [0, 50, 90, 100]);
-        });
-
-        test("updates children height to fit box", function() {
-            equal(stack.children[0].box.height(), stackBox.height());
-            equal(stack.children[1].box.height(), stackBox.height());
-        });
-
-        test("updates children Y position to match targetBox", function() {
-            equal(stack.children[0].box.y1, stackBox.y1);
-            equal(stack.children[1].box.y1, stackBox.y1);
-        });
-
-        // ------------------------------------------------------------
-        module("Stack Layout / Horizontal / Reversed", {
-            setup: function() {
-                stack = new dataviz.StackLayout({ vertical: false, isReversed: true });
-                stack.children.push(
-                    new BarStub(new Box2D(100, 0, 120, 10)),
-                    new BarStub(new Box2D(100, 0, 130, 10)),
-                    new BarStub(new Box2D(100, 0, 140, 10))
-                );
-
-                stack.reflow(stackBox);
-            }
-        });
-
-        test("first bar remains at its position", function() {
-            equal(stack.children[0].box.x1, 100);
-        });
-
-        test("first bar width is not changed", function() {
-            equal(stack.children[0].box.width(), 20);
-        });
-
-        test("second bar is placed to the left of the first", function() {
-            equal(stack.children[1].box.x2, stack.children[0].box.x1);
-        });
-
-        test("second bar width is not changed", function() {
-            equal(stack.children[1].box.width(), 30);
-        });
-
-        test("third bar is placed to the left of the second", function() {
-            equal(stack.children[2].box.x2, stack.children[1].box.x1);
-        });
-
-        test("third bar width is not changed", function() {
-            equal(stack.children[2].box.width(), 40);
-        });
-
-        test("reports final box after layout", function() {
-            deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                 [30, 50, 120, 100]);
         });
 
         test("updates children height to fit box", function() {
