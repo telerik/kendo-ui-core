@@ -3211,9 +3211,6 @@ var __meta__ = {
                 sortable,
                 filterable,
                 isMobile = this._isMobile,
-                closeCallback = function() {
-                    focusTable(that.thead.parent(), true);
-                },
                 initCallback = function(e) {
                     that.trigger(COLUMNMENUINIT, { field: e.field, container: e.container });
                 },
@@ -3245,7 +3242,9 @@ var __meta__ = {
                                 filterable: filterable,
                                 messages: columnMenu.messages,
                                 owner: that,
-                                closeCallback: closeCallback,
+                                closeCallback: function(element) {
+                                    focusTable(element.closest("table"), true);
+                                },
                                 init: initCallback,
                                 pane: that.pane,
                                 filter: isMobile ? ":not(.k-column-active)" : ""
@@ -3262,9 +3261,6 @@ var __meta__ = {
                 columns = that.columns,
                 cell,
                 filterMenu,
-                closeCallback = function() {
-                    focusTable(that.thead.parent(), true);
-                },
                 filterable = that.options.filterable;
 
             if (filterable && !that.options.columnMenu) {
@@ -3287,7 +3283,9 @@ var __meta__ = {
                                 {
                                     dataSource: that.dataSource,
                                     values: columns[index].values,
-                                    closeCallback: closeCallback,
+                                    closeCallback: function(element) {
+                                        focusTable(element.closest("table"), true);
+                                    },
                                     init: function(e) {
                                         that.trigger(FILTERMENUINIT, { field: e.field, container: e.container });
                                     },
