@@ -1,0 +1,79 @@
+@import "../common/popover.less";
+@import "base.less";
+
+/* PopOver */
+
+.km-blackberry .km-popup-arrow
+{
+    width: 10px;
+    height: 10px;
+}
+
+.km-blackberry .km-popup.km-pane .km-view
+{
+    overflow: visible;
+    border-radius: 0;
+}
+
+.km-blackberry .km-popup.km-pane .km-navbar,
+.km-blackberry .km-popup.km-pane .km-toolbar,
+.km-blackberry .km-popup.km-pane .km-tabstrip
+{
+    background: none;
+    .box-shadow(none);
+}
+
+.km-blackberry .km-popup.km-pane .km-header
+{
+    padding: 2px 3px 0;
+    margin: -3px -3px 2px;
+    border-radius: @blackberry-border-radius;
+    -webkit-margin-collapse: separate;
+    background-color: transparent;
+}
+
+.km-blackberry .km-popup-arrow:after,
+.km-blackberry .km-popup-arrow:before
+{
+    border-style: solid;
+    border-width: 0 10px 10px;
+}
+
+.km-blackberry .km-down .km-popup-arrow:before
+{
+    margin-top: -1px;
+}
+
+.km-blackberry .km-up .km-popup-arrow:after
+{
+    border-width: 10px 10px 0 10px;
+}
+
+.km-blackberry .km-left .km-popup-arrow:after
+{
+    border-width: 10px 0 10px 10px;
+}
+
+.km-blackberry .km-right .km-popup-arrow:after
+{
+    border-width: 10px 10px 10px 0;
+}
+
+.km-blackberry .km-left .km-popup-arrow,
+.km-blackberry .km-right .km-popup-arrow
+{
+    margin-top: -2px;
+}
+
+.km-blackberry .km-up .km-popup-arrow,
+.km-blackberry .km-down .km-popup-arrow
+{
+    margin-left: -2px;
+}
+
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet,
+.km-blackberry .km-popup.km-pane .km-content
+{
+    border-width: @blackberry-border-width;
+    border-style: solid;
+}

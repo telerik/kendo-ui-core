@@ -1,0 +1,597 @@
+@blackberry-main-color: #000;
+@blackberry-main-background: #fff;
+@blackberry-second-background: #f0f0f0;
+@blackberry-active-color: #fff;
+@blackberry-active-background: #00aae7;
+@blackberry-navbar-background: #015e98;
+@blackberry-border-color: rgba(180,180,180,.3);
+@blackberry-light-border-color: lighten(@blackberry-border-color, 100%);
+@blackberry-dark-border-color: darken(@blackberry-border-color, 60%);
+@blackberry-light-background: #e6e6e6;
+
+.km-blackberry,
+.km-blackberry .km-content
+{
+    color: @blackberry-main-color;
+    background: @blackberry-main-background;
+}
+
+.km-blackberry .km-navbar,
+.km-blackberry .km-toolbar,
+.km-blackberry .km-button,
+.km-blackberry .km-buttongroup,
+.km-blackberry .km-tabstrip,
+.km-blackberry input[type=file]
+{
+    color: @blackberry-main-color;
+    background-color: @blackberry-light-background;
+    .linear-gradient-image(top, rgba(255,255,255,.7), rgba(255,255,255,0) 70%);
+    .box-shadow(~"0 1px 4px 0 rgba(0,0,0,.3)");
+}
+
+.km-blackberry .km-button,
+.km-blackberry .km-buttongroup
+{
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.1));
+    border-color: rgba(0,0,0,.2);
+}
+
+.km-blackberry .km-button:after,
+.km-blackberry .km-buttongroup,
+.km-blackberry .km-button:before
+{
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.2), inset 0 0 0 2px rgba(0,0,0,.1)");
+}
+
+.km-blackberry .km-navbar .km-button
+{
+    color: @blackberry-active-color;
+    .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,0));
+}
+
+.km-blackberry .km-view-title
+{
+    .box-shadow(0px 1px 3px rgba(0,0,0,.3));
+}
+
+.km-blackberry .km-view-title,
+.km-blackberry .km-dialog-title
+{
+    color: @blackberry-active-color;
+    text-shadow: 0 1px 0 @blackberry-main-color;
+}
+
+.km-blackberry .km-badge,
+.km-blackberry .km-detail
+{
+    color: @blackberry-active-color;
+    background-color: @blackberry-active-background;
+}
+
+.km-blackberry .km-badge
+{
+    .box-shadow(0 0 0 1px @blackberry-active-color);
+}
+
+.km-blackberry .km-detail
+{
+    background: #999;
+    .box-shadow(inset 0 1px 3px rgba(0,0,0,.4));
+}
+
+.km-blackberry .km-rowinsert
+{
+    background-color: #24870D;
+}
+
+.km-blackberry .km-rowdelete
+{
+    background-color: #B01B1A;
+}
+
+.km-blackberry .km-toolbar,
+.km-blackberry .km-navbar,
+.km-blackberry .km-popup.km-pane .km-header
+{
+    background-color: @blackberry-navbar-background;
+    .linear-gradient-image(top, rgba(255,255,255,.2) 40%, rgba(255,255,255,0),
+                           left, rgba(255,255,255,0) 0, rgba(255,255,255,.3));
+}
+
+.km-blackberry .km-tabstrip
+{
+    .box-shadow(inset 0 2px 0 rgba(0,0,0,.3));
+    background-color: #1A1A1A;
+    .linear-gradient-image(top, rgba(255,255,255,.18), rgba(255,255,255,0));
+}
+
+.km-blackberry .km-tabstrip .km-button
+{
+    color: #d1d1d1;
+    .box-shadow(~"-1px 0 0 rgba(0,0,0,.5)");
+}
+
+/* Switch */
+
+.km-blackberry .km-switch-container
+{
+    border-color: darken(@blackberry-border-color, 30%);
+    background-color: fade(@blackberry-border-color, 50%);
+    .box-shadow(inset 0 1px 3px @blackberry-dark-border-color);
+}
+
+.km-blackberry .km-switch-handle
+{
+    background: fade(@blackberry-light-border-color, 90%);
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.15));
+    -webkit-box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px @blackberry-dark-border-color;
+    box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px @blackberry-dark-border-color;
+}
+
+.km-blackberry .km-switch-on .km-switch-handle
+{
+    background-color: #0879c6;
+}
+
+.km-blackberry .km-switch-label-on,
+.km-blackberry .km-switch-label-off
+{
+    color: @blackberry-main-color;
+}
+
+/* ButtonGroup */
+
+.km-blackberry .km-buttongroup > .km-button
+{
+    color: @blackberry-active-color;
+}
+
+.km-blackberry .km-content .km-buttongroup > .km-button
+{
+    color: @blackberry-main-color;
+}
+
+/* ListView */
+
+.km-blackberry div.km-group-title
+{
+    border-top-color: @blackberry-border-color;
+    border-bottom-color: @blackberry-active-background;
+}
+
+.km-blackberry .km-scroll-header .km-group-title
+{
+    background-color: @blackberry-main-background;
+}
+
+.km-blackberry .km-list > li
+{
+    border-bottom-color: @blackberry-border-color;
+}
+
+.km-blackberry .km-filter-wrap:before,
+.km-blackberry .km-filter-reset .km-clear
+{
+	color: #adadad;
+}
+
+/* Icons */
+
+.km-blackberry .km-load-more .km-icon,
+.km-blackberry .km-scroller-pull .km-icon
+{
+    color: #259fff;
+}
+
+.km-blackberry .km-content .km-button .km-icon,
+.km-blackberry .km-buttongroup .km-button:active .km-icon,
+.km-blackberry .km-buttongroup .km-state-active .km-icon
+{
+    color: #057fe4;
+}
+
+.km-blackberry .km-listview-link .km-icon
+{
+    color: #2a3235;
+}
+
+.km-blackberry .km-detail .km-icon,
+.km-blackberry .km-listview-link:active .km-icon,
+.km-blackberry .km-button:active .km-icon,
+.km-blackberry .km-state-active .km-icon,
+.km-blackberry .km-tabstrip .km-icon
+{
+    color: #eee;
+}
+
+/* ScrollView */
+
+.km-blackberry .km-pages .km-current-page
+{
+    background: rgba(150,150,150,.7);
+}
+
+/* Slider */
+
+.km-blackberry .k-slider .k-draghandle,
+.km-blackberry .k-slider .k-draghandle:hover
+{
+    background-color: #eee;
+    .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,0));
+    .box-shadow(~"inset 0 0 0 1px #fff, 0 0 1px 1px rgba(0,0,0,.3)");
+}
+
+.km-blackberry .k-slider .k-draghandle:active
+{
+    background-color: #00aae7;
+    .box-shadow(~"0 0 1px 1px rgba(0,0,0,.3), 0 0 0 .5em rgba(0,170,231,.2), 0 0 .5em rgba(0,170,231,.6)");
+}
+
+.km-blackberry .k-slider-selection
+{
+    background: #0879c6;
+    .box-shadow(~"inset 0 4px 8px rgba(255,255,255,.3), inset 0 0 0 1px #005d9c");
+}
+
+.km-blackberry .k-slider-track
+{
+    background: #e7e3e7;
+    .box-shadow(inset 0 2px 4px rgba(0,0,0,.3));
+}
+
+/* Scroller */
+
+.km-blackberry .km-touch-scrollbar
+{
+    background-color: #777;
+    border-color: rgba(255,255,255,.5);
+}
+
+/* Loader */
+
+.km-blackberry .km-loading,
+.km-blackberry .km-loader .km-loading-left,
+.km-blackberry .km-load-more.km-scroller-refresh .km-icon,
+.km-blackberry .km-scroller-pull.km-scroller-refresh .km-icon,
+.km-blackberry .km-scroller-refresh .km-loading-left
+{
+    border-color: @blackberry-main-color;
+}
+
+.km-blackberry .km-loader h1,
+.km-blackberry .km-scroller-pull .km-icon
+{
+    color: @blackberry-main-color;
+}
+
+/* Forms */
+
+.km-blackberry input[type=password],
+.km-blackberry input[type=search],
+.km-blackberry input[type=number],
+.km-blackberry input[type=tel],
+.km-blackberry input[type=url],
+.km-blackberry input[type=email],
+.km-blackberry input[type=month],
+.km-blackberry input[type=color],
+.km-blackberry input[type=week],
+.km-blackberry input[type=date],
+.km-blackberry input[type=time],
+.km-blackberry input[type=datetime],
+.km-blackberry input[type=datetime-local],
+.km-blackberry input[type=text]:not(.k-input),
+.km-blackberry select:not([multiple]),
+.km-blackberry .k-dropdown,
+.km-blackberry textarea
+{
+    border-color: @blackberry-dark-border-color;
+    background: fade(@blackberry-dark-border-color, 3%);
+}
+
+.km-blackberry .k-dropdown .k-dropdown-wrap
+{
+    border-color: @blackberry-dark-border-color;
+}
+
+.km-blackberry input[type=password],
+.km-blackberry input[type=search],
+.km-blackberry input[type=number],
+.km-blackberry input[type=tel],
+.km-blackberry input[type=url],
+.km-blackberry input[type=email],
+.km-blackberry input[type=text]:not(.k-input),
+.km-blackberry textarea
+{
+    .box-shadow(inset 0 1px 1px @blackberry-border-color);
+}
+
+.km-blackberry input[type=password]:focus,
+.km-blackberry input[type=search]:focus,
+.km-blackberry input[type=number]:focus,
+.km-blackberry input[type=tel]:focus,
+.km-blackberry input[type=url]:focus,
+.km-blackberry input[type=email]:focus,
+.km-blackberry input[type=text]:not(.k-input):focus,
+.km-blackberry textarea:focus
+{
+    border-color: @blackberry-active-background;
+}
+
+.km-blackberry input[type=color],
+.km-blackberry input[type=week],
+.km-blackberry input[type=date],
+.km-blackberry input[type=time],
+.km-blackberry input[type=month],
+.km-blackberry input[type=datetime],
+.km-blackberry input[type=datetime-local],
+.km-blackberry select:not([multiple]),
+.km-blackberry .k-dropdown-wrap
+{
+    background: transparent 100% 0 no-repeat;
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.1));
+    background-size: 1.8em 100%, auto;
+
+    background: ~"-webkit-calc(100% - 5px)" 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAQAAADrJAMDAAABG2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS4xLjIiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+MahxaQAAA/RJREFUeF7t1OlqVVcYh/HnIiz0LrYedWs8UXGc5yGKsxXtVVjwSryOFnoFxYq1TgQVhwQVT+KE0fihhRJ6IHkXGc7Jztr7PO/z8f9l82Oz+KeSrGcAE1pooU1ooU1ooYU2oYU2oYUW2oQW2oQWWmgTWmgTWmihTWihTWihhTahhTahhRbahBbahBZaaBNaaBNaaKFNaKFNaKGFNqGFNqGFFtqEFtqEFlpoE1poE1pooU1ooU1ooYU2oYVmFTf4lRusmlmo13W/H8gXmhE6M8MYW2sIvZWxGYAOI9lC8wOd7sD0f9T1Yv7eBaDDj7lC/zJrmGZLjaC3MD0L4Gau0L/NGb6xmXrcZr7NAfg9/z+621eGyf+G+RoA3Mz3jR4PhimGa8n8Jos3Oo5t4TBFm3yvzVQIsA1yhU5Tf8mWus2XFHM20HFsD4fPWVK3+RwCbIesoOPYEQ6fsqNu8yk02QF1gE5Tf8yKus3HUGQnZAkdx85w+MAm8rhNfEgxZwsdx65weM9QBsxDvA81dkF10M2nHmIytNgN2UPHsTscJtnIyt3GBPMeyB46HXvCYYINrMxtYCLFXBvoOPaGQ2dFqEs6ocJeqD90mrqsnPldirkJ0Gnqd5QZMO+D5kDDvnB8Wxl1ydtQYD80Cxr2h/ObSqhLXqeYmwadpn697NQl46HAAWgmNBwIqccpq2fmIDQXGg6G1GOsZ3luPWOhwCFoNjQcqpB6Ha9SzE2HTlO/Yh39vbW8DAUOw2BAw+EQ4CVrK2A+AoMDDUdChBd9o27xIhQ4CoMFnaZu9YX5eYp58KDhaIjxvGfqFs9CgWMwmNBwLAR51hN1i6ehwHEYXGg4HqI8XTJ1iyehwAkYZOg09ZMlUbcYTTELDSdCnNFFU7d4HAqcBKEB4GQI9HhR1Gt4FAqcAqG7nUpR98g8AkIvhPoRa5j/VvNwocxCw0iI9ZDV83gUPAgFToPQcadDsAdpaqDgfihwBoROdyZBXSSZ/w4FzoLQS6G+H1IX3AsFzoHQ83c2xLs3h7rgbi/MQsO5EPCvLjVQcCcUOA9CL7zzIeLd/6kL/gwFLoDQ/aC+QwEU3A7XiyD04rsQYt6m4I9+MgsNF2PqUOASCL30LgWkUZdB6OWnvgJC997lapiFhitpZq7StxMafkowX6OvJzRcDZiv0/cTGq7NYv6ZZTmh4Xo1zEJDyS1GuUUJQluV0Ca00EKb0EKb0EILbUILbUILLbQJLbQJLbTQJrTQJrTQQpvQQpvQQgttQgttQgsttAkttAkttNAmtNAmtNBCm9BCm9BCC21CC21CCy20CS20CS200Ca00Ca00EKb0EKb0EILbUILbf8CmhlC4QhCFjcAAAAASUVORK5CYII="),
+                -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,.1))) transparent;
+    -webkit-background-size: auto 90%, auto;
+}
+
+.km-blackberry input[type=color]:active,
+.km-blackberry input[type=week]:active,
+.km-blackberry input[type=date]:active,
+.km-blackberry input[type=time]:active,
+.km-blackberry input[type=month]:active,
+.km-blackberry input[type=datetime]:active,
+.km-blackberry input[type=datetime-local]:active,
+.km-blackberry input[type=color]:focus,
+.km-blackberry input[type=week]:focus,
+.km-blackberry input[type=date]:focus,
+.km-blackberry input[type=time]:focus,
+.km-blackberry input[type=month]:focus,
+.km-blackberry input[type=datetime]:focus,
+.km-blackberry input[type=datetime-local]:focus,
+.km-blackberry select:not([multiple]):focus,
+.km-blackberry .k-dropdown .k-state-focused
+{
+    color: @blackberry-active-color;
+    background-color: @blackberry-active-background;
+    background: ~"-webkit-calc(100% - 5px)" 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAQAAADrJAMDAAADrUlEQVR4Xu3a6UocWQCG4bqJhrkL933Lvu9LK25JJpjchTA3MhcSmCsIg4i4ZCSImjSJ2GpCcMuPbwwFdoIfpklOl6e63+/l/C8eDvWjqESZRPEDAE1AAw00AQ00AQ000AQ00AQ00EAT0EAT0EADTUADTUADDTQBDTQBDTTQBDTQBDTQQBPQQBPQQANNQANNQAMNNAENNAENNNAENNAENNBAE9BAE9BAA01AA01AAw00AQ00AQ000AR0h/7Wf0enA+ha9kKVvQS6Vk3px70AuhY918lNAR26P+X3HOiQPZNZaGqgn+r0PQM6RE/08z0FOjyz7wnQv9Ok3P4NSw30hNxm1KTXcpsE+lcal9usmpQcHX+rJ4AOyfytJs3IbRxon29MbnMpcyhqoEflNn/MXKGeldsY0NU0IreFlPkE9ZzcRoEOyZxSz8ttBOjTGpbboppTgDDUQBfltqSWnwA0aUFuw0C7HntmtVYB0KxFuRWBro75jWH2tWhJbo+B/r5Hclv2zD616s3p1EA/lNvblDkA9SOgv/UgEHNKvSy3h0B75hXDXC31W7k9aGzo+3JbtczVU6946saFvie3NcMchvp+Y0LfDcTsqVfldq/xoD3zutoCAbRqTW53Gwv6jtzeqT0gQJvWPXXjQN/2zMH/EG3XO7ndaQxoz/w+Zc6I+nb9Q9+SW0mdNfuf+r3cbtU39E25fTDM4epUyVPXL/SNDJg99Qe53axPaM+8YZizo75Rf9DX5baZMmdCvSG36/UFfU1u5ZQ5M+rNs6SuV2ZPXZbbtfqA9sxb6lKSeV3a8tT5h74qt211pwDRUF/NN/QVz6weJWdWt7Y9dX6hL8ttxzBnW4925HYln9Ce+ZN6lZx5vfokt8v5g74kt8/qMwAxUV/KF/TFqJh9ffqcJXV2zF9S5qiov8jtYj6gL8ht1zDHQL0rtwvxQ5+X255hjoV6T27nI4AOwxw/dbzQBfuJfV/9SqKuX/sG+qP+iBV62jAfaEBJ9A3owFD/FSv0K8M8qCQXDerwBPQ/ebnRh445fur4b3RBZVX2VUNKctWQvqqychzvaF/xmLqkc0py1zmVjpmLcX/rKGhar45OIU/A/vmzhKb4oQlooIEmoIEmoIEGmoAGmoAGGmgCGmgCGmigCWigCWiggSaggSaggQaagAaagAYaaAIaaAIaaKAJaKAJaKCBJqCBJqCBBpqABpqABhpoAhpoAhpooAlooAlooIEmoIEmoIEGmoAGmv4H0vCT+B5BT60AAAAASUVORK5CYII="),
+                -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(0,0,0,.1))), @blackberry-active-background;
+    -webkit-background-size: auto 90%, auto;
+}
+
+.km-blackberry .k-dropdown .k-state-focused .k-input
+{
+    color: @blackberry-active-color;
+}
+
+.km-blackberry select:not([multiple]):focus option
+{
+    color: @blackberry-main-color;
+    background-color: @blackberry-main-background;
+}
+
+/* PopUp */
+
+.km-blackberry .km-shim
+{
+    background: @blackberry-dark-border-color;
+}
+
+.km-blackberry .km-popup .k-item
+{
+    color: @blackberry-main-color;
+    background: @blackberry-main-background;
+}
+
+.km-blackberry .km-popup .k-state-hover,
+.km-blackberry .km-popup .k-state-focused,
+.km-blackberry .km-popup .k-state-selected
+{
+    color: @blackberry-active-color;
+    background: @blackberry-active-background;
+    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.2));
+}
+
+.km-blackberry .km-popup .k-state-hover
+{
+    background-color: fade(@blackberry-active-background, 80%);
+}
+
+.km-blackberry .km-popup .k-list-container
+{
+    background: @blackberry-main-background;
+    border-color: #777;
+}
+
+.km-blackberry .k-dropdown.k-state-border-up
+{
+    .linear-gradient-image(top, #777, #777 10%, transparent 10%,
+                           top, #777, #777 10%, transparent 10%,
+                           top, #fff, #fff 10%, transparent 10%);
+}
+
+.km-blackberry .k-dropdown.k-state-border-down
+{
+    .linear-gradient-image(top, transparent 90%, #777 90%, #777,
+                           top, transparent 90%, #777 90%, #777,
+                           top, transparent 90%, #fff 90%, #fff);
+}
+
+.km-blackberry .km-popup .k-state-border-up
+{
+    .box-shadow(~"1px 1px 1px rgba(0,0,0,.3)");
+}
+
+.km-blackberry .km-popup .k-state-border-down
+{
+    .box-shadow(~"1px 0 1px rgba(0,0,0,.3)");
+}
+
+/* Checkboxes and Radios */
+
+.km-blackberry .km-listview-label input[type=radio],
+.km-blackberry .km-listview-label input[type=checkbox]
+{
+    border-color: rgba(0,0,0,.4);
+    .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
+}
+
+.km-blackberry .km-listview-label input[type=radio]:checked,
+.km-blackberry .km-listview-label input[type=checkbox]:checked
+{
+    color: #fff;
+    background-color: @blackberry-active-background;
+}
+
+.km-blackberry.km-pane .km-listview-label input[type=checkbox]:after
+{
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+
+.km-root .km-blackberry.km-pane .km-listview-label input[type=radio]:checked:after
+{
+    -webkit-background-clip: inherit;
+    .linear-gradient-image(top, #fff, #f9f9f9 10%, #eee);
+    .box-shadow(0 1px 1px rgba(0,0,0,.7));
+}
+
+.km-blackberry.km-pane div.km-actionsheet-wrapper
+{
+    background-color: @blackberry-main-color;
+}
+
+.km-blackberry.km-pane .km-actionsheet-title
+{
+    color: darken(@blackberry-light-background, 30);
+}
+
+.km-blackberry .km-actionsheet > li > a
+{
+    color: @blackberry-main-background;
+    border-color: @blackberry-border-color;
+}
+
+.km-blackberry .km-actionsheet > li:nth-child(2) > a
+{
+    border-top-color: @blackberry-border-color;
+}
+
+/* SplitView */
+
+.km-blackberry .km-pane
+{
+    .box-shadow(-3px 0 10px 1px rgba(0,0,0,.5));
+}
+
+/* PopOver */
+
+.km-blackberry .km-popup.km-pane,
+.km-tablet .km-blackberry .km-actionsheet-wrapper:not(.km-actionsheet-phone)
+{
+    background: @blackberry-navbar-background;
+    .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
+}
+
+.km-blackberry .km-popup-arrow:after,
+.km-blackberry .km-popup-arrow:before
+{
+    border-color: rgba(0,0,0,.5) transparent;
+}
+
+.km-blackberry .km-popup-arrow:after,
+.km-blackberry .km-down .km-popup-arrow:after
+{
+    border-color: @blackberry-navbar-background transparent;
+}
+
+.km-blackberry .km-left .km-popup-arrow:after,
+.km-blackberry .km-right .km-popup-arrow:after
+{
+    border-color: transparent @blackberry-navbar-background;
+}
+
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet,
+.km-blackberry .km-popup.km-pane .km-content
+{
+    .linear-gradient-image(top, rgba(0,0,0,.2), rgba(0,0,0,0) 10%);
+    border-color: rgba(255,255,255,.7);
+}
+
+/* ModalView */
+
+.km-blackberry .km-modalview
+{
+    background-color: #7185a2;
+    .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
+}
+
+/* Active States */
+
+.km-blackberry input[type=file]:active,
+.km-blackberry input[type=file]:focus
+{
+    color: @blackberry-active-color;
+    background-color: rgba(0,0,0,.2);
+}
+
+.km-blackberry .km-button:active:before,
+.km-blackberry .km-button.km-state-active:before
+{
+    .box-shadow(~"inset 0 2px 3px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.2), inset 0 0 1000px rgba(0,0,0,.2)");
+}
+
+.km-blackberry .km-detail.km-state-active,
+.km-blackberry .km-state-active .km-detail,
+.km-blackberry a.km-listview-link:active,
+.km-blackberry .km-state-active a.km-listview-link
+{
+    .box-shadow(inset 0 0 0 2px @blackberry-active-background);
+    background: fade(@blackberry-active-background, 50%);
+}
+
+.km-blackberry *:not(.km-buttongroup) > .km-button:active .km-text,
+.km-blackberry *:not(.km-buttongroup) > .km-button.km-state-active .km-text
+{
+    top: 1px;
+}
+
+.km-blackberry .km-actionsheet > li > a:hover,
+.km-blackberry .km-actionsheet > li > a:focus,
+.km-blackberry .km-actionsheet > li > a:active
+{
+    background: @blackberry-active-background;
+    color: @blackberry-active-color;
+}
+
+/* Tablet Styles */
+
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet
+{
+    background-color: @blackberry-main-background;
+}
+
+.km-tablet .km-blackberry .km-popup-arrow:after
+{
+    border-color: #cfd1d3 transparent;
+}
+
+.km-tablet .km-blackberry .km-left .km-popup-arrow:after,
+.km-tablet .km-blackberry .km-right .km-popup-arrow:after
+{
+    border-color: transparent #cfd1d3;
+}
+
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a
+{
+    color: @blackberry-main-color;
+}
+
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a:hover,
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a:focus,
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a:active
+{
+    color: @blackberry-active-color;
+    background: @blackberry-active-background;
+    .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+}

@@ -1,0 +1,221 @@
+@import "../common/forms.less";
+@import "base.less";
+
+/* Slider */
+
+.km-blackberry .k-slider .k-draghandle,
+.km-blackberry .k-slider .k-draghandle:hover
+{
+    border: 0;
+    border-radius: 5em;
+}
+
+.km-blackberry .k-slider-horizontal .k-draghandle
+{
+    top: -.34em;
+}
+
+.km-blackberry .k-slider-vertical .k-draghandle
+{
+    left: -.34em;
+}
+
+.km-blackberry .k-slider-horizontal .k-slider-selection
+{
+    top: 0;
+    height: 100%;
+}
+
+.km-blackberry .k-slider-track
+{
+    border-width: 1px;
+}
+
+.km-blackberry .k-slider-horizontal .k-slider-track
+{
+    margin-top: .4em;
+}
+
+/* Forms */
+
+.km-blackberry input[type=password],
+.km-blackberry input[type=search],
+.km-blackberry input[type=number],
+.km-blackberry input[type=tel],
+.km-blackberry input[type=url],
+.km-blackberry input[type=email],
+.km-blackberry input[type=month],
+.km-blackberry input[type=color],
+.km-blackberry input[type=week],
+.km-blackberry input[type=date],
+.km-blackberry input[type=time],
+.km-blackberry input[type=datetime],
+.km-blackberry input[type=datetime-local],
+.km-blackberry input[type=text]:not(.k-input),
+.km-blackberry select:not([multiple]),
+.km-blackberry .k-dropdown,
+.km-blackberry textarea
+{
+    font-size: 1em;
+    .appearance(none);
+    border-style: solid;
+    padding: .4em;
+    outline: none;
+    border-width: @blackberry-border-width;
+    border-radius: @blackberry-border-radius;
+}
+
+.km-phone .km-blackberry .km-list input[type=text]:not(.k-input),
+.km-phone .km-blackberry .km-list input[type=password],
+.km-phone .km-blackberry .km-list input[type=search],
+.km-phone .km-blackberry .km-list input[type=number],
+.km-phone .km-blackberry .km-list input[type=tel],
+.km-phone .km-blackberry .km-list input[type=url],
+.km-phone .km-blackberry .km-list input[type=email]
+.km-phone .km-blackberry .km-list input[type=datetime],
+.km-blackberry .k-dropdown
+{
+    margin-top: -1em;
+}
+
+.km-phone .km-blackberry .km-list input[type=color],
+.km-phone .km-blackberry .km-list input[type=month],
+.km-phone .km-blackberry .km-list input[type=week],
+.km-phone .km-blackberry .km-list input[type=date],
+.km-phone .km-blackberry .km-list input[type=time],
+.km-phone .km-blackberry .km-list input[type=datetime-local],
+.km-phone .km-blackberry .km-list select:not([multiple]),
+.km-blackberry .k-dropdown
+{
+    margin-top: -1.2em;
+}
+
+.km-blackberry .km-list input[type=password],
+.km-blackberry .km-list input[type=search],
+.km-blackberry .km-list input[type=number],
+.km-blackberry .km-list input[type=tel],
+.km-blackberry .km-list input[type=url],
+.km-blackberry .km-list input[type=email],
+.km-blackberry .km-list input[type=month],
+.km-blackberry .km-list input[type=color],
+.km-blackberry .km-list input[type=week],
+.km-blackberry .km-list input[type=date],
+.km-blackberry .km-list input[type=time],
+.km-blackberry .km-list input[type=datetime],
+.km-blackberry .km-list input[type=datetime-local],
+.km-blackberry .km-list input[type=text]:not(.k-input),
+.km-blackberry .km-list select:not([multiple]),
+.km-blackberry .km-list .k-dropdown,
+.km-blackberry .km-list textarea,
+.km-blackberry .km-list .k-slider
+{
+    right: .8em;
+}
+
+.km-root .km-blackberry .km-view .km-content .km-list input[type=file]
+{
+    padding: .2em;
+    outline: none;
+    right: .8em;
+    margin-top: -1.1em;
+}
+
+.km-blackberry .k-dropdown
+{
+    border: 0;
+    padding: 0;
+    width: 10em;
+    border-radius: 0;
+}
+
+.km-blackberry .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    padding: .05em 2em .05em .4em;
+    border-style: solid;
+    border-width: @blackberry-border-width;
+    border-radius: @blackberry-border-radius;
+}
+
+.km-blackberry select:not([multiple])
+{
+    min-width: 6em;
+    padding-right: 2em;
+}
+
+.km-blackberry input[type=password]:focus,
+.km-blackberry input[type=search]:focus,
+.km-blackberry input[type=number]:focus,
+.km-blackberry input[type=tel]:focus,
+.km-blackberry input[type=url]:focus,
+.km-blackberry input[type=email]:focus,
+.km-blackberry input[type=text]:not(.k-input):focus,
+.km-blackberry textarea:focus
+{
+    border-width: 2px;
+    border-style: solid;
+    padding: ~"-webkit-calc(.4em - 1px)";
+    padding: ~"-moz-calc(.4em - 1px)";
+    padding: ~"calc(.4em - 1px)";
+}
+
+.km-blackberry .km-list .k-dropdown .k-input
+{
+    background-color: transparent;
+}
+
+/* Checkboxes and Radios */
+
+.km-blackberry .km-listview-label input[type=checkbox]
+{
+    margin-top: -.4em;
+}
+
+.km-blackberry .km-listview-label input[type=radio],
+.km-blackberry .km-listview-label input[type=checkbox]
+{
+    border-width: @blackberry-border-width;
+    border-style: solid;
+    width: 1.05em;
+    height: 1em;
+    font-size: 1.6em;
+    border-radius: @blackberry-border-radius;
+}
+
+.km-blackberry .km-listview-label input[type=radio],
+.km-blackberry .km-listview-label input[type=radio]:after
+{
+    border-radius: @blackberry-switch-radius;
+}
+
+.km-blackberry .km-listview-label input[type=radio]:after,
+.km-blackberry .km-listview-label input[type=checkbox]:after,
+.km-blackberry .km-listview-label input[type=checkbox]:before
+{
+    content: "\a0";
+    display: block;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.km-blackberry .km-listview-label input[type=radio]:after
+{
+    position: relative;
+    margin: 20% auto;
+    width: 70%;
+    height: 70%;
+}
+
+.km-blackberry .km-listview-label input[type=checkbox]:after
+{
+    .transform(scale(.8,1));
+    .transform-origin(25% 50%);
+}
+
+.km-blackberry .km-listview-label input[type=radio]:checked:after
+{
+    color: transparent;
+}
+
