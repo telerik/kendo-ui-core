@@ -416,7 +416,7 @@
                 that.id = that.visual.native.id;
                 that.content(that.content());
                 that._rotate();
-                if (options.hasOwnProperty("layout")) {
+                if (options.hasOwnProperty("layout") && options.layout!==undefined) {
                     // pass the defined shape layout, it overtakes the default resizing
                     that.layout = options.layout.bind(options);
                 }
