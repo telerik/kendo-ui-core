@@ -674,4 +674,26 @@
         }, allowHideAfter + 100);
     });
 
+    test("originating element is hidden if appendTo is not set", function() {
+        createNotification();
+
+        equal(notification.element[0].style.display, "none");
+    });
+
+    test("originating element is hidden if appendTo is set to another element", function() {
+        createNotification({
+            appendTo: QUnit.fixture
+        });
+
+        equal(notification.element[0].style.display, "none");
+    });
+
+    test("originating element is not hidden if appendTo is set to Notification widget element", function() {
+        createNotification({
+            appendTo: "#notification"
+        });
+
+        notEqual(notification.element[0].style.display, "none");
+    });
+
 })();
