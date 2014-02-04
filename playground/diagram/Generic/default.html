@@ -446,7 +446,46 @@ $(function () {
                 ec.select(0);
                 sp.value("#fff");
             }
-        }
+        },
+        shapes: [{
+            "id":"EiVRw3fyd4",
+            "background":"steelblue",
+            "hoveredBackground":"#70CAFF",
+            "cursor":"pointer",
+            "content":{
+                "align":"center middle",
+                "text":""
+            },
+            "editable":true,
+            "selectable":true,
+            "type":"Shape",
+            "data":"m0,100 L100,100 L50,0z",
+            "stroke":"DimGray",
+            "strokeWidth":0,
+            "strokeDashArray":"none",
+            "x":238,
+            "y":132,
+            "minWidth":20,
+            "minHeight":20,
+            "width":100,
+            "height":100,
+            "connectors":[{
+                "name":"Top"
+            }, {
+                "name":"Right"
+            }, {
+                "name":"Left"
+            }, {
+                "name":"Auto"
+            }],
+            "rotation":{
+                "angle":0
+            },
+            "resizable":true,
+            "rotatable":true,
+            "undoable":false,
+            "name":"Triangle"
+        }]
     });
     var diagram = $("#canvas").data("kendoDiagram"),
             kendo = window.kendo,

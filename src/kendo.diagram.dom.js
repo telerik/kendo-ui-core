@@ -1220,6 +1220,8 @@
                     that.layout(that.options.layout);
                 }
                 this.pauseMouseHandlers = false;
+
+                that._createShapes();
             },
             options: {
                 name: "Diagram",
@@ -1257,6 +1259,18 @@
             },
 
             events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
+
+            _createShapes: function() {
+                var that = this,
+                    options = that.options,
+                    shapes = options.shapes,
+                    shape;
+
+                for (i = 0; i < shapes.length; i++) {
+                    shape = shapes[i].options;
+                    that.addShape(new Point(shape.x, shape.y), shape);
+                }
+            },
 
             destroy: function () {
                 var that = this;
