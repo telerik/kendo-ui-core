@@ -52,9 +52,11 @@
 
             <script>
                 $(document).ready(function() {
-                    var panes = $("#splitter").children(),
+                    var splitterElement = $("#splitter"),
                         getPane = function (index) {
                             index = Number(index);
+
+                            var panes = splitterElement.children(".k-pane");
 
                             if(!isNaN(index) && index < panes.length) {
                                 return panes[index];
