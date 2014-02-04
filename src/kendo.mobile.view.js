@@ -54,7 +54,6 @@ var __meta__ = {
             element = that.element;
 
             that.params = {};
-            that._paramsHistory = [];
 
             $.extend(that, options);
 
