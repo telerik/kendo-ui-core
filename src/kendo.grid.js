@@ -1105,9 +1105,9 @@ var __meta__ = {
                             header = th.closest("table");
 
                         isStatic = header.parent().hasClass("k-grid-header-static");
-                        var contentTable =  isStatic ? that.staticTable : that.table;
 
-                        var footer = that.footer || $();
+                        var contentTable =  isStatic ? that.staticTable : that.table,
+                            footer = that.footer || $();
 
                         if (that.footer && that.staticContent) {
                             footer = isStatic ? that.footer.children(".k-grid-footer-static") : that.footer.children(".k-grid-footer-wrap");
@@ -1160,12 +1160,13 @@ var __meta__ = {
                     },
                     resizeend: function() {
                         var newWidth = th.outerWidth(),
-                            column;
+                            column,
+                            header;
 
                         cursor(that.wrapper, "");
 
                         if (columnWidth != newWidth) {
-                            var header = that.staticHeader ? that.staticHeader.find("thead:first").add(that.thead) : th.parent();
+                            header = that.staticHeader ? that.staticHeader.find("thead:first").add(that.thead) : th.parent();
 
                             column = that.columns[header.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)];
 
