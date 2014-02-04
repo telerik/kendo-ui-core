@@ -45,6 +45,10 @@ var __meta__ = {
         }
     }
 
+    function appLevelNativeScrolling() {
+        return mobile.application && mobile.application.options && mobile.application.options.useNativeScrolling;
+    }
+
     var View = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -57,7 +61,6 @@ var __meta__ = {
 
             $.extend(that, options);
 
-            that.applicationNativeScrolling = (mobile.application && mobile.application.options && mobile.application.options.useNativeScrolling);
 
             that._id();
             that._layout();
@@ -159,7 +162,7 @@ var __meta__ = {
         },
 
         _padIfNativeScrolling: function() {
-            if (this.applicationNativeScrolling) {
+            if (appLevelNativeScrolling()) {
                 this.content.css({
                     paddingTop: this.header.height(),
                     paddingBottom: this.footer.height()
@@ -180,7 +183,7 @@ var __meta__ = {
         _scroller: function() {
             var that = this;
 
-            if (that.applicationNativeScrolling) {
+            if (appLevelNativeScrolling()) {
                 return;
             }
             if (that.options.stretch) {
