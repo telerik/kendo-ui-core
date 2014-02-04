@@ -1,0 +1,31 @@
+@import "../common/icons.less";
+@import "../common/buttongroup.less";
+@import "base.less";
+
+/* ButtonGroup */
+
+.km-flat .km-buttongroup > *:not(:first-child):not(:last-child)
+{
+    border-radius: 0;
+}
+
+.km-flat .km-buttongroup > *:first-child
+{
+    border-radius: @flat-border-radius 0 0 @flat-border-radius;
+}
+
+.km-flat .km-buttongroup > *:last-child
+{
+    border-radius: 0 @flat-border-radius @flat-border-radius 0;
+}
+
+.km-flat .km-buttongroup > *.km-state-active
+{
+    border-right-width: 1px;
+}
+
+.km-flat .km-buttongroup > *.km-state-active + *
+{
+    border-left-width: 0;
+}
+

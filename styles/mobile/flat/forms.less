@@ -1,0 +1,130 @@
+@import "../common/forms.less";
+@import "base.less";
+
+/* Slider */
+
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover
+{
+    border: 0;
+    border-radius: 5em;
+    .box-shadow(0 0 0 3px currentcolor);
+}
+
+.km-flat .k-slider-track
+{
+    margin: -.5em .5em 0 0;
+    .box-sizing(content-box);
+    border-radius: .5em;
+    background-color: @flat-second-color;
+}
+
+.km-flat .k-slider-selection
+{
+    margin-left: 0;
+}
+
+/* Forms */
+
+.km-flat .km-list input[type=password],
+.km-flat .km-list input[type=search],
+.km-flat .km-list input[type=number],
+.km-flat .km-list input[type=tel],
+.km-flat .km-list input[type=url],
+.km-flat .km-list input[type=email],
+.km-flat .km-list input[type=month],
+.km-flat .km-list input[type=color],
+.km-flat .km-list input[type=week],
+.km-flat .km-list input[type=date],
+.km-flat .km-list input[type=time],
+.km-flat .km-list input[type=datetime],
+.km-flat .km-list input[type=datetime-local],
+.km-flat .km-list input[type=text]:not(.k-input),
+.km-flat .km-list select:not([multiple]),
+.km-flat .km-list .k-dropdown-wrap,
+.km-flat .km-list textarea
+{
+    .appearance(none);
+    font-size: 1.1rem;
+    min-width: 6em;
+    border: 0;
+    padding: .4em;
+    outline: none;
+    background: transparent;
+}
+
+.km-flat .km-list .k-dropdown-wrap
+{
+	padding: .2em;
+}
+
+.km-flat .km-list .k-dropdown
+{
+    margin-top: -1.05em;
+    font-weight: normal;
+}
+
+.km-flat .km-list input[type=color],
+.km-flat .km-list input[type=week],
+.km-flat .km-list input[type=date],
+.km-flat .km-list input[type=time],
+.km-flat .km-list input[type=month],
+.km-flat .km-list input[type=datetime],
+.km-flat .km-list input[type=datetime-local],
+.km-flat .km-list .k-dropdown
+{
+    text-align: left;
+}
+
+.km-flat .km-list .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    border-radius: 0;
+    background: transparent;
+    .box-shadow(none);
+}
+
+/* Checkboxes and Radios */
+
+.km-flat .km-listview-label input[type=checkbox]
+{
+    margin-top: -.7em;
+}
+
+.km-flat .km-listview-label input[type=radio],
+.km-flat .km-listview-label input[type=checkbox]
+{
+    border-width: @flat-border-width;
+    border-style: solid;
+    width: 1.4em;
+    height: 1.4em;
+    border-radius: @flat-border-radius;
+}
+
+.km-flat .km-listview-label input[type=radio]
+{
+    width: 1.2em;
+    height: 1.2em;
+    border-radius: 1em;
+}
+
+.km-flat .km-listview-label input[type=checkbox]:after
+{
+    content: "\a0";
+    display: block;
+    width: 90%;
+    height: 76%;
+    .transform(scale(.9,1));
+    .transform-origin(10% 50%);
+}
+
+.km-flat .km-listview-label input[type=checkbox]:checked:after
+{
+    font-size: 1.4em;
+}
+
+.km-flat .km-listview-label input[type=radio]:after
+{
+    color: transparent;
+}
+
