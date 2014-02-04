@@ -73,4 +73,19 @@
         setup('<div data-role="view"></div>');
         ok(view.scrollerContent[0] == view.contentElement()[0]);
     });
+
+    test("uses transition if set as a data option", 1, function() {
+        view = kendo.initWidget($('<div data-role="view" data-transition="slide" />'), {}, kendo.mobile.ui.roles);
+        equal(view.transition, 'slide');
+    });
+
+    test("transition attribute is with higher priority than default transition", 1, function() {
+        view = kendo.initWidget($('<div data-role="view" data-transition="slide" />'), { defaultTransition: "overlay:up" }, kendo.mobile.ui.roles);
+        equal(view.transition, 'slide');
+    });
+
+    test("if no transition, default transition is used", 1, function() {
+        view = kendo.initWidget($('<div data-role="view" />'), { defaultTransition: "overlay:up" }, kendo.mobile.ui.roles);
+        equal(view.transition, 'overlay:up');
+    });
 })();

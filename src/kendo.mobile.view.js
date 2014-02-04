@@ -51,22 +51,19 @@ var __meta__ = {
 
     var View = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            Widget.fn.init.call(this, element, options);
 
-            Widget.fn.init.call(that, element, options);
+            this.params = {};
 
-            element = that.element;
+            $.extend(this, options);
 
-            that.params = {};
+            this.transition = this.transition || this.defaultTransition;
 
-            $.extend(that, options);
-
-
-            that._id();
-            that._layout();
-            that._overlay();
-            that._scroller();
-            that._model();
+            this._id();
+            this._layout();
+            this._overlay();
+            this._scroller();
+            this._model();
         },
 
         events: [
@@ -82,6 +79,7 @@ var __meta__ = {
             name: "View",
             title: "",
             reload: false,
+            transition: "",
             defaultTransition: "",
             useNativeScrolling: false,
             stretch: false,
@@ -246,7 +244,6 @@ var __meta__ = {
                 element = that.element;
 
             element.data("kendoView", that).addClass("km-view");
-            that.transition = attrValue(element, "transition");
 
             that.header = element.children(roleSelector("header")).addClass("km-header");
             that.footer = element.children(roleSelector("footer")).addClass("km-footer");
