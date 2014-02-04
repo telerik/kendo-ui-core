@@ -2569,7 +2569,7 @@ var __meta__ = {
                                 container = current;
                             }
 
-                            that._handleEditing(container, false, e.currentTarget);
+                            that._handleEditing(container, false, isInCell ? e.currentTarget : table[0]);
                             handled = true;
                         }
                     }
@@ -2588,14 +2588,14 @@ var __meta__ = {
                             }
                             that.cancelRow();
                             if (currentIndex >= 0) {
-                                that.current(dataTable.find(">tbody>tr").eq(currentIndex).children().filter(NAVCELL).first());
+                                that.current(table.find(">tbody>tr").eq(currentIndex).children().filter(NAVCELL).first());
                             }
                         }
 
                         if (browser.msie && browser.version < 9) {
                             document.body.focus();
                         }
-                        focusTable(e.currentTarget, true);
+                        focusTable(isInCell ? e.currentTarget : table[0], true);
                         handled = true;
                     }
                 } else if (keys.TAB == key) {
