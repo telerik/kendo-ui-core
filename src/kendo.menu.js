@@ -912,9 +912,6 @@ var __meta__ = {
 
             if (item.length && nextItem.length) {
                 item.removeClass(FOCUSEDSTATE);
-                if (item[0].id === id) {
-                    item.removeAttr("id");
-                }
             }
 
             if (nextItem.length) {
@@ -927,6 +924,7 @@ var __meta__ = {
 
                 if (id) {
                     that.element.removeAttr("aria-activedescendant");
+                    $("#" + id).removeAttr("id");
                     nextItem.attr("id", id);
                     that.element.attr("aria-activedescendant", id);
                 }
