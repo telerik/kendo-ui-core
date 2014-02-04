@@ -28,3 +28,4 @@ src/.tern-port
 build/timezone-js
 ci
 docs
+playground
