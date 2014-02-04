@@ -1033,7 +1033,7 @@ var __meta__ = {
                 this.resizeHandle.data("th")
                     .removeClass("k-column-active");
 
-                if (this.staticContent) {
+                if (this.staticContent && !this._isMobile) {
                     this.resizeHandle.remove();
                     this.resizeHandle = null;
                 } else {
@@ -1043,9 +1043,10 @@ var __meta__ = {
         },
 
         _positionColumnResizeHandleTouch: function(container) {
-            var that = this;
+            var that = this,
+                staticHead = that.staticHeader ? that.staticHeader.find("thead:first") : $();
 
-            that._resizeUserEvents = new kendo.UserEvents(that.thead, {
+            that._resizeUserEvents = new kendo.UserEvents(staticHead.add(that.thead), {
                 filter: "th:not(.k-group-cell,.k-hierarchy-cell)",
                 threshold: 10,
                 hold: function(e) {
@@ -1054,7 +1055,7 @@ var __meta__ = {
                     e.preventDefault();
 
                     th.addClass("k-column-active");
-                    that._createResizeHandle(container, th);
+                    that._createResizeHandle(th.closest("div"), th);
 
                     if (!that._resizeHandleDocumentClickHandler) {
                         that._resizeHandleDocumentClickHandler = proxy(that._resizeHandleDocumentClick, that);
