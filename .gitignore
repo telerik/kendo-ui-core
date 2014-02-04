@@ -25,3 +25,6 @@ node_modules
 .tern-port
 kendo-cdn
 src/.tern-port
+build/timezone-js
+ci
+docs
