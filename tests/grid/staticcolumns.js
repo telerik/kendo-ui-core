@@ -629,4 +629,44 @@
         ok(!grid.staticRowTemplate);
         ok(!grid.staticAltRowTemplate);
     });
+
+    test("setDataSource re-creates the static header", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        grid.setDataSource(new kendo.data.DataSource({
+            data: data
+        }));
+
+        equal(grid.staticHeader.find("col").length, 1);
+        equal(grid.staticHeader.find("th").text(), "foo");
+    });
+
+    test("setDataSource re-creates the non static header", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        grid.setDataSource(new kendo.data.DataSource({
+            data: data
+        }));
+
+        equal(grid.thead.find("th").length, 2);
+        equal(grid.thead.find("th:first").text(), "bar");
+        equal(grid.thead.find("th:last").text(), "baz");
+    });
+
+    test("setDataSource static container are not duplicated", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        grid.setDataSource(new kendo.data.DataSource({
+            data: data
+        }));
+
+        equal(grid.wrapper.find(".k-grid-header-static").length, 1);
+        equal(grid.wrapper.find(".k-grid-content-static").length, 1);
+    });
 })();

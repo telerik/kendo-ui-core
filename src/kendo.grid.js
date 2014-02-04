@@ -862,10 +862,7 @@ var __meta__ = {
             }
 
             if (that.staticHeader) {
-                element = element
-                    .add(that.staticHeader)
-                    .add(that.staticContent)
-                    .add(that.staticFooter);
+                that._removeStaticContainers();
             }
 
             if (that.pane) {
@@ -3915,6 +3912,16 @@ var __meta__ = {
             }
         },
 
+        _removeStaticContainers: function() {
+            var elements = this.staticHeader
+                .add(this.staticContent)
+                .add(this.staticFooter);
+
+            elements.off(NS).remove();
+
+            this.staticHeader = this.staticContent = this.staticFooter = null;
+        },
+
         _thead: function() {
             var that = this,
                 columns = that.columns,
@@ -3931,7 +3938,14 @@ var __meta__ = {
                 thead = $("<thead/>").insertBefore(that.tbody);
             }
 
-            tr = that.element.find("tr:has(th):first");
+            if (that.staticHeader && that.thead) {
+                tr = that.thead.find("tr:has(th):first").html("");
+
+                that._removeStaticContainers();
+
+            } else {
+                tr = that.element.find("tr:has(th):first");
+            }
 
             if (!tr.length) {
                 tr = thead.children().first();
