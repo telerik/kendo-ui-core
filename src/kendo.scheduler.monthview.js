@@ -755,7 +755,7 @@ var __meta__ = {
 
                         cellCount ++;
 
-                        var eventCount = Math.floor((clientHeight - firstChildHeight) / (this.options.eventHeight + 3)) - 1;// add space for the more button
+                        var eventCount = Math.floor((clientHeight - firstChildHeight - this.options.moreButtonHeight) / (this.options.eventHeight + 3)) ;// add space for the more button
 
                         cell.setAttribute("role", "gridcell");
                         cell.setAttribute("aria-selected", false);
@@ -902,6 +902,7 @@ var __meta__ = {
             title: "Month",
             name: "month",
             eventHeight: 25,
+            moreButtonHeight: 13,
             editable: true,
             selectedDateFormat: "{0:y}",
             dayTemplate: DAY_TEMPLATE,
