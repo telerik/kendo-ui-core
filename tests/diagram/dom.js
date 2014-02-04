@@ -1,29 +1,23 @@
-﻿///<reference path="qunit-1.12.0.js" />
+///<reference path="qunit-1.12.0.js" />
 ///<reference path="../refs/kendo.core.js" />
 ///<reference path="../refs/kendo.dataviz.core.js" />
 ///<reference path="../js/diagram.math.js" />
 ///<reference path="mock-helper.js" />
 
 (function() {
-    var diagram = window.kendo.diagram,
-        kdiagram,
-        tolerance = 0.0001,
-        Point = diagram.Point,
-        QUnit = window.QUnit,
-        test = QUnit.test,
-        ok = QUnit.ok,
-        equal = QUnit.equal;
+    var tolerance = 0.0001,
+        Point = kendo.diagram.Point,
+        Rect = kendo.diagram.Rect,
+        diagram;
 
     /*-----------Diagram tests------------------------------------*/
-    QUnit.module("Diagram tests", {
+    module("Diagram tests", {
         setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
-            $("#canvas").kendoDiagram();
-
-            kdiagram = $("#canvas").getKendoDiagram();
+            QUnit.fixture.html('<div id="canvas" />');
+            diagram = $("#canvas").kendoDiagram().getKendoDiagram();
         },
         teardown: function () {
-            kdiagram.destroy();
+            diagram.destroy();
         }
     });
 
@@ -33,17 +27,18 @@
     });
 
     test("Adding shape tests", function () {
-        var kendoDiagram = kdiagram;
-        kendoDiagram.addShape(new diagram.Point(100, 120), {
+        diagram.addShape({
             id: "TestShape",
             data: "rectangle",
             width: 200, height: 100,
-            background: "#778899"
+            background: "#778899",
+            x: 100,
+            y: 120
         });
         var found = document.getElementById("TestShape");
         ok(found != null, "A SVG shape with name 'TestShape' should be in the HTML tree.");
-        ok(kendoDiagram.shapes.length == 1, "Items count should be incremented.");
-        var item = kendoDiagram.shapes[0];
+        ok(diagram.shapes.length == 1, "Items count should be incremented.");
+        var item = diagram.shapes[0];
         ok(item.connectors.length == 5, "Item should have 5 connectors.");
         ok(item.options.id == "TestShape", "The Id should be passed across the hierarchy.");
 
@@ -51,26 +46,17 @@
         ok(found.attributes["visibility"].value == "hidden", "The visibility should be 'collapsed' now.");
         item.visible(true);
         ok(found.attributes["visibility"].value == "visible", "The visibility should be 'visible' now.");
-        item.IsSelected = true;
-        kendoDiagram.addShape(new diagram.Point(350, 120), {
-            id: "TestShape",
-            data: "rectangle",
-            width: 200,
-            height: 100,
-            background: "#778899"
-        });
-        //kendoDiagram.shapes[1].select(true);
     });
 
     test("Adding connections", function () {
-        var kendoDiagram = kdiagram;
-        var shape1 = AddShape(kendoDiagram, new diagram.Point(100, 120),
+        var kendoDiagram = diagram;
+        var shape1 = AddShape(kendoDiagram, new Point(100, 120),
             kendo.deepExtend(Shapes.SequentialData, {
                 width: 80, height: 80, title: "sequential data"
             }));
         shape1.Title = "Sequential Data.";
-        var shape2 = AddShape(kendoDiagram, new diagram.Point(100, 400));
-        var shape3 = AddShape(kendoDiagram, new diagram.Point(370, 400), Shapes.Wave);
+        var shape2 = AddShape(kendoDiagram, new Point(100, 400));
+        var shape3 = AddShape(kendoDiagram, new Point(370, 400), Shapes.Wave);
         var topCor = shape2.getConnector("Top");
         var topCor2 = shape3.getConnector("Top");
         var bottomCor = shape1.getConnector("Bottom");
@@ -81,101 +67,74 @@
         var con2 = AddConnection(kendoDiagram, bottomCor, topCor2);
         con2.content("Connection Label");
         equal(kendoDiagram.connections.length, 2, "diagram should have 2 connections");
-        //ok(topCor.connections.length == 1, "Shape2#Top should have one connection.");
-        //ok(bottomCor.connections.length == 2, "Shape1#Bottom should have two connections.");
     });
 
     test("Bring into view - rect", function () {
-        var rect = new diagram.Rect(0, 0, 400, 400),
-            viewport = kdiagram.viewport();
-        kdiagram.bringIntoView(rect);
+        var rect = new Rect(0, 0, 400, 400),
+            viewport = diagram.viewport();
+        diagram.bringIntoView(rect);
         var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(kdiagram.pan(), newPan);
+        deepEqual(diagram.pan(), newPan);
     });
 
     test("Bring into view - shape", function () {
-        var s = kdiagram.addShape(new Point());
+        var s = diagram.addShape(new Point());
         var rect = s.bounds(),
-            viewport = kdiagram.viewport();
+            viewport = diagram.viewport();
 
-        kdiagram.bringIntoView(s, {align: "none"});
-        deepEqual(kdiagram.pan(), new Point(), "Shape is in view. No need to bring anything.");
+        diagram.bringIntoView(s, {align: "none"});
+        deepEqual(diagram.pan(), new Point(), "Shape is in view. No need to bring anything.");
 
-        kdiagram.bringIntoView(s);
+        diagram.bringIntoView(s);
         var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(kdiagram.pan(), newPan);
+        deepEqual(diagram.pan(), newPan);
 
     });
 
     test("Bring into view - many shapes", function () {
-        var s = kdiagram.addShape(new Point());
-        var s1 = kdiagram.addShape(new Point(500, 500));
+        var s = diagram.addShape(new Point());
+        var s1 = diagram.addShape(new Point(500, 500));
         var rect = s.bounds().union(s1.bounds()),
-            viewport = kdiagram.viewport();
+            viewport = diagram.viewport();
 
-        kdiagram.bringIntoView([s, s1], {center: true});
+        diagram.bringIntoView([s, s1], {center: true});
         var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(kdiagram.pan(), newPan);
+        deepEqual(diagram.pan(), newPan);
     });
 
-    //test("Bring into view - after zoom", function () {
-    //    var s = kdiagram.addShape(new Point());
-    //    var s1 = kdiagram.addShape(new Point(500, 500));
-    //    kdiagram.zoom(2);
-    //    var rect = s.visualBounds().union(s1.visualBounds()),
-    //        viewport = kdiagram.viewport();
-
-    //    kdiagram.bringIntoView([s, s1]);
-    //    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-    //    deepEqual(kdiagram.pan(), newPan);
-    //});
-
-    //test("Bring into view - after zoom and pan", function () {
-    //    var s = kdiagram.addShape(new Point());
-    //    var s1 = kdiagram.addShape(new Point(500, 500));
-    //    kdiagram.zoom(2);
-    //    kdiagram.pan(new Point(300, 300));
-    //    var rect = s.visualBounds().union(s1.visualBounds()),
-    //        viewport = kdiagram.viewport();
-
-    //    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center()).plus(kdiagram.pan());
-    //    kdiagram.bringIntoView([s, s1]);
-    //    deepEqual(kdiagram.pan(), newPan);
-    //});
-
     test("Bring into view - align top right", function () {
-        var s = kdiagram.addShape(new Point());
+        var s = diagram.addShape(new Point());
         var rect = s.bounds("transformed"),
-            viewport = kdiagram.viewport();
+            viewport = diagram.viewport();
 
-        var newPan = viewport.topRight().minus(rect.topRight()).plus(kdiagram.pan());
-        kdiagram.bringIntoView([s], {align: "top right"});
-        equal(kdiagram.pan().x, Math.floor(newPan.x));
-        equal(kdiagram.pan().y, Math.floor(newPan.y));
+        var newPan = viewport.topRight().minus(rect.topRight()).plus(diagram.pan());
+        diagram.bringIntoView([s], {align: "top right"});
+        equal(diagram.pan().x, Math.floor(newPan.x));
+        equal(diagram.pan().y, Math.floor(newPan.y));
     });
 
     test("Bring into view - align center bottom", function () {
-        var s = kdiagram.addShape(new Point());
+        var s = diagram.addShape(new Point());
         var rect = s.bounds("transformed"),
-            viewport = kdiagram.viewport();
+            viewport = diagram.viewport();
 
-        var newPan = viewport.bottom().minus(rect.bottom()).plus(kdiagram.pan());
-        kdiagram.bringIntoView([s], {align: "center bottom"});
-        equal(kdiagram.pan().x, newPan.x);
-        equal(kdiagram.pan().y, newPan.y);
+        var newPan = viewport.bottom().minus(rect.bottom()).plus(diagram.pan());
+        diagram.bringIntoView([s], {align: "center bottom"});
+        equal(diagram.pan().x, newPan.x);
+        equal(diagram.pan().y, newPan.y);
     });
 
-    QUnit.module("initialization", {
+    module("initialization", {
         setup: function() {
             QUnit.fixture.html('<div id=canvas />');
             window.initLayoutDiagram = function(options) {
-                kdiagram = $("#canvas").kendoDiagram({layout: options }).data("kendoDiagram");
+                diagram = $("#canvas").kendoDiagram({ layout: options }).data("kendoDiagram");
             };
         },
         teardown: function() {
             window.removeMocksIn(window.kendo.ui.Diagram.fn);
             delete window.initDiagram;
-            kdiagram.destroy();
+            diagram.destroy();
         }
     });
 
@@ -189,83 +148,65 @@
             }
         });
 
-        equal(kdiagram.options.layout.grid.width, 600, "grid width option should be stored");
+        equal(diagram.options.layout.grid.width, 600, "grid width option should be stored");
         ok(diagramFn.layout.called, "the layout method of the diagram should be called");
     });
 
-    QUnit.module("event handling", {
+    module("event handling", {
         setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
+            QUnit.fixture.html('<div id="canvas" />');
             $("#canvas").kendoDiagram();
-            kdiagram = $("#canvas").getKendoDiagram();
+            diagram = $("#canvas").getKendoDiagram();
         },
         teardown: function () {
-            kdiagram.destroy();
+            diagram.destroy();
         }
     });
 
     test("get canvas point of mouse event", function () {
         var offset = $(".k-canvas-container").offset();
-        var point = kdiagram.documentToCanvasPoint(new Point(200, 200));
+        var point = diagram.documentToCanvasPoint(new Point(200, 200));
 
         ok(point.equals(new Point(200 - offset.left, 200 - offset.top)));
     });
 
     test("limit zoom with min/max values", function () {
-        //equal(kdiagram._getValidZoom(0.2), 0.55, "below min");
-        //equal(kdiagram._getValidZoom(0.55), 0.55, "is min");
-        equal(kdiagram._getValidZoom(0.7), 0.7, "valid, zoom out");
-        equal(kdiagram._getValidZoom(1), 1, "valid, no zoom");
-        equal(kdiagram._getValidZoom(1.4), 1.4, "valid, zoom in");
-        equal(kdiagram._getValidZoom(2), 2, "is max");
-        equal(kdiagram._getValidZoom(2.2), 2, "above max");
+        equal(diagram._getValidZoom(0.7), 0.7, "valid, zoom out");
+        equal(diagram._getValidZoom(1), 1, "valid, no zoom");
+        equal(diagram._getValidZoom(1.4), 1.4, "valid, zoom in");
+        equal(diagram._getValidZoom(2), 2, "is max");
+        equal(diagram._getValidZoom(2.2), 2, "above max");
     });
 
     test("zoom does not change the pan", function () {
-        var pan = kdiagram.pan().clone();
-        kdiagram.zoom(1.1);
+        var pan = diagram.pan().clone();
+        diagram.zoom(1.1);
 
-        ok(pan.equals(kdiagram.pan()));
+        ok(pan.equals(diagram.pan()));
     });
 
     test("zoom at position changes diagram zoom", function () {
-        var zoom = kdiagram.zoom(1.1, new Point(200, 200));
+        var zoom = diagram.zoom(1.1, new Point(200, 200));
         equal(zoom, 1.1);
     });
 
-//    test("zoom at position pans the diagram", function () {
-//        kdiagram.zoom(1.1, new Point(200, 200));
-//
-//        var pan = kdiagram.pan();
-//        ok(pan.x < 0, "x pan should be negative because the diagram has expanded around a static point");
-//        ok(pan.y < 0, "y pan should be negative because the diagram has expanded around a static point");
-//    });
-//
-//    test("zoom out at position pans the diagram", function () {
-//        kdiagram.zoom(0.7, new Point(200, 200));
-//
-//        var pan = kdiagram.pan();
-//        ok(pan.x > 0, "x pan should be positive because the diagram has shrunk around a static point");
-//        ok(pan.y > 0, "y pan should be positive because the diagram has shrunk around a static point");
-//    });
-
-    QUnit.module("Shape bounds", {
+    module("Shape bounds", {
         setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
+            QUnit.fixture.html('<div id="canvas" />');
             $("#canvas").kendoDiagram();
 
-            kdiagram = $("#canvas").getKendoDiagram();
+            diagram = $("#canvas").getKendoDiagram();
         },
         teardown: function () {
-            kdiagram.destroy();
+            diagram.destroy();
         }
     });
 
     test("Shape bounds changed event is raised after position set", function () {
-        var s = kdiagram.addShape(new Point(0, 0)),
+        var s = diagram.addShape(new Point(0, 0)),
             raised;
 
-        kdiagram.bind("boundsChange", function () {
+        diagram.bind("boundsChange", function () {
             raised = true;
         });
 
@@ -274,220 +215,114 @@
     });
 
     test("Shape bounds changed event is raised after bounds set", function () {
-        var s = kdiagram.addShape(new Point(0, 0)),
+        var s = diagram.addShape(new Point(0, 0)),
             raised;
 
-        kdiagram.bind("boundsChange", function () {
+        diagram.bind("boundsChange", function () {
             raised = true;
         });
 
-        s.bounds(new diagram.Rect(100, 100, 100, 100));
+        s.bounds(new Rect(100, 100, 100, 100));
 
         ok(raised);
     });
 
-    //test("Shape visual bounds is ok after pan", function () {
-    //    var s = kdiagram.addShape(new Point(0, 0));
-    //    kdiagram.pan(new Point(100, 100));
-
-    //    var pan = kdiagram.pan();
-    //    var vb = s.visualBounds();
-    //    var b = s.bounds();
-    //    equal(b.x + pan.x, vb.x);
-    //    equal(b.y + pan.y, vb.y);
-    //});
-
     test("Shape visual bounds is ok after zoom", function () {
-        var s = kdiagram.addShape(new Point(0, 0));
+        var s = diagram.addShape(new Point(0, 0));
         var z = 0.5;
-        z = kdiagram.zoom(z);
+        z = diagram.zoom(z);
 
         var vb = s.bounds("transformed");
         var b = s.bounds();
-        QUnit.close(b.width, vb.width / z, tolerance);
-        QUnit.close(b.height, vb.height / z, tolerance);
+        close(b.width, vb.width / z, tolerance);
+        close(b.height, vb.height / z, tolerance);
     });
 
     test("Add shape raises itemschange event", function() {
         var eventShape = null,
             called = false;
 
-        kdiagram.bind("itemsChange", function(args) {
+        diagram.bind("itemsChange", function(args) {
             eventShape = args.added[0];
             called = true;
         });
 
-        var addedShape = kdiagram.addShape(new Point(0, 0));
-        QUnit.ok(called, "itemschange event should be raised");
-        QUnit.equal(eventShape, addedShape, "the reported shape should be the same as the added");
+        var addedShape = diagram.addShape(new Point(0, 0));
+        ok(called, "itemschange event should be raised");
+        equal(eventShape, addedShape, "the reported shape should be the same as the added");
     });
 
     test("Remove shape raises itemschange event", function() {
         var eventShape = null,
             called = false,
-            shape = kdiagram.addShape(new Point(0, 0));
+            shape = diagram.addShape(new Point(0, 0));
 
-        kdiagram.bind("itemsChange", function(args) {
+        diagram.bind("itemsChange", function(args) {
             eventShape = args.removed[0];
             called = true;
         });
 
-        kdiagram.remove(shape);
-        QUnit.ok(called, "itemschange event should be raised");
-        QUnit.equal(eventShape, shape, "the reported shape should be the same as the removed");
+        diagram.remove(shape);
+        ok(called, "itemschange event should be raised");
+        equal(eventShape, shape, "the reported shape should be the same as the removed");
     });
 
     test("Remove multiple items raises itemschange event", function() {
         var eventShapes = [],
-            shapes = [kdiagram.addShape(new Point(0, 0)), kdiagram.addShape(new Point(1, 0))];
+            shapes = [diagram.addShape(new Point(0, 0)), diagram.addShape(new Point(1, 0))];
 
-        kdiagram.bind("itemsChange", function(args) {
+        diagram.bind("itemsChange", function(args) {
             eventShapes = args.removed;
         });
 
-        kdiagram.remove(shapes);
-        QUnit.equal(eventShapes.length, shapes.length, "all shapes should be reported by the event handler");
+        diagram.remove(shapes);
+        equal(eventShapes.length, shapes.length, "all shapes should be reported by the event handler");
     });
 
-    //test("Bring to front - no arguments. Rearrange shapes", function () {
-    //    var s1 = kdiagram.addShape(new Point(0, 0));
-    //    var s2 = kdiagram.addShape(new Point(50, 50));
-    //    var s3 = kdiagram.addShape(new Point(60, 60));
-    //    s1.select(true);
-    //
-    //    equal(kdiagram.shapes.indexOf(s1), 0);
-    //    kdiagram.toFront();
-    //    equal(kdiagram.shapes.indexOf(s1), 2);
-    //});
-    //
-    //test("Bring to front - no arguments. Rearrange connections", function () {
-    //    var s1 = kdiagram.connect(new Point(0, 0, new Point(100, 100)));
-    //    var s2 = kdiagram.connect(new Point(0, 0, new Point(100, 200)));
-    //    s1.select(true);
-    //
-    //    equal(kdiagram.connections.indexOf(s1), 0);
-    //    kdiagram.toFront();
-    //    equal(kdiagram.connections.indexOf(s1), 1);
-    //});
-    //
-    //test("Bring to front - with args.", function () {
-    //    var s1 = kdiagram.addShape(new Point(0, 0));
-    //    var s2 = kdiagram.addShape(new Point(50, 50));
-    //    var s3 = kdiagram.addShape(new Point(60, 60));
-    //
-    //    equal(kdiagram.shapes.indexOf(s1), 0);
-    //    kdiagram.toFront(s1);
-    //    equal(kdiagram.shapes.indexOf(s1), 2);
-    //});
-    //
-    //test("Bring to front - with args connections", function () {
-    //    var s1 = kdiagram.connect(new Point(0, 0, new Point(100, 100)));
-    //    var s2 = kdiagram.connect(new Point(0, 0, new Point(100, 200)));
-    //
-    //    equal(kdiagram.connections.indexOf(s1), 0);
-    //    kdiagram.toFront(s1);
-    //    equal(kdiagram.connections.indexOf(s1), 1);
-    //});
-    //
-    //
-    //test("Bring to front - with shapes array.", function () {
-    //    var s1 = kdiagram.addShape(new Point(0, 0));
-    //    var s2 = kdiagram.addShape(new Point(50, 50));
-    //    var s3 = kdiagram.addShape(new Point(60, 60));
-    //
-    //    equal(kdiagram.shapes.indexOf(s1), 0);
-    //    kdiagram.toFront([s1, s2]);
-    //    equal(kdiagram.shapes.indexOf(s1), 1);
-    //    equal(kdiagram.shapes.indexOf(s2), 2);
-    //});
-    //
-    //test("Bring to front - with mixed array.", function () {
-    //    var s1 = kdiagram.addShape(new Point(0, 0));
-    //    var s2 = kdiagram.addShape(new Point(50, 50));
-    //    var s3 = kdiagram.addShape(new Point(60, 60));
-    //    var c1 = kdiagram.connect(new Point(0, 0, new Point(100, 100)));
-    //    var c2 = kdiagram.connect(new Point(0, 0, new Point(100, 200)));
-    //
-    //    equal(kdiagram.shapes.indexOf(s1), 0);
-    //    kdiagram.toFront([s1, c1]);
-    //    equal(kdiagram.shapes.indexOf(s1), 2);
-    //    equal(kdiagram.connections.indexOf(c1), 1);
-    //});
-    //
-    //test("Send to back - with mixed array.", function () {
-    //    var s1 = kdiagram.addShape(new Point(0, 0));
-    //    var s2 = kdiagram.addShape(new Point(50, 50));
-    //    var s3 = kdiagram.addShape(new Point(60, 60));
-    //    var c1 = kdiagram.connect(new Point(0, 0, new Point(100, 100)));
-    //    var c2 = kdiagram.connect(new Point(0, 0, new Point(100, 200)));
-    //
-    //    kdiagram.toBack([s3, c2]);
-    //    equal(kdiagram.shapes.indexOf(s3), 0);
-    //    equal(kdiagram.connections.indexOf(c2), 0);
-    //});
-    //
-    //
-    //test("Hit test after bring to front and send to back.", function () {
-    //    var s1 = kdiagram.addShape(new Point(0, 0));
-    //    var s2 = kdiagram.addShape(new Point(50, 50));
-    //    var s3 = kdiagram.addShape(new Point(60, 60));
-    //
-    //    var hit = kdiagram.toolService._hitTest(new Point(70, 70));
-    //    equal(hit.bounds(), s3.bounds());
-    //
-    //    kdiagram.toFront(s1);
-    //    hit = kdiagram.toolService._hitTest(new Point(70, 70));
-    //    equal(hit.bounds(), s1.bounds());
-    //
-    //    kdiagram.toBack(s1);
-    //    hit = kdiagram.toolService._hitTest(new Point(70, 70));
-    //    equal(hit.bounds(), s3.bounds());
-    //});
-
-    QUnit.module("Connections and connectors", {
+    module("Connections and connectors", {
         setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
+            QUnit.fixture.html('<div id="canvas" />');
             $("#canvas").kendoDiagram();
 
-            kdiagram = $("#canvas").getKendoDiagram();
+            diagram = $("#canvas").getKendoDiagram();
         },
         teardown: function () {
-            kdiagram.destroy();
+            diagram.destroy();
         }
     });
 
     test("Connection connect - set auto connectors test", function () {
-        var s1 = kdiagram.addShape(new Point(0, 0));
-        var s2 = kdiagram.addShape(new Point(100, 0));
+        var s1 = diagram.addShape(new Point(0, 0));
+        var s2 = diagram.addShape(new Point(100, 0));
 
-        var c1 = kdiagram.connect(s1, s2);
+        var c1 = diagram.connect(s1, s2);
         equal(c1.sourceConnector.options.name, "Auto");
         equal(c1.targetConnector.options.name, "Auto");
     });
 
     test("Connection connect - resolve auto connectors test", function () {
-        var s1 = kdiagram.addShape(new Point(0, 0));
-        var s2 = kdiagram.addShape(new Point(100, 0));
+        var s1 = diagram.addShape(new Point(0, 0));
+        var s2 = diagram.addShape(new Point(100, 0));
 
-        var c1 = kdiagram.connect(s1, s2);
+        var c1 = diagram.connect(s1, s2);
         equal(c1._resolvedSourceConnector.options.name, "Right");
         equal(c1._resolvedTargetConnector.options.name, "Left");
     });
 
     test("Connection connect - resolve auto connectors border test", function () {
-        var s1 = kdiagram.addShape(new Point(100, 100));
-        var s2 = kdiagram.addShape(new Point(160, 160));
+        var s1 = diagram.addShape(new Point(100, 100));
+        var s2 = diagram.addShape(new Point(160, 160));
 
-        var c1 = kdiagram.connect(s1, s2);
+        var c1 = diagram.connect(s1, s2);
         equal(c1._resolvedSourceConnector.options.name, "Bottom");
         equal(c1._resolvedTargetConnector.options.name, "Left");
     });
 
     test("Connection connect - resolve auto connectors after move test", function () {
-        var s1 = kdiagram.addShape(new Point(100, 100));
-        var s2 = kdiagram.addShape(new Point(160, 160));
+        var s1 = diagram.addShape(new Point(100, 100));
+        var s2 = diagram.addShape(new Point(160, 160));
 
-        var c1 = kdiagram.connect(s1, s2);
+        var c1 = diagram.connect(s1, s2);
         equal(c1._resolvedSourceConnector.options.name, "Bottom");
         equal(c1._resolvedTargetConnector.options.name, "Left");
 
@@ -498,18 +333,18 @@
     });
 
     test("Connection detach", function () {
-        var s1 = kdiagram.addShape(new Point(0, 0));
-        var s2 = kdiagram.addShape(new Point(200, 0));
+        var s1 = diagram.addShape(new Point(0, 0));
+        var s2 = diagram.addShape(new Point(200, 0));
 
-        var c1 = kdiagram.connect(s1, s2);
+        var c1 = diagram.connect(s1, s2);
         c1.select(true);
-        kdiagram.toolService.start(s2.bounds().left());
+        diagram.toolService.start(s2.bounds().left());
 
         ok(c1.adorner, "The connection edit adorner is present");
-        ok(kdiagram.toolService.activeTool.type === "ConnectionTool", "The active tool is ConnectionEditTool");
+        ok(diagram.toolService.activeTool.type === "ConnectionTool", "The active tool is ConnectionEditTool");
 
-        kdiagram.toolService.move(new Point(400, 0));
-        kdiagram.toolService.end(new Point(400, 0));
+        diagram.toolService.move(new Point(400, 0));
+        diagram.toolService.end(new Point(400, 0));
 
         ok(c1._resolvedTargetConnector === undefined);
         ok(c1.targetConnector === undefined);
@@ -561,9 +396,9 @@
         equal(d, 43);
     });
 
-    QUnit.module("Serialization - Cut/Copy/Paste", {
+    module("Serialization - Cut/Copy/Paste", {
         setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
+            QUnit.fixture.html('<div id="canvas" />');
             $("#canvas").kendoDiagram();
 
             d = $("#canvas").getKendoDiagram();

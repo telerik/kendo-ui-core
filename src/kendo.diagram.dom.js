@@ -1255,7 +1255,8 @@
                     angle: 10
                 },
                 shapeOptions: {},
-                connectionOptions: {}
+                connectionOptions: {},
+                shapes: []
             },
 
             events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
@@ -1267,8 +1268,8 @@
                     shape;
 
                 for (i = 0; i < shapes.length; i++) {
-                    shape = shapes[i].options;
-                    that.addShape(new Point(shape.x, shape.y), shape);
+                    shape = shapes[i];
+                    that.addShape(shape);
                 }
             },
 
@@ -1418,24 +1419,22 @@
              */
             addShape: function (item, options) {
                 var shape,
-                    shapeOptions = deepExtend({}, this.options.shapeOptions, {undoable: true}, options);
+                    shapeOptions = this.options.shapeOptions;
 
-                if (isUndefined(item)) {
-                    item = new Point(0, 0);
-                }
                 if (item instanceof Shape) {
+                    shapeOptions = deepExtend({}, shapeOptions, options);
                     shape = item;
                     shape.redraw(shapeOptions);
-                }
-                else { // consider it a point
+                } else { // consider it a point
+                    shapeOptions = deepExtend({}, shapeOptions, item);
                     deepExtend(shapeOptions, { x: item.x, y: item.y });
                     shape = new Shape(shapeOptions);
                 }
-                if (shapeOptions.undoable === true) {
+
+                if (shapeOptions.undoable) {
                     var unit = new kendo.diagram.AddShapeUnit(shape, this);
                     this.undoRedoService.add(unit);
-                }
-                else {
+                } else {
                     this.shapes.push(shape);
                     shape.diagram = this;
                     this.mainLayer.append(shape.visual);
@@ -2081,7 +2080,7 @@
                                 dp = that.documentToCanvasPoint(new Point(pos.left, pos.top));
                                 normal = that._normalizePointZoom(dp);
 
-                                that.addShape(normal, item);
+                                that.addShape(item);
                             }
                         }
                     });
