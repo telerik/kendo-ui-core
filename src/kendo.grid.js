@@ -661,6 +661,18 @@ var __meta__ = {
         }
     }
 
+    function updateColspan(toAdd, toRemove) {
+        var item, idx, length;
+        for (idx = 0, length = toAdd.length; idx < length; idx += 1) {
+            item = toAdd.eq(idx).children().eq(0);
+            item.attr("colspan", parseInt(item.attr("colspan"), 10) + 1);
+
+            item = toRemove.eq(idx).children().eq(0);
+            item.attr("colspan", parseInt(item.attr("colspan"), 10) - 1);
+        }
+    }
+
+
     var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -1263,6 +1275,7 @@ var __meta__ = {
                 idx,
                 length,
                 isStatic = !!columns[destIndex].static,
+                staticCount = staticColumns(columns).length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer");
 
             if (sourceIndex === destIndex) {
@@ -1273,7 +1286,7 @@ var __meta__ = {
                 return;
             }
 
-            if (column.static && !isStatic && staticColumns(columns).length == 1) {
+            if (column.static && !isStatic && staticCount == 1) {
                 return;
             }
 
@@ -1311,6 +1324,20 @@ var __meta__ = {
 
             rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
             if (that.staticTable) {
+                if (staticCount > destIndex) {
+                    if (staticCount <= sourceIndex) {
+                        updateColspan(
+                            that.staticTable.find(">tbody>tr.k-grouping-row"),
+                            that.table.find(">tbody>tr.k-grouping-row")
+                        );
+                    }
+                } else if (staticCount > sourceIndex) {
+                    updateColspan(
+                        that.table.find(">tbody>tr.k-grouping-row"),
+                        that.staticTable.find(">tbody>tr.k-grouping-row")
+                    );
+                }
+
                 staticRows = that.staticTable.find(">tbody>tr:not(.k-grouping-row,.k-detail-row)");
             }
 

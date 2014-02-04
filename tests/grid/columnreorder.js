@@ -740,6 +740,86 @@
         equal(grid.columns[2].field, "bar");
     });
 
+    test("move to static columns with grouping", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", static: true },
+                "foo",
+                "bar",
+                "baz"
+            ],
+            dataSource: {
+                data: data,
+                group: { field: "foo" }
+            }
+        });
+
+        grid.reorderColumn(0, grid.columns[1], false);
+
+        equal(grid.staticTable.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in static table");
+        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in non-static table");
+    });
+
+    test("move to non-static columns with grouping", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", static: true },
+                { field: "foo", static: true },
+                "bar",
+                "baz"
+            ],
+            dataSource: {
+                data: data,
+                group: { field: "foo" }
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1], false);
+
+        equal(grid.staticTable.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in static table");
+        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in non-static table");
+    });
+
+    test("move in non-static table with grouping", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", static: true },
+                "foo",
+                "bar",
+                "baz"
+            ],
+            dataSource: {
+                data: data,
+                group: { field: "foo" }
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1], false);
+
+        equal(grid.staticTable.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in static table");
+        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in non-static table");
+    });
+
+    test("move in static table with grouping", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", static: true },
+                { field: "foo", static: true },
+                "bar",
+                "baz"
+            ],
+            dataSource: {
+                data: data,
+                group: { field: "foo" }
+            }
+        });
+
+        grid.reorderColumn(1, grid.columns[0], true);
+
+        equal(grid.staticTable.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in static table");
+        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in non-static table");
+    });
+
     function moveOverDropTarget(draggable, dropTarget) {
         var position = dropTarget.position();
 
