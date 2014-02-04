@@ -2808,15 +2808,15 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     float: left;
 }
 
-.mobileExample .km-pane-wrapper .k-pager-nav:nth-last-child(2),
-.mobileExample .km-pane-wrapper .k-pager-nav:nth-last-child(3)
+.mobileExample .km-pane-wrapper .k-pager-nav + .k-pager-nav ~ .k-pager-nav
 {
     position: absolute;
     right: .3em;
     top: .3em;
 }
 
-.mobileExample .km-pane-wrapper .k-pager-nav:nth-last-child(3)
+.mobileExample .km-pane-wrapper .k-pager-wrap .k-pager-numbers + .k-pager-nav,
+.mobileExample .km-pane-wrapper .k-pager-nav:first-child + .k-pager-nav + .k-pager-nav
 {
     right: 3em;
 }

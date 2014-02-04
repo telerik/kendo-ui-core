@@ -5934,15 +5934,15 @@ div[name="recurrenceRule"] > .k-dropdown
         float: left;
     }
 
-    .km-pane-wrapper .k-pager-nav:nth-last-child(2),
-    .km-pane-wrapper .k-pager-nav:nth-last-child(3)
+    .km-pane-wrapper .k-pager-nav + .k-pager-nav ~ .k-pager-nav
     {
         position: absolute;
         right: .3em;
         top: .3em;
     }
-
-    .km-pane-wrapper .k-pager-nav:nth-last-child(3)
+ 
+    .km-pane-wrapper .k-pager-wrap .k-pager-numbers + .k-pager-nav,
+    .km-pane-wrapper .k-pager-nav:first-child + .k-pager-nav + .k-pager-nav
     {
         right: 3em;
     }
