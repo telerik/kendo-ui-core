@@ -199,6 +199,10 @@ var __meta__ = {
     var transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
 
     function parseTransition(transition) {
+        if (!transition){
+            return {};
+        }
+
         var matches = transition.match(transitionRegExp) || [];
 
         return {
@@ -214,7 +218,18 @@ var __meta__ = {
             this.container = container;
             this.history = [];
             this.view = null;
-            this._inProgress = false;
+            this.running = false;
+        },
+
+        after: function() {
+            this.running = false;
+            this.trigger("complete", {view: this.view});
+        },
+
+        end: function() {
+            this.view.showEnd();
+            this.previous.hideEnd();
+            this.after();
         },
 
         show: function(view, transition, locationID) {
@@ -225,21 +240,23 @@ var __meta__ = {
             locationID = locationID || view.id;
 
             var that = this,
-                current = that.view,
+                current = (view === that.view) ? view.clone() : that.view,
                 history = that.history,
-                withSelf = view === current,
                 previousEntry = history[history.length - 2] || {},
                 back = previousEntry.id === locationID,
-                theTransition = transition || ( back ? previousEntry.transition : view.transition ) || view.options.defaultTransition,
+                // If explicit transition is set, it will be with highest priority
+                // Next we will try using the history record transition or the view transition configuration
+                theTransition = transition || ( back ? previousEntry.transition : view.transition ),
                 transitionData = parseTransition(theTransition);
 
-            if (that._inProgress) {
+            if (that.running) {
                 that.effect.stop();
             }
 
             that.trigger("accepted", { view: view });
             that.view = view;
-            that._inProgress = true;
+            that.previous = current;
+            that.running = true;
 
             if (!back) {
                 history.push({ id: locationID, transition: theTransition });
@@ -247,43 +264,29 @@ var __meta__ = {
                 history.pop();
             }
 
-            var after = function() {
-                that._inProgress = false;
-                that.trigger("complete", {view: view});
-            }
-
-            var end = function() {
-                view.showEnd();
-                current.hideEnd();
-                after();
-            }
-
-            if (withSelf) {
-                current = view.clone();
-            }
-
-            if (current) {
-                // layout needs to be detached first, then reattached
-                current.hideStart();
+            if (!current) {
                 view.showStart();
+                view.showEnd();
+                that.after();
+                return;
+            }
 
-                if (!theTransition) {
-                    end();
-                } else {
-                    if (back) {
-                        transitionData.reverse = !transitionData.reverse;
-                    }
+            current.hideStart();
+            view.showStart();
 
-                    this.effect = kendo.fx(view.element).replace(current.element, transitionData.type)
-                        .direction(transitionData.direction)
-                        .setReverse(transitionData.reverse);
-
-                    this.effect.run().then(end);
-                }
+            if (!theTransition) {
+                that.end();
             } else {
-                view.showStart();
-                view.showEnd();
-                after();
+                // do not reverse the explicit transition
+                if (back && !transition) {
+                    transitionData.reverse = !transitionData.reverse;
+                }
+
+                that.effect = kendo.fx(view.element).replace(current.element, transitionData.type)
+                    .direction(transitionData.direction)
+                    .setReverse(transitionData.reverse);
+
+                that.effect.run().then(function() { that.end(); });
             }
         }
     });
