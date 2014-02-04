@@ -44,9 +44,15 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
+            options = that.options;
+
+            if (!options.appendTo || !$(options.appendTo).is(element)) {
+                that.element.hide();
+            }
+
             that._compileTemplates(that.options.templates);
             that._guid = "_" + kendo.guid();
-            that._compileStacking(that.options.stacking, that.options.position.top);
+            that._compileStacking(options.stacking, options.position.top);
 
             kendo.notify(that);
         },
@@ -63,13 +69,13 @@ var __meta__ = {
                 top: null,
                 left: null,
                 bottom: 20,
-                right: 20                
+                right: 20
             },
             stacking: "default",
             hideOnClick: true,
             button: false,
             allowHideAfter: 0,
-            autoHideAfter: 5000,            
+            autoHideAfter: 5000,
             appendTo: null,
             width: null,
             height: null,
