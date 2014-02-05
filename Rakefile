@@ -127,7 +127,7 @@ PHP_CONTENT = {
 
 
 file KENDO_CONFIG_FILE do |t|
-    sh "./node_modules/.bin/grunt kendo:config"
+    sh "./node_modules/.bin/grunt download_builder:config"
 end
 
 # Rake tasks
