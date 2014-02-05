@@ -149,7 +149,7 @@ test("styles handle quotes in item decoration", function() {
         var formatSpan = tool.popup.element.find(".k-item span");
 
         equal(formatSpan.length, 1);
-        equal(formatSpan.css("font-family"), "'Segoe UI'");
+        ok(formatSpan.css("font-family").replace(/"/g, "'"), "'Segoe UI'"); // '
     });
 });
 
