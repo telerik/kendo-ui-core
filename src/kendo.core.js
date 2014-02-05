@@ -2138,6 +2138,7 @@ function pad(number, digits, end) {
     var effects = {};
 
     $.extend(effects, {
+        enabled: true,
         Element: function(element) {
             this.element = $(element);
         },
@@ -2163,10 +2164,12 @@ function pad(number, digits, end) {
         },
 
         disable: function() {
+            this.enabled = false;
             this.promise = this.promiseShim;
         },
 
         enable: function() {
+            this.enabled = true;
             this.promise = this.animatedPromise;
         }
     });
