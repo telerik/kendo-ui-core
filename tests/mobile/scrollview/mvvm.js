@@ -77,4 +77,19 @@
         ok($("#scrollview").data("kendoMobileScrollView")._content instanceof kendo.mobile.ui.ScrollViewContent);
     });
 
+    test("ScrollView pager gets updated when the dataSource changes", 1, function() {
+        var appContent = $('<div><div data-role="view" data-model="scrollViewViewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds" data-template="scrollview-mvvm-tmp"></div> </div></div>').appendTo(QUnit.fixture);
+
+        window.scrollViewViewModel = kendo.observable({
+            ds: [{foo: 1}, {foo: 2}]
+        });
+
+        var app = new kendo.mobile.Application(appContent);
+        var widget = $("#scrollview").data("kendoMobileScrollView");
+
+        scrollViewViewModel.ds.push({foo: 3});
+
+        equal(widget.pager.element.children().length, scrollViewViewModel.ds.length, "Pager is refreshed on ds change");
+    });
+
 })();
