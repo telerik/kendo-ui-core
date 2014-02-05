@@ -664,10 +664,10 @@ var __meta__ = {
     function updateColspan(toAdd, toRemove) {
         var item, idx, length;
         for (idx = 0, length = toAdd.length; idx < length; idx += 1) {
-            item = toAdd.eq(idx).children().eq(0);
+            item = toAdd.eq(idx).children().last();
             item.attr("colspan", parseInt(item.attr("colspan"), 10) + 1);
 
-            item = toRemove.eq(idx).children().eq(0);
+            item = toRemove.eq(idx).children().last();
             item.attr("colspan", parseInt(item.attr("colspan"), 10) - 1);
         }
     }

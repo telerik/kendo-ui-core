@@ -820,6 +820,28 @@
         equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in non-static table");
     });
 
+    test("reorder with two levels of grouping and static columns", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", static: true },
+                { field: "foo", static: true },
+                "bar",
+                "baz"
+            ],
+            dataSource: {
+                data: data,
+                group: [{ field: "foo" }, { field: "bar" }]
+            }
+        });
+
+        grid.reorderColumn(2, grid.columns[1], false);
+
+        equal(grid.staticTable.find(".k-grouping-row:eq(0)>td:first").attr("colspan"), 3, "colspan in static table");
+        equal(grid.staticTable.find(".k-grouping-row:eq(1)>td:not(.k-group-cell)").attr("colspan"), 2, "colspan in static table");
+        equal(grid.table.find(".k-grouping-row:eq(0)>td:first").attr("colspan"), 3, "colspan in non-static table");
+        equal(grid.table.find(".k-grouping-row:eq(1)>td:not(.k-group-cell)").attr("colspan"), 3, "colspan in non-static table");
+    });
+
     function moveOverDropTarget(draggable, dropTarget) {
         var position = dropTarget.position();
 
