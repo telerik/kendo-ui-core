@@ -1005,20 +1005,16 @@ function pad(number, digits, end) {
         return number;
     }
 
-    //Integer above this number can loose its precision
-    //Ref: http://www.jibbering.com/faq/#FAQ4_7
-    //
-    var RELIABLE_PRECISION = 9e15;
-
     var round = function(value, precision) {
-        var power = Math.pow(10, precision || 0);
-        var rounded = Math.round(value * power);
+        precision = precision || 0;
 
-        if (rounded > RELIABLE_PRECISION) {
-            return value.toFixed(precision);
-        }
+        value = value.toString().split('e');
+        value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + precision) : precision)));
 
-        return (rounded / power).toFixed(precision);
+        value = value.toString().split('e');
+        value = +(value[0] + 'e' + (value[1] ? (+value[1] - precision) : -precision));
+
+        return value.toFixed(precision);
     };
 
     var toString = function(value, fmt, culture) {
