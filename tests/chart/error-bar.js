@@ -558,7 +558,7 @@
                  length = seriesData[seriesIdx].length;
                  currentIdx = idx;
                  for(;idx < length + currentIdx; idx++){
-                    plotValue = points[idx].plotValue;
+                    plotValue = points[idx].parent.plotRange(points[idx])[0];
                     if(!(errorBars = points[idx].errorBars) || !errorBars[0] ||
                         errorBars[0].low != (plotValue - errorValue) || errorBars[0].high != (plotValue + errorValue) ||
                         errorBars[0].isVertical !== true){

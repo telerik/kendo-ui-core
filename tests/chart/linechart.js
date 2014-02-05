@@ -389,7 +389,7 @@
 
         test("point plot values are stacked", function() {
             deepEqual(
-                $.map(lineChart.points, function(point) { return point.plotValue }),
+                $.map(lineChart.points, function(point) { return lineChart.plotRange(point)[0] }),
                 [1, 2, 3, 2, 4, 6]
             );
         });
@@ -414,7 +414,7 @@
 
         test("point plot values are stacked", function() {
             deepEqual(
-                $.map(lineChart.points, function(point) { return point.plotValue }),
+                $.map(lineChart.points, function(point) { return lineChart.plotRange(point)[0] }),
                 [-1, -2, -3, -2, -4, -6]
             );
         });

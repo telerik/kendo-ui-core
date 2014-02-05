@@ -4640,18 +4640,33 @@ var __meta__ = {
             point = new LinePoint(value, pointOptions);
             point.color = color;
 
-            if (isStacked) {
-                stackPoint = lastValue(categoryPoints);
-                if (stackPoint) {
-                    plotValue = stackPoint.plotValue;
-                }
-
-                point.plotValue = value + plotValue;
-            }
-
             chart.append(point);
 
             return point;
+        },
+
+        plotRange: function(point) {
+            var categoryIx = point.categoryIx;
+            var categoryPts = this.categoryPoints[categoryIx];
+
+            if (this.options.isStacked) {
+                var plotValue = point.value;
+
+                for (var i = 0; i < categoryPts.length; i++) {
+                    var neighbour = categoryPts[i];
+
+                    if (point === neighbour) {
+                        break;
+                    }
+
+                    plotValue += neighbour.value;
+                };
+
+                return [plotValue, plotValue];
+            } else {
+                var plotRange = CategoricalChart.fn.plotRange.call(this, point);
+                return [plotRange[1], plotRange[1]];
+            }
         },
 
         updateRange: function(data, categoryIx) {
@@ -4705,7 +4720,7 @@ var __meta__ = {
         stackedErrorRange: function(point) {
             var chart = this,
                 stackAxisRange = chart._stackAxisRange,
-                plotValue = point.plotValue -  point.value,
+                plotValue = chart.plotRange(point)[0] -  point.value,
                 low = point.low + plotValue,
                 high = point.high + plotValue;
 
