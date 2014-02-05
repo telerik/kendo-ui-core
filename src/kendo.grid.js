@@ -1189,6 +1189,7 @@ var __meta__ = {
 
                             that._applyStaticContainersWidth();
                             that._syncStaicContentHeight();
+                            that._syncStaicHeaderHeight();
                         }
 
                         that._hideResizeHandle();
@@ -1494,9 +1495,14 @@ var __meta__ = {
 
         _syncStaicContentHeight: function() {
             if (this.staticTable) {
-                adjustRowsHeight(this.table, this.staticTable);
-
                 this._adjustStaticHorizontalScrollBar();
+                adjustRowsHeight(this.table, this.staticTable);
+            }
+        },
+
+        _syncStaicHeaderHeight: function() {
+            if (this.staticHeader) {
+                adjustRowsHeight(this.staticHeader.children("table"), this.thead.parent());
             }
         },
 
@@ -3907,6 +3913,7 @@ var __meta__ = {
 
             if (hasStaticColumns) {
                 this.staticHeader = table.prependTo(container);
+                this._syncStaicHeaderHeight();
             }
         },
 
@@ -4289,6 +4296,7 @@ var __meta__ = {
             if (that.staticTable) {
                 that._applyStaticContainersWidth();
                 that._syncStaicContentHeight();
+                that._syncStaicHeaderHeight();
             } else {
                 cols = that.thead.prev().find("col");
                 for (idx = 0, length = cols.length; idx < length; idx += 1) {
@@ -4372,6 +4380,7 @@ var __meta__ = {
             if (that.staticTable) {
                 that._applyStaticContainersWidth();
                 that._syncStaicContentHeight();
+                that._syncStaicHeaderHeight();
             } else {
                 tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
                 if (!column.width) {
@@ -4593,7 +4602,7 @@ var __meta__ = {
         idx,
         rows2 = table2[0].rows;
 
-      table1.add(table2).find(">tbody>tr").css("height", "");
+      table1.add(table2).find(">tbody>tr, >thead>tr").css("height", "");
 
       for (idx = 0; idx < length; idx++) {
         adjustRowHeight(rows[idx], rows2[idx]);

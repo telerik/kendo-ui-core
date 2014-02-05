@@ -213,6 +213,27 @@
         equal(grid.content.find("tr:first").height(), grid.staticContent.find("tr:first").height());
     });
 
+    test("header row height is in sync - static column is bigger", function() {
+        div.appendTo(QUnit.fixture);
+
+        var grid = setup({
+            columns: [{ title: "foo <br/> foo", static: true, width: 140, encode: false }, "bar", "baz"]
+        });
+
+        equal(grid.thead.find("tr:first").height(), grid.staticHeader.find("tr:first").height());
+    });
+
+    test("header row height is in sync - non static column is bigger", function() {
+        div.appendTo(QUnit.fixture);
+
+        var grid = setup({
+            columns: [{ field: "foo", static: true, width: 140, encode: false }, { title: "bar <br/> bar", field: "bar" }, "baz"]
+        });
+
+        equal(grid.thead.find("tr:first").height(), grid.staticHeader.find("tr:first").height());
+    });
+
+
     test("correct content col elements are created when multiple static columns", function() {
         var grid = setup({
             columns: [
