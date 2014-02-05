@@ -274,7 +274,7 @@ var __meta__ = {
             current.hideStart();
             view.showStart();
 
-            if (!theTransition || !kendo.fx.enabled) {
+            if (!theTransition || !kendo.effects.enabled) {
                 that.end();
             } else {
                 // do not reverse the explicit transition
