@@ -453,7 +453,7 @@ var __meta__ = {
         },
 
         isException: function() {
-            return this.id && this.recurrenceId;
+            return !this.isNew() && this.recurrenceId;
         },
 
         isOccurrence: function() {
