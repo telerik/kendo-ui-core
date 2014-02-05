@@ -2144,7 +2144,7 @@ function pad(number, digits, end) {
             this.element = $(element);
         },
 
-        promise: function (element, options) {
+        promise: function(element, options) {
             if (!element.is(":visible")) {
                 element.css({ display: element.data("olddisplay") || "block" }).css("display");
             }
@@ -2164,33 +2164,16 @@ function pad(number, digits, end) {
             element.dequeue();
         },
 
-        transitionPromise: function(element, destination, options) {
-            var container = kendo.wrap(element);
-            container.append(destination);
-
-            element.hide();
-            destination.show();
-
-            if (options.completeCallback) {
-                options.completeCallback(element); // call the external complete callback with the element
-            }
-
-            return element;
-        },
-
         disable: function() {
             this.promise = this.promiseShim;
-            this.transitionPromise = this.transitionPromiseShim;
         },
 
         enable: function() {
             this.promise = this.animatedPromise;
-            this.transitionPromise = this.animatedTransitionPromise;
         }
     });
 
     effects.promiseShim = effects.promise;
-    effects.transitionPromiseShim = effects.transitionPromise;
 
     function prepareAnimationOptions(options, duration, reverse, complete) {
         if (typeof options === STRING) {
@@ -2248,10 +2231,6 @@ function pad(number, digits, end) {
         return element;
     }
 
-    function animateTo(element, destination, options, duration, reverse, complete) {
-        return effects.transitionPromise(element, destination, prepareAnimationOptions(options, duration, reverse, complete));
-    }
-
     function toggleClass(element, classes, options, add) {
         if (classes) {
             classes = classes.split(" ");
@@ -2274,13 +2253,10 @@ function pad(number, digits, end) {
                 return animate(this, options, duration, reverse, complete);
             },
 
-            kendoAnimateTo: function(destination, options, duration, reverse, complete) {
-                return animateTo(this, destination, options, duration, reverse, complete);
-            },
-
             kendoAddClass: function(classes, options){
                 return kendo.toggleClass(this, classes, options, true);
             },
+
             kendoRemoveClass: function(classes, options){
                 return kendo.toggleClass(this, classes, options, false);
             },
