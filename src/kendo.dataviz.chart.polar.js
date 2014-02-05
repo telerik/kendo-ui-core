@@ -769,7 +769,7 @@ var __meta__ = {
         },
 
         valueSlot: function(valueAxis, value) {
-            return valueAxis.getSlot(value);
+            return valueAxis.getSlot(value, value, !this.options.clip);
         },
 
         categorySlot: function(categoryAxis, categoryIx) {

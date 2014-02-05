@@ -132,7 +132,7 @@ var __meta__ = {
             var view = this,
                 clipPath = view.definitions[id];
 
-            if(!clipPath) {
+            if (!clipPath) {
                 clipPath = new CanvasClipPath({id: id});
                 clipPath.children.push(view.createRect(box, {fill: "none"}));
                 view.definitions[id] = clipPath;
@@ -635,6 +635,7 @@ var __meta__ = {
 
     deepExtend(dataviz, {
         CanvasCircle: CanvasCircle,
+        CanvasClipPath: CanvasClipPath,
         CanvasGroup: CanvasGroup,
         CanvasLine: CanvasLine,
         CanvasMultiLine: CanvasMultiLine,

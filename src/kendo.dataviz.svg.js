@@ -1016,7 +1016,7 @@ var __meta__ = {
                     );
                 }
 
-                element.options.clipPath = "url(#" + clipId + ")";
+                element.options.clipPathId = clipId;
             }
 
             return element;

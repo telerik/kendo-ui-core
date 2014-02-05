@@ -166,6 +166,29 @@
         test("sets point dataItem", function() {
             equal(typeof candlestickChart.points[0].dataItem, "object");
         });
+        
+        // ------------------------------------------------------------
+                       
+        module("Candlestick Chart / Values exceeding value axis min or max options ", {});
+        
+        test("values are not limited", 5, function() {
+            var plotArea = stubPlotArea(
+                function(categoryIndex) {
+                    return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                                     categoryIndex + 1, CATEGORY_AXIS_Y);
+                },
+                function(value, axisCrossingValue, limit) {
+                    ok(!limit);
+                    return Box2D();
+                }, {
+                    categoryAxis: {
+                        categories: ["A"]
+                    }
+                }
+            );
+ 
+            setupCandlestickChart(plotArea, { series: [ {data: [[1,2,3,4]], type: "candlestick"} ] });           
+        });        
 
         // ------------------------------------------------------------
         module("Candlestick Chart / Rendering", {
@@ -476,7 +499,7 @@
             CATEGORY = "A",
             SERIES_NAME = "series";
 
-        function createPoint(options) {
+        function createPoint(options, clipBox) {
             point = new Candlestick(VALUE,
                 $.extend(true, {
                     labels: { font: SANS12 }
@@ -494,13 +517,13 @@
                 seriesValueAxis: function(series) {
                     return {
                         getSlot: function(a,b) {
-                            return new Box2D();
+                            return new Box2D(a,a,b,b);
                         }
                     };
                 },
                 pane: {
-                    chartContainer: {
-                        clipBox: new Box2D(0, 0, 100, 100)
+                    clipBox: function(){
+                        return clipBox || new Box2D(0, 0, 100, 100);
                     }
                 }
             }
@@ -549,6 +572,14 @@
             deepEqual([anchor.x, anchor.y],
                  [point.box.x2 + TOOLTIP_OFFSET, point.box.y1 + TOOLTIP_OFFSET], TOLERANCE)
         });
+        
+        test("tooltipAnchor is limited to the clip box", function() {
+            createPoint({}, Box2D(0,2,100,4));
+           
+            var anchor = point.tooltipAnchor(10, 10);
+            deepEqual([anchor.x, anchor.y],
+                 [point.box.x2 + TOOLTIP_OFFSET, 2 + TOOLTIP_OFFSET], TOLERANCE)
+        });        
 
     })();
 

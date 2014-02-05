@@ -1078,6 +1078,7 @@ var __meta__ = {
     deepExtend(dataviz, {
         VMLCircle: VMLCircle,
         VMLClipAnimationDecorator: VMLClipAnimationDecorator,
+        VMLClipDecorator: VMLClipDecorator,
         VMLClipRect: VMLClipRect,
         VMLFill: VMLFill,
         VMLGroup: VMLGroup,

@@ -891,8 +891,8 @@
                     return kendo.dataviz.autoFormat(tooltipFormat, point.value);
                 },
                 pane: {
-                    chartContainer: {
-                        clipBox: new Box2D(0, 0, 100, 100)
+                    clipBox: function() {
+                        return new Box2D(0, 0, 100, 100);
                     }
                 }
             };

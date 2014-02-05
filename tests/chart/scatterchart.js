@@ -135,7 +135,7 @@
 
         test("renders empty and non-empty scatter line series", 0, function() {
             setupScatterChart(plotArea, { series: [ { data: [] }, series ] });
-        });
+        });             
 
         // ------------------------------------------------------------
         module("Scatter Chart / Multiple Axes", {
@@ -571,4 +571,30 @@
             equal(note.label.content, "name");
         });
     })();
+    
+    // ------------------------------------------------------------
+                           
+    (function() {      
+        module("Scatter Chart / Values exceeding axis min or max options ", {});
+
+        test("values are not limited", 2, function() {
+            var plotArea = {
+                axisX: {
+                    getSlot: function(a,b,limit) {
+                        ok(!limit);
+                        return Box2D();
+                    }
+                },
+                axisY: {
+                    getSlot: function(a,b, limit) {
+                        ok(!limit);
+                        return Box2D();
+                    }
+                }
+            };
+           
+            setupScatterChart(plotArea, { series: [ {data: [[1, 2]], type: "scatter"} ] });          
+        });          
+    })();
+    
 })();

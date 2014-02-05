@@ -3024,19 +3024,21 @@ var __meta__ = {
                 box = bar.box,
                 vertical = options.vertical,
                 aboveAxis = bar.aboveAxis,
-                clipBox = bar.owner.pane.chartContainer.clipBox,
+                clipBox = bar.owner.pane.clipBox(),
                 x,
                 y;
 
             if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
-                y = aboveAxis ? math.max(box.y1, clipBox.y1) : box.y2 - tooltipHeight;
+                y = aboveAxis ? math.max(box.y1, clipBox.y1) : math.min(box.y2, clipBox.y2) - tooltipHeight;
             } else {
+                var x1 = math.max(box.x1, clipBox.x1),
+                    x2 = math.min(box.x2, clipBox.x2);
                 if (options.isStacked) {
-                    x = aboveAxis ? box.x2 - tooltipWidth : box.x1;
+                    x = aboveAxis ? x2 - tooltipWidth : x1;
                     y = box.y1 - tooltipHeight - TOOLTIP_OFFSET;
                 } else {
-                    x = aboveAxis ? math.min(box.x2, clipBox.x2) + TOOLTIP_OFFSET : box.x1 - tooltipWidth - TOOLTIP_OFFSET;
+                    x = aboveAxis ? x2 + TOOLTIP_OFFSET : x1 - tooltipWidth - TOOLTIP_OFFSET;
                     y = box.y1;
                 }
             }
@@ -3356,7 +3358,6 @@ var __meta__ = {
                 chartPoints = chart.points,
                 categoryAxis = chart.categoryAxis,
                 value, valueAxis, axisCrossingValue,
-                clip = chart.options.clip,
                 point;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
@@ -3667,7 +3668,7 @@ var __meta__ = {
         },
 
         valueSlot: function(valueAxis, value, axisCrossingValue) {
-            return valueAxis.getSlot(value, this.options.isStacked ? 0 : axisCrossingValue);
+            return valueAxis.getSlot(value, this.options.isStacked ? 0 : axisCrossingValue, !this.options.clip);
         },
 
         categorySlot: function(categoryAxis, categoryIx, valueAxis) {
@@ -4400,8 +4401,8 @@ var __meta__ = {
                 aboveAxis = point.aboveAxis,
                 x = markerBox.x2 + TOOLTIP_OFFSET,
                 y = aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2,
-                clipBox = point.owner.pane.chartContainer.clipBox,
-                showTooltip = !clipBox || !(markerBox.y2 < clipBox.y1 || clipBox.y2 < markerBox.y1 || markerBox.x2 < clipBox.x1 || clipBox.x2 < markerBox.x1);
+                clipBox = point.owner.pane.clipBox(),
+                showTooltip = !clipBox || clipBox.overlaps(markerBox);
 
             if (showTooltip) {
                 return Point2D(x, y);
@@ -5732,13 +5733,7 @@ var __meta__ = {
                     stroke: options.line.color || options.color,
                     dashType: options.line.dashType,
                     strokeLineCap: "butt"
-                },
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    },
-                    id: point.id
-                });
+                };
 
             if (options.overlay) {
                 rectStyle.overlay = deepExtend({
@@ -5755,9 +5750,7 @@ var __meta__ = {
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
-            group.children = elements;
-
-            return [group];
+            return elements;
         },
 
         getBorderColor: function() {
@@ -5775,9 +5768,11 @@ var __meta__ = {
         },
 
         createOverlayRect: function(view) {
-            return view.createRect(this.box, {
-                data: { modelId: this.modelId },
+            var point = this;
+            return view.createRect(point.box, {
+                data: { modelId: point.modelId },
                 fill: "#fff",
+                id: point.id,
                 fillOpacity: 0
             });
         },
@@ -5813,7 +5808,7 @@ var __meta__ = {
         tooltipAnchor: function() {
             var point = this,
                 box = point.box,
-                clipBox = point.owner.pane.chartContainer.clipBox;
+                clipBox = point.owner.pane.clipBox();
 
             return new Point2D(box.x2 + TOOLTIP_OFFSET, math.max(box.y1, clipBox.y1) + TOOLTIP_OFFSET);
         },
@@ -5940,6 +5935,19 @@ var __meta__ = {
                 value.open, value.high,
                 value.low, value.close, point.category
             );
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                elements = ChartElement.fn.getViewElements.call(chart, view),
+                group = view.createGroup({
+                    animation: {
+                        type: CLIP
+                    }
+                });
+
+            group.children = elements;
+            return [group];
         }
     });
 
@@ -5989,13 +5997,8 @@ var __meta__ = {
                     strokeWidth: lineOptions.width,
                     stroke: options.color || lineOptions.color,
                     dashType: lineOptions.dashType
-                },
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    }
-                });
-            
+                };
+
             elements.push(point.createOverlayRect(view, options));
             elements.push(view.createPolyline(point.oPoints, true, lineStyle));
             elements.push(view.createPolyline(point.cPoints, true, lineStyle));
@@ -6005,9 +6008,7 @@ var __meta__ = {
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
-            group.children = elements;
-
-            return [group];
+            return elements;
         },
 
         highlightOverlay: function(view) {
@@ -7440,6 +7441,10 @@ var __meta__ = {
             if (view) {
                 view.replace(pane);
             }
+        },
+
+        clipBox: function() {
+            return this.chartContainer.clipBox;
         }
     });
 
@@ -7460,7 +7465,7 @@ var __meta__ = {
                     return false;
                 }
             }
-            return length > 0;
+            return true;
         },
 
         _clipBox: function() {
@@ -7468,36 +7473,16 @@ var __meta__ = {
                 pane = container.pane,
                 axes = pane.axes,
                 length = axes.length,
-                idx = 0,
-                options,
-                min, max,
-                valueBox,
-                currentBox,
-                targetBox,
-                axis,
-                vertical,
-                clipBox;
+                clipBox = pane.box,
+                axisValueField, idx,
+                lineBox, axis;
 
-
-            for (; idx < length; idx++) {
+            for (idx = 0; idx < length; idx++) {
                 axis = axes[idx];
-                options = axis.options;
-                min = options.min; max = options.max;
-                if (defined(min) && defined(max)) {
-                    currentBox = axis.getSlot(min, max);
-                    vertical = axis.options.vertical;
-                    //needs further calculations
-                    targetBox = defined(clipBox) ? clipBox : pane.box;
-
-                    if (vertical) {
-                        currentBox.x1 = axis.box.x2;
-                        currentBox.x2 = targetBox.x2;
-                    } else {
-                        currentBox.y1 = targetBox.y1;
-                        currentBox.y2 = axis.box.y1;
-                    }
-                    clipBox = currentBox;
-                }
+                axisValueField = axis.options.vertical ? Y : X;
+                lineBox = axis.lineBox();
+                clipBox[axisValueField + 1] = lineBox[axisValueField + 1];
+                clipBox[axisValueField + 2] = lineBox[axisValueField + 2];
             }
 
             return clipBox;
@@ -7505,27 +7490,25 @@ var __meta__ = {
 
         getViewElements: function (view) {
             var container = this,
-                clipPathId = container.shouldClip() ? container.clipPathId || uniqueId() : "",
                 group;
 
-            if (clipPathId && !container.clipPathId) {
+            if (container.shouldClip() && !container.clipPathId) {
                 container.clipBox = container._clipBox();
-                container.clipPathId = clipPathId;
-                view.createClipPath(clipPathId, container.clipBox);
+                container.clipPathId = uniqueId();
+                view.createClipPath(container.clipPathId, container.clipBox);
             }
 
             group = view.createGroup({
-                clipPathId: clipPathId
+                clipPathId: container.clipPathId
             });
 
-            group.children = ChartElement.fn.getViewElements.call(container, view);
+            group.children = group.children.concat(ChartElement.fn.getViewElements.call(container, view));
             return [group];
         },
 
         destroy: function() {
-            var container = this;
-            ChartElement.fn.destroy.call(container);
-            container.parent = undefined;
+            ChartElement.fn.destroy.call(this);
+            delete this.parent;
         }
     });
 
@@ -9539,7 +9522,6 @@ var __meta__ = {
                 return;
             }
 
-
             tooltip.anchor = tooltip._pointAnchor(point);
 
             if (tooltip.anchor) {
@@ -9549,7 +9531,7 @@ var __meta__ = {
 
                 BaseTooltip.fn.show.call(tooltip, point);
             } else {
-                BaseTooltip.fn.hide.call(tooltip);
+                tooltip.hide();
             }
         }
     });
@@ -11408,6 +11390,7 @@ var __meta__ = {
         CategoricalErrorBar: CategoricalErrorBar,
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
+        ChartContainer: ChartContainer,
         ClusterLayout: ClusterLayout,
         Crosshair: Crosshair,
         CrosshairTooltip: CrosshairTooltip,

@@ -204,7 +204,7 @@
             equal(view.log.rect[0].style.data.modelId, ohlcChart.points[0].modelId);
         });
 
-        test("renders chart group", function() {
+        test("renders chart group", function() {          
             equal(view.log.group.length, 1);
         });
 
@@ -388,8 +388,8 @@
                     };
                 },
                 pane: {
-                    chartContainer: {
-                        clipBox: new Box2D(0, 0, 100, 100)
+                    clipBox: function() {
+                        return new Box2D(0, 0, 100, 100);
                     }
                 }
             }

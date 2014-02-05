@@ -236,6 +236,30 @@
 
             plotArea.valueAxis.options.reverse = false;
         });
+        
+        // ------------------------------------------------------------
+                       
+        module("Bar Chart / Values exceeding value axis min or max options ", {});
+
+        test("values are not limited", 2, function() {
+            var plotArea = stubPlotArea(
+                function(categoryIndex) {
+                    return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                                     categoryIndex + 1, CATEGORY_AXIS_Y);
+                },
+                function(value, axisCrossingValue, limit) {
+                    ok(!limit);
+                    return Box2D();
+                },
+                {
+                    categoryAxis: {
+                        categories: ["A", "B"]
+                    }
+                }
+            );
+          
+            setupBarChart(plotArea, { series: [ {data: [1, 2]} ] });          
+        });        
 
         // ------------------------------------------------------------
         module("Bar Chart / Multiple Series", {
@@ -2012,7 +2036,7 @@
             SERIES_NAME = "series",
             TOOLTIP_OFFSET = 5;
 
-        function createBar(options) {
+        function createBar(options, clipBox) {
             box = new Box2D(0, 0, 100, 100);
             bar = new Bar(VALUE, kendo.deepExtend({}, Bar.fn.defaults, options));
 
@@ -2021,10 +2045,10 @@
             bar.series = { name: SERIES_NAME };
             bar.owner = {
                 pane: {
-                    chartContainer: {
-                        clipBox: new Box2D(0, 0, 100, 100)
+                    clipBox: function(){
+                        return clipBox || new Box2D(0, 0, 100, 100);
                     }
-                }            
+                }          
             };
             
             root = new dataviz.RootElement();
@@ -2242,6 +2266,30 @@
             var anchor = bar.tooltipAnchor(10, 10);
             deepEqual([anchor.x, anchor.y], [bar.box.x1, bar.box.y1 - 10 - TOOLTIP_OFFSET])
         });
+        
+        test("tooltipAnchor is limited to the clipbox / horizontal / above axis", function() {
+            createBar({ vertical: false, aboveAxis: true }, Box2D(1,1, 40, 100));
+            var anchor = bar.tooltipAnchor(10, 10);
+            equal(anchor.x, 40 + TOOLTIP_OFFSET);
+        });        
+
+        test("tooltipAnchor is limited to the clipbox / vertical / above axis", function() {
+            createBar({ vertical: true, aboveAxis: true}, Box2D(1, 40, 100, 100));
+            var anchor = bar.tooltipAnchor(10, 10);
+            equal(anchor.y, 40);
+        });
+
+        test("tooltipAnchor is limited to the clipbox / horizontal / below axis", function() {
+            createBar({ vertical: false, aboveAxis: false}, Box2D(40,1, 100, 100));
+            var anchor = bar.tooltipAnchor(10, 10);
+            equal(anchor.x, 30 - TOOLTIP_OFFSET);
+        });  
+
+        test("tooltipAnchor is limited to the clipbox / vertical / below axis", function() {
+            createBar({ vertical: true, aboveAxis: false}, Box2D(1, 1, 100, 40));
+            var anchor = bar.tooltipAnchor(10, 10);
+            equal(anchor.y, 30);
+        });        
 
         // ------------------------------------------------------------
         module("Bar / Labels / Template");

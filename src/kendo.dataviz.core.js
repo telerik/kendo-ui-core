@@ -424,6 +424,10 @@ var __meta__ = {
             var box = this;
 
             return [box.x1, box.y1, box.x2, box.y2].join(",");
+        },
+
+        overlaps: function(box) {
+            return !(box.y2 < this.y1 || this.y2 < box.y1 || box.x2 < this.x1 || this.x2 < box.x1);
         }
     };
 
@@ -2532,8 +2536,6 @@ var __meta__ = {
                 element = getElement(model.id);
 
             if (element) {
-                view._freeIds(element);
-
                 element.parentNode.replaceChild(
                     view.renderElement(model.getViewElements(view)[0]),
                     element

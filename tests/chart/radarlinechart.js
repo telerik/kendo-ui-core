@@ -65,4 +65,45 @@
 
         ok(!view.log.path[0].closed);
     });
+    
+    // ------------------------------------------------------------
+                           
+    (function() {      
+        module("RadarLine Chart / Values exceeding axis min or max options ", {});
+
+        test("values are limited", 2, function() {
+            var plotArea = {
+                categoryAxis:  {
+                    getSlot: function() {
+                         return new Ring(Point2D());
+                    },
+                    lineBox: function() {
+                        return new Box2D(0,2,2,2);
+                    },
+                    options: {
+                        categories: ["A", "B"]
+                    }
+                },
+                valueAxis: {
+                    getSlot: function(a,b, limit) {
+                        ok(limit);
+                        return Box2D();
+                    },
+                    options: {
+                        axisCrossingValue: 0
+                    }
+                },
+                seriesCategoryAxis: function() {
+                    return plotArea.categoryAxis;
+                }
+            };
+
+            var chart = new dataviz.RadarLineChart(plotArea, {series: [{
+                type: "radaLine",
+                data: [1,2]
+            }]});          
+            
+            chart.reflow();            
+        });          
+    })();     
 })();

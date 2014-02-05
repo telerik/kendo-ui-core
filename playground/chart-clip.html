@@ -4,50 +4,215 @@
     <title>Clip</title>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+         <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
         <script src="../src/kendo.dataviz.chart.polar.js"></script>
         <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.sparkline.js"></script>
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.canvas.js"></script>  
+        <link href="../styles/web/kendo.common.css" rel="stylesheet">
+        <link href="../styles/web/kendo.default.css" rel="stylesheet">
         <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet">
         <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet">
         <style>
             .k-chart{
                 min-height: 400px;
             }
+         
         </style>
 </head>
 <body>
+
 <button type="button" onclick="test()">test</button>
- <!--
+<div id="stock-chart"></div>
+<div id="stock" style="height:500px;"></div>
+<div id="sparkline" style="width:400px;height:300px;margin-top:200px;"></div>
+
 <div id="radarColumn"></div>
+ <--
+ <div id="multipleAxis" style="width: 500px;margin:0 auto;"></div>
+
+<div id="multiplePanes"></div>
+
     <div id="testRange" style="height: 500px;margin-top:200px;"></div>
 <div id="chart" style="margin-top:100px; width: 800px;"></div>
 
  -->
-
- <div id="stock" style="height: 500px;margin-top:200px;"></div>
-    
- <!-- <div id="multiplePanes"></div>
+ 
+ <-- 
  <div id="scatterChart"></div>
  
- <div id="sparkline"></div>
+ 
   <div id="radarChart"></div> 
   <div id="polarChart"></div>
   <div id="bubble"></div>-->
   <script>
+      var renderAs = "svg";
+   $("#stock-chart").kendoStockChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../demos/mvc/content/dataviz/js/boeing-stock.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                dateField: "Date",
+                series: [{
+                    type: "ohlc",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                },
+                categoryAxis: {
+                    notes: {
+                        data: [{
+                            value: "2001/01/01",
+                            label: {
+                                text: "01"
+                            }
+                        }, {
+                            value: "2002/01/01",
+                            label: {
+                                text: "02"
+                            }
+                        }, {
+                            value: "2003/01/01",
+                            label: {
+                                text: "03"
+                            }
+                        }, {
+                            value: "2004/01/01",
+                            label: {
+                                text: "04"
+                            }
+                        }, {
+                            value: "2005/01/01",
+                            label: {
+                                text: "05"
+                            }
+                        }, {
+                            value: "2006/01/01",
+                            label: {
+                                text: "06"
+                            }
+                        }, {
+                            value: "2007/01/01",
+                            label: {
+                                text: "07"
+                            }
+                        }, {
+                            value: "2008/01/01",
+                            label: {
+                                text: "08"
+                            }
+                        }, {
+                            value: "2009/01/01",
+                            label: {
+                                text: "09"
+                            }
+                        }, {
+                            value: "2010/01/01",
+                            label: {
+                                text: "10"
+                            }
+                        }, {
+                            value: "2011/01/01",
+                            label: {
+                                text: "11"
+                            }
+                        }, {
+                            value: "2012/01/01",
+                            label: {
+                                text: "12"
+                            }
+                        }]
+                    }
+                },
+                renderAs: renderAs
+            });
+    $("#sparkline").kendoSparkline({
+        data: [
+            936, 968, 1025, 999, 998, 1014, 1017, 1010, 1010, 1007,
+            1004, 988, 990, 988, 987, 995, 946, 954, 991, 984,
+            974, 956, 986, 936, 955, 1021, 1013, 1005, 958, 953,
+            952, 940, 937, 980, 966, 965, 928, 916, 910, 980
+        ],
+        type: "area",
+        valueAxis: {
+            max: 950
+        },
+        renderAs: renderAs
+    });
+    $("#chart-mmHg").kendoChart({
+            legend: {
+                visible: false
+            },
+            series: [{
+                type: "bullet",
+                data: [[750, 762.5]]
+            }],
+            chartArea: {
+                margin: {
+                    left: 0
+                }
+            },
+            categoryAxis: {
+                majorGridLines: {
+                    visible: false
+                },
+                majorTicks: {
+                    visible: false
+                }
+            },
+            valueAxis: [{
+                plotBands: [{
+                    from: 715, to: 752, color: "#ccc", opacity: .6
+                }, {
+                    from: 752, to: 772, color: "#ccc", opacity: .3
+                }],
+                majorGridLines: {
+                    visible: false
+                },
+                min: 715,
+                max: 730,
+                minorTicks: {
+                    visible: true
+                }
+            }],
+            tooltip: {
+                visible: true,
+                template: "Maximum: #= value.target # <br /> Average: #= value.current #"
+            },
+            renderAs: renderAs
+        });  
     function test(){
         sc = $("#stock").data().kendoStockChart;
         sc._navigator.redrawSlaves();
-        sc._navigator.redrawSlaves();
-        sc._navigator.redrawSlaves();
-        sc._navigator.redrawSlaves();
-        sc._navigator.redrawSlaves();
-        sc._navigator.redrawSlaves();
+        // sc._navigator.redrawSlaves();
+        // sc._navigator.redrawSlaves();
+        // sc._navigator.redrawSlaves();
+        // sc._navigator.redrawSlaves();
+        // sc._navigator.redrawSlaves();
         //call one more time sc._navigator.redrawSlaves();
     }
     
@@ -61,7 +226,54 @@
             // view.replace(pane);
         // }
     // }
-  
+   $("#multipleAxis").kendoChart({  
+        seriesDefaults: {
+            stack:true
+        },
+        series: [{
+            type: "bar",
+            data: [60,25,80],
+            axis: "top"
+        },{
+            type: "verticalLine",
+            data: [60,1,100],
+            axis: "top"
+        },{
+             type: "verticalLine",
+             data: [100,1,100, 50, 60],
+             axis: "bottom"
+        },{
+            type: "bar",
+            data: [60,1,100, 50, 60],
+            axis: "bottom"
+        }],
+        valueAxis: [{
+            min: 40,
+            max: 80,
+            name: "top"
+        }, {
+            min: 40,
+            max: 80,
+            name: "bottom"
+        }],
+          categoryAxis: [
+          // {
+            // categories: ["a", "b", "c"],
+            // pane: "top"
+          // }, 
+          {
+            categories: ["d", "e", "f", "g", "e"]
+          }],
+        // panes: [{
+            // name: "top"
+        // }, {
+            // name: "bottom"
+        // }],
+        tooltip: {
+            visible: true
+        },
+        renderAs: renderAs
+    });
    $("#radarColumn").kendoChart({
             title: {
                 text: "Nutrient balance: Apples, raw"
@@ -94,7 +306,7 @@
                 visible: false
             }
         });
-    var renderAs = "svg";
+
     $("#chart").kendoChart({
         series: [{
             type: "line",
@@ -167,7 +379,7 @@
         renderAs: renderAs
         
     });
-    
+    window.testID = 0;
         $("#stock").kendoStockChart({
                 dataSource: {
                     transport: {
@@ -184,7 +396,7 @@
                 panes: [{
                     name: "volumePane",
                     title: "Volume",
-                    height: 150 
+                    height: 150 // pixels
                 },{
                     title: "Value",
                     name: "stock"
@@ -192,19 +404,22 @@
                 categoryAxis: {
                     pane: "volumePane"
                 },
-                valueAxes: [{                  
-                    max: 40,
-                    min: 24,
+                valueAxes: [{
+                    // Default axis
                     line: {
                         visible: false
                     },
                     name: "stock",
-                    pane: "stock"
+                    pane: "stock",
+                    min: 50,
+                    max: 80
+                    
                 }, {
                     name: "volumeAxis",
-                    pane: "volumePane",                    
-                  
-                    visible: false
+                    pane: "volumePane",
+                    visible: false,
+                    min: 3000000,
+                    max: 15000000
                 }],
                 series: [{
                     type: "candlestick",
@@ -213,7 +428,7 @@
                     lowField: "Low",
                     closeField: "Close",
                     axis: "stock"
-                
+
                 }, {
                     type: "column",
                     field: "Volume",
@@ -221,8 +436,18 @@
                     tooltip: {
                         format: "{0:C0}"
                     }
-                }],
-                renderAs: renderAs
+                }]
+                ,
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                }
             });
     
     $("#scatterChart").kendoChart({
@@ -276,11 +501,11 @@
             data: [60,25,80],
             axis: "top"
         },{
-            type: "line",
+            type: "column",
             data: [60,1,100],
             axis: "top"
         },{
-             type: "line",
+             type: "column",
              data: [100,1,100, 50, 60],
              axis: "bottom"
         },{
@@ -288,6 +513,9 @@
             data: [60,1,100, 50, 60],
             axis: "bottom"
         }],
+        seriesDefaults: {
+            stack:true
+        },
         valueAxis: [{
             min: 40,
             max: 80,

@@ -233,6 +233,26 @@
 
             ok(result === point);
         });
+        
+        // ------------------------------------------------------------
+                       
+        module("Area Chart / Values exceeding value axis min or max options ", {});
+        
+        test("values are not limited", 2, function() {
+            var plotArea = stubPlotArea(
+                function(categoryIndex) {
+                    return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                                     categoryIndex + 1, CATEGORY_AXIS_Y);
+                },
+                function(value, axisCrossingValue, limit) {
+                    ok(!limit);
+                    return Box2D();
+                }
+            );
+            
+            setupAreaChart(plotArea, { series: [ {data: [1, 2]} ] });          
+        });
+        
 
         // ------------------------------------------------------------
         module("Area Chart / Multiple Series", {
@@ -914,7 +934,7 @@
             CATEGORY = "A",
             SERIES_NAME = "series";
 
-        function createPoint(options) {
+        function createPoint(options, clipBox) {
             point = new LinePoint(VALUE,
                 $.extend(true, {
                     labels: { font: SANS12 }
@@ -930,8 +950,8 @@
                     return kendo.dataviz.autoFormat(tooltipFormat, point.value);
                 },
                 pane: {
-                    chartContainer: {
-                        clipBox: new Box2D(0, 0, 100, 100)
+                    clipBox: function(){
+                        return clipBox || new Box2D(0, 0, 100, 100);
                     }
                 }
             }
@@ -1081,7 +1101,7 @@
             var anchor = point.tooltipAnchor(10, 10);
             deepEqual([anchor.x, anchor.y],
                  [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y1 - 10])
-        });
+        });               
 
         test("tooltipAnchor is at bottom right of marker / below axis", function() {
             createPoint({ aboveAxis: false });
@@ -1089,6 +1109,30 @@
             deepEqual([anchor.x, anchor.y],
                  [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y2])
         });
+        
+        test("tooltipAnchor returns undefined if the marker box is after the clipbox", function() {
+            createPoint({ aboveAxis: true }, Box2D(1,1, 40, 100));
+            var anchor = point.tooltipAnchor(10, 10);
+            equal(anchor, undefined);
+        });        
+        
+        test("tooltipAnchor returns undefined if the marker box is before the clipbox", function() {
+            createPoint({ aboveAxis: true}, Box2D(57,1, 100, 100));
+            var anchor = point.tooltipAnchor(10, 10);
+            equal(anchor, undefined);
+        });
+
+        test("tooltipAnchor returns undefined if the marker box is below the clipbox", function() {
+            createPoint({ aboveAxis: true}, Box2D(1,-10, 100, -7));
+            var anchor = point.tooltipAnchor(10, 10);
+            equal(anchor, undefined);
+        });  
+
+        test("tooltipAnchor returns undefined if the marker box is above the clipbox", function() {
+            createPoint({ aboveAxis: true}, Box2D(1, 10, 100, 20));
+            var anchor = point.tooltipAnchor(10, 10);
+            equal(anchor, undefined);
+        });         
 
         // ------------------------------------------------------------
         module("Area Point / Labels", {
