@@ -570,7 +570,7 @@
             });
 
             deepEqual([series.points[0].box.y1, series.points[2].box.y1],
-                 [2, 2]);
+                      [4, 4]);
 
             CATEGORY_AXIS_Y = 2;
         });
@@ -587,7 +587,7 @@
                 isStacked: true }
             );
 
-            equal(series.points[0].options.stackBase, 2);
+            equal(series.points[0].options.stackBase, 4);
 
             CATEGORY_AXIS_Y = 2;
         });
