@@ -9,48 +9,126 @@
     </head>
 
     <body>
-        <div data-role="view" data-title="Index" id="index" data-transition="slide">
-            <div data-role="header">
-                <div data-role="navbar">
-                    <a data-role="backbutton" data-align="left">Back</a>
-                    <span data-role="view-title"></span>
-                </div>
-            </div>
+        <div data-role="view" data-title="Camera App" id="view-transitions">
+            <img src="../../content/mobile/shared/color-lens.png" class="camera-image" /><br />
+            <a href="#view-transitions-login" data-role="button" class="transitions-button">Login/Sign-up</a>
+        </div>
 
-            <ul data-role="listview">
-                <li><a href="#detail">Go to detail</a></li>
-                <li><a href="#index?foo=bar">Go to self (foo=bar)</a></li>
+        <div data-role="view" data-title="Login/Sign-up" id="view-transitions-login" data-transition="overlay:up">
+            <ul data-role="listview" data-style="inset">
+                <li><label for="username">Username: <input type="text" id="username" /></label></li>
+                <li><label for="password">Password: <input type="password" id="password" /></label></li>
             </ul>
-
-            <div data-role="footer">
-                <div data-role="tabstrip">
-                    <a href="#tabstrip-profile" data-icon="contacts">Profile
-                        </a><a href="#tabstrip-sales" data-icon="history">Sales
-                        </a><a href="#tabstrip-rating" data-icon="favorites">Rating
-                    </a><a href="#tabstrip-settings" data-icon="settings">Settings</a>
-                </div>
-            </div>
+            <a href="#view-transitions-welcome" data-transition="overlay:down reverse" data-role="button" class="transitions-button">Login</a><br />
+            <a href="#view-transitions" data-transition="overlay:up reverse" data-role="button" class="transitions-cancel">Cancel</a>
         </div>
 
-        <div data-role="view" data-title="Detail" id="detail" data-transition="slide">
-            <div data-role="header">
-                <div data-role="navbar">
-                    <a data-role="backbutton" data-align="left">Index</a>
-                    <span data-role="view-title"></span>
-                </div>
-            </div>
-
-            <img src="http://i.imgur.com/n6bF2Vx.jpg" alt="" />
-
-            <div data-role="footer">
-                <div data-role="tabstrip">
-                    <a href="#tabstrip-profile" data-icon="contacts">Ingredients
-                        </a><a href="#tabstrip-sales" data-icon="history">Contents
-                        </a><a href="#tabstrip-rating" data-icon="favorites">Etc
-                    </a>
-                </div>
-            </div>
+        <div data-role="view" data-title="Welcome" id="view-transitions-welcome">
+            <img src="../../content/mobile/modalview/lens.png" class="camera-image" /><br />
+            <a data-role="button" href="#view-transitions" data-transition="slide:right" class="transitions-button">Sign out</a>
         </div>
+
+
+        <style scoped>
+            .km-root .transitions-button,
+            .km-root .transitions-cancel {
+                display: block;
+                text-align: center;
+                margin: .6em .8em 0;
+                font-size: 1.2em;
+                background-color: #369;
+            }
+
+            .km-ios7 .transitions-button,
+            .km-ios7 .transitions-cancel {
+                color: #fff;
+                border-color: transparent;
+            }
+
+            .km-blackberry .transitions-button,
+            .km-blackberry .transitions-cancel {
+                margin: .6em 1.8em 0;
+            }
+
+            #view-transitions,
+            #view-transitions-welcome p {
+                color: #fff;
+                text-align: center;
+            }
+
+            #view-transitions img,
+            #view-transitions-welcome img {
+                display: block;
+                margin: 30px auto;
+            }
+
+            #view-transitions-login label {
+                display: inline-block;
+                width: 100%;
+            }
+            #view-transitions .km-content,
+            #view-transitions-login .km-content,
+            #view-transitions-welcome .km-content {
+                background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
+            }
+
+            .km-ios #view-transitions-welcome .km-button,
+            .km-ios7 #view-transitions-welcome .km-content .km-button,
+            .km-blackberry #view-transitions-welcome .km-content .km-button,
+            .km-flat #view-transitions-welcome .km-content .km-button {
+            background-color: DarkRed;
+            color: #fff;
+            }
+
+            .km-ios #view-transitions-login .transitions-button,
+            .km-ios7 #view-transitions-login .transitions-button,
+            .km-blackberry #view-transitions-login .km-content .transitions-button,
+            .km-flat #view-transitions-login .km-content .transitions-button {
+            background-color: Green;
+            color: #fff;
+            }
+
+            .km-blackberry #view-transitions *,
+            .km-blackberry #view-transitions-login *,
+            .km-blackberry #view-transitions-welcome *
+            {
+            color: #fff;
+            }
+
+            .km-ios #view-transitions .km-button,
+            .km-ios7 #view-transitions .km-button,
+            .km-ios #view-transitions-login .transitions-cancel,
+            .km-ios7 #view-transitions-login .transitions-cancel {
+            background-color: #000;
+            }
+
+            .km-flat #view-transitions .km-button,
+            .km-flat #view-transitions-login .km-content .transitions-cancel {
+            background-color: #000;
+            color: #fff;
+            }
+
+            .km-ios #view-transitions .km-navbar,
+            .km-ios #view-transitions-login .km-navbar,
+            .km-ios #view-transitions-welcome .km-navbar,
+            .km-ios7 #view-transitions .km-navbar,
+            .km-ios7 #view-transitions-login .km-navbar,
+            .km-ios7 #view-transitions-welcome .km-navbar,
+            .km-blackberry #view-transitions .km-navbar,
+            .km-blackberry #view-transitions-login .km-navbar,
+            .km-blackberry #view-transitions-welcome .km-navbar,
+            .km-flat #view-transitions .km-navbar,
+            .km-flat #view-transitions-login .km-navbar,
+            .km-flat #view-transitions-welcome .km-navbar {
+            background-color: #000;
+            color: #fff;
+            }
+            .km-ios7 #view-transitions .km-navbar,
+            .km-ios7 #view-transitions-login .km-navbar,
+            .km-ios7 #view-transitions-welcome .km-navbar {
+            border-color: transparent;
+            }
+        </style>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" charset="utf-8">
