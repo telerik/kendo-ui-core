@@ -1416,15 +1416,16 @@ var __meta__ = {
 
             container.addClass(this._containerClass());
 
-            previous.css("display", "").addClass("k-fx-current");
-
-            element.css("display", "").addClass("k-fx-next");
-
             container.one(transitions.event, $.proxy(this, "complete"));
 
-            container.css("left"); // hack to refresh webkit
+            kendo.animationFrame(function() {
+                element.css("display", "").addClass("k-fx-next");
+                previous.css("display", "").addClass("k-fx-current");
 
-            container.removeClass("k-fx-start").addClass("k-fx-end");
+                kendo.animationFrame(function() {
+                    container.removeClass("k-fx-start").addClass("k-fx-end");
+                });
+            });
 
             return deferred.promise();
         },
