@@ -58,24 +58,22 @@ var Serializer = {
         $(".k-paste-container", body).remove();
     },
 
-    _resetOrderedLists: function(body){
+    _resetOrderedLists: function(root){
         // fix for IE9 OL bug -- https://connect.microsoft.com/IE/feedback/details/657695/ordered-list-numbering-changes-from-correct-to-0-0
-        setTimeout(function() {
-            var ols = root.getElementsByTagName("ol"), i, ol, originalStart;
+        var ols = root.getElementsByTagName("ol"), i, ol, originalStart;
 
-            for (i = 0; i < ols.length; i++) {
-                ol = ols[i];
-                originalStart = ol.getAttribute("start");
+        for (i = 0; i < ols.length; i++) {
+            ol = ols[i];
+            originalStart = ol.getAttribute("start");
 
-                ol.setAttribute("start", 1);
+            ol.setAttribute("start", 1);
 
-                if (originalStart) {
-                    ol.setAttribute("start", originalStart);
-                } else {
-                    ol.removeAttribute(originalStart);
-                }
+            if (originalStart) {
+                ol.setAttribute("start", originalStart);
+            } else {
+                ol.removeAttribute(originalStart);
             }
-        }, 1);
+        }
     },
 
     htmlToDom: function(html, root) {
@@ -272,6 +270,8 @@ var Serializer = {
                 } else if (name == 'complete') {
                     specified = false;
                 } else if (name == 'altHtml') {
+                    specified = false;
+                } else if (name == 'start' && (dom.is(node, "ul") || dom.is(node, "ol"))) {
                     specified = false;
                 } else if (name.indexOf('_moz') >= 0) {
                     specified = false;
