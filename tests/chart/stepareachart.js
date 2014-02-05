@@ -428,7 +428,7 @@
 
         test("point plot values are stacked", function() {
             deepEqual(
-                $.map(areaChart.points, function(point) { return point.plotValue }),
+                $.map(areaChart.points, function(point) { return areaChart.plotRange(point)[0] }),
                 [1, 2, 3, 2, 4, 6]
             );
         });
@@ -454,7 +454,7 @@
 
         test("point plot values are stacked", function() {
             deepEqual(
-                $.map(areaChart.points, function(point) { return point.plotValue }),
+                $.map(areaChart.points, function(point) { return areaChart.plotRange(point)[0] }),
                 [-1, -2, -3, -2, -4, -6]
             );
         });
@@ -1273,9 +1273,9 @@
             }, options));
 
             var plotArea = chart._model.children[1],
-                lineChart = plotArea.charts[0];
+                areaChart = plotArea.charts[0];
 
-            segment = lineChart._segments[0];
+            segment = areaChart._segments[0];
         }
 
         function areaClick(callback, x, y) {
