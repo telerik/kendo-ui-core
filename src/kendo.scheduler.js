@@ -450,7 +450,7 @@ kendo_module({
         },
 
         isException: function() {
-            return this.id && this.recurrenceId;
+            return !this.isNew() && this.recurrenceId;
         },
 
         isOccurrence: function() {

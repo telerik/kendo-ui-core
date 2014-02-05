@@ -362,6 +362,26 @@
         ok(schedulerEvent.isException());
     });
 
+    test("isException method behaves correctly when id is guid", function() {
+        var event = new SchedulerEvent.define({
+            id: "foo",
+            fields: {
+                foo: { type: "string", defaultValue: "0000-0000-0000" },
+                test: "test"
+            }
+        });
+
+        var schedulerEvent = new event({
+            title: "Title",
+            recurrenceId: 2,
+            start: new Date(2012, 2, 31, 0, 0),
+            end: new Date(2012, 2, 31, 1, 0)
+        });
+
+        ok(!schedulerEvent.isException());
+        ok(schedulerEvent.isOccurrence());
+    });
+
     test("isOccurrence method returns true if the model isNew and has recurrenceId", function() {
         var schedulerEvent = new SchedulerEvent({
             id: 0,
