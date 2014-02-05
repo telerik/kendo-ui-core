@@ -665,7 +665,10 @@ kendo_module({
             that._content.page = that.page;
 
             that._content.bind("reset", function() {
+                var content = that._content;
+
                 that._syncWithContent();
+                that.trigger(REFRESH, { pageCount: content.pageCount, page: content.page });
             });
 
             that._content.bind(ITEM_CHANGE, function(e) {
