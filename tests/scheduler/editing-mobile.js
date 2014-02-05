@@ -71,7 +71,7 @@
         ok(scheduler._editor.container.closest(kendo.roleSelector("view")).length);
     });
 
-    test("editor is close on cancel",1, function() {
+    test("editor is close on cancel", 1, function() {
         var scheduler = setup();
 
         var close = stub(scheduler._editor, { close: scheduler._editor.close });
@@ -79,7 +79,7 @@
         scheduler.editEvent(scheduler.dataSource.at(0));
         scheduler.cancelEvent();
 
-        equal(close.calls("close"), 2);
+        equal(close.calls("close"), 1);
     });
 
     test("editable is destroyed on close",1, function() {
