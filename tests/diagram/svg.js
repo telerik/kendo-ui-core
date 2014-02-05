@@ -1,4 +1,5 @@
 ﻿///<reference path="qunit-1.12.0.js" />
+///<reference path="common.js" />
 
 var diagram = window.kendo.diagram;
 
@@ -303,4 +304,47 @@ test("composite transform updates SVG node transformation", function() {
     //equal(rect.native.getAttribute("transform"), transform.toString(), "SVG node should be transformed"); // not working in IE - it removes the commas (,)
     ok(rect.native.getAttribute("transform"), "SVG node should be transformed");
 
+});
+
+test("invert translation", function() {
+    var transform  = new diagram.Translation(100, 100);
+    var invert = transform.invert();
+
+    equal(invert.toString(), "translate(-100,-100)", "x and y should be inverted");
+});
+test("invert scale", function() {
+    var transform  = new diagram.Scale(2, 2);
+    var invert = transform.invert();
+
+    equal(invert.toString(), "scale(0.5,0.5)", "zoom in should is inverted with zoom out");
+});
+test("invert rotation without center", function() {
+    var transform  = new diagram.Rotation(30);
+    var invert = transform.invert();
+
+    equal(invert.toString(), "rotate(330)", "invert of rotation is done by rotating to the rest until a full circle angle");
+});
+test("invert rotation with center", function() {
+    var transform  = new diagram.Rotation(30, 100, 100);
+    var invert = transform.invert();
+
+    equal(invert.toString(), "rotate(330,100,100)", "reverting rotation is done over the same center and with rest to full circle angle");
+});
+test("invert composite transform with rotation without center", function() {
+    var transform = new diagram.CompositeTransform(100, 100, 2, 2, 90);
+    var point = new diagram.Point(100, 100);
+
+    var transformedPoint = transform.toMatrix().apply(point);
+    var invertedPoint = transform.invert().toMatrix().apply(transformedPoint);
+
+    roughlyEqualPoint(point, invertedPoint, "the inverted point should be the same as the original point");
+});
+test("invert composite transform with rotation with center", function() {
+    var transform = new diagram.CompositeTransform(100, 100, 2, 2, 90, 30, 30);
+    var point = new diagram.Point(100, 100);
+
+    var transformedPoint = transform.toMatrix().apply(point);
+    var invertedPoint = transform.invert().toMatrix().apply(transformedPoint);
+
+    roughlyEqualPoint(point, invertedPoint, "the inverted point should be the same as the original point");
 });

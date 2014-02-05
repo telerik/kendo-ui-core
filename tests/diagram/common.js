@@ -55,6 +55,11 @@
         ok(isOK, message + failMessage);
     }
 
+    function roughlyEqualPoint(actual, expected, message) {
+        roughlyEqual(actual.x, expected.x, "point should be x equal");
+        roughlyEqual(actual.y, expected.y, "point should be y equal");
+    }
+
     function matrixEqual(m1, m2) {
         roughlyEqual(m1.a, m2.a, "matrix difference in a");
         roughlyEqual(m1.b, m2.b, "matrix difference in b");
@@ -137,6 +142,7 @@
     deepExtend(window, {
         Shapes: Shapes,
         roughlyEqual: roughlyEqual,
+        roughlyEqualPoint: roughlyEqualPoint,
         matrixEqual: matrixEqual,
         equalTranslate: equalTranslate,
         randomDiagram: randomDiagram,

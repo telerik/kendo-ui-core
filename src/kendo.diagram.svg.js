@@ -35,7 +35,8 @@ var __meta__ = {
             arrowEnd: "ArrowEnd"
         },
         DEFAULTWIDTH = 100,
-        DEFAULTHEIGHT = 100;
+        DEFAULTHEIGHT = 100,
+        FULL_CIRCLE_ANGLE = 360;
 
     diagram.Markers = Markers;
 
@@ -49,6 +50,9 @@ var __meta__ = {
         },
         toString: function () {
             return kendo.format("scale({0},{1})", this.x, this.y);
+        },
+        invert: function() {
+            return new Scale(1/this.x, 1/this.y);
         }
     });
 
@@ -82,6 +86,9 @@ var __meta__ = {
                 return;
             }
             this.times(1 / this.length());
+        },
+        invert: function() {
+            return new Translation(-this.x, -this.y);
         }
     });
 
@@ -103,6 +110,9 @@ var __meta__ = {
         },
         center: function () {
             return new Point(this.x, this.y);
+        },
+        invert: function() {
+            return new Rotation(FULL_CIRCLE_ANGLE - this.angle, this.x, this.y);
         }
     });
 
@@ -154,6 +164,21 @@ var __meta__ = {
                 m = m.times(this.scale.toMatrix());
             }
             return m;
+        },
+        invert: function() {
+            var rotate = this.rotate.invert();
+            var scale = this.scale.invert();
+
+            var translatePoint = new Point(-this.translate.x, -this.translate.y);
+            translatePoint = rotate.toMatrix().times(scale.toMatrix()).apply(translatePoint);
+            var translate = new Translation(translatePoint.x, translatePoint.y);
+
+            var transform = new CompositeTransform();
+            transform.translate = translate;
+            transform.rotate = rotate;
+            transform.scale = scale;
+
+            return transform;
         }
     });
 
