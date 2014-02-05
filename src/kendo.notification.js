@@ -50,7 +50,7 @@ var __meta__ = {
                 that.element.hide();
             }
 
-            that._compileTemplates(that.options.templates);
+            that._compileTemplates(options.templates);
             that._guid = "_" + kendo.guid();
             that._compileStacking(options.stacking, options.position.top);
 
