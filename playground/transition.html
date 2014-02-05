@@ -6,41 +6,70 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.fx.js"></script>
+        <link href="../../styles/mobile/common/transitions.less" rel="stylesheet/less" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <title>Transition</title>
         <style>
             body {
                 width: 500px;
                 margin: 20px auto;
             }
-            #a-container, #b-container {
-                width: 100px;
-                height: 100px;
-                position: absolute;
+
+            #container {
+                width: 200px;
+                height: 200px;
+            }
+
+            #a, #b {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .km-content {
+                flex-grow: 1;
             }
 
             #a {
-                width: 100px;
-                height: 100px;
-                background: red;
+                width: 200px;
+                height: 200px;
                 position: absolute;
             }
 
-            #b {
-                width: 100px;
-                height: 100px;
-                position: absolute;
-                background: blue;
+            #a .km-header, #a .km-footer, #a .km-content {
+                background: yellow;
             }
+
+            #b {
+
+                width: 200px;
+                height: 200px;
+                position: absolute;
+            }
+
+            #b .km-header, #b .km-footer {
+                background: #e4e4e4;
+            }
+
+            #b .km-content {
+                background: orange;
+            }
+
         </style>
     </head>
     <body>
 
-        <div id="a-container">
-            <div id="a"> A div </div>
-        </div>
+        <div id="container">
+            <div id="a">
+                <div class="km-header">Index</div>
+                <div class="km-content">Index content</div>
+                <div class="km-footer">Index footer</div>
+            </div>
 
-        <div id="b-container">
-            <div id="b"> B div </div>
+            <div id="b">
+                <div class="km-header">Detail Header</div>
+                <div class="km-content">Detail Content</div>
+                <div class="km-footer">Detail Footer</div>
+            </div>
         </div>
 
         <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
@@ -50,25 +79,42 @@
             <dt>Animation type:</dt>
             <dd>
             <select id="animation-type">
-                <option>overlay:up</option>
-                <option>slide</option>
                 <option>zoom</option>
                 <option>fade</option>
+                <option>slide</option>
+                <option>overlay</option>
             </select>
             </dd>
+
+            <dt>Direction</dt>
+            <dd>
+            <select id="animation-direction">
+                <option>up</option>
+                <option>down</option>
+                <option>left</option>
+                <option>right</option>
+            </select>
+            </dd>
+            <dt>Reverse</dt>
+
+            <dd>
+                <input type="checkbox" id="reverse" />
+            </dd>
         </dl>
-        <label><input type="checkbox" id="reverse" checked />Reverse</label>
         <button id="apply">Apply</button>
 
         <script>
+        $("#apply").click(function() {
+            console.log($("#reverse")[0].checked);
 
-            $("#apply").click(function() {
-                $("#b, #a").css({"top":0, "left":0});
-                $("#a").css("top");
+            kendo.fx("#b").replace("#a", $("#animation-type").val())
+                .direction($("#animation-direction").val())
+                .setReverse($("#reverse")[0].checked)
+                .run().then(function() {
+                    console.log("animation complete")
+                });
 
-                $("#a").kendoAnimateTo($("#b"), { effects: $("#animation-type").val(), duration: 1000, reverse: $("#reverse")[0].checked });
-            });
-            $("#apply").click();
+        });
         </script>
     </body>
 </html>

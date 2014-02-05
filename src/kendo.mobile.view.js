@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller" ], f);
+    define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller", "./kendo.view" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "View",
     category: "mobile",
     description: "Mobile View",
-    depends: [ "core", "fx", "mobile.scroller" ],
+    depends: [ "core", "fx", "mobile.scroller", "view" ],
     hidden: true
 };
 
@@ -19,7 +19,6 @@ var __meta__ = {
         Class = kendo.Class,
         Widget = ui.Widget,
         INIT = "init",
-        TRANSITION_DURATION = 320,
         UI_OVERLAY = '<div style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; z-index: 20000; display: none" />',
         BEFORE_SHOW = "beforeShow",
         SHOW = "show",
@@ -46,26 +45,25 @@ var __meta__ = {
         }
     }
 
+    function appLevelNativeScrolling() {
+        return mobile.application && mobile.application.options && mobile.application.options.useNativeScrolling;
+    }
+
     var View = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            Widget.fn.init.call(this, element, options);
 
-            Widget.fn.init.call(that, element, options);
+            this.params = {};
 
-            element = that.element;
+            $.extend(this, options);
 
-            that.params = {};
-            that._paramsHistory = [];
+            this.transition = this.transition || this.defaultTransition;
 
-            $.extend(that, options);
-
-            that.applicationNativeScrolling = (mobile.application && mobile.application.options && mobile.application.options.useNativeScrolling);
-
-            that._id();
-            that._layout();
-            that._overlay();
-            that._scroller();
-            that._model();
+            this._id();
+            this._layout();
+            this._overlay();
+            this._scroller();
+            this._model();
         },
 
         events: [
@@ -81,6 +79,7 @@ var __meta__ = {
             name: "View",
             title: "",
             reload: false,
+            transition: "",
             defaultTransition: "",
             useNativeScrolling: false,
             stretch: false,
@@ -120,6 +119,13 @@ var __meta__ = {
             this.element.remove();
         },
 
+        triggerBeforeShow: function() {
+            if (this.trigger(BEFORE_SHOW, { view: this })) {
+                return false;
+            }
+            return true;
+        },
+
         showStart: function() {
             var that = this;
             that.element.css("display", "");
@@ -138,89 +144,28 @@ var __meta__ = {
             kendo.resize(that.element);
         },
 
+        showEnd: function() {
+            this.trigger(AFTER_SHOW, {view: this});
+            this._padIfNativeScrolling();
+        },
+
         hideStart: function() {
             this.trigger(BEFORE_HIDE, {view: this});
         },
 
-        hideComplete: function() {
+        hideEnd: function() {
             var that = this;
             that.element.hide();
             that.trigger(HIDE, {view: that});
         },
 
-        updateParams: function(transition, params, callback) {
-            // the newly passed parameters equal the last parameters of the view - we are going back
-            // 1 -> 2 -> 1 is considered back navigation to self
-            if (this._paramsHistory[this._paramsHistory.length - 2] === JSON.stringify(params)) {
-                this._paramsHistory.pop();
-                this.nextViewID = this.id;
-                this.backTransition = this.transition;
-            }
-
-            this.switchWith(new ViewClone(this), transition, params, callback);
-        },
-
         _padIfNativeScrolling: function() {
-            if (this.applicationNativeScrolling) {
+            if (appLevelNativeScrolling()) {
                 this.content.css({
                     paddingTop: this.header.height(),
                     paddingBottom: this.footer.height()
                 });
             }
-        },
-
-        switchWith: function(view, transition, params, callback) {
-            var that = this,
-                paramsHistory = this._paramsHistory,
-                complete = function() {
-                    that.trigger(AFTER_SHOW, {view: that});
-                    that._padIfNativeScrolling();
-                    callback();
-                };
-
-            if (that.trigger(BEFORE_SHOW, {view: that})) {
-                return;
-            }
-
-            that._back = paramsHistory[paramsHistory.length - 1] === JSON.stringify(params);
-
-            if (!that._back) {
-                paramsHistory.push(JSON.stringify(params));
-            }
-
-            that.params = params;
-
-            if (view) {
-                // layout needs to be detached first, then reattached
-                view.hideStart();
-                that.showStart();
-
-                new ViewTransition({
-                    current: view,
-                    next: that,
-                    transition: transition,
-                    defaultTransition: view.options.defaultTransition,
-                    complete: complete
-                });
-            } else {
-                that.showStart();
-                complete();
-            }
-        },
-
-        parallaxContents: function(other) {
-            var that = this,
-                contents = that.content;
-
-            if (!other.header[0]) {
-                contents = contents.add(that.header);
-            }
-
-            if (!other.footer[0]) {
-                contents = contents.add(that.footer);
-            }
-
-            return contents;
         },
 
         contentElement: function() {
@@ -229,10 +174,14 @@ var __meta__ = {
             return that.options.stretch ? that.content : that.scrollerContent;
         },
 
+        clone: function(back) {
+            return new ViewClone(this);
+        },
+
         _scroller: function() {
             var that = this;
 
-            if (that.applicationNativeScrolling) {
+            if (appLevelNativeScrolling()) {
                 return;
             }
             if (that.options.stretch) {
@@ -295,7 +244,6 @@ var __meta__ = {
                 element = that.element;
 
             element.data("kendoView", that).addClass("km-view");
-            that.transition = attrValue(element, "transition");
 
             that.header = element.children(roleSelector("header")).addClass("km-header");
             that.footer = element.children(roleSelector("footer")).addClass("km-footer");
@@ -327,113 +275,27 @@ var __meta__ = {
 
             $.extend(this, {
                 element: elementClone,
-                header: elementClone.children(roleSelector("header")),
-                content: elementClone.children(roleSelector("content")),
-                footer: elementClone.children(roleSelector("footer")),
                 transition: view.transition,
                 options: { defaultTransition: view.options.defaultTransition },
                 params: JSON.stringify(view.params),
                 id: view.id
             });
 
-            view.element.parent().append(this.element);
+            view.element.parent().append(elementClone);
         },
-
-        parallaxContents: View.prototype.parallaxContents,
 
         hideStart: $.noop,
 
-        hideComplete: function() {
+        hideEnd: function() {
             this.element.remove();
         }
     });
-
-    function fade(source, destination, reverse) {
-        if (source[0] && destination[0] && source[0] != destination[0]) {
-            source.kendoAnimateTo(destination, {effects: "fade", duration: TRANSITION_DURATION, reverse: reverse });
-        }
-    }
 
     function initWidgets(collection) {
         collection.each(function() {
             kendo.initWidget($(this), {}, ui.roles);
         });
     }
-
-    var ViewTransition = Class.extend({
-        init: function (options) {
-            $.extend(this, options);
-
-            var that = this,
-                current = that.current,
-                next = that.next,
-                currentContent = current.element,
-                nextContent = next.element,
-                upper = next,
-                lower = current,
-                transition = that._transition();
-
-            if (transition.reverse) {
-                upper = current;
-                lower = next;
-            }
-
-            upper.element.css(Z_INDEX, 1);
-            lower.element.css(Z_INDEX, 0);
-
-            if (transition.parallax) {
-                fade(current.footer, next.footer, transition.reverse);
-                fade(current.header, next.header, transition.reverse);
-                currentContent = current.parallaxContents(next);
-                nextContent = next.parallaxContents(current);
-            }
-
-            currentContent.kendoAnimateTo(nextContent, transition);
-
-            if (!that.back()) {
-                current.nextViewID = next.id;
-                current.backTransition = transition.transition;
-            }
-        },
-
-        _transition: function() {
-            var that = this,
-                current = that.current,
-                next = that.next,
-                back = that.back(),
-                complete = function() {
-                    current.hideComplete();
-                    that.complete();
-                },
-
-                viewTransition = back ? next.backTransition : next.transition,
-                transition = that.transition || viewTransition || that.defaultTransition,
-                animationData = transition.split(' '),
-                animationType = animationData[0],
-                parallax = /^slide/.test(animationType),
-                reverse = animationData[1] === "reverse";
-
-            if (that.back() && !that.transition) {
-                reverse = !reverse;
-            }
-
-            return {
-                effects: animationType,
-                reverse: reverse,
-                parallax: parallax,
-                complete: complete,
-                transition: transition,
-                duration: TRANSITION_DURATION
-            };
-        },
-
-        back: function() {
-            var next = this.next,
-                current = this.current;
-
-            return next.nextViewID && next.nextViewID === current.id && next._back;
-        }
-    });
 
     var Layout = Widget.extend({
         init: function(element, options) {
@@ -507,27 +369,13 @@ var __meta__ = {
     });
 
     var Observable = kendo.Observable,
-        BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
+        bodyRegExp = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
         LOAD_START = "loadStart",
         LOAD_COMPLETE = "loadComplete",
         SHOW_START = "showStart",
         SAME_VIEW_REQUESTED = "sameViewRequested",
         VIEW_SHOW = "viewShow";
-/*
-    function urlParams(url) {
-        var queryString = url.split('?')[1] || "",
-            params = {},
-            paramParts = queryString.split(/&|=/),
-            length = paramParts.length,
-            idx = 0;
 
-        for (; idx < length; idx += 2) {
-            params[paramParts[idx]] = paramParts[idx + 1];
-        }
-
-        return params;
-    }
-*/
     var ViewEngine = Observable.extend({
         init: function(options) {
             var that = this,
@@ -553,11 +401,20 @@ var __meta__ = {
                 throw new Error(errorMessage);
             }
 
-            that._view = null;
-
             that.layouts = {};
 
+            that.viewContainer = new kendo.ViewContainer(that.container);
+
+            that.viewContainer.bind("accepted", function(e) {
+                e.view.params = that.params;
+            });
+
+            that.viewContainer.bind("complete", function(e) {
+                that.trigger(VIEW_SHOW, { view: e.view });
+            });
+
             that._setupLayouts(container);
+
             initWidgets(container.children(roleSelector("modalview drawer")));
 
             if (that.loader) {
@@ -577,7 +434,7 @@ var __meta__ = {
         },
 
         view: function() {
-            return this._view;
+            return this.viewContainer.view;
         },
 
         showView: function(url, transition, params) {
@@ -595,12 +452,13 @@ var __meta__ = {
 
             var that = this,
                 showClosure = function(view) {
-                    that._show(view, transition, params);
+                    that.viewContainer.show(view, transition, url);
                 },
                 element = that._findViewElement(url),
                 view = element.data("kendoView");
 
             that.url = url;
+            that.params = params;
 
             if (view && view.reload) {
                 view.purge();
@@ -629,7 +487,7 @@ var __meta__ = {
                 modalViews,
                 view;
 
-            if (BODY_REGEX.test(html)) {
+            if (bodyRegExp.test(html)) {
                 html = RegExp.$1;
             }
 
@@ -728,21 +586,6 @@ var __meta__ = {
                                 callback(that.append(request.responseText, url));
                             }
                         });
-        },
-
-        _show: function(view, transition, params) {
-            var that = this;
-
-            if (that._view !== view) {
-                view.switchWith(that._view, transition, params, function() {
-                    that._view = view;
-                    that.trigger(VIEW_SHOW, {view: view});
-                });
-            } else {
-                that._view.updateParams(transition, params, function() {
-                    that.trigger(VIEW_SHOW, { view: that._view });
-                });
-            }
         },
 
         _hideViews: function(container) {

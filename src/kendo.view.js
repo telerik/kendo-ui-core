@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.binder" ], f);
+    define([ "./kendo.core", "./kendo.binder", "./kendo.fx" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "View",
     category: "framework",
     description: "The View class instantiates and handles the events of a certain screen from the application.",
-    depends: [ "core", "binder" ],
+    depends: [ "core", "binder", "fx" ],
     hidden: false
 };
 
@@ -18,6 +18,9 @@ var __meta__ = {
         INIT = "init",
         SHOW = "show",
         HIDE = "hide",
+
+        ATTACH = "attach",
+        DETACH = "detach",
         sizzleErrorRegExp = /unrecognized expression/;
 
     var View = Observable.extend({
@@ -27,9 +30,11 @@ var __meta__ = {
 
             Observable.fn.init.call(that);
             that.content = content;
+            that.id = kendo.guid();
             that.tagName = options.tagName || "div";
             that.model = options.model;
             that._wrap = options.wrap !== false;
+            that._fragments = {};
 
             that.bind([ INIT, SHOW, HIDE ], options);
         },
@@ -38,7 +43,7 @@ var __meta__ = {
             var that = this,
                 notInitialized = !that.element;
 
-            // The order below matters - kendo.bind should be happen when the element is in the DOM, and SHOW should be triggered after INIT.
+            // The order below matters - kendo.bind should happen when the element is in the DOM, and show should be triggered after init.
 
             if (notInitialized) {
                 that.element = that._createElement();
@@ -54,13 +59,35 @@ var __meta__ = {
             }
 
             if (container) {
+                that._eachFragment(ATTACH);
                 that.trigger(SHOW);
             }
 
             return that.element;
         },
 
+        triggerBeforeShow: function() {
+            return true;
+        },
+
+        showStart: function() {
+
+        },
+
+        showEnd: function() {
+
+        },
+
+        hideStart: function() {
+
+        },
+
+        hideEnd: function() {
+            this.hide();
+        },
+
         hide: function() {
+            this._eachFragment(DETACH);
             this.element.detach();
             this.trigger(HIDE);
         },
@@ -75,28 +102,51 @@ var __meta__ = {
             }
         },
 
+        fragments: function(fragments) {
+            $.extend(this._fragments, fragments);
+        },
+
+        _eachFragment: function(methodName) {
+            for (var placeholder in this._fragments) {
+                this._fragments[placeholder][methodName](this, placeholder);
+            }
+        },
+
         _createElement: function() {
             var that = this,
+                wrap = that._wrap,
+                wrapper = "<" + that.tagName + " />",
                 element,
                 content;
 
             try {
                 content = $(document.getElementById(that.content) || that.content); // support passing id without #
+
+                if (content[0].tagName === SCRIPT) {
+                    content = content.html();
+                }
             } catch(e) {
                 if (sizzleErrorRegExp.test(e.message)) {
                     content = that.content;
                 }
             }
 
-            element = $("<" + that.tagName + " />").append(content[0].tagName === SCRIPT ? content.html() : content);
-
-            // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
-            // <script id="my-template">
-            // foo
-            // <span> Span </span>
-            // </script>
-            if (!that._wrap) {
-               element = element.contents();
+            if (typeof content === "string") {
+                element = $(wrapper).append(content);
+                kendo.stripWhitespace(element[0]);
+                // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
+                // <script id="my-template">
+                // foo
+                // <span> Span </span>
+                // </script>
+                if (!wrap) {
+                   element = element.contents();
+                }
+            } else {
+                element = content;
+                if (wrap) {
+                    element = element.wrap(wrapper).parent();
+                }
             }
 
             return element;
@@ -106,23 +156,146 @@ var __meta__ = {
     var Layout = View.extend({
         init: function(content, options) {
             View.fn.init.call(this, content, options);
-            this.regions = {};
+            this.containers = {};
         },
 
-        showIn: function(container, view) {
-            var previousView = this.regions[container];
+        container: function(selector) {
+            var container = this.containers[selector];
 
-            if (previousView) {
-                previousView.hide();
+            if (!container) {
+                container = this._createContainer(selector);
+                this.containers[selector] = container;
             }
 
-            view.render(this.render().find(container), previousView);
-            this.regions[container] = view;
+            return container;
+        },
+
+        showIn: function(selector, view, transition) {
+            this.container(selector).show(view, transition);
+        },
+
+        _createContainer: function(selector) {
+            var element = this.render().find(selector),
+                container = new ViewContainer(element);
+
+            container.bind("accepted", function(e) {
+                element.append(e.view.render());
+            });
+
+            return container;
         }
     });
 
+    var Fragment = View.extend({
+        attach: function(view, placeholder) {
+            view.element.find(placeholder).replaceWith(this.render());
+        },
+
+        detach: function() {
+            console.log('detach', arguments);
+        },
+    });
+
+    var transitionRegExp = /^(\w+)(:(\w+))?( (\w+))?$/;
+
+    function parseTransition(transition) {
+        if (!transition){
+            return {};
+        }
+
+        var matches = transition.match(transitionRegExp) || [];
+
+        return {
+            type: matches[1],
+            direction: matches[3],
+            reverse: matches[5] === "reverse"
+        };
+    }
+
+    var ViewContainer = Observable.extend({
+        init: function(container) {
+            Observable.fn.init.call(this);
+            this.container = container;
+            this.history = [];
+            this.view = null;
+            this.running = false;
+        },
+
+        after: function() {
+            this.running = false;
+            this.trigger("complete", {view: this.view});
+        },
+
+        end: function() {
+            this.view.showEnd();
+            this.previous.hideEnd();
+            this.after();
+        },
+
+        show: function(view, transition, locationID) {
+            if (!view.triggerBeforeShow()) {
+                return;
+            }
+
+            locationID = locationID || view.id;
+
+            var that = this,
+                current = (view === that.view) ? view.clone() : that.view,
+                history = that.history,
+                previousEntry = history[history.length - 2] || {},
+                back = previousEntry.id === locationID,
+                // If explicit transition is set, it will be with highest priority
+                // Next we will try using the history record transition or the view transition configuration
+                theTransition = transition || ( back ? previousEntry.transition : view.transition ),
+                transitionData = parseTransition(theTransition);
+
+            if (that.running) {
+                that.effect.stop();
+            }
+
+            that.trigger("accepted", { view: view });
+            that.view = view;
+            that.previous = current;
+            that.running = true;
+
+            if (!back) {
+                history.push({ id: locationID, transition: theTransition });
+            } else {
+                history.pop();
+            }
+
+            if (!current) {
+                view.showStart();
+                view.showEnd();
+                that.after();
+                return;
+            }
+
+            current.hideStart();
+            view.showStart();
+
+            if (!theTransition) {
+                that.end();
+            } else {
+                // do not reverse the explicit transition
+                if (back && !transition) {
+                    transitionData.reverse = !transitionData.reverse;
+                }
+
+                that.effect = kendo.fx(view.element).replace(current.element, transitionData.type)
+                    .direction(transitionData.direction)
+                    .setReverse(transitionData.reverse);
+
+                that.effect.run().then(function() { that.end(); });
+            }
+        }
+    });
+
+    kendo.ViewContainer = ViewContainer;
+    kendo.Fragment = Fragment;
     kendo.Layout = Layout;
     kendo.View = View;
+
 })(window.kendo.jQuery);
 
 return window.kendo;

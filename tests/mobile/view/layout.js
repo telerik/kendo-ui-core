@@ -9,7 +9,7 @@
         root = $(viewHtml);
         layout = kendo.initWidget($(layoutHtml), {}, kendo.mobile.ui.roles);
         view = kendo.initWidget(root, {layout: layout}, kendo.mobile.ui.roles);
-        view.switchWith(null, '', {}, $.noop);
+        view.showStart();
     }
 
 

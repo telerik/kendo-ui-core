@@ -3,6 +3,10 @@
         setup: function() {
             var contentElement = $('<script id="content" type="text/x-kendo-template">Foo</script>');
             $(QUnit.fixture).append(contentElement);
+        },
+
+        teardown: function() {
+            $('#content').remove();
         }
     });
 
@@ -10,6 +14,14 @@
         var view = new kendo.View("<span>Foo</span>");
 
         equal(view.render().html(), "<span>Foo</span>");
+    });
+
+    test("keeps DOM element when rendered by default", 1, function() {
+        $('#content').remove();
+        $(document.body).append('<div id="content">Foo</div>');
+        var view = new kendo.View("content");
+        view.render();
+        equal($('#content').length, 1);
     });
 
     test("supports tag hoch-poch", 1, function() {

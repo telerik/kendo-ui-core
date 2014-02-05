@@ -107,7 +107,7 @@ var __meta__ = {
             }
         };
 
-        kendo.directions = directions;
+    kendo.directions = directions;
 
     extend($.fn, {
         kendoStop: function(clearQueue, gotoEnd) {
@@ -219,38 +219,6 @@ var __meta__ = {
 
     function parseCSS(element, property) {
         return parseInteger(element.css(property));
-    }
-
-
-    function parseTransitionEffects(options) {
-        var effects = options.effects;
-
-        if (effects === "zoom") {
-            effects = "zoom:in fade:in";
-        }
-        if (effects === "fade") {
-            effects = "fade:in";
-        }
-        if (effects === "slide") {
-            effects = "tile:left";
-        }
-        if (/^slide:(.+)$/.test(effects)) {
-            effects = "tile:" + RegExp.$1;
-        }
-        if (effects === "overlay") {
-            effects = "slideIn:left";
-        }
-        if (/^overlay:(.+)$/.test(effects)) {
-            effects = "slideIn:" + RegExp.$1;
-        }
-
-        options.effects = kendo.parseEffects(effects);
-
-        if (ios7 && effects == "tile:left") {
-            options.previousDivisor = 3;
-        }
-
-        return options;
     }
 
     function keys(obj) {
@@ -608,11 +576,6 @@ var __meta__ = {
         }
     };
 
-    fx.transitionPromise = function(element, destination, options) {
-        fx.animateTo(element, destination, options);
-        return element;
-    };
-
     extend(fx, {
         animate: function(elements, properties, options) {
             var useTransition = options.transition !== false;
@@ -707,60 +670,10 @@ var __meta__ = {
                     });
                 }
             }
-        },
-
-        animateTo: function(element, destination, options) {
-            var direction,
-                commonParent = element.parents().filter(destination.parents()).first(),
-                both = $().add(element.parent()).add(destination.parent()),
-                isAbsolute = element.css(POSITION) == "absolute",
-                originalOverflow, originalPosition;
-
-            if (!isAbsolute) {
-                originalPosition = both.css(POSITION);
-                both.css(POSITION, "absolute");
-            }
-
-            options = parseTransitionEffects(options);
-            if (!support.mobileOS.android) {
-                originalOverflow = commonParent.css(OVERFLOW);
-                commonParent.css(OVERFLOW, "hidden");
-            }
-
-            $.each(options.effects, function(name, definition) {
-                direction = direction || definition.direction;
-            });
-
-            function complete(animatedElement) {
-                destination[0].style.cssText = "";
-                element.each(function() { this.style.cssText = ""; });
-                if (!support.mobileOS.android) {
-                    commonParent.css(OVERFLOW, originalOverflow);
-                }
-                if (!isAbsolute) {
-                    both.css(POSITION, originalPosition);
-                }
-                if (options.completeCallback) {
-                    options.completeCallback.call(element, animatedElement);
-                }
-            }
-
-            options.complete = browser.msie ? function() { setTimeout(complete, 0); } : complete;
-            options.previous = (options.reverse ? destination : element);
-
-            options.reset = true; // Reset transforms if there are any.
-
-            // execute callback only once, and hook up derived animations to previous view only once.
-            (options.reverse ? element : destination).each(function() {
-                $(this).kendoAnimate(extend(true, {}, options));
-                options.complete = null;
-                options.previous = null;
-            });
         }
     });
 
     fx.animatedPromise = fx.promise;
-    fx.animatedTransitionPromise = fx.transitionPromise;
 
     var Effect = kendo.Class.extend({
         init: function(element, direction) {
@@ -863,7 +776,7 @@ var __meta__ = {
                 start = strip3DTransforms(start);
             }
 
-            element.css(start).css(TRANSFORM); // Nudge
+            element.css(start).css(TRANSFORM); // Trick webkit into re-rendering
 
             that.setup();
 
@@ -1420,6 +1333,104 @@ var __meta__ = {
         prepare: function(start) {
             start[PERSPECTIVE] = DEFAULT_PERSPECTIVE;
             start.transformStyle = "preserve-3d";
+        }
+    });
+
+    var RESTORE_OVERFLOW = !support.mobileOS.android;
+
+    createEffect("replace", {
+        init: function(element, previous, transitionClass) {
+            Effect.prototype.init.call(this, element);
+            this._previous = $(previous);
+            this._transitionClass = transitionClass;
+        },
+
+        duration: function() {
+            throw new Error("The replace effect does not support duration setting; the effect duration may be customized through the transition class rule");
+        },
+
+        _both: function() {
+            return $().add(this._element).add(this._previous);
+        },
+
+        _containerClass: function() {
+            var direction = this._directon,
+                containerClass = "k-fx k-fx-start k-fx-" + this._transitionClass;
+
+            if (direction) {
+                containerClass += " k-fx-" + direction;
+            }
+
+            if (this._reverse) {
+                containerClass += " k-fx-reverse";
+            }
+
+            return containerClass;
+        },
+
+        complete: function() {
+            var container = this.container;
+
+            container.removeClass("k-fx-end").removeClass(this._containerClass());
+            this._previous.hide().removeClass("k-fx-current");
+            this.element.removeClass("k-fx-next");
+
+            if (RESTORE_OVERFLOW) {
+                container.css(OVERFLOW, "");
+            }
+
+            if (!this.isAbsolute) {
+                this._both().css(POSITION, "");
+            }
+
+            this.deferred.resolve();
+        },
+
+        run: function() {
+            if (this._additionalEffects && this._additionalEffects[0]) {
+                return this.compositeRun();
+            }
+
+            var that = this,
+                element = that.element,
+                previous = that._previous,
+                direction = that._direction,
+                container = element.parents().filter(previous.parents()).first(),
+                both = that._both(),
+                deferred = $.Deferred(),
+                originalPosition = element.css(POSITION),
+                originalOverflow;
+
+            this.container = container;
+            this.deferred = deferred;
+            this.isAbsolute = originalPosition  == "absolute";
+
+            if (!this.isAbsolute) {
+                both.css(POSITION, "absolute");
+            }
+
+            if (RESTORE_OVERFLOW) {
+                originalOverflow = container.css(OVERFLOW);
+                container.css(OVERFLOW, "hidden");
+            }
+
+            container.addClass(this._containerClass());
+
+            previous.css("display", "").addClass("k-fx-current");
+
+            element.css("display", "").addClass("k-fx-next");
+
+            container.one(transitions.event, $.proxy(this, "complete"));
+
+            container.css("left"); // hack to refresh webkit
+
+            container.removeClass("k-fx-start").addClass("k-fx-end");
+
+            return deferred.promise();
+        },
+
+        stop: function() {
+            this.complete();
         }
     });
 
