@@ -1139,7 +1139,7 @@ var __meta__ = {
                     resize: function(e) {
                         var rtlMultiplier = isRtl ? -1 : 1,
                             width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier),
-                            footer = that.footer || $(),
+                            footer = (isStatic ? that.staticFooter : that.footer) || $(),
                             header = th.closest("table"),
                             contentTable = isStatic ? that.staticTable : that.table,
                             constrain = false,

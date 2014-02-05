@@ -277,6 +277,36 @@
         equal(footer.find("tr:first > td:first").width(), initialWidth + 10);
     });
 
+    test("static footer table width is incremented when handler is moved to the right", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: ["foo", { static: true, field: "bar", footerTemplate: "bar", width:100 }]
+        }),
+        firstColumn = grid.staticHeader.find("th:first"),
+        footer = grid.footer.find(".k-grid-footer-static"),
+        initialWidth = footer.find("table").width();
+
+        resizeColumn(grid.wrapper, firstColumn, firstColumn.width(), firstColumn.width() + 10);
+
+        equal(footer.find("table").width(), initialWidth + 10);
+    });
+
+    test("non static footer table width is not incremented when static column is resized", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: ["foo", { static: true, field: "bar", footerTemplate: "bar", width:100 }]
+        }),
+        firstColumn = grid.staticHeader.find("th:first"),
+        footer = grid.footer.find(".k-grid-footer-wrap"),
+        initialWidth = footer.find("table").width();
+
+        resizeColumn(grid.wrapper, firstColumn, firstColumn.width(), firstColumn.width() + 10);
+
+        equal(footer.find("table").width(), initialWidth - 10);
+    });
+
     test("non static column footer cell width is incremented when handler is moved to the right", function() {
          var grid = new Grid(table, {
              dataSource: [ { foo: "foo", bar: "bar"} ],
