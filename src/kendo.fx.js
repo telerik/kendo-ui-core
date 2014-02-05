@@ -1354,7 +1354,7 @@ var __meta__ = {
         },
 
         _containerClass: function() {
-            var direction = this._directon,
+            var direction = this._direction,
                 containerClass = "k-fx k-fx-start k-fx-" + this._transitionClass;
 
             if (direction) {
