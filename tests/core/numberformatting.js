@@ -351,4 +351,8 @@ test("toString formats correctly big integer", function() {
     equal(toString(5285654313, "#.########0"), "5285654313.000000000");
 });
 
+test("toString rounds 17.115 correcly", function() {
+    equal(toString(17.115, "#.##"), "17.12");
+});
+
 }());
