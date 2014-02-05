@@ -1426,7 +1426,7 @@
                     shape = item;
                     shape.redraw(shapeOptions);
                 } else { // consider it a point
-                    shapeOptions = deepExtend({}, shapeOptions, item);
+                    shapeOptions = deepExtend({}, shapeOptions, options, item);
                     deepExtend(shapeOptions, { x: item.x, y: item.y });
                     shape = new Shape(shapeOptions);
                 }
