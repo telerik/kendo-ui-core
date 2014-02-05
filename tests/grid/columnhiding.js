@@ -1058,4 +1058,28 @@
         equal(parseInt(groupCell.eq(0).attr("colspan"), 10), 2);
         equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 2);
     });
+
+    test("refresh with hidden column updates footer cols", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true, footerTemplate: "foo", width: 10 },
+                { field: "bar", static: true, width: 20 },
+                { field: "baz", static: true, width: 30 },
+                { field: "bax", width: 40 },
+                { field: "fuzz", width: 50 }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.refresh();
+
+        var staticCol = grid.wrapper.find(".k-grid-footer-static col");
+        equal(staticCol[0].style.width, "10px");
+        equal(staticCol[1].style.width, "30px");
+
+        var nonStaticCol = grid.wrapper.find(".k-grid-footer-wrap col");
+        equal(nonStaticCol[0].style.width, "40px");
+        equal(nonStaticCol[1].style.width, "50px");
+    });
+
 })();

@@ -3846,40 +3846,29 @@ var __meta__ = {
         },
 
         _appendStaticColumnFooter: function() {
-            var that = this,
-                columns = this.columns,
-                groups = that._groups(),
-                idx,
-                html,
-                colgroup,
-                tr,
-                table,
-                hasStaticColumns;
+            var that = this;
+            var footer = that.footer;
+            var cells = footer.find(".k-footer-template>td");
+            var cols = footer.find(".k-grid-footer-wrap>table>colgroup>col");
+            var html = $('<div class="k-grid-footer-static"><table><colgroup /><tbody><tr class="k-footer-template"></tr></tbody></table></div>');
+            var idx, length;
+            var groups = that._groups();
+            var staticCells = $(), staticCols = $();
 
-            html = '<div class="k-grid-footer-static"><table><colgroup /><tbody><tr class="k-footer-template"></tr></tbody></table></div>';
-
-            table = $(html);
-
-            colgroup = table.find("colgroup");
-            tr = table.find("tr");
-
-            for (idx = columns.length - 1; idx >= 0; idx--) {
-                if (columns[idx].static) {
-
-                    that.footer.find(".k-grid-footer-wrap>table>colgroup>col").eq(idx + groups).prependTo(colgroup);
-                    that.footer.find(".k-footer-template>td").eq(idx+groups).prependTo(tr);
-                    hasStaticColumns = true;
-                }
+            staticCells = staticCells.add(cells.filter(".k-group-cell"));
+            for (idx = 0, length = staticColumns(that.columns).length; idx < length; idx++) {
+                staticCells = staticCells.add(cells.eq(idx + groups));
             }
 
-            that.footer.find(".k-grid-footer-wrap>table>colgroup>.k-group-col,.k-hierarchy-col").prependTo(colgroup);
-            that.footer.find(".k-footer-template>.k-group-cell,.k-hierarchy-cell").prependTo(tr);
-
-            if (hasStaticColumns) {
-                this.staticFooter = table.prependTo(that.footer);
+            staticCols = staticCols.add(cols.filter(".k-group-col"));
+            for (idx = 0, length = visibleStaticColumns(that.columns).length; idx < length; idx++) {
+                staticCols = staticCols.add(cols.eq(idx + groups));
             }
+
+            staticCells.appendTo(html.find("tr"));
+            staticCols.appendTo(html.find("colgroup"));
+            that.staticFooter = html.prependTo(footer);
         },
-
 
         _appendStaticColumnHeader: function(container) {
             var that = this,
@@ -4524,7 +4513,7 @@ var __meta__ = {
                         groupFooterTemplate: that.groupFooterTemplate
                     };
 
-            colspan = isStatic ? colspan - staticColumns(that.columns).length : colspan;
+            colspan = isStatic ? colspan - visibleStaticColumns(that.columns).length : colspan;
 
             if(groups > 0) {
 
@@ -4563,7 +4552,7 @@ var __meta__ = {
                var table = this.staticTable;
 
                if (groups > 0) {
-                   colspan = colspan - nonStaticColumns(this.columns).length;
+                   colspan = colspan - visibleNonStaticColumns(this.columns).length;
                    for (idx = 0, length = data.length; idx < length; idx++) {
                        html += this._groupRowHtml(data[idx], colspan, 0, groupRowBuilder, templates);
                    }
