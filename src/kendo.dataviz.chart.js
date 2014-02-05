@@ -3757,6 +3757,14 @@ var __meta__ = {
             }
         },
 
+        plotRange: function(point) {
+            var series = point.series;
+            var valueAxis = this.seriesValueAxis(series);
+            var axisCrossingValue = this.categoryAxisCrossingValue(valueAxis);
+
+            return [axisCrossingValue, point.value.current || axisCrossingValue];
+        },
+
         createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields,
@@ -3892,7 +3900,7 @@ var __meta__ = {
                 invertAxes = options.invertAxes,
                 valueAxis = chart.seriesValueAxis(bullet.options),
                 categorySlot = chart.categorySlot(chart.categoryAxis, options.categoryIx, valueAxis),
-                targetValueSlot = chart.valueSlot(valueAxis, bullet.value.target, bullet.value.target),
+                targetValueSlot = valueAxis.getSlot(bullet.value.target),
                 targetSlotX = invertAxes ? targetValueSlot : categorySlot,
                 targetSlotY = invertAxes ? categorySlot : targetValueSlot,
                 targetSlot = new Box2D(
