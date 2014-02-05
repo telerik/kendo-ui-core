@@ -1485,9 +1485,18 @@ var __meta__ = {
             }
         },
 
+        _adjustStaticHorizontalScrollBar: function() {
+            var content = this.content,
+                scrollbar = (content[0].offsetHeight - content[0].clientHeight > 0 ? kendo.support.scrollbar() : 0);
+
+            this.staticContent.height(content.height() - scrollbar);
+        },
+
         _syncStaicContentHeight: function() {
             if (this.staticTable) {
                 adjustRowsHeight(this.table, this.staticTable);
+
+                this._adjustStaticHorizontalScrollBar();
             }
         },
 
