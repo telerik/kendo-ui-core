@@ -458,8 +458,8 @@ kendo_module({
 
         scrollTo: function(x, y) {
             if (this._native) {
-                this.scrollElement.scrollLeft(x);
-                this.scrollElement.scrollTop(y);
+                this.scrollElement.scrollLeft(abs(x));
+                this.scrollElement.scrollTop(abs(y));
             } else {
                 this.dimensions.refresh();
                 this.movable.moveTo({x: x, y: y});
@@ -467,11 +467,18 @@ kendo_module({
         },
 
         animatedScrollTo: function(x, y) {
-            var from = { x: this.movable.x, y: this.movable.y },
+            var from,
+                to;
+
+            if(this._native) {
+                this.scrollTo(x, y);
+            } else {
+                from = { x: this.movable.x, y: this.movable.y };
                 to = { x: x, y: y };
 
-            this.animatedScroller.setCoordinates(from, to);
-            this.animatedScroller.start();
+                this.animatedScroller.setCoordinates(from, to);
+                this.animatedScroller.start();
+            }
         },
 
         pullHandled: function() {
