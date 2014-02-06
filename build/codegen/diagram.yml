@@ -1,0 +1,14 @@
+:options:
+    - :name: connections
+      :type: Array
+      :description: Collection of predefined connections to be added to the diagram
+    - :name: connections.connection
+      :type: kendo.diagram.Connection
+      :description: DescriptionPH
+    - :name: shapes
+      :type: Array
+      :description: Collection of predefined shapes to be added to the diagram
+    - :name: shapes.shape
+      :type: kendo.diagram.Shape
+      :description: DescriptionPH
+
