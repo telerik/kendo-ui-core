@@ -580,6 +580,7 @@
                 negativeTotals = [],
                 value,
                 plotValue;
+
             for(; seriesIdx < seriesCount; seriesIdx++){
                  currentIdx = idx;
                  for(;idx < seriesCount + currentIdx; idx++){
@@ -594,15 +595,12 @@
                        plotValue =  negativeTotals[categoryIdx];
                     }
 
-                    if(!(errorBars = points[idx].errorBars) || !errorBars[0] ||
-                        errorBars[0].low != (plotValue - errorValue) || errorBars[0].high != (plotValue + errorValue) ||
-                        errorBars[0].isVertical !== false){
-                        return false;
-                    }
+                    var errorBar = points[idx].errorBars[0];
+                    equal(errorBar.low, plotValue - errorValue, "Low value");
+                    equal(errorBar.high, plotValue + errorValue, "High value");
+                    ok(!errorBar.isVertical, "Should be horizontal");
                 }
             }
-
-            return true;
         }
 
         function addedCategoricalPointValues(points, values){
@@ -794,21 +792,21 @@
             var chart = createCategoricalChart([categoricalArrayData,categoricalArrayData], BAR, true),
                 points = chart.points;
 
-            ok(addedStackedBarPointErrorBar(points, [categoricalArrayData,categoricalArrayData]));
+            addedStackedBarPointErrorBar(points, [categoricalArrayData,categoricalArrayData]);
         });
 
         test("errorBars are correctly calculated for stacked negative positive bar data", function() {
             var chart = createCategoricalChart([categoricalNegativeArrayData,categoricalArrayData], BAR, true),
                 points = chart.points;
 
-            ok(addedStackedBarPointErrorBar(points, [categoricalNegativeArrayData, categoricalArrayData]));
+            addedStackedBarPointErrorBar(points, [categoricalNegativeArrayData, categoricalArrayData]);
         });
 
         test("errorBars are correctly calculated for stacked mixed bar data", function() {
             var chart = createCategoricalChart([categoricalNegativeArrayData, categoricalMixedArrayData], BAR, true),
                 points = chart.points;
 
-            ok(addedStackedBarPointErrorBar(points, [categoricalNegativeArrayData, categoricalMixedArrayData]));
+            addedStackedBarPointErrorBar(points, [categoricalNegativeArrayData, categoricalMixedArrayData]);
         });
 
         test("ErrorRangeCalculator is created only for series with errorbars", function() {

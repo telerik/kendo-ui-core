@@ -3492,9 +3492,6 @@ var __meta__ = {
         init: function(plotArea, options) {
             var chart = this;
 
-            chart._groupTotals = {};
-            chart._groups = [];
-
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
@@ -3527,7 +3524,7 @@ var __meta__ = {
                         continue;
                     }
 
-                    categorySum += neighbour.value;
+                    categorySum += math.abs(neighbour.value);
                 };
 
                 return point.value / categorySum;
@@ -3624,24 +3621,6 @@ var __meta__ = {
             return stackWrap;
         },
 
-        updateRange: function(data, categoryIx, series) {
-            var chart = this,
-                value = data.value,
-                isStacked = chart.options.isStacked,
-                totals;
-
-            if (defined(value)) {
-                if (isStacked) {
-                    totals = chart.groupTotals(series.stack);
-                    incrementSlot(value > 0 ? totals.positive : totals.negative,
-                        categoryIx, value
-                    );
-                } else {
-                    CategoricalChart.fn.updateRange.apply(chart, arguments);
-                }
-            }
-        },
-
         computeAxisRanges: function() {
             var chart = this,
                 isStacked = chart.options.isStacked,
@@ -3663,9 +3642,8 @@ var __meta__ = {
 
         stackedErrorRange: function(point, categoryIx) {
             var chart = this,
-                totals = chart.groupTotals(true),
                 value = point.value,
-                plotValue = (value > 0 ? totals.positive[categoryIx] : totals.negative[categoryIx]) - value,
+                plotValue = chart.plotRange(point)[1] - point.value,
                 low = point.low + plotValue,
                 high = point.high + plotValue;
 
@@ -3708,46 +3686,29 @@ var __meta__ = {
             }
         },
 
-        groupTotals: function(stackGroup) {
-            var chart = this,
-                groupName,
-                totals;
-
-            if (typeof stackGroup === STRING) {
-                groupName = stackGroup;
-            } else {
-                groupName = chart._groups[0] || "default";
-            }
-
-            totals = chart._groupTotals[groupName];
-            if (!totals) {
-                totals = chart._groupTotals[groupName] = {
-                    positive: [],
-                    negative: []
-                };
-
-                chart._groups.push(groupName);
-            }
-
-            return totals;
-        },
-
         categoryTotals: function() {
-            var chart = this,
-                groups = chart._groups,
-                groupTotals = chart._groupTotals,
-                name,
-                totals,
-                categoryTotals = { positive: [], negative: [] },
-                i,
-                length = groups.length;
+            var categoryTotals = { positive: [], negative: [] };
+            for (var i = 0; i < this.categoryPoints.length; i++) {
+                var categoryPts = this.categoryPoints[i];
 
-            for (i = 0; i < length; i++) {
-                name = groups[i];
-                totals = groupTotals[name];
-                append(categoryTotals.positive, totals.positive);
-                append(categoryTotals.negative, totals.negative);
-            }
+                var positiveTotal = 0;
+                var negativeTotal = 0;
+                for (var pIx = 0; pIx < categoryPts.length; pIx++) {
+                    var point = categoryPts[pIx];
+                    if (point) {
+                        var to = this.plotRange(point)[1];
+
+                        if (to > 0) {
+                            positiveTotal = math.max(positiveTotal, to);
+                        } else {
+                            negativeTotal = math.min(negativeTotal, to);
+                        }
+                    }
+                }
+
+                categoryTotals.positive.push(positiveTotal);
+                categoryTotals.negative.push(negativeTotal);
+            };
 
             return categoryTotals;
         }
@@ -4757,7 +4718,7 @@ var __meta__ = {
         stackedErrorRange: function(point) {
             var chart = this,
                 stackAxisRange = chart._stackAxisRange,
-                plotValue = chart.plotRange(point)[0] -  point.value,
+                plotValue = chart.plotRange(point)[0] - point.value,
                 low = point.low + plotValue,
                 high = point.high + plotValue;
 
@@ -8735,8 +8696,7 @@ var __meta__ = {
                 name, i;
 
             if (plotArea.stack100) {
-                baseOptions.min = 0;
-                baseOptions.max = 1;
+                baseOptions.roundToMajorUnit = false;
                 baseOptions.labels = { format: "P0" };
             }
 

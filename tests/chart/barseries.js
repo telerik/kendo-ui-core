@@ -729,6 +729,60 @@
         });
 
         // ------------------------------------------------------------
+        module("Bar Chart / 100% Stacked / Positive Values", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [ positiveSeries, positiveSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].min, 0);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].max, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart / 100% Stacked / Negative Values", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [ negativeSeries, negativeSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].min, -1);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].max, 0);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart / 100% Stacked / Mixed Values", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [ negativeSeries, positiveSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].min, -0.5);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].max, 0.5);
+        });
+
+        // ------------------------------------------------------------
         module("Bar Chart / Grouped Stack / Positive Values", {
             setup: function() {
                 setupBarChart(plotArea, {

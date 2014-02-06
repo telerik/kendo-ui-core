@@ -1005,20 +1005,17 @@
             ok(chartSeries.options.isStacked100);
         });
 
-        test("default value axis range is set to 0, 1", function() {
-            var range = plotArea.valueAxis.range();
-            equal(range.min, 0);
-            equal(range.max, 1);
+        test("sets value axis roundToMajorUnit to false", function() {
+            ok(!plotArea.valueAxis.options.roundToMajorUnit);
         });
 
-        test("default value axis range can be overriden", function() {
+        test("roundToMajorUnit can be overriden", function() {
             createPlotArea([{
                 type: "column",
                 stack: { type: "100%" },
                 data: [1, 2, 3]
-            }], { valueAxis: { max: 1.2 } });
-            var range = plotArea.valueAxis.range();
-            equal(range.max, 1.2);
+            }], { valueAxis: { roundToMajorUnit: false } });
+            ok(plotArea.valueAxis.options.roundToMajorUnit);
         });
 
         test("default value axis label format is set to P0", function() {

@@ -80,6 +80,38 @@ function categoricalChartTests(name, TChart) {
     });
 
     // ------------------------------------------------------------
+    module(name + " / Plot range / Stack 100% / Negative values", {
+        setup: function() {
+            createChart([{ data: [-1] }, { data: [-3] }],
+                         { isStacked: true, isStacked100: true });
+        }
+    });
+
+    test("from axis to value", function() {
+        deepEqual(chart.plotRange(chart.points[0]), [0, -0.25]);
+    });
+
+    test("from prev point to value", function() {
+        deepEqual(chart.plotRange(chart.points[1]), [-0.25, -1]);
+    });
+
+    // ------------------------------------------------------------
+    module(name + " / Plot range / Stack 100% / Mixed values", {
+        setup: function() {
+            createChart([{ data: [1] }, { data: [-3] }],
+                         { isStacked: true, isStacked100: true });
+        }
+    });
+
+    test("from axis to value", function() {
+        deepEqual(chart.plotRange(chart.points[0]), [0, 0.25]);
+    });
+
+    test("from prev point to value", function() {
+        deepEqual(chart.plotRange(chart.points[1]), [0, -0.75]);
+    });
+
+    // ------------------------------------------------------------
     module(name + " / Plot range / Stack / Negative values", {
         setup: function() {
             createChart([{ data: [-1] }, { data: [-2] }],
