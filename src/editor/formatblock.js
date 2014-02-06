@@ -237,25 +237,25 @@ var GreedyBlockFormatter = Class.extend({
     },
 
     apply: function (nodes) {
-        var format = this.format,
-            blocks = dom.blockParents(nodes),
-            formatTag = format[0].tags[0],
-            i, len, list, formatter, range,
-            element;
-
-        if (blocks.length && blocks[0].attributes.contentEditable) {
-            // do not break out of contentEditable elements
-            blocks = [];
-        }
+        var format = this.format;
+        var blocks = dom.blockParents(nodes);
+        var formatTag = format[0].tags[0];
+        var i, len, list, formatter, range;
+        var element;
+        var tagName;
 
         if (blocks.length) {
             for (i = 0, len = blocks.length; i < len; i++) {
-                if (dom.is(blocks[i], "li")) {
+                tagName = dom.name(blocks[i]);
+
+                if (tagName == "li") {
                     list = blocks[i].parentNode;
                     formatter = new Editor.ListFormatter(list.nodeName.toLowerCase(), formatTag);
                     range = this.editor.createRange();
                     range.selectNode(blocks[i]);
                     formatter.toggle(range);
+                } else if (formatTag && (tagName == "td" || blocks[i].attributes.contentEditable)) {
+                    new BlockFormatter(format, this.values).apply(blocks[i].childNodes);
                 } else {
                     element = dom.changeTag(blocks[i], formatTag);
                     dom.attr(element, format[0].attr);
