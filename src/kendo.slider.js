@@ -1109,6 +1109,7 @@ var __meta__ = {
                 owner._update(that.selectionStart, that.selectionEnd);
             } else {
                 owner._update(that.val);
+                that.draggable.userEvents._disposeAll();
             }
 
             return that._end();
