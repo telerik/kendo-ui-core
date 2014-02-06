@@ -9,12 +9,6 @@
         element.data("kendoDraggable").trigger(type, e);
     }
 
-    function moveToSort(draggedElement, x, y) {
-        //event should be simulated twice because hint is updated **after** drag event of the Draggable fires
-        move(draggedElement, x, y);
-        move(draggedElement, x, y);
-    }
-
     module("Sortable - placeholder and hint customization", {
         setup: function() {
             QUnit.fixture.append(
@@ -42,7 +36,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 100, 100);
+        move(draggedElement, 100, 100);
 
         equal($(".hint").length, 1, "Hint is initialized");
     });
@@ -56,7 +50,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 100, 100);
+        move(draggedElement, 100, 100);
 
         equal(element.find(".placeholder").length, 1, "Placeholder is appended to the sortable container");
     });
@@ -74,7 +68,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 100, 100);
+        move(draggedElement, 100, 100);
 
         equal($(".hint").length, 1, "Hint is appended to the DOM");
     });
@@ -92,7 +86,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 100, 100);
+        move(draggedElement, 100, 100);
 
         equal(element.find(".placeholder").length, 1, "Placeholder is appended to the sortable container");
     });

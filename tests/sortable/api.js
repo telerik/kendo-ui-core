@@ -9,12 +9,6 @@
         element.data("kendoDraggable").trigger(type, e);
     }
 
-    function moveToSort(draggedElement, x, y) {
-        //event should be simulated twice because hint is updated **after** drag event of the Draggable fires
-        move(draggedElement, x, y);
-        move(draggedElement, x, y);
-    }
-
     module("Sortable - API", {
         setup: function() {
             QUnit.fixture.append(
@@ -68,7 +62,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 100, 100);
+        move(draggedElement, 100, 100);
         ok(!this.placeholder, "Placeholder is not initialized");
         ok(!$(".hint").length, "Hint is not initialized");
     });
@@ -89,7 +83,7 @@
         targetOffset = kendo.getOffset(target);
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top + target.height());
+        move(draggedElement, targetOffset.left, targetOffset.top + target.height());
         //move is trigerred once
         equal(target.next()[0], sortable.placeholder[0], "Placeholder is inserted after the target");
 
@@ -97,7 +91,7 @@
         targetOffset = kendo.getOffset(target);
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top + target.height());
+        move(draggedElement, targetOffset.left, targetOffset.top + target.height());
         //move is trigerred once
         equal(target.next()[0], sortable.placeholder[0], "Placeholder is inserted after the target");
     });
@@ -118,7 +112,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top);
         release(draggedElement, targetOffset.left, targetOffset.top);
     });
 
@@ -138,7 +132,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top);
         release(draggedElement, targetOffset.left, targetOffset.top);
     });
 
@@ -158,7 +152,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
+        move(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
         release(draggedElement, targetOffset.left + 10, targetOffset.top + 10);
 
         ok(element.children().index(draggedElement) == 3, "draggedElement did not change its position.");
@@ -176,7 +170,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 100, 100);
+        move(draggedElement, 100, 100);
         triggerDraggableEvent("dragcancel", {}, element);
     });
 
@@ -188,7 +182,7 @@
         equal(sortable.items().length, 3, "Method returns correct amount of items before placeholder is initialized.");
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 10, 10);
+        move(draggedElement, 10, 10);
 
         equal(sortable.items().length, 3, "Method returns correct amount of items after placeholder is initialized.");
         equal(sortable.items().find(sortable.placeholder).length, 0, "Placeholder is not part of the items collection");
@@ -215,7 +209,7 @@
             sortable = element.data("kendoSortable");
 
         press(item, kendo.getOffset(item).left, kendo.getOffset(item).top);
-        moveToSort(item, 10, 10)
+        move(item, 10, 10)
 
         equal(sortable.indexOf(sortable.placeholder), 0, "index of the placeholder is returned correctly");
 
@@ -233,6 +227,6 @@
         sortable.element.empty();
 
         ok(sortable.isEmpty());
-    })
+    });
 
 })();

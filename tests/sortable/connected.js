@@ -11,12 +11,6 @@
         element.data("kendoDraggable").trigger(type, e);
     }
 
-    function moveToSort(draggedElement, x, y) {
-        //event should be simulated twice because hint is updated **after** drag event of the Draggable fires
-        move(draggedElement, x, y);
-        move(draggedElement, x, y);
-    }
-
     module("Sortable - connected lists", {
         setup: function() {
             QUnit.fixture.append(
@@ -65,11 +59,11 @@
             sortableC = listC.kendoSortable(options);
 
         press(draggedElement, draggableOffset.left, draggableOffset.top + 10);
-        moveToSort(draggedElement, 10, 10);
+        move(draggedElement, 10, 10);
 
         ok(listA.children().first().is(":visible") && listA.children().first().text() == "B1", "Placeholder is moved to the ListA");
 
-        moveToSort(draggedElement, 10, 220);
+        move(draggedElement, 10, 220);
 
         ok(listA.children().first().is(":visible"), "Placeholder is removed from ListA");
         ok(listC.children().last().is(":visible") && listC.children().last().text() == "B1", "Placeholder is moved to the ListC");
@@ -82,7 +76,7 @@
             sortableC = listC.kendoSortable(options);
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 10, 30);
+        move(draggedElement, 10, 30);
         release(draggedElement, 10, 30);
 
         ok(listB.children().length == 3, "Item is removed from ListB");
@@ -104,7 +98,7 @@
 
         sortableA.bind("move", onMove);
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 10, 10);
+        move(draggedElement, 10, 10);
     });
 
     test("Item is appended to the botton of an empty connected list", 2, function() {

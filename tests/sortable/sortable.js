@@ -9,12 +9,6 @@
         element.data("kendoDraggable").trigger(type, e);
     }
 
-    function moveToSort(draggedElement, x, y) {
-        //event should be simulated twice because hint is updated **after** drag event of the Draggable fires
-        move(draggedElement, x, y);
-        move(draggedElement, x, y);
-    }
-
     module("Sortable - sorting with the mouse", {
         setup: function() {
             QUnit.fixture.append(
@@ -91,14 +85,14 @@
 
         //simulate press to trigger draggable's hint initialization
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
 
         equal(sortable.placeholder.index(), 2, "placeholder is moved under the element under cursor");
 
         targetElement = element.children().last();
         targetOffset = kendo.getOffset(targetElement);
 
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
         equal(sortable.placeholder.index(), 4, "placeholder changes its position while the draggedElement moves");
     });
 
@@ -109,7 +103,7 @@
 
         //simulate press to trigger draggable's hint initialization
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 500, 500);
+        move(draggedElement, 500, 500);
 
         equal(sortable.placeholder.index(), 1, "placeholder position does not change");
     });
@@ -123,7 +117,7 @@
 
         //simulate press to trigger draggable's hint initialization
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top);
         release(draggedElement, targetOffset.left, targetOffset.top);
 
         equal(draggedElement.index(), 1, "draggedElement changes its position");
@@ -138,8 +132,8 @@
 
         //simulate press to trigger draggable's hint initialization
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
-        moveToSort(draggedElement, 500, 500);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
+        move(draggedElement, 500, 500);
         release(draggedElement, 500, 500);
 
         equal(draggedElement.index(), 3, "draggedElement is placed at the last valid position");
@@ -179,7 +173,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
 
         ok(!sortable.placeholder, "placeholder is not initialized");
         equal(draggedElement.index(), filteredIndex, "draggedElement did not change its position");
@@ -195,7 +189,7 @@
                 }).data("kendoSortable");
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top - 10);
+        move(draggedElement, targetOffset.left, targetOffset.top - 10);
 
         notEqual(targetElement.index(), filteredIndex, "filtered item changes its position");
     });
@@ -214,7 +208,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
 
         equal(draggedElement.index(), disabledIndex, "draggedElement did not change its position");
     });
@@ -229,7 +223,7 @@
                 }).data("kendoSortable");
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, targetOffset.left, targetOffset.top + 10);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
 
         //+1 is added because placeholder is appended to the element which changes the index
         equal(targetElement.index(), disabledIndex, "The disabled item changes its position");
@@ -270,7 +264,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 100, 100);
+        move(draggedElement, 100, 100);
 
         equal($(".hint").length, 0, "Hint is not appended to the DOM");
         equal(element.children().length, 4, "Placeholder is not appended to the sortable container");
@@ -286,7 +280,7 @@
         });
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        moveToSort(draggedElement, 100, 100);
+        move(draggedElement, 100, 100);
 
         equal($(".hint").length, 1, "Hint is not appended to the DOM");
         equal(element.children().length, 5, "Placeholder is appended to the sortable container");
