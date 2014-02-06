@@ -1357,6 +1357,7 @@ var __meta__ = {
                 reorder(elements(staticRows[idx], rows[idx], ">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
+            that._updateTablesWidth();
             that._applyStaticContainersWidth();
             that._syncStaticContentHeight();
         },
