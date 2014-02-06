@@ -1,0 +1,89 @@
+
+        <div id="example">
+
+            <div class="sortable-wrapper">
+                <h4>Filter</h4>
+                <p>Filtered items cannot be dragged and are not valid drop targets.</p>
+                <div id="sortable-filter">
+                    <div class="not-sortable">Not sortable (Item 1)</div>
+                    <div class="sortable">Item2</div>
+                    <div class="not-sortable">Not sortable (Item 3)</div>
+                    <div class="sortable">Item4</div>
+                    <div class="sortable">Item5</div>
+                    <div class="sortable">Item6</div>
+                    <div class="sortable">Item7</div>
+                    <div class="not-sortable">Not sortable (Item 8)</div>
+                </div>
+            </div>
+
+            <div class="sortable-wrapper">
+                <h4>Disable</h4>
+                <p>Disabled items cannot be dragged but are valid drop targets.</p>
+                <div id="sortable-disable">
+                    <div class="sortable disabled">Disabled (Item 1)</div>
+                    <div class="sortable">Item2</div>
+                    <div class="sortable disabled">Disabled (Item 3)</div>
+                    <div class="sortable">Item4</div>
+                    <div class="sortable">Item5</div>
+                    <div class="sortable">Item6</div>
+                    <div class="sortable">Item7</div>
+                    <div class="sortable disabled">Disabled (Item 8)</div>
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#sortable-filter").kendoSortable({
+                        filter: ".sortable"
+                    });
+
+                    $("#sortable-disable").kendoSortable({
+                        disabled: ".disabled"
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #example {
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+                .sortable-wrapper {
+                    width: 50%;
+                    float: left;
+                }
+
+                .sortable-wrapper > div {
+                    width: 235px;
+                    margin: 0 auto;
+                }
+
+                .sortable, .not-sortable {
+                    list-style-type: none;
+                    padding: 5px;
+                    margin: 3px;
+                    border: 1px solid black;
+                    width: 200px;
+                    text-align: center;
+                    border-radius: 3px;
+                }
+
+                .sortable {
+                    background-color: green;
+                }
+
+                .not-sortable {
+                    background-color: #CCCCCC;
+                    opacity: 0.5;
+                }
+
+                .disabled {
+                    background-color: #FF0000;
+                    opacity: 0.5;
+                }
+
+            </style>
+        </div>

@@ -1,226 +1,290 @@
 (function() {
-    var DataSource = kendo.data.DataSource,
-        Sortable = kendo.ui.Sortable,
-        button,
-        dataSource;
+    var Sortable = kendo.ui.Sortable,
+        Draggable = kendo.ui.Draggable,
+        element,
+        filteredIndex,
+        disabledIndex;
 
-    function setup(element, options) {
-        return new Sortable(element || button.attr("data-field", "foo"), options || { dataSource: dataSource });
+    function triggerDraggableEvent(type, e, element) {
+        element.data("kendoDraggable").trigger(type, e);
     }
 
-    module("kendo.ui.Sortable", {
+    module("Sortable - sorting with the mouse", {
         setup: function() {
-            dataSource = DataSource.create( { data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 } ] } );
-            button = $("<button />");
+            QUnit.fixture.append(
+                '<ul id="sortable">' +
+                    '<li>foo</li>' +
+                    '<li>bar</li>' +
+                    '<li>baz</li>' +
+                    '<li>qux</li>' +
+                '</ul>'
+            );
+
+            element = $("#sortable");
         },
         teardown: function() {
-            kendo.destroy(button);
+            kendo.destroy(QUnit.fixture);
         }
     });
 
-    test("clicking an item sorts by that field in asc dir", function() {
-        var sorter = setup();
-        button.click();
-
-        equal(dataSource.view()[0].foo, 1);
+    test("widget creates draggable component", 1, function() {
+        element.kendoSortable();
+        ok(element.data("kendoDraggable") instanceof Draggable);
     });
 
-    test("sorting the data source assigns the dir data", function() {
-        var sorter = setup();
-        dataSource.sort( { field: "foo", dir: "desc" });
-        equal(button.attr("data-dir"), "desc");
+    test("placeholder is inserted before dragged element on dragstart", 3, function() {
+        var draggedElement = element.children().eq(0),
+            sortable = element.kendoSortable().data("kendoSortable");
+
+        triggerDraggableEvent(
+            "dragstart",
+            { currentTarget: draggedElement, target: draggedElement }, 
+            element
+        );
+
+        equal(element.children().length, 5, "placeholder is attached to the sortable element");
+        equal(draggedElement.text(), draggedElement.prev().text(), "placeholder is attached before draggedElement");
+        equal(sortable.placeholder.css("visibility"), "hidden", "placeholder element have visibility: hidden");
     });
 
-    test("sorting twice clears the dir data", function() {
-        var sorter = setup();
-        dataSource.sort( { field: "foo", dir: "desc" });
-        dataSource.sort( { field: "bar", dir: "desc" });
-        equal(button.attr("data-dir"), undefined);
+    test("the dragged element is hidden on dragstart", 1, function() {
+        var draggedElement = element.children().eq(0),
+            sortable = element.kendoSortable().data("kendoSortable");
+
+        triggerDraggableEvent(
+            "dragstart",
+            { currentTarget: draggedElement, target: draggedElement },
+            element
+        );
+
+        ok(!draggedElement.is(":visible"), "draggedElement is hidden");
     });
 
-    test("clicking changes the sort direction", function() {
-        var sorter = setup();
-        button.click();
-        button.click();
+    test("placeholder is removed and dragged element is shown on dragcancel", 2, function() {
+        var draggedElement = element.children().eq(0),
+            sortable = element.kendoSortable().data("kendoSortable"),
+            initialChildrenCount = element.children().length;
 
-        equal(button.attr("data-dir"), "desc");
+        triggerDraggableEvent(
+            "dragstart",
+            { currentTarget: draggedElement, target: draggedElement },
+            element
+        );
+        triggerDraggableEvent("dragcancel", {}, element);
+
+        ok(draggedElement.is(":visible"), "draggedElement is shown");
+        ok(initialChildrenCount === element.children().length, "placeholder element is removed");
     });
 
-    test("desc changes to empty", function() {
-        var sorter = setup(button.attr("data-field", "foo").attr("data-dir", "desc"));
+    test("placeholder is moved while user drags", 2, function() {
+        var draggedElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(1),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable().data("kendoSortable");
 
-        button.click();
+        //simulate press to trigger draggable's hint initialization
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
 
-        equal(button.attr("data-dir"), undefined);
+        equal(sortable.placeholder.index(), 2, "placeholder is moved under the element under cursor");
+
+        targetElement = element.children().last();
+        targetOffset = kendo.getOffset(targetElement);
+
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
+        equal(sortable.placeholder.index(), 4, "placeholder changes its position while the draggedElement moves");
     });
 
-    test("clicking unsorted element sets its direrction to ascending", function() {
-        var sorter = setup();
-        button.click();
+    test("placeholder is not moved if item is dragged outside of the sortable container", 1, function() {
+        var draggedElement = element.children().eq(1),
+            draggableOffset = kendo.getOffset(draggedElement),
+            sortable = element.kendoSortable().data("kendoSortable");
 
-        equal(button.attr("data-dir"), "asc");
+        //simulate press to trigger draggable's hint initialization
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, 500, 500);
+
+        equal(sortable.placeholder.index(), 1, "placeholder position does not change");
     });
 
+    test("item is sorted correctly on dragend", 1, function() {
+        var draggedElement = element.children().eq(3),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(1),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable().data("kendoSortable");
 
-    test("multiple sort mode", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple" } );
+        //simulate press to trigger draggable's hint initialization
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top);
+        release(draggedElement, targetOffset.left, targetOffset.top);
 
-        dataSource.sort( { field: "bar", dir: "asc" } );
-
-        button.click();
-
-        var sort = dataSource.sort();
-
-        equal(sort.length, 2);
-        equal(sort[0].field, "bar");
-        equal(sort[1].field, "foo");
+        equal(draggedElement.index(), 1, "draggedElement changes its position");
     });
 
-    test("multiple sort mode and unsorting", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple" } );
+    test("item is placed at the last valid position even if item is released outside of the sortable container", 1, function() {
+        var draggedElement = element.children().eq(2),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(3),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable().data("kendoSortable");
 
-        dataSource.sort( [{ field: "bar", dir: "asc" }, { field: "foo", dir: "desc" } ] );
+        //simulate press to trigger draggable's hint initialization
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
+        move(draggedElement, 500, 500);
+        release(draggedElement, 500, 500);
 
-        button.click();
-
-        var sort = dataSource.sort();
-
-        equal(sort.length, 1);
-        equal(sort[0].field, "bar");
+        equal(draggedElement.index(), 3, "draggedElement is placed at the last valid position");
     });
 
-    test("compare option propagates to data source", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, compare: $.noop } );
+    module("Sortable - filtering and excluding items", {
+        setup: function() {
+            QUnit.fixture.append(
+                '<ul id="sortable">' +
+                    '<li class="item">foo</li>' +
+                    '<li class="filtered">bar</li>' +
+                    '<li class="item">baz</li>' +
+                    '<li class="item disabled">qux</li>' +
+                '</ul>'
+            );
 
-        button.click();
-
-        var sort = dataSource.sort();
-
-        equal(sort[0].compare, $.noop);
+            element = $("#sortable");
+            filteredIndex = $("#sortable .filtered").index();
+            disabledIndex = $("#sortable .disabled").index();
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
     });
 
-    test("dir changes to asc when allowUnsort is false", function() {
-        var sorter = setup(button.attr("data-field", "foo").data("dir", "desc"), { dataSource: dataSource, allowUnsort: false } );
+    test("user is not able to drag items that does not match the filter", 2, function() {
+        var draggedElement = element.children().eq(filteredIndex),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(2),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable({
+                    filter: ".item"
+                }).data("kendoSortable");
 
-        button.click();
+        sortable.bind("start", function(e) {
+            ok(false, "start event is not fired");
+        });
 
-        equal(button.attr("data-dir"), "asc");
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
+
+        ok(!sortable.placeholder, "placeholder is not initialized");
+        equal(draggedElement.index(), filteredIndex, "draggedElement did not change its position");
     });
 
-    test("asc arrow is rendered", function() {
-        var sorter = setup();
-        button.click();
+    test("filtered items are not valid drop targets", 1, function() {
+        var draggedElement = element.children().eq(2),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(filteredIndex),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable({
+                    filter: ".item"
+                }).data("kendoSortable");
 
-        equal(button.find("span.k-icon.k-i-arrow-n").length, 1);
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top - 10);
+
+        notEqual(targetElement.index(), filteredIndex, "filtered item changes its position");
     });
 
-    test("desc arrow is rendered", function() {
-        var sorter = setup();
-        button.click();
-        button.click();
+    test("user is not able to drag disabled items", 1, function() {
+        var draggedElement = element.children().eq(disabledIndex),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(0),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable({
+                    disabled: ".disabled"
+                }).data("kendoSortable");
 
-        equal(button.find("span.k-icon.k-i-arrow-s").length, 1);
+        sortable.bind("start", function(e) {
+            ok(false, "start event is not fired");
+        });
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
+
+        equal(draggedElement.index(), disabledIndex, "draggedElement did not change its position");
     });
 
-    test("sort arrow is removed", function() {
-        var sorter = setup();
-        button.click();
-        button.click();
-        button.click();
+    test("disabled items are valid drop targets and move then users drags an item onto them", 2, function() {
+        var draggedElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(disabledIndex),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable({
+                    disabled: ".disabled"
+                }).data("kendoSortable");
 
-        equal(button.find("span.k-icon.k-i-arrow-s").length, 0);
-        equal(button.find("span.k-icon.k-i-arrow-n").length, 0);
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top + 10);
+
+        //+1 is added because placeholder is appended to the element which changes the index
+        equal(targetElement.index(), disabledIndex, "The disabled item changes its position");
+
+        release(draggedElement, targetElement.left, targetOffset.top + 10);
+        equal(draggedElement.index(), 3, "draggedElement did not change its position");
     });
 
-    test("multiple sorting on same field", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: true } );
+    module("Sortable - draggable handler", {
+        setup: function() {
+            QUnit.fixture.append(
+                '<ul id="sortable">' +
+                    '<li><span class="handler">*</span><p>foo</p></li>' +
+                    '<li><span class="handler">*</span><p>bar</p></li>' +
+                    '<li><span class="handler">*</span><p>baz</p></li>' +
+                    '<li><span class="handler">*</span><p>qux</p></li>' +
+                '</ul>'
+            );
 
-        button.click().click();
+            element = $("#sortable");
 
-        var sort = dataSource.sort();
-
-        equal(sort.length, 1);
-        equal(sort[0].field, "foo");
-        equal(sort[0].dir, "desc");
+            element.kendoSortable({
+                handler: ".handler",
+                hint: $("<div class='hint'>hint</div>")
+            });
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
     });
 
-    test("mode:multiple unsorting field", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: true } );
+    test("If mouse is not over the handler the element cannot be dragged", 3, function() {
+        var draggedElement = element.children().eq(0).find("p"),
+            draggableOffset = kendo.getOffset(draggedElement);
 
-        button.click().click().click();
+        element.data("kendoSortable").bind("start", function(e) {
+            ok(false, "start event is not fired");
+        });
 
-        var sort = dataSource.sort();
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, 100, 100);
 
-        equal(sort.length, 0);
+        equal($(".hint").length, 0, "Hint is not appended to the DOM");
+        equal(element.children().length, 4, "Placeholder is not appended to the sortable container");
+        ok(draggedElement.is(":visible"), "Draggable element is not hidden");
     });
 
-    test("multiple sorting on same field allowUnsort: false", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: false } );
+    test("If mouse is over the handler the element can be dragged", 4, function() {
+        var draggedElement = element.children().eq(0).find(".handler"),
+            draggableOffset = kendo.getOffset(draggedElement);
 
-        button.click().click();
+        element.data("kendoSortable").bind("start", function(e) {
+            ok(true, "start event is fired");
+        });
 
-        var sort = dataSource.sort();
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, 100, 100);
 
-        equal(sort.length, 1);
-        equal(sort[0].field, "foo");
-        equal(sort[0].dir, "desc");
-    });
-
-    test("mode:multiple unsorting field allowUnsort: false", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, mode: "multiple", allowUnsort: false } );
-
-        button.click().click().click();
-
-        var sort = dataSource.sort();
-
-        equal(sort.length, 1);
-        equal(sort[0].field, "foo");
-        equal(sort[0].dir, "asc");
-    });
-
-    test("aria-sort is not set when not sorted", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, aria: true } );
-
-        button;
-
-        ok(!button.attr("aria-sort"));
-    });
-
-    test("aria-sort ascending is set", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, aria: true } );
-
-        button.click();
-
-        equal(button.attr("aria-sort"), "ascending");
-    });
-
-    test("aria-sort descending is set", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource, aria: true } );
-
-        button.click().click();
-
-        equal(button.attr("aria-sort"), "descending");
-    });
-
-    test("aria-sort is not applied when not enabled", function() {
-        var sorter = setup(button.attr("data-field", "foo"), { dataSource: dataSource } );
-
-        button.click();
-
-        equal(button.attr("aria-sort"), "ascending");
-    });
-
-    test("clicking element which does not match the filter has no effect", function() {
-        var sorter = setup(button.attr("data-field", "foo").addClass("k-column-active"), {
-            dataSource: dataSource,
-            filter: ":not(.k-column-active)"
-        } );
-
-        button.click();
-
-        var sort = dataSource.sort();
-
-        ok(!sort);
+        equal($(".hint").length, 1, "Hint is not appended to the DOM");
+        equal(element.children().length, 5, "Placeholder is appended to the sortable container");
+        ok(!draggedElement.is(":visible"), "Draggable element is hidden");
     });
 
 })();

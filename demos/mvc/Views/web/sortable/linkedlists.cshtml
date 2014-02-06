@@ -1,0 +1,97 @@
+
+        <div id="example">
+
+            <h3>One way connection</h3>
+            <div class="list-wrapper">
+                <ul id="sortable-listA">
+                    <li class="listA">Item1</li>
+                    <li class="listA">Item2</li>
+                    <li class="listA">Item3</li>
+                </ul>
+
+                <ul id="sortable-listB">
+                    <li class="listB">Item1</li>
+                    <li class="listB">Item2</li>
+                    <li class="listB">Item3</li>
+                </ul>
+            </div>
+
+            <h3>Two way connection</h3>
+            <div class="list-wrapper">
+                <ul id="sortable-listC">
+                    <li class="listC">Item1</li>
+                    <li class="listC">Item2</li>
+                    <li class="listC">Item3</li>
+                </ul>
+
+                <ul id="sortable-listD">
+                    <li class="listD">Item1</li>
+                    <li class="listD">Item2</li>
+                    <li class="listD">Item3</li>
+                </ul>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#sortable-listA").kendoSortable({
+                        connectWith: "#sortable-listB"
+                    });
+
+                    $("#sortable-listB").kendoSortable();
+
+                    $("#sortable-listC").kendoSortable({
+                        connectWith: "#sortable-listD"
+                    });
+
+                    $("#sortable-listD").kendoSortable({
+                        connectWith: "#sortable-listC"
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #example {
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+
+                .list-wrapper {
+                    overflow: hidden;
+                }
+
+                #sortable-listA, #sortable-listB, #sortable-listC, #sortable-listD {
+                    width: 50%;
+                    margin: 0;
+                    padding: 0;
+                    float: left;
+                }
+
+                .listA, .listB, .listC, .listD {
+                    list-style-type: none;
+                    margin: 5px;
+                    line-height: 30px;
+                    width: 200px;
+                    text-align: center;
+                    border: 1px solid black;
+                    color: white;
+                }
+
+                .listA {
+                    background-color: #0033FF;
+                }
+
+                .listB {
+                    background-color: #CC0033;
+                }
+
+                .listC {
+                    background-color: #66CC66;
+                }
+
+                .listD {
+                    background-color: #FFCC33;
+                }
+            </style>
+        </div>
