@@ -672,6 +672,16 @@ var __meta__ = {
         }
     }
 
+    function tableWidth(table) {
+        var idx, length, width = 0;
+        var cols = table.find(">colgroup>col");
+
+        for (idx = 0, length = cols.length; idx < length; idx += 1) {
+            width += parseInt(cols[idx].style.width, 10);
+        }
+
+        return width;
+    }
 
     var Grid = Widget.extend({
         init: function(element, options) {
@@ -1155,15 +1165,19 @@ var __meta__ = {
 
                             if (options.scrollable && gridWidth) {
                                 if (constrain) {
-                                    that._footerWidth = totalWidth;
+                                    width = totalWidth;
                                 } else {
-                                    that._footerWidth = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
+                                    width = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
                                 }
 
                                 contentTable
                                     .add(header)
                                     .add(footer.find("table"))
-                                    .css('width', that._footerWidth);
+                                    .css('width', width);
+
+                                if (!isStatic) {
+                                    that._footerWidth = width;
+                                }
                             }
                         }
                     },
@@ -4253,6 +4267,26 @@ var __meta__ = {
             return data;
         },
 
+        _updateTablesWidth: function() {
+            var that = this,
+                tables;
+
+            tables =
+                $(">.k-grid-footer>.k-grid-footer-wrap>table", that.wrapper)
+                .add(that.thead.parent())
+                .add(that.table);
+
+            that._footerWidth = tableWidth(tables.eq(0));
+            tables.width(that._footerWidth);
+
+            tables =
+                $(">.k-grid-footer>.k-grid-footer-static>table", that.wrapper)
+                .add(that.staticHeader.find(">table"))
+                .add(that.staticTable);
+
+            tables.width(tableWidth(tables.eq(0)));
+        },
+
         hideColumn: function(column) {
             var that = this,
                 cell,
@@ -4302,6 +4336,7 @@ var __meta__ = {
             }
 
             if (that.staticTable) {
+                that._updateTablesWidth();
                 that._applyStaticContainersWidth();
                 that._syncStaticContentHeight();
                 that._syncStaticHeaderHeight();
@@ -4387,6 +4422,7 @@ var __meta__ = {
             }
 
             if (that.staticTable) {
+                that._updateTablesWidth();
                 that._applyStaticContainersWidth();
                 that._syncStaticContentHeight();
                 that._syncStaticHeaderHeight();
