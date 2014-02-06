@@ -421,6 +421,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="Sortable"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Sortable()
+        ///             .For("Container")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual SortableBuilder Sortable()
+        {
+            return new SortableBuilder(new Sortable(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Tooltip"/>.
         /// </summary>
         /// <example>

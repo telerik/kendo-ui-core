@@ -413,6 +413,7 @@
     <Compile Include="Controllers\Web\Grid\SortingController.cs" />
     <Compile Include="Controllers\Web\Grid\Toolbar_TemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\Virtualization_Remote_DataController.cs" />
+    <Compile Include="Controllers\Web\Sortable\IndexController.cs" />
     <Compile Include="Controllers\Web\ListView\EditingController.cs" />
     <Compile Include="Controllers\Web\ListView\IndexController.cs" />
     <Compile Include="Controllers\Web\ListView\NavigationController.cs" />
@@ -2941,6 +2942,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\aspx\Views\dataviz\map\bing.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\sortable\index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

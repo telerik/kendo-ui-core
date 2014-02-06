@@ -1290,6 +1290,9 @@
     <Compile Include="UI\Slider\SliderOrientation.cs" />
     <Compile Include="UI\Slider\SliderTickPlacement.cs" />
     <Compile Include="UI\Slider\Html\SliderHtmlBuilder.cs" />
+    <Compile Include="UI\Sortable\Fluent\SortableBuilder.cs" />
+    <Compile Include="UI\Sortable\Fluent\SortableEventBuilder.cs" />
+    <Compile Include="UI\Sortable\Sortable.cs" />
     <Compile Include="UI\Sparkline\Enums\ChartSeriesType.cs" />
     <Compile Include="UI\Sparkline\Fluent\SparklineSeriesDefaultsBuilder.cs" />
     <Compile Include="UI\Sparkline\Fluent\SparklineSeriesFactory.cs" />
