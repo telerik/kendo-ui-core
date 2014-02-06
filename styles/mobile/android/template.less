@@ -1,0 +1,492 @@
+@android-main-color: #fff;
+@android-background-color: #000;
+@android-active-color: #33b5e5;
+@android-border-color: #e7e7e7;
+
+.km-android,
+.km-android .km-content
+{
+    background: @android-background-color;
+}
+
+.km-android .km-navbar,
+.km-android .km-toolbar,
+.km-android .km-button,
+.km-android .km-switch,
+.km-android .km-buttongroup,
+.km-android .km-tabstrip
+{
+    color: @android-main-color;
+    border-color: @android-border-color;
+    background-color: @android-background-color;
+}
+
+.km-android .km-content,
+.km-android .km-view-title,
+.km-android .km-dialog-title
+{
+    color: @android-main-color;
+}
+
+.km-android,
+.km-android .km-content
+{
+    -webkit-linear-gradient: top, rgba(0,0,0,0), rgba(255,255,255,.2);
+    -webkit-gradient: linear, 0 0, 0 100%, from(rgba(0,0,0,0)), to(rgba(255,255,255,.2));
+}
+
+/* Button */
+
+.km-android .km-button
+{
+    border-color: rgba(255,255,255,.2) rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(255,255,255,.2);
+    background: #5B5B5B;
+}
+
+.km-android .km-button:active,
+.km-android .km-button.km-state-active,
+.km-android input[type=file]:active,
+.km-android input[type=file]:focus
+{
+    background: #42BEE1;
+}
+
+/* Switch */
+
+.km-android .km-switch-container
+{
+    background: #222;
+}
+
+.km-android .km-switch-handle
+{
+    color: #bbb;
+    border-color: rgba(255,255,255,.2) rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(255,255,255,.2);
+    background: #5B5B5B;
+}
+
+.km-android .km-switch-on .km-switch-handle
+{
+    color: #fff;
+    background-color: #2F97BE;
+}
+
+/* Badges & Details */
+
+.km-android .km-badge,
+.km-android .km-detail
+{
+    .linear-gradient-image(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
+    color: @android-main-color;
+    border-color: #FFF;
+    background-color: #bc0404;
+}
+
+.km-android .km-badge
+{
+    background: #33b5e5;
+    .box-shadow(0 2px 2px rgba(0,0,0,.5));
+}
+
+.km-android input[type=password],
+.km-android input[type=search],
+.km-android input[type=number],
+.km-android input[type=tel],
+.km-android input[type=url],
+.km-android input[type=email],
+.km-android input[type=month],
+.km-android input[type=color],
+.km-android input[type=week],
+.km-android input[type=date],
+.km-android input[type=time],
+.km-android input[type=datetime],
+.km-android input[type=datetime-local],
+.km-android input[type=text]:not(.k-input),
+.km-android select:not([multiple]),
+.km-android input[type=file],
+.km-android .k-dropdown,
+.km-android textarea,
+.km-android .k-dropdown .k-input,
+.km-android .km-popup .k-state-hover,
+.km-android li.km-actionsheet-title,
+.km-android .km-popup .k-item,
+.km-android .km-actionsheet > li > a,
+.km-android .km-actionsheet,
+.km-android .km-popup .k-list-container,
+.km-android .km-list .km-icon,
+.km-android .km-detail .km-icon,
+.km-android .km-scroller-pull .km-icon,
+.km-android .km-navbar [class*=item] .km-button,
+.km-android .km-toolbar > .km-button,
+.km-android .km-tabstrip .km-button:active,
+.km-android .km-tabstrip .km-state-active
+{
+    color: @android-main-color;
+}
+
+.km-android .km-detail .km-text
+{
+    border-left-color: #ddd;
+}
+
+.km-android .km-rowinsert
+{
+    background-color: #24870D;
+}
+
+.km-android .km-rowdelete
+{
+    background-color: #B01B1A;
+}
+
+/* ButtonGroup */
+
+.km-android .km-buttongroup .km-button,
+.km-android .km-navbar .km-buttongroup .km-button
+{
+    border-color: rgba(255,255,255,.2) rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(255,255,255,.2);
+    background: #5B5B5B;
+}
+
+.km-android .km-buttongroup .km-state-active,
+.km-android .km-navbar .km-buttongroup .km-state-active
+{
+    background: #42BEE1;
+}
+
+/* TabStrip */
+
+.km-android .km-tabstrip
+{
+    background: @android-active-color;
+    border-bottom-color: rgba(255,255,255,.4);
+}
+
+.km-android .km-tabstrip .km-button
+{
+    background: #000;
+}
+
+/* NavBar */
+
+.km-android .km-header
+{
+    .box-shadow(~"0 2px 0 #222, 0 -2px 0 #222");
+}
+
+.km-android .km-navbar [class*=item] .km-text,
+.km-android .km-tabstrip .km-text
+{
+    border-right: 1px solid #444;
+}
+
+.km-android .km-navbar [class*=item] .km-text
+{
+    border-right-color: rgba(255,255,255,.4);
+}
+
+/* ListView */
+
+.km-android .km-list > li
+{
+    -webkit-box-shadow: 0 1px 1px rgba(255,255,255,.1);
+    box-shadow: 0 -1px 0 rgba(255,255,255,.1);
+}
+
+.km-android .km-group-title
+{
+    color: #777;
+    -webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,.3);
+    box-shadow: inset 0 -1px 0 rgba(255,255,255,.3);
+}
+
+.km-android .km-scroll-header .km-group-title
+{
+    border-bottom-color: 1px solid #333;
+    background: #000;
+}
+
+html .km-android .km-navbar .km-state-active,
+html .km-android .km-toolbar .km-state-active,
+.km-android .km-detail.km-state-active,
+.km-android .km-state-active .km-detail,
+.km-android .km-state-active .km-listview-link,
+.km-android .km-state-active .km-listview-label
+{
+    background: rgba(76,190,232,.5);
+}
+
+.km-android .km-filter-wrap:before,
+.km-android .km-filter-reset .km-clear
+{
+	color: #adadad;
+}
+
+.km-android .km-item label:before
+{
+    border-color: #000;
+    background-color: rgb(54, 54, 54);
+    .linear-gradient-image(top, rgb(54, 54, 54), rgb(43, 43, 43));
+    .box-shadow(0 0 1px 2px #808080);
+}
+
+/* Icons */
+
+.km-android .km-button .km-icon,
+.km-android .km-navbar .km-icon
+{
+    color: rgba(255,255,255,.8);
+}
+
+.km-android .km-tabstrip .km-icon
+{
+    color: #555;
+}
+
+.km-android .km-tabstrip .km-state-active .km-icon
+{
+    color: @android-active-color;
+}
+
+/* ScrollView */
+
+.km-android .km-pages .km-current-page
+{
+    background: rgba(51,181,229,.6);
+}
+
+/* Slider */
+
+.km-android .k-slider .k-draghandle,
+.km-android .k-slider .k-draghandle:hover
+{
+    background: rgba(51,181,229,.5);
+    background-image: -webkit-radial-gradient(#33B5E5 .2em, transparent .22em);
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 10, color-stop(30%, #33B5E5), color-stop(32%, transparent));
+    background-image: -moz-radial-gradient(#33B5E5 .2em, transparent .22em);
+    background-image: radial-gradient(#33B5E5 .2em, transparent .22em);
+}
+
+.km-android .k-slider .k-draghandle:active
+{
+    .box-shadow(~"inset 0 0 0 1px #33B5E5, inset 0 0 0 1em rgba(51,181,229,.5)");
+}
+
+.km-android .k-slider-selection
+{
+    background: #33B5E5;
+}
+
+/* Scroller */
+
+.km-android .km-touch-scrollbar
+{
+    background-color: #33b5e5;
+}
+
+/* Loading */
+
+.km-android .km-loader
+{
+    background-color: rgba(0,0,0,.5);
+}
+
+/* Forms */
+
+.km-android input[type=password],
+.km-android input[type=search],
+.km-android input[type=number],
+.km-android input[type=tel],
+.km-android input[type=url],
+.km-android input[type=email],
+.km-android input[type=text]:not(.k-input),
+.km-android textarea
+{
+    border-color: rgba(127,127,127,.5);
+    background: no-repeat 0 0, transparent no-repeat 100% 0;
+    .linear-gradient-image(top, transparent 90%, #777 90%, #777,
+                           top, transparent 90%, #777 90%, #777);
+    background-size: 1px 100%;
+}
+
+.km-android input[type=password]:focus,
+.km-android input[type=search]:focus,
+.km-android input[type=number]:focus,
+.km-android input[type=tel]:focus,
+.km-android input[type=url]:focus,
+.km-android input[type=email]:focus,
+.km-android input[type=text]:not(.k-input):focus,
+.km-android textarea:focus
+{
+    border-color: rgba(40,170,220,.6);
+    background: no-repeat 0 0, transparent no-repeat 100% 0;
+    .linear-gradient-image(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6),
+                           top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6));
+    background-size: 2px 100%;
+}
+
+.km-android input[type=month],
+.km-android input[type=color],
+.km-android input[type=week],
+.km-android input[type=date],
+.km-android input[type=time],
+.km-android input[type=datetime],
+.km-android input[type=datetime-local],
+.km-android select:not([multiple]),
+.km-android .k-dropdown .k-dropdown-wrap
+{
+    border-bottom-color: rgba(127,127,127,.5);
+    background: 100% 100% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAACWCAQAAABj2vCcAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAf0lEQVR4XuzLsQkAAAwCsP7/tD1CcAqZcykMsizLsizLsizLsizLsizLsizLsizL8ncuxzYAgEAAhJz893BazVfXE2quGc9z32asZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqOUq5CrkKuStlKuS3QdJPtFaleZ1DgAAAABJRU5ErkJggg==") transparent;
+    background-size: auto 100%;
+}
+
+.km-android input[type=month]:active,
+.km-android input[type=color]:active,
+.km-android input[type=week]:active,
+.km-android input[type=date]:active,
+.km-android input[type=time]:active,
+.km-android input[type=datetime]:active,
+.km-android input[type=datetime-local]:active,
+.km-android input[type=month]:focus,
+.km-android input[type=color]:focus,
+.km-android input[type=week]:focus,
+.km-android input[type=date]:focus,
+.km-android input[type=time]:focus,
+.km-android input[type=datetime]:focus,
+.km-android input[type=datetime-local]:focus,
+.km-android select:not([multiple]):focus,
+.km-android .k-dropdown .k-state-focused
+{
+    background-color: rgba(51,181,229,.6);
+}
+
+.km-android select:not([multiple]):focus option
+{
+    color: #000;
+    background-color: #fff;
+}
+/* ActionSheet */
+
+.km-android li.km-actionsheet-title
+{
+    color: #53d5ff;
+    border-color: #53d5ff;
+}
+
+/* PopUp */
+
+.km-android .km-shim,
+.km-phone .km-android .km-actionsheet-wrapper
+{
+    background: rgba(0,0,0,.5);
+}
+
+.km-android .km-actionsheet,
+.km-android .km-popup .k-list-container
+{
+    background: #222;
+    .box-shadow(~"2px 2px 5px rgba(0,0,0,.5)");
+}
+
+.km-android li.km-actionsheet-title,
+.km-android .km-popup .k-item,
+.km-android .km-actionsheet > li > a
+{
+    border-color: #444;
+}
+
+.km-android .km-popup .k-state-hover,
+.km-android .km-popup .k-state-focused,
+.km-android .km-popup .k-state-selected,
+.km-android .km-actionsheet > li > a:focus,
+.km-android .km-actionsheet > li > a:active
+{
+    background: #33b5e5;
+}
+
+.km-android .km-popup .k-state-hover
+{
+    background: rgba(51,181,229,.6);
+}
+
+/* Checkboxes and Radios */
+
+.km-android .km-listview-label input[type=radio],
+.km-android .km-listview-label input[type=checkbox]
+{
+    border-color: #555;
+    .box-shadow(0 0 1px #555);
+}
+
+.km-android .km-listview-label input[type=checkbox]:checked:after
+{
+    color: #41a6cb;
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+
+.km-android .km-listview-label input[type=radio]:checked:after
+{
+    background: #41a6cb;
+    .box-shadow(0 0 3px #61C6EB);
+}
+
+.km-android .km-state-active input[type=radio]:before,
+.km-android .km-state-active input[type=checkbox]:before
+{
+    background-color: rgba(97,198,235,.2);
+    .box-shadow(0 0 1px rgba(97,198,235,.4));
+}
+
+.km-android .km-state-active input[type=radio],
+.km-android .km-state-active input[type=checkbox]
+{
+    border-color: #ddd;
+    .box-shadow(0 0 1px #ddd);
+}
+
+/* SplitView */
+
+.km-android .km-splitview .km-pane:last-child
+{
+    .box-shadow(-1px 0 1px 1px rgba(0,0,0,.3));
+}
+
+.km-android .km-popup.km-pane .km-view,
+.km-android .km-splitview .km-pane:last-child .km-content
+{
+    border-color: rgba(127,127,127,.4);
+    .box-shadow(inset 0 0 1px 1px #000);
+    background: #202125 none;
+}
+
+.km-android .km-pane
+{
+    background: #000;
+}
+
+/* ModalView */
+
+.km-android .km-modalview
+{
+    .box-shadow(~"0 0 10px rgba(0,0,0,.5), 0 0 2px rgba(255,255,255,.7)");
+    border-color: #000;
+}
+
+.km-android .km-modalview .km-navbar,
+.km-android .km-modalview .km-content
+{
+    background: #282828;
+}
+
+.km-android .km-modalview .km-view-title
+{
+    .box-shadow(inset 0 -2px rgba(255,255,255,.1));
+}
+
+/* Tablet Styles */
+
+.km-tablet .km-android *:not(.km-actionsheet-phone) > .km-actionsheet
+{
+    .box-shadow(0 0 7px #000);
+}
+
