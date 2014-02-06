@@ -1,142 +1,366 @@
+/* jshint eqnull: true */
 (function(f, define){
-    define([ "./kendo.data" ], f);
+    define([ "./kendo.draganddrop" ], f);
 })(function(){
 
 var __meta__ = {
     id: "sortable",
     name: "Sortable",
     category: "framework",
-    depends: [ "data" ],
-    advanced: true
+    depends: [ "draganddrop" ]
 };
 
-/* jshint eqnull: true */
 (function($, undefined) {
     var kendo = window.kendo,
-        proxy = $.proxy,
-        DIR = "dir",
-        ASC = "asc",
-        SINGLE = "single",
-        FIELD = "field",
-        DESC = "desc",
-        NS = ".kendoSortable",
-        TLINK = ".k-link",
-        ARIASORT = "aria-sort",
-        Widget = kendo.ui.Widget;
+        Widget = kendo.ui.Widget,
+
+        START = "start",
+        MOVE = "move",
+        END = "end",
+        CHANGE = "change",
+        CANCEL = "cancel",
+
+        ACTION_SORT = "sort",
+        ACTION_REMOVE = "remove",
+        ACTION_RECEIVE = "receive",
+
+        DEFAULT_FILTER = ">*",
+        MISSING_INDEX = -1;
+
+    function containsOrEqualTo(parent, child) {
+        try {
+            return $.contains(parent, child) || parent == child;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function defaultHint(element) {
+        return element.clone();
+    }
+
+    function defaultPlaceholder(element) {
+        return element.clone().removeAttr("id").css("visibility", "hidden");
+    }
 
     var Sortable = Widget.extend({
         init: function(element, options) {
-            var that = this, link;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
-            that._refreshHandler = proxy(that.refresh, that);
-
-            that.dataSource = that.options.dataSource.bind("change", that._refreshHandler);
-
-            link = that.element.find(TLINK);
-
-            if (!link[0]) {
-                link = that.element.wrapInner('<a class="k-link" href="#"/>').find(TLINK);
-            }
-
-            that.link = link;
-
-            that.element.on("click" + NS, proxy(that._click, that));
+            that._draggable = that._createDraggable();
+            that.floating = false;
         },
+
+        events: [
+            START,
+            MOVE,
+            END,
+            CHANGE,
+            CANCEL
+        ],
 
         options: {
             name: "Sortable",
-            mode: SINGLE,
-            allowUnsort: true,
-            compare: null,
-            filter: ""
+            hint: defaultHint,
+            placeholder: defaultPlaceholder,
+            filter: DEFAULT_FILTER,
+            holdToDrag: false,
+            disabled: null,
+            container: null,
+            connectWith: null,
+            handler: null,
+            cursorOffset: null,
+            axis: null
         },
 
         destroy: function() {
-            var that = this;
-
-            Widget.fn.destroy.call(that);
-
-            that.element.off(NS);
-
-            that.dataSource.unbind("change", that._refreshHandler);
+            this._draggable.destroy();
+            Widget.fn.destroy.call(this);
         },
 
-        refresh: function() {
+        _createDraggable: function() {
             var that = this,
-                sort = that.dataSource.sort() || [],
-                idx,
-                length,
-                descriptor,
-                dir,
                 element = that.element,
-                field = element.attr(kendo.attr(FIELD));
+                options = that.options;
 
-            element.removeAttr(kendo.attr(DIR));
-            element.removeAttr(ARIASORT);
+            return new kendo.ui.Draggable(element, {
+                filter: options.filter,
+                hint: options.hint,
+                holdToDrag: options.holdToDrag,
+                container: options.container,
+                cursorOffset: options.cursorOffset,
+                axis: options.axis,
+                dragstart: $.proxy(that._dragstart, that),
+                dragcancel: $.proxy(that._dragcancel, that),
+                drag: $.proxy(that._drag, that),
+                dragend: $.proxy(that._dragend, that)
+            });
+        },
 
-            for (idx = 0, length = sort.length; idx < length; idx++) {
-               descriptor = sort[idx];
+        _dragstart: function(e) {
+            var draggedElement = this.draggedElement = e.currentTarget,
+                target = e.target || kendo.elementUnderCursor(e),
+                disabled = this.options.disabled,
+                handler = this.options.handler,
+                _placeholder = this.options.placeholder,
+                placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : _placeholder;
 
-               if (field == descriptor.field) {
-                   element.attr(kendo.attr(DIR), descriptor.dir);
-               }
-            }
+            if(disabled && draggedElement.is(disabled)) {
+                e.preventDefault();
+            } else if(handler && !$(target).is(handler)) {
+                e.preventDefault();
+            } else {
 
-            dir = element.attr(kendo.attr(DIR));
+                if(this.trigger(START, { item: draggedElement, draggableEvent: e })) {
+                    e.preventDefault();
+                } else {
+                    this.floating = this._isFloating(draggedElement);
+                    draggedElement.css("display", "none");
+                    draggedElement.before(placeholder);
+                }
 
-            element.find(".k-i-arrow-n,.k-i-arrow-s").remove();
-
-            if (dir === ASC) {
-                $('<span class="k-icon k-i-arrow-n" />').appendTo(that.link);
-                element.attr(ARIASORT, "ascending");
-            } else if (dir === DESC) {
-                $('<span class="k-icon k-i-arrow-s" />').appendTo(that.link);
-                element.attr(ARIASORT, "descending");
             }
         },
 
-        _click: function(e) {
-            var that = this,
-                element = that.element,
-                field = element.attr(kendo.attr(FIELD)),
-                dir = element.attr(kendo.attr(DIR)),
-                options = that.options,
-                compare = that.options.compare == null ? undefined : that.options.compare,
-                sort = that.dataSource.sort() || [],
-                idx,
-                length;
+        _dragcancel: function(e) {
+            this._cancel();
+            this.trigger(CANCEL, { item: this.draggedElement });
+        },
 
-            e.preventDefault();
+        _drag: function(e) {
+            var draggedElement = this.draggedElement,
+                target = this._findTarget(e),
+                targetOffset,
+                cursorOffset = { left: e.x.location, top: e.y.location },
+                offsetDelta,
+                xAxisDelta = e.x.delta,
+                yAxisDelta = e.y.delta,
+                prevVisible,
+                nextVisible,
+                placeholder = this.placeholder,
+                direction;
 
-            if (options.filter && !element.is(options.filter)) {
+            if(target) {
+                targetOffset = kendo.getOffset(target.element);
+                targetOffset.top += target.element.outerHeight() / 2;
+                targetOffset.left += target.element.outerWidth() / 2;
+
+                offsetDelta = {
+                    left: Math.round(cursorOffset.left - targetOffset.left),
+                    top: Math.round(cursorOffset.top - targetOffset.top)
+                };
+
+                prevVisible = target.element.prev();
+                nextVisible = target.element.next();
+
+                if(target.sortable.isEmpty()) {
+                    target.element.append(placeholder);
+                    target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                    return;
+                }
+
+                if(this.floating) { //horizontal
+                    if(xAxisDelta < 0 && offsetDelta.left < 0) {
+                        direction = "prev";
+                    } else if(xAxisDelta > 0 && offsetDelta.left > 0) {
+                        direction = "next";
+                    }
+                } else { //vertical
+                    if(yAxisDelta < 0 && offsetDelta.top < 0) {
+                        direction = "prev";
+                    } else if(yAxisDelta > 0 && offsetDelta.top > 0) {
+                        direction = "next";
+                    }
+                }
+
+                if(direction === "prev") {
+                    while(prevVisible.length && !prevVisible.is(":visible")) {
+                        prevVisible = prevVisible.prev();
+                    }
+
+                    if(prevVisible[0] != placeholder[0]) {
+                        target.element.before(placeholder);
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                    }
+                } else if(direction === "next") {
+                    while(nextVisible.length && !nextVisible.is(":visible")) {
+                        nextVisible = nextVisible.next();
+                    }
+
+                    if(nextVisible[0] != placeholder[0]) {
+                        target.element.after(placeholder);
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                    }
+                }
+            }
+        },
+
+        _dragend: function(e) {
+            var placeholder = this.placeholder,
+                draggedElement = this.draggedElement,
+                draggedIndex = this.indexOf(draggedElement),
+                placeholderIndex = this.indexOf(placeholder),
+                connectWith = this.options.connectWith,
+                connectedList,
+                isDefaultPrevented,
+                eventData;
+
+            eventData = {
+                action: ACTION_SORT,
+                item: draggedElement,
+                oldIndex: draggedIndex,
+                newIndex: placeholderIndex,
+                draggableEvent: e
+            };
+
+            if(placeholderIndex >= 0) {
+                isDefaultPrevented = this.trigger(END, eventData);
+            } else {
+                connectedList = placeholder.parents(connectWith).getKendoSortable();
+
+                isDefaultPrevented = !(
+                    !this.trigger(END, $.extend(eventData, { action: ACTION_REMOVE })) && !connectedList.trigger(END, $.extend(eventData, { action: ACTION_RECEIVE, oldIndex: MISSING_INDEX, newIndex: connectedList.indexOf(placeholder) }))
+                );
+            }
+
+            if(isDefaultPrevented || placeholderIndex === draggedIndex) {
+                this._cancel();
                 return;
             }
 
-            if (dir === ASC) {
-                dir = DESC;
-            } else if (dir === DESC && options.allowUnsort) {
-                dir = undefined;
-            } else {
-                dir = ASC;
+            placeholder.replaceWith(draggedElement);
+
+            draggedElement.show();
+            this._draggable.dropped = true;
+
+            eventData = {
+                action: this.indexOf(draggedElement) != MISSING_INDEX ? ACTION_SORT : ACTION_REMOVE,
+                item: draggedElement,
+                oldIndex: draggedIndex,
+                newIndex: this.indexOf(draggedElement),
+                draggableEvent: e
+            };
+
+            this.trigger(CHANGE, eventData);
+
+            if(connectedList) {
+                connectedList.trigger(CHANGE, $.extend(eventData, {
+                    action: ACTION_RECEIVE,
+                    oldIndex: MISSING_INDEX,
+                    newIndex: connectedList.indexOf(draggedElement)
+                }));
             }
 
-            if (options.mode === SINGLE) {
-                sort = [ { field: field, dir: dir, compare: compare } ];
-            } else if (options.mode === "multiple") {
-                for (idx = 0, length = sort.length; idx < length; idx++) {
-                    if (sort[idx].field === field) {
-                        sort.splice(idx, 1);
-                        break;
+        },
+
+        _findTarget: function(e) {
+            var elementUnderCursor = kendo.elementUnderCursor(e),
+                draggable = e.sender,
+                disabled = this.options.disabled,
+                filter = this.options.filter,
+                items = this.items();
+
+            if(containsOrEqualTo(draggable.hint[0], elementUnderCursor)) {
+                draggable.hint.hide();
+                elementUnderCursor = kendo.elementUnderCursor(e);
+                // IE8 does not return the element in iframe from first attempt
+                if (!elementUnderCursor) {
+                    elementUnderCursor = kendo.elementUnderCursor(e);
+                }
+                draggable.hint.show();
+            }
+
+            return this._findDraggableNode(elementUnderCursor);
+        },
+
+        _findDraggableNode: function(element) {
+            var items,
+                connectWith = this.options.connectWith,
+                connected,
+                node;
+
+            if($.contains(this.element[0], element)) { //the element is part of the sortable container
+                items = this.items();
+                node = items.filter(element)[0] || items.has(element)[0];
+
+                return node ? { element: $(node), sortable: this } : null;
+            } else if (connectWith) {
+                connected = $(connectWith);
+
+                for (var i = 0; i < connected.length; i++) {
+                    var sortable = connected.eq(i).getKendoSortable();
+                    if($.contains(connected[i], element)) {
+                        if(sortable) {
+                            items = sortable.items();
+                            node = items.filter(element)[0] || items.has(element)[0];
+
+                            if(node) {
+                                sortable.placeholder = this.placeholder;
+                                return { element: $(node), sortable: sortable };
+                            } else {
+                                return null;
+                            }
+                        }
+                    } else if(connected[i] == element) {
+                        if(sortable && sortable.isEmpty()) {
+                            return { element: connected.eq(i), sortable: sortable };
+                        }
                     }
                 }
-                sort.push({ field: field, dir: dir, compare: compare });
+            }
+        },
+
+        _isFloating: function(item) {
+            return (/left|right/).test(item.css("float")) || (/inline|table-cell/).test(item.css("display"));
+        },
+
+        _cancel: function() {
+            this.draggedElement.show();
+            this.placeholder.remove();
+        },
+
+        _items: function() {
+            var filter = this.options.filter,
+                items;
+
+            if(filter) {
+                items = this.element.find(filter);
+            } else {
+                items = this.element.children();
             }
 
+            return items;
+        },
 
-            that.dataSource.sort(sort);
+        indexOf: function(element) {
+            var items = this._items(),
+                placeholder = this.placeholder,
+                draggedElement = this.draggedElement;
+
+            if(placeholder && element[0] == placeholder[0]) {
+                return items.not(draggedElement).index(element);
+            } else {
+                return items.not(placeholder).index(element);
+            }
+        },
+
+        items: function() {
+            var placeholder = this.placeholder,
+                items = this._items();
+
+            if(placeholder) {
+                items = items.not(placeholder);
+            }
+
+            return items;
+        },
+
+        isEmpty: function() {
+            return !this.items().length;
         }
+
     });
 
     kendo.ui.plugin(Sortable);

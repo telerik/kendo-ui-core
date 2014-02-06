@@ -3666,6 +3666,18 @@ function pad(number, digits, end) {
         return params;
     };
 
+    var OS = kendo.support.mobileOS,
+        invalidZeroEvents = OS && OS.android,
+        mobileChrome = (invalidZeroEvents && OS.browser == "chrome");
+
+    kendo.elementUnderCursor = function(e) {
+        if (mobileChrome) {
+            return document.elementFromPoint(e.x.screen, e.y.screen);
+        } else {
+            return document.elementFromPoint(e.x.client, e.y.client);
+        }
+    };
+
 })(jQuery);
 
 return window.kendo;
