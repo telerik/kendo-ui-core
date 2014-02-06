@@ -1369,6 +1369,9 @@ var __meta__ = {
         },
 
         complete: function() {
+            if (!this.deferred) {
+                return;
+            }
             var container = this.container;
 
             container.removeClass("k-fx-end").removeClass(this._containerClass());
@@ -1384,6 +1387,7 @@ var __meta__ = {
             }
 
             this.deferred.resolve();
+            delete this.deferred;
         },
 
         run: function() {
