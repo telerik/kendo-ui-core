@@ -60,8 +60,8 @@ namespace Kendo.Mvc.UI.Html
 
             return new HtmlElement("input", TagRenderMode.SelfClosing)
                    .Attributes(defaultOptions)
-                   .Attributes(Component.HtmlAttributes)
-                   .Attributes(Component.GetUnobtrusiveValidationAttributes());
+                   .Attributes(Component.GetUnobtrusiveValidationAttributes())
+                   .Attributes(Component.HtmlAttributes);
         }
     }
 }
