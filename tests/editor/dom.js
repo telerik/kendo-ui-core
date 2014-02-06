@@ -212,4 +212,38 @@ test("editableParent returns inline body from nested inline node", function() {
     equal(inline.body, result);
 });
 
+module("editor dom ensureTrailingBreaks");
+
+test("adds line break to element", function() {
+    var dom = $("<p>foo</p>");
+
+    Dom.ensureTrailingBreak(dom[0]);
+
+    equal(dom.find("br").length, 1);
+});
+
+test("does not add redundant breaks", function() {
+    var dom = $("<p>foo<br /></p>");
+
+    Dom.ensureTrailingBreak(dom[0]);
+
+    equal(dom.find("br").length, 1);
+});
+
+test("adds break to empty paragraph", function() {
+    var dom = $("<p></p>");
+
+    Dom.ensureTrailingBreak(dom[0]);
+
+    equal(dom.find("br").length, 1);
+});
+
+test("adds breaks to all paragraphs", function() {
+    var dom = $("<div><p>foo</p><p>bar</p></div>");
+
+    Dom.ensureTrailingBreaks(dom[0]);
+
+    equal(dom.find("br").length, 2);
+});
+
 }());

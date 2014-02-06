@@ -747,10 +747,10 @@ var Dom = {
     },
 
     ensureTrailingBreak: function(node) {
-        var name = Dom.name(node.lastChild);
+        var name = node.lastChild && Dom.name(node.lastChild);
         var br;
 
-        if (name != "br" && name != "img") {
+        if (!name || name != "br" && name != "img") {
             br = node.ownerDocument.createElement("br");
             br.setAttribute("_moz_dirty", true);
             node.appendChild(br);
