@@ -3624,19 +3624,16 @@ var __meta__ = {
         computeAxisRanges: function() {
             var chart = this,
                 isStacked = chart.options.isStacked,
-                axisName, categoryTotals;
+                axisName, limits;
 
             if (isStacked) {
                 axisName = chart.options.series[0].axis;
-                categoryTotals = chart.categoryTotals();
+                limits = chart.plotLimits();
                 if (chart.errorTotals) {
-                    categoryTotals.negative = categoryTotals.negative.concat(chart.errorTotals.negative);
-                    categoryTotals.positive = categoryTotals.positive.concat(chart.errorTotals.positive);
+                    limits.min = sparseArrayMin(chart.errorTotals.negative.concat(0, limits.min));
+                    limits.max = sparseArrayMax(chart.errorTotals.positive.concat(0, limits.max));
                 }
-                chart.valueAxisRanges[axisName] = {
-                    min: sparseArrayMin(categoryTotals.negative.concat(0)),
-                    max: sparseArrayMax(categoryTotals.positive.concat(0))
-                };
+                chart.valueAxisRanges[axisName] = limits;
             }
         },
 
@@ -3686,31 +3683,28 @@ var __meta__ = {
             }
         },
 
-        categoryTotals: function() {
-            var categoryTotals = { positive: [], negative: [] };
+        plotLimits: function() {
+            var max = 0;
+            var min = 0;
+
             for (var i = 0; i < this.categoryPoints.length; i++) {
                 var categoryPts = this.categoryPoints[i];
 
-                var positiveTotal = 0;
-                var negativeTotal = 0;
                 for (var pIx = 0; pIx < categoryPts.length; pIx++) {
                     var point = categoryPts[pIx];
                     if (point) {
                         var to = this.plotRange(point)[1];
 
                         if (to > 0) {
-                            positiveTotal = math.max(positiveTotal, to);
+                            max = math.max(max, to);
                         } else {
-                            negativeTotal = math.min(negativeTotal, to);
+                            min = math.min(min, to);
                         }
                     }
                 }
-
-                categoryTotals.positive.push(positiveTotal);
-                categoryTotals.negative.push(negativeTotal);
             };
 
-            return categoryTotals;
+            return { min: min, max: max };
         }
     });
 
