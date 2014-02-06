@@ -4,6 +4,13 @@ module CodeGen
   module ASPX
     module Wrappers
 
+        CHILD_COMPONENTS = %w{
+            DiagramConnection
+            DiagramShape
+            DiagramConnectior
+            DiagramLayout}
+
+
       TYPES_MAP = {
           'String' => 'string',
           'Number' => 'double',
@@ -232,6 +239,69 @@ namespace <%= csharp_namespace %>
             "Telerik.Web.UI"
         end
 
+        def add_option(settings)
+            if !settings[:type].nil? && settings[:type].include?('kendo.')
+                settings[:type] = settings[:type].split('.').last
+
+                name = settings[:name].strip
+
+                prefix = settings[:prefix]
+
+                name = name.sub(prefix, '') if prefix
+
+                recursive = settings[:recursive]
+
+                content = settings[:content]
+
+                description = settings[:description]
+
+                default = settings[:default]
+
+                type = settings[:type]
+
+                values = settings[:values]
+
+                remove_existing = settings[:remove_existing] || false
+
+                parents = @options.find_all { |option| name.start_with?(option.name + '.') && (option.type.include?('Object') || option.type.include?('Array')) }
+
+                parents.map! { |parent| parent.to_composite }
+
+                if parents.any?
+
+                    parents.each do |parent|
+                        parent.add_option(
+                            :name => name,
+                            :type => type,
+                            :recursive => recursive,
+                            :content => content,
+                            :default => default,
+                            :prefix => parent.name + '.',
+                            :values => values,
+                            :description => description,
+                            :remove_existing => remove_existing
+                        )
+
+                    end
+
+                else
+
+                    @options.delete_if { |o| o.name == name } if remove_existing
+
+                    @options.push option_class.new(:name => name,
+                                                   :owner => self,
+                                                   :recursive => recursive,
+                                                   :content => content,
+                                                   :type => type,
+                                                   :default => default,
+                                                   :values => values,
+                                                   :description => description)
+                end
+            else
+                super(settings)
+            end
+        end
+
         def root_component
             parent = owner
             while !parent.is_a?(Component) && !parent.owner.nil?
@@ -258,6 +328,7 @@ namespace <%= csharp_namespace %>
 
         def csharp_type
             return "#{owner.csharp_name.sub('Settings','').sub('Collection','')}#{name.pascalize}" if enum?
+            return type[0].split('.').last if type[0].include?('kendo.')
             return TYPES_MAP[type[0]]
         end
 
@@ -385,7 +456,7 @@ namespace <%= csharp_namespace %>
         def csharp_class
             return "Rad#{name.pascalize}" if widget?
 
-            name.pascalize
+            "#{owner_namespace}#{name.pascalize}"
         end
 
         def csharp_converter_class
@@ -399,7 +470,7 @@ namespace <%= csharp_namespace %>
         def csharp_namespace
             prefix = "Telerik.Web.UI"
 
-            return "#{prefix}.#{owner_namespace}" unless widget?
+            return "#{prefix}.#{owner_namespace}" unless widget? && CHILD_COMPONENTS.include?(csharp_class)
 
             prefix
         end
@@ -447,7 +518,7 @@ namespace <%= csharp_namespace %>
 
         def component(component)
           write_class(component)
-          write_converter(component)
+          write_converter(component) unless component.widget?
           write_enums(component)
           write_properties(component)
           write_events(component)
@@ -504,10 +575,10 @@ namespace <%= csharp_namespace %>
             if option.class == CompositeOption && option.owner.class != ArrayItem
                 write_composite_option_file(option)
             end
-            if option.class == ArrayOption
+            if option.class == ArrayOption && !CHILD_COMPONENTS.include?(option.item.csharp_class)
                 write_array_item_class(option.item)
             end
- 
+
             option.to_declaration
         end
 
