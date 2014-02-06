@@ -2077,6 +2077,13 @@
                     "meta": "This Kendo UI Web example shows how the tile effect is implemented to enhance end-user experience."
                 },
                 {
+                    "text": "Replace",
+                    "url": "fx/replace.html",
+                    "title": "Replace effect",
+                    "new": true,
+                    "meta": "This demo showcases how to create custom CSS class based transition between two HTML elements using Kendo UI Replace effect"
+                },
+                {
                     "text": "Combined Effects",
                     "url": "fx/combined.html",
                     "title": "Combined Effects Demo in Kendo UI Web",

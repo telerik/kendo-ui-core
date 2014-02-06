@@ -1,0 +1,95 @@
+<div id="example" class="k-content">
+        <div id="replace-container">
+            <div id="replace-step1">Questionairre – Step 1</div>
+            <div id="replace-step2" style="display: none">Questionairre – Step 2</div>
+        </div>
+
+        <div id="replace-nav">
+            <br> <br>
+
+            <button id="replace-previous" disabled>Previous</button>
+            <button id="replace-next">Next</button>
+        </div>
+
+        <script type="text/javascript" charset="utf-8">
+            $(function() {
+                var nextEffect = kendo.fx("#replace-step2").replace("#replace-step1", "swap"),
+                    previousEffect = kendo.fx("#replace-step1").replace("#replace-step2", "swap");
+
+                $("#replace-next").click(function() {
+                    previousEffect.stop();
+                    nextEffect.run();
+                    $("#replace-next").attr("disabled", "disabled");
+                    $("#replace-previous").removeAttr("disabled");
+                });
+
+                $("#replace-previous").click(function() {
+                    nextEffect.stop();
+                    previousEffect.reverse();
+                    $("#replace-previous").attr("disabled", "disabled");
+                    $("#replace-next").removeAttr("disabled");
+                });
+            });
+
+        </script>
+        <style>
+            #replace-container {
+                position: relative;
+                width: 202px;
+                height: 202px;
+                margin-left: 200px;
+            }
+
+            #replace-nav {
+                margin-left: 200px;
+            }
+
+            #replace-step1, #replace-step2  {
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                border: 1px solid gray;
+                background: #e4e4e4;
+            }
+
+            /**
+             * Custom swap effect
+             */
+
+            /* the initial position of the next div */
+            .k-fx-swap.k-fx-start .k-fx-next {
+                -webkit-transform: translatex(100%);
+                -moz-transform: translatex(100%);
+                -ms-transform: translatex(100%);
+                transform: translatex(100%);
+            }
+
+            /* the initial position of the next div */
+            .k-fx-swap.k-fx-end .k-fx-current {
+                opacity: 0;
+                -webkit-transform: scale(0.9);
+                -moz-transform: scale(0.9);
+                transform: scale(0.9);
+            }
+
+
+            /* Reverse animation */
+
+            /* the initial position of the next div */
+            .k-fx-swap.k-fx-reverse.k-fx-start .k-fx-next {
+                opacity: 0;
+                -webkit-transform: scale(0.9);
+                -moz-transform: scale(0.9);
+                transform: scale(0.9);
+            }
+
+            /* the initial position of the next div */
+            .k-fx-swap.k-fx-reverse.k-fx-end .k-fx-current {
+                opacity: 1;
+                -webkit-transform: translatex(100%);
+                -moz-transform: translatex(100%);
+                transform: translatex(100%);
+            }
+
+        </style>
+</div>
