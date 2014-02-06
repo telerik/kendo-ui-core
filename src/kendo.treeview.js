@@ -29,6 +29,7 @@ var __meta__ = {
         CHANGE = "change",
         ERROR = "error",
         CHECKED = "checked",
+        INDETERMINATE = "indeterminate",
         COLLAPSE = "collapse",
         DRAGSTART = "dragstart",
         DRAG = "drag",
@@ -276,10 +277,10 @@ var __meta__ = {
         _checkboxClick: function(e) {
             var checkbox = $(e.target);
 
-            if (checkbox.data("indeterminate")) {
+            if (checkbox.data(INDETERMINATE)) {
                 checkbox
-                    .data("indeterminate", false)
-                    .prop("indeterminate", false)
+                    .data(INDETERMINATE, false)
+                    .prop(INDETERMINATE, false)
                     .prop(CHECKED, true);
 
                 this._checkboxChange(e);
@@ -715,9 +716,9 @@ var __meta__ = {
                 all = !siblings[0].indeterminate;
             }
 
-            checkboxes(node)
-                .data("indeterminate", !all)
-                .prop("indeterminate", !all)
+            return checkboxes(node)
+                .data(INDETERMINATE, !all)
+                .prop(INDETERMINATE, !all)
                 .prop(CHECKED, all && siblings[0].checked);
         },
 
@@ -725,14 +726,20 @@ var __meta__ = {
             // top-down update of inital indeterminate state for all nodes
             node = node || this.wrapper;
 
-            var subnodes = subGroup(node).children(), i;
+            var subnodes = subGroup(node).children();
+            var i;
+            var checkbox;
 
             if (subnodes.length) {
                 for (i = 0; i < subnodes.length; i++) {
                     this.updateIndeterminate(subnodes.eq(i));
                 }
 
-                this._setIndeterminate(node);
+                checkbox = this._setIndeterminate(node);
+
+                if (checkbox && checkbox.prop(CHECKED)) {
+                    this.dataItem(node).checked = true;
+                }
             }
         },
 
@@ -749,7 +756,7 @@ var __meta__ = {
                 this._setIndeterminate(parentNode);
                 checkbox = parentNode.children("div").find(".k-checkbox :checkbox");
 
-                if (checkbox.prop("indeterminate") === false) {
+                if (checkbox.prop(INDETERMINATE) === false) {
                     this.dataItem(parentNode).set(CHECKED, checkbox.prop(CHECKED));
                 } else {
                     this.dataItem(parentNode).checked = false;
@@ -983,8 +990,8 @@ var __meta__ = {
                 }
             } else if (key == keys.SPACEBAR && checkbox.length) {
                 checkbox.prop(CHECKED, !checkbox.prop(CHECKED))
-                    .data("indeterminate", false)
-                    .prop("indeterminate", false);
+                    .data(INDETERMINATE, false)
+                    .prop(INDETERMINATE, false);
 
                 that._checkboxChange({ target: checkbox });
 
@@ -1239,8 +1246,8 @@ var __meta__ = {
             function setCheckedState(root, state) {
                 root.find(".k-checkbox :checkbox")
                     .prop(CHECKED, state)
-                    .data("indeterminate", false)
-                    .prop("indeterminate", false);
+                    .data(INDETERMINATE, false)
+                    .prop(INDETERMINATE, false);
             }
 
             if (field == "selected") {

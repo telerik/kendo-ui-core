@@ -506,6 +506,20 @@
         ok(treeviewObject.dataItem(".k-item:last").checked);
     });
 
+    test("checkChildren checks root dataItem upon initial load", function() {
+        createTreeView({
+            dataSource: [
+                { text: "foo", items: [
+                    { text: "bar", checked: true },
+                    { text: "baz", checked: true }
+                ] }
+            ],
+            checkboxes: { checkChildren: true }
+        });
+
+        ok(treeviewObject.dataItem(".k-item:first").checked);
+    });
+
     asyncTest("indeterminate state is updated when fetching remote nodes", function() {
         var timeout = setTimeout(start, 1000);
 
