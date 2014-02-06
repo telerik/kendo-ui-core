@@ -10,6 +10,7 @@ module CodeGen
             DiagramConnectior
             DiagramLayout}
 
+        OPTIONS_TO_SKIP = %w{dataSource}
 
       TYPES_MAP = {
           'String' => 'string',
@@ -240,6 +241,8 @@ namespace <%= csharp_namespace %>
         end
 
         def add_option(settings)
+            return if OPTIONS_TO_SKIP.include?(settings[:name])
+
             if !settings[:type].nil? && settings[:type].include?('kendo.')
                 settings[:type] = settings[:type].split('.').last
 
