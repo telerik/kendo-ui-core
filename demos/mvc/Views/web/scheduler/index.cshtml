@@ -90,20 +90,13 @@ $(function() {
             return parseInt($(checkbox).val());
         });
 
-        var filter = {
-            logic: "or",
-            filters: $.map(checked, function(value) {
-                return {
-                    operator: "eq",
-                    field: "ownerId",
-                    value: value
-                };
-            })
-        };
-
         var scheduler = $("#scheduler").data("kendoScheduler");
 
-        scheduler.dataSource.filter(filter);
+        scheduler.dataSource.filter({
+            operator: function(task) {
+                return $.inArray(task.ownerId, checked) >= 0;
+            }
+        });
     });
 });
 </script>
