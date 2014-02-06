@@ -1414,6 +1414,8 @@ var __meta__ = {
                 container.css(OVERFLOW, "hidden");
             }
 
+            element.css("display", "none");
+
             container.addClass(this._containerClass());
 
             container.one(transitions.event, $.proxy(this, "complete"));
