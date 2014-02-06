@@ -20,7 +20,7 @@ var __meta__ = {
         OS = support.mobileOS,
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
-        BROKEN_WEBVIEW_RESIZE = OS.appMode && OS.ios,
+        BROKEN_WEBVIEW_RESIZE = OS.appMode && OS.ios && OS.device === "iphone",
         HORIZONTAL = "km-horizontal",
 
         MOBILE_PLATFORMS = {
