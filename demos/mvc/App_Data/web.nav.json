@@ -1387,6 +1387,57 @@
             ]
         },
         {
+            "packages": ["!mvc"],
+            "text": "Sortable",
+            "name": "sortable",
+            "documentation": "web/sortable",
+            "spriteCssClass": "sortableIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "sortable/index.html",
+                    "title": "Demo for Sortable Component in Kendo UI jQuery framework",
+                    "meta": "This example illustrates the basic functionality of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Filter / Disable items",
+                    "url": "sortable/filter-disable.html",
+                    "title": "Demo for filter and disable items functionality of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the filter and disable items functionality of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Placeholder / Hint customization",
+                    "url": "sortable/customization.html",
+                    "title": "Demo for placeholder and filter customization of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the placeholder and filter customization feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Handlers",
+                    "url": "sortable/handlers.html",
+                    "title": "Demo for handler functionality of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the handler feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Axis / Container constraints",
+                    "url": "sortable/constraints.html",
+                    "title": "Demo for axis / container functionality of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the axis / container restriction feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Linked Lists",
+                    "url": "sortable/linkedlists.html",
+                    "title": "Demo for linked list functionality of Kendo UI Sortable Component",
+                    "meta": "This example illustrates the linked lists feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
+                },
+                {
+                    "text": "Events",
+                    "url": "sortable/events.html",
+                    "title": "Events example for Kendo UI Sortable Component",
+                    "meta": "This example shows events of Kendo UI Sortable widget."
+                }
+            ]
+        },
+        {
             "text": "Splitter",
             "name": "splitter",
             "documentation": "web/splitter",
@@ -2063,57 +2114,6 @@
                     "url": "dragdrop/events.html",
                     "title": "Events example for Kendo UI jQuery Draggable functionality",
                     "meta": "Learn more about draggable interaction with this events example for Kendo UI Draggable in Kendo UI MVVM."
-                }
-            ]
-        },
-        {
-            "packages": ["!mvc"],
-            "text": "Sortable",
-            "name": "sortable",
-            "documentation": "framework/sortable",
-            "spriteCssClass": "sortableIcon",
-            "items": [
-                {
-                    "text": "Basic usage",
-                    "url": "sortable/index.html",
-                    "title": "Demo for Sortable Component in Kendo UI jQuery framework",
-                    "meta": "This example illustrates the basic functionality of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
-                },
-                {
-                    "text": "Filter / Disable items",
-                    "url": "sortable/filter-disable.html",
-                    "title": "Demo for filter and disable items functionality of Kendo UI Sortable Component",
-                    "meta": "This example illustrates the filter and disable items functionality of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
-                },
-                {
-                    "text": "Placeholder / Hint customization",
-                    "url": "sortable/customization.html",
-                    "title": "Demo for placeholder and filter customization of Kendo UI Sortable Component",
-                    "meta": "This example illustrates the placeholder and filter customization feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
-                },
-                {
-                    "text": "Handlers",
-                    "url": "sortable/handlers.html",
-                    "title": "Demo for handler functionality of Kendo UI Sortable Component",
-                    "meta": "This example illustrates the handler feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
-                },
-                {
-                    "text": "Axis / Container constraints",
-                    "url": "sortable/constraints.html",
-                    "title": "Demo for axis / container functionality of Kendo UI Sortable Component",
-                    "meta": "This example illustrates the axis / container restriction feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
-                },
-                {
-                    "text": "Linked Lists",
-                    "url": "sortable/linkedlists.html",
-                    "title": "Demo for linked list functionality of Kendo UI Sortable Component",
-                    "meta": "This example illustrates the linked lists feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
-                },
-                {
-                    "text": "Events",
-                    "url": "sortable/events.html",
-                    "title": "Events example for Kendo UI Sortable Component",
-                    "meta": "This example shows events of Kendo UI Sortable widget."
                 }
             ]
         },
