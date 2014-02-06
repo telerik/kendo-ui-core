@@ -322,8 +322,6 @@
     });
 
     test("static header is not resized pass the grid container width", function() {
-        table.style.width = "200px";
-
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar"} ],
             resizable: true,
@@ -337,7 +335,6 @@
         resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 200);
 
         equal(grid.staticTable.width(), 200 - kendo.support.scrollbar());
-        equal(grid.staticHeader.width(), 200 - kendo.support.scrollbar());
     });
 
     test("column body cell width is incremented when handler is moved to the right", function() {

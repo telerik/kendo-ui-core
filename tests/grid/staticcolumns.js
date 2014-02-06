@@ -138,6 +138,17 @@
         equal(grid.staticHeader.width(), 140);
     });
 
+    test("width is set to static containers if width is set as string", function() {
+        div.width(300);
+        var grid = setup({
+            columns: [{ field: "foo", static: true, width: "240px" }, { field: "bar", width: 100 }, { field:"baz", width: 200 }]
+        });
+
+        equal(grid.staticHeader.width(), grid.staticContent.width());
+        equal(grid.staticHeader.width(), 240);
+        equal(grid.content.width(), 60 - 2);
+    });
+
     test("width is set to static containers with grouping applied", function() {
         var grid = setup({
             columns: [{ field: "foo", static: true, width: 140 }, "bar", "baz"]

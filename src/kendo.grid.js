@@ -1188,8 +1188,8 @@ var __meta__ = {
                             });
 
                             that._applyStaticContainersWidth();
-                            that._syncStaicContentHeight();
-                            that._syncStaicHeaderHeight();
+                            that._syncStaticContentHeight();
+                            that._syncStaticHeaderHeight();
                         }
 
                         that._hideResizeHandle();
@@ -1344,7 +1344,7 @@ var __meta__ = {
             }
 
             that._applyStaticContainersWidth();
-            that._syncStaicContentHeight();
+            that._syncStaticContentHeight();
         },
 
         cellIndex: function(td) {
@@ -1493,16 +1493,22 @@ var __meta__ = {
             this.staticContent.height(content.height() - scrollbar);
         },
 
-        _syncStaicContentHeight: function() {
+        _syncStaticContentHeight: function() {
             if (this.staticTable) {
                 this._adjustStaticHorizontalScrollBar();
                 adjustRowsHeight(this.table, this.staticTable);
             }
         },
 
-        _syncStaicHeaderHeight: function() {
+        _syncStaticHeaderHeight: function() {
             if (this.staticHeader) {
                 adjustRowsHeight(this.staticHeader.children("table"), this.thead.parent());
+            }
+        },
+
+        _syncStaticFooterHeight: function() {
+            if (this.staticFooter && this.footer && this.footer.length) {
+                adjustRowsHeight(this.staticFooter.children("table"), this.footer.find(".k-grid-footer-wrap > table"));
             }
         },
 
@@ -2923,10 +2929,11 @@ var __meta__ = {
                     headerWrap = this.thead.closest(".k-grid-header-wrap"),
                     contentWidth = this.wrapper[0].clientWidth,
                     groups = this._groups(),
+                    cols = this.staticHeader.find(">table>colgroup>col:not(.k-group-col, .k-hierarchy-col)"),
                     width = 0;
 
                 for (var idx = 0, length = columns.length; idx < length; idx++) {
-                    width += columns[idx].width;
+                    width += cols.eq(idx).width();
                 }
 
                 if (groups > 0) {
@@ -3222,6 +3229,7 @@ var __meta__ = {
             if (that.staticContent) {
                 that._appendStaticColumnFooter();
                 that._applyStaticContainersWidth();
+                that._syncStaticFooterHeight();
             }
         },
 
@@ -3913,7 +3921,7 @@ var __meta__ = {
 
             if (hasStaticColumns) {
                 this.staticHeader = table.prependTo(container);
-                this._syncStaicHeaderHeight();
+                this._syncStaticHeaderHeight();
             }
         },
 
@@ -4295,8 +4303,9 @@ var __meta__ = {
 
             if (that.staticTable) {
                 that._applyStaticContainersWidth();
-                that._syncStaicContentHeight();
-                that._syncStaicHeaderHeight();
+                that._syncStaticContentHeight();
+                that._syncStaticHeaderHeight();
+                that._syncStaticFooterHeight();
             } else {
                 cols = that.thead.prev().find("col");
                 for (idx = 0, length = cols.length; idx < length; idx += 1) {
@@ -4379,8 +4388,8 @@ var __meta__ = {
 
             if (that.staticTable) {
                 that._applyStaticContainersWidth();
-                that._syncStaicContentHeight();
-                that._syncStaicHeaderHeight();
+                that._syncStaticContentHeight();
+                that._syncStaticHeaderHeight();
             } else {
                 tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
                 if (!column.width) {
@@ -4580,7 +4589,7 @@ var __meta__ = {
 
                appendContent(table.children("tbody"), table, html);
 
-               this._syncStaicContentHeight();
+               this._syncStaticContentHeight();
            }
        }
    });
