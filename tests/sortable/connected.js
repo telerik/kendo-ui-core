@@ -56,17 +56,24 @@
         var options = { connectWith: "#listA, #listB, #listC" },
             sortableA = listA.kendoSortable(options),
             sortableB = listB.kendoSortable(options),
-            sortableC = listC.kendoSortable(options);
+            sortableC = listC.kendoSortable(options),
+            targetElement = listA.children().first(),
+            targetOffset = kendo.getOffset(targetElement),
+            targetTopCenter;
 
-        press(draggedElement, draggableOffset.left, draggableOffset.top + 10);
-        move(draggedElement, 10, 10);
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top);
 
         ok(listA.children().first().is(":visible") && listA.children().first().text() == "B1", "Placeholder is moved to the ListA");
 
-        move(draggedElement, 10, 220);
+        targetElement = listC.children().last();
+        targetOffset = kendo.getOffset(targetElement);
+        targetTopCenter = targetElement.outerHeight() / 2;
 
-        ok(listA.children().first().is(":visible"), "Placeholder is removed from ListA");
-        ok(listC.children().last().is(":visible") && listC.children().last().text() == "B1", "Placeholder is moved to the ListC");
+        move(draggedElement, targetOffset.left, targetOffset.top + targetTopCenter + 1);
+
+        ok(listA.children().first().text() !== "B1", "Placeholder is removed from ListA");
+        ok(listC.children().last().text() == "B1", "Placeholder is moved to the ListC");
     });
 
     test("Item can be dragged from one list to another", 2, function() {
@@ -105,17 +112,18 @@
          var options = { connectWith: "#listA, #listB, #listC" },
             sortableA = listA.kendoSortable(options).getKendoSortable(),
             sortableB = listB.kendoSortable(options).getKendoSortable(),
-            sortableC = listC.kendoSortable(options).getKendoSortable();
+            sortableC = listC.kendoSortable(options).getKendoSortable(),
+            targetOffset = kendo.getOffset(listC);
 
         listC.css("min-height", 20);
         listC.empty();
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        move(draggedElement, 10, 155);
+        move(draggedElement, targetOffset.left, targetOffset.top);
 
         equal(listC.children()[0], sortableB.placeholder[0], "Placeholder is appended to the ListC");
 
-        release(draggedElement, 10, 155);
+        release(draggedElement, targetOffset.left, targetOffset.top);
 
         equal(listC.children().length, 1, "Item is appended to the ListC");
     });
