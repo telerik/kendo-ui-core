@@ -290,8 +290,8 @@ var __meta__ = {
                 connected = $(connectWith);
 
                 for (var i = 0; i < connected.length; i++) {
+                    var sortable = connected.eq(i).getKendoSortable();
                     if($.contains(connected[i], element)) {
-                        var sortable = connected.eq(i).getKendoSortable();
                         if(sortable) {
                             items = sortable.items();
                             node = items.filter(element)[0] || items.has(element)[0];
@@ -304,9 +304,8 @@ var __meta__ = {
                             }
                         }
                     } else if(connected[i] == element) {
-                        var sortable = connected.eq(i).getKendoSortable();
                         if(sortable && sortable.isEmpty()) {
-                            return { element: connected.eq(i), sortable: sortable }
+                            return { element: connected.eq(i), sortable: sortable };
                         }
                     }
                 }
