@@ -35,8 +35,8 @@ namespace Kendo.Mvc.UI.Html
                 });
             }
 
-            element.Attributes(editor.HtmlAttributes)
-                   .Attributes(editor.GetUnobtrusiveValidationAttributes());
+            element.Attributes(editor.GetUnobtrusiveValidationAttributes())
+                   .Attributes(editor.HtmlAttributes);
 
             var value = editor.GetValue<string>(editor.Value);
 

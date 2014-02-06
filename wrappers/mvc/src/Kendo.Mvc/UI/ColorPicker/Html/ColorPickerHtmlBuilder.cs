@@ -15,11 +15,11 @@ namespace Kendo.Mvc.UI.Html
         {
             return new HtmlElement("input", TagRenderMode.SelfClosing)
                    .Attributes(new { name = Component.Name, id = Component.Id })
-                   .Attributes(Component.HtmlAttributes)
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())
                    .ToggleAttribute("type", "color", !Component.Opacity)
                    .ToggleAttribute("value", Component.Value, !string.IsNullOrEmpty(Component.Value))
                    .ToggleAttribute("disabled", "disabled", !Component.Enabled)
+                   .Attributes(Component.HtmlAttributes)
                    .ToggleClass("input-validation-error", !Component.IsValid())
                    .PrependClass(UIPrimitives.Input);
         }

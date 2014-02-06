@@ -20,9 +20,9 @@ namespace Kendo.Mvc.UI.Html
         {
             return new HtmlElement("select", TagRenderMode.Normal)
                    .Attributes(new { name = Component.Name, id = Component.Id, multiple="multiple" })
-                   .Attributes(Component.HtmlAttributes)
                    .Attributes(Component.GetUnobtrusiveValidationAttributes())
                    .ToggleAttribute("disabled", "disabled", Component.Enabled == false)
+                   .Attributes(Component.HtmlAttributes)
                    .ToggleClass("input-validation-error", !Component.IsValid());
         }
     }

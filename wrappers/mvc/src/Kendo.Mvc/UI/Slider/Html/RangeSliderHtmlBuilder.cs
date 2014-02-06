@@ -42,8 +42,8 @@ namespace Kendo.Mvc.UI.Html
 
             var div = new HtmlElement("div")
                         .Attributes(new { id = Component.Id })
-                        .Attributes(Component.HtmlAttributes)
-                        .Attributes(Component.GetUnobtrusiveValidationAttributes());
+                        .Attributes(Component.GetUnobtrusiveValidationAttributes())
+                        .Attributes(Component.HtmlAttributes);
 
             var defaultOptions = new Dictionary<string, object>();
             FluentDictionary.For(defaultOptions)

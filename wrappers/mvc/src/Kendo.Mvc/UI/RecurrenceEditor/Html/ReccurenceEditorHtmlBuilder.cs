@@ -18,11 +18,9 @@
             var value = Component.GetValue(Component.Value);
 
             return new HtmlElement("div")
-                .Attribute("id", Component.Id)
                 .Attributes(new { name = Component.Name, id = Component.Id })
-                //.ToggleAttribute("value", value, value.HasValue())
-                .Attributes(Component.HtmlAttributes)
                 .Attributes(Component.GetUnobtrusiveValidationAttributes())
+                .Attributes(Component.HtmlAttributes)
                 .ToggleClass("input-validation-error", !Component.IsValid());
         }
     }
