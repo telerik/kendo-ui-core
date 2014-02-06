@@ -66,6 +66,16 @@ test("clicking the tool while it is disabled does not toggle the popup", functio
     equal($(".k-ct-popup:visible").length, 0);
 });
 
+test("mouseleave is considered as cancel", function() {
+    dom.click();
+
+    var popup = tool.popup();
+
+    popup.element.trigger("mouseleave");
+
+    equal(popup.element.find(".k-ct-cell.k-state-selected").length, 0);
+});
+
 test("tool can be opened with the keyboard", function() {
     dom.press({ altKey: true, keyCode: keys.DOWN });
 
