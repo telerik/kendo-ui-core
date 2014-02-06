@@ -153,6 +153,15 @@
         equal(applyDefaultRightOffset(eventWidth), firstSlotWidth + secondSlotWidth);
     });
 
+    test("three day event which end on the first day of the next week is split correctly", function() {
+        var view = setup({ date: new Date("2013/6/1") });
+
+        view.render([
+            new kendo.data.SchedulerEvent({ isAllDay: true, start: new Date("2013/5/31"), end: new Date("2013/6/2"), title: "multi day event" })
+        ]);
+        equal(view.content.find(".k-event").length, 2);
+    });
+
     test("event on multiple rows is split", function() {
         var view = setup();
 
