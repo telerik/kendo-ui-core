@@ -1,0 +1,105 @@
+{
+  "kendo": {
+     "bind": {
+         "!type": "fn()",
+         "!doc": "Replaces each format item in a specified string with the text equivalent of corresponding object's value"
+     },
+     "init": {
+         "!type": "fn() -> string",
+         "!doc": "Instantiates Kendo UI widgets in a given DOM element based on role data attributes."
+     },
+     "observableHierarchy": {
+         "!type": "fn() -> Array",
+         "!doc": "Creates an ObservableArray instance that is bound to a HierarchicalDataSource. Required to bind a HierarchicalDataSource-enabled widget (such as the Kendo UI TreeView) to a view-model."
+     },
+     "culture": {
+         "!type": "fn() -> string",
+         "!doc": "Sets or gets the current culture. Uses the passed culture name to select a culture from the culture scripts that you have included and then sets the current culture. If there is no corresponding culture then the method will try to find culture which is equal to the country part of the culture name. If no culture is found the default one is used"
+     },
+     "destroy": {
+         "!type": "fn()",
+         "!doc": "Finds all Kendo widgets that are children of the specified element and calls their destroy method."
+     },
+     "format": {
+         "!type": "fn() -> string",
+         "!doc": "Replaces each format item in a specified string with the text equivalent of a corresponding object's value. Uses toString for every format item."
+     },
+     "htmlEncode": {
+         "!type": "fn() -> string",
+         "!doc": "Encodes HTML characters to entities."
+     },
+     "parseDate": {
+         "!type": "fn() -> Date",
+         "!doc": "Parses as a formatted string as a Date."
+     },
+     "parseFloat": {
+         "!type": "fn() -> number",
+         "!doc": "Parses a string as a floating point number."
+     },
+     "parseInt": {
+         "!type": "fn() -> number",
+         "!doc": "Parses as a string as an integer."
+     },
+     "parseColor": {
+         "!type": "fn()",
+         "!doc": "Parse a color string to a Color object. If the input is not valid throws an Error, unless the noerror argument is given."
+     },
+     "render": {
+         "!type": "fn()",
+         "!doc": "Renders the specified template using the provided array."
+     },
+     "resize": {
+         "!type": "fn()",
+         "!doc": "Finds all Kendo widgets that are children of the specified element and calls their resize method."
+     },
+     "stringify": {
+         "!type": "fn() -> string",
+         "!doc": "Converts a JavaScript object to JSON. Uses JSON.stringify in browsers that support it."
+     },
+     "template": {
+         "!type": "fn() -> fn()",
+         "!doc": "Compiles a template to a function that builds HTML. Useful when a template will be used several times. Templates offer way of creating HTML chunks. Options such as HTML encoding and compilation for optimal performance are available."
+     },
+     "touchScroller": {
+         "!type": "fn()",
+         "!doc": "Enables kinetic scrolling on touch devices"
+     },
+     "toString": {
+         "!type": "fn() -> string",
+         "!doc": "Formats a Number or Date using the specified format and the current culture."
+     },
+     "unbind": {
+         "!type": "fn()",
+         "!doc": "Unbinds a tree of HTML elements from a View-Model."
+     },
+     "widgetInstance": {
+         "!type": "fn()",
+         "!doc": "Returns a Kendo UI widget instance, attached to the provided element. This method can be used in scenarios when the page (e.g. a form) contains both generic HTML elements and Kendo UI widgets and the exact distribution is not clear."
+     },
+     "support": {
+         "touch":  "bool",
+         "pointers":  "bool",
+         "scrollbar":  "fn()",
+         "hasHW3D":  "bool",
+         "hasNativeScrolling":  "bool",
+         "devicePixelRatio":  "number",
+         "placeHolder":  "bool",
+         "zoomLevel":  "number",
+         "transforms":{
+             "css": "string",
+             "prefix": "string"
+         },
+         "transitions":{
+             "css": "string",
+             "prefix": "string",
+             "event": "string"
+         },
+         "version": "string"
+     }
+  },
+  "jQuery": {
+    "fn": {
+    <%= components.map { |component| component.json_typedef }.reject(&:blank?).join(",") %>
+    }
+  }
+}
