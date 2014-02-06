@@ -164,7 +164,7 @@ var InsertTableTool = PopupTool.extend({
     },
 
     _valid: function(size) {
-        return size.row > 0 && size.col > 0 && size.row <= this.rows && size.col <= this.cols;
+        return size && size.row > 0 && size.col > 0 && size.row <= this.rows && size.col <= this.cols;
     },
 
     _exec: function(size) {
