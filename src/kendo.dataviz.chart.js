@@ -3206,12 +3206,17 @@ var __meta__ = {
             return options;
         },
 
+        plotValue: function(point) {
+            return point.value;
+        },
+
         plotRange: function(point) {
             var categoryIx = point.categoryIx;
             var categoryPts = this.categoryPoints[categoryIx];
 
             if (this.options.isStacked) {
-                var plotValue = point.value;
+                var plotValue = this.plotValue(point);
+                var positive = plotValue > 0;
                 var prevValue = 0;
 
                 for (var i = 0; i < categoryPts.length; i++) {
@@ -3226,10 +3231,11 @@ var __meta__ = {
                         continue;
                     }
 
-                    if ((neighbour.value > 0 && point.value > 0) ||
-                        (neighbour.value < 0 && point.value < 0)) {
-                        prevValue += neighbour.value;
-                        plotValue += neighbour.value;
+                    var neighbourValue = this.plotValue(neighbour);
+                    if ((neighbourValue > 0 && positive) ||
+                        (neighbourValue < 0 && !positive)) {
+                        prevValue += neighbourValue;
+                        plotValue += neighbourValue;
                     }
                 };
 
@@ -3505,6 +3511,29 @@ var __meta__ = {
 
         clusterType: function() {
             return ClusterLayout;
+        },
+
+        plotValue: function(point) {
+            if (this.options.isStacked100) {
+                var categoryIx = point.categoryIx;
+                var categoryPts = this.categoryPoints[categoryIx];
+                var categorySum = 0;
+
+                for (var i = 0; i < categoryPts.length; i++) {
+                    var neighbour = categoryPts[i];
+
+                    if ((point.series.stack && neighbour.series.stack) &&
+                        point.series.stack !== neighbour.series.stack) {
+                        continue;
+                    }
+
+                    categorySum += neighbour.value;
+                };
+
+                return point.value / categorySum;
+            } else {
+                return CategoricalChart.fn.plotValue.call(this, point);
+            }
         },
 
         createPoint: function(data, category, categoryIx, series, seriesIx) {
@@ -8261,6 +8290,14 @@ var __meta__ = {
                 plotArea.invertAxes = inArray(
                     series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA]
                 );
+
+                for (var i = 0; i < series.length; i++) {
+                    var stack = series[i].stack;
+                    if (stack && stack.type === "100%") {
+                        plotArea.stack100 = true;
+                        break;
+                    }
+                };
             }
 
             PlotAreaBase.fn.init.call(plotArea, series, options);
@@ -8482,10 +8519,12 @@ var __meta__ = {
 
             var plotArea = this,
                 firstSeries = series[0],
+                stack = firstSeries.stack,
                 barChart = new BarChart(plotArea, {
                     series: series,
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
+                    isStacked: stack && series.length > 1,
+                    isStacked100: stack && stack.type === "100%" && series.length > 1,
                     gap: firstSeries.gap,
                     spacing: firstSeries.spacing
                 });
@@ -8694,6 +8733,12 @@ var __meta__ = {
                 axisOptions, axisPane, valueAxis,
                 primaryAxis, axes = [], range,
                 name, i;
+
+            if (plotArea.stack100) {
+                baseOptions.min = 0;
+                baseOptions.max = 1;
+                baseOptions.labels = { format: "P0" };
+            }
 
             for (i = 0; i < definitions.length; i++) {
                 axisOptions = definitions[i];

@@ -971,6 +971,69 @@
             equal(chartSeries.options.gap, GAP);
         });
 
+        test("sets isStacked when first series is stacked", function() {
+            createPlotArea([{ type: "column", data: [], stack: true }, { type: "column", data: [] }]);
+            ok(chartSeries.options.isStacked);
+        });
+
+        test("does not set isStacked when first and only series is stacked", function() {
+            createPlotArea([{ type: "column", data: [], stack: true }]);
+            ok(!chartSeries.options.isStacked);
+        });
+
+        // ------------------------------------------------------------
+        module("Categorical PlotArea / 100% Stacked Column series", {
+            setup: function() {
+                moduleSetup();
+
+                createPlotArea([{
+                    name: "Value A",
+                    type: "column",
+                    stack: { type: "100%" },
+                    data: [100, 200, 300]
+                }, {
+                    name: "Value B",
+                    type: "column",
+                    data: [10, 20, 30]
+                }]);
+            },
+            teardown: moduleTeardown
+        });
+
+        test("sets isStacked and isStacked100 when first series is 100% stacked", function() {
+            ok(chartSeries.options.isStacked);
+            ok(chartSeries.options.isStacked100);
+        });
+
+        test("default value axis range is set to 0, 1", function() {
+            var range = plotArea.valueAxis.range();
+            equal(range.min, 0);
+            equal(range.max, 1);
+        });
+
+        test("default value axis range can be overriden", function() {
+            createPlotArea([{
+                type: "column",
+                stack: { type: "100%" },
+                data: [1, 2, 3]
+            }], { valueAxis: { max: 1.2 } });
+            var range = plotArea.valueAxis.range();
+            equal(range.max, 1.2);
+        });
+
+        test("default value axis label format is set to P0", function() {
+            deepEqual(plotArea.valueAxis.options.labels.format, "P0");
+        });
+
+        test("default value axis label format can be overriden", function() {
+            createPlotArea([{
+                type: "column",
+                stack: { type: "100%" },
+                data: [1, 2, 3]
+            }], { valueAxis: { labels: { format: "N" } } });
+            deepEqual(plotArea.valueAxis.options.labels.format, "N");
+        });
+
         // ------------------------------------------------------------
         module("Categorical PlotArea / Line series", {
             setup: function() {
@@ -1215,6 +1278,12 @@
         test("does not set isStacked when first and only series is stacked", function() {
             createPlotArea([{ type: "bar", data: [], stack: true }]);
             ok(!chartSeries.options.isStacked);
+        });
+
+        test("sets isStacked and isStacked100 when first series is 100% stacked", function() {
+            createPlotArea([{ type: "bar", data: [], stack: { type: "100%" } }, { type: "bar", data: [] }]);
+            ok(chartSeries.options.isStacked);
+            ok(chartSeries.options.isStacked100);
         });
 
         // ------------------------------------------------------------
