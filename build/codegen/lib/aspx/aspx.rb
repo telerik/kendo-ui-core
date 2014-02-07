@@ -41,7 +41,8 @@ namespace <%= csharp_namespace %>
     /// <summary>
     /// 
     /// </summary>
-    public class <%= csharp_class %> : Telerik.Web.StateManager
+    <%= widget? ? "	[ParseChildren(ChildrenAsProperties = true)]" : "" %>
+    public class <%= csharp_class %> : <%= widget? ? "RadWebControl" : "Telerik.Web.StateManager" %>
     {
         #region [ Constructor ]
         public <%= csharp_class %>() {}
@@ -240,6 +241,10 @@ namespace <%= csharp_namespace %>
             "Telerik.Web.UI"
         end
 
+        def description
+            @description.gsub(/[\n\r]/, ' ')
+        end
+
         def add_option(settings)
             return if OPTIONS_TO_SKIP.include?(settings[:name])
 
@@ -408,10 +413,6 @@ namespace <%= csharp_namespace %>
             CONVERTER_CLASS_TEMPLATE.result(get_binding)
         end
 
-        def description
-            @description.gsub(/\n/, '')
-        end
-
         def get_binding
             binding
         end
@@ -473,7 +474,7 @@ namespace <%= csharp_namespace %>
         def csharp_namespace
             prefix = "Telerik.Web.UI"
 
-            return "#{prefix}.#{owner_namespace}" unless widget? && CHILD_COMPONENTS.include?(csharp_class)
+            return "#{prefix}.#{owner_namespace}" unless widget? || CHILD_COMPONENTS.include?(csharp_class)
 
             prefix
         end
