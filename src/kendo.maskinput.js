@@ -76,14 +76,19 @@ var __meta__ = {
             var selection = caret(this.element[0]);
             var start = selection[0];
             var end = selection[1];
+            var placeholder;
 
             if (key == keys.BACKSPACE) {
                 if (start === end) {
-                    start -= 1;
+                    start = start - 1;
                 }
 
-                if (start > -1) {
-                    this._mask(end, start);
+                placeholder = this._find(start, -1);
+
+                if (placeholder !== start) {
+                    caret(this.element[0], placeholder + 1);
+                } else if (start > -1) {
+                    this._mask2(start, end, "", true);
                 }
 
                 e.preventDefault();
@@ -199,10 +204,9 @@ var __meta__ = {
             var token;
             var element = this.element;
             var current = element.val() || this._emptyMask;
+            var unmasked;
 
             idx = start = this._find(start, backward ? -1 : 1);
-
-            idx += value.length;
 
             //TODO: ADD support for BACKSPACE and DELETE
 
@@ -210,7 +214,10 @@ var __meta__ = {
                 end = start;
             }
 
-            value += this._unmask(current.substring(end), end);
+            var multiple = start != end;
+
+            unmasked = this._unmask(current.substring(end), end);
+            value += unmasked;
 
             var i = 0;
             var char = value.charAt(i);
@@ -223,6 +230,7 @@ var __meta__ = {
                 if (char) {
                     if (token.test && token.test(char)) {
                         current[start] = char;
+                        idx += 1;
                     }
                 } else {
                     current[start] = this.options.emptySymbol;
@@ -235,7 +243,12 @@ var __meta__ = {
             element.val(current.join(""));
 
             if (kendo._activeElement() === element[0]) { //TODO: not tested
-                caret(element[0], idx);
+                unmasked = unmasked.length;
+                if (unmasked && !multiple) {
+                    unmasked -= 1;
+                }
+
+                caret(element[0], idx - unmasked);
             }
         },
 
