@@ -8,7 +8,7 @@ module CodeGen
             DiagramConnection
             DiagramShape
             DiagramConnectior
-            DiagramLayout}
+            DiagramLayoutSettings}
 
         OPTIONS_TO_SKIP = %w{dataSource}
 
@@ -62,6 +62,7 @@ namespace <%= csharp_namespace %>
 namespace <%= csharp_namespace %>
 {
     using System.ComponentModel;
+    using System.Web.UI;
 
     /// <summary>
     /// <%= description %>
@@ -113,6 +114,7 @@ namespace <%= csharp_namespace %>
     /// <%= description %>
     /// </summary>
     [DefaultValue("<%= name.pascalize %>")]
+    [PersistenceMode(PersistenceMode.InnerProperty)]
     public <%= csharp_class %> <%= name.pascalize %>
     {
       get
@@ -249,7 +251,6 @@ namespace <%= csharp_namespace %>
             return if OPTIONS_TO_SKIP.include?(settings[:name])
 
             if !settings[:type].nil? && settings[:type].include?('kendo.')
-                settings[:type] = settings[:type].split('.').last
 
                 name = settings[:name].strip
 
@@ -296,7 +297,7 @@ namespace <%= csharp_namespace %>
 
                     @options.delete_if { |o| o.name == name } if remove_existing
 
-                    @options.push option_class.new(:name => name,
+                    @options.push composite_option_class.new(:name => name,
                                                    :owner => self,
                                                    :recursive => recursive,
                                                    :content => content,
@@ -335,8 +336,7 @@ namespace <%= csharp_namespace %>
 =end
 
         def csharp_type
-            return "#{owner.csharp_name.sub('Settings','').sub('Collection','')}#{name.pascalize}" if enum?
-            return type[0].split('.').last if type[0].include?('kendo.')
+            return "#{owner.csharp_name.sub('Settings','').sub('Collection','')}#{name.pascalize}" if enum? || type.include?('kendo.')
             return TYPES_MAP[type[0]]
         end
 
@@ -389,8 +389,8 @@ namespace <%= csharp_namespace %>
         include Options
 
         def csharp_class
-            prefix = owner.csharp_class.sub('Settings', '')
-            "#{prefix}#{name.pascalize}Settings"
+            prefix = owner.csharp_name.sub('Settings', '')
+            name.include?('Settings') ? "#{prefix}#{name.sub('Settings', '').pascalize}" : "#{prefix}#{name.pascalize}"
         end
 
         def csharp_converter_class
@@ -576,7 +576,7 @@ namespace <%= csharp_namespace %>
         end
 
         def write_option(option)
-            if option.class == CompositeOption && option.owner.class != ArrayItem
+            if option.class == CompositeOption && option.owner.class != ArrayItem && !CHILD_COMPONENTS.include?(option.csharp_class)
                 write_composite_option_file(option)
             end
             if option.class == ArrayOption && !CHILD_COMPONENTS.include?(option.item.csharp_class)

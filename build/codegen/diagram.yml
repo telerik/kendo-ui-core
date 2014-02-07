@@ -11,4 +11,7 @@
     - :name: shapes.shape
       :type: kendo.diagram.Shape
       :description: DescriptionPH
+    - :name: layoutSettings
+      :type: kendo.diagaram.Layout
+      :description: Defines the diagram's Layout settings
 
