@@ -6,9 +6,21 @@ require 'codegen/lib/component'
 JSONTYPEDEF = ERB.new(File.read("build/codegen/lib/json-typedef/kendo.json.erb"), 0, '%<>')
 
 COMPONENT_TYPEDEF = ERB.new(%{
+        "<%= name %>": {
+            "!type": "fn(element: ?, options: ?)",
+            "!doc": "The Kendo UI <%= plugin%> widget",
+            "prototype": {
+            }
+        }}, 0, '-')
+
+COMPONENT_PLUGIN_TYPEDEF = ERB.new(%{
         "kendo<%= plugin%>": {
             "!type": "fn(options: ?) -> jQuery.fn",
-             "!doc": "Initializes a Kendo UI <%= plugin%> widget"
+            "!doc": "Initializes a Kendo UI <%= plugin%> widget"
+        },
+        "getKendo<%= plugin %>": {
+            "!type": "fn() -> Object",
+            "!doc": "Gets the instance of the Kendo UI <%= plugin%> widget"
         }}, 0, '-')
 
 module CodeGen::JsonTypeDef
@@ -26,9 +38,13 @@ module CodeGen::JsonTypeDef
         end
 
         def json_typedef
-            return unless @full_name.include?('ui')
-            
             COMPONENT_TYPEDEF.result(binding)
+        end
+
+        def plugin_json_typedef
+            return unless @full_name.include?('ui')
+
+            COMPONENT_PLUGIN_TYPEDEF.result(binding)
         end
 
         def add_method(settings)
@@ -73,7 +89,7 @@ namespace :json_typedef do
         namespace branch do
             desc "Generate JSON TypeDef from #{branch} docs"
             task :test do
-                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
+                #sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 
                 path = "dist/kendo.all.json"
 
