@@ -246,4 +246,12 @@ test("adds breaks to all paragraphs", function() {
     equal(dom.find("br").length, 2);
 });
 
+test("adds breaks to all table cells", function() {
+    var dom = $("<table><tr><th>foo</th><td>bar</td></tr></table>");
+
+    Dom.ensureTrailingBreaks(dom[0]);
+
+    equal(dom.find("br").length, 2);
+});
+
 }());

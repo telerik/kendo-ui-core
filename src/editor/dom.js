@@ -729,13 +729,13 @@ var Dom = {
     },
 
     ensureTrailingBreaks: function(node) {
-        var paragraphs = node.getElementsByTagName("p");
-        var length = paragraphs.length;
+        var elements = $(node).find("p,td,th");
+        var length = elements.length;
         var i = 0;
 
         if (length) {
             for (; i < length; i++) {
-                Dom.ensureTrailingBreak(paragraphs[i]);
+                Dom.ensureTrailingBreak(elements[i]);
             }
         } else {
             Dom.ensureTrailingBreak(node);
