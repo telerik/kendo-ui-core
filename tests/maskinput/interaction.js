@@ -101,7 +101,7 @@
         equal(input.val(), "");
     });
 
-    test("MaskInput removes widget value if empty symbol is left", function() {
+    test("MaskInput does not remove widget value if an empty symbol is left", function() {
         var maskinput = new MaskInput(input, {
             mask: "0-0"
         });
@@ -110,6 +110,6 @@
         input.val("1-_");
         input.blur();
 
-        equal(input.val(), "");
+        equal(input.val(), "1-_");
     });
 })();

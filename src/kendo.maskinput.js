@@ -41,8 +41,7 @@ var __meta__ = {
                     }
                 })
                 .on("blur" + ns, function() {
-                    var value = element.val();
-                    if (value === that._emptyMask || value.indexOf(that.options.emptySymbol) !== -1) {
+                    if (element.val() === that._emptyMask) {
                         element.val("");
                     }
                 });
