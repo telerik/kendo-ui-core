@@ -27,6 +27,25 @@
         }
 
         <script src="@Url.Content("~/content/spa/websushi/js/sushi.js")"></script>
+        <style>
+            .k-fx-tileleft.k-fx-start .k-fx-next {
+                -webkit-transform: translatex(100%);
+            }
+
+            .k-fx-tileleft.k-fx-end .k-fx-current {
+                -webkit-transform: translatex(-100%);
+            }
+
+
+            /* right */
+            .k-fx-tileright.k-fx-start .k-fx-next {
+                -webkit-transform: translatex(-100%);
+            }
+
+            .k-fx-tileright.k-fx-end .k-fx-current {
+                -webkit-transform: translatex(100%);
+            }
+        </style>
     </head>
     <body>
         <div id="application"></div>

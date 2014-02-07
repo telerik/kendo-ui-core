@@ -176,10 +176,22 @@ sushi.route("/checkout", function() {
 
 sushi.route("/menu/:id", function(itemID) {
     layout.showIn("#pre-content", cartPreview);
+    var transition = "",
+        current = detailModel.get("current");
+
+    if (current) {
+        transition = current.id < itemID ? "tileleft" : "tileright";
+    }
 
     items.fetch(function(e) {
-        detailModel.setCurrent(itemID);
-        layout.showIn("#content", detail);
+        if (detailModel.get("current")) { // existing view, start transition, then update content. This is necessary for the correct view transition clone to be created.
+            layout.showIn("#content", detail, transition);
+            detailModel.setCurrent(itemID);
+        } else {
+            // update content first
+            detailModel.setCurrent(itemID);
+            layout.showIn("#content", detail, transition);
+        }
     });
 });
 
