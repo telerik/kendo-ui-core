@@ -15,7 +15,10 @@
 
 <br /><br />
 
-<kendo:button name="iconTextButton" type="button" icon="ungroup" content="Kendo UI Button">
+<kendo:button name="iconTextButton" type="button" icon="ungroup">
+    <kendo:button-content>
+        Kendo UI Button
+    </kendo:button-content>
 </kendo:button>
 
 <script>

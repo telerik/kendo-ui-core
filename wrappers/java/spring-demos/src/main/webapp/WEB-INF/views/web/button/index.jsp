@@ -6,24 +6,42 @@
 
 <p>
 
-<kendo:button name="textButton" type="button" content="Text button">
+<kendo:button name="textButton" type="button">
+    <kendo:button-content>
+        Text button
+    </kendo:button-content>
 </kendo:button>
 
-<kendo:button name="iconTextButton" tag="a" spriteCssClass="k-icon k-i-ungroup" content="Icon and text">
+<kendo:button name="iconTextButton" tag="a" spriteCssClass="k-icon k-i-ungroup">
+    <kendo:button-content>
+        Icon and text
+    </kendo:button-content>
 </kendo:button>
 
-<kendo:button name="kendoIconTextButton" tag="a" icon="plus" content="Kendo UI Icon">
+<kendo:button name="kendoIconTextButton" tag="a" icon="plus">
+    <kendo:button-content>
+        Kendo UI Icon
+    </kendo:button-content>
 </kendo:button>
 
-<kendo:button name="iconButton" tag="em" spriteCssClass="k-icon k-i-refresh" content="<span class='k-sprite'>Refresh</span>">
+<kendo:button name="iconButton" tag="em" spriteCssClass="k-icon k-i-refresh">
+    <kendo:button-content>
+        <span class='k-sprite'>Refresh</span>
+    </kendo:button-content>
 </kendo:button>
 
 </p><p>
 
-<kendo:button name="disabledButton1" tag="span" enable="false" content="Disabled via configuration">
+<kendo:button name="disabledButton1" tag="span" enable="false">
+    <kendo:button-content>
+        Disabled via configuration
+    </kendo:button-content>
 </kendo:button>
 
-<kendo:button name="disabledButton2" tag="span" disabled="disabled" content="Disabled via HTML attribute">
+<kendo:button name="disabledButton2" disabled="disabled">
+    <kendo:button-content>
+        Disabled via HTML attribute
+    </kendo:button-content>
 </kendo:button>
 
 </p>
