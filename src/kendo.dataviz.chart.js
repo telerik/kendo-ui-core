@@ -138,6 +138,7 @@ var __meta__ = {
         LEGEND_ITEM_HOVER = "legendItemHover",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
+        LOGARITHMIC = "logarithmic",
         MAX_EXPAND_DEPTH = 5,
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
@@ -8690,7 +8691,7 @@ var __meta__ = {
                 baseOptions = { vertical: !invertAxes },
                 axisOptions, axisPane, valueAxis,
                 primaryAxis, axes = [], range,
-                axisType,
+                axisType, defaultAxisRange,
                 name, i;
 
             if (plotArea.stack100) {
@@ -8704,14 +8705,15 @@ var __meta__ = {
 
                 if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
-                    range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
+                    defaultAxisRange = axisOptions.type === LOGARITHMIC ? {min: 0.1, max: 1} : { min: 0, max: 1 };
+                    range = tracker.query(name) || defaultRange || defaultAxisRange;
 
                     if (i === 0 && range && defaultRange) {
                         range.min = math.min(range.min, defaultRange.min);
                         range.max = math.max(range.max, defaultRange.max);
                     }
 
-                    if (axisOptions.type === "logarithmic") {
+                    if (axisOptions.type === LOGARITHMIC) {
                         axisType = LogarithmicAxis;
                     } else {
                         axisType = NumericAxis;

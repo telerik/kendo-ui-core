@@ -1313,6 +1313,13 @@ var __meta__ = {
         parseNoteValue: function(value) {
             return value;
         },
+        
+        skipUnit: function() {
+            var axis = this,
+                options = axis.options,
+                majorUnit = options.majorTicks.visible ? options.majorUnit : 0;
+            return majorUnit / options.minorUnit;
+        },
 
         renderTicks: function(view) {
             var axis = this,
@@ -1358,7 +1365,7 @@ var __meta__ = {
 
             render(axis.getMajorTickPositions(), options.majorTicks);
             render(axis.getMinorTickPositions(), deepExtend({}, {
-                    skipUnit: majorUnit / options.minorUnit
+                    skipUnit: axis.skipUnit()
                 }, options.minorTicks));
 
             return ticks;
@@ -1520,7 +1527,7 @@ var __meta__ = {
 
             render(axis.getMajorTickPositions(), options.majorGridLines);
             render(axis.getMinorTickPositions(), deepExtend({}, {
-                    skipUnit: majorUnit / options.minorUnit
+                    skipUnit: axis.skipUnit()
                 }, options.minorGridLines));
 
             return items;
@@ -2397,53 +2404,18 @@ var __meta__ = {
 
         options: {
             type: "logarithmic",
-            logarithmBase: 10,
-            axisCrossingValue: 0.1,
+            majorUnit: 10,
+            minorUnit: 1,
+            axisCrossingValue: 1,
             vertical: true,
             majorGridLines: {
                 visible: true,
                 width: 1,
                 color: BLACK
-            },
+            },            
             zIndex: 1
         },
-
-        range: function() {
-            var options = this.options;
-            return { min: options.min, max: options.max };
-        },
-
-        labelsCount: function() {
-            return this.getDivisions() + 1;
-        },
-
-        getMajorTickPositions: function() {
-            return this.getTickPositions();
-        },
-
-        getMinorTickPositions: function(){
-            return [];
-        },
-
-        _initOptions: function(seriesMin, seriesMax, options) {
-            var axis = this,
-                axisOptions = deepExtend({}, axis.options, {min: seriesMin, max: seriesMax}, options),
-                min = axisOptions.min,
-                max = axisOptions.max,
-                base = axisOptions.logarithmBase;
-
-            if (min <= 0 || max <= 0) {
-                throw new Error("Non positive values cannot be used for a logarithmic axis.");
-            }
-
-            axis.logMin = math.floor(axis._log(min, base));
-            axis.logMax = math.ceil(axis._log(max, base));
-            axisOptions.min = math.pow(base, axis.logMin);
-            axisOptions.max = math.pow(base, axis.logMax);
-
-            return axisOptions;
-        },
-
+        
         getSlot: function(a, b) {
             var axis = this,
                 options = axis.options,
@@ -2454,13 +2426,13 @@ var __meta__ = {
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
                 dir = reverse ? -1 : 1,
-                base = options.logarithmBase,
+                base = options.majorUnit,
                 logMin = axis.logMin,
                 logMax = axis.logMax,
                 step = dir * (lineSize / (logMax - logMin)),
                 p1, p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
-
+          
             if (!defined(a)) {
                 a = b || 0;
             }
@@ -2469,8 +2441,8 @@ var __meta__ = {
                 b = a || 0;
             }
 
-            a = axis._log(a, base);
-            b = axis._log(b, base);
+            a = log(a, base);
+            b = log(b, base);
 
             a = math.max(math.min(a, logMax), logMin);
             b = math.max(math.min(b, logMax), logMin);
@@ -2487,7 +2459,7 @@ var __meta__ = {
             slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
 
             return slotBox;
-        },
+        },        
 
         getValue: function(point) {
             var axis = this,
@@ -2496,7 +2468,7 @@ var __meta__ = {
                 vertical = options.vertical,
                 max = options.max * 1,
                 min = options.min * 1,
-                base = options.logarithmBase,
+                base = options.majorUnit,
                 logMin = axis.logMin,
                 logMax = axis.logMax,
                 valueAxis = vertical ? Y : X,
@@ -2518,49 +2490,191 @@ var __meta__ = {
                     logMin + valueOffset;
 
             return round(math.pow(base, value), DEFAULT_PRECISION);
+        },        
+
+        range: function() {
+            var options = this.options;
+            return { min: options.min, max: options.max };
         },
 
-        getDivisions: function() {
-            return this.logMax - this.logMin;
-        },
-
-        _log: function (y, x) {
-            return math.log(y) / math.log(x);
-        },
-
-        getTickPositions: function() {
+        scaleRange: function(delta) {
             var axis = this,
                 options = axis.options,
+                base = options.majorUnit,
+                offset = -delta;
+         
+            return {
+                min: math.pow(base, axis.logMin - offset),
+                max: math.pow(base, axis.logMax + offset)
+            };
+        },
+
+        translateRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                base = options.majorUnit,
+                lineBox = axis.lineBox(),
                 vertical = options.vertical,
                 reverse = options.reverse,
-                lineBox = axis.lineBox(),
-                lineSize = vertical ? lineBox.height() : lineBox.width(),
-                divisions = axis.getDivisions(),
-                step = lineSize / divisions,
-                dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
-                startEdge = dir === 1 ? 1 : 2,
-                pos = lineBox[(vertical ? Y : X) + startEdge],
-                positions = [],
-                length = divisions + 1,
-                i;
+                size = vertical ? lineBox.height() : lineBox.width(),
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                scale = size / (axis.logMax - axis.logMin)
+                offset = round(delta / scale, DEFAULT_PRECISION);
 
-            for (i = 0; i < length; i++) {
-                positions.push(round(pos, COORD_PRECISION));
-
-                pos = pos + step * dir;
+            if ((vertical || reverse) && !(vertical && reverse )) {
+                offset = -offset;
             }
 
+            return {
+                min: math.pow(base, axis.logMin + offset),
+                max: math.pow(base, axis.logMax + offset)
+            };
+        },        
+        
+        labelsCount: function() {
+            var axis = this,
+                floorMax = math.floor(axis.logMax),
+                count = math.ceil(floorMax - axis.logMin) + 1;
+         
+            return count;            
+        },
+
+        getMajorTickPositions: function() {
+            var axis = this,
+                options = axis.options,
+                lineOptions = axis._lineOptions(),
+                lineStart = lineOptions.lineStart,
+                step = lineOptions.step,              
+                minorUnit = options.minorUnit,
+                base = options.majorUnit,
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                positions = [],
+                power;
+           
+            for (power = logMin; power <= logMax ; power= math.floor(power + 1)) {
+                positions.push(lineStart + step * (power - logMin));
+            }
+            
             return positions;
         },
 
+        skipUnit: function() {
+            return 0.1;
+        },       
+        
+        getMinorTickPositions: function(){
+            var axis = this,
+                options = axis.options,
+                lineOptions = axis._lineOptions(),
+                lineStart = lineOptions.lineStart,
+                step = lineOptions.step,              
+                minorUnit = options.minorUnit,
+                base = options.majorUnit,
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                start = logMin,
+                max = math.pow(base, logMax),
+                positions = [],
+                power, 
+                value, 
+                minorOptions;
+
+            if (start % 1 !== 0) {
+                positions.push(lineStart);
+                minorOptions = axis._minorIntervalOptions(start);
+                value = minorOptions.value;
+                start = log(value + minorOptions.minorStep - value % minorOptions.minorStep, base);
+            }
+            
+            for (power = start; power < logMax; power = math.floor(power + 1)) {
+                minorOptions = axis._minorIntervalOptions(power);
+                value = minorOptions.value;
+                
+                while (value < minorOptions.nextValue && value < max) {
+                    positions.push(lineStart + step * (log(value, base) - logMin));
+                    value+= minorOptions.minorStep;
+                }
+            }
+            
+            return positions;
+        },    
+        
+        _minorIntervalOptions: function(power) {
+            var base = this.options.majorUnit,
+                value = math.pow(base, power),
+                nextValue = math.pow(base, math.floor(power + 1)),
+                difference = nextValue - math.pow(base, math.floor(power)),
+                minorStep = difference / this.options.minorUnit;
+            return {
+                value: value,
+                nextValue: nextValue,
+                minorStep: minorStep
+            };
+        },
+        
         createAxisLabel: function(index, labelOptions) {
             var axis = this,
                 options = axis.options,
-                value = round(Math.pow(options.logarithmBase, axis.logMin + index), DEFAULT_PRECISION),
+                power = axis.logMin + index,
+                value = round(Math.pow(options.majorUnit, index === 0 ? power : math.floor(power)), DEFAULT_PRECISION),
                 text = axis.axisLabelText(value, null, labelOptions);
 
             return new AxisLabel(value, text, index, null, labelOptions);
-        }
+        },
+        
+        shouldRenderNote: function(value) {
+            var range = this.range();
+            return range.min <= value && value <= range.max;
+        },        
+
+        _initOptions: function(seriesMin, seriesMax, options) {
+            var axis = this,
+                axisOptions = deepExtend({}, axis.options, {min: seriesMin, max: seriesMax}, options),
+                min = axisOptions.min,
+                max = axisOptions.max,
+                base = axisOptions.majorUnit;
+            
+            if (!defined(options.max)) {
+               if (log(max, base) % 1 < 0.5 || log(max, base) % 1 > 0.9) {
+                   max = math.pow(base, log(max, base) + 0.2);
+               } else {
+                   max = math.pow(base, math.ceil(log(max, base)));
+               }
+            }
+            
+            if (!defined(options.min)) {
+               if (!options.narrowRange) {
+                   min = math.pow(base, math.floor(log(min, base)));
+               }
+            }                       
+            
+            axis.logMin = round(log(min, base), DEFAULT_PRECISION);
+            axis.logMax = round(log(max, base), DEFAULT_PRECISION);
+            axisOptions.minorUnit = options.minorUnit || round(base - 1, DEFAULT_PRECISION);
+        
+            return axisOptions;
+        },
+        
+        _lineOptions: function() {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                dir = vertical === reverse ? 1 : -1,
+                startEdge = dir === 1 ? 1 : 2,                 
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                step = dir * (lineSize / (axis.logMax - axis.logMin)),
+                lineStart = lineBox[valueAxis + startEdge];
+           
+            return {
+                step: step,
+                lineStart: lineStart
+            };            
+        } 
     });
 
     // View base classes ======================================================
@@ -3831,7 +3945,11 @@ var __meta__ = {
         var power = math.pow(10, precision || 0);
         return math.round(value * power) / power;
     }
-
+    
+    function log(y, x) {
+        return math.log(y) / math.log(x);
+    }
+    
     function remainderClose(value, divisor, ratio) {
         var remainder = round(math.abs(value % divisor), DEFAULT_PRECISION),
             threshold = divisor * (1 - ratio);

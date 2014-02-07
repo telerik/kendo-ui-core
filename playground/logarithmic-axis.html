@@ -11,44 +11,211 @@
         <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
          <script src="../src/kendo.dataviz.chart.polar.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.canvas.js"></script>
         <script src="../src/kendo.dataviz.themes.js"></script>
-        <script src="CurveProcessor.js"></script>
     </head>
     <body>
 
-        <div id="log" style="height: 600px;"></div>
+        <div id="chart" style="height: 500px;"></div>
+        <div id="panes"></div>
        <script>
-        $("#log").kendoChart({
-            seriesDefaults: {
-                type: "line",    
-                labels: {
-                    visible: true
+       createChart();
+         function createChart() {
+            $("#panes").kendoStockChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../demos/mvc/content/dataviz/js/boeing-stock.json",
+                            dataType: "json"
+                        }
+                    }
                 },
-                style: "smooth"
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                dateField: "Date",
+                series: [{
+                    type: "column",
+                    field: "Volume",
+                    axis: "volumeAxis",
+                    labels: {
+                        visible: true
+                    },
+                    tooltip: {
+                        format: "{0:C0}"
+                    }
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2002/09/01",
+                        to: "2005/04/01"
+                    }
+                },
+                panes: [{
+                    name: "volumePane",
+                    title: "Volume",
+                    height: 300 // pixels
+                }],
+                valueAxes: [{
+                    name: "volumeAxis",
+                    pane: "volumePane",
+                    visible: true,
+                    minorTicks: {
+                        visible: true,
+                        color: "green"
+                    },
+                    minorGridLines: {
+                        visible: true,
+                        color: "green"
+                    },
+                    type: "logarithmic",
+                    narrowRange: false
+                }],
+                categoryAxis: {
+                    notes: {
+                        data: [{
+                            value: "2001/01/01",
+                            label: {
+                                text: "01"
+                            }
+                        }, {
+                            value: "2002/01/01",
+                            label: {
+                                text: "02"
+                            }
+                        }, {
+                            value: "2003/01/01",
+                            label: {
+                                text: "03"
+                            }
+                        }, {
+                            value: "2004/01/01",
+                            label: {
+                                text: "04"
+                            }
+                        }, {
+                            value: "2005/01/01",
+                            label: {
+                                text: "05"
+                            }
+                        }, {
+                            value: "2006/01/01",
+                            label: {
+                                text: "06"
+                            }
+                        }, {
+                            value: "2007/01/01",
+                            label: {
+                                text: "07"
+                            }
+                        }, {
+                            value: "2008/01/01",
+                            label: {
+                                text: "08"
+                            }
+                        }, {
+                            value: "2009/01/01",
+                            label: {
+                                text: "09"
+                            }
+                        }, {
+                            value: "2010/01/01",
+                            label: {
+                                text: "10"
+                            }
+                        }, {
+                            value: "2011/01/01",
+                            label: {
+                                text: "11"
+                            }
+                        }, {
+                            value: "2012/01/01",
+                            label: {
+                                text: "12"
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+       var data = [1, 1];         
+       for (var i = 2; i < 30; i++) {
+            data.push(data[i-1] + data[i-2]);
+       }
+    
+        $("#chart").kendoChart({
+            title: "Fibonacci sequence",
+            dataSource: {
+                data: data
+              // data: [{value: 3}, {value: 4}, {value: 5}, {value: 6}, {value: 7},{value: 8},{value: 9},
+                // {value: 20, note: "min"}, {value: 30}, {value: 40}, {value: 50}, {value: 60},{value: 70}, {value: 80}, {value: 90}, 
+                // {value: 100, note: "middle"}, {value: 200}, {value: 300} ,{value: 400} ,{value: 500}, {value: 600}, {value: 700}, {value: 800}, {value: 900, note: "top"}, {value: 1001}, {value: 100001}]
             },
-            series: [{               
-                data: [0.1, 11, 100, 234, 1000, 2345, 10000, 23456, 1, 0.01],//error when no data ??? check for type before setting the defaults
-                axis: "top"
-            }, {                      
-                data: [2, 5, 15, 24, 44, 55, 32, 1, 0.1],
-                axis: "bottom"
-            }],           
+            seriesDefaults: {
+                type: "bar",    
+                labels: {
+                    visible: true                   
+                },
+                style: "smooth",
+                markers: {
+                    size: 5
+                }
+            },
+            series: [{   
+                field: "value",
+                noteTextField: "note",
+                notes: {
+                    position: "right"
+                }
+            } ],           
             valueAxis: [{  
-                name: "top",
-                pane: "top",
-                type: "logarithmic"
-            },{
-                name: "bottom",
-                pane: "bottom",
                 type: "logarithmic",
-                logarithmBase: 2    
-            }],
+                majorUnit: 10,
+                min: 2.5,
+                // minorUnit: 9,                 
+                minorGridLines: {
+                    visible: true,
+                    // color: "red"
+                },  
+                majorGridLines: {
+                    visible: true,
+                    // color: "blue"
+                },                  
+                reverse: false,
+                // narrowRange: false,
+                minorTicks: {
+                  // size: 6,
+                  // color: "green",
+                  // width: 1,
+                  visible: true
+                },
+                 majorTicks: {
+                  // size: 6,
+                  // color: "red",
+                  // width: 5,
+                  visible: true
+                }
+            }
+            // ,
+            // {
+                // name: "bottom",
+                // pane: "bottom",
+                // type: "logarithmic",
+                // majorUnit: 2,
+                // narrowRange: false
+            // }
+            ],
             
-            panes: [{name: "top"}, {name: "bottom"}],
+            // panes: [{name: "top"}, {name: "bottom"}],
             
             tooltip:{
                 visible: true
