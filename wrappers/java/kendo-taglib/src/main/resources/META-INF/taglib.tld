@@ -111,7 +111,7 @@ all data items which begin with the current widget value are displayed in the su
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.</description>
+            <description>Specifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.</description>
             <name>valuePrimitive</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -418,28 +418,25 @@ If it is not supported by the browser, the Barcode will switch to the first avai
         </attribute>
 
     </tag>
-
-
-
-
+    
     <tag>
         <description>Button</description>
         <name>button</name>
         <tag-class>com.kendoui.taglib.ButtonTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
+            <description>The tag which the Button will render</description>
+            <name>tag</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>The content of the Button</description>
-            <name>content</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
+        </attribute>       
         <attribute>
             <description>Indicates whether the Button should be enabled or disabled. By default, it is enabled, unless a disabled="disabled" attribute is detected.</description>
             <name>enable</name>
@@ -474,7 +471,6 @@ In case you want to use an icon from the Kendo UI theme sprite background image,
         </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
-
 
     <tag>
         <description>Fires when the Button is clicked with the mouse, touched on a touch device, or ENTER (or SPACE) is pressed while the Button is focused.</description>
@@ -30693,5 +30689,11 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>java.lang.String</type>
         </attribute>
     </tag>
+   	<tag>
+		<description>Button content</description>
+		<name>button-content</name>
+		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
     
 </taglib>

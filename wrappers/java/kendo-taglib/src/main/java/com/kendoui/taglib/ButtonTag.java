@@ -19,15 +19,14 @@ public class ButtonTag extends WidgetTag /* interfaces *//* interfaces */ {
     @Override
     protected Element<?> createElement() {
         Element<?> wrapper;
-        
-        String tag = getTag();
-
-        if (tag.isEmpty()) {
+                
+        if (isSet("tag")) {            
+            wrapper = new GenericElement(getTag());
+            properties().remove("tag");       
+        } else {            
             wrapper = new Button();
-        } else {
-            wrapper = new GenericElement(tag);
         }
-
+        
         wrapper.html(body());
                
         return wrapper;
@@ -65,15 +64,7 @@ public class ButtonTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setClick(ClickFunctionTag value) {
         setEvent("click", value.getBody());
-    }
-
-    public java.lang.Object getContent() {
-        return (java.lang.Object)getProperty("content");
-    }
-
-    public void setContent(java.lang.Object value) {
-        setProperty("content", value);
-    }
+    }   
 
     public boolean getEnable() {
         return (boolean)getProperty("enable");
@@ -128,5 +119,4 @@ public class ButtonTag extends WidgetTag /* interfaces *//* interfaces */ {
     public void setTag(java.lang.String value) {
         setProperty("tag", value);
     }
-
 }
