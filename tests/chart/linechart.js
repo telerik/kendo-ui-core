@@ -49,6 +49,8 @@
         };
     }
 
+    baseLineChartTests("line", dataviz.LineChart);
+
     (function() {
         var positiveSeries = { data: [1, 2], labels: {} },
             negativeSeries = { data: [-1, -2], labels: {} },
@@ -72,135 +74,6 @@
         );
 
         // ------------------------------------------------------------
-        module("Line Chart / Positive Values", {
-            setup: function() {
-                setupLineChart(plotArea, { series: [ positiveSeries ] });
-            }
-        });
-
-        test("Creates points for lineChart data points", function() {
-            equal(lineChart.points.length, positiveSeries.data.length);
-        });
-
-        test("Reports minimum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
-        });
-
-        test("Reports maximum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
-        });
-
-        test("Reports number of categories", function() {
-            setupLineChart(plotArea, {series: [ positiveSeries ]});
-            equal(categoriesCount(lineChart.options.series), positiveSeries.data.length);
-        });
-
-        test("points are distributed across category axis", function() {
-            var pointsX = $.map(lineChart.points, function(point) {
-                return point.box.x1;
-            });
-
-            deepEqual(pointsX, [0, 1]);
-        });
-
-        test("points are aligned to category axis", function() {
-            var pointsY = $.map(lineChart.points, function(point) {
-                return point.box.y2;
-            });
-
-            deepEqual(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
-        });
-
-        test("points have set width", function() {
-            $.each(lineChart.points, function() {
-                equal(this.box.width(), 1);
-            });
-        });
-
-        test("points have set height according to value", function() {
-            var pointHeights = $.map(lineChart.points, function(point) {
-                return point.box.height();
-            });
-
-            deepEqual(pointHeights, [1, 2]);
-        });
-
-        test("getNearestPoint returns nearest series point", function() {
-            var point = lineChart.points[1],
-                result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
-
-            ok(result === point);
-        });
-
-        test("sets point owner", function() {
-            ok(lineChart.points[0].owner === lineChart);
-        });
-
-        test("sets point series", function() {
-            ok(lineChart.points[0].series === positiveSeries);
-        });
-
-        test("sets point series index", function() {
-            ok(lineChart.points[0].seriesIx === 0);
-        });
-
-        test("sets point category", function() {
-            equal(lineChart.points[0].category, "A");
-        });
-
-        test("sets point dataItem", function() {
-            equal(typeof lineChart.points[0].dataItem, "number");
-        });
-
-        test("Throws error when unable to locate value axis", function() {
-            raises(function() {
-                    setupLineChart(plotArea, {
-                        series: [{ axis: "b", data: [1] }]
-                    });
-                },
-                /Unable to locate value axis with name b/);
-        });
-
-        // ------------------------------------------------------------
-        module("Line Chart / Negative Values", {
-            setup: function() {
-                setupLineChart(plotArea, { series: [ negativeSeries ] });
-            }
-        });
-
-        test("Reports minimum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
-        });
-
-        test("Reports maximum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
-        });
-
-        test("point tops are aligned to category axis", function() {
-            var pointsY = $.map(lineChart.points, function(point) {
-                return point.box.y1;
-            });
-
-            deepEqual(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
-        });
-
-        test("points have set height according to value", function() {
-            var pointHeights = $.map(lineChart.points, function(point) {
-                return point.box.height();
-            });
-
-            deepEqual(pointHeights, [1, 2]);
-        });
-
-        test("getNearestPoint returns nearest series point", function() {
-            var point = lineChart.points[1],
-                result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
-
-            ok(result === point);
-        });
-        
-        // ------------------------------------------------------------
-                       
         module("Line Chart / Values exceeding value axis min or max options ", {});
 
         test("values are not limited", 2, function() {
@@ -216,7 +89,7 @@
             );
            
             setupLineChart(plotArea, { series: [ {data: [1, 2]} ] });          
-        });        
+        });
 
         // ------------------------------------------------------------
         module("Line Chart / Multiple Series", {
@@ -288,18 +161,6 @@
             }
         });
 
-        test("Reports minimum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
-        });
-
-        test("Reports maximum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].max, 3);
-        });
-
-        test("Reports number of categories", function() {
-            equal(categoriesCount(lineChart.options.series), 3);
-        });
-
         test("getNearestPoint returns nearest series point", function() {
             var point = lineChart.points[3],
                 result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 1);
@@ -316,14 +177,6 @@
             }
         });
 
-        test("reports minimum series value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].min, 1);
-        });
-
-        test("reports maximum series value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].max, 2);
-        });
-
         test("ignores null values when reporting minimum series value", function() {
             setupLineChart(plotArea, {
                 series: [{ data: [1, 2, null] }]
@@ -332,16 +185,6 @@
         });
 
         test("omits missing points by default", function() {
-            equal(lineChart.points[2], null);
-        });
-
-        test("omits missing points when interpolating", function() {
-            setupLineChart(plotArea, {
-                series: [
-                    $.extend({ missingValues: "interpolate" }, sparseSeries)
-                ]
-            });
-
             equal(lineChart.points[2], null);
         });
 
@@ -370,114 +213,6 @@
         });
 
         // ------------------------------------------------------------
-        module("Line Chart / Stack / Positive Values", {
-            setup: function() {
-                setupLineChart(plotArea, {
-                    series: [ positiveSeries, positiveSeries, positiveSeries ],
-                    isStacked: true }
-                );
-            }
-        });
-
-        test("reports stacked minumum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].min, 1);
-        });
-
-        test("reports stacked maximum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].max, 6);
-        });
-
-        test("point plot values are stacked", function() {
-            deepEqual(
-                $.map(lineChart.points, function(point) { return lineChart.plotRange(point)[0] }),
-                [1, 2, 3, 2, 4, 6]
-            );
-        });
-
-        // ------------------------------------------------------------
-        module("Line Chart / Stack / Negative Values", {
-            setup: function() {
-                setupLineChart(plotArea, {
-                    series: [ negativeSeries, negativeSeries, negativeSeries ],
-                    isStacked: true
-                });
-            }
-        });
-
-        test("reports stacked minumum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].min, -6);
-        });
-
-        test("reports stacked maximum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].max, -1);
-        });
-
-        test("point plot values are stacked", function() {
-            deepEqual(
-                $.map(lineChart.points, function(point) { return lineChart.plotRange(point)[0] }),
-                [-1, -2, -3, -2, -4, -6]
-            );
-        });
-
-        // ------------------------------------------------------------
-        module("Line Chart / Stack / Mixed Values", {
-            setup: function() {
-                setupLineChart(plotArea, {
-                    series: [{
-                        data: [2, 2],
-                        labels: {}
-                    }, {
-                        data: [-1, -1],
-                        labels: {}
-                    }],
-                    isStacked: true
-                });
-            }
-        });
-
-        test("reports stacked minumum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].min, 1);
-        });
-
-        test("reports stacked maximum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].max, 2);
-        });
-
-        test("points have set height according to stack value", function() {
-            var pointHeights = $.map(lineChart.points, function(point) {
-                return point.box.height();
-            });
-
-            deepEqual(pointHeights, [2, 1, 2, 1]);
-        });
-
-        // ------------------------------------------------------------
-        module("Line Chart / Stack / Mixed Series", {
-            setup: function() {
-                plotArea.namedValueAxes.a = plotArea.valueAxis;
-                plotArea.namedValueAxes.b = plotArea.valueAxis;
-
-                setupLineChart(plotArea, {
-                    series: [
-                        // Both axes should be on same axis.
-                        // This rule is intentionally broken for the tests.
-                        $.extend({ axis: "a" }, positiveSeries),
-                        $.extend({ axis: "b" }, negativeSeries)
-                    ],
-                    isStacked: true
-                });
-            }
-        });
-
-        test("reports stacked minumum value for default axis", function() {
-            equal(lineChart.valueAxisRanges.a.min, 0);
-        });
-
-        test("reports stacked maximum value for default axis", function() {
-            equal(lineChart.valueAxisRanges.a.max, 2);
-        });
-
-        // ------------------------------------------------------------
         module("Line Chart / Stack / Missing values", {
             setup: function() {
                 setupLineChart(plotArea, {
@@ -485,39 +220,6 @@
                     isStacked: true
                 });
             }
-        });
-
-        test("Reports minimum series value", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].min, 0);
-        });
-
-        test("Reports minimum series value (interpolated)", function() {
-            setupLineChart(plotArea, {
-                series: [
-                    $.extend({ missingValues: "interpolate" }, sparseSeries)
-                ],
-                isStacked: true
-            });
-            deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
-        });
-
-        test("Reports maximum series value", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].max, 4);
-        });
-
-        test("missing points are assumed to be 0 by default", function() {
-            equal(lineChart.points[4].value, 0);
-        });
-
-        test("missing points are skipped", function() {
-            setupLineChart(plotArea, {
-                series: [
-                    $.extend({ missingValues: "gap" }, sparseSeries)
-                ],
-                isStacked: true
-            });
-
-            equal(lineChart.points[4], null);
         });
 
         test("line is drawn between existing points", function() {
@@ -604,43 +306,6 @@
 
         test("reports maximum value for default axis", function() {
             close(lineChart.valueAxisRanges[undefined].max, 2/3);
-        });
-
-        // ------------------------------------------------------------
-        module("Line Chart / Stack / Panes", {
-            teardown: destroyChart
-        });
-
-        test("charts in different panes are not stacked", function() {
-            teardown: destroyChart
-            var chart = createChart({
-                series: [{
-                    stack: true,
-                    type: "line",
-                    data: [1]
-                }, {
-                    type: "line",
-                    data: [2],
-                    axis: "b"
-                }],
-                panes: [{
-                    name: "top"
-                }, {
-                    name: "bottom"
-                }],
-                valueAxis: [{
-                }, {
-                    name: "b",
-                    pane: "bottom"
-                }],
-                categoryAxis: {
-                    categories: ["A"]
-                }
-            });
-
-            var lineCharts = chart._model._plotArea.charts;
-            equal(lineCharts[0].points[0].plotValue, undefined);
-            equal(lineCharts[1].points[0].plotValue, undefined);
         });
 
         // ------------------------------------------------------------
@@ -763,195 +428,6 @@
             deepEqual(pointCoordinates, [
                 [ 0.5, 1 ], [ 1.5, 0 ], [ 2.5, 2 ], [ 3.5, 0 ]
             ]);
-        });
-
-    })();
-
-    (function() {
-        var lineChart,
-            MARGIN = PADDING = BORDER = 5,
-            linePoint;
-
-        var plotArea = stubPlotArea(
-            function(categoryIndex) {
-                return new Box2D();
-            },
-            function(value) {
-                return new Box2D();
-            },
-            {
-                categoryAxis: { }
-            }
-        );
-
-        function createLineChart(options) {
-            lineChart = new dataviz.LineChart(plotArea, {
-                series: [$.extend({
-                    data: [0, 1],
-                    color: "#f00",
-                    markers: {
-                        visible: false,
-                        size: 10,
-                        type: "triangle",
-                        border: {
-                            width: BORDER
-                        },
-                        opacity: 0.2
-                    },
-                    labels: {
-                        visible: false,
-                        color: "labels-color",
-                        background: "labels-background",
-                        border: {
-                            color: "labels-border",
-                            width: BORDER
-                        },
-                        margin: MARGIN,
-                        padding: PADDING
-                    },
-                    opacity: 0.5,
-                    dashType: "dot"
-                }, options)]
-            });
-            linePoint = lineChart.points[0];
-            lineChart.reflow(chartBox);
-        }
-
-        // ------------------------------------------------------------
-        module("Line Chart / Configuration", {
-            setup: function() {
-                createLineChart();
-            },
-            teardown: function() {
-                destroyChart();
-            }
-        });
-
-        test("remove series if visible is set to false", function() {
-            var chart = createChart({
-                seriesDefaults: {
-                    type: "line"
-                },
-                series: [{
-                    data: [1],
-                    visible: false
-                },{
-                    data: [1]
-                }]
-            });
-
-            var points = chart._model._plotArea.charts[0].points;
-
-            ok(points.length === 1);
-        });
-
-        test("applies visible to point markers", function() {
-            equal(linePoint.options.markers.visible, false);
-        });
-
-        test("applies series color to point markers border", function() {
-            createLineChart({ markers: { visible: true } });
-            equal(linePoint.marker.options.border.color, "#f00");
-        });
-
-        test("applies opacity to point markers", function() {
-            equal(linePoint.options.markers.opacity, 0.2);
-        });
-
-        test("applies size to point markers", function() {
-            equal(linePoint.options.markers.size, 10);
-        });
-
-        test("applies type to point markers", function() {
-            equal(linePoint.options.markers.type, "triangle");
-        });
-
-        test("applies border color to point markers", function() {
-            createLineChart({ markers: { border: { color: "marker-border" } } });
-            equal(linePoint.options.markers.border.color, "marker-border");
-        });
-
-        test("applies border width to point markers.", function() {
-            equal(linePoint.options.markers.border.width, BORDER);
-        });
-
-        test("applies visible to point labels", function() {
-            equal(linePoint.options.labels.visible, false);
-        });
-
-        test("applies color to point labels", function() {
-            equal(linePoint.options.labels.color, "labels-color");
-        });
-
-        test("applies background to point labels", function() {
-            equal(linePoint.options.labels.background, "labels-background");
-        });
-
-        test("applies border color to point labels", function() {
-            equal(linePoint.options.labels.border.color, "labels-border");
-        });
-
-        test("applies border width to point labels", function() {
-            equal(linePoint.options.labels.border.width, BORDER);
-        });
-
-        test("applies padding to point labels", function() {
-            equal(linePoint.options.labels.padding, PADDING);
-        });
-
-        test("applies margin to point labels", function() {
-            equal(linePoint.options.labels.margin, MARGIN);
-        });
-
-        test("applies dashType", function() {
-            equal(linePoint.options.dashType, "dot");
-        });
-
-        test("binds point color", function() {
-            createLineChart({
-                type: "line",
-                data: [{
-                    color: "red", value: 1
-                }, {
-                    color: "green", value: 2
-                }],
-                field: "value",
-                colorField: "color"
-            });
-
-            equal(lineChart.points[0].color, "red");
-            equal(lineChart.points[1].color, "green");
-        });
-
-        test("applies color function", function() {
-            createLineChart({
-                markers: { visible: true },
-                color: function(point) { return "#f00" }
-            });
-
-            equal(linePoint.marker.options.border.color, "#f00");
-        });
-
-        test("color fn argument contains value", 1, function() {
-            createLineChart({
-                data: [1],
-                color: function(point) { equal(point.value, 1); }
-            });
-        });
-
-        test("color fn argument contains category", 1, function() {
-            createLineChart({
-                data: [1],
-                color: function(point) { equal(point.category, "A"); }
-            });
-        });
-
-        test("color fn argument contains series", 1, function() {
-            createLineChart({
-                name: "series 1",
-                data: [1],
-                color: function(point) { equal(point.series.name, "series 1"); }
-            });
         });
 
     })();
@@ -1292,51 +768,6 @@
             createPoint({ labels: { visible: true, template: "${series.name}" } });
             equal(point.children[1].children[0].content, SERIES_NAME);
         });
-    })();
-
-    (function() {
-        var data = [{
-                name: "Category A",
-                text: "Alpha",
-                value: 0
-            }],
-            chart,
-            label;
-
-        // ------------------------------------------------------------
-        module("Line Chart / Integration", {
-            setup: function() {
-                chart = createChart({
-                    dataSource: {
-                        data: data
-                    },
-                    seriesDefaults: {
-                        labels: {
-                            visible: true,
-                            template: "${dataItem.text}"
-                        }
-                    },
-                    series: [{
-                        name: "Value",
-                        type: "line",
-                        field: "value"
-                    }],
-                    categoryAxis: {
-                        field: "name"
-                    }
-                });
-
-                label = chart._plotArea.charts[0].points[0].children[1];
-            },
-            teardown: function() {
-                destroyChart();
-            }
-        });
-
-        test("dataItem sent to label template", function() {
-            equal(label.children[0].content, "Alpha");
-        });
-
     })();
 
     (function() {
