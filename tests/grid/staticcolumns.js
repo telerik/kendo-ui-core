@@ -701,4 +701,262 @@
         equal(grid.wrapper.find(".k-grid-header-static").length, 1);
         equal(grid.wrapper.find(".k-grid-content-static").length, 1);
     });
+
+    test("lock column by field", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        grid.lockColumn("bar");
+
+        equal(grid.columns[1].static, true);
+        equal(grid.columns[1].field, "bar");
+    });
+
+    test("lock column by index", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        grid.lockColumn(1);
+
+        equal(grid.columns[1].static, true);
+        equal(grid.columns[1].field, "bar");
+    });
+
+    test("lock column is ignored if no column is found", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        grid.lockColumn("bax");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].static, undefined);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[2].static, undefined);
+        equal(grid.columns[2].field, "baz");
+    });
+
+    test("lock column is ignored if the column already static", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                "baz"
+            ]
+        });
+
+        grid.lockColumn("bar");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].static, true);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[2].static, undefined);
+        equal(grid.columns[2].field, "baz");
+    });
+
+    test("lock column is ignored if only one non-static", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                "baz"
+            ]
+        });
+
+        grid.lockColumn("baz");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].static, true);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[2].static, undefined);
+        equal(grid.columns[2].field, "baz");
+    });
+
+    test("unlock column by field", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                "baz"
+            ]
+        });
+
+        grid.unlockColumn("bar");
+
+        equal(grid.columns[1].static, false);
+        equal(grid.columns[1].field, "bar");
+    });
+
+    test("unlock column by index", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                "baz"
+            ]
+        });
+
+        grid.unlockColumn(1);
+
+        equal(grid.columns[1].static, false);
+        equal(grid.columns[1].field, "bar");
+    });
+
+    test("unlock column is ignored if no column is found", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true },
+                "baz"
+            ]
+        });
+
+        grid.unlockColumn("bax");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].static, true);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[2].static, undefined);
+        equal(grid.columns[2].field, "baz");
+    });
+
+    test("unlock column is ignored if the column already non-static", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar" },
+                "baz"
+            ]
+        });
+
+        grid.unlockColumn("bar");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].static, undefined);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[2].static, undefined);
+        equal(grid.columns[2].field, "baz");
+    });
+
+    test("unlock column is ignored if only one static", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar" },
+                "baz"
+            ]
+        });
+
+        grid.unlockColumn("foo");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+        equal(grid.columns[1].static, undefined);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[2].static, undefined);
+        equal(grid.columns[2].field, "baz");
+    });
+
+    test("lock column with hidden static columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true, hidden: true },
+                "baz",
+                "bax"
+            ]
+        });
+
+        grid.lockColumn("baz");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+
+        equal(grid.columns[1].static, true);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[1].hidden, true);
+
+        equal(grid.columns[2].static, true);
+        equal(grid.columns[2].field, "baz");
+
+        equal(grid.columns[3].static, undefined);
+        equal(grid.columns[3].field, "bax");
+    });
+
+    test("unlock column with hidden static columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", static: true, hidden: true },
+                { field: "baz", static: true },
+                "bax"
+            ]
+        });
+
+        grid.unlockColumn("baz");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+
+        equal(grid.columns[1].static, true);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[1].hidden, true);
+
+        equal(grid.columns[2].static, false);
+        equal(grid.columns[2].field, "baz");
+
+        equal(grid.columns[3].static, undefined);
+        equal(grid.columns[3].field, "bax");
+    });
+
+    test("lock hidden column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", hidden: true },
+                "baz"
+            ]
+        });
+
+        grid.lockColumn("bar");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+
+        equal(grid.columns[1].static, undefined);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[1].hidden, true);
+
+        equal(grid.columns[2].static, undefined);
+        equal(grid.columns[2].field, "baz");
+    });
+
+    test("unlock hidden column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", static: true },
+                { field: "bar", hidden: true, static: true },
+                "baz"
+            ]
+        });
+
+        grid.unlockColumn("bar");
+
+        equal(grid.columns[0].static, true);
+        equal(grid.columns[0].field, "foo");
+
+        equal(grid.columns[1].static, true);
+        equal(grid.columns[1].field, "bar");
+        equal(grid.columns[1].hidden, true);
+
+        equal(grid.columns[2].static, undefined);
+        equal(grid.columns[2].field, "baz");
+    });
 })();

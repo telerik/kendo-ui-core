@@ -1362,6 +1362,44 @@ var __meta__ = {
             that._syncStaticContentHeight();
         },
 
+        lockColumn: function(column) {
+            var columns = this.columns;
+
+            if (typeof column == "number") {
+                column = columns[column];
+            } else {
+                column = grep(columns, function(item) {
+                    return item.field === column;
+                })[0];
+            }
+
+            if (!column || column.static || column.hidden) {
+                return;
+            }
+
+            var index = staticColumns(columns).length - 1;
+            this.reorderColumn(index, column, false);
+        },
+
+        unlockColumn: function(column) {
+            var columns = this.columns;
+
+            if (typeof column == "number") {
+                column = columns[column];
+            } else {
+                column = grep(columns, function(item) {
+                    return item.field === column;
+                })[0];
+            }
+
+            if (!column || !column.static || column.hidden) {
+                return;
+            }
+
+            var index = staticColumns(columns).length;
+            this.reorderColumn(index, column, true);
+        },
+
         cellIndex: function(td) {
             var staticColumnOffset = 0;
 
@@ -4271,6 +4309,10 @@ var __meta__ = {
         _updateTablesWidth: function() {
             var that = this,
                 tables;
+
+            if (!that._isStatic()) {
+                return;
+            }
 
             tables =
                 $(">.k-grid-footer>.k-grid-footer-wrap>table", that.wrapper)
