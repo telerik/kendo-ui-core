@@ -174,7 +174,7 @@
         equal(caret(input[0])[0], 0);
     });
 
-    /*test("MaskInput skips characters on BACKSPACE", function() {
+    test("MaskInput skips characters on BACKSPACE", function() {
         var maskinput = new MaskInput(input, {
             mask: "0--0"
         });
@@ -186,7 +186,7 @@
 
         equal(input.val(), "_--_");
         equal(caret(input[0])[0], 1);
-    });*/
+    });
 
     test("MaskInput honours static chars on BACKSPACE", function() {
         var maskinput = new MaskInput(input, {
@@ -200,7 +200,7 @@
         input.pressKey(kendo.keys.BACKSPACE, "keydown");
         input.pressKey(kendo.keys.BACKSPACE, "keydown");
 
-        equal(input.val(), "_-2");
+        equal(input.val(), "2-_");
         equal(caret(input[0])[0], 0);
     });
 
