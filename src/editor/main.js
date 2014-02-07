@@ -853,7 +853,7 @@ kendo_module({
             Tool: Tool,
             FormatTool: FormatTool,
             _bomFill: bomFill,
-            emptyElementContent: bomFill || '<br _moz_dirty="" />'
+            emptyElementContent: browser.msie ? '\ufeff' : '<br _moz_dirty="" />'
         }
     });
 
