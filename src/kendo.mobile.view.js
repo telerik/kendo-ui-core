@@ -157,7 +157,7 @@ kendo_module({
         },
 
         _padIfNativeScrolling: function() {
-            if (appLevelNativeScrolling()) {
+            if (this.applicationNativeScrolling) {
                 var isAndroid = kendo.support.mobileOS && kendo.support.mobileOS.android,
                     topContainer = isAndroid ? "footer" : "header",
                     bottomContainer = isAndroid ? "header" : "footer";
