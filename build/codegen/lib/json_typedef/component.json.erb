@@ -1,0 +1,6 @@
+        "<%= name %>": {
+            "!type": "fn(element: ?, options: ?)",
+            "prototype": {
+<%= methods.map { |method| method.json_typedef }.join(",") %>
+            }
+        }

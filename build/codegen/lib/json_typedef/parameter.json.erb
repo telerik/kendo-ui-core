@@ -1,0 +1,9 @@
+% composite_parameters.each do |parameter|
+<%= parameter.type_script_interface %>
+% end
+
+    interface <%= type_script_type %> {
+% unique_parameters.each do |parameter|
+        <%= parameter.type_script_declaration %>
+% end
+    }
