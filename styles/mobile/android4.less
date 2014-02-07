@@ -954,6 +954,29 @@
     font-size: 1em;
 }
 
+.km-native-scrolling .km-android .km-list input[type=password],
+.km-native-scrolling .km-android .km-list input[type=search],
+.km-native-scrolling .km-android .km-list input[type=number],
+.km-native-scrolling .km-android .km-list input[type=tel],
+.km-native-scrolling .km-android .km-list input[type=url],
+.km-native-scrolling .km-android .km-list input[type=email],
+.km-native-scrolling .km-android .km-list input[type=month],
+.km-native-scrolling .km-android .km-list input[type=color],
+.km-native-scrolling .km-android .km-list input[type=week],
+.km-native-scrolling .km-android .km-list input[type=date],
+.km-native-scrolling .km-android .km-list input[type=time],
+.km-native-scrolling .km-android .km-list input[type=datetime],
+.km-native-scrolling .km-android .km-list input[type=datetime-local],
+.km-native-scrolling .km-android .km-list input[type=text]:not(.k-input),
+.km-native-scrolling .km-android .km-list select:not([multiple]),
+.km-native-scrolling .km-android .km-list textarea
+{
+    position: static;
+    float: right;
+    margin-top: 0;
+    margin-bottom: -.2em;
+}
+
 .km-android input[type=file]
 {
     color: #fff;
@@ -966,16 +989,30 @@
     font-size: 1em;
 }
 
+.km-native-scrolling .km-android .km-list textarea
+{
+    width: 50%;
+    margin: 0;
+}
+
 .km-android .k-dropdown
 {
     padding: 0;
-    width: auto;
     min-width: 8em;
 }
 
 .km-root .km-android .k-dropdown
 {
     margin-top: -1.2em;
+}
+
+.km-native-scrolling .km-android .km-list .k-dropdown
+{
+    width: 48%;
+    width: ~"-webkit-calc(50% - .7em)";
+    width: ~"-moz-calc(50% - .7em)";
+    width: ~"calc(50% - .7em)";
+    margin-right: .7em;
 }
 
 .km-android .k-dropdown .k-dropdown-wrap

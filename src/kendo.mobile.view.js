@@ -157,10 +157,14 @@ kendo_module({
         },
 
         _padIfNativeScrolling: function() {
-            if (this.applicationNativeScrolling) {
+            if (appLevelNativeScrolling()) {
+                var isAndroid = kendo.support.mobileOS && kendo.support.mobileOS.android,
+                    topContainer = isAndroid ? "footer" : "header",
+                    bottomContainer = isAndroid ? "header" : "footer";
+
                 this.content.css({
-                    paddingTop: this.header.height(),
-                    paddingBottom: this.footer.height()
+                    paddingTop: this[topContainer].height(),
+                    paddingBottom: this[bottomContainer].height()
                 });
             }
         },
