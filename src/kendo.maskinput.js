@@ -27,9 +27,8 @@ var __meta__ = {
 
             that._tokenize();
 
-            that._wrapper();
-
-            that.element.addClass("k-input")
+            that.element
+                .addClass("k-textbox")
                 .attr("autocomplete", "off")
                 .on("keydown" + ns, $.proxy(that._keydown, that))
                 .on("keypress" + ns, $.proxy(that._keypress, that))
@@ -269,31 +268,6 @@ var __meta__ = {
 
             this._emptyMask = emptyMask;
             this._emptyMaskLength = emptyMask.length;
-        },
-
-        _wrapper: function() {
-            var element = this.element;
-            var DOMelement = element[0];
-            var wrapper = element.parent("span.k-widget");
-
-            if (!wrapper[0]) {
-                wrapper = element.wrap("<span />").parent();
-            }
-
-            wrapper[0].style.cssText = DOMelement.style.cssText;
-            wrapper.attr({
-                tabindex: -1,
-                role: "presentation"
-            });
-
-            element.css({
-                width: "100%",
-                height: DOMelement.style.height
-            });
-
-            this.wrapper = wrapper
-                            .addClass("k-widget k-maskinput k-header")
-                            .addClass(DOMelement.className);
         }
     });
 
