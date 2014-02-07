@@ -66,9 +66,9 @@ var __meta__ = {
                 return this.element.val();
             }
 
-            value = this._normalize(value);
+            value = this._unmask(value);
 
-            this._mask(0, this._emptyMaskLength, value);
+            this._mask(0, this._maskLength, value);
         },
 
         _keydown: function(e) {
@@ -103,11 +103,13 @@ var __meta__ = {
             var start = selection[0];
             var end = selection[1];
 
-            if (start === end) {
+            /*if (start === end) {
                 end += 1;
             }
 
-            this._mask(start, end, String.fromCharCode(e.which));
+            this._mask(start, end, String.fromCharCode(e.which));*/
+
+            this._mask2(start, end, String.fromCharCode(e.which));
 
             e.preventDefault();
         },
@@ -133,7 +135,7 @@ var __meta__ = {
 
             var idx = start;
 
-            var maskLength = this._emptyMaskLength;
+            var maskLength = this._maskLength;
             if (maskLength < start || maskLength < end) {
                 return;
             }
@@ -192,7 +194,68 @@ var __meta__ = {
             }
         },
 
-        _normalize: function(value) {
+        _mask2: function(start, end, value, backward) {
+            var idx;
+            var token;
+            var element = this.element;
+            var current = element.val() || this._emptyMask;
+
+            idx = start = this._find(start, backward ? -1 : 1);
+
+            idx += value.length;
+
+            //TODO: ADD support for BACKSPACE and DELETE
+
+            if (start > end) { //TODO: test this
+                end = start;
+            }
+
+            value += this._unmask(current.substring(end), end);
+
+            var i = 0;
+            var char = value.charAt(i);
+
+            current = current.split("");
+
+            while (start < this._maskLength) {
+                token = this.tokens[start];
+
+                if (char) {
+                    if (token.test && token.test(char)) {
+                        current[start] = char;
+                    }
+                } else {
+                    current[start] = this.options.emptySymbol;
+                }
+
+                char = value.charAt(++i);
+                start = this._find(start + 1);
+            }
+
+            element.val(current.join(""));
+
+            if (kendo._activeElement() === element[0]) { //TODO: not tested
+                caret(element[0], idx);
+            }
+        },
+
+        _find: function(idx, step) {
+            var value = this.element.val() || this._emptyMask;
+
+            step = step || 1;
+
+            while (idx > -1 || idx <= this._maskLength) {
+                if (value.charAt(idx) !== this.tokens[idx]) {
+                    return idx;
+                }
+
+                idx += step;
+            }
+
+            return -1;
+        },
+
+        _unmask: function(value, idx) {
             if (!value) {
                 return "";
             }
@@ -202,7 +265,7 @@ var __meta__ = {
             var result = "";
 
             var charIdx = 0;
-            var tokenIdx = 0;
+            var tokenIdx = idx || 0;
 
             var tokensLength = this.tokens.length;
             var valueLength = value.length;
@@ -266,7 +329,7 @@ var __meta__ = {
             this.tokens = tokens;
 
             this._emptyMask = emptyMask;
-            this._emptyMaskLength = emptyMask.length;
+            this._maskLength = emptyMask.length;
         }
     });
 
