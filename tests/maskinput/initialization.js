@@ -17,39 +17,10 @@
         ok(input.data("kendoMaskInput") instanceof MaskInput);
     });
 
-    test("MaskInput renders a span wrapper", function() {
+    test("MaskInput add k-textbox class to the element", function() {
         var maskinput = new MaskInput(input);
 
-        var wrapper = input.parent();
-
-        ok(wrapper.is("span"));
-        equal(maskinput.wrapper[0], wrapper[0]);
-    });
-
-    test("MaskInput renders the wrapper with correct styles", function() {
-        var maskinput = new MaskInput(input);
-
-        var wrapper = input.parent();
-
-        ok(wrapper.hasClass("k-widget"));
-        ok(wrapper.hasClass("k-maskinput"));
-        ok(wrapper.hasClass("k-header"));
-    });
-
-    test("MaskInput copies element styles to the wrapper", function() {
-        input.addClass("test");
-
-        var maskinput = new MaskInput(input);
-
-        var wrapper = input.parent();
-
-        ok(wrapper.hasClass("test"));
-    });
-
-    test("MaskInput add k-input class to the element", function() {
-        var maskinput = new MaskInput(input);
-
-        ok(input.hasClass("k-input"));
+        ok(input.hasClass("k-textbox"));
     });
 
     test("MaskInput add autocomplete='off' attr", function() {

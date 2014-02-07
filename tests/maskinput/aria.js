@@ -11,11 +11,4 @@
         }
     });
 
-    test("MaskInput renders ARIA attributes to wrapper element", function() {
-        var maskinput = new MaskInput(input);
-        var wrapper = maskinput.wrapper;
-
-        equal(wrapper.attr("tabindex"), -1);
-        equal(wrapper.attr("role"), "presentation");
-    });
 })();
