@@ -1396,7 +1396,7 @@ p#copy
     color: #0487c4;
     text-decoration: none;
     word-wrap: break-word;
-    padding: 6px 13px 5px;
+    padding: 6px 0 5px 13px;
     transition: all .2s ease;    
 }
 
