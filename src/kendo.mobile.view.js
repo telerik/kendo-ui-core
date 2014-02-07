@@ -18,6 +18,7 @@ var __meta__ = {
         attr = kendo.attr,
         Class = kendo.Class,
         Widget = ui.Widget,
+        ViewClone = kendo.ViewClone,
         INIT = "init",
         UI_OVERLAY = '<div style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; z-index: 20000; display: none" />',
         BEFORE_SHOW = "beforeShow",
@@ -265,29 +266,6 @@ var __meta__ = {
 
         _overlay: function() {
             this.overlay = $(UI_OVERLAY).appendTo(this.element);
-        }
-    });
-
-
-    var ViewClone = kendo.mobile.ui.Widget.extend({
-        init: function(view) {
-            var elementClone = view.element.clone(true);
-
-            $.extend(this, {
-                element: elementClone,
-                transition: view.transition,
-                options: { defaultTransition: view.options.defaultTransition },
-                params: JSON.stringify(view.params),
-                id: view.id
-            });
-
-            view.element.parent().append(elementClone);
-        },
-
-        hideStart: $.noop,
-
-        hideEnd: function() {
-            this.element.remove();
         }
     });
 

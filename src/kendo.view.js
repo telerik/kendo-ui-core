@@ -66,6 +66,10 @@ var __meta__ = {
             return that.element;
         },
 
+        clone: function(back) {
+            return new ViewClone(this);
+        },
+
         triggerBeforeShow: function() {
             return true;
         },
@@ -150,6 +154,24 @@ var __meta__ = {
             }
 
             return element;
+        }
+    });
+
+    var ViewClone = kendo.Class.extend({
+        init: function(view) {
+            $.extend(this, {
+                element: view.element.clone(true),
+                transition: view.transition,
+                id: view.id
+            });
+
+            view.element.parent().append(this.element);
+        },
+
+        hideStart: $.noop,
+
+        hideEnd: function() {
+            this.element.remove();
         }
     });
 
@@ -295,6 +317,7 @@ var __meta__ = {
     kendo.Fragment = Fragment;
     kendo.Layout = Layout;
     kendo.View = View;
+    kendo.ViewClone = ViewClone;
 
 })(window.kendo.jQuery);
 
