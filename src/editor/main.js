@@ -242,7 +242,7 @@
         },
 
         _selectionChange: function() {
-            if (!bomFill) {
+            if (!browser.msie) {
                 kendo.ui.editor.Dom.ensureTrailingBreaks(this.body);
             }
 
