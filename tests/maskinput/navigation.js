@@ -103,7 +103,7 @@
         input.pressKey("0");
 
         equal(caret(input[0])[0], 3);
-        equal(input.val(), "0-023");
+        equal(input.val(), "0-012");
     });
 
     test("MaskInput replaces first symbol of selected text on keypress", function() {
@@ -174,19 +174,19 @@
         equal(caret(input[0])[0], 0);
     });
 
-    test("MaskInput skips characters on BACKSPACE", function() {
+    /*test("MaskInput skips characters on BACKSPACE", function() {
         var maskinput = new MaskInput(input, {
-            mask: "0-0"
+            mask: "0--0"
         });
 
         input.focus();
-        caret(input[0], 2);
+        caret(input[0], 3);
 
         input.pressKey(kendo.keys.BACKSPACE, "keydown");
 
-        equal(input.val(), "_-_");
+        equal(input.val(), "_--_");
         equal(caret(input[0])[0], 1);
-    });
+    });*/
 
     test("MaskInput honours static chars on BACKSPACE", function() {
         var maskinput = new MaskInput(input, {
