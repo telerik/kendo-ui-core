@@ -1408,7 +1408,6 @@
             ]
         },
         {
-            "packages": ["!mvc"],
             "text": "Sortable",
             "name": "sortable",
             "documentation": "web/sortable",
