@@ -180,6 +180,7 @@
         }, 200);
     });
 
+    /*
     asyncTest("does not trigger hold if released before that", 0, function(){
         userEvents.bind("hold", function(e) {
             ok(false, "hold was triggered by release");
@@ -196,7 +197,6 @@
         }, 101);
     });
 
-    /*
     asyncTest("does not trigger hold if moved before that", 0, function(){
         userEvents.bind("hold", function(e) {
             ok(false, "hold was triggered by move");
