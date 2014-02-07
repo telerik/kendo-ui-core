@@ -532,6 +532,16 @@
         });
 
         test("Reports minimum series value for default axis", function() {
+            deepEqual(areaChart.valueAxisRanges[undefined].min, 0);
+        });
+
+        test("Reports minimum series value (interpolated)", function() {
+            setupStepAreaChart(plotArea, {
+                series: [
+                    $.extend({ missingValues: "interpolate" }, sparseSeries)
+                ],
+                isStacked: true
+            });
             deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
         });
 

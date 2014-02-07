@@ -473,6 +473,16 @@
         });
 
         test("Reports minimum series value", function() {
+            deepEqual(lineChart.valueAxisRanges[undefined].min, 0);
+        });
+
+        test("Reports minimum series value (interpolated)", function() {
+            setupLineChart(plotArea, {
+                series: [
+                    $.extend({ missingValues: "interpolate" }, sparseSeries)
+                ],
+                isStacked: true
+            });
             deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
         });
 

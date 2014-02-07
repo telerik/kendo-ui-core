@@ -3207,7 +3207,26 @@ var __meta__ = {
         },
 
         plotValue: function(point) {
-            return point.value;
+            if (this.options.isStacked100) {
+                var categoryIx = point.categoryIx;
+                var categoryPts = this.categoryPoints[categoryIx];
+                var categorySum = 0;
+
+                for (var i = 0; i < categoryPts.length; i++) {
+                    var neighbour = categoryPts[i];
+
+                    if ((point.series.stack && neighbour.series.stack) &&
+                        point.series.stack !== neighbour.series.stack) {
+                        continue;
+                    }
+
+                    categorySum += math.abs(neighbour.value);
+                };
+
+                return point.value / categorySum;
+            } else {
+                return point.value;
+            }
         },
 
         plotRange: function(point) {
@@ -3246,6 +3265,44 @@ var __meta__ = {
                 var axisCrossingValue = this.categoryAxisCrossingValue(valueAxis);
 
                 return [axisCrossingValue, point.value || axisCrossingValue];
+            }
+        },
+
+        plotLimits: function() {
+            var min = MAX_VALUE;
+            var max = MIN_VALUE;
+
+            for (var i = 0; i < this.categoryPoints.length; i++) {
+                var categoryPts = this.categoryPoints[i];
+
+                for (var pIx = 0; pIx < categoryPts.length; pIx++) {
+                    var point = categoryPts[pIx];
+                    if (point) {
+                        var to = this.plotRange(point)[1];
+
+                        max = math.max(max, to);
+                        min = math.min(min, to);
+                    }
+                }
+            };
+
+            return { min: min, max: max };
+        },
+
+        computeAxisRanges: function() {
+            var chart = this,
+                isStacked = chart.options.isStacked,
+                axisName, limits;
+
+            if (isStacked) {
+                axisName = chart.options.series[0].axis;
+                limits = chart.plotLimits();
+                if (chart.errorTotals) {
+                    limits.min = math.min(limits.min, sparseArrayMin(chart.errorTotals.negative));
+                    limits.max = math.max(limits.max, sparseArrayMax(chart.errorTotals.positive));
+                }
+
+                chart.valueAxisRanges[axisName] = limits;
             }
         },
 
@@ -3299,6 +3356,26 @@ var __meta__ = {
             errorBar = new CategoricalErrorBar(low, high, isVertical, chart, series, options);
             point.errorBars = [errorBar];
             point.append(errorBar);
+        },
+
+        stackedErrorRange: function(point, categoryIx) {
+            var chart = this,
+                value = point.value,
+                plotValue = chart.plotRange(point)[1] - point.value,
+                low = point.low + plotValue,
+                high = point.high + plotValue;
+
+            chart.errorTotals = chart.errorTotals || {positive: [], negative: []};
+
+            if (low < 0) {
+                chart.errorTotals.negative[categoryIx] =  math.min(chart.errorTotals.negative[categoryIx] || 0, low);
+            }
+
+            if (high > 0) {
+                chart.errorTotals.positive[categoryIx] =  math.max(chart.errorTotals.positive[categoryIx] || 0, high);
+            }
+
+            return {low: low, high: high};
         },
 
         addValue: function(data, category, categoryIx, series, seriesIx) {
@@ -3510,27 +3587,12 @@ var __meta__ = {
             return ClusterLayout;
         },
 
-        plotValue: function(point) {
-            if (this.options.isStacked100) {
-                var categoryIx = point.categoryIx;
-                var categoryPts = this.categoryPoints[categoryIx];
-                var categorySum = 0;
+        plotLimits: function() {
+            var limits = CategoricalChart.fn.plotLimits.call(this);
+            limits.min = math.min(0, limits.min);
+            limits.max = math.max(0, limits.max);
 
-                for (var i = 0; i < categoryPts.length; i++) {
-                    var neighbour = categoryPts[i];
-
-                    if ((point.series.stack && neighbour.series.stack) &&
-                        point.series.stack !== neighbour.series.stack) {
-                        continue;
-                    }
-
-                    categorySum += math.abs(neighbour.value);
-                };
-
-                return point.value / categorySum;
-            } else {
-                return CategoricalChart.fn.plotValue.call(this, point);
-            }
+            return limits;
         },
 
         createPoint: function(data, category, categoryIx, series, seriesIx) {
@@ -3621,42 +3683,6 @@ var __meta__ = {
             return stackWrap;
         },
 
-        computeAxisRanges: function() {
-            var chart = this,
-                isStacked = chart.options.isStacked,
-                axisName, limits;
-
-            if (isStacked) {
-                axisName = chart.options.series[0].axis;
-                limits = chart.plotLimits();
-                if (chart.errorTotals) {
-                    limits.min = sparseArrayMin(chart.errorTotals.negative.concat(0, limits.min));
-                    limits.max = sparseArrayMax(chart.errorTotals.positive.concat(0, limits.max));
-                }
-                chart.valueAxisRanges[axisName] = limits;
-            }
-        },
-
-        stackedErrorRange: function(point, categoryIx) {
-            var chart = this,
-                value = point.value,
-                plotValue = chart.plotRange(point)[1] - point.value,
-                low = point.low + plotValue,
-                high = point.high + plotValue;
-
-            chart.errorTotals = chart.errorTotals || {positive: [], negative: []};
-
-            if (low < 0) {
-                chart.errorTotals.negative[categoryIx] =  math.min(chart.errorTotals.negative[categoryIx] || 0, low);
-            }
-
-            if (high > 0) {
-                chart.errorTotals.positive[categoryIx] =  math.max(chart.errorTotals.positive[categoryIx] || 0, high);
-            }
-
-            return {low: low, high: high};
-        },
-
         categorySlot: function(categoryAxis, categoryIx, valueAxis) {
             var chart = this,
                 options = chart.options,
@@ -3681,30 +3707,6 @@ var __meta__ = {
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
             }
-        },
-
-        plotLimits: function() {
-            var max = 0;
-            var min = 0;
-
-            for (var i = 0; i < this.categoryPoints.length; i++) {
-                var categoryPts = this.categoryPoints[i];
-
-                for (var pIx = 0; pIx < categoryPts.length; pIx++) {
-                    var point = categoryPts[pIx];
-                    if (point) {
-                        var to = this.plotRange(point)[1];
-
-                        if (to > 0) {
-                            max = math.max(max, to);
-                        } else {
-                            min = math.min(min, to);
-                        }
-                    }
-                }
-            };
-
-            return { min: min, max: max };
         }
     });
 
@@ -4578,8 +4580,6 @@ var __meta__ = {
         init: function(plotArea, options) {
             var chart = this;
 
-            chart._stackAxisRange = { min: MAX_VALUE, max: MIN_VALUE };
-            chart._categoryTotals = [];
             chart.enableDiscovery();
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
@@ -4642,7 +4642,7 @@ var __meta__ = {
             var categoryPts = this.categoryPoints[categoryIx];
 
             if (this.options.isStacked) {
-                var plotValue = point.value;
+                var plotValue = this.plotValue(point);
 
                 for (var i = 0; i < categoryPts.length; i++) {
                     var neighbour = categoryPts[i];
@@ -4651,46 +4651,13 @@ var __meta__ = {
                         break;
                     }
 
-                    plotValue += neighbour.value;
+                    plotValue += this.plotValue(neighbour);
                 };
 
                 return [plotValue, plotValue];
             } else {
                 var plotRange = CategoricalChart.fn.plotRange.call(this, point);
                 return [plotRange[1], plotRange[1]];
-            }
-        },
-
-        updateRange: function(data, categoryIx) {
-            var chart = this,
-                isStacked = chart.options.isStacked,
-                value = data.value,
-                stackAxisRange = chart._stackAxisRange,
-                totals = chart._categoryTotals,
-                totalsLimits;
-
-            if (defined(value)) {
-                if (isStacked) {
-                    incrementSlot(totals, categoryIx, value);
-
-                    totalsLimits = sparseArrayLimits(totals);
-                    stackAxisRange.min = math.min(stackAxisRange.min, totalsLimits.min);
-                    stackAxisRange.max = math.max(stackAxisRange.max, totalsLimits.max);
-                } else {
-                    CategoricalChart.fn.updateRange.apply(chart, arguments);
-                }
-            }
-        },
-
-        computeAxisRanges: function() {
-            var chart = this,
-                isStacked = chart.options.isStacked,
-                axisName;
-
-            if (isStacked) {
-                axisName = chart.options.series[0].axis;
-
-                chart.valueAxisRanges[axisName] = chart._stackAxisRange;
             }
         },
 
@@ -4707,19 +4674,6 @@ var __meta__ = {
             }
 
             return new pointType(linePoints, currentSeries, seriesIx);
-        },
-
-        stackedErrorRange: function(point) {
-            var chart = this,
-                stackAxisRange = chart._stackAxisRange,
-                plotValue = chart.plotRange(point)[0] - point.value,
-                low = point.low + plotValue,
-                high = point.high + plotValue;
-
-            stackAxisRange.min = math.min(stackAxisRange.min, low);
-            stackAxisRange.max = math.max(stackAxisRange.max, high);
-
-            return {low: low, high: high};
         },
 
         getViewElements: function(view) {
@@ -8511,9 +8465,11 @@ var __meta__ = {
 
             var plotArea = this,
                 firstSeries = series[0],
+                stack = firstSeries.stack,
                 lineChart = new LineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
+                    isStacked: stack && series.length > 1,
+                    isStacked100: stack && stack.type === "100%" && series.length > 1,
                     series: series
                 });
 
@@ -8527,9 +8483,11 @@ var __meta__ = {
 
             var plotArea = this,
                 firstSeries = series[0],
+                stack = firstSeries.stack,
                 areaChart = new AreaChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
+                    isStacked: stack && series.length > 1,
+                    isStacked100: stack && stack.type === "100%" && series.length > 1,
                     series: series
                 });
 
@@ -10739,10 +10697,6 @@ var __meta__ = {
 
             options[axisName] = axes.length > 1 ? axes : axes[0];
         });
-    }
-
-    function incrementSlot(slots, index, value) {
-        slots[index] = (slots[index] || 0) + value;
     }
 
     function categoriesCount(series) {

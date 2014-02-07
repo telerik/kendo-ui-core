@@ -488,6 +488,16 @@
         });
 
         test("Reports minimum series value", function() {
+            deepEqual(lineChart.valueAxisRanges[undefined].min, 0);
+        });
+
+        test("Reports minimum series value (interpolated)", function() {
+            setupLineChart(plotArea, {
+                series: [
+                    $.extend({ missingValues: "interpolate" }, sparseSeries)
+                ],
+                isStacked: true
+            });
             deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
         });
 
@@ -534,6 +544,66 @@
             deepEqual(pointCoordinates, [
                 [ 0.5, 1 ], [ 1.5, 0 ]
             ]);
+        });
+
+        // ------------------------------------------------------------
+        module("Line Chart / 100% Stacked / Positive Values", {
+            setup: function() {
+                setupLineChart(plotArea, {
+                    series: [ positiveSeries, positiveSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(lineChart.valueAxisRanges[undefined].min, 0.5);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(lineChart.valueAxisRanges[undefined].max, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("Line Chart / 100% Stacked / Negative Values", {
+            setup: function() {
+                setupLineChart(plotArea, {
+                    series: [ negativeSeries, negativeSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(lineChart.valueAxisRanges[undefined].min, -1);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(lineChart.valueAxisRanges[undefined].max, -0.5);
+        });
+
+        // ------------------------------------------------------------
+        module("Line Chart / 100% Stacked / Mixed Values", {
+            setup: function() {
+                setupLineChart(plotArea, {
+                    series: [{
+                        data: [2, 2],
+                        labels: {}
+                    }, {
+                        data: [-1, -1],
+                        labels: {}
+                    }],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(lineChart.valueAxisRanges[undefined].min, 1/3);
+        });
+
+        test("reports maximum value for default axis", function() {
+            close(lineChart.valueAxisRanges[undefined].max, 2/3);
         });
 
         // ------------------------------------------------------------
