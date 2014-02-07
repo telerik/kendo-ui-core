@@ -328,7 +328,7 @@ kendo_module({
                     "a{color:#00a}" +
                     "code{font-size:1.23em}" +
                     "telerik\\3Ascript{display: none;}" +
-                    ".k-table{width:100%;border-spacing:0;margin: 0 0 1em;}" +
+                    ".k-table{table-layout:fixed;width:100%;border-spacing:0;margin: 0 0 1em;}" +
                     ".k-table td{min-width:1px;padding:.2em .3em;}" +
                     ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
                     ".k-table p{margin:0;padding:0;}" +
