@@ -91,6 +91,14 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
         setProperty("collapsible", value);
     }
 
+    public java.lang.Object getContentUrls() {
+        return (java.lang.Object)getProperty("contentUrls");
+    }
+
+    public void setContentUrls(java.lang.Object value) {
+        setProperty("contentUrls", value);
+    }
+
     public java.lang.String getDataContentField() {
         return (java.lang.String)getProperty("dataContentField");
     }

@@ -12,7 +12,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements Items/* interfaces */ {
+public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements DataBoundWidget, Items/* interfaces */ {
 
     public PanelBarTag() {
         super("PanelBar");
@@ -97,6 +97,18 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
 
     public void setAnimation(boolean value) {
         setProperty("animation", value);
+    }
+
+    public java.lang.Object getContentUrls() {
+        return (java.lang.Object)getProperty("contentUrls");
+    }
+
+    public void setContentUrls(java.lang.Object value) {
+        setProperty("contentUrls", value);
+    }
+
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
     }
 
     public java.lang.String getExpandMode() {

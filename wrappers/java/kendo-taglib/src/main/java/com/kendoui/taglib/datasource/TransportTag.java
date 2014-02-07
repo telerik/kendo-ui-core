@@ -63,12 +63,20 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("read", value);
     }
 
+    public void setSignalr(com.kendoui.taglib.datasource.TransportSignalrTag value) {
+        setProperty("signalr", value);
+    }
+
     public void setUpdate(com.kendoui.taglib.datasource.TransportUpdateTag value) {
         setProperty("update", value);
     }
 
     public void setParameterMap(TransportParameterMapFunctionTag value) {
         setEvent("parameterMap", value.getBody());
+    }
+
+    public void setPush(TransportPushFunctionTag value) {
+        setEvent("push", value.getBody());
     }
 
     public java.lang.String getCreate() {
@@ -97,6 +105,18 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setParameterMap(String value) {
         setProperty("parameterMap", new Function(value));
+    }
+
+    public String getPush() {
+        Function property = ((Function)getProperty("push"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setPush(String value) {
+        setProperty("push", new Function(value));
     }
 
     public java.lang.String getRead() {

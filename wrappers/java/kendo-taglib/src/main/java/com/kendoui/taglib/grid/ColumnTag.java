@@ -57,6 +57,10 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("filterable", value);
     }
 
+    public void setSortable(com.kendoui.taglib.grid.ColumnSortableTag value) {
+        setProperty("sortable", value);
+    }
+
     public void setEditor(ColumnEditorFunctionTag value) {
         setEvent("editor", value.getBody());
     }

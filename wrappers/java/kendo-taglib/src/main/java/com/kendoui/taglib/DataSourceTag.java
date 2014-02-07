@@ -96,6 +96,10 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         setEvent("error", value.getBody());
     }
 
+    public void setPush(PushFunctionTag value) {
+        setEvent("push", value.getBody());
+    }
+
     public void setRequestEnd(RequestEndFunctionTag value) {
         setEvent("requestEnd", value.getBody());
     }
@@ -218,6 +222,18 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
 
     public void setError(String value) {
         setProperty("error", new Function(value));
+    }
+
+    public String getPush() {
+        Function property = ((Function)getProperty("push"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setPush(String value) {
+        setProperty("push", new Function(value));
     }
 
     public String getRequestEnd() {

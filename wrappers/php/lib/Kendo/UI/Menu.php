@@ -56,6 +56,15 @@ by setting the close animation.  Each animation also has a direction which can b
     }
 
     /**
+    * Sets the data source of the Menu.
+    * @param array|\Kendo\Data\DataSource $value
+    * @return \Kendo\UI\Menu
+    */
+    public function dataSource($value) {
+        return $this->setProperty('dataSource', $value);
+    }
+
+    /**
     * Specifies Menu opening direction. Can be "top", "bottom", "left", "right".
 You can also specify different direction for root and sub menu items, separating them with space. The example below will initialize the root menu to open upwards and
 its sub menus to the left.

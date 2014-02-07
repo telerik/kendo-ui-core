@@ -39,12 +39,36 @@ the data source sends the parameters using jQuery's conventions.
     }
 
     /**
+    * Sets the push option of the DataSourceTransport.
+    * The function invoked during transport initialization which sets up push notifications. The data source will call this function only once and provide
+callbacks which will handle push notifications (data pushed from the server).
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Data\DataSourceTransport
+    */
+    public function push($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('push', $value);
+    }
+
+    /**
     * The configuration used when the data source loads data items from a remote service.If the value of transport.read is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.read is a string the data source uses this string as the URL of the remote service.
     * @param string|\Kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportRead|array $value
     * @return \Kendo\Data\DataSourceTransport
     */
     public function read($value) {
         return $this->setProperty('read', $value);
+    }
+
+    /**
+    * The configuration used when type is set to "signalr". Configures the SignalR settings - hub, connection promise, server and client hub methods.Live demo available at demos.telerik.com/kendo-ui.It is recommended to familiarize with the SignalR JavaScript API.
+    * @param \Kendo\Data\DataSourceTransportSignalr|array $value
+    * @return \Kendo\Data\DataSourceTransport
+    */
+    public function signalr($value) {
+        return $this->setProperty('signalr', $value);
     }
 
     /**

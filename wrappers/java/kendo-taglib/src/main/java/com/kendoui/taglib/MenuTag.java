@@ -12,7 +12,7 @@ import com.kendoui.taglib.json.Function;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items/* interfaces */ {
+public class MenuTag extends WidgetWithItemsTag /* interfaces */implements DataBoundWidget, Items/* interfaces */ {
 
     public MenuTag() {
         super("Menu");
@@ -93,6 +93,10 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
 
     public void setCloseOnClick(boolean value) {
         setProperty("closeOnClick", value);
+    }
+
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
     }
 
     public java.lang.String getDirection() {

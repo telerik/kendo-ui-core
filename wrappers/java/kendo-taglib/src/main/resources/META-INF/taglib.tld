@@ -3222,7 +3222,7 @@ The last element is always created like a rectangle since there is no following 
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A value indicating if the series should be stacked. String value indicates that the series should be stacked in a group with the specified name.</description>
+            <description>A value indicating if the series should be stacked.String value indicates that the series should be stacked in a group with the specified name.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -9532,7 +9532,8 @@ makes a HTTP request for every CRUD operation.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set the data source will use a predefined transport and/or schema. The only supported value is "odata" which supports the OData v.2 protocol.</description>
+            <description>If set the data source will use a predefined transport and/or schema.
+The supported values are "odata" which supports the OData v.2 protocol and "signalr".</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9545,6 +9546,11 @@ makes a HTTP request for every CRUD operation.</description>
         <attribute>
             <description>Fired when a request to the remote service fails.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
             <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the data source receives a push notification or the pushCreate, pushUpdate or pushDestroy methods are called.</description>
+            <name>push</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -9853,6 +9859,13 @@ the data source sends the parameters using jQuery's conventions.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The function invoked during transport initialization which sets up push notifications. The data source will call this function only once and provide
+callbacks which will handle push notifications (data pushed from the server).</description>
+            <name>push</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The configuration used when the data source loads data items from a remote service.If the value of transport.read is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.read is a string the data source uses this string as the URL of the remote service.</description>
             <name>read</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10048,6 +10061,96 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>The configuration used when type is set to "signalr". Configures the SignalR settings - hub, connection promise, server and client hub methods.Live demo available at demos.telerik.com/kendo-ui.It is recommended to familiarize with the SignalR JavaScript API.</description>
+        <name>dataSource-transport-signalr</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportSignalrTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The SignalR hub object returned by the createHubProxy method. The hub option is mandatory.</description>
+            <name>hub</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The promise returned by the start method of the SignalR connection. The promise option is mandatory.</description>
+            <name>promise</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Specifies the client-side CRUD methods of the SignalR hub.</description>
+        <name>dataSource-transport-signalr-client</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportSignalrClientTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the name of the client-side method of the SignalR hub responsible for creating data items.</description>
+            <name>create</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the name of the client-side method of the SignalR hub responsible for destroying data items.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the name of the client-side method of the SignalR hub responsible for reading data items.</description>
+            <name>read</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the name of the client-side method of the SignalR hub responsible for updating data items.</description>
+            <name>update</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the server-side CRUD methods of the SignalR hub.</description>
+        <name>dataSource-transport-signalr-server</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportSignalrServerTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the name of the server-side method of the SignalR hub responsible for creating data items.</description>
+            <name>create</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the name of the server-side method of the SignalR hub responsible for destroying data items.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the name of the server-side method of the SignalR hub responsible for reading data items.</description>
+            <name>read</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the name of the server-side method of the SignalR hub responsible for updating data items.</description>
+            <name>update</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The configuration used when the data source saves updated data items. Those are data items whose fields have been updated.If the value of transport.update is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.update is a string the data source uses this string as the URL of the remote service.</description>
         <name>dataSource-transport-update</name>
         <tag-class>com.kendoui.taglib.datasource.TransportUpdateTag</tag-class>
@@ -10115,6 +10218,13 @@ the data source sends the parameters using jQuery's conventions.</description>
         <tag-class>com.kendoui.taglib.datasource.TransportParameterMapFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+    <tag>
+        <description>The function invoked during transport initialization which sets up push notifications. The data source will call this function only once and provide
+callbacks which will handle push notifications (data pushed from the server).</description>
+        <name>dataSource-transport-push</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportPushFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
@@ -10126,6 +10236,12 @@ the data source sends the parameters using jQuery's conventions.</description>
         <description>Fired when a request to the remote service fails.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
         <name>dataSource-error</name>
         <tag-class>com.kendoui.taglib.datasource.ErrorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the data source receives a push notification or the pushCreate, pushUpdate or pushDestroy methods are called.</description>
+        <name>dataSource-push</name>
+        <tag-class>com.kendoui.taglib.datasource.PushFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -12023,6 +12139,29 @@ for all columns when filtering is enabled via the filterable option.Can be set t
         <tag-class>com.kendoui.taglib.grid.ColumnFilterableUiFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+    <tag>
+        <description>If set to true the user can click the column header and sort the grid by the column field when sorting is enabled. If set to false sorting will
+be disabled for this column. By default all columns are sortable if sorting is enabled via the sortable option.</description>
+        <name>grid-column-sortable</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnSortableTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>A JavaScript function which is used to compare the values - should return -1 if first argument is less than second one, 0 if both are the same or +1 if the second one is greater that then first one.</description>
+            <name>compare</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>A JavaScript function which is used to compare the values - should return -1 if first argument is less than second one, 0 if both are the same or +1 if the second one is greater that then first one.</description>
+        <name>grid-column-sortable-compare</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnSortableCompareFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>Provides a way to specify a custom editing UI for the column. Use the container parameter to create the editing UI.</description>
@@ -12526,6 +12665,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The tooltip of the ellipsis ("...") button, which appears when the number of pages is greater than the buttonCount.</description>
+            <name>morePages</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The tooltip of the button which goes to the next page.</description>
             <name>next</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12615,7 +12760,8 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>The name of the toolbar command. Either a built-in ("cancel", "create" and "save") or custom.</description>
+            <description>The name of the toolbar command. Either a built-in ("cancel", "create" and "save") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name.
+This class can be used to obtain reference to the button after Grid initialization and attach click handlers.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -14284,12 +14430,7 @@ will disable all animations in the widget.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
-        <attribute>
-            <description>Specifies if the tooltip content.</description>
-            <name>content</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
+
     </tag>
 
     <tag>
@@ -14436,6 +14577,13 @@ Cancelling the event will prevent the user action.</description>
             <name>closeOnClick</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+Refer to the example below for a list of the supported properties.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>Specifies Menu opening direction. Can be "top", "bottom", "left", "right".
@@ -14874,6 +15022,147 @@ The supported filter values are startswith, endswith and contains.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>Notification</description>
+        <name>notification</name>
+        <tag-class>com.kendoui.taglib.NotificationTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Indicates the period in milliseconds after which a notification can be dismissed (hidden) by the user.</description>
+            <name>allowHideAfter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Defines custom show and hide animations via an Kendo UI Animation object. Setting the value to false disables animations.</description>
+            <name>animation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Defines the element to which the notifications will be appended or prepended (depending on the stacking direction).</description>
+            <name>appendTo</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Indicates the period in milliseconds after which a notification disappears automatically. Setting a zero value disables this behavior.</description>
+            <name>autoHideAfter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Determines whether the notifications will include a hide button. This setting works with the built-in templates only.</description>
+            <name>button</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the notifications' height. Numbers are treated as pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Determines whether notifications can be hidden by clicking anywhere on their content.</description>
+            <name>hideOnClick</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Determines the direction in which multiple notification will stack (arrange) with regard to the first one. Possible values are "up", "right", "down", "left" and "default".
+The "default" setting takes into consideration the applied position settings and is evaluated to "up" or "down".</description>
+            <name>stacking</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Describes the HTML markup of the different notification types as Kendo UI template strings. The built-in types are "info", "success", "warning" and "error".This documentation section assumes that you are familiar with Kendo UI templates.</description>
+            <name>templates</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Defines the notifications' width. Numbers are treated as pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Fires when a notification's hiding animation starts.</description>
+            <name>hide</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a notification's showing animation starts.</description>
+            <name>show</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+    <tag>
+        <description>This setting applies to popup notifications only, i.e. in cases when appendTo is not set.
+It determines the position of the first notification on the screen, as well as whether the notifications will move together with the page content during scrolling.
+top takes precedence over bottom and left takes precedence over right.</description>
+        <name>notification-position</name>
+        <tag-class>com.kendoui.taglib.notification.PositionTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Determines the position of the first popup notification with regard to the viewport's bottom edge. Numeric values are treated as pixels.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Determines the position of the first popup notification with regard to the viewport's left edge. Numeric values are treated as pixels.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Determines whether the popup notifications will move together with the other page content during scrolling.</description>
+            <name>pinned</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Determines the position of the first popup notification with regard to the viewport's right edge. Numeric values are treated as pixels.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Determines the position of the first popup notification with regard to the viewport's top edge. Numeric values are treated as pixels.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>Fires when a notification's hiding animation starts.</description>
+        <name>notification-hide</name>
+        <tag-class>com.kendoui.taglib.notification.HideFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when a notification's showing animation starts.</description>
+        <name>notification-show</name>
+        <tag-class>com.kendoui.taglib.notification.ShowFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>NumericTextBox</description>
         <name>numericTextBox</name>
         <tag-class>com.kendoui.taglib.NumericTextBoxTag</tag-class>
@@ -15161,6 +15450,19 @@ user interactions. Setting this option to false will disable all animations.</de
             <name>animation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Sets an array with the URLs from which the PanelBar items content to be loaded from. If only specific items should be loaded via Ajax, then you should set the URLs to the corresponding positions in the array and set the other elements to null.</description>
+            <name>contentUrls</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+Refer to the example below for a list of the supported properties.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>Specifies how the PanelBar items are displayed when opened and closed. The following values
@@ -16393,6 +16695,12 @@ That way all users would see the same dates and times no matter their configured
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>If set to true the scheduler allows event moving. Dragging the event changes the start and end time.</description>
+            <name>move</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>If set to true the scheduler allows event resizing. Dragging the resize handles changes the start or end time of the event.</description>
             <name>resize</name>
             <rtexprvalue>true</rtexprvalue>
@@ -17548,6 +17856,129 @@ tick labels.</description>
         <description>Fires when the user drags the drag handle to a new position.</description>
         <name>slider-slide</name>
         <tag-class>com.kendoui.taglib.slider.SlideFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Sortable</description>
+        <name>sortable</name>
+        <tag-class>com.kendoui.taglib.SortableTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Constrains the hint movement to either the horizontal (x) or vertical (y) axis. Can be set to either "x" or "y".</description>
+            <name>axis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set, specifies the offset of the hint relative to the mouse cursor/finger.
+By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: top and left.</description>
+            <name>cursorOffset</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Selector that determines which items are disabled. Disabled items cannot be dragged but are valid sort targets.</description>
+            <name>disabled</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Selector that determines which items are sortable. Filtered items cannot be dragged and are not valid sort targets.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Selector that determines which element will be used as a draggable handler. If a handler is defined, the user will be able to move the Sortable items only if the cursor/finger is positioned onto the handler element.</description>
+            <name>handler</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Provides a way for customization of the sortable item hint. If a function is supplied, it receives one argument - the draggable element's jQuery object.
+If hint function is not provided the widget will clone dragged item and use it as a hint.</description>
+            <name>hint</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Suitable for touch oriented user interface, in order to avoid collision with the touch scrolling gesture. When set to true, the item will be activated after the user taps and holds the finger on the element for a short amount of time.
+The item will also be activated by pressing, holding and lifting the finger without any movement. Dragging it afterwards will initiate the drag immediately.</description>
+            <name>holdToDrag</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Provides a way for customization of the sortable item placeholder. If a function is supplied, it receives one argument - the draggable element's jQuery object.
+If placeholder function is not provided the widget will clone dragged item, remove its ID attribute, set its visibility to hidden and use it as a placeholder.</description>
+            <name>placeholder</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Fires when sortable item drag starts.</description>
+            <name>start</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when Sortable's placeholder changes its position.</description>
+            <name>move</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when item dragging ends but before the item's position is changed in the DOM. This event is suitable for preventing the sort action.</description>
+            <name>end</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when item is sorted and the item's position is changed in the DOM.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when item sorting is canceled by pressing the Escape key.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+
+    <tag>
+        <description>Fires when sortable item drag starts.</description>
+        <name>sortable-start</name>
+        <tag-class>com.kendoui.taglib.sortable.StartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when Sortable's placeholder changes its position.</description>
+        <name>sortable-move</name>
+        <tag-class>com.kendoui.taglib.sortable.MoveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when item dragging ends but before the item's position is changed in the DOM. This event is suitable for preventing the sort action.</description>
+        <name>sortable-end</name>
+        <tag-class>com.kendoui.taglib.sortable.EndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when item is sorted and the item's position is changed in the DOM.</description>
+        <name>sortable-change</name>
+        <tag-class>com.kendoui.taglib.sortable.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when item sorting is canceled by pressing the Escape key.</description>
+        <name>sortable-cancel</name>
+        <tag-class>com.kendoui.taglib.sortable.CancelFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -28281,6 +28712,12 @@ and is about to render it.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>Sets an array with the URLs from which the tabs content to be loaded from. If only specific tabs should be loaded via Ajax, then you should set the URLs to the corresponding positions in the array and set the other elements to null.</description>
+            <name>contentUrls</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>Sets the field of the data item that provides the text content of
 the tab content element.</description>
             <name>dataContentField</name>
@@ -29123,6 +29560,35 @@ additional information along the treeview checkboxes.The fields which can be use
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>The text messages displayed in the widget. Use it to customize or localize the messages.</description>
+        <name>treeView-messages</name>
+        <tag-class>com.kendoui.taglib.treeview.MessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text message shown while the root level items are loading.</description>
+            <name>loading</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text message shown when an error occurs while fetching the content.</description>
+            <name>requestFailed</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text message shown in the retry button.</description>
+            <name>retry</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
     </tag>
 
 

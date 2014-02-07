@@ -76,6 +76,15 @@ user interactions. Setting this option to false will disable all animations.
     }
 
     /**
+    * Sets an array with the URLs from which the tabs content to be loaded from. If only specific tabs should be loaded via Ajax, then you should set the URLs to the corresponding positions in the array and set the other elements to null.
+    * @param array $value
+    * @return \Kendo\UI\TabStrip
+    */
+    public function contentUrls($value) {
+        return $this->setProperty('contentUrls', $value);
+    }
+
+    /**
     * Sets the field of the data item that provides the text content of
 the tab content element.
     * @param string $value

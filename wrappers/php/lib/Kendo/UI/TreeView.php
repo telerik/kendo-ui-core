@@ -123,6 +123,15 @@ Note: when initializing the widget from an array (rather than from a Hierarchica
     }
 
     /**
+    * The text messages displayed in the widget. Use it to customize or localize the messages.
+    * @param \Kendo\UI\TreeViewMessages|array $value
+    * @return \Kendo\UI\TreeView
+    */
+    public function messages($value) {
+        return $this->setProperty('messages', $value);
+    }
+
+    /**
     * Sets the template option of the TreeView.
     * Template for rendering each node.
     * @param string $value The id of the element which represents the kendo template.

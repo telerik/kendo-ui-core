@@ -77,6 +77,10 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
 
     }
 
+    public void setMessages(com.kendoui.taglib.treeview.MessagesTag value) {
+        setProperty("messages", value);
+    }
+
     public void setChange(ChangeFunctionTag value) {
         setEvent("change", value.getBody());
     }

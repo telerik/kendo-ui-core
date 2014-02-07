@@ -152,7 +152,8 @@ The transport option can also be used to implement custom data loading and savin
     }
 
     /**
-    * If set the data source will use a predefined transport and/or schema. The only supported value is "odata" which supports the OData v.2 protocol.
+    * If set the data source will use a predefined transport and/or schema.
+The supported values are "odata" which supports the OData v.2 protocol and "signalr".
     * @param string $value
     * @return \Kendo\Data\DataSource
     */
@@ -186,6 +187,20 @@ The transport option can also be used to implement custom data loading and savin
         }
 
         return $this->setProperty('error', $value);
+    }
+
+    /**
+    * Sets the push event of the DataSource.
+    * Fired when the data source receives a push notification or the pushCreate, pushUpdate or pushDestroy methods are called.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Data\DataSource
+    */
+    public function push($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('push', $value);
     }
 
     /**

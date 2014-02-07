@@ -91,6 +91,14 @@ public class PageableMessagesTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("last", value);
     }
 
+    public java.lang.String getMorePages() {
+        return (java.lang.String)getProperty("morePages");
+    }
+
+    public void setMorePages(java.lang.String value) {
+        setProperty("morePages", value);
+    }
+
     public java.lang.String getNext() {
         return (java.lang.String)getProperty("next");
     }

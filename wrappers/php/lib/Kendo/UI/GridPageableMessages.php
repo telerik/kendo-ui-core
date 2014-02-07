@@ -98,6 +98,15 @@ class GridPageableMessages extends \Kendo\SerializableObject {
         return $this->setProperty('refresh', $value);
     }
 
+    /**
+    * The tooltip of the ellipsis ("...") button, which appears when the number of pages is greater than the buttonCount.
+    * @param string $value
+    * @return \Kendo\UI\GridPageableMessages
+    */
+    public function morePages($value) {
+        return $this->setProperty('morePages', $value);
+    }
+
 //<< Properties
 }
 

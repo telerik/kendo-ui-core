@@ -33,6 +33,15 @@ class SchedulerEditable extends \Kendo\SerializableObject {
     }
 
     /**
+    * If set to true the scheduler allows event moving. Dragging the event changes the start and end time.
+    * @param boolean $value
+    * @return \Kendo\UI\SchedulerEditable
+    */
+    public function move($value) {
+        return $this->setProperty('move', $value);
+    }
+
+    /**
     * If set to true the scheduler allows event resizing. Dragging the resize handles changes the start or end time of the event.
     * @param boolean $value
     * @return \Kendo\UI\SchedulerEditable

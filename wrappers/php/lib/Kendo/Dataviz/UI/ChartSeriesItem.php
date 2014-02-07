@@ -539,7 +539,7 @@ The last element is always created like a rectangle since there is no following 
     }
 
     /**
-    * A value indicating if the series should be stacked. String value indicates that the series should be stacked in a group with the specified name.
+    * A value indicating if the series should be stacked.String value indicates that the series should be stacked in a group with the specified name.
     * @param boolean|string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
