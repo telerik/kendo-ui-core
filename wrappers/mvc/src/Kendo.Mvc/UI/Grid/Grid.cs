@@ -1265,9 +1265,9 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            if (Columns.Any(c => c.Static) && !IsClientBinding)
+            if (Columns.Any(c => c.Locked) && !IsClientBinding)
             {
-                throw new NotSupportedException(Exceptions.CannotUseStaticColumnsAndServerBinding);
+                throw new NotSupportedException(Exceptions.CannotUseLockedColumnsAndServerBinding);
             }
 
             if (IsClientBinding)
@@ -1282,16 +1282,16 @@ namespace Kendo.Mvc.UI
                     throw new NotSupportedException(Exceptions.CannotUseTemplatesInAjaxOrWebService);
                 }
 
-                if (Columns.Any(c => c.Static)) 
+                if (Columns.Any(c => c.Locked)) 
                 { 
                     if (DetailTemplate != null && DetailTemplate.HasValue() || ClientDetailTemplateId.HasValue())
                     {
-                        throw new NotSupportedException(Exceptions.CannotUseDetailTemplateAndStaticColumns);
+                        throw new NotSupportedException(Exceptions.CannotUseDetailTemplateAndLockedColumns);
                     }
 
                     if (ClientRowTemplate.HasValue() || RowTemplate != null && RowTemplate.HasValue())
                     {
-                        throw new NotSupportedException(Exceptions.CannotUseRowTemplateAndStaticColumns);
+                        throw new NotSupportedException(Exceptions.CannotUseRowTemplateAndLockedColumns);
                     }
                 }
 

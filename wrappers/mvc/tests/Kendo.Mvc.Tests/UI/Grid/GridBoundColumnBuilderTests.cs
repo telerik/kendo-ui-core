@@ -66,10 +66,10 @@ namespace Kendo.Mvc.UI.Tests.Grid
         }        
  
         [Fact]
-        public void Static_sets_the_encoded_property()
+        public void Locked_sets_the_encoded_property()
         {
-            builder.Static();
-            column.Static.ShouldBeTrue();
+            builder.Locked();
+            column.Locked.ShouldBeTrue();
         }               
 
         [Fact]

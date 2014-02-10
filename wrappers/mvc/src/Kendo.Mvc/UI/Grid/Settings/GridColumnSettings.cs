@@ -83,7 +83,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool Static
+        public bool Locked
         {
             get;
             set;

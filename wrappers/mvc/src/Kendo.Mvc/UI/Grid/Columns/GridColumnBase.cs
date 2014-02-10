@@ -145,9 +145,9 @@ namespace Kendo.Mvc.UI
                 json["encoded"] = Encoded;
             }
 
-            if (Static)
+            if (Locked)
             {
-                json["static"] = Static;
+                json["static"] = Locked;
             }
         }       
         
@@ -262,16 +262,16 @@ namespace Kendo.Mvc.UI
             }
         }
    
-        public virtual bool Static
+        public virtual bool Locked
         {
             get
             {
-                return Settings.Static;
+                return Settings.Locked;
             }
             
             set
             {
-                Settings.Static = value;
+                Settings.Locked = value;
             }
         }
         public virtual bool Encoded

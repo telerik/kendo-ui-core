@@ -228,37 +228,35 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Makes the column static. By default all columns are not static.
+        /// Makes the column static. By default all columns are not locked.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderID).Static())
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).Locked())
         /// %&gt;
         /// </code>
         /// </example>
-        public TColumnBuilder Static()
+        public TColumnBuilder Locked()
         {
-            Column.Static = true;
-
-            return this as TColumnBuilder;
+            return Locked(true);
         }
 
         /// <summary>
-        /// Makes the column static or not. By default all columns are not static.
+        /// Makes the column static or not. By default all columns are not locked.
         /// </summary>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Columns(columns => columns.Bound(o => o.OrderID).Static((bool)ViewData["static"]))
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).Locked((bool)ViewData["locked"]))
         /// %&gt;
         /// </code>
         /// </example>
-        public TColumnBuilder Static(bool value)
+        public TColumnBuilder Locked(bool value)
         {
-            Column.Static = value;
+            Column.Locked = value;
 
             return this as TColumnBuilder;
         }

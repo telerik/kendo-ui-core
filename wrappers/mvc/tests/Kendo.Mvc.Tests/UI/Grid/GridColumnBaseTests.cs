@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_serialize_static_true()
         {
-            column.Object.Static = true;
+            column.Object.Locked = true;
 
             var json = column.Object.ToJson();
 
@@ -100,7 +100,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_not_serialize_static_false()
         {
-            column.Object.Static = false;
+            column.Object.Locked = false;
 
             var json = column.Object.ToJson();
 

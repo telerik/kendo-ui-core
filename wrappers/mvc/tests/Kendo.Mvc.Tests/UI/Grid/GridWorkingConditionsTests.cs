@@ -188,7 +188,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_throw_if_static_columns_and_detailView_template_is_used_using_ajax_binding()
         {
             grid.DataSource.Type = DataSourceType.Ajax;
-            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Static = true });
+            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Locked = true });
             grid.DetailTemplate.Html = "foo";
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
@@ -197,7 +197,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_throw_if_static_columns_and_client_row_template_is_used_using_ajax_binding()
         {
             grid.DataSource.Type = DataSourceType.Ajax;
-            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Static = true });
+            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Locked = true });
             grid.ClientRowTemplate = "foo";
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
@@ -206,7 +206,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_throw_if_static_columns_and_row_template_is_used_using_ajax_binding()
         {
             grid.DataSource.Type = DataSourceType.Ajax;
-            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Static = true });
+            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Locked = true });
             grid.RowTemplate.Html = "foo";
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
@@ -215,7 +215,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_throw_if_static_columns_and_detailView_template_id_is_used_using_ajax_binding()
         {
             grid.DataSource.Type = DataSourceType.Ajax;
-            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Static = true });
+            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Locked = true });
             grid.ClientDetailTemplateId = "foo";
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
@@ -224,7 +224,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public void Should_throw_if_static_columns_with_server_binding()
         {
             grid.DataSource.Type = DataSourceType.Server;
-            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Static = true });
+            grid.Columns.Add(new GridBoundColumn<Customer, string>(grid, c => c.Address) { Locked = true });
             Assert.Throws<NotSupportedException>(() => grid.VerifySettings());
         }
 

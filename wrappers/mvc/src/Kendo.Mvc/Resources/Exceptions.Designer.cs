@@ -169,11 +169,20 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot use both Detail template and static columns.
+        ///   Looks up a localized string similar to Cannot use both Detail template and locked columns.
         /// </summary>
-        internal static string CannotUseDetailTemplateAndStaticColumns {
+        internal static string CannotUseDetailTemplateAndLockedColumns {
             get {
-                return ResourceManager.GetString("CannotUseDetailTemplateAndStaticColumns", resourceCulture);
+                return ResourceManager.GetString("CannotUseDetailTemplateAndLockedColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locked columns are not supported in server binding mode.
+        /// </summary>
+        internal static string CannotUseLockedColumnsAndServerBinding {
+            get {
+                return ResourceManager.GetString("CannotUseLockedColumnsAndServerBinding", resourceCulture);
             }
         }
         
@@ -187,20 +196,11 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot use both Row template and static columns.
+        ///   Looks up a localized string similar to Cannot use both Row template and locked columns.
         /// </summary>
-        internal static string CannotUseRowTemplateAndStaticColumns {
+        internal static string CannotUseRowTemplateAndLockedColumns {
             get {
-                return ResourceManager.GetString("CannotUseRowTemplateAndStaticColumns", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Static columns are not supported in server binding mode.
-        /// </summary>
-        internal static string CannotUseStaticColumnsAndServerBinding {
-            get {
-                return ResourceManager.GetString("CannotUseStaticColumnsAndServerBinding", resourceCulture);
+                return ResourceManager.GetString("CannotUseRowTemplateAndLockedColumns", resourceCulture);
             }
         }
         
