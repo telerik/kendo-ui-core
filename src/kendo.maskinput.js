@@ -81,11 +81,14 @@ var __meta__ = {
             if (key == keys.BACKSPACE) {
                 if (start === end) {
                     start = start - 1;
+                    placeholder = this._find(start, -1);
+
+                    if (placeholder !== start) {
+                        caret(this.element[0], placeholder + 1);
+                    }
                 }
 
-                placeholder = this._find(start, -1);
-
-                if (placeholder !== start) {
+                if (placeholder !== undefined && placeholder !== start) {
                     caret(this.element[0], placeholder + 1);
                 } else if (start > -1) {
                     this._mask2(start, end, "", true);
@@ -97,7 +100,8 @@ var __meta__ = {
                     end += 1;
                 }
 
-                this._mask(start, end);
+                this._mask2(start, end, "");
+                //this._mask(start, end);
 
                 e.preventDefault();
             }
