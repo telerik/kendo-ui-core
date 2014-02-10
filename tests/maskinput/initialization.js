@@ -49,4 +49,13 @@
 
         equal(input.val(), "99-99");
     });
+
+    test("MaskInput does not focus if the element is not active", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "00-00",
+            value: "9999"
+        });
+
+        notEqual(input[0], document.activeElement);
+    });
 })();
