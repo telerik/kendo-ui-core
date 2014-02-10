@@ -249,7 +249,7 @@
         equal(caret(input[0])[0], 0);
     });
 
-    /*test("MaskInput honours all static characters on DELETE", function() {
+    test("MaskInput honours all static characters on DELETE", function() {
         var maskinput = new MaskInput(input, {
             mask: "0--00"
         });
@@ -259,10 +259,23 @@
         caret(input[0], 1);
 
         input.pressKey(kendo.keys.DELETE, "keydown");
-        input.pressKey(kendo.keys.DELETE, "keydown");
+
+        equal(input.val(), "2--22");
+        equal(caret(input[0])[0], 3);
+    });
+
+    test("MaskInput with simple mask honours a static character on DELETE", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0-00"
+        });
+
+        input.focus();
+        input.val("2-22");
+        caret(input[0], 1);
+
         input.pressKey(kendo.keys.DELETE, "keydown");
 
-        equal(input.val(), "2--_2");
-        equal(caret(input[0])[0], 4);
-    });*/
+        equal(input.val(), "2-22");
+        equal(caret(input[0])[0], 2);
+    });
 })();
