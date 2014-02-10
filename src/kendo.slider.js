@@ -132,7 +132,7 @@ kendo_module({
             that._calculateSteps(pixelWidths);
 
             if (options.tickPlacement != "none" && sizeBetweenTicks >= 2 &&
-                options.largeStep > options.smallStep) {
+                options.largeStep >= options.smallStep) {
                 that._setItemsLargeTick();
             }
         },
