@@ -98,6 +98,14 @@ var __meta__ = {
             } else if (key == keys.DELETE) {
                 if (start === end) {
                     end += 1;
+
+                    placeholder = this._find(start);
+
+                    if (placeholder !== start) {
+                        caret(this.element[0], placeholder);
+                        e.preventDefault();
+                        return;
+                    }
                 }
 
                 this._mask2(start, end, "");
@@ -211,8 +219,6 @@ var __meta__ = {
             var unmasked;
 
             idx = start = this._find(start, backward ? -1 : 1);
-
-            //TODO: ADD support for BACKSPACE and DELETE
 
             if (start > end) { //TODO: test this
                 end = start;
