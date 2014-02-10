@@ -125,53 +125,58 @@ var __meta__ = {
         },
 
         _mask: function(start, end, value, backward) {
-            var idx;
-            var token;
             var element = this.element;
             var current = element.val() || this._emptyMask;
+
+            var idx;
+            var char;
+            var token;
+            var multiple;
             var unmasked;
+            var charIdx = 0;
+            var unmaskedLength;
 
             idx = start = this._find(start, backward ? -1 : 1);
 
-            if (start > end) { //TODO: test this
+            if (start > end) {
                 end = start;
             }
 
-            var multiple = start != end;
+            multiple = start != end;
 
             unmasked = this._unmask(current.substring(end), end);
+            unmaskedLength = unmasked.length;
+
+            if (value) {
+                unmasked = unmasked.replace(new RegExp("^_{0," + value.length + "}"), "");
+            }
+
             value += unmasked;
-
-            var i = 0;
-            var char = value.charAt(i);
-
             current = current.split("");
+            char = value.charAt(charIdx);
 
             while (start < this._maskLength) {
                 token = this.tokens[start];
 
-                if (char) {
-                    if (char === this.options.emptySymbol || (token.test && token.test(char))) {
-                        current[start] = char;
-                        idx += 1;
-                    }
-                } else {
+                if (!char) {
                     current[start] = this.options.emptySymbol;
+                } else if (char === this.options.emptySymbol || (token.test && token.test(char))) {
+                    current[start] = char;
+                    idx += 1;
                 }
 
-                char = value.charAt(++i);
+                char = value.charAt(++charIdx);
                 start = this._find(start + 1);
             }
 
             element.val(current.join(""));
 
             if (kendo._activeElement() === element[0]) { //TODO: not tested
-                unmasked = unmasked.length;
-                if (unmasked && !multiple) {
-                    unmasked -= 1;
+                if (unmaskedLength && !multiple) {
+                    unmaskedLength -= 1;
                 }
 
-                caret(element[0], idx - unmasked);
+                caret(element[0], idx - unmaskedLength);
             }
         },
 
