@@ -697,6 +697,7 @@ var MSWordFormatCleaner = Cleaner.extend({
             /<(\/?)b(\s[^>]*)?>/ig, '<$1strong$2>',
             /<(\/?)i(\s[^>]*)?>/ig, '<$1em$2>',
             /<\/?(meta|link|style|o:|v:|x:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:|x:)[^>]*>)?/ig, '', /* external references and namespaced tags */
+            /<\/o>/g, '',
             /style=(["|'])\s*\1/g, '', /* empty style attributes */
             /(<br[^>]*>)?\n/g, function ($0, $1) { return $1 ? $0 : ' '; } /* phantom extra line feeds */
         ];
@@ -797,7 +798,7 @@ var MSWordFormatCleaner = Cleaner.extend({
             i = attributes.length;
 
         while (i--) {
-            if (attributes[i].name != "colspan") {
+            if (dom.name(attributes[i]) != "colspan") {
                 element.removeAttributeNode(attributes[i]);
             }
         }

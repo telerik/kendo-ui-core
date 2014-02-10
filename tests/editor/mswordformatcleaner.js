@@ -19,7 +19,9 @@ function clean(html) {
         // empty lines
         .replace(/[\r\n]+/g, '')
         // CSS properties
-        .replace(/(;|:)\s*/g, "$1");
+        .replace(/(;|:)\s*/g, "$1")
+        .replace(/;"/g, '"') //'
+        .replace(/(colspan=)("|')(.*?)("|')/gi, "$1$3");
 }
 
 test("cleaning meta tags", function() {
@@ -209,7 +211,7 @@ test("graphic lists", function() {
 });
 
 test("does not interpret all graphic chars as lists", function() {
-    equal(clean('<p class="MsoNormal">Foo <span style="font-family:Wingdings;mso-ascii-font-family: Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin;mso-char-type:symbol;mso-symbol-font-family: Wingdings">J</span> bar baz<o:p></o:p></p>'), '<p>Foo <span style="font-family:wingdings;">J</span> bar baz</p>');
+    equal(clean('<p class="MsoNormal">Foo <span style="font-family:Wingdings;mso-ascii-font-family: Calibri;mso-ascii-theme-font:minor-latin;mso-hansi-font-family:Calibri; mso-hansi-theme-font:minor-latin;mso-char-type:symbol;mso-symbol-font-family: Wingdings">J</span> bar baz<o:p></o:p></p>'), '<p>Foo <span style="font-family:wingdings">J</span> bar baz</p>');
 });
 
 test("cleans word tables", function() {
@@ -226,7 +228,7 @@ test("cleans word tables", function() {
 '</tbody></table>'),
 
         '<table>' +
-            '<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
+            '<colgroup><col style="width:160px"><col style="width:160px"></colgroup>' +
             '<tbody>' +
                 '<tr><td>cell 1</td><td>cell 2</td></tr>' +
             '</tbody>' +
@@ -248,7 +250,7 @@ test("converts bolded table row to header row", function() {
 '</tbody></table>'),
 
         '<table>' +
-            '<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
+            '<colgroup><col style="width:160px"><col style="width:160px"></colgroup>' +
             '<thead>' +
                 '<tr><th>header 1</th><th>header 2</th></tr>' +
             '</thead>' +
@@ -272,7 +274,7 @@ test("persists line breaks in header row", function() {
 '</tbody></table>'),
 
         '<table>' +
-            '<colgroup><col style="width:160px;"><col style="width:160px;"></colgroup>' +
+            '<colgroup><col style="width:160px"><col style="width:160px"></colgroup>' +
             '<thead>' +
                 '<tr><th>header 1<br><strong>with rows</strong></th><th>header 2</th></tr>' +
             '</thead>' +
@@ -298,10 +300,10 @@ test("persists HTML in table rows", function() {
 '</tbody></table>'),
 
         '<table>' +
-            '<colgroup><col style="width:213px;"><col style="width:213px;"><col style="width:213px;"></colgroup>' +
+            '<colgroup><col style="width:213px"><col style="width:213px"><col style="width:213px"></colgroup>' +
             '<tbody>' +
                 '<tr>' +
-                    '<td>foo <span style="background:yellow;">bar</span></td>' +
+                    '<td>foo <span style="background:yellow">bar</span></td>' +
                     '<td><strong>bold</strong></td>' +
                     '<td>foo<br>bar<br>baz</td>' +
                 '</tr>' +
@@ -319,10 +321,10 @@ test("persists colspan attribute", function() {
                         '<p class="MsoNoSpacing" align="center" style="text-align:center">foo</p></td></tr>' +
                 '<tr style="mso-yfti-irow:1;mso-yfti-lastrow:yes;"><td width="140" valign="top" style="width:104.65pt;border:solid windowtext 1.0pt; border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt; padding:0cm 5.4pt 0cm 5.4pt;"><p class="MsoNoSpacing">bar</p></td><td width="477" valign="top" style="width:357.45pt;border-top:none;border-left: none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt; mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;"><p class="MsoNoSpacing">baz<o:p></td></p></o>'),
     '<table>' +
-        '<colgroup><col style="width:140px;"><col style="width:477px;"></colgroup>' +
+        '<colgroup><col style="width:140px"><col style="width:477px"></colgroup>' +
         '<tbody>' +
             '<tr>' +
-                '<td colspan="2">foo</td>' +
+                '<td colspan=2>foo</td>' +
             '</tr>' +
             '<tr>' +
                 '<td>bar</td>' +
