@@ -7,7 +7,7 @@ module CodeGen
             CHILD_COMPONENTS = %w{
             DiagramConnection
             DiagramShape
-            DiagramConnectior
+            DiagramConnector
             DiagramLayoutSettings}
 
             OPTIONS_TO_SKIP = %w{dataSource}
