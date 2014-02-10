@@ -132,7 +132,7 @@ var __meta__ = {
         _drag: function(e) {
             var draggedElement = this.draggedElement,
                 target = this._findTarget(e),
-                targetOffset,
+                targetCenter,
                 cursorOffset = { left: e.x.location, top: e.y.location },
                 offsetDelta,
                 xAxisDelta = e.x.delta,
@@ -143,13 +143,13 @@ var __meta__ = {
                 direction;
 
             if(target) {
-                targetOffset = kendo.getOffset(target.element);
-                targetOffset.top += target.element.outerHeight() / 2;
-                targetOffset.left += target.element.outerWidth() / 2;
+                targetCenter = kendo.getOffset(target.element);
+                targetCenter.top += target.element.outerHeight() / 2;
+                targetCenter.left += target.element.outerWidth() / 2;
 
                 offsetDelta = {
-                    left: Math.round(cursorOffset.left - targetOffset.left),
-                    top: Math.round(cursorOffset.top - targetOffset.top)
+                    left: Math.round(cursorOffset.left - targetCenter.left),
+                    top: Math.round(cursorOffset.top - targetCenter.top)
                 };
 
                 prevVisible = target.element.prev();
