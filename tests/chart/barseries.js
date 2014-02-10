@@ -956,6 +956,27 @@
         });
 
         // ------------------------------------------------------------
+        module("Bar Chart / Grouped Stack / Group Syntax", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [
+                        $.extend({ stack: { group: "a" } }, positiveSeries),
+                        $.extend({ stack: { group: "a" } }, positiveSeries),
+                        $.extend({ stack: { group: "b" } }, positiveSeries),
+                        $.extend({ stack: { group: "b" } }, positiveSeries)
+                    ],
+                    isStacked: true
+                });
+            }
+        });
+
+        test("two stacks are created", function() {
+            var cluster = series.children[0];
+            equal(cluster.children[0]._stackGroup, "a");
+            equal(cluster.children[1]._stackGroup, "b");
+        });
+
+        // ------------------------------------------------------------
         module("Bar Chart / Stacked / Panes", {
             teardown: destroyChart
         });

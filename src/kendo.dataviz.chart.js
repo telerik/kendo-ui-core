@@ -3213,14 +3213,15 @@ var __meta__ = {
                 var categorySum = 0;
 
                 for (var i = 0; i < categoryPts.length; i++) {
-                    var neighbour = categoryPts[i];
+                    var other = categoryPts[i];
+                    var stack = point.series.stack;
+                    var otherStack = other.series.stack;
 
-                    if ((point.series.stack && neighbour.series.stack) &&
-                        point.series.stack !== neighbour.series.stack) {
+                    if ((stack && otherStack) && stack.group !== otherStack.group) {
                         continue;
                     }
 
-                    categorySum += math.abs(neighbour.value);
+                    categorySum += math.abs(other.value);
                 }
 
                 return point.value / categorySum;
@@ -3239,22 +3240,29 @@ var __meta__ = {
                 var prevValue = 0;
 
                 for (var i = 0; i < categoryPts.length; i++) {
-                    var neighbour = categoryPts[i];
+                    var other = categoryPts[i];
 
-                    if (point === neighbour) {
+                    if (point === other) {
                         break;
                     }
 
-                    if ((point.series.stack && neighbour.series.stack) &&
-                        point.series.stack !== neighbour.series.stack) {
-                        continue;
+                    var stack = point.series.stack;
+                    var otherStack = other.series.stack;
+                    if (stack && otherStack) {
+                        if (typeof stack === STRING && stack !== otherStack) {
+                            continue;
+                        }
+
+                        if (stack.group && stack.group !== otherStack.group) {
+                            continue;
+                        }
                     }
 
-                    var neighbourValue = this.plotValue(neighbour);
-                    if ((neighbourValue > 0 && positive) ||
-                        (neighbourValue < 0 && !positive)) {
-                        prevValue += neighbourValue;
-                        plotValue += neighbourValue;
+                    var otherValue = this.plotValue(other);
+                    if ((otherValue > 0 && positive) ||
+                        (otherValue < 0 && !positive)) {
+                        prevValue += otherValue;
+                        plotValue += otherValue;
                     }
                 }
 
@@ -3660,7 +3668,7 @@ var __meta__ = {
 
         getStackWrap: function(series, cluster) {
             var wraps = cluster.children,
-                stackGroup = series.stack,
+                stackGroup = (series.stack || {}).group || series.stack,
                 stackWrap,
                 i,
                 length = wraps.length;
@@ -4650,13 +4658,13 @@ var __meta__ = {
                 var plotValue = this.plotValue(point);
 
                 for (var i = 0; i < categoryPts.length; i++) {
-                    var neighbour = categoryPts[i];
+                    var other = categoryPts[i];
 
-                    if (point === neighbour) {
+                    if (point === other) {
                         break;
                     }
 
-                    plotValue += this.plotValue(neighbour);
+                    plotValue += this.plotValue(other);
                 }
 
                 return [plotValue, plotValue];
