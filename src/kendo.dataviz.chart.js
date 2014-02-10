@@ -3667,14 +3667,13 @@ var __meta__ = {
         },
 
         getStackWrap: function(series, cluster) {
-            var wraps = cluster.children,
-                stackGroup = (series.stack || {}).group || series.stack,
-                stackWrap,
-                i,
-                length = wraps.length;
+            var stack = series.stack;
+            var stackGroup = stack ? stack.group || stack : stack;
 
+            var wraps = cluster.children;
+            var stackWrap;
             if (typeof stackGroup === STRING) {
-                for (i = 0; i < length; i++) {
+                for (var i = 0; i < wraps.length; i++) {
                     if (wraps[i]._stackGroup === stackGroup) {
                         stackWrap = wraps[i];
                         break;
