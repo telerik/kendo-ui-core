@@ -90,9 +90,22 @@
         input.pressKey("0");
 
         equal(caret(input[0])[0], 2);
+        equal(input.val(), "-0");
     });
 
-    test("MaskInput replace next symbol on keypress", function() {
+    test("MaskInput allows typing of an empty symbol", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "-0"
+        });
+
+        input.focus();
+        input.pressKey("_");
+
+        equal(caret(input[0])[0], 2);
+        equal(input.val(), "-_");
+    });
+
+    test("MaskInput inserts a symbol while shifting rest of the text", function() {
         var maskinput = new MaskInput(input, {
             mask: "0-000"
         });
@@ -106,7 +119,21 @@
         equal(input.val(), "0-012");
     });
 
-    test("MaskInput replaces first symbol of selected text on keypress", function() {
+    /*test("MaskInput replaces an empty symbol without shifting rest of the text", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0-000"
+        });
+
+        input.focus();
+        input.val("0-__3");
+        caret(input[0], 2);
+        input.pressKey("0");
+
+        equal(caret(input[0])[0], 3);
+        equal(input.val(), "0-0_3");
+    });*/
+
+    test("MaskInput ", function() {
         var maskinput = new MaskInput(input, {
             mask: "0-000"
         });
@@ -277,5 +304,20 @@
 
         equal(input.val(), "2-22");
         equal(caret(input[0])[0], 2);
+    });
+
+    test("MaskInput honours empty spaces on DELETE", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0-00"
+        });
+
+        input.focus();
+        input.val("_-_2");
+        caret(input[0], 0);
+
+        input.pressKey(kendo.keys.DELETE, "keydown");
+
+        equal(input.val(), "_-2_");
+        equal(caret(input[0])[0], 0);
     });
 })();
