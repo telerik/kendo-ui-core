@@ -159,6 +159,20 @@
         equal(caret(input[0])[0], 2);
     });
 
+    test("MaskInput does not does not modify value on invalid symbol", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0000"
+        });
+
+        input.focus();
+        input.val("0___");
+        caret(input[0], 0);
+        input.pressKey("a");
+
+        equal(caret(input[0])[0], 0);
+        equal(input.val(), "0___");
+    });
+
     test("MaskInput return empty symbol on BACKSPACE", function() {
         var maskinput = new MaskInput(input, {
             mask: "0-0"
