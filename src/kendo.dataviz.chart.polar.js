@@ -766,10 +766,6 @@ var __meta__ = {
             return RadarStackLayout;
         },
 
-        valueSlot: function(valueAxis, value) {
-            return valueAxis.getSlot(value, value, !this.options.clip);
-        },
-
         categorySlot: function(categoryAxis, categoryIx) {
             return categoryAxis.getSlot(categoryIx);
         },
@@ -1062,6 +1058,13 @@ var __meta__ = {
                 });
             }
 
+            if (plotArea._isStacked100) {
+                deepExtend(defaults, {
+                    roundToMajorUnit: false,
+                    labels: { format: "P0" }
+                });
+            }
+
             return deepExtend(defaults, plotArea.options.valueAxis);
         },
 
@@ -1088,20 +1091,31 @@ var __meta__ = {
             );
         },
 
+        chartOptions: function(series) {
+            var options = { series: series };
+            var firstSeries = series[0];
+            if (firstSeries) {
+                var plotArea = this;
+                var filteredSeries = plotArea.filterVisibleSeries(series);
+                var stack = firstSeries.stack;
+                options.isStacked = stack && filteredSeries.length > 1;
+                options.isStacked100 = stack && stack.type === "100%" && filteredSeries.length > 1;
+
+                if (options.isStacked100) {
+                    plotArea._isStacked100 = true;
+                }
+            }
+
+            return options;
+        },
+
         createAreaChart: function(series, pane) {
             if (series.length === 0) {
                 return;
             }
 
-            var plotArea = this,
-                firstSeries = series[0],
-                filteredSeries = plotArea.filterVisibleSeries(series),
-                areaChart = new RadarAreaChart(plotArea, {
-                    isStacked: firstSeries.stack && filteredSeries.length > 1,
-                    series: series
-                });
-
-            plotArea.appendChart(areaChart, pane);
+            var areaChart = new RadarAreaChart(this, this.chartOptions(series));
+            this.appendChart(areaChart, pane);
         },
 
         createLineChart: function(series, pane) {
@@ -1109,15 +1123,8 @@ var __meta__ = {
                 return;
             }
 
-            var plotArea = this,
-                firstSeries = series[0],
-                filteredSeries = plotArea.filterVisibleSeries(series),
-                lineChart = new RadarLineChart(plotArea, {
-                    isStacked: firstSeries.stack && filteredSeries.length > 1,
-                    series: series
-                });
-
-            plotArea.appendChart(lineChart, pane);
+            var lineChart = new RadarLineChart(this, this.chartOptions(series));
+            this.appendChart(lineChart, pane);
         },
 
         createBarChart: function(series, pane) {
@@ -1125,19 +1132,15 @@ var __meta__ = {
                 return;
             }
 
-            var plotArea = this,
-                firstSeries = series[0],
-                filteredSeries = plotArea.filterVisibleSeries(series),
-                lineChart = new RadarBarChart(plotArea, {
-                    isStacked: firstSeries.stack && filteredSeries.length > 1,
-                    series: series,
-                    gap: firstSeries.gap,
-                    spacing: firstSeries.spacing
-                });
+            var firstSeries = series[0];
+            var options = this.chartOptions(series);
+            options.gap = firstSeries.gap;
+            options.spacing = firstSeries.spacing;
 
-            plotArea._hasBarCharts = true;
+            var barChart = new RadarBarChart(this, options);
+            this.appendChart(barChart, pane);
 
-            plotArea.appendChart(lineChart, pane);
+            this._hasBarCharts = true;
         },
 
         seriesCategoryAxis: function() {

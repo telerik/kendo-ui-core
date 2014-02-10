@@ -94,14 +94,90 @@
         equal(plotArea.charts[0].options.spacing, 2);
     });
 
-    test("first series stack setting is applied to radarColumn charts", function() {
-        createPlotArea([
-            { type: "radarColumn", data: [], stack: true },
-            { type: "radarColumn", data: [] }
-        ]);
+    function assertStackedSeries(seriesType) {
+        // ------------------------------------------------------------
+        module("Radar Plot Area / Stacked " + seriesType + " /");
 
-        ok(plotArea.charts[0].options.isStacked);
-    });
+        test("sets isStacked when first series is stacked", function() {
+            createPlotArea([{
+                type: seriesType, data: [], stack: true
+            }, {
+                type: seriesType, data: []
+            }]);
+
+            ok(chartSeries.options.isStacked);
+        });
+
+        test("does not set isStacked when first and only series is stacked", function() {
+            createPlotArea([{
+                type: seriesType, data: [], stack: true
+            }]);
+
+            ok(!chartSeries.options.isStacked);
+        });
+
+        test("sets isStacked and isStacked100 when first series is 100% stacked", function() {
+            createPlotArea([{
+                type: seriesType, data: [], stack: { type: "100%" }
+            }, {
+                type: seriesType, data: []
+            }]);
+
+            ok(chartSeries.options.isStacked);
+            ok(chartSeries.options.isStacked100);
+        });
+
+        test("does not set isStacked and isStacked100 when only series is 100% stacked", function() {
+            createPlotArea([{
+                type: seriesType, data: [], stack: { type: "100%" }
+            }]);
+
+            ok(!chartSeries.options.isStacked);
+            ok(!chartSeries.options.isStacked100);
+        });
+    }
+
+    assertStackedSeries("radarColumn");
+    assertStackedSeries("radarLine");
+    assertStackedSeries("radarArea");
+
+    function assertStacked100(seriesType) {
+        var series = [{
+            type: seriesType,
+            stack: { type: "100%" },
+            data: [1, 2],
+            labels: { }
+        }];
+
+        series.push(series[0]);
+
+        // ------------------------------------------------------------
+        module("Radar Plot Area / 100% Stacked " + seriesType + " /");
+
+        test("sets value axis roundToMajorUnit to false", function() {
+            createPlotArea(series);
+            ok(!plotArea.valueAxis.options.roundToMajorUnit);
+        });
+
+        test("roundToMajorUnit can be overriden", function() {
+            createPlotArea(series, { valueAxis: { roundToMajorUnit: false } });
+            ok(!plotArea.valueAxis.options.roundToMajorUnit);
+        });
+
+        test("default value axis label format is set to P0", function() {
+            createPlotArea(series);
+            deepEqual(plotArea.valueAxis.options.labels.format, "P0");
+        });
+
+        test("default value axis label format can be overriden", function() {
+            createPlotArea(series, { valueAxis: { labels: { format: "N" } } });
+            deepEqual(plotArea.valueAxis.options.labels.format, "N");
+        });
+    }
+
+    assertStacked100("radarColumn");
+    assertStacked100("radarLine");
+    assertStacked100("radarArea");
 
     (function() {
         var chart,
