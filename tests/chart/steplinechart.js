@@ -121,16 +121,6 @@
             ]);
         });
 
-        test("no line is created for isolated points", function() {
-            setupLineChart(plotArea, {
-                series: [
-                    sparseSeries
-                ]
-            });
-
-            equal(view.log.path.length, 1);
-        });
-
         test("line continues after missing value", function() {
             setupLineChart(plotArea, {
                 series: [{
