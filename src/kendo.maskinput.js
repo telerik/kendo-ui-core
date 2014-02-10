@@ -30,6 +30,7 @@ var __meta__ = {
             that.element
                 .addClass("k-textbox")
                 .attr("autocomplete", "off")
+                .on("paste" + ns, $.proxy(that._paste, that))
                 .on("keydown" + ns, $.proxy(that._keydown, that))
                 .on("keypress" + ns, $.proxy(that._keypress, that))
                 .on("focus" + ns, function() {
@@ -69,6 +70,30 @@ var __meta__ = {
             value = this._unmask(value);
 
             this._mask(0, this._maskLength, value);
+        },
+
+        _paste: function(e) {
+            var that = this;
+            var element = e.target;
+            var position = caret(element);
+            var start = position[0];
+            var end = position[1];
+
+            if (start !== end) {
+                that._mask(start, end, "");
+                start = caret(element)[0];
+            }
+
+            setTimeout(function() {
+                var value = element.value;
+                var end = caret(element)[0];
+                var pasted = value.substring(start, end);
+
+                element.value = value.substring(0, start) + value.substring(end);
+                caret(element, start);
+
+                that._mask(start, start, pasted);
+            });
         },
 
         _keydown: function(e) {
@@ -130,28 +155,24 @@ var __meta__ = {
 
             var idx;
             var char;
-            var multiple;
             var unmasked;
-            var hasValue;
             var charIdx = 0;
-            var unmaskedLength;
+            var valueLength;
             var empty = this.options.emptySymbol;
 
-            idx = start = this._find(start, backward ? -1 : 1);
+            start = this._find(start, backward ? -1 : 1);
 
             if (start > end) {
                 end = start;
             }
 
-            multiple = start != end;
-
             unmasked = this._unmask(current.substring(end), end);
-            unmaskedLength = unmasked.length;
             value = this._unmask(value);
-            hasValue = !!value;
+
+            valueLength = value.length;
 
             if (value) {
-                unmasked = unmasked.replace(new RegExp("^_{0," + value.length + "}"), "");
+                unmasked = unmasked.replace(new RegExp("^_{0," + valueLength + "}"), "");
             }
 
             value += unmasked;
@@ -159,25 +180,20 @@ var __meta__ = {
             char = value.charAt(charIdx);
 
             while (start < this._maskLength) {
-                if (char) {
-                    idx += 1;
-                } else {
-                    char = empty;
+                current[start] = char || empty;
+                char = value.charAt(++charIdx);
+
+                if (idx === undefined && charIdx > valueLength) {
+                    idx = start;
                 }
 
-                current[start] = char;
                 start = this._find(start + 1);
-                char = value.charAt(++charIdx);
             }
 
             element.val(current.join(""));
 
             if (kendo._activeElement() === element[0]) {
-                if (hasValue && unmaskedLength && !multiple) {
-                    unmaskedLength -= 1;
-                }
-
-                caret(element[0], idx - unmaskedLength);
+                caret(element[0], idx);
             }
         },
 
