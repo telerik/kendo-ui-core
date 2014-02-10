@@ -28,21 +28,28 @@
 
         <script src="@Url.Content("~/content/spa/websushi/js/sushi.js")"></script>
         <style>
-            .k-fx-tileleft.k-fx-start .k-fx-next {
+            .k-fx-tileleft.k-fx-end .k-fx-next #details,
+            .k-fx-tileleft.k-fx-end .k-fx-current #details,
+            .k-fx-tileright.k-fx-end .k-fx-next #details,
+            .k-fx-tileright.k-fx-end .k-fx-current #details {
+                -webkit-transition: all 350ms ease-out;
+            }
+
+            .k-fx-tileleft.k-fx-start .k-fx-next #details{
                 -webkit-transform: translatex(100%);
             }
 
-            .k-fx-tileleft.k-fx-end .k-fx-current {
+            .k-fx-tileleft.k-fx-end .k-fx-current #details{
                 -webkit-transform: translatex(-100%);
             }
 
 
             /* right */
-            .k-fx-tileright.k-fx-start .k-fx-next {
+            .k-fx-tileright.k-fx-start .k-fx-next #details{
                 -webkit-transform: translatex(-100%);
             }
 
-            .k-fx-tileright.k-fx-end .k-fx-current {
+            .k-fx-tileright.k-fx-end .k-fx-current #details{
                 -webkit-transform: translatex(100%);
             }
         </style>
@@ -93,8 +100,7 @@
 			<div id="checkout-top-image"></div>
 
 			<div id="details-checkout">
-				<h1>Order Details</h1>
-				<a href="#" class="close"></a>
+                <h1>Order Details</h1>
 				<table>
 					<thead>
 						<tr>
@@ -116,7 +122,6 @@
         <script type="text/x-kendo-template" id="detail-template">
 
 			<div id="details-top-image">
-				<a class="close" href="#"></a>
 			</div>
 
 			<div id="details">

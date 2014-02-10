@@ -163,13 +163,17 @@ var sushi = new kendo.Router({
     }
 });
 
+var viewingDetail = false;
+
 // Routing
 sushi.route("/", function() {
+    viewingDetail = false;
     layout.showIn("#content", index);
     layout.showIn("#pre-content", cartPreview);
 });
 
 sushi.route("/checkout", function() {
+    viewingDetail = false;
     layout.showIn("#content", checkout);
     cartPreview.hide();
 });
@@ -179,7 +183,7 @@ sushi.route("/menu/:id", function(itemID) {
     var transition = "",
         current = detailModel.get("current");
 
-    if (current) {
+    if (viewingDetail && current) {
         transition = current.id < itemID ? "tileleft" : "tileright";
     }
 
@@ -193,6 +197,8 @@ sushi.route("/menu/:id", function(itemID) {
             layout.showIn("#content", detail, transition);
         }
     });
+
+    viewingDetail = true;
 });
 
 $(function() {
