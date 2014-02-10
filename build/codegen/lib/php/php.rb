@@ -164,7 +164,7 @@ FUNCTION_SETTER = ERB.new(%{
         include Options
 
         def to_setter
-            if @name == 'dataSource'
+            if @name == 'dataSource' && @owner.name != 'Menu' && @owner.name != 'PanelBar'
                 return (@owner.name == 'TreeView' ? HIERARCHY_DATA_SOURCE_SETTER : DATA_SOURCE_SETTER).result(binding);
             end
 
