@@ -316,4 +316,11 @@ test("rangeSlider resize should resize", function () {
     ok(initialWidth != currentWidth);
 });
 
+test("rangeSlider should render large ticks instead of small ticks", function () {
+    var slider = newSlider({ smallStep: 1, largeStep: 1 }, $("<input />"));
+    slider.wrapper.find(".k-tick-large").each(function() {
+        ok($(this).hasClass("k-tick-large"));
+    })
+});
+
 }());
