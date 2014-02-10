@@ -119,7 +119,7 @@
         equal(input.val(), "0-012");
     });
 
-    /*test("MaskInput replaces an empty symbol without shifting rest of the text", function() {
+    test("MaskInput replaces an empty symbol without shifting rest of the text", function() {
         var maskinput = new MaskInput(input, {
             mask: "0-000"
         });
@@ -131,7 +131,7 @@
 
         equal(caret(input[0])[0], 3);
         equal(input.val(), "0-0_3");
-    });*/
+    });
 
     test("MaskInput ", function() {
         var maskinput = new MaskInput(input, {
