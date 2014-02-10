@@ -727,7 +727,7 @@ function baseLineChartTests(seriesName, TChart) {
                     }
                 });
 
-                label = chart._plotArea.charts[0].points[0].children[1];
+                label = chart._plotArea.charts[0].points[0].label;
             },
             teardown: function() {
                 destroyChart();
