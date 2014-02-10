@@ -24,16 +24,6 @@ class Menu extends \Kendo\UI\Widget {
         return $element;
     }
 
-    /**
-    * Sets the data of the Menu.
-    * @param array $value
-    * @return \Kendo\UI\Menu
-    */
-    public function dataSource(array $value) {
-        return $this->setProperty('dataSource', $value);
-    }
-
-
 //>> Properties
 
     /**
@@ -56,8 +46,9 @@ by setting the close animation.  Each animation also has a direction which can b
     }
 
     /**
-    * Sets the data source of the Menu.
-    * @param array|\Kendo\Data\DataSource $value
+    * The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+Refer to the example below for a list of the supported properties.
+    * @param |array $value
     * @return \Kendo\UI\Menu
     */
     public function dataSource($value) {

@@ -35,15 +35,6 @@ class PanelBar extends \Kendo\UI\Widget {
         return $element;
     }
 
-    /**
-    * Sets the data of the PanelBar.
-    * @param array $value
-    * @return \Kendo\UI\PanelBar
-    */
-    public function dataSource(array $value) {
-        return $this->setProperty('dataSource', $value);
-    }
-
 //>> Properties
 
     /**
