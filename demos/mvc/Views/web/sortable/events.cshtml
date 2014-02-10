@@ -1,13 +1,13 @@
 
         <div id="example">
             <div class="list-wrapper">
-                <ul id="sortable-left">
+                <ul id="sortable-left" style="min-height: 41px;">
                     <li class="list-left">Item1</li>
                     <li class="list-left">Item2</li>
                     <li class="list-left">Item3</li>
                 </ul>
 
-                <ul id="sortable-right">
+                <ul id="sortable-right" style="min-height: 41px;">
                     <li class="list-right">Item1</li>
                     <li class="list-right">Item2</li>
                     <li class="list-right">Item3</li>
@@ -18,6 +18,9 @@
                 $(document).ready(function() {
                     $("#sortable-left").kendoSortable({
                         connectWith: "#sortable-right",
+                        placeholder: function(element) {
+                            return element.clone().css("opacity", 0.4);
+                        },
                         start: onStart,
                         move: onMove,
                         end: onEnd,
@@ -27,6 +30,9 @@
 
                     $("#sortable-right").kendoSortable({
                         connectWith: "#sortable-left",
+                        placeholder: function(element) {
+                            return element.clone().css("opacity", 0.4);
+                        },
                         start: onStart,
                         move: onMove,
                         end: onEnd,
@@ -75,7 +81,7 @@
 
             <div class="console"></div>
 
-            <style scoped>
+            <style>
                 #example {
                     -webkit-user-select: none;
                     -moz-user-select: none;
@@ -88,10 +94,11 @@
                 }
 
                 #sortable-left, #sortable-right {
-                    width: 50%;
-                    margin: 0;
+                    width: 215px;
+                    margin-left: 50px;
                     padding: 0;
                     float: left;
+                    border: 1px solid black;
                 }
 
                 .list-right, .list-left {

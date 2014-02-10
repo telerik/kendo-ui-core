@@ -34,12 +34,12 @@
                     });
 
                     $("#sortable-container").kendoSortable({
-                        container: $(".sortable-wrapper")
+                        container: ".sortable-wrapper"
                     });
                 });
             </script>
 
-            <style scoped>
+            <style>
                 #example {
                     -webkit-user-select: none;
                     -moz-user-select: none;
@@ -65,14 +65,15 @@
                 }
 
                 .sortable-wrapper {
-                    width: 250px;
+                    width: 215px;
                     margin: 0 auto;
+                    padding: 5px;
                     border: 1px solid red;
                 }
 
                 #sortable-container {
-                    margin: 20px;
                     padding: 0;
+                    margin: 0;
                 }
 
                 .item {

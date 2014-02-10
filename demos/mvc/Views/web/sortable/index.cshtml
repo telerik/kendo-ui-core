@@ -14,11 +14,15 @@
 
             <script>
                 $(document).ready(function() {
-                    $("#sortable-basic").kendoSortable();
+                    $("#sortable-basic").kendoSortable({
+                        placeholder: function(element) {
+                            return element.clone().addClass("placeholder");
+                        }
+                    });
                 });
             </script>
 
-            <style scoped>
+            <style>
                 #example {
                     -webkit-user-select: none;
                     -moz-user-select: none;
@@ -36,11 +40,18 @@
                     list-style-type: none;
                     padding: 10px;
                     margin: 5px;
-                    border: 1px solid black;
-                    background-color: green;
+                    border: 1px solid #000000;
+                    border-radius: 5px;
+                    background-color: #51A0ED;
+                    color: #FFFFFF;
                     width: 200px;
                     text-align: center;
                 }
 
+                li.placeholder {
+                    background-color: #FFFFFF;
+                    color: #000000;
+                    border: 1px dashed #606162;
+                }
             </style>
         </div>

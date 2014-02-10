@@ -2,32 +2,32 @@
         <div id="example">
 
             <div class="sortable-wrapper">
-                <h4>Filter</h4>
-                <p>Filtered items cannot be dragged and are not valid drop targets.</p>
-                <div id="sortable-filter">
-                    <div class="not-sortable">Not sortable (Item 1)</div>
-                    <div class="sortable">Item2</div>
-                    <div class="not-sortable">Not sortable (Item 3)</div>
-                    <div class="sortable">Item4</div>
-                    <div class="sortable">Item5</div>
-                    <div class="sortable">Item6</div>
-                    <div class="sortable">Item7</div>
-                    <div class="not-sortable">Not sortable (Item 8)</div>
-                </div>
-            </div>
-
-            <div class="sortable-wrapper">
                 <h4>Disable</h4>
                 <p>Disabled items cannot be dragged but are valid drop targets.</p>
                 <div id="sortable-disable">
                     <div class="sortable disabled">Disabled (Item 1)</div>
-                    <div class="sortable">Item2</div>
-                    <div class="sortable disabled">Disabled (Item 3)</div>
-                    <div class="sortable">Item4</div>
-                    <div class="sortable">Item5</div>
-                    <div class="sortable">Item6</div>
-                    <div class="sortable">Item7</div>
-                    <div class="sortable disabled">Disabled (Item 8)</div>
+                    <div class="sortable disabled">Disabled (Item 2)</div>
+                    <div class="sortable">Item 3</div>
+                    <div class="sortable">Item 4</div>
+                    <div class="sortable">Item 5</div>
+                    <div class="sortable">Item 6</div>
+                    <div class="sortable">Item 7</div>
+                    <div class="sortable">Item 8</div>
+                </div>
+            </div>
+
+            <div class="sortable-wrapper">
+                <h4>Filter</h4>
+                <p>Filtered items cannot be dragged and are not valid drop targets.</p>
+                <div id="sortable-filter">
+                    <div class="not-sortable">Not sortable (Item 1)</div>
+                    <div class="not-sortable">Not sortable (Item 2)</div>
+                    <div class="sortable">Item 3</div>
+                    <div class="sortable">Item 4</div>
+                    <div class="sortable">Item 5</div>
+                    <div class="sortable">Item 6</div>
+                    <div class="sortable">Item 7</div>
+                    <div class="sortable">Item 8</div>
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                 });
             </script>
 
-            <style scoped>
+            <style>
                 #example {
                     -webkit-user-select: none;
                     -moz-user-select: none;
@@ -69,14 +69,15 @@
                     width: 200px;
                     text-align: center;
                     border-radius: 3px;
+                    color: #FFFFFF;
                 }
 
                 .sortable {
-                    background-color: green;
+                    background-color: #51A0ED;
                 }
 
                 .not-sortable {
-                    background-color: #CCCCCC;
+                    background-color: #8E8E8E;
                     opacity: 0.5;
                 }
 
