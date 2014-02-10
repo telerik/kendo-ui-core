@@ -75,7 +75,7 @@ var __meta__ = {
         },
 
         showStart: function() {
-
+            this.element.css("display", "");
         },
 
         showEnd: function() {
