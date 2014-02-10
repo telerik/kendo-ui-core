@@ -334,4 +334,43 @@
         equal(input.val(), "_-2_");
         equal(caret(input[0])[0], 0);
     });
+
+    asyncTest("MaskInput supports pasting a valid value", 2, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "0000"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+
+        input.trigger("paste");
+        input.val("1234____");
+        caret(input[0], 4);
+
+        setTimeout(function() {
+            start();
+            equal(input.val(), "1234");
+            equal(caret(input[0])[0], 4);
+        });
+    });
+
+    asyncTest("MaskInput unmasks before inserting pasted value", 2, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "00--00"
+        });
+
+        input.focus();
+        input.val("12--34");
+        caret(input[0], 0, 4);
+
+        input.trigger("paste");
+        input.val("5634--__");
+        caret(input[0], 2);
+
+        setTimeout(function() {
+            start();
+            equal(input.val(), "56--34");
+            equal(caret(input[0])[0], 4);
+        });
+    });
 })();
