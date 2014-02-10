@@ -130,11 +130,12 @@ var __meta__ = {
 
             var idx;
             var char;
-            var token;
             var multiple;
             var unmasked;
+            var hasValue;
             var charIdx = 0;
             var unmaskedLength;
+            var empty = this.options.emptySymbol;
 
             idx = start = this._find(start, backward ? -1 : 1);
 
@@ -146,6 +147,8 @@ var __meta__ = {
 
             unmasked = this._unmask(current.substring(end), end);
             unmaskedLength = unmasked.length;
+            value = this._unmask(value);
+            hasValue = !!value;
 
             if (value) {
                 unmasked = unmasked.replace(new RegExp("^_{0," + value.length + "}"), "");
@@ -156,23 +159,21 @@ var __meta__ = {
             char = value.charAt(charIdx);
 
             while (start < this._maskLength) {
-                token = this.tokens[start];
-
-                if (!char) {
-                    current[start] = this.options.emptySymbol;
-                } else if (char === this.options.emptySymbol || (token.test && token.test(char))) {
-                    current[start] = char;
+                if (char) {
                     idx += 1;
+                } else {
+                    char = empty;
                 }
 
-                char = value.charAt(++charIdx);
+                current[start] = char;
                 start = this._find(start + 1);
+                char = value.charAt(++charIdx);
             }
 
             element.val(current.join(""));
 
             if (kendo._activeElement() === element[0]) {
-                if (unmaskedLength && !multiple) {
+                if (hasValue && unmaskedLength && !multiple) {
                     unmaskedLength -= 1;
                 }
 
