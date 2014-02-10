@@ -473,4 +473,41 @@
 
         ok(grid._editContainer.data("kendoWindow"));
     });
+
+    test("modifing edit form field updates locked column value", function() {
+        var grid = setup({
+            columns: [{ locked: true, field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("foo", "12");
+
+        equal(grid.lockedTable.find("tr:first >td:first").text(), "12");
+    });
+
+    test("cancel row updates locked columns", function() {
+        var grid = setup({
+            columns: [{ locked: true, field: "foo" }, "name"],
+            editable: "popup"
+        }),
+        row = table.find("tr:first");
+
+        grid.editRow(row);
+
+        var container = grid._editContainer;
+        var model = container.data("kendoEditable").options.model;
+
+        model.set("foo", "12");
+
+        grid.cancelRow();
+
+        equal(grid.lockedTable.find("tr:first >td:first").text(), "bar");
+    });
+
 })();

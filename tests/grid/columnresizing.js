@@ -128,6 +128,53 @@
         equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
     });
 
+    test("handler is position over the th right side of a locked column", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", { locked: true, field: "bar" }]
+        });
+        var firstColumn = grid.lockedHeader.find("th:first");
+
+        $(firstColumn).trigger({ type: "mousemove", clientX: firstColumn.offset().left + firstColumn.outerWidth(), clientY: 0});
+
+        equal(grid.wrapper.find(".k-grid-header-locked").children(".k-resize-handle").first()[0].offsetTop, firstColumn[0].offsetTop);
+        equal(grid.wrapper.find(".k-grid-header-locked").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
+    });
+
+    test("handler is position over the th right side of non locked", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", { locked: true, field: "bar" }]
+        });
+        var firstColumn = grid.thead.find("th:first");
+
+        $(firstColumn).trigger({ type: "mousemove", clientX: firstColumn.offset().left + firstColumn.outerWidth(), clientY: 0});
+
+        equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetTop, firstColumn[0].offsetTop);
+        equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
+    });
+
+    test("handler is position over the th right side of locked column after hovering over a non locked one", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", { locked: true, field: "bar" }]
+        });
+
+        var nonLockedColumn = grid.thead.find("th:first");
+
+        $(nonLockedColumn).trigger({ type: "mousemove", clientX: nonLockedColumn.offset().left + nonLockedColumn.outerWidth(), clientY: 0});
+
+        var lockedColumn = grid.lockedHeader.find("th:first");
+
+        $(lockedColumn).trigger({ type: "mousemove", clientX: lockedColumn.offset().left + lockedColumn.outerWidth(), clientY: 0});
+
+        equal(grid.wrapper.find(".k-grid-header-locked").children(".k-resize-handle").first()[0].offsetTop, lockedColumn[0].offsetTop);
+        equal(grid.wrapper.find(".k-grid-header-locked").children(".k-resize-handle").first()[0].offsetLeft, lockedColumn[0].offsetLeft + lockedColumn[0].offsetWidth - indicatorWidth);
+    });
+
     test("handler is position over the th right side when prev column is hidden", function() {
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar" } ],
@@ -168,6 +215,15 @@
         ok(grid.wrapper.find(".k-grid-header-wrap").data("kendoResizable"));
     });
 
+    test("resizable is attached to the locked header", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar" } ],
+            resizable: true,
+            columns: ["foo", { locked: true, field: "bar" }]
+        });
+        ok(grid.wrapper.find(".k-grid-header-locked").data("kendoResizable"));
+    });
+
     test("resizable is attached to the header if scrolling is disabled", function() {
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar" } ],
@@ -190,6 +246,95 @@
         resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
 
         equal(firstColumn[0].offsetWidth, initialWidth + 10);
+    });
+
+    test("locked column body cell width is incremented when handler is moved to the right", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: ["foo", { locked: true, field: "bar", width:100 }]
+        }),
+        firstColumn = grid.lockedHeader.find("th:first"),
+        initialWidth = grid.lockedTable.find("tr:first > td:first").width();
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+
+        equal(grid.lockedTable.find("tr:first > td:first").width(), initialWidth + 10);
+    });
+
+    test("locked column footer cell width is incremented when handler is moved to the right", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: ["foo", { locked: true, field: "bar", footerTemplate: "bar", width:100 }]
+        }),
+        firstColumn = grid.lockedHeader.find("th:first"),
+        footer = grid.footer.find(".k-grid-footer-locked"),
+        initialWidth = footer.find("tr:first > td:first").width();
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+
+        equal(footer.find("tr:first > td:first").width(), initialWidth + 10);
+    });
+
+    test("locked footer table width is incremented when handler is moved to the right", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: ["foo", { locked: true, field: "bar", footerTemplate: "bar", width:100 }]
+        }),
+        firstColumn = grid.lockedHeader.find("th:first"),
+        footer = grid.footer.find(".k-grid-footer-locked"),
+        initialWidth = footer.find("table").width();
+
+        resizeColumn(grid.wrapper, firstColumn, firstColumn.width(), firstColumn.width() + 10);
+
+        equal(footer.find("table").width(), initialWidth + 10);
+    });
+
+    test("non locked footer table width is not incremented when locked column is resized", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: ["foo", { locked: true, field: "bar", footerTemplate: "bar", width:100 }]
+        }),
+        firstColumn = grid.lockedHeader.find("th:first"),
+        footer = grid.footer.find(".k-grid-footer-wrap"),
+        initialWidth = footer.find("table").width();
+
+        resizeColumn(grid.wrapper, firstColumn, firstColumn.width(), firstColumn.width() + 10);
+
+        equal(footer.find("table").width(), initialWidth - 10);
+    });
+
+    test("non locked column footer cell width is incremented when handler is moved to the right", function() {
+         var grid = new Grid(table, {
+             dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: [ { field: "foo", width: 200 }, { locked: true, field: "bar", footerTemplate: "bar", width:100 }]
+        }),
+        firstColumn = grid.thead.find("th:first"),
+        initialWidth = grid.footer.find(".k-grid-footer-wrap tr:first > td:first").width();
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 10);
+
+        QUnit.close(grid.footer.find(".k-grid-footer-wrap").find("tr:first > td:first").width(), initialWidth + 10, 2);
+    });
+
+    test("locked header is not resized pass the grid container width", function() {
+        var grid = new Grid(table, {
+            dataSource: [ { foo: "foo", bar: "bar"} ],
+            resizable: true,
+            columns: [{ width: 200, field: "foo"}, { locked: true, field: "bar", width:100 }]
+        }),
+        firstColumn = grid.lockedHeader.find("th:first"),
+        initialWidth = grid.lockedTable.find("tr:first > td:first").width();
+
+        grid.wrapper.width(200);
+
+        resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 200);
+
+        equal(grid.lockedTable.width(), 200 - kendo.support.scrollbar());
     });
 
     test("column body cell width is incremented when handler is moved to the right", function() {

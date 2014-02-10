@@ -228,6 +228,40 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Makes the column static. By default all columns are not locked.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid(Model)
+        ///             .Name("Grid")
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).Locked())
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TColumnBuilder Locked()
+        {
+            return Locked(true);
+        }
+
+        /// <summary>
+        /// Makes the column static or not. By default all columns are not locked.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid(Model)
+        ///             .Name("Grid")
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).Locked((bool)ViewData["locked"]))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TColumnBuilder Locked(bool value)
+        {
+            Column.Locked = value;
+
+            return this as TColumnBuilder;
+        }
+
+        /// <summary>
         /// Makes the column hidden or not. By default all columns are not hidden. Hidden columns are rendered in the output HTML but are hidden.
         /// </summary>
         /// <example>

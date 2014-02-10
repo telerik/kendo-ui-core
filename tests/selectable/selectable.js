@@ -9,6 +9,7 @@
     module("kendo.ui.Selectable", {
         setup: function() {
             ul = $("<ul><li>1</li><li>2</li><li>3</li></ul>").appendTo(QUnit.fixture);
+            secondUL = $("<ul><li>11</li><li>21</li><li>31</li></ul>").appendTo(QUnit.fixture);
 
             $.fn.press = function(x, y, ctrlKey, metaKey) {
                 return triggerEvent(this, "mousedown", {
@@ -40,6 +41,7 @@
         teardown: function() {
             ul.kendoSelectable("destroy");
             ul.remove();
+            secondUL.remove();
             $(".k-marquee").remove();
         }
     });
@@ -598,4 +600,155 @@
         equal(selectees.eq(0).attr("aria-selected"), "true");
         equal(selectees.eq(1).attr("aria-selected"), "true");
     });
+
+    test("calls relatedTarget when initialzied with two elements", 2, function() {
+        var selectable = new Selectable(ul.add(secondUL), {
+            relatedTarget: function(item) {
+                equal(item[0], selectee[0]);
+            }
+        });
+        var selectee = ul.find(">li").eq(0);
+
+        selectee.tap();
+
+        ok(selectee.hasClass(SELECTED));
+    });
+
+    test("element returned from relatedTarget is selected on tap", function() {
+        var selectable = new Selectable(ul.add(secondUL), {
+            relatedTarget: function() {
+                return secondUL.children().first();
+            }
+        });
+        var selectee = ul.find(">li").eq(0);
+
+        selectee.tap();
+
+        ok(selectee.hasClass(SELECTED));
+        ok(secondUL.children().first().hasClass(SELECTED));
+    });
+
+    test("ctrl click with multiple elements", function() {
+        var selectable = new Selectable(ul.add(secondUL), {
+            multiple: true
+        });
+        var first = ul.find(">li").eq(0);
+        var second = secondUL.find(">li").eq(0);
+
+        first.tap();
+        second.tap({ ctrlKey: true });
+
+        ok(first.hasClass(SELECTED));
+        ok(second.hasClass(SELECTED));
+    });
+
+    test("unselect previous selected with multiple elements", function() {
+        var selectable = new Selectable(ul.add(secondUL), {
+            multiple: true
+        });
+        var first = ul.find(">li").eq(0);
+        var second = secondUL.find(">li").eq(0);
+
+        first.tap();
+        second.tap();
+
+        ok(!first.hasClass(SELECTED));
+        ok(second.hasClass(SELECTED));
+    });
+
+    test("item in both elements is mark for selection", function() {
+        var selectable = new Selectable(ul.add(secondUL),
+            {
+                multiple: true,
+                relatedTarget: function(item) {
+                    var idx = $.inArray(item[0], ul.children());
+                    return secondUL.children().eq(idx);
+                }
+            });
+        var selectee = ul.find(">li:first");
+        var position = selectee.offset();
+
+        selectee.press(0, 0).move(position.left, position.top).move(position.left + 1, position.top);
+
+        ok(selectee.hasClass(ACTIVE));
+        ok(secondUL.children().first().hasClass(ACTIVE));
+    });
+
+    test("selectRange calls continuousItems", 1, function() {
+        var selectable = new Selectable(ul.add(secondUL),
+            {
+                multiple: true,
+                continuousItems: function() {
+                    ok(true);
+                }
+            });
+
+        selectable.selectRange(ul.children().first(), ul.children().last());
+    });
+
+    test("selecting range with multiple elements", function() {
+        var selectable = new Selectable(ul.add(secondUL),
+            {
+                multiple: true,
+                continuousItems: function() {
+                    var result = [];
+                    ul.children().each(function(index, item) {
+                        result.push(item);
+                        result.push(secondUL.children()[index]);
+                    });
+
+                    return result;
+                }
+            });
+
+        selectable.selectRange(ul.children().first(), secondUL.children().first());
+        ok(ul.children().eq(0).hasClass(SELECTED));
+        ok(ul.children().eq(1).hasClass(SELECTED));
+        ok(!ul.children().eq(2).hasClass(SELECTED));
+
+        ok(secondUL.children().eq(0).hasClass(SELECTED));
+        ok(!secondUL.children().eq(1).hasClass(SELECTED));
+        ok(!secondUL.children().eq(2).hasClass(SELECTED));
+    });
+
+    test("selecting range with multiple elements and useAllItems enabled", function() {
+        var selectable = new Selectable(ul.add(secondUL),
+            {
+                multiple: true,
+                useAllItems: true,
+                continuousItems: function() {
+                    var result = [];
+                    ul.children().each(function(index, item) {
+                        result.push(item);
+                        result.push(secondUL.children()[index]);
+                    });
+
+                    return result;
+                }
+            });
+
+        selectable.selectRange(ul.children().first(), secondUL.children().first());
+        ok(ul.children().eq(0).hasClass(SELECTED));
+        ok(!ul.children().eq(1).hasClass(SELECTED));
+        ok(!ul.children().eq(2).hasClass(SELECTED));
+
+        ok(secondUL.children().eq(0).hasClass(SELECTED));
+        ok(!secondUL.children().eq(1).hasClass(SELECTED));
+        ok(!secondUL.children().eq(2).hasClass(SELECTED));
+    });
+
+    test("selectRange clears previous selected items", function() {
+        var selectable = new Selectable(ul,
+            {
+                multiple: true,
+            });
+
+        ul.children().first().tap();
+        selectable.selectRange(ul.children().eq(1), ul.children().last());
+
+        ok(!ul.children().eq(0).hasClass(SELECTED), "First item must not be selected");
+        ok(ul.children().eq(1).hasClass(SELECTED), "Second item must be selected");
+        ok(ul.children().eq(2).hasClass(SELECTED), "Third item must be selected");
+    });
+
 })();

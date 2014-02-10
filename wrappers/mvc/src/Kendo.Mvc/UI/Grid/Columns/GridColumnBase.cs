@@ -144,6 +144,11 @@ namespace Kendo.Mvc.UI
             {
                 json["encoded"] = Encoded;
             }
+
+            if (Locked)
+            {
+                json["static"] = Locked;
+            }
         }       
         
         /// <summary>
@@ -256,7 +261,19 @@ namespace Kendo.Mvc.UI
                 Settings.IncludeInMenu = value;
             }
         }
-  
+   
+        public virtual bool Locked
+        {
+            get
+            {
+                return Settings.Locked;
+            }
+            
+            set
+            {
+                Settings.Locked = value;
+            }
+        }
         public virtual bool Encoded
         {
             get

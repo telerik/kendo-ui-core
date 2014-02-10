@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>locked columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.reorderable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.menu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.filtermenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnmenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+  </head>
+    <body>
+            <style scoped>
+                .k-grid-header-locked {
+                    float: left;
+                    overflow: hidden;
+                    float:left;
+                    border-color: #c5c5c5;
+                    position: relative;
+                    border-style: solid;
+                    border-width: 0 1px 0 0;
+                }
+
+                .k-grid-footer-locked {
+                    float:left;
+                    border-right: solid 1px #c5c5c5;
+                }
+
+                .k-grid-content-locked
+                {
+                    overflow: hidden;
+                    float: left;
+                    border-right: solid 1px #c5c5c5;
+                }
+
+                .k-grid-content-locked > table {
+                    table-layout: fixed;
+                }
+
+                .k-grid-header .k-header .k-link {
+                    line-height: 20px;
+                }
+                .k-pager-wrap {
+                    clear: both;
+                }
+            </style>
+
+            <!--div style="width: 900px"-->
+                <div id="grid" style="width:1035px;"></div>
+            <!--/div-->
+
+            <script>
+                $(document).ready(function () {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
+                            },
+                            pageSize: 5,
+                            schema: {
+                                model: {
+                                    id: "CustomerID",
+                                    fields: {
+                                        CustomerID: { type: "number" },
+                                        ContactName: { type: "string" },
+                                        ContactTitle: { type: "string"},
+                                        CompanyName: { type: "string"},
+                                        Country: { type: "string"}
+                                    }
+                                }
+                            }
+                        },
+                        groupable: true,
+                        sortable: true,
+                        height: 500,
+                        pageable: {
+                            refresh: true,
+                            buttonCount: 5
+                        },
+                        navigatable: true,
+                        editable: "inline",
+                        //selectable: "multiple row",
+                        reorderable: true,
+                        //filterable: true,
+                        columnMenu: true,
+                        resizable: true,
+                        toolbar: ["create"],
+                        columns: [{
+                            field: "ContactName",
+                            template: "[locked 1] #=ContactName# #=ContactName#",
+                            title: "[locked 1] Contact Name",
+                            locked: true,
+                   //        footerTemplate: "[locked 1]",
+                            editor: "<textarea style='height:300px'/>",
+                            width: 140
+                        }, {
+                            field: "ContactTitle",
+                            template: "[locked 2] #=ContactTitle#",
+                            //groupFooterTemplate: "[locked 2] group",
+                            locked: true,
+                            footerTemplate: "[locked 2]",
+                            title: "[locked 2] Contact Title",
+                            width: 290
+                        }, {
+                            field: "CompanyName",
+                            title: "Company Name",
+                            locked: true,
+                      //      footerTemplate: "baz",
+                            width: 250
+                        },{
+                            field: "CustomerID",
+                            width: 100
+                        },  {
+                            field: "Country",
+                            width: 203
+                            }, {
+                            command: "edit",
+                            width: 128,
+                            title: "&nbsp;"
+                        }]
+                    });
+                });
+            </script>
+
+            <!--div style="width:600px">
+                <div id="editableGrid"></div>
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+                        dataSource = new kendo.data.DataSource({
+                            transport: {
+                                read:  {
+                                    url: crudServiceBaseUrl + "/Products",
+                                    dataType: "jsonp"
+                                },
+                                update: {
+                                    url: crudServiceBaseUrl + "/Products/Update",
+                                    dataType: "jsonp"
+                                },
+                                destroy: {
+                                    url: crudServiceBaseUrl + "/Products/Destroy",
+                                    dataType: "jsonp"
+                                },
+                                create: {
+                                    url: crudServiceBaseUrl + "/Products/Create",
+                                    dataType: "jsonp"
+                                },
+                                parameterMap: function(options, operation) {
+                                    if (operation !== "read" && options.models) {
+                                        return {models: kendo.stringify(options.models)};
+                                    }
+                                }
+                            },
+                            batch: true,
+                            pageSize: 20,
+                            schema: {
+                                model: {
+                                    id: "ProductID",
+                                    fields: {
+                                        ProductID: { editable: false, nullable: true },
+                                        ProductName: { validation: { required: true } },
+                                        UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                                        Discontinued: { type: "boolean" },
+                                        UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                                    }
+                                }
+                            }
+                        });
+
+                    $("#editableGrid").kendoGrid({
+                        dataSource: dataSource,
+                        pageable: true,
+                        height: 430,
+                        toolbar: ["create"],
+                        columns: [
+                            { field:"ProductName", title: "Product Name", locked: true, width: 100, editor: "<textarea style='height: 200px'></textarea>" },
+                            { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "100px" },
+                            { field: "UnitsInStock", title:"Units In Stock", width: "200px" },
+                            { field: "Discontinued", width: "100px" },
+                            { command: ["edit", "destroy"], title: "&nbsp;", width: "160px" }],
+                        editable: "inline"
+                    });
+                });
+            </script-->
+    </body>
+</html>

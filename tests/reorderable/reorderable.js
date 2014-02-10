@@ -19,25 +19,27 @@
         return $.extend(new $.Event, options);
     }
 
-    function moveOverDropTarget(draggable, dropTarget) {
-        var position = dropTarget.offset();
+    function moveOverDropTarget(draggable, dropTarget, leftOffset) {
+        leftOffset = leftOffset || 0;
+        var offset = dropTarget.offset();
+        offset.left += leftOffset;
 
         draggable.trigger({ type: "mousedown", pageX: 1, pageY: 1 });
 
         $(QUnit.fixture).trigger({
             type: "mousemove",
-            pageX: position.left,
-            pageY: position.top,
-            clientX: position.left,
-            clientY: position.top
+            pageX: offset.left,
+            pageY: offset.top,
+            clientX: offset.left,
+            clientY: offset.top
         });
 
         $(QUnit.fixture).trigger({
             type: "mouseup",
-            pageX: position.left,
-            pageY: position.top,
-            clientX: position.left,
-            clientY: position.top
+            pageX: offset.left,
+            pageY: offset.top,
+            clientX: offset.left,
+            clientY: offset.top
         });
     }
 
@@ -61,6 +63,28 @@
         div.kendoReorderable();
 
         ok(div.data("kendoReorderable") instanceof Reorderable);
+    });
+
+    test("draggable is destroyed", function() {
+        var reorderable = new Reorderable(div);
+        var draggable = stub(reorderable.draggable, {
+            destroy: reorderable.draggable.destroy
+        });
+
+        reorderable.destroy();
+
+        equal(draggable.calls("destroy"), 1);
+    });
+
+    test("drop targets are destroyed", function() {
+        var reorderable = new Reorderable(div);
+
+        reorderable.destroy();
+
+        var dropTargets = div.children();
+        ok(!dropTargets.eq(0).data("kendoDropTarget"));
+        ok(!dropTargets.eq(1).data("kendoDropTarget"));
+        ok(!dropTargets.eq(2).data("kendoDropTarget"));
     });
 
     test("adds class k-reorderable to element", function() {
@@ -179,4 +203,125 @@
         equal(args.oldIndex, 0);
         equal(args.newIndex, 1);
     });
+
+    test("calls inSameContainer", function() {
+        var wasCalled = false;
+        var reorderable = new Reorderable(div, {
+            hint: $("<div />"),
+            inSameContainer: function() {
+                wasCalled = true;
+            }
+        }),
+        target = div.children().eq(1);
+
+        moveOverDropTarget(div.children().eq(0), target);
+        ok(wasCalled);
+    });
+
+    test("drop cue is positioned at the end of the drop target when not in same container", function() {
+        div.empty()
+            .append("<div><div>1</div><div>2</div></div><div><div>11</div><div>12</div></div>")
+            .find("div")
+            .css({float: "left"});
+
+        var reorderable = new Reorderable(div, {
+            filter: ">div>*",
+            hint: $("<div />"),
+            inSameContainer: function(x, y) {
+                return $(x).parent()[0] == $(y).parent()[0];
+            }
+        }),
+        target = div.find(">div:eq(0)>div:last");
+
+        moveOverDropTarget(div.find(">div:eq(1)>div:last"), target, target.outerWidth());
+
+        equalPositions(reorderable.reorderDropCue, target);
+    });
+
+    test("drop cue is positioned at the beging of the drop target when not in same container", function() {
+        div.empty()
+        .append("<div><div>1</div><div>2</div></div><div><div>11</div><div>12</div></div>")
+            .find("div")
+            .css({float: "left"});
+
+        var reorderable = new Reorderable(div, {
+            filter: ">div>*",
+            hint: $("<div />"),
+            inSameContainer: function(x, y) {
+                return $(x).parent()[0] == $(y).parent()[0];
+            }
+        }),
+        target = div.find(">div:eq(0)>div:last");
+
+        moveOverDropTarget(div.find(">div:eq(1)>div:last"), target);
+
+        equalPositions(reorderable.reorderDropCue, target, true);
+    });
+
+    test("position is set to before", function() {
+        var args,
+            reorderable = new Reorderable(div, {
+                change: function() {
+                    args = arguments[0];
+                }
+            }),
+            target = div.children().eq(0);
+
+        moveOverDropTarget(div.children().eq(1), target, 1);
+
+        equal(args.position, "before");
+    });
+
+    test("position is set to after", function() {
+        var args,
+            reorderable = new Reorderable(div, {
+                change: function() {
+                    args = arguments[0];
+                }
+            }),
+            target = div.children().eq(1);
+
+        moveOverDropTarget(div.children().eq(0), target, 1);
+
+        equal(args.position, "after");
+    });
+
+    test("reorder twice adjecent elements", function() {
+        var args;
+        new Reorderable(div, {
+            change: function() {
+                args = arguments[0];
+            }
+        });
+
+        div.children().eq(1).insertBefore(div.children().eq(0));
+        moveOverDropTarget(div.children().eq(1), div.children().eq(0), 1);
+
+        equal(args.newIndex, 0);
+        equal(args.oldIndex, 1);
+    });
+
+    test("will not trigger change if only one element in the right container", function() {
+        div.empty()
+            .append("<div><div>1</div><div>2</div></div><div><div>11</div></div>")
+            .find("div")
+            .css({float: "left"});
+
+        var called = false,
+            reorderable = new Reorderable(div, {
+                filter: ">div>*",
+                hint: $("<div />"),
+                inSameContainer: function() {
+                    return false;
+                },
+                change: function() {
+                    called = true;
+                }
+            });
+
+        moveOverDropTarget(div.find(">div:eq(1)>div"), div.find(">div:eq(0)>div:first"), 1);
+
+        strictEqual(called, false);
+    });
+
 })();

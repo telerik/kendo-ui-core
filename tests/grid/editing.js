@@ -54,6 +54,63 @@
         ok(cell.find(":input").length);
     });
 
+    test("locked cell click enters edit mode", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true }, "name"] });
+
+        var cell = grid.lockedTable.find("td:first").click();
+
+        ok(cell.find(":input").length);
+    });
+
+    test("editing locked cell sync row height", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true, editor: "<input style='height:200px'>" }, "name"] });
+
+        var cell = grid.lockedTable.find("td:first").click();
+
+        var tr = cell.parent();
+        var related = grid._relatedRow(tr);
+
+        equal(tr.height(), related.height());
+    });
+
+    test("closeCell on locked cell sync row height", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true, editor: "<input style='height:200px'>" }, "name"] });
+
+        var cell = grid.lockedTable.find("td:first");
+
+        var originalHeight = cell.parent().height();
+
+        grid.editCell(cell);
+        grid.closeCell(cell);
+
+        var tr = cell.parent();
+        var related = grid._relatedRow(tr);
+
+        equal(tr.height(), related.height());
+        equal(tr.height(), originalHeight);
+    });
+
+
+    test("editing locked cell both rows have css class set", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true }, "name"] });
+
+        var cell = grid.lockedTable.find("td:first").click();
+
+        var tr = cell.parent();
+        var related = grid._relatedRow(tr);
+
+        ok(tr.hasClass("k-grid-edit-row"));
+        ok(related.hasClass("k-grid-edit-row"));
+    });
+
+    test("editing locked cell add css class", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true }, "name"] });
+
+        var cell = grid.lockedTable.find("td:first").click();
+
+        ok(cell.hasClass("k-edit-cell"));
+    });
+
     test("clicking next to a cell with additional table is switched to edit mode", function() {
         setup({
             columns: [

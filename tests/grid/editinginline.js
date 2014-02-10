@@ -502,4 +502,73 @@
         grid.saveRow();
         equal(row.find("input").length, 2);
     });
+
+    test("editRow sets locked column in edit mode", function() {
+        var grid = setup({
+            columns: [ { field: "foo", locked: true }, "name"],
+            editable: "inline"
+        });
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        ok(grid.lockedTable.find("tr:first").hasClass("k-grid-edit-row"));
+        ok(grid.lockedTable.find("tr:first td").find("input").length);
+    });
+
+    test("same editable instance is attached to locked and non locked columns", function() {
+        var grid = setup({
+            columns: [ { field: "foo", locked: true }, "name"],
+            editable: "inline"
+        });
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        deepEqual(grid.lockedTable.find("tr:first").data("kendoEditable"), grid.table.find("tr:first").data("kendoEditable"));
+        deepEqual(grid.lockedTable.find("tr:first").data("kendoEditable"), grid.editable);
+    });
+
+    test("edit event is raised with both locked and non locked row as container", 3, function() {
+        var grid = setup({
+            columns: [ { field: "foo", locked: true }, "name"],
+            editable: "inline",
+            edit: function(e) {
+                equal(e.container.length, 2);
+                equal(e.container.eq(0)[0], grid.lockedTable.find("tr:first")[0]);
+                equal(e.container.eq(1)[0], grid.table.find("tr:first")[0]);
+            }
+        });
+
+        grid.editRow(grid.table.find("tr:first"));
+    });
+
+    test("cancel event adjusts the height of the edited locked and non locked row", function() {
+        var grid = setup({
+            columns: [ { field: "foo", locked: true, editor: "<textarea style='height:200px'></textarea>"}, "name"],
+            editable: "inline"
+        });
+
+        var originalHeigth = grid.table.find("tr:first").height();
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        grid.cancelRow();
+
+        equal(grid.lockedTable.find("tr:first").height(), grid.table.find("tr:first").height());
+        equal(grid.table.find("tr:first").height(), originalHeigth);
+    });
+
+    test("Validator instance has both locked and non locked rows as target", function() {
+        var grid = setup({
+            columns: [ { field: "foo", locked: true }, "name"],
+            editable: "inline"
+        });
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        equal(grid.editable.validatable.element.length, 2);
+
+        deepEqual(grid.lockedTable.find("tr:first")[0], grid.editable.validatable.element[0]);
+        deepEqual(grid.table.find("tr:first")[0], grid.editable.validatable.element[1]);
+    });
+
 })();

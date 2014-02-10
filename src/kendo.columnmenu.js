@@ -122,7 +122,9 @@ var __meta__ = {
                 anchor: that.link,
                 open: proxy(that._open, that),
                 activate: proxy(that._activate, that),
-                close: that.options.closeCallback
+                close: function() {
+                    that.options.closeCallback(that.element);
+                }
             }).data(POPUP);
 
             that.menu = that.wrapper.children()[MENU]({

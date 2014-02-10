@@ -1262,4 +1262,39 @@
 
         equal(grid.tbody.find(".k-grouping-row>td").attr("colspan"), "2");
     });
+
+    test("error is thrown if locked columns and detail template are set", function() {
+        throws(function() {
+            var grid = new Grid(table, {
+                detailTemplate: "foo",
+                columns: [ { locked: true }, "foo" ]
+            });
+        });
+    });
+
+    test("error is thrown if locked columns and row template are set", function() {
+        throws(function() {
+            var grid = new Grid(table, {
+                rowTemplate: "foo",
+                columns: [ { locked: true }, "foo" ]
+            });
+        });
+    });
+
+    test("error is thrown if locked columns and alt row template are set", function() {
+        throws(function() {
+            var grid = new Grid(table, {
+                altRowTemplate: "foo",
+                columns: [ { locked: true }, "foo" ]
+            });
+        });
+    });
+
+    test("error is thrown if all columns are set as locked columns", function() {
+        throws(function() {
+            var grid = new Grid(table, {
+                columns: [ { locked: true } ]
+            });
+        });
+    });
 })();

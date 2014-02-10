@@ -87,6 +87,23 @@ var __meta__ = {
         return $(text);
     }
 
+    function searchForMessageContainer(elements, fieldName) {
+        var containers = $(),
+            element,
+            attr;
+
+        for (var idx = 0, length = elements.length; idx < length; idx++) {
+            element = elements[idx];
+            if (invalidMsgRegExp.test(element.className)) {
+                attr = element.getAttribute(kendo.attr("for"));
+                if (attr === fieldName) {
+                    containers = containers.add(element);
+                }
+            }
+        }
+        return containers;
+    }
+
     var Validator = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -312,17 +329,10 @@ var __meta__ = {
         _findMessageContainer: function(fieldName) {
             var locators = kendo.ui.validator.messageLocators,
                 name,
-                containers = $(),
-                children = this.element[0].getElementsByTagName("*");
+                containers = $();
 
-            for (var idx = 0, length = children.length; idx < length; idx++) {
-                var element = children[idx];
-                if (invalidMsgRegExp.test(element.className)) {
-                    var attr = element.getAttribute(kendo.attr("for"));
-                    if (attr === fieldName) {
-                        containers = containers.add(element);
-                    }
-                }
+            for (var idx = 0, length = this.element.length; idx < length; idx++) {
+                containers = containers.add(searchForMessageContainer(this.element[idx].getElementsByTagName("*"), fieldName));
             }
 
             for (name in locators) {

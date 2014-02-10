@@ -172,4 +172,17 @@
 
         grid.thead.find("th:first").data("kendoColumnMenu").link.click();
     });
+
+    test("column menu initialization over locked columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar" }
+            ]
+        });
+
+        var th = grid.wrapper.find("th");
+        ok(th.eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu, "locked column doesn't have column menu");
+        ok(th.eq(1).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu, "non locked column doesn't have column menu");
+    });
 })();

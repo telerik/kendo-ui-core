@@ -328,4 +328,13 @@ The request for '{0}' has found the following matching controllers:{2}</value>
   <data name="CannotUsePushStateWithServerNavigation" xml:space="preserve">
     <value>Cannot use PushState with server navigation.</value>
   </data>
+  <data name="CannotUseDetailTemplateAndLockedColumns" xml:space="preserve">
+    <value>Cannot use both Detail template and locked columns</value>
+  </data>
+  <data name="CannotUseRowTemplateAndLockedColumns" xml:space="preserve">
+    <value>Cannot use both Row template and locked columns</value>
+  </data>
+  <data name="CannotUseLockedColumnsAndServerBinding" xml:space="preserve">
+    <value>Locked columns are not supported in server binding mode</value>
+  </data>
 </root>

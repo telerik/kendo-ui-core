@@ -284,12 +284,12 @@ var __meta__ = {
 
             that.options.model.bind("set", that._validateProxy);
 
-            that.validatable = container.kendoValidator({
+            that.validatable = new kendo.ui.Validator(container, {
                 validateOnBlur: false,
                 errorTemplate: that.options.errorTemplate || undefined,
-                rules: rules }).data("kendoValidator");
+                rules: rules });
 
-            var focusable = container.find(":kendoFocusable:first").focus();
+            var focusable = container.find(":kendoFocusable").eq(0).focus();
             if (oldIE) {
                 focusable.focus();
             }

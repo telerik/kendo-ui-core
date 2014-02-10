@@ -664,4 +664,422 @@
         equal(grid.tbody.find("td:visible").length, 1, "visible column cells");
         equal(grid.tbody.find("td:not(:visible)").length, 2, "hidden column cells");
     });
+
+    test("hide locked column header", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).is(":visible"), false);
+        equal(th.eq(1).is(":visible"), true);
+        equal(th.eq(2).is(":visible"), true);
+    });
+
+    test("hide non locked column header in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).is(":visible"), true);
+        equal(th.eq(1).is(":visible"), false);
+        equal(th.eq(2).is(":visible"), true);
+    });
+
+    test("hide locked column col", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var cols = grid.wrapper.find("colgroup>col");
+        equal(cols.length, 4);
+        equal(cols[0].style.width, "20px");
+        equal(cols[1].style.width, "30px");
+        equal(cols[2].style.width, "20px");
+        equal(cols[3].style.width, "30px");
+    });
+
+    test("hide non locked column col in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var cols = grid.wrapper.find("colgroup>col");
+        equal(cols.length, 4);
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "30px");
+        equal(cols[2].style.width, "10px");
+        equal(cols[3].style.width, "30px");
+    });
+
+    test("hide locked column footer", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var td = grid.wrapper.find(".k-footer-template>td");
+        equal(td.eq(0).is(":visible"), false);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("hide non locked column footer in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", footerTemplate: "bar" }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var td = grid.wrapper.find(".k-footer-template>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), false);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("hide locked column footer col", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var cols = grid.footer.find("colgroup>col");
+        equal(cols.length, 2);
+        equal(cols[0].style.width, "20px");
+        equal(cols[1].style.width, "30px");
+    });
+
+    test("hide non locked column footer col in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", footerTemplate: "bar" }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var cols = grid.footer.find("colgroup>col");
+        equal(cols.length, 2);
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "30px");
+    });
+
+    test("hide locked column cell", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        var td = grid.lockedTable.find("td").add(grid.table.find("td"));
+        equal(td.eq(0).is(":visible"), false);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("hide non locked column cell in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        var td = grid.lockedTable.find("td").add(grid.table.find("td"));
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), false);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("hide locked column with grouping", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ],
+            dataSource: {
+                group: { field: "foo" }
+            }
+        });
+
+        grid.hideColumn(0);
+        var td = grid.lockedTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.lockedTable.add(grid.table).find(".k-grouping-row>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), false);
+        equal(td.eq(2).is(":visible"), true);
+        equal(td.eq(3).is(":visible"), true);
+        equal(parseInt(groupCell.eq(0).attr("colspan"), 10), 1);
+        equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 2);
+    });
+
+    test("hide non locked column in grid with locked column and grouping", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ],
+            dataSource: {
+                group: { field: "foo" }
+            }
+        });
+
+        grid.hideColumn(1);
+        var td = grid.lockedTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.lockedTable.add(grid.table).find(".k-grouping-row>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), false);
+        equal(td.eq(3).is(":visible"), true);
+        equal(parseInt(groupCell.eq(0).attr("colspan"), 10), 2);
+        equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 1);
+    });
+
+    test("show locked column header", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(0);
+        grid.showColumn(0);
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).is(":visible"), true);
+        equal(th.eq(1).is(":visible"), true);
+        equal(th.eq(2).is(":visible"), true);
+    });
+
+    test("show non locked column header in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).is(":visible"), true);
+        equal(th.eq(1).is(":visible"), true);
+        equal(th.eq(2).is(":visible"), true);
+    });
+
+    test("show locked column col", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(0);
+        grid.showColumn(0);
+        var cols = grid.wrapper.find("colgroup>col");
+        equal(cols.length, 6);
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "20px");
+        equal(cols[2].style.width, "30px");
+        equal(cols[3].style.width, "10px");
+        equal(cols[4].style.width, "20px");
+        equal(cols[5].style.width, "30px");
+    });
+
+    test("show non locked column col in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+        var cols = grid.wrapper.find("colgroup>col");
+        equal(cols.length, 6);
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "20px");
+        equal(cols[2].style.width, "30px");
+        equal(cols[3].style.width, "10px");
+        equal(cols[4].style.width, "20px");
+        equal(cols[5].style.width, "30px");
+    });
+
+    test("show locked column footer", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        grid.showColumn(0);
+        var td = grid.wrapper.find(".k-footer-template>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("show non locked column footer in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", footerTemplate: "bar" }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+        var td = grid.wrapper.find(".k-footer-template>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("show locked column footer col", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        grid.showColumn(0);
+        var cols = grid.footer.find("colgroup>col");
+        equal(cols.length, 3);
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "20px");
+        equal(cols[2].style.width, "30px");
+    });
+
+    test("show non locked column footer col in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", footerTemplate: "bar" }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+        var cols = grid.footer.find("colgroup>col");
+        equal(cols.length, 3);
+        equal(cols[0].style.width, "10px");
+        equal(cols[1].style.width, "20px");
+        equal(cols[2].style.width, "30px");
+    });
+
+    test("show locked column cell", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, footerTemplate: "foo" }
+            ]
+        });
+
+        grid.hideColumn(0);
+        grid.showColumn(0);
+        var td = grid.lockedTable.find("td").add(grid.table.find("td"));
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("show non locked column cell in grid with locked column", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+        var td = grid.lockedTable.find("td").add(grid.table.find("td"));
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+    });
+
+    test("show locked column with grouping", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ],
+            dataSource: {
+                group: { field: "foo" }
+            }
+        });
+
+        grid.hideColumn(0);
+        grid.showColumn(0);
+        var td = grid.lockedTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.lockedTable.add(grid.table).find(".k-grouping-row>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+        equal(td.eq(3).is(":visible"), true);
+        equal(parseInt(groupCell.eq(0).attr("colspan"), 10), 2);
+        equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 2);
+    });
+
+    test("hide non locked column in grid with locked column and grouping", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true }
+            ],
+            dataSource: {
+                group: { field: "foo" }
+            }
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+        var td = grid.lockedTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.lockedTable.add(grid.table).find(".k-grouping-row>td");
+        equal(td.eq(0).is(":visible"), true);
+        equal(td.eq(1).is(":visible"), true);
+        equal(td.eq(2).is(":visible"), true);
+        equal(td.eq(3).is(":visible"), true);
+        equal(parseInt(groupCell.eq(0).attr("colspan"), 10), 2);
+        equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 2);
+    });
+
+    test("refresh with hidden column updates footer cols", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, footerTemplate: "foo", width: 10 },
+                { field: "bar", locked: true, width: 20 },
+                { field: "baz", locked: true, width: 30 },
+                { field: "bax", width: 40 },
+                { field: "fuzz", width: 50 }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.refresh();
+
+        var lockedCol = grid.wrapper.find(".k-grid-footer-locked col");
+        equal(lockedCol[0].style.width, "10px");
+        equal(lockedCol[1].style.width, "30px");
+
+        var nonLockedCol = grid.wrapper.find(".k-grid-footer-wrap col");
+        equal(nonLockedCol[0].style.width, "40px");
+        equal(nonLockedCol[1].style.width, "50px");
+    });
+
 })();

@@ -83,6 +83,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool Locked
+        {
+            get;
+            set;
+        }
+
         public bool Filterable
         {
             get;
