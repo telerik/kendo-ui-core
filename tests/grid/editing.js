@@ -54,18 +54,18 @@
         ok(cell.find(":input").length);
     });
 
-    test("static cell click enters edit mode", function() {
-        var grid = setup({ columns: [{ field: "foo", static: true }, "name"] });
+    test("locked cell click enters edit mode", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true }, "name"] });
 
-        var cell = grid.staticTable.find("td:first").click();
+        var cell = grid.lockedTable.find("td:first").click();
 
         ok(cell.find(":input").length);
     });
 
-    test("editing static cell sync row height", function() {
-        var grid = setup({ columns: [{ field: "foo", static: true, editor: "<input style='height:200px'>" }, "name"] });
+    test("editing locked cell sync row height", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true, editor: "<input style='height:200px'>" }, "name"] });
 
-        var cell = grid.staticTable.find("td:first").click();
+        var cell = grid.lockedTable.find("td:first").click();
 
         var tr = cell.parent();
         var related = grid._relatedRow(tr);
@@ -73,10 +73,10 @@
         equal(tr.height(), related.height());
     });
 
-    test("closeCell on static cell sync row height", function() {
-        var grid = setup({ columns: [{ field: "foo", static: true, editor: "<input style='height:200px'>" }, "name"] });
+    test("closeCell on locked cell sync row height", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true, editor: "<input style='height:200px'>" }, "name"] });
 
-        var cell = grid.staticTable.find("td:first");
+        var cell = grid.lockedTable.find("td:first");
 
         var originalHeight = cell.parent().height();
 
@@ -91,10 +91,10 @@
     });
 
 
-    test("editing static cell both rows have css class set", function() {
-        var grid = setup({ columns: [{ field: "foo", static: true }, "name"] });
+    test("editing locked cell both rows have css class set", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true }, "name"] });
 
-        var cell = grid.staticTable.find("td:first").click();
+        var cell = grid.lockedTable.find("td:first").click();
 
         var tr = cell.parent();
         var related = grid._relatedRow(tr);
@@ -103,10 +103,10 @@
         ok(related.hasClass("k-grid-edit-row"));
     });
 
-    test("editing static cell add css class", function() {
-        var grid = setup({ columns: [{ field: "foo", static: true }, "name"] });
+    test("editing locked cell add css class", function() {
+        var grid = setup({ columns: [{ field: "foo", locked: true }, "name"] });
 
-        var cell = grid.staticTable.find("td:first").click();
+        var cell = grid.lockedTable.find("td:first").click();
 
         ok(cell.hasClass("k-edit-cell"));
     });

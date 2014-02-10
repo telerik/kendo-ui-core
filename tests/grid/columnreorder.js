@@ -469,11 +469,11 @@
         equal(columns[3].field, "baz");
     });
 
-    test("move static column before non static column", function() {
+    test("move locked column before non locked column", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "foo", static: true },
-                { field: "bar", static: true },
+                { field: "foo", locked: true },
+                { field: "bar", locked: true },
                 { field: "baz" },
                 { field: "bax" }
             ]
@@ -483,20 +483,20 @@
 
         var columns = grid.columns;
         equal(columns[0].field, "foo");
-        ok(columns[0].static, true);
+        ok(columns[0].locked, true);
         equal(columns[1].field, "bar");
-        ok(!columns[1].static);
+        ok(!columns[1].locked);
         equal(columns[2].field, "baz");
-        ok(!columns[2].static);
+        ok(!columns[2].locked);
         equal(columns[3].field, "bax");
-        ok(!columns[3].static);
+        ok(!columns[3].locked);
     });
 
-    test("move static column after non static column", function() {
+    test("move locked column after non locked column", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "foo", static: true },
-                { field: "bar", static: true },
+                { field: "foo", locked: true },
+                { field: "bar", locked: true },
                 { field: "baz" },
                 { field: "bax" }
             ]
@@ -506,20 +506,20 @@
 
         var columns = grid.columns;
         equal(columns[0].field, "foo");
-        ok(columns[0].static, true);
+        ok(columns[0].locked, true);
         equal(columns[1].field, "baz");
-        ok(!columns[1].static);
+        ok(!columns[1].locked);
         equal(columns[2].field, "bar");
-        ok(!columns[2].static);
+        ok(!columns[2].locked);
         equal(columns[3].field, "bax");
-        ok(!columns[3].static);
+        ok(!columns[3].locked);
     });
 
-    test("move non static column before static column", function() {
+    test("move non locked column before locked column", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "foo", static: true },
-                { field: "bar", static: true },
+                { field: "foo", locked: true },
+                { field: "bar", locked: true },
                 { field: "baz" },
                 { field: "bax" }
             ]
@@ -529,20 +529,20 @@
 
         var columns = grid.columns;
         equal(columns[0].field, "foo");
-        ok(columns[0].static, true);
+        ok(columns[0].locked, true);
         equal(columns[1].field, "baz");
-        ok(columns[1].static);
+        ok(columns[1].locked);
         equal(columns[2].field, "bar");
-        ok(columns[2].static);
+        ok(columns[2].locked);
         equal(columns[3].field, "bax");
-        ok(!columns[3].static);
+        ok(!columns[3].locked);
     });
 
-    test("move non static column after static column", function() {
+    test("move non locked column after locked column", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "foo", static: true },
-                { field: "bar", static: true },
+                { field: "foo", locked: true },
+                { field: "bar", locked: true },
                 { field: "baz" },
                 { field: "bax" }
             ]
@@ -552,19 +552,19 @@
 
         var columns = grid.columns;
         equal(columns[0].field, "foo");
-        ok(columns[0].static, true);
+        ok(columns[0].locked, true);
         equal(columns[1].field, "bar");
-        ok(columns[1].static);
+        ok(columns[1].locked);
         equal(columns[2].field, "baz");
-        ok(columns[2].static);
+        ok(columns[2].locked);
         equal(columns[3].field, "bax");
-        ok(!columns[3].static);
+        ok(!columns[3].locked);
     });
 
-    test("reorder headers with static columns", function() {
+    test("reorder headers with locked columns", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "bax", static: true },
+                { field: "bax", locked: true },
                 "foo",
                 "bar",
                 "baz"
@@ -581,10 +581,10 @@
         equal(th.eq(3).text(), "baz");
     });
 
-    test("non static header is moved to static headers", function() {
+    test("non locked header is moved to locked headers", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "bax", static: true },
+                { field: "bax", locked: true },
                 "foo",
                 "bar",
                 "baz"
@@ -601,11 +601,11 @@
         equal(th.eq(0).next()[0], th[1]);
     });
 
-    test("static header is moved to non static headers", function() {
+    test("locked header is moved to non locked headers", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "bax", static: true },
-                { field: "foo", static: true },
+                { field: "bax", locked: true },
+                { field: "foo", locked: true },
                 "bar",
                 "baz"
             ]
@@ -621,17 +621,17 @@
         equal(th.eq(1).next()[0], th[2]);
     });
 
-    test("reorder colum footer cells with static columns", function() {
+    test("reorder colum footer cells with locked columns", function() {
         var grid = new Grid(div, {
             reorderable: true,
             columns: [{
                 field: "foo",
                 footerTemplate: "foo footer",
-                static: true
+                locked: true
             },
             {
                 field: "baz",
-                static: true,
+                locked: true,
                 footerTemplate: "baz footer"
             },
             {
@@ -649,18 +649,18 @@
         equal(footer.eq(2).text(), "bar footer");
     });
 
-    test("reorder colum footer cols with static columns", function() {
+    test("reorder colum footer cols with locked columns", function() {
         var grid = new Grid(div, {
             reorderable: true,
             columns: [{
                 field: "foo",
                 footerTemplate: "foo footer",
-                static: true,
+                locked: true,
                 width: 10
             },
             {
                 field: "baz",
-                static: true,
+                locked: true,
                 footerTemplate: "baz footer",
                 width: 20
             },
@@ -681,13 +681,13 @@
         equal(cols[2].style.width, "30px");
     });
 
-    test("columns are not reordered if only one static column", function() {
+    test("columns are not reordered if only one locked column", function() {
         var grid = new Grid(div, {
             reorderable: true,
             columns: [{
                 field: "foo",
                 footerTemplate: "foo footer",
-                static: true,
+                locked: true,
                 width: 10
             },
             {
@@ -710,18 +710,18 @@
         equal(grid.columns[2].field, "bar");
     });
 
-    test("columns are not reordered if only one non static column", function() {
+    test("columns are not reordered if only one non locked column", function() {
         var grid = new Grid(div, {
             reorderable: true,
             columns: [{
                 field: "foo",
                 footerTemplate: "foo footer",
-                static: true,
+                locked: true,
                 width: 10
             },
             {
                 field: "baz",
-                static: true,
+                locked: true,
                 footerTemplate: "baz footer",
                 width: 20
             },
@@ -740,10 +740,10 @@
         equal(grid.columns[2].field, "bar");
     });
 
-    test("move to static columns with grouping", function() {
+    test("move to locked columns with grouping", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "bax", static: true },
+                { field: "bax", locked: true },
                 "foo",
                 "bar",
                 "baz"
@@ -756,15 +756,15 @@
 
         grid.reorderColumn(0, grid.columns[1], false);
 
-        equal(grid.staticTable.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in static table");
-        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in non-static table");
+        equal(grid.lockedTable.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in locked table");
+        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in non-locked table");
     });
 
-    test("move to non-static columns with grouping", function() {
+    test("move to non-locked columns with grouping", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "bax", static: true },
-                { field: "foo", static: true },
+                { field: "bax", locked: true },
+                { field: "foo", locked: true },
                 "bar",
                 "baz"
             ],
@@ -776,14 +776,14 @@
 
         grid.reorderColumn(2, grid.columns[1], false);
 
-        equal(grid.staticTable.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in static table");
-        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in non-static table");
+        equal(grid.lockedTable.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in locked table");
+        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in non-locked table");
     });
 
-    test("move in non-static table with grouping", function() {
+    test("move in non-locked table with grouping", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "bax", static: true },
+                { field: "bax", locked: true },
                 "foo",
                 "bar",
                 "baz"
@@ -796,15 +796,15 @@
 
         grid.reorderColumn(2, grid.columns[1], false);
 
-        equal(grid.staticTable.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in static table");
-        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in non-static table");
+        equal(grid.lockedTable.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in locked table");
+        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in non-locked table");
     });
 
-    test("move in static table with grouping", function() {
+    test("move in locked table with grouping", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "bax", static: true },
-                { field: "foo", static: true },
+                { field: "bax", locked: true },
+                { field: "foo", locked: true },
                 "bar",
                 "baz"
             ],
@@ -816,15 +816,15 @@
 
         grid.reorderColumn(1, grid.columns[0], true);
 
-        equal(grid.staticTable.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in static table");
-        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in non-static table");
+        equal(grid.lockedTable.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in locked table");
+        equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in non-locked table");
     });
 
-    test("reorder with two levels of grouping and static columns", function() {
+    test("reorder with two levels of grouping and locked columns", function() {
         var grid = new Grid(div, {
             columns: [
-                { field: "bax", static: true },
-                { field: "foo", static: true },
+                { field: "bax", locked: true },
+                { field: "foo", locked: true },
                 "bar",
                 "baz"
             ],
@@ -836,10 +836,10 @@
 
         grid.reorderColumn(2, grid.columns[1], false);
 
-        equal(grid.staticTable.find(".k-grouping-row:eq(0)>td:first").attr("colspan"), 3, "colspan in static table");
-        equal(grid.staticTable.find(".k-grouping-row:eq(1)>td:not(.k-group-cell)").attr("colspan"), 2, "colspan in static table");
-        equal(grid.table.find(".k-grouping-row:eq(0)>td:first").attr("colspan"), 3, "colspan in non-static table");
-        equal(grid.table.find(".k-grouping-row:eq(1)>td:not(.k-group-cell)").attr("colspan"), 3, "colspan in non-static table");
+        equal(grid.lockedTable.find(".k-grouping-row:eq(0)>td:first").attr("colspan"), 3, "colspan in locked table");
+        equal(grid.lockedTable.find(".k-grouping-row:eq(1)>td:not(.k-group-cell)").attr("colspan"), 2, "colspan in locked table");
+        equal(grid.table.find(".k-grouping-row:eq(0)>td:first").attr("colspan"), 3, "colspan in non-locked table");
+        equal(grid.table.find(".k-grouping-row:eq(1)>td:not(.k-group-cell)").attr("colspan"), 3, "colspan in non-locked table");
     });
 
     function moveOverDropTarget(draggable, dropTarget) {

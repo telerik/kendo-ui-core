@@ -613,11 +613,11 @@
         ok(!grid.tbody.find("td:first").hasClass("k-state-focused"));
     });
 
-    test("useAllItems is set when static columns and multiple cell selection", function() {
+    test("useAllItems is set when locked columns and multiple cell selection", function() {
         var grid = setup({
             selectable: "multiple cell",
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -626,7 +626,7 @@
         ok(useAllItems);
     });
 
-    test("useAllItems is not set when no static columns", function() {
+    test("useAllItems is not set when no locked columns", function() {
         var grid = setup({
             selectable: "multiple cell"
         });
@@ -644,7 +644,7 @@
         equal(target, undefined);
     });
 
-    test("relatedTarget returns undefined with if not static columns", function() {
+    test("relatedTarget returns undefined with if not locked columns", function() {
         var grid = setup({ selectable: "row" });
 
         var target = grid.selectable.relatedTarget();
@@ -652,29 +652,29 @@
         equal(target, undefined);
     });
 
-    test("relatedTarget returns row from non-static table", function() {
+    test("relatedTarget returns row from non-locked table", function() {
         var grid = setup({
             selectable: "row",
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
         var item = grid.table.find("tr").first();
         var target = grid.selectable.relatedTarget(item);
 
-        equal(target[0], grid.staticContent.find("tr")[0]);
+        equal(target[0], grid.lockedContent.find("tr")[0]);
     });
 
-    test("relatedTarget returns row from static table", function() {
+    test("relatedTarget returns row from locked table", function() {
         var grid = setup({
             selectable: "row",
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
-        var item = grid.staticContent.find("tr").first();
+        var item = grid.lockedContent.find("tr").first();
         var target = grid.selectable.relatedTarget(item);
 
         equal(target[0], grid.table.find("tr")[0]);
@@ -684,7 +684,7 @@
         var grid = setup({
             selectable: "row",
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -692,25 +692,25 @@
         var target = grid.selectable.relatedTarget(item);
 
         equal(target.length, 2);
-        equal(target[0], grid.staticContent.find("tr")[0]);
-        equal(target[1], grid.staticContent.find("tr")[1]);
+        equal(target[0], grid.lockedContent.find("tr")[0]);
+        equal(target[1], grid.lockedContent.find("tr")[1]);
     });
 
     test("relatedTarget returns empty object if called with related rows", function() {
         var grid = setup({
             selectable: "row",
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
-        var item = grid.table.find("tr").eq(0).add(grid.staticContent.find("tr")[0]);
+        var item = grid.table.find("tr").eq(0).add(grid.lockedContent.find("tr")[0]);
         var target = grid.selectable.relatedTarget(item);
 
         equal(target.length, 0);
     });
 
-    test("continuousItems returns undefined if no static columns", function() {
+    test("continuousItems returns undefined if no locked columns", function() {
         var grid = setup({
             selectable: "row"
         });
@@ -724,7 +724,7 @@
         var grid = setup({
             selectable: "row",
             columns: [
-                { field: "foo", static: true },
+                { field: "foo", locked: true },
                 { field: "bar" }
             ],
             dataSource: {
@@ -737,7 +737,7 @@
         var items = grid.selectable.options.continuousItems();
 
         equal(items.length, 2);
-        equal(items[0], grid.staticContent.find("tr")[0]);
+        equal(items[0], grid.lockedContent.find("tr")[0]);
         equal(items[1], grid.table.find("tr")[0]);
     });
 
@@ -745,8 +745,8 @@
         var grid = setup({
             selectable: "cell",
             columns: [
-                { field: "foo", static: true },
-                { field: "bar", static: true },
+                { field: "foo", locked: true },
+                { field: "bar", locked: true },
                 { field: "baz" }
             ],
             dataSource: {
@@ -758,176 +758,176 @@
         });
 
         var items = grid.selectable.options.continuousItems();
-        var staticCells = grid.staticContent.find("td");
-        var nonStaticCells = grid.table.find("td");
+        var lockedCells = grid.lockedContent.find("td");
+        var nonLockedCells = grid.table.find("td");
 
         equal(items.length, 6);
-        equal(items[0], staticCells[0]);
-        equal(items[1], staticCells[1]);
-        equal(items[2], nonStaticCells[0]);
-        equal(items[3], staticCells[2]);
-        equal(items[4], staticCells[3]);
-        equal(items[5], nonStaticCells[1]);
+        equal(items[0], lockedCells[0]);
+        equal(items[1], lockedCells[1]);
+        equal(items[2], nonLockedCells[0]);
+        equal(items[3], lockedCells[2]);
+        equal(items[4], lockedCells[3]);
+        equal(items[5], nonLockedCells[1]);
     });
 
-    test("moving down from static header", function() {
+    test("moving down from locked header", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
-        grid.staticHeader.find(">table").focus().press(kendo.keys.DOWN);
+        grid.lockedHeader.find(">table").focus().press(kendo.keys.DOWN);
 
-        ok(grid.staticTable.find("td:first").hasClass("k-state-focused"));
+        ok(grid.lockedTable.find("td:first").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), -1);
-        equal(grid.staticTable.attr("tabIndex"), 0);
+        equal(grid.lockedTable.attr("tabIndex"), 0);
         equal(grid.thead.parent().attr("tabIndex"), -1);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
 
-    test("moving down from non-static header", function() {
+    test("moving down from non-locked header", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
         grid.thead.parent().focus().press(kendo.keys.DOWN);
 
         ok(grid.table.find("td:first").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), 0);
-        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.lockedTable.attr("tabIndex"), -1);
         equal(grid.thead.parent().attr("tabIndex"), -1);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
 
-    test("moving up from static body", function() {
+    test("moving up from locked body", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
-        grid.staticTable.focus().press(kendo.keys.UP);
+        grid.lockedTable.focus().press(kendo.keys.UP);
 
-        ok(grid.staticHeader.find(">table th:first").hasClass("k-state-focused"));
+        ok(grid.lockedHeader.find(">table th:first").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), -1);
-        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.lockedTable.attr("tabIndex"), -1);
         equal(grid.thead.parent().attr("tabIndex"), -1);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), 0);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), 0);
     });
 
-    test("moving up from non-static body", function() {
+    test("moving up from non-locked body", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
         grid.table.focus().press(kendo.keys.UP);
 
         ok(grid.thead.find("th:first").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), -1);
-        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.lockedTable.attr("tabIndex"), -1);
         equal(grid.thead.parent().attr("tabIndex"), 0);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
 
     test("moving up from header", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
-        grid.staticHeader.find(">table").focus().press(kendo.keys.UP);
+        grid.lockedHeader.find(">table").focus().press(kendo.keys.UP);
 
-        ok(grid.staticHeader.find(">table th:first").hasClass("k-state-focused"));
+        ok(grid.lockedHeader.find(">table th:first").hasClass("k-state-focused"));
     });
 
     test("moving down from body", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
-        grid.staticTable.focus().find("td:last").addClass("k-state-focused").press(kendo.keys.DOWN);
+        grid.lockedTable.focus().find("td:last").addClass("k-state-focused").press(kendo.keys.DOWN);
 
-        ok(grid.staticTable.find("td:last").hasClass("k-state-focused"));
+        ok(grid.lockedTable.find("td:last").hasClass("k-state-focused"));
     });
 
-    test("moving to right from static header", function() {
+    test("moving to right from locked header", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
-        grid.staticHeader.find(">table").focus().press(kendo.keys.RIGHT);
+        grid.lockedHeader.find(">table").focus().press(kendo.keys.RIGHT);
 
         ok(grid.thead.find("th:first").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), -1);
-        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.lockedTable.attr("tabIndex"), -1);
         equal(grid.thead.parent().attr("tabIndex"), 0);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
 
-    test("moving to right from static body", function() {
+    test("moving to right from locked body", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
-        grid.staticTable.focus().press(kendo.keys.RIGHT);
+        grid.lockedTable.focus().press(kendo.keys.RIGHT);
 
         ok(grid.table.find("td:first").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), 0);
-        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.lockedTable.attr("tabIndex"), -1);
         equal(grid.thead.parent().attr("tabIndex"), -1);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
 
-    test("moving to right from non-static body", function() {
+    test("moving to right from non-locked body", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
         grid.table.focus().find("td:last").addClass("k-state-focused").press(kendo.keys.RIGHT);
 
         ok(grid.table.find("td:last").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), 0);
-        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.lockedTable.attr("tabIndex"), -1);
         equal(grid.thead.parent().attr("tabIndex"), -1);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
 
-    test("moving to left from non-static header", function() {
+    test("moving to left from non-locked header", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
         grid.thead.parent().focus().press(kendo.keys.LEFT);
 
-        ok(grid.staticHeader.find("th:first").hasClass("k-state-focused"));
+        ok(grid.lockedHeader.find("th:first").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), -1);
-        equal(grid.staticTable.attr("tabIndex"), -1);
+        equal(grid.lockedTable.attr("tabIndex"), -1);
         equal(grid.thead.parent().attr("tabIndex"), -1);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), 0);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), 0);
     });
 
-    test("moving to left from non-static body", function() {
+    test("moving to left from non-locked body", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
         grid.table.focus().press(kendo.keys.LEFT);
 
-        ok(grid.staticTable.find("tr:first>td:last").hasClass("k-state-focused"));
+        ok(grid.lockedTable.find("tr:first>td:last").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), -1);
-        equal(grid.staticTable.attr("tabIndex"), 0);
+        equal(grid.lockedTable.attr("tabIndex"), 0);
         equal(grid.thead.parent().attr("tabIndex"), -1);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
 
-    test("moving to left from static body", function() {
+    test("moving to left from locked body", function() {
         var grid = setup({
-            columns: [{ field: "foo", static: true }]
+            columns: [{ field: "foo", locked: true }]
         });
 
-        grid.staticTable.focus().find("td:first").addClass("k-state-focused").press(kendo.keys.LEFT);
+        grid.lockedTable.focus().find("td:first").addClass("k-state-focused").press(kendo.keys.LEFT);
 
-        ok(grid.staticTable.find("td:first").hasClass("k-state-focused"));
+        ok(grid.lockedTable.find("td:first").hasClass("k-state-focused"));
         equal(grid.table.attr("tabIndex"), -1);
-        equal(grid.staticTable.attr("tabIndex"), 0);
+        equal(grid.lockedTable.attr("tabIndex"), 0);
         equal(grid.thead.parent().attr("tabIndex"), -1);
-        equal(grid.staticHeader.find(">table").attr("tabIndex"), -1);
+        equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
 })();
 

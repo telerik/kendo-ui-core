@@ -665,10 +665,10 @@
         equal(grid.tbody.find("td:not(:visible)").length, 2, "hidden column cells");
     });
 
-    test("hide static column header", function() {
+    test("hide locked column header", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -679,10 +679,10 @@
         equal(th.eq(2).is(":visible"), true);
     });
 
-    test("hide non static column header in grid with static column", function() {
+    test("hide non locked column header in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -693,10 +693,10 @@
         equal(th.eq(2).is(":visible"), true);
     });
 
-    test("hide static column col", function() {
+    test("hide locked column col", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -709,10 +709,10 @@
         equal(cols[3].style.width, "30px");
     });
 
-    test("hide non static column col in grid with static column", function() {
+    test("hide non locked column col in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -725,10 +725,10 @@
         equal(cols[3].style.width, "30px");
     });
 
-    test("hide static column footer", function() {
+    test("hide locked column footer", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true, footerTemplate: "foo" }
+                { field: "foo", locked: true, footerTemplate: "foo" }
             ]
         });
 
@@ -739,10 +739,10 @@
         equal(td.eq(2).is(":visible"), true);
     });
 
-    test("hide non static column footer in grid with static column", function() {
+    test("hide non locked column footer in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
+                { field: "foo", locked: true },
                 { field: "bar", footerTemplate: "bar" }
             ]
         });
@@ -754,10 +754,10 @@
         equal(td.eq(2).is(":visible"), true);
     });
 
-    test("hide static column footer col", function() {
+    test("hide locked column footer col", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true, footerTemplate: "foo" }
+                { field: "foo", locked: true, footerTemplate: "foo" }
             ]
         });
 
@@ -768,10 +768,10 @@
         equal(cols[1].style.width, "30px");
     });
 
-    test("hide non static column footer col in grid with static column", function() {
+    test("hide non locked column footer col in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
+                { field: "foo", locked: true },
                 { field: "bar", footerTemplate: "bar" }
             ]
         });
@@ -783,38 +783,38 @@
         equal(cols[1].style.width, "30px");
     });
 
-    test("hide static column cell", function() {
+    test("hide locked column cell", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true, footerTemplate: "foo" }
+                { field: "foo", locked: true, footerTemplate: "foo" }
             ]
         });
 
         grid.hideColumn(0);
-        var td = grid.staticTable.find("td").add(grid.table.find("td"));
+        var td = grid.lockedTable.find("td").add(grid.table.find("td"));
         equal(td.eq(0).is(":visible"), false);
         equal(td.eq(1).is(":visible"), true);
         equal(td.eq(2).is(":visible"), true);
     });
 
-    test("hide non static column cell in grid with static column", function() {
+    test("hide non locked column cell in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
         grid.hideColumn(1);
-        var td = grid.staticTable.find("td").add(grid.table.find("td"));
+        var td = grid.lockedTable.find("td").add(grid.table.find("td"));
         equal(td.eq(0).is(":visible"), true);
         equal(td.eq(1).is(":visible"), false);
         equal(td.eq(2).is(":visible"), true);
     });
 
-    test("hide static column with grouping", function() {
+    test("hide locked column with grouping", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ],
             dataSource: {
                 group: { field: "foo" }
@@ -822,8 +822,8 @@
         });
 
         grid.hideColumn(0);
-        var td = grid.staticTable.add(grid.table).find(":not(.k-grouping-row)>td");
-        var groupCell = grid.staticTable.add(grid.table).find(".k-grouping-row>td");
+        var td = grid.lockedTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.lockedTable.add(grid.table).find(".k-grouping-row>td");
         equal(td.eq(0).is(":visible"), true);
         equal(td.eq(1).is(":visible"), false);
         equal(td.eq(2).is(":visible"), true);
@@ -832,10 +832,10 @@
         equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 2);
     });
 
-    test("hide non static column in grid with static column and grouping", function() {
+    test("hide non locked column in grid with locked column and grouping", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ],
             dataSource: {
                 group: { field: "foo" }
@@ -843,8 +843,8 @@
         });
 
         grid.hideColumn(1);
-        var td = grid.staticTable.add(grid.table).find(":not(.k-grouping-row)>td");
-        var groupCell = grid.staticTable.add(grid.table).find(".k-grouping-row>td");
+        var td = grid.lockedTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.lockedTable.add(grid.table).find(".k-grouping-row>td");
         equal(td.eq(0).is(":visible"), true);
         equal(td.eq(1).is(":visible"), true);
         equal(td.eq(2).is(":visible"), false);
@@ -853,10 +853,10 @@
         equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 1);
     });
 
-    test("show static column header", function() {
+    test("show locked column header", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -868,10 +868,10 @@
         equal(th.eq(2).is(":visible"), true);
     });
 
-    test("show non static column header in grid with static column", function() {
+    test("show non locked column header in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -883,10 +883,10 @@
         equal(th.eq(2).is(":visible"), true);
     });
 
-    test("show static column col", function() {
+    test("show locked column col", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -902,10 +902,10 @@
         equal(cols[5].style.width, "30px");
     });
 
-    test("show non static column col in grid with static column", function() {
+    test("show non locked column col in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
@@ -921,10 +921,10 @@
         equal(cols[5].style.width, "30px");
     });
 
-    test("show static column footer", function() {
+    test("show locked column footer", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true, footerTemplate: "foo" }
+                { field: "foo", locked: true, footerTemplate: "foo" }
             ]
         });
 
@@ -936,10 +936,10 @@
         equal(td.eq(2).is(":visible"), true);
     });
 
-    test("show non static column footer in grid with static column", function() {
+    test("show non locked column footer in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
+                { field: "foo", locked: true },
                 { field: "bar", footerTemplate: "bar" }
             ]
         });
@@ -952,10 +952,10 @@
         equal(td.eq(2).is(":visible"), true);
     });
 
-    test("show static column footer col", function() {
+    test("show locked column footer col", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true, footerTemplate: "foo" }
+                { field: "foo", locked: true, footerTemplate: "foo" }
             ]
         });
 
@@ -968,10 +968,10 @@
         equal(cols[2].style.width, "30px");
     });
 
-    test("show non static column footer col in grid with static column", function() {
+    test("show non locked column footer col in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
+                { field: "foo", locked: true },
                 { field: "bar", footerTemplate: "bar" }
             ]
         });
@@ -985,40 +985,40 @@
         equal(cols[2].style.width, "30px");
     });
 
-    test("show static column cell", function() {
+    test("show locked column cell", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true, footerTemplate: "foo" }
+                { field: "foo", locked: true, footerTemplate: "foo" }
             ]
         });
 
         grid.hideColumn(0);
         grid.showColumn(0);
-        var td = grid.staticTable.find("td").add(grid.table.find("td"));
+        var td = grid.lockedTable.find("td").add(grid.table.find("td"));
         equal(td.eq(0).is(":visible"), true);
         equal(td.eq(1).is(":visible"), true);
         equal(td.eq(2).is(":visible"), true);
     });
 
-    test("show non static column cell in grid with static column", function() {
+    test("show non locked column cell in grid with locked column", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ]
         });
 
         grid.hideColumn(1);
         grid.showColumn(1);
-        var td = grid.staticTable.find("td").add(grid.table.find("td"));
+        var td = grid.lockedTable.find("td").add(grid.table.find("td"));
         equal(td.eq(0).is(":visible"), true);
         equal(td.eq(1).is(":visible"), true);
         equal(td.eq(2).is(":visible"), true);
     });
 
-    test("show static column with grouping", function() {
+    test("show locked column with grouping", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ],
             dataSource: {
                 group: { field: "foo" }
@@ -1027,8 +1027,8 @@
 
         grid.hideColumn(0);
         grid.showColumn(0);
-        var td = grid.staticTable.add(grid.table).find(":not(.k-grouping-row)>td");
-        var groupCell = grid.staticTable.add(grid.table).find(".k-grouping-row>td");
+        var td = grid.lockedTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.lockedTable.add(grid.table).find(".k-grouping-row>td");
         equal(td.eq(0).is(":visible"), true);
         equal(td.eq(1).is(":visible"), true);
         equal(td.eq(2).is(":visible"), true);
@@ -1037,10 +1037,10 @@
         equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 2);
     });
 
-    test("hide non static column in grid with static column and grouping", function() {
+    test("hide non locked column in grid with locked column and grouping", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true }
+                { field: "foo", locked: true }
             ],
             dataSource: {
                 group: { field: "foo" }
@@ -1049,8 +1049,8 @@
 
         grid.hideColumn(1);
         grid.showColumn(1);
-        var td = grid.staticTable.add(grid.table).find(":not(.k-grouping-row)>td");
-        var groupCell = grid.staticTable.add(grid.table).find(".k-grouping-row>td");
+        var td = grid.lockedTable.add(grid.table).find(":not(.k-grouping-row)>td");
+        var groupCell = grid.lockedTable.add(grid.table).find(".k-grouping-row>td");
         equal(td.eq(0).is(":visible"), true);
         equal(td.eq(1).is(":visible"), true);
         equal(td.eq(2).is(":visible"), true);
@@ -1062,9 +1062,9 @@
     test("refresh with hidden column updates footer cols", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true, footerTemplate: "foo", width: 10 },
-                { field: "bar", static: true, width: 20 },
-                { field: "baz", static: true, width: 30 },
+                { field: "foo", locked: true, footerTemplate: "foo", width: 10 },
+                { field: "bar", locked: true, width: 20 },
+                { field: "baz", locked: true, width: 30 },
                 { field: "bax", width: 40 },
                 { field: "fuzz", width: 50 }
             ]
@@ -1073,13 +1073,13 @@
         grid.hideColumn(1);
         grid.refresh();
 
-        var staticCol = grid.wrapper.find(".k-grid-footer-static col");
-        equal(staticCol[0].style.width, "10px");
-        equal(staticCol[1].style.width, "30px");
+        var lockedCol = grid.wrapper.find(".k-grid-footer-locked col");
+        equal(lockedCol[0].style.width, "10px");
+        equal(lockedCol[1].style.width, "30px");
 
-        var nonStaticCol = grid.wrapper.find(".k-grid-footer-wrap col");
-        equal(nonStaticCol[0].style.width, "40px");
-        equal(nonStaticCol[1].style.width, "50px");
+        var nonLockedCol = grid.wrapper.find(".k-grid-footer-wrap col");
+        equal(nonLockedCol[0].style.width, "40px");
+        equal(nonLockedCol[1].style.width, "50px");
     });
 
 })();

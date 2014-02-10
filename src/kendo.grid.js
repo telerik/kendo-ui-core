@@ -446,8 +446,8 @@ var __meta__ = {
         source[before ? "insertBefore" : "insertAfter"](dest);
     }
 
-    function elements(staticContent, content, filter) {
-        return $(staticContent).add(content).find(filter);
+    function elements(lockedContent, content, filter) {
+        return $(lockedContent).add(content).find(filter);
     }
 
     function attachCustomCommandEvent(context, container, commands) {
@@ -474,27 +474,27 @@ var __meta__ = {
         });
     }
 
-    function staticColumns(columns) {
+    function lockedColumns(columns) {
         return grep(columns, function(column) {
-            return column.static;
+            return column.locked;
         });
     }
 
-    function nonStaticColumns(columns) {
+    function nonLockedColumns(columns) {
         return grep(columns, function(column) {
-            return !column.static;
+            return !column.locked;
         });
     }
 
-    function visibleNonStaticColumns(columns) {
+    function visibleNonLockedColumns(columns) {
         return grep(columns, function(column) {
-            return !column.static && !column.hidden;
+            return !column.locked && !column.hidden;
         });
     }
 
-    function visibleStaticColumns(columns) {
+    function visibleLockedColumns(columns) {
         return grep(columns, function(column) {
-            return column.static && !column.hidden;
+            return column.locked && !column.hidden;
         });
     }
 
@@ -731,7 +731,7 @@ var __meta__ = {
                 that._footer();
             }
 
-            if (that.staticContent) {
+            if (that.lockedContent) {
                 that._resizeHandler = function()  { that.resize(); };
                 $(window).on("resize" + NS, that._resizeHandler);
             }
@@ -871,8 +871,8 @@ var __meta__ = {
                         .add(that.content.find(">.k-virtual-scrollable-wrap"));
             }
 
-            if (that.staticHeader) {
-                that._removeStaticContainers();
+            if (that.lockedHeader) {
+                that._removeLockedContainers();
             }
 
             if (that.pane) {
@@ -981,7 +981,7 @@ var __meta__ = {
             var resizeHandle = that.resizeHandle;
             var left;
 
-            if (resizeHandle && that.staticContent) {
+            if (resizeHandle && that.lockedContent) {
                 resizeHandle.remove();
                 resizeHandle = null;
             }
@@ -998,7 +998,7 @@ var __meta__ = {
                     left += this.offsetWidth;
                 });
             } else {
-                var headerWrap = th.closest(".k-grid-header-wrap, .k-grid-header-static"),
+                var headerWrap = th.closest(".k-grid-header-wrap, .k-grid-header-locked"),
                     ieCorrection = browser.msie ? headerWrap.scrollLeft() : 0,
                     webkitCorrection = browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
                     firefoxCorrection = browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
@@ -1019,9 +1019,9 @@ var __meta__ = {
         _positionColumnResizeHandle: function(container) {
             var that = this,
                 indicatorWidth = that.options.columnResizeHandleWidth,
-                staticHead = that.staticHeader ? that.staticHeader.find("thead:first") : $();
+                lockedHead = that.lockedHeader ? that.lockedHeader.find("thead:first") : $();
 
-            that.thead.add(staticHead).on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
+            that.thead.add(lockedHead).on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
                 var th = $(this),
                     clientX = e.clientX,
                     winScrollLeft = $(window).scrollLeft(),
@@ -1052,7 +1052,7 @@ var __meta__ = {
                 this.resizeHandle.data("th")
                     .removeClass("k-column-active");
 
-                if (this.staticContent && !this._isMobile) {
+                if (this.lockedContent && !this._isMobile) {
                     this.resizeHandle.remove();
                     this.resizeHandle = null;
                 } else {
@@ -1063,9 +1063,9 @@ var __meta__ = {
 
         _positionColumnResizeHandleTouch: function(container) {
             var that = this,
-                staticHead = that.staticHeader ? that.staticHeader.find("thead:first") : $();
+                lockedHead = that.lockedHeader ? that.lockedHeader.find("thead:first") : $();
 
-            that._resizeUserEvents = new kendo.UserEvents(staticHead.add(that.thead), {
+            that._resizeUserEvents = new kendo.UserEvents(lockedHead.add(that.thead), {
                 filter: "th:not(.k-group-cell,.k-hierarchy-cell)",
                 threshold: 10,
                 hold: function(e) {
@@ -1094,7 +1094,7 @@ var __meta__ = {
                 gridWidth,
                 isMobile = this._isMobile,
                 scrollbar = !kendo.support.mobileOS ? kendo.support.scrollbar() : 0,
-                isStatic,
+                isLocked,
                 col, th;
 
             if (options.resizable) {
@@ -1106,7 +1106,7 @@ var __meta__ = {
                     that._positionColumnResizeHandle(container);
                 }
 
-                that.resizable = new ui.Resizable(container.add(that.staticHeader), {
+                that.resizable = new ui.Resizable(container.add(that.lockedHeader), {
                     handle: ".k-resize-handle",
                     hint: function(handle) {
                         return $('<div class="k-grid-resize-indicator" />').css({
@@ -1123,13 +1123,13 @@ var __meta__ = {
                         var index = $.inArray(th[0], th.parent().children(":visible")),
                             header = th.closest("table");
 
-                        isStatic = header.parent().hasClass("k-grid-header-static");
+                        isLocked = header.parent().hasClass("k-grid-header-locked");
 
-                        var contentTable =  isStatic ? that.staticTable : that.table,
+                        var contentTable =  isLocked ? that.lockedTable : that.table,
                             footer = that.footer || $();
 
-                        if (that.footer && that.staticContent) {
-                            footer = isStatic ? that.footer.children(".k-grid-footer-static") : that.footer.children(".k-grid-footer-wrap");
+                        if (that.footer && that.lockedContent) {
+                            footer = isLocked ? that.footer.children(".k-grid-footer-locked") : that.footer.children(".k-grid-footer-wrap");
                         }
 
                         cursor(that.wrapper, 'col-resize');
@@ -1144,18 +1144,18 @@ var __meta__ = {
 
                         columnStart = e.x.location;
                         columnWidth = th.outerWidth();
-                        gridWidth = isStatic ? contentTable.children("tbody").outerWidth() : that.tbody.outerWidth(); // IE returns 0 if grid is empty and scrolling is enabled
+                        gridWidth = isLocked ? contentTable.children("tbody").outerWidth() : that.tbody.outerWidth(); // IE returns 0 if grid is empty and scrolling is enabled
                     },
                     resize: function(e) {
                         var rtlMultiplier = isRtl ? -1 : 1,
                             width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier),
-                            footer = (isStatic ? that.staticFooter : that.footer) || $(),
+                            footer = (isLocked ? that.lockedFooter : that.footer) || $(),
                             header = th.closest("table"),
-                            contentTable = isStatic ? that.staticTable : that.table,
+                            contentTable = isLocked ? that.lockedTable : that.table,
                             constrain = false,
                             totalWidth = that.wrapper.width() - scrollbar;
 
-                        if (isStatic && gridWidth - columnWidth + width > totalWidth) {
+                        if (isLocked && gridWidth - columnWidth + width > totalWidth) {
                             width = columnWidth + (totalWidth - gridWidth - scrollbar*2);
                             constrain = true;
                         }
@@ -1175,7 +1175,7 @@ var __meta__ = {
                                     .add(footer.find("table"))
                                     .css('width', width);
 
-                                if (!isStatic) {
+                                if (!isLocked) {
                                     that._footerWidth = width;
                                 }
                             }
@@ -1189,7 +1189,7 @@ var __meta__ = {
                         cursor(that.wrapper, "");
 
                         if (columnWidth != newWidth) {
-                            header = that.staticHeader ? that.staticHeader.find("thead:first").add(that.thead) : th.parent();
+                            header = that.lockedHeader ? that.lockedHeader.find("thead:first").add(that.thead) : th.parent();
 
                             column = that.columns[header.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)];
 
@@ -1201,9 +1201,9 @@ var __meta__ = {
                                 newWidth: newWidth
                             });
 
-                            that._applyStaticContainersWidth();
-                            that._syncStaticContentHeight();
-                            that._syncStaticHeaderHeight();
+                            that._applyLockedContainersWidth();
+                            that._syncLockedContentHeight();
+                            that._syncLockedHeaderHeight();
                         }
 
                         that._hideResizeHandle();
@@ -1282,27 +1282,27 @@ var __meta__ = {
                 sourceIndex = inArray(column, columns),
                 colSourceIndex = inArray(column, visibleColumns(columns)),
                 colDestIndex = inArray(columns[destIndex], visibleColumns(columns)),
-                staticRows = $(),
+                lockedRows = $(),
                 rows,
                 idx,
                 length,
-                isStatic = !!columns[destIndex].static,
-                staticCount = staticColumns(columns).length,
+                isLocked = !!columns[destIndex].locked,
+                lockedCount = lockedColumns(columns).length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer");
 
             if (sourceIndex === destIndex) {
                 return;
             }
 
-            if (!column.static && isStatic && nonStaticColumns(columns).length == 1) {
+            if (!column.locked && isLocked && nonLockedColumns(columns).length == 1) {
                 return;
             }
 
-            if (column.static && !isStatic && staticCount == 1) {
+            if (column.locked && !isLocked && lockedCount == 1) {
                 return;
             }
 
-            column.static = isStatic;
+            column.locked = isLocked;
 
             that._hideResizeHandle();
 
@@ -1322,44 +1322,44 @@ var __meta__ = {
             }
             that._templates();
 
-            reorder(elements(that.staticHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+            reorder(elements(that.lockedHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
             if (that.options.scrollable) {
-                reorder(elements(that.staticTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+                reorder(elements(that.lockedTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
             }
 
-            reorder(elements(that.staticHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+            reorder(elements(that.lockedHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
 
             if (footer && footer.length) {
-                reorder(elements(that.staticFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+                reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
                 reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
             rows = that.tbody.children(":not(.k-grouping-row,.k-detail-row)");
-            if (that.staticTable) {
-                if (staticCount > destIndex) {
-                    if (staticCount <= sourceIndex) {
+            if (that.lockedTable) {
+                if (lockedCount > destIndex) {
+                    if (lockedCount <= sourceIndex) {
                         updateColspan(
-                            that.staticTable.find(">tbody>tr.k-grouping-row"),
+                            that.lockedTable.find(">tbody>tr.k-grouping-row"),
                             that.table.find(">tbody>tr.k-grouping-row")
                         );
                     }
-                } else if (staticCount > sourceIndex) {
+                } else if (lockedCount > sourceIndex) {
                     updateColspan(
                         that.table.find(">tbody>tr.k-grouping-row"),
-                        that.staticTable.find(">tbody>tr.k-grouping-row")
+                        that.lockedTable.find(">tbody>tr.k-grouping-row")
                     );
                 }
 
-                staticRows = that.staticTable.find(">tbody>tr:not(.k-grouping-row,.k-detail-row)");
+                lockedRows = that.lockedTable.find(">tbody>tr:not(.k-grouping-row,.k-detail-row)");
             }
 
             for (idx = 0, length = rows.length; idx < length; idx += 1) {
-                reorder(elements(staticRows[idx], rows[idx], ">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+                reorder(elements(lockedRows[idx], rows[idx], ">td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
             that._updateTablesWidth();
-            that._applyStaticContainersWidth();
-            that._syncStaticContentHeight();
+            that._applyLockedContainersWidth();
+            that._syncLockedContentHeight();
         },
 
         lockColumn: function(column) {
@@ -1373,11 +1373,11 @@ var __meta__ = {
                 })[0];
             }
 
-            if (!column || column.static || column.hidden) {
+            if (!column || column.locked || column.hidden) {
                 return;
             }
 
-            var index = staticColumns(columns).length - 1;
+            var index = lockedColumns(columns).length - 1;
             this.reorderColumn(index, column, false);
         },
 
@@ -1392,22 +1392,22 @@ var __meta__ = {
                 })[0];
             }
 
-            if (!column || !column.static || column.hidden) {
+            if (!column || !column.locked || column.hidden) {
                 return;
             }
 
-            var index = staticColumns(columns).length;
+            var index = lockedColumns(columns).length;
             this.reorderColumn(index, column, true);
         },
 
         cellIndex: function(td) {
-            var staticColumnOffset = 0;
+            var lockedColumnOffset = 0;
 
-            if (this.staticTable && !$.contains(this.staticTable[0], td[0])) {
-                staticColumnOffset = staticColumns(this.columns).length;
+            if (this.lockedTable && !$.contains(this.lockedTable[0], td[0])) {
+                lockedColumnOffset = lockedColumns(this.columns).length;
             }
 
-            return $(td).parent().children('td:not(.k-group-cell,.k-hierarchy-cell)').index(td) + staticColumnOffset;
+            return $(td).parent().children('td:not(.k-group-cell,.k-hierarchy-cell)').index(td) + lockedColumnOffset;
         },
 
         _modelForContainer: function(container) {
@@ -1443,7 +1443,7 @@ var __meta__ = {
                     if (editable.update !== false) {
                         that.wrapper.on(CLICK + NS, "tr:not(.k-grouping-row) > td", function(e) {
                             var td = $(this),
-                                isStaticCell = that.staticTable && td.closest("table")[0] === that.staticTable[0];
+                                isLockedCell = that.lockedTable && td.closest("table")[0] === that.lockedTable[0];
 
                             if (td.hasClass("k-hierarchy-cell") ||
                                 td.hasClass("k-detail-cell") ||
@@ -1451,7 +1451,7 @@ var __meta__ = {
                                 td.hasClass("k-edit-cell") ||
                                 td.has("a.k-grid-delete").length ||
                                 td.has("button.k-grid-delete").length ||
-                                (td.closest("tbody")[0] !== that.tbody[0] && !isStaticCell) ||
+                                (td.closest("tbody")[0] !== that.tbody[0] && !isLockedCell) ||
                                 $(e.target).is(":input")) {
                                 return;
                             }
@@ -1531,7 +1531,7 @@ var __meta__ = {
 
                 var tr = cell.parent().addClass("k-grid-edit-row");
 
-                if (that.staticContent) {
+                if (that.lockedContent) {
                     adjustRowHeight(tr[0], that._relatedRow(tr).addClass("k-grid-edit-row")[0]);
                 }
 
@@ -1539,29 +1539,29 @@ var __meta__ = {
             }
         },
 
-        _adjustStaticHorizontalScrollBar: function() {
+        _adjustLockedHorizontalScrollBar: function() {
             var content = this.content,
                 scrollbar = (content[0].offsetHeight - content[0].clientHeight > 0 ? kendo.support.scrollbar() : 0);
 
-            this.staticContent.height(content.height() - scrollbar);
+            this.lockedContent.height(content.height() - scrollbar);
         },
 
-        _syncStaticContentHeight: function() {
-            if (this.staticTable) {
-                this._adjustStaticHorizontalScrollBar();
-                adjustRowsHeight(this.table, this.staticTable);
+        _syncLockedContentHeight: function() {
+            if (this.lockedTable) {
+                this._adjustLockedHorizontalScrollBar();
+                adjustRowsHeight(this.table, this.lockedTable);
             }
         },
 
-        _syncStaticHeaderHeight: function() {
-            if (this.staticHeader) {
-                adjustRowsHeight(this.staticHeader.children("table"), this.thead.parent());
+        _syncLockedHeaderHeight: function() {
+            if (this.lockedHeader) {
+                adjustRowsHeight(this.lockedHeader.children("table"), this.thead.parent());
             }
         },
 
-        _syncStaticFooterHeight: function() {
-            if (this.staticFooter && this.footer && this.footer.length) {
-                adjustRowsHeight(this.staticFooter.children("table"), this.footer.find(".k-grid-footer-wrap > table"));
+        _syncLockedFooterHeight: function() {
+            if (this.lockedFooter && this.footer && this.footer.length) {
+                adjustRowsHeight(this.lockedFooter.children("table"), this.footer.find(".k-grid-footer-wrap > table"));
             }
         },
 
@@ -1652,7 +1652,7 @@ var __meta__ = {
                 $('<span class="k-dirty"/>').prependTo(cell);
             }
 
-            if (that.staticContent) {
+            if (that.lockedContent) {
                 adjustRowHeight(tr.css("height", "")[0], that._relatedRow(tr).css("height", "")[0]);
             }
         },
@@ -1951,7 +1951,7 @@ var __meta__ = {
                 fields = [];
 
 
-            if (that.staticContent) {
+            if (that.lockedContent) {
                 row = row.add(that._relatedRow(row));
             }
 
@@ -2001,7 +2001,7 @@ var __meta__ = {
             if (row.length > 1) {
 
                 adjustRowHeight(row[0], row[1]);
-                that._applyStaticContainersWidth();
+                that._applyLockedContainersWidth();
             }
 
             that.trigger(EDIT, { container: row, model: model });
@@ -2050,8 +2050,8 @@ var __meta__ = {
 
             if (model) {
 
-                if (that.staticContent) {
-                    related = $((isAlt ? that.staticAltRowTemplate : that.staticRowTemplate)(model));
+                if (that.lockedContent) {
+                    related = $((isAlt ? that.lockedAltRowTemplate : that.lockedRowTemplate)(model));
                     that._relatedRow(row.last()).replaceWith(related);
                 }
 
@@ -2160,7 +2160,7 @@ var __meta__ = {
 
                 var model = dataSource.insert(index, {}),
                     id = model.uid,
-                    table = that.staticContent ? that.staticTable : that.table,
+                    table = that.lockedContent ? that.lockedTable : that.table,
                     row = table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
                     cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").eq(that._firstEditableColumnIndex(row));
 
@@ -2301,8 +2301,8 @@ var __meta__ = {
                 };
             }
 
-            if (that._isStatic()) {
-                that.staticTable.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
+            if (that._isLocked()) {
+                that.lockedTable.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
             } else {
                 that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
             }
@@ -2363,12 +2363,12 @@ var __meta__ = {
                 }
 
                 var elements = that.table;
-                if (that.staticContent) {
-                    elements = elements.add(that.staticTable);
+                if (that.lockedContent) {
+                    elements = elements.add(that.lockedTable);
                 }
                 var filter = ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr" + notString);
-                var staticColumnsCount = function() {
-                    return staticColumns(that.columns).length;
+                var lockedColumnsCount = function() {
+                    return lockedColumns(that.columns).length;
                 };
                 that.selectable = new kendo.ui.Selectable(elements, {
                     filter: filter,
@@ -2377,9 +2377,9 @@ var __meta__ = {
                     change: function() {
                         that.trigger(CHANGE);
                     },
-                    useAllItems: that.staticContent && multi && cell,
+                    useAllItems: that.lockedContent && multi && cell,
                     relatedTarget: function(items) {
-                        if (cell || !that.staticContent) {
+                        if (cell || !that.lockedContent) {
                             return;
                         }
 
@@ -2396,19 +2396,19 @@ var __meta__ = {
                         return result;
                     },
                     continuousItems: function() {
-                        if (!that.staticContent) {
+                        if (!that.lockedContent) {
                             return;
                         }
 
-                        var staticItems = $(filter, elements[0]);
-                        var nonStaticItems = $(filter, elements[1]);
-                        var staticColumns = cell ? staticColumnsCount() : 1;
-                        var nonStaticColumns = cell ? that.columns.length - staticColumns : 1;
+                        var lockedItems = $(filter, elements[0]);
+                        var nonLockedItems = $(filter, elements[1]);
+                        var lockedColumns = cell ? lockedColumnsCount() : 1;
+                        var nonLockedColumns = cell ? that.columns.length - lockedColumns : 1;
                         var result = [];
 
-                        for (var idx = 0; idx < staticItems.length; idx += staticColumns) {
-                            push.apply(result, staticItems.slice(idx, idx + staticColumns));
-                            push.apply(result, nonStaticItems.splice(0, nonStaticColumns));
+                        for (var idx = 0; idx < lockedItems.length; idx += lockedColumns) {
+                            push.apply(result, lockedItems.slice(idx, idx + lockedColumns));
+                            push.apply(result, nonLockedItems.splice(0, nonLockedColumns));
                         }
 
                         return result;
@@ -2447,17 +2447,17 @@ var __meta__ = {
         },
 
         _relatedRow: function(row) {
-            var staticTable = this.staticTable;
+            var lockedTable = this.lockedTable;
             row = $(row);
 
-            if (!staticTable) {
+            if (!lockedTable) {
                 return row;
             }
 
-            var table = row.closest(this.table.add(this.staticTable));
+            var table = row.closest(this.table.add(this.lockedTable));
             var index = table.find(">tbody>tr").index(row);
 
-            table = table[0] === this.table[0] ? staticTable : this.table;
+            table = table[0] === this.table[0] ? lockedTable : this.table;
 
             return table.find(">tbody>tr").eq(index);
         },
@@ -2505,11 +2505,11 @@ var __meta__ = {
 
                     if(element.length && scrollable) {
                         var content = element.closest("table").parent();
-                        if (content.is(".k-grid-content,.k-grid-content-static")) {
+                        if (content.is(".k-grid-content,.k-grid-content-locked")) {
                             that._scrollTo(element.parent()[0], that.content[0]);
                         }
 
-                        if (!content.is(".k-grid-content-static,.k-grid-header-static")) {
+                        if (!content.is(".k-grid-content-locked,.k-grid-header-locked")) {
                             if (scrollable.virtual) {
                                 that._scrollTo(element[0], that.content.find(">.k-virtual-scrollable-wrap")[0]);
                             } else {
@@ -2557,9 +2557,9 @@ var __meta__ = {
         _navigatable: function() {
             var that = this,
                 currentProxy = proxy(that.current, that),
-                table = that.table.add(that.staticTable),
-                headerTable = that.thead.parent().add($(">table", that.staticHeader)),
-                isStatic = that._isStatic(),
+                table = that.table.add(that.lockedTable),
+                headerTable = that.thead.parent().add($(">table", that.lockedHeader)),
+                isLocked = that._isLocked(),
                 dataTable = table,
                 isRtl = kendo.support.isRtl(that.element);
 
@@ -2920,15 +2920,15 @@ var __meta__ = {
                 if (scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").bind("scroll" + NS, function () {
                         that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
-                        if (that.staticContent) {
-                            that.staticContent[0].scrollTop = this.scrollTop;
+                        if (that.lockedContent) {
+                            that.lockedContent[0].scrollTop = this.scrollTop;
                         }
                     });
                 } else {
                     that.content.bind("scroll" + NS, function () {
                         that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
-                        if (that.staticContent) {
-                            that.staticContent[0].scrollTop = this.scrollTop;
+                        if (that.lockedContent) {
+                            that.lockedContent[0].scrollTop = this.scrollTop;
                         }
                     });
 
@@ -2936,8 +2936,8 @@ var __meta__ = {
                     if (touchScroller && touchScroller.movable) {
                         touchScroller.movable.bind("change", function(e) {
                             that.scrollables.scrollLeft(-e.sender.x);
-                            if (that.staticContent) {
-                                that.staticContent.scrollTop(-e.sender.y);
+                            if (that.lockedContent) {
+                                that.lockedContent.scrollTop(-e.sender.y);
                             }
                         });
                     }
@@ -2972,17 +2972,17 @@ var __meta__ = {
                     }
                 }
 
-                that._applyStaticContainersWidth();
+                that._applyLockedContainersWidth();
            }
         },
 
-        _applyStaticContainersWidth: function() {
-            if (this.options.scrollable && this.staticHeader) {
-                var columns = visibleStaticColumns(this.columns),
+        _applyLockedContainersWidth: function() {
+            if (this.options.scrollable && this.lockedHeader) {
+                var columns = visibleLockedColumns(this.columns),
                     headerWrap = this.thead.closest(".k-grid-header-wrap"),
                     contentWidth = this.wrapper[0].clientWidth,
                     groups = this._groups(),
-                    cols = this.staticHeader.find(">table>colgroup>col:not(.k-group-col, .k-hierarchy-col)"),
+                    cols = this.lockedHeader.find(">table>colgroup>col:not(.k-group-col, .k-hierarchy-col)"),
                     width = 0;
 
                 for (var idx = 0, length = columns.length; idx < length; idx++) {
@@ -2990,7 +2990,7 @@ var __meta__ = {
                 }
 
                 if (groups > 0) {
-                   var groupCell = this.staticHeader.find(".k-group-cell:first");
+                   var groupCell = this.lockedHeader.find(".k-group-cell:first");
                    if (groupCell.length) {
                        width +=  groupCell[0].clientWidth * groups;
                    }
@@ -3000,8 +3000,8 @@ var __meta__ = {
                     width = contentWidth - kendo.support.scrollbar();
                 }
 
-                this.staticHeader
-                    .add(this.staticContent)
+                this.lockedHeader
+                    .add(this.lockedContent)
                     .width(width);
 
                 headerWrap[0].style.width = this.thead.closest(".k-grid-header").width() - width - 2 + "px";
@@ -3012,8 +3012,8 @@ var __meta__ = {
 
                 this.content[0].style.width = contentWidth - width - 2 + "px";
 
-                if (this.staticFooter && this.staticFooter.length) {
-                    this.staticFooter.width(width);
+                if (this.lockedFooter && this.lockedFooter.length) {
+                    this.lockedFooter.width(width);
                     this.footer.find(".k-grid-footer-wrap")[0].style.width = headerWrap[0].clientWidth + "px";
                 }
             }
@@ -3067,8 +3067,8 @@ var __meta__ = {
 
                 if (isGridHeightSet(that.wrapper)) { // set content height only if needed
                     if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
-                        if (that.staticContent) {
-                            that.staticContent.height(height - (that.content[0].offsetHeight - that.content[0].clientHeight > 0 ? scrollbar : 0));
+                        if (that.lockedContent) {
+                            that.lockedContent.height(height - (that.content[0].offsetHeight - that.content[0].clientHeight > 0 ? scrollbar : 0));
                         }
 
                         that.content.height(height);
@@ -3169,8 +3169,8 @@ var __meta__ = {
 
             } else if (!row.hasClass("k-grid-edit-row")) {
 
-                if (that.staticContent) {
-                    tmp = (isAlt ? that.staticAltRowTemplate : that.staticRowTemplate)(model);
+                if (that.lockedContent) {
+                    tmp = (isAlt ? that.lockedAltRowTemplate : that.lockedRowTemplate)(model);
 
                     that._relatedRow(row).replaceWith(tmp);
                 }
@@ -3181,7 +3181,7 @@ var __meta__ = {
 
                 tmp = that.items().eq(idx);
 
-                if (that.staticContent) {
+                if (that.lockedContent) {
                     var related = that._relatedRow(tmp)[0];
                     adjustRowHeight(tmp[0], related);
 
@@ -3279,10 +3279,10 @@ var __meta__ = {
                 }
             }
 
-            if (that.staticContent) {
-                that._appendStaticColumnFooter();
-                that._applyStaticContainersWidth();
-                that._syncStaticFooterHeight();
+            if (that.lockedContent) {
+                that._appendLockedColumnFooter();
+                that._applyLockedContainersWidth();
+                that._syncLockedFooterHeight();
             }
         },
 
@@ -3441,7 +3441,7 @@ var __meta__ = {
                 table = that.table,
                 encoded,
                 cols = table.find("col"),
-                staticCols,
+                lockedCols,
                 dataSource = that.options.dataSource;
 
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
@@ -3473,14 +3473,14 @@ var __meta__ = {
             encoded = !(that.table.find("tbody tr").length > 0 && (!dataSource || !dataSource.transport));
 
             if (that.options.scrollable) {
-                staticCols = staticColumns(columns);
-                columns = nonStaticColumns(columns);
+                lockedCols = lockedColumns(columns);
+                columns = nonLockedColumns(columns);
 
-                if (staticCols.length > 0 && columns.length === 0) {
-                    throw new Error("There should be at least one non static columns");
+                if (lockedCols.length > 0 && columns.length === 0) {
+                    throw new Error("There should be at least one non locked columns");
                 }
 
-                columns = staticCols.concat(columns);
+                columns = lockedCols.concat(columns);
             }
 
             that.columns = map(columns, function(column) {
@@ -3649,19 +3649,19 @@ var __meta__ = {
                 groups = dataSource.group(),
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 aggregates = dataSource.aggregate(),
-                columnsStatic = staticColumns(that.columns),
-                columns = options.scrollable ? nonStaticColumns(that.columns) : that.columns;
+                columnsLocked = lockedColumns(that.columns),
+                columns = options.scrollable ? nonLockedColumns(that.columns) : that.columns;
 
-            if (options.scrollable && columnsStatic.length) {
+            if (options.scrollable && columnsLocked.length) {
                 if (options.rowTemplate || options.altRowTemplate) {
-                    throw new Error("Having both row template and static columns is not supported");
+                    throw new Error("Having both row template and locked columns is not supported");
                 }
 
                 that.rowTemplate = that._tmpl(options.rowTemplate, columns, false, true);
                 that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true, true);
 
-                that.staticRowTemplate = that._tmpl(options.rowTemplate, columnsStatic);
-                that.staticAltRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columnsStatic, true);
+                that.lockedRowTemplate = that._tmpl(options.rowTemplate, columnsLocked);
+                that.lockedAltRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columnsLocked, true);
             } else {
                 that.rowTemplate = that._tmpl(options.rowTemplate, columns);
                 that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true);
@@ -3680,10 +3680,10 @@ var __meta__ = {
             if (groups && grep(that.columns, function(column) { return column.groupFooterTemplate; }).length) {
                 aggregates = $.map(groups, function(g) { return g.aggregates; });
 
-                that.groupFooterTemplate = that._footerTmpl(columns, aggregates, "groupFooterTemplate", "k-group-footer", columnsStatic.length);
+                that.groupFooterTemplate = that._footerTmpl(columns, aggregates, "groupFooterTemplate", "k-group-footer", columnsLocked.length);
 
-                if (options.scrollable && columnsStatic.length) {
-                    that.staticGroupFooterTemplate = that._footerTmpl(columnsStatic, aggregates, "groupFooterTemplate", "k-group-footer");
+                if (options.scrollable && columnsLocked.length) {
+                    that.lockedGroupFooterTemplate = that._footerTmpl(columnsLocked, aggregates, "groupFooterTemplate", "k-group-footer");
                 }
             }
         },
@@ -3793,8 +3793,8 @@ var __meta__ = {
         _details: function() {
             var that = this;
 
-            if (that.options.scrollable && that._hasDetails() && staticColumns(that.columns).length) {
-                throw new Error("Having both detail template and static columns is not supported");
+            if (that.options.scrollable && that._hasDetails() && lockedColumns(that.columns).length) {
+                throw new Error("Having both detail template and locked columns is not supported");
             }
 
             that.table.on(CLICK + NS, ".k-hierarchy-cell .k-plus, .k-hierarchy-cell .k-minus", function(e) {
@@ -3898,55 +3898,55 @@ var __meta__ = {
             return html;
         },
 
-        _appendStaticColumnContent: function() {
+        _appendLockedColumnContent: function() {
             var columns = this.columns,
                 idx,
-                hasStaticColumns,
+                hasLockedColumns,
                 colgroup,
                 container;
 
-            container = $('<div class="k-grid-content-static"><table><colgroup/><tbody></tbody></table></div>');
+            container = $('<div class="k-grid-content-locked"><table><colgroup/><tbody></tbody></table></div>');
             colgroup = container.find("colgroup");
 
             for (idx = columns.length - 1; idx >= 0; idx--) {
-                if (columns[idx].static) {
+                if (columns[idx].locked) {
                     this.table.find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).prependTo(colgroup);
-                    hasStaticColumns = true;
+                    hasLockedColumns = true;
                 }
             }
 
-            if (hasStaticColumns) {
-                this.staticContent = container.insertBefore(this.content);
-                this.staticTable = container.children("table");
+            if (hasLockedColumns) {
+                this.lockedContent = container.insertBefore(this.content);
+                this.lockedTable = container.children("table");
             }
         },
 
-        _appendStaticColumnFooter: function() {
+        _appendLockedColumnFooter: function() {
             var that = this;
             var footer = that.footer;
             var cells = footer.find(".k-footer-template>td");
             var cols = footer.find(".k-grid-footer-wrap>table>colgroup>col");
-            var html = $('<div class="k-grid-footer-static"><table><colgroup /><tbody><tr class="k-footer-template"></tr></tbody></table></div>');
+            var html = $('<div class="k-grid-footer-locked"><table><colgroup /><tbody><tr class="k-footer-template"></tr></tbody></table></div>');
             var idx, length;
             var groups = that._groups();
-            var staticCells = $(), staticCols = $();
+            var lockedCells = $(), lockedCols = $();
 
-            staticCells = staticCells.add(cells.filter(".k-group-cell"));
-            for (idx = 0, length = staticColumns(that.columns).length; idx < length; idx++) {
-                staticCells = staticCells.add(cells.eq(idx + groups));
+            lockedCells = lockedCells.add(cells.filter(".k-group-cell"));
+            for (idx = 0, length = lockedColumns(that.columns).length; idx < length; idx++) {
+                lockedCells = lockedCells.add(cells.eq(idx + groups));
             }
 
-            staticCols = staticCols.add(cols.filter(".k-group-col"));
-            for (idx = 0, length = visibleStaticColumns(that.columns).length; idx < length; idx++) {
-                staticCols = staticCols.add(cols.eq(idx + groups));
+            lockedCols = lockedCols.add(cols.filter(".k-group-col"));
+            for (idx = 0, length = visibleLockedColumns(that.columns).length; idx < length; idx++) {
+                lockedCols = lockedCols.add(cols.eq(idx + groups));
             }
 
-            staticCells.appendTo(html.find("tr"));
-            staticCols.appendTo(html.find("colgroup"));
-            that.staticFooter = html.prependTo(footer);
+            lockedCells.appendTo(html.find("tr"));
+            lockedCols.appendTo(html.find("colgroup"));
+            that.lockedFooter = html.prependTo(footer);
         },
 
-        _appendStaticColumnHeader: function(container) {
+        _appendLockedColumnHeader: function(container) {
             var that = this,
                 columns = this.columns,
                 idx,
@@ -3954,9 +3954,9 @@ var __meta__ = {
                 colgroup,
                 tr,
                 table,
-                hasStaticColumns;
+                hasLockedColumns;
 
-            html = '<div class="k-grid-header-static"><table><colgroup/><thead><tr>' +
+            html = '<div class="k-grid-header-locked"><table><colgroup/><thead><tr>' +
                 '</tr></thead></table></div>';
 
             table = $(html);
@@ -3965,27 +3965,27 @@ var __meta__ = {
             tr = table.find("thead tr");
 
             for (idx = columns.length - 1; idx >= 0; idx--) {
-                if (columns[idx].static) {
+                if (columns[idx].locked) {
                     that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).prependTo(colgroup);
                     that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(idx).prependTo(tr);
-                    hasStaticColumns = true;
+                    hasLockedColumns = true;
                 }
             }
 
-            if (hasStaticColumns) {
-                this.staticHeader = table.prependTo(container);
-                this._syncStaticHeaderHeight();
+            if (hasLockedColumns) {
+                this.lockedHeader = table.prependTo(container);
+                this._syncLockedHeaderHeight();
             }
         },
 
-        _removeStaticContainers: function() {
-            var elements = this.staticHeader
-                .add(this.staticContent)
-                .add(this.staticFooter);
+        _removeLockedContainers: function() {
+            var elements = this.lockedHeader
+                .add(this.lockedContent)
+                .add(this.lockedFooter);
 
             elements.off(NS).remove();
 
-            this.staticHeader = this.staticContent = this.staticFooter = null;
+            this.lockedHeader = this.lockedContent = this.lockedFooter = null;
         },
 
         _thead: function() {
@@ -4004,10 +4004,10 @@ var __meta__ = {
                 thead = $("<thead/>").insertBefore(that.tbody);
             }
 
-            if (that.staticHeader && that.thead) {
+            if (that.lockedHeader && that.thead) {
                 tr = that.thead.find("tr:has(th):first").html("");
 
-                that._removeStaticContainers();
+                that._removeLockedContainers();
 
             } else {
                 tr = that.element.find("tr:has(th):first");
@@ -4057,11 +4057,11 @@ var __meta__ = {
 
             if (this.options.scrollable) {
 
-                that._appendStaticColumnHeader(that.thead.closest(".k-grid-header"));
+                that._appendLockedColumnHeader(that.thead.closest(".k-grid-header"));
 
-                that._appendStaticColumnContent();
+                that._appendLockedColumnContent();
 
-                that._applyStaticContainersWidth();
+                that._applyLockedContainersWidth();
             }
 
             that._resizable();
@@ -4075,27 +4075,27 @@ var __meta__ = {
             }
         },
 
-        _isStatic: function() {
-            return this.staticHeader != null;
+        _isLocked: function() {
+            return this.lockedHeader != null;
         },
 
         _updateCols: function(table) {
             table = table || this.thead.parent().add(this.table);
 
-            this._appendCols(table, this._isStatic());
+            this._appendCols(table, this._isLocked());
         },
 
-        _updateStaticCols: function(table) {
-            if (this._isStatic()) {
-                table = table || this.staticHeader.find("table").add(this.staticTable);
+        _updateLockedCols: function(table) {
+            if (this._isLocked()) {
+                table = table || this.lockedHeader.find("table").add(this.lockedTable);
 
-                normalizeCols(table, visibleStaticColumns(this.columns), this._hasDetails(), this._groups());
+                normalizeCols(table, visibleLockedColumns(this.columns), this._hasDetails(), this._groups());
             }
         },
 
-        _appendCols: function(table, static) {
-            if (static) {
-                normalizeCols(table, visibleNonStaticColumns(this.columns), this._hasDetails(), 0);
+        _appendCols: function(table, locked) {
+            if (locked) {
+                normalizeCols(table, visibleNonLockedColumns(this.columns), this._hasDetails(), 0);
             } else {
                 normalizeCols(table, visibleColumns(this.columns), this._hasDetails(), this._groups());
             }
@@ -4186,10 +4186,10 @@ var __meta__ = {
                 length,
                 tr;
 
-            if (this._isStatic()) {
-                if (!group.closest("div").hasClass("k-grid-content-static")) {
+            if (this._isLocked()) {
+                if (!group.closest("div").hasClass("k-grid-content-locked")) {
                     relatedGroup = group.nextAll("tr");
-                    group = this.staticTable.find(">tbody>tr:eq(" + group.index() + ")");
+                    group = this.lockedTable.find(">tbody>tr:eq(" + group.index() + ")");
                 } else {
                     relatedGroup = this.tbody.children("tr:eq(" + group.index() + ")").nextAll("tr");
                 }
@@ -4231,10 +4231,10 @@ var __meta__ = {
                 length,
                 groupsCount = 1;
 
-            if (this._isStatic()) {
-                if (!group.closest("div").hasClass("k-grid-content-static")) {
+            if (this._isLocked()) {
+                if (!group.closest("div").hasClass("k-grid-content-locked")) {
                     relatedGroup = group.nextAll("tr");
-                    group = this.staticTable.find(">tbody>tr:eq(" + group.index() + ")");
+                    group = this.lockedTable.find(">tbody>tr:eq(" + group.index() + ")");
                 } else {
                     relatedGroup = this.tbody.children("tr:eq(" + group.index() + ")").nextAll("tr");
                 }
@@ -4283,7 +4283,7 @@ var __meta__ = {
 
         _updateHeader: function(groups) {
             var that = this,
-                container = that._isStatic() ? that.staticHeader : that.thead,
+                container = that._isLocked() ? that.lockedHeader : that.thead,
                 cells = container.find("th.k-group-cell"),
                 length = cells.length;
 
@@ -4310,7 +4310,7 @@ var __meta__ = {
             var that = this,
                 tables;
 
-            if (!that._isStatic()) {
+            if (!that._isLocked()) {
                 return;
             }
 
@@ -4323,9 +4323,9 @@ var __meta__ = {
             tables.width(that._footerWidth);
 
             tables =
-                $(">.k-grid-footer>.k-grid-footer-static>table", that.wrapper)
-                .add(that.staticHeader.find(">table"))
-                .add(that.staticTable);
+                $(">.k-grid-footer>.k-grid-footer-locked>table", that.wrapper)
+                .add(that.lockedHeader.find(">table"))
+                .add(that.lockedTable);
 
             tables.width(tableWidth(tables.eq(0)));
         },
@@ -4341,7 +4341,7 @@ var __meta__ = {
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
-                visibleStatic = visibleStaticColumns(columns).length,
+                visibleLocked = visibleLockedColumns(columns).length,
                 columnIndex;
 
             if (typeof column == "number") {
@@ -4364,26 +4364,26 @@ var __meta__ = {
             that._templates();
 
             that._updateCols();
-            that._updateStaticCols();
-            setCellVisibility(elements($(">table>thead", that.staticHeader), that.thead, ">tr>th"), columnIndex, false);
+            that._updateLockedCols();
+            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr>th"), columnIndex, false);
             if (footer[0]) {
                 that._updateCols(footer.find(">.k-grid-footer-wrap>table"));
-                that._updateStaticCols(footer.find(">.k-grid-footer-static>table"));
+                that._updateLockedCols(footer.find(">.k-grid-footer-locked>table"));
                 setCellVisibility(footer.find(".k-footer-template>td"), columnIndex, false);
             }
 
-            if (that.staticTable && visibleStatic > columnIndex) {
-                hideColumnCells(that.staticTable.find(">tbody>tr"), columnIndex);
+            if (that.lockedTable && visibleLocked > columnIndex) {
+                hideColumnCells(that.lockedTable.find(">tbody>tr"), columnIndex);
             } else {
-                hideColumnCells(that.tbody.children(), columnIndex - visibleStatic);
+                hideColumnCells(that.tbody.children(), columnIndex - visibleLocked);
             }
 
-            if (that.staticTable) {
+            if (that.lockedTable) {
                 that._updateTablesWidth();
-                that._applyStaticContainersWidth();
-                that._syncStaticContentHeight();
-                that._syncStaticHeaderHeight();
-                that._syncStaticFooterHeight();
+                that._applyLockedContainersWidth();
+                that._syncLockedContentHeight();
+                that._syncLockedHeaderHeight();
+                that._syncLockedFooterHeight();
             } else {
                 cols = that.thead.prev().find("col");
                 for (idx = 0, length = cols.length; idx < length; idx += 1) {
@@ -4427,7 +4427,7 @@ var __meta__ = {
                 cols,
                 columns = that.columns,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
-                staticColumnsCount = staticColumns(columns).length,
+                lockedColumnsCount = lockedColumns(columns).length,
                 columnIndex;
 
             if (typeof column == "number") {
@@ -4450,25 +4450,25 @@ var __meta__ = {
             that._templates();
 
             that._updateCols();
-            that._updateStaticCols();
-            setCellVisibility(elements($(">table>thead", that.staticHeader), that.thead, ">tr>th"), columnIndex, true);
+            that._updateLockedCols();
+            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr>th"), columnIndex, true);
             if (footer[0]) {
                 that._updateCols(footer.find(">.k-grid-footer-wrap>table"));
-                that._updateStaticCols(footer.find(">.k-grid-footer-static>table"));
+                that._updateLockedCols(footer.find(">.k-grid-footer-locked>table"));
                 setCellVisibility(footer.find(".k-footer-template>td"), columnIndex, true);
             }
 
-            if (that.staticTable && staticColumnsCount > columnIndex) {
-                showColumnCells(that.staticTable.find(">tbody>tr"), columnIndex);
+            if (that.lockedTable && lockedColumnsCount > columnIndex) {
+                showColumnCells(that.lockedTable.find(">tbody>tr"), columnIndex);
             } else {
-                showColumnCells(that.tbody.children(), columnIndex - staticColumnsCount);
+                showColumnCells(that.tbody.children(), columnIndex - lockedColumnsCount);
             }
 
-            if (that.staticTable) {
+            if (that.lockedTable) {
                 that._updateTablesWidth();
-                that._applyStaticContainersWidth();
-                that._syncStaticContentHeight();
-                that._syncStaticHeaderHeight();
+                that._applyLockedContainersWidth();
+                that._syncLockedContentHeight();
+                that._syncLockedHeaderHeight();
             } else {
                 tables = $(">.k-grid-header table:first,>.k-grid-footer table:first",that.wrapper).add(that.table);
                 if (!column.width) {
@@ -4499,7 +4499,7 @@ var __meta__ = {
         _progress: function(toggle) {
             var element = this.element;
 
-            if (this.staticContent) {
+            if (this.lockedContent) {
                 element = this.wrapper;
             } else if (this.element.is("table")) {
                 element = this.element.parent();
@@ -4522,8 +4522,8 @@ var __meta__ = {
 
             return this.table[0] === active ||
                 $.contains(this.table[0], active) ||
-                (this._isStatic() &&
-                    (this.staticTable[0] === active || $.contains(this.staticTable[0], active))
+                (this._isLocked() &&
+                    (this.lockedTable[0] === active || $.contains(this.lockedTable[0], active))
                 );
         },
 
@@ -4576,14 +4576,14 @@ var __meta__ = {
             if(that._group) {
                 that._templates();
                 that._updateCols();
-                that._updateStaticCols();
+                that._updateLockedCols();
                 that._updateHeader(groups);
                 that._group = groups > 0;
             }
 
             that._renderContent(data, colspan, groups);
 
-            that._renderStaticContent(data, colspan, groups);
+            that._renderLockedContent(data, colspan, groups);
 
             that._footer();
 
@@ -4594,7 +4594,7 @@ var __meta__ = {
             if (currentIndex >= 0) {
                 that._removeCurrent();
                 if (!isCurrentInHeader) {
-                    that.current(that.table.add(that.staticTable).find(FIRSTNAVITEM).first());
+                    that.current(that.table.add(that.lockedTable).find(FIRSTNAVITEM).first());
                 } else {
                     that.current(that.thead.find("th:not(.k-group-cell)").eq(currentIndex));
                 }
@@ -4612,18 +4612,18 @@ var __meta__ = {
                 idx,
                 length,
                 html = "",
-                isStatic = that.staticContent != null,
+                isLocked = that.lockedContent != null,
                 templates = {
                         rowTemplate: that.rowTemplate,
                         altRowTemplate: that.altRowTemplate,
                         groupFooterTemplate: that.groupFooterTemplate
                     };
 
-            colspan = isStatic ? colspan - visibleStaticColumns(that.columns).length : colspan;
+            colspan = isLocked ? colspan - visibleLockedColumns(that.columns).length : colspan;
 
             if(groups > 0) {
 
-                colspan = isStatic ? colspan - groups : colspan;
+                colspan = isLocked ? colspan - groups : colspan;
 
                 if (that.detailTemplate) {
                     colspan++;
@@ -4634,7 +4634,7 @@ var __meta__ = {
                 }
 
                 for (idx = 0, length = data.length; idx < length; idx++) {
-                    html += that._groupRowHtml(data[idx], colspan, 0, isStatic ? groupRowStaticContentBuilder : groupRowBuilder, templates, isStatic);
+                    html += that._groupRowHtml(data[idx], colspan, 0, isLocked ? groupRowLockedContentBuilder : groupRowBuilder, templates, isLocked);
                 }
             } else {
                 html += that._rowsHtml(data, templates);
@@ -4643,22 +4643,22 @@ var __meta__ = {
             that.tbody = appendContent(that.tbody, that.table, html);
        },
 
-       _renderStaticContent: function(data, colspan, groups) {
+       _renderLockedContent: function(data, colspan, groups) {
            var html = "",
                idx,
                length,
                templates = {
-                   rowTemplate: this.staticRowTemplate,
-                   altRowTemplate: this.staticAltRowTemplate,
-                   groupFooterTemplate: this.staticGroupFooterTemplate
+                   rowTemplate: this.lockedRowTemplate,
+                   altRowTemplate: this.lockedAltRowTemplate,
+                   groupFooterTemplate: this.lockedGroupFooterTemplate
                };
 
-           if (this.staticContent) {
+           if (this.lockedContent) {
 
-               var table = this.staticTable;
+               var table = this.lockedTable;
 
                if (groups > 0) {
-                   colspan = colspan - visibleNonStaticColumns(this.columns).length;
+                   colspan = colspan - visibleNonLockedColumns(this.columns).length;
                    for (idx = 0, length = data.length; idx < length; idx++) {
                        html += this._groupRowHtml(data[idx], colspan, 0, groupRowBuilder, templates);
                    }
@@ -4668,7 +4668,7 @@ var __meta__ = {
 
                appendContent(table.children("tbody"), table, html);
 
-               this._syncStaticContentHeight();
+               this._syncLockedContentHeight();
            }
        }
    });
@@ -4755,8 +4755,8 @@ var __meta__ = {
    function tableClick(e) {
        var currentTarget = $(e.currentTarget),
            isHeader = currentTarget.is("th"),
-           table = this.table.add(this.staticTable),
-           headerTable = this.thead.parent().add($(">table", this.staticHeader)),
+           table = this.table.add(this.lockedTable),
+           headerTable = this.thead.parent().add($(">table", this.lockedHeader)),
            currentTable = currentTarget.closest("table")[0];
 
        if (kendo.support.touch) {
@@ -4824,12 +4824,12 @@ var __meta__ = {
    }
 
    function moveLeft(current, currentTable, dataTable, headerTable, relatedRow) {
-       var isStatic = dataTable.length > 1;
+       var isLocked = dataTable.length > 1;
 
        if (current) {
            if (current.prev()[0]) {
                current = current.prevAll(DATA_CELL).first();
-           } else if (isStatic) {
+           } else if (isLocked) {
                if (currentTable == dataTable[1]) {
                    focusTable(dataTable[0]);
                    current = relatedRow(current.parent()).children(DATA_CELL).last();
@@ -4846,12 +4846,12 @@ var __meta__ = {
    }
 
    function moveRight(current, currentTable, dataTable, headerTable, relatedRow) {
-       var isStatic = dataTable.length > 1;
+       var isLocked = dataTable.length > 1;
 
        if (current) {
            if (current.next()[0]) {
                current = current.nextAll(DATA_CELL).first();
-           } else if (isStatic) {
+           } else if (isLocked) {
                if (currentTable == dataTable[0]) {
                    focusTable(dataTable[1]);
                    current = relatedRow(current.parent()).children(DATA_CELL).first();
@@ -4868,13 +4868,13 @@ var __meta__ = {
    }
 
    function tabNext(current, currentTable, dataTable, relatedRow, back) {
-       var isStatic = dataTable.length == 2;
+       var isLocked = dataTable.length == 2;
        var switchRow = true;
        var next = back ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
 
        if (!next.length) {
            next = current.parent();
-           if (isStatic) {
+           if (isLocked) {
                switchRow = (back && currentTable == dataTable[0]) || (!back && currentTable == dataTable[1]);
                next = relatedRow(next);
            }
@@ -4896,7 +4896,7 @@ var __meta__ = {
        '</p></td></tr>';
    }
 
-   function groupRowStaticContentBuilder(colspan, level, text) {
+   function groupRowLockedContentBuilder(colspan, level, text) {
        return '<tr class="k-grouping-row">' +
            '<td colspan="' + colspan + '" aria-expanded="true">' +
            '<p class="k-reset">&nbsp;</p></td></tr>';

@@ -474,9 +474,9 @@
         ok(grid._editContainer.data("kendoWindow"));
     });
 
-    test("modifing edit form field updates static column value", function() {
+    test("modifing edit form field updates locked column value", function() {
         var grid = setup({
-            columns: [{ static: true, field: "foo" }, "name"],
+            columns: [{ locked: true, field: "foo" }, "name"],
             editable: "popup"
         }),
         row = table.find("tr:first");
@@ -488,12 +488,12 @@
 
         model.set("foo", "12");
 
-        equal(grid.staticTable.find("tr:first >td:first").text(), "12");
+        equal(grid.lockedTable.find("tr:first >td:first").text(), "12");
     });
 
-    test("cancel row updates static columns", function() {
+    test("cancel row updates locked columns", function() {
         var grid = setup({
-            columns: [{ static: true, field: "foo" }, "name"],
+            columns: [{ locked: true, field: "foo" }, "name"],
             editable: "popup"
         }),
         row = table.find("tr:first");
@@ -507,7 +507,7 @@
 
         grid.cancelRow();
 
-        equal(grid.staticTable.find("tr:first >td:first").text(), "bar");
+        equal(grid.lockedTable.find("tr:first >td:first").text(), "bar");
     });
 
 })();

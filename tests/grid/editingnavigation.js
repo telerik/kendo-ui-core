@@ -2,7 +2,7 @@
     var Grid = kendo.ui.Grid,
         div,
         table,
-        staticTable,
+        lockedTable,
         DataSource = kendo.data.DataSource,
         Model = kendo.data.Model,
         dataSource;
@@ -34,7 +34,7 @@
         var grid = new Grid(div, options);
         dataSource = grid.dataSource;
         table = grid.table;
-        staticTable = grid.staticTable;
+        lockedTable = grid.lockedTable;
         return grid;
     }
 
@@ -380,98 +380,98 @@
         ok(!grid._current);
     });
 
-    test("pressing tab in static table incell edit mode", function() {
+    test("pressing tab in locked table incell edit mode", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
-                { field: "name", static: true },
-                { field: "id", static: false }
+                { field: "foo", locked: true },
+                { field: "name", locked: true },
+                { field: "id", locked: false }
             ]
         });
 
-        staticTable.focus().press(kendo.keys.TAB);
+        lockedTable.focus().press(kendo.keys.TAB);
 
-        equal(staticTable.find("tr:first>td:last")[0], grid.current()[0]);
-        ok(staticTable.find("tr:first>td:last").hasClass("k-edit-cell"));
+        equal(lockedTable.find("tr:first>td:last")[0], grid.current()[0]);
+        ok(lockedTable.find("tr:first>td:last").hasClass("k-edit-cell"));
     });
 
-    test("pressing tab moves from static to non-static table", function() {
+    test("pressing tab moves from locked to non-locked table", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
-                { field: "name", static: true },
-                { field: "id", static: false }
+                { field: "foo", locked: true },
+                { field: "name", locked: true },
+                { field: "id", locked: false }
             ]
         });
 
-        staticTable.focus().press(kendo.keys.TAB).press(kendo.keys.TAB);
+        lockedTable.focus().press(kendo.keys.TAB).press(kendo.keys.TAB);
 
         equal(table.find("tr:first>td")[0], grid.current()[0]);
         equal(table.attr("tabIndex"), "0");
-        equal(staticTable.attr("tabIndex"), "-1");
+        equal(lockedTable.attr("tabIndex"), "-1");
     });
 
-    test("pressing shift+tab moves from non-static to static table", function() {
+    test("pressing shift+tab moves from non-locked to locked table", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
-                { field: "name", static: true },
-                { field: "id", static: false }
+                { field: "foo", locked: true },
+                { field: "name", locked: true },
+                { field: "id", locked: false }
             ]
         });
 
         table.focus().press(kendo.keys.TAB, false, true);
 
-        equal(staticTable.find("tr:first>td:last")[0], grid.current()[0]);
+        equal(lockedTable.find("tr:first>td:last")[0], grid.current()[0]);
         equal(table.attr("tabIndex"), "-1");
-        equal(staticTable.attr("tabIndex"), "0");
+        equal(lockedTable.attr("tabIndex"), "0");
     });
 
-    test("pressing tab moves from non-static to next row in static table", function() {
+    test("pressing tab moves from non-locked to next row in locked table", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
-                { field: "name", static: true },
-                { field: "id", static: false }
+                { field: "foo", locked: true },
+                { field: "name", locked: true },
+                { field: "id", locked: false }
             ]
         });
 
         table.focus().press(kendo.keys.TAB);
 
-        equal(staticTable.find("tr:eq(1)>td")[0], grid.current()[0]);
+        equal(lockedTable.find("tr:eq(1)>td")[0], grid.current()[0]);
         equal(table.attr("tabIndex"), "-1");
-        equal(staticTable.attr("tabIndex"), "0");
+        equal(lockedTable.attr("tabIndex"), "0");
     });
 
-    test("pressing shift+tab moves from static to prev row in non-static table", function() {
+    test("pressing shift+tab moves from locked to prev row in non-locked table", function() {
         var grid = setup({
             columns: [
-                { field: "foo", static: true },
-                { field: "name", static: true },
-                { field: "id", static: false }
+                { field: "foo", locked: true },
+                { field: "name", locked: true },
+                { field: "id", locked: false }
             ]
         });
 
-        grid.current(staticTable.find("tr:eq(1)>td:first"));
-        staticTable.focus().press(kendo.keys.TAB, false, true);
+        grid.current(lockedTable.find("tr:eq(1)>td:first"));
+        lockedTable.focus().press(kendo.keys.TAB, false, true);
 
         equal(table.find("tr:eq(0)>td:last")[0], grid.current()[0]);
         equal(table.attr("tabIndex"), "0");
-        equal(staticTable.attr("tabIndex"), "-1");
+        equal(lockedTable.attr("tabIndex"), "-1");
     });
 
-    test("focus first column when static columns", function() {
+    test("focus first column when locked columns", function() {
         var grid = setup({
             editable: "inline",
             columns: [
-                { field: "foo", static: true },
-                { field: "name", static: false },
-                { field: "id", static: false }
+                { field: "foo", locked: true },
+                { field: "name", locked: false },
+                { field: "id", locked: false }
             ]
         });
 
-        staticTable.focus().press(kendo.keys.ENTER);
+        lockedTable.focus().press(kendo.keys.ENTER);
 
-        strictEqual(document.activeElement, staticTable.find("input")[0]);
+        strictEqual(document.activeElement, lockedTable.find("input")[0]);
     });
 })();

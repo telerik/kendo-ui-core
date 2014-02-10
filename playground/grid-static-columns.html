@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>static columns</title>
+        <title>locked columns</title>
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
@@ -35,7 +35,7 @@
   </head>
     <body>
             <style scoped>
-                .k-grid-header-static {
+                .k-grid-header-locked {
                     float: left;
                     overflow: hidden;
                     float:left;
@@ -45,19 +45,19 @@
                     border-width: 0 1px 0 0;
                 }
 
-                .k-grid-footer-static {
+                .k-grid-footer-locked {
                     float:left;
                     border-right: solid 1px #c5c5c5;
                 }
 
-                .k-grid-content-static
+                .k-grid-content-locked
                 {
                     overflow: hidden;
                     float: left;
                     border-right: solid 1px #c5c5c5;
                 }
 
-                .k-grid-content-static > table {
+                .k-grid-content-locked > table {
                     table-layout: fixed;
                 }
 
@@ -112,24 +112,24 @@
                         toolbar: ["create"],
                         columns: [{
                             field: "ContactName",
-                            template: "[static 1] #=ContactName# #=ContactName#",
-                            title: "[static 1] Contact Name",
-                            static: true,
-                   //        footerTemplate: "[static 1]",
+                            template: "[locked 1] #=ContactName# #=ContactName#",
+                            title: "[locked 1] Contact Name",
+                            locked: true,
+                   //        footerTemplate: "[locked 1]",
                             editor: "<textarea style='height:300px'/>",
                             width: 140
                         }, {
                             field: "ContactTitle",
-                            template: "[static 2] #=ContactTitle#",
-                            //groupFooterTemplate: "[static 2] group",
-                            static: true,
-                            footerTemplate: "[static 2]",
-                            title: "[static 2] Contact Title",
+                            template: "[locked 2] #=ContactTitle#",
+                            //groupFooterTemplate: "[locked 2] group",
+                            locked: true,
+                            footerTemplate: "[locked 2]",
+                            title: "[locked 2] Contact Title",
                             width: 290
                         }, {
                             field: "CompanyName",
                             title: "Company Name",
-                            static: true,
+                            locked: true,
                       //      footerTemplate: "baz",
                             width: 250
                         },{
@@ -200,7 +200,7 @@
                         height: 430,
                         toolbar: ["create"],
                         columns: [
-                            { field:"ProductName", title: "Product Name", static: true, width: 100, editor: "<textarea style='height: 200px'></textarea>" },
+                            { field:"ProductName", title: "Product Name", locked: true, width: 100, editor: "<textarea style='height: 200px'></textarea>" },
                             { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "100px" },
                             { field: "UnitsInStock", title:"Units In Stock", width: "200px" },
                             { field: "Discontinued", width: "100px" },

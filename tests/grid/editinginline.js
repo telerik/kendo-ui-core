@@ -503,37 +503,37 @@
         equal(row.find("input").length, 2);
     });
 
-    test("editRow sets static column in edit mode", function() {
+    test("editRow sets locked column in edit mode", function() {
         var grid = setup({
-            columns: [ { field: "foo", static: true }, "name"],
+            columns: [ { field: "foo", locked: true }, "name"],
             editable: "inline"
         });
 
         grid.editRow(grid.table.find("tr:first"));
 
-        ok(grid.staticTable.find("tr:first").hasClass("k-grid-edit-row"));
-        ok(grid.staticTable.find("tr:first td").find("input").length);
+        ok(grid.lockedTable.find("tr:first").hasClass("k-grid-edit-row"));
+        ok(grid.lockedTable.find("tr:first td").find("input").length);
     });
 
-    test("same editable instance is attached to static and non static columns", function() {
+    test("same editable instance is attached to locked and non locked columns", function() {
         var grid = setup({
-            columns: [ { field: "foo", static: true }, "name"],
+            columns: [ { field: "foo", locked: true }, "name"],
             editable: "inline"
         });
 
         grid.editRow(grid.table.find("tr:first"));
 
-        deepEqual(grid.staticTable.find("tr:first").data("kendoEditable"), grid.table.find("tr:first").data("kendoEditable"));
-        deepEqual(grid.staticTable.find("tr:first").data("kendoEditable"), grid.editable);
+        deepEqual(grid.lockedTable.find("tr:first").data("kendoEditable"), grid.table.find("tr:first").data("kendoEditable"));
+        deepEqual(grid.lockedTable.find("tr:first").data("kendoEditable"), grid.editable);
     });
 
-    test("edit event is raised with both static and non static row as container", 3, function() {
+    test("edit event is raised with both locked and non locked row as container", 3, function() {
         var grid = setup({
-            columns: [ { field: "foo", static: true }, "name"],
+            columns: [ { field: "foo", locked: true }, "name"],
             editable: "inline",
             edit: function(e) {
                 equal(e.container.length, 2);
-                equal(e.container.eq(0)[0], grid.staticTable.find("tr:first")[0]);
+                equal(e.container.eq(0)[0], grid.lockedTable.find("tr:first")[0]);
                 equal(e.container.eq(1)[0], grid.table.find("tr:first")[0]);
             }
         });
@@ -541,9 +541,9 @@
         grid.editRow(grid.table.find("tr:first"));
     });
 
-    test("cancel event adjusts the height of the edited static and non static row", function() {
+    test("cancel event adjusts the height of the edited locked and non locked row", function() {
         var grid = setup({
-            columns: [ { field: "foo", static: true, editor: "<textarea style='height:200px'></textarea>"}, "name"],
+            columns: [ { field: "foo", locked: true, editor: "<textarea style='height:200px'></textarea>"}, "name"],
             editable: "inline"
         });
 
@@ -553,13 +553,13 @@
 
         grid.cancelRow();
 
-        equal(grid.staticTable.find("tr:first").height(), grid.table.find("tr:first").height());
+        equal(grid.lockedTable.find("tr:first").height(), grid.table.find("tr:first").height());
         equal(grid.table.find("tr:first").height(), originalHeigth);
     });
 
-    test("Validator instance has both static and non static rows as target", function() {
+    test("Validator instance has both locked and non locked rows as target", function() {
         var grid = setup({
-            columns: [ { field: "foo", static: true }, "name"],
+            columns: [ { field: "foo", locked: true }, "name"],
             editable: "inline"
         });
 
@@ -567,7 +567,7 @@
 
         equal(grid.editable.validatable.element.length, 2);
 
-        deepEqual(grid.staticTable.find("tr:first")[0], grid.editable.validatable.element[0]);
+        deepEqual(grid.lockedTable.find("tr:first")[0], grid.editable.validatable.element[0]);
         deepEqual(grid.table.find("tr:first")[0], grid.editable.validatable.element[1]);
     });
 
