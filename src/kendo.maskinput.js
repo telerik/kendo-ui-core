@@ -151,7 +151,7 @@ var __meta__ = {
                 token = this.tokens[start];
 
                 if (char) {
-                    if (token.test && token.test(char)) {
+                    if (char === this.options.emptySymbol || (token.test && token.test(char))) {
                         current[start] = char;
                         idx += 1;
                     }
@@ -214,6 +214,11 @@ var __meta__ = {
                 token = this.tokens[tokenIdx];
 
                 if (char === token) { //char is equal to static token. move forward
+                    charIdx += 1;
+                    tokenIdx += 1;
+                } else if (char === this.options.emptySymbol) { //char is empty
+                    result += this.options.emptySymbol;
+
                     charIdx += 1;
                     tokenIdx += 1;
                 } else if (typeof token !== "string") { //token is rule
