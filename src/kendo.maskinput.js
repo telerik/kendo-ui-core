@@ -91,7 +91,7 @@ var __meta__ = {
                 if (placeholder !== undefined && placeholder !== start) {
                     caret(this.element[0], placeholder + 1);
                 } else if (start > -1) {
-                    this._mask2(start, end, "", true);
+                    this._mask(start, end, "", true);
                 }
 
                 e.preventDefault();
@@ -108,8 +108,7 @@ var __meta__ = {
                     }
                 }
 
-                this._mask2(start, end, "");
-                //this._mask(start, end);
+                this._mask(start, end, "");
 
                 e.preventDefault();
             }
@@ -120,98 +119,12 @@ var __meta__ = {
             var start = selection[0];
             var end = selection[1];
 
-            /*if (start === end) {
-                end += 1;
-            }
-
-            this._mask(start, end, String.fromCharCode(e.which));*/
-
-            this._mask2(start, end, String.fromCharCode(e.which));
+            this._mask(start, end, String.fromCharCode(e.which));
 
             e.preventDefault();
         },
 
-        _mask: function(start, end, newVal) {
-            newVal = newVal || "";
-
-            var tokens = this.tokens;
-            var element = this.element[0];
-            var oldValue = element.value || this._emptyMask;
-
-            var backward = start > end;
-            var direction = 1;
-
-            if (backward) {
-                direction = -1;
-                start -= 1;
-            }
-
-            var result = [];
-            var charIdx = 0;
-            var valid = true;
-
-            var idx = start;
-
-            var maskLength = this._maskLength;
-            if (maskLength < start || maskLength < end) {
-                return;
-            }
-
-            var current;
-            var multipleSelection = Math.abs(end - start) > 1;
-
-            while ((backward && idx >= end && end > -1) || (!backward && idx != end)) {
-                var token = tokens[idx];
-
-                if (token === oldValue.charAt(idx)) {
-                    current = token;
-                    if (!multipleSelection && newVal) {
-                        end += direction;
-                    }
-                } else {
-                    var current = newVal.charAt(charIdx);
-                    charIdx += 1;
-
-                    if (!current) {
-                        current = this.options.emptySymbol;
-                    } else if (token.test) {
-                        valid = token.test(current);
-
-                        if (!valid) {
-                            break;
-                        }
-                    }
-                }
-
-                result.push(current);
-                idx += direction;
-            }
-
-            if (valid) {
-                charIdx = end;
-                if (multipleSelection && !backward) {
-                    charIdx = start + newVal.length;
-                }
-
-                if (backward) {
-                    direction = start;
-
-                    start = end;
-                    end = direction;
-
-                    end += 1; //include end char when delete
-                    result = result.reverse();
-                }
-
-                element.value = oldValue.substring(0, start) + result.join("") + oldValue.substring(end);
-
-                if (kendo._activeElement() === element) { //TODO: not tested
-                    caret(element, charIdx);
-                }
-            }
-        },
-
-        _mask2: function(start, end, value, backward) {
+        _mask: function(start, end, value, backward) {
             var idx;
             var token;
             var element = this.element;
