@@ -3587,6 +3587,10 @@ var __meta__ = {
             return ClusterLayout;
         },
 
+        stackType: function() {
+            return StackWrap;
+        },
+
         plotLimits: function() {
             var limits = CategoricalChart.fn.plotLimits.call(this);
             limits.min = math.min(0, limits.min);
@@ -3673,7 +3677,8 @@ var __meta__ = {
             }
 
             if (!stackWrap) {
-                stackWrap = new StackWrap({
+                var stackType = this.stackType();
+                stackWrap = new stackType({
                     vertical: !this.options.invertAxes
                 });
                 stackWrap._stackGroup = stackGroup;

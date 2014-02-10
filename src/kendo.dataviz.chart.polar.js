@@ -733,7 +733,6 @@ var __meta__ = {
                 if (i !== first) {
                     prevSector = children[reverse ? i + 1 : i - 1].sector;
                     childSector.ir = prevSector.r;
-                    childSector.r += childSector.ir;
                 }
             }
         }
@@ -754,7 +753,6 @@ var __meta__ = {
         }
     });
 
-    // TODO: Rename to RadarColumnChart
     var RadarBarChart = BarChart.extend({
         pointType: function() {
             return RadarSegment;
@@ -1074,7 +1072,6 @@ var __meta__ = {
                 series = plotArea.filterVisibleSeries(plotArea.series),
                 pane = plotArea.panes[0];
 
-            // TODO: Extract createChartByType method
             plotArea.createAreaChart(
                 filterSeriesByType(series, [RADAR_AREA]),
                 pane
@@ -1214,7 +1211,6 @@ var __meta__ = {
                 series = plotArea.filterVisibleSeries(plotArea.series),
                 pane = plotArea.panes[0];
 
-            // TODO: Extract createChartByType method
             plotArea.createLineChart(
                 filterSeriesByType(series, [POLAR_LINE]),
                 pane
