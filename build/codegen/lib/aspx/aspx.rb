@@ -37,6 +37,7 @@ namespace <%= csharp_namespace %>
     using System.ComponentModel;
     using System.Collections.Generic;
     using System.Web.UI;
+    using System.Web.Script.Serialization;
 
     /// <summary>
     /// 
@@ -45,7 +46,16 @@ namespace <%= csharp_namespace %>
     public class <%= csharp_class %> : <%= widget? ? "RadWebControl" : "Telerik.Web.StateManager" %>
     {
         #region [ Constructor ]
-        public <%= csharp_class %>() {}
+        public <%= csharp_class %>()
+        {
+<% if widget? %>
+            List<JavaScriptConverter> converters = new List<JavaScriptConverter>()
+                                                    {
+                                                        #region [ Converters Declaration ]
+                                                        #endregion [ Converters Declaration ]
+                                                    };
+<% end %>
+        }
         #endregion [ Constructor ]
     
         #region [ Properties ]
@@ -53,7 +63,17 @@ namespace <%= csharp_namespace %>
     
         #region [ Events ]
         #endregion [ Events ]
+<% if widget? %>
+        private JavaScriptSerializer serializer = new JavaScriptSerializer();
 
+        protected override void DescribeComponent(IScriptDescriptor descriptor)
+        {
+            base.DescribeComponent(descriptor);
+
+            #region [ Properties Serialization ]
+            #endregion [ Properties Serialization ]
+        }
+<% end %>
   }
 }
 ')
@@ -328,13 +348,6 @@ namespace <%= csharp_namespace %>
             root_component.enum_options.include?(self)
         end
 
-=begin
-        def csharp_name
-            return "#{owner.name.sub('Settings','').sub('Collection','')}#{name.pascalize}" if enum?
-            name.pascalize
-        end
-=end
-
         def csharp_type
             return "#{owner.csharp_name.sub('Settings','').sub('Collection','')}#{name.pascalize}" if enum? || type.include?('kendo.')
             return TYPES_MAP[type[0]]
@@ -348,6 +361,10 @@ namespace <%= csharp_namespace %>
         def to_converter
             return CONVERTER_ENUM_PROPERTY_TEMPLATE.result(get_binding) if values
             return CONVERTER_PROPERTY_TEMPLATE.result(get_binding) if csharp_default
+        end
+
+        def to_serialization_declaration
+            return ERB.new('descriptor.AddProperty("<%= name %>", serializer.Serialize(<%= csharp_name %>));').result(binding)
         end
 
         def csharp_default
@@ -393,6 +410,10 @@ namespace <%= csharp_namespace %>
             name.include?('Settings') ? "#{prefix}#{name.sub('Settings', '').pascalize}" : "#{prefix}#{name.pascalize}"
         end
 
+        def csharp_default
+            'null'
+        end
+
         def csharp_converter_class
             "#{csharp_class}Converter"
         end
@@ -411,6 +432,10 @@ namespace <%= csharp_namespace %>
 
         def to_converter_class_declaration
             CONVERTER_CLASS_TEMPLATE.result(get_binding)
+        end
+
+        def to_serialization_declaration
+            return ERB.new('descriptor.AddProperty("<%= name %>", serializer.Serialize(<%= csharp_name %>));').result(binding)
         end
 
         def get_binding
@@ -516,8 +541,14 @@ namespace <%= csharp_namespace %>
       class Generator
         include Rake::DSL
 
+        @@converters = {}
+
         def initialize(path)
           @path = path
+        end
+
+        def self.converters
+            @@converters
         end
 
         def component(component)
@@ -559,6 +590,22 @@ namespace <%= csharp_namespace %>
           properties_content = write_options(component.options)
 
           write_file(file_path, properties_content, '#region [ Properties ]')
+
+            if component.widget?
+                serialization_content = write_options_serialization(component.options)
+                write_file(file_path, serialization_content, '#region [ Properties Serialization ]')
+            end
+
+        end
+
+        def write_options_serialization(options)
+            content = "\n"
+
+            options.each do |o|
+                content += o.to_serialization_declaration + "\n"
+            end
+
+            content
         end
 
         def write_events(component)
@@ -614,6 +661,17 @@ namespace <%= csharp_namespace %>
         def write_composite_option_converter_file(composite)
             filename = File.join(@path, "#{composite.csharp_converter_class}.cs")
             create_file(filename, composite.to_converter_class_declaration)
+
+            if composite.instance_of? Component
+                key = composite.owner_namespace
+            else
+                key = composite.root_component.widget? ? composite.root_component.csharp_name : composite.root_component.owner_namespace
+            end
+
+            if @@converters[key].nil?
+                @@converters[key] = []
+            end
+            @@converters[key] << composite.csharp_converter_class
 
             composite_content = write_converter_options(composite.options)
             

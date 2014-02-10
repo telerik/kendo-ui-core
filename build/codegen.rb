@@ -55,6 +55,24 @@ namespace :generate do
 
               generator.component(component)
           end
+
+            converters = CodeGen::ASPX::Wrappers::Generator.converters
+
+            converters.keys.each do |widget_name|
+                content = '#region [ Converters Declaration ]' + "\n"
+                converters[widget_name].each_index do |index|
+                    converter = converters[widget_name][index]
+                    content += "new #{converter}()"
+                    content += ",\n" unless index >= converters[widget_name].length - 1
+                end
+
+                file_path = "wrappers/aspx/src/Rad#{widget_name}.cs"
+                file_content = File.read(file_path).sub(Regexp.new(Regexp.escape('#region [ Converters Declaration ]')), content)
+
+                File.open(file_path, 'w') do |f|
+                    f.write(file_content)
+                end
+            end
         end
 
         desc 'Temp task that cleans the ASPX\'s output  folder!'
