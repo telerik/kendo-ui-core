@@ -2,6 +2,7 @@
     - :name: connectors.connector.position
       :type: String
       :description: Defines the connectors position.
+      :default: ConnectorPosition.Auto
       :values:
           - Auto - Connector positioned in the center of the shape.
           - Top - Connector positioned in the middle of the topside of the shape.

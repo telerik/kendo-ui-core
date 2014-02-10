@@ -2,6 +2,7 @@
     - :name: startCap
       :type: String
       :description: The start cap (arrow, head or decoration) of the connection.
+      :default: ConnectionStartCap.FilledCircle
       :values:
           - none - no cap
           - ArrowStart - a filled arrow
@@ -9,6 +10,7 @@
     - :name: endCap
       :type: String
       :description: The start cap (arrow, head or decoration) of the connection.
+      :default: ConnectionEndCap.ArrowEnd
       :values:
           - none - no cap
           - ArrowEnd - a filled arrow
