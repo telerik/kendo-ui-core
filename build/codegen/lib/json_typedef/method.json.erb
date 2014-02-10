@@ -1,4 +1,4 @@
         "<%= name %>": {
             "!type": "fn()<%= result_type %>",
-            "!doc": "<%= description %>"
+            "!doc": "<%= description.gsub(/\r?\n/, " ").gsub(/"/, '\"') %>"
         }

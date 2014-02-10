@@ -256,7 +256,11 @@ module CodeGen::JsonTypeDef
 
     class Result < CodeGen::Result
         def json_typedef
-            CodeGen::JsonTypeDef.type(@type.split('|')[0].strip)
+            type = CodeGen::JsonTypeDef.type(@type.split('|')[0].strip)
+
+            return '+' + type if type =~ /^kendo\./
+
+            type
         end
     end
 
