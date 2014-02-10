@@ -45,16 +45,16 @@ namespace :generate do
 
         desc 'Generate ASP.NET WebForms wrappers'
         task :wrappers do
-          markdown = FileList['docs/api/dataviz/diagram/*.md']#, 'docs/api/dataviz/diagram.md']
+            markdown = FileList['docs/api/dataviz/diagram/*.md'] #, 'docs/api/dataviz/diagram.md']
 
-          components = markdown.map { |file| CodeGen::MarkdownParser.read(file, CodeGen::ASPX::Wrappers::Component) }
+            components = markdown.map { |file| CodeGen::MarkdownParser.read(file, CodeGen::ASPX::Wrappers::Component) }
 
-          components.each do |component|
-            import_metadata(component)
-              generator = CodeGen::ASPX::Wrappers::Generator.new('wrappers/aspx/src/')
+            components.each do |component|
+                import_metadata(component)
+                generator = CodeGen::ASPX::Wrappers::Generator.new('wrappers/aspx/src/')
 
-              generator.component(component)
-          end
+                generator.component(component)
+            end
 
             converters = CodeGen::ASPX::Wrappers::Generator.converters
 
@@ -77,7 +77,7 @@ namespace :generate do
 
         desc 'Temp task that cleans the ASPX\'s output  folder!'
         task :clean do
-          sh 'rm -rd wrappers/aspx/src/*'
+            sh 'rm -rd wrappers/aspx/src/*'
         end
 
     end
