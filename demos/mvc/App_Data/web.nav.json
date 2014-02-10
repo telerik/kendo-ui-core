@@ -805,6 +805,14 @@
                     "meta": "This demo shows column menu functionality of KendoGrid widget."
                 },
                 {
+                    "text": "Locked columns",
+                    "new": true,
+                    "url": "grid/locked-columns.html",
+                    "title": "Locking columns of Kendo UI Grid control | Kendo UI Web demo",
+                    "meta": "This demo shows locked columns feature of KendoGrid control."
+                },
+
+                {
                     "text": "Column Settings",
                     "url": "grid/columnsettings.html",
                     "packages": ["mvc"]
