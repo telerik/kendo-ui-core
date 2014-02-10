@@ -1005,6 +1005,19 @@
             ]
         },
         {
+            "text": "Mobile",
+            "name": "mobile",
+            "new": "true",
+            "spriteCssClass": "multiselectIcon",
+            "items": [
+                {
+                    "text": "Actionsheet",
+                    "url": "mobile/actionsheet.html",
+                    "title": "Kendo UI ActionSheet widget demo"
+                }
+            ]
+        },
+        {
             "text": "MultiSelect",
             "name": "multiselect",
             "documentation": "web/multiselect",
