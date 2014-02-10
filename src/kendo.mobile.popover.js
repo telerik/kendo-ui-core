@@ -138,7 +138,7 @@ var __meta__ = {
             width: 240,
             height: "",
             direction: "down",
-            container: null
+            container: null,
             viewport: null
         },
 
