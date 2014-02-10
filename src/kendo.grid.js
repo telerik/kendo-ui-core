@@ -3901,21 +3901,22 @@ var __meta__ = {
         _appendLockedColumnContent: function() {
             var columns = this.columns,
                 idx,
-                hasLockedColumns,
-                colgroup,
+                colgroup = this.table.find("col:not(.k-group-col,.k-hierarchy-col)"),
+                length,
+                cols = $(),
                 container;
 
-            container = $('<div class="k-grid-content-locked"><table><colgroup/><tbody></tbody></table></div>');
-            colgroup = container.find("colgroup");
-
-            for (idx = columns.length - 1; idx >= 0; idx--) {
+            for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
-                    this.table.find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).prependTo(colgroup);
-                    hasLockedColumns = true;
+                    cols = cols.add(colgroup.eq(idx));
                 }
             }
 
-            if (hasLockedColumns) {
+            if (cols.length) {
+                container = $('<div class="k-grid-content-locked"><table><colgroup/><tbody></tbody></table></div>');
+                colgroup = container.find("colgroup");
+                colgroup.append(cols);
+
                 this.lockedContent = container.insertBefore(this.content);
                 this.lockedTable = container.children("table");
             }
@@ -3951,28 +3952,36 @@ var __meta__ = {
                 columns = this.columns,
                 idx,
                 html,
+                length,
                 colgroup,
                 tr,
                 table,
-                hasLockedColumns;
+                header,
+                cols = $(),
+                cells = $();
 
-            html = '<div class="k-grid-header-locked"><table><colgroup/><thead><tr>' +
-                '</tr></thead></table></div>';
+            colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
+            header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
 
-            table = $(html);
-
-            colgroup = table.find("colgroup");
-            tr = table.find("thead tr");
-
-            for (idx = columns.length - 1; idx >= 0; idx--) {
+            for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
-                    that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).prependTo(colgroup);
-                    that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(idx).prependTo(tr);
-                    hasLockedColumns = true;
+                    cols = cols.add(colgroup.eq(idx));
+                    cells = cells.add(header.eq(idx));
                 }
             }
 
-            if (hasLockedColumns) {
+            if (cols.length) {
+                html = '<div class="k-grid-header-locked" style="width:1px"><table><colgroup/><thead><tr>' +
+                    '</tr></thead></table></div>';
+
+                table = $(html);
+
+                colgroup = table.find("colgroup");
+                tr = table.find("thead tr");
+
+                colgroup.append(cols);
+                tr.append(cells);
+
                 this.lockedHeader = table.prependTo(container);
                 this._syncLockedHeaderHeight();
             }
