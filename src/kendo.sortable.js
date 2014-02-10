@@ -89,7 +89,7 @@ var __meta__ = {
                 filter: options.filter,
                 hint: options.hint,
                 holdToDrag: options.holdToDrag,
-                container: options.container,
+                container: options.container ? $(options.container) : null,
                 cursorOffset: options.cursorOffset,
                 axis: options.axis,
                 dragstart: $.proxy(that._dragstart, that),
