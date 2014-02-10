@@ -1095,14 +1095,13 @@ var __meta__ = {
             var options = { series: series };
             var firstSeries = series[0];
             if (firstSeries) {
-                var plotArea = this;
-                var filteredSeries = plotArea.filterVisibleSeries(series);
+                var filteredSeries = this.filterVisibleSeries(series);
                 var stack = firstSeries.stack;
                 options.isStacked = stack && filteredSeries.length > 1;
                 options.isStacked100 = stack && stack.type === "100%" && filteredSeries.length > 1;
 
                 if (options.isStacked100) {
-                    plotArea._isStacked100 = true;
+                    this._isStacked100 = true;
                 }
             }
 

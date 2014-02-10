@@ -3221,7 +3221,7 @@ var __meta__ = {
                     }
 
                     categorySum += math.abs(neighbour.value);
-                };
+                }
 
                 return point.value / categorySum;
             } else {
@@ -3256,7 +3256,7 @@ var __meta__ = {
                         prevValue += neighbourValue;
                         plotValue += neighbourValue;
                     }
-                };
+                }
 
                 return [prevValue, plotValue];
             } else {
@@ -3284,7 +3284,7 @@ var __meta__ = {
                         min = math.min(min, to);
                     }
                 }
-            };
+            }
 
             return { min: min, max: max };
         },
@@ -4657,7 +4657,7 @@ var __meta__ = {
                     }
 
                     plotValue += this.plotValue(neighbour);
-                };
+                }
 
                 return [plotValue, plotValue];
             } else {
@@ -8211,7 +8211,7 @@ var __meta__ = {
                         plotArea.stack100 = true;
                         break;
                     }
-                };
+                }
             }
 
             PlotAreaBase.fn.init.call(plotArea, series, options);
