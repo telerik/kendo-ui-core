@@ -28,12 +28,23 @@ var __meta__ = {
     var ActionSheet = Widget.extend({
         init: function(element, options) {
             var that = this,
-                os = support.mobileOS,
-                type = options.type,
-                tablet = (type && type == "tablet") || (!type && os && os.tablet),
-                ShimClass = tablet ? Popup : Shim;
+                ShimClass,
+                tablet,
+                type,
+                os = support.mobileOS;
 
             Widget.fn.init.call(that, element, options);
+
+            options = that.options;
+            type = options.type;
+
+            if (type === "auto") {
+                tablet = os && os.tablet;
+            } else {
+                tablet = type === "tablet";
+            }
+
+            ShimClass = tablet ? Popup : Shim;
 
             element = that.element;
 
@@ -67,6 +78,7 @@ var __meta__ = {
         options: {
             name: "ActionSheet",
             cancel: "Cancel",
+            type: "auto",
             popup: { height: "auto" }
         },
 

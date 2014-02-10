@@ -72,22 +72,36 @@ var __meta__ = {
         init: function(element, options) {
             var that = this,
                 containerPopup = element.closest(".km-modalview-wrapper"),
-                mobileContainer = element.closest(".km-root").children('.km-pane').first(),
-                container = containerPopup[0] ? containerPopup : mobileContainer,
-                popupOptions = {
-                    viewport: mobileContainer,
-                    open: function() {
-                        that.overlay.show();
-                    },
-
-                    activate: $.proxy(that._activate, that),
-
-                    deactivate: function() {
-                        that.overlay.hide();
-                        that.trigger(HIDE);
-                    }
-                },
+                viewport = element.closest(".km-root").children('.km-pane').first(),
+                container = containerPopup[0] ? containerPopup : viewport,
+                popupOptions,
                 axis;
+
+            if (options.viewport) {
+                viewport = options.viewport;
+            } else if (!viewport[0]) {
+                viewport = window;
+            }
+
+            if (options.container) {
+                container = options.container;
+            } else if (!container[0]) {
+                container = document.body;
+            }
+
+            popupOptions = {
+                viewport: viewport,
+                open: function() {
+                    that.overlay.show();
+                },
+
+                activate: $.proxy(that._activate, that),
+
+                deactivate: function() {
+                    that.overlay.hide();
+                    that.trigger(HIDE);
+                }
+            };
 
             Widget.fn.init.call(that, element, options);
 
@@ -123,7 +137,9 @@ var __meta__ = {
             name: "Popup",
             width: 240,
             height: "",
-            direction: "down"
+            direction: "down",
+            container: null
+            viewport: null
         },
 
         events: [
