@@ -2113,7 +2113,7 @@
 
                 var transform = new CompositeTransform(0, 0, zoom, zoom);
                 transform.render(this.mainLayer.native);
-                this._matrix = transform.toMatrix();
+                this._storeTransform(transform);
             },
             _transformMainLayer: function () {
                 var pan = this._pan,
@@ -2121,7 +2121,11 @@
 
                 var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
                 transform.render(this.mainLayer.native);
+                this._storeTransform(transform);
+            },
+            _storeTransform: function(transform) {
                 this._matrix = transform.toMatrix();
+                this._invertMatrix = transform.invert().toMatrix();
             },
             _toIndex: function (items, indices) {
                 var result = this._getDiagramItems(items);
