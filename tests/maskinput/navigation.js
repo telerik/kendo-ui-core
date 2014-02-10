@@ -133,7 +133,7 @@
         equal(input.val(), "0-0_3");
     });
 
-    test("MaskInput ", function() {
+    test("MaskInput removes the selected text on keypress", function() {
         var maskinput = new MaskInput(input, {
             mask: "0-000"
         });

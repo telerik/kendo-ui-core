@@ -171,7 +171,7 @@ var __meta__ = {
 
             element.val(current.join(""));
 
-            if (kendo._activeElement() === element[0]) { //TODO: not tested
+            if (kendo._activeElement() === element[0]) {
                 if (unmaskedLength && !multiple) {
                     unmaskedLength -= 1;
                 }
