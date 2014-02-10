@@ -114,6 +114,25 @@ if (!$('link[rel=stylesheet][href*="kendo.common.core.css"]').length) {
 (function() {
     var domContentsLength;
 
+    function getDomContentsLength() {
+        return $(document.body).children(":not(script,#editor-fixture)").length;
+    }
+
+    $(function() {
+        QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
+        QUnit.config.fixture = "";
+        domContentsLength = getDomContentsLength();
+    });
+
+    QUnit.testDone(function() {
+        QUnit.fixture.empty().attr("class", "").attr("style", "").css("height", "100px");
+    });
+
+    var browser = kendo.support.browser;
+    if (browser.msie && browser.version < 9) {
+        return;
+    }
+
     var Widget = kendo.ui.Widget;
     var init = Widget.fn.init;
     var destroy = Widget.fn.destroy;
@@ -129,19 +148,7 @@ if (!$('link[rel=stylesheet][href*="kendo.common.core.css"]').length) {
         destroy.apply(this, arguments);
     }
 
-    function getDomContentsLength() {
-        return $(document.body).children(":not(script,#editor-fixture)").length;
-    }
-
-    $(function() {
-        QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
-        QUnit.config.fixture = "";
-        domContentsLength = getDomContentsLength();
-    });
-
     QUnit.testDone(function( details ) {
-        QUnit.fixture.empty().attr("class", "").attr("style", "").css("height", "100px");
-
         if (!QUnit.suppressCleanupCheck) {
             var length = getDomContentsLength();
 

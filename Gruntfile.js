@@ -139,6 +139,21 @@ module.exports = function(grunt) {
                         tests
                     )
                 }
+            },
+            legacyUnit: {
+                options: {
+                    browsers: [],
+
+                    files: [].concat(
+                        TESTS.compiledStyleSheets,
+                        TESTS.beforeTestFiles,
+                        allKendoFiles,
+                        TESTS.afterTestFiles.filter(function(x) {
+                            return !/(themeuilder|less)\.js/i.test(x);
+                        }),
+                        tests
+                    )
+                }
             }
         },
 
