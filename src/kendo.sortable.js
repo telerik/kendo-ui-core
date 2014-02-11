@@ -87,7 +87,7 @@ var __meta__ = {
 
             return new kendo.ui.Draggable(element, {
                 filter: options.filter,
-                hint: options.hint,
+                hint: kendo.isFunction(options.hint) ? options.hint : $(options.hint),
                 holdToDrag: options.holdToDrag,
                 container: options.container ? $(options.container) : null,
                 cursorOffset: options.cursorOffset,
@@ -105,7 +105,7 @@ var __meta__ = {
                 disabled = this.options.disabled,
                 handler = this.options.handler,
                 _placeholder = this.options.placeholder,
-                placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : _placeholder;
+                placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : $(_placeholder);
 
             if(disabled && draggedElement.is(disabled)) {
                 e.preventDefault();
