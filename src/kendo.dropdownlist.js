@@ -540,8 +540,10 @@ var __meta__ = {
         _popup: function() {
             Select.fn._popup.call(this);
             this.popup.one("open", function() {
-                this.wrapper = kendo.wrap(this.element)
-                                    .addClass("km-popup");
+                this.wrapper = kendo.wrap(this.element);
+                if (this.wrapper.closest(".km-root")[0]) {
+                    this.wrapper.addClass("km-popup");
+                }
             });
         },
 
