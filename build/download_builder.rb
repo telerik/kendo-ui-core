@@ -9,8 +9,8 @@ BUILDER_CONFIG_NAME = File.join('config', 'kendo-config.json')
 BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.html.erb')))
 
 #Build minified version with no AMD headers for use by the download builder
-rule /^dist\/download-builder.+\.min\.js$/ =>
-    lambda { |t| t.sub(/^dist\/download-builder.+\/js/, 'src').sub('.min.js', '.js') } do |t|
+rule /^dist\/download-builder\/js\/.+\.min\.js$/ =>
+    lambda { |t| t.sub(/^dist\/download-builder\/js/, 'src').sub('.min.js', '.js') } do |t|
         FileUtils.mkdir_p File.dirname(t.name)
         File.open t.name, 'w' do |f|
             contents = File.read(t.source)
@@ -68,11 +68,9 @@ namespace :download_builder do
 
     def download_builder_zip_prerequisites
         dist_path = 'dist/download-builder/'
-        js_path = File.join(dist_path, 'js')
 
-        tree :to => js_path,
-             :from => MIN_JS,
-             :root => "src"
+        js_assets_path = File.join(dist_path, 'js')
+        task js_assets_path => MIN_JS.sub('src', js_assets_path)
 
         css_path = File.join(dist_path, 'styles')
 
@@ -87,7 +85,7 @@ namespace :download_builder do
             sh "node #{COMPILEJS} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
         end
 
-        [js_path, css_path, config_file_path]
+        [js_assets_path, css_path, config_file_path]
     end
 
     zip 'dist/download-builder.zip' => download_builder_zip_prerequisites
