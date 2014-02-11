@@ -6,8 +6,8 @@ class GridEditable extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * If set to true the grid will display a confirmation dialog when the user clicks the "destroy" command button.Can be set to a string which will be used as the confirmation text.
-    * @param boolean|string $value
+    * If set to true the grid will display a confirmation dialog when the user clicks the "destroy" command button.Can be set to a string which will be used as the confirmation text.Can be set to a function which will be called, passing the model instance, to return the confirmation text.
+    * @param boolean|string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\UI\GridEditable
     */
     public function confirmation($value) {
