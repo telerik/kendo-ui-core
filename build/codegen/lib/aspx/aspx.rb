@@ -133,7 +133,7 @@ namespace <%= csharp_namespace %>
     /// <summary>
     /// <%= description %>
     /// </summary>
-    [DefaultValue("<%= name.pascalize %>")]
+    [DefaultValue("<%= csharp_default %>")]
     [PersistenceMode(PersistenceMode.InnerProperty)]
     public <%= csharp_class %> <%= name.pascalize %>
     {
