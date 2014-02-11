@@ -413,6 +413,11 @@
     <Compile Include="Controllers\Web\Grid\SortingController.cs" />
     <Compile Include="Controllers\Web\Grid\Toolbar_TemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\Virtualization_Remote_DataController.cs" />
+    <Compile Include="Controllers\Web\Sortable\ConstraintsController.cs" />
+    <Compile Include="Controllers\Web\Sortable\CustomizationController.cs" />
+    <Compile Include="Controllers\Web\Sortable\EventsController.cs" />
+    <Compile Include="Controllers\Web\Sortable\Filter_DisableController.cs" />
+    <Compile Include="Controllers\Web\Sortable\HandlersController.cs" />
     <Compile Include="Controllers\Web\Sortable\IndexController.cs" />
     <Compile Include="Controllers\Web\ListView\EditingController.cs" />
     <Compile Include="Controllers\Web\ListView\IndexController.cs" />
@@ -477,6 +482,7 @@
     <Compile Include="Controllers\Web\Slider\IndexController.cs" />
     <Compile Include="Controllers\Web\Slider\NavigationController.cs" />
     <Compile Include="Controllers\Web\Slider\RtlController.cs" />
+    <Compile Include="Controllers\Web\Sortable\LinkedlistsController.cs" />
     <Compile Include="Controllers\Web\Splitter\AjaxController.cs" />
     <Compile Include="Controllers\Web\Splitter\ApiController.cs" />
     <Compile Include="Controllers\Web\Splitter\EventsController.cs" />
@@ -2945,6 +2951,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\sortable\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\sortable\constraints.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\razor\Views\web\sortable\customization.cshtml" />
+    <Content Include="Areas\razor\Views\web\sortable\events.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\razor\Views\web\sortable\filter_disable.cshtml" />
+    <Content Include="Areas\razor\Views\web\sortable\handlers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\sortable\linkedlists.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
