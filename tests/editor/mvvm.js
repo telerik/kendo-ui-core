@@ -116,4 +116,12 @@ test("binding invisible to false shows the editor", function() {
     ok(editor.wrapper.css("display") != "none", "editor is not invisible");
 });
 
+test("serialization options can be set through data attribute", function() {
+    dom.attr("data-serialization", "{ entities: false }");
+
+    kendo.bind(dom);
+
+    equal(dom.data("kendoEditor").options.serialization.entities, false);
+});
+
 }());
