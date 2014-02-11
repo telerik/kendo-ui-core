@@ -61,8 +61,6 @@
         input.focus();
 
         equal(input.val(), "_-_");
-        equal(caret(input[0])[0], 0);
-        equal(caret(input[0])[1], 0);
     });
 
     test("MaskInput selects whole text if value", function() {

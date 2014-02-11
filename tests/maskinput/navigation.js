@@ -76,6 +76,7 @@
         });
 
         input.focus();
+        caret(input[0], 0);
         input.pressKey("0");
 
         equal(input.val(), "0-_");
@@ -87,6 +88,7 @@
         });
 
         input.focus();
+        caret(input[0], 0);
         input.pressKey("0");
 
         equal(caret(input[0])[0], 2);
@@ -99,6 +101,7 @@
         });
 
         input.focus();
+        caret(input[0], 0);
         input.pressKey("_");
 
         equal(caret(input[0])[0], 2);
@@ -194,7 +197,7 @@
         });
 
         input.focus();
-
+        caret(input[0], 0);
         input.pressKey(kendo.keys.BACKSPACE, "keydown");
 
         equal(input.val(), "(_-_)");
@@ -426,5 +429,20 @@
             equal(input.val(), "(123) 775");
             equal(caret(input[0])[0], 8);
         });
+    });
+
+    test("MaskInput supports cutting/delete through context menu", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(000) 000"
+        });
+
+        input.focus();
+        maskinput.value("123555");
+
+        input.val("(123)");
+        caret(input[0], 5);
+        input.trigger("input");
+
+        equal(input.val(), "(123) ___");
     });
 })();
