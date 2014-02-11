@@ -1023,7 +1023,8 @@ var __meta__ = {
         TextBlock: TextBlock,
         TextBlockEditor: TextBlockEditor,
         Image: Image,
-        Mask: Mask
+        Mask: Mask,
+        Visual: Visual
     });
 })
     (window.kendo.jQuery);
