@@ -478,8 +478,13 @@ var __meta__ = {
                 target,
                 touches = getTouches(e),
                 length = touches.length,
-                touch;
-
+                touch,
+                which = e.which;
+            
+            if (which && which > 1){
+                return;
+            }
+            
             if (that._maxTouchesReached()) {
                 return;
             }
