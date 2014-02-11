@@ -34,15 +34,15 @@
                     "meta": "This demo shows how a 100% stacked area chart is created with KendoChart. Learn how to visualize series that should be stacked to 100% in the chart.",
                     "new": "true"
                 }, {
-                    "text": "Step Area",
+                    "text": "Stepped Area",
                     "url": "area-charts/step-area.html",
                     "title": "Example of using Kendo UI Area Chart with step line style",
                     "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart"
                 }, {
-                    "text": "Smooth (Spline) Area",
+                    "text": "Smooth Area",
                     "url": "area-charts/smooth-area.html",
-                    "title": "Example of using Kendo UI Area Chart with smooth line style",
-                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Area Chart"
+                    "title": "Example of using Kendo UI Area Chart with smooth line (spline) style",
+                    "meta": "This demo shows how to configure smooth line (spline) style for the Kendo UI Area Chart"
                 }, {
                     "text": "Date axis",
                     "url": "area-charts/date-axis.html",
@@ -365,15 +365,15 @@
                     "meta": "This demo shows how you can easily implement Kendo UI 100% Stacked Line Charts in your business webapp.",
                     "new": "true"
                 }, {
-                    "text": "Step line",
+                    "text": "Steped line",
                     "url": "line-charts/step-line.html",
                     "title": "Example of using Kendo UI Line Chart with step line style",
                     "meta": "This demo shows how to configure step line style for the Kendo UI Line Chart"
                 }, {
-                    "text": "Smooth (Spline) line",
+                    "text": "Smooth line",
                     "url": "line-charts/smooth-line.html",
-                    "title": "Example of using Kendo UI Line Chart with smooth line style",
-                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Line Chart"
+                    "title": "Example of using Kendo UI Line Chart with smooth line (spline) style",
+                    "meta": "This demo shows how to configure smooth line (spline) style for the Kendo UI Line Chart"
                 }, {
                     "text": "Date axis",
                     "url": "line-charts/date-axis.html",
@@ -461,10 +461,16 @@
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPolarIcon",
             "items": [{
-                    "text": "Basic usage",
+                    "text": "Polar line",
                     "url": "polar-charts/index.html",
                     "title": "Kendo UI jQuery-based Polar Charts Demo",
                     "meta": "This demo illustrates how Kendo UI Polar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your polar chart."
+                }, {
+                    "text": "Smooth polar line",
+                    "url": "polar-charts/smooth-polar-line.html",
+                    "title": "Example of using smooth line (spline) style for Kendo UI Polar Charts",
+                    "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line (spline) style",
+                    "new": "true"
                 }, {
                     "text": "Polar scatter",
                     "url": "polar-charts/polar-scatter.html",
@@ -493,12 +499,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Smooth (Spline) line",
-                    "url": "polar-charts/smooth-polar-line.html",
-                    "title": "Example of using smooth line style for Kendo UI Polar Charts",
-                    "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line style",
-                    "new": "true"
                 }
             ],
             "name": "polar-charts"
@@ -569,6 +569,12 @@
                     "title": "Kendo UI Scatter Line Charts Demo",
                     "meta": "This sample demonstrates how Kendo UI Scatter Line Charts combines Line and Scatter chart types in your rich HTML5 data visualizations."
                 }, {
+                    "text": "Smooth scatter line",
+                    "url": "scatter-charts/smooth-scatter-line.html",
+                    "title": "Example of using smooth line (spline) style for the Kendo UI Scatter Line Chart",
+                    "meta": "This demo shows how to configure the Kendo UI Scatter Line Chart to use smooth line (spline) style",
+                    "new": "true"
+                }, {
                     "text": "Date axis",
                     "url": "scatter-charts/date-axis.html",
                     "title": "Date Axis demo in Kendo UI Scatter Charts ",
@@ -609,12 +615,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Smooth (Spline) line",
-                    "url": "scatter-charts/smooth-scatter-line.html",
-                    "title": "Example of using smooth line style for the Kendo UI Scatter Line Chart",
-                    "meta": "This demo shows how to configure the Kendo UI Scatter Line Chart to use smooth line style",
-                    "new": "true"
                 }
             ],
             "name": "scatter-charts"
