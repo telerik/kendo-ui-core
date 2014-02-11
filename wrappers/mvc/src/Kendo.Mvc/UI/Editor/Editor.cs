@@ -21,6 +21,7 @@ namespace Kendo.Mvc.UI
 
             Template = new HtmlTemplate();
             Messages = new EditorMessages();
+            SerializationOptions = new EditorSerializationOptions();
             StyleSheets = new List<string>();
 
             new EditorToolFactory(DefaultToolGroup)
@@ -51,6 +52,12 @@ namespace Kendo.Mvc.UI
         }
 
         public EditorMessages Messages
+        {
+            get;
+            private set;
+        }
+
+        public EditorSerializationOptions SerializationOptions
         {
             get;
             private set;
@@ -192,6 +199,13 @@ namespace Kendo.Mvc.UI
             if (Encode.HasValue && !Encode.Value)
             {
                 options["encoded"] = Encode.Value;
+            }
+
+            var serializationOptions = SerializationOptions.ToJson();
+
+            if (serializationOptions.Any())
+            {
+                options["serialization"] = serializationOptions;
             }
 
             var messages = Messages.ToJson();

@@ -704,9 +704,11 @@
     <Compile Include="UI\DropDownListBase\FilterType.cs" />
     <Compile Include="UI\DropDownListBase\Fluent\DropDownListBuilderBase.cs" />
     <Compile Include="UI\DropDownList\Fluent\DropDownListEventBuilder.cs" />
+    <Compile Include="UI\Editor\EditorSerializationOptions.cs" />
     <Compile Include="UI\Editor\EditorImageBrowserMessages.cs" />
     <Compile Include="UI\Editor\EditorImageBrowserOperation.cs" />
     <Compile Include="UI\Editor\EditorMessages.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorSerializationOptionsBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorImageBrowserMessagesBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorImageBrowserOperationBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorImageBrowserSettingsBuilder.cs" />
