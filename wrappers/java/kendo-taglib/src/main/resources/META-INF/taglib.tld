@@ -12237,10 +12237,10 @@ If the grid is in mobile mode this text will be used for the confirm button.</de
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>If set to true the grid will display a confirmation dialog when the user clicks the "destroy" command button.Can be set to a string which will be used as the confirmation text.</description>
+            <description>If set to true the grid will display a confirmation dialog when the user clicks the "destroy" command button.Can be set to a string which will be used as the confirmation text.Can be set to a function which will be called, passing the model instance, to return the confirmation text.</description>
             <name>confirmation</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>The position at which new data items are inserted in the grid. Must be set to either "top" or "bottom". By default new data items are inserted at the top.</description>
@@ -12283,6 +12283,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
     </tag>
 
 
+    <tag>
+        <description>If set to true the grid will display a confirmation dialog when the user clicks the "destroy" command button.Can be set to a string which will be used as the confirmation text.Can be set to a function which will be called, passing the model instance, to return the confirmation text.</description>
+        <name>grid-editable-confirmation</name>
+        <tag-class>com.kendoui.taglib.grid.EditableConfirmationFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The template which renders popup editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>

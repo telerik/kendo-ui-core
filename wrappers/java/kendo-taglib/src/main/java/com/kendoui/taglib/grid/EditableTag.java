@@ -50,6 +50,10 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         return "grid-editable";
     }
 
+    public void setConfirmation(EditableConfirmationFunctionTag value) {
+        setEvent("confirmation", value.getBody());
+    }
+
     public void setTemplate(EditableTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
@@ -70,11 +74,11 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("confirmDelete", value);
     }
 
-    public java.lang.Object getConfirmation() {
-        return (java.lang.Object)getProperty("confirmation");
+    public boolean getConfirmation() {
+        return (boolean)getProperty("confirmation");
     }
 
-    public void setConfirmation(java.lang.Object value) {
+    public void setConfirmation(boolean value) {
         setProperty("confirmation", value);
     }
 
