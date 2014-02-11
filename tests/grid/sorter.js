@@ -11,10 +11,11 @@
     module("kendo.ui.Sorter", {
         setup: function() {
             dataSource = DataSource.create( { data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 } ] } );
-            button = $("<button />");
+            button = $("<button />").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.destroy(button);
+            button.remove();
         }
     });
 

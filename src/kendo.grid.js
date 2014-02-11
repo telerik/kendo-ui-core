@@ -5029,10 +5029,7 @@ var __meta__ = {
 
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
-
-   extend(kendo.ui, {
-       Sorter: Sorter
-   });
+   ui.plugin(Sorter);
 
 })(window.kendo.jQuery);
 
