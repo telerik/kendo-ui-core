@@ -90,6 +90,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configure the serialization options.
+        /// </summary>
+        /// <param name="configurator">An action that configures the serialization options.</param>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Editor()
+        ///             .Name("Editor")
+        ///             .Serialization(serialization => serialization
+        ///                 .Entities(false)
+        ///             )
+        /// %&gt;
+        /// </code>
+        public EditorBuilder Serialization(Action<EditorSerializationOptionsBuilder> configurator)
+        {
+            configurator(new EditorSerializationOptionsBuilder(Component.SerializationOptions));
+
+            return this;
+        }
+
+        /// <summary>
         /// Configure the available tools in the toolbar.
         /// </summary>
         /// <param name="configurator">An action that configures the tools.</param>
