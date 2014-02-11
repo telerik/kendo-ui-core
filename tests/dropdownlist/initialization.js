@@ -679,6 +679,7 @@
     });
 
     test("Add km-popup class to the animation container", function() {
+        $(document.documentElement).addClass("km-root");
         var dropdownlist = new DropDownList($("<input/>").appendTo(QUnit.fixture));
         dropdownlist.popup.trigger("open");
 
@@ -686,6 +687,7 @@
 
         ok(animationContainer.hasClass("k-animation-container"));
         ok(animationContainer.hasClass("km-popup"));
+        $(document.documentElement).removeClass("km-root");
     });
 
     test("resetting dataSource detaches the previouse events", 0, function() {
