@@ -1297,7 +1297,7 @@
             save: function (options) { // options = {saveOptions = true|false}
                 var json = {}, i, shape, con;
                 if (isUndefined(options) || isUndefined(options.saveOptions) || options.saveOptions === true) {
-                    json.options = kendo.deepExtend(options, this.options);
+                    json.options = kendo.deepExtend(options || {}, this.options);
                 }
                 json.shapes = [];
                 json.connections = [];
