@@ -1435,6 +1435,8 @@ kendo_module({
             if (!this.done()) {
                 this._started = true;
                 kendo.animationFrame(this._tickProxy);
+            } else {
+                this.onEnd();
             }
         },
 
