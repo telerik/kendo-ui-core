@@ -1933,6 +1933,37 @@
                 }
                 return result;
             },
+            documentToView: function(point) {
+                var containerOffset = $(this.canvas.element).offset();
+
+                return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
+            },
+            viewToDocument: function(point) {
+                var containerOffset = $(this.canvas.element).offset();
+
+                return new Point(point.x + containerOffset.left, point.y + containerOffset.top);
+            },
+            viewToLayer: function(point) {
+                this._transformWithMatrix(point, this._matrix);
+            },
+            layerToView: function(point) {
+                this._transformWithMatrix(point, this._invertMatrix);
+            },
+            _transformWithMatrix: function(point, matrix) {
+                var result = point;
+                if (point instanceof Point) {
+                    if (matrix) {
+                        result = matrix.apply(point);
+                    }
+                }
+                else {
+                    var tl = this._transformWithMatrix(point.topLeft(), matrix),
+                        br = this._transformWithMatrix(point.bottomRight(), matrix);
+                    result = Rect.fromPoints(tl, br);
+                }
+                return result;
+            },
+
             setDataSource: function (dataSource) {
                 this.options.dataSource = dataSource;
                 this._dataSource();
