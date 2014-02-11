@@ -254,4 +254,18 @@ test("adds breaks to all table cells", function() {
     equal(dom.find("br").length, 2);
 });
 
+test("encode HTML characters", function() {
+    equal(Dom.encode("foo < bar"), "foo &lt; bar");
+    equal(Dom.encode("foo > bar"), "foo &gt; bar");
+    equal(Dom.encode("foo & bar"), "foo &amp; bar");
+});
+
+test("encode HTML entities", function() {
+    equal(Dom.encode("foo ä bar"), "foo &auml; bar");
+});
+
+test("encode allows HTML entity encoding to be suppressed", function() {
+    equal(Dom.encode("foo < ä bar", { entities: false }), "foo &lt; ä bar");
+});
+
 }());

@@ -476,8 +476,8 @@ test("encodes CDATA sections as comments", function() {
     equal(Serializer.toEditableHtml('<![CDATA[ whatever ]]>'), '<!--[CDATA[ whatever ]]-->');
 });
 
-function serializeCycle(html) {
-    return Serializer.domToXhtml(Serializer.htmlToDom(html, QUnit.fixture[0]));
+function serializeCycle(html, options) {
+    return Serializer.domToXhtml(Serializer.htmlToDom(html, QUnit.fixture[0]), options);
 }
 
 function verifyCycle(html) {
@@ -498,6 +498,11 @@ test("removes k-paste-container elements from content", function() {
 
 test("removes k-marker elements from content", function() {
     equal(serializeCycle('f<span class="k-marker"></span>oob<span class="k-marker"></span>az'), "foobaz");
+});
+
+test("encoding of entities can be prevented", function() {
+    equal(serializeCycle('foo ä bar', { entities: false }), "foo ä bar");
+    equal(serializeCycle('<p>foo ä bar</p>', { entities: false }), "<p>foo ä bar</p>");
 });
 
 }());

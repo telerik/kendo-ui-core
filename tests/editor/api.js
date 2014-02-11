@@ -57,6 +57,17 @@ test("value method does not remove selection if provided value is the same as th
     equal(range.endOffset, 2);
 });
 
+test("value method passes serialization options to serializer", function() {
+    var editor = new kendo.ui.Editor("#editor", {
+        serialization: {
+            entities: false
+        },
+        value: "foo ä bar"
+    });
+
+    equal(editor.value(), "foo ä bar");
+});
+
 test("restoreSelection restores element selection", function() {
     var editor = new kendo.ui.Editor("#inline");
 

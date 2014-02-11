@@ -129,7 +129,7 @@ var Serializer = {
         return root;
     },
 
-    domToXhtml: function(root) {
+    domToXhtml: function(root, options) {
         var result = [];
         var tagMap = {
             'telerik:script': {
@@ -386,7 +386,7 @@ var Serializer = {
                     value = value.replace(/ +/, ' ');
                 }
 
-                result.push(skipEncoding ? value : dom.encode(value));
+                result.push(skipEncoding ? value : dom.encode(value, options));
 
             } else if (nodeType == 4) {
                 result.push('<![CDATA[');
@@ -406,7 +406,7 @@ var Serializer = {
         }
 
         if (root.childNodes.length == 1 && root.firstChild.nodeType == 3) {
-            return dom.encode(text(root.firstChild).replace(/[\r\n\v\f\t ]+/, ' '));
+            return dom.encode(text(root.firstChild).replace(/[\r\n\v\f\t ]+/, ' '), options);
         }
 
         children(root);

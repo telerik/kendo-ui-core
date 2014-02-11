@@ -77,6 +77,7 @@ var whitespace = /^\s+$/,
             "border-right-style,border-right-width,border-right-color," +
             "font-family,font-size,font-style,font-variant,font-weight,line-height"
            ).split(","),
+    htmlRe = /[<>\&]/g,
     entityRe = /[\u00A0-\u2666<>\&]/g,
     entityTable = {
             34: 'quot', 38: 'amp', 39: 'apos', 60: 'lt', 62: 'gt',
@@ -262,8 +263,9 @@ var Dom = {
         }).join("");
     },
 
-    encode: function (value) {
-        return value.replace(entityRe, function(c) {
+    encode: function (value, options) {
+        var encodableChars = (!options || options.entities) ? entityRe : htmlRe;
+        return value.replace(encodableChars, function(c) {
             var charCode = c.charCodeAt(0);
             var entity = entityTable[charCode];
             return entity ? '&'+entity+';' : c;

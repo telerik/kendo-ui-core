@@ -534,6 +534,9 @@
             messages: messages,
             formats: {},
             encoded: true,
+            serialization: {
+                entities: true
+            },
             stylesheets: [],
             dialogOptions: {
                 modal: true, resizable: false, draggable: true,
@@ -625,7 +628,7 @@
             var body = this.body,
                 editorNS = kendo.ui.editor,
                 dom = editorNS.Dom,
-                currentHtml = editorNS.Serializer.domToXhtml(body);
+                currentHtml = editorNS.Serializer.domToXhtml(body, this.options.serialization);
 
             if (html === undefined) {
                 return currentHtml;
