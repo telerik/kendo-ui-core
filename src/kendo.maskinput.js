@@ -46,9 +46,9 @@ var __meta__ = {
                     }
                 });
 
-            this.value(that.options.value);
+            that.value(that.options.value);
 
-            that._bind();
+            that._handleChanges();
 
             //TODO: MVVM notify
         },
@@ -78,7 +78,7 @@ var __meta__ = {
         //TODO: enable method
         //TODO: readonly method
 
-        _bind: function() {
+        _handleChanges: function() {
             var that = this;
             var element = that.element;
             var eventName = ("onpropertychange" in element[0] ? "propertychange" : "input") + ns;
@@ -166,6 +166,25 @@ var __meta__ = {
             e.preventDefault();
         },
 
+        _find: function(idx, backward) {
+            var value = this.element.val() || this._emptyMask;
+            var step = 1;
+
+            if (backward === true) {
+                step = -1;
+            }
+
+            while (idx > -1 || idx <= this._maskLength) {
+                if (value.charAt(idx) !== this.tokens[idx]) {
+                    return idx;
+                }
+
+                idx += step;
+            }
+
+            return -1;
+        },
+
         _mask: function(start, end, value, backward) {
             var element = this.element[0];
             var current = element.value || this._emptyMask;
@@ -210,25 +229,6 @@ var __meta__ = {
             if (kendo._activeElement() === element) {
                 caret(element, idx);
             }
-        },
-
-        _find: function(idx, backward) {
-            var value = this.element.val() || this._emptyMask;
-            var step = 1;
-
-            if (backward === true) {
-                step = -1;
-            }
-
-            while (idx > -1 || idx <= this._maskLength) {
-                if (value.charAt(idx) !== this.tokens[idx]) {
-                    return idx;
-                }
-
-                idx += step;
-            }
-
-            return -1;
         },
 
         _unmask: function(value, idx) {
