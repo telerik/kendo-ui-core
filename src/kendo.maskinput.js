@@ -98,42 +98,34 @@ var __meta__ = {
 
         _keydown: function(e) {
             var key = e.keyCode;
-            var selection = caret(this.element[0]);
+            var element = this.element[0];
+            var selection = caret(element);
             var start = selection[0];
             var end = selection[1];
             var placeholder;
 
-            if (key == keys.BACKSPACE) {
-                if (start === end) {
-                    start = start - 1;
-                    placeholder = this._find(start, -1);
+            var backward = key === keys.BACKSPACE;
 
-                    if (placeholder !== start) {
-                        caret(this.element[0], placeholder + 1);
+            if (backward || key === keys.DELETE) {
+                if (start === end) {
+                    if (backward) {
+                        start -= 1;
+                    } else {
+                        end += 1;
                     }
+
+                    placeholder = this._find(start, backward);
                 }
 
                 if (placeholder !== undefined && placeholder !== start) {
-                    caret(this.element[0], placeholder + 1);
-                } else if (start > -1) {
-                    this._mask(start, end, "", true);
-                }
-
-                e.preventDefault();
-            } else if (key == keys.DELETE) {
-                if (start === end) {
-                    end += 1;
-
-                    placeholder = this._find(start);
-
-                    if (placeholder !== start) {
-                        caret(this.element[0], placeholder);
-                        e.preventDefault();
-                        return;
+                    if (backward) {
+                        placeholder += 1;
                     }
-                }
 
-                this._mask(start, end, "");
+                    caret(element, placeholder);
+                } else if (start > -1) {
+                    this._mask(start, end, "", backward);
+                }
 
                 e.preventDefault();
             }
@@ -141,26 +133,23 @@ var __meta__ = {
 
         _keypress: function(e) {
             var selection = caret(this.element[0]);
-            var start = selection[0];
-            var end = selection[1];
 
-            this._mask(start, end, String.fromCharCode(e.which));
+            this._mask(selection[0], selection[1], String.fromCharCode(e.which));
 
             e.preventDefault();
         },
 
         _mask: function(start, end, value, backward) {
-            var element = this.element;
-            var current = element.val() || this._emptyMask;
-
-            var idx;
-            var char;
-            var unmasked;
-            var charIdx = 0;
-            var valueLength;
+            var element = this.element[0];
+            var current = element.value || this._emptyMask;
             var empty = this.options.emptySymbol;
+            var valueLength;
+            var charIdx = 0;
+            var unmasked;
+            var char;
+            var idx;
 
-            start = this._find(start, backward ? -1 : 1);
+            start = this._find(start, backward);
 
             if (start > end) {
                 end = start;
@@ -168,7 +157,6 @@ var __meta__ = {
 
             unmasked = this._unmask(current.substring(end), end);
             value = this._unmask(value);
-
             valueLength = value.length;
 
             if (value) {
@@ -190,17 +178,20 @@ var __meta__ = {
                 start = this._find(start + 1);
             }
 
-            element.val(current.join(""));
+            element.value = current.join("");
 
-            if (kendo._activeElement() === element[0]) {
-                caret(element[0], idx);
+            if (kendo._activeElement() === element) {
+                caret(element, idx);
             }
         },
 
-        _find: function(idx, step) {
+        _find: function(idx, backward) {
             var value = this.element.val() || this._emptyMask;
+            var step = 1;
 
-            step = step || 1;
+            if (backward === true) {
+                step = -1;
+            }
 
             while (idx > -1 || idx <= this._maskLength) {
                 if (value.charAt(idx) !== this.tokens[idx]) {
@@ -213,6 +204,7 @@ var __meta__ = {
             return -1;
         },
 
+        //TODO: Refactor _unmask method
         _unmask: function(value, idx) {
             if (!value) {
                 return "";
