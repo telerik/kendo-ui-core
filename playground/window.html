@@ -18,19 +18,27 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
-        <div id="dialog">
-            <input /><br />
-            <textarea></textarea>
-        </div>
-
-        <button>Open</button>
+        <button onclick='start'>Start</button>
+        <button onclick='stop'>Stop</button>
 
         <script>
-            $(document).ready(function(){
-                $("#dialog").kendoWindow();
-                
-                $("button").click(function() { $("#dialog").kendoWindow("open"); });
-            });
+            var interval;
+            function start() {
+                interval = setInterval(function() {
+                    $(".k-window-content").data("kendoWindow").close();
+
+                    $("<div id='foo'><input></div>").kendoWindow({
+                        animation: false,
+                        deactivate: function() {
+                            this.destroy();
+                        }
+                    }).data("kendoWindow").open();
+                }, 100);
+            }
+
+            function stop() {
+                clearInterval(interval);
+            }
         </script>
     </body>
 </html>
