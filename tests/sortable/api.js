@@ -13,10 +13,10 @@
         setup: function() {
             QUnit.fixture.append(
                 '<div id="sortable">' +
-                    '<p class="filtered">foo</p>' +
-                    '<p class="item">bar</p>' +
-                    '<p class="item disabled">baz</p>' +
-                    '<p class="item">qux</p>' +
+                    '<p style="margin: 0; height: 18px;" class="filtered">foo</p>' +
+                    '<p style="margin: 0; height: 18px;" class="item">bar</p>' +
+                    '<p style="margin: 0; height: 18px;" class="item disabled">baz</p>' +
+                    '<p style="margin: 0; height: 18px;" class="item">qux</p>' +
                 '</div>'
             );
 
