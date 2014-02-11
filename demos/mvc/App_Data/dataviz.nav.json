@@ -34,6 +34,16 @@
                     "meta": "This demo shows how a 100% stacked area chart is created with KendoChart. Learn how to visualize series that should be stacked to 100% in the chart.",
                     "new": "true"
                 }, {
+                    "text": "Step Area",
+                    "url": "area-charts/step-area.html",
+                    "title": "Example of using Kendo UI Area Chart with step line style",
+                    "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart"
+                }, {
+                    "text": "Smooth (Spline) Area",
+                    "url": "area-charts/smooth-area.html",
+                    "title": "Example of using Kendo UI Area Chart with smooth line style",
+                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Area Chart"
+                }, {
                     "text": "Date axis",
                     "url": "area-charts/date-axis.html",
                     "title": "Date axis sample for Kendo UI Area Charts",
@@ -48,16 +58,6 @@
                     "url": "area-charts/error-bars.html",
                     "title": "Example of using ErrorBars for Kendo UI Area Chart",
                     "meta": "This demo shows how to use ErrorBars for Kendo UI Area Chart"
-                }, {
-                    "text": "Step Area",
-                    "url": "area-charts/step-area.html",
-                    "title": "Example of using Kendo UI Area Chart with step line style",
-                    "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart"
-                }, {
-                    "text": "Smooth (Spline) Area",
-                    "url": "area-charts/smooth-area.html",
-                    "title": "Example of using Kendo UI Area Chart with smooth line style",
-                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Area Chart"
                 }, {
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
@@ -359,6 +359,22 @@
                     "title": "Kendo UI Stacked Line Charts Demo",
                     "meta": "This demo shows how you can easily implement Kendo UI Stacked Line Charts in your business webapp."
                 }, {
+                    "text": "100% Stacked line",
+                    "url": "line-charts/stacked100-line.html",
+                    "title": "Kendo UI 100% Stacked Line Charts Demo",
+                    "meta": "This demo shows how you can easily implement Kendo UI 100% Stacked Line Charts in your business webapp.",
+                    "new": "true"
+                }, {
+                    "text": "Step line",
+                    "url": "line-charts/step-line.html",
+                    "title": "Example of using Kendo UI Line Chart with step line style",
+                    "meta": "This demo shows how to configure step line style for the Kendo UI Line Chart"
+                }, {
+                    "text": "Smooth (Spline) line",
+                    "url": "line-charts/smooth-line.html",
+                    "title": "Example of using Kendo UI Line Chart with smooth line style",
+                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Line Chart"
+                }, {
                     "text": "Date axis",
                     "url": "line-charts/date-axis.html",
                     "title": "Example of Kendo UI HTML5 Line Charts Date Axis",
@@ -373,6 +389,11 @@
                     "url": "line-charts/notes.html",
                     "title": "Notes feature example | Kendo UI Line Charts widget",
                     "meta": "This demo shows how to place annotations in your Kendo UI Charts."
+                }, {
+                    "text": "Error Bars",
+                    "url": "line-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Line Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Line Chart"
                 }, {
                     "text": "Binding to remote data",
                     "url": "line-charts/remote-data.html",
@@ -397,24 +418,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Error Bars",
-                    "url": "line-charts/error-bars.html",
-                    "title": "Example of using ErrorBars for Kendo UI Line Chart",
-                    "meta": "This demo shows how to use ErrorBars for Kendo UI Line Chart",
-                    "new": "true"
-                }, {
-                    "text": "Step line",
-                    "url": "line-charts/step-line.html",
-                    "title": "Example of using Kendo UI Line Chart with step line style",
-                    "meta": "This demo shows how to configure step line style for the Kendo UI Line Chart",
-                    "new": "true"
-                }, {
-                    "text": "Smooth (Spline) line",
-                    "url": "line-charts/smooth-line.html",
-                    "title": "Example of using Kendo UI Line Chart with smooth line style",
-                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Line Chart",
-                    "new": "true"
                 }
             ],
             "name": "line-charts"
