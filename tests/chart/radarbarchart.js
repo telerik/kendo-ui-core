@@ -82,13 +82,13 @@
             s2;
 
         function createStack(options) {
-            var segmentSector = new Ring(new Point2D(0, 0), 0, 10, 90, 90);
-            segments = [ new SegmentStub(segmentSector), new SegmentStub(segmentSector) ];
+            segments = [ new SegmentStub(new Ring(new Point2D(0, 0), 0, 10, 90, 90)),
+                         new SegmentStub(new Ring(new Point2D(0, 0), 10, 20, 90, 90)) ];
 
             stack = new dataviz.RadarStackLayout(options);
             [].push.apply(stack.children, segments);
 
-            stack.reflow(new Ring(new Point2D(0, 0), 0, 100, 110, 70));
+            stack.reflow(new Ring(new Point2D(0, 0), 10, 100, 110, 70));
 
             s1 = segments[0].sector;
             s2 = segments[1].sector;
@@ -105,13 +105,13 @@
             equal(s1.r, 10);
         });
 
+        test("first sector inner radius is not changed", function() {
+            equal(s1.ir, 0);
+        });
+
         test("first sector is fitted in sector segment", function() {
             equal(s1.startAngle, 110);
             equal(s1.angle, 70);
-        });
-
-        test("second sector radius is not changed", function() {
-            equal(s2.r, 10);
         });
 
         test("second sector is fitted in sector segment", function() {
@@ -119,7 +119,11 @@
             equal(s1.angle, 70);
         });
 
-        test("second sector inner radius equals first sector radius", function() {
+        test("second sector radius is not changed", function() {
+            equal(s2.r, 20);
+        });
+
+        test("second sector inner radius not changed", function() {
             equal(s2.ir, 10);
         });
 
@@ -134,22 +138,26 @@
             equal(s1.r, 10);
         });
 
+        test("first sector inner radius is not changed", function() {
+            equal(s1.ir, 0);
+        });
+
         test("first sector is fitted in sector segment", function() {
             equal(s1.startAngle, 110);
             equal(s1.angle, 70);
         });
 
         test("second sector radius is not changed", function() {
-            equal(s2.r, 10);
+            equal(s2.r, 20);
+        });
+
+        test("second sector inner radius is not changed", function() {
+            equal(s2.ir, 10);
         });
 
         test("second sector is fitted in sector segment", function() {
             equal(s1.startAngle, 110);
             equal(s1.angle, 70);
-        });
-
-        test("first sector inner radius equals first sector radius", function() {
-            equal(s1.ir, 10);
         });
     })();
 

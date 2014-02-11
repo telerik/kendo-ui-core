@@ -718,7 +718,6 @@ var __meta__ = {
                 children = stack.children,
                 childrenCount = children.length,
                 childSector,
-                prevSector,
                 i,
                 first = reverse ? childrenCount - 1 : 0,
                 step = reverse ? -1 : 1;
@@ -729,11 +728,6 @@ var __meta__ = {
                 childSector = children[i].sector;
                 childSector.startAngle = sector.startAngle;
                 childSector.angle = sector.angle;
-
-                if (i !== first) {
-                    prevSector = children[reverse ? i + 1 : i - 1].sector;
-                    childSector.ir = prevSector.r;
-                }
             }
         }
     });
@@ -772,9 +766,10 @@ var __meta__ = {
 
         pointSlot: function(categorySlot, valueSlot) {
             var slot = categorySlot.clone(),
-                valueRadius = categorySlot.c.y - valueSlot.y1;
+                y = categorySlot.c.y;
 
-            slot.r = valueRadius;
+            slot.r = y - valueSlot.y1;
+            slot.ir = y - valueSlot.y2;
 
             return slot;
         },
