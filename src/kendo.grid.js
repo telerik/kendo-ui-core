@@ -2104,6 +2104,11 @@ var __meta__ = {
                 confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
             if (confirmation !== false && confirmation != null) {
+
+                if (typeof confirmation === FUNCTION) {
+                    confirmation = confirmation(that._modelForContainer(row));
+                }
+
                 return that._showMessage({
                         confirmDelete: editable.confirmDelete || CONFIRMDELETE,
                         cancelDelete: editable.cancelDelete || CANCELDELETE,

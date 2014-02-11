@@ -141,6 +141,18 @@
             ok(method.calls("_confirmation"));
         });
 
+        test("confirmation as function", 1, function() {
+            var grid = setup({ editable: { confirmation: function(e) { return "foo" + e.name; } } }),
+                text;
+
+            grid._showMessage = function(e) {
+              equal(e.title, "footom");
+            }
+
+            grid.removeRow(table.find("tbody>tr:first"));
+
+        });
+
         test("_confirmation uses default text when set to true", function() {
             var grid = setup({ editable: { confirmation: true } }),
                 text;
