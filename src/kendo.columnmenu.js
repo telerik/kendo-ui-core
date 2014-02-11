@@ -81,6 +81,8 @@ var __meta__ = {
 
             that._filter();
 
+            that._lockColumns();
+
             that.trigger(INIT, { field: that.field, container: that.wrapper });
         },
 
@@ -94,7 +96,9 @@ var __meta__ = {
                 filter: "Filter",
                 columns: "Columns",
                 done: "Done",
-                settings: "Column Settings"
+                settings: "Column Settings",
+                lock: "Lock",
+                unlock: "Unlock"
             },
             filter: "",
             columns: true,
@@ -115,7 +119,8 @@ var __meta__ = {
                 sortable: options.sortable,
                 filterable: options.filterable,
                 columns: that._ownerColumns(),
-                showColumns: options.columns
+                showColumns: options.columns,
+                lockedColumns: options.lockedColumns
             }));
 
             that.popup = that.wrapper[POPUP]({
@@ -238,6 +243,10 @@ var __meta__ = {
                     that.close();
                 }
             });
+
+            if (that.options.lockedColumns) {
+                that._updateLockedColumns();
+            }
         },
 
         _activate: function() {
@@ -429,6 +438,45 @@ var __meta__ = {
             }
         },
 
+        _lockColumns: function() {
+            var that = this;
+            that.menu.bind(SELECT, function(e) {
+                var item = $(e.item);
+
+                if (item.hasClass("k-lock")) {
+                    that.owner.lockColumn(that.field);
+                } else if (item.hasClass("k-unlock")) {
+                    that.owner.unlockColumn(that.field);
+                }
+
+                that.close();
+            });
+        },
+
+        _updateLockedColumns: function() {
+            var field = this.field;
+            var columns = this.owner.columns;
+            var column = grep(columns, function(column) {
+                return column.field == field || column.title == field;
+            })[0];
+
+            var locked = !!column.locked;
+            var length = grep(columns, function(column) {
+                return !column.hidden && !!column.locked == locked;
+            }).length;
+
+            var lockItem = this.wrapper.find(".k-lock").removeClass("k-state-disabled");
+            var unlockItem = this.wrapper.find(".k-unlock").removeClass("k-state-disabled");
+
+            if (locked || length == 1) {
+                lockItem.addClass("k-state-disabled");
+            }
+
+            if (!locked || length == 1) {
+                unlockItem.addClass("k-state-disabled");
+            }
+        },
+
         refresh: function() {
             var that = this,
                 sort = that.options.dataSource.sort() || [],
@@ -463,7 +511,7 @@ var __meta__ = {
                             '<li><input type="checkbox" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</li>'+
                         '#}#'+
                         '</ul></li>'+
-                        '#if(filterable){#'+
+                        '#if(filterable || lockedColumns){#'+
                             '<li class="k-separator"></li>'+
                         '#}#'+
                     '#}#'+
@@ -471,6 +519,13 @@ var __meta__ = {
                         '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite k-filter"></span>${messages.filter}</span><ul>'+
                             '<li><div class="k-filterable"></div></li>'+
                         '</ul></li>'+
+                        '#if(lockedColumns){#'+
+                            '<li class="k-separator"></li>'+
+                        '#}#'+
+                    '#}#'+
+                    '#if(lockedColumns){#'+
+                        '<li class="k-item k-lock"><span class="k-link"><span class="k-sprite k-i-lock"></span>${messages.lock}</span></li>'+
+                        '<li class="k-item k-unlock"><span class="k-link"><span class="k-sprite k-i-unlock"></span>${messages.unlock}</span></li>'+
                     '#}#'+
                     '</ul>';
 

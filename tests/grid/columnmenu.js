@@ -185,4 +185,30 @@
         ok(th.eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu, "locked column doesn't have column menu");
         ok(th.eq(1).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu, "non locked column doesn't have column menu");
     });
+
+    test("column menu lockedColumns is set", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar" }
+            ]
+        });
+
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).data("kendoColumnMenu").options.lockedColumns, true);
+        equal(th.eq(1).data("kendoColumnMenu").options.lockedColumns, true);
+    });
+
+    test("column menu lockedColumns is not set", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo" },
+                { field: "bar" }
+            ]
+        });
+
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).data("kendoColumnMenu").options.lockedColumns, false);
+        equal(th.eq(1).data("kendoColumnMenu").options.lockedColumns, false);
+    });
 })();

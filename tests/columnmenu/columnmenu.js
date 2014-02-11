@@ -492,4 +492,158 @@
 
         columnMenu.link.click();
     });
+
+    test("locked columns section is initialized", function() {
+        var menu = setup({ lockedColumns: true });
+
+        ok(menu.wrapper.find(".k-lock").length);
+        ok(menu.wrapper.find(".k-unlock").length);
+    });
+
+    test("locked columns section has separator", function() {
+        var menu = setup({ lockedColumns: true });
+
+        ok(menu.wrapper.find(".k-lock").prev().hasClass("k-separator"));
+    });
+
+    test("locked column, lock menu item is disabled", function() {
+        var menu = setup({
+            lockedColumns: true,
+            owner: {
+                columns: [
+                    { field: "foo", locked: true },
+                    { field: "bar" },
+                    { field: "baz", locked: true }
+                ]
+            }
+        });
+        menu.link.click();
+
+        ok(menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
+        ok(!menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
+    });
+
+    test("only one locked column, lock and unlock menu items are disabled", function() {
+        var menu = setup({
+            lockedColumns: true,
+            owner: {
+                columns: [
+                    { field: "foo", locked: true }
+                ]
+            }
+        });
+        menu.link.click();
+
+        ok(menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
+        ok(menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
+    });
+
+    test("only one visible locked column, lock and unlock menu items are disabled", function() {
+        var menu = setup({
+            lockedColumns: true,
+            owner: {
+                columns: [
+                    { field: "foo", locked: true },
+                    { field: "bar", locked: true, hidden: true }
+                ]
+            }
+        });
+        menu.link.click();
+
+        ok(menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
+        ok(menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
+    });
+
+    test("unlocking columns updates disabled state", function() {
+        var menu = setup({
+            lockedColumns: true,
+            owner: {
+                columns: [
+                    { field: "foo", locked: true },
+                    { field: "bar", locked: false, hidden: false },
+                    { field: "baz", locked: true }
+                ],
+                unlockColumn: function() {
+                    menu.owner.columns[0].locked = false;
+                }
+            }
+        });
+        menu.link.click();
+        menu.wrapper.find(".k-unlock").click();
+        menu.link.click();
+
+        ok(!menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
+        ok(menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
+    });
+
+    test("unlocked column, unlock menu item is disabled", function() {
+        var menu = setup({
+            lockedColumns: true,
+            owner: {
+                columns: [
+                    { field: "foo", locked: false },
+                    { field: "bar" },
+                    { field: "baz", locked: false }
+                ]
+            }
+        });
+        menu.link.click();
+
+        ok(!menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
+        ok(menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
+    });
+
+    test("only one unlocked column, lock and unlock menu items are disabled", function() {
+        var menu = setup({
+            lockedColumns: true,
+            owner: {
+                columns: [
+                    { field: "foo", locked: false },
+                    { field: "bar", locked: true, hidden: false }
+                ]
+            }
+        });
+        menu.link.click();
+
+        ok(menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
+        ok(menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
+    });
+
+    test("only one visible unlocked column, lock and unlock menu items are disabled", function() {
+        var menu = setup({
+            lockedColumns: true,
+            owner: {
+                columns: [
+                    { field: "foo" },
+                    { field: "bar", hidden: true }
+                ]
+            }
+        });
+        menu.link.click();
+
+        ok(menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
+        ok(menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
+    });
+
+    test("locking columns updates disabled state", function() {
+        var menu = setup({
+            lockedColumns: true,
+            owner: {
+                columns: [
+                    { field: "foo" },
+                    { field: "bar", hidden: false },
+                    { field: "baz", locked: true }
+                ],
+                lockColumn: function() {
+                    menu.owner.columns[0].locked = true;
+                }
+            }
+        });
+        menu.link.click();
+        menu.wrapper.find(".k-lock").click();
+        menu.link.click();
+
+        ok(menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
+        ok(!menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
+    });
 })();
