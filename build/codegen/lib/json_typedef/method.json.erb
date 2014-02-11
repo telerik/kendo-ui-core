@@ -1,4 +1,4 @@
         "<%= name %>": {
-            "!type": "fn()<%= result_type %>",
+            "!type": "fn(<%= json_typedef_parameters %>)<%= result_type %>",
             "!doc": "<%= description.gsub(/\r?\n/, " ").gsub(/"/, '\"') %>"
         }

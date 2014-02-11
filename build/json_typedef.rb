@@ -12,8 +12,8 @@ module CodeGen::JsonTypeDef
         'Boolean' => 'boolean',
         'Document' => 'Document',
         'Range' => 'Range',
-        'Object' => 'any',
-        'Array' => 'any',
+        'Object' => 'object',
+        'Array' => '[]',
         'Date' => 'Date',
         'Function' => 'Function',
         'Selection' => 'Selection',
@@ -193,13 +193,9 @@ module CodeGen::JsonTypeDef
             Parameter
         end
 
-        def type_script_type
-            @owner.type_script_type + @name.pascalize
-        end
-
-        def type_script_parameters(parameters)
+        def json_typedef_parameters()
             params = parameters.map do |p|
-                "#{p.name}#{p.optional ? "?" : ""}: #{p.type}"
+                "#{p.name}: #{p.json_typedef_type}"
             end
 
             params.join(', ')
@@ -227,6 +223,16 @@ module CodeGen::JsonTypeDef
 
         def composite_parameter_class
             CompositeParameter
+        end
+
+        def json_typedef_type
+            return type if type.start_with?('kendo')
+
+            result = TYPES[type]
+
+            raise "No JsonTypeDef mapping for type #{type}" unless result
+
+            result
         end
     end
 
