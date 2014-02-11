@@ -1,0 +1,39 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.all.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+
+        <title>Mobile Transitions Playground</title>
+    </head>
+
+    <body>
+
+        <div data-role="view" data-use-native-scrolling="true">
+            <input type="text" />
+            <div style="height: 800px"> Filler </div>
+            <input />
+
+            <div data-role="footer">
+                <div data-role="tabstrip">
+                    <a data-icon="Home">Home</a>
+                    <a data-icon="Home">Settings</a>
+                </div>
+            </div>
+        </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            require.config({
+                baseUrl: "../../src"
+            });
+
+            require(['jquery', 'kendo.mobile.application', 'kendo.mobile.view', 'kendo.mobile.tabstrip' ], function($, kendo) {
+                new kendo.mobile.Application();
+            });
+        </script>
+    </body>
+</html>
