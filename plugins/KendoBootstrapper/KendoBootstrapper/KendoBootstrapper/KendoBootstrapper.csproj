@@ -39,7 +39,6 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0" />
-    <Reference Include="Microsoft.VisualStudio.TextManager.Interop" />
     <Reference Include="Microsoft.VisualStudio.Shell.10.0">
       <Private>false</Private>
     </Reference>
@@ -146,10 +145,13 @@
     <Content Include="node\node_modules\kendo-lint\lib\api.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\.bin\md2html">
+    <Content Include="node\node_modules\kendo-lint\lib\kendo-config.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\.bin\uglifyjs">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\.bin\uglifyjs.cmd">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\.travis.yml">
@@ -164,7 +166,13 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\inherits\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\inherits\README.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\LICENSE">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\CONTRIBUTORS">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\LICENSE">
@@ -173,40 +181,31 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\README.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\sigmund\LICENSE">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\sigmund\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\sigmund\README.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\package.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\README.md">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\README.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\bash-results.json">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\Changes.markdown">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\node_modules\nopt\LICENSE">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\node_modules\nopt\node_modules\abbrev\LICENSE">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\node_modules\nopt\node_modules\abbrev\package.json">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\node_modules\nopt\package.json">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\package.json">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\seed.yml">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\optimist\.travis.yml">
@@ -218,7 +217,13 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\optimist\node_modules\wordwrap\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\node_modules\wordwrap\README.markdown">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\optimist\package.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\readme.markdown">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\.travis.yml">
@@ -239,6 +244,9 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\async\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\async\README.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\.travis.yml">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -248,7 +256,13 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\node_modules\wordwrap\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\node_modules\wordwrap\README.markdown">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\package.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\readme.markdown">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\.travis.yml">
@@ -266,6 +280,9 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\build\suffix-utils.jsm">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\CHANGELOG.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\LICENSE">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -275,10 +292,19 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\node_modules\amdefine\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\node_modules\amdefine\README.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\README.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\package.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\README.md">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\package.json">
@@ -288,6 +314,12 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="node\node.exe">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\bundle.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\docs.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\lib\lint.js">
@@ -320,10 +352,22 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\inherits\inherits_browser.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\inherits\test.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\minimatch.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\lib\lru-cache.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\test\basic.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\test\foreach.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\lru-cache\test\memory-leak.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\sigmund\bench.js">
@@ -332,28 +376,151 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\sigmund\sigmund.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\bin\md2html.js">
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\node_modules\sigmund\test\basic.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\lib\index.js">
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\test\basic.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\lib\markdown.js">
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\test\brace-expand.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\node_modules\nopt\bin\nopt.js">
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\test\caching.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\node_modules\nopt\lib\nopt.js">
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\test\defaults.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\node_modules\markdown\node_modules\nopt\node_modules\abbrev\lib\abbrev.js">
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\node_modules\minimatch\test\extglob-ending-with-state-char.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\00-setup.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\bash-comparison.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\cwd-test.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\globstar-match.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\mark.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\new-glob-optional-options.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\nocase-nomagic.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\pause-resume.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\root-nomount.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\root.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\stat.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\glob\test\zz-cleanup.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\bool.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\boolean_double.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\boolean_single.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\default_hash.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\default_singles.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\divide.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\line_count.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\line_count_options.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\line_count_wrap.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\nonopt.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\reflect.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\short.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\string.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\usage-options.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\example\xup.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\optimist\index.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\node_modules\wordwrap\example\center.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\node_modules\wordwrap\example\meat.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\optimist\node_modules\wordwrap\index.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\node_modules\wordwrap\test\break.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\node_modules\wordwrap\test\idleness.txt">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\node_modules\wordwrap\test\wrap.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\dash.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\parse.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\parse_modified.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\short.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\usage.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\whitespace.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\_.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\_\argv.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\optimist\test\_\bin.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\lib\ast.js">
@@ -386,10 +553,85 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\async\lib\async.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\bool.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\boolean_double.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\boolean_single.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\default_hash.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\default_singles.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\divide.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\line_count.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\line_count_options.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\line_count_wrap.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\nonopt.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\reflect.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\short.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\string.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\usage-options.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\example\xup.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\index.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\node_modules\wordwrap\example\center.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\node_modules\wordwrap\example\meat.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\node_modules\wordwrap\index.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\node_modules\wordwrap\test\break.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\node_modules\wordwrap\test\idleness.txt">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\node_modules\wordwrap\test\wrap.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\test\parse.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\test\usage.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\test\_.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\test\_\argv.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\optimist\test\_\bin.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\build\assert-shim.js">
@@ -399,6 +641,12 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\build\suffix-browser.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\build\test-prefix.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\build\test-suffix.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\lib\source-map.js">
@@ -437,6 +685,96 @@
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\node_modules\amdefine\intercept.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\run-tests.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-api.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-array-set.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-base64-vlq.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-base64.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-binary-search.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-dog-fooding.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-source-map-consumer.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-source-map-generator.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\test-source-node.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\node_modules\source-map\test\source-map\util.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\arrays.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\blocks.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\conditionals.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\dead-code.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\debugger.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\drop-unused.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\issue-105.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\issue-12.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\issue-143.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\issue-22.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\issue-44.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\issue-59.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\labels.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\loops.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\properties.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\sequences.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\switch.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\compress\typeof.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\test\run-tests.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\uglify-js\tools\node.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -464,6 +802,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

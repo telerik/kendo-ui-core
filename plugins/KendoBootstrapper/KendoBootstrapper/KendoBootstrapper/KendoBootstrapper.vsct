@@ -15,7 +15,7 @@
           <CommandName>Kendo UI Bootstrapper</CommandName>
         </Strings>
       </Menu>
-      
+
       <!--<Menu guid="guidKendoBootstrapperCmdSet" type="Menu" id="IdKendoBootstrapperContextMenu" priority="0x0100">
         <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroupContext" />
         <CommandFlag>AlwaysCreate</CommandFlag>
@@ -24,12 +24,12 @@
         </Strings>
       </Menu>-->
     </Menus>
-    
+
     <Groups>
       <Group guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroup" priority="0x1900">
         <Parent guid="guidTelerik_CommonPackageCmdSet" id="TelerikMainMenu"/>
       </Group>
-      
+
       <Group guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperCommandsGroup" priority="0x0600">
         <Parent guid="guidKendoBootstrapperCmdSet" id="IdMenuKendoBootstrapper"/>
       </Group>
@@ -38,8 +38,12 @@
       <Group guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroupContext" priority="0x0100">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
       </Group>
+
+      <!-- Context menu for displaying documentation  -->
+      <Group guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" priority="0x0600">
+      </Group>
     </Groups>
-    
+
     <Buttons>
       <Button type="Button" guid="guidKendoBootstrapperCmdSet" id="IdKendoLintCommand" priority="0x0100">
         <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperCommandsGroup" />
@@ -50,15 +54,33 @@
         </Strings>
       </Button>
 
-      <Button type="Button" guid="guidKendoBootstrapperCmdSet" id="IdKendoLintCommandContext" priority="0x0100">
-        <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroupContext" />
+      <Button type="Button" guid="guidKendoBootstrapperCmdSet" id="IdKendoCustomFileCommand" priority="0x0200">
+        <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperCommandsGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <CommandName>Lint selected file</CommandName>
-          <ButtonText>Lint selected file</ButtonText>
+          <CommandName>Create Custom Kendo UI File</CommandName>
+          <ButtonText>Create Custom Kendo UI File</ButtonText>
         </Strings>
       </Button>
-      
+
+      <Button type="Button" guid="guidKendoBootstrapperCmdSet" id="IdKendoLintCommandContext" priority="0x0100">
+        <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroupContext" />
+        <Strings>
+          <CommandName>Lint selected file/s</CommandName>
+          <ButtonText>Lint selected file/s</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button type="Button" guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextCommand" priority="0x0100">
+        <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <CommandName>Kendo Lint View Documentation</CommandName>
+          <ButtonText>Kendo Lint View Documentation</ButtonText>
+        </Strings>
+      </Button>
+
       <!--<Button guid="guidKendoBootstrapperCmdSet" id="cmdidMyTool" priority="0x0100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
         <Icon guid="guidImages" id="bmpPic2" />
@@ -67,45 +89,76 @@
         </Strings>
       </Button>-->
     </Buttons>
-    
+
     <Bitmaps>
       <Bitmap guid="guidImages" href="Resources\Images_32bit.bmp" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows"/>
     </Bitmaps>
- 
+
   </Commands>
+
+  <CommandPlacements>
+    <CommandPlacement guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" priority="0x0300">
+      <Parent guid="editorContextMenusCmdSet" id="htmlContextMenu"></Parent>
+    </CommandPlacement>
+    <CommandPlacement guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" priority="0x0300">
+      <Parent guid="editorContextMenusCmdSet" id="jsContextMenu"></Parent>
+    </CommandPlacement>
+    <CommandPlacement guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" priority="0x0300">
+      <Parent guid="editorContextMenusCmdSet" id="aspxContextMenu"></Parent>
+    </CommandPlacement>
+    <CommandPlacement guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" priority="0x0300">
+      <Parent guid="editorContextMenusCmdSet" id="cshtmlContextMenu"></Parent>
+    </CommandPlacement>
+  </CommandPlacements>
 
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidKendoBootstrapperPkg" value="{67fc9fc6-d614-41bf-bf14-7c645eadb07f}" />
-    
+
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidKendoBootstrapperCmdSet" value="{be6bca02-8fe6-4d9e-8f12-c66589190e94}">
-      
+
       <!-- Top Level Group and Menu in the main Telerik menu -->
       <IDSymbol name="IdKendoBootstrapperGroup" value="0x1020"/>
       <IDSymbol name="IdMenuKendoBootstrapper" value="0x1000" />
-      
+
       <!-- Groups and commands that are in the KendoBootstrapper submenu -->
       <IDSymbol name="IdKendoBootstrapperCommandsGroup" value="0x1030" />
       <IDSymbol name="IdKendoLintCommand" value="0x0100" />
-      
+      <IDSymbol name="IdKendoCustomFileCommand" value="0x0200"/>
+
       <!-- Context Menu entries -->
       <IDSymbol name="IdKendoBootstrapperContextMenu" value="0x2000" />
       <IDSymbol name="IdKendoBootstrapperGroupContext" value="0x2100" />
       <IDSymbol name="IdKendoBootstrapperTestContext" value="0x2110" />
       <IDSymbol name="IdKendoLintCommandContext" value="0x2120" />
-      
+
+      <!-- Context Menu items for displaying documentation -->
+      <IDSymbol name="IdKendoLintDocumentationContextGroup" value="0x1040" />
+      <IDSymbol name="IdKendoLintDocumentationContextCommand" value="0x0300" />
+
       <IDSymbol name="cmdidMyTool" value="0x0101" />
     </GuidSymbol>
 
     <GuidSymbol name="guidTelerik_CommonPackageCmdSet" value="{e281d250-0488-419a-9b4c-59952015585f}">
       <!-- The parent menu of the BootStrapper -->
       <IDSymbol name="TelerikMainMenu" value="0x1010"/>
-      
+
       <!-- Not needed at the moment. BootStrapper is in a separate group -->
       <!--<IDSymbol name="TelerikProductSuitesGroup" value="0x1020"/>-->
     </GuidSymbol>
-    
+
+    <GuidSymbol name="editorContextMenusCmdSet" value="{D7E8C5E1-BDB8-11D0-9C88-0000F8040A53}">
+      <IDSymbol name="htmlContextMenu" value="0x0033"/>
+      <!-- 51 in hex is 0x0033 -->
+      <IDSymbol name="jsContextMenu" value="0x0034"/>
+      <!-- 52 in hex is 0x0034 -->
+      <IDSymbol name="aspxContextMenu" value="0x0035"/>
+      <!-- 53 in hex is 0x0035 // also applies to master pages -->
+      <IDSymbol name="cshtmlContextMenu" value="0x0036"/>
+      <!-- 54 in hex is 0x0036 -->
+    </GuidSymbol>
+
     <GuidSymbol name="guidImages" value="{0ad36289-7c4c-444f-b141-12547734302f}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
