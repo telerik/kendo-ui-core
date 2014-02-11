@@ -31,7 +31,8 @@
                     "text": "100% Stacked area",
                     "url": "area-charts/stacked100-area.html",
                     "title": "Kendo UI jQuery 100% stacked area chart example",
-                    "meta": "This demo shows how a 100% stacked area chart is created with KendoChart. Learn how to visualize series that should be stacked to 100% in the chart."
+                    "meta": "This demo shows how a 100% stacked area chart is created with KendoChart. Learn how to visualize series that should be stacked to 100% in the chart.",
+                    "new": "true"
                 }, {
                     "text": "Date axis",
                     "url": "area-charts/date-axis.html",
@@ -42,6 +43,21 @@
                     "url": "area-charts/multiple-axes.html",
                     "title": "Multi-axis demo for Kendo UI Area Charts component",
                     "meta": "Ensure the best performance of HTML5 charting and visualize data on multiple axis with Kendo UI Area Charts  in order to provide solid business reports for end users."
+                }, {
+                    "text": "Error Bars",
+                    "url": "area-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Area Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Area Chart"
+                }, {
+                    "text": "Step Area",
+                    "url": "area-charts/step-area.html",
+                    "title": "Example of using Kendo UI Area Chart with step line style",
+                    "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart"
+                }, {
+                    "text": "Smooth (Spline) Area",
+                    "url": "area-charts/smooth-area.html",
+                    "title": "Example of using Kendo UI Area Chart with smooth line style",
+                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Area Chart"
                 }, {
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
@@ -66,24 +82,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Error Bars",
-                    "url": "area-charts/error-bars.html",
-                    "title": "Example of using ErrorBars for Kendo UI Area Chart",
-                    "meta": "This demo shows how to use ErrorBars for Kendo UI Area Chart",
-                    "new": "true"
-                }, {
-                    "text": "Step Area",
-                    "url": "area-charts/step-area.html",
-                    "title": "Example of using Kendo UI Area Chart with step line style",
-                    "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart",
-                    "new": "true"
-                }, {
-                    "text": "Smooth (Spline) Area",
-                    "url": "area-charts/smooth-area.html",
-                    "title": "Example of using Kendo UI Area Chart with smooth line style",
-                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Area Chart",
-                    "new": "true"
                 }
             ],
             "name": "area-charts"
@@ -107,20 +105,22 @@
                     "title": "Kendo UI jQuery-powered Stacked Bar Charts | Kendo UI DataViz Demos",
                     "meta": "This example shows how Kendo UI Bar Charts component supports a stacked bar. The feature of the widget is enabled by setting the stacked property to true."
                 }, {
-                    "text": "100% Stacked bars",
-                    "url": "bar-charts/stacked100-bar.html",
-                    "title": "Kendo UI jQuery-powered 100% Stacked Bar Charts | Kendo UI DataViz Demos",
-                    "meta": "This example shows how Kendo UI Bar Charts component supports a 100% stacked bar. The feature of the widget is enabled by setting the stack type to '100%'."
-                }, {
                     "text": "Stacked and grouped bars",
                     "url": "bar-charts/grouped-stacked-bar.html",
                     "title": "Kendo UI Stacked and Grouped Bar Chart Example",
                     "meta": "This sample demonstrates the implementation of Kendo UI stacked and grouped bars in various data visualization-driven web apps."
                 }, {
+                    "text": "100% Stacked bars",
+                    "url": "bar-charts/stacked100-bar.html",
+                    "title": "Kendo UI jQuery-powered 100% Stacked Bar Charts | Kendo UI DataViz Demos",
+                    "meta": "This example shows how Kendo UI Bar Charts component supports a 100% stacked bar. The feature of the widget is enabled by setting the stack type to '100%'.",
+                    "new": "true"
+                }, {
                     "text": "100% Stacked and grouped bars",
                     "url": "bar-charts/grouped-stacked100-bar.html",
                     "title": "Kendo UI 100% Stacked and Grouped Bar Chart Example",
-                    "meta": "This sample demonstrates the implementation of Kendo UI 100% stacked and grouped bars in various data visualization-driven web apps."
+                    "meta": "This sample demonstrates the implementation of Kendo UI 100% stacked and grouped bars in various data visualization-driven web apps.",
+                    "new": "true"
                 }, {
                     "text": "Date axis",
                     "url": "bar-charts/date-axis.html",
@@ -131,6 +131,28 @@
                     "url": "bar-charts/multiple-axes.html",
                     "title": "Example of multiple axes implementation in Kendo UI Bar Chart",
                     "meta": "This sample illustrates how you can display a data series, using multiple axes in your business chart, built with Kendo UI HTML5 Bar Chart widget."
+                }, {
+                    "text": "Plot bands",
+                    "url": "bar-charts/plotbands.html",
+                    "title": "Plot Bands example in Kendo UI Bar chart",
+                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
+                    "requiresServer": "true"
+                }, {
+                    "text": "Gap and spacing",
+                    "url": "bar-charts/gap-spacing.html",
+                    "title": "Gap and spacing in Kendo UI Bar Charts | Kendo UI DataViz demo",
+                    "meta": "With this example, you will be able to take a closer look at gap and spacing in Kendo UI Bar Charts. Set gap and spacing values to play with the demo."
+                }, {
+                    "text": "Error Bars",
+                    "url": "bar-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Bar Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Bar Chart"
+                }, {
+                    "text": "Pan and zoom",
+                    "url": "bar-charts/pan-and-zoom.html",
+                    "title": "Pan and zoom in Bar charts | Kendo UI Bar Chart demo",
+                    "meta": "Achieve pan and zoom effect in Kendo UI Bar charts. This example demonstrates how you can apply pan and zoom to your bar charts.",
+                    "packages": [ "!mvc" ]
                 }, {
                     "text": "Binding to remote data",
                     "url": "bar-charts/remote-data.html",
@@ -149,35 +171,12 @@
                     "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group.",
                     "requiresServer": "true"
                 }, {
-                    "text": "Plot bands",
-                    "url": "bar-charts/plotbands.html",
-                    "title": "Plot Bands example in Kendo UI Bar chart",
-                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
-                    "requiresServer": "true"
-                }, {
-                    "text": "Gap and spacing",
-                    "url": "bar-charts/gap-spacing.html",
-                    "title": "Gap and spacing in Kendo UI Bar Charts | Kendo UI DataViz demo",
-                    "meta": "With this example, you will be able to take a closer look at gap and spacing in Kendo UI Bar Charts. Set gap and spacing values to play with the demo."
-                }, {
-                    "text": "Pan and zoom",
-                    "url": "bar-charts/pan-and-zoom.html",
-                    "title": "Pan and zoom in Bar charts | Kendo UI Bar Chart demo",
-                    "meta": "Achieve pan and zoom effect in Kendo UI Bar charts. This example demonstrates how you can apply pan and zoom to your bar charts.",
-                    "packages": [ "!mvc" ]
-                }, {
                     "text": "MVVM",
                     "url": "bar-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Error Bars",
-                    "url": "bar-charts/error-bars.html",
-                    "title": "Example of using ErrorBars for Kendo UI Bar Chart",
-                    "meta": "This demo shows how to use ErrorBars for Kendo UI Bar Chart",
-                    "new": "true"
                 }
             ],
             "name": "bar-charts"
