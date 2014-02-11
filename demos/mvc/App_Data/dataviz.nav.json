@@ -107,10 +107,20 @@
                     "title": "Kendo UI jQuery-powered Stacked Bar Charts | Kendo UI DataViz Demos",
                     "meta": "This example shows how Kendo UI Bar Charts component supports a stacked bar. The feature of the widget is enabled by setting the stacked property to true."
                 }, {
+                    "text": "100% Stacked bars",
+                    "url": "bar-charts/stacked100-bar.html",
+                    "title": "Kendo UI jQuery-powered 100% Stacked Bar Charts | Kendo UI DataViz Demos",
+                    "meta": "This example shows how Kendo UI Bar Charts component supports a 100% stacked bar. The feature of the widget is enabled by setting the stack type to '100%'."
+                }, {
                     "text": "Stacked and grouped bars",
                     "url": "bar-charts/grouped-stacked-bar.html",
                     "title": "Kendo UI Stacked and Grouped Bar Chart Example",
                     "meta": "This sample demonstrates the implementation of Kendo UI stacked and grouped bars in various data visualization-driven web apps."
+                }, {
+                    "text": "100% Stacked and grouped bars",
+                    "url": "bar-charts/grouped-stacked100-bar.html",
+                    "title": "Kendo UI 100% Stacked and Grouped Bar Chart Example",
+                    "meta": "This sample demonstrates the implementation of Kendo UI 100% stacked and grouped bars in various data visualization-driven web apps."
                 }, {
                     "text": "Date axis",
                     "url": "bar-charts/date-axis.html",
