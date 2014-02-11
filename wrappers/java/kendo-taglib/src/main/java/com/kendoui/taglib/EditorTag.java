@@ -55,6 +55,10 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("imageBrowser", value);
     }
 
+    public void setSerialization(com.kendoui.taglib.editor.SerializationTag value) {
+        setProperty("serialization", value);
+    }
+
     public void setTools(ToolsTag value) {
 
         setProperty("tools", value.tools());

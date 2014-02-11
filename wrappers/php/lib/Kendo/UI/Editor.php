@@ -51,6 +51,15 @@ class Editor extends \Kendo\UI\Widget {
     }
 
     /**
+    * Allows setting of serialization options.
+    * @param \Kendo\UI\EditorSerialization|array $value
+    * @return \Kendo\UI\Editor
+    */
+    public function serialization($value) {
+        return $this->setProperty('serialization', $value);
+    }
+
+    /**
     * Allows custom stylesheets to be included within the editing area.
     * @param array $value
     * @return \Kendo\UI\Editor
