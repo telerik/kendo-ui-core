@@ -507,10 +507,16 @@
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartRadarIcon",
             "items": [{
-                    "text": "Basic usage",
+                    "text": "Radar line",
                     "url": "radar-charts/index.html",
                     "title": "Kendo UI jQuery-based Radar Charts Demo",
                     "meta": "This demo illustrates how Kendo UI Radar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your radar chart."
+                }, {
+                    "text": "Smooth radar line",
+                    "url": "radar-charts/smooth-radar-line.html",
+                    "title": "Example of using smooth line (spline) style for the Kendo UI Radar Charts",
+                    "meta": "This demo shows how to configure the Kendo UI Radar Charts to use smooth line style (spline)",
+                    "requiresServer": "true"
                 }, {
                     "text": "Radar area",
                     "url": "radar-charts/radar-area.html",
@@ -544,13 +550,6 @@
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
-                    "requiresServer": "true"
-                }, {
-                    "text": "Smooth (Spline) line",
-                    "url": "radar-charts/smooth-radar-line.html",
-                    "title": "Example of using smooth line style for the Kendo UI Radar Charts",
-                    "meta": "This demo shows how to configure the Kendo UI Radar Charts to use smooth line style",
-                    "new": "true",
                     "requiresServer": "true"
                 }
             ],
