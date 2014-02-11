@@ -175,7 +175,8 @@
         module("Radar Bar Chart / Rendering", {
             setup: function() {
                 createRadarBarChart([positiveSeries]);
-            }
+            },
+            teardown: destroyChart
         });
 
         test("radius is set according to value", function() {
@@ -198,7 +199,8 @@
                 };
 
                 createRadarBarChart([stackedSeries, stackedSeries]);
-            }
+            },
+            teardown: destroyChart
         });
 
         test("radius is set according to stacked value", function() {
