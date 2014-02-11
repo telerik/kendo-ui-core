@@ -11,8 +11,7 @@
 
     (function ($, undefined) {
         // Imports ================================================================
-        var kendo = window.kendo,
-            diagram = kendo.diagram,
+        var diagram = kendo.diagram,
             ui = kendo.ui,
             Widget = ui.Widget,
             Class = kendo.Class,
@@ -97,31 +96,25 @@
             TRANSFORMED = "transformed",
             ROTATED = "rotated";
 
-        diagram.DefaultConnectors = [
-            {
-                name: TOP,
-                description: "Top Connector"
-            },
-            {
-                name: RIGHT,
-                description: "Right Connector"
-            },
-            {
-                name: BOTTOM,
-                description: "Bottom Connector"
-            },
-            {
-                name: LEFT,
-                Description: "Left Connector"
-            },
-            {
-                name: AUTO,
-                Description: "Auto Connector",
-                position: function (shape) {
-                    return shape.getPosition("center");
-                }
+        diagram.DefaultConnectors = [{
+            name: TOP,
+            description: "Top Connector"
+        }, {
+            name: RIGHT,
+            description: "Right Connector"
+        }, {
+            name: BOTTOM,
+            description: "Bottom Connector"
+        }, {
+            name: LEFT,
+            Description: "Left Connector"
+        }, {
+            name: AUTO,
+            Description: "Auto Connector",
+            position: function (shape) {
+                return shape.getPosition("center");
             }
-        ];
+        }];
 
         var PanAdapter = kendo.Class.extend({
             init: function (panState) {
@@ -1254,7 +1247,9 @@
                     size: 10,
                     angle: 10
                 },
-                shapeOptions: {},
+                shapeOptions: {
+                    undoable: true
+                },
                 connectionOptions: {},
                 shapes: []
             },
@@ -1284,7 +1279,7 @@
 
                 that.destroyScroller();
 
-                if (that.options.dragAndDrop && kendo.ui.DropTarget) {
+                if (that.options.dragAndDrop && ui.DropTarget) {
                     that.element.kendoDropTarget("destroy");
                 }
             },
@@ -1332,7 +1327,7 @@
                         options.loadShape(itemOptions);
                     }
                     itemOptions.diagram = this; // complex shapes need access to the external shape libraries
-                    this.addShape(new Shape(itemOptions), {undoable: false});
+                    this.addShape(new Shape(itemOptions), { undoable: false });
                 }
 
                 for (i = 0; i < json.connections.length; i++) {
@@ -1419,21 +1414,20 @@
              */
             addShape: function (item, options) {
                 var shape,
+                    unit,
                     shapeOptions = this.options.shapeOptions;
 
                 if (item instanceof Shape) {
                     shapeOptions = deepExtend({}, shapeOptions, options);
+                    item.redraw(shapeOptions);
                     shape = item;
-                    shape.redraw(shapeOptions);
                 } else { // consider it a point
-                    shapeOptions = deepExtend({}, shapeOptions, options, item);
-                    deepExtend(shapeOptions, { x: item.x, y: item.y });
+                    shapeOptions = deepExtend({}, shapeOptions, item);
                     shape = new Shape(shapeOptions);
                 }
 
                 if (shapeOptions.undoable) {
-                    var unit = new kendo.diagram.AddShapeUnit(shape, this);
-                    this.undoRedoService.add(unit);
+                    this.undoRedoService.add(new diagram.AddShapeUnit(shape, this));
                 } else {
                     this.shapes.push(shape);
                     shape.diagram = this;
@@ -1444,8 +1438,10 @@
                 shape.redraw();
 
                 // for shapes which have their own internal layout mechanism
-                if (shape.hasOwnProperty("layout"))
+                if (shape.hasOwnProperty("layout")) {
                     shape.layout(shape);
+                }
+
                 return shape;
             },
             /**
@@ -2070,7 +2066,7 @@
             _drop: function () {
                 var that = this,
                     options = that.options;
-                if (options.dragAndDrop && kendo.ui.DropTarget) {
+                if (options.dragAndDrop && ui.DropTarget) {
                     this.element.kendoDropTarget({
                         drop: function (e) {
                             var item, pos, dp, normal;
@@ -2079,6 +2075,8 @@
                                 pos = e.draggable.hintOffset;
                                 dp = that.documentToCanvasPoint(new Point(pos.left, pos.top));
                                 normal = that._normalizePointZoom(dp);
+                                item.x = normal.x;
+                                item.y = normal.y;
 
                                 that.addShape(item);
                             }
@@ -2211,7 +2209,7 @@
                     };
                     shape = new Shape(opt, node);
                     that.addShape(shape);
-                    that._dataMap.push({uid: node.uid, shape: shape});
+                    that._dataMap.push({ uid: node.uid, shape: shape });
                     return shape;
                 }
 

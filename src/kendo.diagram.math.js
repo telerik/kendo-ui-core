@@ -2784,9 +2784,11 @@ var __meta__ = {
             if (Utils.isUndefined(p)) {
                 p = new diagram.Point(0, 0);
             }
+
             if (Utils.isUndefined(id)) {
                 id = randomId();
             }
+
             shapeOptions = kendo.deepExtend({
                 width: 20,
                 height: 20,
@@ -2794,10 +2796,12 @@ var __meta__ = {
                 radius: 10,
                 background: "#778899",
                 data: "circle",
-                undoable: false
+                undoable: false,
+                x: p.x,
+                y: p.y
             }, shapeOptions);
 
-            return kendoDiagram.addShape(p, shapeOptions);
+            return kendoDiagram.addShape(shapeOptions);
         },
         /**
          * The method used by the diagram creation to instantiate a connection.

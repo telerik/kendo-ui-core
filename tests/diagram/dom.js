@@ -78,7 +78,7 @@
     });
 
     test("Bring into view - shape", function () {
-        var s = diagram.addShape(new Point());
+        var s = diagram.addShape({});
         var rect = s.bounds(),
             viewport = diagram.viewport();
 
@@ -92,8 +92,12 @@
     });
 
     test("Bring into view - many shapes", function () {
-        var s = diagram.addShape(new Point());
-        var s1 = diagram.addShape(new Point(500, 500));
+        var s = diagram.addShape({});
+        var point = new Point(500, 500)
+        var s1 = diagram.addShape({
+            x: point.x,
+            y: point.y
+        });
         var rect = s.bounds().union(s1.bounds()),
             viewport = diagram.viewport();
 
@@ -103,7 +107,7 @@
     });
 
     test("Bring into view - align top right", function () {
-        var s = diagram.addShape(new Point());
+        var s = diagram.addShape({});
         var rect = s.bounds("transformed"),
             viewport = diagram.viewport();
 
@@ -114,7 +118,7 @@
     });
 
     test("Bring into view - align center bottom", function () {
-        var s = diagram.addShape(new Point());
+        var s = diagram.addShape({});
         var rect = s.bounds("transformed"),
             viewport = diagram.viewport();
 
@@ -203,7 +207,7 @@
     });
 
     test("Shape bounds changed event is raised after position set", function () {
-        var s = diagram.addShape(new Point(0, 0)),
+        var s = diagram.addShape({}),
             raised;
 
         diagram.bind("boundsChange", function () {
@@ -215,7 +219,7 @@
     });
 
     test("Shape bounds changed event is raised after bounds set", function () {
-        var s = diagram.addShape(new Point(0, 0)),
+        var s = diagram.addShape({}),
             raised;
 
         diagram.bind("boundsChange", function () {
@@ -228,7 +232,7 @@
     });
 
     test("Shape visual bounds is ok after zoom", function () {
-        var s = diagram.addShape(new Point(0, 0));
+        var s = diagram.addShape({});
         var z = 0.5;
         z = diagram.zoom(z);
 
@@ -247,7 +251,7 @@
             called = true;
         });
 
-        var addedShape = diagram.addShape(new Point(0, 0));
+        var addedShape = diagram.addShape({});
         ok(called, "itemschange event should be raised");
         equal(eventShape, addedShape, "the reported shape should be the same as the added");
     });
@@ -255,7 +259,7 @@
     test("Remove shape raises itemschange event", function() {
         var eventShape = null,
             called = false,
-            shape = diagram.addShape(new Point(0, 0));
+            shape = diagram.addShape({});
 
         diagram.bind("itemsChange", function(args) {
             eventShape = args.removed[0];
@@ -269,7 +273,8 @@
 
     test("Remove multiple items raises itemschange event", function() {
         var eventShapes = [],
-            shapes = [diagram.addShape(new Point(0, 0)), diagram.addShape(new Point(1, 0))];
+            point = new Point(1, 0),
+            shapes = [diagram.addShape({}), diagram.addShape({ x: point.x, y: point.y })];
 
         diagram.bind("itemsChange", function(args) {
             eventShapes = args.removed;
@@ -292,8 +297,9 @@
     });
 
     test("Connection connect - set auto connectors test", function () {
-        var s1 = diagram.addShape(new Point(0, 0));
-        var s2 = diagram.addShape(new Point(100, 0));
+        var s1 = diagram.addShape({});
+        var point = new Point(100, 0);
+        var s2 = diagram.addShape({ x: point.x, y: point.y });
 
         var c1 = diagram.connect(s1, s2);
         equal(c1.sourceConnector.options.name, "Auto");
@@ -301,8 +307,9 @@
     });
 
     test("Connection connect - resolve auto connectors test", function () {
-        var s1 = diagram.addShape(new Point(0, 0));
-        var s2 = diagram.addShape(new Point(100, 0));
+        var s1 = diagram.addShape({});
+        var point = new Point(100, 0);
+        var s2 = diagram.addShape({ x: point.x, y: point.y });
 
         var c1 = diagram.connect(s1, s2);
         equal(c1._resolvedSourceConnector.options.name, "Right");
@@ -310,8 +317,10 @@
     });
 
     test("Connection connect - resolve auto connectors border test", function () {
-        var s1 = diagram.addShape(new Point(100, 100));
-        var s2 = diagram.addShape(new Point(160, 160));
+        var point1 = new Point(100, 100);
+        var s1 = diagram.addShape({ x: point1.x, y: point1.y });
+        var point2 = new Point(160, 160);
+        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
 
         var c1 = diagram.connect(s1, s2);
         equal(c1._resolvedSourceConnector.options.name, "Bottom");
@@ -319,8 +328,10 @@
     });
 
     test("Connection connect - resolve auto connectors after move test", function () {
-        var s1 = diagram.addShape(new Point(100, 100));
-        var s2 = diagram.addShape(new Point(160, 160));
+        var point1 = new Point(100, 100);
+        var s1 = diagram.addShape({ x: point1.x, y: point1.y });
+        var point2 = new Point(160, 160);
+        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
 
         var c1 = diagram.connect(s1, s2);
         equal(c1._resolvedSourceConnector.options.name, "Bottom");
@@ -333,8 +344,9 @@
     });
 
     test("Connection detach", function () {
-        var s1 = diagram.addShape(new Point(0, 0));
-        var s2 = diagram.addShape(new Point(200, 0));
+        var s1 = diagram.addShape({});
+        var point2 = new Point(200, 0);
+        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
 
         var c1 = diagram.connect(s1, s2);
         c1.select(true);

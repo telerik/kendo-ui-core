@@ -103,10 +103,12 @@
             height: 100,
             id: id,
             background: "#778899",
-            data: "rectangle"
+            data: "rectangle",
+            x: p.x,
+            y: p.y
         }, shapeOptions);
 
-        return kendoDiagram.addShape(p, shapeOptions);
+        return kendoDiagram.addShape(shapeOptions);
     };
 
     var AddCircle = function (canvas, p, radius) {
