@@ -96,9 +96,13 @@
          },
          "version": "string"
      },
-     "ui": {<%=
-        namespaces["kendo.ui"].map { |component| component.json_typedef }.reject(&:blank?).join(",") %>
-     }
+     "ui": {<%= component_json_typedefs namespaces["kendo.ui"] %> }
+% if suite =~ /all|dataviz/
+    ,"dataviz": { "ui": { <%= component_json_typedefs namespaces["kendo.dataviz.ui"] %> } }
+% end
+% if suite =~ /all|mobile/
+     ,"mobile": { "ui": { <%= component_json_typedefs namespaces["kendo.mobile.ui"] %> } }
+% end
   },
   "jQuery": {
     "fn": {<%=

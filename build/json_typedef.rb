@@ -9,10 +9,10 @@ module CodeGen::JsonTypeDef
     TYPES = {
         'Number' => 'number',
         'String' => 'string',
-        'Boolean' => 'boolean',
+        'Boolean' => 'bool',
         'Document' => 'Document',
         'Range' => 'Range',
-        'Object' => 'object',
+        'Object' => 'Object',
         'Array' => '[]',
         'Date' => 'Date',
         'Function' => 'Function',
@@ -29,7 +29,7 @@ module CodeGen::JsonTypeDef
     }
 
     def self.type(type)
-        return type if type.start_with?('kendo')
+        return "+#{type}" if type.start_with?('kendo')
 
         result = TYPES[type]
 
@@ -226,13 +226,11 @@ module CodeGen::JsonTypeDef
         end
 
         def json_typedef_type
-            return type if type.start_with?('kendo')
+            raise "#{name} doesn't have a type specified" unless @type
 
-            result = TYPES[type]
+            return 'Object' if @type.size > 1
 
-            raise "No JsonTypeDef mapping for type #{type}" unless result
-
-            result
+            CodeGen::JsonTypeDef.type(@type[0])
         end
     end
 
@@ -245,12 +243,8 @@ module CodeGen::JsonTypeDef
             Parameter
         end
 
-        def type_script_type
-            @owner.type_script_type + @name.pascalize
-        end
-
-        def type_script_interface
-            PARAMETER.result(binding)
+        def json_typedef_type
+            'Object'
         end
 
         def unique_parameters
@@ -385,6 +379,10 @@ def get_json_typedef(name, sources)
     components = components.sort { |a, b| a.plugin <=> b.plugin }
 
     namespaces = components.group_by { |component| component.namespace }
+
+    def component_json_typedefs (namespace)
+      namespace.map { |component| component.json_typedef }.reject(&:blank?).join(",") 
+    end
 
     suite = name.match(/kendo\.([^.]*)\.json/).captures.first
 
