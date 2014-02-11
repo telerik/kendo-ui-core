@@ -11446,6 +11446,23 @@ If function is assigned, the current path and image name will be provided.</desc
 
 
     <tag>
+        <description>Allows setting of serialization options.</description>
+        <name>editor-serialization</name>
+        <tag-class>com.kendoui.taglib.editor.SerializationTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Indicates whether the characters outside the ASCII range will be encoded as HTML entities. By default, they are encoded.</description>
+            <name>entities</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>A collection of tools that are used to interact with the Editor.
 Tools may be switched on by specifying their name.
 Custom tools and tools that require configuration are defined as objects.The available editor commands are:</description>
