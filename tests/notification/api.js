@@ -327,4 +327,65 @@
         equal(notification.getNotifications().length, 2);
     });
 
+    test("destroy removes content click handler from popup", function() {
+        createNotification({
+            autoHideAfter: 0
+        });
+
+        notification.show("foo");
+
+        notification.destroy();
+
+        $(".k-notification").click();
+
+        equal($(".k-notification").length, 1);
+    });
+
+    test("destroy removes button click handler from popup", function() {
+        createNotification({
+            autoHideAfter: 0,
+            hideOnClick: false,
+            button: true
+        });
+
+        notification.show("foo");
+
+        notification.destroy();
+
+        $(".k-notification .k-i-close").click();
+
+        equal($(".k-notification").length, 1);
+    });
+
+    test("destroy removes content click handler from static", function() {
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: 0
+        });
+
+        notification.show("foo");
+
+        notification.destroy();
+
+        $(".k-notification").click();
+
+        equal($(".k-notification").length, 1);
+    });
+
+    test("destroy removes button click handler from static", function() {
+        createNotification({
+            appendTo: QUnit.fixture,
+            autoHideAfter: 0,
+            hideOnClick: false,
+            button: true
+        });
+
+        notification.show("foo");
+
+        notification.destroy();
+
+        $(".k-notification .k-i-close").click();
+
+        equal($(".k-notification").length, 1);
+    });
 })();

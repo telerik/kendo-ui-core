@@ -314,8 +314,7 @@ var __meta__ = {
 
         _hideStatic: function(wrapper) {
             wrapper.kendoAnimate(extend(this.options.animation.close, { complete: function() {
-                wrapper.off(NS);
-                wrapper.find(KICLOSE).off(NS);
+                wrapper.off(NS).find(KICLOSE).off(NS);
                 wrapper.remove();
             }}));
             this.trigger(HIDE, {element: wrapper});
@@ -425,6 +424,11 @@ var __meta__ = {
             if (newOptions.stacking !== undefined || newOptions.position !== undefined) {
                 that._compileStacking(options.stacking, options.position.top);
             }
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.getNotifications().off(NS).find(KICLOSE).off(NS);
         }
     });
 
