@@ -460,9 +460,9 @@ var __meta__ = {
                 return column.field == field || column.title == field;
             })[0];
 
-            var locked = !!column.locked;
+            var locked = column.locked === true;
             var length = grep(columns, function(column) {
-                return !column.hidden && !!column.locked == locked;
+                return !column.hidden && ((column.locked && locked) || (!column.locked && !locked));
             }).length;
 
             var lockItem = this.wrapper.find(".k-lock").removeClass("k-state-disabled");
