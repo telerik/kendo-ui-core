@@ -9,16 +9,25 @@ BUILDER_CONFIG_NAME = File.join('config', 'kendo-config.json')
 BUILDER_INDEX_TEMPLATE = ERB.new(File.read(File.join('download-builder', 'index.html.erb')))
 
 #Build minified version with no AMD headers for use by the download builder
+def compilejs_no_amd(t)
+    FileUtils.mkdir_p File.dirname(t.name)
+    File.open t.name, 'w' do |f|
+        contents = File.read(t.source)
+        contents.sub!("$KENDO_VERSION", VERSION)
+
+        f.write contents;
+    end
+    compilejs(t.name, "--no-amd --no-srcmap")
+end
+
 rule /^dist\/download-builder\/js\/.+\.min\.js$/ =>
     lambda { |t| t.sub(/^dist\/download-builder\/js/, 'src').sub('.min.js', '.js') } do |t|
-        FileUtils.mkdir_p File.dirname(t.name)
-        File.open t.name, 'w' do |f|
-            contents = File.read(t.source)
-            contents.sub!("$KENDO_VERSION", VERSION)
+        compilejs_no_amd(t)
+    end
 
-            f.write contents;
-        end
-        compilejs(t.name, "--no-amd --no-srcmap")
+rule /^dist\/download-builder.+\.min\.js$/ =>
+    lambda { |t| t.sub(/^dist\/download-builder.+\/js/, 'src').sub('.min.js', '.js') } do |t|
+        compilejs_no_amd(t)
     end
 
 namespace :download_builder do
