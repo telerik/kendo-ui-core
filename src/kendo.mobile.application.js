@@ -70,7 +70,7 @@ var __meta__ = {
                 classes.push("km-" + os.name);
             }
         }
-        if (os.name == "ios" && os.majorVersion != 7) {
+        if ((os.name == "ios" && os.majorVersion < 7) || os.name != "ios") {
             classes.push("km-" + os.name + os.majorVersion);
         }
         classes.push("km-" + os.majorVersion);
