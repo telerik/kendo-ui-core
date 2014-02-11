@@ -36,7 +36,6 @@ var __meta__ = {
                 .on("focus" + ns, function() {
                     if (!element.val()) {
                         element.val(that._emptyMask);
-                        caret(element[0], 0);
                     } else {
                         element.select();
                     }
@@ -48,6 +47,10 @@ var __meta__ = {
                 });
 
             this.value(that.options.value);
+
+            that._bind();
+
+            //TODO: MVVM notify
         },
 
         options: {
@@ -72,6 +75,30 @@ var __meta__ = {
             this._mask(0, this._maskLength, value);
         },
 
+        //TODO: enable method
+        //TODO: readonly method
+
+        _bind: function() {
+            var that = this;
+            var element = that.element;
+            var eventName = ("onpropertychange" in element[0] ? "propertychange" : "input") + ns;
+
+            element.on(eventName, function (e) {
+                var value = element.val();
+
+                if (value !== this._old) {
+                    var start = caret(element[0])[0];
+                    var unmasked = that._unmask(value.substring(start), start);
+
+                    that._old = value.substring(0, start) + that._emptyMask.substring(start);
+                    element.val(that._old);
+
+                    that._mask(start, start, unmasked);
+                    caret(element[0], start);
+                }
+            });
+        },
+
         _paste: function(e) {
             var that = this;
             var element = e.target;
@@ -89,7 +116,7 @@ var __meta__ = {
                 var end = caret(element)[0];
                 var pasted = value.substring(start, end);
 
-                element.value = value.substring(0, start) + value.substring(end);
+                element.value = that._old = value.substring(0, start) + value.substring(end);
                 caret(element, start);
 
                 that._mask(start, start, pasted);
@@ -178,7 +205,7 @@ var __meta__ = {
                 start = this._find(start + 1);
             }
 
-            element.value = current.join("");
+            element.value = this._old = current.join("");
 
             if (kendo._activeElement() === element) {
                 caret(element, idx);
