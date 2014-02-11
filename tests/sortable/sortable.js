@@ -13,10 +13,10 @@
         setup: function() {
             QUnit.fixture.append(
                 '<ul id="sortable">' +
-                    '<li>foo</li>' +
-                    '<li>bar</li>' +
-                    '<li>baz</li>' +
-                    '<li>qux</li>' +
+                    '<li style="margin: 0; height: 18px;">foo</li>' +
+                    '<li style="margin: 0; height: 18px;">bar</li>' +
+                    '<li style="margin: 0; height: 18px;">baz</li>' +
+                    '<li style="margin: 0; height: 18px;">qux</li>' +
                 '</ul>'
             );
 
@@ -143,10 +143,10 @@
         setup: function() {
             QUnit.fixture.append(
                 '<ul id="sortable">' +
-                    '<li class="item">foo</li>' +
-                    '<li class="filtered">bar</li>' +
-                    '<li class="item">baz</li>' +
-                    '<li class="item disabled">qux</li>' +
+                    '<li style="margin:0; height: 18px;" class="item">foo</li>' +
+                    '<li style="margin:0; height: 18px;" class="filtered">bar</li>' +
+                    '<li style="margin:0; height: 18px;" class="item">baz</li>' +
+                    '<li style="margin:0; height: 18px;" class="item disabled">qux</li>' +
                 '</ul>'
             );
 
