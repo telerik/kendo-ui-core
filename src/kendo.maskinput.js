@@ -204,7 +204,6 @@ var __meta__ = {
             return -1;
         },
 
-        //TODO: Refactor _unmask method
         _unmask: function(value, idx) {
             if (!value) {
                 return "";
@@ -212,43 +211,39 @@ var __meta__ = {
 
             value = (value + "").split("");
 
-            var result = "";
-
+            var char;
+            var token;
             var charIdx = 0;
             var tokenIdx = idx || 0;
 
-            var tokensLength = this.tokens.length;
+            var empty = this.options.emptySymbol;
+
             var valueLength = value.length;
+            var tokensLength = this.tokens.length;
 
-            var char;
-            var token;
+            var result = "";
 
-            while (tokenIdx < tokensLength) { // || charIdx < valueLength) {
+            while (tokenIdx < tokensLength) {
                 char = value[charIdx];
                 token = this.tokens[tokenIdx];
 
-                if (char === token) { //char is equal to static token. move forward
-                    charIdx += 1;
-                    tokenIdx += 1;
-                } else if (char === this.options.emptySymbol) { //char is empty
-                    result += this.options.emptySymbol;
+                if (char === token || char === empty) {
+                    result += char === empty ? empty : "";
 
                     charIdx += 1;
                     tokenIdx += 1;
-                } else if (typeof token !== "string") { //token is rule
-
-                    if (token.test(char)) { //check if valid
+                } else if (typeof token !== "string") {
+                    if (token.test && token.test(char)) {
                         result += char;
-
                         tokenIdx += 1;
                     }
 
                     charIdx += 1;
-                } else { //token is static string
+                } else {
                     tokenIdx += 1;
                 }
 
-                if (charIdx >= valueLength) { //test this
+                if (charIdx >= valueLength) {
                     break;
                 }
             }
