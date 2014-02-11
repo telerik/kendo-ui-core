@@ -28,6 +28,11 @@
                     "title": "Kendo UI jQuery stacked area chart example",
                     "meta": "This demo shows how the stacked area is created with KendoChart. Learn how to visualize series that should be stacked in the chart."
                 }, {
+                    "text": "100% Stacked area",
+                    "url": "area-charts/stacked100-area.html",
+                    "title": "Kendo UI jQuery 100% stacked area chart example",
+                    "meta": "This demo shows how a 100% stacked area chart is created with KendoChart. Learn how to visualize series that should be stacked to 100% in the chart."
+                }, {
                     "text": "Date axis",
                     "url": "area-charts/date-axis.html",
                     "title": "Date axis sample for Kendo UI Area Charts",
