@@ -699,21 +699,21 @@
             }
         });
 
-        Shape.createShapeVisual = function (options) {
+          Shape.createShapeVisual = function (options) {
             var diagram = options.diagram;
             delete options.diagram; // avoid stackoverflow and reassign later on again
             var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }),
                 visualTemplate = shapeOptions.data; // Shape visual should not have position in its parent group.
 
-            // if external serializationSource we need to consult the attached libraries
-            if (!kendo.isFunction(shapeOptions.data) && shapeOptions.hasOwnProperty("serializationSource") && shapeOptions.serializationSource === "external") {
+            function externalLibraryShape(libraryShapeName, options, shapeOptions) {
+                // if external serializationSource we need to consult the attached libraries
                 // shapeOptions.diagram is set when the diagram starts deserializing
                 if (diagram.libraries && diagram.libraries.length > 0) {
                     for (var i = 0; i < diagram.libraries.length; i++) {
                         var library = diagram.libraries[i];
                         for (var j = 0; j < library.length; j++) {
                             var shapeDefinition = library[j];
-                            if (shapeDefinition.options.name === shapeOptions.name && shapeDefinition.options.serializationSource === "external") {
+                            if (shapeDefinition.options.name === libraryShapeName && shapeDefinition.options.serializationSource === "external") {
                                 // the JSON options do not contain the funcs managing the complex layout, so need to transfer them
                                 options.layout = shapeDefinition.options.layout;
                                 options.data = shapeDefinition.options.data;
@@ -724,8 +724,9 @@
                     }
                 }
             }
-            if (isString(visualTemplate)) {
-                switch (shapeOptions.data.toLocaleLowerCase()) {
+
+            function simpleShape(name, shapeOptions) {
+                switch (name.toLocaleLowerCase()) {
                     case "rectangle":
                         return new Rectangle(shapeOptions);
                     case "circle":
@@ -737,10 +738,78 @@
                         return p;
                 }
             }
-            else if (isFunction(visualTemplate)) {// custom template
-                return visualTemplate.call(this, shapeOptions);
+
+            function functionShape(func, context, shapeOptions) {
+                return func.call(context, shapeOptions);
             }
-            return new Rectangle(shapeOptions);
+
+            var parseXml;
+
+            if (typeof window.DOMParser != "undefined") {
+                parseXml = function (xmlStr) {
+                    return ( new window.DOMParser() ).parseFromString(xmlStr, "image/svg+xml");
+                };
+            } else if (typeof window.ActiveXObject != "undefined" &&
+                new window.ActiveXObject("Microsoft.XMLDOM")) {
+                parseXml = function (xmlStr) {
+                    var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
+                    xmlDoc.async = "false";
+                    xmlDoc.loadXML(xmlStr);
+                    return xmlDoc;
+                };
+            } else {
+                throw new Error("No XML parser found");
+            }
+
+            function svgShape(svgString, shapeOptions) {
+                var fullString = '<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' + svgString + '</svg>';
+                var result = parseXml(fullString);
+                var importedNode = document.importNode(
+                    result /*document*/
+                    .childNodes[0] /*SVG root*/
+                    .childNodes[0] /*SVG group*/
+                    , true);
+                var g =  new kendo.diagram.Group();
+                g.append(new kendo.diagram.Visual(importedNode));
+                return g;
+            }
+
+            if (!kendo.isFunction(shapeOptions.data) && shapeOptions.hasOwnProperty("serializationSource") && shapeOptions.serializationSource === "external") {
+                return externalLibraryShape(shapeOptions.name, options, shapeOptions);
+            }
+            else if (isString(visualTemplate)) {
+                return simpleShape(shapeOptions.data, shapeOptions);
+            }
+            else if (isFunction(visualTemplate)) {// custom template
+                return functionShape(visualTemplate, this, shapeOptions);
+            }
+            else if (Object.prototype.toString.call(visualTemplate) === '[object Object]') { //literal
+
+                var origin = visualTemplate.origin || "internal";
+
+                if(origin.toLocaleLowerCase()==="external"){
+                    var libraryShapeName = visualTemplate.library;
+                    return externalLibraryShape(libraryShapeName, options, shapeOptions);
+                }
+                else{
+                    var type = visualTemplate.type || "simple";
+                    var definition = visualTemplate.definition;
+
+                    if (type.toLocaleLowerCase() === "simple") {
+                        return simpleShape(definition, shapeOptions);
+                    }
+                    else if (type.toLocaleLowerCase() === "svg") {
+                        return svgShape(definition, shapeOptions);
+                    }
+                    else if (type.toLocaleLowerCase() === "function") {
+                        return functionShape(definition, this, shapeOptions);
+                    }
+                }
+
+            }
+            else {
+                return new Rectangle(shapeOptions);
+            }
         };
 
         /**
