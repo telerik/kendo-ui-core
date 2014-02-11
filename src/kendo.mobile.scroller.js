@@ -121,12 +121,8 @@ var __meta__ = {
                     e.touch[that.axis].velocity * that.velocityMultiplier,
                     MAX_VELOCITY), -MAX_VELOCITY);
 
-                if (that.velocity) {
-                    that.tapCapture.captureNext();
-                    Animation.fn.start.call(that);
-                } else {
-                    that._end();
-                }
+                that.tapCapture.captureNext();
+                Animation.fn.start.call(that);
             }
         },
 
