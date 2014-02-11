@@ -372,5 +372,59 @@
             equal(input.val(), "56--34");
             equal(caret(input[0])[0], 4);
         });
+
+    });
+
+    asyncTest("MaskInput pastes correctly when caret is on static symbol", 2, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "00--00"
+        });
+
+        input.focus();
+        input.val("12--34");
+        caret(input[0], 2);
+
+        input.trigger("paste");
+        input.val("1256--34");
+        caret(input[0], 4);
+
+        setTimeout(function() {
+            start();
+            equal(input.val(), "12--56");
+            equal(caret(input[0])[0], 6);
+        });
+    });
+
+    test("MaskInput umasks correctly mu2tiple selection on paste", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(000) 000"
+        });
+
+        input.focus();
+        input.val("(123) 555");
+        caret(input[0], 3, 8);
+
+        input.trigger("paste");
+        equal(input.val(), "(125) ___");
+    });
+
+    asyncTest("MaskInput inserts value correctly after unmasking multiple selection", 2, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(000) 000"
+        });
+
+        input.focus();
+        input.val("(123) 555");
+        caret(input[0], 5, 8);
+
+        input.trigger("paste");
+        input.val("(123) 775__");
+        caret(input[0], 8);
+
+        setTimeout(function() {
+            start();
+            equal(input.val(), "(123) 775");
+            equal(caret(input[0])[0], 8);
+        });
     });
 })();

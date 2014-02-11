@@ -15,7 +15,7 @@ var __meta__ = {
     var keys = kendo.keys;
     var ui = kendo.ui;
     var Widget = ui.Widget;
-    var ns = ".kendoNumericTextBox";
+    var ns = ".kendoMaskInput";
 
     var MaskInput = Widget.extend({
         init: function(element, options) {
