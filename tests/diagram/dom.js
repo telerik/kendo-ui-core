@@ -2,6 +2,7 @@
 ///<reference path="../refs/kendo.core.js" />
 ///<reference path="../refs/kendo.dataviz.core.js" />
 ///<reference path="../js/diagram.math.js" />
+///<reference path="common.js" />
 ///<reference path="mock-helper.js" />
 
 (function() {
@@ -192,6 +193,52 @@
     test("zoom at position changes diagram zoom", function () {
         var zoom = diagram.zoom(1.1, new Point(200, 200));
         equal(zoom, 1.1);
+    });
+
+    module("Coordinate transformations", {
+        setup: function() {
+            QUnit.fixture.html('<div id="canvas" />');
+            diagram = $("#canvas").kendoDiagram().getKendoDiagram();
+        },
+        teardown: function() {
+            diagram.destroy();
+        }
+    });
+
+    test("transform document point to view point", function() {
+        var doc = $("#canvas").offset(),
+            point = new Point(100, 100);
+
+        var result = diagram.documentToView(point);
+
+        roughlyEqualPoint(result, new Point(point.x - doc.left, point.y - doc.top), "transformed point should be relative to the diagram view");
+    });
+
+    test("transform view point to document point", function() {
+        var doc = $("#canvas").offset(),
+            point = new Point(100, 100);
+
+        var result = diagram.viewToDocument(point);
+
+        roughlyEqualPoint(result, new Point(point.x + doc.left, point.y + doc.top), "transformed point should include the diagram container offset");
+    });
+
+    test("transform view to layer point", function() {
+        var point = new Point(100, 100);
+        diagram.zoom(1.5);
+
+        var result = diagram.viewToLayer(point);
+
+        roughlyEqualPoint(result, point.times(1/1.5), "view point should correspond to a scaled down vector in the layer");
+    });
+
+    test("transform layer to view point", function() {
+        var point = new Point(100, 100);
+        diagram.zoom(1.5);
+
+        var result = diagram.layerToView(point);
+
+        roughlyEqualPoint(result, point.times(1.5), "layer point should appear as zoomed in the view coordinate system");
     });
 
     module("Shape bounds", {
