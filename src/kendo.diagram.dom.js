@@ -662,7 +662,7 @@
                 var bounds = this.bounds(),
                     tl = bounds.topLeft(),
                     br = bounds.bottomRight();
-                return Rect.fromPoints(this.diagram.toOrigin(tl), this.diagram.toOrigin(br));
+                return Rect.fromPoints(this.diagram.layerToView(tl), this.diagram.layerToView(br));
             },
             _rotatedBounds: function () {
                 var bounds = this.bounds().rotatedBounds(this.rotate().angle),
@@ -1028,7 +1028,7 @@
              * @returns {Rect}
              */
             bounds: function (value) {
-                if (value) {
+                if (value && !isString(value)) {
                     this._bounds = value;
                 } else {
                     return this._bounds;
@@ -1269,7 +1269,7 @@
                     .mousewheel(proxy(that._wheel, that), { ns: NS })
                     .on("keydown" + NS, proxy(that._keydown, that));
                 that.selector = new Selector(that);
-                // TODO: We may consider using real Clipboard API once is supported by the standart.
+                // TODO: We may consider using real Clipboard API once is supported by the standard.
                 that._clipboard = [];
                 that._drop();
                 that._initEditor();
@@ -1771,7 +1771,7 @@
                     if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
                         staticPoint = new kendo.diagram.Point(Math.round(staticPoint.x), Math.round(staticPoint.y));
                         var zoomedPoint = staticPoint.times(zoom);
-                        var viewportVector = staticPoint.times(currentZoom).plus(this._pan);
+                        var viewportVector = this.layerToView(staticPoint);
                         var raw = viewportVector.minus(zoomedPoint);//pan + zoomed point = viewpoint vector
                         this._storePan(new kendo.diagram.Point(Math.round(raw.x), Math.round(raw.y)));
                     }
@@ -1875,17 +1875,6 @@
                     this._copyOffset += 1;
                 }
             },
-            // Miro: I would make that private and/or use toOrigin instead.
-            documentToCanvasPoint: function (dPoint) {
-                var scroll = this._pan;
-
-                return this.documentToViewportPoint(dPoint).minus(scroll);
-            },
-            documentToViewportPoint: function (point) {
-                var containerOffset = $(this.canvas.element).offset();
-
-                return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
-            },
             /**
              * Gets the bounding rectangle of the given items.
              * @param items DiagramElement, Array of elements.
@@ -1914,25 +1903,49 @@
                 }
                 return rect;
             },
-            /**
-             * Transforms point or rect from main canvas coordinates to non-transformed (origin/visual).
-             * @param value Point, Rect.
-             * @returns {Point, Rect}
-             */
-            toOrigin: function (value) {
-                var result = value;
-                if (value instanceof Point) {
-                    if (this._matrix) {
-                        result = this._matrix.apply(value);
+            documentToView: function(point) {
+                var containerOffset = $(this.canvas.element).offset();
+
+                return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
+            },
+            viewToDocument: function(point) {
+                var containerOffset = $(this.canvas.element).offset();
+
+                return new Point(point.x + containerOffset.left, point.y + containerOffset.top);
+            },
+            viewToLayer: function(point) {
+                return this._transformWithMatrix(point, this._matrixInvert);
+            },
+            layerToView: function(point) {
+                return this._transformWithMatrix(point, this._matrix);
+            },
+            layerToCanvas: function(point) {
+                return this._transformWithMatrix(point, this._canvasMatrix);
+            },
+            canvasToLayer: function(point) {
+                return this._transformWithMatrix(point, this._canvasMatrixInvert);
+            },
+            documentToLayer: function(point) {
+                return this.viewToLayer(this.documentToView(point));
+            },
+            layerToDocument: function(point) {
+                return this.viewToDocument(this.layerToView(point));
+            },
+            _transformWithMatrix: function(point, matrix) {
+                var result = point;
+                if (point instanceof Point) {
+                    if (matrix) {
+                        result = matrix.apply(point);
                     }
                 }
                 else {
-                    var tl = this.toOrigin(value.topLeft()),
-                        br = this.toOrigin(value.bottomRight());
+                    var tl = this._transformWithMatrix(point.topLeft(), matrix),
+                        br = this._transformWithMatrix(point.bottomRight(), matrix);
                     result = Rect.fromPoints(tl, br);
                 }
                 return result;
             },
+
             setDataSource: function (dataSource) {
                 this.options.dataSource = dataSource;
                 this._dataSource();
@@ -2038,7 +2051,7 @@
                 var editor = this._editor,
                     options = editor.options,
                     nativeEditor = $(editor.native),
-                    bounds = this._editItem.bounds("absolute"),
+                    bounds = this.layerToView(this._editItem.bounds()),
                     cssDim = function (prop) {
                         return parseInt(nativeEditor.css(prop), 10);
                     },
@@ -2107,13 +2120,15 @@
             },
             _storePan: function (pan) {
                 this._pan = pan;
+                this._storeViewMatrix();
             },
             _zoomMainLayer: function () {
                 var zoom = this._zoom;
 
                 var transform = new CompositeTransform(0, 0, zoom, zoom);
                 transform.render(this.mainLayer.native);
-                this._matrix = transform.toMatrix();
+                this._storeCanvasMatrix(transform);
+                this._storeViewMatrix();
             },
             _transformMainLayer: function () {
                 var pan = this._pan,
@@ -2121,7 +2136,20 @@
 
                 var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
                 transform.render(this.mainLayer.native);
+                this._storeCanvasMatrix(transform);
+                this._storeViewMatrix();
+            },
+            _storeCanvasMatrix: function(canvasTransform) {
+                this._canvasMatrix = canvasTransform.toMatrix();
+                this._canvasMatrixInvert = canvasTransform.invert().toMatrix();
+            },
+            _storeViewMatrix: function() {
+                var pan = this._pan,
+                    zoom = this._zoom;
+
+                var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
                 this._matrix = transform.toMatrix();
+                this._matrixInvert = transform.invert().toMatrix();
             },
             _toIndex: function (items, indices) {
                 var result = this._getDiagramItems(items);
@@ -2134,14 +2162,14 @@
                 if (options.dragAndDrop && ui.DropTarget) {
                     this.element.kendoDropTarget({
                         drop: function (e) {
-                            var item, pos, dp, normal;
+                            var item, pos;
                             if (e.draggable && e.draggable.hint) {
                                 item = e.draggable.hint.data("data");
                                 pos = e.draggable.hintOffset;
-                                dp = that.documentToCanvasPoint(new Point(pos.left, pos.top));
-                                normal = that._normalizePointZoom(dp);
-                                item.x = normal.x;
-                                item.y = normal.y;
+                                pos = new Point(pos.left, pos.top);
+                                var transformed = that.documentToLayer(pos);
+                                item.x = transformed.x;
+                                item.y = transformed.y;
 
                                 that.addShape(item);
                             }
@@ -2375,9 +2403,9 @@
             _calculatePosition: function (e) {
                 var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
                     point = new Point(pointEvent.pageX, pointEvent.pageY),
-                    offset = this.documentToCanvasPoint(point);
+                    offset = this.documentToLayer(point);
 
-                return this._normalizePointZoom(offset);
+                return offset;
             },
             _normalizePointZoom: function (point) {
                 return point.times(1 / this.zoom());

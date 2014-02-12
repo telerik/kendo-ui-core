@@ -166,11 +166,13 @@ var __meta__ = {
             return m;
         },
         invert: function() {
-            var rotate = this.rotate.invert();
-            var scale = this.scale.invert();
+            var rotate = this.rotate ? this.rotate.invert() : undefined,
+                rotateMatrix = rotate ? rotate.toMatrix() : Matrix.unit(),
+                scale = this.scale ? this.scale.invert() : undefined,
+                scaleMatrix = scale ? scale.toMatrix() : Matrix.unit();
 
             var translatePoint = new Point(-this.translate.x, -this.translate.y);
-            translatePoint = rotate.toMatrix().times(scale.toMatrix()).apply(translatePoint);
+            translatePoint = rotateMatrix.times(scaleMatrix).apply(translatePoint);
             var translate = new Translation(translatePoint.x, translatePoint.y);
 
             var transform = new CompositeTransform();
