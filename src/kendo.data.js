@@ -1361,14 +1361,29 @@ var __meta__ = {
 
     var functions = {
         sum: function(accumulator, item, accessor) {
-            return (accumulator || 0) + accessor.get(item);
+            var value = accessor.get(item);
+
+            if (!isNumber(accumulator)) {
+                accumulator = value;
+            } else if (isNumber(value)) {
+                accumulator += value;
+            }
+
+            return accumulator;
         },
         count: function(accumulator) {
             return (accumulator || 0) + 1;
         },
         average: function(accumulator, item, accessor, index, length) {
-            accumulator = (accumulator || 0) + accessor.get(item);
-            if(index == length - 1) {
+            var value = accessor.get(item);
+
+            if (!isNumber(accumulator)) {
+                accumulator = value;
+            } else if (isNumber(value)) {
+                accumulator += value;
+            }
+
+            if(index == length - 1 && isNumber(accumulator)) {
                 accumulator = accumulator / length;
             }
             return accumulator;
@@ -1376,9 +1391,11 @@ var __meta__ = {
         max: function(accumulator, item, accessor) {
             var value = accessor.get(item);
 
-            accumulator = accumulator || 0;
+            if (!isNumber(accumulator)) {
+                accumulator = value;
+            }
 
-            if(accumulator < value) {
+            if(accumulator < value && isNumber(value)) {
                 accumulator = value;
             }
             return accumulator;
