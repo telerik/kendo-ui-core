@@ -2987,11 +2987,17 @@ var __meta__ = {
                     headerWrap = this.thead.closest(".k-grid-header-wrap"),
                     contentWidth = this.wrapper[0].clientWidth,
                     groups = this._groups(),
+                    scrollbar = kendo.support.scrollbar(),
                     cols = this.lockedHeader.find(">table>colgroup>col:not(.k-group-col, .k-hierarchy-col)"),
+                    colWidth,
                     width = 0;
 
                 for (var idx = 0, length = columns.length; idx < length; idx++) {
-                    width += cols.eq(idx).width();
+                    colWidth = cols[idx].style.width;
+                    if (colWidth && colWidth.indexOf("%") == -1) {
+                        width += parseInt(colWidth, 10);
+                    }
+                    //  width += cols.eq(idx).width();
                 }
 
                 if (groups > 0) {
@@ -3002,7 +3008,7 @@ var __meta__ = {
                 }
 
                 if (width >= contentWidth) {
-                    width = contentWidth - kendo.support.scrollbar();
+                    width = contentWidth - scrollbar;
                 }
 
                 this.lockedHeader
@@ -3012,7 +3018,7 @@ var __meta__ = {
                 headerWrap[0].style.width = this.thead.closest(".k-grid-header").width() - width - 2 + "px";
 
                 if (this.virtualScrollable) {
-                    contentWidth -= kendo.support.scrollbar();
+                    contentWidth -= scrollbar;
                 }
 
                 this.content[0].style.width = contentWidth - width - 2 + "px";
@@ -3913,7 +3919,7 @@ var __meta__ = {
                 container;
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
-                if (columns[idx].locked) {
+                if (columns[idx].locked && !columns[idx].hidden) {
                     cols = cols.add(colgroup.eq(idx));
                 }
             }
@@ -3963,6 +3969,7 @@ var __meta__ = {
                 tr,
                 table,
                 header,
+                skipHiddenCount = 0,
                 cols = $(),
                 cells = $();
 
@@ -3970,8 +3977,11 @@ var __meta__ = {
             header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
+                if (columns[idx].hidden) {
+                    skipHiddenCount++;
+                }
                 if (columns[idx].locked) {
-                    cols = cols.add(colgroup.eq(idx));
+                    cols = cols.add(colgroup.eq(idx - skipHiddenCount));
                     cells = cells.add(header.eq(idx));
                 }
             }

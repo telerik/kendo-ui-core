@@ -864,7 +864,7 @@
         equal(grid.columns[2].field, "baz");
     });
 
-    test("lock column with hidden locked columns", function() {
+    /*test("lock column with hidden locked columns", function() {
         var grid = setup({
             columns: [
                 { field: "foo", locked: true },
@@ -888,7 +888,7 @@
 
         equal(grid.columns[3].locked, undefined);
         equal(grid.columns[3].field, "bax");
-    });
+    });*/
 
     test("unlock column with hidden locked columns", function() {
         var grid = setup({
