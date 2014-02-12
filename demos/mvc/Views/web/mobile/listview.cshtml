@@ -1,0 +1,14 @@
+<div id="example" class="k-content">
+    <div id="touch-scroller" style="height: 200px">
+        <ul id="flat-listview"></ul>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        var flatData = [ "Sashimi salad", "Chirashi sushi", "Seaweed salad", "Edamame", "Miso soup", "Maguro", "Shake", "Shiromi", "Tekka maki", "Hosomaki Mix", "California rolls", "Seattle rolls", "Spicy Tuna rolls", "Ebi rolls", "Chicken Teriyaki", "Salmon Teriyaki", "Gohan", "Tori Katsu", "Yaki Udon" ];
+
+        $("#touch-scroller").kendoMobileScroller();
+        $("#flat-listview").kendoMobileListView({ dataSource: flatData });
+    });
+</script>

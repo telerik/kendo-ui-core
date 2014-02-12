@@ -1034,6 +1034,11 @@
                     "text": "Drawer",
                     "url": "mobile/drawer.html",
                     "title": "Kendo UI Mobile Drawer widget demo"
+                },
+                {
+                    "text": "ListView",
+                    "url": "mobile/listview.html",
+                    "title": "Kendo UI Mobile ListView widget demo"
                 }
             ]
         },
