@@ -1082,9 +1082,9 @@ var __meta__ = {
 
             $(window).off("resize", this._resizeHandler);
 
-            kendo.destroy(this.wrapper);
-
             Widget.fn.destroy.call(this);
+
+            kendo.destroy(this.wrapper);
 
             this._removeOverlay(true);
 
