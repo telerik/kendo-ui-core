@@ -621,7 +621,7 @@
                     "url": "grid/everlive.html",
                     "title": "Binding to Telerik Backend Services | Kendo UI Grid demo",
                     "meta": "This example shows how the Kendo UI Grid can be bound to Telerik Backend Services which will provide the backend functionality",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!jsp", "!php"]
                 },
                 {
                     "text": "Binding to SignalR",
