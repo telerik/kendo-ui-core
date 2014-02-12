@@ -182,7 +182,6 @@
             "name": "bar-charts"
         }, {
             "text": "Box Plot Charts",
-            "new" : "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBoxPlotIcon",
             "items": [{
@@ -310,7 +309,6 @@
             "name": "donut-charts"
         }, {
             "text": "Funnel Charts",
-            "new" : "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartFunnelIcon",
             "items": [{
@@ -469,8 +467,7 @@
                     "text": "Smooth polar line",
                     "url": "polar-charts/smooth-polar-line.html",
                     "title": "Example of using smooth line (spline) style for Kendo UI Polar Charts",
-                    "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line (spline) style",
-                    "new": "true"
+                    "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line (spline) style"
                 }, {
                     "text": "Polar scatter",
                     "url": "polar-charts/polar-scatter.html",
@@ -572,8 +569,7 @@
                     "text": "Smooth scatter line",
                     "url": "scatter-charts/smooth-scatter-line.html",
                     "title": "Example of using smooth line (spline) style for the Kendo UI Scatter Line Chart",
-                    "meta": "This demo shows how to configure the Kendo UI Scatter Line Chart to use smooth line (spline) style",
-                    "new": "true"
+                    "meta": "This demo shows how to configure the Kendo UI Scatter Line Chart to use smooth line (spline) style"
                 }, {
                     "text": "Date axis",
                     "url": "scatter-charts/date-axis.html",
