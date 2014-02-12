@@ -2628,9 +2628,9 @@ var __meta__ = {
             return axis.getTickPositions(axis.options.minorUnit);
         },
 
-        getSlot: function(a, b) {
+        getSlot: function(a, b, limit) {
             return NumericAxis.fn.getSlot.call(
-                this, toDate(a), toDate(b)
+                this, toDate(a), toDate(b), limit
             );
         },
 
