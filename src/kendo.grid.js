@@ -1148,37 +1148,42 @@ var __meta__ = {
                     },
                     resize: function(e) {
                         var rtlMultiplier = isRtl ? -1 : 1,
-                            width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier),
-                            footer = (isLocked ? that.lockedFooter : that.footer) || $(),
-                            header = th.closest("table"),
-                            contentTable = isLocked ? that.lockedTable : that.table,
-                            constrain = false,
-                            totalWidth = that.wrapper.width() - scrollbar;
+                            width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
 
-                        if (isLocked && gridWidth - columnWidth + width > totalWidth) {
-                            width = columnWidth + (totalWidth - gridWidth - scrollbar*2);
-                            constrain = true;
-                        }
+                        if (options.scrollable) {
+                            var footer = (isLocked ? that.lockedFooter.children("table") : that.footer.find(">.k-grid-footer-wrap>table")) || $();
+                            var header = th.closest("table");
+                            var contentTable = isLocked ? that.lockedTable : that.table;
+                            var constrain = false;
+                            var totalWidth = that.wrapper.width() - scrollbar;
 
-                        if (width > 10) {
-                            col.css('width', width);
+                            if (isLocked && gridWidth - columnWidth + width > totalWidth) {
+                                width = columnWidth + (totalWidth - gridWidth - scrollbar*2);
+                                constrain = true;
+                            }
 
-                            if (options.scrollable && gridWidth) {
-                                if (constrain) {
-                                    width = totalWidth;
-                                } else {
-                                    width = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
-                                }
+                            if (width > 10) {
+                                col.css('width', width);
 
-                                contentTable
-                                    .add(header)
-                                    .add(footer.find("table"))
-                                    .css('width', width);
+                                if (gridWidth) {
+                                    if (constrain) {
+                                        width = totalWidth;
+                                    } else {
+                                        width = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
+                                    }
 
-                                if (!isLocked) {
-                                    that._footerWidth = width;
+                                    contentTable
+                                        .add(header)
+                                        .add(footer)
+                                        .css('width', width);
+
+                                    if (!isLocked) {
+                                        that._footerWidth = width;
+                                    }
                                 }
                             }
+                        } else if (width > 10) {
+                            col.css('width', width);
                         }
                     },
                     resizeend: function() {

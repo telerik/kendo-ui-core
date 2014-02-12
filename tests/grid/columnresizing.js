@@ -285,11 +285,14 @@
         }),
         firstColumn = grid.lockedHeader.find("th:first"),
         footer = grid.footer.find(".k-grid-footer-locked"),
-        initialWidth = footer.find("table").width();
+        initialWidth = footer.find("table").width(),
+        nonLockedFooter = grid.footer.find(".k-grid-footer-wrap>table"),
+        nonLockedFooterInitialWidth = nonLockedFooter.width();
 
         resizeColumn(grid.wrapper, firstColumn, firstColumn.width(), firstColumn.width() + 10);
 
         equal(footer.find("table").width(), initialWidth + 10);
+        equal(nonLockedFooter.width(), nonLockedFooterInitialWidth - 10);
     });
 
     test("non locked footer table width is not incremented when locked column is resized", function() {
