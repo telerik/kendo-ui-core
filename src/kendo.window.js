@@ -99,6 +99,10 @@ var __meta__ = {
         };
     }
 
+    function executableScript() {
+        return !this.type || this.type.toLowerCase().indexOf("script") >= 0;
+    }
+
     var Window = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -130,9 +134,7 @@ var __meta__ = {
             }
 
             // remove script blocks to prevent double-execution
-            element.find("script").filter(function() {
-                return !this.type || this.type.toLowerCase().indexOf("script") >= 0;
-            }).remove();
+            element.find("script").filter(executableScript).remove();
 
             if (!element.parent().is(that.appendTo) && (position.top === undefined || position.left === undefined)) {
                 if (element.is(VISIBLE)) {
@@ -170,7 +172,7 @@ var __meta__ = {
             }
 
             that._position();
-            
+
             if (options.pinned) {
                 that.pin(true);
             }
@@ -191,14 +193,14 @@ var __meta__ = {
             }
 
             wrapper
-                .on("mouseenter" + NS, TITLEBAR_BUTTONS, function () { $(this).addClass(KHOVERSTATE); })
-                .on("mouseleave" + NS, TITLEBAR_BUTTONS, function () { $(this).removeClass(KHOVERSTATE); })
+                .on("mouseenter" + NS, TITLEBAR_BUTTONS, proxy(that._buttonEnter, that))
+                .on("mouseleave" + NS, TITLEBAR_BUTTONS, proxy(that._buttonLeave, that))
                 .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
 
             windowContent
                 .on("keydown" + NS, proxy(that._keydown, that))
-                .on("focus" + NS, function() { wrapper.addClass(KFOCUSEDSTATE); })
-                .on("blur" + NS, function() { wrapper.removeClass(KFOCUSEDSTATE); });
+                .on("focus" + NS, proxy(that._focus, that))
+                .on("blur" + NS, proxy(that._blur, that));
 
             this._resizable();
 
@@ -223,9 +225,7 @@ var __meta__ = {
 
             that.touchScroller = kendo.touchScroller(element);
 
-            that._resizeHandler = function(e) {
-                return that._onDocumentResize(e);
-            };
+            that._resizeHandler = proxy(that._onDocumentResize, that);
 
             $(window).on("resize", that._resizeHandler);
 
@@ -235,6 +235,24 @@ var __meta__ = {
             }
 
             kendo.notify(that);
+
+            wrapper = windowContent = null;
+        },
+
+        _buttonEnter: function() {
+            $(this).addClass(KHOVERSTATE);
+        },
+
+        _buttonLeave: function() {
+            $(this).removeClass(KHOVERSTATE);
+        },
+
+        _focus: function() {
+            this.wrapper.addClass(KFOCUSEDSTATE);
+        },
+
+        _blur: function() {
+            this.wrapper.removeClass(KFOCUSEDSTATE);
         },
 
         _dimensions: function() {
@@ -460,7 +478,7 @@ var __meta__ = {
                 if (handled) {
                     w = constrain(newWidth, options.minWidth, options.maxWidth);
                     h = constrain(newHeight, options.minHeight, options.maxHeight);
-                    
+
                     if (!isNaN(w)) {
                         wrapper.width(w);
                         that.options.width = w + "px";
@@ -524,10 +542,11 @@ var __meta__ = {
             var that = this;
 
             return $(KWINDOW).filter(function() {
-                var wnd = $(this);
-                var options = that._object(wnd).options;
+                var dom = $(this);
+                var object = that._object(dom);
+                var options = object && object.options;
 
-                return options.modal && options.visible && wnd.is(VISIBLE);
+                return options && options.modal && options.visible && dom.is(VISIBLE);
             }).sort(function(a, b){
                 return +$(a).css("zIndex") - +$(b).css("zIndex");
             });
@@ -551,7 +570,7 @@ var __meta__ = {
             if (that.options.isMaximized) {
                 return that;
             }
-            
+
             if (!that.options.pinned) {
                 scrollTop = documentWindow.scrollTop();
                 scrollLeft = documentWindow.scrollLeft();
@@ -1049,12 +1068,6 @@ var __meta__ = {
         },
 
         destroy: function () {
-            var wrapper = this.wrapper;
-
-            Widget.fn.destroy.call(this);
-
-            kendo.destroy(wrapper);
-
             if (this.resizing) {
                 this.resizing.destroy();
             }
@@ -1063,13 +1076,19 @@ var __meta__ = {
                 this.dragging.destroy();
             }
 
-            this.element.children("iframe").remove();
-            wrapper.find(".k-resize-handle,.k-window-titlebar").off(NS);
-            wrapper.remove().off(NS);
+            this.wrapper.off(NS)
+                .children(KWINDOWCONTENT).off(NS).end()
+                .find(".k-resize-handle,.k-window-titlebar").off(NS);
 
             $(window).off("resize", this._resizeHandler);
 
+            kendo.destroy(this.wrapper);
+
+            Widget.fn.destroy.call(this);
+
             this._removeOverlay(true);
+
+            this.wrapper.remove();
         },
 
         _createWindow: function() {
@@ -1262,6 +1281,7 @@ var __meta__ = {
         },
         destroy: function() {
             this._draggable.destroy();
+            this.owner = null;
         }
     };
 
@@ -1353,6 +1373,7 @@ var __meta__ = {
         },
         destroy: function() {
             this._draggable.destroy();
+            this.owner = null;
         }
     };
 

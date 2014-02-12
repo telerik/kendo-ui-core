@@ -1,11 +1,17 @@
+function callbackHash(object) {
+    if (typeof object === "string") {
+        var obj = {};
+        obj[object] = $.noop;
+        object = obj;
+    }
+
+    return object;
+}
+
 function stub(that, methods) {
     var stubs = {};
 
-    if (typeof methods === "string") {
-        var obj = {};
-        obj[methods] = $.noop;
-        methods = obj;
-    }
+    methods = callbackHash(methods);
 
     $.each(methods, function(method, impl) {
         stubs[method] = { calls: 0, args: [] };
@@ -29,6 +35,16 @@ function stub(that, methods) {
     }
 
     return that;
+}
+
+function spy(that, methods) {
+    methods = callbackHash(methods);
+
+    $.each(methods, function(method) {
+        methods[method] = that[method];
+    });
+
+    return stub(that, methods);
 }
 
 function arrayClose(a, b, tolerance) {
