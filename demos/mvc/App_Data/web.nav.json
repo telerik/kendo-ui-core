@@ -1496,6 +1496,18 @@
                     "url": "sortable/integration-grid.html",
                     "title": "Kendo UI Grid integration with Sortable Component",
                     "meta": "This example demonstrates Kendo UI Grid integration with Sortable Component."
+                },
+                {
+                    "text": "Integration - ListView",
+                    "url": "sortable/integration-listview.html",
+                    "title": "Kendo UI ListView integration with Sortable Component",
+                    "meta": "This example demonstrates Kendo UI ListView integration with Sortable Component."
+                },
+                {
+                    "text": "Integration - TabStrip",
+                    "url": "sortable/integration-tabstrip.html",
+                    "title": "Kendo UI TabStrip integration with Sortable Component",
+                    "meta": "This example demonstrates Kendo UI TabStrip integration with Sortable Component."
                 }
             ]
         },
