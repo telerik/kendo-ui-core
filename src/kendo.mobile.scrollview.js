@@ -401,6 +401,14 @@ var __meta__ = {
 
             else if (this.options.contentHeight === "100%") {
                 var containerHeight = this.element.parent().height();
+
+                if(this.options.enablePager === true) {
+                    var pager = this.element.parent().find("ol.km-pages");
+                    if(pager.length) {
+                        containerHeight -= pager.outerHeight(true);
+                    }
+                }
+
                 this.element.css("height", containerHeight);
                 pages[0].element.css("height", containerHeight);
                 pages[1].element.css("height", containerHeight);
