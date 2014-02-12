@@ -15,7 +15,7 @@ module CodeGen::JsonTypeDef
         'Object' => 'Object',
         'Array' => '[]',
         'Date' => 'Date',
-        'Function' => 'Function',
+        'Function' => 'fn()',
         'Selection' => 'Selection',
         'Element' => 'Element',
         'HTMLCollection' => 'HTMLCollection',
