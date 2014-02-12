@@ -1257,16 +1257,15 @@ var __meta__ = {
                         return $(x).parent()[0] === $(y).parent()[0];
                     },
                     change: function(e) {
-                        var newIndex = inArray(that.columns[e.newIndex], that.columns),
-                            column = that.columns[e.oldIndex];
+                        var column = that.columns[e.oldIndex];
 
                         that.trigger(COLUMNREORDER, {
-                            newIndex: newIndex,
+                            newIndex: e.newIndex,
                             oldIndex: inArray(column, that.columns),
                             column: column
                         });
 
-                        that.reorderColumn(newIndex, column, e.position === "before");
+                        that.reorderColumn(e.newIndex, column, e.position === "before");
                     }
                 });
             }
@@ -1280,17 +1279,18 @@ var __meta__ = {
             var that = this,
                 columns = that.columns,
                 sourceIndex = inArray(column, columns),
+                destColumn = columns[destIndex],
                 colSourceIndex = inArray(column, visibleColumns(columns)),
-                colDestIndex = inArray(columns[destIndex], visibleColumns(columns)),
+                colDestIndex = inArray(destColumn, visibleColumns(columns)),
                 lockedRows = $(),
                 rows,
                 idx,
                 length,
-                isLocked = !!columns[destIndex].locked,
+                isLocked = !!destColumn.locked,
                 lockedCount = lockedColumns(columns).length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer");
 
-            if (sourceIndex === destIndex) {
+            if (sourceIndex === destIndex || destColumn.hidden === true) {
                 return;
             }
 
@@ -1310,16 +1310,8 @@ var __meta__ = {
                 before = destIndex < sourceIndex;
             }
 
-            if (before) {
-                if (destIndex - 1 !== sourceIndex) {
-                    columns.splice(sourceIndex, 1);
-                    var index = sourceIndex < destIndex ? destIndex - 1 : destIndex;
-                    columns.splice(index, 0, column);
-                }
-            } else if (destIndex + 1 !==  sourceIndex) {
-                columns.splice(sourceIndex, 1);
-                columns.splice(destIndex, 0, column);
-            }
+            columns.splice(before ? destIndex : destIndex + 1, 0, column);
+            columns.splice(sourceIndex < destIndex ? sourceIndex : sourceIndex + 1, 1);
             that._templates();
 
             reorder(elements(that.lockedHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);

@@ -364,6 +364,24 @@
         equal(col[1].style.width, "20px");
     });
 
+    test("reorder when destination index is hidden column", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "foo", width: 10, hidden: true },
+                { field: "bar", width: 20 },
+                { field: "baz", width: 30 }
+            ],
+            dataSource: [{ foo: "foo", bar: "bar", baz: "baz" }]
+        });
+
+        grid.reorderColumn(0, grid.columns[1]);
+        var columns = grid.columns;
+
+        equal(columns[0].field, "foo");
+        equal(columns[1].field, "bar");
+        equal(columns[2].field, "baz");
+    });
+
     test("Reorderable destroy is called on grid destroy", function() {
         var grid = new Grid(div, { reorderable: true }),
             reorderable = grid.wrapper.data("kendoReorderable");
@@ -556,6 +574,29 @@
         equal(columns[1].field, "bar");
         ok(columns[1].locked);
         equal(columns[2].field, "baz");
+        ok(columns[2].locked);
+        equal(columns[3].field, "bax");
+        ok(!columns[3].locked);
+    });
+
+    test("move non locked column after hidden locked column", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", locked: true, hidden: true },
+                { field: "baz" },
+                { field: "bax" }
+            ]
+        });
+
+        grid.reorderColumn(0, grid.columns[2], false);
+
+        var columns = grid.columns;
+        equal(columns[0].field, "foo");
+        ok(columns[0].locked);
+        equal(columns[1].field, "baz");
+        ok(columns[1].locked);
+        equal(columns[2].field, "bar");
         ok(columns[2].locked);
         equal(columns[3].field, "bax");
         ok(!columns[3].locked);
