@@ -326,7 +326,6 @@
                 },
                 {
                     "text": "Data binding",
-                    "new": true,
                     "url": "scrollview/databinding.html",
                     "title": "Kendo UI Mobile ScrollView DataBinding Example",
                     "packages": ["!mvc"],
@@ -334,7 +333,6 @@
                 },
                 {
                     "text": "Custom template",
-                    "new": true,
                     "url": "scrollview/custom-template.html",
                     "title": "Kendo UI Mobile ScrollView Template Customization Example",
                     "packages": ["!mvc"],
