@@ -1,0 +1,30 @@
+<script src="../../content/shared/js/everlive.all.js"></script>
+
+<script>
+    var everlive = new Everlive({
+        apiKey: "3q4sHgIqESXbpvOp",
+        scheme: "http"
+    });
+</script>
+
+@(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.Order>()
+    .Name("grid")
+    .Columns(columns => {
+        columns.Bound(o => o.Freight).Width(100);
+        columns.Bound(o => o.OrderDate).Width(120).Format("{0:MM/dd/yyyy}");
+        columns.Bound(o => o.ShipName);
+        columns.Bound(o => o.ShipCity).Width(150);
+    })
+    .Pageable()
+    .Sortable()
+    .Filterable()
+    .Scrollable()
+    .Groupable()
+    .DataSource(dataSource => dataSource
+        .Custom()
+        .Type("everlive")
+        .Transport(
+        
+        
+    )
+)
