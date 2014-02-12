@@ -742,7 +742,7 @@
         ok(dialog.dragging);
 
 
-        var draggingDestroy = stub(dialog.dragging, "destroy");
+        var draggingDestroy = spy(dialog.dragging, "destroy");
 
         dialog.setOptions({ draggable: false });
 
@@ -758,7 +758,7 @@
         ok(dialog.resizing);
 
 
-        var resizingDestroy = stub(dialog.resizing, "destroy");
+        var resizingDestroy = spy(dialog.resizing, "destroy");
 
         dialog.setOptions({ resizable: false });
 
