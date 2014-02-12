@@ -1,0 +1,53 @@
+        <script src="../../content/shared/js/products.js"></script>
+
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                $(document).ready(function() {
+                    grid = $("#grid").kendoGrid({
+                        dataSource: {
+                            data: products,
+                            schema: {
+                                model: {
+                                    fields: {
+                                        ProductName: { type: "string" },
+                                        UnitPrice: { type: "number" },
+                                        UnitsInStock: { type: "number" },
+                                        Discontinued: { type: "boolean" }
+                                    }
+                                }
+                            },
+                            pageSize: 15
+                        },
+                        scrollable: false,
+                        reorderable: true,
+                        pageable: true,
+                        columns: [
+                            "ProductName",
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px" },
+                            { field: "UnitsInStock", title: "Units In Stock", width: "130px" },
+                            { field: "Discontinued", width: "130px" }
+                        ]
+                    }).data("kendoGrid");
+
+                    $("#grid table tbody").kendoSortable({
+                        filter: ">tr",
+                        hint: function(element) {
+                            return $("<div class='k-grid k-widget' style='width: 970px;'><table><tr class='k-header'>" + element.clone().html() + "</tr></table></div>");
+                        },
+                        container: "#grid tbody",
+                        change: function(e) {
+                            var skip = grid.dataSource.skip(),
+                                oldIndex = e.oldIndex + skip,
+                                newIndex = e.newIndex + skip,
+                                data = grid.dataSource.data(),
+                                dataItem = grid.dataSource.getByUid(e.item.data("uid"));
+
+                            grid.dataSource.remove(dataItem);
+                            grid.dataSource.insert(newIndex, dataItem);
+                        }
+                    });
+                });
+            </script>
+        </div>

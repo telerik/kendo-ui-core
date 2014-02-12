@@ -1489,6 +1489,12 @@
                     "url": "sortable/events.html",
                     "title": "Events example for Kendo UI Sortable Component",
                     "meta": "This example shows events of Kendo UI Sortable widget."
+                },
+                {
+                    "text": "Integration - Grid",
+                    "url": "sortable/integration-grid.html",
+                    "title": "Kendo UI Grid integration with Sortable Component",
+                    "meta": "This example demonstrates Kendo UI Grid integration with Sortable Component."
                 }
             ]
         },
