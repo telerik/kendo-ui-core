@@ -3341,7 +3341,9 @@ function pad(number, digits, end) {
                 return a - b;
             });
 
-            return rules[jQuery.inArray(utcTime, rules) - 1];
+            var rule = rules[jQuery.inArray(utcTime, rules) - 1] || rules[rules.length - 1];
+
+            return isNaN(rule) ? rule : null;
         }
 
         function findZone(utcTime, zones, timezone) {
@@ -3407,7 +3409,7 @@ function pad(number, digits, end) {
             var base = zone[2];
 
             if (base.indexOf("/") >= 0) {
-                return base.split("/")[rule && rule[6] ? 1 : 0];
+                return base.split("/")[rule && +rule[6] ? 1 : 0];
             } else if (base.indexOf("%s") >= 0) {
                 return base.replace("%s", (!rule || rule[7] == "-") ? '' : rule[7]);
             }

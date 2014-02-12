@@ -50,6 +50,12 @@ test("offset adjusts for DST when rule is a concrete date", function() {
     equal(kendo.timezone.offset(daylight, "America/Chicago"), 300);
 });
 
+test("offset adjusts date when it is before DST end", function() {
+    var standard = new Date(2014, 0, 10, 12, 0, 0);
+
+    equal(kendo.timezone.offset(standard, "Pacific/Auckland"), -780);
+});
+
 test("offset adjusts for DST in zones like '1:00' instead of DST rule references", function(){
     var date = new Date(2012, 2, 1, 0, 0, 0, 0)
     equal(kendo.timezone.offset(date, "Pacific/Apia"), -840);
