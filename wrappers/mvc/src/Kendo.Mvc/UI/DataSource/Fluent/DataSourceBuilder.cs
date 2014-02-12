@@ -50,5 +50,17 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new AjaxDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
+
+        /// <summary>
+        /// Use it to configure Custom binding.
+        /// </summary>
+        public CustomDataSourceBuilder<TModel> Custom()
+        {
+            dataSource.Type = DataSourceType.Custom;
+            dataSource.Schema.Data = "";
+            dataSource.Schema.Total = "";
+            dataSource.Schema.Errors = "";
+            return new CustomDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
+        }
     }
 }

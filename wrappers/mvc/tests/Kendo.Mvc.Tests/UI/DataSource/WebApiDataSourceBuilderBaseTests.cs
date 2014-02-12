@@ -1,20 +1,18 @@
 ﻿namespace Kendo.Mvc.UI.Fluent.Tests
 {
-    using System.Collections.Generic;
-    using Xunit;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Tests;
-    using System;
+    using Xunit;
 
     public class WebApiDataSourceBuilderBaseTests
     {
         private readonly DataSource dataSource;
-        private readonly WebApiDataSourceBuilderBaseTestDouble<Customer> builder;
+        private readonly WebApiDataSourceBuilderBaseDouble<Customer> builder;
 
         public WebApiDataSourceBuilderBaseTests()
         {
             dataSource = new DataSource();
-            builder = new WebApiDataSourceBuilderBaseTestDouble<Customer>(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
+            builder = new WebApiDataSourceBuilderBaseDouble<Customer>(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
         }
 
 

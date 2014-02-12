@@ -176,7 +176,7 @@
         {
             get
             {
-                return DataSource.Type == DataSourceType.Ajax || DataSource.Type == DataSourceType.WebApi;
+                return DataSource.Type == DataSourceType.Ajax || DataSource.Type == DataSourceType.WebApi || DataSource.Type == DataSourceType.Custom;
             }
         }
 

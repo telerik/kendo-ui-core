@@ -1,9 +1,9 @@
 ﻿namespace Kendo.Mvc.Tests
 {
-    using Xunit;
     using Kendo.Mvc.UI;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
+    using Xunit;
 
     public class DataSourceTests
     {

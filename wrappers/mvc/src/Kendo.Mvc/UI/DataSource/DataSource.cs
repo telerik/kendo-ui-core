@@ -43,6 +43,13 @@ namespace Kendo.Mvc.UI
                 {
                     json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
                 }
+                else if (Type == DataSourceType.Custom)
+                {
+                    if (!string.IsNullOrEmpty(CustomType))
+                    {
+                        json["type"] = CustomType;
+                    }
+                }
                 else
                 {
                     json["type"] = Type.ToString().ToLower();
@@ -178,7 +185,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return Type == DataSourceType.Ajax || Type == DataSourceType.WebApi;
+                return Type == DataSourceType.Ajax || Type == DataSourceType.WebApi || Type == DataSourceType.Custom;
             }
         }
 
@@ -194,6 +201,12 @@ namespace Kendo.Mvc.UI
         }
 
         public DataSourceType? Type
+        {
+            get;
+            set;
+        }
+
+        public string CustomType
         {
             get;
             set;

@@ -1242,7 +1242,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return DataSource.Type == DataSourceType.Ajax || DataSource.Type == DataSourceType.WebApi;
+                return DataSource.Type == DataSourceType.Ajax || DataSource.Type == DataSourceType.WebApi || DataSource.Type == DataSourceType.Custom;
             }
         }
         
@@ -1310,7 +1310,9 @@ namespace Kendo.Mvc.UI
             {
                 if (HasCommandOfType<GridEditActionCommand>())
                 {
-                    if (!DataSource.Transport.Update.HasValue())
+                    if (!DataSource.Transport.Update.HasValue() &&
+                        !DataSource.Transport.FunctionUpdate.HasValue() &&
+                        DataSource.Transport.CustomUpdate == null)
                     {
                         throw new NotSupportedException(Exceptions.EditCommandRequiresUpdate);
                     }
@@ -1318,7 +1320,10 @@ namespace Kendo.Mvc.UI
 
                 if (HasCommandOfType<GridDestroyActionCommand>())
                 {
-                    if (!DataSource.Transport.Destroy.HasValue() && Editable.Mode != GridEditMode.InCell)
+                    if ((!DataSource.Transport.Destroy.HasValue() &&
+                        !DataSource.Transport.FunctionDestroy.HasValue() &&
+                        DataSource.Transport.CustomDestroy == null) &&
+                        Editable.Mode != GridEditMode.InCell)
                     {
                         throw new NotSupportedException(Exceptions.DeleteCommandRequiresDelete);
                     }
@@ -1326,7 +1331,10 @@ namespace Kendo.Mvc.UI
 
                 if (HasCommandOfType<GridToolBarCreateCommand<T>>())
                 {
-                    if (!DataSource.Transport.Create.HasValue() && Editable.Mode != GridEditMode.InCell)
+                    if ((!DataSource.Transport.Create.HasValue() &&
+                        !DataSource.Transport.FunctionCreate.HasValue() &&
+                        DataSource.Transport.CustomCreate == null) &&
+                        Editable.Mode != GridEditMode.InCell)
                     {
                         throw new NotSupportedException(Exceptions.InsertCommandRequiresInsert);
                     }

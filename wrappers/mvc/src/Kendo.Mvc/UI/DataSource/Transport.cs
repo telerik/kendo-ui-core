@@ -12,52 +12,108 @@ namespace Kendo.Mvc.UI
             Update = new CrudOperation();
             Destroy = new CrudOperation();
             Create = new CrudOperation();
+
+            FunctionRead = new ClientHandlerDescriptor();
+            FunctionUpdate = new ClientHandlerDescriptor();
+            FunctionDestroy = new ClientHandlerDescriptor();
+            FunctionCreate = new ClientHandlerDescriptor();
+
+            ParameterMap = new ClientHandlerDescriptor();
         }
 
         public string Prefix { get; set; }
         public bool StringifyDates { get; set; }
         public string IdField { get; set; }
+        public ClientHandlerDescriptor ParameterMap { get; set; }
         
         protected override void Serialize(IDictionary<string, object> json)
         {
-            var read = Read.ToJson();
+            if (CustomRead != null)
+            {
+                json["read"] = CustomRead;
+            }
+            else if (FunctionRead.HasValue())
+            {
+                json["read"] = FunctionRead;
+            }
+            else
+            {
+                var read = Read.ToJson();
+                if (read.Keys.Any())
+                {
+                    json["read"] = read;
+                }
+            }
             
-            json["prefix"] = Prefix.HasValue() ? Prefix : string.Empty;            
+            json["prefix"] = Prefix.HasValue() ? Prefix : string.Empty;
 
-            if (read.Keys.Any())
+            if (CustomUpdate != null)
             {
-                json["read"] = read;
+                json["update"] = CustomUpdate;
+            }
+            else if (FunctionUpdate.HasValue())
+            {
+                json["update"] = FunctionUpdate;
+            }
+            else
+            {
+                var update = Update.ToJson();
+
+                if (update.Keys.Any())
+                {
+                    json["update"] = update;
+                }
             }
 
-            var update = Update.ToJson();
-
-            if (update.Keys.Any())
+            if (CustomCreate != null)
             {
-                json["update"] = update;
+                json["create"] = CustomCreate;
+            }
+            else if (FunctionCreate.HasValue())
+            {
+                json["create"] = FunctionCreate;
+            }
+            else
+            {
+                var create = Create.ToJson();
+
+                if (create.Keys.Any())
+                {
+                    json["create"] = create;
+                }
             }
 
-            var create = Create.ToJson();
-
-            if (create.Keys.Any())
+            if (CustomDestroy != null)
             {
-                json["create"] = create;
+                json["destroy"] = CustomDestroy;
             }
-
-            var destroy = Destroy.ToJson();
-
-            if (destroy.Keys.Any())
+            else if (FunctionDestroy.HasValue())
             {
-                json["destroy"] = destroy;
+                json["destroy"] = FunctionDestroy;
+            }
+            else
+            {
+                var destroy = Destroy.ToJson();
+
+                if (destroy.Keys.Any())
+                {
+                    json["destroy"] = destroy;
+                }
             }
 
             if (StringifyDates)
             {
-                json["stringifyDates"] = true;
+                json["stringifyDates"] = StringifyDates;
             }
 
             if (!string.IsNullOrEmpty(IdField))
             {
                 json["idField"] = IdField;
+            }
+
+            if (ParameterMap.HasValue())
+            {
+                json["parameterMap"] = ParameterMap;
             }
         }
 
@@ -68,5 +124,21 @@ namespace Kendo.Mvc.UI
         public CrudOperation Create { get; private set; }
 
         public CrudOperation Destroy { get; private set; }
+
+        public IDictionary<string, object> CustomRead { get; set; }
+
+        public IDictionary<string, object> CustomUpdate { get; set; }
+
+        public IDictionary<string, object> CustomCreate { get; set; }
+
+        public IDictionary<string, object> CustomDestroy { get; set; }
+
+        public ClientHandlerDescriptor FunctionRead { get; set; }
+
+        public ClientHandlerDescriptor FunctionUpdate { get; set; }
+
+        public ClientHandlerDescriptor FunctionCreate { get; set; }
+
+        public ClientHandlerDescriptor FunctionDestroy { get; set; }
     }
 }

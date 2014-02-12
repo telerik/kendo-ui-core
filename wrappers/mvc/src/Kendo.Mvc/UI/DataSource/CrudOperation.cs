@@ -15,6 +15,7 @@ namespace Kendo.Mvc.UI
         {            
             RouteValues = new RouteValueDictionary();
             Data = new ClientHandlerDescriptor();
+            Cache = true;
         }
 
         private string Encode(string value)
@@ -47,6 +48,16 @@ namespace Kendo.Mvc.UI
                 if (Type.HasValue())
                 {
                     json["type"] = Type;
+                }
+
+                if (!string.IsNullOrEmpty(ContentType))
+                {
+                    json["contentType"] = ContentType;
+                }
+
+                if (!Cache)
+                {
+                    json["cache"] = Cache;
                 }
             }
         }
@@ -116,5 +127,8 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        public string ContentType { get; set; }
+        public bool Cache { get; set; }
     }
 }

@@ -58,6 +58,21 @@
                 if (prop.MemberType.IsNullableType() || prop.DefaultValue != null) {
                     field["defaultValue"] = prop.DefaultValue;
                 }
+
+                if (!string.IsNullOrEmpty(prop.From))
+                {
+                    field["from"] = prop.From;
+                }
+
+                if (prop.IsNullable)
+                {
+                     field["nullable"] = prop.IsNullable;
+                }
+
+                if (prop.Parse.HasValue())
+                {
+                    field["parse"] = prop.Parse;
+                }
             });
         }
 

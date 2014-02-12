@@ -1,10 +1,9 @@
 ﻿namespace Kendo.Mvc.UI.Fluent.Tests
 {
-    using System.Collections.Generic;
-    using Xunit;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Tests;
     using System;
+    using Xunit;
 
     public class SchedulerAjaxDataSourceBuilderTests
     {

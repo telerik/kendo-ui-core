@@ -243,7 +243,7 @@ namespace Kendo.Mvc.UI
         {
             get
             {
-                return grid.DataSource.Type == DataSourceType.Ajax || grid.DataSource.Type == DataSourceType.WebApi;
+                return grid.DataSource.Type == DataSourceType.Ajax || grid.DataSource.Type == DataSourceType.WebApi || grid.DataSource.Type == DataSourceType.Custom;
             }
         }
     }
