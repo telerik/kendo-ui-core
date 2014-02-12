@@ -1,0 +1,27 @@
+<div id="example" class="k-content">
+
+    <ul id="select-period">
+        <li>
+            Month
+        </li>
+        <li>
+            Quarter
+        </li>
+        <li>
+            Year
+        </li>
+    </ul>
+
+    <div class="console"></div>
+</div>
+
+<script>
+    $(function() {
+        $("#select-period").kendoMobileButtonGroup({
+            select: function(e) {
+                kendoConsole.log("selected index:" + e.index);
+            },
+            index: 0
+        });
+    });
+</script>

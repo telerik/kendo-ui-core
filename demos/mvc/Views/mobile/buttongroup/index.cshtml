@@ -44,9 +44,9 @@
         var listviews = this.element.find("ul.km-listview");
 
         $("#select-period").kendoMobileButtonGroup({
-            select: function() {
+            select: function(e) {
                 listviews.hide()
-                         .eq(this.selectedIndex)
+                         .eq(e.index)
                          .show();
             },
             index: 0
