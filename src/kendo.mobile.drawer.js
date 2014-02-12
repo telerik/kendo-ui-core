@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Drawer",
     category: "mobile",
     description: "The Kendo Mobile Drawer widget provides slide to reveal global application toolbox",
-    depends: [ "mobile.application" ]
+    depends: [ "mobile.view" ]
 };
 
 (function($, undefined) {
@@ -22,7 +22,8 @@ var __meta__ = {
         BEFORE_SHOW = "beforeShow",
         INIT = "init",
         SHOW = "show",
-        HIDE = "hide";
+        HIDE = "hide",
+        NULL_VIEW = { enable: $.noop };
 
     var Drawer = ui.View.extend({
         init: function(element, options) {
@@ -35,17 +36,37 @@ var __meta__ = {
             this._scroller();
             this._model();
 
-            this.pane = this.element.closest(roleSelector("pane")).data("kendoMobilePane");
+            var pane = this.element.closest(roleSelector("pane")).data("kendoMobilePane"),
+                userEvents;
+
+            if (pane) {
+                this.pane = pane;
+                this.pane.bind("viewShow", function(e) {
+                    drawer._viewShow(e);
+                });
+
+                this.pane.bind("sameViewRequested", function() {
+                    drawer.hide();
+                });
+
+                userEvents = this.userEvents = new kendo.UserEvents(pane.element, {
+                    filter: roleSelector("view splitview"),
+                    allowSelection: true
+                });
+
+            } else {
+                this.currentView = NULL_VIEW;
+                var container = $(this.options.container);
+
+                if (!container) {
+                    throw new Error("The drawer needs a container configuration option set.")
+                }
+
+                userEvents = this.userEvents = new kendo.UserEvents(container, { allowSelection: true });
+                this._attachTransition(container);
+            }
 
             var drawer = this;
-
-            this.pane.bind("viewShow", function(e) {
-                drawer._viewShow(e);
-            });
-
-            this.pane.bind("sameViewRequested", function() {
-                drawer.hide();
-            });
 
             var hide = function(e) {
                 if (drawer.visible) {
@@ -53,11 +74,6 @@ var __meta__ = {
                     e.preventDefault();
                 }
             };
-
-            var userEvents = this.userEvents = new kendo.UserEvents(this.pane.element, {
-                filter: roleSelector("view splitview"),
-                allowSelection: true
-            });
 
             if (this.options.swipeToOpen && SWIPE_TO_OPEN) {
                 userEvents.bind("start", function(e) { drawer._start(e); });
@@ -81,7 +97,8 @@ var __meta__ = {
             position: "left",
             views: [],
             swipeToOpen: true,
-            title: ""
+            title: "",
+            container: null
         },
 
         events: [
@@ -129,9 +146,14 @@ var __meta__ = {
                 return true;
             }
 
-            var views = this.options.views,
-                view = this.pane.view(),
-                visibleOnCurrentView = !views[0] || this._viewsInclude(view.id.replace('#', '')) || this._viewsInclude(view.element.attr("id"));
+            var view,
+                visibleOnCurrentView = true,
+                views = this.options.views;
+
+            if (this.pane && views.length) {
+                view = this.pane.view();
+                visibleOnCurrentView = this._viewsInclude(view.id.replace('#', '')) || this._viewsInclude(view.element.attr("id"));
+            }
 
             if (this.trigger(BEFORE_SHOW, { view: this }) || !visibleOnCurrentView) {
                 return false;
@@ -184,11 +206,6 @@ var __meta__ = {
         },
 
         _viewShow: function(e) {
-            var that = this,
-                movable = this.movable,
-                currentOffset = movable && movable.x,
-                element;
-
             if (this.currentView) {
                 this.currentView.enable();
             }
@@ -199,8 +216,13 @@ var __meta__ = {
             }
 
             this.currentView = e.view;
+            this._attachTransition(e.view.element);
+        },
 
-            element = e.view.element;
+        _attachTransition: function(element) {
+            var that = this,
+                movable = this.movable,
+                currentOffset = movable && movable.x;
 
             movable = this.movable = new kendo.ui.Movable(element);
 
