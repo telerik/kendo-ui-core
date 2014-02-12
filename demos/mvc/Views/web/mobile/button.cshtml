@@ -1,0 +1,30 @@
+<div id="example" class="k-content">
+
+    <h2>Mobile optimized buttons</h2>
+
+    <hr />
+
+    <button id="mobile-button">Regular button</button>
+    <button id="mobile-button-icon">Icon button</button>
+
+    <hr />
+
+    <div class="console"></div>
+</div>
+
+<script>
+    $(function() {
+        $("#mobile-button").kendoMobileButton({
+            click: function() {
+                kendoConsole.log("button clicked");
+            }
+        });
+
+        $("#mobile-button-icon").kendoMobileButton({
+            icon: "home",
+            click: function() {
+                kendoConsole.log("button icon clicked");
+            }
+        });
+    });
+</script>

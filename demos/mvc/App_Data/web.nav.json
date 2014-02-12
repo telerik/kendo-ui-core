@@ -1014,6 +1014,11 @@
                     "text": "Actionsheet",
                     "url": "mobile/actionsheet.html",
                     "title": "Kendo UI ActionSheet widget demo"
+                },
+                {
+                    "text": "Button",
+                    "url": "mobile/button.html",
+                    "title": "Kendo UI Mobile Button widget demo"
                 }
             ]
         },
