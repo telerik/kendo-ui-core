@@ -24,6 +24,17 @@
         }
 
         [Fact]
+        public void CustomTransport_is_correctly_serialized()
+        {
+            var settings = new Dictionary<string, object>();
+            settings.Add("someKey", "someText");
+            dataSource.CustomTransport = settings;
+
+            var result = dataSource.ToJson();
+            ((Dictionary<string, object>)result["transport"]).ShouldBeSameAs(settings);
+        }
+
+        [Fact]
         public void ToJson_serverPaging_is_not_serialized_if_not_set()
         {
             dataSource.ServerPaging = false;
