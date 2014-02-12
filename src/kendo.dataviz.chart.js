@@ -3493,7 +3493,7 @@ var __meta__ = {
 
                 if (point) {
                     var plotRange = chart.plotRange(point);
-                    var valueSlot = valueAxis.getSlot(plotRange[0], plotRange[1], !this.options.clip);
+                    var valueSlot = valueAxis.getSlot(plotRange[0], plotRange[1], !chart.options.clip);
                     var pointSlot = chart.pointSlot(categorySlot, valueSlot);
                     var aboveAxis = valueAxis.options.reverse ?
                                         value < axisCrossingValue : value >= axisCrossingValue;
