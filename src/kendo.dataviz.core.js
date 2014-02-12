@@ -53,6 +53,7 @@ var __meta__ = {
         ID_PREFIX = "k",
         ID_POOL_SIZE = 1000,
         ID_START = 10000,
+        COORDINATE_LIMIT = 100000,
         INITIAL_ANIMATION_DURATION = 600,
         INSIDE = "inside",
         LEFT = "left",
@@ -423,6 +424,10 @@ var __meta__ = {
             var box = this;
 
             return [box.x1, box.y1, box.x2, box.y2].join(",");
+        },
+
+        overlaps: function(box) {
+            return !(box.y2 < this.y1 || this.y2 < box.y1 || box.x2 < this.x1 || this.x2 < box.x1);
         }
     };
 
@@ -2263,7 +2268,7 @@ var __meta__ = {
             return axis.getTickPositions(axis.options.minorUnit);
         },
 
-        getSlot: function(a, b) {
+        getSlot: function(a, b, limit) {
             var axis = this,
                 options = axis.options,
                 reverse = options.reverse,
@@ -2286,8 +2291,10 @@ var __meta__ = {
                 b = a || 0;
             }
 
-            a = math.max(math.min(a, options.max), options.min);
-            b = math.max(math.min(b, options.max), options.min);
+            if (limit) {
+                a = math.max(math.min(a, options.max), options.min);
+                b = math.max(math.min(b, options.max), options.min);
+            }
 
             if (vertical) {
                 p1 = options.max - math.max(a, b);
@@ -2297,8 +2304,8 @@ var __meta__ = {
                 p2 = math.max(a, b) - options.min;
             }
 
-            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
-            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
+            slotBox[valueAxis + 1] = math.max(math.min(lineStart + step * (reverse ? p2 : p1), COORDINATE_LIMIT), -COORDINATE_LIMIT);
+            slotBox[valueAxis + 2] = math.max(math.min(lineStart + step * (reverse ? p1 : p2), COORDINATE_LIMIT), -COORDINATE_LIMIT);
 
             return slotBox;
         },
@@ -2529,8 +2536,6 @@ var __meta__ = {
                 element = getElement(model.id);
 
             if (element) {
-                view._freeIds(element);
-
                 element.parentNode.replaceChild(
                     view.renderElement(model.getViewElements(view)[0]),
                     element

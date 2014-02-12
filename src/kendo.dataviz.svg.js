@@ -158,6 +158,18 @@ var __meta__ = {
             );
         },
 
+        createClipPath: function(id, box) {
+            var view = this,
+                clipPath = view.definitions[id];
+            if(!clipPath) {
+                clipPath = new SVGClipPath({id: id});
+                clipPath.children.push(view.createRect(box, {}));
+                view.definitions[id] = clipPath;
+            }
+
+            return clipPath;
+        },
+
         createText: function(content, options) {
             return this.decorate(
                 new SVGText(content, options)
@@ -252,10 +264,22 @@ var __meta__ = {
         }
     });
 
-    var SVGText = ViewElement.extend({
+    var SVGViewElement = ViewElement.extend({
+        renderClipPath: function () {
+            var element = this,
+                id = element.options.clipPathId,
+                clipPath = "";
+            if (id) {
+                clipPath = element.renderAttr("clip-path", "url(#" + id + ")");
+            }
+            return clipPath;
+        }
+    });
+
+    var SVGText = SVGViewElement.extend({
         init: function(content, options) {
             var text = this;
-            ViewElement.fn.init.call(text, options);
+            SVGViewElement.fn.init.call(text, options);
 
             text.content = content;
             text.template = SVGText.template;
@@ -317,15 +341,16 @@ var __meta__ = {
         }
     });
 
-    var SVGPath = ViewElement.extend({
+    var SVGPath = SVGViewElement.extend({
         init: function(options) {
             var path = this;
-            ViewElement.fn.init.call(path, options);
+            SVGViewElement.fn.init.call(path, options);
 
             path.template = SVGPath.template;
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
                     "<path #= d.renderId() #" +
+                    "#= d.renderClipPath() #" +
                     "style='display: #= d.renderDisplay() #; " +
                     "#= d.renderCursor() #' " +
                     "#= d.renderDataAttributes() # " +
@@ -704,7 +729,7 @@ var __meta__ = {
         }
     });
 
-    var SVGGroup = ViewElement.extend({
+    var SVGGroup = SVGViewElement.extend({
         init: function(options) {
             var group = this;
             ViewElement.fn.init.call(group, options);
@@ -715,7 +740,7 @@ var __meta__ = {
                 renderTemplate(
                     "<g#= d.renderId() #" +
                     "#= d.renderDataAttributes() #" +
-                    "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
+                    "#= d.renderClipPath() #>" +
                     "#= d.renderContent() #</g>"
                 );
             }
@@ -991,7 +1016,7 @@ var __meta__ = {
                     );
                 }
 
-                element.options.clipPath = "url(#" + clipId + ")";
+                element.options.clipPathId = clipId;
             }
 
             return element;

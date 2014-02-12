@@ -1800,12 +1800,12 @@
             equal(pane.contentBox.height(), 365);
         });
 
-        test("Sets background color", function() {
+        test("Sets background color", function() {            
             createPaneRect({ background: "color", width: 600, height: 400 });
             equal(rect.style.fill, "color");
         });
 
-        test("Sets border", function() {
+        test("Sets border", function() {            
             createPaneRect({ border: { color: "color", width: 1, dashType: "dashType" }, width: 600, height: 400 });
             equal(rect.style.stroke, "color");
             equal(rect.style.strokeWidth, 1);

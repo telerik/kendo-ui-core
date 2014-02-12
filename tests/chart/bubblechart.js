@@ -532,4 +532,31 @@
             equal(note.label.content, "name");
         });
     })();
+    
+    // ------------------------------------------------------------
+    
+    (function() {      
+                       
+        module("Bubble Chart / Values exceeding axis min or max options ", {});
+
+        test("values are not limited", 2, function() {
+            var plotArea = {
+                axisX: {
+                    getSlot: function(a,b,limit) {
+                        ok(!limit);
+                        return Box2D();
+                    }
+                },
+                axisY: {
+                    getSlot: function(a,b, limit) {
+                        ok(!limit);
+                        return Box2D();
+                    }
+                },
+                options: {}
+            };
+            
+            setupBubbleChart(plotArea, { series: [ {data: [{x: 1, y: 1, size: 100}], type: "bubble"} ] });          
+        });
+    })();
 })();

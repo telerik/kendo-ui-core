@@ -100,11 +100,26 @@
             equal(view.options.width, "100px");
             equal(view.options.height, "100px");
         });
+        
+        test("applyDefinitions sets a clipPath from the definitions to the element if clipPathId is set in the options", function() {            
+            var element = {options: {clipPathId: "foo"}};
+            view.definitions["foo"] = new dataviz.CanvasClipPath();
+            
+            view.applyDefinitions(element);
+            ok(view.definitions["foo"] === element.clipPath);
+        });        
 
         test("createGroup returns CanvasGroup", function() {
             var group = view.createGroup();
             ok(group instanceof dataviz.CanvasGroup);
         });
+        
+        test("createGroup sets the clipPath to the element", function() {
+            view.definitions["foo"] = new dataviz.CanvasClipPath();
+            var group = view.createGroup({clipPathId: "foo"});           
+            
+            ok(group.clipPath === view.definitions["foo"]);
+        });        
 
         test("createText returns CanvasText", function() {
             var text = view.createText();
@@ -276,6 +291,28 @@
             var sector = view.createSector();
             ok(sector instanceof dataviz.CanvasRing);
         });
+        
+        test("createClipPath returns a CanvasClipPath", function() { 
+            var clipPath = view.createClipPath("foo", Box2D());
+            
+            ok(clipPath instanceof dataviz.CanvasClipPath);
+        });
+        
+        test("createClipPath adds a CanvasClipPath to the definitions with the specified rectange box as child", function() {            
+            var id = "foo",
+                box = Box2D(1,1,100,100),
+                clipPath = view.createClipPath(id, box);
+            
+            ok(view.definitions[id] instanceof dataviz.CanvasClipPath);
+            deepEqual(view.definitions[id].children[0].points, box.points());
+        }); 
+
+        test("createClipPath returns an already initialized clip path from the definitions", function() {            
+            var id = "foo",
+               clipPath = view.createClipPath(id, Box2D());         
+           
+            ok(clipPath === view.createClipPath(id, Box2D()));
+        });        
 
         // ------------------------------------------------------------
         var element,
@@ -353,7 +390,68 @@
 
             group.render(ctx);
         });
+        
+        test("renders clipPath", function() {
+            var savesContext = false,
+                rendersClipPath = false,
+                rendersChildren = false,
+                rendersInCorrectOrder = false,                
+                ctx = {
+                    save: function () {
+                        savesContext = true;
+                    },                    
+                    restore: function () {
+                        rendersInCorrectOrder = savesContext && rendersClipPath && rendersChildren;
+                    }
+                };
+            group.clipPath = {
+                render: function() {
+                    rendersClipPath = savesContext;
+                }
+            };
+            group.children.push({
+                render: function () {
+                    rendersChildren = savesContext && rendersClipPath;
+                }
+            });
+            
+            group.render(ctx);
+            ok(rendersInCorrectOrder);
+        });        
 
+    })();
+    
+    (function() {
+        var clipPath;
+
+        module("CanvasClipPath", {
+            setup: function() {
+                clipPath = new dataviz.CanvasClipPath();
+            }
+        });
+        
+        test("clipPath applies clip", function() {
+            var startsNewPath = false,
+                rendersClipPoints = false,
+                appliesClip = false,
+                ctx = {
+                    beginPath: function() {
+                       startsNewPath = true; 
+                    },
+                    clip:function() {
+                        appliesClip = startsNewPath && rendersClipPoints;
+                    }
+                };
+            clipPath.children.push({
+                renderPoints: function() {
+                     rendersClipPoints = startsNewPath;
+                }
+            });
+            
+            clipPath.render(ctx);
+            ok(appliesClip);
+        });
+        
     })();
 
     (function() {

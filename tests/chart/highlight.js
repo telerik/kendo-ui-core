@@ -7,6 +7,11 @@
         GREEN = "rgb(0,255,0)",
         BLUE = "rgb(0,0,255)";
 
+    function uniqueId() {
+        uniqueId.id = uniqueId.id || 0; 
+        return uniqueId.id++;
+    }
+    
     function createHighlight(options) {
         viewMock = {
             renderElement: function(element) {
@@ -16,15 +21,26 @@
 
         highlight = new dataviz.Highlight(viewMock, QUnit.fixture[0], options);
     }
+    
+    var ElementStub = function () {
+        this.id = uniqueId();
+    };
+    
+    ElementStub.prototype = {
+        highlightOverlay: function() {
+            return { type: "overlay" };
+        },
+        toggleHighlight: function () {}
+    };
+    
+    function createElementStub (parent) {
+        var element = new ElementStub();
+        (parent || QUnit.fixture).append("<div id='" + element.id + "'></div>");
+        return element;
+    }
 
     (function() {
-        var ElementStub = {
-            highlightOverlay: function() {
-                return { type: "overlay" };
-            }
-        }
 
-        // ------------------------------------------------------------
         module("Highlight / Overlay", {
             setup: function() {
                 createHighlight({
@@ -74,18 +90,24 @@
             });
         });
 
-        test("Renders overlay element", function() {
-            highlight.show(ElementStub);
+        test("Renders overlay element", function() {             
+            highlight.show(createElementStub());
             equal($(".overlay").length, 1);
         });
+        
+        test("Appends overlay element to element parent", function() {             
+            var parent = $("<div></div>").appendTo(QUnit.fixture);
+            highlight.show(createElementStub(parent));
+            ok(parent.children().last().is(".overlay"));
+        });        
 
-        test("Does not render overlay if no overlay element exists", function() {
+        test("Does not render overlay if no overlay element exists", function() {            
             highlight.show({ highlightOverlay: function() { } });
             equal($(".overlay").length, 0);
         });
 
         test("Removes overlay element", function() {
-            highlight.show(ElementStub);
+            highlight.show(createElementStub());
             highlight.hide();
             equal($(".overlay").length, 0);
         });
@@ -100,7 +122,7 @@
             }
         });
 
-        test("Retrieves overlay elements", 2, function() {
+        test("Retrieves overlay elements", 2, function() {            
             highlight.show([{
                 highlightOverlay: function() {
                     ok(true);
@@ -112,13 +134,23 @@
             }]);
         });
 
-        test("Renders overlay elements", function() {
-            highlight.show([ElementStub, ElementStub]);
+        test("Renders overlay elements", function() {                    
+            highlight.show([createElementStub(), createElementStub()]);
             equal($(".overlay").length, 2);
         });
+        
+        test("Appends overlay elements to elements' parents", function() {             
+            var firstElementParent = $("<div></div>").appendTo(QUnit.fixture),
+                secondElementParent = $("<div></div>").appendTo(QUnit.fixture);
+                
+            highlight.show([createElementStub(firstElementParent), createElementStub(secondElementParent)]);
+            
+            ok(firstElementParent.children().last().is(".overlay"));
+            ok(secondElementParent.children().last().is(".overlay"));
+        });  
 
         test("Removes overlay elements", function() {
-            highlight.show([ElementStub, ElementStub]);
+            highlight.show([createElementStub(), createElementStub()]);
             highlight.hide();
             equal($(".overlay").length, 0);
         });
@@ -126,12 +158,7 @@
     })();
 
     (function() {
-        var ElementStub = {
-            toggleHighlight: function() {
-            }
-        }
-
-        // ------------------------------------------------------------
+    
         module("Highlight / Toggle", {
             setup: function() {
                 createHighlight({
@@ -152,7 +179,7 @@
             });
         });
 
-        test("Does not call toggleHighlight on show (highlight disabled)", 0, function() {
+        test("Does not call toggleHighlight on show (highlight disabled)", 0, function() {            
             highlight.show({
                 options: {
                     highlight: {

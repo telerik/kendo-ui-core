@@ -100,15 +100,45 @@ var __meta__ = {
             var element = this,
                 sortedChildren = element.sortChildren(),
                 childrenCount = sortedChildren.length,
+                clipPath = element.clipPath,
                 i;
+
+            if (clipPath) {
+                context.save();
+                clipPath.render(context);
+            }
 
             for (i = 0; i < childrenCount; i++) {
                 sortedChildren[i].render(context);
             }
+
+            if (clipPath) {
+                context.restore();
+            }
+        },
+
+        applyDefinitions: function (element) {
+            if (element.options.clipPathId) {
+                element.clipPath = this.definitions[element.options.clipPathId];
+            }
+            return element;
         },
 
         createGroup: function(options) {
-            return new CanvasGroup(options);
+             return this.applyDefinitions(new CanvasGroup(options));
+        },
+
+        createClipPath: function(id, box) {
+            var view = this,
+                clipPath = view.definitions[id];
+
+            if (!clipPath) {
+                clipPath = new CanvasClipPath({id: id});
+                clipPath.children.push(view.createRect(box, {fill: "none"}));
+                view.definitions[id] = clipPath;
+            }
+
+            return clipPath;
         },
 
         createText: function(content, options) {
@@ -152,6 +182,20 @@ var __meta__ = {
 
         createPin: function(pin, options) {
             return new CanvasPin(pin, options);
+        }
+    });
+
+    var CanvasClipPath = ViewElement.extend({
+        render: function (context) {
+            var clipPath = this,
+                children = clipPath.children,
+                idx = 0, length = children.length;
+
+            context.beginPath();
+            for (; idx < length; idx++) {
+                children[idx].renderPoints(context);
+            }
+            context.clip();
         }
     });
 
@@ -591,6 +635,7 @@ var __meta__ = {
 
     deepExtend(dataviz, {
         CanvasCircle: CanvasCircle,
+        CanvasClipPath: CanvasClipPath,
         CanvasGroup: CanvasGroup,
         CanvasLine: CanvasLine,
         CanvasMultiLine: CanvasMultiLine,

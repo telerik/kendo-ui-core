@@ -1662,6 +1662,14 @@
             deepEqual(dateAxis.getSlot("2012/02/01", "2012/02/02"),
                  dateAxis.getSlot(new Date("2012/02/01"), new Date("2012/02/02")));
         });
+        
+        test("limits slots depending on the limit parameter", function() {
+            createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
+            var limited = dateAxis.getSlot("2012/02/20", "2012/02/20", true),
+                unlimited = dateAxis.getSlot("2012/02/20", "2012/02/20", false);
+            close(limited.x1, 781.5, 1, 1, "value is limited");
+            close(unlimited.x1, 1217.5, 1, "value is not limited");
+        });       
 
         // ------------------------------------------------------------
         module("Date Value Axis / Range manipulation", {

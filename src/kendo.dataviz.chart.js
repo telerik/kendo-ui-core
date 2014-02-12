@@ -2628,9 +2628,9 @@ var __meta__ = {
             return axis.getTickPositions(axis.options.minorUnit);
         },
 
-        getSlot: function(a, b) {
+        getSlot: function(a, b, limit) {
             return NumericAxis.fn.getSlot.call(
-                this, toDate(a), toDate(b)
+                this, toDate(a), toDate(b), limit
             );
         },
 
@@ -2999,7 +2999,6 @@ var __meta__ = {
                 box = bar.box;
 
             options = deepExtend({ data: { modelId: bar.modelId } }, options);
-
             return view.createRect(box, options);
         },
 
@@ -3025,18 +3024,21 @@ var __meta__ = {
                 box = bar.box,
                 vertical = options.vertical,
                 aboveAxis = bar.aboveAxis,
+                clipBox = bar.owner.pane.clipBox(),
                 x,
                 y;
 
             if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
-                y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
+                y = aboveAxis ? math.max(box.y1, clipBox.y1) : math.min(box.y2, clipBox.y2) - tooltipHeight;
             } else {
+                var x1 = math.max(box.x1, clipBox.x1),
+                    x2 = math.min(box.x2, clipBox.x2);
                 if (options.isStacked) {
-                    x = aboveAxis ? box.x2 - tooltipWidth : box.x1;
+                    x = aboveAxis ? x2 - tooltipWidth : x1;
                     y = box.y1 - tooltipHeight - TOOLTIP_OFFSET;
                 } else {
-                    x = aboveAxis ? box.x2 + TOOLTIP_OFFSET : box.x1 - tooltipWidth - TOOLTIP_OFFSET;
+                    x = aboveAxis ? x2 + TOOLTIP_OFFSET : x1 - tooltipWidth - TOOLTIP_OFFSET;
                     y = box.y1;
                 }
             }
@@ -3194,7 +3196,8 @@ var __meta__ = {
         options: {
             series: [],
             invertAxes: false,
-            isStacked: false
+            isStacked: false,
+            clip: true
         },
 
         render: function() {
@@ -3381,6 +3384,7 @@ var __meta__ = {
                                         value < axisCrossingValue : value >= axisCrossingValue;
 
                     point.aboveAxis = aboveAxis;
+
                     chart.reflowPoint(point, pointSlot);
                 }
             });
@@ -3417,7 +3421,7 @@ var __meta__ = {
         },
 
         valueSlot: function(valueAxis, value, axisCrossingValue) {
-            return valueAxis.getSlot(value, axisCrossingValue);
+            return valueAxis.getSlot(value, axisCrossingValue, !this.options.clip);
         },
 
         categorySlot: function(categoryAxis, categoryIx) {
@@ -3456,6 +3460,7 @@ var __meta__ = {
             return data.valueFields.value;
         }
     });
+
 
     var BarChart = CategoricalChart.extend({
         init: function(plotArea, options) {
@@ -3663,7 +3668,7 @@ var __meta__ = {
         },
 
         valueSlot: function(valueAxis, value, axisCrossingValue) {
-            return valueAxis.getSlot(value, this.options.isStacked ? 0 : axisCrossingValue);
+            return valueAxis.getSlot(value, this.options.isStacked ? 0 : axisCrossingValue, !this.options.clip);
         },
 
         categorySlot: function(categoryAxis, categoryIx, valueAxis) {
@@ -4392,12 +4397,16 @@ var __meta__ = {
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var point = this,
                 markerBox = point.markerBox(),
-                aboveAxis = point.aboveAxis;
+                options = point.options,
+                aboveAxis = point.aboveAxis,
+                x = markerBox.x2 + TOOLTIP_OFFSET,
+                y = aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2,
+                clipBox = point.owner.pane.clipBox(),
+                showTooltip = !clipBox || clipBox.overlaps(markerBox);
 
-            return Point2D(
-                markerBox.x2 + TOOLTIP_OFFSET,
-                aboveAxis ? markerBox.y1 - tooltipHeight : markerBox.y2
-            );
+            if (showTooltip) {
+                return Point2D(x, y);
+            }
         },
 
         formatValue: function(format) {
@@ -5173,7 +5182,8 @@ var __meta__ = {
             },
             labels: {
                 format: "{0}, {1}"
-            }
+            },
+            clip: true
         },
 
         render: function() {
@@ -5364,14 +5374,16 @@ var __meta__ = {
                 chartPoints = chart.points,
                 pointIx = 0,
                 point,
-                seriesAxes;
+                seriesAxes,
+                clip = chart.options.clip,
+                limit = !chart.options.clip;
 
             chart.traverseDataPoints(function(value, fields) {
                 point = chartPoints[pointIx++];
                 seriesAxes = chart.seriesAxes(fields.series);
 
-                var slotX = seriesAxes.x.getSlot(value.x, value.x),
-                    slotY = seriesAxes.y.getSlot(value.y, value.y),
+                var slotX = seriesAxes.x.getSlot(value.x, value.x, limit),
+                    slotY = seriesAxes.y.getSlot(value.y, value.y, limit),
                     pointSlot = chart.pointSlot(slotX, slotY);
 
                 if (point) {
@@ -5721,12 +5733,7 @@ var __meta__ = {
                     stroke: options.line.color || options.color,
                     dashType: options.line.dashType,
                     strokeLineCap: "butt"
-                },
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    }
-                });
+                };
 
             if (options.overlay) {
                 rectStyle.overlay = deepExtend({
@@ -5743,9 +5750,7 @@ var __meta__ = {
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
-            group.children = elements;
-
-            return [group];
+            return elements;
         },
 
         getBorderColor: function() {
@@ -5763,9 +5768,11 @@ var __meta__ = {
         },
 
         createOverlayRect: function(view) {
-            return view.createRect(this.box, {
-                data: { modelId: this.modelId },
+            var point = this;
+            return view.createRect(point.box, {
+                data: { modelId: point.modelId },
                 fill: "#fff",
+                id: point.id,
                 fillOpacity: 0
             });
         },
@@ -5800,9 +5807,10 @@ var __meta__ = {
 
         tooltipAnchor: function() {
             var point = this,
-                box = point.box;
+                box = point.box,
+                clipBox = point.owner.pane.clipBox();
 
-            return new Point2D(box.x2 + TOOLTIP_OFFSET, box.y1 + TOOLTIP_OFFSET);
+            return new Point2D(box.x2 + TOOLTIP_OFFSET, math.max(box.y1, clipBox.y1) + TOOLTIP_OFFSET);
         },
 
         formatValue: function(format) {
@@ -5927,6 +5935,19 @@ var __meta__ = {
                 value.open, value.high,
                 value.low, value.close, point.category
             );
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                elements = ChartElement.fn.getViewElements.call(chart, view),
+                group = view.createGroup({
+                    animation: {
+                        type: CLIP
+                    }
+                });
+
+            group.children = elements;
+            return [group];
         }
     });
 
@@ -5976,13 +5997,8 @@ var __meta__ = {
                     strokeWidth: lineOptions.width,
                     stroke: options.color || lineOptions.color,
                     dashType: lineOptions.dashType
-                },
-                group = view.createGroup({
-                    animation: {
-                        type: CLIP
-                    }
-                });
-            
+                };
+
             elements.push(point.createOverlayRect(view, options));
             elements.push(view.createPolyline(point.oPoints, true, lineStyle));
             elements.push(view.createPolyline(point.cPoints, true, lineStyle));
@@ -5992,9 +6008,7 @@ var __meta__ = {
                 ChartElement.fn.getViewElements.call(point, view)
             );
 
-            group.children = elements;
-
-            return [group];
+            return elements;
         },
 
         highlightOverlay: function(view) {
@@ -7299,6 +7313,7 @@ var __meta__ = {
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
 
             pane.content = new ChartElement();
+            pane.chartContainer = new ChartContainer({}, pane);
             pane.append(pane.content);
 
             pane.axes = [];
@@ -7324,9 +7339,11 @@ var __meta__ = {
 
         appendChart: function(chart) {
             var pane = this;
-
+            if (pane.chartContainer.parent !== pane.content) {
+                pane.content.append(pane.chartContainer);
+            }
             pane.charts.push(chart);
-            pane.content.append(chart);
+            pane.chartContainer.append(chart);
             chart.pane = pane;
         },
 
@@ -7350,6 +7367,7 @@ var __meta__ = {
 
             pane.content.destroy();
             pane.content.children = [];
+            pane.chartContainer.children = [];
         },
 
         reflow: function(targetBox) {
@@ -7423,6 +7441,74 @@ var __meta__ = {
             if (view) {
                 view.replace(pane);
             }
+        },
+
+        clipBox: function() {
+            return this.chartContainer.clipBox;
+        }
+    });
+
+    var ChartContainer = ChartElement.extend({
+        init: function(options, pane) {
+            var container = this;
+            ChartElement.fn.init.call(container, options);
+            container.pane = pane;
+        },
+
+        shouldClip: function () {
+            var container = this,
+                children = container.children,
+                length = children.length,
+                i;
+            for (i = 0; i < length; i++) {
+                if (children[i].options.clip === false) {
+                    return false;
+                }
+            }
+            return true;
+        },
+
+        _clipBox: function() {
+            var container = this,
+                pane = container.pane,
+                axes = pane.axes,
+                length = axes.length,
+                clipBox = pane.box,
+                axisValueField, idx,
+                lineBox, axis;
+
+            for (idx = 0; idx < length; idx++) {
+                axis = axes[idx];
+                axisValueField = axis.options.vertical ? Y : X;
+                lineBox = axis.lineBox();
+                clipBox[axisValueField + 1] = lineBox[axisValueField + 1];
+                clipBox[axisValueField + 2] = lineBox[axisValueField + 2];
+            }
+
+            return clipBox;
+        },
+
+        getViewElements: function (view) {
+            var container = this,
+                group;
+
+            if (container.shouldClip() && !container.clipPathId) {
+                container.clipBox = container._clipBox();
+                container.clipPathId = uniqueId();
+                view.createClipPath(container.clipPathId, container.clipBox);
+            }
+
+            group = view.createGroup({
+                clipPathId: container.clipPathId
+            });
+
+            group.children = group.children.concat(ChartElement.fn.getViewElements.call(container, view));
+            return [group];
+        },
+
+        destroy: function() {
+            ChartElement.fn.destroy.call(this);
+            delete this.parent;
         }
     });
 
@@ -7772,9 +7858,9 @@ var __meta__ = {
         },
 
         alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
-            var slot = axis.getSlot(crossingValue, crossingValue),
+            var slot = axis.getSlot(crossingValue, crossingValue, true),
                 slotEdge = axis.options.reverse ? 2 : 1,
-                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
+                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue, true),
                 targetEdge = targetAxis.options.reverse ? 2 : 1,
                 axisBox = axis.box.translate(
                     targetSlot[X + targetEdge] - slot[X + slotEdge],
@@ -9181,7 +9267,7 @@ var __meta__ = {
 
                             if (overlay) {
                                 overlayElement = view.renderElement(overlay);
-                                viewElement.appendChild(overlayElement);
+                                $("#" + point.id).parent().append(overlayElement);
                                 overlays.push(overlayElement);
                             }
                         }
@@ -9261,7 +9347,13 @@ var __meta__ = {
             var tooltip = this,
                 options = tooltip.options,
                 element = tooltip.element,
-                offset = tooltip._offset();
+                offset;
+
+            if (!tooltip.anchor) {
+                return;
+            }
+
+            offset = tooltip._offset();
 
             if (!tooltip.visible) {
                 element.css({ top: offset.top, left: offset.left });
@@ -9430,12 +9522,17 @@ var __meta__ = {
                 return;
             }
 
-            tooltip.element.html(tooltip._pointContent(point));
             tooltip.anchor = tooltip._pointAnchor(point);
-            tooltip._updateStyle(options, point.options);
-            tooltip.setStyle(options);
 
-            BaseTooltip.fn.show.call(tooltip, point);
+            if (tooltip.anchor) {
+                tooltip.element.html(tooltip._pointContent(point));
+                tooltip._updateStyle(options, point.options);
+                tooltip.setStyle(options);
+
+                BaseTooltip.fn.show.call(tooltip, point);
+            } else {
+                tooltip.hide();
+            }
         }
     });
 
@@ -9489,7 +9586,7 @@ var __meta__ = {
                 tooltip._updateStyle(options, points[0].options);
                 tooltip.setStyle(options);
 
-                    BaseTooltip.fn.show.call(tooltip);
+                BaseTooltip.fn.show.call(tooltip);
             }
         },
 
@@ -11293,6 +11390,7 @@ var __meta__ = {
         CategoricalErrorBar: CategoricalErrorBar,
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
+        ChartContainer: ChartContainer,
         ClusterLayout: ClusterLayout,
         Crosshair: Crosshair,
         CrosshairTooltip: CrosshairTooltip,

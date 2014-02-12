@@ -62,4 +62,33 @@
             [494, 206], [533, 71], [434, 172]
         ], TOLERANCE);
     });
+    
+    // ------------------------------------------------------------
+                           
+    (function() {      
+        module("PolarArea Chart / Values exceeding axis min or max options ", {});
+
+        test("values are limited", 1, function() {
+            var plotArea = {
+                axisX: {
+                    getSlot: function(a,b,limit) {   
+                        return new Ring(Point2D());
+                    }
+                },
+                axisY: {
+                    getSlot: function(a,b, limit) {
+                        ok(limit);
+                        return Box2D();
+                    }
+                }
+            };
+
+            var chart = new dataviz.PolarAreaChart(plotArea, {series: [{
+                type: "polarArea",
+                data: [[45, 1]]
+            }]});          
+            
+            chart.reflow();            
+        });          
+    })();    
 })();

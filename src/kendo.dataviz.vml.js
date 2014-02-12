@@ -55,7 +55,8 @@ var __meta__ = {
 
             view.decorators.push(
                 new VMLOverlayDecorator(view),
-                new VMLGradientDecorator(view)
+                new VMLGradientDecorator(view),
+                new VMLClipDecorator(view)
             );
 
             if (dataviz.ui.Chart) {
@@ -199,6 +200,18 @@ var __meta__ = {
             return this.decorate(
                 new VMLGroup(this.setDefaults(options))
             );
+        },
+
+        createClipPath: function(id, box) {
+            var view = this,
+                clipPath = view.definitions[id];
+
+            if(!clipPath) {
+                clipPath = view.decorate(new VMLClipRect(box, {id: id}));
+                view.definitions[id] = clipPath;
+            }
+
+            return clipPath;
         },
 
         createGradient: function(options) {
@@ -774,10 +787,10 @@ var __meta__ = {
             if (!clipRect.template) {
                 clipRect.template = VMLClipRect.template = renderTemplate(
                     "<#= d.tagName # #= d.renderId() #" +
-                        "style='position:absolute; " +
-                        "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
-                        "top:#= d.box.y1 #px; " +
-                        "left:#= d.box.x1 #px; " +
+                        "style='position:absolute;" +
+                        "width:#= d.box.width() #px; height:#= d.box.height() + d.box.y1#px; " +
+                        "top:0px; " +
+                        "left:0px; " +
                         "clip:#= d._renderClip() #;' >" +
                     "#= d.renderContent() #</#= d.tagName #>"
                 );
@@ -967,6 +980,25 @@ var __meta__ = {
         }
     };
 
+    function VMLClipDecorator(view) {
+        this.view = view;
+    }
+
+    VMLClipDecorator.prototype = {
+        decorate: function (element) {
+            var decorator = this,
+                view = decorator.view,
+                clipPath = view.definitions[element.options.clipPathId];
+            if (clipPath) {
+                clipPath = clipPath.clone();
+                clipPath.options.id = uniqueId();
+                clipPath.children.push(element);
+                return clipPath;
+            }
+            return element;
+        }
+    };
+
     var VMLClipAnimationDecorator = Class.extend({
         init: function(view) {
             this.view = view;
@@ -1046,6 +1078,7 @@ var __meta__ = {
     deepExtend(dataviz, {
         VMLCircle: VMLCircle,
         VMLClipAnimationDecorator: VMLClipAnimationDecorator,
+        VMLClipDecorator: VMLClipDecorator,
         VMLClipRect: VMLClipRect,
         VMLFill: VMLFill,
         VMLGroup: VMLGroup,

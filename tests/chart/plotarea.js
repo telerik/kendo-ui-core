@@ -800,7 +800,7 @@
                         name: "secondary"
                     }]
                 });
-
+       
             ok($.inArray(secondaryCategoryAxis, plotArea.panes[0].content.children) >= 0);
         });
 
@@ -901,8 +901,8 @@
             equal(chartSeries.options.series.length, 2);
         });
 
-        test("bar chart added to pane content", function() {
-            ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+        test("bar chart added to pane chart container", function() {
+            ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });
 
         test("sets axis min/max to series limits", 2, function() {
@@ -993,8 +993,8 @@
             ok(chartSeries instanceof dataviz.LineChart);
         });
 
-        test("line chart added to pane content", function() {
-            ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+        test("line chart added to pane chart container", function() {
+            ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });
 
         test("sets isStacked when first series is stacked", function() {
@@ -1061,8 +1061,8 @@
             ok(chartSeries instanceof dataviz.AreaChart);
         })
 
-        test("area chart added to pane content", function() {
-            ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+        test("area chart added to pane chart container", function() {
+            ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });;
 
         test("sets isStacked when first series is stacked", function() {
@@ -1230,8 +1230,8 @@
             teardown: moduleTeardown
         });
 
-        test("OHLC chart added to pane content", function() {
-            ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+        test("OHLC chart added to pane chart container", function() {
+            ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });
 
         // ------------------------------------------------------------
@@ -1247,8 +1247,8 @@
             teardown: moduleTeardown
         });
 
-        test("Candlestick chart added to pane content", function() {
-            ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+        test("Candlestick chart added to pane chart container", function() {
+            ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });
 
         test("sets named primary axis min/max to series limits (impl./expl. axis)", function() {
@@ -3261,10 +3261,10 @@
         });
 
         test("clears pane", function() {
-            plotArea.panes[0].content.children[0].dirty = true;
+            plotArea.panes[0].chartContainer.children[0].dirty = true;
             plotArea.redraw(plotArea.panes[0]);
-
-            ok(!plotArea.panes[0].content.children[0].dirty);
+            
+            ok(!plotArea.panes[0].chartContainer.children[0].dirty);
         });
 
         test("reflows pane", function() {
@@ -4359,8 +4359,8 @@
             teardown: moduleTeardown
         });
 
-        test("Scatter chart added to pane content", function() {
-            ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+        test("Scatter chart added to pane chart container", function() {
+            ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });
 
         // ------------------------------------------------------------
@@ -4376,8 +4376,8 @@
             teardown: moduleTeardown
         });
 
-        test("Bubble chart added to pane content", function() {
-            ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+        test("Bubble chart added to pane chart container", function() {
+            ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });
 
         // ------------------------------------------------------------
@@ -4390,8 +4390,8 @@
             teardown: moduleTeardown
         });
 
-        test("Scatter line chart added to pane content", function() {
-            ok($.inArray(chartSeries, plotArea.panes[0].content.children) >= 0);
+        test("Scatter line chart added to pane chart container", function() {
+            ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });
 
         // ------------------------------------------------------------
@@ -4516,10 +4516,10 @@
         });
 
         test("clears pane", function() {
-            plotArea.panes[0].content.children[0].dirty = true;
+            plotArea.panes[0].chartContainer.children[0].dirty = true;
             plotArea.redraw(plotArea.panes[0]);
 
-            ok(!plotArea.panes[0].content.children[0].dirty);
+            ok(!plotArea.panes[0].chartContainer.children[0].dirty);
         });
 
         test("reflows pane", function() {
