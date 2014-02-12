@@ -381,6 +381,7 @@
     <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\OdataController.cs" />
+    <Compile Include="Controllers\Web\Grid\EverliveController.cs" />
     <Compile Include="Controllers\Web\Grid\WebApiController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomAjaxBindingController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomServerBindingController.cs" />
@@ -891,6 +892,7 @@
     <Content Include="Areas\aspx\Views\web\grid\column_menu.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\everlive.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\webapi.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\customajaxbinding.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\customserverbinding.aspx" />

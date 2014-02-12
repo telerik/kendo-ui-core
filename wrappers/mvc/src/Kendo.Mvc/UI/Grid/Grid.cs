@@ -1310,33 +1310,34 @@ namespace Kendo.Mvc.UI
             {
                 if (HasCommandOfType<GridEditActionCommand>())
                 {
-                    if (!DataSource.Transport.Update.HasValue() &&
-                        !DataSource.Transport.FunctionUpdate.HasValue() &&
-                        DataSource.Transport.CustomUpdate == null)
+                    if (DataSource.Type != DataSourceType.Custom)
                     {
-                        throw new NotSupportedException(Exceptions.EditCommandRequiresUpdate);
+                        if (!DataSource.Transport.Update.HasValue())
+                        {
+                            throw new NotSupportedException(Exceptions.EditCommandRequiresUpdate);
+                        }
                     }
                 }
 
                 if (HasCommandOfType<GridDestroyActionCommand>())
                 {
-                    if ((!DataSource.Transport.Destroy.HasValue() &&
-                        !DataSource.Transport.FunctionDestroy.HasValue() &&
-                        DataSource.Transport.CustomDestroy == null) &&
-                        Editable.Mode != GridEditMode.InCell)
+                    if (DataSource.Type != DataSourceType.Custom)
                     {
-                        throw new NotSupportedException(Exceptions.DeleteCommandRequiresDelete);
+                        if (!DataSource.Transport.Destroy.HasValue() && Editable.Mode != GridEditMode.InCell)
+                        {
+                            throw new NotSupportedException(Exceptions.DeleteCommandRequiresDelete);
+                        }
                     }
                 }
 
                 if (HasCommandOfType<GridToolBarCreateCommand<T>>())
                 {
-                    if ((!DataSource.Transport.Create.HasValue() &&
-                        !DataSource.Transport.FunctionCreate.HasValue() &&
-                        DataSource.Transport.CustomCreate == null) &&
-                        Editable.Mode != GridEditMode.InCell)
+                    if (DataSource.Type != DataSourceType.Custom)
                     {
-                        throw new NotSupportedException(Exceptions.InsertCommandRequiresInsert);
+                        if (!DataSource.Transport.Create.HasValue() && Editable.Mode != GridEditMode.InCell)
+                        {
+                            throw new NotSupportedException(Exceptions.InsertCommandRequiresInsert);
+                        }
                     }
                 }
 

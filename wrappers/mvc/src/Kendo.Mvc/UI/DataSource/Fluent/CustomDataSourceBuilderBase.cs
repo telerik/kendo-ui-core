@@ -1,7 +1,9 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
     using System;
+    using System.Collections.Generic;
     using System.Web.Mvc;
+    using Kendo.Mvc.Extensions;
 
     public abstract class CustomDataSourceBuilderBase<TCustomDataSourceBuilder> : IHideObjectMembers
         where TCustomDataSourceBuilder : CustomDataSourceBuilderBase<TCustomDataSourceBuilder>
@@ -136,6 +138,20 @@
         public virtual TCustomDataSourceBuilder AutoSync(bool enabled)
         {
             dataSource.AutoSync = enabled;
+
+            return (TCustomDataSourceBuilder)this;
+        }
+
+        /// <summary>
+        /// Sets the transport of the DataSource using anonymous object.
+        /// </summary>
+        public TCustomDataSourceBuilder Transport(object settings)
+        {
+
+            var json = new Dictionary<string, object>();
+            json.Merge(settings);
+
+            dataSource.CustomTransport = json;
 
             return (TCustomDataSourceBuilder)this;
         }

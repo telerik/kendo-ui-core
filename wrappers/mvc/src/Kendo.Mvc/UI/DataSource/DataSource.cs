@@ -61,11 +61,18 @@ namespace Kendo.Mvc.UI
                 }
             }
 
-            var transport = Transport.ToJson();
-
-            if (transport.Keys.Any())
+            if (CustomTransport != null)
             {
-                json["transport"] = transport;
+                json["transport"] = CustomTransport;
+            }
+            else
+            {
+                var transport = Transport.ToJson();
+
+                if (transport.Keys.Any())
+                {
+                    json["transport"] = transport;
+                }
             }
 
             if (PageSize > 0)
@@ -276,6 +283,12 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
+        }
+
+        public IDictionary<string, object> CustomTransport
+        {
+            get;
+            set;
         }
 
         public IEnumerable Data
