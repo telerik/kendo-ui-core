@@ -539,8 +539,9 @@ The last element is always created like a rectangle since there is no following 
     }
 
     /**
-    * A value indicating if the series should be stacked.String value indicates that the series should be stacked in a group with the specified name.
-    * @param boolean|string $value
+    * A boolean value indicating if the series should be stacked.
+A string value is interpreted as series.stack.group.
+    * @param boolean|string|\Kendo\Dataviz\UI\ChartSeriesItemStack|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
     public function stack($value) {
