@@ -1369,7 +1369,7 @@ var __meta__ = {
                 return;
             }
 
-            var index = lockedColumns(columns).length - 1;
+            var index = visibleLockedColumns(columns).length - 1;
             this.reorderColumn(index, column, false);
         },
 
