@@ -2366,7 +2366,7 @@ function pad(number, digits, end) {
         ui: kendo.ui || {},
         fx: kendo.fx || fx,
         effects: kendo.effects || effects,
-        mobile: kendo.mobile || {},
+        mobile: kendo.mobile || { },
         data: kendo.data || {},
         dataviz: kendo.dataviz || {ui: { roles: {}}},
         keys: {
@@ -2898,6 +2898,10 @@ function pad(number, digits, end) {
     extend(kendo.mobile, {
         init: function(element) {
             kendo.init(element, kendo.mobile.ui, kendo.ui, kendo.dataviz.ui);
+        },
+
+        appLevelNativeScrolling: function() {
+            return kendo.mobile.application && kendo.mobile.application.options && kendo.mobile.application.options.useNativeScrolling;
         },
 
         ui: {

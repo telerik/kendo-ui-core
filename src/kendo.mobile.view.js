@@ -46,10 +46,6 @@ var __meta__ = {
         }
     }
 
-    function appLevelNativeScrolling() {
-        return mobile.application && mobile.application.options && mobile.application.options.useNativeScrolling;
-    }
-
     var View = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
@@ -161,7 +157,7 @@ var __meta__ = {
         },
 
         _padIfNativeScrolling: function() {
-            if (appLevelNativeScrolling()) {
+            if (mobile.appLevelNativeScrolling()) {
                 var isAndroid = kendo.support.mobileOS && kendo.support.mobileOS.android,
                     topContainer = isAndroid ? "footer" : "header",
                     bottomContainer = isAndroid ? "header" : "footer";
@@ -186,7 +182,7 @@ var __meta__ = {
         _scroller: function() {
             var that = this;
 
-            if (appLevelNativeScrolling()) {
+            if (mobile.appLevelNativeScrolling()) {
                 return;
             }
             if (that.options.stretch) {
