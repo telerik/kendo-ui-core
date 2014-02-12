@@ -662,7 +662,7 @@
                 var bounds = this.bounds(),
                     tl = bounds.topLeft(),
                     br = bounds.bottomRight();
-                return Rect.fromPoints(this.diagram.toOrigin(tl), this.diagram.toOrigin(br));
+                return Rect.fromPoints(this.diagram.layerToView(tl), this.diagram.layerToView(br));
             },
             _rotatedBounds: function () {
                 var bounds = this.bounds().rotatedBounds(this.rotate().angle),
@@ -1028,7 +1028,7 @@
              * @returns {Rect}
              */
             bounds: function (value) {
-                if (value) {
+                if (value && !isString(value)) {
                     this._bounds = value;
                 } else {
                     return this._bounds;
@@ -1269,7 +1269,7 @@
                     .mousewheel(proxy(that._wheel, that), { ns: NS })
                     .on("keydown" + NS, proxy(that._keydown, that));
                 that.selector = new Selector(that);
-                // TODO: We may consider using real Clipboard API once is supported by the standart.
+                // TODO: We may consider using real Clipboard API once is supported by the standard.
                 that._clipboard = [];
                 that._drop();
                 that._initEditor();
@@ -1875,17 +1875,6 @@
                     this._copyOffset += 1;
                 }
             },
-            // Miro: I would make that private and/or use toOrigin instead.
-            documentToCanvasPoint: function (dPoint) {
-                var scroll = this._pan;
-
-                return this.documentToViewportPoint(dPoint).minus(scroll);
-            },
-            documentToViewportPoint: function (point) {
-                var containerOffset = $(this.canvas.element).offset();
-
-                return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
-            },
             /**
              * Gets the bounding rectangle of the given items.
              * @param items DiagramElement, Array of elements.
@@ -1934,20 +1923,26 @@
                 return result;
             },
             documentToView: function(point) {
-                var containerOffset = $(this.element).offset();
+                var containerOffset = $(this.canvas.element).offset();
 
                 return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
             },
             viewToDocument: function(point) {
-                var containerOffset = $(this.element).offset();
+                var containerOffset = $(this.canvas.element).offset();
 
                 return new Point(point.x + containerOffset.left, point.y + containerOffset.top);
             },
             viewToLayer: function(point) {
-                return this._transformWithMatrix(point, this._invertMatrix);
+                return this._transformWithMatrix(point, this._matrixInvert);
             },
             layerToView: function(point) {
                 return this._transformWithMatrix(point, this._matrix);
+            },
+            layerToCanvas: function(point) {
+                return this._transformWithMatrix(point, this._canvasMatrix);
+            },
+            canvasToLayer: function(point) {
+                return this._transformWithMatrix(point, this._canvasMatrixInvert);
             },
             documentToLayer: function(point) {
                 return this.viewToLayer(this.documentToView(point));
@@ -2075,7 +2070,7 @@
                 var editor = this._editor,
                     options = editor.options,
                     nativeEditor = $(editor.native),
-                    bounds = this._editItem.bounds("absolute"),
+                    bounds = this.layerToView(this._editItem.bounds()),
                     cssDim = function (prop) {
                         return parseInt(nativeEditor.css(prop), 10);
                     },
@@ -2151,6 +2146,7 @@
 
                 var transform = new CompositeTransform(0, 0, zoom, zoom);
                 transform.render(this.mainLayer.native);
+                this._storeCanvasMatrix(transform);
                 this._storeViewMatrix();
             },
             _transformMainLayer: function () {
@@ -2159,7 +2155,12 @@
 
                 var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
                 transform.render(this.mainLayer.native);
+                this._storeCanvasMatrix(transform);
                 this._storeViewMatrix();
+            },
+            _storeCanvasMatrix: function(canvasTransform) {
+                this._canvasMatrix = canvasTransform.toMatrix();
+                this._canvasMatrixInvert = canvasTransform.invert().toMatrix();
             },
             _storeViewMatrix: function() {
                 var pan = this._pan,
@@ -2167,7 +2168,7 @@
 
                 var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
                 this._matrix = transform.toMatrix();
-                this._invertMatrix = transform.invert().toMatrix();
+                this._matrixInvert = transform.invert().toMatrix();
             },
             _toIndex: function (items, indices) {
                 var result = this._getDiagramItems(items);

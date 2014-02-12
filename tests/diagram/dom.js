@@ -168,13 +168,6 @@
         }
     });
 
-    test("get canvas point of mouse event", function () {
-        var offset = $(".k-canvas-container").offset();
-        var point = diagram.documentToCanvasPoint(new Point(200, 200));
-
-        ok(point.equals(new Point(200 - offset.left, 200 - offset.top)));
-    });
-
     test("limit zoom with min/max values", function () {
         equal(diagram._getValidZoom(0.7), 0.7, "valid, zoom out");
         equal(diagram._getValidZoom(1), 1, "valid, no zoom");
@@ -206,7 +199,7 @@
     });
 
     test("transform document point to view point", function() {
-        var doc = $("#canvas").offset(),
+        var doc = $(diagram.canvas.element).offset(),
             point = new Point(100, 100);
 
         var result = diagram.documentToView(point);
@@ -215,7 +208,7 @@
     });
 
     test("transform view point to document point", function() {
-        var doc = $("#canvas").offset(),
+        var doc = $(diagram.canvas.element).offset(),
             point = new Point(100, 100);
 
         var result = diagram.viewToDocument(point);
@@ -239,6 +232,28 @@
         var result = diagram.layerToView(point);
 
         roughlyEqualPoint(result, point.times(1.5), "layer point should appear as zoomed in the view coordinate system");
+    });
+
+    test("transform document to layer", function() {
+        var point = new Point(100, 100);
+        diagram.zoom(1.5);
+        diagram.pan(-20, -20);
+
+        var result = diagram.documentToLayer(point);
+        var expected = diagram.viewToLayer(diagram.documentToView(point));
+
+        roughlyEqualPoint(result, expected, "document to layer transformation should be same as document->view->layer");
+    });
+
+    test("transform layer to document", function() {
+        var point = new Point(100, 100);
+        diagram.zoom(1.5);
+        diagram.pan(-20, -20);
+
+        var result = diagram.layerToDocument(point);
+        var expected = diagram.viewToDocument(diagram.layerToView(point));
+
+        roughlyEqualPoint(result, expected, "layer->view->document");
     });
 
     module("Shape bounds", {
