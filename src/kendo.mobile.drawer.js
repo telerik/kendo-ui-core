@@ -59,7 +59,7 @@ var __meta__ = {
                 var container = $(this.options.container);
 
                 if (!container) {
-                    throw new Error("The drawer needs a container configuration option set.")
+                    throw new Error("The drawer needs a container configuration option set.");
                 }
 
                 userEvents = this.userEvents = new kendo.UserEvents(container, { allowSelection: true });
