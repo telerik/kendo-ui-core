@@ -764,11 +764,7 @@
             function svgShape(svgString, shapeOptions) {
                 var fullString = '<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' + svgString + '</svg>';
                 var result = parseXml(fullString);
-                var importedNode = document.importNode(
-                    result /*document*/
-                    .childNodes[0] /*SVG root*/
-                    .childNodes[0] /*SVG group*/
-                    , true);
+                var importedNode = document.importNode(result.childNodes[0].childNodes[0], true);
                 var g =  new kendo.diagram.Group();
                 g.append(new kendo.diagram.Visual(importedNode));
                 return g;
