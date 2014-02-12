@@ -1447,6 +1447,7 @@
             "name": "sortable",
             "documentation": "web/sortable",
             "spriteCssClass": "sortableIcon",
+            "new": true,
             "items": [
                 {
                     "text": "Basic usage",
