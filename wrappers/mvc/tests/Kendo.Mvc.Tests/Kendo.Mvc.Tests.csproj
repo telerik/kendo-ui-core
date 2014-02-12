@@ -145,7 +145,6 @@
     <Compile Include="UI\DataSource\CustomDataSourceSchemaBuilderBaseDouble.cs" />
     <Compile Include="UI\DataSource\CustomDataSourceSchemaBuilderBaseTests.cs" />
     <Compile Include="UI\DataSource\CustomDataSourceTransportBuilderTests.cs" />
-    <Compile Include="UI\DataSource\DataSourceServerOperationBuilderTests.cs" />
     <Compile Include="UI\DataSource\ListViewAjaxDataSourceBuilderTests.cs" />
     <Compile Include="UI\DataSource\ReadOnlyAjaxDataSourceBuilderTests.cs" />
     <Compile Include="UI\DataSource\CustomDataSourceBuilderBaseTests.cs" />

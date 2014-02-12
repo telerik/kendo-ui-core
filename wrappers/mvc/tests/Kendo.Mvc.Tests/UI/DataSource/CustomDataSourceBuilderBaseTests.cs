@@ -50,16 +50,9 @@
         }
 
         [Fact]
-        public void ServerOperation_sets_ServerPaging_property()
-        {
-            builder.ServerOperation(true);
-            dataSource.ServerPaging.ShouldBeTrue();
-        }
-
-        [Fact]
         public void ServerOperation_builder_overload_sets_corresponding_property()
         {
-            builder.ServerOperation(s => s.ServerPaging(true));
+            builder.ServerPaging(true);
             dataSource.ServerPaging.ShouldBeTrue();
         }
 
@@ -68,6 +61,16 @@
         {
             builder.Total(5);
             dataSource.Total.ShouldEqual(5);
+        }
+
+        [Fact]
+        public void ServerOperations_are_false_by_default()
+        {
+            dataSource.ServerPaging.ShouldBeFalse();
+            dataSource.ServerFiltering.ShouldBeFalse();
+            dataSource.ServerSorting.ShouldBeFalse();
+            dataSource.ServerGrouping.ShouldBeFalse();
+            dataSource.ServerAggregates.ShouldBeFalse();
         }
     }
 }

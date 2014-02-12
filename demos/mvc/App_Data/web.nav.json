@@ -645,6 +645,11 @@
                     "packages": ["mvc"]
                 },
                 {
+                    "text": "OData binding",
+                    "url": "grid/odata.html",
+                    "packages": ["mvc"]
+                },
+                {
                     "text": "Web API binding",
                     "url": "grid/webapi.html",
                     "packages": ["mvc"]

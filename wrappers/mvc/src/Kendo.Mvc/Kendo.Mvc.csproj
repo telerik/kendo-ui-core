@@ -690,7 +690,6 @@
     <Compile Include="UI\DataSource\Fluent\CustomDataSourceTransportBuilderBase.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceModelDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceModelFieldDescriptorBuilderBase.cs" />
-    <Compile Include="UI\DataSource\Fluent\DataSourceServerOperationBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ListViewAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerModelDescriptorFactory.cs" />

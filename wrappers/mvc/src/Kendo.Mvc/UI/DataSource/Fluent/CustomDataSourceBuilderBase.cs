@@ -15,6 +15,11 @@
             this.viewContext = viewContext;
             this.urlGenerator = urlGenerator;
             this.dataSource = dataSource;
+            this.dataSource.ServerPaging = false;
+            this.dataSource.ServerSorting = false;
+            this.dataSource.ServerGrouping = false;
+            this.dataSource.ServerFiltering = false;
+            this.dataSource.ServerAggregates = false;
         }
 
         /// <summary>
@@ -59,29 +64,56 @@
         }
 
         /// <summary>
-        /// Sets the operation mode of the DataSource. 
-        /// By default the DataSource will make a request to the server when data for paging, sorting, 
-        /// filtering or grouping is needed. If set to false all data will be requested through single request. 
-        /// Any other paging, sorting, filtering or grouping will be performed client-side.
+        /// Enables or disables server paging mode. If enabled the data source will make a request during paging.
         /// </summary>
-        /// <param name="enabled">True(default) if server operation mode is enabled, otherwise false.</param>
-        public TCustomDataSourceBuilder ServerOperation(bool enabled)
+        /// <param name="enabled">True to enable server paging; otherwise false (the default).</param>
+        public TCustomDataSourceBuilder ServerPaging(bool enabled)
         {
             dataSource.ServerPaging = enabled;
-            dataSource.ServerFiltering = enabled;
-            dataSource.ServerAggregates = enabled;
+
+            return (TCustomDataSourceBuilder)this;
+        }
+
+        /// <summary>
+        /// Enables or disables server sorting mode. If enabled the data source will make a request during paging.
+        /// </summary>
+        /// <param name="enabled">True to enable server sorting; otherwise false (the default).</param>
+        public TCustomDataSourceBuilder ServerSorting(bool enabled)
+        {
             dataSource.ServerSorting = enabled;
+
+            return (TCustomDataSourceBuilder)this;
+        }
+
+        /// <summary>
+        /// Enables or disables server filtering mode. If enabled the data source will make a request during filtering.
+        /// </summary>
+        /// <param name="enabled">True to enable server filtering; otherwise false (the default).</param>
+        public TCustomDataSourceBuilder ServerFiltering(bool enabled)
+        {
+            dataSource.ServerFiltering = enabled;
+
+            return (TCustomDataSourceBuilder)this;
+        }
+
+        /// <summary>
+        /// Enables or disables server grouping mode. If enabled the data source will make a request during grouping.
+        /// </summary>
+        /// <param name="enabled">True to enable server grouping; otherwise false (the default).</param>
+        public TCustomDataSourceBuilder ServerGrouping(bool enabled)
+        {
             dataSource.ServerGrouping = enabled;
 
             return (TCustomDataSourceBuilder)this;
         }
 
         /// <summary>
-        /// Configures the operation modes of the DataSource.
-        /// </summary>   
-        public TCustomDataSourceBuilder ServerOperation(Action<DataSourceServerOperationBuilder> configurator)
+        /// Enables or disables server aggregates. If enabled the data source will expect the aggregates to be calculated server-side.
+        /// </summary>
+        /// <param name="enabled">True to enable server aggregates; otherwise false (the default).</param>
+        public TCustomDataSourceBuilder ServerAggregates(bool enabled)
         {
-            configurator(new DataSourceServerOperationBuilder(dataSource));
+            dataSource.ServerAggregates = enabled;
 
             return (TCustomDataSourceBuilder)this;
         }

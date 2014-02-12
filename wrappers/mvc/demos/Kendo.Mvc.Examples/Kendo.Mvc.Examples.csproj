@@ -380,6 +380,7 @@
     <Compile Include="Controllers\Web\Grid\Column_MenuController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
+    <Compile Include="Controllers\Web\Grid\OdataController.cs" />
     <Compile Include="Controllers\Web\Grid\WebApiController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomAjaxBindingController.cs" />
     <Compile Include="Controllers\Web\Grid\CustomServerBindingController.cs" />
@@ -2975,6 +2976,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\grid\everlive.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\grid\odata.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\web\grid\odata.aspx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
