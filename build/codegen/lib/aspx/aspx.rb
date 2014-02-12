@@ -10,7 +10,7 @@ module CodeGen
             DiagramConnector
             DiagramLayoutSettings}
 
-            OPTIONS_TO_SKIP = %w{dataSource}
+            OPTIONS_TO_SKIP = %w{dataSource bounds}
 
             TYPES_MAP = {
                 'String' => 'string',
@@ -31,31 +31,21 @@ module CodeGen
             }
 
             CLASS_TEMPLATE = ERB.new('
+using System.Text;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Web.UI;
+using System.Web.Script.Serialization;
+
 namespace <%= csharp_namespace %>
 {
-
-    using System.ComponentModel;
-    using System.Collections.Generic;
-    using System.Web.UI;
-    using System.Web.Script.Serialization;
-
     /// <summary>
     /// 
     /// </summary>
-    <%= widget? ? "	[ParseChildren(ChildrenAsProperties = true)]" : "" %>
-    public class <%= csharp_class %> : <%= widget? ? "RadWebControl" : "Telerik.Web.StateManager" %>
+    public class <%= csharp_class %> : Telerik.Web.StateManager
     {
         #region [ Constructor ]
-        public <%= csharp_class %>()
-        {
-<% if widget? %>
-            List<JavaScriptConverter> converters = new List<JavaScriptConverter>()
-                                                    {
-                                                        #region [ Converters Declaration ]
-                                                        #endregion [ Converters Declaration ]
-                                                    };
-<% end %>
-        }
+        public <%= csharp_class %>(){}
         #endregion [ Constructor ]
     
         #region [ Properties ]
@@ -63,17 +53,76 @@ namespace <%= csharp_namespace %>
     
         #region [ Events ]
         #endregion [ Events ]
-<% if widget? %>
-        private JavaScriptSerializer serializer = new JavaScriptSerializer();
+  }
+}
+')
+
+            WIDGET_CLASS_TEMPLATE = ERB.new('
+using System.Text;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Web.UI;
+using System.Web.Script.Serialization;
+
+[assembly: WebResource("<%= script_resource_path %>", "text/javascript")]
+
+namespace <%= csharp_namespace %>
+{
+    /// <summary>
+    ///
+    /// </summary>
+    [ParseChildren(ChildrenAsProperties = true)]
+    [ClientScriptResource("<%= script_component_type %>", "<%= script_resource_path %>")]
+    public class <%= csharp_class %> : RadWebControl
+    {
+        #region [ Constructor ]
+        public <%= csharp_class %>()
+        {
+            RegisterJSConverters();
+        }
+        #endregion [ Constructor ]
+
+        #region [ Properties ]
+        #endregion [ Properties ]
+
+        #region [ Events ]
+        #endregion [ Events ]
+
+        #region [ Overrides ]
 
         protected override void DescribeComponent(IScriptDescriptor descriptor)
         {
             base.DescribeComponent(descriptor);
+            descriptor.AddScriptProperty("_options", SerializeSettings());
+        }
 
+        #endregion [ Overrides ]
+
+        #region [ Private Members ]
+
+        private JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        private void RegisterJSConverters()
+        {
+            List<JavaScriptConverter> converters = new List<JavaScriptConverter>()
+                                                    {
+                                                        #region [ Converters Declaration ]
+                                                        #endregion [ Converters Declaration ]
+                                                    };
+            serializer.RegisterConverters(converters);
+        }
+
+        private string SerializeSettings()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
             #region [ Properties Serialization ]
             #endregion [ Properties Serialization ]
+            sb.Append("}");
+            return sb.ToString();
         }
-<% end %>
+
+        #endregion [ Private Members ]
   }
 }
 ')
@@ -207,6 +256,7 @@ namespace <%= csharp_namespace %>
 {
     using System;
     using System.Collections.Generic;
+    using System.Web.Script.Serialization;
 
     /// <summary>
     /// Serialization JS converter class for <%= csharp_class %>
@@ -233,6 +283,8 @@ namespace <%= csharp_namespace %>
 ')
 
             CONVERTER_PROPERTY_TEMPLATE = ERB.new('
+            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
+            CONVERTER_COMPOSITE_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
@@ -364,7 +416,7 @@ namespace <%= csharp_namespace %>
                 end
 
                 def to_serialization_declaration
-                    return ERB.new('descriptor.AddProperty("<%= name %>", serializer.Serialize(<%= csharp_name %>));').result(binding)
+                    return ERB.new('sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
                 end
 
                 def csharp_default
@@ -406,7 +458,7 @@ namespace <%= csharp_namespace %>
                 include Options
 
                 def csharp_class
-                    prefix = owner.csharp_name.sub('Settings', '')
+                    prefix = owner.instance_of?(ArrayItem) ? owner.owner.owner.csharp_name.sub('Settings', '') : owner.csharp_name.sub('Settings', '')
                     name.include?('Settings') ? "#{prefix}#{name.sub('Settings', '').pascalize}" : "#{prefix}#{name.pascalize}"
                 end
 
@@ -419,7 +471,7 @@ namespace <%= csharp_namespace %>
                 end
 
                 def to_converter
-                    ''
+                    CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
                 end
 
                 def to_declaration
@@ -435,7 +487,7 @@ namespace <%= csharp_namespace %>
                 end
 
                 def to_serialization_declaration
-                    return ERB.new('descriptor.AddProperty("<%= name %>", serializer.Serialize(<%= csharp_name %>));').result(binding)
+                    return ERB.new('sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
                 end
 
                 def get_binding
@@ -494,6 +546,15 @@ namespace <%= csharp_namespace %>
 
                 def to_converter_class_declaration
                     CONVERTER_CLASS_TEMPLATE.result(get_binding)
+                end
+
+                def script_resource_path
+                    return "Diagram.Scripts.RadDiagram.js" #temp value - current local testing
+                    #"#{csharp_namespace}.#{csharp_name}.Scripts.#{csharp_class}.js"
+                end
+
+                def script_component_type
+                    "#{csharp_namespace}.#{csharp_class}"
                 end
 
                 def csharp_namespace
@@ -565,7 +626,9 @@ namespace <%= csharp_namespace %>
                     file_path = File.join(@path, component.csharp_class + '.cs')
                     return if File.exists?(file_path)
 
-                    class_content = CLASS_TEMPLATE.result(component.get_binding)
+                    template = component.widget? ? WIDGET_CLASS_TEMPLATE : CLASS_TEMPLATE
+
+                    class_content = template.result(component.get_binding)
 
                     create_file(file_path, class_content)
                 end
@@ -601,8 +664,9 @@ namespace <%= csharp_namespace %>
                 def write_options_serialization(options)
                     content = "\n"
 
-                    options.each do |o|
-                        content += o.to_serialization_declaration + "\n"
+                    options.each_index do |index|
+                        content += options[index].to_serialization_declaration + "\n"
+                        content += 'sb.Append(",");' + "\n" unless index == options.length - 1
                     end
 
                     content
@@ -671,7 +735,7 @@ namespace <%= csharp_namespace %>
                     if @@converters[key].nil?
                         @@converters[key] = []
                     end
-                    @@converters[key] << composite.csharp_converter_class
+                    @@converters[key] << composite.csharp_converter_class unless @@converters[key].include?(composite.csharp_converter_class)
 
                     composite_content = write_converter_options(composite.options)
 
@@ -686,6 +750,8 @@ namespace <%= csharp_namespace %>
                     content = write_options(item.options[0].options)
 
                     write_file(file_name, content, '#region [ Properties ]')
+
+                    write_composite_option_converter_file(item.options[0])
                 end
 
                 def write_file(file_path, content, marker)
