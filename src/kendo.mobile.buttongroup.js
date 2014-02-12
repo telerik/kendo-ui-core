@@ -121,9 +121,8 @@ var __meta__ = {
                 return;
             }
 
-            var that = this;
-            that.select(e.currentTarget);
-            that.trigger(SELECT);
+            this.select(e.currentTarget);
+            this.trigger(SELECT, { index: this.selectedIndex });
         }
     });
 
