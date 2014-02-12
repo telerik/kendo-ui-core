@@ -81,6 +81,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("overlay", value);
     }
 
+    public void setStack(com.kendoui.taglib.sparkline.SeriesItemStackTag value) {
+        setProperty("stack", value);
+    }
+
     public void setTarget(com.kendoui.taglib.sparkline.SeriesItemTargetTag value) {
         setProperty("target", value);
     }

@@ -73,6 +73,10 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("overlay", value);
     }
 
+    public void setStack(com.kendoui.taglib.stockchart.NavigatorSeriesItemStackTag value) {
+        setProperty("stack", value);
+    }
+
     public void setTooltip(com.kendoui.taglib.stockchart.NavigatorSeriesItemTooltipTag value) {
         setProperty("tooltip", value);
     }
