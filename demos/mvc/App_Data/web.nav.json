@@ -1029,6 +1029,11 @@
                     "text": "ButtonGroup",
                     "url": "mobile/buttongroup.html",
                     "title": "Kendo UI Mobile ButtonGroup widget demo"
+                },
+                {
+                    "text": "Drawer",
+                    "url": "mobile/drawer.html",
+                    "title": "Kendo UI Mobile Drawer widget demo"
                 }
             ]
         },

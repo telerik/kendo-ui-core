@@ -1,0 +1,47 @@
+<div id="example" class="k-content">
+
+    <div id="drawer-container">
+        <div id="drawer">
+            <a id="drawer-link" href="#">Menu Item</a>
+        </div>
+
+        <div id="content-container">
+            <a id="drawer-trigger" href="#">Show drawer</a>
+            <div id="inner-content"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #content-container {
+        background: white;
+        height: 100%;
+    }
+
+    #drawer-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 300px;
+    }
+</style>
+
+<script>
+    $(function() {
+        $("#drawer").kendoMobileDrawer({
+            container: "#content-container"
+        });
+
+        $("#drawer-trigger").click(function() {
+            $("#drawer").data("kendoMobileDrawer").show();
+            return false;
+        });
+
+        $("#drawer-link").click(function() {
+            $("#inner-content").html("drawer navigated");
+            $("#drawer").data("kendoMobileDrawer").hide();
+            return false;
+        });
+
+    });
+</script>
