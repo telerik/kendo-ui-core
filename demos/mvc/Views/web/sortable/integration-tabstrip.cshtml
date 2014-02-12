@@ -45,7 +45,7 @@
                     start: function(e) {
                         tabstrip.activateTab(e.item);
                     },
-                    end: function(e) {
+                    change: function(e) {
                         var tabstrip = $("#tabstrip").data("kendoTabStrip"),
                             reference = tabstrip.tabGroup.children().eq(e.newIndex);
 
