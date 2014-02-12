@@ -1903,25 +1903,6 @@
                 }
                 return rect;
             },
-            /**
-             * Transforms point or rect from main canvas coordinates to non-transformed (origin/visual).
-             * @param value Point, Rect.
-             * @returns {Point, Rect}
-             */
-            toOrigin: function (value) {
-                var result = value;
-                if (value instanceof Point) {
-                    if (this._matrix) {
-                        result = this._matrix.apply(value);
-                    }
-                }
-                else {
-                    var tl = this.toOrigin(value.topLeft()),
-                        br = this.toOrigin(value.bottomRight());
-                    result = Rect.fromPoints(tl, br);
-                }
-                return result;
-            },
             documentToView: function(point) {
                 var containerOffset = $(this.canvas.element).offset();
 
