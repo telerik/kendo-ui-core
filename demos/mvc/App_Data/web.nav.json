@@ -1044,6 +1044,11 @@
                     "text": "ListView",
                     "url": "mobile/listview.html",
                     "title": "Kendo UI Mobile ListView widget demo"
+                },
+                {
+                    "text": "ModalView",
+                    "url": "mobile/modalview.html",
+                    "title": "Kendo UI Mobile ModalView widget demo"
                 }
             ]
         },
