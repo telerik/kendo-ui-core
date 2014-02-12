@@ -1824,6 +1824,14 @@ test("aggregate max returns max value for a given field", function() {
     equal(result.foo.max, 100);
 });
 
+test("aggregate average return null if data is null", function() {
+    var data = [ {foo: null, bar: "baz"} , {foo: null, bar: "bar"} , {foo: null, bar: "baz"} ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "average" }] );
+
+    equal(result.foo.average, null);
+});
+
 test("aggregate average for a given field", function() {
     var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 
@@ -1886,6 +1894,30 @@ test("aggregate min returns min value for a given field with less than 0", funct
     var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
 
     equal(result.foo.min, -1);
+});
+
+test("aggregate max returns null if all fields are null", function() {
+    var data = [ {foo: null, bar: "baz"}, {foo: null, bar: "baz"}, {foo: null, bar: "baz"},  {foo: null, bar: "bar"}  ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "max" }] );
+
+    equal(result.foo.max, null);
+});
+
+test("aggregate max returns null if all fields are undefined or null", function() {
+    var data = [ {foo: null, bar: "baz"}, {foo: undefined, bar: "baz"}, {foo: null, bar: "baz"},  {foo: undefined, bar: "bar"}  ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "max" }] );
+
+    equal(result.foo.max, null);
+});
+
+test("aggregate max returns undefined if all fields are undefined", function() {
+    var data = [ {foo: undefined, bar: "baz"}, {foo: undefined, bar: "baz"} ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "max" }] );
+
+    equal(result.foo.max, undefined);
 });
 
 test("aggregate max returns min value for a given field with null", function() {
