@@ -1023,57 +1023,68 @@
                 {
                     "text": "Actionsheet",
                     "url": "mobile/actionsheet.html",
-                    "title": "Kendo UI ActionSheet widget demo"
+                    "title": "Mobile ActionSheet widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile Actionsheet may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "Button",
                     "url": "mobile/button.html",
-                    "title": "Kendo UI Mobile Button widget demo"
+                    "title": "Mobile Button widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile Button may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "ButtonGroup",
                     "url": "mobile/buttongroup.html",
-                    "title": "Kendo UI Mobile ButtonGroup widget demo"
+                    "title": "Mobile ButtonGroup widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile ButtonGroup may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "Drawer",
                     "url": "mobile/drawer.html",
-                    "title": "Kendo UI Mobile Drawer widget demo"
+                    "title": "Mobile Drawer widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile Drawer may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "ListView",
                     "url": "mobile/listview.html",
-                    "title": "Kendo UI Mobile ListView widget demo"
+                    "title": "Mobile ListView widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile ListView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "ModalView",
                     "url": "mobile/modalview.html",
-                    "title": "Kendo UI Mobile ModalView widget demo"
+                    "title": "Mobile ModalView widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile ModalView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "Navbar",
                     "url": "mobile/navbar.html",
-                    "title": "Kendo UI Mobile NavBar widget demo"
+                    "title": "Mobile NavBar widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile Navbar may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "Popover",
                     "url": "mobile/popover.html",
-                    "title": "Kendo UI Mobile PopOver widget demo"
+                    "title": "Mobile PopOver widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile PopOver may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "Scroller",
                     "url": "mobile/scroller.html",
-                    "title": "Kendo UI Mobile Scroller widget demo"
+                    "title": "Mobile Scroller widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile Scroller may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "Switch",
                     "url": "mobile/switch.html",
-                    "title": "Kendo UI Mobile Switch widget demo"
+                    "title": "Mobile Switch widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile Switch may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
                     "text": "Tabstrip",
                     "url": "mobile/tabstrip.html",
-                    "title": "Kendo UI Mobile Tabstrip widget demo"
+                    "title": "Mobile Tabstrip widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile Tabstrip may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 }
             ]
         },
