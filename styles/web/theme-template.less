@@ -1818,6 +1818,65 @@ div.k-imagebrowser-dropzone em
     border-color: @secondary-border-color;
 }
 
+//Primary buttons
+.k-primary
+{
+    color: @primary-button-text-color;
+    border-color: @primary-button-border-color;
+    .composite-background(@primary-gradient);
+    background-position: 50% 50%;
+    background-color: @primary-button-background-color;
+    .box-shadow(@primary-shadow);
+}
+
+.k-primary:focus,
+.k-primary.k-state-focused
+{
+    color: @primary-focused-color;
+    border-color: @primary-focused-border-color;
+    .composite-background(@primary-focused-gradient);
+    .box-shadow(@primary-focused-active-item-shadow);
+}
+
+.k-primary:hover
+{
+    color: @primary-hover-text-color;
+    border-color: @primary-hover-border-color;
+    .composite-background(@primary-hover-gradient);
+    background-color: @primary-hover-background-color;
+    .box-shadow(@primary-hover-shadow);
+}
+
+.k-primary:focus:active:not(.k-state-disabled):not([disabled]),
+.k-primary:focus:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@primary-focused-active-item-shadow);
+}
+
+.k-primary:active
+{
+    color: @primary-active-text-color;
+    border-color: @primary-active-border-color;
+    .composite-background(@primary-active-gradient);
+    background-color: @primary-active-background-color;
+    .box-shadow(@primary-active-shadow);
+}
+
+.k-primary.k-state-disabled,
+.k-state-disabled .k-primary,
+.k-primary.k-state-disabled:hover,
+.k-state-disabled .k-primary:hover,
+.k-primary.k-state-disabled:hover,
+.k-state-disabled .k-primary:active,
+.k-primary.k-state-disabled:active
+{
+    color: @primary-diabled-text-color;
+    border-color: @primary-disabled-border-color;
+    background-color: @primary-disabled-background-color;
+    .composite-background(@primary-disabled-gradient);
+    .box-shadow(none);
+}
+
 // Fix for responsive design
 .k-pager-numbers .k-link,
 .k-treeview .k-in

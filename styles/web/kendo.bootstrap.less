@@ -190,6 +190,34 @@
 @menu-active-background: #e7e7e7;
 @concave-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
 
+@primary-button-text-color: #fff;
+@primary-button-background-color: #428bca;
+@primary-button-border-color: #367fbd;
+@primary-gradient: none;
+@primary-shadow:none;
+
+@primary-hover-text-color: @primary-button-text-color;
+@primary-hover-background-color: #3276b1;
+@primary-hover-border-color: #295f8e;
+@primary-hover-gradient: none;
+@primary-hover-shadow:none;
+
+@primary-focused-color: @primary-button-text-color; 
+@primary-focused-border-color: #eff8ff;
+@primary-focused-gradient: none;
+@primary-focused-active-item-shadow: 0 0 8px 0 #cfe6f8;
+
+@primary-active-text-color: @primary-button-text-color;
+@primary-active-background-color: #3276b1;
+@primary-active-gradient: none;
+@primary-active-border-color: #285e8e;
+@primary-active-shadow: inset 0 0 8px 0 #66afe9;
+
+@primary-diabled-text-color: @primary-button-text-color;
+@primary-disabled-background-color: #84b3dc;
+@primary-disabled-border-color: #7dabd4;
+@primary-disabled-gradient: none;
+
 @import "theme-template.less";
 
 .k-grid,
@@ -734,4 +762,13 @@ td.k-state-focused.k-state-selected,
 .k-button.k-state-disabled:active
 {
  	.box-shadow(none);
+}
+
+.k-primary:active
+{
+    color: @primary-active-text-color;
+    border-color: @primary-active-border-color;
+    .composite-background(@primary-active-gradient);
+    background-color: @primary-active-background-color;
+    .box-shadow(@primary-active-shadow);
 }
