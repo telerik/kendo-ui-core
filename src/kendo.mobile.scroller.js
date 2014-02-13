@@ -45,6 +45,10 @@ kendo_module({
             that.tapCapture.bind("press", proxy(that.cancel, that));
         },
 
+        enabled: function() {
+          return this.movable.scale < this.dimensions.minScale;
+        },
+
         done: function() {
             return this.dimensions.minScale - this.movable.scale < 0.01;
         },

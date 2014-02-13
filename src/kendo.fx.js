@@ -1432,12 +1432,20 @@ kendo_module({
         onCancel: $.noop,
 
         start: function() {
+            if (!this.enabled()) {
+                return;
+            }
+
             if (!this.done()) {
                 this._started = true;
                 kendo.animationFrame(this._tickProxy);
             } else {
                 this.onEnd();
             }
+        },
+
+        enabled: function() {
+            return true;
         },
 
         cancel: function() {
