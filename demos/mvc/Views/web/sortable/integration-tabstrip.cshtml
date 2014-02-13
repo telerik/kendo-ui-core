@@ -45,15 +45,13 @@
                     start: function(e) {
                         tabstrip.activateTab(e.item);
                     },
-                    change: function(e) {
-                        var tabstrip = $("#tabstrip").data("kendoTabStrip"),
-                            movedContent = tabstrip.element.find(".k-content").eq(e.oldIndex),
-                            targetContent = tabstrip.element.find(".k-content").eq(e.newIndex);
+                    end: function(e) {
+                        var referenceTab = tabstrip.tabGroup.children().not(this.placeholder).eq(e.newIndex);
 
                         if(e.oldIndex < e.newIndex) {
-                            tabstrip.insertAfter(e.item, e.newIndex);
+                            tabstrip.insertAfter(e.item, referenceTab);
                         } else {
-                            tabstrip.insertBefore(e.item, e.newIndex);
+                            tabstrip.insertBefore(e.item, referenceTab);
                         }
                     }
                 });
