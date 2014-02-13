@@ -3685,6 +3685,22 @@ function pad(number, digits, end) {
         }
     };
 
+    kendo.wheelDeltaY = function(jQueryEvent) {
+        var e = jQueryEvent.originalEvent,
+            deltaY = e.wheelDeltaY,
+            delta;
+
+            if (e.wheelDelta) { // Webkit and IE
+                if (deltaY === undefined || deltaY) { // IE does not have deltaY, thus always scroll (horizontal scrolling is treated as vertical)
+                    delta = e.wheelDelta;
+                }
+            } else if (e.detail && e.axis === e.VERTICAL_AXIS) { // Firefox and Opera
+                delta = (-e.detail) * 10;
+            }
+
+        return delta;
+    };
+
 })(jQuery);
 
 return window.kendo;

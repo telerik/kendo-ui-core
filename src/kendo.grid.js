@@ -201,24 +201,12 @@ var __meta__ = {
         },
 
         _wheelScroll: function(e) {
-            var that = this,
-                scrollTop = that.verticalScrollbar.scrollTop(),
-                originalEvent = e.originalEvent,
-                deltaY = originalEvent.wheelDeltaY,
-                delta;
-
-
-            if (originalEvent.wheelDelta) { // Webkit and IE
-                if (deltaY === undefined || deltaY) { // IE does not have deltaY, thus always scroll (horizontal scrolling is treated as vertical)
-                    delta = originalEvent.wheelDelta;
-                }
-            } else if (originalEvent.detail && originalEvent.axis === originalEvent.VERTICAL_AXIS) { // Firefox and Opera
-                delta = (-originalEvent.detail) * 10;
-            }
+            var scrollTop = this.verticalScrollbar.scrollTop(),
+                delta = kendo.wheelDeltaY(e);
 
             if (delta) {
                 e.preventDefault();
-                that.verticalScrollbar.scrollTop(scrollTop + (-delta));
+                this.verticalScrollbar.scrollTop(scrollTop + (-delta));
             }
         },
 
