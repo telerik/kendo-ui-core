@@ -87,7 +87,7 @@ echo $grid->render();
 ?>
 
 <script id="row-template" type="text/x-kendo-template">
-  <tr>
+  <tr data-uid="#: uid #">
     <td class="photo">
       <img src="../../content/web/Employees/#:EmployeeID#.jpg" alt="#: EmployeeID #" />
     </td>
@@ -103,7 +103,7 @@ echo $grid->render();
 </script>
 
 <script id="alt-row-template" type="text/x-kendo-template">
-  <tr class="k-alt">
+  <tr class="k-alt" data-uid="#: uid #">
     <td class="photo">
       <img src="../../content/web/Employees/#:EmployeeID#.jpg" alt="#: EmployeeID #" />
     </td>
