@@ -1325,8 +1325,8 @@
                 return sb.contains(p) ? -1 : (tb.contains(p) ? 1 : 0);
             },
             refresh: function () {
-                this.spVisual.redraw({ center: this.diagram.layerToCanvas(this.connection.sourcePoint()) });
-                this.epVisual.redraw({ center: this.diagram.layerToCanvas(this.connection.targetPoint()) });
+                this.spVisual.redraw({ center: this.diagram.modelToLayer(this.connection.sourcePoint()) });
+                this.epVisual.redraw({ center: this.diagram.modelToLayer(this.connection.targetPoint()) });
             }
         });
 
@@ -1377,7 +1377,7 @@
             refresh: function () {
                 if (this.shape) {
                     var bounds = this.shape.bounds();
-                        bounds = this.diagram.layerToCanvas(bounds);
+                        bounds = this.diagram.modelToLayer(bounds);
                     this.visual.position(bounds.topLeft());
                     $.each(this.connectors, function () {
                         this.refresh();
@@ -1482,14 +1482,14 @@
             bounds: function (value) {
                 if (value) {
                     this._innerBounds = value.clone();
-                    this._bounds = this.diagram.layerToCanvas(value).inflate(this.options.offset, this.options.offset);
+                    this._bounds = this.diagram.modelToLayer(value).inflate(this.options.offset, this.options.offset);
                 }
                 else {
                     return this._bounds;
                 }
             },
             _hitTest: function (p) {
-                var tp = this.diagram.layerToCanvas(p),
+                var tp = this.diagram.modelToLayer(p),
                     i, hit, handleBounds, handlesCount = this.map.length, handle;
                 if (this._angle) {
                     tp = tp.clone().rotate(this._bounds.center(), this._angle);
@@ -1874,7 +1874,7 @@
             },
             refresh: function () {
                 if (this._sp) {
-                    var visualBounds = Rect.fromPoints(this.diagram.layerToCanvas(this._sp), this.diagram.layerToCanvas(this._ep));
+                    var visualBounds = Rect.fromPoints(this.diagram.modelToLayer(this._sp), this.diagram.modelToLayer(this._ep));
                     this.bounds(Rect.fromPoints(this._sp, this._ep));
                     this.visual.position(visualBounds.topLeft());
                     this.visual.redraw({ height: visualBounds.height + 1, width: visualBounds.width + 1 });
@@ -1894,7 +1894,7 @@
                 this.visual.background(value ? this.options.hoveredBackground : this.options.background);
             },
             refresh: function () {
-                var p = this._c.shape.diagram.layerToView(this._c.position()),
+                var p = this._c.shape.diagram.modelToView(this._c.position()),
                     relative = p.minus(this._c.shape.bounds("transformed").topLeft()),
                     value = new Rect(p.x, p.y, 0, 0);
                 value.inflate(this.options.width / 2, this.options.height / 2);
@@ -1902,7 +1902,7 @@
                 this.visual.redraw({ center: new Point(relative.x, relative.y) });
             },
             _hitTest: function (p) {
-                var tp = this._c.shape.diagram.layerToView(p);
+                var tp = this._c.shape.diagram.modelToView(p);
                 return this._visualBounds.contains(tp);
             }
         });

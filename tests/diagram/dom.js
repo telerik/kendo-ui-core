@@ -220,7 +220,7 @@
         var point = new Point(100, 100);
         diagram.zoom(1.5);
 
-        var result = diagram.viewToLayer(point);
+        var result = diagram.viewToModel(point);
 
         roughlyEqualPoint(result, point.times(1/1.5), "view point should correspond to a scaled down vector in the layer");
     });
@@ -229,7 +229,7 @@
         var point = new Point(100, 100);
         diagram.zoom(1.5);
 
-        var result = diagram.layerToView(point);
+        var result = diagram.modelToView(point);
 
         roughlyEqualPoint(result, point.times(1.5), "layer point should appear as zoomed in the view coordinate system");
     });
@@ -239,8 +239,8 @@
         diagram.zoom(1.5);
         diagram.pan(-20, -20);
 
-        var result = diagram.documentToLayer(point);
-        var expected = diagram.viewToLayer(diagram.documentToView(point));
+        var result = diagram.documentToModel(point);
+        var expected = diagram.viewToModel(diagram.documentToView(point));
 
         roughlyEqualPoint(result, expected, "document to layer transformation should be same as document->view->layer");
     });
@@ -250,8 +250,8 @@
         diagram.zoom(1.5);
         diagram.pan(-20, -20);
 
-        var result = diagram.layerToDocument(point);
-        var expected = diagram.viewToDocument(diagram.layerToView(point));
+        var result = diagram.modelToDocument(point);
+        var expected = diagram.viewToDocument(diagram.modelToView(point));
 
         roughlyEqualPoint(result, expected, "layer->view->document");
     });

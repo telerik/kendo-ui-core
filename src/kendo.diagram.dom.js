@@ -662,7 +662,7 @@
                 var bounds = this.bounds(),
                     tl = bounds.topLeft(),
                     br = bounds.bottomRight();
-                return Rect.fromPoints(this.diagram.layerToView(tl), this.diagram.layerToView(br));
+                return Rect.fromPoints(this.diagram.modelToView(tl), this.diagram.modelToView(br));
             },
             _rotatedBounds: function () {
                 var bounds = this.bounds().rotatedBounds(this.rotate().angle),
@@ -1771,7 +1771,7 @@
                     if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
                         staticPoint = new kendo.diagram.Point(Math.round(staticPoint.x), Math.round(staticPoint.y));
                         var zoomedPoint = staticPoint.times(zoom);
-                        var viewportVector = this.layerToView(staticPoint);
+                        var viewportVector = this.modelToView(staticPoint);
                         var raw = viewportVector.minus(zoomedPoint);//pan + zoomed point = viewpoint vector
                         this._storePan(new kendo.diagram.Point(Math.round(raw.x), Math.round(raw.y)));
                     }
@@ -1913,23 +1913,23 @@
 
                 return new Point(point.x + containerOffset.left, point.y + containerOffset.top);
             },
-            viewToLayer: function(point) {
+            viewToModel: function(point) {
                 return this._transformWithMatrix(point, this._matrixInvert);
             },
-            layerToView: function(point) {
+            modelToView: function(point) {
                 return this._transformWithMatrix(point, this._matrix);
             },
-            layerToCanvas: function(point) {
+            modelToLayer: function(point) {
                 return this._transformWithMatrix(point, this._canvasMatrix);
             },
-            canvasToLayer: function(point) {
+            layerToModel: function(point) {
                 return this._transformWithMatrix(point, this._canvasMatrixInvert);
             },
-            documentToLayer: function(point) {
-                return this.viewToLayer(this.documentToView(point));
+            documentToModel: function(point) {
+                return this.viewToModel(this.documentToView(point));
             },
-            layerToDocument: function(point) {
-                return this.viewToDocument(this.layerToView(point));
+            modelToDocument: function(point) {
+                return this.viewToDocument(this.modelToView(point));
             },
             _transformWithMatrix: function(point, matrix) {
                 var result = point;
@@ -2051,7 +2051,7 @@
                 var editor = this._editor,
                     options = editor.options,
                     nativeEditor = $(editor.native),
-                    bounds = this.layerToView(this._editItem.bounds()),
+                    bounds = this.modelToView(this._editItem.bounds()),
                     cssDim = function (prop) {
                         return parseInt(nativeEditor.css(prop), 10);
                     },
@@ -2167,7 +2167,7 @@
                                 item = e.draggable.hint.data("data");
                                 pos = e.draggable.hintOffset;
                                 pos = new Point(pos.left, pos.top);
-                                var transformed = that.documentToLayer(pos);
+                                var transformed = that.documentToModel(pos);
                                 item.x = transformed.x;
                                 item.y = transformed.y;
 
@@ -2403,7 +2403,7 @@
             _calculatePosition: function (e) {
                 var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
                     point = new Point(pointEvent.pageX, pointEvent.pageY),
-                    offset = this.documentToLayer(point);
+                    offset = this.documentToModel(point);
 
                 return offset;
             },
