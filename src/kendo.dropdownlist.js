@@ -699,7 +699,7 @@ var __meta__ = {
 
 
             if (!template) {
-                template = $.proxy(kendo.template('#:this._text(data)#'), that);
+                template = $.proxy(kendo.template('#:this._text(data)#', { useWithBlock: false }), that);
             } else {
                 template = kendo.template(template);
             }
