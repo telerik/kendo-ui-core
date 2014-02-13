@@ -19,6 +19,7 @@
             .ButtonCount(5))
         .DataSource(dataSource => dataSource
             .Ajax()
+            .Filter(filter => filter.AddRange()
             .Read(read => read.Action("Customers_Read", "Grid"))
         )
     )
