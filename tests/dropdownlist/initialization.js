@@ -323,6 +323,21 @@
         equal(span.html(), "<strong>Test</strong>");
     });
 
+    test("support for valueField named 'data'", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "ProductName",
+            dataValueField: "data",
+            dataSource: [
+                { ProductName: "Chai", data: 1 },
+                { ProductName: "Chang", data: 2 }
+            ]
+        });
+
+        var span = dropdownlist.span;
+
+        equal(span.html(), "Chai");
+    });
+
     test("should populate text and value if items", function() {
         var dropdownlist = new DropDownList(input, {
             dataTextField: "text",
