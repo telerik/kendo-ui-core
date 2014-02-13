@@ -259,6 +259,24 @@
         equal(events[2].end.getMinutes(), 30);
     });
 
+    test("HOURLY method honours DST when INTERVAL rule is used", function() {
+        var schedulerEvent = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2014, 2, 30, 2),
+            end: new Date(2014, 2, 30, 2),
+            recurrenceRule: "FREQ=HOURLY;INTERVAL=5"
+        });
+
+        var events = occurrences(schedulerEvent, new Date(2014, 2, 30), new Date(2014, 2, 30, 12));
+
+        equal(events.length, 3);
+
+        deepEqual(events[0].start, new Date(2014, 2, 30, 2));
+        deepEqual(events[1].start, new Date(2014, 2, 30, 7));
+        deepEqual(events[2].start, new Date(2014, 2, 30, 12));
+    });
+
     brazilTimezoneTest("Hourly method honours DST in Brasilia", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
@@ -310,6 +328,40 @@
 
         equal(events[6].start.getTime(), +new Date(2000, 10, 16, 16, 30));
         equal(events[6].end.getTime(), +new Date(2000, 10, 16, 17, 0));
+    });
+
+    test("DAILY occurrences method expands a date in DST with INTERVAL rule", function() {
+        var schedulerEvent = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2014, 2, 30),
+            end: new Date(2014, 2, 30),
+            isAllDay: true,
+            recurrenceRule: "FREQ=DAILY;INTERVAL=3"
+        });
+
+        var events = occurrences(schedulerEvent, new Date(2014, 2, 30), new Date(2014, 3, 6));
+
+        equal(events.length, 3);
+
+        deepEqual(events[1].start, new Date(2014, 3, 2));
+        deepEqual(events[2].start, new Date(2014, 3, 5));
+    });
+
+    test("DAILY occurrences method expands a date in DST with INTERVAL rule (before 1970)", function() {
+        var schedulerEvent = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(1960, 2, 27),
+            end: new Date(1960, 2, 27),
+            isAllDay: true,
+            recurrenceRule: "FREQ=DAILY;INTERVAL=3"
+        });
+
+        var events = occurrences(schedulerEvent, new Date(1960, 2, 27), new Date(1960, 3, 6));
+
+        deepEqual(events[1].start, new Date(1960, 2, 30));
+        deepEqual(events[2].start, new Date(1960, 3, 2));
     });
 
     test("DAILY occurrences method honours interval recurrence (FREQ: DAILY)", function() {

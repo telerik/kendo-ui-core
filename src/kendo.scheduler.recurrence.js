@@ -394,6 +394,7 @@ var __meta__ = {
 
             interval: function (rule, current) {
                 var start = new Date(rule._startPeriod);
+                var date = new Date(current);
                 var hours = current.getHours();
                 var weekStart = rule.weekStart;
                 var interval = rule.interval;
@@ -404,8 +405,20 @@ var __meta__ = {
                 var day = 1;
                 var diff;
 
+                var startTimeHours;
+
                 if (frequency === "hourly") {
-                    diff = Math.floor((current - start) / (60 * kendo.date.MS_PER_MINUTE));
+                    startTimeHours = rule._startTime.getHours();
+
+                    if (hours !== startTimeHours) {
+                        date = date.getTime();
+                        date += (startTimeHours - hours) * kendo.date.MS_PER_HOUR;
+                        date -= start;
+                    } else {
+                        kendo.date.setTime(date, -start);
+                    }
+
+                    diff = Math.floor(date / kendo.date.MS_PER_HOUR);
                     excess = intervalExcess(diff, interval);
 
                     if (excess !== 0) {
@@ -413,7 +426,9 @@ var __meta__ = {
                         modified = true;
                     }
                 } else if (frequency === "daily") {
-                    diff = Math.floor((current - start) / kendo.date.MS_PER_DAY);
+                    kendo.date.setTime(date, -start);
+
+                    diff = Math.floor(date / kendo.date.MS_PER_DAY);
                     excess = intervalExcess(diff, interval);
 
                     if (excess !== 0) {
