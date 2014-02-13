@@ -1,0 +1,22 @@
+<div id="example" class="k-content">
+    <div id="mobile-tabstrip">
+        <a data-icon="contacts">Profile
+        </a><a data-icon="history">Sales
+        </a><a data-icon="favorites">Rating
+        </a><a data-icon="settings">Settings</a>
+    </div>
+
+    <div class="console">
+
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("#mobile-tabstrip").kendoMobileTabStrip({
+            select: function(e) {
+                kendoConsole.log("Tabstrip item selected:" + e.item.text());
+            }
+        });
+    });
+</script>

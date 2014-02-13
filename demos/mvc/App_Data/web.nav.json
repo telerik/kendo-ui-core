@@ -1069,6 +1069,11 @@
                     "text": "Switch",
                     "url": "mobile/switch.html",
                     "title": "Kendo UI Mobile Switch widget demo"
+                },
+                {
+                    "text": "Tabstrip",
+                    "url": "mobile/tabstrip.html",
+                    "title": "Kendo UI Mobile Tabstrip widget demo"
                 }
             ]
         },
