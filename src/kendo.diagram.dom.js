@@ -1920,10 +1920,10 @@
                 return this._transformWithMatrix(point, this._matrix);
             },
             modelToLayer: function(point) {
-                return this._transformWithMatrix(point, this._canvasMatrix);
+                return this._transformWithMatrix(point, this._layerMatrix);
             },
             layerToModel: function(point) {
-                return this._transformWithMatrix(point, this._canvasMatrixInvert);
+                return this._transformWithMatrix(point, this._layerMatrixInvert);
             },
             documentToModel: function(point) {
                 return this.viewToModel(this.documentToView(point));
@@ -2127,7 +2127,7 @@
 
                 var transform = new CompositeTransform(0, 0, zoom, zoom);
                 transform.render(this.mainLayer.native);
-                this._storeCanvasMatrix(transform);
+                this._storeLayerMatrix(transform);
                 this._storeViewMatrix();
             },
             _transformMainLayer: function () {
@@ -2136,12 +2136,12 @@
 
                 var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
                 transform.render(this.mainLayer.native);
-                this._storeCanvasMatrix(transform);
+                this._storeLayerMatrix(transform);
                 this._storeViewMatrix();
             },
-            _storeCanvasMatrix: function(canvasTransform) {
-                this._canvasMatrix = canvasTransform.toMatrix();
-                this._canvasMatrixInvert = canvasTransform.invert().toMatrix();
+            _storeLayerMatrix: function(canvasTransform) {
+                this._layerMatrix = canvasTransform.toMatrix();
+                this._layerMatrixInvert = canvasTransform.invert().toMatrix();
             },
             _storeViewMatrix: function() {
                 var pan = this._pan,
