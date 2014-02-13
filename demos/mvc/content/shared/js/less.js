@@ -2507,11 +2507,10 @@ tree.functions = {
         arguments = arguments.length > 2 ? arguments : arguments[1].value;
 
         for(i = 1, len = arguments.length; i < len; i++) {
-            if ((arguments[i].value && typeof arguments[i].value == "string") || i == len-1) {
-                var args = Array.prototype.slice.call(arguments, lastIndex + 1, i == len-1 ? i + 1 : i),
-
-                    firstArg = arguments[lastIndex].value,
-                    direction = arguments[lastIndex] instanceof tree.Expression ?
+            if ((arguments[i].value && typeof arguments[i].value == "string" && arguments[i].value != "currentcolor") || i == len-1) {
+                var args = Array.prototype.slice.call(arguments, lastIndex + 1, i == len-1 ? i + 1 : i), lastArg = arguments[lastIndex],
+                    firstArg = lastArg.value,
+                    direction = lastArg instanceof tree.Expression ?
                                         [ directions[firstArg[0].value], directions[ firstArg[1].value ], firstArg[0].value + " " + firstArg[1].value ] :
                                         /left|right/.test(firstArg) ?
                                                 [ directions[ firstArg ], directions[ "center" ], firstArg ] :
@@ -2526,7 +2525,7 @@ tree.functions = {
             }
         }
 
-        return new(tree.Anonymous)(output.substring(0, output.length-1));
+        return new(tree.Anonymous)(output.substring(0, output.length-1).replace(/-blink-/g, "-webkit-"));
     }
 };
 
@@ -2536,7 +2535,7 @@ function getGradient (args, initial, isWebKit) {
     for (var i = 0, len = args.length; i < len; i++) {
         var stop = args[i], dimension, rgba;
 
-        if (stop instanceof tree.Color) {
+        if (stop instanceof tree.Color || stop instanceof tree.Keyword) {
             rgba = "," + stop.toCSS().replace(/ /g, "");
             result += isWebKit ? ", color-stop(" + (i==0 ? "0" : "1" ) + rgba.replace("transparent", "rgba(0,0,0,0)") + ")" : rgba;
         } else {
@@ -2547,7 +2546,7 @@ function getGradient (args, initial, isWebKit) {
         }
     }
 
-   return result + ")";
+    return result + ")";
 }
 
 var directions = {
@@ -7127,7 +7126,6 @@ function errorHTML(e, rootHref) {
         "margin-bottom: 15px"
     ].join(';');
 
-    if (less.env == 'development') {
         timer = setInterval(function () {
             if (document.body) {
                 if (document.getElementById(id)) {
@@ -7138,7 +7136,6 @@ function errorHTML(e, rootHref) {
                 clearInterval(timer);
             }
         }, 10);
-    }
 }
 
 function error(e, rootHref) {
