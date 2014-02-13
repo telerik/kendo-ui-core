@@ -141,6 +141,7 @@
     <Compile Include="UI\DataSource\CrudOperationTests.cs" />
     <Compile Include="UI\DataSource\CustomCrudOperationBuilderTests.cs" />
     <Compile Include="UI\DataSource\CustomDataSourceBuilderBaseDouble.cs" />
+    <Compile Include="UI\DataSource\CustomDataSourceModelDescriptorFactoryTests.cs" />
     <Compile Include="UI\DataSource\CustomDataSourceModelFieldDescriptorBuilderTests.cs" />
     <Compile Include="UI\DataSource\CustomDataSourceSchemaBuilderBaseDouble.cs" />
     <Compile Include="UI\DataSource\CustomDataSourceSchemaBuilderBaseTests.cs" />

@@ -474,7 +474,10 @@
                 }
             }
 
-            DataSource.Transport.StringifyDates = true;
+            if (DataSource.Type != DataSourceType.Custom)
+            {
+                DataSource.Transport.StringifyDates = true;
+            }
 
             Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
 

@@ -33,6 +33,20 @@
         }
 
         /// <summary>
+        /// Use it to configure Custom binding.
+        /// </summary>
+        public CustomDataSourceBuilder<TModel> Custom()
+        {
+            dataSource.Type = DataSourceType.Custom;
+            dataSource.Schema.Data = "";
+            dataSource.Schema.Total = "";
+            dataSource.Schema.Errors = "";
+            dataSource.Schema.Model = new ModelDescriptor(typeof(TModel));
+
+            return new CustomDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
+        }
+
+        /// <summary>
         /// Configures Model properties
         /// </summary>
         public AjaxDataSourceBuilder<TModel> Model(Action<DataSourceSchedulerModelDescriptorFactory<TModel>> configurator)

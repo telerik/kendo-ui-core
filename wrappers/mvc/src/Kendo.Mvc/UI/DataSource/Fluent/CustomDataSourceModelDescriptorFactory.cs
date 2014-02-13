@@ -46,6 +46,14 @@
             return AddFieldDescriptor<TValue>(memberName, typeof(TValue));
         }
 
+        /// <summary>
+        /// Clears all Model fields.
+        /// </summary>
+        public void ClearFields()
+        {
+            model.Fields.Clear();
+        }
+
         private CustomDataSourceModelFieldDescriptorBuilder<TValue> AddFieldDescriptor<TValue>(string memberName, Type memberType)
         {
             var descriptor = model.AddDescriptor(memberName);
