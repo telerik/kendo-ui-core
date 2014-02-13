@@ -24,7 +24,7 @@
     </kendo:grid>
     
     <script id="row-template" type="text/x-kendo-template">
-        <tr>
+        <tr data-uid="#: uid #">
             <td class="photo">
                <img src="<c:url value='/resources/web/Employees/' />#:data.employeeId#.jpg" alt="#: data.employeeId #" />
             </td>
@@ -40,7 +40,7 @@
     </script>
     
     <script id="alt-row-template" type="text/x-kendo-template">
-        <tr class="k-alt">
+        <tr class="k-alt" data-uid="#: uid #">
             <td class="photo">
                <img src="<c:url value='/resources/web/Employees/' />#:data.employeeId#.jpg" alt="#: data.employeeId #" />
             </td>

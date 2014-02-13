@@ -9,7 +9,7 @@
         columns.Bound(e=> e.EmployeeID).Title("ID");
     })
     .ClientRowTemplate(
-        "<tr>" +
+        "<tr data-uid='#: uid #'>" +
             "<td class='photo'>" +
                "<img src='" + Url.Content("~/Content/web/Employees/") +"#:data.EmployeeID#.jpg' alt='#: data.EmployeeID #' />" +
             "</td>" +
@@ -24,7 +24,7 @@
          "</tr>"      
     )
     .ClientAltRowTemplate(
-        "<tr class='k-alt'>" +
+        "<tr class='k-alt' data-uid='#: uid #'>" +
             "<td class='photo'>" +
                 "<img src='" + Url.Content("~/Content/web/Employees/") + "#:data.EmployeeID#.jpg' alt='#: data.EmployeeID #' />" +
             "</td>" +
