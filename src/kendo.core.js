@@ -3601,6 +3601,7 @@ function pad(number, digits, end) {
             },
             toUtcTime: toUtcTime,
             MS_PER_DAY: MS_PER_DAY,
+            MS_PER_HOUR: 60 * MS_PER_MINUTE,
             MS_PER_MINUTE: MS_PER_MINUTE,
             setTime: setTime,
             addDays: addDays,
