@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Transport.Read.Url == null)
+            if (Transport.Read.Url == null & Type != DataSourceType.Custom)
             {
                 // If Url is not set assume the current url (used in server binding)
                 Transport.Read.Url = "";
@@ -146,19 +146,33 @@ namespace Kendo.Mvc.UI
 
             if (IsClientOperationMode && RawData != null)
             {
-                json["data"] = new Dictionary<string, object>()
+                if (string.IsNullOrEmpty(Schema.Data))
                 {
-                    { Schema.Data,  SerializeDataSource(RawData) },
-                    { Schema.Total, Total }
-                };
+                    json["data"] = SerializeDataSource(Data);
+                }
+                else
+                {
+                    json["data"] = new Dictionary<string, object>()
+                    {
+                        { Schema.Data,  SerializeDataSource(RawData) },
+                        { Schema.Total, Total }
+                    };
+                }
             }
             else if (IsClientBinding && !IsClientOperationMode && Data != null)
             {
-                json["data"] = new Dictionary<string, object>()
+                if (string.IsNullOrEmpty(Schema.Data))
                 {
-                    { Schema.Data,  SerializeDataSource(Data) },
-                    { Schema.Total, Total }
-                };
+                    json["data"] = SerializeDataSource(Data);
+                }
+                else
+                {
+                    json["data"] = new Dictionary<string, object>()
+                    {
+                        { Schema.Data,  SerializeDataSource(Data) },
+                        { Schema.Total, Total }
+                    };
+                }
             }
         }
 

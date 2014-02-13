@@ -21,5 +21,15 @@
 
             return new WebApiDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
+
+        /// <summary>
+        /// Use it to configure Custom binding.
+        /// </summary>
+        public CustomDataSourceBuilder<TModel> Custom()
+        {
+            dataSource.Type = DataSourceType.Custom;
+
+            return new CustomDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
+        }
     }
 }

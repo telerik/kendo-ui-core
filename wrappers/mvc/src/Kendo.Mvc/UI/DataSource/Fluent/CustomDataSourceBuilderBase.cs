@@ -25,6 +25,7 @@
             this.dataSource.Schema.Data = "";
             this.dataSource.Schema.Total = "";
             this.dataSource.Schema.Errors = "";
+            this.dataSource.Transport.SerializeEmptyPrefix = false;
         }
 
         /// <summary>

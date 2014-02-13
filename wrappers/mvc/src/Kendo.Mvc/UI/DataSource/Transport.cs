@@ -17,14 +17,15 @@ namespace Kendo.Mvc.UI
             FunctionUpdate = new ClientHandlerDescriptor();
             FunctionDestroy = new ClientHandlerDescriptor();
             FunctionCreate = new ClientHandlerDescriptor();
-
             ParameterMap = new ClientHandlerDescriptor();
+            SerializeEmptyPrefix = true;
         }
 
         public string Prefix { get; set; }
         public bool StringifyDates { get; set; }
         public string IdField { get; set; }
         public ClientHandlerDescriptor ParameterMap { get; set; }
+        public bool SerializeEmptyPrefix { get; set; }
         
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -44,8 +45,15 @@ namespace Kendo.Mvc.UI
                     json["read"] = read;
                 }
             }
-            
-            json["prefix"] = Prefix.HasValue() ? Prefix : string.Empty;
+
+            if (SerializeEmptyPrefix)
+            {
+                json["prefix"] = Prefix.HasValue() ? Prefix : string.Empty;
+            }
+            else if (Prefix.HasValue())
+            {
+                json["prefix"] = Prefix;
+            }
 
             if (CustomUpdate != null)
             {

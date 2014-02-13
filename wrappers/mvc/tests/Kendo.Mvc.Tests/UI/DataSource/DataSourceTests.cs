@@ -15,6 +15,16 @@
         }
 
         [Fact]
+        public void Empty_Url_should_not_be_serialized_for_custom_datasource()
+        {
+            dataSource.Type = DataSourceType.Custom;
+
+            var result = dataSource.ToJson();
+            IDictionary<string, object> transport = (IDictionary<string, object>)dataSource.ToJson()["transport"];
+            transport.ContainsKey("read").ShouldBeFalse();
+        }
+
+        [Fact]
         public void ToJson_serverPaging_is_serialized_if_set()
         {
             dataSource.ServerPaging = true;

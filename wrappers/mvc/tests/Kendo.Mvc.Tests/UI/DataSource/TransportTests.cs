@@ -25,6 +25,17 @@
         }
 
         [Fact]
+        public void Prefix_is_not_serialized_if_serializeEmptyprefix_is_false()
+        {
+            transport.SerializeEmptyPrefix = false;
+
+            var result = (IDictionary<string,object>)transport.ToJson();
+
+            result.ContainsKey("prefix").ShouldBeFalse();
+        }
+
+
+        [Fact]
         public void ParameterMap_with_string_should_set_HandlerName()
         {
             transport.ParameterMap.HandlerName = handlerName;
