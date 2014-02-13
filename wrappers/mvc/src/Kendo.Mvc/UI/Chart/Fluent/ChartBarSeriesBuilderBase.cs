@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Sets the name of the stack that this series belongs to. Each unique name creates a new stack.
         /// </summary>
-        /// <param name="stackName">The name of the stack.</param>
+        /// <param name="stackGroup">The name of the stack group.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Chart(Model)
@@ -49,9 +49,33 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TSeriesBuilder Stack(string stackName)
+        public TSeriesBuilder Stack(string stackGroup)
         {
-            Series.StackName = stackName;
+            Series.StackGroup = stackGroup;
+
+            return (TSeriesBuilder)this;
+        }
+
+        /// <summary>
+        /// Sets the name of the stack that this series belongs to. Each unique name creates a new stack.
+        /// </summary>
+        /// <param name="stackType">The stack type.</param>
+        /// <param name="stackGroup">The name of the stack group.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Series(series => series.Bar(s => s.Sales).Stack("Female"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder Stack(ChartStackType stackType, string stackGroup = null)
+        {
+            Series.StackType = stackType;
+
+            if (stackGroup != null) {
+                Series.StackGroup = stackGroup;
+            }
 
             return (TSeriesBuilder)this;
         }

@@ -159,6 +159,8 @@
     <Compile Include="Controllers\DataViz\Barcode\ApiController.cs" />
     <Compile Include="Controllers\DataViz\Barcode\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\ColumnController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_Stacked100_BarController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Stacked100_BarController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Error_BarsController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Gap_SpacingController.cs" />
@@ -700,6 +702,8 @@
     <Content Include="Areas\aspx\Views\dataviz\barcode\api.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\barcode\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\column.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_stacked100_bar.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\stacked100_bar.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\error_bars.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\gap_spacing.aspx" />
@@ -3001,6 +3005,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\line_charts\stacked100_line.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\stacked100_bar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_stacked100_bar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

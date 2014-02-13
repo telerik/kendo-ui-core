@@ -116,11 +116,12 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Axis("Secondary").ShouldBeSameAs(builder);
         }
+
         [Fact]
         public void Stack_should_set_Stacked()
         {
             builder.Stack(true);
-            series.Stacked.ShouldBeTrue();
+            series.Stacked.Value.ShouldBeTrue();
         }
 
         [Fact]
@@ -130,16 +131,36 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Stack_should_set_StackName()
+        public void Stack_should_set_StackGroup()
         {
             builder.Stack("Female");
-            series.StackName.ShouldEqual("Female");
+            series.StackGroup.ShouldEqual("Female");
         }
 
         [Fact]
         public void Stack_name_should_return_builder()
         {
             builder.Stack("Female").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Stack_should_set_StackType()
+        {
+            builder.Stack(ChartStackType.Stack100);
+            series.StackType.ShouldEqual(ChartStackType.Stack100);
+        }
+
+        [Fact]
+        public void Stack_should_set_StackType_and_StackGroup()
+        {
+            builder.Stack(ChartStackType.Stack100, "Foo");
+            series.StackGroup.ShouldEqual("Foo");
+        }
+
+        [Fact]
+        public void Stack_type_should_return_builder()
+        {
+            builder.Stack(ChartStackType.Stack100).ShouldBeSameAs(builder);
         }
 
         [Fact]
