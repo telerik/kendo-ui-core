@@ -151,7 +151,8 @@ var __meta__ = {
                 sortable: options.sortable,
                 filterable: options.filterable,
                 columns: that._ownerColumns(),
-                showColumns: options.columns
+                showColumns: options.columns,
+                lockedColumns: options.lockedColumns
             });
 
             that.view = that.pane.append(html);
@@ -166,6 +167,12 @@ var __meta__ = {
                 that.close();
                 e.preventDefault();
             });
+
+            if (that.options.lockedColumns) {
+                that.view.bind("show", function() {
+                    that._updateLockedColumns();
+                });
+            }
         },
 
         destroy: function() {
@@ -445,11 +452,11 @@ var __meta__ = {
 
                 if (item.hasClass("k-lock")) {
                     that.owner.lockColumn(that.field);
+                    that.close();
                 } else if (item.hasClass("k-unlock")) {
                     that.owner.unlockColumn(that.field);
+                    that.close();
                 }
-
-                that.close();
             });
         },
 
@@ -541,6 +548,10 @@ var __meta__ = {
                     '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+
                     '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite k-i-sort-desc"></span>${messages.sortDescending}</span></li>'+
                 '#}#'+
+                '#if(lockedColumns){#'+
+                    '<li class="k-item k-lock"><span class="k-link"><span class="k-sprite k-i-lock"></span>${messages.lock}</span></li>'+
+                    '<li class="k-item k-unlock"><span class="k-link"><span class="k-sprite k-i-unlock"></span>${messages.unlock}</span></li>'+
+                '#}#'+
                 '#if(filterable){#'+
                     '<li class="k-item k-filter-item">'+
                         '<span class="k-link k-filterable">'+
@@ -563,15 +574,15 @@ var __meta__ = {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
-            this.element.on("click" + NS, "li:not(.k-separator)", "_click");
+            this.element.on("click" + NS, "li:not(.k-separator):not(.k-state-disabled)", "_click");
         },
 
         events: [ SELECT ],
 
         _click: function(e) {
-            if (this.trigger(SELECT, { item: e.currentTarget })) {
-                e.preventDefault();
-            }
+            e.preventDefault();
+
+            this.trigger(SELECT, { item: e.currentTarget });
         },
 
         close: function() {
