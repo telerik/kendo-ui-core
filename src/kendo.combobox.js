@@ -264,7 +264,7 @@ var __meta__ = {
             }
 
             if (that._isSelect) {
-                hasChild = that.element[0].firstChild;
+                hasChild = that.element[0].children[0];
 
                 if (state === STATE_REBIND) {
                     that._state = "";
