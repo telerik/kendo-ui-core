@@ -57,9 +57,7 @@ namespace Kendo.Mvc.UI.Fluent
         public CustomDataSourceBuilder<TModel> Custom()
         {
             dataSource.Type = DataSourceType.Custom;
-            dataSource.Schema.Data = "";
-            dataSource.Schema.Total = "";
-            dataSource.Schema.Errors = "";
+
             return new CustomDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
     }

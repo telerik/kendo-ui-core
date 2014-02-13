@@ -22,6 +22,9 @@
             this.dataSource.ServerGrouping = false;
             this.dataSource.ServerFiltering = false;
             this.dataSource.ServerAggregates = false;
+            this.dataSource.Schema.Data = "";
+            this.dataSource.Schema.Total = "";
+            this.dataSource.Schema.Errors = "";
         }
 
         /// <summary>

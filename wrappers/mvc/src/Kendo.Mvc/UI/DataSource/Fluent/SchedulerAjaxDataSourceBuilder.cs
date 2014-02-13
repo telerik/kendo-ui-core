@@ -35,15 +35,12 @@
         /// <summary>
         /// Use it to configure Custom binding.
         /// </summary>
-        public CustomDataSourceBuilder<TModel> Custom()
+        public SchedulerCustomDataSourceBuilder<TModel> Custom()
         {
             dataSource.Type = DataSourceType.Custom;
-            dataSource.Schema.Data = "";
-            dataSource.Schema.Total = "";
-            dataSource.Schema.Errors = "";
             dataSource.Schema.Model = new ModelDescriptor(typeof(TModel));
 
-            return new CustomDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
+            return new SchedulerCustomDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
 
         /// <summary>

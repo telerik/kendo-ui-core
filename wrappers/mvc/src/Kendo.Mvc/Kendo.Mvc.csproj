@@ -696,6 +696,7 @@
     <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceTransportBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyWebApiDataSourceBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\SchedulerCustomDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\SchedulerWebApiDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\WebApiDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\WebApiDataSourceBuilderBase.cs" />

@@ -32,6 +32,50 @@
         }
 
         /// <summary>
+        /// Configures the initial sorting.
+        /// </summary>
+        public virtual CustomDataSourceBuilder<TModel> Sort(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
+        {
+
+            configurator(new DataSourceSortDescriptorFactory<TModel>(dataSource.OrderBy));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the initial grouping.
+        /// </summary>
+        public virtual CustomDataSourceBuilder<TModel> Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
+        {
+
+            configurator(new DataSourceGroupDescriptorFactory<TModel>(dataSource.Groups));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the initial aggregates.
+        /// </summary>
+        public virtual CustomDataSourceBuilder<TModel> Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
+        {
+
+            aggregates(new DataSourceAggregateDescriptorFactory<TModel>(dataSource.Aggregates));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the initial filter.
+        /// </summary>
+        public virtual CustomDataSourceBuilder<TModel> Filter(Action<DataSourceFilterDescriptorFactory<TModel>> configurator)
+        {
+
+            configurator(new DataSourceFilterDescriptorFactory<TModel>(dataSource.Filters));
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the type of the data source.
         /// </summary>
         /// <param name="type"></param>

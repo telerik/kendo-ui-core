@@ -151,6 +151,7 @@
     <Compile Include="UI\DataSource\CustomDataSourceBuilderBaseTests.cs" />
     <Compile Include="UI\DataSource\ReadOnlyCustomDataSourceTransportBuilderTests.cs" />
     <Compile Include="UI\DataSource\SchedulerAjaxDataSourceBuilderTests.cs" />
+    <Compile Include="UI\DataSource\SchedulerCustomDataSourceBuilderTests.cs" />
     <Compile Include="UI\DataSource\SchedulerWebApiDataSourceBuilderTests.cs" />
     <Compile Include="UI\DataSource\TransportTests.cs" />
     <Compile Include="UI\DataSource\WebApiDataSourceBuilderBaseTests.cs" />
