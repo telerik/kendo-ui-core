@@ -31,8 +31,8 @@
                         ]
                     }).data("kendoGrid");
 
-                    $("#grid table tbody").kendoSortable({
-                        filter: ">tr",
+                    $("#grid").data("kendoGrid").table.kendoSortable({
+                        filter: ">tbody >tr",
                         hint: function(element) {
                             return $("<div class='k-grid k-widget' style='width: 970px;'><table><tr class='k-header'>" + element.clone().html() + "</tr></table></div>");
                         },
