@@ -344,7 +344,7 @@ registerTool("justifyRight", new BlockFormatTool({
 }));
 
 registerFormat("justifyFull", [
-    { tags: dom.blockElements, attr: { style: { textAlign: "justify", listStylePosition: "" }} },
+    { tags: dom.blockElements, attr: { style: { textAlign: "justify", listStylePosition: "" }} }
 ]);
 registerTool("justifyFull", new BlockFormatTool({
     format: formats.justifyFull,
