@@ -307,13 +307,14 @@
             },
             content: function (content) {
                 if (content !== undefined) {
-                    var bounds = this.bounds();
+                    var bounds = this.bounds(),
+                        options = deepExtend({text: "", width: bounds.width, height: bounds.height}, this.options.content);
+
                     if (kendo.diagram.Utils.isString(content)) {
                         this.options.content.text = content;
-                        options = deepExtend({text: "", width: bounds.width, height: bounds.height}, this.options.content);
+                        options.text = content;
                     }
                     else {
-                        options = deepExtend({text: "", width: bounds.width, height: bounds.height}, this.options.content);
                         this.options.content = options;
                     }
 
@@ -985,6 +986,14 @@
                     return this._targetDefiner;
                 }
             },
+
+            content: function(content) {
+                var result = DiagramElement.fn.content.call(this, content);
+                this.refresh();
+
+                return result;
+            },
+
             /**
              * Selects or unselects this connections.
              * @param value True to select, false to unselect.
