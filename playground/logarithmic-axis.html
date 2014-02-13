@@ -20,7 +20,8 @@
     </head>
     <body>
 
-        <div id="chart" style="height: 500px;"></div>
+       <-- <div id="log" style="height: 500px;"></div> -->
+       <div id="chart" style="height: 500px;"></div>
         <div id="panes"></div>
        <script>
        createChart();
@@ -43,7 +44,7 @@
                     field: "Volume",
                     axis: "volumeAxis",
                     labels: {
-                        visible: true
+                        visible: false
                     },
                     tooltip: {
                         format: "{0:C0}"
@@ -55,8 +56,8 @@
                         field: "Close"
                     },
                     select: {
-                        from: "2002/09/01",
-                        to: "2005/04/01"
+                        from: "2001/02/01",
+                        to: "2003/08/30"
                     }
                 },
                 panes: [{
@@ -69,12 +70,10 @@
                     pane: "volumePane",
                     visible: true,
                     minorTicks: {
-                        visible: true,
-                        color: "green"
+                        visible: true
                     },
                     minorGridLines: {
-                        visible: true,
-                        color: "green"
+                        visible: true
                     },
                     type: "logarithmic",
                     narrowRange: false
@@ -152,16 +151,17 @@
             data.push(data[i-1] + data[i-2]);
        }
     
-        $("#chart").kendoChart({
+        $("#log").kendoChart({
             title: "Fibonacci sequence",
             dataSource: {
+               //data: [10, -20, 30, -40, 60, -70,80,200, 1000, 10000]
                 data: data
               // data: [{value: 3}, {value: 4}, {value: 5}, {value: 6}, {value: 7},{value: 8},{value: 9},
                 // {value: 20, note: "min"}, {value: 30}, {value: 40}, {value: 50}, {value: 60},{value: 70}, {value: 80}, {value: 90}, 
                 // {value: 100, note: "middle"}, {value: 200}, {value: 300} ,{value: 400} ,{value: 500}, {value: 600}, {value: 700}, {value: 800}, {value: 900, note: "top"}, {value: 1001}, {value: 100001}]
             },
             seriesDefaults: {
-                type: "bar",    
+                type: "column",    
                 labels: {
                     visible: true                   
                 },
@@ -179,16 +179,21 @@
             } ],           
             valueAxis: [{  
                 type: "logarithmic",
-                majorUnit: 10,
-                min: 2.5,
-                // minorUnit: 9,                 
+               // majorUnit: 10,
+                //axisCrossingValue: 10,
+                //min: 0.00001,
+                // minorUnit: 3,                 
                 minorGridLines: {
                     visible: true,
-                    // color: "red"
+                    //color: "red",
+                    // skip: 1,
+                    // step: 2
                 },  
                 majorGridLines: {
                     visible: true,
-                    // color: "blue"
+                    //color: "blue",
+                    // skip: 2,
+                    // step: 2
                 },                  
                 reverse: false,
                 // narrowRange: false,
@@ -202,6 +207,8 @@
                   // size: 6,
                   // color: "red",
                   // width: 5,
+                  skip: 2,
+                  step: 2,
                   visible: true
                 }
             }
@@ -226,6 +233,53 @@
             }
         });
         
+        $("#chart").kendoChart({
+            title: {
+                text: "Olympic Medals won by USA"
+            },
+            legend: {
+                visible: false
+            },
+            seriesDefaults: {
+                type: "column",
+                stack: true
+            },
+            series: [{
+                name: "Gold Medals",
+                data: [40, 32, 34, 36, 45, 33, 34, 83, 36, 37, 44, 37, 35, 36, 46],
+                color: "#f3ac32"
+            }, {
+                name: "Silver Medals",
+                data: [19, 25, 21, 26, 28, 31, 35, 60, 31, 34, 32, 24, 40, 38, 29],
+                color: "#b8b8b8"
+            }, {
+                name: "Bronze Medals",
+                data: [17, 17, 16, 28, 34, 30, 25, 30, 27, 37, 25, 33, 26, 36, 29],
+                color: "#bb6e36"
+            }],
+            valueAxis: {
+                max: 180,
+                minorGridLines: {
+                    visible: true
+                },
+                minorTicks: {
+                    visible: true
+                },
+                majorTicks: {
+                    visible: true
+                }
+            },
+            categoryAxis: {
+                categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012],
+                majorGridLines: {
+                    visible: false
+                }
+            },
+            tooltip: {
+                visible: true,
+                template: "#= series.name #: #= value #"
+            }
+        });        
         
        </script>
     </body>
