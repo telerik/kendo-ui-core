@@ -2766,6 +2766,9 @@ var __meta__ = {
                     total -= e.items.length;
                 } else if (action !== "itemchange" && action !== "sync" && !that.options.serverPaging) {
                     total = that._pristineTotal;
+                } else if (action === "sync" && parseInt(that._total, 10) === 0) {
+                    total = 0;
+                    that._pristineTotal = 0;
                 }
 
                 that._total = total;
