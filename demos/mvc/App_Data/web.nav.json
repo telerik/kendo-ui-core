@@ -1064,6 +1064,11 @@
                     "text": "Scroller",
                     "url": "mobile/scroller.html",
                     "title": "Kendo UI Mobile Scroller widget demo"
+                },
+                {
+                    "text": "Switch",
+                    "url": "mobile/switch.html",
+                    "title": "Kendo UI Mobile Switch widget demo"
                 }
             ]
         },

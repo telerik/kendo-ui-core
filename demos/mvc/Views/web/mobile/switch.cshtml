@@ -1,0 +1,27 @@
+<div id="example" class="k-content">
+    <h3>Profile</h3>
+    <h4>Eduardo <span>Saavedra</span></h4><img src="../../content/mobile/overview/eduardo.jpg" />
+    <p>Brand Manager at Marketing Team</p>
+
+    <h4>Password</h4>
+
+    <dl>
+        <dt>User cannot change pasword</dt>
+        <dd><input type="checkbox" id="email-switch" checked="checked" /></dd>
+        <dt>Password never expires</dt>
+        <dd><input id="wink-switch" /></dd>
+    </dl>
+</div>
+
+<script>
+    $(function() {
+        $("#email-switch").kendoMobileSwitch();
+        $("#wink-switch").kendoMobileSwitch();
+
+        $("#subscription-switch").kendoMobileSwitch({
+            checked: true,
+            onLabel: "YES",
+            offLabel: "NO"
+        });
+    });
+</script>
