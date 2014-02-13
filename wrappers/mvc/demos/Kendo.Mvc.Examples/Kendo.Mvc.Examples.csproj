@@ -195,6 +195,7 @@
     <Compile Include="Controllers\DataViz\Financial\VirtualizationController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
+    <Compile Include="Controllers\DataViz\Line_Charts\Stacked100_LineController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Smooth_LineController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Step_LineController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Date_AxisController.cs" />
@@ -730,6 +731,7 @@
     <Content Include="Areas\aspx\Views\dataviz\financial\virtualization.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked100_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\smooth_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\error_bars.aspx" />
@@ -2996,6 +2998,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\area_charts\stacked100_area.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\line_charts\stacked100_line.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

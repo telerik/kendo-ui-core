@@ -157,6 +157,22 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_stack_type_100()
+        {
+            series.StackType = ChartStackType.Stack100;
+            GetJson(series)["stack"].ShouldNotBeNull();
+            ((IDictionary<string, object>)GetJson(series)["stack"])["type"].ShouldEqual("100%");
+        }
+
+        [Fact]
+        public void Serializes_stack_type_normal()
+        {
+            series.StackType = ChartStackType.Normal;
+            GetJson(series)["stack"].ShouldNotBeNull();
+            ((IDictionary<string, object>)GetJson(series)["stack"])["type"].ShouldEqual("normal");
+        }
+
+        [Fact]
         public void Serializes_aggregate()
         {
             series.Aggregate = ChartSeriesAggregate.Max;
