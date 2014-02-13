@@ -1,25 +1,36 @@
 
         <div id="example">
-            <div class="list-wrapper">
+            <div class="demo-section list-wrapper">
+                <h3 class="title">Reorder Items
+                </h3>
                 <ul id="sortable-left" style="min-height: 41px;">
-                    <li class="list-left">Item1</li>
-                    <li class="list-left">Item2</li>
-                    <li class="list-left">Item3</li>
+                    <li class="list-left">Item 1</li>
+                    <li class="list-left">Item 2</li>
+                    <li class="list-left">Item 3</li>
                 </ul>
 
                 <ul id="sortable-right" style="min-height: 41px;">
-                    <li class="list-right">Item1</li>
-                    <li class="list-right">Item2</li>
-                    <li class="list-right">Item3</li>
+                    <li class="list-right">Item 1</li>
+                    <li class="list-right">Item 2</li>
+                    <li class="list-right">Item 3</li>
                 </ul>
+            </div>
+            
+            <div class="demo-section">                
+                <h3 class="title">Console log
+                </h3>
+                <div class="console"></div>
             </div>
 
             <script>
                 $(document).ready(function() {
                     $("#sortable-left").kendoSortable({
                         connectWith: "#sortable-right",
-                        placeholder: function(element) {
+                        hint: function(element) {
                             return element.clone().css("opacity", 0.4);
+                        },
+                        placeholder: function(element) {
+                            return element.clone().addClass("placeholder");
                         },
                         start: onStart,
                         move: onMove,
@@ -30,8 +41,11 @@
 
                     $("#sortable-right").kendoSortable({
                         connectWith: "#sortable-left",
-                        placeholder: function(element) {
+                        hint: function(element) {
                             return element.clone().css("opacity", 0.4);
+                        },
+                        placeholder: function(element) {
+                            return element.clone().addClass("placeholder");
                         },
                         start: onStart,
                         move: onMove,
@@ -78,10 +92,15 @@
                 }
 
             </script>
-
-            <div class="console"></div>
-
-            <style>
+            
+            <style scoped>
+                .demo-section {
+                    width: 600px;
+                    text-align: center;
+                }
+                .console {
+                    margin: 0;
+                }
                 #example {
                     -webkit-user-select: none;
                     -moz-user-select: none;
@@ -94,29 +113,36 @@
                 }
 
                 #sortable-left, #sortable-right {
-                    width: 215px;
-                    margin-left: 50px;
+                    width: 200px;
+                    margin-left: 70px;
                     padding: 0;
                     float: left;
-                    border: 1px solid black;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
                 }
 
                 .list-right, .list-left {
                     list-style-type: none;
                     margin: 5px;
-                    line-height: 30px;
-                    width: 200px;
+                    width: 168px;
+                    padding: 8px 10px;
                     text-align: center;
-                    border: 1px solid black;
-                    color: white;
+                    color: #ffffff;
+                    border: 1px solid transparent;
+                    border-radius: 4px;
                 }
 
                 .list-left {
-                    background-color: #0033FF;
+                    background-color: #52aef7;
                 }
 
                 .list-right {
-                    background-color: #CC0033;
+                    background-color: #e62757;
+                }
+                .placeholder {
+                    border: 1px dashed #ccc;
+                    background-color: #fff;
+                    color: #333;
                 }
             </style>
         </div>
