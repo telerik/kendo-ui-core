@@ -667,6 +667,31 @@ test("total is correct after removing all items syncing and canceling the change
     equal(dataSource.total(), 0);
 });
 
+test("total is correct after removing all items, syncing adding new one and canceling the changes", function() {
+    var dataSource = new DataSource({
+        schema: {
+            model: { id: "id" }
+        },
+        data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+    });
+
+    dataSource.read();
+
+    dataSource.remove(dataSource.get(1));
+    dataSource.remove(dataSource.get(2));
+
+    dataSource.sync();
+
+    dataSource.add({});
+
+    dataSource.sync();
+
+    dataSource.cancelChanges();
+
+    equal(dataSource.total(), 1);
+});
+
+
 test("total is updated after removing all items and adding new", function() {
     var dataSource = new DataSource({
         schema: {
