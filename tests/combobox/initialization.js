@@ -576,6 +576,21 @@ test("Set data source does not change selected index", function() {
    equal(combobox.value(), "");
 });
 
+test("Persist value when rebind data source", function() {
+    combobox = new ComboBox(input,{
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: 1, value: 1}, {text:2, value:2}],
+        value: "1"
+    });
+
+    combobox.value("");
+
+    combobox.refresh();
+
+    equal(combobox.value(), "");
+});
+
 test("persist tabIndex of the original element", function() {
     combobox = new ComboBox($("<input tabindex='5'/>").appendTo(QUnit.fixture));
 

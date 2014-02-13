@@ -859,6 +859,7 @@ kendo_module({
 
         _selectItem: function() {
             var that = this,
+                notBound = that._bound === undefined,
                 options = that.options,
                 useOptionIndex,
                 value;
@@ -866,12 +867,12 @@ kendo_module({
             useOptionIndex = that._isSelect && !that._initial && !options.value && options.index && !that._bound;
 
             if (!useOptionIndex) {
-                value = that._selectedValue || options.value || that._accessor();
+                value = that._selectedValue || (notBound && options.value) || that._accessor();
             }
 
             if (value) {
                 that.value(value);
-            } else if (that._bound === undefined) {
+            } else if (notBound) {
                 that.select(options.index);
             }
         },
