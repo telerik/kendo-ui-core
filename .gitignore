@@ -48,6 +48,7 @@ wrappers/mvc/demos/**/Scripts
 wrappers/mvc/demos/**/Content
 wrappers/mvc/demos/**/App_Data
 wrappers/mvc/legacy-themes/*.min.css
+wrappers/mvc/TestResults
 playground/chart.html
 playground/map/defaults.html
 wrappers/java/**/target
