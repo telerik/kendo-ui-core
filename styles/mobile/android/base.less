@@ -16,6 +16,11 @@
     .flex-direction(column-reverse);
 }
 
+.km-root .km-android .km-tabstrip .km-button
+{
+    background: transparent;
+}
+
 .km-android .km-view > *,
 .km-android .km-modalview,
 .km-android .km-popover-root .km-view,
@@ -72,6 +77,12 @@
 }
 
 /* Icons */
+
+.km-android .km-icon
+{
+    text-indent: 0;
+    z-index: 1;
+}
 
 .km-android .km-notext
 {
@@ -182,6 +193,11 @@ html .km-android .km-navbar .km-notext
     display: none !important;
 }
 
+.km-android .km-popup .k-list-container .km-scroll-container
+{
+    padding: 0;
+}
+
 .km-android .km-popup:not(.km-pane):before,
 .km-android .km-actionsheet-wrapper:before
 {
@@ -224,7 +240,6 @@ html .km-android .km-navbar .km-notext
 
 /* Active States */
 
-.km-android .km-button:active,
 .km-android .km-button.km-state-active,
 .km-android input[type=file]:active,
 .km-android input[type=file]:focus
@@ -232,8 +247,8 @@ html .km-android .km-navbar .km-notext
     overflow: visible;
 }
 
-.km-android .km-button:active:after,
-.km-android .km-button.km-state-active:after
+.km-android .km-button.km-state-active:after,
+.km-android .km-buttongroup .km-state-active:after
 {
     content: "\a0";
     display: block;
@@ -250,7 +265,8 @@ html .km-android .km-navbar .km-notext
 
 .km-android .km-navbar .km-state-active:after,
 .km-android .km-toolbar .km-state-active:after,
-.km-android .km-tabstrip .km-state-active:after
+.km-android .km-tabstrip .km-state-active:after,
+.km-android2 .km-buttongroup .km-state-active:after
 {
     display: none;
 }

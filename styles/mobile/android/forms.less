@@ -12,8 +12,8 @@
 .km-android .k-slider .k-draghandle,
 .km-android .k-slider .k-draghandle:hover
 {
-    width: 1.25em;
-    height: 1.25em;
+    width: .4em;
+    height: .4em;
     .box-shadow(none);
     border-radius: 5em;
     border: 0;
@@ -21,7 +21,7 @@
 
 .km-android .k-slider-horizontal .k-draghandle
 {
-    top: -.6em;
+    top: -3px;
 }
 
 .km-android .k-slider-vertical .k-draghandle
@@ -31,7 +31,7 @@
 
 .km-android .k-slider-horizontal .k-slider-selection
 {
-    margin-top: -.1em;
+    margin-top: -1px;
     height: .2em;
 }
 
@@ -39,11 +39,6 @@
 {
     margin-left: -.1em;
     width: .2em;
-}
-
-.km-android .k-slider-track
-{
-    background: #414141;
 }
 
 .km-android .k-slider-horizontal .k-slider-track
@@ -83,9 +78,8 @@
 {
     .appearance(none);
     padding: .4em;
-    outline: none;
     border-radius: 0;
-    .box-sizing(padding-box);
+    .box-sizing(border-box);
 }
 
 .km-android .km-list input[type=password],
@@ -175,6 +169,7 @@
     padding: .1em .3em;
     border-radius: 0;
     .box-sizing(border-box);
+    .box-shadow(none);
 }
 
 .km-android .k-dropdown .k-input
@@ -189,12 +184,13 @@
 .km-android input[type=url],
 .km-android input[type=email],
 .km-android input[type=text]:not(.k-input),
-.km-android textarea
+.km-root .km-android textarea
 {
-    border-width: 0 0 @android-border-width;
+    outline-width: 4px;
+    outline-style: solid;
+    outline-offset: -5px;
+    border-width: 0 0 5px;
     border-style: solid;
-    margin-bottom: 1px;
-    background-clip: padding-box;
 }
 
 .km-android input[type=password]:focus,
@@ -206,8 +202,7 @@
 .km-android input[type=text]:not(.k-input):focus,
 .km-android textarea:focus
 {
-    margin-bottom: 0;
-    border-width: 0 0 2px;
+    outline-offset: -6px;
 }
 
 .km-android input[type=month],
@@ -223,7 +218,40 @@
     border-width: 0 0 1px;
     border-style: solid;
     margin-bottom: 1px;
-    background-clip: padding-box;
+    background-clip: border-box;
+}
+
+.km-android .k-slider .k-draghandle,
+.km-android .k-slider .k-draghandle:hover
+{
+    margin-top: -.5em;
+    padding: .5em;
+    background-clip: content-box;
+    -webkit-background-clip: content-box;
+}
+
+.km-android .k-slider .k-draghandle:before
+{
+    content: "\a0";
+    display: block;
+    margin-top: -.5em;
+    margin-left: -.5em;
+    width: 100%;
+    height: 100%;
+    opacity: .3;
+    border-radius: 5em;
+    padding: .5em;
+    margin-bottom: .5em;
+}
+
+.km-android .k-slider .k-draghandle:active:before
+{
+    opacity: .4;
+}
+
+.km-android .km-popup .k-state-hover
+{
+    opacity: .6;
 }
 
 /* Checkboxes and Radios */
@@ -269,11 +297,6 @@
     .transform(scale(1,1.2));
 }
 
-.km-android .km-listview-label input[type=radio]:checked:after
-{
-    color: transparent;
-}
-
 .km-android .km-state-active input[type=radio]:before,
 .km-android .km-state-active input[type=checkbox]:before
 {
@@ -288,5 +311,11 @@
 {
     border-width: @android-border-width;
     border-style: solid;
+}
+
+.km-android .km-listview-label input[type=radio]:checked:after
+{
+    content: "\a0";
+    .box-shadow(0 0 3px currentcolor);
 }
 

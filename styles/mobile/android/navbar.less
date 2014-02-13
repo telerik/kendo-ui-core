@@ -45,6 +45,7 @@
 .km-android .km-navbar .km-button,
 .km-android .km-toolbar .km-button
 {
+    display: inline;
     margin: 0;
     border: 0;
     .box-shadow(none);
@@ -71,5 +72,12 @@
 .km-android.km-horizontal .km-rightitem .km-button
 {
     padding: .4em 0;
+}
+
+html .km-android .km-navbar .km-state-active,
+html .km-android .km-toolbar .km-state-active
+{
+    background: currentcolor;
+    opacity: .6;
 }
 

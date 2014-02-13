@@ -51,12 +51,16 @@
     top: 0;
 }
 
-.km-android .km-tabstrip .km-button:active,
 .km-android .km-tabstrip .km-state-active
 {
     border-bottom-width: .4em;
     padding-bottom: 0;
     .box-shadow(none);
-    border-color: transparent;
+    border-color: currentcolor;
+}
+
+.km-android .km-tabstrip .km-state-active .km-icon
+{
+    color: inherit;
 }
 
