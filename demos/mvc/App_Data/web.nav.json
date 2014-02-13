@@ -1049,6 +1049,16 @@
                     "text": "ModalView",
                     "url": "mobile/modalview.html",
                     "title": "Kendo UI Mobile ModalView widget demo"
+                },
+                {
+                    "text": "Navbar",
+                    "url": "mobile/navbar.html",
+                    "title": "Kendo UI Mobile NavBar widget demo"
+                },
+                {
+                    "text": "Popover",
+                    "url": "mobile/popover.html",
+                    "title": "Kendo UI Mobile PopOver widget demo"
                 }
             ]
         },

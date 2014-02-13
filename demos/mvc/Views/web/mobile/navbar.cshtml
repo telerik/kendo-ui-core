@@ -1,0 +1,18 @@
+<div id="example" class="k-content">
+
+    <div id="my-navbar">
+        <button id="left-navbar-button" data-align="left">Index</button>
+        <span data-role="view-title"></span>
+        <button data-align="right" id="right-navbar-button">Save</button>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $("#left-navbar-button").kendoMobileButton();
+        $("#right-navbar-button").kendoMobileButton();
+        $("#my-navbar").kendoMobileNavBar();
+        // set navbar title dynamically
+        $("#my-navbar").kendoMobileNavBar("title", "My Title");
+    });
+</script>

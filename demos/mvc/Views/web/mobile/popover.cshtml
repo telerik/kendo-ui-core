@@ -1,0 +1,40 @@
+<div id="example" class="k-content">
+
+    <a href="#" id="select-people">Select people</a>
+
+    <div data-role="popover" id="popover-people" >
+        <div data-role="view" data-title="People">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
+                </div>
+            </div>
+            <ul data-role="listview">
+                <li><label>Isabella Anderson<input type="checkbox"></label></li>
+                <li><label>Josh Anderson<input type="checkbox"></label></li>
+                <li><label>Linda Anderson<input type="checkbox"></label></li>
+                <li><label>Oliver Anderson<input type="checkbox"></label></li>
+                <li><label>James Williams<input type="checkbox"></label></li>
+                <li><label>Barbara Williams<input type="checkbox"></label></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeParentPopover(e) {
+        var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
+        popover.close();
+    }
+
+    $(function() {
+        $("#popover-people").kendoMobilePopOver({
+            popup: {"height": "16em", "width": "20em"}
+        });
+
+        $("#select-people").click(function() {
+            $("#popover-people").data("kendoMobilePopOver").open(this);
+        });
+    });
+</script>
