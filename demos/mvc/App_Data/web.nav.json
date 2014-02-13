@@ -1487,12 +1487,6 @@
                     "meta": "This example illustrates the filter and disable items functionality of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
                 },
                 {
-                    "text": "Placeholder / Hint customization",
-                    "url": "sortable/customization.html",
-                    "title": "Demo for placeholder and filter customization of Kendo UI Sortable Component",
-                    "meta": "This example illustrates the placeholder and filter customization feature of Kendo UI Sortable component which provides a cross-browser, touch-friendly way to reorder HTML elements via drag and drop."
-                },
-                {
                     "text": "Handlers",
                     "url": "sortable/handlers.html",
                     "title": "Demo for handler functionality of Kendo UI Sortable Component",
