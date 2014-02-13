@@ -3013,7 +3013,7 @@ var __meta__ = {
                 box = bar.box,
                 vertical = options.vertical,
                 aboveAxis = bar.aboveAxis,
-                clipBox = bar.owner.pane.clipBox(),
+                clipBox = bar.owner.pane.clipBox() || box,
                 x,
                 y;
 
@@ -5726,7 +5726,7 @@ var __meta__ = {
         tooltipAnchor: function() {
             var point = this,
                 box = point.box,
-                clipBox = point.owner.pane.clipBox();
+                clipBox = point.owner.pane.clipBox() || box;
 
             return new Point2D(box.x2 + TOOLTIP_OFFSET, math.max(box.y1, clipBox.y1) + TOOLTIP_OFFSET);
         },
@@ -7391,7 +7391,7 @@ var __meta__ = {
                 pane = container.pane,
                 axes = pane.axes,
                 length = axes.length,
-                clipBox = pane.box,
+                clipBox = pane.box.clone(),
                 axisValueField, idx,
                 lineBox, axis;
 
