@@ -211,6 +211,21 @@ test("combobox does not select first item if initialized from empty select", fun
    ok(!combobox.text());
 });
 
+test("combobox selects first item when initalized from select with TEXT node", function() {
+   var select = $("<select></select>");
+
+   select.append(document.createTextNode(""));
+
+   combobox = new ComboBox(select, {
+       dataSource: [{text: "Foo", value: "Foo"}],
+       dataTextField: "text",
+       dataValueField: "value"
+   });
+
+   ok(!combobox.value());
+   ok(!combobox.text());
+});
+
 test("combobox initializes an UL for its items", function() {
      combobox = new ComboBox(input, []);
 
