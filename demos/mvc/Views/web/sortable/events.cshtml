@@ -27,7 +27,7 @@
                     $("#sortable-left").kendoSortable({
                         connectWith: "#sortable-right",
                         hint: function(element) {
-                            return element.clone().css("opacity", 0.4);
+                            return element.clone().addClass("hint");
                         },
                         placeholder: function(element) {
                             return element.clone().addClass("placeholder");
@@ -42,7 +42,7 @@
                     $("#sortable-right").kendoSortable({
                         connectWith: "#sortable-left",
                         hint: function(element) {
-                            return element.clone().css("opacity", 0.4);
+                            return element.clone().addClass("hint");
                         },
                         placeholder: function(element) {
                             return element.clone().addClass("placeholder");
@@ -92,8 +92,8 @@
                 }
 
             </script>
-            
-            <style scoped>
+
+            <style>
                 .demo-section {
                     width: 600px;
                     text-align: center;
@@ -130,6 +130,9 @@
                     color: #ffffff;
                     border: 1px solid transparent;
                     border-radius: 4px;
+                    cursor: -webkit-grab;
+                    cursor: -moz-grab;
+                    cursor: url(https://mail.google.com/mail/images/2/openhand.cur) 8, 8, move;
                 }
 
                 .list-left {
@@ -143,6 +146,12 @@
                     border: 1px dashed #ccc;
                     background-color: #fff;
                     color: #333;
+                }
+                .hint {
+                    opacity: 0.4;
+                    cursor: -webkit-grabbing;
+                    cursor: -moz-grabbing;
+                    cursor: url(https://mail.google.com/mail/images/2/closehand.cur) 8, 8, move;
                 }
             </style>
         </div>
