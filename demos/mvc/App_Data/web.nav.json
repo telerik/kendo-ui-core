@@ -1059,6 +1059,11 @@
                     "text": "Popover",
                     "url": "mobile/popover.html",
                     "title": "Kendo UI Mobile PopOver widget demo"
+                },
+                {
+                    "text": "Scroller",
+                    "url": "mobile/scroller.html",
+                    "title": "Kendo UI Mobile Scroller widget demo"
                 }
             ]
         },
