@@ -87,11 +87,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Axis("Secondary").ShouldBeSameAs(builder);
         }
+
         [Fact]
         public void Stack_should_set_Stacked()
         {
             builder.Stack(true);
-            series.Stacked.ShouldBeTrue();
+            series.Stacked.Value.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Stack_should_set_StackType()
+        {
+            builder.Stack(ChartStackType.Stack100);
+            series.StackType.ShouldEqual(ChartStackType.Stack100);
         }
 
         [Fact]

@@ -145,6 +145,7 @@
     <Compile Include="Controllers\DataViz\Api\EventsController.cs" />
     <Compile Include="Controllers\DataViz\Api\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Api\SelectionController.cs" />
+    <Compile Include="Controllers\DataViz\Area_Charts\Stacked100_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Smooth_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Step_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Error_BarsController.cs" />
@@ -684,6 +685,7 @@
     <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\selection.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_charts\stacked100_area.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\smooth_area.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\error_bars.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\date_axis.aspx" />
@@ -2991,6 +2993,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\aspx\Views\web\grid\custom_datasource.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\area_charts\stacked100_area.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

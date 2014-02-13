@@ -10,7 +10,16 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// A value indicating if the areas should be stacked.
         /// </summary>
-        bool Stacked
+        bool? Stacked
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The type of stack to plot
+        /// </summary>
+        ChartStackType? StackType
         {
             get;
             set;
