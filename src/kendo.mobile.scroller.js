@@ -37,7 +37,8 @@ var __meta__ = {
         PULL = "pull",
         CHANGE = "change",
         RESIZE = "resize",
-        SCROLL = "scroll";
+        SCROLL = "scroll",
+        MOUSE_WHEEL_ID = 2;
 
     var ZoomSnapBack = Animation.extend({
         init: function(options) {
@@ -114,16 +115,17 @@ var __meta__ = {
         },
 
         start: function(e) {
-            var that = this;
+            var that = this,
+                velocity;
 
             if (!that.dimension.enabled) { return; }
+
 
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.velocity = Math.max(Math.min(
-                    e.touch[that.axis].velocity * that.velocityMultiplier,
-                    MAX_VELOCITY), -MAX_VELOCITY);
+                velocity = e.touch.id === MOUSE_WHEEL_ID ? 0 : e.touch[that.axis].velocity;
+                that.velocity = Math.max(Math.min(velocity * that.velocityMultiplier, MAX_VELOCITY), -MAX_VELOCITY);
 
                 that.tapCapture.captureNext();
                 Animation.fn.start.call(that);
@@ -356,6 +358,8 @@ var __meta__ = {
                 });
             });
 
+            element.on("DOMMouseScroll mousewheel",  proxy(this, "_wheelScroll"));
+
             extend(that, {
                 movable: movable,
                 dimensions: dimensions,
@@ -375,11 +379,37 @@ var __meta__ = {
             that._initAxis("x");
             that._initAxis("y");
 
+            // build closure
+            that._wheelEnd = function() {
+                that._wheel = false;
+                that.userEvents.end(0, that._wheelY);
+            };
+
             dimensions.refresh();
 
             if (that.options.pullToRefresh) {
                 that._initPullToRefresh();
             }
+        },
+
+        _wheelScroll: function(e) {
+            if (!this._wheel) {
+                this._wheel = true;
+                this._wheelY = 0;
+                this.userEvents.press(0, this._wheelY);
+            }
+
+            clearTimeout(this._wheelTimeout);
+            this._wheelTimeout = setTimeout(this._wheelEnd, 50);
+
+            var delta = kendo.wheelDeltaY(e);
+
+            if (delta) {
+                this._wheelY += delta;
+                this.userEvents.move(0, this._wheelY);
+            }
+
+            e.preventDefault();
         },
 
         makeVirtual: function() {

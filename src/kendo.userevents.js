@@ -480,11 +480,11 @@ var __meta__ = {
                 length = touches.length,
                 touch,
                 which = e.which;
-            
+
             if (which && which > 1){
                 return;
             }
-            
+
             if (that._maxTouchesReached()) {
                 return;
             }
@@ -564,7 +564,7 @@ var __meta__ = {
                 pageY: y,
                 clientX: x,
                 clientY: y,
-                target: target || this.element,
+                target: $(target || this.element)[0],
                 stopPropagation: $.noop,
                 preventDefault: $.noop
             });
