@@ -201,6 +201,14 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("hidden", value);
     }
 
+    public boolean getLocked() {
+        return (boolean)getProperty("locked");
+    }
+
+    public void setLocked(boolean value) {
+        setProperty("locked", value);
+    }
+
     public boolean getMenu() {
         return (boolean)getProperty("menu");
     }

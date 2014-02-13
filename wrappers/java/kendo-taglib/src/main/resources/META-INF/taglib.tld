@@ -12050,6 +12050,12 @@ is displayed in the column header cell.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>If set to true the column will be displayed as locked in the grid.</description>
+            <name>locked</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>If set to true the column will be visible in the grid column menu. By default the column menu includes all data-bound columns (ones that have their field set).</description>
             <name>menu</name>
             <rtexprvalue>true</rtexprvalue>
