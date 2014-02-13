@@ -2813,6 +2813,7 @@ var __meta__ = {
 
         _initMobile: function() {
             var options = this.options;
+            var that = this;
 
             this._isMobile = (options.mobile === true && kendo.support.mobileOS) ||
                                 options.mobile === "phone" ||
@@ -2838,6 +2839,16 @@ var __meta__ = {
                 }
 
                 this._editAnimation = "slide";
+
+                this.view.bind("show", function() {
+                    if (that._isLocked()) {
+                        that._updateTablesWidth();
+                        that._applyLockedContainersWidth();
+                        that._syncLockedContentHeight();
+                        that._syncLockedHeaderHeight();
+                        that._syncLockedFooterHeight();
+                    }
+                });
             }
         },
 
