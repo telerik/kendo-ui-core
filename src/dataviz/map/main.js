@@ -2,7 +2,7 @@ kendo_module({
     id: "dataviz.map",
     name: "Map",
     category: "dataviz",
-    description: "The Kendo DataViz Map displays spatial data",
+    description: "The Map widget displays tile maps and vector maps",
     depends: [ "data", "userevents", "tooltip", "dataviz.core", "mobile.scroller" ]
 });
 

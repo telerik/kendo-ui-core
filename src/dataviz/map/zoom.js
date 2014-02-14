@@ -1,11 +1,3 @@
-kendo_module({
-    id: "dataviz.zoomControl",
-    name: "ZoomControl",
-    category: "dataviz",
-    depends: [ "dataviz.core" ],
-    advanced: true
-});
-
 (function ($) {
     var kendo = window.kendo;
     var Widget = kendo.ui.Widget;

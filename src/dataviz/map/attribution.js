@@ -1,11 +1,3 @@
-kendo_module({
-    id: "dataviz.attribution",
-    name: "Attribution",
-    category: "dataviz",
-    depends: [ "dataviz.core" ],
-    advanced: true
-});
-
 (function() {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
