@@ -57,10 +57,10 @@ var __meta__ = {
             this.historyCallback = function(url, params) {
                 var transition = that.transition;
                 that.transition = null;
-                that.viewEngine.showView(url, transition, params);
+                return that.viewEngine.showView(url, transition, params);
             };
 
-            that._historyNavigate = function(url) {
+            this._historyNavigate = function(url) {
                 var params = kendo.parseQueryStringParams(url);
 
                 if (url === BACK) {
@@ -92,11 +92,24 @@ var __meta__ = {
             });
 
             that.viewEngine.bind("showStart", function() {
+                that.loader.transition();
                 that.closeActiveDialogs();
+            });
+
+            that.viewEngine.bind("after", function(e) {
+                that.loader.transitionDone();
             });
 
             that.viewEngine.bind(VIEW_SHOW, function(e) {
                 that.trigger(VIEW_SHOW, e);
+            });
+
+            that.viewEngine.bind("loadStart", function() {
+                that.loader.show();
+            });
+
+            that.viewEngine.bind("loadComplete", function() {
+                that.loader.hide();
             });
 
             that.viewEngine.bind(SAME_VIEW_REQUESTED, function() {
@@ -187,7 +200,9 @@ var __meta__ = {
             });
 
             router.bind("routeMissing", function(e) {
-                that.historyCallback(e.url, e.params);
+                if (!that.historyCallback(e.url, e.params)) {
+                    e.preventDefault();
+                }
             });
 
             router.bind("same", function() {

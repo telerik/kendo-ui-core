@@ -352,7 +352,8 @@ var __meta__ = {
         LOAD_COMPLETE = "loadComplete",
         SHOW_START = "showStart",
         SAME_VIEW_REQUESTED = "sameViewRequested",
-        VIEW_SHOW = "viewShow";
+        VIEW_SHOW = "viewShow",
+        AFTER = "after";
 
     var ViewEngine = Observable.extend({
         init: function(options) {
@@ -391,16 +392,13 @@ var __meta__ = {
                 that.trigger(VIEW_SHOW, { view: e.view });
             });
 
+            that.viewContainer.bind(AFTER, function(e) {
+                that.trigger(AFTER);
+            });
+
             that._setupLayouts(container);
 
             initWidgets(container.children(roleSelector("modalview drawer")));
-
-            if (that.loader) {
-                that.bind(SHOW_START, function() { that.loader.transition(); });
-                that.bind(LOAD_START, function() { that.loader.show(); });
-                that.bind(LOAD_COMPLETE, function() { that.loader.hide(); });
-                that.bind(VIEW_SHOW, function() { that.loader.transitionDone(); });
-            }
         },
 
         destroy: function() {
@@ -423,14 +421,14 @@ var __meta__ = {
 
             if (url === this.url) {
                 this.trigger(SAME_VIEW_REQUESTED);
-                return;
+                return false;
             }
 
             this.trigger(SHOW_START);
 
             var that = this,
                 showClosure = function(view) {
-                    that.viewContainer.show(view, transition, url);
+                    return that.viewContainer.show(view, transition, url);
                 },
                 element = that._findViewElement(url),
                 view = element.data("kendoView");
@@ -450,9 +448,10 @@ var __meta__ = {
                     view = that._createView(element);
                 }
 
-                showClosure(view);
+                return showClosure(view);
             } else {
                 that._loadView(url, showClosure);
+                return true;
             }
         },
 

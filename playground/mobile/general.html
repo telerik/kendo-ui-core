@@ -1,0 +1,56 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.all.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+
+        <title>Mobile Transitions Playground</title>
+    </head>
+
+    <body>
+
+        <div id="view1" data-role="view" style="background:grey;">
+            <ul data-role="listview">
+                <li>This is view 1</li>
+                <li><a href="#view2" data-transition="fade">Go to view2 »</a></li>
+                <li><a href="#view3" data-transition="fade">Go to view3 »</a></li>
+            </ul>
+        </div>
+        <div id="view2" data-role="view" data-before-show="protect">
+            <ul data-role="listview">
+                <li>This is view 2</li>
+                <li>You should never see this</li>
+            </ul>
+        </div>
+        <div id="view3" data-role="view">
+            <ul data-role="listview">
+                <li>This is view 3</li>
+                <li><a href="#view1">Go to view 1 »</a></li>
+            </ul>
+        </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            require.config({
+                baseUrl: "../../src"
+            });
+
+            function protect(e)
+            {
+                console.log("protect method");
+                e.preventDefault();
+                kendo.mobile.application.navigate("#view1");
+            }
+
+            require(['jquery', 'kendo.mobile.navbar', 'kendo.mobile.tabstrip', 'kendo.mobile.button', 'kendo.mobile.listview', 'kendo.mobile.splitview', 'kendo.mobile.actionsheet' ], function($, kendo) {
+                var app = new kendo.mobile.Application($(document.body), {
+                    skin: "flat",
+                    transition: "fade"
+                });
+            });
+        </script>
+    </body>
+</html>

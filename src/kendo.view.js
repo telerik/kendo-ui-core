@@ -246,6 +246,7 @@ var __meta__ = {
         after: function() {
             this.running = false;
             this.trigger("complete", {view: this.view});
+            this.trigger("after");
         },
 
         end: function() {
@@ -256,7 +257,8 @@ var __meta__ = {
 
         show: function(view, transition, locationID) {
             if (!view.triggerBeforeShow()) {
-                return;
+                this.trigger("after");
+                return false;
             }
 
             locationID = locationID || view.id;
@@ -290,7 +292,7 @@ var __meta__ = {
                 view.showStart();
                 view.showEnd();
                 that.after();
-                return;
+                return true;
             }
 
             current.hideStart();
@@ -310,6 +312,8 @@ var __meta__ = {
 
                 that.effect.run().then(function() { that.end(); });
             }
+
+            return true;
         }
     });
 
