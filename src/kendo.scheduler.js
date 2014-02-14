@@ -1968,6 +1968,11 @@ kendo_module({
                         var view = that.view();
                         var eventElement = e.currentTarget;
 
+                        if (!view.options.editable || view.options.editable.move === false) {
+                            e.preventDefault();
+                            return;
+                        }
+
                         if (isMobile && !eventElement.hasClass("k-event-active")) {
                             that.element.find(".k-event-active").removeClass("k-event-active");
                             e.preventDefault();
