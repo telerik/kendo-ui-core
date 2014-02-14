@@ -58,7 +58,25 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// A value indicating if the bars should be stacked.
         /// </summary>
-        public bool Stacked
+        public bool? Stacked
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The stack name that this series belongs to.
+        /// </summary>
+        public string StackGroup
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The type of stack to plot
+        /// </summary>
+        public ChartStackType? StackType
         {
             get;
             set;
@@ -68,15 +86,6 @@ namespace Kendo.Mvc.UI
         /// Aggregate function for date series.
         /// </summary>
         public ChartSeriesAggregate? Aggregate
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The stack name that this series belongs to.
-        /// </summary>
-        public string StackName
         {
             get;
             set;
@@ -171,7 +180,6 @@ namespace Kendo.Mvc.UI
         protected virtual void Initialize()
         {
             Orientation = ChartSeriesOrientation.Horizontal;
-            Stacked = false;
             Labels = new ChartBarLabels();
             Border = new ChartElementBorder();
         }

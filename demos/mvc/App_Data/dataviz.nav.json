@@ -28,6 +28,22 @@
                     "title": "Kendo UI jQuery stacked area chart example",
                     "meta": "This demo shows how the stacked area is created with KendoChart. Learn how to visualize series that should be stacked in the chart."
                 }, {
+                    "text": "100% Stacked area",
+                    "url": "area-charts/stacked100-area.html",
+                    "title": "Kendo UI jQuery 100% stacked area chart example",
+                    "meta": "This demo shows how a 100% stacked area chart is created with KendoChart. Learn how to visualize series that should be stacked to 100% in the chart.",
+                    "new": "true"
+                }, {
+                    "text": "Stepped Area",
+                    "url": "area-charts/step-area.html",
+                    "title": "Example of using Kendo UI Area Chart with step line style",
+                    "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart"
+                }, {
+                    "text": "Smooth Area",
+                    "url": "area-charts/smooth-area.html",
+                    "title": "Example of using Kendo UI Area Chart with smooth line (spline) style",
+                    "meta": "This demo shows how to configure smooth line (spline) style for the Kendo UI Area Chart"
+                }, {
                     "text": "Date axis",
                     "url": "area-charts/date-axis.html",
                     "title": "Date axis sample for Kendo UI Area Charts",
@@ -37,6 +53,11 @@
                     "url": "area-charts/multiple-axes.html",
                     "title": "Multi-axis demo for Kendo UI Area Charts component",
                     "meta": "Ensure the best performance of HTML5 charting and visualize data on multiple axis with Kendo UI Area Charts  in order to provide solid business reports for end users."
+                }, {
+                    "text": "Error Bars",
+                    "url": "area-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Area Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Area Chart"
                 }, {
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
@@ -61,24 +82,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Error Bars",
-                    "url": "area-charts/error-bars.html",
-                    "title": "Example of using ErrorBars for Kendo UI Area Chart",
-                    "meta": "This demo shows how to use ErrorBars for Kendo UI Area Chart",
-                    "new": "true"
-                }, {
-                    "text": "Step Area",
-                    "url": "area-charts/step-area.html",
-                    "title": "Example of using Kendo UI Area Chart with step line style",
-                    "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart",
-                    "new": "true"
-                }, {
-                    "text": "Smooth (Spline) Area",
-                    "url": "area-charts/smooth-area.html",
-                    "title": "Example of using Kendo UI Area Chart with smooth line style",
-                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Area Chart",
-                    "new": "true"
                 }
             ],
             "name": "area-charts"
@@ -107,6 +110,18 @@
                     "title": "Kendo UI Stacked and Grouped Bar Chart Example",
                     "meta": "This sample demonstrates the implementation of Kendo UI stacked and grouped bars in various data visualization-driven web apps."
                 }, {
+                    "text": "100% Stacked bars",
+                    "url": "bar-charts/stacked100-bar.html",
+                    "title": "Kendo UI jQuery-powered 100% Stacked Bar Charts | Kendo UI DataViz Demos",
+                    "meta": "This example shows how Kendo UI Bar Charts component supports a 100% stacked bar. The feature of the widget is enabled by setting the stack type to '100%'.",
+                    "new": "true"
+                }, {
+                    "text": "100% Stacked and grouped bars",
+                    "url": "bar-charts/grouped-stacked100-bar.html",
+                    "title": "Kendo UI 100% Stacked and Grouped Bar Chart Example",
+                    "meta": "This sample demonstrates the implementation of Kendo UI 100% stacked and grouped bars in various data visualization-driven web apps.",
+                    "new": "true"
+                }, {
                     "text": "Date axis",
                     "url": "bar-charts/date-axis.html",
                     "title": "Date axis example in Kendo UI jQuery chart control",
@@ -116,6 +131,28 @@
                     "url": "bar-charts/multiple-axes.html",
                     "title": "Example of multiple axes implementation in Kendo UI Bar Chart",
                     "meta": "This sample illustrates how you can display a data series, using multiple axes in your business chart, built with Kendo UI HTML5 Bar Chart widget."
+                }, {
+                    "text": "Plot bands",
+                    "url": "bar-charts/plotbands.html",
+                    "title": "Plot Bands example in Kendo UI Bar chart",
+                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
+                    "requiresServer": "true"
+                }, {
+                    "text": "Gap and spacing",
+                    "url": "bar-charts/gap-spacing.html",
+                    "title": "Gap and spacing in Kendo UI Bar Charts | Kendo UI DataViz demo",
+                    "meta": "With this example, you will be able to take a closer look at gap and spacing in Kendo UI Bar Charts. Set gap and spacing values to play with the demo."
+                }, {
+                    "text": "Error Bars",
+                    "url": "bar-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Bar Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Bar Chart"
+                }, {
+                    "text": "Pan and zoom",
+                    "url": "bar-charts/pan-and-zoom.html",
+                    "title": "Pan and zoom in Bar charts | Kendo UI Bar Chart demo",
+                    "meta": "Achieve pan and zoom effect in Kendo UI Bar charts. This example demonstrates how you can apply pan and zoom to your bar charts.",
+                    "packages": [ "!mvc" ]
                 }, {
                     "text": "Binding to remote data",
                     "url": "bar-charts/remote-data.html",
@@ -134,41 +171,17 @@
                     "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group.",
                     "requiresServer": "true"
                 }, {
-                    "text": "Plot bands",
-                    "url": "bar-charts/plotbands.html",
-                    "title": "Plot Bands example in Kendo UI Bar chart",
-                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
-                    "requiresServer": "true"
-                }, {
-                    "text": "Gap and spacing",
-                    "url": "bar-charts/gap-spacing.html",
-                    "title": "Gap and spacing in Kendo UI Bar Charts | Kendo UI DataViz demo",
-                    "meta": "With this example, you will be able to take a closer look at gap and spacing in Kendo UI Bar Charts. Set gap and spacing values to play with the demo."
-                }, {
-                    "text": "Pan and zoom",
-                    "url": "bar-charts/pan-and-zoom.html",
-                    "title": "Pan and zoom in Bar charts | Kendo UI Bar Chart demo",
-                    "meta": "Achieve pan and zoom effect in Kendo UI Bar charts. This example demonstrates how you can apply pan and zoom to your bar charts.",
-                    "packages": [ "!mvc" ]
-                }, {
                     "text": "MVVM",
                     "url": "bar-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Error Bars",
-                    "url": "bar-charts/error-bars.html",
-                    "title": "Example of using ErrorBars for Kendo UI Bar Chart",
-                    "meta": "This demo shows how to use ErrorBars for Kendo UI Bar Chart",
-                    "new": "true"
                 }
             ],
             "name": "bar-charts"
         }, {
             "text": "Box Plot Charts",
-            "new" : "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBoxPlotIcon",
             "items": [{
@@ -296,7 +309,6 @@
             "name": "donut-charts"
         }, {
             "text": "Funnel Charts",
-            "new" : "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartFunnelIcon",
             "items": [{
@@ -345,6 +357,22 @@
                     "title": "Kendo UI Stacked Line Charts Demo",
                     "meta": "This demo shows how you can easily implement Kendo UI Stacked Line Charts in your business webapp."
                 }, {
+                    "text": "100% Stacked line",
+                    "url": "line-charts/stacked100-line.html",
+                    "title": "Kendo UI 100% Stacked Line Charts Demo",
+                    "meta": "This demo shows how you can easily implement Kendo UI 100% Stacked Line Charts in your business webapp.",
+                    "new": "true"
+                }, {
+                    "text": "Steped line",
+                    "url": "line-charts/step-line.html",
+                    "title": "Example of using Kendo UI Line Chart with step line style",
+                    "meta": "This demo shows how to configure step line style for the Kendo UI Line Chart"
+                }, {
+                    "text": "Smooth line",
+                    "url": "line-charts/smooth-line.html",
+                    "title": "Example of using Kendo UI Line Chart with smooth line (spline) style",
+                    "meta": "This demo shows how to configure smooth line (spline) style for the Kendo UI Line Chart"
+                }, {
                     "text": "Date axis",
                     "url": "line-charts/date-axis.html",
                     "title": "Example of Kendo UI HTML5 Line Charts Date Axis",
@@ -359,6 +387,11 @@
                     "url": "line-charts/notes.html",
                     "title": "Notes feature example | Kendo UI Line Charts widget",
                     "meta": "This demo shows how to place annotations in your Kendo UI Charts."
+                }, {
+                    "text": "Error Bars",
+                    "url": "line-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Line Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Line Chart"
                 }, {
                     "text": "Binding to remote data",
                     "url": "line-charts/remote-data.html",
@@ -383,24 +416,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Error Bars",
-                    "url": "line-charts/error-bars.html",
-                    "title": "Example of using ErrorBars for Kendo UI Line Chart",
-                    "meta": "This demo shows how to use ErrorBars for Kendo UI Line Chart",
-                    "new": "true"
-                }, {
-                    "text": "Step line",
-                    "url": "line-charts/step-line.html",
-                    "title": "Example of using Kendo UI Line Chart with step line style",
-                    "meta": "This demo shows how to configure step line style for the Kendo UI Line Chart",
-                    "new": "true"
-                }, {
-                    "text": "Smooth (Spline) line",
-                    "url": "line-charts/smooth-line.html",
-                    "title": "Example of using Kendo UI Line Chart with smooth line style",
-                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Line Chart",
-                    "new": "true"
                 }
             ],
             "name": "line-charts"
@@ -444,10 +459,15 @@
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPolarIcon",
             "items": [{
-                    "text": "Basic usage",
+                    "text": "Polar line",
                     "url": "polar-charts/index.html",
                     "title": "Kendo UI jQuery-based Polar Charts Demo",
                     "meta": "This demo illustrates how Kendo UI Polar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your polar chart."
+                }, {
+                    "text": "Smooth polar line",
+                    "url": "polar-charts/smooth-polar-line.html",
+                    "title": "Example of using smooth line (spline) style for Kendo UI Polar Charts",
+                    "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line (spline) style"
                 }, {
                     "text": "Polar scatter",
                     "url": "polar-charts/polar-scatter.html",
@@ -476,12 +496,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Smooth (Spline) line",
-                    "url": "polar-charts/smooth-polar-line.html",
-                    "title": "Example of using smooth line style for Kendo UI Polar Charts",
-                    "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line style",
-                    "new": "true"
                 }
             ],
             "name": "polar-charts"
@@ -490,10 +504,16 @@
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartRadarIcon",
             "items": [{
-                    "text": "Basic usage",
+                    "text": "Radar line",
                     "url": "radar-charts/index.html",
                     "title": "Kendo UI jQuery-based Radar Charts Demo",
                     "meta": "This demo illustrates how Kendo UI Radar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your radar chart."
+                }, {
+                    "text": "Smooth radar line",
+                    "url": "radar-charts/smooth-radar-line.html",
+                    "title": "Example of using smooth line (spline) style for the Kendo UI Radar Charts",
+                    "meta": "This demo shows how to configure the Kendo UI Radar Charts to use smooth line style (spline)",
+                    "requiresServer": "true"
                 }, {
                     "text": "Radar area",
                     "url": "radar-charts/radar-area.html",
@@ -528,13 +548,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Smooth (Spline) line",
-                    "url": "radar-charts/smooth-radar-line.html",
-                    "title": "Example of using smooth line style for the Kendo UI Radar Charts",
-                    "meta": "This demo shows how to configure the Kendo UI Radar Charts to use smooth line style",
-                    "new": "true",
-                    "requiresServer": "true"
                 }
             ],
             "name": "radar-charts"
@@ -552,6 +565,11 @@
                     "url": "scatter-charts/scatter-line.html",
                     "title": "Kendo UI Scatter Line Charts Demo",
                     "meta": "This sample demonstrates how Kendo UI Scatter Line Charts combines Line and Scatter chart types in your rich HTML5 data visualizations."
+                }, {
+                    "text": "Smooth scatter line",
+                    "url": "scatter-charts/smooth-scatter-line.html",
+                    "title": "Example of using smooth line (spline) style for the Kendo UI Scatter Line Chart",
+                    "meta": "This demo shows how to configure the Kendo UI Scatter Line Chart to use smooth line (spline) style"
                 }, {
                     "text": "Date axis",
                     "url": "scatter-charts/date-axis.html",
@@ -593,12 +611,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"],
                     "requiresServer": "true"
-                }, {
-                    "text": "Smooth (Spline) line",
-                    "url": "scatter-charts/smooth-scatter-line.html",
-                    "title": "Example of using smooth line style for the Kendo UI Scatter Line Chart",
-                    "meta": "This demo shows how to configure the Kendo UI Scatter Line Chart to use smooth line style",
-                    "new": "true"
                 }
             ],
             "name": "scatter-charts"

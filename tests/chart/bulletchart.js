@@ -43,8 +43,8 @@
             function(categoryIndex) {
                 return new Box2D();
             },
-            function(value) {
-                return new Box2D();
+            function(from, to) {
+                return new Box2D(0, 0, to || from, 0);
             },
             {
                 categoryAxis: {
@@ -113,6 +113,34 @@
                     color: function(bubble) { equal(bubble.series.name, "series 1"); }
                 }]
             });
+        });
+
+        test("sets bar size to current value", function() {
+            bulletChart = new dataviz.BulletChart(plotArea, {
+                series: [{
+                    type: "bullet",
+                    data: [[10, 15]],
+                    notes: { label: { } }
+                }],
+                invertAxes: true
+            });
+            bulletChart.reflow(chartBox);
+
+            equal(bulletChart.points[0].box.x2, 10);
+        });
+
+        test("sets target position to target value", function() {
+            bulletChart = new dataviz.BulletChart(plotArea, {
+                series: [{
+                    type: "bullet",
+                    data: [[10, 15]],
+                    notes: { label: { } }
+                }],
+                invertAxes: true
+            });
+            bulletChart.reflow(chartBox);
+
+            equal(bulletChart.points[0].target.box.x2, 15);
         });
 
     })();

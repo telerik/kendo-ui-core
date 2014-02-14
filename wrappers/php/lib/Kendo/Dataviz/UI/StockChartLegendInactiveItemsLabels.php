@@ -26,8 +26,7 @@ Any valid CSS color string will work here, including hex and rgb.
 
     /**
     * Sets the template option of the StockChartLegendInactiveItemsLabels.
-    * The template of the labels.
-Template variables:
+    * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\StockChartLegendInactiveItemsLabels
     */
@@ -39,8 +38,7 @@ Template variables:
 
     /**
     * Sets the template option of the StockChartLegendInactiveItemsLabels.
-    * The template of the labels.
-Template variables:
+    * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\StockChartLegendInactiveItemsLabels
     */

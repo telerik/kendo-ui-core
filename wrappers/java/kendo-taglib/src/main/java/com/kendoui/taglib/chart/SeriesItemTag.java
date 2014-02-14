@@ -101,6 +101,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("overlay", value);
     }
 
+    public void setStack(com.kendoui.taglib.chart.SeriesItemStackTag value) {
+        setProperty("stack", value);
+    }
+
     public void setTarget(com.kendoui.taglib.chart.SeriesItemTargetTag value) {
         setProperty("target", value);
     }

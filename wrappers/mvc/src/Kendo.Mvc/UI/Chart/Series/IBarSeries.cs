@@ -10,16 +10,25 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// A value indicating if the bars should be stacked.
         /// </summary>
-        bool Stacked
+        bool? Stacked
         {
             get;
             set;
         }
 
         /// <summary>
-        /// The stack name that this series belongs to.
+        /// The stack group that this series belongs to.
         /// </summary>
-        string StackName
+        string StackGroup
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The type of stack to plot
+        /// </summary>
+        ChartStackType? StackType
         {
             get;
             set;

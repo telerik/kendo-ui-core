@@ -97,7 +97,7 @@ class SparklineSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the SparklineSeriesItemLabels.
-    * The label template. Template variables:
+    * The template which renders the chart series label.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemLabels
     */
@@ -109,7 +109,7 @@ class SparklineSeriesItemLabels extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the SparklineSeriesItemLabels.
-    * The label template. Template variables:
+    * The template which renders the chart series label.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\SparklineSeriesItemLabels
     */

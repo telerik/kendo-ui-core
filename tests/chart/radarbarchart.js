@@ -82,13 +82,13 @@
             s2;
 
         function createStack(options) {
-            var segmentSector = new Ring(new Point2D(0, 0), 0, 10, 90, 90);
-            segments = [ new SegmentStub(segmentSector), new SegmentStub(segmentSector) ];
+            segments = [ new SegmentStub(new Ring(new Point2D(0, 0), 0, 10, 90, 90)),
+                         new SegmentStub(new Ring(new Point2D(0, 0), 10, 20, 90, 90)) ];
 
             stack = new dataviz.RadarStackLayout(options);
             [].push.apply(stack.children, segments);
 
-            stack.reflow(new Ring(new Point2D(0, 0), 0, 100, 110, 70));
+            stack.reflow(new Ring(new Point2D(0, 0), 10, 100, 110, 70));
 
             s1 = segments[0].sector;
             s2 = segments[1].sector;
@@ -105,13 +105,13 @@
             equal(s1.r, 10);
         });
 
+        test("first sector inner radius is not changed", function() {
+            equal(s1.ir, 0);
+        });
+
         test("first sector is fitted in sector segment", function() {
             equal(s1.startAngle, 110);
             equal(s1.angle, 70);
-        });
-
-        test("second sector radius is updated", function() {
-            equal(s2.r, s2.ir + 10);
         });
 
         test("second sector is fitted in sector segment", function() {
@@ -119,7 +119,11 @@
             equal(s1.angle, 70);
         });
 
-        test("second sector inner radius equals first sector radius", function() {
+        test("second sector radius is not changed", function() {
+            equal(s2.r, 20);
+        });
+
+        test("second sector inner radius not changed", function() {
             equal(s2.ir, 10);
         });
 
@@ -130,8 +134,12 @@
             }
         });
 
-        test("first sector radius is updated", function() {
-            equal(s1.r, s1.ir + 10);
+        test("first sector radius is not changed", function() {
+            equal(s1.r, 10);
+        });
+
+        test("first sector inner radius is not changed", function() {
+            equal(s1.ir, 0);
         });
 
         test("first sector is fitted in sector segment", function() {
@@ -139,19 +147,79 @@
             equal(s1.angle, 70);
         });
 
-        test("second sector radius is updated", function() {
-            equal(s2.r, 10);
+        test("second sector radius is not changed", function() {
+            equal(s2.r, 20);
+        });
+
+        test("second sector inner radius is not changed", function() {
+            equal(s2.ir, 10);
         });
 
         test("second sector is fitted in sector segment", function() {
             equal(s1.startAngle, 110);
             equal(s1.angle, 70);
         });
+    })();
 
-        test("first sector inner radius equals first sector radius", function() {
-            equal(s1.ir, 10);
+    (function() {
+        var deepExtend = kendo.deepExtend;
+        var barChart;
+
+        function createRadarBarChart(series, options) {
+            var chart = createChart(deepExtend({
+                series: series,
+                transitions: false
+            }, options));
+
+            barChart = chart._plotArea.charts[0];
+        }
+
+        var positiveSeries = {
+            type: "radarColumn",
+            data: [1, 2]
+        };
+
+        // ------------------------------------------------------------
+        module("Radar Bar Chart / Rendering", {
+            setup: function() {
+                createRadarBarChart([positiveSeries]);
+            },
+            teardown: destroyChart
         });
 
+        test("radius is set according to value", function() {
+            deepEqual($.map(barChart.points, function(point) { return point.sector.r; }),
+                      [68.25, 136.5]);
+        });
+
+        test("inner radius is set 0", function() {
+            deepEqual($.map(barChart.points, function(point) { return point.sector.ir; }),
+                      [0, 0]);
+        });
+
+        // ------------------------------------------------------------
+        module("Radar Bar Chart / Stacked / Rendering", {
+            setup: function() {
+                var stackedSeries = {
+                    type: "radarColumn",
+                    data: [1, 2],
+                    stack: true
+                };
+
+                createRadarBarChart([stackedSeries, stackedSeries]);
+            },
+            teardown: destroyChart
+        });
+
+        test("radius is set according to stacked value", function() {
+            deepEqual($.map(barChart.points, function(point) { return point.sector.r; }),
+                      [34.125,68.25,68.25,136.5]);
+        });
+
+        test("inner radius is set according to prev value", function() {
+            deepEqual($.map(barChart.points, function(point) { return point.sector.ir; }),
+                      [0, 34.125, 0, 68.25]);
+        });
     })();
     
     // ------------------------------------------------------------

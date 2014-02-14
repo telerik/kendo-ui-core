@@ -22,7 +22,6 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "line" : "verticalLine")
-                .Add("stack", series.Stacked, false)
                 .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member.HasValue(); })
                 .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
@@ -32,6 +31,16 @@ namespace Kendo.Mvc.UI
                 .Add("noteTextField", series.NoteTextMember, () => series.NoteTextMember.HasValue())
                 .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),
                                       () => series.MissingValues.HasValue);
+
+            if (series.StackType.HasValue)
+            {
+                var type = series.StackType == ChartStackType.Stack100 ? "100%" : series.StackType.ToString().ToLowerInvariant();
+                result.Add("stack", new Dictionary<string, object> { { "type", type } });
+            }
+            else if (series.Stacked.HasValue)
+            {
+                result.Add("stack", series.Stacked);
+            }
 
             var labelsData = series.Labels.CreateSerializer().Serialize();
             if (labelsData.Count > 0)

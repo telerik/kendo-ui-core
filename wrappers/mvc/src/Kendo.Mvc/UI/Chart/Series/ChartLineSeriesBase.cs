@@ -43,7 +43,16 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// A value indicating if the lines should be stacked.
         /// </summary>
-        public bool Stacked
+        public bool? Stacked
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The type of stack to plot
+        /// </summary>
+        public ChartStackType? StackType
         {
             get;
             set;
@@ -119,7 +128,6 @@ namespace Kendo.Mvc.UI
 
         protected virtual void Initialize()
         {
-            Stacked = false;
             Labels = new ChartPointLabels();
             Markers = new ChartMarkers();
             Orientation = ChartSeriesOrientation.Horizontal;

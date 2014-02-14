@@ -21,6 +21,7 @@ exports.afterTestFiles = [
     'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
 
     'tests/chart/util.js',
+    'tests/chart/base-line-chart.js',
     'tests/map/util.js',
     'tests/map/layers/base.js',
 

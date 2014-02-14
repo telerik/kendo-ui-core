@@ -61,6 +61,10 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
         setProperty("labels", value);
     }
 
+    public void setStack(com.kendoui.taglib.sparkline.SeriesDefaultsStackTag value) {
+        setProperty("stack", value);
+    }
+
     public void setTooltip(com.kendoui.taglib.sparkline.SeriesDefaultsTooltipTag value) {
         setProperty("tooltip", value);
     }

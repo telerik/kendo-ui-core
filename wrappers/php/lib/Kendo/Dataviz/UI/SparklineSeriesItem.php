@@ -269,9 +269,9 @@ If not specified, the available space is split evenly between the series.Availab
     }
 
     /**
-    * A value indicating if the series should be stacked. String value indicates that the series should be stacked in a group with the specified name.
-** Available for bar and column series. **
-    * @param boolean|string $value
+    * A boolean value indicating if the series should be stacked.
+A string value is interpreted as series.stack.group.
+    * @param boolean|string|\Kendo\Dataviz\UI\SparklineSeriesItemStack|array $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItem
     */
     public function stack($value) {

@@ -38,6 +38,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets a value indicating the type of stacking to use.
+        /// </summary>
+        /// <param name="type">A value indicating the stacking type.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Chart(Model)
+        ///             .Name("Chart")
+        ///             .Series(series => series.Line(s => s.Sales).Stack(ChartStackType.Stack100))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder Stack(ChartStackType type)
+        {
+            Series.StackType = type;
+
+            return (TSeriesBuilder)this;
+        }
+
+        /// <summary>
         /// Sets the aggregate function for date series.
         /// This function is used when a category (an year, month, etc.) contains two or more points.
         /// </summary>

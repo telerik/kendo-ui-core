@@ -66,13 +66,12 @@
                     return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                     categoryIndex + 1, CATEGORY_AXIS_Y);
                 },
-                function(a, b) {
-                    var a = typeof a === "undefined" ? 0 : a,
-                        b = typeof b === "undefined" ? a : b,
-                        top = VALUE_AXIS_MAX - Math.max(a, b),
-                        bottom = VALUE_AXIS_MAX - Math.min(a, b),
-                        slotTop = Math.min(CATEGORY_AXIS_Y, top),
-                        slotBottom = Math.max(CATEGORY_AXIS_Y, bottom);
+                function(from, to) {
+                    var reverse = this.options.reverse,
+                        fromY = CATEGORY_AXIS_Y + (reverse ? from : -from),
+                        toY = CATEGORY_AXIS_Y + (reverse ? to : -to),
+                        slotTop = Math.min(fromY, toY),
+                        slotBottom = Math.max(fromY, toY);
 
                     return new Box2D(0, slotTop, 0, slotBottom);
                 },
@@ -236,9 +235,9 @@
 
             plotArea.valueAxis.options.reverse = false;
         });
-        
+
         // ------------------------------------------------------------
-                       
+
         module("Bar Chart / Values exceeding value axis min or max options ", {});
 
         test("values are not limited", 2, function() {
@@ -257,9 +256,9 @@
                     }
                 }
             );
-          
-            setupBarChart(plotArea, { series: [ {data: [1, 2]} ] });          
-        });        
+
+            setupBarChart(plotArea, { series: [ {data: [1, 2]} ] });
+        });
 
         // ------------------------------------------------------------
         module("Bar Chart / Multiple Series", {
@@ -571,7 +570,7 @@
             });
 
             deepEqual([series.points[0].box.y1, series.points[2].box.y1],
-                 [2, 2]);
+                      [4, 4]);
 
             CATEGORY_AXIS_Y = 2;
         });
@@ -588,7 +587,7 @@
                 isStacked: true }
             );
 
-            equal(series.points[0].options.stackBase, 2);
+            equal(series.points[0].options.stackBase, 4);
 
             CATEGORY_AXIS_Y = 2;
         });
@@ -727,6 +726,60 @@
             });
 
             deepEqual(barHeights, [1, 1, 2, 2]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart / 100% Stacked / Positive Values", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [ positiveSeries, positiveSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].min, 0);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].max, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart / 100% Stacked / Negative Values", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [ negativeSeries, negativeSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].min, -1);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].max, 0);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart / 100% Stacked / Mixed Values", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [ negativeSeries, positiveSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].min, -0.5);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].max, 0.5);
         });
 
         // ------------------------------------------------------------
@@ -903,6 +956,27 @@
         });
 
         // ------------------------------------------------------------
+        module("Bar Chart / Grouped Stack / Group Syntax", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [
+                        $.extend({ stack: { group: "a" } }, positiveSeries),
+                        $.extend({ stack: { group: "a" } }, positiveSeries),
+                        $.extend({ stack: { group: "b" } }, positiveSeries),
+                        $.extend({ stack: { group: "b" } }, positiveSeries)
+                    ],
+                    isStacked: true
+                });
+            }
+        });
+
+        test("two stacks are created", function() {
+            var cluster = series.children[0];
+            equal(cluster.children[0]._stackGroup, "a");
+            equal(cluster.children[1]._stackGroup, "b");
+        });
+
+        // ------------------------------------------------------------
         module("Bar Chart / Stacked / Panes", {
             teardown: destroyChart
         });
@@ -960,11 +1034,11 @@
                 return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                                  categoryIndex + 100, CATEGORY_AXIS_Y);
             },
-            function(value) {
-                var value = typeof value === "undefined" ? 0 : value,
-                    valueY = VALUE_AXIS_MAX - value,
-                    slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
-                    slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+            function(from, to) {
+                var fromY = CATEGORY_AXIS_Y + from,
+                    toY = CATEGORY_AXIS_Y + to,
+                    slotTop = Math.min(fromY, toY),
+                    slotBottom = Math.max(fromY, toY);
 
                 return new Box2D(0, slotTop, 0, slotBottom);
             },
@@ -983,11 +1057,11 @@
             }
         });
 
-        test("creates labels for 0 values", 1, function() {
+        test("creates labels for 0 values", function() {
             equal(series.points[1].label.children[0].children[0].content, "0");
         });
 
-        test("creates empty labels for null values", 1, function() {
+        test("creates empty labels for null values", function() {
             equal(series.points[2].label.children[0].children[0].content, "");
         });
 
@@ -1421,10 +1495,11 @@
                 return new Box2D(CATEGORY_AXIS_X, categoryIndex,
                                CATEGORY_AXIS_X, categoryIndex + 1);
             },
-            function(value) {
-                var valueX = CATEGORY_AXIS_X + value,
-                    slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
-                    slotRight = Math.max(CATEGORY_AXIS_X, valueX);
+            function(from, to) {
+                var fromX = CATEGORY_AXIS_X + from,
+                    toX = CATEGORY_AXIS_X + to,
+                    slotLeft = Math.min(fromX, toX),
+                    slotRight = Math.max(fromX, toX);
 
                 return new Box2D(slotLeft, 0, slotRight, 0);
             },
@@ -1809,9 +1884,9 @@
             stackBox = new Box2D(50, 50, 100, 100);
 
         // ------------------------------------------------------------
-        module("Stack Layout / Vertical", {
+        module("Stack Wrap / Vertical", {
             setup: function() {
-                stack = new dataviz.StackLayout();
+                stack = new dataviz.StackWrap();
 
                 stack.children.push(
                     new BarStub(new Box2D(0, 90, 100, 100)),
@@ -1821,35 +1896,6 @@
 
                 stack.reflow(stackBox);
             }
-        });
-
-        test("first bar remains at its position", function() {
-            equal(stack.children[0].box.y1, 90);
-        });
-
-        test("first bar height is not changed", function() {
-            equal(stack.children[0].box.height(), 10);
-        });
-
-        test("second bar is placed on top of the first", function() {
-            equal(stack.children[1].box.y2, stack.children[0].box.y1);
-        });
-
-        test("second bar height is not changed", function() {
-            equal(stack.children[1].box.height(), 20);
-        });
-
-        test("third bar is placed on top of the second", function() {
-            equal(stack.children[2].box.y2, stack.children[1].box.y1);
-        });
-
-        test("third bar height is not changed", function() {
-            equal(stack.children[2].box.height(), 30);
-        });
-
-        test("reports final box after layout", function() {
-            deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                 [50, 40, 100, 100]);
         });
 
         test("updates children width to fit box", function() {
@@ -1863,63 +1909,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Stack Layout / Vertical / Reversed", {
+        module("Stack Wrap / Horizontal", {
             setup: function() {
-                stack = new dataviz.StackLayout({ isReversed: true });
-
-                stack.children.push(
-                    new BarStub(new Box2D(0, 90, 100, 100)),
-                    new BarStub(new Box2D(0, 80, 100, 100)),
-                    new BarStub(new Box2D(0, 70, 100, 100))
-                );
-
-                stack.reflow(stackBox);
-            }
-        });
-
-        test("first bar remains at its position", function() {
-            equal(stack.children[0].box.y1, 90);
-        });
-
-        test("first bar height is not changed", function() {
-            equal(stack.children[0].box.height(), 10);
-        });
-
-        test("second bar is placed below the first", function() {
-            equal(stack.children[1].box.y1, stack.children[0].box.y2);
-        });
-
-        test("second bar height is not changed", function() {
-            equal(stack.children[1].box.height(), 20);
-        });
-
-        test("third bar is placed below the second", function() {
-            equal(stack.children[2].box.y1, stack.children[1].box.y2);
-        });
-
-        test("third bar height is not changed", function() {
-            equal(stack.children[2].box.height(), 30);
-        });
-
-        test("reports final box after layout", function() {
-            deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                 [50, 90, 100, 150]);
-        });
-
-        test("updates children width to fit box", function() {
-            equal(stack.children[0].box.width(), stackBox.width());
-            equal(stack.children[1].box.width(), stackBox.width());
-        });
-
-        test("updates children X position to match targetBox", function() {
-            equal(stack.children[0].box.x1, stackBox.x1);
-            equal(stack.children[1].box.x1, stackBox.x1);
-        });
-
-        // ------------------------------------------------------------
-        module("Stack Layout / Horizontal", {
-            setup: function() {
-                stack = new dataviz.StackLayout({ vertical: false });
+                stack = new dataviz.StackWrap({ vertical: false });
                 stack.children.push(
                     new BarStub(new Box2D(0, 0, 20, 10)),
                     new BarStub(new Box2D(0, 0, 30, 10)),
@@ -1928,88 +1920,6 @@
 
                 stack.reflow(stackBox);
             }
-        });
-
-        test("first bar remains at its position", function() {
-            equal(stack.children[0].box.x1, 0);
-        });
-
-        test("first bar width is not changed", function() {
-            equal(stack.children[0].box.width(), 20);
-        });
-
-        test("second bar is placed to the right of the first", function() {
-            equal(stack.children[1].box.x1, stack.children[0].box.x2);
-        });
-
-        test("second bar width is not changed", function() {
-            equal(stack.children[1].box.width(), 30);
-        });
-
-        test("third bar is placed to the right of the second", function() {
-            equal(stack.children[2].box.x1, stack.children[1].box.x2);
-        });
-
-        test("third bar width is not changed", function() {
-            equal(stack.children[2].box.width(), 40);
-        });
-
-        test("reports final box after layout", function() {
-            deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                 [0, 50, 90, 100]);
-        });
-
-        test("updates children height to fit box", function() {
-            equal(stack.children[0].box.height(), stackBox.height());
-            equal(stack.children[1].box.height(), stackBox.height());
-        });
-
-        test("updates children Y position to match targetBox", function() {
-            equal(stack.children[0].box.y1, stackBox.y1);
-            equal(stack.children[1].box.y1, stackBox.y1);
-        });
-
-        // ------------------------------------------------------------
-        module("Stack Layout / Horizontal / Reversed", {
-            setup: function() {
-                stack = new dataviz.StackLayout({ vertical: false, isReversed: true });
-                stack.children.push(
-                    new BarStub(new Box2D(100, 0, 120, 10)),
-                    new BarStub(new Box2D(100, 0, 130, 10)),
-                    new BarStub(new Box2D(100, 0, 140, 10))
-                );
-
-                stack.reflow(stackBox);
-            }
-        });
-
-        test("first bar remains at its position", function() {
-            equal(stack.children[0].box.x1, 100);
-        });
-
-        test("first bar width is not changed", function() {
-            equal(stack.children[0].box.width(), 20);
-        });
-
-        test("second bar is placed to the left of the first", function() {
-            equal(stack.children[1].box.x2, stack.children[0].box.x1);
-        });
-
-        test("second bar width is not changed", function() {
-            equal(stack.children[1].box.width(), 30);
-        });
-
-        test("third bar is placed to the left of the second", function() {
-            equal(stack.children[2].box.x2, stack.children[1].box.x1);
-        });
-
-        test("third bar width is not changed", function() {
-            equal(stack.children[2].box.width(), 40);
-        });
-
-        test("reports final box after layout", function() {
-            deepEqual([stack.box.x1, stack.box.y1, stack.box.x2, stack.box.y2],
-                 [30, 50, 120, 100]);
         });
 
         test("updates children height to fit box", function() {
@@ -2042,15 +1952,16 @@
 
             bar.category = CATEGORY;
             bar.dataItem = { value: VALUE };
+            bar.percentage = 0.5;
             bar.series = { name: SERIES_NAME };
             bar.owner = {
                 pane: {
                     clipBox: function(){
                         return clipBox || new Box2D(0, 0, 100, 100);
                     }
-                }          
+                }
             };
-            
+
             root = new dataviz.RootElement();
             root.append(bar);
 
@@ -2266,12 +2177,12 @@
             var anchor = bar.tooltipAnchor(10, 10);
             deepEqual([anchor.x, anchor.y], [bar.box.x1, bar.box.y1 - 10 - TOOLTIP_OFFSET])
         });
-        
+
         test("tooltipAnchor is limited to the clipbox / horizontal / above axis", function() {
             createBar({ vertical: false, aboveAxis: true }, Box2D(1,1, 40, 100));
             var anchor = bar.tooltipAnchor(10, 10);
             equal(anchor.x, 40 + TOOLTIP_OFFSET);
-        });        
+        });
 
         test("tooltipAnchor is limited to the clipbox / vertical / above axis", function() {
             createBar({ vertical: true, aboveAxis: true}, Box2D(1, 40, 100, 100));
@@ -2283,40 +2194,44 @@
             createBar({ vertical: false, aboveAxis: false}, Box2D(40,1, 100, 100));
             var anchor = bar.tooltipAnchor(10, 10);
             equal(anchor.x, 30 - TOOLTIP_OFFSET);
-        });  
+        });
 
         test("tooltipAnchor is limited to the clipbox / vertical / below axis", function() {
             createBar({ vertical: true, aboveAxis: false}, Box2D(1, 1, 100, 40));
             var anchor = bar.tooltipAnchor(10, 10);
             equal(anchor.y, 30);
-        });        
+        });
 
         // ------------------------------------------------------------
         module("Bar / Labels / Template");
 
+        function assertTemplate(template, value, format) {
+            createBar({ labels: { visible: true, template: template, format: format } });
+            equal(label.children[0].children[0].content, value);
+        }
+
         test("renders template", function() {
-            createBar({ labels: { visible: true, template: "${value}%" } });
-            equal(label.children[0].children[0].content, VALUE + "%");
+            assertTemplate("${value}%", VALUE + "%");
         });
 
         test("renders template even when format is set", function() {
-            createBar({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
-            equal(label.children[0].children[0].content, VALUE + "%");
+            assertTemplate("${value}%", VALUE + "%", "{0:C}");
         });
 
         test("template has category", function() {
-            createBar({ labels: { visible: true, template: "${category}" } });
-            equal(label.children[0].children[0].content, CATEGORY);
+            assertTemplate("${category}", CATEGORY);
+        });
+
+        test("template has percentage", function() {
+            assertTemplate("${percentage}", "0.5");
         });
 
         test("template has dataItem", function() {
-            createBar({ labels: { visible: true, template: "${dataItem.value}" } });
-            equal(label.children[0].children[0].content, VALUE);
+            assertTemplate("${dataItem.value}", VALUE);
         });
 
         test("template has series", function() {
-            createBar({ labels: { visible: true, template: "${series.name}" } });
-            equal(label.children[0].children[0].content, SERIES_NAME);
+            assertTemplate("${series.name}", SERIES_NAME);
         });
 
     })();
@@ -2432,7 +2347,7 @@
             }
         });
 
-        test("fires when clicking bars", 1, function() {
+        test("fires when clicking bars", function() {
             barClick(function() { ok(true); });
         });
 
@@ -2441,7 +2356,7 @@
             clickChart(chart, barElement);
         });
 
-        test("fires when clicking bar labels", 1, function() {
+        test("fires when clicking bar labels", function() {
             createBarChart({
                 seriesDefaults: {
                     bar: {
@@ -2457,21 +2372,33 @@
             clickChart(chart, getElement(label.id));
         });
 
-        test("event arguments contain value", 1, function() {
+        test("event arguments contain value", function() {
             barClick(function(e) { equal(e.value, 1); });
         });
 
-        test("event arguments contain category", 1, function() {
+        test("event arguments contain percentage", function() {
+            createBarChart({
+                seriesDefaults: {
+                    type: "bar",
+                    stack: { type: "100%" }
+                },
+                series: [{ data: [1] }, { data: [2] }],
+                seriesClick: function(e) { equal(e.percentage, 1/3); }
+            });
+            clickChart(chart, barElement);
+        });
+
+        test("event arguments contain category", function() {
             barClick(function(e) { equal(e.category, "A"); });
         });
 
-        test("event arguments contain series", 1, function() {
+        test("event arguments contain series", function() {
             barClick(function(e) {
                 deepEqual(e.series, chart.options.series[0]);
             });
         });
 
-        test("event arguments contain jQuery element", 1, function() {
+        test("event arguments contain jQuery element", function() {
             barClick(function(e) {
                 equal(e.element[0], getElement(bar.id));
             });
@@ -2484,7 +2411,7 @@
             }
         });
 
-        test("fires when hovering bars", 1, function() {
+        test("fires when hovering bars", function() {
             barHover(function() { ok(true); });
         });
 
@@ -2498,7 +2425,7 @@
             clickChart(chart, barElement);
         });
 
-        test("does not fire on subsequent tap", 1, function() {
+        test("does not fire on subsequent tap", function() {
             createBarChart({
                 seriesHover: function() {
                     ok(true);
@@ -2509,7 +2436,7 @@
             clickChart(chart, barElement);
         });
 
-        test("fires when hovering bar labels", 1, function() {
+        test("fires when hovering bar labels", function() {
             createBarChart({
                 seriesDefaults: {
                     bar: {
@@ -2524,24 +2451,315 @@
             $(getElement(label.id)).mouseover();
         });
 
-        test("event arguments contain value", 1, function() {
+        test("event arguments contain value", function() {
             barHover(function(e) { equal(e.value, 1); });
         });
 
-        test("event arguments contain category", 1, function() {
+        test("event arguments contain percentage", function() {
+            createBarChart({
+                seriesDefaults: {
+                    type: "bar",
+                    stack: { type: "100%" }
+                },
+                series: [{ data: [1] }, { data: [2] }],
+                seriesHover: function(e) { equal(e.percentage, 1/3); }
+            });
+            barElement.mouseover();
+        });
+
+        test("event arguments contain category", function() {
             barHover(function(e) { equal(e.category, "A"); });
         });
 
-        test("event arguments contain series", 1, function() {
+        test("event arguments contain series", function() {
             barHover(function(e) {
                 deepEqual(e.series, chart.options.series[0]);
             });
         });
 
-        test("event arguments contain jQuery element", 1, function() {
+        test("event arguments contain jQuery element", function() {
             barHover(function(e) {
                 equal(e.element[0], getElement(bar.id));
             });
+        });
+    })();
+
+    (function() {
+        var deepExtend = kendo.deepExtend;
+        var box = new dataviz.Box2D(0, 0, 800, 600);
+        var plotArea;
+        var chart;
+
+        function createChart(series, options) {
+            plotArea = new dataviz.CategoricalPlotArea([]);
+            chart = new dataviz.BarChart(plotArea, deepExtend({ series: series }, options));
+        }
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Positive values", {
+            setup: function() {
+                createChart([{ data: [1] }]);
+            }
+        });
+
+        test("from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, 1]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Negative values", {
+            setup: function() {
+                createChart([{ data: [-1] }]);
+            }
+        });
+
+        test("from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, -1]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Stack / Configuration");
+
+        test("first series set to stack: true", function() {
+            createChart([{ data: [1], stack: true }, { data: [2] }],
+                         { isStacked: true });
+            deepEqual(chart.plotRange(chart.points[1]), [1, 3]);
+        });
+
+        test("all series set to stack: true", function() {
+            createChart([{ data: [1], stack: true }, { data: [2], stack: true }],
+                         { isStacked: true });
+            deepEqual(chart.plotRange(chart.points[1]), [1, 3]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Stack / Positive values", {
+            setup: function() {
+                createChart([{ data: [1] }, { data: [2] }],
+                             { isStacked: true });
+            }
+        });
+
+        test("from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, 1]);
+        });
+
+        test("from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [1, 3]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Stack / Negative values", {
+            setup: function() {
+                createChart([{ data: [-1] }, { data: [-2] }],
+                             { isStacked: true });
+            }
+        });
+
+        test("from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, -1]);
+        });
+
+        test("from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [-1, -3]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Stack / Mixed values", {
+            setup: function() {
+                createChart([{ data: [1] }, { data: [-1] }],
+                             { isStacked: true });
+            }
+        });
+
+        test("from axis to positive value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, 1]);
+        });
+
+        test("from axis to negative value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [0, -1]);
+        });
+
+        // ------------------------------------------------------------
+        function assertMultipleStacksPositive() {
+            test("first stack, from axis to value", function() {
+                deepEqual(chart.plotRange(chart.points[0]), [0, 1]);
+            });
+
+            test("first stack, from prev point to value", function() {
+                deepEqual(chart.plotRange(chart.points[1]), [1, 3]);
+            });
+
+            test("second stack, from axis to value", function() {
+                deepEqual(chart.plotRange(chart.points[2]), [0, 3]);
+            });
+
+            test("second stack, from prev point to value", function() {
+                deepEqual(chart.plotRange(chart.points[3]), [3, 7]);
+            });
+        }
+
+        module("Bar Chart  / Plot range / Multiple Stacks / Positive values", {
+            setup: function() {
+                createChart([{ data: [1], stack: "a" }, { data: [2], stack: "a" },
+                             { data: [3], stack: "b" }, { data: [4], stack: "b" }],
+                             { isStacked: true });
+            }
+        });
+        assertMultipleStacksPositive();
+
+        module("Bar Chart  / Plot range / Multiple Stacks (group syntax) / Positive values", {
+            setup: function() {
+                createChart([{ data: [1], stack: { group: "a" } },
+                             { data: [2], stack: { group: "a" } },
+                             { data: [3], stack: { group: "b" } },
+                             { data: [4], stack: { group: "b" } }],
+                             { isStacked: true });
+            }
+        });
+        assertMultipleStacksPositive();
+
+        // ------------------------------------------------------------
+        function assertMultipleStacksNegative() {
+            test("first stack, from axis to value", function() {
+                deepEqual(chart.plotRange(chart.points[0]), [0, -1]);
+            });
+
+            test("first stack, from prev point to value", function() {
+                deepEqual(chart.plotRange(chart.points[1]), [-1, -3]);
+            });
+
+            test("second stack, from axis to value", function() {
+                deepEqual(chart.plotRange(chart.points[2]), [0, -3]);
+            });
+
+            test("second stack, from prev point to value", function() {
+                deepEqual(chart.plotRange(chart.points[3]), [-3, -7]);
+            });
+        }
+
+        module("Bar Chart  / Plot range / Multiple Stacks / Negative values", {
+            setup: function() {
+                createChart([{ data: [-1], stack: "a" }, { data: [-2], stack: "a" },
+                             { data: [-3], stack: "b" }, { data: [-4], stack: "b" }],
+                             { isStacked: true });
+            }
+        });
+        assertMultipleStacksNegative();
+
+        module("Bar Chart  / Plot range / Multiple Stacks (group syntax) / Negative values", {
+            setup: function() {
+                createChart([{ data: [-1], stack: { group: "a" } },
+                             { data: [-2], stack: { group: "a" } },
+                             { data: [-3], stack: { group: "b" } },
+                             { data: [-4], stack: { group: "b" } }],
+                             { isStacked: true });
+            }
+        });
+        assertMultipleStacksNegative();
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Stack 100% / Positive values", {
+            setup: function() {
+                createChart([{ data: [1] }, { data: [3] }],
+                             { isStacked: true, isStacked100: true });
+            }
+        });
+
+        test("from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, 0.25]);
+        });
+
+        test("from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [0.25, 1]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Stack 100% / Negative values", {
+            setup: function() {
+                createChart([{ data: [-1] }, { data: [-3] }],
+                             { isStacked: true, isStacked100: true });
+            }
+        });
+
+        test("from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, -0.25]);
+        });
+
+        test("from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [-0.25, -1]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Stack 100% / Mixed values", {
+            setup: function() {
+                createChart([{ data: [1] }, { data: [-3] }],
+                             { isStacked: true, isStacked100: true });
+            }
+        });
+
+        test("from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, 0.25]);
+        });
+
+        test("from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [0, -0.75]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Multiple 100% Stacks / Positive values", {
+            setup: function() {
+                createChart([
+                    { data: [1], stack: { type: "100%", group: "a" } },
+                    { data: [3], stack: { type: "100%", group: "a" } },
+                    { data: [2], stack: { type: "100%", group: "b" } },
+                    { data: [6], stack: { type: "100%", group: "b" } }],
+                    { isStacked: true, isStacked100: true });
+            }
+        });
+
+        test("first stack, from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, 0.25]);
+        });
+
+        test("first stack, from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [0.25, 1]);
+        });
+
+        test("second stack, from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[2]), [0, 0.25]);
+        });
+
+        test("second stack, from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[3]), [0.25, 1]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Multiple 100% Stacks / Negative values", {
+            setup: function() {
+                createChart([
+                    { data: [-1], stack: { type: "100%", group: "a" } },
+                    { data: [-3], stack: { type: "100%", group: "a" } },
+                    { data: [-2], stack: { type: "100%", group: "b" } },
+                    { data: [-6], stack: { type: "100%", group: "b" } }],
+                    { isStacked: true, isStacked100: true });
+            }
+        });
+
+        test("first stack, from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[0]), [0, -0.25]);
+        });
+
+        test("first stack, from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [-0.25, -1]);
+        });
+
+        test("second stack, from axis to value", function() {
+            deepEqual(chart.plotRange(chart.points[2]), [-0, -0.25]);
+        });
+
+        test("second stack, from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[3]), [-0.25, -1]);
         });
     })();
 })();

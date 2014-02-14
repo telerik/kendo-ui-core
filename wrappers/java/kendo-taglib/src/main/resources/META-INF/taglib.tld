@@ -3218,7 +3218,8 @@ The last element is always created like a rectangle since there is no following 
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A value indicating if the series should be stacked.String value indicates that the series should be stacked in a group with the specified name.</description>
+            <description>A boolean value indicating if the series should be stacked.
+A string value is interpreted as series.stack.group.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -4430,6 +4431,29 @@ By default chart series highlighting is enabled.</description>
         <attribute>
             <description>The chart series gradient.The supported values are:</description>
             <name>gradient</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>A boolean value indicating if the series should be stacked.
+A string value is interpreted as series.stack.group.</description>
+        <name>chart-seriesItem-stack</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemStackTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Indicates that the series should be stacked in a group with the specified name.</description>
+            <name>group</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of stack to plot. The following types are supported:</description>
+            <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -19553,8 +19577,8 @@ If not specified, the available space is split evenly between the series.Availab
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A value indicating if the series should be stacked. String value indicates that the series should be stacked in a group with the specified name.
-** Available for bar and column series. **</description>
+            <description>A boolean value indicating if the series should be stacked.
+A string value is interpreted as series.stack.group.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -19794,7 +19818,7 @@ If not specified, the available space is split evenly between the series.Availab
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The label template. Template variables:</description>
+            <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -19886,7 +19910,7 @@ If not specified, the available space is split evenly between the series.Availab
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The label template. Template variables:</description>
+        <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
         <name>sparkline-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -20253,6 +20277,29 @@ If not specified, the available space is split evenly between the series.Availab
 
 
     <tag>
+        <description>A boolean value indicating if the series should be stacked.
+A string value is interpreted as series.stack.group.</description>
+        <name>sparkline-seriesItem-stack</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesItemStackTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Indicates that the series should be stacked in a group with the specified name.</description>
+            <name>group</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of stack to plot. The following types are supported:</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The target of the bullet chart.</description>
         <name>sparkline-seriesItem-target</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemTargetTag</tag-class>
@@ -20491,7 +20538,7 @@ The default options for all pie series. For more details see the series options.
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A value indicating if the series should be stacked.</description>
+            <description>A boolean value indicating if the series should be stacked.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -20624,6 +20671,22 @@ Template variables:</description>
         <tag-class>com.kendoui.taglib.sparkline.SeriesDefaultsLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+    <tag>
+        <description>A boolean value indicating if the series should be stacked.</description>
+        <name>sparkline-seriesDefaults-stack</name>
+        <tag-class>com.kendoui.taglib.sparkline.SeriesDefaultsStackTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The type of stack to plot. The following types are supported:</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
     <tag>
         <description>The data point tooltip configuration options.</description>
         <name>sparkline-seriesDefaults-tooltip</name>
@@ -23711,8 +23774,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template of the labels.
-Template variables:</description>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -23759,10 +23821,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template of the labels.
-Template variables:
-*   text - the text the legend item.
-*   series - the data series.</description>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -25643,8 +25702,8 @@ The function return value is displayed instead of the individual points.The supp
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A value indicating if the series should be stacked.  String value indicates that the series should be stacked in a group with the specified name.
-Available for column series.</description>
+            <description>A boolean value indicating if the series should be stacked.
+A string value is interpreted as navigator.series.stack.group.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -25830,7 +25889,7 @@ Available for column series.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The label template. Template variables:</description>
+            <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -25874,7 +25933,7 @@ Available for column series.</description>
 
 
     <tag>
-        <description>The label template. Template variables:</description>
+        <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
         <name>stockChart-navigator-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -25984,6 +26043,29 @@ Available for column series.</description>
         <attribute>
             <description>The gradient name.Available options:</description>
             <name>gradient</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>A boolean value indicating if the series should be stacked.
+A string value is interpreted as navigator.series.stack.group.</description>
+        <name>stockChart-navigator-seriesItem-stack</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemStackTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Indicates that the series should be stacked in a group with the specified name.</description>
+            <name>group</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of stack to plot. The following types are supported:</description>
+            <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -26447,8 +26529,8 @@ The function return value is displayed instead of the individual points.The supp
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A value indicating if the series should be stacked. String value indicates that the series should be stacked in a group with the specified name.
-Available for column series.</description>
+            <description>A boolean value indicating if the series should be stacked.
+A string value is interpreted as series.stack.group.</description>
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -26676,7 +26758,7 @@ Available for column series.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The label template. Template variables:</description>
+            <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -26768,7 +26850,7 @@ Available for column series.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The label template. Template variables:</description>
+        <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
         <name>stockChart-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -27128,6 +27210,29 @@ Available for column series.</description>
         <attribute>
             <description>The gradient name.Available options:</description>
             <name>gradient</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>A boolean value indicating if the series should be stacked.
+A string value is interpreted as series.stack.group.</description>
+        <name>stockChart-seriesItem-stack</name>
+        <tag-class>com.kendoui.taglib.stockchart.SeriesItemStackTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Indicates that the series should be stacked in a group with the specified name.</description>
+            <name>group</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of stack to plot. The following types are supported:</description>
+            <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

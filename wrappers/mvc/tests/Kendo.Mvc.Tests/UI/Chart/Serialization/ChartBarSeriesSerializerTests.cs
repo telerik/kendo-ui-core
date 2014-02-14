@@ -152,9 +152,35 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_stack_type_100()
+        {
+            series.StackType = ChartStackType.Stack100;
+            GetJson(series)["stack"].ShouldNotBeNull();
+            ((IDictionary<string, object>)GetJson(series)["stack"])["type"].ShouldEqual("100%");
+        }
+
+        [Fact]
+        public void Serializes_stack_type_normal()
+        {
+            series.StackType = ChartStackType.Normal;
+            ((IDictionary<string, object>)GetJson(series)["stack"])["type"].ShouldEqual("normal");
+        }
+
+        [Fact]
+        public void Serializes_stack_type_and_stack_group()
+        {
+            series.StackType = ChartStackType.Stack100;
+            series.StackGroup = "Foo";
+
+            var stack = (IDictionary<string, object>)GetJson(series)["stack"];
+            stack["type"].ShouldEqual("100%");
+            stack["group"].ShouldEqual("Foo");
+        }
+
+        [Fact]
         public void Bar_serializes_stack_name()
         {
-            series.StackName = "Female";
+            series.StackGroup = "Female";
             GetJson(series)["stack"].ShouldEqual("Female");
         }
 

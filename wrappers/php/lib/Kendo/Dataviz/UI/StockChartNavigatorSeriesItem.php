@@ -250,9 +250,9 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
-    * A value indicating if the series should be stacked.  String value indicates that the series should be stacked in a group with the specified name.
-Available for column series.
-    * @param boolean|boolean $value
+    * A boolean value indicating if the series should be stacked.
+A string value is interpreted as navigator.series.stack.group.
+    * @param boolean|string|\Kendo\Dataviz\UI\StockChartNavigatorSeriesItemStack|array $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
     */
     public function stack($value) {

@@ -150,8 +150,8 @@ class ChartSeriesDefaults extends \Kendo\SerializableObject {
     }
 
     /**
-    * A value indicating if the series should be stacked.String value indicates that the series should be stacked in a group with the specified name.
-    * @param boolean $value
+    * A boolean value indicating if the series should be stacked.
+    * @param boolean|\Kendo\Dataviz\UI\ChartSeriesDefaultsStack|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
     */
     public function stack($value) {

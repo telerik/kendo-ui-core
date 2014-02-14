@@ -113,6 +113,79 @@
             );
         }
 
+        function assertStackedSeries(seriesType) {
+            // ------------------------------------------------------------
+            module("Categorical PlotArea / Stacked " + seriesType + " series");
+
+            test("sets isStacked when first series is stacked", function() {
+                createPlotArea([{
+                    type: seriesType, data: [], stack: true
+                }, {
+                    type: seriesType, data: []
+                }]);
+
+                ok(chartSeries.options.isStacked);
+            });
+
+            test("does not set isStacked when first and only series is stacked", function() {
+                createPlotArea([{
+                    type: seriesType, data: [], stack: true
+                }]);
+
+                ok(!chartSeries.options.isStacked);
+            });
+
+            test("sets isStacked and isStacked100 when first series is 100% stacked", function() {
+                createPlotArea([{
+                    type: seriesType, data: [], stack: { type: "100%" }
+                }, {
+                    type: seriesType, data: []
+                }]);
+
+                ok(chartSeries.options.isStacked);
+                ok(chartSeries.options.isStacked100);
+            });
+
+            test("does not set isStacked and isStacked100 when only series is 100% stacked", function() {
+                createPlotArea([{
+                    type: seriesType, data: [], stack: { type: "100%" }
+                }]);
+
+                ok(!chartSeries.options.isStacked);
+                ok(!chartSeries.options.isStacked100);
+            });
+
+            test("disables clippin when series are 100% stacked", function() {
+                createPlotArea([{
+                    type: seriesType, data: [], stack: { type: "100%" }
+                }, {
+                    type: seriesType, data: []
+                }]);
+
+                ok(!chartSeries.options.clip);
+            });
+
+            test("enables clipping when series are stacked", function() {
+                createPlotArea([{
+                    type: seriesType, data: [], stack: true
+                }, {
+                    type: seriesType, data: []
+                }]);
+
+                ok(chartSeries.options.clip);
+            });
+
+            test("enables clipping when series are not stacked", function() {
+                createPlotArea([{
+                    type: seriesType, data: []
+                }, {
+                    type: seriesType, data: []
+                }]);
+
+                ok(chartSeries.options.clip);
+            });
+        }
+
         // ------------------------------------------------------------
         module("Categorical PlotArea / Axes", {
             setup: function() {
@@ -971,6 +1044,8 @@
             equal(chartSeries.options.gap, GAP);
         });
 
+        assertStackedSeries("column");
+
         // ------------------------------------------------------------
         module("Categorical PlotArea / Line series", {
             setup: function() {
@@ -997,15 +1072,7 @@
             ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });
 
-        test("sets isStacked when first series is stacked", function() {
-            createPlotArea([{ type: "line", data: [], stack: true }, { type: "line", data: [] }]);
-            ok(chartSeries.options.isStacked);
-        });
-
-        test("does not set isStacked when first and only series is stacked", function() {
-            createPlotArea([{ type: "line", data: [], stack: true }]);
-            ok(!chartSeries.options.isStacked);
-        });
+        assertStackedSeries("line");
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Vertical line series", {
@@ -1029,15 +1096,7 @@
             ok(chartSeries instanceof dataviz.LineChart);
         });
 
-        test("sets isStacked when first series is stacked", function() {
-            createPlotArea([{ type: "verticalLine", data: [], stack: true }, { type: "verticalLine", data: [] }]);
-            ok(chartSeries.options.isStacked);
-        });
-
-        test("does not set isStacked when first and only series is stacked", function() {
-            createPlotArea([{ type: "verticalLine", data: [], stack: true }]);
-            ok(!chartSeries.options.isStacked);
-        });
+        assertStackedSeries("verticalLine");
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Area series", {
@@ -1065,16 +1124,6 @@
             ok($.inArray(chartSeries, plotArea.panes[0].chartContainer.children) >= 0);
         });;
 
-        test("sets isStacked when first series is stacked", function() {
-            createPlotArea([{ type: "area", data: [], stack: true }, { type: "area", data: [] }]);
-            ok(chartSeries.options.isStacked);
-        });
-
-        test("does not set isStacked when first and only series is stacked", function() {
-            createPlotArea([{ type: "area", data: [], stack: true }]);
-            ok(!chartSeries.options.isStacked);
-        });
-
         test("NaN values are ignored when tracking axis range", 2, function() {
             stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
                 function() {
@@ -1089,6 +1138,9 @@
                 }
             );
         });
+
+        assertStackedSeries("area");
+
         // ------------------------------------------------------------
         module("Categorical PlotArea / Verical area series", {
             setup: function() {
@@ -1111,15 +1163,7 @@
             ok(chartSeries instanceof dataviz.AreaChart);
         });
 
-        test("sets isStacked when first series is stacked", function() {
-            createPlotArea([{ type: "verticalArea", data: [], stack: true }, { type: "verticalArea", data: [] }]);
-            ok(chartSeries.options.isStacked);
-        });
-
-        test("does not set isStacked when first and only series is stacked", function() {
-            createPlotArea([{ type: "verticalArea", data: [], stack: true }]);
-            ok(!chartSeries.options.isStacked);
-        });
+        assertStackedSeries("verticalArea");
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Bar series", {
@@ -1207,14 +1251,51 @@
             deepEqual([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
         });
 
-        test("sets isStacked when first series is stacked", function() {
-            createPlotArea([{ type: "bar", data: [], stack: true }, { type: "bar", data: [] }]);
-            ok(chartSeries.options.isStacked);
+        assertStackedSeries("bar");
+
+        // ------------------------------------------------------------
+        module("Categorical PlotArea / 100% Stacked series", {
+            setup: function() {
+                moduleSetup();
+
+                createPlotArea([{
+                    name: "Value A",
+                    type: "column",
+                    stack: { type: "100%" },
+                    data: [100, 200, 300]
+                }, {
+                    name: "Value B",
+                    type: "column",
+                    data: [10, 20, 30]
+                }]);
+            },
+            teardown: moduleTeardown
         });
 
-        test("does not set isStacked when first and only series is stacked", function() {
-            createPlotArea([{ type: "bar", data: [], stack: true }]);
-            ok(!chartSeries.options.isStacked);
+        test("sets value axis roundToMajorUnit to false", function() {
+            ok(!plotArea.valueAxis.options.roundToMajorUnit);
+        });
+
+        test("roundToMajorUnit can be overriden", function() {
+            createPlotArea([{
+                type: "column",
+                stack: { type: "100%" },
+                data: [1, 2, 3]
+            }], { valueAxis: { roundToMajorUnit: false } });
+            ok(!plotArea.valueAxis.options.roundToMajorUnit);
+        });
+
+        test("default value axis label format is set to P0", function() {
+            deepEqual(plotArea.valueAxis.options.labels.format, "P0");
+        });
+
+        test("default value axis label format can be overriden", function() {
+            createPlotArea([{
+                type: "column",
+                stack: { type: "100%" },
+                data: [1, 2, 3]
+            }], { valueAxis: { labels: { format: "N" } } });
+            deepEqual(plotArea.valueAxis.options.labels.format, "N");
         });
 
         // ------------------------------------------------------------

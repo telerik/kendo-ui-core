@@ -145,6 +145,7 @@
     <Compile Include="Controllers\DataViz\Api\EventsController.cs" />
     <Compile Include="Controllers\DataViz\Api\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Api\SelectionController.cs" />
+    <Compile Include="Controllers\DataViz\Area_Charts\Stacked100_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Smooth_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Step_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Error_BarsController.cs" />
@@ -158,6 +159,8 @@
     <Compile Include="Controllers\DataViz\Barcode\ApiController.cs" />
     <Compile Include="Controllers\DataViz\Barcode\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\ColumnController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_Stacked100_BarController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Stacked100_BarController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Error_BarsController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Gap_SpacingController.cs" />
@@ -194,6 +197,7 @@
     <Compile Include="Controllers\DataViz\Financial\VirtualizationController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Linear_Gauge\Scale_OptoinsController.cs" />
+    <Compile Include="Controllers\DataViz\Line_Charts\Stacked100_LineController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Smooth_LineController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Step_LineController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Date_AxisController.cs" />
@@ -684,6 +688,7 @@
     <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\selection.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_charts\stacked100_area.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\smooth_area.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\error_bars.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\date_axis.aspx" />
@@ -697,6 +702,8 @@
     <Content Include="Areas\aspx\Views\dataviz\barcode\api.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\barcode\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\column.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_stacked100_bar.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\stacked100_bar.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\error_bars.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\gap_spacing.aspx" />
@@ -728,6 +735,7 @@
     <Content Include="Areas\aspx\Views\dataviz\financial\virtualization.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked100_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\smooth_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\error_bars.aspx" />
@@ -2991,6 +2999,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\aspx\Views\web\grid\custom_datasource.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\area_charts\stacked100_area.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\line_charts\stacked100_line.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\stacked100_bar.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_stacked100_bar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

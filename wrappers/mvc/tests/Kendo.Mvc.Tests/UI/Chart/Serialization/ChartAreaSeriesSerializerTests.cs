@@ -84,10 +84,6 @@ namespace Kendo.Mvc.UI.Tests
             GetJson(series).ContainsKey("tooltip").ShouldBeFalse();
         }
 
-        protected static IDictionary<string, object> GetJson(IChartSeries series)
-        {
-            return series.CreateSerializer().Serialize();
-        }
         [Fact]
         public void Should_serialize_data_if_set()
         {
@@ -151,9 +147,25 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_not_seriale_default_stack()
+        public void Should_not_serialize_default_stack()
         {
             GetJson(series).ContainsKey("stack").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_stack_type_100()
+        {
+            series.StackType = ChartStackType.Stack100;
+            GetJson(series)["stack"].ShouldNotBeNull();
+            ((IDictionary<string, object>)GetJson(series)["stack"])["type"].ShouldEqual("100%");
+        }
+
+        [Fact]
+        public void Serializes_stack_type_normal()
+        {
+            series.StackType = ChartStackType.Normal;
+            GetJson(series)["stack"].ShouldNotBeNull();
+            ((IDictionary<string, object>)GetJson(series)["stack"])["type"].ShouldEqual("normal");
         }
 
         [Fact]
@@ -282,6 +294,11 @@ namespace Kendo.Mvc.UI.Tests
         {
             GetJson(series).ContainsKey("errorLowField").ShouldBeFalse();
             GetJson(series).ContainsKey("errorHighField").ShouldBeFalse();
+        }
+
+        protected static IDictionary<string, object> GetJson(IChartSeries series)
+        {
+            return series.CreateSerializer().Serialize();
         }
     }
 }
