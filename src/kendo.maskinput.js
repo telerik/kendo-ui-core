@@ -16,6 +16,11 @@ var __meta__ = {
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var ns = ".kendoMaskInput";
+    var proxy = $.proxy;
+
+    var STATEDISABLED = "k-state-disabled";
+    var DISABLED = "disabled";
+    var READONLY = "readonly";
 
     var MaskInput = Widget.extend({
         init: function(element, options) {
@@ -30,9 +35,6 @@ var __meta__ = {
             that.element
                 .addClass("k-textbox")
                 .attr("autocomplete", "off")
-                .on("paste" + ns, $.proxy(that._paste, that))
-                .on("keydown" + ns, $.proxy(that._keydown, that))
-                .on("keypress" + ns, $.proxy(that._keypress, that))
                 .on("focus" + ns, function() {
                     if (!element.val()) {
                         element.val(that._emptyMask);
@@ -46,11 +48,18 @@ var __meta__ = {
                     }
                 });
 
-            that.value(that.options.value);
+            that.value(that.options.value); // || element.val());
 
-            that._handleChanges();
+             var disabled = element.is("[disabled]");
+
+             if (disabled) {
+                 that.enable(false);
+             } else {
+                 that.readonly(element.is("[readonly]"));
+             }
 
             //TODO: MVVM notify
+            //kendo.notify(that);
         },
 
         options: {
@@ -65,6 +74,8 @@ var __meta__ = {
             "0": /\d/
         },
 
+        //TODO: add destroy method
+
         value: function(value) {
             if (value === undefined) {
                 return this.element.val();
@@ -75,28 +86,64 @@ var __meta__ = {
             this._mask(0, this._maskLength, value);
         },
 
-        //TODO: enable method
-        //TODO: readonly method
+        readonly: function(readonly) {
+            this._editable({
+                readonly: readonly === undefined ? true : readonly,
+                disable: false
+            });
+        },
 
-        _handleChanges: function() {
+        enable: function(enable) {
+            this._editable({
+                readonly: false,
+                disable: !(enable = enable === undefined ? true : enable)
+            });
+        },
+
+        _editable: function(options) {
             var that = this;
             var element = that.element;
-            var eventName = ("onpropertychange" in element[0] ? "propertychange" : "input") + ns;
+            var disable = options.disable;
+            var readonly = options.readonly;
+            var inputEventName = ("onpropertychange" in element[0] ? "propertychange" : "input") + ns;
 
-            element.on(eventName, function (e) {
-                var value = element.val();
+            element
+                .off("keydown" + ns)
+                .off("keypress" + ns)
+                .off("paste" + ns)
+                .off(inputEventName);
 
-                if (value !== this._old) {
-                    var start = caret(element[0])[0];
-                    var unmasked = that._unmask(value.substring(start), start);
+            if (!readonly && !disable) {
+                element.removeAttr(DISABLED)
+                       .removeAttr(READONLY)
+                       .removeClass(STATEDISABLED)
+                       .on("keydown" + ns, proxy(that._keydown, that))
+                       .on("keypress" + ns, proxy(that._keypress, that))
+                       .on("paste" + ns, proxy(that._paste, that))
+                       .on(inputEventName, proxy(that._propertChange, that));
+            } else {
+                element.attr(DISABLED, disable)
+                       .attr(READONLY, readonly)
+                       .toggleClass(STATEDISABLED, disable);
+            }
+        },
 
-                    that._old = value.substring(0, start) + that._emptyMask.substring(start);
-                    element.val(that._old);
+        _propertChange: function() {
+            var that = this;
+            var element = that.element[0];
+            var value = element.value;
+            var unmasked;
+            var start;
 
-                    that._mask(start, start, unmasked);
-                    caret(element[0], start);
-                }
-            });
+            if (value !== that._old) {
+                start = caret(element)[0];
+                unmasked = that._unmask(value.substring(start), start);
+
+                element.value = that._old = value.substring(0, start) + that._emptyMask.substring(start);
+
+                that._mask(start, start, unmasked);
+                caret(element, start);
+            }
         },
 
         _paste: function(e) {
@@ -310,6 +357,7 @@ var __meta__ = {
         }
     });
 
+    //TODO: Move caret function in core.js
     function caret(element, position) {
         var range,
             isPosition = position !== undefined;
