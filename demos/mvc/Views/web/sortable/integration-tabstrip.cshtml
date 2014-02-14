@@ -45,20 +45,25 @@
                     start: function(e) {
                         tabstrip.activateTab(e.item);
                     },
-                    end: function(e) {
-                        var referenceTab = tabstrip.tabGroup.children().not(this.placeholder).eq(e.newIndex);
+                    change: function(e) {
+                        var tabstrip = $("#tabstrip").data("kendoTabStrip"),
+                            movedContent = tabstrip.element.find(".k-content").eq(e.oldIndex),
+                            targetContent = tabstrip.element.find(".k-content").eq(e.newIndex);
 
                         if(e.oldIndex < e.newIndex) {
-                            tabstrip.insertAfter(e.item, referenceTab);
+                            tabstrip.insertAfter(e.item, e.newIndex);
                         } else {
-                            tabstrip.insertBefore(e.item, referenceTab);
+                            tabstrip.insertBefore(e.item, e.newIndex);
                         }
                     }
                 });
             </script>
 
             <style>
-                h3 {
+                .demo-section {
+		    margin: 30px auto;
+		}
+		h3 {
                 	font-weight: normal;
                 	padding: 0 0 1em 0;
                 }

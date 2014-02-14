@@ -1,0 +1,157 @@
+
+        <div id="example">
+            <div class="folio-head"></div>
+            <div class="panel-wrap">
+                <div class="project-list">
+                    <h3>Projects</h3>
+                    <ul>
+                        <li><img src="../../content/web/sortable/property-table.jpg" />Propery Table</li>
+                        <li><img src="../../content/web/sortable/flat.jpg" />Flat</li>
+                        <li><img src="../../content/web/sortable/slider.jpg" />Slider Blueprint</li>
+                        <li><img src="../../content/web/sortable/installer.jpg" />Installer</li>
+                        <li><img src="../../content/web/sortable/weather-dashboard.jpg" />Weather station</li>
+                        <li><img src="../../content/web/sortable/sales-dashboard.jpg" />Sales Dashboard</li>
+                        <li><img src="../../content/web/sortable/shop-it-later.jpg" />Shop it later</li>
+                        <li><img src="../../content/web/sortable/demo-app.jpg" />Demo App</li>
+                    </ul>
+                </div>
+                <div class="featured-list">
+                    <h3>Featured</h3>
+                    <ul>
+                        <li><img src="../../content/web/sortable/property-table.jpg" />Propery Table</li>
+                    </ul>
+                </div>
+                <div class="showcase-list">
+                    <h3>Showcase Gallery</h3>
+                    <ul>
+                        <li><img src="../../content/web/sortable/sales-dashboard.jpg" />Sales Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#sortable-listA").kendoSortable({
+                        connectWith: "#sortable-listB",
+                        placeholder: function(element) {
+                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
+                        }
+                    });
+
+                    $("#sortable-listB").kendoSortable({
+                        placeholder: function(element) {
+                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
+                        }
+                    });
+
+                    $("#sortable-listC").kendoSortable({
+                        connectWith: "#sortable-listD",
+                        placeholder: function(element) {
+                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
+                        }
+                    });
+
+                    $("#sortable-listD").kendoSortable({
+                        connectWith: "#sortable-listC",
+                        placeholder: function(element) {
+                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
+                        }
+                    });
+                });
+            </script>
+
+            <style>
+                #example {
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+                .folio-head {
+                    margin: 20px 0 0;
+                    width: 970px;
+                    height: 80px;
+                    background: url('../../content/web/sortable/portfolio-head.png') no-repeat 50% 70% #222222;  
+                }
+                .panel-wrap {
+                    margin: 0 0 20px;
+                    width: 968px;
+                    background-color: #f5f5f5;
+                    border: 1px solid #e5e5e5;
+                }
+                .panel-wrap h3 {
+                    font-size: 12px;
+                    text-transform: uppercase;
+                }
+                .project-list {
+                    display: inline-block;
+                    margin: 0;
+                    padding: 20px;
+                    width: 180px;
+                    height: 560px;
+                    background-color: #fff;
+                    border-right: 1px solid #e5e5e5;
+                    vertical-align: top;
+                }
+                .project-list ul {
+                    margin: 10px 0 0;
+                    padding: 0;
+                    list-style-type: none;
+                    border: 1px solid #eeeeee;
+                    border-bottom: 0;
+                    font-weight: bold;
+                }
+                .project-list li {
+                    margin: 0;
+                    padding: 5px;
+                    line-height: 20px;
+                    vertical-align: middle;
+                    border-bottom: 1px solid #e5e5e5;
+                }
+                .project-list li img {
+                    width: 30px;
+                    margin-right: 5px;
+                    vertical-align: middle;
+                }
+                .project-list li:hover {
+                    background-color: #52aef7;
+                    color: #fff;
+                }
+                .featured-list {
+                    display: inline-block;
+                    margin: 20px 0;
+                    padding: 0 20px;
+                    width: 200px;
+                    height: 560px;
+                    border-right: 1px solid #e5e5e5;
+                    vertical-align: top;
+                }
+                .featured-list ul,
+                .showcase-list ul {
+                    margin: 10px 0 0;
+                    padding: 0;
+                    list-style-type: none;
+                    font-weight: bold;
+                }
+                .featured-list li,
+                .showcase-list li {
+                    width: 190px;
+                    margin: 0 0 10px;
+                    padding: 5px;
+                    background-color: #ffffff;
+                    box-shadow: 0 1px 3px rgba(0,0,0,.1)
+                }
+                .showcase-list {
+                    display: inline-block;
+                    margin: 0;
+                    padding: 20px;
+                    width: 450px;
+                    height: 560px;
+                    vertical-align: top;
+                }
+                .showcase-list li {
+                    display: inline-block;
+                    margin: 0 7px 10px 0;
+                }
+            </style>
+        </div>
