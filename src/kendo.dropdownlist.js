@@ -539,10 +539,15 @@ var __meta__ = {
 
         _popup: function() {
             Select.fn._popup.call(this);
-            this.popup.one("open", function() {
-                this.wrapper = kendo.wrap(this.element)
-                                    .addClass("km-popup");
-            });
+            this.popup.one("open", proxy(function() {
+                var popup = this.popup;
+
+                popup.wrapper = kendo.wrap(popup.element);
+                if (popup.element.closest(".km-root")[0]) {
+                    popup.wrapper.addClass("km-popup km-widget");
+                    this.wrapper.addClass("km-widget");
+                }
+            }, this));
         },
 
         _search: function() {
