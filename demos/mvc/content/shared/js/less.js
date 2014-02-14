@@ -7126,6 +7126,7 @@ function errorHTML(e, rootHref) {
         "margin-bottom: 15px"
     ].join(';');
 
+    if (less.env == 'development') {
         timer = setInterval(function () {
             if (document.body) {
                 if (document.getElementById(id)) {
@@ -7136,6 +7137,7 @@ function errorHTML(e, rootHref) {
                 clearInterval(timer);
             }
         }, 10);
+    }
 }
 
 function error(e, rootHref) {
