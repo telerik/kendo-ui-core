@@ -76,6 +76,10 @@ var __meta__ = {
         classes.push("km-" + os.majorVersion);
         classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
 
+        if (os.variant) {
+            classes.push("km-" + (os.skin ? os.skin : os.name) + "-" + os.variant);
+        }
+
         if (os.appMode) {
             classes.push("km-app");
         } else {
@@ -219,17 +223,21 @@ var __meta__ = {
             var that = this,
                 platform = that.options.platform,
                 skin = that.options.skin,
+                split = [],
                 os = OS || MOBILE_PLATFORMS[DEFAULT_OS];
 
             if (platform) {
                 if (typeof platform === "string") {
-                    os = $.extend({}, os, MOBILE_PLATFORMS[platform]);
+                    split = platform.split("-");
+                    os = $.extend({ variant: split[1] }, os, MOBILE_PLATFORMS[split[0]]);
                 } else {
                     os = platform;
                 }
             }
+
             if (skin) {
-                os = $.extend({}, os, {skin: skin});
+                split = skin.split("-");
+                os = $.extend({}, os, { skin: split[0], variant: split[1] });
             }
 
             that.os = os;
