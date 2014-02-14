@@ -348,3 +348,21 @@ test("invert composite transform with rotation with center", function() {
 
     roughlyEqualPoint(point, invertedPoint, "the inverted point should be the same as the original point");
 });
+
+/*-----------SVG tests------------------------------------*/
+module("SVG rendering");
+
+test("visualBase should render stroke", function() {
+    var element = new diagram.VisualBase(
+        document.createElementNS("http://www.w3.org/2000/svg", "path"), {
+            stroke: {
+                color: "red",
+                width: 20,
+                dashType: "dot"
+            }
+        });
+
+    equal(element.native.getAttribute("stroke"), "red");
+    equal(element.native.getAttribute("stroke-width"), 20);
+    equal(element.native.getAttribute("stroke-dasharray"), "30 70");
+});
