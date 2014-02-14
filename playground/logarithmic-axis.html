@@ -21,6 +21,7 @@
     <body>
 
        <-- <div id="log" style="height: 500px;"></div> -->
+        <div id="scatter"></div>
        <div id="chart" style="height: 500px;"></div>
         <div id="panes"></div>
        <script>
@@ -178,6 +179,21 @@
                 }
             } ],           
             valueAxis: [{  
+                crosshair: {
+                  visible: true,
+                  tooltip: {
+                    visible: false
+                  }
+                  
+                },
+                labels: {
+                  background: "green",
+                  color: "white",
+                  mirror: false,
+                  skip: 1,
+                  step: 2
+                },
+               
                 type: "logarithmic",
                // majorUnit: 10,
                 //axisCrossingValue: 10,
@@ -194,8 +210,20 @@
                     //color: "blue",
                     // skip: 2,
                     // step: 2
-                },                  
-                reverse: false,
+                }, 
+                plotBands: [
+                  { from: 1, to: 10, color: "red", opacity: 0.1 },
+                  { from: 100, to: 500, color: "blue", opacity: 0.1 }
+                ],   
+                 title: {
+                    text: "test",
+                    visible: true
+                 },
+                 notes: {
+                    position: "right",
+                    data: [{value: 100, label: {text: "test"}}]
+                 },
+                reverse: true,
                 // narrowRange: false,
                 minorTicks: {
                   // size: 6,
@@ -233,6 +261,37 @@
             }
         });
         
+        $("#scatter").kendoChart({
+                title: {
+                    text: "Rainfall - Wind Speed"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "scatter"
+                },
+                series: [{
+                    name: "January 2008",
+                    data: [
+                    [0.1, 5.4], [1020, 2], [10001, 3]]
+                }],
+                xAxis: {
+                    type: "logarithmic",
+                    title: {
+                        text: "Wind Speed [km/h]"
+                    }
+                },
+                yAxis: {
+                    min: -5,
+                    max: 25,
+                    title: {
+                        text: "Rainfall [mm]"
+                    },
+                    axisCrossingValue: -5
+                }
+            });
+        
         $("#chart").kendoChart({
             title: {
                 text: "Olympic Medals won by USA"
@@ -258,6 +317,21 @@
                 color: "#bb6e36"
             }],
             valueAxis: {
+                 title: {
+                    text: "test",
+                    visible: true
+                 },
+                crosshair: {
+                  visible: true,
+                  tooltip: {
+                    visible: true
+                  }
+                },
+                labels: {
+                  background: "green",
+                  color: "white",
+                  mirror: false
+                },
                 max: 180,
                 minorGridLines: {
                     visible: true
@@ -269,12 +343,12 @@
                     visible: true
                 }
             },
-            categoryAxis: {
-                categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012],
-                majorGridLines: {
-                    visible: false
-                }
-            },
+            // categoryAxis: {
+               // categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012],
+                // majorGridLines: {
+                    // visible: false
+                // }
+            // },
             tooltip: {
                 visible: true,
                 template: "#= series.name #: #= value #"

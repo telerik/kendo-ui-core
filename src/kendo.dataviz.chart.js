@@ -8705,7 +8705,7 @@ var __meta__ = {
 
                 if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
-                    defaultAxisRange = axisOptions.type === LOGARITHMIC ? {min: 0.1, max: 1} : { min: 0, max: 1 };
+                    defaultAxisRange = equalsIgnoreCase(axisOptions.type, LOGARITHMIC) ? {min: 0.1, max: 1} : { min: 0, max: 1 };
                     range = tracker.query(name) || defaultRange || defaultAxisRange;
 
                     if (i === 0 && range && defaultRange) {
@@ -8713,7 +8713,7 @@ var __meta__ = {
                         range.max = math.max(range.max, defaultRange.max);
                     }
 
-                    if (axisOptions.type === LOGARITHMIC) {
+                    if (equalsIgnoreCase(axisOptions.type, LOGARITHMIC)) {
                         axisType = LogarithmicAxis;
                     } else {
                         axisType = NumericAxis;
@@ -8979,9 +8979,11 @@ var __meta__ = {
                 namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
                 tracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 defaultRange = tracker.query(),
-                range = tracker.query(axisName) || defaultRange || { min: 0, max: 1 },
+                defaultAxisRange = equalsIgnoreCase(options.type, LOGARITHMIC) ? {min: 0.1, max: 1} : { min: 0, max: 1 },
+                range = tracker.query(axisName) || defaultRange || defaultAxisRange,
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
                 axis,
+                axisType,
                 seriesIx,
                 series = plotArea.series,
                 currentSeries,
@@ -9015,10 +9017,14 @@ var __meta__ = {
             }
 
             if (equalsIgnoreCase(axisOptions.type, DATE) || (!axisOptions.type && inferredDate)) {
-                axis = new DateValueAxis(range.min, range.max, axisOptions);
+                axisType = DateValueAxis;
+            } else if (equalsIgnoreCase(axisOptions.type, LOGARITHMIC)){
+                axisType = LogarithmicAxis;
             } else {
-                axis = new NumericAxis(range.min, range.max, axisOptions);
+                axisType = NumericAxis;
             }
+
+            axis = new axisType(range.min, range.max, axisOptions);
 
             if (axisName) {
                 if (namedAxes[axisName]) {
