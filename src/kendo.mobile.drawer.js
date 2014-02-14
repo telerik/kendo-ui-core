@@ -76,9 +76,10 @@ var __meta__ = {
             };
 
             if (this.options.swipeToOpen && SWIPE_TO_OPEN) {
+                userEvents.bind("press", function(e) { drawer.transition.cancel(); });
                 userEvents.bind("start", function(e) { drawer._start(e); });
                 userEvents.bind("move", function(e) { drawer._update(e); });
-                userEvents.bind("end", function(e) { drawer._end(e); });
+                userEvents.bind("release", function(e) { drawer._end(e); });
                 userEvents.bind("tap", hide);
             } else {
                 userEvents.bind("press", hide);
@@ -115,7 +116,7 @@ var __meta__ = {
         },
 
         hide: function() {
-            if (this._transitioning || !this.currentView) {
+            if (!this.currentView) {
                 return;
             }
 
@@ -171,10 +172,6 @@ var __meta__ = {
         },
 
         _show: function() {
-            if (this._transitioning) {
-                return;
-            }
-
             this.currentView.enable(false);
 
             this.visible = true;
@@ -201,7 +198,6 @@ var __meta__ = {
 
         _moveViewTo: function(offset) {
             this.userEvents.cancel();
-            this._transitioning = true;
             this.transition.moveTo({ location: offset, duration: 400, ease: Transition.easeOutExpo });
         },
 
@@ -224,13 +220,18 @@ var __meta__ = {
                 movable = this.movable,
                 currentOffset = movable && movable.x;
 
+
+            if (this.transition) {
+                this.transition.cancel();
+                this.movable.moveAxis("x", 0);
+            }
+
             movable = this.movable = new kendo.ui.Movable(element);
 
             this.transition = new Transition({
                 axis: AXIS,
                 movable: this.movable,
                 onEnd: function() {
-                    that._transitioning = false;
                     if (movable[AXIS] === 0) {
                         element[0].style.cssText = "";
                         that.element.hide();
@@ -239,8 +240,10 @@ var __meta__ = {
             });
 
             if (currentOffset) {
-                this.movable.moveAxis(AXIS, currentOffset);
-                this.hide();
+                kendo.animationFrame(function() {
+                    that.movable.moveAxis(AXIS, currentOffset);
+                    that.hide();
+                });
             }
         },
 
