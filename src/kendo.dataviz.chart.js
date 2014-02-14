@@ -3698,20 +3698,22 @@ kendo_module({
                 currentSeries, valueAxis,
                 seriesCount = series.length;
 
-            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
-                currentSeries = series[seriesIx];
-                valueAxis = chart.seriesValueAxis(currentSeries);
+            if (options.isStacked) {
+                for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
+                    currentSeries = series[seriesIx];
+                    valueAxis = chart.seriesValueAxis(currentSeries);
 
-                for (categoryIx = 0; categoryIx < count; categoryIx++) {
-                    var cluster = clusters[categoryIx],
-                        stackWrap = chart.getStackWrap(currentSeries, cluster),
-                        stacks = stackWrap.children,
-                        positiveStack = stacks[0],
-                        negativeStack = stacks[1];
+                    for (categoryIx = 0; categoryIx < count; categoryIx++) {
+                        var cluster = clusters[categoryIx],
+                            stackWrap = chart.getStackWrap(currentSeries, cluster),
+                            stacks = stackWrap.children,
+                            positiveStack = stacks[0],
+                            negativeStack = stacks[1];
 
-                    if (positiveStack && negativeStack) {
-                        positiveStack.options.isReversed = valueAxis.options.reverse;
-                        negativeStack.options.isReversed = !valueAxis.options.reverse;
+                        if (positiveStack && negativeStack) {
+                            positiveStack.options.isReversed = valueAxis.options.reverse;
+                            negativeStack.options.isReversed = !valueAxis.options.reverse;
+                        }
                     }
                 }
             }
