@@ -185,7 +185,7 @@ kendo_module({
             router.bind("routeMissing", function(e) {
                 if (!that.historyCallback(e.url, e.params)) {
                     e.preventDefault();
-                };
+                }
             });
 
             router.bind("same", function() {
