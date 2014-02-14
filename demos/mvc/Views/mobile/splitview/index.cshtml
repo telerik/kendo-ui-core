@@ -26,7 +26,7 @@
         <div data-role="layout" data-id="side-default" data-show="toggleBackButton">
             <div data-role="header">
                 <div data-role="navbar">
-                    <a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
+                    <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
                     <span data-role="view-title"></span>
                 </div>
             </div>
@@ -124,7 +124,7 @@
 
     function toggleBackButton(e) {
         if (e.view.id === "#side-root") {
-            e.view.element.find("[data-role=backbutton]").css("visibility", "");
+            e.view.element.find("[data-role=backbutton]").css("visibility", "hidden");
         } else {
             e.view.element.find("[data-role=backbutton]").css("visibility", "visible");
         }
