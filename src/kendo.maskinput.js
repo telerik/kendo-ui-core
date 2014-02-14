@@ -74,7 +74,19 @@ var __meta__ = {
             "0": /\d/
         },
 
-        //TODO: add destroy method
+        //TODO: add form support!
+        //
+        destroy: function() {
+            var that = this;
+
+            that.element.off(ns);
+
+            /*if (that._form) {
+                that._form.off("reset", that._resetHandler);
+            }*/
+
+            Widget.fn.destroy.call(that);
+        },
 
         value: function(value) {
             if (value === undefined) {
