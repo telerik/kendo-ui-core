@@ -179,7 +179,7 @@ kendo_module({
                 };
 
             if (that.trigger(BEFORE_SHOW, {view: that})) {
-                return;
+                return false;
             }
 
             that._back = paramsHistory[paramsHistory.length - 1] === JSON.stringify(params);
@@ -206,6 +206,8 @@ kendo_module({
                 that.showStart();
                 complete();
             }
+
+            return true;
         },
 
         parallaxContents: function(other) {
@@ -512,22 +514,9 @@ kendo_module({
         LOAD_COMPLETE = "loadComplete",
         SHOW_START = "showStart",
         SAME_VIEW_REQUESTED = "sameViewRequested",
-        VIEW_SHOW = "viewShow";
-/*
-    function urlParams(url) {
-        var queryString = url.split('?')[1] || "",
-            params = {},
-            paramParts = queryString.split(/&|=/),
-            length = paramParts.length,
-            idx = 0;
+        VIEW_SHOW = "viewShow",
+        AFTER = "after";
 
-        for (; idx < length; idx += 2) {
-            params[paramParts[idx]] = paramParts[idx + 1];
-        }
-
-        return params;
-    }
-*/
     var ViewEngine = Observable.extend({
         init: function(options) {
             var that = this,
@@ -564,7 +553,7 @@ kendo_module({
                 that.bind(SHOW_START, function() { that.loader.transition(); });
                 that.bind(LOAD_START, function() { that.loader.show(); });
                 that.bind(LOAD_COMPLETE, function() { that.loader.hide(); });
-                that.bind(VIEW_SHOW, function() { that.loader.transitionDone(); });
+                that.bind(AFTER, function() { that.loader.transitionDone(); });
             }
         },
 
@@ -588,14 +577,14 @@ kendo_module({
 
             if (url === this.url) {
                 this.trigger(SAME_VIEW_REQUESTED);
-                return;
+                return false;
             }
 
             this.trigger(SHOW_START);
 
             var that = this,
                 showClosure = function(view) {
-                    that._show(view, transition, params);
+                    return that._show(view, transition, params);
                 },
                 element = that._findViewElement(url),
                 view = element.data("kendoView");
@@ -614,9 +603,10 @@ kendo_module({
                     view = that._createView(element);
                 }
 
-                showClosure(view);
+                return showClosure(view);
             } else {
                 that._loadView(url, showClosure);
+                return true;
             }
         },
 
@@ -734,14 +724,23 @@ kendo_module({
             var that = this;
 
             if (that._view !== view) {
-                view.switchWith(that._view, transition, params, function() {
+                var result = view.switchWith(that._view, transition, params, function() {
                     that._view = view;
                     that.trigger(VIEW_SHOW, {view: view});
+                    that.trigger(AFTER);
                 });
+
+                if (!result) {
+                    that.trigger(AFTER);
+                }
+
+                return result;
             } else {
                 that._view.updateParams(transition, params, function() {
                     that.trigger(VIEW_SHOW, { view: that._view });
+                    that.trigger(AFTER);
                 });
+                return true;
             }
         },
 

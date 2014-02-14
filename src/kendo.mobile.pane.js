@@ -53,7 +53,7 @@ kendo_module({
             this.historyCallback = function(url, params) {
                 var transition = that.transition;
                 that.transition = null;
-                that.viewEngine.showView(url, transition, params);
+                return that.viewEngine.showView(url, transition, params);
             };
 
             that._historyNavigate = function(url) {
@@ -183,7 +183,9 @@ kendo_module({
             });
 
             router.bind("routeMissing", function(e) {
-                that.historyCallback(e.url, e.params);
+                if (!that.historyCallback(e.url, e.params)) {
+                    e.preventDefault();
+                };
             });
 
             router.bind("same", function() {
