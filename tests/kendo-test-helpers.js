@@ -117,6 +117,13 @@ function release(element, x, y, id) {
     })
 }
 
+function tap(element, x, y, id) {
+    x = x || 0;
+    y = y || 0;
+    press(element, x, y, id);
+    release(element, x, y, id);
+}
+
 function mousewheel(element, delta) {
     $(element).trigger($.Event("mousewheel", { originalEvent: { detail: delta * 3 } }));
 }
