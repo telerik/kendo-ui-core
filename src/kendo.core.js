@@ -3325,7 +3325,7 @@ function pad(number, digits, end) {
 
             var rule = rules[jQuery.inArray(utcTime, rules) - 1] || rules[rules.length - 1];
 
-            return isNaN(rule) ? rule : null;
+            return isNaN(rule) ? rule : null;
         }
 
         function findZone(utcTime, zones, timezone) {
