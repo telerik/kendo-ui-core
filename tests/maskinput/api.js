@@ -94,4 +94,72 @@
 
         equal(maskinput.value(), "(99-99)");
     });
+
+    test("enable method with false disables widget", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)"
+        });
+
+        maskinput.enable(false);
+
+        ok(input.attr("disabled"));
+        ok(input.hasClass("k-state-disabled"));
+    });
+
+    test("enable method with true enables widget", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)"
+        });
+
+        maskinput.enable(false);
+        maskinput.enable(true);
+
+        ok(!input.attr("disabled"));
+        ok(!input.hasClass("k-state-disabled"));
+    });
+
+    test("enable method removes readonly attribute", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)"
+        });
+
+        input.attr("readonly", true);
+
+        maskinput.enable();
+
+        ok(!input.attr("readonly"));
+    });
+
+    test("readonly method makes widget readonly", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)"
+        });
+
+        maskinput.readonly();
+
+        ok(input.attr("readonly"));
+    });
+
+    test("readonly method with false makes widget editable ", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)"
+        });
+
+        maskinput.readonly();
+        maskinput.readonly(false);
+
+        ok(!input.attr("readonly"));
+    });
+
+    test("readonly method removes disabled attribute and class", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)"
+        });
+
+        maskinput.enable(false);
+        maskinput.readonly();
+
+        ok(!input.attr("disabled"));
+        ok(!input.hasClass("k-state-disabled"));
+    });
 })();

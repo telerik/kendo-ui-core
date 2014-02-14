@@ -58,4 +58,13 @@
 
         notEqual(input[0], document.activeElement);
     });
+
+    test("MaskInput honours input disabled attr", function() {
+        var maskinput = new MaskInput(input.attr("disabled", true), {
+            mask: "00-00",
+            value: "9999"
+        });
+
+        ok(input.hasClass("k-state-disabled"));
+    });
 })();
