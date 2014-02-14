@@ -95,6 +95,19 @@
         release(element, 10, 10);
     });
 
+    test("canceling in touchstart stops tap", 0, function() {
+        touch.bind("touchstart", function(e) {
+            touch.cancel();
+        });
+
+        touch.bind("tap", function(e) {
+            ok(false);
+        });
+
+        press(element, 10, 10);
+        release(element, 10, 10);
+    });
+
     asyncTest("does not trigger double tap if second one is done after the doubleTapTimeout", 0, function() {
         touch.bind("doubletap", function() {
             ok(false);
@@ -130,6 +143,23 @@
 
         press(element, 10, 10);
         move(element, 20, 20);
+
+        setTimeout(function() {
+            start();
+            release(element, 20, 20);
+        }, 120);
+    });
+
+    asyncTest("canceling the touchstart voids the  hold", 0, function() {
+        touch.bind("touchstart", function() {
+            touch.cancel();
+        });
+
+        touch.bind("hold", function() {
+            ok(false);
+        });
+
+        press(element, 10, 10);
 
         setTimeout(function() {
             start();
