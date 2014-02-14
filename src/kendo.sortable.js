@@ -15,6 +15,7 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
 
         START = "start",
+        BEFORE_MOVE = "beforeMove",
         MOVE = "move",
         END = "end",
         CHANGE = "change",
@@ -55,6 +56,7 @@ var __meta__ = {
 
         events: [
             START,
+            BEFORE_MOVE,
             MOVE,
             END,
             CHANGE,
@@ -156,8 +158,10 @@ var __meta__ = {
                 nextVisible = target.element.next();
 
                 if(target.sortable.isEmpty()) {
-                    target.element.append(placeholder);
-                    target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                    if(!target.sortable.trigger(BEFORE_MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e })) {
+                        target.element.append(placeholder);
+                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                    }
                     return;
                 }
 
@@ -181,8 +185,10 @@ var __meta__ = {
                     }
 
                     if(prevVisible[0] != placeholder[0]) {
-                        target.element.before(placeholder);
-                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                        if(!target.sortable.trigger(BEFORE_MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e })) {
+                            target.element.before(placeholder);
+                            target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                        }
                     }
                 } else if(direction === "next") {
                     while(nextVisible.length && !nextVisible.is(":visible")) {
@@ -190,8 +196,10 @@ var __meta__ = {
                     }
 
                     if(nextVisible[0] != placeholder[0]) {
-                        target.element.after(placeholder);
-                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                        if(!target.sortable.trigger(BEFORE_MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e })) {
+                            target.element.after(placeholder);
+                            target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
+                        }
                     }
                 }
             }
