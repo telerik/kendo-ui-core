@@ -25,7 +25,8 @@ namespace Kendo.Mvc.UI
             Expression<Func<TModel, string>> noteTextExpression)
             : base(expression, categoryExpression, noteTextExpression)
         {
-            if (colorExpression != null) {
+            if (colorExpression != null)
+            {
                 if (typeof(TModel).IsPlainType() && !colorExpression.IsBindable())
                 {
                     throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
@@ -153,16 +154,6 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the effects overlay
         /// </summary>
         public ChartBarSeriesOverlay Overlay
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets the model color member name.
-        /// </summary>
-        /// <value>The model color member name.</value>
-        public string ColorMember
         {
             get;
             set;

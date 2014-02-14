@@ -12,9 +12,13 @@ namespace Kendo.Mvc.UI
         /// Initializes a new instance of the <see cref="ChartBoundSeries{TModel, TValue}" /> class.
         /// </summary>
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
+        /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
         /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
         /// <param name="noteTextExpression">The expression used to extract the point note text from the chart model.</param>
-        protected ChartBoundSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression, Expression<Func<TModel, string>> noteTextExpression)
+        protected ChartBoundSeries(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, string>> noteTextExpression)
         {
             if (typeof(TModel).IsPlainType() && !expression.IsBindable())
             {
@@ -66,16 +70,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets the model data note text member name.
-        /// </summary>
-        /// <value>The model data note text member name.</value>
-        public string NoteTextMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets the model data member name.
         /// </summary>
         /// <value>The model data member name.</value>
@@ -90,6 +84,26 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <value>The model data category member name.</value>
         public string CategoryMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the model color member name.
+        /// </summary>
+        /// <value>The model color member name.</value>
+        public string ColorMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the model data note text member name.
+        /// </summary>
+        /// <value>The model data note text member name.</value>
+        public string NoteTextMember
         {
             get;
             set;

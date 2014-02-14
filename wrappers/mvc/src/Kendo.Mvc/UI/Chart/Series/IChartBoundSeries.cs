@@ -24,6 +24,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets the model color member name.
+        /// </summary>
+        /// <value>The model color member name.</value>
+        string ColorMember
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets the model data note text member name.
         /// </summary>
         /// <value>The model data note text member name.</value>
