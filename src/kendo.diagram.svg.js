@@ -300,11 +300,28 @@ var __meta__ = {
             that.setAtr("fill-opacity", "fillOpacity");
             that.background();
         },
-        _setStroke: function(options) {
+        _setStroke: function() {
             var stroke = this.options.stroke || {};
             this.native.setAttribute("stroke", stroke.color);
-            this.native.setAttribute("stroke-dasharray", stroke.dashType);
+            this.native.setAttribute("stroke-dasharray", this._renderDashType());
             this.native.setAttribute("stroke-width", stroke.width);
+        },
+        _renderDashType: function() {
+            var stroke = this.options.stroke || {},
+                width = stroke.width || 1,
+                dashType = stroke.dashType;
+
+            if (dashType && dashType != "solid") {
+                var dashArray = dataviz.DASH_ARRAYS[dashType.toLowerCase()] || [],
+                    result = [],
+                    i;
+
+                for (i = 0; i < dashArray.length; i++) {
+                    result.push(dashArray[i] * width);
+                }
+
+                return result.join(" ");
+            }
         },
         _hover: function (value) {
             this._background(value ? this.options.hoveredBackground : this.options.background);
