@@ -21,6 +21,7 @@ var __meta__ = {
     var STATEDISABLED = "k-state-disabled";
     var DISABLED = "disabled";
     var READONLY = "readonly";
+    var CHANGE = "change";
 
     var MaskInput = Widget.extend({
         init: function(element, options) {
@@ -36,6 +37,8 @@ var __meta__ = {
                 .addClass("k-textbox")
                 .attr("autocomplete", "off")
                 .on("focus" + ns, function() {
+                    that._oldValue = element.val();
+
                     if (!element.val()) {
                         element.val(that._emptyMask);
                     } else {
@@ -46,6 +49,8 @@ var __meta__ = {
                     if (element.val() === that._emptyMask) {
                         element.val("");
                     }
+
+                    that._change();
                 });
 
             that.value(that.options.value); // || element.val());
@@ -68,7 +73,9 @@ var __meta__ = {
             mask: ""
         },
 
-        events: [],
+        events: [
+            CHANGE
+        ],
 
         rules: {
             "0": /\d/
@@ -137,6 +144,18 @@ var __meta__ = {
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
                        .toggleClass(STATEDISABLED, disable);
+            }
+        },
+
+        _change: function() {
+            var that = this;
+            var value = that.value();
+
+            if (value !== that._oldValue) {
+                that._oldValue = value;
+
+                that.trigger(CHANGE);
+                that.element.trigger(CHANGE);
             }
         },
 
@@ -214,6 +233,8 @@ var __meta__ = {
                 }
 
                 e.preventDefault();
+            } else if (key === keys.ENTER) {
+                this._change();
             }
         },
 
