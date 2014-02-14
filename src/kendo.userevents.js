@@ -165,10 +165,11 @@ var __meta__ = {
             });
 
             that.press = function() {
-                that._trigger(PRESS, touchInfo);
                 that._holdTimeout = setTimeout(function() {
                     that._trigger(HOLD, touchInfo);
                 }, userEvents.minHold);
+
+                that._trigger(PRESS, touchInfo);
             };
         },
 
@@ -221,13 +222,13 @@ var __meta__ = {
         },
 
         dispose: function() {
-            var that = this,
-                userEvents = that.userEvents,
+            var userEvents = this.userEvents,
                 activeTouches = userEvents.touches;
 
-            that._finished = true;
+            this._finished = true;
+            clearTimeout(this._holdTimeout);
 
-            activeTouches.splice($.inArray(that, activeTouches), 1);
+            activeTouches.splice($.inArray(this, activeTouches), 1);
         },
 
         skip: function() {

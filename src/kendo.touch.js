@@ -132,8 +132,14 @@ var __meta__ = {
             doubleTapTimeout: 800
         },
 
+        cancel: function() {
+            this.events.cancel();
+        },
+
         _triggerTouch: function(type, e) {
-            this.trigger(type, { touch: e.touch, event: e.event });
+            if (this.trigger(type, { touch: e.touch, event: e.event })) {
+                e.preventDefault();
+            }
         },
 
         _tap: function(e) {
