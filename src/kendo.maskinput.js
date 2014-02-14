@@ -63,13 +63,13 @@ var __meta__ = {
                  that.readonly(element.is("[readonly]"));
              }
 
-            //TODO: MVVM notify
-            //kendo.notify(that);
+             kendo.notify(that);
         },
 
         options: {
             name: "MaskInput",
             emptySymbol: "_",
+            value: "",
             mask: ""
         },
 
@@ -79,6 +79,15 @@ var __meta__ = {
 
         rules: {
             "0": /\d/
+        },
+
+        setOptions: function(options) {
+            var that = this;
+
+            Widget.fn.setOptions.call(that, options);
+
+            //TODO: add support for dynamic change of mask
+            //TODO: dynamic change of emptySymbol
         },
 
         //TODO: add form support!
@@ -100,7 +109,7 @@ var __meta__ = {
                 return this.element.val();
             }
 
-            value = this._unmask(value);
+            value = this._unmask(value + "");
 
             this._mask(0, this._maskLength, value);
         },
@@ -360,8 +369,9 @@ var __meta__ = {
 
         _tokenize: function() {
             var tokens = [];
+            var mask = this.options.mask || "";
 
-            var maskChars = this.options.mask.split("");
+            var maskChars = mask.split("");
             var length = maskChars.length;
             var idx = 0;
             var char;
