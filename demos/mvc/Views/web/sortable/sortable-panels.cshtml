@@ -4,26 +4,24 @@
             <div class="panel-wrap">
                 <div class="project-list">
                     <h3>Projects</h3>
-                    <ul>
-                        <li><img src="../../content/web/sortable/property-table.jpg" />Propery Table</li>
+                    <ul id="projects-list">
                         <li><img src="../../content/web/sortable/flat.jpg" />Flat</li>
                         <li><img src="../../content/web/sortable/slider.jpg" />Slider Blueprint</li>
                         <li><img src="../../content/web/sortable/installer.jpg" />Installer</li>
                         <li><img src="../../content/web/sortable/weather-dashboard.jpg" />Weather station</li>
-                        <li><img src="../../content/web/sortable/sales-dashboard.jpg" />Sales Dashboard</li>
                         <li><img src="../../content/web/sortable/shop-it-later.jpg" />Shop it later</li>
                         <li><img src="../../content/web/sortable/demo-app.jpg" />Demo App</li>
                     </ul>
                 </div>
                 <div class="featured-list">
                     <h3>Featured</h3>
-                    <ul>
+                    <ul id="featured-list">
                         <li><img src="../../content/web/sortable/property-table.jpg" />Propery Table</li>
                     </ul>
                 </div>
                 <div class="showcase-list">
                     <h3>Showcase Gallery</h3>
-                    <ul>
+                    <ul id="showcase-list">
                         <li><img src="../../content/web/sortable/sales-dashboard.jpg" />Sales Dashboard</li>
                     </ul>
                 </div>
@@ -31,33 +29,40 @@
 
             <script>
                 $(document).ready(function() {
-                    $("#sortable-listA").kendoSortable({
-                        connectWith: "#sortable-listB",
-                        placeholder: function(element) {
-                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
+                    $("#projects-list").kendoSortable({
+                        filter: ">li",
+                        connectWith: "#featured-list, #showcase-list",
+                        placeholder: placeholder
+                    });
+
+                    $("#featured-list").kendoSortable({
+                        connectWith: "#projects-list, #showcase-list",
+                        placeholder: placeholder,
+                        beforeMove: function(e) {
+                            itemCount = this.items().length + 1;
+
+                            if(itemCount > 3) {
+                                e.preventDefault();
+                            }
                         }
                     });
 
-                    $("#sortable-listB").kendoSortable({
-                        placeholder: function(element) {
-                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
-                        }
-                    });
+                    $("#showcase-list").kendoSortable({
+                        connectWith: "#projects-list, #featured-list",
+                        placeholder: placeholder,
+                        beforeMove: function(e) {
+                            itemCount = this.items().length + 1;
 
-                    $("#sortable-listC").kendoSortable({
-                        connectWith: "#sortable-listD",
-                        placeholder: function(element) {
-                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
-                        }
-                    });
-
-                    $("#sortable-listD").kendoSortable({
-                        connectWith: "#sortable-listC",
-                        placeholder: function(element) {
-                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
+                            if(itemCount > 6) {
+                                e.preventDefault();
+                            }
                         }
                     });
                 });
+
+                function placeholder(element) {
+                    return element.clone().addClass("placeholder");
+                }
             </script>
 
             <style>
@@ -152,6 +157,9 @@
                 .showcase-list li {
                     display: inline-block;
                     margin: 0 7px 10px 0;
+                }
+                .placeholder {
+                    opacity: 0.5;
                 }
             </style>
         </div>

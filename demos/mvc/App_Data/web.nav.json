@@ -1528,6 +1528,12 @@
                     "meta": "This example shows events of Kendo UI Sortable widget."
                 },
                 {
+                    "text": "Sortable panels",
+                    "url": "sortable/sortable-panels.html",
+                    "title": "Panels example for Kendo UI Sortable Component",
+                    "meta": "This example demonstrates the usage of Kendo UI Sortable widget."
+                },
+                {
                     "text": "Integration - Grid",
                     "url": "sortable/integration-grid.html",
                     "title": "Kendo UI Grid integration with Sortable Component",
