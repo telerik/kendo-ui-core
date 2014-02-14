@@ -10,7 +10,7 @@
     {
     <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
-    
+
     @if (ViewBag.Debug)
     {
     <script src="@Url.Content("~/content/shared/js/less.js")"></script>
@@ -48,12 +48,12 @@
                 {
                     @Html.Raw("<div class='" + Html.NavigationWrapperClass(category) + "'>");
                 }
-                
+
                 <h2 class="@category.Trim().ToLower().Replace(" ", "-").Replace("&", "")-cat">@category</h2>
-                
+
                 var idx = 0;
                 var maxItemsPerColumn = 7;
-                
+
                 <ul>
                     @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                     {
@@ -84,7 +84,7 @@
                         }
                     }
                 </ul>
-            
+
                 merging = Html.MergesWithNext(category);
 
                 if (!merging)
@@ -93,12 +93,12 @@
                 }
             }
         }
-        
+
         @if (!merging)
         {
             @Html.Raw("<div class='" + Html.NavigationWrapperClass("themes") + "'>");
         }
-        
+
         <h2 class="custom-themes-cat">Custom Themes</h2>
         <ul>
             <li><a class="theme-builder" href="@Url.Content("~/themebuilder/" + ViewBag.Suite + ".html")" target="_blank">Theme Builder</a> </li>
@@ -144,7 +144,7 @@
             </div>
 
         </div>
-   
+
 
     @Html.Partial("Footer")
 

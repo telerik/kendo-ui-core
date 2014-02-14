@@ -95,7 +95,7 @@
                    contentLoad: function (e) {
                         var baseUrl = "http://@(Request.Headers["host"] + Url.Content("~/"))";
                         var content = $(e.contentElement);
-                        if (content.is("#HTML-1")) {                            
+                        if (content.is("#HTML-1")) {
                             var html = content.find('.prettyprint').text();
                             content.data("html", content.find('.prettyprint').text());
                         }

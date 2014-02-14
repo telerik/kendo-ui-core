@@ -209,7 +209,7 @@ a:hover
     line-height: 1;
     margin: 0 0 40px;
     font: 400 40px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
-    letter-spacing: -0.04em; 
+    letter-spacing: -0.04em;
     margin-bottom: 50px;
     color: #000;
 }
@@ -252,7 +252,7 @@ a:hover
     font-weight: bold;
     font-size: 18px;
     line-height: 66px;
-    letter-spacing: -0.05em; 
+    letter-spacing: -0.05em;
 }
 
 .suite-demos-nav .active.header
@@ -394,7 +394,7 @@ a:hover
 	background: -o-linear-gradient(top, #22252d 0%,#474c57 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top, #22252d 0%,#474c57 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #22252d 0%,#474c57 100%); /* W3C */
-    
+
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 	border-radius:10px;
@@ -516,7 +516,7 @@ div.submenu-box ol {
 }
 
 .suite-demos-nav>.centerWrap
-{     
+{
     display: table;
     table-layout: auto;
 }
@@ -546,7 +546,7 @@ div.submenu-box ol {
     text-decoration: none;
     color: #3d3d3d;
     transition: color 0.2s ease, opacity 0.2s ease;
-    word-wrap: break-word;    
+    word-wrap: break-word;
 }
 
 .suite-demos-nav a:hover,
@@ -562,19 +562,19 @@ div.submenu-box ol {
     float: left;
     display: inline-block;
 }
-    
+
 .demos-list
 {
     float: right;
     display: inline-block;
     width: auto;
-}    
- 
+}
+
  .demos-list .get-kendoui
  {
      position:relative;
  }
- 
+
  .suite-demos-nav
  {
     width: 1170px;
@@ -594,7 +594,7 @@ div.submenu-box ol {
 .demos-nav
 {
     background: #f3f5f7;
-    color: #555; 
+    color: #555;
     border-top: 4px solid #2db245;
 }
 
@@ -666,8 +666,8 @@ div.submenu-box ol {
     width: 370px;
     color:#656565;
     display: inline-block;
-    font-size: 16px; 
-    margin-right: 30px;   
+    font-size: 16px;
+    margin-right: 30px;
 }
 
 .box.right-box
@@ -691,13 +691,13 @@ div.submenu-box ol {
 
 .overview .box
 {
-    line-height:1.25; 
+    line-height:1.25;
     vertical-align: top;
 }
 
 .overview .box p
 {
-    padding-right: 20px;     
+    padding-right: 20px;
 }
 
 .overview .box,
@@ -718,7 +718,7 @@ div.submenu-box ol {
 {
     width: 270px;
     margin-right: 30px;
-    color: #555; 
+    color: #555;
 }
 
 .overview .narrowbox.right-box
@@ -741,14 +741,14 @@ div.submenu-box ol {
 .demos-nav.widgetGrid h2
 {
     -ms-word-wrap: break-word;
-    word-wrap: break-word;   
+    word-wrap: break-word;
     color: #000;
     line-height: 1.5;
     font-size: 12px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
-    clear: left;    
+    clear: left;
 }
 
 .overview > .centerWrap > h2
@@ -765,7 +765,7 @@ div.submenu-box ol {
     margin-top:20px;
     font-size:24px;
     font: 24px/1.2 Arial, Helvetica, sans-serif;
-    letter-spacing: -0.04em; 
+    letter-spacing: -0.04em;
 }
 
 .overview .demos-nav h2
@@ -789,7 +789,7 @@ div.submenu-box ol {
     margin-top:2.4em;
     font-weight:normal;
     font: 24px/1.2 Arial, Helvetica, sans-serif;
-    letter-spacing: -0.04em; 
+    letter-spacing: -0.04em;
 }
 
 .box h2,
@@ -862,7 +862,7 @@ div.submenu-box ol {
     display:block;
     position:relative;
     text-align:center;
-    text-decoration:none;    
+    text-decoration:none;
 }
 
 .k-web .imgPlate img,
@@ -935,7 +935,7 @@ div.submenu-box ol {
 
     margin-bottom: 2px;
     padding: 9px 30px;
-  
+
     line-height: 1.2;
     color: #fff;
     transition-property: background-color,color;
@@ -961,7 +961,7 @@ div.submenu-box ol {
     outline-style: none;
     outline-color: -moz-initial;
     outline-color: initial;
-    text-decoration: none;   
+    text-decoration: none;
 }
 
 .widebox .column23
@@ -1064,7 +1064,7 @@ p#copy
 }
 
 @media screen and (min-width:1030px) {
-   
+
 }
 
 @media screen and (min-width:1400px) {
@@ -1096,7 +1096,7 @@ p#copy
     position: absolute;
     top: 23px;
     left: 0;
-    z-index: 100;    
+    z-index: 100;
 }
 
 #exampleTitle strong
@@ -1390,14 +1390,14 @@ p#copy
 }
 
 #examples-list a
-{ 
+{
     font-size: 12px;
     display: block;
     color: #0487c4;
     text-decoration: none;
     word-wrap: break-word;
     padding: 6px 0 5px 13px;
-    transition: all .2s ease;    
+    transition: all .2s ease;
 }
 
 #examples-list .new-example:after
@@ -1476,7 +1476,7 @@ p#copy
 {
     position:relative;
     padding: 15px 0;
-  
+
     min-height:200px;
     font-size: 12px;
 }
@@ -1503,8 +1503,8 @@ p#copy
 .demo-section h2
 {
    margin:0;
-   font: 400 16px/1.25 Arial, Helvetica, sans-serif;   
-   letter-spacing: normal; 
+   font: 400 16px/1.25 Arial, Helvetica, sans-serif;
+   letter-spacing: normal;
    font-weight: bold;
 }
 
@@ -1544,7 +1544,7 @@ p#copy
     float: left;
     margin: 22px 0 30px;
     border-left: 1px solid #dfdfdf;
-    height: 156px; 
+    height: 156px;
 }
 
 .widgetGrid .narrowCol.mobile-devices
@@ -1565,7 +1565,7 @@ p#copy
 }
 
 .widgetGrid .narrowCol.chart,
-.widgetGrid .narrowCol.mobile-widgets 
+.widgetGrid .narrowCol.mobile-widgets
 {
     border-left: none;
 }
@@ -1583,7 +1583,7 @@ p#copy
 .widgetGrid .narrowCol.custom-themes h2
 {
     padding-top:0;
-}    
+}
 
 .widgetGrid .narrowCol.custom-themes
 {
@@ -1721,13 +1721,13 @@ p#copy
 .dataviz.widgetGrid .dashboards
 {
     width:209px;
-  
+
 }
 
 .dataviz.widgetGrid .custom-themes
 {
     width:169px;
-  
+
 }
 
 .widgetGrid .qrcodes,
@@ -1791,7 +1791,7 @@ p#copy
     padding-top: 15px;
 }
 
-a.theme-builder 
+a.theme-builder
 {
     background-color: #929394;
     background-color: rgba(0, 0, 0, 0.4);
@@ -2427,7 +2427,7 @@ pre.prettyprint
 #mainWrapInner
 {
     padding-top: 18px;
-    
+
 }
 
 .nomargin dd
@@ -2698,7 +2698,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     width: 280px;
 }
 
-#device-wrapper [href*=index], #back-button
+#device-wrapper [href='#/'], #back-button
 {
     visibility: hidden;
 }
@@ -2977,7 +2977,7 @@ div.old-browser
     border-bottom: 1px solid #e1e1e1;
 }
 
-.brand-line 
+.brand-line
 {
     border-bottom:4px solid #2db245;
 }
@@ -3180,7 +3180,6 @@ ul.keyboard-legend li a {
 .floatWrap.narrowCol
 {
     position: relative;
- 
 }
 
 .mobile .floatWrap.narrowCol
