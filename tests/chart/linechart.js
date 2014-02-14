@@ -87,8 +87,8 @@
                     return Box2D();
                 }
             );
-           
-            setupLineChart(plotArea, { series: [ {data: [1, 2]} ] });          
+
+            setupLineChart(plotArea, { series: [ {data: [1, 2]} ] });
         });
 
         // ------------------------------------------------------------
@@ -454,6 +454,7 @@
             point.category = CATEGORY;
             point.dataItem = { value: VALUE };
             point.series = { name: SERIES_NAME };
+            point.percentage = 0.5;
 
             point.owner = {
                 formatPointValue: function(point, tooltipFormat) {
@@ -633,30 +634,30 @@
             deepEqual([anchor.x, anchor.y],
                  [point.marker.box.x2 + TOOLTIP_OFFSET, point.marker.box.y2])
         });
-        
+
         test("tooltipAnchor returns undefined if the marker box is after the clipbox", function() {
-            createPoint({ aboveAxis: true }, Box2D(1,1, 40, 100));            
+            createPoint({ aboveAxis: true }, Box2D(1,1, 40, 100));
             var anchor = point.tooltipAnchor(10, 10);
             equal(anchor, undefined);
-        });        
+        });
 
         test("tooltipAnchor returns undefined if the marker box is before the clipbox", function() {
-            createPoint({ aboveAxis: true}, Box2D(57,1, 100, 100));            
+            createPoint({ aboveAxis: true}, Box2D(57,1, 100, 100));
             var anchor = point.tooltipAnchor(10, 10);
             equal(anchor, undefined);
         });
 
         test("tooltipAnchor returns undefined if the marker box is below the clipbox", function() {
-            createPoint({ aboveAxis: true}, Box2D(1,-10, 100, -7));            
+            createPoint({ aboveAxis: true}, Box2D(1,-10, 100, -7));
             var anchor = point.tooltipAnchor(10, 10);
             equal(anchor, undefined);
-        });  
+        });
 
         test("tooltipAnchor returns undefined if the marker box is above the clipbox", function() {
-            createPoint({ aboveAxis: true}, Box2D(1, 10, 100, 20));            
+            createPoint({ aboveAxis: true}, Box2D(1, 10, 100, 20));
             var anchor = point.tooltipAnchor(10, 10);
             equal(anchor, undefined);
-        });        
+        });
 
         // ------------------------------------------------------------
         module("Line Point / Labels", {
@@ -744,29 +745,33 @@
         // ------------------------------------------------------------
         module("Line Point / Labels / Template");
 
+        function assertTemplate(template, value, format) {
+            createPoint({ labels: { visible: true, template: template, format: format } });
+            equal(label.children[0].content, value);
+        }
+
         test("renders template", function() {
-            createPoint({ labels: { visible: true, template: "${value}%" } });
-            equal(label.children[0].content, VALUE + "%");
+            assertTemplate("${value}%", VALUE + "%");
         });
 
         test("renders template even when format is set", function() {
-            createPoint({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
-            equal(label.children[0].content, VALUE + "%");
+            assertTemplate("${value}%", VALUE + "%", "{0:C}");
         });
 
         test("template has category", function() {
-            createPoint({ labels: { visible: true, template: "${category}" } });
-            equal(point.children[1].children[0].content, CATEGORY);
+            assertTemplate("${category}", CATEGORY);
+        });
+
+        test("template has percentage", function() {
+            assertTemplate("${percentage}", "0.5");
         });
 
         test("template has dataItem", function() {
-            createPoint({ labels: { visible: true, template: "${dataItem.value}" } });
-            equal(point.children[1].children[0].content, VALUE);
+            assertTemplate("${dataItem.value}", VALUE);
         });
 
         test("template has series", function() {
-            createPoint({ labels: { visible: true, template: "${series.name}" } });
-            equal(point.children[1].children[0].content, SERIES_NAME);
+            assertTemplate("${series.name}", SERIES_NAME);
         });
     })();
 
@@ -870,6 +875,19 @@
             linePointClick(function(e) { equal(e.category, "A"); });
         });
 
+        test("event arguments contain percentage", function() {
+            createLineChart({
+                seriesDefaults: {
+                    type: "line",
+                    stack: { type: "100%" }
+                },
+                series: [{ data: [1] }, { data: [2] }],
+                seriesClick: function(e) { equal(e.percentage, 1/3); }
+            });
+            chart._userEvents.press(0, 0, getElementFromModel(marker));
+            chart._userEvents.end(0, 0);
+        });
+
         test("event arguments contain series", 1, function() {
             linePointClick(function(e) {
                 deepEqual(e.series, chart.options.series[0]);
@@ -928,6 +946,18 @@
 
         test("event arguments contain value", 1, function() {
             linePointHover(function(e) { equal(e.value, 1); });
+        });
+
+        test("event arguments contain percentage", function() {
+            createLineChart({
+                seriesDefaults: {
+                    type: "line",
+                    stack: { type: "100%" }
+                },
+                series: [{ data: [1] }, { data: [2] }],
+                seriesHover: function(e) { equal(e.percentage, 1/3); }
+            });
+            getElementFromModel(marker).mouseover();
         });
 
         test("event arguments contain category", 1, function() {

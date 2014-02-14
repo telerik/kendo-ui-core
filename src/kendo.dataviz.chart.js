@@ -2802,6 +2802,7 @@ var __meta__ = {
 
             chart.trigger(SERIES_CLICK, {
                 value: point.value,
+                percentage: point.percentage,
                 category: point.category,
                 series: point.series,
                 dataItem: point.dataItem,
@@ -2814,6 +2815,7 @@ var __meta__ = {
 
             chart.trigger(SERIES_HOVER, {
                 value: point.value,
+                percentage: point.percentage,
                 category: point.category,
                 series: point.series,
                 dataItem: point.dataItem,
@@ -2897,6 +2899,7 @@ var __meta__ = {
                         dataItem: bar.dataItem,
                         category: bar.category,
                         value: bar.value,
+                        percentage: bar.percentage,
                         series: bar.series
                     });
                 } else if (labels.format) {
@@ -3499,6 +3502,9 @@ var __meta__ = {
                                         value < axisCrossingValue : value >= axisCrossingValue;
 
                     point.aboveAxis = aboveAxis;
+                    if (chart.options.isStacked100) {
+                        point.percentage = chart.plotValue(point);
+                    }
 
                     chart.reflowPoint(point, pointSlot);
                 }
@@ -4194,6 +4200,7 @@ var __meta__ = {
                         dataItem: point.dataItem,
                         category: point.category,
                         value: point.value,
+                        percentage: point.percentage,
                         series: point.series
                     });
                 } else if (labels.format) {

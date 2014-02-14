@@ -235,9 +235,9 @@
 
             plotArea.valueAxis.options.reverse = false;
         });
-        
+
         // ------------------------------------------------------------
-                       
+
         module("Bar Chart / Values exceeding value axis min or max options ", {});
 
         test("values are not limited", 2, function() {
@@ -256,9 +256,9 @@
                     }
                 }
             );
-          
-            setupBarChart(plotArea, { series: [ {data: [1, 2]} ] });          
-        });        
+
+            setupBarChart(plotArea, { series: [ {data: [1, 2]} ] });
+        });
 
         // ------------------------------------------------------------
         module("Bar Chart / Multiple Series", {
@@ -1057,11 +1057,11 @@
             }
         });
 
-        test("creates labels for 0 values", 1, function() {
+        test("creates labels for 0 values", function() {
             equal(series.points[1].label.children[0].children[0].content, "0");
         });
 
-        test("creates empty labels for null values", 1, function() {
+        test("creates empty labels for null values", function() {
             equal(series.points[2].label.children[0].children[0].content, "");
         });
 
@@ -1952,15 +1952,16 @@
 
             bar.category = CATEGORY;
             bar.dataItem = { value: VALUE };
+            bar.percentage = 0.5;
             bar.series = { name: SERIES_NAME };
             bar.owner = {
                 pane: {
                     clipBox: function(){
                         return clipBox || new Box2D(0, 0, 100, 100);
                     }
-                }          
+                }
             };
-            
+
             root = new dataviz.RootElement();
             root.append(bar);
 
@@ -2176,12 +2177,12 @@
             var anchor = bar.tooltipAnchor(10, 10);
             deepEqual([anchor.x, anchor.y], [bar.box.x1, bar.box.y1 - 10 - TOOLTIP_OFFSET])
         });
-        
+
         test("tooltipAnchor is limited to the clipbox / horizontal / above axis", function() {
             createBar({ vertical: false, aboveAxis: true }, Box2D(1,1, 40, 100));
             var anchor = bar.tooltipAnchor(10, 10);
             equal(anchor.x, 40 + TOOLTIP_OFFSET);
-        });        
+        });
 
         test("tooltipAnchor is limited to the clipbox / vertical / above axis", function() {
             createBar({ vertical: true, aboveAxis: true}, Box2D(1, 40, 100, 100));
@@ -2193,40 +2194,44 @@
             createBar({ vertical: false, aboveAxis: false}, Box2D(40,1, 100, 100));
             var anchor = bar.tooltipAnchor(10, 10);
             equal(anchor.x, 30 - TOOLTIP_OFFSET);
-        });  
+        });
 
         test("tooltipAnchor is limited to the clipbox / vertical / below axis", function() {
             createBar({ vertical: true, aboveAxis: false}, Box2D(1, 1, 100, 40));
             var anchor = bar.tooltipAnchor(10, 10);
             equal(anchor.y, 30);
-        });        
+        });
 
         // ------------------------------------------------------------
         module("Bar / Labels / Template");
 
+        function assertTemplate(template, value, format) {
+            createBar({ labels: { visible: true, template: template, format: format } });
+            equal(label.children[0].children[0].content, value);
+        }
+
         test("renders template", function() {
-            createBar({ labels: { visible: true, template: "${value}%" } });
-            equal(label.children[0].children[0].content, VALUE + "%");
+            assertTemplate("${value}%", VALUE + "%");
         });
 
         test("renders template even when format is set", function() {
-            createBar({ labels: { visible: true, template: "${value}%", format:"{0:C}" } });
-            equal(label.children[0].children[0].content, VALUE + "%");
+            assertTemplate("${value}%", VALUE + "%", "{0:C}");
         });
 
         test("template has category", function() {
-            createBar({ labels: { visible: true, template: "${category}" } });
-            equal(label.children[0].children[0].content, CATEGORY);
+            assertTemplate("${category}", CATEGORY);
+        });
+
+        test("template has percentage", function() {
+            assertTemplate("${percentage}", "0.5");
         });
 
         test("template has dataItem", function() {
-            createBar({ labels: { visible: true, template: "${dataItem.value}" } });
-            equal(label.children[0].children[0].content, VALUE);
+            assertTemplate("${dataItem.value}", VALUE);
         });
 
         test("template has series", function() {
-            createBar({ labels: { visible: true, template: "${series.name}" } });
-            equal(label.children[0].children[0].content, SERIES_NAME);
+            assertTemplate("${series.name}", SERIES_NAME);
         });
 
     })();
@@ -2342,7 +2347,7 @@
             }
         });
 
-        test("fires when clicking bars", 1, function() {
+        test("fires when clicking bars", function() {
             barClick(function() { ok(true); });
         });
 
@@ -2351,7 +2356,7 @@
             clickChart(chart, barElement);
         });
 
-        test("fires when clicking bar labels", 1, function() {
+        test("fires when clicking bar labels", function() {
             createBarChart({
                 seriesDefaults: {
                     bar: {
@@ -2367,21 +2372,33 @@
             clickChart(chart, getElement(label.id));
         });
 
-        test("event arguments contain value", 1, function() {
+        test("event arguments contain value", function() {
             barClick(function(e) { equal(e.value, 1); });
         });
 
-        test("event arguments contain category", 1, function() {
+        test("event arguments contain percentage", function() {
+            createBarChart({
+                seriesDefaults: {
+                    type: "bar",
+                    stack: { type: "100%" }
+                },
+                series: [{ data: [1] }, { data: [2] }],
+                seriesClick: function(e) { equal(e.percentage, 1/3); }
+            });
+            clickChart(chart, barElement);
+        });
+
+        test("event arguments contain category", function() {
             barClick(function(e) { equal(e.category, "A"); });
         });
 
-        test("event arguments contain series", 1, function() {
+        test("event arguments contain series", function() {
             barClick(function(e) {
                 deepEqual(e.series, chart.options.series[0]);
             });
         });
 
-        test("event arguments contain jQuery element", 1, function() {
+        test("event arguments contain jQuery element", function() {
             barClick(function(e) {
                 equal(e.element[0], getElement(bar.id));
             });
@@ -2394,7 +2411,7 @@
             }
         });
 
-        test("fires when hovering bars", 1, function() {
+        test("fires when hovering bars", function() {
             barHover(function() { ok(true); });
         });
 
@@ -2408,7 +2425,7 @@
             clickChart(chart, barElement);
         });
 
-        test("does not fire on subsequent tap", 1, function() {
+        test("does not fire on subsequent tap", function() {
             createBarChart({
                 seriesHover: function() {
                     ok(true);
@@ -2419,7 +2436,7 @@
             clickChart(chart, barElement);
         });
 
-        test("fires when hovering bar labels", 1, function() {
+        test("fires when hovering bar labels", function() {
             createBarChart({
                 seriesDefaults: {
                     bar: {
@@ -2434,21 +2451,33 @@
             $(getElement(label.id)).mouseover();
         });
 
-        test("event arguments contain value", 1, function() {
+        test("event arguments contain value", function() {
             barHover(function(e) { equal(e.value, 1); });
         });
 
-        test("event arguments contain category", 1, function() {
+        test("event arguments contain percentage", function() {
+            createBarChart({
+                seriesDefaults: {
+                    type: "bar",
+                    stack: { type: "100%" }
+                },
+                series: [{ data: [1] }, { data: [2] }],
+                seriesHover: function(e) { equal(e.percentage, 1/3); }
+            });
+            barElement.mouseover();
+        });
+
+        test("event arguments contain category", function() {
             barHover(function(e) { equal(e.category, "A"); });
         });
 
-        test("event arguments contain series", 1, function() {
+        test("event arguments contain series", function() {
             barHover(function(e) {
                 deepEqual(e.series, chart.options.series[0]);
             });
         });
 
-        test("event arguments contain jQuery element", 1, function() {
+        test("event arguments contain jQuery element", function() {
             barHover(function(e) {
                 equal(e.element[0], getElement(bar.id));
             });
