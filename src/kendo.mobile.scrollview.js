@@ -655,7 +655,6 @@ var __meta__ = {
             that.inner = element.children().first();
             that.page = 0;
             that.inner.css("height", options.contentHeight);
-            that.container().bind("show", proxy(this, "viewShow")).bind("init", proxy(this, "viewInit"));
 
             that.pane = new ElasticPane(that.inner, {
                 duration: this.options.duration,
@@ -688,6 +687,15 @@ var __meta__ = {
             });
 
             that.setDataSource(options.dataSource);
+
+            var mobileContainer = that.container();
+
+            if(mobileContainer.nullObject) {
+                that.viewInit();
+                that.viewShow();
+            } else {
+                mobileContainer.bind("show", proxy(this, "viewShow")).bind("init", proxy(this, "viewInit"));
+            }
         },
 
         options: {

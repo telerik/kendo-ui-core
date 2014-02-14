@@ -1075,6 +1075,12 @@
                     ,"meta": "This example demonstrates how the Mobile Scroller may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
                 },
                 {
+                    "text": "ScrollView",
+                    "url": "mobile/scrollview.html",
+                    "title": "Mobile ScrollView widget demo | Kendo UI Demos"
+                    ,"meta": "This example demonstrates how the Mobile ScrollView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
+                },
+                {
                     "text": "Switch",
                     "url": "mobile/switch.html",
                     "title": "Mobile Switch widget demo | Kendo UI Demos"

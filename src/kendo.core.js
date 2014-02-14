@@ -2863,7 +2863,7 @@ function pad(number, digits, end) {
         }
     });
 
-    var ContainerNullObject = { bind: function () { return this; } };
+    var ContainerNullObject = { bind: function () { return this; }, nullObject: true };
 
     var MobileWidget = Widget.extend({
         init: function(element, options) {

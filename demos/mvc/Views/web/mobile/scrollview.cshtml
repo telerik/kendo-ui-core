@@ -1,0 +1,78 @@
+<div id="example" class="k-content">
+    <div id="scrollview-wrapper">
+        <div id="scrollview"></div>
+    </div>
+</div>
+
+<script id="template" type="text/x-kendo-template">
+    <div>
+        <div class="image" style="background-image: url(#: image_url #);"></div>
+        <p class="title">#: name #</p>
+    </div>
+</script>
+
+<script src="../../content/spa/aeroviewr/js/500px.js"></script>
+
+<script>
+    $(function() {
+        _500px.init({
+            sdk_key: 'a3be03a8a98d6e05af17f60d2cf4bf696eb47555'
+        });
+
+        var _500pxDS = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    var params = { 
+                        feature: "popular",
+                        exclude: "Nude",
+                        image_size: 4,
+                        page: options.data.page,
+                        rpp: options.data.pageSize
+                    };
+
+                    _500px.api("/photos", params, function(response) {
+                        options.success(response.data);
+                    });
+                }
+            },
+            serverPaging: true,
+            pageSize: 30,
+            schema: {
+                data: "photos",
+                total: "total_items"
+            }
+        });
+
+        $("#scrollview").kendoMobileScrollView({
+            dataSource: _500pxDS,
+            contentHeight: "440px",
+            enablePager: false,
+            template: kendo.template($("#template").html())
+        });
+    });
+</script>
+
+<style scoped>
+    #scrollview-wrapper {
+        width: 600px;
+        margin: 0 auto;
+        padding: 1em;
+        border-radius: 10px;
+        background-color: #f4f4f4;
+    }
+
+    .title {
+        font-style: italic;
+        font-weight: bold;
+        text-align: center;
+        margin: 0;
+        padding: 1em;
+    }
+
+    .image {
+        display: block;
+        height: 400px;
+        width: 600px;
+        background-size: cover;
+    }
+</style>
