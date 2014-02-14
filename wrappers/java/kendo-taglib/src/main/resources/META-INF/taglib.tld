@@ -19818,7 +19818,7 @@ A string value is interpreted as series.stack.group.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The label template. Template variables:</description>
+            <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -19910,7 +19910,7 @@ A string value is interpreted as series.stack.group.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The label template. Template variables:</description>
+        <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
         <name>sparkline-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -23774,8 +23774,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template of the labels.
-Template variables:</description>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -23822,10 +23821,7 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template of the labels.
-Template variables:
-*   text - the text the legend item.
-*   series - the data series.</description>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -25893,7 +25889,7 @@ A string value is interpreted as navigator.series.stack.group.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The label template. Template variables:</description>
+            <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -25937,7 +25933,7 @@ A string value is interpreted as navigator.series.stack.group.</description>
 
 
     <tag>
-        <description>The label template. Template variables:</description>
+        <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
         <name>stockChart-navigator-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSeriesItemLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -26762,7 +26758,7 @@ A string value is interpreted as series.stack.group.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The label template. Template variables:</description>
+            <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -26854,7 +26850,7 @@ A string value is interpreted as series.stack.group.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The label template. Template variables:</description>
+        <description>The template which renders the chart series label.The fields which can be used in the template are:</description>
         <name>stockChart-seriesItem-labels-template</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>

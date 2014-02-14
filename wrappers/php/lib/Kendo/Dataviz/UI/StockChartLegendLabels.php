@@ -26,10 +26,7 @@ Any valid CSS color string will work here, including hex and rgb.
 
     /**
     * Sets the template option of the StockChartLegendLabels.
-    * The template of the labels.
-Template variables:
-*   text - the text the legend item.
-*   series - the data series.
+    * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\StockChartLegendLabels
     */
@@ -41,10 +38,7 @@ Template variables:
 
     /**
     * Sets the template option of the StockChartLegendLabels.
-    * The template of the labels.
-Template variables:
-*   text - the text the legend item.
-*   series - the data series.
+    * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\StockChartLegendLabels
     */
