@@ -1364,6 +1364,54 @@
         equal(div.find(".k-event-drag-hint").length, 0);
     });
 
+    test("disabliing editing prevents the move", 0, function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 22:00"),
+            views: [{
+                type: "week",
+                editable: false
+            }],
+            dataSource: [
+                { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+            ],
+            moveStart: function() {
+                ok(false);
+            }
+        });
+
+        var handle = div.find(".k-event");
+
+        var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+        dragstart(scheduler, handle, slots.eq(2));
+    });
+
+    test("disabled editable.move prevents the move", 0, function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 22:00"),
+            views: [{
+                type: "week",
+                editable: {
+                    move: false
+                }
+            }],
+            dataSource: [
+                { start: new Date("2013/6/2 10:30 PM"), end: new Date("2013/6/3 12:00"), title: "" }
+            ],
+            moveStart: function() {
+                ok(false);
+            }
+        });
+
+        var handle = div.find(".k-event");
+
+        var slots = div.find(".k-scheduler-content td:nth-child(1)");
+
+        dragstart(scheduler, handle, slots.eq(2));
+    });
+
     test("hint is not snapped when snap is disabled", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
