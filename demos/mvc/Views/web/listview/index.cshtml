@@ -19,7 +19,7 @@
         $(function() {
             var dataSource = new kendo.data.DataSource({
                 data: products,
-                pageSize: 15
+                pageSize: 21
             });
 
             $("#pager").kendoPager({
@@ -35,13 +35,14 @@
 
     <style scoped>
         .demo-section {
-            padding: 30px;
-            width: 577px;
-        }
+                width: 860px;
+                margin: 20px auto;
+                border: 0;
+                background: none;
+            }
         #listView {
-            padding: 10px;
+            padding: 10px 5px;
             margin-bottom: -1px;
-            min-width: 555px;
             min-height: 510px;
         }
         .product {
@@ -49,7 +50,7 @@
             position: relative;
             width: 111px;
             height: 170px;
-            margin: 0;
+            margin: 0 5px;
             padding: 0;
         }
         .product img {
