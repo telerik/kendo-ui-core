@@ -81,12 +81,8 @@
             DEFAULT_SHAPE_MINWIDTH = 20,
             DEFAULT_SHAPE_MINHEIGHT = 20,
             DEFAULT_SHAPE_POSITION = 0,
-            DEFAULT_SHAPE_STROKEWIDTH = 1,
-            DEFAULT_SHAPE_STROKECOLOR = "DimGray",
-            DEFAULT_SHAPE_STROKEDASH = "none",
             DEFAULT_SHAPE_BACKGROUND = "SteelBlue",
             DEFAULT_CONNECTION_BACKGROUND = "Yellow",
-            DEFAULT_CONNECTION_STROKE = "Gray",
             DEFAULT_CONNECTION_STARTCAP = "FilledCircle",
             DEFAULT_CONNECTION_ENDCAP = "ArrowEnd",
             DEFAULT_CONNECTOR_SIZE = 8,
@@ -419,9 +415,11 @@
                 type: "Shape",
                 cssClass: SHAPE_CSS,
                 data: DEFAULT_SHAPE_TYPE,
-                stroke: DEFAULT_SHAPE_STROKECOLOR,
-                strokeWidth: DEFAULT_SHAPE_STROKEWIDTH,
-                strokeDashArray: DEFAULT_SHAPE_STROKEDASH,
+                stroke:{
+                    color: "DimGray",
+                    width: 1,
+                    dashType: "none"
+                },
                 x: DEFAULT_SHAPE_POSITION,
                 y: DEFAULT_SHAPE_POSITION,
                 minWidth: DEFAULT_SHAPE_MINWIDTH,
@@ -459,8 +457,7 @@
                             default:
                                 bounds = this._bounds;
                         }
-                    }
-                    else { // we assume Rect.
+                    } else { // we assume Rect.
                         point = value.topLeft();
                         options.x = point.x;
                         options.y = point.y;
@@ -472,11 +469,9 @@
                         this.refreshConnections();
                         this._triggerBoundsChange();
                     }
-                }
-                else {
+                } else {
                     bounds = this._bounds;
-                }
-                if (!this.shapeVisual._measured) { // no dimensions, assuming autosize for paths, groups...
+                } if (!this.shapeVisual._measured) { // no dimensions, assuming autosize for paths, groups...
                     size = this.shapeVisual._measure();
                     if (size) {
                         if (this.shapeVisual.options.autoSize) {
@@ -831,7 +826,9 @@
                 that.refresh();
             },
             options: {
-                stroke: DEFAULT_CONNECTION_STROKE,
+                stroke: {
+                    color: "gray"
+                },
                 hoveredStroke: DEFAULT_HOVER_COLOR,
                 startCap: DEFAULT_CONNECTION_STARTCAP,
                 endCap: DEFAULT_CONNECTION_ENDCAP,
@@ -1191,7 +1188,11 @@
                 }
             },
             _hover: function (value) {
-                this.path.redraw({ stroke: value ? this.options.hoveredStroke : this.options.stroke });
+                this.path.redraw({
+                    stroke: {
+                        color: value ? this.options.hoveredStroke : this.options.stroke.color
+                    }
+                });
             },
             /**
              * Using the current router with the endpoints and intermediate points, this returns the Path data to be drawn.

@@ -1467,9 +1467,11 @@
                     background: "DimGray"
                 },
                 rect: {
-                    stroke: "#778899",
-                    strokeWidth: 1,
-                    strokeDashArray: "2, 2",
+                    stroke: {
+                        color: "#778899",
+                        width: 1,
+                        dashType: "dash"
+                    },
                     background: "none"
                 },
                 rotationThumb: {
@@ -1848,9 +1850,11 @@
                 this.diagram = diagram;
             },
             options: {
-                stroke: "#778899",
-                strokeWidth: 1,
-                strokeDashArray: "2, 2",
+                stroke: {
+                    color: "#778899",
+                    width: 1,
+                    dashType: "dash"
+                },
                 background: "none"
             },
             start: function (p) {

@@ -460,9 +460,6 @@ $(function () {
             "selectable":true,
             "type":"Shape",
             "data":"m0,100 L100,100 L50,0z",
-            "stroke":"DimGray",
-            "strokeWidth":0,
-            "strokeDashArray":"none",
             "x":238,
             "y":132,
             "minWidth":20,
@@ -484,7 +481,12 @@ $(function () {
             "resizable":true,
             "rotatable":true,
             "undoable":false,
-            "name":"Triangle"
+            "name":"Triangle",
+            stroke: {
+                color: "red",
+                width: 4,
+                dashType: "dot"
+            }
         }]
     });
     var diagram = $("#canvas").data("kendoDiagram"),

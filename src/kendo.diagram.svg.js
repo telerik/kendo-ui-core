@@ -208,8 +208,7 @@ var __meta__ = {
         visible: function (value) {
             if (isUndefined(value)) {
                 return this._visible;
-            }
-            else {
+            } else {
                 this._visible = value;
                 this.native.setAttribute("visibility", (value ? "visible" : "hidden"));
             }
@@ -282,9 +281,11 @@ var __meta__ = {
             Element.fn.init.call(that, native, options);
         },
         options: {
-            stroke: "gray",
-            strokeWidth: 1,
-            strokeDashArray: "none"
+            stroke: {
+                color: "gray",
+                width: 1,
+                dashType: "none"
+            }
         },
         background: function (value) {
             if (value !== undefined) {
@@ -295,12 +296,15 @@ var __meta__ = {
         redraw: function (options) {
             var that = this;
             Element.fn.redraw.call(that, options);
-
-            that.setAtr("stroke", "stroke");
-            that.setAtr("stroke-dasharray", "strokeDashArray");
-            that.setAtr("stroke-width", "strokeWidth");
+            that._setStroke();
             that.setAtr("fill-opacity", "fillOpacity");
             that.background();
+        },
+        _setStroke: function(options) {
+            var stroke = this.options.stroke || {};
+            this.native.setAttribute("stroke", stroke.color);
+            this.native.setAttribute("stroke-dasharray", stroke.dashType);
+            this.native.setAttribute("stroke-width", stroke.width);
         },
         _hover: function (value) {
             this._background(value ? this.options.hoveredBackground : this.options.background);
@@ -355,9 +359,11 @@ var __meta__ = {
             this.native.setAttribute("dominant-baseline", "hanging");
         },
         options: {
-            stroke: "none",
-            strokeWidth: 0,
-            strokeDashArray: "none",
+            stroke: {
+                color: "none",
+                width: 0,
+                dashType: "none"
+            },
             fontSize: 15,
             fontVariant: "normal",
             fontWeight: "normal",
@@ -505,17 +511,14 @@ var __meta__ = {
             Visual.fn.init.call(this, document.createElementNS(SVGNS, "rect"), options);
         },
         options: {
-            strokeWidth: undefined,
-            strokeDashArray: undefined,
+            stroke: {},
             background: "none"
         },
         redraw: function (options) {
             Visual.fn.redraw.call(this, options);
             this.setAtr("rx", "cornerRadius");
             this.setAtr("ry", "cornerRadius");
-            this.setAtr("stroke", "stroke");
-            this.setAtr("stroke-dasharray", "strokeDashArray");
-            this.setAtr("stroke-width", "strokeWidth");
+            this._setStroke();
         }
     });
 
@@ -705,8 +708,10 @@ var __meta__ = {
             this.refresh();
         },
         options: {
-            stroke: "gray",
-            strokeWidth: 1,
+            stroke: {
+                color: "gray",
+                width: 1
+            },
             backgrounds: "none",
             points: []
         }
@@ -994,7 +999,9 @@ var __meta__ = {
                     width: 6,
                     height: 6,
                     center: new Point(5, 5),
-                    strokeWidth: 1,
+                    stroke: {
+                        width: 1
+                    },
                     background: "black"
                 },
                 width: 10,
