@@ -88,23 +88,23 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
-        public void Should_serialize_static_true()
+        public void Should_serialize_locked_true()
         {
             column.Object.Locked = true;
 
             var json = column.Object.ToJson();
 
-            json["static"].ShouldEqual(true);
+            json["locked"].ShouldEqual(true);
         }
 
         [Fact]
-        public void Should_not_serialize_static_false()
+        public void Should_not_serialize_locked_false()
         {
             column.Object.Locked = false;
 
             var json = column.Object.ToJson();
 
-            json.ContainsKey("static").ShouldBeFalse();
+            json.ContainsKey("locked").ShouldBeFalse();
         }
 
         private IHtmlNode GetSpan(IHtmlNode cell)

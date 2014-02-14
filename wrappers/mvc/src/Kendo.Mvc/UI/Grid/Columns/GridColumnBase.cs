@@ -147,7 +147,7 @@ namespace Kendo.Mvc.UI
 
             if (Locked)
             {
-                json["static"] = Locked;
+                json["locked"] = Locked;
             }
         }       
         
