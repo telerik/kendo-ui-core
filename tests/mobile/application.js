@@ -48,6 +48,23 @@
         equal(document.title, "foo", "view title applies view title attribute");
     });
 
+    test("Allows prevention in beforeShow event", 3, function() {
+        window.refuse = function(e) {
+            e.preventDefault();
+        };
+
+        setup('<div data-role="view" id="foo"><a data-role="button" href="#bar">Go to Bar</a></div><div id="bar" data-role="view" data-before-show="refuse">bar</div>');
+
+        var transitionDone = stub(application.pane.loader, "transitionDone" )
+
+        tap(application.element.find("a"));
+
+
+        equal(application.view().id, "/");
+        equal(location.hash, "");
+
+        equal(transitionDone.calls("transitionDone"), 1);
+    });
     asyncTest("Syncs pane and browser history", 1, function() {
         setup('<div data-role="view" id="foo">foo</div><div id="bar" data-role="view">bar</div><div id="baz" data-role="view">baz</div>');
 
