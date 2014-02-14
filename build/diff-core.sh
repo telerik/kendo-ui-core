@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if git remote | grep -q core;
 then
@@ -11,4 +11,18 @@ else
     git checkout --track -b core-master core/master
 fi
 
-find src styles tests -type f | xargs -I{} git diff --color origin/master -- {};
+DIFF_FILE=diff.diff
+
+find src styles tests -type f | grep -v 'tests/kendo-test-helpers.js' | xargs -I{} git diff --color origin/master -- {}>$DIFF_FILE;
+
+cat diff.diff
+
+if [[ -s $DIFF_FILE ]]; then
+    echo "Diffs detected, failing"
+    exit 1;
+else
+    echo "No diffs found, success"
+    exit 0;
+fi
+
+
