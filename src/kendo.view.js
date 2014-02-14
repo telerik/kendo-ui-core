@@ -277,6 +277,10 @@ var __meta__ = {
                 that.effect.stop();
             }
 
+            if (theTransition === "none") {
+                theTransition = null;
+            }
+
             that.trigger("accepted", { view: view });
             that.view = view;
             that.previous = current;
