@@ -11,4 +11,4 @@ else
     git checkout --track -b core-master core/master
 fi
 
-find src styles -type f | xargs -I{} git diff master -- {};
+find src styles tests -type f | xargs -I{} git diff origin/master -- {};
