@@ -150,9 +150,7 @@ var __meta__ = {
 
     var Touch = Class.extend({
         init: function(userEvents, target, touchInfo) {
-            var that = this;
-
-            extend(that, {
+            extend(this, {
                 x: new TouchAxis("X", touchInfo.location),
                 y: new TouchAxis("Y", touchInfo.location),
                 userEvents: userEvents,
@@ -160,17 +158,19 @@ var __meta__ = {
                 currentTarget: touchInfo.currentTarget,
                 initialTouch: touchInfo.target,
                 id: touchInfo.id,
+                _touchInfo: touchInfo,
                 _moved: false,
                 _finished: false
             });
+        },
 
-            that.press = function() {
-                that._holdTimeout = setTimeout(function() {
-                    that._trigger(HOLD, touchInfo);
-                }, userEvents.minHold);
+        press: function() {
+            this._holdTimeout = setTimeout($.proxy(this, "_hold"), this.userEvents.minHold);
+            this._trigger(PRESS, this._touchInfo);
+        },
 
-                that._trigger(PRESS, touchInfo);
-            };
+        _hold: function() {
+            this._trigger(HOLD, this._touchInfo);
         },
 
         move: function(touchInfo) {
@@ -226,6 +226,7 @@ var __meta__ = {
                 activeTouches = userEvents.touches;
 
             this._finished = true;
+            this._touchInfo = null;
             clearTimeout(this._holdTimeout);
 
             activeTouches.splice($.inArray(this, activeTouches), 1);
