@@ -79,7 +79,7 @@ var __meta__ = {
                 userEvents.bind("press", function(e) { drawer.transition.cancel(); });
                 userEvents.bind("start", function(e) { drawer._start(e); });
                 userEvents.bind("move", function(e) { drawer._update(e); });
-                userEvents.bind("release", function(e) { drawer._end(e); });
+                userEvents.bind("end", function(e) { drawer._end(e); });
                 userEvents.bind("tap", hide);
             } else {
                 userEvents.bind("press", hide);
@@ -122,7 +122,6 @@ var __meta__ = {
 
             this.currentView.enable();
 
-            this.visible = false;
             Drawer.current = null;
             this._moveViewTo(0);
             this.trigger(HIDE, { view: this });
@@ -235,6 +234,7 @@ var __meta__ = {
                     if (movable[AXIS] === 0) {
                         element[0].style.cssText = "";
                         that.element.hide();
+                        that.visible = false;
                     }
                 }
             });
