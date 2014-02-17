@@ -188,4 +188,17 @@
 
         equal(maskinput.value(), "12---_");
     });
+
+    test("setOptions changes emptySymbol option", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)",
+            value: "12"
+        });
+
+        maskinput.setOptions({
+            emptySymbol: " "
+        });
+
+        equal(maskinput.value(), "(12-  )");
+    });
 })();

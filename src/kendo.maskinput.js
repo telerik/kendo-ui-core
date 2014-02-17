@@ -86,15 +86,12 @@ var __meta__ = {
 
         setOptions: function(options) {
             var that = this;
-            //var value = this._unmask(this.element.val());
 
             Widget.fn.setOptions.call(that, options);
 
             this._tokenize();
 
             this.value(this.element.val());
-
-            //TODO: dynamic change of emptySymbol
         },
 
         destroy: function() {
