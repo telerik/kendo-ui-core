@@ -213,7 +213,7 @@ var __meta__ = {
             var selectedItems = that.tabGroup.children("li." + ACTIVESTATE),
                 content = that.contentHolder(selectedItems.index());
 
-            if (content.length > 0 && content[0].childNodes.length === 0) {
+            if (selectedItems[0] && content.length > 0 && content[0].childNodes.length === 0) {
                 that.activateTab(selectedItems.eq(0));
             }
 
@@ -662,7 +662,8 @@ var __meta__ = {
                 tabs.each(function () {
                     content = $("<div class='" + CONTENT + "'/>");
                     if (/k-tabstrip-items/.test(this.parentNode.className)) {
-                        content = $(that.contentElement($(this).index()));
+                        var index = parseInt(this.getAttribute("aria-controls").replace(/^.*-/, "")) - 1;
+                        content = $(that.contentElement(index));
                     }
                     contents = contents.add(content);
                 });
@@ -729,28 +730,47 @@ var __meta__ = {
         _updateContentElements: function() {
             var that = this,
                 contentUrls = that.options.contentUrls || [],
-                tabStripID = that.element.attr("id") || kendo.guid(),
+                items = that.tabGroup.find(".k-item"),
+                tabStripID = (that.element.attr("id") || kendo.guid()) + "-",
                 contentElements = that.wrapper.children("div");
 
-            that.tabGroup.find(".k-item").each(function(idx) {
-                var currentContent = contentElements.eq(idx),
-                    id = tabStripID + "-" + (idx+1);
+            if (items.length > contentElements.length) {
+                contentElements.each(function(idx) {
+                    var currentIndex = parseInt(this.id.replace(tabStripID, "")),
+                        item = items.filter("[aria-controls=" + tabStripID + currentIndex + "]"),
+                        id = tabStripID + (idx+1);
 
-                this.setAttribute("aria-controls", id);
+                    item.data("aria", id);
+                    this.setAttribute("id", id);
+                });
 
-                if (!currentContent.length && contentUrls[idx]) {
-                    $("<div class='" + CONTENT + "'/>").appendTo(that.wrapper).attr("id", id);
-                } else {
-                    currentContent.attr("id", id);
+                items.each(function() {
+                    var item = $(this);
 
-                    if (!$(this).children(".k-loading")[0] && !contentUrls[idx]) {
-                        $("<span class='k-loading k-complete'/>").prependTo(this);
+                    this.setAttribute("aria-controls", item.data("aria"));
+                    item.removeData("aria");
+                });
+            } else {
+                items.each(function(idx) {
+                    var currentContent = contentElements.eq(idx),
+                        id = tabStripID + (idx+1);
+
+                    this.setAttribute("aria-controls", id);
+
+                    if (!currentContent.length && contentUrls[idx]) {
+                        $("<div class='" + CONTENT + "'/>").appendTo(that.wrapper).attr("id", id);
+                    } else {
+                        currentContent.attr("id", id);
+
+                        if (!$(this).children(".k-loading")[0] && !contentUrls[idx]) {
+                            $("<span class='k-loading k-complete'/>").prependTo(this);
+                        }
                     }
-                }
-                currentContent.attr("role", "tabpanel");
-                currentContent.filter(":not(." + ACTIVESTATE + ")").attr("aria-hidden", true).attr("aria-expanded", false);
-                currentContent.filter("." + ACTIVESTATE).attr("aria-expanded", true);
-            });
+                    currentContent.attr("role", "tabpanel");
+                    currentContent.filter(":not(." + ACTIVESTATE + ")").attr("aria-hidden", true).attr("aria-expanded", false);
+                    currentContent.filter("." + ACTIVESTATE).attr("aria-expanded", true);
+                });
+            }
 
             that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
 
@@ -958,12 +978,15 @@ var __meta__ = {
                 return undefined;
             }
 
-            var contentElements = this.contentElements && this.contentElements[0] && !kendo.kineticScrollNeeded ? this.contentElements : this.contentAnimators,
-                idTest = new RegExp("-" + (itemIndex + 1) + "$");
+            var contentElements = this.contentElements && this.contentElements[0] && !kendo.kineticScrollNeeded ? this.contentElements : this.contentAnimators;
+
+            itemIndex = contentElements && itemIndex < 0 ? contentElements.length + itemIndex : itemIndex;
+
+            var idTest = new RegExp("-" + (itemIndex + 1) + "$");
 
             if (contentElements) {
                 for (var i = 0, len = contentElements.length; i < len; i++) {
-                    if (idTest.test(contentElements.closest(".k-content")[i].id)) {
+                    if (idTest.test(contentElements.eq(i).closest(".k-content")[0].id)) {
                         return contentElements[i];
                     }
                 }
