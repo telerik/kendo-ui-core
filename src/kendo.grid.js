@@ -2489,7 +2489,7 @@ kendo_module({
                 tbody = $("<tbody/>").appendTo(table);
             }
 
-            that.tbody = tbody;
+            that.tbody = tbody.attr("role", "rowgroup");
         },
 
         _scrollable: function() {
@@ -3429,7 +3429,7 @@ kendo_module({
                 tr.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
             }
 
-            tr.find("th").addClass("k-header");
+            tr.attr("role", "row").find("th").addClass("k-header");
 
             if(!that.options.scrollable) {
                 thead.addClass("k-grid-header");
@@ -3441,7 +3441,7 @@ kendo_module({
                 that._destroyColumnAttachments();
             }
 
-            that.thead = thead;
+            that.thead = thead.attr("role", "rowgroup");
 
             that._sortable();
 
