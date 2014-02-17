@@ -2863,7 +2863,7 @@ var __meta__ = {
                 tbody = $("<tbody/>").appendTo(table);
             }
 
-            that.tbody = tbody;
+            that.tbody = tbody.attr("role", "rowgroup");
         },
 
         _scrollable: function() {
@@ -4052,7 +4052,7 @@ var __meta__ = {
                 tr.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
             }
 
-            tr.find("th").addClass("k-header");
+            tr.attr("role", "row").find("th").addClass("k-header");
 
             if(!that.options.scrollable) {
                 thead.addClass("k-grid-header");
@@ -4064,7 +4064,7 @@ var __meta__ = {
                 that._destroyColumnAttachments();
             }
 
-            that.thead = thead;
+            that.thead = thead.attr("role", "rowgroup");
 
             that._sortable();
 
