@@ -118,9 +118,10 @@
 
     test("initialization compiles custom template function", 2, function() {
         createNotification({
-            templates: {
-                foo: "bar"
-            }
+            templates: [{
+                type: "foo",
+                template: "bar"
+            }]
         });
 
         var fooFunc = notification._getCompiled("foo");

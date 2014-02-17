@@ -165,9 +165,10 @@
 
     test("show method renders passed object content", function() {
         createNotification({
-            templates: {
-                info: "<div id='#= foo #'></div>"
-            }
+            templates: [{
+                type: "info",
+                template: "<div id='#= foo #'></div>"
+            }]
         });
 
         notification.show({foo: "bar"});
@@ -189,9 +190,10 @@
 
     test("show method renders passed function object content", function() {
         createNotification({
-            templates: {
-                info: "<div id='#= foo #'></div>"
-            }
+            templates: [{
+                type: "info",
+                template: "<div id='#= foo #'></div>"
+            }]
         });
 
         notification.show(function(){
@@ -290,15 +292,17 @@
 
     test("setOptions recompiles templates", function() {
         createNotification({
-            templates: {
-                info: "foo"
-            }
+            templates: [{
+                type: "info",
+                template: "foo"
+            }]
         });
 
         notification.setOptions({
-            templates: {
-                info: "bar"
-            }
+            templates: [{
+                type: "info",
+                template: "bar"
+            }]
         });
 
         equal(notification._compiled.info({}), "bar");

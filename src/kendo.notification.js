@@ -79,7 +79,7 @@ var __meta__ = {
             appendTo: null,
             width: null,
             height: null,
-            templates: {},
+            templates: [],
             animation: {
                 open: {
                     effects: "fade:in",
@@ -100,7 +100,7 @@ var __meta__ = {
             that._compiled = {};
 
             $.each(templates, function(key, value) {
-                that._compiled[key] = kendoTemplate(value);
+                that._compiled[value.type] = kendoTemplate(value.template || $(value.templateId).html());
             });
 
             that._defaultCompiled = kendoTemplate(TEMPLATE);
