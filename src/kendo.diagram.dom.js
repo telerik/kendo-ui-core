@@ -1289,7 +1289,7 @@
                 name: "Diagram",
                 zoomRate: 1.1,
                 dataSource: {},
-                dragAndDrop: true,
+                draggable: true,
                 template: "",
                 autoBind: true,
                 resizable: true,
@@ -1348,7 +1348,7 @@
 
                 that.destroyScroller();
 
-                if (that.options.dragAndDrop && ui.DropTarget) {
+                if (that.options.draggable && ui.DropTarget) {
                     that.element.kendoDropTarget("destroy");
                 }
             },
@@ -2161,7 +2161,7 @@
             _drop: function () {
                 var that = this,
                     options = that.options;
-                if (options.dragAndDrop && ui.DropTarget) {
+                if (options.draggable && ui.DropTarget) {
                     this.element.kendoDropTarget({
                         drop: function (e) {
                             var item, pos;
