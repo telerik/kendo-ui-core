@@ -1061,7 +1061,7 @@ var __meta__ = {
                 this.element.prop("scrollTop", 0);
 
                 this.trigger(REFRESH);
-            }
+            };
         },
 
         _showLoading: function() {
