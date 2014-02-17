@@ -226,7 +226,6 @@ var __meta__ = {
                 deepExtend(this.options, options);
             }
             this.setAtr("id", "id");
-            this.setAtr("class", "cssClass");
         },
         position: function (x, y) {
             if (y !== undefined) {

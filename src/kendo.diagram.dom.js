@@ -74,7 +74,6 @@
             SINGLE = "single",
             NONE = "none",
             MULTIPLE = "multiple",
-            CONNECTOR_CSS = "k-connector",
             DEFAULT_SHAPE_TYPE = "rectangle",
             DEFAULT_SHAPE_WIDTH = 100,
             DEFAULT_SHAPE_HEIGHT = 100,
@@ -247,10 +246,8 @@
                 that.isSelected = false;
                 that.model = model;
                 that.visual = new Group({
-                    id: that.options.id,
-                    cssClass: that.options.cssClass
+                    id: that.options.id
                 });
-                that.options.cssClass = undefined; // Clean the class so that is not propagated toward inner elements.
                 that._template();
             },
             options: {
@@ -352,8 +349,7 @@
                 width: DEFAULT_CONNECTOR_SIZE,
                 height: DEFAULT_CONNECTOR_SIZE,
                 background: DEFAULT_CONNECTION_BACKGROUND,
-                hoveredBackground: DEFAULT_HOVER_COLOR,
-                cssClass: CONNECTOR_CSS
+                hoveredBackground: DEFAULT_HOVER_COLOR
             },
             position: function () {
                 if (this.options.position) {
@@ -413,7 +409,6 @@
             },
             options: {
                 type: "Shape",
-                cssClass: SHAPE_CSS,
                 data: DEFAULT_SHAPE_TYPE,
                 stroke:{
                     color: "DimGray",
@@ -832,8 +827,7 @@
                 hoveredStroke: DEFAULT_HOVER_COLOR,
                 startCap: DEFAULT_CONNECTION_STARTCAP,
                 endCap: DEFAULT_CONNECTION_ENDCAP,
-                points: [],
-                cssClass: CONNECTION_CSS
+                points: []
             },
 
             /**
