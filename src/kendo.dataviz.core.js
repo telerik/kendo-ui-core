@@ -2480,7 +2480,7 @@ var __meta__ = {
 
             return slotBox;
         },
-
+//TO DO: fix for reverse true
         getValue: function(point) {
             var axis = this,
                 options = axis.options,

@@ -171,7 +171,12 @@
                         visible: true
                     },
                     type: "log",
-                    narrowRange: false
+                    narrowRange: false,
+                    crosshair: {
+                        visible: true,
+                        tooltip: {visible: true}
+                        
+                    }
                 }],
                 categoryAxis: {
                     notes: {
@@ -276,7 +281,7 @@
                 crosshair: {
                   visible: true,
                   tooltip: {
-                    visible: false
+                    visible: true
                   }
                   
                 },
@@ -317,7 +322,7 @@
                     position: "right",
                     data: [{value: 100, label: {text: "test"}}]
                  },
-                reverse: true,
+                reverse: false,
                 // narrowRange: false,
                 minorTicks: {
                   // size: 6,
