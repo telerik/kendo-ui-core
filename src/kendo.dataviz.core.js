@@ -2418,7 +2418,7 @@ var __meta__ = {
         },
 
         options: {
-            type: "logarithmic",
+            type: "log",
             majorUnit: 10,
             minorUnit: 1,
             axisCrossingValue: 1,
@@ -2447,7 +2447,7 @@ var __meta__ = {
                 step = dir * (lineSize / (logMax - logMin)),
                 p1, p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
-
+            //should return undefined since the rendering will break for connected points
             if(a <= 0 || b <= 0) {
                 slotBox[valueAxis + 1] = -100000;
                 slotBox[valueAxis + 2] = -100000;
@@ -2705,12 +2705,20 @@ var __meta__ = {
             return range.min <= value && value <= range.max;
         },
 
+        _throwNegativeValuesError: function() {
+            throw new Error("Non positive values cannot be used for a logarithmic axis");
+        },
+
         _initOptions: function(seriesMin, seriesMax, options) {
             var axis = this,
                 axisOptions = deepExtend({}, axis.options, {min: seriesMin, max: seriesMax}, options),
                 min = axisOptions.min,
                 max = axisOptions.max,
                 base = axisOptions.majorUnit;
+
+            if (axisOptions.axisCrossingValue <= 0) {
+                axis._throwNegativeValuesError();
+            }
 
             if (!defined(options.max)) {
                if (max <= 0) {
@@ -2720,6 +2728,8 @@ var __meta__ = {
                } else {
                    max = math.pow(base, math.ceil(log(max, base)));
                }
+            } else if (options.max <= 0) {
+                axis._throwNegativeValuesError();
             }
 
             if (!defined(options.min)) {
@@ -2728,6 +2738,8 @@ var __meta__ = {
                } else if (!options.narrowRange) {
                    min = math.pow(base, math.floor(log(min, base)));
                }
+            } else if (options.min <= 0) {
+                axis._throwNegativeValuesError();
             }
 
             axis.logMin = round(log(min, base), DEFAULT_PRECISION);

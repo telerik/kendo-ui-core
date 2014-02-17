@@ -19,12 +19,106 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
     </head>
     <body>
-
+        <div id="polar"></div>
+        <div id="radar"></div>
+        <div id="negativeValues"></div>
        <-- <div id="log" style="height: 500px;"></div> -->
         <div id="scatter"></div>
        <div id="chart" style="height: 500px;"></div>
         <div id="panes"></div>
        <script>
+       
+       
+        $("#radar").kendoChart({
+                title: {
+                    text: "Market Value of Major Banks"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "radarLine",
+                    style: "smooth"
+                },
+                series: [{
+                    name: "Market value as of 2007",
+                    data: [1, 165, 215, 567, 1234]
+                }],
+                categoryAxis: {
+                    categories: ["Santander", "JP Morgan", "HSBC", "Credit Suisse",
+                        "Goldman Sachs", "Morgan Stanley"]
+                },
+                valueAxis: {
+                    type: "log",
+                    labels: {
+                        format: "${0}"
+                    },
+                    plotBands: {
+                        
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "${0} bln"
+                }
+            });       
+          $("#polar").kendoChart({
+            title: {
+                text: "Polar plot"
+            },
+            seriesDefaults: {
+                type: "polarLine",
+                style: "smooth"
+            },
+            
+
+            
+            yAxis: {
+                type: "log"
+            },
+            
+            series: [{
+                data: [
+                    [15, 2], [30, 4],
+                    [45, 6], [60, 8], [75, 10],
+                    [90, 12], [105, 14], [120, 16],
+                    [135, 18], [150, 20], [165, 22],
+                    [180, 24], [195, 26], [210, 28],
+                    [225, 30], [240, 32], [255, 34],
+                    [270, 36], [285, 38], [300, 40],
+                    [315, 42], [330, 44], [345, 46],
+                    [360, 48], [15, 50], [30, 52],
+                    [45, 54], [60, 56], [75, 58], [90, 60]
+                ]
+            },{
+                data: [
+                    [15, 1], [30, 2],
+                    [45, 3], [60, 4], [75, 5],
+                    [90, 6], [105, 7], [120, 8],
+                    [135, 9], [150, 10], [165, 11],
+                    [180, 12], [195, 13], [210, 14],
+                    [225, 15], [240, 16], [255, 17],
+                    [270, 18], [285, 19], [300, 20],
+                    [315, 21], [330, 22], [345, 23],
+                    [360, 24], [15, 25], [30, 26],
+                    [45, 27], [60, 28], [75, 29], [90, 30]
+                ]
+            },{
+                data: [
+                    [15, 3], [30, 6],
+                    [45, 9], [60, 12], [75, 15],
+                    [90, 18], [105, 21], [120, 24],
+                    [135, 27], [150, 30], [165, 33],
+                    [180, 36], [195, 39], [210, 42],
+                    [225, 45], [240, 48], [255, 51],
+                    [270, 54], [285, 57], [300, 60],
+                    [315, 63], [330, 66], [345, 69],
+                    [360, 72], [15, 75], [30, 78],
+                    [45, 81], [60, 84], [75, 87], [90, 90]
+                ]
+            }]
+        });
+       
        createChart();
          function createChart() {
             $("#panes").kendoStockChart({
@@ -76,7 +170,7 @@
                     minorGridLines: {
                         visible: true
                     },
-                    type: "logarithmic",
+                    type: "log",
                     narrowRange: false
                 }],
                 categoryAxis: {
@@ -194,7 +288,7 @@
                   step: 2
                 },
                
-                type: "logarithmic",
+                type: "log",
                // majorUnit: 10,
                 //axisCrossingValue: 10,
                 //min: 0.00001,
@@ -261,6 +355,55 @@
             }
         });
         
+            $("#negativeValues").kendoChart({
+                title: {
+                    text: "Gross domestic product growth /GDP annual %/"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    type: "line",
+                    style: "smooth"
+                },
+                series: [{
+                    name: "India",
+                    data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]
+                },{
+                    name: "World",
+                    data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727]
+                },{
+                    name: "Russian Federation",
+                    data: [4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3]
+                },{
+                    name: "Haiti",
+                    data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+                }],
+                valueAxis: {
+                    type: "log",
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                categoryAxis: {
+                    categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: "#= series.name #: #= value #"
+                }
+            });        
+        
         $("#scatter").kendoChart({
                 title: {
                     text: "Rainfall - Wind Speed"
@@ -277,7 +420,7 @@
                     [0.1, 5.4], [1020, 2], [10001, 3]]
                 }],
                 xAxis: {
-                    type: "logarithmic",
+                    type: "log",
                     title: {
                         text: "Wind Speed [km/h]"
                     }
