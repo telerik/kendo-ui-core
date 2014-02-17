@@ -79,7 +79,6 @@
         {
             "text": "Button",
             "name": "button",
-            "new": "true",
             "documentation": "web/button",
             "spriteCssClass": "buttonIcon",
             "items": [
@@ -876,7 +875,6 @@
                 }, {
                     "text": "Adaptive Rendering",
                     "url": "../mobile/adaptive/grid.html",
-                    "new": "true",
                     "title": "Adaptive Rendering of Kendo UI Grid",
                     "external": "true",
                     "packages": ["!mvc", "!jsp", "!php"]
@@ -1160,6 +1158,7 @@
         {
             "text": "Notification",
             "name": "notification",
+            "new": true,
             "documentation": "web/notification",
             "spriteCssClass": "notificationIcon",
             "items": [
@@ -1301,7 +1300,6 @@
         {
              "text": "ProgressBar",
              "name": "progressbar",
-             "new": "true",
              "documentation": "web/progressbar",
              "spriteCssClass": "progressBarIcon",
              "items": [
@@ -1434,7 +1432,6 @@
                 }, {
                     "text": "Adaptive Rendering",
                     "url": "../mobile/adaptive/scheduler.html",
-                    "new": "true",
                     "title": "Adaptive Rendering of Kendo UI Scheduler",
                     "external": "true",
                     "packages": ["!mvc", "!jsp", "!php"]
