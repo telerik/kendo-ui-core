@@ -24,7 +24,7 @@ class MapLayerDefaults extends \Kendo\SerializableObject {
     }
 
     /**
-    * The default configuration for bing layers.
+    * The default configuration for Bing (tm) tile layers.
     * @param \Kendo\Dataviz\UI\MapLayerDefaultsBing|array $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaults
     */

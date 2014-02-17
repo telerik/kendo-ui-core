@@ -13964,25 +13964,25 @@ Cancelling the event will prevent the user action.</description>
     </tag>
 
     <tag>
-        <description>The default configuration for bing layers.</description>
+        <description>The default configuration for Bing (tm) tile layers.</description>
         <name>map-layerDefaults-bing</name>
         <tag-class>com.kendoui.taglib.map.LayerDefaultsBingTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The attribution of all bing layers.</description>
+            <description>The attribution of all Bing (tm) layers.</description>
             <name>attribution</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The key of all bing layers.</description>
+            <description>The key of all Bing (tm) tile layers.</description>
             <name>key</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The the opacity of all bing layers.</description>
+            <description>The the opacity of all Bing (tm) tile layers.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -14150,7 +14150,14 @@ instance.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The key of the bing layer.</description>
+            <description>Specifies the extent of the region covered by this layer.
+The layer will be hidden when the specified area is out of view.Accepts a four-element array that specifies the extent covered by this layer:Alternatively, you can provide:If not specified, the layer is always visible.</description>
+            <name>extent</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The API key for the layer. Currently supported only for Bing (tm) tile layers.</description>
             <name>key</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>

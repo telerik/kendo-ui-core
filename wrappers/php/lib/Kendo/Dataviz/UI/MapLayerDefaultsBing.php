@@ -6,7 +6,7 @@ class MapLayerDefaultsBing extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The attribution of all bing layers.
+    * The attribution of all Bing (tm) layers.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaultsBing
     */
@@ -15,7 +15,7 @@ class MapLayerDefaultsBing extends \Kendo\SerializableObject {
     }
 
     /**
-    * The the opacity of all bing layers.
+    * The the opacity of all Bing (tm) tile layers.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaultsBing
     */
@@ -24,7 +24,7 @@ class MapLayerDefaultsBing extends \Kendo\SerializableObject {
     }
 
     /**
-    * The key of all bing layers.
+    * The key of all Bing (tm) tile layers.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaultsBing
     */

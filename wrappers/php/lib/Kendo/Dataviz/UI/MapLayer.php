@@ -6,6 +6,15 @@ class MapLayer extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * The attribution for the layer. Accepts valid HTML.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function attribution($value) {
+        return $this->setProperty('attribution', $value);
+    }
+
+    /**
     * If set to false the layer will not bind to the data source during initialization. In this case data binding will occur when the change event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
     * @param boolean $value
@@ -13,15 +22,6 @@ data source is fired. By default the widget will bind to the data source specifi
     */
     public function autoBind($value) {
         return $this->setProperty('autoBind', $value);
-    }
-
-    /**
-    * The key of the bing layer.
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\MapLayer
-    */
-    public function key($value) {
-        return $this->setProperty('key', $value);
     }
 
     /**
@@ -34,12 +34,31 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The attribution for the layer. Accepts valid HTML.
+    * Specifies the extent of the region covered by this layer.
+The layer will be hidden when the specified area is out of view.Accepts a four-element array that specifies the extent covered by this layer:Alternatively, you can provide:If not specified, the layer is always visible.
+    * @param array $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function extent($value) {
+        return $this->setProperty('extent', $value);
+    }
+
+    /**
+    * The API key for the layer. Currently supported only for Bing (tm) tile layers.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
-    public function attribution($value) {
-        return $this->setProperty('attribution', $value);
+    public function key($value) {
+        return $this->setProperty('key', $value);
+    }
+
+    /**
+    * The the opacity for the layer.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function opacity($value) {
+        return $this->setProperty('opacity', $value);
     }
 
     /**
@@ -50,15 +69,6 @@ Alternating between different subdomains allows more requests to be executed in 
     */
     public function subdomains($value) {
         return $this->setProperty('subdomains', $value);
-    }
-
-    /**
-    * The the opacity for the layer.
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\MapLayer
-    */
-    public function opacity($value) {
-        return $this->setProperty('opacity', $value);
     }
 
     /**

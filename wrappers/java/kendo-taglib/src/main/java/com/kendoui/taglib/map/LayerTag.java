@@ -71,6 +71,14 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("dataSource", dataSource);
     }
 
+    public java.lang.Object getExtent() {
+        return (java.lang.Object)getProperty("extent");
+    }
+
+    public void setExtent(java.lang.Object value) {
+        setProperty("extent", value);
+    }
+
     public java.lang.String getKey() {
         return (java.lang.String)getProperty("key");
     }
