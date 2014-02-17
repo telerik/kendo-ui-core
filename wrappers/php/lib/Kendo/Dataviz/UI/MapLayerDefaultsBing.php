@@ -16,7 +16,7 @@ class MapLayerDefaultsBing extends \Kendo\SerializableObject {
 
     /**
     * The the opacity of all Bing (tm) tile layers.
-    * @param string $value
+    * @param float $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaultsBing
     */
     public function opacity($value) {

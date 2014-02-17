@@ -6,7 +6,7 @@ class MapControls extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Enables or disables the built-in attribution control.
+    * Configures or disables the built-in attribution control.
     * @param boolean|\Kendo\Dataviz\UI\MapControlsAttribution|array $value
     * @return \Kendo\Dataviz\UI\MapControls
     */
@@ -15,7 +15,7 @@ class MapControls extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enables or disables the built-in navigator control (directional pad).
+    * Configures or disables the built-in navigator control (directional pad).
     * @param boolean|\Kendo\Dataviz\UI\MapControlsNavigator|array $value
     * @return \Kendo\Dataviz\UI\MapControls
     */
@@ -24,7 +24,7 @@ class MapControls extends \Kendo\SerializableObject {
     }
 
     /**
-    * Enables or disables the built-in zoom control (+/- button).
+    * Configures or disables the built-in zoom control (+/- button).
     * @param boolean|\Kendo\Dataviz\UI\MapControlsZoom|array $value
     * @return \Kendo\Dataviz\UI\MapControls
     */
