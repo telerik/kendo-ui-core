@@ -162,4 +162,30 @@
         ok(!input.attr("disabled"));
         ok(!input.hasClass("k-state-disabled"));
     });
+
+    test("setOptions changes the mask", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)",
+            value: "1234"
+        });
+
+        maskinput.setOptions({
+            mask: "00---0"
+        });
+
+        equal(maskinput.value(), "12---3");
+    });
+
+    test("setOptions changes the mask (leaves empty spaces)", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(00-00)",
+            value: "12"
+        });
+
+        maskinput.setOptions({
+            mask: "00---0"
+        });
+
+        equal(maskinput.value(), "12---_");
+    });
 })();
