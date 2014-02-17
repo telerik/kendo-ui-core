@@ -264,7 +264,7 @@
                 editable: true,
                 selectable: true,
                 isSerializable: true,
-                isHitTestVisible: true
+                enable: true
             },
             _getCursor: function (point) {
                 if (this.adorner) {
@@ -329,7 +329,7 @@
             },
             _hitTest: function (point) {
                 var bounds = this.bounds();
-                return this.visible() && bounds.contains(point) && this.options.isHitTestVisible;
+                return this.visible() && bounds.contains(point) && this.options.enable;
             },
             _template: function () {
                 var that = this;
@@ -1592,14 +1592,13 @@
                         items = this.shapes.concat(this.connections);
                         for (i = 0; i < items.length; i++) {
                             item = items[i];
-                            if ((!rect || item._hitTest(rect)) && item.options.isHitTestVisible) {
+                            if ((!rect || item._hitTest(rect)) && item.options.enable) {
                                 if (item.select(true)) {
                                     selected.push(item);
                                 }
                             }
                         }
-                    }
-                    else if (itemsOrRect instanceof Array) {
+                    } else if (itemsOrRect instanceof Array) {
                         for (i = 0; i < itemsOrRect.length; i++) {
                             item = itemsOrRect[i];
                             if (item instanceof DiagramElement) {
@@ -1608,18 +1607,15 @@
                                 }
                             }
                         }
-                    }
-                    else if (itemsOrRect instanceof DiagramElement) {
+                    } else if (itemsOrRect instanceof DiagramElement) {
                         if (itemsOrRect.select(true)) {
                             selected.push(itemsOrRect);
                         }
-                    }
-                    else { // string with special meaning...
+                    } else { // string with special meaning...
                         valueString = itemsOrRect.toString().toLowerCase();
                         if (valueString === NONE) {
                             this.select(false);
-                        }
-                        else if (valueString === ALL) {
+                        } else if (valueString === ALL) {
                             items = this.shapes.concat(this.connections);
                             for (i = 0; i < items.length; i++) {
                                 item = items[i];
@@ -1629,9 +1625,11 @@
                             }
                         }
                     }
+
                     if (selected.length > 0 || deselected.length > 0) {
                         this._selectionChanged(selected, deselected);
                     }
+
                     this._internalSelection = false;
                 }
                 else {

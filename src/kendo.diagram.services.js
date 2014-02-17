@@ -957,11 +957,11 @@
                     if (this.hoveredItem) {
                         this.hoveredItem._hover(false);
                     }
-                    if (hit && hit.options.isHitTestVisible) {
+
+                    if (hit && hit.options.enable) {
                         this.hoveredItem = hit; // Shape, connection or connector
                         this.hoveredItem._hover(true);
-                    }
-                    else {
+                    } else {
                         this.hoveredItem = undefined;
                     }
                 }
