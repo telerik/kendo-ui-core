@@ -18,27 +18,24 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
-        <button onclick='start'>Start</button>
-        <button onclick='stop'>Stop</button>
+        <button onclick='leak()'>Destroy 50 windows</button>
 
         <script>
-            var interval;
-            function start() {
-                interval = setInterval(function() {
-                    $(".k-window-content").data("kendoWindow").close();
-
-                    $("<div id='foo'><input></div>").kendoWindow({
+            function leak() {
+                for (var i = 0; i < 1; i++) {
+                    $("<div id='foo'><input><button></button><a href=''>foo</a></div>").kendoWindow({
+                        position: { left: 200 },
+                        content: "complex.html",
                         animation: false,
+                        draggable: false,
+                        resizable: false,
                         deactivate: function() {
                             this.destroy();
                         }
                     }).data("kendoWindow").open();
-                }, 100);
+                }
             }
 
-            function stop() {
-                clearInterval(interval);
-            }
         </script>
     </body>
 </html>
