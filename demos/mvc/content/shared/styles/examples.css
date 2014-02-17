@@ -3289,3 +3289,30 @@ ul.keyboard-legend li a {
     font-size: 11px;
     color: #999999;
 }
+
+.try-kendo
+{  
+   color: #fff;
+   font-size: 15px;
+   font-weight: bold;
+   background-color: #015991; 
+   display: block;
+   min-width:189px;
+   line-height: 14px;
+   border-radius:3px;
+   padding: 12px 22px 10px;
+   margin: 55px auto 46px;  
+   border: none;  
+}
+
+.try-kendo .k-icon
+{
+    margin-right: 5px;
+    background-image: url('edit-icon.png');
+}
+
+.try-kendo:hover
+{
+    background: #013a5e;
+    cursor: pointer;
+}
