@@ -71,7 +71,7 @@ var __meta__ = {
 
         options: {
             name: "MaskInput",
-            emptySymbol: "_",
+            emptySymbol: "_", //TODO: Rename to promptChar (like in winforms)
             value: "",
             mask: ""
         },
@@ -81,7 +81,8 @@ var __meta__ = {
         ],
 
         rules: {
-            "0": /\d/
+            "0": /\d/,
+            "9": /\d|\s/
         },
 
         setOptions: function(options) {
