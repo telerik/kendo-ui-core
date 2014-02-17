@@ -232,10 +232,7 @@ a:hover
 {
     margin-right: 560px;
 }
-.overview .teampulse .imgPlate
-{
-    margin-top: 140px;
-}
+
 
 .compatibility p
 {
@@ -831,6 +828,7 @@ div.submenu-box ol {
     width:auto;
     padding:0 0 72px;
     margin-bottom:-72px;
+    margin-right: 0;
     text-align:left;
 }
 
@@ -887,7 +885,7 @@ div.submenu-box ol {
 .widebox .imgPlate
 {
     float:left;
-    margin-right:35px;
+    margin-left: 35px;
 }
 
 .widebox .launchButton
