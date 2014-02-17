@@ -1,4 +1,4 @@
-        <script src="../../content/shared/js/products.js"></script>
+    <script src="../../content/shared/js/products.js"></script>
 
         <div id="example" class="k-content">
             <div id="grid"></div>
@@ -33,8 +33,9 @@
 
                     $("#grid").data("kendoGrid").table.kendoSortable({
                         filter: ">tbody >tr",
-                        hint: function(element) {
-                            return $("<div class='k-grid k-widget' style='width: 970px;'><table><tr class='k-header'>" + element.clone().html() + "</tr></table></div>");
+                        hint: $.noop,
+                        placeholder: function(element) {
+                            return element.clone().addClass("k-header placeholder").css("opacity", 0.4);
                         },
                         container: "#grid tbody",
                         change: function(e) {
