@@ -421,40 +421,47 @@ var __meta__ = {
     });
 
     //TODO: Move caret function in core.js
-    function caret(element, position) {
-        var range,
-            isPosition = position !== undefined;
+    function caret(element, start, end) {
+        var rangeElement;
+        var isPosition = start !== undefined;
+
+        if (end === undefined) {
+            end = start;
+        }
 
         if (element.selectionStart !== undefined) {
             if (isPosition) {
                 element.focus();
-                element.setSelectionRange(position, position);
+                element.setSelectionRange(start, end);
             } else {
-                position = [element.selectionStart, element.selectionEnd];
+                start = [element.selectionStart, element.selectionEnd];
             }
         } else if (document.selection) {
             if ($(element).is(":visible")) {
                 element.focus();
             }
-            range = document.selection.createRange();
+
+            rangeElement = element.createTextRange();
+
             if (isPosition) {
-                range.move("character", position);
-                range.select();
+                rangeElement.collapse(true);
+                rangeElement.moveStart("character", start);
+                rangeElement.moveEnd("character", end - start);
+                rangeElement.select();
             } else {
-                var rangeElement = element.createTextRange(),
-                    rangeDuplicated = rangeElement.duplicate(),
+                var rangeDuplicated = rangeElement.duplicate(),
                     selectionStart, selectionEnd;
 
-                    rangeElement.moveToBookmark(range.getBookmark());
+                    rangeElement.moveToBookmark(document.selection.createRange().getBookmark());
                     rangeDuplicated.setEndPoint('EndToStart', rangeElement);
                     selectionStart = rangeDuplicated.text.length;
                     selectionEnd = selectionStart + rangeElement.text.length;
 
-                position = [selectionStart, selectionEnd];
+                start = [selectionStart, selectionEnd];
             }
         }
 
-        return position;
+        return start;
     }
 
     ui.plugin(MaskInput);

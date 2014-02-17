@@ -29,7 +29,7 @@
     });
 
     function caret(element, start, end) {
-        var range;
+        var rangeElement;
         var isPosition = start !== undefined;
 
         if (end === undefined) {
@@ -47,18 +47,19 @@
             if ($(element).is(":visible")) {
                 element.focus();
             }
-            range = document.selection.createRange();
+
+            rangeElement = element.createTextRange();
+
             if (isPosition) {
-                range.collapse(true);
-                range.moveStart("character", start);
-                range.moveEnd("character", end - start);
-                range.select();
+                rangeElement.collapse(true);
+                rangeElement.moveStart("character", start);
+                rangeElement.moveEnd("character", end - start);
+                rangeElement.select();
             } else {
-                var rangeElement = element.createTextRange(),
-                    rangeDuplicated = rangeElement.duplicate(),
+                var rangeDuplicated = rangeElement.duplicate(),
                     selectionStart, selectionEnd;
 
-                    rangeElement.moveToBookmark(range.getBookmark());
+                    rangeElement.moveToBookmark(document.selection.createRange().getBookmark());
                     rangeDuplicated.setEndPoint('EndToStart', rangeElement);
                     selectionStart = rangeDuplicated.text.length;
                     selectionEnd = selectionStart + rangeElement.text.length;
@@ -416,8 +417,7 @@
             mask: "(000) 000"
         });
 
-        input.val("").focus();
-        input.val("(123) 555");
+        input.val("").focus(); input.val("(123) 555");
         caret(input[0], 5, 8);
 
         input.trigger("paste");
