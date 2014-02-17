@@ -1057,7 +1057,7 @@ kendo_module({
                 this.element.prop("scrollTop", 0);
 
                 this.trigger(REFRESH);
-            }
+            };
         },
 
         _showLoading: function() {
