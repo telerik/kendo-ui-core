@@ -313,7 +313,7 @@ var __meta__ = {
             }
 
             unmasked = this._unmask(current.substring(end), end);
-            value = this._unmask(value);
+            value = this._unmask(value, start);
             valueLength = value.length;
 
             if (value) {

@@ -445,4 +445,17 @@
 
         equal(input.val(), "(123) ___");
     });
+
+    test("MaskInput allows space in middle of mask", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(000) 999"
+        });
+
+        input.focus();
+        caret(input[0], 6);
+
+        input.pressKey(" ");
+
+        equal(input.val(), "(___)  __");
+    });
 })();
