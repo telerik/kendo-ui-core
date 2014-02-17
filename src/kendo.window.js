@@ -56,6 +56,7 @@ var __meta__ = {
         KUNPIN = ".k-i-unpin",
         PIN_UNPIN = KPIN + "," + KUNPIN,
         TITLEBAR_BUTTONS = ".k-window-titlebar .k-window-action",
+        REFRESHICON = ".k-window-titlebar .k-i-refresh",
         isLocalUrl = kendo.isLocalUrl;
 
     function defined(x) {
@@ -354,6 +355,8 @@ var __meta__ = {
 
                 this.resizing = new WindowResizing(this);
             }
+
+            wrapper = null;
         },
 
         _draggable: function() {
@@ -533,6 +536,7 @@ var __meta__ = {
                 if (target.hasClass(commandName)) {
                     e.preventDefault();
                     handler.call(that);
+                    target = null;
                     return false;
                 }
             });
@@ -632,7 +636,7 @@ var __meta__ = {
 
             kendo.destroy(this.element.children());
 
-            content.html(html);
+            content.empty().html(html);
             return this;
         },
 
@@ -688,6 +692,7 @@ var __meta__ = {
                             }
                             that.trigger(ACTIVATE);
                             contentElement.css(OVERFLOW, initialOverflow);
+                            wrapper = null;
                         }
                     });
                 }
@@ -755,6 +760,7 @@ var __meta__ = {
                         if (lastModal) {
                             lastModal.toFront();
                         }
+                        wrapper = null;
                     }
                 });
             }
@@ -829,6 +835,8 @@ var __meta__ = {
                     }
                 }
             }
+
+            wrapper = null;
 
             return that;
         },
@@ -1014,9 +1022,7 @@ var __meta__ = {
 
                     element.find("." + KCONTENTFRAME)
                         .unbind("load" + NS)
-                        .on("load" + NS, function(){
-                            that.trigger(REFRESH);
-                        });
+                        .on("load" + NS, proxy(this._triggerRefresh, this));
                 }
             } else {
                 if (options.template) {
@@ -1032,38 +1038,46 @@ var __meta__ = {
             return that;
         },
 
+        _triggerRefresh: function() {
+            this.trigger(REFRESH);
+        },
+
+        _ajaxComplete: function() {
+            clearTimeout(this._loadingIconTimeout);
+            this.wrapper.find(REFRESHICON).removeClass(LOADING);
+        },
+
+        _ajaxError: function (xhr, status) {
+            this.trigger(ERROR, { status: status, xhr: xhr });
+        },
+
+        _ajaxSuccess: function (contentTemplate) {
+            return function (data) {
+                if (contentTemplate) {
+                    data = template(contentTemplate)(data || {});
+                }
+
+                this.content(data);
+                this.element.prop("scrollTop", 0);
+
+                this.trigger(REFRESH);
+            }
+        },
+
+        _showLoading: function() {
+            this.wrapper.find(REFRESHICON).addClass(LOADING);
+        },
+
         _ajaxRequest: function (options) {
-            var that = this,
-                contentTemplate = options.template,
-                refreshIcon = that.wrapper.find(".k-window-titlebar .k-i-refresh"),
-                loadingIconTimeout = setTimeout(function () {
-                    refreshIcon.addClass(LOADING);
-                }, 100);
+            this._loadingIconTimeout = setTimeout(proxy(this._showLoading, this), 100);
 
             $.ajax(extend({
                 type: "GET",
                 dataType: "html",
                 cache: false,
-                error: function (xhr, status) {
-                    that.trigger(ERROR, {
-                        status: status,
-                        xhr: xhr
-                    });
-                },
-                complete: function () {
-                    clearTimeout(loadingIconTimeout);
-                    refreshIcon.removeClass(LOADING);
-                },
-                success: function (data) {
-                    if (contentTemplate) {
-                        data = template(contentTemplate)(data || {});
-                    }
-
-                    that.content(data);
-                    that.element.prop("scrollTop", 0);
-
-                    that.trigger(REFRESH);
-                }
+                error: proxy(this._ajaxError, this),
+                complete: proxy(this._ajaxComplete, this),
+                success: proxy(this._ajaxSuccess(options.template), this)
             }, options));
         },
 
@@ -1081,6 +1095,8 @@ var __meta__ = {
                 .find(".k-resize-handle,.k-window-titlebar").off(NS);
 
             $(window).off("resize", this._resizeHandler);
+
+            clearTimeout(this._loadingIconTimeout);
 
             Widget.fn.destroy.call(this);
 
