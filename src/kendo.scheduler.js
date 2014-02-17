@@ -2999,23 +2999,30 @@ var __meta__ = {
         },
 
         _wrapper: function() {
-            var height = this.options.height;
+            var that = this;
+            var options = that.options;
+            var height = options.height;
+            var width = options.width;
 
-            this.wrapper = this.element
+            that.wrapper = that.element
                                .addClass("k-widget k-scheduler k-floatwrap")
                                .attr("role", "grid")
                                .attr("aria-multiselectable", true);
 
-            if (this._isMobile()) {
-               this.wrapper.addClass("k-scheduler-mobile");
+            if (that._isMobile()) {
+               that.wrapper.addClass("k-scheduler-mobile");
             }
 
-            if (this._isMobilePhoneView()) {
-               this.wrapper.addClass("k-scheduler-phone");
+            if (that._isMobilePhoneView()) {
+               that.wrapper.addClass("k-scheduler-phone");
             }
 
             if (height) {
-                this.wrapper.css("height", height);
+                that.wrapper.height(height);
+            }
+
+            if (width) {
+                that.wrapper.width(width);
             }
         },
 
