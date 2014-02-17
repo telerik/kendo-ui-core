@@ -905,6 +905,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a <see cref="Notification"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Notification()
+        ///             .Name("Notification1");
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual NotificationBuilder Notification()
+        {
+            return new NotificationBuilder(new Notification(ViewContext, Initializer));
+        }
+
+        /// <summary>
         /// Creates a <see cref="Kendo.Mvc.UI.Chart{T}"/>
         /// </summary>
         /// <example>

@@ -669,6 +669,14 @@
     <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
     <Compile Include="UI\ClientHandlerDescriptor.cs" />
     <Compile Include="UI\ComboBox\Fluent\ComboBoxEventBuilder.cs" />
+    <Compile Include="UI\Notification\Fluent\NotificationPositionSettingsBuilder.cs" />
+    <Compile Include="UI\Notification\Fluent\NotificationTemplateFactory.cs" />
+    <Compile Include="UI\Notification\Fluent\NotificationTemplateBuilder.cs" />
+    <Compile Include="UI\Notification\Notification.cs" />
+    <Compile Include="UI\Notification\Fluent\NotificationBuilder.cs" />
+    <Compile Include="UI\Notification\Fluent\NotificationEventBuilder.cs" />
+    <Compile Include="UI\Notification\Html\NotificationHtmlBuilder.cs" />
+    <Compile Include="UI\Notification\Html\INotificationHtmlBuilder.cs" />
     <Compile Include="UI\DataSource\CrudOperation.cs" />
     <Compile Include="UI\DataSource\DataSource.cs" />
     <Compile Include="UI\DataSource\DataSourceRequest.cs" />
@@ -919,6 +927,9 @@
     <Compile Include="UI\MultiSelect\Fluent\MultiSelectBuilder.cs" />
     <Compile Include="UI\MultiSelect\Html\MultiSelectHtmlBuilder.cs" />
     <Compile Include="UI\MultiSelect\MultiSelect.cs" />
+    <Compile Include="UI\Notification\Settings\NotificationTemplateSettings.cs" />
+    <Compile Include="UI\Notification\Settings\NotificationStackingSettings.cs" />
+    <Compile Include="UI\Notification\Settings\NotificationPositionSettings.cs" />
     <Compile Include="UI\Pageable\Fluent\PageableMessagesBuilder.cs" />
     <Compile Include="UI\Pageable\PageableMessages.cs" />
     <Compile Include="UI\Grid\Settings\GridNavigatableSettings.cs" />
