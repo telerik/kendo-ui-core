@@ -95,14 +95,14 @@ function baseLayerTests(name, TLayer) {
     });
 
     // ------------------------------------------------------------
-    module(name + " / coverage", {
+    module(name + " / extent", {
         setup: function() {
             map = new MapMock();
         }
     });
 
     test("layer is hidden when zoom < minZoom", function() {
-        layer = new TLayer(map, { coverage: [{ minZoom: 5 }] });
+        layer = new TLayer(map, { minZoom: 5 });
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(!visible);
         }, function() {
@@ -112,7 +112,7 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is shown when zoom = minZoom", function() {
-        layer = new TLayer(map, { coverage: [{ minZoom: 5 }] });
+        layer = new TLayer(map, { minZoom: 5 });
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(visible);
         }, function() {
@@ -122,7 +122,7 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is hidden when zoom > maxZoom", function() {
-        layer = new TLayer(map, { coverage: [{ maxZoom: 5 }] });
+        layer = new TLayer(map, { maxZoom: 5 });
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(!visible);
         }, function() {
@@ -132,7 +132,7 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is shown when zoom = maxZoom", function() {
-        layer = new TLayer(map, { coverage: [{ maxZoom: 5 }] });
+        layer = new TLayer(map, { maxZoom: 5 });
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(visible);
         }, function() {
@@ -142,7 +142,7 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is hidden when outside zoom range", function() {
-        layer = new TLayer(map, { coverage: [{ minZoom: 3, maxZoom: 5 }] });
+        layer = new TLayer(map, { minZoom: 3, maxZoom: 5 });
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(!visible);
         }, function() {
@@ -152,7 +152,7 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is shown when inside zoom range", function() {
-        layer = new TLayer(map, { coverage: [{ minZoom: 3, maxZoom: 5 }] });
+        layer = new TLayer(map, { minZoom: 3, maxZoom: 5 });
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(visible);
         }, function() {
@@ -162,12 +162,12 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is hidden when outside extent", function() {
-        layer = new TLayer(map, { coverage: [{
+        layer = new TLayer(map, {
             extent: [
                 45.3444, 20.8960,
                 40.5222, 29.6850
             ]
-        }] });
+        });
 
         map._extent = new m.Extent([0, 0], [-10, 10]);
 
@@ -179,12 +179,12 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is shown when inside extent", function() {
-        layer = new TLayer(map, { coverage: [{
+        layer = new TLayer(map, {
             extent: [
                 45.3444, 20.8960,
                 40.5222, 29.6850
             ]
-        }] });
+        });
 
         map._extent = new m.Extent([0, 42], [30, 0]);
 
@@ -196,14 +196,14 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is shown when inside extent and zoom range", function() {
-        layer = new TLayer(map, { coverage: [{
+        layer = new TLayer(map, {
             extent: [
                 45.3444, 20.8960,
                 40.5222, 29.6850
             ],
             minZoom: 5,
             maxZoom: 10
-        }] });
+        });
 
         map._zoom = 5;
         map._extent = new m.Extent([0, 42], [30, 0]);
@@ -216,14 +216,14 @@ function baseLayerTests(name, TLayer) {
     });
 
     test("layer is hidden when inside extent, but outside zoom range", function() {
-        layer = new TLayer(map, { coverage: [{
+        layer = new TLayer(map, {
             extent: [
                 45.3444, 20.8960,
                 40.5222, 29.6850
             ],
             minZoom: 5,
             maxZoom: 10
-        }] });
+        });
 
         map._zoom = 4;
         map._extent = new m.Extent([0, 42], [30, 0]);
@@ -235,8 +235,8 @@ function baseLayerTests(name, TLayer) {
         });
     });
 
-    test("coverage is evaluated on panEnd", function() {
-        layer = new TLayer(map, { coverage: [{ minZoom: 5 }] });
+    test("extent is evaluated on panEnd", function() {
+        layer = new TLayer(map, { minZoom: 5 });
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(true);
         }, function() {
@@ -244,8 +244,8 @@ function baseLayerTests(name, TLayer) {
         });
     });
 
-    test("coverage not evaluated for hidden layer", 0, function() {
-        layer = new TLayer(map, { coverage: [{ minZoom: 5 }] });
+    test("extent not evaluated for hidden layer", 0, function() {
+        layer = new TLayer(map, { minZoom: 5 });
         layer.hide();
         stubMethod(TLayer.fn, "_setVisibility", function(visible) {
             ok(false);
