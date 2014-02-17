@@ -67,4 +67,13 @@
 
         ok(input.hasClass("k-state-disabled"));
     });
+
+    test("MaskInput gets value from input element", function() {
+        input.val("test99");
+        var maskinput = new MaskInput(input, {
+            mask: "00-00"
+        });
+
+        equal(input.val(), "99-__");
+    });
 })();

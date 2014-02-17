@@ -343,7 +343,7 @@
             mask: "0000"
         });
 
-        input.focus();
+        input.val("").focus();
         caret(input[0], 0);
 
         input.trigger("paste");
@@ -362,7 +362,7 @@
             mask: "00--00"
         });
 
-        input.focus();
+        input.val("").focus();
         input.val("12--34");
         caret(input[0], 0, 4);
 
@@ -383,7 +383,7 @@
             mask: "00--00"
         });
 
-        input.focus();
+        input.val("").focus();
         input.val("12--34");
         caret(input[0], 2);
 
@@ -416,7 +416,7 @@
             mask: "(000) 000"
         });
 
-        input.focus();
+        input.val("").focus();
         input.val("(123) 555");
         caret(input[0], 5, 8);
 
