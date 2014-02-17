@@ -1011,7 +1011,7 @@ declare module kendo.ui {
         element: JQuery;
         constructor(element: Element, options?: DropTargetOptions);
         options: DropTargetOptions;
-        destroyGroup(): void;
+        static destroyGroup(groupName: string): void;
     }
 
     interface DropTargetOptions {
