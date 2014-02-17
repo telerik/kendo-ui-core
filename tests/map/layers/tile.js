@@ -20,9 +20,15 @@
         }
 
         // ------------------------------------------------------------
+        var mobileOS;
+
         module("Tile Layer", {
             setup: function() {
                 createTileLayer();
+                mobileOS = kendo.support.mobileOS;
+            },
+            teardown: function() {
+                kendo.support.mobileOS = mobileOS;
             }
         });
 
@@ -64,6 +70,37 @@
             ok(layer.options.subdomains instanceof Array);
         });
 
+        test("renders on pan (desktop)", function() {
+            kendo.support.mobileOS = false;
+            createTileLayer();
+
+            stubMethod(TileLayer.fn, "_render", function() {
+                ok(true);
+            }, function() {
+                map.trigger("pan");
+            });
+        });
+
+        test("throttles rendering on pan", function() {
+            stubMethod(TileLayer.fn, "_render", function() {
+                ok(true);
+            }, function() {
+                map.trigger("pan");
+                map.trigger("pan");
+                map.trigger("pan");
+            });
+        });
+
+        test("does not render on pan (mobile)", 0, function() {
+            kendo.support.mobileOS = true;
+            createTileLayer();
+
+            stubMethod(TileLayer.fn, "_render", function() {
+                ok(false);
+            }, function() {
+                map.trigger("pan");
+            });
+        });
     })();
 
     (function() {
