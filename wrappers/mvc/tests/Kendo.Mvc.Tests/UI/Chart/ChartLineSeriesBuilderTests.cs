@@ -50,6 +50,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Color_field_should_set_color_member()
+        {
+            builder.ColorField("Color");
+            series.ColorMember.ShouldEqual("Color");
+        }
+
+        [Fact]
+        public void Color_field_should_return_builder()
+        {
+            builder.ColorField("Color").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Tooltip_should_set_visibility()
         {
             builder.Tooltip(true);

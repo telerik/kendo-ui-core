@@ -18,7 +18,27 @@ namespace Kendo.Mvc.UI.Fluent
         public ChartLineSeriesBuilder(IChartLineSeries series)
             : base(series)
         {
-        }    
+        }
+
+        /// <summary>
+        /// Sets the series color field
+        /// </summary>
+        /// <param name="colorField">The series color field</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Line(s => s.Sales).ColorFied("Color"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartLineSeriesBuilder<T> ColorField(string colorField)
+        {
+            Series.ColorMember = colorField;
+
+            return this;
+        }
 
         /// <summary>
         /// Configures the style for line series.
