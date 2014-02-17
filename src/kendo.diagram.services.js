@@ -569,7 +569,7 @@
                 this.toolService.isPanning = true;
                 this.panStart = this.toolService.diagram._pan;
                 this.panOffset = p;
-                this.panDelta = new Point();	//relative to root
+                this.panDelta = new Point();//relative to root
             },
             move: function (p) {
                 var diagram = this.toolService.diagram;
@@ -1894,7 +1894,7 @@
                 this.refresh();
             },
             _hover: function (value) {
-                this.visual.background(value ? this.options.hoveredBackground : this.options.background);
+                this.visual.background(value ? this.options.hover.background : this.options.background);
             },
             refresh: function () {
                 var p = this._c.shape.diagram.modelToView(this._c.position()),

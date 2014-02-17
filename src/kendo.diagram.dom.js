@@ -252,7 +252,9 @@
             },
             options: {
                 background: "Green",
-                hoveredBackground: "#70CAFF",
+                hover: {
+                    background: "#70CAFF"
+                },
                 cursor: Cursors.grip,
                 content: {
                     align: "center middle",
@@ -349,7 +351,9 @@
                 width: DEFAULT_CONNECTOR_SIZE,
                 height: DEFAULT_CONNECTOR_SIZE,
                 background: DEFAULT_CONNECTION_BACKGROUND,
-                hoveredBackground: DEFAULT_HOVER_COLOR
+                hover: {
+                    background: DEFAULT_HOVER_COLOR
+                }
             },
             position: function () {
                 if (this.options.position) {
@@ -422,7 +426,9 @@
                 width: DEFAULT_SHAPE_WIDTH,
                 height: DEFAULT_SHAPE_HEIGHT,
                 background: DEFAULT_SHAPE_BACKGROUND,
-                hoveredBackground: DEFAULT_HOVER_COLOR,
+                hover: {
+                    background: DEFAULT_HOVER_COLOR
+                },
                 connectors: diagram.DefaultConnectors,
                 rotation: {
                     angle: 0
@@ -824,7 +830,11 @@
                 stroke: {
                     color: "gray"
                 },
-                hoveredStroke: DEFAULT_HOVER_COLOR,
+                hover: {
+                    stroke: {
+                        color: DEFAULT_HOVER_COLOR
+                    }
+                },
                 startCap: DEFAULT_CONNECTION_STARTCAP,
                 endCap: DEFAULT_CONNECTION_ENDCAP,
                 points: []
@@ -1184,7 +1194,7 @@
             _hover: function (value) {
                 this.path.redraw({
                     stroke: {
-                        color: value ? this.options.hoveredStroke : this.options.stroke.color
+                        color: value ? this.options.hover.stroke.color : this.options.stroke.color
                     }
                 });
             },
