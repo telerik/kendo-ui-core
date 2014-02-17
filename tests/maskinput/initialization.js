@@ -76,4 +76,42 @@
 
         equal(input.val(), "99-__");
     });
+
+    asyncTest("form reset support", 1, function() {
+        input.attr("value", "1234");
+
+        var form = $("<form/>").appendTo(QUnit.fixture).append(input);
+
+        var maskinput = new MaskInput(input, {
+            mask: "00-00"
+        });
+
+        maskinput.value("5678");
+
+        form[0].reset();
+
+        setTimeout(function() {
+            equal(maskinput.element.val(), "12-34");
+            start();
+        }, 100);
+    });
+
+    asyncTest("support for form defined by attribute", 1, function() {
+        input.attr("form", "form1").attr("value", "1234");
+
+        var form = $("<form id='form1'/>").appendTo(QUnit.fixture);
+
+        var maskinput = new MaskInput(input, {
+            mask: "00-00"
+        });
+
+        maskinput.value("5678");
+
+        form[0].reset();
+
+        setTimeout(function() {
+            equal(maskinput.element.val(), "12-34");
+            start();
+        }, 100);
+    });
 })();
