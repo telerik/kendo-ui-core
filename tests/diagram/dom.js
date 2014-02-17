@@ -358,6 +358,20 @@
         }
     });
 
+    test("create connection on init", function() {
+        $("#canvas").kendoDiagram({
+            shapes: [{id: "s1"},{id: "s2"}],
+            connections: [{
+                from: { shapeId: "s1" },
+                to: { shapeId: "s2" }
+            }]
+        });
+
+        diagram = $("#canvas").getKendoDiagram();
+
+        equal(diagram.connections.length, 1, "one connection should be created");
+    });
+
     test("Connection connect - set auto connectors test", function () {
         var s1 = diagram.addShape({});
         var point = new Point(100, 0);

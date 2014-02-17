@@ -449,7 +449,7 @@ $(function () {
             }
         },
         shapes: [{
-            "id":"EiVRw3fyd4",
+            "id":"triangle",
             "background":"steelblue",
             "hoveredBackground":"#70CAFF",
             "cursor":"pointer",
@@ -487,6 +487,53 @@ $(function () {
                 color: "red",
                 width: 4,
                 dashType: "dot"
+            }
+        },{
+            "id":"rect",
+            "background":"steelblue",
+            "hoveredBackground":"#70CAFF",
+            "cursor":"pointer",
+            "content":{
+                "align":"center middle",
+                "text":""
+            },
+            "editable":true,
+            "selectable":true,
+            "type":"Rect",
+            "x":400,
+            "y":300,
+            "minWidth":20,
+            "minHeight":20,
+            "width":100,
+            "height":100,
+            "connectors":[{
+                "name":"Top"
+            }, {
+                "name":"Right"
+            }, {
+                "name":"Left"
+            }, {
+                "name":"Auto"
+            }],
+            "rotation":{
+                "angle":0
+            },
+            "resizable":true,
+            "rotatable":true,
+            "undoable":false,
+            "name":"Triangle",
+            stroke: {
+                color: "red",
+                width: 4,
+                dashType: "dot"
+            }
+        }],
+        connections: [{
+            from: {
+                shapeId: "triangle"
+            },
+            to: {
+                shapeId: "rect"
             }
         }]
     });

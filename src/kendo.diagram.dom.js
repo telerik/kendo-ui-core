@@ -1294,6 +1294,7 @@
                 this.pauseMouseHandlers = false;
 
                 that._createShapes();
+                that._createConnections();
             },
             options: {
                 name: "Diagram",
@@ -1330,7 +1331,8 @@
                     undoable: true
                 },
                 connectionOptions: {},
-                shapes: []
+                shapes: [],
+                connections: []
             },
 
             events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
@@ -1339,12 +1341,36 @@
                 var that = this,
                     options = that.options,
                     shapes = options.shapes,
-                    shape;
+                    shape, i;
 
                 for (i = 0; i < shapes.length; i++) {
                     shape = shapes[i];
                     that.addShape(shape);
                 }
+            },
+
+            _createConnections: function() {
+                var diagram = this,
+                    options = diagram.options,
+                    defaults = options.connectionOptions,
+                    connections = options.connections,
+                    conn, source, target, i;
+
+                for(i = 0; i < connections.length; i++) {
+                    conn = connections[i];
+                    source = diagram._findConnectionShape(conn.from);
+                    target = diagram._findConnectionShape(conn.to);
+
+                    diagram.connect(source, target, defaults);
+                }
+            },
+
+            _findConnectionShape: function(options) {
+                var diagram = this;
+
+                var shape = diagram.getId(options.shapeId);
+
+                return shape.getConnector(options.connector || AUTO);
             },
 
             destroy: function () {
