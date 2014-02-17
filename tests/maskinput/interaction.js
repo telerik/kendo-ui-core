@@ -63,7 +63,7 @@
         equal(input.val(), "_-_");
     });
 
-    test("MaskInput selects whole text if value", function() {
+    asyncTest("MaskInput selects whole text if value", 3, function() {
         var maskinput = new MaskInput(input, {
             mask: "0-0"
         });
@@ -72,9 +72,12 @@
 
         input.focus();
 
-        equal(input.val(), "1-1");
-        equal(caret(input[0])[0], 0);
-        equal(caret(input[0])[1], 3);
+        setTimeout(function() {
+            start();
+            equal(input.val(), "1-1");
+            equal(caret(input[0])[0], 0);
+            equal(caret(input[0])[1], 3);
+        });
     });
 
     test("MaskInput does not remove input value on blur", function() {

@@ -42,7 +42,9 @@ var __meta__ = {
                     if (!element.val()) {
                         element.val(that._emptyMask);
                     } else {
-                        element.select();
+                        setTimeout(function() {
+                            element.select();
+                        });
                     }
                 })
                 .on("blur" + ns, function() {
@@ -53,7 +55,7 @@ var __meta__ = {
                     that._change();
                 });
 
-            that.value(that.options.value); // || element.val());
+             that.value(that.options.value || element.val());
 
              var disabled = element.is("[disabled]");
 
@@ -111,6 +113,8 @@ var __meta__ = {
 
             value = this._unmask(value + "");
 
+            this.element.val(value ? this._emptyMask : "");
+
             this._mask(0, this._maskLength, value);
         },
 
@@ -148,7 +152,7 @@ var __meta__ = {
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("keypress" + ns, proxy(that._keypress, that))
                        .on("paste" + ns, proxy(that._paste, that))
-                       .on(inputEventName, proxy(that._propertChange, that));
+                       .on(inputEventName, proxy(that._propertyChange, that));
             } else {
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
@@ -168,7 +172,7 @@ var __meta__ = {
             }
         },
 
-        _propertChange: function() {
+        _propertyChange: function() {
             var that = this;
             var element = that.element[0];
             var value = element.value;
