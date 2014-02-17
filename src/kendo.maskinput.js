@@ -32,6 +32,7 @@ var __meta__ = {
             element = that.element;
 
             that._tokenize();
+            that._reset();
 
             that.element
                 .addClass("k-textbox")
@@ -92,16 +93,14 @@ var __meta__ = {
             //TODO: dynamic change of emptySymbol
         },
 
-        //TODO: add form support!
-        //
         destroy: function() {
             var that = this;
 
             that.element.off(ns);
 
-            /*if (that._form) {
+            if (that._form) {
                 that._form.off("reset", that._resetHandler);
-            }*/
+            }
 
             Widget.fn.destroy.call(that);
         },
@@ -212,6 +211,23 @@ var __meta__ = {
 
                 that._mask(start, start, pasted);
             });
+        },
+
+        _reset: function() {
+            var that = this;
+            var element = that.element;
+            var formId = element.attr("form");
+            var form = formId ? $("#" + formId) : element.closest("form");
+
+            if (form[0]) {
+                that._resetHandler = function() {
+                    setTimeout(function() {
+                        that.value(element[0].value);
+                    });
+                };
+
+                that._form = form.on("reset", that._resetHandler);
+            }
         },
 
         _keydown: function(e) {
