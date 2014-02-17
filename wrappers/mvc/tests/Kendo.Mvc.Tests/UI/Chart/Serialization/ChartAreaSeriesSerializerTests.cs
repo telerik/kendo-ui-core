@@ -127,6 +127,19 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_colorField_if_color_member_is_set()
+        {
+            series.ColorMember = "RepSales";
+            GetJson(series)["colorField"].ShouldEqual("RepSales");
+        }
+
+        [Fact]
+        public void Should_not_serialize_colorField_if_color_member_is_not_set()
+        {
+            GetJson(series).ContainsKey("colorField").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Serializes_type()
         {
             GetJson(series)["type"].ShouldEqual("area");

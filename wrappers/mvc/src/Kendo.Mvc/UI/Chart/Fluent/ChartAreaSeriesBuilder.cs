@@ -20,6 +20,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the series color field
+        /// </summary>
+        /// <param name="colorField">The series color field</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Area(s => s.Sales).ColorFied("Color"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartAreaSeriesBuilder<T> ColorField(string colorField)
+        {
+            Series.ColorMember = colorField;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the area chart line.
         /// </summary>
         /// <param name="width">The line width.</param>

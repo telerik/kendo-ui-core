@@ -57,15 +57,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets the data color member of the series.
-        /// </summary>
-        string ColorMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets or sets the funnel chart data labels configuration
         /// </summary>
         ChartFunnelLabels Labels

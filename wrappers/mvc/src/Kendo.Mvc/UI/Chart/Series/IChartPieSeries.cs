@@ -30,15 +30,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Gets the data color member of the series.
-        /// </summary>
-        string ColorMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets the pie chart data labels configuration
         /// </summary>
         ChartPieLabels Labels
