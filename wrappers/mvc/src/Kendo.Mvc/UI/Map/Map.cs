@@ -24,12 +24,11 @@ namespace Kendo.Mvc.UI
             LayerDefaults = new MapLayerDefaultsSettings();
                 
             Layers = new List<MapLayer>();
-
-            Markers = new List<MapMarker>();
-
-            MarkerDefaults = new MapMarkerDefaultsSettings(this);
                 
         //<< Initialization
+
+            Markers = new List<MapMarker>();
+            MarkerDefaults = new MapMarkerDefaultsSettings(this);
         }
 
         public double[] Center { get; set; }
@@ -61,18 +60,6 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-
-        public List<MapMarker> Markers
-        {
-            get;
-            private set;
-        }
-
-        public MapMarkerDefaultsSettings MarkerDefaults
-        {
-            get;
-            private set;
-        }
         
         public double? MinZoom { get; set; }
         
@@ -89,6 +76,18 @@ namespace Kendo.Mvc.UI
         public bool? Zoomable { get; set; }
         
         //<< Fields
+
+        public List<MapMarker> Markers
+        {
+            get;
+            private set;
+        }
+
+        public MapMarkerDefaultsSettings MarkerDefaults
+        {
+            get;
+            private set;
+        }
 
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -117,18 +116,6 @@ namespace Kendo.Mvc.UI
             if (layers.Any())
             {
                 json["layers"] = layers;
-            }
-                
-            var markerDefaults = MarkerDefaults.ToJson();
-            if (markerDefaults.Any())
-            {
-                json["markerDefaults"] = markerDefaults;
-            }
-                
-            var markers = Markers.ToJson();
-            if (markers.Any())
-            {
-                json["markers"] = markers;
             }
                 
             if (MinZoom.HasValue)
@@ -167,6 +154,18 @@ namespace Kendo.Mvc.UI
             }
                 
         //<< Serialization
+                
+            var markerDefaults = MarkerDefaults.ToJson();
+            if (markerDefaults.Any())
+            {
+                json["markerDefaults"] = markerDefaults;
+            }
+                
+            var markers = Markers.ToJson();
+            if (markers.Any())
+            {
+                json["markers"] = markers;
+            }
 
             writer.Write(Initializer.Initialize(Selector, "Map", json));
 

@@ -39,11 +39,13 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
+        public string Attribution { get; set; }
+        
         public bool? AutoBind { get; set; }
         
-        public string Key { get; set; }
+        public double[]? Extent { get; set; }
         
-        public string Attribution { get; set; }
+        public string Key { get; set; }
         
         public string Opacity { get; set; }
         
@@ -75,19 +77,24 @@ namespace Kendo.Mvc.UI
 
             //>> Serialization
         
+            if (Attribution.HasValue())
+            {
+                json["attribution"] = Attribution;
+            }
+            
             if (AutoBind.HasValue)
             {
                 json["autoBind"] = AutoBind;
             }
                 
+            if (Extent.HasValue)
+            {
+                json["extent"] = Extent;
+            }
+                
             if (Key.HasValue())
             {
                 json["key"] = Key;
-            }
-            
-            if (Attribution.HasValue())
-            {
-                json["attribution"] = Attribution;
             }
             
             if (Opacity.HasValue())

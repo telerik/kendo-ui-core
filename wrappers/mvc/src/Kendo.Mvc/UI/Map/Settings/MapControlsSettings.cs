@@ -30,19 +30,19 @@ namespace Kendo.Mvc.UI
         public MapControlsAttributionSettings Attribution
         {
             get;
-            set;
+            private set;
         }
         
         public MapControlsNavigatorSettings Navigator
         {
             get;
-            set;
+            private set;
         }
         
         public MapControlsZoomSettings Zoom
         {
             get;
-            set;
+            private set;
         }
         
         //<< Fields
@@ -50,7 +50,8 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-            //<< Serialization
+        
+        //<< Serialization
 
             if (Attribution != null)
             {

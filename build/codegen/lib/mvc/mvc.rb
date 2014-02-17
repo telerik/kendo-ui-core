@@ -15,8 +15,15 @@ module CodeGen::MVC::Wrappers
         'Date' => 'DateTime'
     }
 
+    FIELD_TYPES = {
+        'map.layers.extent' => 'double[]'
+    }
+
     SERIALIZATION_SKIP_LIST = [
         'map.center',
+        'map.controls.attribution',
+        'map.controls.navigator',
+        'map.controls.zoom',
         'map.layers.datasource',
         'map.markers.position',
         'actionsheet.items.text',
@@ -26,12 +33,19 @@ module CodeGen::MVC::Wrappers
         'splitview.panes.id'
     ]
 
+    FLUENT_SKIP_LIST = [
+        'map.layers'
+    ]
+
     IGNORED = [
         'map.center',
+        'map.controls.attribution.position',
+        'map.controls.navigator.position',
+        'map.controls.zoom.position',
         'map.layers.datasource',
         'map.layerdefaults.tile.subdomains',
         'map.layers.subdomains',
-        'map.markerDefaults',
+        'map.markerdefaults',
         'map.markers',
         'popover.popup.direction',
         'layout.id',
@@ -89,7 +103,7 @@ module CodeGen::MVC::Wrappers
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
-        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= csharp_type %> value)
+        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= csharp_type.match(/\\[\\]$/) ? 'params ' : '' %><%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
 
@@ -191,7 +205,7 @@ module CodeGen::MVC::Wrappers
             if values
                 "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
             else
-                TYPES[type[0]]
+                FIELD_TYPES[full_name] || TYPES[type[0]]
             end
         end
 
@@ -348,7 +362,9 @@ module CodeGen::MVC::Wrappers
                 match = fields.match("//>> #{o.csharp_name}$(.|\n)*//<< #{o.csharp_name}$")
 
                 if match.nil?
-                    o.to_fluent
+                    unless FLUENT_SKIP_LIST.include?(o.full_name)
+                        o.to_fluent
+                    end
                 else
                     "\n\t\t#{match[0]}\n"
                 end

@@ -57,37 +57,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The configuration of the map layers.
-		/// The layer type is determined by the value of the type field.
-        /// </summary>
-        /// <param name="configurator">The action that configures the layers.</param>
-        public MapBuilder Layers(Action<MapLayerFactory> configurator)
-        {
-            configurator(new MapLayerFactory(container.Layers, container.ViewContext, container.UrlGenerator));
-            return this;
-        }
-
-        /// <summary>
-        /// The configuration of the map markers.
-        /// </summary>
-        /// <param name="configurator">The action that configures the markers.</param>
-        public MapBuilder Markers(Action<MapMarkerFactory> configurator)
-        {
-            configurator(new MapMarkerFactory(container));
-            return this;
-        }
-        
-        /// <summary>
-        /// The default options for all markers.
-        /// </summary>
-        /// <param name="configurator">The action that configures the markerdefaults.</param>
-        public MapBuilder MarkerDefaults(Action<MapMarkerDefaultsSettingsBuilder> configurator)
-        {
-            configurator(new MapMarkerDefaultsSettingsBuilder(container.MarkerDefaults));
-            return this;
-        }
-        
-        /// <summary>
         /// The minimum zoom level.
 		/// Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
         /// </summary>
@@ -168,8 +137,37 @@ namespace Kendo.Mvc.UI.Fluent
         
         //<< Fields
 
-
+        /// <summary>
+        /// The configuration of the map layers.
+        /// The layer type is determined by the value of the type field.
+        /// </summary>
+        /// <param name="configurator">The action that configures the layers.</param>
+        public MapBuilder Layers(Action<MapLayerFactory> configurator)
+        {
+            configurator(new MapLayerFactory(container.Layers, container.ViewContext, container.UrlGenerator));
+            return this;
+        }
         
+        /// <summary>
+        /// The configuration of the map markers.
+        /// </summary>
+        /// <param name="configurator">The action that configures the markers.</param>
+        public MapBuilder Markers(Action<MapMarkerFactory> configurator)
+        {
+            configurator(new MapMarkerFactory(container));
+            return this;
+        }
+        
+        /// <summary>
+        /// The default options for all markers.
+        /// </summary>
+        /// <param name="configurator">The action that configures the markerdefaults.</param>
+        public MapBuilder MarkerDefaults(Action<MapMarkerDefaultsSettingsBuilder> configurator)
+        {
+            configurator(new MapMarkerDefaultsSettingsBuilder(container.MarkerDefaults));
+            return this;
+        }
+
         /// <summary>
         /// Configures the client-side events.
         /// </summary>
@@ -191,7 +189,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
     }
 }
 

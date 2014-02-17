@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI
         
         public string Attribution { get; set; }
         
-        public string Opacity { get; set; }
+        public double? Opacity { get; set; }
         
         //<< Fields
 
@@ -42,11 +42,11 @@ namespace Kendo.Mvc.UI
                 json["attribution"] = Attribution;
             }
             
-            if (Opacity.HasValue())
+            if (Opacity.HasValue)
             {
                 json["opacity"] = Opacity;
             }
-            
+                
         //<< Serialization
         }
     }

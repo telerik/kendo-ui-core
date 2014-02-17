@@ -44,6 +44,17 @@ using System.Web.Mvc;
         //>> Fields
         
         /// <summary>
+        /// The attribution for the layer. Accepts valid HTML.
+        /// </summary>
+        /// <param name="value">The value that configures the attribution.</param>
+        public MapLayerBuilder Attribution(string value)
+        {
+            container.Attribution = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// If set to false the layer will not bind to the data source during initialization. In this case data binding will occur when the change event of the
 		/// data source is fired. By default the widget will bind to the data source specified in the configuration.
         /// </summary>
@@ -56,23 +67,25 @@ using System.Web.Mvc;
         }
         
         /// <summary>
-        /// The key of the bing layer.
+        /// Specifies the extent of the region covered by this layer.
+		/// The layer will be hidden when the specified area is out of view.Accepts a four-element array that specifies the extent covered by this layer:
+		/// North-West lat, longitude, South-East latitude, longitude.If not specified, the layer is always visible.
         /// </summary>
-        /// <param name="value">The value that configures the key.</param>
-        public MapLayerBuilder Key(string value)
+        /// <param name="value">The value that configures the extent.</param>
+        public MapLayerBuilder Extent(params double[] value)
         {
-            container.Key = value;
+            container.Extent = value;
 
             return this;
         }
         
         /// <summary>
-        /// The attribution for the layer. Accepts valid HTML.
+        /// The API key for the layer. Currently supported only for Bing (tm) tile layers.
         /// </summary>
-        /// <param name="value">The value that configures the attribution.</param>
-        public MapLayerBuilder Attribution(string value)
+        /// <param name="value">The value that configures the key.</param>
+        public MapLayerBuilder Key(string value)
         {
-            container.Attribution = value;
+            container.Key = value;
 
             return this;
         }

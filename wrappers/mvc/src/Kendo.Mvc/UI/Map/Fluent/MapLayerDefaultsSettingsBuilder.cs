@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The default configuration for bing layers.
+        /// The default configuration for Bing (tm) tile layers.
         /// </summary>
         /// <param name="configurator">The action that configures the bing.</param>
         public MapLayerDefaultsSettingsBuilder Bing(Action<MapLayerDefaultsBingSettingsBuilder> configurator)
