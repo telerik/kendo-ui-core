@@ -123,8 +123,12 @@
                 });
                 marker.dataItem = data[i];
 
-                // TODO: markerCreated
-                marker.addTo(this);
+                // TODO: Duplication with ShapeLayer._createMarker
+                var args = { marker: marker };
+                var cancelled = this.map.trigger("markerCreated", args);
+                if (!cancelled) {
+                    marker.addTo(this);
+                }
             }
         },
 

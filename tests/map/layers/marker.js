@@ -461,6 +461,22 @@
             createBoundLayer();
             ok(!marker.options.foo);
         });
+
+        test("triggers markerCreated", 2, function() {
+            map.bind("markerCreated", function() {
+                ok(true);
+            });
+            createBoundLayer();
+        });
+
+        test("markerCreated can be cancelled", function() {
+            map.bind("markerCreated", function(e) {
+                e.preventDefault();
+            });
+            createBoundLayer();
+
+            equal(marker, null);
+        });
     })();
 
     baseLayerTests("Marker Layer", MarkerLayer);
