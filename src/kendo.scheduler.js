@@ -1927,6 +1927,10 @@ var __meta__ = {
 
             element.off(NS);
 
+            that._model = null;
+            that.toolbar = null;
+            that.element = null;
+
             $(window).off("resize" + NS, that._resizeHandler);
 
             kendo.destroy(that.wrapper);
@@ -2215,9 +2219,15 @@ var __meta__ = {
                             that._updateEvent(dir, event, { start: start, end: end });
                         }
                     }
+
+                    slot = null;
+                    event = null;
                 },
                 dragcancel: function() {
                     that.view()._removeResizeHint();
+
+                    slot = null;
+                    event = null;
                 }
             });
         },

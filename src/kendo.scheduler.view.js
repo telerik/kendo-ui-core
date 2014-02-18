@@ -1688,9 +1688,18 @@ var __meta__ = {
 
             if (that.table) {
                 kendo.destroy(that.table);
-
                 that.table.remove();
             }
+
+            that.groups = null;
+            that.table = null;
+            that.content = null;
+            that.times = null;
+            that.datesHeader = null;
+            that.timesHeader = null;
+            that.footer = null;
+            that._resizeHint = null;
+            that._moveHint = null;
         },
 
         calendarInfo: function() {

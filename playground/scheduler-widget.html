@@ -55,30 +55,62 @@
         </style>
     </head>
     <body>
+            <button>destroy</button>
             <div id="scheduler"></div>
-    <script>
-       $("#scheduler").kendoScheduler({
-            snap: false,
-            views: ["day"],
-            date: new Date("2013/6/10"),
-            dataSource: {
-                data: [
-                /*
-                    {
-                        id: 1,
-                        start: new Date("2013/6/10 10:10"),
-                        end: new Date("2013/6/10 10:20"),
-                        title: "foo"
+            <script>
+                $("button").click(function() {
+                    $("#scheduler").kendoScheduler("destroy").empty();
+                });
+
+                $("#scheduler").kendoScheduler({
+                    date: new Date("2013/6/13"),
+                    views: ["week"],
+                    startTime: new Date("2013/6/13 07:00 AM"),
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "http://demos.telerik.com/kendo-ui/service/tasks",
+                                dataType: "jsonp"
+                            },
+                            update: {
+                                url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                                dataType: "jsonp"
+                            },
+                            create: {
+                                url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                                dataType: "jsonp"
+                            },
+                            destroy: {
+                                url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                                dataType: "jsonp"
+                            },
+                            parameterMap: function(options, operation) {
+                                if (operation !== "read" && options.models) {
+                                    return {models: kendo.stringify(options.models)};
+                                }
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "taskId",
+                                fields: {
+                                    taskId: { from: "TaskID", type: "number" },
+                                    title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                                    start: { type: "date", from: "Start" },
+                                    end: { type: "date", from: "End" },
+                                    startTimezone: { from: "StartTimezone" },
+                                    endTimezone: { from: "EndTimezone" },
+                                    description: { from: "Description" },
+                                    recurrenceId: { from: "RecurrenceID" },
+                                    recurrenceRule: { from: "RecurrenceRule" },
+                                    recurrenceException: { from: "RecurrenceException" },
+                                    ownerId: { from: "OwnerID", defaultValue: 1 },
+                                    isAllDay: { type: "boolean", from: "IsAllDay" }
+                                }
+                            }
+                        },
                     }
-                */
-                ],
-                schema: {
-                    model: {
-                        id: "id"
-                    }
-                }
-            }
-        });
-    </script>
+                });
+            </script>
     </body>
 </html>

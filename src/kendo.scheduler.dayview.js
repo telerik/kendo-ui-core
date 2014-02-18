@@ -1015,11 +1015,11 @@ var __meta__ = {
                 that.element.off(NS);
             }
 
-            SchedulerView.fn.destroy.call(this);
-
             if (that.footer) {
                 that.footer.remove();
             }
+
+            SchedulerView.fn.destroy.call(this);
 
             if (this._isMobile() && that.options.editable) {
                 if (that.options.editable.create !== false) {
