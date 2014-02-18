@@ -128,4 +128,51 @@
         equal(listC.children().length, 1, "Item is appended to the ListC");
     });
 
+    module("Sortable - connected lists border cases", {
+        setup: function() {
+            QUnit.fixture.append(
+                '<div id="listA">' +
+                    '<div style="height: 20px;">A1</div>' +
+                    '<div style="height: 20px;">A2</div>' +
+                    '<div style="height: 20px;">A3</div>' +
+                '</div>'
+            );
+
+            QUnit.fixture.append(
+                '<div id="listB" style="min-height: 25px;">' +
+                    '<div style="height: 20px;">B1</div>' +
+                '</div>'
+            );
+
+            listA = $("#listA");
+            listB = $("#listB");
+
+            draggedElement = listB.children().eq(0);
+            draggableOffset = kendo.getOffset(draggedElement);
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("User is able to bring back the last item to the sortable container", 2, function() {
+        var options = { connectWith: "#listA" },
+            sortableA = listA.kendoSortable().getKendoSortable(),
+            sortableB = listB.kendoSortable(options).getKendoSortable(),
+            target = listA.children().eq(0),
+            targetOffset = kendo.getOffset(target);
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top);
+
+        equal(listA.children()[0], sortableB.placeholder[0], "Placeholder is moved in listA");
+
+        target = listB;
+        targetOffset = kendo.getOffset(target);
+
+        move(draggedElement, targetOffset.left, targetOffset.top);
+        ok($.contains(listB[0], sortableB.placeholder[0]), "Placeholder is appended back to listB");
+
+    });
+
 })();

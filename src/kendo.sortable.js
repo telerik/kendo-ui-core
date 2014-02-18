@@ -294,6 +294,8 @@ var __meta__ = {
                 node = items.filter(element)[0] || items.has(element)[0];
 
                 return node ? { element: $(node), sortable: this } : null;
+            } else if (this.element[0] == element && this.isEmpty()) {
+                return { element: this.element, sortable: this };
             } else if (connectWith) {
                 connected = $(connectWith);
 
@@ -366,7 +368,7 @@ var __meta__ = {
         },
 
         isEmpty: function() {
-            return !this.items().length;
+            return !this.items().not(":hidden").length;
         }
 
     });
