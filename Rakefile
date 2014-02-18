@@ -83,6 +83,7 @@ require 'codegen'
 require 'nuget'
 require 'winrm_tools'
 require 'playground'
+require 'vs_plugin'
 
 MVC_BINARIES = {
     'wrappers/aspnetmvc/Binaries/Mvc3' => MVC3_DLL,

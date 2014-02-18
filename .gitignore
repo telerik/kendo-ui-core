@@ -66,3 +66,4 @@ build/code-reports/internals.html
 test-results.xml
 debug.js
 demos/mvc/content/all-scripts.txt
+demos/**/bin
