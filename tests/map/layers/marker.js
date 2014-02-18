@@ -124,19 +124,29 @@
             equal(wrapper.children().length, 0);
         });
 
-        test("setLocation sets location", function() {
-            marker.setLocation([50, 5]);
-            ok(new Location(50, 5).equals(marker.options.location));
+        test("copies location to instance variable", function() {
+            marker = new Marker({ location: [0, 0] });
+            marker.options.location = "foo";
+            ok(new Location(0, 0).equals(marker.location()));
         });
 
-        test("setLocation calls update on layer", function() {
+        test("location sets and gets location", function() {
+            marker.location([50, 5]);
+            ok(new Location(50, 5).equals(marker.location()));
+        });
+
+        test("location setter is chainable", function() {
+            equal(marker.location([50, 5]), marker);
+        });
+
+        test("setting location calls update on layer", function() {
             layer.update = function(m) { deepEqual(m, marker); };
-            marker.setLocation([50, 5]);
+            marker.location([50, 5]);
         });
 
-        test("setLocation doesn't fail with no layer", 0, function() {
+        test("setting location doesn't fail with no layer", 0, function() {
             marker.layer = null;
-            marker.setLocation([50, 5]);
+            marker.location([50, 5]);
         });
 
         test("hide removes element", function() {
@@ -433,13 +443,17 @@
 
         test("binds location", function() {
             createBoundLayer({ locationField: "location" });
-            equal(marker.options.location[0], 10);
-            equal(marker.options.location[1], 10);
+            ok(new Location(10, 10).equals(marker.location()));
         });
 
-        test("applies default shape", function() {
+        test("sets marker shape", function() {
             createBoundLayer({ shape: "foo" });
             equal(marker.options.shape, "foo");
+        });
+
+        test("sets marker tooltip", function() {
+            createBoundLayer({ tooltip: { content: "foo" } });
+            equal(marker.options.tooltip.content, "foo");
         });
 
         test("does not apply map.markerDefaults", function() {

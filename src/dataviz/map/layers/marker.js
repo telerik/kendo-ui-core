@@ -73,9 +73,8 @@
 
         update: function(marker) {
             // TODO: Do not show markers outside the map extent
-            var loc = marker.options.location;
+            var loc = marker.location();
             if (loc) {
-                loc = Location.create(loc);
                 marker.showAt(this.map.locationToView(loc));
             }
         },
@@ -117,14 +116,15 @@
 
             var locationGetter = this._getter(this.options.locationField);
             for (var i = 0; i < data.length; i++) {
-                // TODO: Construct marker options once
-                var marker = this.add({
+                var marker = new Marker({
                     location: locationGetter(data[i]),
                     tooltip: this.options.tooltip,
                     shape: this.options.shape
                 });
-
                 marker.dataItem = data[i];
+
+                // TODO: markerCreated
+                marker.addTo(this);
             }
         },
 
@@ -136,6 +136,8 @@
     var Marker = Class.extend({
         init: function(options) {
             this.options = options || {};
+
+            this._location = Location.create(this.options.location);
         },
 
         addTo: function(parent) {
@@ -144,12 +146,17 @@
             this.layer.update(this);
         },
 
-        setLocation: function(loc) {
-            // TODO: Shared options. Oops!
-            this.options.location = Location.create(loc);
+        location: function(value) {
+            if (value) {
+                this._location = Location.create(value);
 
-            if (this.layer) {
-                this.layer.update(this);
+                if (this.layer) {
+                    this.layer.update(this);
+                }
+
+                return this;
+            } else {
+                return this._location;
             }
         },
 
@@ -210,7 +217,7 @@
                 if (template) {
                     var contentTemplate = kendo.template(template);
                     options.content = function(e) {
-                        e.location = Location.create(marker.options.location);
+                        e.location = marker.location();
                         e.marker = marker;
                         return contentTemplate(e);
                     };
