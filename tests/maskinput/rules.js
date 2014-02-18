@@ -168,4 +168,42 @@
 
         equal(input.val(), "-_");
     });
+
+    test("Rule 'L' allows an alphabetical symbol", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "LL"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("A");
+        input.pressKey("b");
+
+        equal(input.val(), "Ab");
+    });
+
+    test("Rule 'L' does not allow space", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "LL"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("A");
+        input.pressKey("b");
+
+        equal(input.val(), "Ab");
+    });
+
+    test("Rule 'L' does not allow digit", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "LL"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("3");
+
+        equal(input.val(), "__");
+    });
 })();

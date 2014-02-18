@@ -83,8 +83,8 @@ var __meta__ = {
         rules: {
             "0": /\d/,
             "9": /\d|\s/,
-            "#": /\d|\s|\+|\-/, //TODO: test
-            //"L": /[a-zA-Z]/, //TODO: test
+            "#": /\d|\s|\+|\-/,
+            "L": /[a-zA-Z]/,
             //"?": /[a-zA-Z]?/, //TODO: test
             //TODO: Add support for escaping
         },
