@@ -441,7 +441,6 @@ var __meta__ = {
         }
     });
 
-    //TODO: Move caret function in core.js
     function caret(element, start, end) {
         var rangeElement;
         var isPosition = start !== undefined;
