@@ -32,6 +32,7 @@
         "./kendo.colorpicker",
         "./kendo.listview",
         "./kendo.numerictextbox",
+        "./kendo.maskinput",
         "./kendo.menu",
         "./kendo.editable",
         "./kendo.panelbar",
