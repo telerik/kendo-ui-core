@@ -734,7 +734,7 @@ var __meta__ = {
                 tabStripID = (that.element.attr("id") || kendo.guid()) + "-",
                 contentElements = that.wrapper.children("div");
 
-            if (items.length > contentElements.length) {
+            if (contentElements.length && (items.length > contentElements.length)) {
                 contentElements.each(function(idx) {
                     var currentIndex = parseInt(this.id.replace(tabStripID, "")),
                         item = items.filter("[aria-controls=" + tabStripID + currentIndex + "]"),
