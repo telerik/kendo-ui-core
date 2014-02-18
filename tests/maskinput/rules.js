@@ -297,4 +297,17 @@
 
         equal(input.val(), " ");
     });
+
+    test("Support for custom rule", 1, function() {
+        MaskInput.fn.rules["~"] = /[+-]/
+        var maskinput = new MaskInput(input, {
+            mask: "~"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("+");
+
+        equal(input.val(), "+");
+    });
 })();
