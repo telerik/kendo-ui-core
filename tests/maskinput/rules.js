@@ -206,4 +206,41 @@
 
         equal(input.val(), "__");
     });
+
+    test("Rule '?' allows an alphabetical symbol", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "??"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("A");
+        input.pressKey("b");
+
+        equal(input.val(), "Ab");
+    });
+
+    test("Rule '?' allows space", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "??"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey(" ");
+
+        equal(input.val(), " _");
+    });
+
+    test("Rule '?' does not allow digit", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "??"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("3");
+
+        equal(input.val(), "__");
+    });
 })();
