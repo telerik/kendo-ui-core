@@ -358,7 +358,9 @@ var __meta__ = {
                 });
             });
 
-            element.on("DOMMouseScroll mousewheel",  proxy(this, "_wheelScroll"));
+            if (that.options.mousewheelScrolling) {
+                element.on("DOMMouseScroll mousewheel",  proxy(this, "_wheelScroll"));
+            }
 
             extend(that, {
                 movable: movable,
@@ -438,6 +440,7 @@ var __meta__ = {
             pullOffset: 140,
             elastic: true,
             useNative: false,
+            mousewheelScrolling: true,
             avoidScrolling: function() { return false; },
             pullToRefresh: false,
             pullTemplate: "Pull to refresh",
