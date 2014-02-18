@@ -152,7 +152,7 @@ tree :to => SPRING_DEMOS_RESOURCES + "js",
 
 tree :to => SPRING_DEMOS_RESOURCES + "css",
      :from => MIN_CSS_RESOURCES,
-     :root => ROOT_MAP['styles']
+     :root => 'dist/styles/'
 
 tree :to => SPRING_DEMOS_RESOURCES,
      :from => SPRING_DEMOS_NAVIGATION,
