@@ -1284,7 +1284,7 @@ p#copy
 {
     display: none;
     list-style-type: none;
-    margin: 18px 0;
+    margin: 18px 0 0;
     padding: 0 0 18px 10px;
     border-bottom: 1px solid #dfdfdf;
 }
@@ -1473,8 +1473,7 @@ p#copy
 #example
 {
     position:relative;
-    padding: 15px 0;
-
+    padding: 30px 0;
     min-height:200px;
     font-size: 12px;
 }
@@ -3299,7 +3298,7 @@ ul.keyboard-legend li a {
    line-height: 14px;
    border-radius:3px;
    padding: 12px 22px 10px;
-   margin: 55px auto 46px;  
+   margin: 20px auto;  
    border: none;  
 }
 
