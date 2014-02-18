@@ -43,7 +43,7 @@ namespace Kendo.Mvc.UI
         
         public bool? AutoBind { get; set; }
         
-        public double[]? Extent { get; set; }
+        public double[] Extent { get; set; }
         
         public string Key { get; set; }
         
@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI
         public MapLayerStyleSettings Style
         {
             get;
-            private set;
+            set;
         }
         
         public string UrlTemplateId { get; set; }
@@ -87,11 +87,11 @@ namespace Kendo.Mvc.UI
                 json["autoBind"] = AutoBind;
             }
                 
-            if (Extent.HasValue)
+            if (Extent != null)
             {
                 json["extent"] = Extent;
             }
-                
+	    
             if (Key.HasValue())
             {
                 json["key"] = Key;

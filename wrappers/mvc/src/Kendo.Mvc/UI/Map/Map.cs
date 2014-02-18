@@ -46,19 +46,19 @@ namespace Kendo.Mvc.UI
         public MapControlsSettings Controls
         {
             get;
-            private set;
+            set;
         }
         
         public MapLayerDefaultsSettings LayerDefaults
         {
             get;
-            private set;
+            set;
         }
         
         public List<MapLayer> Layers
         {
             get;
-            private set;
+            set;
         }
         
         public double? MinZoom { get; set; }

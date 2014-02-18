@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI
         public MapLayerDefaultsShapeStyleSettings Style
         {
             get;
-            private set;
+            set;
         }
         
         //<< Fields

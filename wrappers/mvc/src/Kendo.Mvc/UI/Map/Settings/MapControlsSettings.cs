@@ -30,19 +30,19 @@ namespace Kendo.Mvc.UI
         public MapControlsAttributionSettings Attribution
         {
             get;
-            private set;
+            set;
         }
         
         public MapControlsNavigatorSettings Navigator
         {
             get;
-            private set;
+            set;
         }
         
         public MapControlsZoomSettings Zoom
         {
             get;
-            private set;
+            set;
         }
         
         //<< Fields

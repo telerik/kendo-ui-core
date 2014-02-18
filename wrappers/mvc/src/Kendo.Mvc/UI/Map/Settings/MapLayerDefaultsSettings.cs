@@ -30,19 +30,19 @@ namespace Kendo.Mvc.UI
         public MapLayerDefaultsShapeSettings Shape
         {
             get;
-            private set;
+            set;
         }
         
         public MapLayerDefaultsTileSettings Tile
         {
             get;
-            private set;
+            set;
         }
         
         public MapLayerDefaultsBingSettings Bing
         {
             get;
-            private set;
+            set;
         }
         
         //<< Fields

@@ -72,7 +72,7 @@ module CodeGen::MVC::Wrappers
         //<< Fields})
 
         FIELD_DECLARATION = ERB.new(%{
-        public <%= csharp_type == 'string' ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
+        public <%= csharp_type == 'string' || is_csharp_array ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
         })
 
         FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
@@ -86,7 +86,7 @@ module CodeGen::MVC::Wrappers
         public <%= csharp_class %> <%= csharp_name %>
         {
             get;
-            private set;
+            set;
         }
         })
 
@@ -103,7 +103,7 @@ module CodeGen::MVC::Wrappers
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
-        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= csharp_type.match(/\\[\\]$/) ? 'params ' : '' %><%= csharp_type %> value)
+        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= is_csharp_array ? 'params ' : '' %><%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
 
@@ -221,6 +221,10 @@ module CodeGen::MVC::Wrappers
             FLUENT_FIELD_DECLARATION.result(binding)
         end
 
+	def is_csharp_array
+	    csharp_type.match(/\[\]$/)
+        end
+
         def to_client_option
             if csharp_type.eql?('string')
                 return ERB.new(%{
@@ -230,6 +234,15 @@ module CodeGen::MVC::Wrappers
             }
             }).result(binding)
             end
+
+	    if is_csharp_array
+	    	return ERB.new(%{
+            if (<%=csharp_name%> != null)
+            {
+                json["<%= name %>"] = <%=csharp_name%>;
+            }
+	    }).result(binding)
+	    end
 
             ERB.new(%{
             if (<%= csharp_name %>.HasValue)

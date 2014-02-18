@@ -24,13 +24,13 @@ namespace Kendo.Mvc.UI
         public MapLayerDefaultsShapeStyleFillSettings Fill
         {
             get;
-            private set;
+            set;
         }
         
         public MapLayerDefaultsShapeStyleStrokeSettings Stroke
         {
             get;
-            private set;
+            set;
         }
         
         //<< Fields
