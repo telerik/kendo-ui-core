@@ -97,16 +97,75 @@
         equal(caret(input[0])[0], 0);
     });
 
-    test("Rule '9' allows digit or space", 1, function() {
+    test("Rule '9' allows digit", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "9"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("3");
+
+        equal(input.val(), "3");
+    });
+
+    test("Rule '9' allows digit", 1, function() {
         var maskinput = new MaskInput(input, {
             mask: "99"
         });
 
         input.focus();
         caret(input[0], 0);
-        input.pressKey("3");
         input.pressKey(" ");
 
-        equal(input.val(), "3 ");
+        equal(input.val(), " _");
+    });
+
+    test("Rule '#' allows digit", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "#"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("3");
+
+        equal(input.val(), "3");
+    });
+
+    test("Rule '#' allows space", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "##"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey(" ");
+
+        equal(input.val(), " _");
+    });
+
+    test("Rule '#' allows '+'", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "##"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("+");
+
+        equal(input.val(), "+_");
+    });
+
+    test("Rule '#' allows '-'", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "##"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("-");
+
+        equal(input.val(), "-_");
     });
 })();
