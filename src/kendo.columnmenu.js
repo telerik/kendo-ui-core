@@ -209,6 +209,9 @@ var __meta__ = {
             }
 
             that.link.off(NS);
+            that.owner = null;
+            that.wrapper = null;
+            that.element = null;
         },
 
         close: function() {

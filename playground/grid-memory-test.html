@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>locked columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.reorderable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.menu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.filtermenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnmenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+  </head>
+  <body>
+      <button id="clear">Destroy</button>
+                <div id="grid" style="width:1035px;"></div>
+
+                <script>
+                    $(document).ready(function () {
+                        $("#grid").kendoGrid({
+                            dataSource: {
+                                type: "odata",
+                                transport: {
+                                    read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
+                                },
+                                pageSize: 40,
+                                schema: {
+                                    model: {
+                                        id: "CustomerID",
+                                        fields: {
+                                            CustomerID: { type: "number" },
+                                            ContactName: { type: "string" },
+                                            ContactTitle: { type: "string"},
+                                            CompanyName: { type: "string"},
+                                            Country: { type: "string"}
+                                        }
+                                    }
+                                }
+                            },
+                            scrollable: {
+                                virtual: true
+                            },
+                            groupable: true,
+                            sortable: true,
+                            height: 500,
+                            pageable: {
+                                refresh: true,
+                                buttonCount: 5
+                            },
+                            navigatable: true,
+                            editable: true,
+                            selectable: "multiple row",
+                            reorderable: true,
+                            filterable: true,
+                            columnMenu: true,
+                            resizable: true,
+                            toolbar: ["create"]
+                           });
+
+                            $("#clear").click(function() {
+                                $("#grid").data("kendoGrid").destroy();
+                                $("#grid").empty().remove();
+                            });
+                        });
+                    </script>
+    </body>
+</html>

@@ -84,7 +84,7 @@ var __meta__ = {
         NAVROW = "tr:not(.k-footer-template):visible",
         NAVCELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
         FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first",
-        HEADERCELLS = "th.k-header:not(.k-group-cell,.k-hierarchy-cell)",
+        HEADERCELLS = "th.k-header:not(.k-group-cell):not(.k-hierarchy-cell)",
         NS = ".kendoGrid",
         EDIT = "edit",
         SAVE = "save",
@@ -163,7 +163,10 @@ var __meta__ = {
 
             if (that.drag) {
                 that.drag.destroy();
+                that.drag = null;
             }
+            that.wrapper = that.element = that.verticalScrollbar = null;
+            that._refreshHandler = null;
         },
 
         wrap: function() {
@@ -806,13 +809,17 @@ var __meta__ = {
                 $(window).off("resize" + NS, that._resizeHandler);
             }
 
-            if (that.pager) {
+            if (that.pager && that.pager.element) {
                 that.pager.destroy();
             }
 
-            if (that.groupable) {
-                that.groupable.destroy();
+            that.pager = null;
+
+            if (that.groupable && that.groupable.element) {
+                that.groupable.element.kendoGroupable("destroy");
             }
+
+            that.groupable = null;
 
             if (that.options.reorderable) {
                 that.wrapper.data("kendoReorderable").destroy();
@@ -830,12 +837,16 @@ var __meta__ = {
                         $(document).off("click", that._resizeHandleDocumentClickHandler);
                     }
                     that._resizeUserEvents.destroy();
+                    that._resizeUserEvents = null;
                 }
+                that.resizable = null;
             }
 
-            if (that.virtualScrollable) {
+            if (that.virtualScrollable && that.virtualScrollable.element) {
                 that.virtualScrollable.destroy();
             }
+
+            that.virtualScrollable = null;
 
             that._destroyColumnAttachments();
 
@@ -845,6 +856,8 @@ var __meta__ = {
                 that.dataSource.unbind(CHANGE, that._refreshHandler)
                            .unbind(PROGRESS, that._progressHandler)
                            .unbind(ERROR, that._errorHandler);
+
+                that._refreshHandler = that._progressHandler = that._errorHandler = null;
             }
 
             element = that.element
@@ -867,9 +880,26 @@ var __meta__ = {
                 that.pane.destroy();
             }
 
+            if (that._draggableInstance && that._draggableInstance.element) {
+                that._draggableInstance.destroy();
+            }
+
+            that._draggableInstance = null;
+
             element.off(NS);
 
             kendo.destroy(that.wrapper);
+
+            that.scrollables =
+            that.thead =
+            that.tbody =
+            that.element =
+            that.table =
+            that.content =
+            that.footer =
+            that.wrapper =
+            that._groupableClickHandler =
+            that._setContentWidthHandler = null;
         },
 
         setOptions: function(options) {
@@ -881,7 +911,10 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.tbody.children(':not(.k-grouping-row,.k-detail-row,.k-group-footer)');
+            return this.tbody.children().filter(function() {
+                var tr = $(this);
+                return !tr.hasClass("k-grouping-row") && !tr.hasClass("k-detail-row") && !tr.hasClass("k-group-footer");
+            });
         },
 
         _destroyColumnAttachments: function() {
@@ -1009,9 +1042,14 @@ var __meta__ = {
                 indicatorWidth = that.options.columnResizeHandleWidth,
                 lockedHead = that.lockedHeader ? that.lockedHeader.find("thead:first") : $();
 
-            that.thead.add(lockedHead).on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
-                var th = $(this),
-                    clientX = e.clientX,
+            that.thead.add(lockedHead).on("mousemove" + NS, "th", function(e) {
+                var th = $(this);
+
+                if (th.hasClass("k-group-cell") || th.hasClass("k-hierarchy-cell")) {
+                    return;
+                }
+
+                var clientX = e.clientX,
                     winScrollLeft = $(window).scrollLeft(),
                     position = th.offset().left + (!isRtl ? this.offsetWidth : 0);
 
@@ -1054,7 +1092,7 @@ var __meta__ = {
                 lockedHead = that.lockedHeader ? that.lockedHeader.find("thead:first") : $();
 
             that._resizeUserEvents = new kendo.UserEvents(lockedHead.add(that.thead), {
-                filter: "th:not(.k-group-cell,.k-hierarchy-cell)",
+                filter: "th:not(.k-group-cell):not(.k-hierarchy-cell)",
                 threshold: 10,
                 hold: function(e) {
                     var th = $(e.target);
@@ -1092,6 +1130,10 @@ var __meta__ = {
                     that._positionColumnResizeHandleTouch(container);
                 } else {
                     that._positionColumnResizeHandle(container);
+                }
+
+                if (that.resizable) {
+                    that.resizable.destroy();
                 }
 
                 that.resizable = new ui.Resizable(container.add(that.lockedHeader), {
@@ -1184,7 +1226,7 @@ var __meta__ = {
                         if (columnWidth != newWidth) {
                             header = that.lockedHeader ? that.lockedHeader.find("thead:first").add(that.thead) : th.parent();
 
-                            column = that.columns[header.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)];
+                            column = that.columns[header.find("th:not(.k-group-cell):not(.k-hierarchy-cell)").index(th)];
 
                             column.width = newWidth;
 
@@ -2328,6 +2370,29 @@ var __meta__ = {
             }
         },
 
+        _continuousItems: function(filter, cell) {
+            if (!this.lockedContent) {
+                return;
+            }
+
+            var that = this;
+
+            var elements = that.table.add(that.lockedTable);
+
+            var lockedItems = $(filter, elements[0]);
+            var nonLockedItems = $(filter, elements[1]);
+            var columns = cell ? lockedColumns(that.columns).length : 1;
+            var nonLockedColumns = cell ? that.columns.length - columns : 1;
+            var result = [];
+
+            for (var idx = 0; idx < lockedItems.length; idx += columns) {
+                push.apply(result, lockedItems.slice(idx, idx + columns));
+                push.apply(result, nonLockedItems.splice(0, nonLockedColumns));
+            }
+
+            return result;
+        },
+
         _selectable: function() {
             var that = this,
                 multi,
@@ -2356,10 +2421,8 @@ var __meta__ = {
                 if (that.lockedContent) {
                     elements = elements.add(that.lockedTable);
                 }
+
                 var filter = ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr" + notString);
-                var lockedColumnsCount = function() {
-                    return lockedColumns(that.columns).length;
-                };
                 that.selectable = new kendo.ui.Selectable(elements, {
                     filter: filter,
                     aria: true,
@@ -2386,22 +2449,7 @@ var __meta__ = {
                         return result;
                     },
                     continuousItems: function() {
-                        if (!that.lockedContent) {
-                            return;
-                        }
-
-                        var lockedItems = $(filter, elements[0]);
-                        var nonLockedItems = $(filter, elements[1]);
-                        var lockedColumns = cell ? lockedColumnsCount() : 1;
-                        var nonLockedColumns = cell ? that.columns.length - lockedColumns : 1;
-                        var result = [];
-
-                        for (var idx = 0; idx < lockedItems.length; idx += lockedColumns) {
-                            push.apply(result, lockedItems.slice(idx, idx + lockedColumns));
-                            push.apply(result, nonLockedItems.splice(0, nonLockedColumns));
-                        }
-
-                        return result;
+                        return that._continuousItems(filter, cell);
                     }
                 });
 
@@ -2904,7 +2952,7 @@ var __meta__ = {
                 if (hasVirtualScroll) {
                     that.virtualScrollable = new VirtualScrollable(that.content, {
                         dataSource: that.dataSource,
-                        itemHeight: proxy(that._averageRowHeight, that)
+                        itemHeight: function() { return that._averageRowHeight(); }
                     });
                 }
 
@@ -3267,7 +3315,7 @@ var __meta__ = {
                 if (options.scrollable) {
                     footerWrap = footer.attr("tabindex", -1).children(".k-grid-footer-wrap");
                     that.scrollables = that.scrollables
-                        .not(".k-grid-footer-wrap")
+                        .filter(function() { return !$(this).is(".k-grid-footer-wrap"); })
                         .add(footerWrap);
                 }
 
@@ -3319,97 +3367,106 @@ var __meta__ = {
                 menuOptions,
                 sortable,
                 filterable,
+                cells,
                 isMobile = this._isMobile,
                 initCallback = function(e) {
                     that.trigger(COLUMNMENUINIT, { field: e.field, container: e.container });
                 },
-                cell;
+                closeCallback = function(element) {
+                    focusTable(element.closest("table"), true);
+                };
 
             if (columnMenu) {
                 if (typeof columnMenu == "boolean") {
                     columnMenu = {};
                 }
 
-                that.thead
-                    .find("th:not(.k-hierarchy-cell,.k-group-cell)")
-                    .each(function (index) {
-                        column = columns[index];
-                        cell = $(this);
+                cells = that.thead.find("th:not(.k-hierarchy-cell):not(.k-group-cell)");
 
-                        if (!column.command && (column.field || cell.attr("data-" + kendo.ns + "field"))) {
-                            menu = cell.data("kendoColumnMenu");
-                            if (menu) {
-                                menu.destroy();
-                            }
-                            sortable = column.sortable !== false && columnMenu.sortable !== false ? options.sortable : false;
-                            filterable = options.filterable && column.filterable !== false && columnMenu.filterable !== false ? extend({ pane: that.pane }, column.filterable, options.filterable) : false;
-                            menuOptions = {
-                                dataSource: that.dataSource,
-                                values: column.values,
-                                columns: columnMenu.columns,
-                                sortable: sortable,
-                                filterable: filterable,
-                                messages: columnMenu.messages,
-                                owner: that,
-                                closeCallback: function(element) {
-                                    focusTable(element.closest("table"), true);
-                                },
-                                init: initCallback,
-                                pane: that.pane,
-                                filter: isMobile ? ":not(.k-column-active)" : "",
-                                lockedColumns: lockedColumns(columns).length > 0
-                            };
+                for (var idx = 0, length = cells.length; idx < length; idx++) {
+                    column = columns[idx];
+                    var cell = cells.eq(idx);
 
-                            cell.kendoColumnMenu(menuOptions);
+                    if (!column.command && (column.field || cell.attr("data-" + kendo.ns + "field"))) {
+                        menu = cell.data("kendoColumnMenu");
+                        if (menu) {
+                            menu.destroy();
                         }
-                    });
+                        sortable = column.sortable !== false && columnMenu.sortable !== false ? options.sortable : false;
+                        filterable = options.filterable && column.filterable !== false && columnMenu.filterable !== false ? extend({ pane: that.pane }, column.filterable, options.filterable) : false;
+                        menuOptions = {
+                            dataSource: that.dataSource,
+                            values: column.values,
+                            columns: columnMenu.columns,
+                            sortable: sortable,
+                            filterable: filterable,
+                            messages: columnMenu.messages,
+                            owner: that,
+                            closeCallback: closeCallback,
+                            init: initCallback,
+                            pane: that.pane,
+                            filter: isMobile ? ":not(.k-column-active)" : "",
+                            lockedColumns: lockedColumns(columns).length > 0
+                        };
+
+                        cell.kendoColumnMenu(menuOptions);
+                    }
+                }
             }
+        },
+
+        _headerCells: function() {
+            return this.thead.find("th").filter(function() { return !$(this).hasClass("k-hierarchy-cell,k-group-cell"); });
         },
 
         _filterable: function() {
             var that = this,
                 columns = that.columns,
-                cell,
                 filterMenu,
+                cells,
+                cell,
+                filterInit = function(e) {
+                    that.trigger(FILTERMENUINIT, { field: e.field, container: e.container });
+                },
+                closeCallback = function(element) {
+                    focusTable(element.closest("table"), true);
+                },
                 filterable = that.options.filterable;
 
             if (filterable && !that.options.columnMenu) {
-                that.thead
-                    .find("th:not(.k-hierarchy-cell,.k-group-cell)")
-                    .each(function(index) {
-                        cell = $(this);
-                        if (columns[index].filterable !== false && !columns[index].command && (columns[index].field || cell.attr("data-" + kendo.ns + "field"))) {
-                            filterMenu = cell.data("kendoFilterMenu");
+                cells = that._headerCells();
 
-                            if (filterMenu) {
-                                filterMenu.destroy();
-                            }
+                for (var idx = 0, length = cells.length; idx < length; idx++) {
+                    cell = cells.eq(idx);
 
-                            var columnFilterable = columns[index].filterable;
+                    if (columns[idx].filterable !== false && !columns[idx].command && (columns[idx].field || cell.attr("data-" + kendo.ns + "field"))) {
+                        filterMenu = cell.data("kendoFilterMenu");
 
-                            var options = extend({},
-                                filterable,
-                                columnFilterable,
-                                {
-                                    dataSource: that.dataSource,
-                                    values: columns[index].values,
-                                    closeCallback: function(element) {
-                                        focusTable(element.closest("table"), true);
-                                    },
-                                    init: function(e) {
-                                        that.trigger(FILTERMENUINIT, { field: e.field, container: e.container });
-                                    },
-                                    pane: that.pane
-                                }
-                            );
-
-                            if (columnFilterable && columnFilterable.messages) {
-                                options.messages = extend(true, {}, filterable.messages, columnFilterable.messages);
-                            }
-
-                            cell.kendoFilterMenu(options);
+                        if (filterMenu) {
+                            filterMenu.destroy();
                         }
-                    });
+
+                        var columnFilterable = columns[idx].filterable;
+
+                        var options = extend({},
+                            filterable,
+                            columnFilterable,
+                            {
+                                dataSource: that.dataSource,
+                                values: columns[idx].values,
+                                closeCallback: closeCallback,
+                                init: filterInit,
+                                pane: that.pane
+                            }
+                        );
+
+                        if (columnFilterable && columnFilterable.messages) {
+                            options.messages = extend(true, {}, filterable.messages, columnFilterable.messages);
+                        }
+
+                        cell.kendoFilterMenu(options);
+                    }
+                }
             }
         },
 
@@ -3417,30 +3474,32 @@ var __meta__ = {
             var that = this,
                 columns = that.columns,
                 column,
-                cell,
                 sortableInstance,
+                cell,
                 sortable = that.options.sortable;
 
             if (sortable) {
-                that.thead
-                    .find("th:not(.k-hierarchy-cell,.k-group-cell)")
-                    .each(function(index) {
-                        column = columns[index];
-                        if (column.sortable !== false && !column.command && column.field) {
-                            cell = $(this);
+                var cells = that._headerCells();
 
-                            sortableInstance = cell.data("kendoSorter");
+                for (var idx = 0, length = cells.length; idx < length; idx++) {
+                    column = columns[idx];
 
-                            if (sortableInstance) {
-                                sortableInstance.destroy();
-                            }
+                    if (column.sortable !== false && !column.command && column.field) {
+                        cell = cells.eq(idx);
 
-                            new ui.Sorter(
-                                cell.attr("data-" + kendo.ns +"field", column.field),
+                        sortableInstance = cell.data("kendoSorter");
+
+                        if (sortableInstance) {
+                            sortableInstance.destroy();
+                        }
+
+                        cell.attr("data-" + kendo.ns +"field", column.field)
+                            .kendoSorter(
                                 extend({}, sortable, column.sortable, { dataSource: that.dataSource, aria: true, filter: ":not(.k-column-active)" })
                             );
-                        }
-                    });
+                    }
+                }
+                cells = null;
             }
         },
 
@@ -4076,7 +4135,7 @@ var __meta__ = {
 
             that._columnMenu();
 
-            if (this.options.scrollable) {
+            if (this.options.scrollable && lockedColumns(this.columns).length) {
 
                 that._appendLockedColumnHeader(that.thead.closest(".k-grid-header"));
 
@@ -4960,17 +5019,18 @@ var __meta__ = {
            that.element.off(sorterNS);
 
            that.dataSource.unbind("change", that._refreshHandler);
+           that._refreshHandler = that.element = that.link = that.dataSource = null ;
        },
 
        refresh: function() {
            var that = this,
-           sort = that.dataSource.sort() || [],
-           idx,
-           length,
-           descriptor,
-           dir,
-           element = that.element,
-           field = element.attr(kendo.attr(FIELD));
+               sort = that.dataSource.sort() || [],
+               idx,
+               length,
+               descriptor,
+               dir,
+               element = that.element,
+               field = element.attr(kendo.attr(FIELD));
 
            element.removeAttr(kendo.attr(DIR));
            element.removeAttr(ARIASORT);

@@ -3349,14 +3349,14 @@ var __meta__ = {
         }
 
         var dataSource = options || {},
-        data = dataSource.data,
-        fields = dataSource.fields,
-        table = dataSource.table,
-        select = dataSource.select,
-        idx,
-        length,
-        model = {},
-        field;
+            data = dataSource.data,
+            fields = dataSource.fields,
+            table = dataSource.table,
+            select = dataSource.select,
+            idx,
+            length,
+            model = {},
+            field;
 
         if (!data && fields && !dataSource.transport) {
             if (table) {
@@ -3380,6 +3380,8 @@ var __meta__ = {
         }
 
         dataSource.data = data;
+        table = null;
+        dataSource.table = null;
 
         return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
     };

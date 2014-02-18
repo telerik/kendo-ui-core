@@ -66,13 +66,13 @@ var __meta__ = {
                 group: group
             });
 
-            groupContainer = that.groupContainer = $(that.options.groupContainer, that.element)
+            that.groupContainer = $(that.options.groupContainer, that.element)
                 .kendoDropTarget({
                     group: draggable.options.group,
                     dragenter: function(e) {
                         if (that._canDrag(e.draggable.currentTarget)) {
                             e.draggable.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
-                            dropCue.css("top", dropCueOffsetTop(groupContainer)).css(horizontalCuePosition, 0).appendTo(groupContainer);
+                            dropCue.css("top", dropCueOffsetTop(that.groupContainer)).css(horizontalCuePosition, 0).appendTo(that.groupContainer);
                         }
                     },
                     dragleave: function(e) {
@@ -120,7 +120,7 @@ var __meta__ = {
                             left = isRtl ? elementPosition.left - marginLeft : elementPosition.left + element.outerWidth();
 
                         intializePositions();
-                        dropCue.css({top: dropCueOffsetTop(groupContainer), left: left}).appendTo(groupContainer);
+                        dropCue.css({top: dropCueOffsetTop(that.groupContainer), left: left}).appendTo(that.groupContainer);
                         this.hint.find(".k-drag-status").removeClass("k-denied").addClass("k-add");
                     },
                     dragend: function() {
@@ -169,9 +169,15 @@ var __meta__ = {
 
             that.dataSource = that.options.dataSource;
 
-            if(that.dataSource) {
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler);
+            } else {
                 that._refreshHandler = proxy(that.refresh, that);
+            }
+
+            if(that.dataSource) {
                 that.dataSource.bind("change", that._refreshHandler);
+                that.refresh();
             }
         },
 
@@ -179,13 +185,15 @@ var __meta__ = {
             var that = this,
                 dataSource = that.dataSource;
 
-            that.groupContainer.empty().append(
-                $.map(dataSource.group() || [], function(item) {
-                    var fieldName = item.field.replace(nameSpecialCharRegExp, "\\$1");
-                    var element = that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + fieldName + "]");
-                    return that.buildIndicator(item.field, element.attr(kendo.attr("title")), item.dir);
-                }).join("")
-            );
+            if (that.groupContainer) {
+                that.groupContainer.empty().append(
+                    $.map(dataSource.group() || [], function(item) {
+                        var fieldName = item.field.replace(nameSpecialCharRegExp, "\\$1");
+                        var element = that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + fieldName + "]");
+                        return that.buildIndicator(item.field, element.attr(kendo.attr("title")), item.dir);
+                    }).join("")
+                );
+            }
             that._invalidateGroupContainer();
         },
 
@@ -210,7 +218,10 @@ var __meta__ = {
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler);
+                that._refreshHandler = null;
             }
+
+            that.groupContainer = that.element = that.draggable = null;
         },
 
         options: {
@@ -354,6 +365,7 @@ var __meta__ = {
             var that = this,
                 indicators = $(".k-group-indicator", that.groupContainer),
                 left;
+
             that._dropCuePositions = $.map(indicators, function(item) {
                 item = $(item);
                 left = kendo.getOffset(item).left;
@@ -366,7 +378,7 @@ var __meta__ = {
         },
         _invalidateGroupContainer: function() {
             var groupContainer = this.groupContainer;
-            if(groupContainer.is(":empty")) {
+            if(groupContainer && groupContainer.is(":empty")) {
                 groupContainer.html(this.options.messages.empty);
             }
         }

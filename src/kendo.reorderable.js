@@ -37,6 +37,7 @@ var __meta__ = {
 
             element = that.element.addClass(KREORDERABLE);
             options = that.options;
+
             that.draggable = draggable = options.draggable || new kendo.ui.Draggable(element, {
                 group: group,
                 filter: options.filter,
@@ -115,7 +116,7 @@ var __meta__ = {
                     },
                     dragstart: function(e) {
                         that._draggable = e.currentTarget;
-                        that._elements = that.element.find(draggable.options.filter);
+                        that._elements = that.element.find(that.draggable.options.filter);
                     },
                     drag: function(e) {
                         if (!that._dropTarget || this.hint.find(".k-drag-status").hasClass("k-denied")) {
@@ -165,12 +166,11 @@ var __meta__ = {
 
         destroy: function() {
            var that = this;
-           var item;
 
            Widget.fn.destroy.call(that);
 
            that.element.find(that.draggable.options.filter).each(function() {
-               item = $(this);
+               var item = $(this);
                if (item.data("kendoDropTarget")) {
                    item.data("kendoDropTarget").destroy();
                }
@@ -178,8 +178,10 @@ var __meta__ = {
 
            if (that.draggable) {
                that.draggable.destroy();
-               that.draggable = null;
+
+               that.draggable.element = that.draggable = null;
            }
+           that.elements = that.reorderDropCue = that._elements = that._draggable = null;
        }
     });
 

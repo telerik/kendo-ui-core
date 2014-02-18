@@ -462,18 +462,24 @@ var __meta__ = {
                 that.form.unbind(NS);
                 if (that.popup) {
                     that.popup.destroy();
+                    that.popup = null;
                 }
+                that.form = null;
             }
 
             if (that.view) {
                 that.view.purge();
+                that.view = null;
             }
 
             that.link.unbind(NS);
 
             if (that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler);
+                that.dataSource = null;
             }
+
+            that.element = that.link = that._refreshHandler = that.filterModel = null;
         },
 
         _bind: function(expression) {

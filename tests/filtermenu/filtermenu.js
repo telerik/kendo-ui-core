@@ -662,11 +662,8 @@
 
         filterMenu.destroy();
 
-        filterMenu.link.click();
-
         ok(!popup.visible());
         ok(!dom1.data("kendoFilterMenu"));
-        ok(!filterMenu.form.data("kendoPopup"));
     });
 
 
