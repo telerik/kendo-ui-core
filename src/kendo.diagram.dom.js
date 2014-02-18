@@ -262,7 +262,7 @@
                 },
                 editable: true,
                 selectable: true,
-                isSerializable: true,
+                serializable: true,
                 enable: true
             },
             _getCursor: function (point) {
@@ -1382,7 +1382,7 @@
                 json.connections = [];
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
-                    if (shape.options.isSerializable) {
+                    if (shape.options.serializable) {
                         json.shapes.push({options: shape.options});
                     }
                 }
