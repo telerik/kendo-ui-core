@@ -142,10 +142,25 @@
     <Content Include="node\node_modules\kendo-lint\bin\kendo-lint">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\api.json">
+    <Content Include="node\node_modules\kendo-lint\lib\bundle.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\kendo-config.json">
+    <Content Include="node\node_modules\kendo-lint\lib\docs.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\lint.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\parsedocs.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\parsehtml.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\pattern.js">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\public-api.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\.bin\uglifyjs">
@@ -310,31 +325,16 @@
     <Content Include="node\node_modules\kendo-lint\package.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\api.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="node\node_modules\kendo-lint\lib\kendo-config.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
     <Content Include="node\node.exe">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\bundle.js">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\docs.js">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\lint.js">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\parsedocs.js">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\parsehtml.js">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\pattern.js">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="node\node_modules\kendo-lint\lib\public-api.js">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="node\node_modules\kendo-lint\node_modules\glob\examples\g.js">
