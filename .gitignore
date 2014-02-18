@@ -31,7 +31,7 @@ styles/web/*.css
 styles/mobile/*.css
 styles/dataviz/*.min.css
 !styles/web/kendo.rtl.css
-node_modules
+/node_modules
 ./tags
 styles/*.css
 themebuilder/scripts/template.js
