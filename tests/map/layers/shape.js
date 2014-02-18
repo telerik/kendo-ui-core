@@ -63,7 +63,7 @@
     test("sets marker location", function() {
         map.markers = {
             add: function(marker) {
-                deepEqual(marker.options.location, [39.57422, -105.01621]);
+                ok(new Location(39.57422, -105.01621).equals(marker.location()));
             }
         };
 
