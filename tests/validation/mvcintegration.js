@@ -126,6 +126,18 @@
         ok(span.eq(1).text(), "invalid");
     });
 
+    test("existing error message element with whitespaces in the name container is reused", function() {
+        container.append($('<input type="text" name="foo bar" required validationMessage="invalid" /><span>some text</span><span class="field-validation-valid" data-valmsg-for="foo bar" data-valmsg-replace="true"></span>')),
+        validator = setup(container, { errorTemplate: "<span>${message}</span>" });
+        validator.validate();
+
+        var span = container.find("span");
+        ok(!span.eq(0).hasClass("k-invalid-msg"));
+        ok(span.eq(1).hasClass("k-invalid-msg"));
+        ok(span.eq(1).hasClass("field-validation-error"));
+        ok(span.eq(1).text(), "invalid");
+    });
+
     test("validate returns true if input with type=text value does not match min attribute", function() {
         var input = $('<input type="text" value="11" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10" />').appendTo(QUnit.fixture),
             validator = setup(input);
