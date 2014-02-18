@@ -83,6 +83,17 @@
         kendo.culture("en-US");
     });
 
+    test("MaskInput supports escaping mask symbols", function() {
+        var numberFormat = kendo.culture().numberFormat;
+        var maskinput = new MaskInput(input, {
+            mask: "\\&"
+        });
+
+        var tokens = maskinput.tokens;
+        equal(tokens[0], "&");
+        equal(tokens.length, 1);
+    });
+
     test("MaskInput sets value on init", function() {
         var maskinput = new MaskInput(input, {
             mask: "00-00",

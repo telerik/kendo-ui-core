@@ -395,11 +395,11 @@ var __meta__ = {
             return result;
         },
 
-        //TODO: '\' (escape) support
         _tokenize: function() {
             var tokens = [];
-            var mask = this.options.mask || "";
+            var tokenIdx = 0;
 
+            var mask = this.options.mask || "";
             var maskChars = mask.split("");
             var length = maskChars.length;
             var idx = 0;
@@ -415,18 +415,23 @@ var __meta__ = {
                 rule = this.rules[char];
 
                 if (rule) {
-                    tokens[idx] = rule;
+                    tokens[tokenIdx] = rule;
                     emptyMask += emptySymbol;
                 } else {
                     if (char === "." || char === ",") {
                         char = culture.numberFormat[char];
                     } else if (char === "$") {
                         char = culture.numberFormat.currency.symbol;
+                    } else if (char === "\\") {
+                        idx += 1;
+                        char = maskChars[idx];
                     }
 
-                    tokens[idx] = char;
+                    tokens[tokenIdx] = char;
                     emptyMask += char;
                 }
+
+                tokenIdx += 1;
             }
 
             this.tokens = tokens;
