@@ -2,6 +2,7 @@
     var Class = kendo.Class,
 
         dataviz = kendo.dataviz,
+        deepExtend = kendo.deepExtend,
         g = dataviz.geometry,
         d = dataviz.drawing,
 
@@ -293,8 +294,8 @@
             equal(layer.items.length, 1);
         });
 
-        test("add sets markerDefaults", function() {
-            layer.options.markerDefaults = { foo: true };
+        test("add sets default options", function() {
+            layer.options.foo = true;
             layer.add({});
             ok(layer.items[0].options.foo);
         });
@@ -397,6 +398,54 @@
             };
 
             layer.destroy();
+        });
+
+        // ------------------------------------------------------------
+        function createBoundLayer(options) {
+            layer = new MarkerLayer(map, deepExtend({
+                dataSource: {
+                    data: [{
+                        location: [10, 10],
+                        text: "Foo"
+                    }, {
+                        location: [20, 20],
+                        text: "Foo"
+                    }]
+                }
+            }, options));
+
+            marker = layer.items[0];
+        }
+
+        module("Marker Layer / Data Binding", {
+            setup: function() {
+                map = new MapMock();
+                createBoundLayer();
+            },
+            teardown: function() {
+                map.destroy();
+            }
+        });
+
+        test("creates markers from data source", function() {
+            equal(layer.items.length, 2);
+        });
+
+        test("binds location", function() {
+            createBoundLayer({ locationField: "location" });
+            equal(marker.options.location[0], 10);
+            equal(marker.options.location[1], 10);
+        });
+
+        test("applies default shape", function() {
+            createBoundLayer({ shape: "foo" });
+            equal(marker.options.shape, "foo");
+        });
+
+        test("does not apply map.markerDefaults", function() {
+            map.markerDefaults = { foo: true };
+            createBoundLayer();
+            ok(!marker.options.foo);
         });
     })();
 

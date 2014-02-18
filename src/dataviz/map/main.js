@@ -430,9 +430,7 @@
         },
 
         _initMarkers: function() {
-            this.markers = new map.layers.MarkerLayer(this, {
-                markerDefaults: this.options.markerDefaults
-            });
+            this.markers = new map.layers.MarkerLayer(this, this.options.markerDefaults);
             this.markers.add(this.options.markers);
         },
 

@@ -1,5 +1,6 @@
 (function(f, define){
-    define([ "./base", "../location" ], f);
+    define([ "./base", "../location",
+             "../../../kendo.data", "../../../kendo.tooltip" ], f);
 })(function(){
 
 (function ($, undefined) {
@@ -11,6 +12,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
+        DataSource = kendo.data.DataSource,
         Tooltip = kendo.ui.Tooltip,
 
         dataviz = kendo.dataviz,
@@ -26,16 +28,20 @@
             Layer.fn.init.call(this, map, options);
 
             this.items = [];
+            this._initDataSource();
         },
 
         destroy: function() {
             Layer.fn.destroy.call(this);
 
+            this.dataSource.unbind("change", this._dataChange);
             this.clear();
         },
 
         options: {
-            zIndex: 1000
+            zIndex: 1000,
+            autoBind: true,
+            dataSource: {}
         },
 
         add: function(arg) {
@@ -46,13 +52,6 @@
             } else {
                 return this._addOne(arg);
             }
-        },
-
-        _addOne: function(arg) {
-            var marker = Marker.create(arg, this.options.markerDefaults);
-            marker.addTo(this);
-
-            return marker;
         },
 
         remove: function(marker) {
@@ -87,6 +86,50 @@
             for (var i = 0; i < items.length; i++) {
                 this.update(items[i]);
             }
+        },
+
+        _addOne: function(arg) {
+            var marker = Marker.create(arg, this.options);
+            marker.addTo(this);
+
+            return marker;
+        },
+
+        _initDataSource: function() {
+            var dsOptions = this.options.dataSource;
+            this._dataChange = proxy(this._dataChange, this);
+            this.dataSource = DataSource
+                .create(dsOptions)
+                .bind("change", this._dataChange);
+
+            if (dsOptions && this.options.autoBind) {
+                this.dataSource.fetch();
+            }
+        },
+
+        _dataChange: function(data) {
+            this._load(data.items);
+        },
+
+        _load: function(data) {
+            this._data = data;
+            this.clear();
+
+            var locationGetter = this._getter(this.options.locationField);
+            for (var i = 0; i < data.length; i++) {
+                // TODO: Construct marker options once
+                var marker = this.add({
+                    location: locationGetter(data[i]),
+                    tooltip: this.options.tooltip,
+                    shape: this.options.shape
+                });
+
+                marker.dataItem = data[i];
+            }
+        },
+
+        _getter: function(field) {
+            return field ? kendo.getter(this.options.locationField) : $.noop;
         }
     });
 
@@ -102,6 +145,7 @@
         },
 
         setLocation: function(loc) {
+            // TODO: Shared options. Oops!
             this.options.location = Location.create(loc);
 
             if (this.layer) {
