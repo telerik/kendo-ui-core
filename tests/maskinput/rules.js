@@ -243,4 +243,58 @@
 
         equal(input.val(), "__");
     });
+
+    test("Rule '&' allows any character", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "&&&&"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("3");
+        input.pressKey("a");
+        input.pressKey(".");
+        input.pressKey("~");
+
+        equal(input.val(), "3a.~");
+    });
+
+    test("Rule '&' does not allow space", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "&"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey(" ");
+
+        equal(input.val(), "_");
+    });
+
+    test("Rule 'C' allows any character", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "CCCC"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("3");
+        input.pressKey("a");
+        input.pressKey(".");
+        input.pressKey("~");
+
+        equal(input.val(), "3a.~");
+    });
+
+    test("Rule 'C' allows space", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "C"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey(" ");
+
+        equal(input.val(), " ");
+    });
 })();

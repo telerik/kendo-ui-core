@@ -85,7 +85,9 @@ var __meta__ = {
             "9": /\d|\s/,
             "#": /\d|\s|\+|\-/,
             "L": /[a-zA-Z]/,
-            "?": /[a-zA-Z]|\s/
+            "?": /[a-zA-Z]|\s/,
+            "&": /\S/,
+            "C": /./
         },
 
         setOptions: function(options) {
@@ -392,6 +394,10 @@ var __meta__ = {
             return result;
         },
 
+        //TODO: '.' support
+        //TODO: ',' support
+        //TODO: '$' support
+        //TODO: '\' (escape) support
         _tokenize: function() {
             var tokens = [];
             var mask = this.options.mask || "";
