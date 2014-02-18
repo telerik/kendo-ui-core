@@ -88,7 +88,9 @@ var __meta__ = {
             "L": /[a-zA-Z]/,
             "?": /[a-zA-Z]|\s/,
             "&": /\S/,
-            "C": /./
+            "C": /./,
+            "A": /[a-zA-Z0-9]/,
+            "a": /[a-zA-Z0-9]|\s/
         },
 
         setOptions: function(options) {
