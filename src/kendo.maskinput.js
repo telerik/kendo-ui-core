@@ -85,8 +85,7 @@ var __meta__ = {
             "9": /\d|\s/,
             "#": /\d|\s|\+|\-/,
             "L": /[a-zA-Z]/,
-            //"?": /[a-zA-Z]?/, //TODO: test
-            //TODO: Add support for escaping
+            "?": /[a-zA-Z]|\s/
         },
 
         setOptions: function(options) {
