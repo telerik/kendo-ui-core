@@ -16,4 +16,17 @@ if platform?('windows')
         source 'http://download.microsoft.com/download/8/D/D/8DD7BDBA-CEF7-4D8E-8C16-D9F69527F909/ENU/x64/SqlLocalDB.MSI'
         action :install
     end
+
+    remote_file "#{Chef::Config[:file_cache_path]}/VsSDK_sfx.exe" do
+        source 'http://download.microsoft.com/download/C/F/D/CFD1CDDA-3046-4D13-8A6C-793EBAFDECFE/VsSDK_sfx.exe'
+    end
+
+    execute 'Extract Visual Studio 2010 SP1 SDK' do
+        command "#{Chef::Config[:file_cache_path]}/VsSDK_sfx.exe /x:vssdk /q"
+    end
+
+    windows_package 'Visual Studio 2010 SP1 SDK' do
+        source  "C:/vssdk/vssdk.msi"
+        action :install
+    end
 end
