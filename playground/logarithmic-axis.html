@@ -19,25 +19,27 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
     </head>
     <body>
-      <!--   <div id="polar"></div>
-        <div id="radar"></div> -->
+      <--   <div id="polar"></div>
+        <div id="radar"></div> 
          <div id="reverse"></div>
         <div id="negativeValues"></div>
         <div id="scatter"></div>
        
-       <!-- <div id="log" style="height: 500px;"></div>
+        <div id="log" style="height: 500px;"></div>
         
-       <div id="chart" style="height: 500px;"></div>
-        <div id="panes"></div> -->
+    <div id="chart" style="height: 500px;"></div>-->
+     <--    
+    <div id="scatterDrag"></div>
+     <div id="panes"></div> -->
        <script>
        $("#reverse").kendoChart({            
            series: [{
-                type: "bar",
+                type: "column",
                 data: [10, 1000, 10000]
            }],
            valueAxis: {
             type: "log",
-                reverse: false,
+                reverse: true,
                 crosshair: {
                     visible: true,
                     tooltip: {
@@ -152,6 +154,24 @@
                 title: {
                     text: "The Boeing Company (NYSE:BA)"
                 },
+                  drag: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "drag");
+                  },
+                  dragEnd: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "dragEnd");
+                  },
+                  dragStart: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "dragStart");
+                  },
+                  zoom: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "zoom");
+                  },
+                  zoomEnd: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "zoomEnd");
+                  },
+                   zoomStart: function(e) {
+                    console.log("zoomStart");
+                  },
                 dateField: "Date",
                 series: [{
                     type: "column",
@@ -191,77 +211,12 @@
                     },
                     type: "log",
                     narrowRange: false,
-                    crosshair: {
-                        visible: true,
-                        tooltip: {visible: true}
+                    // crosshair: {
+                        // visible: true,
+                        // tooltip: {visible: true}
                         
-                    }
-                }],
-                categoryAxis: {
-                    notes: {
-                        data: [{
-                            value: "2001/01/01",
-                            label: {
-                                text: "01"
-                            }
-                        }, {
-                            value: "2002/01/01",
-                            label: {
-                                text: "02"
-                            }
-                        }, {
-                            value: "2003/01/01",
-                            label: {
-                                text: "03"
-                            }
-                        }, {
-                            value: "2004/01/01",
-                            label: {
-                                text: "04"
-                            }
-                        }, {
-                            value: "2005/01/01",
-                            label: {
-                                text: "05"
-                            }
-                        }, {
-                            value: "2006/01/01",
-                            label: {
-                                text: "06"
-                            }
-                        }, {
-                            value: "2007/01/01",
-                            label: {
-                                text: "07"
-                            }
-                        }, {
-                            value: "2008/01/01",
-                            label: {
-                                text: "08"
-                            }
-                        }, {
-                            value: "2009/01/01",
-                            label: {
-                                text: "09"
-                            }
-                        }, {
-                            value: "2010/01/01",
-                            label: {
-                                text: "10"
-                            }
-                        }, {
-                            value: "2011/01/01",
-                            label: {
-                                text: "11"
-                            }
-                        }, {
-                            value: "2012/01/01",
-                            label: {
-                                text: "12"
-                            }
-                        }]
-                    }
-                }
+                    // }
+                }]
             });
         }
 
@@ -379,36 +334,36 @@
             }
         });
         
-            $("#negativeValues").kendoChart({
-                title: {
-                    text: "Gross domestic product growth /GDP annual %/"
-                },
-                legend: {
-                    position: "bottom"
-                },
-                chartArea: {
-                    background: ""
-                },
-                seriesDefaults: {
-                    type: "line",
-                    style: "smooth"
-                },
-                series: [{
-                    data: [10, -1, 100],
-                    tooltip: {
-                        visible: true
-                    }
-                }],
-                valueAxis: {
-                    type: "log"
-                },
-                categoryAxis: {
-                    categories: [2002, 2003, 2004],
-                    majorGridLines: {
-                        visible: false
-                    }
-                }
-            });        
+            // $("#negativeValues").kendoChart({
+                // title: {
+                    // text: "Gross domestic product growth /GDP annual %/"
+                // },
+                // legend: {
+                    // position: "bottom"
+                // },
+                // chartArea: {
+                    // background: ""
+                // },
+                // seriesDefaults: {
+                    // type: "line",
+                    // style: "smooth"
+                // },
+                // series: [{
+                    // data: [10, -1, 100],
+                    // tooltip: {
+                        // visible: true
+                    // }
+                // }],
+                // valueAxis: {
+                    // type: "log"
+                // },
+                // categoryAxis: {
+                    // categories: [2002, 2003, 2004],
+                    // majorGridLines: {
+                        // visible: false
+                    // }
+                // }
+            // });        
         
             $("#scatter").kendoChart({
                 title: {
@@ -423,7 +378,9 @@
                 series: [{
                     name: "January 2008",
                     data: [
-                    [0.1, 5.4], [-1, 2], [10001, 3]]
+                    [0.1, 5.4], [1, 2], [10001, 3]]
+                    // data: [
+                    // [0.1, 5.4], [-1, 2], [10001, 3]]
                 }],
                 xAxis: {
                     type: "log",
@@ -493,17 +450,95 @@
                     visible: true
                 }
             },
-            // categoryAxis: {
-               // categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012],
-                // majorGridLines: {
-                    // visible: false
-                // }
-            // },
+            categoryAxis: {
+               categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012],
+                majorGridLines: {
+                    visible: false
+                }
+            },
             tooltip: {
                 visible: true,
                 template: "#= series.name #: #= value #"
             }
-        });        
+        });
+
+                var scatterData = [];
+                for (var y = -100, x = 1; x < 30; y += 0.2, x+=0.05) {
+                    
+                    scatterData.push({ x: Math.pow(10, x), y: Math.sin(y) });
+                }
+
+                // Helper function that constructs DataSource filter
+                // for the x value
+                function getFilter(xMin, xMax) {
+                    return [{
+                        field: "x",
+                        operator: "ge",
+                        value: xMin
+                    }, {
+                        field: "x",
+                        operator: "le",
+                        value: xMax
+                    }]
+                }
+                $("#scatterDrag").kendoChart({
+                    renderAs: "canvas",
+                    dataSource: {
+                        data: scatterData,
+                        filter: getFilter(100, 1000)
+                    },
+                    xAxis: {
+                        name: "xAxis",
+                        type: "log",
+                        min: 100,
+                        max: 1000
+                    },
+                    series: [{
+                        type: "scatterLine",
+                        xField: "x",
+                        yField: "y",
+                        labels: {
+                            visible: false,
+                            template: "#:value.x#"
+                        },
+                        markers: {
+                            visible: false
+                        }
+                    }],
+                    transitions: false,
+                    drag: setRange,
+                    zoom: setRange
+                });
+
+                function setRange(e) {
+                    var chart = e.sender;
+                    var ds = chart.dataSource;
+                    var options = chart.options;
+
+                    // Prevent document scrolling on mousewheel zoom
+                    e.originalEvent.preventDefault();
+
+                    var xRange = e.axisRanges.xAxis;
+                    if (xRange) {
+                        // Suggested axis ranges
+                        var xMin = xRange.min;
+                        var xMax = xRange.max;
+
+                        // Limit maximum zoom-in
+                        if (xMax - xMin < 100) {
+                            console.log(xMax - xMin);
+                            return;
+                        }
+
+                        // Set x axis range in chart options
+                        options.xAxis.min = xMin;
+                        options.xAxis.max = xMax;
+
+                        // Filters the data source and rebinds the chart
+                        // which also applies the axis limits set above
+                        ds.filter(getFilter(xMin, xMax));
+                    }
+                }     
         
        </script>
     </body>
