@@ -142,7 +142,8 @@ var __meta__ = {
                 prevVisible,
                 nextVisible,
                 placeholder = this.placeholder,
-                direction;
+                direction,
+                eventData;
 
             if(target) {
                 targetCenter = kendo.getOffset(target.element);
@@ -156,12 +157,16 @@ var __meta__ = {
 
                 prevVisible = target.element.prev();
                 nextVisible = target.element.next();
+                
+                eventData = {
+                    item: draggedElement,
+                    target: target.element,
+                    list: this,
+                    draggableEvent: e 
+                };
 
                 if(target.sortable.isEmpty()) {
-                    if(!target.sortable.trigger(BEFORE_MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e })) {
-                        target.element.append(placeholder);
-                        target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
-                    }
+                    this._movePlaceholder(target, null, eventData);
                     return;
                 }
 
@@ -185,10 +190,7 @@ var __meta__ = {
                     }
 
                     if(prevVisible[0] != placeholder[0]) {
-                        if(!target.sortable.trigger(BEFORE_MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e })) {
-                            target.element.before(placeholder);
-                            target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
-                        }
+                        this._movePlaceholder(target, direction, eventData);
                     }
                 } else if(direction === "next") {
                     while(nextVisible.length && !nextVisible.is(":visible")) {
@@ -196,10 +198,7 @@ var __meta__ = {
                     }
 
                     if(nextVisible[0] != placeholder[0]) {
-                        if(!target.sortable.trigger(BEFORE_MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e })) {
-                            target.element.after(placeholder);
-                            target.sortable.trigger(MOVE, { item: draggedElement, target: target.element, list: this, draggableEvent: e });
-                        }
+                        this._movePlaceholder(target, direction, eventData);
                     }
                 }
             }
@@ -319,6 +318,21 @@ var __meta__ = {
                         }
                     }
                 }
+            }
+        },
+
+        _movePlaceholder: function(target, direction, eventData) {
+            var placeholder = this.placeholder;
+
+            if(!target.sortable.trigger(BEFORE_MOVE, eventData)) {
+                if(!direction) { //the placeholder should be appended to the Sortable's container
+                    target.element.append(placeholder);
+                } else if (direction === "prev") { //the placeholder should be appended before target element
+                    target.element.before(placeholder);
+                } else if (direction === "next") { //the placeholder should be appended after target element
+                    target.element.after(placeholder);
+                }
+                target.sortable.trigger(MOVE, eventData);
             }
         },
 
