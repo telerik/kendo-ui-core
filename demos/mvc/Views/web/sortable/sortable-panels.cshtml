@@ -72,21 +72,13 @@
                         filter: ">div",
                         connectWith: "#main-content",
                         placeholder: placeholder,
-                        hint: hint,
-                        cursorOffset: {
-                            top: -5,
-                            left: -5
-                        }
+                        hint: hint
                     });
 
                     $("#main-content").kendoSortable({
                         connectWith: "#sidebar",
                         placeholder: placeholder,
-                        hint: hint,
-                        cursorOffset: {
-                            top: -5,
-                            left: -5
-                        }
+                        hint: hint
                     });
 
                     //exapand
@@ -156,8 +148,9 @@
                     min-height: 260px;
                     vertical-align: top;
                 }
-                .placeholder {
-                    opacity: 0.7;
+                .widget.placeholder {
+                    opacity: 0.4;
+                    border: 1px dashed #a6a6a6;
                 }
 
                 /* WIDGETS */
@@ -171,7 +164,6 @@
                 .widget:hover {
                     background-color: #fcfcfc;
                     border-color: #cccccc;
-                    cursor: move;
                 }
                 .widget div {
                     padding: 10px;
@@ -287,7 +279,6 @@
                     border-radius: 60px;
                 }
                 .hint {
-                    cursor: move;
                     width: 250px;
                     height: 100px;
                     overflow: hidden;
