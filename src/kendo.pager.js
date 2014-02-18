@@ -188,8 +188,10 @@ var __meta__ = {
 
             that.element.off(NS);
             that.dataSource.unbind(CHANGE, that._refreshHandler);
+            that._refreshHandler = null;
 
             kendo.destroy(that.element);
+            that.element = that.list = null;
         },
 
         events: [

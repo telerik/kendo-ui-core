@@ -357,6 +357,8 @@ var __meta__ = {
             that.element.off(NS);
 
             that.userEvents.destroy();
+
+            that._marquee = that._lastActive = that.element = that.userEvents = null;
         }
     });
 
