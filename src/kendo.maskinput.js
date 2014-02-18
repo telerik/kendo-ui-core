@@ -413,7 +413,7 @@ var __meta__ = {
             var numberFormat = kendo.getCulture(this.options.culture).numberFormat;
 
             for (; idx < length; idx++) {
-                char = maskChars[idx]
+                char = maskChars[idx];
                 rule = this.rules[char];
 
                 if (rule) {
