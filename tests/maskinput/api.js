@@ -189,14 +189,14 @@
         equal(maskinput.value(), "12---_");
     });
 
-    test("setOptions changes emptySymbol option", function() {
+    test("setOptions changes promptChar option", function() {
         var maskinput = new MaskInput(input, {
             mask: "(00-00)",
             value: "12"
         });
 
         maskinput.setOptions({
-            emptySymbol: " "
+            promptChar: " "
         });
 
         equal(maskinput.value(), "(12-  )");

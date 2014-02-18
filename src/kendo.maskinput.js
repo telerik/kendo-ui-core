@@ -71,7 +71,7 @@ var __meta__ = {
 
         options: {
             name: "MaskInput",
-            emptySymbol: "_", //TODO: Rename to promptChar (like in winforms)
+            promptChar: "_",
             culture: "",
             value: "",
             mask: ""
@@ -305,7 +305,7 @@ var __meta__ = {
         _mask: function(start, end, value, backward) {
             var element = this.element[0];
             var current = element.value || this._emptyMask;
-            var empty = this.options.emptySymbol;
+            var empty = this.options.promptChar;
             var valueLength;
             var charIdx = 0;
             var unmasked;
@@ -360,7 +360,7 @@ var __meta__ = {
             var charIdx = 0;
             var tokenIdx = idx || 0;
 
-            var empty = this.options.emptySymbol;
+            var empty = this.options.promptChar;
 
             var valueLength = value.length;
             var tokensLength = this.tokens.length;
@@ -407,8 +407,8 @@ var __meta__ = {
             var rule;
 
             var emptyMask = "";
-            var emptySymbol = this.options.emptySymbol;
-            var culture = kendo.getCulture(this.options.culture);
+            var promptChar = this.options.promptChar;
+            var numberFormat = kendo.getCulture(this.options.culture).numberFormat;
 
             for (; idx < length; idx++) {
                 char = maskChars[idx]
@@ -416,12 +416,12 @@ var __meta__ = {
 
                 if (rule) {
                     tokens[tokenIdx] = rule;
-                    emptyMask += emptySymbol;
+                    emptyMask += promptChar;
                 } else {
                     if (char === "." || char === ",") {
-                        char = culture.numberFormat[char];
+                        char = numberFormat[char];
                     } else if (char === "$") {
-                        char = culture.numberFormat.currency.symbol;
+                        char = numberFormat.currency.symbol;
                     } else if (char === "\\") {
                         idx += 1;
                         char = maskChars[idx];
