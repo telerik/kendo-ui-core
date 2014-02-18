@@ -403,7 +403,8 @@
                 this.element.children(0), {
                     friction: friction,
                     velocityMultiplier: VELOCITY_MULTIPLIER,
-                    zoom: zoomable
+                    zoom: zoomable,
+                    mousewheelScrolling: false
                 });
 
             scroller.bind("scroll", proxy(this._scroll, this));
