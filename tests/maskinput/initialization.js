@@ -41,6 +41,48 @@
         equal(tokens[2], maskinput.rules["0"]);
     });
 
+    test("MaskInput replace '.' token with current decimal separator", function() {
+        kendo.culture("bg-BG");
+
+        var numberFormat = kendo.culture().numberFormat;
+        var maskinput = new MaskInput(input, {
+            mask: "0.0"
+        });
+
+        var tokens = maskinput.tokens;
+        equal(tokens[1], numberFormat["."]);
+
+        kendo.culture("en-US");
+    });
+
+    test("MaskInput replace ',' token with current group separator", function() {
+        kendo.culture("bg-BG");
+
+        var numberFormat = kendo.culture().numberFormat;
+        var maskinput = new MaskInput(input, {
+            mask: "0,0"
+        });
+
+        var tokens = maskinput.tokens;
+        equal(tokens[1], numberFormat[","]);
+
+        kendo.culture("en-US");
+    });
+
+    test("MaskInput replace '$' token with current currency symbol", function() {
+        kendo.culture("bg-BG");
+
+        var numberFormat = kendo.culture().numberFormat;
+        var maskinput = new MaskInput(input, {
+            mask: "00 $"
+        });
+
+        var tokens = maskinput.tokens;
+        equal(tokens[3], numberFormat.currency.symbol);
+
+        kendo.culture("en-US");
+    });
+
     test("MaskInput sets value on init", function() {
         var maskinput = new MaskInput(input, {
             mask: "00-00",

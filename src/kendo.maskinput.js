@@ -72,6 +72,7 @@ var __meta__ = {
         options: {
             name: "MaskInput",
             emptySymbol: "_", //TODO: Rename to promptChar (like in winforms)
+            culture: "",
             value: "",
             mask: ""
         },
@@ -394,9 +395,6 @@ var __meta__ = {
             return result;
         },
 
-        //TODO: '.' support
-        //TODO: ',' support
-        //TODO: '$' support
         //TODO: '\' (escape) support
         _tokenize: function() {
             var tokens = [];
@@ -410,6 +408,7 @@ var __meta__ = {
 
             var emptyMask = "";
             var emptySymbol = this.options.emptySymbol;
+            var culture = kendo.getCulture(this.options.culture);
 
             for (; idx < length; idx++) {
                 char = maskChars[idx]
@@ -419,6 +418,12 @@ var __meta__ = {
                     tokens[idx] = rule;
                     emptyMask += emptySymbol;
                 } else {
+                    if (char === "." || char === ",") {
+                        char = culture.numberFormat[char];
+                    } else if (char === "$") {
+                        char = culture.numberFormat.currency.symbol;
+                    }
+
                     tokens[idx] = char;
                     emptyMask += char;
                 }
