@@ -170,12 +170,30 @@ div.k-grid-header .k-header
 
 .k-grid-header table,
 .k-grid-content table,
-.k-grid-footer table
+.k-grid-footer table,
+.k-grid-content-locked > table
 {
     table-layout: fixed;
 }
 
 .k-ie7 .k-grid-content table { width: auto; }
+
+/* Grid :: locked columns */
+
+.k-grid-header-locked,
+.k-grid-content-locked
+{
+    float: left;
+    overflow: hidden;  /* generally uneeded */
+    position: relative;
+    border-style: solid;
+    border-width: 0 1px 0 0;
+}
+
+.k-grid-footer-locked
+{
+    float: left;
+}
 
 .k-grid-toolbar
 {
@@ -230,6 +248,7 @@ div.k-grid-header .k-header
 
 .k-pager-wrap
 {
+    clear: both;
     overflow: hidden;
     border-style: solid;
     border-width: 1px;

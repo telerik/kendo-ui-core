@@ -214,6 +214,18 @@
     border-right-width: 1px;
 }
 
+.k-rtl .k-grid-header-locked,
+.k-rtl .k-grid-content-locked
+{
+    float: right;
+    border-width: 0 0 0 1px;
+}
+
+.k-rtl .k-grid-footer-locked
+{
+    float: right;
+}
+
 /* Editing */
 
 .k-rtl .k-edit-label,
