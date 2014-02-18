@@ -298,6 +298,69 @@
         equal(input.val(), " ");
     });
 
+    test("Rule 'A' allows alphanumeric character", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "AA"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("3");
+        input.pressKey("a");
+
+        equal(input.val(), "3a");
+    });
+
+    test("Rule 'A' does not allow non-alphanumeric characters", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "A"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey(" ");
+        input.pressKey("~");
+
+        equal(input.val(), "_");
+    });
+
+    test("Rule 'a' allows alphanumeric character", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "aa"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("3");
+        input.pressKey("a");
+
+        equal(input.val(), "3a");
+    });
+
+    test("Rule 'a' allows space", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "a"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey(" ");
+
+        equal(input.val(), " ");
+    });
+
+    test("Rule 'a' does not allow non-alphanumeric characters", 1, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "a"
+        });
+
+        input.focus();
+        caret(input[0], 0);
+        input.pressKey("~");
+
+        equal(input.val(), "_");
+    });
+
     test("Support for custom rule", 1, function() {
         MaskInput.fn.rules["~"] = /[+-]/
 
