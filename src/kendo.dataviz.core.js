@@ -2447,11 +2447,9 @@ var __meta__ = {
                 step = dir * (lineSize / (logMax - logMin)),
                 p1, p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
-            //should return undefined since the rendering will break for connected points
+
             if(a <= 0 || b <= 0) {
-                slotBox[valueAxis + 1] = -100000;
-                slotBox[valueAxis + 2] = -100000;
-                return slotBox;
+                return;
             }
             if (!defined(a)) {
                 a = b || 0;
@@ -2480,24 +2478,23 @@ var __meta__ = {
 
             return slotBox;
         },
-//TO DO: fix for reverse true
+
         getValue: function(point) {
             var axis = this,
                 options = axis.options,
                 reverse = options.reverse,
                 vertical = options.vertical,
-                max = options.max * 1,
-                min = options.min * 1,
+                lineBox = axis.lineBox(),
                 base = options.majorUnit,
                 logMin = axis.logMin,
                 logMax = axis.logMax,
-                valueAxis = vertical ? Y : X,
-                lineBox = axis.lineBox(),
-                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                dir = vertical === reverse ? 1 : -1,
+                startEdge = dir === 1 ? 1 : 2,
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
-                dir = reverse ? -1 : 1,
+                step = ((logMax - logMin) / lineSize),
+                valueAxis = vertical ? Y : X,
+                lineStart = lineBox[valueAxis + startEdge],
                 offset = dir * (point[valueAxis] - lineStart),
-                step = dir * ((logMax - logMin) / (lineSize)),
                 valueOffset = offset * step,
                 value;
 
@@ -2505,9 +2502,7 @@ var __meta__ = {
                 return null;
             }
 
-            value = vertical ?
-                    logMax - valueOffset :
-                    logMin + valueOffset;
+            value = logMin + valueOffset;
 
             return round(math.pow(base, value), DEFAULT_PRECISION);
         },
@@ -2714,16 +2709,18 @@ var __meta__ = {
                 axisOptions = deepExtend({}, axis.options, {min: seriesMin, max: seriesMax}, options),
                 min = axisOptions.min,
                 max = axisOptions.max,
-                base = axisOptions.majorUnit;
+                base = axisOptions.majorUnit,
+                logMaxRemainder;
 
             if (axisOptions.axisCrossingValue <= 0) {
                 axis._throwNegativeValuesError();
             }
 
             if (!defined(options.max)) {
+               logMaxRemainder = log(max, base) % 1;
                if (max <= 0) {
                     max = math.pow(base, 1);
-               } else if (log(max, base) % 1 < 0.3 || log(max, base) % 1 > 0.9) {
+               } else if (logMaxRemainder !== 0 && (logMaxRemainder < 0.3 || logMaxRemainder > 0.9)) {
                    max = math.pow(base, log(max, base) + 0.2);
                } else {
                    max = math.pow(base, math.ceil(log(max, base)));
