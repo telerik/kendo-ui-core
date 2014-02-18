@@ -359,6 +359,7 @@
     });
 
     test("create connection on init", function() {
+        diagram.destroy();
         diagram = $("#canvas").kendoDiagram({
             shapes: [{id: "s1"},{id: "s2"}],
             connections: [{
@@ -378,6 +379,7 @@
     });
 
     test("connections init with specific connector", function() {
+        diagram.destroy();
         diagram = $("#canvas").kendoDiagram({
             shapes: [{
                 id: "s1"
