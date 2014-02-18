@@ -377,7 +377,7 @@ var __meta__ = {
                     charIdx += 1;
                     tokenIdx += 1;
                 } else if (typeof token !== "string") {
-                    if (token.test && token.test(char)) {
+                    if ((token.test && token.test(char)) || ($.isFunction(token) && token(char))) {
                         result += char;
                         tokenIdx += 1;
                     }
