@@ -685,13 +685,15 @@ namespace :build do
     { :production => "Production", :master => "Stable" }.each do |env, destination|
         namespace env do
             desc 'Build and publish ASP.NET MVC DLLs for #{destination} distribution'
-            task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc" ] do
+            task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc", 'vs_plugin:build' ] do
                 sh "if not exist L: ( net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69 )"
 
                 target_dir = "L:\\#{destination}\\binaries\\"
 
                 sh "if not exist #{target_dir} ( mkdir #{target_dir} )"
                 sh "xcopy dist\\binaries\\* #{target_dir} /E /Y"
+
+                sh "xcopy plugins\\KendoBootstrapper\\KendoBootstrapper\\bin\\*.vsix L:\\#{destination}\\ /E /Y"
             end
 
             desc 'Copy ASP.NET MVC DLLs from distribution archive'
