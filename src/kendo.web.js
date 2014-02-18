@@ -37,6 +37,7 @@
         "./kendo.imagebrowser",
         "./kendo.editor",
         "./kendo.numerictextbox",
+        "./kendo.maskinput",
         "./kendo.menu",
         "./kendo.editable",
         "./kendo.filtermenu",
