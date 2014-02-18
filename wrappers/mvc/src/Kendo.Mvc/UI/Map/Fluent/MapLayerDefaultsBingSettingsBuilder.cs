@@ -18,9 +18,9 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         //>> Fields
-
+        
         /// <summary>
-        /// The attribution of all bing layers.
+        /// The attribution of all Bing (tm) layers.
         /// </summary>
         /// <param name="value">The value that configures the attribution.</param>
         public MapLayerDefaultsBingSettingsBuilder Attribution(string value)
@@ -29,21 +29,20 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
+        
         /// <summary>
-        /// The the opacity of all bing layers.
+        /// The the opacity of all Bing (tm) tile layers.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public MapLayerDefaultsBingSettingsBuilder Opacity(string value)
+        public MapLayerDefaultsBingSettingsBuilder Opacity(double value)
         {
             container.Opacity = value;
 
             return this;
         }
-
-
+        
         /// <summary>
-        /// The key of all bing layers.
+        /// The key of all Bing (tm) tile layers.
         /// </summary>
         /// <param name="value">The value that configures the key.</param>
         public MapLayerDefaultsBingSettingsBuilder Key(string value)
@@ -52,7 +51,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-
+        
         //<< Fields
     }
 }

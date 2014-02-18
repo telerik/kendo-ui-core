@@ -9,18 +9,21 @@ namespace Kendo.Mvc.UI
     {
         public MapControlsZoomSettings()
         {
-            //>> Initialization       
-            //<< Initialization            
+            //>> Initialization
+        
+        //<< Initialization            
         }
 
-        //>> Fields       
+        //>> Fields
+        
         //<< Fields
         public MapControlPosition? Position { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-            //<< Serialization
+        
+        //<< Serialization
             if (Position.HasValue)
             {
                 var pos = Position.ToString();

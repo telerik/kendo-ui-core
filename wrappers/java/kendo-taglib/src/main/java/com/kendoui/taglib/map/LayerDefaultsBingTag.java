@@ -67,11 +67,11 @@ public class LayerDefaultsBingTag extends  BaseTag  /* interfaces */ /* interfac
         setProperty("key", value);
     }
 
-    public java.lang.String getOpacity() {
-        return (java.lang.String)getProperty("opacity");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setOpacity(java.lang.String value) {
+    public void setOpacity(float value) {
         setProperty("opacity", value);
     }
 

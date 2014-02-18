@@ -11,39 +11,39 @@ namespace Kendo.Mvc.UI
         public MapLayerDefaultsBingSettings()
         {
             //>> Initialization
-
+        
         //<< Initialization
         }
 
         //>> Fields
-
+        
         public string Attribution { get; set; }
-
-        public string Opacity { get; set; }
-
+        
+        public double? Opacity { get; set; }
+        
         public string Key { get; set; }
-
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-
+        
             if (Attribution.HasValue())
             {
                 json["attribution"] = Attribution;
             }
-
-            if (Opacity.HasValue())
+            
+            if (Opacity.HasValue)
             {
                 json["opacity"] = Opacity;
             }
-
+                
             if (Key.HasValue())
             {
                 json["key"] = Key;
             }
-
+            
         //<< Serialization
         }
     }

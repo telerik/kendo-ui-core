@@ -50,7 +50,8 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-            //<< Serialization
+        
+        //<< Serialization
 
             if (Attribution != null)
             {

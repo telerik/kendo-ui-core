@@ -15,8 +15,15 @@ module CodeGen::MVC::Wrappers
         'Date' => 'DateTime'
     }
 
+    FIELD_TYPES = {
+        'map.layers.extent' => 'double[]'
+    }
+
     SERIALIZATION_SKIP_LIST = [
         'map.center',
+        'map.controls.attribution',
+        'map.controls.navigator',
+        'map.controls.zoom',
         'map.layers.datasource',
         'map.markers.position',
         'actionsheet.items.text',
@@ -26,12 +33,19 @@ module CodeGen::MVC::Wrappers
         'splitview.panes.id'
     ]
 
+    FLUENT_SKIP_LIST = [
+        'map.layers'
+    ]
+
     IGNORED = [
         'map.center',
+        'map.controls.attribution.position',
+        'map.controls.navigator.position',
+        'map.controls.zoom.position',
         'map.layers.datasource',
         'map.layerdefaults.tile.subdomains',
         'map.layers.subdomains',
-        'map.markerDefaults',
+        'map.markerdefaults',
         'map.markers',
         'popover.popup.direction',
         'layout.id',
@@ -58,7 +72,7 @@ module CodeGen::MVC::Wrappers
         //<< Fields})
 
         FIELD_DECLARATION = ERB.new(%{
-        public <%= csharp_type == 'string' ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
+        public <%= csharp_type == 'string' || is_csharp_array ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
         })
 
         FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
@@ -72,7 +86,7 @@ module CodeGen::MVC::Wrappers
         public <%= csharp_class %> <%= csharp_name %>
         {
             get;
-            private set;
+            set;
         }
         })
 
@@ -89,7 +103,7 @@ module CodeGen::MVC::Wrappers
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
-        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= csharp_type %> value)
+        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= is_csharp_array ? 'params ' : '' %><%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
 
@@ -191,7 +205,7 @@ module CodeGen::MVC::Wrappers
             if values
                 "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
             else
-                TYPES[type[0]]
+                FIELD_TYPES[full_name] || TYPES[type[0]]
             end
         end
 
@@ -207,6 +221,10 @@ module CodeGen::MVC::Wrappers
             FLUENT_FIELD_DECLARATION.result(binding)
         end
 
+	def is_csharp_array
+	    csharp_type.match(/\[\]$/)
+        end
+
         def to_client_option
             if csharp_type.eql?('string')
                 return ERB.new(%{
@@ -216,6 +234,15 @@ module CodeGen::MVC::Wrappers
             }
             }).result(binding)
             end
+
+	    if is_csharp_array
+	    	return ERB.new(%{
+            if (<%=csharp_name%> != null)
+            {
+                json["<%= name %>"] = <%=csharp_name%>;
+            }
+	    }).result(binding)
+	    end
 
             ERB.new(%{
             if (<%= csharp_name %>.HasValue)
@@ -348,7 +375,9 @@ module CodeGen::MVC::Wrappers
                 match = fields.match("//>> #{o.csharp_name}$(.|\n)*//<< #{o.csharp_name}$")
 
                 if match.nil?
-                    o.to_fluent
+                    unless FLUENT_SKIP_LIST.include?(o.full_name)
+                        o.to_fluent
+                    end
                 else
                     "\n\t\t#{match[0]}\n"
                 end

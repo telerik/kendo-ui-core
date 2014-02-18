@@ -20,6 +20,38 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// Configures or disables the built-in attribution control.
+        /// </summary>
+        /// <param name="configurator">The action that configures the attribution.</param>
+        public MapControlsSettingsBuilder Attribution(Action<MapControlsAttributionSettingsBuilder> configurator)
+        {
+            configurator(new MapControlsAttributionSettingsBuilder(container.Attribution));
+            return this;
+        }
+        
+        /// <summary>
+        /// Configures or disables the built-in navigator control (directional pad).
+        /// </summary>
+        /// <param name="configurator">The action that configures the navigator.</param>
+        public MapControlsSettingsBuilder Navigator(Action<MapControlsNavigatorSettingsBuilder> configurator)
+        {
+            configurator(new MapControlsNavigatorSettingsBuilder(container.Navigator));
+            return this;
+        }
+        
+        /// <summary>
+        /// Configures or disables the built-in zoom control (+/- button).
+        /// </summary>
+        /// <param name="configurator">The action that configures the zoom.</param>
+        public MapControlsSettingsBuilder Zoom(Action<MapControlsZoomSettingsBuilder> configurator)
+        {
+            configurator(new MapControlsZoomSettingsBuilder(container.Zoom));
+            return this;
+        }
+        
+        //<< Fields
+
+        /// <summary>
         /// Enables or disables the built-in attribution control.
         /// </summary>
         /// <param name="visible">A value indicating if the attribution control should be visible.</param>
@@ -30,16 +62,6 @@ namespace Kendo.Mvc.UI.Fluent
                 container.Attribution = null;
             }
 
-            return this;
-        }
-
-        /// <summary>
-        /// Configures the built-in attribution control.
-        /// </summary>
-        /// <param name="configurator">The action that configures the attribution.</param>
-        public MapControlsSettingsBuilder Attribution(Action<MapControlsAttributionSettingsBuilder> configurator)
-        {
-            configurator(new MapControlsAttributionSettingsBuilder(container.Attribution));
             return this;
         }
 
@@ -56,16 +78,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
-        /// <summary>
-        /// Enables or disables the built-in navigator control (directional pad).
-        /// </summary>
-        /// <param name="configurator">The action that configures the navigator.</param>
-        public MapControlsSettingsBuilder Navigator(Action<MapControlsNavigatorSettingsBuilder> configurator)
-        {
-            configurator(new MapControlsNavigatorSettingsBuilder(container.Navigator));
-            return this;
-        }
 
         /// <summary>
         /// Enables or disables the built-in zoom control.
@@ -80,18 +92,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
-        /// <summary>
-        /// Enables or disables the built-in zoom control (+/- button).
-        /// </summary>
-        /// <param name="configurator">The action that configures the zoom.</param>
-        public MapControlsSettingsBuilder Zoom(Action<MapControlsZoomSettingsBuilder> configurator)
-        {
-            configurator(new MapControlsZoomSettingsBuilder(container.Zoom));
-            return this;
-        }
-        
-        //<< Fields        
     }
 }
 

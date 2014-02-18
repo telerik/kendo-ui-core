@@ -47,7 +47,7 @@ class MapLayerDefaultsTile extends \Kendo\SerializableObject {
 
     /**
     * The the opacity of all tile layers.
-    * @param string $value
+    * @param float $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaultsTile
     */
     public function opacity($value) {

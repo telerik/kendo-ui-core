@@ -47,7 +47,7 @@
         show: function() {
             this.reset();
             this._activate();
-            this._applyCoverage(true);
+            this._applyExtent(true);
         },
 
         hide: function() {
@@ -56,39 +56,26 @@
         },
 
         reset: function() {
-            this._applyCoverage();
+            this._applyExtent();
         },
 
         _resize: $.noop,
 
         _panEnd: function() {
-            this._applyCoverage();
+            this._applyExtent();
         },
 
-        _applyCoverage: function() {
-            var coverage = this.options.coverage;
-            var inCoverage = true;
-            if (coverage) {
-                var zoom = this.map.zoom();
-                var extent = this.map.extent();
+        _applyExtent: function() {
+            var options = this.options;
 
-                for (var i = 0; i < coverage.length; i++) {
-                    var rule = coverage[i];
+            var zoom = this.map.zoom();
+            var matchMinZoom = !defined(options.minZoom) || zoom >= options.minZoom;
+            var matchMaxZoom = !defined(options.maxZoom) || zoom <= options.maxZoom;
 
-                    var below = defined(rule.minZoom) && zoom < rule.minZoom;
-                    var above = defined(rule.maxZoom) && zoom > rule.maxZoom;
+            var extent = Extent.create(options.extent);
+            var inside = !extent || extent.overlaps(this.map.extent());
 
-                    var ruleExtent = Extent.create(rule.extent);
-                    var outside = ruleExtent && !ruleExtent.overlaps(extent);
-
-                    if (below || above || outside) {
-                        inCoverage = false;
-                        break;
-                    }
-                }
-            }
-
-            this._setVisibility(inCoverage);
+            this._setVisibility(matchMinZoom && matchMaxZoom && inside);
         },
 
         _setVisibility: function(visible) {

@@ -19,6 +19,8 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> Fields
         
+        //<< Fields
+
         /// <summary>
         /// The position of the attribution control. Possible values include:
         /// </summary>
@@ -29,8 +31,6 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
-        //<< Fields
     }
 }
 

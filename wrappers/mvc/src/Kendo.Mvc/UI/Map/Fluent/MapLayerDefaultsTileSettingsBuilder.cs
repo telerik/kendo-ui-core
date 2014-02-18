@@ -45,7 +45,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The the opacity of all tile layers.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public MapLayerDefaultsTileSettingsBuilder Opacity(string value)
+        public MapLayerDefaultsTileSettingsBuilder Opacity(double value)
         {
             container.Opacity = value;
 

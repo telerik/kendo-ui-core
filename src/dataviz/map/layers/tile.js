@@ -59,14 +59,11 @@
         _activate: function() {
             Layer.fn._activate.call(this);
 
-            if (!this._panEnd) {
-                this._panEnd = proxy(this._render, this);
-                this._pan = proxy(this._pan, this);
-            }
+            if (!kendo.support.mobileOS) {
+                if (!this._pan) {
+                    this._pan = proxy(this._throttleRender, this);
+                }
 
-            if (kendo.support.mobileOS) {
-                this.map.bind("panEnd", this._panEnd);
-            } else {
                 this.map.bind("pan", this._pan);
             }
         },
@@ -74,8 +71,9 @@
         _deactivate: function() {
             Layer.fn._deactivate.call(this);
 
-            this.map.unbind("panEnd", this._panEnd);
-            this.map.unbind("pan", this._pan);
+            if (this._pan) {
+                this.map.unbind("pan", this._pan);
+            }
         },
 
         _updateView: function() {
@@ -96,15 +94,20 @@
             this._render();
         },
 
-        _pan: function() {
+        _throttleRender: function() {
             var layer = this,
                 now = new Date(),
-                timestamp = layer._pan.timestamp;
+                timestamp = layer._renderTimestamp;
 
             if (!timestamp || now - timestamp > 100) {
                 this._render();
-                layer._pan.timestamp = now;
+                layer._renderTimestamp = now;
             }
+        },
+
+        _panEnd: function(e) {
+            Layer.fn._panEnd.call(this, e);
+            this._render();
         },
 
         _render: function() {
