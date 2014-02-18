@@ -138,7 +138,7 @@
         },
         teardown: function() {
             window.removeMocksIn(window.kendo.ui.Diagram.fn);
-            delete window.initDiagram;
+            delete window.initLayoutDiagram;
             diagram.destroy();
         }
     });
@@ -356,6 +356,52 @@
         teardown: function () {
             diagram.destroy();
         }
+    });
+
+    test("create connection on init", function() {
+        diagram = $("#canvas").kendoDiagram({
+            shapes: [{id: "s1"},{id: "s2"}],
+            connections: [{
+                from: { shapeId: "s1" },
+                to: { shapeId: "s2" }
+            }]
+        }).getKendoDiagram();
+
+        equal(diagram.connections.length, 1, "one connection should be created");
+
+        var connection = diagram.connections[0],
+            source = connection.source(),
+            target = connection.target();
+
+        equal(source.shape.id, "s1", "source should be the from shape");
+        equal(target.shape.id, "s2", "target should be the to shape");
+    });
+
+    test("connections init with specific connector", function() {
+        diagram = $("#canvas").kendoDiagram({
+            shapes: [{
+                id: "s1"
+            },{
+                id: "s2"
+            }],
+            connections: [{
+                from: {
+                    shapeId: "s1",
+                    connector: "bottom"
+                },
+                to: {
+                    shapeId: "s2",
+                    connector: "top"
+                }
+            }]
+        }).getKendoDiagram();
+
+        var connection = diagram.connections[0],
+            source = connection.source(),
+            target = connection.target();
+
+        equal(source.options.name, "Bottom", "source connector is specific");
+        equal(target.options.name, "Top", "target connector is specific");
     });
 
     test("Connection connect - set auto connectors test", function () {
