@@ -1,16 +1,18 @@
 @android-main-color: #fff;
 @android-background-color: #000;
 @android-active-color: #fff;
-@android-active-background: #33b5e5;
-@android-border-color: #e7e7e7;
+@android-active-background: orangered;
 @android-gray: #7f7f7f;
-@android-light-background-color: lighten(@android-background-color, 13.5%);
+@android-border-color: fade(@android-gray, 70%);
+@android-lighter-background-color: lighten(@android-background-color, 13.5%);
 
 @android-button-color: fade(@android-gray, 50%);
 @android-transparent: fade(@android-background-color, 0);
 @android-dark-border-color: darken(@android-button-color, 20%);
 @android-light-border-color: lighten(@android-button-color, 20%);
 
+@android-light-main-color: @android-lighter-background-color;
+@android-light-background-color: darken(@android-main-color, 13.5%);
 
 /* Colors */
 
@@ -19,7 +21,7 @@
 .km-android .km-footer,
 .km-android .km-content,
 .km-android .km-pane,
-.km-android .km-scroll-header .km-group-title
+.km-android .km-scroll-header .km-group-title,
 .km-android input[type=password],
 .km-android input[type=search],
 .km-android input[type=number],
@@ -31,6 +33,25 @@
 {
     background: @android-background-color;
     outline-color: @android-background-color;
+}
+
+.km-android-light,
+.km-android-light .km-header,
+.km-android-light .km-footer,
+.km-android-light .km-content,
+.km-android-light .km-pane,
+.km-android-light .km-scroll-header .km-group-title,
+.km-android-light input[type=password],
+.km-android-light input[type=search],
+.km-android-light input[type=number],
+.km-android-light input[type=tel],
+.km-android-light input[type=url],
+.km-android-light input[type=email],
+.km-android-light input[type=text]:not(.k-input),
+.km-root .km-android-light textarea
+{
+    background: @android-light-background-color;
+    outline-color: @android-light-background-color;
 }
 
 .km-android .km-navbar,
@@ -48,6 +69,20 @@
     background-color: @android-background-color;
 }
 
+.km-android-light .km-navbar,
+.km-android-light .km-toolbar,
+.km-android-light .km-button,
+.km-android-light .km-switch,
+.km-android-light .km-buttongroup,
+.km-android-light .km-tabstrip,
+.km-android-light .km-popup .k-item,
+.km-android-light .km-actionsheet > li > a,
+.km-android-light select:not([multiple]):focus option
+{
+    color: @android-light-main-color;
+    background-color: @android-light-background-color;
+}
+
 .km-android input,
 .km-android select,
 .km-android textarea,
@@ -55,6 +90,14 @@
 {
     color: @android-main-color;
     border-color: @android-border-color;
+}
+
+.km-android-light input,
+.km-android-light select,
+.km-android-light textarea,
+.km-android-light .km-widget
+{
+    color: @android-light-main-color;
 }
 
 .km-android,
@@ -79,7 +122,12 @@
 
 .km-android .km-switch-container
 {
-    background: @android-light-background-color;
+    background: lighten(@android-background-color, 13.5%);
+}
+
+.km-android .km-switch-container
+{
+    background: darken(@android-light-background-color, 13.5%);
 }
 
 /* Badges & Details */
@@ -98,6 +146,14 @@
     background-color: #B01B1A;
 }
 
+.km-android-light .km-badge,
+.km-android-light .km-detail,
+.km-android-light .km-rowdelete
+{
+    .linear-gradient-image(top, fade(@android-light-main-color, 50%), @android-light-border-color 50%, fade(@android-light-main-color, 10%) 50%, fade(@android-light-main-color, 0));
+    border-color: @android-light-main-color;
+}
+
 .km-android .km-detail .km-text
 {
     border-left-color: lighten(@android-background-color, 86.5%);
@@ -108,8 +164,6 @@
     background-color: #24870D;
 }
 
-/* ButtonGroup */
-
 /* TabStrip */
 
 .km-android .km-tabstrip
@@ -117,11 +171,16 @@
     border-bottom-color: fade(@android-main-color, 40%);
 }
 
+.km-android-light .km-tabstrip
+{
+    border-bottom-color: fade(@android-light-main-color, 40%);
+}
+
 /* NavBar */
 
 .km-android .km-header
 {
-    .box-shadow(0 2px 0 @android-light-background-color, 0 -2px 0 @android-light-background-color);
+    .box-shadow(0 2px 0 @android-lighter-background-color, 0 -2px 0 @android-lighter-background-color);
 }
 
 .km-android .km-navbar [class*=item] .km-text,
@@ -135,12 +194,29 @@
     border-right-color: fade(@android-main-color, 40%);
 }
 
+.km-android-light .km-navbar [class*=item] .km-text,
+.km-android-light .km-tabstrip .km-text
+{
+    border-right-color: fade(@android-light-background-color, 26.5%);
+}
+
+.km-android-light .km-navbar [class*=item] .km-text
+{
+    border-right-color: fade(@android-light-main-color, 40%);
+}
+
 /* ListView */
 
 .km-android .km-list > li
 {
-    -webkit-box-shadow: 0 1px 1px fade(@android-main-color, 10%);
-    box-shadow: 0 -1px 0 fade(@android-main-color, 10%);
+    -webkit-box-shadow: 0 1px 1px fade(@android-main-color, 13.5%);
+    box-shadow: 0 -1px 0 fade(@android-main-color, 13.5%);
+}
+
+.km-android-light .km-list > li
+{
+    -webkit-box-shadow: 0 1px 1px fade(@android-light-main-color, 13.5%);
+    box-shadow: 0 -1px 0 fade(@android-light-main-color, 13.5%);
 }
 
 .km-android .km-group-title
@@ -150,15 +226,27 @@
     box-shadow: inset 0 -1px 0 fade(@android-main-color, 30%);
 }
 
+.km-android-light .km-group-title
+{
+    color: fade(@android-light-main-color, 40%);
+    -webkit-box-shadow: inset 0 -1px 1px fade(@android-light-main-color, 30%);
+    box-shadow: inset 0 -1px 0 fade(@android-light-main-color, 30%);
+}
+
 .km-android .km-scroll-header .km-group-title
 {
     border-bottom-color: lighten(@android-background-color, 20%);
 }
 
+.km-android-light .km-scroll-header .km-group-title
+{
+    border-bottom-color: lighten(@android-light-background-color, 20%);
+}
+
 .km-android .km-filter-wrap:before,
 .km-android .km-filter-reset .km-clear
 {
-	color: #adadad;
+	color: @android-border-color;
 }
 
 .km-android .km-item label:before
@@ -169,12 +257,26 @@
     .box-shadow(0 0 1px 2px #808080);
 }
 
+.km-android-light .km-item label:before
+{
+    border-color: @android-light-background-color;
+    background-color: darken(@android-light-background-color, 21%);
+    .linear-gradient-image(top, darken(@android-light-background-color, 21%), darken(@android-light-background-color, 17%));
+    .box-shadow(0 0 1px 2px @android-gray);
+}
+
 /* Icons */
 
 .km-android .km-button .km-icon,
 .km-android .km-navbar .km-icon
 {
     color: fade(@android-main-color, 80%);
+}
+
+.km-android-light .km-button .km-icon,
+.km-android-light .km-navbar .km-icon
+{
+    color: fade(@android-light-main-color, 80%);
 }
 
 .km-android .km-tabstrip .km-icon
@@ -246,10 +348,55 @@
     .box-shadow(2px 2px 5px @android-dark-border-color);
 }
 
+.km-android-light .km-actionsheet,
+.km-android-light .km-popup .k-list-container
+{
+    background: @android-light-background-color;
+}
+
 .km-android .km-popup .k-item,
 .km-android .km-actionsheet > li > a
 {
     border-color: fade(@android-main-color, 20%);
+}
+
+.km-android-light .km-popup .k-item,
+.km-android-light .km-actionsheet > li > a
+{
+    border-color: fade(@android-light-main-color, 20%);
+}
+
+.km-android .km-popup-arrow:before
+{
+    border-color: rgba(0,0,0,.5) transparent;
+}
+
+.km-android .km-left .km-popup-arrow:before,
+.km-android .km-right .km-popup-arrow:before
+{
+    border-color: transparent rgba(0,0,0,.5);
+}
+
+.km-android .km-popup-arrow:after
+{
+    border-color: @android-background-color transparent;
+}
+
+.km-android .km-left .km-popup-arrow:after,
+.km-android .km-right .km-popup-arrow:after
+{
+    border-color: transparent @android-background-color;
+}
+
+.km-android-light .km-popup-arrow:after
+{
+    border-color: @android-light-background-color transparent;
+}
+
+.km-android-light .km-left .km-popup-arrow:after,
+.km-android-light .km-right .km-popup-arrow:after
+{
+    border-color: transparent @android-light-background-color;
 }
 
 /* Checkboxes and Radios */
@@ -268,6 +415,20 @@
     .box-shadow(0 0 1px lighten(@android-background-color, 86.5%));
 }
 
+.km-android-light .km-listview-label input[type=radio],
+.km-android-light .km-listview-label input[type=checkbox]
+{
+    border-color: lighten(@android-light-background-color, 33.5%);
+    .box-shadow(0 0 1px lighten(@android-light-background-color, 33.5%));
+}
+
+.km-android-light .km-state-active input[type=radio],
+.km-android-light .km-state-active input[type=checkbox]
+{
+    border-color: lighten(@android-light-background-color, 86.5%);
+    .box-shadow(0 0 1px lighten(@android-light-background-color, 86.5%));
+}
+
 /* SplitView */
 
 .km-android .km-splitview .km-pane:last-child
@@ -280,7 +441,13 @@
 {
     border-color: fade(darken(@android-main-color, 50%), 40%);
     .box-shadow(inset 0 0 1px 1px @android-background-color);
-    background: #202125 none;
+}
+
+.km-android-light .km-popup.km-pane .km-view,
+.km-android-light .km-splitview .km-pane:last-child .km-content
+{
+    border-color: fade(darken(@android-light-main-color, 50%), 40%);
+    .box-shadow(inset 0 0 1px 1px @android-light-background-color);
 }
 
 /* ModalView */
@@ -296,11 +463,27 @@
     .box-shadow(inset 0 -2px fade(@android-main-color, 10%));
 }
 
+.km-android-light .km-modalview
+{
+    .box-shadow(0 0 10px @android-dark-border-color, 0 0 2px fade(@android-light-main-color, 70%));
+    border-color: @android-light-background-color;
+}
+
+.km-android-light .km-modalview .km-view-title
+{
+    .box-shadow(inset 0 -2px fade(@android-light-main-color, 10%));
+}
+
 /* Tablet Styles */
 
 .km-tablet .km-android *:not(.km-actionsheet-phone) > .km-actionsheet
 {
     .box-shadow(0 0 7px @android-background-color);
+}
+
+.km-tablet .km-android-light *:not(.km-actionsheet-phone) > .km-actionsheet
+{
+    .box-shadow(0 0 7px darken(@android-light-background-color, 20%));
 }
 
 
@@ -322,6 +505,7 @@
 .km-android .km-widget .k-state-focused,
 .km-android .km-widget .k-state-selected,
 .km-android .km-popup > .k-list-container,
+.km-android .km-state-active .km-detail,
 .km-android .km-state-active .km-listview-link,
 .km-android .km-state-active .km-listview-label
 {
@@ -358,10 +542,8 @@
 .km-android .km-state-active .km-switch-label-off,
 .km-android .km-state-active .km-text,
 .km-android .km-state-active .km-icon,
-.km-android .km-state-active.km-contactadd:after,
-.km-android .km-state-active.km-rowdelete:after,
-.km-android .km-state-active.km-rowinsert:after,
-.km-android .km-state-active.km-detaildisclose:after
+.km-android .km-state-active.km-detail:after,
+.km-android .km-state-active .km-detail:after
 {
     color: @android-active-color;
 }
@@ -409,6 +591,24 @@
     text-shadow: 5000px 0 1px @android-active-color;
 }
 
+.km-android .km-actionsheet > li > a:hover > *,
+.km-android .km-actionsheet > li > a:focus > *,
+.km-android .km-actionsheet > li > a:active > *,
+.km-android .km-popup .k-state-hover > *,
+.km-android .km-popup .k-state-focused > *,
+.km-android .km-popup .k-state-selected > *,
+.km-android .km-state-active .km-listview-link > *,
+.km-android .km-state-active .km-listview-label > *,
+.km-android li.km-actionsheet-cancel > a:hover > *,
+.km-android li.km-actionsheet-cancel > a:focus > *,
+.km-android li.km-actionsheet-cancel > a:active > *,
+.km-android .km-badge > *
+{
+    text-indent: 0;
+    text-shadow: none;
+    color: @android-active-color
+}
+
 .km-android select:focus,
 .km-android textarea:focus,
 .km-android.km-pane input:focus,
@@ -427,6 +627,17 @@
 .km-android .km-state-active input[type=checkbox]:before
 {
     background-color: fade(@android-background-color, 20%);
+}
+
+.km-android-light .km-listview-label input[type=checkbox]:checked:after
+{
+    text-shadow: 0 1px 1px fade(@android-light-background-color, 20%);
+}
+
+.km-android-light .km-state-active input[type=radio]:before,
+.km-android-light .km-state-active input[type=checkbox]:before
+{
+    background-color: fade(@android-light-background-color, 20%);
 }
 
 .km-android .km-icon:before,
