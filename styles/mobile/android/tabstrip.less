@@ -9,8 +9,6 @@
     display: table;
     padding: 0;
     background-clip: padding-box;
-    border-bottom-width: @android-border-width;
-    border-bottom-style: solid;
 }
 
 .km-android .km-tabstrip .km-text
@@ -62,5 +60,15 @@
 .km-android .km-tabstrip .km-state-active .km-icon
 {
     color: inherit;
+}
+
+.km-android .km-tabstrip .km-icon:before
+{
+    display: none;
+}
+
+.km-android .km-tabstrip .km-state-active .km-icon:before
+{
+    display: block;
 }
 

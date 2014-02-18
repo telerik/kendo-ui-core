@@ -1,8 +1,8 @@
 @android-main-color: #fff;
 @android-background-color: #000;
 @android-active-color: #fff;
-@android-active-background: orangered;
-@android-gray: #7f7f7f;
+@android-active-background: #33b5e5;
+@android-gray: #999;
 @android-border-color: fade(@android-gray, 70%);
 @android-lighter-background-color: lighten(@android-background-color, 13.5%);
 
@@ -11,8 +11,8 @@
 @android-dark-border-color: darken(@android-button-color, 20%);
 @android-light-border-color: lighten(@android-button-color, 20%);
 
-@android-light-main-color: @android-lighter-background-color;
-@android-light-background-color: darken(@android-main-color, 13.5%);
+@android-light-main-color: #222;
+@android-light-background-color: #fcfcfc;
 
 /* Colors */
 
@@ -59,7 +59,6 @@
 .km-android .km-button,
 .km-android .km-switch,
 .km-android .km-buttongroup,
-.km-android .km-tabstrip,
 .km-android .km-popup .k-item,
 .km-android .km-actionsheet > li > a,
 .km-android select:not([multiple]):focus option
@@ -81,6 +80,16 @@
 {
     color: @android-light-main-color;
     background-color: @android-light-background-color;
+}
+
+.km-android-light .km-navbar,
+.km-android-light .km-toolbar,
+.km-android-light .km-switch,
+.km-android-light .km-tabstrip,
+.km-android-light .km-popup .k-item,
+.km-android-light .km-actionsheet > li > a
+{
+    background-color: darken(@android-light-background-color, 7.5%);
 }
 
 .km-android input,
@@ -107,6 +116,13 @@
     -webkit-gradient: linear, 0 0, 0 100%, from(@android-transparent), to(@android-light-border-color);
 }
 
+.km-android .km-navbar,
+.km-android .km-toolbar,
+.km-android .km-tabstrip
+{
+    .box-shadow(0 0 3px @android-gray);
+}
+
 /* Button */
 
 .km-android .km-button,
@@ -125,7 +141,7 @@
     background: lighten(@android-background-color, 13.5%);
 }
 
-.km-android .km-switch-container
+.km-android-light .km-switch-container
 {
     background: darken(@android-light-background-color, 13.5%);
 }
@@ -284,6 +300,11 @@
     color: fade(@android-main-color, 40%);
 }
 
+.km-android-light .km-tabstrip .km-icon
+{
+    color: fade(@android-light-main-color, 40%);
+}
+
 /* Loading */
 
 .km-android .km-loader
@@ -308,6 +329,14 @@
 .km-root .km-android textarea
 {
     border-color: @android-button-color;
+}
+
+.km-android input[type=radio],
+.km-android input[type=checkbox]
+{
+    color: @android-button-color;
+    border-color: currentcolor;
+    .box-shadow(0 0 1px currentcolor);
 }
 
 .km-android input[type=month],
@@ -390,36 +419,22 @@
 
 .km-android-light .km-popup-arrow:after
 {
-    border-color: @android-light-background-color transparent;
+    border-color: darken(@android-light-background-color, 7.5%) transparent;
 }
 
 .km-android-light .km-left .km-popup-arrow:after,
 .km-android-light .km-right .km-popup-arrow:after
 {
-    border-color: transparent @android-light-background-color;
+    border-color: transparent darken(@android-light-background-color, 7.5%);
 }
 
 /* Checkboxes and Radios */
-
-.km-android .km-listview-label input[type=radio],
-.km-android .km-listview-label input[type=checkbox]
-{
-    border-color: lighten(@android-background-color, 33.5%);
-    .box-shadow(0 0 1px lighten(@android-background-color, 33.5%));
-}
 
 .km-android .km-state-active input[type=radio],
 .km-android .km-state-active input[type=checkbox]
 {
     border-color: lighten(@android-background-color, 86.5%);
     .box-shadow(0 0 1px lighten(@android-background-color, 86.5%));
-}
-
-.km-android-light .km-listview-label input[type=radio],
-.km-android-light .km-listview-label input[type=checkbox]
-{
-    border-color: lighten(@android-light-background-color, 33.5%);
-    .box-shadow(0 0 1px lighten(@android-light-background-color, 33.5%));
 }
 
 .km-android-light .km-state-active input[type=radio],
@@ -606,7 +621,7 @@
 {
     text-indent: 0;
     text-shadow: none;
-    color: @android-active-color
+    color: @android-active-color;
 }
 
 .km-android select:focus,
@@ -662,6 +677,7 @@
 .km-android select:focus,
 .km-android textarea:focus,
 .km-android input:checked,
+.km-android .km-touch-scrollbar,
 .km-android .km-widget .k-state-focused,
 .km-android .km-widget .km-state-active
 {
