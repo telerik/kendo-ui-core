@@ -10,7 +10,12 @@
             form.submit();
         },
         addBaseRedirectTag: function (code, baseUrl) {
-            return code.replace("<head>", "<head>\n" + '<base href="' + baseUrl + '">');
+            return code.replace(
+                '<head>',
+                '<head>\n' +
+                '    <base href="' + baseUrl + '">\n' +
+                '    <style>body { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>'
+            );
         },
         fixLineEndings: function (code) {
             return code.replace(/\n/g, "&#10;");
