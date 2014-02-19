@@ -3416,7 +3416,10 @@ var __meta__ = {
         },
 
         _headerCells: function() {
-            return this.thead.find("th").filter(function() { return !$(this).hasClass("k-hierarchy-cell,k-group-cell"); });
+            return this.thead.find("th").filter(function() {
+                var th = $(this);
+                return !th.hasClass("k-group-cell") && !th.hasClass("k-hierarchy-cell");
+            });
         },
 
         _filterable: function() {
