@@ -140,8 +140,6 @@
     var Marker = Class.extend({
         init: function(options) {
             this.options = options || {};
-
-            this._location = Location.create(this.options.location);
         },
 
         addTo: function(parent) {
@@ -152,7 +150,7 @@
 
         location: function(value) {
             if (value) {
-                this._location = Location.create(value);
+                this.options.location = Location.create(value).toArray();
 
                 if (this.layer) {
                     this.layer.update(this);
@@ -160,7 +158,7 @@
 
                 return this;
             } else {
-                return this._location;
+                return Location.create(this.options.location);
             }
         },
 

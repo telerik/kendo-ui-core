@@ -124,10 +124,9 @@
             equal(wrapper.children().length, 0);
         });
 
-        test("copies location to instance variable", function() {
-            marker = new Marker({ location: [0, 0] });
-            marker.options.location = "foo";
-            ok(new Location(0, 0).equals(marker.location()));
+        test("updates location in options", function() {
+            marker.location([50, 5]);
+            deepEqual([50, 5], marker.options.location);
         });
 
         test("location sets and gets location", function() {
