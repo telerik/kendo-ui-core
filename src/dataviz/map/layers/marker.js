@@ -126,16 +126,15 @@
             this._data = data;
             this.clear();
 
-            var getLocation = this._getter(this.options.locationField);
+            var getLocation = kendo.getter(this.options.locationField);
+            var getTitle = kendo.getter(this.options.titleField);
             for (var i = 0; i < data.length; i++) {
+                var dataItem = data[i];
                 this.bind({
-                    location: getLocation(data[i])
-                }, data[i]);
+                    location: getLocation(dataItem),
+                    title: getTitle(dataItem)
+                }, dataItem);
             }
-        },
-
-        _getter: function(field) {
-            return field ? kendo.getter(this.options.locationField) : $.noop;
         }
     });
 

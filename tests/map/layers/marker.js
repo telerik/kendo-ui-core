@@ -433,6 +433,7 @@
             },
             teardown: function() {
                 map.destroy();
+                layer.destroy();
             }
         });
 
@@ -443,6 +444,11 @@
         test("binds location", function() {
             createBoundLayer({ locationField: "location" });
             ok(new Location(10, 10).equals(marker.location()));
+        });
+
+        test("binds title", function() {
+            createBoundLayer({ titleField: "text" });
+            equal(marker.options.title, "Foo");
         });
 
         test("sets marker shape", function() {
