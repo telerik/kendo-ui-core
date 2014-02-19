@@ -1,35 +1,127 @@
 <div id="example" class="k-content">
 
-    <button id="actionsheet-trigger">Open Actionsheet</button>
+    <div class="demo-section">
+        <div class="head">
+            <div id="action-result"></div>
+            <h3>Select a file to edit</h3>
+        </div>
+        <table id="grid">
+            <colgroup>
+                <col />
+                <col />
+                <col style="width:110px" />
+                <col style="width:120px" />
+                <col style="width:130px" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th data-field="name">Name</th>
+                    <th data-field="type">Type</th>
+                    <th data-field="size">Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>index.html</td>
+                    <td>HTML file</td>
+                    <td>1 KB</td>
+                </tr>
+                <tr>
+                    <td>services.html</td>
+                    <td>HTML file</td>
+                    <td>1 KB</td>
+                </tr>
+                <tr>
+                    <td>aboutus.html</td>
+                    <td>HTML file</td>
+                    <td>1 KB</td>
+                </tr>
+                <tr>
+                    <td>contacts.html</td>
+                    <td>HTML file</td>
+                    <td>1 KB</td>
+                </tr>
+                <tr>
+                    <td>logo.png</td>
+                    <td>PNG file</td>
+                    <td>1 KB</td>
+                </tr>
+                <tr>
+                    <td>phone.png</td>
+                    <td>PNG file</td>
+                    <td>15 KB</td>
+                </tr>
+                <tr>
+                    <td>map.jpg</td>
+                    <td>JPG image</td>
+                    <td>12 KB</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <div id="actionResult"></div>
-
-    <ul id="inboxActions">
-        <li class="km-actionsheet-title">Monday Meeting:</li>
-        <li><a href="#" data-action="reply">Reply</a></li>
-        <li><a href="#" data-action="replyAll">Reply All</a></li>
-        <li><a href="#" data-action="archive">Archive</a></li>
+    <ul id="actions">
+        <li><a href="#" data-action="view">View</a></li>
+        <li><a href="#" data-action="rename">Rename</a></li>
+        <li><a href="#" data-action="del">Delete</a></li>
+        <li><a href="#" data-action="permissions">Set permissions ...</a></li>
     </ul>
 </div>
 
 <script>
+    $(document).ready(function() {
+        $("#grid").kendoGrid({
+            height: 200,
+            selectable: true,
+            sortable: true
+        });
+        $(".actionsheet-trigager").kendoButton();
+    });
     $(function() {
-        $("#inboxActions").kendoMobileActionSheet({ type: "tablet" });
+        $("#actions").kendoMobileActionSheet({ type: "tablet" });
 
-        $("#actionsheet-trigger").click(function() {
-            $("#inboxActions").data("kendoMobileActionSheet").open(this);
+        $("#grid").on("click", "tr", function() {
+            $("#actions").data("kendoMobileActionSheet").open(this);
         });
     });
 
-    function reply(e) {
-        $("#actionResult").html("Replying to message ");
+    function view(e) {
+        $("#action-result").html("Action clicked: View");
     }
 
-    function replyAll(e) {
-        $("#actionResult").html("Replying to all in message");
+    function rename(e) {
+        $("#action-result").html("Action clicked: Rename");
     }
 
-    function archive(e) {
-        $("#actionResult").html("Archiving message");
+    function del(e) {
+        $("#action-result").html("Action clicked: Delete");
+    }
+    function permissions(e) {
+        $("#action-result").html("Action clicked: Set permissions ...");
     }
 </script>
+
+<style scoped>
+    .demo-section {
+        width: 600px;
+    }
+    .head {
+        height: 30px;
+    }
+    #action-result {
+        color: #ff0000;
+        float: right;
+        width: 200px;
+        text-align: right;
+    }
+    .k-group {
+        background-color: transparent;
+    }
+    .k-popup {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    #actions .km-actionsheet-cancel a:link {
+        background-color: #777;
+    }
+</style>
