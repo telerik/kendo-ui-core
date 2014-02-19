@@ -753,6 +753,22 @@ var __meta__ = {
             this._syncWithContent();
         },
 
+        prev: function() {
+            var that = this;
+
+            that._content.paneMoved(RIGHT_SWIPE, undefined, function(eventData) {
+                return that.trigger(CHANGING, eventData);
+            });
+        },
+
+        next: function() {
+            var that = this;
+
+            that._content.paneMoved(LEFT_SWIPE, undefined, function(eventData) {
+                return that.trigger(CHANGING, eventData);
+            });
+        },
+
         setDataSource: function(dataSource) {
             if (!(this._content instanceof VirtualScrollViewContent)) {
                 return;
