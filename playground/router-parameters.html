@@ -24,23 +24,32 @@
     <script src="../demos/mvc/content/shared/js/less.js"></script>
 </head>
 <body>
-    <div id="home" data-role="view">
-        home
-    </div>
+<a id="link" href="#">Click me</a>
+  <script>
+    var router = new kendo.Router();
 
-    <div id="foo" data-show="show" data-role="view">
-        foo
-    </div>
+    router.route("/items/:category/:id", function(category, id) {
+      console.log(category, "item with", id, " was requested");
+    });
 
-    <script>
-        var app = new kendo.mobile.Application();
-        function show(e) {
-            console.log(e.view.params);
-        }
+    skipRouting = true;
 
-        //app.navigate("#foo?bar=Qax");
-        //app.navigate("#foo?bar=rrr&foo=bbb");
-        //app.navigate("#foo");
-    </script>
+    router.bind('change', function (e) {
+      if (skipRouting) {
+        e.preventDefault();
+        console.log(e);
+        skipRouting = false;
+
+      }
+    });
+
+    $(function() {
+      router.start();
+      $("#link").click(function() {
+        router.navigate("/items/books/59");
+        return false;
+      });
+    });
+  </script>
 </body>
 </html>

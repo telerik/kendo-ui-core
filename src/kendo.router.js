@@ -335,7 +335,7 @@ var __meta__ = {
                 root: that.root
             });
 
-            var initEventObject = { url: history.current || "/" };
+            var initEventObject = { url: history.current || "/", preventDefault: $.noop };
 
             if (!that.trigger(INIT, initEventObject)) {
                 that._urlChanged(initEventObject);
