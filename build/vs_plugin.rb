@@ -1,5 +1,7 @@
 VS_PLUGIN_SRC_ROOT = 'plugins/KendoBootstrapper/'
 VS_PLUGIN_SRC = FileList[VS_PLUGIN_SRC_ROOT + '**/*.*']
+                    .exclude('**/KendoBootstrapper.vsix')
+
 VS_PLUGIN_PROJECT = VS_PLUGIN_SRC_ROOT + 'KendoBootstrapper.sln'
 VS_PLUGIN_OUTPUT = VS_PLUGIN_SRC_ROOT + 'KendoBootstrapper/bin/Release/KendoBootstrapper.vsix'
 
