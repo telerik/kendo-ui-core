@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <title>Hello React</title>
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="../src/jquery.js"></script>
+  </head>
+  <body>
+    <button id="update">Update first item</button>
+    <button id="add-column">Add column</button>
+    <div id="root"></div>
+    <script>
+        var Grid = React.createClass({
+            getInitialState: function() {
+                return { data: [] };
+            },
+            componentWillMount: function() {
+                $.ajax(this.props.dataSource.transport.read)
+                .success(function(data) {
+                    this.setState({data: data});
+                }.bind(this));
+            },
+            render: function() {
+                return (
+                    React.DOM.div({ className: 'k-widget k-grid' },
+                        GridTable( {
+                            columns: this.props.columns,
+                            data: this.state.data
+                        } )
+                    )
+                );
+            }
+        });
+
+        var GridTable = React.createClass({
+            render: function() {
+                var rows = this.props.data.map(function(item) {
+                    return GridTableRow({
+                        columns: this.props.columns,
+                        data: item
+                    });
+                }.bind(this));
+
+                return React.DOM.table({
+                    children: rows
+                });
+            }
+        });
+
+        var GridTableRow = React.createClass({
+            render: function() {
+                var cells = this.props.columns.map(function(column) {
+                    return GridTableCell({
+                        data: this.props.data[column.field]
+                    });
+                }.bind(this));
+
+                return React.DOM.tr({
+                    children: cells
+                });
+            }
+        });
+
+        var GridTableCell = React.createClass({
+            render: function() {
+                return React.DOM.td(null, this.props.data);
+            }
+        });
+
+        var grid = Grid({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: 'http://demos.telerik.com/kendo-ui/service/products',
+                        dataType: 'jsonp'
+                    }
+                }
+            },
+            columns: [
+                { field: "ProductName" }
+            ]
+        });
+
+        console.time("initial rendering");
+        React.renderComponent(grid, document.getElementById("root"));
+        console.timeEnd("initial rendering");
+
+        $("#update").click(function() {
+            var state = grid.state;
+
+            state.data[0].ProductName = "" + new Date();
+
+            console.time("partial update");
+            grid.setState(state);
+            console.timeEnd("partial update");
+        });
+
+        $("#add-column").click(function() {
+            var props = grid.props;
+
+            props.columns.push({ field: "UnitPrice" });
+
+            console.time("partial update");
+            grid.setProps(props);
+            console.timeEnd("partial update");
+        });
+    </script>
+  </body>
+</html>
