@@ -287,4 +287,38 @@
         ok(!draggedElement.is(":visible"), "Draggable element is hidden");
     });
 
+    module("Sortable - moving by axis", {
+        setup: function() {
+            QUnit.fixture.append(
+                '<ul id="sortable">' +
+                    '<li class="item" style="margin: 0; height: 20px;">foo</li>' +
+                    '<li class="item" style="margin: 0; height: 20px;">bar</li>' +
+                    '<li class="item" style="margin: 0; height: 20px;">baz</li>' +
+                    '<li class="item" style="margin: 0; height: 20px;">qux</li>' +
+                '</ul>'
+            );
+
+            element = $("#sortable");
+            element.kendoSortable({
+                axis: "y",
+                filter: ".item"
+            });
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    test("Placeholder is moved even of the mouse is outside of the sortable container", 1, function() {
+        var draggedElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(1),
+            targetTopCenter = kendo.getOffset(targetElement).top + targetElement.height() / 2;
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, 100, targetTopCenter + 1);
+
+        equal(targetElement.next()[0], element.getKendoSortable().placeholder[0], "Placeholder is moved");
+    });
+
 })();
