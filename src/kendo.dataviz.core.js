@@ -2118,6 +2118,8 @@ var __meta__ = {
             Axis.fn.init.call(axis, defaultOptions);
         },
 
+        START_VALUE: 0,
+
         options: {
             type: "numeric",
             min: 0,
@@ -2416,6 +2418,8 @@ var __meta__ = {
             this.options = this._initOptions(seriesMin, seriesMax, options);
             Axis.fn.init.call(this, options);
         },
+
+        START_VALUE: 1,
 
         options: {
             type: "log",

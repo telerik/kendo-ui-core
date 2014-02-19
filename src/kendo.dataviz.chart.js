@@ -2780,20 +2780,22 @@ var __meta__ = {
 
             for (i = 0; i < childrenCount; i++) {
                 var currentChild = children[i],
+                    childBox;
+                if (currentChild.box) {
                     childBox = currentChild.box.clone();
+                    childBox.snapTo(targetBox, positionAxis);
+                    if (currentChild.options) {
+                        // TODO: Remove stackBase and fix BarAnimation
+                        currentChild.options.stackBase = stackBase;
+                    }
 
-                childBox.snapTo(targetBox, positionAxis);
-                if (currentChild.options) {
-                    // TODO: Remove stackBase and fix BarAnimation
-                    currentChild.options.stackBase = stackBase;
+                    if (i === 0) {
+                        box = this.box = childBox.clone();
+                    }
+
+                    currentChild.reflow(childBox);
+                    box.wrap(childBox);
                 }
-
-                if (i === 0) {
-                    box = this.box = childBox.clone();
-                }
-
-                currentChild.reflow(childBox);
-                box.wrap(childBox);
             }
         }
     });
@@ -2972,18 +2974,19 @@ var __meta__ = {
                     data: { modelId: bar.modelId }
                 }, border),
                 elements = [];
+            if (box) {
+                if (box.width() > 0 && box.height() > 0) {
+                    if (options.overlay) {
+                        rectStyle.overlay = deepExtend({
+                            rotation: vertical ? 0 : 90
+                        }, options.overlay);
+                    }
 
-            if (box.width() > 0 && box.height() > 0) {
-                if (options.overlay) {
-                    rectStyle.overlay = deepExtend({
-                        rotation: vertical ? 0 : 90
-                    }, options.overlay);
+                    elements.push(view.createRect(box, rectStyle));
                 }
 
-                elements.push(view.createRect(box, rectStyle));
+                append(elements, ChartElement.fn.getViewElements.call(bar, view));
             }
-
-            append(elements, ChartElement.fn.getViewElements.call(bar, view));
 
             return elements;
         },
@@ -3235,14 +3238,14 @@ var __meta__ = {
             }
         },
 
-        plotRange: function(point) {
+        plotRange: function(point, startValue) {
             var categoryIx = point.categoryIx;
             var categoryPts = this.categoryPoints[categoryIx];
 
             if (this.options.isStacked) {
                 var plotValue = this.plotValue(point);
                 var positive = plotValue > 0;
-                var prevValue = 0;
+                var prevValue = startValue;
 
                 for (var i = 0; i < categoryPts.length; i++) {
                     var other = categoryPts[i];
@@ -3271,6 +3274,10 @@ var __meta__ = {
                     }
                 }
 
+                if (i > 0 || !positive) {
+                    prevValue -= startValue;
+                }
+
                 return [prevValue, plotValue];
             } else {
                 var series = point.series;
@@ -3291,7 +3298,7 @@ var __meta__ = {
                 for (var pIx = 0; pIx < categoryPts.length; pIx++) {
                     var point = categoryPts[pIx];
                     if (point) {
-                        var to = this.plotRange(point)[1];
+                        var to = this.plotRange(point, 0)[1];
 
                         max = math.max(max, to);
                         min = math.min(min, to);
@@ -3374,7 +3381,7 @@ var __meta__ = {
         stackedErrorRange: function(point, categoryIx) {
             var chart = this,
                 value = point.value,
-                plotValue = chart.plotRange(point)[1] - point.value,
+                plotValue = chart.plotRange(point, 0)[1] - point.value,
                 low = point.low + plotValue,
                 high = point.high + plotValue;
 
@@ -3497,18 +3504,20 @@ var __meta__ = {
                 }
 
                 if (point) {
-                    var plotRange = chart.plotRange(point);
+                    var plotRange = chart.plotRange(point, valueAxis.START_VALUE);
                     var valueSlot = valueAxis.getSlot(plotRange[0], plotRange[1], !chart.options.clip);
-                    var pointSlot = chart.pointSlot(categorySlot, valueSlot);
-                    var aboveAxis = valueAxis.options.reverse ?
-                                        value < axisCrossingValue : value >= axisCrossingValue;
+                    if (valueSlot) {
+                        var pointSlot = chart.pointSlot(categorySlot, valueSlot);
+                        var aboveAxis = valueAxis.options.reverse ?
+                                            value < axisCrossingValue : value >= axisCrossingValue;
 
-                    point.aboveAxis = aboveAxis;
-                    if (chart.options.isStacked100) {
-                        point.percentage = chart.plotValue(point);
+                        point.aboveAxis = aboveAxis;
+                        if (chart.options.isStacked100) {
+                            point.percentage = chart.plotValue(point);
+                        }
+
+                        chart.reflowPoint(point, pointSlot);
                     }
-
-                    chart.reflowPoint(point, pointSlot);
                 }
             });
 
@@ -3710,7 +3719,7 @@ var __meta__ = {
                 stackAxis, zeroSlot;
 
             if (options.isStacked) {
-                zeroSlot = valueAxis.getSlot(0, 0);
+                zeroSlot = valueAxis.getSlot(valueAxis.START_VALUE, valueAxis.START_VALUE);
                 stackAxis = options.invertAxes ? X : Y;
                 categorySlot[stackAxis + 1] = categorySlot[stackAxis + 2] = zeroSlot[stackAxis + 1];
             }
@@ -4464,9 +4473,11 @@ var __meta__ = {
                 pointCenter;
 
             for (i = 0; i < length; i++) {
-                pointCenter = linePoints[i].markerBox().center();
+                if (linePoints[i].box) {
+                    pointCenter = linePoints[i].markerBox().center();
 
-                points.push(Point2D(pointCenter.x, pointCenter.y));
+                    points.push(Point2D(pointCenter.x, pointCenter.y));
+                }
             }
 
             return points;
@@ -4582,7 +4593,7 @@ var __meta__ = {
             for (i = 0; i < pointsLength; i++) {
                 currentPoint = points[i];
 
-                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
+                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null && currentPoint.box) {
                     pointBox = currentPoint.box;
                     pointDistance = math.abs(pointBox.center()[axis] - pos);
 
@@ -5311,9 +5322,10 @@ var __meta__ = {
 
                 var slotX = seriesAxes.x.getSlot(value.x, value.x, limit),
                     slotY = seriesAxes.y.getSlot(value.y, value.y, limit),
-                    pointSlot = chart.pointSlot(slotX, slotY);
+                    pointSlot;
 
-                if (point) {
+                if (point && slotX && slotY) {
+                    pointSlot = chart.pointSlot(slotX, slotY)
                     point.reflow(pointSlot);
                 }
             });

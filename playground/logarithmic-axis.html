@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <title>Spline</title>
-        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <link href="../styles/dataviz/kendo.dataviz.min.css" rel="stylesheet" />
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
@@ -19,9 +19,10 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
     </head>
     <body>
+       <div id="reverse"></div>
       <--   <div id="polar"></div>
         <div id="radar"></div> 
-         <div id="reverse"></div>
+      
         <div id="negativeValues"></div>
         <div id="scatter"></div>
        
@@ -30,22 +31,40 @@
     <div id="chart" style="height: 500px;"></div>-->
      <--    
     <div id="scatterDrag"></div>
-     <div id="panes"></div> -->
+     <div id="panes"></div> 
+     <div id="bubble"></div>
+     <div id="stock-chart"></div>
+     <div id="boxplot"></div>
+     -->
        <script>
-       $("#reverse").kendoChart({            
+       $("#reverse").kendoChart({   
+          seriesDefaults: {
+                stack:true,
+                 type: "area"
+          },
            series: [{
-                type: "column",
-                data: [10, 1000, 10000]
+               
+                data: [1, -1, 100]
+
+           },{
+                data: [1, -1, 100]
+           },{
+                data: [1, -1, 100]
+           },{
+                data: [1, -1, 100]
            }],
-           valueAxis: {
+            valueAxis: {
             type: "log",
-                reverse: true,
+                reverse: false,
                 crosshair: {
                     visible: true,
                     tooltip: {
                         visible: true
                     }
                 }
+           },
+           tooltip: {
+               visible: true
            }
            
        });
@@ -100,7 +119,7 @@
             
             series: [{
                 data: [
-                    [15, 2], [30, 4],
+                    [0,0],[15, 2], [30, 4],
                     [45, 6], [60, 8], [75, 10],
                     [90, 12], [105, 14], [120, 16],
                     [135, 18], [150, 20], [165, 22],
@@ -113,7 +132,7 @@
                 ]
             },{
                 data: [
-                    [15, 1], [30, 2],
+                    [0,0],[15, 1], [30, 2],
                     [45, 3], [60, 4], [75, 5],
                     [90, 6], [105, 7], [120, 8],
                     [135, 9], [150, 10], [165, 11],
@@ -126,7 +145,7 @@
                 ]
             },{
                 data: [
-                    [15, 3], [30, 6],
+                    [0,0],[15, 3], [30, 6],
                     [45, 9], [60, 12], [75, 15],
                     [90, 18], [105, 21], [120, 24],
                     [135, 27], [150, 30], [165, 33],
@@ -262,11 +281,9 @@
                 labels: {
                   background: "green",
                   color: "white",
-                  mirror: false,
-                  skip: 1,
-                  step: 2
+                  mirror: false
                 },
-               
+                max: 10000000,
                 type: "log",
                // majorUnit: 10,
                 //axisCrossingValue: 10,
@@ -334,36 +351,36 @@
             }
         });
         
-            // $("#negativeValues").kendoChart({
-                // title: {
-                    // text: "Gross domestic product growth /GDP annual %/"
-                // },
-                // legend: {
-                    // position: "bottom"
-                // },
-                // chartArea: {
-                    // background: ""
-                // },
-                // seriesDefaults: {
-                    // type: "line",
-                    // style: "smooth"
-                // },
-                // series: [{
-                    // data: [10, -1, 100],
-                    // tooltip: {
-                        // visible: true
-                    // }
-                // }],
-                // valueAxis: {
-                    // type: "log"
-                // },
-                // categoryAxis: {
-                    // categories: [2002, 2003, 2004],
-                    // majorGridLines: {
-                        // visible: false
-                    // }
-                // }
-            // });        
+            $("#negativeValues").kendoChart({
+                title: {
+                    text: "Gross domestic product growth /GDP annual %/"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    type: "line",
+                    style: "smooth"
+                },
+                series: [{
+                    data: [10, -1, 100],
+                    tooltip: {
+                        visible: true
+                    }
+                }],
+                valueAxis: {
+                    type: "log"
+                },
+                categoryAxis: {
+                    categories: [2002, 2003, 2004],
+                    majorGridLines: {
+                        visible: false
+                    }
+                }
+            });        
         
             $("#scatter").kendoChart({
                 title: {
@@ -378,9 +395,9 @@
                 series: [{
                     name: "January 2008",
                     data: [
-                    [0.1, 5.4], [1, 2], [10001, 3]]
+                    // [0.1, 5.4], [1, 2], [10001, 3]]
                     // data: [
-                    // [0.1, 5.4], [-1, 2], [10001, 3]]
+                    [0.1, 5.4], [-1, 2], [10001, 3]]
                 }],
                 xAxis: {
                     type: "log",
@@ -538,7 +555,164 @@
                         // which also applies the axis limits set above
                         ds.filter(getFilter(xMin, xMax));
                     }
-                }     
+                } 
+
+$("#bubble").kendoChart({
+                title: {
+                    text: "Job Growth for 2011"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "bubble"
+                },
+                series: [{
+                    data: [{
+                        x: -2500,
+                        y: 50000,
+                        size: 500000,
+                        category: "Microsoft"
+                    }, {
+                        x: 500,
+                        y: 110000,
+                        size: 7600000,
+                        category: "Starbucks"
+                    }, {
+                        x: 7000,
+                        y: 19000,
+                        size: 700000,
+                        category: "Google"
+                    }, {
+                        x: 1400,
+                        y: 150000,
+                        size: 700000,
+                        category: "Publix Super Markets"
+                    }, {
+                        x: 2400,
+                        y: 30000,
+                        size: 300000,
+                        category: "PricewaterhouseCoopers"
+                    }, {
+                        x: 2450,
+                        y: 34000,
+                        size: 90000,
+                        category: "Cisco"
+                    }, {
+                        x: 2700,
+                        y: 34000,
+                        size: 400000,
+                        category: "Accenture"
+                    }, {
+                        x: 2900,
+                        y: 40000,
+                        size: 450000,
+                        category: "Deloitte"
+                    }, {
+                        x: 3000,
+                        y: 55000,
+                        size: 900000,
+                        category: "Whole Foods Market"
+                    }]
+                }],
+                xAxis: {
+                    labels: {
+                        format: "{0:N0}",
+                        skip: 1
+                    },
+                    type: "log",
+                    //axisCrossingValue: -5000,
+                    //majorUnit: 2000,
+                    // plotBands: [{
+                        // from: -5000,
+                        // to: 0,
+                        // color: "#00f",
+                        // opacity: 0.05
+                    // }]
+                },
+                yAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    },
+                    line: {
+                        width: 0
+                    },
+                    type: "log"
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{3}: {2:N0} applications",
+                    opacity: 1
+                }
+            });
+            
+            $("#stock-chart").kendoStockChart({
+                dataSource: {
+                    data: [{Date: new Date(2009, 2, 6), Open: 120, Close: 140, High: 60,  Low: -10},
+                    {Date: new Date(2010, 2, 6), Open: 50, Close: 70, High: 60, Low: 40},
+                    {Date: new Date(2011, 2, 6), Open: 50, Close: 100, High: 60, Low: 40}]
+                },
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                valueAxis: {
+                    type: "log"
+                },
+                dateField: "Date",
+                series: [{
+                    type: "candlestick",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                }
+            });            
+            
+            //handle negative???
+            $("#boxplot").kendoChart({
+                title: {
+                    text: "Monthly Mean Temperatures (&deg;F)"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "boxPlot",
+                    data: [
+                        [-1,38.3,51,61.45,68.9,49.0,[18.3, 20, 70, 72,5]],
+                        [26.4,38.125,46.8,60.425,66.8,47.3,[18, 69, 71.3, 71.5]],
+                        [31.6,41.725,52.35,62.175,70.8,52.3,[14, 16.4, 74]],
+                        [34.4,39.375,49.9,61.425,69.2,50.3,[16, 18, 72, 72.5]],
+                        [29.9,38.35,50.4,60.875,69.7,49.9,[19, 20, 76, 78]],
+                        [22.3,36.875,48.9,62.65,70.3,49.0,[16.5, 17, 74, 75, 78]],
+                        [32.3,39.5,54.1,61.175,67.3,50.8,[13, 14, 15, 74.3, 75.2, 76]],
+                        [28.5,36.075,50.5,64.2,70.4,49.6,[18, 22, 73.4, 75]],
+                        [33.6,40.65,49.55,62.8,69.2,51.1,[17, 73]],
+                        [33.6,38.6,47.9,60.825,67,49.7,[12, 13.5, 16, 73, 74.6, 77]],
+                        [31.9,36.425,49.3,61.825,69.7,49.4,[17, 76]],
+                        [34,41.225,51.15,62.4,68.8,51.6,[14.6, 17.3, 72.3, 74]]
+                   ]
+                }],
+                categoryAxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                valueAxis: {
+                    type: "log"
+                }
+            });            
         
        </script>
     </body>
