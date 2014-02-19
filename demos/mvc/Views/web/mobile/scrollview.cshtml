@@ -52,6 +52,16 @@
             enablePager: false,
             template: kendo.template($("#template").html())
         });
+
+        $("#prev-img").click(function(e) {
+            var scrollView = $("#scrollview").data("kendoMobileScrollView");
+            scrollView.prev();
+        });
+
+        $("#next-img").click(function(e) {
+            var scrollView = $("#scrollview").data("kendoMobileScrollView");
+            scrollView.next();
+        });
     });
 </script>
 
