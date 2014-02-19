@@ -40,12 +40,13 @@
                 type: "marker",
                 dataSource: markersDS,
                 locationField: "location",
+                titleField: "text",
 
                 shape: "pinTarget",
                 tooltip: {
                     // TODO: Evaluate with marker as this?
                     // TODO: What about location then?
-                    template: "#= marker.dataItem.text #"
+                    template: "#= marker.options.title #"
                 }
 
                 // TODO: Don't load markers outside map extent
