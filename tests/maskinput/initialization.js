@@ -78,7 +78,14 @@
         });
 
         var tokens = maskinput.tokens;
-        equal(tokens[3], numberFormat.currency.symbol);
+        var chars = numberFormat.currency.symbol.split("");
+        var tokenIdx = 3;
+
+        expect(chars.length);
+
+        for (var idx = 0, length = chars.length; idx < length; idx++) {
+            equal(tokens[tokenIdx + idx], chars[idx]);
+        }
 
         kendo.culture("en-US");
     });
