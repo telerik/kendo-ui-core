@@ -1330,7 +1330,7 @@
                 shapeDefaults: {
                     undoable: true
                 },
-                connectionOptions: {},
+                connectionDefaults: {},
                 shapes: [],
                 connections: []
             },
@@ -1352,7 +1352,7 @@
             _createConnections: function() {
                 var diagram = this,
                     options = diagram.options,
-                    defaults = options.connectionOptions,
+                    defaults = options.connectionDefaults,
                     connections = options.connections,
                     conn, source, target, i;
 
@@ -1470,7 +1470,7 @@
              * @returns The newly created connection.
              */
             connect: function (source, target, options) {
-                var conOptions = deepExtend({}, this.options.connectionOptions, options),
+                var conOptions = deepExtend({}, this.options.connectionDefaults, options),
                     connection = new Connection(source, target, conOptions);
                 return this.addConnection(connection);
             },
