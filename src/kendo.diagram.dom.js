@@ -699,12 +699,12 @@
           Shape.createShapeVisual = function (options) {
             var diagram = options.diagram;
             delete options.diagram; // avoid stackoverflow and reassign later on again
-            var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }),
-                visualTemplate = shapeOptions.data; // Shape visual should not have position in its parent group.
+            var shapeDefaults = deepExtend({}, options, { x: 0, y: 0 }),
+                visualTemplate = shapeDefaults.data; // Shape visual should not have position in its parent group.
 
-            function externalLibraryShape(libraryShapeName, options, shapeOptions) {
+            function externalLibraryShape(libraryShapeName, options, shapeDefaults) {
                 // if external serializationSource we need to consult the attached libraries
-                // shapeOptions.diagram is set when the diagram starts deserializing
+                // shapeDefaults.diagram is set when the diagram starts deserializing
                 if (diagram.libraries && diagram.libraries.length > 0) {
                     for (var i = 0; i < diagram.libraries.length; i++) {
                         var library = diagram.libraries[i];
@@ -715,29 +715,29 @@
                                 options.layout = shapeDefinition.options.layout;
                                 options.data = shapeDefinition.options.data;
                                 options.rebuild = shapeDefinition.options.rebuild;
-                                return shapeDefinition.options.data(shapeOptions);
+                                return shapeDefinition.options.data(shapeDefaults);
                             }
                         }
                     }
                 }
             }
 
-            function simpleShape(name, shapeOptions) {
+            function simpleShape(name, shapeDefaults) {
                 switch (name.toLocaleLowerCase()) {
                     case "rectangle":
-                        return new Rectangle(shapeOptions);
+                        return new Rectangle(shapeDefaults);
                     case "circle":
-                        return new Circle(shapeOptions);
+                        return new Circle(shapeDefaults);
                     case "text": // Maybe should be something else.
-                        return new TextBlock(shapeOptions);
+                        return new TextBlock(shapeDefaults);
                     default:
-                        var p = new Path(shapeOptions);
+                        var p = new Path(shapeDefaults);
                         return p;
                 }
             }
 
-            function functionShape(func, context, shapeOptions) {
-                return func.call(context, shapeOptions);
+            function functionShape(func, context, shapeDefaults) {
+                return func.call(context, shapeDefaults);
             }
 
             var parseXml;
@@ -758,7 +758,7 @@
                 throw new Error("No XML parser found");
             }
 
-            function svgShape(svgString, shapeOptions) {
+            function svgShape(svgString, shapeDefaults) {
                 var fullString = '<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' + svgString + '</svg>';
                 var result = parseXml(fullString);
                 var importedNode = document.importNode(result.childNodes[0].childNodes[0], true);
@@ -767,14 +767,14 @@
                 return g;
             }
 
-            if (!kendo.isFunction(shapeOptions.data) && shapeOptions.hasOwnProperty("serializationSource") && shapeOptions.serializationSource === "external") {
-                return externalLibraryShape(shapeOptions.name, options, shapeOptions);
+            if (!kendo.isFunction(shapeDefaults.data) && shapeDefaults.hasOwnProperty("serializationSource") && shapeDefaults.serializationSource === "external") {
+                return externalLibraryShape(shapeDefaults.name, options, shapeDefaults);
             }
             else if (isString(visualTemplate)) {
-                return simpleShape(shapeOptions.data, shapeOptions);
+                return simpleShape(shapeDefaults.data, shapeDefaults);
             }
             else if (isFunction(visualTemplate)) {// custom template
-                return functionShape(visualTemplate, this, shapeOptions);
+                return functionShape(visualTemplate, this, shapeDefaults);
             }
             else if (Object.prototype.toString.call(visualTemplate) === '[object Object]') { //literal
 
@@ -782,26 +782,26 @@
 
                 if(origin.toLocaleLowerCase()==="external"){
                     var libraryShapeName = visualTemplate.library;
-                    return externalLibraryShape(libraryShapeName, options, shapeOptions);
+                    return externalLibraryShape(libraryShapeName, options, shapeDefaults);
                 }
                 else{
                     var type = visualTemplate.type || "simple";
                     var definition = visualTemplate.definition;
 
                     if (type.toLocaleLowerCase() === "simple") {
-                        return simpleShape(definition, shapeOptions);
+                        return simpleShape(definition, shapeDefaults);
                     }
                     else if (type.toLocaleLowerCase() === "svg") {
-                        return svgShape(definition, shapeOptions);
+                        return svgShape(definition, shapeDefaults);
                     }
                     else if (type.toLocaleLowerCase() === "function") {
-                        return functionShape(definition, this, shapeOptions);
+                        return functionShape(definition, this, shapeDefaults);
                     }
                 }
 
             }
             else {
-                return new Rectangle(shapeOptions);
+                return new Rectangle(shapeDefaults);
             }
         };
 
@@ -1327,7 +1327,7 @@
                     size: 10,
                     angle: 10
                 },
-                shapeOptions: {
+                shapeDefaults: {
                     undoable: true
                 },
                 connectionOptions: {},
@@ -1520,18 +1520,18 @@
             addShape: function (item, options) {
                 var shape,
                     unit,
-                    shapeOptions = this.options.shapeOptions;
+                    shapeDefaults = this.options.shapeDefaults;
 
                 if (item instanceof Shape) {
-                    shapeOptions = deepExtend({}, shapeOptions, options);
-                    item.redraw(shapeOptions);
+                    shapeDefaults = deepExtend({}, shapeDefaults, options);
+                    item.redraw(shapeDefaults);
                     shape = item;
                 } else { // consider it a point
-                    shapeOptions = deepExtend({}, shapeOptions, item);
-                    shape = new Shape(shapeOptions);
+                    shapeDefaults = deepExtend({}, shapeDefaults, item);
+                    shape = new Shape(shapeDefaults);
                 }
 
-                if (shapeOptions.undoable) {
+                if (shapeDefaults.undoable) {
                     this.undoRedoService.add(new diagram.AddShapeUnit(shape, this));
                 } else {
                     this.shapes.push(shape);

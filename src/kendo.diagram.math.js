@@ -2775,12 +2775,12 @@ var __meta__ = {
          * The method used by the diagram creation to instantiate a shape.
          * @param kendoDiagram The Kendo diagram where the diagram will be created.
          * @param p The position at which to place the shape.
-         * @param shapeOptions Optional Shape options.
+         * @param shapeDefaults Optional Shape options.
          * @param id Optional identifier of the shape.
          * @returns {*}
          * @private
          */
-        _addShape: function (kendoDiagram, p, id, shapeOptions) {
+        _addShape: function (kendoDiagram, p, id, shapeDefaults) {
             if (Utils.isUndefined(p)) {
                 p = new diagram.Point(0, 0);
             }
@@ -2789,7 +2789,7 @@ var __meta__ = {
                 id = randomId();
             }
 
-            shapeOptions = kendo.deepExtend({
+            shapeDefaults = kendo.deepExtend({
                 width: 20,
                 height: 20,
                 id: id,
@@ -2799,9 +2799,9 @@ var __meta__ = {
                 undoable: false,
                 x: p.x,
                 y: p.y
-            }, shapeOptions);
+            }, shapeDefaults);
 
-            return kendoDiagram.addShape(shapeOptions);
+            return kendoDiagram.addShape(shapeDefaults);
         },
         /**
          * The method used by the diagram creation to instantiate a connection.

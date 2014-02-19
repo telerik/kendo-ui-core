@@ -93,12 +93,12 @@
         }
     }
 
-    var AddShape = function (kendoDiagram, p, shapeOptions, id) {
+    var AddShape = function (kendoDiagram, p, shapeDefaults, id) {
         if (typeof(p) === "undefined") {
             p = new diagram.Point(0, 0);
         }
 
-        shapeOptions = kendo.deepExtend({
+        shapeDefaults = kendo.deepExtend({
             width: 200,
             height: 100,
             id: id,
@@ -106,9 +106,9 @@
             data: "rectangle",
             x: p.x,
             y: p.y
-        }, shapeOptions);
+        }, shapeDefaults);
 
-        return kendoDiagram.addShape(shapeOptions);
+        return kendoDiagram.addShape(shapeDefaults);
     };
 
     var AddCircle = function (canvas, p, radius) {
