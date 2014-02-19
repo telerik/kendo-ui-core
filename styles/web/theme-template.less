@@ -425,11 +425,24 @@ textarea.k-textbox:hover,
     background-color: @button-background-color;
 }
 
+.k-button:focus,
+.k-button.k-state-focused
+{
+    border-color: @button-focused-border-color;
+}
+
 .k-button:hover
 {
-    color: @hover-text-color;
-    border-color: @hover-border-color;
-    background-color: @hover-background-color;
+    color: @button-hover-text-color;
+    border-color: @button-hover-border-color;
+    background-color: @button-hover-background-color;
+}
+
+.k-button:active
+{
+    color: @selected-text-color;
+    background-color:@button-active-background;
+    border-color: @button-active-border-color;
 }
 
 .k-button.k-state-disabled,
@@ -443,6 +456,16 @@ textarea.k-textbox:hover,
     border-color: @disabled-border-color;
     background-color: @disabled-background-color;
 	.composite-background(@disabled-gradient);
+}
+
+.k-button:focus:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@button-focused-shadow);
+}
+
+.k-button:focus:active:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@button-focused-active-shadow);
 }
 
 .k-draghandle
@@ -663,7 +686,6 @@ textarea.k-textbox:hover,
 .k-list>.k-state-selected,
 .k-list>.k-state-highlight,
 .k-panel > .k-state-selected,
-.k-button:active,
 .k-ghost-splitbar-vertical,
 .k-ghost-splitbar-horizontal,
 .k-draghandle.k-state-selected:hover,
@@ -686,7 +708,6 @@ textarea.k-textbox:hover,
 .k-listview>.k-state-focused,
 .k-grid-header th.k-state-focused,
 td.k-state-focused,
-.k-button:focus:not(.k-state-disabled):not([disabled]),
 .k-button.k-state-focused
 {
     .box-shadow(@focused-item-shadow);
@@ -695,8 +716,7 @@ td.k-state-focused,
 .k-state-focused.k-state-selected,
 .k-list>.k-state-focused.k-state-selected,
 .k-listview>.k-state-focused.k-state-selected,
-td.k-state-focused.k-state-selected,
-.k-button:focus:active:not(.k-state-disabled):not([disabled])
+td.k-state-focused.k-state-selected
 {
     .box-shadow(@focused-active-item-shadow);
 }
