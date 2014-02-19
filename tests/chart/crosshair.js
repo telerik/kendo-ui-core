@@ -80,6 +80,21 @@
             deepEqual([points[0].x, points[0].y], [0,7.5]);
             deepEqual([points[1].x, points[1].y], [199,7.5]);
         });
+        
+        module("Crosshair / destroy", {
+            setup: function() {
+                createCrosshair();
+            }
+        });
+
+        test("destroyes tooltip", function() {                      
+            crosshair.tooltip = {
+                destroy: function() {
+                    ok(true);
+                }
+            };
+            crosshair.destroy();
+        });
 
     })();
 })();

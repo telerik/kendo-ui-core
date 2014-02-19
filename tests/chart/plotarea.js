@@ -3404,6 +3404,49 @@
 
             sameBox(plotArea.namedCategoryAxes.cAxisB.box, box);
         });
+        
+        test("recreates crosshairs for the panes", function() {
+            createPlotArea({
+                panes: [{
+                    name: "a"
+                }, {
+                    name: "b"
+                }],
+                valueAxis: {
+                    pane: "b",
+                    crosshair: {
+                        visible: true
+                    }
+                },
+                categoryAxis: {
+                    pane: "b",
+                    crosshair: {
+                        visible: true
+                    }
+                }
+            });
+            
+            plotArea.crosshairs[0].dirty = true;
+            plotArea.crosshairs[1].dirty = true;
+            plotArea.redraw(plotArea.panes[1]);
+            ok(!plotArea.crosshairs[0].dirty);
+            ok(!plotArea.crosshairs[1].dirty);
+        });
+        
+        test("destroys crosshairs", function() {
+            createPlotArea({
+                valueAxis: {
+                    crosshair: {
+                        visible: true
+                    }
+                }
+            });
+            
+            var crosshair = plotArea.crosshairs[0];
+            stub(crosshair, "destroy");
+            plotArea.redraw(plotArea.panes[0]);
+            equal(crosshair.calls("destroy"), 1);
+        });
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Panes / redraw / batch", {

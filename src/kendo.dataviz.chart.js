@@ -7526,9 +7526,9 @@ var __meta__ = {
             ChartElement.fn.destroy.call(plotArea);
         },
 
-        createCrosshairs: function() {
+        createCrosshairs: function(panes) {
             var plotArea = this,
-                panes = plotArea.panes,
+                panes = panes || plotArea.panes,
                 i, j, pane, axis, currentCrosshair;
 
             for (i = 0; i < panes.length; i++) {
@@ -7540,6 +7540,22 @@ var __meta__ = {
 
                         plotArea.crosshairs.push(currentCrosshair);
                         pane.content.append(currentCrosshair);
+                    }
+                }
+            }
+        },
+
+        removeCrosshairs: function(pane) {
+            var plotArea = this,
+               crosshairs = plotArea.crosshairs,
+               axes = pane.axes,
+               i, j;
+
+            for (i = crosshairs.length - 1; i >= 0; i--) {
+                for (j = 0; j < axes.length; j++) {
+                    if (crosshairs[i].axis === axes[j]) {
+                        crosshairs.splice(i, 1);
+                        break;
                     }
                 }
             }
@@ -7754,12 +7770,15 @@ var __meta__ = {
             panes = [].concat(panes);
 
             for (i = 0; i < panes.length; i++) {
+                plotArea.removeCrosshairs(panes[i]);
                 panes[i].empty();
             }
 
             plotArea.render(panes);
             plotArea.reflowAxes(plotArea.panes);
             plotArea.reflowCharts(panes);
+
+            plotArea.createCrosshairs(panes);
 
             for (i = 0; i < panes.length; i++) {
                 panes[i].refresh();
@@ -9608,8 +9627,6 @@ var __meta__ = {
         showAt: function(point) {
             var crosshair = this;
 
-            crosshair.updateAxisReference();
-
             crosshair._visible = true;
             crosshair.point = point;
             crosshair.repaint();
@@ -9718,22 +9735,13 @@ var __meta__ = {
             return elements;
         },
 
-        updateAxisReference: function() {
-            var crosshair = this,
-                axis = crosshair.axis,
-                plotArea = axis.plotArea,
-                axes = plotArea.axes,
-                currentAxis, i;
-
-            for (i = 0; i < axes.length; i++) {
-                currentAxis = axes[i];
-                if (defined(axis.axisIndex) &&
-                    axis instanceof NumericAxis != currentAxis instanceof CategoryAxis &&
-                    axis.axisIndex === currentAxis.axisIndex) {
-                    crosshair.axis = currentAxis;
-                    break;
-                }
+        destroy: function() {
+            var crosshair = this;
+            if (crosshair.tooltip) {
+                crosshair.tooltip.destroy();
             }
+
+            ChartElement.fn.destroy.call(crosshair);
         }
     });
 
@@ -9838,6 +9846,12 @@ var __meta__ = {
 
         hide: function() {
             this.element.hide();
+            this.point = null;
+        },
+
+        destroy: function() {
+            this.element.remove();
+            this.element = null;
             this.point = null;
         }
     });
