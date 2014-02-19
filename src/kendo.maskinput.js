@@ -427,6 +427,7 @@ var __meta__ = {
                 if (rule) {
                     tokens[tokenIdx] = rule;
                     emptyMask += promptChar;
+                    tokenIdx += 1;
                 } else {
                     if (char === "." || char === ",") {
                         char = numberFormat[char];
@@ -437,11 +438,14 @@ var __meta__ = {
                         char = maskChars[idx];
                     }
 
-                    tokens[tokenIdx] = char;
-                    emptyMask += char;
-                }
+                    char = char.split("");
 
-                tokenIdx += 1;
+                    for (var i = 0, l = char.length; i < l; i++) {
+                        tokens[tokenIdx] = char[i];
+                        emptyMask += char[i];
+                        tokenIdx += 1;
+                    }
+                }
             }
 
             this.tokens = tokens;
