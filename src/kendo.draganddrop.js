@@ -850,6 +850,8 @@ var __meta__ = {
             that._afterEnd();
 
             that.userEvents.destroy();
+
+            that.currentTarget = null;
         },
 
         _afterEnd: function() {

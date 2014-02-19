@@ -399,6 +399,7 @@ var __meta__ = {
             that.unbind();
             delete that.surface;
             delete that.element;
+            delete that.currentTarget;
         },
 
         capture: function() {
