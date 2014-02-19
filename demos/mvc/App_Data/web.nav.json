@@ -934,6 +934,57 @@
             ]
         },
         {
+            "text": "MaskInput",
+            "name": "maskinput",
+            "documentation": "web/maskinput",
+            "spriteCssClass": "maskInputIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "maskinput/index.html",
+                    "title": "Primary features of Kendo UI Mask Input | Kendo UI Web demo",
+                    "meta": "This demo shows the core functionality of KendoMaskInput component."
+                },
+                {
+                    "text": "Events",
+                    "url": "maskinput/events.html",
+                    "title": "Events in Kendo UI MaskInput widget",
+                    "meta": "This example shows events which are triggered in Kendo UI MaskInput widget."
+                },
+                {
+                    "text": "API",
+                    "url": "maskinput/api.html",
+                    "title": "API Functions Demo for KendoMaskInput",
+                    "meta": "This demo shows specific API functions for KendoMaskInput component."
+                },
+                {
+                    "text": "Globalization",
+                    "url": "maskinput/globalization.html",
+                    "title": "Globalization Demo for KendoMaskInput",
+                    "meta": "This demo shows KendoMaskInput globalization support for decimal point, thousand separator and currency symbol."
+                },
+                {
+                    "text": "RTL support",
+                    "url": "maskinput/rtl.html",
+                    "title": "RTL support in Kendo UI MaskInput widget",
+                    "meta": "This demo shows how right-to-left input is implemented in Kendo UI MaskInput component to ensure the satisfaction of RTL language users."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "maskinput/mvvm.html",
+                    "title": "MVVM support in Kendo UI MaskInput",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI MaskInput",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                },
+                {
+                    "text": "Validation",
+                    "url": "maskinput/validation.html",
+                    "title": "Validation Demo for Kendo UI MaskInput",
+                    "meta": "This demo shows how to validate an incomplete widget value"
+                }
+            ]
+        },
+        {
             "text": "Menu",
             "name": "menu",
             "documentation": "web/menu",

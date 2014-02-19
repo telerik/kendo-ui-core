@@ -1,0 +1,64 @@
+
+        <div id="example" class="k-content"> 
+           <div class="configuration" style="width: 220px">
+                <span class="configHead">API Functions</span>
+                <ul class="options">
+                    <li>
+                       <button id="get" class="k-button">Get value</button>
+                   </li>
+                   <li>
+                       <button id="set" class="k-button">Set value</button>
+                       <input class="k-textbox" id="value" value="555 123 4567" style="float:none" />
+                   </li>
+                    <li>
+                        <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button> or <button id="readonly" class="k-button">Readonly</button>
+                    </li>
+                </ul>
+            </div>           
+            <div class="demo-section">
+                <input id="maskinput" />
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#maskinput").kendoMaskInput({
+                        mask: "(999) 000-0000"
+                    });
+
+                    var maskinput = $("#maskinput").data("kendoMaskInput");
+
+                    var setValue = function () {
+                        maskinput.value($("#value").val());
+                    };
+
+                    $("#enable").click(function() {
+                        maskinput.enable();
+                    });
+
+                    $("#disable").click(function() {
+                        maskinput.enable(false);
+                    });
+
+                    $("#readonly").click(function() {
+                        maskinput.readonly();
+                    });
+
+                    $("#set").click(setValue);
+
+                    $("#get").click(function() {
+                        alert(maskinput.value());
+                    });
+                });
+           </script>           
+            <style scoped>
+                .demo-section{
+                    width:150px;
+                    margin-right: 400px;
+                }
+
+                #value {
+                    width: 135px;
+                    margin-left: 3px;
+                }
+            </style>
+        </div>

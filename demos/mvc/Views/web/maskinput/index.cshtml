@@ -1,0 +1,85 @@
+
+        <div id="example" class="k-content">
+            <div class="demo-section">
+                <h2>Mask Input </h2>
+                <ul id="fieldlist">
+                    <li>
+                        <label for="net_mask">Subnet mask:</label>
+                        <input id="net_mask" value="255.255.255.192" />
+                    </li>
+                    <li>
+                        <label for="credit_card">Credit Card number:</label>
+                        <input id="credit_card" value="1234 1234 1234 1234" />
+                    </li>
+                    <li>
+                        <label for="phone_number">Phone number:</label>
+                        <input id="phone_number" value="555 123 4567" />
+                    </li>
+                    <li>
+                        <label for="ssn">Social security number:</label>
+                        <input id="ssn" value="003-12-3456" />
+                    </li>
+                    <li>
+                        <label for="postcode">UK postcode:</label>
+                        <input id="postcode" value="W1N 1AC"/>
+                    </li>
+                </ul>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#net_mask").kendoMaskInput({
+                        mask: "000.000.000.000"
+                    });
+
+                    $("#credit_card").kendoMaskInput({
+                        mask: "0000 0000 0000 0000"
+                    });
+
+                    $("#phone_number").kendoMaskInput({
+                        mask: "(999) 000-0000"
+                    });
+
+                    $("#ssn").kendoMaskInput({
+                        mask: "000-00-0000"
+                    });
+
+                    $("#postcode").kendoMaskInput({
+                        mask: "L0L 0LL"
+                    });
+                });
+            </script>
+
+            <style>
+                .demo-section {
+                    width: 300px;
+                    margin: 35px auto 50px;
+                    padding: 30px;
+                }
+
+                .demo-section h2 {
+                    text-transform: uppercase;
+                    font-size: 1.2em;
+                    margin-bottom: 10px;
+                }
+
+                #fieldlist
+                {
+                    margin:0;
+                    padding:0;
+                }
+
+                #fieldlist li
+                {
+                    list-style:none;
+                    padding:10px 0;
+                }
+
+                #fieldlist label {
+                    display: inline-block;
+                    width: 130px;
+                    margin-right: 5px;
+                    text-align: right;
+                }
+            </style>
+        </div>

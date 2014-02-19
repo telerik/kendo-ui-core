@@ -1,0 +1,30 @@
+    <div id="example" class="k-content">
+        <div class="demo-section">
+            <input id="maskinput"/>
+        </div>
+        <div class="demo-section">
+            <h3 class="title">Console log</h3>
+            <div class="console"></div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                function onChange() {
+                    kendoConsole.log("Change :: " + this.value());
+                }
+
+                $("#maskinput").kendoMaskInput({
+                    mask: "(999) 000-0000",
+                    change: onChange
+                });
+            });
+        </script>
+        <style scoped>
+            .demo-section {
+                width: 500px;
+                text-align: center;
+            }
+            .console {
+                margin: 0;
+            }
+        </style>
+    </div>
