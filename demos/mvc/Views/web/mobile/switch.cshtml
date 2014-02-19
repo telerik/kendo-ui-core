@@ -1,10 +1,11 @@
 <div id="example" class="k-content">
     <div class="demo-section">
+        <div class="settings-head"></div>
         <dl>
-            <dt>User cannot change pasword</dt>
-            <dd><input type="checkbox" id="email-switch" checked="checked" /></dd>
-            <dt>Password never expires</dt>
-            <dd><input id="wink-switch" /></dd>
+            <dt>Notifications</dt><dd><input type="checkbox" id="notifications-switch" checked="checked" /></dd>
+            <dt>Send notifications via mail</dt><dd><input id="mail-switch" /></dd>
+            <dt>Always visible to everyone</dt><dd><input id="visible-switch" /></dd>
+            <dt>Display real name</dt><dd><input id="name-switch" /></dd>
         </dl>
     </div>
     
@@ -13,37 +14,52 @@
             margin: 0;
             padding: 0;
         }
-        .demo-section dl dt {
+        .demo-section dl dt,
+        .demo-section dl dd {
             display: inline-block;
-            width: 200px;
             margin: 0;
-            padding: 0;
+            padding: 0 0 0 20px;
+            height: 40px;
+            line-height: 40px;
+            vertical-align: middle;
+            border-top: 1px solid #e7e7e7;
+        }
+        .demo-section dl dt {
+            width: 185px;
             clear: left;
             text-align: left;
         }
         .demo-section dl dd {
-            display: inline-block;
-            width: 100px;
+            width: 80px;
+            text-align: right;
+            padding-right: 10px;
         }
         .demo-section {
-            width: 400px;
-            height: 200px;
+            width: 315px;
             margin-top: 50px;
             padding: 0;
             text-align: center;
+        }
+        .settings-head {
+            height: 66px;
+            background: url('../../content/web/switch/settings-title.png') no-repeat 20px 50% #2db245;
+        }
+        .km-switch-handle, .km-switch-background {
+            color: #2db245;
         }
     </style>
 </div>
 
 <script>
     $(function() {
-        $("#email-switch").kendoMobileSwitch();
-        $("#wink-switch").kendoMobileSwitch();
-
-        $("#subscription-switch").kendoMobileSwitch({
-            checked: true,
+        $("#notifications-switch").kendoMobileSwitch();
+        $("#mail-switch").kendoMobileSwitch({
             onLabel: "YES",
             offLabel: "NO"
         });
+        $("#visible-switch").kendoMobileSwitch({
+            checked: true
+        });
+        $("#name-switch").kendoMobileSwitch();
     });
 </script>

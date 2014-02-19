@@ -1,7 +1,21 @@
 <div id="example" class="k-content">
-    <div id="touch-scroller" style="height: 200px">
-        <ul id="flat-listview"></ul>
+    <div class="demo-section">
+        <div class="todo-head"></div>
+        <div id="touch-scroller" style="height: 200px">
+            <ul id="flat-listview"></ul>
+        </div>
     </div>
+    <style scoped>
+        .demo-section {
+            width: 400px;
+            padding: 0;
+        }
+        .todo-head {
+            height: 80px;
+            background: url('../../content/web/scroller/title.png') no-repeat 50% 50%;
+            border-bottom: 1px solid #e7e7e7;
+        }
+    </style>
 </div>
 
 <script>

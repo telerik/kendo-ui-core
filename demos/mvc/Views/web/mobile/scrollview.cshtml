@@ -1,6 +1,8 @@
 <div id="example" class="k-content">
-    <div id="scrollview-wrapper">
+    <div class="demo-section">
         <div id="scrollview"></div>
+        <a id="prev-img" title="Previous Image"></a>
+        <a id="next-img" title="Next Image"></a>
     </div>
 </div>
 
@@ -53,14 +55,37 @@
 </script>
 
 <style scoped>
-    #scrollview-wrapper {
+    .demo-section {
         width: 600px;
-        margin: 0 auto;
-        padding: 1em;
-        border-radius: 10px;
-        background-color: #f4f4f4;
+        position: relative;
     }
-
+    #prev-img,
+    #next-img {
+        display: block;
+        position: absolute;
+        top: 10px;
+        z-idex: 1;
+        height: 400px;
+        width: 100px;
+        opacity: 0.2;
+    }
+    #prev-img {
+        left: 10px;
+        background: url('../../content/web/scrollview/arrow-left.png') no-repeat 50% 50%;
+    }
+    #next-img {
+        left: auto;
+        right: 10px;
+        background: url('../../content/web/scrollview/arrow-right.png') no-repeat 50% 50%;
+    }
+    a#prev-img:hover {
+        background: url('../../content/web/scrollview/arrow-left.png') no-repeat 50% 50% rgba(0,0,0,.3);
+        opacity: 1;
+    }
+    a#next-img:hover  {
+        background: url('../../content/web/scrollview/arrow-right.png') no-repeat 50% 50% rgba(0,0,0,.3);
+        opacity: 1;
+    }
     .title {
         font-style: italic;
         font-weight: bold;
