@@ -281,6 +281,7 @@ var __meta__ = {
                 e.preventDefault();
             } else if (key === keys.ENTER) {
                 this._change();
+                e.preventDefault();
             }
         },
 
