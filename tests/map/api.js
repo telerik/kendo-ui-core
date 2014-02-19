@@ -347,4 +347,23 @@
         createMap({ zoom: 1, zoomable: false });
         ok(!map.scroller.userEvents.multiTouch);
     });
+
+    // ------------------------------------------------------------
+    module("Map / Markers", {
+        teardown: destroyMap
+    });
+
+    test("creates static markers", function() {
+        createMap({ markers: [{ }] });
+        equal(map.markers.items.length, 1);
+    });
+
+    test("applies markerDefaults for static markers", function() {
+        createMap({ markers: [{ }], markerDefaults: { foo: true } });
+        ok(map.markers.items[0].options.foo);
+    });
+
+    test("does not trigger markerCreated for static markers", 0, function() {
+        createMap({ markers: [{ }], markerCreated: function() { ok(false); } });
+    });
 })();

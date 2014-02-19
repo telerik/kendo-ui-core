@@ -87,6 +87,18 @@
             }
         },
 
+        bind: function (options, dataItem) {
+            var marker = map.Marker.create(options, this.options);
+            marker.dataItem = dataItem;
+
+            var args = { marker: marker };
+            var cancelled = this.map.trigger("markerCreated", args);
+            if (!cancelled) {
+                this.add(marker);
+                return marker;
+            }
+        },
+
         _addOne: function(arg) {
             var marker = Marker.create(arg, this.options);
             marker.addTo(this);
@@ -114,21 +126,11 @@
             this._data = data;
             this.clear();
 
-            var locationGetter = this._getter(this.options.locationField);
+            var getLocation = this._getter(this.options.locationField);
             for (var i = 0; i < data.length; i++) {
-                var marker = new Marker({
-                    location: locationGetter(data[i]),
-                    tooltip: this.options.tooltip,
-                    shape: this.options.shape
-                });
-                marker.dataItem = data[i];
-
-                // TODO: Duplication with ShapeLayer._createMarker
-                var args = { marker: marker };
-                var cancelled = this.map.trigger("markerCreated", args);
-                if (!cancelled) {
-                    marker.addTo(this);
-                }
+                this.bind({
+                    location: getLocation(data[i])
+                }, data[i]);
             }
         },
 

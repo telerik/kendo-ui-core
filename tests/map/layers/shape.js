@@ -30,15 +30,13 @@
     module("Shape Layer / Markers", {
         setup: function() {
             map = new MapMock();
-            map.markers = { add: $.noop };
+            map.markers = new m.layers.MarkerLayer(map);
             layer = new ShapeLayer(map);
         }
     });
 
     test("adds marker when parsing points", function() {
-        map.markers = {
-            add: function() { ok(true); }
-        };
+        map.markers.add = function() { ok(true); };
 
         layer._load(pointData);
     });
@@ -50,21 +48,9 @@
         layer._load(pointData);
     });
 
-    test("sets default marker options", function() {
-        map.options.markerDefaults = { foo: true };
-
-        map.markers = {
-            add: function(marker) { ok(marker.options.foo); }
-        };
-
-        layer._load(pointData);
-    });
-
     test("sets marker location", function() {
-        map.markers = {
-            add: function(marker) {
-                ok(new Location(39.57422, -105.01621).equals(marker.location()));
-            }
+        map.markers.bind = function(options) {
+            ok(new Location(39.57422, -105.01621).equals(Location.create(options.location)));
         };
 
         layer._load(pointData);
@@ -72,8 +58,8 @@
 
     test("sets marker dataItem", function() {
         map.markers = {
-            add: function(marker) {
-                deepEqual(marker.dataItem, pointData[0]);
+            bind: function(options, dataItem) {
+                deepEqual(dataItem, pointData[0]);
             }
         };
 
@@ -81,9 +67,7 @@
     });
 
     test("does not add marker when markerCreated is cancelled", 0, function() {
-        map.markers = {
-            add: function() { ok(false); }
-        };
+        map.markers.add = function() { ok(false); };
         map.bind("markerCreated", function(e) { e.preventDefault(); });
 
         layer._load(pointData);
