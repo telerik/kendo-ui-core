@@ -596,13 +596,19 @@
                 var diagram = tool.toolService.diagram,
                     canvas = diagram.canvas;
 
-                diagram.scroller = tool.scroller = $(diagram.scrollable).kendoMobileScroller({
+                var scroller = diagram.scroller = tool.scroller = $(diagram.scrollable).kendoMobileScroller({
                     scroll: $.proxy(tool._move, tool)
                 }).data("kendoMobileScroller");
 
                 tool.movableCanvas = new Movable(canvas.element);
+                var virtualScroll = function (dimension, min, max) {
+                    dimension.makeVirtual();
+                    dimension.virtualSize(min || -20000, max || 20000);
+                };
 
-                tool.scroller.disable();
+                virtualScroll(scroller.dimensions.x);
+                virtualScroll(scroller.dimensions.y);
+                scroller.disable();
             },
             tryActivate: function (p, meta) {
                 return this.toolService.hoveredItem === undefined && meta.ctrlKey;
