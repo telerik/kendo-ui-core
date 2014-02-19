@@ -113,4 +113,19 @@
 
         equal(input.val(), "1-_");
     });
+
+    test("MaskInput persists empty mask on ENTER", function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(000) 000-0000"
+        });
+
+        input.focus();
+        caret(input[0], 7);
+        input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ENTER
+        });
+
+        equal(input.val(), "(___) ___-____");
+    });
 })();
