@@ -393,7 +393,6 @@
     test("agenda view WTF", function() {
         var agenda = agendaView({ date: new Date("2014/1/3") });
 
-debugger;
         agenda.render([
             new Event({
                 start: new Date("2014/1/1 11:00"),
