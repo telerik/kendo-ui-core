@@ -137,18 +137,21 @@ var __meta__ = {
                 targetCenter,
                 cursorOffset = { left: e.x.location, top: e.y.location },
                 offsetDelta,
-                xAxisDelta = e.x.delta,
-                yAxisDelta = e.y.delta,
+                axisDelta = { x: e.x.delta, y: e.y.delta },
                 prevVisible,
                 nextVisible,
                 placeholder = this.placeholder,
                 direction,
-                eventData;
+                axis = this.options.axis,
+                eventData = { item: draggedElement, list: this, draggableEvent: e };
+
+            if(axis === "x" || axis === "y") {
+                this._movementByAxis(axis, cursorOffset, axisDelta[axis], eventData);
+                return;
+            }
 
             if(target) {
-                targetCenter = kendo.getOffset(target.element);
-                targetCenter.top += target.element.outerHeight() / 2;
-                targetCenter.left += target.element.outerWidth() / 2;
+                targetCenter = this._getElementCenter(target.element);
 
                 offsetDelta = {
                     left: Math.round(cursorOffset.left - targetCenter.left),
@@ -157,13 +160,8 @@ var __meta__ = {
 
                 prevVisible = target.element.prev();
                 nextVisible = target.element.next();
-                
-                eventData = {
-                    item: draggedElement,
-                    target: target.element,
-                    list: this,
-                    draggableEvent: e 
-                };
+
+                $.extend(eventData, { target: target.element });
 
                 if(target.sortable.isEmpty()) {
                     this._movePlaceholder(target, null, eventData);
@@ -171,15 +169,15 @@ var __meta__ = {
                 }
 
                 if(this.floating) { //horizontal
-                    if(xAxisDelta < 0 && offsetDelta.left < 0) {
+                    if(axisDelta.x < 0 && offsetDelta.left < 0) {
                         direction = "prev";
-                    } else if(xAxisDelta > 0 && offsetDelta.left > 0) {
+                    } else if(axisDelta.x > 0 && offsetDelta.left > 0) {
                         direction = "next";
                     }
                 } else { //vertical
-                    if(yAxisDelta < 0 && offsetDelta.top < 0) {
+                    if(axisDelta.y < 0 && offsetDelta.top < 0) {
                         direction = "prev";
-                    } else if(yAxisDelta > 0 && offsetDelta.top > 0) {
+                    } else if(axisDelta.y > 0 && offsetDelta.top > 0) {
                         direction = "next";
                     }
                 }
@@ -321,19 +319,54 @@ var __meta__ = {
             }
         },
 
+        _movementByAxis: function(axis, cursorOffset, delta, eventData) {
+            var cursorPosition = (axis === "x") ? cursorOffset.left : cursorOffset.top,
+                target = (delta < 0) ? this.placeholder.prev() : this.placeholder.next(),
+                targetCenter;
+
+            if (target.length && !target.is(":visible")) {
+                target = (delta <0) ? target.prev() : target.next();
+            }
+
+            $.extend(eventData, { target: target });
+            targetCenter = this._getElementCenter(target);
+
+            if (targetCenter) {
+                targetCenter = (axis === "x") ? targetCenter.left : targetCenter.top;
+            }
+
+            if (target.length && delta < 0 && cursorPosition - targetCenter < 0) { //prev
+                this._movePlaceholder({ element: target, sortable: this }, "prev", eventData);
+            } else if (target.length && delta > 0 && cursorPosition - targetCenter > 0) { //next
+                this._movePlaceholder({ element: target, sortable: this }, "next", eventData);
+            }
+        },
+
         _movePlaceholder: function(target, direction, eventData) {
             var placeholder = this.placeholder;
 
-            if(!target.sortable.trigger(BEFORE_MOVE, eventData)) {
-                if(!direction) { //the placeholder should be appended to the Sortable's container
+            if (!target.sortable.trigger(BEFORE_MOVE, eventData)) {
+
+                if (!direction) {
                     target.element.append(placeholder);
-                } else if (direction === "prev") { //the placeholder should be appended before target element
+                } else if (direction === "prev") {
                     target.element.before(placeholder);
-                } else if (direction === "next") { //the placeholder should be appended after target element
+                } else if (direction === "next") {
                     target.element.after(placeholder);
                 }
+
                 target.sortable.trigger(MOVE, eventData);
             }
+        },
+
+        _getElementCenter: function(element) {
+            var center = kendo.getOffset(element);
+            if(center) {
+                center.top += element.outerHeight() / 2;
+                center.left += element.outerWidth() / 2;
+            }
+
+            return center;
         },
 
         _isFloating: function(item) {
