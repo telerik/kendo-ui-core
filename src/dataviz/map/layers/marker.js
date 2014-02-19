@@ -41,7 +41,9 @@
         options: {
             zIndex: 1000,
             autoBind: true,
-            dataSource: {}
+            dataSource: {},
+            locationField: "location",
+            titleField: "title"
         },
 
         add: function(arg) {

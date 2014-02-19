@@ -414,10 +414,10 @@
             layer = new MarkerLayer(map, deepExtend({
                 dataSource: {
                     data: [{
-                        location: [10, 10],
+                        latlng: [10, 10],
                         text: "Foo"
                     }, {
-                        location: [20, 20],
+                        latlng: [20, 20],
                         text: "Foo"
                     }]
                 }
@@ -442,13 +442,23 @@
         });
 
         test("binds location", function() {
-            createBoundLayer({ locationField: "location" });
+            createBoundLayer({ locationField: "latlng" });
             ok(new Location(10, 10).equals(marker.location()));
+        });
+
+        test("does not bind location if no field is specified", function() {
+            createBoundLayer({ });
+            equal(marker.location(), null);
         });
 
         test("binds title", function() {
             createBoundLayer({ titleField: "text" });
             equal(marker.options.title, "Foo");
+        });
+
+        test("does not bind title if no field is specified", function() {
+            createBoundLayer({ });
+            equal(marker.options.title, undefined);
         });
 
         test("sets marker shape", function() {
