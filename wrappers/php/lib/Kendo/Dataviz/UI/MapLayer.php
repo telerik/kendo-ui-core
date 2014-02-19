@@ -54,6 +54,45 @@ North-West lat, longitude, South-East latitude, longitude.If not specified, the 
     }
 
     /**
+    * The data item field which contains the marker location.
+The field should be an array with two numbers - latitude and longitude.Requires the dataSource option to be set.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function locationField($value) {
+        return $this->setProperty('locationField', $value);
+    }
+
+    /**
+    * The default marker shape for data-bound markers. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
+For example "pinTarget" is rendered as "k-marker-pin-target".
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function shape($value) {
+        return $this->setProperty('shape', $value);
+    }
+
+    /**
+    * The data item field which contains the marker title.
+Requires the dataSource option to be set.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function titleField($value) {
+        return $this->setProperty('titleField', $value);
+    }
+
+    /**
+    * The default Kendo UI Tooltip options for data-bound markers.
+    * @param \Kendo\Dataviz\UI\MapLayerTooltip|array $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function tooltip($value) {
+        return $this->setProperty('tooltip', $value);
+    }
+
+    /**
     * The the opacity for the layer.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer

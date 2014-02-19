@@ -6,6 +6,15 @@ class MapLayerDefaults extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * The default configuration for marker layers.
+    * @param \Kendo\Dataviz\UI\MapLayerDefaultsMarker|array $value
+    * @return \Kendo\Dataviz\UI\MapLayerDefaults
+    */
+    public function marker($value) {
+        return $this->setProperty('marker', $value);
+    }
+
+    /**
     * The default configuration for shape layers.
     * @param \Kendo\Dataviz\UI\MapLayerDefaultsShape|array $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaults
