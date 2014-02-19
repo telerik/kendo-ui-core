@@ -46,8 +46,9 @@
             RIGHT = "Right",
             LEFT = "Left",
             BOTTOM = "Bottom",
-            DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO];
-        ZOOM_RATE = 1.1;
+            DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
+            SCROLL_MIN = -20000,
+            SCROLL_MAX = 20000;
 
         diagram.Cursors = Cursors;
 
@@ -603,7 +604,7 @@
                 tool.movableCanvas = new Movable(canvas.element);
                 var virtualScroll = function (dimension, min, max) {
                     dimension.makeVirtual();
-                    dimension.virtualSize(min || -20000, max || 20000);
+                    dimension.virtualSize(min || SCROLL_MIN, max || SCROLL_MAX);
                 };
 
                 virtualScroll(scroller.dimensions.x);
