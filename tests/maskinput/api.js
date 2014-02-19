@@ -70,7 +70,7 @@
 
         maskinput.value("");
 
-        equal(input.val(), "(__-__)");
+        equal(input.val(), "");
     });
 
     test("value method clears widget value when new value is not valid", function() {
@@ -82,7 +82,7 @@
 
         maskinput.value("test");
 
-        equal(input.val(), "(__-__)");
+        equal(input.val(), "");
     });
 
     test("value method returns widget value", function() {

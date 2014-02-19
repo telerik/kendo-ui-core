@@ -116,15 +116,22 @@ var __meta__ = {
         },
 
         value: function(value) {
+            var element = this.element;
+            var emptyMask = this._emptyMask;
+
             if (value === undefined) {
                 return this.element.val();
             }
 
             value = this._unmask(value + "");
 
-            this.element.val(value ? this._emptyMask : "");
+            element.val(value ? emptyMask : "");
 
             this._mask(0, this._maskLength, value);
+
+            if (kendo._activeElement() !== element && element.val() === emptyMask) {
+                element.val("");
+            }
         },
 
         readonly: function(readonly) {
