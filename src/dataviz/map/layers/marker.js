@@ -200,7 +200,7 @@
 
                 this.element = $(doc.createElement("span"))
                     .addClass("k-marker k-marker-" + kendo.toHyphens(options.shape || "pin"))
-                    .attr("alt", options.title)
+                    .attr("title", options.title)
                     .css("zIndex", options.zIndex);
 
                 if (layer) {

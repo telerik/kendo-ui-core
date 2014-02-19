@@ -78,13 +78,13 @@
         test("renders no title by default", function() {
             marker = new Marker();
             marker.addTo(layer);
-            ok(!marker.element.attr("alt"));
+            ok(!marker.element.attr("title"));
         });
 
         test("renders title", function() {
             marker = new Marker({ title: "foo" });
             marker.addTo(layer);
-            equal(marker.element.attr("alt"), "foo");
+            equal(marker.element.attr("title"), "foo");
         });
 
         test("renders no z-index by default", function() {
