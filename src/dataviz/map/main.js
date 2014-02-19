@@ -137,6 +137,12 @@
                 this.zoomControl.destroy();
             }
 
+            this.markers.destroy();
+
+            for (var i = 0; i < this.layers.length; i++) {
+                this.layers[i].destroy();
+            };
+
             Widget.fn.destroy.call(this);
         },
 
