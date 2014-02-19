@@ -799,4 +799,41 @@
 
         keydown(kendo.keys.UP);
     });
+
+    test("navigate to view with less groups", function() {
+        setupWidget({
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                        { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                    ],
+                    title: "Room"
+                }
+            ],
+            views: [
+                "day",
+                {
+                    type: "week",
+                    selected: true,
+                    group: {
+                        resources: ["Rooms"]
+                    }
+                }
+            ]
+        });
+
+        var td = $(scheduler.view().groups[1].getTimeSlotCollection(0).first().element);
+
+        td.trigger({
+            type: "mousedown",
+            currentTarget: td
+        });
+
+        scheduler.view("day");
+
+        equal(scheduler._selection.groupIndex, 0);
+    });
 })();

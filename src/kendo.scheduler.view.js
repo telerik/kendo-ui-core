@@ -1087,8 +1087,14 @@ kendo_module({
                 selection.isAllDay = slot.isDaySlot;
                 selection.start = slot.startDate();
                 selection.end = slot.endDate();
-            } else if (!group.daySlotCollectionCount()) {
-                selection.isAllDay = false;
+            } else {
+                if (!group.daySlotCollectionCount()) {
+                    selection.isAllDay = false;
+                }
+
+                if (!this.groups[selection.groupIndex]) {
+                    selection.groupIndex = 0;
+                }
             }
         },
 
