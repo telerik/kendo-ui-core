@@ -173,20 +173,40 @@
 
 @primary-button-text-color: #fff;
 @primary-button-background-color: #f35800;
-@primary-button-border-color: #f35800;
+@primary-button-border-color: #ef671a;
 @primary-gradient: "#f6813f 0%, #f35a03 100%";
+@primary-shadow:none;
 
-@primary-hover-text-color: #282828;
-@primary-hover-background-color: #a99f9a;
-@primary-hover-border-color: #bcb4b0;
-@primary-hover-gradient: "#d3cecc 0%, #bcb4b0 100%";
+@primary-hover-text-color: @primary-button-text-color;
+@primary-hover-background-color: #ed4300;
+@primary-hover-border-color: @primary-button-border-color;
+@primary-hover-gradient: "#f1713f 0%, #ed4503 100%";
+@primary-hover-shadow:none;
 
-@primary-focused-color: #282828; 
-@primary-focused-border-color: #bcb4b0;
-@primary-focused-gradient: "#d3cecc 0%, #bcb4b0 100%";
+@primary-focused-color: @primary-button-text-color; 
+@primary-focused-border-color: #e84200;
+@primary-focused-gradient: @primary-hover-gradient;
+@primary-focused-active-item-shadow: 0 0 3px 1px #e10000;
 
-@primary-active-gradient: "#f6813f 0%, #f35a03 100%";
-@primary-focused-active-item-shadow: 0 0 3px 0 #c5c5c5;
+@primary-active-text-color: @primary-button-text-color;
+@primary-active-background-color: #f35800;
+@primary-active-gradient: @primary-gradient;
 @primary-active-border-color: #ef671a;
+@primary-active-shadow:none;
+
+@primary-diabled-text-color: #fab58e;
+@primary-disabled-background-color: @primary-button-background-color;
+@primary-disabled-border-color: @primary-button-border-color;
+@primary-disabled-gradient: @primary-gradient;
+
+@button-hover-text-color: @hover-text-color;
+@button-hover-background-color: @hover-background-color;
+@button-hover-border-color: @hover-border-color;
+
+@button-active-background: @selected-background-color;
+@button-active-border-color: @selected-border-color;
+@button-focused-border-color: @button-border-color;
+@button-focused-shadow: @focused-item-shadow;
+@button-focused-active-shadow: @focused-active-item-shadow;
 
 @import "theme-template.less";
