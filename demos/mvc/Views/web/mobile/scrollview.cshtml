@@ -3,6 +3,7 @@
         <div id="scrollview"></div>
         <a id="prev-img" title="Previous Image"></a>
         <a id="next-img" title="Next Image"></a>
+        <p>Photos via <a href="http://www.500px.com">500px.com</a></p>
     </div>
 </div>
 
@@ -59,6 +60,11 @@
         width: 600px;
         position: relative;
     }
+    .demo-section > p {
+        text-align: right;
+        margin-top: 10px;
+        font-size: .8em;
+    }
     #prev-img,
     #next-img {
         display: block;
@@ -87,13 +93,14 @@
         opacity: 1;
     }
     .title {
-        font-style: italic;
         font-weight: bold;
+        text-transform: uppercase;
         text-align: center;
         margin: 0;
         padding: 1em;
+        background-color: #222;
+        color: #fff;
     }
-
     .image {
         display: block;
         height: 400px;
