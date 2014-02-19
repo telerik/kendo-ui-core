@@ -1,6 +1,8 @@
 <div id="example" class="k-content">
 
-    <button id="modalview-trigger">Open Modalview</button>
+    <div class="demo-section">
+    <button type="button" id="modalview-trigger">Open ModalView</button>
+    </div>
 
     <div data-role="modalview" id="modalview-login" style="width: 50%;">
         <div data-role="header">
@@ -9,92 +11,74 @@
             </div>
         </div>
 
-        <ul data-style="inset">
-            <li><label for="username">Username: <input type="text" id="username" /></label></li>
-            <li><label for="password">Password: <input type="password" id="password" /></label></li>
+        <ul>
+            <li><label for="username">Username: </label><input type="text" id="username" /></li>
+            <li><label for="password">Password: </label><input type="password" id="password" /></li>
         </ul>
         <a onclick="closeModalViewLogin()" id="modalview-login-button" type="button">Login</a>
         <a onclick="closeModalViewLogin()" id="modalview-reg-button" type="button">Register</a>
     </div>
 
+    <style scoped>
+        .demo-section {
+            width: 500px;
+            margin-top: 50px;
+            padding: 30px 10px;
+            text-align: center;
+        }
+        
+        #modalview-login ul {
+            width: 90%;
+            margin: 30px auto 20px;
+            padding: 0;
+            list-style-type: none;
+        }
+        #modalview-login ul label {
+            display: block;
+            width: 50%px;
+            padding: 0 5px 0 0;
+        }
+        #modalview-login ul input {
+            display: block;
+            width: 100%;
+            height: 36px;
+            line-height: 26px;
+            vertical-align: middle;
+            border: 1px solid #e7e7e7;
+            padding: 5px;
+            margin: 5px 0 10px;
+        }
+        #modalview-login-button,
+        #modalview-reg-button {
+            display: block;
+            margin: 0 auto 20px;
+            text-align: center;
+            font-weight: bold;
+            width: 90%;
+            height: 36px;
+            line-height: 36px;
+            vertical-align: middle;
+            background-color: #015991;
+            color: #ffffff;
+        }
+        #modalview-reg-button {
+            margin-bottom: 30px;
+            background-color: #929394;
+        }
+        #modalview-login-button:hover ,
+        #modalview-reg-button:hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
 </div>
 
-
-<style scoped>
-    #modalview-login-button,
-    #modalview-reg-button,
-    #modalview-open-button {
-        display: block;
-        text-align: center;
-        margin: .6em .8em;
-        font-size: 1.2em;
-    }
-
-    #modalview-open-button {
-        margin: 0 3em;
-        padding: .5em;
-    }
-    .km-flat #modalview-open-button {
-        color: #fff;
-    }
-
-    #modalview-camera {
-        text-align: center;
-    }
-
-    #modalview-camera img {
-        display: block;
-        margin: 30px auto;
-    }
-
-    #modalview-camera .km-content,
-    .km-ios #modalview-login .km-content {
-        background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
-    }
-
-    #modalview-login label {
-        display: inline-block;
-        width: 100%;
-    }
-    .km-ios #modalview-camera .km-button,
-    .km-ios #modalview-login .km-button,
-    .km-ios #modalview-camera .km-navbar,
-    .km-ios #modalview-login .km-header,
-    .km-blackberry #modalview-camera .km-navbar,
-    .km-blackberry #modalview-login .km-navbar
-    {
-        background-color: #000;
-    }
-
-    .km-blackberry #modalview-camera .km-button
-    {
-        color: #fff;
-    }
-
-    .km-ios #modalview-camera .km-button:active,
-    .km-ios #modalview-camera .km-state-active,
-    .km-ios #modalview-login .km-button:active,
-    .km-ios #modalview-login .km-state-active {
-        background-color: #2e2e2e;
-    }
-
-    .km-ios #modalview-login #modalview-login-button,
-    .km-flat #modalview-login #modalview-login-button {
-        background-color: Green;
-        color: #fff;
-    }
-
-    .km-tablet .km-ios #modalview-camera .km-view-title,
-    .km-tablet .km-ios #modalview-login .km-view-title {
-        color: #fff;
-        text-shadow: 0 -1px rgba(0,0,0,.5);
-    }
-
-</style>
 <script>
-</script>
-
-<script>
+    $(document).ready(function() {
+        $("#modalview-trigger").kendoButton();
+    });
+    
     function closeModalViewLogin() {
         $("#modalview-login").kendoMobileModalView("close");
     }

@@ -1,16 +1,38 @@
 <div id="example" class="k-content">
-    <h3>Profile</h3>
-    <h4>Eduardo <span>Saavedra</span></h4><img src="../../content/mobile/overview/eduardo.jpg" />
-    <p>Brand Manager at Marketing Team</p>
-
-    <h4>Password</h4>
-
-    <dl>
-        <dt>User cannot change pasword</dt>
-        <dd><input type="checkbox" id="email-switch" checked="checked" /></dd>
-        <dt>Password never expires</dt>
-        <dd><input id="wink-switch" /></dd>
-    </dl>
+    <div class="demo-section">
+        <dl>
+            <dt>User cannot change pasword</dt>
+            <dd><input type="checkbox" id="email-switch" checked="checked" /></dd>
+            <dt>Password never expires</dt>
+            <dd><input id="wink-switch" /></dd>
+        </dl>
+    </div>
+    
+    <style scoped>
+        .demo-section dl {
+            margin: 0;
+            padding: 0;
+        }
+        .demo-section dl dt {
+            display: inline-block;
+            width: 200px;
+            margin: 0;
+            padding: 0;
+            clear: left;
+            text-align: left;
+        }
+        .demo-section dl dd {
+            display: inline-block;
+            width: 100px;
+        }
+        .demo-section {
+            width: 400px;
+            height: 200px;
+            margin-top: 50px;
+            padding: 0;
+            text-align: center;
+        }
+    </style>
 </div>
 
 <script>

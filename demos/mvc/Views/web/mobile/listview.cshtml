@@ -1,12 +1,39 @@
 <div id="example" class="k-content">
-    <div id="touch-scroller" style="height: 200px">
-        <ul id="flat-listview"></ul>
+    
+    <div class="demo-section">
+        <div class="todo-head"></div>
+        <div id="touch-scroller" style="height: 200px">
+            <ul id="flat-listview"></ul>
+        </div>
     </div>
+    <style scoped>
+        .demo-section {
+            width: 400px;
+            padding: 0;
+        }
+        .todo-head {
+            height: 80px;
+            background: url('../../content/web/listview/simple-to-do.png') no-repeat 50% 50%;
+            border-bottom: 1px solid #e7e7e7;
+        }
+    </style>
 </div>
 
 <script>
     $(function() {
-        var flatData = [ "Sashimi salad", "Chirashi sushi", "Seaweed salad", "Edamame", "Miso soup", "Maguro", "Shake", "Shiromi", "Tekka maki", "Hosomaki Mix", "California rolls", "Seattle rolls", "Spicy Tuna rolls", "Ebi rolls", "Chicken Teriyaki", "Salmon Teriyaki", "Gohan", "Tori Katsu", "Yaki Udon" ];
+        var flatData = [
+                        "Determine project scope",
+                        "Define preliminary resources",
+                        "Conduct needs analysis",
+                        "Draft preliminary specifications",
+                        "Develop delivery timeline",
+                        "Obtain approvals to proceed",
+                        "Secure reuired resources",
+                        "Develop functional specifications",
+                        "Develop prototype",
+                        "Review functional specifications",
+                        "Identify design parameters",
+                        "Assign development staff" ];
 
         $("#touch-scroller").kendoMobileScroller();
         $("#flat-listview").kendoMobileListView({ dataSource: flatData });

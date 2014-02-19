@@ -1,10 +1,22 @@
 <div id="example" class="k-content">
 
-    <div id="my-navbar">
-        <button id="left-navbar-button" data-align="left">Index</button>
-        <span data-role="view-title"></span>
-        <button data-align="right" id="right-navbar-button">Save</button>
+    <div class="demo-section">
+        <div id="my-navbar">
+            <button id="left-navbar-button" data-align="left">Index</button>
+            <span data-role="view-title"></span>
+            <button data-align="right" id="right-navbar-button">Save</button>
+        </div>
     </div>
+    
+    <style scoped>
+        .demo-section {
+            width: 500px;
+            height: 200px;
+            margin-top: 50px;
+            padding: 0;
+            text-align: center;
+        }
+    </style>
 </div>
 
 <script>
@@ -13,6 +25,6 @@
         $("#right-navbar-button").kendoMobileButton();
         $("#my-navbar").kendoMobileNavBar();
         // set navbar title dynamically
-        $("#my-navbar").kendoMobileNavBar("title", "My Title");
+        $("#my-navbar").kendoMobileNavBar("title", "NavBar Title");
     });
 </script>

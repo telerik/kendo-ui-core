@@ -1,6 +1,9 @@
 <div id="example" class="k-content">
 
-    <a href="#" id="select-people">Select people</a>
+    <div class="demo-section">
+        <a href="#" id="select-people">Tag People</a>
+    </div>
+    
 
     <div data-role="popover" id="popover-people" >
         <div data-role="view" data-title="People">
@@ -23,6 +26,9 @@
 </div>
 
 <script>
+    $(document).ready(function() {
+        $("#select-people").kendoButton();
+    });
     function closeParentPopover(e) {
         var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
         popover.close();
