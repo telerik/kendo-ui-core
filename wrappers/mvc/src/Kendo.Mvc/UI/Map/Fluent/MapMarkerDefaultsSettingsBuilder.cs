@@ -29,8 +29,19 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
-        
+
         //<< Fields   
+
+        /// <summary>
+        /// The marker shape name. The "pin" and "pinTarget" shapes are predefined.
+        /// </summary>
+        /// <param name="value">The name of the shape.</param>
+        public MapMarkerDefaultsSettingsBuilder Shape(string name)
+        {
+            container.ShapeName = name;
+
+            return this;
+        }
 
         /// <summary>
         /// Default Kendo UI Tooltip options for this marker.
