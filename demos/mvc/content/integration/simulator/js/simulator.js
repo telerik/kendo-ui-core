@@ -59,7 +59,12 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
             var devicename = deviceSelector.value(),
                 head = $(document.getElementsByTagName("head")[0]),
                 deviceLink = head.find("link[href*='devices/']"),
-                url = "../../content/integration/simulator/devices/" + devicename + "/styles.css", newLink, matches;
+                location = window.location.href,
+                url, newLink, matches;
+
+            location += location[location.length-1] != "/" ? "/" : "";
+
+            url = location + "../../content/integration/simulator/devices/" + devicename + "/styles.css";
 
             if (kendo.support.browser.msie && kendo.support.browser.version < 11) {
                 newLink = document.createStyleSheet(url);
@@ -75,7 +80,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
             matches = deviceSelector.text().match(/(^\w+)\s(.*)/m);
             $(".description .device")
                     .html(matches[1] + "<span class='model'>" + matches[2] + "</span>")
-                    .css("background-image", "url('../../content/integration/simulator/images/" + devicename + ".png')");
+                    .css("background-image", "url('" + location + "../../content/integration/simulator/images/" + devicename + ".png')");
 
             setTimeout(function () {
                 deviceLink.remove();
