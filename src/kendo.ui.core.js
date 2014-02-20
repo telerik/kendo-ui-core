@@ -32,7 +32,7 @@
         "./kendo.colorpicker",
         "./kendo.listview",
         "./kendo.numerictextbox",
-        "./kendo.maskinput",
+        "./kendo.maskedtextbox",
         "./kendo.menu",
         "./kendo.editable",
         "./kendo.panelbar",
