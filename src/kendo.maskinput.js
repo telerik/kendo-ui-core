@@ -286,6 +286,10 @@ var __meta__ = {
         },
 
         _keypress: function(e) {
+            if (e.which === 0) {
+                return;
+            }
+
             var selection = caret(this.element[0]);
 
             this._mask(selection[0], selection[1], String.fromCharCode(e.which));
@@ -354,6 +358,10 @@ var __meta__ = {
             element.value = this._old = current.join("");
 
             if (kendo._activeElement() === element) {
+                if (idx === undefined) {
+                    idx = this._maskLength;
+                }
+
                 caret(element, idx);
             }
         },

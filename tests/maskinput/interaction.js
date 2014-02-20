@@ -128,4 +128,20 @@
 
         equal(input.val(), "(___) ___-____");
     });
+
+    test("MaskInput should not call mask if e.which is 0", 0, function() {
+        var maskinput = new MaskInput(input, {
+            mask: "(000) 000-0000"
+        });
+
+        input.focus();
+        caret(input[0], 7);
+        input.trigger({
+            type: "keypress",
+            which: 0,
+            preventDefault: function() {
+                ok(false);
+            }
+        });
+    });
 })();
