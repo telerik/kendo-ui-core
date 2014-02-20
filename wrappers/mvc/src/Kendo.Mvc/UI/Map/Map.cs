@@ -25,11 +25,11 @@ namespace Kendo.Mvc.UI
                 
             Layers = new List<MapLayer>();
                 
-            MarkerDefaults = new MapMarkerDefaultsSettings();
-                
             Markers = new List<MapMarker>();
-                
-        //<< Initialization
+
+            //<< Initialization
+
+            MarkerDefaults = new MapMarkerDefaultsSettings(this);
         }
 
         public double[] Center { get; set; }

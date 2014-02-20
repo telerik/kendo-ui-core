@@ -42,6 +42,10 @@ module CodeGen::MVC::Wrappers
 		'map.markerdefaults'
     ]
 
+    INITIALIZATION_SKIP_LIST = [
+		'map.markerdefaults'
+    ]
+
     IGNORED = [
         'map.center',
         'map.controls.attribution.position',
@@ -98,7 +102,10 @@ module CodeGen::MVC::Wrappers
         })
 
         COMPOSITE_FIELD_INITIALIZATION = ERB.new(%{//>> Initialization
-        <%= composite_options.map { |option| option.to_initialization }.join %>
+        <%= composite_options.map { |option|
+			next if INITIALIZATION_SKIP_LIST.include?(option.full_name)
+			option.to_initialization
+		}.join %>
         //<< Initialization})
 
         COMPONENT_FLUENT_FIELDS = ERB.new(%{//>> Fields
