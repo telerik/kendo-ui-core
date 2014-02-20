@@ -31,6 +31,7 @@ var __meta__ = {
 
             element = that.element;
 
+            that.wrapper = element;
             that._tokenize();
             that._reset();
 
