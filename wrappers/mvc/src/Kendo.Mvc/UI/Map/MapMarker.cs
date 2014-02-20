@@ -10,34 +10,50 @@ namespace Kendo.Mvc.UI
     {
         public MapMarker(Map map)
         {
+            //>> Initialization
+        
+        //<< Initialization
+
             Tooltip = new MapMarkerTooltip(map.ViewContext, map.Initializer, map.ViewData);
             HtmlAttributes = new RouteValueDictionary();
         }
 
-        /// <summary>
-        /// Gets the HTML attributes.
-        /// </summary>
-        /// <value>The HTML attributes.</value>
+        //>> Fields
+        
+        public double[] Location { get; set; }
+        
+        public string Title { get; set; }
+        
+        public MapMarkersShape? Shape { get; set; }
+        
+        //<< Fields
+
         public IDictionary<string, object> HtmlAttributes
         {
             get;
             private set;
         }
 
-        public double[] Location { get; set; }
-
         public MapMarkerTooltip Tooltip { get; set; }
-
-        public MapMarkersShape? Shape { get; set; }
 
         public string ShapeName { get; set; }
 
+
         protected override void Serialize(IDictionary<string, object> json)
         {
+            //>> Serialization
+        
             if (Location != null)
             {
                 json["location"] = Location;
             }
+	    
+            if (Title.HasValue())
+            {
+                json["title"] = Title;
+            }
+            
+        //<< Serialization
 
             var tooltip = Tooltip.ToJson();
             if (tooltip.Any())

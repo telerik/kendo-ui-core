@@ -20,6 +20,28 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// The marker location on the map. Coordinates are listed as [Latitude, Longitude].
+        /// </summary>
+        /// <param name="value">The value that configures the location.</param>
+        public MapMarkerBuilder Location(params double[] value)
+        {
+            container.Location = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The marker title. Displayed as browser tooltip.
+        /// </summary>
+        /// <param name="value">The value that configures the title.</param>
+        public MapMarkerBuilder Title(string value)
+        {
+            container.Title = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The marker shape. Supported shapes are "pin" and "pinTarget".
         /// </summary>
         /// <param name="value">The value that configures the shape.</param>
@@ -29,6 +51,8 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+        
+        //<< Fields
 
         /// <summary>
         /// The marker shape name. The "pin" and "pinTarget" shapes are predefined.
@@ -42,18 +66,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures the location of the marker.
-        /// </summary>
-        /// <param name="latitude">The latitude</param>
-        /// <param name="longtitude">The longtitude</param>
-        public MapMarkerBuilder Location(double latitude, double longtitude)
-        {
-            container.Location = new[] { latitude, longtitude };
-
-            return this;
-        }
-
-        /// <summary>
         /// The tooltip options for this marker.
         /// </summary>
         /// <param name="configurator">The action that configures the tooltip.</param>
@@ -62,9 +74,6 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new MapMarkerTooltipBuilder(container.Tooltip));
             return this;
         }
-        
-        //<< Fields
-
         
         /// <summary>
         /// Sets the HTML attributes.
@@ -88,8 +97,7 @@ namespace Kendo.Mvc.UI.Fluent
             container.HtmlAttributes.Merge(attributes);
 
             return this;
-        }
-        
+        }        
     }
 }
 

@@ -27,6 +27,7 @@ module CodeGen::MVC::Wrappers
         'map.controls.zoom',
         'map.layers.datasource',
         'map.markers.position',
+		'map.markers.shape',
         'actionsheet.items.text',
         'buttongroup.items.text',
         'tabstrip.items.text',
@@ -35,7 +36,8 @@ module CodeGen::MVC::Wrappers
     ]
 
     FLUENT_SKIP_LIST = [
-        'map.layers'
+        'map.layers',
+		'map.markers'
     ]
 
     IGNORED = [
@@ -49,7 +51,7 @@ module CodeGen::MVC::Wrappers
         'map.layers.subdomains',
         'map.layers.tooltip',
         'map.markerdefaults',
-        'map.markers',
+        'map.markers.tooltip',
         'popover.popup.direction',
         'layout.id',
         'view.model',

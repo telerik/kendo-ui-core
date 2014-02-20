@@ -25,9 +25,10 @@ namespace Kendo.Mvc.UI
                 
             Layers = new List<MapLayer>();
                 
+            Markers = new List<MapMarker>();
+                
         //<< Initialization
 
-            Markers = new List<MapMarker>();
             MarkerDefaults = new MapMarkerDefaultsSettings(this);
         }
 
@@ -61,6 +62,12 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public List<MapMarker> Markers
+        {
+            get;
+            set;
+        }
+        
         public double? MinZoom { get; set; }
         
         public double? MaxZoom { get; set; }
@@ -76,12 +83,6 @@ namespace Kendo.Mvc.UI
         public bool? Zoomable { get; set; }
         
         //<< Fields
-
-        public List<MapMarker> Markers
-        {
-            get;
-            private set;
-        }
 
         public MapMarkerDefaultsSettings MarkerDefaults
         {
@@ -116,6 +117,12 @@ namespace Kendo.Mvc.UI
             if (layers.Any())
             {
                 json["layers"] = layers;
+            }
+                
+            var markers = Markers.ToJson();
+            if (markers.Any())
+            {
+                json["markers"] = markers;
             }
                 
             if (MinZoom.HasValue)
@@ -159,12 +166,6 @@ namespace Kendo.Mvc.UI
             if (markerDefaults.Any())
             {
                 json["markerDefaults"] = markerDefaults;
-            }
-                
-            var markers = Markers.ToJson();
-            if (markers.Any())
-            {
-                json["markers"] = markers;
             }
 
             writer.Write(Initializer.Initialize(Selector, "Map", json));
