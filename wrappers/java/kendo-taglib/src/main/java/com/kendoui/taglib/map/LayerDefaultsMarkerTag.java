@@ -12,15 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MarkerTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class LayerDefaultsMarkerTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        MarkersTag parent = (MarkersTag)findParentWithClass(MarkersTag.class);
 
-        parent.addMarker(this);
+        LayerDefaultsTag parent = (LayerDefaultsTag)findParentWithClass(LayerDefaultsTag.class);
+
+
+        parent.setMarker(this);
 
 //<< doEndTag
 
@@ -46,19 +48,19 @@ public class MarkerTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "map-marker";
+        return "map-layerDefaults-marker";
     }
 
-    public void setTooltip(com.kendoui.taglib.map.MarkerTooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.map.LayerDefaultsMarkerTooltipTag value) {
         setProperty("tooltip", value);
     }
 
-    public java.lang.Object getLocation() {
-        return (java.lang.Object)getProperty("location");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setLocation(java.lang.Object value) {
-        setProperty("location", value);
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
     public java.lang.String getShape() {
@@ -67,14 +69,6 @@ public class MarkerTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setShape(java.lang.String value) {
         setProperty("shape", value);
-    }
-
-    public java.lang.String getTitle() {
-        return (java.lang.String)getProperty("title");
-    }
-
-    public void setTitle(java.lang.String value) {
-        setProperty("title", value);
     }
 
 //<< Attributes

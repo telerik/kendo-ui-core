@@ -63,6 +63,14 @@ public class LayerDefaultsShapeTag extends  BaseTag  /* interfaces */ /* interfa
         setProperty("attribution", value);
     }
 
+    public float getOpacity() {
+        return (float)getProperty("opacity");
+    }
+
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
+    }
+
 //<< Attributes
 
 }
