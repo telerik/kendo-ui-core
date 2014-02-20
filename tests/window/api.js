@@ -86,6 +86,15 @@
         ok(dialog.wrapper.prev("div").is(".k-overlay"));
     });
 
+    test("destroy does not throw errors when called twice on the same object", function() {
+        var dialog = createWindow();
+
+        dialog.destroy();
+        dialog.destroy();
+
+        ok(true);
+    });
+
     test("closing a modal window moves overlay before previous window", function() {
         var dialog = createWindow({
                 modal: true
