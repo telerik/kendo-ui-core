@@ -577,33 +577,6 @@ var __meta__ = {
     });
 
     extend(List, {
-        caret: function(element) {
-            var caret,
-                selection = element.ownerDocument.selection;
-
-            if (selection) {
-                caret = Math.abs(selection.createRange().moveStart(CHARACTER, -element.value.length));
-            } else {
-                caret = element.selectionStart;
-            }
-
-            return caret;
-        },
-
-        selectText: function (element, selectionStart, selectionEnd) {
-            try {
-                if (element.createTextRange) {
-                        element.focus();
-                        var textRange = element.createTextRange();
-                        textRange.collapse(true);
-                        textRange.moveStart(CHARACTER, selectionStart);
-                        textRange.moveEnd(CHARACTER, selectionEnd - selectionStart);
-                        textRange.select();
-                } else {
-                    element.setSelectionRange(selectionStart, selectionEnd);
-                }
-            } catch(e) { /* element is not focused or it is not in the DOM */ }
-        },
         inArray: function(node, parentNode) {
             var idx, length, siblings = parentNode.children;
 
