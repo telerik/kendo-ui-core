@@ -16,7 +16,8 @@ module CodeGen::MVC::Wrappers
     }
 
     FIELD_TYPES = {
-        'map.layers.extent' => 'double[]'
+        'map.layers.extent' => 'double[]',
+        'map.markers.location' => 'double[]'
     }
 
     SERIALIZATION_SKIP_LIST = [
