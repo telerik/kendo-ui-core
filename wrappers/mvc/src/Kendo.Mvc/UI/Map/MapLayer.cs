@@ -9,16 +9,18 @@ namespace Kendo.Mvc.UI
 
     public class MapLayer : JsonObject
     {
-        public MapLayer(ViewContext viewContext, IUrlGenerator urlGenerator)
+        public MapLayer(Map map)
         {
             DataSource = new DataSource();
-            ViewContext = viewContext;
-            UrlGenerator = urlGenerator;
+            ViewContext = map.ViewContext;
+            UrlGenerator = map.UrlGenerator;
             //>> Initialization
         
             Style = new MapLayerStyleSettings();
-                
-        //<< Initialization
+
+            //<< Initialization
+
+            Tooltip = new MapMarkerTooltip(map.ViewContext, map.Initializer, map.ViewData);
         }
 
         public ViewContext ViewContext
