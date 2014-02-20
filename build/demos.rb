@@ -93,6 +93,7 @@ def offline_navigation(suite, path)
         categories.each do |category|
 
             next if path.include?('mobile.commercial') && category['name'] == 'adaptive'
+            next if path.include?('web') && category['name'] == 'mobile'
 
             if include_item?(category)
                 category['items'] = category['items'].find_all do |item|
