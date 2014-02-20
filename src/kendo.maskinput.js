@@ -44,12 +44,14 @@ var __meta__ = {
                     if (!element.val()) {
                         element.val(that._emptyMask);
                     } else {
-                        setTimeout(function() {
+                        that._timeoutId = setTimeout(function() {
                             element.select();
                         });
                     }
                 })
                 .on("blur" + ns, function() {
+                    clearTimeout(that._timeoutId);
+
                     if (element.val() === that._emptyMask) {
                         element.val("");
                     }
