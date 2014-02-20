@@ -4758,13 +4758,18 @@ var __meta__ = {
 
    function adjustRowHeight(row1, row2) {
        var height;
+       var clientHeight1 = row1.clientHeight;
+       var clientHeight2 = row2.clientHeight;
 
-       if (row1.clientHeight > row2.clientHeight) {
-           height = row1.clientHeight + "px";
-       } else if (row1.clientHeight < row2.clientHeight) {
-           height = row2.clientHeight + "px";
+       if (clientHeight1 > clientHeight2) {
+           height = clientHeight1 + "px";
+       } else if (clientHeight1 < clientHeight2) {
+           height = clientHeight2 + "px";
        }
-       row1.style.height = row2.style.height = height;
+
+       if (height) {
+           row1.style.height = row2.style.height = height;
+       }
    }
 
    function adjustRowsHeight(table1, table2) {
