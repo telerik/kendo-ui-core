@@ -18,7 +18,7 @@
         <li>Choose culture: 
             @(Html.Kendo().DropDownList()
                 .Name("CulturesSelector")
-                .BindTo(new[] { "en-US", "de-DE", "bg-BG", "fr-FR", "pl-PL", "ru-RU", "uk-UA" , "pt-BR"})
+                .BindTo(new[] { "en-US", "de-DE", "bg-BG", "fr-FR", "pl-PL", "ru-RU", "uk-UA" , "pt-BR", "it-IT"})
                 .Value(culture)
                 .Events(events => events.Change("cultureChange"))
             )
@@ -40,6 +40,8 @@
     .Editable(editable => editable.Mode(GridEditMode.InLine))
     .Pageable()
     .Sortable()
+    .Filterable()
+    .Groupable()
     .Scrollable()
     .DataSource(dataSource => dataSource
         .Ajax()
