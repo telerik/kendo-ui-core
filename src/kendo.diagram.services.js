@@ -47,6 +47,7 @@
             LEFT = "Left",
             BOTTOM = "Bottom",
             DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
+            ITEMROTATE = "itemRotate",
             SCROLL_MIN = -20000,
             SCROLL_MAX = 20000;
 
@@ -1461,7 +1462,7 @@
                     that._refreshHandler();
                 };
 
-                that.diagram.bind("boundsChange", that._refreshHandler).bind("rotate", that._rotatedHandler);
+                that.diagram.bind("boundsChange", that._refreshHandler).bind(ITEMROTATE, that._rotatedHandler);
                 that.refreshBounds();
                 that.refresh();
             },

@@ -65,7 +65,7 @@
             BOTTOM = "Bottom",
             MAXINT = 9007199254740992,
             SELECT = "select",
-            ROTATE = "rotate",
+            ITEMROTATE = "itemRotate",
             PAN = "pan",
             ZOOM = "zoom",
             CONNECTION_CSS = "k-connection",
@@ -556,7 +556,7 @@
                     }
                     this.refreshConnections();
                     if (this.diagram) {
-                        this.diagram.trigger(ROTATE, {item: this});
+                        this.diagram.trigger(ITEMROTATE, {item: this});
                     }
                 }
 
@@ -1334,7 +1334,7 @@
                 connections: []
             },
 
-            events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, CHANGE],
+            events: [ZOOM, PAN, SELECT, ITEMROTATE, BOUNDSCHANGE, CHANGE],
 
             _createShapes: function() {
                 var that = this,
