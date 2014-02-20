@@ -176,7 +176,7 @@
 
         ok(dom.is(":disabled"));
     });
-/*
+
     test("binding visible to false hides the widget", function() {
         dom = $('<input data-bind="visible:visible" data-role="maskinput"/>');
 
@@ -275,7 +275,7 @@
         observable.set("invisible", false);
 
         ok(dom.data("kendoMaskInput").wrapper.css("display") != "none", "display is not 'none'");
-    });*/
+    });
 
     test("change event reflects value modifications", 1, function() {
         dom = $('<input data-bind="value:value, events:{change: changeEvent}" data-mask="(00)" data-role="maskinput"/>');
