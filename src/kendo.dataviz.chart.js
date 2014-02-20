@@ -7528,9 +7528,9 @@ var __meta__ = {
 
         createCrosshairs: function(panes) {
             var plotArea = this,
-                panes = panes || plotArea.panes,
                 i, j, pane, axis, currentCrosshair;
 
+            panes = panes || plotArea.panes;
             for (i = 0; i < panes.length; i++) {
                 pane = panes[i];
                 for (j = 0; j < pane.axes.length; j++) {
