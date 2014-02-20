@@ -49,8 +49,6 @@ namespace Kendo.Mvc.UI
         
         public string LocationField { get; set; }
         
-        public string Shape { get; set; }
-        
         public string TitleField { get; set; }
         
         public string Opacity { get; set; }
@@ -64,6 +62,8 @@ namespace Kendo.Mvc.UI
         public string UrlTemplateId { get; set; }
         
         public MapLayerType? Type { get; set; }
+        
+        public MapMarkersShape? Shape { get; set; }
         
         //<< Fields
 
@@ -108,11 +108,6 @@ namespace Kendo.Mvc.UI
                 json["locationField"] = LocationField;
             }
             
-            if (Shape.HasValue())
-            {
-                json["shape"] = Shape;
-            }
-            
             if (TitleField.HasValue())
             {
                 json["titleField"] = TitleField;
@@ -137,6 +132,11 @@ namespace Kendo.Mvc.UI
             if (Type.HasValue)
             {
                 json["type"] = Type;
+            }
+                
+            if (Shape.HasValue)
+            {
+                json["shape"] = Shape;
             }
                 
         //<< Serialization

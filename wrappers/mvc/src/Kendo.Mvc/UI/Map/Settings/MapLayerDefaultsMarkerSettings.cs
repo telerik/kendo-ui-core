@@ -17,9 +17,9 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Shape { get; set; }
-        
         public double? Opacity { get; set; }
+        
+        public MapMarkersShape? Shape { get; set; }
         
         //<< Fields
 
@@ -27,14 +27,14 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Shape.HasValue())
-            {
-                json["shape"] = Shape;
-            }
-            
             if (Opacity.HasValue)
             {
                 json["opacity"] = Opacity;
+            }
+                
+            if (Shape.HasValue)
+            {
+                json["shape"] = Shape;
             }
                 
         //<< Serialization

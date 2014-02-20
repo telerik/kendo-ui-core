@@ -103,18 +103,6 @@ using System.Web.Mvc;
         }
         
         /// <summary>
-        /// The default marker shape for data-bound markers. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-		/// For example "pinTarget" is rendered as "k-marker-pin-target".
-        /// </summary>
-        /// <param name="value">The value that configures the shape.</param>
-        public MapLayerBuilder Shape(string value)
-        {
-            container.Shape = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// The data item field which contains the marker title.
 		/// Requires the dataSource option to be set.
         /// </summary>
@@ -165,6 +153,17 @@ using System.Web.Mvc;
         public MapLayerBuilder Type(MapLayerType value)
         {
             container.Type = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The marker shape. Supported shapes are "pin" and "pinTarget".
+        /// </summary>
+        /// <param name="value">The value that configures the shape.</param>
+        public MapLayerBuilder Shape(MapMarkersShape value)
+        {
+            container.Shape = value;
 
             return this;
         }
