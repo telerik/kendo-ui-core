@@ -1201,7 +1201,7 @@ var __meta__ = {
                             var totalWidth = that.wrapper.width() - scrollbar;
 
                             if (isLocked && gridWidth - columnWidth + width > totalWidth) {
-                                width = columnWidth + (totalWidth - gridWidth - scrollbar*2);
+                                width = columnWidth + (totalWidth - gridWidth - scrollbar * 2);
                                 constrain = true;
                             }
 
@@ -1210,7 +1210,7 @@ var __meta__ = {
 
                                 if (gridWidth) {
                                     if (constrain) {
-                                        width = totalWidth;
+                                        width = totalWidth - scrollbar * 2;
                                     } else {
                                         width = gridWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
                                     }

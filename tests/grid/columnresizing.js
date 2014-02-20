@@ -336,7 +336,7 @@
 
         resizeColumn(grid.wrapper, firstColumn, initialWidth, initialWidth + 200);
 
-        equal(grid.lockedTable.width(), 200 - kendo.support.scrollbar());
+        equal(grid.lockedTable.width(), 200 - 3 * kendo.support.scrollbar());
     });
 
     test("column body cell width is incremented when handler is moved to the right", function() {
