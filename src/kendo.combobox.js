@@ -21,6 +21,7 @@ var __meta__ = {
         ui = kendo.ui,
         List = ui.List,
         Select = ui.Select,
+        caret = kendo.caret,
         support = kendo.support,
         placeholderSupported = support.placeholder,
         activeElement = kendo._activeElement,
@@ -349,7 +350,7 @@ var __meta__ = {
             var that = this,
                 element = that.input[0],
                 value = that.text(),
-                caret = List.caret(element),
+                caretIdx = caret(element)[0],
                 key = that._last,
                 idx;
 
@@ -370,8 +371,8 @@ var __meta__ = {
                 }
             }
 
-            if (caret <= 0) {
-                caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+            if (caretIdx <= 0) {
+                caretIdx = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
             }
 
             if (word) {
@@ -380,13 +381,13 @@ var __meta__ = {
                     value += word.substring(idx + value.length);
                 }
             } else {
-                value = value.substring(0, caret);
+                value = value.substring(0, caretIdx);
             }
 
-            if (value.length !== caret || !word) {
+            if (value.length !== caretIdx || !word) {
                 element.value = value;
                 if (element === activeElement()) {
-                    List.selectText(element, caret, value.length);
+                    caret(element, caretIdx, value.length);
                 }
             }
         },
@@ -686,7 +687,7 @@ var __meta__ = {
                 input.val(placeholder);
 
                 if (!placeholder && input[0] === activeElement()) {
-                    List.selectText(input[0], 0, 0);
+                    caret(input[0], 0, 0);
                 }
             }
         },
