@@ -12,6 +12,7 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
+        caret = kendo.caret,
         keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
@@ -645,42 +646,6 @@ var __meta__ = {
 
     function buttonHtml(className, text) {
         return '<span unselectable="on" class="k-link"><span unselectable="on" class="k-icon k-i-arrow-' + className + '" title="' + text + '">' + text + '</span></span>';
-    }
-
-    function caret(element, position) {
-        var range,
-            isPosition = position !== undefined;
-
-        if (element.selectionStart !== undefined) {
-            if (isPosition) {
-                element.focus();
-                element.setSelectionRange(position, position);
-            } else {
-                position = [element.selectionStart, element.selectionEnd];
-            }
-        } else if (document.selection) {
-            if ($(element).is(":visible")) {
-                element.focus();
-            }
-            range = document.selection.createRange();
-            if (isPosition) {
-                range.move("character", position);
-                range.select();
-            } else {
-                var rangeElement = element.createTextRange(),
-                    rangeDuplicated = rangeElement.duplicate(),
-                    selectionStart, selectionEnd;
-
-                    rangeElement.moveToBookmark(range.getBookmark());
-                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
-                    selectionStart = rangeDuplicated.text.length;
-                    selectionEnd = selectionStart + rangeElement.text.length;
-
-                position = [selectionStart, selectionEnd];
-            }
-        }
-
-        return position;
     }
 
     ui.plugin(NumericTextBox);
