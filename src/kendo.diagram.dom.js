@@ -302,24 +302,24 @@
             content: function (content) {
                 if (content !== undefined) {
                     var bounds = this.bounds(),
-                        options = deepExtend({text: "", width: bounds.width, height: bounds.height}, this.options.content);
+                        options = deepExtend({ text: "", width: bounds.width, height: bounds.height }, this.options.content);
 
                     if (kendo.diagram.Utils.isString(content)) {
                         this.options.content.text = content;
                         options.text = content;
-                    }
-                    else {
+                    } else {
                         this.options.content = options;
                     }
-
 
                     if (this.shapeVisual instanceof TextBlock) {
                         this._contentVisual = this.shapeVisual;
                     }
+
                     if (!this._contentVisual) {
                         this._contentVisual = new TextBlock();
                         this.visual.append(this._contentVisual);
                     }
+
                     this._contentVisual.redraw(options);
                 }
 
@@ -331,8 +331,13 @@
             },
             _template: function () {
                 var that = this;
-                if (that.options.template && that.model) {
-                    that.options.content.text = kendo.template(that.options.template, {paramName: "item"})(that.model);
+                if (that.options.content.template) {
+                    var data = that.model || {},
+                        elementTemplate = kendo.template(that.options.content.template, {
+                            paramName: "item"
+                        });
+
+                    that.options.content.text = elementTemplate(data);
                 }
             },
             _canSelect: function () {
@@ -357,8 +362,7 @@
             position: function () {
                 if (this.options.position) {
                     return this.options.position(this.shape);
-                }
-                else {
+                } else {
                     return this.shape.getPosition(this.options.name);
                 }
             },
@@ -575,14 +579,12 @@
                             if (source.shape && source.shape == this) {
                                 result.push(con);
                             }
-                        }
-                        else if (type == "in") {
+                        } else if (type == "in") {
                             var target = con.target();
                             if (target.shape && target.shape == this) {
                                 result.push(con);
                             }
-                        }
-                        else {
+                        } else {
                             result.push(con);
                         }
                     }
@@ -610,11 +612,9 @@
                             return ctr;
                         }
                     }
-                }
-                else if (nameOrPoint instanceof Point) {
+                } else if (nameOrPoint instanceof Point) {
                     return closestConnector(nameOrPoint, this);
-                }
-                else {
+                } else {
                     return this.connectors.length ? this.connectors[0] : null;
                 }
             },
@@ -682,10 +682,10 @@
                 if (this.visible()) {
                     var bounds = this.bounds(), rotatedPoint,
                         angle = this.rotate().angle;
+
                     if (value.isEmpty && !value.isEmpty()) { // rect selection
                         return Intersect.rects(value, bounds, angle ? angle : 0);
-                    }
-                    else { // point
+                    } else { // point
                         rotatedPoint = value.clone().rotate(bounds.center(), angle); // cloning is important because rotate modifies the point inline.
                         if (bounds.contains(rotatedPoint)) {
                             return this;
@@ -695,7 +695,7 @@
             }
         });
 
-          Shape.createShapeVisual = function (options) {
+        Shape.createShapeVisual = function (options) {
             var diagram = options.diagram;
             delete options.diagram; // avoid stackoverflow and reassign later on again
             var shapeDefaults = deepExtend({}, options, { x: 0, y: 0 }),
@@ -768,38 +768,29 @@
 
             if (!kendo.isFunction(shapeDefaults.data) && shapeDefaults.hasOwnProperty("serializationSource") && shapeDefaults.serializationSource === "external") {
                 return externalLibraryShape(shapeDefaults.name, options, shapeDefaults);
-            }
-            else if (isString(visualTemplate)) {
+            } else if (isString(visualTemplate)) {
                 return simpleShape(shapeDefaults.data, shapeDefaults);
-            }
-            else if (isFunction(visualTemplate)) {// custom template
+            } else if (isFunction(visualTemplate)) { // custom template
                 return functionShape(visualTemplate, this, shapeDefaults);
-            }
-            else if (Object.prototype.toString.call(visualTemplate) === '[object Object]') { //literal
-
+            } else if (Object.prototype.toString.call(visualTemplate) === '[object Object]') { //literal
                 var origin = visualTemplate.origin || "internal";
 
-                if(origin.toLocaleLowerCase()==="external"){
+                if (origin.toLocaleLowerCase()==="external"){
                     var libraryShapeName = visualTemplate.library;
                     return externalLibraryShape(libraryShapeName, options, shapeDefaults);
-                }
-                else{
+                } else {
                     var type = visualTemplate.type || "simple";
                     var definition = visualTemplate.definition;
 
                     if (type.toLocaleLowerCase() === "simple") {
                         return simpleShape(definition, shapeDefaults);
-                    }
-                    else if (type.toLocaleLowerCase() === "svg") {
+                    } else if (type.toLocaleLowerCase() === "svg") {
                         return svgShape(definition, shapeDefaults);
-                    }
-                    else if (type.toLocaleLowerCase() === "function") {
+                    } else if (type.toLocaleLowerCase() === "function") {
                         return functionShape(definition, this, shapeDefaults);
                     }
                 }
-
-            }
-            else {
+            } else {
                 return new Rectangle(shapeDefaults);
             }
         };
@@ -2334,7 +2325,6 @@
 
                     var opt = {
                         data: options.visualTemplate,
-                        template: options.template,
                         context: node
                     };
                     shape = new Shape(opt, node);

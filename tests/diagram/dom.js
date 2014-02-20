@@ -256,6 +256,28 @@
         roughlyEqualPoint(result, expected, "layer->view->document");
     });
 
+    module("Shape / Template", {
+        setup: function () {
+            QUnit.fixture.html('<div id="canvas" />');
+            $("#canvas").kendoDiagram();
+
+            diagram = $("#canvas").getKendoDiagram();
+        },
+        teardown: function () {
+            diagram.destroy();
+        }
+    });
+
+    test("should render text", function() {
+        diagram.addShape({
+            content: {
+                template: "text"
+            }
+        });
+
+        equal(diagram.shapes[0].options.content.text, "text");
+    });
+
     module("Shape bounds", {
         setup: function () {
             QUnit.fixture.html('<div id="canvas" />');
@@ -638,4 +660,6 @@
         d.paste();
         equal(cons, d.connections.length);
     });
+
+
 })();
