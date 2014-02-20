@@ -3704,6 +3704,53 @@ function pad(number, digits, end) {
         return delta;
     };
 
+    kendo.caret = function (element, start, end) {
+        var rangeElement;
+        var isPosition = start !== undefined;
+
+        if (end === undefined) {
+            end = start;
+        }
+
+        if (element[0]) {
+            element = element[0];
+        }
+
+        if (element.selectionStart !== undefined) {
+            if (isPosition) {
+                element.focus();
+                element.setSelectionRange(start, end);
+            } else {
+                start = [element.selectionStart, element.selectionEnd];
+            }
+        } else if (document.selection) {
+            if ($(element).is(":visible")) {
+                element.focus();
+            }
+
+            rangeElement = element.createTextRange();
+
+            if (isPosition) {
+                rangeElement.collapse(true);
+                rangeElement.moveStart("character", start);
+                rangeElement.moveEnd("character", end - start);
+                rangeElement.select();
+            } else {
+                var rangeDuplicated = rangeElement.duplicate(),
+                    selectionStart, selectionEnd;
+
+                    rangeElement.moveToBookmark(document.selection.createRange().getBookmark());
+                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+                    selectionStart = rangeDuplicated.text.length;
+                    selectionEnd = selectionStart + rangeElement.text.length;
+
+                start = [selectionStart, selectionEnd];
+            }
+        }
+
+        return start;
+    }
+
 })(jQuery);
 
 return window.kendo;
