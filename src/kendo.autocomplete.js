@@ -19,12 +19,13 @@ var __meta__ = {
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
+        caret = kendo.caret,
         activeElement = kendo._activeElement,
         placeholderSupported = support.placeholder,
         ui = kendo.ui,
+        List = ui.List,
         keys = kendo.keys,
         DataSource = kendo.data.DataSource,
-        List = ui.List,
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
         DEFAULT = "k-state-default",
@@ -36,34 +37,26 @@ var __meta__ = {
         HOVER = "k-state-hover",
         ns = ".kendoAutoComplete",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
-        caretPosition = List.caret,
-        selectText = List.selectText,
         proxy = $.proxy;
 
-    function indexOfWordAtCaret(caret, text, separator) {
-        return separator ? text.substring(0, caret).split(separator).length - 1 : 0;
+    function indexOfWordAtCaret(caretIdx, text, separator) {
+        return separator ? text.substring(0, caretIdx).split(separator).length - 1 : 0;
     }
 
-    function wordAtCaret(caret, text, separator) {
-        return text.split(separator)[indexOfWordAtCaret(caret, text, separator)];
+    function wordAtCaret(caretIdx, text, separator) {
+        return text.split(separator)[indexOfWordAtCaret(caretIdx, text, separator)];
     }
 
-    function replaceWordAtCaret(caret, text, word, separator) {
+    function replaceWordAtCaret(caretIdx, text, word, separator) {
         var words = text.split(separator);
 
-        words.splice(indexOfWordAtCaret(caret, text, separator), 1, word);
+        words.splice(indexOfWordAtCaret(caretIdx, text, separator), 1, word);
 
         if (separator && words[words.length - 1] !== "") {
             words.push("");
         }
 
         return words.join(separator);
-    }
-
-    function moveCaretAtEnd(element) {
-        var length = element.value.length;
-
-        selectText(element, length, length);
     }
 
     var AutoComplete = List.extend({
@@ -304,7 +297,7 @@ var __meta__ = {
             clearTimeout(that._typing);
 
             if (separator) {
-                word = wordAtCaret(caretPosition(that.element[0]), word, separator);
+                word = wordAtCaret(caret(that.element)[0], word, separator);
             }
 
             length = word.length;
@@ -328,11 +321,11 @@ var __meta__ = {
                 key = that._last,
                 value = that._accessor(),
                 element = that.element[0],
-                caret = caretPosition(element),
+                caretIdx = caret(element)[0],
                 separator = that.options.separator,
                 words = value.split(separator),
-                wordIndex = indexOfWordAtCaret(caret, value, separator),
-                selectionEnd = caret,
+                wordIndex = indexOfWordAtCaret(caretIdx, value, separator),
+                selectionEnd = caretIdx,
                 idx;
 
             if (key == keys.BACKSPACE || key == keys.DELETE) {
@@ -352,12 +345,12 @@ var __meta__ = {
                 }
             }
 
-            if (caret <= 0) {
-                caret = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+            if (caretIdx <= 0) {
+                caretIdx = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
             }
 
-            idx = value.substring(0, caret).lastIndexOf(separator);
-            idx = idx > -1 ? caret - (idx + separator.length) : caret;
+            idx = value.substring(0, caretIdx).lastIndexOf(separator);
+            idx = idx > -1 ? caretIdx - (idx + separator.length) : caretIdx;
             value = words[wordIndex].substring(0, idx);
 
             if (word) {
@@ -365,7 +358,7 @@ var __meta__ = {
                 if (idx > -1) {
                     word = word.substring(idx + value.length);
 
-                    selectionEnd = caret + word.length;
+                    selectionEnd = caretIdx + word.length;
 
                     value += word;
                 }
@@ -381,7 +374,7 @@ var __meta__ = {
             that._accessor(words.join(separator || ""));
 
             if (element === activeElement()) {
-                selectText(element, caret, selectionEnd);
+                caret(element, caretIdx, selectionEnd);
             }
         },
 
@@ -417,10 +410,10 @@ var __meta__ = {
         },
 
         _accept: function (li) {
-            var that = this;
+            var element = this.element;
 
-            that._focus(li);
-            moveCaretAtEnd(that.element[0]);
+            this._focus(li);
+            caret(element, element.val().length);
         },
 
         _keydown: function (e) {
@@ -525,7 +518,7 @@ var __meta__ = {
                        .val(placeholder);
 
                 if (!placeholder && element[0] === document.activeElement) {
-                    List.selectText(element[0], 0, 0);
+                    caret(element[0], 0, 0);
                 }
             }
         },
@@ -559,7 +552,7 @@ var __meta__ = {
                     text = that._text(data);
 
                     if (separator) {
-                        text = replaceWordAtCaret(caretPosition(that.element[0]), that._accessor(), text, separator);
+                        text = replaceWordAtCaret(caret(that.element)[0], that._accessor(), text, separator);
                     }
 
                     that._accessor(text);
