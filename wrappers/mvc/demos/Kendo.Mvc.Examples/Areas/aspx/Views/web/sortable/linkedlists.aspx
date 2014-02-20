@@ -1,47 +1,48 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-</asp:Content>
-
-<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
-    <h3>One way connection</h3>
-    <div class="list-wrapper">
-        <ul id="sortable-listA">
-            <li class="list-item">Item1</li>
-            <li class="list-item">Item2</li>
-            <li class="list-item">Item3</li>
-        </ul>
-
-        <ul id="sortable-listB">
-            <li class="list-item">Item1</li>
-            <li class="list-item">Item2</li>
-            <li class="list-item">Item3</li>
-        </ul>
-    </div>
-
-    <h3>Two way connection</h3>
-    <div class="list-wrapper">
-        <ul id="sortable-listC" style="min-height: 41px;">
-            <li class="list-item">Item1</li>
-            <li class="list-item">Item2</li>
-            <li class="list-item">Item3</li>
-        </ul>
-
-        <ul id="sortable-listD" style="min-height: 41px;">
-            <li class="list-item">Item1</li>
-            <li class="list-item">Item2</li>
-            <li class="list-item">Item3</li>
-        </ul>
+    <div class="demo-section one-way">
+        <div class="list-wrapper">
+            <ul id="sortable-listA">
+                <li class="list-item">Apples</li>
+                <li class="list-item">Grapefruits</li>
+                <li class="list-item">Bananas</li>
+            </ul>
+    
+            <ul id="sortable-listB">
+                <li class="list-item">Cranberries</li>
+                <li class="list-item">Pineapples</li>
+                <li class="list-item">Strawberries</li>
+            </ul>
+        </div>
     </div>
 
     <%:Html.Kendo().Sortable()
         .For("#sortable-listA")
         .ConnectWith("#sortable-listB")
+        .PlaceholderHandler("placeholder")
     %>
 
     <%:Html.Kendo().Sortable()
         .For("#sortable-listB")
+        .PlaceholderHandler("placeholder")
     %>
+
+    <div class="demo-section two-way">
+        <div class="list-wrapper">
+            <ul id="sortable-listC" style="min-height: 41px;">
+                <li class="list-item">Cherries</li>
+                <li class="list-item">Pears</li>
+                <li class="list-item">Plums</li>
+            </ul>
+    
+            <ul id="sortable-listD" style="min-height: 41px;">
+                <li class="list-item">Apricots</li>
+                <li class="list-item">Grapes</li>
+                <li class="list-item">Lemons</li>
+            </ul>
+        </div>
+    </div>
 
     <%:Html.Kendo().Sortable()
         .For("#sortable-listC")
@@ -68,16 +69,26 @@
             -ms-user-select: none;
             user-select: none;
         }
-
+        .demo-section {
+            padding: 50px 70px;
+        }
+        .one-way {
+            background: url('/Content/web/sortable/one-way.png') no-repeat 50% 50%;
+        }
+        .two-way {
+            background: url('/Content/web/sortable/two-way.png') no-repeat 50% 50%;
+        }
         .list-wrapper {
             overflow: hidden;
         }
 
         #sortable-listA, #sortable-listB, #sortable-listC, #sortable-listD {
             width: 210px;
+            min-height: 40px;
             margin: 0;
             padding: 0;
-            border: 1px solid black;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
         }
 
         #sortable-listA, #sortable-listC {
@@ -90,35 +101,41 @@
 
         .list-item {
             list-style-type: none;
+            width: 200px;
             margin: 5px;
             line-height: 30px;
-            width: 200px;
             text-align: center;
-            border: 1px solid black;
-            color: white;
-            background-color: #606162;
+            background-color: #222222;
+            color: #ffffff;
+            border-radius: 3px;
         }
 
         #sortable-listA .list-item {
-            background-color: #0033FF;
+            background-color: #54b8fa;
+            color: #000000;
         }
 
         #sortable-listB .list-item {
-            background-color: #CC0033;
+            background-color: #ff879e;
+            color: #000000;
         }
 
         #sortable-listC .list-item {
-            background-color: #66CC66;
+            background-color: #66cc66;
+            color: #000000;
         }
 
         #sortable-listD .list-item {
-            background-color: #FFCC33;
+            background-color: #ffcc33;
+            color: #000000;
         }
 
         #placeholder.list-item {
-            background-color: yellow;
-            border-color: orange;
-            color: #000000;
+            background-color: #ffffff;
+            color: #777;
         }
     </style>
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>

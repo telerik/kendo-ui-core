@@ -1,47 +1,43 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
-    <div class="sortable-wrapper">
-        <h4>Disable</h4>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <div class="demo-section sortable-wrapper">
+        <h3>Disable</h3>
         <p>Disabled items cannot be dragged but are valid drop targets.</p>
         <div id="sortable-disable">
-            <div class="sortable disabled">Disabled (Item 1)</div>
-            <div class="sortable disabled">Disabled (Item 2)</div>
+            <div class="sortable disabled">Disabled item 1</div>
+            <div class="sortable disabled">Disabled item 2</div>
             <div class="sortable">Item 3</div>
             <div class="sortable">Item 4</div>
             <div class="sortable">Item 5</div>
             <div class="sortable">Item 6</div>
-            <div class="sortable">Item 7</div>
-            <div class="sortable">Item 8</div>
-        </div>
-    </div>
-
-    <%:Html.Kendo().Sortable()
-        .For("#sortable-filter")
-        .Filter(".sortable")
-    %>
-
-    <div class="sortable-wrapper">
-        <h4>Filter</h4>
-        <p>Filtered items cannot be dragged and are not valid drop targets.</p>
-        <div id="sortable-filter">
-            <div class="not-sortable">Not sortable (Item 1)</div>
-            <div class="not-sortable">Not sortable (Item 2)</div>
-            <div class="sortable">Item 3</div>
-            <div class="sortable">Item 4</div>
-            <div class="sortable">Item 5</div>
-            <div class="sortable">Item 6</div>
-            <div class="sortable">Item 7</div>
-            <div class="sortable">Item 8</div>
         </div>
     </div>
 
     <%:Html.Kendo().Sortable()
         .For("#sortable-disable")
         .Disabled(".disabled")
+    %>
+
+    <div class="demo-section sortable-wrapper">
+        <h3>Filter</h3>
+        <p>Filtered items cannot be dragged and are not valid drop targets.</p>
+        <div id="sortable-filter">
+            <div class="not-sortable">Not sortable item 1</div>
+            <div class="not-sortable">Not sortable item 2</div>
+            <div class="sortable">Item 3</div>
+            <div class="sortable">Item 4</div>
+            <div class="sortable">Item 5</div>
+            <div class="sortable">Item 6</div>
+        </div>
+    </div>
+
+    <%:Html.Kendo().Sortable()
+        .For("#sortable-filter")
+        .Filter(".sortable")
     %>
 
     <style>
@@ -53,24 +49,21 @@
         }
 
         .sortable-wrapper {
-            width: 50%;
+            width: 35%;
+            margin: 20px 40px;
+            padding: 20px;
             float: left;
         }
-
-        .sortable-wrapper > div {
-            width: 235px;
-            margin: 0 auto;
+        .sortable-wrapper p {
+            margin: 5px auto 20px;
         }
 
         .sortable, .not-sortable {
-            list-style-type: none;
-            padding: 5px;
-            margin: 3px;
-            border: 1px solid black;
-            width: 200px;
+            padding: 10px 0;
+            margin: 1px 0;
+            width: 315px;
             text-align: center;
-            border-radius: 3px;
-            color: #FFFFFF;
+            color: #ffffff;
         }
 
         .sortable {

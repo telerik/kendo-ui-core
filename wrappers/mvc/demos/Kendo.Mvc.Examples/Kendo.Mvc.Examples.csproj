@@ -422,7 +422,6 @@
     <Compile Include="Controllers\Web\Grid\Toolbar_TemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\Virtualization_Remote_DataController.cs" />
     <Compile Include="Controllers\Web\Sortable\ConstraintsController.cs" />
-    <Compile Include="Controllers\Web\Sortable\CustomizationController.cs" />
     <Compile Include="Controllers\Web\Sortable\EventsController.cs" />
     <Compile Include="Controllers\Web\Sortable\Filter_DisableController.cs" />
     <Compile Include="Controllers\Web\Sortable\HandlersController.cs" />
@@ -490,7 +489,11 @@
     <Compile Include="Controllers\Web\Slider\IndexController.cs" />
     <Compile Include="Controllers\Web\Slider\NavigationController.cs" />
     <Compile Include="Controllers\Web\Slider\RtlController.cs" />
+    <Compile Include="Controllers\Web\Sortable\Integration_GridController.cs" />
+    <Compile Include="Controllers\Web\Sortable\Integration_ListViewController.cs" />
+    <Compile Include="Controllers\Web\Sortable\Integration_TabStripController.cs" />
     <Compile Include="Controllers\Web\Sortable\LinkedlistsController.cs" />
+    <Compile Include="Controllers\Web\Sortable\Sortable_PanelsController.cs" />
     <Compile Include="Controllers\Web\Splitter\AjaxController.cs" />
     <Compile Include="Controllers\Web\Splitter\ApiController.cs" />
     <Compile Include="Controllers\Web\Splitter\EventsController.cs" />
@@ -1004,12 +1007,15 @@
     <Content Include="Areas\aspx\Views\web\slider\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\sortable\constraints.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\customization.aspx" />
     <Content Include="Areas\aspx\Views\web\sortable\events.aspx" />
     <Content Include="Areas\aspx\Views\web\sortable\filter_disable.aspx" />
     <Content Include="Areas\aspx\Views\web\sortable\handlers.aspx" />
     <Content Include="Areas\aspx\Views\web\sortable\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\sortable\integration_grid.aspx" />
+    <Content Include="Areas\aspx\Views\web\sortable\integration_listview.aspx" />
+    <Content Include="Areas\aspx\Views\web\sortable\integration_tabstrip.aspx" />
     <Content Include="Areas\aspx\Views\web\sortable\linkedlists.aspx" />
+    <Content Include="Areas\aspx\Views\web\sortable\sortable_panels.aspx" />
     <Content Include="Areas\aspx\Views\web\splitter\ajax.aspx" />
     <Content Include="Areas\aspx\Views\web\splitter\api.aspx" />
     <Content Include="Areas\aspx\Views\web\splitter\events.aspx" />
@@ -1815,6 +1821,25 @@
     <Content Include="Content\web\Sl\Docking.gif" />
     <Content Include="Content\web\Sl\GridView.gif" />
     <Content Include="Content\web\Sl\Scheduler.gif" />
+    <Content Include="Content\web\sortable\1.jpg" />
+    <Content Include="Content\web\sortable\2.jpg" />
+    <Content Include="Content\web\sortable\3.jpg" />
+    <Content Include="Content\web\sortable\4.jpg" />
+    <Content Include="Content\web\sortable\5.jpg" />
+    <Content Include="Content\web\sortable\dashboard-head.png" />
+    <Content Include="Content\web\sortable\demo-app.jpg" />
+    <Content Include="Content\web\sortable\flat.jpg" />
+    <Content Include="Content\web\sortable\handle.png" />
+    <Content Include="Content\web\sortable\handlers-title.png" />
+    <Content Include="Content\web\sortable\installer.jpg" />
+    <Content Include="Content\web\sortable\one-way.png" />
+    <Content Include="Content\web\sortable\playlist.png" />
+    <Content Include="Content\web\sortable\property-table.jpg" />
+    <Content Include="Content\web\sortable\sales-dashboard.jpg" />
+    <Content Include="Content\web\sortable\shop-it-later.jpg" />
+    <Content Include="Content\web\sortable\slider.jpg" />
+    <Content Include="Content\web\sortable\two-way.png" />
+    <Content Include="Content\web\sortable\weather-dashboard.jpg" />
     <Content Include="Content\web\splitter\ajax\ajaxContent1.html" />
     <Content Include="Content\web\splitter\ajax\ajaxContent2.html" />
     <Content Include="Content\web\Suites\ajax.png" />
@@ -2977,7 +3002,6 @@
     <Content Include="Areas\razor\Views\web\sortable\constraints.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\razor\Views\web\sortable\customization.cshtml" />
     <Content Include="Areas\razor\Views\web\sortable\events.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -3014,6 +3038,18 @@
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_stacked100_bar.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\frozen_columns.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\sortable\integration_grid.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\sortable\integration_listview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\sortable\integration_tabstrip.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\sortable\sortable_panels.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
