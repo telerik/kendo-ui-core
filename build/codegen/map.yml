@@ -8,10 +8,32 @@
           - shape
     - :name: markers.shape
       :type: String
-      :description: The marker shape. Supported shapes are "pin" and "circle".
+      :enum_type: MapMarkersShape
+      :description: The marker shape. Supported shapes are "pin" and "pinTarget".
       :values:
           - pin
-          - circle
+          - pinTarget
+    - :name: markerDefaults.shape
+      :type: String
+      :enum_type: MapMarkersShape
+      :description: The default marker shape. Supported shapes are "pin" and "pinTarget".
+      :values:
+          - pin
+          - pinTarget
+    - :name: layers.shape
+      :type: String
+      :enum_type: MapMarkersShape
+      :description: The marker shape. Supported shapes are "pin" and "pinTarget".
+      :values:
+          - pin
+          - pinTarget
+    - :name: layerDefaults.marker.shape
+      :type: String
+      :enum_type: MapMarkersShape
+      :description: The marker shape. Supported shapes are "pin" and "pinTarget".
+      :values:
+          - pin
+          - pinTarget
     - :name: markers.tooltip.position
       :type: String
       :description: The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".

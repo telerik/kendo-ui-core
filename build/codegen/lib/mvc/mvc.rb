@@ -204,7 +204,9 @@ module CodeGen::MVC::Wrappers
         include Options
 
         def csharp_type
-            if values
+            if enum_type
+                enum_type
+            elsif values
                 "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
             else
                 FIELD_TYPES[full_name] || TYPES[type[0]]
@@ -480,7 +482,7 @@ module CodeGen::MVC::Wrappers
             options = component.enum_options
 
             options.each do |option|
-                filename = "#{@path}/#{component.path}/#{component.csharp_class}#{option.csharp_name}.cs"
+                filename = "#{@path}/#{component.path}/#{option.enum_type || component.csharp_class + option.csharp_name }.cs"
 
                 write_file(filename, component.to_enum(filename, option))
             end
