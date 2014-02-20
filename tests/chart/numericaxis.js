@@ -1591,9 +1591,8 @@
                 data: [0, 1]
             }];
 
-        function createPlotArea(series, chartOptions) {
-            plotArea = new dataviz.CategoricalPlotArea(series, {
-                valueAxis: {
+        function createPlotArea(series, valueAxisOptions) {
+            var valueAxis = valueAxisOptions || {
                     plotBands: [{
                         from: 0.2,
                         to: 0.3,
@@ -1603,7 +1602,9 @@
                     labels: {
                         font: "16px Verdana, sans-serif"
                     }
-                },
+                };
+            plotArea = new dataviz.CategoricalPlotArea(series, {
+                valueAxis: valueAxis,
                 categoryAxis: {
                     categories: ["A"],
                     labels: {
@@ -1666,6 +1667,30 @@
 
         test("renders z index", function() {
             equal(plotBands.style.zIndex, -1);
+        });
+        
+        module("Numeric Axis / Plot Bands / limit", {
+            setup: function() {
+                createPlotArea(lineSeriesData, {
+                    min: 4,
+                    max: 10,
+                    plotBands: [{
+                        from: 3,
+                        to: 7,
+                        color: "red",
+                        opacity: 0.5
+                    }],
+                    labels: {
+                        font: "16px Verdana, sans-serif"
+                    }
+                });
+                plotBands = view.log.rect[0];
+            }
+        });
+        
+        test("limits plotBands slot", function() {
+            arrayClose([plotBands.y1, plotBands.y2],
+                 [291, 573], TOLERANCE);
         });
 
     })();

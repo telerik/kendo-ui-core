@@ -1452,9 +1452,9 @@ var __meta__ = {
 
                     if (vertical) {
                         slotX = plotArea.axisX.lineBox();
-                        slotY = axis.getSlot(item.from, item.to);
+                        slotY = axis.getSlot(item.from, item.to, true);
                     } else {
-                        slotX = axis.getSlot(item.from, item.to);
+                        slotX = axis.getSlot(item.from, item.to, true);
                         slotY = plotArea.axisY.lineBox();
                     }
 

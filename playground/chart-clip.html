@@ -17,8 +17,8 @@
         <script src="../src/kendo.dataviz.canvas.js"></script>  
         <link href="../styles/web/kendo.common.css" rel="stylesheet">
         <link href="../styles/web/kendo.default.css" rel="stylesheet">
-        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet">
-        <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet">
+        <link href="../styles/dataviz/kendo.dataviz.min.css" rel="stylesheet">
+        <link href="../styles/dataviz/kendo.dataviz.default.min.css" rel="stylesheet">
         <style>
             .k-chart{
                 min-height: 400px;
@@ -27,14 +27,18 @@
         </style>
 </head>
 <body>
-
-<button type="button" onclick="test()">test</button>
+ <div id="bubble" style="width: 700px;margin-left:200px;"></div>
+ <div id="radarColumn"></div>
+  
+  <div id="radarChart"></div> 
+  <div id="polarChart"></div>
+ <!--<button type="button" onclick="test()">test</button>
 <div id="stock-chart"></div>
 <div id="stock" style="height:500px;"></div>
 <div id="sparkline" style="width:400px;height:300px;margin-top:200px;"></div>
 
-<div id="radarColumn"></div>
- <--
+
+
  <div id="multipleAxis" style="width: 500px;margin:0 auto;"></div>
 
 <div id="multiplePanes"></div>
@@ -44,13 +48,11 @@
 
  -->
  
- <-- 
+ <!-- 
  <div id="scatterChart"></div>
  
- 
-  <div id="radarChart"></div> 
-  <div id="polarChart"></div>
-  <div id="bubble"></div>-->
+
+ -->
   <script>
       var renderAs = "svg";
    $("#stock-chart").kendoStockChart({
@@ -303,7 +305,13 @@
                 visible: true
             },
             valueAxis: {
-                visible: false
+                visible: false,
+                plotBands: [{
+                    from: 3,
+                    to: 10,
+                    color: "red",
+                    opacity: 0.1
+                }]
             }
         });
 
@@ -572,7 +580,13 @@
         valueAxis: {
             labels: {
                 format: "${0}"
-            }
+            },
+                plotBands: [{
+                    from: 60,
+                    to: 300,
+                    color: "blue",
+                    opacity: 0.1
+                }]
         },
         tooltip: {
             visible: true,
@@ -595,11 +609,23 @@
             }],
             xAxis: [{
                 max: 80,
-                min: 30
+                min: 30,
+                plotBands: [{
+                    from: 60,
+                    to: 100,
+                    color: "blue",
+                    opacity: 0.1
+                }]
             }],
             yAxis: [{
                 min: 20,
-                max: 40
+                max: 40,
+                plotBands: [{
+                    from: 30,
+                    to: 50,
+                    color: "red",
+                    opacity: 0.1
+                }]
             }],
             tooltip: {
                 visible: true
@@ -670,8 +696,6 @@
                         format: "{0:N0}",
                         skip: 1
                     },
-                    min: 500,
-                    max: 2500,
                     axisCrossingValue: -5000,
                     majorUnit: 2000,
                     plotBands: [{
@@ -693,9 +717,8 @@
                     visible: true,
                     format: "{3}: {2:N0} applications",
                     opacity: 1
-                },
-                renderAs: renderAs
-            });        
+                }
+            });       
   </script>
 </body>
 </html>

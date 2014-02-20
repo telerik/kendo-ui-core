@@ -373,7 +373,7 @@ var __meta__ = {
                     zIndex: -1
                 };
 
-                slot = axis.getSlot(band.from, band.to);
+                slot = axis.getSlot(band.from, band.to, true);
                 ring = new Ring(center, center.y - slot.y2, center.y - slot.y1, 0, 360);
 
                 elements.push(type === ARC ?
