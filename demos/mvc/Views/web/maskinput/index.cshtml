@@ -4,16 +4,12 @@
                 <h2>Mask Input </h2>
                 <ul id="fieldlist">
                     <li>
-                        <label for="net_mask">Subnet mask:</label>
-                        <input id="net_mask" value="255.255.255.192" />
+                        <label for="phone_number">Phone number:</label>
+                        <input id="phone_number" value="555 123 4567" />
                     </li>
                     <li>
                         <label for="credit_card">Credit Card number:</label>
                         <input id="credit_card" value="1234 1234 1234 1234" />
-                    </li>
-                    <li>
-                        <label for="phone_number">Phone number:</label>
-                        <input id="phone_number" value="555 123 4567" />
                     </li>
                     <li>
                         <label for="ssn">Social security number:</label>
@@ -28,16 +24,12 @@
 
             <script>
                 $(document).ready(function() {
-                    $("#net_mask").kendoMaskInput({
-                        mask: "000.000.000.000"
+                    $("#phone_number").kendoMaskInput({
+                        mask: "(999) 000-0000"
                     });
 
                     $("#credit_card").kendoMaskInput({
                         mask: "0000 0000 0000 0000"
-                    });
-
-                    $("#phone_number").kendoMaskInput({
-                        mask: "(999) 000-0000"
                     });
 
                     $("#ssn").kendoMaskInput({
