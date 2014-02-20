@@ -936,6 +936,7 @@
         {
             "text": "MaskInput",
             "name": "maskinput",
+            "new": "true",
             "documentation": "web/maskinput",
             "spriteCssClass": "maskInputIcon",
             "items": [
