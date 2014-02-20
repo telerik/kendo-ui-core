@@ -382,7 +382,7 @@
     <Compile Include="Controllers\Web\Grid\ApiController.cs" />
     <Compile Include="Controllers\Web\Grid\ColumnSettingsController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_MenuController.cs" />
-    <Compile Include="Controllers\Web\Grid\Locked_ColumnsController.cs" />
+    <Compile Include="Controllers\Web\Grid\Frozen_ColumnsController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
     <Compile Include="Controllers\Web\Grid\Custom_DataSource.cs" />
@@ -3013,7 +3013,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_stacked100_bar.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\locked_columns.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\frozen_columns.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

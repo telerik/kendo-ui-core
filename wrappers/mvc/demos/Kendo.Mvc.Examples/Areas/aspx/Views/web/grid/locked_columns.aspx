@@ -14,7 +14,7 @@
     .DataSource(dataSource => dataSource
         .Ajax()
         .PageSize(30)
-        .Read(read => read.Action("LockedColumns_Read", "Grid"))
+        .Read(read => read.Action("FrozenColumns_Read", "Grid"))
      )
     .Scrollable(scrollable => scrollable.Height(430))
     .Reorderable(reorderable => reorderable.Columns(true))
