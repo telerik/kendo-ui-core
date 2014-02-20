@@ -1,8 +1,8 @@
 (function() {
-    var MaskInput = kendo.ui.MaskInput,
+    var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
 
-    module("kendo.ui.MaskInput interaction", {
+    module("kendo.ui.MaskedTextBox interaction", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
         },
@@ -53,8 +53,8 @@
         return start;
     }
 
-    test("MaskInput shows empty mask on focus", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox shows empty mask on focus", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
@@ -63,12 +63,12 @@
         equal(input.val(), "_-_");
     });
 
-    asyncTest("MaskInput selects whole text if value", 3, function() {
-        var maskinput = new MaskInput(input, {
+    asyncTest("MaskedTextBox selects whole text if value", 3, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
-        maskinput.value("1-1");
+        maskedtextbox.value("1-1");
 
         input.focus();
 
@@ -80,20 +80,20 @@
         });
     });
 
-    test("MaskInput does not remove input value on blur", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox does not remove input value on blur", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
-        maskinput.value("1-1");
+        maskedtextbox.value("1-1");
 
         input.focus().blur();
 
         equal(input.val(), "1-1");
     });
 
-    test("MaskInput removes empty mask on blur", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox removes empty mask on blur", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
@@ -102,8 +102,8 @@
         equal(input.val(), "");
     });
 
-    test("MaskInput does not remove widget value if an empty symbol is left", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox does not remove widget value if an empty symbol is left", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
@@ -114,8 +114,8 @@
         equal(input.val(), "1-_");
     });
 
-    test("MaskInput persists empty mask on ENTER", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox persists empty mask on ENTER", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000-0000"
         });
 
@@ -129,8 +129,8 @@
         equal(input.val(), "(___) ___-____");
     });
 
-    test("MaskInput should not call mask if e.which is 0", 0, function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox should not call mask if e.which is 0", 0, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000-0000"
         });
 

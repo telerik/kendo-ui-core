@@ -1,8 +1,8 @@
 (function() {
-    var MaskInput = kendo.ui.MaskInput,
+    var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
 
-    module("kendo.ui.MaskInput initialization", {
+    module("kendo.ui.MaskedTextBox initialization", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
         },
@@ -11,73 +11,73 @@
         }
     });
 
-    test("MaskInput attaches a maskinput object to a target", function() {
-        var maskinput = new MaskInput(input);
+    test("MaskedTextBox attaches a maskedtextbox object to a target", function() {
+        var maskedtextbox = new MaskedTextBox(input);
 
-        ok(input.data("kendoMaskInput") instanceof MaskInput);
+        ok(input.data("kendoMaskedTextBox") instanceof MaskedTextBox);
     });
 
-    test("MaskInput add k-textbox class to the element", function() {
-        var maskinput = new MaskInput(input);
+    test("MaskedTextBox add k-textbox class to the element", function() {
+        var maskedtextbox = new MaskedTextBox(input);
 
         ok(input.hasClass("k-textbox"));
     });
 
-    test("MaskInput add autocomplete='off' attr", function() {
-        var maskinput = new MaskInput(input);
+    test("MaskedTextBox add autocomplete='off' attr", function() {
+        var maskedtextbox = new MaskedTextBox(input);
 
         ok(input.attr("autocomplete"), "off");
     });
 
-    test("MaskInput tokenize specified mask", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox tokenize specified mask", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
-        var tokens = maskinput.tokens;
+        var tokens = maskedtextbox.tokens;
 
-        equal(tokens[0], maskinput.rules["0"]);
+        equal(tokens[0], maskedtextbox.rules["0"]);
         equal(tokens[1], "-");
-        equal(tokens[2], maskinput.rules["0"]);
+        equal(tokens[2], maskedtextbox.rules["0"]);
     });
 
-    test("MaskInput replace '.' token with current decimal separator", function() {
+    test("MaskedTextBox replace '.' token with current decimal separator", function() {
         kendo.culture("bg-BG");
 
         var numberFormat = kendo.culture().numberFormat;
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0.0"
         });
 
-        var tokens = maskinput.tokens;
+        var tokens = maskedtextbox.tokens;
         equal(tokens[1], numberFormat["."]);
 
         kendo.culture("en-US");
     });
 
-    test("MaskInput replace ',' token with current group separator", function() {
+    test("MaskedTextBox replace ',' token with current group separator", function() {
         kendo.culture("bg-BG");
 
         var numberFormat = kendo.culture().numberFormat;
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0,0"
         });
 
-        var tokens = maskinput.tokens;
+        var tokens = maskedtextbox.tokens;
         equal(tokens[1], numberFormat[","]);
 
         kendo.culture("en-US");
     });
 
-    test("MaskInput replace '$' token with current currency symbol", function() {
+    test("MaskedTextBox replace '$' token with current currency symbol", function() {
         kendo.culture("bg-BG");
 
         var numberFormat = kendo.culture().numberFormat;
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "00 $"
         });
 
-        var tokens = maskinput.tokens;
+        var tokens = maskedtextbox.tokens;
         var chars = numberFormat.currency.symbol.split("");
         var tokenIdx = 3;
 
@@ -90,19 +90,19 @@
         kendo.culture("en-US");
     });
 
-    test("MaskInput supports escaping mask symbols", function() {
+    test("MaskedTextBox supports escaping mask symbols", function() {
         var numberFormat = kendo.culture().numberFormat;
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "\\&"
         });
 
-        var tokens = maskinput.tokens;
+        var tokens = maskedtextbox.tokens;
         equal(tokens[0], "&");
         equal(tokens.length, 1);
     });
 
-    test("MaskInput sets value on init", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox sets value on init", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "00-00",
             value: "9999"
         });
@@ -110,8 +110,8 @@
         equal(input.val(), "99-99");
     });
 
-    test("MaskInput does not focus if the element is not active", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox does not focus if the element is not active", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "00-00",
             value: "9999"
         });
@@ -119,8 +119,8 @@
         notEqual(input[0], document.activeElement);
     });
 
-    test("MaskInput honours input disabled attr", function() {
-        var maskinput = new MaskInput(input.attr("disabled", true), {
+    test("MaskedTextBox honours input disabled attr", function() {
+        var maskedtextbox = new MaskedTextBox(input.attr("disabled", true), {
             mask: "00-00",
             value: "9999"
         });
@@ -128,9 +128,9 @@
         ok(input.hasClass("k-state-disabled"));
     });
 
-    test("MaskInput gets value from input element", function() {
+    test("MaskedTextBox gets value from input element", function() {
         input.val("test99");
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "00-00"
         });
 
@@ -142,16 +142,16 @@
 
         var form = $("<form/>").appendTo(QUnit.fixture).append(input);
 
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "00-00"
         });
 
-        maskinput.value("5678");
+        maskedtextbox.value("5678");
 
         form[0].reset();
 
         setTimeout(function() {
-            equal(maskinput.element.val(), "12-34");
+            equal(maskedtextbox.element.val(), "12-34");
             start();
         }, 100);
     });
@@ -161,16 +161,16 @@
 
         var form = $("<form id='form1'/>").appendTo(QUnit.fixture);
 
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "00-00"
         });
 
-        maskinput.value("5678");
+        maskedtextbox.value("5678");
 
         form[0].reset();
 
         setTimeout(function() {
-            equal(maskinput.element.val(), "12-34");
+            equal(maskedtextbox.element.val(), "12-34");
             start();
         }, 100);
     });

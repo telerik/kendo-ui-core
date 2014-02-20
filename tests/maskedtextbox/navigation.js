@@ -1,8 +1,8 @@
 (function() {
-    var MaskInput = kendo.ui.MaskInput,
+    var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
 
-    module("kendo.ui.MaskInput navigation", {
+    module("kendo.ui.MaskedTextBox navigation", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
 
@@ -71,8 +71,8 @@
         return start;
     }
 
-    test("MaskInput replace empty symbol if valid", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox replace empty symbol if valid", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
@@ -83,8 +83,8 @@
         equal(input.val(), "0-_");
     });
 
-    test("MaskInput inserts after a static character", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox inserts after a static character", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "-0"
         });
 
@@ -96,8 +96,8 @@
         equal(input.val(), "-0");
     });
 
-    test("MaskInput allows typing of an empty symbol", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox allows typing of an empty symbol", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "-0"
         });
 
@@ -109,8 +109,8 @@
         equal(input.val(), "-_");
     });
 
-    test("MaskInput inserts a symbol while shifting rest of the text", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox inserts a symbol while shifting rest of the text", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-000"
         });
 
@@ -123,8 +123,8 @@
         equal(input.val(), "0-012");
     });
 
-    test("MaskInput replaces an empty symbol without shifting rest of the text", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox replaces an empty symbol without shifting rest of the text", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-000"
         });
 
@@ -137,8 +137,8 @@
         equal(input.val(), "0-0_3");
     });
 
-    test("MaskInput removes the selected text on keypress", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox removes the selected text on keypress", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-000"
         });
 
@@ -151,8 +151,8 @@
         equal(input.val(), "0-0__");
     });
 
-    test("MaskInput prevents user input if end of mask is reached", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox prevents user input if end of mask is reached", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "-0"
         });
 
@@ -163,8 +163,8 @@
         equal(caret(input[0])[0], 2);
     });
 
-    test("MaskInput does not does not modify value on invalid symbol", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox does not does not modify value on invalid symbol", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0000"
         });
 
@@ -177,8 +177,8 @@
         equal(input.val(), "0___");
     });
 
-    test("MaskInput return empty symbol on BACKSPACE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox return empty symbol on BACKSPACE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
@@ -192,8 +192,8 @@
         equal(caret(input[0])[0], 2);
     });
 
-    test("MaskInput prevents user input on BACKSPACE if start is reached", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox prevents user input on BACKSPACE if start is reached", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(0-0)"
         });
 
@@ -205,8 +205,8 @@
         equal(caret(input[0])[0], 0);
     });
 
-    test("MaskInput does not add empty symbol on BACKSPACE when start is reached", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox does not add empty symbol on BACKSPACE when start is reached", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(0-0)"
         });
 
@@ -219,8 +219,8 @@
         equal(caret(input[0])[0], 0);
     });
 
-    test("MaskInput skips characters on BACKSPACE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox skips characters on BACKSPACE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0--0"
         });
 
@@ -233,8 +233,8 @@
         equal(caret(input[0])[0], 1);
     });
 
-    test("MaskInput honours static chars on BACKSPACE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox honours static chars on BACKSPACE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
@@ -249,8 +249,8 @@
         equal(caret(input[0])[0], 0);
     });
 
-    test("MaskInput removes whole value on BACKSPACE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox removes whole value on BACKSPACE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 0000-000"
         });
 
@@ -264,8 +264,8 @@
         equal(caret(input[0])[0], 0);
     });
 
-    test("MaskInput removes symbol on DELETE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox removes symbol on DELETE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
@@ -279,8 +279,8 @@
         equal(caret(input[0])[0], 0);
     });
 
-    test("MaskInput removes selected text on DELETE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox removes selected text on DELETE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0--0"
         });
 
@@ -294,8 +294,8 @@
         equal(caret(input[0])[0], 0);
     });
 
-    test("MaskInput honours all static characters on DELETE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox honours all static characters on DELETE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0--00"
         });
 
@@ -309,8 +309,8 @@
         equal(caret(input[0])[0], 3);
     });
 
-    test("MaskInput with simple mask honours a static character on DELETE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox with simple mask honours a static character on DELETE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-00"
         });
 
@@ -324,8 +324,8 @@
         equal(caret(input[0])[0], 2);
     });
 
-    test("MaskInput honours empty spaces on DELETE", function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox honours empty spaces on DELETE", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-00"
         });
 
@@ -339,8 +339,8 @@
         equal(caret(input[0])[0], 0);
     });
 
-    asyncTest("MaskInput supports pasting a valid value", 2, function() {
-        var maskinput = new MaskInput(input, {
+    asyncTest("MaskedTextBox supports pasting a valid value", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0000"
         });
 
@@ -358,8 +358,8 @@
         });
     });
 
-    asyncTest("MaskInput unmasks before inserting pasted value", 2, function() {
-        var maskinput = new MaskInput(input, {
+    asyncTest("MaskedTextBox unmasks before inserting pasted value", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "00--00"
         });
 
@@ -379,8 +379,8 @@
 
     });
 
-    asyncTest("MaskInput pastes correctly when caret is on static symbol", 2, function() {
-        var maskinput = new MaskInput(input, {
+    asyncTest("MaskedTextBox pastes correctly when caret is on static symbol", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "00--00"
         });
 
@@ -399,8 +399,8 @@
         });
     });
 
-    test("MaskInput umasks correctly mu2tiple selection on paste", 1, function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox umasks correctly mu2tiple selection on paste", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000"
         });
 
@@ -412,8 +412,8 @@
         equal(input.val(), "(125) ___");
     });
 
-    asyncTest("MaskInput inserts value correctly after unmasking multiple selection", 2, function() {
-        var maskinput = new MaskInput(input, {
+    asyncTest("MaskedTextBox inserts value correctly after unmasking multiple selection", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000"
         });
 
@@ -431,13 +431,13 @@
         });
     });
 
-    test("MaskInput supports cutting/delete through context menu", 1, function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox supports cutting/delete through context menu", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000"
         });
 
         input.focus();
-        maskinput.value("123555");
+        maskedtextbox.value("123555");
 
         input.val("(123)");
         caret(input[0], 5);
@@ -446,8 +446,8 @@
         equal(input.val(), "(123) ___");
     });
 
-    test("MaskInput allows space in middle of mask", 1, function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox allows space in middle of mask", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 999"
         });
 
