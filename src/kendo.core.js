@@ -3758,7 +3758,7 @@ function pad(number, digits, end) {
         }
 
         return start;
-    }
+    };
 
 })(jQuery);
 
