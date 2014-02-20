@@ -20,7 +20,7 @@ $transport = new \Kendo\Data\DataSourceTransport();
 
 $read = new \Kendo\Data\DataSourceTransportRead();
 
-$read->url('locked-columns.php')
+$read->url('frozen-columns.php')
      ->contentType('application/json')
      ->type('POST');
 

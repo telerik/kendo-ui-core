@@ -11,18 +11,18 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
-@Controller("grid-locked-columns-controller")
+@Controller("grid-frozen-columns-controller")
 @RequestMapping(value="/web/grid/")
-public class LockedColumnsController {
+public class FrozenColumnsController {
     @Autowired 
     private OrderDao order;
 
-    @RequestMapping(value = "/locked-columns", method = RequestMethod.GET)
+    @RequestMapping(value = "/frozen-columns", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/locked-columns";
+        return "web/grid/frozen-columns";
     }
     
-    @RequestMapping(value = "/locked-columns/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/frozen-columns/read", method = RequestMethod.POST)
     public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
         return order.getList(request);
     }
