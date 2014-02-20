@@ -67,6 +67,10 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
+        public string ShapeName { get; set; }
+
+        public MapMarkerTooltip Tooltip { get; set; }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             var dataSource = DataSource.ToJson();
@@ -134,12 +138,23 @@ namespace Kendo.Mvc.UI
                 json["type"] = Type;
             }
                 
-            if (Shape.HasValue)
-            {
-                json["shape"] = Shape;
-            }
-                
         //<< Serialization
+
+            var tooltip = Tooltip.ToJson();
+            if (tooltip.Any())
+            {
+                json["tooltip"] = tooltip;
+            }
+
+            if (ShapeName.HasValue())
+            {
+                json["shape"] = ShapeName;
+            }
+            else if (Shape.HasValue)
+            {
+                var shapeName = Shape.ToString();
+                json["shape"] = shapeName.ToLowerInvariant()[0] + shapeName.Substring(1);
+            }
         }
     }
 }

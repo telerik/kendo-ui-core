@@ -169,6 +169,27 @@ using System.Web.Mvc;
         }
         
         //<< Fields
+
+        /// <summary>
+        /// The marker shape name. The "pin" and "pinTarget" shapes are predefined.
+        /// </summary>
+        /// <param name="value">The name of the shape.</param>
+        public MapLayerBuilder Shape(string name)
+        {
+            container.ShapeName = name;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The tooltip options for this marker.
+        /// </summary>
+        /// <param name="configurator">The action that configures the tooltip.</param>
+        public MapLayerBuilder Tooltip(Action<MapMarkerTooltipBuilder> configurator)
+        {
+            configurator(new MapMarkerTooltipBuilder(container.Tooltip));
+            return this;
+        }
     }
 }
 

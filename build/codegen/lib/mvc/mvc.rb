@@ -26,6 +26,7 @@ module CodeGen::MVC::Wrappers
         'map.controls.navigator',
         'map.controls.zoom',
         'map.layers.datasource',
+        'map.layers.shape',
         'map.markers.position',
 		'map.markers.shape',
 		'map.markerdefaults.shape',

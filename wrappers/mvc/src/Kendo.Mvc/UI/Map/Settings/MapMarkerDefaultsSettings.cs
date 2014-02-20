@@ -29,8 +29,8 @@ namespace Kendo.Mvc.UI
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-
-            //<< Serialization
+        
+        //<< Serialization
 
             var tooltip = Tooltip.ToJson();
             if (tooltip.Any())
