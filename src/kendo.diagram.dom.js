@@ -56,7 +56,6 @@
             CASCADING = "Cascading",
             POLYLINE = "Polyline",
             BOUNDSCHANGE = "boundsChange",
-            ITEMSCHANGE = "itemsChange",
             CHANGE = "change",
             ERROR = "error",
             AUTO = "Auto",
@@ -1335,7 +1334,7 @@
                 connections: []
             },
 
-            events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
+            events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, CHANGE],
 
             _createShapes: function() {
                 var that = this,
@@ -2464,7 +2463,7 @@
 
                 if (diagram.scroller) {
                     diagram.bind(BOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
-                    diagram.bind(ITEMSCHANGE, $.proxy(this._autosizeCanvas, this));
+                    diagram.bind(CHANGE, $.proxy(this._autosizeCanvas, this));
                     diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
                 }
             },
@@ -2553,7 +2552,7 @@
                 this._raiseItemsChanged({removed: items});
             },
             _raiseItemsChanged: function (collections) {
-                this.trigger(ITEMSCHANGE, collections);
+                this.trigger(CHANGE, collections);
             },
 
             _refresh: function () {

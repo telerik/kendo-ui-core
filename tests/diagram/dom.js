@@ -304,41 +304,41 @@
         close(b.height, vb.height / z, tolerance);
     });
 
-    test("Add shape raises itemschange event", function() {
+    test("Add shape raises change event", function() {
         var eventShape = null,
             called = false;
 
-        diagram.bind("itemsChange", function(args) {
+        diagram.bind("change", function(args) {
             eventShape = args.added[0];
             called = true;
         });
 
         var addedShape = diagram.addShape({});
-        ok(called, "itemschange event should be raised");
+        ok(called, "change event should be raised");
         equal(eventShape, addedShape, "the reported shape should be the same as the added");
     });
 
-    test("Remove shape raises itemschange event", function() {
+    test("Remove shape raises change event", function() {
         var eventShape = null,
             called = false,
             shape = diagram.addShape({});
 
-        diagram.bind("itemsChange", function(args) {
+        diagram.bind("change", function(args) {
             eventShape = args.removed[0];
             called = true;
         });
 
         diagram.remove(shape);
-        ok(called, "itemschange event should be raised");
+        ok(called, "change event should be raised");
         equal(eventShape, shape, "the reported shape should be the same as the removed");
     });
 
-    test("Remove multiple items raises itemschange event", function() {
+    test("Remove multiple items raises change event", function() {
         var eventShapes = [],
             point = new Point(1, 0),
             shapes = [diagram.addShape({}), diagram.addShape({ x: point.x, y: point.y })];
 
-        diagram.bind("itemsChange", function(args) {
+        diagram.bind("change", function(args) {
             eventShapes = args.removed;
         });
 
