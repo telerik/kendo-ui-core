@@ -3716,36 +3716,41 @@ function pad(number, digits, end) {
             element = element[0];
         }
 
-        if (element.selectionStart !== undefined) {
-            if (isPosition) {
-                element.focus();
-                element.setSelectionRange(start, end);
-            } else {
-                start = [element.selectionStart, element.selectionEnd];
+        try {
+            if (element.selectionStart !== undefined) {
+                if (isPosition) {
+                    element.focus();
+                    element.setSelectionRange(start, end);
+                } else {
+                    start = [element.selectionStart, element.selectionEnd];
+                }
+            } else if (document.selection) {
+                if ($(element).is(":visible")) {
+                    element.focus();
+                }
+
+                rangeElement = element.createTextRange();
+
+                if (isPosition) {
+                    rangeElement.collapse(true);
+                    rangeElement.moveStart("character", start);
+                    rangeElement.moveEnd("character", end - start);
+                    rangeElement.select();
+                } else {
+                    var rangeDuplicated = rangeElement.duplicate(),
+                        selectionStart, selectionEnd;
+
+                        rangeElement.moveToBookmark(document.selection.createRange().getBookmark());
+                        rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+                        selectionStart = rangeDuplicated.text.length;
+                        selectionEnd = selectionStart + rangeElement.text.length;
+
+                    start = [selectionStart, selectionEnd];
+                }
             }
-        } else if (document.selection) {
-            if ($(element).is(":visible")) {
-                element.focus();
-            }
-
-            rangeElement = element.createTextRange();
-
-            if (isPosition) {
-                rangeElement.collapse(true);
-                rangeElement.moveStart("character", start);
-                rangeElement.moveEnd("character", end - start);
-                rangeElement.select();
-            } else {
-                var rangeDuplicated = rangeElement.duplicate(),
-                    selectionStart, selectionEnd;
-
-                    rangeElement.moveToBookmark(document.selection.createRange().getBookmark());
-                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
-                    selectionStart = rangeDuplicated.text.length;
-                    selectionEnd = selectionStart + rangeElement.text.length;
-
-                start = [selectionStart, selectionEnd];
-            }
+        } catch(e) {
+            /* element is not focused or it is not in the DOM */
+            start = [];
         }
 
         return start;
