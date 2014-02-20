@@ -20,8 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The default marker shape. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-		/// For example "pinTarget" is rendered as "k-marker-pin-target".
+        /// The default marker shape. Supported shapes are "pin" and "pinTarget".
         /// </summary>
         /// <param name="value">The value that configures the shape.</param>
         public MapMarkerDefaultsSettingsBuilder Shape(MapMarkersShape value)
@@ -31,6 +30,8 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        //<< Fields   
+
         /// <summary>
         /// Default Kendo UI Tooltip options for this marker.
         /// </summary>
@@ -39,9 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             configurator(new MapMarkerTooltipBuilder(container.Tooltip));
             return this;
-        }
-
-        //<< Fields        
+        }     
     }
 }
 

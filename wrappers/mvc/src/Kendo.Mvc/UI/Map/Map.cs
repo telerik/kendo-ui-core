@@ -25,11 +25,11 @@ namespace Kendo.Mvc.UI
                 
             Layers = new List<MapLayer>();
                 
+            MarkerDefaults = new MapMarkerDefaultsSettings();
+                
             Markers = new List<MapMarker>();
                 
         //<< Initialization
-
-            MarkerDefaults = new MapMarkerDefaultsSettings(this);
         }
 
         public double[] Center { get; set; }
@@ -62,6 +62,12 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public MapMarkerDefaultsSettings MarkerDefaults
+        {
+            get;
+            set;
+        }
+        
         public List<MapMarker> Markers
         {
             get;
@@ -83,12 +89,6 @@ namespace Kendo.Mvc.UI
         public bool? Zoomable { get; set; }
         
         //<< Fields
-
-        public MapMarkerDefaultsSettings MarkerDefaults
-        {
-            get;
-            private set;
-        }
 
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -117,6 +117,12 @@ namespace Kendo.Mvc.UI
             if (layers.Any())
             {
                 json["layers"] = layers;
+            }
+                
+            var markerDefaults = MarkerDefaults.ToJson();
+            if (markerDefaults.Any())
+            {
+                json["markerDefaults"] = markerDefaults;
             }
                 
             var markers = Markers.ToJson();
@@ -161,12 +167,6 @@ namespace Kendo.Mvc.UI
             }
                 
         //<< Serialization
-                
-            var markerDefaults = MarkerDefaults.ToJson();
-            if (markerDefaults.Any())
-            {
-                json["markerDefaults"] = markerDefaults;
-            }
 
             writer.Write(Initializer.Initialize(Selector, "Map", json));
 
