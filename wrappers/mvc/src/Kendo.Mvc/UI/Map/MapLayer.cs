@@ -17,8 +17,8 @@ namespace Kendo.Mvc.UI
             //>> Initialization
         
             Style = new MapLayerStyleSettings();
-
-            //<< Initialization
+                
+        //<< Initialization
 
             Tooltip = new MapMarkerTooltip(map.ViewContext, map.Initializer, map.ViewData);
         }

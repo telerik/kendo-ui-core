@@ -8,11 +8,13 @@ namespace Kendo.Mvc.UI
 
     public class MapLayerDefaultsMarkerSettings : JsonObject
     {
-        public MapLayerDefaultsMarkerSettings()
+        public MapLayerDefaultsMarkerSettings(Map map)
         {
             //>> Initialization
         
         //<< Initialization
+
+            Tooltip = new MapMarkerTooltip(map.ViewContext, map.Initializer, map.ViewData);
         }
 
         //>> Fields
@@ -22,6 +24,10 @@ namespace Kendo.Mvc.UI
         public MapMarkersShape? Shape { get; set; }
         
         //<< Fields
+
+        public MapMarkerTooltip Tooltip { get; set; }
+
+        public string ShapeName { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -38,6 +44,16 @@ namespace Kendo.Mvc.UI
             }
                 
         //<< Serialization
+
+            if (ShapeName.HasValue())
+            {
+                json["shape"] = ShapeName;
+            }
+            else if (Shape.HasValue)
+            {
+                var shapeName = Shape.ToString();
+                json["shape"] = shapeName.ToLowerInvariant()[0] + shapeName.Substring(1);
+            }
         }
     }
 }

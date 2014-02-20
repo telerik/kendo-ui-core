@@ -21,13 +21,13 @@ namespace Kendo.Mvc.UI
         
             Controls = new MapControlsSettings();
                 
-            LayerDefaults = new MapLayerDefaultsSettings();
-                
             Layers = new List<MapLayer>();
                 
             Markers = new List<MapMarker>();
                 
         //<< Initialization
+
+            LayerDefaults = new MapLayerDefaultsSettings(this);
 
             MarkerDefaults = new MapMarkerDefaultsSettings(this);
         }

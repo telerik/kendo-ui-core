@@ -25,6 +25,7 @@ module CodeGen::MVC::Wrappers
         'map.controls.attribution',
         'map.controls.navigator',
         'map.controls.zoom',
+        'map.layerDefaults.marker.shape',
         'map.layers.datasource',
         'map.layers.shape',
         'map.markers.position',
@@ -44,7 +45,9 @@ module CodeGen::MVC::Wrappers
     ]
 
     INITIALIZATION_SKIP_LIST = [
-		'map.markerdefaults'
+		'map.markerdefaults',
+		'map.layerdefaults',
+		'map.layerdefaults.marker'
     ]
 
     IGNORED = [

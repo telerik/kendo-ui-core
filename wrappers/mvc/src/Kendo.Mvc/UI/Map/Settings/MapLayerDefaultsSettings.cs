@@ -8,13 +8,11 @@ namespace Kendo.Mvc.UI
 
     public class MapLayerDefaultsSettings : JsonObject
     {
-        public MapLayerDefaultsSettings()
+        public MapLayerDefaultsSettings(Map map)
         {
             //>> Initialization
         
             Bing = new MapLayerDefaultsBingSettings();
-                
-            Marker = new MapLayerDefaultsMarkerSettings();
                 
             Shape = new MapLayerDefaultsShapeSettings();
                 
@@ -22,7 +20,7 @@ namespace Kendo.Mvc.UI
                 
         //<< Initialization
 
-            
+            Marker = new MapLayerDefaultsMarkerSettings(map);
         }
 
         
