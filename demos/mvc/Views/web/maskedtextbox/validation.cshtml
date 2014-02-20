@@ -13,7 +13,7 @@
                         </li>
                         <li>
                             <label for="PhoneNumber">Phone Number:</label>
-                            <input type="text" data-role='maskinput' data-mask="(999) 000-0000" id="PhoneNumber" name="PhoneNumber" data-validmask-msg="Phone number is incomplete" required="required" />
+                            <input type="text" data-role='maskedtextbox' data-mask="(999) 000-0000" id="PhoneNumber" name="PhoneNumber" data-validmask-msg="Phone number is incomplete" required="required" />
                             <span data-for='PhoneNumber' class='k-invalid-msg'></span>
                         </li>
                         <li class="actions">
@@ -32,8 +32,8 @@
                             validmask: function (input) {
                                 console.log(input);
                                 if (input.is("[data-validmask-msg]") && input.val() != "") {
-                                    var maskinput = input.data("kendoMaskInput");
-                                    return maskinput.value().indexOf(maskinput.options.promptChar) === -1;
+                                    var maskedtextbox = input.data("kendoMaskedTextBox");
+                                    return maskedtextbox.value().indexOf(maskedtextbox.options.promptChar) === -1;
                                 }
 
                                 return true;

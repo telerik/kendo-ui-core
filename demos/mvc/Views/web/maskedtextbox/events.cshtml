@@ -1,6 +1,6 @@
     <div id="example" class="k-content">
         <div class="demo-section">
-            <input id="maskinput"/>
+            <input id="maskedtextbox"/>
         </div>
         <div class="demo-section">
             <h3 class="title">Console log</h3>
@@ -12,7 +12,7 @@
                     kendoConsole.log("Change :: " + this.value());
                 }
 
-                $("#maskinput").kendoMaskInput({
+                $("#maskedtextbox").kendoMaskedTextBox({
                     mask: "(999) 000-0000",
                     change: onChange
                 });

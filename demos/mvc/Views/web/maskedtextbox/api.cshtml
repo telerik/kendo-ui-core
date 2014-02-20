@@ -16,37 +16,37 @@
                 </ul>
             </div>           
             <div class="demo-section">
-                <input id="maskinput" />
+                <input id="maskedtextbox" />
             </div>
 
             <script>
                 $(document).ready(function() {
-                    $("#maskinput").kendoMaskInput({
+                    $("#maskedtextbox").kendoMaskedTextBox({
                         mask: "(999) 000-0000"
                     });
 
-                    var maskinput = $("#maskinput").data("kendoMaskInput");
+                    var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
 
                     var setValue = function () {
-                        maskinput.value($("#value").val());
+                        maskedtextbox.value($("#value").val());
                     };
 
                     $("#enable").click(function() {
-                        maskinput.enable();
+                        maskedtextbox.enable();
                     });
 
                     $("#disable").click(function() {
-                        maskinput.enable(false);
+                        maskedtextbox.enable(false);
                     });
 
                     $("#readonly").click(function() {
-                        maskinput.readonly();
+                        maskedtextbox.readonly();
                     });
 
                     $("#set").click(setValue);
 
                     $("#get").click(function() {
-                        alert(maskinput.value());
+                        alert(maskedtextbox.value());
                     });
                 });
            </script>           
