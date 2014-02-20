@@ -2269,9 +2269,11 @@ function pad(number, digits, end) {
 
     var ampRegExp = /&/g,
         ltRegExp = /</g,
+        quoteRegExp = /"/g,
+        aposRegExp = /'/g,
         gtRegExp = />/g;
     function htmlEncode(value) {
-        return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;");
+        return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;").replace(quoteRegExp, "&quot;").replace(aposRegExp, "&#39;");
     }
 
     var eventTarget = function (e) {
