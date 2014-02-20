@@ -236,8 +236,6 @@ var __meta__ = {
             }
 
             kendo.notify(that);
-
-            wrapper = windowContent = null;
         },
 
         _buttonEnter: function() {
@@ -257,39 +255,39 @@ var __meta__ = {
         },
 
         _dimensions: function() {
-            var that = this,
-                wrapper = that.wrapper,
-                options = that.options,
-                w = options.width,
-                h = options.height,
-                maxh = options.maxHeight;
+            var wrapper = this.wrapper;
+            var options = this.options;
+            var width = options.width;
+            var height = options.height;
+            var maxHeight = options.maxHeight;
+            var dimensions = ["minWidth","minHeight","maxWidth","maxHeight"];
 
-            that.title(options.title);
+            this.title(options.title);
 
-            each(["minWidth","minHeight","maxWidth","maxHeight"], function(_, prop) {
-                var value = options[prop];
+            for (var i = 0; i < dimensions.length; i++) {
+                var value = options[dimensions[i]];
                 if (value && value != Infinity) {
-                    wrapper.css(prop, value);
-                }
-            });
-
-            if (maxh && maxh != Infinity) {
-                that.element.css("maxHeight", maxh);
-            }
-
-            if (w) {
-                if (w.toString().indexOf("%") > 0) {
-                    wrapper.width(w);
-                } else {
-                    wrapper.width(constrain(w, options.minWidth, options.maxWidth));
+                    wrapper.css(dimensions[i], value);
                 }
             }
 
-            if (h) {
-                if (h.toString().indexOf("%") > 0) {
-                    wrapper.height(h);
+            if (maxHeight && maxHeight != Infinity) {
+                this.element.css("maxHeight", maxHeight);
+            }
+
+            if (width) {
+                if (width.toString().indexOf("%") > 0) {
+                    wrapper.width(width);
                 } else {
-                    wrapper.height(constrain(h, options.minHeight, options.maxHeight));
+                    wrapper.width(constrain(width, options.minWidth, options.maxWidth));
+                }
+            }
+
+            if (height) {
+                if (height.toString().indexOf("%") > 0) {
+                    wrapper.height(height);
+                } else {
+                    wrapper.height(constrain(height, options.minHeight, options.maxHeight));
                 }
             }
 
@@ -299,9 +297,8 @@ var __meta__ = {
         },
 
         _position: function() {
-            var that = this,
-                wrapper = that.wrapper,
-                position = that.options.position;
+            var wrapper = this.wrapper,
+                position = this.options.position;
 
             if (position.top === 0) {
                 position.top = position.top.toString();
@@ -372,14 +369,12 @@ var __meta__ = {
         },
 
         setOptions: function(options) {
-            var that = this;
-
-            Widget.fn.setOptions.call(that, options);
-            that._animations();
-            that._dimensions();
-            that._position();
-            that._resizable();
-            that._draggable();
+            Widget.fn.setOptions.call(this, options);
+            this._animations();
+            this._dimensions();
+            this._position();
+            this._resizable();
+            this._draggable();
         },
 
         events:[
@@ -446,7 +441,7 @@ var __meta__ = {
             }
 
             if (keyCode == keys.ESC && that._closable()) {
-                that._close(true);
+                that._close(false);
             }
 
             if (options.draggable && !e.ctrlKey && !isMaximized) {
@@ -516,36 +511,39 @@ var __meta__ = {
             return overlay;
         },
 
-        _windowActionHandler: function (e) {
-            var target = $(e.target).closest(".k-window-action").find(".k-icon"),
-                that = this;
+        _actionForIcon: function(icon) {
+            var iconClass = /\bk-i-\w+\b/.exec(icon[0].className)[0];
 
-            if (that._closing) {
+            return {
+                "k-i-close": "_close",
+                "k-i-maximize": "maximize",
+                "k-i-minimize": "minimize",
+                "k-i-restore": "restore",
+                "k-i-refresh": "refresh",
+                "k-i-pin": "pin",
+                "k-i-unpin": "unpin"
+            }[iconClass];
+        },
+
+        _windowActionHandler: function (e) {
+            if (this._closing) {
                 return;
             }
 
-            each({
-                "k-i-close": function() { that._close(true); },
-                "k-i-maximize": that.maximize,
-                "k-i-minimize": that.minimize,
-                "k-i-restore": that.restore,
-                "k-i-refresh": that.refresh,
-                "k-i-pin": that.pin,
-                "k-i-unpin": that.unpin
-            }, function (commandName, handler) {
-                if (target.hasClass(commandName)) {
-                    e.preventDefault();
-                    handler.call(that);
-                    target = null;
-                    return false;
-                }
-            });
+            var icon = $(e.target).closest(".k-window-action").find(".k-icon");
+            var action = this._actionForIcon(icon);
+
+            if (action) {
+                e.preventDefault();
+                this[action]();
+                return false;
+            }
         },
 
         _modals: function() {
             var that = this;
 
-            return $(KWINDOW).filter(function() {
+            var zStack = $(KWINDOW).filter(function() {
                 var dom = $(this);
                 var object = that._object(dom);
                 var options = object && object.options;
@@ -554,6 +552,10 @@ var __meta__ = {
             }).sort(function(a, b){
                 return +$(a).css("zIndex") - +$(b).css("zIndex");
             });
+
+            that = null;
+
+            return zStack;
         },
 
         _object: function(element) {
@@ -646,7 +648,6 @@ var __meta__ = {
                 options = that.options,
                 showOptions = options.animation.open,
                 contentElement = wrapper.children(KWINDOWCONTENT),
-                initialOverflow = contentElement.css(OVERFLOW),
                 overlay;
 
             if (!that.trigger(OPEN)) {
@@ -686,14 +687,7 @@ var __meta__ = {
                     wrapper.show().kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
-                        complete: function() {
-                            if (options.autoFocus) {
-                                that.element.focus();
-                            }
-                            that.trigger(ACTIVATE);
-                            contentElement.css(OVERFLOW, initialOverflow);
-                            wrapper = null;
-                        }
+                        complete: proxy(this._activate, this)
                     });
                 }
             }
@@ -704,6 +698,14 @@ var __meta__ = {
             }
 
             return that;
+        },
+
+        _activate: function() {
+            if (this.options.autoFocus) {
+                this.element.focus();
+            }
+            this.trigger(ACTIVATE);
+            this.wrapper.children(KWINDOWCONTENT).css(OVERFLOW, "");
         },
 
         _removeOverlay: function(suppressAnimation) {
@@ -727,14 +729,14 @@ var __meta__ = {
             }
         },
 
-        _close: function(userTriggered) {
+        _close: function(systemTriggered) {
             var that = this,
                 wrapper = that.wrapper,
                 options = that.options,
                 showOptions = options.animation.open,
                 hideOptions = options.animation.close;
 
-            if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !!userTriggered })) {
+            if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !systemTriggered })) {
                 that._closing = true;
                 options.visible = false;
 
@@ -753,15 +755,7 @@ var __meta__ = {
                     effects: hideOptions.effects || showOptions.effects,
                     reverse: hideOptions.reverse === true,
                     duration: hideOptions.duration,
-                    complete: function() {
-                        wrapper.hide().css("opacity","");
-                        that.trigger(DEACTIVATE);
-                        var lastModal = that._object(that._modals().last());
-                        if (lastModal) {
-                            lastModal.toFront();
-                        }
-                        wrapper = null;
-                    }
+                    complete: proxy(this._deactivate, this)
                 });
             }
 
@@ -773,8 +767,17 @@ var __meta__ = {
             }
         },
 
+        _deactivate: function() {
+            this.wrapper.hide().css("opacity","");
+            this.trigger(DEACTIVATE);
+            var lastModal = this._object(this._modals().last());
+            if (lastModal) {
+                lastModal.toFront();
+            }
+        },
+
         close: function () {
-            this._close(false);
+            this._close(true);
             return this;
         },
 
@@ -1100,17 +1103,20 @@ var __meta__ = {
 
             Widget.fn.destroy.call(this);
 
+            this.unbind(undefined);
+
             kendo.destroy(this.wrapper);
 
             this._removeOverlay(true);
 
-            this.wrapper.remove();
+            this.wrapper.empty().remove();
+
+            this.wrapper = this.appendTo = this.element = $();
         },
 
         _createWindow: function() {
-            var that = this,
-                contentHtml = that.element,
-                options = that.options,
+            var contentHtml = this.element,
+                options = this.options,
                 iframeSrcAttributes,
                 wrapper,
                 isRtl = kendo.support.isRtl(contentHtml);
@@ -1136,7 +1142,7 @@ var __meta__ = {
             // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
             wrapper
                 .toggleClass("k-rtl", isRtl)
-                .appendTo(that.appendTo)
+                .appendTo(this.appendTo)
                 .append(contentHtml)
                 .find("iframe:not(.k-content)").each(function(index) {
                    // Restore the src attribute of the iframes when they are part of the live DOM tree
@@ -1155,6 +1161,8 @@ var __meta__ = {
                     editor.refresh();
                 }
             });
+
+            wrapper = contentHtml = null;
         }
     });
 
@@ -1187,35 +1195,32 @@ var __meta__ = {
 
 
     function WindowResizing(wnd) {
-        var that = this;
-
-        that.owner = wnd;
-        that._draggable = new Draggable(wnd.wrapper, {
+        this.owner = wnd;
+        this._draggable = new Draggable(wnd.wrapper, {
             filter: KWINDOWRESIZEHANDLES,
             group: wnd.wrapper.id + "-resizing",
-            dragstart: proxy(that.dragstart, that),
-            drag: proxy(that.drag, that),
-            dragend: proxy(that.dragend, that)
+            dragstart: proxy(this.dragstart, this),
+            drag: proxy(this.drag, this),
+            dragend: proxy(this.dragend, this)
         });
     }
 
     WindowResizing.prototype = {
         dragstart: function (e) {
-            var that = this,
-                wnd = that.owner,
-                wrapper = wnd.wrapper;
+            var wnd = this.owner;
+            var wrapper = wnd.wrapper;
 
-            that.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
-            that.initialCursorPosition = kendo.getOffset(wrapper, "position");
+            this.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
+            this.initialCursorPosition = kendo.getOffset(wrapper, "position");
 
-            that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
+            this.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
 
-            that.initialSize = {
+            this.initialSize = {
                 width: wrapper.width(),
                 height: wrapper.height()
             };
 
-            that.containerOffset = kendo.getOffset(wnd.appendTo);
+            this.containerOffset = kendo.getOffset(wnd.appendTo);
 
             wrapper
                 .append(templates.overlay)
@@ -1297,24 +1302,22 @@ var __meta__ = {
         },
         destroy: function() {
             this._draggable.destroy();
-            this.owner = null;
+            this._draggable = this.owner = null;
         }
     };
 
     function WindowDragging(wnd, dragHandle) {
-        var that = this;
-
-        that.owner = wnd;
-        that._draggable = new Draggable(wnd.wrapper, {
+        this.owner = wnd;
+        this._draggable = new Draggable(wnd.wrapper, {
             filter: dragHandle,
             group: wnd.wrapper.id + "-moving",
-            dragstart: proxy(that.dragstart, that),
-            drag: proxy(that.drag, that),
-            dragend: proxy(that.dragend, that),
-            dragcancel: proxy(that.dragcancel, that)
+            dragstart: proxy(this.dragstart, this),
+            drag: proxy(this.drag, this),
+            dragend: proxy(this.dragend, this),
+            dragcancel: proxy(this.dragcancel, this)
         });
 
-        that._draggable.userEvents.stopPropagation = false;
+        this._draggable.userEvents.stopPropagation = false;
     }
 
     WindowDragging.prototype = {
@@ -1389,7 +1392,7 @@ var __meta__ = {
         },
         destroy: function() {
             this._draggable.destroy();
-            this.owner = null;
+            this._draggable = this.owner = null;
         }
     };
 
