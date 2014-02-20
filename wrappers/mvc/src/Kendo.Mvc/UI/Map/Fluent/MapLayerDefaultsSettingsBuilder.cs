@@ -20,6 +20,16 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// The default configuration for marker layers.
+        /// </summary>
+        /// <param name="configurator">The action that configures the marker.</param>
+        public MapLayerDefaultsSettingsBuilder Marker(Action<MapLayerDefaultsMarkerSettingsBuilder> configurator)
+        {
+            configurator(new MapLayerDefaultsMarkerSettingsBuilder(container.Marker));
+            return this;
+        }
+        
+        /// <summary>
         /// The default configuration for shape layers.
         /// </summary>
         /// <param name="configurator">The action that configures the shape.</param>

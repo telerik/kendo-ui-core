@@ -14,6 +14,8 @@ namespace Kendo.Mvc.UI
         
             Bing = new MapLayerDefaultsBingSettings();
                 
+            Marker = new MapLayerDefaultsMarkerSettings();
+                
             Shape = new MapLayerDefaultsShapeSettings();
                 
             Tile = new MapLayerDefaultsTileSettings();
@@ -26,6 +28,12 @@ namespace Kendo.Mvc.UI
         
 
         //>> Fields
+        
+        public MapLayerDefaultsMarkerSettings Marker
+        {
+            get;
+            set;
+        }
         
         public MapLayerDefaultsShapeSettings Shape
         {
@@ -51,6 +59,12 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            var marker = Marker.ToJson();
+            if (marker.Any())
+            {
+                json["marker"] = marker;
+            }
+                
             var shape = Shape.ToJson();
             if (shape.Any())
             {

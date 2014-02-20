@@ -91,6 +91,42 @@ using System.Web.Mvc;
         }
         
         /// <summary>
+        /// The data item field which contains the marker location.
+		/// The field should be an array with two numbers - latitude and longitude.Requires the dataSource option to be set.
+        /// </summary>
+        /// <param name="value">The value that configures the locationfield.</param>
+        public MapLayerBuilder LocationField(string value)
+        {
+            container.LocationField = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The default marker shape for data-bound markers. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
+		/// For example "pinTarget" is rendered as "k-marker-pin-target".
+        /// </summary>
+        /// <param name="value">The value that configures the shape.</param>
+        public MapLayerBuilder Shape(string value)
+        {
+            container.Shape = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The data item field which contains the marker title.
+		/// Requires the dataSource option to be set.
+        /// </summary>
+        /// <param name="value">The value that configures the titlefield.</param>
+        public MapLayerBuilder TitleField(string value)
+        {
+            container.TitleField = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The the opacity for the layer.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>

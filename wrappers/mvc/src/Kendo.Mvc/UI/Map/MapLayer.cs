@@ -47,6 +47,12 @@ namespace Kendo.Mvc.UI
         
         public string Key { get; set; }
         
+        public string LocationField { get; set; }
+        
+        public string Shape { get; set; }
+        
+        public string TitleField { get; set; }
+        
         public string Opacity { get; set; }
         
         public MapLayerStyleSettings Style
@@ -95,6 +101,21 @@ namespace Kendo.Mvc.UI
             if (Key.HasValue())
             {
                 json["key"] = Key;
+            }
+            
+            if (LocationField.HasValue())
+            {
+                json["locationField"] = LocationField;
+            }
+            
+            if (Shape.HasValue())
+            {
+                json["shape"] = Shape;
+            }
+            
+            if (TitleField.HasValue())
+            {
+                json["titleField"] = TitleField;
             }
             
             if (Opacity.HasValue())

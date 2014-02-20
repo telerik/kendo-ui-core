@@ -6,32 +6,20 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class MapLayerDefaultsShapeSettings : JsonObject
+    public class MapLayerDefaultsMarkerSettings : JsonObject
     {
-        public MapLayerDefaultsShapeSettings()
+        public MapLayerDefaultsMarkerSettings()
         {
             //>> Initialization
         
-            Style = new MapLayerDefaultsShapeStyleSettings();
-                
         //<< Initialization
-
-            
         }
-
-        
 
         //>> Fields
         
-        public string Attribution { get; set; }
+        public string Shape { get; set; }
         
         public double? Opacity { get; set; }
-        
-        public MapLayerDefaultsShapeStyleSettings Style
-        {
-            get;
-            set;
-        }
         
         //<< Fields
 
@@ -39,20 +27,14 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Attribution.HasValue())
+            if (Shape.HasValue())
             {
-                json["attribution"] = Attribution;
+                json["shape"] = Shape;
             }
             
             if (Opacity.HasValue)
             {
                 json["opacity"] = Opacity;
-            }
-                
-            var style = Style.ToJson();
-            if (style.Any())
-            {
-                json["style"] = style;
             }
                 
         //<< Serialization
