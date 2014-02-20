@@ -132,7 +132,7 @@
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar" } ],
             resizable: true,
-            columns: ["foo", { locked: true, field: "bar" }]
+            columns: [{ field: "foo", width: 100 }, { width: 200, locked: true, field: "bar" }]
         });
         var firstColumn = grid.lockedHeader.find("th:first");
 
@@ -146,7 +146,7 @@
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar" } ],
             resizable: true,
-            columns: ["foo", { locked: true, field: "bar" }]
+            columns: [{ width: 100, field: "foo" }, { width: 200, locked: true, field: "bar" }]
         });
         var firstColumn = grid.thead.find("th:first");
 
@@ -160,9 +160,8 @@
         var grid = new Grid(table, {
             dataSource: [ { foo: "foo", bar: "bar" } ],
             resizable: true,
-            columns: ["foo", { locked: true, field: "bar" }]
+            columns: [ { field: "foo", width: 100 }, {  width: 200, locked: true, field: "bar" }]
         });
-
         var nonLockedColumn = grid.thead.find("th:first");
 
         $(nonLockedColumn).trigger({ type: "mousemove", clientX: nonLockedColumn.offset().left + nonLockedColumn.outerWidth(), clientY: 0});
@@ -292,7 +291,7 @@
         resizeColumn(grid.wrapper, firstColumn, firstColumn.width(), firstColumn.width() + 10);
 
         equal(footer.find("table").width(), initialWidth + 10);
-        equal(nonLockedFooter.width(), nonLockedFooterInitialWidth - 10);
+        equal(nonLockedFooter.width(), nonLockedFooterInitialWidth);
     });
 
     test("non locked footer table width is not incremented when locked column is resized", function() {
@@ -307,7 +306,7 @@
 
         resizeColumn(grid.wrapper, firstColumn, firstColumn.width(), firstColumn.width() + 10);
 
-        equal(footer.find("table").width(), initialWidth - 10);
+        equal(footer.find("table").width(), initialWidth);
     });
 
     test("non locked column footer cell width is incremented when handler is moved to the right", function() {

@@ -465,6 +465,19 @@ var __meta__ = {
         });
     }
 
+    function columnsWidth(cols) {
+        var colWidth, width = 0;
+
+        for (var idx = 0, length = cols.length; idx < length; idx++) {
+            colWidth = cols[idx].style.width;
+            if (colWidth && colWidth.indexOf("%") == -1) {
+                width += parseInt(colWidth, 10);
+            }
+        }
+
+        return width;
+    }
+
     function lockedColumns(columns) {
         return grep(columns, function(column) {
             return column.locked;
@@ -3027,29 +3040,16 @@ var __meta__ = {
 
         _applyLockedContainersWidth: function() {
             if (this.options.scrollable && this.lockedHeader) {
-                var columns = visibleLockedColumns(this.columns),
-                    headerWrap = this.thead.closest(".k-grid-header-wrap"),
+                var headerTable = this.thead.parent(),
+                    headerWrap = headerTable.parent(),
                     contentWidth = this.wrapper[0].clientWidth,
                     groups = this._groups(),
                     scrollbar = kendo.support.scrollbar(),
                     cols = this.lockedHeader.find(">table>colgroup>col:not(.k-group-col, .k-hierarchy-col)"),
-                    colWidth,
-                    width = 0;
-
-                for (var idx = 0, length = columns.length; idx < length; idx++) {
-                    colWidth = cols[idx].style.width;
-                    if (colWidth && colWidth.indexOf("%") == -1) {
-                        width += parseInt(colWidth, 10);
-                    }
-                    //  width += cols.eq(idx).width();
-                }
-
-                if (groups > 0) {
-                   var groupCell = this.lockedHeader.find(".k-group-cell:first");
-                   if (groupCell.length) {
-                       width +=  groupCell[0].clientWidth * groups;
-                   }
-                }
+                    nonLockedCols = headerTable.find(">colgroup>col:not(.k-group-col, .k-hierarchy-col)"),
+                    width = columnsWidth(cols),
+                    nonLockedColsWidth = columnsWidth(nonLockedCols),
+                    footerWrap;
 
                 if (width >= contentWidth) {
                     width = contentWidth - scrollbar;
@@ -3059,7 +3059,9 @@ var __meta__ = {
                     .add(this.lockedContent)
                     .width(width);
 
-                headerWrap[0].style.width = this.thead.closest(".k-grid-header").width() - width - 2 + "px";
+                headerWrap[0].style.width = headerWrap.parent().width() - width - 2 + "px";
+
+                headerTable.add(this.table).width(nonLockedColsWidth);
 
                 if (this.virtualScrollable) {
                     contentWidth -= scrollbar;
@@ -3069,7 +3071,9 @@ var __meta__ = {
 
                 if (this.lockedFooter && this.lockedFooter.length) {
                     this.lockedFooter.width(width);
-                    this.footer.find(".k-grid-footer-wrap")[0].style.width = headerWrap[0].clientWidth + "px";
+                    footerWrap = this.footer.find(".k-grid-footer-wrap");
+                    footerWrap[0].style.width = headerWrap[0].clientWidth + "px";
+                    footerWrap.children().first().width(nonLockedColsWidth);
                 }
             }
         },

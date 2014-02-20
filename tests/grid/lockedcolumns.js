@@ -151,25 +151,26 @@
 
     test("width is set to locked containers with grouping applied", function() {
         var grid = setup({
-            columns: [{ field: "foo", locked: true, width: 140 }, "bar", "baz"]
+            columns: [{ field: "foo", locked: true, width: 140 }, { field: "bar", width: 100 }, { field: "baz", width: 100 }]
         });
 
         grid.dataSource.group({ field: "foo" });
 
         equal(grid.lockedHeader.width(), grid.lockedContent.width());
-        equal(grid.lockedHeader.width(), 140 + 27);
+        equal(grid.lockedHeader.width(), 140);
     });
 
     test("width is set to locked containers with multiple grouping applied", function() {
         var grid = setup({
-            columns: [{ field: "foo", locked: true, width: 140 }, "bar", "baz"]
+            columns: [{ field: "foo", locked: true, width: 140 }, { field: "bar", width: 100 }, { field: "baz", width: 100 }]
         });
 
         grid.dataSource.group([{ field: "foo" }, { field: "bar" }]);
 
         equal(grid.lockedHeader.width(), grid.lockedContent.width());
-        equal(grid.lockedHeader.width(), 140 + 54);
+        equal(grid.lockedHeader.width(), 140);
     });
+
     test("width is set to non locked containers", function() {
         div.width(300);
 
@@ -182,6 +183,16 @@
         equal(headerWidth, grid.content.width() - kendo.support.scrollbar());
         equal(headerWidth, footerWidth);
         equal(headerWidth, 150 - kendo.support.scrollbar() - 2);
+    });
+
+    test("width is set to non locked tables", function() {
+        var grid = setup({
+            columns: [{ field: "foo", locked: true, width: 150, footerTemplate: "foo" }, { width: 100, field: "bar"}, { width: 100, field: "baz" }]
+        });
+
+        equal(grid.table.width(), 200);
+        equal(grid.footer.find("table:last").width(), 200);
+        equal(grid.thead.parent().width(), 200);
     });
 
     test("width is set to locked containers with virtualization enabled", function() {
