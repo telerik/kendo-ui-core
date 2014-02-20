@@ -706,7 +706,7 @@ var __meta__ = {
                  .val(show ? that.options.placeholder : "");
 
             if (input[0] === active) {
-                List.selectText(input[0], 0, 0);
+                kendo.caret(input[0], 0, 0);
             }
 
             that._scale();
