@@ -3,10 +3,10 @@
 })(function(){
 
 var __meta__ = {
-    id: "maskinput",
-    name: "MaskInput",
+    id: "maskedtextbox",
+    name: "MaskedTextBox",
     category: "web",
-    description: "The MaskInput widget allows to specify a mask type on an input field.",
+    description: "The MaskedTextBox widget allows to specify a mask type on an input field.",
     depends: [ "core" ]
 };
 
@@ -15,7 +15,7 @@ var __meta__ = {
     var keys = kendo.keys;
     var ui = kendo.ui;
     var Widget = ui.Widget;
-    var ns = ".kendoMaskInput";
+    var ns = ".kendoMaskedTextBox";
     var proxy = $.proxy;
 
     var STATEDISABLED = "k-state-disabled";
@@ -23,7 +23,7 @@ var __meta__ = {
     var READONLY = "readonly";
     var CHANGE = "change";
 
-    var MaskInput = Widget.extend({
+    var MaskedTextBox = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -73,7 +73,7 @@ var __meta__ = {
         },
 
         options: {
-            name: "MaskInput",
+            name: "MaskedTextBox",
             promptChar: "_",
             culture: "",
             value: "",
@@ -509,7 +509,7 @@ var __meta__ = {
         return start;
     }
 
-    ui.plugin(MaskInput);
+    ui.plugin(MaskedTextBox);
 
 })(window.kendo.jQuery);
 

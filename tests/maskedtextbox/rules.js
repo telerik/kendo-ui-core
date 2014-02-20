@@ -1,8 +1,8 @@
 (function() {
-    var MaskInput = kendo.ui.MaskInput,
+    var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
 
-    module("kendo.ui.MaskInput rules", {
+    module("kendo.ui.MaskedTextBox rules", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
             input.val("");
@@ -73,7 +73,7 @@
     }
 
     test("Rule '0' allows only a digit", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0"
         });
 
@@ -85,7 +85,7 @@
     });
 
     test("Rule '0' does not allow empty space", 2, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0"
         });
 
@@ -98,7 +98,7 @@
     });
 
     test("Rule '9' allows digit", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "9"
         });
 
@@ -110,7 +110,7 @@
     });
 
     test("Rule '9' allows digit", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "99"
         });
 
@@ -122,7 +122,7 @@
     });
 
     test("Rule '#' allows digit", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "#"
         });
 
@@ -134,7 +134,7 @@
     });
 
     test("Rule '#' allows space", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "##"
         });
 
@@ -146,7 +146,7 @@
     });
 
     test("Rule '#' allows '+'", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "##"
         });
 
@@ -158,7 +158,7 @@
     });
 
     test("Rule '#' allows '-'", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "##"
         });
 
@@ -170,7 +170,7 @@
     });
 
     test("Rule 'L' allows an alphabetical symbol", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "LL"
         });
 
@@ -183,7 +183,7 @@
     });
 
     test("Rule 'L' does not allow space", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "LL"
         });
 
@@ -196,7 +196,7 @@
     });
 
     test("Rule 'L' does not allow digit", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "LL"
         });
 
@@ -208,7 +208,7 @@
     });
 
     test("Rule '?' allows an alphabetical symbol", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "??"
         });
 
@@ -221,7 +221,7 @@
     });
 
     test("Rule '?' allows space", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "??"
         });
 
@@ -233,7 +233,7 @@
     });
 
     test("Rule '?' does not allow digit", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "??"
         });
 
@@ -245,7 +245,7 @@
     });
 
     test("Rule '&' allows any character", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "&&&&"
         });
 
@@ -260,7 +260,7 @@
     });
 
     test("Rule '&' does not allow space", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "&"
         });
 
@@ -272,7 +272,7 @@
     });
 
     test("Rule 'C' allows any character", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "CCCC"
         });
 
@@ -287,7 +287,7 @@
     });
 
     test("Rule 'C' allows space", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "C"
         });
 
@@ -299,7 +299,7 @@
     });
 
     test("Rule 'A' allows alphanumeric character", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "AA"
         });
 
@@ -312,7 +312,7 @@
     });
 
     test("Rule 'A' does not allow non-alphanumeric characters", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "A"
         });
 
@@ -325,7 +325,7 @@
     });
 
     test("Rule 'a' allows alphanumeric character", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "aa"
         });
 
@@ -338,7 +338,7 @@
     });
 
     test("Rule 'a' allows space", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "a"
         });
 
@@ -350,7 +350,7 @@
     });
 
     test("Rule 'a' does not allow non-alphanumeric characters", 1, function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "a"
         });
 
@@ -362,9 +362,9 @@
     });
 
     test("Support for custom rule", 1, function() {
-        MaskInput.fn.rules["~"] = /[+-]/
+        MaskedTextBox.fn.rules["~"] = /[+-]/
 
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "~"
         });
 
@@ -376,11 +376,11 @@
     });
 
     test("Support for rule defined as function", 1, function() {
-        MaskInput.fn.rules["~"] = function(char) {
+        MaskedTextBox.fn.rules["~"] = function(char) {
             return char === "3";
         };
 
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "~"
         });
 

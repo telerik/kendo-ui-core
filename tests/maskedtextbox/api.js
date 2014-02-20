@@ -1,8 +1,8 @@
 (function() {
-    var MaskInput = kendo.ui.MaskInput,
+    var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
 
-    module("kendo.ui.MaskInput api", {
+    module("kendo.ui.MaskedTextBox api", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
         },
@@ -12,193 +12,193 @@
     });
 
     test("value method sets a value without static chars", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.value("99");
+        maskedtextbox.value("99");
 
         equal(input.val(), "(99-__)");
     });
 
     test("value method sets a value with static chars at the begining", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.value("(99");
+        maskedtextbox.value("(99");
 
         equal(input.val(), "(99-__)");
     });
 
     test("value method sets a value with static chars at the end", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.value("99-");
+        maskedtextbox.value("99-");
 
         equal(input.val(), "(99-__)");
     });
 
     test("value method sets a value equal to mask static chars and values", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.value("(99-99)");
+        maskedtextbox.value("(99-99)");
 
         equal(input.val(), "(99-99)");
     });
 
     test("value method strips invalid chars", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.value("test 99 test 9");
+        maskedtextbox.value("test 99 test 9");
 
         equal(input.val(), "(99-9_)");
     });
 
     test("value method clears widget value", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.value("9999");
+        maskedtextbox.value("9999");
 
-        maskinput.value("");
+        maskedtextbox.value("");
 
         equal(input.val(), "");
     });
 
     test("value method clears widget value when new value is not valid", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.value("9999");
+        maskedtextbox.value("9999");
 
-        maskinput.value("test");
+        maskedtextbox.value("test");
 
         equal(input.val(), "");
     });
 
     test("value method returns widget value", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.value("9999");
+        maskedtextbox.value("9999");
 
-        equal(maskinput.value(), "(99-99)");
+        equal(maskedtextbox.value(), "(99-99)");
     });
 
     test("enable method with false disables widget", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.enable(false);
+        maskedtextbox.enable(false);
 
         ok(input.attr("disabled"));
         ok(input.hasClass("k-state-disabled"));
     });
 
     test("enable method with true enables widget", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.enable(false);
-        maskinput.enable(true);
+        maskedtextbox.enable(false);
+        maskedtextbox.enable(true);
 
         ok(!input.attr("disabled"));
         ok(!input.hasClass("k-state-disabled"));
     });
 
     test("enable method removes readonly attribute", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
         input.attr("readonly", true);
 
-        maskinput.enable();
+        maskedtextbox.enable();
 
         ok(!input.attr("readonly"));
     });
 
     test("readonly method makes widget readonly", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.readonly();
+        maskedtextbox.readonly();
 
         ok(input.attr("readonly"));
     });
 
     test("readonly method with false makes widget editable ", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.readonly();
-        maskinput.readonly(false);
+        maskedtextbox.readonly();
+        maskedtextbox.readonly(false);
 
         ok(!input.attr("readonly"));
     });
 
     test("readonly method removes disabled attribute and class", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
         });
 
-        maskinput.enable(false);
-        maskinput.readonly();
+        maskedtextbox.enable(false);
+        maskedtextbox.readonly();
 
         ok(!input.attr("disabled"));
         ok(!input.hasClass("k-state-disabled"));
     });
 
     test("setOptions changes the mask", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)",
             value: "1234"
         });
 
-        maskinput.setOptions({
+        maskedtextbox.setOptions({
             mask: "00---0"
         });
 
-        equal(maskinput.value(), "12---3");
+        equal(maskedtextbox.value(), "12---3");
     });
 
     test("setOptions changes the mask (leaves empty spaces)", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)",
             value: "12"
         });
 
-        maskinput.setOptions({
+        maskedtextbox.setOptions({
             mask: "00---0"
         });
 
-        equal(maskinput.value(), "12---_");
+        equal(maskedtextbox.value(), "12---_");
     });
 
     test("setOptions changes promptChar option", function() {
-        var maskinput = new MaskInput(input, {
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)",
             value: "12"
         });
 
-        maskinput.setOptions({
+        maskedtextbox.setOptions({
             promptChar: " "
         });
 
-        equal(maskinput.value(), "(12-  )");
+        equal(maskedtextbox.value(), "(12-  )");
     });
 })();

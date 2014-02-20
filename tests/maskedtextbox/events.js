@@ -1,8 +1,8 @@
 (function() {
-    var MaskInput = kendo.ui.MaskInput,
+    var MaskedTextBox = kendo.ui.MaskedTextBox,
         input;
 
-    module("kendo.ui.MaskInput events", {
+    module("kendo.ui.MaskedTextBox events", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
         },
@@ -11,8 +11,8 @@
         }
     });
 
-    test("MaskInput raises widget change event", 1, function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox raises widget change event", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             change: function() {
                 ok(true);
             }
@@ -23,8 +23,8 @@
         input.blur();
     });
 
-    test("MaskInput raises input change event", 1, function() {
-        var maskinput = new MaskInput(input);
+    test("MaskedTextBox raises input change event", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input);
 
         input.on("change", function() {
             ok(true);
@@ -35,8 +35,8 @@
         input.blur();
     });
 
-    test("MaskInput raises change event on ENTER", 1, function() {
-        var maskinput = new MaskInput(input, {
+    test("MaskedTextBox raises change event on ENTER", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
             change: function() {
                 ok(true);
             }
