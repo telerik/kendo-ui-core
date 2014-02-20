@@ -3716,6 +3716,10 @@ function pad(number, digits, end) {
             element = element[0];
         }
 
+        if (isPosition && element.disabled) {
+            return;
+        }
+
         try {
             if (element.selectionStart !== undefined) {
                 if (isPosition) {
