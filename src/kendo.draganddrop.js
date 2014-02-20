@@ -636,6 +636,8 @@ var __meta__ = {
             cursorOffset: null,
             axis: null,
             container: null,
+            filter: null,
+            ignore: null,
             holdToDrag: false,
             dropped: false
         },
@@ -677,10 +679,12 @@ var __meta__ = {
         _start: function(e) {
             var that = this,
                 options = that.options,
+                ignoreSelector = options.ignore,
+                ignore = ignoreSelector && $(e.touch.initialTouch).is(ignoreSelector),
                 container = options.container,
                 hint = options.hint;
 
-            if (options.holdToDrag && !that._activated) {
+            if (ignore || (options.holdToDrag && !that._activated)) {
                 that.userEvents.cancel();
                 return;
             }

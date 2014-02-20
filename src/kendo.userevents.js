@@ -158,7 +158,7 @@ var __meta__ = {
                 currentTarget: touchInfo.currentTarget,
                 initialTouch: touchInfo.target,
                 id: touchInfo.id,
-                _touchInfo: touchInfo,
+                pressEvent: touchInfo,
                 _moved: false,
                 _finished: false
             });
@@ -166,11 +166,11 @@ var __meta__ = {
 
         press: function() {
             this._holdTimeout = setTimeout($.proxy(this, "_hold"), this.userEvents.minHold);
-            this._trigger(PRESS, this._touchInfo);
+            this._trigger(PRESS, this.pressEvent);
         },
 
         _hold: function() {
-            this._trigger(HOLD, this._touchInfo);
+            this._trigger(HOLD, this.pressEvent);
         },
 
         move: function(touchInfo) {
@@ -226,7 +226,7 @@ var __meta__ = {
                 activeTouches = userEvents.touches;
 
             this._finished = true;
-            this._touchInfo = null;
+            this.pressEvent = null;
             clearTimeout(this._holdTimeout);
 
             activeTouches.splice($.inArray(this, activeTouches), 1);
