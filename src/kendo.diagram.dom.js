@@ -55,7 +55,7 @@
         var NS = ".kendoDiagram",
             CASCADING = "Cascading",
             POLYLINE = "Polyline",
-            BOUNDSCHANGE = "boundsChange",
+            ITEMBOUNDSCHANGE = "itemBoundsChange",
             CHANGE = "change",
             ERROR = "error",
             AUTO = "Auto",
@@ -641,7 +641,7 @@
             },
             _triggerBoundsChange: function () {
                 if (this.diagram) {
-                    this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
+                    this.diagram.trigger(ITEMBOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
                 }
             },
             _transformPoint: function (point) {
@@ -1334,7 +1334,7 @@
                 connections: []
             },
 
-            events: [ZOOM, PAN, SELECT, ITEMROTATE, BOUNDSCHANGE, CHANGE],
+            events: [ZOOM, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE],
 
             _createShapes: function() {
                 var that = this,
@@ -2462,7 +2462,7 @@
                 var diagram = this;
 
                 if (diagram.scroller) {
-                    diagram.bind(BOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
+                    diagram.bind(ITEMBOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
                     diagram.bind(CHANGE, $.proxy(this._autosizeCanvas, this));
                     diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
                 }

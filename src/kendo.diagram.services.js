@@ -48,6 +48,7 @@
             BOTTOM = "Bottom",
             DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
             ITEMROTATE = "itemRotate",
+            ITEMBOUNDSCHANGE = "itemBoundsChange",
             SCROLL_MIN = -20000,
             SCROLL_MAX = 20000;
 
@@ -1352,7 +1353,7 @@
                 var that = this, len, i, ctr;
                 that._visible = true;
                 that.shape = shape;
-                that.diagram.bind("boundsChange", that._refreshHandler);
+                that.diagram.bind(ITEMBOUNDSCHANGE, that._refreshHandler);
                 len = shape.connectors.length;
                 that.connectors = [];
                 that.visual.clear();
@@ -1366,7 +1367,7 @@
             },
             destroy: function () {
                 var that = this;
-                that.diagram.unbind("boundsChange", that._refreshHandler);
+                that.diagram.unbind(ITEMBOUNDSCHANGE, that._refreshHandler);
                 that.shape = undefined;
                 that._visible = undefined;
                 that.visual.visible(false);
@@ -1462,7 +1463,7 @@
                     that._refreshHandler();
                 };
 
-                that.diagram.bind("boundsChange", that._refreshHandler).bind(ITEMROTATE, that._rotatedHandler);
+                that.diagram.bind(ITEMBOUNDSCHANGE, that._refreshHandler).bind(ITEMROTATE, that._rotatedHandler);
                 that.refreshBounds();
                 that.refresh();
             },

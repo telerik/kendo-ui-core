@@ -272,7 +272,7 @@
         var s = diagram.addShape({}),
             raised;
 
-        diagram.bind("boundsChange", function () {
+        diagram.bind("itemBoundsChange", function () {
             raised = true;
         });
 
@@ -284,7 +284,7 @@
         var s = diagram.addShape({}),
             raised;
 
-        diagram.bind("boundsChange", function () {
+        diagram.bind("itemBoundsChange", function () {
             raised = true;
         });
 
