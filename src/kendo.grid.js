@@ -1191,7 +1191,7 @@ var __meta__ = {
                     },
                     resize: function(e) {
                         var rtlMultiplier = isRtl ? -1 : 1,
-                            width = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
+                            currentWidth = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
 
                         if (options.scrollable) {
                             var footer = (isLocked ? that.lockedFooter.children("table") : that.footer.find(">.k-grid-footer-wrap>table")) || $();
@@ -1199,9 +1199,13 @@ var __meta__ = {
                             var contentTable = isLocked ? that.lockedTable : that.table;
                             var constrain = false;
                             var totalWidth = that.wrapper.width() - scrollbar;
+                            var width = currentWidth;
 
                             if (isLocked && gridWidth - columnWidth + width > totalWidth) {
                                 width = columnWidth + (totalWidth - gridWidth - scrollbar * 2);
+                                if (width < 0) {
+                                    width = currentWidth;
+                                }
                                 constrain = true;
                             }
 
@@ -1225,8 +1229,8 @@ var __meta__ = {
                                     }
                                 }
                             }
-                        } else if (width > 10) {
-                            col.css('width', width);
+                        } else if (currentWidth > 10) {
+                            col.css('width', currentWidth);
                         }
                     },
                     resizeend: function() {
@@ -3052,7 +3056,7 @@ var __meta__ = {
                     footerWrap;
 
                 if (width >= contentWidth) {
-                    width = contentWidth - scrollbar;
+                    width = contentWidth - 3 * scrollbar;
                 }
 
                 this.lockedHeader
