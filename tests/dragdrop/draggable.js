@@ -107,6 +107,22 @@
         ok(dragstartWasCalled);
     });
 
+    test("ignore skips elements matching the selector", 1, function() {
+        var notIgnored = true,
+            draggable = new Draggable(span.append("<span>foo<input /></span>"), {
+                dragstart: function() {
+                    notIgnored = false;
+                },
+                ignore: "input"
+            });
+
+
+        trigger("mousedown", { pageX: 0, pageY: 0 }, span.find("input"));
+        trigger("mousemove", { pageX: 10, pageY: 10 });
+
+        ok(notIgnored);
+    });
+
     test("with filter - the dragged element is currentTarget during the dragstart event", function() {
         var e, draggable = new Draggable(span.append("<span>foo</span>"), {
                 dragstart: function() {
