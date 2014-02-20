@@ -31425,13 +31425,13 @@ Refer to the jQuery.ajax documentation for further info.</description>
         </attribute>
 
     </tag>
-	
-	<tag>
-		<description>Marker tooltip content</description>
-		<name>map-marker-tooltip-content</name>
-		<tag-class>com.kendoui.taglib.map.MarkerTooltipContentTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
+
+    <tag>
+        <description>Marker tooltip content</description>
+        <name>map-marker-tooltip-content</name>
+        <tag-class>com.kendoui.taglib.map.MarkerTooltipContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
@@ -31449,9 +31449,9 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
-	</tag>
+    </tag>
 
-	<tag>
+    <tag>
         <description>Specifies a URL or request options that the tooltip should load its content from.</description>
         <name>map-marker-tooltip-content-url</name>
         <tag-class>com.kendoui.taglib.map.MarkerTooltipContentAjaxOptionsTag</tag-class>
@@ -31499,13 +31499,13 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>String</type>
         </attribute>
     </tag>
-	
-	<tag>
-		<description>Default marker tooltip content</description>
-		<name>map-markerDefaults-tooltip-content</name>
-		<tag-class>com.kendoui.taglib.map.MarkerDefaultsTooltipContentTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
+
+    <tag>
+        <description>Default marker tooltip content</description>
+        <name>map-markerDefaults-tooltip-content</name>
+        <tag-class>com.kendoui.taglib.map.MarkerDefaultsTooltipContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
@@ -31523,9 +31523,9 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
-	</tag>
+    </tag>
 
-	<tag>
+    <tag>
         <description>Specifies a URL or request options that the tooltip should load its content from.</description>
         <name>map-markerDefaults-tooltip-content-url</name>
         <tag-class>com.kendoui.taglib.map.MarkerDefaultsTooltipContentAjaxOptionsTag</tag-class>
@@ -31573,14 +31573,14 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>String</type>
         </attribute>
     </tag>
-	
 
-	<tag>
-		<description>Default tooltip content for all data-bound markers</description>
-		<name>map-layerDefaults-marker-tooltip-content</name>
-		<tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipContentTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
+
+    <tag>
+        <description>Default tooltip content for all data-bound markers</description>
+        <name>map-layerDefaults-marker-tooltip-content</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
@@ -31598,12 +31598,86 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>String</type>
         </attribute>
-	</tag>
+    </tag>
 
-	<tag>
+    <tag>
         <description>Specifies a URL or request options that the tooltip should load its content from.</description>
         <name>map-layerDefaults-marker-tooltip-content-url</name>
         <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipContentAjaxOptionsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tooltip content for data-bound markers</description>
+        <name>map-layer-tooltip-content</name>
+        <tag-class>com.kendoui.taglib.map.LayerTooltipContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description></description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Specifies a URL or request options that the tooltip should load its content from.</description>
+        <name>map-layer-tooltip-content-url</name>
+        <tag-class>com.kendoui.taglib.map.LayerTooltipContentAjaxOptionsTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
