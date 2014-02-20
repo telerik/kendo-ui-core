@@ -39,6 +39,7 @@
             $("#tabstrip ul.k-tabstrip-items").kendoSortable({
                 filter: "li.k-item",
                 container: "ul.k-tabstrip-items",
+                axis: "x",
                 hint: function(element) {
                     return $("<div id='hint' class='k-widget k-header k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-state-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
                 },
