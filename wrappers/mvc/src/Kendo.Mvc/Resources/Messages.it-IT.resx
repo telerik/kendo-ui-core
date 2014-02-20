@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Filter_And" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="Filter_DateIsEqualTo" xml:space="preserve">
+    <value>È uguale a</value>
+  </data>
+  <data name="Filter_DateIsGreaterThan" xml:space="preserve">
+    <value>È dopo</value>
+  </data>
+  <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>È dopo o uguale a</value>
+  </data>
+  <data name="Filter_DateIsLessThan" xml:space="preserve">
+    <value>È prima</value>
+  </data>
+  <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
+    <value>È prima o uguale a</value>
+  </data>
+  <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
+    <value>Non è uguale a</value>
+  </data>
+  <data name="Filter_Filter" xml:space="preserve">
+    <value>Filtro</value>
+  </data>
+  <data name="Filter_Info" xml:space="preserve">
+    <value>Mostra elementi il cui valore:</value>
+  </data>
+  <data name="Filter_IsFalse" xml:space="preserve">
+    <value>è falso</value>
+  </data>
+  <data name="Filter_IsTrue" xml:space="preserve">
+    <value>è vero</value>
+  </data>
+  <data name="Filter_NumberIsEqualTo" xml:space="preserve">
+    <value>È uguale a</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
+    <value>È più grande di</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>È più grande o uguale a</value>
+  </data>
+  <data name="Filter_NumberIsLessThan" xml:space="preserve">
+    <value>È più piccolo di</value>
+  </data>
+  <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
+    <value>È più piccolo o uguale a</value>
+  </data>
+  <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
+    <value>Non è uguale a</value>
+  </data>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="Filter_StringContains" xml:space="preserve">
+    <value>Contiene</value>
+  </data>
+  <data name="Filter_StringDoesNotContain" xml:space="preserve">
+    <value>Non contiene</value>
+  </data>
+  <data name="Filter_StringEndsWith" xml:space="preserve">
+    <value>Finisce con</value>
+  </data>
+  <data name="Filter_StringIsEqualTo" xml:space="preserve">
+    <value>È uguale a</value>
+  </data>
+  <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
+    <value>Non è uguale a</value>
+  </data>
+  <data name="Filter_StringStartsWith" xml:space="preserve">
+    <value>Inizia con</value>
+  </data>
+  <data name="Grid_Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Grid_CancelChanges" xml:space="preserve">
+    <value>Annulla modifiche</value>
+  </data>
+  <data name="Grid_Confirmation" xml:space="preserve">
+    <value>Sicuro di voler rimuovere questo elemento?</value>
+  </data>
+  <data name="Grid_Create" xml:space="preserve">
+    <value>Aggiungi nuovo elemento</value>
+  </data>
+  <data name="Grid_Destroy" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="Grid_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Grid_SaveChanges" xml:space="preserve">
+    <value>Salva le modifiche</value>
+  </data>
+  <data name="Grid_Select" xml:space="preserve">
+    <value>Seleziona</value>
+  </data>
+  <data name="Grid_Update" xml:space="preserve">
+    <value>Aggiorna</value>
+  </data>
+  <data name="Group_Empty" xml:space="preserve">
+    <value>Trascina l'header di una colonna e rilascialo qui per raggruppare secondo tale colonna</value>
+    <comment>--</comment>
+  </data>
+  <data name="Pager_Display" xml:space="preserve">
+    <value>{0} - {1} di {2} elementi</value>
+  </data>
+  <data name="Pager_Empty" xml:space="preserve">
+    <value>Nessun elemento da visualizzare</value>
+  </data>
+  <data name="Pager_First" xml:space="preserve">
+    <value>Vai alla prima pagina</value>
+  </data>
+  <data name="Pager_ItemsPerPage" xml:space="preserve">
+    <value>elementi per pagina</value>
+  </data>
+  <data name="Pager_Last" xml:space="preserve">
+    <value>Vai all'ultima pagina</value>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Vai alla prossima pagina</value>
+  </data>
+  <data name="Pager_Of" xml:space="preserve">
+    <value>di {0}</value>
+  </data>
+  <data name="Pager_Page" xml:space="preserve">
+    <value>Pagina</value>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Vai alla pagina precedente</value>
+  </data>
+  <data name="Pager_Refresh" xml:space="preserve">
+    <value>Aggiorna</value>
+  </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>Riprova</value>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>Seleziona...</value>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>Upload dei file selezionati</value>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>rilascia qui i file per l'upload</value>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>fallito</value>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>upload effettuato</value>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>upload in corso</value>
+  </data>
+  <data name="Editor_Bold" xml:space="preserve">
+    <value>Grassetto</value>
+  </data>
+  <data name="Editor_CreateLink" xml:space="preserve">
+    <value>Inserisci hyperlink</value>
+  </data>
+  <data name="Editor_FontName" xml:space="preserve">
+    <value>Seleziona una famiglia di font</value>
+  </data>
+  <data name="Editor_FontNameInherit" xml:space="preserve">
+    <value>(font ereditato)</value>
+    <comment>-</comment>
+  </data>
+  <data name="Editor_FontSize" xml:space="preserve">
+    <value>Seleziona la dimensione del font</value>
+  </data>
+  <data name="Editor_FontSizeInherit" xml:space="preserve">
+    <value>(dimensione ereditata)</value>
+    <comment>-</comment>
+  </data>
+  <data name="Editor_FormatBlock" xml:space="preserve">
+    <value>Formatta blocco</value>
+  </data>
+  <data name="Editor_Indent" xml:space="preserve">
+    <value>Aumenta rientro</value>
+  </data>
+  <data name="Editor_InsertHtml" xml:space="preserve">
+    <value>Inserisci HTML</value>
+  </data>
+  <data name="Editor_InsertImage" xml:space="preserve">
+    <value>Inserisci immagine</value>
+  </data>
+  <data name="Editor_InsertOrderedList" xml:space="preserve">
+    <value>Inserisci lista ordinata</value>
+  </data>
+  <data name="Editor_InsertUnorderedList" xml:space="preserve">
+    <value>Inserisci lista non ordinata</value>
+  </data>
+  <data name="Editor_Italic" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="Editor_JustifyCenter" xml:space="preserve">
+    <value>Centra testo</value>
+  </data>
+  <data name="Editor_JustifyFull" xml:space="preserve">
+    <value>Giustifica testo</value>
+  </data>
+  <data name="Editor_JustifyLeft" xml:space="preserve">
+    <value>Allinea il testo a sinistra</value>
+  </data>
+  <data name="Editor_JustifyRight" xml:space="preserve">
+    <value>Allinea il testo a destra</value>
+  </data>
+  <data name="Editor_Outdent" xml:space="preserve">
+    <value>Riduci rientro</value>
+  </data>
+  <data name="Editor_Strikethrough" xml:space="preserve">
+    <value>Barrato</value>
+  </data>
+  <data name="Editor_Styles" xml:space="preserve">
+    <value>Stili</value>
+  </data>
+  <data name="Editor_Subscript" xml:space="preserve">
+    <value>A pedice</value>
+  </data>
+  <data name="Editor_Superscript" xml:space="preserve">
+    <value>In apice</value>
+  </data>
+  <data name="Editor_Underline" xml:space="preserve">
+    <value>Sottolineato</value>
+  </data>
+  <data name="Editor_Unlink" xml:space="preserve">
+    <value>Rimuovi hyperlink</value>
+  </data>
+  <data name="Filter_EnumIsEqualTo" xml:space="preserve">
+    <value>È uguale a</value>
+  </data>
+  <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
+    <value>Non è uguale a</value>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>-Seleziona valore-</value>
+  </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Colonne</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>In ordine crescente</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>In ordine decrescente</value>
+  </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Sicuro di voler rimuovere "{0}"?</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>Non è stata trovata alcuna directory con questo nome.</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Cartella vuota</value>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>Il file selezionato "{0}" non è valido. I tipi di file supportati sono {1}.</value>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Ordina per:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Dimensione</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>'Un file con nome "{0}" esiste già nella directory corrente. Vuoi sovrascriverlo?</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Colore sfondo</value>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Colore</value>
+  </data>
+  <data name="Editor_DropFilesHere" xml:space="preserve">
+    <value>rilascia qui i files per l'upload</value>
+  </data>
+  <data name="Editor_ImageWebAddress" xml:space="preserve">
+    <value>Indirizzo Web</value>
+  </data>
+  <data name="Editor_DialogButtonSeparator" xml:space="preserve">
+    <value>o</value>
+  </data>
+  <data name="Editor_DialogCancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Editor_DialogInsert" xml:space="preserve">
+    <value>Inserisci</value>
+  </data>
+  <data name="Editor_ImageAltText" xml:space="preserve">
+    <value>Testo alternativo</value>
+  </data>
+  <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
+    <value>Apri link in una nuova finestra</value>
+  </data>
+  <data name="Editor_LinkText" xml:space="preserve">
+    <value>Testo</value>
+  </data>
+  <data name="Editor_LinkToolTip" xml:space="preserve">
+    <value>ToolTip</value>
+  </data>
+  <data name="Editor_LinkWebAddress" xml:space="preserve">
+    <value>Indirizzo Web</value>
+  </data>
+  <data name="Editor_Search" xml:space="preserve">
+    <value>Cerca</value>
+  </data>
+  <data name="Scheduler_AllDay" xml:space="preserve">
+    <value>tutto il giorno</value>
+  </data>
+  <data name="Scheduler_Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Scheduler_Confirmation" xml:space="preserve">
+    <value>Sicuro di voler rimuovere questo evento?</value>
+  </data>
+  <data name="Scheduler_Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Scheduler_Destroy" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="Scheduler_Editor_AllDayEvent" xml:space="preserve">
+    <value>Giornata intera</value>
+  </data>
+  <data name="Scheduler_Editor_Description" xml:space="preserve">
+    <value>Descrizione</value>
+  </data>
+  <data name="Scheduler_Editor_EditorTitle" xml:space="preserve">
+    <value>Evento</value>
+  </data>
+  <data name="Scheduler_Editor_End" xml:space="preserve">
+    <value>Fine</value>
+  </data>
+  <data name="Scheduler_Editor_EndTimezone" xml:space="preserve">
+    <value>Fuso orario finale</value>
+  </data>
+  <data name="Scheduler_Editor_Repeat" xml:space="preserve">
+    <value>Ripeti</value>
+  </data>
+  <data name="Scheduler_Editor_SeparateTimezones" xml:space="preserve">
+    <value>Usa differenti fusi orari per l'inizio e la fine</value>
+  </data>
+  <data name="Scheduler_Editor_Start" xml:space="preserve">
+    <value>Inizio</value>
+  </data>
+  <data name="Scheduler_Editor_StartTimezone" xml:space="preserve">
+    <value>Fuso orario iniziale</value>
+  </data>
+  <data name="Scheduler_Editor_Timezone" xml:space="preserve">
+    <value>Modifica fuso orario</value>
+  </data>
+  <data name="Scheduler_Editor_TimezoneEditorButton" xml:space="preserve">
+    <value>Fuso orario</value>
+  </data>
+  <data name="Scheduler_Editor_TimezoneEditorTitle" xml:space="preserve">
+    <value>Fusi orari</value>
+  </data>
+  <data name="Scheduler_Editor_Title" xml:space="preserve">
+    <value>Titolo</value>
+  </data>
+  <data name="Scheduler_Event" xml:space="preserve">
+    <value>Evento</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowOccurrence" xml:space="preserve">
+    <value>Rimuovi questa accorrenza</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowSeries" xml:space="preserve">
+    <value>Rimuovi la serie</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowTitle" xml:space="preserve">
+    <value>Rimuovi elemento ricorrente</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Daily_Interval" xml:space="preserve">
+    <value>giorno(i)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Daily_RepeatEvery" xml:space="preserve">
+    <value>Ripeti ogni: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_After" xml:space="preserve">
+    <value>Dopo</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_Occurrence" xml:space="preserve">
+    <value>Occorrenza(e)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_Label" xml:space="preserve">
+    <value>Fine:</value>
+    <comment>--</comment>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_Never" xml:space="preserve">
+    <value>Mai</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_On" xml:space="preserve">
+    <value>Il</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Daily" xml:space="preserve">
+    <value>Ogni giorno</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Monthly" xml:space="preserve">
+    <value>Ogni mese</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Never" xml:space="preserve">
+    <value>Mai</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Weekly" xml:space="preserve">
+    <value>Ogni settimana</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Yearly" xml:space="preserve">
+    <value>Ogni anno</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_Day" xml:space="preserve">
+    <value>Giorno</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_Interval" xml:space="preserve">
+    <value>mese(i)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_RepeatEvery" xml:space="preserve">
+    <value>Ripeti ogni: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_RepeatOn" xml:space="preserve">
+    <value>Repeti quando:: </value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_First" xml:space="preserve">
+    <value>primo</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Fourth" xml:space="preserve">
+    <value>quarto</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Last" xml:space="preserve">
+    <value>ultimo</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Second" xml:space="preserve">
+    <value>secondo</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Third" xml:space="preserve">
+    <value>terzo</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_RepeatEvery" xml:space="preserve">
+    <value>Ripeti ogni:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_RepeatOn" xml:space="preserve">
+    <value>Ripeti quando:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_Interval" xml:space="preserve">
+    <value>settimana(e)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_Of" xml:space="preserve">
+    <value>di</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_RepeatEvery" xml:space="preserve">
+    <value>Ripeti ogni:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_RepeatOn" xml:space="preserve">
+    <value>Ripeti quando:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_Interval" xml:space="preserve">
+    <value>anno(i)</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowOccurrence" xml:space="preserve">
+    <value>Modifica l'evento corrente</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowSeries" xml:space="preserve">
+    <value>Modifica la serie</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowTitle" xml:space="preserve">
+    <value>Modifica elemento ricorrente</value>
+  </data>
+  <data name="Scheduler_Save" xml:space="preserve">
+    <value>Salva</value>
+  </data>
+  <data name="Scheduler_Time" xml:space="preserve">
+    <value>Tempo</value>
+  </data>
+  <data name="Scheduler_Today" xml:space="preserve">
+    <value>Oggi</value>
+  </data>
+  <data name="Scheduler_View_Agenda" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+  <data name="Scheduler_View_Day" xml:space="preserve">
+    <value>Giorno</value>
+  </data>
+  <data name="Scheduler_View_Month" xml:space="preserve">
+    <value>Mese</value>
+  </data>
+  <data name="Scheduler_View_Week" xml:space="preserve">
+    <value>Settimana</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteRecurring" xml:space="preserve">
+    <value>Vuoi rimuovere solo questo evento o la serie completa?</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditRecurring" xml:space="preserve">
+    <value>Vuoi modifcare solo questo evento o la serie completa?</value>
+  </data>
+  <data name="Editor_CreateTable" xml:space="preserve">
+    <value>Crea tabella</value>
+  </data>
+  <data name="Editor_AddColumnLeft" xml:space="preserve">
+    <value>Aggiungi colonna a sinistra</value>
+  </data>
+  <data name="Editor_AddColumnRight" xml:space="preserve">
+    <value>Aggiungi colonna a destra</value>
+  </data>
+  <data name="Editor_AddRowAbove" xml:space="preserve">
+    <value>Aggiungi riga sopra</value>
+  </data>
+  <data name="Editor_AddRowBelow" xml:space="preserve">
+    <value>Aggiungi riga sotto</value>
+  </data>
+  <data name="Editor_DeleteColumn" xml:space="preserve">
+    <value>Rimuovi colonna</value>
+  </data>
+  <data name="Editor_DeleteRow" xml:space="preserve">
+    <value>Rimuovi riga</value>
+  </data>
+  <data name="Scheduler_DeleteWindowTitle" xml:space="preserve">
+    <value>Rimuovi evento</value>
+  </data>
+  <data name="Scheduler_ShowFullDay" xml:space="preserve">
+    <value>Mostra il giorno completo</value>
+  </data>
+  <data name="Scheduler_ShowWorkDay" xml:space="preserve">
+    <value>Mostra solo le ore lavorative</value>
+  </data>
+  <data name="Upload_HeaderStatusUploaded" xml:space="preserve">
+    <value>Fatto</value>
+  </data>
+  <data name="Upload_HeaderStatusUploading" xml:space="preserve">
+    <value>Upload in corso...</value>
+  </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>Operatore</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>Valore</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Annulla</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>Impostazioni colonna</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Rimuovi</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>Fatto</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Day" xml:space="preserve">
+    <value>giorno</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Weekday" xml:space="preserve">
+    <value>giorno della settimana</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
+    <value>giorno finesettimana</value>
+  </data>
+</root>
