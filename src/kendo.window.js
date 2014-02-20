@@ -1297,7 +1297,10 @@ kendo_module({
             return false;
         },
         destroy: function() {
-            this._draggable.destroy();
+            if (this._draggable) {
+                this._draggable.destroy();
+            }
+
             this._draggable = this.owner = null;
         }
     };
@@ -1387,7 +1390,10 @@ kendo_module({
             return false;
         },
         destroy: function() {
-            this._draggable.destroy();
+            if (this._draggable) {
+                this._draggable.destroy();
+            }
+
             this._draggable = this.owner = null;
         }
     };
