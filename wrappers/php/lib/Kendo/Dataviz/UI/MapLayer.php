@@ -64,16 +64,6 @@ The field should be an array with two numbers - latitude and longitude.Requires 
     }
 
     /**
-    * The default marker shape for data-bound markers. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-For example "pinTarget" is rendered as "k-marker-pin-target".
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\MapLayer
-    */
-    public function shape($value) {
-        return $this->setProperty('shape', $value);
-    }
-
-    /**
     * The data item field which contains the marker title.
 Requires the dataSource option to be set.
     * @param string $value
@@ -149,6 +139,15 @@ Alternating between different subdomains allows more requests to be executed in 
     */
     public function type($value) {
         return $this->setProperty('type', $value);
+    }
+
+    /**
+    * The marker shape. Supported shapes are "pin" and "pinTarget".
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function shape($value) {
+        return $this->setProperty('shape', $value);
     }
 
 //<< Properties

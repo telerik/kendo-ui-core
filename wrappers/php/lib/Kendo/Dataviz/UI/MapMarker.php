@@ -33,7 +33,7 @@ class MapMarker extends \Kendo\SerializableObject {
     }
 
     /**
-    * The marker shape. Supported shapes are "pin" and "circle".
+    * The marker shape. Supported shapes are "pin" and "pinTarget".
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapMarker
     */
