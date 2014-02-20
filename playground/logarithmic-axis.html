@@ -20,7 +20,7 @@
     </head>
     <body>
        <div id="reverse"></div>
-      <--   <div id="polar"></div>
+      <!--   <div id="polar"></div>
         <div id="radar"></div> 
       
         <div id="negativeValues"></div>
@@ -29,7 +29,7 @@
         <div id="log" style="height: 500px;"></div>
         
     <div id="chart" style="height: 500px;"></div>-->
-     <--    
+     <!--    
     <div id="scatterDrag"></div>
      <div id="panes"></div> 
      <div id="bubble"></div>
@@ -40,18 +40,18 @@
        $("#reverse").kendoChart({   
           seriesDefaults: {
                 stack:true,
-                 type: "area"
+                 type: "column"
           },
            series: [{
                
-                data: [1, -1, 100]
+                data: [-1, -1, 100]
 
            },{
-                data: [1, -1, 100]
+                data: [2, -1, 100]
            },{
-                data: [1, -1, 100]
+                data: [2, -1, -1]
            },{
-                data: [1, -1, 100]
+                data: [2, -1, 100]
            }],
             valueAxis: {
             type: "log",
@@ -648,7 +648,7 @@ $("#bubble").kendoChart({
             
             $("#stock-chart").kendoStockChart({
                 dataSource: {
-                    data: [{Date: new Date(2009, 2, 6), Open: 120, Close: 140, High: 60,  Low: -10},
+                    data: [{Date: new Date(2009, 2, 6), Open: 120, Close: 140, High: 60,  Low: 40},
                     {Date: new Date(2010, 2, 6), Open: 50, Close: 70, High: 60, Low: 40},
                     {Date: new Date(2011, 2, 6), Open: 50, Close: 100, High: 60, Low: 40}]
                 },
@@ -689,7 +689,7 @@ $("#bubble").kendoChart({
                 series: [{
                     type: "boxPlot",
                     data: [
-                        [-1,38.3,51,61.45,68.9,49.0,[18.3, 20, 70, 72,5]],
+                        [25,38.3,51,61.45,68.9,49.0,[18.3, 20, 70, 72,5]],
                         [26.4,38.125,46.8,60.425,66.8,47.3,[18, 69, 71.3, 71.5]],
                         [31.6,41.725,52.35,62.175,70.8,52.3,[14, 16.4, 74]],
                         [34.4,39.375,49.9,61.425,69.2,50.3,[16, 18, 72, 72.5]],

@@ -3246,6 +3246,7 @@ var __meta__ = {
                 var plotValue = this.plotValue(point);
                 var positive = plotValue > 0;
                 var prevValue = startValue;
+                var isStackedBar = false;
 
                 for (var i = 0; i < categoryPts.length; i++) {
                     var other = categoryPts[i];
@@ -3271,10 +3272,11 @@ var __meta__ = {
                         (otherValue < 0 && !positive)) {
                         prevValue += otherValue;
                         plotValue += otherValue;
+                        isStackedBar = true;
                     }
                 }
 
-                if (i > 0 || !positive) {
+                if (isStackedBar) {
                     prevValue -= startValue;
                 }
 
