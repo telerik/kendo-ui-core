@@ -13,10 +13,10 @@ MIN_CSS = FileList['styles/**/kendo*.less']
 MIN_CSS_RESOURCES = FileList[MIN_CSS + FileList['styles/*/*/*'].sub('styles/', DIST_STYLES_ROOT)].exclude('**/*.less').exclude('**/*.winjs.*')
 
 WEB_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/web\// }
-WEB_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/web\// }
+WEB_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/(web|common)\// }
 
 MOBILE_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/mobile\// }
-MOBILE_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/mobile\// }
+MOBILE_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/(mobile|common)\// }
 
 DATAVIZ_MIN_CSS = FileList[MIN_CSS_RESOURCES].keep_if { |f| f =~ /styles\/dataviz\// }
 DATAVIZ_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/dataviz\// }
