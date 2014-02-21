@@ -1413,34 +1413,6 @@
 
                 return json;
             },
-            load: function (json, options) { // options = {loadShape/loadConnection - process the options, so that you can set function for complex visual templates}
-                var i, itemOptions, item, from, to;
-                if (json.options) {
-                    this.options = deepExtend(this.options, json.options);
-                }
-                this.clear();
-                this._fetchFreshData();
-                for (i = 0; i < json.shapes.length; i++) {
-                    itemOptions = json.shapes[i].options;
-                    if (options && isFunction(options.loadShape)) {
-                        options.loadShape(itemOptions);
-                    }
-                    itemOptions.diagram = this; // complex shapes need access to the external shape libraries
-                    this.addShape(new Shape(itemOptions), { undoable: false });
-                }
-
-                for (i = 0; i < json.connections.length; i++) {
-                    item = json.connections[i];
-                    itemOptions = item.options;
-                    itemOptions.undoable = false;
-                    if (options && isFunction(options.loadConnection)) {
-                        options.loadConnection(itemOptions);
-                    }
-                    from = deserializeConnector(this, item.from);
-                    to = deserializeConnector(this, item.to);
-                    this.connect(from, to, itemOptions);
-                }
-            },
             focus: function () {
                 var x = window.scrollX, y = window.scrollY;
                 this.canvas.focus();
