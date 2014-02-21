@@ -228,7 +228,7 @@
                     };
                 }
 
-                if (options.content || options.contentUrl) {
+                if (options.title || options.content || options.contentUrl) {
                     this.tooltip = new Tooltip(this.element, options);
                     this.tooltip.marker = this;
                 }

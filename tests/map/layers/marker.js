@@ -191,6 +191,12 @@
             ok(marker.tooltip);
         });
 
+        test("creates tooltip if title is set", function() {
+            marker = new Marker({ tooltip: { title: "foo" } });
+            marker.addTo(layer);
+            ok(marker.tooltip);
+        });
+
         test("tooltip is not created by default", function() {
             marker = new Marker({ tooltip: {} });
             marker.addTo(layer);
