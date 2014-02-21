@@ -1,4 +1,4 @@
-namespace Kendo.Mvc.UI.Tests.Map
+namespace Kendo.Mvc.UI.Tests.Map.Fluent
 {
     using System.Collections.Generic;
     using Xunit;
