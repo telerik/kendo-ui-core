@@ -215,7 +215,8 @@
 
         renderTooltip: function() {
             var marker = this;
-            var options = marker.options.tooltip;
+            var title = marker.options.title;
+            var options = marker.options.tooltip || {};
 
             if (options && Tooltip) {
                 var template = options.template;
@@ -228,7 +229,7 @@
                     };
                 }
 
-                if (options.title || options.content || options.contentUrl) {
+                if (title || options.content || options.contentUrl) {
                     this.tooltip = new Tooltip(this.element, options);
                     this.tooltip.marker = this;
                 }

@@ -192,7 +192,7 @@
         });
 
         test("creates tooltip if title is set", function() {
-            marker = new Marker({ tooltip: { title: "foo" } });
+            marker = new Marker({ title: "foo" });
             marker.addTo(layer);
             ok(marker.tooltip);
         });
