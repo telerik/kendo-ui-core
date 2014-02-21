@@ -222,11 +222,11 @@
 @button-hover-background-color: @hover-background-color;
 @button-hover-border-color: @hover-border-color;
 
-@button-active-background: @selected-background-color;
+@button-active-background: #ebebeb;
 @button-active-border-color: @selected-border-color;
-@button-focused-border-color: @button-border-color;
-@button-focused-shadow: @focused-item-shadow;
-@button-focused-active-shadow: @focused-active-item-shadow;
+@button-focused-border-color: #67afe9;
+@button-focused-shadow: 0 0 7px 0 #67afe9;
+@button-focused-active-shadow: inset 0 0 5px 3px #d4d4d4;
 
 @import "theme-template.less";
 
@@ -320,10 +320,7 @@
    border-color: @hover-background-color;
 }
 
-.k-secondary .k-picker-wrap,
-.k-secondary .k-dropdown-wrap,
-.k-secondary .k-numeric-wrap,
-.k-secondary.k-scheduler-toolbar > ul > li
+.k-scheduler-toolbar > ul > li
 {
     background-color: @drop-down-background;
     border-color: @secondary-border-color;
@@ -344,97 +341,6 @@
 {
     background-color: @selected-background-color;
     color: @selected-text-color;
-}
-
-.k-secondary
-{
-    .k-button-group .k-tool-icon
-    {
-        border-color: @secondary-border-color;
-    }
-
-    &.k-splitbar
-    {
-        border-color: transparent;
-    }
-
-    .k-tool,
-	.k-button,
-	&.k-button
-    {
-        color: @secondary-text-color;
-        background-color: @button-background-color;
-        border-color: @secondary-border-color;
-    }
-
-    .k-tool.k-state-hover,
-	.k-button:hover,
-	&.k-button:hover
-    {
-        color: @hover-text-color;
-        border-color: @hover-border-color;
-        background-color: @hover-background-color;
-    }
-
-    .k-button:active
-    {
-        color: @selected-text-color;
-        background-color: @selected-background-color;
-        border-color: @selected-border-color;
-    }
-	
-    .k-editor-toolbar .k-state-selected
-    {
-        .box-shadow(@concave-shadow);
-        background-color: @select-background-color;
-		border-color: @hover-border-color;
-    }
-	
-	.k-picker-wrap.k-state-focused,
-	.k-numeric-wrap.k-state-focused,	
-	.k-dropdown-wrap.k-state-focused,
-	.k-button-group .k-tool:focus
-	{
-		background-color: @widget-background-color;
-		.composite-background(@hover-gradient);
-		background-position: 50% 50%;
-		border-color: @drop-down-focused-border-color;
-		.box-shadow(@focused-shadow);
-	}	
-		
-	.k-textbox:focus
-	{
-		border-color: @drop-down-focused-border-color;
-		.box-shadow(@focused-shadow);
-	}
-	
-	.k-textbox:hover
-	{
-		border-color: @drop-down-hover-border-color;
-	}
-
-	.k-picker-wrap.k-state-hover,
-	.k-numeric-wrap.k-state-hover,
-	.k-dropdown-wrap.k-state-hover
-	{
-		background-color: @select-hover-background-color;
-		.composite-background(@hover-gradient);
-		background-position: 50% 50%;
-		border-color: @drop-down-hover-border-color;
-	}
-	
-	.k-picker-wrap.k-state-active,
-	.k-numeric-wrap.k-state-active,
-	.k-dropdown-wrap.k-state-active
-	{
-		border-color: @form-widgets-border-color;
-		background-color: @select-background-color;
-	}
-
-	.k-picker-wrap.k-state-active.k-state-border-down
-	{
-		.box-shadow(@concave-shadow);
-	}	
 }
 
 /* Slider */
@@ -710,14 +616,6 @@ td.k-state-focused.k-state-selected,
     .box-shadow(none);
 }
 
-.k-button:active
-{
-    color: @widget-text-color;
-    background-color: @select-background-color;
-    border-color: @focused-border-color;
-    .box-shadow(@selected-shadow);
-}
-
 .k-popup
 {
     .box-shadow(0 5px 10px @group-border-color);
@@ -781,4 +679,43 @@ td.k-state-focused.k-state-selected,
     .composite-background(@primary-active-gradient);
     background-color: @primary-active-background-color;
     .box-shadow(@primary-active-shadow);
+}
+
+.k-editor-toolbar .k-tool
+{
+    color: @secondary-text-color;
+    background-color: @button-background-color;
+    border-color: @secondary-border-color;
+}
+
+.k-editor-toolbar .k-tool.k-state-hover
+{
+    color: @hover-text-color;
+    border-color: @hover-border-color;
+    background-color: @hover-background-color;
+}
+
+.k-editor-toolbar .k-state-selected
+{
+    .box-shadow(@concave-shadow);
+    background-color: @select-background-color;
+    border-color: @hover-border-color;
+}
+
+.k-editor-toolbar .k-button-group .k-tool-icon
+{
+    border-color: @secondary-border-color;
+}
+
+.k-splitbar,
+.k-splitbar:hover
+{
+    border-color: transparent;
+}
+
+.k-button:active
+{
+    color: @button-text-color;
+    background-color:@button-active-background;
+    border-color: @hover-border-color;
 }
