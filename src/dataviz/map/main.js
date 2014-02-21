@@ -93,9 +93,7 @@
                 marker: {
                     shape: "pinTarget",
                     tooltip: {
-                        autoHide: false,
-                        position: "top",
-                        showOn: "click"
+                        position: "top"
                     }
                 }
             },
@@ -108,9 +106,7 @@
             markerDefaults: {
                 shape: "pinTarget",
                 tooltip: {
-                    autoHide: false,
-                    position: "top",
-                    showOn: "click"
+                    position: "top"
                 }
             },
             wraparound: true
