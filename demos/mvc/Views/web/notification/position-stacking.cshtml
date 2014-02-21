@@ -3,31 +3,38 @@
 
             <span id="centeredNotification" style="display:none;"></span>
             <span id="configurableNotification" style="display:none;"></span>
+            
+            <div class="demo-section">
+                <h3>Centered notification:</h3>
+                <p>
+                    <button id="showNotification" class="k-button">Show centered notification</button>
+                </p>
+                    <h3>Custom positioning:</h3>
+                <p>
+                    <label for="left">Left position:</label> <input type="number" id="left" class="num" />
+                    <label for="left">Top position:</label> <input type="number" id="top" class="num" />
+                    <br />
+                    <label for="left">Right position:</label> <input type="number" id="right" class="num" value="20" />
+                    <label for="left">Bottom position:</label> <input type="number" id="bottom" class="num" value="20" />
+                    <br />
+                    <label for="stacking">Notification stacking:</label>
+                    <select id="stacking" style="width:6em"><option selected="selected">up</option><option>right</option><option>down</option><option>left</option></select>
+                    <br />
+                    Top / Left position settings take precedence over Bottom / Right, if both pairs are set.
+                </p>
+                <p>
+                    <button id="showConfigurable" class="k-button">Show notification</button>
+                </p>
+                <h3>Hide notification:</h3>
+                <p>
+                    <button id="hideAllNotifications" class="k-button">Hide all notifications</button>
+                </p>
+            </div>
+            
 
-            <p>
-                <button id="showNotification" class="k-button">Show centered notification</button>
-                <button id="showConfigurable" class="k-button">Show notifications with below settings</button>
-                <button id="hideAllNotifications" class="k-button">Hide all</button>
-            </p>
+            
 
-            <p>
-                <label for="left">Left position:</label> <input type="number" id="left" class="num" />
-                <label for="left">Top position:</label> <input type="number" id="top" class="num" />
-            </p>
 
-            <p>
-                <label for="left">Right position:</label> <input type="number" id="right" class="num" value="20" />
-                <label for="left">Bottom position:</label> <input type="number" id="bottom" class="num" value="20" />
-            </p>
-
-            <p>
-                <label for="stacking">Notification stacking:</label>
-                <select id="stacking" style="width:6em"><option selected="selected">up</option><option>right</option><option>down</option><option>left</option></select>
-            </p>
-
-            <p>
-                Top / Left position settings take precedence over Bottom / Right, if both pairs are set.
-            </p>
 
             <script>
                 $(document).ready(function() {
@@ -101,21 +108,23 @@
 
             <style scoped>
         
-            #example p
-            {
-                margin: 1em 0;
+            .demo-section {
+                width: 600px;
+                padding: 20px 30px;
+            }
+            .demo-section p {
+                margin: 3px 0 15px;
+                line-height: 36px;
             }
         
-            #example label
-            {
+            .demo-section label {
                 display: inline-block;
                 width: 12em;
                 padding-right: .8em;
                 text-align: right;
             }
         
-            .num
-            {
+            .num {
                 width: 6em;
             }
         
