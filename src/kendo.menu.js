@@ -543,7 +543,13 @@ var __meta__ = {
                     if (ul[0] && that.trigger(OPEN, { item: li[0] }) === false) {
 
                         if (!ul.find(".k-group")[0] && ul.children(".k-item").length > 1) {
-                            setTimeout(function(){ul.css({maxHeight: $(window).height(), overflow: "auto"});}); // timeout required by IE7
+                            var setScrolling = function(){ul.css({maxHeight: $(window).height(), overflow: "auto"});};
+
+                            if (kendo.support.browser.msie && kendo.support.browser.version <= 7) {
+                                setTimeout(setScrolling, 0); // timeout required by IE7
+                            } else {
+                                setScrolling();
+                            }
                         } else {
                             ul.css({maxHeight: "", overflow: ""});
                         }
