@@ -89,6 +89,14 @@
                             width: 0.5
                         }
                     }
+                },
+                marker: {
+                    shape: "pinTarget",
+                    tooltip: {
+                        autoHide: false,
+                        position: "top",
+                        showOn: "click"
+                    }
                 }
             },
             center: [0, 0],
