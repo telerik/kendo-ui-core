@@ -757,8 +757,7 @@ namespace :build do
         end
 
         desc 'Package and publish bundles to the Stable directory'
-        task :bundles => [#:get_binaries, 'bundles:all', 'demos:production',
-                          'download_builder:bundle', zip_targets("Stable")].flatten
+        task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
     end
 
 end
