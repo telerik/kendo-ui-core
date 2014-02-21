@@ -201,7 +201,7 @@ var __meta__ = {
             var unmasked;
             var start;
 
-            if (value !== that._old) {
+            if (value !== that._old && !that._pasting) {
                 start = caret(element)[0];
                 unmasked = that._unmask(value.substring(start), start);
 
@@ -224,6 +224,8 @@ var __meta__ = {
                 start = caret(element)[0];
             }
 
+            that._pasting = true;
+
             setTimeout(function() {
                 var value = element.value;
                 var end = caret(element)[0];
@@ -233,6 +235,7 @@ var __meta__ = {
                 caret(element, start);
 
                 that._mask(start, start, pasted);
+                that._pasting = false;
             });
         },
 

@@ -1,5 +1,6 @@
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
+        caret = kendo.caret,
         input;
 
     module("kendo.ui.MaskedTextBox navigation", {
@@ -27,49 +28,6 @@
             kendo.destroy(QUnit.fixture);
         }
     });
-
-    function caret(element, start, end) {
-        var rangeElement;
-        var isPosition = start !== undefined;
-
-        if (end === undefined) {
-            end = start;
-        }
-
-        if (element.selectionStart !== undefined) {
-            if (isPosition) {
-                element.focus();
-                element.setSelectionRange(start, end);
-            } else {
-                start = [element.selectionStart, element.selectionEnd];
-            }
-        } else if (document.selection) {
-            if ($(element).is(":visible")) {
-                element.focus();
-            }
-
-            rangeElement = element.createTextRange();
-
-            if (isPosition) {
-                rangeElement.collapse(true);
-                rangeElement.moveStart("character", start);
-                rangeElement.moveEnd("character", end - start);
-                rangeElement.select();
-            } else {
-                var rangeDuplicated = rangeElement.duplicate(),
-                    selectionStart, selectionEnd;
-
-                    rangeElement.moveToBookmark(document.selection.createRange().getBookmark());
-                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
-                    selectionStart = rangeDuplicated.text.length;
-                    selectionEnd = selectionStart + rangeElement.text.length;
-
-                start = [selectionStart, selectionEnd];
-            }
-        }
-
-        return start;
-    }
 
     test("MaskedTextBox replace empty symbol if valid", function() {
         var maskedtextbox = new MaskedTextBox(input, {
@@ -428,6 +386,27 @@
             start();
             equal(input.val(), "(123) 775");
             equal(caret(input[0])[0], 8);
+        });
+    });
+
+    asyncTest("MaskedTextBox prevents input event if paste is not finished", 2, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(000) 000"
+        });
+
+        input.val("").focus();
+        caret(input[0], 1);
+
+        input.trigger("paste");
+        input.val("(1234___) ___");
+        caret(input[0], 5);
+
+        input.trigger("input");
+
+        setTimeout(function() {
+            start();
+            equal(input.val(), "(123) 4__");
+            equal(caret(input[0])[0], 7);
         });
     });
 
