@@ -2042,10 +2042,14 @@
     height: auto !important;
 }
 
+
 .km-native-scrolling .km-drawer
 {
     position: fixed;
     top: 0;
+    height: 100% !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 .km-native-scrolling > .km-pane > .km-loader
