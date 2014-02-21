@@ -491,6 +491,15 @@ test("template binding without source", function() {
     equal($.trim(dom.text()), "Hello, foofoo");
 });
 
+test("template binding without source does not break observable hierarchy", 1, function() {
+    dom = $('<div data-template="div-template" data-bind="source:this"/>');
+
+    var model = kendo.observable({ foo: "foo" });
+    kendo.bind(dom, model);
+
+    equal(model.parent(), null);
+});
+
 test("binding to nested field", function() {
     dom = $('<div data-bind="text:foo.bar"/>');
 
