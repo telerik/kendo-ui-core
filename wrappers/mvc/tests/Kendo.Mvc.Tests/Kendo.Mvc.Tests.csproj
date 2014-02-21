@@ -166,6 +166,10 @@
     <Compile Include="UI\Map\MapMarkerBuilderTests.cs" />
     <Compile Include="UI\Map\MapMarkerTests.cs" />
     <Compile Include="UI\Map\Serialization\AttributionSettingsTests.cs" />
+    <Compile Include="UI\Map\Serialization\MapLayerTests.cs" />
+    <Compile Include="UI\Map\Serialization\MapLayerDefaultsMarkerSettings.cs" />
+    <Compile Include="UI\Map\Serialization\MapMarkerDefaultSettingsTests.cs" />
+    <Compile Include="UI\Map\Serialization\MapMarkerTests.cs" />
     <Compile Include="UI\Map\Serialization\ZoomSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\NavigatorSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\MapControlsSettingsTests.cs" />

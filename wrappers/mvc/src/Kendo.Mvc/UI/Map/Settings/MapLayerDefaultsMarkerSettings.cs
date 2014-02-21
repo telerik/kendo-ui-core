@@ -45,6 +45,12 @@ namespace Kendo.Mvc.UI
                 
         //<< Serialization
 
+            var tooltip = Tooltip.ToJson();
+            if (tooltip.Any())
+            {
+                json["tooltip"] = tooltip;
+            }
+
             if (ShapeName.HasValue())
             {
                 json["shape"] = ShapeName;
