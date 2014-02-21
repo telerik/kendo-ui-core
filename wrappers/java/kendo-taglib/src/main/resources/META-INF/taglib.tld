@@ -14619,8 +14619,7 @@ Cancelling the event will prevent the user action.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The default marker shape for all marker layers. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-For example "pinTarget" is rendered as "k-marker-pin-target".</description>
+            <description>The marker shape. Supported shapes are "pin" and "pinTarget".</description>
             <name>shape</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -14940,8 +14939,7 @@ The field should be an array with two numbers - latitude and longitude.Requires 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The default marker shape for data-bound markers. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-For example "pinTarget" is rendered as "k-marker-pin-target".</description>
+            <description>The marker shape. Supported shapes are "pin" and "pinTarget".</description>
             <name>shape</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15173,8 +15171,7 @@ will disable all animations in the widget.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The default marker shape. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-For example "pinTarget" is rendered as "k-marker-pin-target".</description>
+            <description>The default marker shape. Supported shapes are "pin" and "pinTarget".</description>
             <name>shape</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15323,7 +15320,7 @@ will disable all animations in the widget.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The marker shape. Supported shapes are "pin" and "circle".</description>
+            <description>The marker shape. Supported shapes are "pin" and "pinTarget".</description>
             <name>shape</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
