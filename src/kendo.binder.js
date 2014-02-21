@@ -167,7 +167,11 @@ var __meta__ = {
                 // Invoke the function
                 that.start(source);
 
-                result = result.call(source, that.source);
+                if (source !== that.source) {
+                    result = result.call(source, that.source);
+                } else {
+                    result = result.call(source);
+                }
 
                 that.stop(source);
             }
@@ -188,10 +192,19 @@ var __meta__ = {
         },
 
         set: function(value) {
-            var that = this,
-                source = that.currentSource || that.source;
+            var source = this.currentSource || this.source;
 
-            source.set(that.path, value);
+            var field = kendo.getter(this.path)(source);
+
+            if (typeof field === "function") {
+                if (source !== this.source) {
+                    field.call(source, this.source, value);
+                } else {
+                    field.call(source, value);
+                }
+            } else {
+                source.set(this.path, value);
+            }
         },
 
         destroy: function() {

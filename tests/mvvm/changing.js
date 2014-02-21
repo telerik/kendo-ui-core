@@ -429,6 +429,52 @@ test("changing the value updates the view model", function() {
     equal(viewModel.foo, "bar");
 });
 
+test("changing the input value updates dependent observable", 1, function() {
+    var dom = $('<input data-bind="value:foo" />');
+
+    var viewModel = kendo.observable({
+        bar: "bar",
+        foo: function(value) {
+            if (value !== undefined) {
+               this.set("bar", value);
+            } else {
+                return this.get("bar");
+            }
+        }
+    });
+
+    kendo.bind(dom, viewModel);
+
+    dom.val("foo");
+    dom.trigger("change");
+
+    equal(viewModel.bar, "foo");
+});
+
+test("changing the input value updates dependent observable from the parent object", 1, function() {
+    var dom = $('<ul data-bind="source: items" data-template="ul-input-template">');
+
+    var viewModel = kendo.observable({
+        items: [
+            { bar: "bar" }
+        ],
+        root: function(item, value) {
+            if (value !== undefined) {
+               item.set("bar", value);
+            } else {
+                return item.get("bar");
+            }
+        }
+    });
+
+    kendo.bind(dom, viewModel);
+
+    dom.find("input").val("foo").trigger("change");
+
+    equal(viewModel.items[0].bar, "foo");
+});
+
+
 test("changing the value of pre populated select updates the view model", function() {
     var dom = $('<select data-bind="value:foo"><option value="foo">foo</option><option value="bar">bar</option>');
 
