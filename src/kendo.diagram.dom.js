@@ -126,6 +126,10 @@
             }
         });
 
+        function isAutoConnector(connector) {
+            return connector.options.name.toLowerCase() === AUTO.toLowerCase();
+        }
+
         function resolveConnectors(connection) {
             var minDist = MAXINT,
                 sourcePoint, targetPoint,
@@ -140,7 +144,7 @@
                 sourcePoint = source;
             }
             else if (source instanceof Connector) {
-                if (source.options.name === AUTO) {
+                if (isAutoConnector(source)) {
                     autoSourceShape = source.shape;
                 }
                 else {
@@ -153,7 +157,7 @@
                 targetPoint = target;
             }
             else if (target instanceof Connector) {
-                if (target.options.name === AUTO) {
+                if (isAutoConnector(target)) {
                     autoTargetShape = target.shape;
                 }
                 else {
@@ -181,7 +185,7 @@
                             k = i;
                         }
                         sourceConnector = autoSourceShape.connectors[k];
-                        if (sourceConnector.options.name !== AUTO) {
+                        if (!isAutoConnector(sourceConnector)) {
                             var currentSourcePoint = sourceConnector.position(),
                                 currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
                             var dist = Math.round(currentTargetConnector.position().distanceTo(currentSourcePoint)); // rounding prevents some not needed connectors switching.
@@ -200,7 +204,7 @@
             var minimumDistance = MAXINT, resCtr, ctrs = shape.connectors;
             for (var i = 0; i < ctrs.length; i++) {
                 var ctr = ctrs[i];
-                if (ctr.options.name !== AUTO) {
+                if (!isAutoConnector(ctr)) {
                     var dist = point.distanceTo(ctr.position());
                     if (dist < minimumDistance) {
                         minimumDistance = dist;
