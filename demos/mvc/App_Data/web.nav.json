@@ -1065,6 +1065,7 @@
             ]
         },
         {
+            "packages": ["!mvc", "!jsp", "!php"],
             "text": "Mobile",
             "name": "mobile",
             "new": "true",
