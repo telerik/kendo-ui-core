@@ -498,6 +498,14 @@ namespace <%= csharp_namespace %>
             class ArrayOption < CompositeOption
                 include Options, CodeGen::Array
 
+                def add_option(settings)
+                    if settings[:name] == "#{name}.#{@item.name}"
+                        @item.type = settings[:type]
+                    else
+                        @item.add_option(settings) unless @item.name == settings[:name]
+                    end
+                end
+
                 def item_class
                     ArrayItem
                 end
@@ -521,6 +529,8 @@ namespace <%= csharp_namespace %>
             end
 
             class ArrayItem < CompositeOption
+
+                attr_accessor :type
 
                 def csharp_class
                     "#{owner.owner.name.pascalize.sub('Collection', '')}#{name.pascalize}"
@@ -747,11 +757,11 @@ namespace <%= csharp_namespace %>
 
                     create_file(file_name, item.to_class)
 
-                    content = write_options(item.options[0].options)
+                    content = write_options(item.options)
 
                     write_file(file_name, content, '#region [ Properties ]')
 
-                    write_composite_option_converter_file(item.options[0])
+                    write_composite_option_converter_file(item)
                 end
 
                 def write_file(file_path, content, marker)
