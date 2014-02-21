@@ -68,7 +68,7 @@ extend(ViewHtmlCommand, {
                 "<textarea class='k-editor-textarea k-input'></textarea>" +
                 "<div class='k-edit-buttons k-state-default'>" +
                     "<button class='k-dialog-update k-button'>#: dialogUpdate #</button>" +
-                    "<button class='k-dialog-close k-button k-secondary'>#: dialogCancel #</button>" +
+                    "<button class='k-dialog-close k-button'>#: dialogCancel #</button>" +
                 "</div>" +
             "</div>",
     indent: function(content) {

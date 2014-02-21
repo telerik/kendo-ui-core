@@ -32,7 +32,7 @@
     var EditorUtils = {
         editorWrapperTemplate:
             '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header" role="presentation"><tbody>' +
-                '<tr role="presentation"><td class="k-editor-toolbar-wrap k-secondary" role="presentation"><ul class="k-editor-toolbar" role="toolbar" /></td></tr>' +
+                '<tr role="presentation"><td class="k-editor-toolbar-wrap" role="presentation"><ul class="k-editor-toolbar" role="toolbar" /></td></tr>' +
                 '<tr><td class="k-editable-area" /></tr>' +
             '</tbody></table>',
 
@@ -193,7 +193,7 @@
 
                 toolbarOptions.popup = true;
 
-                toolbarContainer = $('<ul class="k-editor-toolbar k-secondary" role="toolbar" />').insertBefore(element);
+                toolbarContainer = $('<ul class="k-editor-toolbar" role="toolbar" />').insertBefore(element);
             }
 
             that.toolbar = new editorNS.Toolbar(toolbarContainer[0], toolbarOptions);

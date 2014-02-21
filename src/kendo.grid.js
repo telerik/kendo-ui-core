@@ -2866,7 +2866,7 @@ var __meta__ = {
                wrapper = wrapper.wrap("<div/>").parent();
             }
 
-            that.wrapper = wrapper.addClass("k-grid k-widget k-secondary");
+            that.wrapper = wrapper.addClass("k-grid k-widget");
 
             if (height) {
                 that.wrapper.css(HEIGHT, height);
