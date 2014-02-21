@@ -52,7 +52,7 @@ class SchedulerEditable extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the SchedulerEditable.
-    * The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+    * The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the Scheduler will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\SchedulerEditable
@@ -65,7 +65,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
     /**
     * Sets the template option of the SchedulerEditable.
-    * The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+    * The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the Scheduler will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.
     * @param string $value The template content.
     * @return \Kendo\UI\SchedulerEditable

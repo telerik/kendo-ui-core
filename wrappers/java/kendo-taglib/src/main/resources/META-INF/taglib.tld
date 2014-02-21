@@ -111,7 +111,7 @@ all data items which begin with the current widget value are displayed in the su
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.</description>
+            <description>Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.</description>
             <name>valuePrimitive</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -418,25 +418,28 @@ If it is not supported by the browser, the Barcode will switch to the first avai
         </attribute>
 
     </tag>
-    
+
+
+
+
     <tag>
         <description>Button</description>
         <name>button</name>
         <tag-class>com.kendoui.taglib.ButtonTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
-            <description>The tag which the Button will render</description>
-            <name>tag</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
             <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
             <name>name</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>       
+        </attribute>
+        <attribute>
+            <description>The content of the Button</description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
         <attribute>
             <description>Indicates whether the Button should be enabled or disabled. By default, it is enabled, unless a disabled="disabled" attribute is detected.</description>
             <name>enable</name>
@@ -471,6 +474,7 @@ In case you want to use an icon from the Kendo UI theme sprite background image,
         </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
+
 
     <tag>
         <description>Fires when the Button is clicked with the mouse, touched on a touch device, or ENTER (or SPACE) is pressed while the Button is focused.</description>
@@ -10449,7 +10453,7 @@ The following settings are available for the start value:</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template to be used for rendering the cells in the "month" view, which are not in the min/max range.</description>
+            <description>The template used for rendering cells in the "month" view, which are outside the min/max range.</description>
             <name>empty</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10655,8 +10659,7 @@ settings are available for the depth value:</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template used for rendering the cells in the calendar "month" view, which are not in the range between
-the minimum and maximum values.</description>
+            <description>The template used for rendering cells in the calendar "month" view, which are outside the min/max range.</description>
             <name>empty</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -13911,7 +13914,7 @@ Cancelling the event will prevent the user action.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The position of the attribution control. Possible values include:</description>
+            <description>The position of the attribution control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -13927,7 +13930,7 @@ Cancelling the event will prevent the user action.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The position of the navigator control. Possible values include:</description>
+            <description>The position of the navigator control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -13943,7 +13946,7 @@ Cancelling the event will prevent the user action.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The position of the zoom control. Possible values include:</description>
+            <description>The position of the zoom control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -14458,7 +14461,7 @@ will disable all animations in the widget.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".</description>
+            <description>The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15140,12 +15143,6 @@ The "default" setting takes into consideration the applied position settings and
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Describes the HTML markup of the different notification types as Kendo UI template strings. The built-in types are "info", "success", "warning" and "error".This documentation section assumes that you are familiar with Kendo UI templates.</description>
-            <name>templates</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
             <description>Defines the notifications' width. Numbers are treated as pixels.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15203,6 +15200,42 @@ top takes precedence over bottom and left takes precedence over right.</descript
             <type>java.lang.Object</type>
         </attribute>
 
+    </tag>
+
+
+
+    <tag>
+        <description>Describes the HTML markup of the different notification types as Kendo UI template strings. The built-in types are "info", "success", "warning" and "error".This documentation section assumes that you are familiar with Kendo UI templates.</description>
+        <name>notification-templates</name>
+        <tag-class>com.kendoui.taglib.notification.TemplatesTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Describes the HTML markup of the different notification types as Kendo UI template strings. The built-in types are "info", "success", "warning" and "error".This documentation section assumes that you are familiar with Kendo UI templates.</description>
+        <name>notification-template</name>
+        <tag-class>com.kendoui.taglib.notification.TemplateTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>Defines a Kendo UI template to be used with the corresponding notification type. Either templates.template or templates.templateId must be set.See the example above.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines a client ID of an external Kendo UI template to be used with the corresponding notification type. Do not include the # sign with the ID.
+Either templates.template or templates.templateId must be set.See the example above.</description>
+            <name>templateId</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Required. Specified a unique identifier, which is used to retrieve the correct template when a notification of this type is shown.See the example above.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
 
@@ -16764,7 +16797,7 @@ That way all users would see the same dates and times no matter their configured
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+            <description>The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the Scheduler will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
@@ -16781,7 +16814,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
-        <description>The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the grid will know
+        <description>The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the Scheduler will know
 which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
         <name>scheduler-editable-template</name>
         <tag-class>com.kendoui.taglib.scheduler.EditableTemplateFunctionTag</tag-class>
@@ -17934,11 +17967,16 @@ tick labels.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>If set, specifies the offset of the hint relative to the mouse cursor/finger.
-By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: top and left.</description>
-            <name>cursorOffset</name>
+            <description>Selector which determines if items from the current Sortable widget can be accepted from another Sortable container(s). The connectWith option describes one way relationship, if the developer wants a two way connection then the connectWith option should be set on both widgets.</description>
+            <name>connectWith</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Selector that determines the container to which boundaries the hint movement will be constrained.</description>
+            <name>container</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Selector that determines which items are disabled. Disabled items cannot be dragged but are valid sort targets.</description>
@@ -18006,6 +18044,29 @@ If placeholder function is not provided the widget will clone dragged item, remo
         </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
+
+    <tag>
+        <description>If set, specifies the offset of the hint relative to the mouse cursor/finger.
+By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: top and left.</description>
+        <name>sortable-cursorOffset</name>
+        <tag-class>com.kendoui.taglib.sortable.CursorOffsetTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The left offset of the hint element relative to the mouse cursor/finger.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top offset of the hint element relative to the mouse cursor/finger.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>

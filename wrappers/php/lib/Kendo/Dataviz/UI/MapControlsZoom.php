@@ -6,7 +6,7 @@ class MapControlsZoom extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The position of the zoom control. Possible values include:
+    * The position of the zoom control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapControlsZoom
     */

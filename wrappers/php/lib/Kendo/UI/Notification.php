@@ -93,12 +93,12 @@ The "default" setting takes into consideration the applied position settings and
     }
 
     /**
-    * Describes the HTML markup of the different notification types as Kendo UI template strings. The built-in types are "info", "success", "warning" and "error".This documentation section assumes that you are familiar with Kendo UI templates.
-    * @param  $value
+    * Adds NotificationTemplate to the Notification.
+    * @param \Kendo\UI\NotificationTemplate|array,... $value one or more NotificationTemplate to add.
     * @return \Kendo\UI\Notification
     */
-    public function templates($value) {
-        return $this->setProperty('templates', $value);
+    public function addTemplate($value) {
+        return $this->add('templates', func_get_args());
     }
 
     /**

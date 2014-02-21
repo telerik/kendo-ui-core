@@ -93,15 +93,6 @@ By default the tooltip will display the target element title attribute content.
     }
 
     /**
-    * The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\MapMarkerTooltip
-    */
-    public function position($value) {
-        return $this->setProperty('position', $value);
-    }
-
-    /**
     * Specify the delay in milliseconds before the tooltip is shown. This option is ignored if showOn is set to "click" or "focus".
     * @param float $value
     * @return \Kendo\Dataviz\UI\MapMarkerTooltip
@@ -117,6 +108,15 @@ By default the tooltip will display the target element title attribute content.
     */
     public function showOn($value) {
         return $this->setProperty('showOn', $value);
+    }
+
+    /**
+    * The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapMarkerTooltip
+    */
+    public function position($value) {
+        return $this->setProperty('position', $value);
     }
 
 //<< Properties

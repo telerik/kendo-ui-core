@@ -51,6 +51,12 @@ public class NotificationTag extends WidgetTag /* interfaces *//* interfaces */ 
         setProperty("position", value);
     }
 
+    public void setTemplates(TemplatesTag value) {
+
+        setProperty("templates", value.templates());
+
+    }
+
     public void setHide(HideFunctionTag value) {
         setEvent("hide", value.getBody());
     }
@@ -121,14 +127,6 @@ public class NotificationTag extends WidgetTag /* interfaces *//* interfaces */ 
 
     public void setStacking(java.lang.String value) {
         setProperty("stacking", value);
-    }
-
-    public java.lang.Object getTemplates() {
-        return (java.lang.Object)getProperty("templates");
-    }
-
-    public void setTemplates(java.lang.Object value) {
-        setProperty("templates", value);
     }
 
     public java.lang.Object getWidth() {

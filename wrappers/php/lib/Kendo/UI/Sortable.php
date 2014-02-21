@@ -18,9 +18,27 @@ class Sortable extends \Kendo\UI\Widget {
     }
 
     /**
+    * Selector that determines the container to which boundaries the hint movement will be constrained.
+    * @param string $value
+    * @return \Kendo\UI\Sortable
+    */
+    public function container($value) {
+        return $this->setProperty('container', $value);
+    }
+
+    /**
+    * Selector which determines if items from the current Sortable widget can be accepted from another Sortable container(s). The connectWith option describes one way relationship, if the developer wants a two way connection then the connectWith option should be set on both widgets.
+    * @param string $value
+    * @return \Kendo\UI\Sortable
+    */
+    public function connectWith($value) {
+        return $this->setProperty('connectWith', $value);
+    }
+
+    /**
     * If set, specifies the offset of the hint relative to the mouse cursor/finger.
 By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: top and left.
-    * @param  $value
+    * @param \Kendo\UI\SortableCursorOffset|array $value
     * @return \Kendo\UI\Sortable
     */
     public function cursorOffset($value) {
@@ -55,17 +73,12 @@ By default, the hint is initially positioned on top of the draggable source offs
     }
 
     /**
-    * Sets the hint option of the Sortable.
     * Provides a way for customization of the sortable item hint. If a function is supplied, it receives one argument - the draggable element's jQuery object.
 If hint function is not provided the widget will clone dragged item and use it as a hint.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param \Kendo\JavaScriptFunction|string $value
     * @return \Kendo\UI\Sortable
     */
     public function hint($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('hint', $value);
     }
 
@@ -80,17 +93,12 @@ The item will also be activated by pressing, holding and lifting the finger with
     }
 
     /**
-    * Sets the placeholder option of the Sortable.
     * Provides a way for customization of the sortable item placeholder. If a function is supplied, it receives one argument - the draggable element's jQuery object.
 If placeholder function is not provided the widget will clone dragged item, remove its ID attribute, set its visibility to hidden and use it as a placeholder.
-    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @param \Kendo\JavaScriptFunction|string $value
     * @return \Kendo\UI\Sortable
     */
     public function placeholder($value) {
-        if (is_string($value)) {
-            $value = new \Kendo\JavaScriptFunction($value);
-        }
-
         return $this->setProperty('placeholder', $value);
     }
 

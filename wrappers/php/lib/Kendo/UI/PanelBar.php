@@ -57,8 +57,9 @@ user interactions. Setting this option to false will disable all animations.
     }
 
     /**
-    * Sets the data source of the PanelBar.
-    * @param array|\Kendo\Data\DataSource $value
+    * The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+Refer to the example below for a list of the supported properties.
+    * @param |array $value
     * @return \Kendo\UI\PanelBar
     */
     public function dataSource($value) {
