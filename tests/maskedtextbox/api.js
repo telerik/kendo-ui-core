@@ -201,4 +201,19 @@
 
         equal(maskedtextbox.value(), "(12-  )");
     });
+
+    test("setOptions extends built-in rules", function() {
+        var rule = /[+-]/;
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0-0"
+        });
+
+        maskedtextbox.setOptions({
+            rules: {
+                "~": rule
+            }
+        });
+
+        equal(maskedtextbox.rules["~"], rule);
+    });
 })();

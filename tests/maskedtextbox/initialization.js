@@ -29,6 +29,18 @@
         ok(input.attr("autocomplete"), "off");
     });
 
+    test("MaskedTextBox extends built-in rules", function() {
+        var rule = /[+-]/;
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0-0",
+            rules: {
+                "~": rule
+            }
+        });
+
+        equal(maskedtextbox.rules["~"], rule);
+    });
+
     test("MaskedTextBox tokenize specified mask", function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
