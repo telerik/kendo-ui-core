@@ -110,6 +110,11 @@ namespace Kendo.Mvc.UI
                     column.Commands.Add(command);
                 }
 
+                if (settings.HeaderTemplate.HasValue())
+                {
+                    column.HeaderTemplate.Html = settings.HeaderTemplate;
+                }
+
                 return column;
 
             }
@@ -134,10 +139,17 @@ namespace Kendo.Mvc.UI
             }
 
             column.Settings = settings;
+
             if (settings is GridColumnSettings<T>)
             {
                 column.Template = ((GridColumnSettings<T>)settings).Template;
             }
+
+            if (settings.HeaderTemplate.HasValue())
+            {
+                column.HeaderTemplate.Html = settings.HeaderTemplate;
+            }
+
             return column;
         }
     }
