@@ -540,23 +540,14 @@ kendo_module({
                 idx,
                 length,
                 element = this.container(),
-                template = this.template(),
-                parent;
+                template = this.template();
 
             if (source instanceof kendo.data.DataSource) {
                 source = source.view();
             }
 
             if (!(source instanceof ObservableArray) && toString.call(source) !== "[object Array]") {
-                if (source.parent) {
-                    parent = source.parent;
-                }
-
-                source = new ObservableArray([source]);
-
-                if (source.parent) {
-                    source.parent = parent;
-                }
+                source = [source];
             }
 
             if (this.bindings.template) {
