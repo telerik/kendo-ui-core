@@ -274,6 +274,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.fr-FR.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Messages.it-IT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.it-IT.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Messages.nl-NL.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1553,7 +1558,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.fr-FR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Messages.it-IT.resx" />
+    <EmbeddedResource Include="Resources\Messages.it-IT.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.it-IT.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.nl-NL.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.nl-NL.Designer.cs</LastGenOutput>
