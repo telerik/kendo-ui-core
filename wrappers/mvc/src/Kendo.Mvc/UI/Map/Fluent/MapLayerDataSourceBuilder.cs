@@ -14,11 +14,15 @@ namespace Kendo.Mvc.UI.Fluent
             dataSource.Schema.Data = "";
             dataSource.Schema.Total = "";
             dataSource.Schema.Errors = "";
+
+            dataSource.Type = DataSourceType.Ajax;
+            dataSource.Transport.Read.ActionName = "POST";
         }
 
         public GeoJsonDataSourceBuilder GeoJson()
         {
             dataSource.Type = DataSourceType.GeoJson;
+            dataSource.Transport.Read.ActionName = "";
             return new GeoJsonDataSourceBuilder(dataSource, viewContext, urlGenerator);
         }
     }
