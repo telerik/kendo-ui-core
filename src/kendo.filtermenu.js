@@ -93,7 +93,7 @@ var __meta__ = {
                     '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
-                '<form class="k-filter-menu k-mobile-list k-secondary">'+
+                '<form class="k-filter-menu k-mobile-list">'+
                     '<ul class="k-filter-help-text"><li><span class="k-link">#=messages.info#</span>'+
                     '<ul>'+
                         '<li class="k-item"><label class="k-label">#=messages.operator#'+
@@ -159,7 +159,7 @@ var __meta__ = {
                     '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
-                '<form class="k-filter-menu k-mobile-list k-secondary">'+
+                '<form class="k-filter-menu k-mobile-list">'+
                     '<ul class="k-filter-help-text"><li><span class="k-link">#=messages.info#</span>'+
                     '<ul>'+
                         '<li class="k-item"><label class="k-label">'+
@@ -360,7 +360,7 @@ var __meta__ = {
 
             operators = operators[type] || options.operators[type];
 
-            that.form = $('<form class="k-filter-menu k-secondary"/>')
+            that.form = $('<form class="k-filter-menu"/>')
                 .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
                     field: that.field,
                     format: options.format,

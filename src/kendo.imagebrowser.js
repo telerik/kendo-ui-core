@@ -197,7 +197,7 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("k-imagebrowser k-secondary");
+            that.element.addClass("k-imagebrowser");
 
             that.element
                 .on(CLICK + NS, ".k-toolbar button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that))

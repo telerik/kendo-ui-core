@@ -425,11 +425,24 @@ textarea.k-textbox:hover,
     background-color: @button-background-color;
 }
 
+.k-button:focus,
+.k-button.k-state-focused
+{
+    border-color: @button-focused-border-color;
+}
+
 .k-button:hover
 {
-    color: @hover-text-color;
-    border-color: @hover-border-color;
-    background-color: @hover-background-color;
+    color: @button-hover-text-color;
+    border-color: @button-hover-border-color;
+    background-color: @button-hover-background-color;
+}
+
+.k-button:active
+{
+    color: @selected-text-color;
+    background-color:@button-active-background;
+    border-color: @button-active-border-color;
 }
 
 .k-button.k-state-disabled,
@@ -443,6 +456,16 @@ textarea.k-textbox:hover,
     border-color: @disabled-border-color;
     background-color: @disabled-background-color;
 	.composite-background(@disabled-gradient);
+}
+
+.k-button:focus:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@button-focused-shadow);
+}
+
+.k-button:focus:active:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@button-focused-active-shadow);
 }
 
 .k-draghandle
@@ -663,7 +686,6 @@ textarea.k-textbox:hover,
 .k-list>.k-state-selected,
 .k-list>.k-state-highlight,
 .k-panel > .k-state-selected,
-.k-button:active,
 .k-ghost-splitbar-vertical,
 .k-ghost-splitbar-horizontal,
 .k-draghandle.k-state-selected:hover,
@@ -686,7 +708,6 @@ textarea.k-textbox:hover,
 .k-listview>.k-state-focused,
 .k-grid-header th.k-state-focused,
 td.k-state-focused,
-.k-button:focus:not(.k-state-disabled):not([disabled]),
 .k-button.k-state-focused
 {
     .box-shadow(@focused-item-shadow);
@@ -695,8 +716,7 @@ td.k-state-focused,
 .k-state-focused.k-state-selected,
 .k-list>.k-state-focused.k-state-selected,
 .k-listview>.k-state-focused.k-state-selected,
-td.k-state-focused.k-state-selected,
-.k-button:focus:active:not(.k-state-disabled):not([disabled])
+td.k-state-focused.k-state-selected
 {
     .box-shadow(@focused-active-item-shadow);
 }
@@ -1655,132 +1675,6 @@ div.k-imagebrowser-dropzone em
     border-color: @group-border-color;
 }
 
-.k-secondary .k-picker-wrap,
-.k-secondary .k-dropdown-wrap,
-.k-secondary .k-numeric-wrap,
-.k-secondary.k-scheduler-toolbar > ul > li
-{
-    background-color: @header-background-color;
-    border-color: @secondary-border-color;
-}
-
-.k-secondary
-{
-    .k-button-group .k-tool
-    {
-        border-color: @secondary-border-color;
-    }
-
-    &.k-splitbar
-    {
-        border-color: @widget-border-color;
-    }
-
-    .k-state-default > .k-select
-    {
-        border-color: @secondary-border-color;
-    }
-
-    .k-state-hover > .k-select
-    {
-        border-color: @hover-border-color;
-    }
-
-    .k-state-focused > .k-select
-    {
-        border-color: @drop-down-border-color;
-    }
-
-    .k-autocomplete.k-state-hover,
-    .k-picker-wrap.k-state-hover,
-    .k-numeric-wrap.k-state-hover,
-    .k-dropdown-wrap.k-state-hover
-    {
-        background-color: @select-hover-background-color;
-        .composite-background(@hover-gradient);
-        background-position: 50% 50%;
-        border-color: @drop-down-hover-border-color;
-    }
-
-    .k-autocomplete.k-state-focused,
-    .k-picker-wrap.k-state-focused,
-    .k-numeric-wrap.k-state-focused,
-    .k-dropdown-wrap.k-state-focused
-    {
-        background-color: @select-border-color;
-        .composite-background(@hover-gradient);
-        background-position: 50% 50%;
-        border-color: @select-border-color;
-    }
-	
-	.k-button-group .k-tool:focus
-	 {
-        background-color: @select-border-color;
-        .composite-background(@hover-gradient);
-        background-position: 50% 50%;
-    }
-
-    .k-button,
-    &.k-button
-    {
-        color: @secondary-text-color;
-        background-color: @header-background-color;
-        border-color: @secondary-border-color;
-    }
-
-    .k-button:hover,
-    &.k-button:hover
-    {
-        color: @hover-text-color;
-        border-color: @hover-border-color;
-        background-color: @hover-background-color;
-    }
-
-    .k-button:active
-    {
-        color: @selected-text-color;
-        background-color: @selected-background-color;
-        border-color: @selected-border-color;
-    }
-	
-	.k-button.k-state-disabled,
-	.k-state-disabled .k-button,
-	.k-state-disabled .k-button:hover,
-	.k-button.k-state-disabled:hover,
-	.k-state-disabled .k-button:active,
-	.k-button.k-state-disabled:active
-	{
-		color: @disabled-text-color;
-		border-color: @disabled-border-color;
-		background-color: @disabled-background-color;
-		.composite-background(@disabled-gradient);
-	}
-
-    .k-dropdown .k-input,
-    .k-dropdown .k-state-focused .k-input,
-    .k-menu .k-popup
-    {
-        color: @secondary-text-color;
-    }
-
-    .k-toolbar
-    {
-        color: @secondary-text-color;
-        border-color: @secondary-border-color;
-    }
-
-    &.k-popup.k-group
-    {
-        border-color: @group-border-color;
-    }
-
-    &.k-filter-menu
-    {
-        background-color: @filter-menu-content-background;
-        color: @secondary-text-color;
-    }
-}
-
 .k-grid-filter.k-state-active
 {
     background-color: @active-filter-background-color;
@@ -1818,6 +1712,65 @@ div.k-imagebrowser-dropzone em
     border-color: @secondary-border-color;
 }
 
+//Primary buttons
+.k-primary
+{
+    color: @primary-button-text-color;
+    border-color: @primary-button-border-color;
+    .composite-background(@primary-gradient);
+    background-position: 50% 50%;
+    background-color: @primary-button-background-color;
+    .box-shadow(@primary-shadow);
+}
+
+.k-primary:focus,
+.k-primary.k-state-focused
+{
+    color: @primary-focused-color;
+    border-color: @primary-focused-border-color;
+    .composite-background(@primary-focused-gradient);
+    .box-shadow(@primary-focused-active-item-shadow);
+}
+
+.k-primary:hover
+{
+    color: @primary-hover-text-color;
+    border-color: @primary-hover-border-color;
+    .composite-background(@primary-hover-gradient);
+    background-color: @primary-hover-background-color;
+    .box-shadow(@primary-hover-shadow);
+}
+
+.k-primary:focus:active:not(.k-state-disabled):not([disabled]),
+.k-primary:focus:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@primary-focused-active-item-shadow);
+}
+
+.k-primary:active
+{
+    color: @primary-active-text-color;
+    border-color: @primary-active-border-color;
+    .composite-background(@primary-active-gradient);
+    background-color: @primary-active-background-color;
+    .box-shadow(@primary-active-shadow);
+}
+
+.k-primary.k-state-disabled,
+.k-state-disabled .k-primary,
+.k-primary.k-state-disabled:hover,
+.k-state-disabled .k-primary:hover,
+.k-primary.k-state-disabled:hover,
+.k-state-disabled .k-primary:active,
+.k-primary.k-state-disabled:active
+{
+    color: @primary-diabled-text-color;
+    border-color: @primary-disabled-border-color;
+    background-color: @primary-disabled-background-color;
+    .composite-background(@primary-disabled-gradient);
+    .box-shadow(none);
+}
+
 // Fix for responsive design
 .k-pager-numbers .k-link,
 .k-treeview .k-in
@@ -1836,6 +1789,12 @@ div.k-imagebrowser-dropzone em
 .k-scheduler-table .k-state-hover .k-icon
 {
     background-color: transparent;
+}
+
+a:focus,
+button:focus
+{
+    outline:none;
 }
 
 // Retina sprite
@@ -1868,8 +1827,8 @@ div.k-imagebrowser-dropzone em
 
 // High contrast mode
 @media screen and (-ms-high-contrast: active) {
-    .k-secondary .k-dropdown-wrap.k-state-focused,
-    .k-secondary .k-button-group .k-tool:focus {
+    .k-editor-toolbar-wrap .k-dropdown-wrap.k-state-focused,
+    .k-editor-toolbar-wrap .k-button-group .k-tool:focus {
         border-color: #fff;
     }
 }

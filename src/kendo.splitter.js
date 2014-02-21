@@ -326,7 +326,7 @@ var __meta__ = {
                 nextCollapsible = nextPane.collapsible,
                 nextCollapsed = nextPane.collapsed;
 
-            splitbar.addClass("k-splitbar k-state-default k-secondary k-splitbar-" + orientation)
+            splitbar.addClass("k-splitbar k-state-default k-splitbar-" + orientation)
                     .attr("role", "separator")
                     .attr("aria-expanded", !(prevCollapsed || nextCollapsed))
                     .removeClass("k-splitbar-" + orientation + "-hover")

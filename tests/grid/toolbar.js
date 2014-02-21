@@ -76,7 +76,7 @@
     test("toolbar as kendo template grid is passed as parameter", function() {
         setup({ toolbar: "#= this.wrapper[0].className #" });
 
-        equal(toolbar.text(), "k-grid k-widget k-secondary");
+        equal(toolbar.text(), "k-grid k-widget");
     });
 
     test("toolbar template as function", function() {
