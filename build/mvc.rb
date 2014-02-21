@@ -210,13 +210,13 @@ end
 if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
     # copy pre-built binaries
 
-    tree :to => 'wrappers/mvc',
-         :from => 'dist/binaries/**/*.dll',
+    tree :to => 'wrappers/mvc/',
+         :from => FileList[MVC3_DLL + MVC4_DLL + MVC5_DLL].sub('wrappers/mvc', "dist/binaries"),
          :root => 'dist/binaries/'
 
-    tree :to => 'wrappers/mvc',
-         :from => 'dist/binaries/**/Kendo.*.xml',
-         :root => 'dist/binaries/'
+p FileList[MVC3_DLL + MVC4_DLL + MVC5_DLL].sub('wrappers/mvc', "dist/binaries")
+exit
+
 else
     [ "Release", "Release-MVC3", "Release-MVC5" ].each do |configuration|
         options = '/p:Configuration="' + configuration + '"'
