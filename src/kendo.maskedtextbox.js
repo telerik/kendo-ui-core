@@ -31,6 +31,8 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
+            $.extend(that.rules, that.options.rules);
+
             element = that.element;
             DOMElement = element[0];
 
@@ -79,6 +81,7 @@ var __meta__ = {
             name: "MaskedTextBox",
             promptChar: "_",
             culture: "",
+            rules: {},
             value: "",
             mask: ""
         },
@@ -104,9 +107,11 @@ var __meta__ = {
 
             Widget.fn.setOptions.call(that, options);
 
-            this._tokenize();
+            $.extend(that.rules, that.options.rules);
 
-            this.value(this.element.val());
+            that._tokenize();
+
+            that.value(that.element.val());
         },
 
         destroy: function() {
