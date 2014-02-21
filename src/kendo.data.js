@@ -2329,6 +2329,11 @@ var __meta__ = {
                     return true;
                 }
             });
+
+            this._removeModelFromRanges(model);
+
+            this._updateRangesLength();
+
             return model;
         },
 
@@ -3302,9 +3307,9 @@ var __meta__ = {
 
         _rangeExists: function(start, end) {
             var that = this,
-            ranges = that._ranges,
-            idx,
-            length;
+                ranges = that._ranges,
+                idx,
+                length;
 
             for (idx = 0, length = ranges.length; idx < length; idx++) {
                 if (ranges[idx].start <= start && ranges[idx].end >= end) {
@@ -3312,6 +3317,42 @@ var __meta__ = {
                 }
             }
             return false;
+        },
+
+        _removeModelFromRanges: function(model) {
+            var result,
+                found,
+                range;
+
+            for (var idx = 0, length = this._ranges.length; idx < length; idx++) {
+                range = this._ranges[idx];
+
+                this._eachItem(range.data, function(items) {
+                    result = removeModel(items, model);
+                    if (result) {
+                        found = true;
+                    }
+                });
+
+                if (found) {
+                    break;
+                }
+            }
+        },
+
+        _updateRangesLength: function() {
+            var startOffset = 0,
+                range,
+                rangeLength;
+
+            for (var idx = 0, length = this._ranges.length; idx < length; idx++) {
+                range = this._ranges[idx];
+                range.start = range.start - startOffset;
+
+                rangeLength = this._flatData(range.data).length;
+                startOffset = range.end - rangeLength;
+                range.end = range.start + rangeLength;
+            }
         }
     });
 
