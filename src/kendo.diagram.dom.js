@@ -367,7 +367,10 @@
                 }
             },
             toString: function () {
-                return kendo.format("{0}: {1}", this.shape.toString(), this.options.name);
+                return {
+                    shapeId: this.shape.toString(),
+                    connector: this.options.name
+                };
             }
         });
 
