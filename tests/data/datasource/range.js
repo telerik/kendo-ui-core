@@ -1082,4 +1082,187 @@ test("range returns requested size when one group is in multiple ranges", functi
     equal(data[0].items[1].foo, 21);
 });
 
+test("ranges are updated when model is removed", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var take = options.data.take,
+                    skip = options.data.skip;
+
+                    var data = [];
+
+                    for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                    }
+                    options.success({ data: data, total: totalCount });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+    dataSource.read();
+
+    dataSource.remove(dataSource.at(0));
+
+    var range = dataSource._ranges[0];
+
+    equal(range.start, 0);
+    equal(range.end, 19);
+    equal(range.data.length, 19);
+    equal(dataSource.data().length, 19);
+});
+
+test("ranges are updated when model is removed after range is called", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var take = options.data.take,
+                    skip = options.data.skip;
+
+                    var data = [];
+
+                    for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                    }
+                    options.success({ data: data, total: totalCount });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+    dataSource.read();
+    dataSource.range(10, 20);
+
+    dataSource.remove(dataSource.at(0));
+
+    var range = dataSource._ranges[0];
+
+    equal(range.start, 0);
+    equal(range.end, 19);
+    equal(range.data.length, 19);
+    equal(dataSource.data().length, 19);
+});
+
+test("fetched ranges start is updated if item is removed", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var take = options.data.take,
+                    skip = options.data.skip;
+
+                    var data = [];
+
+                    for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                    }
+                    options.success({ data: data, total: totalCount });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+    dataSource.read();
+    dataSource.range(10, 20);
+    dataSource.remove(dataSource.at(0));
+
+    var range = dataSource._ranges[1];
+    equal(range.start, 19);
+    equal(range.end, 39);
+    equal(range.data.length, 20);
+});
+
+test("fetched ranges start is updated if item is removed - with range holes", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var take = options.data.take,
+                    skip = options.data.skip;
+
+                    var data = [];
+
+                    for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                        data.push({ OrderID: i, ContactName: "Contact " + i, ShipAddress: "Ship Address " + i });
+                    }
+                    options.success({ data: data, total: totalCount });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+    dataSource.read();
+
+    dataSource.range(40, 20);
+
+    dataSource.remove(dataSource.at(0));
+
+    var range = dataSource._ranges[1];
+    equal(range.start, 40);
+    equal(range.end, 46);
+    equal(range.data.length, 6);
+});
+
+test("ranges are updated when model is removed after range is called - with local binding", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            data: generator(totalCount)
+       });
+
+    dataSource.read();
+    dataSource.range(10, 20);
+
+    dataSource.remove(dataSource.at(0));
+
+    var range = dataSource._ranges[0];
+
+    equal(range.start, 0);
+    equal(range.end, 46);
+    equal(range.data.length, 46);
+    equal(dataSource.data().length, 46);
+});
+
+/*test("ranges are updated when model is added after range is called - with local binding", function() {
+    var totalCount = 47,
+        dataSource = new DataSource({
+            pageSize: 20,
+            data: generator(totalCount)
+       });
+
+    dataSource.read();
+    dataSource.range(10, 20);
+
+    dataSource.add({});
+
+    var range = dataSource._ranges[0];
+
+    equal(range.start, 0);
+    equal(range.end, 46);
+    equal(range.data.length, 46);
+    equal(dataSource.data().length, 46);
+});*/
+
 }());
