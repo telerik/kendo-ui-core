@@ -6,6 +6,7 @@
           - bing
           - tile
           - shape
+          - marker
     - :name: markers.shape
       :type: String
       :enum_type: MapMarkersShape
