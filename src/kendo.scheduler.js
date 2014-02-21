@@ -3179,6 +3179,7 @@ var __meta__ = {
             return {
                 startDate: slot.startDate(),
                 endDate: slot.endDate(),
+                groupIndex: slot.groupIndex,
                 element: slot.element,
                 isDaySlot: slot.isDaySlot
             };
