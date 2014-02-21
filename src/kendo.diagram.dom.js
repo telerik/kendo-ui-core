@@ -1392,21 +1392,25 @@
             save: function (options) { // options = {saveOptions = true|false}
                 var json = {}, i, shape, con;
                 if (isUndefined(options) || isUndefined(options.saveOptions) || options.saveOptions === true) {
-                    json.options = kendo.deepExtend(options || {}, this.options);
+                    json = kendo.deepExtend(options || {}, this.options);
                 }
+
                 json.shapes = [];
                 json.connections = [];
+
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     if (shape.options.serializable) {
-                        json.shapes.push({options: shape.options});
+                        json.shapes.push(shape.options);
                     }
                 }
 
                 for (i = 0; i < this.connections.length; i++) {
                     con = this.connections[i];
-                    json.connections.push({options: con.options, from: con.from.toString(), to: con.to.toString()});
+                    var conOptions = deepExtend({}, { from: con.from.toString(), to: con.to.toString() }, con.options);
+                    json.connections.push(conOptions);
                 }
+
                 return json;
             },
             load: function (json, options) { // options = {loadShape/loadConnection - process the options, so that you can set function for complex visual templates}
@@ -1529,7 +1533,7 @@
                     this.mainLayer.append(shape.visual);
                 }
 
-                this._raiseItemsAdded([shape]);
+                this._raiseItemsAdded([ shape ]);
                 shape.redraw();
 
                 // for shapes which have their own internal layout mechanism
