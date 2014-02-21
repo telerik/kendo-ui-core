@@ -27,10 +27,12 @@ var __meta__ = {
     var MaskedTextBox = Widget.extend({
         init: function(element, options) {
             var that = this;
+            var DOMElement;
 
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
+            DOMElement = element[0];
 
             that.wrapper = element;
             that._tokenize();
@@ -40,10 +42,10 @@ var __meta__ = {
                 .addClass("k-textbox")
                 .attr("autocomplete", "off")
                 .on("focus" + ns, function() {
-                    that._oldValue = element.val();
+                    that._oldValue = DOMElement.value;
 
                     if (!element.val()) {
-                        element.val(that._emptyMask);
+                        DOMElement.value = that._old = that._emptyMask;
                     } else {
                         that._timeoutId = setTimeout(function() {
                             element.select();
@@ -54,7 +56,7 @@ var __meta__ = {
                     clearTimeout(that._timeoutId);
 
                     if (element.val() === that._emptyMask) {
-                        element.val("");
+                        DOMElement.value = that._old = "";
                     }
 
                     that._change();
