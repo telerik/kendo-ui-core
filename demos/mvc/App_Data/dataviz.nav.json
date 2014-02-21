@@ -315,12 +315,14 @@
                     "text": "Basic usage",
                     "url": "funnel-charts/index.html",
                     "title": "Example of Kendo UI Funnel Charts",
-                    "meta": "This demo shows the core functionality of Kendo UI jQuery Funnel Charts which visualize the breakdown of data into its elements."
+                    "meta": "This demo shows the core functionality of Kendo UI jQuery Funnel Charts which visualize the breakdown of data into its elements.",
+                    "packages": [ "!offline" ]
                 }, {
                     "text": "Funnel labels",
                     "url": "funnel-charts/funnel-labels.html",
                     "title": "Configuration of Funnel labels in Kendo UI funnel charts",
-                    "meta": "This example shows how to configure the values of Kendo UI jQuery Funnel Charts, enable/disable funnel labels and specify how they are aligned to the chart."
+                    "meta": "This example shows how to configure the values of Kendo UI jQuery Funnel Charts, enable/disable funnel labels and specify how they are aligned to the chart.",
+                    "packages": [ "!offline" ]
                 }, {
                     "text": "Binding to remote data",
                     "url": "funnel-charts/remote-data.html",
@@ -734,7 +736,8 @@
                 "text": "API",
                 "url": "barcode/api.html",
                 "title": "Kendo UI Barcode API Demo",
-                "meta": "This sample demonstrates the different symbologies the Barcode support and the different options that could be set"
+                "meta": "This sample demonstrates the different symbologies the Barcode support and the different options that could be set",
+                "packages": [ "!offline" ]
             }, {
                 "text": "MVVM",
                 "url": "barcode/mvvm.html",
@@ -757,7 +760,8 @@
                 "text": "API",
                 "url": "qrcode/api.html",
                 "title": "Kendo UI QRCode API demo",
-                "meta": "This demo shows how Kendo UI QRCode Widget API works and what kind of functions it supports."
+                "meta": "This demo shows how Kendo UI QRCode Widget API works and what kind of functions it supports.",
+                "packages": [ "!offline" ]
             }, {
                 "text": "MVVM",
                 "url": "qrcode/mvvm.html",
