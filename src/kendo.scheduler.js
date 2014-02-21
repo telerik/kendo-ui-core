@@ -3159,6 +3159,7 @@ kendo_module({
             return {
                 startDate: slot.startDate(),
                 endDate: slot.endDate(),
+                groupIndex: slot.groupIndex,
                 element: slot.element,
                 isDaySlot: slot.isDaySlot
             };

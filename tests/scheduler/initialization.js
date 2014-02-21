@@ -637,6 +637,19 @@
         equal(scheduler.slotByPosition(0,0), null);
     });
 
+    test("slotByPosition function returns groupIndex correctly in day view", function() {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
+            views: ["day"],
+            dataSource: []
+        });
+
+        var firstSlotOffset = scheduler.view().content.find("tr:first td:first").offset();
+        var slot = scheduler.slotByPosition(firstSlotOffset.left + 1, firstSlotOffset.top + 1);
+
+        ok(slot !== null && slot.groupIndex == 0);
+    });
+
     test("slotByPosition function returns slot correctly on day view", function() {
         QUnit.fixture.append(container);
         var scheduler = new kendo.ui.Scheduler(container, {
