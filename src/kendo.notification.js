@@ -100,7 +100,7 @@ var __meta__ = {
             that._compiled = {};
 
             $.each(templates, function(key, value) {
-                that._compiled[value.type] = kendoTemplate(value.template || $(value.templateId).html());
+                that._compiled[value.type] = kendoTemplate(value.template || $("#" + value.templateId).html());
             });
 
             that._defaultCompiled = kendoTemplate(TEMPLATE);

@@ -116,11 +116,28 @@
         equal(defaultFunc(params), defaultOutput);
     });
 
-    test("initialization compiles custom template function", 2, function() {
+    test("initialization compiles custom template function when string template is defined", 2, function() {
         createNotification({
             templates: [{
                 type: "foo",
                 template: "bar"
+            }]
+        });
+
+        var fooFunc = notification._getCompiled("foo");
+
+        equal(typeof fooFunc, "function");
+        equal(fooFunc({}), "bar");
+    });
+
+    test("initialization compiles custom template function when template ID is defined", 2, function() {
+
+    $("<script id='tid' type='text/x-kendo-template'>bar</script>").appendTo(QUnit.fixture);
+
+        createNotification({
+            templates: [{
+                type: "foo",
+                templateId: "tid"
             }]
         });
 
