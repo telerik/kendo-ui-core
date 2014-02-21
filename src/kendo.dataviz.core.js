@@ -2435,7 +2435,7 @@ var __meta__ = {
             zIndex: 1
         },
 
-        getSlot: function(a, b) {
+        getSlot: function(a, b, limit) {
             var axis = this,
                 options = axis.options,
                 reverse = options.reverse,
@@ -2452,9 +2452,6 @@ var __meta__ = {
                 p1, p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
-            if(a <= 0 || b <= 0) {
-                return;
-            }
             if (!defined(a)) {
                 a = b || 0;
             }
@@ -2463,11 +2460,17 @@ var __meta__ = {
                 b = a || 0;
             }
 
+            if(a <= 0 || b <= 0) {
+                return;
+            }
+
+            if (limit) {
+                a = math.max(math.min(a, options.max), options.min);
+                b = math.max(math.min(b, options.max), options.min);
+            }
+
             a = log(a, base);
             b = log(b, base);
-
-            a = math.max(math.min(a, logMax), logMin);
-            b = math.max(math.min(b, logMax), logMin);
 
             if (vertical) {
                 p1 = logMax - math.max(a, b);

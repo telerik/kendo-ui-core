@@ -19,31 +19,44 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
     </head>
     <body>
+    <div id="limit"></div>
        <div id="reverse"></div>
-      <!--   <div id="polar"></div>
-        <div id="radar"></div> 
-      
+      <--   <div id="polar"></div>
+        <div id="radar"></div>
+
         <div id="negativeValues"></div>
         <div id="scatter"></div>
-       
+
         <div id="log" style="height: 500px;"></div>
-        
+
     <div id="chart" style="height: 500px;"></div>-->
-     <!--    
+     <--
     <div id="scatterDrag"></div>
-     <div id="panes"></div> 
+     <div id="panes"></div>
      <div id="bubble"></div>
      <div id="stock-chart"></div>
      <div id="boxplot"></div>
      -->
        <script>
-       $("#reverse").kendoChart({   
+       $("#limit").kendoChart({
+            series: [{
+                type: "line",
+                data: [1, 1000, 1]
+            }],
+            valueAxis: {
+                type: "log",
+                min: 10,
+                max: 100
+            }
+       });
+
+       $("#reverse").kendoChart({
           seriesDefaults: {
                 stack:true,
                  type: "column"
           },
            series: [{
-               
+
                 data: [-1, -1, 100]
 
            },{
@@ -66,9 +79,9 @@
            tooltip: {
                visible: true
            }
-           
+
        });
-       
+
         $("#radar").kendoChart({
                 title: {
                     text: "Market Value of Major Banks"
@@ -94,14 +107,14 @@
                         format: "${0}"
                     },
                     plotBands: {
-                        
+
                     }
                 },
                 tooltip: {
                     visible: true,
                     format: "${0} bln"
                 }
-            });       
+            });
           $("#polar").kendoChart({
             title: {
                 text: "Polar plot"
@@ -110,13 +123,13 @@
                 type: "polarLine",
                 style: "smooth"
             },
-            
 
-            
+
+
             yAxis: {
                 type: "log"
             },
-            
+
             series: [{
                 data: [
                     [0,0],[15, 2], [30, 4],
@@ -158,7 +171,7 @@
                 ]
             }]
         });
-       
+
        createChart();
          function createChart() {
             $("#panes").kendoStockChart({
@@ -233,50 +246,50 @@
                     // crosshair: {
                         // visible: true,
                         // tooltip: {visible: true}
-                        
+
                     // }
                 }]
             });
         }
 
-       var data = [1, 1];         
+       var data = [1, 1];
        for (var i = 2; i < 30; i++) {
             data.push(data[i-1] + data[i-2]);
        }
-    
+
         $("#log").kendoChart({
             title: "Fibonacci sequence",
             dataSource: {
                //data: [10, -20, 30, -40, 60, -70,80,200, 1000, 10000]
                 data: data
               // data: [{value: 3}, {value: 4}, {value: 5}, {value: 6}, {value: 7},{value: 8},{value: 9},
-                // {value: 20, note: "min"}, {value: 30}, {value: 40}, {value: 50}, {value: 60},{value: 70}, {value: 80}, {value: 90}, 
+                // {value: 20, note: "min"}, {value: 30}, {value: 40}, {value: 50}, {value: 60},{value: 70}, {value: 80}, {value: 90},
                 // {value: 100, note: "middle"}, {value: 200}, {value: 300} ,{value: 400} ,{value: 500}, {value: 600}, {value: 700}, {value: 800}, {value: 900, note: "top"}, {value: 1001}, {value: 100001}]
             },
             seriesDefaults: {
-                type: "column",    
+                type: "column",
                 labels: {
-                    visible: true                   
+                    visible: true
                 },
                 style: "smooth",
                 markers: {
                     size: 5
                 }
             },
-            series: [{   
+            series: [{
                 field: "value",
                 noteTextField: "note",
                 notes: {
                     position: "right"
                 }
-            } ],           
-            valueAxis: [{  
+            } ],
+            valueAxis: [{
                 crosshair: {
                   visible: true,
                   tooltip: {
                     visible: true
                   }
-                  
+
                 },
                 labels: {
                   background: "green",
@@ -288,23 +301,23 @@
                // majorUnit: 10,
                 //axisCrossingValue: 10,
                 //min: 0.00001,
-                // minorUnit: 3,                 
+                // minorUnit: 3,
                 minorGridLines: {
                     visible: true,
                     //color: "red",
                     // skip: 1,
                     // step: 2
-                },  
+                },
                 majorGridLines: {
                     visible: true,
                     //color: "blue",
                     // skip: 2,
                     // step: 2
-                }, 
+                },
                 plotBands: [
                   { from: 1, to: 10, color: "red", opacity: 0.1 },
                   { from: 100, to: 500, color: "blue", opacity: 0.1 }
-                ],   
+                ],
                  title: {
                     text: "test",
                     visible: true
@@ -339,18 +352,18 @@
                 // narrowRange: false
             // }
             ],
-            
+
             // panes: [{name: "top"}, {name: "bottom"}],
-            
+
             tooltip:{
                 visible: true
             },
-            
+
             plotAreaClick: function(e) {
                 console.log(e.value);
             }
         });
-        
+
             $("#negativeValues").kendoChart({
                 title: {
                     text: "Gross domestic product growth /GDP annual %/"
@@ -380,8 +393,8 @@
                         visible: false
                     }
                 }
-            });        
-        
+            });
+
             $("#scatter").kendoChart({
                 title: {
                     text: "Rainfall - Wind Speed"
@@ -415,7 +428,7 @@
                     axisCrossingValue: -5
                 }
             });
-        
+
         $("#chart").kendoChart({
             title: {
                 text: "Olympic Medals won by USA"
@@ -481,7 +494,7 @@
 
                 var scatterData = [];
                 for (var y = -100, x = 1; x < 30; y += 0.2, x+=0.05) {
-                    
+
                     scatterData.push({ x: Math.pow(10, x), y: Math.sin(y) });
                 }
 
@@ -555,7 +568,7 @@
                         // which also applies the axis limits set above
                         ds.filter(getFilter(xMin, xMax));
                     }
-                } 
+                }
 
 $("#bubble").kendoChart({
                 title: {
@@ -645,7 +658,7 @@ $("#bubble").kendoChart({
                     opacity: 1
                 }
             });
-            
+
             $("#stock-chart").kendoStockChart({
                 dataSource: {
                     data: [{Date: new Date(2009, 2, 6), Open: 120, Close: 140, High: 60,  Low: 40},
@@ -676,8 +689,8 @@ $("#bubble").kendoChart({
                         to: "2011/10/07"
                     }
                 }
-            });            
-            
+            });
+
             //handle negative???
             $("#boxplot").kendoChart({
                 title: {
@@ -712,8 +725,8 @@ $("#bubble").kendoChart({
                 valueAxis: {
                     type: "log"
                 }
-            });            
-        
+            });
+
        </script>
     </body>
 </html>
