@@ -800,7 +800,6 @@
     ],
     "geoviz": [{
             "text": "Map",
-            "beta": "true",
             "name": "map",
             "documentation": "dataviz/map",
             "spriteCssClass": "mapIcon",
