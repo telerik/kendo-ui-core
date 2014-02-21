@@ -377,8 +377,8 @@
         grid.reorderColumn(0, grid.columns[1]);
         var columns = grid.columns;
 
-        equal(columns[0].field, "foo");
-        equal(columns[1].field, "bar");
+        equal(columns[0].field, "bar");
+        equal(columns[1].field, "foo");
         equal(columns[2].field, "baz");
     });
 

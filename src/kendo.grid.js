@@ -430,11 +430,14 @@ var __meta__ = {
             return fieldsMap;
     }
 
-    function reorder(selector, sourceIndex, destIndex, before) {
-        var source = selector.eq(sourceIndex),
-            dest = selector.eq(destIndex);
+    function reorder(selector, source, dest, before) {
+        source = selector.eq(source);
 
-        source[before ? "insertBefore" : "insertAfter"](dest);
+        if (typeof dest == "number") {
+            source[before ? "insertBefore" : "insertAfter"](selector.eq(dest));
+        } else {
+            source.appendTo(dest);
+        }
     }
 
     function elements(lockedContent, content, filter) {
@@ -1323,17 +1326,15 @@ var __meta__ = {
             }
         },
 
-        _elements: function(container, filter) {
-            return container.find(filter);
-        },
-
         reorderColumn: function(destIndex, column, before) {
             var that = this,
                 columns = that.columns,
                 sourceIndex = inArray(column, columns),
                 destColumn = columns[destIndex],
                 colSourceIndex = inArray(column, visibleColumns(columns)),
-                colDestIndex = inArray(destColumn, visibleColumns(columns)),
+                colDest = inArray(destColumn, visibleColumns(columns)),
+                headerCol = colDest,
+                footerCol = colDest,
                 lockedRows = $(),
                 rows,
                 idx,
@@ -1342,7 +1343,7 @@ var __meta__ = {
                 lockedCount = lockedColumns(columns).length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer");
 
-            if (sourceIndex === destIndex || destColumn.hidden === true) {
+            if (sourceIndex === destIndex) {
                 return;
             }
 
@@ -1352,6 +1353,18 @@ var __meta__ = {
 
             if (column.locked && !isLocked && lockedCount == 1) {
                 return;
+            }
+
+            if (destColumn.hidden) {
+                if (isLocked) {
+                    colDest = that.lockedTable.find("colgroup");
+                    headerCol = that.lockedHeader.find("colgroup");
+                    footerCol = $(that.lockedFooter).find(">table>colgroup");
+                } else {
+                    colDest = that.tbody.prev();
+                    headerCol = that.thead.prev();
+                    footerCol = footer.find(".k-grid-footer-wrap").find(">table>colgroup");
+                }
             }
 
             column.locked = isLocked;
@@ -1366,15 +1379,15 @@ var __meta__ = {
             columns.splice(sourceIndex < destIndex ? sourceIndex : sourceIndex + 1, 1);
             that._templates();
 
-            reorder(elements(that.lockedHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+            reorder(elements(that.lockedHeader, that.thead.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, headerCol, before);
             if (that.options.scrollable) {
-                reorder(elements(that.lockedTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+                reorder(elements(that.lockedTable, that.tbody.prev(), "col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDest, before);
             }
 
             reorder(elements(that.lockedHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
 
             if (footer && footer.length) {
-                reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, colDestIndex, before);
+                reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, footerCol, before);
                 reorder(footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
@@ -1421,7 +1434,7 @@ var __meta__ = {
                 return;
             }
 
-            var index = visibleLockedColumns(columns).length - 1;
+            var index = lockedColumns(columns).length - 1;
             this.reorderColumn(index, column, false);
         },
 
@@ -3991,14 +4004,12 @@ var __meta__ = {
                 }
             }
 
-            if (cols.length) {
-                container = $('<div class="k-grid-content-locked"><table><colgroup/><tbody></tbody></table></div>');
-                colgroup = container.find("colgroup");
-                colgroup.append(cols);
+            container = $('<div class="k-grid-content-locked"><table><colgroup/><tbody></tbody></table></div>');
+            colgroup = container.find("colgroup");
+            colgroup.append(cols);
 
-                this.lockedContent = container.insertBefore(this.content);
-                this.lockedTable = container.children("table");
-            }
+            this.lockedContent = container.insertBefore(this.content);
+            this.lockedTable = container.children("table");
         },
 
         _appendLockedColumnFooter: function() {
@@ -4044,16 +4055,18 @@ var __meta__ = {
             header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
+                if (columns[idx].locked) {
+                    if (!columns[idx].hidden) {
+                        cols = cols.add(colgroup.eq(idx - skipHiddenCount));
+                    }
+                    cells = cells.add(header.eq(idx));
+                }
                 if (columns[idx].hidden) {
                     skipHiddenCount++;
                 }
-                if (columns[idx].locked) {
-                    cols = cols.add(colgroup.eq(idx - skipHiddenCount));
-                    cells = cells.add(header.eq(idx));
-                }
             }
 
-            if (cols.length) {
+            if (cells.length) {
                 html = '<div class="k-grid-header-locked" style="width:1px"><table><colgroup/><thead><tr>' +
                     '</tr></thead></table></div>';
 
