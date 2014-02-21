@@ -5,7 +5,7 @@
 
             <script>
                 $(document).ready(function() {
-                    grid = $("#grid").kendoGrid({
+                    var grid = $("#grid").kendoGrid({
                         dataSource: {
                             data: products,
                             schema: {
@@ -30,7 +30,7 @@
                         ]
                     }).data("kendoGrid");
 
-                    $("#grid").data("kendoGrid").table.kendoSortable({
+                    grid.table.kendoSortable({
                         filter: ">tbody >tr",
                         hint: $.noop,
                         placeholder: function(element) {
