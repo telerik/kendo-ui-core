@@ -2726,7 +2726,7 @@ var __meta__ = {
             if (!defined(options.max)) {
                logMaxRemainder = log(max, base) % 1;
                if (max <= 0) {
-                    max = math.pow(base, 1);
+                    max = base;
                } else if (logMaxRemainder !== 0 && (logMaxRemainder < 0.3 || logMaxRemainder > 0.9)) {
                    max = math.pow(base, log(max, base) + 0.2);
                } else {
