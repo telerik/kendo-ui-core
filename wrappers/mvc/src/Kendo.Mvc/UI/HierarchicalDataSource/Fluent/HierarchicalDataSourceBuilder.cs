@@ -69,7 +69,7 @@
         /// </summary>  
         public HierarchicalDataSourceBuilder Model(Action<HierarchicalModelDescriptorBuilder> configurator)
         {
-            configurator(new HierarchicalModelDescriptorBuilder(dataSource.Model));
+            configurator(new HierarchicalModelDescriptorBuilder(dataSource.Model, viewContext, urlGenerator));
 
             return this;
         }

@@ -26,6 +26,12 @@
             set; 
         }
 
+        public HierarchicalDataSource ChildrenDataSource
+        {
+            get;
+            set;
+        }
+
         public string ChildrenMember
         {
             get;
@@ -45,8 +51,16 @@
         {
             FluentDictionary.For(json)
                     .Add("id", IdMember, IdMember.HasValue)
-                    .Add("hasChildren", HasChildrenMember, HasChildrenMember.HasValue)
-                    .Add("children", ChildrenMember, ChildrenMember.HasValue);
+                    .Add("hasChildren", HasChildrenMember, HasChildrenMember.HasValue);
+
+            if (ChildrenDataSource != null)
+            {
+                json["children"] = ChildrenDataSource.ToJson();
+            }
+            else if (ChildrenMember.HasValue())
+            {
+                json["children"] = ChildrenMember;
+            }
 
             if (Fields.Count > 0)
             {

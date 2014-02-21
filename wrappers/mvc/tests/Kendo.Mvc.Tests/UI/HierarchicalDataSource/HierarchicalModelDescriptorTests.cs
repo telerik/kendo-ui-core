@@ -53,6 +53,21 @@
         }
 
         [Fact]
+        public void ToJson_children_dataSource_is_serialized_if_set()
+        {
+            model.ChildrenDataSource = new HierarchicalDataSource();
+            model.ToJson().ContainsKey("children").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void ToJson_children_dataSource_is_serialized_if_both_dataSource_and_member_are_set()
+        {
+            model.ChildrenDataSource = new HierarchicalDataSource();
+            model.ChildrenMember = "items";            
+            model.ToJson()["children"].ShouldNotEqual("items");
+        }
+
+        [Fact]
         public void ToJson_fields_is_not_serialized_if_not_set()
         {
             model.ToJson().ContainsKey("fields").ShouldBeFalse();

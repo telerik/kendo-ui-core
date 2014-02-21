@@ -12,7 +12,7 @@
         public HierarchicalModelDescriptorBuilderTests()
         {
             model = new HierarchicalModelDescriptor();
-            builder = new HierarchicalModelDescriptorBuilder(model);
+            builder = new HierarchicalModelDescriptorBuilder(model, TestHelper.CreateViewContext(), new UrlGenerator());
         }
 
         [Fact]
@@ -39,6 +39,19 @@
         {
             builder.Children("items");
             model.ChildrenMember.ShouldEqual("items");
+        }
+
+        [Fact]
+        public void Children_DataSource_should_return_builder()
+        {
+            builder.Children(c => c.Model(m => { })).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Children_DataSource_should_set_ChildrenDataSource()
+        {
+            builder.Children(c => c.Model(m => { }));
+            model.ChildrenDataSource.ShouldNotBeNull();
         }
 
         [Fact]
