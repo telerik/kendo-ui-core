@@ -134,7 +134,7 @@
             setup: function() {
                 createAxis(1, 100, {});
                 axis.reflow(chartBox);
-            }        
+            }
         });
         
         test("returns undefined if first value is non-positive", function() {

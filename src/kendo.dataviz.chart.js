@@ -2781,7 +2781,7 @@ var __meta__ = {
             for (i = 0; i < childrenCount; i++) {
                 var currentChild = children[i],
                     childBox;
-                if (currentChild.box) {
+                if (currentChild.visible !== false) {
                     childBox = currentChild.box.clone();
                     childBox.snapTo(targetBox, positionAxis);
                     if (currentChild.options) {
@@ -3506,7 +3506,7 @@ var __meta__ = {
                 }
 
                 if (point) {
-                    var plotRange = chart.plotRange(point, valueAxis.START_VALUE);
+                    var plotRange = chart.plotRange(point, valueAxis.startValue());
                     var valueSlot = valueAxis.getSlot(plotRange[0], plotRange[1], !chart.options.clip);
                     if (valueSlot) {
                         var pointSlot = chart.pointSlot(categorySlot, valueSlot);
@@ -3519,6 +3519,8 @@ var __meta__ = {
                         }
 
                         chart.reflowPoint(point, pointSlot);
+                    } else {
+                        point.visible = false;
                     }
                 }
             });
@@ -3721,7 +3723,7 @@ var __meta__ = {
                 stackAxis, zeroSlot;
 
             if (options.isStacked) {
-                zeroSlot = valueAxis.getSlot(valueAxis.START_VALUE, valueAxis.START_VALUE);
+                zeroSlot = valueAxis.getSlot(valueAxis.startValue(), valueAxis.startValue());
                 stackAxis = options.invertAxes ? X : Y;
                 categorySlot[stackAxis + 1] = categorySlot[stackAxis + 2] = zeroSlot[stackAxis + 1];
             }
@@ -3920,12 +3922,13 @@ var __meta__ = {
                 targetValueSlot = valueAxis.getSlot(bullet.value.target),
                 targetSlotX = invertAxes ? targetValueSlot : categorySlot,
                 targetSlotY = invertAxes ? categorySlot : targetValueSlot,
+                targetSlot;
+
+            if (target) {
                 targetSlot = new Box2D(
                     targetSlotX.x1, targetSlotY.y1,
                     targetSlotX.x2, targetSlotY.y2
                 );
-
-            if (target) {
                 target.options.height = invertAxes ? targetSlot.height() : options.target.line.width;
                 target.options.width = invertAxes ? options.target.line.width : targetSlot.width();
                 target.reflow(targetSlot);
@@ -4475,7 +4478,7 @@ var __meta__ = {
                 pointCenter;
 
             for (i = 0; i < length; i++) {
-                if (linePoints[i].box) {
+                if (linePoints[i].visible !== false) {
                     pointCenter = linePoints[i].markerBox().center();
 
                     points.push(Point2D(pointCenter.x, pointCenter.y));
@@ -4595,7 +4598,7 @@ var __meta__ = {
             for (i = 0; i < pointsLength; i++) {
                 currentPoint = points[i];
 
-                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null && currentPoint.box) {
+                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null && currentPoint.visible !== false) {
                     pointBox = currentPoint.box;
                     pointDistance = math.abs(pointBox.center()[axis] - pos);
 
@@ -5326,9 +5329,13 @@ var __meta__ = {
                     slotY = seriesAxes.y.getSlot(value.y, value.y, limit),
                     pointSlot;
 
-                if (point && slotX && slotY) {
-                    pointSlot = chart.pointSlot(slotX, slotY)
-                    point.reflow(pointSlot);
+                if (point) {
+                    if (slotX && slotY) {
+                        pointSlot = chart.pointSlot(slotX, slotY);
+                        point.reflow(pointSlot);
+                    } else {
+                        point.visible = false;
+                    }
                 }
             });
 
@@ -9261,7 +9268,7 @@ var __meta__ = {
                     pointOptions = point.options;
 
                     if (!pointOptions || (pointOptions.highlight || {}).visible) {
-                        if (point.highlightOverlay) {
+                        if (point.highlightOverlay && point.visible !== false) {
                             overlay = point.highlightOverlay(view, highlight.options);
 
                             if (overlay) {

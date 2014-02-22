@@ -2118,7 +2118,9 @@ var __meta__ = {
             Axis.fn.init.call(axis, defaultOptions);
         },
 
-        START_VALUE: 0,
+        startValue: function() {
+            return 0;
+        },
 
         options: {
             type: "numeric",
@@ -2419,7 +2421,9 @@ var __meta__ = {
             Axis.fn.init.call(this, options);
         },
 
-        START_VALUE: 1,
+        startValue: function() {
+            return this.options.min;
+        },
 
         options: {
             type: "log",
@@ -2726,7 +2730,7 @@ var __meta__ = {
             if (!defined(options.max)) {
                logMaxRemainder = log(max, base) % 1;
                if (max <= 0) {
-                    max = base;
+                   max = base;
                } else if (logMaxRemainder !== 0 && (logMaxRemainder < 0.3 || logMaxRemainder > 0.9)) {
                    max = math.pow(base, log(max, base) + 0.2);
                } else {
@@ -2738,7 +2742,7 @@ var __meta__ = {
 
             if (!defined(options.min)) {
                if (min <= 0) {
-                   min = 1;
+                   min = max <= 1 ? math.pow(base, -2) : 1;
                } else if (!options.narrowRange) {
                    min = math.pow(base, math.floor(log(min, base)));
                }

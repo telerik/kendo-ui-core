@@ -19,15 +19,21 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
     </head>
     <body>
+     <div id="stack100"></div>
+
+      
+      <--   
+     <div id="stack"></div>
+    <div id="negativePowers"></div>
+          <div id="bullet"></div>
     <div id="limit"></div>
-       <div id="reverse"></div>
-      <--   <div id="polar"></div>
-        <div id="radar"></div>
+    <div id="polar"></div>
+    <div id="radar"></div>
 
-        <div id="negativeValues"></div>
-        <div id="scatter"></div>
+    <div id="negativeValues"></div>
+    <div id="scatter"></div>
 
-        <div id="log" style="height: 500px;"></div>
+    <div id="log" style="height: 500px;"></div>
 
     <div id="chart" style="height: 500px;"></div>-->
      <--
@@ -38,35 +44,52 @@
      <div id="boxplot"></div>
      -->
        <script>
-       $("#limit").kendoChart({
+       var negative = [];
+       for(var i = 0; i >= -6; i-=0.2){
+            negative.push(Math.pow(10, i));
+       }
+       
+      for(; i < 3; i+=0.2){
+            negative.push(Math.pow(10, i));
+       }
+       $("#negativePowers").kendoChart({       
             series: [{
                 type: "line",
-                data: [1, 1000, 1]
+                data: negative
             }],
             valueAxis: {
-                type: "log",
-                min: 10,
-                max: 100
-            }
+                type: "log"
+            }       
        });
-
-       $("#reverse").kendoChart({
+       $("#stack100").kendoChart({
           seriesDefaults: {
-                stack:true,
+                stack:{
+                        type: "100%"
+                    },
                  type: "column"
           },
+          legend: {
+            visible: true
+          },
            series: [{
+                name: "F",
+                data: [15, -1, 10]
 
-                data: [-1, -1, 100]
-
            },{
-                data: [2, -1, 100]
+                name: "S",
+                data: [35, -1, 100]
            },{
-                data: [2, -1, -1]
+                name: "T",
+                data: [30, -1 , 100]
            },{
-                data: [2, -1, 100]
+                name: "Fo",
+                data: [20, -1 , 100]
            }],
-            valueAxis: {
+           categoryAxis: {
+                categories: ["A", "B", "C"]
+           },
+           valueAxis: {
+            axisCrossingValue: 0.01,
             type: "log",
                 reverse: false,
                 crosshair: {
@@ -79,9 +102,131 @@
            tooltip: {
                visible: true,
                shared: true
-           }
-
+          }
        });
+      $("#stack").kendoChart({
+          seriesDefaults: {
+                stack: true,
+                 type: "column"
+          },
+          legend: {
+            visible: true
+          },
+           series: [{
+                name: "F",
+                data: [2, -1, 10]
+
+           },{
+                name: "S",
+                data: [2, -1, 100]
+           },{
+                name: "T",
+                data: [2, -1 , -1]
+           },{
+                name: "Fo",
+                data: [2, -1 , 100]
+           }],
+           categoryAxis: {
+                categories: ["A", "B", "C"]
+           },
+           valueAxis: {
+           // min: 0.01,
+            type: "log",
+                reverse: false,
+                crosshair: {
+                    visible: true,
+                    tooltip: {
+                        visible: true
+                    }
+                }
+           },
+           tooltip: {
+               visible: true,
+               shared: true
+          }
+       });
+       $("#limit").kendoChart({
+            series: [{
+                type: "line",
+                data: [1, 1000, 1]
+            }],
+            valueAxis: {
+                type: "log",
+                min: 10,
+                max: 100
+            }
+       });
+var mmhgData = [
+            { current: 750, target: 762.5, category: 1 }, { current: 754, target: 768.5, category: 2 },
+            { current: 762, target: 770, category: 3 }, { current: 764, target: 773, category: 4 },
+            { current: 753, target: 760, category: 5 }, { current: 748, target: 765, category: 6 },
+            { current: 740, target: 760, category: 7 }, { current: 755, target: 758, category: 8 },
+            { current: 765, target: 768, category: 9 }, { current: 776, target: 783, category: 10 },
+            { current: 768, target: 770, category: 11 }, { current: 760, target: 762.5, category: 12 },
+            { current: 763, target: 768, category: 13 }, { current: 758, target: 766, category: 14 }
+        ];
+
+    $("#bullet").kendoChart({
+        legend: {
+            visible: false
+        },
+        dataSource: {
+            data: mmhgData
+        },
+        series: [{
+            type: "verticalBullet",
+            color: "#ffffff",
+            opacity: .8,
+            target: {
+                color: "#ffffff"
+            },
+            currentField: "current",
+            targetField: "target"
+        }],
+        categoryAxis: {
+            majorGridLines: {
+                visible: false
+            },
+            majorTicks: {
+                visible: false
+            },
+            title: {
+                text: "mmHg"
+            },
+            field: "category"
+        },
+        valueAxis: [{
+            type: "log",
+            plotBands: [{
+                from: 715, to: 752, color: "#2890cc", opacity: .5
+            }, {
+                from: 752, to: 772, color: "#2890cc", opacity: .7
+            }, {
+                from: 772, to: 790, color: "#2890cc", opacity: .5
+            }, {
+                from: 761, to: 761.5, color: "#ff0000", opacity: 1
+            }],
+            majorGridLines: {
+                visible: true
+            },
+            minorGridLines: {
+                visible: true,
+                color: "red",
+                width: 10
+            },
+            min: 715,
+            max: 790,
+            minorTicks: {
+                visible: true
+            }
+        }],
+        tooltip: {
+            visible: true,
+            template: "Maximum: #= value.target # <br /> Average: #= value.current #"
+        }
+    });
+
+
 
         $("#radar").kendoChart({
                 title: {
@@ -379,6 +524,10 @@
                     type: "line",
                     style: "smooth"
                 },
+                tooltip: {
+                    shared:true,
+                    visible: true
+                },
                 series: [{
                     data: [10, -1, 100],
                     tooltip: {
@@ -399,6 +548,10 @@
             $("#scatter").kendoChart({
                 title: {
                     text: "Rainfall - Wind Speed"
+                },
+                tooltip: {
+                    shared:true,
+                    visible: true
                 },
                 legend: {
                     position: "bottom"
