@@ -2974,7 +2974,7 @@ var __meta__ = {
                     data: { modelId: bar.modelId }
                 }, border),
                 elements = [];
-            if (box) {
+            if (bar.visible !== false) {
                 if (box.width() > 0 && box.height() > 0) {
                     if (options.overlay) {
                         rectStyle.overlay = deepExtend({
