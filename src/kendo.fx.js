@@ -1418,20 +1418,24 @@ var __meta__ = {
                 container.css(OVERFLOW, "hidden");
             }
 
-            element.css("display", "none");
+            if (!transitions) {
+                this.complete();
+            } else {
+                element.css("display", "none");
 
-            container.addClass(this._containerClass());
+                container.addClass(this._containerClass());
 
-            container.one(transitions.event, $.proxy(this, "complete"));
-
-            kendo.animationFrame(function() {
-                element.css("display", "").addClass("k-fx-next");
-                previous.css("display", "").addClass("k-fx-current");
+                container.one(transitions.event, $.proxy(this, "complete"));
 
                 kendo.animationFrame(function() {
-                    container.removeClass("k-fx-start").addClass("k-fx-end");
+                    element.css("display", "").addClass("k-fx-next");
+                    previous.css("display", "").addClass("k-fx-current");
+
+                    kendo.animationFrame(function() {
+                        container.removeClass("k-fx-start").addClass("k-fx-end");
+                    });
                 });
-            });
+            }
 
             return deferred.promise();
         },
