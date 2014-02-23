@@ -19,10 +19,11 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
     </head>
     <body>
-     <div id="stack100"></div>
+     
 
-      
+      <div id="axisLineLabels"></div>
       <--   
+      <div id="stack100"></div>
      <div id="stack"></div>
     <div id="negativePowers"></div>
           <div id="bullet"></div>
@@ -36,6 +37,7 @@
     <div id="log" style="height: 500px;"></div>
 
     <div id="chart" style="height: 500px;"></div>-->
+    
      <--
     <div id="scatterDrag"></div>
      <div id="panes"></div>
@@ -44,6 +46,31 @@
      <div id="boxplot"></div>
      -->
        <script>
+       
+       $("#axisLineLabels").kendoChart({
+            dataSource: {
+                data: []
+            },
+            xAxis: {
+                name: "xAxis",
+                type: "log",
+                min: 104.338,
+                max: 1043.3859
+            },
+            series: [{
+                type: "scatterLine",
+                xField: "x",
+                yField: "y",
+                labels: {
+                    visible: false,
+                    template: "#:value.x#"
+                },
+                markers: {
+                    visible: false
+                }
+            }]
+        });
+       
        var negative = [];
        for(var i = 0; i >= -6; i-=0.2){
             negative.push(Math.pow(10, i));

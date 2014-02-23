@@ -2561,7 +2561,7 @@ var __meta__ = {
         labelsCount: function() {
             var axis = this,
                 floorMax = math.floor(axis.logMax),
-                count = math.ceil(floorMax - axis.logMin) + 1;
+                count = math.floor(floorMax - axis.logMin) + 1;
 
             return count;
         },
@@ -2653,11 +2653,10 @@ var __meta__ = {
                 step = lineOptions.step,
                 logMin = axis.logMin,
                 logMax = axis.logMax,
-                start = math.floor(logMin),
                 power,
                 position;
 
-            for (power = start + tickOptions.skip; power <= logMax; power+= tickOptions.step) {
+            for (power = math.ceil(logMin) + tickOptions.skip; power <= logMax; power+= tickOptions.step) {
                 position = round(lineStart + step * (power - logMin), DEFAULT_PRECISION);
                 callback(position, tickOptions);
             }
@@ -2700,7 +2699,7 @@ var __meta__ = {
             var axis = this,
                 options = axis.options,
                 power = math.floor(axis.logMin + index),
-                value = round(Math.pow(options.majorUnit, power), DEFAULT_PRECISION),
+                value = Math.pow(options.majorUnit, power),
                 text = axis.axisLabelText(value, null, labelOptions);
 
             return new AxisLabel(value, text, index, null, labelOptions);
@@ -2728,7 +2727,7 @@ var __meta__ = {
             }
 
             if (!defined(options.max)) {
-               logMaxRemainder = log(max, base) % 1;
+               logMaxRemainder =  round(log(max, base), DEFAULT_PRECISION) % 1;
                if (max <= 0) {
                    max = base;
                } else if (logMaxRemainder !== 0 && (logMaxRemainder < 0.3 || logMaxRemainder > 0.9)) {
