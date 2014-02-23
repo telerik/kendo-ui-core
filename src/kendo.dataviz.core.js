@@ -2545,7 +2545,7 @@ var __meta__ = {
                 size = vertical ? lineBox.height() : lineBox.width(),
                 logMin = axis.logMin,
                 logMax = axis.logMax,
-                scale = size / (axis.logMax - axis.logMin)
+                scale = size / (axis.logMax - axis.logMin),
                 offset = round(delta / scale, DEFAULT_PRECISION);
 
             if ((vertical || reverse) && !(vertical && reverse )) {

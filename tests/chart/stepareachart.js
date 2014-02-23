@@ -39,7 +39,10 @@
                 lineBox: function() {
                     return new Box2D(0,0,0,2);
                 },
-                options: {}
+                options: {},
+                startValue: function() {
+                    return 0;
+                }
             };
 
             this.namedCategoryAxes = {};

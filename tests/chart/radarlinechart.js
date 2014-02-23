@@ -22,7 +22,10 @@
                 },
                 valueAxis: {
                     majorGridLines: { visible: false },
-                    visible: false
+                    visible: false,
+                    startValue: function() {
+                        return 0;
+                    }
                 },
                 plotArea: {
                     padding: 35
@@ -91,6 +94,9 @@
                     },
                     options: {
                         axisCrossingValue: 0
+                    },
+                    startValue: function() {
+                        return 0;
                     }
                 },
                 seriesCategoryAxis: function() {

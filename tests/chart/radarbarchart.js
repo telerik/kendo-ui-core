@@ -247,6 +247,9 @@
                     },
                     options: {
                         axisCrossingValue: 0
+                    },
+                    startValue: function() {
+                        return 0;
                     }
                 },
                 seriesCategoryAxis: function() {

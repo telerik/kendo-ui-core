@@ -18,7 +18,10 @@
             kendo.deepExtend({
                 valueAxis: {
                     majorGridLines: { visible: false },
-                    visible: false
+                    visible: false,
+                    startValue: function() {
+                        return 0;
+                    }
                 },
                 categoryAxis: {
                     majorGridLines: { visible: false },
@@ -99,6 +102,9 @@
                     },
                     options: {
                         axisCrossingValue: 0
+                    },
+                    startValue: function() {
+                        return 0;
                     }
                 },
                 seriesCategoryAxis: function() {

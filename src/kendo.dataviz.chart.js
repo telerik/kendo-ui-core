@@ -3243,6 +3243,7 @@ var __meta__ = {
             var categoryPts = this.categoryPoints[categoryIx];
 
             if (this.options.isStacked) {
+                startValue = startValue || 0;
                 var plotValue = this.plotValue(point);
                 var positive = plotValue > 0;
                 var prevValue = startValue;

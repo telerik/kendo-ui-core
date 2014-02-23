@@ -967,7 +967,10 @@
            return new Box(a, a, b, b);
         },
         valueAxis = {
-            getSlot: getSlot
+            getSlot: getSlot,
+            startValue: function() {
+                return 0;
+            }
         },
         xAxis = {
             getSlot: getSlot

@@ -37,6 +37,9 @@
                 getSlot: getValueSlot,
                 options: {
                     axisCrossingValue: 0
+                },
+                startValue: function() {
+                    return 0;
                 }
             };
 
