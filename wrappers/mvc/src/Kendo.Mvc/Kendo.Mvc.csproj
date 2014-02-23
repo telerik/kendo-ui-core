@@ -345,6 +345,7 @@
     <Compile Include="UI\Chart\Axes\ChartCategoryAxis.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisBase.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisNotes.cs" />
+    <Compile Include="UI\Chart\Axes\ChartLogarithmicAxis.cs" />
     <Compile Include="UI\Chart\Axes\ChartNumericAxis.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisDefaults.cs" />
     <Compile Include="UI\Chart\Axes\ChartPlotBand.cs" />
@@ -391,6 +392,7 @@
     <Compile Include="UI\Chart\ChartAreaLine.cs" />
     <Compile Include="UI\Chart\Enums\ChartStackType.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartLogarithmicAxisSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaSeries.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializer.cs" />

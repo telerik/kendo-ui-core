@@ -3047,6 +3047,15 @@
     <Content Include="Areas\razor\Views\dataviz\map\remote_markers.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\area_charts\logarithmic_axis.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\line_charts\logarithmic_axis.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\logarithmic_axis.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Areas\razor\Views\web\sortable\integration_grid.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<int>
+
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Title("Fibonacci sequence")
+        .Series(series => {
+            series.Column(Model);
+        })
+        .ValueAxis(axis => axis.Logarithmic()
+            .MinorGridLines(minorGridLines => minorGridLines.Visible(true))
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+        )
+    ) 
+</div>
