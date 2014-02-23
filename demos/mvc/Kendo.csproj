@@ -836,6 +836,9 @@
     <Content Include="Views\dataviz\map\bing.cshtml" />
     <Content Include="Views\dataviz\map\api.cshtml" />
     <Content Include="Views\dataviz\map\remote-markers.cshtml" />
+    <Content Include="Views\dataviz\area-charts\logarithmic-axis.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\logarithmic-axis.cshtml" />
+    <Content Include="Views\dataviz\line-charts\logarithmic-axis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

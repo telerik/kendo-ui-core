@@ -49,6 +49,13 @@
                     "title": "Date axis sample for Kendo UI Area Charts",
                     "meta": "This demo shows how you can set specific base date units in your Kendo UI Area Chart to help you visualize a seasonal trend in your app."
                 }, {
+                    "text": "Logarithmic axis",
+                    "url": "area-charts/logarithmic-axis.html",
+                    "title": "Logarithmic axis sample for Kendo UI Area Charts",
+                    "meta": "This demo shows how you can use a logarithmic axis for the Kendo UI Area Chart.",
+                    "new": "true",
+                    "requiresServer": "true"
+                }, {
                     "text": "Multi-axis",
                     "url": "area-charts/multiple-axes.html",
                     "title": "Multi-axis demo for Kendo UI Area Charts component",
@@ -126,6 +133,12 @@
                     "url": "bar-charts/date-axis.html",
                     "title": "Date axis example in Kendo UI jQuery chart control",
                     "meta": "This sample shows how you can configure the base date unit for your date axis in Kendo UI HTML5 business bar chart."
+                }, {
+                    "text": "Logarithmic axis",
+                    "url": "bar-charts/logarithmic-axis.html",
+                    "title": "Logarithmic axis sample for Kendo UI Bar Charts",
+                    "meta": "This demo shows how you can use a logarithmic axis for the Kendo UI Bar Chart.",
+                    "new": "true"
                 }, {
                     "text": "Multi-axis",
                     "url": "bar-charts/multiple-axes.html",
@@ -379,6 +392,13 @@
                     "url": "line-charts/date-axis.html",
                     "title": "Example of Kendo UI HTML5 Line Charts Date Axis",
                     "meta": "This demo illustrates the date axis in Kendo UI Line Charts can be easily changed by setting the configuration and specifying the aggregate function value."
+                }, {
+                    "text": "Logarithmic axis",
+                    "url": "line-charts/logarithmic-axis.html",
+                    "title": "Logarithmic axis sample for Kendo UI Line Charts",
+                    "meta": "This demo shows how you can use a logarithmic axis for the Kendo UI Line Chart.",
+                    "new": "true",
+                    "requiresServer": "true"
                 }, {
                     "text": "Multi-axis",
                     "url": "line-charts/multiple-axes.html",
