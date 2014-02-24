@@ -58,11 +58,12 @@
                     var centered = $("#centeredNotification").kendoNotification({
                         stacking: "down",
                         show: onShow,
-                        button: true
+                        button: true,
+                        autoHideAfter: 0
                     }).data("kendoNotification");
 
                     $("#showNotification").click(function(){
-                        centered.show((new Date()).getTime(), "note");
+                        centered.show("milliseconds since 1970: " + (new Date()).getTime());
                     });
 
                     var configurable = $("#configurableNotification").kendoNotification().data("kendoNotification");
@@ -101,7 +102,7 @@
                     });
 
                     $("#showConfigurable").click(function(){
-                        configurable.show((new Date()).getTime(), "note");
+                        configurable.show("milliseconds since 1970: " + (new Date()).getTime());
                     });
                 });
             </script>
