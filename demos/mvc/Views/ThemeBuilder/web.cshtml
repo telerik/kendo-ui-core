@@ -38,6 +38,10 @@
 
 <div class="k-content floatWrap">
 <div class="column">
+    <h3>Button</h3>
+    <button class="k-button">A button</button>
+    <button class="k-button">Another one</button>
+
     <h3>Menu</h3>
     <ul id="menu">
         <li>First Item
@@ -145,10 +149,6 @@
 </div>
 
 <div class="column">
-    <h3>Button</h3>
-    <button class="k-button">A button</button>
-    <button class="k-button">Another one</button>
-
     <h3 title="Kendo UI Tooltip" id="tooltip">Tooltip (hover me)</h3>
 
     <h3>Upload</h3>
@@ -165,6 +165,10 @@
 
     <h3>Progress bar</h3>
     <div id="progress"></div>
+
+    <h3>Notifications</h3>
+    <div id="notification"></div>
+
 </div>
 
 <div id="scheduler"></div>
@@ -458,5 +462,16 @@
         });
 
         $("#progress").kendoProgressBar({ value: 40 });
+
+        var notification = $("#notification").kendoNotification({
+            autoHideAfter: 0,
+            hideOnClick: false,
+            appendTo: "#notification"
+        }).data("kendoNotification");
+        notification.info("information");
+        notification.success("success");
+        notification.warning("warning");
+        notification.error("error");
+
     });
 </script>
