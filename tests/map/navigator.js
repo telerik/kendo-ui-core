@@ -1,12 +1,6 @@
 (function() {
     var dom;
 
-    function keydown(element, keyCode) {
-        var e = jQuery.Event("keydown");
-        e.which = keyCode;
-        element.trigger(e);
-    }
-
     // ------------------------------------------------------------
     module("Map / Navigator", {
         teardown: function() {

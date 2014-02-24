@@ -598,20 +598,6 @@
         }
     });
 
-    var KeyboardNavigator = Class.extend({
-        init: function(element, options) {
-            this._keydown = proxy(this._keydown, this);
-            element.on("keydown", this._keydown);
-        },
-
-        dispose: function() {
-            element.off("keydown", this._keydown);
-        },
-
-        _keydown: function(e) {
-        }
-    });
-
     // Exports ================================================================
     dataviz.ui.plugin(Map);
 

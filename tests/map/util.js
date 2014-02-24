@@ -46,4 +46,11 @@
     });
 
     window.MapMock = MapMock;
+
+    window.keydown = function(element, keyCode) {
+        var e = jQuery.Event("keydown");
+        e.which = keyCode;
+        element.trigger(e);
+    }
+
 })();
