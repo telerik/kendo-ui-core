@@ -310,6 +310,7 @@
     <Compile Include="Controllers\SuiteController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ApiController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ClientFilteringController.cs" />
+    <Compile Include="Controllers\Web\AutoComplete\Custom_DataSourceController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\EventsController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\IndexController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\NavigationController.cs" />
@@ -340,6 +341,7 @@
     <Compile Include="Controllers\Web\ComboBox\ApiController.cs" />
     <Compile Include="Controllers\Web\ComboBox\CascadingComboBoxController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ClientFilteringController.cs" />
+    <Compile Include="Controllers\Web\ComboBox\Custom_DataSourceController.cs" />
     <Compile Include="Controllers\Web\ComboBox\EventsController.cs" />
     <Compile Include="Controllers\Web\ComboBox\IndexController.cs" />
     <Compile Include="Controllers\Web\ComboBox\NavigationController.cs" />
@@ -370,6 +372,7 @@
     <Compile Include="Controllers\Web\DateTimePicker\TemplateController.cs" />
     <Compile Include="Controllers\Web\DropDownList\ApiController.cs" />
     <Compile Include="Controllers\Web\DropDownList\CascadingDropDownListController.cs" />
+    <Compile Include="Controllers\Web\DropDownList\Custom_DataSourceController.cs" />
     <Compile Include="Controllers\Web\DropDownList\EventsController.cs" />
     <Compile Include="Controllers\Web\DropDownList\IndexController.cs" />
     <Compile Include="Controllers\Web\DropDownList\NavigationController.cs" />
@@ -395,7 +398,7 @@
     <Compile Include="Controllers\Web\Grid\Frozen_ColumnsController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ReorderingController.cs" />
     <Compile Include="Controllers\Web\Grid\Column_ResizingController.cs" />
-    <Compile Include="Controllers\Web\Grid\Custom_DataSource.cs" />
+    <Compile Include="Controllers\Web\Grid\Custom_DataSourceController.cs" />
     <Compile Include="Controllers\Web\Grid\OdataController.cs" />
     <Compile Include="Controllers\Web\Grid\EverliveController.cs" />
     <Compile Include="Controllers\Web\Grid\WebApiController.cs" />
@@ -431,6 +434,8 @@
     <Compile Include="Controllers\Web\Grid\SortingController.cs" />
     <Compile Include="Controllers\Web\Grid\Toolbar_TemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\Virtualization_Remote_DataController.cs" />
+    <Compile Include="Controllers\Web\ListView\Custom_DataSourceController.cs" />
+    <Compile Include="Controllers\Web\Scheduler\Custom_DataSourceController.cs" />
     <Compile Include="Controllers\Web\Sortable\ConstraintsController.cs" />
     <Compile Include="Controllers\Web\Sortable\EventsController.cs" />
     <Compile Include="Controllers\Web\Sortable\Filter_DisableController.cs" />
@@ -844,6 +849,7 @@
     <Content Include="Areas\aspx\Views\mobile\view\zoomable.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\api.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\clientfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\web\autocomplete\custom_datasource.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\events.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\index.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />
@@ -874,6 +880,7 @@
     <Content Include="Areas\aspx\Views\web\combobox\api.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\cascadingcombobox.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\clientfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\web\combobox\custom_datasource.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\events.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\index.aspx" />
     <Content Include="Areas\aspx\Views\web\combobox\navigation.aspx" />
@@ -898,6 +905,7 @@
     <Content Include="Areas\aspx\Views\web\datetimepicker\template.aspx" />
     <Content Include="Areas\aspx\Views\web\dropdownlist\api.aspx" />
     <Content Include="Areas\aspx\Views\web\dropdownlist\cascadingdropdownlist.aspx" />
+    <Content Include="Areas\aspx\Views\web\dropdownlist\custom_datasource.aspx" />
     <Content Include="Areas\aspx\Views\web\dropdownlist\events.aspx" />
     <Content Include="Areas\aspx\Views\web\dropdownlist\index.aspx" />
     <Content Include="Areas\aspx\Views\web\dropdownlist\navigation.aspx" />
@@ -958,6 +966,7 @@
     <Content Include="Areas\aspx\Views\web\grid\sorting.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\toolbar_template.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\virtualization_remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\web\listview\custom_datasource.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\editing.aspx" />
     <Content Include="Areas\aspx\Views\web\listview\EditorTemplates\ProductViewModel.ascx" />
     <Content Include="Areas\aspx\Views\web\listview\index.aspx" />
@@ -1005,6 +1014,7 @@
     <Content Include="Areas\aspx\Views\web\progressbar\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\progressbar\vertical.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\scheduler\custom_datasource.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\webapi.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\restriction.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\move_resize.aspx" />
@@ -3114,6 +3124,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\aspx\Views\web\maskedtextbox\validation.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\scheduler\custom_datasource.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\listview\custom_datasource.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\combobox\custom_datasource.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\dropdownlist\custom_datasource.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\autocomplete\custom_datasource.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

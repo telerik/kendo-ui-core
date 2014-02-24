@@ -74,16 +74,5 @@
 
             return this;
         }
-
-        /// <summary>
-        /// Sets the type of the data source.
-        /// </summary>
-        /// <param name="type"></param>
-        public CustomDataSourceBuilder<TModel> Type(string type)
-        {
-            dataSource.CustomType = type;
-
-            return this;
-        }
     }
 }

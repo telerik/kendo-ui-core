@@ -44,6 +44,11 @@
                     "meta": "With this Kendo UI AutoComplete demo, you can learn how to customize the template of the widget."
                 },
                 {
+                    "text": "Custom data source",
+                    "url": "autocomplete/custom-datasource.html",
+                    "packages": ["mvc"]
+                },
+                {
                     "text": "Events",
                     "url": "autocomplete/events.html",
                     "title": "Events in Kendo UI AutoComplete widget | Kendo UI Web demos",
@@ -278,6 +283,11 @@
                     "meta": "This demo shows how the cascading Kendo UI ComboBox control would fit any web application or website."
                 },
                 {
+                    "text": "Custom data source",
+                    "url": "combobox/custom-datasource.html",
+                    "packages": ["mvc"]
+                },
+                {
                     "text": "Events",
                     "url": "combobox/events.html",
                     "title": "Examples of events in Kendo UI jQuery ComboBox component",
@@ -463,6 +473,11 @@
                     "url": "dropdownlist/cascadingdropdownlist.html",
                     "title": "Example of cascading DropDownList | Kendo UI Dropdownlist Demo",
                     "meta": "This demo shows how the cascading jQuery dropdown works in Kendo UI DropDownList widget."
+                },
+                {
+                    "text": "Custom data source",
+                    "url": "dropdownlist/custom-datasource.html",
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Events",
@@ -899,6 +914,11 @@
                     "title": "Example for Jquery Listview binding to remote data | Kendo UI demos",
                     "meta": "This Kendo UI ListView demo shows how the control can be bound to remote data by using Kendo UI DataSource component.",
                     "packages": ["!mvc"]
+                },
+                {
+                    "text": "Custom data source",
+                    "url": "listview/custom-datasource.html",
+                    "packages": ["mvc"]
                 },
                 {
                     "text": "Editing",
@@ -1418,6 +1438,10 @@
                     "url": "scheduler/index.html",
                     "title": "Kendo jQuery Scheduler Control Demo",
                     "meta": "This demo shows the basic functionality of Kendo UI Scheduler widget, included in Kendo UI Web framework."
+                }, {
+                    "text": "Custom data source",
+                    "url": "scheduler/custom-datasource.html",
+                    "packages": ["mvc"]
                 }, {
                     "text": "Resources",
                     "url": "scheduler/resources.html",

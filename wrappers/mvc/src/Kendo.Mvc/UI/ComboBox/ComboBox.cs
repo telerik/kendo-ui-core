@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue())
+            if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue() && DataSource.Type != DataSourceType.Custom)
             {
                 DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
