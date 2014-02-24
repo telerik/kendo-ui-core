@@ -30,7 +30,9 @@
 <script type="text/javascript">
     $(function () {
         var container = $("#employeeForm");
-        
+
+        kendo.init(container);
+
         container.kendoValidator({
             rules: {
                 validmask: function (input) {
