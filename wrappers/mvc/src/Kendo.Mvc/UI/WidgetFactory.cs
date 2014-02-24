@@ -670,6 +670,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="MaskedTextBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MaskedTextBox()
+        ///             .Name("MaskedTextBox")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MaskedTextBoxBuilder MaskedTextBox()
+        {
+            return new MaskedTextBoxBuilder(new MaskedTextBox(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Window"/>.
         /// </summary>
         /// <example>
@@ -1646,6 +1661,22 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual NumericTextBoxBuilder<double> PercentTextBoxFor(Expression<Func<TModel, double>> expression)
         {
             return NumericTextBoxFor<double>(expression).Format("p");
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="MaskedTextBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MaskedTextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual MaskedTextBoxBuilder MaskedTextBoxFor(Expression<Func<TModel, Nullable<int>>> expression)
+        {
+            return MaskedTextBox()
+                    .Name(GetName(expression))
+                    .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
+                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as string);
         }
 
         /// <summary>

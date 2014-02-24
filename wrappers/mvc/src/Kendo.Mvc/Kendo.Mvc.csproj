@@ -676,6 +676,11 @@
     <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
     <Compile Include="UI\ClientHandlerDescriptor.cs" />
     <Compile Include="UI\ComboBox\Fluent\ComboBoxEventBuilder.cs" />
+    <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxRulesBuilder.cs" />
+    <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxBuilder.cs" />
+    <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxEventBuilder.cs" />
+    <Compile Include="UI\MaskedTextBox\Html\MaskedTextBoxHtmlBuilder.cs" />
+    <Compile Include="UI\MaskedTextBox\MaskedTextBox.cs" />
     <Compile Include="UI\Notification\Fluent\NotificationPositionSettingsBuilder.cs" />
     <Compile Include="UI\Notification\Fluent\NotificationTemplateFactory.cs" />
     <Compile Include="UI\Notification\Fluent\NotificationTemplateBuilder.cs" />
@@ -1876,4 +1881,8 @@
     <Compile Include="UI\Map\Settings\MapLayerDefaultsBingSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDefaultsBingSettingsBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\Map\Settings\MapLayerDefaultsMarkerSettings.cs" /><Compile Include="UI\Map\Fluent\MapLayerDefaultsMarkerSettingsBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\Map\Settings\MapLayerDefaultsMarkerSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsMarkerSettingsBuilder.cs" />
+  </ItemGroup>
+</Project>
