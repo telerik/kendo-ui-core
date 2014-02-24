@@ -31,6 +31,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The the opacity of all shape layers.
+        /// </summary>
+        /// <param name="value">The value that configures the opacity.</param>
+        public MapLayerDefaultsShapeSettingsBuilder Opacity(double value)
+        {
+            container.Opacity = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The default style for shapes.
         /// </summary>
         /// <param name="configurator">The action that configures the style.</param>

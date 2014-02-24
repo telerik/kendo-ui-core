@@ -1,6 +1,6 @@
 (function(f, define){
     define(["./base", "../location",
-            "../../geometry", "../../drawing/shapes",
+            "../../geometry", "../../util", "../../drawing/shapes",
             "../../../kendo.data", "../../../kendo.draganddrop" ], f);
 })(function(){
 
@@ -15,6 +15,7 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
         last = dataviz.last,
+        defined = dataviz.util.defined,
 
         g = dataviz.geometry,
 
@@ -113,7 +114,7 @@
         shapeCreated: function(shape) {
             var cancelled = false;
             if (shape instanceof d.Circle) {
-                cancelled = !this._createMarker(shape);
+                cancelled = defined(this._createMarker(shape));
             }
 
             if (!cancelled) {
@@ -125,20 +126,15 @@
         },
 
         _createMarker: function(shape) {
-            var dataItem = shape.dataItem;
-            var marker = map.Marker.create({
-               location: shape.location.toArray()
-            }, this.map.options.markerDefaults);
-            marker.dataItem = dataItem;
+            var marker = this.map.markers.bind({
+                location: shape.location
+            }, shape.dataItem);
 
-            var args = { marker: marker };
-            var cancelled = this.map.trigger("markerCreated", args);
-            if (!cancelled) {
-                this.map.markers.add(marker);
+            if (marker) {
                 this._markers.push(marker);
             }
 
-            return cancelled;
+            return marker;
         },
 
         _clearMarkers: function() {

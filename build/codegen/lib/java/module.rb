@@ -14,6 +14,8 @@ module CodeGen::Java
         'chart' => ['axisDefaults', 'seriesDefaults'],
         'stockchart' => ['axisDefaults', 'seriesDefaults'],
         'tooltip' => ['content'],
+        'map' => ['markers.tooltip.content', 'markerDefaults.tooltip.content',
+                  'layers.tooltip.content', 'layerDefaults.marker.tooltip.content'],
         'filteritem' => ['filters'],
         'column' => ['values']
     }

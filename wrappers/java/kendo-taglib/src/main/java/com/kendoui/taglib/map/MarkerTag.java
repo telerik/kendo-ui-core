@@ -69,6 +69,14 @@ public class MarkerTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("shape", value);
     }
 
+    public java.lang.String getTitle() {
+        return (java.lang.String)getProperty("title");
+    }
+
+    public void setTitle(java.lang.String value) {
+        setProperty("title", value);
+    }
+
 //<< Attributes
 
 }

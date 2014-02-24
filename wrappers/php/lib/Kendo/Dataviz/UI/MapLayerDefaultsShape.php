@@ -15,6 +15,15 @@ class MapLayerDefaultsShape extends \Kendo\SerializableObject {
     }
 
     /**
+    * The the opacity of all shape layers.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\MapLayerDefaultsShape
+    */
+    public function opacity($value) {
+        return $this->setProperty('opacity', $value);
+    }
+
+    /**
     * The default style for shapes.
     * @param \Kendo\Dataviz\UI\MapLayerDefaultsShapeStyle|array $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaultsShape

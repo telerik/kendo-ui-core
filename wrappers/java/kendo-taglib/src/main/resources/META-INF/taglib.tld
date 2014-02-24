@@ -14607,6 +14607,147 @@ Cancelling the event will prevent the user action.</description>
 
 
     <tag>
+        <description>The default configuration for marker layers.</description>
+        <name>map-layerDefaults-marker</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The the opacity of all marker layers.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The marker shape. Supported shapes are "pin" and "pinTarget".</description>
+            <name>shape</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The default Kendo UI Tooltip options for all marker layers.</description>
+        <name>map-layerDefaults-marker-tooltip</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.</description>
+            <name>autoHide</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the tooltip callout will be displayed.</description>
+            <name>callout</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The height (in pixels) of the tooltip.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Explicitly states whether content iframe should be created.</description>
+            <name>iframe</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specify the delay in milliseconds before the tooltip is shown. This option is ignored if showOn is set to "click" or "focus".</description>
+            <name>showAfter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The event on which the tooltip will be shown. Predefined values are "mouseenter", "click" and "focus".</description>
+            <name>showOn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the tooltip content.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width (in pixels) of the tooltip.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>A collection of {Animation} objects, used to change default animations. A value of false
+will disable all animations in the widget.</description>
+        <name>map-layerDefaults-marker-tooltip-animation</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipAnimationTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The animation that will be used when a Tooltip closes.</description>
+        <name>map-layerDefaults-marker-tooltip-animation-close</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipAnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used for closing of the tooltip.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation that will be used when a Tooltip opens.</description>
+        <name>map-layerDefaults-marker-tooltip-animation-open</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipAnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used for opening of the Tooltip.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+
+    <tag>
         <description>The default configuration for shape layers.</description>
         <name>map-layerDefaults-shape</name>
         <tag-class>com.kendoui.taglib.map.LayerDefaultsShapeTag</tag-class>
@@ -14617,6 +14758,12 @@ Cancelling the event will prevent the user action.</description>
             <name>attribution</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The the opacity of all shape layers.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -14779,8 +14926,21 @@ North-West lat, longitude, South-East latitude, longitude.If not specified, the 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The data item field which contains the marker location.
+The field should be an array with two numbers - latitude and longitude.Requires the dataSource option to be set.</description>
+            <name>locationField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The the opacity for the layer.</description>
             <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The marker shape. Supported shapes are "pin" and "pinTarget".</description>
+            <name>shape</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -14790,6 +14950,13 @@ Alternating between different subdomains allows more requests to be executed in 
             <name>subdomains</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the marker title.
+Requires the dataSource option to be set.</description>
+            <name>titleField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The layer type. Supported types are "tile" and "shape".</description>
@@ -14876,6 +15043,125 @@ The following dash types are supported:</description>
 
 
 
+    <tag>
+        <description>The default Kendo UI Tooltip options for data-bound markers.</description>
+        <name>map-layer-tooltip</name>
+        <tag-class>com.kendoui.taglib.map.LayerTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies if the tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.</description>
+            <name>autoHide</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the tooltip callout will be displayed.</description>
+            <name>callout</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The height (in pixels) of the tooltip.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Explicitly states whether content iframe should be created.</description>
+            <name>iframe</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specify the delay in milliseconds before the tooltip is shown. This option is ignored if showOn is set to "click" or "focus".</description>
+            <name>showAfter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The event on which the tooltip will be shown. Predefined values are "mouseenter", "click" and "focus".</description>
+            <name>showOn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the tooltip content.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width (in pixels) of the tooltip.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>A collection of {Animation} objects, used to change default animations. A value of false
+will disable all animations in the widget.</description>
+        <name>map-layer-tooltip-animation</name>
+        <tag-class>com.kendoui.taglib.map.LayerTooltipAnimationTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The animation that will be used when a Tooltip closes.</description>
+        <name>map-layer-tooltip-animation-close</name>
+        <tag-class>com.kendoui.taglib.map.LayerTooltipAnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used for closing of the tooltip.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The animation that will be used when a Tooltip opens.</description>
+        <name>map-layer-tooltip-animation-open</name>
+        <tag-class>com.kendoui.taglib.map.LayerTooltipAnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the animation duration.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used for opening of the Tooltip.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
 
 
     <tag>
@@ -14885,8 +15171,7 @@ The following dash types are supported:</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The default marker shape. The following pre-defined marker shapes are available:Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-For example "pinTarget" is rendered as "k-marker-pin-target".</description>
+            <description>The default marker shape. Supported shapes are "pin" and "pinTarget".</description>
             <name>shape</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15035,8 +15320,14 @@ will disable all animations in the widget.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The marker shape. Supported shapes are "pin" and "circle".</description>
+            <description>The marker shape. Supported shapes are "pin" and "pinTarget".</description>
             <name>shape</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The marker title. Displayed as browser tooltip.</description>
+            <name>title</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -31131,7 +31422,305 @@ Refer to the jQuery.ajax documentation for further info.</description>
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Marker tooltip content</description>
+        <name>map-marker-tooltip-content</name>
+        <tag-class>com.kendoui.taglib.map.MarkerTooltipContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description></description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Specifies a URL or request options that the tooltip should load its content from.</description>
+        <name>map-marker-tooltip-content-url</name>
+        <tag-class>com.kendoui.taglib.map.MarkerTooltipContentAjaxOptionsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Default marker tooltip content</description>
+        <name>map-markerDefaults-tooltip-content</name>
+        <tag-class>com.kendoui.taglib.map.MarkerDefaultsTooltipContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description></description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Specifies a URL or request options that the tooltip should load its content from.</description>
+        <name>map-markerDefaults-tooltip-content-url</name>
+        <tag-class>com.kendoui.taglib.map.MarkerDefaultsTooltipContentAjaxOptionsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Default tooltip content for all data-bound markers</description>
+        <name>map-layerDefaults-marker-tooltip-content</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description></description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Specifies a URL or request options that the tooltip should load its content from.</description>
+        <name>map-layerDefaults-marker-tooltip-content-url</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsMarkerTooltipContentAjaxOptionsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Tooltip content for data-bound markers</description>
+        <name>map-layer-tooltip-content</name>
+        <tag-class>com.kendoui.taglib.map.LayerTooltipContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description></description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Specifies a URL or request options that the tooltip should load its content from.</description>
+        <name>map-layer-tooltip-content-url</name>
+        <tag-class>com.kendoui.taglib.map.LayerTooltipContentAjaxOptionsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>If set to false, it will force requested pages not to be cached by the browser. Setting cache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>String</type>
+        </attribute>
+    </tag>
 	
+
 	<tag>
 		<description>PanelBar Item content</description>
 		<name>panelBar-item-content</name>

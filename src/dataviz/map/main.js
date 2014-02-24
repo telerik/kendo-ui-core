@@ -89,6 +89,12 @@
                             width: 0.5
                         }
                     }
+                },
+                marker: {
+                    shape: "pinTarget",
+                    tooltip: {
+                        position: "top"
+                    }
                 }
             },
             center: [0, 0],
@@ -100,9 +106,7 @@
             markerDefaults: {
                 shape: "pinTarget",
                 tooltip: {
-                    autoHide: false,
-                    position: "top",
-                    showOn: "click"
+                    position: "top"
                 }
             },
             wraparound: true
@@ -135,6 +139,12 @@
 
             if (this.zoomControl) {
                 this.zoomControl.destroy();
+            }
+
+            this.markers.destroy();
+
+            for (var i = 0; i < this.layers.length; i++) {
+                this.layers[i].destroy();
             }
 
             Widget.fn.destroy.call(this);
@@ -430,9 +440,7 @@
         },
 
         _initMarkers: function() {
-            this.markers = new map.layers.MarkerLayer(this, {
-                markerDefaults: this.options.markerDefaults
-            });
+            this.markers = new map.layers.MarkerLayer(this, this.options.markerDefaults);
             this.markers.add(this.options.markers);
         },
 

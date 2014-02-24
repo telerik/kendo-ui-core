@@ -8,22 +8,18 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class MapLayerFactory : IHideObjectMembers
     {
-        private readonly List<MapLayer> container;
-        private readonly ViewContext viewContext;
-        private readonly IUrlGenerator urlGenerator;
+        private readonly Map container;
 
-        public MapLayerFactory(List<MapLayer> container, ViewContext viewContext, IUrlGenerator urlGenerator)
+        public MapLayerFactory(Map container)
         {
             this.container = container;
-            this.viewContext = viewContext;
-            this.urlGenerator = urlGenerator;
         }
 
         public virtual MapLayerBuilder Add()
         {
-            var item = new MapLayer(viewContext, urlGenerator);
+            var item = new MapLayer(container);
 
-            container.Add(item);
+            container.Layers.Add(item);
 
             return new MapLayerBuilder(item);
         }

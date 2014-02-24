@@ -15,6 +15,15 @@ class MapMarker extends \Kendo\SerializableObject {
     }
 
     /**
+    * The marker title. Displayed as browser tooltip.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapMarker
+    */
+    public function title($value) {
+        return $this->setProperty('title', $value);
+    }
+
+    /**
     * Kendo UI Tooltip options for this marker.
     * @param \Kendo\Dataviz\UI\MapMarkerTooltip|array $value
     * @return \Kendo\Dataviz\UI\MapMarker
@@ -24,7 +33,7 @@ class MapMarker extends \Kendo\SerializableObject {
     }
 
     /**
-    * The marker shape. Supported shapes are "pin" and "circle".
+    * The marker shape. Supported shapes are "pin" and "pinTarget".
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapMarker
     */

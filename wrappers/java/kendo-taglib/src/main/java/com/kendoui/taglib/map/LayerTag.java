@@ -51,6 +51,10 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("style", value);
     }
 
+    public void setTooltip(com.kendoui.taglib.map.LayerTooltipTag value) {
+        setProperty("tooltip", value);
+    }
+
     public java.lang.String getAttribution() {
         return (java.lang.String)getProperty("attribution");
     }
@@ -87,6 +91,14 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("key", value);
     }
 
+    public java.lang.String getLocationField() {
+        return (java.lang.String)getProperty("locationField");
+    }
+
+    public void setLocationField(java.lang.String value) {
+        setProperty("locationField", value);
+    }
+
     public java.lang.String getOpacity() {
         return (java.lang.String)getProperty("opacity");
     }
@@ -95,12 +107,28 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("opacity", value);
     }
 
+    public java.lang.String getShape() {
+        return (java.lang.String)getProperty("shape");
+    }
+
+    public void setShape(java.lang.String value) {
+        setProperty("shape", value);
+    }
+
     public java.lang.Object getSubdomains() {
         return (java.lang.Object)getProperty("subdomains");
     }
 
     public void setSubdomains(java.lang.Object value) {
         setProperty("subdomains", value);
+    }
+
+    public java.lang.String getTitleField() {
+        return (java.lang.String)getProperty("titleField");
+    }
+
+    public void setTitleField(java.lang.String value) {
+        setProperty("titleField", value);
     }
 
     public java.lang.String getType() {

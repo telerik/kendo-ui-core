@@ -2,6 +2,7 @@
     var Class = kendo.Class,
 
         dataviz = kendo.dataviz,
+        deepExtend = kendo.deepExtend,
         g = dataviz.geometry,
         d = dataviz.drawing,
 
@@ -77,13 +78,13 @@
         test("renders no title by default", function() {
             marker = new Marker();
             marker.addTo(layer);
-            ok(!marker.element.attr("alt"));
+            ok(!marker.element.attr("title"));
         });
 
         test("renders title", function() {
             marker = new Marker({ title: "foo" });
             marker.addTo(layer);
-            equal(marker.element.attr("alt"), "foo");
+            equal(marker.element.attr("title"), "foo");
         });
 
         test("renders no z-index by default", function() {
@@ -123,19 +124,28 @@
             equal(wrapper.children().length, 0);
         });
 
-        test("setLocation sets location", function() {
-            marker.setLocation([50, 5]);
-            ok(new Location(50, 5).equals(marker.options.location));
+        test("updates location in options", function() {
+            marker.location([50, 5]);
+            deepEqual([50, 5], marker.options.location);
         });
 
-        test("setLocation calls update on layer", function() {
+        test("location sets and gets location", function() {
+            marker.location([50, 5]);
+            ok(new Location(50, 5).equals(marker.location()));
+        });
+
+        test("location setter is chainable", function() {
+            equal(marker.location([50, 5]), marker);
+        });
+
+        test("setting location calls update on layer", function() {
             layer.update = function(m) { deepEqual(m, marker); };
-            marker.setLocation([50, 5]);
+            marker.location([50, 5]);
         });
 
-        test("setLocation doesn't fail with no layer", 0, function() {
+        test("setting location doesn't fail with no layer", 0, function() {
             marker.layer = null;
-            marker.setLocation([50, 5]);
+            marker.location([50, 5]);
         });
 
         test("hide removes element", function() {
@@ -177,6 +187,12 @@
 
         test("creates tooltip if contentUrl is set", function() {
             marker = new Marker({ tooltip: { contentUrl: "foo" } });
+            marker.addTo(layer);
+            ok(marker.tooltip);
+        });
+
+        test("creates tooltip if title is set", function() {
+            marker = new Marker({ title: "foo" });
             marker.addTo(layer);
             ok(marker.tooltip);
         });
@@ -293,8 +309,8 @@
             equal(layer.items.length, 1);
         });
 
-        test("add sets markerDefaults", function() {
-            layer.options.markerDefaults = { foo: true };
+        test("add sets default options", function() {
+            layer.options.foo = true;
             layer.add({});
             ok(layer.items[0].options.foo);
         });
@@ -397,6 +413,90 @@
             };
 
             layer.destroy();
+        });
+
+        // ------------------------------------------------------------
+        function createBoundLayer(options) {
+            layer = new MarkerLayer(map, deepExtend({
+                dataSource: {
+                    data: [{
+                        latlng: [10, 10],
+                        text: "Foo"
+                    }, {
+                        latlng: [20, 20],
+                        text: "Foo"
+                    }]
+                }
+            }, options));
+
+            marker = layer.items[0];
+        }
+
+        module("Marker Layer / Data Binding", {
+            setup: function() {
+                map = new MapMock();
+                createBoundLayer();
+            },
+            teardown: function() {
+                map.destroy();
+                layer.destroy();
+            }
+        });
+
+        test("creates markers from data source", function() {
+            equal(layer.items.length, 2);
+        });
+
+        test("binds location", function() {
+            createBoundLayer({ locationField: "latlng" });
+            ok(new Location(10, 10).equals(marker.location()));
+        });
+
+        test("does not bind location if no field is specified", function() {
+            createBoundLayer({ });
+            equal(marker.location(), null);
+        });
+
+        test("binds title", function() {
+            createBoundLayer({ titleField: "text" });
+            equal(marker.options.title, "Foo");
+        });
+
+        test("does not bind title if no field is specified", function() {
+            createBoundLayer({ });
+            equal(marker.options.title, undefined);
+        });
+
+        test("sets marker shape", function() {
+            createBoundLayer({ shape: "foo" });
+            equal(marker.options.shape, "foo");
+        });
+
+        test("sets marker tooltip", function() {
+            createBoundLayer({ tooltip: { content: "foo" } });
+            equal(marker.options.tooltip.content, "foo");
+        });
+
+        test("does not apply map.markerDefaults", function() {
+            map.markerDefaults = { foo: true };
+            createBoundLayer();
+            ok(!marker.options.foo);
+        });
+
+        test("triggers markerCreated", 2, function() {
+            map.bind("markerCreated", function() {
+                ok(true);
+            });
+            createBoundLayer();
+        });
+
+        test("markerCreated can be cancelled", function() {
+            map.bind("markerCreated", function(e) {
+                e.preventDefault();
+            });
+            createBoundLayer();
+
+            equal(marker, null);
         });
     })();
 

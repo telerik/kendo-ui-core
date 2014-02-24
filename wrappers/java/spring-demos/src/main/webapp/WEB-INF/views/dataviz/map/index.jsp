@@ -12,7 +12,8 @@
     </kendo:map-layers>
     <kendo:map-markers>
         <kendo:map-marker location="<%= new double[] {30.2681, -97.7448} %>" shape="pinTarget">
-            <kendo:map-marker-tooltip content="Austin, TX">
+            <kendo:map-marker-tooltip>
+            	<kendo:map-marker-tooltip-content content="Austin, TX" />
             </kendo:map-marker-tooltip>
         </kendo:map-marker>
     </kendo:map-markers>

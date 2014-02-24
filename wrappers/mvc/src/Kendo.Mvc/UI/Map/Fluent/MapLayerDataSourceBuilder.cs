@@ -6,26 +6,23 @@ using System.Web.Mvc;
 
 namespace Kendo.Mvc.UI.Fluent
 {
-    public class MapLayerDataSourceBuilder : IHideObjectMembers
+    public class MapLayerDataSourceBuilder : ReadOnlyAjaxDataSourceBuilder<object>
     {
-        private readonly DataSource dataSource;
-        private readonly IUrlGenerator urlGenerator;
-        private readonly ViewContext viewContext;
-
         public MapLayerDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
+            : base(dataSource, viewContext, urlGenerator)
         {
-            this.viewContext = viewContext;
-            this.urlGenerator = urlGenerator;
-            this.dataSource = dataSource;
-
             dataSource.Schema.Data = "";
             dataSource.Schema.Total = "";
             dataSource.Schema.Errors = "";
+
+            dataSource.Type = DataSourceType.Ajax;
+            dataSource.Transport.Read.ActionName = "POST";
         }
 
         public GeoJsonDataSourceBuilder GeoJson()
         {
             dataSource.Type = DataSourceType.GeoJson;
+            dataSource.Transport.Read.ActionName = "";
             return new GeoJsonDataSourceBuilder(dataSource, viewContext, urlGenerator);
         }
     }

@@ -800,7 +800,6 @@
     ],
     "geoviz": [{
             "text": "Map",
-            "beta": "true",
             "name": "map",
             "documentation": "dataviz/map",
             "spriteCssClass": "mapIcon",
@@ -817,6 +816,12 @@
                 "url": "map/geojson.html",
                 "title": "Displaying GeoJSON shapes Kendo UI map layer",
                 "meta": "This demo illustrates how to bind a Kendo UI map layer to GeoJSON shapes.",
+                "requiresServer": "true"
+            }, {
+                "text": "Binding markers to remote data",
+                "url": "map/remote-markers.html",
+                "title": "Load map markers in a Kendo UI map layer",
+                "meta": "This demo illustrates how to bind a Kendo UI marker layer.",
                 "requiresServer": "true"
             }, {
                 "text": "Events",

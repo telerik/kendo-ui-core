@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
 
     public class MapLayerDefaultsSettings : JsonObject
     {
-        public MapLayerDefaultsSettings()
+        public MapLayerDefaultsSettings(Map map)
         {
             //>> Initialization
         
@@ -20,12 +20,18 @@ namespace Kendo.Mvc.UI
                 
         //<< Initialization
 
-            
+            Marker = new MapLayerDefaultsMarkerSettings(map);
         }
 
         
 
         //>> Fields
+        
+        public MapLayerDefaultsMarkerSettings Marker
+        {
+            get;
+            set;
+        }
         
         public MapLayerDefaultsShapeSettings Shape
         {
@@ -51,6 +57,12 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            var marker = Marker.ToJson();
+            if (marker.Any())
+            {
+                json["marker"] = marker;
+            }
+                
             var shape = Shape.ToJson();
             if (shape.Any())
             {

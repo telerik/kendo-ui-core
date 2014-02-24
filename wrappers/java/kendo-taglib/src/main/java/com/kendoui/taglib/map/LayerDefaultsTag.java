@@ -57,6 +57,10 @@ public class LayerDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces *
         setProperty("bing", value);
     }
 
+    public void setMarker(com.kendoui.taglib.map.LayerDefaultsMarkerTag value) {
+        setProperty("marker", value);
+    }
+
     public void setShape(com.kendoui.taglib.map.LayerDefaultsShapeTag value) {
         setProperty("shape", value);
     }

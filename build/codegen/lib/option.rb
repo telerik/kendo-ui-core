@@ -1,7 +1,7 @@
 module CodeGen
 
     class Option
-        attr_reader :name, :description, :type, :owner, :default, :values
+        attr_reader :name, :description, :type, :owner, :default, :values, :enum_type
 
         def initialize(options)
             @name = options[:name]
@@ -12,6 +12,7 @@ module CodeGen
             @default = options[:default]
             @content = options[:content]
             @values = options[:values]
+            @enum_type = options[:enum_type]
         end
 
         def content?

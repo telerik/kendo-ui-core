@@ -16,7 +16,8 @@ module CodeGen::MVC::Wrappers
     }
 
     FIELD_TYPES = {
-        'map.layers.extent' => 'double[]'
+        'map.layers.extent' => 'double[]',
+        'map.markers.location' => 'double[]'
     }
 
     SERIALIZATION_SKIP_LIST = [
@@ -24,8 +25,12 @@ module CodeGen::MVC::Wrappers
         'map.controls.attribution',
         'map.controls.navigator',
         'map.controls.zoom',
+        'map.layerDefaults.marker.shape',
         'map.layers.datasource',
+        'map.layers.shape',
         'map.markers.position',
+		'map.markers.shape',
+		'map.markerdefaults.shape',
         'actionsheet.items.text',
         'buttongroup.items.text',
         'tabstrip.items.text',
@@ -34,7 +39,15 @@ module CodeGen::MVC::Wrappers
     ]
 
     FLUENT_SKIP_LIST = [
-        'map.layers'
+        'map.layers',
+		'map.markers',
+		'map.markerdefaults'
+    ]
+
+    INITIALIZATION_SKIP_LIST = [
+		'map.markerdefaults',
+		'map.layerdefaults',
+		'map.layerdefaults.marker'
     ]
 
     IGNORED = [
@@ -44,9 +57,11 @@ module CodeGen::MVC::Wrappers
         'map.controls.zoom.position',
         'map.layers.datasource',
         'map.layerdefaults.tile.subdomains',
+        'map.layerdefaults.marker.tooltip',
         'map.layers.subdomains',
-        'map.markerdefaults',
-        'map.markers',
+        'map.layers.tooltip',
+        'map.markerdefaults.tooltip',
+        'map.markers.tooltip',
         'popover.popup.direction',
         'layout.id',
         'view.model',
@@ -91,7 +106,10 @@ module CodeGen::MVC::Wrappers
         })
 
         COMPOSITE_FIELD_INITIALIZATION = ERB.new(%{//>> Initialization
-        <%= composite_options.map { |option| option.to_initialization }.join %>
+        <%= composite_options.map { |option|
+			next if INITIALIZATION_SKIP_LIST.include?(option.full_name)
+			option.to_initialization
+		}.join %>
         //<< Initialization})
 
         COMPONENT_FLUENT_FIELDS = ERB.new(%{//>> Fields
@@ -202,7 +220,9 @@ module CodeGen::MVC::Wrappers
         include Options
 
         def csharp_type
-            if values
+            if enum_type
+                enum_type
+            elsif values
                 "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
             else
                 FIELD_TYPES[full_name] || TYPES[type[0]]
@@ -478,7 +498,7 @@ module CodeGen::MVC::Wrappers
             options = component.enum_options
 
             options.each do |option|
-                filename = "#{@path}/#{component.path}/#{component.csharp_class}#{option.csharp_name}.cs"
+                filename = "#{@path}/#{component.path}/#{option.enum_type || component.csharp_class + option.csharp_name }.cs"
 
                 write_file(filename, component.to_enum(filename, option))
             end

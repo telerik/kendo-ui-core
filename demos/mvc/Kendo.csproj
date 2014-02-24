@@ -608,6 +608,7 @@
     <None Include="content\dataviz\js\job-stats.json" />
     <None Include="content\dataviz\js\crime-stats.json" />
     <None Include="content\dataviz\js\screen_resolution.json" />
+    <None Include="content\dataviz\map\store-locations.json" />
     <None Include="content\web\datasource\internet-users.json" />
     <None Include="content\web\datasource\top250movies.json" />
     <Content Include="Views\mobile\button\appearance.cshtml" />
@@ -833,6 +834,8 @@
     <Content Include="Views\Shared\Products.cshtml" />
     <Content Include="Views\Shared\Telerik-Navigation.cshtml" />
     <Content Include="Views\dataviz\map\bing.cshtml" />
+    <Content Include="Views\dataviz\map\api.cshtml" />
+    <Content Include="Views\dataviz\map\remote-markers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

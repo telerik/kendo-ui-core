@@ -91,6 +91,30 @@ using System.Web.Mvc;
         }
         
         /// <summary>
+        /// The data item field which contains the marker location.
+		/// The field should be an array with two numbers - latitude and longitude.Requires the dataSource option to be set.
+        /// </summary>
+        /// <param name="value">The value that configures the locationfield.</param>
+        public MapLayerBuilder LocationField(string value)
+        {
+            container.LocationField = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The data item field which contains the marker title.
+		/// Requires the dataSource option to be set.
+        /// </summary>
+        /// <param name="value">The value that configures the titlefield.</param>
+        public MapLayerBuilder TitleField(string value)
+        {
+            container.TitleField = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The the opacity for the layer.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
@@ -133,7 +157,39 @@ using System.Web.Mvc;
             return this;
         }
         
+        /// <summary>
+        /// The marker shape. Supported shapes are "pin" and "pinTarget".
+        /// </summary>
+        /// <param name="value">The value that configures the shape.</param>
+        public MapLayerBuilder Shape(MapMarkersShape value)
+        {
+            container.Shape = value;
+
+            return this;
+        }
+        
         //<< Fields
+
+        /// <summary>
+        /// The marker shape name. The "pin" and "pinTarget" shapes are predefined.
+        /// </summary>
+        /// <param name="value">The name of the shape.</param>
+        public MapLayerBuilder Shape(string name)
+        {
+            container.ShapeName = name;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The tooltip options for this marker.
+        /// </summary>
+        /// <param name="configurator">The action that configures the tooltip.</param>
+        public MapLayerBuilder Tooltip(Action<MapMarkerTooltipBuilder> configurator)
+        {
+            configurator(new MapMarkerTooltipBuilder(container.Tooltip));
+            return this;
+        }
     }
 }
 

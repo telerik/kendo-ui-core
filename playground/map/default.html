@@ -6,13 +6,6 @@
         <link rel="stylesheet/less" type="text/css" href="../../styles/web/kendo.default.less" />
         <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz.less" />
         <link rel="stylesheet/less" type="text/css" href="../../styles/dataviz/kendo.dataviz.default.less" />
-        <style>
-            .zip-label {
-                position: absolute;
-                font: 14px sans-serif;
-            }
-        </style>
-
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="proj4.js"></script>
         <script src="../require.js"></script>
@@ -29,23 +22,41 @@
     <div id="map"></div>
     <script>
     require([ "jquery.min", "kendo.dataviz.map" ], function(){
+        var markersDS = new kendo.data.DataSource({
+            data: [{
+                location: [30.268107, -97.744821],
+                text: "Austin, TX"
+            }]
+        });
+
         $("#map").kendoMap({
             center: [30.268107, -97.744821],
             zoom: 3,
             layers: [{
                 type: "tile",
                 urlTemplate: "http://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
-                subdomains: ["a", "b", "c"],
-                attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>." +
-                             "Tiles courtesy of <a href='http://www.opencyclemap.org/'>Andy Allan</a>"
-            }],
-            markers: [{
-                location: [30.268107, -97.744821],
+                subdomains: ["a", "b", "c"]
+            }, {
+                type: "marker",
+                dataSource: markersDS,
+                locationField: "location",
+                titleField: "text",
+
                 shape: "pinTarget",
                 tooltip: {
-                    content: "Austin, TX"
+                    // TODO: Evaluate with marker as this?
+                    // TODO: What about location then?
+                    template: "#= marker.options.title #"
                 }
-            }]
+
+                // TODO: Don't load markers outside map extent
+            }],
+            markerCreated: function(e) {
+                console.log(e)
+            },
+            markerDefaults: {
+                // TODO: Don't apply markerDefaults to layers!
+            }
         });
     });
     </script>

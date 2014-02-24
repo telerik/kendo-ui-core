@@ -40,6 +40,8 @@ module CodeGen
 
             values = settings[:values]
 
+            enum_type = settings[:enum_type]
+
             remove_existing = settings[:remove_existing] || false
 
             return unless types
@@ -67,6 +69,7 @@ module CodeGen
                       :default => default,
                       :prefix => parent.name + '.',
                       :values => values,
+                      :enum_type => enum_type,
                       :description => description,
                       :remove_existing => remove_existing
                     )
@@ -84,6 +87,7 @@ module CodeGen
                                                :type => type,
                                                :default => default,
                                                :values => values,
+                                               :enum_type => enum_type,
                                                :description => description)
             end
 

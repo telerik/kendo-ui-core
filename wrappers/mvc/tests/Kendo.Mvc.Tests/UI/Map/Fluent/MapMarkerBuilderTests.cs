@@ -1,4 +1,4 @@
-namespace Kendo.Mvc.UI.Tests.Map
+namespace Kendo.Mvc.UI.Tests.Map.Fluent
 {
     using System.Collections.Generic;
     using Xunit;
@@ -39,6 +39,19 @@ namespace Kendo.Mvc.UI.Tests.Map
         public void Setting_marker_shape_name_returns_builder()
         {
             builder.Shape("Foo").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Sets_marker_tooltip()
+        {
+            builder.Tooltip(tooltip => tooltip.Content("foo"));
+            marker.Tooltip.Content.ShouldEqual("foo");
+        }
+
+        [Fact]
+        public void Setting_marker_tooltip_returns_builder()
+        {
+            builder.Tooltip(tooltip => tooltip.Content("foo")).ShouldBeSameAs(builder);
         }
     }
 }

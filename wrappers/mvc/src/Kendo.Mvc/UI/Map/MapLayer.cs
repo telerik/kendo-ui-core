@@ -9,16 +9,18 @@ namespace Kendo.Mvc.UI
 
     public class MapLayer : JsonObject
     {
-        public MapLayer(ViewContext viewContext, IUrlGenerator urlGenerator)
+        public MapLayer(Map map)
         {
             DataSource = new DataSource();
-            ViewContext = viewContext;
-            UrlGenerator = urlGenerator;
+            ViewContext = map.ViewContext;
+            UrlGenerator = map.UrlGenerator;
             //>> Initialization
         
             Style = new MapLayerStyleSettings();
                 
         //<< Initialization
+
+            Tooltip = new MapMarkerTooltip(map.ViewContext, map.Initializer, map.ViewData);
         }
 
         public ViewContext ViewContext
@@ -47,6 +49,10 @@ namespace Kendo.Mvc.UI
         
         public string Key { get; set; }
         
+        public string LocationField { get; set; }
+        
+        public string TitleField { get; set; }
+        
         public string Opacity { get; set; }
         
         public MapLayerStyleSettings Style
@@ -59,7 +65,13 @@ namespace Kendo.Mvc.UI
         
         public MapLayerType? Type { get; set; }
         
+        public MapMarkersShape? Shape { get; set; }
+        
         //<< Fields
+
+        public string ShapeName { get; set; }
+
+        public MapMarkerTooltip Tooltip { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -97,6 +109,16 @@ namespace Kendo.Mvc.UI
                 json["key"] = Key;
             }
             
+            if (LocationField.HasValue())
+            {
+                json["locationField"] = LocationField;
+            }
+            
+            if (TitleField.HasValue())
+            {
+                json["titleField"] = TitleField;
+            }
+            
             if (Opacity.HasValue())
             {
                 json["opacity"] = Opacity;
@@ -119,6 +141,22 @@ namespace Kendo.Mvc.UI
             }
                 
         //<< Serialization
+
+            var tooltip = Tooltip.ToJson();
+            if (tooltip.Any())
+            {
+                json["tooltip"] = tooltip;
+            }
+
+            if (ShapeName.HasValue())
+            {
+                json["shape"] = ShapeName;
+            }
+            else if (Shape.HasValue)
+            {
+                var shapeName = Shape.ToString();
+                json["shape"] = shapeName.ToLowerInvariant()[0] + shapeName.Substring(1);
+            }
         }
     }
 }

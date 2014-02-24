@@ -347,4 +347,59 @@
         createMap({ zoom: 1, zoomable: false });
         ok(!map.scroller.userEvents.multiTouch);
     });
+
+    // ------------------------------------------------------------
+    module("Map / Markers", {
+        teardown: destroyMap
+    });
+
+    test("creates static markers", function() {
+        createMap({ markers: [{ }] });
+        equal(map.markers.items.length, 1);
+    });
+
+    test("applies markerDefaults for static markers", function() {
+        createMap({ markers: [{ }], markerDefaults: { foo: true } });
+        ok(map.markers.items[0].options.foo);
+    });
+
+    test("does not trigger markerCreated for static markers", 0, function() {
+        createMap({ markers: [{ }], markerCreated: function() { ok(false); } });
+    });
+
+    // ------------------------------------------------------------
+    module("Map / Markers", {
+        setup: function() {
+            createMap({
+                markers: [{}],
+                layers: [{ type: "shape" }]
+            });
+        },
+        teardown: destroyMap
+    });
+
+    test("destroys static marker layer", function() {
+        map.markers.destroy = function() { ok(true); };
+        map.destroy();
+    });
+
+    test("destroys layers", function() {
+        map.layers[0].destroy = function() { ok(true); };
+        map.destroy();
+    });
+
+    test("destroys navigator", function() {
+        map.navigator.destroy = function() { ok(true); };
+        map.destroy();
+    });
+
+    test("destroys attribution", function() {
+        map.attribution.destroy = function() { ok(true); };
+        map.destroy();
+    });
+
+    test("destroys zoomControl", function() {
+        map.zoomControl.destroy = function() { ok(true); };
+        map.destroy();
+    });
 })();

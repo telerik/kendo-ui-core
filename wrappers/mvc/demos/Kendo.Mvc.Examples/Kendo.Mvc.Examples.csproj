@@ -211,6 +211,7 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
     <Compile Include="Controllers\DataViz\Map\BingController.cs" />
     <Compile Include="Controllers\DataViz\Map\ApiController.cs" />
+    <Compile Include="Controllers\DataViz\Map\Remote_MarkersController.cs" />
     <Compile Include="Controllers\DataViz\Map\EventsController.cs" />
     <Compile Include="Controllers\DataViz\Map\GeojsonController.cs" />
     <Compile Include="Controllers\DataViz\Map\IndexController.cs" />
@@ -592,6 +593,8 @@
     <Compile Include="Models\Chart\WindDataItem.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
+    <Compile Include="Models\Map\Marker.cs" />
+    <Compile Include="Models\Map\MapDataRepository.cs" />
     <Compile Include="Models\MeetingAttendee.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
@@ -752,6 +755,7 @@
     <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\step_line.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\map\api.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\map\remote_markers.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\pie_labels.aspx" />
@@ -3038,6 +3042,9 @@
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_stacked100_bar.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\frozen_columns.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\map\remote_markers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\sortable\integration_grid.cshtml" />

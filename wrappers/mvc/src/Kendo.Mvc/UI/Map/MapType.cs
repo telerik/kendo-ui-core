@@ -7,7 +7,9 @@ namespace Kendo.Mvc.UI
         
         Tile ,
         
-        Shape 
+        Shape ,
+        
+        Marker 
         
     }
 }
