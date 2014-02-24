@@ -1356,21 +1356,23 @@ kendo_module({
                 model,
                 mode;
 
+            if (mode !== "incell") {
+                that.cancelRow();
+            }
+
             row = $(row).hide();
             model = that._modelForContainer(row);
 
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
                 mode = that._editMode();
 
-                if (mode !== "incell") {
-                    that.cancelRow();
-                }
-
-                that.dataSource.remove(model);
+                                that.dataSource.remove(model);
 
                 if (mode === "inline" || mode === "popup") {
                     that.dataSource.sync();
                 }
+            } else if (mode === "incell") {
+                that._destroyEditable();
             }
         },
 

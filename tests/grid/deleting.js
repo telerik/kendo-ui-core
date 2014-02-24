@@ -123,6 +123,24 @@
             ok(args.model instanceof Model);
         });
 
+        test("canceling the remove event destroyes the editable", function() {
+            var args,
+                grid = setup({
+                    editable: "incell",
+                    remove: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+            var destroyEditable = stub(grid, {
+                "_destroyEditable": grid._destroyEditable
+            });
+
+            grid.removeRow(table.find("tbody>tr:first"));
+
+            equal(destroyEditable.calls("_destroyEditable"), 1);
+        });
+
         test("removeRow does not show confirmation message if editing is false", function() {
             var grid = setup({ editable: { confirmation: undefined } });
                 method = stub(grid, "_showMessage");
