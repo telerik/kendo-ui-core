@@ -1095,10 +1095,10 @@ var __meta__ = {
                 if (!group.daySlotCollectionCount()) {
                     selection.isAllDay = false;
                 }
+            }
 
-                if (!this.groups[selection.groupIndex]) {
-                    selection.groupIndex = 0;
-                }
+            if (!this.groups[selection.groupIndex]) {
+                selection.groupIndex = 0;
             }
         },
 
