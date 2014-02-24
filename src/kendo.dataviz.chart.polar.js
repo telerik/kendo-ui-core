@@ -31,6 +31,7 @@ var __meta__ = {
         DonutSegment = dataviz.DonutSegment,
         LineChart = dataviz.LineChart,
         LineSegment = dataviz.LineSegment,
+        LogarithmicAxis = dataviz.LogarithmicAxis,
         NumericAxis = dataviz.NumericAxis,
         PlotAreaBase = dataviz.PlotAreaBase,
         PlotAreaFactory = dataviz.PlotAreaFactory,
@@ -53,6 +54,7 @@ var __meta__ = {
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_PADDING = 0.15,
         DEG_TO_RAD = math.PI / 180,
+        LOGARITHMIC = "log",
         PLOT_AREA_CLICK = "plotAreaClick",
         POLAR_AREA = "polarArea",
         POLAR_LINE = "polarLine",
@@ -342,7 +344,7 @@ var __meta__ = {
     });
     deepExtend(RadarCategoryAxis.fn, GridLinesMixin);
 
-    var RadarNumericAxis = NumericAxis.extend({
+    var RadarNumericAxisMixin = {
         options: {
             majorGridLines: {
                 visible: true
@@ -407,22 +409,20 @@ var __meta__ = {
         renderGridLines: function(view, altAxis) {
             var axis = this,
                 options = axis.options,
-                majorTicks = axis.getTickPositions(options.majorUnit),
+                majorTicks = axis.radarMajorGridLinePositions(),
                 majorAngles = altAxis.majorAngles(),
                 minorTicks,
-                minorSkipStep = 0,
                 center = altAxis.box.center(),
                 gridLines = [];
 
             if (options.majorGridLines.visible) {
-                minorSkipStep = options.majorUnit;
                 gridLines = axis.gridLineElements(
                     view, center, majorTicks, majorAngles, options.majorGridLines
                 );
             }
 
             if (options.minorGridLines.visible) {
-                minorTicks = axis.getTickPositions(options.minorUnit, minorSkipStep);
+                minorTicks = axis.radarMinorGridLinePositions();
                 append(gridLines, axis.gridLineElements(
                     view, center, minorTicks, majorAngles, options.minorGridLines
                 ));
@@ -501,11 +501,63 @@ var __meta__ = {
                 distance = r * (math.sin(beta * DEG_TO_RAD) / math.sin(gamma * DEG_TO_RAD));
             }
 
-            return NumericAxis.fn.getValue.call(
+            return axis.axisType().fn.getValue.call(
                 axis, new Point2D(lineBox.x1, lineBox.y2 - distance)
             );
         }
+    };
+
+    var RadarNumericAxis = NumericAxis.extend({
+        radarMajorGridLinePositions: function() {
+            return this.getTickPositions(this.options.majorUnit);
+        },
+
+        radarMinorGridLinePositions: function() {
+            var axis = this,
+                options = axis.options,
+                minorSkipStep = 0;
+            if (options.majorGridLines.visible) {
+                minorSkipStep = options.majorUnit;
+            }
+            return axis.getTickPositions(options.minorUnit, minorSkipStep);
+        },
+
+        axisType: function() {
+            return NumericAxis;
+        }
     });
+
+    deepExtend(RadarNumericAxis.fn, RadarNumericAxisMixin);
+
+    var RadarLogarithmicAxis = LogarithmicAxis.extend({
+        radarMajorGridLinePositions: function() {
+            var axis = this,
+                positions = [];
+
+            axis.traverseMajorTicksPositions(function(position) {
+                positions.push(position);
+            }, axis.options.majorGridLines);
+
+            return positions;
+        },
+
+        radarMinorGridLinePositions: function() {
+            var axis = this,
+                positions = [];
+
+            axis.traverseMinorTicksPositions(function(position) {
+                positions.push(position);
+            }, axis.options.minorGridLines);
+
+            return positions;
+        },
+
+        axisType: function() {
+            return LogarithmicAxis;
+        }
+    });
+
+    deepExtend(RadarLogarithmicAxis.fn, RadarNumericAxisMixin);
 
     var PolarAxis = Axis.extend({
         init: function(options) {
@@ -904,7 +956,7 @@ var __meta__ = {
                 center = polarAxis.box.center();
             return [center];
         },
-        points: function(){
+        points: function() {
             var segment = this,
                 chart = segment.parent,
                 plotArea = chart.plotArea,
@@ -967,18 +1019,29 @@ var __meta__ = {
                 tracker = plotArea.valueAxisRangeTracker,
                 defaultRange = tracker.query(),
                 range,
-                valueAxis;
+                valueAxis,
+                axisOptions = plotArea.valueAxisOptions({ roundToMajorUnit: false }),
+                axisType,
+                axisDefaultRange;
 
-            range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
+            if (axisOptions.type === LOGARITHMIC) {
+                axisType = RadarLogarithmicAxis;
+                axisDefaultRange = {min: 0.1, max: 1};
+            } else {
+                axisType = RadarNumericAxis;
+                axisDefaultRange = {min: 0, max: 1};
+            }
+
+            range = tracker.query(name) || defaultRange || axisDefaultRange;
 
             if (range && defaultRange) {
                 range.min = math.min(range.min, defaultRange.min);
                 range.max = math.max(range.max, defaultRange.max);
             }
 
-            valueAxis = new RadarNumericAxis(
+            valueAxis = new axisType(
                 range.min, range.max,
-                plotArea.valueAxisOptions({ roundToMajorUnit: false })
+                axisOptions
             );
 
             plotArea.valueAxis = valueAxis;

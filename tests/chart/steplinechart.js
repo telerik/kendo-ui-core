@@ -31,7 +31,10 @@
 
             this.valueAxis = {
                 getSlot: getValueSlot,
-                options: {}
+                options: {},
+                startValue: function() {
+                    return 0;
+                }
             };
 
             this.namedCategoryAxes = {};

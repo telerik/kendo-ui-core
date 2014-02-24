@@ -1091,6 +1091,53 @@ var __meta__ = {
         }
     });
 
+    function createAxisTick(view, options, tickOptions) {
+        var tickX = options.tickX,
+            tickY = options.tickY,
+            position = options.position,
+            start, end;
+
+        if (options.vertical) {
+            start = Point2D(tickX, position);
+            end = Point2D(tickX + tickOptions.size, position);
+        } else {
+            start = Point2D(position, tickY);
+            end = Point2D(position, tickY + tickOptions.size);
+        }
+
+        return view.createLine(
+            start.x, start.y,
+            end.x, end.y, {
+                strokeWidth: tickOptions.width,
+                stroke: tickOptions.color,
+                align: options._alignLines
+            });
+    }
+
+    function createAxisGridLine(view, options, gridLine) {
+        var lineStart = options.lineStart,
+            lineEnd = options.lineEnd,
+            position = options.position,
+            start, end;
+
+        if (options.vertical) {
+            start = Point2D(lineStart, position);
+            end = Point2D(lineEnd, position);
+        } else {
+            start = Point2D(position, lineStart);
+            end = Point2D(position, lineEnd);
+        }
+        return view.createLine(
+            start.x, start.y,
+            end.x, end.y, {
+                data: { modelId: options.modelId },
+                strokeWidth: gridLine.width,
+                stroke: gridLine.color,
+                dashType: gridLine.dashType,
+                zIndex: -1
+            });
+    }
+
     var Axis = ChartElement.extend({
         init: function(options) {
             var axis = this;
@@ -1321,7 +1368,10 @@ var __meta__ = {
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
                 majorUnit = options.majorTicks.visible ? options.majorUnit : 0,
-                tickX, tickY, pos,
+                tickLineOptions= {
+                    _alignLines: options._alignLines,
+                    vertical: options.vertical
+                },
                 start, end;
 
             function render(tickPositions, tickOptions) {
@@ -1333,25 +1383,11 @@ var __meta__ = {
                             continue;
                         }
 
-                        tickX = mirror ? lineBox.x2 : lineBox.x2 - tickOptions.size;
-                        tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
-                        pos = tickPositions[i];
+                        tickLineOptions.tickX = mirror ? lineBox.x2 : lineBox.x2 - tickOptions.size;
+                        tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
+                        tickLineOptions.position = tickPositions[i];
 
-                        if (options.vertical) {
-                            start = Point2D(tickX, pos);
-                            end = Point2D(tickX + tickOptions.size, pos);
-                        } else {
-                            start = Point2D(pos, tickY);
-                            end = Point2D(pos, tickY + tickOptions.size);
-                        }
-
-                        ticks.push(view.createLine(
-                            start.x, start.y,
-                            end.x, end.y, {
-                                strokeWidth: tickOptions.width,
-                                stroke: tickOptions.color,
-                                align: options._alignLines
-                            }));
+                        ticks.push(createAxisTick(view, tickLineOptions, tickOptions));
                     }
                 }
             }
@@ -1471,16 +1507,19 @@ var __meta__ = {
             var axis = this,
                 items = [],
                 options = axis.options,
-                modelId = axis.plotArea.modelId,
                 axisLineVisible = altAxis.options.line.visible,
                 majorGridLines = options.majorGridLines,
                 majorUnit = majorGridLines.visible ? options.majorUnit : 0,
                 vertical = options.vertical,
                 lineBox = altAxis.lineBox(),
-                lineStart = lineBox[vertical ? "x1" : "y1"],
-                lineEnd = lineBox[vertical ? "x2" : "y2"],
                 linePos = lineBox[vertical ? "y1" : "x1"],
-                pos, majorTicks = [], start, end;
+                lineOptions = {
+                    lineStart: lineBox[vertical ? "x1" : "y1"],
+                    lineEnd: lineBox[vertical ? "x2" : "y2"],
+                    vertical: vertical,
+                    modelId: axis.plotArea.modelId
+                },
+                pos, majorTicks = [];
 
             function render(tickPositions, gridLine) {
                 var count = tickPositions.length,
@@ -1491,27 +1530,10 @@ var __meta__ = {
                         pos = round(tickPositions[i]);
                         if (!inArray(pos, majorTicks)) {
                             if (i % gridLine.skipUnit !== 0 && (!axisLineVisible || linePos !== pos)) {
-                                if (options.vertical) {
-                                    start = Point2D(lineStart, pos);
-                                    end = Point2D(lineEnd, pos);
-                                } else {
-                                    start = Point2D(pos, lineStart);
-                                    end = Point2D(pos, lineEnd);
-                                }
+                                lineOptions.position = pos;
+                                items.push(createAxisGridLine(view, lineOptions, gridLine));
 
-                                if (start && end) {
-                                    items.push(view.createLine(
-                                        start.x, start.y,
-                                        end.x, end.y, {
-                                            data: { modelId: modelId },
-                                            strokeWidth: gridLine.width,
-                                            stroke: gridLine.color,
-                                            dashType: gridLine.dashType,
-                                            zIndex: -1
-                                        }));
-
-                                    majorTicks.push(pos);
-                                }
+                                majorTicks.push(pos);
                             }
                         }
                     }
@@ -2096,6 +2118,10 @@ var __meta__ = {
             Axis.fn.init.call(axis, defaultOptions);
         },
 
+        startValue: function() {
+            return 0;
+        },
+
         options: {
             type: "numeric",
             min: 0,
@@ -2386,6 +2412,382 @@ var __meta__ = {
         shouldRenderNote: function(value) {
             var range = this.range();
             return range.min <= value && value <= range.max;
+        }
+    });
+
+    LogarithmicAxis = Axis.extend({
+        init: function(seriesMin, seriesMax, options) {
+            this.options = this._initOptions(seriesMin, seriesMax, options);
+            Axis.fn.init.call(this, options);
+        },
+
+        startValue: function() {
+            return this.options.min;
+        },
+
+        options: {
+            type: "log",
+            majorUnit: 10,
+            minorUnit: 1,
+            axisCrossingValue: 1,
+            vertical: true,
+            majorGridLines: {
+                visible: true,
+                width: 1,
+                color: BLACK
+            },
+            zIndex: 1
+        },
+
+        getSlot: function(a, b, limit) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                dir = reverse ? -1 : 1,
+                base = options.majorUnit,
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                step = dir * (lineSize / (logMax - logMin)),
+                p1, p2,
+                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
+
+            if (!defined(a)) {
+                a = b || 0;
+            }
+
+            if (!defined(b)) {
+                b = a || 0;
+            }
+
+            if(a <= 0 || b <= 0) {
+                return;
+            }
+
+            if (limit) {
+                a = math.max(math.min(a, options.max), options.min);
+                b = math.max(math.min(b, options.max), options.min);
+            }
+
+            a = log(a, base);
+            b = log(b, base);
+
+            if (vertical) {
+                p1 = logMax - math.max(a, b);
+                p2 = logMax - math.min(a, b);
+            } else {
+                p1 = math.min(a, b) - logMin;
+                p2 = math.max(a, b) - logMin;
+            }
+
+            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
+            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
+
+            return slotBox;
+        },
+
+        getValue: function(point) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                lineBox = axis.lineBox(),
+                base = options.majorUnit,
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                dir = vertical === reverse ? 1 : -1,
+                startEdge = dir === 1 ? 1 : 2,
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                step = ((logMax - logMin) / lineSize),
+                valueAxis = vertical ? Y : X,
+                lineStart = lineBox[valueAxis + startEdge],
+                offset = dir * (point[valueAxis] - lineStart),
+                valueOffset = offset * step,
+                value;
+
+            if (offset < 0 || offset > lineSize) {
+                return null;
+            }
+
+            value = logMin + valueOffset;
+
+            return round(math.pow(base, value), DEFAULT_PRECISION);
+        },
+
+        range: function() {
+            var options = this.options;
+            return { min: options.min, max: options.max };
+        },
+
+        scaleRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                base = options.majorUnit,
+                offset = -delta;
+
+            return {
+                min: math.pow(base, axis.logMin - offset),
+                max: math.pow(base, axis.logMax + offset)
+            };
+        },
+
+        translateRange: function(delta) {
+            var axis = this,
+                options = axis.options,
+                base = options.majorUnit,
+                lineBox = axis.lineBox(),
+                vertical = options.vertical,
+                reverse = options.reverse,
+                size = vertical ? lineBox.height() : lineBox.width(),
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                scale = size / (axis.logMax - axis.logMin),
+                offset = round(delta / scale, DEFAULT_PRECISION);
+
+            if ((vertical || reverse) && !(vertical && reverse )) {
+                offset = -offset;
+            }
+
+            return {
+                min: math.pow(base, axis.logMin + offset),
+                max: math.pow(base, axis.logMax + offset)
+            };
+        },
+
+        labelsCount: function() {
+            var axis = this,
+                floorMax = math.floor(axis.logMax),
+                count = math.floor(floorMax - axis.logMin) + 1;
+
+            return count;
+        },
+
+        getMajorTickPositions: function() {
+            var axis = this,
+                ticks = [];
+
+            axis.traverseMajorTicksPositions(function(position) {
+                ticks.push(position);
+            }, {step: 1, skip: 0});
+            return ticks;
+        },
+
+        renderTicks: function(view) {
+            var axis = this,
+                ticks = [],
+                options = axis.options,
+                lineBox = axis.lineBox(),
+                mirror = options.labels.mirror,
+                majorTicks = options.majorTicks,
+                minorTicks = options.minorTicks,
+                tickLineOptions= {
+                    _alignLines: options._alignLines,
+                    vertical: options.vertical
+                },
+                start, end;
+
+            function render(tickPosition, tickOptions) {
+                tickLineOptions.tickX = mirror ? lineBox.x2 : lineBox.x2 - tickOptions.size;
+                tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
+                tickLineOptions.position = tickPosition;
+
+                ticks.push(createAxisTick(view, tickLineOptions, tickOptions));
+            }
+
+            if (majorTicks.visible) {
+                axis.traverseMajorTicksPositions(render, majorTicks);
+            }
+
+            if (minorTicks.visible) {
+                axis.traverseMinorTicksPositions(render, minorTicks);
+            }
+
+            return ticks;
+        },
+
+        renderGridLines: function(view, altAxis) {
+            var axis = this,
+                items = [],
+                options = axis.options,
+                axisLineVisible = altAxis.options.line.visible,//check
+                majorGridLines = options.majorGridLines,
+                minorGridLines = options.minorGridLines,
+                vertical = options.vertical,
+                lineBox = altAxis.lineBox(),
+                lineOptions = {
+                    lineStart: lineBox[vertical ? "x1" : "y1"],
+                    lineEnd: lineBox[vertical ? "x2" : "y2"],
+                    vertical: vertical,
+                    modelId: axis.plotArea.modelId
+                },
+                pos, majorTicks = [];
+
+            function render(tickPosition, gridLine) {
+                if (!inArray(tickPosition, majorTicks)) {
+                    lineOptions.position = tickPosition;
+                    items.push(createAxisGridLine(view, lineOptions, gridLine));
+
+                    majorTicks.push(tickPosition);
+                }
+            }
+
+            if (majorGridLines.visible) {
+                axis.traverseMajorTicksPositions(render, majorGridLines);
+            }
+
+            if (minorGridLines.visible) {
+                axis.traverseMinorTicksPositions(render, minorGridLines);
+            }
+
+            return items;
+        },
+
+        traverseMajorTicksPositions: function(callback, tickOptions) {
+            var axis = this,
+                lineOptions = axis._lineOptions(),
+                lineStart = lineOptions.lineStart,
+                step = lineOptions.step,
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                power,
+                position;
+
+            for (power = math.ceil(logMin) + tickOptions.skip; power <= logMax; power+= tickOptions.step) {
+                position = round(lineStart + step * (power - logMin), DEFAULT_PRECISION);
+                callback(position, tickOptions);
+            }
+        },
+
+        traverseMinorTicksPositions: function(callback, tickOptions) {
+            var axis = this,
+                options = axis.options,
+                lineOptions = axis._lineOptions(),
+                lineStart = lineOptions.lineStart,
+                lineStep = lineOptions.step,
+                base = options.majorUnit,
+                logMin = axis.logMin,
+                logMax = axis.logMax,
+                start = math.floor(logMin),
+                max = options.max,
+                min = options.min,
+                minorUnit = options.minorUnit,
+                power,
+                value,
+                position,
+                minorOptions;
+
+            for (power = start; power < logMax; power++) {
+                minorOptions = axis._minorIntervalOptions(power);
+                for(var idx = tickOptions.skip; idx < minorUnit; idx+= tickOptions.step) {
+                    value = minorOptions.value + idx * minorOptions.minorStep;
+                    if (value > max) {
+                        break;
+                    }
+                    if (value >= min) {
+                        position = round(lineStart + lineStep * (log(value, base) - logMin), DEFAULT_PRECISION);
+                        callback(position, tickOptions);
+                    }
+                }
+            }
+        },
+
+        createAxisLabel: function(index, labelOptions) {
+            var axis = this,
+                options = axis.options,
+                power = math.floor(axis.logMin + index),
+                value = Math.pow(options.majorUnit, power),
+                text = axis.axisLabelText(value, null, labelOptions);
+
+            return new AxisLabel(value, text, index, null, labelOptions);
+        },
+
+        shouldRenderNote: function(value) {
+            var range = this.range();
+            return range.min <= value && value <= range.max;
+        },
+
+        _throwNegativeValuesError: function() {
+            throw new Error("Non positive values cannot be used for a logarithmic axis");
+        },
+
+        _initOptions: function(seriesMin, seriesMax, options) {
+            var axis = this,
+                axisOptions = deepExtend({}, axis.options, {min: seriesMin, max: seriesMax}, options),
+                min = axisOptions.min,
+                max = axisOptions.max,
+                base = axisOptions.majorUnit,
+                logMaxRemainder;
+
+            if (axisOptions.axisCrossingValue <= 0) {
+                axis._throwNegativeValuesError();
+            }
+
+            if (!defined(options.max)) {
+               logMaxRemainder =  round(log(max, base), DEFAULT_PRECISION) % 1;
+               if (max <= 0) {
+                   max = base;
+               } else if (logMaxRemainder !== 0 && (logMaxRemainder < 0.3 || logMaxRemainder > 0.9)) {
+                   max = math.pow(base, log(max, base) + 0.2);
+               } else {
+                   max = math.pow(base, math.ceil(log(max, base)));
+               }
+            } else if (options.max <= 0) {
+                axis._throwNegativeValuesError();
+            }
+
+            if (!defined(options.min)) {
+               if (min <= 0) {
+                   min = max <= 1 ? math.pow(base, -2) : 1;
+               } else if (!options.narrowRange) {
+                   min = math.pow(base, math.floor(log(min, base)));
+               }
+            } else if (options.min <= 0) {
+                axis._throwNegativeValuesError();
+            }
+
+            axis.logMin = round(log(min, base), DEFAULT_PRECISION);
+            axis.logMax = round(log(max, base), DEFAULT_PRECISION);
+            axisOptions.max = max;
+            axisOptions.min = min;
+            axisOptions.minorUnit = options.minorUnit || round(base - 1, DEFAULT_PRECISION);
+
+            return axisOptions;
+        },
+
+        _minorIntervalOptions: function(power) {
+            var base = this.options.majorUnit,
+                value = math.pow(base, power),
+                nextValue = math.pow(base, power + 1),
+                difference = nextValue - value,
+                minorStep = difference / this.options.minorUnit;
+            return {
+                value: value,
+                minorStep: minorStep
+            };
+        },
+
+        _lineOptions: function() {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                dir = vertical === reverse ? 1 : -1,
+                startEdge = dir === 1 ? 1 : 2,
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                step = dir * (lineSize / (axis.logMax - axis.logMin)),
+                lineStart = lineBox[valueAxis + startEdge];
+
+            return {
+                step: step,
+                lineStart: lineStart,
+                lineBox: lineBox
+            };
         }
     });
 
@@ -3658,6 +4060,10 @@ var __meta__ = {
         return math.round(value * power) / power;
     }
 
+    function log(y, x) {
+        return math.log(y) / math.log(x);
+    }
+
     function remainderClose(value, divisor, ratio) {
         var remainder = round(math.abs(value % divisor), DEFAULT_PRECISION),
             threshold = divisor * (1 - ratio);
@@ -4072,6 +4478,7 @@ var __meta__ = {
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
         IDPool: IDPool,
+        LogarithmicAxis: LogarithmicAxis,
         LRUCache: LRUCache,
         Matrix: Matrix,
         Note: Note,

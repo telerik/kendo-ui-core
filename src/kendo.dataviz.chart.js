@@ -53,6 +53,7 @@ var __meta__ = {
         CurveProcessor = dataviz.CurveProcessor,
         ElementAnimation = dataviz.ElementAnimation,
         Note = dataviz.Note,
+        LogarithmicAxis = dataviz.LogarithmicAxis,
         NumericAxis = dataviz.NumericAxis,
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
@@ -137,6 +138,7 @@ var __meta__ = {
         LEGEND_ITEM_HOVER = "legendItemHover",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
+        LOGARITHMIC = "log",
         MAX_EXPAND_DEPTH = 5,
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
@@ -2778,20 +2780,22 @@ var __meta__ = {
 
             for (i = 0; i < childrenCount; i++) {
                 var currentChild = children[i],
+                    childBox;
+                if (currentChild.visible !== false) {
                     childBox = currentChild.box.clone();
+                    childBox.snapTo(targetBox, positionAxis);
+                    if (currentChild.options) {
+                        // TODO: Remove stackBase and fix BarAnimation
+                        currentChild.options.stackBase = stackBase;
+                    }
 
-                childBox.snapTo(targetBox, positionAxis);
-                if (currentChild.options) {
-                    // TODO: Remove stackBase and fix BarAnimation
-                    currentChild.options.stackBase = stackBase;
+                    if (i === 0) {
+                        box = this.box = childBox.clone();
+                    }
+
+                    currentChild.reflow(childBox);
+                    box.wrap(childBox);
                 }
-
-                if (i === 0) {
-                    box = this.box = childBox.clone();
-                }
-
-                currentChild.reflow(childBox);
-                box.wrap(childBox);
             }
         }
     });
@@ -2970,18 +2974,19 @@ var __meta__ = {
                     data: { modelId: bar.modelId }
                 }, border),
                 elements = [];
+            if (bar.visible !== false) {
+                if (box.width() > 0 && box.height() > 0) {
+                    if (options.overlay) {
+                        rectStyle.overlay = deepExtend({
+                            rotation: vertical ? 0 : 90
+                        }, options.overlay);
+                    }
 
-            if (box.width() > 0 && box.height() > 0) {
-                if (options.overlay) {
-                    rectStyle.overlay = deepExtend({
-                        rotation: vertical ? 0 : 90
-                    }, options.overlay);
+                    elements.push(view.createRect(box, rectStyle));
                 }
 
-                elements.push(view.createRect(box, rectStyle));
+                append(elements, ChartElement.fn.getViewElements.call(bar, view));
             }
-
-            append(elements, ChartElement.fn.getViewElements.call(bar, view));
 
             return elements;
         },
@@ -3233,14 +3238,16 @@ var __meta__ = {
             }
         },
 
-        plotRange: function(point) {
+        plotRange: function(point, startValue) {
             var categoryIx = point.categoryIx;
             var categoryPts = this.categoryPoints[categoryIx];
 
             if (this.options.isStacked) {
+                startValue = startValue || 0;
                 var plotValue = this.plotValue(point);
                 var positive = plotValue > 0;
-                var prevValue = 0;
+                var prevValue = startValue;
+                var isStackedBar = false;
 
                 for (var i = 0; i < categoryPts.length; i++) {
                     var other = categoryPts[i];
@@ -3266,7 +3273,12 @@ var __meta__ = {
                         (otherValue < 0 && !positive)) {
                         prevValue += otherValue;
                         plotValue += otherValue;
+                        isStackedBar = true;
                     }
+                }
+
+                if (isStackedBar) {
+                    prevValue -= startValue;
                 }
 
                 return [prevValue, plotValue];
@@ -3289,7 +3301,7 @@ var __meta__ = {
                 for (var pIx = 0; pIx < categoryPts.length; pIx++) {
                     var point = categoryPts[pIx];
                     if (point) {
-                        var to = this.plotRange(point)[1];
+                        var to = this.plotRange(point, 0)[1];
 
                         max = math.max(max, to);
                         min = math.min(min, to);
@@ -3372,7 +3384,7 @@ var __meta__ = {
         stackedErrorRange: function(point, categoryIx) {
             var chart = this,
                 value = point.value,
-                plotValue = chart.plotRange(point)[1] - point.value,
+                plotValue = chart.plotRange(point, 0)[1] - point.value,
                 low = point.low + plotValue,
                 high = point.high + plotValue;
 
@@ -3495,18 +3507,22 @@ var __meta__ = {
                 }
 
                 if (point) {
-                    var plotRange = chart.plotRange(point);
+                    var plotRange = chart.plotRange(point, valueAxis.startValue());
                     var valueSlot = valueAxis.getSlot(plotRange[0], plotRange[1], !chart.options.clip);
-                    var pointSlot = chart.pointSlot(categorySlot, valueSlot);
-                    var aboveAxis = valueAxis.options.reverse ?
-                                        value < axisCrossingValue : value >= axisCrossingValue;
+                    if (valueSlot) {
+                        var pointSlot = chart.pointSlot(categorySlot, valueSlot);
+                        var aboveAxis = valueAxis.options.reverse ?
+                                            value < axisCrossingValue : value >= axisCrossingValue;
 
-                    point.aboveAxis = aboveAxis;
-                    if (chart.options.isStacked100) {
-                        point.percentage = chart.plotValue(point);
+                        point.aboveAxis = aboveAxis;
+                        if (chart.options.isStacked100) {
+                            point.percentage = chart.plotValue(point);
+                        }
+
+                        chart.reflowPoint(point, pointSlot);
+                    } else {
+                        point.visible = false;
                     }
-
-                    chart.reflowPoint(point, pointSlot);
                 }
             });
 
@@ -3708,7 +3724,7 @@ var __meta__ = {
                 stackAxis, zeroSlot;
 
             if (options.isStacked) {
-                zeroSlot = valueAxis.getSlot(0, 0);
+                zeroSlot = valueAxis.getSlot(valueAxis.startValue(), valueAxis.startValue());
                 stackAxis = options.invertAxes ? X : Y;
                 categorySlot[stackAxis + 1] = categorySlot[stackAxis + 2] = zeroSlot[stackAxis + 1];
             }
@@ -3907,12 +3923,13 @@ var __meta__ = {
                 targetValueSlot = valueAxis.getSlot(bullet.value.target),
                 targetSlotX = invertAxes ? targetValueSlot : categorySlot,
                 targetSlotY = invertAxes ? categorySlot : targetValueSlot,
+                targetSlot;
+
+            if (target) {
                 targetSlot = new Box2D(
                     targetSlotX.x1, targetSlotY.y1,
                     targetSlotX.x2, targetSlotY.y2
                 );
-
-            if (target) {
                 target.options.height = invertAxes ? targetSlot.height() : options.target.line.width;
                 target.options.width = invertAxes ? options.target.line.width : targetSlot.width();
                 target.reflow(targetSlot);
@@ -4462,9 +4479,11 @@ var __meta__ = {
                 pointCenter;
 
             for (i = 0; i < length; i++) {
-                pointCenter = linePoints[i].markerBox().center();
+                if (linePoints[i].visible !== false) {
+                    pointCenter = linePoints[i].markerBox().center();
 
-                points.push(Point2D(pointCenter.x, pointCenter.y));
+                    points.push(Point2D(pointCenter.x, pointCenter.y));
+                }
             }
 
             return points;
@@ -4580,7 +4599,7 @@ var __meta__ = {
             for (i = 0; i < pointsLength; i++) {
                 currentPoint = points[i];
 
-                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null) {
+                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null && currentPoint.visible !== false) {
                     pointBox = currentPoint.box;
                     pointDistance = math.abs(pointBox.center()[axis] - pos);
 
@@ -5309,10 +5328,15 @@ var __meta__ = {
 
                 var slotX = seriesAxes.x.getSlot(value.x, value.x, limit),
                     slotY = seriesAxes.y.getSlot(value.y, value.y, limit),
-                    pointSlot = chart.pointSlot(slotX, slotY);
+                    pointSlot;
 
                 if (point) {
-                    point.reflow(pointSlot);
+                    if (slotX && slotY) {
+                        pointSlot = chart.pointSlot(slotX, slotY);
+                        point.reflow(pointSlot);
+                    } else {
+                        point.visible = false;
+                    }
                 }
             });
 
@@ -8689,6 +8713,7 @@ var __meta__ = {
                 baseOptions = { vertical: !invertAxes },
                 axisOptions, axisPane, valueAxis,
                 primaryAxis, axes = [], range,
+                axisType, defaultAxisRange,
                 name, i;
 
             if (plotArea.stack100) {
@@ -8702,14 +8727,21 @@ var __meta__ = {
 
                 if (inArray(axisPane, panes)) {
                     name = axisOptions.name;
-                    range = tracker.query(name) || defaultRange || { min: 0, max: 1 };
+                    defaultAxisRange = equalsIgnoreCase(axisOptions.type, LOGARITHMIC) ? {min: 0.1, max: 1} : { min: 0, max: 1 };
+                    range = tracker.query(name) || defaultRange || defaultAxisRange;
 
                     if (i === 0 && range && defaultRange) {
                         range.min = math.min(range.min, defaultRange.min);
                         range.max = math.max(range.max, defaultRange.max);
                     }
 
-                    valueAxis = new NumericAxis(range.min, range.max,
+                    if (equalsIgnoreCase(axisOptions.type, LOGARITHMIC)) {
+                        axisType = LogarithmicAxis;
+                    } else {
+                        axisType = NumericAxis;
+                    }
+
+                    valueAxis = new axisType(range.min, range.max,
                         deepExtend({}, baseOptions, axisOptions)
                     );
 
@@ -8969,9 +9001,11 @@ var __meta__ = {
                 namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
                 tracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 defaultRange = tracker.query(),
-                range = tracker.query(axisName) || defaultRange || { min: 0, max: 1 },
+                defaultAxisRange = equalsIgnoreCase(options.type, LOGARITHMIC) ? {min: 0.1, max: 1} : { min: 0, max: 1 },
+                range = tracker.query(axisName) || defaultRange || defaultAxisRange,
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
                 axis,
+                axisType,
                 seriesIx,
                 series = plotArea.series,
                 currentSeries,
@@ -9005,10 +9039,14 @@ var __meta__ = {
             }
 
             if (equalsIgnoreCase(axisOptions.type, DATE) || (!axisOptions.type && inferredDate)) {
-                axis = new DateValueAxis(range.min, range.max, axisOptions);
+                axisType = DateValueAxis;
+            } else if (equalsIgnoreCase(axisOptions.type, LOGARITHMIC)){
+                axisType = LogarithmicAxis;
             } else {
-                axis = new NumericAxis(range.min, range.max, axisOptions);
+                axisType = NumericAxis;
             }
+
+            axis = new axisType(range.min, range.max, axisOptions);
 
             if (axisName) {
                 if (namedAxes[axisName]) {
@@ -9231,7 +9269,7 @@ var __meta__ = {
                     pointOptions = point.options;
 
                     if (!pointOptions || (pointOptions.highlight || {}).visible) {
-                        if (point.highlightOverlay) {
+                        if (point.highlightOverlay && point.visible !== false) {
                             overlay = point.highlightOverlay(view, highlight.options);
 
                             if (overlay) {

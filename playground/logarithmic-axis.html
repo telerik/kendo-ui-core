@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>Spline</title>
+        <link href="../styles/dataviz/kendo.dataviz.min.css" rel="stylesheet" />
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+         <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+         <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+    </head>
+    <body>
+     
+
+      <div id="axisLineLabels"></div>
+      <--   
+      <div id="stack100"></div>
+     <div id="stack"></div>
+    <div id="negativePowers"></div>
+          <div id="bullet"></div>
+    <div id="limit"></div>
+    <div id="polar"></div>
+    <div id="radar"></div>
+
+    <div id="negativeValues"></div>
+    <div id="scatter"></div>
+
+    <div id="log" style="height: 500px;"></div>
+
+    <div id="chart" style="height: 500px;"></div>-->
+    
+     <--
+    <div id="scatterDrag"></div>
+     <div id="panes"></div>
+     <div id="bubble"></div>
+     <div id="stock-chart"></div>
+     <div id="boxplot"></div>
+     -->
+       <script>
+       
+       $("#axisLineLabels").kendoChart({
+            dataSource: {
+                data: []
+            },
+            xAxis: {
+                name: "xAxis",
+                type: "log",
+                min: 104.338,
+                max: 1043.3859
+            },
+            series: [{
+                type: "scatterLine",
+                xField: "x",
+                yField: "y",
+                labels: {
+                    visible: false,
+                    template: "#:value.x#"
+                },
+                markers: {
+                    visible: false
+                }
+            }]
+        });
+       
+       var negative = [];
+       for(var i = 0; i >= -6; i-=0.2){
+            negative.push(Math.pow(10, i));
+       }
+       
+      for(; i < 3; i+=0.2){
+            negative.push(Math.pow(10, i));
+       }
+       $("#negativePowers").kendoChart({       
+            series: [{
+                type: "line",
+                data: negative
+            }],
+            valueAxis: {
+                type: "log"
+            }       
+       });
+       $("#stack100").kendoChart({
+          seriesDefaults: {
+                stack:{
+                        type: "100%"
+                    },
+                 type: "column"
+          },
+          legend: {
+            visible: true
+          },
+           series: [{
+                name: "F",
+                data: [15, -1, 10]
+
+           },{
+                name: "S",
+                data: [35, -1, 100]
+           },{
+                name: "T",
+                data: [30, -1 , 100]
+           },{
+                name: "Fo",
+                data: [20, -1 , 100]
+           }],
+           categoryAxis: {
+                categories: ["A", "B", "C"]
+           },
+           valueAxis: {
+            axisCrossingValue: 0.01,
+            type: "log",
+                reverse: false,
+                crosshair: {
+                    visible: true,
+                    tooltip: {
+                        visible: true
+                    }
+                }
+           },
+           tooltip: {
+               visible: true,
+               shared: true
+          }
+       });
+      $("#stack").kendoChart({
+          seriesDefaults: {
+                stack: true,
+                 type: "column"
+          },
+          legend: {
+            visible: true
+          },
+           series: [{
+                name: "F",
+                data: [2, -1, 10]
+
+           },{
+                name: "S",
+                data: [2, -1, 100]
+           },{
+                name: "T",
+                data: [2, -1 , -1]
+           },{
+                name: "Fo",
+                data: [2, -1 , 100]
+           }],
+           categoryAxis: {
+                categories: ["A", "B", "C"]
+           },
+           valueAxis: {
+           // min: 0.01,
+            type: "log",
+                reverse: false,
+                crosshair: {
+                    visible: true,
+                    tooltip: {
+                        visible: true
+                    }
+                }
+           },
+           tooltip: {
+               visible: true,
+               shared: true
+          }
+       });
+       $("#limit").kendoChart({
+            series: [{
+                type: "line",
+                data: [1, 1000, 1]
+            }],
+            valueAxis: {
+                type: "log",
+                min: 10,
+                max: 100
+            }
+       });
+var mmhgData = [
+            { current: 750, target: 762.5, category: 1 }, { current: 754, target: 768.5, category: 2 },
+            { current: 762, target: 770, category: 3 }, { current: 764, target: 773, category: 4 },
+            { current: 753, target: 760, category: 5 }, { current: 748, target: 765, category: 6 },
+            { current: 740, target: 760, category: 7 }, { current: 755, target: 758, category: 8 },
+            { current: 765, target: 768, category: 9 }, { current: 776, target: 783, category: 10 },
+            { current: 768, target: 770, category: 11 }, { current: 760, target: 762.5, category: 12 },
+            { current: 763, target: 768, category: 13 }, { current: 758, target: 766, category: 14 }
+        ];
+
+    $("#bullet").kendoChart({
+        legend: {
+            visible: false
+        },
+        dataSource: {
+            data: mmhgData
+        },
+        series: [{
+            type: "verticalBullet",
+            color: "#ffffff",
+            opacity: .8,
+            target: {
+                color: "#ffffff"
+            },
+            currentField: "current",
+            targetField: "target"
+        }],
+        categoryAxis: {
+            majorGridLines: {
+                visible: false
+            },
+            majorTicks: {
+                visible: false
+            },
+            title: {
+                text: "mmHg"
+            },
+            field: "category"
+        },
+        valueAxis: [{
+            type: "log",
+            plotBands: [{
+                from: 715, to: 752, color: "#2890cc", opacity: .5
+            }, {
+                from: 752, to: 772, color: "#2890cc", opacity: .7
+            }, {
+                from: 772, to: 790, color: "#2890cc", opacity: .5
+            }, {
+                from: 761, to: 761.5, color: "#ff0000", opacity: 1
+            }],
+            majorGridLines: {
+                visible: true
+            },
+            minorGridLines: {
+                visible: true,
+                color: "red",
+                width: 10
+            },
+            min: 715,
+            max: 790,
+            minorTicks: {
+                visible: true
+            }
+        }],
+        tooltip: {
+            visible: true,
+            template: "Maximum: #= value.target # <br /> Average: #= value.current #"
+        }
+    });
+
+
+
+        $("#radar").kendoChart({
+                title: {
+                    text: "Market Value of Major Banks"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "radarLine",
+                    style: "smooth"
+                },
+                series: [{
+                    name: "Market value as of 2007",
+                    data: [1, 165, 215, 567, 1234]
+                }],
+                categoryAxis: {
+                    categories: ["Santander", "JP Morgan", "HSBC", "Credit Suisse",
+                        "Goldman Sachs", "Morgan Stanley"]
+                },
+                valueAxis: {
+                    type: "log",
+                    labels: {
+                        format: "${0}"
+                    },
+                    plotBands: {
+
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "${0} bln"
+                }
+            });
+          $("#polar").kendoChart({
+            title: {
+                text: "Polar plot"
+            },
+            seriesDefaults: {
+                type: "polarLine",
+                style: "smooth"
+            },
+
+
+
+            yAxis: {
+                type: "log"
+            },
+
+            series: [{
+                data: [
+                    [0,0],[15, 2], [30, 4],
+                    [45, 6], [60, 8], [75, 10],
+                    [90, 12], [105, 14], [120, 16],
+                    [135, 18], [150, 20], [165, 22],
+                    [180, 24], [195, 26], [210, 28],
+                    [225, 30], [240, 32], [255, 34],
+                    [270, 36], [285, 38], [300, 40],
+                    [315, 42], [330, 44], [345, 46],
+                    [360, 48], [15, 50], [30, 52],
+                    [45, 54], [60, 56], [75, 58], [90, 60]
+                ]
+            },{
+                data: [
+                    [0,0],[15, 1], [30, 2],
+                    [45, 3], [60, 4], [75, 5],
+                    [90, 6], [105, 7], [120, 8],
+                    [135, 9], [150, 10], [165, 11],
+                    [180, 12], [195, 13], [210, 14],
+                    [225, 15], [240, 16], [255, 17],
+                    [270, 18], [285, 19], [300, 20],
+                    [315, 21], [330, 22], [345, 23],
+                    [360, 24], [15, 25], [30, 26],
+                    [45, 27], [60, 28], [75, 29], [90, 30]
+                ]
+            },{
+                data: [
+                    [0,0],[15, 3], [30, 6],
+                    [45, 9], [60, 12], [75, 15],
+                    [90, 18], [105, 21], [120, 24],
+                    [135, 27], [150, 30], [165, 33],
+                    [180, 36], [195, 39], [210, 42],
+                    [225, 45], [240, 48], [255, 51],
+                    [270, 54], [285, 57], [300, 60],
+                    [315, 63], [330, 66], [345, 69],
+                    [360, 72], [15, 75], [30, 78],
+                    [45, 81], [60, 84], [75, 87], [90, 90]
+                ]
+            }]
+        });
+
+       createChart();
+         function createChart() {
+            $("#panes").kendoStockChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../demos/mvc/content/dataviz/js/boeing-stock.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                  drag: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "drag");
+                  },
+                  dragEnd: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "dragEnd");
+                  },
+                  dragStart: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "dragStart");
+                  },
+                  zoom: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "zoom");
+                  },
+                  zoomEnd: function(e) {
+                    console.log((e.axisRanges || {}).volumeAxis, "zoomEnd");
+                  },
+                   zoomStart: function(e) {
+                    console.log("zoomStart");
+                  },
+                dateField: "Date",
+                series: [{
+                    type: "column",
+                    field: "Volume",
+                    axis: "volumeAxis",
+                    labels: {
+                        visible: false
+                    },
+                    tooltip: {
+                        format: "{0:C0}"
+                    }
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2001/02/01",
+                        to: "2003/08/30"
+                    }
+                },
+                panes: [{
+                    name: "volumePane",
+                    title: "Volume",
+                    height: 300 // pixels
+                }],
+                valueAxes: [{
+                    name: "volumeAxis",
+                    pane: "volumePane",
+                    visible: true,
+                    minorTicks: {
+                        visible: true
+                    },
+                    minorGridLines: {
+                        visible: true
+                    },
+                    type: "log",
+                    narrowRange: false,
+                    // crosshair: {
+                        // visible: true,
+                        // tooltip: {visible: true}
+
+                    // }
+                }]
+            });
+        }
+
+       var data = [1, 1];
+       for (var i = 2; i < 30; i++) {
+            data.push(data[i-1] + data[i-2]);
+       }
+
+        $("#log").kendoChart({
+            title: "Fibonacci sequence",
+            dataSource: {
+               //data: [10, -20, 30, -40, 60, -70,80,200, 1000, 10000]
+                data: data
+              // data: [{value: 3}, {value: 4}, {value: 5}, {value: 6}, {value: 7},{value: 8},{value: 9},
+                // {value: 20, note: "min"}, {value: 30}, {value: 40}, {value: 50}, {value: 60},{value: 70}, {value: 80}, {value: 90},
+                // {value: 100, note: "middle"}, {value: 200}, {value: 300} ,{value: 400} ,{value: 500}, {value: 600}, {value: 700}, {value: 800}, {value: 900, note: "top"}, {value: 1001}, {value: 100001}]
+            },
+            seriesDefaults: {
+                type: "column",
+                labels: {
+                    visible: true
+                },
+                style: "smooth",
+                markers: {
+                    size: 5
+                }
+            },
+            series: [{
+                field: "value",
+                noteTextField: "note",
+                notes: {
+                    position: "right"
+                }
+            } ],
+            valueAxis: [{
+                crosshair: {
+                  visible: true,
+                  tooltip: {
+                    visible: true
+                  }
+
+                },
+                labels: {
+                  background: "green",
+                  color: "white",
+                  mirror: false
+                },
+                max: 10000000,
+                type: "log",
+               // majorUnit: 10,
+                //axisCrossingValue: 10,
+                //min: 0.00001,
+                // minorUnit: 3,
+                minorGridLines: {
+                    visible: true,
+                    //color: "red",
+                    // skip: 1,
+                    // step: 2
+                },
+                majorGridLines: {
+                    visible: true,
+                    //color: "blue",
+                    // skip: 2,
+                    // step: 2
+                },
+                plotBands: [
+                  { from: 1, to: 10, color: "red", opacity: 0.1 },
+                  { from: 100, to: 500, color: "blue", opacity: 0.1 }
+                ],
+                 title: {
+                    text: "test",
+                    visible: true
+                 },
+                 notes: {
+                    position: "right",
+                    data: [{value: 100, label: {text: "test"}}]
+                 },
+                reverse: false,
+                // narrowRange: false,
+                minorTicks: {
+                  // size: 6,
+                  // color: "green",
+                  // width: 1,
+                  visible: true
+                },
+                 majorTicks: {
+                  // size: 6,
+                  // color: "red",
+                  // width: 5,
+                  skip: 2,
+                  step: 2,
+                  visible: true
+                }
+            }
+            // ,
+            // {
+                // name: "bottom",
+                // pane: "bottom",
+                // type: "logarithmic",
+                // majorUnit: 2,
+                // narrowRange: false
+            // }
+            ],
+
+            // panes: [{name: "top"}, {name: "bottom"}],
+
+            tooltip:{
+                visible: true
+            },
+
+            plotAreaClick: function(e) {
+                console.log(e.value);
+            }
+        });
+
+            $("#negativeValues").kendoChart({
+                title: {
+                    text: "Gross domestic product growth /GDP annual %/"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    type: "line",
+                    style: "smooth"
+                },
+                tooltip: {
+                    shared:true,
+                    visible: true
+                },
+                series: [{
+                    data: [10, -1, 100],
+                    tooltip: {
+                        visible: true
+                    }
+                }],
+                valueAxis: {
+                    type: "log"
+                },
+                categoryAxis: {
+                    categories: [2002, 2003, 2004],
+                    majorGridLines: {
+                        visible: false
+                    }
+                }
+            });
+
+            $("#scatter").kendoChart({
+                title: {
+                    text: "Rainfall - Wind Speed"
+                },
+                tooltip: {
+                    shared:true,
+                    visible: true
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "scatterLine"
+                },
+                series: [{
+                    name: "January 2008",
+                    data: [
+                    // [0.1, 5.4], [1, 2], [10001, 3]]
+                    // data: [
+                    [0.1, 5.4], [-1, 2], [10001, 3]]
+                }],
+                xAxis: {
+                    type: "log",
+                    min: 0.1,
+                    title: {
+                        text: "Wind Speed [km/h]"
+                    }
+                },
+                yAxis: {
+                    min: -5,
+                    max: 25,
+                    title: {
+                        text: "Rainfall [mm]"
+                    },
+                    axisCrossingValue: -5
+                }
+            });
+
+        $("#chart").kendoChart({
+            title: {
+                text: "Olympic Medals won by USA"
+            },
+            legend: {
+                visible: false
+            },
+            seriesDefaults: {
+                type: "column",
+                stack: true
+            },
+            series: [{
+                name: "Gold Medals",
+                data: [40, 32, 34, 36, 45, 33, 34, 83, 36, 37, 44, 37, 35, 36, 46],
+                color: "#f3ac32"
+            }, {
+                name: "Silver Medals",
+                data: [19, 25, 21, 26, 28, 31, 35, 60, 31, 34, 32, 24, 40, 38, 29],
+                color: "#b8b8b8"
+            }, {
+                name: "Bronze Medals",
+                data: [17, 17, 16, 28, 34, 30, 25, 30, 27, 37, 25, 33, 26, 36, 29],
+                color: "#bb6e36"
+            }],
+            valueAxis: {
+                 title: {
+                    text: "test",
+                    visible: true
+                 },
+                crosshair: {
+                  visible: true,
+                  tooltip: {
+                    visible: true
+                  }
+                },
+                labels: {
+                  background: "green",
+                  color: "white",
+                  mirror: false
+                },
+                max: 180,
+                minorGridLines: {
+                    visible: true
+                },
+                minorTicks: {
+                    visible: true
+                },
+                majorTicks: {
+                    visible: true
+                }
+            },
+            categoryAxis: {
+               categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012],
+                majorGridLines: {
+                    visible: false
+                }
+            },
+            tooltip: {
+                visible: true,
+                template: "#= series.name #: #= value #"
+            }
+        });
+
+                var scatterData = [];
+                for (var y = -100, x = 1; x < 30; y += 0.2, x+=0.05) {
+
+                    scatterData.push({ x: Math.pow(10, x), y: Math.sin(y) });
+                }
+
+                // Helper function that constructs DataSource filter
+                // for the x value
+                function getFilter(xMin, xMax) {
+                    return [{
+                        field: "x",
+                        operator: "ge",
+                        value: xMin
+                    }, {
+                        field: "x",
+                        operator: "le",
+                        value: xMax
+                    }]
+                }
+                $("#scatterDrag").kendoChart({
+                    renderAs: "canvas",
+                    dataSource: {
+                        data: scatterData,
+                        filter: getFilter(100, 1000)
+                    },
+                    xAxis: {
+                        name: "xAxis",
+                        type: "log",
+                        min: 100,
+                        max: 1000
+                    },
+                    series: [{
+                        type: "scatterLine",
+                        xField: "x",
+                        yField: "y",
+                        labels: {
+                            visible: false,
+                            template: "#:value.x#"
+                        },
+                        markers: {
+                            visible: false
+                        }
+                    }],
+                    transitions: false,
+                    drag: setRange,
+                    zoom: setRange
+                });
+
+                function setRange(e) {
+                    var chart = e.sender;
+                    var ds = chart.dataSource;
+                    var options = chart.options;
+
+                    // Prevent document scrolling on mousewheel zoom
+                    e.originalEvent.preventDefault();
+
+                    var xRange = e.axisRanges.xAxis;
+                    if (xRange) {
+                        // Suggested axis ranges
+                        var xMin = xRange.min;
+                        var xMax = xRange.max;
+
+                        // Limit maximum zoom-in
+                        if (xMax - xMin < 100) {
+                            console.log(xMax - xMin);
+                            return;
+                        }
+
+                        // Set x axis range in chart options
+                        options.xAxis.min = xMin;
+                        options.xAxis.max = xMax;
+
+                        // Filters the data source and rebinds the chart
+                        // which also applies the axis limits set above
+                        ds.filter(getFilter(xMin, xMax));
+                    }
+                }
+
+$("#bubble").kendoChart({
+                title: {
+                    text: "Job Growth for 2011"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "bubble"
+                },
+                series: [{
+                    data: [{
+                        x: -2500,
+                        y: 50000,
+                        size: 500000,
+                        category: "Microsoft"
+                    }, {
+                        x: 500,
+                        y: 110000,
+                        size: 7600000,
+                        category: "Starbucks"
+                    }, {
+                        x: 7000,
+                        y: 19000,
+                        size: 700000,
+                        category: "Google"
+                    }, {
+                        x: 1400,
+                        y: 150000,
+                        size: 700000,
+                        category: "Publix Super Markets"
+                    }, {
+                        x: 2400,
+                        y: 30000,
+                        size: 300000,
+                        category: "PricewaterhouseCoopers"
+                    }, {
+                        x: 2450,
+                        y: 34000,
+                        size: 90000,
+                        category: "Cisco"
+                    }, {
+                        x: 2700,
+                        y: 34000,
+                        size: 400000,
+                        category: "Accenture"
+                    }, {
+                        x: 2900,
+                        y: 40000,
+                        size: 450000,
+                        category: "Deloitte"
+                    }, {
+                        x: 3000,
+                        y: 55000,
+                        size: 900000,
+                        category: "Whole Foods Market"
+                    }]
+                }],
+                xAxis: {
+                    labels: {
+                        format: "{0:N0}",
+                        skip: 1
+                    },
+                    type: "log",
+                    //axisCrossingValue: -5000,
+                    //majorUnit: 2000,
+                    // plotBands: [{
+                        // from: -5000,
+                        // to: 0,
+                        // color: "#00f",
+                        // opacity: 0.05
+                    // }]
+                },
+                yAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    },
+                    line: {
+                        width: 0
+                    },
+                    type: "log"
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{3}: {2:N0} applications",
+                    opacity: 1
+                }
+            });
+
+            $("#stock-chart").kendoStockChart({
+                dataSource: {
+                    data: [{Date: new Date(2009, 2, 6), Open: 120, Close: 140, High: 60,  Low: 40},
+                    {Date: new Date(2010, 2, 6), Open: 50, Close: 70, High: 60, Low: 40},
+                    {Date: new Date(2011, 2, 6), Open: 50, Close: 100, High: 60, Low: 40}]
+                },
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                valueAxis: {
+                    type: "log"
+                },
+                dateField: "Date",
+                series: [{
+                    type: "candlestick",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                }
+            });
+
+            //handle negative???
+            $("#boxplot").kendoChart({
+                title: {
+                    text: "Monthly Mean Temperatures (&deg;F)"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "boxPlot",
+                    data: [
+                        [25,38.3,51,61.45,68.9,49.0,[18.3, 20, 70, 72,5]],
+                        [26.4,38.125,46.8,60.425,66.8,47.3,[18, 69, 71.3, 71.5]],
+                        [31.6,41.725,52.35,62.175,70.8,52.3,[14, 16.4, 74]],
+                        [34.4,39.375,49.9,61.425,69.2,50.3,[16, 18, 72, 72.5]],
+                        [29.9,38.35,50.4,60.875,69.7,49.9,[19, 20, 76, 78]],
+                        [22.3,36.875,48.9,62.65,70.3,49.0,[16.5, 17, 74, 75, 78]],
+                        [32.3,39.5,54.1,61.175,67.3,50.8,[13, 14, 15, 74.3, 75.2, 76]],
+                        [28.5,36.075,50.5,64.2,70.4,49.6,[18, 22, 73.4, 75]],
+                        [33.6,40.65,49.55,62.8,69.2,51.1,[17, 73]],
+                        [33.6,38.6,47.9,60.825,67,49.7,[12, 13.5, 16, 73, 74.6, 77]],
+                        [31.9,36.425,49.3,61.825,69.7,49.4,[17, 76]],
+                        [34,41.225,51.15,62.4,68.8,51.6,[14.6, 17.3, 72.3, 74]]
+                   ]
+                }],
+                categoryAxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                valueAxis: {
+                    type: "log"
+                }
+            });
+
+       </script>
+    </body>
+</html>

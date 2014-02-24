@@ -57,6 +57,27 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines a logarithmic value axis.
+        /// </summary>
+        public virtual ChartNumericAxisBuilder Logarithmic()
+        {
+            return Logarithmic("");
+        }
+
+        /// <summary>
+        /// Defines a logarithmic value axis.
+        /// </summary>
+        public virtual ChartNumericAxisBuilder Logarithmic(string name)
+        {
+            var logarithmicAxis = new ChartLogarithmicAxis<TModel>(Container);
+            logarithmicAxis.Name = name;
+
+            Axes.Add(logarithmicAxis);
+
+            return new ChartNumericAxisBuilder(logarithmicAxis);
+        }
+
+        /// <summary>
         /// Defines a date value axis.
         /// </summary>
         public virtual ChartDateAxisBuilder Date()
