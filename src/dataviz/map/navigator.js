@@ -22,7 +22,6 @@
 
             var parentElement = this.element.parent().closest("[" + kendo.attr("role") + "]");
             this._keyroot = parentElement.length > 0 ? parentElement : this.element;
-
             this._tabindex(this._keyroot);
 
             this._keydown = proxy(this._keydown, this);
@@ -89,14 +88,17 @@
         }
     });
 
-    kendo.dataviz.ui.plugin(Navigator);
-
+    // Helper functions =======================================================
     function button(dir) {
        return kendo.format(
            '<button class="k-button k-navigator-{0}">' +
                '<span class="k-icon k-i-arrow-{0}"/>' +
            '</button>', dir);
     }
+
+    // Exports ================================================================
+    kendo.dataviz.ui.plugin(Navigator);
+
 })(jQuery);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
