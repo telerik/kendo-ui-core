@@ -255,6 +255,7 @@
             },
             options: {
                 background: "Green",
+                hover: {},
                 cursor: Cursors.grip,
                 content: {
                     align: "center middle",
@@ -355,7 +356,8 @@
             options: {
                 width: DEFAULT_CONNECTOR_SIZE,
                 height: DEFAULT_CONNECTOR_SIZE,
-                background: DEFAULT_CONNECTION_BACKGROUND
+                background: DEFAULT_CONNECTION_BACKGROUND,
+                hover: {}
             },
             position: function () {
                 if (this.options.position) {
@@ -431,6 +433,7 @@
                 width: DEFAULT_SHAPE_WIDTH,
                 height: DEFAULT_SHAPE_HEIGHT,
                 background: DEFAULT_SHAPE_BACKGROUND,
+                hover: {},
                 connectors: diagram.DefaultConnectors,
                 rotation: {
                     angle: 0
@@ -826,6 +829,9 @@
             options: {
                 stroke: {
                     color: "gray"
+                },
+                hover: {
+                    stroke: {}
                 },
                 startCap: DEFAULT_CONNECTION_STARTCAP,
                 endCap: DEFAULT_CONNECTION_ENDCAP,
