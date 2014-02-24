@@ -10,7 +10,7 @@ Kendo UI is everything you need to build sites and apps with HTML5 & JavaScript 
 
 Kendo UI Core is a free and open-source distribution of Kendo UI. The following table details the widgets and features available in Kendo UI Core, as well as the additional features available via a commercial Kendo UI license.
 
-| Feature | Core | Complete | UI for MVC/JSP/PHP |
+| Feature | Core | [Complete](http://www.telerik.com/kendo-ui) | UI for [MVC](http://www.telerik.com/aspnet-mvc)/[JSP](http://www.telerik.com/jsp-ui)/[PHP](http://www.telerik.com/php-ui) |
 | ------- | :----: | :--------: | :------------------: |
 | **Framework** |
 | DataSource | Yes | Yes | Yes |
@@ -57,7 +57,7 @@ Kendo UI Core is a free and open-source distribution of Kendo UI. The following 
 | **Mobile** |
 | Mobile Widgets | No | Yes | Yes |
 | Mobile Framework Features | No | Yes | Yes | 
-| Official Support | No | Yes | Yes
+| **Official Support** | No | Yes | Yes
 
 ## Compatibility and Requirements
 
@@ -91,7 +91,7 @@ Before contributing to Kendo UI Core, please:
 
 As a fully-open source project, Kendo UI Core is a primarially community-supported project, As such, you are encouraged to use forums like Stack Overflow to post questions, and the issues list of this repo to report bugs.
 
-The Kendo UI team does *not* provide formal support for Kendo UI Core, except to those customers who have purchased a commercial license for Kendo UI (Complete, UI for MVC, etc.) or a support-only package from Telerik.com. Please do not create support requests for this project in the issues list for this repo, as these will be immediately closed and you'll be directed to post your question on a community forum.
+The Kendo UI team does *not* provide formal support for Kendo UI Core, except to those customers who have purchased a [commercial license for Kendo UI](http://www.telerik.com/kendo-ui) (Complete, UI for MVC, etc.) or a support-only package from Telerik.com. Please do not create support requests for this project in the issues list for this repo, as these will be immediately closed and you'll be directed to post your question on a community forum.
 
 ## Release Notes
 
