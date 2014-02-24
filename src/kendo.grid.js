@@ -1725,7 +1725,7 @@ var __meta__ = {
         _removeRow: function(row) {
             var that = this,
                 model,
-                mode;
+                mode = that._editMode();
 
             if (mode !== "incell") {
                 that.cancelRow();
@@ -1735,9 +1735,8 @@ var __meta__ = {
             model = that._modelForContainer(row);
 
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
-                mode = that._editMode();
 
-                                that.dataSource.remove(model);
+                that.dataSource.remove(model);
 
                 if (mode === "inline" || mode === "popup") {
                     that.dataSource.sync();
