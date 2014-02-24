@@ -1,10 +1,10 @@
 
 package com.kendoui.taglib;
 
-
-
+import com.kendoui.taglib.maskedtextbox.*;
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Input;
 import com.kendoui.taglib.json.Function;
-
 
 import javax.servlet.jsp.JspException;
 
@@ -13,6 +13,11 @@ public class MaskedTextBoxTag extends WidgetTag /* interfaces *//* interfaces */
 
     public MaskedTextBoxTag() {
         super("MaskedTextBox");
+    }
+    
+    @Override
+    protected Element<?> createElement() {
+        return new Input().attr("name", getName());
     }
     
     @Override
