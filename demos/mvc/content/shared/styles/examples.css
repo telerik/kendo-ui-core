@@ -1308,7 +1308,7 @@ p#copy
 
 .tc-theme .tc-link
 {
-    color: #4f4f4f;
+    color: #0487c4;
     padding: 10px;
     border: 1px solid #fff;
 }
@@ -1324,6 +1324,7 @@ p#copy
 
 .tc-theme .tc-link.active
 {
+    color: #4f4f4f;
     border-color: #d6d6d6;
     -moz-box-shadow: inset 0 0 7px rgba(0,0,0,.15);
     -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,.15);
