@@ -11,8 +11,53 @@ Kendo UI is everything you need to build sites and apps with HTML5 & JavaScript 
 Kendo UI Core is a free and open-source distribution of Kendo UI. The following table details the widgets and features available in Kendo UI Core, as well as the additional features available via a commercial Kendo UI license.
 
 | Feature | Core | Complete | UI for MVC/JSP/PHP |
-| ------- | ---- | -------- | ------------------ |
+| ------- | :----: | :--------: | :------------------: |
+| Framework |
 | DataSource | Yes | Yes | Yes |
+| MVVM | Yes | Yes | Yes |
+| SPA | Yes | Yes | Yes |
+| Effects | Yes | Yes | Yes |
+| Drag & Drop | Yes | Yes | Yes |
+| Validator | Yes | Yes | Yes |
+| Widgets |
+| AutoComplete | Yes | Yes | Yes |
+| Calendar | Yes | Yes | Yes |
+| ComboBox | Yes | Yes | Yes |
+| DatePicker | Yes | Yes | Yes |
+| DateTimePicker | Yes | Yes | Yes |
+| DropDownList | Yes | Yes | Yes |
+| ListView | Yes | Yes | Yes |
+| Menu | Yes | Yes | Yes |
+| NumericTextBox | Yes | Yes | Yes |
+| PanelBar | Yes | Yes | Yes |
+| Slider | Yes | Yes | Yes |
+| Splitter | Yes | Yes | Yes |
+| TabStrip | Yes | Yes | Yes |
+| TimePicker | Yes | Yes | Yes |
+| Tooltip | Yes | Yes | Yes |
+| Window | Yes | Yes | Yes |
+| Sortable | Yes | Yes | Yes |
+| Progress | Yes | Yes | Yes |
+| Button | Yes | Yes | Yes |
+| Color Picker | Yes | Yes | Yes |
+| Toolbar | Yes | Yes | Yes |
+| MultiSelect | Yes | Yes | Yes |
+| Mask Input | Yes | Yes | Yes |
+| Notification | Yes | Yes | Yes |
+| Editor | No | Yes | Yes |
+| Grid | No | Yes | Yes |
+| Scheduler | No | Yes | Yes |
+| TreeView | No | Yes | Yes |
+| Upload | No | Yes | Yes |
+| Data Viz |
+| Charts | No | Yes | Yes |
+| Gauges | No | Yes | Yes |
+| QR Code | No | Yes | Yes |
+| Bar Code | No | Yes | Yes |
+| Mobile |
+| Mobile Widgets | No | Yes | Yes |
+| Mobile Framework Features | No | Yes | Yes | 
+| Official Support | No | Yes | Yes
 
 ## Compatibility and Requirements
 
