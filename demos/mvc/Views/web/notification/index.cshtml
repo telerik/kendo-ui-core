@@ -57,11 +57,13 @@
                     }).data("kendoNotification");
 
                     $("#showPopupNotification").click(function(){
-                        popupNotification.show((new Date()).getTime(), "error");
+                        popupNotification.show(new Date().toLocaleTimeString(), "error");
                     });
 
                     $("#showStaticNotification").click(function(){
-                        staticNotification.show((new Date()).getTime(), "note");
+                        staticNotification.show(new Date().toLocaleTimeString(), "info");
+                        var container = $(staticNotification.options.appendTo);
+                        container.scrollTop(container[0].scrollHeight);
                     });
 
                     $("#hideAllNotifications").click(function(){
