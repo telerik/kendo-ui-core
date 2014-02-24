@@ -2,6 +2,9 @@
 package com.kendoui.taglib;
 
 import javax.servlet.jsp.JspException;
+
+import com.kendoui.taglib.diagram.ConnectionsTag;
+import com.kendoui.taglib.diagram.ShapesTag;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
