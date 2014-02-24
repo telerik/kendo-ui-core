@@ -5,7 +5,7 @@
     <title>KendoUI Diagrams </title>
     <link rel="shortcut icon" href="http://demos.telerik.com/kendo-ui/favicon.ico" />
     <link rel="stylesheet/less" type="text/css" href="../../../styles/web/kendo.common.less" />
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/web/kendo.default.less" />
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/web/kendo.blue.less" />
     <style type="text/css">
         html, body, #mainDiv {
             height: 100%;
@@ -454,13 +454,14 @@ $(function () {
             "hoveredBackground":"#70CAFF",
             "cursor":"pointer",
             "content":{
-                template: "Tri <",
                 "align":"center middle",
-                "text":""
+                "text":"kur",
+                color: "red"
             },
             "editable":true,
             "selectable":true,
-            "path":"m0,100 L100,100 L50,0z",
+            "type":"Shape",
+            "data":"m0,100 L100,100 L50,0z",
             "x":238,
             "y":132,
             "minWidth":20,
@@ -474,7 +475,7 @@ $(function () {
             }, {
                 "name":"Left"
             }, {
-                "name":"auto"
+                "name":"Auto"
             }],
             "rotation":{
                 "angle":0
@@ -482,6 +483,7 @@ $(function () {
             "resizable":true,
             "rotatable":true,
             "undoable":false,
+            "name":"Triangle",
             stroke: {
                 color: "red",
                 width: 4,
@@ -494,10 +496,11 @@ $(function () {
             "cursor":"pointer",
             "content":{
                 "align":"center middle",
-                "text":"Rect <"
+                "text":""
             },
             "editable":true,
             "selectable":true,
+            "type":"Rectangle",
             "x":400,
             "y":300,
             "minWidth":20,
@@ -511,7 +514,7 @@ $(function () {
             }, {
                 "name":"Left"
             }, {
-                "name":"auto"
+                "name":"Auto"
             }],
             "rotation":{
                 "angle":0
@@ -519,19 +522,27 @@ $(function () {
             "resizable":true,
             "rotatable":true,
             "undoable":false,
+            "name":"Triangle",
             stroke: {
                 color: "red",
                 width: 4,
                 dashType: "dot"
             }
         }],
+        connectionDefaults: {
+            stroke: {
+                color: "red"
+            }
+        },
         connections: [{
             from: {
                 shapeId: "triangle"
             },
             to: {
                 shapeId: "rect"
-            }
+            },
+            startCap: "none",
+            endCap: "none"
         }]
     });
     var diagram = $("#canvas").data("kendoDiagram"),

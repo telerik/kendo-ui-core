@@ -255,9 +255,6 @@
             },
             options: {
                 background: "Green",
-                hover: {
-                    background: "#70CAFF"
-                },
                 cursor: Cursors.grip,
                 content: {
                     align: "center middle",
@@ -358,10 +355,7 @@
             options: {
                 width: DEFAULT_CONNECTOR_SIZE,
                 height: DEFAULT_CONNECTOR_SIZE,
-                background: DEFAULT_CONNECTION_BACKGROUND,
-                hover: {
-                    background: DEFAULT_HOVER_COLOR
-                }
+                background: DEFAULT_CONNECTION_BACKGROUND
             },
             position: function () {
                 if (this.options.position) {
@@ -437,9 +431,6 @@
                 width: DEFAULT_SHAPE_WIDTH,
                 height: DEFAULT_SHAPE_HEIGHT,
                 background: DEFAULT_SHAPE_BACKGROUND,
-                hover: {
-                    background: DEFAULT_HOVER_COLOR
-                },
                 connectors: diagram.DefaultConnectors,
                 rotation: {
                     angle: 0
@@ -836,11 +827,6 @@
                 stroke: {
                     color: "gray"
                 },
-                hover: {
-                    stroke: {
-                        color: DEFAULT_HOVER_COLOR
-                    }
-                },
                 startCap: DEFAULT_CONNECTION_STARTCAP,
                 endCap: DEFAULT_CONNECTION_ENDCAP,
                 points: []
@@ -864,8 +850,7 @@
                 if (isDefined(source)) {
                     if (undoable && this.diagram) {
                         this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
-                    }
-                    else {
+                    } else {
                         if (source !== undefined) {
                             this.from = source;
                         }
@@ -874,20 +859,17 @@
                                 this._sourcePoint = this._resolvedSourceConnector.position();
                                 this._clearSourceConnector();
                             }
-                        }
-                        else if (source instanceof Connector) {
+                        } else if (source instanceof Connector) {
                             this.sourceConnector = source;
                             this.sourceConnector.connections.push(this);
                             this.refresh();
-                        }
-                        else if (source instanceof Point) {
+                        } else if (source instanceof Point) {
                             this._sourcePoint = source;
                             if (this.sourceConnector) {
                                 this._clearSourceConnector();
                             }
                             this.refresh();
-                        }
-                        else if (source instanceof Shape) {
+                        } else if (source instanceof Shape) {
                             this.sourceConnector = source.getConnector(AUTO);// source.getConnector(this.targetPoint());
                             this.sourceConnector.connections.push(this);
                             this.refresh();
@@ -909,8 +891,7 @@
                         value.left = null;
                         this._sourceDefiner = value;
                         this.source(value.point); // refresh implicit here
-                    }
-                    else {
+                    } else {
                         throw "The sourceDefiner needs to be a PathDefiner.";
                     }
                 } else {
@@ -936,8 +917,7 @@
                 if (isDefined(target)) {
                     if (undoable && this.diagram) {
                         this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
-                    }
-                    else {
+                    } else {
                         if (target !== undefined) {
                             this.to = target;
                         }
@@ -946,20 +926,17 @@
                                 this._targetPoint = this._resolvedTargetConnector.position();
                                 this._clearTargetConnector();
                             }
-                        }
-                        else if (target instanceof Connector) {
+                        } else if (target instanceof Connector) {
                             this.targetConnector = target;
                             this.targetConnector.connections.push(this);
                             this.refresh();
-                        }
-                        else if (target instanceof Point) {
+                        } else if (target instanceof Point) {
                             this._targetPoint = target;
                             if (this.targetConnector) {
                                 this._clearTargetConnector();
                             }
                             this.refresh();
-                        }
-                        else if (target instanceof Shape) {
+                        } else if (target instanceof Shape) {
                             this.targetConnector = target.getConnector(AUTO);// target.getConnector(this.sourcePoint());
                             if (this.targetConnector) {
                                 this.targetConnector.connections.push(this);
@@ -982,8 +959,7 @@
                         value.right = null;
                         this._targetDefiner = value;
                         this.target(value.point); // refresh implicit here
-                    }
-                    else {
+                    } else {
                         throw "The sourceDefiner needs to be a PathDefiner.";
                     }
                 } else {
@@ -1071,8 +1047,7 @@
                         }
                         this.refresh();
                     }
-                }
-                else {
+                } else {
                     return this._type;
                 }
             },
@@ -1090,11 +1065,9 @@
                         var definition = value[i];
                         if (definition instanceof diagram.Point) {
                             this.definers.push(new diagram.PathDefiner(definition));
-                        }
-                        else if (definition.hasOwnProperty("x") && definition.hasOwnProperty("y")) { // e.g. Clipboard does not preserve the Point definition and tunred into an Object
+                        } else if (definition.hasOwnProperty("x") && definition.hasOwnProperty("y")) { // e.g. Clipboard does not preserve the Point definition and tunred into an Object
                             this.definers.push(new diagram.PathDefiner(new Point(definition.x, definition.y)));
-                        }
-                        else {
+                        } else {
                             throw "A Connection point needs to be a Point or an object with x and y properties.";
                         }
                     }
@@ -1167,8 +1140,7 @@
              * @returns {Connection}
              */
             serialize: function () {
-                var json = deepExtend({},
-                    {
+                var json = deepExtend({}, {
                         options: this.options,
                         from: this.from.toString(),
                         to: this.to.toString()
@@ -1198,9 +1170,15 @@
                 }
             },
             _hover: function (value) {
+                var color = this.options.stroke.color;
+
+                if (value && isDefined(this.options.hover.stroke.color)) {
+                    color = this.options.hover.stroke.color;
+                }
+
                 this.path.redraw({
                     stroke: {
-                        color: value ? this.options.hover.stroke.color : this.options.stroke.color
+                        color: color
                     }
                 });
             },
