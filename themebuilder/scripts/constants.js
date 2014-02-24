@@ -248,7 +248,21 @@
             "@shadow-inset-color":              constant("box-shadow", ".k-autocomplete .k-input"),
             "@link-text-color":                 constant(COLOR, "a.k-link"),
             "@loading-panel-color":             constant(BGCOLOR, ".k-loading-color"),
-            "@splitbar-background-color":       constant(BGCOLOR, ".k-splitbar")
+            "@splitbar-background-color":       constant(BGCOLOR, ".k-splitbar"),
+
+            "@notification-info-background-color": constant(BGCOLOR, ".k-notification.k-notification-info"),
+            "@notification-info-text-color": constant(COLOR, ".k-notification.k-notification-info"),
+            "@notification-info-border-color": constant(BORDERCOLOR, ".k-notification.k-notification-info"),
+            "@notification-success-background-color": constant(BGCOLOR, ".k-notification.k-notification-success"),
+            "@notification-success-text-color": constant(COLOR, ".k-notification.k-notification-success"),
+            "@notification-success-border-color": constant(BORDERCOLOR, ".k-notification.k-notification-info"),
+            "@notification-warning-background-color": constant(BGCOLOR, ".k-notification.k-notification-warning"),
+            "@notification-warning-text-color": constant(COLOR, ".k-notification.k-notification-warning"),
+            "@notification-warning-border-color": constant(BORDERCOLOR, ".k-notification.k-notification-info"),
+            "@notification-error-background-color": constant(BGCOLOR, ".k-notification.k-notification-error"),
+            "@notification-error-text-color": constant(COLOR, ".k-notification.k-notification-error"),
+            "@notification-error-border-color": constant(BORDERCOLOR, ".k-notification.k-notification-info")
+
         },
         datavizConstants = {
             "chart.title.color":                          constant(COLOR),
@@ -357,6 +371,20 @@
                 "@tooltip-background-color":      "Background",
                 "@tooltip-border-color":          "Border color",
                 "@tooltip-text-color":            "Text color"
+            },
+            "Notifications": {
+                "@notification-info-background-color":      "Info background",
+                "@notification-info-text-color":            "Info text color",
+                "@notification-info-border-color":          "Info border color",
+                "@notification-success-background-color":   "Success background",
+                "@notification-success-text-color":         "Success text color",
+                "@notification-success-border-color":       "Success border color",
+                "@notification-warning-background-color":   "Warning background",
+                "@notification-warning-text-color":         "Warning text color",
+                "@notification-warning-border-color":       "Warning border color",
+                "@notification-error-background-color":     "Error background",
+                "@notification-error-text-color":           "Error text color",
+                "@notification-error-border-color":         "Error border color"
             },
             "Validation": {
                 "@validation-background-color":   "Background",
