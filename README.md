@@ -26,13 +26,21 @@ For complete Kendo UI Documentation, including Kendo UI Core, please visit http:
 
 ## How to Contribute
 
-If you would like to contribute to Kendo UI Core, please read the [guidelines for pull requests and contributions](CONTRIBUTING.md). Following these guidelines will help make your contributions easier to bring in to the next release.
+Kendo UI Core is free and open-source. We encourage and support an active, healthy community that accepts contributions from the public. We'd like you to be a part of that community.
+
+Before contributing to Kendo UI Core, please:
+
+1. Read and sign the [Kendo UI Core Contribution License Agreement](http://telerik.com/kendo-ui/cla), to confirm you've read and acknowledged the legal aspects of your contributions, and
+2. Read our [contribution guide](CONTRIBUTING.md), which houses all of the necessary info to:
+	- submit bugs,
+	- request new features, and
+	- walk you through the entire process of preparing your code for a Pull Request.
 
 ## Getting Help
 
-Use this section to list ways that a developer can obtain help or support for this project, for instance, Stack Overflow. Make sure to also leave the following section:
+As a fully-open source project, Kendo UI Core is a primarially community-supported project, As such, you are encouraged to use forums like Stack Overflow to post questions, and the issues list of this repo to report bugs.
 
-As a part of Kendo UI Labs, [Project Name] is intended to be a community-run project, and not an official part of any Kendo UI SKU (Web, DataViz, Mobile or Complete). As such, this project is not a supported part of Kendo UI, and is not covered under the support agreements for Kendo UI license holders. Please do not create support requests for this project, as these will be immediately closed and you'll be directed to post your question on a community forum.
+The Kendo UI team does *not* provide formal support for Kendo UI Core, except to those customers who have purchased a commercial license for Kendo UI (Complete, UI for MVC, etc.) or a support-only package from Telerik.com. Please do not create support requests for this project in the issues list for this repo, as these will be immediately closed and you'll be directed to post your question on a community forum.
 
 ## Release Notes
 

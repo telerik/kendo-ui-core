@@ -1,10 +1,23 @@
-**#KENDO LABS BOILERPLATE. CUSTOMIZE FOR YOUR PROJECT**
+# Contributing to Kendo UI Core
+
+## Before You Start
+
+Anyone wishing to contribute to the Kendo UI Core project MUST read & sign the [Kendo UI Core Contribution License Agreement](http://www.telerik.com/kendo-ui/cla). The Kendo UI team is legally prevented from accepting any pull requests from users who have not signed the CLA first.
+
+## Introduction
 
 These guidelines are here to facilitate your contribution and streamline the process of getting changes merged into this project and released. Any contributions you can make will help tremendously, even if only in the form of an issue report. Following these guidelines will help to streamline the pull request and change submission process.
 
-## Documentation Fixes
+## Reporting Bugs
 
-If you notice any problems with any documentation, please fix it and we'll get it merged as soon as we can. For small things like typos and grammar, just click the "Edit this file" button and send in the pull request for the fix. For larger changes and big swaths of documentation changes, a regular pull request as outlined below is more appropriate.
+1. Always update to the most recent master release; the bug may already be resolved.
+2. Search for similar issues in the issues list for this repo; it may already be an identified problem.
+3. Make sure you can reproduce your problem on our sandbox at try.kendoui.com
+4. If this is a bug or problem that is clear, simple, and is unlikely to require any discussion -- it is OK to open an issue on GitHub with a reproduction of the bug including workflows, screenshots, or links to examples on try.kendoui.com. If possible, submit a Pull Request with a failing test. If you'd rather take matters into your own hands, fix the bug yourself (jump down to the "Code Fixes and Enhancements" section).
+
+## Requesting New Features
+
+Do not submit a feature request on GitHub; all feature requests on GitHub will be closed. Instead, visit the [Kendo UI Feedback portal](http://kendoui-feedback.telerik.com/forums/127393-telerik-kendo-ui-feedback), and search this list for similar feature requests.
 
 ## Code Fixes and Enhancements
 
@@ -28,7 +41,7 @@ If you don't use a topic branch, we may ask you to re-do your pull request on a 
 
 #### Branch from "dev" not "master"
 
-The "master" branch of the [PROJECT NAME] repository is for production release code, and documentation updates only. Never create a pull request from the master branch. Always create a branch for your work from the "dev" branch. This will facilitate easier pull request management for the continuous work that is done in the dev branch.
+The "master" branch of the Kendo UI Core repository is for production release code, and documentation updates only. Never create a pull request from the master branch. Always create a branch for your work from the "dev" branch. This will facilitate easier pull request management for the continuous work that is done in the dev branch.
 
 #### Squash your commits
 
@@ -38,7 +51,7 @@ When you've completed your work on a topic branch, we prefer that you squash you
 
 See [Github's documentation for pull requests](https://help.github.com/articles/using-pull-requests).
 
-Pull requests are the preferred way to contribute to [PROJECT NAME]. Any time you can send us a pull request with the changes that you want, we will have an easier time seeing what you are trying to do. But a pull request in itself is not usually sufficient. There needs to be some context and purpose with it, and it should be done against specific branch.
+Pull requests are the preferred way to contribute to Kendo Ui Core. Any time you can send us a pull request with the changes that you want, we will have an easier time seeing what you are trying to do. But a pull request in itself is not usually sufficient. There needs to be some context and purpose with it, and it should be done against specific branch.
 
 ### Provide A Meaningful Description
 
@@ -56,7 +69,7 @@ Without at least the first 2 items in this list, we won't have any clue why you'
 
 ## Code Style
 
-We're not dogmatic about code style, here, but we do believe that a project should adhere to a consistent style. All Kendo UI Labs projects are expected to follow the following style guidelines, so please keep these in mind before you submit your Pull Requests:
+All code contributed to this project should adhere to a consistent style, so please keep these in mind before you submit your Pull Requests:
 
 - Tab indentation, size of 2
 - Semicolons are nice. Use them
@@ -66,4 +79,4 @@ We're not dogmatic about code style, here, but we do believe that a project shou
 - Return early
 - Be JSHint Valid
 
-Beyond these, you're best bet, when it doubt it to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js). 
+Beyond these, your best bet, when it doubt it to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js). 
