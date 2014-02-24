@@ -87,10 +87,11 @@ def upload_internal_build(options)
     Thread.current.send :sleep, 6
 end
 
-desc "Hide all current internal builds"
 
+desc "Upload all internal builds on kendoui.com"
 task "internal_builds:bundles:all"
 
+desc "Hide all current internal builds"
 task "internal_builds:uncheck_previous" do
     bot = TelerikAdminBot.instance
 
