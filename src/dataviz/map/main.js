@@ -1,5 +1,5 @@
 (function(f, define){
-    define(["../geometry", "./location"], f);
+    define(["../geometry", "./crs", "./location"], f);
 })(function(){
 
 (function ($, undefined) {
@@ -55,6 +55,9 @@
                 .css("position", "relative")
                 .empty()
                 .append(doc.createElement("div"));
+
+            this.wrapper = this.element;
+            this._tabindex();
 
             this._viewOrigin = this._getOrigin();
             this._initScroller();
@@ -595,6 +598,20 @@
                     this.trigger("zoomEnd", { originalEvent: e });
                 }
             }
+        }
+    });
+
+    var KeyboardNavigator = Class.extend({
+        init: function(element, options) {
+            this._keydown = proxy(this._keydown, this);
+            element.on("keydown", this._keydown);
+        },
+
+        dispose: function() {
+            element.off("keydown", this._keydown);
+        },
+
+        _keydown: function(e) {
         }
     });
 
