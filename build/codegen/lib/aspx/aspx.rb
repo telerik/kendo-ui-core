@@ -544,6 +544,20 @@ namespace <%= csharp_namespace %>
             class Component < CodeGen::Component
                 include Options
 
+                def initialize settings
+                    super settings
+
+                    import_metadata
+                end
+
+                def import_metadata
+                    metadata_filename = "build/codegen/lib/aspx/#{name.downcase}.yml"
+
+                    if File.exists? metadata_filename
+                        import(YAML.load(File.read(metadata_filename)))
+                    end
+                end
+
                 def csharp_class
                     return "Rad#{name.pascalize}" if widget?
 
