@@ -646,4 +646,79 @@
         ok(menu.wrapper.find(".k-lock").hasClass("k-state-disabled"));
         ok(!menu.wrapper.find(".k-unlock").hasClass("k-state-disabled"));
     });
+
+    test("only one visible locked column - multiple unlocked columns", function() {
+        var menu = setup({
+            owner: {
+                columns: [
+                    { field: "foo", locked: true, hidden: true },
+                    { field: "bar", locked: true, hidden: false },
+                    { field: "baz", locked: false, hidden: false },
+                    { field: "bax", locked: false, hidden: false },
+                ],
+            }
+        });
+
+        var checkboxes = menu.wrapper.find("[type=checkbox]");
+        equal(checkboxes.length, 4);
+        ok(!checkboxes.eq(0).prop("checked"));
+        ok(!checkboxes.eq(0).prop("disabled"));
+        ok(checkboxes.eq(1).prop("checked"));
+        ok(checkboxes.eq(1).prop("disabled"));
+
+        ok(checkboxes.eq(2).prop("checked"));
+        ok(!checkboxes.eq(2).prop("disabled"));
+        ok(checkboxes.eq(3).prop("checked"));
+        ok(!checkboxes.eq(3).prop("disabled"));
+    });
+
+    test("only one visible locked column - one visible unlocked column", function() {
+        var menu = setup({
+            owner: {
+                columns: [
+                    { field: "foo", locked: true, hidden: true },
+                    { field: "bar", locked: true, hidden: false },
+                    { field: "baz", locked: false, hidden: true },
+                    { field: "bax", locked: false, hidden: false },
+                ],
+            }
+        });
+
+        var checkboxes = menu.wrapper.find("[type=checkbox]");
+        equal(checkboxes.length, 4);
+        ok(!checkboxes.eq(0).prop("checked"));
+        ok(!checkboxes.eq(0).prop("disabled"));
+        ok(checkboxes.eq(1).prop("checked"));
+        ok(checkboxes.eq(1).prop("disabled"));
+
+        ok(!checkboxes.eq(2).prop("checked"));
+        ok(!checkboxes.eq(2).prop("disabled"));
+        ok(checkboxes.eq(3).prop("checked"));
+        ok(checkboxes.eq(3).prop("disabled"));
+    });
+
+    test("multiple visible locked columns - only one visible unlocked column", function() {
+        var menu = setup({
+            owner: {
+                columns: [
+                    { field: "foo", locked: true, hidden: false },
+                    { field: "bar", locked: true, hidden: false },
+                    { field: "baz", locked: false, hidden: true },
+                    { field: "bax", locked: false, hidden: false },
+                ],
+            }
+        });
+
+        var checkboxes = menu.wrapper.find("[type=checkbox]");
+        equal(checkboxes.length, 4);
+        ok(checkboxes.eq(0).prop("checked"));
+        ok(!checkboxes.eq(0).prop("disabled"));
+        ok(checkboxes.eq(1).prop("checked"));
+        ok(!checkboxes.eq(1).prop("disabled"));
+
+        ok(!checkboxes.eq(2).prop("checked"));
+        ok(!checkboxes.eq(2).prop("disabled"));
+        ok(checkboxes.eq(3).prop("checked"));
+        ok(checkboxes.eq(3).prop("disabled"));
+    });
 })();

@@ -282,7 +282,8 @@ var __meta__ = {
                     field: col.field || col.title,
                     title: col.title || col.field,
                     hidden: col.hidden,
-                    index: inArray(col, columns)
+                    index: inArray(col, columns),
+                    locked: !!col.locked
                 };
             });
         },
@@ -399,26 +400,50 @@ var __meta__ = {
         },
 
         _updateColumnsMenu: function() {
-            var attr = kendo.attr("field"),
+            var fieldAttr = kendo.attr("field"),
+                lockedAttr = kendo.attr("locked"),
                 visible = grep(this._ownerColumns(), function(field) {
                     return !field.hidden;
                 }),
                 visibleDataFields = grep(visible, function(field) {
                     return field.originalField;
+                }),
+                lockedCount = grep(visibleDataFields, function(col) {
+                    return col.locked === true;
+                }).length,
+                nonLockedCount = grep(visibleDataFields, function(col) {
+                    return col.locked !== true;
                 }).length;
 
             visible = map(visible, function(col) {
                 return col.field;
             });
 
-            this.wrapper
-                .find(".k-columns-item input[" + attr + "]")
-                .prop("checked", false)
-                .filter(function() {
-                    return inArray($(this).attr(attr), visible) > -1;
-                })
-                .prop("checked", true)
-                .prop("disabled", visibleDataFields == 1);
+            var checkboxes = this.wrapper
+                .find(".k-columns-item input[" + fieldAttr + "]")
+                .prop("disabled", false)
+                .prop("checked", false);
+
+            var idx, length, current, checked, locked;
+            for (idx = 0, length = checkboxes.length; idx < length; idx ++) {
+                current = checkboxes.eq(idx);
+                locked = current.attr(lockedAttr) === "true";
+                checked = false;
+                if (inArray(current.attr(fieldAttr), visible) > -1) {
+                    checked = true;
+                    current.prop("checked", checked);
+                }
+
+                if (checked) {
+                    if (lockedCount == 1 && locked) {
+                        current.prop("disabled", true);
+                    }
+
+                    if (nonLockedCount == 1 && !locked) {
+                        current.prop("disabled", true);
+                    }
+                }
+            }
         },
 
         _filter: function() {
@@ -518,7 +543,7 @@ var __meta__ = {
                     '#if(showColumns){#'+
                         '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
                         '#for (var idx = 0; idx < columns.length; idx++) {#'+
-                            '<li><input type="checkbox" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</li>'+
+                            '<li><input type="checkbox" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#" data-#=ns#locked="#=columns[idx].locked#"/>#=columns[idx].title#</li>'+
                         '#}#'+
                         '</ul></li>'+
                         '#if(filterable || lockedColumns){#'+
@@ -566,7 +591,7 @@ var __meta__ = {
                 '#if(showColumns){#'+
                     '<li class="k-columns-item"><span class="k-link">${messages.columns}</span><ul>'+
                     '#for (var idx = 0; idx < columns.length; idx++) {#'+
-                        '<li class="k-item"><label class="k-label"><input type="checkbox" class="k-check" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</label></li>'+
+                        '<li class="k-item"><label class="k-label"><input type="checkbox" class="k-check" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#" data-#=ns#locked="#=columns[idx].locked#"/>#=columns[idx].title#</label></li>'+
                     '#}#'+
                     '</ul></li>'+
                 '#}#'+
