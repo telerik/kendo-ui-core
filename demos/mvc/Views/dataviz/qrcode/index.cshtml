@@ -1,19 +1,21 @@
 ﻿        <div id="example" class="k-content">
-            <div class="demo-section">
-                <h3>E-mail</h3>
-                <div id="qrMail"></div>
-            </div>
-            <div class="demo-section">
-                <h3>URL</h3>
-                <div id="qrUrl"></div>
-            </div>
-            <div class="demo-section">
-                <h3>Telephone</h3>
-                <div id="qrTelephone"></div>
-            </div>
-            <div class="demo-section">
-                <h3>Geo Location</h3>
-                <div id="qrGeoLocation"></div>
+            <div class="qr-wrapper">            
+                <div class="demo-section">
+                    <h3>E-mail</h3>
+                    <div id="qrMail"></div>
+                </div>
+                <div class="demo-section">
+                    <h3>URL</h3>
+                    <div id="qrUrl"></div>
+                </div>
+                <div class="demo-section">
+                    <h3>Telephone</h3>
+                    <div id="qrTelephone"></div>
+                </div>
+                <div class="demo-section">
+                    <h3>Geo Location</h3>
+                    <div id="qrGeoLocation"></div>
+                </div>
             </div>
 
             <script type="text/javascript">
@@ -58,6 +60,10 @@
             </script>
 
             <style scoped>
+                .qr-wrapper {
+                    width: 715px;
+                    margin: 0 auto
+                }
                 .demo-section {
                     display: inline-block;
                     margin: 17px;
