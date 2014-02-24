@@ -15524,6 +15524,63 @@ Cancelling the event will prevent the user action.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>MaskedTextBox</description>
+        <name>maskedTextBox</name>
+        <tag-class>com.kendoui.taglib.MaskedTextBoxTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the culture info used by the widget.</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the input mask. The following mask rules are supported:</description>
+            <name>mask</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the character used to represent the absence of user input in the widget</description>
+            <name>promptChar</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines an object of custom mask rules.</description>
+            <name>rules</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the value of the MaskedTextBox widget.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Fires when the value is changed</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+
+    <tag>
+        <description>Fires when the value is changed</description>
+        <name>maskedTextBox-change</name>
+        <tag-class>com.kendoui.taglib.maskedtextbox.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Menu</description>
         <name>menu</name>
         <tag-class>com.kendoui.taglib.MenuTag</tag-class>
