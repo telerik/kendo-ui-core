@@ -158,6 +158,22 @@
         dom.find(".k-navigator-n").trigger("click");
     });
 
+    test("tab index is set on navigator", function() {
+        dom = $("<div>").kendoNavigator();
+        equal(dom.attr("tabIndex"), 0);
+    });
+
+    test("tab index is set on parent widget", function() {
+        var parent = $("<div data-role='foo'>");
+
+        dom = $("<div>");
+        dom.appendTo(parent);
+
+        dom.kendoNavigator();
+
+        equal(parent.attr("tabIndex"), 0);
+    });
+
     test("keyboard events fired on parent widget are processed", function() {
         var parent = $("<div data-role='foo'>");
 

@@ -56,9 +56,6 @@
                 .empty()
                 .append(doc.createElement("div"));
 
-            this.wrapper = this.element;
-            this._tabindex();
-
             this._viewOrigin = this._getOrigin();
             this._initScroller();
             this._initMarkers();

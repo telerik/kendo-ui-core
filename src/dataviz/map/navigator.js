@@ -23,6 +23,8 @@
             var parentElement = this.element.parent().closest("[" + kendo.attr("role") + "]");
             this._keyroot = parentElement.length > 0 ? parentElement : this.element;
 
+            this._tabindex(this._keyroot);
+
             this._keydown = proxy(this._keydown, this);
             this._keyroot.on("keydown", this._keydown);
         },
