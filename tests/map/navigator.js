@@ -42,7 +42,7 @@
         ok(dom.find("button:eq(3) span").is(".k-icon.k-i-arrow-w"));
     });
 
-    test("clicking the north button triggers the pan event with positive y argument and zero x argument", 2, function() {
+    test("clicking north triggers the pan event with positive y argument and zero x argument", 2, function() {
         dom = $("<div>").kendoNavigator({
             pan: function(e) {
                 equal(e.y, 1);
@@ -53,7 +53,7 @@
         dom.find(".k-navigator-n").trigger("click");
     });
 
-    test("clicking the south button triggers the pan event with negative y argument and zero x argument", 2, function() {
+    test("clicking south triggers the pan event with negative y argument and zero x argument", 2, function() {
         dom = $("<div>").kendoNavigator({
             pan: function(e) {
                 equal(e.y, -1);
@@ -64,7 +64,7 @@
         dom.find(".k-navigator-s").trigger("click");
     });
 
-    test("clicking the east button triggers the pan event with positive x argument and zero y argument", 2, function() {
+    test("clicking east triggers the pan event with positive x argument and zero y argument", 2, function() {
         dom = $("<div>").kendoNavigator({
             pan: function(e) {
                 equal(e.y, 0);
@@ -75,7 +75,7 @@
         dom.find(".k-navigator-e").trigger("click");
     });
 
-    test("clicking the west button triggers the pan event with negative x argument and zero y argument", 2, function() {
+    test("clicking west triggers the pan event with negative x argument and zero y argument", 2, function() {
         dom = $("<div>").kendoNavigator({
             pan: function(e) {
                 equal(e.y, 0);
@@ -84,6 +84,50 @@
         });
 
         dom.find(".k-navigator-w").trigger("click");
+    });
+
+    test("pressing up triggers the pan event with positive y argument and zero x argument", 2, function() {
+        dom = $("<div>").kendoNavigator({
+            pan: function(e) {
+                equal(e.y, 1);
+                equal(e.x, 0);
+            }
+        });
+
+        keydown(dom, kendo.keys.UP);
+    });
+
+    test("pressing down triggers the pan event with negative y argument and zero x argument", 2, function() {
+        dom = $("<div>").kendoNavigator({
+            pan: function(e) {
+                equal(e.y, -1);
+                equal(e.x, 0);
+            }
+        });
+
+        keydown(dom, kendo.keys.DOWN);
+    });
+
+    test("pressing right triggers the pan event with positive x argument and zero y argument", 2, function() {
+        dom = $("<div>").kendoNavigator({
+            pan: function(e) {
+                equal(e.y, 0);
+                equal(e.x, 1);
+            }
+        });
+
+        keydown(dom, kendo.keys.RIGHT);
+    });
+
+    test("pressing left triggers the pan event with negative x argument and zero y argument", 2, function() {
+        dom = $("<div>").kendoNavigator({
+            pan: function(e) {
+                equal(e.y, 0);
+                equal(e.x, -1);
+            }
+        });
+
+        keydown(dom, kendo.keys.LEFT);
     });
 
     test("pan event x argument is multiplied by panStep", function() {
@@ -107,4 +151,34 @@
 
         dom.find(".k-navigator-n").trigger("click");
     });
+
+    test("tab index is set on navigator", function() {
+        dom = $("<div>").kendoNavigator();
+        equal(dom.attr("tabIndex"), 0);
+    });
+
+    test("tab index is set on parent widget", function() {
+        var parent = $("<div data-role='foo'>");
+
+        dom = $("<div>");
+        dom.appendTo(parent);
+
+        dom.kendoNavigator();
+
+        equal(parent.attr("tabIndex"), 0);
+    });
+
+    test("keyboard events fired on parent widget are processed", function() {
+        var parent = $("<div data-role='foo'>");
+
+        dom = $("<div>");
+        dom.appendTo(parent);
+
+        dom.kendoNavigator({
+            pan: function() { ok(true); }
+        });
+
+        keydown(parent, kendo.keys.UP);
+    });
+
 })();

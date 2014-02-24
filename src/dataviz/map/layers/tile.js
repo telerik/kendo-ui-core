@@ -280,7 +280,7 @@
         },
 
         createElement: function() {
-            this.element = $("<img style='position: absolute; display: block; visibility: visible;' unselectable='on'></img>")
+            this.element = $("<img style='position: absolute; display: block; visibility: visible;' />")
                             .error(proxy(function(e) {
                                 e.target.setAttribute("src", this.errorUrl());
                             }, this));
