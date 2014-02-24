@@ -63,7 +63,7 @@
 
         notification.show("foo");
 
-        equal($(document.body).find(".k-notification").parent().css("margin"), "0px");
+        equal($(document.body).find(".k-notification").parent()[0].style.margin, "0px"); // using .css("margin") will fail in Firefox
     });
 
     test("show method creates a Kendo UI Popup with three zero paddings, except top by default", 3, function() {
