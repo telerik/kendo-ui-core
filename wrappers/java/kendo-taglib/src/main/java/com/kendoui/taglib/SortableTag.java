@@ -1,8 +1,15 @@
 package com.kendoui.taglib;
 
+import java.io.IOException;
+import java.io.StringWriter;
+
 import javax.servlet.jsp.JspException;
 
+import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.Empty;
+import com.kendoui.taglib.html.Script;
 import com.kendoui.taglib.json.Function;
+import com.kendoui.taglib.json.Serializer;
 import com.kendoui.taglib.sortable.CancelFunctionTag;
 import com.kendoui.taglib.sortable.ChangeFunctionTag;
 import com.kendoui.taglib.sortable.EndFunctionTag;
@@ -14,6 +21,36 @@ public class SortableTag extends WidgetTag /* interfaces *//* interfaces */{
 
     public SortableTag() {
         super("Sortable");
+    }
+    
+    @Override
+    protected Element<?> createElement() {
+        return new Empty();
+    }
+    
+    @Override
+    public Script script() {
+        StringWriter content = new StringWriter();
+
+        content.append("jQuery(function(){jQuery(\"")
+               .append(getName())
+               .append("\").kendo")
+               .append("Sortable")
+               .append("(");
+
+        try {
+            new Serializer().serialize(content, this);
+        } catch (IOException exception) {
+            // StringWriter is not supposed to throw IOException
+        }
+
+        content.append(");})");
+
+        Script script = new Script();
+
+        script.html(content.toString());
+
+        return script;
     }
 
     @Override
@@ -80,6 +117,22 @@ public class SortableTag extends WidgetTag /* interfaces *//* interfaces */{
 
     public void setCursorOffset(java.lang.Object value) {
         setProperty("cursorOffset", value);
+    }
+    
+    public java.lang.String getContainer() {
+        return (java.lang.String) getProperty("container");
+    }
+
+    public void setContainer(java.lang.String value) {
+        setProperty("container", value);
+    }
+    
+    public java.lang.String getConnectWith() {
+        return (java.lang.String) getProperty("connectWith");
+    }
+
+    public void setConnectWith(java.lang.String value) {
+        setProperty("connectWith", value);
     }
 
     public java.lang.String getDisabled() {
