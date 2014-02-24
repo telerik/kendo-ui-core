@@ -780,7 +780,6 @@
                 return g;
             }
 
-            if(shapeDefaults.type == "Rect") debugger;
             if (!kendo.isFunction(visualTemplate) && shapeDefaults.serializationSource === "external") {
                 return externalLibraryShape(shapeDefaults.name, options, shapeDefaults);
             } else if (shapeDefaults.path) {
