@@ -149,7 +149,7 @@
 </div>
 
 <div class="column">
-    <h3 title="Kendo UI Tooltip" id="tooltip">Tooltip (hover me)</h3>
+    <h3 title="Kendo UI Tooltip" id="tooltip" style="width:10em">Tooltip (hover me)</h3>
 
     <h3>Upload</h3>
     <input id="upload" type="file" />
@@ -343,7 +343,7 @@
         $("#tooltip").kendoTooltip({
             autoHide: false,
             position: "top"
-        });
+        }).data("kendoTooltip").show();
 
         $("#upload").kendoUpload();
 
