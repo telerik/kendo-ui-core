@@ -12,14 +12,14 @@ Kendo UI Core is a free and open-source distribution of Kendo UI. The following 
 
 | Feature | Core | Complete | UI for MVC/JSP/PHP |
 | ------- | :----: | :--------: | :------------------: |
-| *_Framework_* |
+| **Framework** |
 | DataSource | Yes | Yes | Yes |
 | MVVM | Yes | Yes | Yes |
 | SPA | Yes | Yes | Yes |
 | Effects | Yes | Yes | Yes |
 | Drag & Drop | Yes | Yes | Yes |
 | Validator | Yes | Yes | Yes |
-| *_Widgets_* |
+| **Widgets** |
 | AutoComplete | Yes | Yes | Yes |
 | Calendar | Yes | Yes | Yes |
 | ComboBox | Yes | Yes | Yes |
@@ -49,12 +49,12 @@ Kendo UI Core is a free and open-source distribution of Kendo UI. The following 
 | Scheduler | No | Yes | Yes |
 | TreeView | No | Yes | Yes |
 | Upload | No | Yes | Yes |
-| *_Data Viz_* |
+| **Data Viz** |
 | Charts | No | Yes | Yes |
 | Gauges | No | Yes | Yes |
 | QR Code | No | Yes | Yes |
 | Bar Code | No | Yes | Yes |
-| *_Mobile_* |
+| **Mobile** |
 | Mobile Widgets | No | Yes | Yes |
 | Mobile Framework Features | No | Yes | Yes | 
 | Official Support | No | Yes | Yes
