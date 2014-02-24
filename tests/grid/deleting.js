@@ -133,7 +133,8 @@
                 });
 
             var destroyEditable = stub(grid, {
-                "_destroyEditable": grid._destroyEditable
+                "_destroyEditable": $.noop,
+                "_showMessage": function() { return true; }
             });
 
             grid.removeRow(table.find("tbody>tr:first"));

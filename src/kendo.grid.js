@@ -1354,7 +1354,7 @@ kendo_module({
         _removeRow: function(row) {
             var that = this,
                 model,
-                mode;
+                mode = that._editMode();
 
             if (mode !== "incell") {
                 that.cancelRow();
@@ -1364,9 +1364,8 @@ kendo_module({
             model = that._modelForContainer(row);
 
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
-                mode = that._editMode();
 
-                                that.dataSource.remove(model);
+                that.dataSource.remove(model);
 
                 if (mode === "inline" || mode === "popup") {
                     that.dataSource.sync();
