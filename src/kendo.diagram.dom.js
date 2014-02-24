@@ -423,7 +423,6 @@
             },
             options: {
                 type: DEFAULT_SHAPE_TYPE,
-                data: DEFAULT_SHAPE_TYPE,
                 path: "",
                 visual: null,
                 stroke:{
@@ -721,9 +720,9 @@
                             if (shapeDefinition.options.name === libraryShapeName && shapeDefinition.options.serializationSource === "external") {
                                 // the JSON options do not contain the funcs managing the complex layout, so need to transfer them
                                 options.layout = shapeDefinition.options.layout;
-                                options.data = shapeDefinition.options.data;
+                                options.visual = shapeDefinition.options.visual;
                                 options.rebuild = shapeDefinition.options.rebuild;
-                                return shapeDefinition.options.data(shapeDefaults);
+                                return shapeDefinition.options.visual(shapeDefaults);
                             }
                         }
                     }
@@ -2318,7 +2317,7 @@
                     }
 
                     var opt = {
-                        data: options.visualTemplate,
+                        visual: options.visualTemplate,
                         context: node
                     };
                     shape = new Shape(opt, node);
