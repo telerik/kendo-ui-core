@@ -71,6 +71,7 @@ body of the chart.
 
     /**
     * The interval between major divisions.
+If the valueAxis.type is set to "log", the majorUnit value will be used for the base of the logarithm.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -126,6 +127,7 @@ body of the chart.
 
     /**
     * The interval between minor divisions. It defaults to 1/5th of the valueAxis.majorUnit.
+If the valueAxis.type is set to "log", the minorUnit value represents the number of divisions between two major units and defaults to the major unit minus one.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
     */
@@ -186,6 +188,15 @@ The axis will be rendered in the first (default) pane if not set.
     */
     public function title($value) {
         return $this->setProperty('title', $value);
+    }
+
+    /**
+    * The axis type.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItem
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
     }
 
     /**
