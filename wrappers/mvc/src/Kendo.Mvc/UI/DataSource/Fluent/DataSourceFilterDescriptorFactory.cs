@@ -1,24 +1,19 @@
 namespace Kendo.Mvc.UI.Fluent
 {
+    using Extensions;
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
-    using Extensions;
-    using Infrastructure;
-
     /// <summary>
     /// Defines the fluent interface for configuring filter.
     /// </summary>    
-    public class DataSourceFilterDescriptorFactory<TModel> : IHideObjectMembers where TModel : class
+    public class DataSourceFilterDescriptorFactory<TModel> : DataSourceFilterDescriptorFactoryBase, IHideObjectMembers where TModel : class
     {
         public DataSourceFilterDescriptorFactory(IList<IFilterDescriptor> filters)
+            :base(filters)
         {
-
-            Filters = filters;
         }
-
-        protected IList<IFilterDescriptor> Filters { get; private set; }
 
         /// <summary>
         /// Specifies the member on which the filter should be applied.
@@ -63,26 +58,6 @@ namespace Kendo.Mvc.UI.Fluent
             var filter = CreateFilter(expression);
 
             return new DataSourceFilterStringDescriptorBuilder(filter);
-        }
-
-        public virtual void AddRange(IEnumerable<IFilterDescriptor> filters)
-        {
-            foreach (var filter in filters)
-            {
-                var composite = filter as CompositeFilterDescriptor;
-
-                if (composite == null)
-                {
-                    composite = new CompositeFilterDescriptor
-                    {
-                        LogicalOperator = FilterCompositionLogicalOperator.And
-                    };
-
-                    composite.FilterDescriptors.Add(filter);
-                }
-
-                Filters.Add(composite);
-            }
         }
 
         protected virtual CompositeFilterDescriptor CreateFilter<TValue>(Expression<Func<TModel, TValue>> expression)

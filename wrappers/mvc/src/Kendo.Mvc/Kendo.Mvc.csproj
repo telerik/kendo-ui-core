@@ -704,13 +704,17 @@
     <Compile Include="UI\DataSource\Fluent\CustomDataSourceSchemaBuilderBase.cs" />
     <Compile Include="UI\DataSource\Fluent\CustomDataSourceTransportBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\CustomDataSourceTransportBuilderBase.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceFilterDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceModelDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceModelFieldDescriptorBuilderBase.cs" />
     <Compile Include="UI\DataSource\Fluent\ListViewAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerModelDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceFilterDescriptorFactory.cs" />
+    <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceSchemaBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceTransportBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceModelDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyWebApiDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\SchedulerCustomDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\SchedulerWebApiDataSourceBuilder.cs" />

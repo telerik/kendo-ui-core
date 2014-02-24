@@ -25,5 +25,16 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new ReadOnlyWebApiDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
+
+
+        /// <summary>
+        /// Use it to configure Custom binding.
+        /// </summary>
+        public ReadOnlyCustomDataSourceBuilder Custom()
+        {
+            dataSource.Type = DataSourceType.Custom;
+
+            return new ReadOnlyCustomDataSourceBuilder(dataSource, viewContext, urlGenerator);
+        }
     }
 }

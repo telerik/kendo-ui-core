@@ -8,7 +8,7 @@
     /// Defines the fluent interface for configuring the <see cref="DataSource"/> Model definition.
     /// </summary>
     /// <typeparam name="TModel">Type of the model</typeparam>
-    public class DataSourceModelDescriptorFactoryBase<TModel> : IHideObjectMembers
+    public abstract class DataSourceModelDescriptorFactoryBase<TModel> : IHideObjectMembers
         where TModel : class
     {
         protected readonly ModelDescriptor model;
@@ -16,19 +16,6 @@
         public DataSourceModelDescriptorFactoryBase(ModelDescriptor model)
         {
             this.model = model;
-        }
-
-        /// <summary>
-        /// Specify the member used to identify an unique Model instance.
-        /// </summary>
-        /// <typeparam name="TValue">Type of the field</typeparam>
-        /// <param name="expression">Member access expression which describes the member</param>
-        public virtual void Id<TValue>(Expression<Func<TModel, TValue>> expression)
-        {
-            var dataKey = new GridDataKey<TModel, TValue>(expression);
-            dataKey.RouteKey = dataKey.Name;
-
-            model.Id = dataKey;
         }
 
         /// <summary>

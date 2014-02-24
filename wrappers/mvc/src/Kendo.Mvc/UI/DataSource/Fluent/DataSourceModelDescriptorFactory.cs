@@ -19,6 +19,19 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specify the member used to identify an unique Model instance.
+        /// </summary>
+        /// <typeparam name="TValue">Type of the field</typeparam>
+        /// <param name="expression">Member access expression which describes the member</param>
+        public virtual void Id<TValue>(Expression<Func<TModel, TValue>> expression)
+        {
+            var dataKey = new GridDataKey<TModel, TValue>(expression);
+            dataKey.RouteKey = dataKey.Name;
+
+            model.Id = dataKey;
+        }
+
+        /// <summary>
         /// Describes a Model field
         /// </summary>
         /// <typeparam name="TValue">Field type</typeparam>

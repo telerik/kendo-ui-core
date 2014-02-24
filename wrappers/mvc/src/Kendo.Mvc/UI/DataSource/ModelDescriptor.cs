@@ -40,40 +40,44 @@
                 json["id"] = Id.Name;
             }
 
-            var fields = new Dictionary<string, object>();
-            json["fields"] = fields;            
-
-            Fields.Each(prop =>             
+            if (Fields.Count > 0)
             {
-                var field = new Dictionary<string, object>();
-                fields[prop.Member] = field;
+                var fields = new Dictionary<string, object>();
+                json["fields"] = fields;
 
-                if (!prop.IsEditable)
+                Fields.Each(prop =>
                 {
-                    field["editable"] = false;
-                }
+                    var field = new Dictionary<string, object>();
+                    fields[prop.Member] = field;
 
-                field["type"] = prop.MemberType.ToJavaScriptType().ToLowerInvariant();
+                    if (!prop.IsEditable)
+                    {
+                        field["editable"] = false;
+                    }
 
-                if (prop.MemberType.IsNullableType() || prop.DefaultValue != null) {
-                    field["defaultValue"] = prop.DefaultValue;
-                }
+                    field["type"] = prop.MemberType.ToJavaScriptType().ToLowerInvariant();
 
-                if (!string.IsNullOrEmpty(prop.From))
-                {
-                    field["from"] = prop.From;
-                }
+                    if (prop.MemberType.IsNullableType() || prop.DefaultValue != null)
+                    {
+                        field["defaultValue"] = prop.DefaultValue;
+                    }
 
-                if (prop.IsNullable)
-                {
-                     field["nullable"] = prop.IsNullable;
-                }
+                    if (!string.IsNullOrEmpty(prop.From))
+                    {
+                        field["from"] = prop.From;
+                    }
 
-                if (prop.Parse.HasValue())
-                {
-                    field["parse"] = prop.Parse;
-                }
-            });
+                    if (prop.IsNullable)
+                    {
+                        field["nullable"] = prop.IsNullable;
+                    }
+
+                    if (prop.Parse.HasValue())
+                    {
+                        field["parse"] = prop.Parse;
+                    }
+                });
+            }
         }
 
         private IList<ModelFieldDescriptor> Translate(ModelMetadata metadata)

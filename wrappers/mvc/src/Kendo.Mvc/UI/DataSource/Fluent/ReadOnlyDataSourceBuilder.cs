@@ -86,6 +86,16 @@
             return this;
         }
 
+        /// <summary>
+        /// Use it to configure Custom binding.
+        /// </summary>
+        public ReadOnlyCustomDataSourceBuilder Custom()
+        {
+            dataSource.Type = DataSourceType.Custom;
+
+            return new ReadOnlyCustomDataSourceBuilder(dataSource, viewContext, urlGenerator);
+        }
+
         protected virtual void SetOperationUrl(CrudOperation operation, string actionName, string controllerName, object routeValues)
         {
             operation.Action(actionName, controllerName, routeValues);

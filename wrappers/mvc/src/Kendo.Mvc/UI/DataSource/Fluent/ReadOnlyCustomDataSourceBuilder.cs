@@ -20,6 +20,24 @@
             return this;
         }
 
-        //Include model builder
+        /// <summary>
+        /// Configures Schema properties
+        /// </summary>
+        public ReadOnlyCustomDataSourceBuilder Schema(Action<ReadOnlyCustomDataSourceSchemaBuilder<object>> configurator)
+        {
+            configurator(new ReadOnlyCustomDataSourceSchemaBuilder<object>(dataSource.Schema));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the initial filter.
+        /// </summary>
+        public virtual ReadOnlyCustomDataSourceBuilder Filter(Action<ReadOnlyCustomDataSourceFilterDescriptorFactory> configurator)
+        {
+            configurator(new ReadOnlyCustomDataSourceFilterDescriptorFactory(dataSource.Filters));
+
+            return this;
+        }
     }
 }

@@ -132,7 +132,11 @@ namespace Kendo.Mvc.UI
                 json.Merge(Events);
             }
 
-            json["schema"] = Schema.ToJson();
+            var schema = Schema.ToJson();
+            if (schema.Keys.Any())
+            {
+                json["schema"] = schema;
+            }
 
             if (Batch)
             {
