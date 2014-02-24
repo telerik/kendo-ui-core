@@ -20,7 +20,7 @@ var mediaPlayerShape = window.kendo.Class.extend({
         minWidth: 120,
         serializationSource: "external",
         autoSize: false,
-        data: function (data) {
+        visual: function (data) {
 
             // define the elements of the shape and in the layout method define how they are positioned upon resize
 
@@ -153,7 +153,7 @@ var tabControl = window.kendo.Class.extend({
         name: "TabControl",
         serializationSource: "external", // tells the deserialization that this shape lib will be needed
 
-        data: function (data) {
+        visual: function (data) {
             var text = data.hasOwnProperty("content") ? (window.kendo.isFunction(data.content) ? data.content() : data.content.text) : "Tab1, Tab2, Tab3";
 
             function makeTab(index, title) {

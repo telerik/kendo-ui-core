@@ -425,6 +425,7 @@
                 type: "Shape",
                 data: DEFAULT_SHAPE_TYPE,
                 path: "",
+                visual: null,
                 stroke:{
                     color: "DimGray",
                     width: 1,
@@ -780,14 +781,14 @@
                 return g;
             }
 
-            if (!kendo.isFunction(shapeDefaults.data) && shapeDefaults.hasOwnProperty("serializationSource") && shapeDefaults.serializationSource === "external") {
+            if (!kendo.isFunction(shapeDefaults.visual) && shapeDefaults.serializationSource === "external") {
                 return externalLibraryShape(shapeDefaults.name, options, shapeDefaults);
             } else if (shapeDefaults.path) {
                 return pathShape(shapeDefaults.path, shapeDefaults);
+            } else if (isFunction(shapeDefaults.visual)) { // custom template
+                return functionShape(shapeDefaults.visual, this, shapeDefaults);
             } else if (isString(visualTemplate)) {
                 return simpleShape(shapeDefaults.data, shapeDefaults);
-            } else if (isFunction(visualTemplate)) { // custom template
-                return functionShape(visualTemplate, this, shapeDefaults);
             } else if (Object.prototype.toString.call(visualTemplate) === '[object Object]') { //literal
                 var origin = visualTemplate.origin || "internal";
 

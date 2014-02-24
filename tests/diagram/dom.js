@@ -178,6 +178,20 @@
         equal(path.shapeVisual.data(), shape.options.path, "the shape visual should have the same path data");
     });
 
+    test("visual shape creation", function() {
+        var visualCalled = false,
+            shape = diagram.addShape({
+                id: "visualShape",
+                visual: function() {
+                    visualCalled = true;
+                    return new kendo.diagram.Group({ id: "shapeRoot" });
+                }
+            });
+
+        ok(visualCalled, "visual method should be called");
+        equal(diagram.shapes.length, 1, "should have a single shape");
+    });
+
     module("event handling", {
         setup: function () {
             QUnit.fixture.html('<div id="canvas" />');
