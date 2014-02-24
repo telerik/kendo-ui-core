@@ -130,7 +130,7 @@
 
             var labelAxis = chart._plotArea.namedCategoryAxes["_navigator_labels"];
             var ticks = labelAxis.getTickPositions();
-            close(ticks[2], 411, 1);
+            close(ticks[2], 411, 2);
         });
 
         test("last category is not collapsed (months)", function() {
