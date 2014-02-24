@@ -2,7 +2,7 @@
 
 ## Before You Start
 
-Anyone wishing to contribute to the Kendo UI Core project MUST read & sign the [Kendo UI Core Contribution License Agreement](http://www.telerik.com/kendo-ui/cla). The Kendo UI team is legally prevented from accepting any pull requests from users who have not signed the CLA first.
+Anyone wishing to contribute to the Kendo UI Core project MUST read & sign the [Kendo UI Core Contribution License Agreement](http://www.telerik.com/kendo-ui/cla). The Kendo UI team cannot accept pull requests from users who have not signed the CLA first.
 
 ## Introduction
 
@@ -12,7 +12,7 @@ These guidelines are here to facilitate your contribution and streamline the pro
 
 1. Always update to the most recent master release; the bug may already be resolved.
 2. Search for similar issues in the issues list for this repo; it may already be an identified problem.
-3. Make sure you can reproduce your problem on our sandbox at try.kendoui.com
+3. Make sure you can reproduce your problem on our sandbox at try.kendoui.com.
 4. If this is a bug or problem that is clear, simple, and is unlikely to require any discussion -- it is OK to open an issue on GitHub with a reproduction of the bug including workflows, screenshots, or links to examples on try.kendoui.com. If possible, submit a Pull Request with a failing test. If you'd rather take matters into your own hands, fix the bug yourself (jump down to the "Code Fixes and Enhancements" section).
 
 ## Requesting New Features
