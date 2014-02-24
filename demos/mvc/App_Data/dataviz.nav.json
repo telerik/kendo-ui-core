@@ -851,6 +851,7 @@
             "thumbnailUrl": "content/dataviz/dashboards/climate.gif",
             "expanded": "true",
             "items": [{
+                "text": "Launch",
                 "url": "sparklines/index.html"
             }],
             "name": "climate-control"
