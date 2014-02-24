@@ -2389,7 +2389,9 @@ function pad(number, digits, end) {
             PAGEDOWN: 34,
             F2: 113,
             F10: 121,
-            F12: 123
+            F12: 123,
+            NUMPAD_PLUS: 107,
+            NUMPAD_MINUS: 109
         },
         support: kendo.support || support,
         animate: kendo.animate || animate,
