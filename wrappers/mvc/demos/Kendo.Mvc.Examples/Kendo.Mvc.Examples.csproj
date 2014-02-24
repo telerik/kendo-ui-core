@@ -346,6 +346,12 @@
     <Compile Include="Controllers\Web\ComboBox\RtlController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ServerFilteringController.cs" />
     <Compile Include="Controllers\Web\ComboBox\TemplateController.cs" />
+    <Compile Include="Controllers\Web\MaskedTextBox\ApiController.cs" />
+    <Compile Include="Controllers\Web\MaskedTextBox\EventsController.cs" />
+    <Compile Include="Controllers\Web\MaskedTextBox\GlobalizationController.cs" />
+    <Compile Include="Controllers\Web\MaskedTextBox\IndexController.cs" />
+    <Compile Include="Controllers\Web\MaskedTextBox\ValidationController.cs" />
+    <Compile Include="Controllers\Web\MaskedTextBox\RtlController.cs" />
     <Compile Include="Controllers\Web\DatePicker\ApiController.cs" />
     <Compile Include="Controllers\Web\DatePicker\EventsController.cs" />
     <Compile Include="Controllers\Web\DatePicker\GlobalizationController.cs" />
@@ -3072,6 +3078,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\sortable\sortable_panels.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\maskedtextbox\api.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\maskedtextbox\events.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\maskedtextbox\globalization.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\maskedtextbox\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\maskedtextbox\validation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\maskedtextbox\rtl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\web\maskedtextbox\api.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\web\maskedtextbox\events.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\web\maskedtextbox\globalization.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\web\maskedtextbox\index.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\web\maskedtextbox\rtl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\web\maskedtextbox\validation.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
