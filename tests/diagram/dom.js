@@ -192,6 +192,16 @@
         equal(diagram.shapes.length, 1, "should have a single shape");
     });
 
+    test("typed shape", function() {
+        var shape = diagram.addShape({
+            id: "circle",
+            type: "circle"
+        });
+
+        equal(diagram.shapes.length, 1, "should have a single shape");
+        equal(diagram.shapes[0].shapeVisual.options.type, shape.options.type, "shape visual is same type as the shape itself");
+    });
+
     module("event handling", {
         setup: function () {
             QUnit.fixture.html('<div id="canvas" />');

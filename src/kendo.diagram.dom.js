@@ -422,7 +422,7 @@
                 }
             },
             options: {
-                type: "Shape",
+                type: DEFAULT_SHAPE_TYPE,
                 data: DEFAULT_SHAPE_TYPE,
                 path: "",
                 visual: null,
@@ -708,7 +708,7 @@
             var diagram = options.diagram;
             delete options.diagram; // avoid stackoverflow and reassign later on again
             var shapeDefaults = deepExtend({}, options, { x: 0, y: 0 }),
-                visualTemplate = shapeDefaults.data; // Shape visual should not have position in its parent group.
+                visualTemplate = shapeDefaults.visual; // Shape visual should not have position in its parent group.
 
             function externalLibraryShape(libraryShapeName, options, shapeDefaults) {
                 // if external serializationSource we need to consult the attached libraries
@@ -781,14 +781,13 @@
                 return g;
             }
 
-            if (!kendo.isFunction(shapeDefaults.visual) && shapeDefaults.serializationSource === "external") {
+            if(shapeDefaults.type == "Rect") debugger;
+            if (!kendo.isFunction(visualTemplate) && shapeDefaults.serializationSource === "external") {
                 return externalLibraryShape(shapeDefaults.name, options, shapeDefaults);
             } else if (shapeDefaults.path) {
                 return pathShape(shapeDefaults.path, shapeDefaults);
-            } else if (isFunction(shapeDefaults.visual)) { // custom template
-                return functionShape(shapeDefaults.visual, this, shapeDefaults);
-            } else if (isString(visualTemplate)) {
-                return simpleShape(shapeDefaults.data, shapeDefaults);
+            } else if (isFunction(visualTemplate)) { // custom template
+                return functionShape(visualTemplate, this, shapeDefaults);
             } else if (Object.prototype.toString.call(visualTemplate) === '[object Object]') { //literal
                 var origin = visualTemplate.origin || "internal";
 
@@ -807,6 +806,8 @@
                         return functionShape(definition, this, shapeDefaults);
                     }
                 }
+            } else if (isString(shapeDefaults.type)) {
+                return simpleShape(shapeDefaults.type, shapeDefaults);
             } else {
                 return new Rectangle(shapeDefaults);
             }
