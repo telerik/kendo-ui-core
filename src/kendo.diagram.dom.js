@@ -1367,7 +1367,7 @@
                     source = diagram._findConnectionShape(conn.from);
                     target = diagram._findConnectionShape(conn.to);
 
-                    diagram.connect(source, target, defaults);
+                    diagram.connect(source, target, deepExtend({}, defaults, conn));
                 }
             },
 
