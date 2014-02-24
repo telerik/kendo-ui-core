@@ -424,6 +424,7 @@
             options: {
                 type: "Shape",
                 data: DEFAULT_SHAPE_TYPE,
+                path: "",
                 stroke:{
                     color: "DimGray",
                     width: 1,
@@ -742,6 +743,12 @@
                 }
             }
 
+            function pathShape(path, shapeDefaults) {
+                shapeDefaults.data = path;
+
+                return new Path(shapeDefaults);
+            }
+
             function functionShape(func, context, shapeDefaults) {
                 return func.call(context, shapeDefaults);
             }
@@ -775,6 +782,8 @@
 
             if (!kendo.isFunction(shapeDefaults.data) && shapeDefaults.hasOwnProperty("serializationSource") && shapeDefaults.serializationSource === "external") {
                 return externalLibraryShape(shapeDefaults.name, options, shapeDefaults);
+            } else if (shapeDefaults.path) {
+                return pathShape(shapeDefaults.path, shapeDefaults);
             } else if (isString(visualTemplate)) {
                 return simpleShape(shapeDefaults.data, shapeDefaults);
             } else if (isFunction(visualTemplate)) { // custom template

@@ -277,7 +277,7 @@ var shapesSource = [
     {
         options: {
             name: "Triangle",
-            data: "m0,100 L100,100 L50,0z",
+            path: "m0,100 L100,100 L50,0z",
             connectors: [
                 {
                     name: "Top",

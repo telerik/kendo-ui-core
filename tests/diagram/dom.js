@@ -157,6 +157,27 @@
         ok(diagramFn.layout.called, "the layout method of the diagram should be called");
     });
 
+    module("shape creation options", {
+        setup: function() {
+            QUnit.fixture.html('<div id=canvas />');
+            diagram = $("#canvas").kendoDiagram().getKendoDiagram();
+        },
+        teardown: function() {
+            diagram.destroy();
+        }
+    });
+
+    test("create path shape", function() {
+        var shape = diagram.addShape({
+            id: "pathShape",
+            path: "m0,100 L100,100 L50,0z"
+        });
+
+        equal(diagram.shapes.length, 1, "should have a single path");
+        var path = diagram.shapes[0];
+        equal(path.shapeVisual.data(), shape.options.path, "the shape visual should have the same path data");
+    });
+
     module("event handling", {
         setup: function () {
             QUnit.fixture.html('<div id="canvas" />');
