@@ -802,6 +802,7 @@
 
     test("navigate to view with less groups", function() {
         setupWidget({
+            date: new Date("2014/02/23"),
             resources: [
                 {
                     field: "roomId",
