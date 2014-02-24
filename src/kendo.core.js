@@ -2943,9 +2943,9 @@ function pad(number, digits, end) {
         e.preventDefault();
     };
 
-    kendo.widgetInstance = function(element, suite) {
+    kendo.widgetInstance = function(element, suites) {
         var role = element.data(kendo.ns + "role"),
-            widgets;
+            widgets = [], i, length;
 
         if (role) {
             // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
@@ -2953,8 +2953,14 @@ function pad(number, digits, end) {
                 role = "scroller";
             }
 
-            if (suite) {
-                widgets = [ suite.roles[role] ];
+            if (suites) {
+                if (suites[0]) {
+                    for (i = 0, length = suites.length; i < length; i ++) {
+                        widgets.push(suites[i].roles[role]);
+                    }
+                } else {
+                    widgets.push(suites.roles[role]);
+                }
             }
             else {
                 widgets = [ kendo.ui.roles[role], kendo.dataviz.ui.roles[role],  kendo.mobile.ui.roles[role] ];
@@ -2964,7 +2970,7 @@ function pad(number, digits, end) {
                 widgets = [ kendo.getter(role)(window) ];
             }
 
-            for (var i = 0, length = widgets.length; i < length; i ++) {
+            for (i = 0, length = widgets.length; i < length; i ++) {
                 var widget = widgets[i];
                 if (widget) {
                     var instance = element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
