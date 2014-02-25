@@ -454,7 +454,6 @@ $(function () {
             "hoveredBackground":"#70CAFF",
             "cursor":"pointer",
             "content":{
-                "align":"center middle",
                 "text":"kur",
                 color: "red"
             },
@@ -494,12 +493,6 @@ $(function () {
             "background":"steelblue",
             "hoveredBackground":"#70CAFF",
             "cursor":"pointer",
-            "content":{
-                "align":"center middle",
-                "text":""
-            },
-            "editable":true,
-            "selectable":true,
             "type":"Rectangle",
             "x":400,
             "y":300,
@@ -527,6 +520,33 @@ $(function () {
                 color: "red",
                 width: 4,
                 dashType: "dot"
+            },
+
+            visual: function(a, b, c) {
+                var g = new window.kendo.diagram.Group({
+                    autoSize: true
+                });
+
+                g.append(new window.kendo.diagram.Rectangle({
+                    width: 150,
+                    height: 150,
+                    background: "red"
+                }));
+
+                g.append(new window.kendo.diagram.TextBlock({
+                    text: "patka",
+                    fontSize: 16,
+                    x: 50,
+                    y: 20
+                }));
+                g.append(new window.kendo.diagram.TextBlock({
+                    text: "vtora patka",
+                    fontSize: 16,
+                    x: 50,
+                    y: 40
+                }));
+
+                return g;
             }
         }],
         connectionDefaults: {

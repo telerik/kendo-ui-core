@@ -323,7 +323,14 @@ var __meta__ = {
             }
         },
         _hover: function (value) {
-            this._background(value ? this.options.hover.background : this.options.background);
+            var color = this.options.background;
+
+            if (value && Utils.isDefined(this.options.hover.background)) {
+                color = this.options.hover.background;
+            }
+
+
+            this._background(color);
         },
         _background: function (value) {
             this.native.setAttribute("fill", this._getColor(value));

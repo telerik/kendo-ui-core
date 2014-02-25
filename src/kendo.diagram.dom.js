@@ -480,8 +480,7 @@
                     if (size) {
                         if (this.shapeVisual.options.autoSize) {
                             this.bounds(new Rect(options.x, options.y, size.width, size.height));
-                        }
-                        else {
+                        } else {
                             this.shapeVisual.redraw();
                         }
                     }
