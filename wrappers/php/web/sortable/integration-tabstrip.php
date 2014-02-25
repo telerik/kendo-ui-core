@@ -84,16 +84,20 @@ require_once '../../lib/Kendo/Autoload.php';
         font-weight: normal;
         padding: 0 0 1em 0;
     }
+
     .demo-section {
         width: 500px;
     }
+
     .k-tabstrip .k-content {
         padding-top: 10px;
         padding-bottom: 10px;
     }
+
     #hint {
         border: none;
     }
+
     #hint .k-tabstrip-items {
         padding: 0;
     }

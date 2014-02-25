@@ -54,6 +54,7 @@ echo $sortableFilter->render();
             padding: 20px;
             float: left;
         }
+
         .sortable-wrapper p {
             margin: 5px auto 20px;
         }
@@ -81,5 +82,4 @@ echo $sortableFilter->render();
         }
 
     </style>
-        
 <?php require_once '../../include/footer.php'; ?>

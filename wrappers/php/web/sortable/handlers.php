@@ -35,7 +35,6 @@ echo $sortable->render();
             </div>
         </div>  
     </div>
-    
 
     <script>
         function hint(element) {
@@ -50,6 +49,7 @@ echo $sortable->render();
             -ms-user-select: none;
             user-select: none;
         }
+
         #pages {
             margin: 30px auto;
             width: 300px;
@@ -57,10 +57,12 @@ echo $sortable->render();
             border-radius: 4px; 
             border: 1px solid rgba(0,0,0,.1);
         }
+
         #pages-title {
             height: 60px;
             background: url('../../content/web/sortable/handlers-title.png') no-repeat 50% 15px;
         }
+
         #pages-title span {
             display: none;
         }
@@ -83,21 +85,23 @@ echo $sortable->render();
             border-radius: 3px 0 0 3px;
             background: url('../../content/web/sortable/handle.png') no-repeat 50% 50% #ccc;  
         }
+
         .handler:hover {
-            background-color: #2db245;  
+            background-color: #2db245;
         }
 
         .placeholder {
             width: 298px;
             border: 1px solid #2db245;
         }
+
         .hint {
             border: 2px solid #2db245;
             border-radius: 6px;
         }
+
         .hint .handler {
             background-color: #2db245;  
         }
     </style>
-        
 <?php require_once '../../include/footer.php'; ?>

@@ -51,7 +51,7 @@ echo $sortable->render();
             -ms-user-select: none;
             user-select: none;
         }
-        
+
         #playlist {
             margin: 30px auto;
             width: 300px;
@@ -59,12 +59,14 @@ echo $sortable->render();
             border-radius: 4px; 
             border: 1px solid rgba(0,0,0,.1);
         }
+
         #playlist-title {
             height: 80px;
             background: url('../../content/web/sortable/playlist.png') no-repeat 50% 50% #ffffff;
             border-radius: 4px 4px 0 0;
             border-bottom: 1px solid rgba(0,0,0,.1);
         }
+
         #playlist-title span {
             display: none;
         }
@@ -81,24 +83,29 @@ echo $sortable->render();
             color: #666;
             font-size: 1.2em;
         }
+
         li.sortable:last-child {
             border-bottom: 0;
             border-radius: 0 0 4px 4px;
         }
+
         li.sortable span {
             display: block;
             float: right;
             color: #666;
         }
+
         li.sortable:hover {
             background-color: #dceffd;
         }
+
         li.hint {
             display: block;
             width: 200px;
             background-color: #52aef7;
             color: #fff;
         }
+
         li.hint:after {
             content: "";
             display: block;
@@ -111,9 +118,11 @@ echo $sortable->render();
             left: 216px;
             top: 8px;
         }
+
         li.hint:last-child {
             border-radius: 4px;
         }
+
         li.hint span {
             color: #fff;
         }
@@ -124,5 +133,4 @@ echo $sortable->render();
             text-align: right;
         }
     </style>
-        
 <?php require_once '../../include/footer.php'; ?>

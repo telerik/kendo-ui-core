@@ -44,7 +44,7 @@ echo $sortableRight->render();
         </ul>
     </div>
     
-    <div class="demo-section">                
+    <div class="demo-section">
         <h3 class="title">Console log
         </h3>
         <div class="console"></div>
@@ -102,9 +102,11 @@ echo $sortableRight->render();
             width: 600px;
             text-align: center;
         }
+
         .console {
             margin: 0;
         }
+
         #example {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -146,11 +148,13 @@ echo $sortableRight->render();
         .list-right {
             background-color: #e62757;
         }
+
         .placeholder {
             border: 1px dashed #ccc;
             background-color: #fff;
             color: #333;
         }
+
         .hint {
             opacity: 0.4;
             cursor: -webkit-grabbing;

@@ -139,5 +139,4 @@ echo $sortableListD->render();
             color: #777;
         }
     </style>
-        
 <?php require_once '../../include/footer.php'; ?>
