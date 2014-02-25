@@ -127,14 +127,6 @@
                 ok(chartSeries.options.isStacked);
             });
 
-            test("does not set isStacked when first and only series is stacked", function() {
-                createPlotArea([{
-                    type: seriesType, data: [], stack: true
-                }]);
-
-                ok(!chartSeries.options.isStacked);
-            });
-
             test("sets isStacked and isStacked100 when first series is 100% stacked", function() {
                 createPlotArea([{
                     type: seriesType, data: [], stack: { type: "100%" }
@@ -146,16 +138,7 @@
                 ok(chartSeries.options.isStacked100);
             });
 
-            test("does not set isStacked and isStacked100 when only series is 100% stacked", function() {
-                createPlotArea([{
-                    type: seriesType, data: [], stack: { type: "100%" }
-                }]);
-
-                ok(!chartSeries.options.isStacked);
-                ok(!chartSeries.options.isStacked100);
-            });
-
-            test("disables clippin when series are 100% stacked", function() {
+            test("disables clipping when series are 100% stacked", function() {
                 createPlotArea([{
                     type: seriesType, data: [], stack: { type: "100%" }
                 }, {

@@ -8491,11 +8491,11 @@ var __meta__ = {
             var plotArea = this,
                 firstSeries = series[0],
                 stack = firstSeries.stack,
-                isStacked100 = stack && stack.type === "100%" && series.length > 1,
+                isStacked100 = stack && stack.type === "100%",
                 barChart = new BarChart(plotArea, {
                     series: series,
                     invertAxes: plotArea.invertAxes,
-                    isStacked: stack && series.length > 1,
+                    isStacked: stack,
                     isStacked100: isStacked100,
                     clip: !isStacked100,
                     gap: firstSeries.gap,
@@ -8530,10 +8530,10 @@ var __meta__ = {
             var plotArea = this,
                 firstSeries = series[0],
                 stack = firstSeries.stack,
-                isStacked100 = stack && stack.type === "100%" && series.length > 1,
+                isStacked100 = stack && stack.type === "100%",
                 lineChart = new LineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: stack && series.length > 1,
+                    isStacked: stack,
                     isStacked100: isStacked100,
                     clip: !isStacked100,
                     series: series
@@ -8550,10 +8550,10 @@ var __meta__ = {
             var plotArea = this,
                 firstSeries = series[0],
                 stack = firstSeries.stack,
-                isStacked100 = stack && stack.type === "100%" && series.length > 1,
+                isStacked100 = stack && stack.type === "100%",
                 areaChart = new AreaChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: stack && series.length > 1,
+                    isStacked: stack,
                     isStacked100: isStacked100,
                     clip: !isStacked100,
                     series: series
