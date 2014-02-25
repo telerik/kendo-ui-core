@@ -2533,6 +2533,11 @@ function pad(number, digits, end) {
         },
 
         setOptions: function(options) {
+            this._setEvents(options);
+            $.extend(this.options, options);
+        },
+
+        _setEvents: function(options) {
             var that = this,
                 idx = 0,
                 length = that.events.length,
@@ -2545,7 +2550,6 @@ function pad(number, digits, end) {
                 }
             }
 
-            $.extend(that.options, options);
             that.bind(that.events, options);
         },
 

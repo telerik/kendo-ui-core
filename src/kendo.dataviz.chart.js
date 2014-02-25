@@ -1246,7 +1246,7 @@ var __meta__ = {
             chart._sourceSeries = null;
             $(document).off(MOUSEMOVE_NS);
 
-            Widget.fn.setOptions.call(chart, options);
+            Widget.fn._setEvents.call(chart, options);
 
             chart._initTheme(chart.options);
 

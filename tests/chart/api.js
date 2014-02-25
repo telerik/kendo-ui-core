@@ -471,6 +471,15 @@
             equal(chart.options.series.length, 1);
         });
 
+        test("extends axis options", function() {
+            setupChart({
+                valueAxis: { name: "foo" }
+            });
+
+            chart.setOptions({ valueAxis: { max: 1 } });
+            equal(chart.options.valueAxis.name, "foo");
+        });
+
         test("sets data source", function() {
             setupChart({
                 series: [{ field: "foo" }]
