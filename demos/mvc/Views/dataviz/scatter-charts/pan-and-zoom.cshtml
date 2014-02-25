@@ -6,35 +6,21 @@
             <script>
                 // Generate sample data
                 var data = [];
-                for (var x = -100; x < 100; x += 0.2) {
+                var step = Math.PI / 4;
+                for (var x = -25; x < 25; x += step) {
                     data.push({ x: x, y: Math.sin(x) });
-                }
-
-                // Helper function that constructs DataSource filter
-                // for the x value
-                function getFilter(xMin, xMax) {
-                    return [{
-                        field: "x",
-                        operator: "gt",
-                        value: xMin
-                    }, {
-                        field: "x",
-                        operator: "lt",
-                        value: xMax
-                    }]
                 }
 
                 function createChart() {
                     $("#chart").kendoChart({
                         renderAs: "canvas",
                         dataSource: {
-                            data: data,
-                            filter: getFilter(-10, 10)
+                            data: data
                         },
                         xAxis: {
                             name: "xAxis",
-                            min: -10,
-                            max: 10,
+                            min: -2,
+                            max: 2,
                             labels: {
                                 format: "{0:N1}"
                             }
@@ -43,6 +29,7 @@
                             type: "scatterLine",
                             xField: "x",
                             yField: "y",
+                            style: "smooth",
                             markers: {
                                 visible: false
                             }
@@ -54,7 +41,6 @@
 
                     function setRange(e) {
                         var chart = e.sender;
-                        var ds = chart.dataSource;
                         var options = chart.options;
 
                         // Prevent document scrolling on mousewheel zoom
@@ -71,13 +57,13 @@
                                 return;
                             }
 
-                            // Set x axis range in chart options
-                            options.xAxis.min = xMin;
-                            options.xAxis.max = xMax;
-
-                            // Filters the data source and rebinds the chart
-                            // which also applies the axis limits set above
-                            ds.filter(getFilter(xMin, xMax));
+                            // Set X axis range
+                            chart.setOptions({
+                                xAxis: {
+                                    min: xMin,
+                                    max: xMax
+                                }
+                            });
                         }
                     }
                 }
