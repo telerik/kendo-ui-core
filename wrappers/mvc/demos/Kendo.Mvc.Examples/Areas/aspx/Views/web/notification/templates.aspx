@@ -1,8 +1,23 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-        <div id="example" class="k-content">
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
 
-            <span id="notification" style="display:none;"></span>
-    
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
+<%= Html.Kendo().Notification()
+    .Name("notification")
+    .Position(p => p.Pinned(true).Top(30).Right(30))
+    .Stacking(NotificationStackingSettings.Down)
+    .AutoHideAfter(0)
+    .Templates(t =>
+    {
+        t.Add().Type("info").ClientTemplateID("emailTemplate");
+        t.Add().Type("error").ClientTemplateID("errorTemplate");
+        t.Add().Type("upload-success").ClientTemplateID("successTemplate");
+    })
+%>
+
             <div class="demo-section">
                 
                 <h3>Show notification:</h3>
@@ -20,7 +35,7 @@
             
             <script id="emailTemplate" type="text/x-kendo-template">        
                 <div class="new-mail">
-                    <img src="../../content/web/notification/envelope.png" />
+                    <img src="../../../content/web/notification/envelope.png" />
                     <h3>#= title #</h3>
                     <p>#= message #</p>
                 </div>
@@ -28,7 +43,7 @@
             
             <script id="errorTemplate" type="text/x-kendo-template">        
                 <div class="wrong-pass">
-                    <img src="../../content/web/notification/error-icon.png" />
+                    <img src="../../../content/web/notification/error-icon.png" />
                     <h3>#= title #</h3>
                     <p>#= message #</p>
                 </div>
@@ -36,56 +51,37 @@
             
             <script id="successTemplate" type="text/x-kendo-template">        
                 <div class="upload-success">
-                    <img src="../../content/web/notification/success-icon.png" />
+                    <img src="../../../content/web/notification/success-icon.png" />
                     <h3>#= message #</h3>
                 </div>
             </script>
 
             <script>
-                $(document).ready(function() {
+                $(document).ready(function () {
 
-                    var notification = $("#notification").kendoNotification({
-                        position: {
-                            pinned: true,
-                            top: "30px",
-                            right: "30px"
-                        },
-                        autoHideAfter: 0,
-                        stacking: "down",
-                        templates: [{
-                            type: "info",
-                            template: $("#emailTemplate").html()
-                        }, {
-                            type: "error",
-                            template: $("#errorTemplate").html()
-                        }, {
-                            type: "upload-success",
-                            template: $("#successTemplate").html()
-                        }]
-                        
-                    }).data("kendoNotification");
+                    var notification = $("#notification").data("kendoNotification");
 
-                    $("#showEmailNotification").click(function(){
+                    $("#showEmailNotification").click(function () {
                         notification.show({
                             title: "New E-mail",
                             message: "You have 1 new mail message!"
                         }, "info");
                     });
-                    
-                    $("#showErrorNotification").click(function(){
+
+                    $("#showErrorNotification").click(function () {
                         notification.show({
                             title: "Wrong Password",
                             message: "Please enter your password again."
                         }, "error");
                     });
-                    
-                    $("#showSuccessNotification").click(function(){
+
+                    $("#showSuccessNotification").click(function () {
                         notification.show({
                             message: "Upload Successful"
                         }, "upload-success");
                     });
 
-                    $("#hideAllNotifications").click(function(){
+                    $("#hideAllNotifications").click(function () {
                         notification.hide();
                     });
 
@@ -169,4 +165,5 @@
                     margin-right: 10px;
                 }
             </style>
-        </div>
+
+</asp:Content>

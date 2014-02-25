@@ -1,8 +1,20 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
-        <div id="example" class="k-content">
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
 
-            <span id="centeredNotification" style="display:none;"></span>
-            <span id="configurableNotification" style="display:none;"></span>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
+<%= Html.Kendo().Notification()
+    .Name("centeredNotification")
+    .Stacking(NotificationStackingSettings.Down)
+    .Events(e => e.Show("onShow"))
+    .Button(true)
+%>
+
+<%= Html.Kendo().Notification()
+    .Name("configurableNotification")
+%>
             
             <div class="demo-section">
                 <h3>Centered notification:</h3>
@@ -41,28 +53,24 @@
                             wWidth = $(window).width(),
                             wHeight = $(window).height(),
                             newTop, newLeft;
-                        
+
                         newLeft = Math.floor(wWidth / 2 - eWidth / 2);
                         newTop = Math.floor(wHeight / 2 - eHeight / 2);
 
-                        e.element.parent().css({top: newTop, left: newLeft});
+                        e.element.parent().css({ top: newTop, left: newLeft });
                     }
                 }
 
-                $(document).ready(function() {
-                    var centered = $("#centeredNotification").kendoNotification({
-                        stacking: "down",
-                        show: onShow,
-                        button: true
-                    }).data("kendoNotification");
+                $(document).ready(function () {
+                    var centered = $("#centeredNotification").data("kendoNotification");
 
-                    $("#showNotification").click(function(){
+                    $("#showNotification").click(function () {
                         centered.show(new Date().toLocaleTimeString());
                     });
 
-                    var configurable = $("#configurableNotification").kendoNotification().data("kendoNotification");
+                    var configurable = $("#configurableNotification").data("kendoNotification");
 
-                    $("#hideAllNotifications").click(function(){
+                    $("#hideAllNotifications").click(function () {
                         centered.hide();
                         configurable.hide();
                     });
@@ -87,7 +95,7 @@
                         change: applyConfiguration
                     };
 
-                    $(".num").each(function(){
+                    $(".num").each(function () {
                         $(this).kendoNumericTextBox(config);
                     });
 
@@ -95,7 +103,7 @@
                         change: applyConfiguration
                     });
 
-                    $("#showConfigurable").click(function(){
+                    $("#showConfigurable").click(function () {
                         configurable.show(new Date().toLocaleTimeString());
                     });
                 });
@@ -125,4 +133,4 @@
         
             </style>
 
-        </div>
+</asp:Content>

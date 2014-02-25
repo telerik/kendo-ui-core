@@ -5,6 +5,12 @@
 .floatWrap,#example{display:block}
 .clear{clear:both}
 
+h1,h2,h3,p
+{
+    margin:0;
+    padding:0;
+}
+
 html
 {
     top: 0;
