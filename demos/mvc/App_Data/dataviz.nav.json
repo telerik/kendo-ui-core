@@ -702,11 +702,7 @@
                     "text": "index",
                     "url": "diagram/index.html",
                     "title": "Kendo UI Diagram Demo"
-                }, {
-                    "text": "api",
-                    "url": "diagram/api.html",
-                    "title": "Kendi UI Diagram Api"
-            }],
+                }],
             "name": "Diagram"
 		}
 	],
