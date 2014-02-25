@@ -55,19 +55,19 @@ namespace Kendo.Mvc.UI
             var options = new Dictionary<string, object>(Events);
             var positionOptions = new Dictionary<string, object>();
 
-            if (Position.Bottom != "20")
+            if (Position.Bottom != 20)
             {
                 positionOptions.Add("bottom", Position.Bottom);
             }
-            if (Position.Right != "20")
+            if (Position.Right != 20)
             {
                 positionOptions.Add("right", Position.Right);
             }
-            if (Position.Top.HasValue())
+            if (Position.Top != int.MinValue)
             {
                 positionOptions.Add("top", Position.Top);
             }
-            if (Position.Left.HasValue())
+            if (Position.Left != int.MinValue)
             {
                 positionOptions.Add("left", Position.Left);
             }

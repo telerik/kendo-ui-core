@@ -25,25 +25,9 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>Sets the position of the first popup notification with regard to the viewport's bottom edge.</summary>
-        public NotificationPositionSettingsBuilder Bottom(string value)
-        {
-            settings.Bottom = value;
-
-            return this;
-        }
-
-        /// <summary>Sets the position of the first popup notification with regard to the viewport's bottom edge.</summary>
         public NotificationPositionSettingsBuilder Bottom(int value)
         {
-            settings.Bottom = value.ToString() + "px";
-
-            return this;
-        }
-
-        /// <summary>Sets the position of the first popup notification with regard to the viewport's left edge.</summary>
-        public NotificationPositionSettingsBuilder Left(string value)
-        {
-            settings.Left = value;
+            settings.Bottom = value;
 
             return this;
         }
@@ -51,15 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>Sets the position of the first popup notification with regard to the viewport's left edge.</summary>
         public NotificationPositionSettingsBuilder Left(int value)
         {
-            settings.Left = value.ToString() + "px";
-
-            return this;
-        }
-
-        /// <summary>Sets the position of the first popup notification with regard to the viewport's right edge.</summary>
-        public NotificationPositionSettingsBuilder Right(string value)
-        {
-            settings.Right = value;
+            settings.Left = value;
 
             return this;
         }
@@ -67,15 +43,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>Sets the position of the first popup notification with regard to the viewport's right edge.</summary>
         public NotificationPositionSettingsBuilder Right(int value)
         {
-            settings.Right = value.ToString() + "px";
-
-            return this;
-        }
-
-        /// <summary>Sets the position of the first popup notification with regard to the viewport's top edge.</summary>
-        public NotificationPositionSettingsBuilder Top(string value)
-        {
-            settings.Top = value;
+            settings.Right = value;
 
             return this;
         }
@@ -83,7 +51,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>Sets the position of the first popup notification with regard to the viewport's top edge.</summary>
         public NotificationPositionSettingsBuilder Top(int value)
         {
-            settings.Top = value.ToString() + "px";
+            settings.Top = value;
 
             return this;
         }

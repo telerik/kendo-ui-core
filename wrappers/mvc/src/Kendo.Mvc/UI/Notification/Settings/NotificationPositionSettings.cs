@@ -5,14 +5,16 @@ namespace Kendo.Mvc.UI
         public NotificationPositionSettings()
         {
             Pinned = true;
-            Bottom = "20";
-            Right = "20";
+            Bottom = 20;
+            Right = 20;
+            Top = int.MinValue;
+            Left = int.MinValue;
         }
 
         public bool Pinned { get; set; }
-        public string Top { get; set; }
-        public string Left { get; set; }
-        public string Bottom { get; set; }
-        public string Right { get; set; }
+        public int Top { get; set; }
+        public int Left { get; set; }
+        public int Bottom { get; set; }
+        public int Right { get; set; }
     }
 }
