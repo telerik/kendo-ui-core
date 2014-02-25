@@ -84,7 +84,6 @@
 
     <script>
         $(document).ready(function () {
-
             //exapand
             $(".panel-wrap").on("click", "span.k-i-arrowhead-s", function (e) {
                 var contentElement = $(e.target).closest(".widget").find(">div");
@@ -124,17 +123,20 @@
             -ms-user-select: none;
             user-select: none;
         }
+
         .dash-head {
             width: 902px;
             height: 80px;
-            background: url('/Content/web/sortable/dashboard-head.png') no-repeat 50% 50% #222222;  
+            background: url('<%=Url.Content("~/content/web/sortable/dashboard-head.png")%>') no-repeat 50% 50% #222222;  
         }
+
         .panel-wrap {
             margin: 0 0 20px;
             width: 900px;
             background-color: #f5f5f5;
             border: 1px solid #e5e5e5;
         }
+
         #sidebar {
             display: inline-block;
             margin: 0;
@@ -143,6 +145,7 @@
             min-height: 260px;
             vertical-align: top;
         }
+
         #main-content {
             display: inline-block;
             margin: 0;
@@ -151,6 +154,7 @@
             min-height: 260px;
             vertical-align: top;
         }
+
         .widget.placeholder {
             opacity: 0.4;
             border: 1px dashed #a6a6a6;
@@ -164,23 +168,28 @@
             border: 1px solid #e7e7e7;
             border-radius: 3px;
         }
+
         .widget:hover {
             background-color: #fcfcfc;
             border-color: #cccccc;
         }
+
         .widget div {
             padding: 10px;
             min-height: 50px;
         }
+
         .widget h3 {
             font-size: 12px;
             padding: 8px 10px;
             text-transform: uppercase;
             border-bottom: 1px solid #e7e7e7;
         }
+
         .widget h3 span {
             float: right;
         }
+
         .widget h3 span:hover {
             cursor: pointer;
             background-color: #e7e7e7;
@@ -194,17 +203,20 @@
             margin: 10px auto;
             border-radius: 100px;
             border: 1px solid #e7e7e7;
-            background: url('/Content/web/Customers/ISLAT.jpg') no-repeat 50% 50%;
+            background: url('<%=Url.Content("~/content/web/Customers/ISLAT.jpg")%>') no-repeat 50% 50%;
         }
+
         #profile div {
             text-align: center;
         }
+
         #profile h4 {
             width: auto;
             margin: 0 0 5px;
             font-size: 1.2em;
             color: #1f97f7;
         }
+
         #profile p {
             margin: 0 0 10px;
         }
@@ -214,6 +226,7 @@
         #news div {
             padding: 0 20px 20px;
         }
+
         #teammates h4,
         #blogs h4,
         #news h4 {
@@ -223,25 +236,31 @@
             color: #1f97f7;
             font-weight: normal;
         }
+
         .blog-info {
             margin: 0 0 10px;
             font-size: .9em;
             color: #787878;
         }
+
         #sidebar #blogs h4 {
             font-size: 1em;
         }
+
         #sidebar #blogs p {
             display: none;
         }
+
         #sidebar #blogs .blog-info {
             display: block;
         }
+
         #main-content #news h4 {
             font-size: 1.2em;
             line-height: 1.4em;
             height: 40px;
         }
+
         #main-content #news h4 span {
             display: block;
             float: left;
@@ -249,9 +268,11 @@
             height: 40px;
             color: #000;
         }
+
         #sidebar #news h4 {
             font-size: 1em;
         }
+
         #sidebar #news h4 span {
             display: block;
             margin-bottom: 3px;
@@ -267,11 +288,13 @@
             clear: both;
             visibility: hidden;
         }
+
         #teammates .team-mate h4 {
             font-size: 1.4em;
             font-weight: normal;
             margin-top: 12px;
         }
+
         .team-mate p {
             margin: 0;
         }
@@ -281,11 +304,13 @@
             border: 1px solid #e7e7e7;
             border-radius: 60px;
         }
+
         .hint {
             width: 250px;
             height: 100px;
             overflow: hidden;
         }
+
         .hint > h3 {
             padding-left: 20px;
         }

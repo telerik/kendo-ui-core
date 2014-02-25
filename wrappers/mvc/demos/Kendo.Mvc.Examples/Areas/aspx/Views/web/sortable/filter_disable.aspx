@@ -54,6 +54,7 @@
             padding: 20px;
             float: left;
         }
+
         .sortable-wrapper p {
             margin: 5px auto 20px;
         }

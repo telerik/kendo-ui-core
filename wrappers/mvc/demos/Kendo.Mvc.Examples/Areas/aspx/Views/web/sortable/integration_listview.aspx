@@ -59,12 +59,14 @@
             padding: 30px;
             width: 577px;
         }
+
         #listView {
             padding: 10px;
             margin-bottom: -1px;
             min-width: 555px;
             min-height: 510px;
         }
+
         .product {
             float: left;
             position: relative;
@@ -73,10 +75,12 @@
             margin: 0;
             padding: 0;
         }
+
         .product img {
             width: 110px;
             height: 110px;
         }
+
         .product h3 {
             margin: 0;
             padding: 3px 5px 0 0;
@@ -88,9 +92,11 @@
             text-transform: uppercase;
             color: #999;
         }
+
         .product p {
             visibility: hidden;
         }
+
         .product:hover p {
             visibility: visible;
             position: absolute;
@@ -109,6 +115,7 @@
             -webkit-transition: background .2s linear, color .2s linear;
             -o-transition: background .2s linear, color .2s linear;
         }
+
         .k-listview:after, .product dl:after {
             content: ".";
             display: block;

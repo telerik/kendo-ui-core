@@ -93,9 +93,11 @@
             width: 600px;
             text-align: center;
         }
+
         .console {
             margin: 0;
         }
+
         #example {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -137,11 +139,13 @@
         .list-right {
             background-color: #e62757;
         }
+
         .placeholder {
             border: 1px dashed #ccc;
             background-color: #fff;
             color: #333;
         }
+
         .hint {
             opacity: 0.4;
             cursor: -webkit-grabbing;

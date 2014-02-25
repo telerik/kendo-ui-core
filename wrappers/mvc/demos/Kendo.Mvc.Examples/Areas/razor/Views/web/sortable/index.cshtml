@@ -48,12 +48,14 @@
         border-radius: 4px; 
         border: 1px solid rgba(0,0,0,.1);
     }
+
     #playlist-title {
         height: 80px;
-        background: url('/Content/web/sortable/playlist.png') no-repeat 50% 50% #ffffff;
+        background: url('@Url.Content("~/content/web/sortable/playlist.png")') no-repeat 50% 50% #ffffff;
         border-radius: 4px 4px 0 0;
         border-bottom: 1px solid rgba(0,0,0,.1);
     }
+
     #playlist-title span {
         display: none;
     }
@@ -70,24 +72,29 @@
         color: #666;
         font-size: 1.2em;
     }
+
     li.sortable:last-child {
         border-bottom: 0;
         border-radius: 0 0 4px 4px;
     }
+
     li.sortable span {
         display: block;
         float: right;
         color: #666;
     }
+
     li.sortable:hover {
         background-color: #dceffd;
     }
+
     li.hint {
         display: block;
         width: 200px;
         background-color: #52aef7;
         color: #fff;
     }
+
     li.hint:after {
         content: "";
         display: block;
@@ -100,9 +107,11 @@
         left: 216px;
         top: 8px;
     }
+
     li.hint:last-child {
         border-radius: 4px;
     }
+
     li.hint span {
         color: #fff;
     }

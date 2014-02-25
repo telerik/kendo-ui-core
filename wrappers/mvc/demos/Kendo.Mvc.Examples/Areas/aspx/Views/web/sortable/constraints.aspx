@@ -19,6 +19,7 @@
 
     <%:Html.Kendo().Sortable()
         .For("#sortable-horizontal")
+        .ContainerSelector("#sortable-horizontal")
         .Axis(SortableAxis.X)
         .Placeholder("<div class='placeholder'>Drop Here!</div>")
         .HintHandler("hint")
@@ -37,24 +38,27 @@
             -ms-user-select: none;
             user-select: none;
         }
+
         .demo-section .title {
             margin: 0;
         }
+
         #sortable-horizontal {
             overflow: hidden;
-            width: 950px;
+            width: 878px;
             text-align: center;
         }
 
         #sortable-horizontal img {
-            width: 166px;
+            width: 155px;
             margin: 10px;
             vertical-align: middle
         }
+
         .placeholder {
             display: inline-block;
-            width: 164px;
-            height: 123px;
+            width: 153px;
+            height: 115px;
             border: 1px dashed #ddd;
             background-color: #f3f5f7;
             margin: 10px;
@@ -64,6 +68,7 @@
             vertical-align: middle;
             color: #777;
         }
+
         .tooltip {
             opacity: .6;
         }
