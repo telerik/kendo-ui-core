@@ -1,13 +1,6 @@
 (function (f, define) {
-    define([ "./kendo.diagram.svg" ], f);
+    define([ "./svg" ], f);
 })(function () {
-
-    var __meta__ = {
-        id: "diagram.services",
-        name: "Diagram Services",
-        category: "diagram",
-        depends: [ "diagram.svg" ]
-    };
 
     (function ($, undefined) {
         // Imports ================================================================

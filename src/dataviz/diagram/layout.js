@@ -1,13 +1,6 @@
 (function(f, define){
-    define([ "./kendo.diagram.math" ], f);
+    define([ "./math" ], f);
 })(function(){
-
-var __meta__ = {
-    id: "diagram",
-    name: "Diagram Layout",
-    category: "diagram",
-    depends: [ "diagram.math" ]
-};
 
 (function ($, undefined) {
     var kendo = window.kendo,

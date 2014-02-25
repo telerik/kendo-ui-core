@@ -1,13 +1,6 @@
 (function(f, define){
-    define([ "./kendo.diagram.utils" ], f);
+    define([ "./utils" ], f);
 })(function(){
-
-var __meta__ = {
-    id: "diagram.math",
-    name: "Math",
-    category: "diagram",
-    depends: [ "dataviz.core", "diagram.utils" ]
-};
 
 (function ($, undefined) {
     // Imports ================================================================

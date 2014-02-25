@@ -1,13 +1,6 @@
 (function(f, define){
-    define([ "./kendo.dataviz.core", "./kendo.core" ], f);
+    define([ "../../kendo.dataviz.core" ], f);
 })(function(){
-
-var __meta__ = {
-    id: "diagram.utils",
-    name: "Utils",
-    category: "diagram",
-    depends: [ "core" ]
-};
 
 (function ($, undefined) {
     var kendo = window.kendo,
@@ -348,19 +341,6 @@ var __meta__ = {
         }
 
         var all = [], i;
-
-        // Miro - not used.
-//            var sort_by = function (field, reverse, primer) {
-//
-//                var key = function (x) {
-//                    return primer ? primer(x[field]) : x[field];
-//                };
-//
-//                return function (a, b) {
-//                    var A = key(a), B = key(b);
-//                    return ((A < B) ? -1 : (A > B) ? +1 : 0) * [-1, 1][+!!reverse];
-//                };
-//            };
 
         for (i = 0; i < a.length; i++) {
             all.push({ 'x': a[i], 'y': b[i] });

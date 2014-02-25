@@ -28,7 +28,7 @@
         "./kendo.dataviz.vml",
         "./kendo.dataviz.canvas",
         "./kendo.dataviz.map",
-        "./kendo.diagram.dom"
+        "./kendo.dataviz.diagram"
     ], f);
 })(function(){
     "bundle all";
