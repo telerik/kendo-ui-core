@@ -1,6 +1,7 @@
     <div id="example" class="k-content">
 
         <script src="../../content/shared/js/products.js"></script>
+
         <div class="demo-section">
             <div id="listView"></div>
             <div id="pager" class="k-pager-wrap"></div>
@@ -60,11 +61,13 @@
                 border: 0;
                 background: none;
             }
+
             #listView {
                 padding: 10px 5px;
                 margin-bottom: -1px;
                 min-height: 510px;
             }
+
             .product {
                 float: left;
                 position: relative;
@@ -73,10 +76,12 @@
                 margin: 0 5px;
                 padding: 0;
             }
+
             .product img {
                 width: 110px;
                 height: 110px;
             }
+
             .product h3 {
                 margin: 0;
                 padding: 3px 5px 0 0;
@@ -87,9 +92,11 @@
                 font-weight: normal;
                 text-transform: uppercase;
             }
+
             .product p {
                 visibility: hidden;
             }
+
             #listView .product:hover p {
                 visibility: visible;
                 position: absolute;
@@ -108,6 +115,7 @@
                 -webkit-transition: background .2s linear, color .2s linear;
                 -o-transition: background .2s linear, color .2s linear;
             }
+
             .k-listview:after {
                 content: ".";
                 display: block;

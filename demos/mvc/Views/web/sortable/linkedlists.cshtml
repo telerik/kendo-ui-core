@@ -7,7 +7,7 @@
                         <li class="list-item">Grapefruits</li>
                         <li class="list-item">Bananas</li>
                     </ul>
-    
+
                     <ul id="sortable-listB">
                         <li class="list-item">Cranberries</li>
                         <li class="list-item">Pineapples</li>
@@ -23,7 +23,7 @@
                         <li class="list-item">Pears</li>
                         <li class="list-item">Plums</li>
                     </ul>
-    
+
                     <ul id="sortable-listD" style="min-height: 41px;">
                         <li class="list-item">Apricots</li>
                         <li class="list-item">Grapes</li>
@@ -33,32 +33,28 @@
             </div>
 
             <script>
+                function placeholder(element) {
+                    return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
+                }
+
                 $(document).ready(function() {
                     $("#sortable-listA").kendoSortable({
                         connectWith: "#sortable-listB",
-                        placeholder: function(element) {
-                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
-                        }
+                        placeholder: placeholder
                     });
 
                     $("#sortable-listB").kendoSortable({
-                        placeholder: function(element) {
-                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
-                        }
+                        placeholder: placeholder
                     });
 
                     $("#sortable-listC").kendoSortable({
                         connectWith: "#sortable-listD",
-                        placeholder: function(element) {
-                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
-                        }
+                        placeholder: placeholder
                     });
 
                     $("#sortable-listD").kendoSortable({
                         connectWith: "#sortable-listC",
-                        placeholder: function(element) {
-                            return $("<li class='list-item' id='placeholder'>Drop Here!</li>");
-                        }
+                        placeholder: placeholder
                     });
                 });
             </script>
@@ -70,15 +66,19 @@
                     -ms-user-select: none;
                     user-select: none;
                 }
+
                 .demo-section {
                     padding: 50px 70px;
                 }
+
                 .one-way {
                     background: url('../../content/web/sortable/one-way.png') no-repeat 50% 50%;
                 }
+
                 .two-way {
                     background: url('../../content/web/sortable/two-way.png') no-repeat 50% 50%;
                 }
+
                 .list-wrapper {
                     overflow: hidden;
                 }

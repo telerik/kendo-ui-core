@@ -40,7 +40,6 @@
                 filter: "li.k-item",
                 axis: "x",
                 container: "ul.k-tabstrip-items",
-                axis: "x",
                 hint: function(element) {
                     return $("<div id='hint' class='k-widget k-header k-tabstrip'><ul class='k-tabstrip-items k-reset'><li class='k-item k-state-active k-tab-on-top'>" + element.html() + "</li></ul></div>");
                 },
@@ -64,20 +63,25 @@
             .demo-section {
                 margin: 30px auto;
             }
+
             h3 {
                 font-weight: normal;
                 padding: 0 0 1em 0;
             }
+
             .demo-section {
                 width: 500px;
             }
+
             .k-tabstrip .k-content {
                 padding-top: 10px;
                 padding-bottom: 10px;
             }
+
             #hint {
                 border: none;
             }
+
             #hint .k-tabstrip-items {
                 padding: 0;
             }
