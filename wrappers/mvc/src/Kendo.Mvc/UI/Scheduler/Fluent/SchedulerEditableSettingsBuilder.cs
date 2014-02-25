@@ -106,6 +106,16 @@
         }
 
         /// <summary>
+        /// If set to false the moving of the events will be disabled. Moving is enabled by default.
+        /// </summary>
+        /// <param name="enable">The move option</param>
+        public SchedulerEditableSettingsBuilder<T> Move(bool enable)
+        {
+            container.Move = enable;
+
+            return this;
+        }
+        /// <summary>
         /// If set to true the scheduler will display a confirmation dialog when the user clicks the "destroy" button. Confirmation dialog is enabled by default.
         /// </summary>
         /// <param name="enable">The confirmation</param>

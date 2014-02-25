@@ -35,6 +35,8 @@
 
         public bool DisplayDeleteConfirmation { get; set; }
 
+        public bool Move { get; set; }
+
         public string TemplateName
         {
             get;
@@ -77,6 +79,11 @@
             if (!Resize)
             {
                 json["resize"] = false;
+            }
+
+            if (!Move)
+            {
+                json["move"] = false;
             }
         }
 
@@ -125,5 +132,6 @@
         {          
             return Activator.CreateInstance<T>();
         }
+
     }
 }
