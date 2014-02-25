@@ -2289,12 +2289,12 @@
                     options = that.options,
                     i;
 
-                function addShape(node) {
-                    if (isUndefined(node)) { // happens on updating dataSource
+                function addShape(dataItem) {
+                    if (isUndefined(dataItem)) { // happens on updating dataSource
                         return;
                     }
                     var shape = Utils.first(that._dataMap, function (item) {
-                        return item.uid === node.uid;
+                        return item.uid === dataItem.uid;
                     });
                     if (shape) {
                         return shape.shape;
@@ -2302,11 +2302,11 @@
 
                     var opt = {
                         visual: options.visualTemplate,
-                        context: node
+                        dataItem: dataItem
                     };
-                    shape = new Shape(opt, node);
+                    shape = new Shape(opt, dataItem);
                     that.addShape(shape);
-                    that._dataMap.push({ uid: node.uid, shape: shape });
+                    that._dataMap.push({ uid: dataItem.uid, shape: shape });
                     return shape;
                 }
 
