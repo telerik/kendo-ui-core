@@ -1833,10 +1833,6 @@
                         b = that._getHandleBounds(new Point(this.x, this.y));
                         this.visual.position(b.topLeft());
                     });
-                    this.text.position(new Point(0, bounds.height + 20));
-                    this.text.content(kendo.format("x: {0}, y: {1}, w: {2}, h: {3} a: {4}",
-                        Math.round(this._innerBounds.x), Math.round(this._innerBounds.y), Math.round(this._innerBounds.width), Math.round(this._innerBounds.height), Math.round(this._angle)
-                    ));
                     this.visual.position(bounds.topLeft());
 
                     var center = new Point(bounds.width / 2, bounds.height / 2);
