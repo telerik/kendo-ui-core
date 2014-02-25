@@ -42,44 +42,44 @@
        var data = [{
             name: "Antonio",
             lastName: "Moreno",
-            image: "images/LONEP.jpg",
+            image: "url(../../../../content/dataviz/diagram/people/antonio.jpg",
             position: "Team Lead",
             background: "#1696d3",
             items: [{
                     name: "Elizabeth",
-                    image: "images/Elizabeth.jpg",
+                    image: "url(../../../../content/dataviz/diagram/people/elizabeth.jpg",
                     lastName: "Brown",
                     position: "Design Lead",
                     background: "#ef6944",
                     items: [{
                             name: "Ann",
                             lastName: "Devon",
-                            image: "images/Ann.jpg",
+                            image: "url(../../../../content/dataviz/diagram/people/ann.jpg",
                             position: "UI Designer",
                             background: "#ef6944"
                         },{
                             name: "Fran",
                             lastName: "Wilson",
-                            image: "images/Fran.jpg",
+                            image: "url(../../../../content/dataviz/diagram/people/fran.jpg",
                             position: "Desing Intern",
                             background: "#ef6944"
                     }]
             }, {
                 name: "Diego",
                 lastName: "Roel",
-                image: "images/Diego.jpg",
+                image: "url(../../../../content/dataviz/diagram/people/diego.jpg",
                 position: "QA Engineer",
                 background: "#ee587b"
             }, {
                 name: "Felipe",
                 lastName: "Izquiedro",
-                image: "images/Felipe.jpg",
+                image: "url(../../../../content/dataviz/diagram/people/felipe.jpg",
                 position: "Senior Developer",
                 background: "#75be16",
                 items: [{
                     name: "Daniel",
                     lastName: "Tonini",
-                    image: "images/Daniel.jpg",
+                    image: "url(../../../../content/dataviz/diagram/people/daniel.jpg",
                     position: "Developer",
                     background: "#75be16"
                 }]
@@ -90,11 +90,11 @@
             var dataItem = options.dataItem;
             var g = new window.kendo.diagram.Group({
                 autoSize: true
-            });                                          
-                                                 
+            });
+
             g.append(new window.kendo.diagram.Rectangle({
-                width: 180,
-                height: 60,
+                width: 210,
+                height: 75,
                 stroke: {
                     width: 0
                 },
@@ -105,25 +105,33 @@
                 },
                 background: dataItem.background,
                 id: options.id
-            }));                                         
-            
+            }));
+
             g.append(new window.kendo.diagram.TextBlock({
                 text: dataItem.name + " " + dataItem.lastName,
-                x: 50,
+                x: 85,
                 y: 20,
                 color: "#ffffff",
                 id: options.id
             }));
-                                                                          
+
             g.append(new window.kendo.diagram.TextBlock({
                 text: dataItem.position,
-                x: 50,
+                x: 85,
                 y: 40,
                 color: "#ffffff",
                 id: options.id
-            }));                                         
-                                                 
-            return g;   
+            }));
+
+            g.append(new window.kendo.diagram.Image({
+                source: dataItem.image,
+                x: 0,
+                y: 0,
+                width: 75,
+                height: 74
+            }));
+
+            return g;
         }
 
         function createDiagram() {
@@ -137,14 +145,7 @@
                     }
                 }),
                 layout: {
-                    type: "tree"
-                },
-                shapeDefaults: {
-                    connectors: [{
-                        name: "top"
-                    }, {
-                        name: "bottom"
-                    }]
+                    type: "layered"
                 },
                 visualTemplate: visualTemplate,
                 connectionDefaults: {
@@ -154,6 +155,9 @@
                     }
                 }
             });
+
+            var diagram = $("#diagram").getKendoDiagram();
+            diagram.bringIntoView(diagram.shapes);
         }
 
         $(document).ready(createDiagram);
