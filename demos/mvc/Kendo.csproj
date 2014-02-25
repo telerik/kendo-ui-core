@@ -839,6 +839,7 @@
     <Content Include="Views\dataviz\area-charts\logarithmic-axis.cshtml" />
     <Content Include="Views\dataviz\bar-charts\logarithmic-axis.cshtml" />
     <Content Include="Views\dataviz\line-charts\logarithmic-axis.cshtml" />
+    <Content Include="Views\dataviz\diagram\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
