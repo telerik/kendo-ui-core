@@ -125,10 +125,10 @@
 
             g.append(new window.kendo.diagram.Image({
                 source: dataItem.image,
-                x: 0,
-                y: 0,
-                width: 75,
-                height: 74
+                x: 3,
+                y: 3,
+                width: 68,
+                height: 68
             }));
 
             return g;
@@ -148,6 +148,11 @@
                     type: "layered"
                 },
                 visualTemplate: visualTemplate,
+                shapeDefaults: {
+                    editable: false,
+                    rotatable: false,
+                    resizable: false
+                },
                 connectionDefaults: {
                     stroke: {
                         color: "#979797",
