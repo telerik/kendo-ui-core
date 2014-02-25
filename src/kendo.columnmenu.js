@@ -34,6 +34,16 @@ var __meta__ = {
         return $.trim(text).replace(/&nbsp;/gi, "");
     }
 
+    function toHash(arr, key) {
+        var result = {};
+        var idx, len, current;
+        for (idx = 0, len = arr.length; idx < len; idx ++) {
+            current = arr[idx];
+            result[current[key]] = current;
+        }
+        return result;
+    }
+
     var ColumnMenu = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -400,6 +410,7 @@ var __meta__ = {
         },
 
         _updateColumnsMenu: function() {
+            var idx, length, current, checked, locked;
             var fieldAttr = kendo.attr("field"),
                 lockedAttr = kendo.attr("locked"),
                 visible = grep(this._ownerColumns(), function(field) {
@@ -424,7 +435,6 @@ var __meta__ = {
                 .prop("disabled", false)
                 .prop("checked", false);
 
-            var idx, length, current, checked, locked;
             for (idx = 0, length = checkboxes.length; idx < length; idx ++) {
                 current = checkboxes.eq(idx);
                 locked = current.attr(lockedAttr) === "true";
@@ -444,6 +454,25 @@ var __meta__ = {
                     }
                 }
             }
+        },
+
+        _updateColumnsLockedState: function() {
+            var idx, length, current, locked, column;
+            var fieldAttr = kendo.attr("field");
+            var lockedAttr = kendo.attr("locked");
+            var columns = toHash(this._ownerColumns(), "field");
+            var checkboxes = this.wrapper
+                .find(".k-columns-item input[type=checkbox]");
+
+            for (idx = 0, length = checkboxes.length; idx < length; idx ++ ) {
+                current = checkboxes.eq(idx);
+                column = columns[current.attr(fieldAttr)];
+                if (column) {
+                    current.attr(lockedAttr, column.locked);
+                }
+            }
+
+            this._updateColumnsMenu();
         },
 
         _filter: function() {
@@ -510,6 +539,8 @@ var __meta__ = {
             if (!locked || length == 1) {
                 unlockItem.addClass("k-state-disabled");
             }
+
+            this._updateColumnsLockedState();
         },
 
         refresh: function() {

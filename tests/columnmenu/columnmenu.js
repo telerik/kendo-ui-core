@@ -721,4 +721,35 @@
         ok(checkboxes.eq(3).prop("checked"));
         ok(checkboxes.eq(3).prop("disabled"));
     });
+
+    test("change of locked state updates column checkboxes", function() {
+        var menu = setup({
+            owner: {
+                columns: [
+                    { field: "foo", locked: true, hidden: false},
+                    { field: "bar", locked: true, hidden: false },
+                    { field: "baz", locked: false, hidden: false },
+                    { field: "bax", locked: false, hidden: false },
+                ],
+            },
+            lockedColumns: true
+        });
+        var popup = menu.wrapper.data("kendoPopup");
+
+        menu.link.click();
+        popup.close();
+        menu.owner.columns[2].locked = true;
+        menu.link.click();
+
+        var checkboxes = menu.wrapper.find("[type=checkbox]");
+        equal(checkboxes.eq(0).attr(kendo.attr("locked")), "true", "first column is not locked");
+        ok(!checkboxes.eq(0).prop("disabled"), "first column is disabled");
+        equal(checkboxes.eq(1).attr(kendo.attr("locked")), "true", "second column is not locked");
+        ok(!checkboxes.eq(1).prop("disabled"), "second column is disabled");
+        equal(checkboxes.eq(2).attr(kendo.attr("locked")), "true", "third column is not locked");
+        ok(!checkboxes.eq(2).prop("disabled"), "third column is disabled");
+        equal(checkboxes.eq(3).attr(kendo.attr("locked")), "false", "fourth column is locked");
+        ok(checkboxes.eq(3).prop("disabled"), "fourth column is not disabled");
+    });
+
 })();
