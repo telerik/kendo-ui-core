@@ -437,4 +437,19 @@
 
         equal(input.val(), "(___)  __");
     });
+
+    test("MaskedTextBox allows any character if no mask", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input);
+
+        input.focus();
+        caret(input[0], 0);
+
+        stub(maskedtextbox, {
+            _mask: maskedtextbox._mask
+        });
+
+        input.pressKey("3");
+
+        equal(maskedtextbox.calls("_mask"), 0);
+    });
 })();

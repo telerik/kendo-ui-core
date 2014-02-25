@@ -95,6 +95,18 @@
         equal(maskedtextbox.value(), "(99-99)");
     });
 
+    test("value method does not mask if no options.mask", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            value: "12"
+        });
+
+        equal(maskedtextbox.value(), "12");
+
+        maskedtextbox.value("10");
+
+        equal(maskedtextbox.value(), "10");
+    });
+
     test("enable method with false disables widget", function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(00-00)"
@@ -215,5 +227,48 @@
         });
 
         equal(maskedtextbox.rules["~"], rule);
+    });
+
+    test("setOptions unbinds input events if no mask", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(00-00)",
+            value: "12"
+        });
+
+        stub(maskedtextbox, {
+            _mask: maskedtextbox._mask
+        });
+
+        maskedtextbox.setOptions({
+            mask: ""
+        });
+
+        input.trigger({
+            keyCode: 60,
+            type: "keypress"
+        });
+
+        equal(maskedtextbox.calls("_mask"), 0);
+    });
+
+    test("setOptions binds input events if mask is set", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            value: "12"
+        });
+
+        maskedtextbox.setOptions({
+            mask: "(00-00)"
+        });
+
+        stub(maskedtextbox, {
+            _mask: maskedtextbox._mask
+        });
+
+        input.trigger({
+            keyCode: 60,
+            type: "keypress"
+        });
+
+        equal(maskedtextbox.calls("_mask"), 1);
     });
 })();
