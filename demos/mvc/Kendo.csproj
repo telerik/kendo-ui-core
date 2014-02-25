@@ -842,6 +842,7 @@
     <Content Include="Views\dataviz\diagram\index.cshtml" />
     <Content Include="Views\dataviz\line-charts\stacked100-line.cshtml" />
     <Content Include="Views\dataviz\scatter-charts\mvvm.cshtml" />
+    <Content Include="Views\dataviz\diagram\layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
