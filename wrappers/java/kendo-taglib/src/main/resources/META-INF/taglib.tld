@@ -30805,32 +30805,32 @@ has been clicked on a window with static content.</description>
 
 <!-- Auto-generated -->
 
-	<tag>
-		<description>Tooltip content</description>
-		<name>tooltip-content</name>
-		<tag-class>com.kendoui.taglib.tooltip.ContentTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
+    <tag>
+        <description>Tooltip content</description>
+        <name>tooltip-content</name>
+        <tag-class>com.kendoui.taglib.tooltip.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
-	</tag>
-	
-	 <tag>
+    </tag>
+
+     <tag>
         <description>Specifies a URL or request options that the tooltip should load its content from.</description>
         <name>tooltip-content-url</name>
         <tag-class>com.kendoui.taglib.tooltip.ContentAjaxOptionsTag</tag-class>
@@ -30848,34 +30848,34 @@ Refer to the jQuery.ajax documentation for further info.</description>
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Data to be send to the server.
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The remote url to call when creating a new record.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
@@ -30889,19 +30889,19 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
 
@@ -30923,34 +30923,34 @@ Refer to the jQuery.ajax documentation for further info.</description>
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Data to be send to the server.
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The remote url to call when creating a new record.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
 
@@ -30963,19 +30963,19 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
 
@@ -30997,34 +30997,34 @@ Refer to the jQuery.ajax documentation for further info.</description>
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Data to be send to the server.
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The remote url to call when creating a new record.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
 
@@ -31038,19 +31038,19 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
 
@@ -31072,34 +31072,34 @@ Refer to the jQuery.ajax documentation for further info.</description>
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Data to be send to the server.
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The remote url to call when creating a new record.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
 
@@ -31112,19 +31112,19 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
 
@@ -31146,44 +31146,44 @@ Refer to the jQuery.ajax documentation for further info.</description>
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Data to be send to the server.
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The remote url to call when creating a new record.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
     </tag>
-	
 
-	<tag>
-		<description>PanelBar Item content</description>
-		<name>panelBar-item-content</name>
-		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
+
+    <tag>
+        <description>PanelBar Item content</description>
+        <name>panelBar-item-content</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>Splitter Pane content</description>
@@ -31192,42 +31192,42 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <body-content>JSP</body-content>
     </tag>
 
-	<tag>
-		<description>TabStrip Item content</description>
-		<name>tabStrip-item-content</name>
-		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
+    <tag>
+        <description>TabStrip Item content</description>
+        <name>tabStrip-item-content</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
-	<tag>
-		<description>Menu Item content</description>
-		<name>menu-item-content</name>
-		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
+    <tag>
+        <description>Menu Item content</description>
+        <name>menu-item-content</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
-	<tag>
-		<description>TreeView Item content</description>
-		<name>treeView-item-content</name>
-		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
+    <tag>
+        <description>TreeView Item content</description>
+        <name>treeView-item-content</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
-	<tag>
-		<description>Window content</description>
-		<name>window-content</name>
-		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
+    <tag>
+        <description>Window content</description>
+        <name>window-content</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
-	<tag>
+    <tag>
         <description>PanelBar child items</description>
         <name>panelBar-item-items</name>
         <tag-class>com.kendoui.taglib.panelbar.ItemsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
-	<tag>
+    <tag>
         <description>TreeView child items</description>
         <name>treeView-item-items</name>
         <tag-class>com.kendoui.taglib.treeview.ItemsTag</tag-class>
@@ -31235,61 +31235,61 @@ Refer to the jQuery.ajax documentation for further info.</description>
     </tag>
 
     <tag>
-    	<description>Model definition</description>
-    	<name>dataSource-schema-model</name>
-    	<tag-class>com.kendoui.taglib.datasource.ModelTag</tag-class>
-    	<body-content>JSP</body-content>
+        <description>Model definition</description>
+        <name>dataSource-schema-model</name>
+        <tag-class>com.kendoui.taglib.datasource.ModelTag</tag-class>
+        <body-content>JSP</body-content>
 
-    	<attribute>
-    	 	<description>The name of the field which acts as an identifier of the model.</description>
+        <attribute>
+            <description>The name of the field which acts as an identifier of the model.</description>
             <name>id</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-    	</attribute>
+        </attribute>
     </tag>
 
     <tag>
-    	<description>Hierarchical model definition</description>
-    	<name>dataSource-schema-hierarchical-model</name>
-    	<tag-class>com.kendoui.taglib.datasource.HierarchicalModelTag</tag-class>
-    	<body-content>JSP</body-content>
+        <description>Hierarchical model definition</description>
+        <name>dataSource-schema-hierarchical-model</name>
+        <tag-class>com.kendoui.taglib.datasource.HierarchicalModelTag</tag-class>
+        <body-content>JSP</body-content>
 
-    	<attribute>
-    	 	<description>The name of the field which acts as an identifier of the model.</description>
+        <attribute>
+            <description>The name of the field which acts as an identifier of the model.</description>
             <name>id</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-    	</attribute>
+        </attribute>
 
-    	<attribute>
-    	 	<description>The name of the field which describes if the data item has child items.</description>
+        <attribute>
+            <description>The name of the field which describes if the data item has child items.</description>
             <name>hasChildren</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-    	</attribute>
+        </attribute>
 
-    	<attribute>
-    	 	<description>The name of the field which holds the child items array.</description>
+        <attribute>
+            <description>The name of the field which holds the child items array.</description>
             <name>children</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-    	</attribute>
+        </attribute>
     </tag>
 
     <tag>
-    	<description>Configures model fields</description>
-    	<name>dataSource-schema-model-fields</name>
-    	<tag-class>com.kendoui.taglib.datasource.FieldsTag</tag-class>
-    	<body-content>JSP</body-content>
+        <description>Configures model fields</description>
+        <name>dataSource-schema-model-fields</name>
+        <tag-class>com.kendoui.taglib.datasource.FieldsTag</tag-class>
+        <body-content>JSP</body-content>
     </tag>
 
     <tag>
-    	<description>Defines a model field</description>
-    	<name>dataSource-schema-model-field</name>
-    	<tag-class>com.kendoui.taglib.datasource.FieldTag</tag-class>
-    	<body-content>JSP</body-content>
+        <description>Defines a model field</description>
+        <name>dataSource-schema-model-field</name>
+        <tag-class>com.kendoui.taglib.datasource.FieldTag</tag-class>
+        <body-content>JSP</body-content>
 
-    	 <attribute>
+         <attribute>
             <description>The mandatory and unique name of the field.</description>
             <name>name</name>
             <required>true</required>
@@ -31297,7 +31297,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>java.lang.String</type>
         </attribute>
 
-    	<attribute>
+        <attribute>
             <description>Specifies the the type of the field. The available options are &quot;string&quot;, &quot;number&quot;, &quot;boolean&quot;, &quot;date&quot;. The default is &quot;string&quot;.
             </description>
             <name>type</name>
@@ -31305,21 +31305,21 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>java.lang.String</type>
         </attribute>
 
-    	<attribute>
+        <attribute>
             <description>Specifies the name of the original raw data item field.</description>
             <name>from</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-        
-    	<attribute>
+
+        <attribute>
             <description>Specifies if the field is editable or not. The default value is &quot;true&quot;.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
 
-    	<attribute>
+        <attribute>
             <description>Specifies if the defaultValue setting should be used. The default is &quot;false&quot;.</description>
             <name>nullable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -31330,38 +31330,38 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <description>Specifies the value which will be used for the field when a new model instance is created.</description>
             <name>defaultValue</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
     </tag>
 
     <tag>
-    	<description>Specifies the validation options of a model field</description>
-    	<name>dataSource-schema-model-field-validation</name>
-    	<tag-class>com.kendoui.taglib.datasource.ValidationTag</tag-class>
-    	<body-content>empty</body-content>
+        <description>Specifies the validation options of a model field</description>
+        <name>dataSource-schema-model-field-validation</name>
+        <tag-class>com.kendoui.taglib.datasource.ValidationTag</tag-class>
+        <body-content>empty</body-content>
 
-    	<attribute>
+        <attribute>
             <description>Specifies if the field is required. The default value is &quot;false&quot;.</description>
             <name>required</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
 
-    	<attribute>
+        <attribute>
             <description>A regular expression which the field value should match.</description>
             <name>pattern</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
-    	<attribute>
+        <attribute>
             <description>Specifies the maximum numeric value of the field.</description>
             <name>max</name>
             <rtexprvalue>true</rtexprvalue>
             <type>double</type>
         </attribute>
 
-    	<attribute>
+        <attribute>
             <description>Specifies the minimum numeric value of the field.</description>
             <name>min</name>
             <rtexprvalue>true</rtexprvalue>
@@ -31371,27 +31371,27 @@ Refer to the jQuery.ajax documentation for further info.</description>
     </tag>
 
     <tag>
-		<description>Template to be used for rendering the toolbar of the grid.</description>
-		<name>grid-toolbarTemplate</name>
-		<tag-class>com.kendoui.taglib.grid.ToolbarTemplateFunctionTag</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
+        <description>Template to be used for rendering the toolbar of the grid.</description>
+        <name>grid-toolbarTemplate</name>
+        <tag-class>com.kendoui.taglib.grid.ToolbarTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
-	<tag>
-		<description>List of possible values which to be matched to the column field value. The matched value will be displayed in the column cell. The items of the list should have value and taxt fields.</description>
-		<name>grid-column-values</name>
-		<tag-class>com.kendoui.taglib.grid.ColumnValuesTag</tag-class>
-		<body-content>empty</body-content>
+    <tag>
+        <description>List of possible values which to be matched to the column field value. The matched value will be displayed in the column cell. The items of the list should have value and taxt fields.</description>
+        <name>grid-column-values</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnValuesTag</tag-class>
+        <body-content>empty</body-content>
 
-		<attribute>
+        <attribute>
             <description></description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
-	</tag>
+    </tag>
 
-	<tag>
+    <tag>
         <description>Specifies detail template of the Grid</description>
         <name>grid-detailTemplate</name>
         <tag-class>com.kendoui.taglib.grid.DetailTemplateFunctionTag</tag-class>
@@ -31410,8 +31410,8 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <tag-class>com.kendoui.taglib.ContentTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
-    
-	<tag>
+
+    <tag>
         <description>Indicates whether paging is enabled/disabled.</description>
         <name>listview-pageable</name>
         <tag-class>com.kendoui.taglib.listview.PageableTag</tag-class>
@@ -31473,7 +31473,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>boolean</type>
         </attribute>
     </tag>
-    
+
     <tag>
         <description>Defines texts shown within the pager.</description>
         <name>listview-pageable-messages</name>
@@ -31550,11 +31550,11 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>java.lang.String</type>
         </attribute>
     </tag>
-   	<tag>
-		<description>Button content</description>
-		<name>button-content</name>
-		<tag-class>com.kendoui.taglib.ContentTag</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-    
+    <tag>
+        <description>Button content</description>
+        <name>button-content</name>
+        <tag-class>com.kendoui.taglib.ContentTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
 </taglib>
