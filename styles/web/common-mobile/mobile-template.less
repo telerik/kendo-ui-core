@@ -1,23 +1,71 @@
-@mobile-main-color: #4c5356;
 @mobile-second-color: #bababa;
-@mobile-background: #f4f4f4;
 @mobile-dark-background: #363940;
-@mobile-list-background: #fcfcfc;
-@mobile-button-background: rgba(0,0,0,.1);
-@mobile-border-color: rgba(0,0,0,.1);
-@mobile-active-color: #fff;
-@mobile-active-background: #10c4b2;
+@mobile-list-background: darken(@widget-background-color, 5%);
+@mobile-button-background: fade(@widget-background-color, 20%);
+@mobile-border-color: fade(@widget-text-color, 20%);
 @mobile-second-active-background: #da2228;
-@mobile-light-shadow: rgba(255,255,255,.2);
+@mobile-light-shadow: @mobile-button-background;
 @mobile-overlay-background: rgba(0,0,0,.4);
+
+@mobile-border-width: 1px;
+
+/* Border-radius */
+
+.km-buttongroup > *:first-child
+{
+    border-radius: @main-border-radius 0 0 @main-border-radius;
+}
+
+.km-buttongroup > *:last-child
+{
+    border-radius: 0 @main-border-radius @main-border-radius 0;
+}
+
+.km-listinset > li:first-child,
+.km-popover-root .km-popup .km-header,
+.km-listgroupinset .km-list > li:first-child
+{
+    border-radius: @main-border-radius @main-border-radius 0 0;
+}
+
+.km-listinset > li:last-child,
+.km-listgroupinset .km-list > li:last-child
+{
+    border-radius: 0 0 @main-border-radius @main-border-radius;
+}
+
+.km-button,
+.km-switch-handle,
+.km-filter-wrap > input,
+.km-popover-root .km-popup,
+.km-actionsheet-wrapper.km-popup,
+.km-listview-label input[type=radio],
+.km-listview-label input[type=checkbox],
+.km-listinset > li:first-child:last-child,
+.km-listgroupinset .km-list > li:first-child:last-child
+{
+    border-radius: @main-border-radius;
+}
+
+.km-switch-wrapper,
+.km-switch-container,
+.km-switch-background
+{
+    border-radius: @main-border-radius + 1px;
+}
+
+.km-actionsheet-wrapper.km-popup
+{
+    padding: @main-border-radius 0;
+}
 
 /* override transform options for performance */
 .km-widget,
 .km-content,
 .km-popover-root .km-content .km-widget
 {
-    color: @mobile-main-color;
-    background: @mobile-background;
+    color: @widget-text-color;
+    background: @widget-background-color;
 }
 
 /* NavBar */
@@ -44,9 +92,9 @@
 
 .km-detail
 {
-    color: @mobile-main-color;
+    color: @widget-text-color;
     border-color: @mobile-border-color;
-    background-color: @mobile-background;
+    background-color: @widget-background-color;
 }
 
 .km-detail:active,
@@ -64,12 +112,15 @@
 
 .km-switch-background
 {
-    .linear-gradient-image(top, @mobile-second-color, @mobile-second-color);
+    .composite-background(~"@{mobile-second-color}, @{mobile-second-color}");
+    background-position: 4.25em 0;
+    background-repeat: no-repeat;
+    background-color: currentcolor;
 }
 
 .km-switch-handle
 {
-    background: @mobile-background;
+    background: @widget-background-color;
 }
 
 .km-switch-off .km-switch-handle
@@ -82,18 +133,18 @@
 .km-switch-container,
 .km-switch-background
 {
-    border-radius: @mobile-border-radius + 1px;
+    border-radius: @main-border-radius + 1px;
 }
 
 .km-switch-handle
 {
-    border-radius: @mobile-border-radius;
+    border-radius: @main-border-radius;
 }
 
 .km-switch-container,
 .km-switch-wrapper
 {
-    border-color: #f0f0f0;
+    border-color: @widget-border-color;
 }
 
 /* ListView */
@@ -119,12 +170,12 @@
 
 .km-listview-link:after
 {
-    color: lighten(@mobile-main-color, 30);
+    color: lighten(@widget-text-color, 30);
 }
 
 .km-group-title
 {
-    background: @mobile-background;
+    background: @widget-background-color;
     border-color: @mobile-border-color;
 }
 
@@ -140,12 +191,12 @@
 .km-filter-wrap:before,
 .km-filter-reset .km-clear
 {
-	color: @mobile-main-color;
+	color: @widget-text-color;
 }
 
 .km-filter-wrap > input
 {
-    color: @mobile-main-color;
+    color: @widget-text-color;
     border-color: @mobile-border-color;
 }
 
@@ -174,12 +225,12 @@
 .km-list .k-dropdown-wrap,
 .km-list textarea
 {
-    color: @mobile-main-color;
+    color: @widget-text-color;
 }
 
 .km-list .k-dropdown-wrap .k-input
 {
-    color: @mobile-main-color;
+    color: @widget-text-color;
 }
 
 .km-list select:not([multiple]) option
@@ -213,7 +264,7 @@
 .km-listview-label input[type=checkbox]
 {
     border-color: @mobile-border-color;
-    background: @mobile-background;
+    background: @widget-background-color;
 }
 
 .km-listview-label input[type=checkbox]:checked:after
@@ -288,7 +339,7 @@ li.km-actionsheet-cancel > a
 
 .km-loader h1
 {
-    color: @mobile-main-color;
+    color: @widget-text-color;
 }
 
 /* Active States */
@@ -319,21 +370,25 @@ li.km-state-active .km-listview-link,
 li.km-state-active .km-listview-label,
 .km-state-active .km-listview-link:after
 {
-    color: @mobile-active-color;
+    color: @selected-text-color;
 }
 
 .km-loader > *:not(h1),
 .km-filter-wrap > input,
-.km-switch-handle.km-state-active,
 .km-root .km-scroller-refresh span:not(.km-template)
 {
-    background-color: @mobile-active-color;
+    background-color: @selected-text-color;
+}
+
+.km-switch-handle.km-state-active
+{
+    background-color: lighten(@widget-background-color, 10%);
 }
 
 .km-switch-handle,
 .km-switch-background
 {
-    color: @mobile-active-background;
+    color: @selected-background-color;
 }
 
 .km-loader,
@@ -354,12 +409,12 @@ li.km-state-active .km-listview-label,
 .km-listview-label input[type=radio]:checked,
 .km-listview-label input[type=checkbox]:checked
 {
-    background: @mobile-active-background;
+    background: @selected-background-color;
 }
 
 .km-filter-wrap > input:focus
 {
-    border-color: @mobile-active-background;
+    border-color: @selected-background-color;
 }
 
 .km-badge,

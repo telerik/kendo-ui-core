@@ -1,8 +1,14 @@
 @import "../../mobile/common/base.less";
 
 @mobile-border-width: 1px;
-@mobile-border-radius: 3px;
-@mobile-inline-border-radius: @mobile-border-radius - 1px;
+@main-border-radius: 3px;
+@mobile-inline-border-radius: @main-border-radius - 1px;
+@widget-text-color: #4c5356;
+@widget-background-color: #f4f4f4;
+@selected-text-color: #fff;
+@selected-background-color: #10c4b2;
+@mobile-button-background: rgba(0,0,0,.1);
+@mobile-border-color: rgba(0,0,0,.1);
 
 .km-widget
 {
@@ -215,7 +221,3 @@
     33% { height: 1.2em; margin-top: -.6em; }
     66% { height: .6em; margin-top: -.3em; }
 }
-
-
-/* Color Template */
-@import "mobile-template.less";

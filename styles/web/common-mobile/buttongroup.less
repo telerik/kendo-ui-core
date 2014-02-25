@@ -22,22 +22,13 @@
     border-radius: 0;
 }
 
-.km-buttongroup > *:first-child
-{
-    border-radius: @mobile-border-radius 0 0 @mobile-border-radius;
-}
-
-.km-buttongroup > *:last-child
-{
-    border-radius: 0 @mobile-border-radius @mobile-border-radius 0;
-}
-
-.km-buttongroup > *.km-state-active
+.km-widget.km-buttongroup > *:last-child,
+.km-widget.km-buttongroup > *.km-state-active
 {
     border-right-width: @mobile-border-width;
 }
 
-.km-buttongroup > *.km-state-active + *
+.km-widget.km-buttongroup > *.km-state-active + *
 {
     border-left-width: 0;
 }
