@@ -44,6 +44,17 @@
         }
 
         /// <summary>
+        /// Use it to configure SignalR binding.
+        /// </summary>
+        public SchedulerSignalRDataSourceBuilder<TModel> SignalR()
+        {
+            dataSource.Type = DataSourceType.Custom;
+            dataSource.Schema.Model = new ModelDescriptor(typeof(TModel));
+
+            return new SchedulerSignalRDataSourceBuilder<TModel>(dataSource);
+        }
+
+        /// <summary>
         /// Configures Model properties
         /// </summary>
         public AjaxDataSourceBuilder<TModel> Model(Action<DataSourceSchedulerModelDescriptorFactory<TModel>> configurator)

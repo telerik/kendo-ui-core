@@ -1348,9 +1348,12 @@ namespace Kendo.Mvc.UI
                         throw new NotSupportedException(Exceptions.BatchUpdatesRequireInCellMode);
                     }
 
-                    if (!DataSource.Transport.Update.HasValue())
+                    if (DataSource.Type != DataSourceType.Custom)
                     {
-                        throw new NotSupportedException(Exceptions.BatchUpdatesRequireUpdate);
+                        if (!DataSource.Transport.Update.HasValue())
+                        {
+                            throw new NotSupportedException(Exceptions.BatchUpdatesRequireUpdate);
+                        }
                     }
                 }                
 

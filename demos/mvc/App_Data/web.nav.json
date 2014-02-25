@@ -643,7 +643,7 @@
                     "new": true,
                     "title": "Real-time Binding to SignalR Hub",
                     "meta": "This example shows how the Kendo UI Grid can be bound to SignalR Hub for real-time push notifications",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!jsp", "!php"]
                 },
                 {
                     "text": "Binding to WebSocket",

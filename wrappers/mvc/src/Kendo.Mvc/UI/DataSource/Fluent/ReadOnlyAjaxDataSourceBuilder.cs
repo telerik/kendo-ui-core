@@ -36,5 +36,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new ReadOnlyCustomDataSourceBuilder(dataSource, viewContext, urlGenerator);
         }
+
+        /// <summary>
+        /// Use it to configure SignalR binding.
+        /// </summary>
+        public ReadOnlySignalRDataSourceBuilder SignalR()
+        {
+            dataSource.Type = DataSourceType.Custom;
+
+            return new ReadOnlySignalRDataSourceBuilder(dataSource);
+        }
     }
 }

@@ -19,9 +19,9 @@
         /// </summary>
         /// <param name="memberName">Field name</param>
         /// <param name="memberType">Field type</param>        
-        public virtual CustomDataSourceModelFieldDescriptorBuilder<object> Field(string memberName, Type memberType)
+        public virtual CustomDataSourceModelFieldDescriptorBuilder<TModel> Field(string memberName, Type memberType)
         {
-            return AddFieldDescriptor<object>(memberName, memberType);
+            return AddFieldDescriptor<TModel>(memberName, memberType);
         }
 
         private CustomDataSourceModelFieldDescriptorBuilder<TValue> AddFieldDescriptor<TValue>(string memberName, Type memberType)

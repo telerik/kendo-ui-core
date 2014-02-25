@@ -122,5 +122,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the Push client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        public DataSourceEventBuilder Push(string handler)
+        {
+            Handler("push", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the inline handler of the Push client-side event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        public DataSourceEventBuilder Push(Func<object, object> handler)
+        {
+            Handler("push", handler);
+
+            return this;
+        }
     }
 }

@@ -8,7 +8,7 @@
     /// Defines the fluent interface for configuring the <see cref="DataSource"/> Model definition.
     /// </summary>
     /// <typeparam name="TModel">Type of the model</typeparam>
-    public class CustomDataSourceModelDescriptorFactory<TModel> : DataSourceModelDescriptorFactoryBase<TModel>, IHideObjectMembers
+    public class CustomDataSourceModelDescriptorFactory<TModel> : DataSourceModelDescriptorFactoryBase<object>, IHideObjectMembers
         where TModel : class
     {
         public CustomDataSourceModelDescriptorFactory(ModelDescriptor model)

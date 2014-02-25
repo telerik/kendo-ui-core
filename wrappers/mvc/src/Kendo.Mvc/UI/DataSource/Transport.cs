@@ -19,6 +19,7 @@ namespace Kendo.Mvc.UI
             FunctionCreate = new ClientHandlerDescriptor();
             ParameterMap = new ClientHandlerDescriptor();
             SerializeEmptyPrefix = true;
+            SignalR = new TransportSignalR();
         }
 
         public string Prefix { get; set; }
@@ -26,6 +27,7 @@ namespace Kendo.Mvc.UI
         public string IdField { get; set; }
         public ClientHandlerDescriptor ParameterMap { get; set; }
         public bool SerializeEmptyPrefix { get; set; }
+        public TransportSignalR SignalR { get; set; }
         
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -122,6 +124,13 @@ namespace Kendo.Mvc.UI
             if (ParameterMap.HasValue())
             {
                 json["parameterMap"] = ParameterMap;
+            }
+
+            var signalR = SignalR.ToJson();
+
+            if (signalR.Keys.Any())
+            {
+                json["signalr"] = signalR;
             }
         }
 

@@ -1,21 +1,20 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using System.Web.Mvc;
 
-    public class ReadOnlyCustomDataSourceBuilder : CustomDataSourceBuilderBase<ReadOnlyCustomDataSourceBuilder>
+    public class ReadOnlySignalRDataSourceBuilder : SignalRDataSourceBuilderBase<ReadOnlySignalRDataSourceBuilder>, IHideObjectMembers
     {
-        public ReadOnlyCustomDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
-            : base(dataSource, viewContext, urlGenerator)
+        public ReadOnlySignalRDataSourceBuilder(DataSource dataSource)
+            : base(dataSource)
         { 
         }
 
         /// <summary>
         /// Configures the transport of the DataSource
         /// </summary>                
-        public ReadOnlyCustomDataSourceBuilder Transport(Action<ReadOnlyCustomDataSourceTransportBuilder> configurator)
+        public ReadOnlySignalRDataSourceBuilder Transport(Action<ReadOnlySignalRDataSourceTransportBuilder> configurator)
         {
-            configurator(new ReadOnlyCustomDataSourceTransportBuilder(dataSource.Transport, viewContext, urlGenerator));
+            configurator(new ReadOnlySignalRDataSourceTransportBuilder(dataSource.Transport));
 
             return this;
         }
@@ -23,7 +22,7 @@
         /// <summary>
         /// Configures Schema properties
         /// </summary>
-        public ReadOnlyCustomDataSourceBuilder Schema(Action<ReadOnlyCustomDataSourceSchemaBuilder<object>> configurator)
+        public ReadOnlySignalRDataSourceBuilder Schema(Action<ReadOnlyCustomDataSourceSchemaBuilder<object>> configurator)
         {
             configurator(new ReadOnlyCustomDataSourceSchemaBuilder<object>(dataSource.Schema));
 
@@ -33,7 +32,7 @@
         /// <summary>
         /// Configures the initial filter.
         /// </summary>
-        public virtual ReadOnlyCustomDataSourceBuilder Filter(Action<ReadOnlyCustomDataSourceFilterDescriptorFactory> configurator)
+        public virtual ReadOnlySignalRDataSourceBuilder Filter(Action<ReadOnlyCustomDataSourceFilterDescriptorFactory> configurator)
         {
             configurator(new ReadOnlyCustomDataSourceFilterDescriptorFactory(dataSource.Filters));
 
@@ -43,7 +42,7 @@
         /// <summary>
         /// Configures the initial sort.
         /// </summary>
-        public virtual ReadOnlyCustomDataSourceBuilder Sort(Action<ReadOnlyCustomDataSourceSortDescriptorFactory> configurator)
+        public virtual ReadOnlySignalRDataSourceBuilder Sort(Action<ReadOnlyCustomDataSourceSortDescriptorFactory> configurator)
         {
             configurator(new ReadOnlyCustomDataSourceSortDescriptorFactory(dataSource.OrderBy));
 

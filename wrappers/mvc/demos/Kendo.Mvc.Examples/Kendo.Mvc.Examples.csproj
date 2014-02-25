@@ -348,6 +348,7 @@
     <Compile Include="Controllers\Web\ComboBox\RtlController.cs" />
     <Compile Include="Controllers\Web\ComboBox\ServerFilteringController.cs" />
     <Compile Include="Controllers\Web\ComboBox\TemplateController.cs" />
+    <Compile Include="Controllers\Web\Grid\SignalRController.cs" />
     <Compile Include="Controllers\Web\MaskedTextBox\ApiController.cs" />
     <Compile Include="Controllers\Web\MaskedTextBox\EventsController.cs" />
     <Compile Include="Controllers\Web\MaskedTextBox\GlobalizationController.cs" />
@@ -934,6 +935,7 @@
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\locked_columns.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\everlive.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\signalr.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\webapi.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\customajaxbinding.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\customserverbinding.aspx" />
@@ -3146,6 +3148,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\notification\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\grid\signalr.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
