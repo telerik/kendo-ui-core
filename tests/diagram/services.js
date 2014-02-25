@@ -1,7 +1,7 @@
 ﻿///<reference path="qunit-1.12.0.js" />
 
 (function ($, undefined) {
-    var kendo = window.kendo, diagram = kendo.diagram, d, Point = diagram.Point;
+    var kendo = window.kendo, diagram = kendo.dataviz.diagram, d, Point = diagram.Point;
 
     module("Selection tests", {
         setup: function () {

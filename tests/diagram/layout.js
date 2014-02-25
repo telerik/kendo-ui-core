@@ -4,7 +4,7 @@
 ///<reference path="../js/diagram.math.js" />
 
 (function() {
-    var diagram = kendo.diagram;
+    var diagram = kendo.dataviz.diagram;
     var Range = diagram.Range;
     var Graph = diagram.Graph;
     var Node = diagram.Node;

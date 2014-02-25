@@ -13,7 +13,7 @@ var __meta__ = {
     // Imports ================================================================
     var kendo = window.kendo,
         Observable = kendo.Observable,
-        diagram = kendo.diagram,
+        diagram = kendo.dataviz.diagram,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
         dataviz = kendo.dataviz,
@@ -1038,7 +1038,7 @@ var __meta__ = {
 
     kendo.deepExtend(diagram, {
         init: function (element) {
-            kendo.init(element, kendo.diagram.ui);
+            kendo.init(element, diagram.ui);
         },
         Scale: Scale,
         Translation: Translation,

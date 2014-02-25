@@ -1,7 +1,7 @@
-var diagram = kendo.diagram,
-    Range = kendo.diagram.Range,
-    Utils = kendo.diagram.Utils,
-    Point = kendo.diagram.Point
+var diagram = kendo.dataviz.diagram,
+    Range = diagram.Range,
+    Utils = diagram.Utils,
+    Point = diagram.Point
     isFunction = kendo.isFunction
 
 /*-----------Utilities tests------------------------------------*/
