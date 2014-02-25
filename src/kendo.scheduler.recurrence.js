@@ -1620,6 +1620,7 @@ var __meta__ = {
             messages: {
                 frequencies: {
                     never: "Never",
+                    hourly: "Hourly",
                     daily: "Daily",
                     weekly: "Weekly",
                     monthly: "Monthly",
