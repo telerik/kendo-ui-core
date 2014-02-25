@@ -3663,12 +3663,12 @@ function pad(number, digits, end) {
     };
 
     kendo.runNextAnimation = function() {
-        var callback = animationQueue.shift();
-
         kendo.animationFrame(function() {
-            callback();
-            if (animationFrame[0]) {
-                kendo.runNextAnimation();
+            if (animationQueue[0]) {
+                animationQueue.shift()();
+                if (animationQueue[0]) {
+                    kendo.runNextAnimation();
+                }
             }
         });
     };
