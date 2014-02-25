@@ -9,6 +9,7 @@
 obj/
 !**/References/*.dll
 !wrappers/mvc/packages/**/*.dll
+!plugins/KendoBootstrapper/packages/Newtonsoft.*/*/*/*.dll
 .DS_Store
 .JustCode
 .bundle/
