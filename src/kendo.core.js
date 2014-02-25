@@ -2009,6 +2009,7 @@ function pad(number, digits, end) {
         var input = document.createElement("input");
 
         support.placeholder = "placeholder" in input;
+        support.propertyChangeEvent = "onpropertychange" in input;
 
         support.input = (function() {
             var types = ["number", "date", "time", "month", "week", "datetime", "datetime-local"];

@@ -15,6 +15,10 @@ test("kendo.support checks for placeholder attribute", function() {
     equal(kendo.support.placeholder, "placeholder" in input);
 });
 
+test("kendo.support checks whether onpropertchange is supported", function() {
+    equal(kendo.support.propertyChangeEvent, !!("onpropertychange" in input));
+});
+
 test("kendo.support checks for number type", function() {
     input.setAttribute("type", "number");
 
