@@ -83,6 +83,14 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
         setEvent("select", value.getBody());
     }
 
+    public boolean getAnimation() {
+        return (boolean)getProperty("animation");
+    }
+
+    public void setAnimation(boolean value) {
+        setProperty("animation", value);
+    }
+
     public boolean getCollapsible() {
         return (boolean)getProperty("collapsible");
     }

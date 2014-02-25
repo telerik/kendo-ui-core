@@ -53,19 +53,19 @@ public class PositionTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         return "notification-position";
     }
 
-    public java.lang.Object getBottom() {
-        return (java.lang.Object)getProperty("bottom");
+    public float getBottom() {
+        return (float)getProperty("bottom");
     }
 
-    public void setBottom(java.lang.Object value) {
+    public void setBottom(float value) {
         setProperty("bottom", value);
     }
 
-    public java.lang.Object getLeft() {
-        return (java.lang.Object)getProperty("left");
+    public float getLeft() {
+        return (float)getProperty("left");
     }
 
-    public void setLeft(java.lang.Object value) {
+    public void setLeft(float value) {
         setProperty("left", value);
     }
 
@@ -77,19 +77,19 @@ public class PositionTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("pinned", value);
     }
 
-    public java.lang.Object getRight() {
-        return (java.lang.Object)getProperty("right");
+    public float getRight() {
+        return (float)getProperty("right");
     }
 
-    public void setRight(java.lang.Object value) {
+    public void setRight(float value) {
         setProperty("right", value);
     }
 
-    public java.lang.Object getTop() {
-        return (java.lang.Object)getProperty("top");
+    public float getTop() {
+        return (float)getProperty("top");
     }
 
-    public void setTop(java.lang.Object value) {
+    public void setTop(float value) {
         setProperty("top", value);
     }
 

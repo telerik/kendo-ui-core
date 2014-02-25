@@ -15530,16 +15530,16 @@ top takes precedence over bottom and left takes precedence over right.</descript
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Determines the position of the first popup notification with regard to the viewport's bottom edge. Numeric values are treated as pixels.</description>
+            <description>Determines the pixel position of the first popup notification with regard to the viewport's bottom edge.</description>
             <name>bottom</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>float</type>
         </attribute>
         <attribute>
-            <description>Determines the position of the first popup notification with regard to the viewport's left edge. Numeric values are treated as pixels.</description>
+            <description>Determines the pixel position of the first popup notification with regard to the viewport's left edge.</description>
             <name>left</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>float</type>
         </attribute>
         <attribute>
             <description>Determines whether the popup notifications will move together with the other page content during scrolling.</description>
@@ -15548,16 +15548,16 @@ top takes precedence over bottom and left takes precedence over right.</descript
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Determines the position of the first popup notification with regard to the viewport's right edge. Numeric values are treated as pixels.</description>
+            <description>Determines the pixel position of the first popup notification with regard to the viewport's right edge.</description>
             <name>right</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>float</type>
         </attribute>
         <attribute>
             <description>Determines the position of the first popup notification with regard to the viewport's top edge. Numeric values are treated as pixels.</description>
             <name>top</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -29263,6 +29263,13 @@ and is about to render it.</description>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>A collection of visual animations used when TabStrip tab are selected through
+user interactions. Setting this option to false will disable all animations.</description>
+            <name>animation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.</description>
