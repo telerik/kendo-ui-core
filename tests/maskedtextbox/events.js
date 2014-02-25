@@ -37,6 +37,7 @@
 
     test("MaskedTextBox raises change event on ENTER", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
+            mask: "LLLL",
             change: function() {
                 ok(true);
             }

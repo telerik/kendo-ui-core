@@ -19,6 +19,7 @@ var __meta__ = {
     var ns = ".kendoMaskedTextBox";
     var proxy = $.proxy;
 
+    var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertchange" : "input") + ns;
     var STATEDISABLED = "k-state-disabled";
     var DISABLED = "disabled";
     var READONLY = "readonly";
@@ -64,8 +65,6 @@ var __meta__ = {
                     that._change();
                 });
 
-             that.value(that.options.value || element.val());
-
              var disabled = element.is("[disabled]");
 
              if (disabled) {
@@ -73,6 +72,8 @@ var __meta__ = {
              } else {
                  that.readonly(element.is("[readonly]"));
              }
+
+             that.value(that.options.value || element.val());
 
              kendo.notify(that);
         },
@@ -111,6 +112,9 @@ var __meta__ = {
 
             that._tokenize();
 
+            this._unbindInput();
+            this._bindInput();
+
             that.value(that.element.val());
         },
 
@@ -132,6 +136,11 @@ var __meta__ = {
 
             if (value === undefined) {
                 return this.element.val();
+            }
+
+            if (!emptyMask) {
+                element.val(value);
+                return;
             }
 
             value = this._unmask(value + "");
@@ -159,27 +168,40 @@ var __meta__ = {
             });
         },
 
+        _bindInput: function() {
+            var that = this;
+
+            if (that._maskLength) {
+                that.element
+                    .on("keydown" + ns, proxy(that._keydown, that))
+                    .on("keypress" + ns, proxy(that._keypress, that))
+                    .on("paste" + ns, proxy(that._paste, that))
+                    .on(INPUT_EVENT_NAME, proxy(that._propertyChange, that));
+            }
+        },
+
+        _unbindInput: function() {
+            this.element
+                .off("keydown" + ns)
+                .off("keypress" + ns)
+                .off("paste" + ns)
+                .off(INPUT_EVENT_NAME);
+        },
+
         _editable: function(options) {
             var that = this;
             var element = that.element;
             var disable = options.disable;
             var readonly = options.readonly;
-            var inputEventName = ("onpropertychange" in element[0] ? "propertychange" : "input") + ns;
 
-            element
-                .off("keydown" + ns)
-                .off("keypress" + ns)
-                .off("paste" + ns)
-                .off(inputEventName);
+            that._unbindInput();
 
             if (!readonly && !disable) {
                 element.removeAttr(DISABLED)
                        .removeAttr(READONLY)
-                       .removeClass(STATEDISABLED)
-                       .on("keydown" + ns, proxy(that._keydown, that))
-                       .on("keypress" + ns, proxy(that._keypress, that))
-                       .on("paste" + ns, proxy(that._paste, that))
-                       .on(inputEventName, proxy(that._propertyChange, that));
+                       .removeClass(STATEDISABLED);
+
+                that._bindInput();
             } else {
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
