@@ -1,13 +1,10 @@
 (function (f, define) {
-    define([ "./kendo.diagram.svg", "./kendo.diagram.services", "./kendo.diagram.layout", "./kendo.diagram.extensions", "./kendo.data", "./kendo.draganddrop" ], f);
+    define(["./kendo.data", "./kendo.draganddrop",
+           "./kendo.diagram.svg",
+           "./kendo.diagram.services",
+           "./kendo.diagram.layout",
+           "./kendo.diagram.extensions" ], f);
 })(function () {
-
-    var __meta__ = {
-        id: "diagram",
-        name: "Diagram",
-        category: "diagram",
-        depends: [ "diagram.svg", "diagram.services", "data", "draganddrop" ]
-    };
 
     (function ($, undefined) {
         // Imports ================================================================

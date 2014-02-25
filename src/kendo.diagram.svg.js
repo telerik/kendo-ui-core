@@ -2,13 +2,6 @@
     define([ "./kendo.diagram.math" ], f);
 })(function(){
 
-var __meta__ = {
-    id: "diagram.svg",
-    name: "Core",
-    category: "diagram",
-    depends: [ "diagram.math" ]
-};
-
 (function ($, undefined) {
     // Imports ================================================================
     var kendo = window.kendo,

@@ -2,13 +2,6 @@
     define([ "./kendo.diagram.math" ], f);
 })(function(){
 
-var __meta__ = {
-    id: "diagram",
-    name: "Diagram Layout",
-    category: "diagram",
-    depends: [ "diagram.math" ]
-};
-
 (function ($, undefined) {
     var kendo = window.kendo,
         diagram = kendo.dataviz.diagram,

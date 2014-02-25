@@ -2,13 +2,6 @@
     define([ "./kendo.diagram.utils" ], f);
 })(function(){
 
-var __meta__ = {
-    id: "diagram.math",
-    name: "Math",
-    category: "diagram",
-    depends: [ "dataviz.core", "diagram.utils" ]
-};
-
 (function ($, undefined) {
     // Imports ================================================================
     var kendo = window.kendo,
