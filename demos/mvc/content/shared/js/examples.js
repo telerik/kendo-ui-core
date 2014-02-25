@@ -26,7 +26,7 @@
                 duration: 300
             }
         },
-        skinRegex = /kendo\.[\w\-]+(\.min)?\.(.+)/i,
+        skinRegex = /kendo\.[\w\-]+(\.min)?\.(less|css)/i,
         dvSkinRegex = /kendo\.dataviz\.(?!min)\w+?(\.css|\.min.css)/gi,
         supports = {
             sessionStorage: (function () {
@@ -210,7 +210,13 @@
 
         getCurrentThemeLink: function () {
             return $("head link").filter(function () {
-                return (/kendo\./gi).test(this.href) && !(/common|rtl|dataviz/gi).test(this.href);
+                return (/kendo\./gi).test(this.href) && !(/common|rtl|dataviz|mobile/gi).test(this.href);
+            });
+        },
+
+        getCurrentMobileThemeLink: function () {
+            return $("head link").filter(function () {
+                return (/kendo\.[^\.\/]+?\.mobile/gi).test(this.href) && !(/common|rtl|dataviz/gi).test(this.href);
             });
         },
 
@@ -248,6 +254,13 @@
 
             Application.publishTheme(themeName);
             $(doc.documentElement).removeClass("k-" + oldThemeName).addClass("k-" + themeName);
+        },
+
+        replaceWebMobileTheme: function (themeName) {
+            var newThemeUrl = Application.getThemeUrl(themeName + ".mobile"),
+                themeLink = Application.getCurrentMobileThemeLink();
+
+            Application.updateLink(themeLink, newThemeUrl);
         },
 
         replaceDVTheme: function (themeName) {
@@ -291,6 +304,7 @@
 
         replaceTheme: function (themeName) {
             Application.replaceWebTheme(themeName);
+            Application.replaceWebMobileTheme(themeName);
             Application.replaceDVTheme(themeName);
 
             $("#example").trigger("kendo:skinChange");
