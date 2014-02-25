@@ -29806,22 +29806,22 @@ has been clicked on a window with static content.</description>
             <description></description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description></description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
 	</tag>
-	
+
 	 <tag>
         <description>Specifies a URL or request options that the tooltip should load its content from.</description>
         <name>tooltip-content-url</name>
@@ -29840,38 +29840,38 @@ Refer to the jQuery.ajax documentation for further info.</description>
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>contentType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Data to be send to the server.
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>data</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>dataType</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 Refer to the jQuery.ajax documentation for further info.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The remote url to call when creating a new record.</description>
             <name>url</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>String</type>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
-	
+
 	<tag>
 		<description>PanelBar Item content</description>
 		<name>panelBar-item-content</name>
@@ -30005,7 +30005,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-        
+
     	<attribute>
             <description>Specifies if the field is editable or not. The default value is &quot;true&quot;.</description>
             <name>editable</name>
@@ -30024,7 +30024,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <description>Specifies the value which will be used for the field when a new model instance is created.</description>
             <name>defaultValue</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
     </tag>
 
@@ -30081,7 +30081,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <description></description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>Object</type>
+            <type>java.lang.Object</type>
         </attribute>
 	</tag>
 
@@ -30104,7 +30104,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <tag-class>com.kendoui.taglib.ContentTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
-    
+
 	<tag>
         <description>Indicates whether paging is enabled/disabled.</description>
         <name>listview-pageable</name>
@@ -30167,7 +30167,7 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>boolean</type>
         </attribute>
     </tag>
-    
+
     <tag>
         <description>Defines texts shown within the pager.</description>
         <name>listview-pageable-messages</name>
@@ -30244,5 +30244,5 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <type>java.lang.String</type>
         </attribute>
     </tag>
-    
+
 </taglib>
