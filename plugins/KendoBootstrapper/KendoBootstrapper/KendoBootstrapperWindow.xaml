@@ -1,0 +1,8 @@
+﻿<Window x:Class="Company.KendoBootstrapper.KendoBootstrapperWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kendo UI Documentation" Height="600" Width="800">
+    <Grid>
+        <WebBrowser Height="Auto" HorizontalAlignment="Left" Name="documentationBrowser" VerticalAlignment="Top" Width="Auto" ClipToBounds="True" Navigating="onBrowserNavigate" />
+    </Grid>
+</Window>

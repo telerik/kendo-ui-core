@@ -59,23 +59,5 @@ namespace Company.KendoBootstrapper {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Can not create tool window..
-        /// </summary>
-        internal static string CanNotCreateWindow {
-            get {
-                return ResourceManager.GetString("CanNotCreateWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Kendo Lint.
-        /// </summary>
-        internal static string ToolWindowTitle {
-            get {
-                return ResourceManager.GetString("ToolWindowTitle", resourceCulture);
-            }
-        }
     }
 }

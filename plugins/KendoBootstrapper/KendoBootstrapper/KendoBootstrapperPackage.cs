@@ -15,6 +15,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Text;
 
 namespace Company.KendoBootstrapper
 {
@@ -37,7 +40,7 @@ namespace Company.KendoBootstrapper
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     // This attribute registers a tool window exposed by this package.
-    [ProvideToolWindow(typeof(MyToolWindow))]
+    //[ProvideToolWindow(typeof(KendoBootstrapperWindow))]
     [Guid(GuidList.guidKendoBootstrapperPkgString)]
     public sealed class KendoBootstrapperPackage : Package
     {
@@ -92,27 +95,9 @@ namespace Company.KendoBootstrapper
             return Path.GetDirectoryName(path);
         }
 
-        /// <summary>
-        /// This function is called when the user clicks the menu item that shows the 
-        /// tool window. See the Initialize method to see how the menu item is associated to 
-        /// this function using the OleMenuCommandService service and the MenuCommand class.
-        /// </summary>
-        private void ShowToolWindow(object sender, EventArgs e)
+        private void LintSolution(object sender, EventArgs e)
         {
             Lint(SolutionFiles());
-
-            /*
-                        // Get the instance number 0 of this tool window. This window is single instance so this instance
-                        // is actually the only one.
-                        // The last flag is set to true so that if the tool window does not exists it will be created.
-                        ToolWindowPane window = this.FindToolWindow(typeof(MyToolWindow), 0, true);
-                        if ((null == window) || (null == window.Frame))
-                        {
-                            throw new NotSupportedException(Resources.CanNotCreateWindow);
-                        }
-                        IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
-                        Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
-            */
         }
 
         private void LintCurrentFile(object sender, EventArgs e)
@@ -158,19 +143,18 @@ namespace Company.KendoBootstrapper
                 }
             }
 
-            RunLintProcess(htmlFiles, "--html");
-            RunLintProcess(jsFiles, "--js");
+            RunLinter(htmlFiles, "--html");
+            RunLinter(jsFiles, "--js");
         }
 
-        private void RunLintProcess(IEnumerable<string> fileNames, string args)
+        private void RunLinter(IEnumerable<string> fileNames, string args)
         {
             if (fileNames.Count() == 0)
             {
                 return;
             }
 
-            DTE.StatusBar.Text = "Kendo Lint Process running...";
-            //DTE.StatusBar.Animate(true, vsStatusAnimation.vsStatusAnimationGeneral);
+            DTE.StatusBar.Text = "Kendo Bootstrapper is looking for errors...";
 
             var process = new System.Diagnostics.Process();
 
@@ -237,6 +221,8 @@ namespace Company.KendoBootstrapper
                 }
             }
 
+            DTE.StatusBar.Text = "Creating custom Kendo UI file...";
+
             var process = new System.Diagnostics.Process();
 
             var node = Path.Combine(AssemblyDirectory(), "node", "node");
@@ -256,6 +242,7 @@ namespace Company.KendoBootstrapper
             process.Start();
             process.WaitForExit();
 
+            DTE.StatusBar.Text = "Ready";
             //string s = process.StandardOutput.ReadToEnd();
             //string t = process.StandardError.ReadToEnd();
 
@@ -265,68 +252,64 @@ namespace Company.KendoBootstrapper
             //}
         }
 
-        private void DisplayDocumentation(object sender, EventArgs e) 
+        private string parseDocumentation(string output, string selection)
         {
-            //get selection
-            TextSelection selection = (TextSelection)DTE.ActiveDocument.Selection;
-            int line = selection.ActivePoint.Line;
-            
+            JArray items = JArray.Parse(output);
+            StringBuilder result = new StringBuilder();
 
-            TextDocument document = (TextDocument)DTE.ActiveDocument.Object("");
-            EditPoint editPoint = document.StartPoint.CreateEditPoint();
+            if (items.Count > 0)
+            {
+                foreach (JToken item in items.Children())
+                {
+                    result.Append("<h2 style=\"font-size: 35px; font-family: Arial, Helvetica, sans-serif; color: #444; font-weight: normal;\">" + item["widget"] + "</h2>");
+                    result.Append("<h4 style=\"font-size: 16px; font-family: Arial, Helvetica, sans-serif; color: #2e2e2e; font-weight: bold; \">" + item["prop"]["name"] + "</h4>");
 
-            int selectionOffset = selection.BottomPoint.LineCharOffset;
-            int charsToStrip = selection.ActivePoint.LineLength - selectionOffset + 1;
+                    if (item["prop"]["type"] != null)
+                    {
+                        result.Append("<code style=\"font-family: monospace; font-size: 16px; font-weight: bold; color: #e15613;\">" + String.Join("|", item["prop"]["type"]) + "</code>");
+                    }
 
-            string textToSelection = editPoint.GetLines(1, line + 1);
-            textToSelection = textToSelection.Substring(0, textToSelection.Length - charsToStrip);
+                    result.Append("<div style=\"font-size: 13px; font-family: Arial, Helvetica, sans-serif; line-height: 1.33em; color: #656565;\">" + item["prop"]["short_doc"] + "</div>");
+                }
+            }
+            else
+            {
+                result.Append("<h3>Property " + selection + " not found in Kendo UI Documentation</h3>");
+            }
 
-            ////strip comments? check if in a string?
-            ////find nearest widget / or dataSource
-            //string widgetPattern = @"\.\s*kendo(\S+)\s*\({1}";
-            //string dataSourcePattern =
-
-            //Match widgetMatch = Regex.Match(textToSelection, widgetPattern, RegexOptions.RightToLeft);
-
-            //if (widgetMatch.Groups.Count <= 1)
-            //{
-            //    //no widget found
-            //}
-
-            //widgetMatch.
-
-            //check if there is dataSource
-
-            //run linter
-
-            //open pop up to display the documentation
-
-            return;
+            return result.ToString();
         }
 
-        //// get the active WpfTextView, if there is one.
-        //private IWpfTextView GetActiveTextView()
-        //{
-        //    IWpfTextView view = null;
-        //    IVsTextView vTextView = null;
+        private void DisplayDocumentation(object sender, EventArgs e)
+        {
+            TextSelection selection = (TextSelection)DTE.ActiveDocument.Selection;
 
-        //    IVsTextManager txtMgr = (IVsTextManager)GetService(typeof(SVsTextManager));
-        //    int mustHaveFocus = 1;
-        //    txtMgr.GetActiveView(mustHaveFocus, null, out vTextView);
+            if (selection.Text != String.Empty)
+            {
+                var process = new System.Diagnostics.Process();
 
-        //    IVsUserData userData = vTextView as IVsUserData;
-        //    if (null != userData)
-        //    {
-        //        IWpfTextViewHost viewHost;
-        //        object holder;
-        //        Guid guidViewHost = DefGuidList.guidIWpfTextViewHost;
-        //        userData.GetData(ref guidViewHost, out holder);
-        //        viewHost = (IWpfTextViewHost)holder;
-        //        view = viewHost.TextView;
-        //    }
+                var node = Path.Combine(AssemblyDirectory(), "node", "node");
+                var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
 
-        //    return view;
-        //}
+                process.StartInfo.FileName = node;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+
+                process.StartInfo.Arguments = string.Format(@"""{0}"" --doc "".{1}""", lint, selection.Text);
+
+                process.Start();
+
+                string output = process.StandardOutput.ReadToEnd();
+                string t = process.StandardError.ReadToEnd();
+
+                process.WaitForExit();
+
+                KendoBootstrapperWindow wind = new KendoBootstrapperWindow(parseDocumentation(output, selection.Text));
+                wind.ShowDialog();
+            }
+        }
 
         private DTE2 dte;
 
@@ -405,7 +388,7 @@ namespace Company.KendoBootstrapper
             {
                 // Create the lint command for the main menu item.
                 CommandID menuCommandID = new CommandID(GuidList.guidKendoBootstrapperCmdSet, (int)PkgCmdIDList.IdKendoLintCommand);
-                MenuCommand menuItem = new MenuCommand(ShowToolWindow, menuCommandID);
+                MenuCommand menuItem = new MenuCommand(LintSolution, menuCommandID);
                 mcs.AddCommand(menuItem);
 
                 //Create the custom file command for the main menu item
@@ -424,9 +407,9 @@ namespace Company.KendoBootstrapper
                 mcs.AddCommand(documentationContextCommand);
 
                 // Create the command for the tool window
-                CommandID toolwndCommandID = new CommandID(GuidList.guidKendoBootstrapperCmdSet, (int)PkgCmdIDList.cmdidMyTool);
-                MenuCommand menuToolWin = new MenuCommand(ShowToolWindow, toolwndCommandID);
-                mcs.AddCommand(menuToolWin);
+                //CommandID toolwndCommandID = new CommandID(GuidList.guidKendoBootstrapperCmdSet, (int)PkgCmdIDList.cmdidMyTool);
+                //MenuCommand menuToolWin = new MenuCommand(ShowToolWindow, toolwndCommandID);
+                //mcs.AddCommand(menuToolWin);
             }
         }
         #endregion
