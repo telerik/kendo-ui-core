@@ -2594,7 +2594,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 }
 
 .chart-wrapper,
-.map-wrapper {
+.map-wrapper,
+.diagram-wrapper {
     position: relative;
     width: 948px;
     height: 470px;
@@ -2605,19 +2606,22 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 }
 
 #example.absConf .chart-wrapper,
-#example.absConf .map-wrapper
+#example.absConf .map-wrapper,
+#example.absConf .diagram-wrapper
 {
     margin-left: 0;
 }
 
 .chart-wrapper .k-chart,
-.map-wrapper .k-map {
+.map-wrapper .k-map,
+.diagram-wrapper .k-diagram {
     width: 948px;
     height: 470px;
 }
 
 .config-section .k-chart,
-.config-section .k-map {
+.config-section .k-map,
+.config-section .k-diagram {
     width: 480px;
     height: 240px;
 }

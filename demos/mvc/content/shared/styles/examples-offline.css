@@ -375,7 +375,8 @@ ul.keyboard-legend li a {
 }
 
 .chart-wrapper,
-.map-wrapper {
+.map-wrapper,
+.diagram-wrapper {
     position: relative;
     height: 430px;
     margin: 0 auto 15px auto;
@@ -383,13 +384,15 @@ ul.keyboard-legend li a {
 }
 
 #example.absConf .chart-wrapper,
-#example.absConf .map-wrapper
+#example.absConf .map-wrapper,
+#example.absConf .diagram-wrapper
 {
     margin-left: 0;
 }
 
 .chart-wrapper .k-chart,
-.map-wrapper .k-map {
+.map-wrapper .k-map,
+.diagram-wrapper .k-diagram {
     height: 430px;
 }
 
