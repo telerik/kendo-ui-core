@@ -6,8 +6,8 @@ class NotificationPosition extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Determines the position of the first popup notification with regard to the viewport's bottom edge. Numeric values are treated as pixels.
-    * @param float|string $value
+    * Determines the pixel position of the first popup notification with regard to the viewport's bottom edge.
+    * @param float $value
     * @return \Kendo\UI\NotificationPosition
     */
     public function bottom($value) {
@@ -15,8 +15,8 @@ class NotificationPosition extends \Kendo\SerializableObject {
     }
 
     /**
-    * Determines the position of the first popup notification with regard to the viewport's left edge. Numeric values are treated as pixels.
-    * @param float|string $value
+    * Determines the pixel position of the first popup notification with regard to the viewport's left edge.
+    * @param float $value
     * @return \Kendo\UI\NotificationPosition
     */
     public function left($value) {
@@ -33,8 +33,8 @@ class NotificationPosition extends \Kendo\SerializableObject {
     }
 
     /**
-    * Determines the position of the first popup notification with regard to the viewport's right edge. Numeric values are treated as pixels.
-    * @param float|string $value
+    * Determines the pixel position of the first popup notification with regard to the viewport's right edge.
+    * @param float $value
     * @return \Kendo\UI\NotificationPosition
     */
     public function right($value) {
@@ -43,7 +43,7 @@ class NotificationPosition extends \Kendo\SerializableObject {
 
     /**
     * Determines the position of the first popup notification with regard to the viewport's top edge. Numeric values are treated as pixels.
-    * @param float|string $value
+    * @param float $value
     * @return \Kendo\UI\NotificationPosition
     */
     public function top($value) {
