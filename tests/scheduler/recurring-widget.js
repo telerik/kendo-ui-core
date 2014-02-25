@@ -51,6 +51,21 @@
     });
 
     test("changing frequency changes value of the widget", function() {
+        var editor = new RecurrenceEditor(div, {
+            frequencies: [
+                "never",
+                "hourly"
+            ]
+        });
+        var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
+
+        ddl.value("hourly");
+        ddl.trigger("change");
+
+        equal(editor.value(), "FREQ=HOURLY");
+    });
+
+    test("changing frequency changes value of the widget", function() {
         var editor = new RecurrenceEditor(div);
         var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
 
@@ -101,6 +116,21 @@
         teardown: function() {
             kendo.destroy(div);
         }
+    });
+
+    test("Render interval input with default value in hourly freq", function() {
+        var editor = new RecurrenceEditor(div, {
+            frequencies: [
+                "never",
+                "hourly"
+            ]
+        });
+        editor._initView("hourly");
+
+        var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
+
+        ok(interval);
+        equal(interval.value(), 1);
     });
 
     test("Render interval input with default value", function() {

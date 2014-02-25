@@ -1625,6 +1625,10 @@ var __meta__ = {
                     monthly: "Monthly",
                     yearly: "Yearly"
                 },
+                hourly: {
+                    repeatEvery: "Repeat every: ",
+                    interval: " hour(s)"
+                },
                 daily: {
                     repeatEvery: "Repeat every: ",
                     interval: " day(s)"
