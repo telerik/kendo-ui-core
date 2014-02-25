@@ -870,8 +870,8 @@
                     "title": "Kendo UI Diagram Demo"
                 }, {
                     "text": "api",
-                    "url": "diagram/api.html",
-                    "title": "Kendi UI Diagram Api"
+                    "url": "diagram/layout.html",
+                    "title": "Kendi UI Diagram Layout"
             }],
             "name": "Diagram"
 		}
