@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core" ], f);
+    define([ "./kendo.dataviz.core", "./kendo.core" ], f);
 })(function(){
 
 var __meta__ = {
@@ -11,7 +11,7 @@ var __meta__ = {
 
 (function ($, undefined) {
     var kendo = window.kendo,
-        diagram = kendo.diagram = {},
+        diagram = kendo.dataviz.diagram = {},
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
         isArray = $.isArray,
@@ -106,7 +106,7 @@ var __meta__ = {
                 throw "Not an array of points.";
             }
             for (var i = 0; i < v.length; i += 2) {
-                points.push(new kendo.diagram.Point(
+                points.push(new diagram.Point(
                     parseInt(v[i], 10),
                     parseInt(v[i + 1], 10)
                 ));
@@ -509,7 +509,7 @@ var __meta__ = {
 
     kendo.deepExtend(diagram, {
         init: function (element) {
-            kendo.init(element, kendo.diagram.ui);
+            kendo.init(element, diagram.ui);
         },
 
         Utils: Utils,

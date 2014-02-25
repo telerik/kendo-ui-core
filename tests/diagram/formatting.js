@@ -2,7 +2,7 @@
     var container,
         content,
         aligner,
-        diagram = kendo.diagram,
+        diagram = kendo.dataviz.diagram,
         Rect = diagram.Rect,
         RectAlign = diagram.RectAlign;
 

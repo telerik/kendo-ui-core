@@ -1,6 +1,6 @@
 ﻿(function ($, global, undefined) {
     var deepExtend = window.kendo.deepExtend,
-        Utils = window.kendo.diagram.Utils;
+        Utils = window.kendo.dataviz.diagram.Utils;
 
     var Shapes = {
         Rectangle: function (point) {

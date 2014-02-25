@@ -7,8 +7,10 @@
 
 (function() {
     var tolerance = 0.0001,
-        Point = kendo.diagram.Point,
-        Rect = kendo.diagram.Rect,
+        dataviz = kendo.dataviz,
+        Point = dataviz.diagram.Point,
+        Rect = dataviz.diagram.Rect,
+        Geometry = dataviz.diagram.Geometry,
         diagram;
 
     /*-----------Diagram tests------------------------------------*/
@@ -184,7 +186,7 @@
                 id: "visualShape",
                 visual: function() {
                     visualCalled = true;
-                    return new kendo.diagram.Group({ id: "shapeRoot" });
+                    return new dataviz.diagram.Group({ id: "shapeRoot" });
                 }
             });
 
@@ -543,45 +545,45 @@
     });
 
     test('Connection definers', function () {
-        var con = new kendo.diagram.Connection(new Point(10, 20), new Point(100, 200));
+        var con = new dataviz.diagram.Connection(new Point(10, 20), new Point(100, 200));
         con.points([new Point(1, 2), new Point(3, 4), new Point(5, 6)]);
         equal(con.points().length, 3);
         equal(con.allPoints().length, 5);
         ok(con.sourceDefiner().point === con.sourcePoint());
         ok(con.targetDefiner().point === con.targetPoint());
 
-        con.sourceDefiner(new kendo.diagram.PathDefiner(new Point(44, 55), new Point(478, 44), new Point(-55, 0)));
+        con.sourceDefiner(new dataviz.diagram.PathDefiner(new Point(44, 55), new Point(478, 44), new Point(-55, 0)));
         ok(con.sourceDefiner().point.x === 44 && con.sourceDefiner().point.y === 55);
         ok(con.sourceDefiner().left===null);
         ok(con.sourceDefiner().right.x === -55 && con.sourceDefiner().right.y === 0);
 
-        con.targetDefiner(new kendo.diagram.PathDefiner(new Point(44, 55), new Point(478, 102), new Point(-55, 0)));
+        con.targetDefiner(new dataviz.diagram.PathDefiner(new Point(44, 55), new Point(478, 102), new Point(-55, 0)));
         ok(con.targetDefiner().point.x === 44 && con.targetDefiner().point.y === 55);
         ok(con.targetDefiner().right===null);
         ok(con.targetDefiner().left.x === 478 && con.targetDefiner().left.y === 102);
     });
 
     test('Connection bounds', function () {
-        var con = new kendo.diagram.Connection(new Point(0, 0), new Point(500, 500));
+        var con = new dataviz.diagram.Connection(new Point(0, 0), new Point(500, 500));
         con.points([new Point(25,10), new Point(101,88), new Point(250,37), new Point(100,100), new Point(301,322), new Point(660,770)]);
         var bounds = con._router.getBounds();
         ok(bounds.x===0 && bounds.y===0 && bounds.width===660 && bounds.height===770);
     });
 
     test('Distance to a line segment', function () {
-        var d = kendo.diagram.Geometry.distanceToLine(new Point(0,0), new Point(0,100), new Point(100,100));
+        var d = Geometry.distanceToLine(new Point(0,0), new Point(0,100), new Point(100,100));
         equal(d, 100);
-        d = kendo.diagram.Geometry.distanceToLine(new Point(57.88, 0), new Point(0, 100), new Point(100, 100));
+        d = Geometry.distanceToLine(new Point(57.88, 0), new Point(0, 100), new Point(100, 100));
         equal(d,100);
-        d = kendo.diagram.Geometry.distanceToLine(new Point(100, 44.02), new Point(0, 0), new Point(0, 100));
+        d = Geometry.distanceToLine(new Point(100, 44.02), new Point(0, 0), new Point(0, 100));
         equal(d,100);
     });
 
     test('Distance to polyline', function () {
         var polyline = [new Point(0,0), new Point(100,0), new Point(100,100), new Point(0,100)];
-        var d = kendo.diagram.Geometry.distanceToPolyline(new Point(50,50), polyline);
+        var d = Geometry.distanceToPolyline(new Point(50,50), polyline);
         equal(d, 50);
-        d = kendo.diagram.Geometry.distanceToPolyline(new Point(57,50), polyline);
+        d = Geometry.distanceToPolyline(new Point(57,50), polyline);
         equal(d, 43);
     });
 

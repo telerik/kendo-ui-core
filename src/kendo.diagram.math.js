@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dataviz.core", "./kendo.diagram.utils" ], f);
+    define([ "./kendo.diagram.utils" ], f);
 })(function(){
 
 var __meta__ = {
@@ -12,7 +12,7 @@ var __meta__ = {
 (function ($, undefined) {
     // Imports ================================================================
     var kendo = window.kendo,
-        diagram = kendo.diagram,
+        diagram = kendo.dataviz.diagram,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
         dataviz = kendo.dataviz,
@@ -2897,7 +2897,7 @@ var __meta__ = {
 
             }
             if (doLayout) {
-                var l = new kendo.diagram.SpringLayout(diagram);
+                var l = new diagram.SpringLayout(diagram);
                 l.layoutGraph(graph, {limitToView: false});
                 for (var shi = 0; shi < graph.nodes.length; shi++) {
                     node = graph.nodes[shi];
@@ -3064,14 +3064,14 @@ var __meta__ = {
          * @param layoutType The optional layout type to apply after the diagram is generated.
          */
         randomDiagram: function (diagram, shapeCount, maxIncidence, isTree, randomSize) {
-            var g = kendo.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
+            var g = diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
             Graph.Utils.createDiagramFromGraph(diagram, g, false, randomSize);
         }
     };
 
     kendo.deepExtend(diagram, {
         init: function (element) {
-            kendo.init(element, kendo.diagram.ui);
+            kendo.init(element, diagram.ui);
         },
 
         Point: Point,

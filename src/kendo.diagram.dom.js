@@ -11,7 +11,7 @@
 
     (function ($, undefined) {
         // Imports ================================================================
-        var diagram = kendo.diagram,
+        var diagram = kendo.dataviz.diagram,
             ui = kendo.ui,
             Widget = ui.Widget,
             Class = kendo.Class,
@@ -243,7 +243,7 @@
             init: function (options, model) {
                 var that = this;
                 Observable.fn.init.call(that);
-                that.options = deepExtend({id: kendo.diagram.randomId()}, that.options, options);
+                that.options = deepExtend({id: diagram.randomId()}, that.options, options);
                 that.isSelected = false;
                 that.model = model;
                 that.visual = new Group({
@@ -304,7 +304,7 @@
                     var bounds = this.bounds(),
                         options = deepExtend({ text: "", width: bounds.width, height: bounds.height }, this.options.content);
 
-                    if (kendo.diagram.Utils.isString(content)) {
+                    if (diagram.Utils.isString(content)) {
                         this.options.content.text = content;
                         options.text = content;
                     } else {
@@ -501,7 +501,7 @@
              */
             clone: function () {
                 var json = this.serialize();
-                json.options.id = kendo.diagram.randomId();
+                json.options.id = diagram.randomId();
                 var clone = new Shape(json.options);
                 clone.diagram = this.diagram;
                 /*clone.visual.native.id = clone.id;
@@ -766,8 +766,8 @@
                 var fullString = '<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' + svgString + '</svg>';
                 var result = parseXml(fullString);
                 var importedNode = document.importNode(result.childNodes[0].childNodes[0], true);
-                var g =  new kendo.diagram.Group();
-                g.append(new kendo.diagram.Visual(importedNode));
+                var g =  new diagram.Group();
+                g.append(new diagram.Visual(importedNode));
                 return g;
             }
 
@@ -852,7 +852,7 @@
             source: function (source, undoable) {
                 if (isDefined(source)) {
                     if (undoable && this.diagram) {
-                        this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
+                        this.diagram.undoRedoService.addCompositeItem(new diagram.ConnectionEditUnit(this, source));
                     } else {
                         if (source !== undefined) {
                             this.from = source;
@@ -919,7 +919,7 @@
             target: function (target, undoable) {
                 if (isDefined(target)) {
                     if (undoable && this.diagram) {
-                        this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
+                        this.diagram.undoRedoService.addCompositeItem(new diagram.ConnectionEditUnit(this, target));
                     } else {
                         if (target !== undefined) {
                             this.to = target;
@@ -1467,7 +1467,7 @@
                     undoable = true;
                 }
                 if (undoable) {
-                    var unit = new kendo.diagram.AddConnectionUnit(connection, this);
+                    var unit = new diagram.AddConnectionUnit(connection, this);
                     this.undoRedoService.add(unit);
                 }
                 else {
@@ -1692,7 +1692,7 @@
                         options.align = "center middle";
                     }
                     var old = rect.clone(),
-                        align = new kendo.diagram.RectAlign(viewport);
+                        align = new diagram.RectAlign(viewport);
 
                     align.align(rect, options.align);
 
@@ -1763,22 +1763,22 @@
                         //item.refresh();
                     }
                 }
-                var unit = new kendo.diagram.TransformUnit(shapes, undoStates);
+                var unit = new diagram.TransformUnit(shapes, undoStates);
                 this.undoRedoService.add(unit, false);
             },
             zoom: function (zoom, options) {
                 if (zoom) {
-                    var staticPoint = options ? options.location : new kendo.diagram.Point(0, 0);
+                    var staticPoint = options ? options.location : new diagram.Point(0, 0);
                     // var meta = options ? options.meta : 0;
                     var currentZoom = this._zoom;
                     zoom = this._zoom = this._getValidZoom(zoom);
 
                     if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
-                        staticPoint = new kendo.diagram.Point(Math.round(staticPoint.x), Math.round(staticPoint.y));
+                        staticPoint = new diagram.Point(Math.round(staticPoint.x), Math.round(staticPoint.y));
                         var zoomedPoint = staticPoint.times(zoom);
                         var viewportVector = this.modelToView(staticPoint);
                         var raw = viewportVector.minus(zoomedPoint);//pan + zoomed point = viewpoint vector
-                        this._storePan(new kendo.diagram.Point(Math.round(raw.x), Math.round(raw.y)));
+                        this._storePan(new diagram.Point(Math.round(raw.x), Math.round(raw.y)));
                     }
                     if (options) {
                         options.zoom = zoom;
@@ -1995,10 +1995,10 @@
                     default:
                         throw "Layout algorithm '" + type + "' is not supported.";
                 }
-                var initialState = new kendo.diagram.LayoutState(this);
+                var initialState = new diagram.LayoutState(this);
                 var finalState = l.layout(options);
                 if (finalState) {
-                    var unit = new kendo.diagram.LayoutUndoUnit(initialState, finalState, options ? options.animate : null);
+                    var unit = new diagram.LayoutUndoUnit(initialState, finalState, options ? options.animate : null);
                     this.undoRedoService.add(unit);
                 }
                 this.isLayouting = false;
@@ -2423,7 +2423,7 @@
                 this._adorners = [];
                 this._dataMap = [];
                 this.undoRedoService = new UndoRedoService();
-                this.id = kendo.diagram.randomId();
+                this.id = diagram.randomId();
             },
             _attachEvents: function () {
                 var diagram = this;

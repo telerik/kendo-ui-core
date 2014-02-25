@@ -11,7 +11,7 @@ var __meta__ = {
 
 (function ($, undefined) {
     var kendo = window.kendo,
-        diagram = kendo.diagram,
+        diagram = kendo.dataviz.diagram,
         Graph = diagram.Graph,
         Node = diagram.Node,
         Link = diagram.Link,
@@ -786,7 +786,7 @@ var __meta__ = {
                 this.layoutGraph(component, options);
             }
             var finalNodeSet = this.gridLayoutComponents(components);
-            return new kendo.diagram.LayoutState(this.diagram, finalNodeSet);
+            return new diagram.LayoutState(this.diagram, finalNodeSet);
         },
 
         layoutGraph: function (graph, options) {
@@ -1822,7 +1822,7 @@ var __meta__ = {
 
             // note that the graph contains the original data and
             // the components are another instance of nodes referring to the same set of shapes
-            return new kendo.diagram.LayoutState(this.diagram, finalNodeSet);
+            return new diagram.LayoutState(this.diagram, finalNodeSet);
         },
 
         layoutComponents: function () {
@@ -1935,7 +1935,7 @@ var __meta__ = {
                 this.layoutGraph(component, options);
             }
             var finalNodeSet = this.gridLayoutComponents(components);
-            return new kendo.diagram.LayoutState(this.diagram, finalNodeSet);
+            return new diagram.LayoutState(this.diagram, finalNodeSet);
 
         },
 
@@ -3704,7 +3704,7 @@ var __meta__ = {
                 link,
                 links;
 
-            if (diagramOrGraphOrNodes instanceof kendo.diagram.Graph) {
+            if (diagramOrGraphOrNodes instanceof diagram.Graph) {
 
                 for (i = 0; i < diagramOrGraphOrNodes.nodes.length; i++) {
                     node = diagramOrGraphOrNodes.nodes[i];
@@ -3796,7 +3796,7 @@ var __meta__ = {
 
     deepExtend(diagram, {
         init: function (element) {
-            kendo.init(element, kendo.diagram.ui);
+            kendo.init(element, diagram.ui);
         },
         SpringLayout: SpringLayout,
         TreeLayout: TreeLayout,

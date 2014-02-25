@@ -1,19 +1,19 @@
 (function() {
-    var diagram = kendo.diagram;
-    var Range = kendo.diagram.Range;
-    var Graph = kendo.diagram.Graph;
-    var Node = kendo.diagram.Node;
-    var Link = kendo.diagram.Link;
-    var Dictionary = kendo.diagram.Dictionary;
-    var HashTable = kendo.diagram.HashTable;
-    var Queue = kendo.diagram.Queue;
-    var Predefined = kendo.diagram.Graph.Predefined;
-    var GraphUtils = kendo.diagram.Graph.Utils;
-    var parse = kendo.diagram.Graph.Utils.parse;
-    var linearize = kendo.diagram.Graph.Utils.linearize;
-    var Adapter = kendo.diagram.GraphAdapter;
-    var Point = kendo.diagram.Point;
-    var Set = kendo.diagram.Set;
+    var diagram = kendo.dataviz.diagram;
+    var Range = diagram.Range;
+    var Graph = diagram.Graph;
+    var Node = diagram.Node;
+    var Link = diagram.Link;
+    var Dictionary = diagram.Dictionary;
+    var HashTable = diagram.HashTable;
+    var Queue = diagram.Queue;
+    var Predefined = diagram.Graph.Predefined;
+    var GraphUtils = diagram.Graph.Utils;
+    var parse = diagram.Graph.Utils.parse;
+    var linearize = diagram.Graph.Utils.linearize;
+    var Adapter = diagram.GraphAdapter;
+    var Point = diagram.Point;
+    var Set = diagram.Set;
     var Utils = diagram.Utils;
     var contains = Utils.contains;
 
@@ -71,7 +71,7 @@
     var Accuracy = 1E-6;
 
     test("Normal Distribution", function () {
-        var n = kendo.diagram.normalVariable;
+        var n = diagram.normalVariable;
         var r = Range(0, 100).map(function (i) {
             return n();
         });
@@ -795,7 +795,7 @@
         var a = AddShape(diagram);
         var b = AddShape(diagram);
         AddConnection(diagram, a, b);
-        var looseCon = new kendo.diagram.Connection(a, new Point(120, 255));
+        var looseCon = new diagram.Connection(a, new Point(120, 255));
         diagram.addConnection(looseCon);
         var adapter = new Adapter(diagram);
         var g = adapter.convert();

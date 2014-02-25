@@ -1,7 +1,7 @@
 ﻿///<reference path="qunit-1.12.0.js" />
 ///<reference path="common.js" />
 
-var diagram = window.kendo.diagram;
+var diagram = window.kendo.dataviz.diagram;
 
 /*-----------Marker tests------------------------------------*/
 QUnit.module("Marker tests", {

@@ -12,7 +12,7 @@
     (function ($, undefined) {
         // Imports ================================================================
         var kendo = window.kendo,
-            diagram = kendo.diagram,
+            diagram = kendo.dataviz.diagram,
             Class = kendo.Class,
             Group = diagram.Group,
             TextBlock = diagram.TextBlock,
@@ -94,8 +94,8 @@
                             }
                         }
                     );
-                    var ticker = new kendo.diagram.Ticker();
-                    ticker.addAdapter(new kendo.diagram.PositionAdapter(state));
+                    var ticker = new diagram.Ticker();
+                    ticker.addAdapter(new diagram.PositionAdapter(state));
                     ticker.onComplete(function () {
                         state.linkMap.forEach(
                             function (id) {
@@ -1069,12 +1069,12 @@
                 if (!rec.contains(p)) {
                     return false;
                 }
-                return kendo.diagram.Geometry.distanceToPolyline(p, this.connection.allPoints()) < HITTESTDISTANCE;
+                return diagram.Geometry.distanceToPolyline(p, this.connection.allPoints()) < HITTESTDISTANCE;
             },
 
             /**
              * Bounds of a polyline.
-             * @returns {kendo.diagram.Rect}
+             * @returns {kendo.dataviz.diagram.Rect}
              */
             getBounds: function () {
                 var points = this.connection.allPoints(),
@@ -1773,8 +1773,8 @@
                 return this.diagram.options.snap.enabled === true ? Math.floor((a % 360) / snapAngle) * snapAngle : (a % 360);
             },
             _truncateDistance: function (d) {
-                if (d instanceof kendo.diagram.Point) {
-                    return new kendo.diagram.Point(this._truncateDistance(d.x), this._truncateDistance(d.y));
+                if (d instanceof diagram.Point) {
+                    return new diagram.Point(this._truncateDistance(d.x), this._truncateDistance(d.y));
                 } else {
                     var snapSize = Math.max(this.diagram.options.snap.size, 5);
                     return this.diagram.options.snap.enabled === true ? Math.floor(d / snapSize) * snapSize : d;
