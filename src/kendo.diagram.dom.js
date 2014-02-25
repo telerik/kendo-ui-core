@@ -694,7 +694,7 @@
             }
         });
 
-        Shape.createShapeVisual = function (options) {
+        Shape.createShapeVisual = function(options) {
             var diagram = options.diagram;
             delete options.diagram; // avoid stackoverflow and reassign later on again
             var shapeDefaults = deepExtend({}, options, { x: 0, y: 0 }),
@@ -1386,11 +1386,8 @@
                 scroller.element.remove();
                 this.scroller = null;
             },
-            save: function (options) { // options = {saveOptions = true|false}
-                var json = {}, i, shape, con;
-                if (isUndefined(options) || isUndefined(options.saveOptions) || options.saveOptions === true) {
-                    json = kendo.deepExtend(options || {}, this.options);
-                }
+            save: function () {
+                var json = {};
 
                 json.shapes = [];
                 json.connections = [];
@@ -1414,6 +1411,13 @@
                 var x = window.scrollX, y = window.scrollY;
                 this.canvas.focus();
                 window.scrollTo(x, y); // prevent the annoying scroll to top of the canvas (div).
+            },
+            load: function(options) {
+                this.clear();
+
+                this.setOptions(options);
+                this._createShapes();
+                this._createConnections();
             },
             clear: function () {
                 var that = this;
