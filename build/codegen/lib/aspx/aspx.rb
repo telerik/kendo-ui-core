@@ -544,18 +544,42 @@ namespace <%= csharp_namespace %>
             class Component < CodeGen::Component
                 include Options
 
-                def initialize settings
-                    super settings
-
-                    import_metadata
-                end
-
-                def import_metadata
+                def import_local_meta
                     metadata_filename = "build/codegen/lib/aspx/#{name.downcase}.yml"
 
                     if File.exists? metadata_filename
                         import(YAML.load(File.read(metadata_filename)))
                     end
+                end
+
+                def import(metadata)
+                    @content = metadata[:content]
+
+                    metadata[:options].each do |option|
+
+                        parent = find_parent_in_options(option[:name])
+                        if !parent.nil? && parent.instance_of?(ArrayItem)
+                            parent.type = option.type
+                        else
+                            option[:remove_existing] = true
+
+                            add_option(option)
+                        end
+
+                    end
+                end
+
+                def find_parent_in_options(option_name)
+                    parent = self
+                    names = option_name.split('.')
+                    names.slice!(0, names.count - 1) if names.count > 0
+
+                    names.each do |name|
+                        parent = parent.options.find { |o| o.name == name }
+                        parent = parent.item if parent.instance_of?(ArrayOption)
+                    end
+
+                    parent
                 end
 
                 def csharp_class
