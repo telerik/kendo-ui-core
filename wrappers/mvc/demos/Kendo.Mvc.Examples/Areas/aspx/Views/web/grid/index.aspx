@@ -28,10 +28,14 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.ProductV
 </div>
 
 <style scoped>
+    #example{
+        padding-left: 0;
+    }
+
     #clientsDb {
-        width: 692px;
-        height: 413px;
-        margin: 30px auto;
+        width: 952px;
+        height: 396px;
+        margin: 20px auto 0;
         padding: 51px 4px 0 4px;
         background: url('<%=Url.Content("~/content/web/grid/clientsDb.png")%>') no-repeat 0 0;
     }

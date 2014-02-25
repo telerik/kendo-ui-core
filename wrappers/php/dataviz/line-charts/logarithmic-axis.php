@@ -30,6 +30,7 @@ $valueAxis = new \Kendo\Dataviz\UI\ChartValueAxisItem();
 
 $valueAxis->labels(array('format' => 'N0'))
           ->line(array('visible' => false))
+          ->minorGridLines(array('visible' => true))
           ->type('log');
 
 $categoryAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();

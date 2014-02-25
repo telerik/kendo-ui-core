@@ -9,7 +9,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult Logarithmic_Axis()
         {
-            return View(GetFibonacciSequence(40));
+            return View(GetFibonacciSequence(39));
         }
 
         private List<int> GetFibonacciSequence(int n)

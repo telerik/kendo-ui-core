@@ -19,7 +19,7 @@ public class LogarithmicAxisController {
         data.add(1);
         data.add(1);
         
-        for (int i = 2; i < 40; i++) {
+        for (int i = 2; i < 39; i++) {
             data.add(data.get(i-1) + data.get(i-2));
         }
         

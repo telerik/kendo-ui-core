@@ -5,7 +5,7 @@ require_once '../../include/header.php';
 
 
 $data = array(1, 1);
-for ($i = 2; $i < 40; $i++) {
+for ($i = 2; $i < 39; $i++) {
     $data[] = $data[$i - 1] + $data[$i - 2];
 }
 

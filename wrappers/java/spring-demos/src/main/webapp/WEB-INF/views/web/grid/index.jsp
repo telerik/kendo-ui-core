@@ -37,12 +37,16 @@
 </div>  
 
  <style scoped>
-     #clientsDb {
-         width: 692px;
-         height: 413px;
-         margin: 30px auto;
-         padding: 51px 4px 0 4px;
-         background: url('${backgroundUrl}') no-repeat 0 0;
+	#example{
+	    padding-left: 0;
+	}
+	
+	#clientsDb {
+	    width: 952px;
+	    height: 396px;
+	    margin: 20px auto 0;
+	    padding: 51px 4px 0 4px;
+        background: url('${backgroundUrl}') no-repeat 0 0;
      }
  </style>  
 <demo:footer />

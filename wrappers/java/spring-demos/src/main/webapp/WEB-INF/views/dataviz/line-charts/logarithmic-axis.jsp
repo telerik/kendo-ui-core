@@ -31,6 +31,7 @@
              <kendo:chart-valueAxis>
                 <kendo:chart-valueAxisItem type="log">
                     <kendo:chart-valueAxisItem-labels format="{0:N0}" />
+                    <kendo:chart-valueAxisItem-minorGridLines visible="true"/>
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
              <kendo:chart-tooltip visible="true" format="{0:N0}" shared="true" />
