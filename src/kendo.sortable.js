@@ -50,6 +50,14 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
+            if(!that.options.placeholder) {
+                that.options.placeholder = defaultPlaceholder;
+            }
+
+            if(!that.options.hint) {
+                that.options.hint = defaultHint;
+            }
+
             that._draggable = that._createDraggable();
             that.floating = false;
         },
@@ -65,8 +73,8 @@ var __meta__ = {
 
         options: {
             name: "Sortable",
-            hint: defaultHint,
-            placeholder: defaultPlaceholder,
+            hint: null,
+            placeholder: null,
             filter: DEFAULT_FILTER,
             holdToDrag: false,
             disabled: null,
