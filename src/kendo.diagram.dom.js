@@ -81,8 +81,6 @@
             DEFAULT_SHAPE_POSITION = 0,
             DEFAULT_SHAPE_BACKGROUND = "SteelBlue",
             DEFAULT_CONNECTION_BACKGROUND = "Yellow",
-            DEFAULT_CONNECTION_STARTCAP = "FilledCircle",
-            DEFAULT_CONNECTION_ENDCAP = "ArrowEnd",
             DEFAULT_CONNECTOR_SIZE = 8,
             DEFAULT_HOVER_COLOR = "#70CAFF",
             ALL = "all",
@@ -814,7 +812,7 @@
                 DiagramElement.fn.init.call(that, options, model);
                 that._router = new PolylineRouter(this);
                 that.path = new Path(that.options);
-                that.path.background("none");
+                that.path.background(NONE);
                 that.visual.append(that.path);
                 that._sourcePoint = that._targetPoint = new Point();
                 that.source(from);
@@ -833,8 +831,8 @@
                 hover: {
                     stroke: {}
                 },
-                startCap: DEFAULT_CONNECTION_STARTCAP,
-                endCap: DEFAULT_CONNECTION_ENDCAP,
+                startCap: NONE,
+                endCap: NONE,
                 points: []
             },
 
