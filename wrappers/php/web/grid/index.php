@@ -105,10 +105,6 @@ echo $grid->render();
 </div>  
 
 <style scoped>
-    #example{
-        padding-left: 0;
-    }
-
     #clientsDb {
         width: 952px;
         height: 396px;

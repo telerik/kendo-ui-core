@@ -21,7 +21,7 @@ body
 
 .page
 {
-    width:940px;
+    width:960px;
     margin:30px auto;
     padding:30px;
     background:#fff;
@@ -59,7 +59,7 @@ body
 #example
 {
     margin: 20px auto;
-    padding: 20px;
+    padding: 20px 0;
     border: 0;
     max-width: 1180px;
     background: transparent;
