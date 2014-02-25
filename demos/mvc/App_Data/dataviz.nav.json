@@ -692,20 +692,6 @@
             "name": "api"
         }
     ],
-	"diagramming": [
-		{
-			"text": "Diagram",
-			"new": "true",
-            "documentation": "dataviz/diagram",
-            "spriteCssClass": "chartIcon",
-            "items": [{
-                    "text": "index",
-                    "url": "diagram/index.html",
-                    "title": "Kendo UI Diagram Demo"
-                }],
-            "name": "Diagram"
-		}
-	],
     "gauges": [
         {
             "text": "Linear Gauge",
@@ -872,6 +858,24 @@
             }]
         }
     ],
+	"diagramming": [
+		{
+			"text": "Diagram",
+			"beta": "true",
+            "documentation": "dataviz/diagram",
+            "spriteCssClass": "chartIcon",
+            "items": [{
+                    "text": "index",
+                    "url": "diagram/index.html",
+                    "title": "Kendo UI Diagram Demo"
+                }, {
+                    "text": "api",
+                    "url": "diagram/api.html",
+                    "title": "Kendi UI Diagram Api"
+            }],
+            "name": "Diagram"
+		}
+	],
     "Sample Dashboards": [
         {
             "text": "Stock History",

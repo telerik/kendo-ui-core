@@ -131,7 +131,7 @@ namespace Kendo.Extensions
         {
             category = category.ToLower();
 
-            return category.Contains("applications") || category.Contains("gauges") || category.Contains("financial");
+            return category.Contains("applications") || category.Contains("gauges") || category.Contains("financial") || category.Contains("geoviz");
         }
 
         public static string NavigationWrapperClass(this HtmlHelper html, string category)
