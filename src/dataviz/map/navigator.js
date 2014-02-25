@@ -71,18 +71,22 @@
             switch (e.which) {
                 case keys.UP:
                     this._pan(0, 1);
+                    e.preventDefault();
                     break;
 
                 case keys.DOWN:
                     this._pan(0, -1);
+                    e.preventDefault();
                     break;
 
                 case keys.RIGHT:
                     this._pan(1, 0);
+                    e.preventDefault();
                     break;
 
                 case keys.LEFT:
                     this._pan(-1, 0);
+                    e.preventDefault();
                     break;
             }
         }
