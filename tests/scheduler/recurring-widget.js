@@ -54,7 +54,7 @@
         var editor = new RecurrenceEditor(div);
         var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
 
-        ddl.select(1);
+        ddl.value("daily");
         ddl.trigger("change");
 
         equal(editor.value(), "FREQ=DAILY");
@@ -64,7 +64,7 @@
         var editor = new RecurrenceEditor(div);
         var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
 
-        ddl.select(1);
+        ddl.value("daily");
         ddl.trigger("change");
 
         ddl.select(0);
@@ -80,7 +80,7 @@
         });
         var ddl = div.find("[data-role=dropdownlist]").data("kendoDropDownList");
 
-        ddl.select(1);
+        ddl.value("daily");
         ddl.trigger("change");
 
         equal(editor.value(), "FREQ=DAILY");
