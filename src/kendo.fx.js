@@ -1482,7 +1482,7 @@ var __meta__ = {
             that.tick();
 
             if (!that.done()) {
-                kendo.queueAnimation(that._tickProxy);
+                kendo.animationFrame(that._tickProxy);
             } else {
                 that._started = false;
                 that.onEnd();
