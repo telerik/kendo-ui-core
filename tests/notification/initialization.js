@@ -378,21 +378,21 @@
         equal(popupContainer.css("left"), "2px");
     });
 
-    test("pinned popup notification is shown at specified string position", 2, function() {
-        createNotification({
-            position: {
-                top: "1px",
-                left: "2px"
-            }
-        });
+//    test("pinned popup notification is shown at specified string position", 2, function() {
+//        createNotification({
+//            position: {
+//                top: "1px",
+//                left: "2px"
+//            }
+//        });
 
-        notification.show("foo");
+//        notification.show("foo");
 
-        var popupContainer = $(".k-notification").parent();
+//        var popupContainer = $(".k-notification").parent();
 
-        equal(popupContainer.css("top"), "1px");
-        equal(popupContainer.css("left"), "2px");
-    });
+//        equal(popupContainer.css("top"), "1px");
+//        equal(popupContainer.css("left"), "2px");
+//    });
 
     test("pinned popup notification is shown at zero position", 2, function() {
         createNotification({
@@ -427,22 +427,22 @@
         equal(popupContainer.css("left"), "2px");
     });
 
-    test("unpinned popup notification is shown at specified string position", 2, function() {
-        createNotification({
-            position: {
-                top: "1px",
-                left: "2px",
-                pinned: false
-            }
-        });
+//    test("unpinned popup notification is shown at specified string position", 2, function() {
+//        createNotification({
+//            position: {
+//                top: "1px",
+//                left: "2px",
+//                pinned: false
+//            }
+//        });
 
-        notification.show("foo");
+//        notification.show("foo");
 
-        var popupContainer = $(".k-notification").parent();
+//        var popupContainer = $(".k-notification").parent();
 
-        equal(popupContainer.css("top"), "1px");
-        equal(popupContainer.css("left"), "2px");
-    });
+//        equal(popupContainer.css("top"), "1px");
+//        equal(popupContainer.css("left"), "2px");
+//    });
 
     test("unpinned popup notification is shown at zero position", 2, function() {
         createNotification({
