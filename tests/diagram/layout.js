@@ -206,7 +206,7 @@
         var components = g.getConnectedComponents();
         for (var i = 0; i < components.length; i++) {
             var rootid = components[i].nodes[0].id;
-            var root = diagram.getId(rootid);
+            var root = diagram.getShapeById(rootid);
             root.shapeVisual.background("red");
             roots.push(root);
         }
@@ -221,7 +221,7 @@
         var diagram = diagramElement.data("kendoDiagram");
         diagram.canvas.native.setAttribute("height", "1000");
         randomDiagram(20, 5, true);
-        var root = diagram.getId("0");
+        var root = diagram.getShapeById("0");
         root.shapeVisual.background("Orange");
         diagram.layout({type: "tree", subtype: "Radial"});
         ok(true);
@@ -245,7 +245,7 @@
             diagram.connect(map[0], map[i]);
         }
 
-        var root = diagram.getId("0");
+        var root = diagram.getShapeById("0");
         root.shapeVisual.background("Orange");
         diagram.layout({type: "tree", subtype: "Mindmap", roots: [root]});
         diagram.zoom(0.5);
@@ -259,7 +259,7 @@
         var diagram = diagramElement.data("kendoDiagram");
         diagram.canvas.native.setAttribute("height", "1000");
         GraphUtils.createDiagramFromGraph(diagram, g, false);
-        var root = diagram.getId("0");
+        var root = diagram.getShapeById("0");
         root.shapeVisual.background("Orange");
 
         diagram.layout({type: "tree", subtype: "MindmapVertical", roots: [root]});
@@ -274,7 +274,7 @@
         var diagram = diagramElement.data("kendoDiagram");
         diagram.canvas.native.setAttribute("height", "1000");
         GraphUtils.createDiagramFromGraph(diagram, g, false);
-        var root = diagram.getId("0");
+        var root = diagram.getShapeById("0");
         root.shapeVisual.background("Orange");
 
         diagram.layout({type: "tree", subtype: "Mindmap", roots: [root]})
@@ -288,7 +288,7 @@
         var diagram = diagramElement.data("kendoDiagram");
         diagram.canvas.native.setAttribute("height", "1000");
         randomDiagram(250, 3, true);
-        var root = diagram.getId("0");
+        var root = diagram.getShapeById("0");
         root.shapeVisual.background("Green");
 
         diagram.layout({
@@ -309,7 +309,7 @@
         diagram.canvas.native.setAttribute("height", "1000");
         randomDiagram(50, 3, true);
 
-        var root = diagram.getId("0");
+        var root = diagram.getShapeById("0");
         root.shapeVisual.background("red");
         diagram.layout({
                 type: "tree",
@@ -356,7 +356,7 @@
          diagram.canvas.native.setAttribute("height", "1000");
          GraphUtils.createDiagramFromGraph(diagram, g, false);*/
 
-        var root = diagram.getId("0");
+        var root = diagram.getShapeById("0");
         diagram.layout(
             {
                 type: "Tree",
@@ -380,7 +380,7 @@
         var components = g.getConnectedComponents();
         for (var i = 0; i < components.length; i++) {
             var rootid = components[i].nodes[3].id;
-            var root = diagram.getId(rootid);
+            var root = diagram.getShapeById(rootid);
             root.shapeVisual.background("red");
             roots.push(root);
         }

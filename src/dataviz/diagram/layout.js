@@ -3764,7 +3764,7 @@
             this.tos = [];
             this.subjects = [];
             function pusher(id, bounds) {
-                var shape = this.diagram.getId(id);
+                var shape = this.diagram.getShapeById(id);
                 if (shape) {
                     this.subjects.push(shape);
                     this.froms.push(shape.bounds().topLeft());

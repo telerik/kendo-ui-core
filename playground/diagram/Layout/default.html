@@ -223,7 +223,7 @@ function layout() {
     }
     // if a forest there are multiple roots but we for a random graph it'd be difficult to guess
     // the most appropriate root
-    var knownRoot = diagram.getId("0");
+    var knownRoot = diagram.getShapeById("0");
     // because the loop produces in the generation above sometimes five times the same set of id's =>should be unique for the layout.
     diagram.shapes.forEach(function (s) {
         s.id = kendo.diagram.randomId();

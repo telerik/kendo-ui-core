@@ -16,6 +16,8 @@
             Point = diagram.Point,
             Circle = diagram.Circle,
             Path = diagram.Path,
+            Ticker = diagram.Ticker,
+            PositionAdapter = diagram.PositionAdapter,
             deepExtend = kendo.deepExtend,
             Movable = kendo.ui.Movable;
         // Constants ==============================================================
@@ -82,19 +84,19 @@
                 if (this.animate) {
                     state.linkMap.forEach(
                         function (id, points) {
-                            var conn = diagram.getId(id);
+                            var conn = diagram.getShapeById(id);
                             conn.visible(false);
                             if (conn) {
                                 conn.points(points);
                             }
                         }
                     );
-                    var ticker = new diagram.Ticker();
-                    ticker.addAdapter(new diagram.PositionAdapter(state));
+                    var ticker = new Ticker();
+                    ticker.addAdapter(new PositionAdapter(state));
                     ticker.onComplete(function () {
                         state.linkMap.forEach(
                             function (id) {
-                                var conn = diagram.getId(id);
+                                var conn = diagram.getShapeById(id);
                                 conn.visible(true);
                             }
                         );
@@ -103,14 +105,14 @@
                 }
                 else {
                     state.nodeMap.forEach(function (id, bounds) {
-                        var shape = diagram.getId(id);
+                        var shape = diagram.getShapeById(id);
                         if (shape) {
                             shape.position(bounds.topLeft());
                         }
                     });
                     state.linkMap.forEach(
                         function (id, points) {
-                            var conn = diagram.getId(id);
+                            var conn = diagram.getShapeById(id);
                             if (conn) {
                                 conn.points(points);
                             }

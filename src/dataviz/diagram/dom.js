@@ -1352,7 +1352,7 @@
             _findConnectionShape: function(options) {
                 var diagram = this;
 
-                var shape = diagram.getId(options.shapeId);
+                var shape = diagram.getShapeById(options.shapeId);
 
                 return shape.getConnector(options.connector || AUTO);
             },
@@ -1857,7 +1857,7 @@
                         if (item.source() instanceof Connector) { // if Point then it's a floating end
                             connector = item.source();
                             if (mapping.containsKey(connector.shape.id)) { // occurs when an attached connection is pasted with unselected shape parents
-                                shape = this.getId(mapping.get(connector.shape.id));
+                                shape = this.getShapeById(mapping.get(connector.shape.id));
                                 copied.source(shape.getConnector(connector.options.name));
                             } else {
                                 copied.source(new Point(item.sourcePoint().x + offsetX, item.sourcePoint().y + offsetY));
@@ -1866,7 +1866,7 @@
                         if (item.target() instanceof Connector) {
                             connector = item.target();
                             if (mapping.containsKey(connector.shape.id)) {
-                                shape = this.getId(mapping.get(connector.shape.id));
+                                shape = this.getShapeById(mapping.get(connector.shape.id));
                                 copied.target(shape.getConnector(connector.options.name));
                             }
                             else {
@@ -2011,7 +2011,7 @@
              * @param id (string) the identifier of a shape.
              * @returns {Shape}
              */
-            getId: function (id) {
+            getShapeById: function (id) {
                 var found;
                 found = Utils.first(this.shapes, function (s) {
                     return s.visual.native.id === id;
