@@ -1930,10 +1930,6 @@
             CascadingRouter: CascadingRouter,
             SelectionTool: SelectionTool
         });
-    })(window.kendo.jQuery);
+})(window.kendo.jQuery);
 
-    return window.kendo;
-
-}, typeof define == 'function' && define.amd ? define : function (_, f) {
-    f();
-});
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
