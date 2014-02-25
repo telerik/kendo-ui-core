@@ -42,7 +42,8 @@
             DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
             ITEMROTATE = "itemRotate",
             ITEMBOUNDSCHANGE = "itemBoundsChange",
-            ZOOM = "zoom",
+            ZOOMSTART = "zoomStart",
+            ZOOMEND = "zoomEnd",
             SCROLL_MIN = -20000,
             SCROLL_MAX = 20000;
 
@@ -909,7 +910,9 @@
                     delta = meta.delta,
                     z = diagram.zoom(),
                     zoomRate = diagram.options.zoomRate,
-                    zoomOptions = {location: p, meta: meta};
+                    zoomOptions = {location: p, meta: meta, zoom: z};
+
+                diagram.trigger(ZOOMSTART, zoomOptions);
 
                 if (delta < 0) {
                     z *= zoomRate;
@@ -921,7 +924,7 @@
                 zoomOptions.zoom = z;
 
                 diagram.zoom(z, zoomOptions);
-                diagram.trigger(ZOOM, zoomOptions);
+                diagram.trigger(ZOOMEND, zoomOptions);
 
                 return true;
             },
