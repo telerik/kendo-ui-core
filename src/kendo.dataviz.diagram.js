@@ -2,13 +2,13 @@
     define([
             "./kendo.data", "./kendo.draganddrop", "./kendo.userevents", "./kendo.mobile.scroller",
 
-           "./kendo.diagram.dom",
-           "./kendo.diagram.svg",
-           "./kendo.diagram.services",
-           "./kendo.diagram.layout",
-           "./kendo.diagram.utils",
-           "./kendo.diagram.math",
-           "./kendo.diagram.extensions"
+           "./dataviz/diagram/dom",
+           "./dataviz/diagram/svg",
+           "./dataviz/diagram/services",
+           "./dataviz/diagram/layout",
+           "./dataviz/diagram/utils",
+           "./dataviz/diagram/math",
+           "./dataviz/diagram/extensions"
     ], f);
 })(function(){
 

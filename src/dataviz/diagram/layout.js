@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.diagram.math" ], f);
+    define([ "./math" ], f);
 })(function(){
 
 (function ($, undefined) {

@@ -1,5 +1,5 @@
 (function (f, define) {
-    define([ "./kendo.diagram.svg" ], f);
+    define([ "./svg" ], f);
 })(function () {
 
     (function ($, undefined) {

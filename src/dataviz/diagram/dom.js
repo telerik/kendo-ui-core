@@ -1,9 +1,9 @@
 (function (f, define) {
-    define(["./kendo.data", "./kendo.draganddrop",
-           "./kendo.diagram.svg",
-           "./kendo.diagram.services",
-           "./kendo.diagram.layout",
-           "./kendo.diagram.extensions" ], f);
+    define(["../../kendo.data", "../../kendo.draganddrop",
+           "./svg",
+           "./services",
+           "./layout",
+           "./extensions" ], f);
 })(function () {
 
     (function ($, undefined) {
