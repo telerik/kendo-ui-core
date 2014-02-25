@@ -2300,10 +2300,10 @@
                         return shape.shape;
                     }
 
-                    var opt = {
+                    var opt = deepExtend({}, that.options.shapeDefaults, {
                         visual: options.visualTemplate,
                         dataItem: dataItem
-                    };
+                    });
                     shape = new Shape(opt, dataItem);
                     that.addShape(shape);
                     that._dataMap.push({ uid: dataItem.uid, shape: shape });
