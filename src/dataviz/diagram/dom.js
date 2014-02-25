@@ -1767,7 +1767,6 @@
                 if (zoom) {
                     var staticPoint = options ? options.location : new diagram.Point(0, 0);
                     // var meta = options ? options.meta : 0;
-                    var currentZoom = this._zoom;
                     zoom = this._zoom = this._getValidZoom(zoom);
 
                     if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
@@ -1782,7 +1781,9 @@
                     }
 
                     this._panTransform();
-                    this.trigger(ZOOM, options);
+
+                    this._autosizeCanvas();
+                    this._updateAdorners();
                 }
                 return this._zoom;
             },
@@ -1794,6 +1795,8 @@
                     this._storePan(pan);
 
                     this.trigger(PAN, {total: pan, delta: options.delta});
+                    this._autosizeCanvas();
+                    this._updateAdorners();
                 }
 
                 return this._pan;
@@ -2491,7 +2494,7 @@
                 }
             },
             _autosizeCanvas: function (args) {
-                var diagram = args.sender || this,
+                var diagram = (args || {}).sender || this,
                     editor = this._editor,
                     zoom = diagram.zoom(),
                     viewport = diagram.element,
@@ -2506,6 +2509,18 @@
                 diagram.canvas.size(cumulativeSize);
                 if (editor && editor.visible()) {
                     this._positionEditor();
+                }
+            },
+            _updateAdorners: function() {
+                var adorners = this._adorners;
+
+                for(var i = 0; i < adorners.length; i++) {
+                    var adorner = adorners[i];
+
+                    if (adorner.refreshBounds) {
+                        adorner.refreshBounds();
+                    }
+                    adorner.refresh();
                 }
             },
 

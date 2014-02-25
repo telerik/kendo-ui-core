@@ -42,6 +42,7 @@
             DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
             ITEMROTATE = "itemRotate",
             ITEMBOUNDSCHANGE = "itemBoundsChange",
+            ZOOM = "zoom",
             SCROLL_MIN = -20000,
             SCROLL_MAX = 20000;
 
@@ -907,7 +908,8 @@
                 var diagram = this.diagram,
                     delta = meta.delta,
                     z = diagram.zoom(),
-                    zoomRate = diagram.options.zoomRate;
+                    zoomRate = diagram.options.zoomRate,
+                    zoomOptions = {location: p, meta: meta};
 
                 if (delta < 0) {
                     z *= zoomRate;
@@ -916,7 +918,11 @@
                 }
 
                 z = Math.round(Math.max(0.7, Math.min(2.0, z)) * 10) / 10;
-                diagram.zoom(z, {location: p, meta: meta});
+                zoomOptions.zoom = z;
+
+                diagram.zoom(z, zoomOptions);
+                diagram.trigger(ZOOM, zoomOptions);
+
                 return true;
             },
             setTool: function (tool, index) {
@@ -1210,18 +1216,7 @@
                 that.diagram = diagram;
                 that.options = deepExtend({}, that.options, options);
                 that.visual = new Group();
-                that.diagram.bind("pan", function () {
-                    if (that.refreshBounds) {
-                        that.refreshBounds();
-                    }
-                    that.refresh();
-                });
-                that.diagram.bind("zoom", function () {
-                    if (that.refreshBounds) {
-                        that.refreshBounds();
-                    }
-                    that.refresh();
-                });
+                that.diagram._adorners.push(that);
             },
             refresh: function () {
 

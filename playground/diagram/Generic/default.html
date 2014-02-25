@@ -311,7 +311,7 @@
         <svg>
         <g transform="scale(0.5)" >
         <title>#:options.name#</title>
-            #= new XMLSerializer().serializeToString(kendo.diagram.Shape.createShapeVisual(options).native) #
+            #= new XMLSerializer().serializeToString(kendo.dataviz.diagram.Shape.createShapeVisual(options).native) #
             </g>
         </svg>
     </div>
@@ -353,6 +353,9 @@ function loadDiagram() {
 }
 
 $(function () {
+    var diagramNS = window.kendo.dataviz.diagram,
+        Point = diagramNS.Point;
+
     function onload() {
         load("Flowchart.json");
     }
@@ -415,7 +418,7 @@ $(function () {
             var sc = $("#StartCap").data("kendoDropDownList");
             var ec = $("#EndCap").data("kendoDropDownList");
             var sp = $("#shapePicker").data("kendoColorPicker");
-            if (items.length === 1 && items[0] instanceof kendo.diagram.Connection) {
+            if (items.length === 1 && items[0] instanceof diagramNS.Connection) {
                 item = items[0];
                 for (var i = 0; i < caps.length; i++) {
                     var cap = caps[i];
@@ -429,10 +432,10 @@ $(function () {
                 sc.select(scIndex);
                 ec.select(ecIndex);
             }
-            else if (items.length === 1 && items[0] instanceof kendo.diagram.Shape) {
+            else if (items.length === 1 && items[0] instanceof diagramNS.Shape) {
                 try {
                     var bg = items[0].options.background;
-                    if (kendo.diagram.Utils.isDefined(bg)) {
+                    if (diagramNS.Utils.isDefined(bg)) {
                         var color = kendo.parseColor(bg);
                         sp.value(color);
                     }
@@ -523,23 +526,23 @@ $(function () {
             },
 
             visual: function(a, b, c) {
-                var g = new window.kendo.diagram.Group({
+                var g = new diagramNS.Group({
                     autoSize: true
                 });
 
-                g.append(new window.kendo.diagram.Rectangle({
+                g.append(new diagramNS.Rectangle({
                     width: 150,
                     height: 150,
                     background: "red"
                 }));
 
-                g.append(new window.kendo.diagram.TextBlock({
+                g.append(new diagramNS.TextBlock({
                     text: "patka",
                     fontSize: 16,
                     x: 50,
                     y: 20
                 }));
-                g.append(new window.kendo.diagram.TextBlock({
+                g.append(new diagramNS.TextBlock({
                     text: "vtora patka",
                     fontSize: 16,
                     x: 50,
@@ -565,9 +568,7 @@ $(function () {
             endCap: "none"
         }]
     });
-    var diagram = $("#canvas").data("kendoDiagram"),
-            kendo = window.kendo,
-            Point = kendo.diagram.Point;
+    var diagram = $("#canvas").data("kendoDiagram");
 
     diagram.libraries.push(shapesSource); // libs for controls and complex shapes
     var list = $("#toolBox").kendoListView({
@@ -811,10 +812,10 @@ $(function () {
     });
 
     var caps = [
-        {value: kendo.diagram.Markers.none},
-        {value: kendo.diagram.Markers.arrowStart},
-        {value: kendo.diagram.Markers.filledCircle},
-        {value: kendo.diagram.Markers.arrowEnd}
+        {value: diagramNS.Markers.none},
+        {value: diagramNS.Markers.arrowStart},
+        {value: diagramNS.Markers.filledCircle},
+        {value: diagramNS.Markers.arrowEnd}
     ];
 
     $("#StartCap").kendoDropDownList({
@@ -824,7 +825,7 @@ $(function () {
         select: function (e) {
             var that = this;
             $.each(diagram.select(), function () {
-                if (this instanceof kendo.diagram.Connection) {
+                if (this instanceof diagramNS.Connection) {
                     this.redraw({startCap: that.dataItem(e.item.index()).value});
                 }
             });
@@ -838,7 +839,7 @@ $(function () {
         select: function (e) {
             var that = this;
             $.each(diagram.select(), function () {
-                if (this instanceof kendo.diagram.Connection) {
+                if (this instanceof diagramNS.Connection) {
                     this.redraw({endCap: that.dataItem(e.item.index()).value});
                 }
             });
