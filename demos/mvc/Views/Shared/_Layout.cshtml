@@ -106,30 +106,15 @@
 
         @Html.Raw("</div>")
 
-        @if (ViewBag.suite == "mobile")
-        {
-            <div class="narrowCol mobile-devices">
-                <h2>OS Simulator Mode</h2>
-                <input id="deviceChooser" type="hidden" />
-                <ul id="deviceList" class="options">
-                    <li></li>
-                </ul>
-
-                <script id="deviceThumbTemplate" type="text/x-kendo-template">
-                    <li><span class="osName"><strong>#= text #</strong># if (text != "Flat Skin") { # Simulator# } #</span> <span class="osThumb #= value #Thumb">#= value #</span></li>
-                </script>
-
-            </div>
-        }
         </div>
     </div>
 
 @{
     var ignored = Request.Path.IndexOf("overview") > -1 || Request.Path.IndexOf("dashboard") > -1;
 }
-        <div class='centerWrap floatWrap@(ignored ? " widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
+        <div class='centerWrap floatWrap@(ignored ? " widgetOverview" : "")' id="mainWrap">
             <div id="themeWrap" style="@(ignored ? "display:none" : "")">
-                <span id="themeChooser" style="@(ViewBag.suite == "mobile" ? "display:none" : "")"></span>
+                <span id="themeChooser"></span>
                 <a href="http://docs.telerik.com/kendo-ui/api/@ViewBag.Documentation" class="get-kendoui" style="display:@(ignored || string.IsNullOrEmpty(ViewBag.Documentation) ? "none" : "inline-block")">Documentation</a>
             </div>
 
@@ -169,11 +154,25 @@
             });
         }
 
-        $("#themeChooser").kendoThemeChooser();
+        Application.isMobile = !!$("#mobile-application-container").length;
 
-        $("#deviceChooser").mobileOsChooser({
-            container: "#mobile-application-container"
-        });
+        if (Application.isMobile) {
+            var initialTheme = {
+                theme: "ios7",
+                themes: [
+                    { text: "iOS7", value: "ios7", shot: "" },
+                    { text: "iOS6", value: "ios", shot: "" },
+                    { text: "Android Light", value: "android-light", shot: "" },
+                    { text: "Android Dark", value: "android-dark", shot: "" },
+                    { text: "BlackBerry", value: "blackberry", shot: "" },
+                    { text: "WP8 Light", value: "wp-light", shot: "" },
+                    { text: "WP8 Dark", value: "wp-dark", shot: "" },
+                    { text: "Flat Skin", value: "flat", shot: "" }
+                ]
+            }
+        }
+
+        $("#themeChooser").kendoThemeChooser(initialTheme);
 
         @if (ViewBag.suite != "mobile")
         {

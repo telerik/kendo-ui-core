@@ -475,9 +475,6 @@
                 e.stopPropagation();
             });
 
-            $("#deviceChooser").mobileOsChooser({
-                container: "#mobile-application-container"
-            });
         },
 
         initMobile: function () {
@@ -490,7 +487,7 @@
                 e.stopPropagation();
             });
 
-            applyCurrentMobileOS("#mobile-application-container");
+            applyCurrentMobileOS();
         }
     };
 
@@ -500,7 +497,7 @@
 
     $(Application.init);
 
-    var mobileClasses = "km-ios km-ios4 km-ios5 km-ios6 km-ios7 km-android km-blackberry km-wp km-flat";
+    var mobileClasses = "km-ios km-ios4 km-ios5 km-ios6 km-ios7 km-android km-android-dark km-android-light km-blackberry km-wp km-wp-dark km-wp-light km-flat";
 
     function applyCurrentTheme() {
         if (supports.sessionStorage) {
@@ -512,14 +509,14 @@
         }
     }
 
-    function applyCurrentMobileOS(container) {
+    function applyCurrentMobileOS() {
         var kendoMobileOS = window.kendoMobileOS;
 
         if (supports.sessionStorage) {
             window.kendoMobileOS = sessionStorage.getItem("kendoMobileOS") || kendoMobileOS;
         }
 
-        $(container).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
+        $("#mobile-application-container").removeClass(mobileClasses).addClass("km-" + kendoMobileOS + (" km-" + kendoMobileOS.replace(/-.*/, "")));
         $("#device-wrapper").removeClass("ios7 android blackberry wp flat").addClass(kendoMobileOS);
         $("#deviceList .selectedThumb").removeClass("selectedThumb");
         $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
@@ -542,51 +539,6 @@
         prev.attr("href", li.prev().find("a").attr("href") || prev.data("widget"));
         next.attr("href", li.next().find("a").attr("href") || next.data("widget"));
     }
-
-    $.fn.mobileOsChooser = function (options) {
-        var deviceList = $("#deviceList");
-        if (deviceList.length != 1) {
-            return this;
-        }
-
-        var oses = new kendo.data.DataSource({
-            data: [
-                { text: "iOS", value: "ios7" },
-                { text: "Android", value: "android" },
-                { text: "Blackberry", value: "blackberry" },
-                { text: "WP8", value: "wp" },
-                { text: "Flat Skin", value: "flat" }
-            ]
-        });
-
-        oses.read();
-
-        applyCurrentMobileOS(options.container);
-
-        var deviceTemplate = kendo.template($("#deviceThumbTemplate").html());
-        deviceList.html(kendo.render(deviceTemplate, oses.view()));
-
-        deviceList.find(".osName,.osThumb").click(function () {
-            var li = $(this).closest("li");
-
-            if (supports.sessionStorage) {
-                if (sessionStorage.getItem("kendoMobileOS") === li.children(".osThumb").text()) {
-                    return;
-                }
-
-                sessionStorage.setItem("kendoMobileOS", li.children(".osThumb").text());
-
-                li.siblings().removeClass("selectedThumb")
-                  .end().addClass("selectedThumb");
-
-                Application.fetch(location.href, true);
-            }
-        });
-
-        return this;
-    };
-
-    // sub menu dropdowns
 
     $(document).ready(function () {
         var dropdown = $("#header a[href=#expand]"),
@@ -615,8 +567,26 @@
             init: function (element, options) {
                 options = options || {};
 
+                options.themes = options.themes || [
+                    { text: "Default", value: "default", colors: ["#ef6f1c", "#e24b17", "#5a4b43", "#ededed"] },
+                    { text: "Blue Opal", value: "blueopal", colors: ["#076186", "#7ed3f6", "#94c0d2", "#daecf4"] },
+                    { text: "Bootstrap", value: "bootstrap", colors: ["#3276b1", "#67afe9", "#ebebeb", "#ffffff"] },
+                    { text: "Silver", value: "silver", colors: ["#298bc8", "#515967", "#bfc6d0", "#eaeaec"] },
+                    { text: "Uniform", value: "uniform", colors: ["#666666", "#cccccc", "#e7e7e7", "#ffffff"] },
+                    { text: "Metro", value: "metro", colors: ["#8ebc00", "#787878", "#e5e5e5", "#ffffff"] },
+                    { text: "Black", value: "black", colors: ["#0167cc", "#4698e9", "#272727", "#000000"] },
+                    { text: "Metro Black", value: "metroblack", colors: ["#00aba9", "#0e0e0e", "#333333", "#565656"] },
+                    { text: "High Contrast", value: "highcontrast", colors: ["#b11e9c", "#880275", "#664e62", "#1b141a"] },
+                    { text: "Moonlight", value: "moonlight", colors: ["#ee9f05", "#40444f", "#2f3640", "#212a33"] },
+                    { text: "Flat", value: "flat", colors: ["#363940", "#2eb3a6", "#10c4b2", "#ffffff"] }
+                ];
+
                 if (supports.sessionStorage) {
-                    options.theme = sessionStorage.getItem("kendoSkin");
+                    if (Application.isMobile) {
+                        options.theme = sessionStorage.getItem("kendoMobileOS") || options.theme;
+                    } else {
+                        options.theme = sessionStorage.getItem("kendoSkin");
+                    }
                 }
 
                 options.theme = options.theme || ThemeChooser.prototype.options.theme;
@@ -672,7 +642,12 @@
 
                     themeChooser.setTheme(theme);
 
-                    Application.changeTheme(theme, true);
+                    if (Application.isMobile) {
+                        Application.fetch(location.href, true);
+                        setTimeout(applyCurrentMobileOS, 200);
+                    } else {
+                        Application.changeTheme(theme, true);
+                    }
 
                 });
 
@@ -697,7 +672,12 @@
                 this.element.find(".tc-theme-name").text(theme.text);
 
                 if (supports.sessionStorage) {
-                    sessionStorage.setItem("kendoSkin", themeName);
+                    if (Application.isMobile) {
+                        sessionStorage.setItem("kendoMobileOS", themeName);
+                        window.kendoMobileOS = themeName;
+                    } else {
+                        sessionStorage.setItem("kendoSkin", themeName);
+                    }
                 }
             },
 
@@ -723,26 +703,16 @@
                 itemTemplate: kendo.template(
                     "<li class='tc-theme'>" +
                         "<a href='\\#' class='tc-link#= data.selected ? ' active' : '' #' data-value='#= data.value #'>" +
-                            "# for (var i = 0; i < data.colors.length; i++) { #" +
+                            "# if (data.shot !== undefined) { #" +
+                                "<span class='tc-mobile' style='background-image: #= data.shot #'></span>" +
+                            "#} else { for (var i = 0; i < data.colors.length; i++) { #" +
                                 "<span class='tc-color' style='background-color: #= data.colors[i] #'></span>" +
-                            "# } #" +
+                            "# } } #" +
                             "<span class='tc-theme-name'>#= data.text #</span>" +
                         "</a>" +
                     "</li>",
                 { useWithBlock: false }),
-                themes: [
-                    { text: "Default", value: "default", colors: ["#ef6f1c", "#e24b17", "#5a4b43", "#ededed"] },
-                    { text: "Blue Opal", value: "blueopal", colors: ["#076186", "#7ed3f6", "#94c0d2", "#daecf4"] },
-                    { text: "Bootstrap", value: "bootstrap", colors: ["#3276b1", "#67afe9", "#ebebeb", "#ffffff"] },
-                    { text: "Silver", value: "silver", colors: ["#298bc8", "#515967", "#bfc6d0", "#eaeaec"] },
-                    { text: "Uniform", value: "uniform", colors: ["#666666", "#cccccc", "#e7e7e7", "#ffffff"] },
-                    { text: "Metro", value: "metro", colors: ["#8ebc00", "#787878", "#e5e5e5", "#ffffff"] },
-                    { text: "Black", value: "black", colors: ["#0167cc", "#4698e9", "#272727", "#000000"] },
-                    { text: "Metro Black", value: "metroblack", colors: ["#00aba9", "#0e0e0e", "#333333", "#565656"] },
-                    { text: "High Contrast", value: "highcontrast", colors: ["#b11e9c", "#880275", "#664e62", "#1b141a"] },
-                    { text: "Moonlight", value: "moonlight", colors: ["#ee9f05", "#40444f", "#2f3640", "#212a33"] },
-                    { text: "Flat", value: "flat", colors: ["#363940", "#2eb3a6", "#10c4b2", "#ffffff"] }
-                ]
+                themes: false
             }
         });
 

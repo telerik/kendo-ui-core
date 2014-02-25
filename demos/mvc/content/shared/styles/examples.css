@@ -2634,7 +2634,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     margin: auto;
 }
 
-#device-wrapper.android {
+#device-wrapper.android-dark,
+#device-wrapper.android-light {
     background-image: url("nexus.png");
 }
 
@@ -2642,7 +2643,8 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background-image: url("blackberrySkin.png");
 }
 
-#device-wrapper.wp {
+#device-wrapper.wp-dark,
+#device-wrapper.wp-light {
     background-image: url("wpSkin.png");
 }
 
