@@ -95,12 +95,12 @@ public class ShapeDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces *
         setProperty("content", value);
     }
 
-    public java.lang.String getData() {
-        return (java.lang.String)getProperty("data");
+    public boolean getEditable() {
+        return (boolean)getProperty("editable");
     }
 
-    public void setData(java.lang.String value) {
-        setProperty("data", value);
+    public void setEditable(boolean value) {
+        setProperty("editable", value);
     }
 
     public float getHeight() {
@@ -125,6 +125,38 @@ public class ShapeDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces *
 
     public void setMinWidth(float value) {
         setProperty("minWidth", value);
+    }
+
+    public java.lang.String getPath() {
+        return (java.lang.String)getProperty("path");
+    }
+
+    public void setPath(java.lang.String value) {
+        setProperty("path", value);
+    }
+
+    public boolean getResizable() {
+        return (boolean)getProperty("resizable");
+    }
+
+    public void setResizable(boolean value) {
+        setProperty("resizable", value);
+    }
+
+    public boolean getRotatable() {
+        return (boolean)getProperty("rotatable");
+    }
+
+    public void setRotatable(boolean value) {
+        setProperty("rotatable", value);
+    }
+
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
+    }
+
+    public void setType(java.lang.String value) {
+        setProperty("type", value);
     }
 
     public float getWidth() {

@@ -59,6 +59,14 @@ public class ConnectionsDefaultsStrokeTag extends  BaseTag  /* interfaces */ /* 
         setProperty("color", value);
     }
 
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
+    }
+
 //<< Attributes
 
 }

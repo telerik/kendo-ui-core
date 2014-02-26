@@ -8,7 +8,7 @@ import com.kendoui.taglib.diagram.ShapesTag;
 import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
-public class DiagramTag extends WidgetTag /* interfaces *//* interfaces */ {
+public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
 
     public DiagramTag() {
         super("Diagram");
@@ -44,24 +44,16 @@ public class DiagramTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "diagram";
     }
 
-    public void setConnections(ConnectionsTag value) {
-
-        setProperty("connections", value.connections());
-
-    }
-
     public void setConnectionsDefaults(com.kendoui.taglib.diagram.ConnectionsDefaultsTag value) {
         setProperty("connectionsDefaults", value);
     }
 
-    public void setShapeDefaults(com.kendoui.taglib.diagram.ShapeDefaultsTag value) {
-        setProperty("shapeDefaults", value);
+    public void setLayout(com.kendoui.taglib.diagram.LayoutTag value) {
+        setProperty("layout", value);
     }
 
-    public void setShapes(ShapesTag value) {
-
-        setProperty("shapes", value.shapes());
-
+    public void setShapeDefaults(com.kendoui.taglib.diagram.ShapeDefaultsTag value) {
+        setProperty("shapeDefaults", value);
     }
 
     public boolean getAutoBind() {
@@ -72,6 +64,14 @@ public class DiagramTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("autoBind", value);
     }
 
+    public java.lang.Object getConnections() {
+        return (java.lang.Object)getProperty("connections");
+    }
+
+    public void setConnections(java.lang.Object value) {
+        setProperty("connections", value);
+    }
+
     public java.lang.Object getCopy() {
         return (java.lang.Object)getProperty("copy");
     }
@@ -80,20 +80,16 @@ public class DiagramTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("copy", value);
     }
 
+    public void setDataSource(DataSourceTag dataSource) {
+        setProperty("dataSource", dataSource);
+    }
+
     public boolean getDraggable() {
         return (boolean)getProperty("draggable");
     }
 
     public void setDraggable(boolean value) {
         setProperty("draggable", value);
-    }
-
-    public java.lang.String getName() {
-        return (java.lang.String)getProperty("name");
-    }
-
-    public void setName(java.lang.String value) {
-        setProperty("name", value);
     }
 
     public boolean getResizable() {
@@ -110,6 +106,14 @@ public class DiagramTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setRotatable(boolean value) {
         setProperty("rotatable", value);
+    }
+
+    public java.lang.Object getShapes() {
+        return (java.lang.Object)getProperty("shapes");
+    }
+
+    public void setShapes(java.lang.Object value) {
+        setProperty("shapes", value);
     }
 
     public java.lang.String getTemplate() {
