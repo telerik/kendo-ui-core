@@ -1547,6 +1547,11 @@ p#copy
     height: 176px;
 }
 
+.widgetGrid.mobile .narrowCol
+{
+    height: 100px;
+}
+
 .widgetGrid .narrowCol.mobile-devices
 {
     margin-bottom: 0;
@@ -1603,7 +1608,7 @@ p#copy
 
 .widgetGrid .mobile-widgets
 {
-    width:330px;
+    width: 615px;
 }
 
 .widgetGrid .narrowCol.chart
@@ -1613,7 +1618,7 @@ p#copy
 
 .widgetGrid .mobile-framework
 {
-     width:169px;
+     width: 384px;
 }
 
 .widgetGrid .narrowCol.mobile-widgets h2,
@@ -1676,6 +1681,7 @@ p#copy
 }
 
 .widgetGrid .mobile-widgets ul,
+.widgetGrid .mobile-framework ul,
 .widgetGrid .chart ul
 {
     margin-right: 53.5px;

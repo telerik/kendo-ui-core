@@ -54,6 +54,10 @@
                 var idx = 0;
                 var maxItemsPerColumn = 8;
 
+                if (ViewBag.suite == "mobile") {
+                    maxItemsPerColumn = 4;
+                }
+
                 <ul>
                     @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                     {
