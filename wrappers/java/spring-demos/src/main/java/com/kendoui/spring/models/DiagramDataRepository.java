@@ -16,7 +16,7 @@ public class DiagramDataRepository {
         OrgChartItem ann = new OrgChartItem("Ann", "Devon", "ann.jpg", "UI Designer", "#ef6944");
         elizabeth.getItems().add(ann);
 
-        OrgChartItem fran = new OrgChartItem("Fran", "Wilson", "fran.jpg", "Desing Intern", "#ef6944");
+        OrgChartItem fran = new OrgChartItem("Fran", "Wilson", "fran.jpg", "Design Intern", "#ef6944");
         elizabeth.getItems().add(fran);
         
         OrgChartItem diego = new OrgChartItem("Diego", "Roel", "diego.jpg", "QA Engineer", "#ee587b");
