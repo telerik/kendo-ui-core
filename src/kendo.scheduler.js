@@ -1,4 +1,3 @@
-/*jshint eqnull: true */
 kendo_module({
     id: "scheduler",
     name: "Scheduler",
@@ -2797,7 +2796,7 @@ kendo_module({
             var size = this.getSize(),
                 currentSize = this._size;
 
-            if (size.width != 0 && size.height != 0 && (force || !currentSize || size.width !== currentSize.width || size.height !== currentSize.height)) {
+            if (size.width !== 0 && size.height !== 0 && (force || !currentSize || size.width !== currentSize.width || size.height !== currentSize.height)) {
                 this.refresh({ action: "resize" });
                 this._size = size;
             }
