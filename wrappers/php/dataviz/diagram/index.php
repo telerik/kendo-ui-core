@@ -52,7 +52,7 @@ require_once '../../include/header.php';
         }));
 
         g.append(new dataviz.diagram.Image({
-            source: "../../../../content/dataviz/diagram/people/" + dataItem.image,
+            source: "../../content/dataviz/diagram/people/" + dataItem.image,
             x: 3,
             y: 3,
             width: 68,
@@ -100,7 +100,7 @@ $connection_defaults->stroke($stroke);
 $diagram = new \Kendo\Dataviz\UI\Diagram('diagram');
 $diagram->dataSource($dataSource)
         ->layout($layout)
-        ->visualTemplate('visualTemplate')
+        ->visualTemplate(new \Kendo\JavaScriptFunction('visualTemplate'))
         ->shapeDefaults($shape_defaults)
         ->connectionDefaults($connection_defaults);
 
