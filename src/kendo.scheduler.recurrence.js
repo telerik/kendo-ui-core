@@ -408,14 +408,17 @@ var __meta__ = {
                 var startTimeHours;
 
                 if (frequency === "hourly") {
+                    diff = date.getTimezoneOffset() - start.getTimezoneOffset();
                     startTimeHours = rule._startTime.getHours();
 
+                    date = date.getTime();
                     if (hours !== startTimeHours) {
-                        date = date.getTime();
                         date += (startTimeHours - hours) * kendo.date.MS_PER_HOUR;
-                        date -= start;
-                    } else {
-                        kendo.date.setTime(date, -start);
+                    }
+                    date -= start;
+
+                    if (diff) {
+                        date -= diff * kendo.date.MS_PER_MINUTE;
                     }
 
                     diff = Math.floor(date / kendo.date.MS_PER_HOUR);

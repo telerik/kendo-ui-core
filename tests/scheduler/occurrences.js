@@ -53,6 +53,24 @@
         equal(events[2].end.getTime(), +new Date(2000, 10, 10, 19, 0));
     });
 
+    test("HOURLY occurrences method repeat event every 2 hours", function() {
+        var schedulerEvent = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2014, 2, 20, 8),
+            end: new Date(2014, 2, 20, 9),
+            recurrenceRule: "FREQ=HOURLY;INTERVAL=2"
+        });
+
+        var events = occurrences(schedulerEvent, new Date(2014, 2, 20), new Date(2014, 2, 21, 0));
+
+        deepEqual(events[0].start, new Date(2014, 2, 20, 8));
+        deepEqual(events[0].end, new Date(2014, 2, 20, 9));
+
+        deepEqual(events[1].start, new Date(2014, 2, 20, 10));
+        deepEqual(events[1].end, new Date(2014, 2, 20, 11));
+    });
+
     test("HOURLY occurrences method repeat event every 3 hours", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
