@@ -692,6 +692,7 @@ var MSWordFormatCleaner = Cleaner.extend({
             /mso-[^;"]*;?/ig, '', /* office-related CSS attributes */
             /<(\/?)b(\s[^>]*)?>/ig, '<$1strong$2>',
             /<(\/?)i(\s[^>]*)?>/ig, '<$1em$2>',
+            /<o:p>&nbsp;<\/o:p>/ig, '&nbsp;',
             /<\/?(meta|link|style|o:|v:|x:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:|x:)[^>]*>)?/ig, '', /* external references and namespaced tags */
             /<\/o>/g, '',
             /style=(["|'])\s*\1/g, '', /* empty style attributes */
