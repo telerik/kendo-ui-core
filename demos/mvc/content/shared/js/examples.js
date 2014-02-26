@@ -703,8 +703,8 @@
                 itemTemplate: kendo.template(
                     "<li class='tc-theme'>" +
                         "<a href='\\#' class='tc-link#= data.selected ? ' active' : '' #' data-value='#= data.value #'>" +
-                            "# if (data.shot !== undefined) { #" +
-                                "<span class='tc-mobile' style='background-image: #= data.shot #'></span>" +
+                            "# if (!data.colors) { #" +
+                                "<span class='tc-mobile #= 'tc-' + data.value #'></span>" +
                             "#} else { for (var i = 0; i < data.colors.length; i++) { #" +
                                 "<span class='tc-color' style='background-color: #= data.colors[i] #'></span>" +
                             "# } } #" +
