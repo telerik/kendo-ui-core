@@ -109,8 +109,29 @@
 
             "@button-background-color":         constant(BGCOLOR, ".k-button"),
             "@button-hover-background-color":   constant(BGCOLOR, ".k-button:hover"),
+            "@button-active-background":        constant(BGCOLOR, ".k-button:active"),
             "@button-text-color":               constant(COLOR, ".k-button"),
             "@button-hover-text-color":         constant(COLOR, ".k-button:hover"),
+
+            "@primary-button-text-color":       constant(COLOR, ".k-primary"),
+            "@primary-button-background-color": constant(BGCOLOR, ".k-primary"),
+            "@primary-button-border-color":     constant(BORDERCOLOR, ".k-primary"),
+            "@primary-gradient":                gradientConstant(".k-primary"),
+            "@primary-focused-color":           constant(COLOR, ".k-primary:focus"),
+            "@primary-focused-border-color":    constant(BORDERCOLOR, ".k-primary:focus"),
+            "@primary-focused-gradient":        gradientConstant(".k-primary:focus"),
+            "@primary-hover-text-color":        constant(COLOR, ".k-primary:hover"),
+            "@primary-hover-border-color":      constant(BORDERCOLOR, ".k-primary:hover"),
+            "@primary-hover-gradient":          gradientConstant(".k-primary:hover"),
+            "@primary-hover-background-color":  constant(BGCOLOR, ".k-primary:hover"),
+            "@primary-active-text-color":       constant(COLOR, ".k-primary:active"),
+            "@primary-active-border-color":     constant(BORDERCOLOR, ".k-primary:active"),
+            "@primary-active-gradient":         gradientConstant(".k-primary:active"),
+            "@primary-active-background-color": constant(BGCOLOR, ".k-primary:active"),
+            "@primary-diabled-text-color":      constant(COLOR, ".k-primary.k-state-disabled"),
+            "@primary-disabled-border-color":   constant(BORDERCOLOR, ".k-primary.k-state-disabled"),
+            "@primary-disabled-background-color":constant(BGCOLOR, ".k-primary.k-state-disabled"),
+            "@primary-disabled-gradient":       gradientConstant(".k-primary.k-state-disabled"),
 
             "@group-background-color":          constant(BGCOLOR, ".k-group"),
             "@group-border-color":              constant(BORDERCOLOR, ".k-group"),
@@ -160,6 +181,42 @@
                     return cssPropertyFrom("k-picker-wrap k-state-focused", "box-shadow");
                 }
             },
+            "@button-focused-shadow": {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom(".k-button:focus", "box-shadow");
+                }
+            }, 
+            "@button-focused-active-shadow": {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom(".k-button:focus:active", "box-shadow");
+                }
+            }, 
+            "@primary-shadow": {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom(".k-primary", "box-shadow");
+                }
+            },          
+            "@primary-focused-active-item-shadow": {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom(".k-primary:focus", "box-shadow");
+                }
+            },
+            "@primary-hover-shadow": {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom(".k-primary:hover", "box-shadow");
+                }
+            },
+            "@primary-active-shadow": {
+                readonly: true,
+                infer: function() {
+                    return cssPropertyFrom(".k-primary:active", "box-shadow");
+                }
+            },         
 
             "@error-background-color":          constant(BGCOLOR, ".k-state-error"),
             "@error-border-color":              constant(BORDERCOLOR, ".k-state-error"),
@@ -215,6 +272,7 @@
             "@calendar-group-background-color":         constant(BGCOLOR, ".k-calendar th"),
             "@button-border-color":                     constant(BORDERCOLOR, ".k-button"),
             "@button-hover-border-color":               constant(BORDERCOLOR, ".k-button:hover"),
+            "@button-active-border-color":              constant(BORDERCOLOR, ".k-button:active"),
             "@button-focused-border-color":             constant(BORDERCOLOR, ".k-button:focus, .k-button.k-state-focused"),
             "@menu-border-color":                       constant(BORDERCOLOR, ".k-menu .k-item"),
             "@filter-menu-content-background":          constant(BGCOLOR, ".k-secondary.k-filter-menu"),
@@ -319,7 +377,9 @@
                 "@button-hover-text-color":       "Hover text color",
                 "@button-border-color":           "Border color",
                 "@button-hover-border-color":     "Hover border color",
-                "@button-focused-border-color":   "Focused border color"
+                "@button-focused-border-color":   "Focused border color",
+                "@button-active-background":      "Active background",
+                "@button-active-border-color":    "Active border color"
             },
             "Groups and content areas": {
                 "@group-background-color":        "Group background",
