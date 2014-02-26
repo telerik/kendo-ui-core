@@ -20,10 +20,9 @@
         },
         addConsoleScript: function (code) {
             if(code.indexOf("kendoConsole") !== -1) {
-                var styleReference = '\t<link rel="stylesheet" href="/content/shared/styles/examples-offline.css">\n'
-                var scriptReference = '\t<script src="/content/shared/js/console.js"></script>\n'
-                code = code.replace("</head>", styleReference + "</head>");
-                code = code.replace("</head>", scriptReference + "</head>");
+            	var styleReference = '\t<link rel="stylesheet" href="/content/shared/styles/examples-offline.css">\n';
+                var scriptReference = '\t<script src="/content/shared/js/console.js"></script>\n';
+                code = code.replace("</head>", styleReference + scriptReference + "</head>");
             }
 
             return code;
