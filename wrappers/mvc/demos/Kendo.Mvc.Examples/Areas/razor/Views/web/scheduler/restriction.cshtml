@@ -112,15 +112,24 @@
 
         for (var idx = 0, length = occurrences.length; idx < length; idx++) {
             occurrence = occurrences[idx];
-            if (occurrence[resourceFieldName] === value) {
+            var resourceValue = occurrence[resourceFieldName];
+
+            if (resourceValue === value) {
                 result.push(occurrence);
+            } else if (resourceValue instanceof kendo.data.ObservableArray) {
+                for (var i = 0; i < value.length; i++) {
+                    if (resourceValue.indexOf(value[i]) != -1) {
+                        result.push(occurrence);
+                        break;
+                    }
+                }
             }
         }
         return result;
     }
 
     function attendeeIsOccupied(start, end, event, resources) {
-        var occurrences = occurrencesInRangeByResource(start, end, "attendee", event, resources);
+        var occurrences = occurrencesInRangeByResource(start, end, "Attendees", event, resources);
         if (occurrences.length > 0) {
             return true;
         }
@@ -128,7 +137,7 @@
     }
 
     function roomIsOccupied(start, end, event, resources) {
-        var occurrences = occurrencesInRangeByResource(start, end, "roomId", event, resources);
+        var occurrences = occurrencesInRangeByResource(start, end, "RoomID", event, resources);
         if (occurrences.length > 0) {
             return true;
         }
@@ -136,7 +145,6 @@
     }
 
     function checkAvailability(start, end, event, resources) {
-
         if (attendeeIsOccupied(start, end, event, resources)) {
             setTimeout(function () {
                 alert("This person is not available in this time period.");
