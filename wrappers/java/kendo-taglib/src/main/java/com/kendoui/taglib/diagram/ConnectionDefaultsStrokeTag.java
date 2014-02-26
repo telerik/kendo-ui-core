@@ -12,14 +12,14 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ConnectionsDefaultsHoverStrokeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ConnectionDefaultsStrokeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ConnectionsDefaultsHoverTag parent = (ConnectionsDefaultsHoverTag)findParentWithClass(ConnectionsDefaultsHoverTag.class);
+        ConnectionDefaultsTag parent = (ConnectionDefaultsTag)findParentWithClass(ConnectionDefaultsTag.class);
 
 
         parent.setStroke(this);
@@ -48,7 +48,7 @@ public class ConnectionsDefaultsHoverStrokeTag extends  BaseTag  /* interfaces *
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-connectionsDefaults-hover-stroke";
+        return "diagram-connectionDefaults-stroke";
     }
 
     public java.lang.String getColor() {
@@ -57,6 +57,14 @@ public class ConnectionsDefaultsHoverStrokeTag extends  BaseTag  /* interfaces *
 
     public void setColor(java.lang.String value) {
         setProperty("color", value);
+    }
+
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes
