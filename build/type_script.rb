@@ -28,6 +28,7 @@ module CodeGen::TypeScript
         'docs/api/framework/droptarget.md',
         'docs/api/framework/droptargetarea.md',
         'docs/api/mobile/application.md',
+        'docs/api/dataviz/diagram.md',
         'docs/api/web/ui.md'
     ]
 
@@ -242,7 +243,7 @@ module CodeGen::TypeScript
         def initialize(parameters)
             if parameters.any?
                 type_indices = parameters.map do |p|
-                    raise "#{p.owner.owner.name}.#{p.owner.name}.#{p.name} does not have type set" unless p.type
+                    raise "The #{p.name} parameter of #{p.owner.owner.name}.#{p.owner.name} does not have a type set" unless p.type
                     0.step(p.type.size-1).to_a
                 end
 
