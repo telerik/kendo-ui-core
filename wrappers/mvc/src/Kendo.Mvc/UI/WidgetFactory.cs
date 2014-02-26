@@ -1247,6 +1247,22 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> DataVizComponents 
         /// <summary>
+        /// Creates a <see cref="Map"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Map()
+        ///             .Name("Map")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MapBuilder Map()
+        {
+            return new MapBuilder(new Map(ViewContext, Initializer, UrlGenerator));
+        }
+        //<< DataVizComponents
+
+        /// <summary>
         /// Creates a <see cref="Diagram"/>
         /// </summary>
         /// <example>
@@ -1260,7 +1276,6 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new DiagramBuilder(new Diagram(ViewContext, Initializer, UrlGenerator));
         }
-        //<< DataVizComponents
 
         //>> MobileComponents 
         /// <summary>
