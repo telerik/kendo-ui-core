@@ -869,12 +869,13 @@
                     "text": "Basic usage",
                     "url": "diagram/index.html",
                     "title": "Example of Kendo UI Diagram with a simple layout",
-	                "meta": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Diagram widget can be implemented for hierarchical diagrams."
+                    "meta": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Diagram widget can be implemented for hierarchical diagrams."
                 }, {
                     "text": "Built-in Layouts",
                     "url": "diagram/layout.html",
                     "title": "Example of Kendo UI Diagram with different layouts",
-	                "meta": "This sample demonstrates the built-in layouts which are specific to Kendo UI Diagram component."
+                    "meta": "This sample demonstrates the built-in layouts which are specific to Kendo UI Diagram component.",
+                    "packages": ["!mvc", "!jsp", "!php"]
             }]
         }
     ],
