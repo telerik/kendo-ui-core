@@ -25,7 +25,7 @@ WIN_SRC_CSS = FileList["#{DIST_STYLES_ROOT}web/kendo.common.css"].include("#{DIS
 WIN_MIN_CSS = FileList["#{DIST_STYLES_ROOT}web/kendo.winjs.min.css"]
 
 ICENIUM_MIN_RESOURCES = FileList[MOBILE_MIN_CSS].keep_if { |f| f =~ /styles\/mobile\/images\// }
-ICENIUM_MIN_CSS = FileList["#{DIST_STYLES_ROOT}mobile/kendo.icenium.min.css"].include(ICENIUM_MIN_RESOURCES).include(DATAVIZ_MIN_CSS).exclude("#{DIST_STYLES_ROOT}dataviz/kendo.dataviz.min.css")
+ICENIUM_MIN_CSS = FileList["#{DIST_STYLES_ROOT}mobile/kendo.mobile.icenium.min.css"].include(ICENIUM_MIN_RESOURCES).include(DATAVIZ_MIN_CSS).exclude("#{DIST_STYLES_ROOT}dataviz/kendo.dataviz.min.css")
 
 CLEAN.include('dist/styles')
 
