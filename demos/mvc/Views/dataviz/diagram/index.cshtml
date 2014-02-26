@@ -4,48 +4,48 @@
     </div>
     <script>
        var data = [{
-            name: "Antonio",
+            firstName: "Antonio",
             lastName: "Moreno",
-            image: "url(../../../../content/dataviz/diagram/people/antonio.jpg",
-            position: "Team Lead",
-            background: "#1696d3",
+            image: "antonio.jpg",
+            title: "Team Lead",
+            colorScheme: "#1696d3",
             items: [{
-                    name: "Elizabeth",
-                    image: "url(../../../../content/dataviz/diagram/people/elizabeth.jpg",
+                    firstName: "Elizabeth",
+                    image: "elizabeth.jpg",
                     lastName: "Brown",
-                    position: "Design Lead",
-                    background: "#ef6944",
+                    title: "Design Lead",
+                    colorScheme: "#ef6944",
                     items: [{
-                            name: "Ann",
+                            firstName: "Ann",
                             lastName: "Devon",
-                            image: "url(../../../../content/dataviz/diagram/people/ann.jpg",
-                            position: "UI Designer",
-                            background: "#ef6944"
+                            image: "ann.jpg",
+                            title: "UI Designer",
+                            colorScheme: "#ef6944"
                         },{
-                            name: "Fran",
+                            firstName: "Fran",
                             lastName: "Wilson",
-                            image: "url(../../../../content/dataviz/diagram/people/fran.jpg",
-                            position: "Desing Intern",
-                            background: "#ef6944"
+                            image: "fran.jpg",
+                            title: "Desing Intern",
+                            colorScheme: "#ef6944"
                     }]
             }, {
-                name: "Diego",
+                firstName: "Diego",
                 lastName: "Roel",
-                image: "url(../../../../content/dataviz/diagram/people/diego.jpg",
-                position: "QA Engineer",
-                background: "#ee587b"
+                image: "diego.jpg",
+                title: "QA Engineer",
+                colorScheme: "#ee587b"
             }, {
-                name: "Felipe",
+                firstName: "Felipe",
                 lastName: "Izquiedro",
-                image: "url(../../../../content/dataviz/diagram/people/felipe.jpg",
-                position: "Senior Developer",
-                background: "#75be16",
+                image: "felipe.jpg",
+                title: "Senior Developer",
+                colorScheme: "#75be16",
                 items: [{
-                    name: "Daniel",
+                    firstName: "Daniel",
                     lastName: "Tonini",
-                    image: "url(../../../../content/dataviz/diagram/people/daniel.jpg",
-                    position: "Developer",
-                    background: "#75be16"
+                    image: "daniel.jpg",
+                    title: "Developer",
+                    colorScheme: "#75be16"
                 }]
             }]
         }];
@@ -68,25 +68,25 @@
                 content: {
                     color: "#ffffff"
                 },
-                background: dataItem.background,
+                background: dataItem.colorScheme,
             }));
 
             g.append(new dataviz.diagram.TextBlock({
-                text: dataItem.name + " " + dataItem.lastName,
+                text: dataItem.firstName + " " + dataItem.lastName,
                 x: 85,
                 y: 20,
                 color: "#ffffff"
             }));
 
             g.append(new dataviz.diagram.TextBlock({
-                text: dataItem.position,
+                text: dataItem.title,
                 x: 85,
                 y: 40,
                 color: "#ffffff"
             }));
 
             g.append(new dataviz.diagram.Image({
-                source: dataItem.image,
+                source: "../../../../content/dataviz/diagram/people/" + dataItem.image,
                 x: 3,
                 y: 3,
                 width: 68,
