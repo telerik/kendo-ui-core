@@ -82,6 +82,13 @@ end
 
 namespace :vsdoc do
     VSDOC_SOURCES = FileList["docs/api/{web,mobile,dataviz,framework}/*.md"]
+    desc "Test VSDoc generation"
+    task :test do
+        File.open("dist/kendo.vsdoc-master.js", "w") do |f|
+            f.write get_vsdoc(VSDOC_SOURCES)
+            sh "node_modules/jshint/bin/jshint #{f.path}"
+        end
+    end
     %w(master production).each do |branch|
         namespace branch do
             desc "Test VSDoc generation"

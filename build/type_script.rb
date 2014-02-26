@@ -28,7 +28,6 @@ module CodeGen::TypeScript
         'docs/api/framework/droptarget.md',
         'docs/api/framework/droptargetarea.md',
         'docs/api/mobile/application.md',
-        'docs/api/dataviz/diagram.md',
         'docs/api/web/ui.md'
     ]
 
