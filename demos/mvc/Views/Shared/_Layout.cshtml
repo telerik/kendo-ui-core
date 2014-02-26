@@ -117,7 +117,7 @@
     var ignored = Request.Path.IndexOf("overview") > -1 || Request.Path.IndexOf("dashboard") > -1;
 }
         <div class='centerWrap floatWrap@(ignored ? " widgetOverview" : "")' id="mainWrap">
-            <div id="themeWrap" style="@(ignored ? "display:none" : "")">
+            <div id="themeWrap" style="@(ignored && ViewBag.Suite != "mobile" ? "display:none" : "")">
                 <span id="themeChooser"></span>
                 <a href="http://docs.telerik.com/kendo-ui/api/@ViewBag.Documentation" class="get-kendoui" style="display:@(ignored || string.IsNullOrEmpty(ViewBag.Documentation) ? "none" : "inline-block")">Documentation</a>
             </div>

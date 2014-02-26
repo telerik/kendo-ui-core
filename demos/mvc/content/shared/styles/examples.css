@@ -1223,12 +1223,28 @@ p#copy
     margin-bottom:45px;
 }
 
+.mobile + .widgetOverview #exampleTitle
+{
+    position: absolute;
+    top: 23px;
+}
+
+.mobile + .widgetOverview #exampleWrap
+{
+    margin-top: 45px;
+}
+
 #themeWrap
 {
     line-height: 23px;
     float: right;
     margin-right: 200px;
     margin-top: -25px;
+}
+
+.mobile + .widgetOverview #themeWrap
+{
+    margin-right: 7px;
 }
 
 #themeWrap .get-kendoui
