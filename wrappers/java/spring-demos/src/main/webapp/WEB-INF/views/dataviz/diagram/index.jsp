@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:url value="/dataviz/diagram/index/read" var="readUrl" />
+<c:url value="/resources/dataviz/diagram/people" var="imageRootUrl" />
 
 <demo:header />
 
@@ -25,25 +26,25 @@ function visualTemplate(options) {
         content: {
             color: "#ffffff"
         },
-        background: dataItem.background,
+        background: dataItem.colorScheme,
     }));
 
     g.append(new dataviz.diagram.TextBlock({
-        text: dataItem.name + " " + dataItem.lastName,
+        text: dataItem.firstName + " " + dataItem.lastName,
         x: 85,
         y: 20,
         color: "#ffffff"
     }));
 
     g.append(new dataviz.diagram.TextBlock({
-        text: dataItem.position,
+        text: dataItem.title,
         x: 85,
         y: 40,
         color: "#ffffff"
     }));
 
     g.append(new dataviz.diagram.Image({
-        source: dataItem.image,
+        source: "${imageRootUrl}/" + dataItem.image,
         x: 3,
         y: 3,
         width: 68,

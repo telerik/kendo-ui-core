@@ -1,38 +1,32 @@
 package com.kendoui.spring.models;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrgChartItem {
-    private int employeeId;
     private String firstName;
     private String lastName;
+    private String image;
     private String title;
-    private String city;
-    private String address;
-    private String country;
-    private Date birthDate;
-    private String homePhone;
+    private String colorScheme;
+    private List<OrgChartItem> items = new ArrayList<OrgChartItem>();
 
-    @Id
-    @Column(name="EmployeeID")
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public OrgChartItem(String firstName, String lastName, String image, String title, String colorScheme) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setImage(image);
+        setTitle(title);
+        setColorScheme(colorScheme);
     }
     
-    @Column(name="FirstName")
+    public List<OrgChartItem> getItems() {
+        return items;
+    }
+    
+    public void setItems(List<OrgChartItem> items) {
+        this.items = items;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
@@ -41,7 +35,6 @@ public class OrgChartItem {
         this.firstName = firstName;
     }
 
-    @Column(name="LastName")
     public String getLastName() {
         return lastName;
     }
@@ -50,12 +43,6 @@ public class OrgChartItem {
         this.lastName = lastName;
     }
     
-    @Transient
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
-
-    @Column(name="Title")
     public String getTitle() {
         return title;
     }
@@ -64,48 +51,18 @@ public class OrgChartItem {
         this.title = title;
     }
 
-    @Column(name="City")
-    public String getCity() {
-        return city;
+    public String getImage() {
+        return image;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    @Column(name="Address")
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setImage(String image) {
+        this.image = image;
     }
     
-    @Column(name="Country")
-    public String getCountry() {
-        return country;
+    public String getColorScheme() {
+        return colorScheme;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-    
-    @Column(name="BirthDate")
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }  
-    
-    @Column(name="HomePhone")
-    public String getHomePhone() {
-        return homePhone;
-    }
-
-    public void setHomePhone(String homePhone) {
-        this.homePhone = homePhone;
-    }
-}
+    public void setColorScheme(String colorScheme) {
+        this.colorScheme = colorScheme;
+    }}
