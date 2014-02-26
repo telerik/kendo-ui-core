@@ -221,6 +221,28 @@
         dropdownlist.wrapper.focus().press(keys.DOWN).press(keys.ENTER);
     });
 
+    test("press enter should not raise error when last item is selected", 1, function() {
+        var dropdownlist = new kendo.ui.DropDownList(input, {
+            dataSource: [
+                { name: "Compact", value: 0 },
+                { name: "Details", value: 1 }
+            ],
+            dataTextField: "name",
+            dataValueField: "value"
+        });
+
+        dropdownlist.open();
+        dropdownlist.ul.find("li:last").click();
+
+        dropdownlist.wrapper
+                    .trigger({ type: "keypress", keyCode: keys.ENTER })
+                    .trigger({ type: "keypress", keyCode: keys.ENTER })
+                    .trigger({ type: "keypress", keyCode: keys.ENTER })
+                    .trigger({ type: "keypress", keyCode: keys.ENTER });
+
+        ok(true);
+    });
+
     test("selected item with enter should persist selected state", function() {
         var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
         dropdownlist.popup.options.animation = false;
