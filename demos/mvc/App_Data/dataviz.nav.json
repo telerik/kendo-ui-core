@@ -864,7 +864,7 @@
             "name": "Diagram",
             "beta": "true",
             "documentation": "dataviz/diagram",
-            "spriteCssClass": "chartIcon",
+            "spriteCssClass": "diagramIcon",
             "items": [{
                     "text": "Basic usage",
                     "url": "diagram/index.html",
