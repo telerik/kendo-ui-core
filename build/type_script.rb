@@ -559,6 +559,18 @@ namespace :type_script do
                 .include('docs/api/framework/*.md'),
     }
 
+    desc "Test TypeScript generation"
+    task :test do
+        SUITES.each do |suite, dependencies|
+            path = "dist/kendo.#{suite}.d.ts"
+
+            File.write(path, get_type_script(path, dependencies, suite == 'icenium'))
+
+            sh "node_modules/typescript/bin/tsc --noImplicitAny #{path}"
+        end
+
+    end
+
     %w(master production).each do |branch|
         namespace branch do
             desc "Test TypeScript generation"
