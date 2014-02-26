@@ -1,32 +1,73 @@
 :options:
     - :name: connections.connection
-      :type: kendo.diagram.Connection
+      :type: kendo.dataviz.diagram.Connection
       :description: DescriptionPH
 
     - :name: shapes.shape
-      :type: kendo.diagram.Shape
+      :type: kendo.dataviz.diagram.Shape
       :description: DescriptionPH
 
     - :name: layoutSettings
       :type: kendo.diagaram.Layout
       :description: Defines the diagram's Layout settings
 
-    - :name: shapes.connectors.connector
-      :type: kendo.diagram.Shape.Connector
+    - :name: connectionDefaults.points.point
+      :type: kendo.dataviz.diagram.Point
       :description: DescriptionPH
 
-    - :name: connectionDefaults.points.point
-      :type: kendo.diagram.Point
-      :description: DescriptionPH
+    - :name: connectionDefaults.stroke
+      :type: kendo.dataviz.diagram.Connection.Stroke
+      :description: Defines the stroke configuration.
+
+    - :name: connectionDefaults.hover
+      :type: kendo.dataviz.diagram.Connection.Hover
+      :description: Defines the hover configuration.
+
+    - :name: connectionDefaults.hover.stroke
+      :type: kendo.dataviz.diagram.Connection.Stroke
+      :description: Defines the hover stroke configuration.
 
     - :name: connections.points.point
-      :type: kendo.diagram.Point
+      :type: kendo.dataviz.diagram.Point
       :description: DescriptionPH
 
+    - :name: connections.stroke
+      :type: kendo.dataviz.diagram.Connection.Stroke
+      :description: Defines the stroke configuration.
+
+    - :name: connections.hover
+      :type: kendo.dataviz.diagram.Connection.Hover
+      :description: Defines the hover configuration.
+
+    - :name: connections.hover.stroke
+      :type: kendo.dataviz.diagram.Connection.Stroke
+      :description: Defines the hover stroke configuration.
+
     - :name: shapeDefaults.connectors.connector
-      :type: kendo.diagram.Shape.Connector
+      :type: kendo.dataviz.diagram.Shape.Connector
+      :description: DescriptionPH
+
+    - :name: shapeDefaults.stroke
+      :type: kendo.dataviz.diagram.Shape.Stroke
+      :description: Defines the stroke configuration.
+
+    - :name: shapeDefaults.hover
+      :type: kendo.dataviz.diagram.Shape.Hover
+      :description: Defines the hover configuration.
+
+    - :name: shapes.connectors.connector
+      :type: kendo.dataviz.diagram.Shape.Connector
+      :description: DescriptionPH
+
+    - :name: shapes.connectors.connector
+      :type: kendo.dataviz.diagram.Shape.Connector
       :description: DescriptionPH
 
     - :name: shapes.stroke
-      :type: kendo.diagram.Shape.Stroke
-      :description: DescriptionPH
+      :type: kendo.dataviz.diagram.Shape.Stroke
+      :description: Defines the stroke configuration.
+
+    - :name: shapes.hover
+      :type: kendo.dataviz.diagram.Shape.Hover
+      :description: Defines the hover configuration.
+
