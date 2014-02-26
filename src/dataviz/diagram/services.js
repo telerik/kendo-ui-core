@@ -17,7 +17,6 @@
             Circle = diagram.Circle,
             Path = diagram.Path,
             Ticker = diagram.Ticker,
-            PositionAdapter = diagram.PositionAdapter,
             deepExtend = kendo.deepExtend,
             Movable = kendo.ui.Movable;
         // Constants ==============================================================
@@ -60,6 +59,40 @@
                 item.diagram.select(item, {addToSelection: meta.ctrlKey});
             }
         }
+
+
+        var PositionAdapter = kendo.Class.extend({
+            init: function (layoutState) {
+                this.layoutState = layoutState;
+                this.diagram = layoutState.diagram;
+            },
+            initState: function () {
+                this.froms = [];
+                this.tos = [];
+                this.subjects = [];
+                function pusher(id, bounds) {
+                    var shape = this.diagram.getShapeById(id);
+                    if (shape) {
+                        this.subjects.push(shape);
+                        this.froms.push(shape.bounds().topLeft());
+                        this.tos.push(bounds.topLeft());
+                    }
+                }
+
+                this.layoutState.nodeMap.forEach(pusher, this);
+            },
+            update: function (tick) {
+                if (this.subjects.length <= 0) {
+                    return;
+                }
+                for (var i = 0; i < this.subjects.length; i++) {
+                    //todo: define a Lerp function instead
+                    this.subjects[i].position(
+                        new Point(this.froms[i].x + (this.tos[i].x - this.froms[i].x) * tick, this.froms[i].y + (this.tos[i].y - this.froms[i].y) * tick)
+                    );
+                }
+            }
+        });
 
         var LayoutUndoUnit = Class.extend({
             init: function (initialState, finalState, animate) {
