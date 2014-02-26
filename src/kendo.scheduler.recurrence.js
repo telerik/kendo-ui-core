@@ -2335,6 +2335,9 @@ var __meta__ = {
                 daily: {
                     interval: ""
                 },
+                hourly: {
+                    interval: ""
+                },
                 weekly: {
                     interval: ""
                 },
