@@ -184,6 +184,7 @@
     <Compile Include="Controllers\DataViz\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bullet_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bullet_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Diagram\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Funnel_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Funnel_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Funnel_Charts\Funnel_LabelsController.cs" />
@@ -594,6 +595,8 @@
     <Compile Include="Models\Chart\ChartDataRepository.Polar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Radar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Stock.cs" />
+    <Compile Include="Models\Chart\CorporateData.cs" />
+    <Compile Include="Models\Chart\DiagramDataRepository.cs" />
     <Compile Include="Models\Chart\SiteOmptimizationItem.cs" />
     <Compile Include="Models\Chart\DatePoint.cs" />
     <Compile Include="Models\Chart\ElectricityProduction.cs" />
@@ -753,6 +756,7 @@
     <Content Include="Areas\aspx\Views\dataviz\bullet_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bullet_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\dashboards\car_dashboard.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\diagram\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\donut_labels.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\donut_charts\local_data.aspx" />
@@ -1106,6 +1110,7 @@
     <Content Include="Areas\aspx\Views\web\window\index.aspx" />
     <Content Include="Areas\aspx\Views\web\window\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\window\rtl.aspx" />
+    <None Include="Areas\razor\Views\dataviz\diagram\index.cshtml" />
     <Content Include="Content\dataviz\dashboards\area-chart.png" />
     <Content Include="Content\dataviz\dashboards\car-dashboard.png" />
     <Content Include="Content\dataviz\dashboards\car.gif" />

@@ -689,6 +689,7 @@
     <Compile Include="UI\DataSource\Fluent\SignalRDataSourceTransportBuilderBase.cs" />
     <Compile Include="UI\DataSource\Fluent\SignalRCrudOperationsBuilderBase.cs" />
     <Compile Include="UI\DataSource\TransportSignalR.cs" />
+    <Compile Include="UI\Diagram\Html\DiagramHtmlBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxRulesBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxEventBuilder.cs" />
@@ -1897,5 +1898,49 @@
   <ItemGroup>
     <Compile Include="UI\Map\Settings\MapLayerDefaultsMarkerSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDefaultsMarkerSettingsBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Diagram\Diagram.cs" />
+    <Compile Include="UI\Diagram\DiagramType.cs" />
+    <Compile Include="UI\Diagram\DiagramSubtype.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionDefaultsSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionDefaultsHoverSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsHoverSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionDefaultsHoverStrokeSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsHoverStrokeSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionDefaultsStrokeSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsStrokeSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionFactory.cs" />
+    <Compile Include="UI\Diagram\DiagramConnection.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionHoverSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionHoverSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionHoverStrokeSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionHoverStrokeSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramConnectionStrokeSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramConnectionStrokeSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramLayoutSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramLayoutSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramLayoutGridSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramLayoutGridSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramShapeDefaultsSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramShapeDefaultsHoverSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsHoverSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramShapeDefaultsRotationSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsRotationSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramShapeDefaultsStrokeSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsStrokeSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeFactory.cs" />
+    <Compile Include="UI\Diagram\DiagramShape.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramShapeHoverSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeHoverSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramShapeRotationSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeRotationSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramShapeStrokeSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeStrokeSettingsBuilder.cs" />
   </ItemGroup>
 </Project>

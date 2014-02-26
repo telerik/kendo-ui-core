@@ -1247,18 +1247,18 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> DataVizComponents 
         /// <summary>
-        /// Creates a <see cref="Map"/>
+        /// Creates a <see cref="Diagram"/>
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Map()
-        ///             .Name("Map")
+        ///  &lt;%= Html.Kendo().Diagram()
+        ///             .Name("Diagram")
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual MapBuilder Map()
+        public virtual DiagramBuilder Diagram()
         {
-            return new MapBuilder(new Map(ViewContext, Initializer, UrlGenerator));
+            return new DiagramBuilder(new Diagram(ViewContext, Initializer, UrlGenerator));
         }
         //<< DataVizComponents
 
