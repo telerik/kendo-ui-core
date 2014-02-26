@@ -2346,6 +2346,10 @@
                         items[i].load();
                     }
                 }
+
+                if (that.options.layout) {
+                    that.layout(that.options.layout);
+                }
             },
             _mouseDown: function (e) {
                 if (this.pauseMouseHandlers) {
