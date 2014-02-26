@@ -23,6 +23,7 @@
             DefaultDataItem = CreateDefaultItem;
 
             Resize = true;
+            Move = true;
         }
 
         public string Template { get; set; }
