@@ -119,7 +119,6 @@
 
     test("Enter in IE is allowed", 0, function() {
         var textbox = new NumericTextBox(input);
-        console.log("start");
         input.pressKey(kendo.keys.ENTER, {
             preventDefault: function() {
                 ok(false);
@@ -169,6 +168,24 @@
         input.pressKey(".", {
             preventDefault: function() {
                 ok(true);
+            }
+        });
+
+        kendo.culture("en-US");
+    });
+
+    test("Convert numpad decimal point to bg-BG decimal point (empty input)", 3, function() {
+        var textbox = new NumericTextBox(input);
+
+        kendo.culture("bg-BG");
+
+        input.focus();
+        input.pressKey(110, "keydown");
+        input.pressKey(".", {
+            preventDefault: function() {
+                ok(true);
+                equal(input.val(), ",");
+                equal(kendo.caret(input)[0], 1);
             }
         });
 
