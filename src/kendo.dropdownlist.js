@@ -492,6 +492,7 @@ var __meta__ = {
             }
 
             if (startIndex > 0) {
+                console.log(startIndex);
                 index = 0;
                 for (; index <= startIndex; index++) {
                     text = that._text(data[index]);
@@ -505,7 +506,7 @@ var __meta__ = {
         },
 
         _keypress: function(e) {
-            if (e.charCode === 0) {
+            if (e.which === 0 || e.keyCode === kendo.keys.ENTER) {
                 return;
             }
 
