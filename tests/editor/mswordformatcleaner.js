@@ -20,8 +20,8 @@ function clean(html) {
         .replace(/[\r\n]+/g, '')
         // CSS properties
         .replace(/(;|:)\s*/g, "$1")
-        .replace(/;"/g, '"') //'
-        .replace(/(colspan=)("|')(.*?)("|')/gi, "$1$3");
+        .replace(/;"/g, "\"")
+        .replace(/(colspan=)("|')(.*?)('|")/gi, "$1$3");
 }
 
 test("cleaning meta tags", function() {
@@ -352,6 +352,10 @@ test("do not replace line feeds with space after <br/>", function() {
 
 test("do not replace line feeds with space after <br />", function() {
     equal(clean('<p class="MsoNormal">foo<br />\nbar</p>'), '<p>foo<br>bar</p>');
+});
+
+test("does not remove empty Word paragraphs", function() {
+    equal(clean('<p class="MsoNormal"><o:p>&nbsp;</o:p></p>'), '<p>&nbsp;</p>');
 });
 
 }());
