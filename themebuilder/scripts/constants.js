@@ -109,6 +109,7 @@
 
             "@button-background-color":         constant(BGCOLOR, ".k-button"),
             "@button-text-color":               constant(COLOR, ".k-button"),
+            "@button-hover-text-color":         constant(COLOR, ".k-button:hover"),
 
             "@group-background-color":          constant(BGCOLOR, ".k-group"),
             "@group-border-color":              constant(BORDERCOLOR, ".k-group"),
@@ -212,6 +213,7 @@
             "@calendar-header-hover-background":        constant("background-color", ".k-calendar .k-nav-fast.k-state-hover"),
             "@calendar-group-background-color":         constant(BGCOLOR, ".k-calendar th"),
             "@button-border-color":                     constant(BORDERCOLOR, ".k-button"),
+            "@button-hover-border-color":               constant(BORDERCOLOR, ".k-button:hover"),
             "@button-focused-border-color":             constant(BORDERCOLOR, ".k-button:focus, .k-button.k-state-focused"),
             "@menu-border-color":                       constant(BORDERCOLOR, ".k-menu .k-item"),
             "@filter-menu-content-background":          constant(BGCOLOR, ".k-secondary.k-filter-menu"),
@@ -312,7 +314,9 @@
             "Buttons": {
                 "@button-background-color":       "Background",
                 "@button-text-color":             "Text color",
+                "@button-hover-text-color":       "Hover text color",
                 "@button-border-color":           "Border color",
+                "@button-hover-border-color":     "Hover border color",
                 "@button-focused-border-color":   "Focused border color"
             },
             "Groups and content areas": {
