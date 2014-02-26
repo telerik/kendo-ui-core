@@ -25,6 +25,42 @@
         }
     });
 
+    function caret(element, position) {
+        var range,
+            isPosition = position !== undefined;
+
+        if (element.selectionStart !== undefined) {
+            if (isPosition) {
+                element.focus();
+                element.setSelectionRange(position, position);
+            } else {
+                position = [element.selectionStart, element.selectionEnd];
+            }
+        } else if (document.selection) {
+            if ($(element).is(":visible")) {
+                element.focus();
+            }
+            range = document.selection.createRange();
+            if (isPosition) {
+                range.move("character", position);
+                range.select();
+            } else {
+                var rangeElement = element.createTextRange(),
+                    rangeDuplicated = rangeElement.duplicate(),
+                    selectionStart, selectionEnd;
+
+                    rangeElement.moveToBookmark(range.getBookmark());
+                    rangeDuplicated.setEndPoint('EndToStart', rangeElement);
+                    selectionStart = rangeDuplicated.text.length;
+                    selectionEnd = selectionStart + rangeElement.text.length;
+
+                position = [selectionStart, selectionEnd];
+            }
+        }
+
+        return position;
+    }
+
     test("pressing DOWN arrow calls _step()", function() {
         var textbox = new NumericTextBox(input);
 
@@ -119,7 +155,6 @@
 
     test("Enter in IE is allowed", 0, function() {
         var textbox = new NumericTextBox(input);
-        console.log("start");
         input.pressKey(kendo.keys.ENTER, {
             preventDefault: function() {
                 ok(false);
@@ -169,6 +204,24 @@
         input.pressKey(".", {
             preventDefault: function() {
                 ok(true);
+            }
+        });
+
+        kendo.culture("en-US");
+    });
+
+    test("Convert numpad decimal point to bg-BG decimal point (empty input)", 3, function() {
+        var textbox = new NumericTextBox(input);
+
+        kendo.culture("bg-BG");
+
+        input.focus();
+        input.pressKey(110, "keydown");
+        input.pressKey(".", {
+            preventDefault: function() {
+                ok(true);
+                equal(input.val(), ",");
+                equal(caret(input[0])[0], 1);
             }
         });
 
