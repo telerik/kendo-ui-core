@@ -18,9 +18,9 @@ $errorTemplate = new \Kendo\UI\NotificationTemplate();
 $errorTemplate->type('error');
 $errorTemplate->templateId('errorTemplate');
 
-$upload-success = new \Kendo\UI\NotificationTemplate();
-$upload-success->type('upload-success');
-$upload-success->templateId('successTemplate');
+$uploadSuccess = new \Kendo\UI\NotificationTemplate();
+$uploadSuccess->type('upload-success');
+$uploadSuccess->templateId('successTemplate');
 
 $notification = new \Kendo\UI\Notification('notification');
 $notification->position($position);
@@ -28,7 +28,7 @@ $notification->autoHideAfter(0);
 $notification->stacking("down");
 $notification->addTemplate($infoTemplate);
 $notification->addTemplate($errorTemplate);
-$notification->addTemplate($success-template);
+$notification->addTemplate($uploadSuccess);
 
 echo $notification->render();
 
