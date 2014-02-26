@@ -419,6 +419,26 @@ test("Empty comboBox does not raise exception on navigate", 1, function() {
     ok(true);
 });
 
+test("Empty combobox does not select first focused item on ENTER", 1, function() {
+    combobox.destroy();
+    combobox = new ComboBox(input, {
+        dataSource: ["Item1", "Item2"],
+    });
+
+    combobox.input.focus();
+
+    combobox.open();
+    combobox.input.val("");
+    combobox.close();
+
+    combobox.input.trigger({
+        type: "keydown",
+        keyCode: kendo.keys.ENTER
+    });
+
+    equal(combobox.value(), "");
+});
+
 asyncTest("clearing custom value does not re-enter the old value", 1, function() {
     combobox.options.delay = 0;
     combobox.options.filter = "startswith";
