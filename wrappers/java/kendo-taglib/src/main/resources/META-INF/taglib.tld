@@ -10772,6 +10772,36 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
+        <attribute>
+            <description>Fired when an item is added or removed to/from the diagram.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the bounds of an item are changed.</description>
+            <name>itemBoundsChange</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when an item is rotated.</description>
+            <name>itemRotate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user pans the diagram.</description>
+            <name>pan</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user selects one or more items.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user changes the diagram zoom level.</description>
+            <name>zoom</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
@@ -11169,6 +11199,42 @@ A diagram can have in general disconnected pieces, known as components, which ca
 
 
 
+    <tag>
+        <description>Fired when an item is added or removed to/from the diagram.</description>
+        <name>diagram-change</name>
+        <tag-class>com.kendoui.taglib.diagram.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the bounds of an item are changed.</description>
+        <name>diagram-itemBoundsChange</name>
+        <tag-class>com.kendoui.taglib.diagram.ItemBoundsChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when an item is rotated.</description>
+        <name>diagram-itemRotate</name>
+        <tag-class>com.kendoui.taglib.diagram.ItemRotateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user pans the diagram.</description>
+        <name>diagram-pan</name>
+        <tag-class>com.kendoui.taglib.diagram.PanFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user selects one or more items.</description>
+        <name>diagram-select</name>
+        <tag-class>com.kendoui.taglib.diagram.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user changes the diagram zoom level.</description>
+        <name>diagram-zoom</name>
+        <tag-class>com.kendoui.taglib.diagram.ZoomFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>DropDownList</description>
         <name>dropDownList</name>

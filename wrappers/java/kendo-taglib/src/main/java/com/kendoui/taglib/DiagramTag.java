@@ -3,9 +3,8 @@ package com.kendoui.taglib;
 
 import javax.servlet.jsp.JspException;
 
-import com.kendoui.taglib.diagram.ConnectionsTag;
-import com.kendoui.taglib.diagram.ShapesTag;
 import com.kendoui.taglib.json.Function;
+import com.kendoui.taglib.diagram.*;
 
 @SuppressWarnings("serial")
 public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWidget/* interfaces */ {
@@ -54,6 +53,30 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setShapeDefaults(com.kendoui.taglib.diagram.ShapeDefaultsTag value) {
         setProperty("shapeDefaults", value);
+    }
+
+    public void setChange(ChangeFunctionTag value) {
+        setEvent("change", value.getBody());
+    }
+
+    public void setItemBoundsChange(ItemBoundsChangeFunctionTag value) {
+        setEvent("itemBoundsChange", value.getBody());
+    }
+
+    public void setItemRotate(ItemRotateFunctionTag value) {
+        setEvent("itemRotate", value.getBody());
+    }
+
+    public void setPan(PanFunctionTag value) {
+        setEvent("pan", value.getBody());
+    }
+
+    public void setSelect(SelectFunctionTag value) {
+        setEvent("select", value.getBody());
+    }
+
+    public void setZoom(ZoomFunctionTag value) {
+        setEvent("zoom", value.getBody());
     }
 
     public boolean getAutoBind() {
@@ -134,6 +157,78 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setZoomRate(float value) {
         setProperty("zoomRate", value);
+    }
+
+    public String getChange() {
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
+    }
+
+    public String getItemBoundsChange() {
+        Function property = ((Function)getProperty("itemBoundsChange"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setItemBoundsChange(String value) {
+        setProperty("itemBoundsChange", new Function(value));
+    }
+
+    public String getItemRotate() {
+        Function property = ((Function)getProperty("itemRotate"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setItemRotate(String value) {
+        setProperty("itemRotate", new Function(value));
+    }
+
+    public String getPan() {
+        Function property = ((Function)getProperty("pan"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setPan(String value) {
+        setProperty("pan", new Function(value));
+    }
+
+    public String getSelect() {
+        Function property = ((Function)getProperty("select"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setSelect(String value) {
+        setProperty("select", new Function(value));
+    }
+
+    public String getZoom() {
+        Function property = ((Function)getProperty("zoom"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setZoom(String value) {
+        setProperty("zoom", new Function(value));
     }
 
 //<< Attributes

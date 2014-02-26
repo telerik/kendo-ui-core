@@ -152,6 +152,90 @@ data source is fired. By default the widget will bind to the data source specifi
         return $this->setProperty('shapes', $value);
     }
 
+    /**
+    * Sets the change event of the Diagram.
+    * Fired when an item is added or removed to/from the diagram.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function change($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('change', $value);
+    }
+
+    /**
+    * Sets the itemBoundsChange event of the Diagram.
+    * Fired when the bounds of an item are changed.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function itemBoundsChange($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('itemBoundsChange', $value);
+    }
+
+    /**
+    * Sets the itemRotate event of the Diagram.
+    * Fired when an item is rotated.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function itemRotate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('itemRotate', $value);
+    }
+
+    /**
+    * Sets the pan event of the Diagram.
+    * Fired when the user pans the diagram.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function pan($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('pan', $value);
+    }
+
+    /**
+    * Sets the select event of the Diagram.
+    * Fired when the user selects one or more items.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function select($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('select', $value);
+    }
+
+    /**
+    * Sets the zoom event of the Diagram.
+    * Fired when the user changes the diagram zoom level.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function zoom($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('zoom', $value);
+    }
+
 
 //<< Properties
 }
