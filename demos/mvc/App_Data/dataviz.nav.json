@@ -861,19 +861,21 @@
     "diagramming": [
         {
             "text": "Diagram",
+            "name": "Diagram",
             "beta": "true",
             "documentation": "dataviz/diagram",
             "spriteCssClass": "chartIcon",
             "items": [{
-                    "text": "index",
+                    "text": "Basic usage",
                     "url": "diagram/index.html",
-                    "title": "Kendo UI Diagram Demo"
+                    "title": "Example of Kendo UI Diagram with a simple layout",
+	                "meta": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Diagram widget can be implemented for hierarchical diagrams."
                 }, {
-                    "text": "layout",
+                    "text": "Built-in Layouts",
                     "url": "diagram/layout.html",
-                    "title": "Kendi UI Diagram Layout"
-            }],
-            "name": "Diagram"
+                    "title": "Example of Kendo UI Diagram with different layouts",
+	                "meta": "This sample demonstrates the built-in layouts which are specific to Kendo UI Diagram component."
+            }]
         }
     ],
     "Sample Dashboards": [
