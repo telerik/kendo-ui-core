@@ -246,22 +246,24 @@ var __meta__ = {
             var start = position[0];
             var end = position[1];
 
-            if (start !== end) {
-                that._mask(start, end, "");
-                start = caret(element)[0];
-            }
+            var unmasked = that._unmask(element.value.substring(end), end);
 
             that._pasting = true;
 
             setTimeout(function() {
                 var value = element.value;
-                var end = caret(element)[0];
-                var pasted = value.substring(start, end);
+                var pasted = value.substring(start, caret(element)[0]);
 
-                element.value = that._old = value.substring(0, start) + value.substring(end);
-                caret(element, start);
+                element.value = that._old = value.substring(0, start) + that._emptyMask.substring(start);
 
                 that._mask(start, start, pasted);
+
+                start = caret(element)[0];
+
+                that._mask(start, start, unmasked);
+
+                caret(element, start);
+
                 that._pasting = false;
             });
         },

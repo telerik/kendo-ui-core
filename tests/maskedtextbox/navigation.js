@@ -357,7 +357,7 @@
         });
     });
 
-    test("MaskedTextBox umasks correctly mu2tiple selection on paste", 1, function() {
+    asyncTest("MaskedTextBox unmasks correctly multiple selection on paste", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000"
         });
@@ -367,7 +367,10 @@
         caret(input[0], 3, 8);
 
         input.trigger("paste");
-        equal(input.val(), "(125) ___");
+        setTimeout(function() {
+            start();
+            equal(input.val(), "(125) ___");
+        });
     });
 
     asyncTest("MaskedTextBox inserts value correctly after unmasking multiple selection", 2, function() {
@@ -375,12 +378,16 @@
             mask: "(000) 000"
         });
 
-        input.val("").focus(); input.val("(123) 555");
+        input.val("").focus();
+        input.val("(123) 555");
         caret(input[0], 5, 8);
 
+        console.log("start");
+
         input.trigger("paste");
-        input.val("(123) 775__");
-        caret(input[0], 8);
+        input.val("(123)77 555");
+        console.log("last " + input.val());
+        caret(input[0], 7);
 
         setTimeout(function() {
             start();
