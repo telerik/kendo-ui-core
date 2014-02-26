@@ -2,9 +2,11 @@
     - :name: connections.connection
       :type: kendo.diagram.Connection
       :description: DescriptionPH
+
     - :name: shapes.shape
       :type: kendo.diagram.Shape
       :description: DescriptionPH
+
     - :name: layoutSettings
       :type: kendo.diagaram.Layout
       :description: Defines the diagram's Layout settings
@@ -13,6 +15,18 @@
       :type: kendo.diagram.Shape.Connector
       :description: DescriptionPH
 
-    - :name: connectionsDefaults.points.point
+    - :name: connectionDefaults.points.point
       :type: kendo.diagram.Point
+      :description: DescriptionPH
+
+    - :name: connections.points.point
+      :type: kendo.diagram.Point
+      :description: DescriptionPH
+
+    - :name: shapeDefaults.connectors.connector
+      :type: kendo.diagram.Shape.Connector
+      :description: DescriptionPH
+
+    - :name: shapes.stroke
+      :type: kendo.diagram.Shape.Stroke
       :description: DescriptionPH

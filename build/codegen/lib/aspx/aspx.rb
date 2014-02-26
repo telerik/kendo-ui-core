@@ -556,23 +556,44 @@ namespace <%= csharp_namespace %>
                     @content = metadata[:content]
 
                     metadata[:options].each do |option|
-
                         parent = find_parent_in_options(option[:name])
-                        if !parent.nil? && parent.instance_of?(ArrayItem)
-                            parent.type = option.type
+                        current_option = parent.options.find { |o| o.name == option[:name] } unless parent.nil?
+                        if !current_option.nil? && current_option.instance_of?(ArrayItem)
+                            current_option.type = option[:type]
                         else
                             option[:remove_existing] = true
-
                             add_option(option)
-                        end
 
+                            transfer_children_recursively(current_option, option[:name]) if current_option.is_a?(CompositeOption)
+                        end
+                    end
+                end
+
+                def transfer_children_recursively(parent, name)
+                    child_options = parent.options
+
+                    child_options.each do |child|
+                        settings = {
+                            :name => "#{name}.#{child.name}",
+                            :type => child.type,
+                            :description => child.description
+                        }
+                        #settings[:owner] = owner unless owner.nil?
+                        settings[:recursive] = child.recursive if child.respond_to?('recursive')
+                        settings[:default] = child.default if option.respond_to?('default')
+                        settings[:values] = child.values if option.respond_to?('values')
+                        settings[:content] = child.content if child.respond_to?('content')
+
+                        add_option(settings)
+
+                        transfer_children_recursively(child, name) if child.options.length > 0
                     end
                 end
 
                 def find_parent_in_options(option_name)
                     parent = self
                     names = option_name.split('.')
-                    names.slice!(0, names.count - 1) if names.count > 0
+                    names = names.slice(0, names.count - 1) if names.count > 0
 
                     names.each do |name|
                         parent = parent.options.find { |o| o.name == name }

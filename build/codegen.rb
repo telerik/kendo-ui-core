@@ -78,7 +78,7 @@ namespace :generate do
 
         desc 'Temp task that cleans the ASPX\'s output  folder!'
         task :clean do
-            sh 'rm -rd wrappers/aspx/src/*'
+            sh 'rm -rdf wrappers/aspx/src/*'
         end
 
     end
