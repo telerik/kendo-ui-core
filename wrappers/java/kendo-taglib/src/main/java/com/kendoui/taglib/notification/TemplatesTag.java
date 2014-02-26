@@ -3,11 +3,7 @@ package com.kendoui.taglib.notification;
 
 
 import com.kendoui.taglib.BaseTag;
-
-
-
 import com.kendoui.taglib.NotificationTag;
-
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,6 +19,10 @@ public class TemplatesTag extends BaseTag /* interfaces */ /* interfaces */ {
 //>> doEndTag
 //<< doEndTag
 
+        NotificationTag parent = (NotificationTag)findParentWithClass(NotificationTag.class);
+
+        parent.setTemplates(this);
+        
         return super.doEndTag();
     }
 
