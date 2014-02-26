@@ -108,6 +108,7 @@
             "@header-text-color":               constant(COLOR, ".k-header"),
 
             "@button-background-color":         constant(BGCOLOR, ".k-button"),
+            "@button-hover-background-color":   constant(BGCOLOR, ".k-button:hover"),
             "@button-text-color":               constant(COLOR, ".k-button"),
             "@button-hover-text-color":         constant(COLOR, ".k-button:hover"),
 
@@ -313,6 +314,7 @@
             },
             "Buttons": {
                 "@button-background-color":       "Background",
+                "@button-hover-background-color": "Hover background",
                 "@button-text-color":             "Text color",
                 "@button-hover-text-color":       "Hover text color",
                 "@button-border-color":           "Border color",
