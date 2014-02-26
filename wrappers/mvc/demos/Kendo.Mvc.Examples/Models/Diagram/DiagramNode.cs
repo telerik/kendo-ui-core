@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+namespace Kendo.Mvc.Examples.Models
+{
+    public class DiagramNode
+    {
+        public DiagramNode()
+        {
+        }
+
+        public DiagramNode(string name, List<DiagramNode> items)
+        {
+            Name = name;
+            Items = items;
+        }
+
+        public string Name { get; set; }
+
+        public List<DiagramNode> Items { get; set; }
+    }
+}
