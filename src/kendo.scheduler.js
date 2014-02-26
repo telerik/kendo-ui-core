@@ -28,6 +28,7 @@ kendo_module({
     } ]
 });
 
+/*jshint eqnull: true */
 (function($, undefined) {
     var kendo = window.kendo,
         date = kendo.date,
@@ -2960,7 +2961,7 @@ kendo_module({
                     dataTextField: resource.dataTextField || "text",
                     dataValueField: resource.dataValueField || "value",
                     dataColorField: resource.dataColorField || "color",
-                    valuePrimitive: resource.valuePrimitive !== null ? resource.valuePrimitive : true,
+                    valuePrimitive: resource.valuePrimitive != null ? resource.valuePrimitive : true,
                     multiple: resource.multiple || false,
                     dataSource: kendo.data.DataSource.create(dataSource)
                 });
@@ -3016,7 +3017,7 @@ kendo_module({
         },
 
         date: function(value) {
-            if (value !== null && getDate(value) >= getDate(this.options.min) && getDate(value) <= getDate(this.options.max)) {
+            if (value != null && getDate(value) >= getDate(this.options.min) && getDate(value) <= getDate(this.options.max)) {
                 this._model.set("selectedDate", value);
             }
             return getDate(this._model.get("selectedDate"));
