@@ -7,18 +7,23 @@ import com.kendoui.taglib.BaseTag;
 
 
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.List;
+
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ConnectionsDefaultsPointsTag extends BaseTag /* interfaces */ /* interfaces */ {
+public class ConnectionDefaultsHoverStrokeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
+
+
+        ConnectionDefaultsHoverTag parent = (ConnectionDefaultsHoverTag)findParentWithClass(ConnectionDefaultsHoverTag.class);
+
+
+        parent.setStroke(this);
+
 //<< doEndTag
 
         return super.doEndTag();
@@ -27,9 +32,6 @@ public class ConnectionsDefaultsPointsTag extends BaseTag /* interfaces */ /* in
     @Override
     public void initialize() {
 //>> initialize
-
-        points = new ArrayList<Map<String, Object>>();
-
 //<< initialize
 
         super.initialize();
@@ -45,18 +47,16 @@ public class ConnectionsDefaultsPointsTag extends BaseTag /* interfaces */ /* in
 
 //>> Attributes
 
-    private List<Map<String, Object>> points;
-
-    public List<Map<String, Object>> points() {
-        return points;
-    }
-
     public static String tagName() {
-        return "diagram-connectionsDefaults-points";
+        return "diagram-connectionDefaults-hover-stroke";
     }
 
-    public void addPoint(ConnectionsDefaultsPointTag value) {
-        points.add(value.properties());
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
+    }
+
+    public void setColor(java.lang.String value) {
+        setProperty("color", value);
     }
 
 //<< Attributes

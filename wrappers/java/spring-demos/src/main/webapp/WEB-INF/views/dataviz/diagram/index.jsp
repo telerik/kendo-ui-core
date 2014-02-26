@@ -66,9 +66,9 @@ function visualTemplate(options) {
      </kendo:dataSource>
      <kendo:diagram-layout type="layered" />
      <kendo:diagram-shapeDefaults editable="false" rotatable="false" resizable="false" />
-     <kendo:diagram-connectionsDefaults>
-     	<kendo:diagram-connectionsDefaults-stroke color="#979797" width="2" />
-	 </kendo:diagram-connectionsDefaults>
+     <kendo:diagram-connectionDefaults>
+     	<kendo:diagram-connectionDefaults-stroke color="#979797" width="2" />
+	 </kendo:diagram-connectionDefaults>
  </kendo:diagram>
 
 <script type="text/javascript">

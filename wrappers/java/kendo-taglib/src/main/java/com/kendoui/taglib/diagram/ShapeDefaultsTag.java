@@ -79,14 +79,6 @@ public class ShapeDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces *
         setProperty("background", value);
     }
 
-    public java.lang.Object getBounds() {
-        return (java.lang.Object)getProperty("bounds");
-    }
-
-    public void setBounds(java.lang.Object value) {
-        setProperty("bounds", value);
-    }
-
     public java.lang.String getContent() {
         return (java.lang.String)getProperty("content");
     }

@@ -10725,12 +10725,6 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The copy configuration.</description>
-            <name>copy</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
             <description>See the dataSource field.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10767,12 +10761,6 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The tooltip configuration.</description>
-            <name>tooltip</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
             <description>A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual: Should redirect here to a more comprehensive overview of how to use the primitives.</description>
             <name>visualTemplate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10789,8 +10777,8 @@ data source is fired. By default the widget will bind to the data source specifi
 
     <tag>
         <description>Defines the connections configuration.</description>
-        <name>diagram-connectionsDefaults</name>
-        <tag-class>com.kendoui.taglib.diagram.ConnectionsDefaultsTag</tag-class>
+        <name>diagram-connectionDefaults</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
@@ -10810,8 +10798,8 @@ data source is fired. By default the widget will bind to the data source specifi
 
     <tag>
         <description>Defines the hover configuration.</description>
-        <name>diagram-connectionsDefaults-hover</name>
-        <tag-class>com.kendoui.taglib.diagram.ConnectionsDefaultsHoverTag</tag-class>
+        <name>diagram-connectionDefaults-hover</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsHoverTag</tag-class>
         <body-content>JSP</body-content>
 
 
@@ -10819,8 +10807,8 @@ data source is fired. By default the widget will bind to the data source specifi
 
     <tag>
         <description>Defines the hover stroke configuration.</description>
-        <name>diagram-connectionsDefaults-hover-stroke</name>
-        <tag-class>com.kendoui.taglib.diagram.ConnectionsDefaultsHoverStrokeTag</tag-class>
+        <name>diagram-connectionDefaults-hover-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsHoverStrokeTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -10835,37 +10823,9 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
-        <description>Sets the intermediate points (in global coordinates) of the connection. It's important to note that currently these points cannot be manipulated in the interface.</description>
-        <name>diagram-connectionsDefaults-points</name>
-        <tag-class>com.kendoui.taglib.diagram.ConnectionsDefaultsPointsTag</tag-class>
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description>Sets the intermediate points (in global coordinates) of the connection. It's important to note that currently these points cannot be manipulated in the interface.</description>
-        <name>diagram-connectionsDefaults-point</name>
-        <tag-class>com.kendoui.taglib.diagram.ConnectionsDefaultsPointTag</tag-class>
-
-        <body-content>empty</body-content>
-        <attribute>
-            <description>Sets the X coordinate of the point.</description>
-            <name>x</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-        <attribute>
-            <description>Sets the Y coordinate of the point.</description>
-            <name>y</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-    </tag>
-
-
-    <tag>
         <description>Defines the stroke configuration.</description>
-        <name>diagram-connectionsDefaults-stroke</name>
-        <tag-class>com.kendoui.taglib.diagram.ConnectionsDefaultsStrokeTag</tag-class>
+        <name>diagram-connectionDefaults-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsStrokeTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -11045,12 +11005,6 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>all bounds should be merged</description>
-            <name>bounds</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
             <description>Sets the text content of the Shape.</description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11137,15 +11091,7 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <name>diagram-shapeDefaults-connector</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsConnectorTag</tag-class>
 
-        <body-content>JSP</body-content>
-    </tag>
-
-    <tag>
-        <description></description>
-        <name>diagram-shapeDefaults-connector-connector</name>
-        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsConnectorConnectorTag</tag-class>
         <body-content>empty</body-content>
-
         <attribute>
             <description></description>
             <name>description</name>
@@ -11158,9 +11104,7 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
-
     </tag>
-
 
 
     <tag>

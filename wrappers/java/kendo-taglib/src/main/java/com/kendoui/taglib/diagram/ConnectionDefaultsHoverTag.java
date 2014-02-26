@@ -12,15 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ConnectionsDefaultsPointTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ConnectionDefaultsHoverTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
-        ConnectionsDefaultsPointsTag parent = (ConnectionsDefaultsPointsTag)findParentWithClass(ConnectionsDefaultsPointsTag.class);
 
-        parent.addPoint(this);
+        ConnectionDefaultsTag parent = (ConnectionDefaultsTag)findParentWithClass(ConnectionDefaultsTag.class);
+
+
+        parent.setHover(this);
 
 //<< doEndTag
 
@@ -46,23 +48,11 @@ public class ConnectionsDefaultsPointTag extends  BaseTag  /* interfaces */ /* i
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-connectionsDefaults-point";
+        return "diagram-connectionDefaults-hover";
     }
 
-    public float getX() {
-        return (float)getProperty("x");
-    }
-
-    public void setX(float value) {
-        setProperty("x", value);
-    }
-
-    public float getY() {
-        return (float)getProperty("y");
-    }
-
-    public void setY(float value) {
-        setProperty("y", value);
+    public void setStroke(com.kendoui.taglib.diagram.ConnectionDefaultsHoverStrokeTag value) {
+        setProperty("stroke", value);
     }
 
 //<< Attributes

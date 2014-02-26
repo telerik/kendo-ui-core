@@ -49,8 +49,20 @@ public class ShapeDefaultsConnectorTag extends  BaseTag  /* interfaces */ /* int
         return "diagram-shapeDefaults-connector";
     }
 
-    public void setConnector(com.kendoui.taglib.diagram.ShapeDefaultsConnectorConnectorTag value) {
-        setProperty("connector", value);
+    public java.lang.String getDescription() {
+        return (java.lang.String)getProperty("description");
+    }
+
+    public void setDescription(java.lang.String value) {
+        setProperty("description", value);
+    }
+
+    public java.lang.String getPosition() {
+        return (java.lang.String)getProperty("position");
+    }
+
+    public void setPosition(java.lang.String value) {
+        setProperty("position", value);
     }
 
 //<< Attributes

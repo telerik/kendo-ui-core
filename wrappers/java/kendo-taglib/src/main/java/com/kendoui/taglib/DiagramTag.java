@@ -44,8 +44,8 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         return "diagram";
     }
 
-    public void setConnectionsDefaults(com.kendoui.taglib.diagram.ConnectionsDefaultsTag value) {
-        setProperty("connectionsDefaults", value);
+    public void setConnectionDefaults(com.kendoui.taglib.diagram.ConnectionDefaultsTag value) {
+        setProperty("connectionDefaults", value);
     }
 
     public void setLayout(com.kendoui.taglib.diagram.LayoutTag value) {
@@ -70,14 +70,6 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setConnections(java.lang.Object value) {
         setProperty("connections", value);
-    }
-
-    public java.lang.Object getCopy() {
-        return (java.lang.Object)getProperty("copy");
-    }
-
-    public void setCopy(java.lang.Object value) {
-        setProperty("copy", value);
     }
 
     public void setDataSource(DataSourceTag dataSource) {
@@ -122,14 +114,6 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setTemplate(java.lang.String value) {
         setProperty("template", value);
-    }
-
-    public java.lang.Object getTooltip() {
-        return (java.lang.Object)getProperty("tooltip");
-    }
-
-    public void setTooltip(java.lang.Object value) {
-        setProperty("tooltip", value);
     }
 
     public String getVisualTemplate() {
