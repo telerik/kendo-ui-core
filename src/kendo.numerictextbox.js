@@ -427,6 +427,8 @@ var __meta__ = {
             var that = this,
                 key = e.keyCode;
 
+            that._key = key;
+
             if (key == keys.DOWN) {
                 that._step(-1);
             } else if (key == keys.UP) {
@@ -441,28 +443,41 @@ var __meta__ = {
                 return;
             }
 
-            var element = this.element;
-            var character = String.fromCharCode(e.which);
-            var selection = caret(element[0]);
+            var that = this;
+            var min = that.options.min;
+            var element = that.element;
+            var selection = caret(element);
             var selectionStart = selection[0];
             var selectionEnd = selection[1];
-            var min = this.options.min;
-
+            var character = String.fromCharCode(e.which);
+            var numberFormat = that._format(that.options.format);
+            var isNumPadDecimal = that._key === keys.NUMPAD_DOT;
             var value = element.val();
+            var isValid;
+
+            if (isNumPadDecimal) {
+                character = numberFormat[POINT];
+            }
 
             value = value.substring(0, selectionStart) + character + value.substring(selectionEnd);
+            isValid = that._numericRegex(numberFormat).test(value);
 
-            if ((min !== null && min >= 0 && value.charAt(0) === "-") || !this._numericRegex().test(value)) {
+            if (isValid && isNumPadDecimal) {
+                element.val(value);
+                caret(element, selectionStart + character.length);
+
+                e.preventDefault();
+            } else if ((min !== null && min >= 0 && value.charAt(0) === "-") || !isValid) {
                 e.preventDefault();
             }
+
+            that._key = 0;
         },
 
-        _numericRegex: function() {
+        _numericRegex: function(numberFormat) {
             var that = this;
-            var options = that.options;
-            var numberFormat = that._format(options.format);
             var separator = numberFormat[POINT];
-            var precision = options.decimals;
+            var precision = that.options.decimals;
 
             if (separator === POINT) {
                 separator = "\\" + separator;
