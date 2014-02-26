@@ -419,7 +419,7 @@ namespace :demos do
         'dist/demos/production/src/aspnetmvc/controllers/mobile',
         'dist/demos/production/src/aspnetmvc/views/aspx',
         'dist/demos/production/src/aspnetmvc/views/razor',
-        patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT, 'http://try.kendoui.com/')
+        patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT, 'http://trykendoui.telerik.com/')
     ]
 
     zip 'dist/demos/production.zip' => :production_site
