@@ -3325,32 +3325,6 @@
                 this.calcDownData(iconsidered);
             }
 
-            // sort nodes within this layer according to the barycenters
-            Array.prototype.sort.call(this, considered, function (n1, n2) {
-                var n1BaryCenter = this.calcBaryCenter(n1),
-                    n2BaryCenter = this.calcBaryCenter(n2);
-
-                if (Math.abs(n1BaryCenter - n2BaryCenter) < 0.0001) {
-                    // in case of coinciding barycenters compare by the count of in/out links
-                    if (n1.degree() === n2.degree()) {
-                        return this.compareByIndex(n1, n2);
-                    }
-                    else if (n1.degree() < n2.degree()) {
-                        return 1;
-                    }
-                    return -1;
-                }
-
-                var compareValue = (n2BaryCenter - n1BaryCenter) * 1000;
-                if (compareValue > 0) {
-                    return -1;
-                }
-                else if (compareValue < 0) {
-                    return 1;
-                }
-                return this.compareByIndex(n1, n2);
-            });
-
             // count relocations
             var i, moves = 0;
             for (i = 0; i < considered.length; i++) {
