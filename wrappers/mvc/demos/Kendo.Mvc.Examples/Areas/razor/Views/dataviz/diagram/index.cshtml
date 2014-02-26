@@ -46,14 +46,15 @@
         return g;
     }
 </script>
-
-@(Html.Kendo().Diagram()
-       .Name("diagram")
-       .DataSource(dataSource => dataSource
-           .Read(read => read.Action("_OrgChart", "Diagram")).Model(m => m.Children("Items"))
-       )
-       .Layout(l => l.Type(DiagramLayoutType.Layered))
-       .VisualTemplate("visualTemplate")
-       .ShapeDefaults(sd => sd.Editable(false).Rotatable(false).Resizable(false))
-       .ConnectionDefaults(cd => cd.Stroke(s => s.Color("#979797").Width(2)))
-)
+<div class="diagram-wrapper" style="margin: auto;">
+    @(Html.Kendo().Diagram()
+           .Name("diagram")
+           .DataSource(dataSource => dataSource
+               .Read(read => read.Action("_OrgChart", "Diagram")).Model(m => m.Children("Items"))
+           )
+           .Layout(l => l.Type(DiagramLayoutType.Layered))
+           .VisualTemplate("visualTemplate")
+           .ShapeDefaults(sd => sd.Editable(false).Rotatable(false).Resizable(false))
+           .ConnectionDefaults(cd => cd.Stroke(s => s.Color("#979797").Width(2)))
+    )
+</div>
