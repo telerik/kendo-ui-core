@@ -241,7 +241,10 @@ module CodeGen::TypeScript
 
         def initialize(parameters)
             if parameters.any?
-                type_indices = parameters.map { |p| 0.step(p.type.size-1).to_a }
+                type_indices = parameters.map do |p|
+                    raise "#{p.owner.owner.name}.#{p.owner.name}.#{p.name} does not have type set" unless p.type
+                    0.step(p.type.size-1).to_a
+                end
 
                 type_indices_product = type_indices[0].product(*type_indices[1..type_indices.length])
 
