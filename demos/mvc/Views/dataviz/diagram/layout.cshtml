@@ -1,132 +1,112 @@
 <div id="example" class="k-content absConf">
-    <div id="diagram"></div>
+    <div class="diagram-wrapper" style="margin: auto;">
+        <div id="diagram"></div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <label for="subtype">Layout: </label>
+            <input id="subtype" value="1" />
+        </div>
+    </div>
     <script>
-       var data = [{
-            name: "Antonio",
-            lastName: "Moreno",
-            image: "url(../../../../content/dataviz/diagram/people/antonio.jpg",
-            position: "Team Lead",
-            background: "#1696d3",
-            items: [{
-                    name: "Elizabeth",
-                    image: "url(../../../../content/dataviz/diagram/people/elizabeth.jpg",
-                    lastName: "Brown",
-                    position: "Design Lead",
-                    background: "#ef6944",
-                    items: [{
-                            name: "Ann",
-                            lastName: "Devon",
-                            image: "url(../../../../content/dataviz/diagram/people/ann.jpg",
-                            position: "UI Designer",
-                            background: "#ef6944"
-                        },{
-                            name: "Fran",
-                            lastName: "Wilson",
-                            image: "url(../../../../content/dataviz/diagram/people/fran.jpg",
-                            position: "Desing Intern",
-                            background: "#ef6944"
-                    }]
-            }, {
-                name: "Diego",
-                lastName: "Roel",
-                image: "url(../../../../content/dataviz/diagram/people/diego.jpg",
-                position: "QA Engineer",
-                background: "#ee587b"
-            }, {
-                name: "Felipe",
-                lastName: "Izquiedro",
-                image: "url(../../../../content/dataviz/diagram/people/felipe.jpg",
-                position: "Senior Developer",
-                background: "#75be16",
-                items: [{
-                    name: "Daniel",
-                    lastName: "Tonini",
-                    image: "url(../../../../content/dataviz/diagram/people/daniel.jpg",
-                    position: "Developer",
-                    background: "#75be16"
-                }]
-            }]
-        }];
+        function subtypeChange() {
+            $("#diagram").getKendoDiagram().layout({
+                subtype: this.value(),
+                type: "tree",
+                horizontalSeparation: 30,
+                verticalSeparation: 20
+            });
+        }
 
-        function visualTemplate(options) {
-            var dataItem = options.dataItem;
-            var g = new window.kendo.diagram.Group({
-                autoSize: true
+        function init() {
+            var subtypeData = [{
+                text: "TreeDown", value: "down"
+            },{
+                text: "TreeUp", value: "up"
+            },{
+                text: "TipoverTree", value: "tipover"
+            }];
+
+            $("#subtype").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: subtypeData,
+                change: subtypeChange
             });
 
-            g.append(new window.kendo.diagram.Rectangle({
-                width: 210,
-                height: 75,
-                stroke: {
-                    width: 0
-                },
-                minWidth: 20,
-                minHeight: 20,
-                content: {
-                    color: "#ffffff"
-                },
-                background: dataItem.background,
-                id: options.id
-            }));
-
-            g.append(new window.kendo.diagram.TextBlock({
-                text: dataItem.name + " " + dataItem.lastName,
-                x: 85,
-                y: 20,
-                color: "#ffffff",
-                id: options.id
-            }));
-
-            g.append(new window.kendo.diagram.TextBlock({
-                text: dataItem.position,
-                x: 85,
-                y: 40,
-                color: "#ffffff",
-                id: options.id
-            }));
-
-            g.append(new window.kendo.diagram.Image({
-                source: dataItem.image,
-                x: 3,
-                y: 3,
-                width: 68,
-                height: 68
-            }));
-
-            return g;
+            createDiagram();
         }
 
         function createDiagram() {
+            var data = [{
+                node: "0",
+                items: [{
+                    node: "1.1",
+                    items: [{
+                        node: "2.1",
+                        items: [{
+                            node: "3.1"
+                        }]
+                    }]
+                },{
+                    node: "1.2",
+                    items: [{
+                        node: "2.2"
+                    }]
+                },{
+                    node: "1.3",
+                    items: [{
+                        node: "2.3"
+                    },{
+                        node: "2.4",
+                        items: [{
+                            node: "3.2"
+                        },{
+                            node: "3.3"
+                        }]
+                    }]
+                },{
+                    node: "1.4",
+                    items: [{
+                        node: "2.5"
+                    }]
+                },{
+                    node: "1.5",
+                    items: [{
+                        node: "2.6"
+                    },{
+                        node: "2.7",
+                        items: [{
+                            node: "3.4"
+                        },{
+                            node: "3.5"
+                        }]
+                    }]
+                }]
+            }];
+
             $("#diagram").kendoDiagram({
-                dataSource: new kendo.data.HierarchicalDataSource({
+                dataSource: {
                     data: data,
                     schema: {
                         model: {
                             children: "items"
                         }
                     }
-                }),
+                },
                 layout: {
-                    type: "layered"
+                    type: "tree",
+                    subtype: "down",
+                    horizontalSeparation: 30,
+                    verticalSeparation: 20
                 },
-                visualTemplate: visualTemplate,
                 shapeDefaults: {
-                    editable: false,
-                    rotatable: false,
-                    resizable: false
-                },
-                connectionDefaults: {
-                    stroke: {
-                        color: "#979797",
-                        width: 2
-                    }
+                    width: 50,
+                    height: 50
                 }
             });
-
-            var diagram = $("#diagram").getKendoDiagram();
-            diagram.bringIntoView(diagram.shapes);
         }
 
-        $(document).ready(createDiagram);
+        $(document).ready(init);
     </script>
 </div>

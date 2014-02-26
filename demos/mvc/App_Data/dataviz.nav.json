@@ -858,10 +858,10 @@
             }]
         }
     ],
-	"diagramming": [
-		{
-			"text": "Diagram",
-			"beta": "true",
+    "diagramming": [
+        {
+            "text": "Diagram",
+            "beta": "true",
             "documentation": "dataviz/diagram",
             "spriteCssClass": "chartIcon",
             "items": [{
@@ -869,13 +869,13 @@
                     "url": "diagram/index.html",
                     "title": "Kendo UI Diagram Demo"
                 }, {
-                    "text": "api",
+                    "text": "layout",
                     "url": "diagram/layout.html",
                     "title": "Kendi UI Diagram Layout"
             }],
             "name": "Diagram"
-		}
-	],
+        }
+    ],
     "Sample Dashboards": [
         {
             "text": "Stock History",
