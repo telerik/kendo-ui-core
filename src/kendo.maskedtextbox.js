@@ -19,7 +19,7 @@ var __meta__ = {
     var ns = ".kendoMaskedTextBox";
     var proxy = $.proxy;
 
-    var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertchange" : "input") + ns;
+    var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertychange" : "input") + ns;
     var STATEDISABLED = "k-state-disabled";
     var DISABLED = "disabled";
     var READONLY = "readonly";
