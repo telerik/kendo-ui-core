@@ -107,11 +107,4 @@ $diagram->dataSource($dataSource)
 echo $diagram->render();
 ?>
 
-<script>
-    $(document).ready(function() {
-        var diagram = $("#diagram").getKendoDiagram();
-        diagram.bringIntoView(diagram.shapes);
-    });
-</script>
-
 <?php require_once '../../include/footer.php'; ?>

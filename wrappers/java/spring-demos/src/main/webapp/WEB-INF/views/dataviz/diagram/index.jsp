@@ -71,11 +71,4 @@ function visualTemplate(options) {
 	 </kendo:diagram-connectionDefaults>
  </kendo:diagram>
 
-<script type="text/javascript">
-$(document).ready(function() {
-    var diagram = $("#diagram").getKendoDiagram();
-    diagram.bringIntoView(diagram.shapes);
-});
-</script>
-
 <demo:footer />
