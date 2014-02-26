@@ -50,6 +50,17 @@
     $categories = read_navigation($jsonFilename);
 
     foreach($categories as $category => $subcategory) {
+
+        $hasChildren = false;
+        foreach ($subcategory as $widget) {
+            if (include_in_navigation($widget)) {
+                $hasChildren = true;
+                break;
+            }
+        }
+        if ($hasChildren == false) {
+            continue;
+        }
 ?>
         <h1><?= $category ?></h1>
         <ul>
