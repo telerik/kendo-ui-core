@@ -130,8 +130,8 @@ task :js => [MIN_JS, JS_BUNDLES, KENDO_CONFIG_FILE].flatten
 desc('Less')
 multitask :less => [MIN_CSS].flatten
 
-task :sync_docs_submodule do
-    sh "export BRANCH=`git rev-parse --abbrev-ref HEAD`; cd docs && git fetch && git reset --hard origin/$BRANCH"
+def sync_docs_submodule(branch)
+    sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 end
 
 desc('Build all Kendo UI distributions')
@@ -693,11 +693,15 @@ namespace :build do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
         end
 
+        task :sync_docs do
+            sync_docs_submodule("production")
+        end
+
         changelog = "#{WEB_ROOT}/changelog/index.html"
         write_changelog changelog, %w(web mobile dataviz framework aspnetmvc)
 
         desc 'Package and publish bundles to the Production directory, and update the changelog'
-        task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
+        task :bundles => [:get_binaries, :sync_docs, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
     end
 
     namespace :master do
@@ -737,8 +741,12 @@ namespace :build do
             remote.start_iis()
         end
 
+        task :sync_docs do
+            sync_docs_submodule("master")
+        end
+
         desc 'Package and publish bundles to the Stable directory'
-        task :bundles => [:get_binaries, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
+        task :bundles => [:get_binaries, :sync_docs, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
     end
 
 end
