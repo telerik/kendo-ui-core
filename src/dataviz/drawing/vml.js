@@ -22,6 +22,7 @@
 
     // Constants ==============================================================
     var NONE = "none",
+        SPACE = " ",
         TRANSPARENT = "transparent";
 
     // VML rendering surface ==================================================
@@ -365,17 +366,30 @@
         },
 
         printPath: function(path, open) {
-            var segments = path.segments;
-            if (segments.length > 0) {
+            var segments = path.segments,
+                length = segments.length;
+            if (length > 0) {
                 var parts = [],
                     output,
+                    segmentType,
+                    currentType,
                     i;
 
-                for (i = 0; i < segments.length; i++) {
-                    parts.push(segments[i].anchor.toString(0, ","));
+                for (i = 1; i < length; i++) {
+                    segmentType = this.segmentType(segments[i - 1], segments[i]);
+                    if (segmentType !== currentType) {
+                        currentType = segmentType;
+                        parts.push(segmentType);
+                    }
+
+                    if (segmentType === "l") {
+                        parts.push(this.printPoints(segments[i].anchor));
+                    } else {
+                        parts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
+                    }
                 }
 
-                output = "m " + parts.shift() + " l " + parts.join(" ");
+                output = "m " + this.printPoints(segments[0].anchor) + SPACE + parts.join(SPACE);
                 if (path.options.closed) {
                     output += " x";
                 }
@@ -386,6 +400,20 @@
 
                 return output;
             }
+        },
+
+        segmentType: function(segmentStart, segmentEnd) {
+            return segmentStart.controlOut && segmentEnd.controlIn ? "c" : "l";
+        },
+
+        printPoints: function() {
+            var points = arguments,
+                length = points.length,
+                i, result = [];
+            for (i = 0; i < length; i++) {
+                result.push(points[i].toString(0, ","));
+            }
+            return result.join(SPACE);
         },
 
         mapFill: function(fill) {
