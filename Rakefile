@@ -130,6 +130,10 @@ task :js => [MIN_JS, JS_BUNDLES, KENDO_CONFIG_FILE].flatten
 desc('Less')
 multitask :less => [MIN_CSS].flatten
 
+task :sync_docs_submodule do
+    sh "export BRANCH=`git rev-parse --abbrev-ref HEAD`; cd docs && git fetch && git reset --hard origin/$BRANCH"
+end
+
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 

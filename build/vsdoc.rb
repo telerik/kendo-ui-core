@@ -85,9 +85,7 @@ namespace :vsdoc do
     %w(master production).each do |branch|
         namespace branch do
             desc "Test VSDoc generation"
-            task :test do
-                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
-
+            task :test => :sync_docs_submodule do
                 File.open("dist/kendo.vsdoc-#{branch}.js", "w") do |f|
                     f.write get_vsdoc(VSDOC_SOURCES)
                     sh "node_modules/jshint/bin/jshint #{f.path}"

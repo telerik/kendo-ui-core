@@ -100,9 +100,7 @@ namespace :intellisense do
     %w(master production).each do |branch|
         namespace branch do
             desc "Test .intellisense generation"
-            task :test do
-                #sh "cd docs && git fetch && git reset --hard origin/#{branch}"
-
+            task :test => :sync_docs_submodule do
                 File.open("dist/kendo.intellisense-#{branch}.js", "w") do |f|
                     f.write get_intellisense(INTELLISENSEDOC_SOURCES)
                     sh "node_modules/jshint/bin/jshint #{f.path}"

@@ -556,9 +556,7 @@ namespace :type_script do
     %w(master production).each do |branch|
         namespace branch do
             desc "Test TypeScript generation"
-            task :test do
-                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
-
+            task :test => :sync_docs_submodule do
                 SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
 
