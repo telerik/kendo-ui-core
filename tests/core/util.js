@@ -30,13 +30,15 @@ test("replaces ...-a... with ...A...", function() {
     equal(toHyphens("fooBarBaz"), "foo-bar-baz")
 });
 
-test("widgetInstance supports array of namespaces as an argument", 3, function() {
+test("widgetInstance supports array of namespaces as an argument", function() {
     var testbed = $("<div data-role='barcode'></div><div data-role='scroller'></div><div data-role='calendar'></div>");
-    kendo.init(testbed, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
+    kendo.init(testbed, kendo.mobile.ui, kendo.dataviz.ui || {}, kendo.ui);
 
-    ok(kendo.widgetInstance(testbed.filter(".k-barcode"), [ kendo.mobile.ui, kendo.dataviz.ui ]));
-    ok(kendo.widgetInstance(testbed.filter(".km-scroll-wrapper"), [ kendo.mobile.ui, kendo.dataviz.ui ]));
-    ok(!kendo.widgetInstance(testbed.filter(".k-calendar"), [ kendo.mobile.ui, kendo.dataviz.ui ]));
+    if (kendo.dataviz.ui) {
+        ok(kendo.widgetInstance(testbed.filter(".km-scroll-wrapper"), [ kendo.mobile.ui, kendo.dataviz.ui || {} ]));
+    }
+    ok(kendo.widgetInstance(testbed.filter(".km-scroll-wrapper"), [ kendo.mobile.ui, kendo.dataviz.ui || {} ]));
+    ok(!kendo.widgetInstance(testbed.filter(".k-calendar"), [ kendo.mobile.ui, kendo.dataviz.ui || {} ]));
     kendo.destroy(testbed);
 });
 
