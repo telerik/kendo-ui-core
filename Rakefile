@@ -143,6 +143,10 @@ task :less do
     grunt :styles
 end
 
+task :sync_docs_submodule do
+    sh "export BRANCH=`git rev-parse --abbrev-ref HEAD`; cd docs && git fetch && git reset --hard origin/$BRANCH"
+end
+
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
