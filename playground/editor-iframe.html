@@ -7,24 +7,22 @@
 
     <meta name="viewport" content="width=device-width,user-scalable=1,initial-scale=1.0" />
 
-    <link rel="stylesheet/less" href="../styles/web/kendo.common.less" />
-    <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
+    <link rel="stylesheet" href="../styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../styles/web/kendo.default.css">
     <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css">
 
-    <script src="../demos/mvc/content/shared/js/less.js"></script>
-
     <script src="../src/jquery.js"></script>
-    <script src="../src/module.js"></script>
-    <!-- <script src="../src/kendo.core.js"></script> -->
-    <!-- <script src="../src/kendo.data.js"></script> -->
-    <!-- <script src="../src/kendo.draganddrop.js"></script> -->
-    <!-- <script src="../src/kendo.binder.js"></script> -->
-    <!-- <script src="../src/kendo.popup.js"></script> -->
-    <!-- <script src="../src/kendo.list.js"></script> -->
-    <!-- <script src="../src/kendo.dropdownlist.js"></script> -->
-    <!-- <script src="../src/kendo.combobox.js"></script> -->
-    <!-- <script src="../src/kendo.fx.js"></script> -->
-    <!-- <script src="../src/kendo.window.js"></script> -->
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.binder.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.list.js"></script>
+    <script src="../src/kendo.dropdownlist.js"></script>
+    <script src="../src/kendo.combobox.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.window.js"></script>
 
     <!-- <script src="../src/kendo.editor.js"></script> -->
 
@@ -54,34 +52,14 @@
 
 </head>
 <body>
-
-    <div id='container'>
-        <textarea id="txtEditTopPriority" data-bind="value: TopPriority" data-tools='["bold", "italic", "underline", "insertUnorderedList", "insertOrderedList"]' data-role="editor"></textarea>
-        <div id="gluh"></div>
-    </div>
+    <textarea id="editor"></textarea>
 
     <script>
-        $(window).load(function(){
-            var vm = new kendo.observable({
-                    TopPriority: "Filler Text",
-                    electricity: new kendo.data.DataSource({
-                    data: [1, 4, 3]
-                })
-            });
-
-
-            kendo.bind($('#container'), vm);
-
-            var ue = new kendo.UserEvents($("#gluh")[0], {
-                global: true
-            });
-
-            ue.destroy();
-            //if (chart._userEvents) {
-                //chart._userEvents.destroy();
-            //}
+        $("#editor").kendoEditor({
+            paste: function(e) {
+                console.log(e.html);
+            }
         });
-
     </script>
 </body>
 </html>
