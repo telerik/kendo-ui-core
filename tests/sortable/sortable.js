@@ -139,6 +139,40 @@
         equal(draggedElement.index(), 3, "draggedElement is placed at the last valid position");
     });
 
+    test("cursor changes on drag start and is reset on dragcancel", 2, function() {
+        var draggedElement = element.children().eq(0),
+            sortable = element.kendoSortable({ cursor: "move" }).data("kendoSortable");
+
+        triggerDraggableEvent(
+            "dragstart",
+            { currentTarget: draggedElement, target: draggedElement }, 
+            element
+        );
+
+        equal(draggedElement.css("cursor"), "move", "Cursor is changed to move");
+
+        triggerDraggableEvent("dragcancel", {}, element);
+
+        equal(draggedElement.css("cursor"), "auto", "Cusror is reset back to auto");
+    });
+
+    test("cusor changes on drag start and is reset on dragend", 2, function() {
+        var draggedElement = element.children().eq(3),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(1),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable({ cursor: "move" }).data("kendoSortable");
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top);
+
+        equal(draggedElement.css("cursor"), "move", "Cursor is changed to move");
+
+        release(draggedElement, targetOffset.left, targetOffset.top);
+
+        equal(draggedElement.css("cursor"), "auto", "Cusror is reset back to auto");
+    });
+
     module("Sortable - filtering and excluding items", {
         setup: function() {
             QUnit.fixture.append(
