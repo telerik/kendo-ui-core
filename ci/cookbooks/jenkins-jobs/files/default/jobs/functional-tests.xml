@@ -43,6 +43,12 @@
       <url>https://github.com/telerik/kendo-functional-tests/</url>
     </browser>
     <submoduleCfg class="list"/>
+    <extensions>
+        <hudson.plugins.git.extensions.impl.SubmoduleOption>
+            <disableSubmodules>false</disableSubmodules>
+            <recursiveSubmodules>true</recursiveSubmodules>
+        </hudson.plugins.git.extensions.impl.SubmoduleOption>
+    </extensions>
     <relativeTargetDir/>
     <reference/>
     <excludedRegions/>
