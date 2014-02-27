@@ -192,7 +192,7 @@ asyncTest('open should apply max-height and overflow styles to group UL', 3, fun
     setTimeout(function () {
         var maxHeightStyle = parseInt(ul.css("max-height"), 10),
             overflowStyle = ul.css("overflow"),
-            windowHeight = parseInt($(window).height(), 10);
+            windowHeight = $(window).height() - kendo.getShadows(ul).bottom - (ul.outerHeight() - ul.height());
 
         ok(!isNaN(maxHeightStyle));
         equal(overflowStyle, "auto");

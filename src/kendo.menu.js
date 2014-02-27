@@ -543,7 +543,10 @@ var __meta__ = {
                     if (ul[0] && that.trigger(OPEN, { item: li[0] }) === false) {
 
                         if (!ul.find(".k-group")[0] && ul.children(".k-item").length > 1) {
-                            var setScrolling = function(){ul.css({maxHeight: $(window).height(), overflow: "auto"});};
+                            var windowHeight = $(window).height(),
+                                setScrolling = function(){
+                                    ul.css({maxHeight: windowHeight - (ul.outerHeight() - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto"});
+                                };
 
                             if (kendo.support.browser.msie && kendo.support.browser.version <= 7) {
                                 setTimeout(setScrolling, 0); // timeout required by IE7
