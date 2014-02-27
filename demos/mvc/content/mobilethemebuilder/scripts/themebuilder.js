@@ -883,28 +883,34 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
             }
         };
 
-        // Override Kendo History to avoid URL breaks and bad refresh
-        kendo.history.navigate = function(to, silent) {
-            var that = this;
+        // Override Kendo Pane bindToRouter to avoid URL breaks and bad refresh
+        kendo.mobile.ui.Pane.prototype.bindToRouter = function(router) {
+            var that = this,
+                options = that.options,
+                initial = options.initial,
+                viewEngine = this.viewEngine;
 
-            if (to === '#:back') {
-                return;
-            }
+            router.bind("init", function(e) {
+                var url = e.url,
+                    attrUrl = router.pushState ? url : "/";
 
-            to = to.replace(/^#*/, '');
+                viewEngine.rootView.attr(kendo.attr("url"), attrUrl);
 
-            if (that.current === to || that.current === decodeURIComponent(to)) {
-                return;
-            }
+                if (url === "/" && initial) {
+                    router.navigate(initial, true);
+                    e.preventDefault(); // prevents from executing routeMissing, by default
+                }
+            });
 
-            if (that._pushState) {
-                history.pushState({}, document.title, that._makePushStateUrl(to));
-                that.current = to;
-            }
+            router.bind("routeMissing", function(e) {
+                if (!that.historyCallback(e.url, e.params)) {
+                    e.preventDefault();
+                }
+            });
 
-            if (!silent) {
-                that.trigger("change", {url: that.current});
-            }
+            router.bind("same", function() {
+                that.trigger("sameViewRequested");
+            });
         };
 
         originalToggle = kendo.mobile.ui.ListView.prototype._toggle;
