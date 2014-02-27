@@ -1601,25 +1601,32 @@ function pad(number, digits, end) {
     }
 })();
 
+    function getShadows(element) {
+        var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
+            radius = shadow ? shadow.match(boxShadowRegExp) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
+            blur = math.max((+radius[3]), +(radius[4] || 0));
+
+        return {
+            left: (-radius[1]) + blur,
+            right: (+radius[1]) + blur,
+            bottom: (+radius[2]) + blur
+        };
+    }
+
     function wrap(element, autosize) {
         var browser = support.browser,
             percentage,
             isRtl = element.css("direction") == "rtl";
 
         if (!element.parent().hasClass("k-animation-container")) {
-            var shadow = element.css(kendo.support.transitions.css + "box-shadow") || element.css("box-shadow"),
-                radius = shadow ? shadow.match(boxShadowRegExp) || [ 0, 0, 0, 0, 0 ] : [ 0, 0, 0, 0, 0 ],
-                blur = math.max((+radius[3]), +(radius[4] || 0)),
-                left = (-radius[1]) + blur,
-                right = (+radius[1]) + blur,
-                bottom = (+radius[2]) + blur,
+            var shadows = getShadows(element),
                 width = element[0].style.width,
                 height = element[0].style.height,
                 percentWidth = percentRegExp.test(width),
                 percentHeight = percentRegExp.test(height);
 
             if (browser.opera) { // Box shadow can't be retrieved in Opera
-                left = right = bottom = 5;
+                shadows.left = shadows.right = shadows.bottom = 5;
             }
 
             percentage = percentWidth || percentHeight;
@@ -1633,10 +1640,10 @@ function pad(number, digits, end) {
                          .css({
                              width: width,
                              height: height,
-                             marginLeft: left * (isRtl ? 1 : -1),
-                             paddingLeft: left,
-                             paddingRight: right,
-                             paddingBottom: bottom
+                             marginLeft: shadows.left * (isRtl ? 1 : -1),
+                             paddingLeft: shadows.left,
+                             paddingRight: shadows.right,
+                             paddingBottom: shadows.bottom
                          }));
 
             if (percentage) {
@@ -2417,6 +2424,7 @@ function pad(number, digits, end) {
         attr: function(value) {
             return "data-" + kendo.ns + value;
         },
+        getShadows: getShadows,
         wrap: wrap,
         deepExtend: deepExtend,
         getComputedStyles: getComputedStyles,
