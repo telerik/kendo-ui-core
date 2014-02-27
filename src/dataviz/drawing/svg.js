@@ -27,11 +27,11 @@
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
         NONE = "none",
         SOLID = "solid",
+        SPACE = " ",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
         TRANSPARENT = "transparent",
-        UNDEFINED = "undefined",
-        SPACE = " ";
+        UNDEFINED = "undefined";
 
     // SVG rendering surface ==================================================
     var Surface = d.Surface.extend({
@@ -298,29 +298,26 @@
                 length = segments.length;
             if (length > 0) {
                 var parts = [],
-                    subParts,
                     output,
+                    segmentType,
+                    currentType,
                     i;
 
                 for (i = 1; i < length; i++) {
-                    subParts = [];
-                    if (this.isCurve(segments[i - 1], segments[i])) {
-                        do {
-                            subParts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
-                            i++;
-                        } while(i < length && this.isCurve(segments[i - 1], segments[i]));
-                        parts.push("C" + subParts.join(SPACE));
-                    } else {
-                        do {
-                            subParts.push(segments[i].anchor.toString(1));
-                            i++;
-                        } while(i < length && !this.isCurve(segments[i - 1], segments[i]));                        
-                        parts.push("L" + subParts.join(SPACE));
+                    segmentType = this.segmentType(segments[i - 1], segments[i]);
+                    if (segmentType !== currentType) {
+                        currentType = segmentType;
+                        parts.push(segmentType);
                     }
-                    i--;
+
+                    if (segmentType === "L") {
+                        parts.push(this.printPoints(segments[i].anchor));
+                    } else {
+                        parts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
+                    }
                 }
 
-                output = "M" + segments[0].anchor.toString(1) + " " + parts.join(SPACE);
+                output = "M" + this.printPoints(segments[0].anchor) + SPACE + parts.join(SPACE);
                 if (path.options.closed) {
                     output += "Z";
                 }
@@ -328,7 +325,7 @@
                 return output;
             }
         },
-        
+
         printPoints: function() {
             var points = arguments,
                 length = points.length,
@@ -336,11 +333,11 @@
             for (i = 0; i < length; i++) {
                 result.push(points[i].toString(1));
             }
-            return result.join(SPACE);            
+            return result.join(SPACE);
         },
 
-        isCurve: function(segmentStart, segmentEnd) {
-            return segmentStart.controlOut && segmentEnd.controlIn;
+        segmentType: function(segmentStart, segmentEnd) {
+            return segmentStart.controlOut && segmentEnd.controlIn ? "C" : "L";
         },
 
         mapStroke: function(stroke) {
