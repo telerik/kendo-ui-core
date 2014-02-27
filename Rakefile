@@ -3,8 +3,8 @@ require 'rake/testtask'
 require 'bundler/setup'
 require 'tempfile'
 require 'erb'
-require 'winrm'
 require 'json'
+require 'winrm' unless RUBY_PLATFORM =~ /darwin/
 
 VERBOSE = verbose == true
 
@@ -81,7 +81,7 @@ require 'cdn'
 require 'tests'
 require 'codegen'
 require 'nuget'
-require 'winrm_tools'
+require 'winrm_tools' unless RUBY_PLATFORM =~ /darwin/
 require 'playground'
 require 'vs_plugin'
 

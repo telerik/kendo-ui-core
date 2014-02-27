@@ -6,7 +6,10 @@ gem "kramdown"
 gem "nokogiri"
 gem "selenium-webdriver", "~> 2.34.0"
 gem "rubyzip", :require => 'zip/zip'
-gem "winrm"
+
+unless RUBY_PLATFORM =~ /darwin/
+    gem "winrm"
+end
 
 group :development do
     gem 'guard'
