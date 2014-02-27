@@ -3069,6 +3069,10 @@ var __meta__ = {
                     nonLockedColsWidth = columnsWidth(nonLockedCols),
                     footerWrap;
 
+                if (groups > 0) {
+                    width += this.lockedHeader.find(".k-group-cell:first").outerWidth() * groups;
+                }
+
                 if (width >= contentWidth) {
                     width = contentWidth - 3 * scrollbar;
                 }

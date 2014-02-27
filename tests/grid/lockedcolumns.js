@@ -157,7 +157,7 @@
         grid.dataSource.group({ field: "foo" });
 
         equal(grid.lockedHeader.width(), grid.lockedContent.width());
-        equal(grid.lockedHeader.width(), 140);
+        equal(grid.lockedHeader.width(), 140 + 27); // one group col
     });
 
     test("width is set to locked containers with multiple grouping applied", function() {
@@ -168,7 +168,7 @@
         grid.dataSource.group([{ field: "foo" }, { field: "bar" }]);
 
         equal(grid.lockedHeader.width(), grid.lockedContent.width());
-        equal(grid.lockedHeader.width(), 140);
+        equal(grid.lockedHeader.width(), 140 + 54); // two group cols
     });
 
     test("width is set to non locked containers", function() {
