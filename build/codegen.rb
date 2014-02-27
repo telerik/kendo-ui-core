@@ -28,8 +28,8 @@ require 'codegen/lib/php/api'
 require 'codegen/lib/aspx/aspx'
 
 namespace :generate do
-    def import_metadata(component)
-        metadata = "build/codegen/#{component.name.downcase}.yml"
+    def import_metadata(component, path = '')
+        metadata = "build/codegen/#{path}#{component.name.downcase}.yml"
 
         if File.exists?(metadata)
             yaml = YAML.load(File.read(metadata))
@@ -45,12 +45,12 @@ namespace :generate do
 
         desc 'Generate ASP.NET WebForms wrappers'
         task :wrappers do
-            markdown = FileList['docs/api/dataviz/diagram/*.md'] #, 'docs/api/dataviz/diagram.md']
+            markdown = FileList['docs/api/dataviz/diagram/*.md']
 
             components = markdown.map { |file| CodeGen::MarkdownParser.read(file, CodeGen::ASPX::Wrappers::Component) }
 
             components.each do |component|
-                import_metadata(component)
+                import_metadata(component, "lib/aspx/")
                 generator = CodeGen::ASPX::Wrappers::Generator.new('wrappers/aspx/src/')
 
                 generator.component(component)
