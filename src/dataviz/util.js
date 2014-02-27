@@ -54,22 +54,22 @@
     function sqr(value) {
         return value * value;
     }
-    
+
     function arrayMinMax(arr) {
         var length = arr.length,
             i,
             min = Number.MAX_VALUE,
             max = Number.MIN_VALUE;
-            
+
         for (i = 0; i < length; i ++) {
             max = math.max(max, arr[i]);
             min = math.min(min, arr[i]);
         }
-        
+
         return {
             min: min,
             max: max
-        };        
+        };
     }
 
     // Template helpers =======================================================

@@ -8,14 +8,16 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
-        
+
          <script src="../src/dataviz/util.js"></script>
         <script src="../src/dataviz/geometry.js"></script>
-        <script src="../src/dataviz/drawing/core.js"></script>       
+        <script src="../src/dataviz/drawing/core.js"></script>
         <script src="../src/dataviz/drawing/shapes.js"></script>
          <script src="../src/dataviz/drawing/svg.js"></script>
+         <script src="../src/dataviz/drawing/canvas.js"></script>
+         <script src="../src/dataviz/drawing/vml.js"></script>
     </head>
-    <body>  
+    <body>
         <div id="container"></div>
         <script>
             var dataviz = kendo.dataviz,
@@ -26,22 +28,26 @@
                 Path = drawing.Path,
                 Segment = drawing.Segment,
                 Surface = drawing.Surface,
-                surface = Surface.create(document.getElementById("container"), {width: 500, height: 500}),
-                circleGeometry = new Circle(Point.create(250, 250), 100),
+                surface = Surface.create(document.getElementById("container"), {width: 700, height: 700}),
+                circleGeometry = new Circle(Point.create(150, 400), 100),
                 circle = new drawing.Circle(circleGeometry, {fill: {color: "red"} }),
                 boundingRect = circle.boundingRect(),
-                circleBoundingPath = rectPath(boundingRect, {stroke: {color: "black", width: 2}}),
-                curve = new Path({stroke: {color: "black", width: 2}}),
+                strokeOptions = {stroke: {color: "black", width: 2}},
+                circleBoundingPath = rectPath(boundingRect, strokeOptions),
+                curve = new Path(strokeOptions),
                 group = new drawing.Group();
-                
+
             curve.moveTo(100, 100);
             curve.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
+            curve.lineTo(500, 150);
             curve.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
-            curve.lineTo(100, 100);
-            group.append(circle, circleBoundingPath, curve);
+            //curve.close();
+
+            var curveBoundingRect = rectPath(curve.boundingRect(), strokeOptions)
+            group.append(circle, circleBoundingPath, curve, curveBoundingRect);
             surface.draw(group);
-            
-            
+
+
             function rectPath(rect, options) {
                 var rectPath = new Path(options),
                     width = rect.width(),
@@ -51,7 +57,7 @@
                 rectPath.lineTo(rect.p0.x + width, rect.p0.y + height);
                 rectPath.lineTo(rect.p0.x, rect.p0.y + height);
                 rectPath.close();
-                
+
                 return rectPath;
             }
         </script>

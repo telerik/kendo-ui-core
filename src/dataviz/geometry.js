@@ -121,11 +121,11 @@
             this.y = round(this.y, precision);
             return this;
         },
-        
+
         min: function(point) {
             return new Point(math.min(this.x, point.x), math.min(this.y, point.y));
         },
-        
+
         max: function(point) {
             return new Point(math.max(this.x, point.x), math.max(this.y, point.y));
         }
@@ -156,11 +156,11 @@
             }
         }
     };
-    
+
     Point.minPoint = function() {
         return new Point(Number.MIN_VALUE, Number.MIN_VALUE);
     };
-    
+
     Point.maxPoint = function() {
         return new Point(Number.MAX_VALUE, Number.MAX_VALUE);
     };
@@ -184,10 +184,10 @@
         height: function() {
             return this.p1.y - this.p0.y;
         },
-        
+
         wrap: function(targetRect) {
-            return new Rect(this.p0.min(targetRect.p0), this.p1.min(targetRect.p1));
-        },        
+            return new Rect(this.p0.min(targetRect.p0), this.p1.max(targetRect.p1));
+        },
     });
 
     var Circle = Class.extend({
@@ -232,8 +232,8 @@
                 c.y - r * math.sin(a)
             );
         },
-        
-        boundingRect: function() {            
+
+        boundingRect: function() {
             var minPoint = Point.maxPoint(),
                 maxPoint = Point.minPoint(),
                 currentPoint, angle;
@@ -242,10 +242,11 @@
                 minPoint = minPoint.min(currentPoint);
                 maxPoint = maxPoint.max(currentPoint);
             }
-            
+
             return new Rect(minPoint, maxPoint);
         }
     });
+
 
     // TODO: MERGE WITH DIAGRAM MATH
     var Matrix = Class.extend({
