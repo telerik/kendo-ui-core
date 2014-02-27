@@ -31,10 +31,9 @@
             boundingRect, i;
         if (length > 0) {
             boundingRect = new Rect(Point.maxPoint(), Point.minPoint());
-        }
-
-        for (i = 0; i < length; i++) {
-            boundingRect = boundingRect.wrap(elements[i].boundingRect());
+            for (i = 0; i < length; i++) {
+                boundingRect = boundingRect.wrap(elements[i].boundingRect());
+            }
         }
 
         return boundingRect;
