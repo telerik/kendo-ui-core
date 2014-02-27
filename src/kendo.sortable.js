@@ -225,7 +225,8 @@ var __meta__ = {
                 connectWith = this.options.connectWith,
                 connectedList,
                 isDefaultPrevented,
-                eventData;
+                eventData,
+                connectedListEventData;
 
             this._resetCursor();
 
@@ -242,9 +243,14 @@ var __meta__ = {
             } else {
                 connectedList = placeholder.parents(connectWith).getKendoSortable();
 
-                isDefaultPrevented = !(
-                    !this.trigger(END, $.extend(eventData, { action: ACTION_REMOVE })) && !connectedList.trigger(END, $.extend(eventData, { action: ACTION_RECEIVE, oldIndex: MISSING_INDEX, newIndex: connectedList.indexOf(placeholder) }))
-                );
+                eventData.action = ACTION_REMOVE;
+                connectedListEventData = $.extend({}, eventData, {
+                    action: ACTION_RECEIVE,
+                    oldIndex: MISSING_INDEX,
+                    newIndex: connectedList.indexOf(placeholder)
+                });
+
+                isDefaultPrevented = !(!this.trigger(END, eventData) && !connectedList.trigger(END, connectedListEventData));
             }
 
             if(isDefaultPrevented || placeholderIndex === draggedIndex) {
@@ -268,11 +274,13 @@ var __meta__ = {
             this.trigger(CHANGE, eventData);
 
             if(connectedList) {
-                connectedList.trigger(CHANGE, $.extend(eventData, {
+                connectedListEventData = $.extend({}, eventData, {
                     action: ACTION_RECEIVE,
                     oldIndex: MISSING_INDEX,
                     newIndex: connectedList.indexOf(draggedElement)
-                }));
+                });
+
+                connectedList.trigger(CHANGE, connectedListEventData);
             }
 
         },
