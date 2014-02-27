@@ -174,7 +174,7 @@
         kendo.culture("en-US");
     });
 
-    test("Convert numpad decimal point to bg-BG decimal point (empty input)", 3, function() {
+    test("Convert numpad decimal point to bg-BG decimal point (empty input)", 1, function() {
         var textbox = new NumericTextBox(input);
 
         kendo.culture("bg-BG");
@@ -183,9 +183,7 @@
         input.pressKey(110, "keydown");
         input.pressKey(".", {
             preventDefault: function() {
-                ok(true);
                 equal(input.val(), ",");
-                equal(kendo.caret(input)[0], 1);
             }
         });
 
