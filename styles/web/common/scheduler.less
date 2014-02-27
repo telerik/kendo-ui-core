@@ -271,8 +271,13 @@
 }
 
 .k-scheduler-table td,
-.k-scheduler-layout tr + tr .k-scheduler-times th:last-child,
 .k-slot-cell
+{
+    vertical-align: top;
+}
+
+/* separate due to old IEs */
+.k-scheduler-layout tr + tr .k-scheduler-times th:last-child
 {
     vertical-align: top;
 }
