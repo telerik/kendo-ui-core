@@ -153,10 +153,9 @@ var __meta__ = {
                 cursorOffset = { left: e.x.location, top: e.y.location },
                 offsetDelta,
                 axisDelta = { x: e.x.delta, y: e.y.delta },
-                prevVisible,
-                nextVisible,
-                placeholder = this.placeholder,
                 direction,
+                sibling,
+                getSibling,
                 axis = this.options.axis,
                 eventData = { item: draggedElement, list: this, draggableEvent: e };
 
@@ -172,9 +171,6 @@ var __meta__ = {
                     left: Math.round(cursorOffset.left - targetCenter.left),
                     top: Math.round(cursorOffset.top - targetCenter.top)
                 };
-
-                prevVisible = target.element.prev();
-                nextVisible = target.element.next();
 
                 $.extend(eventData, { target: target.element });
 
@@ -197,20 +193,17 @@ var __meta__ = {
                     }
                 }
 
-                if(direction === "prev") {
-                    while(prevVisible.length && !prevVisible.is(":visible")) {
-                        prevVisible = prevVisible.prev();
+                if(direction) {
+                    getSibling = (direction === "prev") ? jQuery.fn.prev : jQuery.fn.next;
+
+                    sibling = getSibling.call(target.element);
+
+                    //find the prev/next visible sibling
+                    while(sibling.length && !sibling.is(":visible")) {
+                        sibling = getSibling.call(sibling);
                     }
 
-                    if(prevVisible[0] != placeholder[0]) {
-                        this._movePlaceholder(target, direction, eventData);
-                    }
-                } else if(direction === "next") {
-                    while(nextVisible.length && !nextVisible.is(":visible")) {
-                        nextVisible = nextVisible.next();
-                    }
-
-                    if(nextVisible[0] != placeholder[0]) {
+                    if(sibling[0] != this.placeholder[0]) {
                         this._movePlaceholder(target, direction, eventData);
                     }
                 }
