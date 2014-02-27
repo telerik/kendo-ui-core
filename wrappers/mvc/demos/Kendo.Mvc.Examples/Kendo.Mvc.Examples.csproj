@@ -939,7 +939,7 @@
     <Content Include="Areas\aspx\Views\web\grid\column_menu.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\locked_columns.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\frozen_columns.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\everlive.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\signalr.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\webapi.aspx" />
