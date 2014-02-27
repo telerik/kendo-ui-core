@@ -22,7 +22,7 @@ def bundle(options)
     legal_dir = File.join('resources', 'legal', beta ? 'beta' : 'official')
     license = nil
 
-    prerequisites = [:js, :less, :sync_docs_submodule] + options[:prerequisites].to_a
+    prerequisites = [:js, :less] + options[:prerequisites].to_a
 
     if options[:license]
         license = "#{path}.license"
