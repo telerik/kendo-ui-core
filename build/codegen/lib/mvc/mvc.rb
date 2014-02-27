@@ -69,7 +69,9 @@ module CodeGen::MVC::Wrappers
         'scrollview.velocitythreshold',
         'scrollview.bouncevelocitythreshold',
         'scrollview.datasource',
-        'drawer.views'
+        'drawer.views',
+	'diagram.visualTemplate',
+	'diagram.dataSource'
     ]
 
     CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
