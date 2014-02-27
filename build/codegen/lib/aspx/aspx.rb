@@ -458,6 +458,22 @@ namespace <%= csharp_namespace %>
                 include Options
 
                 def csharp_class
+                    if type.include?('kendo.')
+                        result = type
+                                    .sub('kendo.ui.', '')
+                                    .sub('kendo.dataviz.ui.', '')
+                                    .sub('kendo.dataviz.', '')
+                                    .sub('kendo.mobile.ui.', '')
+                                    .sub('kendo.mobile.', '')
+                                    .sub('kendo.', '')
+                                    .sub(".#{root_component.owner_namespace.downcase}", '')
+                                    .sub("#{root_component.owner_namespace.downcase}.", '')
+
+                        return result.split('.').map { |w|
+                                                w.pascalize
+                                            }.join('')
+                    end
+
                     prefix = owner.instance_of?(ArrayItem) ? owner.owner.owner.csharp_name.sub('Settings', '') : owner.csharp_name.sub('Settings', '')
                     name.include?('Settings') ? "#{prefix}#{name.sub('Settings', '').pascalize}" : "#{prefix}#{name.pascalize}"
                 end
@@ -635,13 +651,14 @@ namespace <%= csharp_namespace %>
                 end
 
                 def owner_namespace
-                    full_name.sub(".#{name}", '')
+                    full_name
                     .sub('kendo.ui.', '')
                     .sub('kendo.dataviz.ui.', '')
                     .sub('kendo.dataviz.', '')
                     .sub('kendo.mobile.ui.', '')
                     .sub('kendo.mobile.', '')
                     .sub('kendo.', '')
+                    .sub(".#{name}", '')
                     .pascalize
                 end
 
