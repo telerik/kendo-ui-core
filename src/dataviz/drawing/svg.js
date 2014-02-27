@@ -30,7 +30,8 @@
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
         TRANSPARENT = "transparent",
-        UNDEFINED = "undefined";
+        UNDEFINED = "undefined",
+        SPACE = " ";
 
     // SVG rendering surface ==================================================
     var Surface = d.Surface.extend({
@@ -293,23 +294,53 @@
         },
 
         printPath: function(path) {
-            var segments = path.segments;
-            if (segments.length > 0) {
+            var segments = path.segments,
+                length = segments.length;
+            if (length > 0) {
                 var parts = [],
+                    subParts,
                     output,
                     i;
 
-                for (i = 0; i < segments.length; i++) {
-                    parts.push(segments[i].anchor.toString(1));
+                for (i = 1; i < length; i++) {
+                    subParts = [];
+                    if (this.isCurve(segments[i - 1], segments[i])) {
+                        do {
+                            subParts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
+                            i++;
+                        } while(i < length && this.isCurve(segments[i - 1], segments[i]));
+                        parts.push("C" + subParts.join(SPACE));
+                    } else {
+                        do {
+                            subParts.push(segments[i].anchor.toString(1));
+                            i++;
+                        } while(i < length && !this.isCurve(segments[i - 1], segments[i]));                        
+                        parts.push("L" + subParts.join(SPACE));
+                    }
+                    i--;
                 }
 
-                output = "M" + parts.join(" ");
+                output = "M" + segments[0].anchor.toString(1) + " " + parts.join(SPACE);
                 if (path.options.closed) {
                     output += "Z";
                 }
 
                 return output;
             }
+        },
+        
+        printPoints: function() {
+            var points = arguments,
+                length = points.length,
+                i, result = [];
+            for (i = 0; i < length; i++) {
+                result.push(points[i].toString(1));
+            }
+            return result.join(SPACE);            
+        },
+
+        isCurve: function(segmentStart, segmentEnd) {
+            return segmentStart.controlOut && segmentEnd.controlIn;
         },
 
         mapStroke: function(stroke) {

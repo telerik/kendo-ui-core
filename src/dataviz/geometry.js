@@ -120,6 +120,14 @@
             this.x = round(this.x, precision);
             this.y = round(this.y, precision);
             return this;
+        },
+        
+        min: function(point) {
+            return new Point(math.min(this.x, point.x), math.min(this.y, point.y));
+        },
+        
+        max: function(point) {
+            return new Point(math.max(this.x, point.x), math.max(this.y, point.y));
         }
     });
 
@@ -148,6 +156,14 @@
             }
         }
     };
+    
+    Point.minPoint = function() {
+        return new Point(Number.MIN_VALUE, Number.MIN_VALUE);
+    };
+    
+    Point.maxPoint = function() {
+        return new Point(Number.MAX_VALUE, Number.MAX_VALUE);
+    };
 
     var Rect = Class.extend({
         init: function(p0, p1) {
@@ -167,7 +183,11 @@
 
         height: function() {
             return this.p1.y - this.p0.y;
-        }
+        },
+        
+        wrap: function(targetRect) {
+            return new Rect(this.p0.min(targetRect.p0), this.p1.min(targetRect.p1));
+        },        
     });
 
     var Circle = Class.extend({
@@ -211,6 +231,19 @@
                 c.x - r * math.cos(a),
                 c.y - r * math.sin(a)
             );
+        },
+        
+        boundingRect: function() {            
+            var minPoint = Point.maxPoint(),
+                maxPoint = Point.minPoint(),
+                currentPoint, angle;
+            for (angle = 0; angle < 360; angle+=90) {
+                currentPoint = this.pointAt(angle);
+                minPoint = minPoint.min(currentPoint);
+                maxPoint = maxPoint.max(currentPoint);
+            }
+            
+            return new Rect(minPoint, maxPoint);
         }
     });
 

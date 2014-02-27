@@ -8,7 +8,7 @@
     var kendo = window.kendo,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
-
+        
         dataviz = kendo.dataviz,
         append = dataviz.append,
 
@@ -18,8 +18,11 @@
         drawing = dataviz.drawing,
         OptionsStore = drawing.OptionsStore,
 
+        math = Math,
+        
         util = dataviz.util,
-        defined = util.defined;
+        defined = util.defined,
+        arrayMinMax = util.arrayMinMax;
 
     // Drawing primitives =====================================================
     var Element = Class.extend({
@@ -128,6 +131,10 @@
 
             circle.geometry = geometry || new g.Circle();
             circle.geometry.observer = this;
+        },
+        
+        boundingRect: function() {
+            return this.geometry.boundingRect();
         }
     });
 
@@ -150,7 +157,80 @@
             }
         },
 
-        geometryChange: util.mixins.geometryChange
+        geometryChange: util.mixins.geometryChange,
+        
+        boundingRectTo: function(segment) {
+            var rect;
+            if (this.controlOut && segment.controlIn) {
+                rect = this._curveBoundingRect(this.anchor, this.controlOut, segment.controlIn, segment.anchor);
+            } else {
+                rect = this._lineBoundingRect(this.anchor, segment.anchor);
+            }
+        },
+        
+        _lineBoundingRect: function(p1, p2) {
+            return new Rect(p1.clone(), p2.clone());
+        },      
+        
+        _curveBoundingRect: function(p1, cp1, cp2, p2) {
+            var points = [p1, cp1, cp2, p2],
+                extremesX = this._curveExtremesFor(points, "x"),
+                extremesY = this._curveExtremesFor(points, "y"),
+                xMinMax = arrayMinMax([extremesX.min, extremesX.max, p1.x, p2.x]),
+                yMinMax = arrayMinMax([extremesY.min, extremesY.max, p1.y, p2.y]);
+            
+            return new Rect(Point.create(xMinMax.min, yMinMax.min), Point.create(xMinMax.max, yMinMax.max));
+        },
+        
+        _curveExtremesFor: function(points, field) {
+            var extremes = this._curveExtremes(points[0][field], points[1][field],
+                points[2][field], points[3][field]);
+            
+            return {
+                min: this._calculateCurveAt(extremes.min, field, points),
+                max: this._calculateCurveAt(extremes.max, field, points)
+            };
+        },
+        
+        _calculateCurveAt: function (t, field, points) {
+            var t1 = 1- t;
+            return math.pow(t1, 3) * points[0][field] + 
+                3 * math.pow(t1, 2) * t * points[1][field] + 
+                3 * math.pow(t, 2) * t1 * points[2][field] + 
+                math.pow(t, 3) * points[3][field];
+        },        
+        
+        _curveExtremes: function (x1, x2, x3, x4) {
+            var a = x1 - 3 * x2 + 3 * x3 - x4,
+                b = - 2 * (x1 - 2 * x2 + x3),
+                c = x1 - x2,
+                sqrt = math.sqrt(b * b - 4 * a * c),
+                t1 = 0, t2 = 1,
+                min,
+                max;
+            if (a === 0) {
+                if (b !== 0) {
+                    t1 = t2 = -c / b;              
+                }
+            } else if (!isNaN(sqrt)) {                    
+                t1 = (- b + sqrt) / (2 * a);
+                t2 = (- b - sqrt) / (2 * a);   
+            }
+            
+            min = math.max(math.min(t1, t2), 0);
+            if (min < 0 || min > 1) {
+                min = 0;
+            }
+            max = math.min(math.max(t1, t2), 1);
+            if (max > 1 || max < 0) {
+                max = 1;
+            }
+            
+            return {
+                min: min,
+                max: max
+            };
+        }       
     });
 
     var Path = Shape.extend({
@@ -179,6 +259,18 @@
             this.segments.push(segment);
             this.geometryChange();
 
+            return this;
+        },
+        
+        curveTo: function(controlOut, controlIn, point) {
+            var last = this.segments[this.segments.length - 1];
+                segment = new Segment(point, controlIn);
+                
+            last.controlOut = controlOut;
+            controlOut.observer = last;
+            
+            this.segments.push(segment);
+            
             return this;
         },
 
