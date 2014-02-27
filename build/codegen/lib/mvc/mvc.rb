@@ -526,6 +526,11 @@ module CodeGen::MVC::Wrappers
         end
 
         def write_composite_option(component, option)
+            if option.instance_of?(component.array_option_class)
+                write_array(component, option)
+
+                return
+            end
             # write *Settings.cs file
             filename = "#{@path}/#{component.path}/Settings/#{option.csharp_class}.cs"
 
@@ -543,16 +548,16 @@ module CodeGen::MVC::Wrappers
 
         def write_array(component, option)
             #write *Factory.cs file
-            filename = "#{@path}/#{option.owner.path}/Fluent/#{option.csharp_builder_class}.cs"
+            filename = "#{@path}/#{component.path}/Fluent/#{option.csharp_builder_class}.cs"
             component.files.push(filename)
             write_file(filename, ITEM_FACTORY.result(option.get_binding)) unless File.exists?(filename)
 
             #write *Item.cs file
-            filename = "#{@path}/#{option.owner.path}/#{option.csharp_item_class}.cs"
+            filename = "#{@path}/#{component.path}/#{option.csharp_item_class}.cs"
             write_file(filename, component.to_setting(filename, option))
 
             #write *ItemBuilder.cs file
-            filename = "#{@path}/#{option.owner.path}/Fluent/#{option.csharp_item_class}Builder.cs"
+            filename = "#{@path}/#{component.path}/Fluent/#{option.csharp_item_class}Builder.cs"
             write_file(filename, component.to_fluent_setting(filename, option))
 
             option.item.composite_options.each do |o|
