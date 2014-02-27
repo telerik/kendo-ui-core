@@ -144,7 +144,9 @@ task :less do
 end
 
 task :sync_docs_submodule do
-    sh "export BRANCH=`git rev-parse --abbrev-ref HEAD`; cd docs && git fetch && git reset --hard origin/$BRANCH"
+    branch = `git branch | grep '*' | cut -d' ' -f2`.strip
+    branch = "master" if branch =~ /master|production/
+    sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 end
 
 desc('Build all Kendo UI distributions')
