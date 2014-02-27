@@ -145,7 +145,7 @@ end
 
 task :sync_docs_submodule do
     branch = `git branch | grep '*' | cut -d' ' -f2`.strip
-    branch = "master" if branch =~ /master|production/
+    branch = "master" unless branch =~ /master|production/
     sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 end
 
