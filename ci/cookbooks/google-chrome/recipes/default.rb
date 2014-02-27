@@ -5,7 +5,7 @@ apt_repository "google" do
 end
 
 package "google-chrome-stable" do
-    version "31.*"
+    action :upgrade
 end
 
 

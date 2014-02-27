@@ -1,3 +1,3 @@
 package "firefox" do
-    version "25.*"
+    action :upgrade
 end
