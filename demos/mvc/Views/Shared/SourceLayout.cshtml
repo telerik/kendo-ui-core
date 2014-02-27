@@ -4,6 +4,10 @@
     <title>@ViewBag.Title</title>
     <link href="styles/kendo.common.min.css" rel="stylesheet" />
     <link href="styles/kendo.default.min.css" rel="stylesheet" />
+    @if (ViewBag.suite == "web" && Request.QueryString["path"] != null && Request.QueryString["path"].Contains("mobile"))
+    {
+    <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" />
+    }
     @if (Request.QueryString["path"] != null && Request.QueryString["path"].Contains("rtl"))
     {
     <link href="styles/kendo.rtl.min.css" rel="stylesheet" />
