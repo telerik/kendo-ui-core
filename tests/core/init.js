@@ -130,10 +130,38 @@ test("parses options from data attributes", function() {
     equal(testwidget.options.foo, "foo");
 });
 
+test("parses string option from data attribute", function() {
+    dom = $('<div data-role="testwidget" data-foo="[foo]" />');
+    kendo.init(dom);
+
+    var testwidget = dom.data("kendoTestWidget");
+
+    equal(testwidget.options.foo, "[foo]");
+});
+
+test("parses strings array option from data attribute", function() {
+    dom = $('<div data-role="testwidget" data-foo="[\'red\']"/>');
+
+    kendo.init(dom);
+
+    var testwidget = dom.data("kendoTestWidget");
+
+    deepEqual(testwidget.options.foo, ["red"]);
+});
+
+test("parses ints array option from data attribute", function() {
+    dom = $('<div data-role="testwidget" data-foo="[1]"/>');
+
+    kendo.init(dom);
+
+    var testwidget = dom.data("kendoTestWidget");
+
+    deepEqual(testwidget.options.foo, [1]);
+});
+
 test("parses number options from data attributes", function() {
     dom = $('<div data-role="testwidget" data-foo="100" />');
     kendo.init(dom);
-
     var testwidget = dom.data("kendoTestWidget");
 
     ok(testwidget.options.foo === 100);
