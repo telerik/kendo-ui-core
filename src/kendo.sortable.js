@@ -26,7 +26,9 @@ var __meta__ = {
         ACTION_RECEIVE = "receive",
 
         DEFAULT_FILTER = ">*",
-        MISSING_INDEX = -1;
+        MISSING_INDEX = -1,
+
+        GRABBING_CURSOR = "url(https://mail.google.com/mail/images/2/closedhand.cur), default !important;";
 
     function containsOrEqualTo(parent, child) {
         try {
@@ -82,7 +84,8 @@ var __meta__ = {
             connectWith: null,
             handler: null,
             cursorOffset: null,
-            axis: null
+            axis: null,
+            cursor: "auto"
         },
 
         destroy: function() {
@@ -129,6 +132,8 @@ var __meta__ = {
                     this.floating = this._isFloating(draggedElement);
                     draggedElement.css("display", "none");
                     draggedElement.before(placeholder);
+
+                    this._setCursor();
                 }
 
             }
@@ -137,6 +142,8 @@ var __meta__ = {
         _dragcancel: function(e) {
             this._cancel();
             this.trigger(CANCEL, { item: this.draggedElement });
+
+            this._resetCursor();
         },
 
         _drag: function(e) {
@@ -219,6 +226,8 @@ var __meta__ = {
                 connectedList,
                 isDefaultPrevented,
                 eventData;
+
+            this._resetCursor();
 
             eventData = {
                 action: ACTION_SORT,
@@ -364,6 +373,37 @@ var __meta__ = {
                 }
 
                 target.sortable.trigger(MOVE, eventData);
+            }
+        },
+
+        _setCursor: function() {
+            var cursor = this.options.cursor,
+                body;
+
+            if(cursor && cursor !== "auto") {
+                body = $(document.body);
+
+                this._originalCursorType = body.css("cursor");
+                body.css({ "cursor": (cursor === "grabbing") ? GRABBING_CURSOR : cursor });
+
+                if(!this._cursorStylesheet) {
+                    if(cursor === "grabbing") {
+                        this._cursorStylesheet = $("<style>* { cursor: " + GRABBING_CURSOR + " }</style>");
+                    } else {
+                        this._cursorStylesheet = $("<style>* { cursor: " + cursor + " !important; }</style>");
+                    }
+                }
+
+                this._cursorStylesheet.appendTo(body);
+            }
+        },
+
+        _resetCursor: function() {
+            if(this._originalCursorType) {
+                $(document.body).css("cursor", this._originalCursorType);
+                this._originalCursorType = null;
+
+                this._cursorStylesheet.remove();
             }
         },
 
