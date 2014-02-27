@@ -428,7 +428,7 @@
 
     test("major grid lines extend to value axis end", function() {
         close(view.log.line[0].x2, 473, TOLERANCE);
-        equal(view.log.line[0].y2, 400);
+        close(view.log.line[0].y2, 400, TOLERANCE);
     });
 
     test("renders 90 degree grid line when value axis is not visible", function() {
