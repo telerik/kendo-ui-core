@@ -41,6 +41,8 @@ module CodeGen::VSDoc
 
     class Parameter < CodeGen::Parameter
         def vsdoc_type
+            raise "The #{@name} parameter of #{@owner.owner.name}.#{@owner.name} does not have a type set" unless @type
+
             return 'Object' if @type.size > 1
 
             @type[0]
