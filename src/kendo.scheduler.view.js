@@ -1324,14 +1324,6 @@ var __meta__ = {
             return startDate <= start && start < endDate && startDate < end && end <= endDate;
         },
 
-        _scrollbarOffset: function(value, multiday) {
-            if (!this._isRtl || (multiday && !this._isVerticallyGrouped()) || !kendo.support.browser.webkit) {
-                return value;
-            }
-
-            return this._scrollbarWidth + value;
-        },
-
         _resourceValue: function(resource, item) {
             if (resource.valuePrimitive) {
                 item = kendo.getter(resource.dataValueField)(item);
@@ -1562,8 +1554,6 @@ var __meta__ = {
             var contentDiv = that.content[0],
                 scrollbarWidth = !kendo.support.kineticScrollNeeded ? scrollbar : 0;
 
-            this._scrollbarWidth = 0;
-
             if (isSchedulerHeightSet(that.element)) { // set content height only if needed
                 if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
                     that.content.height(height);
@@ -1582,7 +1572,6 @@ var __meta__ = {
             if (contentDiv.offsetWidth - contentDiv.clientWidth > 0) {
                 that.table.addClass("k-scrollbar-v");
                 that.datesHeader.css("padding-" + paddingDirection, scrollbarWidth - parseInt(that.datesHeader.children().css("border-" + paddingDirection + "-width"), 10));
-                this._scrollbarWidth = scrollbarWidth;
             } else {
                 that.datesHeader.css("padding-" + paddingDirection, "");
             }

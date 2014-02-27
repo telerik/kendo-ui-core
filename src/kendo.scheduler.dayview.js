@@ -221,7 +221,7 @@ var __meta__ = {
                 }
 
                 var hint = SchedulerView.fn._createResizeHint.call(this,
-                    this._scrollbarOffset(start.offsetLeft, multiday),
+                    start.offsetLeft,
                     top,
                     width,
                     height
@@ -287,7 +287,7 @@ var __meta__ = {
                 };
 
                 if (this._isRtl) {
-                   css.left = startSlot.clientWidth * 0.1 + this._scrollbarOffset(startSlot.offsetLeft) + 2;
+                   css.left = startSlot.clientWidth * 0.1 + startSlot.offsetLeft + 2;
                 }
 
                 if (multiday) {
@@ -1098,7 +1098,7 @@ var __meta__ = {
 
             element
                 .css({
-                    left: this._scrollbarOffset(start.offsetLeft + leftOffset, true),
+                    left: start.offsetLeft + leftOffset,
                     width: slotWidth - rightOffset
                 });
 
@@ -1151,7 +1151,7 @@ var __meta__ = {
 
                 for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
                     columnEvents[j].element[0].style.width = columnWidth - 4 + "px";
-                    columnEvents[j].element[0].style.left = (this._isRtl ? this._scrollbarOffset(eventRightOffset) : 0) + startSlot.offsetLeft + idx * columnWidth + 2 + "px";
+                    columnEvents[j].element[0].style.left = (this._isRtl ? eventRightOffset : 0) + startSlot.offsetLeft + idx * columnWidth + 2 + "px";
                 }
             }
         },
