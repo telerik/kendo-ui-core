@@ -1,0 +1,20 @@
+:options:
+    - :name: layout.type
+      :type: String
+      :description: The layout type.
+      :values:
+          - layered
+          - tree
+          - force
+    - :name: layout.subtype
+      :type: String
+      :description: The layout subtype.
+      :values:
+          - down
+          - up
+          - right
+          - radial
+          - tipover
+          - mindmapvertical
+          - mindmaphorizontal
+
