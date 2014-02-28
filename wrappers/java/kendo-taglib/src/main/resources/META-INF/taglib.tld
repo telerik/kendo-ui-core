@@ -10719,12 +10719,6 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Collection of predefined connections to be added to the diagram</description>
-            <name>connections</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
             <description>See the dataSource field.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10747,12 +10741,6 @@ data source is fired. By default the widget will bind to the data source specifi
             <name>rotatable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Collection of predefined shapes to be added to the diagram</description>
-            <name>shapes</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The template which renders the content of the shape when bound to a dataSource. The names you can use in the template correspond to the properties used in the dataSource. See the dataSource topic below for a concrete example.</description>
@@ -10877,6 +10865,111 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
+        <description>Defines the connections configuration.</description>
+        <name>diagram-connections</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Defines the connections configuration.</description>
+        <name>diagram-connection</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed. Much like the startCap example above, you can define custom caps (markers) for the endpoint of the connection.</description>
+            <name>endCap</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The start cap (arrow, head or decoration) of the connection:You easily add custom caps through the underlying mechanism of SVG called 'markers' (see e.g. the SVG documentation).</description>
+            <name>startCap</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Defines the hover configuration.</description>
+        <name>diagram-connection-hover</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionHoverTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Defines the hover stroke configuration.</description>
+        <name>diagram-connection-hover-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionHoverStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the highlight color when the pointer is hovering over the connection.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>Sets the intermediate points (in global coordinates) of the connection. It's important to note that currently these points cannot be manipulated in the interface.</description>
+        <name>diagram-connection-points</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionPointsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Sets the intermediate points (in global coordinates) of the connection. It's important to note that currently these points cannot be manipulated in the interface.</description>
+        <name>diagram-connection-point</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionPointTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>Sets the X coordinate of the point.</description>
+            <name>x</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Sets the Y coordinate of the point.</description>
+            <name>y</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Defines the stroke configuration.</description>
+        <name>diagram-connection-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the stroke or line color of the connection.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the stroke width of the connection.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
         <description>The layout of a diagram consists in arranging the shapes (sometimes also the connections) in some fashion in order to achieve an aesthetically pleasing experience to the user. It aims at giving a more direct insight in the information contained within the diagram and its relational structure.On a technical level, layout consists of a multitude of algorithms and optimizations:and various ad-hoc calculations which depend on the type of layout. The criteria on which an algorithm is based vary but the common denominator is:Kendo diagram includes three of the most used layout algorithms which should cover most of your layout needs - tree layout, force-directed layout and layered layout. Please, check the type property for more details regarding each type.The generic way to apply a layout is by calling the layout() method on the diagram. The method has a single parameter options. It is an object, which can contain parameters which are specific to the layout as well as parameters customizing the global grid layout. Parameters which apply to other layout algorithms can be included but are overlooked if not applicable to the chose layout type. This means that you can define a set of parameters which cover all possible layout types and simply pass it in the method whatever the layout define in the first parameter.</description>
         <name>diagram-layout</name>
         <tag-class>com.kendoui.taglib.diagram.LayoutTag</tag-class>
@@ -10931,23 +11024,13 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The subtype further defines the layout type by specifying in greater detail the behaviour expected by the layout algorithm. Possible predefined values are:</description>
+            <description>The layout subtype.</description>
             <name>subtype</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The type of the layout algorythm to use. Predefined values are:There are several criteria on which this algorithm is based and which are respected in as far as the incidence structure allows it:
-* links have a preferred direction (the complementary direction of the subtype) and attempt to flow as much as possible in this way
-* linked nodes try to stay closed to one another (clustering of nodes)
-* links crossings should be minimized
-* links should be as short as possible (cross a few layers as possible)The construction of a layered graph drawing proceeds in a series of steps (assuming an horizontal layer from here on):
- + If the input graph is not already a directed acyclic graph, a set of edges is identified the reversal of which will make it acyclic.
- + The nodes of the directed acyclic graph resulting from the first step are assigned to layers, such that each link goes from a higher layer to a lower layer.
- + Edges that span multiple layers are replaced by paths of dummy vertices so that, after this step, each edge in the expanded graph connects two vertices on adjacent layers of the drawing.
- + The nodes within each layer are permuted in an attempt to reduce the number of crossings among the edges connecting it to the previous layer.
- + Each node is assigned a coordinate within its layer, consistent with the permutation calculated in the previous step.
- + The edges reversed in the first step of the algorithm are returned to their original orientations, the dummy vertices are removed from the graph and the vertices and edges are drawn.</description>
+            <description>The layout type.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10981,7 +11064,7 @@ data source is fired. By default the widget will bind to the data source specifi
 
     <tag>
         <description>Each layout algorithm has a different set of parameters customizing the layout but they also all have a common collection of parameters which relate to the way 'pieces' of a diagram are organized.
-A diagram can have in general disconnected pieces, known as components, which can be organized in a way independent of the way a component on its own is arranged. In the picture above, this is one diagram consisting of four components. When you apply a certain layout an analysis will first split the diagram in components, arrange each component individually and thereafter organize the components in a grid. The common parameters referred above deal with this grid layout, they define the width, margin and padding of the (invisible) grid used to organize the components.</description>
+A diagram can have in general disconnected pieces, known as components, which can be organized in a way independent of the way a component on its own is arranged. In the picture above, this is one diagram consisting of four components.When you apply a certain layout an analysis will first split the diagram in components, arrange each component individually and thereafter organize the components in a grid. The common parameters referred above deal with this grid layout, they define the width, margin and padding of the (invisible) grid used to organize the components.</description>
         <name>diagram-layout-grid</name>
         <tag-class>com.kendoui.taglib.diagram.LayoutGridTag</tag-class>
         <body-content>empty</body-content>
@@ -11173,6 +11256,189 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <description>Defines the stroke configuration.</description>
         <name>diagram-shapeDefaults-stroke</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the color of the shape's stroke.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the shape.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the thickness or width of the shape's stroke.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>Defines the shape options.</description>
+        <name>diagram-shapes</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapesTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Defines the shape options.</description>
+        <name>diagram-shape</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Defines the fill-color of the shape.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the text content of the Shape.</description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the shape is editable by the user.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the height of the shape when added to the diagram.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Defines the minimum height the shape should have, i.e. it cannot be resized to a value smaller than the given one.</description>
+            <name>minHeight</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Defines the minimum width the shape should have, i.e. it cannot be resized to a value smaller than the given one.</description>
+            <name>minWidth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").</description>
+            <name>path</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the shape is resizable.</description>
+            <name>resizable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the user is allowed to rotate the shape.</description>
+            <name>rotatable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the type of the Shape using any of the built-in shape type.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the width of the shape when added to the diagram.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Defines the x-coordinate of the shape when added to the diagram.</description>
+            <name>x</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Defines the y-coordinate of the shape when added to the diagram.</description>
+            <name>y</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Defines the connectors the shape owns.You can easily define your own custom connectors or mix-match with the above defined custom connectors.Example - custom shape with custom connectorsThe following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.</description>
+        <name>diagram-shape-connectors</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeConnectorsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Defines the connectors the shape owns.You can easily define your own custom connectors or mix-match with the above defined custom connectors.Example - custom shape with custom connectorsThe following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.</description>
+        <name>diagram-shape-connector</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeConnectorTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description></description>
+            <name>description</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Defines the hover configuration.</description>
+        <name>diagram-shape-hover</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeHoverTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Hover's background color.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description></description>
+        <name>diagram-shape-rotation</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeRotationTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>this is an object right now and contains only an angle</description>
+            <name>angle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines the stroke configuration.</description>
+        <name>diagram-shape-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeStrokeTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
@@ -12621,6 +12887,12 @@ is displayed in the column header cell.</description>
         <attribute>
             <description>If set to true the column will not be displayed in the grid. By default all columns are displayed.</description>
             <name>hidden</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the column will remain in the side of the grid into which its own locked configuration placed it.</description>
+            <name>lockable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
