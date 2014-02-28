@@ -109,7 +109,7 @@
                 });
             </script>
 
-            <style scoped>
+            <style>
         
             .demo-section {
                 width: 600px;

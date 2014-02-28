@@ -23,7 +23,7 @@
     </p>
 </div>
     
-<style scoped>
+<style>
     .demo-section {
         width: 600px;
         padding: 20px 30px;

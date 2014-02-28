@@ -88,7 +88,7 @@
                 });
             </script>
             
-            <style scoped>
+            <style>
                 .demo-section {
                     width: 200px;
                     padding: 20px 30px;
