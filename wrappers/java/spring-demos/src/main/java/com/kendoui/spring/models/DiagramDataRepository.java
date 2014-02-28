@@ -1,6 +1,7 @@
 package com.kendoui.spring.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DiagramDataRepository {
@@ -29,5 +30,29 @@ public class DiagramDataRepository {
         felipe.getItems().add(daniel);
         
         return result;
+    }
+    
+    public static List<DiagramNode> DiagramNodes() 
+    {
+        List<DiagramNode> result = new ArrayList<DiagramNode>();
+        DiagramNode root = new DiagramNode("0");
+        result.add(root);
+        
+        AddNodes(root, new int[] { 3, 2, 2 });
+        
+        return result;
+    }
+    
+    private static void AddNodes(DiagramNode root, int[] levels) {
+        if (levels.length > 0) {
+            for (int i = 0; i < levels[0]; i++) {
+                DiagramNode node = new DiagramNode(root.getName() + "." + i);
+                root.getItems().add(node);
+                
+                if (levels.length > 1) {
+                    AddNodes(node, Arrays.copyOfRange(levels, 1, levels.length - 1));
+                }
+            }
+        }
     }
 }
