@@ -324,4 +324,85 @@
         strictEqual(called, false);
     });
 
+    test("drop cue is as denied when not in same container", function() {
+        var hint = $('<div><div class="k-drag-status" /></div>');
+        var reorderable = new Reorderable(div, {
+            hint: function() {
+                return hint;
+            },
+            inSameContainer: function(x, y) {
+                return false;
+            },
+            dragOverContainers: function() {
+                return false;
+            }
+        }),
+        target = div.children().eq(1);
+
+        moveOverDropTarget(div.children().eq(0), target);
+
+        ok(hint.find(".k-drag-status").hasClass("k-denied"), "drag hint is not in denied state");
+        ok(!hint.find(".k-drag-status").hasClass("k-add"), "drag hint is in add state");
+    });
+
+    test("drop cue is as not denied when in same container", function() {
+        var hint = $('<div><div class="k-drag-status" /></div>');
+        var reorderable = new Reorderable(div, {
+            hint: function() {
+                return hint;
+            },
+            inSameContainer: function(x, y) {
+                return true;
+            },
+            dragOverContainers: function() {
+                return false;
+            }
+        }),
+        target = div.children().eq(1);
+
+        moveOverDropTarget(div.children().eq(0), target);
+
+        ok(!hint.find(".k-drag-status").hasClass("k-denied"), "drag hint is in denied state");
+        ok(hint.find(".k-drag-status").hasClass("k-add"), "drag hint is not in add state");
+    });
+
+    test("change event is not triggered when drag over containers is not allowed", function() {
+        var wasCalled = false;
+        var reorderable = new Reorderable(div, {
+            inSameContainer: function(x, y) {
+                return false;
+            },
+            dragOverContainers: function() {
+                return false;
+            },
+            change: function() {
+                wasCalled = true;
+            }
+        }),
+        target = div.children().eq(1);
+
+        moveOverDropTarget(div.children().eq(0), target);
+
+        ok(!wasCalled, "change event was incorrectly triggered");
+    });
+
+    test("change event is triggered when drag over containers is allowed", function() {
+        var wasCalled = false;
+        var reorderable = new Reorderable(div, {
+            inSameContainer: function(x, y) {
+                return $(x).parent()[0] == $(y).parent()[0];
+            },
+            dragOverContainers: function() {
+                return true;
+            },
+            change: function() {
+                wasCalled = true;
+            }
+        }),
+        target = div.children().eq(1);
+
+        moveOverDropTarget(div.children().eq(0), target);
+
+        ok(wasCalled, "change event did not triggered");
+    });
 })();

@@ -54,10 +54,10 @@ var __meta__ = {
                     }
 
                     var dropTarget = this.element, offset;
-                    var same = dropTarget[0] === that._draggable[0] || that._isLastDraggable();
+                    var denied = !that._dropTargetAllowed(dropTarget) || that._isLastDraggable();
 
-                    toggleHintClass(e.draggable.hint, same);
-                    if (!same) {
+                    toggleHintClass(e.draggable.hint, denied);
+                    if (!denied) {
                         offset = getOffset(dropTarget);
                         var left = offset.left;
 
@@ -91,7 +91,7 @@ var __meta__ = {
                     var draggable = that._draggable;
                     var containerChange = false;
 
-                    if (draggable[0] !== dropTarget[0] && !that._isLastDraggable()) {
+                    if (that._dropTargetAllowed(dropTarget) && !that._isLastDraggable()) {
                         that.trigger(CHANGE, {
                             element: that._draggable,
                             oldIndex: that._elements.index(draggable),
@@ -162,6 +162,26 @@ var __meta__ = {
             }
 
             return !found;
+        },
+
+        _dropTargetAllowed: function(dropTarget) {
+            var inSameContainer = this.options.inSameContainer,
+                dragOverContainers = this.options.dragOverContainers,
+                draggable = this._draggable;
+
+            if (draggable[0] === dropTarget[0]) {
+                return false;
+            }
+
+            if (!inSameContainer || !dragOverContainers) {
+                return true;
+            }
+
+            if (inSameContainer(draggable, dropTarget)) {
+                return true;
+            }
+
+            return dragOverContainers(this._elements.index(draggable));
         },
 
         destroy: function() {

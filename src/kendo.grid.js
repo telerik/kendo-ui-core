@@ -1308,6 +1308,9 @@ var __meta__ = {
 
                 that.wrapper.kendoReorderable({
                     draggable: that._draggableInstance,
+                    dragOverContainers: function(index) {
+                        return that.columns[index].lockable !== false;
+                    },
                     inSameContainer: function(x, y) {
                         return $(x).parent()[0] === $(y).parent()[0];
                     },
