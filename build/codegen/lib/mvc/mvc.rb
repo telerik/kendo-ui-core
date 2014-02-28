@@ -70,8 +70,8 @@ module CodeGen::MVC::Wrappers
         'scrollview.bouncevelocitythreshold',
         'scrollview.datasource',
         'drawer.views',
-	'diagram.visualTemplate',
-	'diagram.dataSource'
+		'diagram.visualtemplate',
+		'diagram.datasource'
     ]
 
     CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
@@ -212,7 +212,6 @@ module CodeGen::MVC::Wrappers
 
             @options.delete_if do |option|
                 option.delete_ignored
-
                 IGNORED.include?(option.full_name)
             end
         end
