@@ -6,6 +6,7 @@
 
     // Imports ================================================================
     var math = Math,
+        inArray = $.inArray,
 
         kendo = window.kendo,
         Class = kendo.Class,
@@ -15,6 +16,7 @@
         util = dataviz.util,
         defined = util.defined,
         rad = util.rad,
+        deg = util.deg,
         round = util.round;
 
     // Geometrical primitives =================================================
@@ -247,6 +249,96 @@
         }
     });
 
+    var Arc = Class.extend({
+        MAX_INTERVAL: 90,
+        _fields: ["radiusX", "radiusY", "startAngle", "endAngle"],
+
+        init: function(center, options) {
+            var arc = this;
+            arc.center = center;
+            arc.observer = null;
+            arc.center.observer = arc;
+
+            arc.radiusX = options.radiusX;
+            arc.radiusY = options.radiusY || options.radiusX;
+            arc.startAngle = options.startAngle;
+            arc.endAngle = options.endAngle;
+            arc.counterClockwise = options.counterClockwise || false;
+        },
+
+        geometryChange: util.mixins.geometryChange,
+
+        get: function(field) {
+            return this[field];
+        },
+
+        set: function(field, value) {
+            var arc = this;
+            if ($.inArray(field, arc._fields) !== -1 && arc[field] !== value) {
+                arc[field] = value;
+                arc.geometryChange();
+            }
+        },
+
+        pointAt: function(angle) {
+            var arc = this,
+                center = this.center,
+                radian = rad(angle),
+                point = new Point(center.x + arc.radiusX * math.cos(radian),
+                    center.y + arc.radiusY * math.sin(radian));
+
+            return point;
+        },
+
+        curvePoints: function() {
+            var arc = this,
+                startAngle = arc.startAngle,
+                endAngle = arc.endAngle,
+                angles = [],
+                i, points,
+                curvePoints = [arc.pointAt(startAngle)],
+                currentAngle = startAngle;
+            while(endAngle - currentAngle > arc.MAX_INTERVAL) {
+                angles.push(currentAngle);
+                currentAngle += arc.MAX_INTERVAL;
+            }
+
+            angles.push(currentAngle);
+            angles.push(endAngle);
+
+            for (i = 1; i < angles.length; i++) {
+                points = arc._intervalCurvePoints(angles[i - 1], angles[i]);
+                curvePoints.push(points.cp1, points.cp2, points.p2);
+            }
+
+            return curvePoints;
+        },
+
+        _intervalCurvePoints: function(startAngle, endAngle) {
+            var arc = this,
+                p1 = arc.pointAt(startAngle),
+                p2 = arc.pointAt(endAngle),
+                p1Derivative = arc._derivativeAt(startAngle),
+                p2Derivative = arc._derivativeAt(endAngle),
+                t = (rad(endAngle) - rad(startAngle)) / 3,
+                cp1 = new Point(p1.x + t * p1Derivative.x, p1.y + t * p1Derivative.y),
+                cp2 = new Point(p2.x - t * p2Derivative.x, p2.y - t * p2Derivative.y);
+
+            return {
+                p1: p1,
+                cp1: cp1,
+                cp2: cp2,
+                p2: p2
+            };
+        },
+
+        _derivativeAt: function(angle) {
+            var arc = this,
+                radian = rad(angle);
+            return new Point(-arc.radiusX * math.sin(radian), arc.radiusY * math.cos(radian));
+        }
+    });
+
 
     // TODO: MERGE WITH DIAGRAM MATH
     var Matrix = Class.extend({
@@ -309,6 +401,7 @@
     // Exports ================================================================
     deepExtend(dataviz, {
         geometry: {
+            Arc: Arc,
             Circle: Circle,
             Matrix: Matrix,
             Point: Point,

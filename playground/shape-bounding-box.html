@@ -19,6 +19,22 @@
     </head>
     <body>
         <div id="container"></div>
+        <!--
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400px" height="400px" style="position:absolute;">
+                <g>
+                    <path d="M400 300 A 100 50 0 1 1 250 256.7" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round"></path>           
+                    <circle cx="300" cy="300" r="3" stroke="black" stroke-width="2" stroke-linecap="square" fill="none"></circle>
+                </g>
+            </svg>
+        -->
+     <!--
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="700px" height="700px" style="position: absolute;">
+            <g>
+                <circle cx="300" cy="300" r="100" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round" />            
+                <circle cx="300" cy="300" r="3" stroke="black" stroke-width="2" stroke-linecap="square" fill="none"></circle>
+            </g>
+        </svg> 
+      -->
         <script>
             var dataviz = kendo.dataviz,
                 geometry = dataviz.geometry,
@@ -43,8 +59,16 @@
             curve.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
             //curve.close();
 
-            var curveBoundingRect = rectPath(curve.boundingRect(), strokeOptions)
-            group.append(circle, circleBoundingPath, curve, curveBoundingRect);
+            var curveBoundingRect = rectPath(curve.boundingRect(), strokeOptions);
+                        
+            var arcGeometry = new geometry.Arc(Point.create(300, 300), {
+                startAngle: 270,
+                endAngle: 360,
+                radiusX: 100
+            });
+            
+            var arc = new drawing.Arc(arcGeometry, strokeOptions);
+            group.append(arc, new drawing.Circle(new geometry.Circle(Point.create(300, 300), 3), strokeOptions));//circle, circleBoundingPath, curve, curveBoundingRect);
             surface.draw(group);
 
 

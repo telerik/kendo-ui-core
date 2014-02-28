@@ -15,6 +15,7 @@
         g = dataviz.geometry,
         Point = g.Point,
         Rect = g.Rect,
+        Arc = g.Arc,
 
         drawing = dataviz.drawing,
         OptionsStore = drawing.OptionsStore,
@@ -154,6 +155,52 @@
 
         boundingRect: function() {
             return this.geometry.boundingRect();
+        }
+    });
+
+    var Arc = Shape.extend({
+        init: function(geometry, options) {
+            var arc = this;
+            Shape.fn.init.call(arc, options);
+
+            arc.geometry = geometry || new g.Arc();
+            arc.geometry.observer = this;
+        },
+
+        boundingRect: function() {
+            return this.geometry.boundingRect();
+        },
+
+        toPath: function() {
+            var path = new Path(this._cloneOption()),
+                curvePoints = this.geometry.curvePoints();
+            path.moveTo(curvePoints[0].x, curvePoints[0].y);
+            for (var i = 1; i < curvePoints.length; i+=3) {
+                path.curveTo(curvePoints[i], curvePoints[i + 1], curvePoints[i + 2]);
+            }
+
+            return path;
+        },
+
+        _cloneOption: function() {
+            var options = this.options,
+                result = {};
+            if (options.fill) {
+                result.fill = {
+                    color: options.fill.color,
+                    opacity: options.fill.opacity
+                };
+            }
+
+            if (options.stroke) {
+                result.stroke = {
+                    color: options.stroke.color,
+                    width: options.stroke.width,
+                    opacity: options.stroke.opacity
+                };
+            }
+
+            return result;
         }
     });
 
@@ -363,6 +410,7 @@
         Group: Group,
         Shape: Shape,
 
+        Arc: Arc,
         Circle: Circle,
         Path: Path,
         MultiPath: MultiPath,
