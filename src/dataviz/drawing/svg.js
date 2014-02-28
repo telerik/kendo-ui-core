@@ -142,6 +142,8 @@
                     childNode = new MultiPathNode(srcElement);
                 } else if (srcElement instanceof d.Circle) {
                     childNode = new CircleNode(srcElement);
+                } else if (srcElement instanceof d.Arc) {
+                    childNode = new ArcNode(srcElement);
                 }
 
                 if (children && children.length > 0) {
@@ -436,6 +438,12 @@
             "#= d.renderFill() # " +
             "stroke-linejoin='round'></path>"
         )
+    });
+
+    var ArcNode = PathNode.extend({
+        renderData: function() {
+            return this.printPath(this.srcElement.toPath());
+        }
     });
 
     var MultiPathNode = PathNode .extend({
