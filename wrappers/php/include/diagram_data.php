@@ -50,4 +50,26 @@ function orgchart_items() {
     ));
 }
 
+function _node($index) {
+    return array('node' => $index, 'items' => array());
+}
+
+function _make_nodes($root, $levels) {
+    if (!empty($levels)) {
+        for ($i = 0; $i < $levels[0]; $i++) {
+            $node = _node($i);
+            _make_nodes(&$node, array_slice($levels, 1));
+
+            $root['items'][] = $node;
+        }
+    }
+}
+
+function diagram_nodes() {
+    $root = _node('0');
+    _make_nodes(&$root, array(3, 2, 2));
+
+    return array($root);
+}
+
 ?>
