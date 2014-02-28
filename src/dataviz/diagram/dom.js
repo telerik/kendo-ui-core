@@ -17,6 +17,7 @@
             HierarchicalDataSource = kendo.data.HierarchicalDataSource,
             Canvas = diagram.Canvas,
             Group = diagram.Group,
+            Visual = diagram.Visual,
             Rectangle = diagram.Rectangle,
             Circle = diagram.Circle,
             CompositeTransform = diagram.CompositeTransform,
@@ -695,7 +696,8 @@
             var diagram = options.diagram;
             delete options.diagram; // avoid stackoverflow and reassign later on again
             var shapeDefaults = deepExtend({}, options, { x: 0, y: 0 }),
-                visualTemplate = shapeDefaults.visual; // Shape visual should not have position in its parent group.
+                visualTemplate = shapeDefaults.visual, // Shape visual should not have position in its parent group.
+                type = shapeDefaults.type.toLocaleLowerCase();
 
             function externalLibraryShape(libraryShapeName, options, shapeDefaults) {
                 // if external serializationSource we need to consult the attached libraries
@@ -725,6 +727,8 @@
                         return new Circle(shapeDefaults);
                     case "text": // Maybe should be something else.
                         return new TextBlock(shapeDefaults);
+                    case "svg":
+                        return svgShape(shapeDefaults.definition);
                     default:
                         var p = new Path(shapeDefaults);
                         return p;
@@ -747,8 +751,7 @@
                 parseXml = function (xmlStr) {
                     return ( new window.DOMParser() ).parseFromString(xmlStr, "image/svg+xml");
                 };
-            } else if (typeof window.ActiveXObject != "undefined" &&
-                new window.ActiveXObject("Microsoft.XMLDOM")) {
+            } else if (typeof window.ActiveXObject != "undefined" && new window.ActiveXObject("Microsoft.XMLDOM")) {
                 parseXml = function (xmlStr) {
                     var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
                     xmlDoc.async = "false";
@@ -759,12 +762,12 @@
                 throw new Error("No XML parser found");
             }
 
-            function svgShape(svgString, shapeDefaults) {
-                var fullString = '<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' + svgString + '</svg>';
+            function svgShape(svgString) {
+                var fullString = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' + svgString + '</svg>';
                 var result = parseXml(fullString);
                 var importedNode = document.importNode(result.childNodes[0].childNodes[0], true);
-                var g =  new diagram.Group();
-                g.append(new diagram.Visual(importedNode));
+                var g = new Group();
+                g.append(new Visual(importedNode));
                 return g;
             }
 
@@ -774,25 +777,20 @@
                 return pathShape(shapeDefaults.path, shapeDefaults);
             } else if (isFunction(visualTemplate)) { // custom template
                 return functionShape(visualTemplate, this, shapeDefaults);
-            } else if (Object.prototype.toString.call(visualTemplate) === '[object Object]') { //literal
-                var origin = visualTemplate.origin || "internal";
-
-                if (origin.toLocaleLowerCase()==="external"){
-                    var libraryShapeName = visualTemplate.library;
-                    return externalLibraryShape(libraryShapeName, options, shapeDefaults);
-                } else {
-                    var type = visualTemplate.type || "simple";
-                    var definition = visualTemplate.definition;
-
-                    if (type.toLocaleLowerCase() === "simple") {
-                        return simpleShape(definition, shapeDefaults);
-                    } else if (type.toLocaleLowerCase() === "svg") {
-                        return svgShape(definition, shapeDefaults);
-                    } else if (type.toLocaleLowerCase() === "function") {
-                        return functionShape(definition, this, shapeDefaults);
-                    }
-                }
-            } else if (isString(shapeDefaults.type)) {
+            } else if (isString(type)) {
+//                var origin = visualTemplate.origin || "internal";
+//
+//                if (origin.toLocaleLowerCase() === "external"){
+//                    var libraryShapeName = visualTemplate.library;
+//                    return externalLibraryShape(libraryShapeName, options, shapeDefaults);
+//                } else {
+//                    var definition = visualTemplate.definition;
+//                    if (type === "svg") {
+//                        return svgShape(definition, shapeDefaults);
+//                    } else if (type.toLocaleLowerCase() === "function") {
+//                        return functionShape(definition, this, shapeDefaults);
+//                    }
+//                }
                 return simpleShape(shapeDefaults.type, shapeDefaults);
             } else {
                 return new Rectangle(shapeDefaults);
@@ -1141,10 +1139,10 @@
              */
             serialize: function () {
                 var json = deepExtend({}, {
-                        options: this.options,
-                        from: this.from.toString(),
-                        to: this.to.toString()
-                    });
+                    options: this.options,
+                    from: this.from.toString(),
+                    to: this.to.toString()
+                });
                 if (this.model) {
                     json.model = this.model.toString();
                 }

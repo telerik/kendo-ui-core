@@ -180,6 +180,16 @@
         equal(path.shapeVisual.data(), shape.options.path, "the shape visual should have the same path data");
     });
 
+    test("create svg shape", function() {
+        var shape = diagram.addShape({
+            id: "pathShape",
+            type: "svg",
+            definition: '<rect ry="7" rx="7" id="svg_2" height="125" width="270" y="0" x="0" stroke-width="0" stroke="#000000" fill="#e1e6e5"/>'
+        });
+
+        equal(diagram.shapes.length, 1, "should have a single group with rect");
+    });
+
     test("visual shape creation", function() {
         var visualCalled = false,
             shape = diagram.addShape({
