@@ -711,13 +711,13 @@ namespace :build do
         desc 'Run tests and VSDoc'
         task :tests => ["tests:Production", "vsdoc:production:test"]
 
-        desc 'Update the /production build machine web site'
-        task :demos => [ 'demos:staging', 'download_builder:staging' ] do
-            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
-        end
-
         task :sync_docs do
             sync_docs_submodule("production")
+        end
+
+        desc 'Update the /production build machine web site'
+        task :demos => [ :sync_docs, 'demos:staging', 'download_builder:staging' ] do
+            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
         end
 
         changelog = "#{WEB_ROOT}/changelog/index.html"
@@ -731,9 +731,14 @@ namespace :build do
         desc 'Runs test suite over the master branch'
         task :tests => ["tests:CI", "vsdoc:master:test", "intellisense:master:test", "type_script:master:test"]
 
+        task :sync_docs do
+            sync_docs_submodule("master")
+        end
+
         desc 'Update the /staging build machine web site'
         task :demos => [
             :get_binaries,
+            :sync_docs,
             'demos:staging',
             'download_builder:staging',
             'demos:staging_java',
@@ -762,10 +767,6 @@ namespace :build do
             remote.deploy("#{source}\\VS2012\\Kendo.Mvc.Examples", "#{shares}\\staging-mvc\\")
             remote.deploy("#{source}\\VS2013\\Kendo.Mvc.Examples", "#{shares}\\staging-mvc5\\")
             remote.start_iis()
-        end
-
-        task :sync_docs do
-            sync_docs_submodule("master")
         end
 
         desc 'Package and publish bundles to the Stable directory'
