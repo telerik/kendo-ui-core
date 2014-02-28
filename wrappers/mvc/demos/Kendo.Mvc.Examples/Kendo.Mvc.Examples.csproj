@@ -577,6 +577,7 @@
     <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
     <Compile Include="ModelBinders\CultureAwareDateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\CultureAwareDecimalModelBinder.cs" />
+    <Compile Include="ModelBinders\WebApiDataSourceRequestModelBinder.cs" />
     <Compile Include="Models\BarChartsLocalDataViewModel.cs" />
     <Compile Include="Models\BaseUnit.cs" />
     <Compile Include="Models\BubbleChartsGroupedDataViewModel.cs" />

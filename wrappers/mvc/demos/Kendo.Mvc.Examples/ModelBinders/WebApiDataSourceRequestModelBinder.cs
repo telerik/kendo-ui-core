@@ -1,8 +1,9 @@
 ﻿using Kendo.Mvc.Infrastructure;
+using Kendo.Mvc.UI;
 using System.Web.Http.Controllers;
 using System.Web.Http.ModelBinding;
 
-namespace Kendo.Mvc.UI
+namespace Kendo.Mvc.Examples
 {
     public class WebApiDataSourceRequestModelBinder : IModelBinder
     {
@@ -48,7 +49,7 @@ namespace Kendo.Mvc.UI
             return true;
         }
 
-        private bool TryGetValue<T>(ModelBindingContext bindingContext, string key, out T result)
+        private bool TryGetValue<T>(System.Web.Http.ModelBinding.ModelBindingContext bindingContext, string key, out T result)
         {
             var value = bindingContext.ValueProvider.GetValue(key);
 
