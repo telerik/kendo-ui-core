@@ -7,7 +7,7 @@ namespace Kendo.Mvc.UI
         
         Tree ,
         
-        Forcedirected 
+        Force 
         
     }
 }

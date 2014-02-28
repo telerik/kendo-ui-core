@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Connectors = new List<DiagramShapeDefaultsSettingsConnector>();
+                
             Hover = new DiagramShapeDefaultsHoverSettings();
                 
             Rotation = new DiagramShapeDefaultsRotationSettings();
@@ -54,6 +56,12 @@ namespace Kendo.Mvc.UI
         public string Background { get; set; }
         
         public DiagramShapeDefaultsHoverSettings Hover
+        {
+            get;
+            set;
+        }
+        
+        public List<DiagramShapeDefaultsSettingsConnector> Connectors
         {
             get;
             set;
@@ -143,6 +151,12 @@ namespace Kendo.Mvc.UI
             if (hover.Any())
             {
                 json["hover"] = hover;
+            }
+                
+            var connectors = Connectors.ToJson();
+            if (connectors.Any())
+            {
+                json["connectors"] = connectors;
             }
                 
             var rotation = Rotation.ToJson();

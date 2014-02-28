@@ -85,7 +85,7 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-
+        
         //<< Fields
 
         public ClientHandlerDescriptor VisualTemplate { get; set; }
@@ -140,7 +140,7 @@ namespace Kendo.Mvc.UI
             {
                 json["rotatable"] = Rotatable;
             }
-            
+                
             var connectionDefaults = ConnectionDefaults.ToJson();
             if (connectionDefaults.Any())
             {
@@ -164,8 +164,8 @@ namespace Kendo.Mvc.UI
             {
                 json["shapes"] = shapes;
             }
-
-            //<< Serialization
+                
+        //<< Serialization
 
             if (VisualTemplate.HasValue())
             {

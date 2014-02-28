@@ -100,17 +100,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual: Should redirect here to a more comprehensive overview of how to use the primitives.
-        /// </summary>
-        /// <param name="value">The value that configures the visualtemplateid.</param>
-        public DiagramBuilder VisualTemplate(string value)
-        {
-            container.VisualTemplate.HandlerName = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// Defines the connections configuration.
         /// </summary>
         /// <param name="configurator">The action that configures the connectiondefaults.</param>

@@ -172,6 +172,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Defines the connectors the shape owns.You can easily define your own custom connectors or mix-match with the above defined custom connectors.Example - custom shape with custom connectorsThe following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.
+        /// </summary>
+        /// <param name="configurator">The action that configures the connectors.</param>
+        public DiagramShapeBuilder Connectors(Action<DiagramShapeConnectorFactory> configurator)
+        {
+            configurator(new DiagramShapeConnectorFactory(container.Connectors));
+            return this;
+        }
+        
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="configurator">The action that configures the rotation.</param>

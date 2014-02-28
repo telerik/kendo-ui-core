@@ -1943,4 +1943,4 @@
     <Compile Include="UI\Diagram\Settings\DiagramShapeStrokeSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramShapeStrokeSettingsBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\Diagram\Fluent\DiagramConnectionPointFactory.cs" /><Compile Include="UI\Diagram\DiagramConnectionPoint.cs" /><Compile Include="UI\Diagram\Fluent\DiagramConnectionPointBuilder.cs" /><Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsSettingsConnectorFactory.cs" /><Compile Include="UI\Diagram\DiagramShapeDefaultsSettingsConnector.cs" /><Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsSettingsConnectorBuilder.cs" /><Compile Include="UI\Diagram\Fluent\DiagramShapeConnectorFactory.cs" /><Compile Include="UI\Diagram\DiagramShapeConnector.cs" /><Compile Include="UI\Diagram\Fluent\DiagramShapeConnectorBuilder.cs" /><Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" /></ItemGroup></Project>

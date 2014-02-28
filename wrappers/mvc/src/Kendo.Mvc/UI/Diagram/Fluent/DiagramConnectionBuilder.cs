@@ -61,6 +61,16 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Sets the intermediate points (in global coordinates) of the connection. It's important to note that currently these points cannot be manipulated in the interface.
+        /// </summary>
+        /// <param name="configurator">The action that configures the points.</param>
+        public DiagramConnectionBuilder Points(Action<DiagramConnectionPointFactory> configurator)
+        {
+            configurator(new DiagramConnectionPointFactory(container.Points));
+            return this;
+        }
+        
         //<< Fields
     }
 }
