@@ -14,7 +14,7 @@
             <ul>
                 @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                 {
-                    if (!widget.ShouldInclude) { continue; }
+                    if (!widget.ShouldInclude || widget.Items.All(x=>!x.ShouldInclude)) { continue; }
                     <li>
                         <h2>@widget.Text</h2>
                         <ul>

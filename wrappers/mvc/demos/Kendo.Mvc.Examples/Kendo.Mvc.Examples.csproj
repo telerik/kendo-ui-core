@@ -2750,7 +2750,6 @@
     <Content Include="Areas\razor\Views\web\scheduler\rtl.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\selection.cshtml" />
     <Content Include="Areas\razor\Views\web\scheduler\templates.cshtml" />
-    <Content Include="Areas\razor\Views\web\Shared\test.cshtml" />
     <Content Include="Areas\razor\Views\web\slider\api.cshtml" />
     <Content Include="Areas\razor\Views\web\slider\events.cshtml" />
     <Content Include="Areas\razor\Views\web\slider\index.cshtml" />
