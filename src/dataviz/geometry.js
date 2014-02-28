@@ -189,7 +189,7 @@
 
         wrap: function(targetRect) {
             return new Rect(this.p0.min(targetRect.p0), this.p1.max(targetRect.p1));
-        },
+        }
     });
 
     var Circle = Class.extend({

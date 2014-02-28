@@ -113,6 +113,8 @@
                     childNode = new MultiPathNode(srcElement);
                 } else if (srcElement instanceof d.Circle) {
                     childNode = new CircleNode(srcElement);
+                } else if (srcElement instanceof d.Arc) {
+                    childNode = new ArcNode(srcElement);
                 }
 
                 if (children && children.length > 0) {
@@ -526,6 +528,12 @@
         )
     });
 
+    var ArcNode = PathNode.extend({
+        renderData: function() {
+            return this.printPath(this.srcElement.toPath());
+        }
+    });
+
     // Exports ================================================================
     if (kendo.support.browser.msie) {
         d.SurfaceFactory.current.register("vml", Surface, 20);
@@ -533,6 +541,7 @@
 
     deepExtend(d, {
         vml: {
+            ArcNode: ArcNode,
             CircleNode: CircleNode,
             FillNode: FillNode,
             GroupNode: GroupNode,
