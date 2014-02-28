@@ -3435,7 +3435,7 @@ var __meta__ = {
                             init: initCallback,
                             pane: that.pane,
                             filter: isMobile ? ":not(.k-column-active)" : "",
-                            lockedColumns: lockedColumns(columns).length > 0
+                            lockedColumns: column.lockable !== false && lockedColumns(columns).length > 0
                         };
 
                         cell.kendoColumnMenu(menuOptions);

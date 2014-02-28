@@ -211,4 +211,17 @@
         equal(th.eq(0).data("kendoColumnMenu").options.lockedColumns, false);
         equal(th.eq(1).data("kendoColumnMenu").options.lockedColumns, false);
     });
+
+    test("column menu lockedColumns when lockable is disabled", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", lockable: false, locked: true },
+                { field: "bar", lockable: false, locked: false }
+            ]
+        });
+
+        var th = grid.wrapper.find("th");
+        equal(th.eq(0).data("kendoColumnMenu").options.lockedColumns, false);
+        equal(th.eq(1).data("kendoColumnMenu").options.lockedColumns, false);
+    });
 })();
