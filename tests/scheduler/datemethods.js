@@ -56,6 +56,11 @@
         equal(weekInMonth(date, 6), 2);
     });
 
+    test("weekInMonth method weekStart (MO) - last week", function() {
+        var date = new Date(2014, 2, 31);
+        equal(weekInMonth(date, 1), 6);
+    });
+
     module("Week in year (ISO8601)");
 
     test("weekInYear returns 53 for (31-12-2012 00:00:00)", function(){
