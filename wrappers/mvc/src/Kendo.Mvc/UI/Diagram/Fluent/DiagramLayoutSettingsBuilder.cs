@@ -163,7 +163,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The layer type.
+        /// The layout type.
         /// </summary>
         /// <param name="value">The value that configures the type.</param>
         public DiagramLayoutSettingsBuilder Type(DiagramLayoutType value)
@@ -174,7 +174,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// the subtype of the layer.
+        /// The layout subtype.
         /// </summary>
         /// <param name="value">The value that configures the subtype.</param>
         public DiagramLayoutSettingsBuilder Subtype(DiagramLayoutSubtype value)

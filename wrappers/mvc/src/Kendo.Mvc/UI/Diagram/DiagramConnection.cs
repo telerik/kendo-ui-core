@@ -14,6 +14,8 @@ namespace Kendo.Mvc.UI
         
             Hover = new DiagramConnectionHoverSettings();
                 
+            Points = new List<DiagramConnectionPoint>();
+                
             Stroke = new DiagramConnectionStrokeSettings();
                 
         //<< Initialization
@@ -36,6 +38,12 @@ namespace Kendo.Mvc.UI
         public string StartCap { get; set; }
         
         public string EndCap { get; set; }
+        
+        public List<DiagramConnectionPoint> Points
+        {
+            get;
+            set;
+        }
         
         //<< Fields
 
@@ -65,6 +73,12 @@ namespace Kendo.Mvc.UI
                 json["endCap"] = EndCap;
             }
             
+            var points = Points.ToJson();
+            if (points.Any())
+            {
+                json["points"] = points;
+            }
+                
         //<< Serialization
         }
     }

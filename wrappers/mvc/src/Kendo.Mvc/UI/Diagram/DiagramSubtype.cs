@@ -13,9 +13,9 @@ namespace Kendo.Mvc.UI
         
         Tipover ,
         
-        MindmapVertical ,
+        Mindmapvertical ,
         
-        MindmapHorizontal 
+        Mindmaphorizontal 
         
     }
 }
