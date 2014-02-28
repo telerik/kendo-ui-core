@@ -3,11 +3,10 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
 using System.Data.Entity.Infrastructure;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
 using System.Web.Mvc;
-using System.Linq;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
