@@ -5,89 +5,18 @@
     <div class="configuration-horizontal">
         <div class="config-section">
             <label for="subtype">Layout: </label>
-            <input id="subtype" value="1" />
+               <select id="subtype">
+                    <option value="down">Tree Down</option>
+                    <option value="up">Tree Up</option>
+                    <option value="tipover">Tipover Tree</option>
+               </select>
         </div>
     </div>
     <script>
-        function subtypeChange() {
-            $("#diagram").getKendoDiagram().layout({
-                subtype: this.value(),
-                type: "tree",
-                horizontalSeparation: 30,
-                verticalSeparation: 20
-            });
-        }
-
-        function init() {
-            var subtypeData = [{
-                text: "TreeDown", value: "down"
-            },{
-                text: "TreeUp", value: "up"
-            },{
-                text: "TipoverTree", value: "tipover"
-            }];
-
-            $("#subtype").kendoDropDownList({
-                dataTextField: "text",
-                dataValueField: "value",
-                dataSource: subtypeData,
-                change: subtypeChange
-            });
-
-            createDiagram();
-        }
-
         function createDiagram() {
-            var data = [{
-                node: "0",
-                items: [{
-                    node: "1.1",
-                    items: [{
-                        node: "2.1",
-                        items: [{
-                            node: "3.1"
-                        }]
-                    }]
-                },{
-                    node: "1.2",
-                    items: [{
-                        node: "2.2"
-                    }]
-                },{
-                    node: "1.3",
-                    items: [{
-                        node: "2.3"
-                    },{
-                        node: "2.4",
-                        items: [{
-                            node: "3.2"
-                        },{
-                            node: "3.3"
-                        }]
-                    }]
-                },{
-                    node: "1.4",
-                    items: [{
-                        node: "2.5"
-                    }]
-                },{
-                    node: "1.5",
-                    items: [{
-                        node: "2.6"
-                    },{
-                        node: "2.7",
-                        items: [{
-                            node: "3.4"
-                        },{
-                            node: "3.5"
-                        }]
-                    }]
-                }]
-            }];
-
             $("#diagram").kendoDiagram({
                 dataSource: {
-                    data: data,
+                    data: diagramNodes(),
                     schema: {
                         model: {
                             children: "items"
@@ -101,12 +30,41 @@
                     verticalSeparation: 20
                 },
                 shapeDefaults: {
-                    width: 50,
-                    height: 50
+                    width: 40,
+                    height: 40
                 }
             });
         }
 
-        $(document).ready(init);
+        function diagramNodes() {
+            var root = { name: "0", items: [] };
+            addNodes(root, [3, 2, 2]);
+            return [root];
+        }
+
+        function addNodes(root, levels) {
+            if (levels.length > 0) {
+                for (var i = 0; i < levels[0]; i++) {
+                    var node = { name: "0", items: [] };
+                    root.items.push(node);
+
+                    addNodes(node, levels.slice(1));
+                }
+            }
+        }
+
+        $(document).ready(function() {
+            $("#subtype").change(function() {
+                $("#diagram").getKendoDiagram().layout({
+                    subtype: $(this).val(),
+                    type: "tree",
+                    horizontalSeparation: 30,
+                    verticalSeparation: 20
+                });
+            });
+        });
+
+        $(document).ready(createDiagram);
+        $(document).bind("kendo:skinChange", createDiagram);
     </script>
 </div>
