@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Hosting;
 
 namespace Kendo.Extensions
 {
@@ -56,7 +57,11 @@ namespace Kendo.Extensions
         private static string ResourceUrl(UrlHelper url, string assetType, string file)
         {
 #if DEBUG
-            return url.RouteUrl("Debug", new { assetType = assetType, file = file });
+            return url.Content(string.Format("{0}/src/{1}/{2}",
+                HostingEnvironment.ApplicationVirtualPath,
+                assetType,
+                file
+            ));
 #else
             if (IsAbsoluteUrl(file)) {
                 return file;
