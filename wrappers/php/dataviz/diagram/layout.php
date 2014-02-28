@@ -55,37 +55,24 @@ echo $diagram->render();
 <div class="configuration-horizontal">
     <div class="config-section">
         <label for="subtype">Layout: </label>
-        <input id="subtype" value="1" />
+           <select id="subtype">
+                <option value="down">Tree Down</option>
+                <option value="up">Tree Up</option>
+                <option value="tipover">Tipover Tree</option>
+            </select>
     </div>
 </div>
 <script>
-    function subtypeChange() {
-        $("#diagram").getKendoDiagram().layout({
-            subtype: this.value(),
-            type: "tree",
-            horizontalSeparation: 30,
-            verticalSeparation: 20
+    $(document).ready(function() {
+        $("#subtype").change(function() {
+            $("#diagram").getKendoDiagram().layout({
+                subtype: $(this).val(),
+                type: "tree",
+                horizontalSeparation: 30,
+                verticalSeparation: 20
+            });
         });
-    }
-
-    function init() {
-        var subtypeData = [{
-            text: "TreeDown", value: "down"
-        },{
-            text: "TreeUp", value: "up"
-        },{
-            text: "TipoverTree", value: "tipover"
-        }];
-
-        $("#subtype").kendoDropDownList({
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: subtypeData,
-            change: subtypeChange
-        });
-
-        createDiagram();
-    }
+    });
 </script>
 
 <?php require_once '../../include/footer.php'; ?>
