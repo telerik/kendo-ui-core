@@ -196,6 +196,21 @@ namespace Kendo.Mvc.UI.Tests.Grid
         }
 
         [Fact]
+        public void Aggregates_property_is_correctly_serialized()
+        {
+            var grid = GridTestHelper.CreateGrid<User>();
+            AggregateDescriptor aggregate = new AggregateDescriptor();
+            aggregate.Member = "Name";
+            aggregate.Aggregates.Add(new SumFunction { SourceField = "Name" });
+
+            grid.DataSource.Aggregates.Add(aggregate);
+            var column = new GridBoundColumn<User, string>(grid, u => u.Name);
+            var json = column.ToJson();
+
+            Assert.True(json.ContainsKey("aggregates"));
+        }
+
+        [Fact]
         public void Should_create_template_builder_if_template_is_set()
         {
             var column = new GridBoundColumn<User, bool>(GridTestHelper.CreateGrid<User>(), u => u.Active);

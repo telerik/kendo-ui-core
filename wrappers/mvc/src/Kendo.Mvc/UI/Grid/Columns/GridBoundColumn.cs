@@ -240,7 +240,7 @@ namespace Kendo.Mvc.UI
 
             if (aggregates.Any())
             {
-                json["aggregate"] = aggregates;
+                json["aggregates"] = aggregates;
             }
 
             string editorHtml = EditorHtml;
