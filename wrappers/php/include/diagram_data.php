@@ -51,13 +51,13 @@ function orgchart_items() {
 }
 
 function _node($index) {
-    return array('node' => $index, 'items' => array());
+    return array('name' => $index, 'items' => array());
 }
 
 function _make_nodes($root, $levels) {
     if (!empty($levels)) {
         for ($i = 0; $i < $levels[0]; $i++) {
-            $node = _node($i);
+            $node = _node($root['name'] . '.' . $i);
             _make_nodes(&$node, array_slice($levels, 1));
 
             $root['items'][] = $node;
