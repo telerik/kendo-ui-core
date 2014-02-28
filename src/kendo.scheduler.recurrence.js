@@ -666,8 +666,12 @@ kendo_module({
     }
 
     function weekInMonth(date, weekStart) {
-        var firstWeekDay = firstDayOfMonth(date).getDay(),
-            firstWeekLength = Math.abs(7 - (firstWeekDay + 7 - (weekStart || 7))) || 7;
+        var firstWeekDay = firstDayOfMonth(date).getDay();
+        var firstWeekLength = 7 - (firstWeekDay + 7 - (weekStart || 7)) || 7;
+
+        if (firstWeekLength < 0) {
+            firstWeekLength += 7;
+        }
 
         return Math.ceil((date.getDate() - firstWeekLength) / 7) + 1;
     }
