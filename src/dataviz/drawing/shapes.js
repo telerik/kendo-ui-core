@@ -172,7 +172,7 @@
         },
 
         toPath: function() {
-            var path = new Path(this._cloneOption()),
+            var path = new Path(this.options.toJSON()),
                 curvePoints = this.geometry.curvePoints();
             path.moveTo(curvePoints[0].x, curvePoints[0].y);
             for (var i = 1; i < curvePoints.length; i+=3) {
@@ -180,27 +180,6 @@
             }
 
             return path;
-        },
-
-        _cloneOption: function() {
-            var options = this.options,
-                result = {};
-            if (options.fill) {
-                result.fill = {
-                    color: options.fill.color,
-                    opacity: options.fill.opacity
-                };
-            }
-
-            if (options.stroke) {
-                result.stroke = {
-                    color: options.stroke.color,
-                    width: options.stroke.width,
-                    opacity: options.stroke.opacity
-                };
-            }
-
-            return result;
         }
     });
 
