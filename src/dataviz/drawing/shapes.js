@@ -15,7 +15,6 @@
         g = dataviz.geometry,
         Point = g.Point,
         Rect = g.Rect,
-        Arc = g.Arc,
 
         drawing = dataviz.drawing,
         OptionsStore = drawing.OptionsStore,

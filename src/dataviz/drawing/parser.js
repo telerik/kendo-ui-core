@@ -8,12 +8,10 @@
         dataviz = kendo.dataviz,
         drawing = dataviz.drawing,
         geometry = dataviz.geometry,
-        Segment = drawing.Segment,
         Point = geometry.Point,
         SEGMENT_REGEX = /([a-z]{1})([^a-z]*)(z)?/gi,
         SPLIT_REGEX = /,|\s/g,
         trim = $.trim,
-        last = dataviz.last,
         round = dataviz.round,
         deg = dataviz.util.deg,
         math = Math,
@@ -35,7 +33,7 @@
         if (start > end) {
             end+= 360;
         }
-        alpha = math.abs(end - start)
+        alpha = math.abs(end - start);
         if (!swipe) {
             alpha = 360 - alpha;
         }
@@ -57,7 +55,7 @@
 
         if  (y1 !== y2) {
             var x21 = x2 - x1, y21 = y2 - y1,
-                rx2 = math.pow(rx, 2), ry2 = math.pow(ry, 2)
+                rx2 = math.pow(rx, 2), ry2 = math.pow(ry, 2),
                 k = (ry2 * x21 * (x1 + x2) + rx2 * y21 * (y1 + y2)) / (2 * rx2 * y21),
                 yk2 = k - y2,
                 l = - (x21 * ry2) / (rx2 * y21);
@@ -202,7 +200,6 @@
 
             a: function(path, parameters, position, isRelative) {
                 var length = parameters.length,
-                    startPoint,
                     endPoint,
                     radiusX,
                     radiusY,
