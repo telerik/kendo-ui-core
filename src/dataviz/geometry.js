@@ -292,7 +292,7 @@
 
         curvePoints: function() {
             var arc = this,
-                interval = arc._arcPathInterval(),
+                interval = arc._arcInterval(),
                 startAngle = interval.startAngle,
                 endAngle = interval.endAngle,
                 angles = [],
@@ -317,7 +317,28 @@
             return curvePoints;
         },
 
-        _arcPathInterval: function() {
+        boundingRect: function() {
+            var arc = this,
+                interval = arc._arcInterval(),
+                startAngle = interval.startAngle,
+                endAngle = interval.endAngle,
+                currentPoint = arc.pointAt(startAngle),
+                endPoint = arc.pointAt(endAngle),
+                minPoint = currentPoint.min(endPoint),
+                maxPoint = currentPoint.max(endPoint),
+                currentAngle = startAngle + 90 - startAngle % 90;
+
+            while (currentAngle < endAngle) {
+                currentPoint = arc.pointAt(currentAngle);
+                minPoint = minPoint.min(currentPoint);
+                maxPoint = maxPoint.max(currentPoint);
+                currentAngle += 90;
+            }
+
+            return new Rect(minPoint, maxPoint);
+        },
+
+        _arcInterval: function() {
             var startAngle = this.startAngle,
                 endAngle = this.endAngle,
                 counterClockwise = this.counterClockwise;

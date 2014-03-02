@@ -63,14 +63,14 @@
                         
             var arcGeometry = new geometry.Arc(Point.create(300, 300), {
                 startAngle: 0,
-                endAngle: 0,
-                radiusX: 100,
-                radiusY: 50,
+                endAngle: 120,
+                radiusX: 50,
+                radiusY: 100,
                 counterClockwise: true
             });
             
             var arc = new drawing.Arc(arcGeometry, strokeOptions);
-            group.append(arc, new drawing.Circle(new geometry.Circle(Point.create(300, 300), 3), strokeOptions));//circle, circleBoundingPath, curve, curveBoundingRect);
+            group.append(arc, new drawing.Circle(new geometry.Circle(Point.create(300, 300), 3), strokeOptions), rectPath(arc.boundingRect(), strokeOptions));//circle, circleBoundingPath, curve, curveBoundingRect);
             surface.draw(group);
 
 
