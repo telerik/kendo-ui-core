@@ -227,9 +227,21 @@
         });
 
         // ------------------------------------------------------------
+        function triggerMousewheel(delta) {
+            chart._mousewheel({
+                originalEvent: {
+                    detail: delta * 3,
+                    clientX: 300,
+                    clientY: 300
+                },
+                preventDefault: function() {},
+                stopPropagation: function() {}
+            });
+        }
+
         module("Events", {
             setup: function() {
-                setupChart({series: [{}]});
+                setupChart({series: [{}], valueAxis: { name: "value" }});
             },
             teardown: destroyChart
         });
@@ -272,6 +284,19 @@
             });
         });
 
+        test("mousewheel down triggers zoom event (zoom out)", function() {
+            chart.bind("zoom", function(e) {
+                equal(e.axisRanges.value.max, 3.2);
+            });
+            triggerMousewheel(10);
+        });
+
+        test("mousewheel up triggers zoom event (zoom in)", function() {
+            chart.bind("zoom", function(e) {
+                equal(e.axisRanges.value.max, -0.8);
+            });
+            triggerMousewheel(-10);
+        });
     })();
 
     (function() {

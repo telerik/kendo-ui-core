@@ -689,7 +689,7 @@ var __meta__ = {
                     currentAxis = axes[i];
                     axisName = currentAxis.options.name;
                     if (axisName) {
-                        ranges[axisName] = currentAxis.scaleRange(totalDelta);
+                        ranges[axisName] = currentAxis.scaleRange(-totalDelta);
                     }
                 }
 
