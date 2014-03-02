@@ -14,42 +14,31 @@
                 .VerticalSeparation(20)
             )
             .ShapeDefaults(sd => sd
-                .Width(50)
-                .Height(50)
+                .Width(40)
+                .Height(40)
             )
     %>
 </div>
-<div class="configuration k-widget k-header" style="width:170px;">
-    <label for="subtype">Layout: </label>
-    <%= Html.Kendo().DropDownList()
-            .Name("subtype")
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .Events(e => e.Change("subtypeChange"))
-            .BindTo(new List<SelectListItem>() {
-                new SelectListItem() {
-                    Text = "TreeDown",
-                    Value = "down"
-                },
-                new SelectListItem() {
-                    Text = "TreeUp",
-                    Value = "up"
-                },
-                new SelectListItem() {
-                    Text = "TipoverTree",
-                    Value = "tipover"
-                }
-            })
-    %>
+<div class="configuration-horizontal">
+    <div class="config-section">
+        <label for="subtype">Layout: </label>
+           <select id="subtype">
+                <option value="down">Tree Down</option>
+                <option value="up">Tree Up</option>
+                <option value="tipover">Tipover Tree</option>
+            </select>
+    </div>
 </div>
 <script>
-    function subtypeChange() {
-        $("#diagram").getKendoDiagram().layout({
-            subtype: this.value(),
-            type: "tree",
-            horizontalSeparation: 30,
-            verticalSeparation: 20
+    $(document).ready(function () {
+        $("#subtype").change(function () {
+            $("#diagram").getKendoDiagram().layout({
+                subtype: $(this).val(),
+                type: "tree",
+                horizontalSeparation: 30,
+                verticalSeparation: 20
+            });
         });
-    }
+    });
 </script>
 </asp:Content>
