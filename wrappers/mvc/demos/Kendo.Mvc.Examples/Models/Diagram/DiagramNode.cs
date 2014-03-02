@@ -8,10 +8,10 @@ namespace Kendo.Mvc.Examples.Models
         {
         }
 
-        public DiagramNode(string name, List<DiagramNode> items)
+        public DiagramNode(string name)
         {
             Name = name;
-            Items = items;
+            Items = new List<DiagramNode>();
         }
 
         public string Name { get; set; }

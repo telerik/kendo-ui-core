@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 using Kendo.Mvc.Examples.Models.Chart;
 
 namespace Kendo.Mvc.Examples.Models
@@ -35,87 +36,30 @@ namespace Kendo.Mvc.Examples.Models
 
         public static List<DiagramNode> DiagramNodes()
         {
-            List<DiagramNode> result = new List<DiagramNode> {
-                new DiagramNode {
-                    Name = "0",
-                    Items = new List<DiagramNode> {
-                        new DiagramNode {
-                            Name = "1.1",
-                            Items = new List<DiagramNode> {
-                                new DiagramNode {
-                                    Name = "2.1",
-                                    Items = new List<DiagramNode> {
-                                        new DiagramNode {
-                                            Name = "3.1",
-                                            Items = null
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        new DiagramNode {
-                            Name = "1.2",
-                            Items = new List<DiagramNode> {
-                                new DiagramNode {
-                                    Name = "2.2",
-                                    Items = null
-                                }
-                            }
-                        },
-                        new DiagramNode {
-                            Name = "1.3",
-                            Items = new List<DiagramNode> {
-                                new DiagramNode {
-                                    Name = "2.3",
-                                    Items = new List<DiagramNode> {
-                                        new DiagramNode {
-                                            Name = "3.2",
-                                            Items = null
-                                        },
-                                        new DiagramNode {
-                                            Name = "3.3",
-                                            Items = null
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        new DiagramNode {
-                            Name = "1.4",
-                            Items = new List<DiagramNode> {
-                                new DiagramNode {
-                                    Name = "2.5",
-                                    Items = null
-                                }
-                            }
-                        },
-                        new DiagramNode {
-                            Name = "1.5",
-                            Items = new List<DiagramNode> {
-                                new DiagramNode {
-                                    Name = "2.6",
-                                    Items = null
-                                },
-                                new DiagramNode {
-                                    Name = "2.7",
-                                    Items = new List<DiagramNode> {
-                                        new DiagramNode {
-                                            Name = "3.4",
-                                            Items = null
-                                        },
-                                        new DiagramNode {
-                                            Name = "3.5",
-                                            Items = null
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            };
+            var result = new List<DiagramNode>();
+            var root = new DiagramNode("0");
+            result.Add(root);
+
+            AddNodes(root, new int[] { 3, 2, 2 });
 
             return result;
+        }
+
+        private static void AddNodes(DiagramNode root, IEnumerable<int> levels)
+        {
+            if (levels.Any())
+            {
+                for (int i = 0; i < levels.First(); i++)
+                {
+                    var node = new DiagramNode(root.Name + "." + i);
+                    root.Items.Add(node);
+
+                    if (levels.Count() > 1)
+                    {
+                        AddNodes(node, levels.Skip(1));
+                    }
+                }
+            }
         }
     }
 }
