@@ -3282,13 +3282,13 @@ var __meta__ = {
                 }
 
                 return [prevValue, plotValue];
-            } else {
-                var series = point.series;
-                var valueAxis = this.seriesValueAxis(series);
-                var axisCrossingValue = this.categoryAxisCrossingValue(valueAxis);
-
-                return [axisCrossingValue, point.value || axisCrossingValue];
             }
+
+            var series = point.series;
+            var valueAxis = this.seriesValueAxis(series);
+            var axisCrossingValue = this.categoryAxisCrossingValue(valueAxis);
+
+            return [axisCrossingValue, point.value || axisCrossingValue];
         },
 
         plotLimits: function() {
@@ -3302,9 +3302,10 @@ var __meta__ = {
                     var point = categoryPts[pIx];
                     if (point) {
                         var to = this.plotRange(point, 0)[1];
-
-                        max = math.max(max, to);
-                        min = math.min(min, to);
+                        if (defined(to)) {
+                            max = math.max(max, to);
+                            min = math.min(min, to);
+                        }
                     }
                 }
             }

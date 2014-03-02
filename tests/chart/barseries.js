@@ -60,6 +60,7 @@
     (function() {
         var positiveSeries = { data: [1, 2], labels: {} },
             negativeSeries = { data: [-1, -2], labels: {} },
+            sparseSeries = { data: [undefined, 2], labels: {} },
             VALUE_AXIS_MAX = 2,
             CATEGORY_AXIS_Y = 2,
             TOLERANCE = 0.1;
@@ -729,6 +730,24 @@
             });
 
             deepEqual(barHeights, [1, 1, 2, 2]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart / Stack / Missing Values", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [ sparseSeries, sparseSeries ],
+                    isStacked: true }
+                );
+            }
+        });
+
+        test("Reports minimum series value", function() {
+            deepEqual(series.valueAxisRanges[undefined].min, 0);
+        });
+
+        test("Reports maximum series value", function() {
+            deepEqual(series.valueAxisRanges[undefined].max, 4);
         });
 
         // ------------------------------------------------------------
