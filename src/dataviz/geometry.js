@@ -251,7 +251,7 @@
 
     var Arc = Class.extend({
         MAX_INTERVAL: 90,
-        _fields: ["radiusX", "radiusY", "startAngle", "endAngle"],
+        _fields: ["radiusX", "radiusY", "startAngle", "endAngle", "counterClockwise"],
 
         init: function(center, options) {
             var arc = this;
@@ -292,26 +292,50 @@
 
         curvePoints: function() {
             var arc = this,
-                startAngle = arc.startAngle,
-                endAngle = arc.endAngle,
+                interval = arc._arcPathInterval(),
+                startAngle = interval.startAngle,
+                endAngle = interval.endAngle,
                 angles = [],
                 i, points,
                 curvePoints = [arc.pointAt(startAngle)],
                 currentAngle = startAngle;
-            while(endAngle - currentAngle > arc.MAX_INTERVAL) {
-                angles.push(currentAngle);
-                currentAngle += arc.MAX_INTERVAL;
-            }
 
-            angles.push(currentAngle);
-            angles.push(endAngle);
+            if (startAngle !== endAngle) {
+                while(endAngle - currentAngle > arc.MAX_INTERVAL) {
+                    angles.push(currentAngle);
+                    currentAngle += arc.MAX_INTERVAL;
+                }
 
-            for (i = 1; i < angles.length; i++) {
-                points = arc._intervalCurvePoints(angles[i - 1], angles[i]);
-                curvePoints.push(points.cp1, points.cp2, points.p2);
+                angles.push(currentAngle, endAngle);
+
+                for (i = 1; i < angles.length; i++) {
+                    points = arc._intervalCurvePoints(angles[i - 1], angles[i]);
+                    curvePoints.push(points.cp1, points.cp2, points.p2);
+                }
             }
 
             return curvePoints;
+        },
+
+        _arcPathInterval: function() {
+            var startAngle = this.startAngle,
+                endAngle = this.endAngle,
+                counterClockwise = this.counterClockwise;
+
+            if (counterClockwise) {
+                var oldStart = startAngle;
+                startAngle = endAngle;
+                endAngle = oldStart;
+            }
+
+            if (startAngle > endAngle || (counterClockwise && startAngle === endAngle)) {
+                endAngle += 360;
+            }
+
+            return {
+                startAngle: startAngle,
+                endAngle: endAngle
+            };
         },
 
         _intervalCurvePoints: function(startAngle, endAngle) {
