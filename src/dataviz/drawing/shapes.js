@@ -309,13 +309,15 @@
         },
 
         curveTo: function(controlOut, controlIn, point) {
-            var last = this.segments[this.segments.length - 1];
-                segment = new Segment(point, controlIn);
+            if (this.segments.length > 0) {
+                var last = dataviz.last(this.segments);
+                    segment = new Segment(point, controlIn);
 
-            last.controlOut = controlOut;
-            controlOut.observer = last;
+                last.controlOut = controlOut;
+                controlOut.observer = last;
 
-            this.segments.push(segment);
+                this.segments.push(segment);
+            }
 
             return this;
         },
@@ -363,6 +365,14 @@
         lineTo: function(x, y) {
             if (this.paths.length > 0) {
                 dataviz.last(this.paths).lineTo(x, y);
+            }
+
+            return this;
+        },
+
+        curveTo: function(controlOut, controlIn, point) {
+            if (this.paths.length > 0) {
+                dataviz.last(this.paths).curveTo(controlOut, controlIn, point);
             }
 
             return this;
