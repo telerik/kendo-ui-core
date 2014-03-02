@@ -604,12 +604,12 @@
         }
 
         function addedCategoricalPointValues(points, values){
-            var addedValues = true;
+            equal(points.length, values.length, "Number of points");
             for(var idx = 0; idx < points.length; idx++){
-                addedValues = addedValues && points[idx].low === values[idx].low &&
-                    points[idx].high === values[idx].high;
+                deepEqual([points[idx].low, points[idx].high],
+                          [values[idx].low, values[idx].high],
+                         "Difference at index " + idx);
             }
-            return addedValues;
         }
 
         test("low and high value are added to bar points", function(){
@@ -617,7 +617,7 @@
                 points = chart.points,
                 expectedValues = [{low: -2, high: 4},{low: -1, high: 5},{low: 0, high: 6}];
 
-            ok(addedCategoricalPointValues(points, expectedValues));
+            addedCategoricalPointValues(points, expectedValues);
         });
 
         test("low and high value are added to stacked bar points", function(){
@@ -625,7 +625,7 @@
                 points = chart.points,
                 expectedValues = [{low: -2, high: 4},{low: -2, high: 4},{low: -1, high: 5},{low: -1, high: 5},{low: 0, high: 6},{low: 0, high: 6}];
 
-            ok(addedCategoricalPointValues(points, expectedValues));
+            addedCategoricalPointValues(points, expectedValues);
         });
 
         test("low and high value are added to line points", function(){
@@ -633,7 +633,7 @@
                 points = chart.points,
                 expectedValues = [{low: -2, high: 4},{low: -1, high: 5},{low: 0, high: 6}];
 
-            ok(addedCategoricalPointValues(points, expectedValues));
+            addedCategoricalPointValues(points, expectedValues);
         });
 
         test("low and high value are added to stacked line points", function(){
@@ -641,7 +641,7 @@
                 points = chart.points,
                 expectedValues = [{low: -2, high: 4},{low: -2, high: 4},{low: -1, high: 5},{low: -1, high: 5},{low: 0, high: 6},{low: 0, high: 6}];
 
-            ok(addedCategoricalPointValues(points, expectedValues));
+            addedCategoricalPointValues(points, expectedValues);
         });
 
         test("horizontal error bars are correctly added to categorical points for array data", function() {
