@@ -9001,10 +9001,11 @@ var __meta__ = {
                 axisName = options.name,
                 namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
                 tracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
-                defaultRange = tracker.query(),
-                defaultAxisRange = equalsIgnoreCase(options.type, LOGARITHMIC) ? {min: 0.1, max: 1} : { min: 0, max: 1 },
-                range = tracker.query(axisName) || defaultRange || defaultAxisRange,
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
+                isLog = equalsIgnoreCase(axisOptions.type, LOGARITHMIC),
+                defaultRange = tracker.query(),
+                defaultAxisRange = isLog ? {min: 0.1, max: 1} : { min: 0, max: 1 },
+                range = tracker.query(axisName) || defaultRange || defaultAxisRange,
                 axis,
                 axisType,
                 seriesIx,
@@ -9041,7 +9042,7 @@ var __meta__ = {
 
             if (equalsIgnoreCase(axisOptions.type, DATE) || (!axisOptions.type && inferredDate)) {
                 axisType = DateValueAxis;
-            } else if (equalsIgnoreCase(axisOptions.type, LOGARITHMIC)){
+            } else if (isLog){
                 axisType = LogarithmicAxis;
             } else {
                 axisType = NumericAxis;
