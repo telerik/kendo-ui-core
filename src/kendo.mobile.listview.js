@@ -383,10 +383,8 @@ kendo_module({
                     item.update(this.content(this.offset));
                     items.unshift(item);
 
-                    kendo.queueAnimation(function() {
-                        item.above(firstItem);
-                        list._resize();
-                    });
+                    item.above(firstItem);
+                    list._resize();
                }
             } else { // scrolling down
                 if (
@@ -405,10 +403,8 @@ kendo_module({
                         item.update(this.content(this.offset + this.itemCount));
                         list.offset ++;
 
-                        kendo.queueAnimation(function() {
-                            item.below(lastItem);
-                            list._resize();
-                        });
+                        item.below(lastItem);
+                        list._resize();
                     }
                 }
             }
