@@ -2,11 +2,11 @@
     .Name("Grid")
     .Columns(columns =>
     {
-        columns.Bound(o => o.OrderID).Width(120).Locked(true);
+        columns.Bound(o => o.OrderID).Width(120).Locked(true).Lockable(false);
         columns.Bound(o => o.ShipCountry).Width(200);
         columns.Bound(o => o.ShipCity).Width(160);
         columns.Bound(o => o.ShipName).Width(200).Locked(true);
-        columns.Bound(o => o.ShipAddress).Width(300);
+        columns.Bound(o => o.ShipAddress).Width(300).Lockable(false);
     })
     .DataSource(dataSource => dataSource
         .Ajax()
