@@ -12,6 +12,7 @@
 
         svg = d.svg,
         Node = svg.Node,
+        ArcNode = svg.ArcNode,
         CircleNode = svg.CircleNode,
         GroupNode = svg.GroupNode,
         PathNode = svg.PathNode,
@@ -298,13 +299,31 @@
     test("renders straight segments", function() {
         path.moveTo(0, 0).lineTo(10, 20);
 
-        ok(pathNode.render().indexOf("d='M0 0 10 20'") !== -1);
+        ok(pathNode.render().indexOf("d='M0 0 L 10 20'") !== -1);
     });
 
     test("renders closed paths", function() {
         path.moveTo(0, 0).lineTo(10, 20).close();
 
-        ok(pathNode.render().indexOf("d='M0 0 10 20Z'") !== -1);
+        ok(pathNode.render().indexOf("d='M0 0 L 10 20Z'") !== -1);
+    });
+
+    test("renders curve", function() {
+        path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
+
+        ok(pathNode.render().indexOf("d='M0 0 C 10 10 20 10 30 0'") !== -1);
+    });
+
+    test("switches between line and curve", function() {
+        path.moveTo(0, 0).lineTo(5, 5).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
+
+        ok(pathNode.render().indexOf("d='M0 0 L 5 5 C 10 10 20 10 30 0'") !== -1);
+    });
+
+    test("switches between curve and line", function() {
+        path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0)).lineTo(40, 10);
+
+        ok(pathNode.render().indexOf("d='M0 0 C 10 10 20 10 30 0 L 40 10'") !== -1);
     });
 
     test("does not render segments for empty path", function() {
@@ -539,7 +558,7 @@
             .moveTo(0, 0).lineTo(10, 20)
             .moveTo(10, 10).lineTo(10, 20);
 
-        ok(multiPathNode.render().indexOf("d='M0 0 10 20 M10 10 10 20'") !== -1);
+        ok(multiPathNode.render().indexOf("d='M0 0 L 10 20 M10 10 L 10 20'") !== -1);
     });
 
     // ------------------------------------------------------------
@@ -583,4 +602,49 @@
 
         circle.geometry.set("radius", 60);
     });
+    
+    // ------------------------------------------------------------
+    var arc,
+        arcNode;
+
+    module("ArcNode", {
+        setup: function() {
+            var geometry = new g.Arc(new Point(100, 100), {
+                startAngle: 0,
+                endAngle: 120,
+                radiusX: 50,
+                radiusY: 100
+            });
+            arc = new d.Arc(geometry, {stroke: {color: "red", width: 4}, fill: {color: "green", opacity: 0.5}});
+            arcNode = new ArcNode(arc);
+        }
+    });
+
+    test("renders curve path", function() {
+        var result = arcNode.render();        
+        ok(result.indexOf("d='M150 100 C 150 152.4 126.2 200 100 200 91.3 200 82.6 195.3 75 186.6'") !== -1);
+    });
+
+    test("renders arc fill", function() {
+        var result = arcNode.render();
+
+        ok(result.indexOf("fill='green'") !== -1);
+        ok(result.indexOf("fill-opacity='0.5'") !== -1);
+    });
+    
+    test("renders arc stroke", function() {
+        var result = arcNode.render();
+        ok(result.indexOf("stroke-width='4'") !== -1);
+        ok(result.indexOf("stroke='red'") !== -1);
+    });
+    
+    test("geometryChange updates path", function() {
+        arcNode.attr = function(name, value) {
+            equal(name, "d");
+            equal(value, "M150 100 C 150 152.4 126.2 200 100 200 73.8 200 50 152.4 50 100");
+        };
+
+        arc.geometry.set("endAngle", 180);
+    });
+    
 })();

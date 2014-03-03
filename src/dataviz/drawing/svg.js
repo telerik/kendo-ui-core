@@ -533,6 +533,7 @@
 
     deepExtend(d, {
         svg: {
+            ArcNode: ArcNode,
             CircleNode: CircleNode,
             GroupNode: GroupNode,
             MultiPathNode: MultiPathNode,
