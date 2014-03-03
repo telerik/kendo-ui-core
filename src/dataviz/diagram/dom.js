@@ -26,6 +26,7 @@
             DeleteShapeUnit = diagram.DeleteShapeUnit,
             DeleteConnectionUnit = diagram.DeleteConnectionUnit,
             TextBlock = diagram.TextBlock,
+            Image = diagram.Image,
             Point = diagram.Point,
             Intersect = diagram.Intersect,
             ConnectionEditAdorner = diagram.ConnectionEditAdorner,
@@ -727,6 +728,8 @@
                         return new Circle(shapeDefaults);
                     case "text": // Maybe should be something else.
                         return new TextBlock(shapeDefaults);
+                    case "image":
+                        return new Image(shapeDefaults);
                     case "svg":
                         return svgShape(shapeDefaults.definition);
                     default:

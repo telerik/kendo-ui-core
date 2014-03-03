@@ -190,6 +190,18 @@
         equal(diagram.shapes.length, 1, "should have a single group with rect");
     });
 
+    test("create image shape", function() {
+        var shape = diagram.addShape({
+            id: "imageShape",
+            type: "image",
+            source: "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
+        });
+
+        equal(diagram.shapes.length, 1, "should have a single group with rect");
+        var imageShape = diagram.shapes[0];
+        equal(imageShape.shapeVisual.options.source, "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg", "the shape visual should have the same image source");
+    });
+
     test("visual shape creation", function() {
         var visualCalled = false,
             shape = diagram.addShape({
