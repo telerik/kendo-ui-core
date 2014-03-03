@@ -63,7 +63,7 @@ def msbuild(project, options=nil)
 
     msbuild_path = 'c:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\msbuild.exe'
 
-    msbuild_path = 'xbuild' if PLATFORM =~ /linux|darwin/
+    msbuild_path = 'xbuild' if PLATFORM =~ /linux|darwin|bsd/
 
     sh "#{msbuild_path} /v:q #{project} #{options}", :verbose => VERBOSE
 end
