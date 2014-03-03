@@ -1,5 +1,21 @@
 (function(){
 
+var Binder = kendo.data.Binder;
+
+//specific widget binding
+kendo.data.binders.widget.testwidget = {
+    test: Binder.extend({
+        init: function(widget, bindings, options) {
+            Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+            this.widget = widget;
+        },
+
+        refresh: function() {
+            this.widget.trigger("change");
+        }
+    })
+};
 
 var TestWidget = kendo.ui.Widget.extend({
     init: function(element, options) {
@@ -8,7 +24,11 @@ var TestWidget = kendo.ui.Widget.extend({
 
     options: {
         name: "TestWidget",
-    }
+    },
+
+    events: [
+        "change"
+    ]
 });
 
 
@@ -50,6 +70,13 @@ test("widgets are initialized from multiple namespaces", function() {
     dom = $('<div><span id="foo" data-role="testwidget" /><span id="bar" data-role="testwidget2" /></div>');
     kendo.bind(dom, {}, kendo.ui, kendo.mobile.ui);
     ok(dom.find("#bar").data("kendoMobileTestWidget2"));
+});
+
+test("widget specific binding is allowed", 1, function() {
+    dom = $('<div><span id="foo" data-role="kendo.ui.TestWidget" data-bind="test: test" /></div>');
+    kendo.bind(dom, {}, kendo.ui);
+
+    ok(dom.find("#foo").data("kendoTestWidget"));
 });
 
 }());
