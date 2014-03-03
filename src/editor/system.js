@@ -418,8 +418,17 @@ var Clipboard = Class.extend({
     _contentModification: function(before, after) {
         var that = this;
         var editor = that.editor;
-        var range = editor.getRange();
-        var startRestorePoint = new RestorePoint(range);
+        var range;
+        var startRestorePoint;
+
+        if (that._inProgress) {
+            return;
+        }
+
+        that._inProgress = true;
+
+        range = editor.getRange();
+        startRestorePoint = new RestorePoint(range);
 
         dom.persistScrollTop(editor.document);
 
@@ -433,6 +442,8 @@ var Clipboard = Class.extend({
             genericCommand.editor = editor;
             editor.undoRedoStack.push(genericCommand);
             editor._selectionChange();
+
+            that._inProgress = false;
         });
     },
 
