@@ -163,25 +163,4 @@ test("paste of nested table adds k-table class", function() {
     ok($("table", editor.body).hasClass("k-table"));
 });
 
-test("fix tag nesting", function() {
-    var clipboard = editor.clipboard;
-    equal(clipboard._fixTagNesting("<p>foo"), "<p>foo</p>");
-    equal(clipboard._fixTagNesting("foo</p>"), "foo");
-    equal(clipboard._fixTagNesting("<p>foo</b></p>"), "<p>foo</p>");
-    equal(clipboard._fixTagNesting("<p>foo</b></b></p></i>"), "<p>foo</p>");
-    equal(clipboard._fixTagNesting("<p><b>foo</p>"), "<p><b>foo</b></p>");
-    equal(clipboard._fixTagNesting("<p><b>foo</b></b></p>"), "<p><b>foo</b></p>");
-    equal(clipboard._fixTagNesting("<b><p>foo</b></p>"), "<b></b><p>foo</p>");
-    equal(clipboard._fixTagNesting("<p data-bar>foo</b></p>"), "<p data-bar>foo</p>");
-    equal(clipboard._fixTagNesting(
-        "<table><tbody><tr><td>foo</td></tr></tbody></table>"),
-        "<table><tbody><tr><td>foo</td></tr></tbody></table>");
-    equal(clipboard._fixTagNesting(
-        "<table><tbody><tr><td><p>foo</p></td></tr></tbody></table><p>bar</p>"),
-        "<table><tbody><tr><td><p>foo</p></td></tr></tbody></table><p>bar</p>");
-    equal(clipboard._fixTagNesting(
-        "<p>bar</p><table><tbody><tr><td><p>foo</p></td></tr></tbody></table>"),
-        "<p>bar</p><table><tbody><tr><td><p>foo</p></td></tr></tbody></table>");
-});
-
 }());
