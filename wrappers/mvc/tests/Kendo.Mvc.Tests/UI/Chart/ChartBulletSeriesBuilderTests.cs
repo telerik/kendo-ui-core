@@ -122,5 +122,57 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Overlay(ChartBarSeriesOverlay.None).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void CurrentField_should_set_current_member()
+        {
+            builder.CurrentField("Current");
+            series.CurrentMember.ShouldEqual("Current");
+        }
+
+        [Fact]
+        public void CurrentField_should_return_builder()
+        {
+            builder.CurrentField("Current").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void TargetField_should_set_target_member()
+        {
+            builder.TargetField("Target");
+            series.TargetMember.ShouldEqual("Target");
+        }
+
+        [Fact]
+        public void TargetField_should_return_builder()
+        {
+            builder.TargetField("Target").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void ColorField_should_set_color_member()
+        {
+            builder.ColorField("Color");
+            series.ColorMember.ShouldEqual("Color");
+        }
+
+        [Fact]
+        public void ColorField_should_return_builder()
+        {
+            builder.ColorField("Color").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void NoteTextField_should_set_note_text_member()
+        {
+            builder.NoteTextField("NoteText");
+            series.NoteTextMember.ShouldEqual("NoteText");
+        }
+
+        [Fact]
+        public void NoteTextField_should_return_builder()
+        {
+            builder.NoteTextField("NoteText").ShouldBeSameAs(builder);
+        }
     }
 }

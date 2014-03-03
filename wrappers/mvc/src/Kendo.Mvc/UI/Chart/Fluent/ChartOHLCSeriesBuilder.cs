@@ -198,5 +198,146 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new ChartOHLCSeriesHighlightBuilder(Series.Highlight));
             return this;
         }
+
+        /// <summary>
+        /// Sets the open field for the series
+        /// </summary>
+        /// <param name="openField">The open field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.OHLC(Model.Records).OpenField("Open").HighField("High").LowField("Low").CloseField("Close"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartOHLCSeriesBuilder<T> OpenField(string openField)
+        {
+            Series.OpenMember = openField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the close field for the series
+        /// </summary>
+        /// <param name="closeField">The close field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.OHLC(Model.Records).OpenField("Open").HighField("High").LowField("Low").CloseField("Close"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartOHLCSeriesBuilder<T> CloseField(string closeField)
+        {
+            Series.CloseMember = closeField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the high field for the series
+        /// </summary>
+        /// <param name="highField">The high field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.OHLC(Model.Records).OpenField("Open").HighField("High").LowField("Low").CloseField("Close"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartOHLCSeriesBuilder<T> HighField(string highField)
+        {
+            Series.HighMember = highField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the low field for the series
+        /// </summary>
+        /// <param name="lowField">The low field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.OHLC(Model.Records).OpenField("Open").HighField("High").LowField("Low").CloseField("Close"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartOHLCSeriesBuilder<T> LowField(string lowField)
+        {
+            Series.LowMember = lowField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the value fields for the series
+        /// </summary>
+        /// <param name="openField">The open field for the series</param>
+        /// <param name="highField">The value fields for the series</param>
+        /// <param name="lowField">The low field for the series</param>
+        /// <param name="closeField">The close field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.OHLC(Model.Records).Fields("Open", "High", "Low", "Close"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartOHLCSeriesBuilder<T> Fields(string openField, string highField, string lowField, string closeField)
+        {
+            return OpenField(openField).HighField(highField).LowField(lowField).CloseField(closeField);
+        }
+
+        /// <summary>
+        /// Sets the color field for the series
+        /// </summary>
+        /// <param name="colorField">The color field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.OHLC(Model.Records).OpenField("Open").HighField("High").LowField("Low").CloseField("Close").ColorField("Color"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartOHLCSeriesBuilder<T> ColorField(string colorField)
+        {
+            Series.ColorMember = colorField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the note text field for the series
+        /// </summary>
+        /// <param name="noteTextField">The note text field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.OHLC(Model.Records).OpenField("Open").HighField("High").LowField("Low").CloseField("Close").NoteTextField("NoteText"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartOHLCSeriesBuilder<T> NoteTextField(string noteTextField)
+        {
+            Series.NoteTextMember = noteTextField;
+
+            return this;
+        }
     }
 }

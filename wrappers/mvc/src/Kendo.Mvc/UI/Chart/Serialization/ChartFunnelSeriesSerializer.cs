@@ -24,10 +24,10 @@ namespace Kendo.Mvc.UI
                 .Add("dynamicSlope", series.DynamicSlope, () => { return series.DynamicSlope != false; })
                 .Add("neckRatio", series.NeckRatio, () => { return series.NeckRatio != 0.3; })
                 .Add("segmentSpacing", series.SegmentSpacing, () => { return series.SegmentSpacing != 0; })
-                .Add("field", series.Member, () => { return series.Data == null && series.Member != null; })
-                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember != null; })
-                .Add("colorField", series.ColorMember, () => { return series.Data == null && series.ColorMember != null; })
-                .Add("visibleInLegendField", series.VisibleInLegendMember, () => { return series.Data == null && series.VisibleInLegendMember != null; })
+                .Add("field", series.Member, () => series.Member != null)
+                .Add("categoryField", series.CategoryMember, () => series.CategoryMember != null)
+                .Add("colorField", series.ColorMember, () => series.ColorMember != null)
+                .Add("visibleInLegendField", series.VisibleInLegendMember, () => series.VisibleInLegendMember != null)
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("border", series.Border.CreateSerializer().Serialize(), ShouldSerializeBorder);
 

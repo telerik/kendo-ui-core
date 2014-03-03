@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
                 .Add("upperField", series.UpperMember, () => series.UpperMember.HasValue())
                 .Add("meanField", series.MeanMember, () => series.MeanMember.HasValue())
                 .Add("outliersField", series.OutliersMember, () => series.OutliersMember.HasValue())
-                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
+                .Add("categoryField", series.CategoryMember, () => series.CategoryMember.HasValue())
                 .Add("noteTextField", series.NoteTextMember, () => series.NoteTextMember.HasValue());
 
             var line = series.Line.CreateSerializer().Serialize();

@@ -300,5 +300,205 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the category field for the series
+        /// </summary>
+        /// <param name="categoryField">The category field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").CategoryField("Category"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> CategoryField(string categoryField)
+        {
+            Series.CategoryMember = categoryField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the color field for the series
+        /// </summary>
+        /// <param name="colorField">The color field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").ColorField("Color"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> ColorField(string colorField)
+        {
+            Series.ColorMember = colorField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the note text field for the series
+        /// </summary>
+        /// <param name="noteTextField">The note text field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").NoteTextField("NoteText"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> NoteTextField(string noteTextField)
+        {
+            Series.NoteTextMember = noteTextField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the lower field for the series
+        /// </summary>
+        /// <param name="lowerField">The lower field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(Model.Records).Field("Value").LowerField("Lower"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> LowerField(string lowerField)
+        {
+            Series.LowerMember = lowerField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the q1 field for the series
+        /// </summary>
+        /// <param name="q1Field">The q1 field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").Q1Field("Q1"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> Q1Field(string q1Field)
+        {
+            Series.Q1Member = q1Field;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the median field for the series
+        /// </summary>
+        /// <param name="medianField">The median field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").MedianField("Median"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> MedianField(string medianField)
+        {
+            Series.MedianMember = medianField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the q3 field for the series
+        /// </summary>
+        /// <param name="q3Field">The q3 field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").Q3Field("Q3"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> Q3Field(string q3Field)
+        {
+            Series.Q3Member = q3Field;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the upper field for the series
+        /// </summary>
+        /// <param name="upperField">The upper field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").UpperField("Upper"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> UpperField(string upperField)
+        {
+            Series.UpperMember = upperField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the mean field for the series
+        /// </summary>
+        /// <param name="meanField">The mean field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").MeanField("Mean"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> MeanField(string meanField)
+        {
+            Series.MeanMember = meanField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the outliers field for the series
+        /// </summary>
+        /// <param name="outliersField">The outliers field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.BoxPlot(Model.Records).Field("Value").OutliersField("Outliers"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBoxPlotSeriesBuilder<T> OutliersField(string outliersField)
+        {
+            Series.OutliersMember = outliersField;
+
+            return this;
+        }
     }
 }

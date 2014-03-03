@@ -247,5 +247,125 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new ChartPieSeriesHighlightBuilder(Series.Highlight));
             return this;
         }
+
+        /// <summary>
+        /// Sets the value field for the series
+        /// </summary>
+        /// <param name="field">The value field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Pie(Model.Records).Field("Value"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartPieSeriesBuilder<T> Field(string field)
+        {
+            Series.Member = field;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the category field for the series
+        /// </summary>
+        /// <param name="categoryField">The category field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Pie(Model.Records).Field("Value").CategoryField("Category"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartPieSeriesBuilder<T> CategoryField(string categoryField)
+        {
+            Series.CategoryMember = categoryField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the color field for the series
+        /// </summary>
+        /// <param name="colorField">The color field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Pie(Model.Records).Field("Value").ColorField("Color"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartPieSeriesBuilder<T> ColorField(string colorField)
+        {
+            Series.ColorMember = colorField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the note text field for the series
+        /// </summary>
+        /// <param name="noteTextField">The note text field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Pie(Model.Records).Field("Value").NoteTextField("NoteText"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartPieSeriesBuilder<T> NoteTextField(string noteTextField)
+        {
+            Series.NoteTextMember = noteTextField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the explode field for the series
+        /// </summary>
+        /// <param name="explodeField">The explode field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Pie(Model.Records).Field("Value").ExplodeField("Explode"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartPieSeriesBuilder<T> ExplodeField(string explodeField)
+        {
+            Series.ExplodeMember = explodeField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the visibleInLegend field for the series
+        /// </summary>
+        /// <param name="visibleInLegendField">The visibleInLegend field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Pie(Model.Records).Field("Value").VisibleInLegendField("VisibleInLegend"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartPieSeriesBuilder<T> VisibleInLegendField(string visibleInLegendField)
+        {
+            Series.VisibleInLegendMember = visibleInLegendField;
+
+            return this;
+        }
     }
 }
