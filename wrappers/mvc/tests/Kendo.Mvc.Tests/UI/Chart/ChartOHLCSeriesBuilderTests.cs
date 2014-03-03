@@ -166,6 +166,22 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Fields_should_set_members()
+        {
+            builder.Fields("o", "h", "l", "c");
+            series.OpenMember.ShouldEqual("o");
+            series.HighMember.ShouldEqual("h");
+            series.LowMember.ShouldEqual("l");
+            series.CloseMember.ShouldEqual("c");
+        }
+
+        [Fact]
+        public void Fields_should_return_builder()
+        {
+            builder.Fields("o", "h", "l", "c").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void ColorField_should_set_color_member()
         {
             builder.ColorField("Color");

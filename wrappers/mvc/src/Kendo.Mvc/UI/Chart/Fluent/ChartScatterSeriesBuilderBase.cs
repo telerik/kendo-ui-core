@@ -167,7 +167,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the value X field for the series
+        /// Sets the X field for the series
         /// </summary>
         /// <param name="xField">The value X field for the series</param>
         /// <example>
@@ -187,7 +187,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the value Y field for the series
+        /// Sets the Y field for the series
         /// </summary>
         /// <param name="yField">The value Y field for the series</param>
         /// <example>
@@ -224,6 +224,25 @@ namespace Kendo.Mvc.UI.Fluent
             Series.NoteTextMember = noteTextField;
 
             return (TBuilder)this;
+        }
+
+        /// <summary>
+        /// Sets the X and Y fields for the series
+        /// </summary>
+        /// <param name="xField">The X field for the series</param>
+        /// <param name="yField">The Y field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Scatter(Model.Records).Fields("X", "Y"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TBuilder Fields(string xField, string yField)
+        {
+            return XField(xField).YField(yField);
         }
     }
 }

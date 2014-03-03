@@ -280,6 +280,27 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the value fields for the series
+        /// </summary>
+        /// <param name="openField">The open field for the series</param>
+        /// <param name="highField">The value fields for the series</param>
+        /// <param name="lowField">The low field for the series</param>
+        /// <param name="closeField">The close field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.OHLC(Model.Records).Fields("Open", "High", "Low", "Close"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartOHLCSeriesBuilder<T> Fields(string openField, string highField, string lowField, string closeField)
+        {
+            return OpenField(openField).HighField(highField).LowField(lowField).CloseField(closeField);
+        }
+
+        /// <summary>
         /// Sets the color field for the series
         /// </summary>
         /// <param name="colorField">The color field for the series</param>

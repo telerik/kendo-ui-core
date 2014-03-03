@@ -180,6 +180,20 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Fields_should_set_x_and_y_member()
+        {
+            builder.Fields("x", "y");
+            series.XMember.ShouldEqual("x");
+            series.YMember.ShouldEqual("y");
+        }
+
+        [Fact]
+        public void Fields_should_return_builder()
+        {
+            builder.Fields("x", "y").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void NoteTextField_should_set_note_text_member()
         {
             builder.NoteTextField("NoteText");
