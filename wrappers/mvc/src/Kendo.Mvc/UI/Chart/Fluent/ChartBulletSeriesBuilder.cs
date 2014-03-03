@@ -267,5 +267,85 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the current field for the series
+        /// </summary>
+        /// <param name="currentField">The current field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bullter(Model.Records).CurrentField("Current").TargetField("Target"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBulletSeriesBuilder<T> CurrentField(string currentField)
+        {
+            Series.CurrentMember = currentField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the target field for the series
+        /// </summary>
+        /// <param name="targetField">The target field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bullter(Model.Records).CurrentField("Current").TargetField("Target"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBulletSeriesBuilder<T> TargetField(string targetField)
+        {
+            Series.TargetMember = targetField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the color field for the series
+        /// </summary>
+        /// <param name="colorField">The color field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(Model.Records).Field("Value").ColorField("Color"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBulletSeriesBuilder<T> ColorField(string colorField)
+        {
+            Series.ColorMember = colorField;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the note text field for the series
+        /// </summary>
+        /// <param name="noteTextField">The note text field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(Model.Records).Field("Value").NoteTextField("NoteText"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartBulletSeriesBuilder<T> NoteTextField(string noteTextField)
+        {
+            Series.NoteTextMember = noteTextField;
+
+            return this;
+        }
     }
 }
