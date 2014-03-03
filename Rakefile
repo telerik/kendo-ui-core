@@ -5,6 +5,7 @@ require 'bundler/setup'
 require 'tempfile'
 require 'erb'
 require 'winrm'
+require 'zip'
 require 'json'
 
 VERBOSE = verbose == true
@@ -36,7 +37,7 @@ ADMIN_PASS = 'ultra'
 
 require 'version'
 require 'timezone'
-require 'zip'
+require './build/zip'
 require 'js'
 require 'css'
 require 'tasks'

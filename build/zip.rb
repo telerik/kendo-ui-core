@@ -1,5 +1,3 @@
-require 'zip/zip'
-
 class ZipTask < Rake::FileTask
     include Rake::DSL
 
@@ -16,7 +14,7 @@ class ZipTask < Rake::FileTask
 
         $stderr.puts("Creating #{name}") if VERBOSE
 
-        Zip::ZipFile.open(name, Zip::ZipFile::CREATE) do |file|
+        Zip::File.open(name, Zip::File::CREATE) do |file|
             Dir[File.join(dir, '**', '*')].each do |src|
                 entry = src.sub(File.join(dir, File::SEPARATOR), "")
                 file.add entry, src
