@@ -165,5 +165,65 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return base.Axis(axis);
         }
+
+        /// <summary>
+        /// Sets the value X field for the series
+        /// </summary>
+        /// <param name="xField">The value X field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Scatter(Model.Records).XField("X").YField("Y"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TBuilder XField(string xField)
+        {
+            Series.XMember = xField;
+
+            return (TBuilder)this;
+        }
+
+        /// <summary>
+        /// Sets the value Y field for the series
+        /// </summary>
+        /// <param name="yField">The value Y field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Scatter(Model.Records).XField("X").YField("Y"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TBuilder YField(string yField)
+        {
+            Series.YMember = yField;
+
+            return (TBuilder)this;
+        }
+
+        /// <summary>
+        /// Sets the note text field for the series
+        /// </summary>
+        /// <param name="noteTextField">The note text field for the series</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Bar(Model.Records).Field("Value").NoteTextField("NoteText"))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public TBuilder NoteTextField(string noteTextField)
+        {
+            Series.NoteTextMember = noteTextField;
+
+            return (TBuilder)this;
+        }
     }
 }
