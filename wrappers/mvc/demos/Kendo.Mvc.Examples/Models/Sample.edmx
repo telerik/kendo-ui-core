@@ -20,17 +20,7 @@
           <EntitySet Name="Products" EntityType="SampleModel.Store.Products" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Region" EntityType="SampleModel.Store.Region" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Shippers" EntityType="SampleModel.Store.Shippers" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Stock" EntityType="SampleModel.Store.Stock" store:Type="Tables" store:Schema="dbo" store:Name="Stock">
-            <DefiningQuery>SELECT 
-      [Stock].[ID] AS [ID], 
-      [Stock].[Symbol] AS [Symbol], 
-      [Stock].[Date] AS [Date], 
-      [Stock].[Open] AS [Open], 
-      [Stock].[High] AS [High], 
-      [Stock].[Low] AS [Low], 
-      [Stock].[Close] AS [Close]
-      FROM [dbo].[Stock] AS [Stock]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Stock" EntityType="SampleModel.Store.Stock" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Suppliers" EntityType="SampleModel.Store.Suppliers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tasks" EntityType="SampleModel.Store.Tasks" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Territories" EntityType="SampleModel.Store.Territories" store:Type="Tables" Schema="dbo" />
@@ -283,18 +273,9 @@
           <Property Name="CompanyName" Type="nvarchar" Nullable="false" MaxLength="40" />
           <Property Name="Phone" Type="nvarchar" MaxLength="24" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'C:\WORK\KENDO\WRAPPERS\MVC\DEMOS\KENDO.MVC.EXAMPLES\APP_DATA\SAMPLE.MDF.dbo.Stock' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="Stock">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Symbol" />
-            <PropertyRef Name="Date" />
-            <PropertyRef Name="Open" />
-            <PropertyRef Name="High" />
-            <PropertyRef Name="Low" />
-            <PropertyRef Name="Close" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Symbol" Type="varchar" Nullable="false" MaxLength="10" />
@@ -303,6 +284,7 @@
           <Property Name="High" Type="decimal" Nullable="false" Precision="9" Scale="3" />
           <Property Name="Low" Type="decimal" Nullable="false" Precision="9" Scale="3" />
           <Property Name="Close" Type="decimal" Nullable="false" Precision="9" Scale="3" />
+          <Property Name="Volume" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Suppliers">
           <Key>
@@ -1041,12 +1023,6 @@
         <EntityType Name="Stock">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="Symbol" />
-            <PropertyRef Name="Date" />
-            <PropertyRef Name="Open" />
-            <PropertyRef Name="High" />
-            <PropertyRef Name="Low" />
-            <PropertyRef Name="Close" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Symbol" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -1055,6 +1031,7 @@
           <Property Type="Decimal" Name="High" Nullable="false" Precision="9" Scale="3" />
           <Property Type="Decimal" Name="Low" Nullable="false" Precision="9" Scale="3" />
           <Property Type="Decimal" Name="Close" Nullable="false" Precision="9" Scale="3" />
+          <Property Type="Int64" Name="Volume" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1306,6 +1283,7 @@
           <EntitySetMapping Name="Stocks">
             <EntityTypeMapping TypeName="SampleModel.Stock">
               <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
                 <ScalarProperty Name="Close" ColumnName="Close" />
                 <ScalarProperty Name="Low" ColumnName="Low" />
                 <ScalarProperty Name="High" ColumnName="High" />

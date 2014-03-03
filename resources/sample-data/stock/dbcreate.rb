@@ -14,7 +14,10 @@ puts %Q{
         [Open] DECIMAL(9,3) NOT NULL,
         [High] DECIMAL(9,3) NOT NULL,
         [Low] DECIMAL(9,3) NOT NULL,
-        [Close] DECIMAL(9,3) NOT NULL
+        [Close] DECIMAL(9,3) NOT NULL,
+        [Volume] BIGINT NOT NULL,
+
+        CONSTRAINT PK_Stock PRIMARY KEY CLUSTERED (ID)
     )
     GO
 
@@ -26,14 +29,18 @@ CSV.foreach('data.csv', :headers => true) do |row|
 
     puts %Q{
     INSERT INTO Stock
-        ([Symbol], [Date], [Open], [High], [Low], [Close])
+        ([Symbol], [Date], [Open], [High], [Low], [Close], [Volume])
     VALUES
-        ('BA', CONVERT(DATETIME, '#{date.strftime(DATE_FORMAT)}', 103), #{row['Open']}, #{row['High']}, #{row['Low']}, #{row['Close']})
+        ('BA', CONVERT(DATETIME, '#{date.strftime(DATE_FORMAT)}', 103), #{row['Open']}, #{row['High']}, #{row['Low']}, #{row['Close']}, #{row['Volume']})
     }
 end
 
 puts %Q{
     COMMIT TRANSACTION
+
+    CREATE INDEX IX_Stock_Date
+        ON Stock ([Date])
+    GO
 
     CREATE INDEX IX_Stock_Date
         ON Stock ([Date])

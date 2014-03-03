@@ -26,7 +26,8 @@ namespace Kendo.Mvc.Examples.Controllers
                     Open = s.Open,
                     High = s.High,
                     Low = s.Low,
-                    Close = s.Close
+                    Close = s.Close,
+                    Volume = s.Volume
                 }
             );
         }
