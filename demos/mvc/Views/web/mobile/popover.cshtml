@@ -4,7 +4,7 @@
         <p><a href="#" id="select-people">Tag People</a></p>
         <img src="../../content/web/popover/tag-people.jpg" alt="My teammates" />
     </div>
-    
+
 
     <div data-role="popover" id="popover-people" >
         <div data-role="view" data-title="People">
@@ -24,7 +24,7 @@
             </ul>
         </div>
     </div>
-    
+
     <style scoped>
         .demo-section {
             width: 600px;
@@ -50,8 +50,9 @@
             popup: {"height": "16em", "width": "20em"}
         });
 
-        $("#select-people").click(function() {
+        $("#select-people").click(function(e) {
             $("#popover-people").data("kendoMobilePopOver").open(this);
+            e.preventDefault();
         });
     });
 </script>
