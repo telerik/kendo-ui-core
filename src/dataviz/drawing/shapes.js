@@ -215,7 +215,7 @@
         },
 
         _lineBoundingRect: function(p1, p2) {
-            return new Rect(p1.clone(), p2.clone());
+            return new Rect(p1.min(p2), p1.max(p2));
         },
 
         _curveBoundingRect: function(p1, cp1, cp2, p2) {
