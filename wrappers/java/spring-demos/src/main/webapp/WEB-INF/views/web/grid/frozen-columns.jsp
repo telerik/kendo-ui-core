@@ -9,11 +9,11 @@
     <kendo:grid name="grid" pageable="true" height="430px" sortable="true" groupable="true" reorderable="true" resizable="true" filterable="true" columnMenu="true">
     	<kendo:grid-scrollable/>
         <kendo:grid-columns>
-            <kendo:grid-column title="Order ID" field="orderId" width="120px" locked="true" />
+            <kendo:grid-column title="Order ID" field="orderId" width="120px" locked="true" lockable="false"/>
             <kendo:grid-column title="Ship Country" field="shipCountry" width="200px" />
             <kendo:grid-column title="Ship City" field="shipCity" width="160px" />
             <kendo:grid-column title="Ship Name" field="shipName" width="200px" locked="true"/>
-            <kendo:grid-column title="Ship Address" field="shipAddress" width="300px" />
+            <kendo:grid-column title="Ship Address" field="shipAddress" width="300px" lockable="false"/>
         </kendo:grid-columns>
         <kendo:dataSource pageSize="30" serverPaging="true" serverSorting="true" serverFiltering="true" serverGrouping="true">
             <kendo:dataSource-transport>
