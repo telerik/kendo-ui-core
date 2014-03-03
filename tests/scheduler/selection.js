@@ -94,25 +94,6 @@
         equal(selection.groupIndex, slot.groupIndex);
     });
 
-    test("scheduler sets selection range based on clicked event", function() {
-        createSampleEvent();
-        var event = container.find(".k-event").eq(0),
-            dataItem = scheduler.dataSource.getByUid(event.data("uid")),
-            slot = scheduler.view().selectionByElement(event);
-
-        event.trigger({
-            type: "mousedown",
-            currentTarget: event
-        });
-
-        selection = scheduler._selection;
-
-        deepEqual(selection.start, dataItem.start);
-        deepEqual(selection.end, dataItem.end);
-        equal(selection.isAllDay, false);
-        equal(selection.groupIndex, slot.groupIndex);
-    });
-
     test("scheduler focuses wrapper on mousedown", function() {
         var td = container.find(".k-scheduler-content td:first");
 
