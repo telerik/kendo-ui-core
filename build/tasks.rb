@@ -1,4 +1,5 @@
 require 'rbconfig'
+require 'zip'
 
 README_DIR = 'resources'
 THIRD_PARTY_LEGAL_DIR = File.join('resources', 'legal', 'third-party')

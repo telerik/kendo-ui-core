@@ -3,6 +3,7 @@ require 'rake/testtask'
 require 'bundler/setup'
 require 'tempfile'
 require 'erb'
+require 'zip'
 require 'json'
 require 'winrm' unless RUBY_PLATFORM =~ /darwin/
 
@@ -60,7 +61,7 @@ ROOT_MAP = {
 
 require 'version'
 require 'timezone'
-require 'zip'
+require './build/zip'
 require 'js'
 require 'css'
 require 'tasks'
