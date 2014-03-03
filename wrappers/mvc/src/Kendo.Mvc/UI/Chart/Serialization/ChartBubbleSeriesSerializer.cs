@@ -20,10 +20,10 @@ namespace Kendo.Mvc.UI
             result["type"] = "bubble";
 
             FluentDictionary.For(result)
-                .Add("sizeField", series.SizeMember, () => { return series.Data == null && series.SizeMember != null; })
-                .Add("colorField", series.ColorMember, () => { return series.Data == null && series.ColorMember != null; })
-                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember != null; })
-                .Add("visibleInLegendField", series.VisibleInLegendMember, () => { return series.Data == null && series.VisibleInLegendMember != null; })
+                .Add("sizeField", series.SizeMember, () => series.SizeMember != null)
+                .Add("colorField", series.ColorMember, () => series.ColorMember != null)
+                .Add("categoryField", series.CategoryMember, () => series.CategoryMember != null)
+                .Add("visibleInLegendField", series.VisibleInLegendMember, () => series.VisibleInLegendMember != null)
                 .Add("minSize", series.MinSize, () => series.MinSize.HasValue)
                 .Add("maxSize", series.MaxSize, () => series.MaxSize.HasValue);
 

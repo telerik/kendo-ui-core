@@ -22,8 +22,8 @@ namespace Kendo.Mvc.UI
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
                 .Add("visible", series.Visible, () => series.Visible.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
-                .Add("targetField", series.TargetMember, () => { return series.Data == null && series.TargetMember != null; })
-                .Add("currentField", series.CurrentMember, () => { return series.Data == null && series.CurrentMember != null; })
+                .Add("targetField", series.TargetMember, () => series.TargetMember != null)
+                .Add("currentField", series.CurrentMember, () => series.CurrentMember != null)
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("border", series.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)
                 .Add("color", series.Color, () => series.Color.HasValue())
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI
                 .Add("opacity", series.Opacity, () => series.Opacity.HasValue)
                 .Add("axis", series.Axis, string.Empty)
                 .Add("colorField", series.ColorMember, () => series.ColorMember.HasValue())
-                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
+                .Add("categoryField", series.CategoryMember, () => series.CategoryMember.HasValue())
                 .Add("noteTextField", series.NoteTextMember, () => series.NoteTextMember.HasValue());
 
             if (series.Overlay != null)

@@ -24,10 +24,10 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "area" : "verticalArea")
                 .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
-                .Add("field", series.Member, () => { return series.Data == null && series.Member.HasValue(); })
-                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
-                .Add("colorField", series.ColorMember, () => { return series.Data == null && series.ColorMember.HasValue(); })
-                .Add("noteTextField", series.NoteTextMember, () => { return series.Data == null && series.NoteTextMember.HasValue(); })
+                .Add("field", series.Member, () => series.Member.HasValue())
+                .Add("categoryField", series.CategoryMember, () => series.CategoryMember.HasValue())
+                .Add("colorField", series.ColorMember, () => series.ColorMember.HasValue() )
+                .Add("noteTextField", series.NoteTextMember, () => series.NoteTextMember.HasValue())
                 .Add("data", series.Data, () => { return series.Data != null; })
                 .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),
                                       () => series.MissingValues.HasValue);
