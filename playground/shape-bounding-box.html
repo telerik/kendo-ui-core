@@ -23,6 +23,7 @@
         <textarea id="pathString" cols="40" rows="5" data-bind="value:path"></textarea>
         <div data-bind="text:drawPath"></div>
         <div id="container"></div>
+        <div id="test"></div>
          <--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute; left: 300px;">
             <g>
@@ -96,6 +97,7 @@
                             multiPathBoundingRect = multiPath.boundingRect();
             
                         multiPathGroup.append(multiPath, rectPath(multiPathBoundingRect, strokeOptions));
+                        surface.clear();
                         surface.draw(multiPathGroup);
                     }
                     
@@ -116,6 +118,20 @@
                 rectPath.close();
 
                 return rectPath;
+            }
+            renderTest();
+            function renderTest() {
+                var surface = Surface.create(document.getElementById("test"), {width: 700, height: 700}),
+                    arcGeometry = new geometry.Arc(Point.create(100, 100), {
+                        startAngle: 0,
+                        endAngle: 180,
+                        radiusX: 50,
+                        radiusY: 100,
+                        counterClockwise: false
+                    }),
+                    arc = new drawing.Arc(arcGeometry, $.extend({}, strokeOptions, {fill: {color: "red"}}));
+                   debugger;
+                surface.draw(arc);
             }
         </script>
     </body>

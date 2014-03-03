@@ -172,9 +172,10 @@
 
         toPath: function() {
             var path = new Path(this.options.toJSON()),
-                curvePoints = this.geometry.curvePoints();
+                curvePoints = this.geometry.curvePoints(),
+                i, length = curvePoints.length;
             path.moveTo(curvePoints[0].x, curvePoints[0].y);
-            for (var i = 1; i < curvePoints.length; i+=3) {
+            for (i = 1; i < length; i+=3) {
                 path.curveTo(curvePoints[i], curvePoints[i + 1], curvePoints[i + 2]);
             }
 

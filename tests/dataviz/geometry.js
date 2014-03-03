@@ -5,7 +5,8 @@
         Circle = g.Circle,
         Point = g.Point,
         Rect = g.Rect,
-        Matrix = g.Matrix;
+        Matrix = g.Matrix,
+        Arc = g.Arc;
 
     // ------------------------------------------------------------
     var point;
@@ -263,6 +264,26 @@
         equal(point.toString(1), "10.6 20.6");
     });
 
+    test("min returns a new point with minmum x y", function() {
+        point.x = 10;
+        point.y = 20;
+        var other = new Point(20, 10),
+            minPoint = point.min(other);
+
+        equal(minPoint.x, 10);
+        equal(minPoint.y, 10);
+    });
+
+    test("max returns a new point with maximum x y", function() {
+        point.x = 10;
+        point.y = 20;
+        var other = new Point(20, 10),
+            maxPoint = point.max(other);
+
+        equal(maxPoint.x, 20);
+        equal(maxPoint.y, 20);
+    });
+
     // ------------------------------------------------------------
     var rect;
 
@@ -309,6 +330,15 @@
         };
 
         rect.p1.set("x", 1);
+    });
+
+    test("wrap returns new rect with minimum p0 and maximum p1", function() {
+        var other = new Rect(new Point(-1, 5), new Point(15, 15)),
+            wrap =  rect.wrap(other);
+        equal(wrap.p0.x, -1);
+        equal(wrap.p0.y, 0);
+        equal(wrap.p1.x, 15);
+        equal(wrap.p1.y, 20);
     });
 
     // ------------------------------------------------------------
@@ -413,4 +443,142 @@
         var clone = circle.clone();
         equal(clone.radius, circle.radius);
     });
+
+    test("boundingRect returns the circle bounding Rect", function() {
+        var rect = circle.boundingRect();
+        equal(rect.p0.x, -10);
+        equal(rect.p0.y, -10);
+        equal(rect.p1.x, 10);
+        equal(rect.p1.y, 10);
+    });
+
+    // ------------------------------------------------------------
+    var arc,
+        ARC_POINT_TOLERANCE = 0.1;
+
+    module("Arc", {
+        setup: function() {
+            arc = new Arc(new Point(100, 100), {
+                startAngle: 0,
+                endAngle: 180,
+                radiusX: 50,
+                radiusY: 100
+            });
+        }
+    });
+
+    test("constructor sets center", function() {
+        ok(arc.center.equals(new Point(100, 100)));
+        ok(arc.center.observer === arc);
+    });
+
+    test("constructor sets options", function() {
+        equal(arc.radiusX, 50);
+        equal(arc.radiusY, 100);
+        equal(arc.startAngle, 0);
+        equal(arc.endAngle, 180);
+    });
+
+    test("counterClockwise is false by default", function() {
+        equal(arc.counterClockwise, false);
+    });
+
+    test("modifying center triggers geometryChange", function() {
+        arc.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        arc.center.set("x", 1);
+    });
+
+    test("sets fields", function() {
+        arc.set("radiusX", 10);
+        arc.set("radiusY", 20);
+        arc.set("startAngle", 30);
+        arc.set("endAngle", 40);
+        arc.set("counterClockwise", true);
+
+        equal(arc.radiusX, 10);
+        equal(arc.radiusY, 20);
+        equal(arc.startAngle, 30);
+        equal(arc.endAngle, 40);
+        equal(arc.counterClockwise, true);
+    });
+
+    test("setting a field triggers geometryChange", function() {
+        arc.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        arc.set("radiusX", 10);
+    });
+
+    test("setting a field to the same value does not trigger geometryChange", 0, function() {
+        arc.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+
+        arc.set("radiusX", 50);
+    });
+
+    test("setting an invalid field does not trigger geometryChange", 0, function() {
+        arc.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+
+        arc.set("foo", 10);
+    });
+
+    test("gets fields", function() {
+        equal(arc.get("radiusX"), 50);
+        equal(arc.get("radiusY"), 100);
+        equal(arc.get("startAngle"), 0);
+        equal(arc.get("endAngle"), 180);
+        equal(arc.get("counterClockwise"), false);
+    });
+
+    test("pointAt returns the point on the elipse for a given angle", function() {
+        var point1 = arc.pointAt(0),
+            point2 = arc.pointAt(180),
+            point3 = arc.pointAt(360);
+
+        close(point1.x, 150, ARC_POINT_TOLERANCE);
+        close(point1.y, 100, ARC_POINT_TOLERANCE);
+        close(point2.x, 50, ARC_POINT_TOLERANCE);
+        close(point2.y, 100, ARC_POINT_TOLERANCE);
+        close(point3.x, 150, ARC_POINT_TOLERANCE);
+        close(point3.y, 100, ARC_POINT_TOLERANCE);
+    });
+
+    test("boundingRect returns the arc bounding Rect", function() {
+        var rect = arc.boundingRect();
+        equal(rect.p0.x, 50);
+        equal(rect.p0.y, 100);
+        equal(rect.p1.x, 150);
+        equal(rect.p1.y, 200);
+    });
+
+    test("curvePoints returns points for a curve that approximate the arc", function() {
+        var points = arc.curvePoints(),
+            expected = [Point.create(150, 100), Point.create(150, 152.4), Point.create(126.2, 200),
+                Point.create(100, 200), Point.create(73.8, 200), Point.create(50, 152.4), Point.create(50, 100)];
+
+        if (points.length !== expected.length) {
+            ok(false);
+        }
+
+        for (var i = 0; i < points.length; i++) {
+            close(points[i].x, expected[i].x, ARC_POINT_TOLERANCE);
+            close(points[i].y, expected[i].y, ARC_POINT_TOLERANCE);
+        }
+    });
+
 })();
