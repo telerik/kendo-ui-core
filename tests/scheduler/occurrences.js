@@ -2214,6 +2214,23 @@
         equal(events[1].end.getTime(), +new Date(2013, 1, 1, 19, 10));
     });
 
+    test("YEARLY method expands BYMONTH and limit by negative offset BYDAY (week start Monday)", function() {
+        var schedulerEvent = new SchedulerEvent({
+            id: 1,
+            title: "Title",
+            isAllDay: true,
+            start: new Date(2014, 1, 28),
+            end: new Date(2014, 1, 28),
+            recurrenceRule: "FREQ=YEARLY;COUNT=2;BYMONTH=3;BYDAY=-1SU;WKST=MO"
+        });
+
+        var events = occurrences(schedulerEvent, new Date(2014, 1, 28), new Date(2114, 1, 28));
+
+        equal(events.length, 2);
+        deepEqual(events[0].start, new Date(2014, 2, 30));
+        deepEqual(events[1].start, new Date(2015, 2, 29));
+    });
+
     test("YEARLY occurrence sets startTime correctly", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
