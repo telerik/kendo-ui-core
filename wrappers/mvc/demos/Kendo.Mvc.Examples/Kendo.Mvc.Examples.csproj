@@ -621,6 +621,9 @@
     <Compile Include="Models\MeetingAttendee.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Stock.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TreeViewItemModel.cs" />
     <Compile Include="Models\CompensationStats.cs" />
     <Compile Include="Models\Config.cs" />

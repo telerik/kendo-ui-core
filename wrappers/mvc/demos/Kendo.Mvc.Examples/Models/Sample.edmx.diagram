@@ -35,6 +35,7 @@
         <AssociationConnector Association="SampleModel.FK_Tasks_Tasks" ManuallyRouted="false" />
         <AssociationConnector Association="SampleModel.CustomerCustomerDemo" ManuallyRouted="false" />
         <AssociationConnector Association="SampleModel.EmployeeTerritories" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SampleModel.Stock" Width="1.5" PointX="0.79401703960914971" PointY="3.2958533332198177" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
