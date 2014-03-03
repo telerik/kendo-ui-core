@@ -212,5 +212,57 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.ErrorBars(e => e.Value(1)).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Field_should_set_member()
+        {
+            builder.Field("Value");
+            series.Member.ShouldEqual("Value");
+        }
+
+        [Fact]
+        public void Field_should_return_builder()
+        {
+            builder.Field("Value").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void CategoryField_should_set_category_member()
+        {
+            builder.CategoryField("Category");
+            series.CategoryMember.ShouldEqual("Category");
+        }
+
+        [Fact]
+        public void CategoryField_should_return_builder()
+        {
+            builder.CategoryField("Category").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void ColorField_should_set_color_member()
+        {
+            builder.ColorField("Color");
+            series.ColorMember.ShouldEqual("Color");
+        }
+
+        [Fact]
+        public void ColorField_should_return_builder()
+        {
+            builder.ColorField("Color").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void NoteTextField_should_set_note_text_member()
+        {
+            builder.NoteTextField("NoteText");
+            series.NoteTextMember.ShouldEqual("NoteText");
+        }
+
+        [Fact]
+        public void NoteTextField_should_return_builder()
+        {
+            builder.NoteTextField("NoteText").ShouldBeSameAs(builder);
+        }
     }
 }
