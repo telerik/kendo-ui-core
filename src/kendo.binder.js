@@ -1307,21 +1307,21 @@ var __meta__ = {
                 } else if (binding == SOURCE) {
                     hasSource = true;
                 } else {
-                    that.applyBinding(binding, bindings);
+                    that.applyBinding(binding, bindings, specificBinders);
                 }
             }
 
             if (hasSource) {
-                that.applyBinding(SOURCE, bindings);
+                that.applyBinding(SOURCE, bindings, specificBinders);
             }
 
             if (hasValue) {
-                that.applyBinding(VALUE, bindings, specificBinders[VALUE]);
+                that.applyBinding(VALUE, bindings, specificBinders);
             }
         },
 
-        applyBinding: function(name, bindings, specificBinder) {
-            var binder = specificBinder || binders.widget[name],
+        applyBinding: function(name, bindings, specificBinders) {
+            var binder = specificBinders[name] || binders.widget[name],
                 toDestroy = this.toDestroy,
                 attribute,
                 binding = bindings[name];
