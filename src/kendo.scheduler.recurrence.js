@@ -186,11 +186,11 @@ kendo_module({
             },
 
             weekDays: function(date, end, rule) {
-                var weekDays = rule.weekDays,
-                    weekStart = rule.weekStart,
-                    weekDayRules = ruleWeekValues(weekDays, date, weekStart),
-                    hours = date.getHours(),
-                    weekDayRule, day;
+                var weekDays = rule.weekDays;
+                var weekStart = rule.weekStart;
+                var weekDayRules = ruleWeekValues(weekDays, date, weekStart);
+                var hours = date.getHours();
+                var weekDayRule, day;
 
                 if (weekDayRules === null) {
                     return false;
@@ -676,10 +676,37 @@ kendo_module({
         return Math.ceil((date.getDate() - firstWeekLength) / 7) + 1;
     }
 
-    function normalizeOffset(date, offset, weekStart) {
-        if (offset < 0) {
-            offset = numberOfWeeks(date, weekStart) + (offset + 1);
+    function normalizeDayIndex(weekDay, weekStart) {
+        return weekDay + (weekDay < weekStart ? 7 : 0);
+    }
+
+    function normalizeOffset(date, rule, weekStart) {
+        var offset = rule.offset;
+
+        if (!offset) {
+            return weekInMonth(date, weekStart);
         }
+
+        var lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        var weeksInMonth = weekInMonth(lastDate, weekStart);
+
+        var day = normalizeDayIndex(rule.day, weekStart);
+
+        var skipFirst = day < normalizeDayIndex(new Date(date.getFullYear(), date.getMonth(), 1).getDay(), weekStart);
+        var skipLast = day > normalizeDayIndex(lastDate.getDay(), weekStart);
+
+        if (offset < 0) {
+            offset = weeksInMonth + (offset + 1 - (skipLast ? 1 : 0));
+        } else if (skipFirst) {
+            offset += 1;
+        }
+
+        weeksInMonth -= (skipLast ? 1 : 0);
+
+        if (offset < (skipFirst ? 1 : 0) || offset > weeksInMonth) {
+            return null;
+        }
+
         return offset;
     }
 
@@ -687,74 +714,34 @@ kendo_module({
         return weekInMonth(new Date(date.getFullYear(), date.getMonth() + 1, 0), weekStart);
     }
 
-    function isInWeek(date, weekDayRule, weekStart) {
-        var offset = weekDayRule.offset,
-            weekNumber = weekInMonth(date, weekStart);
-
-        if (!allowFirstWeek(date, weekDayRule, weekStart)) {
-            weekNumber -= 1;
-        }
-
-        return weekNumber === normalizeOffset(date, offset, weekStart);
-    }
-
-    function allowFirstWeek(date, weekDayRule, weekStart) {
-        var day = weekDayRule.day,
-            offset = weekDayRule.offset,
-            firstDay, allow;
-
-        if (!offset) {
-            return true;
-        }
-
-        firstDay = firstDayOfMonth(date).getDay();
-        if (firstDay < weekStart) {
-            firstDay += weekStart;
-        }
-
-        if (day < weekStart) {
-            day += weekStart;
-        }
-
-        allow = day >= firstDay;
-        if (!allow && offset < 0 && normalizeOffset(date, offset, weekStart) !== 1) {
-            allow = true;
-        }
-
-        return allow;
+    function isInWeek(date, rule, weekStart) {
+        return weekInMonth(date, weekStart) === normalizeOffset(date, rule, weekStart);
     }
 
     function ruleWeekValues(weekDays, date, weekStart) {
-        var currentDay = date.getDay(),
-            length = weekDays.length,
-            weekDay, day, offset,
-            weekNumber,
-            result = [],
-            idx = 0;
-
-        if (currentDay < weekStart) {
-            currentDay += 7;
-        }
+        var currentDay = normalizeDayIndex(date.getDay(), weekStart);
+        var length = weekDays.length;
+        var ruleWeekOffset;
+        var weekDay, day;
+        var weekNumber;
+        var result = [];
+        var idx = 0;
 
         for (;idx < length; idx++) {
             weekDay = weekDays[idx];
-            offset = weekDay.offset;
-            day = weekDay.day;
-
-            if (day < weekStart) {
-                day += 7;
-            }
 
             weekNumber = weekInMonth(date, weekStart);
-            if (!allowFirstWeek(date, weekDay, weekStart)) {
-                weekNumber -= 1;
+            ruleWeekOffset = normalizeOffset(date, weekDay, weekStart);
+
+            if (ruleWeekOffset === null) {
+                continue;
             }
 
-            offset = offset ? normalizeOffset(date, offset, weekStart) : weekNumber;
-
-            if (weekNumber < offset) {
+            if (weekNumber < ruleWeekOffset) {
                 result.push(weekDay);
-            } else if (weekNumber === offset) {
+            } else if (weekNumber === ruleWeekOffset) {
+                day = normalizeDayIndex(weekDay.day, weekStart);
+
                 if (currentDay < day) {
                     result.push(weekDay);
                 } else if (currentDay === day) {
