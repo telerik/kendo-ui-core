@@ -262,6 +262,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// If set to false the column will remain in the side of the grid into which its own locked configuration placed it.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid(Model)
+        ///             .Name("Grid")
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).Lockable((bool)ViewData["lockable"]))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TColumnBuilder Lockable(bool value)
+        {
+            Column.Lockable = value;
+
+            return this as TColumnBuilder;
+        }
+
+        /// <summary>
         /// Makes the column hidden or not. By default all columns are not hidden. Hidden columns are rendered in the output HTML but are hidden.
         /// </summary>
         /// <example>

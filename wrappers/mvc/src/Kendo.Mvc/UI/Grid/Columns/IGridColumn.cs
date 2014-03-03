@@ -64,6 +64,12 @@ namespace Kendo.Mvc.UI
             set; 
         }
 
+        bool Lockable
+        {
+            get;
+            set;
+        }
+
         bool IncludeInMenu
         {
             get;

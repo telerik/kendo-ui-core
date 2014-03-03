@@ -70,7 +70,14 @@ namespace Kendo.Mvc.UI.Tests.Grid
         {
             builder.Locked();
             column.Locked.ShouldBeTrue();
-        }               
+        }
+
+        [Fact]
+        public void Lockable_sets_the_property()
+        {
+            builder.Lockable(false);
+            column.Lockable.ShouldBeFalse();
+        }  
 
         [Fact]
         public void HtmlAttributes_sets_the_html_attributes_of_the_column()

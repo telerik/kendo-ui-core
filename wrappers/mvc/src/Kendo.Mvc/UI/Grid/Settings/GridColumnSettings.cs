@@ -30,6 +30,7 @@ namespace Kendo.Mvc.UI
             Groupable = true;
             Visible = true;
             IncludeInMenu = true;
+            Lockable = true;
             HeaderHtmlAttributes = new RouteValueDictionary();            
             HtmlAttributes = new RouteValueDictionary();            
             FooterHtmlAttributes = new RouteValueDictionary();
@@ -84,6 +85,12 @@ namespace Kendo.Mvc.UI
         }
 
         public bool Locked
+        {
+            get;
+            set;
+        }
+
+        public bool Lockable
         {
             get;
             set;
