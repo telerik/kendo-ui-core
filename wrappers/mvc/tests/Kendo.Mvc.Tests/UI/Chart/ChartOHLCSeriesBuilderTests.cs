@@ -112,5 +112,83 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Highlight(series => { }).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void OpenField_should_set_open_member()
+        {
+            builder.OpenField("Open");
+            series.OpenMember.ShouldEqual("Open");
+        }
+
+        [Fact]
+        public void OpenField_should_return_builder()
+        {
+            builder.OpenField("Open").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void CloseField_should_set_close_member()
+        {
+            builder.CloseField("Close");
+            series.CloseMember.ShouldEqual("Close");
+        }
+
+        [Fact]
+        public void CloseField_should_return_builder()
+        {
+            builder.CloseField("Close").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void HighField_should_set_high_member()
+        {
+            builder.HighField("High");
+            series.HighMember.ShouldEqual("High");
+        }
+
+        [Fact]
+        public void HighField_should_return_builder()
+        {
+            builder.HighField("High").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void LowField_should_set_low_member()
+        {
+            builder.LowField("Low");
+            series.LowMember.ShouldEqual("Low");
+        }
+
+        [Fact]
+        public void LowField_should_return_builder()
+        {
+            builder.LowField("Low").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void ColorField_should_set_color_member()
+        {
+            builder.ColorField("Color");
+            series.ColorMember.ShouldEqual("Color");
+        }
+
+        [Fact]
+        public void ColorField_should_return_builder()
+        {
+            builder.ColorField("Color").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void NoteTextField_should_set_note_text_member()
+        {
+            builder.NoteTextField("NoteText");
+            series.NoteTextMember.ShouldEqual("NoteText");
+        }
+
+        [Fact]
+        public void NoteTextField_should_return_builder()
+        {
+            builder.NoteTextField("NoteText").ShouldBeSameAs(builder);
+        }
     }
 }
