@@ -11,6 +11,7 @@
           .DataTextField("ProductName")
           .DataValueField("ProductID")
           .Filter("contains")
+          .Value(new[] { new {ProductName= "Chang", ProductID = 2 }, new { ProductName = "Uncle Bob's Organic Dried Pears", ProductID = 7 } })          
           .DataSource(source => {
               source.Read(read =>
               {
