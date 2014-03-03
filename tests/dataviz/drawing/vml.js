@@ -12,6 +12,7 @@
 
         vml = d.vml,
         Node = vml.Node,
+        ArcNode = vml.ArcNode,
         CircleNode = vml.CircleNode,
         FillNode = vml.FillNode,
         GroupNode = vml.GroupNode,
@@ -503,6 +504,24 @@
 
         ok(pathNode.render().indexOf("v='m 0,0 l 10,20 20,30 e'") !== -1);
     });
+    
+    test("renders curve", function() {
+        path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
+
+        ok(pathNode.render().indexOf("v='m 0,0 c 10,10 20,10 30,0 e'") !== -1);
+    });
+
+    test("switches between line and curve", function() {
+        path.moveTo(0, 0).lineTo(5, 5).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
+
+        ok(pathNode.render().indexOf("v='m 0,0 l 5,5 c 10,10 20,10 30,0 e'") !== -1);
+    });
+
+    test("switches between curve and line", function() {
+        path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0)).lineTo(40, 10);
+
+        ok(pathNode.render().indexOf("v='m 0,0 c 10,10 20,10 30,0 l 40,10 e'") !== -1);
+    });    
 
     test("renders closed paths", function() {
         path.moveTo(0, 0).lineTo(10, 20).close();
@@ -669,4 +688,50 @@
 
         circle.geometry.set("radius", 60);
     });
+    
+    // ------------------------------------------------------------
+    var arc,
+        arcNode;
+
+    module("ArcNode", {
+        setup: function() {
+            var geometry = new g.Arc(new Point(100, 100), {
+                startAngle: 0,
+                endAngle: 120,
+                radiusX: 50,
+                radiusY: 100
+            });
+            arc = new d.Arc(geometry, {stroke: {color: "red", width: 4}, fill: {color: "green", opacity: 0.5}});
+            arcNode = new ArcNode(arc);
+        }
+    });
+
+    test("renders curve path", function() {
+        var result = arcNode.render();
+        ok(result.indexOf("v='m 150,100 c 150,152 126,200 100,200 91,200 83,195 75,187 e'") !== -1);
+    });
+
+    test("renders arc fill", function() {
+        var result = arcNode.render();
+
+        ok(/kvml:fill.*?color='green'.*?kvml:fill/.test(result));
+        ok(/kvml:fill.*?opacity='0.5'.*?kvml:fill/.test(result));
+    });
+    
+    test("renders arc stroke", function() {
+        var result = arcNode.render();
+
+        ok(/kvml:stroke.*?color='red'.*?kvml:stroke/.test(result));
+        ok(/kvml:stroke.*?weight='4px'.*?kvml:stroke/.test(result));
+    });
+    
+    test("geometryChange updates path", function() {
+        arcNode.attr = function(name, value) {
+            equal(name, "v");
+            equal(value, "m 150,100 c 150,152 126,200 100,200 74,200 50,152 50,100 e");
+        };
+
+        arc.geometry.set("endAngle", 180);
+    });
+    
 })();
