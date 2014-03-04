@@ -303,13 +303,19 @@ div.k-grid-header .k-header
     text-decoration: none;
 }
 
+.k-pager-wrap > .k-link,
+.k-pager-numbers .k-link,
+.k-pager-numbers .k-state-selected
+{
+    min-width: 2em;
+}
+
 .k-pager-wrap>.k-link
 {
     float:left;
     margin:0 0.08333em;
     height: 2em;/*IE7*/
-    line-height: 2em;/*IE7*/
-    width: 2em;
+    line-height: 2em;/*IE7*/    
     border-radius: 1.0833em;
     cursor:pointer;
     text-align: center;
@@ -323,7 +329,6 @@ div.k-grid-header .k-header
 
 .k-pager-numbers .k-link
 {
-	width: 2em;
 	text-align: center;
     line-height:2em;
     border-style:solid;
@@ -349,7 +354,6 @@ div.k-grid-header .k-header
 {
     border-style:solid;
     border-width:1px;
-	width: 2em;
 	text-align: center;
     border-radius: 1.0833em;
 }
