@@ -226,7 +226,12 @@ namespace KendoCRUDService.Controllers
                     Directory.CreateDirectory(physicalPath);
                 }
 
-                return Json(entry);
+                return Json(new
+                        {
+                            name = entry.Name,
+                            type = "d",
+                            size = entry.Size
+                        });
             }
 
             throw new HttpException(403, "Forbidden");
