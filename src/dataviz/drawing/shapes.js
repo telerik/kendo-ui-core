@@ -199,12 +199,40 @@
         }
     });
 
-    var Text = Shape.extend({
+    var TextSpan = Shape.extend({
         init: function(content, options) {
-            var text = this;
-            text.content = content;
+            this._content = content;
 
-            Shape.fn.init.call(text, options);
+            Shape.fn.init.call(this, options);
+        },
+
+        content: function(value) {
+            if (defined(value)) {
+                this._content = value;
+                this.contentChange();
+                return this;
+            } else {
+                return this._content;
+            }
+        },
+
+        contentChange: function() {
+            if (this.observer) {
+                this.observer.contentChange();
+            }
+        }
+    });
+
+    var Text = Group.extend({
+        init: function(content, origin, options) {
+            Group.fn.init.call(this, options);
+
+            this.append(content);
+        },
+
+        append: function(content, options) {
+            var span = new TextSpan(content, options);
+            Group.fn.append.call(this, span);
         }
     });
 
@@ -541,7 +569,8 @@
         Path: Path,
         MultiPath: MultiPath,
         Segment: Segment,
-        Text: Text
+        Text: Text,
+        TextSpan: TextSpan
     });
 
 })(window.kendo.jQuery);

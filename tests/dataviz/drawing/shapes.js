@@ -11,6 +11,7 @@
         Segment = d.Segment,
         Shape = d.Shape,
         Text = d.Text,
+        TextSpan = d.TextSpan,
         Circle = d.Circle,
         MultiPath = d.MultiPath,
         Path = d.Path,
@@ -365,24 +366,73 @@
     });
 
     // ------------------------------------------------------------
-    module("Text");
+    var tspan;
+
+    module("TextSpan", {
+        setup: function() {
+            tspan = new TextSpan("Foo");
+        }
+    });
 
     test("sets initial content", function() {
-        var text = new Text("Foo");
-
-        equal(text.content, "Foo");
+        equal(tspan.content(), "Foo");
     });
 
     test("sets initial options", function() {
-        var text = new Text("Foo", { foo: true });
+        tspan = new TextSpan("Foo", { foo: true });
+
+        ok(tspan.options.foo);
+    });
+
+    test("setting content triggers contentChange", function() {
+        tspan.observer = {
+            contentChange: function() { ok(true); }
+        };
+
+        tspan.content("Bar");
+    });
+
+    test("clears content", function() {
+        tspan.content("");
+        equal(tspan.content(), "");
+    });
+
+    test("content setter is chainable", function() {
+        equal(tspan.content("Bar"), tspan);
+    });
+
+    // ------------------------------------------------------------
+    var text;
+    module("Text", {
+        setup: function() {
+            text = new Text("Foo");
+        }
+    });
+
+    test("sets initial options", function() {
+        text = new Text("Foo", new g.Point(), { foo: true });
 
         ok(text.options.foo);
     });
 
-    test("setting content triggers change", function() {
-        var text = new Text("Foo", { foo: true });
+    test("appends initial content", function() {
+        equal(text.children[0].content(), "Foo");
+    });
 
-        ok(text.options.foo);
+    test("appending content triggers childrenChange", function() {
+        text.observer = {
+            childrenChange: function() { ok(true); }
+        };
+
+        text.append("Bar");
+    });
+
+    test("clear triggers childrenChange", function() {
+        text.observer = {
+            childrenChange: function() { ok(true); }
+        };
+
+        text.clear();
     });
 
     // ------------------------------------------------------------
