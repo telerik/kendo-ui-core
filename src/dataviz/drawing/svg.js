@@ -440,7 +440,7 @@
                 if (defined(fill.opacity)) {
                     attrs.push(["fill-opacity", fill.opacity]);
                 }
-            } else {
+            } else if (defined(fill)) {
                 attrs.push(["fill", NONE]);
             }
 
