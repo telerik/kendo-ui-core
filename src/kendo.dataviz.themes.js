@@ -287,12 +287,15 @@ var __meta__ = {
         }
     };
 
+    var diagramBaseTheme = { };
+
     var themes = ui.themes,
         registerTheme = ui.registerTheme = function(themeName, options) {
             var result = {};
             // Apply base theme
             result.chart = deepExtend({}, chartBaseTheme, options.chart);
             result.gauge = deepExtend({}, gaugeBaseTheme, options.gauge);
+            result.diagram = deepExtend({}, diagramBaseTheme, options.diagram);
 
             // Copy the line/area chart settings for their vertical counterparts
             var defaults = result.chart.seriesDefaults;
@@ -436,7 +439,6 @@ var __meta__ = {
             },
             scale: {
                 rangePlaceholderColor: "#1d1d1d",
-
                 labels: {
                     color: WHITE
                 },
@@ -448,6 +450,37 @@ var __meta__ = {
                 },
                 line: {
                     color: WHITE
+                }
+            }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#0066cc",
+                hover: {
+                    opacity: 0.2
+                },
+                connectorDefaults: {
+                    background: "#ffffff",
+                    stroke: {
+                        color: "#384049"
+                    },
+                    hover: {
+                        background: "#000000",
+                        stroke: {
+                            color: "#efefef"
+                        }
+                    }
+                }
+            },
+            resizingAdorner: {
+                type: "rectangle",
+                background: "#3d3d3d",
+                border: {
+                    dashType: "dot",
+                    color: "#ffffff"
+                },
+                hover: {
+                    background: "#3d3d3d"
                 }
             }
         }

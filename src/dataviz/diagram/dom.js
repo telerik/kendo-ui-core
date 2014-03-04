@@ -8,7 +8,8 @@
 
     (function ($, undefined) {
         // Imports ================================================================
-        var diagram = kendo.dataviz.diagram,
+        var dataviz = kendo.dataviz,
+            diagram = dataviz.diagram,
             ui = kendo.ui,
             Widget = ui.Widget,
             Class = kendo.Class,
@@ -1244,6 +1245,7 @@
             init: function (element, options) {
                 var that = this;
                 Widget.fn.init.call(that, element, options);
+                that._initTheme(options);
                 that._extendLayoutOptions(that.options);
                 element = that.element; // the hosting element
 
@@ -1330,6 +1332,15 @@
             },
 
             events: [ZOOM, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
+
+            _initTheme: function(options) {
+                var diagram = this,
+                    themes = dataviz.ui.themes || {},
+                    themeName = options.theme.toLowerCase(),
+                    themeOptions = (themes[themeName] || {}).diagram;
+
+                diagram.options = deepExtend({}, themeOptions, diagram.options);
+            },
 
             _createShapes: function() {
                 var that = this,
