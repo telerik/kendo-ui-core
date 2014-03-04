@@ -10,7 +10,7 @@ module CodeGen
             DiagramConnector
             DiagramLayoutSettings}
 
-            OPTIONS_TO_SKIP = %w{dataSource bounds}
+            OPTIONS_TO_SKIP = %w{dataSource autoBind}
 
             TYPES_MAP = {
                 'String' => 'string',
@@ -130,8 +130,11 @@ namespace <%= csharp_namespace %>
             COMPOSITE_CLASS_TEMPLATE = ERB.new('
 namespace <%= csharp_namespace %>
 {
+    using System.Text;
     using System.ComponentModel;
+    using System.Collections.Generic;
     using System.Web.UI;
+    using System.Web.Script.Serialization;
 
     /// <summary>
     /// <%= description %>
@@ -290,6 +293,9 @@ namespace <%= csharp_namespace %>
             AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
 
             module Options
+
+                attr_accessor :type, :values
+
                 def component_class
                     Component
                 end
@@ -344,7 +350,7 @@ namespace <%= csharp_namespace %>
 
                         remove_existing = settings[:remove_existing] || false
 
-                        parents = @options.find_all { |option| name.start_with?(option.name + '.') && (option.type.include?('Object') || option.type.include?('Array')) }
+                        parents = @options.find_all { |option| name.start_with?(option.name + '.') && (option.type.include?('Object') || option.type.include?('Array') || option.type.include?('kendo.')) }
 
                         parents.map! { |parent| parent.to_composite }
 
@@ -546,8 +552,6 @@ namespace <%= csharp_namespace %>
 
             class ArrayItem < CompositeOption
 
-                attr_accessor :type
-
                 def csharp_class
                     "#{owner.owner.name.pascalize.sub('Collection', '')}#{name.pascalize}"
                 end
@@ -568,55 +572,38 @@ namespace <%= csharp_namespace %>
                     end
                 end
 
+                def find_option_by_name(name, root)
+                    return root if root.name == name
+
+                    child = root.options.find { |o| name == o.name || name.start_with?("#{o.name}.") }
+
+                    if !child.nil? && !child.instance_of?(Option) && name != child.name
+                        name = name.sub("#{child.name}.", '')
+                        child = child.item if child.instance_of?(ArrayOption) && (name.include?('.') || name != child.name.singular)
+                        child = find_option_by_name(name, child)
+                    end
+
+                    if !child.nil? && name.end_with?(child.name)
+                        child
+                    else
+                        nil
+                    end
+                end
+
                 def import(metadata)
                     @content = metadata[:content]
 
                     metadata[:options].each do |option|
-                        parent = find_parent_in_options(option[:name])
-                        current_option = parent.options.find { |o| o.name == option[:name] } unless parent.nil?
-                        if !current_option.nil? && current_option.instance_of?(ArrayItem)
-                            current_option.type = option[:type]
-                        else
-                            option[:remove_existing] = true
-                            add_option(option)
+                        existing_option = find_option_by_name(option[:name], self)
 
-                            transfer_children_recursively(current_option, option[:name]) if current_option.is_a?(CompositeOption)
+                        if !existing_option.nil?
+                            existing_option.type = option[:type] if option[:type].include?('kendo.')
+                            existing_option.values = option[:values] unless option[:values].nil?
+                        else
+                            option[:remove_existing] = existing_option.nil?
+                            add_option(option)
                         end
                     end
-                end
-
-                def transfer_children_recursively(parent, name)
-                    child_options = parent.options
-
-                    child_options.each do |child|
-                        settings = {
-                            :name => "#{name}.#{child.name}",
-                            :type => child.type,
-                            :description => child.description
-                        }
-                        #settings[:owner] = owner unless owner.nil?
-                        settings[:recursive] = child.recursive if child.respond_to?('recursive')
-                        settings[:default] = child.default if option.respond_to?('default')
-                        settings[:values] = child.values if option.respond_to?('values')
-                        settings[:content] = child.content if child.respond_to?('content')
-
-                        add_option(settings)
-
-                        transfer_children_recursively(child, name) if child.options.length > 0
-                    end
-                end
-
-                def find_parent_in_options(option_name)
-                    parent = self
-                    names = option_name.split('.')
-                    names = names.slice(0, names.count - 1) if names.count > 0
-
-                    names.each do |name|
-                        parent = parent.options.find { |o| o.name == name }
-                        parent = parent.item if parent.instance_of?(ArrayOption)
-                    end
-
-                    parent
                 end
 
                 def csharp_class
