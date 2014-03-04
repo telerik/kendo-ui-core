@@ -335,7 +335,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the header template for the column.
+        /// Sets the header template for the column. If sorting is enabled, the template content wrapper must have a k-link CSS class.
         /// </summary>
         /// <param name="template">The action defining the template.</param>
         public TColumnBuilder HeaderTemplate(Action template)
@@ -345,7 +345,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the header template for the column.
+        /// Sets the header template for the column.  If sorting is enabled, the template content wrapper must have a k-link CSS class.
         /// </summary>
         /// <param name="template">The string defining the template.</param>
         public TColumnBuilder HeaderTemplate(string template)
@@ -355,7 +355,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the header template for the column.
+        /// Sets the header template for the column.  If sorting is enabled, the template content wrapper must have a k-link CSS class.
         /// </summary>
         /// <param name="template">The action defining the template.</param>
         public TColumnBuilder HeaderTemplate(Func<object, object> template)
