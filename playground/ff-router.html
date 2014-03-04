@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.router.js"></script>
+    </head>
+    <body>
+        <a id="link" href="#">Click me</a>
+        <script>
+            var router = new kendo.Router();
+
+            // this will not work in Firefox
+            // router.route("workspace/:guid/analytics/:guid2/nav/:hash",
+            // this will, though
+            router.route("workspace/:guid/analytics/:guid2/nav/*hash", function() {
+
+                console.log(arguments[2]);
+            });
+
+            $(function() {
+                router.start();
+                $("#link").click(function() {
+                    router.navigate("workspace/0abd9912-4695-4c41-97ce-d498d6604ce2/analytics/4a99ec18-f9bd-4065-ae71-aed97708380c/nav/%2F%23%2Fgettingstarted%2F4a99ec18f9bd4065ae71aed97708380c");
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

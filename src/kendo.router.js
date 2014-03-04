@@ -94,7 +94,7 @@ kendo_module({
         },
 
         current: function() {
-            return location.hash.replace(hashStrip, '');
+            return location.href.split("#")[1] || "";
         }
     });
 
