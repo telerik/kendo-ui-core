@@ -403,7 +403,7 @@ var __meta__ = {
         },
 
         _getElementCenter: function(element) {
-            var center = kendo.getOffset(element);
+            var center = element.length ? kendo.getOffset(element) : null;
             if(center) {
                 center.top += element.outerHeight() / 2;
                 center.left += element.outerWidth() / 2;
