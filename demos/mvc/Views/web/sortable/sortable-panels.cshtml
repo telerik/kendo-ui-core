@@ -70,12 +70,15 @@
 
                     $("#sidebar").kendoSortable({
                         filter: ">div",
+                        cursor: "move",
                         connectWith: "#main-content",
                         placeholder: placeholder,
                         hint: hint
                     });
 
                     $("#main-content").kendoSortable({
+                        filter: ">div",
+                        cursor: "move",
                         connectWith: "#sidebar",
                         placeholder: placeholder,
                         hint: hint
@@ -164,6 +167,7 @@
                     background-color: #ffffff;
                     border: 1px solid #e7e7e7;
                     border-radius: 3px;
+                    cursor: move;
                 }
 
                 .widget:hover {

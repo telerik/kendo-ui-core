@@ -17,6 +17,7 @@
                 $(document).ready(function() {
                     $("#sortable-horizontal").kendoSortable({
                         axis: "x",
+                        cursor: "move",
                         container: "#sortable-horizontal",
                         placeholder: "<div class='placeholder'>Drop Here!</div>",
                         hint: function (element) {
@@ -47,7 +48,8 @@
                 #sortable-horizontal img {
                     width: 166px;
                     margin: 10px;
-                    vertical-align: middle
+                    vertical-align: middle;
+                    cursor: move;
                 }
 
                 .placeholder {

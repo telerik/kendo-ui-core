@@ -33,6 +33,7 @@
                     grid.table.kendoSortable({
                         filter: ">tbody >tr",
                         hint: $.noop,
+                        cursor: "move",
                         placeholder: function(element) {
                             return element.clone().addClass("k-state-hover").css("opacity", 0.65);
                         },
@@ -50,4 +51,10 @@
                     });
                 });
             </script>
+
+            <style>
+                .k-grid tbody tr {
+                    cursor: move;
+                }
+            </style>
         </div>
