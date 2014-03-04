@@ -46,6 +46,7 @@ kendo_module({
         FOCUSEDSTATE = "k-state-focused",
         DISABLEDSTATE = "k-state-disabled",
         groupSelector = ".k-group",
+        popupSelector = groupSelector + ",.k-animation-container",
         allItemsSelector = ":not(.k-list) > .k-item",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item:not(.k-state-disabled)",
@@ -603,7 +604,7 @@ kendo_module({
             return that;
         },
 
-        close: function (items) {
+        close: function (items, dontClearClose) {
             var that = this,
                 element = that.element;
 
@@ -616,7 +617,7 @@ kendo_module({
             items.each(function () {
                 var li = $(this);
 
-                if (that._isRootItem(li)) {
+                if (!dontClearClose && that._isRootItem(li)) {
                     that.clicked = false;
                 }
 
@@ -725,7 +726,7 @@ kendo_module({
 
             if (that.options.openOnClick && that.clicked || mobile) {
                 element.siblings().each(proxy(function (_, sibling) {
-                    that.close(sibling);
+                    that.close(sibling, true);
                 }, that));
             }
         },
@@ -773,7 +774,7 @@ kendo_module({
 
             e.handled = true;
 
-            childGroup = element.children(groupSelector + ",.k-animation-container");
+            childGroup = element.children(popupSelector);
             childGroupVisible = childGroup.is(":visible");
 
             if (options.closeOnClick && !isLink && (!childGroup.length || (options.openOnClick && childGroupVisible))) {
