@@ -50,7 +50,7 @@ public class DiagramDataRepository {
                 root.getItems().add(node);
                 
                 if (levels.length > 1) {
-                    AddNodes(node, Arrays.copyOfRange(levels, 1, levels.length - 1));
+                    AddNodes(node, Arrays.copyOfRange(levels, 1, levels.length));
                 }
             }
         }

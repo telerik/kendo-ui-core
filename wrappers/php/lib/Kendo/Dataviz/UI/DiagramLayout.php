@@ -6,34 +6,6 @@ class DiagramLayout extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The type of the layout algorythm to use. Predefined values are:There are several criteria on which this algorithm is based and which are respected in as far as the incidence structure allows it:
-* links have a preferred direction (the complementary direction of the subtype) and attempt to flow as much as possible in this way
-* linked nodes try to stay closed to one another (clustering of nodes)
-* links crossings should be minimized
-* links should be as short as possible (cross a few layers as possible)The construction of a layered graph drawing proceeds in a series of steps (assuming an horizontal layer from here on):
- + If the input graph is not already a directed acyclic graph, a set of edges is identified the reversal of which will make it acyclic.
- + The nodes of the directed acyclic graph resulting from the first step are assigned to layers, such that each link goes from a higher layer to a lower layer.
- + Edges that span multiple layers are replaced by paths of dummy vertices so that, after this step, each edge in the expanded graph connects two vertices on adjacent layers of the drawing.
- + The nodes within each layer are permuted in an attempt to reduce the number of crossings among the edges connecting it to the previous layer.
- + Each node is assigned a coordinate within its layer, consistent with the permutation calculated in the previous step.
- + The edges reversed in the first step of the algorithm are returned to their original orientations, the dummy vertices are removed from the graph and the vertices and edges are drawn.
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\DiagramLayout
-    */
-    public function type($value) {
-        return $this->setProperty('type', $value);
-    }
-
-    /**
-    * The subtype further defines the layout type by specifying in greater detail the behaviour expected by the layout algorithm. Possible predefined values are:
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\DiagramLayout
-    */
-    public function subtype($value) {
-        return $this->setProperty('subtype', $value);
-    }
-
-    /**
     * Either the distance between the siblings if the tree is up/down or between levels if the tree is left/right. In tipOver tree layout this setting is used only for the direct children of the root
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramLayout
@@ -134,7 +106,7 @@ class DiagramLayout extends \Kendo\SerializableObject {
 
     /**
     * Each layout algorithm has a different set of parameters customizing the layout but they also all have a common collection of parameters which relate to the way 'pieces' of a diagram are organized.
-A diagram can have in general disconnected pieces, known as components, which can be organized in a way independent of the way a component on its own is arranged. In the picture above, this is one diagram consisting of four components. When you apply a certain layout an analysis will first split the diagram in components, arrange each component individually and thereafter organize the components in a grid. The common parameters referred above deal with this grid layout, they define the width, margin and padding of the (invisible) grid used to organize the components.
+A diagram can have in general disconnected pieces, known as components, which can be organized in a way independent of the way a component on its own is arranged. In the picture above, this is one diagram consisting of four components.When you apply a certain layout an analysis will first split the diagram in components, arrange each component individually and thereafter organize the components in a grid. The common parameters referred above deal with this grid layout, they define the width, margin and padding of the (invisible) grid used to organize the components.
     * @param \Kendo\Dataviz\UI\DiagramLayoutGrid|array $value
     * @return \Kendo\Dataviz\UI\DiagramLayout
     */
@@ -149,6 +121,24 @@ A diagram can have in general disconnected pieces, known as components, which ca
     */
     public function layerSeparation($value) {
         return $this->setProperty('layerSeparation', $value);
+    }
+
+    /**
+    * The layout type.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramLayout
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
+    }
+
+    /**
+    * The layout subtype.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramLayout
+    */
+    public function subtype($value) {
+        return $this->setProperty('subtype', $value);
     }
 
 //<< Properties

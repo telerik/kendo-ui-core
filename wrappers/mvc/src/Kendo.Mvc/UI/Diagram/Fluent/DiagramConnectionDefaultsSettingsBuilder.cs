@@ -40,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The start cap (arrow, head or decoration) of the connection:You easily add custom caps through the underlying mechanism of SVG called 'markers' (see e.g. the SVG documentation).
+        /// The start cap (arrow, head or decoration) of the connection:
         /// </summary>
         /// <param name="value">The value that configures the startcap.</param>
         public DiagramConnectionDefaultsSettingsBuilder StartCap(string value)

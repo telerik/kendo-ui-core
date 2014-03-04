@@ -10749,13 +10749,14 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual: Should redirect here to a more comprehensive overview of how to use the primitives.</description>
+            <description>A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual:</description>
             <name>visualTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The scaling factor or the zoom when using the mouse-wheel to zoom in or out. If zoomRate is less than 1, zooming will be reverted. If zoomRate=1, then zooming will appear disabled.</description>
+            <description>The scaling factor or the zoom when using the mouse-wheel to zoom in or out.
+If zoomRate is less than 1, zooming will be reversed.</description>
             <name>zoomRate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -10806,7 +10807,7 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The start cap (arrow, head or decoration) of the connection:You easily add custom caps through the underlying mechanism of SVG called 'markers' (see e.g. the SVG documentation).</description>
+            <description>The start cap (arrow, head or decoration) of the connection:</description>
             <name>startCap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10884,7 +10885,7 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The start cap (arrow, head or decoration) of the connection:You easily add custom caps through the underlying mechanism of SVG called 'markers' (see e.g. the SVG documentation).</description>
+            <description>The start cap (arrow, head or decoration) of the connection:</description>
             <name>startCap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -11243,7 +11244,7 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <body-content>empty</body-content>
 
         <attribute>
-            <description>this is an object right now and contains only an angle</description>
+            <description></description>
             <name>angle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -11426,7 +11427,7 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <body-content>empty</body-content>
 
         <attribute>
-            <description>this is an object right now and contains only an angle</description>
+            <description></description>
             <name>angle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>

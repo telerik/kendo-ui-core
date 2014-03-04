@@ -2,13 +2,13 @@
 
 namespace Kendo\Dataviz\UI;
 
-class DiagramConnectionDefaults extends \Kendo\SerializableObject {
+class DiagramConnection extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
     * Defines the stroke configuration.
-    * @param \Kendo\Dataviz\UI\DiagramConnectionDefaultsStroke|array $value
-    * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
+    * @param \Kendo\Dataviz\UI\DiagramConnectionStroke|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
     */
     public function stroke($value) {
         return $this->setProperty('stroke', $value);
@@ -16,8 +16,8 @@ class DiagramConnectionDefaults extends \Kendo\SerializableObject {
 
     /**
     * Defines the hover configuration.
-    * @param \Kendo\Dataviz\UI\DiagramConnectionDefaultsHover|array $value
-    * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
+    * @param \Kendo\Dataviz\UI\DiagramConnectionHover|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
     */
     public function hover($value) {
         return $this->setProperty('hover', $value);
@@ -26,7 +26,7 @@ class DiagramConnectionDefaults extends \Kendo\SerializableObject {
     /**
     * The start cap (arrow, head or decoration) of the connection:
     * @param string $value
-    * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
+    * @return \Kendo\Dataviz\UI\DiagramConnection
     */
     public function startCap($value) {
         return $this->setProperty('startCap', $value);
@@ -35,10 +35,19 @@ class DiagramConnectionDefaults extends \Kendo\SerializableObject {
     /**
     * The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed. Much like the startCap example above, you can define custom caps (markers) for the endpoint of the connection.
     * @param string $value
-    * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
+    * @return \Kendo\Dataviz\UI\DiagramConnection
     */
     public function endCap($value) {
         return $this->setProperty('endCap', $value);
+    }
+
+    /**
+    * Adds DiagramConnectionPoint to the DiagramConnection.
+    * @param \Kendo\Dataviz\UI\DiagramConnectionPoint|array,... $value one or more DiagramConnectionPoint to add.
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function addPoint($value) {
+        return $this->add('points', func_get_args());
     }
 
 //<< Properties
