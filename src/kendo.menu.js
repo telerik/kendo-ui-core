@@ -50,6 +50,7 @@ var __meta__ = {
         FOCUSEDSTATE = "k-state-focused",
         DISABLEDSTATE = "k-state-disabled",
         groupSelector = ".k-group",
+        popupSelector = groupSelector + ",.k-animation-container",
         allItemsSelector = ":not(.k-list) > .k-item",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item:not(.k-state-disabled)",
@@ -612,7 +613,7 @@ var __meta__ = {
             return that;
         },
 
-        close: function (items) {
+        close: function (items, dontClearClose) {
             var that = this,
                 element = that.element;
 
@@ -625,7 +626,7 @@ var __meta__ = {
             items.each(function () {
                 var li = $(this);
 
-                if (that._isRootItem(li)) {
+                if (!dontClearClose && that._isRootItem(li)) {
                     that.clicked = false;
                 }
 
@@ -734,7 +735,7 @@ var __meta__ = {
 
             if (that.options.openOnClick && that.clicked || mobile) {
                 element.siblings().each(proxy(function (_, sibling) {
-                    that.close(sibling);
+                    that.close(sibling, true);
                 }, that));
             }
         },
@@ -782,7 +783,7 @@ var __meta__ = {
 
             e.handled = true;
 
-            childGroup = element.children(groupSelector + ",.k-animation-container");
+            childGroup = element.children(popupSelector);
             childGroupVisible = childGroup.is(":visible");
 
             if (options.closeOnClick && !isLink && (!childGroup.length || (options.openOnClick && childGroupVisible))) {
