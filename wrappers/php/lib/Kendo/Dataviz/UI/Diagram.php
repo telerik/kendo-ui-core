@@ -19,7 +19,8 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The scaling factor or the zoom when using the mouse-wheel to zoom in or out. If zoomRate is less than 1, zooming will be reverted. If zoomRate=1, then zooming will appear disabled.
+    * The scaling factor or the zoom when using the mouse-wheel to zoom in or out.
+If zoomRate is less than 1, zooming will be reversed.
     * @param float $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
@@ -96,7 +97,7 @@ data source is fired. By default the widget will bind to the data source specifi
 
     /**
     * Sets the visualTemplate option of the Diagram.
-    * A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual: Should redirect here to a more comprehensive overview of how to use the primitives.
+    * A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\Dataviz\UI\Diagram
     */
@@ -108,7 +109,7 @@ data source is fired. By default the widget will bind to the data source specifi
 
     /**
     * Sets the visualTemplate option of the Diagram.
-    * A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual: Should redirect here to a more comprehensive overview of how to use the primitives.
+    * A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual:
     * @param string $value The template content.
     * @return \Kendo\Dataviz\UI\Diagram
     */
@@ -126,6 +127,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Adds DiagramConnection to the Diagram.
+    * @param \Kendo\Dataviz\UI\DiagramConnection|array,... $value one or more DiagramConnection to add.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function addConnection($value) {
+        return $this->add('connections', func_get_args());
+    }
+
+    /**
     * Defines the shape options.
     * @param \Kendo\Dataviz\UI\DiagramShapeDefaults|array $value
     * @return \Kendo\Dataviz\UI\Diagram
@@ -135,21 +145,12 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * Collection of predefined connections to be added to the diagram
-    * @param array $value
+    * Adds DiagramShape to the Diagram.
+    * @param \Kendo\Dataviz\UI\DiagramShape|array,... $value one or more DiagramShape to add.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function connections($value) {
-        return $this->setProperty('connections', $value);
-    }
-
-    /**
-    * Collection of predefined shapes to be added to the diagram
-    * @param array $value
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function shapes($value) {
-        return $this->setProperty('shapes', $value);
+    public function addShape($value) {
+        return $this->add('shapes', func_get_args());
     }
 
     /**
