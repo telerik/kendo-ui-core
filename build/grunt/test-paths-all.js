@@ -46,8 +46,7 @@ exports.afterTestFiles = [
     'download-builder/scripts/script-resolver.js',
     'tests/diagram/common.js',
 
-    'demos/mvc/content/shared/js/trykendo.js',
-    'tests/demos/trykendo.js'
+    'demos/mvc/content/shared/js/trykendo.js'
 ];
 
 exports.compiledStyleSheets = [
