@@ -93,6 +93,26 @@
         });
     });
 
+    test("boundingRect returns children bounding rectangle", function() {
+        var path = new Path(),
+            circle = new Circle(new g.Circle(new Point(), 10)),
+            boundingRect;
+        circle.boundingRect = function() {
+            return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+        };
+        path.boundingRect = function() {
+            return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+        };
+        group.append(circle);
+        group.append(path);
+        boundingRect = group.boundingRect();
+
+        equal(boundingRect.p0.x, 30);
+        equal(boundingRect.p0.y, 50);
+        equal(boundingRect.p1.x, 150);
+        equal(boundingRect.p1.y, 170);
+    });
+
     // ------------------------------------------------------------
     var shape;
 
@@ -212,6 +232,22 @@
         circle.geometry.set("radius", 5);
     });
 
+    test("boundingRect returns geometry bounding rect with half stroke width added", function() {
+        var boundingRect,
+            geometry = new g.Circle(new Point());
+
+        geometry.boundingRect = function() {
+            return new g.Rect(new Point(50, 50), new Point(150, 150));
+        };
+        circle = new Circle(geometry, {stroke: {width: 5}});
+        boundingRect = circle.boundingRect();
+
+        equal(boundingRect.p0.x, 47.5);
+        equal(boundingRect.p0.y, 47.5);
+        equal(boundingRect.p1.x, 152.5);
+        equal(boundingRect.p1.y, 152.5);
+    });
+
     // ------------------------------------------------------------
     var segment;
 
@@ -258,6 +294,7 @@
 
         segment.controlOut.set("x", 5);
     });
+
     // ------------------------------------------------------------
     var path;
 

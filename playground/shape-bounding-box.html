@@ -20,11 +20,14 @@
          <script src="../src/dataviz/drawing/vml.js"></script>
     </head>
     <body>
-        <textarea id="pathString" cols="40" rows="5" data-bind="value:path"></textarea>
-        <div data-bind="text:drawPath"></div>
-        <div id="container"></div>
+        <!--
+            <textarea id="pathString" cols="40" rows="5" data-bind="value:path"></textarea>
+            <div data-bind="text:drawPath"></div>
+           
+         -->
+          <div id="container"></div>
         <div id="test"></div>
-         <--
+         <!--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute; left: 300px;">
             <g>
                 <path d="M 300 300 v 86.6 h-25 A 50 100 0 1 1 350 300 c -5 100 100 100 100 -100 10 -70 50 100 50 100" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round"></path>
@@ -96,8 +99,8 @@
                             multiPathBoundingRect = multiPath.boundingRect();
 
                         multiPathGroup.append(multiPath, rectPath(multiPathBoundingRect, strokeOptions));
-                        surface.clear();
-                        surface.draw(multiPathGroup);
+                        //surface.clear();
+                        //surface.draw(multiPathGroup);
                     }
 
                     return pathString;
@@ -118,19 +121,35 @@
 
                 return rectPath;
             }
-           // renderTest();
+            renderTest();
             function renderTest() {
                 var surface = Surface.create(document.getElementById("test"), {width: 700, height: 700}),
                     arcGeometry = new geometry.Arc(Point.create(100, 100), {
-                        startAngle: 0,
-                        endAngle: 180,
+                        startAngle: 60,
+                        endAngle: 240,
                         radiusX: 50,
                         radiusY: 100,
                         counterClockwise: false
                     }),
-                    arc = new drawing.Arc(arcGeometry, $.extend({}, strokeOptions, {fill: {color: "red"}}));
-
-                surface.draw(arc);
+                    arc = new drawing.Arc(arcGeometry, {stroke: {color: "red", width: 20}});
+                //var circ  =new drawing.Circle(new geometry.Circle(Point.create(300, 300), 100), {stroke: {color: "red", width: 100}});
+                var group = new drawing.Group();
+                
+                //group.append(arc, rectPath(arc.boundingRect(), {stroke: {color: "black", width: 1}}));
+               // group.append(circ, rectPath(circ.boundingRect(), {stroke: {color: "black", width: 1}}));
+               
+                var path = new Path({stroke: {color: "red", width: 20}});
+                path.moveTo(100, 100);
+                path.curveTo(new Point(150, 150), new Point(200, 150), new Point(300, 100));
+                path.curveTo(new Point(310, 50), new Point(400, 150), new Point(200, 300));
+                path.close();
+                var path2 = new Path({stroke: {color: "black", width: 1}});
+                path2.moveTo(100, 100);
+                path2.curveTo(new Point(150, 150), new Point(200, 150), new Point(300, 100));
+                path2.curveTo(new Point(310, 50), new Point(400, 150), new Point(200, 300));
+                path2.close();
+                group.append(path, rectPath(path.boundingRect(), {stroke: {color: "black", width: 1}}), path2);
+                surface.draw(group);
             }
         </script>
     </body>

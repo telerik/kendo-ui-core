@@ -23,4 +23,10 @@
     test("renderPos returns empty string", function() {
         equal(util.renderPos(), "");
     });
+
+    test("arrayMinMax returns the minimum and maximum number in an array", function() {
+        var result = util.arrayMinMax([5, -1, 4, 7, 2]);
+        equal(result.min, -1);
+        equal(result.max, 7);
+    });
 })();

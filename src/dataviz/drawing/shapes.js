@@ -25,20 +25,6 @@
         defined = util.defined,
         arrayMinMax = util.arrayMinMax;
 
-    //utility =====================================================
-    function elementsBoundingRect(elements) {
-        var length = elements.length,
-            boundingRect, i;
-        if (length > 0) {
-            boundingRect = new Rect(Point.maxPoint(), Point.minPoint());
-            for (i = 0; i < length; i++) {
-                boundingRect = boundingRect.wrap(elements[i].boundingRect());
-            }
-        }
-
-        return boundingRect;
-    }
-
     // Drawing primitives =====================================================
     var Element = Class.extend({
         init: function(options) {
@@ -153,7 +139,13 @@
         },
 
         boundingRect: function() {
-            return this.geometry.boundingRect();
+            var rect = this.geometry.boundingRect();
+                strokeWidth = this.options.get("stroke.width");
+            if (strokeWidth) {
+                expandRect(rect, strokeWidth / 2);
+            }
+
+            return rect;
         }
     });
 
@@ -167,7 +159,13 @@
         },
 
         boundingRect: function() {
-            return this.geometry.boundingRect();
+            var rect = this.geometry.boundingRect();
+                strokeWidth = this.options.get("stroke.width");
+            if (strokeWidth) {
+                expandRect(rect, strokeWidth / 2);
+            }
+
+            return rect;
         },
 
         toPath: function() {
@@ -333,6 +331,7 @@
             var segments = this.segments,
                 length = segments.length,
                 boundingRect = new Rect(Point.maxPoint(), Point.minPoint()),
+                strokeWidth = this.options.get("stroke.width"),
                 i;
 
             if (length === 1) {
@@ -342,6 +341,11 @@
                     boundingRect = boundingRect.wrap(segments[i - 1].boundingRectTo(segments[i]));
                 }
             }
+
+            if (strokeWidth) {
+                expandRect(boundingRect, strokeWidth / 2);
+            }
+
             return boundingRect;
         }
     });
@@ -393,6 +397,29 @@
 
     // Sector
     // Ring
+
+
+    //utility =====================================================
+    function elementsBoundingRect(elements) {
+        var length = elements.length,
+            boundingRect, i;
+        if (length > 0) {
+            boundingRect = new Rect(Point.maxPoint(), Point.minPoint());
+            for (i = 0; i < length; i++) {
+                boundingRect = boundingRect.wrap(elements[i].boundingRect());
+            }
+        }
+
+        return boundingRect;
+    }
+
+    function expandRect(rect, value) {
+        rect.p0.x -= value;
+        rect.p0.y -= value;
+        rect.p1.x += value;
+        rect.p1.y += value;
+    }
+
 
     // Exports ================================================================
     deepExtend(drawing, {
