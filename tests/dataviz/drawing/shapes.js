@@ -419,6 +419,22 @@
         equal(text.children[0].content(), "Foo");
     });
 
+    test("append accepts TextSpan", function() {
+        var tspan = new TextSpan("Bar");
+        text.append(tspan);
+        equal(text.children[1], tspan);
+    });
+
+    test("append accepts text", function() {
+        text.append("Bar");
+        equal(text.children[1].content(), "Bar");
+    });
+
+    test("append sets options on TextSpan", function() {
+        text.append("Bar", { foo: true });
+        equal(text.children[1].options.foo, true);
+    });
+
     test("appending content triggers childrenChange", function() {
         text.observer = {
             childrenChange: function() { ok(true); }

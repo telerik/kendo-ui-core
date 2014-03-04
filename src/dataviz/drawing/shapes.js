@@ -231,8 +231,15 @@
         },
 
         append: function(content, options) {
-            var span = new TextSpan(content, options);
-            Group.fn.append.call(this, span);
+            var tspan;
+
+            if (content instanceof TextSpan) {
+                tspan = content;
+            } else {
+                tspan = new TextSpan(content, options);
+            }
+
+            Group.fn.append.call(this, tspan);
         }
     });
 
