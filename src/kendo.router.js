@@ -98,7 +98,7 @@ var __meta__ = {
         },
 
         current: function() {
-            return location.hash.replace(hashStrip, '');
+            return location.href.split("#")[1] || "";
         }
     });
 
