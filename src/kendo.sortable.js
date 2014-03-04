@@ -26,9 +26,7 @@ var __meta__ = {
         ACTION_RECEIVE = "receive",
 
         DEFAULT_FILTER = ">*",
-        MISSING_INDEX = -1,
-
-        GRABBING_CURSOR = "url(https://mail.google.com/mail/images/2/closedhand.cur), default !important;";
+        MISSING_INDEX = -1;
 
     function containsOrEqualTo(parent, child) {
         try {
@@ -385,14 +383,10 @@ var __meta__ = {
                 body = $(document.body);
 
                 this._originalCursorType = body.css("cursor");
-                body.css({ "cursor": (cursor === "grabbing") ? GRABBING_CURSOR : cursor });
+                body.css({ "cursor": cursor });
 
                 if(!this._cursorStylesheet) {
-                    if(cursor === "grabbing") {
-                        this._cursorStylesheet = $("<style>* { cursor: " + GRABBING_CURSOR + " }</style>");
-                    } else {
-                        this._cursorStylesheet = $("<style>* { cursor: " + cursor + " !important; }</style>");
-                    }
+                    this._cursorStylesheet = $("<style>* { cursor: " + cursor + " !important; }</style>");
                 }
 
                 this._cursorStylesheet.appendTo(body);
