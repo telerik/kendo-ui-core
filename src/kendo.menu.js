@@ -767,7 +767,7 @@ var __meta__ = {
                 href = link.attr("href"), childGroup, childGroupVisible,
                 isLink = (!!href && href !== $("<a href='#' />").attr("href"));
 
-            if (element.children(templateSelector)[0]) {
+            if (!options.openOnClick && element.children(templateSelector)[0]) {
                 return;
             }
 
