@@ -47,12 +47,24 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("connectionDefaults", value);
     }
 
+    public void setConnections(ConnectionsTag value) {
+
+        setProperty("connections", value.connections());
+
+    }
+
     public void setLayout(com.kendoui.taglib.diagram.LayoutTag value) {
         setProperty("layout", value);
     }
 
     public void setShapeDefaults(com.kendoui.taglib.diagram.ShapeDefaultsTag value) {
         setProperty("shapeDefaults", value);
+    }
+
+    public void setShapes(ShapesTag value) {
+
+        setProperty("shapes", value.shapes());
+
     }
 
     public void setChange(ChangeFunctionTag value) {
@@ -87,14 +99,6 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("autoBind", value);
     }
 
-    public java.lang.Object getConnections() {
-        return (java.lang.Object)getProperty("connections");
-    }
-
-    public void setConnections(java.lang.Object value) {
-        setProperty("connections", value);
-    }
-
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }
@@ -121,14 +125,6 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setRotatable(boolean value) {
         setProperty("rotatable", value);
-    }
-
-    public java.lang.Object getShapes() {
-        return (java.lang.Object)getProperty("shapes");
-    }
-
-    public void setShapes(java.lang.Object value) {
-        setProperty("shapes", value);
     }
 
     public java.lang.String getTemplate() {
