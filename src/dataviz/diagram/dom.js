@@ -698,7 +698,7 @@
             delete options.diagram; // avoid stackoverflow and reassign later on again
             var shapeDefaults = deepExtend({}, options, { x: 0, y: 0 }),
                 visualTemplate = shapeDefaults.visual, // Shape visual should not have position in its parent group.
-                type = shapeDefaults.type.toLocaleLowerCase();
+                type = shapeDefaults.type;
 
             function externalLibraryShape(libraryShapeName, options, shapeDefaults) {
                 // if external serializationSource we need to consult the attached libraries
@@ -794,7 +794,7 @@
 //                        return functionShape(definition, this, shapeDefaults);
 //                    }
 //                }
-                return simpleShape(shapeDefaults.type, shapeDefaults);
+                return simpleShape(shapeDefaults.type.toLocaleLowerCase(), shapeDefaults);
             } else {
                 return new Rectangle(shapeDefaults);
             }
@@ -1385,20 +1385,20 @@
                 this.scroller = null;
             },
             save: function () {
-                var json = {};
+                var json = {}, i;
 
                 json.shapes = [];
                 json.connections = [];
 
                 for (i = 0; i < this.shapes.length; i++) {
-                    shape = this.shapes[i];
+                    var shape = this.shapes[i];
                     if (shape.options.serializable) {
                         json.shapes.push(shape.options);
                     }
                 }
 
                 for (i = 0; i < this.connections.length; i++) {
-                    con = this.connections[i];
+                    var con = this.connections[i];
                     var conOptions = deepExtend({}, { from: con.from.toString(), to: con.to.toString() }, con.options);
                     json.connections.push(conOptions);
                 }
