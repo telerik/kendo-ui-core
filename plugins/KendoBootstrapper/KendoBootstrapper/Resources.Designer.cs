@@ -59,5 +59,50 @@ namespace Company.KendoBootstrapper {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating custom Kendo UI file....
+        /// </summary>
+        internal static string CreatingCustomKendoFile {
+            get {
+                return ResourceManager.GetString("CreatingCustomKendoFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while creating the custom Kendo UI file.
+        /// </summary>
+        internal static string CreatingCustomKendoFileError {
+            get {
+                return ResourceManager.GetString("CreatingCustomKendoFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kendo UI was not found in solution.
+        /// </summary>
+        internal static string KendoNotFound {
+            get {
+                return ResourceManager.GetString("KendoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kendo Bootstrapper is looking for errors....
+        /// </summary>
+        internal static string LintingProject {
+            get {
+                return ResourceManager.GetString("LintingProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        internal static string Ready {
+            get {
+                return ResourceManager.GetString("Ready", resourceCulture);
+            }
+        }
     }
 }

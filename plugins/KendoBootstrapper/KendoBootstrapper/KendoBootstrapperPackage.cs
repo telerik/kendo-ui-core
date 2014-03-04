@@ -21,16 +21,6 @@ using System.Text;
 
 namespace Company.KendoBootstrapper
 {
-    /// <summary>
-    /// This is the class that implements the package exposed by this assembly.
-    ///
-    /// The minimum requirement for a class to be considered a valid package for Visual Studio
-    /// is to implement the IVsPackage interface and register itself with the shell.
-    /// This package uses the helper classes defined inside the Managed Package Framework (MPF)
-    /// to do it: it derives from the Package class that provides the implementation of the 
-    /// IVsPackage interface and uses the registration attributes defined in the framework to 
-    /// register itself and its components with the shell.
-    /// </summary>
     // This attribute tells the PkgDef creation utility (CreatePkgDef.exe) that this class is
     // a package.
     [PackageRegistration(UseManagedResourcesOnly = true)]
@@ -39,23 +29,13 @@ namespace Company.KendoBootstrapper
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    // This attribute registers a tool window exposed by this package.
-    //[ProvideToolWindow(typeof(KendoBootstrapperWindow))]
     [Guid(GuidList.guidKendoBootstrapperPkgString)]
     public sealed class KendoBootstrapperPackage : Package
     {
-        /// <summary>
-        /// Default constructor of the package.
-        /// Inside this method you can place any initialization code that does not require 
-        /// any Visual Studio service because at this point the package object is created but 
-        /// not sited yet inside Visual Studio environment. The place to do all the other 
-        /// initialization is the Initialize method.
-        /// </summary>
         public KendoBootstrapperPackage()
         {
-            Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
+            //Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
         }
-
 
         private ErrorListProvider errorProvider;
 
@@ -114,10 +94,7 @@ namespace Company.KendoBootstrapper
 
         private void Lint(IEnumerable<ProjectItem> projectItems)
         {
-            //string npm = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "npm");
-
             OutputPane.Clear();
-            OutputPane.Activate();
 
             List<string> htmlFiles = new List<string>();
             List<string> jsFiles = new List<string>();
@@ -154,7 +131,7 @@ namespace Company.KendoBootstrapper
                 return;
             }
 
-            DTE.StatusBar.Text = "Kendo Bootstrapper is looking for errors...";
+            DTE.StatusBar.Text = Resources.LintingProject;
 
             var process = new System.Diagnostics.Process();
 
@@ -193,7 +170,9 @@ namespace Company.KendoBootstrapper
                     path, line, description, true);
             }
 
-            DTE.StatusBar.Text = "Ready";
+            OutputPane.Activate();
+
+            DTE.StatusBar.Text = Resources.Ready;
         }
 
         private void CreateCustomKendoFile(object sender, EventArgs e)
@@ -221,7 +200,12 @@ namespace Company.KendoBootstrapper
                 }
             }
 
-            DTE.StatusBar.Text = "Creating custom Kendo UI file...";
+            if (!isKendoFound)
+            {
+                DTE.StatusBar.Text = Resources.KendoNotFound;
+            }
+
+            DTE.StatusBar.Text = Resources.CreatingCustomKendoFile;
 
             var process = new System.Diagnostics.Process();
 
@@ -242,42 +226,17 @@ namespace Company.KendoBootstrapper
             process.Start();
             process.WaitForExit();
 
-            DTE.StatusBar.Text = "Ready";
-            //string s = process.StandardOutput.ReadToEnd();
-            //string t = process.StandardError.ReadToEnd();
+            string output = process.StandardOutput.ReadToEnd();
+            string errorOutput = process.StandardError.ReadToEnd();
 
-            //while (!process.StandardOutput.EndOfStream)
-            //{
-            //    var output = process.StandardOutput.ReadToEnd();
-            //}
-        }
-
-        private string parseDocumentation(string output, string selection)
-        {
-            JArray items = JArray.Parse(output);
-            StringBuilder result = new StringBuilder();
-
-            if (items.Count > 0)
+            if (String.IsNullOrEmpty(errorOutput))
             {
-                foreach (JToken item in items.Children())
-                {
-                    result.Append("<h2 style=\"font-size: 35px; font-family: Arial, Helvetica, sans-serif; color: #444; font-weight: normal;\">" + item["widget"] + "</h2>");
-                    result.Append("<h4 style=\"font-size: 16px; font-family: Arial, Helvetica, sans-serif; color: #2e2e2e; font-weight: bold; \">" + item["prop"]["name"] + "</h4>");
-
-                    if (item["prop"]["type"] != null)
-                    {
-                        result.Append("<code style=\"font-family: monospace; font-size: 16px; font-weight: bold; color: #e15613;\">" + String.Join("|", item["prop"]["type"]) + "</code>");
-                    }
-
-                    result.Append("<div style=\"font-size: 13px; font-family: Arial, Helvetica, sans-serif; line-height: 1.33em; color: #656565;\">" + item["prop"]["short_doc"] + "</div>");
-                }
+                DTE.StatusBar.Text = Resources.Ready;
             }
             else
             {
-                result.Append("<h3>Property " + selection + " not found in Kendo UI Documentation</h3>");
+                DTE.StatusBar.Text = Resources.CreatingCustomKendoFileError;
             }
-
-            return result.ToString();
         }
 
         private void DisplayDocumentation(object sender, EventArgs e)
@@ -306,8 +265,8 @@ namespace Company.KendoBootstrapper
 
                 process.WaitForExit();
 
-                KendoBootstrapperWindow wind = new KendoBootstrapperWindow(parseDocumentation(output, selection.Text));
-                wind.ShowDialog();
+                KendoBootstrapperWindow docs = new KendoBootstrapperWindow(output, selection.Text);
+                docs.ShowDialog();
             }
         }
 
@@ -405,11 +364,6 @@ namespace Company.KendoBootstrapper
                 CommandID documentationContextCommandID = new CommandID(GuidList.guidKendoBootstrapperCmdSet, (int)PkgCmdIDList.IdKendoLintDocumentationContextCommand);
                 MenuCommand documentationContextCommand = new MenuCommand(DisplayDocumentation, documentationContextCommandID);
                 mcs.AddCommand(documentationContextCommand);
-
-                // Create the command for the tool window
-                //CommandID toolwndCommandID = new CommandID(GuidList.guidKendoBootstrapperCmdSet, (int)PkgCmdIDList.cmdidMyTool);
-                //MenuCommand menuToolWin = new MenuCommand(ShowToolWindow, toolwndCommandID);
-                //mcs.AddCommand(menuToolWin);
             }
         }
         #endregion

@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
   <Identifier Id="67fc9fc6-d614-41bf-bf14-7c645eadb07f">
-    <Name>KendoBootstrapper</Name>
-    <Author>Company</Author>
+    <Name>Kendo UI Bootstrapper</Name>
+    <Author>Telerik</Author>
     <Version>1.0</Version>
-    <Description xml:space="preserve">Information about my package</Description>
+    <Description xml:space="preserve">Kendo UI Bootstrapper Package</Description>
     <Locale>1033</Locale>
+    <Icon>KBIcon.png</Icon>
+    <PreviewImage>PreviewImage.jpg</PreviewImage>
     <InstalledByMsi>false</InstalledByMsi>
     <SupportedProducts>
       <VisualStudio Version="10.0">

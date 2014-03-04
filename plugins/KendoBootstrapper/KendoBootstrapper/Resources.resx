@@ -117,4 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CreatingCustomKendoFile" xml:space="preserve">
+    <value>Creating custom Kendo UI file...</value>
+  </data>
+  <data name="CreatingCustomKendoFileError" xml:space="preserve">
+    <value>An error occurred while creating the custom Kendo UI file</value>
+  </data>
+  <data name="KendoNotFound" xml:space="preserve">
+    <value>Kendo UI was not found in solution</value>
+  </data>
+  <data name="LintingProject" xml:space="preserve">
+    <value>Kendo Bootstrapper is looking for errors...</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
 </root>
