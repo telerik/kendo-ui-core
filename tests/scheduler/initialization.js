@@ -716,6 +716,53 @@
         ok(slot !== null && typeof slot == "object");
     });
 
+    test("resourcesByGroupIndex function returns resources for passed index", function() {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
+            views: ["day"],
+            dataSource: [],
+            group: {
+                resources: ["ResourceName", "ResourceName2"],
+                orientation: "horizontal"
+            },
+            resources: [
+                {
+                    field: "rooms",
+                    name: "ResourceName",
+                    dataSource: [
+                        { text: "Room1", value: 1 },
+                        { text: "Room2", value: 2 }
+                    ]
+                },
+                {
+                    field: "persons",
+                    name: "ResourceName2",
+                    dataSource: [
+                        { text: "Fred", value: 1 },
+                        { text: "Barny", value: 2 }
+                    ]
+                }
+            ]
+        });
+
+
+        var resources1 = scheduler.resourcesByGroupIndex(0);
+        equal(resources1.rooms, 1);
+        equal(resources1.persons, 1);
+
+        var resources2 = scheduler.resourcesByGroupIndex(1);
+        equal(resources2.rooms, 1);
+        equal(resources2.persons, 2);
+
+        var resources3 = scheduler.resourcesByGroupIndex(2);
+        equal(resources3.rooms, 2);
+        equal(resources3.persons, 1);
+
+        var resources4 = scheduler.resourcesByGroupIndex(3);
+        equal(resources4.rooms, 2);
+        equal(resources4.persons, 2);
+    });
+
     test("date past max is not selected", function() {
         var scheduler = new Scheduler(container, {
                 date: new Date("1/1/2013"),
