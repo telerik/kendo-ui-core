@@ -227,6 +227,9 @@
         init: function(content, origin, options) {
             Group.fn.init.call(this, options);
 
+            this.origin = origin || new g.Point();
+            this.origin.observer = this;
+
             this.append(content);
         },
 
@@ -240,7 +243,9 @@
             }
 
             Group.fn.append.call(this, tspan);
-        }
+        },
+
+        geometryChange: util.mixins.geometryChange
     });
 
     var Circle = Shape.extend({

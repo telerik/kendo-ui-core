@@ -405,7 +405,7 @@
     var text;
     module("Text", {
         setup: function() {
-            text = new Text("Foo");
+            text = new Text("Foo", new g.Point(100, 100));
         }
     });
 
@@ -413,6 +413,20 @@
         text = new Text("Foo", new g.Point(), { foo: true });
 
         ok(text.options.foo);
+    });
+
+    test("sets initial origin", function() {
+        equal(text.origin.x, 100);
+    });
+
+    test("changing the origin triggers geometryChange", function() {
+        text.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        text.origin.set("x", 5);
     });
 
     test("appends initial content", function() {
