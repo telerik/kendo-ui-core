@@ -49,7 +49,7 @@ wrappers/mvc/demos/**/Content
 wrappers/mvc/demos/**/App_Data
 wrappers/mvc/legacy-themes/*.min.css
 wrappers/mvc/TestResults
-playground/chart.html
+playground/local
 playground/map/defaults.html
 wrappers/java/**/target
 wrappers/java/spring-demos/src/main/webapp/resources
