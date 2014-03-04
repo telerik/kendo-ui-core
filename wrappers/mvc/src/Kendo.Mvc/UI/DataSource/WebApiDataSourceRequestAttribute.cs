@@ -1,4 +1,5 @@
-﻿using System.Web.Http.ModelBinding;
+﻿#if !MVC3
+using System.Web.Http.ModelBinding;
 
 namespace Kendo.Mvc.UI
 {
@@ -10,3 +11,4 @@ namespace Kendo.Mvc.UI
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using Kendo.Mvc.Infrastructure;
+﻿#if !MVC3
+using Kendo.Mvc.Infrastructure;
 using System.Web.Http.Controllers;
 using System.Web.Http.ModelBinding;
 
@@ -65,3 +66,4 @@ namespace Kendo.Mvc.UI
         }
     }
 }
+#endif
