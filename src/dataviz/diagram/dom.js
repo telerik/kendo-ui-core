@@ -107,6 +107,34 @@
             }
         }];
 
+        diagram.shapeDefaults = function() {
+            return {
+                type: DEFAULT_SHAPE_TYPE,
+                path: "",
+                visual: null,
+                stroke:{
+                    color: "DimGray",
+                    width: 1,
+                    dashType: "none"
+                },
+                x: DEFAULT_SHAPE_POSITION,
+                y: DEFAULT_SHAPE_POSITION,
+                minWidth: DEFAULT_SHAPE_MINWIDTH,
+                minHeight: DEFAULT_SHAPE_MINHEIGHT,
+                width: DEFAULT_SHAPE_WIDTH,
+                height: DEFAULT_SHAPE_HEIGHT,
+                background: DEFAULT_SHAPE_BACKGROUND,
+                hover: {},
+                connectors: diagram.DefaultConnectors,
+                rotation: {
+                    angle: 0
+                },
+                editable: true,
+                resizable: true,
+                rotatable: true
+            };
+        };
+
         var PanAdapter = kendo.Class.extend({
             init: function (panState) {
                 this.pan = panState.pan;
@@ -414,31 +442,7 @@
                     that.layout = options.layout.bind(options);
                 }
             },
-            options: {
-                type: DEFAULT_SHAPE_TYPE,
-                path: "",
-                visual: null,
-                stroke:{
-                    color: "DimGray",
-                    width: 1,
-                    dashType: "none"
-                },
-                x: DEFAULT_SHAPE_POSITION,
-                y: DEFAULT_SHAPE_POSITION,
-                minWidth: DEFAULT_SHAPE_MINWIDTH,
-                minHeight: DEFAULT_SHAPE_MINHEIGHT,
-                width: DEFAULT_SHAPE_WIDTH,
-                height: DEFAULT_SHAPE_HEIGHT,
-                background: DEFAULT_SHAPE_BACKGROUND,
-                hover: {},
-                connectors: diagram.DefaultConnectors,
-                rotation: {
-                    angle: 0
-                },
-                editable: true,
-                resizable: true,
-                rotatable: true
-            },
+            options: diagram.shapeDefaults(),
             bounds: function (value) {
                 var point, size, bounds, options;
                 options = this.options;
@@ -1312,9 +1316,7 @@
                     size: 10,
                     angle: 10
                 },
-                shapeDefaults: {
-                    undoable: true
-                },
+                shapeDefaults: diagram.shapeDefaults(),
                 connectionDefaults: {},
                 shapes: [],
                 connections: []

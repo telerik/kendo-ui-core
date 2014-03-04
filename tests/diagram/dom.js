@@ -347,6 +347,38 @@
         equal(diagram.shapes[0].options.content.text, "text");
     });
 
+    module("Diagram shapeDefaults", {
+        setup: function() {
+            QUnit.fixture.html('<div id="canvas" />');
+            window.createShapeDefaults = function(shapeDefaults) {
+                diagram = $("#canvas").kendoDiagram({
+                    shapeDefaults: shapeDefaults
+                }).getKendoDiagram();
+
+                return diagram;
+            };
+        },
+        teardown: function() {
+            diagram.destroy();
+            delete window.createShapeDefaults;
+        }
+    });
+
+    test("default shape type", function() {
+        createShapeDefaults({type: "circle"});
+        var shape = diagram.addShape({id: "shape1"});
+
+        equal(shape.options.type, "circle", "the type of the shape should come from shapeDefaults");
+    });
+
+    test("default shape path", function() {
+        createShapeDefaults({path: "m0,100 L100,100 L50,0z"});
+        var shape = diagram.addShape({id: "shape1"});
+
+        equal(shape.options.path, "m0,100 L100,100 L50,0z", "path should be set by the shapeDefaults");
+    });
+
+
     module("Shape bounds", {
         setup: function () {
             QUnit.fixture.html('<div id="canvas" />');
