@@ -207,7 +207,7 @@ var __meta__ = {
 
             values[e.field] = e.value;
 
-            input = $(':input[' + kendo.attr("bind") + '="' + (isBoolean ? 'checked:' : 'value:') + e.field.replace(nameSpecialCharRegExp, "\\$1") + '"]', that.element);
+            input = $(':input[' + kendo.attr("bind") + '*="' + (isBoolean ? 'checked:' : 'value:') + e.field.replace(nameSpecialCharRegExp, "\\$1") + '"]', that.element);
 
             try {
                 that._validationEventInProgress = true;
