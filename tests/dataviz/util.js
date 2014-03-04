@@ -57,4 +57,16 @@
     test("renderPos returns empty string", function() {
         equal(util.renderPos(), "");
     });
+
+    test("renderStyle renders style attributes", function() {
+        equal(util.renderStyle([["foo", "a"], ["bar", "b"]]), "foo:a;bar:b;");
+    });
+
+    test("renderStyle ignores undefined values", function() {
+        equal(util.renderStyle([["foo", undefined], ["bar", "b"]]), "bar:b;");
+    });
+
+    test("renderStyle returns undefined with no values", function() {
+        equal(util.renderStyle([["foo", undefined]]), undefined);
+    });
 })();

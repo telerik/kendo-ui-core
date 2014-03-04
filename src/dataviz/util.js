@@ -127,6 +127,20 @@
         return output;
     }
 
+    function renderStyle(attrs) {
+        var output = "";
+        for (var i = 0; i < attrs.length; i++) {
+            var value = attrs[i][1];
+            if (defined(value)) {
+                output += attrs[i][0] + ":" + value + ";";
+            }
+        };
+
+        if (output !== "") {
+            return output;
+        }
+    }
+
     function renderSize(size) {
         if (typeof size !== "string") {
             size += "px";
@@ -181,9 +195,6 @@
             renderAllAttr: renderAllAttr,
             renderPos: renderPos,
             renderSize: renderSize,
-            sparseArrayLimits: sparseArrayLimits,
-            sparseArrayMin: sparseArrayMin,
-            sparseArrayMax: sparseArrayMax,
             sqr: sqr,
             valueOrDefault: valueOrDefault
         }

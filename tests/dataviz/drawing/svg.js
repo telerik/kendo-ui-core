@@ -659,49 +659,4 @@
 
         circle.geometry.set("radius", 60);
     });
-
-    // ------------------------------------------------------------
-    var arc,
-        arcNode;
-
-    module("ArcNode", {
-        setup: function() {
-            var geometry = new g.Arc(new Point(100, 100), {
-                startAngle: 0,
-                endAngle: 120,
-                radiusX: 50,
-                radiusY: 100
-            });
-            arc = new d.Arc(geometry, {stroke: {color: "red", width: 4}, fill: {color: "green", opacity: 0.5}});
-            arcNode = new ArcNode(arc);
-        }
-    });
-
-    test("renders curve path", function() {
-        var result = arcNode.render();
-        ok(result.indexOf("d='M150 100 C 150 134.9 140.1 169.1 125 186.6 109.9 204.1 90.1 204.1 75 186.6'") !== -1);
-    });
-
-    test("renders arc fill", function() {
-        var result = arcNode.render();
-
-        ok(result.indexOf("fill='green'") !== -1);
-        ok(result.indexOf("fill-opacity='0.5'") !== -1);
-    });
-
-    test("renders arc stroke", function() {
-        var result = arcNode.render();
-        ok(result.indexOf("stroke-width='4'") !== -1);
-        ok(result.indexOf("stroke='red'") !== -1);
-    });
-
-    test("geometryChange updates path", function() {
-        arcNode.attr = function(name, value) {
-            equal(name, "d");
-            equal(value, "M150 100 C 150 152.4 126.2 200 100 200 73.8 200 50 152.4 50 100");
-        };
-
-        arc.geometry.set("endAngle", 180);
-    });
-
 })();

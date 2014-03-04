@@ -135,7 +135,11 @@
                 srcElement = elements[i];
                 children = srcElement.children;
 
-                if (srcElement instanceof d.Group) {
+                if (srcElement instanceof d.Text) {
+                    childNode = new TextNode(srcElement);
+                } else if (srcElement instanceof d.TextSpan) {
+                    childNode = new TextSpanNode(srcElement);
+                } else if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Path) {
                     childNode = new PathNode(srcElement);
@@ -330,6 +334,12 @@
             "stroke.opacity": "stroke-opacity"
         },
 
+        content: function(value) {
+            if (this.element) {
+                this.element.innerHTML = this.srcElement.content();
+            }
+        },
+
         renderData: function() {
             return this.printPath(this.srcElement);
         },
@@ -453,12 +463,12 @@
             );
         },
 
-        renderCursor: function() {
-            var cursor = this.srcElement.options.cursor;
+        mapStyle: function() {
+            return [["cursor", this.srcElement.options.cursor]];
+        },
 
-            if (cursor) {
-                return "cursor:" + cursor + ";";
-            }
+        renderStyle: function() {
+            return renderAttr("style", util.renderStyle(this.mapStyle()));
         },
 
         renderVisibility: function() {
@@ -470,7 +480,7 @@
         },
 
         template: renderTemplate(
-            "<path #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
+            "<path #= d.renderStyle() # " +
             "#= d.renderVisibility() # " +
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
@@ -513,13 +523,74 @@
         },
 
         template: renderTemplate(
-            "<circle #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
+            "<circle #= d.renderStyle() # " +
             "cx='#= this.srcElement.geometry.center.x #' cy='#= this.srcElement.geometry.center.y #' " +
             "r='#= this.srcElement.geometry.radius #' " +
             "#= d.renderVisibility() # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
             "#= d.renderTransform() # ></circle>"
+        )
+    });
+
+    var TextNode = PathNode.extend({
+        geometryChange: function() {
+            var origin = this.srcElement.origin;
+            this.attr("x", origin.x);
+            this.attr("y", origin.y);
+            this.invalidate();
+        },
+
+        optionsChange: function(e) {
+            if(e.field == "font") {
+                this.attr("style", util.renderStyle(this.mapStyle()));
+            }
+
+            PathNode.fn.optionsChange.call(this, e);
+        },
+
+        mapStyle: function() {
+            var style = PathNode.fn.mapStyle.call(this);
+            style.push(["font", this.srcElement.options.font]);
+
+            return style;
+        },
+
+        template: renderTemplate(
+            "<text #= d.renderStyle() # " +
+            "x='#= this.srcElement.origin.x #' y='#= this.srcElement.origin.y #' " +
+            "#= d.renderVisibility() # " +
+            "#= d.renderStroke() # " +
+            "#= d.renderFill() #>#= d.renderChildren() #</text>"
+        )
+    });
+
+    var TextSpanNode = PathNode.extend({
+        contentChange: function() {
+            this.content(this.srcElement.content());
+            this.invalidate();
+        },
+
+        optionsChange: function(e) {
+            if(e.field == "font") {
+                this.attr("style", util.renderStyle(this.mapStyle()));
+            }
+
+            PathNode.fn.optionsChange.call(this, e);
+        },
+
+        mapStyle: function() {
+            var style = PathNode.fn.mapStyle.call(this);
+            style.push(["font", this.srcElement.options.font]);
+
+            return style;
+        },
+
+        template: renderTemplate(
+            "<tspan #= d.renderStyle() # " +
+            "#= d.renderVisibility() # " +
+            "#= d.renderStroke() # " +
+            "#= d.renderFill() #>#= this.srcElement.content() #</text>"
         )
     });
 
@@ -581,7 +652,9 @@
             Node: Node,
             PathNode: PathNode,
             RootNode: RootNode,
-            Surface: Surface
+            Surface: Surface,
+            TextNode: TextNode,
+            TextSpanNode: TextSpanNode
         }
     });
 
