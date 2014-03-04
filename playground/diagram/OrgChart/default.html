@@ -76,18 +76,18 @@
     <script src="../../../src/kendo.treeview.js"></script>
     <script src="../../../src/kendo.popup.js"></script>
     <script src="../../../src/kendo.list.js"></script>
-    <script src="../../../src/kendo.comboBox.js"></script>
+    <script src="../../../src/kendo.combobox.js"></script>
     <script src="../../../src/kendo.tooltip.js"></script>
     <script src="../../../src/kendo.fx.js"></script>
     <script src="../../../src/kendo.mobile.scroller.js"></script>
 
-    <script src="../../../src/kendo.diagram.utils.js"></script>
-    <script src="../../../src/kendo.diagram.math.js"></script>
-    <script src="../../../src/kendo.diagram.layout.js"></script>
-    <script src="../../../src/kendo.diagram.svg.js"></script>
-    <script src="../../../src/kendo.diagram.services.js"></script>
-    <script src="../../../src/kendo.diagram.extensions.js"></script>
-    <script src="../../../src/kendo.diagram.dom.js"></script>
+    <script src="../../../src/dataviz/diagram/utils.js"></script>
+    <script src="../../../src/dataviz/diagram/math.js"></script>
+    <script src="../../../src/dataviz/diagram/layout.js"></script>
+    <script src="../../../src/dataviz/diagram/svg.js"></script>
+    <script src="../../../src/dataviz/diagram/services.js"></script>
+    <script src="../../../src/dataviz/diagram/extensions.js"></script>
+    <script src="../../../src/dataviz/diagram/dom.js"></script>
 </head>
 <body>
 
@@ -96,21 +96,23 @@
 </script>
 
 <script type="text/javascript">
-var diagram, utils = kendo.diagram.Utils;
+    var diagram,
+        diagramNS = kendo.dataviz.diagram,
+        utils = diagramNS.Utils;
 
 function getVisual(item) {
-    var data = item.context;
+    var data = item.dataItem;
 
-    var g = new kendo.diagram.Group({
+    var g = new diagramNS.Group({
         autoSize: true
     });
-    var r = new kendo.diagram.Rectangle({
+    var r = new diagramNS.Rectangle({
         width: 150,
         height: 60,
         background: "#bdcbde"
     });
     g.append(r);
-    var im = new kendo.diagram.Image({
+    var im = new diagramNS.Image({
         source: data.image,
         height: 40,
         width: 40,
@@ -118,20 +120,20 @@ function getVisual(item) {
         y: 10
     });
     g.append(im);
-    var fn = new kendo.diagram.TextBlock({
+    var fn = new diagramNS.TextBlock({
         text: data.name,
         fontSize: 16,
         x: 50,
         y: 20
     });
-    var ln = new kendo.diagram.TextBlock({
+    var ln = new diagramNS.TextBlock({
         text: data.lastName,
         fontSize: 16,
         x: 50,
         y: 40
     });
 
-    var p = new kendo.diagram.Path({
+    var p = new diagramNS.Path({
         data: "M0,0 L5,10 L10, 0 Z",
         x: 130,
         y: 45,
@@ -218,7 +220,7 @@ $(function () {
         }
         diagram = createDiagram($("#templates").val());
         dataSource.fetch();
-        diagram.layout();
+        layout();
     }
 
     var layouts = [

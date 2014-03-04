@@ -1364,7 +1364,7 @@
 
                 that.clear();
                 that.element.off(NS);
-                that.canvas.element.removeChild(that.canvas.native);
+                that.canvas.destroy(true);
                 that.canvas = undefined;
 
                 that.destroyScroller();

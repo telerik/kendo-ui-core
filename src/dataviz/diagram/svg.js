@@ -1026,6 +1026,11 @@
                 ref: new Point(5, 5),
                 orientation: "auto"
             }));
+        },
+        destroy: function(clearHtml) {
+            if(clearHtml) {
+                $(this.element).remove();
+            }
         }
     });
 
