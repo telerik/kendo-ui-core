@@ -64,6 +64,15 @@ class Sortable extends \Kendo\UI\Widget {
     }
 
     /**
+    * The cursor that will be shown while user drags sortable item.
+    * @param string $value
+    * @return \Kendo\UI\Sortable
+    */
+    public function cursor($value) {
+        return $this->setProperty('cursor', $value);
+    }
+
+    /**
     * If set, specifies the offset of the hint relative to the mouse cursor/finger.
 By default, the hint is initially positioned on top of the draggable source offset. The option accepts an object with two keys: top and left.
     * @param \Kendo\UI\SortableCursorOffset|array $value
