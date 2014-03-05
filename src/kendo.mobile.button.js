@@ -47,10 +47,9 @@ kendo_module({
                 press: function(e) { that._activate(e); },
                 tap: function(e) { that._release(e); },
                 release: function(e) { highlightButton(that, e, false); },
-                // Prevent the navigation when scrolled in this case
-                // in THEORY this should not break anything in the other mode, too - but let's not take any chances
+                // prevent the navigation when native scrolling is present
                 end: function(e) {
-                    if (kendo.mobile.application.options.useNativeScrolling) {
+                    if (kendo.mobile.appLevelNativeScrolling() || that.viewHasNativeScrolling()) {
                         e.preventDefault();
                     }
                 }

@@ -2922,6 +2922,11 @@ function pad(number, digits, end) {
             return kendo.widgetInstance(viewElement, kendo.mobile.ui);
         },
 
+        viewHasNativeScrolling: function() {
+            var view = this.view();
+            return view && view.options.useNativeScrolling;
+        },
+
         container: function() {
             var element = this.element.closest(kendo.roleSelector("view layout modalview drawer"));
             return kendo.widgetInstance(element, kendo.mobile.ui) || ContainerNullObject;
