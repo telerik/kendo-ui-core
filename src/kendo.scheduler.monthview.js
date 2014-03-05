@@ -335,7 +335,7 @@ var __meta__ = {
             }
 
             for (var verticalGroupIdx = 0; verticalGroupIdx < verticalGroupCount; verticalGroupIdx++) {
-                html += this._createCalendar();
+                html += this._createCalendar(verticalGroupIdx);
             }
 
             html += "</tbody>";
@@ -343,25 +343,26 @@ var __meta__ = {
             this.content.find("table").html(html);
         },
 
-        _createCalendar: function() {
+        _createCalendar: function(verticalGroupIndex) {
             var start = this.startDate();
             var cellCount = NUMBER_OF_COLUMNS*NUMBER_OF_ROWS;
             var cellsPerRow = NUMBER_OF_COLUMNS;
             var weekStartDates = [start];
             var html = '';
             var horizontalGroupCount = 1;
+            var isVerticallyGrouped = this._isVerticallyGrouped();
 
             var resources = this.groupedResources;
 
             if (resources.length) {
-                if (!this._isVerticallyGrouped()) {
+                if (!isVerticallyGrouped) {
                     horizontalGroupCount = this._columnCountForLevel(resources.length - 1);
                 }
             }
 
             this._slotIndices = {};
 
-            for (var rowIdx = 0; rowIdx < cellCount / cellsPerRow; rowIdx++) {
+            for (var rowIdx = 0, length = cellCount / cellsPerRow; rowIdx < length; rowIdx++) {
                 html += "<tr>";
 
                 weekStartDates.push(start);
@@ -369,7 +370,7 @@ var __meta__ = {
                 var startIdx = rowIdx*cellsPerRow;
 
                 for (var groupIdx = 0; groupIdx < horizontalGroupCount; groupIdx++) {
-                    html += this._createRow(start, startIdx, cellsPerRow);
+                    html += this._createRow(start, startIdx, cellsPerRow, isVerticallyGrouped ? verticalGroupIndex : groupIdx);
                 }
 
                 start = kendo.date.addDays(start, cellsPerRow);
@@ -383,7 +384,7 @@ var __meta__ = {
             return html;
         },
 
-        _createRow: function(startDate, startIdx, cellsPerRow) {
+        _createRow: function(startDate, startIdx, cellsPerRow, groupIndex) {
             var min = this._firstDayOfMonth;
             var max = this._lastDayOfMonth;
             var content = this.dayTemplate;
@@ -408,7 +409,7 @@ var __meta__ = {
                 }
 
                 html += ">";
-                html += content({ date: startDate });
+                html += content({ date: startDate, groupIndex: groupIndex });
                 html += "</td>";
 
                 this._slotIndices[getDate(startDate).getTime()] = startIdx + cellIdx;

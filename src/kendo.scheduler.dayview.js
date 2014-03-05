@@ -714,8 +714,11 @@ var __meta__ = {
                 rows.push({
                     text: options.messages.allDay, allDay: true,
                     cellContent: function(idx) {
+                        var groupIndex = idx;
+
                         idx = resources.length && that._groupOrientation() !== "vertical" ? idx % dates.length : idx;
-                        return that.allDaySlotTemplate({ date: dates[idx] });
+
+                        return that.allDaySlotTemplate({ date: dates[idx], groupIndex: groupIndex });
                     }
                 });
             }
@@ -846,20 +849,26 @@ var __meta__ = {
             var columnCount = dates.length;
             var html = '';
             var resources = this.groupedResources;
-            var allDayVerticalGroupRow = "";
             var slotTemplate = this.slotTemplate;
+            var allDaySlotTemplate = this.allDaySlotTemplate;
+            var isVerticalGroupped = false;
+            var allDayVerticalGroupRow;
 
             if (resources.length) {
-                if (that._groupOrientation() === "vertical") {
+                isVerticalGroupped = that._groupOrientation() === "vertical";
+
+                if (isVerticalGroupped) {
                     rowCount = this._rowCountForLevel(this.rowLevels.length - 2);
                     if (options.allDaySlot) {
-                        allDayVerticalGroupRow = '<tr class="k-scheduler-header-all-day">';
+                        allDayVerticalGroupRow = function (groupIndex) {
+                            var result = '<tr class="k-scheduler-header-all-day">';
 
-                        for (var idx = 0, length = dates.length; idx < length; idx++) {
-                            allDayVerticalGroupRow += "<td>" + this.allDaySlotTemplate({ date: dates[idx] }) + "</td>";
+                            for (var idx = 0, length = dates.length; idx < length; idx++) {
+                                result += "<td>" + allDaySlotTemplate({ date: dates[idx], groupIndex: groupIndex }) + "</td>";
+                            }
+
+                            return result + "</tr>";
                         }
-
-                        allDayVerticalGroupRow += "</tr>";
                     }
                 } else {
                     groupsCount = this._columnCountForLevel(this.columnLevels.length - 2);
@@ -895,7 +904,7 @@ var __meta__ = {
                         tmplDate = kendo.date.getDate(dates[idx]);
                         kendo.date.setTime(tmplDate, kendo.date.getMilliseconds(date));
 
-                        content += slotTemplate({ date: tmplDate });
+                        content += slotTemplate({ date: tmplDate, groupIndex: isVerticalGroupped ? rowIdx : groupIdx });
                         content += "</td>";
                     }
                 }
@@ -906,7 +915,7 @@ var __meta__ = {
             };
 
             for (var rowIdx = 0; rowIdx < rowCount; rowIdx++) {
-                html += allDayVerticalGroupRow;
+                html += allDayVerticalGroupRow ? allDayVerticalGroupRow(rowIdx) : "";
 
                 html += this._forTimeRange(start, end, appendRow);
             }

@@ -47,6 +47,41 @@
         return new MyDayView(container, $.extend({ majorTick: 120 }, options));
     }
 
+    function setupGroupedScheduler(element, orientation, view) {
+        orientation = orientation || "horizontal";
+
+        new kendo.ui.Scheduler(element, {
+            date: new Date("2013/6/6"),
+            startTime: new Date("2013/6/6 08:00"),
+            endTime: new Date("2013/6/6 08:30"),
+            editable: false,
+            draggable: false,
+            group: {
+                resources: ["ResourceName", "ResourceName2"],
+                orientation: orientation
+            },
+            resources: [
+                {
+                    field: "rooms",
+                    name: "ResourceName",
+                    dataSource: [
+                        { text: "Room1", value: 1 },
+                        { text: "Room2", value: 2 }
+                    ]
+                },
+                {
+                    field: "persons",
+                    name: "ResourceName2",
+                    dataSource: [
+                        { text: "Fred", value: 1 },
+                        { text: "Barny", value: 2 }
+                    ]
+                }
+            ],
+            views: [ view || "week" ]
+        });
+    }
+
     module("Multi Day View rendering", {
         setup: function() {
             container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
@@ -55,6 +90,8 @@
             if (container.data("kendoMultiDayView")) {
                 container.data("kendoMultiDayView").destroy();
             }
+
+            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -194,6 +231,82 @@
                 new Date("1/26/2013")
             ]
         });
+    });
+
+    test("correct groupIndex is passed to slotTemplate (horizontal grouping)", function() {
+        var group1, group2, group3, group4;
+        var element = $("<div>").appendTo(QUnit.fixture);
+
+        setupGroupedScheduler(element, "horizontal", {
+            type: "day",
+            slotTemplate: function(data) {
+                var groupIndex = data.groupIndex;
+
+                group1 = groupIndex === 0;
+                group2 = groupIndex === 1;
+                group3 = groupIndex === 2;
+                group4 = groupIndex === 3;
+            }
+        });
+
+        ok(group1 && group2 && group3 && group4);
+    });
+
+    test("correct groupIndex is passed to slotTemplate (vertical grouping)", function() {
+        var group1, group2, group3, group4;
+        var element = $("<div>").appendTo(QUnit.fixture);
+
+        setupGroupedScheduler(element, "vertical", {
+            type: "day",
+            slotTemplate: function(data) {
+                var groupIndex = data.groupIndex;
+
+                group1 = groupIndex === 0;
+                group2 = groupIndex === 1;
+                group3 = groupIndex === 2;
+                group4 = groupIndex === 3;
+            }
+        });
+
+        ok(group1 && group2 && group3 && group4);
+    });
+
+    test("correct groupIndex is passed to slotTemplate (horizontal grouping)", function() {
+        var group1, group2, group3, group4;
+        var element = $("<div>").appendTo(QUnit.fixture);
+
+        setupGroupedScheduler(element, "horizontal", {
+            type: "day",
+            allDaySlotTemplate: function(data) {
+                var groupIndex = data.groupIndex;
+
+                group1 = groupIndex === 0;
+                group2 = groupIndex === 1;
+                group3 = groupIndex === 2;
+                group4 = groupIndex === 3;
+            }
+        });
+
+        ok(group1 && group2 && group3 && group4);
+    });
+
+    test("correct groupIndex is passed to slotTemplate (vertical grouping)", function() {
+        var group1, group2, group3, group4;
+        var element = $("<div>").appendTo(QUnit.fixture);
+
+        setupGroupedScheduler(element, "vertical", {
+            type: "day",
+            allDaySlotTemplate: function(data) {
+                var groupIndex = data.groupIndex;
+
+                group1 = groupIndex === 0;
+                group2 = groupIndex === 1;
+                group3 = groupIndex === 2;
+                group4 = groupIndex === 3;
+            }
+        });
+
+        ok(group1 && group2 && group3 && group4);
     });
 
     test("render all day slots template", function() {
