@@ -25,6 +25,7 @@
         .ConnectWith("#sortable-right")
         .HintHandler("hint")
         .PlaceholderHandler("placeholder")
+        .Cursor("url('" + Url.Content("~/content/web/sortable/grabbing.cur") + "'), default")
         .Events(events => events.Start("onStart").Move("onMove").End("onEnd").Change("onChange").Cancel("onCancel"))
     %>
 
@@ -33,6 +34,7 @@
         .ConnectWith("#sortable-left")
         .HintHandler("hint")
         .PlaceholderHandler("placeholder")
+        .Cursor("url('" + Url.Content("~/content/web/sortable/grabbing.cur") + "'), default")
         .Events(events => events.Start("onStart").Move("onMove").End("onEnd").Change("onChange").Cancel("onCancel"))
     %>
             
@@ -127,9 +129,7 @@
             color: #ffffff;
             border: 1px solid transparent;
             border-radius: 4px;
-            cursor: -webkit-grab;
-            cursor: -moz-grab;
-            cursor: url(https://mail.google.com/mail/images/2/openhand.cur) 8, 8, move;
+            cursor: url('<%=Url.Content("~/content/web/sortable/grab.cur")%>'), default;
         }
 
         .list-left {
@@ -148,9 +148,6 @@
 
         .hint {
             opacity: 0.4;
-            cursor: -webkit-grabbing;
-            cursor: -moz-grabbing;
-            cursor: url(https://mail.google.com/mail/images/2/closehand.cur) 8, 8, move;
         }
     </style>
 </asp:Content>

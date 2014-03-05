@@ -28,6 +28,7 @@ namespace Kendo.Mvc.UI
         public string Handler { get; set; }
         public string ContainerSelector { get; set; }
         public string ConnectWith { get; set; }
+        public string Cursor { get; set; }
         public SortableCursorOffset CursorOffset { get; set; }
         public bool HoldToDrag { get; set; }
         public string Hint { get; set; }
@@ -104,6 +105,11 @@ namespace Kendo.Mvc.UI
             if (Axis != SortableAxis.None)
             {
                 options["axis"] = Enum.GetName(typeof(SortableAxis), Axis).ToLowerInvariant();
+            }
+
+            if (Cursor.HasValue())
+            {
+                options["cursor"] = SanitizeSelector(Cursor);
             }
 
             if (CursorOffset.Left != int.MinValue || CursorOffset.Top != int.MinValue)

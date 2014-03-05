@@ -67,6 +67,7 @@
     .For("#sidebar")
     .Filter(">div")
     .ConnectWith("#main-content")
+    .Cursor("move")
     .PlaceholderHandler("placeholder")
     .HintHandler("hint")
 )
@@ -74,6 +75,7 @@
 @(Html.Kendo().Sortable()
     .For("#main-content")
     .ConnectWith("#sidebar")
+    .Cursor("move")
     .PlaceholderHandler("placeholder")
     .HintHandler("hint")
 )
@@ -163,6 +165,7 @@
         background-color: #ffffff;
         border: 1px solid #e7e7e7;
         border-radius: 3px;
+        cursor: move;
     }
 
     .widget:hover {

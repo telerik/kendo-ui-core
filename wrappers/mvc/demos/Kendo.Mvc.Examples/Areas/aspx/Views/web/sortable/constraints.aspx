@@ -21,6 +21,7 @@
         .For("#sortable-horizontal")
         .ContainerSelector("#sortable-horizontal")
         .Axis(SortableAxis.X)
+        .Cursor("move")
         .Placeholder("<div class='placeholder'>Drop Here!</div>")
         .HintHandler("hint")
     %>
@@ -52,7 +53,8 @@
         #sortable-horizontal img {
             width: 155px;
             margin: 10px;
-            vertical-align: middle
+            vertical-align: middle;
+            cursor: move;
         }
 
         .placeholder {

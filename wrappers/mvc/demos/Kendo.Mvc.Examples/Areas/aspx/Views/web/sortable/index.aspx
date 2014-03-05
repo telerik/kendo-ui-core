@@ -21,9 +21,10 @@
             <li class="sortable">Pushing Me Away <span>3:11</span></li>
         </ul>
     </div>
-
+    
     <%:Html.Kendo().Sortable()
         .For("#sortable-basic")
+        .Cursor("url('" + Url.Content("~/content/web/sortable/grabbing.cur") + "'), default")
         .CursorOffset(offset => offset.Left(-230).Top(-10))
         .HintHandler("hint")
         .PlaceholderHandler("placeholder")
@@ -77,6 +78,7 @@
             margin: 0;
             color: #666;
             font-size: 1.2em;
+            cursor: url('<%=Url.Content("~/content/web/sortable/grab.cur")%>'), default;
         }
 
         li.sortable:last-child {

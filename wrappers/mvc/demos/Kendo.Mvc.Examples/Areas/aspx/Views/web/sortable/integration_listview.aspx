@@ -25,6 +25,7 @@
     <%:Html.Kendo().Sortable()
         .For("#listView")
         .Filter(">div.product")
+        .Cursor("move")
         .PlaceholderHandler("placeholder")
         .HintHandler("hint")
         .Events(events => events.Change("onChange"))
@@ -74,6 +75,7 @@
             height: 170px;
             margin: 0;
             padding: 0;
+            cursor: move;
         }
 
         .product img {

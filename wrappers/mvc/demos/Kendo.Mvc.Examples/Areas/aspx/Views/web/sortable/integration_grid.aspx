@@ -22,6 +22,7 @@
 <%:Html.Kendo().Sortable()
     .For("#Grid")
     .Filter("table > tbody > tr")
+    .Cursor("move")
     .HintHandler("noHint")
     .PlaceholderHandler("placeholder")
     .ContainerSelector("#Grid tbody")
@@ -47,6 +48,12 @@
         grid.dataSource.insert(newIndex, dataItem);
     }
 </script>
+    
+<style>
+    .k-grid tbody tr {
+        cursor: move;
+    }
+</style>
 
 </asp:Content>
 

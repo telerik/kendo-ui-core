@@ -21,11 +21,13 @@
         .For("#sortable-listA")
         .ConnectWith("#sortable-listB")
         .PlaceholderHandler("placeholder")
+        .Cursor("url('" + Url.Content("~/content/web/sortable/grabbing.cur") + "'), default")
     %>
 
     <%:Html.Kendo().Sortable()
         .For("#sortable-listB")
         .PlaceholderHandler("placeholder")
+        .Cursor("url('" + Url.Content("~/content/web/sortable/grabbing.cur") + "'), default")
     %>
 
     <div class="demo-section two-way">
@@ -48,12 +50,14 @@
         .For("#sortable-listC")
         .ConnectWith("#sortable-listD")
         .PlaceholderHandler("placeholder")
+        .Cursor("url('" + Url.Content("~/content/web/sortable/grabbing.cur") + "'), default")
     %>
 
     <%:Html.Kendo().Sortable()
         .For("#sortable-listD")
         .ConnectWith("#sortable-listC")
         .PlaceholderHandler("placeholder")
+        .Cursor("url('" + Url.Content("~/content/web/sortable/grabbing.cur") + "'), default")
     %>
 
     <script>
@@ -112,6 +116,7 @@
             background-color: #222222;
             color: #ffffff;
             border-radius: 3px;
+            cursor: url('<%=Url.Content("~/content/web/sortable/grab.cur")%>'), default;
         }
 
         #sortable-listA .list-item {

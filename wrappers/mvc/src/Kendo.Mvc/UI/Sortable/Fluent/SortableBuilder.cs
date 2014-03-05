@@ -90,6 +90,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// The CSS style which determines the cursor that will be shown while user drags sortable item. For example 'move', 'pointer', etc.
+        /// </summary>
+        /// <param name="string">String</param>
+        /// <returns></returns>
+        public virtual SortableBuilder Cursor(string cursor)
+        {
+            Component.Cursor = cursor;
+            return this;
+        }
+
+        /// <summary>
         /// When set to true, the item will be activated after the user taps and holds the finger on the element for a short amount of time.
         /// </summary>
         /// <param name="value"></param>
