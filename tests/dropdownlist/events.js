@@ -409,6 +409,20 @@
         input.data("kendoDropDownList").value("foo");
     });
 
+    test("DropDownList trigger cascade set value using value method (autoBind: false)", 1, function() {
+        input.val("foo");
+
+        input.kendoDropDownList({
+            dataSource: ["foo", "bar"],
+            autoBind: false,
+            cascade: function() {
+                ok(true);
+            }
+        });
+
+        input.data("kendoDropDownList").value("foo");
+    });
+
     test("DropDownList trigger change on search if popup is closed", 2, function() {
         var change, cascade;
 
