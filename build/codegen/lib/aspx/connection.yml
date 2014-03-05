@@ -15,3 +15,5 @@
           - none - no cap
           - ArrowEnd - a filled arrow
           - FilledCircle - a filled circle
+    - :name: hover.stroke
+      :type: kendo.dataviz.diagram.Connection.Hover

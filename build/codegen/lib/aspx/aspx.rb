@@ -397,6 +397,22 @@ namespace <%= csharp_namespace %>
 
                     parent if parent.is_a?(Component)
                 end
+
+                def strip_kendo_type(input)
+                    result = input
+                    .sub('kendo.ui.', '')
+                    .sub('kendo.dataviz.ui.', '')
+                    .sub('kendo.dataviz.', '')
+                    .sub('kendo.mobile.ui.', '')
+                    .sub('kendo.mobile.', '')
+                    .sub('kendo.', '')
+                    .sub(".#{root_component.owner_namespace.downcase}", '')
+                    .sub("#{root_component.owner_namespace.downcase}.", '')
+
+                    return result.split('.').map { |w|
+                        w.pascalize
+                    }.join('')
+                end
             end
 
             class Option < CodeGen::Option
@@ -407,7 +423,8 @@ namespace <%= csharp_namespace %>
                 end
 
                 def csharp_type
-                    return "#{owner.csharp_name.sub('Settings', '').sub('Collection', '')}#{name.pascalize}" if enum? || type.include?('kendo.')
+                    return strip_kendo_type(type) if type.include?('kendo.')
+                    return "#{owner.csharp_name.sub('Settings', '').sub('Collection', '')}#{name.pascalize}" if enum?
                     return TYPES_MAP[type[0]]
                 end
 
@@ -464,21 +481,7 @@ namespace <%= csharp_namespace %>
                 include Options
 
                 def csharp_class
-                    if type.include?('kendo.')
-                        result = type
-                                    .sub('kendo.ui.', '')
-                                    .sub('kendo.dataviz.ui.', '')
-                                    .sub('kendo.dataviz.', '')
-                                    .sub('kendo.mobile.ui.', '')
-                                    .sub('kendo.mobile.', '')
-                                    .sub('kendo.', '')
-                                    .sub(".#{root_component.owner_namespace.downcase}", '')
-                                    .sub("#{root_component.owner_namespace.downcase}.", '')
-
-                        return result.split('.').map { |w|
-                                                w.pascalize
-                                            }.join('')
-                    end
+                    return strip_kendo_type(type) if type.include?('kendo.')
 
                     prefix = owner.instance_of?(ArrayItem) ? owner.owner.owner.csharp_name.sub('Settings', '') : owner.csharp_name.sub('Settings', '')
                     name.include?('Settings') ? "#{prefix}#{name.sub('Settings', '').pascalize}" : "#{prefix}#{name.pascalize}"
@@ -563,14 +566,6 @@ namespace <%= csharp_namespace %>
 
             class Component < CodeGen::Component
                 include Options
-
-                def import_local_meta
-                    metadata_filename = "build/codegen/lib/aspx/#{name.downcase}.yml"
-
-                    if File.exists? metadata_filename
-                        import(YAML.load(File.read(metadata_filename)))
-                    end
-                end
 
                 def find_option_by_name(name, root)
                     return root if root.name == name
