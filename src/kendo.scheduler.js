@@ -3190,8 +3190,8 @@ var __meta__ = {
             return this.slotByPosition(offset.left, offset.top);
         },
 
-        resourcesByGroupIndex: function(index) {
-            return this.view()._resourceBySlot({ groupIndex: index || 0 });
+        resourceBySlot: function(slot) {
+            return this.view()._resourceBySlot(slot);
         }
     });
 

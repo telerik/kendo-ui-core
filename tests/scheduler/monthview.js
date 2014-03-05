@@ -481,7 +481,7 @@
         ok(view.element.find("div.k-event>div").attr("title").indexOf('["my event"]') > -1);
     });
 
-    test("correct groupIndex is passed to dayTemplate (horizontal grouping)", function() {
+    test("correct resources are passed to dayTemplate (horizontal grouping)", function() {
         var group1, group2, group3, group4;
 
         var element = $("<div>").appendTo(QUnit.fixture);
@@ -489,21 +489,21 @@
         setupGroupedScheduler(element, "horizontal", {
             type: "month",
             dayTemplate: function(data) {
-                var groupIndex = data.groupIndex;
+                var resources = data.resources();
 
-                if (group1 === undefined && groupIndex === 0) {
+                if (resources.rooms == 1 && resources.persons == 1) {
                     group1 = true;
                 }
 
-                if (group2 === undefined && groupIndex === 1) {
+                if (resources.rooms == 1 && resources.persons == 2) {
                     group2 = true;
                 }
 
-                if (group3 === undefined && groupIndex === 2) {
+                if (resources.rooms == 2 && resources.persons == 1) {
                     group3 = true;
                 }
 
-                if (group4 === undefined && groupIndex === 3) {
+                if (resources.rooms == 2 && resources.persons == 2) {
                     group4 = true;
                 }
             }
@@ -512,7 +512,7 @@
         ok(group1 && group2 && group3 && group4);
     });
 
-    test("correct groupIndex is passed to dayTemplate (vertical grouping)", function() {
+    test("correct resources are passed to dayTemplate (vertical grouping)", function() {
         var group1, group2, group3, group4;
 
         var element = $("<div>").appendTo(QUnit.fixture);
@@ -520,21 +520,21 @@
         setupGroupedScheduler(element, "vertical", {
             type: "month",
             dayTemplate: function(data) {
-                var groupIndex = data.groupIndex;
+                var resources = data.resources();
 
-                if (group1 === undefined && groupIndex === 0) {
+                if (resources.rooms == 1 && resources.persons == 1) {
                     group1 = true;
                 }
 
-                if (group2 === undefined && groupIndex === 1) {
+                if (resources.rooms == 1 && resources.persons == 2) {
                     group2 = true;
                 }
 
-                if (group3 === undefined && groupIndex === 2) {
+                if (resources.rooms == 2 && resources.persons == 1) {
                     group3 = true;
                 }
 
-                if (group4 === undefined && groupIndex === 3) {
+                if (resources.rooms == 2 && resources.persons == 2) {
                     group4 = true;
                 }
             }

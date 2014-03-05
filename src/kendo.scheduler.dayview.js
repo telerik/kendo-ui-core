@@ -718,7 +718,10 @@ var __meta__ = {
 
                         idx = resources.length && that._groupOrientation() !== "vertical" ? idx % dates.length : idx;
 
-                        return that.allDaySlotTemplate({ date: dates[idx], groupIndex: groupIndex });
+                        return that.allDaySlotTemplate({ date: dates[idx], resources: function() {
+                                return that._resourceBySlot({ groupIndex: groupIndex })
+                            }
+                        });
                     }
                 });
             }
@@ -862,9 +865,12 @@ var __meta__ = {
                     if (options.allDaySlot) {
                         allDayVerticalGroupRow = function (groupIndex) {
                             var result = '<tr class="k-scheduler-header-all-day">';
+                            var resources = function() {
+                                return that._resourceBySlot({ groupIndex: groupIndex });
+                            }
 
                             for (var idx = 0, length = dates.length; idx < length; idx++) {
-                                result += "<td>" + allDaySlotTemplate({ date: dates[idx], groupIndex: groupIndex }) + "</td>";
+                                result += "<td>" + allDaySlotTemplate({ date: dates[idx], resources: resources }) + "</td>";
                             }
 
                             return result + "</tr>";
@@ -904,7 +910,10 @@ var __meta__ = {
                         tmplDate = kendo.date.getDate(dates[idx]);
                         kendo.date.setTime(tmplDate, kendo.date.getMilliseconds(date));
 
-                        content += slotTemplate({ date: tmplDate, groupIndex: isVerticalGroupped ? rowIdx : groupIdx });
+                        content += slotTemplate({ date: tmplDate, resources: function() {
+                                return that._resourceBySlot({ groupIndex: isVerticalGroupped ? rowIdx : groupIdx });
+                            }
+                        });
                         content += "</td>";
                     }
                 }

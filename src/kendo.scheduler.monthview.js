@@ -385,9 +385,10 @@ var __meta__ = {
         },
 
         _createRow: function(startDate, startIdx, cellsPerRow, groupIndex) {
-            var min = this._firstDayOfMonth;
-            var max = this._lastDayOfMonth;
-            var content = this.dayTemplate;
+            var that = this;
+            var min = that._firstDayOfMonth;
+            var max = that._lastDayOfMonth;
+            var content = that.dayTemplate;
             var classes = "";
             var html = "";
 
@@ -409,10 +410,10 @@ var __meta__ = {
                 }
 
                 html += ">";
-                html += content({ date: startDate, groupIndex: groupIndex });
+                html += content({ date: startDate, resources: function() { return that._resourceBySlot({ groupIndex: groupIndex }); } });
                 html += "</td>";
 
-                this._slotIndices[getDate(startDate).getTime()] = startIdx + cellIdx;
+                that._slotIndices[getDate(startDate).getTime()] = startIdx + cellIdx;
 
                 startDate = kendo.date.nextDay(startDate);
             }
