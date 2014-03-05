@@ -1036,7 +1036,7 @@
         var view = scheduler.view();
     });
 
-    test("all day slot template is rendered for each resource group when orientation is vertical in day view", 1, function() {
+    test("all day slot template is rendered for each resource group when orientation is vertical in day view", 2, function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
             allDaySlotTemplate: function(data) { deepEqual(data.date,new Date("2013/6/6")) },

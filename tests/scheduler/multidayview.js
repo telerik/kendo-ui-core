@@ -242,10 +242,21 @@
             slotTemplate: function(data) {
                 var groupIndex = data.groupIndex;
 
-                group1 = groupIndex === 0;
-                group2 = groupIndex === 1;
-                group3 = groupIndex === 2;
-                group4 = groupIndex === 3;
+                if (group1 === undefined && groupIndex === 0) {
+                    group1 = true;
+                }
+
+                if (group2 === undefined && groupIndex === 1) {
+                    group2 = true;
+                }
+
+                if (group3 === undefined && groupIndex === 2) {
+                    group3 = true;
+                }
+
+                if (group4 === undefined && groupIndex === 3) {
+                    group4 = true;
+                }
             }
         });
 
@@ -261,10 +272,21 @@
             slotTemplate: function(data) {
                 var groupIndex = data.groupIndex;
 
-                group1 = groupIndex === 0;
-                group2 = groupIndex === 1;
-                group3 = groupIndex === 2;
-                group4 = groupIndex === 3;
+                if (group1 === undefined && groupIndex === 0) {
+                    group1 = true;
+                }
+
+                if (group2 === undefined && groupIndex === 1) {
+                    group2 = true;
+                }
+
+                if (group3 === undefined && groupIndex === 2) {
+                    group3 = true;
+                }
+
+                if (group4 === undefined && groupIndex === 3) {
+                    group4 = true;
+                }
             }
         });
 
@@ -280,10 +302,21 @@
             allDaySlotTemplate: function(data) {
                 var groupIndex = data.groupIndex;
 
-                group1 = groupIndex === 0;
-                group2 = groupIndex === 1;
-                group3 = groupIndex === 2;
-                group4 = groupIndex === 3;
+                if (group1 === undefined && groupIndex === 0) {
+                    group1 = true;
+                }
+
+                if (group2 === undefined && groupIndex === 1) {
+                    group2 = true;
+                }
+
+                if (group3 === undefined && groupIndex === 2) {
+                    group3 = true;
+                }
+
+                if (group4 === undefined && groupIndex === 3) {
+                    group4 = true;
+                }
             }
         });
 
@@ -299,10 +332,21 @@
             allDaySlotTemplate: function(data) {
                 var groupIndex = data.groupIndex;
 
-                group1 = groupIndex === 0;
-                group2 = groupIndex === 1;
-                group3 = groupIndex === 2;
-                group4 = groupIndex === 3;
+                if (group1 === undefined && groupIndex === 0) {
+                    group1 = true;
+                }
+
+                if (group2 === undefined && groupIndex === 1) {
+                    group2 = true;
+                }
+
+                if (group3 === undefined && groupIndex === 2) {
+                    group3 = true;
+                }
+
+                if (group4 === undefined && groupIndex === 3) {
+                    group4 = true;
+                }
             }
         });
 
