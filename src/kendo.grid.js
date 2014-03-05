@@ -2334,17 +2334,10 @@ var __meta__ = {
         },
 
         _hasFooters: function() {
-            var cols = this.columns,
-                len = cols.length,
-                j;
-
-            for (j = 0; j < len; j++) {
-                if (cols[j].footerTemplate !== "" || cols[j].groupFooterTemplate !== "") {
-                    return true;
-                }
-            }
-
-            return false;
+            return !!this.footerTemplate ||
+                !!this.groupFooterTemplate ||
+                (this.footer && this.footer.length > 0) ||
+                this.wrapper.find(".k-grid-footer").length > 0;
         },
 
         _groupable: function() {
