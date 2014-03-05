@@ -19,8 +19,6 @@ namespace Kendo.Mvc.UI
             this.urlGenerator = urlGenerator;
 
             DataSource = new HierarchicalDataSource();
-
-            VisualTemplate = new ClientHandlerDescriptor();
             //>> Initialization
         
             ConnectionDefaults = new DiagramConnectionDefaultsSettings();
