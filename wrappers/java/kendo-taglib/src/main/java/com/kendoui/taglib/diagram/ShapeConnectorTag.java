@@ -49,12 +49,24 @@ public class ShapeConnectorTag extends  BaseTag  /* interfaces */ /* interfaces 
         return "diagram-shape-connector";
     }
 
+    public void setPosition(ShapeConnectorPositionFunctionTag value) {
+        setEvent("position", value.getBody());
+    }
+
     public java.lang.String getDescription() {
         return (java.lang.String)getProperty("description");
     }
 
     public void setDescription(java.lang.String value) {
         setProperty("description", value);
+    }
+
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
+    }
+
+    public void setName(java.lang.String value) {
+        setProperty("name", value);
     }
 
     public java.lang.String getPosition() {
