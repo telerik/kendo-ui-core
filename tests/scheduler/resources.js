@@ -271,6 +271,45 @@
         equalBackgroundColor(events.eq(1), "red");
     });
 
+    test("eventResources method returns items with field, name and title fields", function() {
+        var resourcesInEventTemplate = [];
+
+        eventTemplate = function(resources) {
+            resourcesInEventTemplate = resources;
+            return "";
+        };
+
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            eventTemplate: "#=eventTemplate(data.resources)#",
+            resources: [
+                {
+                    field: "foo",
+                    dataSource: [
+                        { text: "text11", value: 1, color: "red" },
+                        { text: "text12", value: 2, color: "green" }
+                    ]
+                },
+                {
+                    field: "bar",
+                    multiple: true,
+                    dataSource: [
+                        { text: "text21", value: 1, color: "red" },
+                        { text: "text22", value: 2, color: "green" }
+                    ]
+                }
+            ],
+            dataSource: [
+                { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2, bar: [1,2]},
+            ],
+            views: [ "week" ]
+        });
+
+        equal(resourcesInEventTemplate[0].field == "foo", true);
+        equal(resourcesInEventTemplate[0].title == "foo", true);
+        equal(resourcesInEventTemplate[0].name == "foo", true);
+    });
+
     test("background is not changed if the event doesn't have a resource in week view", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),

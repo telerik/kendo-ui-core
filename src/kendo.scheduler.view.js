@@ -1447,8 +1447,10 @@ var __meta__ = {
 
                     if (eventResource !== null) {
                         var resourceColor = kendo.getter(resource.dataColorField)(eventResource);
-
                         resources.push({
+                            field: resource.field,
+                            title: resource.title,
+                            name: resource.name,
                             text: kendo.getter(resource.dataTextField)(eventResource),
                             value: value,
                             color: resourceColor
