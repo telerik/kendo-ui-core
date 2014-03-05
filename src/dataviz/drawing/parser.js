@@ -11,6 +11,7 @@
         Point = geometry.Point,
         SEGMENT_REGEX = /([a-z]{1})([^a-z]*)(z)?/gi,
         SPLIT_REGEX = /,|\s/g,
+        deepExtend = kendo.deepExtend,
         trim = $.trim,
         round = dataviz.round,
         deg = dataviz.util.deg,
@@ -98,147 +99,163 @@
         };
     }
 
-    var ShapeParseMap = {
-        l: function(path, parameters, position, isRelative) {
-            var length = parameters.length,
-                i, point;
+    var PathParser = function() {};
 
-            for (i = 0; i < length; i+=2){
-                point = new Point(parameters[i], parameters[i + 1]);
-                if (isRelative) {
-                    point.add(position);
-                }
-                path.lineTo(point.x, point.y);
+    PathParser.fn = PathParser.protoytype = {
+        parse: function(str, options) {
+            var parser = this,
+                multiPath = new drawing.MultiPath(options),
+                command,
+                isRelative,
+                parameters,
+                i, length,
+                position = new Point();
 
-                position.x = point.x;
-                position.y = point.y;
-            }
-        },
+            str.replace(SEGMENT_REGEX, function(match, element, params, closePath) {
+                command = element.toLowerCase();
+                isRelative = command === element;
+                parameters =  trim(params).split(SPLIT_REGEX);
+                length = parameters.length;
 
-        c: function(path, parameters, position, isRelative) {
-            var length = parameters.length,
-                controlIn, controlOut, point,
-                i;
-
-            for (i = 0; i < length; i+= 6) {
-                controlOut = new Point(parameters[i], parameters[i + 1]);
-                controlIn = new Point(parameters[i + 2], parameters[i + 3]);
-                point = new Point(parameters[i + 4], parameters[i + 5]);
-                if (isRelative) {
-                    controlIn.add(position);
-                    controlOut.add(position);
-                    point.add(position);
+                for (i = 0; i < length; i++) {
+                    parameters[i] = parseFloat(parameters[i]);
                 }
 
-                path.curveTo(controlOut, controlIn, point);
+                if (command === MOVE) {
+                    if (isRelative) {
+                        position.x += parameters[0];
+                        position.y += parameters[1];
+                    } else {
+                        position.x = parameters[0];
+                        position.y = parameters[1];
+                    }
 
-                position.x = point.x;
-                position.y = point.y;
-            }
-        },
+                    multiPath.moveTo(position.x, position.y);
+                } else if (parser.ShapeMap[command]) {
+                    parser.ShapeMap[command](
+                        multiPath,
+                        parameters,
+                        position,
+                        isRelative
+                    );
 
-        v: function(path, parameters, position, isRelative) {
-            var value = isRelative ? 0 : position.x;
-            toLineParamaters(parameters, true, value);
-            this.l(path, parameters, position, isRelative);
-        },
-
-        h: function(path, parameters, position, isRelative) {
-            var value = isRelative ? 0 : position.y;
-            toLineParamaters(parameters, false, value);
-            this.l(path, parameters, position, isRelative);
-        },
-
-        a: function(path, parameters, position, isRelative) {
-            var length = parameters.length,
-                endPoint,
-                radiusX,
-                radiusY,
-                swipe, largeArc,
-                arcParameters,
-                i, j, arc,
-                curvePoints;
-
-            for (i = 0; i < length; i+=7) {
-                radiusX = parameters[i];
-                radiusY = parameters[i + 1];
-                largeArc = parameters[i + 3];
-                swipe = parameters[i + 4];
-                endPoint = new Point(parameters[i + 5], parameters[i + 6]);
-
-                if (isRelative) {
-                    endPoint.add(position);
+                    if (closePath && closePath.toLowerCase() === CLOSE) {
+                        multiPath.close();
+                    }
+                } else {
+                    throw new Error("Unsupported command: " + command);
                 }
+            });
 
-                arcParameters = normalizeArcParameters(radiusX, radiusY, position.x, position.y,
-                    endPoint.x, endPoint.y, largeArc, swipe);
+            return multiPath;
+        },
 
-                arc = new geometry.Arc(arcParameters.center, {
-                    startAngle: arcParameters.startAngle,
-                    endAngle: arcParameters.endAngle,
-                    radiusX: radiusX,
-                    radiusY: radiusY,
-                    counterClockwise: swipe === 0
-                });
+        ShapeMap: {
+            l: function(path, parameters, position, isRelative) {
+                var length = parameters.length,
+                    i, point;
 
-                curvePoints = arc.curvePoints();
-                for (j = 1; j < curvePoints.length; j+=3) {
-                    path.curveTo(curvePoints[j], curvePoints[j + 1], curvePoints[j + 2]);
+                for (i = 0; i < length; i+=2){
+                    point = new Point(parameters[i], parameters[i + 1]);
+                    if (isRelative) {
+                        point.add(position);
+                    }
+                    path.lineTo(point.x, point.y);
+
+                    position.x = point.x;
+                    position.y = point.y;
                 }
+            },
 
-                position.x = endPoint.x;
-                position.y = endPoint.y;
+            c: function(path, parameters, position, isRelative) {
+                var length = parameters.length,
+                    controlIn, controlOut, point,
+                    i;
+
+                for (i = 0; i < length; i+= 6) {
+                    controlOut = new Point(parameters[i], parameters[i + 1]);
+                    controlIn = new Point(parameters[i + 2], parameters[i + 3]);
+                    point = new Point(parameters[i + 4], parameters[i + 5]);
+                    if (isRelative) {
+                        controlIn.add(position);
+                        controlOut.add(position);
+                        point.add(position);
+                    }
+
+                    path.curveTo(controlOut, controlIn, point);
+
+                    position.x = point.x;
+                    position.y = point.y;
+                }
+            },
+
+            v: function(path, parameters, position, isRelative) {
+                var value = isRelative ? 0 : position.x;
+                toLineParamaters(parameters, true, value);
+                this.l(path, parameters, position, isRelative);
+            },
+
+            h: function(path, parameters, position, isRelative) {
+                var value = isRelative ? 0 : position.y;
+                toLineParamaters(parameters, false, value);
+                this.l(path, parameters, position, isRelative);
+            },
+
+            a: function(path, parameters, position, isRelative) {
+                var length = parameters.length,
+                    endPoint,
+                    radiusX,
+                    radiusY,
+                    swipe, largeArc,
+                    arcParameters,
+                    i, j, arc,
+                    curvePoints;
+
+                for (i = 0; i < length; i+=7) {
+                    radiusX = parameters[i];
+                    radiusY = parameters[i + 1];
+                    largeArc = parameters[i + 3];
+                    swipe = parameters[i + 4];
+                    endPoint = new Point(parameters[i + 5], parameters[i + 6]);
+
+                    if (isRelative) {
+                        endPoint.add(position);
+                    }
+
+                    arcParameters = normalizeArcParameters(radiusX, radiusY, position.x, position.y,
+                        endPoint.x, endPoint.y, largeArc, swipe);
+
+                    arc = new geometry.Arc(arcParameters.center, {
+                        startAngle: arcParameters.startAngle,
+                        endAngle: arcParameters.endAngle,
+                        radiusX: radiusX,
+                        radiusY: radiusY,
+                        counterClockwise: swipe === 0
+                    });
+
+                    curvePoints = arc.curvePoints();
+                    for (j = 1; j < curvePoints.length; j+=3) {
+                        path.curveTo(curvePoints[j], curvePoints[j + 1], curvePoints[j + 2]);
+                    }
+
+                    position.x = endPoint.x;
+                    position.y = endPoint.y;
+                }
             }
         }
     };
 
+    PathParser.current = new PathParser();
+
+
     drawing.Path.parse = function(str, options) {
-        var parser = this,
-            multiPath = new drawing.MultiPath(options),
-            command,
-            isRelative,
-            parameters,
-            i, length,
-            position = new Point();
-
-        str.replace(SEGMENT_REGEX, function(match, element, params, closePath) {
-            command = element.toLowerCase();
-            isRelative = command === element;
-            parameters =  trim(params).split(SPLIT_REGEX);
-            length = parameters.length;
-
-            for (i = 0; i < length; i++) {
-                parameters[i] = parseFloat(parameters[i]);
-            }
-
-            if (command === MOVE) {
-                if (isRelative) {
-                    position.x += parameters[0];
-                    position.y += parameters[1];
-                } else {
-                    position.x = parameters[0];
-                    position.y = parameters[1];
-                }
-
-                multiPath.moveTo(position.x, position.y);
-            } else if (ShapeParseMap[command]) {
-                ShapeParseMap[command](
-                    multiPath,
-                    parameters,
-                    position,
-                    isRelative
-                );
-
-                if (closePath && closePath.toLowerCase() === CLOSE) {
-                    multiPath.close();
-                }
-            } else {
-                throw new Error("Unsupported command: " + command);
-            }
-        });
-
-        return multiPath;
+        return PathParser.current.parse(str, options);
     };
+
+    // Exports ================================================================
+    deepExtend(drawing, {
+        PathParser: PathParser
+    });
 
 })(window.kendo.jQuery);
 

@@ -88,7 +88,7 @@
 
             var arc = new drawing.Arc(arcGeometry, strokeOptions);
             group.append(arc, new drawing.Circle(new geometry.Circle(Point.create(300, 300), 3), strokeOptions), rectPath(arc.boundingRect(), strokeOptions));//circle, circleBoundingPath, curve, curveBoundingRect);
-            //surface.draw(group);
+            surface.draw(group);
             var viewModel = kendo.observable({
                 path: "M 300 300 v 86.6 h-25 A 50 100 0 1 1 350 300 c -5 100 100 100 100 -100 10 -70 50 100 50 100",
                 drawPath: function() {
