@@ -11,7 +11,6 @@ var __meta__ = {
     hidden: true
 };
 
-
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -719,7 +718,7 @@ var __meta__ = {
                         idx = resources.length && that._groupOrientation() !== "vertical" ? idx % dates.length : idx;
 
                         return that.allDaySlotTemplate({ date: dates[idx], resources: function() {
-                                return that._resourceBySlot({ groupIndex: groupIndex })
+                                return that._resourceBySlot({ groupIndex: groupIndex });
                             }
                         });
                     }
@@ -867,7 +866,7 @@ var __meta__ = {
                             var result = '<tr class="k-scheduler-header-all-day">';
                             var resources = function() {
                                 return that._resourceBySlot({ groupIndex: groupIndex });
-                            }
+                            };
 
                             for (var idx = 0, length = dates.length; idx < length; idx++) {
                                 result += "<td>" + allDaySlotTemplate({ date: dates[idx], resources: resources }) + "</td>";
@@ -889,10 +888,17 @@ var __meta__ = {
                 var length;
                 var classes = "";
                 var tmplDate;
+                var groupIdx = 0;
 
                 content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
 
-                for (var groupIdx = 0; groupIdx < groupsCount; groupIdx++) {
+                var resources = function(groupIndex) {
+                    return function() {
+                        return that._resourceBySlot({ groupIndex: groupIndex });
+                    };
+                };
+
+                for (; groupIdx < groupsCount; groupIdx++) {
                     for (idx = 0, length = columnCount; idx < length; idx++) {
                         classes = "";
 
@@ -910,10 +916,7 @@ var __meta__ = {
                         tmplDate = kendo.date.getDate(dates[idx]);
                         kendo.date.setTime(tmplDate, kendo.date.getMilliseconds(date));
 
-                        content += slotTemplate({ date: tmplDate, resources: function() {
-                                return that._resourceBySlot({ groupIndex: isVerticalGroupped ? rowIdx : groupIdx });
-                            }
-                        });
+                        content += slotTemplate({ date: tmplDate, resources: resources(isVerticalGroupped ? rowIdx : groupIdx) });
                         content += "</td>";
                     }
                 }

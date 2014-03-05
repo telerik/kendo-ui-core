@@ -392,6 +392,10 @@ var __meta__ = {
             var classes = "";
             var html = "";
 
+            var resources = function() {
+                return that._resourceBySlot({ groupIndex: groupIndex });
+            };
+
             for (var cellIdx = 0; cellIdx < cellsPerRow; cellIdx++) {
                 classes = "";
 
@@ -410,7 +414,7 @@ var __meta__ = {
                 }
 
                 html += ">";
-                html += content({ date: startDate, resources: function() { return that._resourceBySlot({ groupIndex: groupIndex }); } });
+                html += content({ date: startDate, resources: resources });
                 html += "</td>";
 
                 that._slotIndices[getDate(startDate).getTime()] = startIdx + cellIdx;
