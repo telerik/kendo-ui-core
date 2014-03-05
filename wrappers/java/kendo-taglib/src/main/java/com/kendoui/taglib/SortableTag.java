@@ -111,6 +111,14 @@ public class SortableTag extends WidgetTag /* interfaces *//* interfaces */{
         setProperty("axis", value);
     }
 
+    public java.lang.String getCursor() {
+        return (java.lang.String) getProperty("cursor");
+    }
+
+    public void setCursor(java.lang.String value) {
+        setProperty("cursor", value);
+    }
+
     public java.lang.Object getCursorOffset() {
         return (java.lang.Object) getProperty("cursorOffset");
     }
