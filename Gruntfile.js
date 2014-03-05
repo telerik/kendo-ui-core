@@ -75,8 +75,8 @@ module.exports = function(grunt) {
                         base: 'BrowserStack',
                         browser: 'chrome',
                         browser_version: 'latest',
-                        os: 'Windows',
-                        os_version: '7'
+                        os: 'OS X',
+                        os_version: 'Mavericks'
                     }
                 },
                 reportSlowerThan: 500,
