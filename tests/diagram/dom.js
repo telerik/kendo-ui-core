@@ -368,16 +368,22 @@
         createShapeDefaults({type: "circle"});
         var shape = diagram.addShape({id: "shape1"});
 
-        equal(shape.options.type, "circle", "the type of the shape should come from shapeDefaults");
+        equal("circle", shape.options.type, "the type of the shape should come from shapeDefaults");
     });
 
     test("default shape path", function() {
         createShapeDefaults({path: "m0,100 L100,100 L50,0z"});
         var shape = diagram.addShape({id: "shape1"});
 
-        equal(shape.options.path, "m0,100 L100,100 L50,0z", "path should be set by the shapeDefaults");
+        equal("m0,100 L100,100 L50,0z", shape.options.path, "path should be set by the shapeDefaults");
     });
 
+    test("shape is undoable", function() {
+        createShapeDefaults({});
+        var shape = diagram.addShape({id: "shape1"});
+
+        equal(shape, diagram.undoRedoService.stack[0].shape, "shape is undoable");
+    });
 
     module("Shape bounds", {
         setup: function () {

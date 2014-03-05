@@ -72,6 +72,15 @@
             }
             return true;
         },
+        simpleExtend: function(destination, source) {
+            if(!Utils.isObject(source)) {
+                return;
+            }
+
+            for(var name in source) {
+                destination[name] = source[name];
+            }
+        },
         /**
          * Returns an array of the specified size and with each entry set to the given value.
          * @param size

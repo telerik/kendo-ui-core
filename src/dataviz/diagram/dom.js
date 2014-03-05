@@ -107,8 +107,8 @@
             }
         }];
 
-        diagram.shapeDefaults = function() {
-            return {
+        diagram.shapeDefaults = function(extra) {
+            var defaults = {
                 type: DEFAULT_SHAPE_TYPE,
                 path: "",
                 visual: null,
@@ -133,6 +133,10 @@
                 resizable: true,
                 rotatable: true
             };
+
+            Utils.simpleExtend(defaults, extra);
+
+            return defaults;
         };
 
         var PanAdapter = kendo.Class.extend({
@@ -1316,7 +1320,7 @@
                     size: 10,
                     angle: 10
                 },
-                shapeDefaults: diagram.shapeDefaults(),
+                shapeDefaults: diagram.shapeDefaults({undoable: true}),
                 connectionDefaults: {},
                 shapes: [],
                 connections: []
@@ -1486,21 +1490,22 @@
              */
             addShape: function (item, options) {
                 var shape,
-                    unit,
                     shapeDefaults = this.options.shapeDefaults;
 
                 if (item instanceof Shape) {
                     shapeDefaults = deepExtend({}, shapeDefaults, options);
-                    item.redraw(shapeDefaults);
+                    item.redraw(options);
                     shape = item;
-                } else { // consider it a point
+                }
+                else { // consider it a point
                     shapeDefaults = deepExtend({}, shapeDefaults, item);
                     shape = new Shape(shapeDefaults);
                 }
 
                 if (shapeDefaults.undoable) {
                     this.undoRedoService.add(new diagram.AddShapeUnit(shape, this));
-                } else {
+                }
+                else {
                     this.shapes.push(shape);
                     shape.diagram = this;
                     this.mainLayer.append(shape.visual);
