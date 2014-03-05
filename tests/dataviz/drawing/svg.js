@@ -203,24 +203,24 @@
             }
         });
 
-        test("renders visibility attribute", function() {
+        test("renders visibility", function() {
             shape.visible(false);
-            ok(node.render().indexOf("visibility='hidden'") !== -1);
+            ok(node.render().indexOf("display='none'") !== -1);
         });
 
         test("does not render visibility if not set", function() {
-            ok(node.render().indexOf("visibility") === -1);
+            ok(node.render().indexOf("display") === -1);
         });
 
         test("does not render visibility if set to true", function() {
             shape.visible(true);
-            ok(node.render().indexOf("visibility") === -1);
+            ok(node.render().indexOf("display") === -1);
         });
 
         test("optionsChange sets visibility to hidden", function() {
             node.attr = function(name, value) {
-                equal(name, "visibility");
-                equal(value, "hidden");
+                equal(name, "display");
+                equal(value, "none");
             };
 
             shape.visible(false);
@@ -228,8 +228,8 @@
 
         test("optionsChange sets visibility to visible", function() {
             node.attr = function(name, value) {
-                equal(name, "visibility");
-                equal(value, "visible");
+                equal(name, "display");
+                equal(value, "");
             };
 
             shape.visible(true);

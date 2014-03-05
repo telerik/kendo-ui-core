@@ -218,7 +218,7 @@
 
         renderVisibility: function() {
             if (this.srcElement.options.visible === false) {
-                return renderAttr("visibility", "hidden");
+                return renderAttr("display", "none");
             }
 
             return "";
@@ -232,7 +232,7 @@
 
         optionsChange: function(e) {
             if (e.field === "visible") {
-                this.attr("visibility", e.value ? "visible" : "hidden");
+                this.attr("display", e.value ? "" : "none");
             }
 
             BaseNode.fn.optionsChange.call(this, e);
