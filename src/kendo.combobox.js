@@ -395,18 +395,28 @@ var __meta__ = {
         text: function (text) {
             text = text === null ? "" : text;
 
-            var that = this,
-                input = that.input[0],
-                ignoreCase = that.options.ignoreCase,
-                loweredText = text,
-                dataItem;
+            var that = this;
+            var input = that.input[0];
+            var ignoreCase = that.options.ignoreCase;
+            var loweredText = text;
+            var dataItem;
+            var value;
 
             if (text !== undefined) {
                 dataItem = that.dataItem();
 
-                if (dataItem && that._text(dataItem) === text && that._value(dataItem).toString() === that._old) {
-                    that._triggerCascade();
-                    return;
+                if (dataItem && that._text(dataItem) === text) {
+                    value = that._value(dataItem);
+                    if (value === null) {
+                        value = "";
+                    } else {
+                        value += "";
+                    }
+
+                    if (value === that._old) {
+                        that._triggerCascade();
+                        return;
+                    }
                 }
 
                 if (ignoreCase) {
