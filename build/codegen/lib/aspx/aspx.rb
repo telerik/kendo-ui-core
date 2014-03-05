@@ -30,265 +30,32 @@ module CodeGen
                 'Date' => 'null'
             }
 
-            CLASS_TEMPLATE = ERB.new('
-using System.Text;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Web.UI;
-using System.Web.Script.Serialization;
+            CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/class.template.erb'))
 
-namespace <%= csharp_namespace %>
-{
-    /// <summary>
-    /// 
-    /// </summary>
-    public class <%= csharp_class %> : Telerik.Web.StateManager
-    {
-        #region [ Constructor ]
-        public <%= csharp_class %>(){}
-        #endregion [ Constructor ]
-    
-        #region [ Properties ]
-        #endregion [ Properties ]
-    
-        #region [ Events ]
-        #endregion [ Events ]
-  }
-}
-')
+            WIDGET_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/widget.class.template.erb'))
 
-            WIDGET_CLASS_TEMPLATE = ERB.new('
-using System.Text;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Web.UI;
-using System.Web.Script.Serialization;
+            COMPOSITE_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/composite.class.template.erb'))
 
-[assembly: WebResource("<%= script_resource_path %>", "text/javascript")]
+            PROPERTY_WITH_DEFAULT_VALUE_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/property.with.default.template.erb'))
 
-namespace <%= csharp_namespace %>
-{
-    /// <summary>
-    ///
-    /// </summary>
-    [ParseChildren(ChildrenAsProperties = true)]
-    [ClientScriptResource("<%= script_component_type %>", "<%= script_resource_path %>")]
-    public class <%= csharp_class %> : RadWebControl
-    {
-        #region [ Constructor ]
-        public <%= csharp_class %>()
-        {
-            RegisterJSConverters();
-        }
-        #endregion [ Constructor ]
+            PROPERTY_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/property.template.erb'))
 
-        #region [ Properties ]
-        #endregion [ Properties ]
+            COMPOSITE_PROPERTY_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/composite.property.template.erb'))
 
-        #region [ Events ]
-        #endregion [ Events ]
+            ENUM_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/enum.template.erb'))
 
-        #region [ Overrides ]
+            COLLECTION_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.property.template.erb'))
 
-        protected override void DescribeComponent(IScriptDescriptor descriptor)
-        {
-            base.DescribeComponent(descriptor);
-            descriptor.AddScriptProperty("_options", SerializeSettings());
-        }
+            ARRAY_ITEM_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.class.template.erb'))
 
-        #endregion [ Overrides ]
-
-        #region [ Private Members ]
-
-        private JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-        private void RegisterJSConverters()
-        {
-            List<JavaScriptConverter> converters = new List<JavaScriptConverter>()
-                                                    {
-                                                        #region [ Converters Declaration ]
-                                                        #endregion [ Converters Declaration ]
-                                                    };
-            serializer.RegisterConverters(converters);
-        }
-
-        private string SerializeSettings()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("{");
-            #region [ Properties Serialization ]
-            #endregion [ Properties Serialization ]
-            sb.Append("}");
-            return sb.ToString();
-        }
-
-        #endregion [ Private Members ]
-  }
-}
-')
-
-            COMPOSITE_CLASS_TEMPLATE = ERB.new('
-namespace <%= csharp_namespace %>
-{
-    using System.Text;
-    using System.ComponentModel;
-    using System.Collections.Generic;
-    using System.Web.UI;
-    using System.Web.Script.Serialization;
-
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    public class <%= csharp_class %> : Telerik.Web.StateManager
-    {
-        #region [ Properties ]
-        #endregion [ Properties ]
-    }
-}
-')
-
-            PROPERTY_WITH_DEFAULT_VALUE_TEMPLATE = ERB.new('
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    [DefaultValue(<%= csharp_default %>)]
-    public <%= csharp_type %> <%= name.pascalize %>
-    {
-      get
-      {
-        return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"] ?? <%= csharp_default %>);
-      }
-      set
-      {
-        ViewState["<%= name.pascalize %>"] = value;
-      }
-    }')
-
-            PROPERTY_TEMPLATE = ERB.new('
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    public <%= csharp_type %> <%= name.pascalize %>
-    {
-      get
-      {
-        return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"]);
-      }
-      set
-      {
-        ViewState["<%= name.pascalize %>"] = value;
-      }
-    }')
-
-            COMPOSITE_PROPERTY_TEMPLATE = ERB.new('
-    private <%= csharp_class %> _<%= name %>; 
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    [DefaultValue("<%= csharp_default %>")]
-    [PersistenceMode(PersistenceMode.InnerProperty)]
-    public <%= csharp_class %> <%= name.pascalize %>
-    {
-      get
-      {
-        if (this._<%= name %> == null)
-        {
-            this._<%= name %> = new <%= csharp_class %>();
-        }
-        return this._<%= name %>;
-      }
-    }')
-
-            ENUM_TEMPLATE = ERB.new('
-namespace <%= csharp_namespace %>
-{
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    public enum <%= csharp_type %>
-    {
-        <% values.each_with_index do |value, index| %>
-        ///<summary>
-        ///<%= value_desc_to_s value %>
-        ///</summary>
-        <%= value_to_s(value).pascalize %><%= \',\' if index < values.length - 1 %>
-        <% end %>
-    }
-}
-    ')
-
-            COLLECTION_TEMPLATE = ERB.new('
-    private <%= csharp_class %> _<%= name %>;
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    [DefaultValue(<%= csharp_default %>)]
-    [PersistenceMode(PersistenceMode.InnerProperty)]
-    public <%= csharp_class %> <%= name.pascalize %>
-    {
-      get
-      {
-        if (this._<%= name %> == null)
-        {
-            this._<%= name %> = new <%= csharp_class %>();
-        }
-        return this._<%= name %>;
-      }
-    }
-')
-            ARRAY_ITEM_CLASS_TEMPLATE = ERB.new('
-namespace <%= csharp_namespace %>
-{
-    using System.ComponentModel;
-
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    public class <%= csharp_class %> : Telerik.Web.StateManager
-    {
-        public <%= csharp_class %>() {}
-
-        #region [ Properties ]
-        #endregion [ Properties ]
-    }
-}
-')
-
-            CONVERTER_CLASS_TEMPLATE = ERB.new('
-namespace <%= csharp_namespace %>
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Script.Serialization;
-
-    /// <summary>
-    /// Serialization JS converter class for <%= csharp_class %>
-    /// </summary>
-    public class <%= csharp_converter_class %>: ExplicitJavaScriptConverter
-    {
-        protected override void PopulateProperties(IDictionary<string, object> state, object obj)
-        {
-            var convertable = obj as <%= csharp_class %>;
-            
-            #region [ SerializedProperties ]
-            #endregion [ SerializedProperties ]
-        }
-
-        public override IEnumerable<System.Type> SupportedTypes
-        {
-            get
-            {
-                return new[] { typeof(<%= csharp_class %>) };
-            }
-        }
-    }
-}
-')
+            CONVERTER_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/converter.class.template.erb'))
 
             CONVERTER_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
+
             CONVERTER_COMPOSITE_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
+
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
 
@@ -439,7 +206,7 @@ namespace <%= csharp_namespace %>
                 end
 
                 def to_serialization_declaration
-                    return ERB.new('sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
+                    return ERB.new('            sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
                 end
 
                 def csharp_default
@@ -512,7 +279,7 @@ namespace <%= csharp_namespace %>
                 end
 
                 def to_serialization_declaration
-                    return ERB.new('sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
+                    return ERB.new('            sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
                 end
 
                 def get_binding

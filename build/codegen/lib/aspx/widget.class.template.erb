@@ -1,0 +1,67 @@
+using System.Text;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Web.UI;
+using System.Web.Script.Serialization;
+
+[assembly: WebResource("<%= script_resource_path %>", "text/javascript")]
+
+namespace <%= csharp_namespace %>
+{
+    /// <summary>
+    ///
+    /// </summary>
+    [ParseChildren(ChildrenAsProperties = true)]
+    [ClientScriptResource("<%= script_component_type %>", "<%= script_resource_path %>")]
+    public class <%= csharp_class %> : RadWebControl
+    {
+        #region [ Constructor ]
+        public <%= csharp_class %>()
+        {
+            RegisterJSConverters();
+        }
+        #endregion [ Constructor ]
+
+        #region [ Properties ]
+        #endregion [ Properties ]
+
+        #region [ Events ]
+        #endregion [ Events ]
+
+        #region [ Overrides ]
+
+        protected override void DescribeComponent(IScriptDescriptor descriptor)
+        {
+            base.DescribeComponent(descriptor);
+            descriptor.AddScriptProperty("_options", SerializeSettings());
+        }
+
+        #endregion [ Overrides ]
+
+        #region [ Private Members ]
+
+        private JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        private void RegisterJSConverters()
+        {
+            List<JavaScriptConverter> converters = new List<JavaScriptConverter>()
+            {
+                #region [ Converters Declaration ]
+                #endregion [ Converters Declaration ]
+            };
+            serializer.RegisterConverters(converters);
+        }
+
+        private string SerializeSettings()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("{");
+            #region [ Properties Serialization ]
+            #endregion [ Properties Serialization ]
+            sb.Append("}");
+            return sb.ToString();
+        }
+
+        #endregion [ Private Members ]
+    }
+}

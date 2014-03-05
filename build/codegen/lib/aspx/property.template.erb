@@ -1,0 +1,15 @@
+
+        /// <summary>
+        /// <%= description %>
+        /// </summary>
+        public <%= csharp_type %> <%= name.pascalize %>
+        {
+            get
+            {
+                return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"]);
+            }
+            set
+            {
+                ViewState["<%= name.pascalize %>"] = value;
+            }
+        }
