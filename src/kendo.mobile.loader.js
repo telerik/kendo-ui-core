@@ -21,6 +21,7 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that.container = container;
+            that.captureEvents = false;
 
             that._attachCapture();
 
@@ -42,15 +43,16 @@ kendo_module({
                 return;
             }
 
+            that.captureEvents = true;
             that._loading = setTimeout(function() {
                 that.element.show();
             }, that.options.timeout);
         },
 
         hide: function() {
-            var that = this;
-            clearTimeout(that._loading);
-            that.element.hide();
+            this.captureEvents = false;
+            clearTimeout(this._loading);
+            this.element.hide();
         },
 
         changeMessage: function(message) {
@@ -59,21 +61,21 @@ kendo_module({
         },
 
         transition: function() {
-            this.transitioning = true;
+            this.captureEvents = true;
             this.container.css("pointer-events", "none");
         },
 
         transitionDone: function() {
-            this.transitioning = false;
+            this.captureEvents = false;
             this.container.css("pointer-events", "");
         },
 
         _attachCapture: function() {
             var that = this;
-            that.transitioning = false;
+            that.captureEvents = false;
 
             function capture(e) {
-                if (that.transitioning) {
+                if (that.captureEvents) {
                     e.preventDefault();
                 }
             }
