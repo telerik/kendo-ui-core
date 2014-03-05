@@ -363,6 +363,21 @@ test("text method does not throw expection if set to null", function() {
     equal(combobox.text(), "");
 });
 
+test("text method does not throw expection if current selected item's value is null", function() {
+    var combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: null}]
+    });
+
+    combobox.select(0);
+
+    combobox.text("foo");
+
+    equal(combobox.value(), "");
+    equal(combobox.text(), "foo");
+});
+
 test("text should not change selection if selected item is equal to input.value", 2, function() {
     var combobox = input.kendoComboBox({
         dataTextField: "text",
