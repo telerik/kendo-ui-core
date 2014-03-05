@@ -10,8 +10,8 @@ class DiagramShapeDefaultsConnector extends \Kendo\SerializableObject {
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramShapeDefaultsConnector
     */
-    public function position($value) {
-        return $this->setProperty('position', $value);
+    public function name($value) {
+        return $this->setProperty('name', $value);
     }
 
     /**
@@ -21,6 +21,15 @@ class DiagramShapeDefaultsConnector extends \Kendo\SerializableObject {
     */
     public function description($value) {
         return $this->setProperty('description', $value);
+    }
+
+    /**
+    * 
+    * @param string|\Kendo\JavaScriptFunction $value
+    * @return \Kendo\Dataviz\UI\DiagramShapeDefaultsConnector
+    */
+    public function position($value) {
+        return $this->setProperty('position', $value);
     }
 
 //<< Properties

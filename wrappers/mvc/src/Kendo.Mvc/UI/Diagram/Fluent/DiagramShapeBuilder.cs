@@ -203,6 +203,28 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         //<< Fields
+
+        /// <summary>
+        /// Defines the inline visual template
+        /// </summary>
+        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
+        public DiagramShapeBuilder Visual(Func<object, object> inlineCodeBlock)
+        {
+            container.Visual = new ClientHandlerDescriptor { TemplateDelegate = inlineCodeBlock };
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will create the visual element.
+        /// </summary>
+        /// <param name="visualHandler">The name of the JavaScript function that will create the visual element.</param>
+        public DiagramShapeBuilder Visual(string visualHandler)
+        {
+            container.Visual = new ClientHandlerDescriptor { HandlerName = visualHandler };
+
+            return this;
+        }
     }
 }
 

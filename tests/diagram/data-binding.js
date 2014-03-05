@@ -57,4 +57,28 @@
 
         equal(diagram.shapes.length, 2);
     });
+
+    test("Applies visual to bound shapes", function() {
+        diagram = createDiagram({
+            dataSource: {
+                data: [{
+                    id: "1",
+                    bars: [{
+                        id: "1.1"
+                    }]
+                }],
+                schema: {
+                    model: {
+                        children: "bars"
+                    }
+                }
+            },
+            shapeDefaults: {
+                visual: function() {
+                    ok(true);
+                    return new kendo.dataviz.diagram.Group();
+                }
+            }
+        });
+    });
 })();

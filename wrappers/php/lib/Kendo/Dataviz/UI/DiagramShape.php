@@ -158,6 +158,21 @@ class DiagramShape extends \Kendo\SerializableObject {
         return $this->setProperty('content', $value);
     }
 
+    /**
+    * Sets the visual option of the DiagramShape.
+    * A function returning a visual element to render for this shape.
+See visual.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\DiagramShape
+    */
+    public function visual($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('visual', $value);
+    }
+
 //<< Properties
 }
 

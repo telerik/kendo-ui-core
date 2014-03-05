@@ -135,18 +135,6 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("template", value);
     }
 
-    public String getVisualTemplate() {
-        Function property = ((Function)getProperty("visualTemplate"));
-        if (property != null) {
-            return property.getBody();
-        }
-        return null;
-    }
-
-    public void setVisualTemplate(String value) {
-        setProperty("visualTemplate", new Function(value));
-    }
-
     public float getZoomRate() {
         return (float)getProperty("zoomRate");
     }

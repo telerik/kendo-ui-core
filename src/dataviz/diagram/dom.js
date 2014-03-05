@@ -1299,7 +1299,6 @@
                 resizable: true,
                 rotatable: true,
                 useScroller: true,
-                visualTemplate: null,
                 tooltip: { enabled: true, format: "{0}" },
                 copy: {
                     enabled: true,
@@ -2309,7 +2308,6 @@
                     }
 
                     var opt = deepExtend({}, that.options.shapeDefaults, {
-                        visual: options.visualTemplate,
                         dataItem: dataItem
                     });
                     shape = new Shape(opt, dataItem);

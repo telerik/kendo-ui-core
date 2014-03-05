@@ -96,28 +96,6 @@ If zoomRate is less than 1, zooming will be reversed.
     }
 
     /**
-    * Sets the visualTemplate option of the Diagram.
-    * A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual:
-    * @param string $value The id of the element which represents the kendo template.
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function visualTemplateId($value) {
-        $value = new \Kendo\Template($value);
-
-        return $this->setProperty('visualTemplate', $value);
-    }
-
-    /**
-    * Sets the visualTemplate option of the Diagram.
-    * A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual:
-    * @param string $value The template content.
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function visualTemplate($value) {
-        return $this->setProperty('visualTemplate', $value);
-    }
-
-    /**
     * Defines the connections configuration.
     * @param \Kendo\Dataviz\UI\DiagramConnectionDefaults|array $value
     * @return \Kendo\Dataviz\UI\Diagram

@@ -22,10 +22,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value">The value that configures the position.</param>
-        public DiagramShapeConnectorBuilder Position(string value)
+        /// <param name="value">The value that configures the name.</param>
+        public DiagramShapeConnectorBuilder Name(string value)
         {
-            container.Position = value;
+            container.Name = value;
 
             return this;
         }
@@ -37,6 +37,17 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramShapeConnectorBuilder Description(string value)
         {
             container.Description = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value">The value that configures the position.</param>
+        public DiagramShapeConnectorBuilder Position(string value)
+        {
+            container.Position = value;
 
             return this;
         }

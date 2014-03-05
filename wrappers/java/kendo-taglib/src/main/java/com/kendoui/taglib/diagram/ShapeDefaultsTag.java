@@ -11,6 +11,8 @@ import com.kendoui.taglib.DiagramTag;
 
 
 
+import com.kendoui.taglib.json.Function;
+
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
@@ -69,6 +71,10 @@ public class ShapeDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces *
 
     public void setStroke(com.kendoui.taglib.diagram.ShapeDefaultsStrokeTag value) {
         setProperty("stroke", value);
+    }
+
+    public void setVisual(ShapeDefaultsVisualFunctionTag value) {
+        setEvent("visual", value.getBody());
     }
 
     public java.lang.String getBackground() {
@@ -149,6 +155,18 @@ public class ShapeDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces *
 
     public void setType(java.lang.String value) {
         setProperty("type", value);
+    }
+
+    public String getVisual() {
+        Function property = ((Function)getProperty("visual"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setVisual(String value) {
+        setProperty("visual", new Function(value));
     }
 
     public float getWidth() {

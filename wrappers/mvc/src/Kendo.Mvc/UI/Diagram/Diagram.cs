@@ -19,8 +19,6 @@ namespace Kendo.Mvc.UI
             this.urlGenerator = urlGenerator;
 
             DataSource = new HierarchicalDataSource();
-
-            VisualTemplate = new ClientHandlerDescriptor();
             //>> Initialization
         
             ConnectionDefaults = new DiagramConnectionDefaultsSettings();
@@ -87,8 +85,6 @@ namespace Kendo.Mvc.UI
         }
         
         //<< Fields
-
-        public ClientHandlerDescriptor VisualTemplate { get; set; }
 
         public override void WriteInitializationScript(TextWriter writer)
         {
@@ -166,11 +162,6 @@ namespace Kendo.Mvc.UI
             }
                 
         //<< Serialization
-
-            if (VisualTemplate.HasValue())
-            {
-                json["visualTemplate"] = VisualTemplate;
-            }
 
             writer.Write(Initializer.Initialize(Selector, "Diagram", json));
 

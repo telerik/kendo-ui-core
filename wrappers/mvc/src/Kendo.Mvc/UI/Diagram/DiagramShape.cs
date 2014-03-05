@@ -21,6 +21,8 @@ namespace Kendo.Mvc.UI
             Stroke = new DiagramShapeStrokeSettings();
                 
         //<< Initialization
+
+            Visual = new ClientHandlerDescriptor();
         }
 
         //>> Fields
@@ -76,6 +78,8 @@ namespace Kendo.Mvc.UI
         public string Content { get; set; }
         
         //<< Fields
+
+        public ClientHandlerDescriptor Visual { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -171,6 +175,11 @@ namespace Kendo.Mvc.UI
             }
             
         //<< Serialization
+
+            if (Visual.HasValue())
+            {
+                json["visual"] = Visual;
+            }
         }
     }
 }
