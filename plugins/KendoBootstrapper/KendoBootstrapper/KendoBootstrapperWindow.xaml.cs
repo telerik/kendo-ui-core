@@ -59,7 +59,7 @@ namespace Company.KendoBootstrapper
         {
             StringBuilder result = new StringBuilder();
 
-            result.AppendFormat("<p id=\"resultsCount\">{0} search results for <strong style=\"color: #2e2e2e;\">{1}</strong>. {2}</p>", documentationItems.Count, selection, documentationItems.Count > 0 ? "Click on the widget that you are using for further details." : "");
+            result.AppendFormat("<p id=\"resultsCount\">{0} search results for <strong style=\"color: #2e2e2e;\">{1}</strong>. {2}</p>", documentationItems.Count, selection, documentationItems.Count > 0 ? "Click on the component that you are using for further details." : "");
 
             if (documentationItems.Count > 0)
             {
@@ -169,7 +169,7 @@ namespace Company.KendoBootstrapper
             result.Append("<h3>" + item["prop"]["name"] + "</h3>");
             result.Append("<div class=\"configWrapper\">" + item["prop"]["short_doc"]);
 
-            if (item["prop"]["args"] != null)
+            if (item["prop"]["args"] != null && item["prop"]["args"].Count() > 0)
             {
                 result.Append("<div class=\"details-list\"><h4 class=\"details-title\">Parameters</h4>");
 

@@ -41,8 +41,8 @@
         <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperCommandsGroup" />
         <Icon guid="guidImages" id="lintIcon" />
         <Strings>
-          <CommandName>Lint Solution</CommandName>
-          <ButtonText>Lint Solution</ButtonText>
+          <CommandName>Analyze Kendo UI code usage</CommandName>
+          <ButtonText>Analyze Kendo UI code usage</ButtonText>
         </Strings>
       </Button>
 
@@ -50,8 +50,8 @@
         <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperCommandsGroup" />
         <Icon guid="guidImages" id="customFileIcon" />
         <Strings>
-          <CommandName>Create Custom Kendo UI File</CommandName>
-          <ButtonText>Create Custom Kendo UI File</ButtonText>
+          <CommandName>Create custom Kendo UI JavaScript file</CommandName>
+          <ButtonText>Create custom Kendo UI JavaScript file</ButtonText>
         </Strings>
       </Button>
 
@@ -59,8 +59,8 @@
         <Parent guid="guidKendoBootstrapperCmdSet" id="IdKendoBootstrapperGroupContext" />
         <Icon guid="guidImages" id="lintIcon" />
         <Strings>
-          <CommandName>Lint selected file/s</CommandName>
-          <ButtonText>Lint selected file/s</ButtonText>
+          <CommandName>Analyze Kendo UI code usage</CommandName>
+          <ButtonText>Analyze Kendo UI code usage</ButtonText>
         </Strings>
       </Button>
 
@@ -69,8 +69,8 @@
         <Icon guid="guidImages" id="docsIcon" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
-          <CommandName>Kendo Lint View Documentation</CommandName>
-          <ButtonText>Kendo Lint View Documentation</ButtonText>
+          <CommandName>View Kendo UI Documentation</CommandName>
+          <ButtonText>View Kendo UI Documentation</ButtonText>
         </Strings>
       </Button>
     </Buttons>
