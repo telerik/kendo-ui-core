@@ -101,7 +101,7 @@
 
     var PathParser = function() {};
 
-    PathParser.fn = PathParser.protoytype = {
+    PathParser.prototype = PathParser.fn = {
         parse: function(str, options) {
             var parser = this,
                 multiPath = new drawing.MultiPath(options),

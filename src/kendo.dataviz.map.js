@@ -6,6 +6,7 @@
         "./dataviz/geometry",
         "./dataviz/drawing/core",
         "./dataviz/drawing/shapes",
+        "./dataviz/drawing/parser",
         "./dataviz/drawing/svg",
         "./dataviz/drawing/vml",
         "./dataviz/map/location",
