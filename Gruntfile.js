@@ -73,8 +73,8 @@ module.exports = function(grunt) {
                         base: 'BrowserStack',
                         browser: 'chrome',
                         browser_version: 'latest',
-                        os: 'OS X',
-                        os_version: 'Mavericks'
+                        os: 'Windows',
+                        os_version: '7'
                     }
                 },
                 reportSlowerThan: 500,
