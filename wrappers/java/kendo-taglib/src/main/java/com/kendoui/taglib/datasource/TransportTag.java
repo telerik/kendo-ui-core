@@ -63,10 +63,6 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("read", value);
     }
 
-    public void setSignalr(com.kendoui.taglib.datasource.TransportSignalrTag value) {
-        setProperty("signalr", value);
-    }
-
     public void setUpdate(com.kendoui.taglib.datasource.TransportUpdateTag value) {
         setProperty("update", value);
     }

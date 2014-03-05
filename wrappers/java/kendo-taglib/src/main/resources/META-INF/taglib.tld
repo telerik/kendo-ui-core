@@ -10097,96 +10097,6 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The configuration used when type is set to "signalr". Configures the SignalR settings - hub, connection promise, server and client hub methods.Live demo available at demos.telerik.com/kendo-ui.It is recommended to familiarize with the SignalR JavaScript API.</description>
-        <name>dataSource-transport-signalr</name>
-        <tag-class>com.kendoui.taglib.datasource.TransportSignalrTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>The SignalR hub object returned by the createHubProxy method. The hub option is mandatory.</description>
-            <name>hub</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
-            <description>The promise returned by the start method of the SignalR connection. The promise option is mandatory.</description>
-            <name>promise</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>Specifies the client-side CRUD methods of the SignalR hub.</description>
-        <name>dataSource-transport-signalr-client</name>
-        <tag-class>com.kendoui.taglib.datasource.TransportSignalrClientTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Specifies the name of the client-side method of the SignalR hub responsible for creating data items.</description>
-            <name>create</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the name of the client-side method of the SignalR hub responsible for destroying data items.</description>
-            <name>destroy</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the name of the client-side method of the SignalR hub responsible for reading data items.</description>
-            <name>read</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the name of the client-side method of the SignalR hub responsible for updating data items.</description>
-            <name>update</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-    </tag>
-
-
-    <tag>
-        <description>Specifies the server-side CRUD methods of the SignalR hub.</description>
-        <name>dataSource-transport-signalr-server</name>
-        <tag-class>com.kendoui.taglib.datasource.TransportSignalrServerTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Specifies the name of the server-side method of the SignalR hub responsible for creating data items.</description>
-            <name>create</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the name of the server-side method of the SignalR hub responsible for destroying data items.</description>
-            <name>destroy</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the name of the server-side method of the SignalR hub responsible for reading data items.</description>
-            <name>read</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the name of the server-side method of the SignalR hub responsible for updating data items.</description>
-            <name>update</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-    </tag>
-
-
-
-    <tag>
         <description>The configuration used when the data source saves updated data items. Those are data items whose fields have been updated.If the value of transport.update is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.update is a string the data source uses this string as the URL of the remote service.</description>
         <name>dataSource-transport-update</name>
         <tag-class>com.kendoui.taglib.datasource.TransportUpdateTag</tag-class>
@@ -11205,10 +11115,16 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <name>diagram-shapeDefaults-connector</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsConnectorTag</tag-class>
 
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
         <attribute>
             <description></description>
             <name>description</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11221,6 +11137,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
     </tag>
 
 
+    <tag>
+        <description></description>
+        <name>diagram-shapeDefaults-connector-position</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsConnectorPositionFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Defines the hover configuration.</description>
         <name>diagram-shapeDefaults-hover</name>
@@ -11388,10 +11310,16 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <name>diagram-shape-connector</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeConnectorTag</tag-class>
 
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
         <attribute>
             <description></description>
             <name>description</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description></description>
+            <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11404,6 +11332,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
     </tag>
 
 
+    <tag>
+        <description></description>
+        <name>diagram-shape-connector-position</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeConnectorPositionFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Defines the hover configuration.</description>
         <name>diagram-shape-hover</name>
@@ -19144,6 +19078,12 @@ tick labels.</description>
         <attribute>
             <description>Selector that determines the container to which boundaries the hint movement will be constrained.</description>
             <name>container</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The cursor that will be shown while user drags sortable item.</description>
+            <name>cursor</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

@@ -17,6 +17,7 @@ module CodeGen::Java
         'map' => ['markers.tooltip.content', 'markerDefaults.tooltip.content',
                   'layers.tooltip.content', 'layerDefaults.marker.tooltip.content'],
         'filteritem' => ['filters'],
+        'transport' => ['signalr'],
         'column' => ['values']
     }
 
