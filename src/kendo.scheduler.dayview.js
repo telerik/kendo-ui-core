@@ -868,7 +868,7 @@ var __meta__ = {
                             }
 
                             return result + "</tr>";
-                        }
+                        };
                     }
                 } else {
                     groupsCount = this._columnCountForLevel(this.columnLevels.length - 2);
