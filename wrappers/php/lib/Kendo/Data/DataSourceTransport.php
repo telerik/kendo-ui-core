@@ -63,15 +63,6 @@ callbacks which will handle push notifications (data pushed from the server).
     }
 
     /**
-    * The configuration used when type is set to "signalr". Configures the SignalR settings - hub, connection promise, server and client hub methods.Live demo available at demos.telerik.com/kendo-ui.It is recommended to familiarize with the SignalR JavaScript API.
-    * @param \Kendo\Data\DataSourceTransportSignalr|array $value
-    * @return \Kendo\Data\DataSourceTransport
-    */
-    public function signalr($value) {
-        return $this->setProperty('signalr', $value);
-    }
-
-    /**
     * The configuration used when the data source saves updated data items. Those are data items whose fields have been updated.If the value of transport.update is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.update is a string the data source uses this string as the URL of the remote service.
     * @param string|\Kendo\JavaScriptFunction|\Kendo\Data\DataSourceTransportUpdate|array $value
     * @return \Kendo\Data\DataSourceTransport

@@ -273,6 +273,8 @@ COMPONENT_PROPERTIES = ERB.new(%{//>> Properties
         end
 
         def component(component)
+            component.delete_ignored
+
             write_php(component)
 
             composite_options(component.composite_options)

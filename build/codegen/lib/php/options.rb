@@ -29,6 +29,16 @@ module CodeGen::PHP
         'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor'
      ]
 
+    IGNORED = {
+        'transport' => ['signalr']
+    }
+
+    def self.ignored?(component, option)
+        ignored = IGNORED[component.downcase]
+
+        ignored && ignored.any? { |ignore| option.start_with?(ignore) }
+    end
+
     module Options
         def php_name
             return "_#{name}" if KEYWORDS.include?(@name)
@@ -60,6 +70,12 @@ module CodeGen::PHP
             end
 
             result
+        end
+
+        def delete_ignored
+           @options.delete_if { |o| CodeGen::PHP.ignored?(@name, o.name) }
+
+           composite_options.each { |o| o.delete_ignored }
         end
     end
 

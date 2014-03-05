@@ -486,6 +486,8 @@ Adds one or more <%= item.php_class %> to the <%= owner.php_class %>.
         end
 
         def component(component)
+            component.delete_ignored
+
             write_markdown(component)
 
             composite_options(component.composite_options)
