@@ -188,7 +188,7 @@
     });
 
     // ------------------------------------------------------------
-    function baseNodeTests(TShape, TNode, name) {
+    function nodeTests(TShape, TNode, name) {
         var shape,
             node,
             container;
@@ -252,7 +252,7 @@
     var groupNode,
         group;
 
-    baseNodeTests(Group, GroupNode, "GroupNode");
+    nodeTests(Group, GroupNode, "GroupNode");
 
     module("GroupNode", {
         setup: function() {
@@ -370,7 +370,7 @@
         pathNode,
         container;
 
-    baseNodeTests(Path, PathNode, "PathNode");
+    nodeTests(Path, PathNode, "PathNode");
 
     module("PathNode", {
         setup: function() {
@@ -629,7 +629,7 @@
     var multiPath,
         multiPathNode;
 
-    baseNodeTests(MultiPath, MultiPathNode, "MultiPathNode");
+    nodeTests(MultiPath, MultiPathNode, "MultiPathNode");
 
     module("MultiPathNode", {
         setup: function() {
@@ -650,7 +650,7 @@
     var circle,
         circleNode;
 
-    baseNodeTests(Circle, CircleNode, "CircleNode");
+    nodeTests(Circle, CircleNode, "CircleNode");
 
     module("CircleNode", {
         setup: function() {
@@ -694,6 +694,8 @@
     var text;
     var textNode;
 
+    baseNodeTests(Text, TextNode, "TextNode");
+
     module("TextNode", {
         setup: function() {
             text = new d.Text("Foo", new Point(10, 20), { font: "arial" });
@@ -733,6 +735,8 @@
     // ------------------------------------------------------------
     var textSpan;
     var textSpanNode;
+
+    baseNodeTests(TextSpan, TextSpanNode, "TextNode");
 
     module("TextSpanNode", {
         setup: function() {
