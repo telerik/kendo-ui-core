@@ -138,17 +138,18 @@
                 //group.append(arc, rectPath(arc.boundingRect(), {stroke: {color: "black", width: 1}}));
                // group.append(circ, rectPath(circ.boundingRect(), {stroke: {color: "black", width: 1}}));
                
-                var path = new Path({stroke: {color: "red", width: 20}});
-                path.moveTo(100, 100);
-                path.curveTo(new Point(150, 150), new Point(200, 150), new Point(300, 100));
-                path.curveTo(new Point(310, 50), new Point(400, 150), new Point(200, 300));
-                path.close();
-                var path2 = new Path({stroke: {color: "black", width: 1}});
-                path2.moveTo(100, 100);
-                path2.curveTo(new Point(150, 150), new Point(200, 150), new Point(300, 100));
-                path2.curveTo(new Point(310, 50), new Point(400, 150), new Point(200, 300));
-                path2.close();
-                group.append(path, rectPath(path.boundingRect(), {stroke: {color: "black", width: 1}}), path2);
+                var path = new Path({stroke: {color: "red", width: 1}});
+                path.moveTo(0, 0);
+                path.curveTo(new Point(-10, -10), new Point(-20, 30), new Point(30, 50));
+                //path.curveTo(new Point(310, 50), new Point(400, 150), new Point(200, 300));
+                // path.close();
+                // var path2 = new Path({stroke: {color: "black", width: 1}});
+                // path2.moveTo(100, 100);
+                // path2.curveTo(new Point(150, 150), new Point(200, 150), new Point(300, 100));
+                // path2.curveTo(new Point(310, 50), new Point(400, 150), new Point(200, 300));
+                // path2.close();
+                debugger;
+                group.append(path, rectPath(path.boundingRect(), {stroke: {color: "black", width: 1}}));//, path2);
                 surface.draw(group);
             }
         </script>

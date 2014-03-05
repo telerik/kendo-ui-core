@@ -255,10 +255,12 @@
 
         init: function(center, options) {
             var arc = this;
+
             arc.center = center;
             arc.observer = null;
             arc.center.observer = arc;
 
+            options = options || {};
             arc.radiusX = options.radiusX;
             arc.radiusY = options.radiusY || options.radiusX;
             arc.startAngle = options.startAngle;

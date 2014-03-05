@@ -311,6 +311,8 @@
                 var last = dataviz.last(this.segments);
                     segment = new Segment(point, controlIn);
 
+                segment.observer = this;
+
                 last.controlOut = controlOut;
                 controlOut.observer = last;
 
@@ -330,20 +332,20 @@
         boundingRect: function() {
             var segments = this.segments,
                 length = segments.length,
-                boundingRect = new Rect(Point.maxPoint(), Point.minPoint()),
                 strokeWidth = this.options.get("stroke.width"),
+                boundingRect,
                 i;
 
             if (length === 1) {
                 boundingRect = new Rect(segments[0].anchor.clone(), segments[0].anchor.clone());
             } else if (length > 0) {
+                boundingRect = new Rect(Point.maxPoint(), Point.minPoint())
                 for (i = 1; i < length; i++) {
                     boundingRect = boundingRect.wrap(segments[i - 1].boundingRectTo(segments[i]));
                 }
-            }
-
-            if (strokeWidth) {
-                expandRect(boundingRect, strokeWidth / 2);
+                if (strokeWidth) {
+                    expandRect(boundingRect, strokeWidth / 2);
+                }
             }
 
             return boundingRect;

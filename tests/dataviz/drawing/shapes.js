@@ -11,7 +11,9 @@
         Text = d.Text,
         Circle = d.Circle,
         MultiPath = d.MultiPath,
-        Path = d.Path;
+        Path = d.Path,
+        Arc = d.Arc,
+        TOLERANCE = 0.1;
 
     // ------------------------------------------------------------
     var group;
@@ -247,7 +249,71 @@
         equal(boundingRect.p1.x, 152.5);
         equal(boundingRect.p1.y, 152.5);
     });
+    
+    // ------------------------------------------------------------
+    var arcGeometry,
+        arc;
 
+    module("Arc", {
+        setup: function() {
+            arcGeometry = new g.Arc(new Point(100, 100), {
+                startAngle: 0,
+                endAngle: 180,
+                radiusX: 50,
+                radiusY: 100
+            });
+            
+            arc = new Arc(arcGeometry);
+        }
+    });
+    
+    test("sets initial geometry", function() {
+        deepEqual(arc.geometry, arcGeometry);
+    });
+
+    test("sets initial options", function() {
+        var arc = new Arc(arcGeometry, { foo: true });
+
+        ok(arc.options.foo);
+    });
+
+    test("changing the center triggers geometryChange", function() {
+        arc.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        arc.geometry.center.set("x", 5);
+    });
+    
+    test("changing a geometry field triggers geometryChange", 2, function() {
+        arc.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+       
+        arc.geometry.set("radiusX", 100);
+        arc.geometry.set("counterClockwise", true);
+    });
+
+    test("boundingRect returns geometry bounding rect with half stroke width added", function() {
+        var boundingRect,
+            geometry = new g.Arc(new Point());
+
+        geometry.boundingRect = function() {
+            return new g.Rect(new Point(50, 50), new Point(150, 150));
+        };
+        arc = new Arc(geometry, {stroke: {width: 5}});
+        boundingRect = arc.boundingRect();
+
+        equal(boundingRect.p0.x, 47.5);
+        equal(boundingRect.p0.y, 47.5);
+        equal(boundingRect.p1.x, 152.5);
+        equal(boundingRect.p1.y, 152.5);
+    });    
+    
     // ------------------------------------------------------------
     var segment;
 
@@ -295,6 +361,26 @@
         segment.controlOut.set("x", 5);
     });
 
+    test("boundingRectTo returns the line bounding rect to the passed segment if all control points are not specified", function() {
+        var other = new Segment(Point.create(100, 100)),
+            boundingRect = segment.boundingRectTo(other);
+
+        equal(boundingRect.p0.x, 0);
+        equal(boundingRect.p0.y, 0);
+        equal(boundingRect.p1.x, 100);
+        equal(boundingRect.p1.y, 100);
+    });
+
+    test("boundingRectTo returns the curve bounding rect to the passed segment if all control points are specified", function() {
+        var other = new Segment(Point.create(30, 50), Point.create(-20, 30)),
+            boundingRect = segment.boundingRectTo(other);
+
+        close(boundingRect.p0.x, -8.2, TOLERANCE);
+        close(boundingRect.p0.y, -1.6, TOLERANCE);
+        close(boundingRect.p1.x, 30, TOLERANCE);
+        close(boundingRect.p1.y, 50, TOLERANCE);
+    });
+
     // ------------------------------------------------------------
     var path;
 
@@ -328,6 +414,44 @@
 
     test("lineTo returns path", function() {
         deepEqual(path.lineTo(0, 0), path);
+    });
+
+    test("curveTo does nothing if move segment has not been set", function() {
+        path.curveTo(Point.create(10, 10), Point.create(40, 20), Point.create(30,30));
+
+        equal(path.segments.length, 0);
+    });
+
+    test("curveTo adds segment", function() {
+        path.moveTo(0, 0);
+        path.curveTo(Point.create(10, 10), Point.create(40, 20), Point.create(30,30));
+
+        equal(path.segments.length, 2);
+    });
+
+    test("curveTo sets control points", function() {
+        var controlOut = Point.create(10, 10),
+            controlIn = Point.create(40, 20);
+        path.moveTo(0, 0);
+        path.curveTo(controlOut, controlIn, Point.create(30,30));
+
+        deepEqual(path.segments[0].controlOut, controlOut);
+        deepEqual(path.segments[1].controlIn, controlIn);
+    });
+
+    test("changing the control points triggers geometryChange", 2, function() {
+        var controlOut = Point.create(10, 10),
+            controlIn = Point.create(40, 20);
+        path.moveTo(0, 0);
+        path.curveTo(controlOut, controlIn, Point.create(30,30));
+        path.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        controlOut.set("x", 20);
+        controlIn.set("y", 30);
     });
 
     test("sets initial options", function() {
@@ -373,6 +497,42 @@
 
     test("close returns path", function() {
         deepEqual(path.close(), path);
+    });
+
+    test("boundingRect returns undefined if there are no segments", function() {
+        var boundingRect = path.boundingRect();
+        ok(boundingRect === undefined);
+    });
+
+    test("boundingRect returns a bounding rectangle with both points equal to the segment anchor if there is a single segment", function() {
+        path.moveTo(10, 10);
+        var boundingRect = path.boundingRect();
+        equal(boundingRect.p0.x, 10);
+        equal(boundingRect.p0.y, 10);
+        equal(boundingRect.p1.x, 10);
+        equal(boundingRect.p1.y, 10);
+    });
+
+    test("boundingRect returns the bounding rect between the segments", function() {
+        path.moveTo(0, 0);
+        path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
+        path.lineTo(20, 70);
+        var boundingRect = path.boundingRect();
+        close(boundingRect.p0.x, -8.2, TOLERANCE);
+        close(boundingRect.p0.y, -1.6, TOLERANCE);
+        close(boundingRect.p1.x, 30, TOLERANCE);
+        close(boundingRect.p1.y, 70, TOLERANCE);
+    });
+
+    test("boundingRect returns the bounding rect between the segments with stroke added", function() {
+        path.moveTo(0, 0);
+        path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
+        path.stroke("black", 5);
+        var boundingRect = path.boundingRect();
+        close(boundingRect.p0.x, -10.7, TOLERANCE);
+        close(boundingRect.p0.y, -4.1, TOLERANCE);
+        close(boundingRect.p1.x, 32.5, TOLERANCE);
+        close(boundingRect.p1.y, 52.5, TOLERANCE);
     });
 
     // ------------------------------------------------------------
@@ -427,6 +587,39 @@
         deepEqual(multiPath.moveTo(0, 0).lineTo(0, 0), multiPath);
     });
 
+    test("curveTo does nothing if there are no paths", function() {
+        multiPath.curveTo(Point.create(10, 10), Point.create(40, 20), Point.create(30,30));
+
+        equal(multiPath.paths.length, 0);
+    });
+
+    test("curveTo adds curve to the last path", function() {
+        multiPath.moveTo(-10, -10);
+        multiPath.moveTo(0, 0);
+        multiPath.curveTo(Point.create(10, 10), Point.create(40, 20), Point.create(30,30));
+
+        equal(multiPath.paths[1].segments.length, 2);
+    });
+    
+    test("curveTo returns multiPath", function() {
+        deepEqual(multiPath.moveTo(0, 0).curveTo(new Point(), new Point(), new Point()), multiPath);
+    });    
+
+    test("changing the control points triggers geometryChange", 2, function() {
+        var controlOut = Point.create(10, 10),
+            controlIn = Point.create(40, 20);
+        multiPath.moveTo(0, 0);
+        multiPath.curveTo(controlOut, controlIn, Point.create(30,30));
+        multiPath.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        controlOut.set("x", 20);
+        controlIn.set("y", 30);
+    });
+
     test("close closes last path", function() {
         multiPath.moveTo(0, 0).close();
         ok(multiPath.paths[0].options.closed);
@@ -440,4 +633,21 @@
     test("close returns multiPath", function() {
         deepEqual(multiPath.moveTo(0, 0).close(), multiPath);
     });
+
+    test("boundingRect returns undefined if there are no paths", function() {
+        var boundingRect = multiPath.boundingRect();
+        ok(boundingRect === undefined);
+    });
+
+    test("boundingRect returns the bounding rect for the paths", function() {
+        multiPath.moveTo(0, 0);
+        multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
+        multiPath.moveTo(20, 70);
+        var boundingRect = multiPath.boundingRect();
+        close(boundingRect.p0.x, -8.2, TOLERANCE);
+        close(boundingRect.p0.y, -1.6, TOLERANCE);
+        close(boundingRect.p1.x, 30, TOLERANCE);
+        close(boundingRect.p1.y, 70, TOLERANCE);
+    });
+
 })();
