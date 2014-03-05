@@ -11285,6 +11285,13 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>A function returning a visual element to render for this shape.
+See visual.</description>
+            <name>visual</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Defines the width of the shape when added to the diagram.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11405,6 +11412,13 @@ A diagram can have in general disconnected pieces, known as components, which ca
 
 
 
+    <tag>
+        <description>A function returning a visual element to render for this shape.
+See visual.</description>
+        <name>diagram-shape-visual</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeVisualFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>Fired when an item is added or removed to/from the diagram.</description>

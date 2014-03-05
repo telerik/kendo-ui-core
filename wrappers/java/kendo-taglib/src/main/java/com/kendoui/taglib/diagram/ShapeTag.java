@@ -67,6 +67,10 @@ public class ShapeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("stroke", value);
     }
 
+    public void setVisual(ShapeVisualFunctionTag value) {
+        setEvent("visual", value.getBody());
+    }
+
     public java.lang.String getBackground() {
         return (java.lang.String)getProperty("background");
     }
@@ -145,6 +149,18 @@ public class ShapeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setType(java.lang.String value) {
         setProperty("type", value);
+    }
+
+    public String getVisual() {
+        Function property = ((Function)getProperty("visual"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setVisual(String value) {
+        setProperty("visual", new Function(value));
     }
 
     public float getWidth() {
