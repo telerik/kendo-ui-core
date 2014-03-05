@@ -25,6 +25,7 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
 
             that.container = container;
+            that.captureEvents = false;
 
             that._attachCapture();
 
@@ -46,15 +47,16 @@ var __meta__ = {
                 return;
             }
 
+            that.captureEvents = true;
             that._loading = setTimeout(function() {
                 that.element.show();
             }, that.options.timeout);
         },
 
         hide: function() {
-            var that = this;
-            clearTimeout(that._loading);
-            that.element.hide();
+            this.captureEvents = false;
+            clearTimeout(this._loading);
+            this.element.hide();
         },
 
         changeMessage: function(message) {
@@ -63,21 +65,21 @@ var __meta__ = {
         },
 
         transition: function() {
-            this.transitioning = true;
-            this.container.css("pointer-events", "none");
+            this.captureEvents = true;
+                this.container.css("pointer-events", "none");
         },
 
         transitionDone: function() {
-            this.transitioning = false;
+            this.captureEvents = false;
             this.container.css("pointer-events", "");
         },
 
         _attachCapture: function() {
             var that = this;
-            that.transitioning = false;
+            that.captureEvents = false;
 
             function capture(e) {
-                if (that.transitioning) {
+                if (that.captureEvents) {
                     e.preventDefault();
                 }
             }
