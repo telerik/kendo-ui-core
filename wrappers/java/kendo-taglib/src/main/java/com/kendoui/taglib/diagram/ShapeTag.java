@@ -9,6 +9,8 @@ import com.kendoui.taglib.BaseTag;
 
 
 
+import com.kendoui.taglib.json.Function;
+
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
