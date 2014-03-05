@@ -335,6 +335,10 @@
     <Content Include="node\node_modules\kendo-lint\lib\kendo-config.json">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="EULA.rtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>

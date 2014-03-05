@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Windows.Navigation;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace Company.KendoBootstrapper
 {
@@ -34,10 +35,10 @@ namespace Company.KendoBootstrapper
             this.documentationItems = JArray.Parse(output);
             this.selection = sel;
 
-            documentationBrowser.NavigateToString(BuildHtmlPage(BuildResultsList(), BuildResultsListCssStyles()));
+            documentationBrowser.NavigateToString(BuildHtmlPage(BuildResultsList(), BuildResultsListCssStyles(), false));
         }
 
-        private string BuildHtmlPage(StringBuilder content, StringBuilder styles)
+        private string BuildHtmlPage(StringBuilder content, StringBuilder styles, bool shouldPrettify)
         {
             StringBuilder page = new StringBuilder();
 
@@ -46,6 +47,11 @@ namespace Company.KendoBootstrapper
             if (styles != null && styles.Length > 0)
             {
                 page.Append("<style>" + styles.ToString() + "</style>");
+            }
+
+            if (shouldPrettify)
+            {
+                page.Append("<script src=\"https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js\"></script>");
             }
 
             page.Append("</head><body>");
@@ -149,7 +155,7 @@ namespace Company.KendoBootstrapper
 
             
             result.Append("<h3>" + propertyName + "<code>" + String.Join("|", propertyType) + "</code></h3>");
-            result.Append("<div class=\"configWrapper\">" + propertyDocs + "</div>");
+            result.Append("<div class=\"configWrapper\">" + PretifyExample(propertyDocs) + "</div>");
 
             if (subProperties != null)
             {
@@ -188,13 +194,18 @@ namespace Company.KendoBootstrapper
             {
                 foreach (var example in item["prop"]["examples"])
                 {
-                    result.Append(example);
+                    result.Append(PretifyExample(example));
                 }
             }
             
             result.Append("</div>");
 
             return result;
+        }
+
+        private string PretifyExample(JToken example)
+        {
+            return Regex.Replace(example.ToString(), "<pre>", "<pre class=\"prettyprint\">");
         }
 
         private void onBrowserNavigate(object sender, NavigatingCancelEventArgs e)
@@ -226,7 +237,7 @@ namespace Company.KendoBootstrapper
                     {
                         if (item["widget"].ToString() == currentWidget)
                         {
-                            documentationBrowser.NavigateToString(BuildHtmlPage(BuildDetailsPage(item), BuildDetailsPageCssStyles()));
+                            documentationBrowser.NavigateToString(BuildHtmlPage(BuildDetailsPage(item), BuildDetailsPageCssStyles(), true));
                         }
                     }
                 }
