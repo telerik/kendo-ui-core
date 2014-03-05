@@ -73,6 +73,7 @@ require_once '../../include/header.php';
 
     $sortable = new \Kendo\UI\Sortable('#listView');
     $sortable->filter('>div.product')
+        ->cursor('move')
         ->hint(new \Kendo\JavaScriptFunction('hint'))
         ->placeholder(new \Kendo\JavaScriptFunction('placeholder'))
         ->change('onChange');
@@ -121,6 +122,7 @@ require_once '../../include/header.php';
         height: 170px;
         margin: 0;
         padding: 0;
+        cursor: move;
     }
     .product img {
         width: 110px;

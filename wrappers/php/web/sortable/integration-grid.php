@@ -79,6 +79,7 @@ $sortable = new \Kendo\UI\Sortable('#grid table'); // select the container for t
 $sortable->hint(new \Kendo\JavaScriptFunction('hint'))
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'))
     ->filter('>tbody >tr')
+    ->cursor('move')
     ->container('#grid tbody')
     ->change('onChange');
 
@@ -104,5 +105,11 @@ echo $sortable->render();
             grid.dataSource.insert(newIndex, dataItem);
         }
     </script>
-        
+
+    <style>
+        .k-grid tbody tr {
+            cursor: move;
+        }
+    </style>
+
 <?php require_once '../../include/footer.php'; ?>

@@ -6,6 +6,7 @@ require_once '../../include/header.php';
 $sortableSidebar = new \Kendo\UI\Sortable('#sidebar'); // select the container for the Sortable
 $sortableSidebar->filter('>div')
     ->connectWith('#main-content')
+    ->cursor('move')
     ->hint(new \Kendo\JavaScriptFunction('hint'))
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
 
@@ -13,6 +14,7 @@ echo $sortableSidebar->render();
 
 $sortableMain = new \Kendo\UI\Sortable('#main-content'); // select the container for the Sortable
 $sortableMain->connectWith('#sidebar')
+    ->cursor('move')
     ->hint(new \Kendo\JavaScriptFunction('hint'))
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
 
@@ -164,6 +166,7 @@ echo $sortableMain->render();
             background-color: #ffffff;
             border: 1px solid #e7e7e7;
             border-radius: 3px;
+            cursor: move;
         }
         .widget:hover {
             background-color: #fcfcfc;

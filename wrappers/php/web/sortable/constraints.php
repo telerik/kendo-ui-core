@@ -6,6 +6,7 @@ require_once '../../include/header.php';
 $sortable = new \Kendo\UI\Sortable('#sortable-horizontal'); // select the container for the Sortable
 $sortable->axis('x')
     ->container('#sortable-horizontal')
+    ->cursor('move')
     ->placeholder('<div class="placeholder">Drop Here!</div>')
     ->hint(new \Kendo\JavaScriptFunction('hint'));
 
@@ -52,7 +53,8 @@ echo $sortable->render();
         #sortable-horizontal img {
             width: 155px;
             margin: 10px;
-            vertical-align: middle
+            vertical-align: middle;
+            cursor: move;
         }
 
         .placeholder {

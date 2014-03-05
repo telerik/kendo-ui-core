@@ -7,6 +7,7 @@ $sortableLeft = new \Kendo\UI\Sortable('#sortable-left'); // select the containe
 $sortableLeft->connectWith('#sortable-right')
     ->hint(new \Kendo\JavaScriptFunction('hint'))
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'))
+    ->cursor('url(\'../../content/web/sortable/grabbing.cur\'), default')
     ->start('onStart')
     ->move('onMove')
     ->end('onEnd')
@@ -19,6 +20,7 @@ $sortableRight = new \Kendo\UI\Sortable('#sortable-right'); // select the contai
 $sortableRight->connectWith('#sortable-left')
     ->hint(new \Kendo\JavaScriptFunction('hint'))
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'))
+    ->cursor('url(\'../../content/web/sortable/grabbing.cur\'), default')
     ->start('onStart')
     ->move('onMove')
     ->end('onEnd')
@@ -136,9 +138,7 @@ echo $sortableRight->render();
             color: #ffffff;
             border: 1px solid transparent;
             border-radius: 4px;
-            cursor: -webkit-grab;
-            cursor: -moz-grab;
-            cursor: url(https://mail.google.com/mail/images/2/openhand.cur) 8, 8, move;
+            cursor: url('../../content/web/sortable/grab.cur'), default;
         }
 
         .list-left {

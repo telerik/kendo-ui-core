@@ -11,6 +11,7 @@ $cursorOffset->left(-230)
 
 $sortable->hint(new \Kendo\JavaScriptFunction('hint'))
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'))
+    ->cursor('url(\'../../content/web/sortable/grabbing.cur\'), default')
     ->cursorOffset($cursorOffset);
 
 echo $sortable->render();
@@ -82,6 +83,7 @@ echo $sortable->render();
             margin: 0;
             color: #666;
             font-size: 1.2em;
+            cursor: url('../../content/web/sortable/grab.cur'), default;
         }
 
         li.sortable:last-child {

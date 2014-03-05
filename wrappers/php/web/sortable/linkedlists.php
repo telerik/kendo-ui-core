@@ -5,23 +5,27 @@ require_once '../../include/header.php';
 
 $sortableListA = new \Kendo\UI\Sortable('#sortable-listA'); // select the container for the Sortable
 $sortableListA->connectWith('#sortable-listB')
+    ->cursor('url(\'../../content/web/sortable/grabbing.cur\'), default')
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
 
 echo $sortableListA->render();
 
 $sortableListB = new \Kendo\UI\Sortable('#sortable-listB'); // select the container for the Sortable
-$sortableListB->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
+$sortableListB->cursor('url(\'../../content/web/sortable/grabbing.cur\'), default')
+    ->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
 
 echo $sortableListB->render();
 
 $sortableListC = new \Kendo\UI\Sortable('#sortable-listC'); // select the container for the Sortable
 $sortableListC->connectWith('#sortable-listD')
+    ->cursor('url(\'../../content/web/sortable/grabbing.cur\'), default')
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
 
 echo $sortableListC->render();
 
 $sortableListD = new \Kendo\UI\Sortable('#sortable-listD'); // select the container for the Sortable
 $sortableListD->connectWith('#sortable-listC')
+    ->cursor('url(\'../../content/web/sortable/grabbing.cur\'), default')
     ->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
 
 echo $sortableListD->render();
@@ -112,6 +116,7 @@ echo $sortableListD->render();
             background-color: #222222;
             color: #ffffff;
             border-radius: 3px;
+            cursor: url('../../content/web/sortable/grab.cur'), default;
         }
 
         #sortable-listA .list-item {
