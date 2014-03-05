@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Deploys the scratchpad to the staging server.</description>
+  <description>Deploys the dojo to the remote staging server.</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>1</daysToKeep>
     <numToKeep>1</numToKeep>
@@ -14,7 +14,7 @@
       <projectUrl>https://github.com/telerik/tryKendo/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.0">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.0.3">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -23,7 +23,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>master</name>
+        <name>stable</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -32,10 +32,10 @@
     </browser>
     <submoduleCfg class="list"/>
     <extensions>
-        <hudson.plugins.git.extensions.impl.SubmoduleOption>
-            <disableSubmodules>false</disableSubmodules>
-            <recursiveSubmodules>true</recursiveSubmodules>
-        </hudson.plugins.git.extensions.impl.SubmoduleOption>
+      <hudson.plugins.git.extensions.impl.SubmoduleOption>
+        <disableSubmodules>false</disableSubmodules>
+        <recursiveSubmodules>true</recursiveSubmodules>
+      </hudson.plugins.git.extensions.impl.SubmoduleOption>
     </extensions>
   </scm>
   <assignedNode>master</assignedNode>
@@ -47,7 +47,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install --production &amp;&amp; xvfb-run -a node_modules/.bin/grunt deploy:local:staging</command>
+      <command>npm install &amp;&amp; xvfb-run -a node_modules/.bin/grunt deploy:remote:staging</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

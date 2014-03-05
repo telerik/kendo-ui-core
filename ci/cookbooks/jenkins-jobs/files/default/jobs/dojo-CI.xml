@@ -14,7 +14,7 @@
       <projectUrl>https://github.com/telerik/tryKendo/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.0">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.0.3">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -32,10 +32,10 @@
     </browser>
     <submoduleCfg class="list"/>
     <extensions>
-        <hudson.plugins.git.extensions.impl.SubmoduleOption>
-            <disableSubmodules>false</disableSubmodules>
-            <recursiveSubmodules>true</recursiveSubmodules>
-        </hudson.plugins.git.extensions.impl.SubmoduleOption>
+      <hudson.plugins.git.extensions.impl.SubmoduleOption>
+        <disableSubmodules>false</disableSubmodules>
+        <recursiveSubmodules>true</recursiveSubmodules>
+      </hudson.plugins.git.extensions.impl.SubmoduleOption>
     </extensions>
   </scm>
   <canRoam>true</canRoam>
@@ -52,13 +52,16 @@
     <hudson.tasks.Shell>
       <command>npm install &amp;&amp; xvfb-run -a node_modules/.bin/grunt ci</command>
     </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>git push --force origin HEAD:stable</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.BuildTrigger>
-      <childProjects>scratchpad-staging</childProjects>
+      <childProjects>dojo-staging</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
