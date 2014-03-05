@@ -138,8 +138,10 @@
     <Compile Include="UI\Chart\Serialization\ChartFunnelSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ScatterErrorBarsSerializerTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxSerializationTests.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeBuilderTests.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsSettingsTests.cs" />
     <Compile Include="UI\Diagram\DiagramTestHelper.cs" />
+    <Compile Include="UI\Diagram\Serialization\DiagramShapeTests.cs" />
     <Compile Include="UI\Diagram\Serialization\DiagramShapeDefaultsSettingsTests.cs" />
     <Compile Include="UI\DataSource\CrudOperationTests.cs" />
     <Compile Include="UI\DataSource\CustomCrudOperationBuilderTests.cs" />

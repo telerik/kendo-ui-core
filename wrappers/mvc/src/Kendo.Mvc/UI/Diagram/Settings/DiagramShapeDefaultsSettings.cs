@@ -19,8 +19,8 @@ namespace Kendo.Mvc.UI
             Rotation = new DiagramShapeDefaultsRotationSettings();
                 
             Stroke = new DiagramShapeDefaultsStrokeSettings();
-
-            //<< Initialization
+                
+        //<< Initialization
 
             Visual = new ClientHandlerDescriptor();
         }
@@ -76,7 +76,7 @@ namespace Kendo.Mvc.UI
         }
         
         public string Content { get; set; }
-
+        
         //<< Fields
 
         public ClientHandlerDescriptor Visual { get; set; }
@@ -173,8 +173,8 @@ namespace Kendo.Mvc.UI
             {
                 json["content"] = Content;
             }
-
-            //<< Serialization
+            
+        //<< Serialization
 
             if (Visual.HasValue())
             {

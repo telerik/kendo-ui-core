@@ -71,6 +71,7 @@ module CodeGen::MVC::Wrappers
         'scrollview.datasource',
         'drawer.views',
 		'diagram.shapedefaults.visual',
+		'diagram.shapes.visual',
 		'diagram.datasource'
     ]
 
