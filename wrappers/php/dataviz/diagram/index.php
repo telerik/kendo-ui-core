@@ -86,7 +86,8 @@ $layout = new \Kendo\Dataviz\UI\DiagramLayout();
 $layout->type('layered');
 
 $shape_defaults = new \Kendo\Dataviz\UI\DiagramShapeDefaults();
-$shape_defaults->editable(false)
+$shape_defaults->visual(new \Kendo\JavaScriptFunction('visualTemplate'))
+               ->editable(false)
                ->rotatable(false)
                ->resizable(false);
 
@@ -100,7 +101,6 @@ $connection_defaults->stroke($stroke);
 $diagram = new \Kendo\Dataviz\UI\Diagram('diagram');
 $diagram->dataSource($dataSource)
         ->layout($layout)
-        ->visualTemplate(new \Kendo\JavaScriptFunction('visualTemplate'))
         ->shapeDefaults($shape_defaults)
         ->connectionDefaults($connection_defaults);
 

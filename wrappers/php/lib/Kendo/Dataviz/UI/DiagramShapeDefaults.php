@@ -158,6 +158,20 @@ class DiagramShapeDefaults extends \Kendo\SerializableObject {
         return $this->setProperty('content', $value);
     }
 
+    /**
+    * Sets the visual option of the DiagramShapeDefaults.
+    * A function returning a visual element to render for a given shape. The following primitives can be used to construct a composite visual:
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\DiagramShapeDefaults
+    */
+    public function visual($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('visual', $value);
+    }
+
 //<< Properties
 }
 
