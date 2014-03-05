@@ -99,7 +99,7 @@ namespace Company.KendoBootstrapper
         {
             StringBuilder result = new StringBuilder();
 
-            result.Append("<div class=\"bodyText\">");
+            result.Append("<div class=\"bodyText\"><h1>" + item["widget"] + "</h1>");
 
             string itemType = item["type"].ToString();
 
@@ -128,6 +128,7 @@ namespace Company.KendoBootstrapper
             StringBuilder cssStyles = new StringBuilder();
 
             cssStyles.Append(".bodyText { font-family: Arial, Helvetica, sans-serif; font-size: 13px; line-height: 1.33em; color: #656565; }");
+            cssStyles.Append(".bodyText h1 { font-size: 35px; line-height: 1.2em; padding: 0; margin: 0; word-wrap: break-word; width: 100%; color: #444; font-weight: normal; }");
             cssStyles.Append(".bodyText h3 { font-size: 16px; font-weight: bold; color: #2e2e2e; padding: 15px 0 0 0; margin: 25px 0 0 0; word-wrap: break-word; border-top: 1px dotted #bbb; line-height: 1em; }");
             cssStyles.Append(".bodyText h3 code { color: #e15613; padding: 0 5px; font-family: monospace; }");
             cssStyles.Append(".bodyText .configWrapper > p { padding-top: 5px; padding-bottom: 5px; margin-top: 0; margin-bottom: 0; }");
