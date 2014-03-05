@@ -10659,12 +10659,6 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>A function returning a visual element to render for a given dataSource item. The following primitives can be used to construct a composite visual:</description>
-            <name>visualTemplate</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
             <description>The scaling factor or the zoom when using the mouse-wheel to zoom in or out.
 If zoomRate is less than 1, zooming will be reversed.</description>
             <name>zoomRate</name>
@@ -11083,6 +11077,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>A function returning a visual element to render for a given shape. The following primitives can be used to construct a composite visual:</description>
+            <name>visual</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Defines the width of the shape when added to the diagram.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11204,6 +11204,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
 
 
 
+    <tag>
+        <description>A function returning a visual element to render for a given shape. The following primitives can be used to construct a composite visual:</description>
+        <name>diagram-shapeDefaults-visual</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsVisualFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>Defines the shape options.</description>
