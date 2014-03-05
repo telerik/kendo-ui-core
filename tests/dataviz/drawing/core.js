@@ -168,4 +168,16 @@
     test("get returns nested field", function() {
         equal(options.get("foo.baz"), true);
     });
+
+    test("toJSON returns configuration options as plain object without prefix and observer", function() {
+        var expected = {
+            foo: {
+                bar: { },
+                baz: true
+            },
+            bar: true
+        };
+
+        deepEqual(options.toJSON(), expected);
+    });
 })();
