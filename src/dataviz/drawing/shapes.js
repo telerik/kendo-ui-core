@@ -250,6 +250,8 @@
             Group.fn.append.call(this, tspan);
         },
 
+        // TODO: Bounding box
+
         geometryChange: util.mixins.geometryChange,
         fill: shapeMixin.fill,
         stroke: shapeMixin.stroke
