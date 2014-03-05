@@ -17,9 +17,11 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Position { get; set; }
+        public string Name { get; set; }
         
         public string Description { get; set; }
+        
+        public string Position { get; set; }
         
         //<< Fields
 
@@ -27,14 +29,19 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Position.HasValue())
+            if (Name.HasValue())
             {
-                json["position"] = Position;
+                json["name"] = Name;
             }
             
             if (Description.HasValue())
             {
                 json["description"] = Description;
+            }
+            
+            if (Position.HasValue())
+            {
+                json["position"] = Position;
             }
             
         //<< Serialization

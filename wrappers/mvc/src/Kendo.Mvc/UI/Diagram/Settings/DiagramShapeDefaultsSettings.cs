@@ -74,8 +74,10 @@ namespace Kendo.Mvc.UI
         }
         
         public string Content { get; set; }
-        
+
         //<< Fields
+
+        public ClientHandlerDescriptor Visual { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -169,8 +171,13 @@ namespace Kendo.Mvc.UI
             {
                 json["content"] = Content;
             }
-            
-        //<< Serialization
+
+            //<< Serialization
+
+            if (VisualTemplate.HasValue())
+            {
+                json["visualTemplate"] = VisualTemplate;
+            }
         }
     }
 }

@@ -70,7 +70,7 @@ module CodeGen::MVC::Wrappers
         'scrollview.bouncevelocitythreshold',
         'scrollview.datasource',
         'drawer.views',
-		'diagram.visualtemplate',
+		'diagram.shapedefaults.visual',
 		'diagram.datasource'
     ]
 

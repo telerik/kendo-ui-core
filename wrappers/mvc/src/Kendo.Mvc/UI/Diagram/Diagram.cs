@@ -88,8 +88,6 @@ namespace Kendo.Mvc.UI
         
         //<< Fields
 
-        public ClientHandlerDescriptor VisualTemplate { get; set; }
-
         public override void WriteInitializationScript(TextWriter writer)
         {
             var json = new Dictionary<string, object>(Events);
@@ -166,11 +164,6 @@ namespace Kendo.Mvc.UI
             }
                 
         //<< Serialization
-
-            if (VisualTemplate.HasValue())
-            {
-                json["visualTemplate"] = VisualTemplate;
-            }
 
             writer.Write(Initializer.Initialize(Selector, "Diagram", json));
 
