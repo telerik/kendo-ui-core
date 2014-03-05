@@ -1533,11 +1533,20 @@
         var model = scheduler.dataSource.data()[1];
         scheduler.editEvent(model.uid);
 
-        start.setHours(start.getHours() - 2);
-        model.set("start", start);
 
+        start.setHours(start.getHours() - 2);
         end.setHours(end.getHours() - 2);
-        model.set("end", end);
+
+        var datepickers = $(".k-window .k-edit-form-container").find("[data-role=datetimepicker]");
+
+        var startPicker = datepickers.eq(0).data("kendoDateTimePicker");
+        var endPicker = datepickers.eq(1).data("kendoDateTimePicker");
+
+        endPicker.value(end);
+        endPicker.trigger("change");
+
+        startPicker.value(start);
+        startPicker.trigger("change");
 
         scheduler.saveEvent();
 
