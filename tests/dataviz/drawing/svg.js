@@ -10,6 +10,8 @@
         Group = d.Group,
         MultiPath = d.MultiPath,
         Path = d.Path,
+        Text = d.Text,
+        TextSpan = d.TextSpan,
 
         svg = d.svg,
         Node = svg.Node,
@@ -18,7 +20,9 @@
         GroupNode = svg.GroupNode,
         PathNode = svg.PathNode,
         MultiPathNode = svg.MultiPathNode,
-        Surface = svg.Surface;
+        Surface = svg.Surface,
+        TextNode = svg.TextNode,
+        TextSpanNode = svg.TextSpanNode;
 
     // ------------------------------------------------------------
     var container,
@@ -184,6 +188,55 @@
     });
 
     // ------------------------------------------------------------
+    function baseNodeTests(TShape, TNode, name) {
+        var shape,
+            node,
+            container;
+
+        module("Base Node tests / " + name, {
+            setup: function() {
+                container = document.createElement("div");
+
+                shape = new TShape();
+                node = new TNode(shape);
+                node.attachTo(container);
+            }
+        });
+
+        test("renders visibility attribute", function() {
+            shape.visible(false);
+            ok(node.render().indexOf("visibility='hidden'") !== -1);
+        });
+
+        test("does not render visibility if not set", function() {
+            ok(node.render().indexOf("visibility") === -1);
+        });
+
+        test("does not render visibility if set to true", function() {
+            shape.visible(true);
+            ok(node.render().indexOf("visibility") === -1);
+        });
+
+        test("optionsChange sets visibility to hidden", function() {
+            node.attr = function(name, value) {
+                equal(name, "visibility");
+                equal(value, "hidden");
+            };
+
+            shape.visible(false);
+        });
+
+        test("optionsChange sets visibility to visible", function() {
+            node.attr = function(name, value) {
+                equal(name, "visibility");
+                equal(value, "visible");
+            };
+
+            shape.visible(true);
+        });
+    }
+
+    // ------------------------------------------------------------
     module("RootNode");
 
     test("attachTo directly sets element", function() {
@@ -195,8 +248,11 @@
     });
 
     // ------------------------------------------------------------
+    var group;
     var groupNode,
         group;
+
+    baseNodeTests(Group, GroupNode, "GroupNode");
 
     module("GroupNode", {
         setup: function() {
@@ -313,6 +369,8 @@
     var path,
         pathNode,
         container;
+
+    baseNodeTests(Path, PathNode, "PathNode");
 
     module("PathNode", {
         setup: function() {
@@ -451,20 +509,6 @@
         ok(pathNode.render().indexOf("style") === -1);
     });
 
-    test("renders visibility attribute", function() {
-        path.visible(false);
-        ok(pathNode.render().indexOf("visibility='hidden'") !== -1);
-    });
-
-    test("does not render visibility if not set", function() {
-        ok(pathNode.render().indexOf("visibility") === -1);
-    });
-
-    test("does not render visibility if set to true", function() {
-        path.visible(true);
-        ok(pathNode.render().indexOf("visibility") === -1);
-    });
-
     test("renders transform if set", function() {
         path.transform(new Matrix(1,1,1,1,1,1));
         ok(pathNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") !== -1);
@@ -566,24 +610,6 @@
         path.options.set("stroke", { color: "red", opacity: 0.4, width: 4 });
     });
 
-    test("optionsChange sets visibility to hidden", function() {
-        pathNode.attr = function(name, value) {
-            equal(name, "visibility");
-            equal(value, "hidden");
-        };
-
-        path.visible(false);
-    });
-
-    test("optionsChange sets visibility to visible", function() {
-        pathNode.attr = function(name, value) {
-            equal(name, "visibility");
-            equal(value, "visible");
-        };
-
-        path.visible(true);
-    });
-
     test("options change renders transform", function() {
         pathNode.attr = function(key, value) {
             equal(key, "transform");
@@ -603,6 +629,8 @@
     var multiPath,
         multiPathNode;
 
+    baseNodeTests(MultiPath, MultiPathNode, "MultiPathNode");
+
     module("MultiPathNode", {
         setup: function() {
             multiPath = new MultiPath();
@@ -621,6 +649,8 @@
     // ------------------------------------------------------------
     var circle,
         circleNode;
+
+    baseNodeTests(Circle, CircleNode, "CircleNode");
 
     module("CircleNode", {
         setup: function() {
@@ -658,5 +688,81 @@
         };
 
         circle.geometry.set("radius", 60);
+    });
+
+    // ------------------------------------------------------------
+    var text;
+    var textNode;
+
+    module("TextNode", {
+        setup: function() {
+            text = new d.Text("Foo", new Point(10, 20), { font: "arial" });
+            textNode = new svg.TextNode(text);
+        }
+    });
+
+    test("renders origin", function() {
+        ok(textNode.render().indexOf("x='10' y='20'") > -1);
+    });
+
+    test("renders font", function() {
+        ok(textNode.render().indexOf("font:arial;") > -1);
+    });
+
+    test("geometryChange sets origin", 2, function() {
+        textNode.attr = function(name, value) {
+            if (name === "x") {
+                equal(value, 20);
+            } else if (name === "y") {
+                equal(value, 40);
+            }
+        };
+
+        text.origin.multiply(2);
+    });
+
+    test("optionsChange sets font", function() {
+        textNode.attr = function(name, value) {
+            equal(name, "style");
+            equal(value, "font:foo;");
+        };
+
+        text.options.set("font", "foo");
+    });
+
+    // ------------------------------------------------------------
+    var textSpan;
+    var textSpanNode;
+
+    module("TextSpanNode", {
+        setup: function() {
+            textSpan = new d.TextSpan("Foo", { font: "arial" });
+            textSpanNode = new svg.TextSpanNode(textSpan);
+        }
+    });
+
+    test("renders content", function() {
+        ok(textSpanNode.render().indexOf("Foo") > -1);
+    });
+
+    test("renders font", function() {
+        ok(textSpanNode.render().indexOf("font:arial;") > -1);
+    });
+
+    test("contentChange sets content", function() {
+        textSpanNode.content = function(value) {
+            equal(value, "Bar");
+        };
+
+        textSpan.content("Bar");
+    });
+
+    test("optionsChange sets font", function() {
+        textSpanNode.attr = function(name, value) {
+            equal(name, "style");
+            equal(value, "font:foo;");
+        };
+
+        textSpan.options.set("font", "foo");
     });
 })();

@@ -216,6 +216,28 @@
             return output;
         },
 
+        renderVisibility: function() {
+            if (this.srcElement.options.visible === false) {
+                return renderAttr("visibility", "hidden");
+            }
+
+            return "";
+        },
+
+        attr: function(name, value) {
+            if (this.element) {
+                this.element.setAttribute(name, value);
+            }
+        },
+
+        optionsChange: function(e) {
+            if (e.field === "visible") {
+                this.attr("visibility", e.value ? "visible" : "hidden");
+            }
+
+            this.invalidate();
+        },
+
         clear: function() {
             var element = this.element;
 
@@ -277,7 +299,7 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g#= d.renderTransform() #>#= d.renderChildren() #</g>"
+            "<g#= d.renderTransform() + d.renderVisibility() #>#= d.renderChildren() #</g>"
         ),
 
         optionsChange: function(e) {
@@ -308,10 +330,6 @@
                     this.allAttr(this.mapStroke(e.value));
                     break;
 
-                case "visible":
-                    this.attr("visibility", e.value ? "visible" : "hidden");
-                    break;
-
                 case TRANSFORM:
                     this.transformChange(e.value);
                     break;
@@ -324,7 +342,7 @@
                     break;
             }
 
-            this.invalidate();
+            Node.fn.optionsChange.call(this, e);
         },
 
         attributeMap: {
@@ -469,14 +487,6 @@
 
         renderStyle: function() {
             return renderAttr("style", util.renderStyle(this.mapStyle()));
-        },
-
-        renderVisibility: function() {
-            if (this.srcElement.options.visible === false) {
-                return renderAttr("visibility", "hidden");
-            }
-
-            return "";
         },
 
         template: renderTemplate(
