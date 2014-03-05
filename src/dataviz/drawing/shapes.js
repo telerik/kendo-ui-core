@@ -171,9 +171,7 @@
         }
     });
 
-    var Shape = Element.extend({
-        geometryChange: util.mixins.geometryChange,
-
+    var shapeMixin = {
         fill: function(color, opacity) {
             this.options.set("fill.color", color);
 
@@ -197,6 +195,13 @@
 
             return this;
         }
+    };
+
+    var Shape = Element.extend({
+        geometryChange: util.mixins.geometryChange,
+
+        fill: shapeMixin.fill,
+        stroke: shapeMixin.stroke
     });
 
     var TextSpan = Shape.extend({
@@ -245,7 +250,9 @@
             Group.fn.append.call(this, tspan);
         },
 
-        geometryChange: util.mixins.geometryChange
+        geometryChange: util.mixins.geometryChange,
+        fill: shapeMixin.fill,
+        stroke: shapeMixin.stroke
     });
 
     var Circle = Shape.extend({

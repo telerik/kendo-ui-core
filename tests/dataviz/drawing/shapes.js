@@ -309,64 +309,73 @@
     });
 
     // ------------------------------------------------------------
-    var shape;
+    function shapeBaseTests(TShape, name) {
+        var shape;
 
-    module("Shape", {
-        setup: function() {
-            shape = new Shape();
-        }
-    });
+        module("Shape base tests / " + name, {
+            setup: function() {
+                shape = new TShape();
+            }
+        });
+
+        test("fill sets fill", function() {
+            shape.fill("red", 1);
+
+            equal(shape.options.fill.color, "red");
+            equal(shape.options.fill.opacity, 1);
+        });
+
+        test("fill triggers optionsChange", function() {
+            shape.observer = {
+                optionsChange: function() {
+                    ok(true);
+                }
+            }
+
+            shape.fill("red");
+        });
+
+        test("fill returns shape", function() {
+            deepEqual(shape.fill("red"), shape);
+        });
+
+        test("stroke sets stroke", function() {
+            shape.stroke("red", 2, 1);
+
+            equal(shape.options.stroke.color, "red");
+            equal(shape.options.stroke.width, 2);
+            equal(shape.options.stroke.opacity, 1);
+        });
+
+        test("stroke triggers optionsChange", function() {
+            shape.observer = {
+                optionsChange: function() {
+                    ok(true);
+                }
+            }
+
+            shape.stroke("red");
+        });
+
+        test("stroke returns shape", function() {
+            deepEqual(shape.stroke("red"), shape);
+        });
+    }
+
+    shapeBaseTests(Shape, "Shape");
+
+    // ------------------------------------------------------------
+    module("Shape");
 
     test("sets initial options", function() {
         shape = new Shape({ foo: true });
         ok(shape.options.foo);
     });
 
-    test("fill sets fill", function() {
-        shape.fill("red", 1);
-
-        equal(shape.options.fill.color, "red");
-        equal(shape.options.fill.opacity, 1);
-    });
-
-    test("fill triggers optionsChange", function() {
-        shape.observer = {
-            optionsChange: function() {
-                ok(true);
-            }
-        }
-
-        shape.fill("red");
-    });
-
-    test("fill returns shape", function() {
-        deepEqual(shape.fill("red"), shape);
-    });
-
-    test("stroke sets stroke", function() {
-        shape.stroke("red", 2, 1);
-
-        equal(shape.options.stroke.color, "red");
-        equal(shape.options.stroke.width, 2);
-        equal(shape.options.stroke.opacity, 1);
-    });
-
-    test("stroke triggers optionsChange", function() {
-        shape.observer = {
-            optionsChange: function() {
-                ok(true);
-            }
-        }
-
-        shape.stroke("red");
-    });
-
-    test("stroke returns shape", function() {
-        deepEqual(shape.stroke("red"), shape);
-    });
-
     // ------------------------------------------------------------
     var tspan;
+
+    shapeBaseTests(TextSpan, "TextSpan");
 
     module("TextSpan", {
         setup: function() {
@@ -403,6 +412,9 @@
 
     // ------------------------------------------------------------
     var text;
+
+    shapeBaseTests(Text, "Text");
+
     module("Text", {
         setup: function() {
             text = new Text("Foo", new g.Point(100, 100));
@@ -468,6 +480,8 @@
     // ------------------------------------------------------------
     var circleGeometry,
         circle;
+
+    shapeBaseTests(Circle, "Circle");
 
     module("Circle", {
         setup: function() {
@@ -679,6 +693,8 @@
     // ------------------------------------------------------------
     var path;
 
+    shapeBaseTests(Path, "Path");
+
     module("Path", {
         setup: function() {
             path = new Path();
@@ -855,6 +871,8 @@
 
     // ------------------------------------------------------------
     var multiPath;
+
+    shapeBaseTests(MultiPath, "MultiPath");
 
     module("MultiPath", {
         setup: function() {
