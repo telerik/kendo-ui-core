@@ -24,7 +24,7 @@
     </kendo:grid>
 
 	<kendo:sortable name="#grid" filter="table > tbody > tr" hint="noHint"
-		placeholder="placeholder" container="#grid tbody" change="onChange"></kendo:sortable>
+		placeholder="placeholder" container="#grid tbody" cursor="move" change="onChange"></kendo:sortable>
 		
 	<script>
 		var noHint = $.noop;
@@ -45,5 +45,11 @@
 	        grid.dataSource.insert(newIndex, dataItem);
 	    }
 	</script>
+	
+    <style>
+         .k-grid tbody tr {
+             cursor: move;
+         }
+    </style>
     
 <demo:footer />

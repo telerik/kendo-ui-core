@@ -10,7 +10,7 @@
     </kendo:listView>
 </div>
 
-<kendo:sortable name="#listView" filter=">div.product" placeholder="placeholder" hint="hint" change="onChange"></kendo:sortable>
+<kendo:sortable name="#listView" filter=">div.product" cursor="move" placeholder="placeholder" hint="hint" change="onChange"></kendo:sortable>
 
 <script>
 	function placeholder(element) {
@@ -60,6 +60,7 @@
     height: 170px;
     margin: 0;
     padding: 0;
+    cursor: move;
 }
 .product img {
     width: 110px;

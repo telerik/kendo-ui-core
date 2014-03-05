@@ -6,7 +6,7 @@
 <demo:header />
 
 <kendo:sortable name="#sortable-horizontal" axis="x"
-	container="#sortable-horizontal" hint="hint" placeholder="placeholder"></kendo:sortable>
+	container="#sortable-horizontal" hint="hint" placeholder="placeholder" cursor="move"></kendo:sortable>
 
 <div class="demo-section" style="margin-top: 50px;">
 	<h3 class="title">Rearrange the photos</h3>
@@ -52,7 +52,8 @@
 #sortable-horizontal img {
 	width: 166px;
 	margin: 10px;
-	vertical-align: middle
+	vertical-align: middle;
+	cursor: move;
 }
 
 .placeholder {

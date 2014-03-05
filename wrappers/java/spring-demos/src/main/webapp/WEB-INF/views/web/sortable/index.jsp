@@ -8,7 +8,7 @@
 <c:url value="/resources/web/sortable/playlist.png"
 	var="playlistBackground" />
 
-<kendo:sortable name="#sortable-basic" hint="hint" placeholder="placeholder">
+<kendo:sortable name="#sortable-basic" hint="hint" placeholder="placeholder" cursor="url('../../resources/web/sortable/grabbing.cur'), default">
 	<kendo:sortable-cursorOffset top="-10" left="-230" />
 </kendo:sortable>
 
@@ -80,6 +80,7 @@
 		margin: 0;
 		color: #666;
 		font-size: 1.2em;
+		cursor: url('../../resources/web/sortable/grab.cur'), default;
 	}
 	
 	li.sortable:last-child {

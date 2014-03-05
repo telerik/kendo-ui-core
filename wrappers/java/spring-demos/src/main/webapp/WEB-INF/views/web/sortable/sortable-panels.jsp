@@ -5,10 +5,10 @@
 
 <demo:header />
 
-<kendo:sortable name="#sidebar" hint="hint" placeholder="placeholder"
+<kendo:sortable name="#sidebar" hint="hint" placeholder="placeholder" cursor="move"
 	connectWith="#main-content" filter=">div"></kendo:sortable>
 	
-<kendo:sortable name="#main-content" hint="hint" placeholder="placeholder"
+<kendo:sortable name="#main-content" hint="hint" placeholder="placeholder" cursor="move"
 	connectWith="#sidebar"></kendo:sortable>
 
 <div class="dash-head"></div>
@@ -198,6 +198,7 @@
 	background-color: #ffffff;
 	border: 1px solid #e7e7e7;
 	border-radius: 3px;
+	cursor: move;
 }
 
 .widget:hover {
