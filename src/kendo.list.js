@@ -892,6 +892,7 @@ kendo_module({
                 }
 
                 that.dataSource.one(CHANGE, function() {
+                    that._old = undefined;
                     that.value(value);
                     that._fetch = false;
                 });
