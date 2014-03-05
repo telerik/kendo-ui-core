@@ -235,7 +235,7 @@
                 this.attr("visibility", e.value ? "visible" : "hidden");
             }
 
-            this.invalidate();
+            BaseNode.fn.optionsChange.call(this, e);
         },
 
         clear: function() {
