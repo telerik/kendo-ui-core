@@ -189,12 +189,12 @@
     }
 
     var Element = Class.extend({
-        init: function (native, options) {
+        init: function (dom, options) {
             var element = this;
             this._originSize = Rect.empty();
             this._visible = true;
             this._transform = new CompositeTransform();
-            element.native = native;
+            element.native = dom;
             element.options = deepExtend({}, element.options, options);
             element.redraw();
         },
@@ -268,9 +268,9 @@
 
     // Visual but with no size.
     var VisualBase = Element.extend({
-        init: function (native, options) {
+        init: function (dom, options) {
             var that = this;
-            Element.fn.init.call(that, native, options);
+            Element.fn.init.call(that, dom, options);
         },
         options: {
             stroke: {
@@ -342,9 +342,9 @@
     });
 
     var Visual = VisualBase.extend({
-        init: function (native, options) {
+        init: function (dom, options) {
             var that = this;
-            VisualBase.fn.init.call(that, native, options);
+            VisualBase.fn.init.call(that, dom, options);
         },
         redraw: function (options) {
             var that = this;
@@ -436,11 +436,11 @@
     });
 
     var TextBlockEditor = Observable.extend({
-        init: function (native, options) {
+        init: function (dom, options) {
             Observable.fn.init.call(this);
 
             var element = this;
-            element.native = native || this._createEditor();
+            element.native = dom || this._createEditor();
             element.options = deepExtend({}, element.options, options);
             element.redraw();
         },
