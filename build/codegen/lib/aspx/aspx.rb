@@ -61,7 +61,7 @@ module CodeGen
 
             module Options
 
-                attr_accessor :type, :values
+                attr_accessor :type, :values, :description, :default
 
                 def component_class
                     Component
@@ -487,11 +487,11 @@ module CodeGen
 
                     properties_content = write_options(component.options)
 
-                    write_file(file_path, properties_content, '#region [ Properties ]')
+                    write_file(file_path, properties_content, '[ Properties ]')
 
                     if component.widget?
                         serialization_content = write_options_serialization(component.options)
-                        write_file(file_path, serialization_content, '#region [ Properties Serialization ]')
+                        write_file(file_path, serialization_content, '[ Properties Serialization ]')
                     end
 
                 end
@@ -538,7 +538,7 @@ module CodeGen
 
                     composite_content = write_options(composite.options)
 
-                    write_file(filename, composite_content, '#region [ Properties ]')
+                    write_file(filename, composite_content, '[ Properties ]')
 
                     write_composite_option_converter_file(composite)
                 end
@@ -574,7 +574,7 @@ module CodeGen
 
                     composite_content = write_converter_options(composite.options)
 
-                    write_file(filename, composite_content, '#region [ SerializedProperties ]')
+                    write_file(filename, composite_content, '[ SerializedProperties ]')
                 end
 
                 def write_array_item_class(item)
@@ -584,7 +584,7 @@ module CodeGen
 
                     content = write_options(item.options)
 
-                    write_file(file_name, content, '#region [ Properties ]')
+                    write_file(file_name, content, '[ Properties ]')
 
                     write_composite_option_converter_file(item)
                 end
@@ -592,7 +592,9 @@ module CodeGen
                 def write_file(file_path, content, marker)
                     return unless File.exists?(file_path)
 
-                    c = File.read(file_path).sub(Regexp.new(Regexp.escape(marker)), marker + content)
+                    region_regexp = Regexp.new("#region\s#{Regexp.escape(marker)}(.*)#endregion\s#{Regexp.escape(marker)}", Regexp::MULTILINE)
+
+                    c = File.read(file_path).gsub(region_regexp) { "#region #{marker}\n#{content}\n#endregion #{marker}" }
 
                     File.open(file_path, 'w') do |f|
                         f.write(c)
