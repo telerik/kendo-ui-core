@@ -969,6 +969,8 @@ var __meta__ = {
                 valueField = options.cascadeFromField || parent.options.dataValueField;
 
                 change = function() {
+                    that.dataSource.unbind(CHANGE, change);
+
                     var value = that._selectedValue || that.value();
                     if (that._userTriggered) {
                         that._clearSelection(parent, true);
@@ -1001,9 +1003,14 @@ var __meta__ = {
                             value: filterValue
                         });
 
-                        that.dataSource
-                            .one(CHANGE, change)
-                            .filter(filters);
+                        var handler = function() {
+                            that.dataSource.unbind(CHANGE, handler);
+                            change.apply(that, arguments);
+                        };
+
+                        that.first("dataBound", handler);
+
+                        that.dataSource.filter(filters);
 
                     } else {
                         that.enable(false);
@@ -1013,7 +1020,7 @@ var __meta__ = {
                     }
                 };
 
-                parent.bind("cascade", function(e) {
+                parent.first("cascade", function(e) {
                     that._userTriggered = e.userTriggered;
                     select();
                 });
