@@ -3,11 +3,11 @@
         /// <%= description %>
         /// </summary>
         [DefaultValue(<%= csharp_default %>)]
-        public <%= csharp_type %> <%= name.pascalize %>
+        public <%= csharp_class %> <%= name.pascalize %>
         {
             get
             {
-                return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"] ?? <%= csharp_default %>);
+                return (<%= csharp_class %>)(ViewState["<%= name.pascalize %>"] ?? <%= csharp_default %>);
             }
             set
             {

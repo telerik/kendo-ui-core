@@ -186,10 +186,10 @@ module CodeGen
                 include Options
 
                 def enum?
-                    root_component.enum_options.include?(self)
+                    !@values.nil?
                 end
 
-                def csharp_type
+                def csharp_class
                     return strip_kendo_type(type) if type.include?('kendo.')
                     return "#{owner.csharp_name.sub('Settings', '').sub('Collection', '')}#{name.pascalize}" if enum?
                     return TYPES_MAP[type[0]]
@@ -394,7 +394,7 @@ module CodeGen
                 end
 
                 def csharp_namespace
-                    prefix = "Telerik.Web.UI"
+                    prefix = 'Telerik.Web.UI'
 
                     return "#{prefix}.#{owner_namespace}" unless widget? || CHILD_COMPONENTS.include?(csharp_class)
 
@@ -422,13 +422,15 @@ module CodeGen
                 end
 
                 def enum_options
-                    enums = simple_options.select { |o| !o.values.nil? }
+                    enums = simple_options.select { |o| o.enum? }
                     composite = composite_options.flat_map { |o| o.options }
 
                     composite.each do |item|
-                        composite.push(*item.options) if item.composite?
-
-                        enums.push(item) if item.respond_to?(:values) && !item.values.nil?
+                        if item.composite?
+                            composite.push(*item.options) if item.composite?
+                        else
+                            enums.push(item) if item.enum?
+                        end
                     end
 
                     enums
@@ -474,7 +476,7 @@ module CodeGen
                     options = component.enum_options
 
                     options.each do |option|
-                        filename = "#{@path}/#{option.csharp_type}.cs"
+                        filename = "#{@path}/#{option.csharp_class}.cs"
 
                         create_file(filename, option.to_enum)
                     end

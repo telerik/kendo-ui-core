@@ -2,11 +2,11 @@
         /// <summary>
         /// <%= description %>
         /// </summary>
-        public <%= csharp_type %> <%= name.pascalize %>
+        public <%= csharp_class %> <%= name.pascalize %>
         {
             get
             {
-                return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"]);
+                return (<%= csharp_class %>)(ViewState["<%= name.pascalize %>"]);
             }
             set
             {
