@@ -20,7 +20,7 @@ var __meta__ = {
         OS = support.mobileOS,
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
-        BROKEN_WEBVIEW_RESIZE = OS.appMode && OS.ios, // && OS.device === "iphone",
+        BROKEN_WEBVIEW_RESIZE = OS.ios && OS.flatVersion >= 700 && OS.appMode,
         HORIZONTAL = "km-horizontal",
 
         MOBILE_PLATFORMS = {
@@ -80,6 +80,9 @@ var __meta__ = {
             classes.push("km-" + (os.skin ? os.skin : os.name) + "-" + os.variant);
         }
 
+        if (os.cordova) {
+            classes.push("km-cordova");
+        }
         if (os.appMode) {
             classes.push("km-app");
         } else {
