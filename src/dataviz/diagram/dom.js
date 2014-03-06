@@ -1281,6 +1281,7 @@
                 that._clipboard = [];
                 that._drop();
                 that._initEditor();
+                that._autosizeCanvas();
 
                 if(that.options.layout) {
                     that.layout(that.options.layout);
@@ -2505,6 +2506,10 @@
                 }
             },
             _autosizeCanvas: function (args) {
+                if(!this.scroller) { //no need to resize the canvas when no scroller is present
+                    return;
+                }
+
                 var diagram = (args || {}).sender || this,
                     editor = this._editor,
                     zoom = diagram.zoom(),
