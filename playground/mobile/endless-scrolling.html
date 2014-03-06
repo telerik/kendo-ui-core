@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Endless scrolling listview</title>
-        <link href="http://cdn.kendostatic.com/staging/c70fd02a1482e42014da55d8a56cc92786f54bf6/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2013.3.1324/styles/kendo.mobile.all.min.css" rel="stylesheet" />
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
@@ -26,47 +26,49 @@
         <script src="../../src/kendo.mobile.listview.js"></script>
     </head>
     <body>
-        <div data-role="view" data-model="model" data-title="Scroll down to load">
-            <header data-role="header">
-                <div data-role="navbar">
-                    <span data-role="view-title"></span>
-                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
-                </div>
-            </header>
+          <div data-role="view" data-model="foo">
 
-            <ul data-template="endless-scrolling-template" data-role="listview" data-bind="source: foo" data-endless-scroll="true"></ul>
-        </div>
 
-        <script type="text/x-kendo-tmpl" id="endless-scrolling-template">
-            <div class="product">
-                <h3>#:ProductName#</h3>
-                <p>#:kendo.toString(UnitPrice, "c")#</p>
-            </div>
-        </script>
+<ul
+                        data-role="listview"
+                        data-bind="source: source"
+                        data-template="filter-listview-template"
+                        data-virtual-view-size="150"
+                        data-endless-scroll="true"
+                        >
+                    </ul>
+  </div>
+
+
+  <script type="text/x-kendo-template" id="filter-listview-template">
+      <label data-bind="disabled: IsLocalModified"
+          #= (data.IsLocalModified == true ? 'disabled="disabled"' : '') #
+          >
+          <span>#= Code #</span>
+          # if (data.IsLocalModified == true) { #
+              <span class="app-right fa km-fa-edit" style="font-size: 1.9em; margin-right:2.5em"></span>
+              # } /* end if */ #
+          <input
+          type="checkbox"
+          name="filter-modal-checkbox"
+          data-bind="checked: IsSelected, disabled: IsLocalModified"
+
+          />
+      </label>
+  </script>
 
         <script>
-            var model = kendo.observable({
-                foo: new kendo.data.DataSource({
-                    type: "odata",
-                    transport: {
-                        read: {
-                            url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                        }
-                    },
-                    schema: {
-                        total: function () { return 77; }
-                    },
-                    sort: {
-                        field: "ProductID",
-                        dir: "desc"
-                    },
-                    serverPaging: true,
-                    serverSorting: true,
-                    pageSize: 50
-                })
+            var data = [];
+
+            for (var i = 0; i < 300; i ++) {
+                data[i] = { idx: i, IsSelected: false, IsLocalModified: false, Code: "Code" + i };
+            }
+
+            var foo = kendo.observable({
+                source: new kendo.data.DataSource({ data: data })
             });
 
-            var app = new kendo.mobile.Application(document.body);
+            new kendo.mobile.Application();
         </script>
     </body>
 </html>
