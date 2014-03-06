@@ -41,25 +41,16 @@
 <div data-role="view" data-layout="overview-layout" id="overview-gallery" data-title="Photo Gallery">
     <div id="scrollview-container">
         <div data-role="scrollview">
-            <div class="photo photo1"></div>
-
-            <div class="photo photo2"></div>
-
-            <div class="photo photo3"></div>
-
-            <div class="photo photo4"></div>
-
-            <div class="photo photo5"></div>
-
-            <div class="photo photo6"></div>
-
-            <div class="photo photo7"></div>
-
-            <div class="photo photo8"></div>
-
-            <div class="photo photo9"></div>
-
-            <div class="photo photo10"></div>
+            <div class="photo photo1">
+            </div><div class="photo photo2" data-role="page">
+            </div><div class="photo photo3" data-role="page">
+            </div><div class="photo photo4" data-role="page">
+            </div><div class="photo photo5" data-role="page">
+            </div><div class="photo photo6" data-role="page">
+            </div><div class="photo photo7" data-role="page">
+            </div><div class="photo photo8" data-role="page">
+            </div><div class="photo photo9" data-role="page">
+            </div><div class="photo photo10" data-role="page"></div>
         </div>
     </div>
 </div>
@@ -244,15 +235,13 @@
     margin: 1em auto .4em auto;
 }
 #overview-gallery .photo {
-    width: 277px;
-    margin: 20px 20px 7px;
+    margin: 0;
     height: 220px;
     display: inline-block;
     -webkit-background-size: auto 100%;
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center center;
-    -webkit-transform: translatez(0);
 }
 .km-wp #overview-gallery .photo {
     width: 15em;
@@ -270,8 +259,9 @@
 .photo10 {background-image: url("../../content/mobile/cities/220/san-francisco.jpg");}
 
 #scrollview-container {
-    margin: 3px 0 1em 0;
-    padding-bottom: 10px;
+    margin: 45px 0 1em 0;
+    padding-bottom: 20px;
+    padding-top: 20px;
     background: rgba(0,0,0,.1);
     border: 1px solid rgba(0,0,0,.3);
     border-width: 1px 0;
