@@ -35,6 +35,9 @@
 
         </script>
         <style>
+            .demo-section {
+                width: 664px;
+            }
             #placeholder {
                 display: inline-block;
                 width: 500px;
@@ -60,7 +63,15 @@
             #homes li a {
                 display: block;
                 width: 160px;
-                height: 111px;
+                height: 109px;
+                margin: 3px 0;
+                box-shadow: inset 0 0 10px rgba(0,0,0,.5);
+            }
+            #homes li a:hover {
+                box-shadow: inset 0 100px 100px rgba(0,0,0,.3);
+            }
+            #homes li a#thumb1 {
+                margin: 0 0 3px;
             }
             #homes li a span {
                 display: none;
