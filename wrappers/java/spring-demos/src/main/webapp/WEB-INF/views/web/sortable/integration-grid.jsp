@@ -2,14 +2,14 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <demo:header />
-    <kendo:grid name="grid" pageable="true" scrollable="false">	
+    <kendo:grid name="grid" scrollable="false">	
         <kendo:grid-columns>
             <kendo:grid-column title="Product Name" field="productName" />
             <kendo:grid-column title="Unit Price" field="unitPrice" format="{0:c}" width="130px"/>
             <kendo:grid-column title="Units In Stock" field="unitsInStock" width="130px"/>
             <kendo:grid-column title="Discontinued" field="discontinued" width="130px"/>
         </kendo:grid-columns>
-        <kendo:dataSource data="${products}" pageSize="15">        
+        <kendo:dataSource data="${products}" pageSize="16">
             <kendo:dataSource-schema>
                 <kendo:dataSource-schema-model>
                     <kendo:dataSource-schema-model-fields>

@@ -36,7 +36,7 @@ $schema->data('data')
 $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->data($data)
-           ->pageSize(15)
+           ->pageSize(16)
            ->schema($schema);
 
 $grid = new \Kendo\UI\Grid('grid');
@@ -60,17 +60,12 @@ $discontinued = new \Kendo\UI\GridColumn();
 $discontinued->field('Discontinued')
           ->width('130px');
 
-$pageable = new \Kendo\UI\GridPageable();
-$pageable->input(true)
-        ->numeric(false);
-
 $grid->addColumn($productName)
      ->addColumn($unitPrice)
      ->addColumn($unitsInStock)
      ->addColumn($discontinued)
      ->scrollable(false)
-     ->dataSource($dataSource)
-     ->pageable($pageable);
+     ->dataSource($dataSource);
 
 echo $grid->render();
 

@@ -9,11 +9,10 @@
         columns.Bound(p => p.UnitsInStock).Title("Units In Stock").Width(130);
         columns.Bound(p => p.Discontinued).Width(130);
     })
-    .Pageable()
-    .DataSource(dataSource => dataSource        
+    .DataSource(dataSource => dataSource
         .Ajax()
-        .PageSize(15)
-        .ServerOperation(false)        
+        .PageSize(16)
+        .ServerOperation(false)
      )
 )
 
