@@ -52,6 +52,7 @@ var __meta__ = {
 
             that._compileTemplates(options.templates);
             that._guid = "_" + kendo.guid();
+            that._isRtl = kendo.support.isRtl(element);
             that._compileStacking(options.stacking, options.position.top);
 
             kendo.notify(that);
@@ -208,6 +209,7 @@ var __meta__ = {
                 animation: options.animation,
                 modal: true,
                 collision: "",
+                isRtl: that._isRtl,
                 close: function(e) {
                     that.trigger(HIDE, {element: this.element});
                 },
