@@ -250,7 +250,7 @@
                 visual = visuals[i];
                 for (var j = 0; j < group.children.length; j++) {
                     var other = group.children[j];
-                    if (other == visual.native) {
+                    if (other == visual.domElement) {
                         indices.push(j);
                         break;
                     }
@@ -438,7 +438,7 @@
                 that.parentContainer = null;
                 that.isContainer = false;
                 that.isCollapsed = false;
-                that.id = that.visual.native.id;
+                that.id = that.visual.domElement.id;
                 that.content(that.content());
                 that._rotate();
                 if (options.hasOwnProperty("layout") && options.layout!==undefined) {
@@ -1645,7 +1645,7 @@
             toFront: function (items, undoable) {
                 var result = this._getDiagramItems(items), indices;
                 if (isUndefined(undoable) || undoable) {
-                    indices = indicesOfItems(this.mainLayer.native, result.visuals);
+                    indices = indicesOfItems(this.mainLayer.domElement, result.visuals);
                     var unit = new ToFrontUnit(this, items, indices);
                     this.undoRedoService.add(unit);
                 }
@@ -1662,7 +1662,7 @@
             toBack: function (items, undoable) {
                 var result = this._getDiagramItems(items), indices;
                 if (isUndefined(undoable) || undoable) {
-                    indices = indicesOfItems(this.mainLayer.native, result.visuals);
+                    indices = indicesOfItems(this.mainLayer.domElement, result.visuals);
                     var unit = new ToBackUnit(this, items, indices);
                     this.undoRedoService.add(unit);
                 }
@@ -2021,13 +2021,13 @@
             getShapeById: function (id) {
                 var found;
                 found = Utils.first(this.shapes, function (s) {
-                    return s.visual.native.id === id;
+                    return s.visual.domElement.id === id;
                 });
                 if (found) {
                     return found;
                 }
                 found = Utils.first(this.connections, function (c) {
-                    return c.visual.native.id === id;
+                    return c.visual.domElement.id === id;
                 });
                 return found;
             },
@@ -2056,13 +2056,13 @@
                 var editor = this._editor;
 
                 editor.visible(true);
-                this.element.context.appendChild(editor.native);
+                this.element.context.appendChild(editor.domElement);
                 this._positionEditor();
             },
             _positionEditor: function () {
                 var editor = this._editor,
                     options = editor.options,
-                    nativeEditor = $(editor.native),
+                    nativeEditor = $(editor.domElement),
                     bounds = this.modelToView(this._editItem.bounds()),
                     cssDim = function (prop) {
                         return parseInt(nativeEditor.css(prop), 10);
@@ -2138,7 +2138,7 @@
                 var zoom = this._zoom;
 
                 var transform = new CompositeTransform(0, 0, zoom, zoom);
-                transform.render(this.mainLayer.native);
+                transform.render(this.mainLayer.domElement);
                 this._storeLayerMatrix(transform);
                 this._storeViewMatrix();
             },
@@ -2147,7 +2147,7 @@
                     zoom = this._zoom;
 
                 var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
-                transform.render(this.mainLayer.native);
+                transform.render(this.mainLayer.domElement);
                 this._storeLayerMatrix(transform);
                 this._storeViewMatrix();
             },

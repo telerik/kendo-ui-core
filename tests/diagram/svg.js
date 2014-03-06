@@ -29,17 +29,17 @@ test("Add/Remove/Clear Marker", function () {
     ok(found != null, "Marker element should be there.");
     ok(found.attributes["viewBox"] != null, "The viewBox should be there");
     ok(found.attributes["orient"] != null && found.attributes["orient"].value == "auto", "The orientation should be there");
-    equal(marker.native.firstChild.tagName.toLowerCase(), "path", "path should be there");
+    equal(marker.domElement.firstChild.tagName.toLowerCase(), "path", "path should be there");
 
     var line = new diagram.Line({
         id: "Line1",
-        endCap: marker.native.id
+        endCap: marker.domElement.id
     });
     canvas.append(line);
     found = document.getElementById("Line1");
     ok(found.attributes["marker-end"] != null);
     equal(found.attributes["marker-end"].value.replace(/"/g, ""), "url(#ArrowHead)", "The end marker should be present.");
-    var returnedMarkerId = line.native.getAttribute("marker-end");
+    var returnedMarkerId = line.domElement.getAttribute("marker-end");
     ok(returnedMarkerId.indexOf("ArrowHead") > -1, "Not the correct Id.");
     canvas.clearMarkers();
     var defs = document.getElementsByTagName("defs");
@@ -299,10 +299,10 @@ test("composite transform updates SVG node transformation", function() {
     var rect = new diagram.Rectangle();
     var transform = new diagram.CompositeTransform(2, 3);
 
-    transform.render(rect.native);
+    transform.render(rect.domElement);
 
-    //equal(rect.native.getAttribute("transform"), transform.toString(), "SVG node should be transformed"); // not working in IE - it removes the commas (,)
-    ok(rect.native.getAttribute("transform"), "SVG node should be transformed");
+    //equal(rect.domElement.getAttribute("transform"), transform.toString(), "SVG node should be transformed"); // not working in IE - it removes the commas (,)
+    ok(rect.domElement.getAttribute("transform"), "SVG node should be transformed");
 
 });
 
@@ -362,7 +362,7 @@ test("visualBase should render stroke", function() {
             }
         });
 
-    equal(element.native.getAttribute("stroke"), "red");
-    equal(element.native.getAttribute("stroke-width"), 20);
-    equal(element.native.getAttribute("stroke-dasharray"), "30 70");
+    equal(element.domElement.getAttribute("stroke"), "red");
+    equal(element.domElement.getAttribute("stroke-width"), 20);
+    equal(element.domElement.getAttribute("stroke-dasharray"), "30 70");
 });

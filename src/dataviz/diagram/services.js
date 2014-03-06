@@ -985,7 +985,7 @@
             _updateCursor: function (p) {
                 var cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredAdorner ? this.hoveredAdorner._getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow));
 
-                $(this.diagram.canvas.native).css({cursor: cursor});
+                $(this.diagram.canvas.domElement).css({cursor: cursor});
             },
             _connectionManipulation: function (connection, disabledShape, isNew) {
                 this.activeConnection = connection;
@@ -1674,9 +1674,9 @@
                     rotationDisplay = (options && options.rotatable !== undefined && options.rotatable === false) ? "none" : "inline";
                 for (i = 0; i < this.map.length; i++) {
                     handle = this.map[i];
-                    $(handle.visual.native).css("display", display);
+                    $(handle.visual.domElement).css("display", display);
                 }
-                $(that.rotationThumb.native).css("display", rotationDisplay);
+                $(that.rotationThumb.domElement).css("display", rotationDisplay);
             },
             move: function (handle, p) {
                 var delta ,

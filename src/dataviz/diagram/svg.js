@@ -189,12 +189,12 @@
     }
 
     var Element = Class.extend({
-        init: function (dom, options) {
+        init: function (domElement, options) {
             var element = this;
             this._originSize = Rect.empty();
             this._visible = true;
             this._transform = new CompositeTransform();
-            element.native = dom;
+            element.domElement = domElement;
             element.options = deepExtend({}, element.options, options);
             element.redraw();
         },
@@ -203,7 +203,7 @@
                 return this._visible;
             } else {
                 this._visible = value;
-                this.native.setAttribute("visibility", (value ? "visible" : "hidden"));
+                this.domElement.setAttribute("visibility", (value ? "visible" : "hidden"));
             }
         },
         setAtr: function (atr, prop) {
@@ -211,7 +211,7 @@
                 return;
             }
             if (this.options[prop] !== undefined) {
-                this.native.setAttribute(atr, this.options[prop]);
+                this.domElement.setAttribute(atr, this.options[prop]);
             }
         },
         redraw: function (options) {
@@ -243,12 +243,12 @@
             return this._transform.rotate || new Rotation(0);
         },
         _renderTransform: function () {
-            this._transform.render(this.native);
+            this._transform.render(this.domElement);
         },
         _hover: function () {
         },
         _measure: function (force) {
-            var box, n = this.native;
+            var box, n = this.domElement;
             if (!this._measured || force) {
                 try {
                     box = n.getBBox();
@@ -268,9 +268,9 @@
 
     // Visual but with no size.
     var VisualBase = Element.extend({
-        init: function (dom, options) {
+        init: function (domElement, options) {
             var that = this;
-            Element.fn.init.call(that, dom, options);
+            Element.fn.init.call(that, domElement, options);
         },
         options: {
             stroke: {
@@ -294,9 +294,9 @@
         },
         _setStroke: function() {
             var stroke = this.options.stroke || {};
-            this.native.setAttribute("stroke", stroke.color);
-            this.native.setAttribute("stroke-dasharray", this._renderDashType());
-            this.native.setAttribute("stroke-width", stroke.width);
+            this.domElement.setAttribute("stroke", stroke.color);
+            this.domElement.setAttribute("stroke-dasharray", this._renderDashType());
+            this.domElement.setAttribute("stroke-width", stroke.width);
         },
         _renderDashType: function() {
             var stroke = this.options.stroke || {},
@@ -326,7 +326,7 @@
             this._background(color);
         },
         _background: function (value) {
-            this.native.setAttribute("fill", this._getColor(value));
+            this.domElement.setAttribute("fill", this._getColor(value));
         },
         _getColor: function (value) {
             var bg;
@@ -342,9 +342,9 @@
     });
 
     var Visual = VisualBase.extend({
-        init: function (dom, options) {
+        init: function (domElement, options) {
             var that = this;
-            VisualBase.fn.init.call(that, dom, options);
+            VisualBase.fn.init.call(that, domElement, options);
         },
         redraw: function (options) {
             var that = this;
@@ -372,7 +372,7 @@
         init: function (options) {
             var that = this;
             Visual.fn.init.call(that, document.createElementNS(SVGNS, "text"), options);
-            this.native.setAttribute("dominant-baseline", "hanging");
+            this.domElement.setAttribute("dominant-baseline", "hanging");
         },
         options: {
             stroke: {
@@ -389,7 +389,7 @@
         },
         content: function (text) {
             if (text !== undefined) {
-                this.native.textContent = this.options.text = text;
+                this.domElement.textContent = this.options.text = text;
                 this._align();
             }
 
@@ -436,18 +436,18 @@
     });
 
     var TextBlockEditor = Observable.extend({
-        init: function (dom, options) {
+        init: function (domElement, options) {
             Observable.fn.init.call(this);
 
             var element = this;
-            element.native = dom || this._createEditor();
+            element.domElement = domElement || this._createEditor();
             element.options = deepExtend({}, element.options, options);
             element.redraw();
         },
         visible: function (value) {
             if (value !== undefined) {
                 this._isVisible = value;
-                this.native.style.visibility = value ? "visible" : "hidden";
+                this.domElement.style.visibility = value ? "visible" : "hidden";
             }
             return this._isVisible;
         },
@@ -463,7 +463,7 @@
                 this.options.y = this._pos.y;
             }
 
-            $(this.native).css({left: this._pos.x + "px", top: this._pos.y + "px"});
+            $(this.domElement).css({left: this._pos.x + "px", top: this._pos.y + "px"});
             return this._pos;
         },
         size: function (w, h) {
@@ -479,20 +479,20 @@
 
             if (isSet) {
                 deepExtend(this.options, this._size);
-                $(this.native).css({width: this._size.width + "px", height: this._size.height + "px"});
+                $(this.domElement).css({width: this._size.width + "px", height: this._size.height + "px"});
             }
 
             return this._size;
         },
         focus: function () {
-            $(this.native).focus();
+            $(this.domElement).focus();
         },
         content: function (text) {
             if (!isUndefined(text)) {
-                this.native.value = this.options.text = text;
+                this.domElement.value = this.options.text = text;
             }
 
-            return this.native.value;
+            return this.domElement.value;
         },
         redraw: function (options) {
             this.options = deepExtend(this.options, options);
@@ -563,21 +563,21 @@
             that.size();
             that.setAtr("d", "data");
             if (this.options.startCap && this.options.startCap !== Markers.none) {
-                this.native.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
+                this.domElement.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
             }
             else {
-                this.native.removeAttribute("marker-start");
+                this.domElement.removeAttribute("marker-start");
             }
             if (this.options.endCap && this.options.endCap !== Markers.none) {
-                this.native.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
+                this.domElement.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
             }
             else {
-                this.native.removeAttribute("marker-end");
+                this.domElement.removeAttribute("marker-end");
             }
 
             // SVG markers are not refreshed after the line has changed. This fixes the problem.
-            if (this.native.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
-                this.native.parentNode.insertBefore(this.native, this.native);
+            if (this.domElement.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
+                this.domElement.parentNode.insertBefore(this.domElement, this.domElement);
             }
         }
     });
@@ -595,21 +595,21 @@
                 childElement = new Circle(o.circle);
             }
             if (childElement) {
-                this.native.appendChild(childElement.native);
+                this.domElement.appendChild(childElement.domElement);
             }
         },
         redraw: function (options) {
             Element.fn.redraw.call(this, options);
             var that = this, o = that.options;
             if (o.ref) {
-                that.native.refX.baseVal.value = o.ref.x;
-                that.native.refY.baseVal.value = o.ref.y;
+                that.domElement.refX.baseVal.value = o.ref.x;
+                that.domElement.refY.baseVal.value = o.ref.y;
             }
             if (o.width) {
-                that.native.markerWidth.baseVal.value = o.width;
+                that.domElement.markerWidth.baseVal.value = o.width;
             }
             if (o.height) {
-                that.native.markerHeight.baseVal.value = o.height;
+                that.domElement.markerHeight.baseVal.value = o.height;
             }
             this.setAtr("orient", "orientation");
             this.setAtr("viewBox", "viewBox");
@@ -632,7 +632,7 @@
                 childElement = new Rectangle(o.rectangle);
             }
             if (childElement) {
-                this.native.appendChild(childElement.native);
+                this.domElement.appendChild(childElement.domElement);
             }
             this.setAtr("id", "id");
         },
@@ -641,10 +641,10 @@
             var that = this, o = that.options;
 
             if (o.width) {
-                that.native.width.baseVal.value = o.width;
+                that.domElement.width.baseVal.value = o.width;
             }
             if (o.height) {
-                that.native.height.baseVal.value = o.height;
+                that.domElement.height.baseVal.value = o.height;
             }
 
         }
@@ -659,29 +659,29 @@
         redraw: function (options) {
             VisualBase.fn.redraw.call(this, options);
             if (this.options.from) {
-                this.native.setAttribute("x1", this.options.from.x.toString());
-                this.native.setAttribute("y1", this.options.from.y.toString());
+                this.domElement.setAttribute("x1", this.options.from.x.toString());
+                this.domElement.setAttribute("y1", this.options.from.y.toString());
             }
             if (this.options.to) {
-                this.native.setAttribute("x2", this.options.to.x.toString());
-                this.native.setAttribute("y2", this.options.to.y.toString());
+                this.domElement.setAttribute("x2", this.options.to.x.toString());
+                this.domElement.setAttribute("y2", this.options.to.y.toString());
             }
             if (this.options.startCap && this.options.startCap !== Markers.none) {
-                this.native.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
+                this.domElement.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
             }
             else {
-                this.native.removeAttribute("marker-start");
+                this.domElement.removeAttribute("marker-start");
             }
             if (this.options.endCap && this.options.endCap !== Markers.none) {
-                this.native.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
+                this.domElement.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
             }
             else {
-                this.native.removeAttribute("marker-end");
+                this.domElement.removeAttribute("marker-end");
             }
 
             // SVG markers are not refreshed after the line has changed. This fixes the problem.
-            if (this.native.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
-                this.native.parentNode.insertBefore(this.native, this.native);
+            if (this.domElement.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
+                this.domElement.parentNode.insertBefore(this.domElement, this.domElement);
             }
         }
     });
@@ -706,9 +706,9 @@
                 // todo: toArray and fromArray to allow Point and Tuple
                 pointsString += " " + this._points[i].x + "," + this._points[i].y;
             }
-            this.native.setAttribute("points", pointsString.trim());
-            this.native.setAttribute("stroke", "Orange");
-            this.native.setAttribute("stroke-width", "5");
+            this.domElement.setAttribute("points", pointsString.trim());
+            this.domElement.setAttribute("stroke", "Orange");
+            this.domElement.setAttribute("stroke-width", "5");
 
         },
         points: function (value) {
@@ -742,7 +742,7 @@
         },
         redraw: function (options) {
             Element.fn.redraw.call(this, options);
-            this.native.setAttributeNS(SVGXLINK, "href", this.options.source);
+            this.domElement.setAttributeNS(SVGXLINK, "href", this.options.source);
             this.setAtr("width", "width");
             this.setAtr("height", "height");
             this.setAtr("x", "x");
@@ -760,35 +760,35 @@
             autoSize: false
         },
         append: function (visual) {
-            this.native.appendChild(visual.native);
+            this.domElement.appendChild(visual.domElement);
             visual.canvas = this.canvas;
         },
         remove: function (visual) {
-            if (visual.native) {
-                this.native.removeChild(visual.native);
+            if (visual.domElement) {
+                this.domElement.removeChild(visual.domElement);
             }
             else {
-                this.native.removeChild(visual);
+                this.domElement.removeChild(visual);
             }
         },
         clear: function () {
-            while (this.native.lastChild) {
-                this.native.removeChild(this.native.lastChild);
+            while (this.domElement.lastChild) {
+                this.domElement.removeChild(this.domElement.lastChild);
             }
         },
         toFront: function (visuals) {
-            var visual, i, n = this.native;
+            var visual, i, n = this.domElement;
 
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
-                n.appendChild(visual.native);
+                n.appendChild(visual.domElement);
             }
         },
         toBack: function (visuals) {
             var visual, i;
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
-                this.native.insertBefore(visual.native, this.native.firstChild);
+                this.domElement.insertBefore(visual.domElement, this.domElement.firstChild);
             }
         },
         toIndex: function (visuals, indices) { // bring the items to the following index
@@ -796,7 +796,7 @@
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
                 index = indices[i];
-                this.native.insertBefore(visual.native, this.native.children[index]);
+                this.domElement.insertBefore(visual.domElement, this.domElement.children[index]);
             }
         },
         size: function () {
@@ -822,7 +822,7 @@
                 options.center = new Point(options.width / 2, options.height / 2);
             }
             VisualBase.fn.redraw.call(this, options);
-            var n = this.native,
+            var n = this.domElement,
                 o = this.options,
                 rx = o.width / 2 || o.rx, ry = o.height / 2 || o.rx;
 
@@ -852,21 +852,21 @@
             this.gradients = [];
             this.visuals = [];
             this.defsNode = document.createElementNS(SVGNS, "defs");
-            this.native.appendChild(this.defsNode);
+            this.domElement.appendChild(this.defsNode);
             if (element.context) {
                 this.element = element.context; // kendo wrapped object
             }
             else {
                 this.element = element;
             }
-            $(this.native).css({
+            $(this.domElement).css({
                 width: this.options.width,
                 height: this.options.height
             });
-            this.element.appendChild(that.native);
-            this.native.style.background = that.options.background;
-            this.native.setAttribute('xmlns', SVGNS);
-            this.native.setAttribute('xmlns:xlink', SVGXLINK);
+            this.element.appendChild(that.domElement);
+            this.domElement.style.background = that.options.background;
+            this.domElement.setAttribute('xmlns', SVGNS);
+            this.domElement.setAttribute('xmlns:xlink', SVGXLINK);
             this.element.setAttribute("tabindex", "0"); //ensure tabindex so the the canvas receives key events
             this._markers();
             this.masks = [];
@@ -878,7 +878,7 @@
             id: "SVGRoot"
         },
         bounds: function () {
-            var box = this.native.getBBox();
+            var box = this.domElement.getBBox();
             return new Rect(0, 0, box.width, box.height);
         },
         focus: function () {
@@ -889,7 +889,7 @@
                 size = Visual.fn.size.apply(canvas, arguments),
                 viewBox = this.viewBox();
 
-            this._styledSize(canvas.native);
+            this._styledSize(canvas.domElement);
 
             viewBox.width = size.width;
             viewBox.height = size.height;
@@ -905,62 +905,62 @@
             var canvas = this;
 
             if (isUndefined(rect)) {
-                return canvas.native.viewBox.baseVal ? Rect.toRect(canvas.native.viewBox.baseVal) : Rect.empty();
+                return canvas.domElement.viewBox.baseVal ? Rect.toRect(canvas.domElement.viewBox.baseVal) : Rect.empty();
             }
 
             rect = Rect.toRect(rect);
             if (!isNaN(rect.width) && !isNaN(rect.height)) {
-                this.native.setAttribute("viewBox", rect.toString(","));
+                this.domElement.setAttribute("viewBox", rect.toString(","));
             }
         },
         append: function (shape) {
-            this.native.appendChild(shape.native);
+            this.domElement.appendChild(shape.domElement);
             shape.canvas = this;
             this.visuals.push(shape);
             return this;
         },
         remove: function (visual) {
             if (Utils.indexOf(this.visuals, visual) >= 0) {
-                this.native.removeChild(visual.native);
+                this.domElement.removeChild(visual.domElement);
                 visual.canvas = undefined;
                 Utils.remove(this.visuals, visual);
                 return this;
             }
         },
         insertBefore: function (visual, beforeVisual) {
-            this.native.insertBefore(visual.native, beforeVisual.native);
+            this.domElement.insertBefore(visual.domElement, beforeVisual.domElement);
             visual.canvas = this;
             this.visuals.push(visual);
             return this;
         },
         addMarker: function (marker) {
-            this.defsNode.appendChild(marker.native);
+            this.defsNode.appendChild(marker.domElement);
             this.markers.push(marker);
         },
         removeMarker: function (marker) {
             if (marker && Utils.contains.contains(this.markers, marker)) {
-                this.defsNode.removeChild(marker.native);
+                this.defsNode.removeChild(marker.domElement);
                 Utils.remove(this.markers, marker);
             }
         },
         addMask: function (mask) {
-            this.defsNode.appendChild(mask.native);
+            this.defsNode.appendChild(mask.domElement);
             this.masks.push(mask);
         },
         removeMask: function (mask) {
             if (mask && Utils.contains(this.masks, mask)) {
-                this.defsNode.removeChild(mask.native);
+                this.defsNode.removeChild(mask.domElement);
                 Utils.remove(this.masks, mask);
             }
         },
         removeGradient: function (gradient) {
             if (gradient && Utils.contains(this.gradients, gradient)) {
-                this.defsNode.removeChild(gradient.native);
+                this.defsNode.removeChild(gradient.domElement);
                 Utils.remove(this.gradients, gradient);
             }
         },
         addGradient: function (gradient) {
-            this.defsNode.appendChild(gradient.native);
+            this.defsNode.appendChild(gradient.domElement);
             this.gradients.push(gradient);
         },
         clearMarkers: function () {
@@ -969,7 +969,7 @@
                 return;
             }
             for (i = 0; i < this.markers.length; i++) {
-                this.defsNode.removeChild(this.markers[i].native);
+                this.defsNode.removeChild(this.markers[i].domElement);
             }
             this.markers = [];
         },
@@ -980,10 +980,10 @@
         },
         mask: function (mask) {
             if (mask === null) {
-                this.native.removeAttribute("mask");
+                this.domElement.removeAttribute("mask");
             }
             else {
-                this.native.setAttribute("mask", "url(#" + mask.native.id + ")");
+                this.domElement.setAttribute("mask", "url(#" + mask.domElement.id + ")");
             }
 
         },

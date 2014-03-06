@@ -85,7 +85,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var d = diagramElement.data("kendoDiagram");
-        d.canvas.native.setAttribute("height", "1000");
+        d.canvas.domElement.setAttribute("height", "1000");
         // converting a Graph to a diagram (with internal spring layout to please the eyes)
         GraphUtils.createDiagramFromGraph(d, g, false);
         d.layout(
@@ -155,7 +155,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         var map = [];
         for (var i = 0; i < 100; i++) {
             var shape = diagram.addShape();
@@ -177,7 +177,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         GraphUtils.createDiagramFromGraph(diagram, g, false);
         diagram.layout({type: "tree", subtype: "Down"});
         ok(true);
@@ -187,7 +187,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
 
         randomDiagram(diagram, parseInt(Math.random() * 150 + 1), 3, false);
 
@@ -200,7 +200,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         GraphUtils.createDiagramFromGraph(diagram, g, false);
         var roots = [];
         var components = g.getConnectedComponents();
@@ -219,7 +219,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         randomDiagram(20, 5, true);
         var root = diagram.getShapeById("0");
         root.shapeVisual.background("Orange");
@@ -237,7 +237,7 @@
         for (var i = 0; i < 10; i++) {
             var shape = diagram.addShape();
             shape.id = i.toString();
-            shape.visual.native.id = shape.id;
+            shape.visual.domElement.id = shape.id;
             map[i] = shape;
         }
         // create explicitly a radial diagram without passing through the graph structure
@@ -257,7 +257,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         GraphUtils.createDiagramFromGraph(diagram, g, false);
         var root = diagram.getShapeById("0");
         root.shapeVisual.background("Orange");
@@ -272,7 +272,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         GraphUtils.createDiagramFromGraph(diagram, g, false);
         var root = diagram.getShapeById("0");
         root.shapeVisual.background("Orange");
@@ -286,7 +286,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         randomDiagram(250, 3, true);
         var root = diagram.getShapeById("0");
         root.shapeVisual.background("Green");
@@ -306,7 +306,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         randomDiagram(50, 3, true);
 
         var root = diagram.getShapeById("0");
@@ -330,7 +330,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         GraphUtils.createDiagramFromGraph(diagram, g, false, true);
 
         diagram.layout({
@@ -346,14 +346,14 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         randomDiagram(50, 15, false, true);
 
         /*  var g = Predefined.Forest(3,3,3);
          var div = GetRoot();
          var diagramElement = $("#canvas").kendoDiagram();
          var diagram = diagramElement.data("kendoDiagram");
-         diagram.canvas.native.setAttribute("height", "1000");
+         diagram.canvas.domElement.setAttribute("height", "1000");
          GraphUtils.createDiagramFromGraph(diagram, g, false);*/
 
         var root = diagram.getShapeById("0");
@@ -374,7 +374,7 @@
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
         var diagram = diagramElement.data("kendoDiagram");
-        diagram.canvas.native.setAttribute("height", "1000");
+        diagram.canvas.domElement.setAttribute("height", "1000");
         GraphUtils.createDiagramFromGraph(diagram, g, false);
         var roots = [];
         var components = g.getConnectedComponents();
