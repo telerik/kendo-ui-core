@@ -68,7 +68,7 @@
     - :name: shapeDefaults.stroke.dashType
       :type: kendo.dataviz.diagram.Stroke.dashType
       :description: The dash type of the shape
-      :default:
+      :default: StrokeDashType.Solid
       :values:
         - dash - a line consisting of dashes
         - dashDot - a line consisting of a repeating pattern of dash-dot
@@ -97,7 +97,7 @@
     - :name: shapes.stroke.dashType
       :type: kendo.dataviz.diagram.Stroke.dashType
       :description: The dash type of the shape
-      :default:
+      :default: StrokeDashType.Solid
       :values:
         - dash - a line consisting of dashes
         - dashDot - a line consisting of a repeating pattern of dash-dot

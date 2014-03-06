@@ -22,11 +22,11 @@ module CodeGen
             }
 
             TYPES_DEFAULT_MAP = {
-                'String' => 'null',
+                'String' => '""',
                 'Number' => '0.0',
                 'Boolean' => 'false',
                 'Object' => 'null',
-                'Function' => 'null',
+                'Function' => '""',
                 'Date' => 'null'
             }
 
@@ -361,6 +361,8 @@ module CodeGen
                         if !existing_option.nil?
                             existing_option.type = option[:type] if option[:type].include?('kendo.')
                             existing_option.values = option[:values] unless option[:values].nil?
+                            existing_option.description = option[:description] unless option[:description].nil? || option[:description] == ''
+                            existing_option.default = option[:default] unless option[:default].nil? || option[:default] == ''
                         else
                             option[:remove_existing] = existing_option.nil?
                             add_option(option)
