@@ -22,7 +22,7 @@
         /// Specify the member used to identify an unique Model instance.
         /// </summary>
         /// <param name="fieldName">The member name.</param>
-        public virtual void Id(string fieldName)
+        protected void Id(string fieldName)
         {
             IGridDataKey<TModel> dataKey;
             if (typeof(TModel) == typeof(System.Data.DataRowView))

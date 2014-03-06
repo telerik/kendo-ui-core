@@ -18,7 +18,6 @@
         /// </summary>
         public virtual ReadOnlyCustomDataSourceSchemaBuilder<TModel> Model(Action<ReadOnlyCustomDataSourceModelDescriptorFactory<TModel>> configurator)
         {
-            //is correct? make overload with type parameter ?
             schema.Model = new ModelDescriptor(typeof(TModel));
 
             configurator(new ReadOnlyCustomDataSourceModelDescriptorFactory<TModel>(schema.Model));

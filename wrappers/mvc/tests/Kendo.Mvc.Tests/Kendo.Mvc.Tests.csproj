@@ -165,7 +165,7 @@
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceBuilderTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptorBuilderTests.cs" />
-    <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptorTests.cs" />
+    <Compile Include="UI\DataSource\ModelDescriptorTests.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerBuilderTests.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDefaultsMarkerSettingsBuilderTests.cs" />
     <Compile Include="UI\Map\Fluent\MapMarkerDefaultsSettingsBuilderTests.cs" />

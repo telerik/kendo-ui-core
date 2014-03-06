@@ -158,9 +158,9 @@ namespace Kendo.Mvc.UI.Fluent
         ///  %&gt;
         /// </code>
         /// </example>
-        public DiagramBuilder DataSource(Action<HierarchicalDataSourceBuilder> configurator)
+        public DiagramBuilder DataSource(Action<HierarchicalDataSourceBuilder<object>> configurator)
         {
-            configurator(new HierarchicalDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.urlGenerator));
+            configurator(new HierarchicalDataSourceBuilder<object>(Component.DataSource, this.Component.ViewContext, this.Component.urlGenerator));
 
             return this;
         }

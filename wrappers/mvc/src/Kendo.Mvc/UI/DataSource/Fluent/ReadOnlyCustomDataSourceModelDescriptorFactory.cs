@@ -15,6 +15,15 @@
         }
 
         /// <summary>
+        /// Specify the member used to identify an unique Model instance.
+        /// </summary>
+        /// <param name="fieldName">The member name.</param>
+        public new void Id(string fieldName)
+        {
+            base.Id(fieldName);
+        }
+
+        /// <summary>
         /// Describes a Model field
         /// </summary>
         /// <param name="memberName">Field name</param>

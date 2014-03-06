@@ -34,7 +34,8 @@ namespace Kendo.Mvc.UI
 
             Checkboxes = new TreeViewCheckboxesSettings();
 
-            DataSource = new HierarchicalDataSource();
+            DataSource = new DataSource();
+            DataSource.ModelType(typeof(object));
 
             AutoBind = true;
         }
@@ -63,7 +64,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public HierarchicalDataSource DataSource
+        public DataSource DataSource
         {
             get;
             private set;
@@ -193,8 +194,8 @@ namespace Kendo.Mvc.UI
                 this.DataSource.Data = SerializeItems(Items);
                 this.LoadOnDemand = false;
             }
-            
-            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
+
+            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url) || DataSource.Type == DataSourceType.Custom)
             {
                 options["dataSource"] = DataSource.ToJson();
             }

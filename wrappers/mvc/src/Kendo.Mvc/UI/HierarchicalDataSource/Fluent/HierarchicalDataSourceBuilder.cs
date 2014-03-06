@@ -6,23 +6,53 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="HierarchicalDataSource"/>.
     /// </summary>
-    public class HierarchicalDataSourceBuilder : IHideObjectMembers
+    public class HierarchicalDataSourceBuilder<TModel> : IHideObjectMembers
+        where TModel: class
     {
-        private readonly HierarchicalDataSource dataSource;
+        private readonly DataSource dataSource;
         private readonly IUrlGenerator urlGenerator;
         private readonly ViewContext viewContext;
 
-        public HierarchicalDataSourceBuilder(HierarchicalDataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
+        public HierarchicalDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
         {
             this.dataSource = dataSource;
             this.urlGenerator = urlGenerator;
             this.viewContext = viewContext;
+            this.dataSource.ServerPaging = false;
+            this.dataSource.ServerSorting = false;
+            this.dataSource.ServerGrouping = false;
+            this.dataSource.ServerFiltering = false;
+            this.dataSource.ServerAggregates = false;
+            this.dataSource.Schema.Data = "";
+            this.dataSource.Schema.Total = "";
+            this.dataSource.Schema.Errors = "";
+            this.dataSource.Transport.SerializeEmptyPrefix = false;
+        }
+
+        /// <summary>
+        /// Use it to configure Custom binding.
+        /// </summary>
+        public CustomHierarchicalDataSourceBuilder Custom()
+        {
+            dataSource.Type = DataSourceType.Custom;
+
+            return new CustomHierarchicalDataSourceBuilder(dataSource, viewContext, urlGenerator);
+        }
+
+        /// <summary>
+        /// Use it to configure SignalR binding.
+        /// </summary>
+        public SignalRHierarchicalDataSourceBuilder SignalR()
+        {
+            dataSource.Type = DataSourceType.Custom;
+
+            return new SignalRHierarchicalDataSourceBuilder(dataSource);
         }
 
         /// <summary>
         /// Configures the URL for Read operation.
         /// </summary> 
-        public HierarchicalDataSourceBuilder Read(Action<CrudOperationBuilder> configurator)
+        public HierarchicalDataSourceBuilder<TModel> Read(Action<CrudOperationBuilder> configurator)
         {
             configurator(new CrudOperationBuilder(dataSource.Transport.Read, viewContext, urlGenerator));
 
@@ -35,7 +65,7 @@
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller Name</param>        
         /// <param name="routeValues">Route values</param>
-        public HierarchicalDataSourceBuilder Read(string actionName, string controllerName, object routeValues)
+        public HierarchicalDataSourceBuilder<TModel> Read(string actionName, string controllerName, object routeValues)
         {
             SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, routeValues);
 
@@ -47,7 +77,7 @@
         /// </summary>
         /// <param name="actionName">Action name</param>
         /// <param name="controllerName">Controller Name</param>                
-        public HierarchicalDataSourceBuilder Read(string actionName, string controllerName)
+        public HierarchicalDataSourceBuilder<TModel> Read(string actionName, string controllerName)
         {
             SetOperationUrl(dataSource.Transport.Read, actionName, controllerName, null);
 
@@ -57,7 +87,7 @@
         /// <summary>
         /// Configures the client-side events
         /// </summary>  
-        public HierarchicalDataSourceBuilder Events(Action<DataSourceEventBuilder> configurator)
+        public HierarchicalDataSourceBuilder<TModel> Events(Action<DataSourceEventBuilder> configurator)
         {
             configurator(new DataSourceEventBuilder(dataSource.Events));
 
@@ -67,9 +97,9 @@
         /// <summary>
         /// Configures the model
         /// </summary>  
-        public HierarchicalDataSourceBuilder Model(Action<HierarchicalModelDescriptorBuilder> configurator)
+        public HierarchicalDataSourceBuilder<TModel> Model(Action<HierarchicalModelDescriptorBuilder<object>> configurator)
         {
-            configurator(new HierarchicalModelDescriptorBuilder(dataSource.Model, viewContext, urlGenerator));
+            configurator(new HierarchicalModelDescriptorBuilder<object>(dataSource.Schema.Model, viewContext, urlGenerator));
 
             return this;
         }
@@ -77,7 +107,7 @@
         /// <summary>
         /// Specifies if filtering should be handled by the server.
         /// </summary>        
-        public HierarchicalDataSourceBuilder ServerFiltering()
+        public HierarchicalDataSourceBuilder<TModel> ServerFiltering()
         {
             dataSource.ServerFiltering = true;
             return this;
@@ -86,7 +116,7 @@
         /// <summary>
         /// Specifies if filtering should be handled by the server.
         /// </summary>        
-        public HierarchicalDataSourceBuilder ServerFiltering(bool enabled)
+        public HierarchicalDataSourceBuilder<TModel> ServerFiltering(bool enabled)
         {
             dataSource.ServerFiltering = enabled;
             return this;

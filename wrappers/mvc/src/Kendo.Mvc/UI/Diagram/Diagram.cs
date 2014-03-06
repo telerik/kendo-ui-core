@@ -18,9 +18,10 @@ namespace Kendo.Mvc.UI
         {
             this.urlGenerator = urlGenerator;
 
-            DataSource = new HierarchicalDataSource();
+            DataSource = new DataSource();
+            DataSource.ModelType(typeof(object));
+
             //>> Initialization
-        
             ConnectionDefaults = new DiagramConnectionDefaultsSettings();
                 
             Connections = new List<DiagramConnection>();
@@ -34,7 +35,7 @@ namespace Kendo.Mvc.UI
         //<< Initialization
         }
 
-        public HierarchicalDataSource DataSource
+        public DataSource DataSource
         {
             get;
             private set;
@@ -90,7 +91,7 @@ namespace Kendo.Mvc.UI
         {
             var json = new Dictionary<string, object>(Events);
 
-            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url))
+            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url) || DataSource.Type == DataSourceType.Custom)
             {
                 json["dataSource"] = DataSource.ToJson();
             }

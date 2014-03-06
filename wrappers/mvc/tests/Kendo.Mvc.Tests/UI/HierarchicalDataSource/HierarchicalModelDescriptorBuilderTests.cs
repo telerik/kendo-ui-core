@@ -6,13 +6,13 @@
 
     public class HierarchicalModelDescriptorBuilderTests
     {
-        private readonly HierarchicalModelDescriptorBuilder builder;
-        private readonly HierarchicalModelDescriptor model;
+        private readonly HierarchicalModelDescriptorBuilder<object> builder;
+        private readonly ModelDescriptor model;
 
         public HierarchicalModelDescriptorBuilderTests()
         {
-            model = new HierarchicalModelDescriptor();
-            builder = new HierarchicalModelDescriptorBuilder(model, TestHelper.CreateViewContext(), new UrlGenerator());
+            model = new ModelDescriptor(typeof(object));
+            builder = new HierarchicalModelDescriptorBuilder<object>(model, TestHelper.CreateViewContext(), new UrlGenerator());
         }
 
         [Fact]
@@ -25,7 +25,7 @@
         public void Id_should_set_id_member()
         {
             builder.Id("ID");
-            model.IdMember.ShouldEqual("ID");
+            model.Id.Name.ShouldEqual("ID");
         }
 
         [Fact]

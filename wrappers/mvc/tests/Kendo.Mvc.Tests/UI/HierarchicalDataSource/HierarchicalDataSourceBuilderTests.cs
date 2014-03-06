@@ -6,13 +6,13 @@
 
     public class HierarchicalDataSourceBuilderTests
     {
-        private readonly HierarchicalDataSource dataSource;
-        private readonly HierarchicalDataSourceBuilder builder;        
+        private readonly DataSource dataSource;
+        private readonly HierarchicalDataSourceBuilder<object> builder;
 
         public HierarchicalDataSourceBuilderTests()
         {
-            dataSource = new HierarchicalDataSource();
-            builder = new HierarchicalDataSourceBuilder(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
+            dataSource = new DataSource();
+            builder = new HierarchicalDataSourceBuilder<object>(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
         }
 
         [Fact]
@@ -106,8 +106,9 @@
         [Fact]
         public void Model_should_configure_model_options()
         {
+            dataSource.ModelType(typeof(object));
             builder.Model(model => model.Id("ID"));
-            dataSource.Model.IdMember.ShouldEqual("ID");
+            dataSource.Schema.Model.Id.Name.ShouldEqual("ID");
         }
     }
 }

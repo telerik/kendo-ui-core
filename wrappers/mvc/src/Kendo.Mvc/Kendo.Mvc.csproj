@@ -700,6 +700,12 @@
     <Compile Include="UI\DataSource\WebApiDataSourceRequestAttribute.cs" />
     <Compile Include="UI\DataSource\WebApiDataSourceRequestModelBinder.cs" />
     <Compile Include="UI\Diagram\Html\DiagramHtmlBuilder.cs" />
+    <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceBuilder.cs" />
+    <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceModelDescriptorFactory.cs" />
+    <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceSchemaBuilder.cs" />
+    <Compile Include="UI\HierarchicalDataSource\Fluent\SignalRHierarchicalDataSourceBuilder.cs" />
+    <Compile Include="UI\HierarchicalDataSource\Fluent\SignalRHierarchicalDataSourceModelDescriptorFactory.cs" />
+    <Compile Include="UI\HierarchicalDataSource\Fluent\SignalRHierarchicalDataSourceSchemaBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxRulesBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxEventBuilder.cs" />
@@ -939,8 +945,6 @@
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\HierarchicalDataSourceBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\HierarchicalModelDescriptorBuilder.cs" />
-    <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSource.cs" />
-    <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptor.cs" />
     <Compile Include="UI\Map\MapControlPosition.cs" />
     <Compile Include="UI\Map\Fluent\MapControlsAttributionSettingsBuilder.cs" />
     <Compile Include="UI\Map\MapMarkerTooltip.cs" />

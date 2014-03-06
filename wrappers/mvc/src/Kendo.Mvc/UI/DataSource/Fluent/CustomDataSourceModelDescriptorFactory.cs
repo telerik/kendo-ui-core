@@ -19,6 +19,15 @@
         /// <summary>
         /// Specify the member used to identify an unique Model instance.
         /// </summary>
+        /// <param name="fieldName">The member name.</param>
+        public new void Id(string fieldName)
+        {
+            base.Id(fieldName);
+        }
+
+        /// <summary>
+        /// Specify the member used to identify an unique Model instance.
+        /// </summary>
         /// <typeparam name="TValue">Type of the field</typeparam>
         /// <param name="expression">Member access expression which describes the member</param>
         public virtual void Id<TValue>(Expression<Func<TModel, TValue>> expression)

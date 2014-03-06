@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Extensions;
+    using Infrastructure;
 
     public class ModelDescriptor : JsonObject
     {
@@ -17,6 +18,23 @@
 
         public IList<ModelFieldDescriptor> Fields { get; private set; }
         public IDataKey Id { get; set; }
+        public DataSource ChildrenDataSource
+        {
+            get;
+            set;
+        }
+
+        public string ChildrenMember
+        {
+            get;
+            set;
+        }
+
+        public string HasChildrenMember
+        {
+            get;
+            set;
+        }
 
         public ModelFieldDescriptor AddDescriptor(string member)
         {
@@ -38,6 +56,18 @@
             if (Id != null)
             {
                 json["id"] = Id.Name;
+            }
+
+            FluentDictionary.For(json)
+                   .Add("hasChildren", HasChildrenMember, HasChildrenMember.HasValue);
+
+            if (ChildrenDataSource != null)
+            {
+                json["children"] = ChildrenDataSource.ToJson();
+            }
+            else if (ChildrenMember.HasValue())
+            {
+                json["children"] = ChildrenMember;
             }
 
             if (Fields.Count > 0)

@@ -6,11 +6,11 @@
 
     public class HierarchicalDataSourceTests
     {
-        private readonly HierarchicalDataSource dataSource;        
+        private readonly DataSource dataSource;
 
         public HierarchicalDataSourceTests()
         {
-            dataSource = new HierarchicalDataSource();           
+            dataSource = new DataSource();
         }
         [Fact]
         public void ToJson_transport_is_serialized()
@@ -41,14 +41,15 @@
         [Fact]
         public void ToJson_model_is_not_serialized_if_not_set()
         {
-            var schema = dataSource.ToJson()["schema"] as IDictionary<string, object>;            
+            var schema = dataSource.ToJson()["schema"] as IDictionary<string, object>;
             schema.ContainsKey("model").ShouldBeFalse();
         }
 
         [Fact]
         public void ToJson_model_is_serialized_if_set()
         {
-            dataSource.Model.IdMember = "ID";
+            dataSource.ModelType(typeof(object));
+            dataSource.Schema.Model.HasChildrenMember = "HasChildren";
             var schema = dataSource.ToJson()["schema"] as IDictionary<string, object>;
             schema.ContainsKey("model").ShouldBeTrue();
         }
