@@ -707,24 +707,8 @@ var __meta__ = {
             this._collectionIndex = collectionIndex;
         },
         refresh: function() {
-            var diffs = [];
-
             for (var slotIndex = 0; slotIndex < this._slots.length; slotIndex++) {
-                var slot = this._slots[slotIndex];
-
-                var offsetTop = slot.offsetTop;
-
-                slot.refresh();
-
-                diffs[slotIndex] = slot.offsetTop - offsetTop;
-            }
-
-            for (var eventIndex = 0; eventIndex < this._events.length; eventIndex++) {
-                var event = this._events[eventIndex];
-
-                event.element.css({
-                    top: event.element[0].offsetTop + diffs[event.slotIndex]
-                });
+                this._slots[slotIndex].refresh();
             }
         },
 

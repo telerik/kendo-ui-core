@@ -1554,7 +1554,7 @@
         deepEqual(model.end, timezone.convert(end, zone, "Etc/UTC"));
     });
 
-    test("updateEvent refreshes the ui", 3, function() {
+    test("updateEvent refreshes the ui", 2, function() {
         var scheduler = setup({
             dataSource: {
                 data: [

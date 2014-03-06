@@ -2244,8 +2244,6 @@ var __meta__ = {
                     that._preventRefresh = false;
                 }
 
-                that.refresh();
-
                 if (!that.trigger(SAVE, { event: event })) {
                     if (callback) {
                         callback();

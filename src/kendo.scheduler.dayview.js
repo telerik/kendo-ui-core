@@ -1130,7 +1130,6 @@ var __meta__ = {
             var rows = SchedulerView.createRows(allDayEvents);
 
             if (rows.length && rows.length > currentColumnCount) {
-                this._updateAllDayHeaderHeight(eventHeight * rows.length + eventHeight);
                 this._headerColumnCount = rows.length;
             }
 
@@ -1337,15 +1336,19 @@ var __meta__ = {
         },
 
         _updateAllDayHeaderHeight: function(height) {
-            var allDaySlots = this.element.find(".k-scheduler-header-all-day td");
+            if (this._height !== height) {
+                this._height = height;
 
-            if (allDaySlots.length) {
-                allDaySlots.parent()
-                    .add(this.element.find(".k-scheduler-times-all-day").parent())
-                    .height(height);
+                var allDaySlots = this.element.find(".k-scheduler-header-all-day td");
 
-                for (var groupIndex = 0; groupIndex < this.groups.length; groupIndex++) {
-                    this.groups[groupIndex].refresh();
+                if (allDaySlots.length) {
+                    allDaySlots.parent()
+                        .add(this.element.find(".k-scheduler-times-all-day").parent())
+                        .height(height);
+
+                    for (var groupIndex = 0; groupIndex < this.groups.length; groupIndex++) {
+                        this.groups[groupIndex].refresh();
+                    }
                 }
             }
         },
@@ -1441,25 +1444,37 @@ var __meta__ = {
 
             this.element.find(".k-event").remove();
 
-            this._updateAllDayHeaderHeight(this._allDayHeaderHeight);
-
             events = new kendo.data.Query(events)
                 .sort([{ field: "start", dir: "asc" },{ field: "end", dir: "desc" }])
                 .toArray();
 
-            var resources = this.groupedResources;
+            var eventsByResource = [];
 
-            if (resources.length) {
-                this._renderGroups(events, resources, 0);
-            } else {
-                this._renderEvents(events, 0, 0);
+            this._eventsByResource(events, this.groupedResources, eventsByResource);
+
+            var eventsPerDate = this._dates.map(function(date) {
+                return Math.max.apply(null,
+                    eventsByResource.map(function(events) {
+                        return events.filter(function(event) {
+                            return event.isMultiDay() && isInDateRange(date, event.start, event.end);
+                        }).length;
+                    })
+                );
+            });
+
+            var height = Math.max.apply(null, eventsPerDate);
+
+            this._updateAllDayHeaderHeight((height + 1) * this._allDayHeaderHeight);
+
+            for (var groupIndex = 0; groupIndex < eventsByResource.length; groupIndex++) {
+                this._renderEvents(eventsByResource[groupIndex], groupIndex);
             }
 
             this.refreshLayout();
             this.trigger("activate");
         },
 
-        _renderGroups: function(events, resources, offset) {
+        _eventsByResource: function(events, resources, result) {
             var resource = resources[0];
 
             if (resource) {
@@ -1471,13 +1486,14 @@ var __meta__ = {
                     var eventsFilteredByResource = new kendo.data.Query(events).filter({ field: resource.field, operator: SchedulerView.groupEqFilter(value) }).toArray();
 
                     if (resources.length > 1) {
-                        offset = this._renderGroups(eventsFilteredByResource, resources.slice(1), offset++);
+                        this._eventsByResource(eventsFilteredByResource, resources.slice(1), result);
                     } else {
-                        this._renderEvents(eventsFilteredByResource, offset++);
+                        result.push(eventsFilteredByResource);
                     }
                 }
+            } else {
+                result.push(events);
             }
-            return offset;
         },
 
         _columnOffsetForResource: function(index) {
