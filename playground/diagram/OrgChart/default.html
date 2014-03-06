@@ -190,10 +190,10 @@ $(function () {
         var options = {
             dataSource: dataSource,
             autoBind: false,
-            useScroller: false
+            shapeDefaults: {}
         }
         if (kendo.isFunction(window[template])) {
-            options.visualTemplate = window[template];
+            options.shapeDefaults.visual = window[template];
         }
         else {
             options.template = template;
