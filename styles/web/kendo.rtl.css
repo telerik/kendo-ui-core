@@ -336,6 +336,7 @@
 
 /* Notification */
 
+.k-rtl .k-notification-button .k-notification-wrap,
 .k-rtl.k-notification-button .k-notification-wrap
 {
     padding-right: .5em;
