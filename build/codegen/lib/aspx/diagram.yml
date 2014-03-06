@@ -7,7 +7,7 @@
       :type: kendo.dataviz.diagram.Shape
       :description: DescriptionPH
 
-    - :name: layoutSettings
+    - :name: layout
       :type: kendo.dataviz.diagram.DiagramLayout
       :description: Defines the diagram's Layout settings
 

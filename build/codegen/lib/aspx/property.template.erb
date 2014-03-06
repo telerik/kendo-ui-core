@@ -2,14 +2,14 @@
         /// <summary>
         /// <%= description %>
         /// </summary>
-        public <%= csharp_class %> <%= name.pascalize %>
+        public <%= csharp_class %> <%= csharp_name %>
         {
             get
             {
-                return (<%= csharp_class %>)(ViewState["<%= name.pascalize %>"]);
+                return (<%= csharp_class %>)(ViewState["<%= csharp_name %>"]);
             }
             set
             {
-                ViewState["<%= name.pascalize %>"] = value;
+                ViewState["<%= csharp_name %>"] = value;
             }
         }

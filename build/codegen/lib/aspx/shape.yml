@@ -3,9 +3,17 @@
       :type: kendo.dataviz.diagram.Shape.Stroke
       :description: Defines the stroke configuration.
 
+    - :name: rotation
+      :type: kendo.dataviz.diagram.Shape.Rotation
+      :description: Defines the rotation applied to the shape.
+
     - :name: hover
       :type: kendo.dataviz.diagram.Shape.Hover
       :description: Defines the hover configuration.
+
+    - :name: hover.stroke
+      :type: kendo.dataviz.diagram.Shape.Stroke
+      :description: Defines the hovered stroke configuration.
 
     - :name: connectors.connector
       :type: kendo.dataviz.diagram.Shape.Connector

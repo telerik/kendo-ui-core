@@ -5,12 +5,13 @@ module CodeGen
         module Wrappers
 
             CHILD_COMPONENTS = %w{
-            DiagramConnection
-            DiagramShape
-            DiagramConnector
-            DiagramLayoutSettings}
+                DiagramLayout
+            }
 
-            OPTIONS_TO_SKIP = %w{dataSource autoBind}
+            OPTIONS_TO_SKIP = %w{
+                dataSource
+                autoBind
+            }
 
             TYPES_MAP = {
                 'String' => 'string',
@@ -51,13 +52,13 @@ module CodeGen
             CONVERTER_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/converter.class.template.erb'))
 
             CONVERTER_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
 
             CONVERTER_COMPOSITE_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
 
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
 
             module Options
 
@@ -65,10 +66,6 @@ module CodeGen
 
                 def component_class
                     Component
-                end
-
-                def csharp_name
-                    name.pascalize
                 end
 
                 def composite_option_class
@@ -83,9 +80,12 @@ module CodeGen
                     ArrayOption
                 end
 
+                def csharp_name
+                    name.pascalize
+                end
+
                 def csharp_namespace
-                    "Telerik.Web.UI.#{root_component.name.pascalize}" if root_component.widget?
-                    "Telerik.Web.UI"
+                    "Telerik.Web.UI.#{root_component.owner_namespace}"
                 end
 
                 def description
@@ -157,7 +157,7 @@ module CodeGen
                 end
 
                 def root_component
-                    parent = owner
+                    parent = self
                     while !parent.is_a?(Component) && !parent.owner.nil?
                         parent = parent.owner
                     end
@@ -247,15 +247,27 @@ module CodeGen
             class CompositeOption < CodeGen::CompositeOption
                 include Options
 
+                def csharp_name
+                    "#{name.pascalize}Settings"
+                end
+
                 def csharp_class
                     return strip_kendo_type(type) if type.include?('kendo.')
 
-                    prefix = owner.instance_of?(ArrayItem) ? owner.owner.owner.csharp_name.sub('Settings', '') : owner.csharp_name.sub('Settings', '')
-                    name.include?('Settings') ? "#{prefix}#{name.sub('Settings', '').pascalize}" : "#{prefix}#{name.pascalize}"
+                    #prefix = owner.instance_of?(ArrayItem) ? owner.owner.owner.csharp_name.sub('Settings', '') : owner.csharp_name.sub('Settings', '')
+
+                    #"#{prefix}#{name.sub('Settings', '').pascalize}"
+
+                    name.pascalize
                 end
 
                 def csharp_default
                     'null'
+                end
+
+                def csharp_namespace
+                    return 'Telerik.Web.UI' if csharp_class.start_with?(root_component.owner_namespace)
+                    "Telerik.Web.UI.#{root_component.owner_namespace}"
                 end
 
                 def csharp_converter_class
@@ -302,12 +314,12 @@ module CodeGen
                     ArrayItem
                 end
 
-                def csharp_class
-                    "List<#{item.csharp_class}>"
+                def csharp_name
+                    "#{name.pascalize}Collection"
                 end
 
-                def csharp_namespace
-                    'Telerik.Web.UI'
+                def csharp_class
+                    "List<#{item.csharp_class}>"
                 end
 
                 def csharp_default
@@ -323,6 +335,12 @@ module CodeGen
             class ArrayItem < CompositeOption
 
                 def csharp_class
+                    if type.include?('kendo.')
+                        prefix = root_component.widget? ? root_component.name.pascalize : root_component.owner_namespace
+
+                        return "#{prefix}#{strip_kendo_type(type)}"
+                    end
+
                     "#{owner.owner.name.pascalize.sub('Collection', '')}#{name.pascalize}"
                 end
 
@@ -526,10 +544,10 @@ module CodeGen
                 end
 
                 def write_option(option)
-                    if option.class == CompositeOption && option.owner.class != ArrayItem && !CHILD_COMPONENTS.include?(option.csharp_class)
+                    if option.class == CompositeOption && option.owner.class != ArrayItem
                         write_composite_option_file(option)
                     end
-                    if option.class == ArrayOption && !CHILD_COMPONENTS.include?(option.item.csharp_class)
+                    if option.class == ArrayOption
                         write_array_item_class(option.item)
                     end
 

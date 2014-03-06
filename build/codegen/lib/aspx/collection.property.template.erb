@@ -1,10 +1,11 @@
+
         private <%= csharp_class %> _<%= name %>;
         /// <summary>
         /// <%= description %>
         /// </summary>
         [DefaultValue(<%= csharp_default %>)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public <%= csharp_class %> <%= name.pascalize %>
+        public <%= csharp_class %> <%= csharp_name %>
         {
             get
             {

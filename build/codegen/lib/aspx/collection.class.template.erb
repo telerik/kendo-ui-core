@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.Script.Serialization;
 
+using Telerik.Web.UI<%= csharp_namespace == 'Telerik.Web.UI' ? ".#{root_component.owner_namespace}" : '' %>;
+
 namespace <%= csharp_namespace %>
 {
    /// <summary>

@@ -7,6 +7,7 @@
           - none - no cap
           - ArrowStart - a filled arrow
           - FilledCircle - a filled circle
+
     - :name: endCap
       :type: String
       :description: The start cap (arrow, head or decoration) of the connection.
@@ -15,5 +16,15 @@
           - none - no cap
           - ArrowEnd - a filled arrow
           - FilledCircle - a filled circle
+
+    - :name: hover
+      :type: kendo.dataviz.diagram.Connection.Hover
+      :description: Defines the hover configuration.
+
     - :name: hover.stroke
       :type: kendo.dataviz.diagram.Connection.Stroke
+      :description: Defines the hovered stroke configuration.
+
+    - :name: stroke
+      :type: kendo.dataviz.diagram.Connection.Stroke
+      :description: Defines the stroke configuration.
