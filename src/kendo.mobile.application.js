@@ -16,7 +16,7 @@ kendo_module({
         OS = support.mobileOS,
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
-        BROKEN_WEBVIEW_RESIZE = OS.appMode && OS.ios, // && OS.device === "iphone",
+        BROKEN_WEBVIEW_RESIZE = OS.ios && OS.flatVersion >= 700 && OS.appMode,
         HORIZONTAL = "km-horizontal",
 
         MOBILE_PLATFORMS = {
@@ -72,6 +72,9 @@ kendo_module({
         classes.push("km-" + os.majorVersion);
         classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
 
+        if (os.cordova) {
+            classes.push("km-cordova");
+        }
         if (os.appMode) {
             classes.push("km-app");
         } else {

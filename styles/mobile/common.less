@@ -1239,6 +1239,13 @@
     background-clip: border-box;
 }
 
+// reset the padding in iOS6, as the status bar can't overlay it in Cordova
+.km-on-ios.km-ios5.km-cordova .km-header .km-navbar,
+.km-on-ios.km-ios6.km-cordova .km-header .km-navbar
+{
+    padding-top: 0;
+}
+
 .km-leftitem,
 .km-rightitem
 {
