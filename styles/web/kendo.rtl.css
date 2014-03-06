@@ -334,6 +334,14 @@
     float: right;
 }
 
+/* Notification */
+
+.k-rtl .k-notification-wrap > .k-i-close
+{
+    right: auto;
+    left: 4px;
+}
+
 /* PanelBar */
 
 .k-rtl .k-panelbar-expand,
