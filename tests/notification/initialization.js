@@ -714,4 +714,15 @@
         notEqual(notification.element[0].style.display, "none");
     });
 
+    test("popup notifications have a k-rtl class in RTL mode", function() {
+        QUnit.fixture.addClass("k-rtl");
+        createNotification();
+
+        notification.show("foo");
+
+        QUnit.fixture.removeClass("k-rtl");
+
+        ok($(".k-notification").hasClass("k-rtl"));
+    });
+
 })();
