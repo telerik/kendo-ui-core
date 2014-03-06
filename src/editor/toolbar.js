@@ -415,6 +415,17 @@
             });
         },
 
+        decorateFrom: function(body) {
+            this.items().filter(".k-decorated")
+                .each(function() {
+                    var selectBox = $(this).data("kendoSelectBox");
+
+                    if (selectBox) {
+                        selectBox.decorate(body);
+                    }
+                });
+        },
+
         destroy: function() {
             Widget.fn.destroy.call(this);
 

@@ -297,8 +297,7 @@
             doc = wnd.document || iframe.contentDocument;
 
             $(iframe).one("load", function() {
-                var styleTools = editor.toolbar.items().filter(".k-decorated");
-                styleTools.kendoSelectBox("decorate", doc.body);
+                editor.toolbar.decorateFrom(doc.body);
             });
 
             doc.open();
@@ -355,8 +354,7 @@
 
                 blurTrigger = editor.body;
 
-                var styleTools = editor.toolbar.items().filter(".k-decorated");
-                styleTools.kendoSelectBox("decorate", editor.body);
+                editor.toolbar.decorateFrom(editor.body);
             }
 
             $(blurTrigger)
