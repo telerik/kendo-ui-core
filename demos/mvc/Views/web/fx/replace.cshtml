@@ -1,4 +1,18 @@
 <div id="example" class="k-content">
+        
+        <div class="demo-section">
+            <div id="placeholder">
+                <img id="home1" src="../../content/web/fx/replace/home1.jpg" />
+                <img id="home2" src="../../content/web/fx/replace/home2.jpg" />
+                <img id="home3" src="../../content/web/fx/replace/home3.jpg" />
+            </div>
+            <ul id="homes">
+                <li><a id="thumb1" href="#"><span>Home 1</span></a></li>
+                <li><a id="thumb2" href="#"><span>Home 2</span></a></li>
+                <li><a id="thumb3" href="#"><span>Home 3</span></a></li>
+            </ul>
+        </div>
+        
         <div id="replace-container">
             <div id="replace-step1">Questionairre – Step 1</div>
             <div id="replace-step2" style="display: none">Questionairre – Step 2</div>
@@ -33,6 +47,45 @@
 
         </script>
         <style>
+            #placeholder {
+                display: inline-block;
+                width: 500px;
+                height: 333px;
+            }
+            #homes {
+                display: inline-block;
+                width: 160px;
+                height: 333px;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            #homes li {
+                margin: 0;
+                padding: 0;
+            }
+            #homes li a {
+                display: block;
+                width: 160px;
+                height: 111px;
+            }
+            #homes li a span {
+                display: none;
+            }
+            
+            #thumb1 {
+                background: url('../../content/web/fx/replace/t1.jpg') no-repeat left top;
+            }
+            #thumb2 {
+                background: url('../../content/web/fx/replace/t2.jpg') no-repeat left top;
+            }
+            #thumb3 {
+                background: url('../../content/web/fx/replace/t3.jpg') no-repeat left top;
+            }
+            
+            
+            
+            
             #replace-container {
                 position: relative;
                 width: 202px;
