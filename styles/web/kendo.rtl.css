@@ -336,6 +336,18 @@
 
 /* Notification */
 
+.k-rtl .k-notification-button .k-notification-wrap
+{
+    padding-right: .5em;
+    padding-left: 20px;
+}
+
+.k-rtl .k-notification-wrap > .k-i-note
+{
+    margin-right: 0;
+    margin-left: 4px;
+}
+
 .k-rtl .k-notification-wrap > .k-i-close
 {
     right: auto;
