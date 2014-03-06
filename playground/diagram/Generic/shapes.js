@@ -41,7 +41,7 @@ var mediaPlayerShape = window.kendo.Class.extend({
                 background: "silver",
                 id: "view"
             });
-            view.native.setAttribute("transform", "translate(5,5)");
+            view.domElement.setAttribute("transform", "translate(5,5)");
             g.append(view);
 
             var playBar = new kendo.dataviz.diagram.Rectangle({
@@ -51,13 +51,13 @@ var mediaPlayerShape = window.kendo.Class.extend({
                 cornerRadius: 6,
                 id: "playBar"
             });
-            playBar.native.setAttribute("transform", "translate(5,78)");
+            playBar.domElement.setAttribute("transform", "translate(5,78)");
             g.append(playBar);
 
             var playGroup = new kendo.dataviz.diagram.Group({
                 id: "playGroup"
             });
-            playGroup.native.setAttribute("transform", "translate(35,70)");
+            playGroup.domElement.setAttribute("transform", "translate(35,70)");
             g.append(playGroup);
 
             var playCircle = new kendo.dataviz.diagram.Circle({
@@ -87,7 +87,7 @@ var mediaPlayerShape = window.kendo.Class.extend({
             var c = newBounds.center();
             //var sx = newBounds.width / oldBounds.width;
             var sy = newBounds.height / oldBounds.height;
-            var svg = shape.visual.native.ownerSVGElement;
+            var svg = shape.visual.domElement.ownerSVGElement;
             var consolidatedMatrix = svg.createSVGTransform().matrix;
             var p = new kendo.dataviz.diagram.Point(c.x - newBounds.x - 25, c.y - newBounds.y - 25);
 
@@ -95,7 +95,7 @@ var mediaPlayerShape = window.kendo.Class.extend({
             // var special = document.getElementById("special");
 
             var shapeRoot;
-            kendo.dataviz.diagram.Utils.DFT(shape.visual.native, function (n) {
+            kendo.dataviz.diagram.Utils.DFT(shape.visual.domElement, function (n) {
                 if (n.id === "shapeRoot") {
                     shapeRoot = n;
                     n.removeAttribute("transform");
@@ -166,12 +166,12 @@ var tabControl = window.kendo.Class.extend({
                     background: "silver",
                     id: "tabRectangle" + index
                 });
-                //tabRectangle.native.setAttribute("transform", "translate(0,0)");
+                //tabRectangle.domElement.setAttribute("transform", "translate(0,0)");
                 g.append(tabRectangle);
 
                 var textBlock = new kendo.dataviz.diagram.TextBlock();
                 textBlock.content(title);
-                textBlock.native.setAttribute("transform", "translate(10,10)");
+                textBlock.domElement.setAttribute("transform", "translate(10,10)");
                 g.append(textBlock);
 
                 return g;
@@ -195,7 +195,7 @@ var tabControl = window.kendo.Class.extend({
                 if(title===null) continue;
                 if(title.trim().length===0) continue;
                 var tab = makeTab(i, title);
-                tab.native.setAttribute("transform", "translate(" + (i * 103) + ",0)");
+                tab.domElement.setAttribute("transform", "translate(" + (i * 103) + ",0)");
                 g.append(tab);
             }
 
@@ -216,7 +216,7 @@ var tabControl = window.kendo.Class.extend({
             shape.options.minWidth = tabTitles.length * 103 + 30;
             shape.options.minHeight = 50;
             // remove the textblock
-            $(shape.visual.native.childNodes[1]).remove();
+            $(shape.visual.domElement.childNodes[1]).remove();
 
             if (!kendo.dataviz.diagram.Utils.isDefined(newBounds)) {
                 newBounds = shape.bounds();
@@ -229,12 +229,12 @@ var tabControl = window.kendo.Class.extend({
 
 
             var c = newBounds.center();
-            /*   var svg = shape.visual.native.ownerSVGElement;
+            /*   var svg = shape.visual.domElement.ownerSVGElement;
 
              var p = new kendo.dataviz.diagram.Point(c.x - newBounds.x - 25, c.y - newBounds.y - 25);*/
 
             var shapeRoot;
-            kendo.dataviz.diagram.Utils.DFT(shape.visual.native, function (n) {
+            kendo.dataviz.diagram.Utils.DFT(shape.visual.domElement, function (n) {
                 if (n.id === "shapeRoot") {
                     shapeRoot = n;
                     n.removeAttribute("transform");

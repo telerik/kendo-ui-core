@@ -311,7 +311,7 @@
         <svg>
         <g transform="scale(0.5)" >
         <title>#:options.name#</title>
-            #= new XMLSerializer().serializeToString(kendo.dataviz.diagram.Shape.createShapeVisual(options).native) #
+            #= new XMLSerializer().serializeToString(kendo.dataviz.diagram.Shape.createShapeVisual(options).domElement) #
             </g>
         </svg>
     </div>
