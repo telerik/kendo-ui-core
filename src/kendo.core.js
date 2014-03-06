@@ -1902,7 +1902,7 @@ function pad(number, digits, end) {
                     omobile: /Opera\sMobi/i,
                     firefox: /Firefox|Fennec/i,
                     mobilesafari: /version\/.*safari/i,
-                    chrome: /chrome/i,
+                    chrome: /chrome|crios/i,
                     webkit: /webkit/i,
                     ie: /MSIE|Windows\sPhone/i
                 };
