@@ -56,6 +56,7 @@
             POLYLINE = "Polyline",
             ITEMBOUNDSCHANGE = "itemBoundsChange",
             CHANGE = "change",
+            CLICK = "click",
             ERROR = "error",
             AUTO = "Auto",
             TOP = "Top",
@@ -1325,7 +1326,7 @@
                 connections: []
             },
 
-            events: [ZOOM, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE],
+            events: [ZOOM, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
 
             _createShapes: function() {
                 var that = this,

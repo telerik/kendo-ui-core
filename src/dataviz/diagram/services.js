@@ -689,7 +689,8 @@
                 return true; // the pointer tool is last and handles all others requests.
             },
             start: function (p, meta) {
-                var diagram = this.toolService.diagram, hoveredItem = this.toolService.hoveredItem;
+                var diagram = this.toolService.diagram,
+                    hoveredItem = this.toolService.hoveredItem;
                 if (hoveredItem) {
                     selectSingle(hoveredItem, meta);
                     if (hoveredItem.adorner) { //connection
@@ -713,13 +714,19 @@
                     this.adorner.move(that.handle, p);
                 }
             },
-            end: function () {
-                var diagram = this.toolService.diagram, unit;
+            end: function (p, meta) {
+                var diagram = this.toolService.diagram,
+                    service = this.toolService,
+                    unit;
+
                 if (this.adorner) {
                     unit = this.adorner.stop();
                     if (unit) {
                         diagram.undoRedoService.add(unit, false);
                     }
+                }
+                if(service.hoveredItem) {
+                    this.toolService.triggerClick({item: service.hoveredItem, point: p, meta: meta});
                 }
                 this.adorner = undefined;
                 this.handle = undefined;
@@ -770,8 +777,10 @@
                 return this.toolService._hoveredConnector && !meta.ctrlKey; // connector it seems
             },
             start: function (p, meta) {
-                var diagram = this.toolService.diagram, connector = this.toolService._hoveredConnector,
+                var diagram = this.toolService.diagram,
+                    connector = this.toolService._hoveredConnector,
                     connection = diagram.connect(connector._c, p);
+
                 this.toolService._connectionManipulation(connection, connector._c.shape, true);
                 this.toolService._removeHover();
                 selectSingle(this.toolService.activeConnection, meta);
@@ -817,7 +826,8 @@
                 this._c.adorner.move(this.handle, p);
                 return true;
             },
-            end: function (p) {
+            end: function (p, meta) {
+                this.toolService.triggerClick({item: this._c, point: p, meta: meta});
                 var unit = this._c.adorner.stop(p);
                 this.toolService.diagram.undoRedoService.add(unit, false);
             },
@@ -867,6 +877,7 @@
                 this.activeTool.start(p, meta);
                 this._updateCursor(p);
                 this.diagram.focus();
+                this.startPoint = p;
                 return true;
             },
             move: function (p, meta) {
@@ -966,6 +977,12 @@
             setTool: function (tool, index) {
                 tool.toolService = this;
                 this.tools[index] = tool;
+            },
+            triggerClick: function(data) {
+                if(this.startPoint.equals(data.point)) {
+                    this.diagram.trigger("click", data);
+                }
+
             },
             _discardNewConnection: function () {
                 if (this.newConnection) {

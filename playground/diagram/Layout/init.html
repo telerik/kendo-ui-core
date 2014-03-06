@@ -47,7 +47,12 @@
             type: "tree",
             subtype: "right"
         },
-        zoom: 1.5
+        select: function() {
+            console.log(arguments);
+        },
+        click: function() {
+            console.log(arguments);
+        }
     });
 </script>
 </body>
