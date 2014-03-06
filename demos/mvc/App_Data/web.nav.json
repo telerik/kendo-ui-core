@@ -1252,6 +1252,12 @@
                     "url": "notification/templates.html",
                     "title": "Templates of Kendo UI Notification | Kendo UI Web demo",
                     "meta": "Demo about using templates with the Kendo UI Notification component."
+                },
+                {
+                    "text": "RTL support",
+                    "url": "notification/rtl.html",
+                    "title": "RTL Support of Kendo UI Notification | Kendo UI Web demo",
+                    "meta": "Demo about the RTL support of the Kendo UI Notification component."
                 }
             ]
         },

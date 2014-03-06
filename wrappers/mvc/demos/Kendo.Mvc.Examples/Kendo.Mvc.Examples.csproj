@@ -438,6 +438,7 @@
     <Compile Include="Controllers\Web\Grid\Toolbar_TemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\Virtualization_Remote_DataController.cs" />
     <Compile Include="Controllers\Web\ListView\Custom_DataSourceController.cs" />
+    <Compile Include="Controllers\Web\Notification\RtlController.cs" />
     <Compile Include="Controllers\Web\Scheduler\Custom_DataSourceController.cs" />
     <Compile Include="Controllers\Web\Notification\Position_StackingController.cs" />
     <Compile Include="Controllers\Web\Notification\TemplatesController.cs" />
@@ -1005,6 +1006,7 @@
     <Content Include="Areas\aspx\Views\web\multiselect\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\multiselect\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\web\multiselect\template.aspx" />
+    <Content Include="Areas\aspx\Views\web\notification\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\notification\index.aspx" />
     <Content Include="Areas\aspx\Views\web\notification\position_stacking.aspx" />
     <Content Include="Areas\aspx\Views\web\notification\templates.aspx" />
@@ -2455,6 +2457,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Areas\razor\Views\web\notification\rtl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\map\api.cshtml" />
