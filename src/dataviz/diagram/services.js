@@ -1469,7 +1469,7 @@
                     for (var y = -1; y <= 1; y++) {
                         if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
                             var visual = new Rectangle(that.options.handles);
-                            visual.native._hover = $.proxy(that._hover, that);
+                            visual.domElement._hover = $.proxy(that._hover, that);
                             that.map.push({ x: x, y: y, visual: visual });
                             that.visual.append(visual);
                         }
@@ -1641,7 +1641,7 @@
                 that._positions();
                 that.refreshBounds();
                 that.refresh();
-                that.redraw({resizable: resizable, rotatable: rotatable});
+                that.redraw({ resizable: resizable, rotatable: rotatable });
             },
             _rotates: function () {
                 var that = this, i, shape;

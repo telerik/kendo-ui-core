@@ -1372,13 +1372,13 @@
 
             _mouseover: function(e) {
                 if (e.target._hover) {
-                    e.target._hover(true, e.target.parent);
+                    e.target._hover(true, e.target._kendoElement);
                 }
             },
 
             _mouseout: function(e) {
                 if (e.target._hover) {
-                    e.target._hover(false, e.target.parent);
+                    e.target._hover(false, e.target._kendoElement);
                 }
             },
 

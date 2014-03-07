@@ -271,7 +271,7 @@
         init: function (domElement, options) {
             var that = this;
             Element.fn.init.call(that, domElement, options);
-            domElement.parent = this;
+            domElement._kendoElement = this;
         },
         options: {
             stroke: {
