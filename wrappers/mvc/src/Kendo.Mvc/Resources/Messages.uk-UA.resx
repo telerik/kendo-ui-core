@@ -705,4 +705,10 @@
   <data name="Pager_MorePages" xml:space="preserve">
     <value>Більше сторінок</value>
   </data>
+  <data name="Grid_Lock" xml:space="preserve">
+    <value>Замикати</value>
+  </data>
+  <data name="Grid_Unlock" xml:space="preserve">
+    <value>Відімкнути</value>
+  </data>
 </root>

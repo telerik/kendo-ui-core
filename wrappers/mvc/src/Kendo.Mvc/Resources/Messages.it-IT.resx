@@ -691,4 +691,10 @@
   <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
     <value>giorno finesettimana</value>
   </data>
+  <data name="Grid_Lock" xml:space="preserve">
+    <value>Bloccare</value>
+  </data>
+  <data name="Grid_Unlock" xml:space="preserve">
+    <value>Sbloccare</value>
+  </data>
 </root>

@@ -804,4 +804,10 @@
   <data name="Pager_MorePages" xml:space="preserve">
     <value>Больше страниц</value>
   </data>
+  <data name="Grid_Lock" xml:space="preserve">
+    <value>Запирать</value>
+  </data>
+  <data name="Grid_Unlock" xml:space="preserve">
+    <value>Отпереть</value>
+  </data>
 </root>

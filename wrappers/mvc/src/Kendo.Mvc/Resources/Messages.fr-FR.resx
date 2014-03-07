@@ -693,4 +693,10 @@
   <data name="Pager_MorePages" xml:space="preserve">
     <value>Plusieurs pages</value>
   </data>
+  <data name="Grid_Lock" xml:space="preserve">
+    <value>Bloquer</value>
+  </data>
+  <data name="Grid_Unlock" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
 </root>
