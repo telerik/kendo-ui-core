@@ -334,6 +334,28 @@ test("persists colspan attribute", function() {
     '</table>');
 });
 
+test("keeps empty cells", function() {
+    equal(
+        clean(
+            '<table>' +
+                '<tbody>' +
+                    '<tr>' +
+                        '<td></td>' +
+                        '<td>a</td>' +
+                    '</tr>' +
+                '</tbody>' +
+            '</table>'),
+    '<table>' +
+        '<colgroup><col><col></colgroup>' +
+        '<tbody>' +
+            '<tr>' +
+                '<td></td>' +
+                '<td>a</td>' +
+            '</tr>' +
+        '</tbody>' +
+    '</table>');
+});
+
 test("persists HTML in text", function() {
     equal(clean('<p class="MsoNormal">&lt;label class="whatever"&gt;<o:p></o:p></p>'), '<p>&lt;label class="whatever"&gt;</p>');
 });
