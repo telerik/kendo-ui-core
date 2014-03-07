@@ -356,6 +356,29 @@ test("keeps empty cells", function() {
     '</table>');
 });
 
+test("converts colgroup", function() {
+    equal(
+        clean(
+            '<table>' +
+                '<colgroup><col width="200"> <col width="100"></colgroup>' +
+                '<tbody>' +
+                    '<tr>' +
+                        '<td></td>' +
+                        '<td>a</td>' +
+                    '</tr>' +
+                '</tbody>' +
+            '</table>'),
+    '<table>' +
+        '<colgroup><col style="width:200px"><col style="width:100px"></colgroup>' +
+        '<tbody>' +
+            '<tr>' +
+                '<td></td>' +
+                '<td>a</td>' +
+            '</tr>' +
+        '</tbody>' +
+    '</table>');
+});
+
 test("persists HTML in text", function() {
     equal(clean('<p class="MsoNormal">&lt;label class="whatever"&gt;<o:p></o:p></p>'), '<p>&lt;label class="whatever"&gt;</p>');
 });
