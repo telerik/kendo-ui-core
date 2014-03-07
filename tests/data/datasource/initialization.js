@@ -45,6 +45,26 @@ test("dataSource is initialized if array is passed as options.data", function() 
     ok(dataSource.data()[1], 2);
 });
 
+test("assigning data updates the pristine", function() {
+    var data = [1, 2],
+        dataSource = DataSource.create({ });
+
+    dataSource.read();
+    dataSource.data([{ foo: 1 }]);
+    dataSource.cancelChanges();
+    equal(dataSource.data().length, 1);
+});
+
+test("assigning data updates the pristine total", function() {
+    var data = [1, 2],
+        dataSource = DataSource.create({ });
+
+    dataSource.read();
+    dataSource.data([{ foo: 1 }]);
+    dataSource.cancelChanges();
+    equal(dataSource.total(), 1);
+});
+
 test("model is created during dataSource initialization from field definition", function() {
     var dataSource = DataSource.create({
         data: data,
