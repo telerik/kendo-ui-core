@@ -2162,10 +2162,13 @@ var __meta__ = {
             if (value !== undefined) {
                 that._data = this._observe(value);
 
+                that._pristineData = value.slice(0);
+
                 that._ranges = [];
                 that._addRange(that._data);
 
                 that._total = that._data.length;
+                that._pristineTotal = that._total;
 
                 that._process(that._data);
             } else {
