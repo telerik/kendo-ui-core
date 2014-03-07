@@ -80,5 +80,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the text message displayed in the column menu for locking a column.
+        /// </summary>
+        /// <param name="message">The message</param>        
+        public ColumnMenuMessagesBuilder Lock(string message)
+        {
+            messages.Lock = message;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the text message displayed in the column menu for unlocking a column.
+        /// </summary>
+        /// <param name="message">The message</param>        
+        public ColumnMenuMessagesBuilder Unlock(string message)
+        {
+            messages.Unlock = message;
+
+            return this;
+        }
     }
 }

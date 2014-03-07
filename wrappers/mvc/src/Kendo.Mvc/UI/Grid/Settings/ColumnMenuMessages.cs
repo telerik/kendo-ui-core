@@ -15,6 +15,8 @@ namespace Kendo.Mvc.UI
             SortDescending = Messages.Grid_SortDescending;
             Done = Messages.Grid_Done;
             ColumnSettings = Messages.Grid_ColumnSettings;
+            Lock = Messages.Grid_Lock;
+            Unlock = Messages.Grid_Unlock;
         }
 
         public string SortAscending { get; set; }
@@ -23,13 +25,17 @@ namespace Kendo.Mvc.UI
         public string Columns { get; set; }
         public string Done { get; set; }
         public string ColumnSettings { get; set; }
+        public string Lock { get; set; }
+        public string Unlock { get; set; }
 
         private const string DefaultSortAscending = "Sort Ascending";
         private const string DefaultSortDescending = "Sort Descending";
         private const string DefaultFilter = "Filter";
         private const string DefaultColumns = "Columns";
         private const string DefaultDone = "Done";
-        private const string DefaultColumnSettings = "Column Settings";  
+        private const string DefaultColumnSettings = "Column Settings";
+        private const string DefaultLock = "Lock";
+        private const string DefaultUnlock = "Unlock";
 
         protected override void Serialize(IDictionary<string, object> json)
         {            
@@ -61,7 +67,17 @@ namespace Kendo.Mvc.UI
             if (ColumnSettings != DefaultColumnSettings)
             {
                 json["settings"] = ColumnSettings;
-            }  
+            }
+
+            if (Lock != DefaultLock)
+            {
+                json["lock"] = Lock;
+            }
+
+            if (Unlock != DefaultUnlock)
+            {
+                json["unlock"] = Unlock;
+            } 
         }
     }
 }

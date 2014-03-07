@@ -925,6 +925,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lock.
+        /// </summary>
+        public static string Grid_Lock {
+            get {
+                return ResourceManager.GetString("Grid_Lock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save changes.
         /// </summary>
         public static string Grid_SaveChanges {
@@ -957,6 +966,15 @@ namespace Kendo.Mvc.Resources {
         public static string Grid_SortDescending {
             get {
                 return ResourceManager.GetString("Grid_SortDescending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock.
+        /// </summary>
+        public static string Grid_Unlock {
+            get {
+                return ResourceManager.GetString("Grid_Unlock", resourceCulture);
             }
         }
         
