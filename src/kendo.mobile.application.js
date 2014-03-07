@@ -48,6 +48,7 @@ var __meta__ = {
         BARCOMPENSATION = OS.browser == "mobilesafari" ? 60 : 0,
         STATUS_BAR_HEIGHT = 20,
         WINDOW = $(window),
+        SCREEN = window.screen,
         HEAD = $("head"),
 
         // mobile app events
@@ -268,13 +269,25 @@ var __meta__ = {
         },
 
         _resizeToScreenHeight: function() {
-            var statusBarOverlaps = $("meta[name=apple-mobile-web-app-status-bar-style]").attr("content") === "black-translucent";
+            var includeStatusBar = $("meta[name=apple-mobile-web-app-status-bar-style]").attr("content").match(/black-translucent|hidden/),
+                element = this.element,
+                height;
 
-            if (isOrientationHorizontal(this.element)) {
-                this.element.height(window.screen.availWidth - (statusBarOverlaps ? 0 : STATUS_BAR_HEIGHT));
+            if (isOrientationHorizontal(element)) {
+                if (includeStatusBar) {
+                    height = SCREEN.availWidth;
+                } else {
+                    height = SCREEN.availWidth - STATUS_BAR_HEIGHT;
+                }
             } else {
-                this.element.height(window.screen.availHeight + (statusBarOverlaps ? STATUS_BAR_HEIGHT : 0));
+                if (includeStatusBar) {
+                    height = SCREEN.availHeight + STATUS_BAR_HEIGHT;
+                } else {
+                    height = SCREEN.availHeight;
+                }
             }
+
+            element.height(height);
         },
 
         _setupElementClass: function() {
