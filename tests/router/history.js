@@ -146,9 +146,21 @@
         if (!pushStateSupported) {
             return;
         }
+
         kendoHistory.start({root: root + "/subdir/", pushState: true});
         kendoHistory.navigate('/new-location');
         url(initial + "/subdir/new-location");
+    });
+
+    test("strips root in current field after navigation", 2, function() {
+        if (!pushStateSupported) {
+            return;
+        }
+
+        kendoHistory.start({root: root + "/subdir/", pushState: true});
+        kendoHistory.navigate(root + '/subdir/new-location');
+        url(initial + "/subdir/new-location");
+        equal(kendoHistory.current, "new-location");
     });
 
     test("triggers events when history changed", function() {

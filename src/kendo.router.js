@@ -41,7 +41,7 @@ kendo_module({
         if (url.indexOf(root) === 0) {
             return (url.substr(root.length)).replace(/\/\//g, '/');
         } else {
-            return root;
+            return url;
         }
     }
 
@@ -52,7 +52,10 @@ kendo_module({
 
         navigate: function(to) {
             history.pushState({}, document.title, absoluteURL(to, this.root));
-            return this.current();
+        },
+
+        normalize: function(url) {
+            return stripRoot(this.root, url);
         },
 
         current: function() {
@@ -77,7 +80,10 @@ kendo_module({
     var HashAdapter = kendo.Class.extend({
         navigate: function(to) {
             location.hash = to;
-            return to;
+        },
+
+        normalize: function(url) {
+            return url;
         },
 
         change: function(callback) {
@@ -177,7 +183,8 @@ kendo_module({
                 }
             }
 
-            this.current = this.adapter.navigate(to);
+            this.current = this.adapter.normalize(to);
+            this.adapter.navigate(to);
 
             this.historyLength = history.length;
 
