@@ -21,7 +21,7 @@
             content: {
                 color: "#ffffff"
             },
-            background: dataItem.ColorScheme,
+            background: dataItem.ColorScheme
         }));
 
         g.append(new dataviz.diagram.TextBlock({

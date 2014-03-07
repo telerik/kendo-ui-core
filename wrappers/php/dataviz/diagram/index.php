@@ -34,7 +34,7 @@ require_once '../../include/header.php';
             content: {
                 color: "#ffffff"
             },
-            background: dataItem.colorScheme,
+            background: dataItem.colorScheme
         }));
 
         g.append(new dataviz.diagram.TextBlock({

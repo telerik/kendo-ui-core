@@ -26,7 +26,7 @@ function visualTemplate(options) {
         content: {
             color: "#ffffff"
         },
-        background: dataItem.colorScheme,
+        background: dataItem.colorScheme
     }));
 
     g.append(new dataviz.diagram.TextBlock({
