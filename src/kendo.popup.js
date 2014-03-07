@@ -406,11 +406,12 @@ var __meta__ = {
 
         _position: function(fixed) {
             var that = this,
+                documentElement = $(document.documentElement),
                 element = that.element.css(POSITION, ""),
                 wrapper = that.wrapper,
                 options = that.options,
                 viewport = $(options.viewport),
-                viewportOffset = $(viewport).offset(),
+                viewportOffset = viewport.offset(),
                 anchor = $(options.anchor),
                 origins = options.origin.toLowerCase().split(" "),
                 positions = options.position.toLowerCase().split(" "),
@@ -418,7 +419,13 @@ var __meta__ = {
                 zoomLevel = support.zoomLevel(),
                 siblingContainer, parents,
                 parentZIndex, zIndex = 10002,
-                idx = 0, length;
+                idx = 0, length, viewportWidth, viewportHeight;
+
+            // $(window).height() uses documentElement to get the height
+            documentElement.css({ overflowX: "hidden", overflowY: "hidden" });
+            viewportWidth = viewport.width();
+            viewportHeight = viewport.height();
+            documentElement.css({ overflowX: "", overflowY: "" });
 
             siblingContainer = anchor.parents().filter(wrapper.siblings());
 
@@ -471,21 +478,21 @@ var __meta__ = {
                 location = extend({}, pos);
 
             if (collisions[0] === "fit") {
-                location.top += that._fit(offsets.top, wrapper.outerHeight(), viewport.height() / zoomLevel);
+                location.top += that._fit(offsets.top, wrapper.outerHeight(), viewportHeight / zoomLevel);
             }
 
             if (collisions[1] === "fit") {
-                location.left += that._fit(offsets.left, wrapper.outerWidth(), viewport.width() / zoomLevel);
+                location.left += that._fit(offsets.left, wrapper.outerWidth(), viewportWidth / zoomLevel);
             }
 
             var flipPos = extend({}, location);
 
             if (collisions[0] === "flip") {
-                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewport.height() / zoomLevel, origins[0], positions[0], wrapper.outerHeight());
+                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewportHeight / zoomLevel, origins[0], positions[0], wrapper.outerHeight());
             }
 
             if (collisions[1] === "flip") {
-                location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewport.width() / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
+                location.left += that._flip(offsets.left, element.outerWidth(), anchor.outerWidth(), viewportWidth / zoomLevel, origins[1], positions[1], wrapper.outerWidth());
             }
 
             element.css(POSITION, ABSOLUTE);
