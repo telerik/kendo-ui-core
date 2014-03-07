@@ -52,12 +52,12 @@
     	<kendo:dataSource data="${ meetings }" />
     	<kendo:scheduler-group resources="<%= new String[] { \"Rooms\" } %>"/>
     	<kendo:scheduler-resources>
-    	    <kendo:scheduler-resource field="roomId" title="Room" name="Rooms">
-    			<kendo:dataSource data="<%= rooms %>" />
-    		</kendo:scheduler-resource>
     		<kendo:scheduler-resource field="attendees" title="Attendees" multiple="true" name="Attendees">
     			<kendo:dataSource data="<%= people %>" />
     		</kendo:scheduler-resource>
+			<kendo:scheduler-resource field="roomId" title="Room" name="Rooms">
+				<kendo:dataSource data="<%= rooms %>" />
+			</kendo:scheduler-resource>
     	</kendo:scheduler-resources>
     </kendo:scheduler>
 

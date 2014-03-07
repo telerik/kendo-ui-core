@@ -14,6 +14,16 @@
     .Group(group => group.Resources("Rooms"))
     .Resources(resource =>
     {
+        resource.Add(m => m.Attendees)
+            .Title("Attendees")
+            .Multiple(true)
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .DataColorField("Color")
+            .BindTo(new[] {
+                        new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                        new { Text = "Bob", Value = 2, Color = "#51a0ed" }
+            });
         resource.Add(m => m.RoomID)
             .Title("Room")
             .Name("Rooms")
@@ -22,18 +32,9 @@
             .DataColorField("Color")
             .BindTo(new[] { 
                 new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
-                new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" } 
+                new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
             });
-        resource.Add(m => m.Attendees)
-            .Title("Attendees")
-            .Multiple(true)
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .DataColorField("Color")
-            .BindTo(new[] { 
-                new { Text = "Alex", Value = 1, Color = "#f8a398" },
-                new { Text = "Bob", Value = 2, Color = "#51a0ed" }                
-            });
+
     })
     .Events(events => events
         .Add("scheduler_add")

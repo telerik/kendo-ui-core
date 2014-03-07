@@ -82,7 +82,7 @@ $attendeesResource->field('attendee')
 $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->date(new DateTime('2013/6/13'))
         ->height(600)
-        ->addResource($roomResource, $attendeesResource)
+        ->addResource($attendeesResource, $roomResource)
         ->group(array('resources' => array('Rooms')))
         ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')))
         ->resize('scheduler_resize')
