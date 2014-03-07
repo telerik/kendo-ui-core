@@ -75,6 +75,14 @@ public class ColumnMenuMessagesTag extends  BaseTag  /* interfaces *//* interfac
         setProperty("filter", value);
     }
 
+    public java.lang.String getLock() {
+        return (java.lang.String)getProperty("lock");
+    }
+
+    public void setLock(java.lang.String value) {
+        setProperty("lock", value);
+    }
+
     public java.lang.String getSettings() {
         return (java.lang.String)getProperty("settings");
     }
@@ -97,6 +105,14 @@ public class ColumnMenuMessagesTag extends  BaseTag  /* interfaces *//* interfac
 
     public void setSortDescending(java.lang.String value) {
         setProperty("sortDescending", value);
+    }
+
+    public java.lang.String getUnlock() {
+        return (java.lang.String)getProperty("unlock");
+    }
+
+    public void setUnlock(java.lang.String value) {
+        setProperty("unlock", value);
     }
 
 //<< Attributes

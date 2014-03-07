@@ -2987,7 +2987,7 @@ The function return value is displayed instead of the individual points.The supp
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The series base color. Accepts a valid CSS color string, including hex and rgb.</description>
+            <description>The series base color. The supported values are:</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -4677,7 +4677,7 @@ A string value is interpreted as series.stack.group.</description>
     </tag>
 
     <tag>
-        <description>The series base color. Accepts a valid CSS color string, including hex and rgb.</description>
+        <description>The series base color. The supported values are:</description>
         <name>chart-seriesItem-color</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemColorFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -10695,6 +10695,11 @@ If zoomRate is less than 1, zooming will be reversed.</description>
             <name>zoom</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <description>Fired when the user clicks on a shape or a connection. Will not fire when the start/down and end/up event points are not equal.</description>
+            <name>click</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
@@ -11454,6 +11459,12 @@ See visual.</description>
         <description>Fired when the user changes the diagram zoom level.</description>
         <name>diagram-zoom</name>
         <tag-class>com.kendoui.taglib.diagram.ZoomFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks on a shape or a connection. Will not fire when the start/down and end/up event points are not equal.</description>
+        <name>diagram-click</name>
+        <tag-class>com.kendoui.taglib.diagram.ClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -12717,6 +12728,12 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text message displayed in the column menu for locking a column.</description>
+            <name>lock</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The text message displayed in the menu header (available in mobile mode only).</description>
             <name>settings</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12731,6 +12748,12 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
         <attribute>
             <description>The text message displayed for the menu item which performs descending sort.</description>
             <name>sortDescending</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text message displayed in the column menu for unlocking a column.</description>
+            <name>unlock</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -20678,7 +20701,7 @@ The function return value is displayed instead of the individual points.The supp
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The series base color.</description>
+            <description>The series base color. The supported values are:</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -21671,7 +21694,7 @@ Template variables:</description>
     </tag>
 
     <tag>
-        <description>The series base color.</description>
+        <description>The series base color. The supported values are:</description>
         <name>sparkline-seriesItem-color</name>
         <tag-class>com.kendoui.taglib.sparkline.SeriesItemColorFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -26804,7 +26827,7 @@ The function return value is displayed instead of the individual points.The supp
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The series base color.</description>
+            <description>The series base color. The supported values are:</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -27619,7 +27642,7 @@ The function return value is displayed instead of the individual points.The supp
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The series base color.</description>
+            <description>The series base color. The supported values are:</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -28618,7 +28641,7 @@ Template variables:</description>
     </tag>
 
     <tag>
-        <description>The series base color.</description>
+        <description>The series base color. The supported values are:</description>
         <name>stockChart-seriesItem-color</name>
         <tag-class>com.kendoui.taglib.stockchart.SeriesItemColorFunctionTag</tag-class>
         <body-content>JSP</body-content>

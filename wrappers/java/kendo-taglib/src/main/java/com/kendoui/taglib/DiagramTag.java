@@ -71,6 +71,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setEvent("change", value.getBody());
     }
 
+    public void setClick(ClickFunctionTag value) {
+        setEvent("click", value.getBody());
+    }
+
     public void setItemBoundsChange(ItemBoundsChangeFunctionTag value) {
         setEvent("itemBoundsChange", value.getBody());
     }
@@ -153,6 +157,18 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setChange(String value) {
         setProperty("change", new Function(value));
+    }
+
+    public String getClick() {
+        Function property = ((Function)getProperty("click"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setClick(String value) {
+        setProperty("click", new Function(value));
     }
 
     public String getItemBoundsChange() {
