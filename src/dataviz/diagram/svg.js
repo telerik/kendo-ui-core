@@ -271,6 +271,7 @@
         init: function (domElement, options) {
             var that = this;
             Element.fn.init.call(that, domElement, options);
+            domElement.parent = this;
         },
         options: {
             stroke: {
@@ -321,7 +322,6 @@
             if (value && Utils.isDefined(this.options.hover.background)) {
                 color = this.options.hover.background;
             }
-
 
             this._background(color);
         },

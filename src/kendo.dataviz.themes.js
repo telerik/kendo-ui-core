@@ -465,7 +465,7 @@ var __meta__ = {
                         color: "#384049"
                     },
                     hover: {
-                        background: "#000000",
+                        background: "#3d3d3d",
                         stroke: {
                             color: "#efefef"
                         }
@@ -473,14 +473,21 @@ var __meta__ = {
                 }
             },
             resizingAdorner: {
-                type: "rectangle",
-                background: "#3d3d3d",
-                border: {
-                    dashType: "dot",
-                    color: "#ffffff"
-                },
-                hover: {
-                    background: "#3d3d3d"
+                handles: {
+                    type: "rectangle",
+                    background: "#3d3d3d",
+                    stroke: {
+                        color: "#ffffff"
+                    },
+                    hover: {
+                        background: "#ffffff",
+                        stroke: {
+                            color: "#3d3d3d",
+                            width: 2
+                        }
+                    },
+                    width: 7,
+                    height: 7
                 }
             }
         }

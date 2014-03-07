@@ -921,37 +921,28 @@
                     if (testKey(key, "a")) {// A: select all
                         diagram.select("All");
                         return true;
-                    }
-                    else if (testKey(key, "z")) {// Z: undo
+                    } else if (testKey(key, "z")) {// Z: undo
                         diagram.undo();
                         return true;
-                    }
-                    else if (testKey(key, "y")) {// y: redo
+                    } else if (testKey(key, "y")) {// y: redo
                         diagram.redo();
                         return true;
-                    }
-                    else if (testKey(key, "c")) {
+                    } else if (testKey(key, "c")) {
                         diagram.copy();
-                    }
-                    else if (testKey(key, "x")) {
+                    } else if (testKey(key, "x")) {
                         diagram.cut();
-                    }
-                    else if (testKey(key, "v")) {
+                    } else if (testKey(key, "v")) {
                         diagram.paste();
-                    }
-                    else if (testKey(key, "l")) {
+                    } else if (testKey(key, "l")) {
                         diagram.layout();
-                    }
-                    else if (testKey(key, "d")) {
+                    } else if (testKey(key, "d")) {
                         diagram.copy();
                         diagram.paste();
                     }
-                }
-                else if (key === 46 || key === 8) {// del: deletion
+                } else if (key === 46 || key === 8) {// del: deletion
                     diagram.remove(diagram.select(), true);
                     return true;
-                }
-                else if (key === 27) {// ESC: stop any action
+                } else if (key === 27) {// ESC: stop any action
                     this._discardNewConnection();
                     diagram.select(false);
                     return true;
@@ -1063,8 +1054,7 @@
                         return;
                     }
                     hit = undefined;
-                }
-                else {
+                } else {
                     this.hoveredAdorner = undefined;
                 }
 
@@ -1445,30 +1435,27 @@
         });
 
         function hitToOppositeSide(hit, bounds) {
+            var result;
+
             if (hit.x == -1 && hit.y == -1) {
-                return bounds.bottomRight();
+                result = bounds.bottomRight();
+            } else if (hit.x == 1 && hit.y == 1) {
+                result = bounds.topLeft();
+            } else if (hit.x == -1 && hit.y == 1) {
+                result = bounds.topRight();
+            } else if (hit.x == 1 && hit.y == -1) {
+                result = bounds.bottomLeft();
+            } else if (hit.x === 0 && hit.y == -1) {
+                result = bounds.bottom();
+            } else if (hit.x === 0 && hit.y == 1) {
+                result = bounds.top();
+            } else if (hit.x == 1 && hit.y === 0) {
+                result = bounds.left();
+            } else if (hit.x == -1 && hit.y === 0) {
+                result = bounds.right();
             }
-            else if (hit.x == 1 && hit.y == 1) {
-                return bounds.topLeft();
-            }
-            else if (hit.x == -1 && hit.y == 1) {
-                return bounds.topRight();
-            }
-            else if (hit.x == 1 && hit.y == -1) {
-                return bounds.bottomLeft();
-            }
-            else if (hit.x === 0 && hit.y == -1) {
-                return bounds.bottom();
-            }
-            else if (hit.x === 0 && hit.y == 1) {
-                return bounds.top();
-            }
-            else if (hit.x == 1 && hit.y === 0) {
-                return bounds.left();
-            }
-            else if (hit.x == -1 && hit.y === 0) {
-                return bounds.right();
-            }
+
+            return result;
         }
 
         var ResizingAdorner = AdornerBase.extend({
@@ -1482,6 +1469,7 @@
                     for (var y = -1; y <= 1; y++) {
                         if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
                             var visual = new Rectangle(that.options.handles);
+                            visual.native._hover = $.proxy(that._hover, that);
                             that.map.push({ x: x, y: y, visual: visual });
                             that.visual.append(visual);
                         }
@@ -1521,8 +1509,7 @@
                 rotatable: true,
                 handles: {
                     width: 7,
-                    height: 7,
-                    background: "DimGray"
+                    height: 7
                 },
                 rect: {
                     stroke: {
@@ -1543,8 +1530,7 @@
                 if (value) {
                     this._innerBounds = value.clone();
                     this._bounds = this.diagram.modelToLayer(value).inflate(this.options.offset, this.options.offset);
-                }
-                else {
+                } else {
                     return this._bounds;
                 }
             },
@@ -1579,20 +1565,15 @@
                     r = new Rect(0, 0, w, h);
                 if (p.x < 0) {
                     r.x = -w;
-                }
-                else if (p.x === 0) {
+                } else if (p.x === 0) {
                     r.x = Math.floor(this._bounds.width / 2) - w / 2;
-                }
-                else if (p.x > 0) {
+                } else if (p.x > 0) {
                     r.x = this._bounds.width + 1.0;
-                }
-                if (p.y < 0) {
+                } if (p.y < 0) {
                     r.y = -h;
-                }
-                else if (p.y === 0) {
+                } else if (p.y === 0) {
                     r.y = Math.floor(this._bounds.height / 2) - h / 2;
-                }
-                else if (p.y > 0) {
+                } else if (p.y > 0) {
                     r.y = this._bounds.height + 1.0;
                 }
                 return r;
@@ -1606,6 +1587,7 @@
                         hit.rotate(new Point(0, 0), angle);
                         hit = new Point(Math.round(hit.x), Math.round(hit.y));
                     }
+
                     if (hit.x == -1 && hit.y == -1) {
                         return "nw-resize";
                     }
@@ -1677,7 +1659,24 @@
                     that.initialStates.push(shape.bounds());
                 }
             },
-            _hover: function () {
+            _hover: function(value, element) {
+                var handleOptions = this.options.handles,
+                    hover = handleOptions.hover,
+                    stroke = handleOptions.stroke,
+                    background = handleOptions.background;
+
+                if (value && Utils.isDefined(hover.stroke)) {
+                    stroke = deepExtend({}, stroke, hover.stroke);
+                }
+
+                if (value && Utils.isDefined(hover.background)) {
+                    background = hover.background;
+                }
+
+                element.redraw({
+                    stroke: stroke,
+                    background: background
+                });
             },
             start: function (p) {
                 this._sp = p;
@@ -1739,29 +1738,25 @@
                         }
                         delta = thr;
                         this._lp = new Point(this._lp.x + thr.x, this._lp.y + thr.y);
-                    }
-                    else {
+                    } else {
                         delta = p.minus(this._cp);
                     }
 
                     if (handle.x === 0 && handle.y === 0) {
                         dbr = dtl = delta; // dragging
                         dragging = true;
-                    }
-                    else {
+                    } else {
                         if (this._angle) { // adjust the delta so that resizers resize in the correct direction after rotation.
                             delta.rotate(new Point(0, 0), this._angle);
                         }
                         if (handle.x == -1) {
                             dtl.x = delta.x;
-                        }
-                        else if (handle.x == 1) {
+                        } else if (handle.x == 1) {
                             dbr.x = delta.x;
                         }
                         if (handle.y == -1) {
                             dtl.y = delta.y;
-                        }
-                        else if (handle.y == 1) {
+                        } else if (handle.y == 1) {
                             dbr.y = delta.y;
                         }
                     }
@@ -1777,8 +1772,7 @@
                         bounds = shape.bounds();
                         if (dragging) {
                             newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
-                        }
-                        else {
+                        } else {
                             newBounds = bounds.clone();
                             newBounds.scale(scaleX, scaleY, staticPoint, this._innerBounds.center(), shape.rotate().angle);
                             var newCenter = newBounds.center(); // fixes the new rotation center.
@@ -1849,8 +1843,7 @@
                     if (this._rotating) {
                         unit = new RotateUnit(this, this.shapes, this.initialRotates);
                         this._rotating = false;
-                    }
-                    else {
+                    } else {
                         if (this.diagram.ruler) {
                             for (var i = 0; i < this.shapes.length; i++) {
                                 var shape = this.shapes[i];
@@ -1896,8 +1889,7 @@
                         this._rotationThumbBounds = new Rect(bounds.center().x, bounds.y + this.options.rotationThumb.y, 0, 0).inflate(this.options.rotationThumb.thumbWidth);
                         this.rotationThumb.redraw({x: bounds.width / 2 - this.options.rotationThumb.thumbWidth / 2});
                     }
-                }
-                else {
+                } else {
                     this.visual.visible(false);
                 }
             }
@@ -1953,7 +1945,23 @@
                 this.refresh();
             },
             _hover: function (value) {
-                this.visual.background(value ? this.options.hover.background : this.options.background);
+                var options = this.options,
+                    hover = options.hover,
+                    stroke = options.stroke,
+                    background = options.background;
+
+                if (value && Utils.isDefined(hover.stroke)) {
+                    stroke = deepExtend({}, stroke, hover.stroke);
+                }
+
+                if (value && Utils.isDefined(hover.background)) {
+                    background = hover.background;
+                }
+
+                this.visual.redraw({
+                    stroke: stroke,
+                    background: background
+                });
             },
             refresh: function () {
                 var p = this._c.shape.diagram.modelToView(this._c.position()),
