@@ -59,6 +59,24 @@ class GridColumnMenuMessages extends \Kendo\SerializableObject {
         return $this->setProperty('done', $value);
     }
 
+    /**
+    * The text message displayed in the column menu for locking a column.
+    * @param string $value
+    * @return \Kendo\UI\GridColumnMenuMessages
+    */
+    public function lock($value) {
+        return $this->setProperty('lock', $value);
+    }
+
+    /**
+    * The text message displayed in the column menu for unlocking a column.
+    * @param string $value
+    * @return \Kendo\UI\GridColumnMenuMessages
+    */
+    public function unlock($value) {
+        return $this->setProperty('unlock', $value);
+    }
+
 //<< Properties
 }
 
