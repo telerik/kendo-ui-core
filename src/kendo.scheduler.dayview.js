@@ -1054,6 +1054,18 @@ var __meta__ = {
             }
         },
 
+        inRange: function(options) {
+            var inRange = SchedulerView.fn.inRange.call(this, options);
+
+            var startTime = getMilliseconds(this.startTime());
+            var endTime = getMilliseconds(this.endTime()) || kendo.date.MS_PER_DAY;
+
+            var start = getMilliseconds(options.start);
+            var end = getMilliseconds(options.end) || kendo.date.MS_PER_DAY;
+
+            return inRange && startTime <= start && end <= endTime;
+        },
+
         selectionByElement: function(cell) {
             var offset = cell.offset();
             return this._slotByPosition(offset.left, offset.top);

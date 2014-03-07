@@ -82,6 +82,23 @@
         equal(selection.isAllDay, false);
     });
 
+    test("inRange method honour startTime/endTime of the view", function() {
+        var view = setup({
+            dates: [new Date(2013, 6, 7)],
+            allDaySlot: false,
+            showWorkHours: true,
+            startTime: new Date(2013, 6, 7, 8),
+            endTime: new Date(2013, 6, 7, 20)
+        });
+
+        var selection = createSelection({
+            start: new Date(2013, 6, 7, 23, 30),
+            end: new Date(2013, 6, 8)
+        });
+
+        ok(!view.inRange(selection));
+    });
+
     test("View selects cell", function() {
         var view = setup({ dates: [new Date(2013, 6, 7)] }),
             selection = createSelection(new Date(2013, 6, 7));
