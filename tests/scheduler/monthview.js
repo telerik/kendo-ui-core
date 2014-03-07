@@ -136,6 +136,39 @@
         equalWithRound(eventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
     });
 
+    test("position event with dayTemplate with a text node", function() {
+        var view = setup({ dayTemplate: "foo<span>bar</span>" });
+
+        view.render([
+            new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "one day event" })
+        ]);
+
+        var eventOffset = view.content.find(".k-event").offset();
+        var slot = view.content.find("td").eq(9);
+        var slotOffset = slot.offset();
+
+        equalWithRound(view.content.find(".k-event").length, 1);
+        equalWithRound(removeDefaultHorizontalOffset(eventOffset.left), slotOffset.left);
+        equalWithRound(eventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
+    });
+
+    test("position event with dayTemplate with only text", function() {
+        var view = setup({ dayTemplate: "foo" });
+
+        view.render([
+            new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "one day event" })
+        ]);
+
+        var eventOffset = view.content.find(".k-event").offset();
+        var slot = view.content.find("td").eq(9);
+        var slotOffset = slot.offset();
+
+        equalWithRound(view.content.find(".k-event").length, 1);
+        equalWithRound(removeDefaultHorizontalOffset(eventOffset.left), slotOffset.left);
+        equalWithRound(eventOffset.top, applyDefaultTopOffset(slot, slotOffset.top));
+    });
+
+
     test("position multiple events in a single slot", function() {
         var view = setup();
 
