@@ -743,7 +743,7 @@ kendo_module({
 
                         var clientHeight = cell.clientHeight;
 
-                        var firstChildHeight = cell.firstChild.offsetHeight + 3;
+                        var firstChildHeight = cell.children.length ? cell.children[0].offsetHeight + 3 : 0;
 
                         var start = kendo.date.toUtcTime(kendo.date.addDays(this.startDate(), cellCount));
 

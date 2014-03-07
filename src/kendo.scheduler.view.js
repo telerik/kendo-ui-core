@@ -903,8 +903,14 @@ kendo_module({
 
             this.eventCount = eventCount;
             this.isDaySlot = true;
-            this.firstChildHeight = this.element.firstChild.offsetHeight + 3;
-            this.firstChildTop = this.element.firstChild.offsetTop;
+
+            if (this.element.children.length) {
+                this.firstChildHeight = this.element.children[0].offsetHeight + 3;
+                this.firstChildTop = this.element.children[0].offsetTop;
+            } else {
+                this.firstChildHeight = 3;
+                this.firstChildTop = 0;
+            }
         },
 
         refresh: function() {
