@@ -769,10 +769,15 @@ var MSWordFormatCleaner = Cleaner.extend({
     },
 
     createColGroup: function(row) {
-        var cells = row.cells, colgroup;
+        var cells = row.cells;
+        var table = $(row).closest("table");
+        var colgroup = table.children("colgroup");
 
         if (cells.length < 2) {
             return;
+        } else if (colgroup.length) {
+            cells = colgroup.children();
+            colgroup[0].parentNode.removeChild(colgroup[0]);
         }
 
         colgroup = $($.map(cells, function(cell) {
@@ -789,7 +794,7 @@ var MSWordFormatCleaner = Cleaner.extend({
             colgroup = $("<colgroup/>").append(colgroup);
         }
 
-        colgroup.prependTo($(row).closest("table"));
+        colgroup.prependTo(table);
     },
 
     convertHeaders: function(row) {
