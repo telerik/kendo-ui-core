@@ -694,6 +694,7 @@ var MSWordFormatCleaner = Cleaner.extend({
         var blockChildren = $(dom.blockElements.join(','), placeholder),
             lastMargin = -1,
             lastType,
+            name,
             levels = {'ul':{}, 'ol':{}},
             li = placeholder,
             i, p, type, margin, list, key, child;
@@ -701,8 +702,13 @@ var MSWordFormatCleaner = Cleaner.extend({
         for (i = 0; i < blockChildren.length; i++) {
             p = blockChildren[i];
             type = this.listType(p.innerHTML);
+            name = dom.name(p);
 
-            if (!type || dom.name(p) != 'p') {
+            if (name == "td") {
+                continue;
+            }
+
+            if (!type || name != 'p') {
                 if (!p.innerHTML) {
                     dom.remove(p);
                 } else {
