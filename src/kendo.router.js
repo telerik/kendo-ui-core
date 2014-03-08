@@ -82,6 +82,10 @@ var __meta__ = {
     });
 
     var HashAdapter = kendo.Class.extend({
+        init: function() {
+            this._id = kendo.guid();
+        },
+
         navigate: function(to) {
             location.hash = to;
         },
@@ -92,14 +96,14 @@ var __meta__ = {
 
         change: function(callback) {
             if (support.hashChange) {
-                $(window).bind("hashchange.kendo", callback);
+                $(window).on("hashchange." + this._id, callback);
             } else {
                 this._interval = setInterval(callback, CHECK_URL_INTERVAL);
             }
         },
 
         stop: function() {
-            $(window).unbind("popstate.kendo");
+            $(window).off("hashchange." + this._id);
             clearInterval(this._interval);
         },
 
@@ -235,6 +239,8 @@ var __meta__ = {
         }
     });
 
+    kendo.History = History;
+    kendo.History.HashAdapter = HashAdapter;
     kendo.absoluteURL = absoluteURL;
     kendo.history = new History();
 })(window.kendo.jQuery);
