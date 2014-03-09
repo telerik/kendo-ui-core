@@ -241,6 +241,7 @@ var __meta__ = {
 
     kendo.History = History;
     kendo.History.HashAdapter = HashAdapter;
+    kendo.History.PushStateAdapter = PushStateAdapter;
     kendo.absoluteURL = absoluteURL;
     kendo.history = new History();
 })(window.kendo.jQuery);
