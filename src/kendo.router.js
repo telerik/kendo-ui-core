@@ -49,7 +49,21 @@ var __meta__ = {
         }
     }
 
-    var PushStateAdapter = kendo.Class.extend({
+    var HistoryAdapter = kendo.Class.extend({
+        back: function() {
+            history.back();
+        },
+
+        forward: function() {
+            history.forward();
+        },
+
+        length: function() {
+            return history.length;
+        }
+    })
+
+    var PushStateAdapter = HistoryAdapter.extend({
         init: function(root) {
             this.root = root;
         },
@@ -81,7 +95,7 @@ var __meta__ = {
         }
     });
 
-    var HashAdapter = kendo.Class.extend({
+    var HashAdapter = HistoryAdapter.extend({
         init: function() {
             this._id = kendo.guid();
         },
@@ -128,9 +142,9 @@ var __meta__ = {
                 hash = location.hash,
                 pushState = support.pushState && options.pushState,
                 root = options.root || "/",
-                atRoot = root === pathname;
-
-            this.adapter = pushState ? new PushStateAdapter(root) : new HashAdapter();
+                atRoot = root === pathname,
+                adapter = pushState ? new PushStateAdapter(root) : new HashAdapter(),
+                current;
 
             if (options.pushState && !support.pushState && !atRoot) {
                 location.replace(root + '#' + stripRoot(root, pathname));
@@ -152,11 +166,18 @@ var __meta__ = {
                 }
             }
 
-            this.root = root;
-            this.historyLength = history.length;
-            this.current = this.adapter.current();
-            this.locations = [this.current];
-            this.adapter.change($.proxy(this, "_checkUrl"));
+
+            current = adapter.current();
+
+            $.extend(this, {
+                adapter: adapter,
+                root: root,
+                historyLength: adapter.length(),
+                current: current,
+                locations: [current],
+            });
+
+            adapter.change($.proxy(this, "_checkUrl"));
         },
 
         stop: function() {
@@ -173,8 +194,9 @@ var __meta__ = {
         },
 
         navigate: function(to, silent) {
+            var adapter = this.adapter;
             if (to === "#:back") {
-                history.back();
+                adapter.back();
                 return;
             }
 
@@ -191,17 +213,18 @@ var __meta__ = {
                 }
             }
 
-            this.current = this.adapter.normalize(to);
-            this.adapter.navigate(to);
+            this.current = adapter.normalize(to);
+            adapter.navigate(to);
 
-            this.historyLength = history.length;
+            this.historyLength = adapter.length();
 
             this.locations.push(this.current);
         },
 
         _checkUrl: function() {
-            var current = this.adapter.current(),
-                newLength = history.length,
+            var adapter = this.adapter,
+                current = adapter.current(),
+                newLength = adapter.length(),
                 navigatingInExisting = this.historyLength === newLength,
                 back = current === this.locations[this.locations.length - 2] && navigatingInExisting,
                 prev = this.current;
@@ -215,16 +238,16 @@ var __meta__ = {
             this.current = current;
 
             if (back && this.trigger("back", { url: prev, to: current })) {
-                history.forward();
+                adapter.forward();
                 this.current = prev;
                 return;
             }
 
             if (this.trigger(CHANGE, { url: current })) {
                 if (back) {
-                    history.forward();
+                    adapter.forward();
                 } else {
-                    history.back();
+                    adapter.back();
                     this.historyLength --;
                 }
                 this.current = prev;
@@ -240,6 +263,7 @@ var __meta__ = {
     });
 
     kendo.History = History;
+    kendo.History.HistoryAdapter = HistoryAdapter;
     kendo.History.HashAdapter = HashAdapter;
     kendo.History.PushStateAdapter = PushStateAdapter;
     kendo.absoluteURL = absoluteURL;
