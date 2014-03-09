@@ -102,5 +102,22 @@
 
         adapter.replace("#baz");
     });
+
+    if (kendo.support.pushState) {
+        test("normalizeCurrent will translate pushState to non-pushState, removing the root from the the path", 2, function() {
+            var root = location.pathname;
+
+            stub(adapter, { replaceLocation: function(url) {
+                equal(url, root + "#/bar");
+            }});
+
+            history.pushState({}, "", location.pathname + "/bar");
+            ok(adapter.normalizeCurrent({ pushState: true, root: root }));
+        });
+    }
+
+    test("normalizeCurrent will not touch anything if started from the root", 1, function() {
+        ok(!adapter.normalizeCurrent({ pushState: true, root: location.pathname }));
+    });
 })();
 
