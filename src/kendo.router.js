@@ -41,6 +41,10 @@ var __meta__ = {
         return location.protocol + '//' + (location.host + "/" + path).replace(/\/\/+/g, '/');
     }
 
+    function locationHash() {
+        return location.href.split("#")[1] || "";
+    }
+
     function stripRoot(root, url) {
         if (url.indexOf(root) === 0) {
             return (url.substr(root.length)).replace(/\/\//g, '/');
@@ -60,6 +64,10 @@ var __meta__ = {
 
         length: function() {
             return history.length;
+        },
+
+        replaceLocation: function(url) {
+            location.replace(url);
         }
     })
 
@@ -96,6 +104,25 @@ var __meta__ = {
 
         stop: function() {
             $(window).unbind("popstate.kendo");
+        },
+
+        normalizeCurrent: function(options) {
+            var fixedUrl,
+                root = options.root,
+                pathname = location.pathname,
+                hash = locationHash();
+
+            if (root === pathname + "/") {
+                fixedUrl = root;
+            }
+
+            if (root === pathname && hash) {
+                fixedUrl = absoluteURL(hash.replace(hashStrip, ''), root);
+            }
+
+            if (fixedUrl) {
+                history.pushState({}, document.title, fixedUrl);
+            }
         }
     });
 
@@ -109,7 +136,7 @@ var __meta__ = {
         },
 
         replace: function(to) {
-            location.replace("#" + to.replace(/^#/, ''));
+            this.replaceLocation("#" + to.replace(/^#/, ''));
         },
 
         normalize: function(url) {
@@ -130,7 +157,19 @@ var __meta__ = {
         },
 
         current: function() {
-            return location.href.split("#")[1] || "";
+            return locationHash();
+        },
+
+        normalizeCurrent: function(options) {
+            var pathname = location.pathname,
+                root = options.root;
+
+            if (options.pushState && root !== pathname) {
+                this.replaceLocation(root + '#' + stripRoot(root, pathname));
+                return true; // browser will reload at this point.
+            }
+
+            return false;
         }
     });
 
@@ -146,34 +185,14 @@ var __meta__ = {
 
             this._started = true;
 
-            var pathname = location.pathname,
-                hash = location.hash,
-                pushState = support.pushState && options.pushState,
-                root = options.root || "/",
-                atRoot = root === pathname,
-                adapter = pushState ? new PushStateAdapter(root) : new HashAdapter(),
+            var root = options.root || "/",
+                adapter = support.pushState && options.pushState ? new PushStateAdapter(root) : new HashAdapter(),
                 current;
 
-            if (options.pushState && !support.pushState && !atRoot) {
-                location.replace(root + '#' + stripRoot(root, pathname));
-                return true; // browser will reload at this point.
+            // adapter may reload the document
+            if (adapter.normalizeCurrent({ root: root, pushState: options.pushState })) {
+                return;
             }
-
-            if (pushState) {
-                var fixedUrl;
-                if (root === pathname + "/") {
-                    fixedUrl = root;
-                }
-
-                if (atRoot && hash) {
-                    fixedUrl = absoluteURL(hash.replace(hashStrip, ''), root);
-                }
-
-                if (fixedUrl) {
-                    history.replaceState({}, document.title, fixedUrl);
-                }
-            }
-
 
             current = adapter.current();
 

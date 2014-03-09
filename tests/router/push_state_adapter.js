@@ -80,5 +80,23 @@
             equal(initial, adapter.length());
         }
     });
+
+    test("normalizeCurrent will append slash if current path is missing", 2, function() {
+        var current = location.pathname;
+        ok(!adapter.normalizeCurrent({ root: current + "/" }));
+        equal(location.pathname, current + "/");
+    });
+
+    asyncTest("normalizeCurrent will translate the hash to pathname", 2, function() {
+        var current = location.pathname;
+
+        $(window).one("hashchange", function() {
+            start();
+            ok(!adapter.normalizeCurrent({ root: current }));
+            equal(location.pathname, current + "foo");
+        });
+
+        location.hash = "foo";
+    });
 })();
 
