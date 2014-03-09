@@ -2,6 +2,7 @@
     var Adapter = kendo.History.HistoryAdapter;
 
     module("History adapter");
+
     function onHash(callback) {
         $(window).one("hashchange", callback);
     }

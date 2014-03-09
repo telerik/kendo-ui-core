@@ -72,6 +72,10 @@ var __meta__ = {
             history.pushState({}, document.title, absoluteURL(to, this.root));
         },
 
+        replace: function(to) {
+            history.replaceState({}, document.title, absoluteURL(to, this.root));
+        },
+
         normalize: function(url) {
             return stripRoot(this.root, url);
         },
@@ -102,6 +106,10 @@ var __meta__ = {
 
         navigate: function(to) {
             location.hash = to;
+        },
+
+        replace: function(to) {
+            location.replace("#" + to.replace(/^#/, ''));
         },
 
         normalize: function(url) {

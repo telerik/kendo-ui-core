@@ -67,5 +67,18 @@
     test("normalize strips the root", 1, function() {
         equal(adapter.normalize(root + "foo"), "foo");
     });
+
+    test("replace updates location while keeping history length same", 2, function() {
+        var initial = adapter.length();
+        adapter.replace("foo");
+        equal(location.pathname, root + "foo");
+
+        if (history.length === 50) {
+            console.log("max history length reached, skipping length check");
+            ok(true);
+        } else {
+            equal(initial, adapter.length());
+        }
+    });
 })();
 
