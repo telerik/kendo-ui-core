@@ -32,7 +32,7 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
-            $.extend(that.rules, that.options.rules);
+            that._rules = $.extend({}, that.rules, that.options.rules);
 
             element = that.element;
             DOMElement = element[0];
@@ -108,7 +108,7 @@ var __meta__ = {
 
             Widget.fn.setOptions.call(that, options);
 
-            $.extend(that.rules, that.options.rules);
+            that._rules = $.extend({}, that.rules, that.options.rules);
 
             that._tokenize();
 
@@ -465,10 +465,11 @@ var __meta__ = {
             var emptyMask = "";
             var promptChar = this.options.promptChar;
             var numberFormat = kendo.getCulture(this.options.culture).numberFormat;
+            var rules = this._rules;
 
             for (; idx < length; idx++) {
                 char = maskChars[idx];
-                rule = this.rules[char];
+                rule = rules[char];
 
                 if (rule) {
                     tokens[tokenIdx] = rule;

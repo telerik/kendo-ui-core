@@ -5,6 +5,23 @@
     module("kendo.ui.MaskedTextBox api", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
+
+            $.fn.pressKey = function(key, eventName, options) {
+                if (typeof key === "string") {
+                    key = key.charCodeAt(0);
+                }
+
+                if ($.isPlainObject(eventName)) {
+                    options = eventName;
+                    eventName = "keypress";
+                }
+
+                if (!eventName) {
+                    eventName = "keypress";
+                }
+
+                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
+            }
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -217,7 +234,7 @@
     test("setOptions extends built-in rules", function() {
         var rule = /[+-]/;
         var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0-0"
+            mask: "~-0"
         });
 
         maskedtextbox.setOptions({
@@ -226,7 +243,11 @@
             }
         });
 
-        equal(maskedtextbox.rules["~"], rule);
+        input.focus();
+        kendo.caret(input[0], 0);
+        input.pressKey("+");
+
+        equal(input.val(), "+-_");
     });
 
     test("setOptions unbinds input events if no mask", function() {

@@ -5,6 +5,23 @@
     module("kendo.ui.MaskedTextBox initialization", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
+
+            $.fn.pressKey = function(key, eventName, options) {
+                if (typeof key === "string") {
+                    key = key.charCodeAt(0);
+                }
+
+                if ($.isPlainObject(eventName)) {
+                    options = eventName;
+                    eventName = "keypress";
+                }
+
+                if (!eventName) {
+                    eventName = "keypress";
+                }
+
+                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
+            }
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
@@ -32,13 +49,29 @@
     test("MaskedTextBox extends built-in rules", function() {
         var rule = /[+-]/;
         var maskedtextbox = new MaskedTextBox(input, {
+            mask: "~-0",
+            rules: {
+                "~": rule
+            }
+        });
+
+        input.focus();
+        kendo.caret(input[0], 0);
+        input.pressKey("+");
+
+        equal(input.val(), "+-_");
+    });
+
+    test("MaskedTextBox does not extend rules in the prototype", function() {
+        var rule = /[+-]/;
+        var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0",
             rules: {
                 "~": rule
             }
         });
 
-        equal(maskedtextbox.rules["~"], rule);
+        notEqual(MaskedTextBox.fn.rules["~"], rule);
     });
 
     test("MaskedTextBox tokenize specified mask", function() {
