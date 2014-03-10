@@ -40,6 +40,8 @@
                     this.geometryChange();
                 }
             }
+
+            return this;
         },
 
         get: function(field) {
