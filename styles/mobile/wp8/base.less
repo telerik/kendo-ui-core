@@ -63,7 +63,8 @@
 /* Scroll hints */
 .km-wp .km-touch-scrollbar
 {
-    border: 1px solid rgba(255,255,255,.4);
+    border-width: @wp-border-width;
+    border-style: solid;
 }
 
 .km-wp .km-vertical-scrollbar
@@ -170,16 +171,6 @@
     position: relative;
 }
 
-.km-wp-dark .km-loader
-{
-    background: @wp-second-background-dark;
-}
-
-.km-wp-light .km-loader
-{
-    background: @wp-second-background-light;
-}
-
 .km-wp .km-loader h1,
 .km-wp .km-scroller-refresh .km-template
 {
@@ -266,20 +257,6 @@
     line-height: 0;
 }
 
-.km-wp-light .km-loader:before,
-.km-wp-light .km-loader:after,
-.km-wp-light .km-loader .km-loading,
-.km-wp-light .km-loader .km-loading:after,
-.km-wp-light .km-loader .km-loading:before,
-.km-wp-light .km-scroller-refresh:after,
-.km-wp-light .km-scroller-refresh:before,
-.km-wp-light .km-scroller-refresh .km-icon,
-.km-wp-light .km-scroller-refresh .km-icon:after,
-.km-wp-light .km-scroller-refresh .km-icon:before
-{
-    color: @wp-main-text-light;
-}
-
 .km-wp .km-loader:before,
 .km-wp .km-loader:after,
 .km-wp .km-loader .km-loading:after,
@@ -352,25 +329,13 @@
     100% { opacity: 0; }
 }
 
-.km-wp .km-content
+.km-wp .km-content:not(.km-stretched-view)
 {
     display: block;
 }
 
 
 
-
-
 /* Color Template */
 @import "template.less";
-
-
-
-
-/* Active States */
-
-
-
-
-/* Tablet Styles */
 

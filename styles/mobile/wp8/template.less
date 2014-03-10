@@ -136,14 +136,51 @@
     color: @wp-second-background-dark;
 }
 
+.km-wp .km-badge,
 .km-wp .km-state-active .km-listview-link:after
 {
     border-color: @wp-accent-text;
 }
 
+.km-wp .km-listview-label input[type=radio],
+.km-wp .km-listview-label input[type=checkbox]
+{
+    border-color: @wp-main-text-dark;
+    .box-shadow(0 0 1px @wp-main-text-dark);
+}
+
+.km-wp-light .km-listview-label input[type=radio],
+.km-wp-light .km-listview-label input[type=checkbox]
+{
+    border-color: @wp-main-text-light;
+    .box-shadow(0 0 1px @wp-main-text-light);
+}
+
+.km-wp .km-listview-label input[type=checkbox]:checked:after
+{
+    color: @wp-main-text-dark;
+}
+
+.km-wp-light .km-listview-label input[type=checkbox]:checked:after
+{
+    color: @wp-main-text-light;
+}
+
+.km-wp .km-listview-label input[type=radio]:checked:after
+{
+    color: transparent;
+    background: @wp-main-text-dark;
+}
+
+.km-wp-light .km-listview-label input[type=radio]:checked:after
+{
+    background: @wp-main-text-light;
+}
+
+.km-wp .km-badge,
 .km-wp .km-group-title
 {
-    background: @wp-accent-background;
+    background-color: @wp-accent-background;
     color: @wp-accent-text;
 }
 
@@ -234,5 +271,155 @@
 .km-wp-light .km-tabstrip .km-state-active .km-icon
 {
 	border-color: @wp-main-text-light;
+}
+
+.km-wp-light .km-loader:before,
+.km-wp-light .km-loader:after,
+.km-wp-light .km-loader .km-loading,
+.km-wp-light .km-loader .km-loading:after,
+.km-wp-light .km-loader .km-loading:before,
+.km-wp-light .km-scroller-refresh:after,
+.km-wp-light .km-scroller-refresh:before,
+.km-wp-light .km-scroller-refresh .km-icon,
+.km-wp-light .km-scroller-refresh .km-icon:after,
+.km-wp-light .km-scroller-refresh .km-icon:before
+{
+    color: @wp-main-text-light;
+}
+
+.km-wp-dark .km-loader
+{
+    background: @wp-second-background-dark;
+}
+
+.km-wp-light .km-loader
+{
+    background: @wp-second-background-light;
+}
+
+.km-wp .km-touch-scrollbar
+{
+    border-color: rgba(255, 255, 255, .4);
+}
+
+/* Forms */
+
+.km-wp input[type=password],
+.km-wp input[type=search],
+.km-wp input[type=number],
+.km-wp input[type=tel],
+.km-wp input[type=url],
+.km-wp input[type=email],
+.km-wp input[type=text]:not(.k-input),
+.km-wp input[type=month],
+.km-wp input[type=color],
+.km-wp input[type=week],
+.km-wp input[type=date],
+.km-wp input[type=time],
+.km-wp input[type=datetime],
+.km-wp input[type=datetime-local],
+.km-wp select:not([multiple]),
+.km-wp .k-dropdown,
+.km-wp textarea
+{
+	border-color: @wp-main-text-dark;
+    background: @wp-main-background;
+	color: @wp-main-text-dark;
+}
+
+.km-wp input::selection,
+.km-wp textarea::selection
+{
+    color: @wp-accent-text;
+    background: @wp-accent-background;
+}
+
+.km-wp-light input[type=password],
+.km-wp-light input[type=search],
+.km-wp-light input[type=number],
+.km-wp-light input[type=tel],
+.km-wp-light input[type=url],
+.km-wp-light input[type=email],
+.km-wp-light input[type=text]:not(.k-input),
+.km-wp-light input[type=month],
+.km-wp-light input[type=color],
+.km-wp-light input[type=week],
+.km-wp-light input[type=date],
+.km-wp-light input[type=time],
+.km-wp-light input[type=datetime],
+.km-wp-light input[type=datetime-local],
+.km-wp-light select:not([multiple]),
+.km-wp-light .k-dropdown,
+.km-wp-light textarea
+{
+	border-color: @wp-main-text-light;
+    color: @wp-main-text-light;
+}
+
+.km-wp input[type=password]:focus,
+.km-wp input[type=search]:focus,
+.km-wp input[type=number]:focus,
+.km-wp input[type=tel]:focus,
+.km-wp input[type=url]:focus,
+.km-wp input[type=email]:focus,
+.km-wp input[type=text]:not(.k-input):focus,
+.km-wp input[type=month]:focus,
+.km-wp input[type=color]:focus,
+.km-wp input[type=week]:focus,
+.km-wp input[type=date]:focus,
+.km-wp input[type=time]:focus,
+.km-wp input[type=datetime]:focus,
+.km-wp input[type=datetime-local]:focus,
+.km-wp textarea:focus
+{
+	border-color: @wp-accent-background;
+}
+
+.km-wp select:not([multiple]):focus,
+.km-wp .k-dropdown .k-state-active,
+.km-wp .k-dropdown .k-state-focused
+{
+    color: @wp-accent-text;
+    border-color: @wp-accent-text;
+    background-color: @wp-accent-background;
+}
+
+/* Slider */
+
+.km-wp .k-slider .k-draghandle,
+.km-wp .k-slider .k-draghandle:hover
+{
+    background: @wp-main-text-dark;
+}
+
+.km-wp-light .k-slider .k-draghandle,
+.km-wp-light .k-slider .k-draghandle:hover
+{
+    background: @wp-main-text-light;
+}
+
+.km-wp .k-slider .k-tick-large:before
+{
+    background: @wp-main-text-light;
+}
+
+.km-wp-light .k-slider .k-tick-large:before
+{
+    background: @wp-main-text-dark;
+}
+
+.km-wp .k-slider-selection
+{
+    background: @wp-accent-background;
+}
+
+.km-wp .k-slider-track
+{
+    background: @wp-third-background-dark;
+}
+
+.km-wp-light .k-slider-track
+{
+    background: @wp-third-background-light;
 }
 
