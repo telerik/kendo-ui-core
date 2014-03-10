@@ -666,6 +666,18 @@ namespace :build do
         zip_bundles
     end
 
+    def xml_changelogs(destination)
+        [ 'web.commercial', 'dataviz.commercial', 'mobile.commercial' ].map do |bundle|
+            xml_changelog = "dist/bundles/#{bundle}.changelog.xml"
+            xml_changelog_destination = File.join(ARCHIVE_ROOT, destination, 'changelogs', "#{bundle}.changelog.xml")
+
+            file_copy :to => xml_changelog_destination,
+                      :from => xml_changelog
+
+            xml_changelog_destination
+        end
+    end
+
     { :production => "Production", :master => "Stable" }.each do |env, destination|
         namespace env do
             desc 'Build and publish ASP.NET MVC DLLs for #{destination} distribution'
@@ -702,7 +714,16 @@ namespace :build do
         write_changelog changelog, %w(web mobile dataviz framework aspnetmvc)
 
         desc 'Package and publish bundles to the Production directory, and update the changelog'
-        task :bundles => [:get_binaries, :sync_docs, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Production"), changelog].flatten
+        task :bundles => [
+            :get_binaries,
+            :sync_docs,
+            'bundles:all',
+            'demos:production',
+            'download_builder:bundle',
+            zip_targets("Production"),
+            xml_changelogs("Production"),
+            changelog
+        ].flatten
     end
 
     namespace :master do
@@ -747,7 +768,15 @@ namespace :build do
         end
 
         desc 'Package and publish bundles to the Stable directory'
-        task :bundles => [:get_binaries, :sync_docs, 'bundles:all', 'demos:production', 'download_builder:bundle', zip_targets("Stable")].flatten
+        task :bundles => [
+            :get_binaries,
+            :sync_docs,
+            'bundles:all',
+            'demos:production',
+            'download_builder:bundle',
+            zip_targets("Stable"),
+            xml_changelogs("Stable")
+        ].flatten
     end
 
 end
