@@ -1421,14 +1421,14 @@ var __meta__ = {
             if (!transitions) {
                 this.complete();
             } else {
-                element.css("display", "none");
+                element.addClass("k-fx-hidden");
 
                 container.addClass(this._containerClass());
 
                 container.one(transitions.event, $.proxy(this, "complete"));
 
                 kendo.animationFrame(function() {
-                    element.css("display", "").addClass("k-fx-next");
+                    element.removeClass("k-fx-hidden").addClass("k-fx-next");
                     previous.css("display", "").addClass("k-fx-current");
 
                     kendo.animationFrame(function() {
