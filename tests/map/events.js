@@ -78,4 +78,45 @@
 
         equal(map.zoom(), 1);
     });
+
+    // ------------------------------------------------------------
+    module("Map / Events / reset", {
+        setup: createMap,
+        teardown: destroyMap
+    });
+
+    test("beforeReset triggered before reset", 2, function() {
+        map.bind("beforeReset", function() {
+            ok(true);
+            map.bind("reset", function() {
+                ok(true);
+            });
+        });
+
+        map._reset();
+    });
+
+    test("fires reset after zooming", function() {
+        map.bind("reset", function() {
+            equal(map.zoom(), 5);
+        });
+
+        map.zoom(5);
+    });
+
+    test("fires reset after changing center", function() {
+        map.bind("reset", function() {
+            ok(map.center().equals(new m.Location(10, 20)));
+        });
+
+        map.center([10, 20]);
+    });
+
+    test("fires reset after setOptions", function() {
+        map.bind("reset", function() {
+            ok(map.options.foo, true);
+        });
+
+        map.setOptions({ foo: true });
+    });
 })();
