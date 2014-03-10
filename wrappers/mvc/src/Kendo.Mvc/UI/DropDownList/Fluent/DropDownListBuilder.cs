@@ -187,10 +187,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///             .Name("DropDownList")
         ///             .DataTextField("Text")
         ///             .DataValueField("Value")
-        ///             .OptionLabel(new {
-        ///                Text = "Text1",
-        ///                Value = "Value1"
-        ///             })
+        ///             .OptionLabel(new { Text = "Text1", Value = "Value1" })
         /// %&gt;
         /// </code>
         /// </example>
