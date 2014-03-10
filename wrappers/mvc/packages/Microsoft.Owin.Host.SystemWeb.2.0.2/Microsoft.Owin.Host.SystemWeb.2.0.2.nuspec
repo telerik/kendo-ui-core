@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.Owin.Host.SystemWeb</id>
+    <version>2.0.2</version>
+    <title>Microsoft.Owin.Host.SystemWeb</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnetcomponent_rtw_enu.htm</licenseUrl>
+    <projectUrl>http://katanaproject.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>OWIN server that enables OWIN-based applications to run on IIS using the ASP.NET request pipeline.</description>
+    <tags>Microsoft OWIN Katana</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="Owin" version="1.0" />
+        <dependency id="Microsoft.Owin" version="2.0.2" />
+        <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+      </group>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="Owin" version="1.0" />
+        <dependency id="Microsoft.Owin" version="2.0.2" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
