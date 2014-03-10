@@ -53,8 +53,7 @@
         },
 
         options: {
-            autoBind: true,
-            dataSource: {}
+            autoBind: true
         },
 
         destroy: function() {
@@ -67,13 +66,14 @@
         reset: function() {
             Layer.fn.reset.call(this);
             this._translateSurface();
+
             if (this._data) {
                 this._load(this._data);
             }
         },
 
-        polygon: function(coords, style) {
-            this.surface.draw(this._buildPolygon(coords, style));
+        _beforeReset: function() {
+            this.surface.clear();
         },
 
         _resize: function() {
@@ -101,7 +101,6 @@
         _load: function(data) {
             this._data = data;
             this._clearMarkers();
-            this.surface.clear();
 
             for (var i = 0; i < data.length; i++) {
                 var shape = this._loader.parse(data[i]);

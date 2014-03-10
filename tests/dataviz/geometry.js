@@ -63,6 +63,10 @@
         equal(point.y, 10);
     });
 
+    test("set is chainable", function() {
+        equal(point.set("x", 10), point);
+    });
+
     test("gets x", function() {
         equal(point.get("x"), 10);
     });

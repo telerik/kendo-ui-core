@@ -113,6 +113,7 @@
         },
 
         events:[
+            "beforeReset",
             "click",
             "reset",
             "pan",
@@ -504,6 +505,7 @@
 
             this._viewOrigin = this._getOrigin(true);
             this._resetScroller();
+            this.trigger("beforeReset");
             this.trigger("reset");
         },
 

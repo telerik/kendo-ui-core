@@ -21,12 +21,12 @@
         equal(layer.movable.element[0], layer.surface.element);
     });
 
+    // ------------------------------------------------------------
     var pointData = [{
         "type": "Point",
         "coordinates": [-105.01621, 39.57422]
     }];
 
-    // ------------------------------------------------------------
     module("Shape Layer / Markers", {
         setup: function() {
             map = new MapMock();
@@ -122,12 +122,58 @@
     });
 
     test("destroys surface", function() {
-        stubMethod(d.Surface.fn, "destroy", function() {
+        layer.surface.destroy = function() {
             ok(true);
-        }, function() {
-            layer.destroy();
-            map.trigger("reset");
-        });
+        };
+
+        layer.destroy();
+    });
+
+    // ------------------------------------------------------------
+    module("Shape Layer / Data binding", {
+        setup: function() {
+            map = new MapMock();
+            layer = new ShapeLayer(map, {
+                dataSource: {
+                    data: [{
+                        "type": "LineString",
+                        "coordinates": [ [100.0, 0.0], [101.0, 1.0] ]
+                    }]
+                }
+            });
+        }
+    });
+
+    test("re-draws GeoJSON primitives on reset", function() {
+        layer.surface.draw = function() {
+            ok(true);
+        };
+
+        map.trigger("reset");
+    });
+
+    // ------------------------------------------------------------
+    module("Shape Layer / API", {
+        setup: function() {
+            map = new MapMock();
+            layer = new ShapeLayer(map);
+        }
+    });
+
+    test("surface is cleared before reset", function() {
+        layer.surface.clear = function() {
+            ok(true);
+        };
+
+        map.trigger("beforeReset");
+    });
+
+    test("surface is not cleared during reset", 0, function() {
+        layer.surface.clear = function() {
+            ok(false);
+        };
+
+        map.trigger("reset");
     });
 
     baseLayerTests("Shape Layer", ShapeLayer);

@@ -39,6 +39,9 @@
             }
         },
 
+        DISTANCE_ITERATIONS: 100,
+        DISTANCE_CONVERGENCE: 1e-12,
+        DISTANCE_PRECISION: 2,
         FORMAT: "{0:N6},{1:N6}",
 
         toArray: function() {
@@ -64,10 +67,6 @@
             this.lat = this.lat % 90;
             return this;
         },
-
-        DISTANCE_ITERATIONS: 100,
-        DISTANCE_CONVERGENCE: 1e-12,
-        DISTANCE_PRECISION: 2,
 
         distanceTo: function(dest, datum) {
             return this.greatCircleTo(dest, datum).distance;

@@ -22,42 +22,85 @@
     <div id="map"></div>
     <script>
     require([ "jquery.min", "kendo.dataviz.map" ], function(){
-        var markersDS = new kendo.data.DataSource({
-            data: [{
-                location: [30.268107, -97.744821],
-                text: "Austin, TX"
-            }]
-        });
-
         $("#map").kendoMap({
-            center: [30.268107, -97.744821],
-            zoom: 3,
-            layers: [{
-                type: "tile",
-                urlTemplate: "http://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
-                subdomains: ["a", "b", "c"]
-            }, {
-                type: "marker",
-                dataSource: markersDS,
-                locationField: "location",
-                titleField: "text",
-
-                shape: "pinTarget",
-                tooltip: {
-                    // TODO: Evaluate with marker as this?
-                    // TODO: What about location then?
-                    template: "#= marker.options.title #"
-                }
-
-                // TODO: Don't load markers outside map extent
-            }],
-            markerCreated: function(e) {
-                console.log(e)
-            },
-            markerDefaults: {
-                // TODO: Don't apply markerDefaults to layers!
-            }
+          center: [0, -70],
+          zoom: 2,
+          layers: [{
+            type: "tile",
+            urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+          }, {
+            type: "shape"
+          }],
+          shapeMouseEnter: onShapeMouseEnter,
+          shapeMouseLeave: onShapeMouseLeave,
+          reset: initMarkers
         });
+
+        function onShapeMouseEnter(e) {
+          e.shape.options.set("fill.opacity", 1);
+          $('.info').show();
+        }
+
+        function onShapeMouseLeave(e) {
+          e.shape.options.set("fill.opacity", 0.5);
+          $('.info').hide();
+        }
+
+
+        function initMarkers(e) {
+          var g = kendo.dataviz.geometry;
+          var d = kendo.dataviz.drawing;
+
+          var group = new d.Group();
+          for (var lat = -80; lat <= 80; lat += 10) {
+            for (var lng = -125; lng < 0; lng += 30) {
+              var map = e.sender;
+
+              var center = new kendo.dataviz.map.Location(lat, lng);
+              var circle = geoCircle(map, center, 200000 /* m */ )
+
+              group.append(circle);
+            }
+          }
+
+          var layer = e.sender.layers[1];
+          layer.surface.draw(group);
+        }
+
+        function geoCircle(map, center, radius) {
+          var path = new kendo.dataviz.drawing.Path({
+            fill: { opacity: 0.5, color: "red" }
+          });
+
+          for (var bearing = 0; bearing <= 360; bearing += 10) {
+            var loc = destination(center, radius, bearing);
+            path.lineTo(map.locationToView(loc));
+          }
+
+          return path;
+        }
+
+        // Calculatons based on
+        // http://www.movable-type.co.uk/scripts/latlong.html#destPoint
+        function destination(from, distance, bearing) {
+          var rad = kendo.dataviz.util.rad;
+          var deg = kendo.dataviz.util.deg;
+
+          bearing = rad(bearing);
+          var fromLat = rad(from.lat);
+          var fromLng = rad(from.lng);
+
+          var dToR = distance / kendo.dataviz.map.datums.WGS84.a;
+
+          var lat = Math.asin(Math.sin(fromLat) * Math.cos(dToR) +
+                              Math.cos(fromLat) * Math.sin(dToR) * Math.cos(bearing));
+
+          var lng = fromLng + Math.atan2(Math.sin(bearing) * Math.sin(dToR) * Math.cos(fromLat),
+                                      Math.cos(dToR) - Math.sin(fromLat) * Math.sin(lat));
+
+          return new kendo.dataviz.map.Location(deg(lat), deg(lng));
+        }
     });
     </script>
     </body>
