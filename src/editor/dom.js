@@ -269,7 +269,7 @@ var Dom = {
     },
 
     stripBom: function(text) {
-        return text.replace(bom, "");
+        return (text || "").replace(bom, "");
     },
 
     insignificant: function(node) {
