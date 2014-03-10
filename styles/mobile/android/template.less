@@ -109,11 +109,9 @@
     color: @android-light-main-color;
 }
 
-.km-android,
 .km-android .km-content
 {
-    -webkit-linear-gradient: top, @android-transparent, @android-light-border-color;
-    -webkit-gradient: linear, 0 0, 0 100%, from(@android-transparent), to(@android-light-border-color);
+    .linear-gradient(top, @android-transparent, lighten(@android-background-color, 7.5%));
 }
 
 .km-android .km-navbar,
