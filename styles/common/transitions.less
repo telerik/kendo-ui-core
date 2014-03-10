@@ -37,25 +37,25 @@
 
 .k-fx-zoom {
     &.k-fx-start .k-fx-next {
-        .transform(scale(0));
+        .transform(scale(0)) !important;
     }
 
     &.k-fx-end .k-fx-next {
-        .transform(scale(1));
+        .transform(scale(1)) !important;
     }
 
     &.k-fx-reverse {
         &.k-fx-start .k-fx-next,
         &.k-fx-end .k-fx-next {
-            .transform(scale(1));
+            .transform(scale(1)) !important;
         }
 
         &.k-fx-start .k-fx-current {
-            .transform(scale(1));
+            .transform(scale(1)) !important;
         }
 
         &.k-fx-end .k-fx-current {
-            .transform(scale(0));
+            .transform(scale(0)) !important;
         }
     }
 }
