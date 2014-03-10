@@ -16,7 +16,8 @@ kendo_module({
         OS = support.mobileOS,
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
-        BROKEN_WEBVIEW_RESIZE = OS.ios && OS.flatVersion >= 700 && OS.appMode,
+        CHROME =  OS.browser === "chrome",
+        BROKEN_WEBVIEW_RESIZE = OS.ios && OS.flatVersion >= 700 && (OS.appMode || CHROME),
         HORIZONTAL = "km-horizontal",
 
         MOBILE_PLATFORMS = {
@@ -261,17 +262,21 @@ kendo_module({
                 element = this.element,
                 height;
 
-            if (isOrientationHorizontal(element)) {
-                if (includeStatusBar) {
-                    height = SCREEN.availWidth;
-                } else {
-                    height = SCREEN.availWidth - STATUS_BAR_HEIGHT;
-                }
+            if (CHROME) {
+                height = window.innerHeight;
             } else {
-                if (includeStatusBar) {
-                    height = SCREEN.availHeight + STATUS_BAR_HEIGHT;
+                if (isOrientationHorizontal(element)) {
+                    if (includeStatusBar) {
+                        height = SCREEN.availWidth;
+                    } else {
+                        height = SCREEN.availWidth - STATUS_BAR_HEIGHT;
+                    }
                 } else {
-                    height = SCREEN.availHeight;
+                    if (includeStatusBar) {
+                        height = SCREEN.availHeight + STATUS_BAR_HEIGHT;
+                    } else {
+                        height = SCREEN.availHeight;
+                    }
                 }
             }
 
