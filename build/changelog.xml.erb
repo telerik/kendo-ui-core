@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<%
+def encode(value)
+    value.to_s.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
+end
+
+def output(tag, issues)
+    return if issues.length == 0
+
+    out = "<#{tag}>"
+
+    issues.each do |issue|
+        out += "<add>#{encode(issue.title)}</add>"
+    end
+
+    out += "</#{tag}>"
+
+    out
+end
+
+new_items = suites.collect(&:new_components).flatten.each { |issue| issue.title = "New widget: " + issue.title }
+    .concat(suites.collect(&:features).flatten)
+%>
+<releaseNote xmlns="http://www.telerik.com/importReleaseNotesSchema.xsd">
+  <items>
+    <releaseNoteItem Title="All components">
+      <%= output("newItems", new_items) %>
+      <%= output("fixedItems", suites.collect(&:bugs).flatten) %>
+    </releaseNoteItem>
+
+% suites.each do |suite|
+% suite.components.each do |component_title, component|
+    <releaseNoteItem Title="<%= encode(component_title) %>">
+      <%= output("newItems", component.features) %>
+      <%= output("fixedItems", component.bugs) %>
+    </releaseNoteItem>
+% end
+% end
+  </items>
+</releaseNote>

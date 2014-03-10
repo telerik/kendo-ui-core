@@ -3,9 +3,11 @@ require 'singleton'
 require 'erb'
 
 CHANGELOG_TEMPLATE = ERB.new(File.read(File.join(File.dirname(__FILE__), 'changelog.html.erb')), 0, '%<>')
+CHANGELOG_XML_TEMPLATE = ERB.new(File.read(File.join(File.dirname(__FILE__), 'changelog.xml.erb')), 0, '%<>')
 
 class Issue
-    attr_reader :title, :suites, :components, :internal, :framework, :bug, :new_component
+    attr_reader :suites, :components, :internal, :framework, :bug, :new_component
+    attr_accessor :title
     def initialize(issue)
         @title = issue.title
         @labels = issue.labels.map {|l| l.name }
@@ -105,9 +107,9 @@ class ChangeLog
         end
     end
 
-    def render_changelog(suite_names)
+    def render_changelog(template, suite_names)
         suites = @suites.select { |suite| suite_names.include? suite.key }
-        CHANGELOG_TEMPLATE.result(binding)
+        template.result(binding)
     end
 
     private
@@ -186,16 +188,23 @@ end
 
 class WriteChangeLogTask < Rake::FileTask
     attr_accessor :suites
-    def execute(args)
-        File.open(name, 'w') { |file| file.write(contents) }
+
+    def template(name)
+        return CHANGELOG_XML_TEMPLATE if name =~ /.xml$/
+
+        CHANGELOG_TEMPLATE
     end
 
-    def contents
-        @contents ||= ChangeLog.instance.render_changelog(suites)
+    def execute(args)
+        File.open(name, 'w') { |file| file.write(contents(template(name))) }
+    end
+
+    def contents(render_template)
+        @contents ||= ChangeLog.instance.render_changelog(render_template, suites)
     end
 
     def needed?
-        !File.exist?(name) || File.read(name).strip != contents.strip
+        !File.exist?(name) || File.read(name).strip != contents(template(name)).strip
     end
 end
 
