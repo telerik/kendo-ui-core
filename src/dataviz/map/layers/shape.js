@@ -72,10 +72,6 @@
             }
         },
 
-        polygon: function(coords, style) {
-            this.surface.draw(this._buildPolygon(coords, style));
-        },
-
         _beforeReset: function() {
             this.surface.clear();
         },
