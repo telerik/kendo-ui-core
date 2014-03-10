@@ -9644,6 +9644,7 @@ var __meta__ = {
             }
             crosshair._visible = false;
             crosshair.stickyMode = axis instanceof CategoryAxis;
+            crosshair.enableDiscovery();
         },
 
         options: {
@@ -9758,6 +9759,7 @@ var __meta__ = {
 
             crosshair.points = crosshair.linePoints();
             crosshair.element = view.createPolyline(crosshair.points, false, {
+                data: { modelId: crosshair.modelId },
                 id: crosshair.id,
                 stroke: options.color,
                 strokeWidth: options.width,
