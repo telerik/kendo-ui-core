@@ -32,6 +32,11 @@
         equal(location.pathname, root + "bar");
     });
 
+    test("navigating accepts root prefixed url too", 1, function() {
+        adapter.navigate(root + "bar1");
+        equal(location.pathname, root + "bar1");
+    });
+
     /**
      * Just like kendo methods/events, pushState call does not trigger the symmetric event.
      * So, we will push, then go back.

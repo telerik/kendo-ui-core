@@ -185,12 +185,13 @@ var __meta__ = {
 
             this._started = true;
 
-            var root = options.root || "/",
-                adapter = support.pushState && options.pushState ? new PushStateAdapter(root) : new HashAdapter(),
+            options.root = options.root || "/";
+
+            var adapter = this.createAdapter(options),
                 current;
 
             // adapter may reload the document
-            if (adapter.normalizeCurrent({ root: root, pushState: options.pushState })) {
+            if (adapter.normalizeCurrent(options)) {
                 return;
             }
 
@@ -198,13 +199,17 @@ var __meta__ = {
 
             $.extend(this, {
                 adapter: adapter,
-                root: root,
+                root: options.root,
                 historyLength: adapter.length(),
                 current: current,
                 locations: [current],
             });
 
             adapter.change($.proxy(this, "_checkUrl"));
+        },
+
+        createAdapter:function(options) {
+           return support.pushState && options.pushState ? new PushStateAdapter(options.root) : new HashAdapter();
         },
 
         stop: function() {
