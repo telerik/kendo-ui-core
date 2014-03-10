@@ -268,4 +268,12 @@ test("encode allows HTML entity encoding to be suppressed", function() {
     equal(Dom.encode("foo < ä bar", { entities: false }), "foo &lt; ä bar");
 });
 
+test("stripBom removes bom characters", function() {
+    equal(Dom.stripBom("foo\ufeffbar\ufeff"), "foobar");
+});
+
+test("stripBom works on null", function() {
+    equal(Dom.stripBom(null), "");
+});
+
 }());
