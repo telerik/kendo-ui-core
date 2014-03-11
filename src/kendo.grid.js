@@ -1018,7 +1018,7 @@ var __meta__ = {
             var resizeHandle = that.resizeHandle;
             var left;
 
-            if (resizeHandle && that.lockedContent) {
+            if (resizeHandle && that.lockedContent && resizeHandle.data("th")[0] !== th[0]) {
                 resizeHandle.remove();
                 resizeHandle = null;
             }
