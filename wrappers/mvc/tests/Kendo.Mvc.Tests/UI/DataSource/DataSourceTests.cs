@@ -1,6 +1,7 @@
 ﻿namespace Kendo.Mvc.Tests
 {
     using Kendo.Mvc.UI;
+    using Kendo.Mvc.UI.Tests;
     using System.Collections.Generic;
     using System.Linq;
     using Xunit;
@@ -277,6 +278,56 @@
 
             transport.ContainsKey("prefix").ShouldBeTrue();
             transport["prefix"].ShouldEqual("foo");
+        }
+
+        [Fact]
+        public void Local_data_is_not_paged_for_dataSource_type_custom()
+        {
+            List<Customer> localData = new List<Customer> {
+                new Customer{Id = 1 , Name = "C1"},
+                new Customer{Id = 2 , Name = "C2"}
+            };
+            dataSource.Data = localData;
+            dataSource.PageSize = 1;
+            dataSource.Type = DataSourceType.Custom;
+            dataSource.Schema.Data = "";
+
+            var result = dataSource.ToJson();
+            result["data"].ShouldBeSameAs(localData);
+        }
+
+        [Fact]
+        public void Local_data_is_correctly_formatted_for_dataSource_type_custom_and_schema_data_is_set()
+        {
+            List<Customer> localData = new List<Customer> {
+                new Customer{Id = 1 , Name = "C1"},
+                new Customer{Id = 2 , Name = "C2"}
+            };
+
+            dataSource.Data = localData;
+            dataSource.Type = DataSourceType.Custom;
+            dataSource.Schema.Data = "Data";
+
+            var result = dataSource.ToJson();
+            ((IDictionary<string, object>)result["data"]).ContainsKey("Data");
+        }
+
+
+        [Fact]
+        public void Local_data_is_correctly_serialized_for_dataSource_type_custom_and_client_operations()
+        {
+            List<Customer> localData = new List<Customer> {
+                new Customer{Id = 1 , Name = "C1"},
+                new Customer{Id = 2 , Name = "C2"}
+            };
+
+            dataSource.Data = localData;
+            dataSource.ServerPaging = false;
+            dataSource.Type = DataSourceType.Custom;
+            dataSource.Schema.Data = "";
+
+            var result = dataSource.ToJson();
+            result["data"].ShouldBeSameAs(localData);
         }
 
         /*

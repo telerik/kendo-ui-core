@@ -148,35 +148,34 @@ namespace Kendo.Mvc.UI
                 json["autoSync"] = AutoSync;
             }
 
+            if (IsClientOperationMode && Type == DataSourceType.Custom && CustomType != "aspnetmvc-ajax")
+            {
+                RawData = Data;
+            }
+
             if (IsClientOperationMode && RawData != null)
             {
-                if (string.IsNullOrEmpty(Schema.Data))
-                {
-                    json["data"] = SerializeDataSource(Data);
-                }
-                else
-                {
-                    json["data"] = new Dictionary<string, object>()
-                    {
-                        { Schema.Data,  SerializeDataSource(RawData) },
-                        { Schema.Total, Total }
-                    };
-                }
+                SerializeData(json, RawData);
             }
             else if (IsClientBinding && !IsClientOperationMode && Data != null)
             {
-                if (string.IsNullOrEmpty(Schema.Data))
-                {
-                    json["data"] = SerializeDataSource(Data);
-                }
-                else
-                {
-                    json["data"] = new Dictionary<string, object>()
+                SerializeData(json, Data);
+            }
+        }
+
+        private void SerializeData(IDictionary<string, object> json, IEnumerable data)
+        {
+            if (string.IsNullOrEmpty(Schema.Data))
+            {
+                json["data"] = SerializeDataSource(data);
+            }
+            else
+            {
+                json["data"] = new Dictionary<string, object>()
                     {
-                        { Schema.Data,  SerializeDataSource(Data) },
+                        { Schema.Data,  SerializeDataSource(data) },
                         { Schema.Total, Total }
                     };
-                }
             }
         }
 

@@ -121,8 +121,11 @@
             {
                 FormId = Name + "form"
             };
-                   
-            ProcessDataSource();
+
+            if (DataSource.Type != DataSourceType.Custom || DataSource.CustomType == "aspnetmvc-ajax")
+            {
+                 ProcessDataSource();
+            }
 
             InitializeEditor();
 

@@ -479,13 +479,12 @@
                 DataSource.Transport.StringifyDates = true;
             }
 
-            Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
-
-            //TODO: update logic
-            if (DataSource.Data != null)
+            if (DataSource.CustomType == "aspnetmvc-ajax")
             {
-                dataSource["data"] = new { Data = DataSource.Data };
+                DataSource.RawData = DataSource.Data;
             }
+
+            Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
 
             options["dataSource"] = dataSource;
 

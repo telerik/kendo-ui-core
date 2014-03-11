@@ -900,7 +900,10 @@ namespace Kendo.Mvc.UI
 
                 var builder = htmlBuilderFactory.CreateBuilder(Scrollable.Enabled);
 
-                ProcessDataSource();
+                if (DataSource.Type != DataSourceType.Custom || DataSource.CustomType == "aspnetmvc-ajax")
+                {
+                    ProcessDataSource();
+                }
 
                 var renderingData = CreateRenderingData();
 
