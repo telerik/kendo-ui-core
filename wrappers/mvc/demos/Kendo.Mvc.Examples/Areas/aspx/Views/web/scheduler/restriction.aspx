@@ -6,16 +6,26 @@
     .Name("scheduler")
     .Date(new DateTime(2013, 6, 13))
     .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
-    .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))    
-    .Height(600)   
+    .EndTime(new DateTime(2013, 6, 13, 23, 00, 00))
+    .Height(600)
     .Views(views =>
     {
-        views.DayView();        
+        views.DayView();
     })
     .Timezone("Etc/UTC")
     .Group(group => group.Resources("Rooms"))
     .Resources(resource =>
     {
+        resource.Add(m => m.Attendees)
+            .Title("Attendees")
+            .Multiple(true)
+            .DataTextField("Text")
+            .DataValueField("Value")
+            .DataColorField("Color")
+            .BindTo(new[] {
+                        new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                        new { Text = "Bob", Value = 2, Color = "#51a0ed" }
+            });
         resource.Add(m => m.RoomID)
             .Title("Room")
             .Name("Rooms")
@@ -24,17 +34,7 @@
             .DataColorField("Color")
             .BindTo(new[] { 
                 new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
-                new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" } 
-            });
-        resource.Add(m => m.Attendees)
-            .Title("Attendees")
-            .Multiple(true)
-            .DataTextField("Text")
-            .DataValueField("Value")
-            .DataColorField("Color")
-            .BindTo(new[] { 
-                new { Text = "Alex", Value = 1, Color = "#f8a398" },
-                new { Text = "Bob", Value = 2, Color = "#51a0ed" }                
+                new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
             });
     })
     .Events(events => events
@@ -45,13 +45,27 @@
         .Move("scheduler_move")
         .MoveEnd("scheduler_moveEnd")
     )
-    .DataSource(dataSource => 
-        dataSource.Model(m => { 
-               m.Id(f => f.MeetingID);  
-               m.Field(f => f.Title).DefaultValue("No title");
-               m.RecurrenceId(f => f.RecurrenceID);                                                     
-        })
-    )
+    .DataSource(dataSource =>
+            dataSource.Custom()
+            .Schema(schema => schema
+                .Model(m =>
+                {
+                    m.ClearFields();
+                    m.Id(f => f.MeetingID);
+                    m.Field("title", typeof(string)).From("Title");
+                    m.Field(f => f.Attendees);
+                    m.Field("recurrenceId", typeof(int)).From("RecurrenceID");
+                    m.Field("start", typeof(DateTime)).From("Start");
+                    m.Field("end", typeof(DateTime)).From("End");
+                    m.Field("description", typeof(string)).From("Description");
+                    m.Field("recurrenceID", typeof(int)).From("RecurrenceID");
+                    m.Field("recurrenceRule", typeof(string)).From("RecurrenceRule");
+                    m.Field("recurrenceException", typeof(string)).From("RecurrenceException");
+                    m.Field("isAllDay", typeof(bool)).From("IsAllDay");
+                    m.Field("startTimezone", typeof(string)).From("StartTimezone");
+                    m.Field("endTimezone", typeof(string)).From("EndTimezone");
+                }))
+        )
     .BindTo(Model) 
 %>
 
@@ -114,15 +128,26 @@
 
         for (var idx = 0, length = occurrences.length; idx < length; idx++) {
             occurrence = occurrences[idx];
-            if (occurrence[resourceFieldName] === value) {
+            var resourceValue = occurrence[resourceFieldName];
+
+            if (resourceValue === value) {
                 result.push(occurrence);
+            } else if (resourceValue instanceof kendo.data.ObservableArray) {
+                if (value) {
+                    for (var i = 0; i < value.length; i++) {
+                        if (resourceValue.indexOf(value[i]) != -1) {
+                            result.push(occurrence);
+                            break;
+                        }
+                    }
+                }
             }
         }
         return result;
     }
 
     function attendeeIsOccupied(start, end, event, resources) {
-        var occurrences = occurrencesInRangeByResource(start, end, "attendee", event, resources);
+        var occurrences = occurrencesInRangeByResource(start, end, "Attendees", event, resources);
         if (occurrences.length > 0) {
             return true;
         }
@@ -130,7 +155,7 @@
     }
 
     function roomIsOccupied(start, end, event, resources) {
-        var occurrences = occurrencesInRangeByResource(start, end, "roomId", event, resources);
+        var occurrences = occurrencesInRangeByResource(start, end, "RoomID", event, resources);
         if (occurrences.length > 0) {
             return true;
         }
@@ -138,7 +163,6 @@
     }
 
     function checkAvailability(start, end, event, resources) {
-
         if (attendeeIsOccupied(start, end, event, resources)) {
             setTimeout(function () {
                 alert("This person is not available in this time period.");
@@ -157,7 +181,6 @@
 
         return true;
     }
-
 </script>
 
 <style scoped>
