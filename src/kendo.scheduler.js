@@ -1549,7 +1549,7 @@ var __meta__ = {
 
             that._tabindex();
 
-            wrapper.on(selectEvent, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
+            wrapper.on(selectEvent + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
                 that._createSelection(e.currentTarget);
                 wrapper.focus();
             });
