@@ -570,6 +570,23 @@
         equal(model.get("name"), "foo");
     });
 
+    test("dblclicking the new directory input sets the value", 2, function() {
+        var browser = setup({
+            transport: {
+                create:
+                    function() { ok(true); }
+                }
+        }, []);
+
+        browser.createDirectory();
+
+        var tile =  browser.list.find("li:last");
+        var model = browser.dataSource.getByUid(tile.attr("data-uid"));
+
+        tile.find("input").val("foo").change().trigger("dblclick");
+        equal(model.get("name"), "foo");
+    });
+
     test("name is generated if directory name is empty", 2, function() {
         var browser = setup({
             transport: {
