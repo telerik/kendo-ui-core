@@ -411,6 +411,7 @@ kendo_module({
                 plotArea;
 
             chart._applyDefaults(chart.options);
+            applySeriesColors(chart.options);
 
             if (paneName) {
                 plotArea = chart._model._plotArea;

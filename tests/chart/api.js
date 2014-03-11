@@ -157,6 +157,34 @@
             equal(chart.element.find("#extra").length, 0);
         });
 
+        test("redraw sets series defaults", function() {
+            setupChart({
+                series: [{
+                    type: "column",
+                    data: [1000],
+                    color: function() { return "foo"; }
+                }],
+                seriesColors: ["red"]
+            });
+
+            chart.redraw();
+            equal(chart.options.series[0]._defaults.color, "red");
+        });
+
+        test("refresh sets series defaults", function() {
+            setupChart({
+                series: [{
+                    type: "column",
+                    data: [1000],
+                    color: function() { return "foo"; }
+                }],
+                seriesColors: ["red"]
+            });
+
+            chart.refresh();
+            equal(chart.options.series[0]._defaults.color, "red");
+        });
+
         test("refresh applies changes to data-bound series", function() {
             setupChart({
                 dataSource: [{ value: 1 }],
