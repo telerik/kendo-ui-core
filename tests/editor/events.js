@@ -298,4 +298,15 @@ test("keydown is triggered even if a command is being executed", function() {
     equal(e.keyCode, 13);
 });
 
+test("blurring the editor blurs the textarea (jQuery validate compatibility)", function() {
+    var called = false;
+    editor.textarea.bind("blur", function() {
+        called = true;
+    });
+
+    $(editor.window).trigger("blur");
+
+    ok(called);
+});
+
 }());
