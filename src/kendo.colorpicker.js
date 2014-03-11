@@ -94,6 +94,7 @@ kendo_module({
             var prev = this._value;
             color = this.color(color);
             if (!nohooks) {
+                this.element.trigger("blur");
                 if (!color.equals(prev)) {
                     this.trigger("change", { value: this.value() });
                 } else if (!this._standalone) {
