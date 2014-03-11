@@ -334,6 +334,22 @@
             return wnd;
         },
 
+        _blur: function() {
+            var textarea = this.textarea;
+            var old = textarea ? textarea.val() : this._oldValue;
+            var value = this.options.encoded ? this.encodedValue() : this.value();
+
+            this.update();
+
+            if (textarea) {
+                textarea.trigger("blur");
+            }
+
+            if (value != old) {
+                this.trigger("change");
+            }
+        },
+
         _initializeContentElement: function() {
             var editor = this;
             var doc;
@@ -357,24 +373,14 @@
                 editor.toolbar.decorateFrom(editor.body);
             }
 
-            $(blurTrigger)
-                .on("blur" + NS, function () {
-                    var old = editor.textarea ? editor.textarea.val() : editor._oldValue;
-                    var value = editor.options.encoded ? editor.encodedValue() : editor.value();
-
-                    editor.update();
-
-                    if (value != old) {
-                        editor.trigger("change");
-                    }
-                });
+            $(blurTrigger).on("blur" + NS, proxy(this._blur, this));
 
             try {
                 doc.execCommand("enableInlineTableEditing", null, false);
             } catch(e) { }
 
             if (kendo.support.touch) {
-                $(doc).on("selectionchange" + NS, function() { editor._selectionChange(); })
+                $(doc).on("selectionchange" + NS, proxy(this._selectionChange, this))
                       .on("keydown" + NS, function() {
                           // necessary in iOS when touch events are bound to the page
                           if (kendo._activeElement() != doc.body) {
