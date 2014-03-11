@@ -626,6 +626,10 @@ kendo_module({
             var that = this,
                 li = $(e.currentTarget);
 
+            if (li.hasClass("k-edit-item")) {
+                that._directoryBlur();
+            }
+
             if (li.filter("[" + kendo.attr("type") + "=d]").length) {
                 var folder = that.dataSource.getByUid(li.attr(kendo.attr("uid")));
                 if (folder) {
