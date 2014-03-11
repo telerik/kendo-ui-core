@@ -47,6 +47,14 @@
         adapter.navigate("bar");
     });
 
+    asyncTest("navigating accepts hash string too", 1, function() {
+        onHash(function() {
+            start();
+            equal(location.hash, "#bar1");
+        });
+        adapter.navigate("#bar1");
+    });
+
     asyncTest("change calls callback when hash changed", 1, function() {
         adapter.change(function(e) {
             start();

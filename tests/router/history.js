@@ -37,7 +37,7 @@
     var history,
         adapter;
 
-    module("History with mocks", {
+    module("Mocked History", {
         setup: function() {
             history = new kendo.History();
             adapter = new MockAdapter();
@@ -179,7 +179,7 @@
         equal(history.current, "/new-location");
     });
 
-    test("Allows prevention of back if preventDefault in back event called", 1, function() {
+    test("allows prevention of back if preventDefault in back event called", 1, function() {
         history.start();
 
         history.navigate("/initial-location");
@@ -194,160 +194,66 @@
 
         equal(history.current, "/new-location");
     });
-})();
 
-
-(function() {
-    var win,
-        kendoHistory,
-        _history,
-        initial,
-        win,
-        loc,
-        root,
-        pushStateSupported = kendo.support.pushState;
-
-    module("History", {
-        setup: function() {
-            location.hash = "";
-            QUnit.stop();
-            QUnit.fixture.html('<iframe src="/base/tests/router/sandbox.html"></iframe>');
-            win = window.frames[0].window;
-
-            $(win).one('load', function() {
-                loc = win.location;
-                root = loc.pathname;
-                initial = loc.href.replace(/#.*$/, '');
-                kendoHistory = win.kendo.history;
-                _history = win.history;
-                QUnit.start();
-            });
-        },
-
-        teardown: function() {
-            if (win.kendo) {
-                win.kendo.support.pushState = pushStateSupported;
-                kendoHistory.stop();
+    test("accepts event handlers passed as options", 1, function() {
+        history.start({
+            change: function(e) {
+                equal(e.url, "/new-location");
             }
-        }
-    });
-
-    function url(expected) {
-        equal(loc.href.replace(/#$/, ''), expected);
-    }
-
-    function startWithHash() {
-        kendoHistory.start({root: root});
-    }
-
-    function startWithPushState() {
-        kendoHistory.start({pushState: true, root: root});
-    }
-
-/*
- * Test is very erratic, but has certain value - can be run for troubleshooting
-    asyncTest("Allows prevention of navigating to previous URL (not back) if preventDefault called", 1, function() {
-        startWithHash();
-
-        kendoHistory.navigate("/initial-location");
-        kendoHistory.navigate("/new-location");
-
-        kendoHistory.change(function(e) {
-            e.preventDefault();
         });
 
-        setTimeout(function() {
-            loc.href = initial + "#/initial-location";
-        }, 300);
-
-        setTimeout(function() {
-            start();
-            url(initial + "#/new-location");
-        }, 600);
-    });
-*/
-
-    test("strips hash from passed urls", function() {
-        startWithHash();
-        kendoHistory.navigate('#/new-location');
-        equal(kendoHistory.current, '/new-location');
+        history.navigate("/new-location");
     });
 
-    test("accepts event handlers passed as options", function() {
-        expect(1);
-
-        kendoHistory.start({root: root, change: function(e) { equal(e.url, "/new-location"); }});
-
-        kendoHistory.navigate("/new-location");
+    test("triggers ready with the initial location", 1, function() {
+        adapter.current = function() {
+            return "/initial-location";
+        }
+        history.start();
+        equal(history.current, "/initial-location");
     });
 
-    test("triggers ready with the initial location", function() {
-        expect(1);
+    test("listens for adapter changes", 1, function() {
+        history.start();
 
-        win.location.hash = "/initial-location";
-        kendoHistory.start({root: root });
-        equal(kendoHistory.current, "/initial-location");
-    });
-
-    asyncTest("listens for outside url changes (hashChange)", function() {
-        expect(1);
-        startWithHash();
-
-        kendoHistory.change(function(e) {
-            start();
+        history.change(function(e) {
             equal(e.url, "/outside-location");
         });
 
-        win.location.hash = "/outside-location";
+        adapter.url = "/outside-location";
+        adapter.callback();
     });
 
-    test("passes parameters if any present", function() {
-        expect(1);
-        startWithHash();
+    test("passes parameters if any present", 1, function() {
+        history.start();
 
-        kendoHistory.change(function(e) {
+        history.change(function(e) {
             equal(e.url, "/new-location?foo=bar");
         });
 
-        kendoHistory.navigate("/new-location?foo=bar");
+        history.navigate("/new-location?foo=bar");
     });
 
-    asyncTest("supports #:back pseudo url for going back", 1, function() {
-        startWithHash();
-        kendoHistory.navigate("/new-location");
-        kendoHistory.navigate("#:back");
-        setTimeout(function() {
-            start();
-            equal(loc.hash, '');
-        }, 300);
+    test("supports #:back pseudo url for going back", 1, function() {
+        stub(adapter, { back: function() {
+            ok(true);
+        }})
+
+        history.start();
+        history.navigate("/new-location");
+        history.navigate("#:back");
     });
 
-    asyncTest("stays in sync after back is called", 2, function() {
-        startWithHash();
-        kendoHistory.navigate("/initial-location");
-        kendoHistory.navigate("/new-location");
-        kendoHistory.navigate("#:back");
+    test("stays in sync after back is called", 2, function() {
+        history.start();
+        history.navigate("/initial-location");
+        history.navigate("/new-location");
 
-        setTimeout(function() {
-            start();
-            equal(kendoHistory.locations.length, 2);
-            equal(kendoHistory.locations[0], "");
-        }, 300);
-    });
+        adapter.url = "/initial-location";
+        adapter.callback();
 
-    asyncTest("handles back in push state", 1, function() {
-        startWithPushState();
-        kendoHistory.navigate("/foo");
-        kendoHistory.navigate("/bar");
-        kendoHistory.navigate("/baz");
-        _history.back();
-
-        setTimeout(function() {
-            _history.back();
-            setTimeout(function() {
-                start();
-                equal(kendoHistory.locations.length, 2);
-            }, 200);
-        }, 200);
+        equal(history.locations.length, 2);
+        equal(history.locations[0], "");
     });
 })();
+
