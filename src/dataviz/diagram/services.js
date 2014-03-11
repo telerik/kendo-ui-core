@@ -1465,6 +1465,8 @@
                 that._manipulating = false;
                 that.map = [];
                 that.shapes = [];
+                that.rect = new Rectangle(that.options.rect);
+                that.visual.append(that.rect);
                 for (var x = -1; x <= 1; x++) {
                     for (var y = -1; y <= 1; y++) {
                         if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
@@ -1477,8 +1479,6 @@
                 }
                 that.text = new TextBlock();
                 that.visual.append(that.text);
-                that.rect = new Rectangle(that.options.rect);
-                that.visual.append(that.rect);
                 that.rotationThumb = new Path(that.options.rotationThumb);
                 that.visual.append(that.rotationThumb);
                 that.redraw();
@@ -1513,9 +1513,9 @@
                 },
                 rect: {
                     stroke: {
-                        color: "#778899",
+                        color: "#ffffff",
                         width: 1,
-                        dashType: "dash"
+                        dashType: "dot"
                     },
                     background: "none"
                 },
@@ -1524,7 +1524,7 @@
                     y: -50,
                     thumbWidth: 10
                 },
-                offset: 6
+                offset: 10
             },
             bounds: function (value) {
                 if (value) {
@@ -1563,19 +1563,21 @@
             _getHandleBounds: function (p) {
                 var w = this.options.handles.width, h = this.options.handles.height,
                     r = new Rect(0, 0, w, h);
+
                 if (p.x < 0) {
-                    r.x = -w;
+                    r.x = - w / 2;
                 } else if (p.x === 0) {
                     r.x = Math.floor(this._bounds.width / 2) - w / 2;
                 } else if (p.x > 0) {
-                    r.x = this._bounds.width + 1.0;
+                    r.x = this._bounds.width + 1.0 - w / 2;
                 } if (p.y < 0) {
-                    r.y = -h;
+                    r.y = - h / 2;
                 } else if (p.y === 0) {
                     r.y = Math.floor(this._bounds.height / 2) - h / 2;
                 } else if (p.y > 0) {
-                    r.y = this._bounds.height + 1.0;
+                    r.y = this._bounds.height + 1.0 - h / 2;
                 }
+
                 return r;
             },
             _getCursor: function (point) {
@@ -1884,10 +1886,10 @@
 
                     var center = new Point(bounds.width / 2, bounds.height / 2);
                     this.visual.rotate(this._angle, center);
-                    this.rect.redraw({width: bounds.width, height: bounds.height});
+                    this.rect.redraw({ width: bounds.width, height: bounds.height });
                     if (this.rotationThumb) {
                         this._rotationThumbBounds = new Rect(bounds.center().x, bounds.y + this.options.rotationThumb.y, 0, 0).inflate(this.options.rotationThumb.thumbWidth);
-                        this.rotationThumb.redraw({x: bounds.width / 2 - this.options.rotationThumb.thumbWidth / 2});
+                        this.rotationThumb.redraw({ x: bounds.width / 2 - this.options.rotationThumb.thumbWidth / 2 });
                     }
                 } else {
                     this.visual.visible(false);

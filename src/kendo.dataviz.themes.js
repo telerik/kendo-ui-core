@@ -482,12 +482,9 @@ var __meta__ = {
                     hover: {
                         background: "#ffffff",
                         stroke: {
-                            color: "#3d3d3d",
-                            width: 2
+                            color: "#3d3d3d"
                         }
-                    },
-                    width: 7,
-                    height: 7
+                    }
                 }
             }
         }

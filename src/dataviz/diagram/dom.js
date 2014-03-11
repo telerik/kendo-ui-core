@@ -387,8 +387,8 @@
                 this.shape = shape;
             },
             options: {
-                width: DEFAULT_CONNECTOR_SIZE,
-                height: DEFAULT_CONNECTOR_SIZE,
+                width: 7,
+                height: 7,
                 background: DEFAULT_CONNECTION_BACKGROUND,
                 hover: {}
             },
