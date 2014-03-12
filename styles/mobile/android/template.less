@@ -390,13 +390,13 @@
 
 .km-android .km-popup-arrow:before
 {
-    border-color: rgba(0,0,0,.5) transparent;
+    border-color: @android-border-color transparent;
 }
 
 .km-android .km-left .km-popup-arrow:before,
 .km-android .km-right .km-popup-arrow:before
 {
-    border-color: transparent rgba(0,0,0,.5);
+    border-color: transparent @android-border-color;
 }
 
 .km-android .km-popup-arrow:after
@@ -486,14 +486,8 @@
 
 .km-tablet .km-android *:not(.km-actionsheet-phone) > .km-actionsheet
 {
-    .box-shadow(0 0 7px @android-background-color);
+    .box-shadow(0 0 7px @android-button-color);
 }
-
-.km-tablet .km-android-light *:not(.km-actionsheet-phone) > .km-actionsheet
-{
-    .box-shadow(0 0 7px darken(@android-light-background-color, 20%));
-}
-
 
 
 
