@@ -172,7 +172,7 @@ var __meta__ = {
 
                 $.extend(eventData, { target: target.element });
 
-                if(target.sortable.isEmpty()) {
+                if(target.appendToBottom) {
                     this._movePlaceholder(target, null, eventData);
                     return;
                 }
@@ -277,6 +277,24 @@ var __meta__ = {
         },
 
         _findTarget: function(e) {
+            var element = this._findElementUnderCursor(e),
+                items,
+                connectWith = this.options.connectWith,
+                node;
+
+            if($.contains(this.element[0], element)) { //the element is part of the sortable container
+                items = this.items();
+                node = items.filter(element)[0] || items.has(element)[0];
+
+                return node ? { element: $(node), sortable: this } : null;
+            } else if (this.element[0] == element && this.isEmpty()) { //the sortable container is empty
+                return { element: this.element, sortable: this, appendToBottom: true };
+            } else if (connectWith) { //connected lists are present
+                return this._searchConnectedTargets(element, e);
+            }
+        },
+
+        _findElementUnderCursor: function(e) {
             var elementUnderCursor = kendo.elementUnderCursor(e),
                 draggable = e.sender,
                 disabled = this.options.disabled,
@@ -293,46 +311,56 @@ var __meta__ = {
                 draggable.hint.show();
             }
 
-            return this._findDraggableNode(elementUnderCursor);
+            return elementUnderCursor;
         },
 
-        _findDraggableNode: function(element) {
-            var items,
-                connectWith = this.options.connectWith,
-                connected,
+        _searchConnectedTargets: function(element, e) {
+            var connected = $(this.options.connectWith),
+                sortableInstance,
+                items,
                 node;
 
-            if($.contains(this.element[0], element)) { //the element is part of the sortable container
-                items = this.items();
-                node = items.filter(element)[0] || items.has(element)[0];
+            for (var i = 0; i < connected.length; i++) {
+                sortableInstance = connected.eq(i).getKendoSortable();
 
-                return node ? { element: $(node), sortable: this } : null;
-            } else if (this.element[0] == element && this.isEmpty()) {
-                return { element: this.element, sortable: this };
-            } else if (connectWith) {
-                connected = $(connectWith);
+                if($.contains(connected[i], element)) {
+                    if(sortableInstance) {
+                        items = sortableInstance.items();
+                        node = items.filter(element)[0] || items.has(element)[0];
 
-                for (var i = 0; i < connected.length; i++) {
-                    var sortable = connected.eq(i).getKendoSortable();
-                    if($.contains(connected[i], element)) {
-                        if(sortable) {
-                            items = sortable.items();
-                            node = items.filter(element)[0] || items.has(element)[0];
-
-                            if(node) {
-                                sortable.placeholder = this.placeholder;
-                                return { element: $(node), sortable: sortable };
-                            } else {
-                                return null;
-                            }
+                        if(node) {
+                            sortableInstance.placeholder = this.placeholder;
+                            return { element: $(node), sortable: sortableInstance };
+                        } else {
+                            return null;
                         }
-                    } else if(connected[i] == element) {
-                        if(sortable && sortable.isEmpty()) {
-                            return { element: connected.eq(i), sortable: sortable };
-                        }
+                    }
+                } else if(connected[i] == element) {
+                    if((sortableInstance && sortableInstance.isEmpty()) || this._isCursorAfterLast(sortableInstance, e)) {
+                        return { element: connected.eq(i), sortable: sortableInstance, appendToBottom: true };
                     }
                 }
             }
+
+        },
+
+        _isCursorAfterLast: function(sortable, e) {
+            var lastItem = sortable.items().last(),
+                cursorOffset = { left: e.x.location, top: e.y.location },
+                lastItemOffset,
+                delta;
+
+            lastItemOffset = kendo.getOffset(lastItem);
+            lastItemOffset.top += lastItem.outerHeight();
+            lastItemOffset.left += lastItem.outerWidth();
+
+            if(this.floating) { //horizontal
+                delta = lastItemOffset.left - cursorOffset.left;
+            } else { //vertical
+                delta = lastItemOffset.top - cursorOffset.top;
+            }
+
+            return delta < 0 ? true : false;
         },
 
         _movementByAxis: function(axis, cursorOffset, delta, eventData) {

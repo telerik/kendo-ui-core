@@ -175,4 +175,18 @@
 
     });
 
+    test("Placeholder is moved when item is dragged at the bottom of connectedList container", 1, function() {
+        var options = { connectWith: "#listA" },
+            sortableA = listA.kendoSortable().getKendoSortable(),
+            sortableB = listB.kendoSortable(options).getKendoSortable(),
+            target = listA;
+
+        listA.css("min-height", 400);
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, 50, 350);
+
+        equal(listA.children().last()[0], sortableB.placeholder[0], "Placeholder is moved in listA");
+    });
+
 })();
