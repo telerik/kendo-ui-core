@@ -39,7 +39,7 @@
         }));
 
         g.append(new dataviz.diagram.Image({
-            source: "../../content/dataviz/diagram/people/" + dataItem.image,
+            source: "${imageRootUrl}/" + dataItem.image,
             x: 3,
             y: 3,
             width: 68,
