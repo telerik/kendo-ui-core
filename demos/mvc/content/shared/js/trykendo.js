@@ -15,7 +15,7 @@
                 '<head>',
                 '<head>\n' +
                 '    <base href="' + baseUrl + '">\n' +
-                '    <style>body { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>'
+                '    <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>'
             );
         },
         addConsoleScript: function (code) {
