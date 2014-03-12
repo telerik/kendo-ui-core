@@ -739,6 +739,7 @@ var __meta__ = {
             }
 
             if (that.lockedContent) {
+                that.wrapper.addClass("k-grid-lockedcolumns");
                 that._resizeHandler = function()  { that.resize(); };
                 $(window).on("resize" + NS, that._resizeHandler);
             }
@@ -4004,7 +4005,7 @@ var __meta__ = {
                 }
             }
 
-            container = $('<div class="k-grid-content-locked"><table><colgroup/><tbody></tbody></table></div>');
+            container = $('<div class="k-grid-content-locked"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><tbody></tbody></table></div>');
             colgroup = container.find("colgroup");
             colgroup.append(cols);
 
@@ -4067,7 +4068,7 @@ var __meta__ = {
             }
 
             if (cells.length) {
-                html = '<div class="k-grid-header-locked" style="width:1px"><table><colgroup/><thead><tr>' +
+                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr>' +
                     '</tr></thead></table></div>';
 
                 table = $(html);

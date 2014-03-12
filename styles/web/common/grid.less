@@ -180,19 +180,28 @@ div.k-grid-header .k-header
 
 /* Grid :: locked columns */
 
+.k-grid-lockedcolumns
+{
+    white-space: nowrap;
+}
+
 .k-grid-header-locked,
 .k-grid-content-locked
 {
-    float: left;
+    display: inline-block;
+    vertical-align: top;
     overflow: hidden;  /* generally uneeded */
     position: relative;
     border-style: solid;
     border-width: 0 1px 0 0;
 }
 
+.k-grid-header-locked + .k-grid-header-wrap,
+.k-grid-content-locked + .k-grid-content,
 .k-grid-footer-locked
 {
-    float: left;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .k-grid-toolbar
