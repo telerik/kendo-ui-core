@@ -625,7 +625,7 @@ var __meta__ = {
     function hideColumnCells(rows, columnIndex) {
         var idx = 0,
             length = rows.length,
-            cell;
+            cell, row;
 
         for ( ; idx < length; idx += 1) {
             row = rows.eq(idx);
@@ -648,7 +648,7 @@ var __meta__ = {
     function showColumnCells(rows, columnIndex) {
         var idx = 0,
             length = rows.length,
-            cell;
+            cell, row, columns;
 
         for ( ; idx < length; idx += 1) {
             row = rows.eq(idx);

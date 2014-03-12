@@ -5,7 +5,7 @@
         },
 
         create: function(options, paneCount, initCss) {
-            var splitter = $(SplitterHelpers.generateHtml(paneCount || 2))
+            var splitter = $(window.SplitterHelpers.generateHtml(paneCount || 2))
                     .css(initCss || {})
                     .appendTo(QUnit.fixture)
                     .kendoSplitter(options);

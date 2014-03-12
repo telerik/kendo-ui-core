@@ -29,6 +29,8 @@
         drawing = dataviz.drawing,
         BaseNode = drawing.BaseNode,
         Group = drawing.Group,
+        Box2D = dataviz.Box2D,
+        Color = dataviz.Color,
         Path = drawing.Path;
 
     // Constants ==============================================================
@@ -39,6 +41,7 @@
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         NONE = "none",
+        LINEAR = "linear",
         RADIAL = "radial",
         SOLID = "solid",
         SQUARE = "square",

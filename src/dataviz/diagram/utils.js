@@ -317,6 +317,7 @@
 
     Utils.all = function (arr, iterator, context) {
         var result = true;
+        var value;
 
         for (var i = 0; i < arr.length; i++) {
             value = arr[i];

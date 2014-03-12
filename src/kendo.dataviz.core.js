@@ -2415,7 +2415,7 @@ var __meta__ = {
         }
     });
 
-    LogarithmicAxis = Axis.extend({
+    var LogarithmicAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
             this.options = this._initOptions(seriesMin, seriesMax, options);
             Axis.fn.init.call(this, options);

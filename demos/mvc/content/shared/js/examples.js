@@ -406,7 +406,7 @@
                         }
                     })
                     .on('click', '.try-kendo', function () {
-                        dojo.postSnippet($('#HTML-1').data('html'), window.location.href);
+                        window.dojo.postSnippet($('#HTML-1').data('html'), window.location.href);
                     });
 
                 $(window).bind("popstate", function (e) {

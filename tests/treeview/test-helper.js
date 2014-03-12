@@ -1,5 +1,5 @@
 (function() {
-    window.TreeViewHelpers = {
+    var TreeViewHelpers = window.TreeViewHelpers = {
         fromOptions: function (treeviewOptions, options) {
             var container = QUnit.fixture;
 
@@ -15,10 +15,10 @@
         fromHtml: function (html, options, container) {
             container = container || QUnit.fixture;
 
-            window.treeview = $(html).appendTo(container).kendoTreeView(options);
+            var treeview = window.treeview = $(html).appendTo(container).kendoTreeView(options);
             window.treeviewObject = treeview.data("kendoTreeView");
 
-            return window.treeview;
+            return treeview;
         },
 
         destroy: function () {
