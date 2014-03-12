@@ -16,12 +16,10 @@ require_once '../../include/header.php';
 ?>
 
 <script>
-    var dataviz = kendo.dataviz;
     function visualTemplate(options) {
+        var dataviz = kendo.dataviz;
+        var g = new dataviz.diagram.Group();
         var dataItem = options.dataItem;
-        var g = new dataviz.diagram.Group({
-            autoSize: true
-        });
 
         g.append(new dataviz.diagram.Rectangle({
             width: 210,
@@ -31,9 +29,6 @@ require_once '../../include/header.php';
             },
             minWidth: 20,
             minHeight: 20,
-            content: {
-                color: "#ffffff"
-            },
             background: dataItem.colorScheme
         }));
 
@@ -41,14 +36,14 @@ require_once '../../include/header.php';
             text: dataItem.firstName + " " + dataItem.lastName,
             x: 85,
             y: 20,
-            color: "#ffffff"
+            color: "#fff"
         }));
 
         g.append(new dataviz.diagram.TextBlock({
             text: dataItem.title,
             x: 85,
             y: 40,
-            color: "#ffffff"
+            color: "#fff"
         }));
 
         g.append(new dataviz.diagram.Image({

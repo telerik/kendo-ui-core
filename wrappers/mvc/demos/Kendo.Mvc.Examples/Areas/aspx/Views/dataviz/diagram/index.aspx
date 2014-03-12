@@ -3,12 +3,10 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
 <script>
-    var dataviz = kendo.dataviz;
     function visualTemplate(options) {
+        var dataviz = kendo.dataviz;
+        var g = new dataviz.diagram.Group();
         var dataItem = options.dataItem;
-        var g = new dataviz.diagram.Group({
-            autoSize: true
-        });
 
         g.append(new dataviz.diagram.Rectangle({
             width: 210,
@@ -18,28 +16,25 @@
             },
             minWidth: 20,
             minHeight: 20,
-            content: {
-                color: "#ffffff"
-            },
-            background: dataItem.ColorScheme
+            background: dataItem.colorScheme
         }));
 
         g.append(new dataviz.diagram.TextBlock({
-            text: dataItem.FirstName + " " + dataItem.LastName,
+            text: dataItem.firstName + " " + dataItem.lastName,
             x: 85,
             y: 20,
-            color: "#ffffff"
+            color: "#fff"
         }));
 
         g.append(new dataviz.diagram.TextBlock({
-            text: dataItem.Title,
+            text: dataItem.title,
             x: 85,
             y: 40,
-            color: "#ffffff"
+            color: "#fff"
         }));
 
         g.append(new dataviz.diagram.Image({
-            source: "<%= Url.Content("~/content/dataviz/diagram/people/") %>" + dataItem.Image,
+            source: "../../content/dataviz/diagram/people/" + dataItem.image,
             x: 3,
             y: 3,
             width: 68,

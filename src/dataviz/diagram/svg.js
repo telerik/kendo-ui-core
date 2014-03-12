@@ -757,7 +757,7 @@
             this.height = this.options.height;
         },
         options: {
-            autoSize: false
+            autoSize: true
         },
         append: function (visual) {
             this.domElement.appendChild(visual.domElement);

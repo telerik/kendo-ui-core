@@ -8,51 +8,46 @@
 <demo:header />
 
 <script type="text/javascript">
-var dataviz = kendo.dataviz;
-function visualTemplate(options) {
-    var dataItem = options.dataItem;
-    var g = new dataviz.diagram.Group({
-        autoSize: true
-    });
+    function visualTemplate(options) {
+        var dataviz = kendo.dataviz;
+        var g = new dataviz.diagram.Group();
+        var dataItem = options.dataItem;
 
-    g.append(new dataviz.diagram.Rectangle({
-        width: 210,
-        height: 75,
-        stroke: {
-            width: 0
-        },
-        minWidth: 20,
-        minHeight: 20,
-        content: {
-            color: "#ffffff"
-        },
-        background: dataItem.colorScheme
-    }));
+        g.append(new dataviz.diagram.Rectangle({
+            width: 210,
+            height: 75,
+            stroke: {
+                width: 0
+            },
+            minWidth: 20,
+            minHeight: 20,
+            background: dataItem.colorScheme
+        }));
 
-    g.append(new dataviz.diagram.TextBlock({
-        text: dataItem.firstName + " " + dataItem.lastName,
-        x: 85,
-        y: 20,
-        color: "#ffffff"
-    }));
+        g.append(new dataviz.diagram.TextBlock({
+            text: dataItem.firstName + " " + dataItem.lastName,
+            x: 85,
+            y: 20,
+            color: "#fff"
+        }));
 
-    g.append(new dataviz.diagram.TextBlock({
-        text: dataItem.title,
-        x: 85,
-        y: 40,
-        color: "#ffffff"
-    }));
+        g.append(new dataviz.diagram.TextBlock({
+            text: dataItem.title,
+            x: 85,
+            y: 40,
+            color: "#fff"
+        }));
 
-    g.append(new dataviz.diagram.Image({
-        source: "${imageRootUrl}/" + dataItem.image,
-        x: 3,
-        y: 3,
-        width: 68,
-        height: 68
-    }));
+        g.append(new dataviz.diagram.Image({
+            source: "../../content/dataviz/diagram/people/" + dataItem.image,
+            x: 3,
+            y: 3,
+            width: 68,
+            height: 68
+        }));
 
-    return g;
-}
+        return g;
+    }
 </script>
 
 <kendo:diagram name="diagram">
