@@ -9,6 +9,7 @@ namespace Kendo.Mvc.Extensions
             var name = provider.GetType().FullName;
             return  name == "System.Data.Objects.ELinq.ObjectQueryProvider" || 
                     name == "System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider" ||
+                    name.StartsWith("LinqKit.ExpandableQueryProvider") ||
                     name.StartsWith("System.Data.Entity.Internal.Linq");
         }
 
