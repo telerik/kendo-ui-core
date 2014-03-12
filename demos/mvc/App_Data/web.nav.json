@@ -1089,7 +1089,7 @@
             "text": "Mobile",
             "name": "mobile",
             "new": "true",
-            "spriteCssClass": "multiselectIcon",
+            "spriteCssClass": "mobileIcon",
             "items": [
                 {
                     "text": "Actionsheet",
