@@ -227,7 +227,7 @@ kendo_module({
                     "font: #= d.options.font #; color: #= d.options.color #; " +
                     "visibility: #= d.renderVisibility() #; white-space: nowrap; " +
                     "#= d.renderCursor() #'>" +
-                    "#= d.content #</kvml:textbox>"
+                    "${ d.content }</kvml:textbox>"
                 );
             }
         },
@@ -282,7 +282,7 @@ kendo_module({
                     "#= d.renderPath() #" +
                     "<kvml:fill color='#= d.options.color #' />" +
                     "<kvml:textpath on='true' style='font: #= d.options.font #;' " +
-                    "fitpath='false' string='#= d.content #' /></kvml:shape>"
+                    "fitpath='false' string='${ d.content }' /></kvml:shape>"
                 );
             }
         },

@@ -266,7 +266,7 @@ kendo_module({
                     "style='font: #= d.options.font #; " +
                     "#= d.renderCursor() #' " +
                     "fill='#= d.options.color #'>" +
-                    "#= d.content #</text>"
+                    "${ d.content }</text>"
                 );
             }
         },
