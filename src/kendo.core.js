@@ -9,7 +9,7 @@ var __meta__ = {
     description: "The core of the Kendo framework."
 };
 
-/*jshint eqnull: true, loopfunc: true, evil: true, boss: true */
+/*jshint eqnull: true, loopfunc: true, evil: true, boss: true, freeze: false*/
 (function($, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,
@@ -330,6 +330,7 @@ function pad(number, digits, end) {
         },
         rep,
         toString = {}.toString;
+
 
     if (typeof Date.prototype.toJSON !== FUNCTION) {
 
