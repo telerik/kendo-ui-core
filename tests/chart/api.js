@@ -330,13 +330,13 @@
     (function() {
         var chart;
 
-        function setupChart() {
-            chart = createChart({
+        function setupChart(options) {
+            chart = createChart(kendo.deepExtend({
                 series: [{
                     type: "bar",
                     data: [1, 2]
                 }]
-            });
+            }, options));
         }
 
         // ------------------------------------------------------------
@@ -382,6 +382,16 @@
             var oldView = chart._view;
             chart.svg();
             ok(oldView === chart._view);
+        });
+
+        test("svg() encodes entities", function() {
+            setupChart({ categoryAxis: { categories: ["Foo & Bar"] } });
+            ok(chart.svg().indexOf("Foo &amp; Bar") > -1);
+        });
+
+        test("svg() preserves encoded entities", function() {
+            setupChart({ categoryAxis: { categories: ["Foo &amp; Bar"] } });
+            ok(chart.svg().indexOf("Foo &amp; Bar") > -1);
         });
 
         test("imageDataURL() exports image/png", function() {
