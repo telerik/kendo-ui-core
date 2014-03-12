@@ -472,17 +472,21 @@ var __meta__ = {
                     }
                 }
             },
-            resizingAdorner: {
-                handles: {
-                    type: "rectangle",
-                    background: "#3d3d3d",
-                    stroke: {
-                        color: "#ffffff"
-                    },
-                    hover: {
-                        background: "#ffffff",
+            editable: {
+                resize: {
+                    handles: {
+                        width: 7,
+                        height: 7,
+                        type: "rectangle",
+                        background: "#3d3d3d",
                         stroke: {
                             color: "#ffffff"
+                        },
+                        hover: {
+                            background: "#ffffff",
+                            stroke: {
+                                color: "#ffffff"
+                            }
                         }
                     }
                 }

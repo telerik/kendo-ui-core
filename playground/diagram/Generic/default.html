@@ -486,8 +486,11 @@ $(function () {
             to: {
                 shapeId: "rect"
             },
-            startCap: "none",
-            endCap: "none"
+            startCap: "ArrowStart",
+            endCap: "none",
+            content: {
+                text: "text"
+            }
         }]
     });
     var diagram = $("#canvas").data("kendoDiagram");

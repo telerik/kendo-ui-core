@@ -1297,9 +1297,7 @@
                 this._attachEvents();
                 that._initialize();
                 that._fetchFreshData();
-                this._resizingAdorner = new ResizingAdorner(this, deepExtend({}, {
-                        editable: this.options.editable
-                    }, that.options.resizingAdorner));
+                this._resizingAdorner = new ResizingAdorner(this, { editable: this.options.editable });
                 this._connectorsAdorner = new ConnectorsAdorner(this);
 
                 this._adorn(this._resizingAdorner, true);

@@ -1449,16 +1449,7 @@
                 that.shapes = [];
                 that.rect = new Rectangle(that.options.rect);
                 that.visual.append(that.rect);
-                for (var x = -1; x <= 1; x++) {
-                    for (var y = -1; y <= 1; y++) {
-                        if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
-                            var visual = new Rectangle(that.options.handles);
-                            visual.domElement._hover = $.proxy(that._hover, that);
-                            that.map.push({ x: x, y: y, visual: visual });
-                            that.visual.append(visual);
-                        }
-                    }
-                }
+                that._createHandles();
                 that.text = new TextBlock();
                 that.visual.append(that.text);
                 that.rotationThumb = new Path(that.options.rotationThumb);
@@ -1487,10 +1478,6 @@
                 that.refresh();
             },
             options: {
-                handles: {
-                    width: 7,
-                    height: 7
-                },
                 rect: {
                     stroke: {
                         color: "#ffffff",
@@ -1506,6 +1493,25 @@
                 },
                 offset: 10
             },
+            _createHandles: function() {
+                var editable = this.options.editable,
+                    handles, item, i, y;
+
+                if (editable && editable.resize) {
+                    handles = editable.resize.handles;
+                    for (x = -1; x <= 1; x++) {
+                        for (y = -1; y <= 1; y++) {
+                            if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
+                                item = new Rectangle(handles);
+                                item.domElement._hover = $.proxy(this._hover, this);
+                                this.map.push({ x: x, y: y, visual: item });
+                                this.visual.append(item);
+                            }
+                        }
+                    }
+                }
+            },
+
             bounds: function (value) {
                 if (value) {
                     this._innerBounds = value.clone();
@@ -1546,24 +1552,29 @@
                 }
             },
             _getHandleBounds: function (p) {
-                var w = this.options.handles.width, h = this.options.handles.height,
-                    r = new Rect(0, 0, w, h);
+                var editable = this.options.editable;
+                if (editable && editable.resize) {
+                    var handles = editable.resize.handles,
+                        w = handles.width,
+                        h = handles.height,
+                        r = new Rect(0, 0, w, h);
 
-                if (p.x < 0) {
-                    r.x = - w / 2;
-                } else if (p.x === 0) {
-                    r.x = Math.floor(this._bounds.width / 2) - w / 2;
-                } else if (p.x > 0) {
-                    r.x = this._bounds.width + 1.0 - w / 2;
-                } if (p.y < 0) {
-                    r.y = - h / 2;
-                } else if (p.y === 0) {
-                    r.y = Math.floor(this._bounds.height / 2) - h / 2;
-                } else if (p.y > 0) {
-                    r.y = this._bounds.height + 1.0 - h / 2;
+                    if (p.x < 0) {
+                        r.x = - w / 2;
+                    } else if (p.x === 0) {
+                        r.x = Math.floor(this._bounds.width / 2) - w / 2;
+                    } else if (p.x > 0) {
+                        r.x = this._bounds.width + 1.0 - w / 2;
+                    } if (p.y < 0) {
+                        r.y = - h / 2;
+                    } else if (p.y === 0) {
+                        r.y = Math.floor(this._bounds.height / 2) - h / 2;
+                    } else if (p.y > 0) {
+                        r.y = this._bounds.height + 1.0 - h / 2;
+                    }
+
+                    return r;
                 }
-
-                return r;
             },
             _getCursor: function (point) {
                 var hit = this._hitTest(point);
@@ -1640,23 +1651,26 @@
                 }
             },
             _hover: function(value, element) {
-                var handleOptions = this.options.handles,
-                    hover = handleOptions.hover,
-                    stroke = handleOptions.stroke,
-                    background = handleOptions.background;
+                var editable = this.options.editable;
+                if (editable && editable.resize) {
+                    var handleOptions = editable.resize.handles,
+                        hover = handleOptions.hover,
+                        stroke = handleOptions.stroke,
+                        background = handleOptions.background;
 
-                if (value && Utils.isDefined(hover.stroke)) {
-                    stroke = deepExtend({}, stroke, hover.stroke);
+                    if (value && Utils.isDefined(hover.stroke)) {
+                        stroke = deepExtend({}, stroke, hover.stroke);
+                    }
+
+                    if (value && Utils.isDefined(hover.background)) {
+                        background = hover.background;
+                    }
+
+                    element.redraw({
+                        stroke: stroke,
+                        background: background
+                    });
                 }
-
-                if (value && Utils.isDefined(hover.background)) {
-                    background = hover.background;
-                }
-
-                element.redraw({
-                    stroke: stroke,
-                    background: background
-                });
             },
             start: function (p) {
                 this._sp = p;
