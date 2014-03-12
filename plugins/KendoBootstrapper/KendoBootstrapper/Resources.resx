@@ -123,6 +123,9 @@
   <data name="CreatingCustomKendoFileError" xml:space="preserve">
     <value>An error occurred while creating the custom Kendo UI file</value>
   </data>
+  <data name="CreatingCustomKendoFileSuccess" xml:space="preserve">
+    <value>Custom Kendo UI file created successfully</value>
+  </data>
   <data name="KendoNotFound" xml:space="preserve">
     <value>Kendo UI was not found in solution</value>
   </data>
@@ -131,5 +134,8 @@
   </data>
   <data name="Ready" xml:space="preserve">
     <value>Ready</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Kendo Bootstrapper encountered an unknown error</value>
   </data>
 </root>

@@ -79,6 +79,15 @@ namespace Company.KendoBootstrapper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Kendo UI file created successfully.
+        /// </summary>
+        internal static string CreatingCustomKendoFileSuccess {
+            get {
+                return ResourceManager.GetString("CreatingCustomKendoFileSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kendo UI was not found in solution.
         /// </summary>
         internal static string KendoNotFound {
@@ -102,6 +111,15 @@ namespace Company.KendoBootstrapper {
         internal static string Ready {
             get {
                 return ResourceManager.GetString("Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kendo Bootstrapper encountered an unknown error.
+        /// </summary>
+        internal static string UnknownError {
+            get {
+                return ResourceManager.GetString("UnknownError", resourceCulture);
             }
         }
     }

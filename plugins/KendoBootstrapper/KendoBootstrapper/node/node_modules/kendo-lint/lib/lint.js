@@ -82,7 +82,7 @@ function _lint_html(code, args) {
     function get_attr(node, name) {
         return find(node.attr, function(att){ return att.name == name });
     }
-    var tree = HTML.parse(code);
+    var tree = HTML.parse(code, { asp: args.asp });
     var warnings = tree.errors.map(function(e){
         return {
             message  : e.err,
@@ -122,7 +122,8 @@ function _lint_html(code, args) {
                             pos  : node.body.loc.pos,
                             line : node.body.loc.line,
                             col  : node.body.loc.col,
-                        }
+                        },
+                        asp: args.asp
                     });
                     return;
                 }
@@ -205,8 +206,11 @@ function _lint_html(code, args) {
     return warnings;
 }
 
-function lint_html_file(code, filename, results) {
-    return _lint_html(code, { filename: filename, results: results });
+function lint_html_file(code, filename, results, options) {
+    if (!options) options = {};
+    options.filename = filename;
+    options.results = results;
+    return _lint_html(code, options);
 }
 
 exports.lint_javascript_file = lint_javascript_file;

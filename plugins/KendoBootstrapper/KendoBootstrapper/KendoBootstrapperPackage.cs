@@ -96,35 +96,32 @@ namespace Company.KendoBootstrapper
         {
             OutputPane.Clear();
 
-            List<string> htmlFiles = new List<string>();
-            List<string> jsFiles = new List<string>();
+            List<string> filesToLint = new List<string>();
 
             foreach (ProjectItem projectItem in projectItems)
             {
-                string currentFileName = (string)projectItem.Properties.Item("FullPath").Value;
-                string currentFileExtension = Path.GetExtension(currentFileName);
-
-                if (ExtensionsToLint.Contains(currentFileExtension))
+                if (projectItem.Properties.Item("FullPath") != null)
                 {
-                    if (currentFileExtension == ".js")
+                    string currentFileName = (string)projectItem.Properties.Item("FullPath").Value;
+                    string currentFileExtension = Path.GetExtension(currentFileName);
+
+                    if (ExtensionsToLint.Contains(currentFileExtension))
                     {
-                        if (!Regex.Match(currentFileName, KendoFilesRegex).Success)
+                        if (currentFileExtension != ".js" || !Regex.Match(currentFileName, KendoFilesRegex).Success)
                         {
-                            jsFiles.Add(currentFileName);
+                            filesToLint.Add(currentFileName);
                         }
-                    }
-                    else
-                    {
-                        htmlFiles.Add(currentFileName);
                     }
                 }
             }
 
-            RunLinter(htmlFiles, "--html");
-            RunLinter(jsFiles, "--js");
+            RunLinter(filesToLint);
+
+            OutputPane.Activate();
+            DTE.StatusBar.Text = Resources.Ready;
         }
 
-        private void RunLinter(IEnumerable<string> fileNames, string args)
+        private void RunLinter(IEnumerable<string> fileNames)
         {
             if (fileNames.Count() == 0)
             {
@@ -137,72 +134,95 @@ namespace Company.KendoBootstrapper
 
             var node = Path.Combine(AssemblyDirectory(), "node", "node");
             var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
+            var listOfFiles = JsonConvert.SerializeObject(fileNames.Select(fileName => new { file = fileName }));
 
             process.StartInfo.FileName = node;
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.Arguments = string.Format(@"""{0}"" {1} {2}", lint, args, String.Join(" ", fileNames.Select(a => "\"" + a + "\"").ToArray()));
+            process.StartInfo.Arguments = string.Format(@"""{0}"" --files", lint);
 
-            process.Start();
-            process.WaitForExit();
-
-            while (!process.StandardOutput.EndOfStream)
+            try
             {
-                var output = process.StandardOutput.ReadLine();
+                process.Start();
 
-                var lineAndColumn = Regex.Match(output, @"\[(\d+),(\d+)\]");
+                process.StandardInput.WriteLine(listOfFiles);
+                process.StandardInput.Close();
 
-                var path = output.Substring(0, output.IndexOf(lineAndColumn.Value));
+                while (!process.StandardOutput.EndOfStream)
+                {
+                    var output = process.StandardOutput.ReadLine();
 
-                var line = Convert.ToInt32(lineAndColumn.Groups[1].Value);
+                    var lineAndColumn = Regex.Match(output, @"\[(\d+),(\d+)\]");
 
-                var column = Convert.ToInt32(lineAndColumn.Groups[2].Value);
+                    var path = output.Substring(0, output.IndexOf(lineAndColumn.Value));
 
-                var message = output.Replace("[", "(").Replace("]", ")");
+                    var line = Convert.ToInt32(lineAndColumn.Groups[1].Value);
 
-                var description = message.Split(new[] { "):" }, StringSplitOptions.None).Last();
+                    var column = Convert.ToInt32(lineAndColumn.Groups[2].Value);
 
-                OutputPane.OutputTaskItemString(message + Environment.NewLine,
-                    vsTaskPriority.vsTaskPriorityMedium,
-                    "Kendo Lint", vsTaskIcon.vsTaskIconCompile,
-                    path, line, description, true);
+                    var message = output.Replace("[", "(").Replace("]", ")");
+
+                    var description = message.Split(new[] { "):" }, StringSplitOptions.None).Last();
+
+                    OutputPane.OutputTaskItemString(message + Environment.NewLine,
+                        vsTaskPriority.vsTaskPriorityMedium,
+                        "Kendo Lint", vsTaskIcon.vsTaskIconCompile,
+                        path, line, description, true);
+                }
+
+                process.WaitForExit();
             }
-
-            OutputPane.Activate();
-
-            DTE.StatusBar.Text = Resources.Ready;
+            catch 
+            {
+                DTE.StatusBar.Text = Resources.UnknownError;
+            }
+            finally
+            {
+                process.Close();
+            }
         }
 
         private void CreateCustomKendoFile(object sender, EventArgs e)
         {
             List<string> filesToLint = new List<string>();
+            var solutionFiles = SolutionFiles();
             string kendoLocation = null;
             bool isKendoFound = false;
 
-            foreach (var projectItem in SolutionFiles())
+            if (solutionFiles.Count() == 0)
+            {
+                return;
+            }
+
+            foreach (var projectItem in solutionFiles)
             {
                 if (ExtensionsToLint.Contains(Path.GetExtension(projectItem.Name)))
                 {
-                    string currentFilePath = (string)projectItem.Properties.Item("FullPath").Value;
-
-                    if (!Regex.Match(currentFilePath, KendoFilesRegex).Success)
+                    if (projectItem.Properties.Item("FullPath") != null)
                     {
-                        filesToLint.Add(currentFilePath);
-                    }
+                        string currentFilePath = (string)projectItem.Properties.Item("FullPath").Value;
 
-                    if (!isKendoFound && Regex.Match(currentFilePath, KendoFilesRegex).Success)
-                    {
-                        isKendoFound = true;
-                        kendoLocation = Path.GetDirectoryName(currentFilePath);
+                        if (!Regex.Match(currentFilePath, KendoFilesRegex).Success)
+                        {
+                            filesToLint.Add(currentFilePath);
+                        }
+
+                        if (!isKendoFound && Regex.Match(currentFilePath, KendoFilesRegex).Success)
+                        {
+                            isKendoFound = true;
+                            kendoLocation = Path.GetDirectoryName(currentFilePath);
+                        }
                     }
                 }
             }
 
-            if (!isKendoFound)
+            if (solutionFiles.Count() > 0 && !isKendoFound)
             {
                 DTE.StatusBar.Text = Resources.KendoNotFound;
+                return;
             }
 
             DTE.StatusBar.Text = Resources.CreatingCustomKendoFile;
@@ -215,27 +235,41 @@ namespace Company.KendoBootstrapper
             process.StartInfo.FileName = node;
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
 
             string customFileName = kendoLocation + "\\kendo.custom.min.js";
-            string listOfFiles = String.Join(" ", filesToLint.Select(a => "\"" + a + "\"").ToArray());
+            var listOfFiles = JsonConvert.SerializeObject(filesToLint.Select(fileName => new { file = fileName }));
 
-            process.StartInfo.Arguments = string.Format(@"""{0}"" {1} --build-kendo ""{2}"" -o ""{3}""", lint, listOfFiles, kendoLocation, customFileName);
-
-            process.Start();
-            process.WaitForExit();
-
-            string output = process.StandardOutput.ReadToEnd();
-            string errorOutput = process.StandardError.ReadToEnd();
-
-            if (String.IsNullOrEmpty(errorOutput))
+            try
             {
-                DTE.StatusBar.Text = Resources.Ready;
+                process.StartInfo.Arguments = string.Format(@"""{0}"" --files --build-kendo ""{1}"" -o ""{2}""", lint, kendoLocation, customFileName);
+                process.Start();
+
+                process.StandardInput.WriteLine(listOfFiles);
+                process.StandardInput.Close();
+
+                string errorOutput = process.StandardError.ReadToEnd();
+
+                process.WaitForExit();
+
+                if (process.ExitCode == 0)
+                {
+                    DTE.StatusBar.Text = Resources.Ready;
+                }
+                else
+                {
+                    DTE.StatusBar.Text = Resources.CreatingCustomKendoFileError;
+                }
             }
-            else
+            catch (Exception ex) 
             {
                 DTE.StatusBar.Text = Resources.CreatingCustomKendoFileError;
+            }
+            finally
+            {
+                process.Close();
             }
         }
 
@@ -256,17 +290,28 @@ namespace Company.KendoBootstrapper
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
 
-                process.StartInfo.Arguments = string.Format(@"""{0}"" --doc "".{1}""", lint, selection.Text);
+                try
+                {
+                    process.StartInfo.Arguments = string.Format(@"""{0}"" --doc "".{1}""", lint, selection.Text);
+                    process.Start();
 
-                process.Start();
+                    string output = process.StandardOutput.ReadToEnd();
+                    string err = process.StandardError.ReadToEnd();
 
-                string output = process.StandardOutput.ReadToEnd();
-                string t = process.StandardError.ReadToEnd();
+                    process.WaitForExit();
 
-                process.WaitForExit();
+                    KendoBootstrapperWindow docs = new KendoBootstrapperWindow(output, selection.Text);
+                    docs.ShowDialog();
+                }
+                catch (Exception ex) 
+                {
+                    DTE.StatusBar.Text = Resources.UnknownError;
+                }
+                finally 
+                {
+                    process.Close();
+                }
 
-                KendoBootstrapperWindow docs = new KendoBootstrapperWindow(output, selection.Text);
-                docs.ShowDialog();
             }
         }
 
