@@ -19,8 +19,6 @@
             stroke: {
                 width: 0
             },
-            minWidth: 20,
-            minHeight: 20,
             background: dataItem.colorScheme
         }));
 
