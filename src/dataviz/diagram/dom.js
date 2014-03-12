@@ -347,12 +347,14 @@
                         this._contentVisual = this.shapeVisual;
                     }
 
-                    if (!this._contentVisual) {
+                    if (!this._contentVisual && this.options.content.text) {
                         this._contentVisual = new TextBlock();
                         this.visual.append(this._contentVisual);
                     }
 
-                    this._contentVisual.redraw(options);
+                    if (this._contentVisual) {
+                        this._contentVisual.redraw(options);
+                    }
                 }
 
                 return this.options.content.text;
