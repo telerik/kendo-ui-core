@@ -50,7 +50,7 @@ var __meta__ = {
                    "font-style",
                    "font-weight",
                    "line-height",
-                   "font-size",];
+                   "font-size"];
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
