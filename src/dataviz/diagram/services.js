@@ -1505,8 +1505,6 @@
                 that.refresh();
             },
             options: {
-                resizable: true,
-                rotatable: true,
                 handles: {
                     width: 7,
                     height: 7
@@ -1537,14 +1535,17 @@
             _hitTest: function (p) {
                 var tp = this.diagram.modelToLayer(p),
                     i, hit, handleBounds, handlesCount = this.map.length, handle;
+
                 if (this._angle) {
                     tp = tp.clone().rotate(this._bounds.center(), this._angle);
                 }
+
                 if (this.options.rotatable && this._rotationThumbBounds) {
                     if (this._rotationThumbBounds.contains(tp)) {
                         return new Point(-1, -2);
                     }
                 }
+
                 if (this.options.resizable) {
                     for (i = 0; i < handlesCount; i++) {
                         handle = this.map[i];
@@ -1556,6 +1557,7 @@
                         }
                     }
                 }
+
                 if (this._bounds.contains(tp)) {
                     return new Point(0, 0);
                 }
@@ -1618,24 +1620,7 @@
                 return this._manipulating ? Cursors.move : Cursors.select;
             },
             _initialize: function () {
-                var that = this, i, item,
-                    items = this.diagram.select(),
-                    resizable = that.options.resizable,
-                    rotatable = that.options.rotatable;
-                that.shapes = [];
-                for (i = 0; i < items.length; i++) {
-                    item = items[i];
-                    if (item instanceof diagram.Shape) {
-                        that.shapes.push(item);
-                        item._rotationOffset = new Point();
-                        if (item.options.resizable !== undefined) {
-                            resizable = resizable && item.options.resizable;
-                        }
-                        if (item.options.rotatable !== undefined) {
-                            rotatable = rotatable && item.options.rotatable;
-                        }
-                    }
-                }
+                var that = this;
 
                 that._angle = that.shapes.length == 1 ? that.shapes[0].rotate().angle : 0;
                 that._startAngle = that._angle;
@@ -1643,7 +1628,7 @@
                 that._positions();
                 that.refreshBounds();
                 that.refresh();
-                that.redraw({ resizable: resizable, rotatable: rotatable });
+                that.redraw();
             },
             _rotates: function () {
                 var that = this, i, shape;
@@ -1692,10 +1677,13 @@
                     this.shapeStates.push(shape.bounds());
                 }
             },
-            redraw: function (options) {
+            redraw: function () {
                 var that = this, i, handle,
-                    display = (options && options.resizable !== undefined && options.resizable === false) ? "none" : "inline",
-                    rotationDisplay = (options && options.rotatable !== undefined && options.rotatable === false) ? "none" : "inline";
+                    resizable = this.options.resizable,
+                    rotatable = this.options.rotatable,
+                    display = resizable === false ? "none" : "inline",
+                    rotationDisplay = rotatable === false ? "none" : "inline";
+
                 for (i = 0; i < this.map.length; i++) {
                     handle = this.map[i];
                     $(handle.visual.domElement).css("display", display);
@@ -1703,20 +1691,14 @@
                 $(that.rotationThumb.domElement).css("display", rotationDisplay);
             },
             move: function (handle, p) {
-                var delta ,
-                    dragging,
+                var delta, dragging,
                     dtl = new Point(),
                     dbr = new Point(),
-                    bounds,
-                    center,
-                    shape,
-                    i,
-                    angle,
-                    newBounds,
-                    changed = 0,
-                    staticPoint,
-                    scaleX,
-                    scaleY;
+                    bounds, center, shape,
+                    i, angle, newBounds,
+                    changed = 0, staticPoint,
+                    scaleX, scaleY;
+
                 if (handle.y === -2 && handle.x === -1) {
                     center = this._innerBounds.center();
                     this._angle = this._truncateAngle(Utils.findAngle(center, p));
