@@ -130,58 +130,54 @@ namespace Company.KendoBootstrapper
 
             DTE.StatusBar.Text = Resources.LintingProject;
 
-            var process = new System.Diagnostics.Process();
-
             var node = Path.Combine(AssemblyDirectory(), "node", "node");
             var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
             var listOfFiles = JsonConvert.SerializeObject(fileNames.Select(fileName => new { file = fileName }));
 
-            process.StartInfo.FileName = node;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.Arguments = string.Format(@"""{0}"" --files", lint);
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = node;
+            startInfo.CreateNoWindow = true;
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardInput = true;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.Arguments = string.Format(@"""{0}"" --files", lint);
 
-            try
+            using (System.Diagnostics.Process process = System.Diagnostics.Process.Start(startInfo))
             {
-                process.Start();
-
-                process.StandardInput.WriteLine(listOfFiles);
-                process.StandardInput.Close();
-
-                while (!process.StandardOutput.EndOfStream)
+                try
                 {
-                    var output = process.StandardOutput.ReadLine();
+                    process.StandardInput.WriteLine(listOfFiles);
+                    process.StandardInput.Close();
 
-                    var lineAndColumn = Regex.Match(output, @"\[(\d+),(\d+)\]");
+                    while (!process.StandardOutput.EndOfStream)
+                    {
+                        var output = process.StandardOutput.ReadLine();
 
-                    var path = output.Substring(0, output.IndexOf(lineAndColumn.Value));
+                        var lineAndColumn = Regex.Match(output, @"\[(\d+),(\d+)\]");
 
-                    var line = Convert.ToInt32(lineAndColumn.Groups[1].Value);
+                        var path = output.Substring(0, output.IndexOf(lineAndColumn.Value));
 
-                    var column = Convert.ToInt32(lineAndColumn.Groups[2].Value);
+                        var line = Convert.ToInt32(lineAndColumn.Groups[1].Value);
 
-                    var message = output.Replace("[", "(").Replace("]", ")");
+                        var column = Convert.ToInt32(lineAndColumn.Groups[2].Value);
 
-                    var description = message.Split(new[] { "):" }, StringSplitOptions.None).Last();
+                        var message = output.Replace("[", "(").Replace("]", ")");
 
-                    OutputPane.OutputTaskItemString(message + Environment.NewLine,
-                        vsTaskPriority.vsTaskPriorityMedium,
-                        "Kendo Lint", vsTaskIcon.vsTaskIconCompile,
-                        path, line, description, true);
+                        var description = message.Split(new[] { "):" }, StringSplitOptions.None).Last();
+
+                        OutputPane.OutputTaskItemString(message + Environment.NewLine,
+                            vsTaskPriority.vsTaskPriorityMedium,
+                            "Kendo Lint", vsTaskIcon.vsTaskIconCompile,
+                            path, line, description, true);
+                    }
+
+                    process.WaitForExit();
                 }
-
-                process.WaitForExit();
-            }
-            catch 
-            {
-                DTE.StatusBar.Text = Resources.UnknownError;
-            }
-            finally
-            {
-                process.Close();
+                catch
+                {
+                    DTE.StatusBar.Text = Resources.UnknownError;
+                }
             }
         }
 
@@ -227,49 +223,46 @@ namespace Company.KendoBootstrapper
 
             DTE.StatusBar.Text = Resources.CreatingCustomKendoFile;
 
-            var process = new System.Diagnostics.Process();
-
             var node = Path.Combine(AssemblyDirectory(), "node", "node");
             var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
 
-            process.StartInfo.FileName = node;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-
             string customFileName = kendoLocation + "\\kendo.custom.min.js";
-            var listOfFiles = JsonConvert.SerializeObject(filesToLint.Select(fileName => new { file = fileName }));
 
-            try
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = node;
+            startInfo.CreateNoWindow = true;
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardInput = true;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.Arguments = string.Format(@"""{0}"" --files --build-kendo ""{1}"" -o ""{2}""", lint, kendoLocation, customFileName);
+
+            using (System.Diagnostics.Process process = System.Diagnostics.Process.Start(startInfo))
             {
-                process.StartInfo.Arguments = string.Format(@"""{0}"" --files --build-kendo ""{1}"" -o ""{2}""", lint, kendoLocation, customFileName);
-                process.Start();
-
-                process.StandardInput.WriteLine(listOfFiles);
-                process.StandardInput.Close();
-
-                string errorOutput = process.StandardError.ReadToEnd();
-
-                process.WaitForExit();
-
-                if (process.ExitCode == 0)
+                try
                 {
-                    DTE.StatusBar.Text = Resources.Ready;
+                    var listOfFiles = JsonConvert.SerializeObject(filesToLint.Select(fileName => new { file = fileName }));
+
+                    process.StandardInput.WriteLine(listOfFiles);
+                    process.StandardInput.Close();
+
+                    string errorOutput = process.StandardError.ReadToEnd();
+
+                    process.WaitForExit();
+
+                    if (process.ExitCode == 0)
+                    {
+                        DTE.StatusBar.Text = Resources.Ready;
+                    }
+                    else
+                    {
+                        DTE.StatusBar.Text = Resources.CreatingCustomKendoFileError;
+                    }
                 }
-                else
+                catch
                 {
                     DTE.StatusBar.Text = Resources.CreatingCustomKendoFileError;
                 }
-            }
-            catch
-            {
-                DTE.StatusBar.Text = Resources.CreatingCustomKendoFileError;
-            }
-            finally
-            {
-                process.Close();
             }
         }
 
@@ -279,37 +272,33 @@ namespace Company.KendoBootstrapper
 
             if (selection.Text != String.Empty)
             {
-                var process = new System.Diagnostics.Process();
-
                 var node = Path.Combine(AssemblyDirectory(), "node", "node");
                 var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
 
-                process.StartInfo.FileName = node;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = node;
+                startInfo.CreateNoWindow = true;
+                startInfo.UseShellExecute = false;
+                startInfo.RedirectStandardOutput = true;
+                startInfo.RedirectStandardError = true;
+                startInfo.Arguments = string.Format(@"""{0}"" --doc "".{1}""", lint, selection.Text);
 
-                try
+                using (System.Diagnostics.Process process = System.Diagnostics.Process.Start(startInfo))
                 {
-                    process.StartInfo.Arguments = string.Format(@"""{0}"" --doc "".{1}""", lint, selection.Text);
-                    process.Start();
+                    try
+                    {
+                        string output = process.StandardOutput.ReadToEnd();
+                        string err = process.StandardError.ReadToEnd();
 
-                    string output = process.StandardOutput.ReadToEnd();
-                    string err = process.StandardError.ReadToEnd();
+                        process.WaitForExit();
 
-                    process.WaitForExit();
-
-                    KendoBootstrapperWindow docs = new KendoBootstrapperWindow(output, selection.Text);
-                    docs.ShowDialog();
-                }
-                catch
-                {
-                    DTE.StatusBar.Text = Resources.UnknownError;
-                }
-                finally 
-                {
-                    process.Close();
+                        KendoBootstrapperWindow docs = new KendoBootstrapperWindow(output, selection.Text);
+                        docs.ShowDialog();
+                    }
+                    catch
+                    {
+                        DTE.StatusBar.Text = Resources.UnknownError;
+                    }
                 }
             }
         }
