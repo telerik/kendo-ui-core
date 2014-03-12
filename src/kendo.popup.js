@@ -46,11 +46,11 @@ var __meta__ = {
         extend = $.extend,
         NS = ".kendoPopup",
         styles = ["font-family",
-                   "font-size",
                    "font-stretch",
                    "font-style",
                    "font-weight",
-                   "line-height"];
+                   "line-height",
+                   "font-size",];
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
@@ -218,10 +218,14 @@ var __meta__ = {
                 options = that.options,
                 direction = "down",
                 animation, wrapper,
-                anchor = $(options.anchor);
+                anchor = $(options.anchor),
+                mobile = that.element.is(".km-widget");
 
             if (!that.visible()) {
                 if (options.copyAnchorStyles) {
+                    if (mobile) {
+                        styles.pop();
+                    }
                     element.css(kendo.getComputedStyles(anchor[0], styles));
                 }
 
