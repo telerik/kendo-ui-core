@@ -6,27 +6,21 @@
             <a data-align="right" data-role="button" href="#light-theme">Light Theme</a>
         </div>
     </header>
-    <div data-role="scrollview">
-            <div class="photo photo1"></div>
-
-            <div class="photo photo2"></div>
-
-            <div class="photo photo3"></div>
-
-            <div class="photo photo4"></div>
-
-            <div class="photo photo5"></div>
-
-            <div class="photo photo6"></div>
-
-            <div class="photo photo7"></div>
-
-            <div class="photo photo8"></div>
-
-            <div class="photo photo9"></div>
-
-            <div class="photo photo10"></div>
-     </div>
+    <div id="scrollview-container">
+	<div data-role="scrollview">
+	    <div class="photo photo1">
+            </div><div class="photo photo2" data-role="page">
+            </div><div class="photo photo3" data-role="page">
+            </div><div class="photo photo4" data-role="page">
+            </div><div class="photo photo5" data-role="page">
+            </div><div class="photo photo6" data-role="page">
+            </div><div class="photo photo7" data-role="page">
+            </div><div class="photo photo8" data-role="page">
+            </div><div class="photo photo9" data-role="page">
+            </div><div class="photo photo10" data-role="page">
+            </div>
+	</div>
+    </div>
 </div>
 
 <div data-role="view" id="light-theme" data-title="Light">
@@ -37,70 +31,73 @@
             <a data-align="right" data-role="button" href="#dark-theme">Dark Theme</a>
         </div>
     </header>
-    <div data-role="scrollview">
-            <div class="photo photo1"></div>
-
-            <div class="photo photo2"></div>
-
-            <div class="photo photo3"></div>
-
-            <div class="photo photo4"></div>
-
-            <div class="photo photo5"></div>
-
-            <div class="photo photo6"></div>
-
-            <div class="photo photo7"></div>
-
-            <div class="photo photo8"></div>
-
-            <div class="photo photo9"></div>
-
-            <div class="photo photo10"></div>
-     </div>
+    <div id="scrollview-container">
+	<div data-role="scrollview">
+	    <div class="photo photo1">
+            </div><div class="photo photo2" data-role="page">
+            </div><div class="photo photo3" data-role="page">
+            </div><div class="photo photo4" data-role="page">
+            </div><div class="photo photo5" data-role="page">
+            </div><div class="photo photo6" data-role="page">
+            </div><div class="photo photo7" data-role="page">
+            </div><div class="photo photo8" data-role="page">
+            </div><div class="photo photo9" data-role="page">
+            </div><div class="photo photo10" data-role="page">
+            </div>
+	</div>
+    </div>
 </div>
 <style scoped>
 
-#dark-theme .km-content, #dark-theme .km-navbar {
-	background-color: #111;
+#dark-theme .km-content,
+#dark-theme .km-navbar {
+    background-color: #111;
 }
 
 /* iOS pager */
 .km-ios #dark-theme .km-pages .km-current-page {
-	background: #ff009c;
+    background: #ff009c;
 }
-
-#light-theme .km-content, #light-theme .km-navbar {
-	background-color: #ddd;
+#light-theme .km-content,
+#light-theme .km-navbar {
+    background-color: #ddd;
 }
 
 /* WP8 pager */
-.km-wp-dark #light-theme .km-content, .km-wp-dark  #light-theme .km-navbar {
-	background-color: #fff;
+.km-wp-dark #light-theme .km-content,
+.km-wp-dark  #light-theme .km-navbar {
+    background-color: #fff;
 }
 .km-wp-dark #light-theme .km-pages > li {
-	background-color: #000;
+    background-color: #000;
 }
 
 /* Flat pager */
 .km-flat #dark-theme .km-navbar {
-	color: #fff;
+    color: #fff;
 }
 .km-flat #dark-theme .km-pages li {
-	background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 .km-flat #dark-theme .km-pages .km-current-page {
-background: #10c4b2;
+    background: #10c4b2;
 }
-
 #light-theme .km-view-title {
-	color: #666;
-	text-shadow: 0 1px rgba(255, 255, 255, 0.6);
+    color: #666;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.6);
 }
-
 .km-tablet .km-ios #dark-theme .km-view-title {
     color: #fff;
     text-shadow: 0 -1px rgba(0,0,0,.5);
+}
+.km-ios7 #dark-theme .km-view-title,
+.km-tablet .km-ios7 #dark-theme .km-view-title {
+    color: #fff;
+    text-shadow: none;
+}
+.km-ios7 #light-theme .km-view-title,
+.km-tablet .km-ios7 #light-theme .km-view-title {
+    text-shadow: none;
 }
 .km-android #light-theme .km-text {
 	color: #666;
@@ -108,8 +105,7 @@ background: #10c4b2;
 
 #dark-theme .photo,
 #light-theme .photo {
-    width: 15em;
-    margin: 7em 20px 7px;
+    margin: 0;
     height: 15em;
     display: inline-block;
     -webkit-background-size: auto 100%;
@@ -129,4 +125,18 @@ background: #10c4b2;
 .photo8 {background-image: url("../../content/mobile/cities/220/london.jpg");}
 .photo9 {background-image: url("../../content/mobile/cities/220/melbourne.jpg");}
 .photo10 {background-image: url("../../content/mobile/cities/220/san-francisco.jpg");}
+
+#scrollview-container {
+    margin: 45px 0 1em 0;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background: rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.3);
+    border-width: 1px 0;
+}
+.km-flat #scrollview-container {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
 </style>
