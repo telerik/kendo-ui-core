@@ -716,7 +716,7 @@
         ok(slot !== null && typeof slot == "object");
     });
 
-    test("resourceBySlot function returns resources for passed index", function() {
+    test("resourcesBySlot function returns resources for passed index", function() {
         QUnit.fixture.append(container);
         var scheduler = new kendo.ui.Scheduler(container, {
             views: ["day"],
@@ -746,19 +746,19 @@
         });
 
 
-        var resources1 = scheduler.resourceBySlot({ groupIndex: 0 });
+        var resources1 = scheduler.resourcesBySlot({ groupIndex: 0 });
         equal(resources1.rooms, 1);
         equal(resources1.persons, 1);
 
-        var resources2 = scheduler.resourceBySlot({ groupIndex: 1 });
+        var resources2 = scheduler.resourcesBySlot({ groupIndex: 1 });
         equal(resources2.rooms, 1);
         equal(resources2.persons, 2);
 
-        var resources3 = scheduler.resourceBySlot({ groupIndex: 2 });
+        var resources3 = scheduler.resourcesBySlot({ groupIndex: 2 });
         equal(resources3.rooms, 2);
         equal(resources3.persons, 1);
 
-        var resources4 = scheduler.resourceBySlot({ groupIndex: 3 });
+        var resources4 = scheduler.resourcesBySlot({ groupIndex: 3 });
         equal(resources4.rooms, 2);
         equal(resources4.persons, 2);
     });

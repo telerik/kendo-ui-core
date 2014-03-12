@@ -3188,7 +3188,7 @@ var __meta__ = {
             return this.slotByPosition(offset.left, offset.top);
         },
 
-        resourceBySlot: function(slot) {
+        resourcesBySlot: function(slot) {
             return this.view()._resourceBySlot(slot);
         }
     });
