@@ -225,12 +225,28 @@ var __meta__ = {
             this.bind(CHANGE, callback);
         },
 
+        replace: function(to, silent) {
+
+            this._navigate(to, silent, function(adapter) {
+                adapter.replace(to);
+                this.locations[this.locations - 1] = this.current;
+            });
+        },
+
         navigate: function(to, silent) {
-            var adapter = this.adapter;
             if (to === "#:back") {
-                adapter.back();
+                this.adapter.back();
                 return;
             }
+
+            this._navigate(to, silent, function(adapter) {
+                adapter.navigate(to);
+                this.locations.push(this.current);
+            });
+        },
+
+        _navigate: function(to, silent, callback) {
+            var adapter = this.adapter;
 
             to = to.replace(hashStrip, '');
 
@@ -246,11 +262,10 @@ var __meta__ = {
             }
 
             this.current = adapter.normalize(to);
-            adapter.navigate(to);
+
+            callback.call(this, adapter);
 
             this.historyLength = adapter.length();
-
-            this.locations.push(this.current);
         },
 
         _checkUrl: function() {
@@ -421,6 +436,10 @@ var __meta__ = {
 
         navigate: function(url, silent) {
             kendo.history.navigate(url, silent);
+        },
+
+        replace: function(url, silent) {
+            kendo.history.replace(url, silent);
         },
 
         _back: function(e) {
