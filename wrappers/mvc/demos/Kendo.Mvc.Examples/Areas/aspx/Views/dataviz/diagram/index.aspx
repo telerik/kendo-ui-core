@@ -16,25 +16,25 @@
             },
             minWidth: 20,
             minHeight: 20,
-            background: dataItem.colorScheme
+            background: dataItem.ColorScheme
         }));
 
         g.append(new dataviz.diagram.TextBlock({
-            text: dataItem.firstName + " " + dataItem.lastName,
+            text: dataItem.FirstName + " " + dataItem.LastName,
             x: 85,
             y: 20,
             color: "#fff"
         }));
 
         g.append(new dataviz.diagram.TextBlock({
-            text: dataItem.title,
+            text: dataItem.Title,
             x: 85,
             y: 40,
             color: "#fff"
         }));
 
         g.append(new dataviz.diagram.Image({
-            source: "../../content/dataviz/diagram/people/" + dataItem.image,
+            source: "../../content/dataviz/diagram/people/" + dataItem.Image,
             x: 3,
             y: 3,
             width: 68,
@@ -54,8 +54,8 @@
                 .Model(m => m.Children("Items"))
             )
             .Layout(l => l.Type(DiagramLayoutType.Layered))
-            .VisualTemplate("visualTemplate")
             .ShapeDefaults(sd => sd
+                .Visual("visualTemplate")
                 .Editable(false)
                 .Rotatable(false)
                 .Resizable(false)
