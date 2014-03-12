@@ -37,7 +37,7 @@
     var history,
         adapter;
 
-    module("Mocked History", {
+    module("History", {
         setup: function() {
             history = new kendo.History();
             adapter = new MockAdapter();
@@ -254,6 +254,14 @@
 
         equal(history.locations.length, 2);
         equal(history.locations[0], "");
+    });
+
+    test("replace calls the adapter replace method", 1, function() {
+        stub(adapter, { replace: function(url) {
+            equal(url, "foo");
+        }});
+        history.start();
+        history.replace("foo");
     });
 })();
 
