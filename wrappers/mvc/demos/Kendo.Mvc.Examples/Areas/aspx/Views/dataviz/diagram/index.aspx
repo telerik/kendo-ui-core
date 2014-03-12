@@ -34,7 +34,7 @@
         }));
 
         g.append(new dataviz.diagram.Image({
-            source: "../../content/dataviz/diagram/people/" + dataItem.Image,
+            source: "<%= Url.Content("~/content/dataviz/diagram/people/") %>" + dataItem.Image,
             x: 3,
             y: 3,
             width: 68,
