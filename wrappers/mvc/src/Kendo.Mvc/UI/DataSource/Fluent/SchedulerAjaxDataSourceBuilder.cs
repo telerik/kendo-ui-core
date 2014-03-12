@@ -4,22 +4,12 @@
     using System.ComponentModel;
     using System.Web.Mvc;
 
-    public class SchedulerAjaxDataSourceBuilder<TModel> : AjaxDataSourceBuilder<TModel>, IHideObjectMembers
+    public class SchedulerAjaxDataSourceBuilder<TModel> : AjaxDataSourceBuilderBase<TModel, SchedulerAjaxDataSourceBuilder<TModel>>, IHideObjectMembers
          where TModel : class
     {
         public SchedulerAjaxDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
             : base(dataSource, viewContext, urlGenerator)
         {
-        }
-
-        /// <summary>
-        /// Configures the initial filter.
-        /// </summary>
-        public override AjaxDataSourceBuilder<TModel> Filter(Action<DataSourceFilterDescriptorFactory<TModel>> configurator)
-        {
-            configurator(new DataSourceSchedulerFilterDescriptorFactory<TModel>(dataSource.Filters));
-
-            return this;
         }
 
         /// <summary>
@@ -57,29 +47,166 @@
         /// <summary>
         /// Configures Model properties
         /// </summary>
-        public AjaxDataSourceBuilder<TModel> Model(Action<DataSourceSchedulerModelDescriptorFactory<TModel>> configurator)
+        public SchedulerAjaxDataSourceBuilder<TModel> Model(Action<DataSourceSchedulerModelDescriptorFactory<TModel>> configurator)
         {
             configurator(new DataSourceSchedulerModelDescriptorFactory<TModel>((SchedulerModelDescriptor)dataSource.Schema.Model));
 
-            return (AjaxDataSourceBuilder<TModel>)this;
+            return (SchedulerAjaxDataSourceBuilder<TModel>)this;
+        }
+
+        /// <summary>
+        /// Configures the initial filter.
+        /// </summary>
+        public override SchedulerAjaxDataSourceBuilder<TModel> Filter(Action<DataSourceFilterDescriptorFactory<TModel>> configurator)
+        {
+            configurator(new DataSourceSchedulerFilterDescriptorFactory<TModel>(dataSource.Filters));
+
+            return this;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override AjaxDataSourceBuilder<TModel> Sort(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
+        public override SchedulerAjaxDataSourceBuilder<TModel> Sort(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
         {
             throw new MethodAccessException("Sort method is not available for Scheduler DataSource.");
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override AjaxDataSourceBuilder<TModel> Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
+        public override SchedulerAjaxDataSourceBuilder<TModel> Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
         {
             throw new MethodAccessException("Group method is not available for Scheduler DataSource.");
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override AjaxDataSourceBuilder<TModel> Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
+        public override SchedulerAjaxDataSourceBuilder<TModel> Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
         {
             throw new MethodAccessException("Aggregates method is not available for Scheduler DataSource.");
+        }
+
+        /// <summary>
+        /// Configures the URL for Update operation.
+        /// </summary>        
+        public SchedulerAjaxDataSourceBuilder<TModel> Update(Action<CrudOperationBuilder> configurator)
+        {
+            configurator(new CrudOperationBuilder(dataSource.Transport.Update, viewContext, urlGenerator));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller and action for Update operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>        
+        public SchedulerAjaxDataSourceBuilder<TModel> Update(string actionName, string controllerName)
+        {
+            SetOperationUrl(dataSource.Transport.Update, actionName, controllerName, null);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller, action and routeValues for Update operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>        
+        /// <param name="routeValues">Route values</param>
+        public SchedulerAjaxDataSourceBuilder<TModel> Update(string actionName, string controllerName, object routeValues)
+        {
+            SetOperationUrl(dataSource.Transport.Update, actionName, controllerName, routeValues);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the URL for Create operation.
+        /// </summary> 
+        public SchedulerAjaxDataSourceBuilder<TModel> Create(Action<CrudOperationBuilder> configurator)
+        {
+            configurator(new CrudOperationBuilder(dataSource.Transport.Create, viewContext, urlGenerator));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller and action for Create operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>                
+        public SchedulerAjaxDataSourceBuilder<TModel> Create(string actionName, string controllerName)
+        {
+            SetOperationUrl(dataSource.Transport.Create, actionName, controllerName, null);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller, action and routeValues for Create operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>        
+        /// <param name="routeValues">Route values</param>
+        public SchedulerAjaxDataSourceBuilder<TModel> Create(string actionName, string controllerName, object routeValues)
+        {
+            SetOperationUrl(dataSource.Transport.Create, actionName, controllerName, routeValues);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the URL for Destroy operation.
+        /// </summary> 
+        public SchedulerAjaxDataSourceBuilder<TModel> Destroy(Action<CrudOperationBuilder> configurator)
+        {
+            configurator(new CrudOperationBuilder(dataSource.Transport.Destroy, viewContext, urlGenerator));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller and action for Destroy operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>                
+        public SchedulerAjaxDataSourceBuilder<TModel> Destroy(string actionName, string controllerName)
+        {
+            SetOperationUrl(dataSource.Transport.Destroy, actionName, controllerName, null);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets controller, action and routeValues for Destroy operation.
+        /// </summary>
+        /// <param name="actionName">Action name</param>
+        /// <param name="controllerName">Controller Name</param>        
+        /// <param name="routeValues">Route values</param>
+        public SchedulerAjaxDataSourceBuilder<TModel> Destroy(string actionName, string controllerName, object routeValues)
+        {
+            SetOperationUrl(dataSource.Transport.Destroy, actionName, controllerName, routeValues);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Determines if modifications will be sent to the server in batches or as individually requests.
+        /// </summary>
+        /// <param name="enabled">If true changes will be batched, otherwise false.</param>        
+        public SchedulerAjaxDataSourceBuilder<TModel> Batch(bool enabled)
+        {
+            dataSource.Batch = enabled;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Determines if data source would automatically sync any changes to its data items. By default changes are not automatically sync-ed.
+        /// </summary>
+        /// <param name="enabled">If true changes will be automatically synced, otherwise false.</param>        
+        public SchedulerAjaxDataSourceBuilder<TModel> AutoSync(bool enabled)
+        {
+            dataSource.AutoSync = enabled;
+
+            return this;
         }
     }
 }

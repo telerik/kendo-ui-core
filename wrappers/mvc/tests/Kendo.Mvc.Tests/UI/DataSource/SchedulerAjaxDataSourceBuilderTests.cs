@@ -35,6 +35,11 @@
             builder.Filter(f => f.Add(m => m.Name).Contains("SomeVal")).ShouldBeType(typeof(SchedulerAjaxDataSourceBuilder<Customer>));
         }
 
+        [Fact]
+        public void ServerOperations_should_return_correct_datasource_builder()
+        {
+            builder.ServerOperation(true).ShouldBeType(typeof(SchedulerAjaxDataSourceBuilder<Customer>));
+        }
 
         [Fact]
         public void Sort_should_throw_error()
