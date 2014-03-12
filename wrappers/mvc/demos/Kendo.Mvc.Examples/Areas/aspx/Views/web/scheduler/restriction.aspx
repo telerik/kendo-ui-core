@@ -53,7 +53,7 @@
                     m.ClearFields();
                     m.Id(f => f.MeetingID);
                     m.Field("title", typeof(string)).From("Title");
-                    m.Field(f => f.Attendees);
+                    m.Field(f => f.Attendees).DefaultValue(new List<int>() { 1 });
                     m.Field("recurrenceId", typeof(int)).From("RecurrenceID");
                     m.Field("start", typeof(DateTime)).From("Start");
                     m.Field("end", typeof(DateTime)).From("End");
