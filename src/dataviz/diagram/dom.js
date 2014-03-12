@@ -130,10 +130,7 @@
                 connectors: diagram.DefaultConnectors,
                 rotation: {
                     angle: 0
-                },
-                editable: true,
-                resizable: true,
-                rotatable: true
+                }
             };
 
             Utils.simpleExtend(defaults, extra);
@@ -1301,8 +1298,7 @@
                 that._initialize();
                 that._fetchFreshData();
                 this._resizingAdorner = new ResizingAdorner(this, deepExtend({}, {
-                        resizable: this.options.resizable,
-                        rotatable: this.options.rotatable
+                        editable: this.options.editable
                     }, that.options.resizingAdorner));
                 this._connectorsAdorner = new ConnectorsAdorner(this);
 
@@ -1339,8 +1335,11 @@
                 draggable: true,
                 template: "",
                 autoBind: true,
-                resizable: true,
-                rotatable: true,
+                editable: {
+                    rotate: {},
+                    resize: {},
+                    text: true
+                },
                 useScroller: true,
                 tooltip: { enabled: true, format: "{0}" },
                 copy: {
@@ -1362,7 +1361,7 @@
                     size: 10,
                     angle: 10
                 },
-                shapeDefaults: diagram.shapeDefaults({undoable: true}),
+                shapeDefaults: diagram.shapeDefaults({ undoable: true }),
                 connectionDefaults: {},
                 shapes: [],
                 connections: []
@@ -2103,7 +2102,7 @@
              */
             editor: function (item, options) { // support custome editors via the options for vNext
                 var editor = this._editor;
-                if (isUndefined(item.options.editable) || item.options.editable === true) {
+                if (isUndefined(item.options.editable) || item.options.editable.text) {
                     editor.options = deepExtend(this.options.editor, options);
                     this._editItem = item;
                     this._showEditor();

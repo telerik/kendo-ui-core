@@ -60,7 +60,6 @@
             }
         }
 
-
         var PositionAdapter = kendo.Class.extend({
             init: function (layoutState) {
                 this.layoutState = layoutState;
@@ -152,23 +151,6 @@
                         }
                     );
                 }
-
-                /*for (var i = 0; i < graph.links.length; i++) {
-                 var link = graph.links[i];
-                 var p = []
-                 if (link.points != null) {
-                 p.addRange(link.points);
-                 }
-                 */
-                /* var sb = link.source.associatedShape.bounds();
-                 p.prepend(new diagram.Point(sb.x, sb.y));
-                 var eb = link.target.associatedShape.bounds();
-                 p.append(new diagram.Point(eb.x, eb.y));*/
-                /*
-
-                 link.associatedConnection.points(p);
-                 }*/
-
             }
         });
 
@@ -1534,19 +1516,20 @@
             },
             _hitTest: function (p) {
                 var tp = this.diagram.modelToLayer(p),
+                    editable = this.options.editable,
                     i, hit, handleBounds, handlesCount = this.map.length, handle;
 
                 if (this._angle) {
                     tp = tp.clone().rotate(this._bounds.center(), this._angle);
                 }
 
-                if (this.options.rotatable && this._rotationThumbBounds) {
+                if (editable && editable.rotate && this._rotationThumbBounds) {
                     if (this._rotationThumbBounds.contains(tp)) {
                         return new Point(-1, -2);
                     }
                 }
 
-                if (this.options.resizable) {
+                if (editable && editable.resize) {
                     for (i = 0; i < handlesCount; i++) {
                         handle = this.map[i];
                         hit = new Point(handle.x, handle.y);
@@ -1584,7 +1567,7 @@
             },
             _getCursor: function (point) {
                 var hit = this._hitTest(point);
-                if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.resizable) {
+                if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.editable && this.options.editable.resize) {
                     var angle = this._angle;
                     if (angle) {
                         angle = 360 - angle;
@@ -1619,8 +1602,18 @@
                 }
                 return this._manipulating ? Cursors.move : Cursors.select;
             },
-            _initialize: function () {
-                var that = this;
+            _initialize: function() {
+                var that = this, i, item,
+                    items = that.diagram.select();
+
+                that.shapes = [];
+                for (i = 0; i < items.length; i++) {
+                    item = items[i];
+                    if (item instanceof diagram.Shape) {
+                        that.shapes.push(item);
+                        item._rotationOffset = new Point();
+                    }
+                }
 
                 that._angle = that.shapes.length == 1 ? that.shapes[0].rotate().angle : 0;
                 that._startAngle = that._angle;
@@ -1679,10 +1672,11 @@
             },
             redraw: function () {
                 var that = this, i, handle,
-                    resizable = this.options.resizable,
-                    rotatable = this.options.rotatable,
-                    display = resizable === false ? "none" : "inline",
-                    rotationDisplay = rotatable === false ? "none" : "inline";
+                    editable = that.options.editable,
+                    resize = editable.resize,
+                    rotate = editable.rotate,
+                    display = editable && resize ? "inline" : "none",
+                    rotationDisplay = editable && rotate ? "inline" : "none";
 
                 for (i = 0; i < this.map.length; i++) {
                     handle = this.map[i];
