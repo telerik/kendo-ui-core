@@ -69,7 +69,7 @@ var __meta__ = {
         replaceLocation: function(url) {
             location.replace(url);
         }
-    })
+    });
 
     var PushStateAdapter = HistoryAdapter.extend({
         init: function(root) {
