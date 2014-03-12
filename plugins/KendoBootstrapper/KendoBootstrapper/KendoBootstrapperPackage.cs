@@ -263,7 +263,7 @@ namespace Company.KendoBootstrapper
                     DTE.StatusBar.Text = Resources.CreatingCustomKendoFileError;
                 }
             }
-            catch (Exception ex) 
+            catch
             {
                 DTE.StatusBar.Text = Resources.CreatingCustomKendoFileError;
             }
@@ -303,7 +303,7 @@ namespace Company.KendoBootstrapper
                     KendoBootstrapperWindow docs = new KendoBootstrapperWindow(output, selection.Text);
                     docs.ShowDialog();
                 }
-                catch (Exception ex) 
+                catch
                 {
                     DTE.StatusBar.Text = Resources.UnknownError;
                 }
@@ -311,7 +311,6 @@ namespace Company.KendoBootstrapper
                 {
                     process.Close();
                 }
-
             }
         }
 
