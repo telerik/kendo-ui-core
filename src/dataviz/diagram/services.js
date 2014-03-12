@@ -214,13 +214,15 @@
             },
             undo: function () {
                 this.item.content(this._undoContent);
-                if (this.rebuild)
+                if (this.rebuild) {
                     this.rebuild.call(this.item, this.item);
+                }
             },
             redo: function () {
                 this.item.content(this._redoContent);
-                if (this.rebuild)
+                if (this.rebuild) {
                     this.rebuild.call(this.item, this.item);
+                }
             }
 
         });
@@ -321,8 +323,9 @@
                 for (var i = 0; i < this.shapes.length; i++) {
                     var shape = this.shapes[i];
                     shape.bounds(this.undoStates[i]);
-                    if (shape.hasOwnProperty("layout"))
+                    if (shape.hasOwnProperty("layout")) {
                         shape.layout(shape, this.redoStates[i], this.undoStates[i]);
+                    }
                 }
                 if (this.adorner) {
                     this.adorner.refreshBounds();
@@ -334,8 +337,9 @@
                     var shape = this.shapes[i];
                     shape.bounds(this.redoStates[i]);
                     // the 'layout' property, if implemented, lets the shape itself work out what to do with the new bounds
-                    if (shape.hasOwnProperty("layout"))
+                    if (shape.hasOwnProperty("layout")) {
                         shape.layout(shape, this.undoStates[i], this.redoStates[i]);
+                    }
                 }
                 if (this.adorner) {
                     this.adorner.refreshBounds();
@@ -406,8 +410,9 @@
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     shape.rotate(this.undoRotates[i], this.center);
-                    if (shape.hasOwnProperty("layout"))
+                    if (shape.hasOwnProperty("layout")) {
                         shape.layout(shape);
+                    }
                 }
                 if (this.adorner) {
                     this.adorner._initialize();
@@ -419,8 +424,9 @@
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     shape.rotate(this.redoRotates[i], this.center);
-                    if (shape.hasOwnProperty("layout"))
+                    if (shape.hasOwnProperty("layout")) {
                         shape.layout(shape);
+                    }
                 }
                 if (this.adorner) {
                     this.adorner._initialize();
@@ -1717,8 +1723,9 @@
                         shape = this.shapes[i];
                         angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
                         shape.rotate(angle, center);
-                        if (shape.hasOwnProperty("layout"))
+                        if (shape.hasOwnProperty("layout")) {
                             shape.layout(shape);
+                        }
                         this._rotating = true;
                     }
                     this.refresh();
@@ -1781,8 +1788,9 @@
                         if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
                             var oldBounds = bounds;
                             shape.bounds(newBounds);
-                            if (shape.hasOwnProperty("layout"))
+                            if (shape.hasOwnProperty("layout")) {
                                 shape.layout(shape, oldBounds, newBounds);
+                            }
                             shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                             changed += 1;
                         }

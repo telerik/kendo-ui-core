@@ -140,7 +140,9 @@
          Returns the angle in degrees for the given matrix
          */
         getMatrixAngle: function (m) {
-            if (m === null || m.d === 0) return 0;
+            if (m === null || m.d === 0) {
+                return 0;
+            }
             return Math.atan2(m.b, m.d) * 180 / Math.PI;
         },
 
