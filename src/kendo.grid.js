@@ -1610,19 +1610,19 @@ var __meta__ = {
         _syncLockedContentHeight: function() {
             if (this.lockedTable) {
                 this._adjustLockedHorizontalScrollBar();
-                adjustRowsHeight(this.table, this.lockedTable);
+                this._adjustRowsHeight(this.table, this.lockedTable);
             }
         },
 
         _syncLockedHeaderHeight: function() {
             if (this.lockedHeader) {
-                adjustRowsHeight(this.lockedHeader.children("table"), this.thead.parent());
+                this._adjustRowsHeight(this.lockedHeader.children("table"), this.thead.parent());
             }
         },
 
         _syncLockedFooterHeight: function() {
             if (this.lockedFooter && this.footer && this.footer.length) {
-                adjustRowsHeight(this.lockedFooter.children("table"), this.footer.find(".k-grid-footer-wrap > table"));
+                this._adjustRowsHeight(this.lockedFooter.children("table"), this.footer.find(".k-grid-footer-wrap > table"));
             }
         },
 
@@ -4776,6 +4776,47 @@ var __meta__ = {
 
                this._syncLockedContentHeight();
            }
+       },
+
+       _adjustRowsHeight: function(table1, table2) {
+          var rows = table1[0].rows,
+            length = rows.length,
+            idx,
+            rows2 = table2[0].rows,
+            containers = table1.add(table2),
+            heights = [];
+
+          for (idx = 0; idx < length; idx++) {
+              if (rows[idx].style.height) {
+                  rows[idx].style.height = rows2[idx].style.height = "";
+              }
+
+              var clientHeight1 = rows[idx].clientHeight;
+              var clientHeight2 = rows2[idx].clientHeight;
+              var height = 0;
+
+              if (clientHeight1 > clientHeight2) {
+                  height = clientHeight1;
+              } else if (clientHeight1 < clientHeight2) {
+                  height = clientHeight2;
+              }
+
+              heights.push(height);
+          }
+
+          for (idx = 0, length = containers.length; idx < length; idx++) {
+              containers[idx].style.display = "none";
+          }
+
+          for (idx = 0; idx < length; idx++) {
+              if (heights[idx]) {
+                  rows[idx].style.height = rows2[idx].style.height = heights[idx] + "px";
+              }
+          }
+
+          for (idx = 0, length = containers.length; idx < length; idx++) {
+              containers[idx].style.display = "";
+          }
        }
    });
 
@@ -4795,18 +4836,6 @@ var __meta__ = {
        }
    }
 
-   function adjustRowsHeight(table1, table2) {
-      var rows = table1[0].rows,
-        length = rows.length,
-        idx,
-        rows2 = table2[0].rows;
-
-      table1.add(table2).find(">tbody>tr, >thead>tr").css("height", "");
-
-      for (idx = 0; idx < length; idx++) {
-        adjustRowHeight(rows[idx], rows2[idx]);
-      }
-   }
 
    function getCommand(commands, name) {
        var idx, length, command;
