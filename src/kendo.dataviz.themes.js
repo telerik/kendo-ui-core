@@ -489,6 +489,15 @@ var __meta__ = {
                             }
                         }
                     }
+                },
+                rotate: {
+                    thumb: {
+                        width: 14,
+                        stroke: {
+                            color: "#ffffff"
+                        },
+                        background: "#ffffff"
+                    }
                 }
             }
         }

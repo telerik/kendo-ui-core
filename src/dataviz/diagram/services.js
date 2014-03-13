@@ -1452,8 +1452,7 @@
                 that._createHandles();
                 that.text = new TextBlock();
                 that.visual.append(that.text);
-                that.rotationThumb = new Path(that.options.rotationThumb);
-                that.visual.append(that.rotationThumb);
+                that._createThumb();
                 that.redraw();
                 that.diagram.bind("select", function (e) {
                     that._initialize(e.selected);
@@ -1486,13 +1485,28 @@
                     },
                     background: "none"
                 },
-                rotationThumb: {
-                    data: "M7.115,16C3.186,16,0,12.814,0,8.885C0,5.3,2.65,2.336,6.099,1.843V0l4.85,2.801l-4.85,2.8V3.758 c-2.399,0.473-4.21,2.588-4.21,5.126c0,2.886,2.34,5.226,5.226,5.226s5.226-2.34,5.226-5.226c0-1.351-0.513-2.582-1.354-3.51 l1.664-0.961c0.988,1.222,1.581,2.777,1.581,4.472C14.23,12.814,11.045,16,7.115,16L7.115,16z",
-                    y: -30,
-                    thumbWidth: 14
+                editable: {
+                    rotate: {
+                        thumb: {
+                            data: "M7.115,16C3.186,16,0,12.814,0,8.885C0,5.3,2.65,2.336,6.099,1.843V0l4.85,2.801l-4.85,2.8V3.758 c-2.399,0.473-4.21,2.588-4.21,5.126c0,2.886,2.34,5.226,5.226,5.226s5.226-2.34,5.226-5.226c0-1.351-0.513-2.582-1.354-3.51 l1.664-0.961c0.988,1.222,1.581,2.777,1.581,4.472C14.23,12.814,11.045,16,7.115,16L7.115,16z",
+                            y: -30
+                        }
+                    }
                 },
                 offset: 10
             },
+
+            _createThumb: function() {
+                var that = this,
+                    editable = that.options.editable,
+                    rotate = editable.rotate;
+
+                if (editable && rotate) {
+                    that.rotationThumb = new Path(rotate.thumb);
+                    that.visual.append(that.rotationThumb);
+                }
+            },
+
             _createHandles: function() {
                 var editable = this.options.editable,
                     handles, item, i, y;
@@ -1696,7 +1710,9 @@
                     handle = this.map[i];
                     $(handle.visual.domElement).css("display", display);
                 }
-                $(that.rotationThumb.domElement).css("display", rotationDisplay);
+                if (that.rotationThumb) {
+                    $(that.rotationThumb.domElement).css("display", rotationDisplay);
+                }
             },
             move: function (handle, p) {
                 var delta, dragging,
@@ -1878,8 +1894,9 @@
                     this.visual.rotate(this._angle, center);
                     this.rect.redraw({ width: bounds.width, height: bounds.height });
                     if (this.rotationThumb) {
-                        this._rotationThumbBounds = new Rect(bounds.center().x, bounds.y + this.options.rotationThumb.y, 0, 0).inflate(this.options.rotationThumb.thumbWidth);
-                        this.rotationThumb.redraw({ x: bounds.width / 2 - this.options.rotationThumb.thumbWidth / 2 });
+                        var thumb = this.options.editable.rotate.thumb;
+                        this._rotationThumbBounds = new Rect(bounds.center().x, bounds.y + thumb.y, 0, 0).inflate(thumb.width);
+                        this.rotationThumb.redraw({ x: bounds.width / 2 - thumb.width / 2 });
                     }
                 } else {
                     this.visual.visible(false);
