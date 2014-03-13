@@ -6,7 +6,7 @@ class DiagramShapeRotation extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * 
+    * The rotation angle.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramShapeRotation
     */

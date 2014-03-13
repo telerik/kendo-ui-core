@@ -215,6 +215,20 @@ If zoomRate is less than 1, zooming will be reversed.
         return $this->setProperty('zoom', $value);
     }
 
+    /**
+    * Sets the click event of the Diagram.
+    * Fired when the user clicks on a shape or a connection. Will not fire when the start/down and end/up event points are not equal.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function click($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('click', $value);
+    }
+
 
 //<< Properties
 }

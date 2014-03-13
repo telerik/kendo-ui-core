@@ -15,6 +15,15 @@ class DiagramShape extends \Kendo\SerializableObject {
     }
 
     /**
+    * The unique identifier for a Shape.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramShape
+    */
+    public function id($value) {
+        return $this->setProperty('id', $value);
+    }
+
+    /**
     * Specifies if the user is allowed to rotate the shape.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\DiagramShape
@@ -141,7 +150,7 @@ class DiagramShape extends \Kendo\SerializableObject {
     }
 
     /**
-    * 
+    * The function that positions the connector.
     * @param \Kendo\Dataviz\UI\DiagramShapeRotation|array $value
     * @return \Kendo\Dataviz\UI\DiagramShape
     */
