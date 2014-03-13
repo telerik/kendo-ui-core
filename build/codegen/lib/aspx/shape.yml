@@ -11,10 +11,6 @@
       :type: kendo.dataviz.diagram.Shape.Hover
       :description: Defines the hover configuration.
 
-    - :name: hover.stroke
-      :type: kendo.dataviz.diagram.Shape.Stroke
-      :description: Defines the hovered stroke configuration.
-
     - :name: connectors.connector
       :type: kendo.dataviz.diagram.Shape.Connector
       :description: Defines the hover configuration.
