@@ -6,7 +6,7 @@ class DiagramLayoutGrid extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.
+    * Defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramLayoutGrid
     */
@@ -15,7 +15,7 @@ class DiagramLayoutGrid extends \Kendo\SerializableObject {
     }
 
     /**
-    * defines the left offset of the grid layout. The default is 50.
+    * Defines the left offset of the grid layout. The default is 50.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramLayoutGrid
     */
@@ -24,7 +24,7 @@ class DiagramLayoutGrid extends \Kendo\SerializableObject {
     }
 
     /**
-    * defines the top offset of the grid layout. The default is 50.
+    * Defines the top offset of the grid layout. The default is 50.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramLayoutGrid
     */
@@ -33,7 +33,7 @@ class DiagramLayoutGrid extends \Kendo\SerializableObject {
     }
 
     /**
-    * defines the horizontal spacing between each component. The default is 50.
+    * Defines the horizontal spacing between each component. The default is 50.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramLayoutGrid
     */
@@ -42,7 +42,7 @@ class DiagramLayoutGrid extends \Kendo\SerializableObject {
     }
 
     /**
-    * defines the vertical spacing between each component. The default is 50.
+    * Defines the vertical spacing between each component. The default is 50.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramLayoutGrid
     */

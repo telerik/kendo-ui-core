@@ -83,7 +83,7 @@ def vsdoc(*args, &block)
 end
 
 namespace :vsdoc do
-    VSDOC_SOURCES = FileList["docs/api/{web,mobile,dataviz,framework}/*.md"]
+    VSDOC_SOURCES = FileList["docs/api/{web,mobile,framework}/*.md"].include('docs/api/dataviz/**/*.md')
     desc "Test VSDoc generation"
     task :test do
         File.open("dist/kendo.vsdoc-master.js", "w") do |f|

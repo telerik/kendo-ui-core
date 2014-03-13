@@ -542,13 +542,13 @@ namespace :type_script do
     SUITES = {
         'all' => FileList["docs/api/web/*.md"]
                 .include('docs/api/framework/*.md')
-                .include('docs/api/dataviz/*.md')
+                .include('docs/api/dataviz/**/*.md')
                 .include('docs/api/mobile/*.md'),
 
         'web' => FileList["docs/api/web/*.md"]
                 .include('docs/api/framework/*.md'),
 
-        'dataviz' => FileList["docs/api/dataviz/*.md"]
+        'dataviz' => FileList["docs/api/dataviz/**/*.md"]
                  .include('docs/api/framework/*.md'),
 
         'mobile' => FileList["docs/api/mobile/*.md"]

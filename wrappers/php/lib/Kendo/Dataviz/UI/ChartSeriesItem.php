@@ -52,7 +52,7 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
-    * The series base color. Accepts a valid CSS color string, including hex and rgb.
+    * The series base color. The supported values are:
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */

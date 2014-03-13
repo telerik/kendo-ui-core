@@ -33,7 +33,7 @@ class DiagramConnectionDefaults extends \Kendo\SerializableObject {
     }
 
     /**
-    * The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed. Much like the startCap example above, you can define custom caps (markers) for the endpoint of the connection.
+    * The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
     */

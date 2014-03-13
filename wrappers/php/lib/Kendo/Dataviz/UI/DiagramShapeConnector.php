@@ -6,7 +6,7 @@ class DiagramShapeConnector extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * 
+    * The connector name. Predefined names include:
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramShapeConnector
     */
@@ -15,7 +15,7 @@ class DiagramShapeConnector extends \Kendo\SerializableObject {
     }
 
     /**
-    * 
+    * The connector description.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramShapeConnector
     */
@@ -24,7 +24,7 @@ class DiagramShapeConnector extends \Kendo\SerializableObject {
     }
 
     /**
-    * 
+    * The function that positions the connector.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\DiagramShapeConnector
     */

@@ -10710,7 +10710,7 @@ If zoomRate is less than 1, zooming will be reversed.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed. Much like the startCap example above, you can define custom caps (markers) for the endpoint of the connection.</description>
+            <description>The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.</description>
             <name>endCap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10788,7 +10788,7 @@ If zoomRate is less than 1, zooming will be reversed.</description>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed. Much like the startCap example above, you can define custom caps (markers) for the endpoint of the connection.</description>
+            <description>The start cap (arrow, head or decoration) of the connection:Note that you can also use the "ArrowStart" for the endCap but its direction will be inversed.</description>
             <name>endCap</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10904,7 +10904,7 @@ If zoomRate is less than 1, zooming will be reversed.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>the height (in a vertical layout) or width (in a horizontal layout) between the layers.</description>
+            <description>The height (in a vertical layout) or width (in a horizontal layout) between the layers.</description>
             <name>layerSeparation</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -10980,31 +10980,31 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <body-content>empty</body-content>
 
         <attribute>
-            <description>defines the horizontal spacing between each component. The default is 50.</description>
+            <description>Defines the horizontal spacing between each component. The default is 50.</description>
             <name>componentSpacingX</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>defines the vertical spacing between each component. The default is 50.</description>
+            <description>Defines the vertical spacing between each component. The default is 50.</description>
             <name>componentSpacingY</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>defines the left offset of the grid layout. The default is 50.</description>
+            <description>Defines the left offset of the grid layout. The default is 50.</description>
             <name>offsetX</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>defines the top offset of the grid layout. The default is 50.</description>
+            <description>Defines the top offset of the grid layout. The default is 50.</description>
             <name>offsetY</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.</description>
+            <description>Defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -11254,6 +11254,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The unique identifier for a Shape.</description>
+            <name>id</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Defines the minimum height the shape should have, i.e. it cannot be resized to a value smaller than the given one.</description>
             <name>minHeight</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11317,32 +11323,32 @@ See visual.</description>
     </tag>
 
     <tag>
-        <description>Defines the connectors the shape owns.You can easily define your own custom connectors or mix-match with the above defined custom connectors.Example - custom shape with custom connectorsThe following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.</description>
+        <description>Defines the connectors the shape owns.</description>
         <name>diagram-shape-connectors</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeConnectorsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>Defines the connectors the shape owns.You can easily define your own custom connectors or mix-match with the above defined custom connectors.Example - custom shape with custom connectorsThe following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.</description>
+        <description>Defines the connectors the shape owns.</description>
         <name>diagram-shape-connector</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeConnectorTag</tag-class>
 
         <body-content>JSP</body-content>
         <attribute>
-            <description></description>
+            <description>The connector description.</description>
             <name>description</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description></description>
+            <description>The connector name. Predefined names include:</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description></description>
+            <description>The function that positions the connector.</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -11351,7 +11357,7 @@ See visual.</description>
 
 
     <tag>
-        <description></description>
+        <description>The function that positions the connector.</description>
         <name>diagram-shape-connector-position</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeConnectorPositionFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -11373,13 +11379,13 @@ See visual.</description>
 
 
     <tag>
-        <description></description>
+        <description>The function that positions the connector.</description>
         <name>diagram-shape-rotation</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeRotationTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description></description>
+            <description>The rotation angle.</description>
             <name>angle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>

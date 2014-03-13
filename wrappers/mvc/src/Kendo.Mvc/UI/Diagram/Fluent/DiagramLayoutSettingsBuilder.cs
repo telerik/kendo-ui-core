@@ -152,7 +152,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// the height (in a vertical layout) or width (in a horizontal layout) between the layers.
+        /// The height (in a vertical layout) or width (in a horizontal layout) between the layers.
         /// </summary>
         /// <param name="value">The value that configures the layerseparation.</param>
         public DiagramLayoutSettingsBuilder LayerSeparation(double value)

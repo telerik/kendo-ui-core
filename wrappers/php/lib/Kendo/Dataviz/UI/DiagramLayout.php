@@ -115,7 +115,7 @@ A diagram can have in general disconnected pieces, known as components, which ca
     }
 
     /**
-    * the height (in a vertical layout) or width (in a horizontal layout) between the layers.
+    * The height (in a vertical layout) or width (in a horizontal layout) between the layers.
     * @param float $value
     * @return \Kendo\Dataviz\UI\DiagramLayout
     */
