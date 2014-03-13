@@ -147,7 +147,7 @@ If zoomRate is less than 1, zooming will be reversed.
 
     /**
     * Sets the itemBoundsChange event of the Diagram.
-    * Fired when the bounds of an item are changed.
+    * Fired when the location or size of an item are changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
@@ -202,22 +202,36 @@ If zoomRate is less than 1, zooming will be reversed.
     }
 
     /**
-    * Sets the zoom event of the Diagram.
-    * Fired when the user changes the diagram zoom level.
+    * Sets the zoomStart event of the Diagram.
+    * Fired when the user starts changing the diagram zoom level.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */
-    public function zoom($value) {
+    public function zoomStart($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
 
-        return $this->setProperty('zoom', $value);
+        return $this->setProperty('zoomStart', $value);
+    }
+
+    /**
+    * Sets the zoomEnd event of the Diagram.
+    * Fired when the user changes the diagram zoom level.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function zoomEnd($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('zoomEnd', $value);
     }
 
     /**
     * Sets the click event of the Diagram.
-    * Fired when the user clicks on a shape or a connection. Will not fire when the start/down and end/up event points are not equal.
+    * Fired when the user clicks on a shape or a connection.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Diagram
     */

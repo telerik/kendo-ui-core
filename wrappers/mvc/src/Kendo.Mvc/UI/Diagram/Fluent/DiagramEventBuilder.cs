@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Fired when the bounds of an item are changed.
+        /// Fired when the location or size of an item are changed.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the itemBoundsChange event.</param>
         public DiagramEventBuilder ItemBoundsChange(string handler)
@@ -71,18 +71,29 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Fired when the user changes the diagram zoom level.
+        /// Fired when the user starts changing the diagram zoom level.
         /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the zoom event.</param>
-        public DiagramEventBuilder Zoom(string handler)
+        /// <param name="handler">The name of the JavaScript function that will handle the zoomStart event.</param>
+        public DiagramEventBuilder ZoomStart(string handler)
         {
-            Handler("zoom", handler);
+            Handler("zoomStart", handler);
 
             return this;
         }
         
         /// <summary>
-        /// Fired when the user clicks on a shape or a connection. Will not fire when the start/down and end/up event points are not equal.
+        /// Fired when the user changes the diagram zoom level.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the zoomEnd event.</param>
+        public DiagramEventBuilder ZoomEnd(string handler)
+        {
+            Handler("zoomEnd", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the user clicks on a shape or a connection.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the click event.</param>
         public DiagramEventBuilder Click(string handler)

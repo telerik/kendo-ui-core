@@ -91,8 +91,12 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setEvent("select", value.getBody());
     }
 
-    public void setZoom(ZoomFunctionTag value) {
-        setEvent("zoom", value.getBody());
+    public void setZoomEnd(ZoomEndFunctionTag value) {
+        setEvent("zoomEnd", value.getBody());
+    }
+
+    public void setZoomStart(ZoomStartFunctionTag value) {
+        setEvent("zoomStart", value.getBody());
     }
 
     public boolean getAutoBind() {
@@ -219,16 +223,28 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("select", new Function(value));
     }
 
-    public String getZoom() {
-        Function property = ((Function)getProperty("zoom"));
+    public String getZoomEnd() {
+        Function property = ((Function)getProperty("zoomEnd"));
         if (property != null) {
             return property.getBody();
         }
         return null;
     }
 
-    public void setZoom(String value) {
-        setProperty("zoom", new Function(value));
+    public void setZoomEnd(String value) {
+        setProperty("zoomEnd", new Function(value));
+    }
+
+    public String getZoomStart() {
+        Function property = ((Function)getProperty("zoomStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setZoomStart(String value) {
+        setProperty("zoomStart", new Function(value));
     }
 
 //<< Attributes
