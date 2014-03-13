@@ -10671,7 +10671,7 @@ If zoomRate is less than 1, zooming will be reversed.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the bounds of an item are changed.</description>
+            <description>Fired when the location or size of an item are changed.</description>
             <name>itemBoundsChange</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -10691,12 +10691,17 @@ If zoomRate is less than 1, zooming will be reversed.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user changes the diagram zoom level.</description>
-            <name>zoom</name>
+            <description>Fired when the user starts changing the diagram zoom level.</description>
+            <name>zoomStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user clicks on a shape or a connection. Will not fire when the start/down and end/up event points are not equal.</description>
+            <description>Fired when the user changes the diagram zoom level.</description>
+            <name>zoomEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user clicks on a shape or a connection.</description>
             <name>click</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -11438,7 +11443,7 @@ See visual.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the bounds of an item are changed.</description>
+        <description>Fired when the location or size of an item are changed.</description>
         <name>diagram-itemBoundsChange</name>
         <tag-class>com.kendoui.taglib.diagram.ItemBoundsChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -11462,13 +11467,19 @@ See visual.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user changes the diagram zoom level.</description>
-        <name>diagram-zoom</name>
-        <tag-class>com.kendoui.taglib.diagram.ZoomFunctionTag</tag-class>
+        <description>Fired when the user starts changing the diagram zoom level.</description>
+        <name>diagram-zoomStart</name>
+        <tag-class>com.kendoui.taglib.diagram.ZoomStartFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user clicks on a shape or a connection. Will not fire when the start/down and end/up event points are not equal.</description>
+        <description>Fired when the user changes the diagram zoom level.</description>
+        <name>diagram-zoomEnd</name>
+        <tag-class>com.kendoui.taglib.diagram.ZoomEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user clicks on a shape or a connection.</description>
         <name>diagram-click</name>
         <tag-class>com.kendoui.taglib.diagram.ClickFunctionTag</tag-class>
         <body-content>JSP</body-content>

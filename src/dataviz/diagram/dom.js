@@ -1514,7 +1514,11 @@
                     this.mainLayer.append(shape.visual);
                 }
 
-                this._raiseItemsAdded([ shape ]);
+                this.trigger(CHANGE, {
+                    added: [shape],
+                    removed: []
+                });
+
                 shape.redraw();
 
                 // for shapes which have their own internal layout mechanism
@@ -1551,7 +1555,10 @@
                     this.undoRedoService.commit();
                 }
 
-                this._raiseItemsRemoved(isMultiple ? items : [items]);
+                this.trigger(CHANGE, {
+                    added: [],
+                    removed: isMultiple ? items : [items]
+                });
             },
             /**
              * Executes the next undoable action on top of the undo stack if any.
@@ -2540,16 +2547,6 @@
                     }
                     adorner.refresh();
                 }
-            },
-
-            _raiseItemsAdded: function (items) {
-                this._raiseItemsChanged({added: items});
-            },
-            _raiseItemsRemoved: function (items) {
-                this._raiseItemsChanged({removed: items});
-            },
-            _raiseItemsChanged: function (collections) {
-                this.trigger(CHANGE, collections);
             },
 
             _refresh: function () {

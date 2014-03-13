@@ -9,7 +9,7 @@ import com.kendoui.taglib.DiagramTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ZoomFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ZoomEndFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -19,7 +19,7 @@ public class ZoomFunctionTag extends FunctionTag /* interfaces */ /* interfaces 
         DiagramTag parent = (DiagramTag)findParentWithClass(DiagramTag.class);
 
 
-        parent.setZoom(this);
+        parent.setZoomEnd(this);
 
 //<< doEndTag
 
