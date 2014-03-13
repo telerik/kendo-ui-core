@@ -641,7 +641,7 @@ var __meta__ = {
             increaseButtonTitle: "Increase",
             decreaseButtonTitle: "Decrease",
             dragHandleTitle: "drag",
-            tooltip: { format: "{0}" },
+            tooltip: { format: "{0:#,#.##}" },
             value: null
         },
 
@@ -1301,7 +1301,7 @@ var __meta__ = {
             name: "RangeSlider",
             leftDragHandleTitle: "drag",
             rightDragHandleTitle: "drag",
-            tooltip: { format: "{0}" },
+            tooltip: { format: "{0:#,#.##}" },
             selectionStart: null,
             selectionEnd: null
         },
