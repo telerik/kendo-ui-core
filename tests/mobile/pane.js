@@ -72,4 +72,13 @@
         visible("#foo");
         hidden("#bar");
     });
+
+    test("replace replaces current view in the history stack", 1, function() {
+        pane = buildPane('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div><div data-role="view" id="baz">Baz</div>');
+        pane.navigate("#foo");
+        pane.navigate("#bar");
+        pane.replace("#baz");
+        pane.navigate("#:back");
+        visible("#foo");
+    });
 })();

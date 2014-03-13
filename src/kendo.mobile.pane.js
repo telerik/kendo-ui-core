@@ -77,6 +77,12 @@ var __meta__ = {
                 that.historyCallback(url, params);
             };
 
+            this._historyReplace = function(url) {
+                var params = kendo.parseQueryStringParams(url);
+                that.history[that.history.length - 1] = url;
+                that.historyCallback(url, params);
+            };
+
             that.loader = new Loader(element, {
                 loading: that.options.loading
             });
@@ -181,6 +187,16 @@ var __meta__ = {
             this._historyNavigate(url);
         },
 
+        replace: function(url, transition) {
+            if (url instanceof View) {
+                url = url.id;
+            }
+
+            this.transition = transition;
+
+            this._historyReplace(url);
+        },
+
         bindToRouter: function(router) {
             var that = this,
                 options = that.options,
@@ -211,6 +227,10 @@ var __meta__ = {
 
             that._historyNavigate = function(url) {
                 router.navigate(url);
+            };
+
+            that._historyReplace = function(url) {
+                router.replace(url);
             };
         },
 

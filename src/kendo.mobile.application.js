@@ -172,6 +172,10 @@ var __meta__ = {
             this.pane.navigate(url, transition);
         },
 
+        replace: function(url, transition) {
+            this.pane.replace(url, transition);
+        },
+
         scroller: function() {
             return this.view().scroller;
         },

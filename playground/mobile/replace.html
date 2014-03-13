@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.all.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+    </head>
+
+    <body>
+        <div data-role="view" id="foo">
+            Foo
+            <a href="#bar" data-role="button">Bar</a>
+        </div>
+
+        <div data-role="view" id="bar">
+            <a data-role="button" data-click="replaceBar">Baz</a>
+        </div>
+
+        <div data-role="view" id="baz">
+            <a data-role="backbutton">Back</a>
+            Baz
+        </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            function replaceBar() {
+                kendo.mobile.application.replace("#baz");
+            }
+            require.config({
+                baseUrl: "../../src"
+            });
+
+            require(['jquery', 'kendo.mobile.navbar', 'kendo.mobile.tabstrip', 'kendo.mobile.button', 'kendo.mobile.listview'], function($, kendo) {
+                new kendo.mobile.Application(document.body);
+            });
+        </script>
+    </body>
+</html>
