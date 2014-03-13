@@ -502,7 +502,7 @@ var __meta__ = {
             }
 
             that._old = that._initialValues = value;
-            that._setInitialValues = !!value[0];
+            that._setInitialValues = value[0] !== undefined;
         },
 
         _mapValues: function(values) {

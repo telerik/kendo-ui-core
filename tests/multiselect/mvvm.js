@@ -416,7 +416,7 @@
     });
 
     test("destroys detaches the events to widget", function() {
-        dom = $('<div data-role="multiselect" data-bind="source:items" />');
+        dom = $('<select data-role="multiselect" data-bind="source:items" />');
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -430,7 +430,7 @@
     });
 
     test("dataBound event is raised if attached as option", 2, function() {
-        dom = $('<div data-role="multiselect" data-bound="multiSelectDataBound" data-bind="source:items" />');
+        dom = $('<select data-role="multiselect" data-bound="multiSelectDataBound" data-bind="source:items" />');
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}]
@@ -440,7 +440,7 @@
     });
 
     test("dataBound event is raised if attached as option to a already initialized multiselect", 1, function() {
-        dom = $('<div data-bound="multiSelectDataBound" data-bind="source:items" />').kendoMultiSelect();
+        dom = $('<select data-bound="multiSelectDataBound" data-bind="source:items" />').kendoMultiSelect();
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}]

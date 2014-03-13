@@ -380,6 +380,21 @@
         equal(multiselect.dataItems().length, 2);
     });
 
+    test("MultiSelect selects an item which value field is an empty string", function() {
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "id",
+            dataSource: [
+                { id: "", text: "text" },
+                { id: "1", text: "text1" }
+            ],
+            value: [""]
+        });
+
+        ok(multiselect.element.children().first()[0].selected);
+        equal(multiselect.value(), "");
+    });
+
     test("MultiSelect binds to complex data passed to value option if autoBind is false", function() {
         var multiselect = new MultiSelect(select, {
             autoBind: false,
