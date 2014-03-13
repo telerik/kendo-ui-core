@@ -66,5 +66,42 @@ namespace <%= csharp_namespace %>
         }
 
         #endregion [ Private Members ]
+
+        #region [ RadWebControl Overrides ]
+        protected override HtmlTextWriterTag TagKey
+        {
+            get
+            {
+                return HtmlTextWriterTag.Div;
+            }
+        }
+
+        protected override string CssClassFormatString
+        {
+            get
+            {
+                return "";
+            }
+        }
+
+        [DefaultValue(false)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public override bool EnableEmbeddedSkins
+        {
+            get { return false; }
+        }
+
+        [DefaultValue(false)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public override bool EnableEmbeddedBaseStylesheet
+        {
+            get { return false; }
+        }
+        #endregion
+
     }
 }

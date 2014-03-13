@@ -51,10 +51,15 @@ module CodeGen
 
             CONVERTER_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/converter.class.template.erb'))
 
-            CONVERTER_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
-
             CONVERTER_COMPOSITE_TEMPLATE = ERB.new('
+            if (!convertable.<%= csharp_name %>.IsDefault)
+                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
+
+            CONVERTER_ARRAY_TEMPLATE = ERB.new('
+            if (convertable.<%= csharp_name %>.Count != 0)
+                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
+
+            CONVERTER_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
 
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
@@ -261,10 +266,6 @@ module CodeGen
                     name.pascalize
                 end
 
-                def csharp_default
-                    'null'
-                end
-
                 def csharp_namespace
                     return 'Telerik.Web.UI' if csharp_class.start_with?(root_component.owner_namespace)
                     "Telerik.Web.UI.#{root_component.owner_namespace}"
@@ -322,13 +323,14 @@ module CodeGen
                     "List<#{item.csharp_class}>"
                 end
 
-                def csharp_default
-                    'null'
-                end
-
                 def to_declaration
                     COLLECTION_TEMPLATE.result(binding)
                 end
+
+                def to_converter
+                    CONVERTER_ARRAY_TEMPLATE.result(get_binding)
+                end
+
 
             end
 
@@ -403,8 +405,7 @@ module CodeGen
                 end
 
                 def script_resource_path
-                    return "Diagram.Scripts.RadDiagram.js" #temp value - current local testing
-                    #"#{csharp_namespace}.#{csharp_name}.Scripts.#{csharp_class}.js"
+                    "#{csharp_namespace}.#{csharp_name}.Scripts.#{csharp_class}.js"
                 end
 
                 def script_component_type
@@ -514,6 +515,9 @@ module CodeGen
                     if component.widget?
                         serialization_content = write_options_serialization(component.options)
                         write_file(file_path, serialization_content, '[ Properties Serialization ]')
+                    else
+                        is_default_content = write_is_default(component.options)
+                        write_file(file_path, is_default_content, '[ IsDefault ]')
                     end
 
                 end
@@ -559,10 +563,26 @@ module CodeGen
                     create_file(filename, composite.to_class_declaration)
 
                     composite_content = write_options(composite.options)
+                    is_default_content = write_is_default(composite.options)
 
                     write_file(filename, composite_content, '[ Properties ]')
+                    write_file(filename, is_default_content, '[ IsDefault ]')
 
                     write_composite_option_converter_file(composite)
+                end
+
+                def write_is_default(options)
+                    result = ''
+                    options.each_index do |index|
+                        option  = options[index]
+                        result += !option.composite? ?
+                            "                   #{option.csharp_name} == #{option.csharp_default}" :
+                            option.instance_of?(CompositeOption) ?
+                                "                   #{option.csharp_name}.IsDefault" :
+                                "                   #{option.csharp_name}.Count == 0"
+                        result += index < options.length - 1 ? " &&\n" : ';'
+                    end
+                    result
                 end
 
                 def write_converter_options(options)
