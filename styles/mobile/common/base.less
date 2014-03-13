@@ -2,7 +2,12 @@
 
 /* Common Platform CSS */
 
-@-ms-viewport { width: device-width; }
+@-ms-viewport {
+    width: device-width;
+    user-zoom: fixed;
+    max-zoom: 1;
+    min-zoom: 1;
+}
 
 // Fix the wrong window.outerHeight in iOS7 iPad landscape
 @media (orientation:landscape) {
@@ -386,9 +391,20 @@
 {
     min-height: 100%;
     height: auto;
-    -ms-touch-action: auto !important;
     -webkit-transform: none;
     overflow-x: visible;
+}
+
+.km-native-scrolling .km-pane,
+.km-native-scrolling .km-view
+{
+    -ms-touch-action: auto;
+    display: block;
+}
+
+.km-native-scrolling .km-content
+{
+    -ms-flex: auto;
 }
 
 .km-native-scrolling .km-blackberry .km-content
