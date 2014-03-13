@@ -22,7 +22,7 @@
        "grunt-contrib-jshint": "~0.7.2",
        "grunt-contrib-copy": "~0.5.0",
        "grunt-debug-task": "0.1.3",
-       "grunt-karma": "*",
+       "grunt-karma": "0.6.2",
 
        "qunitjs": "~1.12.0",
 
@@ -34,7 +34,8 @@
        "karma-qunit": "*",
        "karma-junit-reporter": "0.2.1",
        "karma-osx-reporter": "0.0.4",
-       "karma-ie-launcher": "~0.1"
+       "karma-ie-launcher": "~0.1",
+       "karma-coffee-preprocessor": "~0.1.3"
    },
    "scripts": {
        "test": "./node_modules/.bin/grunt travis"
