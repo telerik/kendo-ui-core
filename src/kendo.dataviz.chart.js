@@ -3437,7 +3437,7 @@ var __meta__ = {
         },
 
         evalPointOptions: function(options, value, category, categoryIx, series, seriesIx) {
-            var state = { defaults: series._defaults, excluded: ["data", "aggregate", "_events"] };
+            var state = { defaults: series._defaults, excluded: ["data", "aggregate", "_events", "tooltip"] };
 
             var doEval = this._evalSeries[seriesIx];
             if (!defined(doEval)) {
@@ -5258,7 +5258,7 @@ var __meta__ = {
                 value: value,
                 series: series,
                 dataItem: fields.dataItem
-            }, { defaults: series._defaults, excluded: ["data"] });
+            }, { defaults: series._defaults, excluded: ["data", "tooltip"] });
         },
 
         createPoint: function(value, fields) {
