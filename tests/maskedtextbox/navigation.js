@@ -382,11 +382,8 @@
         input.val("(123) 555");
         caret(input[0], 5, 8);
 
-        console.log("start");
-
         input.trigger("paste");
         input.val("(123)77 555");
-        console.log("last " + input.val());
         caret(input[0], 7);
 
         setTimeout(function() {
