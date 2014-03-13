@@ -29,13 +29,13 @@
 
 <div class="demo-section two-way">
 	<div class="list-wrapper">
-		<ul id="sortable-listC" style="min-height: 41px;">
+		<ul id="sortable-listC" style="min-height: 110px;">
 			<li class="list-item">Cherries</li>
 			<li class="list-item">Pears</li>
 			<li class="list-item">Plums</li>
 		</ul>
 
-		<ul id="sortable-listD" style="min-height: 41px;">
+		<ul id="sortable-listD" style="min-height: 110px;">
 			<li class="list-item">Apricots</li>
 			<li class="list-item">Grapes</li>
 			<li class="list-item">Lemons</li>

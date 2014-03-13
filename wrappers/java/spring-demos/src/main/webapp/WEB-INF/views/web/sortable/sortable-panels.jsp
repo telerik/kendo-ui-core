@@ -162,6 +162,7 @@
 }
 
 .panel-wrap {
+    display: table;
 	margin: 0 0 20px;
 	width: 908px;
 	background-color: #f5f5f5;
@@ -169,20 +170,18 @@
 }
 
 #sidebar {
-	display: inline-block;
+	display: table-cell;
 	margin: 0;
 	padding: 20px 0 20px 20px;
 	width: 220px;
-	min-height: 260px;
 	vertical-align: top;
 }
 
 #main-content {
-	display: inline-block;
+	display: table-cell;
 	margin: 0;
 	padding: 20px;
 	width: 610px;
-	min-height: 260px;
 	vertical-align: top;
 }
 

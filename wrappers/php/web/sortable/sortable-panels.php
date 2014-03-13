@@ -133,25 +133,24 @@ echo $sortableMain->render();
             background: url('../../content/web/sortable/dashboard-head.png') no-repeat 50% 50% #222222;  
         }
         .panel-wrap {
+            display: table;
             margin: 0 0 20px;
             width: 900px;
             background-color: #f5f5f5;
             border: 1px solid #e5e5e5;
         }
         #sidebar {
-            display: inline-block;
+            display: table-cell;
             margin: 0;
             padding: 20px 0 20px 20px;
             width: 220px;
-            min-height: 260px;
             vertical-align: top;
         }
         #main-content {
-            display: inline-block;
+            display: table-cell;
             margin: 0;
             padding: 20px;
             width: 600px;
-            min-height: 260px;
             vertical-align: top;
         }
         .widget.placeholder {
