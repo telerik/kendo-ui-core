@@ -105,6 +105,14 @@ public class ShapeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("height", value);
     }
 
+    public java.lang.String getId() {
+        return (java.lang.String)getProperty("id");
+    }
+
+    public void setId(java.lang.String value) {
+        setProperty("id", value);
+    }
+
     public float getMinHeight() {
         return (float)getProperty("minHeight");
     }
