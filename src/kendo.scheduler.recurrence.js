@@ -1690,8 +1690,8 @@ var __meta__ = {
 
         _weekDayRule: function(clear) {
             var that = this;
-            var weekday = that._weekDay.value();
-            var offset = Number(that._weekDayOffset.value());
+            var weekday = (that._weekDay.element || that._weekDay).val();
+            var offset = Number((that._weekDayOffset.element || that._weekDayOffset).val());
             var weekDays = null;
             var positions = null;
 

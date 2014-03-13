@@ -192,6 +192,26 @@
         equal(weekday.val(), "1");
     });
 
+    test("MobileRecurrenceEditor updates recurrence rule when change week day offset", function() {
+        div.kendoMobileRecurrenceEditor({
+            pane: pane,
+            value: "FREQ=MONTHLY;BYDAY=3MO"
+        });
+
+        div.find(".k-scheduler-recur").click();
+
+        var view = $("#recurrence");
+        var toolbar = view.find("ul.k-scheduler-navigation:first");
+
+        var patternView = view.find(".k-recur-view");
+
+        var weekdayOffset = patternView.find("select.k-recur-weekday-offset");
+
+        weekdayOffset.trigger("change"); //simulate change
+
+        ok(true);
+    });
+
     test("MobileRecurrenceEditor renders yearly view", function() {
         div.kendoMobileRecurrenceEditor({
             pane: pane,
