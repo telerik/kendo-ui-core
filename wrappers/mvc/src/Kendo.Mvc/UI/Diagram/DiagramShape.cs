@@ -29,6 +29,8 @@ namespace Kendo.Mvc.UI
         
         public bool? Editable { get; set; }
         
+        public string Id { get; set; }
+        
         public bool? Rotatable { get; set; }
         
         public bool? Resizable { get; set; }
@@ -90,6 +92,11 @@ namespace Kendo.Mvc.UI
                 json["editable"] = Editable;
             }
                 
+            if (Id.HasValue())
+            {
+                json["id"] = Id;
+            }
+            
             if (Rotatable.HasValue)
             {
                 json["rotatable"] = Rotatable;

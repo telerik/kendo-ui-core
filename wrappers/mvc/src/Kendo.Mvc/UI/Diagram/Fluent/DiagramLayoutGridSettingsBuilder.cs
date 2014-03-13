@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.
+        /// Defines the width of the grid. The bigger this parameter the more components will be organized in an horizontal row. How many components really depends on your diagram and they type of layout applied to each component. The default is set to 800.
         /// </summary>
         /// <param name="value">The value that configures the width.</param>
         public DiagramLayoutGridSettingsBuilder Width(double value)
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// defines the left offset of the grid layout. The default is 50.
+        /// Defines the left offset of the grid layout. The default is 50.
         /// </summary>
         /// <param name="value">The value that configures the offsetx.</param>
         public DiagramLayoutGridSettingsBuilder OffsetX(double value)
@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// defines the top offset of the grid layout. The default is 50.
+        /// Defines the top offset of the grid layout. The default is 50.
         /// </summary>
         /// <param name="value">The value that configures the offsety.</param>
         public DiagramLayoutGridSettingsBuilder OffsetY(double value)
@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// defines the horizontal spacing between each component. The default is 50.
+        /// Defines the horizontal spacing between each component. The default is 50.
         /// </summary>
         /// <param name="value">The value that configures the componentspacingx.</param>
         public DiagramLayoutGridSettingsBuilder ComponentSpacingX(double value)
@@ -64,7 +64,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// defines the vertical spacing between each component. The default is 50.
+        /// Defines the vertical spacing between each component. The default is 50.
         /// </summary>
         /// <param name="value">The value that configures the componentspacingy.</param>
         public DiagramLayoutGridSettingsBuilder ComponentSpacingY(double value)

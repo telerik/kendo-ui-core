@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// 
+        /// The connector name. Predefined names include:
         /// </summary>
         /// <param name="value">The value that configures the name.</param>
         public DiagramShapeConnectorBuilder Name(string value)
@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// 
+        /// The connector description.
         /// </summary>
         /// <param name="value">The value that configures the description.</param>
         public DiagramShapeConnectorBuilder Description(string value)
@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// 
+        /// The function that positions the connector.
         /// </summary>
         /// <param name="value">The value that configures the position.</param>
         public DiagramShapeConnectorBuilder Position(string value)

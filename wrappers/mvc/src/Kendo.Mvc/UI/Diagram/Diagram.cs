@@ -22,6 +22,7 @@ namespace Kendo.Mvc.UI
             DataSource.ModelType(typeof(object));
 
             //>> Initialization
+        
             ConnectionDefaults = new DiagramConnectionDefaultsSettings();
                 
             Connections = new List<DiagramConnection>();

@@ -81,6 +81,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Fired when the user clicks on a shape or a connection. Will not fire when the start/down and end/up event points are not equal.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the click event.</param>
+        public DiagramEventBuilder Click(string handler)
+        {
+            Handler("click", handler);
+
+            return this;
+        }
+        
         //<< Handlers
     }
 }
