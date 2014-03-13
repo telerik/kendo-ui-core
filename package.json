@@ -36,6 +36,6 @@
        "karma-ie-launcher": "~0.1"
    },
    "scripts": {
-       "test": "./node_modules/.bin/grunt travis"
+       "test": "cp build/BrowserStackTunnel.jar ./node_modules/karma-browserstack-launcher/node_modules/browserstacktunnel-wrapper/bin/BrowserStackTunnel.jar && ./node_modules/.bin/grunt travis"
    }
 }
