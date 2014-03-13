@@ -49,7 +49,7 @@ kendo_module({
                 release: function(e) { highlightButton(that, e, false); },
                 // prevent the navigation when native scrolling is present
                 end: function(e) {
-                    if (kendo.mobile.appLevelNativeScrolling() || that.viewHasNativeScrolling()) {
+                    if (kendo.mobile.application.options.useNativeScrolling || that.viewHasNativeScrolling()) {
                         e.preventDefault();
                     }
                 }

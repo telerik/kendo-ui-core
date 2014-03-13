@@ -868,7 +868,7 @@ kendo_module({
                 },
                 // prevent the navigation when native scrolling is present
                 end: function(e) {
-                    if (kendo.mobile.appLevelNativeScrolling() || listView.viewHasNativeScrolling()) {
+                    if (kendo.mobile.application.options.useNativeScrolling || listView.viewHasNativeScrolling()) {
                         e.preventDefault();
                     }
                 }
