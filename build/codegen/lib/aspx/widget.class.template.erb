@@ -55,16 +55,6 @@ namespace <%= csharp_namespace %>
             serializer.RegisterConverters(converters);
         }
 
-        private string SerializeSettings()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("{");
-            #region [ Properties Serialization ]
-            #endregion [ Properties Serialization ]
-            sb.Append("}");
-            return sb.ToString();
-        }
-
         #endregion [ Private Members ]
 
         #region [ RadWebControl Overrides ]
