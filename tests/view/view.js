@@ -19,7 +19,7 @@
     test("keeps DOM element when rendered by default", 1, function() {
         $('#content').remove();
         $(document.body).append('<div id="content">Foo</div>');
-        var view = new kendo.View("content");
+        var view = new kendo.View("content", { wrap: false });
         view.render();
         equal($('#content').length, 1);
     });
