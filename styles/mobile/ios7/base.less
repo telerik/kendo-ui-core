@@ -224,11 +224,9 @@
 
 .km-ios7 .km-loading,
 .km-ios7 .km-loader .km-loading-left,
-.km-ios7 .km-loader .km-loading-right,
 .km-root .km-ios7 .km-load-more.km-scroller-refresh .km-icon,
 .km-root .km-ios7 .km-scroller-pull.km-scroller-refresh .km-icon,
-.km-ios7 .km-scroller-refresh .km-loading-left,
-.km-ios7 .km-scroller-refresh .km-loading-right
+.km-ios7 .km-scroller-refresh .km-loading-left
 {
     font-size: 1em;
     display: inline-block;
@@ -236,42 +234,36 @@
     left: auto;
     width: .6em;
     height: .2em;
-    margin: 0 0 0;
+    margin: 0;
     border-radius: 1em;
     vertical-align: middle;
     -webkit-transform-origin: 160% 50%;
     transform-origin: 160% 50%;
+    background: currentcolor;
+    -webkit-transform: rotate(0deg);
     .animation(km-ios-spin 1s infinite steps(8));
+    box-shadow: 1.4em 0 rgba(0,0,0,.8);
 }
 
 .km-ios7 .km-loading,
-.km-ios7 .km-loader .km-loading-left,
-.km-ios7 .km-loader .km-loading-right
+.km-ios7 .km-loader .km-loading-left
 {
     margin: .2em 0 0;
 }
 
 .km-ios7 .km-loading:before,
 .km-ios7 .km-loading:after,
-.km-ios7 .km-loader .km-loading-left:before,
-.km-ios7 .km-loader .km-loading-left:after,
-.km-ios7 .km-loader .km-loading-right:before,
-.km-ios7 .km-loader .km-loading-right:after,
 .km-ios7 .km-load-more.km-scroller-refresh .km-icon:after,
 .km-ios7 .km-load-more.km-scroller-refresh .km-icon:before,
 .km-ios7 .km-scroller-pull.km-scroller-refresh .km-icon:after,
-.km-ios7 .km-scroller-pull.km-scroller-refresh .km-icon:before,
-.km-ios7 .km-scroller-refresh .km-loading-left:after,
-.km-ios7 .km-scroller-refresh .km-loading-left:before,
-.km-ios7 .km-scroller-refresh .km-loading-right:after,
-.km-ios7 .km-scroller-refresh .km-loading-right:before
+.km-ios7 .km-scroller-pull.km-scroller-refresh .km-icon:before
 {
+    color: inherit;
     content: "\a0";
     display: block;
     position: absolute;
     left: 0;
     top: 0;
-    opacity: .85;
     margin-top: 0;
     -webkit-transform-origin: inherit;
     transform-origin: inherit;
@@ -280,50 +272,47 @@
     width: inherit;
     height: inherit;
     border-radius: inherit;
-    background: inherit !important;
-    -webkit-background-clip: border-box !important;
-    -webkit-text-fill-color: inherit !important;
+    background: inherit;
+    -webkit-background-clip: border-box;
+    -webkit-text-fill-color: inherit;
+    box-shadow: 1.4em 0 rgba(0,0,0,.7);
 }
 
 .km-ios7 .km-loading:after,
-.km-ios7 .km-loader .km-loading-left:after,
-.km-ios7 .km-loader .km-loading-right:after,
 .km-ios7 .km-load-more.km-scroller-refresh .km-icon:after,
-.km-ios7 .km-scroller-pull.km-scroller-refresh .km-icon:after,
-.km-ios7 .km-scroller-refresh .km-loading-left:after,
-.km-ios7 .km-scroller-refresh .km-loading-right:after
+.km-ios7 .km-scroller-pull.km-scroller-refresh .km-icon:after
 {
-    opacity: .7;
     -webkit-transform: rotate(-90deg);
     transform: rotate(-90deg);
+    box-shadow: 1.4em 0 rgba(0,0,0,.6);
 }
 
 .km-ios7 .km-loader .km-loading-left,
 .km-ios7 .km-scroller-refresh .km-loading-left
 {
     margin-left: -.6em;
-    background: rgba(0,0,0,.5);
+    -webkit-transform: rotate(-135deg);
+    box-shadow: 1.4em 0 rgba(0,0,0,.5);
     .animation(km-ios-spin1 1s infinite steps(8));
 }
 
-.km-ios7 .km-loader .km-loading-right,
-.km-ios7 .km-scroller-refresh .km-loading-right
-{
-    margin-left: -.6em;
-    background: rgba(0,0,0,.5);
-    .animation(km-ios-spin2 1s infinite steps(8));
-}
-
-.km-ios7 .km-loader .km-loading-right:before,
-.km-ios7 .km-scroller-refresh .km-loading-right:before
-{
-    opacity: 1;
-}
-
-.km-ios7 .km-loader .km-loading-right:after,
-.km-ios7 .km-scroller-refresh .km-loading-right:after
+.km-ios7 .km-loading-left:after,
+.km-ios7 .km-loading-left:before,
+.km-ios7 .km-loading-right
 {
     display: none;
+}
+
+.km-ios7 .km-loading,
+.km-ios7 .km-loading:after,
+.km-ios7 .km-loading:before
+{
+    color: black;
+}
+
+.km-ios7 .km-loading-left
+{
+    color: rgba(0,0,0,.9);
 }
 
 @-webkit-keyframes km-ios-spin
@@ -338,12 +327,6 @@
     to { -webkit-transform: rotate(225deg); }
 }
 
-@-webkit-keyframes km-ios-spin2
-{
-    from { -webkit-transform: rotate(-270deg); }
-    to { -webkit-transform: rotate(90deg); }
-}
-
 @-moz-keyframes km-ios-spin
 {
     from { -moz-transform: rotate(0deg); }
@@ -356,12 +339,6 @@
     to { -moz-transform: rotate(225deg); }
 }
 
-@-moz-keyframes km-ios-spin2
-{
-    from { -moz-transform: rotate(-270deg); }
-    to { -moz-transform: rotate(90deg); }
-}
-
 @keyframes km-ios-spin
 {
     from { transform: rotate(0deg); }
@@ -372,12 +349,6 @@
 {
     from { transform: rotate(-135deg); }
     to { transform: rotate(225deg); }
-}
-
-@keyframes km-ios-spin2
-{
-    from { transform: rotate(-270deg); }
-    to { transform: rotate(90deg); }
 }
 
 
