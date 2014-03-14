@@ -94,6 +94,12 @@
     <CommandPlacement guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" priority="0x0300">
       <Parent guid="editorContextMenusCmdSet" id="cshtmlContextMenu"></Parent>
     </CommandPlacement>
+    <CommandPlacement guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" priority="0x0300">
+      <Parent guid="htmlEditorContextMenusCmdSet" id="htmlContextMenu2013"></Parent>
+    </CommandPlacement>
+    <CommandPlacement guid="guidKendoBootstrapperCmdSet" id="IdKendoLintDocumentationContextGroup" priority="0x0300">
+      <Parent guid="jsEditorContextMenusCmdSet" id="jsContextMenu2013"></Parent>
+    </CommandPlacement>
   </CommandPlacements>
 
   <Symbols>
@@ -134,14 +140,22 @@
     </GuidSymbol>
 
     <GuidSymbol name="editorContextMenusCmdSet" value="{D7E8C5E1-BDB8-11D0-9C88-0000F8040A53}">
-      <IDSymbol name="htmlContextMenu" value="0x0033"/>
       <!-- 51 in hex is 0x0033 -->
-      <IDSymbol name="jsContextMenu" value="0x0034"/>
+      <IDSymbol name="htmlContextMenu" value="0x0033"/>
       <!-- 52 in hex is 0x0034 -->
-      <IDSymbol name="aspxContextMenu" value="0x0035"/>
+      <IDSymbol name="jsContextMenu" value="0x0034"/>
       <!-- 53 in hex is 0x0035 // also applies to master pages -->
-      <IDSymbol name="cshtmlContextMenu" value="0x0036"/>
+      <IDSymbol name="aspxContextMenu" value="0x0035"/>
       <!-- 54 in hex is 0x0036 -->
+      <IDSymbol name="cshtmlContextMenu" value="0x0036"/>
+    </GuidSymbol>
+
+    <GuidSymbol name="htmlEditorContextMenusCmdSet" value="{78F03954-2FB8-4087-8CE7-59D71710B3BB}">
+      <IDSymbol name="htmlContextMenu2013" value="1"/>
+    </GuidSymbol>
+
+    <GuidSymbol name="jsEditorContextMenusCmdSet" value="{D309F791-903F-11D0-9EFC-00A0C911004F}">
+      <IDSymbol name="jsContextMenu2013" value="0x040d"/>
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{0ad36289-7c4c-444f-b141-12547734302f}" >
