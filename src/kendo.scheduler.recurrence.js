@@ -2551,7 +2551,9 @@ var __meta__ = {
                 that._endFields.toggleClass("k-state-disabled", !frequency);
                 that._repeatButton.text(messages.frequencies[frequency || "never"]);
 
-                that._destroyView();
+                that._pane.one("viewShow", function() {
+                    that._destroyView();
+                });
 
                 that._pane.navigate(returnViewId, that.options.animations.right);
             });
