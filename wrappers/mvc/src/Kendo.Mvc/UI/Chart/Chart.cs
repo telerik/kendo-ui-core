@@ -354,12 +354,7 @@ namespace Kendo.Mvc.UI
 
         private void ProcessDataSource()
         {
-            var binder = new DataSourceRequestModelBinder();
-
-            var controller = ViewContext.Controller;
-            var bindingContext = new ModelBindingContext() { ValueProvider = controller.ValueProvider };
-
-            var request = (DataSourceRequest)binder.BindModel(controller.ControllerContext, bindingContext);
+            DataSourceRequest request = new DataSourceRequest();
 
             DataSource.Process(request, true);
         }
@@ -370,7 +365,7 @@ namespace Kendo.Mvc.UI
             {
                 DataSource.Data = Data;
 
-                if (DataSource.CustomType == "aspnetmvc-ajax")
+                if (DataSource.CustomType == "aspnetmvc-ajax" && DataSource.Data != null)
                 {
                     ProcessDataSource();
                 }
