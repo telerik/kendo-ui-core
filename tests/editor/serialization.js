@@ -492,6 +492,12 @@ test("does not convert relative href/src URLs to absolute", function() {
     verifyCycle('<script src="foo"><\/script>');
 });
 
+test("filling empty elements does not trigger errors", function() {
+    var fixture = QUnit.fixture[0];
+    ok(Serializer.htmlToDom("<p><br></p>", fixture))
+    ok(Serializer.htmlToDom("<p><img></p>", fixture))
+});
+
 test("removes k-paste-container elements from content", function() {
     equal(serializeCycle('foo<p class="k-paste-container">bar</p>baz'), "foobaz");
 });

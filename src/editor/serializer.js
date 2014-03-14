@@ -46,7 +46,7 @@ var Serializer = {
                     node = node.firstChild;
                 }
 
-                if (node.nodeType == 1 && node.tagName.toLowerCase() != "img") {
+                if (node.nodeType == 1 && !dom.empty[dom.name(node)]) {
                     node.innerHTML = kendo.ui.editor.emptyElementContent;
                 }
             }
