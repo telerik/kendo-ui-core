@@ -487,7 +487,7 @@ var __meta__ = {
             shapeDefaults: {
                 background: "#0066cc",
                 connectorDefaults: {
-                    background: "#ffffff",
+                    background: WHITE,
                     stroke: {
                         color: "#384049"
                     },
@@ -497,6 +497,9 @@ var __meta__ = {
                             color: "#efefef"
                         }
                     }
+                },
+                content: {
+                    color: WHITE
                 }
             },
             editable: {
@@ -505,12 +508,12 @@ var __meta__ = {
                         type: "rectangle",
                         background: "#3d3d3d",
                         stroke: {
-                            color: "#ffffff"
+                            color: WHITE
                         },
                         hover: {
-                            background: "#ffffff",
+                            background: WHITE,
                             stroke: {
-                                color: "#ffffff"
+                                color: WHITE
                             }
                         }
                     }
@@ -518,18 +521,18 @@ var __meta__ = {
                 rotate: {
                     thumb: {
                         stroke: {
-                            color: "#ffffff"
+                            color: WHITE
                         },
-                        background: "#ffffff"
+                        background: WHITE
                     }
                 }
             },
             connectionDefaults: {
                 stroke: {
-                    color: "#ffffff"
+                    color: WHITE
                 },
                 content: {
-                    color: "#ffffff"
+                    color: WHITE
                 },
                 select: {
                     handles: {
