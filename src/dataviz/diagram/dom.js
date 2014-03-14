@@ -1195,7 +1195,7 @@
                 }
             },
             _hover: function (value) {
-                var color = this.options.stroke.color;
+                var color = (this.options.stroke || {}).color;
 
                 if (value && isDefined(this.options.hover.stroke.color)) {
                     color = this.options.hover.stroke.color;
@@ -1366,7 +1366,7 @@
             _initTheme: function(options) {
                 var diagram = this,
                     themes = dataviz.ui.themes || {},
-                    themeName = options.theme.toLowerCase(),
+                    themeName = ((options || {}).theme || "").toLowerCase(),
                     themeOptions = (themes[themeName] || {}).diagram;
 
                 diagram.options = deepExtend({}, themeOptions, diagram.options);

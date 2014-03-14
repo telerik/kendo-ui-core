@@ -1505,7 +1505,7 @@
 
             _createHandles: function() {
                 var editable = this.options.editable,
-                    handles, item, i, y;
+                    handles, item, i, y, x;
 
                 if (editable && editable.resize) {
                     handles = editable.resize.handles;
@@ -1564,7 +1564,7 @@
             _getHandleBounds: function (p) {
                 var editable = this.options.editable;
                 if (editable && editable.resize) {
-                    var handles = editable.resize.handles,
+                    var handles = editable.resize.handles || {},
                         w = handles.width,
                         h = handles.height,
                         r = new Rect(0, 0, w, h);

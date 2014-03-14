@@ -313,7 +313,7 @@ var __meta__ = {
             select: {
                 handles: {
                     width: 8,
-                    width: 8
+                    height: 8
                 }
             }
         }
