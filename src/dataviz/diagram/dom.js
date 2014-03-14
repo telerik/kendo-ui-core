@@ -2021,9 +2021,6 @@
                 }
                 this.isLayouting = false;
             },
-            findByUid: function (uid) {
-                return this.element.find(".k-shape[" + kendo.attr("uid") + "=" + uid + "]");
-            },
             /**
              * Gets a shape on the basis of its identifier.
              * @param id (string) the identifier of a shape.
