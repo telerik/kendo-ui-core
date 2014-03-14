@@ -210,17 +210,17 @@ echo $scheduler->render();
     }
     #alex {
         position: absolute;
-        left: 404px;
+        left: 630px;
         top: 81px;
     }
     #bob {
         position: absolute;
-        left: 519px;
+        left: 745px;
         top: 81px;
     }
     #charlie {
         position: absolute;
-        left: 634px;
+        left: 860px;
         top: 81px;
     }
 </style>
