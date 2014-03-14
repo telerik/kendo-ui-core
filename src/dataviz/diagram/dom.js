@@ -8,7 +8,8 @@
 
     (function ($, undefined) {
         // Imports ================================================================
-        var diagram = kendo.dataviz.diagram,
+        var dataviz = kendo.dataviz,
+            diagram = dataviz.diagram,
             ui = kendo.ui,
             Widget = ui.Widget,
             Class = kendo.Class,
@@ -129,10 +130,7 @@
                 connectors: diagram.DefaultConnectors,
                 rotation: {
                     angle: 0
-                },
-                editable: true,
-                resizable: true,
-                rotatable: true
+                }
             };
 
             Utils.simpleExtend(defaults, extra);
@@ -275,7 +273,7 @@
             init: function (options, model) {
                 var that = this;
                 Observable.fn.init.call(that);
-                that.options = deepExtend({id: diagram.randomId()}, that.options, options);
+                that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
                 that.isSelected = false;
                 that.model = model;
                 that.visual = new Group({
@@ -291,7 +289,6 @@
                     align: "center middle",
                     text: ""
                 },
-                editable: true,
                 selectable: true,
                 serializable: true,
                 enable: true
@@ -375,7 +372,7 @@
                 }
             },
             _canSelect: function () {
-                return this.options.selectable === true && this.diagram.options.selectable.type !== NONE;
+                return this.options.selectable && this.diagram.options.selectable.type !== NONE;
             }
         });
 
@@ -386,8 +383,8 @@
                 this.shape = shape;
             },
             options: {
-                width: DEFAULT_CONNECTOR_SIZE,
-                height: DEFAULT_CONNECTOR_SIZE,
+                width: 7,
+                height: 7,
                 background: DEFAULT_CONNECTION_BACKGROUND,
                 hover: {}
             },
@@ -421,7 +418,7 @@
 
         var Shape = DiagramElement.extend({
             init: function (options, model) {
-                var that = this, connector, i;
+                var that = this;
                 var diagram = options.diagram;
                 delete options.diagram; // avoid stackoverflow and reassign later on again
                 DiagramElement.fn.init.call(that, options, model);
@@ -432,12 +429,8 @@
                 that.shapeVisual = Shape.createShapeVisual(that.options);
                 that.visual.append(this.shapeVisual);
                 that.bounds(new Rect(options.x, options.y, Math.floor(options.width), Math.floor(options.height)));
-                var length = options.connectors.length;
-                for (i = 0; i < length; i++) {
-                    connector = new Connector(that, options.connectors[i]);
-                    that.connectors.push(connector);
-                }
                 // TODO: Swa added for phase 2; included here already because the GraphAdapter takes it into account
+                that._createConnectors();
                 that.parentContainer = null;
                 that.isContainer = false;
                 that.isCollapsed = false;
@@ -449,7 +442,26 @@
                     that.layout = options.layout.bind(options);
                 }
             },
+
             options: diagram.shapeDefaults(),
+
+            _createConnectors: function() {
+                var options = this.options,
+                    length = options.connectors.length,
+                    connectorDefaults = options.connectorDefaults,
+                    connector, i;
+
+                for (i = 0; i < length; i++) {
+                    connector = new Connector(
+                        this, deepExtend({},
+                            connectorDefaults,
+                            options.connectors[i]
+                        )
+                    );
+                    this.connectors.push(connector);
+                }
+            },
+
             bounds: function (value) {
                 var point, size, bounds, options;
                 options = this.options;
@@ -500,8 +512,7 @@
             position: function (point) {
                 if (point) {
                     this.bounds(new Rect(point.x, point.y, this._bounds.width, this._bounds.height));
-                }
-                else {
+                } else {
                     return this._bounds.topLeft();
                 }
             },
@@ -684,7 +695,24 @@
                 this._rotationOffset = new Point();
             },
             _hover: function (value) {
-                this.shapeVisual._hover(value);
+                var options = this.options,
+                    hover = options.hover,
+                    stroke = options.stroke,
+                    background = options.background;
+
+                if (value && isDefined(hover.stroke)) {
+                    stroke = deepExtend({}, stroke, hover.stroke);
+                }
+
+                if (value && isDefined(hover.background)) {
+                    background = hover.background;
+                }
+
+                this.shapeVisual.redraw({
+                    stroke: stroke,
+                    background: background
+                });
+
                 this.diagram._showConnectors(this, value);
             },
             _hitTest: function (value) {
@@ -792,19 +820,6 @@
             } else if (isFunction(visualTemplate)) { // custom template
                 return functionShape(visualTemplate, this, shapeDefaults);
             } else if (isString(type)) {
-//                var origin = visualTemplate.origin || "internal";
-//
-//                if (origin.toLocaleLowerCase() === "external"){
-//                    var libraryShapeName = visualTemplate.library;
-//                    return externalLibraryShape(libraryShapeName, options, shapeDefaults);
-//                } else {
-//                    var definition = visualTemplate.definition;
-//                    if (type === "svg") {
-//                        return svgShape(definition, shapeDefaults);
-//                    } else if (type.toLocaleLowerCase() === "function") {
-//                        return functionShape(definition, this, shapeDefaults);
-//                    }
-//                }
                 return simpleShape(shapeDefaults.type.toLocaleLowerCase(), shapeDefaults);
             } else {
                 return new Rectangle(shapeDefaults);
@@ -833,15 +848,13 @@
                 that.refresh();
             },
             options: {
-                stroke: {
-                    color: "gray"
-                },
                 hover: {
                     stroke: {}
                 },
                 startCap: NONE,
                 endCap: NONE,
-                points: []
+                points: [],
+                selectable: true
             },
 
             /**
@@ -1005,7 +1018,7 @@
                             if (type === SINGLE) {
                                 this.diagram.select(false);
                             }
-                            this.adorner = new ConnectionEditAdorner(this);
+                            this.adorner = new ConnectionEditAdorner(this, this.options.select);
                             diagram._adorn(this.adorner, true);
                             diagram._selectedItems.push(this);
                             selected.push(this);
@@ -1182,7 +1195,7 @@
                 }
             },
             _hover: function (value) {
-                var color = this.options.stroke.color;
+                var color = (this.options.stroke || {}).color;
 
                 if (value && isDefined(this.options.hover.stroke.color)) {
                     color = this.options.hover.stroke.color;
@@ -1244,6 +1257,7 @@
             init: function (element, options) {
                 var that = this;
                 Widget.fn.init.call(that, element, options);
+                that._initTheme(options);
                 that._extendLayoutOptions(that.options);
                 element = that.element; // the hosting element
 
@@ -1267,17 +1281,20 @@
                 this._attachEvents();
                 that._initialize();
                 that._fetchFreshData();
-                this._resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
+                this._resizingAdorner = new ResizingAdorner(this, { editable: this.options.editable });
                 this._connectorsAdorner = new ConnectorsAdorner(this);
 
                 this._adorn(this._resizingAdorner, true);
                 this._adorn(this._connectorsAdorner, true);
-                that.element.on("mousemove" + NS, proxy(that._mouseMove, that))
+                that.element
+                    .on("mousemove" + NS, proxy(that._mouseMove, that))
                     .on("mouseup" + NS, proxy(that._mouseUp, that))
                     .on("dblclick" + NS, proxy(that._doubleClick, that))
                     .on("mousedown" + NS, proxy(that._mouseDown, that))
                     .mousewheel(proxy(that._wheel, that), { ns: NS })
-                    .on("keydown" + NS, proxy(that._keydown, that));
+                    .on("keydown" + NS, proxy(that._keydown, that))
+                    .on("mouseover" + NS, proxy(that._mouseover, that))
+                    .on("mouseout" + NS, proxy(that._mouseout, that));
                 that.selector = new Selector(that);
                 // TODO: We may consider using real Clipboard API once is supported by the standard.
                 that._clipboard = [];
@@ -1285,7 +1302,7 @@
                 that._initEditor();
                 that._autosizeCanvas();
 
-                if(that.options.layout) {
+                if (that.options.layout) {
                     that.layout(that.options.layout);
                 }
                 this.pauseMouseHandlers = false;
@@ -1300,8 +1317,11 @@
                 draggable: true,
                 template: "",
                 autoBind: true,
-                resizable: true,
-                rotatable: true,
+                editable: {
+                    rotate: {},
+                    resize: {},
+                    text: true
+                },
                 useScroller: true,
                 tooltip: { enabled: true, format: "{0}" },
                 copy: {
@@ -1323,13 +1343,34 @@
                     size: 10,
                     angle: 10
                 },
-                shapeDefaults: diagram.shapeDefaults({undoable: true}),
+                shapeDefaults: diagram.shapeDefaults({ undoable: true }),
                 connectionDefaults: {},
                 shapes: [],
                 connections: []
             },
 
             events: [ZOOM, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
+
+            _mouseover: function(e) {
+                if (e.target._hover) {
+                    e.target._hover(true, e.target._kendoElement);
+                }
+            },
+
+            _mouseout: function(e) {
+                if (e.target._hover) {
+                    e.target._hover(false, e.target._kendoElement);
+                }
+            },
+
+            _initTheme: function(options) {
+                var diagram = this,
+                    themes = dataviz.ui.themes || {},
+                    themeName = ((options || {}).theme || "").toLowerCase(),
+                    themeOptions = (themes[themeName] || {}).diagram;
+
+                diagram.options = deepExtend({}, themeOptions, diagram.options);
+            },
 
             _createShapes: function() {
                 var that = this,
@@ -1476,8 +1517,7 @@
                 if (undoable) {
                     var unit = new diagram.AddConnectionUnit(connection, this);
                     this.undoRedoService.add(unit);
-                }
-                else {
+                } else {
                     connection.diagram = this;
                     this.mainLayer.append(connection.visual);
                     this.connections.push(connection);
@@ -1547,8 +1587,7 @@
                     for (var i = 0; i < items.length; i++) {
                         this._removeItem(items[i], undoable);
                     }
-                }
-                else if (items instanceof Shape || items instanceof Connection) {
+                } else if (items instanceof Shape || items instanceof Connection) {
                     this._removeItem(items, undoable);
                 }
                 if (undoable) {
@@ -2045,7 +2084,7 @@
              */
             editor: function (item, options) { // support custome editors via the options for vNext
                 var editor = this._editor;
-                if (isUndefined(item.options.editable) || item.options.editable === true) {
+                if (isUndefined(item.options.editable) || item.options.editable.text) {
                     editor.options = deepExtend(this.options.editor, options);
                     this._editItem = item;
                     this._showEditor();
@@ -2377,8 +2416,7 @@
             _addItem: function (item) {
                 if (item instanceof Shape) {
                     this.addShape(item);
-                }
-                else if (item instanceof Connection) {
+                } else if (item instanceof Connection) {
                     this.addConnection(item);
                 }
             },

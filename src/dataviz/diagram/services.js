@@ -60,7 +60,6 @@
             }
         }
 
-
         var PositionAdapter = kendo.Class.extend({
             init: function (layoutState) {
                 this.layoutState = layoutState;
@@ -152,23 +151,6 @@
                         }
                     );
                 }
-
-                /*for (var i = 0; i < graph.links.length; i++) {
-                 var link = graph.links[i];
-                 var p = []
-                 if (link.points != null) {
-                 p.addRange(link.points);
-                 }
-                 */
-                /* var sb = link.source.associatedShape.bounds();
-                 p.prepend(new diagram.Point(sb.x, sb.y));
-                 var eb = link.target.associatedShape.bounds();
-                 p.append(new diagram.Point(eb.x, eb.y));*/
-                /*
-
-                 link.associatedConnection.points(p);
-                 }*/
-
             }
         });
 
@@ -921,37 +903,28 @@
                     if (testKey(key, "a")) {// A: select all
                         diagram.select("All");
                         return true;
-                    }
-                    else if (testKey(key, "z")) {// Z: undo
+                    } else if (testKey(key, "z")) {// Z: undo
                         diagram.undo();
                         return true;
-                    }
-                    else if (testKey(key, "y")) {// y: redo
+                    } else if (testKey(key, "y")) {// y: redo
                         diagram.redo();
                         return true;
-                    }
-                    else if (testKey(key, "c")) {
+                    } else if (testKey(key, "c")) {
                         diagram.copy();
-                    }
-                    else if (testKey(key, "x")) {
+                    } else if (testKey(key, "x")) {
                         diagram.cut();
-                    }
-                    else if (testKey(key, "v")) {
+                    } else if (testKey(key, "v")) {
                         diagram.paste();
-                    }
-                    else if (testKey(key, "l")) {
+                    } else if (testKey(key, "l")) {
                         diagram.layout();
-                    }
-                    else if (testKey(key, "d")) {
+                    } else if (testKey(key, "d")) {
                         diagram.copy();
                         diagram.paste();
                     }
-                }
-                else if (key === 46 || key === 8) {// del: deletion
+                } else if (key === 46 || key === 8) {// del: deletion
                     diagram.remove(diagram.select(), true);
                     return true;
-                }
-                else if (key === 27) {// ESC: stop any action
+                } else if (key === 27) {// ESC: stop any action
                     this._discardNewConnection();
                     diagram.select(false);
                     return true;
@@ -1063,8 +1036,7 @@
                         return;
                     }
                     hit = undefined;
-                }
-                else {
+                } else {
                     this.hoveredAdorner = undefined;
                 }
 
@@ -1299,11 +1271,7 @@
                 that.visual.append(that.epVisual);
             },
             options: {
-                handles: {
-                    width: 8,
-                    height: 8,
-                    background: "Red"
-                }
+                handles: {}
             },
             _getCursor: function () {
                 return Cursors.move;
@@ -1445,30 +1413,27 @@
         });
 
         function hitToOppositeSide(hit, bounds) {
+            var result;
+
             if (hit.x == -1 && hit.y == -1) {
-                return bounds.bottomRight();
+                result = bounds.bottomRight();
+            } else if (hit.x == 1 && hit.y == 1) {
+                result = bounds.topLeft();
+            } else if (hit.x == -1 && hit.y == 1) {
+                result = bounds.topRight();
+            } else if (hit.x == 1 && hit.y == -1) {
+                result = bounds.bottomLeft();
+            } else if (hit.x === 0 && hit.y == -1) {
+                result = bounds.bottom();
+            } else if (hit.x === 0 && hit.y == 1) {
+                result = bounds.top();
+            } else if (hit.x == 1 && hit.y === 0) {
+                result = bounds.left();
+            } else if (hit.x == -1 && hit.y === 0) {
+                result = bounds.right();
             }
-            else if (hit.x == 1 && hit.y == 1) {
-                return bounds.topLeft();
-            }
-            else if (hit.x == -1 && hit.y == 1) {
-                return bounds.topRight();
-            }
-            else if (hit.x == 1 && hit.y == -1) {
-                return bounds.bottomLeft();
-            }
-            else if (hit.x === 0 && hit.y == -1) {
-                return bounds.bottom();
-            }
-            else if (hit.x === 0 && hit.y == 1) {
-                return bounds.top();
-            }
-            else if (hit.x == 1 && hit.y === 0) {
-                return bounds.left();
-            }
-            else if (hit.x == -1 && hit.y === 0) {
-                return bounds.right();
-            }
+
+            return result;
         }
 
         var ResizingAdorner = AdornerBase.extend({
@@ -1478,21 +1443,12 @@
                 that._manipulating = false;
                 that.map = [];
                 that.shapes = [];
-                for (var x = -1; x <= 1; x++) {
-                    for (var y = -1; y <= 1; y++) {
-                        if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
-                            var visual = new Rectangle(that.options.handles);
-                            that.map.push({ x: x, y: y, visual: visual });
-                            that.visual.append(visual);
-                        }
-                    }
-                }
-                that.text = new TextBlock();
-                that.visual.append(that.text);
                 that.rect = new Rectangle(that.options.rect);
                 that.visual.append(that.rect);
-                that.rotationThumb = new Path(that.options.rotationThumb);
-                that.visual.append(that.rotationThumb);
+                that._createHandles();
+                that.text = new TextBlock();
+                that.visual.append(that.text);
+                that._createThumb();
                 that.redraw();
                 that.diagram.bind("select", function (e) {
                     that._initialize(e.selected);
@@ -1517,49 +1473,79 @@
                 that.refresh();
             },
             options: {
-                resizable: true,
-                rotatable: true,
-                handles: {
-                    width: 7,
-                    height: 7,
-                    background: "DimGray"
-                },
                 rect: {
                     stroke: {
-                        color: "#778899",
+                        color: "#ffffff",
                         width: 1,
-                        dashType: "dash"
+                        dashType: "dot"
                     },
                     background: "none"
                 },
-                rotationThumb: {
-                    data: "M6.50012,0C8.21795,2.56698e-009 9.78015,0.666358 10.9423,1.75469L11.0482,1.85645L12.6557,0.541992L12.697,6.41699L7,5.16667L8.69918,3.77724L8.68162,3.76281C8.08334,3.28539 7.32506,3 6.50012,3C4.56709,3 3.00006,4.567 3.00006,6.5C3.00006,8.433 4.56709,10 6.50012,10C7.82908,10 8.98505,9.25935 9.57775,8.16831L9.59433,8.13594L12.333,9.37087L12.2891,9.45914C11.2124,11.5613 9.02428,13 6.50012,13C2.9102,13 -7.45058e-008,10.0899 0,6.5C-7.45058e-008,2.91015 2.9102,2.93369e-009 6.50012,0z",
-                    y: -50,
-                    thumbWidth: 10
+                editable: {
+                    rotate: {
+                        thumb: {
+                            data: "M7.115,16C3.186,16,0,12.814,0,8.885C0,5.3,2.65,2.336,6.099,1.843V0l4.85,2.801l-4.85,2.8V3.758 c-2.399,0.473-4.21,2.588-4.21,5.126c0,2.886,2.34,5.226,5.226,5.226s5.226-2.34,5.226-5.226c0-1.351-0.513-2.582-1.354-3.51 l1.664-0.961c0.988,1.222,1.581,2.777,1.581,4.472C14.23,12.814,11.045,16,7.115,16L7.115,16z",
+                            y: -30
+                        }
+                    }
                 },
-                offset: 6
+                offset: 10
             },
+
+            _createThumb: function() {
+                var that = this,
+                    editable = that.options.editable,
+                    rotate = editable.rotate;
+
+                if (editable && rotate) {
+                    that.rotationThumb = new Path(rotate.thumb);
+                    that.visual.append(that.rotationThumb);
+                }
+            },
+
+            _createHandles: function() {
+                var editable = this.options.editable,
+                    handles, item, i, y, x;
+
+                if (editable && editable.resize) {
+                    handles = editable.resize.handles;
+                    for (x = -1; x <= 1; x++) {
+                        for (y = -1; y <= 1; y++) {
+                            if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
+                                item = new Rectangle(handles);
+                                item.domElement._hover = $.proxy(this._hover, this);
+                                this.map.push({ x: x, y: y, visual: item });
+                                this.visual.append(item);
+                            }
+                        }
+                    }
+                }
+            },
+
             bounds: function (value) {
                 if (value) {
                     this._innerBounds = value.clone();
                     this._bounds = this.diagram.modelToLayer(value).inflate(this.options.offset, this.options.offset);
-                }
-                else {
+                } else {
                     return this._bounds;
                 }
             },
             _hitTest: function (p) {
                 var tp = this.diagram.modelToLayer(p),
+                    editable = this.options.editable,
                     i, hit, handleBounds, handlesCount = this.map.length, handle;
+
                 if (this._angle) {
                     tp = tp.clone().rotate(this._bounds.center(), this._angle);
                 }
-                if (this.options.rotatable && this._rotationThumbBounds) {
+
+                if (editable && editable.rotate && this._rotationThumbBounds) {
                     if (this._rotationThumbBounds.contains(tp)) {
                         return new Point(-1, -2);
                     }
                 }
-                if (this.options.resizable) {
+
+                if (editable && editable.resize) {
                     for (i = 0; i < handlesCount; i++) {
                         handle = this.map[i];
                         hit = new Point(handle.x, handle.y);
@@ -1570,42 +1556,46 @@
                         }
                     }
                 }
+
                 if (this._bounds.contains(tp)) {
                     return new Point(0, 0);
                 }
             },
             _getHandleBounds: function (p) {
-                var w = this.options.handles.width, h = this.options.handles.height,
-                    r = new Rect(0, 0, w, h);
-                if (p.x < 0) {
-                    r.x = -w;
+                var editable = this.options.editable;
+                if (editable && editable.resize) {
+                    var handles = editable.resize.handles || {},
+                        w = handles.width,
+                        h = handles.height,
+                        r = new Rect(0, 0, w, h);
+
+                    if (p.x < 0) {
+                        r.x = - w / 2;
+                    } else if (p.x === 0) {
+                        r.x = Math.floor(this._bounds.width / 2) - w / 2;
+                    } else if (p.x > 0) {
+                        r.x = this._bounds.width + 1.0 - w / 2;
+                    } if (p.y < 0) {
+                        r.y = - h / 2;
+                    } else if (p.y === 0) {
+                        r.y = Math.floor(this._bounds.height / 2) - h / 2;
+                    } else if (p.y > 0) {
+                        r.y = this._bounds.height + 1.0 - h / 2;
+                    }
+
+                    return r;
                 }
-                else if (p.x === 0) {
-                    r.x = Math.floor(this._bounds.width / 2) - w / 2;
-                }
-                else if (p.x > 0) {
-                    r.x = this._bounds.width + 1.0;
-                }
-                if (p.y < 0) {
-                    r.y = -h;
-                }
-                else if (p.y === 0) {
-                    r.y = Math.floor(this._bounds.height / 2) - h / 2;
-                }
-                else if (p.y > 0) {
-                    r.y = this._bounds.height + 1.0;
-                }
-                return r;
             },
             _getCursor: function (point) {
                 var hit = this._hitTest(point);
-                if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.resizable) {
+                if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.editable && this.options.editable.resize) {
                     var angle = this._angle;
                     if (angle) {
                         angle = 360 - angle;
                         hit.rotate(new Point(0, 0), angle);
                         hit = new Point(Math.round(hit.x), Math.round(hit.y));
                     }
+
                     if (hit.x == -1 && hit.y == -1) {
                         return "nw-resize";
                     }
@@ -1633,23 +1623,16 @@
                 }
                 return this._manipulating ? Cursors.move : Cursors.select;
             },
-            _initialize: function () {
+            _initialize: function() {
                 var that = this, i, item,
-                    items = this.diagram.select(),
-                    resizable = that.options.resizable,
-                    rotatable = that.options.rotatable;
+                    items = that.diagram.select();
+
                 that.shapes = [];
                 for (i = 0; i < items.length; i++) {
                     item = items[i];
                     if (item instanceof diagram.Shape) {
                         that.shapes.push(item);
                         item._rotationOffset = new Point();
-                        if (item.options.resizable !== undefined) {
-                            resizable = resizable && item.options.resizable;
-                        }
-                        if (item.options.rotatable !== undefined) {
-                            rotatable = rotatable && item.options.rotatable;
-                        }
                     }
                 }
 
@@ -1659,7 +1642,7 @@
                 that._positions();
                 that.refreshBounds();
                 that.refresh();
-                that.redraw({resizable: resizable, rotatable: rotatable});
+                that.redraw();
             },
             _rotates: function () {
                 var that = this, i, shape;
@@ -1677,7 +1660,27 @@
                     that.initialStates.push(shape.bounds());
                 }
             },
-            _hover: function () {
+            _hover: function(value, element) {
+                var editable = this.options.editable;
+                if (editable && editable.resize) {
+                    var handleOptions = editable.resize.handles,
+                        hover = handleOptions.hover,
+                        stroke = handleOptions.stroke,
+                        background = handleOptions.background;
+
+                    if (value && Utils.isDefined(hover.stroke)) {
+                        stroke = deepExtend({}, stroke, hover.stroke);
+                    }
+
+                    if (value && Utils.isDefined(hover.background)) {
+                        background = hover.background;
+                    }
+
+                    element.redraw({
+                        stroke: stroke,
+                        background: background
+                    });
+                }
             },
             start: function (p) {
                 this._sp = p;
@@ -1691,31 +1694,31 @@
                     this.shapeStates.push(shape.bounds());
                 }
             },
-            redraw: function (options) {
+            redraw: function () {
                 var that = this, i, handle,
-                    display = (options && options.resizable !== undefined && options.resizable === false) ? "none" : "inline",
-                    rotationDisplay = (options && options.rotatable !== undefined && options.rotatable === false) ? "none" : "inline";
+                    editable = that.options.editable,
+                    resize = editable.resize,
+                    rotate = editable.rotate,
+                    display = editable && resize ? "inline" : "none",
+                    rotationDisplay = editable && rotate ? "inline" : "none";
+
                 for (i = 0; i < this.map.length; i++) {
                     handle = this.map[i];
                     $(handle.visual.domElement).css("display", display);
                 }
-                $(that.rotationThumb.domElement).css("display", rotationDisplay);
+                if (that.rotationThumb) {
+                    $(that.rotationThumb.domElement).css("display", rotationDisplay);
+                }
             },
             move: function (handle, p) {
-                var delta ,
-                    dragging,
+                var delta, dragging,
                     dtl = new Point(),
                     dbr = new Point(),
-                    bounds,
-                    center,
-                    shape,
-                    i,
-                    angle,
-                    newBounds,
-                    changed = 0,
-                    staticPoint,
-                    scaleX,
-                    scaleY;
+                    bounds, center, shape,
+                    i, angle, newBounds,
+                    changed = 0, staticPoint,
+                    scaleX, scaleY;
+
                 if (handle.y === -2 && handle.x === -1) {
                     center = this._innerBounds.center();
                     this._angle = this._truncateAngle(Utils.findAngle(center, p));
@@ -1739,29 +1742,25 @@
                         }
                         delta = thr;
                         this._lp = new Point(this._lp.x + thr.x, this._lp.y + thr.y);
-                    }
-                    else {
+                    } else {
                         delta = p.minus(this._cp);
                     }
 
                     if (handle.x === 0 && handle.y === 0) {
                         dbr = dtl = delta; // dragging
                         dragging = true;
-                    }
-                    else {
+                    } else {
                         if (this._angle) { // adjust the delta so that resizers resize in the correct direction after rotation.
                             delta.rotate(new Point(0, 0), this._angle);
                         }
                         if (handle.x == -1) {
                             dtl.x = delta.x;
-                        }
-                        else if (handle.x == 1) {
+                        } else if (handle.x == 1) {
                             dbr.x = delta.x;
                         }
                         if (handle.y == -1) {
                             dtl.y = delta.y;
-                        }
-                        else if (handle.y == 1) {
+                        } else if (handle.y == 1) {
                             dbr.y = delta.y;
                         }
                     }
@@ -1777,8 +1776,7 @@
                         bounds = shape.bounds();
                         if (dragging) {
                             newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
-                        }
-                        else {
+                        } else {
                             newBounds = bounds.clone();
                             newBounds.scale(scaleX, scaleY, staticPoint, this._innerBounds.center(), shape.rotate().angle);
                             var newCenter = newBounds.center(); // fixes the new rotation center.
@@ -1849,8 +1847,7 @@
                     if (this._rotating) {
                         unit = new RotateUnit(this, this.shapes, this.initialRotates);
                         this._rotating = false;
-                    }
-                    else {
+                    } else {
                         if (this.diagram.ruler) {
                             for (var i = 0; i < this.shapes.length; i++) {
                                 var shape = this.shapes[i];
@@ -1891,13 +1888,13 @@
 
                     var center = new Point(bounds.width / 2, bounds.height / 2);
                     this.visual.rotate(this._angle, center);
-                    this.rect.redraw({width: bounds.width, height: bounds.height});
+                    this.rect.redraw({ width: bounds.width, height: bounds.height });
                     if (this.rotationThumb) {
-                        this._rotationThumbBounds = new Rect(bounds.center().x, bounds.y + this.options.rotationThumb.y, 0, 0).inflate(this.options.rotationThumb.thumbWidth);
-                        this.rotationThumb.redraw({x: bounds.width / 2 - this.options.rotationThumb.thumbWidth / 2});
+                        var thumb = this.options.editable.rotate.thumb;
+                        this._rotationThumbBounds = new Rect(bounds.center().x, bounds.y + thumb.y, 0, 0).inflate(thumb.width);
+                        this.rotationThumb.redraw({ x: bounds.width / 2 - thumb.width / 2 });
                     }
-                }
-                else {
+                } else {
                     this.visual.visible(false);
                 }
             }
@@ -1953,7 +1950,23 @@
                 this.refresh();
             },
             _hover: function (value) {
-                this.visual.background(value ? this.options.hover.background : this.options.background);
+                var options = this.options,
+                    hover = options.hover,
+                    stroke = options.stroke,
+                    background = options.background;
+
+                if (value && Utils.isDefined(hover.stroke)) {
+                    stroke = deepExtend({}, stroke, hover.stroke);
+                }
+
+                if (value && Utils.isDefined(hover.background)) {
+                    background = hover.background;
+                }
+
+                this.visual.redraw({
+                    stroke: stroke,
+                    background: background
+                });
             },
             refresh: function () {
                 var p = this._c.shape.diagram.modelToView(this._c.position()),

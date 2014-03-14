@@ -6,7 +6,9 @@
     module("Selection tests", {
         setup: function () {
             QUnit.fixture.html('<div id=canvas />');
-            $("#canvas").kendoDiagram();
+            $("#canvas").kendoDiagram({
+                theme: "black"
+            });
 
             d = $("#canvas").getKendoDiagram();
             randomDiagram(d);

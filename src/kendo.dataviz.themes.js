@@ -287,12 +287,45 @@ var __meta__ = {
         }
     };
 
+    var diagramBaseTheme = {
+        shapeDefaults: {
+            hover: {
+                opacity: 0.2
+            }
+        },
+        editable: {
+            resize: {
+                handles: {
+                    width: 7,
+                    height: 7
+                }
+            },
+            rotate: {
+                thumb: {
+                    width: 14
+                }
+            }
+        },
+        connectionDefaults: {
+            stroke: {
+                width: 2
+            },
+            select: {
+                handles: {
+                    width: 8,
+                    height: 8
+                }
+            }
+        }
+    };
+
     var themes = ui.themes,
         registerTheme = ui.registerTheme = function(themeName, options) {
             var result = {};
             // Apply base theme
             result.chart = deepExtend({}, chartBaseTheme, options.chart);
             result.gauge = deepExtend({}, gaugeBaseTheme, options.gauge);
+            result.diagram = deepExtend({}, diagramBaseTheme, options.diagram);
 
             // Copy the line/area chart settings for their vertical counterparts
             var defaults = result.chart.seriesDefaults;
@@ -436,7 +469,6 @@ var __meta__ = {
             },
             scale: {
                 rangePlaceholderColor: "#1d1d1d",
-
                 labels: {
                     color: WHITE
                 },
@@ -448,6 +480,67 @@ var __meta__ = {
                 },
                 line: {
                     color: WHITE
+                }
+            }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#0066cc",
+                connectorDefaults: {
+                    background: WHITE,
+                    stroke: {
+                        color: "#384049"
+                    },
+                    hover: {
+                        background: "#3d3d3d",
+                        stroke: {
+                            color: "#efefef"
+                        }
+                    }
+                },
+                content: {
+                    color: WHITE
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        type: "rectangle",
+                        background: "#3d3d3d",
+                        stroke: {
+                            color: WHITE
+                        },
+                        hover: {
+                            background: WHITE,
+                            stroke: {
+                                color: WHITE
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: WHITE
+                        },
+                        background: WHITE
+                    }
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: WHITE
+                },
+                content: {
+                    color: WHITE
+                },
+                select: {
+                    handles: {
+                        background: "#3d3d3d",
+                        stroke: {
+                            color: "#efefef"
+                        }
+                    }
                 }
             }
         }
