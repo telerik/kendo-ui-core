@@ -1871,7 +1871,10 @@
                 return unit;
             },
             refreshBounds: function () {
-                var bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getBoundingBox(this.shapes, true);
+                var bounds = this.shapes.length == 1 ?
+                    this.shapes[0].bounds().clone() :
+                    this.diagram.boundingBox(this.shapes, true);
+
                 this.bounds(bounds);
             },
             refresh: function () {
