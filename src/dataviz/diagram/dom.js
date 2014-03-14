@@ -1697,7 +1697,7 @@
                     rect = item.bounds(TRANSFORMED);
                 }
                 else if (isArray(item)) {
-                    rect = this.getBoundingBox(item);
+                    rect = this.boundingBox(item);
                 }
                 else if (item instanceof Rect) {
                     rect = item.clone();
@@ -1904,7 +1904,7 @@
              * @param origin Boolean. Pass 'true' if you need to get the bounding box of the shapes without their rotation offset.
              * @returns {Rect}
              */
-            getBoundingBox: function (items, origin) {
+            boundingBox: function (items, origin) {
                 var rect = Rect.empty(), temp,
                     di = isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
                 if (di.shapes.length > 0) {
@@ -2020,9 +2020,6 @@
                     this.undoRedoService.add(unit);
                 }
                 this.isLayouting = false;
-            },
-            findByUid: function (uid) {
-                return this.element.find(".k-shape[" + kendo.attr("uid") + "=" + uid + "]");
             },
             /**
              * Gets a shape on the basis of its identifier.
@@ -2524,7 +2521,7 @@
                     zoom = diagram.zoom(),
                     viewport = diagram.element,
                     viewportSize = new Rect(0, 0, viewport.width(), viewport.height()),
-                    cumulativeSize = diagram.getBoundingBox(diagram.shapes);
+                    cumulativeSize = diagram.boundingBox(diagram.shapes);
 
                 cumulativeSize.width = (cumulativeSize.width + cumulativeSize.x) * zoom;
                 cumulativeSize.height = (cumulativeSize.height + cumulativeSize.y) * zoom;
