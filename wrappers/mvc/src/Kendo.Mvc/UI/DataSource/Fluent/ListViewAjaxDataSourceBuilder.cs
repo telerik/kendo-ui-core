@@ -12,6 +12,7 @@
         {
         }
 
+#if !MVC3
         /// <summary>
         /// Use it to configure WebApi binding.
         /// </summary>        
@@ -21,6 +22,7 @@
 
             return new WebApiDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
+#endif
 
         /// <summary>
         /// Use it to configure Custom binding.

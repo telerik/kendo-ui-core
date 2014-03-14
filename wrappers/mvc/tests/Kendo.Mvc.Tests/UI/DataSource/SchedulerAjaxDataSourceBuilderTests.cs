@@ -16,6 +16,7 @@
             builder = new SchedulerAjaxDataSourceBuilder<Customer>(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
         }
 
+#if !MVC3
         [Fact]
         public void Webapi_should_return_webapi_datasource_builder()
         {
@@ -28,6 +29,7 @@
             builder.WebApi();
             dataSource.Type.ShouldEqual(DataSourceType.WebApi);
         }
+#endif
 
         [Fact]
         public void Filter_should_return_webapi_datasource_builder()

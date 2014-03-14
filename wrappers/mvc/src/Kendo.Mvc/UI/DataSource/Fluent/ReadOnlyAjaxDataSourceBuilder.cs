@@ -16,6 +16,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
         }
 
+#if !MVC3
         /// <summary>
         /// Use it to configure WebApi binding.
         /// </summary>
@@ -25,7 +26,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new ReadOnlyWebApiDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
-
+#endif
 
         /// <summary>
         /// Use it to configure Custom binding.

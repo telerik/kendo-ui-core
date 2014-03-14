@@ -41,6 +41,7 @@ namespace Kendo.Mvc.UI.Fluent
             return new ServerDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
 
+#if !MVC3
         /// <summary>
         /// Use it to configure WebApi binding.
         /// </summary>
@@ -50,7 +51,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new AjaxDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
-
+#endif
         /// <summary>
         /// Use it to configure Custom binding.
         /// </summary>
