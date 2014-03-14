@@ -905,6 +905,11 @@ namespace Kendo.Mvc.UI
                     ProcessDataSource();
                 }
 
+                if (DataSource.Schema.Model.Id != null)
+                {
+                    DataKeys.Add(DataSource.Schema.Model.Id);
+                }
+
                 var renderingData = CreateRenderingData();
 
                 var functionalData = CreateFunctionalData();
@@ -1048,11 +1053,6 @@ namespace Kendo.Mvc.UI
             var request = (DataSourceRequest)binder.BindModel(controller.ControllerContext, bindingContext);
 
             DataSource.Process(request, !EnableCustomBinding);
-
-            if (DataSource.Schema.Model.Id != null)
-            {
-                DataKeys.Add(DataSource.Schema.Model.Id);
-            }
         }
 
         private GridRenderingData CreateRenderingData()
@@ -1311,31 +1311,25 @@ namespace Kendo.Mvc.UI
 
             if (Editable.Enabled)
             {
-                if (HasCommandOfType<GridEditActionCommand>())
+                if (DataSource.Type != DataSourceType.Custom)
                 {
-                    if (DataSource.Type != DataSourceType.Custom)
+                    if (HasCommandOfType<GridEditActionCommand>())
                     {
                         if (!DataSource.Transport.Update.HasValue())
                         {
                             throw new NotSupportedException(Exceptions.EditCommandRequiresUpdate);
                         }
                     }
-                }
 
-                if (HasCommandOfType<GridDestroyActionCommand>())
-                {
-                    if (DataSource.Type != DataSourceType.Custom)
+                    if (HasCommandOfType<GridDestroyActionCommand>())
                     {
                         if (!DataSource.Transport.Destroy.HasValue() && Editable.Mode != GridEditMode.InCell)
                         {
                             throw new NotSupportedException(Exceptions.DeleteCommandRequiresDelete);
                         }
                     }
-                }
 
-                if (HasCommandOfType<GridToolBarCreateCommand<T>>())
-                {
-                    if (DataSource.Type != DataSourceType.Custom)
+                    if (HasCommandOfType<GridToolBarCreateCommand<T>>())
                     {
                         if (!DataSource.Transport.Create.HasValue() && Editable.Mode != GridEditMode.InCell)
                         {
