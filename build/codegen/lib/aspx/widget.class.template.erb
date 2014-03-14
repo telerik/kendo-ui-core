@@ -36,7 +36,7 @@ namespace <%= csharp_namespace %>
         protected override void DescribeComponent(IScriptDescriptor descriptor)
         {
             base.DescribeComponent(descriptor);
-            descriptor.AddScriptProperty("_options", SerializeSettings());
+            descriptor.AddScriptProperty("_options", serializer.Serialize(this));
         }
 
         #endregion [ Overrides ]

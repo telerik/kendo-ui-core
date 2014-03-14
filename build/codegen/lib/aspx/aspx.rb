@@ -210,10 +210,6 @@ module CodeGen
                     return CONVERTER_PROPERTY_TEMPLATE.result(get_binding) if csharp_default
                 end
 
-                def to_serialization_declaration
-                    return ERB.new('            sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
-                end
-
                 def csharp_default
                     return TYPES_DEFAULT_MAP[type[0]] if !default
                     return default.to_f if type[0] == 'Number'
@@ -259,10 +255,6 @@ module CodeGen
                 def csharp_class
                     return strip_kendo_type(type) if type.include?('kendo.')
 
-                    #prefix = owner.instance_of?(ArrayItem) ? owner.owner.owner.csharp_name.sub('Settings', '') : owner.csharp_name.sub('Settings', '')
-
-                    #"#{prefix}#{name.sub('Settings', '').pascalize}"
-
                     name.pascalize
                 end
 
@@ -289,10 +281,6 @@ module CodeGen
 
                 def to_converter_class_declaration
                     CONVERTER_CLASS_TEMPLATE.result(get_binding)
-                end
-
-                def to_serialization_declaration
-                    return ERB.new('            sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
                 end
 
                 def get_binding
@@ -472,7 +460,7 @@ module CodeGen
 
                 def component(component)
                     write_class(component)
-                    write_converter(component) unless component.widget?
+                    write_converter(component)
                     write_enums(component)
                     write_properties(component)
                     write_events(component)
@@ -512,25 +500,11 @@ module CodeGen
 
                     write_file(file_path, properties_content, '[ Properties ]')
 
-                    if component.widget?
-                        serialization_content = write_options_serialization(component.options)
-                        write_file(file_path, serialization_content, '[ Properties Serialization ]')
-                    else
+                    if !component.widget?
                         is_default_content = write_is_default(component.options)
                         write_file(file_path, is_default_content, '[ IsDefault ]')
                     end
 
-                end
-
-                def write_options_serialization(options)
-                    content = "\n"
-
-                    options.each_index do |index|
-                        content += options[index].to_serialization_declaration + "\n"
-                        content += 'sb.Append(",");' + "\n" unless index == options.length - 1
-                    end
-
-                    content
                 end
 
                 def write_events(component)
