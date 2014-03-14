@@ -57,8 +57,9 @@
                 $(document).ready(function () {
                     var centered = $("#centeredNotification").data("kendoNotification");
 
-                    $("#showNotification").click(function(){
-                        centered.show(new Date().toLocaleTimeString());
+                    $("#showNotification").click(function () {
+                        var d = new Date();
+                        centered.show(kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000"));
                     });
 
                     var configurable = $("#configurableNotification").data("kendoNotification");
@@ -96,8 +97,9 @@
                         change: applyConfiguration
                     });
 
-                    $("#showConfigurable").click(function(){
-                        configurable.show(new Date().toLocaleTimeString());
+                    $("#showConfigurable").click(function () {
+                        var d = new Date();
+                        configurable.show(kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000"));
                     });
                 });
             </script>

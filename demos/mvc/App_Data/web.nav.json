@@ -1254,6 +1254,18 @@
                     "meta": "Demo about using templates with the Kendo UI Notification component."
                 },
                 {
+                    "text": "Events",
+                    "url": "notification/events.html",
+                    "title": "Events of Kendo UI Notification | Kendo UI Web demo",
+                    "meta": "Demo about using events and handlers with the Kendo UI Notification component."
+                },
+                {
+                    "text": "API",
+                    "url": "notification/api.html",
+                    "title": "API of Kendo UI Notification | Kendo UI Web demo",
+                    "meta": "Demo about using the API of the Kendo UI Notification component."
+                },
+                {
                     "text": "RTL support",
                     "url": "notification/rtl.html",
                     "title": "RTL Support of Kendo UI Notification | Kendo UI Web demo",

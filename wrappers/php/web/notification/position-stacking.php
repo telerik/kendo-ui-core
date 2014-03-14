@@ -72,7 +72,8 @@ echo $configurableNotification->render();
     var centered = $("#centeredNotification").data("kendoNotification");
 
     $("#showNotification").click(function(){
-      centered.show(new Date().toLocaleTimeString());
+      var d = new Date();
+      centered.show(kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000"));
     });
 
     var configurable = $("#configurableNotification").data("kendoNotification");
@@ -111,7 +112,8 @@ echo $configurableNotification->render();
     });
 
     $("#showConfigurable").click(function(){
-      configurable.show(new Date().toLocaleTimeString());
+      var d = new Date();
+      configurable.show(kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000"));
     });
   });
 </script>

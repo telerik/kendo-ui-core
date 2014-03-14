@@ -61,16 +61,18 @@ echo $staticNotification->render();
 </style>
 
 <script>
-  $(document).ready(function() {
+$(document).ready(function() {
   var popupNotification = $("#popupNotification").data("kendoNotification");
   var staticNotification = $("#staticNotification").data("kendoNotification");
 
   $("#showPopupNotification").click(function(){
-    popupNotification.show(new Date().toLocaleTimeString(), "error");
+    var d = new Date();
+    popupNotification.show(kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000"), "error");
   });
 
   $("#showStaticNotification").click(function(){
-    staticNotification.show(new Date().toLocaleTimeString(), "info");
+    var d = new Date();
+    staticNotification.show(kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000"), "info");
     var container = $(staticNotification.options.appendTo);
     container.scrollTop(container[0].scrollHeight);
   });
@@ -79,8 +81,7 @@ echo $staticNotification->render();
     popupNotification.hide();
     staticNotification.hide();
   });
-
-  });
+});
 </script>
 
 <?php require_once '../../include/footer.php'; ?>
