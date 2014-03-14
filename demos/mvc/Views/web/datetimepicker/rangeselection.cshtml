@@ -43,7 +43,7 @@
                         }
                     }
 
-                    var today = new Date(kendo.format('{0:MM-dd-yyyy}', new Date()))
+                    var today = kendo.date.today();
 
                     var start = $("#start").kendoDateTimePicker({
                         value: today,
