@@ -309,6 +309,10 @@ var __meta__ = {
                 element.parent().addClass("km-native-scrolling");
             }
 
+            if (CHROME) {
+                element.addClass("km-ios-chrome");
+            }
+
             if (support.wpDevicePixelRatio) {
                 element.parent().css("font-size", support.wpDevicePixelRatio + "em");
             }

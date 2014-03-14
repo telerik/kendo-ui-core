@@ -11,7 +11,7 @@
 
 // Fix the wrong window.outerHeight in iOS7 iPad landscape
 @media (orientation:landscape) {
-    .km-tablet .km-on-ios.km-horizontal.km-web {
+    .km-tablet .km-on-ios.km-horizontal.km-web:not(.km-ios-chrome) {
         position: fixed;
         bottom: 0;
     }
