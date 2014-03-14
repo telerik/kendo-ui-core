@@ -1271,11 +1271,7 @@
                 that.visual.append(that.epVisual);
             },
             options: {
-                handles: {
-                    width: 8,
-                    height: 8,
-                    background: "Red"
-                }
+                handles: {}
             },
             _getCursor: function () {
                 return Cursors.move;

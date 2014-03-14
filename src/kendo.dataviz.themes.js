@@ -499,6 +499,25 @@ var __meta__ = {
                         background: "#ffffff"
                     }
                 }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#ffffff",
+                    width: 2
+                },
+                content: {
+                    color: "#ffffff"
+                },
+                select: {
+                    handles: {
+                        width: 8,
+                        height: 8,
+                        background: "#3d3d3d",
+                        stroke: {
+                            color: "#efefef"
+                        }
+                    }
+                }
             }
         }
     });

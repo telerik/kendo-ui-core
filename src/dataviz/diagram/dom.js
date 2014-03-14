@@ -273,7 +273,7 @@
             init: function (options, model) {
                 var that = this;
                 Observable.fn.init.call(that);
-                that.options = deepExtend({id: diagram.randomId()}, that.options, options);
+                that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
                 that.isSelected = false;
                 that.model = model;
                 that.visual = new Group({
@@ -373,7 +373,7 @@
                 }
             },
             _canSelect: function () {
-                return this.options.selectable === true && this.diagram.options.selectable.type !== NONE;
+                return this.options.selectable && this.diagram.options.selectable.type !== NONE;
             }
         });
 
@@ -821,19 +821,6 @@
             } else if (isFunction(visualTemplate)) { // custom template
                 return functionShape(visualTemplate, this, shapeDefaults);
             } else if (isString(type)) {
-//                var origin = visualTemplate.origin || "internal";
-//
-//                if (origin.toLocaleLowerCase() === "external"){
-//                    var libraryShapeName = visualTemplate.library;
-//                    return externalLibraryShape(libraryShapeName, options, shapeDefaults);
-//                } else {
-//                    var definition = visualTemplate.definition;
-//                    if (type === "svg") {
-//                        return svgShape(definition, shapeDefaults);
-//                    } else if (type.toLocaleLowerCase() === "function") {
-//                        return functionShape(definition, this, shapeDefaults);
-//                    }
-//                }
                 return simpleShape(shapeDefaults.type.toLocaleLowerCase(), shapeDefaults);
             } else {
                 return new Rectangle(shapeDefaults);
@@ -862,15 +849,13 @@
                 that.refresh();
             },
             options: {
-                stroke: {
-                    color: "gray"
-                },
                 hover: {
                     stroke: {}
                 },
                 startCap: NONE,
                 endCap: NONE,
-                points: []
+                points: [],
+                selectable: true
             },
 
             /**
@@ -1034,7 +1019,7 @@
                             if (type === SINGLE) {
                                 this.diagram.select(false);
                             }
-                            this.adorner = new ConnectionEditAdorner(this);
+                            this.adorner = new ConnectionEditAdorner(this, this.options.select);
                             diagram._adorn(this.adorner, true);
                             diagram._selectedItems.push(this);
                             selected.push(this);
