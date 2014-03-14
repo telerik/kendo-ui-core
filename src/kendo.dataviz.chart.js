@@ -3216,7 +3216,7 @@ var __meta__ = {
         },
 
         plotValue: function(point) {
-            if (this.options.isStacked100) {
+            if (this.options.isStacked100 && isNumber(point.value)) {
                 var categoryIx = point.categoryIx;
                 var categoryPts = this.categoryPoints[categoryIx];
                 var categorySum = 0;
@@ -3230,7 +3230,9 @@ var __meta__ = {
                         continue;
                     }
 
-                    categorySum += math.abs(other.value);
+                    if (isNumber(other.value)) {
+                        categorySum += math.abs(other.value);
+                    }
                 }
 
                 return point.value / categorySum;

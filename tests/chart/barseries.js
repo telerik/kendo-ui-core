@@ -805,6 +805,24 @@
         });
 
         // ------------------------------------------------------------
+        module("Bar Chart / 100% Stacked / Missing Values", {
+            setup: function() {
+                setupBarChart(plotArea, {
+                    series: [ sparseSeries, positiveSeries ],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].min, 0);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(series.valueAxisRanges[undefined].max, 1);
+        });
+
+        // ------------------------------------------------------------
         module("Bar Chart / Grouped Stack / Positive Values", {
             setup: function() {
                 setupBarChart(plotArea, {
@@ -2726,6 +2744,18 @@
 
         test("from prev point to value", function() {
             deepEqual(chart.plotRange(chart.points[1]), [0, -0.75]);
+        });
+
+        // ------------------------------------------------------------
+        module("Bar Chart  / Plot range / Stack 100% / Missing values", {
+            setup: function() {
+                createChart([{ data: [undefined] }, { data: [1] }],
+                             { isStacked: true, isStacked100: true });
+            }
+        });
+
+        test("from prev point to value", function() {
+            deepEqual(chart.plotRange(chart.points[1]), [0, 1]);
         });
 
         // ------------------------------------------------------------
