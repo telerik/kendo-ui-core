@@ -287,7 +287,37 @@ var __meta__ = {
         }
     };
 
-    var diagramBaseTheme = { };
+    var diagramBaseTheme = {
+        shapeDefaults: {
+            hover: {
+                opacity: 0.2
+            }
+        },
+        editable: {
+            resize: {
+                handles: {
+                    width: 7,
+                    height: 7
+                }
+            },
+            rotate: {
+                thumb: {
+                    width: 14
+                }
+            }
+        },
+        connectionDefaults: {
+            stroke: {
+                width: 2
+            },
+            select: {
+                handles: {
+                    width: 8,
+                    width: 8
+                }
+            }
+        }
+    };
 
     var themes = ui.themes,
         registerTheme = ui.registerTheme = function(themeName, options) {
@@ -456,9 +486,6 @@ var __meta__ = {
         diagram: {
             shapeDefaults: {
                 background: "#0066cc",
-                hover: {
-                    opacity: 0.2
-                },
                 connectorDefaults: {
                     background: "#ffffff",
                     stroke: {
@@ -475,8 +502,6 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        width: 7,
-                        height: 7,
                         type: "rectangle",
                         background: "#3d3d3d",
                         stroke: {
@@ -492,7 +517,6 @@ var __meta__ = {
                 },
                 rotate: {
                     thumb: {
-                        width: 14,
                         stroke: {
                             color: "#ffffff"
                         },
@@ -502,16 +526,13 @@ var __meta__ = {
             },
             connectionDefaults: {
                 stroke: {
-                    color: "#ffffff",
-                    width: 2
+                    color: "#ffffff"
                 },
                 content: {
                     color: "#ffffff"
                 },
                 select: {
                     handles: {
-                        width: 8,
-                        height: 8,
                         background: "#3d3d3d",
                         stroke: {
                             color: "#efefef"

@@ -289,7 +289,6 @@
                     align: "center middle",
                     text: ""
                 },
-                editable: true,
                 selectable: true,
                 serializable: true,
                 enable: true
