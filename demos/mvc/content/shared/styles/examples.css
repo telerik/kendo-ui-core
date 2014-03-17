@@ -1571,7 +1571,7 @@ p#copy
 
 .widgetGrid.mobile .narrowCol
 {
-    height: 100px;
+    height: 135px;
 }
 
 .widgetGrid .narrowCol.mobile-devices
@@ -1630,7 +1630,7 @@ p#copy
 
 .widgetGrid .mobile-widgets
 {
-    width: 615px;
+    width: 580px;
 }
 
 .widgetGrid .narrowCol.chart
@@ -1640,7 +1640,7 @@ p#copy
 
 .widgetGrid .mobile-framework
 {
-     width: 384px;
+     width: 419px;
 }
 
 .widgetGrid .narrowCol.mobile-widgets h2,
@@ -1703,7 +1703,11 @@ p#copy
 }
 
 .widgetGrid .mobile-widgets ul,
-.widgetGrid .mobile-framework ul,
+.widgetGrid .mobile-framework ul
+{
+    margin-right: 89.5px;
+}
+
 .widgetGrid .chart ul
 {
     margin-right: 53.5px;
@@ -1749,6 +1753,12 @@ p#copy
 .dataviz.widgetGrid .dashboards
 {
     width:209px;
+
+}
+
+.mobile.widgetGrid .dashboards
+{
+    width:160px;
 
 }
 

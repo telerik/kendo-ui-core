@@ -520,5 +520,27 @@
                 }
             ]
         }
+    ],
+    
+    "Sample Applications": [
+        {
+            "text": "Mobile Sushi",
+            "name": "websushi",
+            "items": [
+                {
+                    "url": "apps/sushi/"
+                }
+            ]
+        },
+        {
+            "text": "Cuteness",
+            "name": "cuteness",
+            "items": [
+                {
+                    "url": "apps/cuteness/"
+                }
+            ]
+            
+        }
     ]
 }
