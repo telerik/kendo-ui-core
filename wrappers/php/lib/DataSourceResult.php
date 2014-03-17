@@ -305,8 +305,8 @@ class DataSourceResult {
     }
 
     private function isDate($value) {
-        $result = strtotime($value);
-        return $result != false;
+        $result = date_parse($value);
+        return $result["error_count"] < 1 && checkdate($result['month'], $result['day'], $result['year']);
     }
 
     private function isString($value) {
