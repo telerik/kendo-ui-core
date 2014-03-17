@@ -24,7 +24,7 @@ var __meta__ = {
         BLACK = "#000",
         SANS = "Arial,Helvetica,sans-serif",
         SANS11 = "11px " + SANS,
-        SANS12 = "12px " + SANS,
+        SANS12 = "12px " + SAN
         SANS16 = "16px " + SANS,
         WHITE = "#fff";
 
@@ -1490,7 +1490,6 @@ var __meta__ = {
                 }
             }
         }
-
     });
 
     registerTheme("metroblack", {
@@ -1622,7 +1621,73 @@ var __meta__ = {
                     color: "#cecece"
                 }
             }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#00aba9",
+                connectorDefaults: {
+                    background: WHITE,
+                    stroke: {
+                        color: "#0e0e0e"
+                    },
+                    hover: {
+                        background: "#0e0e0e",
+                        stroke: {
+                            color: WHITE
+                        }
+                    }
+                },
+                content: {
+                    color: WHITE
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        background: "#0e0e0e",
+                        stroke: {
+                            color: "#787878"
+                        },
+                        hover: {
+                            background: "#787878",
+                            stroke: {
+                                color: "#787878"
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: WHITE
+                        },
+                        background: WHITE
+                    }
+                },
+                select: {
+                    stroke: {
+                        color: "#787878"
+                    }
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#0e0e0e"
+                },
+                content: {
+                    color: WHITE
+                },
+                select: {
+                    handles: {
+                        background: "#0e0e0e",
+                        stroke: {
+                            color: WHITE
+                        }
+                    }
+                }
+            }
         }
+
     });
 
     registerTheme("moonlight", {
