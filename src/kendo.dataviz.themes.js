@@ -24,7 +24,7 @@ var __meta__ = {
         BLACK = "#000",
         SANS = "Arial,Helvetica,sans-serif",
         SANS11 = "11px " + SANS,
-        SANS12 = "12px " + SAN
+        SANS12 = "12px " + SANS,
         SANS16 = "16px " + SANS,
         WHITE = "#fff";
 
