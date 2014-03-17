@@ -149,6 +149,16 @@ test("parses strings array option from data attribute", function() {
     deepEqual(testwidget.options.foo, ["red"]);
 });
 
+test("parses object with array from data attribute", function() {
+    dom = $('<div data-role="testwidget" data-foo="{data:[\'[red]\']}"/>');
+
+    kendo.init(dom);
+
+    var testwidget = dom.data("kendoTestWidget");
+
+    deepEqual(testwidget.options.foo.data[0], "[red]");
+});
+
 test("parses ints array option from data attribute", function() {
     dom = $('<div data-role="testwidget" data-foo="[1]"/>');
 
