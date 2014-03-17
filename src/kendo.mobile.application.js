@@ -253,17 +253,22 @@ var __meta__ = {
 
             that.osCssClass = osCssClass(that.os, that.options);
 
-            if (!os.skin && os.name == "wp") {
-                that.element.parent().css("overflow", "hidden");
+            if (os.wp) {
+                $(window).off("focusin", refreshBackgroundColor);
+                document.removeEventListener("resume", refreshBackgroundColor);
 
-                var refreshBackgroundColor = function() {
-                    that.element.removeClass("km-wp-dark km-wp-light").addClass("km-wp-" + wp8Background());
-                };
+                if (!os.skin) {
+                    that.element.parent().css("overflow", "hidden");
 
-                $(window).on("focusin", refreshBackgroundColor); // Restore theme on browser focus (requires click).
-                document.addEventListener("resume", refreshBackgroundColor); // PhoneGap fires resume.
+                    var refreshBackgroundColor = function() {
+                        that.element.removeClass("km-wp-dark km-wp-light").addClass("km-wp-" + wp8Background());
+                    };
 
-                refreshBackgroundColor();
+                    $(window).on("focusin", refreshBackgroundColor); // Restore theme on browser focus (requires click).
+                    document.addEventListener("resume", refreshBackgroundColor); // PhoneGap fires resume.
+
+                    refreshBackgroundColor();
+                }
             }
         },
 
