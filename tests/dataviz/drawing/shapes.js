@@ -95,24 +95,24 @@
         });
     });
 
-    test("boundingRect returns children bounding rectangle", function() {
+    test("boundingBox returns children bounding rectangle", function() {
         var path = new Path(),
             circle = new Circle(new g.Circle(new Point(), 10)),
-            boundingRect;
-        circle.boundingRect = function() {
+            boundingBox;
+        circle.boundingBox = function() {
             return new g.Rect(Point.create(50, 50), Point.create(150, 150));
         };
-        path.boundingRect = function() {
+        path.boundingBox = function() {
             return new g.Rect(Point.create(30, 70), Point.create(120, 170));
         };
         group.append(circle);
         group.append(path);
-        boundingRect = group.boundingRect();
+        boundingBox = group.boundingBox();
 
-        equal(boundingRect.p0.x, 30);
-        equal(boundingRect.p0.y, 50);
-        equal(boundingRect.p1.x, 150);
-        equal(boundingRect.p1.y, 170);
+        equal(boundingBox.p0.x, 30);
+        equal(boundingBox.p0.y, 50);
+        equal(boundingBox.p1.x, 150);
+        equal(boundingBox.p1.y, 170);
     });
 
     // ------------------------------------------------------------
@@ -234,20 +234,20 @@
         circle.geometry.set("radius", 5);
     });
 
-    test("boundingRect returns geometry bounding rect with half stroke width added", function() {
-        var boundingRect,
+    test("boundingBox returns geometry bounding rect with half stroke width added", function() {
+        var boundingBox,
             geometry = new g.Circle(new Point());
 
-        geometry.boundingRect = function() {
+        geometry.boundingBox = function() {
             return new g.Rect(new Point(50, 50), new Point(150, 150));
         };
         circle = new Circle(geometry, {stroke: {width: 5}});
-        boundingRect = circle.boundingRect();
+        boundingBox = circle.boundingBox();
 
-        equal(boundingRect.p0.x, 47.5);
-        equal(boundingRect.p0.y, 47.5);
-        equal(boundingRect.p1.x, 152.5);
-        equal(boundingRect.p1.y, 152.5);
+        equal(boundingBox.p0.x, 47.5);
+        equal(boundingBox.p0.y, 47.5);
+        equal(boundingBox.p1.x, 152.5);
+        equal(boundingBox.p1.y, 152.5);
     });
     
     // ------------------------------------------------------------
@@ -298,20 +298,20 @@
         arc.geometry.set("counterClockwise", true);
     });
 
-    test("boundingRect returns geometry bounding rect with half stroke width added", function() {
-        var boundingRect,
+    test("boundingBox returns geometry bounding rect with half stroke width added", function() {
+        var boundingBox,
             geometry = new g.Arc(new Point());
 
-        geometry.boundingRect = function() {
+        geometry.boundingBox = function() {
             return new g.Rect(new Point(50, 50), new Point(150, 150));
         };
         arc = new Arc(geometry, {stroke: {width: 5}});
-        boundingRect = arc.boundingRect();
+        boundingBox = arc.boundingBox();
 
-        equal(boundingRect.p0.x, 47.5);
-        equal(boundingRect.p0.y, 47.5);
-        equal(boundingRect.p1.x, 152.5);
-        equal(boundingRect.p1.y, 152.5);
+        equal(boundingBox.p0.x, 47.5);
+        equal(boundingBox.p0.y, 47.5);
+        equal(boundingBox.p1.x, 152.5);
+        equal(boundingBox.p1.y, 152.5);
     });    
     
     // ------------------------------------------------------------
@@ -361,24 +361,24 @@
         segment.controlOut.set("x", 5);
     });
 
-    test("boundingRectTo returns the line bounding rect to the passed segment if all control points are not specified", function() {
+    test("boundingBoxTo returns the line bounding box to the passed segment if all control points are not specified", function() {
         var other = new Segment(Point.create(100, 100)),
-            boundingRect = segment.boundingRectTo(other);
+            boundingBox = segment.boundingBoxTo(other);
 
-        equal(boundingRect.p0.x, 0);
-        equal(boundingRect.p0.y, 0);
-        equal(boundingRect.p1.x, 100);
-        equal(boundingRect.p1.y, 100);
+        equal(boundingBox.p0.x, 0);
+        equal(boundingBox.p0.y, 0);
+        equal(boundingBox.p1.x, 100);
+        equal(boundingBox.p1.y, 100);
     });
 
-    test("boundingRectTo returns the curve bounding rect to the passed segment if all control points are specified", function() {
+    test("boundingBoxTo returns the curve bounding rect to the passed segment if all control points are specified", function() {
         var other = new Segment(Point.create(30, 50), Point.create(-20, 30)),
-            boundingRect = segment.boundingRectTo(other);
+            boundingBox = segment.boundingBoxTo(other);
 
-        close(boundingRect.p0.x, -8.2, TOLERANCE);
-        close(boundingRect.p0.y, -1.6, TOLERANCE);
-        close(boundingRect.p1.x, 30, TOLERANCE);
-        close(boundingRect.p1.y, 50, TOLERANCE);
+        close(boundingBox.p0.x, -8.2, TOLERANCE);
+        close(boundingBox.p0.y, -1.6, TOLERANCE);
+        close(boundingBox.p1.x, 30, TOLERANCE);
+        close(boundingBox.p1.y, 50, TOLERANCE);
     });
 
     // ------------------------------------------------------------
@@ -499,40 +499,40 @@
         deepEqual(path.close(), path);
     });
 
-    test("boundingRect returns undefined if there are no segments", function() {
-        var boundingRect = path.boundingRect();
-        ok(boundingRect === undefined);
+    test("boundingBox returns undefined if there are no segments", function() {
+        var boundingBox = path.boundingBox();
+        ok(boundingBox === undefined);
     });
 
-    test("boundingRect returns a bounding rectangle with both points equal to the segment anchor if there is a single segment", function() {
+    test("boundingBox returns a bounding rectangle with both points equal to the segment anchor if there is a single segment", function() {
         path.moveTo(10, 10);
-        var boundingRect = path.boundingRect();
-        equal(boundingRect.p0.x, 10);
-        equal(boundingRect.p0.y, 10);
-        equal(boundingRect.p1.x, 10);
-        equal(boundingRect.p1.y, 10);
+        var boundingBox = path.boundingBox();
+        equal(boundingBox.p0.x, 10);
+        equal(boundingBox.p0.y, 10);
+        equal(boundingBox.p1.x, 10);
+        equal(boundingBox.p1.y, 10);
     });
 
-    test("boundingRect returns the bounding rect between the segments", function() {
+    test("boundingBox returns the bounding rect between the segments", function() {
         path.moveTo(0, 0);
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.lineTo(20, 70);
-        var boundingRect = path.boundingRect();
-        close(boundingRect.p0.x, -8.2, TOLERANCE);
-        close(boundingRect.p0.y, -1.6, TOLERANCE);
-        close(boundingRect.p1.x, 30, TOLERANCE);
-        close(boundingRect.p1.y, 70, TOLERANCE);
+        var boundingBox = path.boundingBox();
+        close(boundingBox.p0.x, -8.2, TOLERANCE);
+        close(boundingBox.p0.y, -1.6, TOLERANCE);
+        close(boundingBox.p1.x, 30, TOLERANCE);
+        close(boundingBox.p1.y, 70, TOLERANCE);
     });
 
-    test("boundingRect returns the bounding rect between the segments with stroke added", function() {
+    test("boundingBox returns the bounding rect between the segments with stroke added", function() {
         path.moveTo(0, 0);
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.stroke("black", 5);
-        var boundingRect = path.boundingRect();
-        close(boundingRect.p0.x, -10.7, TOLERANCE);
-        close(boundingRect.p0.y, -4.1, TOLERANCE);
-        close(boundingRect.p1.x, 32.5, TOLERANCE);
-        close(boundingRect.p1.y, 52.5, TOLERANCE);
+        var boundingBox = path.boundingBox();
+        close(boundingBox.p0.x, -10.7, TOLERANCE);
+        close(boundingBox.p0.y, -4.1, TOLERANCE);
+        close(boundingBox.p1.x, 32.5, TOLERANCE);
+        close(boundingBox.p1.y, 52.5, TOLERANCE);
     });
 
     // ------------------------------------------------------------
@@ -634,20 +634,20 @@
         deepEqual(multiPath.moveTo(0, 0).close(), multiPath);
     });
 
-    test("boundingRect returns undefined if there are no paths", function() {
-        var boundingRect = multiPath.boundingRect();
-        ok(boundingRect === undefined);
+    test("boundingBox returns undefined if there are no paths", function() {
+        var boundingBox = multiPath.boundingBox();
+        ok(boundingBox === undefined);
     });
 
-    test("boundingRect returns the bounding rect for the paths", function() {
+    test("boundingBox returns the bounding rect for the paths", function() {
         multiPath.moveTo(0, 0);
         multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         multiPath.moveTo(20, 70);
-        var boundingRect = multiPath.boundingRect();
-        close(boundingRect.p0.x, -8.2, TOLERANCE);
-        close(boundingRect.p0.y, -1.6, TOLERANCE);
-        close(boundingRect.p1.x, 30, TOLERANCE);
-        close(boundingRect.p1.y, 70, TOLERANCE);
+        var boundingBox = multiPath.boundingBox();
+        close(boundingBox.p0.x, -8.2, TOLERANCE);
+        close(boundingBox.p0.y, -1.6, TOLERANCE);
+        close(boundingBox.p1.x, 30, TOLERANCE);
+        close(boundingBox.p1.y, 70, TOLERANCE);
     });
 
 })();

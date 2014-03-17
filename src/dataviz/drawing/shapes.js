@@ -87,8 +87,8 @@
             this.childrenChange("remove", items, 0);
         },
 
-        boundingRect: function() {
-            return elementsBoundingRect(this.children);
+        boundingBox: function() {
+            return elementsBoundingBox(this.children);
         }
     });
 
@@ -138,8 +138,8 @@
             circle.geometry.observer = this;
         },
 
-        boundingRect: function() {
-            var rect = this.geometry.boundingRect();
+        boundingBox: function() {
+            var rect = this.geometry.boundingBox();
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
@@ -158,8 +158,8 @@
             arc.geometry.observer = this;
         },
 
-        boundingRect: function() {
-            var rect = this.geometry.boundingRect();
+        boundingBox: function() {
+            var rect = this.geometry.boundingBox();
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
@@ -202,21 +202,21 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        boundingRectTo: function(segment) {
+        boundingBoxTo: function(segment) {
             var rect;
             if (this.controlOut && segment.controlIn) {
-                rect = this._curveBoundingRect(this.anchor, this.controlOut, segment.controlIn, segment.anchor);
+                rect = this._curveBoundingBox(this.anchor, this.controlOut, segment.controlIn, segment.anchor);
             } else {
-                rect = this._lineBoundingRect(this.anchor, segment.anchor);
+                rect = this._lineBoundingBox(this.anchor, segment.anchor);
             }
             return rect;
         },
 
-        _lineBoundingRect: function(p1, p2) {
+        _lineBoundingBox: function(p1, p2) {
             return new Rect(p1.min(p2), p1.max(p2));
         },
 
-        _curveBoundingRect: function(p1, cp1, cp2, p2) {
+        _curveBoundingBox: function(p1, cp1, cp2, p2) {
             var points = [p1, cp1, cp2, p2],
                 extremesX = this._curveExtremesFor(points, "x"),
                 extremesY = this._curveExtremesFor(points, "y"),
@@ -329,26 +329,26 @@
             return this;
         },
 
-        boundingRect: function() {
+        boundingBox: function() {
             var segments = this.segments,
                 length = segments.length,
                 strokeWidth = this.options.get("stroke.width"),
-                boundingRect,
+                boundingBox,
                 i;
 
             if (length === 1) {
-                boundingRect = new Rect(segments[0].anchor.clone(), segments[0].anchor.clone());
+                boundingBox = new Rect(segments[0].anchor.clone(), segments[0].anchor.clone());
             } else if (length > 0) {
-                boundingRect = new Rect(Point.maxPoint(), Point.minPoint())
+                boundingBox = new Rect(Point.maxPoint(), Point.minPoint())
                 for (i = 1; i < length; i++) {
-                    boundingRect = boundingRect.wrap(segments[i - 1].boundingRectTo(segments[i]));
+                    boundingBox = boundingBox.wrap(segments[i - 1].boundingBoxTo(segments[i]));
                 }
                 if (strokeWidth) {
-                    expandRect(boundingRect, strokeWidth / 2);
+                    expandRect(boundingBox, strokeWidth / 2);
                 }
             }
 
-            return boundingRect;
+            return boundingBox;
         }
     });
 
@@ -392,8 +392,8 @@
             return this;
         },
 
-        boundingRect: function() {
-            return elementsBoundingRect(this.paths);
+        boundingBox: function() {
+            return elementsBoundingBox(this.paths);
         }
     });
 
@@ -402,17 +402,17 @@
 
 
     //utility =====================================================
-    function elementsBoundingRect(elements) {
+    function elementsBoundingBox(elements) {
         var length = elements.length,
-            boundingRect, i;
+            boundingBox, i;
         if (length > 0) {
-            boundingRect = new Rect(Point.maxPoint(), Point.minPoint());
+            boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
             for (i = 0; i < length; i++) {
-                boundingRect = boundingRect.wrap(elements[i].boundingRect());
+                boundingBox = boundingBox.wrap(elements[i].boundingBox());
             }
         }
 
-        return boundingRect;
+        return boundingBox;
     }
 
     function expandRect(rect, value) {

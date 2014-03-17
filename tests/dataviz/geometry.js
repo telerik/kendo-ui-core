@@ -444,8 +444,8 @@
         equal(clone.radius, circle.radius);
     });
 
-    test("boundingRect returns the circle bounding Rect", function() {
-        var rect = circle.boundingRect();
+    test("boundingBox returns the circle bounding Rect", function() {
+        var rect = circle.boundingBox();
         equal(rect.p0.x, -10);
         equal(rect.p0.y, -10);
         equal(rect.p1.x, 10);
@@ -558,8 +558,8 @@
         close(point3.y, 100, ARC_POINT_TOLERANCE);
     });
 
-    test("boundingRect returns the arc bounding Rect", function() {
-        var rect = arc.boundingRect();
+    test("boundingBox returns the arc bounding Rect", function() {
+        var rect = arc.boundingBox();
         equal(rect.p0.x, 50);
         equal(rect.p0.y, 100);
         equal(rect.p1.x, 150);

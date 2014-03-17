@@ -235,7 +235,7 @@
             );
         },
 
-        boundingRect: function() {
+        boundingBox: function() {
             var minPoint = Point.maxPoint(),
                 maxPoint = Point.minPoint(),
                 currentPoint, angle;
@@ -315,7 +315,7 @@
             return curvePoints;
         },
 
-        boundingRect: function() {
+        boundingBox: function() {
             var arc = this,
                 interval = arc._arcInterval(),
                 startAngle = interval.startAngle,
