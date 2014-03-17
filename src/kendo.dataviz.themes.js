@@ -1424,7 +1424,73 @@ var __meta__ = {
                     color: "#777"
                 }
             }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#8ebc00",
+                connectorDefaults: {
+                    background: BLACK,
+                    stroke: {
+                        color: WHITE
+                    },
+                    hover: {
+                        background: WHITE,
+                        stroke: {
+                            color: BLACK
+                        }
+                    }
+                },
+                content: {
+                    color: "#777"
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#787878"
+                        },
+                        hover: {
+                            background: "#787878",
+                            stroke: {
+                                color: "#787878"
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: "#787878"
+                        },
+                        background: "#787878"
+                    }
+                },
+                select: {
+                    stroke: {
+                        color: "#515967"
+                    }
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#787878"
+                },
+                content: {
+                    color: "#777"
+                },
+                select: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#787878"
+                        }
+                    }
+                }
+            }
         }
+
     });
 
     registerTheme("metroblack", {
