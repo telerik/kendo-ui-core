@@ -19,11 +19,11 @@ namespace Kendo.Mvc.Examples.Models
             CorporateData ann = new CorporateData("Ann", "Devon", "ann.jpg", "UI Designer", "#ef6944");
             elizabeth.Items.Add(ann);
 
-            CorporateData fran = new CorporateData("Fran", "Wilson", "fran.jpg", "Design Intern", "#ef6944");
-            elizabeth.Items.Add(fran);
-
             CorporateData diego = new CorporateData("Diego", "Roel", "diego.jpg", "QA Engineer", "#ee587b");
             antonio.Items.Add(diego);
+
+            CorporateData fran = new CorporateData("Fran", "Wilson", "fran.jpg", "QA Intern", "#ee587b");
+            diego.Items.Add(fran);
 
             CorporateData felipe = new CorporateData("Felipe", "Izquiedro", "felipe.jpg", "Senior Developer", "#75be16");
             antonio.Items.Add(felipe);
