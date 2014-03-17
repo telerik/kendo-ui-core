@@ -209,7 +209,7 @@ end
 if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
     # copy pre-built binaries
 
-    FileList[MVC3_DLL + MVC4_DLL + MVC5_DLL].each do |file|
+    FileList[MVC3_DLL + MVC4_DLL + MVC5_DLL + FileList[MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll']].each do |file|
         file_copy :to => file, :from => file.sub('wrappers/mvc', "dist/binaries")
     end
 
