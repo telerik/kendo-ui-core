@@ -2160,7 +2160,7 @@ var __meta__ = {
                 labels: {
                     color: "#333333"
                 },
-				overlay: {
+                overlay: {
                     gradient: "none"
                 },
                 errorBars: {
@@ -2548,7 +2548,7 @@ var __meta__ = {
                 }
             }
         }
-	});
+    });
 
 })(window.kendo.jQuery);
 
