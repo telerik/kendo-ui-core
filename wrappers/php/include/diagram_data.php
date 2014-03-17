@@ -54,11 +54,11 @@ function _node($index) {
     return array('name' => $index, 'items' => array());
 }
 
-function _make_nodes($root, $levels) {
+function _make_nodes(&$root, $levels) {
     if (!empty($levels)) {
         for ($i = 0; $i < $levels[0]; $i++) {
             $node = _node($root['name'] . '.' . $i);
-            _make_nodes(&$node, array_slice($levels, 1));
+            _make_nodes($node, array_slice($levels, 1));
 
             $root['items'][] = $node;
         }
