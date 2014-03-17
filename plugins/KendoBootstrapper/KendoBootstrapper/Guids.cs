@@ -2,7 +2,7 @@
 // MUST match guids.h
 using System;
 
-namespace Company.KendoBootstrapper
+namespace Telerik.KendoBootstrapper
 {
     static class GuidList
     {

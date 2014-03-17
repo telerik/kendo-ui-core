@@ -15,7 +15,7 @@ using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 
-namespace Company.KendoBootstrapper
+namespace Telerik.KendoBootstrapper
 {
     public partial class KendoBootstrapperWindow : Window
     {

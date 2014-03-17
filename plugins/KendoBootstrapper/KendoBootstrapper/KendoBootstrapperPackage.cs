@@ -19,7 +19,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
 
-namespace Company.KendoBootstrapper
+namespace Telerik.KendoBootstrapper
 {
     // This attribute tells the PkgDef creation utility (CreatePkgDef.exe) that this class is
     // a package.

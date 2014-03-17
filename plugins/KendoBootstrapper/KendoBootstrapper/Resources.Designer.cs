@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Company.KendoBootstrapper {
+namespace Telerik.KendoBootstrapper {
     using System;
     
     

@@ -2,7 +2,7 @@
 // MUST match PkgCmdID.h
 using System;
 
-namespace Company.KendoBootstrapper
+namespace Telerik.KendoBootstrapper
 {
     static class PkgCmdIDList
     {
