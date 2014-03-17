@@ -50,27 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core">
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.0.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.0.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\..\packages\Microsoft.Owin.2.0.2\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.2.0.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.2.0.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Owin">
-      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -156,7 +138,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\ModelBinderConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\ViewEngineConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\aspx\ASPXAreaRegistration.cs" />
@@ -597,7 +578,6 @@
     <Compile Include="Helpers\HyphenatedRouteHandler.cs" />
     <Compile Include="Helpers\KendoRazorViewEngine.cs" />
     <Compile Include="Helpers\KendoWebFormViewEngine.cs" />
-    <Compile Include="Hubs\ProductHub.cs" />
     <Compile Include="ModelBinders\CultureAwareDateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\CultureAwareDecimalModelBinder.cs" />
     <Compile Include="Models\BarChartsLocalDataViewModel.cs" />
@@ -643,7 +623,6 @@
     <Compile Include="Models\MeetingAttendee.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductSignalR.cs" />
     <Compile Include="Models\Stock.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
@@ -2367,8 +2346,6 @@
     <Content Include="Scripts\examples.js" />
     <Content Include="Scripts\examples.min.js" />
     <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Scripts\jquery.signalR-2.0.2.js" />
-    <Content Include="Scripts\jquery.signalR-2.0.2.min.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\kendo.autocomplete.min.js" />
