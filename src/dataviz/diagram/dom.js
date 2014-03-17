@@ -1694,6 +1694,9 @@
              * @param undoable. By default the action is undoable.
              */
             toFront: function (items, undoable) {
+                if (!items) {
+                    items = this._selectedItems.slice();
+                }
                 var result = this._getDiagramItems(items), indices;
                 if (isUndefined(undoable) || undoable) {
                     indices = indicesOfItems(this.mainLayer.domElement, result.visuals);
@@ -1711,6 +1714,9 @@
              * @param undoable. By default the action is undoable.
              */
             toBack: function (items, undoable) {
+                if (!items) {
+                    items = this._selectedItems.slice();
+                }
                 var result = this._getDiagramItems(items), indices;
                 if (isUndefined(undoable) || undoable) {
                     indices = indicesOfItems(this.mainLayer.domElement, result.visuals);
@@ -2257,8 +2263,9 @@
                 result.visuals = [];
                 result.shapes = [];
                 result.cons = [];
+
                 if (!items) {
-                    args = this._selectedItems;
+                    args = this._selectedItems.slice();
                 }
                 else if (!isArray(items)) {
                     args = [items];
