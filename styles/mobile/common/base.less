@@ -292,50 +292,151 @@
 
 .km-loader
 {
-    top: 50%;
-    left: 50%;
-    width: 180px;
-    height: 130px;
-    opacity: .85;
-    z-index: 100000;
-    padding: 30px 30px;
-    position: absolute;
-    margin-top: -70px;
-    margin-left: -90px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    text-align: center;
     .box-sizing(border-box);
-    background-color: black;
+    position: absolute;
+    z-index: 100000;
+    background: rgba(0,0,0,.2);
 }
 
-.km-loader h1
+.km-loader:before
 {
-    font-size: 1rem;
-    color: white;
-    text-align: center;
+    content: "\a0";
+    display: inline-block;
+    height: 100%;
+    width: 0;
     vertical-align: middle;
 }
 
-.km-loader .km-loading,
-.km-load-more .km-icon,
-.km-scroller-refresh .km-icon
+.km-load-more,
+.km-scroller-pull
 {
-    .animation(km-spin 1s infinite linear);
+    font-size: 1em;
+}
+
+.km-scroller-pull
+{
+    opacity: .5;
+}
+
+.km-list > .km-load-more {
+    border-top: 0;
+}
+
+.km-loader h1,
+.km-scroller-refresh .km-template
+{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 2em;
+    font-size: 1rem;
+    color: #222;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+.km-scroller-pull .km-template
+{
+    min-width: 0;
+}
+
+.km-loading,
+.km-loader .km-loading-left,
+.km-root .km-load-more.km-scroller-refresh .km-icon,
+.km-root .km-scroller-pull.km-scroller-refresh .km-icon,
+.km-scroller-refresh .km-loading-left
+{
+    display: inline-block;
+    top: auto;
+    left: auto;
+    width: 8px;
+    height: 2px;
+    margin: 0;
+    border: 0;
+    border-radius: 5px;
+    vertical-align: middle;
+    .transform-origin(150% 50%);
+    background: currentcolor;
+    .animation(km-spin 1.5s infinite steps(8));
+    .box-shadow(16px 0 rgba(0,0,0,.6));
+}
+
+.km-loading,
+.km-loader .km-loading-left
+{
+    margin: 2px 0 0;
+}
+
+.km-loading:before,
+.km-loading:after,
+.km-load-more.km-scroller-refresh .km-icon:after,
+.km-load-more.km-scroller-refresh .km-icon:before,
+.km-scroller-pull.km-scroller-refresh .km-icon:after,
+.km-scroller-pull.km-scroller-refresh .km-icon:before
+{
+    color: inherit;
+    content: "\a0";
     display: block;
-    margin: 0 auto;
-    width: 35px;
-    height: 35px;
-    font-size: 35px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 0;
+    .transform-origin(inherit);
+    .transform(rotate(-45deg));
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    background: inherit;
+    -webkit-background-clip: border-box;
+    -webkit-text-fill-color: inherit;
+    .box-shadow(16px 0 rgba(0,0,0,.5));
 }
 
-.km-loader .km-loading:after,
-.km-load-more .km-icon:after
+.km-loading:after,
+.km-load-more.km-scroller-refresh .km-icon:after,
+.km-scroller-pull.km-scroller-refresh .km-icon:after
 {
-    color: #ccc;
+    .transform(rotate(-90deg));
+    .box-shadow(16px 0 rgba(0,0,0,.4));
 }
 
-.km-loading-left,
+.km-loader .km-loading-left,
+.km-scroller-refresh .km-loading-left
+{
+    margin-left: -8px;
+    .box-shadow(16px 0 rgba(0,0,0,.3));
+    .animation(km-spin1 1.5s infinite steps(8));
+}
+
+.km-loading-left:after,
+.km-loading-left:before,
 .km-loading-right
 {
     display: none;
+}
+
+.km-loading
+{
+    color: #000;
+}
+
+.km-loading:before
+{
+    color: rgba(0,0,0,.9);
+}
+
+.km-loading:after
+{
+    color: rgba(0,0,0,.8);
+}
+
+.km-loading-left
+{
+    color: rgba(0,0,0,.7);
 }
 
 @-webkit-keyframes km-spin
@@ -344,23 +445,36 @@
     to { -webkit-transform: rotate(360deg); }
 }
 
+@-webkit-keyframes km-spin1
+{
+    from { -webkit-transform: rotate(-135deg); }
+    to { -webkit-transform: rotate(225deg); }
+}
+
 @-moz-keyframes km-spin
 {
     from { -moz-transform: rotate(0deg); }
     to { -moz-transform: rotate(360deg); }
 }
 
-@-ms-keyframes km-spin
+@-moz-keyframes km-spin1
 {
-    from { -ms-transform: rotate(0deg); }
-    to { -ms-transform: rotate(360deg); }
+    from { -moz-transform: rotate(-135deg); }
+    to { -moz-transform: rotate(225deg); }
 }
 
-@-o-keyframes km-spin
+@keyframes km-spin
 {
-    from { -o-transform: rotate(0deg); }
-    to { -o-transform: rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
+
+@keyframes km-spin1
+{
+    from { transform: rotate(-135deg); }
+    to { transform: rotate(225deg); }
+}
+
 
 /* Stretched View */
 
