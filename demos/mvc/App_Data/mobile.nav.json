@@ -521,26 +521,28 @@
             ]
         }
     ],
-    
+
     "Sample Applications": [
         {
             "text": "Mobile Sushi",
+            "packages": ["online"],
             "name": "websushi",
             "items": [
                 {
-                    "url": "apps/sushi/"
+                    "url": "apps/sushi/index.html"
                 }
             ]
         },
         {
             "text": "Cuteness",
+            "packages": ["online"],
             "name": "cuteness",
             "items": [
                 {
-                    "url": "apps/cuteness/"
+                    "url": "apps/cuteness/index.html"
                 }
             ]
-            
+
         }
     ]
 }

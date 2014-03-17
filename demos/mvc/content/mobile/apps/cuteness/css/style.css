@@ -1,0 +1,401 @@
+.loading {
+    color: gray;
+}
+
+.item {
+    font-size: 11px;
+    display: table;
+    width: 100%;
+    font-weight: normal;
+    padding: 5px;
+}
+
+.item h3 {
+    font-weight: normal;
+    color: #181818;
+}
+
+.item-thumb, .item-summary, .item-comments {
+    display: table-cell;
+    vertical-align: top;
+    padding-bottom: .5em;
+}
+
+.item-summary a
+{
+    color: #10c4b2;
+}
+
+.item-thumb {
+    width: 50px;
+    padding-left: 1em;
+}
+
+.item-comments {
+    width: 50px;
+    text-align: center;
+    color: #af5555;
+    vertical-align: middle;
+}
+
+.thumb, .loading-thumb {
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1em;
+    display: inline-block;
+}
+
+.loading-thumb {
+    background-color: #ccc;
+    background-size: 70% 70%;
+}
+
+#aww li:not(.km-load-more) {
+    padding: 0;
+}
+
+#about .km-content {
+    background: transparent;
+}
+
+.touchTarget {
+    width: 100%;
+    height: auto;
+}
+
+.touchTarget p {
+    display: block;
+    height: 10%;
+    bottom: 20%;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    padding: 0 10%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+}
+
+.km-scrollview {
+    display: flex;
+    display: -webkit-flex;
+    display: -webkit-box;
+}
+
+.km-scrollview > div {
+    position: relative;
+    flex: 1;
+    -webkit-flex: 1;
+    -webkit-box-flex: 1;
+}
+
+.km-virtual-page {
+    min-height: 1px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+}
+
+.title-bar {
+    position: absolute;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 42px;
+    background: rgba(0,0,0,.5);
+    color: #FFFFFF;
+}
+
+.title-bar:before {
+    margin-left: -5px;
+}
+
+.title-bar p {
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.title-bar span {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    max-height: 42px;
+    width: 100%;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+}
+
+.tile {
+    width: 50%;
+    height: 33%;
+    display: inline-block;
+    float: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 1px solid #000;
+    overflow: hidden;
+}
+
+.item-img {
+    height: 100%;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+}
+
+#drawer .km-content,
+#detail .km-content,
+#canvas .km-content,
+#canvas-detail .km-content {
+    background: #363940;
+}
+
+#drawer .km-group-title {
+    color: #f4f4f4;
+}
+
+.faded,
+.detailed-img {
+    background: transparent url(images/foxie.png) no-repeat 50% 50%;
+    background-size: auto 50%;
+}
+
+.loaded {
+    opacity: 1;
+    -webkit-transition: opacity 0.25s ease-in;
+            transition: opacity 0.25s ease-in;
+}
+
+.detailed-img {
+    width: 100%;
+    height: 100%;
+    background-size: auto 40%;
+    background-position: 50% 30%;
+    -webkit-transform: translatez(0);
+}
+
+.detailed-img .content {
+    position: absolute;
+    top: 65%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.detailed-img p,
+.detailed-img p > span {
+    color: #fff;
+    display: block;
+    margin: auto;
+    text-transform: uppercase;
+    width: 100%;
+    font-size: 1.6em;
+}
+
+.detailed-img p > span {
+    font-size: .6em;
+    color: #10c4b2;
+    text-transform: none;
+    padding-bottom: 2em;
+}
+
+.detailed-img .km-button {
+    color: #fff;
+    background-color: #10c4b2;
+}
+
+.detail-image {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 120px;
+}
+
+.detail-image img {
+    width: 100%;
+}
+
+.detail-text {
+    width: 100%;
+    height: 120px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 20px;
+    color: #fff;
+    padding: 0 20px;
+    vertical-align: middle;
+}
+
+.km-horizontal .detail-image {
+    bottom: 60px;
+}
+
+.km-horizontal .detail-text {
+    height: 60px;
+}
+
+.title-bar:before,
+.detail-text:before {
+    content: "\a0";
+    width: 0;
+    height: 95%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.detail-text > div {
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.detail-text p {
+    padding: 0;
+    margin: 0;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    max-height: 72px;
+    width: 100%;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+}
+
+.km-horizontal .detail-image {
+    bottom: 60px;
+}
+
+.km-horizontal .detail-text {
+    height: 60px;
+}
+
+.km-horizontal .detail-text p {
+    width: 100%;
+    display: block;
+    max-height: 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.detail-text span {
+    color: #c1c1c1;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+.detail-text a {
+    color: #10c4b2;
+    text-decoration: none;
+}
+
+.detail-text a:hover {
+    text-decoration: underline;
+}
+
+[data-icon=comments] {
+    width: 50px;
+}
+[data-icon=comments] span {
+    display: block;
+    text-align: center;
+    margin-top: 3px;
+}
+
+[data-icon=comments] .km-icon {
+    margin: 0;
+}
+
+.km-comments:after,
+.km-comments:before
+{
+    content: "\E091";
+    color: #d4d4d4;
+}
+
+.km-canvas:after,
+.km-canvas:before
+{
+    content: "\E0AC";
+}
+
+.km-list-icon:after,
+.km-list-icon:before
+{
+    content: "\E055";
+}
+
+.splash
+{
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: -webkit-gradient(lienar, 0 0, 0 100%, from(#10c4b2), to(#000));
+    background: -webkit-linear-gradient(top, #10c4b2, #000);
+    background: -moz-linear-gradient(top, #10c4b2, #000);
+    background: -ms-linear-gradient(top, #10c4b2, #000);
+    background: linear-gradient(to bottom, #10c4b2, #000);
+}
+
+.splash:before
+{
+    display: block;
+    content: "\a0";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent url(images/logo.png) no-repeat 50% 50%;
+    background-size: auto 25%;
+}
+
+.km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
+
+.account-info {
+    float: right;
+    font-weight: bold;
+}
+
+#feedback textarea {
+    float: none;
+    width: 100%;
+    resize: none;
+}
+
+#feedback .km-content [data-role=button] {
+    display: block;
+    margin: 1em;
+}
+
+#feedback .km-content [data-role=button] span {
+    display: block;
+    text-align: center;
+    font-size: 1.2em;
+}
+
