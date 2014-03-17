@@ -26,6 +26,10 @@
     <div data-role="view" data-title="Kendo UI Mobile" id="index">
     @foreach (string category in ViewBag.Navigation.Keys)
     {
+        if (category == "Sample Applications")
+        {
+            continue;
+        }
         <ul data-role="listview" data-type="group" data-style="inset">
         @foreach (NavigationWidget widget in ViewBag.Navigation[category])
         {
