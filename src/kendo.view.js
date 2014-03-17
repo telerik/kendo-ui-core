@@ -270,7 +270,7 @@ var __meta__ = {
                 back = previousEntry.id === locationID,
                 // If explicit transition is set, it will be with highest priority
                 // Next we will try using the history record transition or the view transition configuration
-                theTransition = transition || ( back ? previousEntry.transition : view.transition ),
+                theTransition = transition || ( back ? history[history.length - 1].transition : view.transition ),
                 transitionData = parseTransition(theTransition);
 
             if (that.running) {
