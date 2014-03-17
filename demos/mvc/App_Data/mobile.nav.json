@@ -529,7 +529,7 @@
             "name": "websushi",
             "items": [
                 {
-                    "url": "apps/sushi/index.html"
+                    "url": "apps/sushi"
                 }
             ]
         },
@@ -539,7 +539,7 @@
             "name": "cuteness",
             "items": [
                 {
-                    "url": "apps/cuteness/index.html"
+                    "url": "apps/cuteness"
                 }
             ]
 
