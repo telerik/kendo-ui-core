@@ -2361,7 +2361,7 @@ var __meta__ = {
                         }
                     },
                     stroke: {
-                        color: "#c4c4c4"
+                        color: "#333333"
                     }
                 }
             }
@@ -2477,6 +2477,74 @@ var __meta__ = {
                 },
                 line: {
                     color: "#4c5356"
+                }
+            }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#10c4b2",
+                connectorDefaults: {
+                    background: "#363940",
+                    stroke: {
+                        color: WHITE
+                    },
+                    hover: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#363940"
+                        }
+                    }
+                },
+                content: {
+                    color: "#4c5356"
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#363940"
+                        },
+                        hover: {
+                            background: "#363940",
+                            stroke: {
+                                color: "#363940"
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: "#363940"
+                        },
+                        background: "#363940"
+                    }
+                },
+                select: {
+                    stroke: {
+                        color: "#363940"
+                    }
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#cdcdcd"
+                },
+                content: {
+                    color: "#4c5356"
+                },
+                select: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#363940"
+                        }
+                    },
+                    stroke: {
+                        color: "#363940"
+                    }
                 }
             }
         }
