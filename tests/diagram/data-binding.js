@@ -58,6 +58,26 @@
         equal(diagram.shapes.length, 2);
     });
 
+    test("Binds to HierarchicalDataSource instance", function() {
+        diagram = createDiagram({
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [{
+                    id: "1",
+                    bars: [{
+                        id: "1.1"
+                    }]
+                }],
+                schema: {
+                    model: {
+                        children: "bars"
+                    }
+                }
+            })
+        });
+
+        equal(diagram.shapes.length, 2);
+    });
+
     test("Applies visual to bound shapes", function() {
         diagram = createDiagram({
             dataSource: {

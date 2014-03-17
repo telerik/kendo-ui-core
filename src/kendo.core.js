@@ -1710,6 +1710,7 @@ function pad(number, digits, end) {
     function deepExtendOne(destination, source) {
         var ObservableArray = kendo.data.ObservableArray,
             DataSource = kendo.data.DataSource,
+            HierarchicalDataSource = kendo.data.HierarchicalDataSource,
             property,
             propValue,
             propType,
@@ -1718,8 +1719,9 @@ function pad(number, digits, end) {
         for (property in source) {
             propValue = source[property];
             propType = typeof propValue;
-            if (propType === OBJECT && propValue !== null && propValue.constructor !== Array &&
-                propValue.constructor !== ObservableArray && propValue.constructor !== DataSource) {
+            if (propType === OBJECT && propValue !== null &&
+                propValue.constructor !== Array && propValue.constructor !== ObservableArray &&
+                propValue.constructor !== DataSource && propValue.constructor !== HierarchicalDataSource) {
                 if (propValue instanceof Date) {
                     destination[property] = new Date(propValue.getTime());
                 } else if (isFunction(propValue.clone)) {
