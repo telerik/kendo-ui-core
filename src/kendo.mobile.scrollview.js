@@ -215,6 +215,8 @@ var __meta__ = {
             that._getPages();
             this.page = 0;
             this.pageSize = options.pageSize || 1;
+            this.contentHeight = options.contentHeight;
+            this.enablePager = options.enablePager;
         },
 
         scrollTo: function(page, instant) {
@@ -271,6 +273,20 @@ var __meta__ = {
                 width = size.width;
 
             this.pageElements.width(width);
+
+            if (this.contentHeight === "100%") {
+                var containerHeight = this.element.parent().height();
+
+                if(this.enablePager === true) {
+                    var pager = this.element.parent().find("ol.km-pages");
+                    if(pager.length) {
+                        containerHeight -= pager.outerHeight(true);
+                    }
+                }
+
+                this.element.css("height", containerHeight);
+                this.pageElements.css("height", containerHeight);
+            }
 
             // re-read pane dimension after the pageElements have been resized.
             pane.updateDimension();
