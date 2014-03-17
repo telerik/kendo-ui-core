@@ -77,6 +77,18 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "MobileApplication",
+                "mobile/apps/{app}",
+                new { controller = "MobileApps", action = "Index" }
+            );
+
+            routes.MapRoute(
+                "MobileApplicationInstance",
+                "mobile/apps/{app}/contents",
+                new { controller = "MobileApps", action = "App" }
+            );
+
+            routes.MapRoute(
                 "MobileDeviceExample",
                 "mobile/m/{section}/{example}.html",
                 new { controller = "MobileDevice", action = "Example" }

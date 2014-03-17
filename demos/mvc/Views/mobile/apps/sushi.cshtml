@@ -1,0 +1,164 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Kendo UI Mobile Sushi</title>
+        <link rel="stylesheet" href="@Url.Content("~/content/mobile/apps/sushi/css/style.css")">
+
+        @foreach (string styleName in Kendo.Models.StyleGroups.Mobile) {
+            <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+        }
+
+        @if (ViewBag.Debug) {
+            <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+        }
+
+        @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
+            <script src="@Url.Script(scriptName)"></script>
+        }
+
+        <script>
+            window.contentPath = '@Url.Content("~/content/mobile/apps/sushi")';
+        </script>
+
+        <script src="@Url.Content("~/content/mobile/apps/sushi/sushi.js")"></script>
+    </head>
+    <body>
+    <div data-role="layout" data-id="default">
+        <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a class="about-button" data-align="right" href="../../../content/mobile/apps/sushi/about.html" data-role="button">About</a>
+        </div>
+        </header>
+
+        <footer data-role="footer" data-id="default">
+        <div data-role="tabstrip">
+            <a href="#index" data-icon="home">Home</a>
+            <a href="#menu" data-icon="organize">Our menu</a>
+            <a href="#cart" data-icon="cart">Cart</a>
+            <a href="#account" data-icon="contacts">Account</a>
+        </div>
+        </footer>
+    </div>
+
+    <div data-title="Kendo sushi" data-role="view" id="index" data-url="/" data-layout="default" data-model="viewModel" data-before-show="showHomeView">
+        <ul
+            id="featured"
+            class="item-list"
+            data-type="flat"
+            data-role="listview"
+            data-template="menuTemplate"
+            data-bind="source: dataSource"
+        ></ul>
+    </div>
+
+    <div data-title="Menu" data-role="view" id="menu" data-layout="default" data-model="viewModel" data-show="showMenuView">
+        <ul
+            id="menuList"
+            class="item-list"
+            data-role="listview"
+            data-template="menuTemplate"
+            data-bind="source: dataSource"
+        ></ul>
+    </div>
+
+    <div data-role="view" id="cart" data-layout="default" data-title="Cart" data-model="viewModel" data-show="showCartView">
+        <h2 id="total" data-bind="text: showTotal"></h2>
+        <img src="../../../content/mobile/apps/sushi/images/sad.png" id="empty-icon">
+        <a id="checkout" data-bind="click: checkout" class="red-button" href="#done" data-role="button">Checkout</a>
+        <ul id="cartList"
+            class="item-list"
+            data-template="cartItemTemplate"
+            data-bind="source: added"
+            data-role="listview"
+            data-style="inset"></ul>
+    </div>
+
+    <div data-role="view" id="account" data-layout="default" data-title="My Account">
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                Account
+                <ul>
+                    <li>Username<span class="list-item-data">kendoSushi</span></li>
+                    <li>Email<span class="list-item-data">sushi@kendoui.com</span></li>
+                </ul>
+            </li>
+            <li>
+                Notifications
+                <ul>
+                    <li>New products<input type="checkbox" data-role="switch" /></li>
+                    <li>Exclusive promos<input type="checkbox" data-role="switch" checked="checked" /></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div data-role="view" id="done">
+        <header data-role="header"> <div data-role="navbar"> <span data-role="view-title">Done!</span> </div>
+        </header>
+        <div data-role="content" class="km-insetcontent">
+            <img src="../../../content/mobile/apps/sushi/images/happy.png" id="done-icon">
+            <h2>Thanks for shopping!</h2>
+            <h3>Your sushi is on the way.</h3>
+            <a id="done-button" href="#cart" data-role="button">Done</a>
+        </div>
+    </div>
+
+    <div data-role="view" id="details" data-transition="slide" data-layout="default" data-model="viewModel" data-show="showDetailsView">
+        <header data-role="header">
+        <div data-role="navbar">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-role="view-title">Item</span>
+        </div>
+        </header>
+
+        <div data-role="content">
+            <aside>
+                <img data-bind="srcPath: currentItem.image" /> <!-- src="content/images/200/#:image#" -->
+                <span class="price" data-bind="format: currentItem.price"></span></span>
+                <a data-role="button" data-bind="click: addToCart">Order</a>
+            </aside>
+            <h2 data-bind="text: currentItem.name"></h2>
+            <p data-bind="text: currentItem.description"></p>
+            <span class="added" data-bind="innerText: currentItem.ordered, visible: showLabel"></span>
+        </div>
+    </div>
+
+    <script id="menuTemplate" type="text/x-kendo-template">
+        <a data-role="button"
+            data-bind="click: addToCart"
+            data-item-id="#:id#">#:kendo.toString(price, "c")#</a>
+        <a
+            class="details-link"
+            data-role="listview-link"
+            href="\#details?id=#:id#">
+            <img src="#: window.contentPath #/images/75/#:image#" />
+            <h2>#:name#</h2>
+            <span class="added" data-bind="visible: ordered">Item added to cart #= data.ordered # times.</span>
+        </a>
+    </script>
+
+    <script id="cartItemTemplate" type="text/x-kendo-template">
+        <a
+            class="red-button"
+            data-bind="click: removeItem"
+            data-item-id="#:id#"
+            data-role="button">&nbsp;&\\#x2716;&nbsp;</a>
+        <a
+            class="details-link"
+            data-role="listview-link"
+            href="\#details?id=#:id#">
+            <img src="#: window.contentPath #/images/75/#:image#" />
+            <h2>#:name# (x #:ordered#)</h2>
+            <span class="price">total: #:kendo.toString(price * ordered, "c")#</span>
+        </a>
+    </script>
+
+    <script>
+        app = new kendo.mobile.Application($(document.body), { transition: "slide" });
+    </script>
+</body>
+</html>

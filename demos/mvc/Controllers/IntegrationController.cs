@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -22,8 +23,7 @@ namespace Kendo.Controllers
 
         public ActionResult Simulator()
         {
-            SetDebug();
-            return View();
+            return RedirectPermanent(Url.RouteUrl("MobileApplication", new { app = "sushi" }));
         }
 
         public ActionResult Bootstrap()
