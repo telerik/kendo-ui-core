@@ -7,7 +7,7 @@
         $("#scheduler").kendoScheduler({
             date: new Date("2013/6/26"),
             startTime: new Date("2013/6/26 07:00 AM"),
-            height: "28em",
+            height: kendo.support.mobileOS.wp ? "28em" : 600,
             views: [
                 { type: "day", selected: true },
                 { type: "week", selectedDateFormat: "{0:ddd,MMM dd,yyyy} - {1:ddd,MMM dd,yyyy}" },
