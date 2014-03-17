@@ -68,7 +68,8 @@
             SELECT = "select",
             ITEMROTATE = "itemRotate",
             PAN = "pan",
-            ZOOM = "zoom",
+            ZOOM_START = "zoomStart",
+            ZOOM_END = "zoomEnd",
             CONNECTION_CSS = "k-connection",
             SHAPE_CSS = "k-shape",
             SINGLE = "single",
@@ -1349,7 +1350,7 @@
                 connections: []
             },
 
-            events: [ZOOM, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
+            events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
 
             _mouseover: function(e) {
                 if (e.target._hover) {
@@ -2487,7 +2488,7 @@
                 if (diagram.scroller) {
                     diagram.bind(ITEMBOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
                     diagram.bind(CHANGE, $.proxy(this._autosizeCanvas, this));
-                    diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
+                    diagram.bind(ZOOM_END, $.proxy(this._autosizeCanvas, this));
                 }
             },
             _fetchFreshData: function () {

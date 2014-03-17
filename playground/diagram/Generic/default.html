@@ -411,7 +411,7 @@ $(function () {
     }
 
     $("#canvas").kendoDiagram({
-        zoom: function (e) {
+        zoomEnd: function (e) {
             slider.value(this._zoom);
         },
         theme: "black",
