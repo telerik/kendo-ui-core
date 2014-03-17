@@ -1550,14 +1550,27 @@ var __meta__ = {
             that._tabindex();
 
             wrapper.on(selectEvent + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
-                that._createSelection(e.currentTarget);
+                var which = e.which;
+                var button = e.button;
+                var isRight = which && which === 3 || button && button == 2;
+
+                if (!isRight) {
+                    that._createSelection(e.currentTarget);
+                }
+
                 wrapper.focus();
             });
 
             var mouseMoveHandler = $.proxy(that._mouseMove, that);
 
-            wrapper.on("mousedown" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", function() {
-                wrapper.on("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
+            wrapper.on("mousedown" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", function(e) {
+                var which = e.which;
+                var button = e.button;
+                var isRight = which && which === 3 || button && button == 2;
+
+                if (!isRight) {
+                    wrapper.on("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
+                }
             });
 
             wrapper.on("mouseup" + NS + " mouseleave" + NS, function() {
