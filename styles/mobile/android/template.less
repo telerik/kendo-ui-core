@@ -530,8 +530,6 @@
 .km-android .k-slider .k-draghandle:hover,
 .km-android .k-slider .k-draghandle:before,
 .km-android .km-switch-on .km-switch-handle,
-.km-android .km-state-active .km-listview-link,
-.km-android .km-state-active .km-listview-label,
 .km-android select:not([multiple]):focus option,
 .km-android .km-listview-label input[type=radio]:checked:after
 {
@@ -552,9 +550,7 @@
 .km-android .km-actionsheet > li > a:active,
 .km-android .km-popup .k-state-hover,
 .km-android .km-popup .k-state-focused,
-.km-android .km-popup .k-state-selected,
-.km-android .km-state-active .km-listview-link,
-.km-android .km-state-active .km-listview-label
+.km-android .km-popup .k-state-selected
 {
     text-indent: -10000px;
     text-shadow: 10000px 0 0 @android-active-color;
@@ -564,11 +560,16 @@
 .km-android2 .km-actionsheet > li > a:active,
 .km-android2 .km-popup .k-state-hover,
 .km-android2 .km-popup .k-state-focused,
-.km-android2 .km-popup .k-state-selected,
-.km-android2 .km-state-active .km-listview-link,
-.km-android2 .km-state-active .km-listview-label
+.km-android2 .km-popup .k-state-selected
 {
     text-shadow: 10000px 0 1px @android-active-color;
+}
+
+.km-android .km-state-active .km-listview-link,
+.km-android .km-state-active .km-listview-label
+{
+    color: @android-active-color;
+    background: inherit;
 }
 
 .km-android li.km-actionsheet-cancel > a:focus,
@@ -592,8 +593,6 @@
 .km-android .km-popup .k-state-hover > *,
 .km-android .km-popup .k-state-focused > *,
 .km-android .km-popup .k-state-selected > *,
-.km-android .km-state-active .km-listview-link > *,
-.km-android .km-state-active .km-listview-label > *,
 .km-android li.km-actionsheet-cancel > a:focus > *,
 .km-android li.km-actionsheet-cancel > a:active > *,
 .km-android .km-badge > *
