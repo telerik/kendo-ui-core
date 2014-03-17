@@ -1273,6 +1273,10 @@
                     id: "main-layer"
                 });
                 this.canvas.append(this.mainLayer);
+
+                this._zoom = 1.0;
+                this._pan = new Point();
+                this._adorners = [];
                 this.adornerLayer = new Group({
                     id: "adorner-layer"
                 });
@@ -2479,12 +2483,9 @@
                 return point.times(1 / this.zoom());
             },
             _initialize: function () {
-                this._zoom = 1.0;
-                this._pan = new Point();
                 this.shapes = [];
                 this._selectedItems = [];
                 this.connections = [];
-                this._adorners = [];
                 this._dataMap = [];
                 this.undoRedoService = new UndoRedoService();
                 this.id = diagram.randomId();
