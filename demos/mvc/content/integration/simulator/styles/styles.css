@@ -7,7 +7,7 @@ body
     min-height: 100%;
     font: 12px/normal Arial, Helvetica, sans-serif;
     background: url("../images/back.jpg") no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
     overflow: hidden;
 }
 
