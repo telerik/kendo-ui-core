@@ -10,8 +10,8 @@
         // Imports ================================================================
         var dataviz = kendo.dataviz,
             diagram = dataviz.diagram,
-            ui = kendo.ui,
-            Widget = ui.Widget,
+            ui = dataviz.ui,
+            Widget = kendo.ui.Widget,
             Class = kendo.Class,
             proxy = $.proxy,
             deepExtend = kendo.deepExtend,
@@ -1257,10 +1257,12 @@
         var Diagram = Widget.extend({
             init: function (element, options) {
                 var that = this;
+                kendo.destroy(element);
                 Widget.fn.init.call(that, element, options);
-                that._initTheme(options);
-                that._extendLayoutOptions(that.options);
                 element = that.element; // the hosting element
+                element.empty();
+                that._initTheme();
+                that._extendLayoutOptions(that.options);
 
                 that.element.addClass("k-widget k-diagram").attr("role", "diagram");
                 var canvasContainer = $("<div class='k-canvas-container'></div>").appendTo(element)[0];
@@ -1364,13 +1366,13 @@
                 }
             },
 
-            _initTheme: function(options) {
-                var diagram = this,
-                    themes = dataviz.ui.themes || {},
-                    themeName = ((options || {}).theme || "").toLowerCase(),
+            _initTheme: function() {
+                var that = this,
+                    themes = ui.themes || {},
+                    themeName = ((that.options || {}).theme || "").toLowerCase(),
                     themeOptions = (themes[themeName] || {}).diagram;
 
-                diagram.options = deepExtend({}, themeOptions, diagram.options);
+                that.options = deepExtend({}, themeOptions, that.options);
             },
 
             _createShapes: function() {

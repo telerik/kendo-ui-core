@@ -139,14 +139,14 @@
             };
         },
         teardown: function() {
-            window.removeMocksIn(window.kendo.ui.Diagram.fn);
+            window.removeMocksIn(window.kendo.dataviz.ui.Diagram.fn);
             delete window.initLayoutDiagram;
             diagram.destroy();
         }
     });
 
     test("grid layout", function () {
-        var diagramFn = kendo.ui.Diagram.prototype;
+        var diagramFn = kendo.dataviz.ui.Diagram.prototype;
         diagramFn.layout = diagramFn.layout.mock();
 
         window.initLayoutDiagram({
