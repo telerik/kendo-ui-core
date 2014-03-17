@@ -67,7 +67,7 @@ function _make_nodes(&$root, $levels) {
 
 function diagram_nodes() {
     $root = _node('0');
-    _make_nodes(&$root, array(3, 2, 2));
+    _make_nodes($root, array(3, 2, 2));
 
     return array($root);
 }
