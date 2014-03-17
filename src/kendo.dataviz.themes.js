@@ -304,6 +304,15 @@ var __meta__ = {
                 thumb: {
                     width: 14
                 }
+            },
+            handles: {
+                type: "rectangle",
+            },
+            select: {
+                stroke: {
+                    width: 1,
+                    dashType: "dot"
+                }
             }
         },
         connectionDefaults: {
@@ -505,7 +514,6 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        type: "rectangle",
                         background: "#3d3d3d",
                         stroke: {
                             color: WHITE
@@ -524,6 +532,11 @@ var __meta__ = {
                             color: WHITE
                         },
                         background: WHITE
+                    }
+                },
+                select: {
+                    stroke: {
+                        color: WHITE
                     }
                 }
             },
@@ -648,6 +661,71 @@ var __meta__ = {
                 },
                 line: {
                     color: "#293135"
+                }
+            }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#7ec6e3",
+                connectorDefaults: {
+                    background: "#003f59",
+                    stroke: {
+                        color: WHITE
+                    },
+                    hover: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#003f59"
+                        }
+                    }
+                },
+                content: {
+                    color: WHITE
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#003f59"
+                        },
+                        hover: {
+                            background: "#003f59",
+                            stroke: {
+                                color: "#003f59"
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: "#003f59"
+                        },
+                        background: "#003f59"
+                    }
+                },
+                select: {
+                    stroke: {
+                        color: "#003f59"
+                    }
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#003f59"
+                },
+                content: {
+                    color: WHITE
+                },
+                select: {
+                    handles: {
+                        background: "#3d3d3d",
+                        stroke: {
+                            color: "#efefef"
+                        }
+                    }
                 }
             }
         }

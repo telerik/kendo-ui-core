@@ -1443,7 +1443,7 @@
                 that._manipulating = false;
                 that.map = [];
                 that.shapes = [];
-                that.rect = new Rectangle(that.options.rect);
+                that.rect = new Rectangle(options.editable.select);
                 that.visual.append(that.rect);
                 that._createHandles();
                 that.text = new TextBlock();
@@ -1473,14 +1473,6 @@
                 that.refresh();
             },
             options: {
-                rect: {
-                    stroke: {
-                        color: "#ffffff",
-                        width: 1,
-                        dashType: "dot"
-                    },
-                    background: "none"
-                },
                 editable: {
                     rotate: {
                         thumb: {
