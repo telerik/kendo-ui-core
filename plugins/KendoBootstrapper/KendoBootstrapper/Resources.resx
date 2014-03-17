@@ -126,16 +126,19 @@
   <data name="CreatingCustomKendoFileSuccess" xml:space="preserve">
     <value>Custom Kendo UI file created successfully</value>
   </data>
+  <data name="EmptySelection" xml:space="preserve">
+    <value>Selection is empty</value>
+  </data>
   <data name="KendoNotFound" xml:space="preserve">
     <value>Kendo UI was not found in solution</value>
   </data>
   <data name="LintingProject" xml:space="preserve">
-    <value>Kendo Bootstrapper is looking for errors...</value>
+    <value>Kendo UI Bootstrapper is looking for errors...</value>
   </data>
   <data name="Ready" xml:space="preserve">
     <value>Ready</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
-    <value>Kendo Bootstrapper encountered an unknown error</value>
+    <value>Kendo UI Bootstrapper encountered an unknown error</value>
   </data>
 </root>

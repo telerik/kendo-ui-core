@@ -272,6 +272,8 @@ namespace Telerik.KendoBootstrapper
 
             if (selection.Text != String.Empty)
             {
+                DTE.StatusBar.Text = Resources.Ready;
+
                 var node = Path.Combine(AssemblyDirectory(), "node", "node");
                 var lint = Path.Combine(AssemblyDirectory(), "node", "node_modules", "kendo-lint", "bin", "kendo-lint");
 
@@ -300,6 +302,10 @@ namespace Telerik.KendoBootstrapper
                         DTE.StatusBar.Text = Resources.UnknownError;
                     }
                 }
+            }
+            else
+            {
+                DTE.StatusBar.Text = Resources.EmptySelection;
             }
         }
 

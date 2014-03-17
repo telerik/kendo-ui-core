@@ -65,7 +65,7 @@ namespace Telerik.KendoBootstrapper
         {
             StringBuilder result = new StringBuilder();
 
-            result.AppendFormat("<p id=\"resultsCount\">{0} search results for <strong style=\"color: #2e2e2e;\">{1}</strong>. {2}</p>", documentationItems.Count, selection, documentationItems.Count > 0 ? "Click on the component that you are using for further details." : "");
+            result.AppendFormat("<p id=\"resultsCount\">{0} search results for <strong style=\"color: #2e2e2e;\">'{1}'</strong>. {2}</p>", documentationItems.Count, selection, documentationItems.Count > 0 ? "Click on the component that you are using for further details." : "");
 
             if (documentationItems.Count > 0)
             {
