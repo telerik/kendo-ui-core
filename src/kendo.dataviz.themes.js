@@ -1248,6 +1248,71 @@ var __meta__ = {
                     color: "#515967"
                 }
             }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#1c82c2",
+                connectorDefaults: {
+                    background: "#515967",
+                    stroke: {
+                        color: WHITE
+                    },
+                    hover: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#282828"
+                        }
+                    }
+                },
+                content: {
+                    color: "#515967"
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#515967"
+                        },
+                        hover: {
+                            background: "#515967",
+                            stroke: {
+                                color: "#515967"
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: "#515967"
+                        },
+                        background: "#515967"
+                    }
+                },
+                select: {
+                    stroke: {
+                        color: "#515967"
+                    }
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#515967"
+                },
+                content: {
+                    color: "#515967"
+                },
+                select: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#515967"
+                        }
+                    }
+                }
+            }
         }
     });
 
