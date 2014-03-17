@@ -291,6 +291,9 @@ var __meta__ = {
         shapeDefaults: {
             hover: {
                 opacity: 0.2
+            },
+            stroke: {
+                width: 0
             }
         },
         editable: {
@@ -1089,9 +1092,9 @@ var __meta__ = {
                 rotate: {
                     thumb: {
                         stroke: {
-                            color: "#a7018f"
+                            color: "#282828"
                         },
-                        background: "#a7018f"
+                        background: "#282828"
                     }
                 },
                 select: {
@@ -1672,7 +1675,7 @@ var __meta__ = {
             },
             connectionDefaults: {
                 stroke: {
-                    color: "#0e0e0e"
+                    color: WHITE
                 },
                 content: {
                     color: WHITE
