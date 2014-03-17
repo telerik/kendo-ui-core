@@ -1687,7 +1687,6 @@ var __meta__ = {
                 }
             }
         }
-
     });
 
     registerTheme("moonlight", {
@@ -1845,6 +1844,71 @@ var __meta__ = {
                 },
                 line: {
                     color: "#8c909e"
+                }
+            }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#f3ae03",
+                connectorDefaults: {
+                    background: WHITE,
+                    stroke: {
+                        color: "#414550"
+                    },
+                    hover: {
+                        background: "#414550",
+                        stroke: {
+                            color: WHITE
+                        }
+                    }
+                },
+                content: {
+                    color: WHITE
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        background: "#414550",
+                        stroke: {
+                            color: WHITE
+                        },
+                        hover: {
+                            background: WHITE,
+                            stroke: {
+                                color: WHITE
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: WHITE
+                        },
+                        background: WHITE
+                    }
+                },
+                select: {
+                    stroke: {
+                        color: WHITE
+                    }
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: WHITE
+                },
+                content: {
+                    color: WHITE
+                },
+                select: {
+                    handles: {
+                        background: "#414550",
+                        stroke: {
+                            color: WHITE
+                        }
+                    }
                 }
             }
         }
