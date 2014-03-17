@@ -1035,7 +1035,9 @@ var __meta__ = {
         },
 
         replace: function(dataItems) {
+            this.options.type = "flat";
             this.element.empty();
+            this._style();
             return this.insertAt(dataItems, 0);
         },
 
