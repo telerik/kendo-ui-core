@@ -2297,6 +2297,74 @@ var __meta__ = {
                     color: "#cccccc"
                 }
             }
+        },
+        diagram: {
+            shapeDefaults: {
+                background: "#428bca",
+                connectorDefaults: {
+                    background: "#333333",
+                    stroke: {
+                        color: WHITE
+                    },
+                    hover: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#333333"
+                        }
+                    }
+                },
+                content: {
+                    color: "#333333"
+                }
+            },
+            editable: {
+                resize: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#333333"
+                        },
+                        hover: {
+                            background: "#333333",
+                            stroke: {
+                                color: "#333333"
+                            }
+                        }
+                    }
+                },
+                rotate: {
+                    thumb: {
+                        stroke: {
+                            color: "#333333"
+                        },
+                        background: "#333333"
+                    }
+                },
+                select: {
+                    stroke: {
+                        color: "#333333"
+                    }
+                }
+            },
+            connectionDefaults: {
+                stroke: {
+                    color: "#c4c4c4"
+                },
+                content: {
+                    color: "#333333"
+                },
+                select: {
+                    handles: {
+                        background: WHITE,
+                        stroke: {
+                            color: "#333333"
+                        }
+                    },
+                    stroke: {
+                        color: "#c4c4c4"
+                    }
+                }
+            }
         }
     });
 
