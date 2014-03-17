@@ -294,26 +294,22 @@
 
         curvePoints: function() {
             var arc = this,
-                interval = arc._arcInterval(),
-                startAngle = interval.startAngle,
-                endAngle = interval.endAngle,
-                angles = [],
-                i, points,
+                i, points, nextAngle,
+                startAngle = arc.startAngle,
+                endAngle = arc.endAngle,
+                dir = arc.counterClockwise ? -1 : 1,
                 curvePoints = [arc.pointAt(startAngle)],
-                currentAngle = startAngle;
+                currentAngle = startAngle,
+                interval = arc._arcInterval(),
+                intervalAngle = interval.endAngle - interval.startAngle,
+                subIntervalsCount = math.ceil(intervalAngle / arc.MAX_INTERVAL),
+                subIntervalAngle = intervalAngle / subIntervalsCount;
 
-            if (startAngle !== endAngle) {
-                while(endAngle - currentAngle > arc.MAX_INTERVAL) {
-                    angles.push(currentAngle);
-                    currentAngle += arc.MAX_INTERVAL;
-                }
-
-                angles.push(currentAngle, endAngle);
-
-                for (i = 1; i < angles.length; i++) {
-                    points = arc._intervalCurvePoints(angles[i - 1], angles[i]);
-                    curvePoints.push(points.cp1, points.cp2, points.p2);
-                }
+            for (i = 1; i <= subIntervalsCount; i++) {
+                nextAngle = currentAngle + dir * subIntervalAngle;
+                points = arc._intervalCurvePoints(currentAngle, nextAngle);
+                curvePoints.push(points.cp1, points.cp2, points.p2);
+                currentAngle = nextAngle;
             }
 
             return curvePoints;

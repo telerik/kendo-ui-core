@@ -80,17 +80,17 @@
 
             var arcGeometry = new geometry.Arc(Point.create(300, 300), {
                 startAngle: 120,
-                endAngle: 90,
-                radiusX: 80,
-                radiusY: 40,
-                counterClockwise: true
+                endAngle: 0,
+                radiusX: 50,
+                radiusY: 100,
+                counterClockwise: false
             });
 //M300 340 C 286 340 272.1 338.1 260 334.6
             var arc = new drawing.Arc(arcGeometry, strokeOptions);
             group.append(arc, new drawing.Circle(new geometry.Circle(Point.create(300, 300), 3), strokeOptions), rectPath(arc.boundingRect(), strokeOptions));//circle, circleBoundingPath, curve, curveBoundingRect);
             //surface.draw(group);
             var viewModel = kendo.observable({
-                path: "M 260 334.6 A 80 40 0 0 0 300 340",
+                path: "M 340 265.4 a 80 40 0 0 1 29.3 54.6",//"M 300 300 v 86.6 h-25 A 50 100 0 1 1 350 300 c -5 100 100 100 100 -100 10 -70 50 100 50 100",//"M 300 300 A 50 100 0 1 1 350 300"
                 drawPath: function() {
                     var pathString = this.get("path");
                     if (pathString) {
@@ -99,7 +99,7 @@
                             multiPathBoundingRect = multiPath.boundingRect();
 
                         multiPathGroup.append(multiPath, rectPath(multiPathBoundingRect, strokeOptions));
-                       // surface.clear();
+                        surface.clear();
                        surface.draw(multiPathGroup);
                     }
 

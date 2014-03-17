@@ -231,30 +231,29 @@
         }
     }
     
-    module("P=arser / Arc", {});
+    module("Parser / Arc", {});
      
     test("parses arc to curve", function() {
-        multiPath = parser.parse("M 300 300 A 50 100 0 1 1 350 300");
+        multiPath = parser.parse("M 300 300 A 50 100 0 1 1 350 300");          
         path = multiPath.paths[0];
         var expectedPath = new d.Path();
         expectedPath.moveTo(300, 300);
-        expectedPath.curveTo(Point.create(277.3,273.8), Point.create(268.6, 208.7), Point.create(281.7,163.4));
-        expectedPath.curveTo(Point.create(294.8,118.1), Point.create(327.3, 100.6), Point.create(350, 126.8));
-        expectedPath.curveTo(Point.create(372.7, 153), Point.create(381.4, 218.1), Point.create(368.3, 263.4));
-        expectedPath.curveTo(Point.create(363.9, 278.5), Point.create(357.6, 291.3), Point.create(350, 300));
+        expectedPath.curveTo(Point.create(281.1, 278.2), Point.create(271.1, 229.7), Point.create(276.7, 187.5));
+        expectedPath.curveTo(Point.create(282.4, 145.4), Point.create(303.2, 113.4), Point.create(325, 113.4));
+        expectedPath.curveTo(Point.create(346.8, 113.4), Point.create(367.6, 145.4), Point.create(373.3, 187.5));
+        expectedPath.curveTo(Point.create(378.9, 229.7), Point.create(368.9, 278.2), Point.create(350, 300));
         
         closePaths(path, expectedPath, TOLERANCE);
     });
 
-    // test("parses arc with relative coordinates", function() {
-        // multiPath = parser.parse("M 340 265.4 a 80 40 0 0 1 29.3 54.6");
-        // path = multiPath.paths[0];
+    test("parses arc with relative coordinates", function() {
+        multiPath = parser.parse("M 340 265.4 a 80 40 0 0 1 29.3 54.6");
+        path = multiPath.paths[0];
+        var expectedPath = new d.Path();
+        expectedPath.moveTo(340, 265.4);
+        expectedPath.curveTo(Point.create(376.3, 275.9), Point.create(390.2, 301.9), Point.create(369.3, 320));
         
-        // var expectedPath = new d.Path();
-        // expectedPath.moveTo(340, 265.4);
-        // expectedPath.curveTo(Point.create(376.3, 275.8), Point.create(390.2, 301.9), Point.create(369.3, 320));
-        
-        // closePaths(path, expectedPath, TOLERANCE);
-    // });    
+        closePaths(path, expectedPath, TOLERANCE);
+    });    
     
 })();    

@@ -622,7 +622,7 @@
 
     test("renders curve path", function() {
         var result = arcNode.render();        
-        ok(result.indexOf("d='M150 100 C 150 152.4 126.2 200 100 200 91.3 200 82.6 195.3 75 186.6'") !== -1);
+        ok(result.indexOf("d='M150 100 C 150 134.9 140.1 169.1 125 186.6 109.9 204.1 90.1 204.1 75 186.6'") !== -1);
     });
 
     test("renders arc fill", function() {
