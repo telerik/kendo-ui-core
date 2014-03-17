@@ -53,17 +53,23 @@
                 <a class="nav-button" data-align="left" data-role="backbutton" href="#/" data-transition="slide:left reverse">Back</a>
                 <span data-role="view-title"></span>
                 <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+                <a id="androidLightChanger" class="index-button" data-align="right" data-role="button" data-click="changeAndroidSkin" style="display: none">Light</a>
             </div>
         </header>
     </div>
 
     <script>
         document.title = "@ViewBag.Title";
+        var isAndroid = kendo.support.mobileOS.android;
 
         function triggerIndexButton(e) {
             var viewID = e.view.element.attr("id");
             e.layout.header.find(".index-button").css({display: viewID != "index" ? "none" : ""});
             e.layout.header.find(".nav-button").css({display: viewID != "index" ? "" : "none"});
+
+            if (!isAndroid) {
+                $("#androidLightChanger").hide();
+            }
         }
 
         function changeSkin(e) {
@@ -71,6 +77,17 @@
 
             window.kendoMobileApplication.skin(nextSkin.toLowerCase());
             e.sender.element.find(".km-text").text(nextSkin ? "Native" : "Flat");
+
+            if (isAndroid) {
+                $("#androidLightChanger")[nextSkin ? "hide" : "show"]();
+            }
+        }
+
+        function changeAndroidSkin(e) {
+            var nextSkin = e.sender.element.text() == "Light" ? "android-light" : "android-dark";
+
+            window.kendoMobileApplication.skin(nextSkin.toLowerCase());
+            e.sender.element.find(".km-text").text(nextSkin == "android-light" ? "Dark" : "Light");
         }
 
         window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
