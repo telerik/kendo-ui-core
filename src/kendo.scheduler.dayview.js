@@ -1464,9 +1464,9 @@ var __meta__ = {
 
             this._eventsByResource(events, this.groupedResources, eventsByResource);
 
-            var eventsPerDate = this._dates.map(function(date) {
+            var eventsPerDate = $.map(this._dates, function(date) {
                 return Math.max.apply(null,
-                    eventsByResource.map(function(events) {
+                    $.map(eventsByResource, function(events) {
                         return events.filter(function(event) {
                             return event.isMultiDay() && isInDateRange(date, event.start, event.end);
                         }).length;
