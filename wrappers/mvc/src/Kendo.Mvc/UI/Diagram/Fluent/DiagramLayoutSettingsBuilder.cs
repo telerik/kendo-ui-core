@@ -64,7 +64,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Defines where the circle/arc starts. The positive direction is clockwise and the angle is in radians. This setting is specific to the radial tree layout.
+        /// Defines where the circle/arc starts. The positive direction is clockwise and the angle is in degrees. This setting is specific to the radial tree layout.
         /// </summary>
         /// <param name="value">The value that configures the startradialangle.</param>
         public DiagramLayoutSettingsBuilder StartRadialAngle(double value)
@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Defines where the circle/arc ends. The positive direction is clockwise and the angle is in radians. Default is 2*Math.PI. This setting is specific to the radial tree layout.
+        /// Defines where the circle/arc ends. The positive direction is clockwise and the angle is in degrees. This setting is specific to the radial tree layout.
         /// </summary>
         /// <param name="value">The value that configures the endradialangle.</param>
         public DiagramLayoutSettingsBuilder EndRadialAngle(double value)

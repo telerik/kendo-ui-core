@@ -10891,7 +10891,7 @@ If zoomRate is less than 1, zooming will be reversed.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Defines where the circle/arc ends. The positive direction is clockwise and the angle is in radians. Default is 2*Math.PI. This setting is specific to the radial tree layout.</description>
+            <description>Defines where the circle/arc ends. The positive direction is clockwise and the angle is in degrees. This setting is specific to the radial tree layout.</description>
             <name>endRadialAngle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -10933,7 +10933,7 @@ If zoomRate is less than 1, zooming will be reversed.</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Defines where the circle/arc starts. The positive direction is clockwise and the angle is in radians. This setting is specific to the radial tree layout.</description>
+            <description>Defines where the circle/arc starts. The positive direction is clockwise and the angle is in degrees. This setting is specific to the radial tree layout.</description>
             <name>startRadialAngle</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -19741,8 +19741,7 @@ Every n-th label is rendered where n is the step</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The label template.
-Template variables:</description>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -19786,8 +19785,7 @@ Template variables:</description>
 
 
     <tag>
-        <description>The label template.
-Template variables:</description>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
         <name>sparkline-categoryAxisItem-labels-template</name>
         <tag-class>com.kendoui.taglib.sparkline.CategoryAxisItemLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -23952,8 +23950,7 @@ Every n-th label is rendered where n is the step</description>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The label template.
-Template variables:</description>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -23997,8 +23994,7 @@ Template variables:</description>
 
 
     <tag>
-        <description>The label template.
-Template variables:</description>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
         <name>stockChart-categoryAxisItem-labels-template</name>
         <tag-class>com.kendoui.taglib.stockchart.CategoryAxisItemLabelsTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
