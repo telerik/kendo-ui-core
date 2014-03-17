@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <title>Spline</title>
-        <link href="../styles/dataviz/kendo.dataviz.min.css" rel="stylesheet" />
+        <link href="../dist/styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
@@ -20,9 +20,9 @@
     </head>
     <body>
      
-
-      <div id="axisLineLabels"></div>
-      <--   
+    <div id="multiaxis"></div>
+   <--      <div id="axisLineLabels"></div>
+      
       <div id="stack100"></div>
      <div id="stack"></div>
     <div id="negativePowers"></div>
@@ -46,7 +46,59 @@
      <div id="boxplot"></div>
      -->
        <script>
-       
+       $("#multiaxis").kendoChart({
+            title: {
+                text: "Hybrid car mileage report"
+            },
+            legend: {
+                position: "top"
+            },
+            series: [{
+                type: "column",
+                data: [20, 40, 45, 30, 50],
+                stack: true,
+                name: "on battery",
+                color: "#cc6e38",
+              axis: "km"
+            }, {
+                type: "column",
+                data: [20, 30, 35, 35, 40],
+                stack: true,
+                name: "on gas",
+                color: "#ef955f",
+              axis: "km"
+            }, {
+                type: "line",
+                data: [30, 38, 40, 32, 42],
+                name: "mpg",
+                color: "#ec5e0a",
+                axis: "mpg"
+            }, {
+                type: "line",
+                data: [7.8, 6.2, 5.9, 7.4, 5.6],
+                name: "l/100 km",
+                color: "#4e4141",
+                axis: "mpg"
+            }],
+            valueAxes: [{
+                title: { text: "miles" },
+                min: 0,
+                max: 100
+            }, {
+                name: "km",
+                title: { text: "km" }
+                
+            }, {
+                name: "mpg",
+                title: { text: "miles per gallon" },
+                color: "#ec5e0a",
+                type:"log"
+            }],
+            categoryAxis: {
+                categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                axisCrossingValues: [0, 0, 10, 10]
+            }
+        });
        $("#axisLineLabels").kendoChart({
             dataSource: {
                 data: []

@@ -2457,11 +2457,11 @@ var __meta__ = {
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
             if (!defined(a)) {
-                a = b || 0;
+                a = b || 1;
             }
 
             if (!defined(b)) {
-                b = a || 0;
+                b = a || 1;
             }
 
             if(a <= 0 || b <= 0) {
