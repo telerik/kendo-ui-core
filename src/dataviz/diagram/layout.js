@@ -17,6 +17,7 @@
         Utils = diagram.Utils,
         Point = diagram.Point,
         EPSILON = 1e-06,
+        DEG_TO_RAD = Math.PI / 180,
         contains = Utils.contains,
         grep = $.grep;
 
@@ -113,7 +114,7 @@
             /**
              * Tree-radial option: the angle at which the layout starts.
              */
-            endRadialAngle: 2 * Math.PI,
+            endRadialAngle: 360,
             /**
              * Tree-radial option: the separation between levels.
              */
@@ -1099,8 +1100,8 @@
             this.setChildrenDirection(this.center, "Radial", false);
             this.setChildrenLayout(this.center, "Default", false);
             this.previousRoot = null;
-            var startAngle = this.options.startRadialAngle;
-            var endAngle = this.options.endRadialAngle;
+            var startAngle = this.options.startRadialAngle * DEG_TO_RAD;
+            var endAngle = this.options.endRadialAngle * DEG_TO_RAD;
             if (endAngle <= startAngle) {
                 throw "Final angle should not be less than the start angle.";
             }
