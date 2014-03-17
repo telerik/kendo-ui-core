@@ -88,30 +88,6 @@
         ok(!td.hasClass("k-state-selected"));
     });
 
-    asyncTest("scheduler does not move selection on right mouse click", function() {
-
-        var row = container.find(".k-scheduler-content tr");
-        var first = row.find("td:first");
-        var last = row.find("td:last");
-
-        first.trigger({
-            type: "mousedown",
-            currentTarget: first,
-            which: 3
-        });
-
-        last.trigger({
-            type: "mousemove",
-            currentTarget: last,
-            which: 3
-        });
-
-        setTimeout(function() {
-            start();
-            ok(!last.hasClass("k-state-selected"));
-        }, 200);
-    });
-
     test("scheduler sets selection range based on clicked cell", function() {
         var td = container.find(".k-scheduler-header td").eq(5),
             slot = scheduler.view().selectionByElement(td),
