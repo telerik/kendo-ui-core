@@ -14,25 +14,25 @@ function orgchart_items() {
                 'title' => 'Design Lead',
                 'colorScheme' => '#ef6944',
                 'items' => array(array(
-                        'firstName' => 'Ann',
-                        'lastName' => 'Devon',
-                        'image' => 'ann.jpg',
-                        'title' => 'UI Designer',
-                        'colorScheme' => '#ef6944'
-                    ), array(
-                        'firstName' => 'Fran',
-                        'lastName' => 'Wilson',
-                        'image' => 'fran.jpg',
-                        'title' => 'Design Intern',
-                        'colorScheme' => '#ef6944'
-                    )
-                )
+                    'firstName' => 'Ann',
+                    'lastName' => 'Devon',
+                    'image' => 'ann.jpg',
+                    'title' => 'UI Designer',
+                    'colorScheme' => '#ef6944'
+                ))
         ), array(
             'firstName' => 'Diego',
             'lastName' => 'Roel',
             'image' => 'diego.jpg',
             'title' => 'QA Engineer',
-            'colorScheme' => '#ee587b'
+            'colorScheme' => '#ee587b',
+            'items' => array(array(
+                'firstName' => 'Fran',
+                'lastName' => 'Wilson',
+                'image' => 'fran.jpg',
+                'title' => 'QA Intern',
+                'colorScheme' => '#ee587b'
+            ))
         ), array(
             'firstName' => 'Felipe',
             'lastName' => 'Izquiedro',
