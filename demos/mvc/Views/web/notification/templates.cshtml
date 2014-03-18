@@ -89,6 +89,8 @@
                         notification.hide();
                     });
 
+                    $(document).one("kendo:pageUnload", function(){ if (notification) { notification.hide(); } });
+
                 });
             </script>
             
