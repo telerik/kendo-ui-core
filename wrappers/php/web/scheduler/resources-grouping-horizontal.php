@@ -80,6 +80,7 @@ $meetingIdField->type('number')
 $titleField = new \Kendo\Data\DataSourceSchemaModelField('title');
 $titleField->from('Title')
         ->defaultValue('No title')
+        ->type('string')
         ->validation(array('required' => true));
 
 $startField = new \Kendo\Data\DataSourceSchemaModelField('start');
