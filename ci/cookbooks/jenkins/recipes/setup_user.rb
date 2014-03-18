@@ -47,4 +47,14 @@ else
         command "find /var/lib/jenkins/.mozilla/firefox -maxdepth 1 -type d -mtime +3 -exec rm -r {} \\\;"
         action :create
     end
+
+    cron "cleanup_chrome_profile" do
+        minute "0"
+        hour "20"
+        day "*"
+        month "*"
+        weekday "*"
+        command "find /tmp/.com.google.Chrome.* -maxdepth 0 -type d -mtime +2 -exec rm -r {} \\\;"
+        action :create
+    end
 end
