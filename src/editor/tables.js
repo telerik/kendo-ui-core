@@ -20,7 +20,7 @@ var kendo = window.kendo,
     BlockFormatFinder = Editor.BlockFormatFinder,
     registerTool = Editor.EditorUtils.registerTool;
 
-var editableCell = "<td contentEditable='true'>" + Editor.emptyElementContent + "</td>";
+var editableCell = "<td>" + Editor.emptyElementContent + "</td>";
 
 var tableFormatFinder = new BlockFormatFinder([{tags:["table"]}]);
 
@@ -29,7 +29,7 @@ var TableCommand = InsertHtmlCommand.extend({
         rows = rows || 1;
         columns = columns || 1;
 
-        return "<table class='k-table' contentEditable='false' data-last>" +
+        return "<table class='k-table' data-last>" +
                    new Array(rows + 1).join("<tr>" + new Array(columns + 1).join(editableCell) + "</tr>") +
                "</table>";
     },
