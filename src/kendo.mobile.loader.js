@@ -66,7 +66,7 @@ var __meta__ = {
 
         transition: function() {
             this.captureEvents = true;
-                this.container.css("pointer-events", "none");
+            this.container.css("pointer-events", "none");
         },
 
         transitionDone: function() {

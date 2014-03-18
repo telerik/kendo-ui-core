@@ -1405,6 +1405,11 @@ var __meta__ = {
                 originalPosition = element.css(POSITION),
                 originalOverflow;
 
+            // edge case for grid/scheduler, where the previous is already destroyed.
+            if (!container.length) {
+                container = element.parent();
+            }
+
             this.container = container;
             this.deferred = deferred;
             this.isAbsolute = originalPosition  == "absolute";
