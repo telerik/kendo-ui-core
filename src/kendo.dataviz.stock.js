@@ -686,8 +686,7 @@ var __meta__ = {
 
         categoryAxes.push(
             deepExtend({}, base, {
-                    // TODO: Width based
-                    maxDateGroups: 200,
+                    maxDateGroups: 200
                 }, user, {
                 name: NAVIGATOR_AXIS,
                 baseUnit: "fit",
@@ -696,7 +695,6 @@ var __meta__ = {
                 majorTicks: { visible: false }
             }), deepExtend({}, base, user, {
                 name: NAVIGATOR_AXIS + "_labels",
-                // TODO: Width based
                 maxDateGroups: 20,
                 baseUnitStep: "auto",
                 autoBaseUnitSteps: {
@@ -705,7 +703,6 @@ var __meta__ = {
                 majorTicks: { visible: true }
             }), deepExtend({}, base, user, {
                 name: NAVIGATOR_AXIS + "_ticks",
-                // TODO: Width based
                 maxDateGroups: 200,
                 majorTicks: {
                     visible: true,
