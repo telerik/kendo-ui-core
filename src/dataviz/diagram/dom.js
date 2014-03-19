@@ -10,7 +10,6 @@
         // Imports ================================================================
         var dataviz = kendo.dataviz,
             diagram = dataviz.diagram,
-            ui = dataviz.ui,
             Widget = kendo.ui.Widget,
             Class = kendo.Class,
             proxy = $.proxy,
@@ -1366,7 +1365,7 @@
 
             _initTheme: function() {
                 var that = this,
-                    themes = ui.themes || {},
+                    themes = dataviz.ui.themes || {},
                     themeName = ((that.options || {}).theme || "").toLowerCase(),
                     themeOptions = (themes[themeName] || {}).diagram;
 
@@ -1420,7 +1419,7 @@
 
                 that.destroyScroller();
 
-                if (that.options.draggable && ui.DropTarget) {
+                if (that.options.draggable && kendo.ui.DropTarget) {
                     that.element.kendoDropTarget("destroy");
                 }
             },
@@ -2225,7 +2224,7 @@
             _drop: function () {
                 var that = this,
                     options = that.options;
-                if (options.draggable && ui.DropTarget) {
+                if (options.draggable && kendo.ui.DropTarget) {
                     this.element.kendoDropTarget({
                         drop: function (e) {
                             var item, pos;
@@ -2597,7 +2596,7 @@
             }
         });
 
-        ui.plugin(Diagram);
+        dataviz.ui.plugin(Diagram);
 
         kendo.deepExtend(diagram, {
             Shape: Shape,
