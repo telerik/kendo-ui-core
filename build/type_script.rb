@@ -539,31 +539,16 @@ def type_script(*args, &block)
 end
 
 namespace :type_script do
-    desc "Test TypeScript generation"
-    task :test do
-        MD_API_SUITES.each do |suite, dependencies|
-            path = "dist/kendo.#{suite}.d.ts"
-
-            File.write(path, get_type_script(path, dependencies, suite == 'icenium'))
-
-            sh "node_modules/typescript/bin/tsc --noImplicitAny #{path}"
-        end
-
-    end
-
     %w(master production).each do |branch|
         namespace branch do
             desc "Test TypeScript generation"
             task :test do
                 sync_docs_submodule(branch)
-                MD_API_SUITES.each do |suite, dependencies|
-                    path = "dist/kendo.#{suite}.d.ts"
+                path = "dist/kendo.all.d.ts"
 
-                    File.write(path, get_type_script(path, dependencies, suite == 'icenium'))
+                File.write(path, get_type_script(path, md_api_suite("all"), false))
 
-                    sh "node_modules/typescript/bin/tsc --noImplicitAny #{path}"
-                end
-
+                sh "node_modules/typescript/bin/tsc --noImplicitAny #{path}"
             end
         end
     end

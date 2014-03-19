@@ -101,7 +101,7 @@ namespace :intellisense do
             task :test do
                 sync_docs_submodule(branch)
                 File.open("dist/kendo.intellisense-#{branch}.js", "w") do |f|
-                    f.write get_intellisense(MD_API_SUITES['all'])
+                    f.write get_intellisense(md_api_suite('all'))
                     sh "node_modules/jshint/bin/jshint #{f.path}"
                 end
             end

@@ -86,7 +86,7 @@ namespace :vsdoc do
     desc "Test VSDoc generation"
     task :test do
         File.open("dist/kendo.vsdoc-master.js", "w") do |f|
-            f.write get_vsdoc(MD_API_SUITES['all'])
+            f.write get_vsdoc(md_api_suite('all'))
             sh "node_modules/jshint/bin/jshint #{f.path}"
         end
     end
@@ -96,7 +96,7 @@ namespace :vsdoc do
             task :test do
                 sync_docs_submodule(branch)
                 File.open("dist/kendo.vsdoc-#{branch}.js", "w") do |f|
-                    f.write get_vsdoc(MD_API_SUITES['all'])
+                    f.write get_vsdoc(md_api_suite('all'))
                     sh "node_modules/jshint/bin/jshint #{f.path}"
                 end
             end
