@@ -17,7 +17,8 @@ exports.afterTestFiles = [
 ];
 
 exports.compiledStyleSheets = [
-    'dist/styles/web/kendo.common.core.css',
+    'dist/styles/web/kendo.common.core.min.css',
+    'dist/styles/mobile/kendo.mobile.all.min.css',
     'dist/styles/web/kendo.rtl.css'
 ];
 
