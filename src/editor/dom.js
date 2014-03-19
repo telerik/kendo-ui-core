@@ -140,6 +140,10 @@ var Dom = {
     findNodeIndex: function(node, skipText) {
         var i = 0;
 
+        if (!node) {
+            return -1;
+        }
+
         while (true) {
             node = node.previousSibling;
 

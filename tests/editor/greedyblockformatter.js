@@ -113,4 +113,17 @@ test("apply table cell formats to multiple table cells", function() {
     equal(editor.value(), '<table><tbody><tr><td class="foo">foo</td><td class="foo">bar</td></tr></tbody></table>');
 });
 
+test("apply does not fail on empty table cells", function() {
+    editor.value("<table><tr><td>foo</td><td></td><td>bar</td></tr></table>");
+
+    var formatter = new GreedyBlockFormatter([{ tags: ['h3'] }], {});
+
+    formatter.editor = editor;
+    var td = $("td", editor.body);
+    td[1].innerHTML = "\ufeff";
+    formatter.apply([td[0].firstChild, td[1].firstChild, td[2].firstChild]);
+
+    equal(editor.value(), '<table><tbody><tr><td><h3>foo</h3></td><td></td><td><h3>bar</h3></td></tr></tbody></table>');
+});
+
 }());
