@@ -250,7 +250,7 @@ var __meta__ = {
                     .on("focus" + ns, function() { that._placeholder(false); })
                     .on("blur" + ns, function() {
                         clearTimeout(that._typing);
-                        that._placeholder();
+                        that._placeholder(!that._dataItems[0], true);
                         that.close();
 
                         if (that._state === FILTER) {
@@ -686,7 +686,7 @@ var __meta__ = {
             }, 100);
         },
 
-        _placeholder: function(show) {
+        _placeholder: function(show, skipCaret) {
             var that = this,
                 input = that.input,
                 active = activeElement();
@@ -705,7 +705,7 @@ var __meta__ = {
             input.toggleClass("k-readonly", show)
                  .val(show ? that.options.placeholder : "");
 
-            if (input[0] === active) {
+            if (input[0] === active && !skipCaret) {
                 kendo.caret(input[0], 0, 0);
             }
 
