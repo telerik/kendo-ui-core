@@ -640,9 +640,14 @@ function pad(number, digits, end) {
             } else if (match === "f") {
                 result = math.floor(date.getMilliseconds() / 100);
             } else if (match === "ff") {
-                result = math.floor(date.getMilliseconds() / 10);
-            } else if (match === "fff") {
                 result = date.getMilliseconds();
+                if (result > 99) {
+                    result = math.floor(result / 10)
+                }
+
+                result = pad(result);
+            } else if (match === "fff") {
+                result = pad(date.getMilliseconds(), 3);
             } else if (match === "tt") {
                 result = date.getHours() < 12 ? calendar.AM[0] : calendar.PM[0];
             }
