@@ -1,0 +1,55 @@
+@import "../common/switch.less";
+@import "base.less";
+
+/* Switch */
+
+/* Switch */
+
+.km-blackberry .km-switch
+{
+    width: 6rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+
+.km-blackberry .km-switch-wrapper
+{
+    display: none;
+}
+
+.km-blackberry .km-switch-container
+{
+    padding: 1px 0 1px 1px;
+    .box-sizing(border-box);
+    border-radius: 3em;
+    border-width: @blackberry-border-width;
+    border-style: solid;
+}
+
+.km-blackberry .km-switch-handle
+{
+    border-radius: @blackberry-switch-radius;
+    width: 1.7em;
+    height: 1.7em;
+    margin: 0 4px 0 0;
+}
+
+.km-blackberry .km-switch-label-off
+{
+    left: 1.7em;
+}
+
+.km-blackberry .km-switch-label-on
+{
+    left: -4.1em;
+}
+
+.km-blackberry .km-switch-label-on,
+.km-blackberry .km-switch-label-off
+{
+    text-transform: capitalize;
+    text-shadow: none;
+    width: 240%;
+    line-height: 1.8em;
+    vertical-align: middle;
+}

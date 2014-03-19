@@ -1,0 +1,117 @@
+@import "../common/forms.less";
+@import "base.less";
+
+/* Slider */
+
+.km-ios .k-slider .k-draghandle,
+.km-ios .k-slider .k-draghandle:hover
+{
+    border: 0;
+    border-radius: 5em;
+}
+
+.km-ios .k-slider-vertical .k-draghandle
+{
+    margin-left: -.3em;
+}
+
+.km-ios .k-slider-selection
+{
+    background: 0 0 no-repeat;
+}
+
+.km-ios .k-slider-horizontal .k-draghandle
+{
+    top: -.4em;
+}
+
+.km-ios .k-slider-track
+{
+    margin: -.5em .5em 0 0;
+    .box-sizing(content-box);
+}
+
+.km-ios .k-slider-horizontal .k-slider-selection
+{
+    margin-left: 0;
+}
+
+/* Dialog */
+
+.km-ios .km-dialog
+{
+    border-width: 2px;
+    border-style: solid;
+}
+
+.km-ios .km-dialog .km-button
+{
+    display: block;
+    margin: .4em;
+    font-size: 1.3em;
+    text-align: center;
+    padding: .44em;
+    .user-select(none);
+    border-radius: 4px;
+}
+
+/* Forms */
+
+.km-ios .km-list input[type=password],
+.km-ios .km-list input[type=search],
+.km-ios .km-list input[type=number],
+.km-ios .km-list input[type=tel],
+.km-ios .km-list input[type=url],
+.km-ios .km-list input[type=email],
+.km-ios .km-list input[type=month],
+.km-ios .km-list input[type=color],
+.km-ios .km-list input[type=week],
+.km-ios .km-list input[type=date],
+.km-ios .km-list input[type=time],
+.km-ios .km-list input[type=datetime],
+.km-ios .km-list input[type=datetime-local],
+.km-ios .km-list input[type=text]:not(.k-input),
+.km-ios .km-list select:not([multiple]),
+.km-ios .km-list .k-dropdown-wrap,
+.km-ios .km-list textarea
+{
+    .appearance(none);
+    font-size: 1.1rem;
+    min-width: 6em;
+    border: 0;
+    padding: .4em;
+    outline: none;
+    background: transparent;
+}
+
+.km-ios .km-list .k-dropdown-wrap
+{
+	padding: .2em .8em;
+}
+
+.km-ios .km-list .k-dropdown
+{
+    margin-top: -1.05em;
+    font-weight: normal;
+}
+
+.km-ios .km-list input[type=color],
+.km-ios .km-list input[type=week],
+.km-ios .km-list input[type=date],
+.km-ios .km-list input[type=time],
+.km-ios .km-list input[type=month],
+.km-ios .km-list input[type=datetime],
+.km-ios .km-list input[type=datetime-local],
+.km-ios .km-list .k-dropdown
+{
+    text-align: right;
+}
+
+.km-ios .km-list .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    border-radius: 0;
+    background: transparent;
+    .box-shadow(none);
+}
+

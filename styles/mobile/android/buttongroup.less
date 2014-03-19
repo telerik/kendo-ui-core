@@ -1,0 +1,70 @@
+@import "../common/icons.less";
+@import "../common/buttongroup.less";
+@import "base.less";
+
+/* ButtonGroup */
+
+.km-android .km-widget.km-buttongroup
+{
+    background: none;
+}
+
+.km-android .km-navbar .km-buttongroup
+{
+    margin-top: .2em;
+    line-height: 1.2em;
+    height: 1.8em;
+}
+
+.km-android .km-buttongroup .km-button,
+.km-android .km-navbar .km-buttongroup .km-button
+{
+    border-radius: 1px;
+
+    padding: .6em 1em;
+    border-style: solid;
+    border-width: 1px 0 1px 1px;
+}
+
+.km-android .km-navbar .km-buttongroup .km-button
+{
+    font-size: .9em;
+}
+
+.k-ff .km-android .km-buttongroup .km-button
+{
+    display: inline-block;
+    margin-left: -4px;
+}
+
+.km-android .km-buttongroup .km-state-active,
+.km-android .km-navbar .km-buttongroup .km-state-active
+{
+    overflow: visible;
+    z-index: 1;
+}
+
+.km-android .km-buttongroup .km-button .km-text
+{
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.km-android .km-buttongroup .km-button .km-icon
+{
+    width: 1.1em;
+    height: 1.1em;
+}
+
+.km-root .km-android .km-buttongroup .km-button:first-child
+{
+    margin-left: 0;
+    border-radius: 1px 0 0 1px;
+}
+
+.km-root .km-android .km-buttongroup .km-button:last-child
+{
+    border-radius: 0 1px 1px 0;
+}
+

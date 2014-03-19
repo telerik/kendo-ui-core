@@ -1,0 +1,52 @@
+@import "../common/popover.less";
+@import "base.less";
+
+/* PopOver */
+
+.km-flat .km-popup.km-pane
+{
+    border: 5px solid transparent;
+}
+
+.km-flat .km-popup.km-pane .km-navbar,
+.km-flat .km-popup.km-pane .km-toolbar,
+.km-flat .km-popup.km-pane .km-tabstrip
+{
+    background: none;
+}
+
+.km-flat .km-popup.km-pane .km-header
+{
+    padding: 0 5px;
+    margin: -5px -5px 2px;
+    border-radius: @flat-border-radius @flat-border-radius 0 0;
+    -webkit-margin-collapse: separate;
+}
+
+.km-flat .km-popup-arrow:after
+{
+    border-color: rgba(0,0,0,.5) transparent;
+    border-style: solid;
+    border-width: 0 15px 15px;
+}
+
+.km-flat .km-down .km-popup-arrow:before
+{
+    margin-top: -1px;
+}
+
+.km-flat .km-up .km-popup-arrow:after
+{
+    border-width: 15px 15px 0 15px;
+}
+
+.km-flat .km-left .km-popup-arrow:after
+{
+    border-width: 15px 0 15px 15px;
+}
+
+.km-flat .km-right .km-popup-arrow:after
+{
+    border-width: 15px 15px 15px 0;
+}
+

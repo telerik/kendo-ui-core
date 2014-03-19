@@ -1,0 +1,123 @@
+@import "../common/icons.less";
+@import "../common/listview.less";
+@import "base.less";
+
+/* ListView */
+
+.km-android li.km-state-active
+{
+    border: 0;
+}
+
+.km-android .km-listinset,
+.km-android .km-listgroupinset
+{
+    margin: 0;
+}
+
+.km-android .km-listview-wrapper
+{
+    padding: 0 1em;
+}
+
+.km-android .km-list > li
+{
+    font-size: 1.3em;
+    font-weight: normal;
+    line-height: 2em;
+    overflow: hidden;
+}
+
+.km-android .km-list
+{
+    margin-bottom: 1em;
+    -webkit-margin-collapse: separate;
+}
+
+.km-android .km-group-title
+{
+    margin-top: 0;
+    background: transparent;
+    padding: .8em 0 .5em;
+    line-height: inherit;
+    text-transform: uppercase;
+}
+
+.km-android .km-scroll-header .km-group-title
+{
+    margin: 0 1em;
+    border-bottom-width: @android-border-width;
+    border-bottom-style: solid;
+}
+
+.km-android .km-listview-link:after,
+.km-android .km-listview-label:after
+{
+    display: none;
+}
+
+.km-android .km-list .km-item
+{
+    height: 56px;
+}
+
+.km-android .km-listview .km-switch
+{
+    margin-top: -.8em;
+}
+
+/* Filter box */
+
+.km-android .km-listview-wrapper form .km-filter-wrap > input
+{
+    font-size: 1.2em;
+    padding-left: 1.8em;
+    padding-right: 1.8em;
+}
+
+.km-android .km-filter-wrap:before
+{
+    margin: 0 -1.3em 0 .3em;
+}
+
+.km-android .km-filter-wrap:before,
+.km-android .km-filter-reset .km-clear
+{
+    font-size: 1.4em;
+}
+
+.km-android .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
+/* Pull To Refresh */
+
+.km-root .km-android .km-load-more,
+.km-android .km-scroller-pull
+{
+    font-size: 1.2em;
+}
+
+/* Load more */
+.km-android .km-load-more .km-icon,
+.km-android .km-scroller-pull .km-icon
+{
+    width: 1em;
+    height: 1em;
+    font-size: 1.7em;
+}
+
+.km-android .km-scroller-pull .km-template
+{
+    min-width: 0;
+}
+
+.km-android .km-item label:before
+{
+    border-width: @android-border-width;
+    border-style: solid;
+    border-radius: 2px;
+    .box-sizing(border-box);
+}
+

@@ -1,0 +1,90 @@
+/* PopOver */
+
+.km-popover-root .km-popup-wrapper
+{
+    position: relative !important;
+}
+
+.km-popup-wrapper,
+.km-modalview-wrapper
+{
+    z-index: 10001;
+    position: relative;
+    background: none;
+    border: 0;
+    .box-shadow(none);
+}
+
+.km-popup-overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+}
+
+.km-popup-arrow,
+.km-popup-arrow:after,
+.km-popup-arrow:before
+{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.km-left .km-popup-arrow,
+.km-right .km-popup-arrow
+{
+    margin-top: -8px;
+}
+
+.km-up .km-popup-arrow,
+.km-down .km-popup-arrow
+{
+    margin-left: -8px;
+}
+
+.km-popup-arrow:after,
+.km-popup-arrow:before
+{
+    display: block;
+    content: "\a0";
+    width: 0;
+    height: 0;
+}
+
+.km-up .km-popup-arrow
+{
+    top: auto;
+    bottom: 0;
+}
+
+.km-left .km-popup-arrow
+{
+    left: auto;
+    right: 0;
+}
+
+.km-popup.km-pane
+{
+    .box-sizing(border-box);
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    background: transparent;
+}
+
+.km-popover-root .km-view
+{
+    position: relative;
+}
+
+.km-popover-root .km-content
+{
+    -ms-flex: auto;
+}

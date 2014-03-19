@@ -1,0 +1,61 @@
+/* PopUp + ActionSheet */
+
+.km-root .km-popup .k-item,
+.km-widget.km-actionsheet > li
+{
+    list-style-type: none;
+    padding: inherit 1em;
+    border-bottom: 1px solid #555;
+    .box-sizing(border-box);
+}
+
+.km-widget.km-actionsheet > li
+{
+    line-height: 2em;
+    border-bottom: 0;
+}
+
+.km-widget.km-actionsheet > li > a
+{
+    line-height: 1.5em;
+    text-align: left;
+    background: transparent;
+}
+
+.km-root .km-popup .k-list,
+.km-widget.km-actionsheet
+{
+    padding: 0;
+    margin: 0;
+}
+
+.km-root .km-popup .k-item:last-child,
+.km-widget.km-actionsheet > li:last-child
+{
+    border: 0;
+}
+
+.km-widget.km-actionsheet-wrapper
+{
+    width: 100%;
+    .box-shadow(none);
+    border: 0;
+}
+
+.km-actionsheet-root.km-shim .k-animation-container
+{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.km-tablet .km-pane div.km-actionsheet-phone
+{
+    background: transparent;
+}
+
+.km-tablet .km-actionsheet-phone li.km-actionsheet-title,
+.km-tablet div.km-actionsheet-phone li.km-actionsheet-cancel
+{
+    display: block;
+}
+

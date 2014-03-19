@@ -42,7 +42,25 @@
         "./kendo.datetimepicker",
         "./kendo.slider",
         "./kendo.splitter",
-        "./kendo.window"
+        "./kendo.window",
+        "./kendo.mobile.popover",
+        "./kendo.mobile.loader",
+        "./kendo.mobile.scroller",
+        "./kendo.mobile.shim",
+        "./kendo.mobile.view",
+        "./kendo.mobile.modalview",
+        "./kendo.mobile.drawer",
+        "./kendo.mobile.splitview",
+        "./kendo.mobile.pane",
+        "./kendo.mobile.application",
+        "./kendo.mobile.actionsheet",
+        "./kendo.mobile.button",
+        "./kendo.mobile.buttongroup",
+        "./kendo.mobile.listview",
+        "./kendo.mobile.navbar",
+        "./kendo.mobile.scrollview",
+        "./kendo.mobile.switch",
+        "./kendo.mobile.tabstrip"
     ], f);
 })(function(){
     "bundle all";

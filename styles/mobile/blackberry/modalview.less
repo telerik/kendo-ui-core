@@ -1,0 +1,34 @@
+@import "../common/modalview.less";
+@import "base.less";
+
+/* ModalView */
+
+.km-blackberry .km-modalview
+{
+    border-radius: @blackberry-border-radius;
+    .box-sizing(border-box);
+}
+
+.km-blackberry .km-modalview .km-header
+{
+    padding: 0;
+    margin: -1px 0 0;
+}
+
+.km-blackberry .km-modalview > :first-child
+{
+    border: 0;
+}
+
+.km-blackberry .km-modalview .km-navbar,
+.km-blackberry .km-modalview .km-toolbar,
+.km-blackberry .km-modalview > :first-child
+{
+    border-radius: @blackberry-border-radius @blackberry-border-radius 0 0;
+}
+
+.km-blackberry .km-modalview > :last-child
+{
+    border-radius: 0 0 @blackberry-border-radius @blackberry-border-radius;
+}
+

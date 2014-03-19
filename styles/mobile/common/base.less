@@ -1,0 +1,546 @@
+@import "mixins.less";
+
+/* Common Platform CSS */
+
+@-ms-viewport {
+    width: device-width;
+    user-zoom: fixed;
+    max-zoom: 1;
+    min-zoom: 1;
+}
+
+// Fix the wrong window.outerHeight in iOS7 iPad landscape
+@media (orientation:landscape) {
+    .km-tablet .km-on-ios.km-horizontal.km-web:not(.km-ios-chrome) {
+        position: fixed;
+        bottom: 0;
+    }
+}
+
+.km-root
+{
+    font-size: .92em;
+}
+
+.km-root a
+{
+    color: inherit;
+}
+
+.km-tablet
+{
+    font-size: 1em;
+}
+
+.km-root *:focus
+{
+    outline-width: 0;
+}
+
+.km-root,
+.km-pane,
+.km-pane-wrapper
+{
+    width: 100%;
+    height: 100%;
+    -ms-touch-action: none;
+    -ms-content-zooming: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    .text-size-adjust(none); // Disables zoom on Desktop too.
+    overflow-x: hidden;
+}
+
+.km-pane-wrapper {
+    position: absolute;
+}
+
+.km-pane,
+.km-shim
+{
+    font-family: sans-serif;
+}
+
+.km-pane
+{
+    overflow-x: hidden;
+    position: relative;
+}
+
+.km-collapsible-pane {
+}
+
+.km-vertical .km-collapsible-pane {
+    position: absolute;
+    z-index: 2 !important;
+    -webkit-transition: -webkit-transform 350ms ease-out;
+    -ms-transition: -ms-transform 350ms ease-out;
+    .transform(translatex(-100%));
+}
+
+.km-vertical .km-expanded-splitview .km-collapsible-pane {
+    .transform(translatex(0));
+}
+
+.km-expanded-pane-shim {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.km-expanded-splitview .km-expanded-pane-shim {
+    display: block;
+    z-index: 1;
+}
+
+.km-root > *
+{
+    margin: 0;
+    padding: 0;
+}
+
+.km-root *
+{
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.km-view
+{
+    top: 0;
+    left: 0;
+    position: absolute;
+    .flexbox();
+    height: 100%;
+    width: 100%;
+    .box-orient(vertical);
+    .flex-direction(column);
+    .flex-align-items(stretch);
+    .flex-align-content(stretch);
+    vertical-align: top;
+}
+
+.k-ff .km-view,
+.k-ff .km-pane
+{
+    overflow: hidden;
+}
+
+.k-ff18 .km-view, .k-ff18 .km-pane,
+.k-ff19 .km-view, .k-ff19 .km-pane,
+.k-ff20 .km-view, .k-ff20 .km-pane,
+.k-ff21 .km-view, .k-ff21 .km-pane
+{
+    position: relative;
+}
+
+.k-ff .km-view
+{
+    display: -moz-inline-box;
+    display: inline-flex;
+}
+
+.km-content
+{
+    min-height: 1px;
+    .flex(1);
+    .flex-align(stretch);
+    display: block;
+    width: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.km-content p, .km-content h1, .km-content h2, .km-content h3,
+.km-content h4, .km-content h5, .km-content h6
+{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.km-header,
+.km-footer
+{
+    display: block;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    width: 100%;
+}
+
+.k-ff .km-scrollview > div
+{
+    display: inline-block;
+}
+
+.km-header
+{
+    padding: 0;
+}
+
+.km-footer
+{
+    background: #1a1a1a;
+}
+
+[data-role="layout"]
+{
+    display: none;
+}
+
+[data-role="view"], [data-role="drawer"]
+{
+    visibility: hidden;
+}
+
+.km-view
+{
+    visibility: visible;
+}
+
+.km-header,
+.km-footer
+{
+    position: relative;
+    z-index: 1;
+}
+
+@media all and (-webkit-min-device-pixel-ratio:10000),
+       not all and (-webkit-min-device-pixel-ratio:0)
+{
+  .km-view { display: table; }
+  .km-header, .km-footer, .km-content { display: table-row; }
+  .km-header, .km-footer { height: 1px; }
+}
+
+.km-toolbar,
+.km-navbar,
+.km-button,
+.km-buttongroup,
+.km-tabstrip,
+.km-blackberry li.km-actionsheet-cancel > a
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-origin: border-box;
+    position: relative;
+    display: inline-block;
+    padding: .4em .7em;
+    margin: .1rem;
+    overflow: visible;
+    text-decoration: none;
+}
+
+.km-tabstrip,
+.km-toolbar,
+.km-navbar
+{
+    display: block;
+    padding: .8em;
+    margin: 0;
+    width: 100%;
+    border-width: 0;
+    .box-sizing(border-box);
+}
+
+.km-native-scroller
+{
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-touch-action: pan-x pan-y;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -ms-scroll-snap-type: proximity;
+}
+
+.km-default-content
+{
+    padding: 1em;
+}
+
+.km-shim
+{
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    height: 100% !important;
+    background: rgba(0,0,0,.6);
+    z-index: 10001;
+    .box-sizing(border-box);
+}
+
+.km-root .km-shim {
+    position: absolute;
+}
+
+.km-shim:before
+{
+    content: "\a0";
+    height: 100%;
+    width: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.km-shim .k-animation-container
+{
+    .box-shadow(none);
+    border: 0;
+    width: auto;
+}
+
+/* Loader */
+
+.km-loader
+{
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 130px;
+    opacity: .85;
+    z-index: 100000;
+    padding: 30px 30px;
+    position: absolute;
+    margin-top: -70px;
+    margin-left: -90px;
+    .box-sizing(border-box);
+    background-color: black;
+}
+
+.km-loader h1
+{
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.km-loader .km-loading,
+.km-load-more .km-icon,
+.km-scroller-refresh .km-icon
+{
+    .animation(km-spin 1s infinite linear);
+    display: block;
+    margin: 0 auto;
+    width: 35px;
+    height: 35px;
+    font-size: 35px;
+}
+
+.km-loader .km-loading:after,
+.km-load-more .km-icon:after
+{
+    color: #ccc;
+}
+
+.km-loading-left,
+.km-loading-right
+{
+    display: none;
+}
+
+@-webkit-keyframes km-spin
+{
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+@-moz-keyframes km-spin
+{
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+
+@-ms-keyframes km-spin
+{
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+
+@-o-keyframes km-spin
+{
+    from { -o-transform: rotate(0deg); }
+    to { -o-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes km-ios-spin
+{
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes km-ios-spin1
+{
+    from { -webkit-transform: rotate(-135deg); }
+    to { -webkit-transform: rotate(225deg); }
+}
+
+@-moz-keyframes km-ios-spin
+{
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+
+@-moz-keyframes km-ios-spin1
+{
+    from { -moz-transform: rotate(-135deg); }
+    to { -moz-transform: rotate(225deg); }
+}
+
+@keyframes km-ios-spin
+{
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes km-ios-spin1
+{
+    from { transform: rotate(-135deg); }
+    to { transform: rotate(225deg); }
+}
+
+
+/* Stretched View */
+
+.km-stretched-view
+{
+    .flexbox();
+}
+
+.km-stretched-view > *
+{
+    width: 100%;
+}
+
+.km-overlay
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 100000;
+}
+
+.km-root.km-native-scrolling,
+.km-root.km-native-scrolling .km-view,
+.km-root.km-native-scrolling .km-splitview .km-pane
+{
+    min-height: 100%;
+    height: auto;
+    -webkit-transform: none;
+    overflow-x: visible;
+}
+
+.km-native-scrolling .km-pane,
+.km-native-scrolling .km-view
+{
+    -ms-touch-action: auto;
+    display: block;
+}
+
+.km-native-scrolling .km-content
+{
+    -ms-flex: auto;
+}
+
+.km-native-scrolling .km-blackberry .km-content
+{
+    min-height: auto;
+}
+
+/* Restore position:absolute during animation */
+.km-native-scrolling .km-splitview
+{
+    position: absolute;
+}
+
+.km-native-scrolling .km-header
+{
+    position: fixed;
+    top: 0;
+}
+
+.km-native-scrolling .km-android .km-header
+{
+    top: auto;
+    bottom: 0;
+}
+
+.km-native-scrolling .km-footer
+{
+    position: fixed;
+    bottom: 0;
+}
+
+.km-native-scrolling .km-android .km-footer
+{
+    top: 0;
+    bottom: auto;
+}
+
+.km-native-scrolling .km-badge
+{
+    z-index: auto;
+}
+
+.km-native-scrolling .km-splitview .km-header,
+.km-native-scrolling .km-splitview .km-footer,
+.km-native-scrolling .km-popup.km-pane .km-header,
+.km-native-scrolling .km-popup.km-pane .km-footer
+{
+    position: absolute;
+}
+
+.km-native-scrolling .km-modalview .km-header,
+.km-native-scrolling .km-modalview .km-footer
+{
+    position: relative;
+}
+
+.km-native-scrolling .km-content
+{
+    width: 100%;
+}
+
+.km-native-scrolling .km-shim,
+.km-native-scrolling .km-popup-overlay
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: auto !important;
+}
+
+.km-native-scrolling .km-drawer
+{
+    position: fixed;
+    top: 0;
+    height: 100% !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.km-native-scrolling > .km-pane > .km-loader
+{
+    position: fixed;
+    top: 50%;
+    margin-top: -2em;
+}
+
+.km-native-scrolling .km-header,
+.km-native-scrolling .km-footer
+{
+    z-index: 2;
+}
+
+/* Disabled states */
+
+.km-state-disabled
+{
+    opacity: 0.5;
+}
