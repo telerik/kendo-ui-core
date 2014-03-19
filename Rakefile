@@ -59,24 +59,31 @@ ROOT_MAP = {
     'wrappers/php' => 'wrappers/php'
 }
 
-MD_API_SUITES = {
-    'all' => FileList["docs/api/web/*.md"]
-            .include('docs/api/framework/*.md')
-            .include('docs/api/dataviz/**/*.md')
-            .include('docs/api/mobile/*.md'),
+def md_api_suite(suite)
+    case suite
+    when 'all'
+        FileList["docs/api/web/*.md"]
+        .include('docs/api/framework/*.md')
+        .include('docs/api/dataviz/**/*.md')
+        .include('docs/api/mobile/*.md')
 
-    'web' => FileList["docs/api/web/*.md"]
-            .include('docs/api/framework/*.md'),
+    when 'web'
+        FileList["docs/api/web/*.md"]
+        .include('docs/api/framework/*.md')
 
-    'dataviz' => FileList["docs/api/dataviz/**/*.md"]
-             .include('docs/api/framework/*.md'),
+    when 'dataviz'
+        FileList["docs/api/dataviz/**/*.md"]
+         .include('docs/api/framework/*.md')
 
-    'mobile' => FileList["docs/api/mobile/*.md"]
-            .include('docs/api/framework/*.md'),
+    when 'mobile'
+        FileList["docs/api/mobile/*.md"]
+        .include('docs/api/framework/*.md')
 
-    'icenium' => FileList["docs/api/mobile/*.md"]
-            .include('docs/api/framework/*.md'),
-}
+    when 'icenium'
+        FileList["docs/api/mobile/*.md"]
+        .include('docs/api/framework/*.md')
+    end
+end
 
 
 require 'version'

@@ -72,7 +72,7 @@ def bundle(options)
     if vsdoc_sources
         vsdoc_sources.each do |file|
             vsdoc_path = File.join(path, vsdoc_dest, "kendo.#{file}-vsdoc.js")
-            vsdoc vsdoc_path => MD_API_SUITES[file]
+            vsdoc vsdoc_path => md_api_suite(file)
             prerequisites.push(vsdoc_path)
         end
     end
@@ -80,7 +80,7 @@ def bundle(options)
     if intellisense_sources
         intellisense_sources.each do |file|
             intellisense_path = File.join(path, vsdoc_dest, "kendo.#{file}.min.intellisense.js")
-            intellisense intellisense_path => MD_API_SUITES[file]
+            intellisense intellisense_path => md_api_suite(file)
             prerequisites.push(intellisense_path)
         end
     end
@@ -90,7 +90,7 @@ def bundle(options)
 
         type_script_sources.each do |file|
             type_script_path = File.join(path, "typescript", "kendo.#{file}.d.ts")
-            type_script type_script_path => [MD_API_SUITES[file], type_script_build_files].flatten
+            type_script type_script_path => [md_api_suite(file), type_script_build_files].flatten
             prerequisites.push(type_script_path)
         end
     end
