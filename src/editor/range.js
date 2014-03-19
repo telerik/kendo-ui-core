@@ -580,7 +580,8 @@ function adoptEndPoint(textRange, range, commonAncestor, start) {
         comparison = start ? "StartToStart" : "StartToEnd",
         result, parent, target,
         previous, next,
-        args, index;
+        args, index,
+        appended = false;
 
     cursorNode.innerHTML = "\ufeff";
     cursor.collapse(start);
@@ -594,7 +595,12 @@ function adoptEndPoint(textRange, range, commonAncestor, start) {
     // detect range end points
     // insert cursorNode within the textRange parent and move the cursor until it gets outside of the textRange
     do {
-        parent.insertBefore(cursorNode, cursorNode.previousSibling);
+        if (appended) {
+            parent.insertBefore(cursorNode, cursorNode.previousSibling);
+        } else {
+            parent.appendChild(cursorNode);
+            appended = true;
+        }
         cursor.moveToElementText(cursorNode);
     } while ((result = cursor.compareEndPoints(comparison, textRange)) > 0 && cursorNode.previousSibling);
 
