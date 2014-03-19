@@ -45,9 +45,11 @@ module CodeGen
 
             ENUM_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/enum.template.erb'))
 
-            COLLECTION_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.property.template.erb'))
+            COLLECTION_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.class.template.erb'))
 
-            ARRAY_ITEM_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.class.template.erb'))
+            COLLECTION_ITEM_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.item.property.template.erb'))
+
+            ARRAY_ITEM_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.item.class.template.erb'))
 
             CONVERTER_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/converter.class.template.erb'))
 
@@ -57,7 +59,7 @@ module CodeGen
 
             CONVERTER_ARRAY_TEMPLATE = ERB.new('
             if (convertable.<%= csharp_name %>.Count != 0)
-                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
+                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ItemsList, null);')
 
             CONVERTER_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
@@ -91,6 +93,14 @@ module CodeGen
 
                 def csharp_namespace
                     "Telerik.Web.UI.#{root_component.owner_namespace}"
+                end
+
+                def csharp_datafield
+                    nil
+                end
+
+                def boundable?
+                    !csharp_datafield.nil?
                 end
 
                 def description
@@ -308,11 +318,11 @@ module CodeGen
                 end
 
                 def csharp_class
-                    "List<#{item.csharp_class}>"
+                    "#{item.csharp_class}sCollection"
                 end
 
                 def to_declaration
-                    COLLECTION_TEMPLATE.result(binding)
+                    COLLECTION_ITEM_TEMPLATE.result(binding)
                 end
 
                 def to_converter
@@ -371,6 +381,7 @@ module CodeGen
                             existing_option.values = option[:values] unless option[:values].nil?
                             existing_option.description = option[:description] unless option[:description].nil? || option[:description] == ''
                             existing_option.default = option[:default] unless option[:default].nil? || option[:default] == ''
+                            existing_option.csharp_datafield = option[:default] unless option[:datafield].nil? || option[:datafield] == ''
                         else
                             option[:remove_existing] = existing_option.nil?
                             add_option(option)
@@ -527,9 +538,20 @@ module CodeGen
                     end
                     if option.class == ArrayOption
                         write_array_item_class(option.item)
+                        write_collection_class(option)
                     end
 
                     option.to_declaration
+                end
+
+                def write_collection_class(option)
+                    #return unless option.instance_of?(ArrayOption)
+
+                    content = COLLECTION_CLASS_TEMPLATE.result(option.get_binding)
+
+                    file_name = File.join(@path, "#{option.csharp_class}.cs")
+
+                    create_file(file_name, content)
                 end
 
                 def write_composite_option_file(composite)
@@ -553,7 +575,7 @@ module CodeGen
                             "                   #{option.csharp_name} == #{option.csharp_default}" :
                             option.instance_of?(CompositeOption) ?
                                 "                   #{option.csharp_name}.IsDefault" :
-                                "                   #{option.csharp_name}.Count == 0"
+                                "                   #{option.csharp_name}.ItemsList.Count == 0"
                         result += index < options.length - 1 ? " &&\n" : ';'
                     end
                     result
