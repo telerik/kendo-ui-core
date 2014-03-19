@@ -7,6 +7,10 @@
     errorResponse = "ERROR!",
     lastFormData;
 
+var formDataStub = {
+    append: $.noop
+};
+
 function createUpload(options) {
     removeHTML();
     copyUploadPrototype();
@@ -162,17 +166,15 @@ test("clicking cancel should remove file entry", function() {
     ok(requestStopped);
 });
 
-test("FormData is created when a file is selected", function() {
-    var createFormDataCalled = false;
-    uploadInstance._module.createFormData = function() { createFormDataCalled = true; }
+test("FormData is created when a file is selected", 1, function() {
+    uploadInstance._module.createFormData = function() { ok(true); return formDataStub; }
 
     simulateFileSelect();
-    ok(createFormDataCalled);
 });
 
-test("file is passed to createFormData", function() {
+test("file is passed to populateFormData", function() {
     var file = null;
-    uploadInstance._module.createFormData = function(sourceFiles) {
+    uploadInstance._module.populateFormData = function(data, sourceFiles) {
         file = sourceFiles[0];
     };
 
@@ -188,13 +190,11 @@ test("postFormData is issued when file is selected", function() {
     ok(postFormDataCalled);
 });
 
-test("postFormData receives form data", function() {
-    var formData = null;
-    uploadInstance._module.createFormData = function() { return "data"; }
-    uploadInstance._module.postFormData = function(url, data) { formData = data; };
+test("postFormData receives form data", 1, function() {
+    uploadInstance._module.createFormData = function() { return formDataStub; }
+    uploadInstance._module.postFormData = function(url, data) { equal(data, formDataStub); };
 
     simulateFileSelect();
-    equal(formData, "data");
 });
 
 test("original input is removed upon success", function() {
@@ -750,8 +750,8 @@ test("file names are rendered for multiple files", function() {
     equal(fileNames[0], "first.txt, second.txt");
 });
 
-test("files are passed to createFormData", 2, function() {
-    uploadInstance._module.createFormData = function(sourceFiles) {
+test("files are passed to populateFormData", 2, function() {
+    uploadInstance._module.populateFormData = function(formData, sourceFiles) {
         equal(sourceFiles[0].name, "first.txt");
         equal(sourceFiles[1].name, "second.txt");
     };

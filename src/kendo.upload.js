@@ -1038,7 +1038,7 @@ var __meta__ = {
 
         performUpload: function(fileEntry) {
             var upload = this.upload,
-                formData = this.createFormData(fileEntry.data("files")),
+                formData = this.createFormData(),
                 xhr = new XMLHttpRequest(),
                 e = {
                     files: fileEntry.data("fileNames"),
@@ -1054,6 +1054,8 @@ var __meta__ = {
                 for (var key in e.data) {
                     formData.append(key, e.data[key]);
                 }
+
+                this.populateFormData(formData, fileEntry.data("files")),
 
                 upload._fileState(fileEntry, "uploading");
                 $(fileEntry).addClass("k-file-progress");
@@ -1120,20 +1122,23 @@ var __meta__ = {
             xhr.send(data);
         },
 
-        createFormData: function(files) {
-            var formData = new FormData(),
-                upload = this.upload,
+        createFormData: function() {
+            return new FormData();
+        },
+
+        populateFormData: function(data, files) {
+            var upload = this.upload,
                 i,
                 length = files.length;
 
             for (i = 0; i < length; i++) {
-                formData.append(
+                data.append(
                     upload.options.async.saveField || upload.name,
                     files[i].rawFile
                 );
             }
 
-            return formData;
+            return data;
         },
 
         onRequestSuccess: function(e, fileEntry) {
