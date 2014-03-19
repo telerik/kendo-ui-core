@@ -642,7 +642,7 @@ function pad(number, digits, end) {
             } else if (match === "ff") {
                 result = date.getMilliseconds();
                 if (result > 99) {
-                    result = math.floor(result / 10)
+                    result = math.floor(result / 10);
                 }
 
                 result = pad(result);
