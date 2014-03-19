@@ -59,6 +59,26 @@ ROOT_MAP = {
     'wrappers/php' => 'wrappers/php'
 }
 
+MD_API_SUITES = {
+    'all' => FileList["docs/api/web/*.md"]
+            .include('docs/api/framework/*.md')
+            .include('docs/api/dataviz/**/*.md')
+            .include('docs/api/mobile/*.md'),
+
+    'web' => FileList["docs/api/web/*.md"]
+            .include('docs/api/framework/*.md'),
+
+    'dataviz' => FileList["docs/api/dataviz/**/*.md"]
+             .include('docs/api/framework/*.md'),
+
+    'mobile' => FileList["docs/api/mobile/*.md"]
+            .include('docs/api/framework/*.md'),
+
+    'icenium' => FileList["docs/api/mobile/*.md"]
+            .include('docs/api/framework/*.md'),
+}
+
+
 require 'version'
 require 'timezone'
 require './build/zip'
@@ -156,19 +176,9 @@ bundle :name => 'complete.commercial',
        :license => 'src-license-complete',
        :eula => 'complete',
        :readme => 'README.KendoUI.Complete',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :vsdoc => %w(all web mobile dataviz),
+       :intellisense => %w(all web mobile dataviz),
+       :type_script => %w(all web mobile dataviz),
        :changelog => %w(web mobile dataviz framework),
        :demos => {
            :suites => %w(web dataviz mobile),
@@ -187,19 +197,9 @@ bundle :name => 'complete.trial',
        :license => 'src-license-complete',
        :eula => 'complete',
        :readme => 'README.KendoUI.Trial',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :vsdoc => %w(all web mobile dataviz),
+       :intellisense => %w(all web mobile dataviz),
+       :type_script => %w(all web mobile dataviz),
        :changelog => %w(web mobile dataviz framework),
        :demos => {
            :suites => %w(web dataviz mobile),
@@ -214,9 +214,9 @@ bundle :name => 'complete.trial',
 bundle :name => 'web.commercial',
        :license => 'src-license-web',
        :eula => 'web',
-       :vsdoc => { %w(web framework) => 'web' },
-       :intellisense => { %w(web framework) => 'web' },
-       :type_script => { %w(web framework) => 'web' },
+       :vsdoc => %w(web),
+       :intellisense => %w(web),
+       :type_script => %w(web),
        :changelog => %w(web framework),
        :demos => {
            :suites => %w(web),
@@ -233,9 +233,9 @@ bundle :name => 'web.commercial',
 
 bundle :name => 'web.open-source',
        :license => 'src-license-web',
-       :vsdoc => { %w(web framework) => 'web' },
-       :intellisense => { %w(web framework) => 'web' },
-       :type_script => { %w(web framework) => 'web' },
+       :vsdoc => %w(web),
+       :intellisense => %w(web),
+       :type_script => %w(web),
        :changelog => %w(web framework),
        :demos => {
            :suites => %w(web),
@@ -251,9 +251,9 @@ bundle :name => 'web.open-source',
 # Kendo UI Mobile
 bundle :name => 'mobile.commercial',
        :license => 'src-license-mobile',
-       :vsdoc => { %w(mobile framework) => 'mobile' },
-       :intellisense => { %w(mobile framework) => 'mobile' },
-       :type_script => { %w(mobile framework) => 'mobile' },
+       :vsdoc => %w(mobile),
+       :intellisense => %w(mobile),
+       :type_script => %w(mobile),
        :changelog => %w(mobile framework),
        :demos => {
            :suites => %w(mobile),
@@ -272,9 +272,9 @@ bundle :name => 'mobile.commercial',
 # Kendo UI DataViz
 bundle :name => 'dataviz.commercial',
        :license => 'src-license-dataviz',
-       :vsdoc => { %w(dataviz framework) => 'dataviz' },
-       :intellisense => { %w(dataviz framework) => 'dataviz' },
-       :type_script => { %w(dataviz framework) => 'dataviz' },
+       :vsdoc => %w(dataviz),
+       :intellisense => %w(dataviz),
+       :type_script => %w(dataviz),
        :changelog => %w(dataviz framework),
        :eula => 'dataviz',
        :demos => {
@@ -295,19 +295,9 @@ bundle :name => 'aspnetmvc.trial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
        :readme => 'README.KendoUI.Trial',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :vsdoc => %w(all web mobile dataviz),
+       :intellisense => %w(all web mobile dataviz),
+       :type_script => %w(all web mobile dataviz),
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :demos => {
            :suites => %w(web dataviz mobile),
@@ -337,19 +327,9 @@ bundle :name => 'aspnetmvc.trial',
 bundle :name => 'aspnetmvc.hotfix.trial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :type_script => { %w(web mobile dataviz framework) => "all" },
+       :vsdoc => %w(all web mobile dataviz),
+       :intellisense => %w(all web mobile dataviz),
+       :type_script => %w(all web mobile dataviz),
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :contents => {
             'js' => TRIAL_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
@@ -365,19 +345,9 @@ bundle :name => 'aspnetmvc.hotfix.trial',
 bundle :name => 'aspnetmvc.commercial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :type_script => { %w(web mobile dataviz framework) => "all" },
+       :vsdoc => %w(all web mobile dataviz),
+       :intellisense => %w(all web mobile dataviz),
+       :type_script => %w(all web mobile dataviz),
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :demos => {
            :suites => %w(web dataviz mobile),
@@ -419,19 +389,9 @@ bundle :name => 'aspnetmvc.commercial',
 bundle :name => 'aspnetmvc.internal.commercial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :type_script => { %w(web mobile dataviz framework) => "all" },
+       :vsdoc => %w(all web mobile dataviz),
+       :intellisense => %w(all web mobile dataviz),
+       :type_script => %w(all web mobile dataviz),
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => true,
@@ -460,19 +420,9 @@ bundle :name => 'aspnetmvc.internal.commercial',
 bundle :name => 'aspnetmvc.hotfix.commercial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :type_script => { %w(web mobile dataviz framework) => "all" },
+       :vsdoc => %w(all web mobile dataviz),
+       :intellisense => %w(all web mobile dataviz),
+       :type_script => %w(all web mobile dataviz),
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => true,
@@ -488,18 +438,8 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
 
 bundle :name => 'cdn.commercial',
        :license => 'src-license-cdn',
-       :vsdoc => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
-       :intellisense => {
-           %w(web mobile dataviz framework) => 'all',
-           %w(web framework) => 'web',
-           %w(dataviz framework) => 'dataviz',
-           %w(mobile framework) => 'mobile'
-       },
+       :vsdoc => %w(all web mobile dataviz),
+       :intellisense => %w(all web mobile dataviz),
        :vsdoc_dest => 'js',
        :contents => {
            'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
@@ -516,7 +456,7 @@ bundle :name => 'winjs.commercial',
 
 bundle :name => 'icenium',
        :license => 'src-license-icenium',
-       :type_script => { %w(mobile framework) => 'icenium' },
+       :type_script => %w(mobile),
        :contents => {
             'styles' => ICENIUM_MIN_CSS,
             'js' => ICENIUM_MIN_JS + JQUERY_MAP
@@ -528,7 +468,7 @@ bundle :name => 'jsp.trial',
        :eula => 'jsp',
        :readme => 'README.KendoUI.Trial',
        :changelog => %w(web mobile dataviz framework jsp),
-       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :type_script => %w(all web mobile dataviz),
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -546,7 +486,7 @@ bundle :name => 'jsp.commercial',
        :changelog => %w(web mobile dataviz framework jsp),
        :product => 'UI for JSP',
        :upload_as_internal_build => true,
-       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :type_script => %w(all web mobile dataviz),
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -566,7 +506,7 @@ bundle :name => 'php.trial',
        :eula => 'php',
        :readme => 'README.KendoUI.Trial',
        :changelog => %w(web mobile dataviz framework php),
-       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :type_script => %w(all web mobile dataviz),
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -582,7 +522,7 @@ bundle :name => 'php.commercial',
        :changelog => %w(web mobile dataviz framework php),
        :product => 'UI for PHP',
        :upload_as_internal_build => true,
-       :type_script => { %w(web mobile dataviz framework) => 'all' },
+       :type_script => %w(all web mobile dataviz),
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,

@@ -83,11 +83,10 @@ def vsdoc(*args, &block)
 end
 
 namespace :vsdoc do
-    VSDOC_SOURCES = FileList["docs/api/{web,mobile,framework}/*.md"].include('docs/api/dataviz/**/*.md')
     desc "Test VSDoc generation"
     task :test do
         File.open("dist/kendo.vsdoc-master.js", "w") do |f|
-            f.write get_vsdoc(VSDOC_SOURCES)
+            f.write get_vsdoc(MD_API_SUITES['all'])
             sh "node_modules/jshint/bin/jshint #{f.path}"
         end
     end
@@ -97,7 +96,7 @@ namespace :vsdoc do
             task :test do
                 sync_docs_submodule(branch)
                 File.open("dist/kendo.vsdoc-#{branch}.js", "w") do |f|
-                    f.write get_vsdoc(VSDOC_SOURCES)
+                    f.write get_vsdoc(MD_API_SUITES['all'])
                     sh "node_modules/jshint/bin/jshint #{f.path}"
                 end
             end
