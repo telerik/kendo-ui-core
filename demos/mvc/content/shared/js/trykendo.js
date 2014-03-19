@@ -5,7 +5,7 @@
             snippet = dojo.addBaseRedirectTag(snippet, baseUrl);
             snippet = dojo.addConsoleScript(snippet);
             snippet = dojo.fixLineEndings(snippet);
-            var form = $('<form method="post" action="' + dojo.configuration.url + '" target="__blank" />').appendTo(document.body);
+            var form = $('<form method="post" action="' + dojo.configuration.url + '" target="__blank" />').hide().appendTo(document.body);
             $("<input name='snippet'>").val(snippet).appendTo(form);
 
             form.submit();
