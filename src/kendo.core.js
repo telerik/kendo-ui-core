@@ -118,6 +118,7 @@ var __meta__ = {
                             that.unbind(eventName, handler);
                             original.apply(that, arguments);
                         };
+                        handler.original = original;
                     }
                     events = that._events[eventName] = that._events[eventName] || [];
                     events.push(handler);
@@ -193,7 +194,7 @@ var __meta__ = {
             } else if (events) {
                 if (handler) {
                     for (idx = events.length - 1; idx >= 0; idx--) {
-                        if (events[idx] === handler) {
+                        if (events[idx] === handler || events[idx].original === handler) {
                             events.splice(idx, 1);
                         }
                     }
