@@ -70,33 +70,29 @@ def bundle(options)
     end
 
     if vsdoc_sources
-        vsdoc_sources.keys.each_with_index do |key, index|
-            sources = FileList["docs/api/{#{vsdoc_sources.keys[index].join(",")}}/*.md"]
-            vsdoc_path = File.join(path, vsdoc_dest, "kendo.#{vsdoc_sources.values[index]}-vsdoc.js")
-            vsdoc vsdoc_path => sources
+        vsdoc_sources.each do |file|
+            vsdoc_path = File.join(path, vsdoc_dest, "kendo.#{file}-vsdoc.js")
+            vsdoc vsdoc_path => MD_API_SUITES[file]
             prerequisites.push(vsdoc_path)
         end
     end
 
     if intellisense_sources
-        intellisense_sources.keys.each_with_index do |key, index|
-            sources = FileList["docs/api/{#{intellisense_sources.keys[index].join(",")}}/*.md"]
-            intellisense_path = File.join(path, vsdoc_dest, "kendo.#{intellisense_sources.values[index]}.min.intellisense.js")
-            intellisense intellisense_path => sources
+        intellisense_sources.each do |file|
+            intellisense_path = File.join(path, vsdoc_dest, "kendo.#{file}.min.intellisense.js")
+            intellisense intellisense_path => MD_API_SUITES[file]
             prerequisites.push(intellisense_path)
         end
     end
 
     if type_script_sources
-        md = FileList["docs/api/{#{type_script_sources.keys[0].join(",")}}/*.md"]
-
         type_script_build_files = FileList["build/codegen/lib/type_script/*.*"]
 
-        type_script_path = File.join(path, "typescript", "kendo.#{type_script_sources.values[0]}.d.ts")
-
-        type_script type_script_path => [md, type_script_build_files].flatten
-
-        prerequisites.push(type_script_path)
+        type_script_sources.each do |file|
+            type_script_path = File.join(path, "typescript", "kendo.#{file}.d.ts")
+            type_script type_script_path => [MD_API_SUITES[file], type_script_build_files].flatten
+            prerequisites.push(type_script_path)
+        end
     end
 
     if changelog_suites

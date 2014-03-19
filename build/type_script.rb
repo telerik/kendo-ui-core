@@ -539,28 +539,9 @@ def type_script(*args, &block)
 end
 
 namespace :type_script do
-    SUITES = {
-        'all' => FileList["docs/api/web/*.md"]
-                .include('docs/api/framework/*.md')
-                .include('docs/api/dataviz/**/*.md')
-                .include('docs/api/mobile/*.md'),
-
-        'web' => FileList["docs/api/web/*.md"]
-                .include('docs/api/framework/*.md'),
-
-        'dataviz' => FileList["docs/api/dataviz/**/*.md"]
-                 .include('docs/api/framework/*.md'),
-
-        'mobile' => FileList["docs/api/mobile/*.md"]
-                .include('docs/api/framework/*.md'),
-
-        'icenium' => FileList["docs/api/mobile/*.md"]
-                .include('docs/api/framework/*.md'),
-    }
-
     desc "Test TypeScript generation"
     task :test do
-        SUITES.each do |suite, dependencies|
+        MD_API_SUITES.each do |suite, dependencies|
             path = "dist/kendo.#{suite}.d.ts"
 
             File.write(path, get_type_script(path, dependencies, suite == 'icenium'))
@@ -575,7 +556,7 @@ namespace :type_script do
             desc "Test TypeScript generation"
             task :test do
                 sync_docs_submodule(branch)
-                SUITES.each do |suite, dependencies|
+                MD_API_SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
 
                     File.write(path, get_type_script(path, dependencies, suite == 'icenium'))
