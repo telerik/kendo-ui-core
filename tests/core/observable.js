@@ -138,6 +138,19 @@ test("unbind removes the specified handler", function() {
     equal(observable._events.foo[0], second);
 });
 
+test("unbind removes handlers attached with onethe specified handler", function() {
+    var observable = new Observable(),
+        first = function() {},
+        second = function() {};
+
+    observable.one("foo", first).bind("foo", second);
+
+    observable.unbind("foo", first);
+
+    equal(observable._events.foo.length, 1);
+    equal(observable._events.foo[0], second);
+});
+
 test("bind to array of events", function() {
     var observable = new Observable();
 
