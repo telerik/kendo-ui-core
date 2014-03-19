@@ -150,6 +150,16 @@ test('date formatting supports fff', function() {
     equal(toString(d, "fff"), '129');
 });
 
+test('date formatting supports padded ff', function() {
+    var d = date(2000, 1, 1, 1, 1, 1, 1);
+    equal(toString(d, "ff"), '01');
+});
+
+test('date formatting supports padded fff', function() {
+    var d = date(2000, 1, 1, 1, 1, 1, 1);
+    equal(toString(d, "fff"), '001');
+});
+
 test('date formatting supports H', function() {
     var d = date(2000, 1, 1, 1);
     equal(toString(d, "H"), '1')
