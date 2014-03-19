@@ -1,0 +1,66 @@
+@import "../common/icons.less";
+@import "../common/tabstrip.less";
+@import "base.less";
+
+/* TabStrip */
+
+.km-phone .km-blackberry .km-tabstrip
+{
+    display: table;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.km-phone .km-blackberry .km-tabstrip .km-button
+{
+    display: table-cell;
+}
+
+.km-blackberry .km-tabstrip
+{
+    font-size: .7em;
+    padding: 0;
+}
+
+.km-blackberry .km-tabstrip .km-button
+{
+    border: 0;
+    margin: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: .1em .3em .4em;
+    border-top: 2px solid transparent;
+    .box-sizing(border-box);
+}
+
+.km-root .km-blackberry .km-tabstrip .km-button:before
+{
+    display: none;
+}
+
+.km-blackberry .km-tabstrip .km-button:first-child,
+.km-blackberry .km-tabstrip .km-button:active + .km-button,
+.km-blackberry .km-tabstrip .km-button.km-state-active + .km-button
+{
+    .box-shadow(none);
+}
+
+.km-blackberry .km-tabstrip .km-button:active,
+.km-blackberry .km-tabstrip .km-button.km-state-active
+{
+    background: rgba(255,255,255,.1);
+    border-top: 2px solid #057fe4;
+    .box-shadow(0 1px 5px @blackberry-main-color);
+}
+
+.km-blackberry .km-tabstrip.km-vertical .km-button
+{
+    padding: 0 .7em;
+}
+
+.km-blackberry .km-tabstrip .km-badge
+{
+    text-indent: 0;
+}
+

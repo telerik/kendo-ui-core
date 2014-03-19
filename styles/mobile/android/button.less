@@ -1,0 +1,97 @@
+@import "../common/icons.less";
+@import "../common/button.less";
+@import "base.less";
+
+/* Button */
+
+.km-android .km-button
+{
+    border-radius: 1px;
+    padding: .6em 1em;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.km-android .km-button .km-text
+{
+    position: relative;
+    z-index: 1;
+}
+
+.km-android .km-button .km-notext
+{
+    width: 1em;
+}
+
+.km-android .km-back:before
+{
+    display: none;
+}
+
+/* Badges & Details */
+
+.km-android .km-badge,
+.km-android .km-detail
+{
+    border-width: .3em;
+    border-style: solid;
+}
+
+.km-android .km-badge
+{
+    opacity: .8;
+    border: 0;
+    top: -1.05em;
+    min-width: 1.1em;
+    height: 2em;
+    line-height: 2.2em;
+    border-radius: 3em;
+}
+
+.km-android .km-detail
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background: transparent;
+    .box-shadow(none);
+    .box-sizing(border-box);
+}
+
+.km-root .km-android .km-detail
+{
+    height: 100%;
+    width: 3rem;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.km-android .km-detail .km-icon,
+.km-android .km-detail .km-icon:after,
+.km-android .km-detail .km-icon:before,
+.km-root .km-android .km-detail:before,
+.km-root .km-android .km-detail:after
+{
+    line-height: 3.4rem;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.km-android .km-detail .km-text
+{
+    width: 100%;
+    display: block;
+    height: 1.6rem;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -.8rem;
+    border-left-width: @android-border-width;
+    border-left-style: dotted;
+}
+

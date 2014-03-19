@@ -1,0 +1,86 @@
+@import "../common/popover.less";
+@import "base.less";
+
+/* PopOver */
+
+.km-ios7 .km-popup.km-pane
+{
+    overflow: visible;
+}
+
+.km-ios7 .km-popup.km-pane .km-leftitem
+{
+    left: .5em;
+}
+
+.km-ios7 .km-popup.km-pane .km-rightitem
+{
+    right: .5em;
+}
+
+.km-ios7 .km-popup.km-pane
+{
+    overflow: visible;
+    box-sizing: border-box;
+    border-bottom: 1px solid transparent;
+    border-radius: @ios7-secondary-border-radius;
+}
+
+.km-ios7 .km-popup.km-pane > .km-view
+{
+    height: 100%;
+    border-radius: @ios7-border-radius;
+}
+
+.km-ios7 .km-popup.km-pane > .km-view > :first-child,
+.km-ios7 .km-popup.km-pane > .km-view > :first-child > *
+{
+    border-top-left-radius: @ios7-border-radius;
+    border-top-right-radius: @ios7-border-radius;
+    -webkit-margin-collapse: separate;
+}
+
+.km-ios7 .km-popup.km-pane > .km-view > :last-child,
+.km-ios7 .km-popup.km-pane > .km-view > :last-child > *
+{
+    border-bottom-left-radius: @ios7-border-radius;
+    border-bottom-right-radius: @ios7-border-radius;
+    -webkit-margin-collapse: separate;
+}
+
+.km-ios7 .km-popup-arrow:after
+{
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-style: solid;
+    border-width: 0 15px 15px;
+}
+
+.km-ios7 .km-down .km-popup-arrow:before
+{
+    margin-top: -1px;
+}
+
+.km-ios7 .km-up .km-popup-arrow:before
+{
+    margin-top: 1px;
+}
+
+.km-ios7 .km-up .km-popup-arrow:after,
+.km-ios7 .km-up .km-popup-arrow:before
+{
+    border-width: 15px 15px 0 15px;
+}
+
+.km-ios7 .km-left .km-popup-arrow:after,
+.km-ios7 .km-left .km-popup-arrow:before
+{
+    border-width: 15px 0 15px 15px;
+}
+
+.km-ios7 .km-right .km-popup-arrow:after,
+.km-ios7 .km-right .km-popup-arrow:before
+{
+    border-width: 15px 15px 15px 0;
+}
+

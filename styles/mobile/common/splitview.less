@@ -1,0 +1,37 @@
+/* SplitView */
+div.km-widget.km-splitview
+{
+    .box-orient(horizontal);
+    .box-direction(normal);
+    .flex-direction(row);
+}
+
+.km-widget.km-splitview.km-split-vertical
+{
+    .box-orient(vertical);
+    .flex-direction(column);
+}
+
+.km-splitview > .km-pane
+{
+    .flex(2);
+    width: auto;
+    height: auto;
+}
+
+.km-splitview > .km-pane:first-child
+{
+    .flex(1);
+}
+
+.km-split-horizontal > .km-pane
+{
+    height: 100%;
+}
+
+// Hopefully temporary
+.km-split-vertical > .km-pane > .km-view
+{
+    display: -webkit-box;
+}
+

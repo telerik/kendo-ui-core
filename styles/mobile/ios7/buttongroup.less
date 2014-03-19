@@ -1,0 +1,41 @@
+@import "../common/icons.less";
+@import "../common/buttongroup.less";
+@import "base.less";
+
+/* ButtonGroup */
+
+.km-ios7 .km-buttongroup
+{
+    font-size: 1em;
+}
+
+.km-ios7 .km-buttongroup > *:not(:first-child):not(:last-child)
+{
+    border-radius: 0;
+}
+
+.km-ios7 .km-buttongroup > *:first-child
+{
+    border-radius: @ios7-border-radius 0 0 @ios7-border-radius;
+}
+
+.km-ios7 .km-buttongroup > *:last-child
+{
+    border-radius: 0 @ios7-border-radius @ios7-border-radius 0;
+}
+
+.km-ios7 .km-buttongroup > *.km-state-active
+{
+    border-right-width: 1px;
+}
+
+.km-ios7 .km-buttongroup > *.km-state-active + *
+{
+    border-left-width: 0;
+}
+
+.km-ios7 .km-view-title .km-buttongroup
+{
+    font-weight: normal;
+}
+

@@ -1,0 +1,137 @@
+@import "../common/icons.less";
+@import "../common/listview.less";
+@import "base.less";
+
+/* ListView */
+
+.km-flat .km-list > li
+{
+    border-style: solid;
+    border-width: 0 0 @flat-border-width 0;
+}
+
+.km-flat .km-listinset > li:first-child,
+.km-flat .km-listgroupinset .km-list > li:first-child
+{
+    border-style: solid;
+    border-width: @flat-border-width;
+    border-radius: @flat-border-radius @flat-border-radius 0 0;
+}
+
+.km-flat .km-listinset > li,
+.km-flat .km-listgroupinset .km-list > li
+{
+    border-width: 0 @flat-border-width @flat-border-width @flat-border-width;
+}
+
+.km-flat .km-listinset > li:last-child,
+.km-flat .km-listgroupinset .km-list > li:last-child
+{
+    border-style: solid;
+    border-width: 0 @flat-border-width @flat-border-width @flat-border-width;
+    border-radius: 0 0 @flat-border-radius @flat-border-radius;
+}
+
+.km-flat .km-listinset > li:first-child:last-child,
+.km-flat .km-listgroupinset .km-list > li:first-child:last-child
+{
+    border-width: @flat-border-width;
+    border-radius: @flat-border-radius;
+}
+
+.km-flat .km-listview-link:after
+{
+    border-width: .2rem .2rem 0 0;
+}
+
+.km-flat:not(.km-on-android) .km-listview-link:after
+{
+    width: .66rem;
+    height: .64rem;
+    border-width: 0;
+    box-shadow: inset -.2rem .2rem 0;
+}
+
+.km-flat .km-listinset li:first-child > .km-listview-link,
+.km-flat .km-listgroupinset li:first-child > .km-listview-link,
+.km-flat .km-listinset li:first-child > .km-listview-label,
+.km-flat .km-listgroupinset li:first-child > .km-listview-label
+{
+    border-radius: @flat-inline-border-radius @flat-inline-border-radius 0 0;
+}
+
+.km-flat .km-listinset li:last-child > .km-listview-link,
+.km-flat .km-listgroupinset li:last-child > .km-listview-link,
+.km-flat .km-listinset li:last-child > .km-listview-label,
+.km-flat .km-listgroupinset li:last-child > .km-listview-label
+{
+    border-radius: 0 0 @flat-inline-border-radius @flat-inline-border-radius;
+}
+
+.km-flat .km-listinset li:first-child:last-child > .km-listview-link,
+.km-flat .km-listgroupinset li:first-child:last-child > .km-listview-link,
+.km-flat .km-listinset li:first-child:last-child > .km-listview-label,
+.km-flat .km-listgroupinset li:first-child:last-child > .km-listview-label
+{
+    border-radius: @flat-inline-border-radius;
+}
+
+.km-flat .km-group-title
+{
+    border-style: solid;
+    border-width: @flat-border-width 0;
+}
+
+.km-flat .km-scroll-header .km-group-title
+{
+    border-width: 0 0 @flat-border-width;
+}
+
+.km-flat .km-listgroupinset .km-group-title
+{
+    border: 0;
+    background: none;
+}
+
+.km-flat .km-listview .km-switch
+{
+    margin-top: -.9rem;
+}
+
+/* Filter box */
+
+.km-flat .km-listview-wrapper form .km-filter-wrap > input
+{
+    font-size: 1.2em;
+    padding: .3em 1.8em;
+}
+
+.km-flat .km-filter-wrap:before
+{
+    margin: .05em -1.3em 0 .3em;
+}
+
+.km-flat .km-filter-reset
+{
+    margin: .05em 0 0 -2em;
+}
+
+.km-flat .km-filter-reset .km-clear:after
+{
+    content: "\e038";
+}
+
+.km-flat .km-filter-wrap > input
+{
+    border-radius: @flat-border-radius;
+    border-width: @flat-border-width;
+    border-style: solid;
+}
+
+.km-flat .km-filter-wrap > input:focus
+{
+    border-width: @flat-border-width;
+    border-style: solid;
+}
+
+

@@ -247,10 +247,11 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
-    grunt.registerTask("ci", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:jenkins' ]);
-    grunt.registerTask("travis", [ 'kendo', 'styles', 'copy:jquery', 'copy:timezones', 'karma:travis' ]);
     grunt.registerTask('tests', [ 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:timezones' ]);
-    grunt.registerTask('build', [ 'all', 'styles', 'license' ]);
+    grunt.registerTask('build', [ 'kendo', 'copy:jquery', 'styles', 'license' ]);
+
+    grunt.registerTask("ci", [ 'all', 'karma:jenkins' ]);
+    grunt.registerTask("travis", [ 'jshint', 'build', 'karma:travis' ]);
 };

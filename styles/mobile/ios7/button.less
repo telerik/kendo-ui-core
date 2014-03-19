@@ -1,0 +1,95 @@
+@import "../common/icons.less";
+@import "../common/button.less";
+@import "base.less";
+
+/* Button */
+
+.km-ios7 .km-button
+{
+    font-size: .9em;
+    padding: .5em .8em;
+    border: 1px solid currentcolor;
+    border-radius: @ios7-border-radius;
+}
+
+.km-ios7 .km-leftitem .km-button,
+.km-ios7 .km-rightitem .km-button
+{
+    border: 0;
+    margin-top: .26rem;
+    margin-bottom: .26rem;
+    padding-left: .2em;
+    padding-right: .2em;
+}
+
+.km-ios7 .km-footer,
+.km-ios7 .km-tabstrip .km-button
+{
+    background: none;
+}
+
+.km-ios7 .km-back:before
+{
+    content: "\a0";
+    display: inline-block;
+    color: currentcolor;
+    width: .8em;
+    height: .8em;
+    border-width: 0;
+    box-shadow: inset .25rem -.25rem 0 currentcolor;
+    .transform(rotate(45deg));
+}
+
+/* Badges and Details */
+
+.km-ios7 .km-badge,
+.km-ios7 .km-detail
+{
+    font-size: .9em;
+    border: 0;
+    min-width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    text-align: center;
+    border-radius: 5em;
+}
+
+.km-ios7 .km-detail
+{
+    font-size: 1.1em;
+    min-width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
+    border: 1px solid currentcolor;
+}
+
+.km-ios7 .km-detail:after
+{
+    left: auto;
+    top: auto;
+    line-height: 1.3em;
+    text-align: center;
+}
+
+.km-ios7 .km-detaildisclose:after
+{
+    font-size: 1.2em;
+    line-height: 1em;
+}
+
+.km-ios7 .km-detail:after,
+.km-ios7 .km-detail:after,
+.km-ios7 .km-detail .km-icon:after,
+.km-ios7 .km-detail .km-icon:after
+{
+    color: inherit;
+}
+
+.km-ios7 li.km-state-active .km-detail:after,
+.km-ios7 li.km-state-active .km-detail:after,
+.km-ios7 li.km-state-active .km-detail .km-icon:after,
+.km-ios7 li.km-state-active .km-detail .km-icon:after
+{
+    -webkit-text-fill-color: currentcolor;
+}
+
