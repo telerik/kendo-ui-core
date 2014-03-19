@@ -221,14 +221,20 @@ namespace Telerik.KendoBootstrapper
                 if (e.Uri.AbsoluteUri.StartsWith("http://"))
                 {
                     e.Cancel = true;
-                    Process.Start(new ProcessStartInfo { FileName = e.Uri.ToString() });
-                }
 
-                if (e.Uri.AbsoluteUri.StartsWith("about:/api"))
+                    NavigateViaDefaultBrowser(e.Uri.ToString());
+                }
+                else if (e.Uri.AbsoluteUri.StartsWith("about:/api"))
                 {
                     e.Cancel = true;
 
-                    Process.Start(new ProcessStartInfo { FileName = "http://docs.telerik.com/kendo-ui" + e.Uri.AbsoluteUri.Substring(6) });
+                    NavigateViaDefaultBrowser("http://docs.telerik.com/kendo-ui" + e.Uri.AbsoluteUri.Substring(6));
+                }
+                else if (e.Uri.AbsoluteUri.StartsWith("about:/kendo-ui"))
+                {
+                    e.Cancel = true;
+
+                    NavigateViaDefaultBrowser("http://docs.telerik.com" + e.Uri.AbsoluteUri.Substring(6));
                 }
                 else if (e.Uri.AbsoluteUri.StartsWith("about:kendo"))
                 {
@@ -245,6 +251,11 @@ namespace Telerik.KendoBootstrapper
             }
 
             e.Cancel = true;
+        }
+
+        private void NavigateViaDefaultBrowser(string uri)
+        {
+            Process.Start(new ProcessStartInfo { FileName = uri });
         }
     }
 }
