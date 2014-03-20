@@ -582,6 +582,18 @@ var __meta__ = {
         }
     }
 
+    function normalizeHeaderCells(th, columns) {
+        var lastIndex = 0;
+        var idx , len;
+
+        for (idx = 0, len = columns.length; idx < len; idx ++) {
+            if (columns[idx].locked) {
+                th.eq(idx).insertBefore(th.eq(lastIndex));
+                lastIndex ++;
+            }
+        }
+    }
+
     function convertToObject(array) {
         var result = {},
             item,
@@ -3566,6 +3578,7 @@ var __meta__ = {
             encoded = !(that.table.find("tbody tr").length > 0 && (!dataSource || !dataSource.transport));
 
             if (that.options.scrollable) {
+                var initialColumns = columns;
                 lockedCols = lockedColumns(columns);
                 columns = nonLockedColumns(columns);
 
@@ -3573,6 +3586,7 @@ var __meta__ = {
                     throw new Error("There should be at least one non locked columns");
                 }
 
+                normalizeHeaderCells(that.element.find("tr:has(th):first").find("th:not(.k-group-cell)"), initialColumns);
                 columns = lockedCols.concat(columns);
             }
 
@@ -4076,8 +4090,8 @@ var __meta__ = {
                 colgroup = table.find("colgroup");
                 tr = table.find("thead tr");
 
-                colgroup.append(cols);
-                tr.append(cells);
+                colgroup.append(that.thead.prev().find("col.k-group-col").add(cols));
+                tr.append(that.thead.find(".k-group-cell").add(cells));
 
                 this.lockedHeader = table.prependTo(container);
                 this._syncLockedHeaderHeight();
