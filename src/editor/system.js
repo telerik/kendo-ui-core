@@ -662,7 +662,7 @@ var MSWordFormatCleaner = Cleaner.extend({
     },
 
     applicable: function(html) {
-        return (/class="?Mso|style="[^"]*mso-/i).test(html);
+        return (/class="?Mso|style="[^"]*mso-/i).test(html) || (/urn:schemas-microsoft-com:office/).test(html);
     },
 
     stripEmptyAnchors: function(html) {

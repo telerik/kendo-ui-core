@@ -389,13 +389,7 @@ test("replace phantom line feeds with space", function() {
 
 test("do not replace line feeds with space after <br>", function() {
     equal(clean('<p class="MsoNormal">foo<br>\nbar</p>'), '<p>foo<br>bar</p>');
-});
-
-test("do not replace line feeds with space after <br/>", function() {
     equal(clean('<p class="MsoNormal">foo<br/>\nbar</p>'), '<p>foo<br>bar</p>');
-});
-
-test("do not replace line feeds with space after <br />", function() {
     equal(clean('<p class="MsoNormal">foo<br />\nbar</p>'), '<p>foo<br>bar</p>');
 });
 
