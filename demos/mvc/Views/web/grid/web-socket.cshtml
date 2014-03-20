@@ -132,15 +132,13 @@
     </script>
     <div class="configuration-horizontal">
         <span class="configHead">Information</span>
-        <p>
-            This demo demonstrates real-time push-notifications from a WebSocket.
-        </p>
-        <p>
-            To see the real-time updates:
-        </p>
+        <p>This example demonstrates real-time push-notifications from a WebSocket. To see the real-time updates:</p>
         <ol>
             <li>Open this page in another browser window by clicking <a href="./web-socket.html" target="_new">here</a></li>
             <li>Create, update or destroy grid items.</li>
         </ol>
+        <p><strong>Note:</strong> To further enhance real-time experience, the Grid will also display changes from other users,
+            which currently happen to perform CRUD operations on the same demo.
+            If you refresh the page, all changes will be lost, because the remote service only broadcasts changes, it does not actually save them.</p>
     </div>
 </div>
