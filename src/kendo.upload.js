@@ -730,7 +730,6 @@ var __meta__ = {
         }
     };
 
-    // Iframe upload module
     var iframeUploadModule = function(upload) {
         this.name = "iframeUploadModule";
         this.element = upload.wrapper;
@@ -803,7 +802,7 @@ var __meta__ = {
                     var dataInput = form.find("input[name='" + key + "']");
                     if (dataInput.length === 0) {
                         dataInput = $("<input>", { type: "hidden", name: key })
-                            .appendTo(form);
+                            .prependTo(form);
                     }
                     dataInput.val(e.data[key]);
                 }
