@@ -1,0 +1,44 @@
+:options:
+    - :name: stroke
+      :type: kendo.dataviz.diagram.Shape.Stroke
+      :description: Defines the stroke configuration.
+
+    - :name: rotation
+      :type: kendo.dataviz.diagram.Shape.Rotation
+      :description: Defines the rotation applied to the shape.
+
+    - :name: hover
+      :type: kendo.dataviz.diagram.Shape.Hover
+      :description: Defines the hover configuration.
+
+    - :name: connectors.connector
+      :type: kendo.dataviz.diagram.Shape.Connector
+      :description: Defines the hover configuration.
+
+    - :name: stroke.dashType
+      :type: kendo.dataviz.diagram.Stroke.dashType
+      :description: The dash type of the shape.
+      :default: StrokeDashType.Solid
+      :values:
+        - dash - a line consisting of dashes
+        - dashDot - a line consisting of a repeating pattern of dash-dot
+        - dot - a line consisting of dots
+        - longDash - a line consisting of a repeating pattern of long-dash
+        - longDashDot - a line consisting of a repeating pattern of long-dash-dot
+        - longDashDotDot - a line consisting of a repeating pattern of long-dash-dot-dot
+        - solid - a solid line
+
+    - :name: connectors.name
+      :type: String
+      :description:
+      :default: ConnectorName.Auto
+      :values:
+          - Auto - Connector positioned in the center of the shape.
+          - Top - Connector positioned in the middle of the topside of the shape.
+          - TopLeft - Connector positioned an the top-left corner of the shape.
+          - TopRight - Connector positioned an the top-right corner of the shape.
+          - Left - Connector positioned in the middle of the left side of the shape.
+          - Right - Connector positioned in the middle of the right side of the shape.
+          - Bottom - Connector positioned in the middle of the bottom side of the shape.
+          - BottomLeft - Connector positioned an the bottom-left corner of the shape.
+          - BottomRight - Connector positioned an the bottom-left corner of the shape.

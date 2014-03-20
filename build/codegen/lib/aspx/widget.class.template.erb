@@ -1,0 +1,128 @@
+using System;
+using System.Text;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Web.UI;
+using System.Web.Script.Serialization;
+
+using Telerik.Web.UI<%= csharp_namespace == 'Telerik.Web.UI' ? ".#{root_component.owner_namespace}" : '' %>;
+
+[assembly: WebResource("<%= script_resource_path %>", "text/javascript")]
+
+namespace <%= csharp_namespace %>
+{
+    /// <summary>
+    ///
+    /// </summary>
+    [ParseChildren(ChildrenAsProperties = true)]
+    [ClientScriptResource("<%= script_component_type %>", "<%= script_resource_path %>")]
+    public class <%= csharp_class %> : RadWebControl
+    {
+        #region [ Constructor ]
+        public <%= csharp_class %>()
+        {
+            RegisterJSConverters();
+        }
+        #endregion [ Constructor ]
+
+        #region [ Properties ]
+        #endregion [ Properties ]
+
+        #region [ Events ]
+        #endregion [ Events ]
+
+        #region [ Overrides ]
+
+        protected override void DescribeComponent(IScriptDescriptor descriptor)
+        {
+            base.DescribeComponent(descriptor);
+            descriptor.AddScriptProperty("_options", serializer.Serialize(this));
+        }
+
+        #endregion [ Overrides ]
+
+        #region [ Private Members ]
+
+        private JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+        private void RegisterJSConverters()
+        {
+            List<JavaScriptConverter> converters = new List<JavaScriptConverter>()
+            {
+                #region [ Converters Declaration ]
+                #endregion [ Converters Declaration ]
+            };
+            serializer.RegisterConverters(converters);
+        }
+
+        #endregion [ Private Members ]
+
+        #region [ RadWebControl Overrides ]
+        protected override HtmlTextWriterTag TagKey
+        {
+            get
+            {
+                return HtmlTextWriterTag.Div;
+            }
+        }
+
+        protected override string CssClassFormatString
+        {
+            get
+            {
+                return "";
+            }
+        }
+
+        [DefaultValue(false)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public override bool EnableEmbeddedSkins
+        {
+            get { return false; }
+        }
+
+        [DefaultValue(false)]
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public override bool EnableEmbeddedBaseStylesheet
+        {
+            get { return false; }
+        }
+        #endregion [ RadWebControl Overrides ]
+    <% if has_composite_options? %>
+
+        #region [ ViewState ]
+
+        protected override void LoadViewState(object state)
+        {
+            object[] viewState = (object[])state;
+            int i = 0;
+            base.LoadViewState(viewState[i++]);
+            #region [ LoadViewState ]
+            #endregion [ LoadViewState ]
+        }
+
+        protected override object SaveViewState()
+        {
+            object[] viewState = new object[] {
+                base.SaveViewState(),
+                #region [ SaveViewState ]
+                #endregion [ SaveViewState ]
+            };
+            return viewState;
+        }
+
+        protected override void TrackViewState()
+        {
+            base.TrackViewState();
+            #region [ TrackViewState ]
+            #endregion [ TrackViewState ]
+        }
+
+        #endregion [ ViewState ]
+    <% end %>
+    }
+}

@@ -1,0 +1,15 @@
+namespace <%= csharp_namespace %>
+{
+    /// <summary>
+    /// <%= description %>
+    /// </summary>
+    public enum <%= csharp_class %>
+    {
+        <% values.each_with_index do |value, index| %>
+        ///<summary>
+        ///<%= value_desc_to_s value %>
+        ///</summary>
+        <%= value_to_s(value).pascalize %><%= ',' if index < values.length - 1  %>
+        <% end %>
+    }
+}

@@ -5,12 +5,13 @@ module CodeGen
         module Wrappers
 
             CHILD_COMPONENTS = %w{
-            DiagramConnection
-            DiagramShape
-            DiagramConnector
-            DiagramLayoutSettings}
+                DiagramLayout
+            }
 
-            OPTIONS_TO_SKIP = %w{dataSource bounds}
+            OPTIONS_TO_SKIP = %w{
+                dataSource
+                autoBind
+            }
 
             TYPES_MAP = {
                 'String' => 'string',
@@ -22,280 +23,63 @@ module CodeGen
             }
 
             TYPES_DEFAULT_MAP = {
-                'String' => 'null',
+                'String' => '""',
                 'Number' => '0.0',
                 'Boolean' => 'false',
                 'Object' => 'null',
-                'Function' => 'null',
+                'Function' => '""',
                 'Date' => 'null'
             }
 
-            CLASS_TEMPLATE = ERB.new('
-using System.Text;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Web.UI;
-using System.Web.Script.Serialization;
+            CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/class.template.erb'))
 
-namespace <%= csharp_namespace %>
-{
-    /// <summary>
-    /// 
-    /// </summary>
-    public class <%= csharp_class %> : Telerik.Web.StateManager
-    {
-        #region [ Constructor ]
-        public <%= csharp_class %>(){}
-        #endregion [ Constructor ]
-    
-        #region [ Properties ]
-        #endregion [ Properties ]
-    
-        #region [ Events ]
-        #endregion [ Events ]
-  }
-}
-')
+            WIDGET_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/widget.class.template.erb'))
 
-            WIDGET_CLASS_TEMPLATE = ERB.new('
-using System.Text;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Web.UI;
-using System.Web.Script.Serialization;
+            COMPOSITE_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/composite.class.template.erb'))
 
-[assembly: WebResource("<%= script_resource_path %>", "text/javascript")]
+            PROPERTY_WITH_DEFAULT_VALUE_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/property.with.default.template.erb'))
 
-namespace <%= csharp_namespace %>
-{
-    /// <summary>
-    ///
-    /// </summary>
-    [ParseChildren(ChildrenAsProperties = true)]
-    [ClientScriptResource("<%= script_component_type %>", "<%= script_resource_path %>")]
-    public class <%= csharp_class %> : RadWebControl
-    {
-        #region [ Constructor ]
-        public <%= csharp_class %>()
-        {
-            RegisterJSConverters();
-        }
-        #endregion [ Constructor ]
+            PROPERTY_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/property.template.erb'))
 
-        #region [ Properties ]
-        #endregion [ Properties ]
+            COMPOSITE_PROPERTY_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/composite.property.template.erb'))
 
-        #region [ Events ]
-        #endregion [ Events ]
+            ENUM_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/enum.template.erb'))
 
-        #region [ Overrides ]
+            COLLECTION_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.class.template.erb'))
 
-        protected override void DescribeComponent(IScriptDescriptor descriptor)
-        {
-            base.DescribeComponent(descriptor);
-            descriptor.AddScriptProperty("_options", SerializeSettings());
-        }
+            COLLECTION_ITEM_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.item.property.template.erb'))
 
-        #endregion [ Overrides ]
+            ARRAY_ITEM_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.item.class.template.erb'))
 
-        #region [ Private Members ]
+            CONVERTER_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/converter.class.template.erb'))
 
-        private JavaScriptSerializer serializer = new JavaScriptSerializer();
+            CONVERTER_COMPOSITE_TEMPLATE = ERB.new('
+            if (!convertable.<%= csharp_name %>.IsDefault)
+                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
 
-        private void RegisterJSConverters()
-        {
-            List<JavaScriptConverter> converters = new List<JavaScriptConverter>()
-                                                    {
-                                                        #region [ Converters Declaration ]
-                                                        #endregion [ Converters Declaration ]
-                                                    };
-            serializer.RegisterConverters(converters);
-        }
-
-        private string SerializeSettings()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("{");
-            #region [ Properties Serialization ]
-            #endregion [ Properties Serialization ]
-            sb.Append("}");
-            return sb.ToString();
-        }
-
-        #endregion [ Private Members ]
-  }
-}
-')
-
-            COMPOSITE_CLASS_TEMPLATE = ERB.new('
-namespace <%= csharp_namespace %>
-{
-    using System.ComponentModel;
-    using System.Web.UI;
-
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    public class <%= csharp_class %> : Telerik.Web.StateManager
-    {
-        #region [ Properties ]
-        #endregion [ Properties ]
-    }
-}
-')
-
-            PROPERTY_WITH_DEFAULT_VALUE_TEMPLATE = ERB.new('
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    [DefaultValue(<%= csharp_default %>)]
-    public <%= csharp_type %> <%= name.pascalize %>
-    {
-      get
-      {
-        return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"] ?? <%= csharp_default %>);
-      }
-      set
-      {
-        ViewState["<%= name.pascalize %>"] = value;
-      }
-    }')
-
-            PROPERTY_TEMPLATE = ERB.new('
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    public <%= csharp_type %> <%= name.pascalize %>
-    {
-      get
-      {
-        return (<%= csharp_type %>)(ViewState["<%= name.pascalize %>"]);
-      }
-      set
-      {
-        ViewState["<%= name.pascalize %>"] = value;
-      }
-    }')
-
-            COMPOSITE_PROPERTY_TEMPLATE = ERB.new('
-    private <%= csharp_class %> _<%= name %>; 
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    [DefaultValue("<%= csharp_default %>")]
-    [PersistenceMode(PersistenceMode.InnerProperty)]
-    public <%= csharp_class %> <%= name.pascalize %>
-    {
-      get
-      {
-        if (this._<%= name %> == null)
-        {
-            this._<%= name %> = new <%= csharp_class %>();
-        }
-        return this._<%= name %>;
-      }
-    }')
-
-            ENUM_TEMPLATE = ERB.new('
-namespace <%= csharp_namespace %>
-{
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    public enum <%= csharp_type %>
-    {
-        <% values.each_with_index do |value, index| %>
-        ///<summary>
-        ///<%= value_desc_to_s value %>
-        ///</summary>
-        <%= value_to_s(value).pascalize %><%= \',\' if index < values.length - 1 %>
-        <% end %>
-    }
-}
-    ')
-
-            COLLECTION_TEMPLATE = ERB.new('
-    private <%= csharp_class %> _<%= name %>;
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    [DefaultValue(<%= csharp_default %>)]
-    [PersistenceMode(PersistenceMode.InnerProperty)]
-    public <%= csharp_class %> <%= name.pascalize %>
-    {
-      get
-      {
-        if (this._<%= name %> == null)
-        {
-            this._<%= name %> = new <%= csharp_class %>();
-        }
-        return this._<%= name %>;
-      }
-    }
-')
-            ARRAY_ITEM_CLASS_TEMPLATE = ERB.new('
-namespace <%= csharp_namespace %>
-{
-    using System.ComponentModel;
-
-    /// <summary>
-    /// <%= description %>
-    /// </summary>
-    public class <%= csharp_class %> : Telerik.Web.StateManager
-    {
-        public <%= csharp_class %>() {}
-
-        #region [ Properties ]
-        #endregion [ Properties ]
-    }
-}
-')
-
-            CONVERTER_CLASS_TEMPLATE = ERB.new('
-namespace <%= csharp_namespace %>
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Script.Serialization;
-
-    /// <summary>
-    /// Serialization JS converter class for <%= csharp_class %>
-    /// </summary>
-    public class <%= csharp_converter_class %>: ExplicitJavaScriptConverter
-    {
-        protected override void PopulateProperties(IDictionary<string, object> state, object obj)
-        {
-            var convertable = obj as <%= csharp_class %>;
-            
-            #region [ SerializedProperties ]
-            #endregion [ SerializedProperties ]
-        }
-
-        public override IEnumerable<System.Type> SupportedTypes
-        {
-            get
-            {
-                return new[] { typeof(<%= csharp_class %>) };
-            }
-        }
-    }
-}
-')
+            CONVERTER_ARRAY_TEMPLATE = ERB.new('
+            if (convertable.<%= csharp_name %>.Count != 0)
+                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ItemsList, null);')
 
             CONVERTER_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
-            CONVERTER_COMPOSITE_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>, <%= csharp_default %>);')
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
+
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", convertable.<%= name.pascalize %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
+
+            LOAD_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).LoadViewState(viewState[i++]);')
+
+            SAVE_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).SaveViewState()')
+
+            TRACK_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).TrackViewState();')
+
 
             module Options
+
+                attr_accessor :type, :values, :description, :default
+
                 def component_class
                     Component
-                end
-
-                def csharp_name
-                    name.pascalize
                 end
 
                 def composite_option_class
@@ -310,9 +94,24 @@ namespace <%= csharp_namespace %>
                     ArrayOption
                 end
 
+                def has_composite_options?
+                    composite? && @options.select { |o| o.composite? }.count > 0
+                end
+
+                def csharp_name
+                    name.pascalize
+                end
+
                 def csharp_namespace
-                    "Telerik.Web.UI.#{root_component.name.pascalize}" if root_component.widget?
-                    "Telerik.Web.UI"
+                    "Telerik.Web.UI.#{root_component.owner_namespace}"
+                end
+
+                def csharp_datafield
+                    nil
+                end
+
+                def boundable?
+                    !csharp_datafield.nil?
                 end
 
                 def description
@@ -344,7 +143,7 @@ namespace <%= csharp_namespace %>
 
                         remove_existing = settings[:remove_existing] || false
 
-                        parents = @options.find_all { |option| name.start_with?(option.name + '.') && (option.type.include?('Object') || option.type.include?('Array')) }
+                        parents = @options.find_all { |option| name.start_with?(option.name + '.') && (option.type.include?('Object') || option.type.include?('Array') || option.type.include?('kendo.')) }
 
                         parents.map! { |parent| parent.to_composite }
 
@@ -384,12 +183,28 @@ namespace <%= csharp_namespace %>
                 end
 
                 def root_component
-                    parent = owner
+                    parent = self
                     while !parent.is_a?(Component) && !parent.owner.nil?
                         parent = parent.owner
                     end
 
                     parent if parent.is_a?(Component)
+                end
+
+                def strip_kendo_type(input)
+                    result = input
+                    .sub('kendo.ui.', '')
+                    .sub('kendo.dataviz.ui.', '')
+                    .sub('kendo.dataviz.', '')
+                    .sub('kendo.mobile.ui.', '')
+                    .sub('kendo.mobile.', '')
+                    .sub('kendo.', '')
+                    .sub(".#{root_component.owner_namespace.downcase}", '')
+                    .sub("#{root_component.owner_namespace.downcase}.", '')
+
+                    return result.split('.').map { |w|
+                        w.pascalize
+                    }.join('')
                 end
             end
 
@@ -397,11 +212,12 @@ namespace <%= csharp_namespace %>
                 include Options
 
                 def enum?
-                    root_component.enum_options.include?(self)
+                    !@values.nil?
                 end
 
-                def csharp_type
-                    return "#{owner.csharp_name.sub('Settings', '').sub('Collection', '')}#{name.pascalize}" if enum? || type.include?('kendo.')
+                def csharp_class
+                    return strip_kendo_type(type) if type.include?('kendo.')
+                    return "#{owner.csharp_name.sub('Settings', '').sub('Collection', '')}#{name.pascalize}" if enum?
                     return TYPES_MAP[type[0]]
                 end
 
@@ -413,10 +229,6 @@ namespace <%= csharp_namespace %>
                 def to_converter
                     return CONVERTER_ENUM_PROPERTY_TEMPLATE.result(get_binding) if values
                     return CONVERTER_PROPERTY_TEMPLATE.result(get_binding) if csharp_default
-                end
-
-                def to_serialization_declaration
-                    return ERB.new('sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
                 end
 
                 def csharp_default
@@ -457,17 +269,27 @@ namespace <%= csharp_namespace %>
             class CompositeOption < CodeGen::CompositeOption
                 include Options
 
-                def csharp_class
-                    prefix = owner.instance_of?(ArrayItem) ? owner.owner.owner.csharp_name.sub('Settings', '') : owner.csharp_name.sub('Settings', '')
-                    name.include?('Settings') ? "#{prefix}#{name.sub('Settings', '').pascalize}" : "#{prefix}#{name.pascalize}"
+                def csharp_name
+                    "#{name.pascalize}Settings"
                 end
 
-                def csharp_default
-                    'null'
+                def csharp_class
+                    return strip_kendo_type(type) if type.include?('kendo.')
+
+                    name.pascalize
+                end
+
+                def csharp_namespace
+                    return 'Telerik.Web.UI' if csharp_class.start_with?(root_component.owner_namespace)
+                    "Telerik.Web.UI.#{root_component.owner_namespace}"
                 end
 
                 def csharp_converter_class
                     "#{csharp_class}Converter"
+                end
+
+                def array_options
+                    @options.select { |option| option.instance_of?(ArrayOption) }
                 end
 
                 def to_converter
@@ -486,8 +308,16 @@ namespace <%= csharp_namespace %>
                     CONVERTER_CLASS_TEMPLATE.result(get_binding)
                 end
 
-                def to_serialization_declaration
-                    return ERB.new('sb.AppendFormat("<%= name %>:{0}", serializer.Serialize(<%= csharp_name %>));').result(binding)
+                def to_loadviewstate
+                    LOAD_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+                def to_saveviewstate
+                    SAVE_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+                def to_trackviewstate
+                    TRACK_VIEWSTATE_TEMPLATE.result(get_binding)
                 end
 
                 def get_binding
@@ -498,31 +328,46 @@ namespace <%= csharp_namespace %>
             class ArrayOption < CompositeOption
                 include Options, CodeGen::Array
 
+                def add_option(settings)
+                    if settings[:name] == "#{name}.#{@item.name}"
+                        @item.type = settings[:type]
+                    else
+                        @item.add_option(settings) unless @item.name == settings[:name]
+                    end
+                end
+
                 def item_class
                     ArrayItem
                 end
 
+                def csharp_name
+                    "#{name.pascalize}Collection"
+                end
+
                 def csharp_class
-                    "List<#{item.csharp_class}>"
-                end
-
-                def csharp_namespace
-                    'Telerik.Web.UI'
-                end
-
-                def csharp_default
-                    'null'
+                    "#{item.csharp_class}sCollection"
                 end
 
                 def to_declaration
-                    COLLECTION_TEMPLATE.result(binding)
+                    COLLECTION_ITEM_TEMPLATE.result(binding)
                 end
+
+                def to_converter
+                    CONVERTER_ARRAY_TEMPLATE.result(get_binding)
+                end
+
 
             end
 
             class ArrayItem < CompositeOption
 
                 def csharp_class
+                    if type.include?('kendo.')
+                        prefix = root_component.widget? ? root_component.name.pascalize : root_component.owner_namespace
+
+                        return "#{prefix}#{strip_kendo_type(type)}"
+                    end
+
                     "#{owner.owner.name.pascalize.sub('Collection', '')}#{name.pascalize}"
                 end
 
@@ -534,6 +379,43 @@ namespace <%= csharp_namespace %>
             class Component < CodeGen::Component
                 include Options
 
+                def find_option_by_name(name, root)
+                    return root if root.name == name
+
+                    child = root.options.find { |o| name == o.name || name.start_with?("#{o.name}.") }
+
+                    if !child.nil? && !child.instance_of?(Option) && name != child.name
+                        name = name.sub("#{child.name}.", '')
+                        child = child.item if child.instance_of?(ArrayOption) && (name.include?('.') || name != child.name.singular)
+                        child = find_option_by_name(name, child)
+                    end
+
+                    if !child.nil? && name.end_with?(child.name)
+                        child
+                    else
+                        nil
+                    end
+                end
+
+                def import(metadata)
+                    @content = metadata[:content]
+
+                    metadata[:options].each do |option|
+                        existing_option = find_option_by_name(option[:name], self)
+
+                        if !existing_option.nil?
+                            existing_option.type = option[:type] if option[:type].include?('kendo.')
+                            existing_option.values = option[:values] unless option[:values].nil?
+                            existing_option.description = option[:description] unless option[:description].nil? || option[:description] == ''
+                            existing_option.default = option[:default] unless option[:default].nil? || option[:default] == ''
+                            existing_option.csharp_datafield = option[:default] unless option[:datafield].nil? || option[:datafield] == ''
+                        else
+                            option[:remove_existing] = existing_option.nil?
+                            add_option(option)
+                        end
+                    end
+                end
+
                 def csharp_class
                     return "Rad#{name.pascalize}" if widget?
 
@@ -544,13 +426,29 @@ namespace <%= csharp_namespace %>
                     "#{csharp_class}Converter"
                 end
 
+                def has_composite_options?
+                    @options.select { |o| o.composite? }.count > 0
+                end
+
                 def to_converter_class_declaration
                     CONVERTER_CLASS_TEMPLATE.result(get_binding)
                 end
 
+                def to_loadviewstate
+                    LOAD_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+                def to_saveviewstate
+                    SAVE_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+                def to_trackviewstate
+                    TRACK_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+
                 def script_resource_path
-                    return "Diagram.Scripts.RadDiagram.js" #temp value - current local testing
-                    #"#{csharp_namespace}.#{csharp_name}.Scripts.#{csharp_class}.js"
+                    "#{csharp_namespace}.#{csharp_name}.Scripts.#{csharp_class}.js"
                 end
 
                 def script_component_type
@@ -558,7 +456,7 @@ namespace <%= csharp_namespace %>
                 end
 
                 def csharp_namespace
-                    prefix = "Telerik.Web.UI"
+                    prefix = 'Telerik.Web.UI'
 
                     return "#{prefix}.#{owner_namespace}" unless widget? || CHILD_COMPONENTS.include?(csharp_class)
 
@@ -566,13 +464,14 @@ namespace <%= csharp_namespace %>
                 end
 
                 def owner_namespace
-                    full_name.sub(".#{name}", '')
+                    full_name
                     .sub('kendo.ui.', '')
                     .sub('kendo.dataviz.ui.', '')
                     .sub('kendo.dataviz.', '')
                     .sub('kendo.mobile.ui.', '')
                     .sub('kendo.mobile.', '')
                     .sub('kendo.', '')
+                    .sub(".#{name}", '')
                     .pascalize
                 end
 
@@ -585,16 +484,22 @@ namespace <%= csharp_namespace %>
                 end
 
                 def enum_options
-                    enums = simple_options.select { |o| !o.values.nil? }
+                    enums = simple_options.select { |o| o.enum? }
                     composite = composite_options.flat_map { |o| o.options }
 
                     composite.each do |item|
-                        composite.push(*item.options) if item.composite?
-
-                        enums.push(item) if item.respond_to?(:values) && !item.values.nil?
+                        if item.composite?
+                            composite.push(*item.options) if item.composite?
+                        else
+                            enums.push(item) if item.enum?
+                        end
                     end
 
                     enums
+                end
+
+                def array_options
+                    @options.select { |option| option.instance_of?(ArrayOption) }
                 end
             end
 
@@ -614,10 +519,11 @@ namespace <%= csharp_namespace %>
 
                 def component(component)
                     write_class(component)
-                    write_converter(component) unless component.widget?
+                    write_converter(component)
                     write_enums(component)
                     write_properties(component)
                     write_events(component)
+                    write_viewstate(component)
                 end
 
                 private
@@ -637,7 +543,7 @@ namespace <%= csharp_namespace %>
                     options = component.enum_options
 
                     options.each do |option|
-                        filename = "#{@path}/#{option.csharp_type}.cs"
+                        filename = "#{@path}/#{option.csharp_class}.cs"
 
                         create_file(filename, option.to_enum)
                     end
@@ -652,24 +558,13 @@ namespace <%= csharp_namespace %>
 
                     properties_content = write_options(component.options)
 
-                    write_file(file_path, properties_content, '#region [ Properties ]')
+                    write_file(file_path, properties_content, '[ Properties ]')
 
-                    if component.widget?
-                        serialization_content = write_options_serialization(component.options)
-                        write_file(file_path, serialization_content, '#region [ Properties Serialization ]')
+                    if !component.widget?
+                        is_default_content = write_is_default(component.options)
+                        write_file(file_path, is_default_content, '[ IsDefault ]')
                     end
 
-                end
-
-                def write_options_serialization(options)
-                    content = "\n"
-
-                    options.each_index do |index|
-                        content += options[index].to_serialization_declaration + "\n"
-                        content += 'sb.Append(",");' + "\n" unless index == options.length - 1
-                    end
-
-                    content
                 end
 
                 def write_events(component)
@@ -687,14 +582,23 @@ namespace <%= csharp_namespace %>
                 end
 
                 def write_option(option)
-                    if option.class == CompositeOption && option.owner.class != ArrayItem && !CHILD_COMPONENTS.include?(option.csharp_class)
+                    if option.class == CompositeOption && option.owner.class != ArrayItem
                         write_composite_option_file(option)
                     end
-                    if option.class == ArrayOption && !CHILD_COMPONENTS.include?(option.item.csharp_class)
+                    if option.class == ArrayOption
                         write_array_item_class(option.item)
+                        write_collection_class(option)
                     end
 
                     option.to_declaration
+                end
+
+                def write_collection_class(option)
+                    content = COLLECTION_CLASS_TEMPLATE.result(option.get_binding)
+
+                    file_name = File.join(@path, "#{option.csharp_class}.cs")
+
+                    create_file(file_name, content)
                 end
 
                 def write_composite_option_file(composite)
@@ -702,10 +606,28 @@ namespace <%= csharp_namespace %>
                     create_file(filename, composite.to_class_declaration)
 
                     composite_content = write_options(composite.options)
+                    is_default_content = write_is_default(composite.options)
 
-                    write_file(filename, composite_content, '#region [ Properties ]')
+                    write_file(filename, composite_content, '[ Properties ]')
+                    write_file(filename, is_default_content, '[ IsDefault ]')
+
+                    write_viewstate(composite)
 
                     write_composite_option_converter_file(composite)
+                end
+
+                def write_is_default(options)
+                    result = ''
+                    options.each_index do |index|
+                        option  = options[index]
+                        result += !option.composite? ?
+                            "                   #{option.csharp_name} == #{option.csharp_default}" :
+                            option.instance_of?(CompositeOption) ?
+                                "                   #{option.csharp_name}.IsDefault" :
+                                "                   #{option.csharp_name}.ItemsList.Count == 0"
+                        result += index < options.length - 1 ? " &&\n" : ';'
+                    end
+                    result
                 end
 
                 def write_converter_options(options)
@@ -739,7 +661,7 @@ namespace <%= csharp_namespace %>
 
                     composite_content = write_converter_options(composite.options)
 
-                    write_file(filename, composite_content, '#region [ SerializedProperties ]')
+                    write_file(filename, composite_content, '[ SerializedProperties ]')
                 end
 
                 def write_array_item_class(item)
@@ -747,17 +669,47 @@ namespace <%= csharp_namespace %>
 
                     create_file(file_name, item.to_class)
 
-                    content = write_options(item.options[0].options)
+                    content = write_options(item.options)
 
-                    write_file(file_name, content, '#region [ Properties ]')
+                    write_file(file_name, content, '[ Properties ]')
 
-                    write_composite_option_converter_file(item.options[0])
+                    write_viewstate(item)
+
+                    write_composite_option_converter_file(item)
+                end
+
+                def write_viewstate(owner)
+                    options = owner.options.select { |o|
+                        o.composite?
+                    }.sort { |a,b| a.name <=> b.name }
+
+                    load_viewstate_content = write_viewstate_content(options, 'load')
+                    save_viewstate_content = write_viewstate_content(options, 'save')
+                    track_viewstate_content = write_viewstate_content(options, 'track')
+
+                    file_name = File.join(@path, "#{owner.csharp_class}.cs")
+
+                    write_file(file_name, load_viewstate_content, '[ LoadViewState ]')
+                    write_file(file_name, save_viewstate_content, '[ SaveViewState ]')
+                    write_file(file_name, track_viewstate_content, '[ TrackViewState ]')
+                end
+
+                def write_viewstate_content(options, action)
+                    content = ''
+                    options.each_with_index do |option, index|
+                        content += option.send("to_#{action}viewstate")
+                        content += ',' if action == 'save' && index < options.count - 1
+                        content += "\n"
+                    end
+                    content
                 end
 
                 def write_file(file_path, content, marker)
                     return unless File.exists?(file_path)
 
-                    c = File.read(file_path).sub(Regexp.new(Regexp.escape(marker)), marker + content)
+                    region_regexp = Regexp.new("#region\s#{Regexp.escape(marker)}(.*)#endregion\s#{Regexp.escape(marker)}", Regexp::MULTILINE)
+
+                    c = File.read(file_path).gsub(region_regexp) { "#region #{marker}\n#{content}\n#endregion #{marker}" }
 
                     File.open(file_path, 'w') do |f|
                         f.write(c)

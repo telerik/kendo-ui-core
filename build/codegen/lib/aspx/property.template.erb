@@ -1,0 +1,15 @@
+
+        /// <summary>
+        /// <%= description %>
+        /// </summary>
+        public <%= csharp_class %> <%= csharp_name %>
+        {
+            get
+            {
+                return (<%= csharp_class %>)(ViewState["<%= csharp_name %>"]);
+            }
+            set
+            {
+                ViewState["<%= csharp_name %>"] = value;
+            }
+        }

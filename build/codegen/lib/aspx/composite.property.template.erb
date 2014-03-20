@@ -1,0 +1,17 @@
+
+        private <%= csharp_class %> _<%= name %>;
+        /// <summary>
+        /// <%= description %>
+        /// </summary>
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        public <%= csharp_class %> <%= csharp_name %>
+        {
+            get
+            {
+                if (this._<%= name %> == null)
+                {
+                    this._<%= name %> = new <%= csharp_class %>();
+                }
+                return this._<%= name %>;
+            }
+        }

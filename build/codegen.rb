@@ -45,7 +45,12 @@ namespace :generate do
 
         desc 'Generate ASP.NET WebForms wrappers'
         task :wrappers do
-            markdown = FileList['docs/api/dataviz/diagram/*.md']
+            markdown = FileList[
+                'docs/api/dataviz/diagram.md',
+                'docs/api/dataviz/diagram/connection.md',
+                'docs/api/dataviz/diagram/shape.md'
+            ]
+
 
             components = markdown.map { |file| CodeGen::MarkdownParser.read(file, CodeGen::ASPX::Wrappers::Component) }
 
@@ -77,7 +82,7 @@ namespace :generate do
 
         desc 'Temp task that cleans the ASPX\'s output  folder!'
         task :clean do
-            sh 'rm -rd wrappers/aspx/src/*'
+            sh 'rm -rdf wrappers/aspx/src/*'
         end
 
     end
@@ -101,7 +106,7 @@ namespace :generate do
         namespace :dataviz do
             desc 'Generate MVC DataViz wrappers'
             task :wrappers do
-                markdown = FileList['docs/api/dataviz/map.md', 'docs/api/dataviz/diagram.md']
+                markdown = FileList['docs/api/dataviz/map.md']
 
                 components = markdown.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::DataViz::Component) }
                     .sort { |a, b| a.name <=> b.name }

@@ -1,0 +1,23 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web.UI;
+
+using Telerik.Web.UI<%= csharp_namespace == 'Telerik.Web.UI' ? ".#{root_component.owner_namespace}" : '' %>;
+
+namespace <%= csharp_namespace %>
+{
+    [ParseChildren(typeof(<%= item.csharp_class %>))]
+    public class <%= csharp_class %> : StronglyTypedStateManagedCollection<<%= item.csharp_class %>>
+    {
+        internal IList ItemsList
+        {
+            get
+            {
+                return this.List;
+            }
+        }
+    }
+}

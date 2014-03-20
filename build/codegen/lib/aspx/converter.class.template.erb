@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
+
+namespace <%= csharp_namespace %>
+{
+    /// <summary>
+    /// Serialization JS converter class for <%= csharp_class %>
+    /// </summary>
+    public class <%= csharp_converter_class %>: ExplicitJavaScriptConverter
+    {
+        protected override void PopulateProperties(IDictionary<string, object> state, object obj)
+        {
+            var convertable = obj as <%= csharp_class %>;
+
+            #region [ SerializedProperties ]
+            #endregion [ SerializedProperties ]
+        }
+
+        public override IEnumerable<System.Type> SupportedTypes
+        {
+            get
+            {
+                return new[] { typeof(<%= csharp_class %>) };
+            }
+        }
+    }
+}
