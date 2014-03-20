@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
   <Identifier Id="67fc9fc6-d614-41bf-bf14-7c645eadb07f">
-    <Name>Kendo UI Bootstrapper</Name>
+    <Name>Telerik Kendo UI Bootstrapper</Name>
     <Author>Telerik</Author>
-    <Version>2014.1.319</Version>
-    <Description xml:space="preserve">Kendo UI Bootstrapper Extension (Beta)</Description>
+    <Version>2014.1.320</Version>
+    <Description xml:space="preserve">Telerik Kendo UI Bootstrapper Extension (Beta)</Description>
     <Locale>1033</Locale>
     <MoreInfoUrl>http://www.telerik.com/kendo-ui</MoreInfoUrl>
     <License>EULA.rtf</License>
