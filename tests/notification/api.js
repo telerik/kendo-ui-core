@@ -227,6 +227,24 @@
         equal(notificationElement.find(".k-i-note").text(), "bar");
     });
 
+    test("show method adds data-role='alert' to popup notification", function() {
+        createNotification();
+
+        notification.show("foo");
+
+        equal($(".k-notification").attr("data-role"), "alert");
+    });
+
+    test("show method adds data-role='alert' to static notification", function() {
+        createNotification({
+            appendTo: QUnit.fixture
+        });
+
+        notification.show("foo");
+
+        equal($(".k-notification").attr("data-role"), "alert");
+    });
+
     test("shortcut show methods call show method with appropriate arguments", 8, function() {
         var defaultArgs = [null, null],
             methods = ["info", "success", "warning", "error"],
