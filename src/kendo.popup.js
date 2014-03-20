@@ -410,7 +410,6 @@ var __meta__ = {
 
         _position: function(fixed) {
             var that = this,
-                documentElement = $(document.documentElement),
                 element = that.element.css(POSITION, ""),
                 wrapper = that.wrapper,
                 options = that.options,
