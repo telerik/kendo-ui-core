@@ -11,7 +11,7 @@ function createUpload(options) {
     $('#uploadInstance').kendoUpload($.extend({ async:{"saveUrl":"javascript:;",autoUpload:true,showFileList:true} }, options));
 
     var uploadInstance = $('#uploadInstance').data("kendoUpload");
-    uploadInstance._module.createFormData = function() { return { } };
+    uploadInstance._module.createFormData = function() { return { append: $.noop } };
     uploadInstance._module.postFormData = function(url, data, fileEntry) {
         fileEntry.data("request", { abort: function() { } });
     };
