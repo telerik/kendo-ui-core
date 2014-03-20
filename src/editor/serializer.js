@@ -40,7 +40,8 @@ var Serializer = {
     _fillEmptyElements: function(body) {
         // fills empty elements to allow them to be focused
         $(body).find("p").each(function() {
-            if (/^\s*$/g.test($(this).text())) {
+            var p = $(this);
+            if (/^\s*$/g.test(p.text()) && !p.find("img,input").length) {
                 var node = this;
                 while (node.firstChild && node.firstChild.nodeType != 3) {
                     node = node.firstChild;

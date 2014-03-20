@@ -498,6 +498,16 @@ test("filling empty elements does not trigger errors", function() {
     ok(Serializer.htmlToDom("<p><img></p>", fixture))
 });
 
+test("does not remove empty elements from content", function() {
+    var fixture = QUnit.fixture;
+
+    Serializer.htmlToDom("<p> <img></p>", fixture[0]);
+    ok(fixture.find("img").length);
+
+    Serializer.htmlToDom("<p> <input></p>", fixture[0]);
+    ok(fixture.find("input").length);
+});
+
 test("removes k-paste-container elements from content", function() {
     equal(serializeCycle('foo<p class="k-paste-container">bar</p>baz'), "foobaz");
 });
