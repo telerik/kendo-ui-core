@@ -1116,7 +1116,13 @@ asyncTest("child parameterMap gets called when fetching child nodes", function()
                 id: "id",
                 hasChildren: "hasChildren",
                 children: {
-                    transport: { read: bar, parameterMap: addFoo }
+                    transport: {
+                        read: bar,
+                        parameterMap: function(data, type) {
+                            equal(type, "read");
+                            return addFoo(data);
+                        }
+                    }
                 }
             }
         }
