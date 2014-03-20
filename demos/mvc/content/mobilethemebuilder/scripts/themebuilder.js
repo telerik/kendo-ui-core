@@ -883,6 +883,9 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
             }
         };
 
+        // Wheel scrolling affects property chooser
+        kendo.mobile.ui.Scroller.prototype._wheelScroll = function(e) {};
+
         // Override Kendo Pane bindToRouter to avoid URL breaks and bad refresh
         kendo.mobile.ui.Pane.prototype.bindToRouter = function(router) {
             var that = this,
