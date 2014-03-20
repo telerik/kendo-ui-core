@@ -3560,11 +3560,11 @@ var __meta__ = {
                 transport = children.transport;
                 parameterMap = transport.parameterMap;
 
-                transport.parameterMap = function(data) {
+                transport.parameterMap = function(data, type) {
                     data[that.idField || "id"] = that.id;
 
                     if (parameterMap) {
-                        data = parameterMap(data);
+                        data = parameterMap(data, type);
                     }
 
                     return data;
