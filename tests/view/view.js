@@ -132,6 +132,15 @@
         equal(layout.element.find("#container").html(), '<div>' + view.element.html() + '</div>');
     });
 
+    test("layout triggers view show when replacing views", 1, function() {
+        var layout = new kendo.Layout("<div><span id='container' /></div>" ),
+            foo = new kendo.View('<span>Foo</span>', { show: function() { ok(true); } });
+
+        layout.render();
+
+        layout.showIn('#container', foo);
+    });
+
     test("layout triggers view hide when replacing views", 1, function() {
         var layout = new kendo.Layout("<div><span id='container' /></div>" ),
             foo = new kendo.View('<span>Foo</span>', { hide: function() { ok(true); } }),
