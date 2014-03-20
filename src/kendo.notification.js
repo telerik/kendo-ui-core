@@ -349,6 +349,7 @@ var __meta__ = {
                 wrapper
                     .addClass(KNOTIFICATION + "-" + type)
                     .toggleClass(KNOTIFICATION + "-button", options.button)
+                    .attr("data-role", "alert")
                     .css({width: options.width, height: options.height})
                     .append(that._getCompiled(type)(args));
                 
