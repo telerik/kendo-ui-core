@@ -62,6 +62,73 @@
         ok(grid.element.find(".k-grid-header-wrap th[data-field=baz]").length);
     });
 
+    test("th elements when header already exists", function() {
+        $('<div class="k-grid-header"><div class="k-grid-header-wrap"><table><tr>' +
+            '<th>foo</th><th>bar</th><th>baz</th></div></div>')
+            .appendTo(div);
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", locked: false },
+                { field: "baz", locked: true }
+            ]
+        });
+
+        var lockedTH = grid.element.find(".k-grid-header-locked th");
+        equal(lockedTH.length, 2);
+        equal(lockedTH.eq(0).text(), "foo");
+        equal(lockedTH.eq(1).text(), "baz");
+
+        var unlockedTH = grid.element.find(".k-grid-header-wrap th");
+        equal(unlockedTH.length, 1);
+        equal(unlockedTH.eq(0).text(), "bar");
+    });
+
+    test("column without field when header already exists", function() {
+        $('<div class="k-grid-header"><div class="k-grid-header-wrap"><table><tr>' +
+            '<th>foo</th><th>bar</th><th>baz</th></div></div>')
+            .appendTo(div);
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", locked: false },
+                { locked: true }
+            ]
+        });
+
+        var lockedTH = grid.element.find(".k-grid-header-locked th");
+        equal(lockedTH.length, 2);
+        equal(lockedTH.eq(0).text(), "foo");
+        equal(lockedTH.eq(1).text(), "baz");
+
+        var unlockedTH = grid.element.find(".k-grid-header-wrap th");
+        equal(unlockedTH.length, 1);
+        equal(unlockedTH.eq(0).text(), "bar");
+    });
+
+    test("initially grouping when header already exists", function() {
+        $('<div class="k-grid-header"><div class="k-grid-header-wrap"><table><tr>' +
+            '<th class="k-group-cell"></th><th>foo</th><th>bar</th><th>baz</th></div></div>')
+            .appendTo(div);
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", locked: false },
+                { field: "baz", locked: true }
+            ]
+        });
+
+        var lockedTH = grid.element.find(".k-grid-header-locked th");
+        equal(lockedTH.length, 3);
+        ok(lockedTH.eq(0).hasClass("k-group-cell"));
+        equal(lockedTH.eq(1).text(), "foo");
+        equal(lockedTH.eq(2).text(), "baz");
+
+        var unlockedTH = grid.element.find(".k-grid-header-wrap th");
+        equal(unlockedTH.length, 1);
+        equal(unlockedTH.eq(0).text(), "bar");
+    });
+
     test("correct th elements are created when multiple locked columns", function() {
         var grid = setup({
             columns: [{ field: "foo", locked: true }, "bar", { field: "baz", locked: true }]
