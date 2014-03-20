@@ -91,7 +91,38 @@ namespace <%= csharp_namespace %>
         {
             get { return false; }
         }
-        #endregion
+        #endregion [ RadWebControl Overrides ]
+    <% if has_composite_options? %>
 
+        #region [ ViewState ]
+
+        protected override void LoadViewState(object state)
+        {
+            object[] viewState = (object[])state;
+            int i = 0;
+            base.LoadViewState(viewState[i++]);
+            #region [ LoadViewState ]
+            #endregion [ LoadViewState ]
+        }
+
+        protected override object SaveViewState()
+        {
+            object[] viewState = new object[] {
+                base.SaveViewState(),
+                #region [ SaveViewState ]
+                #endregion [ SaveViewState ]
+            };
+            return viewState;
+        }
+
+        protected override void TrackViewState()
+        {
+            base.TrackViewState();
+            #region [ TrackViewState ]
+            #endregion [ TrackViewState ]
+        }
+
+        #endregion [ ViewState ]
+    <% end %>
     }
 }

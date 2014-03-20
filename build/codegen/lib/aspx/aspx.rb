@@ -67,6 +67,13 @@ module CodeGen
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ToString().ToLower(), "<%= value_to_s(values[0]) %>");')
 
+            LOAD_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).LoadViewState(viewState[i++]);')
+
+            SAVE_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).SaveViewState()')
+
+            TRACK_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).TrackViewState();')
+
+
             module Options
 
                 attr_accessor :type, :values, :description, :default
@@ -85,6 +92,10 @@ module CodeGen
 
                 def array_option_class
                     ArrayOption
+                end
+
+                def has_composite_options?
+                    composite? && @options.select { |o| o.composite? }.count > 0
                 end
 
                 def csharp_name
@@ -277,6 +288,10 @@ module CodeGen
                     "#{csharp_class}Converter"
                 end
 
+                def array_options
+                    @options.select { |option| option.instance_of?(ArrayOption) }
+                end
+
                 def to_converter
                     CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
                 end
@@ -291,6 +306,18 @@ module CodeGen
 
                 def to_converter_class_declaration
                     CONVERTER_CLASS_TEMPLATE.result(get_binding)
+                end
+
+                def to_loadviewstate
+                    LOAD_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+                def to_saveviewstate
+                    SAVE_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+                def to_trackviewstate
+                    TRACK_VIEWSTATE_TEMPLATE.result(get_binding)
                 end
 
                 def get_binding
@@ -399,9 +426,26 @@ module CodeGen
                     "#{csharp_class}Converter"
                 end
 
+                def has_composite_options?
+                    @options.select { |o| o.composite? }.count > 0
+                end
+
                 def to_converter_class_declaration
                     CONVERTER_CLASS_TEMPLATE.result(get_binding)
                 end
+
+                def to_loadviewstate
+                    LOAD_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+                def to_saveviewstate
+                    SAVE_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
+                def to_trackviewstate
+                    TRACK_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
 
                 def script_resource_path
                     "#{csharp_namespace}.#{csharp_name}.Scripts.#{csharp_class}.js"
@@ -453,6 +497,10 @@ module CodeGen
 
                     enums
                 end
+
+                def array_options
+                    @options.select { |option| option.instance_of?(ArrayOption) }
+                end
             end
 
 
@@ -475,6 +523,7 @@ module CodeGen
                     write_enums(component)
                     write_properties(component)
                     write_events(component)
+                    write_viewstate(component)
                 end
 
                 private
@@ -545,8 +594,6 @@ module CodeGen
                 end
 
                 def write_collection_class(option)
-                    #return unless option.instance_of?(ArrayOption)
-
                     content = COLLECTION_CLASS_TEMPLATE.result(option.get_binding)
 
                     file_name = File.join(@path, "#{option.csharp_class}.cs")
@@ -563,6 +610,8 @@ module CodeGen
 
                     write_file(filename, composite_content, '[ Properties ]')
                     write_file(filename, is_default_content, '[ IsDefault ]')
+
+                    write_viewstate(composite)
 
                     write_composite_option_converter_file(composite)
                 end
@@ -624,7 +673,35 @@ module CodeGen
 
                     write_file(file_name, content, '[ Properties ]')
 
+                    write_viewstate(item)
+
                     write_composite_option_converter_file(item)
+                end
+
+                def write_viewstate(owner)
+                    options = owner.options.select { |o|
+                        o.composite?
+                    }.sort { |a,b| a.name <=> b.name }
+
+                    load_viewstate_content = write_viewstate_content(options, 'load')
+                    save_viewstate_content = write_viewstate_content(options, 'save')
+                    track_viewstate_content = write_viewstate_content(options, 'track')
+
+                    file_name = File.join(@path, "#{owner.csharp_class}.cs")
+
+                    write_file(file_name, load_viewstate_content, '[ LoadViewState ]')
+                    write_file(file_name, save_viewstate_content, '[ SaveViewState ]')
+                    write_file(file_name, track_viewstate_content, '[ TrackViewState ]')
+                end
+
+                def write_viewstate_content(options, action)
+                    content = ''
+                    options.each_with_index do |option, index|
+                        content += option.send("to_#{action}viewstate")
+                        content += ',' if action == 'save' && index < options.count - 1
+                        content += "\n"
+                    end
+                    content
                 end
 
                 def write_file(file_path, content, marker)
