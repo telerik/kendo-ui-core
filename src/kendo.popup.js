@@ -423,13 +423,12 @@ var __meta__ = {
                 zoomLevel = support.zoomLevel(),
                 siblingContainer, parents,
                 parentZIndex, zIndex = 10002,
+                isWindow = viewport == window,
                 idx = 0, length, viewportWidth, viewportHeight;
 
             // $(window).height() uses documentElement to get the height
-            documentElement.css({ overflowX: "hidden", overflowY: "hidden" });
-            viewportWidth = viewport.width();
-            viewportHeight = viewport.height();
-            documentElement.css({ overflowX: "", overflowY: "" });
+            viewportWidth = isWindow ? window.innerWidth : viewport.width();
+            viewportHeight = isWindow ? window.innerHeight : viewport.height();
 
             siblingContainer = anchor.parents().filter(wrapper.siblings());
 
