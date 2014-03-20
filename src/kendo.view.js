@@ -76,14 +76,13 @@ var __meta__ = {
 
         showStart: function() {
             this.element.css("display", "");
+            this.trigger(SHOW);
         },
 
         showEnd: function() {
-
         },
 
         hideStart: function() {
-
         },
 
         hideEnd: function() {
