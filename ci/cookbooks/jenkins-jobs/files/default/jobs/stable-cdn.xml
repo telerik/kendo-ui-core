@@ -46,7 +46,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; BETA=true bundle exec rake cdn:deploy</command>
+      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; sh -c 'cd docs &amp;&amp; git fetch &amp;&amp; git reset --hard origin/master' &amp;&amp; BETA=true bundle exec rake cdn:deploy</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

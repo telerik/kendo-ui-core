@@ -67,7 +67,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; xvfb-run -e xvfb-run.log -a bundle exec rake internal_builds:upload;</command>
+      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; sh -c 'cd docs &amp;&amp; git fetch &amp;&amp; git reset --hard origin/master' &amp;&amp; xvfb-run -e xvfb-run.log -a bundle exec rake internal_builds:upload;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

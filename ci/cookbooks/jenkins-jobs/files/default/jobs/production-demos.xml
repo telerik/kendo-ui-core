@@ -68,7 +68,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; bundle exec rake build:production:demos;</command>
+      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; sh -c 'cd docs &amp;&amp; git fetch &amp;&amp; git reset --hard origin/master' &amp;&amp; bundle exec rake build:production:demos;</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>git reset --hard</command>

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./deploy jenkins-jobs.json root@kendobuild
