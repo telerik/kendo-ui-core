@@ -1054,7 +1054,7 @@ var __meta__ = {
                     formData.append(key, e.data[key]);
                 }
 
-                this.populateFormData(formData, fileEntry.data("files")),
+                this.populateFormData(formData, fileEntry.data("files"));
 
                 upload._fileState(fileEntry, "uploading");
                 $(fileEntry).addClass("k-file-progress");
