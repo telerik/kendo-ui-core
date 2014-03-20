@@ -422,7 +422,7 @@ var __meta__ = {
                 zoomLevel = support.zoomLevel(),
                 siblingContainer, parents,
                 parentZIndex, zIndex = 10002,
-                isWindow = viewport == window,
+                isWindow = !!((viewport[0] == window) && window.innerWidth && (zoomLevel <= 1.02)),
                 idx = 0, length, viewportWidth, viewportHeight;
 
             // $(window).height() uses documentElement to get the height
