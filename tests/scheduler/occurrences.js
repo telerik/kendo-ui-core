@@ -43,8 +43,8 @@
 
         equal(events.length, 3);
 
-        equal(events[0].start.getTime(), +new Date(2000, 10, 10, 16, 0));
-        equal(events[0].startTime.getHours(), 16);
+        deepEqual(events[0].start, new Date(2000, 10, 10, 16, 0));
+        equal(events[0].startTime, kendo.date.toUtcTime(events[0].start));
 
         equal(events[1].start.getTime(), +new Date(2000, 10, 10, 17, 0));
         equal(events[1].end.getTime(), +new Date(2000, 10, 10, 18, 0));
@@ -260,16 +260,18 @@
         afterDstDate = new Date(2013, 2, 31, 3);
 
         var events = occurrences(schedulerEvent, new Date(2013, 2, 31), new Date(2013, 3, 1));
+        var event = events[1];
 
-        equal(events[1].start.getHours(), afterDstDate.getHours());
-        equal(events[1].start.getMinutes(), 0);
-        equal(events[1].end.getHours(), afterDstDate.getHours());
-        equal(events[1].end.getMinutes(), 30);
+        equal(event.start.getHours(), afterDstDate.getHours());
+        equal(event.start.getMinutes(), 0);
+        equal(event.end.getHours(), afterDstDate.getHours());
+        equal(event.end.getMinutes(), 30);
 
-        equal(events[1].startTime.getHours(), 3);
-        equal(events[1].startTime.getMinutes(), 0);
-        equal(events[1].endTime.getHours(), 3);
-        equal(events[1].endTime.getMinutes(), 30);
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(event.start)) + (3 * kendo.date.MS_PER_HOUR);
+        var endTime = startTime + (30 * kendo.date.MS_PER_MINUTE);
+
+        equal(events[1].startTime, startTime);
+        equal(events[1].endTime, endTime);
 
         equal(events[2].start.getHours(), 4);
         equal(events[2].start.getMinutes(), 0);
@@ -307,7 +309,7 @@
         var events = occurrences(schedulerEvent, new Date(2013, 9, 19, 10), new Date(2013, 9, 20, 3));
 
         equal(events[0].start.getHours(), 1);
-        equal(events[0].startTime.getHours(), 0);
+        equal(events[0].startTime, kendo.date.toUtcTime(kendo.date.getDate(events[0].start)));
 
         equal(events[0].end.getHours(), 2);
         equal(events[0].endTime.getHours(), 1);
@@ -960,13 +962,15 @@
         var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
 
         equal(events[1].start.getHours(), 3);
-        equal(events[1].startTime.getHours(), 3);
+        equal(events[1].startTime, kendo.date.toUtcTime(events[1].start));
 
         equal(events[2].start.getHours(), afterDstDate.getHours());
-        equal(events[2].startTime.getHours(), 3);
+
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[2].start)) + (3 * kendo.date.MS_PER_HOUR);
+        equal(events[2].startTime, startTime);
 
         equal(events[3].start.getHours(), 3);
-        equal(events[3].startTime.getHours(), 3);
+        equal(events[3].startTime, kendo.date.toUtcTime(events[3].start));
     });
 
     test("DAILY method honours EEST when calculate duration", function() {
@@ -979,12 +983,13 @@
         });
 
         var events = occurrences(schedulerEvent, new Date(2013, 9, 27), new Date(2013, 9, 28, 17));
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[0].start));
 
         equal(events[0].start.getHours(), 0);
-        equal(events[0].startTime.getHours(), 0);
+        equal(events[0].startTime, startTime);
 
         equal(events[0].end.getHours(), 10);
-        equal(events[0].endTime.getHours(), 10);
+        equal(events[0].endTime, startTime + (10 * kendo.date.MS_PER_HOUR));
     });
 
     test("DAILY method honours EST when calculate duration", function() {
@@ -997,12 +1002,13 @@
         });
 
         var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[0].start));
 
         equal(events[0].start.getHours(), 0);
-        equal(events[0].startTime.getHours(), 0);
+        equal(events[0].startTime, startTime);
 
         equal(events[0].end.getHours(), 10);
-        equal(events[0].endTime.getHours(), 10);
+        equal(events[0].endTime, startTime + (10 * kendo.date.MS_PER_HOUR));
     });
 
     test("DAILY method honours DTSTART", function() {
@@ -1019,12 +1025,13 @@
         });
 
         var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
+        var startTime = kendo.date.toUtcTime(events[0].start);
 
         equal(events[0].start.getHours(), 8);
-        equal(events[0].startTime.getHours(), 8);
+        equal(events[0].startTime, startTime);
 
         equal(events[0].end.getHours(), 10);
-        equal(events[0].endTime.getHours(), 10);
+        equal(events[0].endTime, startTime + (2 * kendo.date.MS_PER_HOUR));
     });
 
     test("DAILY method honours DTEND", function() {
@@ -1041,12 +1048,13 @@
         });
 
         var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[0].start));
 
         equal(events[0].start.getHours(), 0);
-        equal(events[0].startTime.getHours(), 0);
+        equal(events[0].startTime, startTime);
 
         equal(events[0].end.getHours(), 8);
-        equal(events[0].endTime.getHours(), 8);
+        equal(events[0].endTime, startTime + (8 * kendo.date.MS_PER_HOUR));
     });
 
     test("DAILY occurrences method honours", function() {
@@ -1077,17 +1085,21 @@
 
         var events = occurrences(schedulerEvent, new Date(2013, 9, 10), new Date(2013, 9, 21, 17));
 
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[0].start));
+
         equal(events[0].start.getHours(), 1);
-        equal(events[0].startTime.getHours(), 0);
+        equal(events[0].startTime, startTime);
 
         equal(events[0].end.getHours(), 2);
-        equal(events[0].endTime.getHours(), 1);
+        equal(events[0].endTime, startTime + kendo.date.MS_PER_HOUR);
+
+        startTime = kendo.date.toUtcTime(kendo.date.getDate(events[1].start));
 
         equal(events[1].start.getHours(), 0);
-        equal(events[1].startTime.getHours(), 0);
+        equal(events[1].startTime, startTime);
 
         equal(events[1].end.getHours(), 1);
-        equal(events[1].endTime.getHours(), 1);
+        equal(events[1].endTime, startTime + kendo.date.MS_PER_HOUR);
     });
 
     test("DAILY method honours DST when use BYMONTHDAY", function() {
@@ -1101,17 +1113,21 @@
 
         var events = occurrences(schedulerEvent, new Date(2013, 9, 10), new Date(2013, 10, 21, 17));
 
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[0].start));
+
         equal(events[0].start.getHours(), 1);
-        equal(events[0].startTime.getHours(), 0);
+        equal(events[0].startTime, startTime);
 
         equal(events[0].end.getHours(), 2);
-        equal(events[0].endTime.getHours(), 1);
+        equal(events[0].endTime, startTime + kendo.date.MS_PER_HOUR);
+
+        startTime = kendo.date.toUtcTime(kendo.date.getDate(events[1].start));
 
         equal(events[1].start.getHours(), 0);
-        equal(events[1].startTime.getHours(), 0);
+        equal(events[1].startTime, startTime);
 
         equal(events[1].end.getHours(), 1);
-        equal(events[1].endTime.getHours(), 1);
+        equal(events[1].endTime, startTime + kendo.date.MS_PER_HOUR);
     });*/
 
     module("WEEKLY Occurrences");
@@ -1463,17 +1479,21 @@
 
         var events = occurrences(schedulerEvent, new Date(2013, 2, 20), new Date(2013, 3, 10));
 
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[1].start)) + (3 * kendo.date.MS_PER_HOUR);
+
         equal(events[1].start.getHours(), afterDstDate.getHours());
-        equal(events[1].startTime.getHours(), 3);
+        equal(events[1].startTime, startTime);
 
         equal(events[1].end.getHours(), endHour);
-        equal(events[1].endTime.getHours(), 4);
+        equal(events[1].endTime, startTime + kendo.date.MS_PER_HOUR);
+
+        startTime = kendo.date.toUtcTime(kendo.date.getDate(events[2].start)) + (3 * kendo.date.MS_PER_HOUR);
 
         equal(events[2].start.getHours(), 3);
-        equal(events[2].startTime.getHours(), 3);
+        equal(events[2].startTime, startTime);
 
         equal(events[2].end.getHours(), 4);
-        equal(events[2].endTime.getHours(), 4);
+        equal(events[2].endTime, startTime + kendo.date.MS_PER_HOUR);
     });
 
     test("WEEKLY occurrence expands correctly when period is between event length", function() {
@@ -1838,17 +1858,21 @@
 
         var events = occurrences(schedulerEvent, new Date(2013, 0, 1), new Date(2013, 5, 10));
 
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[1].start)) + (3 * kendo.date.MS_PER_HOUR);
+
         equal(events[1].start.getHours(), afterDstDate.getHours());
-        equal(events[1].startTime.getHours(), 3);
+        equal(events[1].startTime, startTime);
 
         equal(events[1].end.getHours(), endHour);
-        equal(events[1].endTime.getHours(), 4);
+        equal(events[1].endTime, startTime + kendo.date.MS_PER_HOUR);
+
+        startTime = kendo.date.toUtcTime(kendo.date.getDate(events[2].start)) + (3 * kendo.date.MS_PER_HOUR);
 
         equal(events[2].start.getHours(), 3);
-        equal(events[2].startTime.getHours(), 3);
+        equal(events[2].startTime, startTime);
 
         equal(events[2].end.getHours(), 4);
-        equal(events[2].endTime.getHours(), 4);
+        equal(events[2].endTime, startTime + kendo.date.MS_PER_HOUR);
     });
 
     test("MONTHLY occurrence method supports bysetpos rule", function() {
@@ -2244,17 +2268,21 @@
 
         var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2014, 5, 10));
 
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[1].start));
+
         equal(events[1].start.getHours(), afterDstDate.getHours());
-        equal(events[1].startTime.getHours(), 3);
+        equal(events[1].startTime, startTime + (3 * kendo.date.MS_PER_HOUR));
 
         equal(events[1].end.getHours(), endHour);
-        equal(events[1].endTime.getHours(), 4);
+        equal(events[1].endTime, startTime + (4 * kendo.date.MS_PER_HOUR));
+
+        startTime = kendo.date.toUtcTime(kendo.date.getDate(events[2].start));
 
         equal(events[2].start.getHours(), 3);
-        equal(events[2].startTime.getHours(), 3);
+        equal(events[2].startTime, startTime + (3 * kendo.date.MS_PER_HOUR));
 
         equal(events[2].end.getHours(), 4);
-        equal(events[2].endTime.getHours(), 4);
+        equal(events[2].endTime, startTime + (4 * kendo.date.MS_PER_HOUR));
     });
 
     /*
@@ -2270,17 +2298,21 @@
 
         var events = occurrences(schedulerEvent, new Date(2012, 0, 1), new Date(2014, 10, 10));
 
+        var startTime = kendo.date.toUtcTime(kendo.date.getDate(events[1].start));
+
         equal(events[1].start.getHours(), 1);
-        equal(events[1].startTime.getHours(), 0);
+        equal(events[1].startTime, startTime);
 
         equal(events[1].end.getHours(), 2);
-        equal(events[1].endTime.getHours(), 1);
+        equal(events[1].endTime, startTime + kendo.date.MS_PER_HOUR);
+
+        startTime = kendo.date.toUtcTime(kendo.date.getDate(events[2].start));
 
         equal(events[2].start.getHours(), 0);
-        equal(events[2].startTime.getHours(), 0);
+        equal(events[2].startTime, startTime);
 
         equal(events[2].end.getHours(), 1);
-        equal(events[2].endTime.getHours(), 1);
+        equal(events[2].endTime, startTime + kendo.date.MS_PER_HOUR);
     });*/
 
     test("YEARLY occurrences method starts expand from event start", function() {

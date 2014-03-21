@@ -17,12 +17,12 @@ var __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget,
         DropDownList = ui.DropDownList,
-        date = kendo.date,
-        setTime = date.setTime,
-        setDayOfWeek = date.setDayOfWeek,
-        adjustDST = date.adjustDST,
-        firstDayOfMonth = date.firstDayOfMonth,
-        getMilliseconds = date.getMilliseconds,
+        kendoDate = kendo.date,
+        setTime = kendoDate.setTime,
+        setDayOfWeek = kendoDate.setDayOfWeek,
+        adjustDST = kendoDate.adjustDST,
+        firstDayOfMonth = kendoDate.firstDayOfMonth,
+        getMilliseconds = kendoDate.getMilliseconds,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
@@ -1128,18 +1128,18 @@ var __meta__ = {
             inPeriod = start >= startPeriod || endDate > startPeriod;
 
             if (inPeriod && !isException(exceptionDates, start, zone) || positions) {
-                endTime = new Date(rule._startTime);
-                setTime(endTime, durationMS);
+                startTime = kendo.date.toUtcTime(kendo.date.getDate(start)) + getMilliseconds(rule._startTime);
+                endTime = startTime + durationMS;
 
-                if (eventStartMS !== start.getTime() || eventStartTime !== getMilliseconds(startTime)) {
+                if (eventStartMS !== start.getTime() || eventStartTime !== getMilliseconds(rule._startTime)) {
                     events.push(event.toOccurrence({
                         start: new Date(start),
-                        startTime: new Date(startTime),
                         end: endDate,
+                        startTime: startTime,
                         endTime: endTime
                     }));
                 } else {
-                    event.startTime = new Date(startTime);
+                    event.startTime = startTime;
                     event.endTime = endTime;
                     events.push(event);
                 }
@@ -1162,7 +1162,6 @@ var __meta__ = {
                 }
 
             } else {
-
                 if (count && count === current) {
                     break;
                 }
