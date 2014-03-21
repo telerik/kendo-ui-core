@@ -126,7 +126,7 @@
 
     module("Layout", { });
 
-    test("layout renders view in a given region", 1, function() {
+    test("renders view in a given region", 1, function() {
         var layout = new kendo.Layout("<div><span id='container' /></div>" ),
             view = new kendo.View('<span id="baz">Baz</span>');
 
@@ -137,7 +137,7 @@
         equal(layout.element.find("#container").html(), '<div>' + view.element.html() + '</div>');
     });
 
-    test("layout triggers view show when replacing views", 1, function() {
+    test("triggers view show when replacing views", 1, function() {
         var layout = new kendo.Layout("<div><span id='container' /></div>" ),
             foo = new kendo.View('<span>Foo</span>', { show: function() { ok(true); } });
 
@@ -146,7 +146,7 @@
         layout.showIn('#container', foo);
     });
 
-    test("layout triggers view hide when replacing views", 1, function() {
+    test("triggers view hide when replacing views", 1, function() {
         var layout = new kendo.Layout("<div><span id='container' /></div>" ),
             foo = new kendo.View('<span>Foo</span>', { hide: function() { ok(true); } }),
             bar = new kendo.View('<span>Foo</span>');
@@ -155,5 +155,16 @@
 
         layout.showIn('#container', foo);
         layout.showIn('#container', bar);
+    });
+
+    test("renders view in the root region", 1, function() {
+        var layout = new kendo.Layout("<div id='root'></div>", { wrap: false }),
+            view = new kendo.View('<span id="baz">Baz</span>');
+
+        layout.render();
+
+        layout.showIn('#root', view);
+
+        equal(layout.element.html(), '<div>' + view.element.html() + '</div>');
     });
 })();
