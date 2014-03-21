@@ -18,7 +18,7 @@ desc 'Generate js dependencies'
 task :js_dependencies do
     dependencies = {}
 
-    data = YAML.load(`node #{COMPILEJS} --kendo-config`)
+    data = YAML.load(`node #{METAJS} --kendo-config`)
     categories = data["categories"]
 
     categories.each do |name, category|
