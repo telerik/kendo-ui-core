@@ -300,7 +300,13 @@
         createNotification();
 
         notification.show("foo");
-        ok(!$(".k-notification").find(".k-i-close").is(":visible"));
+        
+        stop();
+
+        setTimeout(function(){
+            start();
+            ok(!$(".k-notification").find(".k-i-close").is(":visible"));
+        }, 400);
     });
 
     test("hide button is displayed if button property is set to true", function() {
