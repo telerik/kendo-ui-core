@@ -16,6 +16,11 @@
         equal(view.render().html(), "<span>Foo</span>");
     });
 
+    test("wraps passed tags in a single element", 1, function() {
+        var view = new kendo.View("<span>Foo</span><span>Bar</span>");
+        equal(view.render().length, 1);
+    });
+
     test("keeps DOM element when rendered by default", 1, function() {
         $('#content').remove();
         $(document.body).append('<div id="content">Foo</div>');

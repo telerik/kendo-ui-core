@@ -148,7 +148,7 @@ var __meta__ = {
             } else {
                 element = content;
                 if (wrap) {
-                    element = element.wrap(wrapper).parent();
+                    element = element.wrapAll(wrapper).parent();
                 }
             }
 
