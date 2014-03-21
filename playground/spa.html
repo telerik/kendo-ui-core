@@ -16,13 +16,11 @@
     <script src="../src/kendo.popup.js"></script>
     <script src="../src/kendo.dropdownlist.js"></script>
     <script src="../src/kendo.listview.js"></script>
-    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
-    <script src="../demos/mvc/content/shared/js/less.js"></script>
 </head>
 <body>
 
-  <div id="myRoot" class="container">
-  </div>
+    <h1>Kendo Test</h1>
+    <div id="replace"></div>
 
   <script type="text/x-kendo-template" id="layout-template">
     <ul data-role="menu">
@@ -46,66 +44,26 @@
   </script>
 
   <script>
-      (function() {
 
-          // Define layout
-          var layout = new kendo.Layout("#layout-template");
+    $(document).ready(function () {
+        var t2 = '<div id="putviewhere" style="width:500px;height:200px;background-color:blue"><div id="foo"></div></div>';
 
-          var canLeaveCallback = null;
+    var layout = new kendo.Layout(t2, {
+    wrap: false
+    });
 
-          var canLeaveHome = function () {
-              return true;
-          };
+    layout.render("#replace");
+    var template = '<div>';
+    template += '<div id="combo" style="width:200px;height:24px;background-color:yellow"></div>';
+    template += '</div>';
+    var view = new kendo.Layout(template, { wrap: false });
+    //This line works
+    // view.render("#putviewhere");
+    //This line doesn't
 
-          var canLeaveOrders = function () {
-              return true;
-          };
+    layout.showIn("#putviewhere", view);
+    });
 
-          var canLeaveProducts = function () {
-              return false;
-          };
-
-          // Define Router
-          var router = new kendo.Router({
-              init: function () {
-                  layout.render("#myRoot");
-              },
-              change: function (e) {
-                  console.log("change event fired");
-
-                  if (canLeaveCallback !== null && canLeaveCallback() !== true) {
-                      e.preventDefault();
-                      console.log("route cancelled");
-                  }
-              }
-          });
-
-          // Define Views
-          var views = {
-              home: new kendo.View('#home-template'),
-              orders: new kendo.View('#orders-template'),
-              products: new kendo.View('#products-template')
-          };
-
-          // Configure routes
-          router.route('/', function() {
-              layout.showIn('#myContent', views.home);
-              canLeaveCallback = canLeaveHome;
-          });
-
-          router.route('/orders', function() {
-              layout.showIn('#myContent', views.orders);
-              canLeaveCallback = canLeaveOrders;
-          });
-
-          router.route('/products', function() {
-              layout.showIn('#myContent', views.products);
-              canLeaveCallback = canLeaveProducts;
-          });
-
-          router.start();
-
-      }());
   </script>
 </body>
 </html>

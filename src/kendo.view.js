@@ -196,8 +196,20 @@ var __meta__ = {
         },
 
         _createContainer: function(selector) {
-            var element = this.render().find(selector),
-                container = new ViewContainer(element);
+            var root = this.render(),
+                element = root.find(selector),
+                container;
+
+            if (!element.length && root.is(selector)) {
+                if (root.is(selector)) {
+                    element = root;
+                } else {
+
+                    throw new Error("can't find a container with the specified " + selector + " selector");
+                }
+            }
+
+            container = new ViewContainer(element);
 
             container.bind("accepted", function(e) {
                 element.append(e.view.render());
