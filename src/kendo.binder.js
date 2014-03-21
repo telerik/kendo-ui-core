@@ -13,12 +13,13 @@ var __meta__ = {
 /*jshint eqnull: true */
 (function ($, undefined) {
     var kendo = window.kendo,
+        browser = kendo.support.browser,
         Observable = kendo.Observable,
         ObservableObject = kendo.data.ObservableObject,
         ObservableArray = kendo.data.ObservableArray,
         toString = {}.toString,
         binders = {},
-        splice = Array.prototype.splice,
+        slice = Array.prototype.slice,
         Class = kendo.Class,
         innerText,
         proxy = $.proxy,
@@ -1122,9 +1123,6 @@ var __meta__ = {
                         var newValue;
                         var found;
 
-                        var oldIdx = 0;
-                        var oldLength = oldValues.length + 1;
-
                         while (old) {
                             found = false;
                             for (j = 0; j < newLength; j++) {
@@ -1147,21 +1145,16 @@ var __meta__ = {
 
                             if (!found) {
                                 remove.push(old);
-                                splice.call(oldValues, i, 1);
+                                arraySplice(oldValues, i, 1);
                                 removeIndex = i;
                             } else {
                                 i += 1;
                             }
 
                             old = oldValues[i];
-                            oldIdx++;
-
-                            if (oldIdx > oldLength) {
-                                break;
-                            }
                         }
 
-                        splice.apply(oldValues, [oldValues.length, 0].concat(newValues));
+                        arraySplice(oldValues, oldValues.length, 0, newValues);
 
                         if (remove.length) {
                             oldValues.trigger("change", {
@@ -1214,6 +1207,56 @@ var __meta__ = {
                 }
 
             })
+        }
+    };
+
+    var arraySplice = function(arr, idx, remove, add) {
+        add = add || [];
+        remove = remove || 0;
+
+        var addLength = add.length;
+        var oldLength = arr.length;
+
+        var shifted = [].slice.call(arr, idx + remove);
+        var shiftedLength = shifted.length;
+        var index;
+
+        if (addLength) {
+            addLength = idx + addLength;
+            index = 0;
+
+            for (; idx < addLength; idx++) {
+                arr[idx] = add[index];
+                index++;
+            }
+
+            arr.length = addLength;
+        } else if (remove) {
+            arr.length = idx;
+
+            remove += idx;
+            while (idx < remove) {
+                delete arr[--remove];
+            }
+        }
+
+        if (shiftedLength) {
+            shiftedLength = idx + shiftedLength;
+            index = 0;
+
+            for (; idx < shiftedLength; idx++) {
+                arr[idx] = shifted[index];
+                index++;
+            }
+
+            arr.length = shiftedLength;
+        }
+
+        idx = arr.length;
+
+        while (idx < oldLength) {
+            delete arr[idx];
+            idx++;
         }
     };
 

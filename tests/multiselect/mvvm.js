@@ -684,6 +684,24 @@
         multiselect.trigger("change");
     });
 
+    test("Adding item to non-empty observable adds the item", 2, function() {
+        dom = $('<select data-role="multiselect" data-text-field="Text" data-value-field="ID" data-value-primitive="true" data-bind="value: data,source: multiselectData"></select>');
+        var observable = kendo.observable({
+            data: [1],
+            multiselectData: [{ID: 1, Text: "Text1"}, {ID: 2, Text: "Text2"}, {ID: 3,    Text: "Text3"}]
+        });
+
+        kendo.bind(dom, observable);
+
+        var multiselect = dom.data("kendoMultiSelect");
+
+        multiselect.value([1, 2]);
+        multiselect.trigger("change");
+
+        equal(observable.data[0], 1);
+        equal(observable.data[1], 2);
+    });
+
     test("Remove item raises change with remove action (value primitive)", 4, function() {
         dom = $('<select data-role="multiselect" data-text-field="Text" data-value-field="ID" data-value-primitive="true" data-bind="value: data,source: multiselectData"></select>');
         var observable = kendo.observable({
@@ -723,5 +741,24 @@
 
         multiselect.value([2]);
         multiselect.trigger("change");
+    });
+
+    test("Remove tag removes item from value field", 3, function() {
+        dom = $('<select data-role="multiselect" data-text-field="Text" data-value-field="ID" data-value-primitive="true" data-bind="value: data,source: multiselectData"></select>');
+        var observable = kendo.observable({
+            data: [1,2,3],
+            multiselectData: [{ID: 1, Text: "Text1"}, {ID: 2, Text: "Text2"}, {ID: 3,    Text: "Text3"}]
+        });
+
+        kendo.bind(dom, observable);
+
+        var multiselect = dom.data("kendoMultiSelect");
+
+        multiselect.value([1,3]);
+        multiselect.trigger("change");
+
+        equal(observable.data.length, 2);
+        equal(observable.data[0], 1);
+        equal(observable.data[1], 3);
     });
 })();
