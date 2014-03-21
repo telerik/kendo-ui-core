@@ -42,6 +42,7 @@ var __meta__ = {
             element = that.element;
             options = that.options;
             that._value = options.value = parse(options.value);
+            that._tabIndex = element.attr("tabIndex") || 0;
 
             ariaId = that._ariaId = options.ariaId;
             if (ariaId) {
@@ -87,9 +88,8 @@ var __meta__ = {
             if (arguments.length === 0) {
                 enable = true;
             }
-            if (enable) {
-                $(".k-disabled-overlay", this.wrapper).remove();
-            } else {
+            $(".k-disabled-overlay", this.wrapper).remove();
+            if (!enable) {
                 this.wrapper.append("<div class='k-disabled-overlay'></div>");
             }
             this._onEnable(enable);
@@ -172,7 +172,7 @@ var __meta__ = {
                 colors = $.map(colors, function(x) { return parse(x); });
             }
 
-            this._selectedID = (options.ariaId || kendo.guid()) + "_selected";
+            that._selectedID = (options.ariaId || kendo.guid()) + "_selected";
 
             element.addClass("k-widget k-colorpalette")
                 .attr("role", "grid")
@@ -187,7 +187,7 @@ var __meta__ = {
                 .on(CLICK_NS, ".k-item", function(ev){
                     that._select($(ev.currentTarget).css(BACKGROUNDCOLOR));
                 })
-                .attr("tabIndex", 0)
+                .attr("tabIndex", that._tabIndex)
                 .on(KEYDOWN_NS, bind(that._keydown, that));
 
             var tileSize = options.tileSize, width, height;
@@ -214,9 +214,9 @@ var __meta__ = {
         },
         _onEnable: function(enable) {
             if (enable) {
-                this.wrapper.removeAttr("tabIndex");
+                this.wrapper.attr("tabIndex", this._tabIndex);
             } else {
-                this.wrapper.attr("tabIndex", 0);
+                this.wrapper.removeAttr("tabIndex");
             }
         },
         _keydown: function(e) {
@@ -467,7 +467,7 @@ var __meta__ = {
             var handle = this._hsvRect.find(".k-draghandle");
 
             if (enable) {
-                handle.attr("tabIndex", 0);
+                handle.attr("tabIndex", this._tabIndex);
             } else {
                 handle.removeAttr("tabIndex");
             }
@@ -828,6 +828,8 @@ var __meta__ = {
                 element.appendTo(content);
             }
 
+            that._tabIndex = element.attr("tabIndex") || 0;
+
             that.enable(!element.attr("disabled"));
 
             var accesskey = element.attr("accesskey");
@@ -874,7 +876,7 @@ var __meta__ = {
 
             if (enable) {
                 wrapper.removeClass("k-state-disabled")
-                    .attr("tabIndex", 0)
+                    .attr("tabIndex", that._tabIndex)
                     .on("mouseenter" + NS, function() { innerWrapper.addClass("k-state-hover"); })
                     .on("mouseleave" + NS, function() { innerWrapper.removeClass("k-state-hover"); })
                     .on("focus" + NS, function () { innerWrapper.addClass("k-state-focused"); })
