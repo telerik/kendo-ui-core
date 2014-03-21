@@ -271,14 +271,17 @@
             var editor = this;
             var iframe, wnd, doc;
             var textarea = editor.textarea;
-            var domain = document.domain;
+            var specifiedDomain = editor.options.domain;
+            var domain = specifiedDomain || document.domain;
+            var domainScript = "";
             var src = 'javascript:""';
 
-            if (domain != location.hostname) {
+            // automatically relax same-origin policy if document.domain != location.hostname,
+            // or forcefully relax if options.domain is specified (for document.domain = document.domain scenario)
+            if (specifiedDomain || domain != location.hostname) {
                 // relax same-origin policy
-                src = "javascript:document.write(" +
-                          "'<script>document.domain=\"" + domain + "\"</script>'" +
-                      ")";
+                domainScript = "<script>document.domain=\"" + domain + "\"</script>";
+                src = "javascript:document.write('" + domainScript + "')";
             }
 
             textarea.hide();
@@ -322,6 +325,7 @@
                     ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
                     ".k-table p{margin:0;padding:0;}" +
                 "</style>" +
+                domainScript +
                 "<script>(function(d,c){d[c]('header'),d[c]('article'),d[c]('nav'),d[c]('section'),d[c]('footer');})(document, 'createElement');</script>" +
                 $.map(stylesheets, function(href){
                     return "<link rel='stylesheet' href='" + href + "'>";
@@ -538,6 +542,7 @@
             messages: messages,
             formats: {},
             encoded: true,
+            domain: null,
             serialization: {
                 entities: true
             },
