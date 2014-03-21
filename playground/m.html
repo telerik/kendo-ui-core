@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+    <head>
+
+        <script src="mithril.js"></script>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
+    </head>
+    <body>
+        <button>shuffle columns</button>
+
+        <p>
+            Mithril:<span id="m-time"></span>
+        </p>
+        <p>
+            Kendo:<span id="kendo-time"></span>
+        </p>
+
+        <div id="m-grid" style="width: 500px;float:left" class="k-grid k-widget"></div>
+        <div id="grid" style="width: 500px;float:left"></div>
+
+        <script>
+            function now() {
+                return window.performance && window.performance.now ? window.performance.now() : new window.Date().getTime()
+            }
+
+            $("button").click(function() {
+                columns.push(columns.shift());
+                dataSource.fetch();
+            });
+
+            var dataSource = new kendo.data.DataSource({
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+                        dataType: "jsonp"
+                    }
+                },
+                change: function() {
+                    m.redraw();
+                }
+            });
+
+            var kendoDataSource = new kendo.data.DataSource({
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+                        dataType: "jsonp"
+                    }
+                }
+            });
+
+            var columns = [
+                { field: "OrderID", title: "Order ID" },
+                { field: "ShipName", title: "Ship Name" }
+            ];
+
+            $("#grid").kendoGrid({
+                dataSource: kendoDataSource,
+                columns: columns,
+                scrollable: false,
+                sortable: true,
+                dataBinding: function() {
+                    this.__time__ = now();
+                },
+                dataBound: function() {
+                    console.log("k", now()-this.__time__);
+                    //$("#kendo-time").text(now() - this.__time__);
+                }
+            });
+
+            function table() {
+                return m("table", { role: "grid" }, [colgroup(), thead(), tbody()]);
+            }
+
+            function thead() {
+                return m("thead", { role: "rowgroup", className: "k-grid-header" }, [theadrow()]);
+            }
+
+            function theadrow() {
+                return m("tr", { role: "row" }, ths());
+            }
+
+            function ths() {
+                return columns.map(function(column) {
+                    return th(column);
+                });
+            }
+
+            function th(column) {
+                return m("th", { "data-field": column.field, className: "k-header", role: "columnheader" }, column.title);
+            }
+
+            function tbody() {
+                return m("tbody", rows());
+            }
+
+            function colgroup() {
+                return m("colgroup", cols());
+            }
+
+            function cols() {
+                return columns.map(function() {
+                    return m("col");
+                });
+            }
+
+            function rows() {
+                return dataSource.view().map(row);
+            }
+
+            function row(dataItem, index) {
+                var attr = {
+                    "data-uid": dataItem.uid
+                };
+
+                if (index % 2) {
+                    attr["className"] = "k-alt";
+                }
+
+                return m("tr", attr, cells(dataItem));
+            }
+
+            function cells(dataItem) {
+                return columns.map(function(column) {
+                    return cell(column.field, dataItem);
+                });
+            }
+
+            function cell(field, dataItem) {
+                return m("td", dataItem[field]);
+            }
+
+            dataSource.fetch(function() {
+                m.module(document.getElementById("m-grid"), {
+                    controller: function() {
+                    },
+                    view: function() {
+                        var start = now();
+                        var dom = table();
+                        var end = now();
+                        console.log("m", end-start);
+                        //$("#m-time").text(end-start);
+                        return dom;
+                    }
+                });
+            });
+
+            setTimeout(function() {
+                $("#m-grid").find("th").kendoSorter({ dataSource: dataSource });
+            }, 4000);
+
+        </script>
+    </body>
+</html>
