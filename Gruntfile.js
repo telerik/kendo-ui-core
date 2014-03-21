@@ -22,7 +22,20 @@ module.exports = function(grunt) {
     var browserOption = grunt.option('browser');
     var testsOption = grunt.option('tests');
     var jqueryOption = grunt.option('jquery');
+    var skipStylesheets = grunt.option('skip-styles');
     var jquery = 'src/jquery.js';
+
+    if (skipStylesheets) {
+        grunt.log.writeln("Skipping styles");
+        for (var i = 0; i < TESTS.afterTestFiles.length; i ++) {
+            var item = TESTS.afterTestFiles[i];
+            if (typeof item === "string") {
+                if (item.match(/less\.js/)) {
+                    TESTS.afterTestFiles.splice(i, 1);
+                }
+            }
+        }
+    }
 
     if (testsOption) {
         tests = [ testsOption ];
