@@ -1,7 +1,7 @@
 var PATH = require("path");
 var LESS = require("../../less-js");
 var CSSMIN = require("cssmin").cssmin;
-var licensePath = PATH.join("resources", "legal", "public-license.txt");
+var licensePath = PATH.join("resources", "legal", "core-license.txt");
 
 module.exports = function(grunt) {
     grunt.registerMultiTask("license", "Apply license to built files", function() {
