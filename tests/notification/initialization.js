@@ -296,11 +296,24 @@
         equal(notificationElement.style.height, size);
     });
 
-    test("hide button is by default hidden", function() {
+    asyncTest("hide button is by default hidden", 1, function() {
         createNotification();
 
         notification.show("foo");
-        ok(!$(".k-notification").find(".k-i-close").is(":visible"));
+
+        stop();
+
+        setTimeout(function(){
+            start();
+            var notificationPopup = $(".k-notification");
+            var closeIcon = notificationPopup.find(".k-i-close");
+            console.log("notificationPopup: " + notificationPopup[0].outerHTML);
+            console.log("closeIcon: " + closeIcon[0].outerHTML);
+            console.log("display: " + closeIcon.css("display"));
+            console.log("position: " + closeIcon.css("position"));
+            console.log("popup parent body tag length: " + notificationPopup.closest("body").length);
+            ok(!closeIcon.is(":visible"));
+        }, 400);
     });
 
     test("hide button is displayed if button property is set to true", function() {
