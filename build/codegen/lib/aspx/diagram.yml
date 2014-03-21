@@ -140,4 +140,6 @@
           - horizontal - layered layout specific subtype. The preferred direction of the links is horizontal.
           - vertical - layered layout specific subtype. The preferred direction of the links is vertical.
 
+    - :name: shapes.content
+      :type: kendo.dataviz.diagram.Shape.Content
 

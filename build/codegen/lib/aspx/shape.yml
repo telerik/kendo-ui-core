@@ -42,3 +42,6 @@
           - Bottom - Connector positioned in the middle of the bottom side of the shape.
           - BottomLeft - Connector positioned an the bottom-left corner of the shape.
           - BottomRight - Connector positioned an the bottom-left corner of the shape.
+
+    - :name: content
+      :type: kendo.dataviz.diagram.Shape.Content
