@@ -1686,12 +1686,12 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().MaskedTextBoxFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
-        public virtual MaskedTextBoxBuilder MaskedTextBoxFor(Expression<Func<TModel, Nullable<int>>> expression)
+        public virtual MaskedTextBoxBuilder MaskedTextBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
             return MaskedTextBox()
-                    .Name(GetName(expression))
-                    .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
-                    .Value(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model as string);
+                        .Name(GetName(expression))
+                        .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
+                        .Value(GetValue(expression));
         }
 
         /// <summary>
