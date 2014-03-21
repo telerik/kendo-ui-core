@@ -3584,9 +3584,10 @@ var __meta__ = {
         _initChildren: function() {
             var that = this;
             var children, transport, parameterMap;
+            var dataSourceType = arguments[0] || HierarchicalDataSource;
 
-            if (!(that.children instanceof HierarchicalDataSource)) {
-                children = that.children = new HierarchicalDataSource(that._childrenOptions);
+            if (!(that.children instanceof dataSourceType)) {
+                children = that.children = new dataSourceType(that._childrenOptions);
 
                 transport = children.transport;
                 parameterMap = transport.parameterMap;

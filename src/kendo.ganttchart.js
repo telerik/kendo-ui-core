@@ -20,9 +20,31 @@ var __meta__ = {
     var proxy = $.proxy;
     var extend = $.extend;
 
+    var GanttChartTask = kendo.data.Node.define({
+        _initChildren: function() {
+            kendo.data.Node.fn._initChildren.call(this, GanttChartDataSource);
+        },
+
+        id: "id",
+        fields: {
+            uid: { type: "number" },
+            title: { defaultValue: "", type: "string" },
+            start: { type: "date", validation: { required: true } },
+            end: { type: "date", validation: { required: true } },
+            duration: { type: "date" },
+            isMilestone: { type: "boolean" }
+        }
+    });
+
     var GanttChartDataSource = HierarchicalDataSource.extend({
         init: function(options) {
-            HierarchicalDataSource.fn.init.call(this, options);
+            var node = GanttChartTask.define({
+                children: options
+            });
+
+            DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
+
+            this._attachBubbleHandlers();
         }
     });
 
@@ -34,7 +56,7 @@ var __meta__ = {
 
         dataSource.data = data;
 
-        if (!(dataSource instanceof GanttChartDataSource) && dataSource instanceof kendo.data.DataSource) {
+        if (!(dataSource instanceof GanttChartDataSource) && dataSource instanceof DataSource) {
             throw new Error("Incorrect DataSource type. Only GanttChartDataSource instances are supported");
         }
 
@@ -42,22 +64,35 @@ var __meta__ = {
     };
 
     extend(true, kendo.data, {
-       GanttChartDataSource: GanttChartDataSource
+        GanttChartDataSource: GanttChartDataSource,
+        GanttChartTask: GanttChartTask
     });
 
     var GanttChart = Widget.extend({
         init: function(element, options) {
+            if (isArray(options)) {
+                options = { dataSource: options };
+            }
+
             Widget.fn.init.call(this, element, options);
 
             this._dataSource();
 
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
+
             kendo.notify(this);
         },
 
-        events: [ ],
+        events: [
+            "dataBinding",
+            "dataBound"
+        ],
 
         options: {
-            name: "GanttChart"
+            name: "GanttChart",
+            autoBind: true
         },
 
         _dataSource: function() {
@@ -83,8 +118,27 @@ var __meta__ = {
                 .bind("error", this._errorHandler);
         },
 
-        refresh: function(e) {
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
 
+            this._dataSource();
+
+            if (this.options.autoBind) {
+                dataSource.fetch();
+            }
+        },
+
+        refresh: function(e) {
+            var items = e.items;
+            if (this.trigger("dataBinding")) {
+                return;
+            }
+
+            for (var i = 0; i < items.length; i++) {
+                items[i].load();
+            }
+
+            this.trigger("dataBound");
         },
 
         _requestStart: function() {
