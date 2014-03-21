@@ -929,6 +929,50 @@
         equal(grid.thead.parent().attr("tabIndex"), -1);
         equal(grid.lockedHeader.find(">table").attr("tabIndex"), -1);
     });
+
+    test("select locked cell with space", function() {
+        var grid = setup({
+            selectable: "cell",
+            navigatable: true,
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.lockedTable.focus().press(kendo.keys.SPACEBAR);
+
+        ok(grid.lockedTable.find("tbody tr:eq(0) td:first").hasClass("k-state-selected"));
+    });
+
+    test("space on locked table select both rows", function() {
+        var grid = setup({
+            selectable: "row",
+            navigatable: true,
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.lockedTable.focus().press(kendo.keys.SPACEBAR);
+
+        ok(grid.lockedTable.find("tbody tr:eq(0)").hasClass("k-state-selected"));
+        ok(grid.table.find("tbody tr:eq(0)").hasClass("k-state-selected"));
+    });
+
+    test("space on unlocked table select both rows", function() {
+        var grid = setup({
+            selectable: "row",
+            navigatable: true,
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.table.focus().press(kendo.keys.SPACEBAR);
+
+        ok(grid.lockedTable.find("tbody tr:eq(0)").hasClass("k-state-selected"));
+        ok(grid.table.find("tbody tr:eq(0)").hasClass("k-state-selected"));
+    });
 })();
 
 /*

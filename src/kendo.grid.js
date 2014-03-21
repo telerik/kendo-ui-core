@@ -2438,6 +2438,7 @@ var __meta__ = {
                 multi,
                 cell,
                 notString = [],
+                isLocked = that._isLocked(),
                 selectable = that.options.selectable;
 
             if (selectable) {
@@ -2458,7 +2459,7 @@ var __meta__ = {
                 }
 
                 var elements = that.table;
-                if (that.lockedContent) {
+                if (isLocked) {
                     elements = elements.add(that.lockedTable);
                 }
 
@@ -2470,9 +2471,9 @@ var __meta__ = {
                     change: function() {
                         that.trigger(CHANGE);
                     },
-                    useAllItems: that.lockedContent && multi && cell,
+                    useAllItems: isLocked && multi && cell,
                     relatedTarget: function(items) {
-                        if (cell || !that.lockedContent) {
+                        if (cell || !isLocked) {
                             return;
                         }
 
@@ -2494,14 +2495,19 @@ var __meta__ = {
                 });
 
                 if (that.options.navigatable) {
-                    that.table.on("keydown" + NS, function(e) {
+                    elements.on("keydown" + NS, function(e) {
                         var current = that.current();
-                        if (e.keyCode === keys.SPACEBAR && e.target == that.table[0] &&
+                        var target = e.target;
+                        if (e.keyCode === keys.SPACEBAR && $.inArray(target, elements) > -1 &&
                             !current.is(".k-edit-cell,.k-header") &&
                             current.parent().is(":not(.k-grouping-row,.k-detail-row,.k-group-footer)")) {
                             e.preventDefault();
                             e.stopPropagation();
                             current = cell ? current : current.parent();
+
+                            if (isLocked) {
+                                current = current.add(that._relatedRow(current));
+                            }
 
                             if(multi) {
                                 if(!e.ctrlKey) {
