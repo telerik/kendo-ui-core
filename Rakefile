@@ -541,6 +541,17 @@ bundle :name => 'php.commercial',
            "php:assets"
        ]
 
+# Kendo UI Core
+bundle :name => 'core',
+       :license => 'src-license-core',
+       :product => 'Kendo UI Core',
+       :contents => {
+            'js' => CORE_MIN_JS + CORE_MIN_JS_MAP + JQUERY_MAP,
+            'styles' => CORE_MIN_CSS_RESOURCES,
+            'src/js' => CORE_SRC_JS,
+            'src/styles' => CORE_SRC_CSS
+       }
+
 BUNDLES = [
     'aspnetmvc.commercial',
     'aspnetmvc.internal.commercial',

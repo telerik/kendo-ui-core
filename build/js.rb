@@ -58,3 +58,6 @@ WIN_SRC_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.winjs.js')]
 
 ICENIUM_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.icenium.min.js')].include(JQUERY)
 
+CORE_SRC_JS = dependencies("ui.core")
+CORE_MIN_JS = CORE_SRC_JS.ext('min.js').include(JQUERY)
+CORE_MIN_JS_MAP = maps(CORE_SRC_JS)
