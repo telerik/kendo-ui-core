@@ -296,11 +296,10 @@
         equal(notificationElement.style.height, size);
     });
 
-    test("hide button is by default hidden", function() {
+    asyncTest("hide button is by default hidden", 1, function() {
         createNotification();
 
         notification.show("foo");
-        
         stop();
 
         setTimeout(function(){
