@@ -24,14 +24,20 @@ var __meta__ = {
         _getDataSourceType: function() {
             return GanttChartDataSource;
         },
+        
+        isSummary: function() {
+            return this.children.data().length > 0;
+        },
 
         id: "id",
         fields: {
-            uid: { type: "number" },
+            id: { type: "number" },
+            sortId: { type: "number", validation: { required: true } },
             title: { defaultValue: "", type: "string" },
             start: { type: "date", validation: { required: true } },
             end: { type: "date", validation: { required: true } },
             duration: { type: "date" },
+            percentComplete: { type: "number" },
             isMilestone: { type: "boolean" }
         }
     });
@@ -75,9 +81,12 @@ var __meta__ = {
             Widget.fn.init.call(this, element, options);
 
             this._dataSource();
+            
+            this._dependencies();
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
+                this.dependencies.dataSource.fetch();
             }
 
             kendo.notify(this);
@@ -114,6 +123,18 @@ var __meta__ = {
                 .bind("change", this._refreshHandler)
                 .bind("progress", this._progressHandler)
                 .bind("error", this._errorHandler);
+        },
+
+        _dependencies: function() {
+            var dependencies = this.options.dependencies || {};
+            var dataSource = isArray(dependencies) ? dependencies : dependencies.dataSource;
+
+            this.dependencies = {
+                dataPredecessorField: dependencies.dataPredecessorField || "predecessorId",
+                dataSuccessorField: dependencies.dataSuccessorField || "successorId",
+                dataTypeField: dependencies.dataTypeField || "type",
+                dataSource: kendo.data.DataSource.create(dataSource)
+            };
         },
 
         setDataSource: function(dataSource) {

@@ -119,14 +119,13 @@
         ganttChart.setDataSource(new kendo.data.GanttChartDataSource());
     });
 
-
-    test("Initializing from JSON populates root items", function() {
+    test("Initializing from JSON array populates root items", function() {
         var ganttChart = new GanttChart(container, JSONData);
 
         equal(ganttChart.dataSource.data().length, 2);
     });
 
-    test("Initializing from JSON populates child items", function() {
+    test("Initializing from JSON array populates child items", function() {
         var ganttChart = new GanttChart(container, JSONData);
 
         equal(ganttChart.dataSource.at(0).children.data().length, 3);
@@ -193,4 +192,78 @@
 
         equal(ganttChart.dataSource.at(0).children.data().length, 3);
     });
+
+
+    module("Dependencies", {
+        setup: function() {
+            container = $("<div />");
+        },
+        teardown: function() {
+            kendo.destroy(container);
+        }
+    });
+
+    test("Dependencies create a DataSource when not specified", function() {
+        var ganttChart = new GanttChart(container);
+
+        ok(ganttChart.dependencies.dataSource instanceof kendo.data.DataSource);
+    });
+
+    test("Dependencies create a DataSource from Array", function() {
+        var ganttChart = new GanttChart(container, {
+            dependencies: [{}, {}]
+        });
+
+        ok(ganttChart.dependencies.dataSource instanceof kendo.data.DataSource);
+    });
+
+    test("Dependencies create a DataSource from datasource", function() {
+        var ganttChart = new GanttChart(container, {
+            dependencies: {
+                dataSource: {
+                    data: [{}, {}]
+                }
+            }
+        });
+
+        ok(ganttChart.dependencies.dataSource instanceof kendo.data.DataSource);
+    });
+    
+    test("Dependencies are populated from JSON array", function() {
+        var ganttChart = new GanttChart(container, {
+            dependencies: [{}, {}]
+        });
+
+        ok(ganttChart.dependencies.dataSource.data().length === 2);
+    });
+
+    test("Dependencies are populated from local datasource", function() {
+        var ganttChart = new GanttChart(container, {
+            dependencies: {
+                dataSource: {
+                    data: [{}, {}]
+                }
+            }
+        });
+
+        ok(ganttChart.dependencies.dataSource.data().length === 2);
+    });
+
+    test("Dependencies are populated from remote datasource", function() {
+        var ganttChart = new GanttChart(container, {
+            dependencies: {
+                dataSource: {
+                    transport: {
+                        read: function(options) {
+                            options.success([{}, {}]);
+                        }
+                    }
+                }
+            }
+        });
+
+        ok(ganttChart.dependencies.dataSource.data().length === 2);
+    });
+
+
 })();
