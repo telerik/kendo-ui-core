@@ -3177,15 +3177,20 @@ var __meta__ = {
 
         _averageRowHeight: function() {
             var that = this,
+                itemsCount = that.items().length,
                 rowHeight = that._rowHeight;
 
+            if (itemsCount === 0) {
+                return rowHeight;
+            }
+
             if (!that._rowHeight) {
-                that._rowHeight = rowHeight = that.table.outerHeight() / that.items().length;
+                that._rowHeight = rowHeight = that.table.outerHeight() / itemsCount;
                 that._sum = rowHeight;
                 that._measures = 1;
             }
 
-            var currentRowHeight = that.table.outerHeight() / that.items().length;
+            var currentRowHeight = that.table.outerHeight() / itemsCount;
 
             if (rowHeight !== currentRowHeight) {
                 that._measures ++;
