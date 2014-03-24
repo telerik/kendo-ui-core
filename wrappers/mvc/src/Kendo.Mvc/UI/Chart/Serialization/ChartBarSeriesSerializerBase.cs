@@ -65,6 +65,15 @@ namespace Kendo.Mvc.UI
                 result.Add("stack", series.Stacked);
             }
 
+            if (series.Aggregate.HasValue)
+            {
+                result.Add("aggregate", series.Aggregate.ToString().ToLowerInvariant());
+            }
+            else if (series.AggregateHandler != null)
+            {
+                result.Add("aggregate", series.AggregateHandler);
+            }
+
             return result;
         }
 

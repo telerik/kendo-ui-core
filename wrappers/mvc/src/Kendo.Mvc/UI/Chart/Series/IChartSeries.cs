@@ -41,6 +41,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Aggregate function for date series.
+        /// </summary>
+        ClientHandlerDescriptor AggregateHandler
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the data point tooltip options
         /// </summary>
         ChartTooltip Tooltip
