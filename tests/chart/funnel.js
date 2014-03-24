@@ -67,6 +67,139 @@
         equal(chart.points.length, chart.options.series[0].data.length);
     });
 
+    module("null/undefined cases", {
+        teardown: destroyChart
+    });
+
+    test("does not render segments for null", function() {
+            createFunnelChart({
+                dynamicHeight: false,
+                series: [{
+                    data: [{
+                        value: null,
+                        category: "A",
+                    }, {
+                        value: 2,
+                        category: "B"
+                    }, {
+                        value: 3,
+                        category: "C"
+                    }]
+                }]
+            });
+
+            equal(chart.points.length, 2);
+    });
+
+    test("does not render segments for undefined", function() {
+            createFunnelChart({
+                dynamicHeight: false,
+                series: [{
+                    data: [{
+                        value: undefined,
+                        category: "A",
+                    }, {
+                        value: 2,
+                        category: "B"
+                    }, {
+                        value: 3,
+                        category: "C"
+                    }]
+                }]
+            });
+
+            equal(chart.points.length, 2);
+    });
+
+    test("does not render label for undefined", function() {
+            createFunnelChart({
+                dynamicHeight: false,
+                labels: {
+                    visible: true
+                },
+                series: [{
+                    data: [{
+                        value: undefined,
+                        category: "A",
+                    }, {
+                        value: 2,
+                        category: "B"
+                    }, {
+                        value: 3,
+                        category: "C"
+                    }]
+                }]
+            });
+
+            equal(chart.labels.length, 2);
+    });
+
+    test("does not render label for null", function() {
+            createFunnelChart({
+                dynamicHeight: false,
+                labels: {
+                    visible: true
+                },
+                series: [{
+                    data: [{
+                        value: null,
+                        category: "A",
+                    }, {
+                        value: 2,
+                        category: "B"
+                    }, {
+                        value: 3,
+                        category: "C"
+                    }]
+                }]
+            });
+
+            equal(chart.labels.length, 2);
+    });
+
+    test("renders segment for 0", function() {
+            createFunnelChart({
+                dynamicHeight: false,
+                series: [{
+                    data: [{
+                        value: 0,
+                        category: "A",
+                    }, {
+                        value: 2,
+                        category: "B"
+                    }, {
+                        value: 3,
+                        category: "C"
+                    }]
+                }]
+            });
+
+            equal(chart.points.length, 3);
+    });
+
+    test("renders label for 0", function() {
+            createFunnelChart({
+                dynamicHeight: false,
+                labels: {
+                    visible: true
+                },
+                series: [{
+                    data: [{
+                        value: 0,
+                        category: "A",
+                    }, {
+                        value: 2,
+                        category: "B"
+                    }, {
+                        value: 3,
+                        category: "C"
+                    }]
+                }]
+            });
+
+            equal(chart.labels.length, 3);
+    });
+
     module("dynamicSlope false", {
         setup: function() {
             createFunnelChart({

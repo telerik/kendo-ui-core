@@ -123,6 +123,11 @@ var __meta__ = {
             for (i = 0; i < data.length; i++) {
                 pointData = SeriesBinder.current.bindPoint(series, i);
                 value = pointData.valueFields.value;
+
+                if (value === null || value === undefined) {
+                   continue;
+                }
+
                 fields = pointData.fields;
 
                 if (!isFn(series.color)) {
@@ -188,7 +193,7 @@ var __meta__ = {
                 text = value,
                 textBox;
 
-            if (labels.visible && value) {
+            if (labels.visible) {
                 if (labels.template) {
                     var labelTemplate = template(labels.template);
                     text = labelTemplate({
@@ -202,11 +207,11 @@ var __meta__ = {
                     text = autoFormat(labels.format, text);
                 }
 
-                if(!labels.color&&labels.align==="center"){
+                if (!labels.color&&labels.align==="center") {
                     var brightnessValue = new Color(series.color).percBrightness();
-                    if(brightnessValue > 180){
+                    if (brightnessValue > 180) {
                         labels.color = BLACK;
-                    }else{
+                    } else {
                         labels.color = WHITE;
                     }
                 }
