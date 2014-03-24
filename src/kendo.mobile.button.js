@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.mobile.application", "./kendo.userevents" ], f);
+    define([ "./kendo.userevents" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Button",
     category: "mobile",
     description: "The Button widget navigates between mobile Application views when pressed.",
-    depends: [ "mobile.application", "userevents" ]
+    depends: [ "userevents" ]
 };
 
 (function($, undefined) {

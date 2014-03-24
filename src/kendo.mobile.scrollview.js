@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.mobile.application" ], f);
+    define([ "./kendo.fx", "./kendo.data", "./kendo.draganddrop" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "ScrollView",
     category: "mobile",
     description: "The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.",
-    depends: [ "mobile.application" ]
+    depends: [ "fx", "data", "draganddrop" ]
 };
 
 (function($, undefined) {

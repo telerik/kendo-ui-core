@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.mobile.application", "./kendo.userevents" ], f);
+    define([ "./kendo.data", "./kendo.userevents", "./kendo.mobile.button" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "ListView",
     category: "mobile",
     description: "The Kendo Mobile ListView widget is used to display flat or grouped list of items.",
-    depends: [ "data", "mobile.application", "userevents" ]
+    depends: [ "data", "userevents", "mobile.button" ]
 };
 
 (function($, undefined) {
