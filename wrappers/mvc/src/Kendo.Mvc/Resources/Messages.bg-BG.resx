@@ -705,4 +705,7 @@
   <data name="Editor_ViewHtml" xml:space="preserve">
     <value>Виж HTML-а</value>
   </data>
+  <data name="Editor_DialogUpdate" xml:space="preserve">
+    <value>Обнови</value>
+  </data>
 </root>

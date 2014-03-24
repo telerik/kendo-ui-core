@@ -187,6 +187,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Editor_DialogUpdate {
+            get {
+                return ResourceManager.GetString("Editor_DialogUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A directory with this name was not found..
         /// </summary>
         public static string Editor_DirectoryNotFound {

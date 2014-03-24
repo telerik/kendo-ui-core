@@ -250,6 +250,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public EditorMessagesBuilder DialogUpdate(string message)
+        {
+            messages.DialogUpdate = message;
+
+            return this;
+        }
+
         public EditorMessagesBuilder CreateTable(string message)
         {
             messages.CreateTable = message;
