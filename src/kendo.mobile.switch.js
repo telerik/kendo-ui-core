@@ -1,6 +1,6 @@
 /* jshint multistr: true */
 (function(f, define){
-    define([ "./kendo.mobile.application" ], f);
+    define([ "./kendo.fx", "./kendo.userevents" ], f);
 })(function(){
 
 var __meta__ = {
@@ -8,7 +8,7 @@ var __meta__ = {
     name: "Switch",
     category: "mobile",
     description: "The mobile Switch widget is used to display two exclusive choices.",
-    depends: [ "mobile.application" ]
+    depends: [ "fx", "userevents" ]
 };
 
 (function($, undefined) {
