@@ -21,8 +21,8 @@ var __meta__ = {
     var extend = $.extend;
 
     var GanttChartTask = kendo.data.Node.define({
-        _initChildren: function() {
-            kendo.data.Node.fn._initChildren.call(this, GanttChartDataSource);
+        _getDataSourceType: function() {
+            return GanttChartDataSource;
         },
 
         id: "id",
@@ -37,14 +37,12 @@ var __meta__ = {
     });
 
     var GanttChartDataSource = HierarchicalDataSource.extend({
-        init: function(options) {
+        _defineNode: function(options) {
             var node = GanttChartTask.define({
                 children: options
             });
 
-            DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
-
-            this._attachBubbleHandlers();
+            return node;
         }
     });
 
