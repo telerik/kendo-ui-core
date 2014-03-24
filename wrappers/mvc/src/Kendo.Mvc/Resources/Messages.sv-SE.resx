@@ -798,4 +798,7 @@
   <data name="Editor_ViewHtml" xml:space="preserve">
     <value>View HTML</value>
   </data>
+  <data name="Editor_DialogUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
 </root>

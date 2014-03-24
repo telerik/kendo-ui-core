@@ -46,6 +46,7 @@ namespace Kendo.Mvc.UI
             DialogInsert = Messages.Editor_DialogInsert;
             DialogButtonSeparator = Messages.Editor_DialogButtonSeparator;
             DialogCancel = Messages.Editor_DialogCancel;
+            DialogUpdate = Messages.Editor_DialogUpdate;
             CreateTable = Messages.Editor_CreateTable;
             AddColumnLeft = Messages.Editor_AddColumnLeft;
             AddColumnRight = Messages.Editor_AddColumnRight;
@@ -94,6 +95,7 @@ namespace Kendo.Mvc.UI
         public string DialogInsert { get; set; }
         public string DialogButtonSeparator { get; set; }
         public string DialogCancel { get; set; }
+        public string DialogUpdate { get; set; }
         public string CreateTable { get; set; }
         public string AddColumnLeft { get; set; }
         public string AddColumnRight { get; set; }
@@ -141,6 +143,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultDialogInsert = "Insert";
         private const string DefaultDialogButtonSeparator = "or";
         private const string DefaultDialogCancel = "Cancel";
+        private const string DefaultDialogUpdate = "Update";
         private const string DefaultCreateTable = "Create table";
         private const string DefaultAddColumnLeft = "Add column on the left";
         private const string DefaultAddColumnRight = "Add column on the right";
@@ -339,6 +342,11 @@ namespace Kendo.Mvc.UI
             if (DialogCancel != DefaultDialogCancel)
             {
                 json["dialogCancel"] = DialogCancel;
+            }
+
+            if (DialogUpdate != DefaultDialogUpdate)
+            {
+                json["dialogUpdate"] = DialogUpdate;
             }
 
             if (CreateTable != DefaultCreateTable)
