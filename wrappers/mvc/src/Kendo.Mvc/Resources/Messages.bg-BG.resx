@@ -708,4 +708,10 @@
   <data name="Editor_DialogUpdate" xml:space="preserve">
     <value>Обнови</value>
   </data>
+  <data name="Scheduler_Editor_NoTimezone" xml:space="preserve">
+    <value>Без часова зона</value>
+  </data>
+  <data name="Scheduler_View_WorkWeek" xml:space="preserve">
+    <value>Работна седмица</value>
+  </data>
 </root>

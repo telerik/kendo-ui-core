@@ -1213,6 +1213,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No timezone.
+        /// </summary>
+        public static string Scheduler_Editor_NoTimezone {
+            get {
+                return ResourceManager.GetString("Scheduler_Editor_NoTimezone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Repeat.
         /// </summary>
         public static string Scheduler_Editor_Repeat {
@@ -1722,6 +1731,15 @@ namespace Kendo.Mvc.Resources {
         public static string Scheduler_View_Week {
             get {
                 return ResourceManager.GetString("Scheduler_View_Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work Week.
+        /// </summary>
+        public static string Scheduler_View_WorkWeek {
+            get {
+                return ResourceManager.GetString("Scheduler_View_WorkWeek", resourceCulture);
             }
         }
         

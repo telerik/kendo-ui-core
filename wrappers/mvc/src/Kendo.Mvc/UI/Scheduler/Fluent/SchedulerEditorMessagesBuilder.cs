@@ -79,6 +79,13 @@
             return this;
         }
 
+        public SchedulerEditorMessagesBuilder NoTimezone(string message)
+        {
+            editorMessages.NoTimezone = message;
+
+            return this;
+        }
+
         public SchedulerEditorMessagesBuilder SeparateTimezones(string message)
         {
             editorMessages.SeparateTimezones = message;

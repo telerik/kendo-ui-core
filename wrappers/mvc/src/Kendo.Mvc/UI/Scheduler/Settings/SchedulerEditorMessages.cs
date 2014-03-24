@@ -23,6 +23,8 @@
 
         private const string DefaultEndTimezone = "End timezone";
 
+        private const string DefaultNoTimezone = "No timezone";
+
         private const string DefaultSeparateTimezones = "Use separate start and end time zones";
 
         private const string DefaultTimezoneEditorTitle = "Timezones";
@@ -51,6 +53,8 @@
 
             EndTimezone = Messages.Scheduler_Editor_EndTimezone;
 
+            NoTimezone = Messages.Scheduler_Editor_NoTimezone;
+
             SeparateTimezones = Messages.Scheduler_Editor_SeparateTimezones;
 
             TimezoneEditorTitle = Messages.Scheduler_Editor_TimezoneEditorTitle;
@@ -77,6 +81,8 @@
         public string StartTimezone { get; set; }
 
         public string EndTimezone { get; set; }
+
+        public string NoTimezone { get; set; }
 
         public string SeparateTimezones { get; set; }
 
@@ -131,6 +137,11 @@
             if (EndTimezone != DefaultEndTimezone)
             {
                 json["endTimezone"] = EndTimezone;
+            }
+
+            if (NoTimezone != DefaultNoTimezone)
+            {
+                json["noTimezone"] = NoTimezone;
             }
 
             if (SeparateTimezones != DefaultSeparateTimezones)
