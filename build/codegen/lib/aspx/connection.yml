@@ -31,7 +31,7 @@
 
     - :name: from
       :type: Object
-      :description: something
+      :description: Defines the settings for the source shape.
 
     - :name: from.shapeId
       :type: String
@@ -54,7 +54,7 @@
 
     - :name: to
       :type: Object
-      :description: something
+      :description: Defines the settings for the target shape.
 
     - :name: to.shapeId
       :type: String

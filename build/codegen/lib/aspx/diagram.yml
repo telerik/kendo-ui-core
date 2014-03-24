@@ -1,11 +1,9 @@
 :options:
     - :name: connections.connection
       :type: kendo.dataviz.diagram.Connection
-      :description: DescriptionPH
 
     - :name: shapes.shape
       :type: kendo.dataviz.diagram.Shape
-      :description: DescriptionPH
 
     - :name: connectionDefaults.stroke
       :type: kendo.dataviz.diagram.Connection.Stroke
@@ -39,7 +37,6 @@
 
     - :name: connections.points.point
       :type: kendo.dataviz.diagram.Connection.Point
-      :description: DescriptionPH
 
     - :name: connections.stroke
       :type: kendo.dataviz.diagram.Connection.Stroke
@@ -55,7 +52,6 @@
 
     - :name: shapeDefaults.connectors.connector
       :type: kendo.dataviz.diagram.Shape.Connector
-      :description: DescriptionPH
 
     - :name: shapeDefaults.stroke
       :type: kendo.dataviz.diagram.Shape.Stroke
@@ -84,7 +80,6 @@
 
     - :name: shapes.connectors.connector
       :type: kendo.dataviz.diagram.Shape.Connector
-      :description: DescriptionPH
 
     - :name: shapes.stroke
       :type: kendo.dataviz.diagram.Shape.Stroke
