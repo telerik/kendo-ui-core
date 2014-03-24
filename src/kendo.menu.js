@@ -326,7 +326,8 @@ var __meta__ = {
             direction: "default",
             openOnClick: false,
             closeOnClick: true,
-            hoverDelay: 100
+            hoverDelay: 100,
+            popupCollision: undefined
         },
 
         _initData: function(options) {
