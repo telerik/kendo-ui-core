@@ -75,7 +75,7 @@ var __meta__ = {
             '</ul>' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-views">' +
                 '#for(var view in views){#' +
-                    '<li class="k-state-default k-view-#=view#" data-#=ns#name="#=view#"><a role="button" href="\\#" class="k-link">${views[view].title}</a></li>' +
+                    '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a role="button" href="\\#" class="k-link">${views[view].title}</a></li>' +
                 '#}#'  +
             '</ul>' +
             '</div>'),
@@ -85,7 +85,7 @@ var __meta__ = {
             '</ul>' +
             '<ul class="k-reset k-header k-toolbar k-scheduler-views">' +
                 '#for(var view in views){#' +
-                    '<li class="k-state-default k-view-#=view#" data-#=ns#name="#=view#"><a role="button" href="\\#" class="k-link">${views[view].title}</a></li>' +
+                    '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a role="button" href="\\#" class="k-link">${views[view].title}</a></li>' +
                 '#}#'  +
             '</ul>' +
             '</div>'+
