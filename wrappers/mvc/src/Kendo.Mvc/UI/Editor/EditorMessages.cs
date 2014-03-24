@@ -36,6 +36,7 @@ namespace Kendo.Mvc.UI
             Styles = Messages.Editor_Styles;
             ForeColor = Messages.Editor_ForeColor;
             BackColor = Messages.Editor_BackColor;
+            ViewHtml = Messages.Editor_ViewHtml;
             ImageWebAddress= Messages.Editor_ImageWebAddress;
             ImageAltText= Messages.Editor_ImageAltText;
             LinkWebAddress = Messages.Editor_LinkWebAddress;
@@ -83,6 +84,7 @@ namespace Kendo.Mvc.UI
         public string Styles { get; set; }
         public string ForeColor { get; set; }
         public string BackColor { get; set; }
+        public string ViewHtml { get; set; }
         public string ImageWebAddress { get; set; }
         public string ImageAltText { get; set; }
         public string LinkWebAddress { get; set; }
@@ -129,6 +131,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultStyles = "Styles";
         private const string DefaultBackColor = "Background color";
         private const string DefaultForeColor = "Color";
+        private const string DefaultViewHtml = "View HTML";
         private const string DefaultImageWebAddress = "Web address";
         private const string DefaultImageAltText = "Alternate text";
         private const string DefaultLinkWebAddress = "Web address";
@@ -286,6 +289,11 @@ namespace Kendo.Mvc.UI
             if (ForeColor != DefaultForeColor)
             {
                 json["foreColor"] = ForeColor;
+            }
+
+            if (ViewHtml != DefaultViewHtml)
+            {
+                json["viewHtml"] = ViewHtml;
             }
 
             if (ImageWebAddress != DefaultImageWebAddress)

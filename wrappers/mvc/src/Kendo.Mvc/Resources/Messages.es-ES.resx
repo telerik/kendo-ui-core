@@ -714,4 +714,7 @@
   <data name="Grid_Unlock" xml:space="preserve">
     <value>Descubrir</value>
   </data>
+  <data name="Editor_ViewHtml" xml:space="preserve">
+    <value>View HTML</value>
+  </data>
 </root>
