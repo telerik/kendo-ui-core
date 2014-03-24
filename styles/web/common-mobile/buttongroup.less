@@ -1,0 +1,35 @@
+@import "../../mobile/common/icons.less";
+@import "../../mobile/common/buttongroup.less";
+@import "base.less";
+
+/* ButtonGroup */
+
+.km-buttongroup
+{
+    vertical-align: middle;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.km-buttongroup > *
+{
+    padding: .36em .8em;
+}
+
+.km-buttongroup > *:not(:first-child):not(:last-child)
+{
+    border-radius: 0;
+}
+
+.km-widget.km-buttongroup > *:last-child,
+.km-widget.km-buttongroup > *.km-state-active
+{
+    border-right-width: @mobile-border-width;
+}
+
+.km-widget.km-buttongroup > *.km-state-active + *
+{
+    border-left-width: 0;
+}
+
