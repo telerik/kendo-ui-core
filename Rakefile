@@ -545,6 +545,7 @@ bundle :name => 'php.commercial',
 bundle :name => 'core',
        :license => 'src-license-core',
        :product => 'Kendo UI Core',
+       :readme => 'README.KendoUI.Core',
        :contents => {
             'js' => CORE_MIN_JS + CORE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => CORE_MIN_CSS_RESOURCES,
