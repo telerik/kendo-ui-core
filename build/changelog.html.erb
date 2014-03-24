@@ -101,6 +101,7 @@ end
 % if suite.new_components.any? then
         <h1>New UI Widgets</h1>
 % suite.new_components.each do |issue|
+% next if exclude.include? issue.title.downcase
         <div class="tClear poTopLine">
             <div class="poBoxIconText">
                 <h2><%= encode(issue.title) %></h2>
@@ -112,6 +113,7 @@ end
 % end
 
 % suite.components.each do |component_title, component|
+% next if exclude.include? component_title.downcase
         <div class="tClear poTopLine">
             <h2><%= encode(component_title) %></h2>
             <%= output("What's new", component.features) %>
