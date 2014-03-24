@@ -31,6 +31,13 @@
             return this;
         }
 
+        public SchedulerViewMessagesBuilder WorkWeek(string message)
+        {
+            viewMessages.WorkWeek = message;
+
+            return this;
+        }
+
         public SchedulerViewMessagesBuilder Month(string message)
         {
             viewMessages.Month = message;

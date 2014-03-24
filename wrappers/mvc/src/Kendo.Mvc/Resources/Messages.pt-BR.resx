@@ -702,4 +702,10 @@
   <data name="Editor_DialogUpdate" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="Scheduler_Editor_NoTimezone" xml:space="preserve">
+    <value>No timezone</value>
+  </data>
+  <data name="Scheduler_View_WorkWeek" xml:space="preserve">
+    <value>Work Week</value>
+  </data>
 </root>

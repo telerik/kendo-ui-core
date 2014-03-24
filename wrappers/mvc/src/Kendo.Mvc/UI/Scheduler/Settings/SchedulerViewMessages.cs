@@ -9,6 +9,8 @@
 
         private const string DefaultWeek = "Week";
 
+        private const string DefaultWorkWeek = "Work Week";
+
         private const string DefaultMonth = "Month";
 
         private const string DefaultAgenda = "Agenda";
@@ -19,6 +21,8 @@
 
             Week = Messages.Scheduler_View_Week;
 
+            WorkWeek = Messages.Scheduler_View_WorkWeek;
+
             Month = Messages.Scheduler_View_Month;
 
             Agenda = Messages.Scheduler_View_Agenda;
@@ -27,6 +31,8 @@
         public string Day { get; set; }
 
         public string Week { get; set; }
+
+        public string WorkWeek { get; set; }
 
         public string Month { get; set; }
 
@@ -42,6 +48,11 @@
             if (Week != DefaultWeek)
             {
                 json["week"] = Week;
+            }
+
+            if (WorkWeek != DefaultWorkWeek)
+            {
+                json["workWeek"] = WorkWeek;
             }
 
             if (Month != DefaultMonth)
