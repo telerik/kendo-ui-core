@@ -13,6 +13,7 @@ namespace <%= csharp_namespace %>
         {
             var convertable = obj as <%= csharp_class %>;
 
+<% if self.instance_of?(Component) && self.widget? %>            AddProperty(state, "theme", convertable.RuntimeSkin, "Default");<% end %>
             #region [ SerializedProperties ]
             #endregion [ SerializedProperties ]
         }
