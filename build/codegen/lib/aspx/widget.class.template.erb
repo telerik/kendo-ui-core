@@ -16,7 +16,7 @@ namespace <%= csharp_namespace %>
     /// </summary>
     [ParseChildren(ChildrenAsProperties = true)]
     [ClientScriptResource("<%= script_component_type %>", "<%= script_resource_path %>")]
-    public class <%= csharp_class %> : RadWebControl
+    public protected class <%= csharp_class %> : RadWebControl
     {
         #region [ Constructor ]
         public <%= csharp_class %>()

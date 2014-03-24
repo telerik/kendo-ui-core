@@ -7,10 +7,6 @@
       :type: kendo.dataviz.diagram.Shape
       :description: DescriptionPH
 
-    - :name: layout
-      :type: kendo.dataviz.diagram.DiagramLayout
-      :description: Defines the diagram's Layout settings
-
     - :name: connectionDefaults.stroke
       :type: kendo.dataviz.diagram.Connection.Stroke
       :description: Defines the stroke configuration.
@@ -143,3 +139,11 @@
     - :name: shapes.content
       :type: kendo.dataviz.diagram.Shape.Content
 
+    - :name: layout.enabled
+      :type: Boolean
+      :default: false
+      :description: Gets or Sets whether the Layout should be applied to the diagram.
+
+    - :name: layout
+      :type: kendo.dataviz.diagram.DiagramLayout
+      :description: Defines the diagram's Layout settings
