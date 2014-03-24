@@ -18,6 +18,7 @@ namespace Kendo.Mvc.UI
     public abstract class WidgetBase : IWidget, IScriptableComponent
     {
         internal static readonly string DeferredScriptsKey = "$DeferredScriptsKey$";
+        private static readonly Regex UnicodeEntityExpression = new Regex(@"\\+u(\d+)\\*#(\d+;)", RegexOptions.Compiled);
 
         private string name;        
 
@@ -250,6 +251,11 @@ namespace Kendo.Mvc.UI
                 html = Regex.Replace(html, "&#32;", " ", RegexOptions.IgnoreCase);               
                 html = Regex.Replace(html, @"\\u0026#32;", " ", RegexOptions.IgnoreCase);   
             }
+            //escape entities in attributes encoded by the TextWriter Unicode encoding
+            html = UnicodeEntityExpression.Replace(html, (m) =>
+            {
+                return HttpUtility.HtmlDecode(Regex.Unescape(@"\u" + m.Groups[1].Value + "#" + m.Groups[2].Value));
+            });
 
             //must decode unicode symbols otherwise they will be rendered as HTML entities
             //which will break the client template
