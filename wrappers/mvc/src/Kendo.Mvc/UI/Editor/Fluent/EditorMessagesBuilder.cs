@@ -174,6 +174,12 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public EditorMessagesBuilder ViewHtml(string message)
+        {
+            messages.ViewHtml = message;
+            return this;
+        }
+
         public EditorMessagesBuilder ImageBrowser(Action<EditorImageBrowserMessagesBuilder> configurator)
         {
             configurator(new EditorImageBrowserMessagesBuilder(messages.ImageBrowserMessages));

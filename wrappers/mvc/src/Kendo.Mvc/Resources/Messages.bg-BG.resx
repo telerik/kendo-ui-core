@@ -702,4 +702,7 @@
   <data name="Grid_Unlock" xml:space="preserve">
     <value>Отключи</value>
   </data>
+  <data name="Editor_ViewHtml" xml:space="preserve">
+    <value>Виж HTML-а</value>
+  </data>
 </root>
