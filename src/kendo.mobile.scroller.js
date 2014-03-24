@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.fx", "./kendo.draganddrop" ], f);
+    define([ "./kendo.fx", "./kendo.draganddrop" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Scroller",
     category: "mobile",
     description: "The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.",
-    depends: [ "core", "fx", "draganddrop" ]
+    depends: [ "fx", "draganddrop" ]
 };
 
 (function($, undefined) {

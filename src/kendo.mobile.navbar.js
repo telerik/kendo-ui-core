@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.mobile.application" ], f);
+    define([ "./kendo.core" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "NavBar",
     category: "mobile",
     description: "The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.",
-    depends: [ "mobile.application" ]
+    depends: [ "mobile.core" ]
 };
 
 (function($, undefined) {

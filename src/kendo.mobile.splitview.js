@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.mobile.application" ], f);
+    define([ "./kendo.mobile.pane" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "SplitView",
     category: "mobile",
     description: "The mobile SplitView is a tablet-specific view that consists of two or more mobile Pane widgets.",
-    depends: [ "mobile.application" ]
+    depends: [ "mobile.pane" ]
 };
 
 (function($, undefined) {

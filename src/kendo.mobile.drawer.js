@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.mobile.application" ], f);
+    define([ "./kendo.mobile.view", "./kendo.userevents" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Drawer",
     category: "mobile",
     description: "The Kendo Mobile Drawer widget provides slide to reveal global application toolbox",
-    depends: [ "mobile.view" ]
+    depends: [ "mobile.view", "userevents" ]
 };
 
 (function($, undefined) {

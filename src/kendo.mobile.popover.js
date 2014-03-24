@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.popup", "./kendo.mobile.application" ], f);
+    define([ "./kendo.popup", "./kendo.mobile.pane" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "PopOver",
     category: "mobile",
     description: "The mobile PopOver widget represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. ",
-    depends: [ "popup", "mobile.application" ]
+    depends: [ "popup", "mobile.pane" ]
 };
 
 (function($, undefined) {
