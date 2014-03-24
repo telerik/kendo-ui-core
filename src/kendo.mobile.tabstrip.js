@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.mobile.application" ], f);
+    define([ "./kendo.core" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "TabStrip",
     category: "mobile",
     description: "The mobile TabStrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.",
-    depends: [ "core", "mobile.application" ]
+    depends: [ "core" ]
 };
 
 (function($, undefined) {

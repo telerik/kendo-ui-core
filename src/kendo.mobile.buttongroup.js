@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.mobile.application" ], f);
+    define([ "./kendo.core" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "ButtonGroup",
     category: "mobile",
     description: "The Kendo mobile ButtonGroup widget is a linear set of grouped buttons.",
-    depends: [ "mobile.application" ]
+    depends: [ "core" ]
 };
 
 (function($, undefined) {
