@@ -40,29 +40,43 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Color_should_set_color()
+        public void Color_sets_background()
         {
             builder.Color("Blue");
             series.Color.ShouldEqual("Blue");
         }
 
         [Fact]
-        public void Color_should_return_builder()
+        public void Color_returns_builder()
         {
-            builder.Color("Blue").ShouldBeSameAs(builder);
+            builder.Color("Blue");
+            series.Color.ShouldEqual("Blue");
         }
 
         [Fact]
-        public void Color_with_Func_should_set_InlineCodeBlock()
+        public void Color_handler_sets_background_handler()
         {
-            builder.Color(nullFunc);
-            series.ColorHandler.TemplateDelegate.ShouldBeSameAs(nullFunc);
+            builder.ColorHandler("Foo");
+            series.ColorHandler.HandlerName.ShouldEqual("Foo");
         }
 
         [Fact]
-        public void Color_with_Func_should_return_builder()
+        public void Color_handler_returns_builder()
         {
-            builder.Color(nullFunc).ShouldBeSameAs(builder);
+            builder.ColorHandler("Foo").ShouldEqual(builder);
+        }
+
+        [Fact]
+        public void Color_handler_sets_background_delegate()
+        {
+            builder.ColorHandler(nullFunc);
+            series.ColorHandler.TemplateDelegate.ShouldEqual(nullFunc);
+        }
+
+        [Fact]
+        public void Color_handler_delegate_returns_builder()
+        {
+            builder.ColorHandler(nullFunc).ShouldEqual(builder);
         }
 
         [Fact]
