@@ -1969,4 +1969,4 @@
     <Compile Include="UI\Diagram\Fluent\DiagramShapeConnectorBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\MobileActionSheet\MobileActionSheetType.cs" /></ItemGroup></Project>

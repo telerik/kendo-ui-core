@@ -43,6 +43,11 @@ namespace Kendo.Mvc.UI
                 html.Children.Add(CreateItem(item));
             }
 
+            if (component.Type != MobileActionSheetType.Auto)
+            {
+                html.Attribute("data-type", component.Type.ToString().ToLowerInvariant());
+            }
+
             return html;
         }
 

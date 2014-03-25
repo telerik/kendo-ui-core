@@ -43,6 +43,8 @@ namespace Kendo.Mvc.UI
             private set;
         }
         
+        public MobileActionSheetType Type { get; set; }
+        
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)
