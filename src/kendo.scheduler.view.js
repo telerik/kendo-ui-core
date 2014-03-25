@@ -327,8 +327,8 @@ var __meta__ = {
         },
 
         slotRanges: function(event, isDay) {
-            var startTime = kendo.date.toUtcTime(event.start);
-            var endTime = kendo.date.toUtcTime(event.end);
+            var startTime = event.startTime || kendo.date.toUtcTime(event.start);
+            var endTime = event.endTime || kendo.date.toUtcTime(event.end);
 
             if (isDay === undefined) {
                 isDay = event.isMultiDay();
@@ -336,14 +336,6 @@ var __meta__ = {
 
             if (isDay) {
                 return this.daySlotRanges(startTime, endTime, event.isAllDay);
-            }
-
-            if (event.startTime) {
-                startTime =  kendo.date.getMilliseconds(event.startTime) + kendo.date.toUtcTime(kendo.date.getDate(event.start));
-            }
-
-            if (event.endTime) {
-                endTime =  kendo.date.getMilliseconds(event.endTime) + kendo.date.toUtcTime(kendo.date.getDate(event.end));
             }
 
             return this.timeSlotRanges(startTime, endTime);

@@ -17,12 +17,12 @@ var __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget,
         DropDownList = ui.DropDownList,
-        date = kendo.date,
-        setTime = date.setTime,
-        setDayOfWeek = date.setDayOfWeek,
-        adjustDST = date.adjustDST,
-        firstDayOfMonth = date.firstDayOfMonth,
-        getMilliseconds = date.getMilliseconds,
+        kendoDate = kendo.date,
+        setTime = kendoDate.setTime,
+        setDayOfWeek = kendoDate.setDayOfWeek,
+        adjustDST = kendoDate.adjustDST,
+        firstDayOfMonth = kendoDate.firstDayOfMonth,
+        getMilliseconds = kendoDate.getMilliseconds,
         DAYS_IN_LEAPYEAR = [0,31,60,91,121,152,182,213,244,274,305,335,366],
         DAYS_IN_YEAR = [0,31,59,90,120,151,181,212,243,273,304,334,365],
         MONTHS = [31, 28, 30, 31, 30, 31, 30, 31, 30, 31, 30, 31],
@@ -413,15 +413,15 @@ var __meta__ = {
 
                     date = date.getTime();
                     if (hours !== startTimeHours) {
-                        date += (startTimeHours - hours) * kendo.date.MS_PER_HOUR;
+                        date += (startTimeHours - hours) * kendoDate.MS_PER_HOUR;
                     }
                     date -= start;
 
                     if (diff) {
-                        date -= diff * kendo.date.MS_PER_MINUTE;
+                        date -= diff * kendoDate.MS_PER_MINUTE;
                     }
 
-                    diff = Math.floor(date / kendo.date.MS_PER_HOUR);
+                    diff = Math.floor(date / kendoDate.MS_PER_HOUR);
                     excess = intervalExcess(diff, interval);
 
                     if (excess !== 0) {
@@ -429,9 +429,9 @@ var __meta__ = {
                         modified = true;
                     }
                 } else if (frequency === "daily") {
-                    kendo.date.setTime(date, -start);
+                    kendoDate.setTime(date, -start);
 
-                    diff = Math.floor(date / kendo.date.MS_PER_DAY);
+                    diff = Math.floor(date / kendoDate.MS_PER_DAY);
                     excess = intervalExcess(diff, interval);
 
                     if (excess !== 0) {
@@ -446,7 +446,7 @@ var __meta__ = {
                     excess = intervalExcess(excess, interval);
 
                     if (excess !== 0) {
-                        kendo.date.setDayOfWeek(current, rule.weekStart, -1);
+                        kendoDate.setDayOfWeek(current, rule.weekStart, -1);
 
                         current.setDate(current.getDate() + (excess * 7));
                         adjustDST(current, hours);
@@ -1104,7 +1104,7 @@ var __meta__ = {
             if (diff < 0) {
                 hours = start.getHours();
                 end.setHours(hours, start.getMinutes(), start.getSeconds(), start.getMilliseconds());
-                kendo.date.adjustDST(end, hours);
+                kendoDate.adjustDST(end, hours);
             }
 
             rule._startPeriod = new Date(start);
@@ -1113,7 +1113,7 @@ var __meta__ = {
         }
 
         durationMS = event.duration();
-        rule._startTime = startTime = kendo.date.toInvariantTime(start);
+        rule._startTime = startTime = kendoDate.toInvariantTime(start);
 
         if (freq.setup) {
             freq.setup(rule, eventStart, start);
@@ -1128,18 +1128,18 @@ var __meta__ = {
             inPeriod = start >= startPeriod || endDate > startPeriod;
 
             if (inPeriod && !isException(exceptionDates, start, zone) || positions) {
-                endTime = new Date(rule._startTime);
-                setTime(endTime, durationMS);
+                startTime = kendoDate.toUtcTime(kendoDate.getDate(start)) + getMilliseconds(rule._startTime);
+                endTime = startTime + durationMS;
 
-                if (eventStartMS !== start.getTime() || eventStartTime !== getMilliseconds(startTime)) {
+                if (eventStartMS !== start.getTime() || eventStartTime !== getMilliseconds(rule._startTime)) {
                     events.push(event.toOccurrence({
                         start: new Date(start),
-                        startTime: new Date(startTime),
                         end: endDate,
+                        startTime: startTime,
                         endTime: endTime
                     }));
                 } else {
-                    event.startTime = new Date(startTime);
+                    event.startTime = startTime;
                     event.endTime = endTime;
                     events.push(event);
                 }
@@ -1162,7 +1162,6 @@ var __meta__ = {
                 }
 
             } else {
-
                 if (count && count === current) {
                     break;
                 }
@@ -1580,7 +1579,7 @@ var __meta__ = {
             that.wrapper = that.element;
 
             options = that.options;
-            options.start = start = options.start || date.today();
+            options.start = start = options.start || kendoDate.today();
 
             if (frequencies) {
                 options.frequencies = frequencies;

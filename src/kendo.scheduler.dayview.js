@@ -276,7 +276,7 @@ var __meta__ = {
                 var range = ranges[rangeIndex];
                 var startSlot = range.start;
 
-                var hint = this._createEventElement(event.clone({ start: start, startTime: start, end: end, endTime: end }), !multiday);
+                var hint = this._createEventElement(event.clone({ start: start, end: end }), !multiday);
 
                 hint.addClass("k-event-drag-hint");
 
@@ -1189,16 +1189,8 @@ var __meta__ = {
         },
 
         _positionEvent: function(event, element, slotRange) {
-            var start = event.start;
-            var end = event.end;
-
-            if (event.startTime) {
-                start =  kendo.date.getMilliseconds(event.startTime) + kendo.date.toUtcTime(kendo.date.getDate(event.start));
-            }
-
-            if (event.endTime) {
-                end = kendo.date.getMilliseconds(event.endTime) + kendo.date.toUtcTime(kendo.date.getDate(event.end));
-            }
+            var start = event.startTime || event.start;
+            var end = event.endTime || event.end;
 
             var rect = slotRange.innerRect(start, end, false);
 
@@ -1252,8 +1244,8 @@ var __meta__ = {
             var endDate = getDate(this.endDate());
             var startTime = getMilliseconds(this.startTime());
             var endTime = getMilliseconds(this.endTime());
-            var eventStartTime = getMilliseconds(event.startTime || event.start);
-            var eventEndTime = getMilliseconds(event.endTime || event.end);
+            var eventStartTime = event._time("start");
+            var eventEndTime = event._time("end");
             var middle;
 
             if (startTime >= endTime) {
@@ -1310,13 +1302,12 @@ var __meta__ = {
                 setTime(slotEndTime, MS_PER_DAY - 1);
             }
 
-            if (kendo.date.getDate(endTime) > kendo.date.getDate(startTime)) {
-               endTime = kendo.date.getDate(endTime);
-               setTime(endTime, MS_PER_DAY - 1);
+            if (event._date("end") > event._date("start")) {
+               endTime = +event._date("end") + (MS_PER_DAY - 1);
             }
 
-            endTime = getMilliseconds(endTime);
-            startTime = getMilliseconds(startTime);
+            endTime = endTime - event._date("end");
+            startTime = startTime - event._date("start");
             slotEndTime = getMilliseconds(slotEndTime);
             slotStartTime = getMilliseconds(slotStartTime);
 
