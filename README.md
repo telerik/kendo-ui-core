@@ -55,8 +55,8 @@ Kendo UI Core is a free and open-source distribution of Kendo UI. The following 
 | QR Code | No | Yes | Yes |
 | Bar Code | No | Yes | Yes |
 | **Mobile** |
-| Mobile Widgets | No | Yes | Yes |
-| Mobile Framework Features | No | Yes | Yes | 
+| Mobile Widgets | Yes | Yes | Yes |
+| Mobile Framework Features | Yes | Yes | Yes |
 | **Official Support** | No | Yes | Yes
 
 ## Compatibility and Requirements
