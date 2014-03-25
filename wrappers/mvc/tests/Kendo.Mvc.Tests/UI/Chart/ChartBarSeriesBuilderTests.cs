@@ -177,6 +177,32 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Aggregate_should_set_Aggregate_handler_name()
+        {
+            builder.Aggregate("foo");
+            series.AggregateHandler.HandlerName.ShouldEqual("foo");
+        }
+
+        [Fact]
+        public void Aggregate_handler_name_should_return_builder()
+        {
+            builder.Aggregate("foo").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Aggregate_should_set_Aggregate_template()
+        {
+            builder.Aggregate(nullFunc);
+            series.AggregateHandler.TemplateDelegate.ShouldEqual(nullFunc);
+        }
+
+        [Fact]
+        public void Aggregate_template_should_return_builder()
+        {
+            builder.Aggregate(nullFunc).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Gap_should_set_gap()
         {
             builder.Gap(1);

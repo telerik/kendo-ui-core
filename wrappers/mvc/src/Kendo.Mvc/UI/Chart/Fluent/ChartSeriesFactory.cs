@@ -2460,7 +2460,7 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, TValue>> q3Expression,
             Expression<Func<TModel, TValue>> upperExpression,
             Expression<Func<TModel, TValue>> meanExpression = null,
-            Expression<Func<TModel, List<TValue>>> outliersExpression = null,
+            Expression<Func<TModel, IList<TValue>>> outliersExpression = null,
             Expression<Func<TModel, string>> colorExpression = null,
             Expression<Func<TModel, TCategory>> categoryExpression = null,
             Expression<Func<TModel, string>> noteTextExpression = null
@@ -2485,7 +2485,7 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, TValue>> q3Expression,
             Expression<Func<TModel, TValue>> upperExpression,
             Expression<Func<TModel, TValue>> meanExpression = null,
-            Expression<Func<TModel, List<TValue>>> outliersExpression = null,
+            Expression<Func<TModel, IList<TValue>>> outliersExpression = null,
             Expression<Func<TModel, string>> colorExpression = null,
             Expression<Func<TModel, string>> noteTextExpression = null
             )

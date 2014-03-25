@@ -5,17 +5,17 @@ namespace Kendo.Mvc.UI.Tests.Chart
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
 
-    public class ChartOHLCSeriesBuilderTests
+    public class ChartBoxPlotSeriesBuilderTests
     {
-        private IChartOHLCSeries series;
-        private ChartOHLCSeriesBuilder<OHLCData> builder;
+        private IChartBoxPlotSeries series;
+        private ChartBoxPlotSeriesBuilder<BoxPlotData> builder;
         private readonly Func<object, object> nullFunc;
 
-        public ChartOHLCSeriesBuilderTests()
+        public ChartBoxPlotSeriesBuilderTests()
         {
-            var chart = ChartTestHelper.CreateChart<OHLCData>();
-            series = new ChartOHLCSeries<OHLCData, decimal, string>(s => s.Open, s => s.High, s => s.Low, s => s.Close, s => s.Color, null, s => s.NoteText);
-            builder = new ChartOHLCSeriesBuilder<OHLCData>(series);
+            var chart = ChartTestHelper.CreateChart<BoxPlotData>();
+            series = new ChartBoxPlotSeries<BoxPlotData, decimal, string>(s => s.Lower, s => s.Q1, s => s.Median, s => s.Q3, s => s.Upper, s => s.Mean, s => s.Outliers, null, null, null);
+            builder = new ChartBoxPlotSeriesBuilder<BoxPlotData>(series);
             nullFunc = (o) => null;
         }
 
@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void Aggregate_should_set_Aggregate()
         {
             builder.Aggregate(ChartSeriesAggregate.Max);
-            series.Aggregates.Open.ShouldEqual(ChartSeriesAggregate.Max);
+            series.Aggregates.Lower.ShouldEqual(ChartSeriesAggregate.Max);
         }
 
         [Fact]
@@ -132,8 +132,8 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Highlight_with_builder_should_configure_series()
         {
-            builder.Highlight(s => { s.Line(1); });
-            series.Highlight.Line.Width.ShouldEqual(1);
+            builder.Highlight(s => { s.Visible(false); });
+            series.Highlight.Visible.ShouldEqual(false);
         }
 
         [Fact]
@@ -143,71 +143,94 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void OpenField_should_set_open_member()
+        public void LowerField_should_set_open_member()
         {
-            builder.OpenField("Open");
-            series.OpenMember.ShouldEqual("Open");
+            builder.LowerField("Lower");
+            series.LowerMember.ShouldEqual("Lower");
         }
 
         [Fact]
-        public void OpenField_should_return_builder()
+        public void LowerField_should_return_builder()
         {
-            builder.OpenField("Open").ShouldBeSameAs(builder);
+            builder.LowerField("Lower").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void CloseField_should_set_close_member()
+        public void Q1Field_should_set_open_member()
         {
-            builder.CloseField("Close");
-            series.CloseMember.ShouldEqual("Close");
+            builder.Q1Field("Q1");
+            series.Q1Member.ShouldEqual("Q1");
         }
 
         [Fact]
-        public void CloseField_should_return_builder()
+        public void Q1Field_should_return_builder()
         {
-            builder.CloseField("Close").ShouldBeSameAs(builder);
+            builder.Q1Field("Q1").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void HighField_should_set_high_member()
+        public void MedianField_should_set_open_member()
         {
-            builder.HighField("High");
-            series.HighMember.ShouldEqual("High");
+            builder.MedianField("Median");
+            series.MedianMember.ShouldEqual("Median");
         }
 
         [Fact]
-        public void HighField_should_return_builder()
+        public void MedianField_should_return_builder()
         {
-            builder.HighField("High").ShouldBeSameAs(builder);
+            builder.MedianField("Median").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void LowField_should_set_low_member()
+        public void Q3Field_should_set_open_member()
         {
-            builder.LowField("Low");
-            series.LowMember.ShouldEqual("Low");
+            builder.Q3Field("Q3");
+            series.Q3Member.ShouldEqual("Q3");
         }
 
         [Fact]
-        public void LowField_should_return_builder()
+        public void Q3Field_should_return_builder()
         {
-            builder.LowField("Low").ShouldBeSameAs(builder);
+            builder.Q3Field("Q3").ShouldBeSameAs(builder);
         }
 
         [Fact]
-        public void Fields_should_set_members()
+        public void UpperField_should_set_open_member()
         {
-            builder.Fields("o", "h", "l", "c");
-            series.OpenMember.ShouldEqual("o");
-            series.HighMember.ShouldEqual("h");
-            series.LowMember.ShouldEqual("l");
-            series.CloseMember.ShouldEqual("c");
+            builder.UpperField("Upper");
+            series.UpperMember.ShouldEqual("Upper");
         }
 
         [Fact]
-        public void Fields_should_return_builder()
+        public void UpperField_should_return_builder()
         {
-            builder.Fields("o", "h", "l", "c").ShouldBeSameAs(builder);
+            builder.UpperField("Upper").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void MeanField_should_set_open_member()
+        {
+            builder.MeanField("Mean");
+            series.MeanMember.ShouldEqual("Mean");
+        }
+
+        [Fact]
+        public void MeanField_should_return_builder()
+        {
+            builder.MeanField("Mean").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void OutliersField_should_set_open_member()
+        {
+            builder.OutliersField("Outliers");
+            series.OutliersMember.ShouldEqual("Outliers");
+        }
+
+        [Fact]
+        public void OutliersField_should_return_builder()
+        {
+            builder.OutliersField("Outliers").ShouldBeSameAs(builder);
         }
 
         [Fact]

@@ -20,7 +20,6 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("type", series.Type)
-                .Add("aggregates", series.Aggregates.CreateSerializer().Serialize(), ShouldSerializeAggregates)
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
                 .Add("axis", series.Axis, () => series.Axis.HasValue())
@@ -55,6 +54,19 @@ namespace Kendo.Mvc.UI
                 result.Add("extremes", extremes);
             }
 
+            if (series.AggregateHandler != null)
+            {
+                result.Add("aggregate", series.AggregateHandler);
+            }
+            else
+            {
+                var aggregates = series.Aggregates.CreateSerializer().Serialize();
+                if (aggregates.Count > 0)
+                {
+                    result.Add("aggregate", aggregates);
+                }
+            }
+
             return result;
         }
 
@@ -63,15 +75,6 @@ namespace Kendo.Mvc.UI
             return series.Border.Color.HasValue() ||
                    series.Border.Width.HasValue ||
                    series.Border.DashType.HasValue;
-        }
-
-        private bool ShouldSerializeAggregates()
-        {
-            return series.Aggregates.Lower.HasValue ||
-                   series.Aggregates.Q1.HasValue ||
-                   series.Aggregates.Median.HasValue ||
-                   series.Aggregates.Q3.HasValue ||
-                   series.Aggregates.Upper.HasValue;
         }
     }
 }

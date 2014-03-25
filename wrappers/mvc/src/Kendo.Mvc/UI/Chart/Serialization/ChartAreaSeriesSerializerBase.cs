@@ -23,7 +23,6 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "area" : "verticalArea")
-                .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("field", series.Member, () => series.Member.HasValue())
                 .Add("categoryField", series.CategoryMember, () => series.CategoryMember.HasValue())
                 .Add("colorField", series.ColorMember, () => series.ColorMember.HasValue() )
@@ -49,6 +48,15 @@ namespace Kendo.Mvc.UI
             if (markers.Count > 0)
             {
                 result.Add("markers", markers);
+            }
+
+            if (series.AggregateHandler != null)
+            {
+                result.Add("aggregate", series.AggregateHandler);
+            }
+            else if (series.Aggregate.HasValue)
+            {
+                result.Add("aggregate", series.Aggregate.ToString().ToLowerInvariant());
             }
 
             return result;

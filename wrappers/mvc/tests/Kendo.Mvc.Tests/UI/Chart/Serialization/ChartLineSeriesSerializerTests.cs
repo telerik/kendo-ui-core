@@ -199,6 +199,21 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_aggregate_handler()
+        {
+            series.AggregateHandler = new ClientHandlerDescriptor { HandlerName = "Foo" };
+            GetJson(series)["aggregate"].ShouldEqual(series.AggregateHandler);
+        }
+
+        [Fact]
+        public void Should_prefer_aggregate_handler_over_aggregate()
+        {
+            series.Aggregate = ChartSeriesAggregate.Max;
+            series.AggregateHandler = new ClientHandlerDescriptor { HandlerName = "Foo" };
+            GetJson(series)["aggregate"].ShouldEqual(series.AggregateHandler);
+        }
+
+        [Fact]
         public void Serializes_width()
         {
             series.Width = 2;

@@ -272,5 +272,68 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new ChartNoteBuilder(Series.Notes));
             return this as TSeriesBuilder;
         }
+
+        /// <summary>
+        /// Sets the function used to retrieve point color.
+        /// </summary>
+        /// <param name="aggregateFunction">
+        ///     The JavaScript function that will be executed
+        ///     to retrieve the value of each aggregated point.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Bar(s => s.Sales)
+        ///                .Aggregate(
+        ///                    @&lt;text&gt;
+        ///                    function(values) {
+        ///                        return values[0];
+        ///                    }
+        ///                    &lt;/text&gt;
+        ///                )
+        ///             )
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder Aggregate(Func<object, object> aggregateFunction)
+        {
+            Series.AggregateHandler = new ClientHandlerDescriptor { TemplateDelegate = aggregateFunction };
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Sets the function used to retrieve point color.
+        /// </summary>
+        /// <param name="aggregateFunction">
+        ///     The JavaScript function that will be executed
+        ///     to retrieve the value of each aggregated point.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Bar(s => s.Sales)
+        ///                .Aggregate("myAggregate")
+        ///             )
+        ///            .Render();
+        /// %&gt;
+        /// &lt;script&gt;
+        /// function myAggregate(values) {
+        ///     return values[0];
+        /// }
+        /// &lt;/script&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder Aggregate(string aggregateFunction)
+        {
+            Series.AggregateHandler = new ClientHandlerDescriptor { HandlerName = aggregateFunction };
+
+            return this as TSeriesBuilder;
+        }
     }
 }
