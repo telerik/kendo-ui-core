@@ -44,6 +44,10 @@ If you don't use a topic branch, we may ask you to re-do your pull request on a 
 The "production" branch of the Kendo UI Core repository is for production maintenance code only. Never create a pull request from the production branch. Always create a branch for your work from the "master" branch.
 This will facilitate easier pull request management for the continuous work that is done in the master branch. If the issue is a bug fix that should be included in a maintenance release, the core maintainers will cherry-pick it.
 
+### 3. Write Tests
+
+TODO:
+
 #### (optional) Squash your commits
 
 When you've completed your work on a topic branch, you may squash your work down into fewer commits to make the merge process easier. For information on squashing via an interactive rebase, see [the rebase documentation on GitHub](https://help.github.com/articles/interactive-rebase)
