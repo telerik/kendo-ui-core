@@ -1,0 +1,12 @@
+#!/bin/sh
+
+git clean -dfx src styles dist demos wrappers
+
+npm install
+bundle --without development --path ~/gems
+
+if [ ! -z "$DOCS_BRANCH" ]; then
+    sh -c "cd docs && git fetch && git reset --hard origin/$DOCS_BRANCH"
+fi
+
+bundle exec rake "$1"
