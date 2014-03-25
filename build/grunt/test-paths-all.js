@@ -1,10 +1,14 @@
 exports.beforeTestFiles = [
-    { pattern: 'styles/**/*.*', watched: true, included: false },
+    'dist/styles/mobile/kendo.mobile.all.css',
+    'dist/styles/web/kendo.common.css',
+    'dist/styles/dataviz/kendo.dataviz.css',
+    'dist/styles/web/kendo.rtl.css',
+    { pattern: 'dist/styles/**/*.*', watched: true, included: false },
     { pattern: 'tests/router/sandbox.html', watched: true, included: false },
     { pattern: 'tests/window/blank.html', watched: true, included: false },
     { pattern: 'tests/editor/editorStyles.css', included: false },
     { pattern: 'tests/**/*-fixture.html' },
-    { pattern: 'demos/mvc/App_Data/*json', included: false },
+    { pattern: 'demos/mvc/App_Data/*json', included: false }
 ];
 
 exports.afterTestFiles = [
@@ -16,7 +20,6 @@ exports.afterTestFiles = [
 
     'tests/kendo-test-helpers.js',
     'tests/**/test-helper.js',
-    'demos/mvc/content/shared/js/less.js',
     'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
     'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
 
@@ -45,15 +48,7 @@ exports.afterTestFiles = [
 
     'download-builder/scripts/script-resolver.js',
     'tests/diagram/common.js',
-
     'demos/mvc/content/shared/js/trykendo.js'
-];
-
-exports.compiledStyleSheets = [
-    'dist/styles/mobile/kendo.mobile.all.css',
-    'dist/styles/web/kendo.common.css',
-    'dist/styles/dataviz/kendo.dataviz.css',
-    'dist/styles/web/kendo.rtl.css'
 ];
 
 exports.ciFiles = [ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js'  ];
