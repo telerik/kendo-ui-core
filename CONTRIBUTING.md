@@ -31,7 +31,7 @@ Before doing anything else, we ask that you file an issue in the Issues list for
 
 The work you are doing for your pull request should not be done in the master branch of your forked repository. Create a topic branch for your work. This allows you to isolate the work you are doing from other changes that may be happening.
 
-Github is a smart system, too. If you submit a pull request from a topic branch and we ask you to fix something, pushing a change to your topic branch will automatically update the pull request. 
+Github is a smart system, too. If you submit a pull request from a topic branch and we ask you to fix something, pushing a change to your topic branch will automatically update the pull request.
 
 #### Isolate Your Changes For The Pull Request
 
@@ -39,13 +39,14 @@ See the previous item on creating a topic branch.
 
 If you don't use a topic branch, we may ask you to re-do your pull request on a topic branch. If your pull request contains commits or other changes that are not related to the pull request, we will ask you to re-do your pull request.
 
-#### Branch from "dev" not "master"
+#### Branch from "master" not "production"
 
-The "master" branch of the Kendo UI Core repository is for production release code, and documentation updates only. Never create a pull request from the master branch. Always create a branch for your work from the "dev" branch. This will facilitate easier pull request management for the continuous work that is done in the dev branch.
+The "production" branch of the Kendo UI Core repository is for production maintenance code only. Never create a pull request from the production branch. Always create a branch for your work from the "master" branch.
+This will facilitate easier pull request management for the continuous work that is done in the master branch. If the issue is a bug fix that should be included in a maintenance release, the core maintainers will cherry-pick it.
 
-#### Squash your commits
+#### (optional) Squash your commits
 
-When you've completed your work on a topic branch, we prefer that you squash your work down into a single commit to make the merge process easier. For information on squashing via an interactive rebase, see [the rebase documentation on GitHub](https://help.github.com/articles/interactive-rebase)
+When you've completed your work on a topic branch, you may squash your work down into fewer commits to make the merge process easier. For information on squashing via an interactive rebase, see [the rebase documentation on GitHub](https://help.github.com/articles/interactive-rebase)
 
 ### 3. Submit a Pull Request
 
@@ -71,12 +72,12 @@ Without at least the first 2 items in this list, we won't have any clue why you'
 
 All code contributed to this project should adhere to a consistent style, so please keep these in mind before you submit your Pull Requests:
 
-- Tab indentation, size of 2
+- Space indentation, size of 4
 - Semicolons are nice. Use them
-- Single quotes
+- Double quotes
 - No trailing whitespace
 - Declare variables at the top of a scope
 - Return early
 - Be JSHint Valid
 
-Beyond these, your best bet, when it doubt it to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js). 
+Beyond these, your best bet, when it doubt it to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js).
