@@ -296,10 +296,19 @@
         div.appendTo(QUnit.fixture);
 
         var grid = setup({
+            dataSource: {
+                data: [
+                    { foo: "foo", bar: "bar", baz: "baz" },
+                    { foo: "foo", bar: "bar", baz: "baz" },
+                    { foo: "foo", bar: "bar", baz: "baz" }
+                ]
+            },
             columns: [{ template: "foo <br/> foo", locked: true, width: 140, encode: false }, "bar", "baz"]
         });
 
-        equal(grid.content.find("tr:first").height(), grid.lockedContent.find("tr:first").height());
+        equal(grid.content.find("tr:eq(0)").height(), grid.lockedContent.find("tr:eq(0)").height());
+        equal(grid.content.find("tr:eq(1)").height(), grid.lockedContent.find("tr:eq(1)").height());
+        equal(grid.content.find("tr:eq(2)").height(), grid.lockedContent.find("tr:eq(2)").height());
     });
 
     test("header row height is in sync - locked column is bigger", function() {

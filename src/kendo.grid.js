@@ -4809,6 +4809,7 @@ var __meta__ = {
             idx,
             rows2 = table2[0].rows,
             containers = table1.add(table2),
+            containersLength = containers.length,
             heights = [];
 
           for (idx = 0; idx < length; idx++) {
@@ -4829,7 +4830,7 @@ var __meta__ = {
               heights.push(height);
           }
 
-          for (idx = 0, length = containers.length; idx < length; idx++) {
+          for (idx = 0; idx < containersLength; idx++) {
               containers[idx].style.display = "none";
           }
 
