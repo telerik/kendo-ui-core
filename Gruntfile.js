@@ -253,6 +253,6 @@ module.exports = function(grunt) {
     grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:timezones' ]);
     grunt.registerTask('build', [ 'kendo', 'copy:jquery', 'styles', 'license' ]);
 
-    grunt.registerTask("ci", [ 'all', 'karma:jenkins' ]);
+    grunt.registerTask('ci', [ "all", 'styles', 'karma:jenkins' ]);
     grunt.registerTask("travis", [ 'jshint', 'build', 'karma:travis' ]);
 };
