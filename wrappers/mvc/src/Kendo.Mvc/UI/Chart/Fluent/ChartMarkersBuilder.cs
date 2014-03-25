@@ -152,6 +152,66 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the function used to retrieve marker background.
+        /// </summary>
+        /// <param name="colorFunction">
+        ///     The JavaScript function that will be executed
+        ///     to retrieve the background of each marker.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .Markers(m =>
+        ///                     m.BackgroundHandler(
+        ///                         @&lt;text&gt;
+        ///                         function(point) {
+        ///                             return point.value > 5 ? "red" : "green";
+        ///                         }
+        ///                         &lt;/text&gt;
+        ///                    )
+        ///                )
+        ///             )
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartMarkersBuilder BackgroundHandler(Func<object, object> backgroundFunction)
+        {
+            lineMarkers.BackgroundHandler = new ClientHandlerDescriptor { TemplateDelegate = backgroundFunction };
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the function used to retrieve marker background.
+        /// </summary>
+        /// <param name="colorFunction">
+        ///     The JavaScript function that will be executed
+        ///     to retrieve the background of each marker.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .Markers(m => m.BackgroundHandler("backgroundFn"))
+        ///             )
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartMarkersBuilder BackgroundHandler(string backgroundFunction)
+        {
+            lineMarkers.BackgroundHandler = new ClientHandlerDescriptor { HandlerName = backgroundFunction };
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the markers rotation angle.
         /// </summary>
         /// <param name="size">The markers rotation angle.</param>
