@@ -50,7 +50,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; sh -c 'cd docs &amp;&amp; git fetch &amp;&amp; git reset --hard origin/master' &amp;&amp; bundle exec rake build:master:tests</command>
+        <command>DOCS_BRANCH=master ./build/run-build-task build:master:tests</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>git push --force origin HEAD:stable</command>

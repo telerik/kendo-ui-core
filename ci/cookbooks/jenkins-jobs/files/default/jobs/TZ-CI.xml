@@ -50,10 +50,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; export TZ=&quot;/usr/share/zoneinfo/Brazil/East&quot; &amp;&amp; sh -c 'cd docs &amp;&amp; git fetch &amp;&amp; git reset --hard origin/master' &amp;&amp; bundle exec rake tests:TZ</command>
+      <command>TZ=&quot;/usr/share/zoneinfo/Brazil/East&quot; DOCS_BRANCH=master ./build/run-build-task tests:TZ</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>export TZ=&quot;/usr/share/zoneinfo/US/Pacific&quot; &amp;&amp; sh -c 'cd docs &amp;&amp; git fetch &amp;&amp; git reset --hard origin/master' &amp;&amp; bundle exec rake tests:TZ</command>
+      <command>TZ=&quot;/usr/share/zoneinfo/US/Pacific&quot; DOCS_BRANCH=master ./build/run-build-task tests:TZ</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

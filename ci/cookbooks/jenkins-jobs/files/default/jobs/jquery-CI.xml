@@ -50,7 +50,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>npm install &amp;&amp; bundle --without development --path ~/gems &amp;&amp; sh -c 'cd docs &amp;&amp; git fetch &amp;&amp; git reset --hard origin/master' &amp;&amp; bundle exec rake tests:jquery</command>
+      <command>DOCS_BRANCH=master ./build/run-build-task tests:jquery</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
