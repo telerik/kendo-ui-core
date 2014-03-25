@@ -413,15 +413,15 @@ var __meta__ = {
 
                     date = date.getTime();
                     if (hours !== startTimeHours) {
-                        date += (startTimeHours - hours) * kendo.date.MS_PER_HOUR;
+                        date += (startTimeHours - hours) * kendoDate.MS_PER_HOUR;
                     }
                     date -= start;
 
                     if (diff) {
-                        date -= diff * kendo.date.MS_PER_MINUTE;
+                        date -= diff * kendoDate.MS_PER_MINUTE;
                     }
 
-                    diff = Math.floor(date / kendo.date.MS_PER_HOUR);
+                    diff = Math.floor(date / kendoDate.MS_PER_HOUR);
                     excess = intervalExcess(diff, interval);
 
                     if (excess !== 0) {
@@ -429,9 +429,9 @@ var __meta__ = {
                         modified = true;
                     }
                 } else if (frequency === "daily") {
-                    kendo.date.setTime(date, -start);
+                    kendoDate.setTime(date, -start);
 
-                    diff = Math.floor(date / kendo.date.MS_PER_DAY);
+                    diff = Math.floor(date / kendoDate.MS_PER_DAY);
                     excess = intervalExcess(diff, interval);
 
                     if (excess !== 0) {
@@ -446,7 +446,7 @@ var __meta__ = {
                     excess = intervalExcess(excess, interval);
 
                     if (excess !== 0) {
-                        kendo.date.setDayOfWeek(current, rule.weekStart, -1);
+                        kendoDate.setDayOfWeek(current, rule.weekStart, -1);
 
                         current.setDate(current.getDate() + (excess * 7));
                         adjustDST(current, hours);
@@ -1104,7 +1104,7 @@ var __meta__ = {
             if (diff < 0) {
                 hours = start.getHours();
                 end.setHours(hours, start.getMinutes(), start.getSeconds(), start.getMilliseconds());
-                kendo.date.adjustDST(end, hours);
+                kendoDate.adjustDST(end, hours);
             }
 
             rule._startPeriod = new Date(start);
@@ -1113,7 +1113,7 @@ var __meta__ = {
         }
 
         durationMS = event.duration();
-        rule._startTime = startTime = kendo.date.toInvariantTime(start);
+        rule._startTime = startTime = kendoDate.toInvariantTime(start);
 
         if (freq.setup) {
             freq.setup(rule, eventStart, start);
@@ -1128,7 +1128,7 @@ var __meta__ = {
             inPeriod = start >= startPeriod || endDate > startPeriod;
 
             if (inPeriod && !isException(exceptionDates, start, zone) || positions) {
-                startTime = kendo.date.toUtcTime(kendo.date.getDate(start)) + getMilliseconds(rule._startTime);
+                startTime = kendoDate.toUtcTime(kendoDate.getDate(start)) + getMilliseconds(rule._startTime);
                 endTime = startTime + durationMS;
 
                 if (eventStartMS !== start.getTime() || eventStartTime !== getMilliseconds(rule._startTime)) {
@@ -1579,7 +1579,7 @@ var __meta__ = {
             that.wrapper = that.element;
 
             options = that.options;
-            options.start = start = options.start || date.today();
+            options.start = start = options.start || kendoDate.today();
 
             if (frequencies) {
                 options.frequencies = frequencies;

@@ -411,6 +411,27 @@ var __meta__ = {
             that._defaultId = that.defaults[that.idField];
         },
 
+        _time: function(field) {
+            var date = this[field];
+            var fieldTime = field + "Time";
+
+            if (this[fieldTime]) {
+                return this[fieldTime] - kendo.date.toUtcTime(kendo.date.getDate(date));
+            }
+
+            return getMilliseconds(date);
+        },
+
+        _date: function(field) {
+            var fieldTime = field + "Time";
+
+            if (this[fieldTime]) {
+                return this[fieldTime] - this._time(field);
+            }
+
+            return kendo.date.getDate(this[field]);
+        },
+
         clone: function(options, updateUid) {
             var uid = this.uid,
                 event = new this.constructor($.extend({}, this.toJSON(), options));
@@ -440,11 +461,11 @@ var __meta__ = {
             }
 
             if (this.startTime) {
-                this.set("startTime", toInvariantDate(this.start));
+                this.set("startTime", kendo.date.toUtcTime(this.start)); //toInvariantDate(this.start));
             }
 
             if (this.endTime) {
-                this.set("endTime", toInvariantDate(this.end));
+                this.set("endTime", kendo.date.toUtcTime(this.end)); //toInvariantDate(this.end));
             }
         },
 
