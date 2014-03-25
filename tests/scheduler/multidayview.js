@@ -1205,6 +1205,7 @@
         ok(!view.content.find("td").eq(1).hasClass("k-nonwork-hour"));
         ok(view.content.find("td").last().hasClass("k-nonwork-hour"));
     });
+
     module("Multi Day View event positioning", {
         setup: function() {
             container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
@@ -1216,6 +1217,28 @@
             }
             kendo.destroy(container);
         }
+    });
+
+    test("gap below all day events if they do not start or end in 12:00 am", function() {
+        var view = setup({
+            dates: [
+                new Date("2013/6/6")
+            ]
+        });
+
+        var events = [
+            new SchedulerEvent({
+                uid:"uid",
+                start: new Date("2013/6/6 2:00"),
+                end: new Date("2013/6/6 2:00"),
+                isAllDay: true,
+                title: ""
+            })
+        ];
+
+        view.render(events);
+
+        ok(view.element.find(".k-scheduler-header-all-day td").outerHeight() >= view.element.find(".k-event").outerHeight() * 2);
     });
 
     test("event which starts at 15 minutes is positioned in the middle of the slot", function() {
