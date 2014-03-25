@@ -309,12 +309,6 @@ var __meta__ = {
         }
     }
 
-    function toInvariantDate(date) {
-        var invariant = new Date(1980, 0, 1);
-        invariant.setHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
-        return invariant;
-    }
-
     var SchedulerDataReader = kendo.Class.extend({
         init: function(schema, reader) {
             var timezone = schema.timezone;
@@ -461,11 +455,11 @@ var __meta__ = {
             }
 
             if (this.startTime) {
-                this.set("startTime", kendo.date.toUtcTime(this.start)); //toInvariantDate(this.start));
+                this.set("startTime", kendo.date.toUtcTime(this.start));
             }
 
             if (this.endTime) {
-                this.set("endTime", kendo.date.toUtcTime(this.end)); //toInvariantDate(this.end));
+                this.set("endTime", kendo.date.toUtcTime(this.end));
             }
         },
 
