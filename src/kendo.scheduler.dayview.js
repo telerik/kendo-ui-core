@@ -1464,11 +1464,13 @@ var __meta__ = {
 
             this._eventsByResource(events, this.groupedResources, eventsByResource);
 
+            var that = this;
+
             var eventsPerDate = $.map(this._dates, function(date) {
                 return Math.max.apply(null,
                     $.map(eventsByResource, function(events) {
                         return $.grep(events, function(event) {
-                            return event.isMultiDay() && isInDateRange(date, event.start, event.end);
+                            return event.isMultiDay() && that._isInDateSlot(event);
                         }).length;
                     })
                 );
