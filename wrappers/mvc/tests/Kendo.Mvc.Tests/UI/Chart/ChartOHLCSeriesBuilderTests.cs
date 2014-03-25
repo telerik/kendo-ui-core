@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI.Tests.Chart
 {
+    using System;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
@@ -8,12 +9,14 @@ namespace Kendo.Mvc.UI.Tests.Chart
     {
         private IChartOHLCSeries series;
         private ChartOHLCSeriesBuilder<OHLCData> builder;
+        private readonly Func<object, object> nullFunc;
 
         public ChartOHLCSeriesBuilderTests()
         {
             var chart = ChartTestHelper.CreateChart<OHLCData>();
             series = new ChartOHLCSeries<OHLCData, decimal, string>(s => s.Open, s => s.High, s => s.Low, s => s.Close, s => s.Color, null, s => s.NoteText);
             builder = new ChartOHLCSeriesBuilder<OHLCData>(series);
+            nullFunc = (o) => null;
         }
 
         [Fact]
@@ -27,6 +30,32 @@ namespace Kendo.Mvc.UI.Tests.Chart
         public void Aggregate_should_return_builder()
         {
             builder.Aggregate(ChartSeriesAggregate.Max).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Aggregate_should_set_Aggregate_handler_name()
+        {
+            builder.Aggregate("foo");
+            series.AggregateHandler.HandlerName.ShouldEqual("foo");
+        }
+
+        [Fact]
+        public void Aggregate_handler_name_should_return_builder()
+        {
+            builder.Aggregate("foo").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Aggregate_should_set_Aggregate_template()
+        {
+            builder.Aggregate(nullFunc);
+            series.AggregateHandler.TemplateDelegate.ShouldEqual(nullFunc);
+        }
+
+        [Fact]
+        public void Aggregate_template_should_return_builder()
+        {
+            builder.Aggregate(nullFunc).ShouldBeSameAs(builder);
         }
 
         [Fact]
