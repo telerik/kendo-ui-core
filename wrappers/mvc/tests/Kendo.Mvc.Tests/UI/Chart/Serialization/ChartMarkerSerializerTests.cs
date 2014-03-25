@@ -40,6 +40,21 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_background_handler()
+        {
+            lineMarkers.BackgroundHandler.HandlerName = "Foo";
+            GetJson()["background"].ShouldEqual(lineMarkers.BackgroundHandler);
+        }
+
+        [Fact]
+        public void Serializes_background_handler_over_background()
+        {
+            lineMarkers.Background = "Red";
+            lineMarkers.BackgroundHandler.HandlerName = "Foo";
+            GetJson()["background"].ShouldEqual(lineMarkers.BackgroundHandler);
+        }
+
+        [Fact]
         public void Serializes_border()
         {
             lineMarkers.Border.Color = "red";

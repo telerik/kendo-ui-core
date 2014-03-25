@@ -1,5 +1,6 @@
 namespace Kendo.Mvc.UI.Tests.Chart
 {
+    using System;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.UI.Fluent;
     using Xunit;
@@ -8,11 +9,13 @@ namespace Kendo.Mvc.UI.Tests.Chart
     {
         private readonly ChartMarkers markers;
         private readonly ChartMarkersBuilder builder;
+        private readonly Func<object, object> nullFunc;
 
         public ChartMarkersBuilderTests()
         {
             markers = new ChartMarkers();
             builder = new ChartMarkersBuilder(markers);
+            nullFunc = (o) => null;
         }
 
         [Fact]
@@ -41,6 +44,39 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Background("Blue");
             markers.Background.ShouldEqual("Blue");
+        }
+
+        [Fact]
+        public void Background_returns_builder()
+        {
+            builder.Background("Blue");
+            markers.Background.ShouldEqual("Blue");
+        }
+
+        [Fact]
+        public void Background_handler_sets_background_handler()
+        {
+            builder.BackgroundHandler("Foo");
+            markers.BackgroundHandler.HandlerName.ShouldEqual("Foo");
+        }
+
+        [Fact]
+        public void Background_handler_returns_builder()
+        {
+            builder.BackgroundHandler("Foo").ShouldEqual(builder);
+        }
+
+        [Fact]
+        public void Background_handler_sets_background_delegate()
+        {
+            builder.BackgroundHandler(nullFunc);
+            markers.BackgroundHandler.TemplateDelegate.ShouldEqual(nullFunc);
+        }
+
+        [Fact]
+        public void Background_handler_delegate_returns_builder()
+        {
+            builder.BackgroundHandler(nullFunc).ShouldEqual(builder);
         }
 
         [Fact]

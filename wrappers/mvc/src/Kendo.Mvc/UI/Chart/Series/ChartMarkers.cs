@@ -8,6 +8,7 @@ namespace Kendo.Mvc.UI
         public ChartMarkers()
         {
             Border = new ChartElementBorder();
+            BackgroundHandler = new ClientHandlerDescriptor();
         }
 
         /// <summary>
@@ -23,6 +24,15 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the markers background.
         /// </summary>
         public string Background
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the markers background function.
+        /// </summary>
+        public ClientHandlerDescriptor BackgroundHandler
         {
             get;
             set;
