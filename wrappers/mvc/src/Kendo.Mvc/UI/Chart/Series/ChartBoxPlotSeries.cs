@@ -28,7 +28,7 @@ using System.Collections.Generic;
             Expression<Func<TModel, TValue>> q3Expression,
             Expression<Func<TModel, TValue>> upperExpression,
             Expression<Func<TModel, TValue>> meanExpression,
-            Expression<Func<TModel, List<TValue>>> outliersExpression,
+            Expression<Func<TModel, IList<TValue>>> outliersExpression,
             Expression<Func<TModel, string>> colorExpression,
             Expression<Func<TModel, TCategory>> categoryExpression,
             Expression<Func<TModel, string>> noteTextExpression
