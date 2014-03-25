@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
     <head>
-
         <script src="mithril.js"></script>
+        <script src="http://fb.me/react-0.8.0.js"></script>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
@@ -10,19 +10,30 @@
         <script src="../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../dist/styles/web/kendo.common.min.css">
         <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
+        <style>
+            fieldset {
+                width: 500px;
+                float:left;
+            }
+        </style>
     </head>
     <body>
         <button>shuffle columns</button>
 
-        <p>
-            Mithril:<span id="m-time"></span>
-        </p>
-        <p>
-            Kendo:<span id="kendo-time"></span>
-        </p>
+        <fieldset>
+            <legend>Mithril</legend>
+            <div id="m-grid" class="k-grid k-widget"></div>
+        </fieldset>
 
-        <div id="m-grid" style="width: 500px;float:left" class="k-grid k-widget"></div>
-        <div id="grid" style="width: 500px;float:left"></div>
+        <fieldset>
+            <legend>ReactJS</legend>
+            <div id="r-grid" class="k-grid k-widget"></div>
+        </fieldset>
+
+        <fieldset>
+           <legend>Kendo UI</legend>
+           <div id="k-grid"></div>
+        </fieldset>
 
         <script>
             function now() {
@@ -47,35 +58,12 @@
                 }
             });
 
-            var kendoDataSource = new kendo.data.DataSource({
-                type: "odata",
-                transport: {
-                    read: {
-                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
-                        dataType: "jsonp"
-                    }
-                }
-            });
-
             var columns = [
                 { field: "OrderID", title: "Order ID" },
                 { field: "ShipName", title: "Ship Name" }
             ];
 
-            $("#grid").kendoGrid({
-                dataSource: kendoDataSource,
-                columns: columns,
-                scrollable: false,
-                sortable: true,
-                dataBinding: function() {
-                    this.__time__ = now();
-                },
-                dataBound: function() {
-                    console.log("k", now()-this.__time__);
-                    //$("#kendo-time").text(now() - this.__time__);
-                }
-            });
-
+            // Mithril
             function table() {
                 return m("table", { role: "grid" }, [colgroup(), thead(), tbody()]);
             }
@@ -138,7 +126,85 @@
                 return m("td", dataItem[field]);
             }
 
+            //ReactJS
+
+            var Grid = React.createClass({
+                getInitialState: function() {
+                    return { data: [] };
+                },
+                componentWillMount: function() {
+                    this.setState({ data: this.props.dataSource });
+                },
+                render: function() {
+                    return (
+                        GridTable( {
+                            columns: this.props.columns,
+                            data: this.state.data
+                        } )
+                    );
+                }
+            });
+
+            var GridTable = React.createClass({
+                tbody: function() {
+                    var rows = this.props.data.map(function(item, index) {
+                        var attr = {
+                            "data-uid": item.uid
+                        };
+
+                        if (index % 2) {
+                            attr["className"] = "k-alt";
+                        }
+
+                        return React.DOM.tr(attr, {
+                            children: this.props.columns.map(function(column) {
+                                return React.DOM.td(null, item[column.field]);
+                            }.bind(this))
+                        });
+                    }.bind(this));
+
+                    return React.DOM.tbody({
+                        children: rows
+                    });
+                },
+                thead: function() {
+                    return React.DOM.thead({ className: "k-grid-header" }, {
+                        children: [React.DOM.tr( { role: "rowgroup" }, {
+                            children: this.props.columns.map(function(column) {
+                                return React.DOM.th({
+                                    className: "k-header",
+                                    role: "columnehader",
+                                    "data-field": column.field
+                                }, column.title);
+                            })
+                        }
+                        ) ]
+                    });
+                },
+                render: function() {
+                    return React.DOM.table({
+                        children: [
+                            this.thead(),
+                            this.tbody()
+                        ]
+                    });
+                }
+            });
+
             dataSource.fetch(function() {
+                $("#k-grid").kendoGrid({
+                    dataSource: this.data(),
+                    columns: columns,
+                    scrollable: false,
+                    sortable: true,
+                    dataBinding: function() {
+                        this.__time__ = now();
+                    },
+                    dataBound: function() {
+                        console.log("kendo", now()-this.__time__);
+                    }
+                });
+
                 m.module(document.getElementById("m-grid"), {
                     controller: function() {
                     },
@@ -146,16 +212,34 @@
                         var start = now();
                         var dom = table();
                         var end = now();
-                        console.log("m", end-start);
-                        //$("#m-time").text(end-start);
+                        console.log("Mithril", end-start);
                         return dom;
                     }
                 });
-            });
 
-            setTimeout(function() {
+                var reactDataSource = new kendo.data.DataSource({
+                    data: this.data(),
+                    change: function() {
+                        var start = now();
+                        grid.setState({ data: this.view() });
+                        var end = now();
+                        console.log("ReactJS", end-start);
+                    }
+                });
+
+                var grid = Grid({
+                    dataSource: this.data(),
+                    columns: columns
+                });
+
+                var start = now();
+                React.renderComponent(grid, document.getElementById("r-grid"));
+                var end = now();
+                console.log("ReactJS", end-start);
+
                 $("#m-grid").find("th").kendoSorter({ dataSource: dataSource });
-            }, 4000);
+                $("#r-grid").find("th").kendoSorter({ dataSource: reactDataSource });
+            });
 
         </script>
     </body>
