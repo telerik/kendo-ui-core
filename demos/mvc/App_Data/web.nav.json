@@ -2400,12 +2400,6 @@
             "packages": [ "online" ],
             "items": [
                 {
-                    "text": "Kendo UI + KnockoutJS",
-                    "url": "integration/index.html",
-                    "title": "Example of KnockoutJS integration with Kendo UI Web framework",
-                    "meta": "This demo illustrates how KnockoutJS dynamic JavaScript UIs can be integrated with Kendo UI HTML5 & CSS3 Web framework."
-                },
-                {
                     "text": "Kendo UI + jQuery templates",
                     "url": "integration/jquery-templates.html",
                     "title": "Integrating jQuery templates with Kendo UI Web examples",
