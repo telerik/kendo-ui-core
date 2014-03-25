@@ -20,6 +20,7 @@ exports.afterTestFiles = [
 
     'tests/kendo-test-helpers.js',
     'tests/**/test-helper.js',
+    'demos/mvc/content/shared/js/less.js',
     'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
     'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
 
