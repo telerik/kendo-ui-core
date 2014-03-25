@@ -64,6 +64,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Specifies the actionsheet type.
+        /// </summary>
+        /// <param name="value">The value that configures the type.</param>
+        public MobileActionSheetBuilder Type(MobileActionSheetType value)
+        {
+            container.Type = value;
+
+            return this;
+        }
+        
         //<< Fields
 
 
