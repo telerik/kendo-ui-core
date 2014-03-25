@@ -1372,6 +1372,35 @@
         equalWithRound(view.datesHeader.find("div.k-event").width(), applyDefaultRightOffset(slotWidth));
     });
 
+    test("recurring multiple day event position is set to the date slot with multiple slots", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                dates: [
+                   new Date(2013, 1, 26, 0, 0, 0),
+                   new Date(2013, 1, 27, 0, 0, 0),
+                   new Date(2013, 1, 28, 0, 0, 0),
+                   new Date(2013, 1, 29, 0, 0, 0)
+                ]
+            });
+
+        var event = new SchedulerEvent({
+            id: 1,
+            recurrenceRule: "FREQ=DAILY;COUNT=3",
+            start: new Date(2013, 1, 26, 23, 0, 0),
+            end: new Date(2013, 1, 27, 9, 0, 0),
+            title: "my event"
+        });
+
+        view.render(event.expand(new Date(2013, 1, 26), new Date(2013, 1, 30)));
+
+        var eventPosition = view.content.find("div.k-event").eq(3).offset(); //offset of the second part of the event
+        var timeSlotPosition = view.content.find("tr").eq(0).find("td").eq(2).offset();
+
+        equalWithRound(eventPosition.top, timeSlotPosition.top);
+        equalWithRound(eventPosition.left, applyDefaultLeftOffset(timeSlotPosition.left));
+    });
+
+
     test("position multiday event which starts before the selected range", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({
