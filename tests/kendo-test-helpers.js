@@ -128,13 +128,6 @@ function mousewheel(element, delta) {
     $(element).trigger($.Event("mousewheel", { originalEvent: { detail: delta * 3 } }));
 }
 
-if (!$('link[rel=stylesheet][href*="kendo.common.core.min.css"]').length) {
-    $('head')
-        .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.common.core.less" />')
-        .append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" />')
-        .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.rtl.css" />');
-}
-
 (function() {
     var domContentsLength;
 
