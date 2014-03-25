@@ -23,7 +23,6 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "bar" : "column")
-                .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("gap", series.Gap, () => series.Gap.HasValue)
                 .Add("spacing", series.Spacing, () => series.Spacing.HasValue)
                 .Add("field", series.Member, () => series.Member != null)
@@ -63,6 +62,14 @@ namespace Kendo.Mvc.UI
             } if (series.Stacked.HasValue)
             {
                 result.Add("stack", series.Stacked);
+            }
+
+            if (series.AggregateHandler != null)
+            {
+                result.Add("aggregate", series.AggregateHandler);
+            } else if (series.Aggregate.HasValue)
+            {
+                result.Add("aggregate", series.Aggregate.ToString().ToLowerInvariant());
             }
 
             return result;

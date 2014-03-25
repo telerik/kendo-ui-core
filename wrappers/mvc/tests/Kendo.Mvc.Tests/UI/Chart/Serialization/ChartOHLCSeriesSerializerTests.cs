@@ -100,16 +100,31 @@ namespace Kendo.Mvc.UI.Tests
             series.Aggregates.High = ChartSeriesAggregate.Max;
             series.Aggregates.Low = ChartSeriesAggregate.Max;
             series.Aggregates.Close = ChartSeriesAggregate.Max;
-            ((Dictionary<string, object>)GetJson(series)["aggregates"])["open"].ShouldEqual("max");
-            ((Dictionary<string, object>)GetJson(series)["aggregates"])["high"].ShouldEqual("max");
-            ((Dictionary<string, object>)GetJson(series)["aggregates"])["low"].ShouldEqual("max");
-            ((Dictionary<string, object>)GetJson(series)["aggregates"])["close"].ShouldEqual("max");
+            ((Dictionary<string, object>)GetJson(series)["aggregate"])["open"].ShouldEqual("max");
+            ((Dictionary<string, object>)GetJson(series)["aggregate"])["high"].ShouldEqual("max");
+            ((Dictionary<string, object>)GetJson(series)["aggregate"])["low"].ShouldEqual("max");
+            ((Dictionary<string, object>)GetJson(series)["aggregate"])["close"].ShouldEqual("max");
         }
 
         [Fact]
         public void Should_not_serialize_default_aggregates()
         {
-            GetJson(series).ContainsKey("aggregates").ShouldBeFalse();
+            GetJson(series).ContainsKey("aggregate").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_aggregate_handler()
+        {
+            series.AggregateHandler = new ClientHandlerDescriptor { HandlerName = "Foo" };
+            GetJson(series)["aggregate"].ShouldEqual(series.AggregateHandler);
+        }
+
+        [Fact]
+        public void Should_prefer_aggregate_handler_over_aggregate()
+        {
+            series.Aggregates.Open = ChartSeriesAggregate.Max;
+            series.AggregateHandler = new ClientHandlerDescriptor { HandlerName = "Foo" };
+            GetJson(series)["aggregate"].ShouldEqual(series.AggregateHandler);
         }
 
         [Fact]
