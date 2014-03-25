@@ -31,14 +31,13 @@
             startTime: new Date("2013/6/6 10:00"),
             dates: [
                 new Date("2013/6/6"),
-                new Date("2013/6/8"),
-                new Date("2013/6/9")
+                new Date("2013/6/8")
             ]
         });
 
         var events = [
             new SchedulerEvent({
-                uid:"uid",
+                uid: "uid",
                 start: new Date("2013/6/7 10:00"),
                 end: new Date("2013/6/7 11:00"),
                 title: ""

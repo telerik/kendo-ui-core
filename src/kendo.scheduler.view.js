@@ -254,6 +254,10 @@ var __meta__ = {
                 end = this._endSlot(endTime, collections);
             }
 
+            if (!end.inRange && !start.inRange && startTime >= start.slot.end && endTime <= end.slot.start) {
+                return [];
+            }
+
             return this._continuousRange(TimeSlotRange, collections, start, end);
         },
 
