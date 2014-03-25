@@ -1,7 +1,8 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
-    using Kendo.Mvc.Infrastructure;
+using System.ComponentModel;
+using Kendo.Mvc.Infrastructure;
 
     /// <summary>
     /// Defines the fluent interface for configuring series.
@@ -148,9 +149,68 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public TSeriesBuilder Color(Func<object, object> colorFunction)
         {
             Series.ColorHandler = new ClientHandlerDescriptor { TemplateDelegate = colorFunction };
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Sets the function used to retrieve point color.
+        /// </summary>
+        /// <param name="colorFunction">
+        ///     The JavaScript function that will be executed
+        ///     to retrieve the color of each point.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Bar(s => s.Sales)
+        ///                .ColorHandler(
+        ///                    @&lt;text&gt;
+        ///                    function(point) {
+        ///                        return point.value > 5 ? "red" : "green";
+        ///                    }
+        ///                    &lt;/text&gt;
+        ///                )
+        ///             )
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder ColorHandler(Func<object, object> colorFunction)
+        {
+            Series.ColorHandler = new ClientHandlerDescriptor { TemplateDelegate = colorFunction };
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
+        /// Sets the function used to retrieve point color.
+        /// </summary>
+        /// <param name="colorFunction">
+        ///     The JavaScript function that will be executed
+        ///     to retrieve the color of each point.
+        /// </param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Bar(s => s.Sales)
+        ///                .ColorHandler("pointColor")
+        ///             )
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TSeriesBuilder ColorHandler(string colorFunction)
+        {
+            Series.ColorHandler = new ClientHandlerDescriptor { HandlerName = colorFunction };
 
             return this as TSeriesBuilder;
         }
