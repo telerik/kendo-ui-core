@@ -134,6 +134,12 @@
             equal(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
         });
 
+        test("sets div background from the current point color", function() {
+            dataPointMock.color = BLUE;
+            showNow(dataPointMock);
+            equal(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
+        });
+
         test("sets text color", function() {
             createTooltip({ color: GREEN });
             showNow(dataPointMock);

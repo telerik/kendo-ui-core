@@ -9506,9 +9506,9 @@ var __meta__ = {
             return output;
         },
 
-        _updateStyle: function(options, pointOptions) {
+        _updateStyle: function(options, point) {
             if (!defined(options.background)) {
-                options.background = pointOptions.color;
+                options.background = point.color || point.options.color;
             }
 
             if (!defined(options.color)) {
@@ -9538,7 +9538,7 @@ var __meta__ = {
 
             if (tooltip.anchor) {
                 tooltip.element.html(tooltip._pointContent(point));
-                tooltip._updateStyle(options, point.options);
+                tooltip._updateStyle(options, point);
                 tooltip.setStyle(options);
 
                 BaseTooltip.fn.show.call(tooltip, point);
@@ -9595,7 +9595,7 @@ var __meta__ = {
                 content = tooltip._content(points, category);
                 tooltip.element.html(content);
                 tooltip.anchor = tooltip._slotAnchor(coords, slot);
-                tooltip._updateStyle(options, points[0].options);
+                tooltip._updateStyle(options, points[0]);
                 tooltip.setStyle(options);
 
                 BaseTooltip.fn.show.call(tooltip);
