@@ -2,18 +2,18 @@
 
 if git remote | grep -q core;
 then
-    echo "core remote found, switching to core-master branch"
-    git checkout core-master; git pull
+    echo "core remote found, switching to core-$BRANCH branch"
+    git checkout core-$BRANCH; git pull
 else
     echo "core remote not found, adding..."
     git remote add core git@github.com:telerik/kendo-ui-core.git
     git fetch core
-    git checkout --track -b core-master core/master
+    git checkout --track -b core-$BRANCH core/$BRANCH
 fi
 
 DIFF_FILE=diff.diff
 
-find src styles tests -type f | grep -v 'tests/kendo-test-helpers.js' | xargs -I{} git diff --color origin/master -- {}>$DIFF_FILE;
+find src styles tests -type f | grep -v 'tests/kendo-test-helpers.js' | xargs -I{} git diff --color origin/$BRANCH -- {}>$DIFF_FILE;
 
 cat diff.diff
 
