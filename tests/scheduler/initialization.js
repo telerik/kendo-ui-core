@@ -205,6 +205,14 @@
         equal(scheduler.view().name, "day");
     });
 
+    test("work week view is selected", function() {
+        var scheduler = new Scheduler(container, {
+            views: ["workWeek"]
+        });
+
+        ok(scheduler.toolbar.find(".k-view-workweek").hasClass("k-state-selected"));
+    });
+
     test("view is selected", function() {
         var scheduler = new Scheduler(container, {
             views: ["day", { type: "week", selected: true }]
