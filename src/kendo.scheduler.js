@@ -348,6 +348,16 @@ var __meta__ = {
         }
     });
 
+    function applyZone(date, fromZone, toZone) {
+        if (toZone) {
+            date = kendo.timezone.convert(date, fromZone, toZone);
+        } else {
+            date = kendo.timezone.remove(date, fromZone);
+        }
+
+        return date;
+    }
+
     function dateCompareValidator(input) {
         if (input.filter("[name=end]").length) {
             var container = input.closest(".k-scheduler-edit-form");
@@ -380,13 +390,8 @@ var __meta__ = {
                         endTimezone = endTimezone || startTimezone;
 
                         if (startTimezone) {
-                            if (timezone) {
-                                start = kendo.timezone.convert(model.start, startTimezone, timezone);
-                                end = kendo.timezone.convert(model.end, endTimezone, timezone);
-                            } else {
-                                start = kendo.timezone.remove(model.start, startTimezone);
-                                end = kendo.timezone.remove(model.end, endTimezone);
-                            }
+                            start = applyZone(model.start, startTimezone, timezone);
+                            end = applyZone(model.end, endTimezone, timezone);
                         }
                     }
 
@@ -972,6 +977,33 @@ var __meta__ = {
 
             delete this._startTimezone;
             delete this._endTimezone;
+        },
+
+        _normalizeModel: function(model) {
+            var timezone = this.options.timezone;
+            var startTimezone = model.startTimezone;
+            var endTimezone = model.endTimezone;
+
+            startTimezone = startTimezone || endTimezone;
+            endTimezone = endTimezone || startTimezone;
+
+            if (startTimezone) {
+                if (!model || !model.start){
+                    console.log(model);
+                }
+                var start = applyZone(model.start, startTimezone, timezone);
+                var end = applyZone(model.end, endTimezone, timezone);
+
+                if (start > end) {
+                    if (timezone) {
+                        end = kendo.timezone.convert(model.end, timezone, endTimezone);
+                    } else {
+                        end = kendo.timezone.apply(model.end, endTimezone);
+                    }
+                }
+
+                model.end = end;
+            }
         }
     });
 
@@ -1044,6 +1076,8 @@ var __meta__ = {
 
                     if ($(this).hasClass("k-scheduler-cancel")) {
                         that._revertTimezones(model);
+                    } else {
+                        that._normalizeModel(model);
                     }
 
                     model.unbind("change", startTimezoneChange);
@@ -1471,6 +1505,7 @@ var __meta__ = {
 
                 saveButton.click(function(e) {
                     e.preventDefault();
+                    that._normalizeModel(model);
                     wnd.close();
                 });
 
