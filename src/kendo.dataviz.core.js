@@ -920,7 +920,7 @@ var __meta__ = {
 
             ChartElement.fn.init.call(text, options);
 
-            text.content = decodeEntities(content);
+            text.content = content;
 
             // Calculate size
             text.reflow(Box2D());
@@ -4125,17 +4125,6 @@ var __meta__ = {
         return -v1.x * v2.y + v1.y * v2.x < 0;
     }
 
-    function decodeEntities(text) {
-        if (!text || !text.indexOf || text.indexOf("&") < 0) {
-            return text;
-        } else {
-            var element = decodeEntities._element;
-            element.innerHTML = text;
-            return element.textContent || element.innerText;
-        }
-    }
-    decodeEntities._element = doc.createElement("span");
-
     function dateComparer(a, b) {
          if (a && b) {
              return a.getTime() - b.getTime();
@@ -4505,7 +4494,6 @@ var __meta__ = {
         autoMajorUnit: autoMajorUnit,
         boxDiff: boxDiff,
         defined: defined,
-        decodeEntities: decodeEntities,
         dateComparer: dateComparer,
         getElement: getElement,
         getSpacing: getSpacing,

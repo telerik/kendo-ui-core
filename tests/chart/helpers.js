@@ -1415,26 +1415,6 @@
     });
 
     // ------------------------------------------------------------
-    module("decodeEntities");
-
-    test("decodes HTML entities", function() {
-        equal(dataviz.decodeEntities("test &gt;"), "test >");
-    });
-
-    test("returns empty string", function() {
-        equal(dataviz.decodeEntities(""), "");
-    });
-
-    test("returns undefined", function() {
-        equal(dataviz.decodeEntities(), undefined);
-    });
-
-    test("returns other types as-is", function() {
-        equal(dataviz.decodeEntities(1), 1);
-    });
-
-
-    // ------------------------------------------------------------
     append = dataviz.append;
 
     module("append");
