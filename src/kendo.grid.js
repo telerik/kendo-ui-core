@@ -2505,7 +2505,7 @@ var __meta__ = {
                             e.stopPropagation();
                             current = cell ? current : current.parent();
 
-                            if (isLocked) {
+                            if (isLocked && !cell) {
                                 current = current.add(that._relatedRow(current));
                             }
 
