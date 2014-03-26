@@ -2808,7 +2808,7 @@ var __meta__ = {
                     .find(".k-scheduler-views li")
                     .removeClass("k-state-selected")
                     .end()
-                    .find(".k-view-" + name.replace(/\./g, "\\."))
+                    .find(".k-view-" + name.replace(/\./g, "\\.").toLowerCase())
                     .addClass("k-state-selected");
             }
         },
