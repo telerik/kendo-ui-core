@@ -402,7 +402,7 @@ var __meta__ = {
 
             WINDOW.on("load", hideBar);
 
-            kendo.onResize(function () {
+            kendo.onResize(function() {
                 setTimeout(window.scrollTo, 0, 0, 1);
             });
         },
