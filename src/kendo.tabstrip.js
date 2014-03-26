@@ -662,7 +662,7 @@ var __meta__ = {
                 tabs.each(function () {
                     content = $("<div class='" + CONTENT + "'/>");
                     if (/k-tabstrip-items/.test(this.parentNode.className)) {
-                        var index = parseInt(this.getAttribute("aria-controls").replace(/^.*-/, "")) - 1;
+                        var index = parseInt(this.getAttribute("aria-controls").replace(/^.*-/, ""), 10) - 1;
                         content = $(that.contentElement(index));
                     }
                     contents = contents.add(content);
@@ -736,7 +736,7 @@ var __meta__ = {
 
             if (contentElements.length && (items.length > contentElements.length)) {
                 contentElements.each(function(idx) {
-                    var currentIndex = parseInt(this.id.replace(tabStripID, "")),
+                    var currentIndex = parseInt(this.id.replace(tabStripID, ""), 10),
                         item = items.filter("[aria-controls=" + tabStripID + currentIndex + "]"),
                         id = tabStripID + (idx+1);
 
