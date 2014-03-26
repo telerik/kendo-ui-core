@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
   <description>Set the time zone to BRT (Brasília time) and runs all unit tests		</description>
   <logRotator class="hudson.tasks.LogRotator">
@@ -50,10 +49,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>TZ=&quot;/usr/share/zoneinfo/Brazil/East&quot; DOCS_BRANCH=master ./build/run-build-task tests:TZ</command>
+      <command>TZ="/usr/share/zoneinfo/Brazil/East" DOCS_BRANCH=master ./build/run-build-task tests:TZ</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>TZ=&quot;/usr/share/zoneinfo/US/Pacific&quot; DOCS_BRANCH=master ./build/run-build-task tests:TZ</command>
+      <command>TZ="/usr/share/zoneinfo/US/Pacific" DOCS_BRANCH=master ./build/run-build-task tests:TZ</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

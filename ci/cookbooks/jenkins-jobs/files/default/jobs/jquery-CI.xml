@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
   <description>Runs the unit test suite with supported jQuery versions	</description>
   <logRotator class="hudson.tasks.LogRotator">

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>cherry pick commits from kendo-ui-core/master to kendo/master</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.8">
+      <projectUrl>https://github.com/telerik/kendo-ui-core/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.0.4">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name>core</name>
+        <url>git@github.com:telerik/kendo-ui-core.git</url>
+        <credentialsId>5c87bc89-008e-409a-bae7-85d270f6681b</credentialsId>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.LocalBranch>
+        <localBranch>remotes/core/core-master</localBranch>
+      </hudson.plugins.git.extensions.impl.LocalBranch>
+    </extensions>
+  </scm>
+  <assignedNode>slave</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.8">
+      <spec></spec>
+    </com.cloudbees.jenkins.GitHubPushTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+export ORIGIN=git@github.com:telerik/kendo.git
+
+if [ $(git remote | wc -l) -ne 2 ]; then
+    echo &quot;Adding remote origin&quot;
+    git remote add origin $ORIGIN
+    INITIAL=true
+fi
+
+git fetch origin +refs/heads/master:private-master &amp;&gt;/dev/null
+
+if [ -z &quot;$INITIAL&quot; ]; then
+    PREVIOUS=$(git rev-parse previous)
+
+    if [ &quot;$PREVIOUS&quot; == $(git rev-parse core/master) ]; then
+        echo &quot;nothing to pick&quot;
+        exit 0
+    fi
+else
+    echo &quot;Initial fetch, skipping cherry-pick&quot;
+    git tag -f previous core/master
+    exit 0
+fi
+
+git checkout private-master &amp;&gt;/dev/null
+
+git cherry-pick previous..core/master
+
+CHERRY_PICK_RESULT=$?
+
+if [ &quot;$CHERRY_PICK_RESULT&quot; -eq 0 ]; then
+    git push origin private-master:master
+else
+    git status
+    git cherry-pick --abort
+    git reset --hard
+fi
+
+git tag -f previous core/master
+
+exit $CHERRY_PICK_RESULT
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

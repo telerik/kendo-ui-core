@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
-  <description>Builds the &apos;stable&apos; branch and publishes the build artifacts to K:\DISTRIBUTIONS\. </description>
+  <description>Builds the 'stable' branch and publishes the build artifacts to K:\DISTRIBUTIONS\. </description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>2</daysToKeep>
     <numToKeep>5</numToKeep>

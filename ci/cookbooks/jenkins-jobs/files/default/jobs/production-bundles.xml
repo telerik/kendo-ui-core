@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
+<?xml version="1.0" encoding="UTF-8"?><project>
   <actions/>
   <description>Build the bundles from productions to K:\Distributions\ </description>
   <logRotator class="hudson.tasks.LogRotator">
