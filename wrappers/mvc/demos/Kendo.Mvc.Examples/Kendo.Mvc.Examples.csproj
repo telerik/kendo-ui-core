@@ -1156,8 +1156,6 @@
     <Content Include="Content\dataviz\overview\bubble.png" />
     <Content Include="Content\dataviz\overview\donut.png" />
     <Content Include="Content\dataviz\overview\line.png" />
-    <Content Include="Content\dataviz\overview\linear-gauge.png" />
-    <Content Include="Content\dataviz\overview\multiple-axes.png" />
     <Content Include="Content\dataviz\overview\overlay.png" />
     <Content Include="Content\dataviz\overview\pie.png" />
     <Content Include="Content\dataviz\overview\radial-gauge.png" />
