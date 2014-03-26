@@ -252,4 +252,22 @@
         equal(scheduler.dataSource.calls("remove"), 0);
         equal(scheduler.dataSource.data().length, 1);
     })
+
+    test("Cancel event after edit prevent does not throw exception", 0, function() {
+        var scheduler = setup({
+            dataSource: {
+                data: [
+                    { id: 1, start: new Date(), end: new Date(), isAllDay: true, title: "my event" }
+                ]
+            },
+            edit: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        scheduler.editEvent(scheduler.dataSource.view()[0].uid);
+        scheduler._editor.container.removeAttr("data-uid");
+
+        scheduler.cancelEvent();
+    })
 })();

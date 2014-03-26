@@ -2438,7 +2438,7 @@ var __meta__ = {
             if (container) {
                 model = this._modelForContainer(container);
 
-                if (model.isOccurrence()) {
+                if (model && model.isOccurrence()) {
                     this._convertDates(model, "remove");
                     this._convertDates(this.dataSource.get(model.recurrenceId), "remove");
                 }
