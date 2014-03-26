@@ -36,7 +36,18 @@
         visible("#bar");
     });
 
-    test("parses url params upon navigation", 1, function() {
+    test("parses url params upon navigation", 2, function() {
+        window.checkParams = function(e) {
+            equal(e.view.params["foo"], "baz");
+            window.checkParams = null;
+        }
+        pane = buildPane('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar" data-show="checkParams">Bar</div>');
+        pane.navigate("#bar?foo=baz");
+        pane.navigate("#foo");
+        pane.navigate("#:back");
+    });
+
+    test("parses url params when navigating back", 1, function() {
         window.checkParams = function(e) {
             equal(e.view.params["foo"], "baz");
             window.checkParams = null;

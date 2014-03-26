@@ -61,8 +61,6 @@ var __meta__ = {
             };
 
             this._historyNavigate = function(url) {
-                var params = kendo.parseQueryStringParams(url);
-
                 if (url === BACK) {
                     if (that.history.length === 1) {
                         return;
@@ -74,7 +72,7 @@ var __meta__ = {
                     that.history.push(url);
                 }
 
-                that.historyCallback(url, params);
+                that.historyCallback(url, kendo.parseQueryStringParams(url));
             };
 
             this._historyReplace = function(url) {
