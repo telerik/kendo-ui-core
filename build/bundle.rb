@@ -144,5 +144,25 @@ def bundle(options)
         # add bundle to bundles:all
         task "internal_builds:bundles:all" => "internal_builds:bundles:#{name}"
     end
+    if options[:upload_as_release_build]
+        versioned_bundle_archive_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, "Q#{VERSION_Q} #{VERSION_YEAR}", VERSION, versioned_bundle_name(name) + ".zip")
+
+        #file_copy :to => versioned_bundle_archive_path, :from => "#{path}.zip"
+
+        desc "Upload #{name} as an release build on kendoui.com"
+        task "release_builds:bundles:#{name}" do
+                    puts versioned_bundle_archive_path
+=begin         upload_release_build \
+                :title => versioned_bundle_name(name),
+                :product => options[:product],
+                :changelog_path => changelog_path,
+                :vs_extension => !!options[:vs_extension],
+                :archive_path => versioned_bundle_archive_path
+=end                
+        end
+
+        # add bundle to bundles:all
+        task "release_builds:bundles:all" => "release_builds:bundles:#{name}"
+    end
 end
 

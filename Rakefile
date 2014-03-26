@@ -20,6 +20,7 @@ DIST_STYLES_ROOT = "dist/styles/"
 KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
 PLATFORM = RbConfig::CONFIG['host_os']
+RELEASE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI"
 
 if PLATFORM =~ /linux|darwin/
     ARCHIVE_ROOT = "/kendo-builds"
@@ -215,7 +216,89 @@ bundle :name => 'professional.trial',
             'styles' => MIN_CSS_RESOURCES,
        }
 
-# UI for ASP.NET MVC
+
+# Kendo UI Web
+bundle :name => 'web.commercial',
+       :license => 'src-license-web',
+       :eula => 'web',
+       :vsdoc => %w(web),
+       :intellisense => %w(web),
+       :type_script => %w(web),
+       :changelog => %w(web framework),
+       :demos => {
+           :suites => %w(web),
+           :dir => 'examples'
+       },
+       :product => 'Kendo UI Web',
+       :upload_as_internal_build => true,
+       :contents => {
+            'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
+            'styles' => WEB_MIN_CSS,
+            'src/js' => WEB_SRC_JS,
+            'src/styles' => WEB_SRC_CSS
+       }
+
+bundle :name => 'web.open-source',
+       :license => 'src-license-web',
+       :vsdoc => %w(web),
+       :intellisense => %w(web),
+       :type_script => %w(web),
+       :changelog => %w(web framework),
+       :demos => {
+           :suites => %w(web),
+           :dir => 'examples'
+       },
+       :contents => {
+            'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
+            'styles' => WEB_MIN_CSS,
+            'src/js' => WEB_SRC_JS,
+            'src/styles' => WEB_SRC_CSS
+       }
+
+# Kendo UI Mobile
+bundle :name => 'mobile.commercial',
+       :license => 'src-license-mobile',
+       :vsdoc => %w(mobile),
+       :intellisense => %w(mobile),
+       :type_script => %w(mobile),
+       :changelog => %w(mobile framework),
+       :demos => {
+           :suites => %w(mobile),
+           :dir => 'examples'
+       },
+       :product => 'Kendo UI Mobile',
+       :upload_as_internal_build => true,
+       :eula => 'mobile',
+       :contents => {
+            'js' => MOBILE_MIN_JS + MOBILE_MIN_JS_MAP + JQUERY_MAP,
+            'styles' => MOBILE_MIN_CSS,
+            'src/js' => MOBILE_SRC_JS,
+            'src/styles' => MOBILE_SRC_CSS
+       }
+
+# Kendo UI DataViz
+bundle :name => 'dataviz.commercial',
+       :license => 'src-license-dataviz',
+       :vsdoc => %w(dataviz),
+       :intellisense => %w(dataviz),
+       :type_script => %w(dataviz),
+       :changelog => %w(dataviz framework),
+       :eula => 'dataviz',
+       :demos => {
+           :suites => %w(dataviz),
+           :dir => 'examples'
+       },
+       :product => 'Kendo UI DataViz',
+       :upload_as_internal_build => true,
+       :upload_as_release_build => true,
+       :contents => {
+            'js' => DATAVIZ_MIN_JS + DATAVIZ_MIN_JS_MAP + JQUERY_MAP,
+            'styles' => DATAVIZ_MIN_CSS + WEB_MIN_CSS,
+            'src/js' => DATAVIZ_SRC_JS,
+            'src/styles' => DATAVIZ_SRC_CSS
+       }
+
+# Kendo Complete for ASP.NET MVC
 bundle :name => 'aspnetmvc.trial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
