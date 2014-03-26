@@ -99,7 +99,8 @@ var __meta__ = {
 
         options: {
             width: DEFAULT_WIDTH,
-            height: DEFAULT_HEIGHT
+            height: DEFAULT_HEIGHT,
+            encodeText: false
         },
 
         renderTo: function(container) {
@@ -172,7 +173,7 @@ var __meta__ = {
 
         createText: function(content, options) {
             return this.decorate(
-                new SVGText(content, options)
+                new SVGText(content, deepExtend({ encode: this.options.encodeText }, options))
             );
         },
 
@@ -294,7 +295,7 @@ var __meta__ = {
                     "style='font: #= d.options.font #; " +
                     "#= d.renderCursor() #' " +
                     "fill='#= d.options.color #'>" +
-                    "#= d.content #</text>"
+                    "#= d.renderContent() #</text>"
                 );
             }
         },
@@ -338,6 +339,16 @@ var __meta__ = {
 
             return "transform='translate(" + offsetX + "," + offsetY + ") " +
                    "rotate(" + options.rotation + "," + cx + "," + cy + ")'";
+        },
+
+        renderContent: function() {
+            var content = this.content;
+            if (this.options.encode) {
+                content = dataviz.decodeEntities(content);
+                content = kendo.htmlEncode(content);
+            }
+
+           return content;
         }
     });
 

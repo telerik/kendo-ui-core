@@ -548,7 +548,7 @@ var __meta__ = {
             var text = this;
             ViewElement.fn.init.call(text, options);
 
-            text.content = decodeEntities(content);
+            text.content = dataviz.decodeEntities(content);
         },
 
         options: {
@@ -627,17 +627,6 @@ var __meta__ = {
             );
         }
     }
-
-    function decodeEntities(text) {
-        if (!text || !text.indexOf || text.indexOf("&") < 0) {
-            return text;
-        } else {
-            var element = decodeEntities._element;
-            element.innerHTML = text;
-            return element.textContent || element.innerText;
-        }
-    }
-    decodeEntities._element = document.createElement("span");
 
     // Exports ================================================================
     if (dataviz.supportsCanvas()) {

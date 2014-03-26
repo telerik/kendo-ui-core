@@ -3802,7 +3802,7 @@ var __meta__ = {
         svg: function() {
             if (dataviz.SVGView) {
                 var model = this._getModel(),
-                    view = new dataviz.SVGView(model.options);
+                    view = new dataviz.SVGView(deepExtend({ encodeText: true }, model.options));
 
                 view.load(model);
 
@@ -4418,6 +4418,17 @@ var __meta__ = {
         return delta;
     }
 
+    function decodeEntities(text) {
+        if (!text || !text.indexOf || text.indexOf("&") < 0) {
+            return text;
+        } else {
+            var element = decodeEntities._element;
+            element.innerHTML = text;
+            return element.textContent || element.innerText;
+        }
+    }
+    decodeEntities._element = document.createElement("span");
+
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
         init: function(element) {
@@ -4495,6 +4506,7 @@ var __meta__ = {
         boxDiff: boxDiff,
         defined: defined,
         dateComparer: dateComparer,
+        decodeEntities: decodeEntities,
         getElement: getElement,
         getSpacing: getSpacing,
         inArray: inArray,
