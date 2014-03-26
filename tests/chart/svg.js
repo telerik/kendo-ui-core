@@ -520,12 +520,6 @@
                     "<text>Text</text>");
         });
 
-        test("encodes entities", function() {
-            text.content = "Foo & Bar";
-            equal(text.render().replace(/\<text.*?\>/, "<text>"),
-                    "<text>Foo &amp; Bar</text>");
-        });
-
         test("baseline is added to y", function() {
             text.options.y = 5;
             text.options.baseline = 5;
