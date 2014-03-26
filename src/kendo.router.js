@@ -202,7 +202,7 @@ var __meta__ = {
                 root: options.root,
                 historyLength: adapter.length(),
                 current: current,
-                locations: [current],
+                locations: [current]
             });
 
             adapter.change($.proxy(this, "_checkUrl"));
