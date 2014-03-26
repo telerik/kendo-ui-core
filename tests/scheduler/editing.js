@@ -1138,6 +1138,28 @@
         equal(editor.value(), "America/Toronto");
     });
 
+    test("Timezone editor uses messages.noTimezone text for optionLabel", function() {
+        var scheduler = setup({
+            messages: {
+                editor: {
+                    noTimezone: "test"
+                }
+            }
+        });
+        var model = scheduler.dataSource.data()[0];
+        var uid = model.uid;
+
+        scheduler.dataSource.view()[0].isAllDay = false;
+
+        scheduler.editEvent(uid);
+
+        var editor = scheduler._editor.container
+                              .find("[data-role=timezoneeditor]:first")
+                              .data("kendoTimezoneEditor");
+
+        equal(editor.options.optionLabel, "test");
+    });
+
     test("Click done closes timezone popup", function() {
         var scheduler = setup(),
             model = scheduler.dataSource.data()[0],

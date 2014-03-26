@@ -173,16 +173,18 @@ var __meta__ = {
                 })
                 .toggle(options.visible)
                 .appendTo(container)
-                .kendoMobileTimezoneEditor();
+                .kendoMobileTimezoneEditor({
+                    optionLabel: options.noTimezone
+                });
         },
         TIMEZONEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
-                .attr({
-                    name: options.field
-                })
+                .attr({ name: options.field })
                 .toggle(options.visible)
                 .appendTo(container)
-                .kendoTimezoneEditor();
+                .kendoTimezoneEditor({
+                    optionLabel: options.noTimezone
+                });
         };
 
     function timezoneButtonText(model, message) {
@@ -877,8 +879,8 @@ var __meta__ = {
 
             if (kendo.timezone.windows_zones && !model.isAllDay) {
                 fields.push({ field: "timezone", title: messages.editor.timezone, editor: editors.timezonePopUp, click: click, messages: messages.editor, model: model });
-                fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: editors.timezone });
-                fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: editors.timezone });
+                fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: editors.timezone, noTimezone: messages.editor.noTimezone });
+                fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: editors.timezone, noTimezone: messages.editor.noTimezone });
             }
 
             if (!model.recurrenceId) {
@@ -3382,7 +3384,7 @@ var __meta__ = {
             var length = data.length;
 
             if (optionLabel) {
-                html += template({ other_zone: "", name: this.options.optionLabel });
+                html += template({ other_zone: "", name: optionLabel });
             }
 
             for (; idx < length; idx++) {
