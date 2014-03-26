@@ -361,7 +361,7 @@
         var PanUndoUnit = Class.extend({
             init: function (initialPosition, finalPosition, diagram) {
                 this.initial = initialPosition;
-                this.final = finalPosition;
+                this.finalPos = finalPosition;
                 this.diagram = diagram;
                 this.title = "Pan Unit";
             },
@@ -369,7 +369,7 @@
                 this.diagram.pan(this.initial);
             },
             redo: function () {
-                this.diagram.pan(this.final);
+                this.diagram.pan(this.finalPos);
             }
         });
 

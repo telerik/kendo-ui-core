@@ -309,7 +309,7 @@ var __meta__ = {
                 }
             },
             handles: {
-                type: "rectangle",
+                type: "rectangle"
             },
             select: {
                 stroke: {
