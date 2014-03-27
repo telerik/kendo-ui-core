@@ -137,6 +137,15 @@
         equal(layout.element.find("#container").html(), '<div>' + view.element.html() + '</div>');
     });
 
+    test("triggers init when the view is available in the DOM", 1, function() {
+        var layout = new kendo.Layout("<div><span id='container' /></div>" ),
+            foo = new kendo.View('<span id="foo">Foo</span>', { init: function() { equal(layout.element.find("#foo").length, 1); } });
+
+        layout.render();
+
+        layout.showIn('#container', foo);
+    });
+
     test("triggers view show when replacing views", 1, function() {
         var layout = new kendo.Layout("<div><span id='container' /></div>" ),
             foo = new kendo.View('<span>Foo</span>', { show: function() { ok(true); } });

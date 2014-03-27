@@ -76,7 +76,6 @@ var __meta__ = {
 
         showStart: function() {
             this.element.css("display", "");
-            this.trigger(SHOW);
         },
 
         showEnd: function() {
@@ -212,7 +211,7 @@ var __meta__ = {
             container = new ViewContainer(element);
 
             container.bind("accepted", function(e) {
-                element.append(e.view.render());
+                e.view.render(element);
             });
 
             return container;
