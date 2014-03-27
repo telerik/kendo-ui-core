@@ -1262,6 +1262,30 @@
         deepEqual(model.end, new Date(2014, 1, 21, 11, 30));
     });
 
+    test("Closing the window does not throw exception when update start/end", function() {
+        var scheduler = setup({
+                timezone: "Etc/UTC"
+            }),
+            model = scheduler.dataSource.data()[0],
+            uid = model.uid;
+
+        model.set("start", new Date(2014, 1, 21, 9));
+        model.set("end", null);
+
+        scheduler.dataSource.view()[0].isAllDay = false;
+
+        scheduler.editEvent(uid);
+        scheduler._editor.container.find(".k-edit-field > a").click();
+
+        model.set("startTimezone", "Europe/London");
+        model.set("endTimezone", "Africa/Cairo");
+
+        scheduler._editor._timezonePopup.find(".k-scheduler-savetimezone").click();
+
+        deepEqual(model.start, new Date(2014, 1, 21, 9));
+        deepEqual(model.end, null);
+    });
+
     test("Click checkbox toggles endTimezone editor widget", function() {
         var scheduler = setup(),
             model = scheduler.dataSource.data()[0],
