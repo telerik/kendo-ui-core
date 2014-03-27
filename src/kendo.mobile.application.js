@@ -254,8 +254,10 @@ var __meta__ = {
             that.osCssClass = osCssClass(that.os, that.options);
 
             if (os.wp) {
-                $(window).off("focusin", refreshBackgroundColor);
-                document.removeEventListener("resume", refreshBackgroundColor);
+                if (refreshBackgroundColor) {
+                    $(window).off("focusin", refreshBackgroundColor);
+                    document.removeEventListener("resume", refreshBackgroundColor);
+                }
 
                 if (!os.skin) {
                     that.element.parent().css("overflow", "hidden");
