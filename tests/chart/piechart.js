@@ -606,6 +606,13 @@
             equal(pieSegment.options.color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            createPieChart({
+                data: [1, 2],
+                color: function() { ok(true); }
+            });
+        });
+
         test("color fn argument contains value", 1, function() {
             createPieChart({
                 color: function(p) { equal(p.value, 1); }

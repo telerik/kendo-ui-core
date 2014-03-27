@@ -420,6 +420,12 @@
             equal(scatterPoint.color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            createScatterChart({
+                color: function() { ok(true); }
+            });
+        });
+
         test("color fn argument contains value", 1, function() {
             createScatterChart({
                 data: [[1, 1]],

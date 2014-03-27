@@ -408,6 +408,17 @@
             equal(points[0].options.color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            createBubbleChart({
+                dataSource: null,
+                series: [{
+                    type: "bubble",
+                    data: [[1, 10, 100]],
+                    color: function() { ok(true); }
+                }]
+            });
+        });
+
         test("color fn argument contains value", 2, function() {
             createBubbleChart({
                 dataSource: null,

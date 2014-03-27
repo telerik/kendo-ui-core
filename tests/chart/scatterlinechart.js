@@ -524,6 +524,12 @@
             equal(scatterLinePoint.color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            createScatterLineChart({
+                color: function() { ok(true); }
+            });
+        });
+
         test("color fn argument contains value", 1, function() {
             createScatterLineChart({
                 data: [[1, 1]],

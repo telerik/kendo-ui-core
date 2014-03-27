@@ -1814,6 +1814,15 @@
             equal(barChart.points[0].color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            barChart = new dataviz.BarChart(plotArea, {
+                series: [{
+                    data: [0, 1],
+                    color: function() { ok(true); }
+                }]
+            });
+        });
+
         test("color fn argument contains value", 1, function() {
             new dataviz.BarChart(plotArea, {
                 series: [{
