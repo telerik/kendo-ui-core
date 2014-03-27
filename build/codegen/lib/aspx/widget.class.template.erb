@@ -7,15 +7,12 @@ using System.Web.Script.Serialization;
 
 using Telerik.Web.UI<%= csharp_namespace == 'Telerik.Web.UI' ? ".#{root_component.owner_namespace}" : '' %>;
 
-[assembly: WebResource("<%= script_resource_path %>", "text/javascript")]
-
 namespace <%= csharp_namespace %>
 {
     /// <summary>
     ///
     /// </summary>
     [ParseChildren(ChildrenAsProperties = true)]
-    [ClientScriptResource("<%= script_component_type %>", "<%= script_resource_path %>")]
     public partial class <%= csharp_class %> : RadWebControl
     {
         #region [ Constructor ]
@@ -37,6 +34,12 @@ namespace <%= csharp_namespace %>
         {
             base.DescribeComponent(descriptor);
             descriptor.AddScriptProperty("_options", serializer.Serialize(this));
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            ScriptObjectBuilder.RegisterCssReferences(this);
         }
 
         #endregion [ Overrides ]
