@@ -46,7 +46,10 @@ var __meta__ = {
                 position: "center center",
                 align: "center center",
                 effect: "fade:in",
-                className: "km-modalview-root"
+                className: "km-modalview-root",
+                hide: function(e) {
+                    that.trigger(CLOSE);
+                }
             });
 
             if (kendo.support.mobileOS.wp) {

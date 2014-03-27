@@ -14,7 +14,7 @@
             root.html('<div data-role="view">\
                 <a id="source" data-role="button" href="#modalView" data-rel="modalview">Foo</a>\
                 </div>\
-                <div data-role="modalview" id="modalView">\
+                <div data-role="modalview" id="modalView" data-modal="false">\
                 Hello world!\
                 </div>');
             app = new kendo.mobile.Application(root);
@@ -39,6 +39,13 @@
     test("Is hidden when closed", 1, function() {
         modalView.open();
         modalView.close();
+        equal(root.find(".km-shim").css("display"), "none");
+    });
+
+    test("Tapping the shim closes the modalview", 2, function() {
+        modalView.open();
+        modalView.bind("close", function() { ok(true) });
+        tap(root.find(".km-shim"));
         equal(root.find(".km-shim").css("display"), "none");
     });
 
