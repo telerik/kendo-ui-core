@@ -420,7 +420,7 @@ var __meta__ = {
                                '#}#' +
                            '</div>',
             eventTimeTemplate: "#if(data.isAllDay) {#" +
-                            "all day" +
+                            '#=this.options.messages.allDay#' +
                           "#} else { #" +
                             '#=kendo.format(format, start, end)#' +
                           "# } #",
@@ -439,7 +439,8 @@ var __meta__ = {
             messages: {
                 event: "Event",
                 date: "Date",
-                time: "Time"
+                time: "Time",
+                allDay: "all day"
             }
         }
     });

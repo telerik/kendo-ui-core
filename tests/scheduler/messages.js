@@ -33,6 +33,45 @@
         equal(allDayText, "custom");
     });
 
+     test("allDay message is changed correctly in agenda view", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            messages: {
+               allDay: "custom"
+            },
+            views: ["agenda"],
+            dataSource: {
+                data: [{
+                    title: "test",
+                    isAllDay: true,
+                    start: new Date("2013/6/6"),
+                    end: new Date("2013/6/6")
+                }]
+            }
+        });
+
+        var allDayText= $(scheduler.element.find(".k-scheduler-timecolumn div")[0]).text();
+        equal(allDayText, "custom");
+    });
+
+    test("default allDay message is set correctly in agenda view", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            views: ["agenda"],
+            dataSource: {
+                data: [{
+                    title: "test",
+                    isAllDay: true,
+                    start: new Date("2013/6/6"),
+                    end: new Date("2013/6/6")
+                }]
+            }
+        });
+
+        var allDayText= $(scheduler.element.find(".k-scheduler-timecolumn div")[0]).text();
+        equal(allDayText, "all day");
+    });
+
     test("allDay message is changed correctly in week view", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
