@@ -145,9 +145,16 @@ def bundle(options)
         task "internal_builds:bundles:all" => "internal_builds:bundles:#{name}"
     end
     if options[:upload_as_release_build]
-        versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, "Q#{VERSION_Q} #{VERSION_YEAR}", versioned_bundle_name(name) + ".zip")
-        versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, "Production", versioned_bundle_name(name) + ".zip")
+      if defined? VERSION_SERVICE_PACK
+           versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}", versioned_bundle_name(name) + ".zip")
+
+           FileUtils.mkdir_p(File.dirname(versioned_bundle_destination_path))
+      else
+           versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, "Q#{VERSION_Q} #{VERSION_YEAR}", versioned_bundle_name(name) + ".zip")
+           FileUtils.mkdir_p(File.dirname(versioned_bundle_destination_path))
+      end 
         
+        versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, "Production", versioned_bundle_name(name) + ".zip")
     #    file_copy :to => versioned_bundle_destination_path, :from => versioned_bundle_archive_path
 
         desc "Upload #{name} as an release build on telerik.com"
