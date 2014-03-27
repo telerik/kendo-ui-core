@@ -16,6 +16,7 @@
     <%= Html.Kendo().DatePicker()
           .Name("datepicker")
           .Value(DateTime.Today)
+          .Events(e => e.Open("onOpen"))
           .Footer("Today - #=kendo.toString(data, 'd') #")
           .MonthTemplate("# if ($.inArray(+data.date, birthdays) != -1) { #" +
                              "<div class=\"birthday\"></div>" +
@@ -34,11 +35,12 @@
         ];
 </script>
 <script>
-    $(document).ready(function () {
-        $("#datepicker").data("kendoDatePicker")
-                        .dateView.calendar.element
-                        .width(340);
-    });
+    function onOpen() {
+        var dateViewCalendar = this.dateView.calendar;
+        if (dateViewCalendar) {
+            dateViewCalendar.element.width(340);
+        }
+    };
 </script>
 
 <style scoped>
