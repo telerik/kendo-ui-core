@@ -1463,7 +1463,7 @@ var __meta__ = {
                 return Math.max.apply(null,
                     $.map(eventsByResource, function(events) {
                         return $.grep(events, function(event) {
-                            return event.isMultiDay() && that._isInDateSlot(event);
+                            return event.isMultiDay() && isInDateRange(date, getDate(event.start), getDate(event.end));
                         }).length;
                     })
                 );
