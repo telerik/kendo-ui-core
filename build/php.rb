@@ -3,10 +3,12 @@ PHP_WRAPPERS_ROOT = 'wrappers/php/'
 PHP_DEMOS_ROOT = PHP_WRAPPERS_ROOT
 PHP_DEMOS_SRC_ROOT = PHP_DEMOS_ROOT
 PHP_LIB_SRC = FileList[PHP_WRAPPERS_ROOT + '/lib/**/*.*']
-
-PHP_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*'].exclude('**/globalization/**/*')
-PHP_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
 PHP_DEMOS_RESOURCES = PHP_DEMOS_SRC_ROOT + 'content/'
+
+PHP_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*']
+                .exclude('**/globalization/**/*')
+
+PHP_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
 
 PHP_DEMOS_SRC = FileList[PHP_DEMOS_SRC_ROOT + '**/*'].exclude('**/tests/**')
                     .include(FileList[PHP_DEMOS_SHARED_CONTENT]
@@ -15,6 +17,12 @@ PHP_DEMOS_SRC = FileList[PHP_DEMOS_SRC_ROOT + '**/*'].exclude('**/tests/**')
                     )
                     .include(FileList[PHP_DEMOS_NAVIGATION]
                          .sub('demos/mvc/App_Data/', PHP_DEMOS_RESOURCES)
+                    )
+                    .include(FileList[COMPLETE_MIN_JS]
+                        .sub(DIST_JS_ROOT, PHP_DEMOS_RESOURCES + "js")
+                    )
+                    .include(FileList[MIN_CSS_RESOURCES]
+                        .sub('dist/styles', PHP_DEMOS_RESOURCES + "css")
                     )
 
 tree :to => PHP_DEMOS_RESOURCES,
