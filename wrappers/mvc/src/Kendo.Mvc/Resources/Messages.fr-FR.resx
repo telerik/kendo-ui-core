@@ -235,7 +235,7 @@
     <value>Annuler les modifications</value>
   </data>
   <data name="Grid_SaveChanges" xml:space="preserve">
-    <value>Entregistrer les modifications</value>
+    <value>Enregistrer les modifications</value>
   </data>
   <data name="Pager_Refresh" xml:space="preserve">
     <value>Actualiser</value>
