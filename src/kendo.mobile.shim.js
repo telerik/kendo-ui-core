@@ -16,6 +16,8 @@ var __meta__ = {
         ui = kendo.mobile.ui,
         Popup = kendo.ui.Popup,
         SHIM = '<div class="km-shim"/>',
+        SHOW = "show",
+        HIDE = "hide",
         Widget = ui.Widget;
 
     var Shim = Widget.extend({
@@ -73,6 +75,8 @@ var __meta__ = {
             kendo.notify(that);
         },
 
+        events: [ SHOW, HIDE ],
+
         options: {
             name: "Shim",
             modal: false,
@@ -84,11 +88,13 @@ var __meta__ = {
 
         show: function() {
             this.popup.open();
+            this.trigger(SHOW);
         },
 
         hide: function(e) {
             if (!e || !$.contains(this.shim.children().children(".k-popup")[0], e.target)) {
                 this.popup.close();
+                this.trigger(HIDE);
             }
         },
 
