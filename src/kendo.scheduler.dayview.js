@@ -504,7 +504,7 @@ var __meta__ = {
                         cellCount = 0;
                     }
 
-                    var start = kendo.date.addDays(this.startDate(), cellCount);
+                    var start = this._dates[cellCount];
 
                     var currentTime = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
 
@@ -532,7 +532,7 @@ var __meta__ = {
                 }
 
                 if (this.options.allDaySlot) {
-                    view.addDaySlotCollection(this._dates[0], this._dates[this._dates.length - 1]);
+                    view.addDaySlotCollection(this._dates[0], kendo.date.addDays(this._dates[this._dates.length - 1], 1));
                 }
             }
 
@@ -1428,13 +1428,15 @@ var __meta__ = {
 
                        ranges = group.slotRanges(event);
 
-                       element = this._createEventElement(event, !isMultiDayEvent);
+                       if (ranges.length) {
+                           element = this._createEventElement(event, !isMultiDayEvent);
 
-                       this._positionAllDayEvent(element, ranges[0]);
+                           this._positionAllDayEvent(element, ranges[0]);
 
-                       addContinuousEvent(group, ranges[0], element, true);
+                           addContinuousEvent(group, ranges[0], element, true);
 
-                       element.appendTo(container);
+                           element.appendTo(container);
+                       }
                     }
                 }
             }
