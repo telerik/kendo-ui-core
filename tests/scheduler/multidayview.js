@@ -1241,6 +1241,35 @@
         ok(view.element.find(".k-scheduler-header-all-day td").outerHeight() >= view.element.find(".k-event").outerHeight() * 2);
     });
 
+    test("leaves empty space after all day slot", function() {
+        var view = setup({
+            dates: [
+               new Date("2013/6/6"),
+               new Date("2013/6/7"),
+            ]
+        });
+
+        var events = [
+            new SchedulerEvent({
+                uid:"uid",
+                start: new Date("2013/6/6"),
+                end: new Date("2013/6/6"),
+                isAllDay: true,
+                title: "event"
+            }), new SchedulerEvent({
+                uid:"uid",
+                start: new Date("2013/6/7"),
+                end: new Date("2013/6/7"),
+                isAllDay: true,
+                title: "event"
+            })
+        ];
+
+        view.render(events);
+
+        equalWithRound(view.element.find(".k-scheduler-header-all-day td").height(), view.element.find(".k-event").height() * 2);
+    });
+
     test("event which starts at 15 minutes is positioned in the middle of the slot", function() {
         var view = setup({
             majorTick: 60,
@@ -2260,5 +2289,6 @@
 
         equal(view.element.find("div.k-event>div").length, 0);
     });
+
 
 })();
