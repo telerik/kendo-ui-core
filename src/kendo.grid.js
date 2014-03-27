@@ -2119,7 +2119,8 @@ var __meta__ = {
             var that = this,
                 model = that._modelForContainer(row),
                 related,
-                tmp,
+                newRow,
+                nextRow,
                 isAlt = row.hasClass("k-alt");
 
             if (model) {
@@ -2129,11 +2130,18 @@ var __meta__ = {
                     that._relatedRow(row.last()).replaceWith(related);
                 }
 
-                tmp = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
-                row.replaceWith(tmp);
+                newRow = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
+                row.replaceWith(newRow);
 
                 if (related) {
-                    adjustRowHeight(tmp[0], related[0]);
+                    adjustRowHeight(newRow[0], related[0]);
+                }
+
+                nextRow = newRow.next();
+                if (nextRow.hasClass("k-detail-row") && nextRow.is(":visible")) {
+                    newRow.find(".k-hierarchy-cell .k-icon")
+                        .removeClass("k-plus")
+                        .addClass("k-minus");
                 }
             }
         },

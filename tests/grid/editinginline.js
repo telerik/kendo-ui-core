@@ -571,4 +571,20 @@
         deepEqual(grid.table.find("tr:first")[0], grid.editable.validatable.element[1]);
     });
 
+    test("cancel edit updates detail icon status", function() {
+        var grid = setup({
+            columns: [ "foo", "name"],
+            editable: "inline",
+            detailTemplate: "detail template"
+        });
+
+        grid.expandRow(grid.table.find("tr:first"));
+
+        grid.editRow(grid.table.find("tr:first"));
+
+        grid.cancelRow();
+
+        ok(grid.table.find(".k-icon:first").hasClass("k-minus"));
+        ok(!grid.table.find(".k-icon:first").hasClass("k-plus"));
+    });
 })();
