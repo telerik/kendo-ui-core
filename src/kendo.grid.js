@@ -4019,20 +4019,23 @@ var __meta__ = {
         _appendLockedColumnContent: function() {
             var columns = this.columns,
                 idx,
-                colgroup = this.table.find("col:not(.k-group-col,.k-hierarchy-col)"),
+                colgroup = this.table.find("colgroup"),
+                cols = colgroup.find("col:not(.k-group-col,.k-hierarchy-col)"),
                 length,
-                cols = $(),
+                lockedCols = $(),
                 container;
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked && !columns[idx].hidden) {
-                    cols = cols.add(colgroup.eq(idx));
+                    lockedCols = lockedCols.add(cols.eq(idx));
                 }
             }
 
             container = $('<div class="k-grid-content-locked"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><tbody></tbody></table></div>');
-            colgroup = container.find("colgroup");
-            colgroup.append(cols);
+            // detach is required for IE8, otherwise it switches to compatibility mode
+            colgroup.detach();
+            container.find("colgroup").append(lockedCols);
+            colgroup.insertBefore(this.table.find("tbody"));
 
             this.lockedContent = container.insertBefore(this.content);
             this.lockedTable = container.children("table");
