@@ -248,14 +248,36 @@ var __meta__ = {
 
             var start = this._startSlot(startTime, collections);
 
+            if (!start.inRange && startTime >= start.slot.end) {
+                start = null;
+            }
+
             var end = start;
 
             if (startTime < endTime) {
                 end = this._endSlot(endTime, collections);
             }
 
-            if (!end.inRange && !start.inRange && startTime >= start.slot.end && endTime <= end.slot.start) {
+            if (end && !end.inRange && endTime <= end.slot.start) {
+                end = null;
+            }
+
+            if (start == null && end == null) {
                 return [];
+            }
+
+            if (start == null) {
+                start = {
+                    inRange: true,
+                    slot: collections[end.slot.collectionIndex].first()
+                };
+            }
+
+            if (end == null) {
+                end = {
+                    inRange: true,
+                    slot: collections[start.slot.collectionIndex].last()
+                };
             }
 
             return this._continuousRange(TimeSlotRange, collections, start, end);
@@ -266,10 +288,36 @@ var __meta__ = {
 
             var start = this._startSlot(startTime, collections, isAllDay);
 
+            if (!start.inRange && startTime >= start.slot.end) {
+                start = null;
+            }
+
             var end = start;
 
             if (startTime < endTime) {
                 end = this._endSlot(endTime, collections, isAllDay);
+            }
+
+            if (end && !end.inRange && endTime <= end.slot.start) {
+                end = null;
+            }
+
+            if (start == null && end == null) {
+                return [];
+            }
+
+            if (start == null) {
+                do {
+                    startTime += kendo.date.MS_PER_DAY;
+                    start = this._startSlot(startTime, collections, isAllDay);
+                } while (!start.inRange && startTime >= start.slot.end);
+            }
+
+            if (end == null) {
+                do {
+                    endTime -= kendo.date.MS_PER_DAY;
+                    end = this._endSlot(endTime, collections, isAllDay);
+                } while (!end.inRange && endTime <= end.slot.start);
             }
 
             return this._continuousRange(DaySlotRange, collections, start, end);
