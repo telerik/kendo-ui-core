@@ -983,16 +983,15 @@ var __meta__ = {
             var timezone = this.options.timezone;
             var startTimezone = model.startTimezone;
             var endTimezone = model.endTimezone;
+            var start = model.start;
+            var end = model.end;
 
             startTimezone = startTimezone || endTimezone;
             endTimezone = endTimezone || startTimezone;
 
-            if (startTimezone) {
-                if (!model || !model.start){
-                    console.log(model);
-                }
-                var start = applyZone(model.start, startTimezone, timezone);
-                var end = applyZone(model.end, endTimezone, timezone);
+            if (start && end && startTimezone) {
+                start = applyZone(start, startTimezone, timezone);
+                end = applyZone(end, endTimezone, timezone);
 
                 if (start > end) {
                     if (timezone) {
