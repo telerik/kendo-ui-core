@@ -300,6 +300,7 @@
         createNotification();
 
         notification.show("foo");
+
         stop();
 
         setTimeout(function(){
