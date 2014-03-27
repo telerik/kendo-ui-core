@@ -469,11 +469,6 @@
             ok(text.render().indexOf(">Text</kvml:textbox>") != -1);
         });
 
-        test("encodes entities", function() {
-            text.content = "Foo & Bar";
-            ok(text.render().indexOf("Foo &amp; Bar") != -1);
-        });
-
         test("sets position on text", function() {
             ok(text.render().indexOf("position: absolute; left: 0px; top: 0px;") > -1);
         });
@@ -648,11 +643,6 @@
 
         test("renders content", function() {
             ok(text.render().indexOf("string='test'") != -1);
-        });
-
-        test("encodes entities", function() {
-            text.content = "Foo & Bar";
-            ok(text.render().indexOf("Foo &amp; Bar") != -1);
         });
 
         test("sets position on the shape of the text", function() {

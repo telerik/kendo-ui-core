@@ -482,6 +482,30 @@
             equal(ctx.log.fillText[0].content, "Text");
         });
 
+        test("decodes HTML entities", function() {
+            text = new dataviz.CanvasText("test &gt;");
+            text.render(ctx);
+            equal(ctx.log.fillText[0].content, "test >");
+        });
+
+        test("renders empty content", function() {
+            text = new dataviz.CanvasText("");
+            text.render(ctx);
+            equal(ctx.log.fillText[0].content, "");
+        });
+
+        test("handles undefined content", function() {
+            text = new dataviz.CanvasText();
+            text.render(ctx);
+            equal(ctx.log.fillText[0].content, undefined);
+        });
+
+        test("handles non-string content", function() {
+            text = new dataviz.CanvasText(1);
+            text.render(ctx);
+            equal(ctx.log.fillText[0].content, 1);
+        });
+
         test("baseline is added to y", function() {
             text.options.y = 5;
             text.options.baseline = 5;
