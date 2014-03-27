@@ -546,6 +546,29 @@
         equal(view.content.find(".k-event .k-event-template").last().text(), "my event");
     });
 
+    test("event is rendered with correct time title", 2, function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                dates: [
+                   selectedDate
+                ]
+            });
+
+        var recur = new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 24, 10, 0, 0), end: new Date(2013, 1, 24, 11, 0, 0), title: "my event", recurrenceRule: "FREQ=DAILY" });
+        var recurAll = new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 24), end: new Date(2013, 1, 24), isAllDay: true, title: "my event", recurrenceRule: "FREQ=DAILY" });
+
+        var events = recur.expand(selectedDate, new Date(2013, 1, 27));
+        events = events.concat(recurAll.expand(selectedDate, new Date(2013, 1, 27)));
+
+        view.render(events);
+
+        var eventTitle = view.content.find("div.k-event").find("div").first().attr("title");
+        var alldayTitle = view.datesHeader.find("div.k-event").find("div").first().attr("title");
+
+        equal(eventTitle, "(10:00 AM - 11:00 AM): my event");
+        equal(alldayTitle, "(12:00 AM): my event");
+    });
+
     test("custom event template", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({

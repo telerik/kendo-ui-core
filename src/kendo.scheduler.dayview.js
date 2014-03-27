@@ -1256,24 +1256,35 @@ var __meta__ = {
                 endDate = new Date(endDate.getTime() + MS_PER_DAY);
             }
 
+            var eventStartDate = event.start;
             var eventEndDate = event.end;
 
             if (event.isAllDay) {
                 eventEndDate = getDate(event.end);
             }
 
-            if ((!isInDateRange(getDate(event.start), startDate, endDate) &&
+            if ((!isInDateRange(getDate(eventStartDate), startDate, endDate) &&
                 !isInDateRange(eventEndDate, startDate, endDate)) ||
                 (isOneDayEvent && eventStartTime < startTime && eventEndTime > endTime)) {
 
                 middle = true;
-            } else if (getDate(event.start) < startDate || (isOneDayEvent && eventStartTime < startTime)) {
+            } else if (getDate(eventStartDate) < startDate || (isOneDayEvent && eventStartTime < startTime)) {
                 tail = true;
             } else if ((eventEndDate > endDate && !isOneDayEvent) || (isOneDayEvent && eventEndTime > endTime)) {
                 head = true;
             }
 
             var resources = this.eventResources(event);
+
+            if (event.startTime) {
+                eventStartDate = new Date(eventStartTime);
+                eventStartDate = kendo.timezone.apply(eventStartDate, "Etc/UTC");
+            }
+
+            if (event.endTime) {
+                eventEndDate = new Date(eventEndTime);
+                eventEndDate = kendo.timezone.apply(eventEndDate, "Etc/UTC");
+            }
 
             return $(template(extend({}, {
                 ns: kendo.ns,
@@ -1286,8 +1297,8 @@ var __meta__ = {
                 resources: resources,
                 inverseColor: resources && resources[0] ? this._shouldInverseResourceColor(resources[0]) : false
             }, event, {
-                start: event.startTime || event.start,
-                end: event.endTime || event.end
+                start: eventStartDate,
+                end: eventEndDate
             })));
         },
 
