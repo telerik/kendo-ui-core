@@ -262,18 +262,18 @@ var __meta__ = {
                 end = null;
             }
 
-            if (start == null && end == null) {
+            if (start === null && end === null) {
                 return [];
             }
 
-            if (start == null) {
+            if (start === null) {
                 start = {
                     inRange: true,
                     slot: collections[end.slot.collectionIndex].first()
                 };
             }
 
-            if (end == null) {
+            if (end === null) {
                 end = {
                     inRange: true,
                     slot: collections[start.slot.collectionIndex].last()
@@ -302,18 +302,18 @@ var __meta__ = {
                 end = null;
             }
 
-            if (start == null && end == null) {
+            if (start === null && end === null) {
                 return [];
             }
 
-            if (start == null) {
+            if (start === null) {
                 do {
                     startTime += kendo.date.MS_PER_DAY;
                     start = this._startSlot(startTime, collections, isAllDay);
                 } while (!start.inRange && startTime >= start.slot.end);
             }
 
-            if (end == null) {
+            if (end === null) {
                 do {
                     endTime -= kendo.date.MS_PER_DAY;
                     end = this._endSlot(endTime, collections, isAllDay);
