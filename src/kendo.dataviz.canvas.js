@@ -548,7 +548,7 @@ var __meta__ = {
             var text = this;
             ViewElement.fn.init.call(text, options);
 
-            text.content = content;
+            text.content = dataviz.decodeEntities(content);
         },
 
         options: {

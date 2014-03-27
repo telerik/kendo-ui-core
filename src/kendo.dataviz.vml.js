@@ -244,7 +244,7 @@ var __meta__ = {
                     "font: #= d.options.font #; color: #= d.options.color #; " +
                     "visibility: #= d.renderVisibility() #; white-space: nowrap; " +
                     "#= d.renderCursor() #'>" +
-                    "${ d.content }</kvml:textbox>"
+                    "#= d.content #</kvml:textbox>"
                 );
             }
         },
@@ -299,7 +299,7 @@ var __meta__ = {
                     "#= d.renderPath() #" +
                     "<kvml:fill color='#= d.options.color #' />" +
                     "<kvml:textpath on='true' style='font: #= d.options.font #;' " +
-                    "fitpath='false' string='${ d.content }' /></kvml:shape>"
+                    "fitpath='false' string='#= d.content #' /></kvml:shape>"
                 );
             }
         },
