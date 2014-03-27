@@ -25,6 +25,12 @@ SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*
                          .sub('demos/mvc/App_Data/', SPRING_DEMOS_RESOURCES)
                     )
                     .include(FileList[SPRING_DEMOS_RESOURCES + '**/*'])
+                    .include(FileList[COMPLETE_MIN_JS]
+                        .sub(DIST_JS_ROOT, SPRING_DEMOS_RESOURCES + "js")
+                    )
+                    .include(FileList[MIN_CSS_RESOURCES]
+                        .sub('dist/styles', SPRING_DEMOS_RESOURCES + "css")
+                    )
 
 # Delete all resource files copied by `rake java:assets`
 CLEAN.include(FileList[SPRING_DEMOS_RESOURCES + '**/*'])
