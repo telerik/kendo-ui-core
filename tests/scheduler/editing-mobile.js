@@ -489,30 +489,6 @@
         equal($(".k-timezone-button").text(), "America/Toronto");
     });
 
-    test("Click save button normalizes model based on new timezones", function() {
-        var scheduler = setup({
-                timezone: "Etc/UTC"
-            }),
-            model = scheduler.dataSource.data()[0],
-            uid = model.uid;
-
-        model.set("start", new Date(2014, 1, 21, 9));
-        model.set("end", new Date(2014, 1, 21, 9, 30));
-
-        model.isAllDay = false;
-        scheduler.editEvent(uid);
-
-        $(".k-timezone-button").click();
-
-        model.set("startTimezone", "Europe/London");
-        model.set("endTimezone", "Africa/Cairo");
-
-        $(".k-scheduler-timezones").parents("[data-role=view]").find(".k-scheduler-update").click();
-
-        deepEqual(model.start, new Date(2014, 1, 21, 9));
-        deepEqual(model.end, new Date(2014, 1, 21, 11, 30));
-    });
-
     test("Select start timezone enables checkbox", function() {
         var scheduler = setup(),
             model = scheduler.dataSource.data()[0],

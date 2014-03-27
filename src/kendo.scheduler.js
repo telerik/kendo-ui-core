@@ -390,8 +390,8 @@ var __meta__ = {
                         endTimezone = endTimezone || startTimezone;
 
                         if (startTimezone) {
-                            start = applyZone(model.start, startTimezone, timezone);
-                            end = applyZone(model.end, endTimezone, timezone);
+                            start = applyZone(start, startTimezone, timezone);
+                            end = applyZone(end, endTimezone, timezone);
                         }
                     }
 
@@ -977,32 +977,6 @@ var __meta__ = {
 
             delete this._startTimezone;
             delete this._endTimezone;
-        },
-
-        _normalizeModel: function(model) {
-            var timezone = this.options.timezone;
-            var startTimezone = model.startTimezone;
-            var endTimezone = model.endTimezone;
-            var start = model.start;
-            var end = model.end;
-
-            startTimezone = startTimezone || endTimezone;
-            endTimezone = endTimezone || startTimezone;
-
-            if (start && end && startTimezone) {
-                start = applyZone(start, startTimezone, timezone);
-                end = applyZone(end, endTimezone, timezone);
-
-                if (start > end) {
-                    if (timezone) {
-                        end = kendo.timezone.convert(model.end, timezone, endTimezone);
-                    } else {
-                        end = kendo.timezone.apply(model.end, endTimezone);
-                    }
-
-                    model.end = end;
-                }
-            }
         }
     });
 
@@ -1075,8 +1049,6 @@ var __meta__ = {
 
                     if ($(this).hasClass("k-scheduler-cancel")) {
                         that._revertTimezones(model);
-                    } else {
-                        that._normalizeModel(model);
                     }
 
                     model.unbind("change", startTimezoneChange);
@@ -1504,7 +1476,6 @@ var __meta__ = {
 
                 saveButton.click(function(e) {
                     e.preventDefault();
-                    that._normalizeModel(model);
                     wnd.close();
                 });
 
