@@ -3447,6 +3447,7 @@ var __meta__ = {
             }
 
             if (doEval) {
+                options = deepExtend({}, options);
                 evalOptions(options, {
                     value: value,
                     category: category,
@@ -3805,7 +3806,7 @@ var __meta__ = {
                 invertAxes: options.invertAxes
             }, series);
 
-            chart.evalPointOptions(
+            bulletOptions = chart.evalPointOptions(
                 bulletOptions, value, category, categoryIx, series, seriesIx
             );
 
@@ -5855,7 +5856,7 @@ var __meta__ = {
                 pointOptions = deepExtend({}, series),
                 pointType = chart.pointType();
 
-            chart.evalPointOptions(
+            pointOptions = chart.evalPointOptions(
                 pointOptions, value, category, categoryIx, series, seriesIx
             );
 

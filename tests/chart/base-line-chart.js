@@ -674,6 +674,13 @@ function baseLineChartTests(seriesName, TChart) {
             equal(linePoint.marker.options.border.color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            createCustomChart({
+                markers: { visible: true },
+                color: function() { ok(true) }
+            });
+        });
+
         test("color fn argument contains value", 1, function() {
             createCustomChart({
                 data: [1],

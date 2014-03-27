@@ -329,6 +329,13 @@
             equal(ohlcPoint.options.color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            createOHLCChart({
+                data: [[3,4,2,1], [3,4,2,1]],
+                color: function() { ok(true); }
+            });
+        });
+
         test("color fn argument contains value", 1, function() {
             createOHLCChart({
                 color: function(p) { equal(p.value.open, 3); }

@@ -94,6 +94,16 @@
             equal(bulletChart.points[0].options.color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            bulletChart = new dataviz.BulletChart(plotArea, {
+                series: [{
+                    type: "bullet",
+                    data: [[0, 0], [1, 1]],
+                    color: function() { ok(true); }
+                }]
+            });
+        });
+
         test("color fn argument contains value", 2, function() {
             new dataviz.BulletChart(plotArea, {
                 series: [{

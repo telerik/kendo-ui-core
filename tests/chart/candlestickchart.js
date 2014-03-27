@@ -463,6 +463,13 @@
             equal(candlestick.options.color, "#f00");
         });
 
+        test("applies color function for each point", 2, function() {
+            createCandlestickChart({
+                data: [[1,4,2,3], [1,4,2,3]],
+                color: function(bubble) { ok(true); }
+            });
+        });
+
         test("color fn argument contains value", 1, function() {
             createCandlestickChart({
                 color: function(c) { equal(c.value.open, 1); }
