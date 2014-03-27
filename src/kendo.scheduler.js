@@ -999,9 +999,9 @@ var __meta__ = {
                     } else {
                         end = kendo.timezone.apply(model.end, endTimezone);
                     }
-                }
 
-                model.end = end;
+                    model.end = end;
+                }
             }
         }
     });
