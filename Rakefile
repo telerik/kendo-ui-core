@@ -192,6 +192,7 @@ bundle :name => 'professional.commercial',
        },
        :product => 'Kendo UI Professional',
        :upload_as_internal_build => true,
+       :upload_as_release_build => true,
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -214,7 +215,8 @@ bundle :name => 'professional.trial',
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
-       }
+       },
+       :upload_as_release_build => true
 
 
 # Kendo UI Web

@@ -145,13 +145,16 @@ def bundle(options)
         task "internal_builds:bundles:all" => "internal_builds:bundles:#{name}"
     end
     if options[:upload_as_release_build]
-        versioned_bundle_archive_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, "Q#{VERSION_Q} #{VERSION_YEAR}", VERSION, versioned_bundle_name(name) + ".zip")
+        versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, "Q#{VERSION_Q} #{VERSION_YEAR}", versioned_bundle_name(name) + ".zip")
+        versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, "Production", versioned_bundle_name(name) + ".zip")
+        
+    #    file_copy :to => versioned_bundle_destination_path, :from => versioned_bundle_archive_path
 
-        #file_copy :to => versioned_bundle_archive_path, :from => "#{path}.zip"
+        desc "Upload #{name} as an release build on telerik.com"
 
-        desc "Upload #{name} as an release build on kendoui.com"
         task "release_builds:bundles:#{name}" do
-                    puts versioned_bundle_archive_path
+            cp versioned_bundle_archive_path, versioned_bundle_destination_path
+            #puts VERSION_SERVICE_PACK
 =begin         upload_release_build \
                 :title => versioned_bundle_name(name),
                 :product => options[:product],
