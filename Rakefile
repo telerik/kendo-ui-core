@@ -21,6 +21,7 @@ KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
 PLATFORM = RbConfig::CONFIG['host_os']
 RELEASE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI"
+WEB_INSTALLER_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\Guidance\\CurrentWebInstaller"
 
 if PLATFORM =~ /linux|darwin/
     ARCHIVE_ROOT = "/kendo-builds"
@@ -192,7 +193,13 @@ bundle :name => 'professional.commercial',
        },
        :product => 'Kendo UI Professional',
        :upload_as_internal_build => true,
-       :upload_as_release_build => true,
+       :release_build => {
+           :zip => true,
+           :msi => true,
+           :xml => true,
+           :download_builder => true,
+           :common_installer => true
+       },
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -216,7 +223,11 @@ bundle :name => 'professional.trial',
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
        },
-       :upload_as_release_build => true
+       :release_build => {
+          :zip => true,
+          :msi => true,
+          :xml => true  
+       }
 
 
 # Kendo UI Web
@@ -233,7 +244,9 @@ bundle :name => 'web.commercial',
        },
        :product => 'Kendo UI Web',
        :upload_as_internal_build => true,
-       :upload_as_release_build => true,
+       :release_build => {
+          :zip => true
+       },
        :contents => {
             'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
             'styles' => WEB_MIN_CSS,
@@ -250,6 +263,9 @@ bundle :name => 'web.open-source',
        :demos => {
            :suites => %w(web),
            :dir => 'examples'
+       },
+       :release_build => {
+          :zip => true
        },
        :contents => {
             'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
@@ -271,7 +287,9 @@ bundle :name => 'mobile.commercial',
        },
        :product => 'Kendo UI Mobile',
        :upload_as_internal_build => true,
-       :upload_as_release_build => true,
+       :release_build => {
+          :zip => true
+       },
        :eula => 'mobile',
        :contents => {
             'js' => MOBILE_MIN_JS + MOBILE_MIN_JS_MAP + JQUERY_MAP,
@@ -294,7 +312,9 @@ bundle :name => 'dataviz.commercial',
        },
        :product => 'Kendo UI DataViz',
        :upload_as_internal_build => true,
-       :upload_as_release_build => true,
+       :release_build => {
+          :zip => true
+       },
        :contents => {
             'js' => DATAVIZ_MIN_JS + DATAVIZ_MIN_JS_MAP + JQUERY_MAP,
             'styles' => DATAVIZ_MIN_CSS + WEB_MIN_CSS,
@@ -320,6 +340,13 @@ bundle :name => 'aspnetmvc.trial',
            ],
            :template_dir => 'mvc'
        },
+       :release_build => {
+          :zip => true,
+          :msi => true,
+          :xml => true,
+          :nuget => true,
+          :common_installer => true,
+       },
        :contents => {
             'js' => TRIAL_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -344,7 +371,9 @@ bundle :name => 'aspnetmvc.hotfix.trial',
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
        :changelog => %w(components aspnetmvc),
-       :upload_as_release_build => true,
+       :release_build => {
+         :zip => true
+       },
        :contents => {
             'js' => TRIAL_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -373,7 +402,14 @@ bundle :name => 'aspnetmvc.commercial',
        },
        :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => false,
-       :upload_as_release_build => true,
+       :release_build => {
+          :zip => true,
+          :msi => true,
+          :xml => true,
+          :nuget => true,
+          :common_installer => true,
+          :demos => true
+       },
        :contents => {
             'js' => MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -441,7 +477,9 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
        :changelog => %w(components aspnetmvc),
        :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => true,
-       :upload_as_release_build => true,
+       :release_build => {
+          :zip => true
+       },
        :vs_extension => true,
        :contents => {
             'js' => MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
@@ -485,7 +523,9 @@ bundle :name => 'jsp.trial',
        :readme => 'README.KendoUI.Trial',
        :changelog => %w(components jsp),
        :type_script => %w(all web mobile dataviz),
-       :upload_as_release_build => true,
+       :release_build => {
+          :zip => true
+        },
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -503,7 +543,9 @@ bundle :name => 'jsp.commercial',
        :changelog => %w(components jsp),
        :product => 'UI for JSP',
        :upload_as_internal_build => true,
-       :upload_as_release_build => true,
+       :release_build => {
+         :zip => true
+        },
        :type_script => %w(all web mobile dataviz),
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
@@ -526,7 +568,9 @@ bundle :name => 'php.trial',
        :readme => 'README.KendoUI.Trial',
        :changelog => %w(components php),
        :type_script => %w(all web mobile dataviz),
-       :upload_as_release_build => true,
+       :release_build => {
+          :zip => true
+        },
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -542,7 +586,9 @@ bundle :name => 'php.commercial',
        :changelog => %w(components php),
        :product => 'UI for PHP',
        :upload_as_internal_build => true,
-       :upload_as_release_build => true,
+       :release_build => {
+          :zip => true
+        },
        :type_script => %w(all web mobile dataviz),
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
