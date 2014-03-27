@@ -224,7 +224,7 @@ var __meta__ = {
                    var slot = collection.at(slotIndex);
 
                    if (x >= slot.offsetLeft && x < slot.offsetLeft + slot.clientWidth &&
-                       y >= slot.offsetTop && y < slot.offsetTop + slot.clientHeight) {
+                       y >= slot.offsetTop && y <= slot.offsetTop + slot.clientHeight) {
                        return slot;
                    }
                }

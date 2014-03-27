@@ -1869,6 +1869,19 @@
         equalWithRound(eventElements.eq(2).offset().top, eventSlotOffset.top);
     });
 
+    test("slot by position when the cursor is over the border", function() {
+        var view = new MyWorkWeekView(container,  {
+            date: new Date(),
+            workWeekStart: 0,
+        });
+
+        var row = view.content.find("tr:first");
+        var offset = row.find("td:first").offset();
+        var slot = view._slotByPosition(offset.left, offset.top + row.find("td:first").innerHeight());
+
+        ok(slot);
+    });
+
     test("set top of multiple overlapping all day events in same slot", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({
