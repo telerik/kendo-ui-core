@@ -2996,7 +2996,7 @@ var __meta__ = {
 
                 that.content = that.table.parent();
 
-                if (that.content.is(".k-virtual-scrollable-wrap")) {
+                if (that.content.is(".k-virtual-scrollable-wrap, .km-scroll-container")) {
                     that.content = that.content.parent();
                 }
 
