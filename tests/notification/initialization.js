@@ -301,8 +301,6 @@
 
         notification.show("foo");
 
-        stop();
-
         setTimeout(function(){
             start();
             var notificationPopup = $(".k-notification");
