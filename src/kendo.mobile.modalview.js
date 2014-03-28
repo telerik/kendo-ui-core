@@ -37,7 +37,7 @@ var __meta__ = {
             that.wrapper = element.parent().css({
                 width: options.width || width || 300,
                 height: options.height || height || 300
-            });
+            }).addClass(height == "auto" ? " km-auto-height" : "");
 
             element.css({ width: "", height: "" });
 
