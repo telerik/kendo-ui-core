@@ -59,6 +59,19 @@ test("set triggers only once the change event if value is the same", 1, function
     viewModel.set("foo.foo", "baz");
 });
 
+test("set bind to change once with composite paths", 1, function() {
+    var viewModel = kendo.observable({ foo: { foo: [] }});
+
+    // This works: viewModel.foo.set("foo", []);
+    viewModel.set("foo.foo", []);
+
+    viewModel.bind("change", function() {
+        ok(true, "change is raised");
+    });
+
+    viewModel.get("foo.foo").push(1);
+});
+
 test("change event arguments provide the name of the field", function() {
     expect(1);
 
