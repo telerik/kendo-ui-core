@@ -515,7 +515,7 @@ def get_type_script(name, sources, jsdoc)
 
     suite = name.match(/kendo\.([^.]*)\.d\.ts/).captures.first
 
-    suite = 'mobile' if suite == 'icenium'
+    suite = 'mobile' if suite == 'appbuilder'
 
     TYPE_SCRIPT.result(binding)
 end
@@ -528,7 +528,7 @@ class TypeScriptTask < Rake::FileTask
 
         $stderr.puts("Creating #{name}") if VERBOSE
 
-        jsdoc = name.include?('icenium')
+        jsdoc = name.include?('appbuilder')
 
         File.write(name, get_type_script(name, prerequisites, jsdoc))
     end

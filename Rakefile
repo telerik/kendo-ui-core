@@ -79,7 +79,7 @@ def md_api_suite(suite)
         FileList["docs/api/mobile/*.md"]
         .include('docs/api/framework/*.md')
 
-    when 'icenium'
+    when 'appbuilder'
         FileList["docs/api/mobile/*.md"]
         .include('docs/api/framework/*.md')
     end
@@ -461,12 +461,12 @@ bundle :name => 'winjs.commercial',
             '.' => WIN_JS_RESOURCES
        }
 
-bundle :name => 'icenium',
-       :license => 'src-license-icenium',
+bundle :name => 'appbuilder',
+       :license => 'src-license-appbuilder',
        :type_script => %w(mobile),
        :contents => {
-            'styles' => ICENIUM_MIN_CSS,
-            'js' => ICENIUM_MIN_JS + JQUERY_MAP
+            'styles' => APP_BUILDER_MIN_CSS,
+            'js' => APP_BUILDER_MIN_JS + JQUERY_MAP
        }
 
 # UI for JSP
@@ -573,7 +573,7 @@ BUNDLES = [
     'web.commercial',
     'web.open-source',
     'winjs.commercial',
-    'icenium'
+    'appbuilder'
 ]
 
 namespace :build do
@@ -625,17 +625,17 @@ namespace :build do
 
         zip_bundles.push("#{ARCHIVE_ROOT}/WinJS/#{destination}")
 
-        tree :to => "#{ARCHIVE_ROOT}/Icenium/#{destination}/js",
-             :from => FileList[ICENIUM_MIN_JS].pathmap('dist/bundles/icenium/js/%f'),
-             :root => 'dist/bundles/icenium/js'
+        tree :to => "#{ARCHIVE_ROOT}/AppBuilder/#{destination}/js",
+             :from => FileList[APP_BUILDER_MIN_JS].pathmap('dist/bundles/appbuilder/js/%f'),
+             :root => 'dist/bundles/appbuilder/js'
 
-        zip_bundles.push("#{ARCHIVE_ROOT}/Icenium/#{destination}/js")
+        zip_bundles.push("#{ARCHIVE_ROOT}/AppBuilder/#{destination}/js")
 
-        tree :to => "#{ARCHIVE_ROOT}/Icenium/#{destination}/styles",
-             :from => FileList[ICENIUM_MIN_CSS].sub!(/dist\/styles\/(mobile|dataviz)/, 'dist/bundles/icenium/styles'),
-             :root => 'dist/bundles/icenium/styles'
+        tree :to => "#{ARCHIVE_ROOT}/AppBuilder/#{destination}/styles",
+             :from => FileList[APP_BUILDER_MIN_CSS].sub!(/dist\/styles\/(mobile|dataviz)/, 'dist/bundles/appbuilder/styles'),
+             :root => 'dist/bundles/appbuilder/styles'
 
-        zip_bundles.push("#{ARCHIVE_ROOT}/Icenium/#{destination}/styles")
+        zip_bundles.push("#{ARCHIVE_ROOT}/AppBuilder/#{destination}/styles")
 
         clean_task = "#{ARCHIVE_ROOT}/#{destination}"
 
