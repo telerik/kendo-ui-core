@@ -106,7 +106,8 @@ module.exports = function(grunt) {
 
                     files: [].concat(
                         TESTS.beforeTestFiles,
-                        TESTS.ciFiles,
+                        //TESTS.ciFiles, //commented for test purposes
+                        allKendoFiles,
                         TESTS.afterTestFiles,
                         tests
                     )
