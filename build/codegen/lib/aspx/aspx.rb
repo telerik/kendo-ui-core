@@ -517,6 +517,18 @@ module CodeGen
                     @@converters
                 end
 
+                def self.write_file(file_path, content, marker)
+                    return unless File.exists?(file_path)
+
+                    region_regexp = Regexp.new("#region\s#{Regexp.escape(marker)}(.*)#endregion\s#{Regexp.escape(marker)}", Regexp::MULTILINE)
+
+                    c = File.read(file_path).gsub(region_regexp) { "#region #{marker}\n#{content}\n#endregion #{marker}" }
+
+                    File.open(file_path, 'w') do |f|
+                        f.write(c)
+                    end
+                end
+
                 def component(component)
                     write_class(component)
                     write_converter(component)
@@ -558,11 +570,11 @@ module CodeGen
 
                     properties_content = write_options(component.options)
 
-                    write_file(file_path, properties_content, '[ Properties ]')
+                    Generator.write_file(file_path, properties_content, '[ Properties ]')
 
                     if !component.widget?
                         is_default_content = write_is_default(component.options)
-                        write_file(file_path, is_default_content, '[ IsDefault ]')
+                        Generator.write_file(file_path, is_default_content, '[ IsDefault ]')
                     end
 
                 end
@@ -608,8 +620,8 @@ module CodeGen
                     composite_content = write_options(composite.options)
                     is_default_content = write_is_default(composite.options)
 
-                    write_file(filename, composite_content, '[ Properties ]')
-                    write_file(filename, is_default_content, '[ IsDefault ]')
+                    Generator.write_file(filename, composite_content, '[ Properties ]')
+                    Generator.write_file(filename, is_default_content, '[ IsDefault ]')
 
                     write_viewstate(composite)
 
@@ -661,7 +673,7 @@ module CodeGen
 
                     composite_content = write_converter_options(composite.options)
 
-                    write_file(filename, composite_content, '[ SerializedProperties ]')
+                    Generator.write_file(filename, composite_content, '[ SerializedProperties ]')
                 end
 
                 def write_array_item_class(item)
@@ -671,7 +683,7 @@ module CodeGen
 
                     content = write_options(item.options)
 
-                    write_file(file_name, content, '[ Properties ]')
+                    Generator.write_file(file_name, content, '[ Properties ]')
 
                     write_viewstate(item)
 
@@ -689,9 +701,9 @@ module CodeGen
 
                     file_name = File.join(@path, "#{owner.csharp_class}.cs")
 
-                    write_file(file_name, load_viewstate_content, '[ LoadViewState ]')
-                    write_file(file_name, save_viewstate_content, '[ SaveViewState ]')
-                    write_file(file_name, track_viewstate_content, '[ TrackViewState ]')
+                    Generator.write_file(file_name, load_viewstate_content, '[ LoadViewState ]')
+                    Generator.write_file(file_name, save_viewstate_content, '[ SaveViewState ]')
+                    Generator.write_file(file_name, track_viewstate_content, '[ TrackViewState ]')
                 end
 
                 def write_viewstate_content(options, action)
@@ -702,18 +714,6 @@ module CodeGen
                         content += "\n"
                     end
                     content
-                end
-
-                def write_file(file_path, content, marker)
-                    return unless File.exists?(file_path)
-
-                    region_regexp = Regexp.new("#region\s#{Regexp.escape(marker)}(.*)#endregion\s#{Regexp.escape(marker)}", Regexp::MULTILINE)
-
-                    c = File.read(file_path).gsub(region_regexp) { "#region #{marker}\n#{content}\n#endregion #{marker}" }
-
-                    File.open(file_path, 'w') do |f|
-                        f.write(c)
-                    end
                 end
 
                 def create_file(file_path, content)
