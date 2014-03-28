@@ -17,13 +17,13 @@ def maps(list)
 end
 
 ASPNET_MVC = File.join(DIST_JS_ROOT, 'kendo.aspnetmvc.js')
-JS_BUNDLES = in_dist FileList[ 'kendo.web.js', 'kendo.dataviz.js', 'kendo.mobile.js', 'kendo.all.js', 'kendo.winjs.js', 'kendo.icenium.js' ]
+JS_BUNDLES = in_dist FileList[ 'kendo.web.js', 'kendo.dataviz.js', 'kendo.mobile.js', 'kendo.all.js', 'kendo.winjs.js', 'kendo.dataviz.mobile.js' ]
 
 JQUERY = File.join(DIST_JS_ROOT, "jquery.min.js")
 JQUERY_MAP = FileList[File.join(DIST_JS_ROOT, 'jquery.min.map')]
 
 # Suites
-COMPLETE_JS = dependencies("all")
+COMPLETE_JS = dependencies("all").include('dist/js/kendo.dataviz.mobile.js')
 
 MIN_JS = FileList[COMPLETE_JS - JS_BUNDLES - CULTURES_AND_TIMEZONES].include(ASPNET_MVC).ext('min.js')
 
@@ -56,7 +56,7 @@ CDN_MIN_JS_MAP = FileList[MVC_MIN_JS_MAP]
 WIN_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.winjs.min.js')]
 WIN_SRC_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.winjs.js')]
 
-ICENIUM_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.icenium.min.js')].include(JQUERY)
+APP_BUILDER_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.dataviz.mobile.min.js')].include(JQUERY)
 
 CORE_SRC_JS = dependencies("ui.core")
 CORE_MIN_JS = CORE_SRC_JS.ext('min.js').include(JQUERY)
