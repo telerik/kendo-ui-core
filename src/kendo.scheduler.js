@@ -99,7 +99,7 @@ var __meta__ = {
         MOBILEDATERANGEEDITOR = function(container, options) {
             var attr = { name: options.field };
             var datepicker_role = !input_support.date ? kendo.attr("role") + '="datepicker" ' : "";
-            var datetimepicker_role = !input_support.datetimelocal ? kendo.attr("role") + '="datetimepicker" ' : "";
+            var datetimepicker_role = kendo.attr("role") + '="datetimepicker" ';
 
             appendTimezoneAttr(attr, options);
             appendDateCompareValidator(attr, options);
@@ -841,7 +841,7 @@ var __meta__ = {
             recurrence: MOBILERECURRENCEEDITOR,
             description: '<textarea name="description" class="k-textbox"/>',
             multipleResources: multiSelectResourceEditorMobile,
-            resources: dropDownResourceEditorMobile
+            resources: dropDownResourceEditor
         },
         desktop: {
             dateRange: DATERANGEEDITOR,
@@ -2840,8 +2840,13 @@ var __meta__ = {
         },
 
         resize: function(force) {
-            var size = this.getSize(),
-                currentSize = this._size;
+            var size = this.getSize();
+            var currentSize = this._size;
+            var view = this.view();
+
+            if (!view.groups) {
+                return;
+            }
 
             if (force || !currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
                 this.refresh({ action: "resize" });

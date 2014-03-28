@@ -813,4 +813,12 @@
 
         kendo.resize(container);
     });
+
+    test("resize method does nothing if view is destroyed", 0, function() {
+        var scheduler = new Scheduler(container);
+
+        scheduler.view().destroy();
+
+        scheduler.resize(true);
+    });
 })();
