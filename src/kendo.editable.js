@@ -203,11 +203,18 @@ var __meta__ = {
                 isBoolean = typeof e.value === "boolean",
                 input,
                 preventChangeTrigger = that._validationEventInProgress,
-                values = {};
+                values = {},
+                bindAttribute = kendo.attr("bind"),
+                attributeValue = (isBoolean ? 'checked:' : 'value:') + e.field.replace(nameSpecialCharRegExp, "\\$1");
 
             values[e.field] = e.value;
 
-            input = $(':input[' + kendo.attr("bind") + '*="' + (isBoolean ? 'checked:' : 'value:') + e.field.replace(nameSpecialCharRegExp, "\\$1") + '"]', that.element);
+            input = $(':input[' + bindAttribute + '*="' + attributeValue + '"]', that.element);
+            if (input.length > 1) {
+                input = input.filter(function () {
+                    return inArray(attributeValue, $(this).attr(bindAttribute).split(",")) >= 0;
+                });
+            }
 
             try {
                 that._validationEventInProgress = true;

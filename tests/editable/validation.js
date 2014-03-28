@@ -532,6 +532,35 @@
         equal(validateInput.args("validateInput", 0)[0].length, 1);
     });
 
+    test("changing model field validates only inputs with the same field name when there are other fields with the same start of the name", function() {
+        var MyModel = Model.define({
+            fields: {
+                foo: {
+                    field: "foo",
+                    validation: {
+                        required: true
+                    }
+                }
+            }
+        }),
+        model = new MyModel({ foo: "bar", fooOther: "bar" }),
+        editable = new Editable(div, { fields: [{
+            field: "foo",
+            editor: function(container) {
+                container.append($('<input data-bind="value:foo" />'));
+            }
+        }, {
+            field: "fooOther",
+            editor: function(container) {
+                container.append($('<input data-bind="value:fooOther" />'));
+            }
+        }], model: model }),
+        validateInput = stub(editable.validatable, "validateInput");
+
+        model.set("foo", "baz");
+        equal(validateInput.args("validateInput", 0)[0].length, 1);
+    });
+
     test("changing boolean model field validates the input", function() {
         var MyModel = Model.define({
             fields: {
