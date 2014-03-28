@@ -86,8 +86,100 @@ def upload_internal_build(options)
     bot.find("[value='Save']").click
     Thread.current.send :sleep, 6
 end
+def release_build_file_copy(release_build_config, name)
+    if defined? SERVICE_PACK_NUMBER
+        destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}"
+    else
+        destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}"
+    end
+
+    versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, destination_folder_name)
+    versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, "Production")
 
 
+    FileUtils.mkdir_p(versioned_bundle_destination_path)
+
+    if release_build_config[:zip]
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :vbd => versioned_bundle_name(name),
+      :extension => ".zip"
+
+      #destination_zip = File.join(versioned_bundle_destination_path, versioned_bundle_name(name) + ".zip")
+      #archive_zip = File.join(versioned_bundle_archive_path, versioned_bundle_name(name) + ".zip")
+      #cp archive_zip, destination_zip
+    end
+    if release_build_config[:msi]
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :vbd => versioned_bundle_name(name),
+      :extension => ".msi"
+      #destionation_msi = File.join(versioned_bundle_destination_path, versioned_bundle_name(name)  + ".msi") 
+      #archive_msi = File.join(versioned_bundle_archive_path, versioned_bundle_name(name)  + ".msi") 
+      #cp archive_msi, destionation_msi
+    end
+    if release_build_config[:xml]
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :vbd => versioned_bundle_name(name),
+      :extension => ".xml"
+      #destionation_xml = File.join(versioned_bundle_destination_path, versioned_bundle_name(name)  + ".xml") 
+      #archive_xml = File.join(versioned_bundle_archive_path, versioned_bundle_name(name)  + ".xml") 
+      #cp archive_xml, destionation_xml
+    end
+    if release_build_config[:nuget]
+      build_path_and_copy \
+      #:destination =>  versioned_bundle_destination_path,
+      #:archive => versioned_bundle_archive_path,
+      #:vbd => versioned_bundle_name(name),
+      #:extension => "nupkg.zip"
+       #destionation_nuget = File.join(versioned_bundle_destination_path, versioned_bundle_name(name)  + ".zip") 
+       #archive_nuget = File.join(versioned_bundle_archive_path, versioned_bundle_name(name)  + ".zip") 
+       #cp archive_nuget, destionation_nuget
+    end
+    if release_build_config[:download_builder]
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :static_name => "download-builder" 
+      #destination_path = File.join(versioned_bundle_destination_path, "download-builder")
+      #archive_path = File.join(versioned_bundle_archive_path, "download-builder") 
+      #cp_r(archive_path, destination_path)
+      #cp archive_path, destionation_path
+      
+    end
+    if release_build_config[:demos]
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :static_name => "online-examples.zip" 
+      #destionation_demos = File.join(versioned_bundle_destination_path, "online-examples.zip") 
+      #archive_demos = File.join(versioned_bundle_archive_path, "online-examples.zip") 
+      #cp archive_demos, destionation_demos
+    end
+    if release_build_config[:common_installer]
+      archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikControlPanelSetup.exe")
+      cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.MVC.#{VERSION}.exe")
+      cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.KUI.Complete.#{VERSION}.exe") 
+
+      archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikUIForAspNetMvcSetup.exe")
+      cp archive_file, File.join(versioned_bundle_destination_path, "TelerikUIForAspNetMvcSetup.#{VERSION}.exe")
+    end
+        
+end
+def build_path_and_copy(options)
+   if options[:static_name]
+    destination = File.join(options[:destination], options[:static_name])
+    archive = File.join(options[:archive], options[:static_name])
+   else
+    destination = File.join(options[:destination], options[:vbd] + options[:extension])
+    archive = File.join(options[:archive], options[:vbd] + options[:extension])
+   end
+   cp archive, destination
+end
 
 desc "Upload release builds"
 task "release_builds:upload" do
