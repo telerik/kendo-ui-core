@@ -65,7 +65,7 @@ module CodeGen
             AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
 
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", StringHelpers.ToCamelCase(convertable.<%= csharp_name %>.ToString()), "<%= value_to_s(values[0]) %>");')
+            AddProperty(state, "<%= name %>", StringHelpers.ToCamelCase(convertable.<%= csharp_name %>.ToString()), <%= csharp_default %>.ToString());')
 
             LOAD_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).LoadViewState(viewState[i++]);')
 
