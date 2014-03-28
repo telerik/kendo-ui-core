@@ -456,12 +456,16 @@ var __meta__ = {
 
         set: function(field, value) {
             var that = this,
+                composite = field.indexOf(".") >= 0,
                 current = kendo.getter(field, true)(that);
 
             if (current !== value) {
 
                 if (!that.trigger("set", { field: field, value: value })) {
-                    if (!that._set(field, that.wrap(value, field, function() { return that; })) || field.indexOf("(") >= 0 || field.indexOf("[") >= 0) {
+                    if (!composite) {
+                        value = that.wrap(value, field, function() { return that; });
+                    }
+                    if (!that._set(field, value) || field.indexOf("(") >= 0 || field.indexOf("[") >= 0) {
                         that.trigger(CHANGE, { field: field });
                     }
                 }
