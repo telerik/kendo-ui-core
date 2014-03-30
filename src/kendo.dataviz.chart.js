@@ -1588,6 +1588,38 @@ var __meta__ = {
             }
 
             text.reflow(targetBox);
+        },
+
+        alignToClipBox: function(clipBox) {
+            var barLabel = this,
+                vertical = barLabel.options.vertical,
+                field = vertical ? Y : X,
+                start = field + "1",
+                end = field + "2",
+                text = barLabel.children[0],
+                box = text.paddingBox,
+                difference;
+
+            if (box[end] < clipBox[start]) {
+                difference = clipBox[start] - box[end];
+            } else if (clipBox[end] < box[start]){
+                difference = clipBox[end] - box[start];
+            }
+
+            if (defined(difference)) {
+                box[start] += difference;
+                box[end] += difference;
+                text.reflow(box);
+            }
+        },
+
+        getViewElements: function(view) {
+            var barLabel = this,
+                elements = [];
+            if (barLabel.options.visible !== false) {
+                elements = ChartElement.fn.getViewElements.call(barLabel, view);
+            }
+            return elements;
         }
     });
 
@@ -7416,11 +7448,11 @@ var __meta__ = {
                 length = children.length,
                 i;
             for (i = 0; i < length; i++) {
-                if (children[i].options.clip === false) {
-                    return false;
+                if (children[i].options.clip === true) {
+                    return true;
                 }
             }
-            return true;
+            return false;
         },
 
         _clipBox: function() {
@@ -7445,21 +7477,58 @@ var __meta__ = {
 
         getViewElements: function (view) {
             var container = this,
-                group;
+                shouldClip = container.shouldClip(),
+                group,
+                labels,
+                result;
 
-            if (container.shouldClip() && !container.clipPathId) {
+            if (shouldClip && !container.clipPathId) {
                 container.clipBox = container._clipBox();
                 container.clipPathId = uniqueId();
                 view.createClipPath(container.clipPathId, container.clipBox);
             }
 
-            group = view.createGroup({
-                id: container.id,
-                clipPathId: container.clipPathId
-            });
+            if (shouldClip) {
+                group = view.createGroup({
+                    id: container.id,
+                    clipPathId: container.clipPathId
+                });
+                labels = container.labelViewElements(view);
+                group.children = group.children.concat(ChartElement.fn.getViewElements.call(container, view));
+                result = [group].concat(labels);
+            } else {
+                result = ChartElement.fn.getViewElements.call(container, view);
+            }
 
-            group.children = group.children.concat(ChartElement.fn.getViewElements.call(container, view));
-            return [group];
+            return result;
+        },
+
+        labelViewElements: function(view) {
+            var container = this,
+                charts = container.children,
+                elements = [],
+                clipBox = container.clipBox,
+                points, point,
+                i, j, length;
+            for (i = 0; i < charts.length; i++) {
+                points = charts[i].points;
+                length = points.length;
+
+                for (j = 0; j < length; j++) {
+                    point = points[j];
+                    if (point && point.label && point.label.options.visible) {
+                        if (point.box.overlaps(clipBox)) {
+                            if (point.label.alignToClipBox) {
+                                point.label.alignToClipBox(clipBox);
+                            }
+                            append(elements, point.label.getViewElements(view));
+                        }
+                        point.label.options.visible = false;
+                    }
+                }
+            }
+
+            return elements;
         },
 
         destroy: function() {
