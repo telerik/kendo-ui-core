@@ -8560,6 +8560,22 @@ var __meta__ = {
             return axis;
         },
 
+        stackableChartOptions: function(firstSeries, pane) {
+            var stack = firstSeries.stack,
+                isStacked100 = stack && stack.type === "100%",
+                clip;
+            if (defined(pane.options.clip)) {
+                clip = pane.options.clip;
+            } else if (isStacked100){
+                clip = false;
+            }
+            return {
+                isStacked: stack,
+                isStacked100: isStacked100,
+                clip: clip
+            };
+        },
+
         createBarChart: function(series, pane) {
             if (series.length === 0) {
                 return;
@@ -8567,17 +8583,12 @@ var __meta__ = {
 
             var plotArea = this,
                 firstSeries = series[0],
-                stack = firstSeries.stack,
-                isStacked100 = stack && stack.type === "100%",
-                barChart = new BarChart(plotArea, {
+                barChart = new BarChart(plotArea, extend({
                     series: series,
                     invertAxes: plotArea.invertAxes,
-                    isStacked: stack,
-                    isStacked100: isStacked100,
-                    clip: !isStacked100,
                     gap: firstSeries.gap,
                     spacing: firstSeries.spacing
-                });
+                }, plotArea.stackableChartOptions(firstSeries, pane)));
 
             plotArea.appendChart(barChart, pane);
         },
@@ -8593,7 +8604,8 @@ var __meta__ = {
                     series: series,
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
-                    spacing: firstSeries.spacing
+                    spacing: firstSeries.spacing,
+                    clip: pane.options.clip
                 });
 
             plotArea.appendChart(bulletChart, pane);
@@ -8606,15 +8618,10 @@ var __meta__ = {
 
             var plotArea = this,
                 firstSeries = series[0],
-                stack = firstSeries.stack,
-                isStacked100 = stack && stack.type === "100%",
-                lineChart = new LineChart(plotArea, {
+                lineChart = new LineChart(plotArea, extend({
                     invertAxes: plotArea.invertAxes,
-                    isStacked: stack,
-                    isStacked100: isStacked100,
-                    clip: !isStacked100,
                     series: series
-                });
+                }, plotArea.stackableChartOptions(firstSeries, pane)));
 
             plotArea.appendChart(lineChart, pane);
         },
@@ -8626,15 +8633,10 @@ var __meta__ = {
 
             var plotArea = this,
                 firstSeries = series[0],
-                stack = firstSeries.stack,
-                isStacked100 = stack && stack.type === "100%",
-                areaChart = new AreaChart(plotArea, {
+                areaChart = new AreaChart(plotArea, extend({
                     invertAxes: plotArea.invertAxes,
-                    isStacked: stack,
-                    isStacked100: isStacked100,
-                    clip: !isStacked100,
                     series: series
-                });
+                }, plotArea.stackableChartOptions(firstSeries, pane)));
 
             plotArea.appendChart(areaChart, pane);
         },
@@ -8650,7 +8652,8 @@ var __meta__ = {
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
                     series: series,
-                    spacing: firstSeries.spacing
+                    spacing: firstSeries.spacing,
+                    clip: pane.options.clip
                 });
 
             plotArea.appendChart(chart, pane);
@@ -8667,7 +8670,8 @@ var __meta__ = {
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
                     series: series,
-                    spacing: firstSeries.spacing
+                    spacing: firstSeries.spacing,
+                    clip: pane.options.clip
                 });
 
             plotArea.appendChart(chart, pane);
@@ -8684,7 +8688,8 @@ var __meta__ = {
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
                     series: series,
-                    spacing: firstSeries.spacing
+                    spacing: firstSeries.spacing,
+                    clip: pane.options.clip
                 });
 
             plotArea.appendChart(chart, pane);
@@ -9044,7 +9049,7 @@ var __meta__ = {
 
             if (series.length > 0) {
                 plotArea.appendChart(
-                    new ScatterChart(plotArea, { series: series }),
+                    new ScatterChart(plotArea, { series: series, clip: pane.options.clip }),
                     pane
                 );
             }
@@ -9055,7 +9060,7 @@ var __meta__ = {
 
             if (series.length > 0) {
                 plotArea.appendChart(
-                    new ScatterLineChart(plotArea, { series: series }),
+                    new ScatterLineChart(plotArea, { series: series, clip: pane.options.clip }),
                     pane
                 );
             }
@@ -9066,7 +9071,7 @@ var __meta__ = {
 
             if (series.length > 0) {
                 plotArea.appendChart(
-                    new BubbleChart(plotArea, { series: series }),
+                    new BubbleChart(plotArea, { series: series, clip: pane.options.clip }),
                     pane
                 );
             }
