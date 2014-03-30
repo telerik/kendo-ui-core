@@ -3758,10 +3758,11 @@ var __meta__ = {
             var chart = this,
                 options = chart.options,
                 categorySlot = categoryAxis.getSlot(categoryIx),
+                startValue = valueAxis.startValue(),
                 stackAxis, zeroSlot;
 
             if (options.isStacked) {
-                zeroSlot = valueAxis.getSlot(valueAxis.startValue(), valueAxis.startValue());
+                zeroSlot = valueAxis.getSlot(startValue, startValue, true);
                 stackAxis = options.invertAxes ? X : Y;
                 categorySlot[stackAxis + 1] = categorySlot[stackAxis + 2] = zeroSlot[stackAxis + 1];
             }
