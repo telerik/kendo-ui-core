@@ -5,8 +5,6 @@
 <html>
     <head>
     <title>Cuteness.io – powered by Kendo UI</title>
-        <link rel="stylesheet" href="@Url.Content("~/content/mobile/apps/cuteness/css/style.css")">
-
         @foreach (string styleName in Kendo.Models.StyleGroups.Mobile) {
             <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
         }
@@ -14,6 +12,8 @@
         @if (ViewBag.Debug) {
             <script src="@Url.Content("~/content/shared/js/less.js")"></script>
         }
+
+        <link rel="stylesheet" href="@Url.Content("~/content/mobile/apps/cuteness/css/style.css")">
 
         @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
             <script src="@Url.Script(scriptName)"></script>
