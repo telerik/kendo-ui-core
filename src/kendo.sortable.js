@@ -83,6 +83,7 @@ var __meta__ = {
             handler: null,
             cursorOffset: null,
             axis: null,
+            ignore: null,
             cursor: "auto"
         },
 
@@ -103,6 +104,7 @@ var __meta__ = {
                 container: options.container ? $(options.container) : null,
                 cursorOffset: options.cursorOffset,
                 axis: options.axis,
+                ignore: options.ignore,
                 dragstart: $.proxy(that._dragstart, that),
                 dragcancel: $.proxy(that._dragcancel, that),
                 drag: $.proxy(that._drag, that),
