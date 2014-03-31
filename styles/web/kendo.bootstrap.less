@@ -252,6 +252,16 @@
     border-radius: @main-border-radius;
 }
 
+.k-menu > .k-first
+{
+    border-radius: @inner-border-radius 0 0 @inner-border-radius;
+}
+
+.k-rtl .k-menu > .k-first
+{
+    border-radius: 0 @inner-border-radius @inner-border-radius 0;
+}
+
 .k-widget.k-treeview
 {
     color: @treeview-text-color;
