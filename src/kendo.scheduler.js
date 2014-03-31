@@ -1962,6 +1962,8 @@ var __meta__ = {
 
             element.off(NS);
 
+            clearTimeout(that._moveTimer);
+
             that._model = null;
             that.toolbar = null;
             that.element = null;
