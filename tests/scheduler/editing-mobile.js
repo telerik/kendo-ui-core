@@ -325,7 +325,7 @@
         equal(anchor.text(), scheduler.options.messages.editor.noTimezone);
     });
 
-    /*test("Render Timezone button with startTimezone id as a text", function() {
+    test("Render Timezone button with startTimezone id as a text", function() {
         var scheduler = setup(),
             event = scheduler.dataSource.data()[0],
             tzid = "America/Toronto",
@@ -339,9 +339,9 @@
         var anchor = scheduler._editor.container.find("a.k-timezone-button");
 
         equal(anchor.text(), tzid);
-    });*/
+    });
 
-    test("Do not render Timezone field if isAllDay", function() {
+    test("Hide Timezone field if isAllDay", function() {
         var scheduler = setup(),
             event = scheduler.dataSource.data()[0],
             uid = event.uid;
@@ -351,7 +351,35 @@
         scheduler.editEvent(uid);
         var anchor = scheduler._editor.container.find("a.k-timezone-button");
 
-        ok(!anchor[0]);
+        equal(anchor[0].style.display, "none");
+    });
+
+    test("Show Timezone field if it isn't allDay", function() {
+        var scheduler = setup(),
+            event = scheduler.dataSource.data()[0],
+            uid = event.uid;
+
+        event.isAllDay = false;
+
+        scheduler.editEvent(uid);
+        var anchor = scheduler._editor.container.find("a.k-timezone-button");
+
+        equal(anchor[0].style.display, "");
+    });
+
+    test("Show Timezone field on isAllDay change", function() {
+        var scheduler = setup(),
+            event = scheduler.dataSource.data()[0],
+            uid = event.uid;
+
+        event.isAllDay = true;
+
+        scheduler.editEvent(uid);
+        var anchor = scheduler._editor.container.find("a.k-timezone-button");
+
+        event.set("isAllDay", false);
+
+        equal(anchor[0].style.display, "");
     });
 
     test("Render start and end timezone editors", function() {

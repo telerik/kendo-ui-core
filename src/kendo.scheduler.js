@@ -161,10 +161,10 @@ var __meta__ = {
         MOBILETIMEZONEPOPUP = function(container, options) {
             var text = timezoneButtonText(options.model, options.messages.noTimezone);
 
-            $('<a href="#" class="k-button k-timezone-button">' + text + '</a>').click(options.click).appendTo(container);
+            $('<a href="#" class="k-button k-timezone-button" data-bind="invisible:isAllDay">' + text + '</a>').click(options.click).appendTo(container);
         },
         TIMEZONEPOPUP = function(container, options) {
-            $('<a href="#" class="k-button">' + options.messages.timezoneEditorButton + '</a>').click(options.click).appendTo(container);
+            $('<a href="#" class="k-button" data-bind="invisible:isAllDay">' + options.messages.timezoneEditorButton + '</a>').click(options.click).appendTo(container);
         },
         MOBILETIMEZONEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
@@ -882,7 +882,7 @@ var __meta__ = {
                 { field: "isAllDay", title: messages.editor.allDayEvent }
             ];
 
-            if (kendo.timezone.windows_zones && !model.isAllDay) {
+            if (kendo.timezone.windows_zones) {
                 fields.push({ field: "timezone", title: messages.editor.timezone, editor: editors.timezonePopUp, click: click, messages: messages.editor, model: model });
                 fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: editors.timezone, noTimezone: messages.editor.noTimezone });
                 fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: editors.timezone, noTimezone: messages.editor.noTimezone });

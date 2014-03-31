@@ -555,7 +555,7 @@
         var container = scheduler._editor.container.children("div.k-edit-form-container");
         var elements = container.children("div").not(".k-edit-buttons").not(".k-recur-view");
 
-        equal(elements.length, 10);
+        equal(elements.length, 13);
         ok(elements.eq(0).hasClass("k-edit-label"));
         equal(elements.eq(0).find("label").attr("for"), "title");
         equal(elements.eq(1).text(), "my event");
@@ -1054,7 +1054,7 @@
         equal(anchor.text(), "Time zone");
     });
 
-    test("Do not render Timezone field if isAllDay", function() {
+    test("Hide Timezone field if isAllDay", function() {
         var scheduler = setup(),
             event = scheduler.dataSource.data()[0],
             uid = event.uid;
@@ -1064,7 +1064,36 @@
         scheduler.editEvent(uid);
         var anchor = scheduler._editor.container.find(".k-edit-field > a");
 
-        ok(!anchor[0]);
+        equal(anchor[0].style.display, "none");
+    });
+
+    test("Show Timezone field if it is not allday", function() {
+        var scheduler = setup(),
+            event = scheduler.dataSource.data()[0],
+            uid = event.uid;
+
+        event.isAllDay = false;
+
+        scheduler.editEvent(uid);
+        var anchor = scheduler._editor.container.find(".k-edit-field > a");
+
+        equal(anchor[0].style.display, "");
+    });
+
+    test("Show Timezone field on isAllDay change", function() {
+        var scheduler = setup(),
+            event = scheduler.dataSource.data()[0],
+            uid = event.uid;
+
+        event.isAllDay = true;
+
+        scheduler.editEvent(uid);
+
+        var anchor = scheduler._editor.container.find(".k-edit-field > a");
+
+        event.set("isAllDay", false);
+
+        equal(anchor[0].style.display, "");
     });
 
     test("Render start and end timezone editors", function() {
