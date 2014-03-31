@@ -1613,9 +1613,10 @@ var __meta__ = {
         },
 
         _adjustLockedHorizontalScrollBar: function() {
-            var content = this.content,
-                scrollbar = (content[0].offsetHeight - content[0].clientHeight > 0 ? kendo.support.scrollbar() : 0);
+            var table = this.table,
+                content = table.parent();
 
+            var scrollbar = table[0].offsetWidth > content[0].clientWidth ? kendo.support.scrollbar() : 0;
             this.lockedContent.height(content.height() - scrollbar);
         },
 
@@ -3172,7 +3173,8 @@ var __meta__ = {
                 if (isGridHeightSet(that.wrapper)) { // set content height only if needed
                     if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
                         if (that.lockedContent) {
-                            that.lockedContent.height(height - (that.content[0].offsetHeight - that.content[0].clientHeight > 0 ? scrollbar : 0));
+                            scrollbar = that.table[0].offsetWidth > that.table.parent()[0].clientWidth ? scrollbar : 0;
+                            that.lockedContent.height(height - scrollbar);
                         }
 
                         that.content.height(height);
