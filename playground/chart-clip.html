@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <base href="test" />
     <title>Clip</title>
-        <script src="../src/jquery.js"></script>
-        <script src="../src/kendo.core.js"></script>
-         <script src="../src/kendo.userevents.js"></script>
-        <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.dataviz.core.js"></script>
-        <script src="../src/kendo.dataviz.chart.js"></script>
-        <script src="../src/kendo.dataviz.chart.polar.js"></script>
-        <script src="../src/kendo.dataviz.stock.js"></script>
-        <script src="../src/kendo.dataviz.sparkline.js"></script>
-        <script src="../src/kendo.dataviz.themes.js"></script>
-        <script src="../src/kendo.dataviz.vml.js"></script>
-        <script src="../src/kendo.dataviz.svg.js"></script>
-        <script src="../src/kendo.dataviz.canvas.js"></script>  
-        <link href="../styles/web/kendo.common.css" rel="stylesheet">
-        <link href="../styles/web/kendo.default.css" rel="stylesheet">
-        <link href="../styles/dataviz/kendo.dataviz.min.css" rel="stylesheet">
-        <link href="../styles/dataviz/kendo.dataviz.default.min.css" rel="stylesheet">
+        <script src="/kendo/src/jquery.js"></script>
+        <script src="/kendo/src/kendo.core.js"></script>
+         <script src="/kendo/src/kendo.userevents.js"></script>
+        <script src="/kendo/src/kendo.data.js"></script>
+        <script src="/kendo/src/kendo.dataviz.core.js"></script>
+        <script src="/kendo/src/kendo.dataviz.chart.js"></script>
+        <script src="/kendo/src/kendo.dataviz.chart.polar.js"></script>
+        <script src="/kendo/src/kendo.dataviz.stock.js"></script>
+        <script src="/kendo/src/kendo.dataviz.sparkline.js"></script>
+        <script src="/kendo/src/kendo.dataviz.themes.js"></script>
+        <script src="/kendo/src/kendo.dataviz.vml.js"></script>
+        <script src="/kendo/src/kendo.dataviz.svg.js"></script>
+        <script src="/kendo/src/kendo.dataviz.canvas.js"></script>  
+        <link href="/kendo/styles/web/kendo.common.css" rel="stylesheet">
+        <link href="/kendo/styles/web/kendo.default.css" rel="stylesheet">
+        <link href="/kendo/styles/dataviz/kendo.dataviz.min.css" rel="stylesheet">
+        <link href="/kendo/styles/dataviz/kendo.dataviz.default.min.css" rel="stylesheet">
         <style>
             .k-chart{
                 min-height: 400px;
@@ -27,12 +28,15 @@
         </style>
 </head>
 <body>
- <div id="bubble" style="width: 700px;margin-left:200px;"></div>
+<div id="chart" style="margin-top:100px; width: 800px;"></div>
+
+ <!--
+  <div id="bubble" style="width: 700px;margin-left:200px;"></div>
  <div id="radarColumn"></div>
   
   <div id="radarChart"></div> 
   <div id="polarChart"></div>
- <!--<button type="button" onclick="test()">test</button>
+ <button type="button" onclick="test()">test</button>
 <div id="stock-chart"></div>
 <div id="stock" style="height:500px;"></div>
 <div id="sparkline" style="width:400px;height:300px;margin-top:200px;"></div>
@@ -44,7 +48,7 @@
 <div id="multiplePanes"></div>
 
     <div id="testRange" style="height: 500px;margin-top:200px;"></div>
-<div id="chart" style="margin-top:100px; width: 800px;"></div>
+
 
  -->
  
@@ -55,6 +59,30 @@
  -->
   <script>
       var renderAs = "svg";
+      
+       $("#chart").kendoChart({
+        legend: {
+            position: "top"
+        },
+        series: [{
+            type: "line",
+            name: "line",
+            data: [1, 100, 1, 50, 80]
+        }, {
+            type: "column",
+            name: "column",
+            data: [1, 50, 1, 50, 40]
+        }],
+        valueAxis: {
+            max: 80,
+            min: 30         
+        },       
+        tooltip: {
+            visible: true//,
+            //shared: true
+        },
+        renderAs: renderAs
+    });  
    $("#stock-chart").kendoStockChart({
                 dataSource: {
                     transport: {
@@ -315,41 +343,7 @@
             }
         });
 
-    $("#chart").kendoChart({
-        series: [{
-            type: "line",
-            style: "step",
-            data: [1, 100, 1, 50, 80]
-        }, {
-            type: "column",
-            data: [1, 50, 1, 50, 40]
-        }],
-        valueAxis: {
-            max: 80,
-            min: 30,
-            crosshair: {
-                visible: true,
-                tooltip: {
-                    visible: true,
-                    format: "n1"
-                }
-            }            
-        },
-        categoryAxis: {
-            crosshair: {
-                visible: true,
-                tooltip: {
-                    visible: true,
-                    format: "n1"
-                }
-            }
-        },        
-        tooltip: {
-            visible: true//,
-            //shared: true
-        },
-        renderAs: renderAs
-    });    
+     
     
     $("#testRange").kendoChart({
         series: [{

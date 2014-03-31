@@ -271,7 +271,7 @@ var __meta__ = {
                 id = element.options.clipPathId,
                 clipPath = "";
             if (id) {
-                clipPath = element.renderAttr("clip-path", "url(#" + id + ")");
+                clipPath = element.renderAttr("clip-path", "url(" + baseUrl() +"#" + id + ")");
             }
             return clipPath;
         }
@@ -967,30 +967,13 @@ var __meta__ = {
                         definitions[overlayId] = gradient;
                     }
 
-                    return "url(" + decorator.baseUrl() + "#" + gradient.options.id + ")";
+                    return "url(" + baseUrl() + "#" + gradient.options.id + ")";
                 } else {
                     return NONE;
                 }
             } else {
                 return paint;
             }
-        },
-
-        baseUrl: function() {
-            var base = doc.getElementsByTagName("base")[0],
-                baseUrl = "",
-                href = doc.location.href,
-                hashIndex = href.indexOf("#");
-
-            if (base && !kendo.support.browser.msie) {
-                if (hashIndex !== -1) {
-                    href = href.substring(0, hashIndex);
-                }
-
-                baseUrl = href;
-            }
-
-            return baseUrl;
         }
     };
 
@@ -1061,6 +1044,23 @@ var __meta__ = {
     var renderSVG = function(container, svg) {
         container.innerHTML = svg;
     };
+
+    function baseUrl() {
+        var base = doc.getElementsByTagName("base")[0],
+            baseUrl = "",
+            href = doc.location.href,
+            hashIndex = href.indexOf("#");
+
+        if (base && !kendo.support.browser.msie) {
+            if (hashIndex !== -1) {
+                href = href.substring(0, hashIndex);
+            }
+
+            baseUrl = href;
+        }
+
+        return baseUrl;
+    }
 
     (function() {
         var testFragment = "<svg xmlns='" + SVG_NS + "'></svg>",
