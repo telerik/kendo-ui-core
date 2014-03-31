@@ -20,7 +20,8 @@ DIST_STYLES_ROOT = "dist/styles/"
 KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
 PLATFORM = RbConfig::CONFIG['host_os']
-RELEASE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI"
+#RELEASE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI"
+RELEASE_ROOT = "K:\\DISTRIBUTIONS\\KendoUI"
 WEB_INSTALLER_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\Guidance\\CurrentWebInstaller"
 
 if PLATFORM =~ /linux|darwin/
@@ -29,15 +30,19 @@ else
     ARCHIVE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\Builds"
 end
 
-if ENV['DRY_RUN']
+#if ENV['DRY_RUN']
     ADMIN_URL = 'http://integrationadmin.telerik.com/'
     ADMIN_LOGIN = 'petyo.ivanov@telerik.local'
-else
-    ADMIN_URL = 'http://admin.telerik.com/'
-    ADMIN_LOGIN = 'petyo.ivanov@telerik.com'
-end
+    ADMIN_RELEASE_UPLOAD_LOGIN = 'stefan.rahnev@telerik.local'
+#else
+#    ADMIN_URL = 'http://admin.telerik.com/'
+#    ADMIN_LOGIN = 'petyo.ivanov@telerik.com'
+#    ADMIN_RELEASE_UPLOAD_LOGIN = 'stefan.rahnev@telerik.com'
+#end
 
 ADMIN_PASS = 'ultra'
+ADMIN_RELEASE_UPLOAD_PASS = "p75a80s"
+#ADMIN_RELEASE_UPLOAD_PASS = "t3l3r1k@dm1n"
 
 ROOT_MAP = {
     '.' => /(dist\/js|dist\/styles\/.+?)\//,

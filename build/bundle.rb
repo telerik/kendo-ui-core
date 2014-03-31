@@ -151,7 +151,13 @@ def bundle(options)
         desc "Upload #{name} as release build on telerik.com"
 
         task "release_builds:bundles:#{name}" do
-                release_build_file_copy(options[:release_build], name)                
+                source_folder = release_build_file_copy(options[:release_build], name) 
+
+                upload_release_build \
+                :title => versioned_bundle_name(name),
+                :product => options[:product],
+                :vs_extension => !! options[:vs_extension],
+                :archive_path => source_folder                             
         end
 
         # add bundle to bundles:all

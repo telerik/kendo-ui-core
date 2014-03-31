@@ -10,8 +10,8 @@ class TelerikReleaseBot
         @driver = Selenium::WebDriver.for(:firefox)
         @driver.navigate.to ADMIN_URL
 
-        driver.find_element(:name, "txtEmail").send_keys ADMIN_LOGIN
-        driver.find_element(:name, "txtPassword").send_keys ADMIN_PASS
+        driver.find_element(:name, "txtEmail").send_keys ADMIN_RELEASE_UPLOAD_LOGIN
+        driver.find_element(:name, "txtPassword").send_keys ADMIN_RELEASE_UPLOAD_PASS
         driver.find_element(:name, "btnLogin").click
     end
 
@@ -21,7 +21,7 @@ class TelerikReleaseBot
 
     def go_to_product_versions
         click_and_wait "Administration", "administration"
-        click_and_wait "Latest Internal Builds", "latest"
+        click_and_wait "Product Versions", "product"
     end
 
     def click_and_wait(link, title)
@@ -45,46 +45,50 @@ class TelerikReleaseBot
     end
 end
 
-def upload_internal_build(options)
-    bot = TelerikAdminBot.instance
+def upload_release_build(options)
+    bot = TelerikReleaseBot.instance
 
-    bot.go_to_internal_buids
+    bot.go_to_product_versions
 
-    bot.find("[value='Add New Item']").click
+    bot.driver.execute_script <<-SCRIPT
+         var masterTable = $find($telerik.$('[id$=\"_dgProducts\"]').attr('id')).get_masterTableView();
+         masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
+    SCRIPT
 
-    bot.wait_for_title "administration"
-
-    Thread.current.send :sleep, 3
-
-    bot.driver.execute_script "$find($telerik.$('[id$=\"_tfTitle_txtFieldText\"]').attr('id')).set_value('#{options[:title]}')"
-
-    bot.fill_in('Product', options[:product])
+    bot.wait_for_title "product"
 
     Thread.current.send :sleep, 3
 
-    changelog_contents = File.read(options[:changelog_path])
+    product_names = ['Kendo UI Web', 'Kendo UI Web GPL' 'Kendo UI DataViz', 'Kendo UI Mobile', 'Kendo UI Complete', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
 
-    bot.driver.execute_script "$telerik.$(document.body).append('<textarea id=\"tmp_editor\" />')"
+    create_version("Kendo UI Mobile") 
+    #product_names.each { |pn| create_version(pn) }
+    
+end
+def create_version(productName)
+      click_and_wait productName, "administration"
+      click_and_wait "Manage Versions", "administration"
 
-    changelog_contents.each_line do |line|
-        bot.find("#tmp_editor").send_keys(line)
-    end
+      if defined? SERVICE_PACK_NUMBER
+        click_and_wait "New Minor","administration"
+        fill_version_fields
+        #upload_files  
+      else
+        click_and_wait "New Major","administration"
+        fill_version_fields
+        #upload_files  
+      end
+end
+def fill_version_fields
+       bot.driver.execute_script "$find($telerik.$('[id$=\"_txtMajorName\"]').attr('id')).set_value('#{VERSION_YEAR}.#{VERSION_Q}')"
+       bot.driver.execute_script "$find($telerik.$('[id$=\"_txtMinorName\"']).attr('id')).set_value('#{VERSION}')"
+       bot.driver.execute_script "$find($telerik.$('[id$=\"_cbBeta\"']).attr('id')).checked = true"
 
-    bot.driver.execute_script "$find($telerik.$('[id$=\"_efReleaseNotes_reFieldText\"]').attr('id')).set_html($telerik.$('#tmp_editor').val())"
+       bot.find("[value='Save']").click
+       Thread.current.send :sleep, 6
+end
+def upload_files
 
-    bot.fill_in('File type:', 'Paid Files')
-
-    unless options[:vs_extension]
-        bot.driver.execute_script "$telerik.$('input[id$=\"_attachmentEdit_cbIsHotfix\"]').click()"
-    else
-        bot.find('#fileVersionField input').send_keys "#{VERSION}.0"
-    end
-
-    full_path = File.expand_path(options[:archive_path], File.join(File.dirname(__FILE__), ".."))
-    bot.find('.RadUpload input[type=file]').send_keys(full_path)
-
-    bot.find("[value='Save']").click
-    Thread.current.send :sleep, 6
 end
 def release_build_file_copy(release_build_config, name)
     if defined? SERVICE_PACK_NUMBER
@@ -106,9 +110,6 @@ def release_build_file_copy(release_build_config, name)
       :vbd => versioned_bundle_name(name),
       :extension => ".zip"
 
-      #destination_zip = File.join(versioned_bundle_destination_path, versioned_bundle_name(name) + ".zip")
-      #archive_zip = File.join(versioned_bundle_archive_path, versioned_bundle_name(name) + ".zip")
-      #cp archive_zip, destination_zip
     end
     if release_build_config[:msi]
       build_path_and_copy \
@@ -116,9 +117,7 @@ def release_build_file_copy(release_build_config, name)
       :archive => versioned_bundle_archive_path,
       :vbd => versioned_bundle_name(name),
       :extension => ".msi"
-      #destionation_msi = File.join(versioned_bundle_destination_path, versioned_bundle_name(name)  + ".msi") 
-      #archive_msi = File.join(versioned_bundle_archive_path, versioned_bundle_name(name)  + ".msi") 
-      #cp archive_msi, destionation_msi
+
     end
     if release_build_config[:xml]
       build_path_and_copy \
@@ -126,29 +125,20 @@ def release_build_file_copy(release_build_config, name)
       :archive => versioned_bundle_archive_path,
       :vbd => versioned_bundle_name(name),
       :extension => ".xml"
-      #destionation_xml = File.join(versioned_bundle_destination_path, versioned_bundle_name(name)  + ".xml") 
-      #archive_xml = File.join(versioned_bundle_archive_path, versioned_bundle_name(name)  + ".xml") 
-      #cp archive_xml, destionation_xml
+
     end
     if release_build_config[:nuget]
       build_path_and_copy \
-      #:destination =>  versioned_bundle_destination_path,
-      #:archive => versioned_bundle_archive_path,
-      #:vbd => versioned_bundle_name(name),
-      #:extension => "nupkg.zip"
-       #destionation_nuget = File.join(versioned_bundle_destination_path, versioned_bundle_name(name)  + ".zip") 
-       #archive_nuget = File.join(versioned_bundle_archive_path, versioned_bundle_name(name)  + ".zip") 
-       #cp archive_nuget, destionation_nuget
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :vbd => versioned_bundle_name(name),
+      :extension => "nupkg.zip"
     end
     if release_build_config[:download_builder]
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
       :static_name => "download-builder" 
-      #destination_path = File.join(versioned_bundle_destination_path, "download-builder")
-      #archive_path = File.join(versioned_bundle_archive_path, "download-builder") 
-      #cp_r(archive_path, destination_path)
-      #cp archive_path, destionation_path
       
     end
     if release_build_config[:demos]
@@ -156,9 +146,7 @@ def release_build_file_copy(release_build_config, name)
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
       :static_name => "online-examples.zip" 
-      #destionation_demos = File.join(versioned_bundle_destination_path, "online-examples.zip") 
-      #archive_demos = File.join(versioned_bundle_archive_path, "online-examples.zip") 
-      #cp archive_demos, destionation_demos
+
     end
     if release_build_config[:common_installer]
       archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikControlPanelSetup.exe")
@@ -168,7 +156,8 @@ def release_build_file_copy(release_build_config, name)
       archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikUIForAspNetMvcSetup.exe")
       cp archive_file, File.join(versioned_bundle_destination_path, "TelerikUIForAspNetMvcSetup.#{VERSION}.exe")
     end
-        
+
+    return versioned_bundle_destination_path    
 end
 def build_path_and_copy(options)
    if options[:static_name]
@@ -178,7 +167,7 @@ def build_path_and_copy(options)
     destination = File.join(options[:destination], options[:vbd] + options[:extension])
     archive = File.join(options[:archive], options[:vbd] + options[:extension])
    end
-   cp archive, destination
+   cp_r archive, destination
 end
 
 desc "Upload release builds"
