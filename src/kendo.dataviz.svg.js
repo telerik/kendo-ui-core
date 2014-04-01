@@ -161,11 +161,15 @@ var __meta__ = {
 
         createClipPath: function(id, box) {
             var view = this,
-                clipPath = view.definitions[id];
+                clipPath = view.definitions[id],
+                children = [view.createRect(box, {})];
             if(!clipPath) {
                 clipPath = new SVGClipPath({id: id});
-                clipPath.children.push(view.createRect(box, {}));
+                clipPath.children = children;
                 view.definitions[id] = clipPath;
+            } else {
+                clipPath.children = children;
+                clipPath.refresh();
             }
 
             return clipPath;
@@ -768,6 +772,13 @@ var __meta__ = {
                 clip.template = SVGClipPath.template =
                 renderTemplate("<clipPath#= d.renderAttr(\"id\", d.options.id) #>" +
                          "#= d.renderContent() #</clipPath>");
+            }
+        },
+
+        refresh: function() {
+            var element = doc.getElementById(this.options.id);
+            if (element) {
+                element.innerHTML = this.renderContent();
             }
         }
     });

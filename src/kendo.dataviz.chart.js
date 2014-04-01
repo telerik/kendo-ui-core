@@ -7483,13 +7483,11 @@ var __meta__ = {
                 labels,
                 result;
 
-            if (shouldClip && !container.clipPathId) {
-                container.clipBox = container._clipBox();
-                container.clipPathId = uniqueId();
-                view.createClipPath(container.clipPathId, container.clipBox);
-            }
-
             if (shouldClip) {
+                container.clipBox = container._clipBox();
+                container.clipPathId = container.clipPathId || uniqueId();
+                view.createClipPath(container.clipPathId, container.clipBox);
+
                 group = view.createGroup({
                     id: container.id,
                     clipPathId: container.clipPathId

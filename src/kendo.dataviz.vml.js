@@ -204,12 +204,10 @@ var __meta__ = {
 
         createClipPath: function(id, box) {
             var view = this,
-                clipPath = view.definitions[id];
+                clipPath;
 
-            if(!clipPath) {
-                clipPath = view.decorate(new VMLClipRect(box, {id: id}));
-                view.definitions[id] = clipPath;
-            }
+            clipPath = new VMLClipRect(box, {id: id});
+            view.definitions[id] = clipPath;
 
             return clipPath;
         },
