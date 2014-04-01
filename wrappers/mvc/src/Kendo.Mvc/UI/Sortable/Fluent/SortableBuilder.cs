@@ -90,6 +90,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// The selector which determines child elements for which the sort will not be initiated. Useful if the sortable item contains input elements.
+        /// </summary>
+        /// <param name="selector">jQuery selector</param>
+        /// <returns></returns>
+        public virtual SortableBuilder Ignore(string selector)
+        {
+            Component.Ignore = selector;
+            return this;
+        }
+
+        /// <summary>
         /// The CSS style which determines the cursor that will be shown while user drags sortable item. For example 'move', 'pointer', etc.
         /// </summary>
         /// <param name="string">String</param>
