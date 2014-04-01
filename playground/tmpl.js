@@ -403,7 +403,6 @@ var TMPL = (function(){
                 try {
                     f.call(tm, data);
                 } catch(ex) {
-                    console.log("FUCKED UP");
                     console.log(ex);
                     console.log(ex.stack);
                 }
