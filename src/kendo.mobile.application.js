@@ -22,6 +22,7 @@ var __meta__ = {
         VERTICAL = "km-vertical",
         CHROME =  OS.browser === "chrome",
         BROKEN_WEBVIEW_RESIZE = OS.ios && OS.flatVersion >= 700 && (OS.appMode || CHROME),
+        INITIALLY_HORIZONTAL = (Math.abs(window.orientation) / 90 == 1),
         HORIZONTAL = "km-horizontal",
 
         MOBILE_PLATFORMS = {
@@ -290,15 +291,31 @@ var __meta__ = {
             } else {
                 if (isOrientationHorizontal(element)) {
                     if (includeStatusBar) {
-                        height = SCREEN.availWidth;
+                        if (INITIALLY_HORIZONTAL) {
+                            height = SCREEN.availWidth + STATUS_BAR_HEIGHT;
+                        } else {
+                            height = SCREEN.availWidth;
+                        }
                     } else {
-                        height = SCREEN.availWidth - STATUS_BAR_HEIGHT;
+                        if (INITIALLY_HORIZONTAL) {
+                            height = SCREEN.availWidth;
+                        } else {
+                            height = SCREEN.availWidth - STATUS_BAR_HEIGHT;
+                        }
                     }
                 } else {
                     if (includeStatusBar) {
-                        height = SCREEN.availHeight + STATUS_BAR_HEIGHT;
+                        if (INITIALLY_HORIZONTAL) {
+                            height = SCREEN.availHeight;
+                        } else {
+                            height = SCREEN.availHeight + STATUS_BAR_HEIGHT;
+                        }
                     } else {
-                        height = SCREEN.availHeight;
+                        if (INITIALLY_HORIZONTAL) {
+                            height = SCREEN.availHeight - STATUS_BAR_HEIGHT;
+                        } else {
+                            height = SCREEN.availHeight;
+                        }
                     }
                 }
             }
