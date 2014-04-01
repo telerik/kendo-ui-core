@@ -7510,7 +7510,7 @@ var __meta__ = {
                 points, point,
                 i, j, length;
             for (i = 0; i < charts.length; i++) {
-                points = charts[i].points;
+                points = charts[i].points || {};
                 length = points.length;
 
                 for (j = 0; j < length; j++) {
