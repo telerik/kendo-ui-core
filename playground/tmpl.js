@@ -373,7 +373,7 @@ var TMPL = (function(){
             this.push(txt);
         },
         esc: function(txt) {
-            this.raw(this.q(txt));
+            this.push(txt);
         },
         tag: function(tagName, attrs, closed) {
             var tag = {
