@@ -34,7 +34,15 @@ namespace KendoCRUDService.Models
 
         public static void Insert(ProductModel product)
         {
-            product.ProductID = All().OrderByDescending(p => p.ProductID).First().ProductID + 1;
+												var first = All().OrderByDescending(p => p.ProductID).FirstOrDefault();
+												if (first != null)
+												{
+																product.ProductID = first.ProductID + 1;
+												}
+												else
+												{
+																product.ProductID = 0;
+												}            
 
             All().Insert(0, product);
         }
