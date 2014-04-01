@@ -54,7 +54,10 @@
                     }
                 },
                 change: function() {
+                    var start = now();
                     m.redraw();
+                    var end = now();
+                    console.log("Mithril", end-start);
                 }
             });
 
@@ -209,10 +212,7 @@
                     controller: function() {
                     },
                     view: function() {
-                        var start = now();
                         var dom = table();
-                        var end = now();
-                        console.log("Mithril", end-start);
                         return dom;
                     }
                 });
