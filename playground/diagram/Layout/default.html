@@ -132,18 +132,18 @@
 <script src="../../../src/kendo.fx.js"></script>
 <script src="../../../src/kendo.mobile.scroller.js"></script>
 
-<script src="../../../src/kendo.diagram.utils.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.math.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.svg.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.services.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.extensions.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.dom.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.layout.js" type="text/javascript"></script>
+<script src="../../../src/dataviz/diagram/utils.js" type="text/javascript"></script>
+<script src="../../../src/dataviz/diagram/math.js" type="text/javascript"></script>
+<script src="../../../src/dataviz/diagram/svg.js" type="text/javascript"></script>
+<script src="../../../src/dataviz/diagram/services.js" type="text/javascript"></script>
+<script src="../../../src/dataviz/diagram/extensions.js" type="text/javascript"></script>
+<script src="../../../src/dataviz/diagram/dom.js" type="text/javascript"></script>
+<script src="../../../src/dataviz/diagram/layout.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 var diagram, animId, useRandomSizes = false,
-        Predefined = kendo.diagram.Graph.Predefined,
-        GraphUtils = kendo.diagram.Graph.Utils,
+        Predefined = kendo.dataviz.diagram.Graph.Predefined,
+        GraphUtils = kendo.dataviz.diagram.Graph.Utils,
         randomDiagram = GraphUtils.randomDiagram,
         animateTransitions = false;
 
@@ -226,8 +226,8 @@ function layout() {
     var knownRoot = diagram.getShapeById("0");
     // because the loop produces in the generation above sometimes five times the same set of id's =>should be unique for the layout.
     diagram.shapes.forEach(function (s) {
-        s.id = kendo.diagram.randomId();
-        s.visual.native.id = s.id;
+        s.id = kendo.dataviz.diagram.randomId();
+        s.visual.domElement.id = s.id;
     })
     switch (selected) {
         case "QTreeDown":

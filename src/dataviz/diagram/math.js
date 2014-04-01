@@ -3057,7 +3057,7 @@
          * @param layoutType The optional layout type to apply after the diagram is generated.
          */
         randomDiagram: function (diagram, shapeCount, maxIncidence, isTree, randomSize) {
-            var g = diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
+            var g = kendo.dataviz.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
             Graph.Utils.createDiagramFromGraph(diagram, g, false, randomSize);
         }
     };
