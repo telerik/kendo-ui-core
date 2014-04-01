@@ -7520,6 +7520,7 @@ var __meta__ = {
                             if (point.label.alignToClipBox) {
                                 point.label.alignToClipBox(clipBox);
                             }
+                            point.label.modelId = point.modelId;
                             append(elements, point.label.getViewElements(view));
                         }
                         point.label.options.visible = false;

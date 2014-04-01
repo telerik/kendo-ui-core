@@ -15,10 +15,10 @@
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.canvas.js"></script>  
-        <link href="../styles/web/kendo.common.css" rel="stylesheet">
-        <link href="../styles/web/kendo.default.css" rel="stylesheet">
-        <link href="../styles/dataviz/kendo.dataviz.min.css" rel="stylesheet">
-        <link href="../styles/dataviz/kendo.dataviz.default.min.css" rel="stylesheet">
+        <link href="../dist/styles/web/kendo.common.css" rel="stylesheet">
+        <link href="../dist/styles/web/kendo.default.css" rel="stylesheet">
+        <link href="../dist/styles/dataviz/kendo.dataviz.min.css" rel="stylesheet">
+        <link href="../dist/styles/dataviz/kendo.dataviz.default.min.css" rel="stylesheet">
         <style>
             .k-chart{
                 min-height: 400px;
@@ -28,7 +28,7 @@
 </head>
 <body>
 <div id="chart" style="margin-top:100px; width: 800px;"></div>
- <--
+ <!--
   <div id="bubble" style="width: 700px;margin-left:200px;"></div>
  <div id="radarColumn"></div>
   
@@ -50,7 +50,7 @@
 
  -->
  
- <-- 
+ <!-- 
  <div id="scatterChart"></div>
  
 
@@ -121,6 +121,9 @@
          legend: {
             position: "top"
         },
+        seriesClick: function(e) {
+         debugger;
+        },
         series: [
         {
             type: "column", 
@@ -144,6 +147,9 @@
         plotArea: {
             margin: 15
         },
+        panes: [{
+            clip: true
+        }],
         valueAxis: {
             max: 80,
             min: 30           
