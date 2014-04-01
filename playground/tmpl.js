@@ -134,9 +134,6 @@ var TMPL = (function(){
         esc: function(expr) {
             return "this.esc((" + expr + "))";
         },
-        q: function(expr) {
-            return "this.q((" + expr + "))";
-        },
         tag: function(tagName, attrs, closed) {
             var ret = "this.tag(" + JSON.stringify(tagName) + ", {", first = true;
             for (var i in attrs) if (attrs.hasOwnProperty(i)) {
@@ -260,7 +257,7 @@ var TMPL = (function(){
             attrs[attr] = "(" + val + ")";
         }
 
-        function valueQuoted(q) {
+        function valueQuoted(quote) {
             var str = "", ret = [];
             function dump(nextParser, arg) {
                 if (str) {
@@ -273,7 +270,7 @@ var TMPL = (function(){
             }
             input.next();
             while (!input.eof()) {
-                if (input.lookingAt(q)) {
+                if (input.lookingAt(quote)) {
                     input.next();
                     break;
                 }
@@ -322,13 +319,13 @@ var TMPL = (function(){
         function escaped1(forStat) {
             input.forward(options.startEscaped1.length);
             var expr = readUntil(options.closeEscaped1);
-            return forStat ? output.esc(expr) : output.q(expr);
+            return forStat ? output.esc(expr) : expr;
         }
 
         function escaped2(forStat) {
             input.forward(options.startEscaped2.length);
             var expr = readUntil(options.closeEscaped2);
-            return forStat ? output.esc(expr) : output.q(expr);
+            return forStat ? output.esc(expr) : expr;
         }
 
         function literal1(forStat) {
@@ -360,12 +357,6 @@ var TMPL = (function(){
             if (!tag.children)
                 tag.children = [];
             tag.children.push(thing);
-        },
-        q: function(txt) {
-            return (txt + "").replace(/&/g, "&amp;")
-                .replace(/\x22/g, "&quot;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;");
         },
         raw: function(txt) {
             txt = new String(txt);

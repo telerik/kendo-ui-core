@@ -49,7 +49,8 @@
               <tr role="row">
               # for (var i = 0; i < columns.length; ++i) {
                 var col = columns[i]; #
-                <th data-field="#: col.field #" class="k-header" role="columnheader">
+                <th data-field="#: col.field #" class="k-header" role="columnheader"
+                    t1="#: '<>' #" t2="#= '<>' #">
                   #= "<b>" + col.title + "</b>" #
                 </th>
               # } #
