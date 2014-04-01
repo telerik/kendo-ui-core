@@ -28,6 +28,7 @@ namespace Kendo.Mvc.UI
         public string Handler { get; set; }
         public string ContainerSelector { get; set; }
         public string ConnectWith { get; set; }
+        public string Ignore { get; set; }
         public string Cursor { get; set; }
         public SortableCursorOffset CursorOffset { get; set; }
         public bool HoldToDrag { get; set; }
@@ -95,6 +96,11 @@ namespace Kendo.Mvc.UI
             if (ConnectWith.HasValue())
             {
                 options["connectWith"] = SanitizeSelector(ConnectWith);
+            }
+
+            if (Ignore.HasValue())
+            {
+                options["ignore"] = SanitizeSelector(Ignore);
             }
 
             if (HoldToDrag)
