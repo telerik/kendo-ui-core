@@ -4830,14 +4830,14 @@ var __meta__ = {
                   rows[idx].style.height = rows2[idx].style.height = "";
               }
 
-              var clientHeight1 = rows[idx].clientHeight;
-              var clientHeight2 = rows2[idx].clientHeight;
+              var offsetHeight1 = rows[idx].offsetHeight;
+              var offsetHeight2 = rows2[idx].offsetHeight;
               var height = 0;
 
-              if (clientHeight1 > clientHeight2) {
-                  height = clientHeight1;
-              } else if (clientHeight1 < clientHeight2) {
-                  height = clientHeight2;
+              if (offsetHeight1 > offsetHeight2) {
+                  height = offsetHeight1;
+              } else if (offsetHeight1 < offsetHeight2) {
+                  height = offsetHeight2;
               }
 
               heights.push(height);
@@ -4853,7 +4853,7 @@ var __meta__ = {
               }
           }
 
-          for (idx = 0, length = containers.length; idx < length; idx++) {
+          for (idx = 0; idx < containersLength; idx++) {
               containers[idx].style.display = "";
           }
        }
