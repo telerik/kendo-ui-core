@@ -240,7 +240,9 @@ var __meta__ = {
             });
 
             if (currentOffset) {
+                element.addClass("k-fx-hidden");
                 kendo.animationFrame(function() {
+                    element.removeClass("k-fx-hidden");
                     that.movable.moveAxis(AXIS, currentOffset);
                     that.hide();
                 });
