@@ -50,7 +50,7 @@
               # for (var i = 0; i < columns.length; ++i) {
                 var col = columns[i]; #
                 <th data-field="#: col.field #" class="k-header" role="columnheader">
-                  #: col.title #
+                  #= "<b>" + col.title + "</b>" #
                 </th>
               # } #
               </tr>
@@ -61,7 +61,7 @@
                 <tr data-uid="#: dataItem.uid #" class="#= i % 2 ? 'k-alt' : '' #">
                   # for (var j = 0; j < columns.length; ++j) {
                     var column = columns[j]; #
-                    <td>#: dataItem[column.field] #</td>
+                    <td>${ dataItem[column.field] }</td>
                   # } #
                 </tr>
               # } #
@@ -107,7 +107,7 @@
 
             dataSource.fetch(function() {
 
-                false && $("#k-grid").kendoGrid({
+                $("#k-grid").kendoGrid({
                     dataSource: this.data(),
                     columns: columns,
                     scrollable: false,

@@ -387,7 +387,7 @@ var TMPL = (function(){
         gat: function(tagName) {
             // XXX: tagName is kinda pointless, but we could throw some
             // errors on mismatch.
-            this.stack.pop(tagName);
+            this.stack.pop();
         }
     };
 
