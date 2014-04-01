@@ -50,45 +50,46 @@ def upload_release_build(options)
 
     bot.go_to_product_versions
 
-    bot.driver.execute_script <<-SCRIPT
-         var masterTable = $find($telerik.$('[id$=\"_dgProducts\"]').attr('id')).get_masterTableView();
-         masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
-    SCRIPT
+    bot.click_and_wait("Product Name", "product")
+    #bot.driver.execute_script <<-SCRIPT
+         #var masterTable = $find($telerik.$('[id$=\"_dgProducts\"]').attr('id')).get_masterTableView();
+         #masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
+    #SCRIPT
 
-    bot.wait_for_title "product"
+    #bot.wait_for_title "product"
 
-    Thread.current.send :sleep, 3
+    #Thread.current.send :sleep, 3
 
     product_names = ['Kendo UI Web', 'Kendo UI Web GPL' 'Kendo UI DataViz', 'Kendo UI Mobile', 'Kendo UI Complete', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
 
-    create_version("Kendo UI Mobile") 
+    create_version("Kendo UI Mobile", bot) 
     #product_names.each { |pn| create_version(pn) }
     
 end
-def create_version(productName)
-      click_and_wait productName, "administration"
-      click_and_wait "Manage Versions", "administration"
+def create_version(productName, bot)
+      bot.click_and_wait productName, "administration"
+      bot.click_and_wait "Manage Versions", "administration"
 
       if defined? SERVICE_PACK_NUMBER
-        click_and_wait "New Minor","administration"
-        fill_version_fields
+        bot.click_and_wait "New Minor","administration"
+        fill_version_fields(bot)
         #upload_files  
       else
-        click_and_wait "New Major","administration"
-        fill_version_fields
+        bot.click_and_wait "New Major","administration"
+        fill_version_fields(bot)
         #upload_files  
       end
 end
-def fill_version_fields
+def fill_version_fields(bot)
        bot.driver.execute_script "$find($telerik.$('[id$=\"_txtMajorName\"]').attr('id')).set_value('#{VERSION_YEAR}.#{VERSION_Q}')"
-       bot.driver.execute_script "$find($telerik.$('[id$=\"_txtMinorName\"']).attr('id')).set_value('#{VERSION}')"
-       bot.driver.execute_script "$find($telerik.$('[id$=\"_cbBeta\"']).attr('id')).checked = true"
+       bot.driver.execute_script "$find($telerik.$('[id$=\"_txtMinorName\"]').attr('id')).set_value('#{VERSION}')"
+       bot.driver.execute_script "$find($telerik.$('[id$=\"_cbBeta\"]').attr('id')).checked = true"
 
        bot.find("[value='Save']").click
        Thread.current.send :sleep, 6
 end
 def upload_files
-
+  #todo
 end
 def release_build_file_copy(release_build_config, name)
     if defined? SERVICE_PACK_NUMBER
