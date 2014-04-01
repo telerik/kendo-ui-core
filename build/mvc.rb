@@ -249,12 +249,16 @@ else
         msbuild MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
     end
 
-    tree :to => 'dist/binaries/',
-         :from => 'wrappers/mvc/**/*.dll',
-         :root => 'wrappers/mvc/'
 
     tree :to => 'dist/binaries/',
-         :from => 'wrappers/mvc/**/Kendo.*.xml',
+         :from => FileList['wrappers/mvc/**/*.dll',
+             'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
+             'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/Kendo.Mvc.dll',
+             'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/Kendo.Mvc.dll',
+             'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml',
+             'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/Kendo.Mvc.xml',
+             'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/Kendo.Mvc.xml'
+         ],
          :root => 'wrappers/mvc/'
 end
 
