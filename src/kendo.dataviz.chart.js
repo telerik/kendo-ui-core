@@ -1602,7 +1602,7 @@ var __meta__ = {
 
             if (box[end] < clipBox[start]) {
                 difference = clipBox[start] - box[end];
-            } else if (clipBox[end] < box[start]){
+            } else if (clipBox[end] < box[start]) {
                 difference = clipBox[end] - box[start];
             }
 

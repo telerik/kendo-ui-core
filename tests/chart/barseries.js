@@ -1054,6 +1054,106 @@
     })();
 
     (function() {
+        var BarLabel = kendo.dataviz.BarLabel,
+            barLabel,
+            paddingBox,
+            text;
+
+        module("BarLabel", {
+            setup: function() {
+                view = new ViewStub();
+            }
+        });
+
+        test("renders no elements if visible option is false", function() {
+            barLabel = new BarLabel("content", {visible: false});
+            var result = barLabel.getViewElements(view);
+
+            equal(result.length, 0);
+            equal(view.log.text.length, 0);
+            equal(view.log.rect.length, 0);
+        });
+
+        module("BarLabel / Align to clip box / vertical", {
+            setup: function() {
+                barLabel = new BarLabel("content", {vertical: true, padding: 0, margin: 0});
+                barLabel.reflow(Box2D(50, 50, 60, 60));
+                text = barLabel.children[0];
+                paddingBox = text.paddingBox.clone();
+            }
+        });
+
+        test("label inside the box is not aligned", function() {
+            barLabel.alignToClipBox(Box2D(0, paddingBox.y1 - 20, 100, paddingBox.y1 + 1));
+            var result = text.paddingBox;
+            equal(result.x1, paddingBox.x1);
+            equal(result.x2, paddingBox.x2);
+            equal(result.y1, paddingBox.y1);
+            equal(result.y2, paddingBox.y2);
+        });
+
+        test("label above the box is aligned to the top of the box", 4, function() {
+            text.reflow = function(result) {
+                equal(result.x1, paddingBox.x1);
+                equal(result.x2, paddingBox.x2);
+                close(result.y1, paddingBox.y1 + 20, 0.1);
+                equal(result.y2, paddingBox.y2 + 20);
+            };
+            barLabel.alignToClipBox(Box2D(0, paddingBox.y2 + 20, 100, paddingBox.y2 + 30));
+        });
+
+        test("label below the box is aligned to the bottom of the box", 4, function() {
+            text.reflow = function(result) {
+                equal(result.x1, paddingBox.x1);
+                equal(result.x2, paddingBox.x2);
+                equal(result.y1, paddingBox.y1 - 20);
+                close(result.y2, paddingBox.y2 - 20, 0.1);
+            };
+            barLabel.alignToClipBox(Box2D(0, paddingBox.y1 - 30, 100, paddingBox.y1 - 20));
+        });
+
+
+        module("BarLabel / Align to clip box / horizontal", {
+            setup: function() {
+                barLabel = new BarLabel("content", {vertical: false, padding: 0, margin: 0});
+                barLabel.reflow(Box2D(50, 50, 60, 60));
+                text = barLabel.children[0];
+                paddingBox = text.paddingBox.clone();
+            }
+        });
+
+        test("label inside the box is not aligned", function() {
+            barLabel.alignToClipBox(Box2D(paddingBox.x1 - 20, 0, paddingBox.x1 + 1, 100));
+            var result = text.paddingBox;
+            equal(result.x1, paddingBox.x1);
+            equal(result.x2, paddingBox.x2);
+            equal(result.y1, paddingBox.y1);
+            equal(result.y2, paddingBox.y2);
+        });
+
+        test("label left from the box is aligned to the left side of the box", 4, function() {
+            text.reflow = function(result) {
+                equal(result.y1, paddingBox.y1);
+                equal(result.y2, paddingBox.y2);
+                close(result.x1, paddingBox.x1 + 20, 0.1);
+                equal(result.x2, paddingBox.x2 + 20);
+            };
+            barLabel.alignToClipBox(Box2D(paddingBox.x2 + 20, 0, paddingBox.x2 + 30, 100));
+        });
+
+        test("label right from the box is aligned to the right side of the box", 4, function() {
+            text.reflow = function(result) {
+                equal(result.y1, paddingBox.y1);
+                equal(result.y2, paddingBox.y2);
+                equal(result.x1, paddingBox.x1 - 20);
+                close(result.x2, paddingBox.x2 - 20, 0.1);
+            };
+            barLabel.alignToClipBox(Box2D(paddingBox.x1 - 30, 0, paddingBox.x1 - 20, 100));
+        });
+
+    })();
+
+    (function() {
         var positiveData = [100, 150],
             negativeData = [-100, -150],
             VALUE_AXIS_MAX = 200,
