@@ -299,7 +299,7 @@ var __meta__ = {
                 kendo.widgetInstance($(href), ui).openFor(link);
                 // if propagation is not stopped and actionsheet is opened from tabstrip,
                 // the actionsheet is closed immediately.
-                if (rel === "actionsheet") {
+                if (rel === "actionsheet" || rel === "drawer") {
                     e.stopPropagation();
                 }
             } else {
