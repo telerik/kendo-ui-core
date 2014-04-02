@@ -6,7 +6,7 @@
         var tooltip,
             element,
             chartElement,
-            dataPointMock,
+            pointMock,
             RED = "rgb(255,0,0)",
             GREEN = "rgb(0,255,0)",
             BLUE = "rgb(0,0,255)";
@@ -15,19 +15,18 @@
             chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
             tooltip = new dataviz.Tooltip(chartElement, options);
             element = tooltip.element;
-            element.css({ width: "45px", height: "35px" });
         }
 
         function destroyTooltip() {
             chartElement.remove();
         }
 
-        function showNow(point) {
-            tooltip.show(point);
+        function showTooltip() {
+            tooltip.show(pointMock);
         }
 
         function createPoint(options) {
-            dataPointMock = {
+            pointMock = {
                 value: 1,
                 box: new dataviz.Box2D(0, 0, 10, 10),
                 options: {
@@ -59,7 +58,7 @@
                 }
             };
 
-            $.extend(dataPointMock, options);
+            $.extend(pointMock, options);
         }
 
         // ------------------------------------------------------------
@@ -86,14 +85,14 @@
         });
 
         test("sets series tooltip font", function() {
-            createTooltip();
-            showNow(kendo.deepExtend({}, dataPointMock, {
+            createPoint({
                 options: {
                     tooltip: {
                         font: "16px Tahoma"
                     }
                 }
-            }));
+            });
+            showTooltip();
             equal(element.css("fontSize"), "16px");
             equal(element.css("fontFamily"), "Tahoma");
         });
@@ -109,7 +108,7 @@
         });
 
         asyncTest("show displays tooltip for last point with a delay", function() {
-            tooltip.show(dataPointMock);
+            tooltip.show(pointMock);
 
             setTimeout(function() {
                 equal(element.text(), "1");
@@ -119,78 +118,78 @@
 
         test("can override border color", function() {
             createTooltip({ border: { color: RED } });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.css("border-top-color").replace(/\s/g, ''), RED);
         });
 
         test("sets border color to current point color", function() {
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.css("border-top-color").replace(/\s/g, ''), RED);
         });
 
         test("sets div background", function() {
             tooltip.options.background = BLUE;
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
         });
 
         test("sets div background from the current point color", function() {
-            dataPointMock.color = BLUE;
-            showNow(dataPointMock);
+            pointMock.color = BLUE;
+            showTooltip();
             equal(element.css("backgroundColor").replace(/\s/g, ''), BLUE);
         });
 
         test("sets text color", function() {
             createTooltip({ color: GREEN });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.css("color").replace(/\s/g, ''), GREEN);
         });
 
         test("applies full label format", function() {
             createTooltip({ format: "{0}%" });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "1%");
         });
 
         test("applies simple label format", function() {
             createTooltip({ format: "p0" });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "100 %");
         });
 
         test("renders template", function() {
             createTooltip({ template: "${value}%" });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "1%");
         });
 
         test("renders compiled template", function() {
             createTooltip({ template: kendo.template("${value}%") });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "1%");
         });
 
         test("renders template when format is set", function() {
             createTooltip({ format: "{0} percent", template: "${value}%" });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "1%");
         });
 
         test("template context has category", function() {
             createTooltip({ template: "${category}" });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "category");
         });
 
         test("template context has series", function() {
             createTooltip({ template: "${series.name}" });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "series");
         });
 
         test("template context has dataItem", function() {
             createTooltip({ template: "${dataItem.field}" });
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "value");
         });
 
@@ -204,6 +203,18 @@
             deepEqual([parseInt(tooltip.element.css("left"), 10),
                   parseInt(tooltip.element.css("top"), 10)],
                   [10, 20]);
+        });
+
+        test("tooltipAnchor receives correct tooltip size", function() {
+            createPoint({
+                tooltipAnchor: function(width, height) {
+                    equal(width, 113);
+                    equal(height, 30);
+                }
+            });
+
+            createTooltip({ template: "<div style='width: 100px; height: 20px;' />"});
+            showTooltip();
         });
 
         test("positions accounts for chart padding", function() {
@@ -226,7 +237,7 @@
 
         test("applies format from the series", function() {
             createPoint({ options: { tooltip: { format: "{0:C}" } }});
-            showNow(dataPointMock);
+            showTooltip();
             equal(element.text(), "$1.00");
         });
 
@@ -278,96 +289,40 @@
             ok(tooltip.element.hasClass("k-tooltip-inverse"));
         });
 
-    })();
-
-
-    (function() {
-        var tooltip,
-            element,
-            chartElement,
-            dataPointMock,
-            RED = "rgb(255,0,0)";
-
-        function createTooltip() {
-            chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
-            tooltip = new dataviz.Tooltip(chartElement, {
-                background: "black",
-                border: {
-                    width: 5,
-                    color: "red"
-                },
-                visible: false
-            });
-
-            element = tooltip.element;
-            element.css({ width: "45px", height: "35px" });
-        }
-
-        function destroyTooltip() {
-            chartElement.remove();
-        }
-
-        function showNow(point) {
-            tooltip.show(point);
-        }
-
-        function createSeriesPoint(options) {
-            dataPointMock = {
-                value: 1,
-                box: new dataviz.Box2D(0, 0, 10, 10),
-                options: {
-                    aboveAxis: true,
-                    color: RED,
-                    tooltip: {
-                        border: {
-                            color: "blue",
-                            width: 2
-                        },
-                        visible: true,
-                        color: "red",
-                        background: "green",
-                        opacity: 1
-                    }
-                },
-                category: "category",
-                dataItem: {
-                    field: "value"
-                },
-                tooltipAnchor: function() {
-                    return new dataviz.Point2D();
-                },
-                owner: {
-                    formatPointValue: function(value, tooltipFormat) {
-                        return kendo.format(tooltipFormat, value);
-                    }
-                },
-                formatPointValue: function(format) {
-                    var point = this;
-
-                    return point.owner.formatPointValue(point.value, format);
-                }
-            };
-
-            $.extend(dataPointMock, options);
-        }
-
         // ------------------------------------------------------------
         module("Tooltip / Series", {
             setup: function() {
                 createTooltip();
-                createSeriesPoint();
             },
             teardown: destroyTooltip
         });
 
         test("sets border width", function() {
-            showNow(dataPointMock);
+            createPoint({
+                options: {
+                    tooltip: {
+                        border: {
+                            width: 2
+                        }
+                    }
+                }
+            });
+            showTooltip();
+
             equal(element.css("border-top-width"), "2px");
         });
 
         test("sets opacity", function() {
-            showNow(dataPointMock);
-            equal(element.css("opacity"), 1);
+            createPoint({
+                options: {
+                    tooltip: {
+                        opacity: 0.5
+                    }
+                }
+            });
+            showTooltip();
+
+            equal(element.css("opacity"), 0.5);
         });
     })();
 

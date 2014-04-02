@@ -9535,10 +9535,10 @@ var __meta__ = {
                 return;
             }
 
+            tooltip.element.html(tooltip._pointContent(point));
             tooltip.anchor = tooltip._pointAnchor(point);
 
             if (tooltip.anchor) {
-                tooltip.element.html(tooltip._pointContent(point));
                 tooltip._updateStyle(options, point);
                 tooltip.setStyle(options);
 
