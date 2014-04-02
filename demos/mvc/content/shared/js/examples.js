@@ -431,7 +431,7 @@
                 } catch (err) { }
             }
 
-        				$(doc)
+                $(doc)
                 .on('click', '.try-kendo', function () {
                     window.dojo.postSnippet($('#HTML-1').data('html'), window.location.href);
                 })
