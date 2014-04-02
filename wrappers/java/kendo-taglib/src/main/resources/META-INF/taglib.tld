@@ -11033,12 +11033,6 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Sets the text content of the Shape.</description>
-            <name>content</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
             <description>Specifies if the shape is editable by the user.</description>
             <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11154,6 +11148,28 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>Defines the shapes content settings.</description>
+        <name>diagram-shapeDefaults-content</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsContentTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The alignment of the text inside the shape.</description>
+            <name>align</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text displayed in the shape.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Defines the hover configuration.</description>
         <name>diagram-shapeDefaults-hover</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsHoverTag</tag-class>
@@ -11237,12 +11253,6 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <attribute>
             <description>Defines the fill-color of the shape.</description>
             <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Sets the text content of the Shape.</description>
-            <name>content</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11367,6 +11377,28 @@ See visual.</description>
         <tag-class>com.kendoui.taglib.diagram.ShapeConnectorPositionFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+    <tag>
+        <description>Defines the shapes content settings.</description>
+        <name>diagram-shape-content</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeContentTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The alignment of the text inside the shape.</description>
+            <name>align</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text displayed in the shape.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
     <tag>
         <description>Defines the hover configuration.</description>
         <name>diagram-shape-hover</name>

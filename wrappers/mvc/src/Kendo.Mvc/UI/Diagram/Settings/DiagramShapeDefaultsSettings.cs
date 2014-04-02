@@ -14,6 +14,8 @@ namespace Kendo.Mvc.UI
         
             Connectors = new List<DiagramShapeDefaultsSettingsConnector>();
                 
+            Content = new DiagramShapeDefaultsContentSettings();
+                
             Hover = new DiagramShapeDefaultsHoverSettings();
                 
             Rotation = new DiagramShapeDefaultsRotationSettings();
@@ -75,7 +77,11 @@ namespace Kendo.Mvc.UI
             set;
         }
         
-        public string Content { get; set; }
+        public DiagramShapeDefaultsContentSettings Content
+        {
+            get;
+            set;
+        }
         
         //<< Fields
 
@@ -169,11 +175,12 @@ namespace Kendo.Mvc.UI
                 json["rotation"] = rotation;
             }
                 
-            if (Content.HasValue())
+            var content = Content.ToJson();
+            if (content.Any())
             {
-                json["content"] = Content;
+                json["content"] = content;
             }
-            
+                
         //<< Serialization
 
             if (Visual.HasValue())

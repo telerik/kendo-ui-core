@@ -1969,4 +1969,4 @@
     <Compile Include="UI\Diagram\Fluent\DiagramShapeConnectorBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\MobileActionSheet\MobileActionSheetType.cs" /></ItemGroup></Project>
+<ItemGroup><Compile Include="UI\MobileActionSheet\MobileActionSheetType.cs" /></ItemGroup><ItemGroup><Compile Include="UI\Diagram\Settings\DiagramShapeDefaultsContentSettings.cs" /><Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsContentSettingsBuilder.cs" /><Compile Include="UI\Diagram\Settings\DiagramShapeContentSettings.cs" /><Compile Include="UI\Diagram\Fluent\DiagramShapeContentSettingsBuilder.cs" /></ItemGroup></Project>
