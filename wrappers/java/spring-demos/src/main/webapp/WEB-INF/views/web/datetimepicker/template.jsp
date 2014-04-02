@@ -19,7 +19,7 @@
 	        +new Date(today.getFullYear(), today.getMonth() - 1, 3),
 	        +new Date(today.getFullYear(), today.getMonth() - 2, 22)
 	    ];
-    
+
 	    function isInArray(date, dates) {
 	    	for(var idx = 0, length = dates.length; idx < length; idx++) {
 	    		if (+date === +dates[idx]) {
@@ -29,7 +29,14 @@
 	    	
 	    	return false;
 	    }
-    </script>    
+
+	    function onOpen() {
+	       var dateViewCalendar = this.dateView.calendar;
+	       if (dateViewCalendar) {
+	            dateViewCalendar.element.width(340);
+	        }
+		}
+    </script>
         <%
         String template = "# if (isInArray(data.date, birthdays)) { #" +
 	      "<div class=\"" +
@@ -47,26 +54,17 @@
     String footer = "Today - #=kendo.toString(data, 'd') #";
     %>
     <div class="demo-section">    
-        <kendo:dateTimePicker name="datetimepicker" value="<%=new Date()%>" footer="<%=footer%>">
+        <kendo:dateTimePicker name="datetimepicker" value="<%=new Date()%>" footer="<%=footer%>"  open="onOpen">
             <kendo:dateTimePicker-month content="<%=template%>"/>
         </kendo:dateTimePicker>
-        
     </div>
-    <script>
-	    $(document).ready(function() {
-	        $("#datetimepicker").data("kendoDateTimePicker")
-	                            .dateView.calendar.element
-	                            .width(340);
-	    });
-	</script>
-	
     <style scoped>       
         .demo-section {
             width: 185px;
         }
         
-        .birthday {
-            background: transparent url('<c:url value="/resources/web/calendar/cake.png" />') no-repeat 0 50%;
+        .party {
+            background: transparent url(<c:url value="/resources/web/calendar/cake.png" />) no-repeat 0 50%;
             display: inline-block;
             width: 16px;
             height: 16px;

@@ -48,12 +48,14 @@
                                      '# } #' +
                                      '#= data.value #'
                         },
-                        footer: "Today - #=kendo.toString(data, 'd') #"
+                        footer: "Today - #=kendo.toString(data, 'd') #",
+                        open: function () {
+                            var dateViewCalendar = this.dateView.calendar;
+                            if (dateViewCalendar) {
+                                dateViewCalendar.element.width(300);
+                            }
+                        }
                     });
-
-                    $("#datetimepicker").data("kendoDateTimePicker")
-                                    .dateView.calendar.element
-                                    .width(300);
                 });
             </script>
 

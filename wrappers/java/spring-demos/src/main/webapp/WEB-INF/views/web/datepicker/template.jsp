@@ -11,7 +11,16 @@
 	</div>
 	
     <script>
-	    function isInArray(date, dates) {
+	   var today = new Date(),
+	   birthdays = [
+	       +new Date(today.getFullYear(), today.getMonth(), 11),
+	       +new Date(today.getFullYear(), today.getMonth() + 1, 6),
+	       +new Date(today.getFullYear(), today.getMonth() + 1, 27),
+	       +new Date(today.getFullYear(), today.getMonth() - 1, 3),
+	       +new Date(today.getFullYear(), today.getMonth() - 2, 22)
+	   ];
+
+	   function isInArray(date, dates) {
 	    	for(var idx = 0, length = dates.length; idx < length; idx++) {
 	    		if (+date === +dates[idx]) {
 	    			return true;
@@ -20,6 +29,13 @@
 	    	
 	    	return false;
 	    }
+
+	    function onOpen() {
+	       var dateViewCalendar = this.dateView.calendar;
+	       if (dateViewCalendar) {
+	            dateViewCalendar.element.width(340);
+	        }
+		}
     </script>
         <%
         String template = "# if (isInArray(+data.date, data.dates)) { #" +
@@ -30,22 +46,14 @@
     String footer = "Today - #=kendo.toString(data, 'd') #";
     %>
      <div class="demo-section" style="width: 155px;">   
-        <kendo:datePicker name="datepicker" value="<%=new Date()%>" dates="${dates}" footer="<%=footer%>">
+        <kendo:datePicker name="datepicker" value="<%=new Date()%>" dates="${dates}" footer="<%=footer%>" open="onOpen">
             <kendo:datePicker-month content="<%=template%>"/>
         </kendo:datePicker>
-        
     </div>
-    <script>
-	    $(document).ready(function() {
-	        $("#datepicker").data("kendoDatePicker")
-	                        .dateView.calendar.element
-	                        .width(340);
-	    });
-	</script>
 	
     <style scoped>          
         .demo-section {
-            margin: 0 0;
+            width: 185px;
         }
 
         .birthday {
