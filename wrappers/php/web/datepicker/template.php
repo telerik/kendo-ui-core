@@ -13,21 +13,29 @@ require_once '../../include/header.php';
 <div class="demo-section" style="width: 155px;">
 <?php
 $datePicker = new \Kendo\UI\DatePicker('datepicker');
-$datePicker->value(new DateTime('today', new DateTimeZone('UTC')))
-           ->month(array(
+$datePicker ->value(new DateTime('today', new DateTimeZone('UTC')))
+            ->month(array(
                'content' => <<<TEMPLATE
 # if (isInArray(data.date, birthdays)) { #
     <div class="birthday"></div>
 # } #
 #= data.value #
 TEMPLATE
-           ))
-           ->footer("Today - #= kendo.toString(data, 'd') #");
+            ))
+            ->footer("Today - #= kendo.toString(data, 'd') #")
+            ->open("onOpen");
 
 echo $datePicker->render();
 ?>
 </div>
 <script>
+    function onOpen() {
+        var dateViewCalendar = this.dateView.calendar;
+        if (dateViewCalendar) {
+            dateViewCalendar.element.width(300);
+        }
+    }
+
     var today = new Date();
     var birthdays = [
            new Date(today.getFullYear(), today.getMonth(), 11),
@@ -49,12 +57,6 @@ echo $datePicker->render();
 
         return false;
     }
-
-    $(function() {
-         $("#datepicker").data("kendoDatePicker")
-                        .dateView.calendar.element
-                        .width(300);
-    });
 </script>
 
 <style scoped>
