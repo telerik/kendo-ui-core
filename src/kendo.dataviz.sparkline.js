@@ -133,7 +133,11 @@ var __meta__ = {
             },
             transitions: false,
 
-            pointWidth: 5
+            pointWidth: 5,
+
+            panes: [{
+                clip: false
+            }]
         },
 
         _applyDefaults: function(options) {
