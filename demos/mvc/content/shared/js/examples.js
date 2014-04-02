@@ -405,9 +405,6 @@
                             element.add(sibling).bind("click", stopDefaults);
                             Application.loadWidget(navigateUrl);
                         }
-                    })
-                    .on('click', '.try-kendo', function () {
-                        window.dojo.postSnippet($('#HTML-1').data('html'), window.location.href);
                     });
 
                 $(window).bind("popstate", function (e) {
@@ -434,7 +431,10 @@
                 } catch (err) { }
             }
 
-            $(doc)
+        				$(doc)
+                .on('click', '.try-kendo', function () {
+                    window.dojo.postSnippet($('#HTML-1').data('html'), window.location.href);
+                })
                 .on("mouseenter mouseleave", DETAILHANDLE, function (e) {
                     var element = $(this),
                         extender = element.next();
