@@ -17,11 +17,6 @@
                 return window.performance && window.performance.now ? window.performance.now() : new window.Date().getTime()
             }
 
-            $("button").click(function() {
-                columns.push(columns.shift());
-                m.redraw();
-            });
-
             var dataSource = new kendo.data.DataSource({
                 type: "odata",
                 transport: {
@@ -32,7 +27,7 @@
                 },
                 change: function() {
                     var start = now();
-                    m.render(document.getElementById("grid"), table());
+                    kendo.dom.render(document.getElementById("grid"), table());
                     var end = now();
                     console.log("Mithril", end-start);
                 }
@@ -106,12 +101,23 @@
                 return kendo.dom("td", dataItem[field]);
             }
 
+            /*
+            var dom = kendo.dom("div", "Foo");
 
+            kendo.dom.render(document.getElementById("grid"), dom);
+            */
+
+            var dom = kendo.DOM("div", null, "Foo");
+
+            kendo.DOM.render(document.getElementById("grid"), dom);
+
+            /*
             dataSource.fetch(function() {
-                m.render(document.getElementById("grid"), table());
+                kendo.dom.render(document.getElementById("grid"), table());
 
                 $("#grid").find("th").kendoSorter({ dataSource: dataSource });
             });
+            */
 
         </script>
     </body>

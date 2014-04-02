@@ -1,51 +1,63 @@
 (function(window) {
-    var selectorCache = {}
     var type = {}.toString
-    var parser = /(?:(^|#|\.)([^#\.\[\]]+))|(\[.+?\])/g, attrParser = /\[(.+?)(?:=("|'|)(.+?)\2)?\]/
 
-//    window.selectorCache = selectorCache;
+    var Node = function() {
+    };
 
-    kendo.dom = m = function(tag, attrs, children) {
-        //var args = arguments
+    var Element = function(tag, attr, children) {
+        this.tag = tag;
+        this.attr = attr;
+        this.children = children;
+    };
 
-        var hasAttrs = attrs !== undefined && attrs.constructor === Object;// type.call(attrs) == "[object Object]";
+    Element.prototype = new Node;
 
-        //var attrs = hasAttrs ? args[1] : {}
+    Element.prototype.render = function(parent) {
+        var element = document.createElement(this.tag);
 
-        //var classAttrName = "class" in attrs ? "class" : "className"
+        for (var i = 0; i < this.children.length; i++) {
+            this.children[i].render(element);
+        }
 
-        //var cell = selectorCache[tag];
+        parent.appendChild(element);
+    }
 
-        //if (cell === undefined) {
-         //   selectorCache[tag] = cell = {tag: tag, attrs: {}}
+    var TextNode = function(nodeValue) {
+        this.nodeValue = nodeValue;
+    };
 
-          //  var match, classes = []
+    TextNode.prototype = new Node;
+    TextNode.prototype.render = function(parent) {
+        parent.appendChild(document.createTextNode(this.nodeValue));
+    }
 
-            /*
-            while (match = parser.exec(tag)) {
-                if (match[1] == "") cell.tag = match[2]
-                else if (match[1] == "#") cell.attrs.id = match[2]
-                else if (match[1] == ".") classes.push(match[2])
-                else if (match[3][0] == "[") {
-                    var pair = attrParser.exec(match[3])
-                    cell.attrs[pair[1]] = pair[3] || true
-                }
-            }
-            */
-            //if (classes.length > 0) cell.attrs[classAttrName] = classes.join(" ")
-        //}
-        //cell = clone(cell)
-        //cell.attrs = clone(cell.attrs)
-        //cell.children = hasAttrs ? args[2] : args[1];
-        //for (var attrName in attrs) {
-        //    if (attrName == classAttrName) cell.attrs[attrName] = (cell.attrs[attrName] || "") + " " + attrs[attrName]
-        //    else cell.attrs[attrName] = attrs[attrName]
-        //}
+    kendo.DOM = function(tag, attrs, children) {
+        if (typeof children === "string") {
+            children = [new TextNode(children)];
+        }
+
+        return new Element(tag, attrs, children);
+    }
+
+    kendo.DOM.render = function(root, node) {
+        node.render(root);
+    }
+
+    kendo.dom = function(tag, attrs, children) {
+        var hasAttrs = attrs !== undefined && attrs.constructor === Object;
+
         return {
             tag: tag,
             attrs: hasAttrs ? attrs : {},
             children: hasAttrs ? children : attrs
         };
+    }
+
+    kendo.dom.render = function(root, cell) {
+        var index = nodeCache.indexOf(root)
+        var id = index < 0 ? nodeCache.push(root) - 1 : index
+        var node = root;
+        cellCache[id] = build(node, cell, cellCache[id])
     }
 
     function build(parent, data, cached) {
@@ -104,7 +116,7 @@
             }
         } else if (dataType == "[object Object]") {
 
-            if (data.tag != cached.tag) { //|| Object.keys(data.attrs).join() != Object.keys(cached.attrs).join()) {
+            if (data.tag != cached.tag) {
                 clear(cached.nodes);
             }
 
@@ -128,49 +140,17 @@
                 cached.nodes.intact = true;
             }
 
-            //if (type.call(data.attrs["config"]) == "[object Function]") data.attrs["config"](node, !isNew)
         } else {
             var node;
 
             if (cached.nodes.length === 0) {
-            /*
-                if (data.$trusted) {
-                    var lastChild = parent.lastChild;
-                    parent.insertAdjacentHTML("beforeend", data);
-                    node = lastChild ? lastChild.nextSibling : parent.firstChild;
-                } else */ {
-
-                    node = document.createTextNode(data)
-                    parent.appendChild(node)
-                }
+                node = document.createTextNode(data)
+                parent.appendChild(node)
                 cached = "string number boolean".indexOf(typeof data) > -1 ? new data.constructor(data) : data
                 cached.nodes = [node];
-            } else if (cached !== data) { //(cached.valueOf() !== data.valueOf()) {
-                /*
-                if (data.$trusted) {
-                    var current = cached.nodes[0];
-                    var nodes = [current];
-
-                    if (current) {
-                        while (current = current.nextSibling)  {
-                            nodes.push(current);
-                        }
-
-                        clear(nodes);
-
-                        var lastChild = parent.lastChild;
-
-                        parent.insertAdjacentHTML("beforeend", data);
-
-                        node = lastChild ? lastChild.nextSibling : parent.firstChild;
-                    } else  {
-                        parent.innerHTML = data;
-                    }
-                } else */{
-                    node = cached.nodes[0];
-                    //parent.appendChild(node);
-                    node.nodeValue = data;
-                }
+            } else if (cached !== data) {
+                node = cached.nodes[0];
+                node.nodeValue = data;
                 cached = new data.constructor(data);
                 cached.nodes = [node];
             } else  {
@@ -186,8 +166,6 @@
             var dataAttr = dataAttrs[attrName];
             if (!(attrName in cachedAttrs) || cachedAttrs[attrName] !== dataAttr) {
                 cachedAttrs[attrName] = dataAttr;
-                //if (attrName == "config") continue
-                //if (attrName.indexOf("on") == 0 && typeof dataAttr == "function") dataAttr = autoredraw(dataAttr, node)
 
                 if (attrName == "style") {
                     for (var rule in dataAttr) {
@@ -212,105 +190,10 @@
         nodes.length = 0;
     }
 
-/*
-    function clone(object) {
-        var result = {}
-        for (var prop in object) result[prop] = object[prop]
-        return result
-    }
-    function autoredraw(callback, object) {
-        return function() {
-            m.startComputation()
-            var output = callback.apply(object || window, arguments)
-            m.endComputation()
-            return output
-        }
-    }
-
-*/
-    var html;
-    /*
-    var documentNode = {
-        insertAdjacentHTML: function(_, data) {
-            window.document.write(data)
-            window.document.close()
-        },
-        appendChild: function(node) {
-            if (html === undefined) html = window.document.createElement("html")
-            if (node.nodeName == "HTML") html = node
-            else html.appendChild(node)
-            if (window.document.documentElement !== html) {
-                window.document.replaceChild(html, window.document.documentElement)
-            }
-        }
-    };
-    */
-
     var nodeCache = [], cellCache = {};
 
     window.nodeCache = nodeCache;
 
     window.cellCache = cellCache;
 
-    m.render = function(root, cell) {
-        var index = nodeCache.indexOf(root)
-        var id = index < 0 ? nodeCache.push(root) - 1 : index
-        //var node = root == window.document || root == window.document.documentElement ? documentNode : root
-        var node = root;
-        cellCache[id] = build(node, cell, cellCache[id])
-    }
-
-/*
-    m.trust = function(value) {
-        value = new String(value)
-        value.$trusted = true
-        return value
-    }
-*/
-
-    //var currentRoot, currentModule = {view: function() {}}, currentController = {}, now = 0, lastRedraw = 0, lastRedrawId = 0
-    var now = 0, lastRedraw = 0, lastRedrawId = 0;
-
-/*
-    m.module = function(root, module) {
-        m.startComputation()
-        currentRoot = root
-        currentModule = module
-        currentController = new module.controller
-        m.endComputation()
-    }
-    m.redraw = function() {
-        m.render(currentRoot || window.document, currentModule.view(currentController))
-        lastRedraw = now
-    }
-*/
-    function redraw() {
-        now = window.performance && window.performance.now ? window.performance.now() : new window.Date().getTime()
-        if (now - lastRedraw > 16) m.redraw()
-        else {
-            var cancel = window.cancelAnimationFrame || window.clearTimeout
-            var defer = window.requestAnimationFrame || window.setTimeout
-            cancel(lastRedrawId)
-            lastRedrawId = defer(m.redraw, 0)
-        }
-    }
-
-    var pendingRequests = 0, computePostRedrawHook = null
-    m.startComputation = function() {pendingRequests++}
-    m.endComputation = function() {
-        pendingRequests = Math.max(pendingRequests - 1, 0)
-        if (pendingRequests == 0) {
-            redraw()
-            if (computePostRedrawHook) {
-                computePostRedrawHook()
-                computePostRedrawHook = null
-            }
-        }
-    }
-
-/*
-    m.withAttr = function(prop, withAttrCallback) {
-        return function(e) {withAttrCallback(prop in e.currentTarget ? e.currentTarget[prop] : e.currentTarget.getAttribute(prop))}
-    }
-*/
 }(this));
