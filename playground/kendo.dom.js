@@ -8,7 +8,7 @@
     kendo.dom = m = function(tag, attrs, children) {
         //var args = arguments
 
-        var hasAttrs = type.call(attrs) == "[object Object]";
+        var hasAttrs = attrs !== undefined && attrs.constructor === Object;// type.call(attrs) == "[object Object]";
 
         //var attrs = hasAttrs ? args[1] : {}
 
@@ -34,12 +34,6 @@
             */
             //if (classes.length > 0) cell.attrs[classAttrName] = classes.join(" ")
         //}
-        var cell = {
-            tag: tag,
-            attrs: hasAttrs ? attrs : {},
-            children: hasAttrs ? children : attrs
-        };
-
         //cell = clone(cell)
         //cell.attrs = clone(cell.attrs)
         //cell.children = hasAttrs ? args[2] : args[1];
@@ -47,8 +41,13 @@
         //    if (attrName == classAttrName) cell.attrs[attrName] = (cell.attrs[attrName] || "") + " " + attrs[attrName]
         //    else cell.attrs[attrName] = attrs[attrName]
         //}
-        return cell;
+        return {
+            tag: tag,
+            attrs: hasAttrs ? attrs : {},
+            children: hasAttrs ? children : attrs
+        };
     }
+
     function build(parent, data, cached) {
         if (data === null || data === undefined) {
             return;
@@ -105,7 +104,7 @@
             }
         } else if (dataType == "[object Object]") {
 
-            if (data.tag != cached.tag || Object.keys(data.attrs).join() != Object.keys(cached.attrs).join()) {
+            if (data.tag != cached.tag) { //|| Object.keys(data.attrs).join() != Object.keys(cached.attrs).join()) {
                 clear(cached.nodes);
             }
 
@@ -146,7 +145,7 @@
                 }
                 cached = "string number boolean".indexOf(typeof data) > -1 ? new data.constructor(data) : data
                 cached.nodes = [node];
-            } else if (cached.valueOf() !== data.valueOf()) {
+            } else if (cached !== data) { //(cached.valueOf() !== data.valueOf()) {
                 /*
                 if (data.$trusted) {
                     var current = cached.nodes[0];
@@ -169,7 +168,7 @@
                     }
                 } else */{
                     node = cached.nodes[0];
-                    parent.appendChild(node);
+                    //parent.appendChild(node);
                     node.nodeValue = data;
                 }
                 cached = new data.constructor(data);
