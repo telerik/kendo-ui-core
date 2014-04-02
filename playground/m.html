@@ -5,6 +5,7 @@
         <script src="http://fb.me/react-0.8.0.js"></script>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.dom.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.data.odata.js"></script>
         <script src="../src/kendo.grid.js"></script>
@@ -12,7 +13,7 @@
         <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
         <style>
             fieldset {
-                width: 500px;
+                width: 400px;
                 float:left;
             }
         </style>
@@ -33,6 +34,11 @@
         <fieldset>
            <legend>Kendo UI</legend>
            <div id="k-grid"></div>
+        </fieldset>
+
+        <fieldset>
+           <legend>Kendo UI Virtual DOM</legend>
+           <div id="kv-grid" class="k-grid k-widget"></div>
         </fieldset>
 
         <script>
@@ -65,6 +71,69 @@
                 { field: "OrderID", title: "Order ID" },
                 { field: "ShipName", title: "Ship Name" }
             ];
+            // Kendo
+
+            function kendo_table() {
+                return kendo.dom("table", { role: "grid" }, [kendo_colgroup(), kendo_thead(), kendo_tbody()]);
+            }
+
+            function kendo_thead() {
+                return kendo.dom("thead", { role: "rowgroup", className: "k-grid-header" }, [kendo_theadrow()]);
+            }
+
+            function kendo_theadrow() {
+                return kendo.dom("tr", { role: "row" }, kendo_ths());
+            }
+
+            function kendo_ths() {
+                return columns.map(function(column) {
+                    return kendo_th(column);
+                });
+            }
+
+            function kendo_th(column) {
+                return kendo.dom("th", { "data-field": column.field, className: "k-header", role: "columnheader" }, column.title);
+            }
+
+            function kendo_tbody() {
+                return kendo.dom("tbody", null, kendo_rows());
+            }
+
+            function kendo_colgroup() {
+                return kendo.dom("colgroup", null, kendo_cols());
+            }
+
+            function kendo_cols() {
+                return columns.map(function() {
+                    return kendo.dom("col");
+                });
+            }
+
+            function kendo_rows() {
+                return kvds.view().map(kendo_row);
+            }
+
+            function kendo_row(dataItem, index) {
+                var attr = {
+                    "data-uid": dataItem.uid
+                };
+
+                if (index % 2) {
+                    attr["className"] = "k-alt";
+                }
+
+                return kendo.dom("tr", attr, kendo_cells(dataItem));
+            }
+
+            function kendo_cells(dataItem) {
+                return columns.map(function(column) {
+                    return kendo_cell(column.field, dataItem);
+                });
+            }
+
+            function kendo_cell(field, dataItem) {
+                return kendo.dom("td", null, String(dataItem[field]));
+            }
 
             // Mithril
             function table() {
@@ -194,6 +263,8 @@
                 }
             });
 
+            var kvds;
+
             dataSource.fetch(function() {
                 $("#k-grid").kendoGrid({
                     dataSource: this.data(),
@@ -208,6 +279,20 @@
                     }
                 });
 
+                var kv = document.getElementById("kv-grid");
+
+                kvds = new kendo.data.DataSource({
+                    data: this.data(),
+                    change: function() {
+                        var start = now();
+                        kendo.dom.render(kv, kendo_table());
+                        var end = now();
+                        console.log("Kendo Virtual DOM", end-start);
+                    }
+                });
+
+                kvds.fetch();
+
                 m.module(document.getElementById("m-grid"), {
                     controller: function() {
                     },
@@ -216,6 +301,11 @@
                         return dom;
                     }
                 });
+
+                var start = now();
+                kendo.dom.render(kv, kendo_table());
+                var end = now();
+                console.log("Kendo Virtual DOM", end-start);
 
                 var reactDataSource = new kendo.data.DataSource({
                     data: this.data(),
@@ -238,6 +328,7 @@
                 console.log("ReactJS", end-start);
 
                 $("#m-grid").find("th").kendoSorter({ dataSource: dataSource });
+                $("#kv-grid").find("th").kendoSorter({ dataSource: kvds });
                 $("#r-grid").find("th").kendoSorter({ dataSource: reactDataSource });
             });
 
