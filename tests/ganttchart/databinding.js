@@ -2,37 +2,24 @@
     var GanttChart = kendo.ui.GanttChart;
     var GanttChartDataSource = kendo.data.GanttChartDataSource;
     var container;
+    var JSONData = [
+        { title: "Task1", parentId: null, id: 1 },
+            { title: "Child 1.1", parentId: 1, id: 2 },
+            { title: "Child 1.2", parentId: 1, id: 3 },
+            { title: "Child 1.3", parentId: 1, id: 4 },
+        { title: "Task2", parentId: null, id: 5 },
+            { title: "Child 2.1", parentId: 5, id: 6 },
+            { title: "Child 2.2", parentId: 5, id: 7 },
+            { title: "Child 2.3", parentId: 5, id: 8 }
+    ];
     var dataSource = {
-        data: [
-            {
-                title: "Root",
-                tasks: [
-                    { title: "Child1" }
-                ]
-            }
-        ],
+        data: JSONData,
         schema: {
             model: {
-                children: "tasks"
+                id: "id"
             }
         }
     };
-    var JSONData = [
-        {
-            title: "Task1", items: [
-                { title: "Child 1.1" },
-                { title: "Child 1.2" },
-                { title: "Child 1.3" }
-            ]
-        },
-        {
-            title: "Task2", items: [
-                { title: "Child 2.1" },
-                { title: "Child 2.2" },
-                { title: "Child 2.3" }
-            ]
-        }
-    ];
 
     module("GanttChart", {
         setup: function() {
@@ -69,16 +56,6 @@
                 dataSource: new kendo.data.DataSource()
             });
         });
-    });
-
-    test("creates a GanttChartDataSource for child items", function() {
-        var ganttChart = new GanttChart(container, {
-            dataSource: [
-                { items: [{}, {}] }
-            ]
-        });
-
-        ok(ganttChart.dataSource.at(0).children instanceof kendo.data.GanttChartDataSource);
     });
 
     test("dataBinding event is fired", function () {
@@ -119,47 +96,21 @@
         ganttChart.setDataSource(new kendo.data.GanttChartDataSource());
     });
 
-    test("Initializing from JSON array populates root items", function() {
+    test("Initializing from JSON array populates items", function() {
         var ganttChart = new GanttChart(container, JSONData);
 
-        equal(ganttChart.dataSource.data().length, 2);
+        equal(ganttChart.dataSource.data().length, 8);
     });
 
-    test("Initializing from JSON array populates child items", function() {
-        var ganttChart = new GanttChart(container, JSONData);
-
-        equal(ganttChart.dataSource.at(0).children.data().length, 3);
-    });
-
-    test("Initializing from local datasource populates root items", function() {
-        var ganttChart = new GanttChart(container, {
-            dataSource: {
-                data: JSONData
-            }
-        });
-
-        equal(ganttChart.dataSource.data().length, 2);
-    });
-
-    test("Initializing from local datasource populates child items", function() {
-        var ganttChart = new GanttChart(container, {
-            dataSource: {
-                data: JSONData
-            }
-        });
-
-        equal(ganttChart.dataSource.at(0).children.data().length, 3);
-    });
-
-    test("Initializing from local datasource loads children from schema property", function() {
+    test("Initializing from local datasource populates items", function() {
         var ganttChart = new GanttChart(container, {
             dataSource: dataSource
         });
 
-        equal(ganttChart.dataSource.at(0).children.data().length, 1);
+        equal(ganttChart.dataSource.data().length, 8);
     });
 
-    test("Initializing from remote datasource populates root items", function() {
+    test("Initializing from remote datasource populates items", function() {
         var ganttChart = new GanttChart(container, {
             dataSource: {
                 transport: {
@@ -173,26 +124,15 @@
         equal(ganttChart.dataSource.data().length, 2);
     });
 
-    test("Initializing from existing datasource populates root items", function() {
+    test("Initializing from existing datasource populates items", function() {
         var ganttChart = new GanttChart(container, {
             dataSource: new GanttChartDataSource({
                 data: JSONData
             })
         });
 
-        equal(ganttChart.dataSource.data().length, 2);
+        equal(ganttChart.dataSource.data().length, 8);
     });
-
-    test("Initializing from existing datasource populates child items", function() {
-        var ganttChart = new GanttChart(container, {
-            dataSource: new GanttChartDataSource({
-                data: JSONData
-            })
-        });
-
-        equal(ganttChart.dataSource.at(0).children.data().length, 3);
-    });
-
 
     module("Dependencies", {
         setup: function() {
