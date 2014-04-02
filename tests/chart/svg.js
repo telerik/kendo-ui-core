@@ -251,28 +251,40 @@
 
             equal(sector.options.strokeWidth, 2);
         });
-        
-        test("createClipPath returns a SVGClipPath", function() { 
+
+        test("createClipPath returns a SVGClipPath", function() {
             var clipPath = view.createClipPath("foo", Box2D());
-            
+
               ok(clipPath instanceof dataviz.SVGClipPath);
         });
-        
-        test("createClipPath adds a SVGClipPath to the definitions with the specified rectange box as child", function() {            
+
+        test("createClipPath adds a SVGClipPath to the definitions with the specified rectange box as child", function() {
             var id = "foo",
                 box = Box2D(1,1,100,100),
                 clipPath = view.createClipPath(id, box);
-             
+
             ok(view.definitions[id] instanceof dataviz.SVGClipPath);
             deepEqual(view.definitions[id].children[0].points, box.points());
-        }); 
+        });
 
-        test("createClipPath returns an already initialized clip path from the definitions", function() {            
+        test("createClipPath returns an already initialized clip path from the definitions", function() {
             var id = "foo",
-               clipPath = view.createClipPath(id, Box2D());         
-           
+               clipPath = view.createClipPath(id, Box2D());
+
             ok(clipPath === view.createClipPath(id, Box2D()));
-        });         
+        });
+
+        test("createClipPath refreshes an already initialized clip path from the definitions", 2, function() {
+            var id = "foo",
+               clipPath = view.createClipPath(id, Box2D()),
+               newBox = Box2D(1, 1, 100, 100);
+
+            clipPath.refresh = function() {
+                ok(true)
+            };
+            view.createClipPath(id, newBox);
+            deepEqual(clipPath.children[0].points, newBox.points());
+        });
 
         test("renderElement returns element", function() {
             if (browser.msie && browser.version < 9) {
@@ -476,11 +488,11 @@
             group.options.data = { testId: 1 };
             ok(group.render().indexOf("data-test-id='1'") > -1);
         });
-        
-        test("renders clip path", function() {            
+
+        test("renders clip path", function() {
             group.options.clipPathId = "foo";
             ok(group.render().indexOf("clip-path='url(#foo)'") > -1);
-        });        
+        });
 
     })();
 
@@ -727,11 +739,11 @@
             path.options.data = { testId: 1 };
             ok(path.render().indexOf("data-test-id='1'") > -1);
         });
-        
-        test("renders clip path", function() {            
+
+        test("renders clip path", function() {
             path.options.clipPathId = "foo";
             ok(path.render().indexOf("clip-path='url(#foo)'") > -1);
-        });          
+        });
 
         test("clone returns different instance", function() {
             notEqual(path.clone(), path);
@@ -1001,6 +1013,22 @@
         test("renders id", function() {
             clipPath.options.id = "id";
             ok(clipPath.render().indexOf("id='id'") > -1);
+        });
+
+        test("refresh updates element content", function() {
+            var container = $("<div id='foo'>foo</div>").appendTo(QUnit.fixture),
+                content = "<span>bar</span>";
+            clipPath.options.id = "foo";
+            clipPath.children[0] = {
+                render: function() {
+                    return content;
+                }
+            };
+
+            clipPath.refresh();
+
+            equal(container.html(), content);
+            container.remove();
         });
 
     })();
