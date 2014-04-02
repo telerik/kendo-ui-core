@@ -103,7 +103,7 @@ namespace :generate do
         namespace :dataviz do
             desc 'Generate MVC DataViz wrappers'
             task :wrappers do
-                markdown = FileList['docs/api/dataviz/map.md']
+                markdown = FileList['docs/api/dataviz/map.md', 'docs/api/dataviz/diagram.md']
 
                 components = markdown.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::DataViz::Component) }
                     .sort { |a, b| a.name <=> b.name }
