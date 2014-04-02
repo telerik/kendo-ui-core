@@ -2001,7 +2001,8 @@ function pad(number, digits, end) {
 
         (function(browser) {
             // add browser-specific CSS class
-            var cssClass,
+            var cssClass = "",
+                docElement = $(document.documentElement),
                 majorVersion = parseInt(browser.version, 10);
 
             if (browser.msie) {
@@ -2017,8 +2018,13 @@ function pad(number, digits, end) {
             }
 
             if (cssClass) {
-                $(document.documentElement).addClass("k-" + cssClass + " k-" + cssClass + majorVersion);
+                cssClass = "k-" + cssClass + " k-" + cssClass + majorVersion;
             }
+            if (support.mobileOS) {
+                cssClass += " k-mobile";
+            }
+
+            docElement.addClass(cssClass);
         })(support.browser);
 
         support.eventCapture = document.documentElement.addEventListener;
