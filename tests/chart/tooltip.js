@@ -15,7 +15,6 @@
             chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
             tooltip = new dataviz.Tooltip(chartElement, options);
             element = tooltip.element;
-            element.css({ width: "45px", height: "35px" });
         }
 
         function destroyTooltip() {
@@ -204,6 +203,18 @@
             deepEqual([parseInt(tooltip.element.css("left"), 10),
                   parseInt(tooltip.element.css("top"), 10)],
                   [10, 20]);
+        });
+
+        test("tooltipAnchor receives correct tooltip size", function() {
+            createPoint({
+                tooltipAnchor: function(width, height) {
+                    equal(width, 113);
+                    equal(height, 30);
+                }
+            });
+
+            createTooltip({ template: "<div style='width: 100px; height: 20px;' />"});
+            showNow(dataPointMock);
         });
 
         test("positions accounts for chart padding", function() {
