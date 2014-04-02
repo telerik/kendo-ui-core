@@ -573,7 +573,8 @@ BUNDLES = [
     'web.commercial',
     'web.open-source',
     'winjs.commercial',
-    'appbuilder'
+    'appbuilder',
+    'core'
 ]
 
 namespace :build do
