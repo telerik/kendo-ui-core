@@ -203,13 +203,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Sets the text content of the Shape.
+        /// Defines the shapes content settings.
         /// </summary>
-        /// <param name="value">The value that configures the content.</param>
-        public DiagramShapeBuilder Content(string value)
+        /// <param name="configurator">The action that configures the content.</param>
+        public DiagramShapeBuilder Content(Action<DiagramShapeContentSettingsBuilder> configurator)
         {
-            container.Content = value;
-
+            configurator(new DiagramShapeContentSettingsBuilder(container.Content));
             return this;
         }
         

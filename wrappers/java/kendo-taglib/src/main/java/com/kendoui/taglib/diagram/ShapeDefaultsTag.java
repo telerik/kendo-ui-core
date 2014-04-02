@@ -61,6 +61,10 @@ public class ShapeDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces *
 
     }
 
+    public void setContent(com.kendoui.taglib.diagram.ShapeDefaultsContentTag value) {
+        setProperty("content", value);
+    }
+
     public void setHover(com.kendoui.taglib.diagram.ShapeDefaultsHoverTag value) {
         setProperty("hover", value);
     }
@@ -83,14 +87,6 @@ public class ShapeDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces *
 
     public void setBackground(java.lang.String value) {
         setProperty("background", value);
-    }
-
-    public java.lang.String getContent() {
-        return (java.lang.String)getProperty("content");
-    }
-
-    public void setContent(java.lang.String value) {
-        setProperty("content", value);
     }
 
     public boolean getEditable() {
