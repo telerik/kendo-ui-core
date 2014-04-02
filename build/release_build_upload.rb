@@ -60,7 +60,7 @@ def upload_release_build(options)
 
     #Thread.current.send :sleep, 3
 
-    product_names = ['Kendo UI Web', 'Kendo UI Web GPL' 'Kendo UI DataViz', 'Kendo UI Mobile', 'Kendo UI Complete', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
+    product_names = ['Kendo UI Web', 'Kendo UI Web GPL' 'Kendo UI DataViz', 'Kendo UI Mobile', 'Kendo UI Core' 'Kendo UI Complete', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
 
     create_version("Kendo UI Mobile", bot) 
     #product_names.each { |pn| create_version(pn) }
@@ -81,12 +81,14 @@ def create_version(productName, bot)
       end
 end
 def fill_version_fields(bot)
-       bot.driver.execute_script "$find($telerik.$('[id$=\"_txtMajorName\"]').attr('id')).set_value('#{VERSION_YEAR}.#{VERSION_Q}')"
-       bot.driver.execute_script "$find($telerik.$('[id$=\"_txtMinorName\"]').attr('id')).set_value('#{VERSION}')"
-       bot.driver.execute_script "$find($telerik.$('[id$=\"_cbBeta\"]').attr('id')).checked = true"
+       bot.driver.execute_script "$('[id$=\"txtMajorName\"]').val('#{VERSION_YEAR}.#{VERSION_Q}')"
+       last_numbers = VERSION.split(".")[2]
+       bot.driver.execute_script "$('[id$=\"_txtMinorName\"]').val('#{last_numbers}')"
+       bot.driver.execute_script "$('[id$=\"_cbBeta\"]').prop('checked', true)"
 
        bot.find("[value='Save']").click
-       Thread.current.send :sleep, 6
+       bot.click_and_wait "Copy Files and Save", "administration"
+
 end
 def upload_files
   #todo
@@ -133,7 +135,7 @@ def release_build_file_copy(release_build_config, name)
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
       :vbd => versioned_bundle_name(name),
-      :extension => "nupkg.zip"
+      :extension => ".nupkg.zip"
     end
     if release_build_config[:download_builder]
       build_path_and_copy \

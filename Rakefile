@@ -616,6 +616,9 @@ bundle :name => 'core',
             chart sparkline diagram map stockchart barcode qrcode lineargauge radialgauge
         ),
        :readme => 'README.KendoUI.Core',
+       :release_build => {
+          :zip => true
+        },
        :contents => {
             'js' => CORE_MIN_JS + CORE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => CORE_MIN_CSS_RESOURCES,
