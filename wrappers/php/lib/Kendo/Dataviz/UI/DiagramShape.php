@@ -159,8 +159,8 @@ class DiagramShape extends \Kendo\SerializableObject {
     }
 
     /**
-    * Sets the text content of the Shape.
-    * @param string $value
+    * Defines the shapes content settings.
+    * @param \Kendo\Dataviz\UI\DiagramShapeContent|array $value
     * @return \Kendo\Dataviz\UI\DiagramShape
     */
     public function content($value) {
