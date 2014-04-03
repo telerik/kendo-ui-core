@@ -196,36 +196,45 @@ var __meta__ = {
         },
 
         _onInputChange: function(e) {
-            var upload = this,
-                input = $(e.target),
-                prevented = upload.trigger(SELECT, { files: inputFiles(input) });
+            var that = this;
+            var input = $(e.target);
+            var files = assignGuidToFiles(that._inputFiles(input), that._isAsyncNonBatch());
+
+            var prevented = that.trigger(SELECT, { files: files });
 
             if (prevented) {
-                upload._addInput(input);
+                that._addInput(input);
                 input.remove();
             } else {
-                upload._module.onSelect(e);
+                that._module.onSelect({target : input}, files);
             }
         },
 
         _onDrop: function (e) {
-            var dt = e.originalEvent.dataTransfer,
-                that = this,
-                droppedFiles = dt.files;
+            var dt = e.originalEvent.dataTransfer;
+            var that = this;
+            var droppedFiles = dt.files;
+            var files = assignGuidToFiles(getAllFileInfo(droppedFiles), that._isAsyncNonBatch());
 
             stopEvent(e);
 
             if (droppedFiles.length > 0) {
-                var prevented = that.trigger(SELECT, { files: getAllFileInfo(droppedFiles) });
+                var prevented = that.trigger(SELECT, { files: files });
+
                 if (!prevented) {
-                    that._module.onSelect({target : $(".k-dropzone", that.wrapper) }, droppedFiles);
+                    that._module.onSelect({target : $(".k-dropzone", that.wrapper) }, files);
                 }
             }
+        },
+
+        _isAsyncNonBatch: function () {
+            return (this._async && !this.options.async.batch) || false;
         },
 
         _renderInitialFiles: function(files) {
             var that = this;
             var idx = 0;
+            files = assignGuidToFiles(files, true);
 
             for (idx = 0; idx < files.length; idx++) {
                 var currentFile = files[idx];
@@ -277,6 +286,7 @@ var __meta__ = {
             var that = this;
             var existingFileEntries;
             var fileEntry;
+            var fileUid = data.fileNames[0].uid;
             var fileList =  $(".k-upload-files", that.wrapper);
             var options = that.options;
             var template = options.template;
@@ -304,6 +314,7 @@ var __meta__ = {
             }
 
             fileEntry
+                .attr(kendo.attr("uid"), fileUid)
                 .appendTo(fileList)
                 .data(data);
 
@@ -694,7 +705,11 @@ var __meta__ = {
             if ($(".k-file.k-file-progress", this.wrapper).length === 0) {
                 this.trigger(COMPLETE);
             }
-        }
+        },
+
+        _inputFiles: function(sourceInput) {
+            return inputFiles(sourceInput);
+        },
     });
 
     // Synchronous upload module
@@ -709,14 +724,14 @@ var __meta__ = {
     };
 
     syncUploadModule.prototype = {
-        onSelect: function(e) {
+        onSelect: function(e, files) {
             var upload = this.upload;
             var sourceInput = $(e.target);
 
             upload._addInput(sourceInput);
 
             var file = upload._enqueueFile(getFileName(sourceInput), {
-                "relatedInput" : sourceInput, "fileNames": inputFiles(sourceInput)
+                "relatedInput" : sourceInput, "fileNames": files
             });
 
             upload._fileAction(file, REMOVE);
@@ -740,11 +755,11 @@ var __meta__ = {
     Upload._frameId = 0;
 
     iframeUploadModule.prototype = {
-        onSelect: function(e) {
+        onSelect: function(e, files) {
             var upload = this.upload,
                 sourceInput = $(e.target);
 
-            var fileEntry = this.prepareUpload(sourceInput);
+            var fileEntry = this.prepareUpload(sourceInput, files);
 
             if (upload.options.async.autoUpload) {
                 this.performUpload(fileEntry);
@@ -757,7 +772,7 @@ var __meta__ = {
             }
         },
 
-        prepareUpload: function(sourceInput) {
+        prepareUpload: function(sourceInput, files) {
             var upload = this.upload;
             var activeInput = $(upload.element);
             var name = upload.options.async.saveField || sourceInput.attr("name");
@@ -774,7 +789,7 @@ var __meta__ = {
 
             var fileEntry = upload._enqueueFile(
                 getFileName(sourceInput),
-                { "frame": iframe, "relatedInput": activeInput, "fileNames": inputFiles(sourceInput) });
+                { "frame": iframe, "relatedInput": activeInput, "fileNames": files });
 
             iframe
                 .data({ "form": form, "file": fileEntry });
@@ -966,11 +981,10 @@ var __meta__ = {
     };
 
     formDataUploadModule.prototype = {
-        onSelect: function(e, rawFiles) {
+        onSelect: function(e, files) {
             var upload = this.upload,
                 module = this,
                 sourceElement = $(e.target),
-                files = rawFiles ? getAllFileInfo(rawFiles) : this.inputFiles(sourceElement),
                 fileEntries = this.prepareUpload(sourceElement, files);
 
             $.each(fileEntries, function() {
@@ -1029,10 +1043,6 @@ var __meta__ = {
             }
 
             return fileEntries;
-        },
-
-        inputFiles: function(sourceInput) {
-            return inputFiles(sourceInput);
         },
 
         performUpload: function(fileEntry) {
@@ -1209,6 +1219,7 @@ var __meta__ = {
 
     function inputFiles($input) {
         var input = $input[0];
+
         if (input.files) {
             return getAllFileInfo(input.files);
         } else {
@@ -1245,6 +1256,16 @@ var __meta__ = {
     function stripPath(name) {
         var slashIndex = name.lastIndexOf("\\");
         return (slashIndex != -1) ? name.substr(slashIndex + 1) : name;
+    }
+
+    function assignGuidToFiles(files, unique) {
+        var uid = kendo.guid();
+
+        return $.map(files, function(file){
+            file.uid = unique ? kendo.guid() : uid;
+
+            return file;
+        });
     }
 
     function removeUploadedFile(fileEntry, upload, data) {

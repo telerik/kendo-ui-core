@@ -293,7 +293,10 @@ function uploadSuccess(params) {
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
             success: function(e) {
-                deepEqual(e.files, [ { name: "test.doc", extension: ".doc", size: 50 } ]);
+                var files = e.files;
+                delete files[0].uid;
+
+                deepEqual(files, [ { name: "test.doc", extension: ".doc", size: 50 } ]);
                 start();
             }
         });

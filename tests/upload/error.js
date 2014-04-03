@@ -299,6 +299,8 @@ function uploadError(params) {
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
             error: function(e) {
+                delete e.files[0].uid;
+
                 deepEqual(e.files, [ { name: "test.doc", extension: ".doc", size: 50 } ]);
                 start();
             }
