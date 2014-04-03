@@ -143,67 +143,68 @@
         }
     });
 
-    test("Dependencies create a DataSource when not specified", function() {
+    test("create GanttDependencyDataSource", function() {
         var gantt = new Gantt(container);
 
-        ok(gantt.dependencies.dataSource instanceof kendo.data.DataSource);
+        ok(gantt.dependencies instanceof kendo.data.GanttDependencyDataSource);
     });
 
-    test("Dependencies create a DataSource from Array", function() {
+    test("create GanttDependencyDataSource from Array", function() {
         var gantt = new Gantt(container, {
             dependencies: [{}, {}]
         });
 
-        ok(gantt.dependencies.dataSource instanceof kendo.data.DataSource);
+        ok(gantt.dependencies instanceof kendo.data.GanttDependencyDataSource);
     });
 
-    test("Dependencies create a DataSource from datasource", function() {
+    test("create GanttDependencyDataSource from datasource", function() {
         var gantt = new Gantt(container, {
             dependencies: {
-                dataSource: {
-                    data: [{}, {}]
-                }
+                data: [{}, {}]
             }
         });
 
-        ok(gantt.dependencies.dataSource instanceof kendo.data.DataSource);
+        ok(gantt.dependencies instanceof kendo.data.GanttDependencyDataSource);
     });
-    
-    test("Dependencies are populated from JSON array", function() {
+
+    test("throw exception for wrong DataSource type", function() {
+        throws(function() {
+            new Gantt(container, {
+                dependencies: new kendo.data.DataSource()
+            });
+        });
+    });
+
+    test("populated from JSON array", function() {
         var gantt = new Gantt(container, {
             dependencies: [{}, {}]
         });
 
-        ok(gantt.dependencies.dataSource.data().length === 2);
+        ok(gantt.dependencies.data().length === 2);
     });
 
-    test("Dependencies are populated from local datasource", function() {
+    test("populated from local datasource", function() {
         var gantt = new Gantt(container, {
             dependencies: {
-                dataSource: {
-                    data: [{}, {}]
-                }
+                data: [{}, {}]
             }
         });
 
-        ok(gantt.dependencies.dataSource.data().length === 2);
+        ok(gantt.dependencies.data().length === 2);
     });
 
-    test("Dependencies are populated from remote datasource", function() {
+    test("populated from remote datasource", function() {
         var gantt = new Gantt(container, {
             dependencies: {
-                dataSource: {
-                    transport: {
-                        read: function(options) {
-                            options.success([{}, {}]);
-                        }
+                transport: {
+                    read: function(options) {
+                        options.success([{}, {}]);
                     }
                 }
             }
         });
 
-        ok(gantt.dependencies.dataSource.data().length === 2);
+        ok(gantt.dependencies.data().length === 2);
     });
-
 
 })();

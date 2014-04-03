@@ -1,6 +1,8 @@
 ﻿(function() {
     var GanttTask = kendo.data.GanttTask;
     var GanttDataSource = kendo.data.GanttDataSource;
+    var GanttDependency = kendo.data.GanttDependency;
+    var GanttDependencyDataSource = kendo.data.GanttDependencyDataSource;
     var dataSource;
     var task;
 
@@ -159,6 +161,58 @@
         ok(siblings === null);
     });
 
+    test("taskLevel() returns 0 for root task", function() {
+        var task = dataSource.get(1);
+
+        equal(dataSource.taskLevel(task), 0);
+    });
+
+    test("taskLevel() returns correct value for child task", function() {
+        var task = dataSource.get(2);
+
+        equal(dataSource.taskLevel(task), 1);
+    });
+
+    test("taskTree() returns tasks in correct order", function() {
+        /* 
+
+        Tasks should be returned in the following order:
+
+        Task1
+            Child 1.1
+                Child 1.1.1
+                Child 1.1.2
+        Task2
+            Child 2.1
+
+        */
+
+        dataSource = new GanttDataSource({
+            data: [
+            { title: "Task1", parentId: null, id: 1 },
+            { title: "Task2", parentId: null, id: 2 },
+            { title: "Child 1.1", parentId: 1, id: 3 },
+            { title: "Child 2.1", parentId: 2, id: 4 },
+            { title: "Child 1.1.1", parentId: 3, id: 5 },
+            { title: "Child 1.1.2", parentId: 3, id: 6 }
+            ],
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+        dataSource.fetch();
+
+        var tasks = dataSource.taskTree();
+
+        equal(tasks[0].id, 1);
+        equal(tasks[1].id, 3);
+        equal(tasks[2].id, 5);
+        equal(tasks[3].id, 6);
+        equal(tasks[4].id, 2);
+        equal(tasks[5].id, 4);
+    });
 
     module("GanttDataSource update()", {
         setup: function() {
@@ -806,5 +860,61 @@
         equal(dataSource.get(3).get("orderId"), 2);
         equal(dataSource.get(4).get("orderId"), 3);
     });
+
+    module("GanttDependency", { });
+
+    test("GanttDependency inherits kendo.data.Model", function() {
+        var task = new GanttDependency();
+
+        ok(task instanceof kendo.data.Model);
+    });
+
+    test("GanttDependency creates kendo.data.GanttDependency instance", function() {
+        var task = new GanttDependency();
+
+        ok(task instanceof kendo.data.GanttDependency);
+    });
+
+    module("GanttDependencyDataSource", {
+        setup: function() {
+            dataSource = new GanttDependencyDataSource({
+                data: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 1 },
+                { id: 2, predecessorId: 1, successorId: 3, type: 1 },
+                { id: 3, predecessorId: 1, successorId: 4, type: 1 },
+                { id: 4, predecessorId: 2, successorId: 5, type: 1 },
+                { id: 5, predecessorId: 3, successorId: 5, type: 1 },
+                { id: 6, predecessorId: 4, successorId: 5, type: 1 },
+                { id: 7, predecessorId: 5, successorId: 6, type: 1 }
+                ],
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            });
+
+            dataSource.fetch();
+        }
+    });
+
+    test("successors(id) returns correct items", 4, function() {
+        var successors = dataSource.successors(1);
+
+        equal(successors.length, 3);
+        equal(successors[0].id, 1);
+        equal(successors[1].id, 2);
+        equal(successors[2].id, 3);
+    });
+
+    test("predecessors(id) returns correct items", 4, function() {
+        var predecessors = dataSource.predecessors(5);
+
+        equal(predecessors.length, 3);
+        equal(predecessors[0].id, 4);
+        equal(predecessors[1].id, 5);
+        equal(predecessors[2].id, 6);
+    });
+
 
 }());

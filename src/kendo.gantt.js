@@ -21,6 +21,67 @@ var __meta__ = {
     var extend = $.extend;
     var map = $.map;
 
+    var createDataSource = function(type, name) {
+        return function(options) {
+            options = isArray(dataSource) ? { data: options } : options;
+
+            var dataSource = options || {};
+            var data = dataSource.data;
+
+            dataSource.data = data;
+
+            if (!(dataSource instanceof type) && dataSource instanceof DataSource) {
+                throw new Error("Incorrect DataSource type. Only " + name + " instances are supported");
+            }
+
+            return dataSource instanceof type ? dataSource : new type(dataSource);
+        };
+    };
+
+    var GanttDependency = kendo.data.Model.define({
+        id: "id",
+        fields: {
+            id: { type: "number" },
+            predecessorId: { type: "number" },
+            successorId: { type: "number" },
+            type: { type: "number" },
+        }
+    });
+
+    var GanttDependencyDataSource = DataSource.extend({
+        init: function(options) {
+            DataSource.fn.init.call(this, extend(true, {}, {
+                schema: {
+                    modelBase: GanttDependency,
+                    model: GanttDependency
+                }
+            }, options));
+        },
+
+        successors: function(id) {
+            return this._dependencies("predecessorId", id);
+        },
+
+        predecessors: function(id) {
+            return this._dependencies("successorId", id);
+        },
+
+        _dependencies: function(field, id) {
+            var data = this.view();
+            var filter = {
+                field: field,
+                operator: "eq",
+                value: id
+            };
+
+            data = new Query(data).filter(filter).toArray();
+
+            return data;
+        }
+    });
+
+    GanttDependencyDataSource.create = createDataSource(GanttDependencyDataSource, "GanttDependencyDataSource");
+
     var GanttTask = kendo.data.Model.define({
 
         duration: function() {
@@ -59,14 +120,12 @@ var __meta__ = {
 
     var GanttDataSource = DataSource.extend({
         init: function(options) {
-
             DataSource.fn.init.call(this, extend(true, {}, {
                 schema: {
                     modelBase: GanttTask,
                     model: GanttTask
                 }
             }, options));
-
         },
 
         remove: function(task) {
@@ -325,24 +384,13 @@ var __meta__ = {
 
     });
 
-    GanttDataSource.create = function(options) {
-        options = isArray(dataSource) ? { data: options } : options;
-
-        var dataSource = options || {};
-        var data = dataSource.data;
-
-        dataSource.data = data;
-
-        if (!(dataSource instanceof GanttDataSource) && dataSource instanceof DataSource) {
-            throw new Error("Incorrect DataSource type. Only GanttDataSource instances are supported");
-        }
-
-        return dataSource instanceof GanttDataSource ? dataSource : new GanttDataSource(dataSource);
-    };
+    GanttDataSource.create = createDataSource(GanttDataSource, "GanttDataSource");
 
     extend(true, kendo.data, {
         GanttDataSource: GanttDataSource,
-        GanttTask: GanttTask
+        GanttTask: GanttTask,
+        GanttDependencyDataSource: GanttDependencyDataSource,
+        GanttDependency: GanttDependency
     });
 
     var Gantt = Widget.extend({
@@ -359,7 +407,8 @@ var __meta__ = {
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
-                this.dependencies.dataSource.fetch();
+
+                this.dependencies.fetch();
             }
 
             kendo.notify(this);
@@ -397,14 +446,9 @@ var __meta__ = {
 
         _dependencies: function() {
             var dependencies = this.options.dependencies || {};
-            var dataSource = isArray(dependencies) ? dependencies : dependencies.dataSource;
+            var dataSource = isArray(dependencies) ? { data: dependencies } : dependencies;
 
-            this.dependencies = {
-                dataPredecessorField: dependencies.dataPredecessorField || "predecessorId",
-                dataSuccessorField: dependencies.dataSuccessorField || "successorId",
-                dataTypeField: dependencies.dataTypeField || "type",
-                dataSource: kendo.data.DataSource.create(dataSource)
-            };
+            this.dependencies = kendo.data.GanttDependencyDataSource.create(dataSource);
         },
 
         setDataSource: function(dataSource) {
