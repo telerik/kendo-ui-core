@@ -40,15 +40,15 @@
 
             // Mithril
             function table() {
-                return kendo.dom("table", { role: "grid" }, [colgroup(), thead(), tbody()]);
+                return kendo.dom.element("table", { role: "grid" }, [colgroup(), thead(), tbody()]);
             }
 
             function thead() {
-                return kendo.dom("thead", { role: "rowgroup", className: "k-grid-header" }, [theadrow()]);
+                return kendo.dom.element("thead", { role: "rowgroup", className: "k-grid-header" }, [theadrow()]);
             }
 
             function theadrow() {
-                return kendo.dom("tr", { role: "row" }, ths());
+                return kendo.dom.element("tr", { role: "row" }, ths());
             }
 
             function ths() {
@@ -58,20 +58,20 @@
             }
 
             function th(column) {
-                return kendo.dom("th", { "data-field": column.field, className: "k-header", role: "columnheader" }, column.title);
+                return kendo.dom.element("th", { "data-field": column.field, className: "k-header", role: "columnheader" }, column.title);
             }
 
             function tbody() {
-                return kendo.dom("tbody", rows());
+                return kendo.dom.element("tbody", rows());
             }
 
             function colgroup() {
-                return kendo.dom("colgroup", cols());
+                return kendo.dom.element("colgroup", cols());
             }
 
             function cols() {
                 return columns.map(function() {
-                    return kendo.dom("col");
+                    return kendo.dom.element("col");
                 });
             }
 
@@ -88,7 +88,7 @@
                     attr["className"] = "k-alt";
                 }
 
-                return kendo.dom("tr", attr, cells(dataItem));
+                return kendo.dom.element("tr", attr, cells(dataItem));
             }
 
             function cells(dataItem) {
@@ -98,16 +98,16 @@
             }
 
             function cell(field, dataItem) {
-                return kendo.dom("td", dataItem[field]);
+                return kendo.dom.element("td", dataItem[field]);
             }
 
             /*
-            var dom = kendo.dom("div", "Foo");
+            var dom = kendo.dom.element("div", "Foo");
 
             kendo.dom.render(document.getElementById("grid"), dom);
             */
 
-            var dom = kendo.DOM("div", null, "Foo");
+            var dom = kendo.dom.element("div", null, "Foo");
 
             kendo.DOM.render(document.getElementById("grid"), dom);
 

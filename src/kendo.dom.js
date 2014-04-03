@@ -108,15 +108,15 @@ var __meta__ = {
     var cache = {};
     var roots = [];
 
-    var DOM = function(tag, attrs, children) {
-        if (typeof children === "string") {
-            children = [new TextNode(children)];
-        }
-
+    function element(tag, attrs, children) {
         return new Element(tag, attrs, children);
-    };
+    }
 
-    DOM.render = function(root, node) {
+    function text(value) {
+        return new TextNode(value);
+    }
+
+    function render(root, node) {
         var id = roots.indexOf(root);
 
         if (id < 0) {
@@ -126,17 +126,21 @@ var __meta__ = {
         node.render(root, cache[id]);
 
         cache[id] = node;
-    };
+    }
 
-    DOM.remove = function(root) {
+    function remove(root) {
         var id = roots.indexOf(root);
 
         roots.splice(id, 1);
 
         delete(cache[id]);
-    };
+    }
 
-    kendo.dom = DOM;
+    kendo.dom = {
+        element: element,
+        text: text,
+        render: render
+    };
 })(window.kendo);
 
 return window.kendo;
