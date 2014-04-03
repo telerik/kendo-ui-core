@@ -136,10 +136,12 @@
             equal(view.log.group[0].options.clipPathId, container.clipPathId);
         });
 
-        test("does not create group if no clipping should be applied", function() {
+        test("creates group without clippathid if no clipping should be applied", function() {
             container.children[0].options.clip = false;
-            viewElements = container.getViewElements(view);
-            equal(viewElements.length, 0);
+            viewElements = container.getViewElements(view);            
+            equal(viewElements.length, 1);
+            equal(viewElements[0].options.clipPathId, undefined);
+            
         });
 
         test("sets clipBox", function() {

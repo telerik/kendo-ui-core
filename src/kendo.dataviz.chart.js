@@ -7479,25 +7479,27 @@ var __meta__ = {
         getViewElements: function (view) {
             var container = this,
                 shouldClip = container.shouldClip(),
+                clipPathId,
+                labels = [],
                 group,
-                labels,
                 result;
 
             if (shouldClip) {
                 container.clipBox = container._clipBox();
                 container.clipPathId = container.clipPathId || uniqueId();
+                clipPathId = container.clipPathId;
                 view.createClipPath(container.clipPathId, container.clipBox);
 
-                group = view.createGroup({
-                    id: container.id,
-                    clipPathId: container.clipPathId
-                });
                 labels = container.labelViewElements(view);
-                group.children = group.children.concat(ChartElement.fn.getViewElements.call(container, view));
-                result = [group].concat(labels);
-            } else {
-                result = ChartElement.fn.getViewElements.call(container, view);
             }
+
+            group = view.createGroup({
+                id: container.id,
+                clipPathId: clipPathId
+            });
+
+            group.children = group.children.concat(ChartElement.fn.getViewElements.call(container, view));
+            result = [group].concat(labels);
 
             return result;
         },
