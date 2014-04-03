@@ -21,8 +21,8 @@ var __meta__ = {
         }
     };
 
-    var Element = function(tag, attr, children) {
-        this.tag = tag;
+    var Element = function(nodeName, attr, children) {
+        this.nodeName = nodeName;
 
         this.attr = attr || {};
 
@@ -36,12 +36,12 @@ var __meta__ = {
 
         var index;
 
-        if (!cached || cached.tag !== this.tag) {
+        if (!cached || cached.nodeName !== this.nodeName) {
             if (cached) {
                 cached.remove();
             }
 
-            node = document.createElement(this.tag);
+            node = document.createElement(this.nodeName);
 
             for (index = 0; index < this.children.length; index++) {
                 this.children[index].render(node);
@@ -83,11 +83,11 @@ var __meta__ = {
     };
 
     TextNode.prototype = new Node();
-    TextNode.prototype.tag = "#text";
+    TextNode.prototype.nodeName = "#text";
     TextNode.prototype.render = function(parent, cached) {
         var node;
 
-        if (!cached || cached.tag !== this.tag) {
+        if (!cached || cached.nodeName !== this.nodeName) {
             if (cached) {
                 cached.node.parentNode.removeChild(cached.node);
             }
@@ -108,8 +108,8 @@ var __meta__ = {
     var cache = {};
     var roots = [];
 
-    function element(tag, attrs, children) {
-        return new Element(tag, attrs, children);
+    function element(nodeName, attrs, children) {
+        return new Element(nodeName, attrs, children);
     }
 
     function text(value) {
