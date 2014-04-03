@@ -1,6 +1,6 @@
 (function() {
-    var GanttChart = kendo.ui.GanttChart;
-    var GanttChartDataSource = kendo.data.GanttChartDataSource;
+    var Gantt = kendo.ui.Gantt;
+    var GanttDataSource = kendo.data.GanttDataSource;
     var container;
     var JSONData = [
         { title: "Task1", parentId: null, id: 1 },
@@ -21,7 +21,7 @@
         }
     };
 
-    module("GanttChart", {
+    module("Gantt", {
         setup: function() {
             container = $("<div />");
         },
@@ -30,36 +30,36 @@
         }
     });
 
-    test("creates a GanttChartDataSource", function() {
-        var ganttChart = new GanttChart(container);
+    test("creates a GanttDataSource", function() {
+        var gantt = new Gantt(container);
 
-        ok(ganttChart.dataSource instanceof kendo.data.GanttChartDataSource);
+        ok(gantt.dataSource instanceof kendo.data.GanttDataSource);
     });
 
-    test("creates a GanttChartDataSource from array", function() {
-        var ganttChart = new GanttChart(container, []);
+    test("creates a GanttDataSource from array", function() {
+        var gantt = new Gantt(container, []);
 
-        ok(ganttChart.dataSource instanceof kendo.data.GanttChartDataSource);
+        ok(gantt.dataSource instanceof kendo.data.GanttDataSource);
     });
 
-    test("creates a GanttChartDataSource from GanttChartDataSource", function() {
-        var ganttChart = new GanttChart(container, {
-            dataSource: new kendo.data.GanttChartDataSource()
+    test("creates a GanttDataSource from GanttDataSource", function() {
+        var gantt = new Gantt(container, {
+            dataSource: new kendo.data.GanttDataSource()
         });
 
-        ok(ganttChart.dataSource instanceof kendo.data.GanttChartDataSource);
+        ok(gantt.dataSource instanceof kendo.data.GanttDataSource);
     });
 
     test("throws exception for wrong DataSource type", function() {
         throws(function() {
-            new GanttChart(container, {
+            new Gantt(container, {
                 dataSource: new kendo.data.DataSource()
             });
         });
     });
 
     test("dataBinding event is fired", function () {
-        new GanttChart(container, {
+        new Gantt(container, {
             dataBinding: function (e) {
                 ok(true);
             }
@@ -67,7 +67,7 @@
     });
 
     test("dataBinding event can be prevented", 0, function () {
-        new GanttChart(container, {
+        new Gantt(container, {
             dataBinding: function (e) {
                 e.preventDefault();
             },
@@ -77,8 +77,8 @@
         });
     });
 
-    test("AutoBind=false prevents ganttchart from binding", 0, function () {
-        new GanttChart(container, {
+    test("AutoBind=false prevents gantt from binding", 0, function () {
+        new Gantt(container, {
             autoBind: false,
             dataBinding: function () {
                 ok(false);
@@ -87,31 +87,31 @@
     });
 
     test("resetting DataSource rebinds the widget", 2, function () {
-        var ganttChart = new GanttChart(container, {
+        var gantt = new Gantt(container, {
             dataBinding: function () {
                 ok(true);
             }
         });
 
-        ganttChart.setDataSource(new kendo.data.GanttChartDataSource());
+        gantt.setDataSource(new kendo.data.GanttDataSource());
     });
 
     test("Initializing from JSON array populates items", function() {
-        var ganttChart = new GanttChart(container, JSONData);
+        var gantt = new Gantt(container, JSONData);
 
-        equal(ganttChart.dataSource.data().length, 8);
+        equal(gantt.dataSource.data().length, 8);
     });
 
     test("Initializing from local datasource populates items", function() {
-        var ganttChart = new GanttChart(container, {
+        var gantt = new Gantt(container, {
             dataSource: dataSource
         });
 
-        equal(ganttChart.dataSource.data().length, 8);
+        equal(gantt.dataSource.data().length, 8);
     });
 
     test("Initializing from remote datasource populates items", function() {
-        var ganttChart = new GanttChart(container, {
+        var gantt = new Gantt(container, {
             dataSource: {
                 transport: {
                     read: function(options) {
@@ -121,17 +121,17 @@
             }
         });
 
-        equal(ganttChart.dataSource.data().length, 2);
+        equal(gantt.dataSource.data().length, 2);
     });
 
     test("Initializing from existing datasource populates items", function() {
-        var ganttChart = new GanttChart(container, {
-            dataSource: new GanttChartDataSource({
+        var gantt = new Gantt(container, {
+            dataSource: new GanttDataSource({
                 data: JSONData
             })
         });
 
-        equal(ganttChart.dataSource.data().length, 8);
+        equal(gantt.dataSource.data().length, 8);
     });
 
     module("Dependencies", {
@@ -144,21 +144,21 @@
     });
 
     test("Dependencies create a DataSource when not specified", function() {
-        var ganttChart = new GanttChart(container);
+        var gantt = new Gantt(container);
 
-        ok(ganttChart.dependencies.dataSource instanceof kendo.data.DataSource);
+        ok(gantt.dependencies.dataSource instanceof kendo.data.DataSource);
     });
 
     test("Dependencies create a DataSource from Array", function() {
-        var ganttChart = new GanttChart(container, {
+        var gantt = new Gantt(container, {
             dependencies: [{}, {}]
         });
 
-        ok(ganttChart.dependencies.dataSource instanceof kendo.data.DataSource);
+        ok(gantt.dependencies.dataSource instanceof kendo.data.DataSource);
     });
 
     test("Dependencies create a DataSource from datasource", function() {
-        var ganttChart = new GanttChart(container, {
+        var gantt = new Gantt(container, {
             dependencies: {
                 dataSource: {
                     data: [{}, {}]
@@ -166,19 +166,19 @@
             }
         });
 
-        ok(ganttChart.dependencies.dataSource instanceof kendo.data.DataSource);
+        ok(gantt.dependencies.dataSource instanceof kendo.data.DataSource);
     });
     
     test("Dependencies are populated from JSON array", function() {
-        var ganttChart = new GanttChart(container, {
+        var gantt = new Gantt(container, {
             dependencies: [{}, {}]
         });
 
-        ok(ganttChart.dependencies.dataSource.data().length === 2);
+        ok(gantt.dependencies.dataSource.data().length === 2);
     });
 
     test("Dependencies are populated from local datasource", function() {
-        var ganttChart = new GanttChart(container, {
+        var gantt = new Gantt(container, {
             dependencies: {
                 dataSource: {
                     data: [{}, {}]
@@ -186,11 +186,11 @@
             }
         });
 
-        ok(ganttChart.dependencies.dataSource.data().length === 2);
+        ok(gantt.dependencies.dataSource.data().length === 2);
     });
 
     test("Dependencies are populated from remote datasource", function() {
-        var ganttChart = new GanttChart(container, {
+        var gantt = new Gantt(container, {
             dependencies: {
                 dataSource: {
                     transport: {
@@ -202,7 +202,7 @@
             }
         });
 
-        ok(ganttChart.dependencies.dataSource.data().length === 2);
+        ok(gantt.dependencies.dataSource.data().length === 2);
     });
 
 

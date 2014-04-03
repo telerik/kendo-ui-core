@@ -3,8 +3,8 @@
 })(function(){
 
 var __meta__ = {
-    id: "ganttchart",
-    name: "GanttChart",
+    id: "gantt",
+    name: "Gantt",
     category: "web",
     description: "The Gantt-chart component.",
     depends: [ "data" ]
@@ -21,7 +21,7 @@ var __meta__ = {
     var extend = $.extend;
     var map = $.map;
 
-    var GanttChartTask = kendo.data.Model.define({
+    var GanttTask = kendo.data.Model.define({
 
         duration: function() {
             var end = this.end;
@@ -57,13 +57,13 @@ var __meta__ = {
         }
     });
 
-    var GanttChartDataSource = DataSource.extend({
+    var GanttDataSource = DataSource.extend({
         init: function(options) {
 
             DataSource.fn.init.call(this, extend(true, {}, {
                 schema: {
-                    modelBase: GanttChartTask,
-                    model: GanttChartTask
+                    modelBase: GanttTask,
+                    model: GanttTask
                 }
             }, options));
 
@@ -153,6 +153,33 @@ var __meta__ = {
                 return null;
             }
             return this.get(task.parentId);
+        },
+
+        taskLevel: function(task) {
+            var level = 0;
+            var parent = this.taskParent(task);
+
+            while (parent !== null) {
+                level += 1;
+                parent = this.taskParent(parent);
+            }
+
+            return level;
+        },
+
+        taskTree: function(task) {
+            var data = [];
+            var tasks = this.taskChildren(task);
+
+            for (var i = 0, l = tasks.length; i < l; i++) {
+                data.push(tasks[i]);
+
+                var children = this.taskTree(tasks[i]);
+
+                data.push.apply(data, children);
+            }
+
+            return data;
         },
 
         update: function(task, taksInfo) {
@@ -298,7 +325,7 @@ var __meta__ = {
 
     });
 
-    GanttChartDataSource.create = function(options) {
+    GanttDataSource.create = function(options) {
         options = isArray(dataSource) ? { data: options } : options;
 
         var dataSource = options || {};
@@ -306,19 +333,19 @@ var __meta__ = {
 
         dataSource.data = data;
 
-        if (!(dataSource instanceof GanttChartDataSource) && dataSource instanceof DataSource) {
-            throw new Error("Incorrect DataSource type. Only GanttChartDataSource instances are supported");
+        if (!(dataSource instanceof GanttDataSource) && dataSource instanceof DataSource) {
+            throw new Error("Incorrect DataSource type. Only GanttDataSource instances are supported");
         }
 
-        return dataSource instanceof GanttChartDataSource ? dataSource : new GanttChartDataSource(dataSource);
+        return dataSource instanceof GanttDataSource ? dataSource : new GanttDataSource(dataSource);
     };
 
     extend(true, kendo.data, {
-        GanttChartDataSource: GanttChartDataSource,
-        GanttChartTask: GanttChartTask
+        GanttDataSource: GanttDataSource,
+        GanttTask: GanttTask
     });
 
-    var GanttChart = Widget.extend({
+    var Gantt = Widget.extend({
         init: function(element, options) {
             if (isArray(options)) {
                 options = { dataSource: options };
@@ -344,7 +371,7 @@ var __meta__ = {
         ],
 
         options: {
-            name: "GanttChart",
+            name: "Gantt",
             autoBind: true
         },
 
@@ -363,7 +390,7 @@ var __meta__ = {
                 this._errorHandler = proxy(this._error, this);
             }
 
-            this.dataSource = kendo.data.GanttChartDataSource.create(dataSource)
+            this.dataSource = kendo.data.GanttDataSource.create(dataSource)
                 .bind("change", this._refreshHandler)
                 .bind("error", this._errorHandler);
         },
@@ -403,7 +430,7 @@ var __meta__ = {
         }
     });
 
-    kendo.ui.plugin(GanttChart);
+    kendo.ui.plugin(Gantt);
 
 })(window.kendo.jQuery);
 

@@ -1,12 +1,12 @@
 ﻿(function() {
-    var GanttChartTask = kendo.data.GanttChartTask;
-    var GanttChartDataSource = kendo.data.GanttChartDataSource;
+    var GanttTask = kendo.data.GanttTask;
+    var GanttDataSource = kendo.data.GanttDataSource;
     var dataSource;
     var task;
 
-    module("GanttChartTask", {
+    module("GanttTask", {
         setup: function() {
-            dataSource = new GanttChartDataSource({
+            dataSource = new GanttDataSource({
                 data: [
                 { title: "Task1", parentId: null, id: 1 },
                     { title: "Child 1.1", parentId: 1, id: 2 }
@@ -20,20 +20,20 @@
         }
     });
 
-    test("GanttChartTask inherits kendo.data.Model", function() {
-        var task = new GanttChartTask();
+    test("GanttTask inherits kendo.data.Model", function() {
+        var task = new GanttTask();
 
         ok(task instanceof kendo.data.Model);
     });
 
-    test("GanttChartTask creates kendo.data.GanttChartTask instance", function() {
-        var task = new GanttChartTask();
+    test("GanttTask creates kendo.data.GanttTask instance", function() {
+        var task = new GanttTask();
 
-        ok(task instanceof kendo.data.GanttChartTask);
+        ok(task instanceof kendo.data.GanttTask);
     });
 
-    test("GanttChartTask isMilestone returns true for zero duration", function() {
-        var task = new GanttChartTask();
+    test("GanttTask isMilestone returns true for zero duration", function() {
+        var task = new GanttTask();
 
         task.set("start", new Date("2014/04/04"));
         task.set("end", new Date("2014/04/04"));
@@ -41,8 +41,8 @@
         ok(task.isMilestone());
     });
 
-    test("GanttChartTask isMilestone returns false for non zero duration", function() {
-        var task = new GanttChartTask();
+    test("GanttTask isMilestone returns false for non zero duration", function() {
+        var task = new GanttTask();
 
         task.set("start", new Date("2014/04/04"));
         task.set("end", new Date("2014/04/06"));
@@ -50,9 +50,9 @@
         ok(!task.isMilestone());
     });
 
-    module("GanttChartDataSource", {
+    module("GanttDataSource", {
         setup: function() {
-            dataSource = new GanttChartDataSource({
+            dataSource = new GanttDataSource({
                 data: [
                 { title: "Task1", parentId: null, id: 1 },
                     { title: "Child 1.1", parentId: 1, id: 2 },
@@ -76,8 +76,8 @@
         }
     });
 
-    test("GanttChartDataSource creates kendo.data.DataSource instance", function() {
-        var dataSource = new GanttChartDataSource();
+    test("GanttDataSource creates kendo.data.DataSource instance", function() {
+        var dataSource = new GanttDataSource();
 
         ok(dataSource instanceof kendo.data.DataSource);
     });
@@ -160,9 +160,9 @@
     });
 
 
-    module("GanttChartDataSource update()", {
+    module("GanttDataSource update()", {
         setup: function() {
-            dataSource = new GanttChartDataSource({
+            dataSource = new GanttDataSource({
                 data: [{
                     id: 1,
                     title: "Task1",
@@ -250,9 +250,9 @@
         equal(task.get("title"), newTitle);
     });
 
-    module("GanttChartDataSource update() related tasks", {
+    module("GanttDataSource update() related tasks", {
         setup: function() {
-            dataSource = new GanttChartDataSource({
+            dataSource = new GanttDataSource({
                 data: [
                 {
                     id: 1,
@@ -600,7 +600,7 @@
     });
 
     test("parentId updates old parent summary field", function() {
-        dataSource = new GanttChartDataSource({
+        dataSource = new GanttDataSource({
             data: [
             { title: "Task1", parentId: null, id: 1, summary: true },
                 { title: "Child 1", parentId: 1, id: 2 },
@@ -622,7 +622,7 @@
     });
 
     test("parentId updates new parent summary field", function() {
-        dataSource = new GanttChartDataSource({
+        dataSource = new GanttDataSource({
             data: [
             { title: "Task1", parentId: null, id: 1, summary: true },
                 { title: "Child 1", parentId: 1, id: 2 },
@@ -643,9 +643,9 @@
         ok(dataSource.get(3).get("summary"));
     });
 
-    module("GanttChartDataSource CRUD", {
+    module("GanttDataSource CRUD", {
         setup: function() {
-            dataSource = new GanttChartDataSource({
+            dataSource = new GanttDataSource({
                 data: [
                 {
                     id: 1,
@@ -746,7 +746,7 @@
     });
 
     test("add(task) appends task to root collection when parentId is null", function() {
-        var task = new GanttChartTask();
+        var task = new GanttTask();
 
         dataSource.add(task);
 
@@ -754,7 +754,7 @@
     });
 
     test("add(task) appends task to child collection when parentId is set", function() {
-        var task = new GanttChartTask();
+        var task = new GanttTask();
         task.set("parentId", 6);
 
         dataSource.add(task);
@@ -763,7 +763,7 @@
     });
 
     test("add(task) updates parent summary field", function() {
-        var task = new GanttChartTask();
+        var task = new GanttTask();
         task.set("parentId", 7);
 
         dataSource.add(task);
@@ -772,7 +772,7 @@
     });
 
     test("insert(index, task) sets task orderId when parentId is null", function() {
-        var task = new GanttChartTask();
+        var task = new GanttTask();
 
         dataSource.insert(1, task);
 
@@ -780,7 +780,7 @@
     });
 
     test("insert(index, task) sets task orderId when parentId is set", function() {
-        var task = new GanttChartTask();
+        var task = new GanttTask();
         task.set("parentId", 1);
 
         dataSource.insert(1, task);
@@ -789,7 +789,7 @@
     });
 
     test("insert(index, task) updates siblings orderId when parentId is null", function() {
-        var task = new GanttChartTask();
+        var task = new GanttTask();
 
         dataSource.insert(1, task);
 
@@ -798,7 +798,7 @@
     });
 
     test("insert(index, task) updates siblings orderId when parentId is set", function() {
-        var task = new GanttChartTask();
+        var task = new GanttTask();
         task.set("parentId", 1);
 
         dataSource.insert(1, task);
