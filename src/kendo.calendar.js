@@ -165,6 +165,10 @@ var __meta__ = {
 
             normalize(options);
 
+            if (!options.dates[0]) {
+                options.dates = that.options.dates;
+            }
+
             Widget.fn.setOptions.call(that, options);
 
             that._templates();
