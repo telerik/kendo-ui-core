@@ -220,6 +220,15 @@
             }
 
             BaseNode.fn.clear.call(this);
+        },
+
+        renderTransform: function() {
+            var transform = this.srcElement.options.transform;
+            if (transform) {
+                return renderAttr("transform", "matrix(" + transform.toString() + ")");
+            }
+
+            return "";
         }
     });
 
@@ -436,6 +445,7 @@
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
+            "#= d.renderTransform() #" +
             "stroke-linejoin='round'></path>"
         )
     });

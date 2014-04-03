@@ -41,6 +41,10 @@
             }
         },
 
+        transform: function(matrix) {
+            this.options.set("transform", matrix);
+        },
+
         visible: function(visible) {
             this.options.set("visible", visible);
             return this;
@@ -202,14 +206,32 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        boundingBoxTo: function(segment) {
-            var rect;
-            if (this.controlOut && segment.controlIn) {
-                rect = this._curveBoundingBox(this.anchor, this.controlOut, segment.controlIn, segment.anchor);
+        boundingBoxTo: function(other, matrix) {
+            var rect,
+                segment = this;
+            if (matrix) {
+                segment = segment.transform(matrix);
+                other = other.transform(matrix);
+            }
+
+            if (segment.controlOut && segment.controlIn) {
+                rect = segment._curveBoundingBox(segment.anchor, segment.controlOut, other.controlIn, other.anchor);
             } else {
-                rect = this._lineBoundingBox(this.anchor, segment.anchor);
+                rect = segment._lineBoundingBox(segment.anchor, other.anchor);
             }
             return rect;
+        },
+
+        transform: function(matrix) {
+            var controlIn,
+                controlOut;
+            if (this.controlIn) {
+                controlIn = this.controlIn.clone().transform(matrix);
+            }
+            if (controlOut) {
+                controlOut = this.controlOut.clone().transform(matrix);
+            }
+            return new Segment(this.anchor.clone().transform(matrix), controlIn, controlOut);
         },
 
         _lineBoundingBox: function(p1, p2) {
@@ -329,19 +351,28 @@
             return this;
         },
 
-        boundingBox: function() {
+        boundingBox: function(matrix) {
             var segments = this.segments,
                 length = segments.length,
-                strokeWidth = this.options.get("stroke.width"),
+                options = this.options,
+                strokeWidth = options.get("stroke.width"),
                 boundingBox,
+                transform = options.get("transform"),
+                transformationMatrix,
                 i;
+
+            if (matrix && transform) {
+                transformationMatrix = matrix.clone().times(transform);
+            } else {
+                transformationMatrix = matrix || transform;
+            }
 
             if (length === 1) {
                 boundingBox = new Rect(segments[0].anchor.clone(), segments[0].anchor.clone());
             } else if (length > 0) {
                 boundingBox = new Rect(Point.maxPoint(), Point.minPoint())
                 for (i = 1; i < length; i++) {
-                    boundingBox = boundingBox.wrap(segments[i - 1].boundingBoxTo(segments[i]));
+                    boundingBox = boundingBox.wrap(segments[i - 1].boundingBoxTo(segments[i], transformationMatrix));
                 }
                 if (strokeWidth) {
                     expandRect(boundingBox, strokeWidth / 2);

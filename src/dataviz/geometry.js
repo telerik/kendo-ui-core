@@ -89,8 +89,10 @@
         },
 
         transform: function(mx) {
-            this.x = mx.a * this.x + mx.c * this.y + mx.e;
-            this.y = mx.b * this.x + mx.d * this.y + mx.f;
+            var x = this.x,
+                y = this.y;
+            this.x = mx.a * x + mx.c * y + mx.e;
+            this.y = mx.b * x + mx.d * y + mx.f;
 
             this.geometryChange();
 
@@ -402,8 +404,16 @@
                 this.a * m.e + this.c * m.f + this.e,
                 this.b * m.e + this.d * m.f + this.f
             );
+        },
+
+        clone: function() {
+            return new Matrix(this.a, this.b, this.c, this.d, this.e, this.f);
         }
     });
+
+    Matrix.fn.toString = function() {
+       return [this.a, this.b, this.c, this.d, this.e, this.f].join(",");
+    };
 
     deepExtend(Matrix, {
         translate: function (x, y) {
@@ -441,6 +451,35 @@
         }
     });
 
+    var Transformation = Class.extend({
+        init: function() {
+            this._matrix = Matrix.unit();
+        },
+
+        translate: function(x, y) {
+            this._matrix = this._matrix.times(Matrix.translate(x, y));
+            return this;
+        },
+
+        scale: function(x, y) {
+            this._matrix = this._matrix.times(Matrix.scale(x, y));
+            return this;
+        },
+
+        rotate: function(angle, x, y) {
+            this._matrix = this._matrix.times(Matrix.rotate(angle, x, y));
+            return this;
+        },
+
+        matrix: function() {
+            return this._matrix;
+        }
+    });
+
+    function transform() {
+        return new Transformation();
+    }
+
     // Exports ================================================================
     deepExtend(dataviz, {
         geometry: {
@@ -448,7 +487,9 @@
             Circle: Circle,
             Matrix: Matrix,
             Point: Point,
-            Rect: Rect
+            Rect: Rect,
+            transform: transform,
+            Transformation: Transformation
         }
     });
 

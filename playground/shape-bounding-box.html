@@ -27,6 +27,11 @@
          -->
           <div id="container"></div>
         <div id="test"></div>
+        <--
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute;left: 300px;">
+            <rect x = "25" y = "50" width = "150" height = "100" fill = "tomato" stroke = "lightgreen" stroke-width = "2" transform = "rotate(-45 100 100)"/>
+        </svg>
+          -->
          <--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute; left: 300px;">
             <g>
@@ -55,6 +60,7 @@
             //test arc M275 386.6 A 50 100 0 0 0 350 300
             var dataviz = kendo.dataviz,
                 geometry = dataviz.geometry,
+                transform = geometry.transform,
                 Point = geometry.Point,
                 Circle = geometry.Circle,
                 drawing = dataviz.drawing,
@@ -64,19 +70,19 @@
                 surface = Surface.create(document.getElementById("container"), {width: 700, height: 700}),
                 circleGeometry = new Circle(Point.create(150, 400), 100),
                 circle = new drawing.Circle(circleGeometry, {fill: {color: "red"} }),
-                boundingRect = circle.boundingBox(),
+               // boundingRect = circle.boundingBox(),
                 strokeOptions = {stroke: {color: "black", width: 2}},
-                circleBoundingPath = rectPath(boundingRect, strokeOptions),
+                //circleBoundingPath = rectPath(boundingRect, strokeOptions),
                 curve = new Path(strokeOptions),
                 group = new drawing.Group();
 
-            curve.moveTo(100, 100);
-            curve.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
-            curve.lineTo(500, 150);
-            curve.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
+            // curve.moveTo(100, 100);
+            // curve.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
+            // curve.lineTo(500, 150);
+            // curve.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
             //curve.close();
 
-            var curveBoundingRect = rectPath(curve.boundingBox(), strokeOptions);
+            // var curveBoundingRect = rectPath(curve.boundingBox(), strokeOptions);
 
             var arcGeometry = new geometry.Arc(Point.create(300, 300), {
                 startAngle: 120,
@@ -87,26 +93,44 @@
             });
 //M300 340 C 286 340 272.1 338.1 260 334.6
             var arc = new drawing.Arc(arcGeometry, strokeOptions);
-            group.append(arc, new drawing.Circle(new geometry.Circle(Point.create(300, 300), 3), strokeOptions), rectPath(arc.boundingBox(), strokeOptions));//circle, circleBoundingPath, curve, curveBoundingRect);
+            //group.append(arc, new drawing.Circle(new geometry.Circle(Point.create(300, 300), 3), strokeOptions), rectPath(arc.boundingBox(), strokeOptions));//circle, circleBoundingPath, curve, curveBoundingRect);
             //surface.draw(group);
             var viewModel = kendo.observable({
                 path: "M 340 265.4 a 80 40 0 0 1 29.3 54.6",//"M 300 300 v 86.6 h-25 A 50 100 0 1 1 350 300 c -5 100 100 100 100 -100 10 -70 50 100 50 100",//"M 300 300 A 50 100 0 1 1 350 300"
                 drawPath: function() {
                     var pathString = this.get("path");
                     if (pathString) {
-                        var multiPath = Path.parse(pathString, strokeOptions),
-                            multiPathGroup =  new drawing.Group(),
-                            multiPathBoundingRect = multiPath.boundingBox();
+                        // var multiPath = Path.parse(pathString, strokeOptions),
+                            // multiPathGroup =  new drawing.Group(),
+                            // multiPathBoundingRect = multiPath.boundingBox();
 
-                        multiPathGroup.append(multiPath, rectPath(multiPathBoundingRect, strokeOptions));
-                        surface.clear();
-                       surface.draw(multiPathGroup);
+                       // multiPathGroup.append(multiPath, rectPath(multiPathBoundingRect, strokeOptions));
+                        // surface.clear();
+                       // surface.draw(multiPathGroup);
                     }
 
                     return pathString;
                 }
             });
-
+            var pathTransform = new Path($.extend({transform: transform().rotate(-45, 100, 100).matrix()}, strokeOptions)),
+                original = new Path({stroke: {color: "blue", width: 1}});
+            
+            original.moveTo(25, 50);
+            original.lineTo(175, 50);
+            original.lineTo(175, 150);
+            original.lineTo(25, 150);
+            original.close(); 
+            
+            
+            pathTransform.moveTo(25, 50);
+            pathTransform.lineTo(175, 50);
+            pathTransform.lineTo(175, 150);
+            pathTransform.lineTo(25, 150);
+            pathTransform.close();            
+            group.append(pathTransform, rectPath(pathTransform.boundingBox(), strokeOptions), original);
+            surface.clear();
+            surface.draw(group);
+            
             kendo.bind($("body"), viewModel);
 
             function rectPath(rect, options) {
@@ -149,8 +173,8 @@
                 // path2.curveTo(new Point(310, 50), new Point(400, 150), new Point(200, 300));
                 // path2.close();
                 
-                group.append(path, rectPath(path.boundingBox(), {stroke: {color: "black", width: 1}}));//, path2);
-                surface.draw(group);
+               // group.append(path, rectPath(path.boundingBox(), {stroke: {color: "black", width: 1}}));//, path2);
+               // surface.draw(group);
             }
         </script>
     </body>
