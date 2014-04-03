@@ -709,7 +709,7 @@ var __meta__ = {
 
         _inputFiles: function(sourceInput) {
             return inputFiles(sourceInput);
-        },
+        }
     });
 
     // Synchronous upload module
