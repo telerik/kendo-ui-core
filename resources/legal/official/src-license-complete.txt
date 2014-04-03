@@ -1,5 +1,5 @@
 /*
-* Kendo UI Complete v#= version # (http://kendoui.com)
+* Kendo UI Complete v#= version # (http://www.telerik.com/kendo-ui)
 * Copyright #= year # Telerik AD. All rights reserved.
 *
 * Kendo UI Complete commercial licenses may be obtained at
