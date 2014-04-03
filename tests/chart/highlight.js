@@ -3,15 +3,16 @@
         highlight,
         viewMock,
         element,
+        clipGroup,
         RED = "rgb(255,0,0)",
         GREEN = "rgb(0,255,0)",
         BLUE = "rgb(0,0,255)";
 
     function uniqueId() {
-        uniqueId.id = uniqueId.id || 0; 
+        uniqueId.id = uniqueId.id || 0;
         return uniqueId.id++;
     }
-    
+
     function createHighlight(options) {
         viewMock = {
             renderElement: function(element) {
@@ -19,38 +20,35 @@
             }
         };
 
-        highlight = new dataviz.Highlight(viewMock, QUnit.fixture[0], options);
+        highlight = new dataviz.Highlight(viewMock, options);
+
+        clipGroup = $("<div id='clipgroup'></div>");
+        QUnit.fixture.append(clipGroup);
     }
-    
-    var ElementStub = function () {
-        this.id = uniqueId();
-    };
-    
-    ElementStub.prototype = {
+
+    function destroyHighlight() {
+        QUnit.fixture.empty();
+    }
+
+    var elementStub = {
         highlightOverlay: function() {
             return { type: "overlay" };
         },
+        owner: {
+            pane: {
+                chartContainer: {
+                    id: "clipgroup"
+                }
+            }
+        },
         toggleHighlight: function () {}
     };
-    
-    function createElementStub (parent) {
-        var element = new ElementStub();
-        (parent || QUnit.fixture).append("<div id='" + element.id + "'></div>");
-        return element;
-    }
 
     (function() {
 
         module("Highlight / Overlay", {
-            setup: function() {
-                createHighlight({
-                    fill: "#cf0",
-                    fillOpacity: 0.5
-                });
-            },
-            teardown: function() {
-                QUnit.fixture.empty();
-            }
+            setup: createHighlight,
+            teardown: destroyHighlight
         });
 
         test("Retrieves overlay element", 1, function() {
@@ -74,40 +72,23 @@
             });
         });
 
-        test("Sets fill on overlay element", 1, function() {
-            highlight.show({
-                highlightOverlay: function(definition, options) {
-                    equal(options.fill, "#cf0");
-                }
-            });
-        });
-
-        test("Sets fill opacity on overlay element", 1, function() {
-            highlight.show({
-                highlightOverlay: function(definition, options) {
-                    equal(options.fillOpacity, 0.5);
-                }
-            });
-        });
-
-        test("Renders overlay element", function() {             
-            highlight.show(createElementStub());
+        test("Renders overlay element", function() {
+            highlight.show(elementStub);
             equal($(".overlay").length, 1);
         });
-        
-        test("Appends overlay element to element parent", function() {             
-            var parent = $("<div></div>").appendTo(QUnit.fixture);
-            highlight.show(createElementStub(parent));
-            ok(parent.children().last().is(".overlay"));
-        });        
 
-        test("Does not render overlay if no overlay element exists", function() {            
+        test("Appends overlay element to clip group", function() {
+            highlight.show(elementStub);
+            ok(clipGroup.children().last().is(".overlay"));
+        });
+
+        test("Does not render overlay if no overlay element exists", function() {
             highlight.show({ highlightOverlay: function() { } });
             equal($(".overlay").length, 0);
         });
 
         test("Removes overlay element", function() {
-            highlight.show(createElementStub());
+            highlight.show(elementStub);
             highlight.hide();
             equal($(".overlay").length, 0);
         });
@@ -122,7 +103,7 @@
             }
         });
 
-        test("Retrieves overlay elements", 2, function() {            
+        test("Retrieves overlay elements", 2, function() {
             highlight.show([{
                 highlightOverlay: function() {
                     ok(true);
@@ -134,23 +115,19 @@
             }]);
         });
 
-        test("Renders overlay elements", function() {                    
-            highlight.show([createElementStub(), createElementStub()]);
+        test("Renders overlay elements", function() {
+            highlight.show([elementStub, elementStub]);
             equal($(".overlay").length, 2);
         });
-        
-        test("Appends overlay elements to elements' parents", function() {             
-            var firstElementParent = $("<div></div>").appendTo(QUnit.fixture),
-                secondElementParent = $("<div></div>").appendTo(QUnit.fixture);
-                
-            highlight.show([createElementStub(firstElementParent), createElementStub(secondElementParent)]);
-            
-            ok(firstElementParent.children().last().is(".overlay"));
-            ok(secondElementParent.children().last().is(".overlay"));
-        });  
+
+        test("Appends overlay elements to clip group", function() {
+            highlight.show([elementStub, elementStub]);
+
+            equal(clipGroup.find(".overlay").length, 2);
+        });
 
         test("Removes overlay elements", function() {
-            highlight.show([createElementStub(), createElementStub()]);
+            highlight.show([elementStub, elementStub]);
             highlight.hide();
             equal($(".overlay").length, 0);
         });
@@ -158,7 +135,7 @@
     })();
 
     (function() {
-    
+
         module("Highlight / Toggle", {
             setup: function() {
                 createHighlight({
@@ -179,7 +156,7 @@
             });
         });
 
-        test("Does not call toggleHighlight on show (highlight disabled)", 0, function() {            
+        test("Does not call toggleHighlight on show (highlight disabled)", 0, function() {
             highlight.show({
                 options: {
                     highlight: {
