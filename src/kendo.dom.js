@@ -31,43 +31,41 @@ var __meta__ = {
 
     Element.prototype = new Node();
 
-    Element.prototype.render = function(parent, cached) {
-        var node;
+    Element.prototype.create = function() {
+        return document.createElement(this.nodeName);
+    };
 
+    Element.prototype.render = function(node, cached) {
         var index;
+        var child;
 
         var children = this.children;
 
         var length = children.length;
 
-        if (!cached || cached.nodeName !== this.nodeName) {
-            if (cached) {
-                cached.remove();
+        if (!cached) {
+            cached = new Element();
+        }
+
+        for (index = 0; index < length; index++) {
+            child = children[index];
+            var cachedChild = cached.children[index];
+
+            if (cachedChild && cachedChild.nodeName !== child.nodeName) {
+                cachedChild.remove();
+                cachedChild = null;
             }
 
-            node = document.createElement(this.nodeName);
-
-            for (index = 0; index < length; index++) {
-                children[index].render(node, null);
+            if (!cachedChild) {
+                child.render(child.create(), null);
+                node.appendChild(child.node);
+            } else {
+                child.render(cachedChild.node, cachedChild);
             }
+        }
 
-            parent.appendChild(node);
-        } else {
-            node = cached.node;
-
-            if (cached.children.length > length) {
-                length = cached.children.length;
-            }
-
-            for (index = 0; index < length; index++) {
-                var child = children[index];
-
-                if (child) {
-                    child.render(node, cached.children[index]);
-                } else {
-                    cached.children[index].remove();
-                }
-            }
+        for (index = length; index < cached.children.length; index++) {
+            cached.children[index].remove();
         }
 
         var attr = this.attr;
@@ -125,16 +123,16 @@ var __meta__ = {
 
     TextNode.prototype = new Node();
     TextNode.prototype.nodeName = "#text";
-    TextNode.prototype.render = function(parent, cached) {
-        var node;
 
+    TextNode.prototype.create = function() {
+        return document.createTextNode(this.nodeValue);
+    };
+
+    TextNode.prototype.render = function(node, cached) {
         if (!cached || cached.nodeName !== this.nodeName) {
             if (cached) {
                 cached.node.parentNode.removeChild(cached.node);
             }
-            node = document.createTextNode(this.nodeValue);
-
-            parent.appendChild(node);
         } else {
             node = cached.node;
 

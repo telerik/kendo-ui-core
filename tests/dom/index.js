@@ -11,36 +11,31 @@
     });
 
     test("render appends element to root", function() {
-        var div = element("div");
+        var div = element("div", null, [element("div")]);
 
         render(root, div);
 
         equal(root.children.length, 1);
-    });
-
-    test("render appends element with specified tag name", function() {
-        render(root, element("div"));
-
-        equal(root.children[0].tagName, "DIV");
+        equal(root.children[0].children.length, 0);
     });
 
     test("render creates text node", function() {
         render(root, element("div", null, [text("foo")]));
 
-        equal(root.children[0].firstChild.nodeName, "#text");
+        equal(root.firstChild.nodeName, "#text");
     });
 
     test("render creates text node with specified text", function() {
         render(root, element("div", null, [text("foo")]));
 
-        equal(root.children[0].firstChild.nodeValue, "foo");
+        equal(root.firstChild.nodeValue, "foo");
     });
 
-    test("render children", function() {
+    test("renders children", function() {
         var div = element("div", null, [ element("div"), element("div") ]);
 
         render(root, div);
-        equal(root.children[0].children.length, 2);
+        equal(root.children.length, 2);
     });
 
     test("render attributes", function() {
@@ -48,13 +43,13 @@
 
         render(root, div);
 
-        equal(root.children[0].id, "foo");
+        equal(root.id, "foo");
     });
 
     test("render doesn't replace existing element if no changes present", function() {
-        render(root, element("div"));
+        render(root, element("div", null, [ element("div") ]));
         var firstChild = root.children[0];
-        render(root, element("div"));
+        render(root, element("div", null, [ element("div") ]));
 
         equal(root.children.length, 1);
 
@@ -62,8 +57,8 @@
     });
 
     test("render changes tag name", function() {
-        render(root, element("div"));
-        render(root, element("span"));
+        render(root, element("div", null, [ element("div") ]));
+        render(root, element("div", null, [ element("span") ]));
 
         equal(root.children.length, 1);
 
@@ -71,11 +66,11 @@
     });
 
     test("render changes attribute of existing element", function() {
-        render(root, element("div", {id: "foo"}));
+        render(root, element("div", null,  [ element("div", {id: "foo"}) ]));
 
         var firstChild = root.children[0];
 
-        render(root, element("div", {id: "bar"}));
+        render(root, element("div", null,  [ element("div", {id: "bar"}) ]));
 
         equal(root.children.length, 1);
 
@@ -96,31 +91,23 @@
     });
 
     test("render inserts new children", function() {
-        var div = element("div");
-
-        render(root, div);
-
-        var firstChild = root.children[0];
+        render(root, element("div"));
 
         render(root, element("div", null, [ element("div") ]));
 
         equal(root.children.length, 1);
-
-        strictEqual(firstChild, root.children[0]);
-
-        equal(firstChild.children.length, 1);
     });
 
     test("render updates existing text node", function() {
         render(root, element("div", null, [text("foo")]));
 
-        var textNode = root.children[0].firstChild;
+        var textNode = root.firstChild;
 
         render(root, element("div", null, [text("bar")]));
 
-        equal(root.children[0].childNodes.length, 1);
+        equal(root.childNodes.length, 1);
 
-        strictEqual(textNode, root.children[0].firstChild);
+        strictEqual(textNode, root.firstChild);
 
         equal(textNode.nodeValue, "bar");
     });
@@ -130,9 +117,9 @@
 
         render(root, element("div", null, [element("div")]));
 
-        equal(root.children[0].childNodes.length, 1);
+        equal(root.childNodes.length, 1);
 
-        equal(root.children[0].firstChild.tagName, "DIV");
+        equal(root.firstChild.tagName, "DIV");
     });
 
     test("render replaces element with text node", function() {
@@ -140,9 +127,9 @@
 
         render(root, element("div", null, [text("foo")]));
 
-        equal(root.children[0].childNodes.length, 1);
+        equal(root.childNodes.length, 1);
 
-        equal(root.children[0].firstChild.nodeValue, "foo");
+        equal(root.firstChild.nodeValue, "foo");
     });
 
     test("render doesn't change text node with same value", 0, function() {
@@ -164,7 +151,7 @@
 
         render(root, element("div", null, [element("div")]));
 
-        equal(root.children[0].childNodes.length, 1);
+        equal(root.childNodes.length, 1);
     });
 
     test("render removes attributes set via dirrect assignment", function() {
@@ -172,7 +159,7 @@
 
         render(root, element("div", null));
 
-        equal(root.children[0].id, "");
+        equal(root.id, "");
     });
 
     test("render removes attributes set via setAttribute", function() {
@@ -180,13 +167,13 @@
 
         render(root, element("div", null));
 
-        equal(root.children[0].getAttribute("foo"), null);
+        equal(root.getAttribute("foo"), null);
     });
 
     test("render adds style attributes", function() {
         render(root, element("div", { style: { width: "100px" } }));
 
-        equal(root.children[0].style.width,"100px");
+        equal(root.style.width,"100px");
     });
 
     test("render does not set style if same", 0, function() {
@@ -212,6 +199,6 @@
         render(root, element("div", { style: { width: "100px" } }));
         render(root, element("div", null));
 
-        equal(root.children[0].style.cssText, "");
+        equal(root.style.cssText, "");
     });
 }());

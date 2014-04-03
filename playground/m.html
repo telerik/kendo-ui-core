@@ -77,7 +77,7 @@
             // Kendo
 
             function kendo_table() {
-                return element("table", { role: "grid" }, [kendo_colgroup(), kendo_thead(), kendo_tbody()]);
+                return element("div", { className: "k-grid k-widget" }, [ element("table", { role: "grid" }, [kendo_colgroup(), kendo_thead(), kendo_tbody()]) ]);
             }
 
             function kendo_thead() {
