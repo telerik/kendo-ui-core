@@ -36,6 +36,10 @@ var __meta__ = {
 
         var index;
 
+        var children = this.children;
+
+        var length = children.length;
+
         if (!cached || cached.nodeName !== this.nodeName) {
             if (cached) {
                 cached.remove();
@@ -43,18 +47,21 @@ var __meta__ = {
 
             node = document.createElement(this.nodeName);
 
-            for (index = 0; index < this.children.length; index++) {
-                this.children[index].render(node);
+            for (index = 0; index < length; index++) {
+                children[index].render(node, null);
             }
 
             parent.appendChild(node);
         } else {
             node = cached.node;
 
-            var length = Math.max(this.children.length, cached.children.length);
+            if (cached.children.length > length) {
+                length = cached.children.length;
+            }
 
             for (index = 0; index < length; index++) {
-                var child = this.children[index];
+                var child = children[index];
+
                 if (child) {
                     child.render(node, cached.children[index]);
                 } else {
