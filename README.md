@@ -67,6 +67,53 @@ Kendo UI Core depends on the following libraries:
 
 Kendo UI Core has not been tested against any other versions of these libraries. You may find that versions other than these are compatible with Kendo Ui Core, but we make no claims to support those version, nor can we troubleshoot issues that arise when using those versions.
 
+
+## Building Kendo UI Core
+
+In order to build Kendo UI Core, you need to have Node.js/npm latest and git 1.7 or later.
+
+For Windows you have to download and install [git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/download/).
+
+Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once Homebrew is installed, run `brew install git` to install git,
+and `brew install node` to install Node.js.
+
+Linux/BSD users should use their appropriate package managers to install git and Node.js, or build them from source.
+
+
+### How to build Kendo UI Core
+
+Clone a copy of the repository by running
+
+```bash
+git clone git@github.com:telerik/kendo-ui-core.git
+```
+
+Enter the repository directory and run the build script:
+```bash
+cd kendo-ui-core && npm run build
+```
+The minified version of the scripts and styles of Kendo UI Core will be put in the `dist/` subdirectory.
+
+If you want to create custom build or help with Kendo UI Core development, it would be better to install [grunt command line interface](https://github.com/gruntjs/grunt-cli) as a global package:
+
+```
+npm install -g grunt-cli
+```
+Make sure you have `grunt` installed by testing:
+```
+grunt -v
+```
+
+Now by running `grunt` command in the Kendo UI Core directory, you can build full version of Kendo UI Core, just like with `npm run build` command:
+```
+grunt build
+```
+
+There are several other tasks available:
+```
+grunt -help
+```
+
 ## Source Code and Downloads
 
 LINK TO ZIP DISTRIBUTION OF KENDO UI CORE HOSTED AT TELERIK.COM
