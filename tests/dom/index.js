@@ -166,4 +166,20 @@
 
         equal(root.children[0].childNodes.length, 1);
     });
+
+    test("render removes attributes set via dirrect assignment", function() {
+        render(root, element("div", { id: "foo" }));
+
+        render(root, element("div", null));
+
+        equal(root.children[0].id, "");
+    });
+
+    test("render removes attributes set via setAttribute", function() {
+        render(root, element("div", { foo: "foo" }));
+
+        render(root, element("div", null));
+
+        equal(root.children[0].getAttribute("foo"), null);
+    });
 }());

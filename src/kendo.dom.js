@@ -71,13 +71,26 @@ var __meta__ = {
         }
 
         var attr = this.attr;
+        var attrName;
 
-        for (var attrName in attr) {
+        for (attrName in attr) {
             if (!cached || attr[attrName] !== cached.attr[attrName]) {
                 if (node[attrName] !== undefined) {
                     node[attrName] = attr[attrName];
                 } else {
                     node.setAttribute(attrName, attr[attrName]);
+                }
+            }
+        }
+
+        if (cached) {
+            for (attrName in cached.attr) {
+                if (attr[attrName] === undefined) {
+                    if (node[attrName] !== undefined) {
+                        node[attrName] = "";
+                    } else {
+                        node.removeAttribute(attrName);
+                    }
                 }
             }
         }
