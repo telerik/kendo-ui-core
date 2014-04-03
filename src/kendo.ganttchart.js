@@ -19,7 +19,7 @@ var __meta__ = {
     var isArray = $.isArray;
     var proxy = $.proxy;
     var extend = $.extend;
-    var each = $.each;
+    var map = $.map;
 
     var GanttChartTask = kendo.data.Model.define({
 
@@ -122,11 +122,11 @@ var __meta__ = {
         taskAllChildren: function(task) {
             var data = [];
             var that = this;
-            var callback = function() {
-                var tasks = that.taskChildren(arguments[1] || arguments[0]);
+            var callback = function(task) {
+                var tasks = that.taskChildren(task);
 
                 data.push.apply(data, tasks);
-                each(tasks, callback);
+                map(tasks, callback);
             };
 
             if (!!task) {
