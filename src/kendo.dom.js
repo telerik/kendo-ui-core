@@ -157,8 +157,18 @@ var __meta__ = {
         return new TextNode(value);
     }
 
+    function indexOf(array, item) {
+        for (var index = 0, length = array.length; index < length; index++) {
+            if (array[index] === item) {
+                return index;
+            }
+        }
+
+        return -1;
+    }
+
     function render(root, node) {
-        var id = roots.indexOf(root);
+        var id = indexOf(roots, root);
 
         if (id < 0) {
             id = roots.push(root) - 1;
