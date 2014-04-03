@@ -99,4 +99,11 @@ test("k-upload-empty is removed when a file is selected", function() {
     ok(!$(uploadInstance.wrapper).is(".k-upload-empty"));
 });
 
+test("data-uid attribute is added to the list item when a file is selected", function() {
+    var uploadInstance = createUpload();
+    simulateFileSelect();
+
+    notEqual($(".k-file").data("uid"), undefined);
+});
+
 }

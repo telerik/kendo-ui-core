@@ -141,13 +141,22 @@ test("current input is hidden after choosing a file", function() {
 });
 
 test("list element is created for each selected file", function() {
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
     simulateFileSelect();
     equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 2);
 });
 
+test("data-uid attribute for list element has the same value as the file uid", function() {
+    simulateSingleFileSelect();
+
+    var listItemUid = $(".k-file").data("uid");
+    var fileUid = $(".k-file").data("fileNames")[0].uid;
+
+    equal(listItemUid, fileUid);
+});
+
 test("file names are rendered for multiple files", function() {
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
     simulateFileSelect();
 
     var fileNames = $(".k-filename", uploadInstance.wrapper).map(function() { return $(this).text(); });
@@ -210,7 +219,7 @@ test("original input is removed upon success", function() {
 });
 
 test("original input is removed after all uploads succeed", function() {
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
 
     uploadInstance.element.addClass("marker");
     simulateFileSelect();
@@ -228,7 +237,7 @@ test("original input is removed after all uploads succeed", function() {
 });
 
 test("original input is not removed if some uploads fail", function() {
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
 
     uploadInstance.element.addClass("marker");
     simulateFileSelect();
@@ -406,7 +415,7 @@ test("clicking remove should remove original file input", function() {
 });
 
 test("clicking remove should remove original file input when all related files are removed", function() {
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
 
     uploadInstance.element.addClass("marker");
     simulateFileSelect();
@@ -419,7 +428,7 @@ test("clicking remove should remove original file input when all related files a
 });
 
 test("clicking remove should not remove original file input if some related files are not uploaded", function() {
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
 
     uploadInstance.element.addClass("marker");
     simulateFileSelect();
@@ -734,13 +743,26 @@ module("Upload / FormDataUpload / batch = true", {
 });
 
 test("list element is created for all selected file", function() {
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
     simulateFileSelect();
+
     equal($(".k-upload-files li.k-file", uploadInstance.wrapper).length, 1);
 });
 
+test("data-uid value is the same for the list item and all selected files", function(){
+    uploadInstance._inputFiles = function () { return getFileListMock() };
+    simulateFileSelect();
+
+    var listItemUid = $(".k-file").data("uid");
+    var firstFileUid = $(".k-file").data("fileNames")[0].uid;
+    var secondFileUid = $(".k-file").data("fileNames")[1].uid;
+
+    equal(listItemUid, firstFileUid);
+    equal(listItemUid, secondFileUid);
+});
+
 test("file names are rendered for multiple files", function() {
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
     simulateFileSelect();
 
     var fileNames = $(".k-filename", uploadInstance.wrapper).map(
@@ -756,7 +778,7 @@ test("files are passed to populateFormData", 2, function() {
         equal(sourceFiles[1].name, "second.txt");
     };
 
-    uploadInstance._module.inputFiles = function () { return getFileListMock() };
+    uploadInstance._inputFiles = function () { return getFileListMock() };
     simulateFileSelect();
 });
 
@@ -915,15 +937,21 @@ test("list elements contain k-file-success class", function(){
 test("file entries contain 'fileNames' data", function(){
     var firstFileEntry = $('.k-file', uploadInstance.wrapper);
     var expectedFileNamesData = [ { name: "test.doc", size: 50, extension: ".doc"} ];
+    var firstFileEntryData = firstFileEntry.data('fileNames');
 
-    deepEqual(firstFileEntry.data('fileNames'), expectedFileNamesData);
+    delete firstFileEntryData[0].uid;
+
+    deepEqual(firstFileEntryData, expectedFileNamesData);
 });
 
 test("file entries contain 'files' data", function(){
     var firstFileEntry = $('.k-file', uploadInstance.wrapper);
     var expectedFilesData = [ { name: "test.doc", size: 50, extension: ".doc"} ];
+    var firstFileEntryData = firstFileEntry.data('files');
 
-    deepEqual(firstFileEntry.data('files'), expectedFilesData);
+    delete firstFileEntryData[0].uid;
+
+    deepEqual(firstFileEntryData, expectedFilesData);
 });
 
 test("remove icon is rendered for each file entry", function() {

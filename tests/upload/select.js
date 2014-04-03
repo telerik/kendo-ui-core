@@ -29,6 +29,18 @@ test("select event contains information for multiple files", function() {
     assertMultipleSelectedFiles(files);
 });
 
+test("files information in select event contains uids", function() {
+    var uid = null;
+
+    var uploadInstance = createUpload({ "select" : (function(e) {
+        uid = e.files[0].uid;
+    }) });
+
+    simulateFileSelect();
+
+    notEqual(uid, null);
+});
+
 test("cancelling select event prevents file selection", function() {
     var uploadInstance = createUpload({ "select" : (function(e) { e.preventDefault(); }) });
 

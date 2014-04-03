@@ -151,6 +151,7 @@ function uploadRemoveEvent(params) {
             ],
             remove: function(e) {
                 files = e.files;
+                delete files[0].uid;
             }
         });
 
