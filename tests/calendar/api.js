@@ -767,4 +767,28 @@ test("setOptions updates footer", 1, function() {
     ok(!div.find(".k-footer").is(":visible"));
 });
 
+test("setOptions preserves options.dates", 1, function() {
+    var calendar = new Calendar(div, {
+        dates: [new Date()]
+    });
+
+    calendar.setOptions({
+        footer: false
+    });
+
+    equal(calendar.options.dates.length, 1);
+});
+
+test("setOptions updates options.dates", 1, function() {
+    var calendar = new Calendar(div, {
+        dates: [new Date()]
+    });
+
+    calendar.setOptions({
+        dates: [new Date(), new Date()]
+    });
+
+    equal(calendar.options.dates.length, 2);
+});
+
 })();

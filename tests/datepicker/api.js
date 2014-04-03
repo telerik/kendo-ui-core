@@ -484,4 +484,28 @@ test("setOptions method updates format", function() {
     equal(datepicker.element.val(), kendo.toString(datepicker.value(), "dd/MM/yyyy"));
 });
 
+test("setOptions preserves options.dates", 1, function() {
+    var datepicker = new DatePicker(input, {
+        dates: [new Date()]
+    });
+
+    datepicker.setOptions({
+        footer: false
+    });
+
+    equal(datepicker.options.dates.length, 1);
+});
+
+test("setOptions updates options.dates", 1, function() {
+    var datepicker = new DatePicker(input, {
+        dates: [new Date()]
+    });
+
+    datepicker.setOptions({
+        dates: [new Date(), new Date()]
+    });
+
+    equal(datepicker.options.dates.length, 2);
+});
+
 })();
