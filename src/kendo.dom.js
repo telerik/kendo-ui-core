@@ -76,7 +76,24 @@ var __meta__ = {
         for (attrName in attr) {
             if (!cached || attr[attrName] !== cached.attr[attrName]) {
                 if (node[attrName] !== undefined) {
-                    node[attrName] = attr[attrName];
+                    if (attrName !== "style") {
+                        node[attrName] = attr[attrName];
+                    } else {
+                        var cssText = "";
+
+                        var style = attr[attrName];
+
+                        for (var key in style) {
+                            cssText += key;
+                            cssText += ": ";
+                            cssText += style[key];
+                            cssText += ";";
+                        }
+
+                        if (node.style.cssText !== cssText) {
+                            node.style.cssText = cssText;
+                        }
+                    }
                 } else {
                     node.setAttribute(attrName, attr[attrName]);
                 }
@@ -87,7 +104,11 @@ var __meta__ = {
             for (attrName in cached.attr) {
                 if (attr[attrName] === undefined) {
                     if (node[attrName] !== undefined) {
-                        node[attrName] = "";
+                        if (attrName !== "style") {
+                            node[attrName] = "";
+                        } else {
+                            node.style.cssText = "";
+                        }
                     } else {
                         node.removeAttribute(attrName);
                     }

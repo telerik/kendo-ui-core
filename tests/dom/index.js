@@ -182,4 +182,36 @@
 
         equal(root.children[0].getAttribute("foo"), null);
     });
+
+    test("render adds style attributes", function() {
+        render(root, element("div", { style: { width: "100px" } }));
+
+        equal(root.children[0].style.width,"100px");
+    });
+
+    test("render does not set style if same", 0, function() {
+        var div = element("div", { style: { width: "100px" } });
+
+        render(root, div);
+
+        var cssText = div.node.style.cssText;
+
+        Object.defineProperty(div.node.style, "cssText", {
+            set: function() {
+                ok(false);
+            },
+            get: function() {
+               return cssText;
+            }
+        });
+
+        render(root, element("div", { style: { width: "100px" } }));
+    });
+
+    test("render removes style attribute", function() {
+        render(root, element("div", { style: { width: "100px" } }));
+        render(root, element("div", null));
+
+        equal(root.children[0].style.cssText, "");
+    });
 }());
