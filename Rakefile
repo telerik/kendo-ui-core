@@ -20,8 +20,8 @@ DIST_STYLES_ROOT = "dist/styles/"
 KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
 PLATFORM = RbConfig::CONFIG['host_os']
-#RELEASE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI"
-RELEASE_ROOT = "K:\\DISTRIBUTIONS\\KendoUI"
+RELEASE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI"
+#RELEASE_ROOT = "K:\\DISTRIBUTIONS\\KendoUI"
 WEB_INSTALLER_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\Guidance\\CurrentWebInstaller"
 
 if PLATFORM =~ /linux|darwin/

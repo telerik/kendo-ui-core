@@ -1,5 +1,6 @@
 require 'selenium-webdriver'
 require 'singleton'
+require 'version'
 
 class TelerikReleaseBot
     include Singleton
@@ -34,7 +35,7 @@ class TelerikReleaseBot
     end
 
     def fill_in(title, contents)
-        element = driver.find_element(:xpath, "//label[text()='#{title}']/..//input")
+        element = driver.find_element(:xpath, "//a[text()='#{title}']/..//input")
         driver.execute_script 'arguments[0].focus()', element
         element.send_keys contents
         element.send_keys :tab
@@ -62,26 +63,26 @@ def upload_release_build(options)
 
     product_names = ['Kendo UI Web', 'Kendo UI Web GPL' 'Kendo UI DataViz', 'Kendo UI Mobile', 'Kendo UI Core' 'Kendo UI Complete', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
 
-    create_version("Kendo UI Mobile", bot) 
+    create_version("Kendo UI Complete", bot, options) 
     #product_names.each { |pn| create_version(pn) }
     
 end
-def create_version(productName, bot)
+def create_version(productName, bot, options)
       bot.click_and_wait productName, "administration"
       bot.click_and_wait "Manage Versions", "administration"
 
       if defined? SERVICE_PACK_NUMBER
         bot.click_and_wait "New Minor","administration"
         fill_version_fields(bot)
-        #upload_files  
+        prepare_files(bot, options)  
       else
         bot.click_and_wait "New Major","administration"
         fill_version_fields(bot)
-        #upload_files  
+        prepare_files(bot, options)  
       end
 end
 def fill_version_fields(bot)
-       bot.driver.execute_script "$('[id$=\"txtMajorName\"]').val('#{VERSION_YEAR}.#{VERSION_Q}')"
+       bot.driver.execute_script "$('[id$=\"_txtMajorName\"]').val('#{VERSION_YEAR}.#{VERSION_Q}')"
        last_numbers = VERSION.split(".")[2]
        bot.driver.execute_script "$('[id$=\"_txtMinorName\"]').val('#{last_numbers}')"
        bot.driver.execute_script "$('[id$=\"_cbBeta\"]').prop('checked', true)"
@@ -90,8 +91,68 @@ def fill_version_fields(bot)
        bot.click_and_wait "Copy Files and Save", "administration"
 
 end
-def upload_files
+def prepare_files(bot, options)
   #todo
+  #bot.driver.execute_script "window.location = $('a:contains(\"commercial.zip\")').attr(\"href\")"
+  element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.zip')]")
+  element.click
+
+  file_name = options[:title]
+  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.zip')" 
+
+  upload_file_and_go_back(bot, options[:archive_path])
+
+
+  #element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.msi')]")
+  #element.click
+
+  #bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.msi')" 
+
+  #upload_file_and_go_back(bot, options[:archive_path], 'withxml')
+
+
+  element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.zip')]")
+  element.click
+
+  file_name = options[:title].sub! "commercial", "trial"
+  p file_name
+  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.zip')" 
+
+  upload_file_and_go_back(bot, options[:archive_path])
+
+
+  #element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.msi')]")
+  #element.click
+
+  #file_name = options[:title].sub! "commercial", "trial"
+  #p file_name
+  #bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.msi')" 
+
+  #upload_file_and_go_back(bot, options[:archive_path], 'withxml')
+
+
+  element = bot.driver.find_element(:xpath, "//a[contains(.,'ControlPanel')]")
+  element.click
+
+  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('TelerikControlPanelSetup.KUI.Complete#{VERSION}.exe')" 
+
+  upload_file_and_go_back(bot, options[:archive_path])
+
+end
+def upload_file_and_go_back(bot, options)
+  full_path = File.expand_path(options, File.join(File.dirname(__FILE__), ".."))
+  bot.find('.RadUpload input[type=file]').send_keys(full_path)
+
+  #if defined? xml
+    #todo - upload xml files    
+  #end
+  #Thread.current.send :sleep, 10
+
+  bot.find("[value='Save']").click
+
+  #Thread.current.send :sleep, 10
+
+  bot.find("[value='GO TO FILE LIST']").click
 end
 def release_build_file_copy(release_build_config, name)
     if defined? SERVICE_PACK_NUMBER
