@@ -80,10 +80,10 @@ var __meta__ = {
 
     var TextNode = function(nodeValue) {
         this.nodeValue = nodeValue;
-        this.tag = "#text";
     };
 
     TextNode.prototype = new Node();
+    TextNode.prototype.tag = "#text";
     TextNode.prototype.render = function(parent, cached) {
         var node;
 
