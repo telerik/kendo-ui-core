@@ -1004,7 +1004,7 @@ var __meta__ = {
                         });
 
                         var handler = function() {
-                            that.dataSource.unbind(CHANGE, handler);
+                            that.unbind("dataBound", handler);
                             change.apply(that, arguments);
                         };
 
