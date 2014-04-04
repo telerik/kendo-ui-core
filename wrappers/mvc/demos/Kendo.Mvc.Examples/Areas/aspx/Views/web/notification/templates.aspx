@@ -108,7 +108,7 @@
                 
                 /* Info template */
                 .k-notification-info.k-group {
-                    background: rgba(0,0,0,.7);
+                    background: rgba(0%,0%,0%,.7);
                     color: #fff;
                 }
                 .new-mail {
@@ -126,7 +126,7 @@
                 
                 /* Error template */
                 .k-notification-error.k-group {
-                    background: rgba(255,0,0,.7);
+                    background: rgba(100%,0%,0%,.7);
                     color: #ffffff;
                 }
                 .wrong-pass {
@@ -144,7 +144,7 @@
                 
                 /* Success template */
                 .k-notification-upload-success.k-group {
-                    background: rgba(0,153,0,.7);
+                    background: rgba(0%,60%,0%,.7);
                     color: #fff;
                 }
                 .upload-success {
