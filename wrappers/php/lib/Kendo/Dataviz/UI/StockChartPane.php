@@ -51,6 +51,15 @@ class StockChartPane extends \Kendo\SerializableObject {
     }
 
     /**
+    * Specifies whether the charts in the pane should be clipped.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\StockChartPane
+    */
+    public function clip($value) {
+        return $this->setProperty('clip', $value);
+    }
+
+    /**
     * The pane height in pixels.
     * @param float $value
     * @return \Kendo\Dataviz\UI\StockChartPane

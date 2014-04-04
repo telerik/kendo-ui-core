@@ -134,9 +134,10 @@ var __meta__ = {
 
             if (!clipPath) {
                 clipPath = new CanvasClipPath({id: id});
-                clipPath.children.push(view.createRect(box, {fill: "none"}));
                 view.definitions[id] = clipPath;
             }
+
+            clipPath.children = [view.createRect(box, {fill: "none"})];
 
             return clipPath;
         },

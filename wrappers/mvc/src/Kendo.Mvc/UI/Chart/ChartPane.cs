@@ -87,6 +87,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the pane clip option
+        /// </summary>
+        public bool? Clip
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartPaneSerializer(this);

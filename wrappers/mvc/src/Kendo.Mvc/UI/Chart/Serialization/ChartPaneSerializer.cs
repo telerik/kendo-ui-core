@@ -45,6 +45,11 @@ namespace Kendo.Mvc.UI
                 result.Add("border", borderData);
             }
 
+            if (pane.Clip.HasValue)
+            {
+                result.Add("clip", pane.Clip.Value);
+            }
+
             return result;
         }
     }

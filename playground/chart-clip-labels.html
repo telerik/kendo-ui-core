@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="test" />
     <title>Clip</title>
-        <script src="/kendo/src/jquery.js"></script>
-        <script src="/kendo/src/kendo.core.js"></script>
-         <script src="/kendo/src/kendo.userevents.js"></script>
-        <script src="/kendo/src/kendo.data.js"></script>
-        <script src="/kendo/src/kendo.dataviz.core.js"></script>
-        <script src="/kendo/src/kendo.dataviz.chart.js"></script>
-        <script src="/kendo/src/kendo.dataviz.chart.polar.js"></script>
-        <script src="/kendo/src/kendo.dataviz.stock.js"></script>
-        <script src="/kendo/src/kendo.dataviz.sparkline.js"></script>
-        <script src="/kendo/src/kendo.dataviz.themes.js"></script>
-        <script src="/kendo/src/kendo.dataviz.vml.js"></script>
-        <script src="/kendo/src/kendo.dataviz.svg.js"></script>
-        <script src="/kendo/src/kendo.dataviz.canvas.js"></script>  
-        <link href="/kendo/styles/web/kendo.common.css" rel="stylesheet">
-        <link href="/kendo/styles/web/kendo.default.css" rel="stylesheet">
-        <link href="/kendo/styles/dataviz/kendo.dataviz.min.css" rel="stylesheet">
-        <link href="/kendo/styles/dataviz/kendo.dataviz.default.min.css" rel="stylesheet">
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+         <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.sparkline.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>  
+        <link href="../dist/styles/web/kendo.common.css" rel="stylesheet">
+        <link href="../dist/styles/web/kendo.default.css" rel="stylesheet">
+        <link href="../dist/styles/dataviz/kendo.dataviz.min.css" rel="stylesheet">
+        <link href="../dist/styles/dataviz/kendo.dataviz.default.min.css" rel="stylesheet">
         <style>
             .k-chart{
                 min-height: 400px;
@@ -29,7 +28,6 @@
 </head>
 <body>
 <div id="chart" style="margin-top:100px; width: 800px;"></div>
-
  <!--
   <div id="bubble" style="width: 700px;margin-left:200px;"></div>
  <div id="radarColumn"></div>
@@ -58,31 +56,114 @@
 
  -->
   <script>
+
+    var start = new Date().getTime();
+    var opt = kendo.dataviz.ui.Chart.fn.options;
+      opt.plotArea.margin = 15;
+    $.extend(opt.seriesDefaults, {
+            column: {
+                labels: {
+                    visible: true,
+                    position: "outsideEnd",
+                    background: "none"
+                }
+            },
+            bar: {
+                labels: {
+                    visible: true,
+                    position: "outsideEnd",
+                    background: "none"
+                }
+            },
+            labels: {
+                visible: true,
+                position: "above",
+                background: "none"
+            }        
+      });
+    
+    var sopt = kendo.dataviz.ui.StockChart.fn.options;
+     sopt.plotArea.margin = 15;
+    $.extend(sopt.seriesDefaults, {
+            column: {
+                labels: {
+                    visible: true,
+                    position: "outsideEnd",
+                    background: "none"
+                }
+            },
+            bar: {
+                labels: {
+                    visible: true,
+                    position: "outsideEnd",
+                    background: "none"
+                }
+            },
+            labels: {
+                visible: true,
+                position: "above",
+                background: "none"
+            }        
+      });
+
       var renderAs = "svg";
       
-       $("#chart").kendoChart({
-        legend: {
+         $("#chart").kendoChart({
+         seriesDefaults: {
+            labels: {
+                visible: true,
+                position: "outsideEnd",
+                padding: 10,
+                margin: 4
+            },
+            stack: true
+         },
+         legend: {
             position: "top"
         },
-        series: [{
-            type: "line",
+        seriesClick: function(e) {
+         debugger;
+        },
+        plotAreaClick: function(e) {
+            debugger;
+        },
+        series: [
+        {
+            type: "column", 
             name: "line",
-            data: [1, 100, 1, 50, 80]
-        }, {
+            data: [1, 100, 1, 50, 80],
+            labels: {
+                visible: true,
+                position: "above"
+            }
+        }
+        , 
+        {
             type: "column",
             name: "column",
-            data: [1, 50, 1, 50, 40]
+            data: [1, 90, 1, 80, 40]
+        }
+        ],
+        categoryAxis: {
+            categories: ["a","b","c","d","e"]
+        },
+        plotArea: {
+            margin: 15
+        },
+
+        panes: [{
+            clip: true
         }],
         valueAxis: {
             max: 80,
-            min: 30         
-        },       
+            min: 30           
+        },      
         tooltip: {
-            visible: true//,
-            //shared: true
+            visible: true
         },
         renderAs: renderAs
     });  
+      
    $("#stock-chart").kendoStockChart({
                 dataSource: {
                     transport: {
@@ -343,7 +424,7 @@
             }
         });
 
-     
+   
     
     $("#testRange").kendoChart({
         series: [{
@@ -398,10 +479,12 @@
                 panes: [{
                     name: "volumePane",
                     title: "Volume",
-                    height: 150 // pixels
+                    height: 150, 
+                    margin: 10
                 },{
                     title: "Value",
-                    name: "stock"
+                    name: "stock",
+                    margin: 10
                 }],
                 categoryAxis: {
                     pane: "volumePane"
@@ -455,7 +538,7 @@
     $("#scatterChart").kendoChart({
         series: [{
             type: "scatterLine",
-            data: [{x:1,y: 20},{ x:40, y: 25},{ x:50, y: 30},{x: 1, y: 1}, {x: 50, y: 50}],
+            data: [{x:30,y: 20},{ x:40, y: 25},{ x:50, y: 30},{x: 1, y: 1}, {x: 50, y: 40}],
             xAxis: "top",
             yAxis: "top"
         }, {
@@ -465,8 +548,10 @@
             yAxis: "bottom"
         }],
         panes: [{
+            margin: 10,
             name: "top"
         }, {
+            margin: 10,
             name: "bottom"
         }],        
         xAxis: [{
@@ -537,8 +622,10 @@
             pane: "bottom"
           }],
         panes: [{
+            margin: 10,
             name: "top"
         }, {
+            margin: 10,
             name: "bottom"
         }],
         tooltip: {
@@ -713,6 +800,8 @@
                     opacity: 1
                 }
             });       
+            
+        console.log(new Date().getTime() - start);
   </script>
 </body>
 </html>

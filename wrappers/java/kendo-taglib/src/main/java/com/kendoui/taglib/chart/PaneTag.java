@@ -73,6 +73,14 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("background", value);
     }
 
+    public boolean getClip() {
+        return (boolean)getProperty("clip");
+    }
+
+    public void setClip(boolean value) {
+        setProperty("clip", value);
+    }
+
     public float getHeight() {
         return (float)getProperty("height");
     }

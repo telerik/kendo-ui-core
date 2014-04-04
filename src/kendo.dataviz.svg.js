@@ -161,11 +161,15 @@ var __meta__ = {
 
         createClipPath: function(id, box) {
             var view = this,
-                clipPath = view.definitions[id];
+                clipPath = view.definitions[id],
+                children = [view.createRect(box, {})];
             if(!clipPath) {
                 clipPath = new SVGClipPath({id: id});
-                clipPath.children.push(view.createRect(box, {}));
+                clipPath.children = children;
                 view.definitions[id] = clipPath;
+            } else {
+                clipPath.children = children;
+                clipPath.refresh();
             }
 
             return clipPath;
@@ -271,7 +275,7 @@ var __meta__ = {
                 id = element.options.clipPathId,
                 clipPath = "";
             if (id) {
-                clipPath = element.renderAttr("clip-path", "url(#" + id + ")");
+                clipPath = element.renderAttr("clip-path", "url(" + baseUrl() +"#" + id + ")");
             }
             return clipPath;
         }
@@ -769,6 +773,13 @@ var __meta__ = {
                 renderTemplate("<clipPath#= d.renderAttr(\"id\", d.options.id) #>" +
                          "#= d.renderContent() #</clipPath>");
             }
+        },
+
+        refresh: function() {
+            var element = doc.getElementById(this.options.id);
+            if (element) {
+                element.innerHTML = this.renderContent();
+            }
         }
     });
 
@@ -967,30 +978,13 @@ var __meta__ = {
                         definitions[overlayId] = gradient;
                     }
 
-                    return "url(" + decorator.baseUrl() + "#" + gradient.options.id + ")";
+                    return "url(" + baseUrl() + "#" + gradient.options.id + ")";
                 } else {
                     return NONE;
                 }
             } else {
                 return paint;
             }
-        },
-
-        baseUrl: function() {
-            var base = doc.getElementsByTagName("base")[0],
-                baseUrl = "",
-                href = doc.location.href,
-                hashIndex = href.indexOf("#");
-
-            if (base && !kendo.support.browser.msie) {
-                if (hashIndex !== -1) {
-                    href = href.substring(0, hashIndex);
-                }
-
-                baseUrl = href;
-            }
-
-            return baseUrl;
         }
     };
 
@@ -1061,6 +1055,23 @@ var __meta__ = {
     var renderSVG = function(container, svg) {
         container.innerHTML = svg;
     };
+
+    function baseUrl() {
+        var base = doc.getElementsByTagName("base")[0],
+            url = "",
+            href = doc.location.href,
+            hashIndex = href.indexOf("#");
+
+        if (base && !kendo.support.browser.msie) {
+            if (hashIndex !== -1) {
+                href = href.substring(0, hashIndex);
+            }
+
+            url = href;
+        }
+
+        return url;
+    }
 
     (function() {
         var testFragment = "<svg xmlns='" + SVG_NS + "'></svg>",

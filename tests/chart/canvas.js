@@ -100,26 +100,26 @@
             equal(view.options.width, "100px");
             equal(view.options.height, "100px");
         });
-        
-        test("applyDefinitions sets a clipPath from the definitions to the element if clipPathId is set in the options", function() {            
+
+        test("applyDefinitions sets a clipPath from the definitions to the element if clipPathId is set in the options", function() {
             var element = {options: {clipPathId: "foo"}};
             view.definitions["foo"] = new dataviz.CanvasClipPath();
-            
+
             view.applyDefinitions(element);
             ok(view.definitions["foo"] === element.clipPath);
-        });        
+        });
 
         test("createGroup returns CanvasGroup", function() {
             var group = view.createGroup();
             ok(group instanceof dataviz.CanvasGroup);
         });
-        
+
         test("createGroup sets the clipPath to the element", function() {
             view.definitions["foo"] = new dataviz.CanvasClipPath();
-            var group = view.createGroup({clipPathId: "foo"});           
-            
+            var group = view.createGroup({clipPathId: "foo"});
+
             ok(group.clipPath === view.definitions["foo"]);
-        });        
+        });
 
         test("createText returns CanvasText", function() {
             var text = view.createText();
@@ -291,28 +291,37 @@
             var sector = view.createSector();
             ok(sector instanceof dataviz.CanvasRing);
         });
-        
-        test("createClipPath returns a CanvasClipPath", function() { 
+
+        test("createClipPath returns a CanvasClipPath", function() {
             var clipPath = view.createClipPath("foo", Box2D());
-            
+
             ok(clipPath instanceof dataviz.CanvasClipPath);
         });
-        
-        test("createClipPath adds a CanvasClipPath to the definitions with the specified rectange box as child", function() {            
+
+        test("createClipPath adds a CanvasClipPath to the definitions with the specified rectange box as child", function() {
             var id = "foo",
                 box = Box2D(1,1,100,100),
                 clipPath = view.createClipPath(id, box);
-            
+
             ok(view.definitions[id] instanceof dataviz.CanvasClipPath);
             deepEqual(view.definitions[id].children[0].points, box.points());
-        }); 
+        });
 
-        test("createClipPath returns an already initialized clip path from the definitions", function() {            
+        test("createClipPath returns an already initialized clip path from the definitions", function() {
             var id = "foo",
-               clipPath = view.createClipPath(id, Box2D());         
-           
+               clipPath = view.createClipPath(id, Box2D());
+
             ok(clipPath === view.createClipPath(id, Box2D()));
-        });        
+        });
+
+        test("createClipPath updates the children of an already initialized clip path with the same id", function() {
+            var id = "foo",
+               clipPath = view.createClipPath(id, Box2D()),
+               newBox = Box2D(1,1,100,100);
+            view.createClipPath(id, newBox);
+
+            deepEqual(clipPath.children[0].points, newBox.points());
+        });
 
         // ------------------------------------------------------------
         var element,
@@ -390,16 +399,16 @@
 
             group.render(ctx);
         });
-        
+
         test("renders clipPath", function() {
             var savesContext = false,
                 rendersClipPath = false,
                 rendersChildren = false,
-                rendersInCorrectOrder = false,                
+                rendersInCorrectOrder = false,
                 ctx = {
                     save: function () {
                         savesContext = true;
-                    },                    
+                    },
                     restore: function () {
                         rendersInCorrectOrder = savesContext && rendersClipPath && rendersChildren;
                     }
@@ -414,13 +423,13 @@
                     rendersChildren = savesContext && rendersClipPath;
                 }
             });
-            
+
             group.render(ctx);
             ok(rendersInCorrectOrder);
-        });        
+        });
 
     })();
-    
+
     (function() {
         var clipPath;
 
@@ -429,14 +438,14 @@
                 clipPath = new dataviz.CanvasClipPath();
             }
         });
-        
+
         test("clipPath applies clip", function() {
             var startsNewPath = false,
                 rendersClipPoints = false,
                 appliesClip = false,
                 ctx = {
                     beginPath: function() {
-                       startsNewPath = true; 
+                       startsNewPath = true;
                     },
                     clip:function() {
                         appliesClip = startsNewPath && rendersClipPoints;
@@ -447,11 +456,11 @@
                      rendersClipPoints = startsNewPath;
                 }
             });
-            
+
             clipPath.render(ctx);
             ok(appliesClip);
         });
-        
+
     })();
 
     (function() {
