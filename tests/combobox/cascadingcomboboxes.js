@@ -533,4 +533,45 @@ test("dataBound event of child is raised after cascading is finished", 2, functi
     equal(childCB.value(), "2");
 });
 
+asyncTest("filtering child combo does not re-input the selected value", 1, function() {
+    parent.kendoComboBox({
+        dataTextField: "parentID",
+        dataValueField: "parentID",
+        dataSource: [
+            { parentID: 1 },
+            { parentID: 2 }
+        ],
+        value: 1
+    });
+
+    child.kendoComboBox({
+        cascadeFrom: "parent", //id of the parent
+        dataTextField: "childID",
+        dataValueField: "childID",
+        filter: "contains",
+        dataSource: [
+            { parentID: 1, childID: "1" },
+            { parentID: 2, childID: "2" },
+            { parentID: 1, childID: "3" },
+            { parentID: 2, childID: "4" }
+        ],
+        value: 1
+    });
+
+    var parentCB = parent.data("kendoComboBox"),
+        childCB = child.data("kendoComboBox");
+
+    childCB.bind("dataBound", function() {
+        start();
+        equal(childCB.input.val(), "");
+    });
+
+    childCB.input
+           .val("")
+           .trigger({
+                type: "keydown",
+                keyCode: kendo.keys.BACKSPACE
+           });
+});
+
 })();
