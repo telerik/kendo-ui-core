@@ -1058,7 +1058,7 @@ var __meta__ = {
 
     function baseUrl() {
         var base = doc.getElementsByTagName("base")[0],
-            baseUrl = "",
+            url = "",
             href = doc.location.href,
             hashIndex = href.indexOf("#");
 
@@ -1067,10 +1067,10 @@ var __meta__ = {
                 href = href.substring(0, hashIndex);
             }
 
-            baseUrl = href;
+            url = href;
         }
 
-        return baseUrl;
+        return url;
     }
 
     (function() {
