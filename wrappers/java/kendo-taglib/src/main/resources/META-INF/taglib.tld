@@ -2572,6 +2572,12 @@ Axis that don't have specified pane are placed in the top (default) pane.Series 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Specifies whether the charts in the pane should be clipped. By default all charts except radar, polar and 100% stacked charts are clipped.</description>
+            <name>clip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The chart pane height in pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
@@ -27444,6 +27450,12 @@ Axis that don't have specified pane are placed in the top (default) pane.Series 
             <name>background</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the charts in the pane should be clipped.</description>
+            <name>clip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>The pane height in pixels.</description>

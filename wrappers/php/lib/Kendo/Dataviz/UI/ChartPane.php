@@ -24,6 +24,15 @@ class ChartPane extends \Kendo\SerializableObject {
     }
 
     /**
+    * Specifies whether the charts in the pane should be clipped. By default all charts except radar, polar and 100% stacked charts are clipped.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\ChartPane
+    */
+    public function clip($value) {
+        return $this->setProperty('clip', $value);
+    }
+
+    /**
     * The chart pane height in pixels.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartPane
