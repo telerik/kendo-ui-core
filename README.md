@@ -100,6 +100,7 @@ If you want to create custom build or help with Kendo UI Core development, it wo
 npm install -g grunt-cli
 ```
 Make sure you have `grunt` installed by testing:
+
 ```
 grunt -v
 ```
@@ -112,6 +113,14 @@ grunt build
 There are several other tasks available:
 ```
 grunt -help
+```
+
+### Building only what you need
+
+The grunt `custom` task will create a custom minified file - `dist/kendo.custom.min.js`, which includes only the specified components. The following command will include only the autocomplete and dropdownlist widgets:
+
+```
+grunt custom:autocomplete,dropdownlist
 ```
 
 ## Source Code and Downloads
