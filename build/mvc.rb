@@ -239,7 +239,7 @@ else
         # XML API documentation
         file "#{output_dir}/Kendo.Mvc.xml" => dll_file
 
-        # Satellite assemblies (<culture>\Kendo.Mvc.ressources.dll) depend on Kendo.Mvc.dll
+        # Satellite assemblies (<culture>\Kendo.Mvc.resources.dll) depend on Kendo.Mvc.dll
         rule "#{output_dir}/**/*.resources.dll" => dll_file
     end
 
@@ -251,13 +251,8 @@ else
 
 
     tree :to => 'dist/binaries/',
-         :from => FileList['wrappers/mvc/**/*.dll',
-             'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
-             'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/Kendo.Mvc.dll',
-             'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/Kendo.Mvc.dll',
-             'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml',
-             'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/Kendo.Mvc.xml',
-             'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/Kendo.Mvc.xml'
+         :from => FileList[
+             MVC3_DLL + MVC4_DLL + MVC5_DLL + FileList['wrappers/mvc/**/*.dll']
          ],
          :root => 'wrappers/mvc/'
 end
