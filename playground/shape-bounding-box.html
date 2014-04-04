@@ -20,19 +20,22 @@
          <script src="../src/dataviz/drawing/vml.js"></script>
     </head>
     <body>
-        <--
+        <!--
             <textarea id="pathString" cols="40" rows="5" data-bind="value:path"></textarea>
             <div data-bind="text:drawPath"></div>
            
          -->
           <div id="container"></div>
-        <div id="test"></div>
+      
         <--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute;left: 300px;">
-            <rect x = "25" y = "50" width = "150" height = "100" fill = "tomato" stroke = "lightgreen" stroke-width = "2" transform = "rotate(-45 100 100)"/>
+            <g transform = "translate(0, 300)">
+                <path d="M100,100 C200,200 300,200 400,100 L500,150 C450,200 200,300 100,200 z" transform = "rotate(-45 100 100) scale(1.1, 0.7)" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round"></path>
+            </g>           
         </svg>
           -->
-         <--
+         <!--
+         <div id="test"></div>
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute; left: 300px;">
             <g>
                 <path d="M 300 300 v 86.6 h-25 A 50 100 0 1 1 350 300 c -5 100 100 100 100 -100 10 -70 50 100 50 100" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round"></path>
@@ -76,14 +79,6 @@
                 curve = new Path(strokeOptions),
                 group = new drawing.Group();
 
-            // curve.moveTo(100, 100);
-            // curve.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
-            // curve.lineTo(500, 150);
-            // curve.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
-            //curve.close();
-
-            // var curveBoundingRect = rectPath(curve.boundingBox(), strokeOptions);
-
             var arcGeometry = new geometry.Arc(Point.create(300, 300), {
                 startAngle: 120,
                 endAngle: 0,
@@ -112,24 +107,27 @@
                     return pathString;
                 }
             });
-            var pathTransform = new Path($.extend({transform: transform().rotate(-45, 100, 100).matrix()}, strokeOptions)),
+            var curveTransform = new Path($.extend({transform: transform().rotate(-45, 100, 100).scale(1.1, 0.7).matrix()}, strokeOptions)),
                 original = new Path({stroke: {color: "blue", width: 1}});
             
-            original.moveTo(25, 50);
-            original.lineTo(175, 50);
-            original.lineTo(175, 150);
-            original.lineTo(25, 150);
+            curveTransform.moveTo(100, 100);
+            curveTransform.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
+            curveTransform.lineTo(500, 150);
+            curveTransform.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
+            curveTransform.close();
+            
+            original.moveTo(100, 100);
+            original.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
+            original.lineTo(500, 150);
+            original.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
             original.close(); 
-            
-            
-            pathTransform.moveTo(25, 50);
-            pathTransform.lineTo(175, 50);
-            pathTransform.lineTo(175, 150);
-            pathTransform.lineTo(25, 150);
-            pathTransform.close();            
-            group.append(pathTransform, rectPath(pathTransform.boundingBox(), strokeOptions), original);
+            group = new drawing.Group({transform: transform().translate(0, 300).matrix()});
+            group.append(curveTransform, rectPath(curveTransform.boundingBox(), strokeOptions));
             surface.clear();
-            surface.draw(group);
+            debugger;
+            var mainGroup = new drawing.Group();
+            mainGroup.append(group, original);
+            surface.draw(mainGroup);
             
             kendo.bind($("body"), viewModel);
 
@@ -145,7 +143,7 @@
 
                 return rectPath;
             }
-            renderTest();
+            //renderTest();
             function renderTest() {
                 var surface = Surface.create(document.getElementById("test"), {width: 700, height: 700}),
                     arcGeometry = new geometry.Arc(Point.create(100, 100), {

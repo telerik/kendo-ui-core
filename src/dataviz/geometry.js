@@ -99,6 +99,14 @@
             return this;
         },
 
+        transformInto: function(mx) {
+            var point = this.clone();
+            if (mx) {
+                point.transform(mx);
+            }
+            return point;
+        },
+
         add: function(other) {
             this.x += other.x;
             this.y += other.y;
@@ -452,8 +460,8 @@
     });
 
     var Transformation = Class.extend({
-        init: function() {
-            this._matrix = Matrix.unit();
+        init: function(matrix) {
+            this._matrix = matrix || Matrix.unit();
         },
 
         translate: function(x, y) {
@@ -462,6 +470,9 @@
         },
 
         scale: function(x, y) {
+            if (!defined(y)) {
+               y = x;
+            }
             this._matrix = this._matrix.times(Matrix.scale(x, y));
             return this;
         },
@@ -476,8 +487,8 @@
         }
     });
 
-    function transform() {
-        return new Transformation();
+    function transform(matrix) {
+        return new Transformation(matrix);
     }
 
     // Exports ================================================================

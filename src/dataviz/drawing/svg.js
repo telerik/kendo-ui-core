@@ -242,7 +242,7 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g>#= d.renderChildren() #</g>"
+            "<g #= d.renderTransform() # >#= d.renderChildren() #</g>"
         )
     });
 

@@ -45,6 +45,18 @@
             this.options.set("transform", matrix);
         },
 
+        combineTransform: function(matrix) {
+            var elementTransform = this.options.get("transform"),
+                combinedTransform;
+            if (elementTransform && matrix) {
+                combinedTransform = matrix.times(elementTransform);
+            } else {
+                combinedTransform = elementTransform || matrix;
+            }
+
+            return combinedTransform;
+        },
+
         visible: function(visible) {
             this.options.set("visible", visible);
             return this;
@@ -210,8 +222,8 @@
             var rect,
                 segment = this;
             if (matrix) {
-                segment = segment.transform(matrix);
-                other = other.transform(matrix);
+                segment = segment.transformInto(matrix);
+                other = other.transformInto(matrix);
             }
 
             if (segment.controlOut && segment.controlIn) {
@@ -222,16 +234,16 @@
             return rect;
         },
 
-        transform: function(matrix) {
+        transformInto: function(matrix) {
             var controlIn,
                 controlOut;
             if (this.controlIn) {
-                controlIn = this.controlIn.clone().transform(matrix);
+                controlIn = this.controlIn.transformInto(matrix);
             }
             if (controlOut) {
-                controlOut = this.controlOut.clone().transform(matrix);
+                controlOut = this.controlOut.transformInto(matrix);
             }
-            return new Segment(this.anchor.clone().transform(matrix), controlIn, controlOut);
+            return new Segment(this.anchor.transformInto(matrix), controlIn, controlOut);
         },
 
         _lineBoundingBox: function(p1, p2) {
@@ -354,25 +366,18 @@
         boundingBox: function(matrix) {
             var segments = this.segments,
                 length = segments.length,
-                options = this.options,
-                strokeWidth = options.get("stroke.width"),
+                strokeWidth = this.options.get("stroke.width"),
+                combinedTransform = this.combineTransform(matrix),
                 boundingBox,
-                transform = options.get("transform"),
-                transformationMatrix,
                 i;
 
-            if (matrix && transform) {
-                transformationMatrix = matrix.clone().times(transform);
-            } else {
-                transformationMatrix = matrix || transform;
-            }
-
             if (length === 1) {
-                boundingBox = new Rect(segments[0].anchor.clone(), segments[0].anchor.clone());
+                var anchor = segments[0].anchor.transformInto(combinedTransform);
+                boundingBox = new Rect(anchor, anchor);
             } else if (length > 0) {
                 boundingBox = new Rect(Point.maxPoint(), Point.minPoint())
                 for (i = 1; i < length; i++) {
-                    boundingBox = boundingBox.wrap(segments[i - 1].boundingBoxTo(segments[i], transformationMatrix));
+                    boundingBox = boundingBox.wrap(segments[i - 1].boundingBoxTo(segments[i], combinedTransform));
                 }
                 if (strokeWidth) {
                     expandRect(boundingBox, strokeWidth / 2);
