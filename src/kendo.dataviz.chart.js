@@ -7440,7 +7440,6 @@ var __meta__ = {
             var container = this;
             ChartElement.fn.init.call(container, options);
             container.pane = pane;
-            container.id = uniqueId();
         },
 
         shouldClip: function () {
@@ -7493,6 +7492,7 @@ var __meta__ = {
                 labels = container.labelViewElements(view);
             }
 
+            container.id = uniqueId();
             group = view.createGroup({
                 id: container.id,
                 clipPathId: clipPathId

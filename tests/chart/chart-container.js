@@ -136,12 +136,24 @@
             equal(view.log.group[0].options.clipPathId, container.clipPathId);
         });
 
+        test("sets id to the group", function() {
+            ok(view.log.group[0].options.id !== undefined);
+        });
+
+        test("generates new id each time getViewElements is called and uses it for the group", function() {
+            var id = container.id;
+            view = new ViewStub();
+            container.getViewElements(view);
+            ok(container.id != id);
+            equal(view.log.group[0].options.id, container.id);
+        });
+
         test("creates group without clippathid if no clipping should be applied", function() {
             container.children[0].options.clip = false;
-            viewElements = container.getViewElements(view);            
+            viewElements = container.getViewElements(view);
             equal(viewElements.length, 1);
             equal(viewElements[0].options.clipPathId, undefined);
-            
+
         });
 
         test("sets clipBox", function() {
