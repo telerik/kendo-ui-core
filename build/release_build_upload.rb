@@ -61,14 +61,11 @@ def upload_release_build(options)
 
     #Thread.current.send :sleep, 3
 
-    product_names = ['Kendo UI Web', 'Kendo UI Web GPL' 'Kendo UI DataViz', 'Kendo UI Mobile', 'Kendo UI Core' 'Kendo UI Complete', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
-
-    create_version("Kendo UI Complete", bot, options) 
-    #product_names.each { |pn| create_version(pn) }
+    create_version(bot, options) 
     
 end
-def create_version(productName, bot, options)
-      bot.click_and_wait productName, "administration"
+def create_version(bot, options)
+      bot.click_and_wait options[:product], "administration"
       bot.click_and_wait "Manage Versions", "administration"
 
       if defined? SERVICE_PACK_NUMBER
@@ -94,61 +91,143 @@ end
 def prepare_files(bot, options)
   #todo
   #bot.driver.execute_script "window.location = $('a:contains(\"commercial.zip\")').attr(\"href\")"
+
+  #msi files
+  if options[:msi]
+    element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.msi')]")
+    element.click
+
+    options[:file_name] = options[:title] + ".msi"
+    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
+
+    p "Setting filename..."
+    p "#{options[:file_name]}"
+    upload_file_and_go_back(bot, options)
+
+
+    element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.msi')]")
+    element.click
+
+    options[:file_name] = options[:title].sub! "commercial", "trial" + ".msi"
+    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
+
+    upload_file_and_go_back(bot, options)
+
+    options[:msi] = nil
+  end
+  
+  #zip files
   element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.zip')]")
   element.click
 
-  file_name = options[:title]
-  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.zip')" 
+  options[:file_name] = options[:title]  + ".zip"
+  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
 
-  upload_file_and_go_back(bot, options[:archive_path])
-
-
-  #element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.msi')]")
-  #element.click
-
-  #bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.msi')" 
-
-  #upload_file_and_go_back(bot, options[:archive_path], 'withxml')
-
+  upload_file_and_go_back(bot, options)
 
   element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.zip')]")
   element.click
 
-  file_name = options[:title].sub! "commercial", "trial"
-  p file_name
-  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.zip')" 
+  options[:file_name] = options[:title].sub! "commercial", "trial" + ".zip"
+  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
 
-  upload_file_and_go_back(bot, options[:archive_path])
+  upload_file_and_go_back(bot, options)
+  
+  #hotfix files
+  if options[:vs_extension]
+      element = bot.driver.find_element(:xpath, "//a[contains(.,'hotfix') and contains(.,'commercial')]")
+      element.click
 
+      file_name = options[:title]
+      bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.hotfix.zip')" 
 
-  #element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.msi')]")
-  #element.click
+      upload_file_and_go_back(bot, options)
 
-  #file_name = options[:title].sub! "commercial", "trial"
-  #p file_name
-  #bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.msi')" 
+      element = bot.driver.find_element(:xpath, "//a[contains(.,'hotfix') and contains (.,'trial')]")
+      element.click
 
-  #upload_file_and_go_back(bot, options[:archive_path], 'withxml')
+      file_name = options[:title].sub! "commercial", "trial"
+      bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.hotfix.zip')" 
 
+      upload_file_and_go_back(bot, options)
+  end
+  #nuget files
+  if options[:nuget]
+      #element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.nupkg')]") - to replace after April 16th
+      element = bot.driver.find_element(:xpath, "//a[contains(.,'NuGet') and contains(.,'commercial')]")
+      element.click
 
-  element = bot.driver.find_element(:xpath, "//a[contains(.,'ControlPanel')]")
-  element.click
+      file_name = options[:title] 
+      bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.nupkg.zip')" 
 
-  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('TelerikControlPanelSetup.KUI.Complete#{VERSION}.exe')" 
+      upload_file_and_go_back(bot, options)
 
-  upload_file_and_go_back(bot, options[:archive_path])
+      #element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.nupkg')]") - to replace after April 16th
+      element = bot.driver.find_element(:xpath, "//a[contains(.,'NuGet') and contains(.,'trial')]")
+      element.click
+
+      file_name = options[:title].sub! "commercial", "trial"
+      bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.nupkg.zip')" 
+
+      upload_file_and_go_back(bot, options)
+  end
+
+  #installer files
+  if options[:common_installer_complete]
+    element = bot.driver.find_element(:xpath, "//a[contains(.,'ControlPanel')]")
+    element.click
+
+    options[:file_name] = "TelerikControlPanelSetup.KUI.Professional#{VERSION}.exe"
+    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
+
+    upload_file_and_go_back(bot, options)
+  end
+  if options[:common_installer_mvc]
+    element = bot.driver.find_element(:xpath, "//a[contains(.,'ControlPanel')]")
+    element.click
+
+    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('TelerikControlPanelSetup.MVC.#{VERSION}.exe')" 
+
+    upload_file_and_go_back(bot, options)  
+
+    #element = bot.driver.find_element(:xpath, "//a[contains(.,'AspNetMvc')]") - to replace after April 16th
+    element = bot.driver.find_element(:xpath, "//a[contains(.,'ASPNETMVC')]")
+    element.click
+
+    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('TelerikUIForAspNetMvcSetup.#{VERSION}.exe')" 
+
+    upload_file_and_go_back(bot, options)    
+  end
 
 end
 def upload_file_and_go_back(bot, options)
-  full_path = File.expand_path(options, File.join(File.dirname(__FILE__), ".."))
-  bot.find('.RadUpload input[type=file]').send_keys(full_path)
+  full_path = File.expand_path(options[:archive_path] + "/" + options[:file_name], File.join(File.dirname(__FILE__), ".."))
+  p "#{full_path}"
+  element = bot.driver.find_element(:xpath, "//input[contains(@id,'rdFileUploadfile0')]")
+  element.send_keys(full_path)
 
-  #if defined? xml
-    #todo - upload xml files    
-  #end
+  #p full_path
+
+  p "msi uploaded"
+
+  if options[:msi]
+    #p full_path
+    options[:file_name] = options[:file_name].sub! "msi", "xml"
+    p "Setting xml filename..."
+    p "#{options[:file_name]}"
+
+    full_path = File.expand_path(options[:archive_path] + "/" + options[:file_name], File.join(File.dirname(__FILE__), ".."))
+
+    p "#{full_path}"
+    element = bot.driver.find_element(:xpath, "//input[contains(@id,'rdXMLConfigFileUploadfile0')]")
+    element.send_keys(full_path)
+    p "xml uploaded"   
+  end
   #Thread.current.send :sleep, 10
 
   bot.find("[value='Save']").click
+
+  p "Saving..."
 
   #Thread.current.send :sleep, 10
 
