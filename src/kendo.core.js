@@ -3661,13 +3661,28 @@ function pad(number, digits, end) {
 
 
     kendo.stripWhitespace = function(element) {
-        var iterator = document.createNodeIterator(element, NodeFilter.SHOW_TEXT, function(node) {
-                return node.parentNode == element ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-            }, false);
+        if (document.createNodeIterator) {
+            var iterator = document.createNodeIterator(element, NodeFilter.SHOW_TEXT, function(node) {
+                    return node.parentNode == element ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                }, false);
 
-        while (iterator.nextNode()) {
-            if (iterator.referenceNode && !iterator.referenceNode.textContent.trim()) {
-                iterator.referenceNode.parentNode.removeChild(iterator.referenceNode);
+            while (iterator.nextNode()) {
+                if (iterator.referenceNode && !iterator.referenceNode.textContent.trim()) {
+                    iterator.referenceNode.parentNode.removeChild(iterator.referenceNode);
+                }
+            }
+        } else { // IE7/8 support
+            for (var i = 0; i < element.childNodes.length; i++) {
+                var child = element.childNodes[i];
+
+                if (child.nodeType == 3 && !/\S/.test(child.nodeValue)) {
+                    element.removeChild(child);
+                    i--;
+                }
+
+                if (child.nodeType == 1) {
+                    kendo.stripWhitespace(child);
+                }
             }
         }
     };
