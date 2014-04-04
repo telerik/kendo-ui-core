@@ -1,0 +1,702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Filter_And" xml:space="preserve">
+    <value>A zároveň</value>
+  </data>
+  <data name="Filter_Clear" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Filter_DateIsEqualTo" xml:space="preserve">
+    <value>Je rovno</value>
+  </data>
+  <data name="Filter_DateIsGreaterThan" xml:space="preserve">
+    <value>Začíná po</value>
+  </data>
+  <data name="Filter_DateIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Začáná od</value>
+  </data>
+  <data name="Filter_DateIsLessThan" xml:space="preserve">
+    <value>Končí po</value>
+  </data>
+  <data name="Filter_DateIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Končí do</value>
+  </data>
+  <data name="Filter_DateIsNotEqualTo" xml:space="preserve">
+    <value>Je různá od</value>
+  </data>
+  <data name="Filter_Filter" xml:space="preserve">
+    <value>Filtrovat</value>
+  </data>
+  <data name="Filter_Info" xml:space="preserve">
+    <value>Zobrazit položky s hodnotou, která:</value>
+  </data>
+  <data name="Filter_IsFalse" xml:space="preserve">
+    <value>není pravda</value>
+  </data>
+  <data name="Filter_IsTrue" xml:space="preserve">
+    <value>je pravda</value>
+  </data>
+  <data name="Filter_NumberIsEqualTo" xml:space="preserve">
+    <value>Je rovno</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThan" xml:space="preserve">
+    <value>Je větší než</value>
+  </data>
+  <data name="Filter_NumberIsGreaterThanOrEqualTo" xml:space="preserve">
+    <value>Je větší nebo rovno</value>
+  </data>
+  <data name="Filter_NumberIsLessThan" xml:space="preserve">
+    <value>Je menší než</value>
+  </data>
+  <data name="Filter_NumberIsLessThanOrEqualTo" xml:space="preserve">
+    <value>Je menší nebo rovno</value>
+  </data>
+  <data name="Filter_NumberIsNotEqualTo" xml:space="preserve">
+    <value>Je různá od</value>
+  </data>
+  <data name="Filter_Or" xml:space="preserve">
+    <value>Nebo</value>
+  </data>
+  <data name="Filter_StringContains" xml:space="preserve">
+    <value>Obsahuje</value>
+  </data>
+  <data name="Filter_StringDoesNotContain" xml:space="preserve">
+    <value>Neobsahuje</value>
+  </data>
+  <data name="Filter_StringEndsWith" xml:space="preserve">
+    <value>Končí na</value>
+  </data>
+  <data name="Filter_StringIsEqualTo" xml:space="preserve">
+    <value>Je shodná s</value>
+  </data>
+  <data name="Filter_StringIsNotEqualTo" xml:space="preserve">
+    <value>Je různá od</value>
+  </data>
+  <data name="Filter_StringStartsWith" xml:space="preserve">
+    <value>Začíná na</value>
+  </data>
+  <data name="Grid_Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Grid_CancelChanges" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Grid_Confirmation" xml:space="preserve">
+    <value>Opravdu chcete smazat tento záznam?</value>
+  </data>
+  <data name="Grid_Create" xml:space="preserve">
+    <value>Přidat nový záznam</value>
+  </data>
+  <data name="Grid_Destroy" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Grid_Edit" xml:space="preserve">
+    <value>Upravit</value>
+  </data>
+  <data name="Grid_SaveChanges" xml:space="preserve">
+    <value>Uložit změny</value>
+  </data>
+  <data name="Grid_Select" xml:space="preserve">
+    <value>Vybrat</value>
+  </data>
+  <data name="Grid_Update" xml:space="preserve">
+    <value>Odemknout</value>
+  </data>
+  <data name="Group_Empty" xml:space="preserve">
+    <value>Přetáhněte sem záhlaví sloupce pro seskupení dle vybraného sloupce.</value>
+  </data>
+  <data name="Pager_Display" xml:space="preserve">
+    <value>{0} - {1} z {2} celkem</value>
+  </data>
+  <data name="Pager_Empty" xml:space="preserve">
+    <value>Žádný záznam nenalezen</value>
+  </data>
+  <data name="Pager_First" xml:space="preserve">
+    <value>Na první stránku</value>
+  </data>
+  <data name="Pager_ItemsPerPage" xml:space="preserve">
+    <value>záznamů na stránku</value>
+  </data>
+  <data name="Pager_Last" xml:space="preserve">
+    <value>Na poslední stránku</value>
+  </data>
+  <data name="Pager_Next" xml:space="preserve">
+    <value>Na další stránku</value>
+  </data>
+  <data name="Pager_Of" xml:space="preserve">
+    <value>z {0}</value>
+  </data>
+  <data name="Pager_Page" xml:space="preserve">
+    <value>Strana</value>
+  </data>
+  <data name="Pager_Previous" xml:space="preserve">
+    <value>Na předchozí stránku</value>
+  </data>
+  <data name="Pager_Refresh" xml:space="preserve">
+    <value>Obnovit</value>
+  </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>Zkusit znova</value>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>Vyberte...</value>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>Nahrát soubory</value>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>Pro nahrátí přetáhněte soubory sem</value>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>chyba</value>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>nahráno</value>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>nahrávám</value>
+  </data>
+  <data name="Editor_Bold" xml:space="preserve">
+    <value>Tučně</value>
+  </data>
+  <data name="Editor_CreateLink" xml:space="preserve">
+    <value>Vložit odkaz</value>
+  </data>
+  <data name="Editor_FontName" xml:space="preserve">
+    <value>Vyberte písmo</value>
+  </data>
+  <data name="Editor_FontNameInherit" xml:space="preserve">
+    <value>(výchozí písmo)</value>
+  </data>
+  <data name="Editor_FontSize" xml:space="preserve">
+    <value>Vyberte velikost písma</value>
+  </data>
+  <data name="Editor_FontSizeInherit" xml:space="preserve">
+    <value>(výchozí velikost)</value>
+  </data>
+  <data name="Editor_FormatBlock" xml:space="preserve">
+    <value>Formát</value>
+  </data>
+  <data name="Editor_Indent" xml:space="preserve">
+    <value>Zvětšit odsazení</value>
+  </data>
+  <data name="Editor_InsertHtml" xml:space="preserve">
+    <value>Vložit HTML</value>
+  </data>
+  <data name="Editor_InsertImage" xml:space="preserve">
+    <value>Vložit obrázek</value>
+  </data>
+  <data name="Editor_InsertOrderedList" xml:space="preserve">
+    <value>Vložit číslovaný seznam</value>
+  </data>
+  <data name="Editor_InsertUnorderedList" xml:space="preserve">
+    <value>Vložit odrážkový seznam</value>
+  </data>
+  <data name="Editor_Italic" xml:space="preserve">
+    <value>Kurzíva</value>
+  </data>
+  <data name="Editor_JustifyCenter" xml:space="preserve">
+    <value>Zarovnat na střed</value>
+  </data>
+  <data name="Editor_JustifyFull" xml:space="preserve">
+    <value>Zarovnat do bloku</value>
+  </data>
+  <data name="Editor_JustifyLeft" xml:space="preserve">
+    <value>Zarovnat vlevo</value>
+  </data>
+  <data name="Editor_JustifyRight" xml:space="preserve">
+    <value>Zarovnat vpravo</value>
+  </data>
+  <data name="Editor_Outdent" xml:space="preserve">
+    <value>Zmenšit odsazení</value>
+  </data>
+  <data name="Editor_Strikethrough" xml:space="preserve">
+    <value>Přeškrtnuté</value>
+  </data>
+  <data name="Editor_Styles" xml:space="preserve">
+    <value>Styly</value>
+  </data>
+  <data name="Editor_Subscript" xml:space="preserve">
+    <value>Dolní index</value>
+  </data>
+  <data name="Editor_Superscript" xml:space="preserve">
+    <value>Horní index</value>
+  </data>
+  <data name="Editor_Underline" xml:space="preserve">
+    <value>Podtržené</value>
+  </data>
+  <data name="Editor_Unlink" xml:space="preserve">
+    <value>Zrušit odkaz</value>
+  </data>
+  <data name="Filter_EnumIsEqualTo" xml:space="preserve">
+    <value>Je rovno</value>
+  </data>
+  <data name="Filter_EnumIsNotEqualTo" xml:space="preserve">
+    <value>Je různá od</value>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>-Vyberte hodnotu-</value>
+  </data>
+  <data name="Grid_Columns" xml:space="preserve">
+    <value>Sloupce</value>
+  </data>
+  <data name="Grid_SortAscending" xml:space="preserve">
+    <value>Roustoucí</value>
+  </data>
+  <data name="Grid_SortDescending" xml:space="preserve">
+    <value>Klesající</value>
+  </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Opravdu chcete smazat "{0}"?</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>Adresář zadaného názvu nebyl nalezen.</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Prázný adresář</value>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>Vybraný soubor s příponou "{0}" není podporovaný. Podporované soubory jsou {1}.</value>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Seřadit dle:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Jména</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Velikosti</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>'Soubor s názvem "{0}" již ve vybraném adresáři existuje. Přejete si jej přepsat?</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Nahrát</value>
+  </data>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Barva pozadí</value>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Barva</value>
+  </data>
+  <data name="Editor_DropFilesHere" xml:space="preserve">
+    <value>Přetáhněte soubory sem pro nahrání</value>
+  </data>
+  <data name="Editor_ImageWebAddress" xml:space="preserve">
+    <value>Odkaz</value>
+  </data>
+  <data name="Editor_DialogButtonSeparator" xml:space="preserve">
+    <value>nebo</value>
+  </data>
+  <data name="Editor_DialogCancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Editor_DialogInsert" xml:space="preserve">
+    <value>Vložit</value>
+  </data>
+  <data name="Editor_ImageAltText" xml:space="preserve">
+    <value>Alternativní text</value>
+  </data>
+  <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
+    <value>Otevřít odkaz v novém okně</value>
+  </data>
+  <data name="Editor_LinkText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Editor_LinkToolTip" xml:space="preserve">
+    <value>Text po najetí</value>
+  </data>
+  <data name="Editor_LinkWebAddress" xml:space="preserve">
+    <value>Odkaz</value>
+  </data>
+  <data name="Editor_Search" xml:space="preserve">
+    <value>Hledat</value>
+  </data>
+  <data name="Scheduler_AllDay" xml:space="preserve">
+    <value>celý den</value>
+  </data>
+  <data name="Scheduler_Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Scheduler_Confirmation" xml:space="preserve">
+    <value>Opravdu chcete smazat tuto událost?</value>
+  </data>
+  <data name="Scheduler_Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Scheduler_Destroy" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Scheduler_Editor_AllDayEvent" xml:space="preserve">
+    <value>Celodenní</value>
+  </data>
+  <data name="Scheduler_Editor_Description" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="Scheduler_Editor_EditorTitle" xml:space="preserve">
+    <value>Událost</value>
+  </data>
+  <data name="Scheduler_Editor_End" xml:space="preserve">
+    <value>Konec</value>
+  </data>
+  <data name="Scheduler_Editor_EndTimezone" xml:space="preserve">
+    <value>Časové pásmo konce</value>
+  </data>
+  <data name="Scheduler_Editor_Repeat" xml:space="preserve">
+    <value>Opakování</value>
+  </data>
+  <data name="Scheduler_Editor_SeparateTimezones" xml:space="preserve">
+    <value>Různé časové pásma pro začátek a konec</value>
+  </data>
+  <data name="Scheduler_Editor_Start" xml:space="preserve">
+    <value>Začátek</value>
+  </data>
+  <data name="Scheduler_Editor_StartTimezone" xml:space="preserve">
+    <value>Časové pásmo začátku</value>
+  </data>
+  <data name="Scheduler_Editor_Timezone" xml:space="preserve">
+    <value> Časové pásmo</value>
+  </data>
+  <data name="Scheduler_Editor_TimezoneEditorButton" xml:space="preserve">
+    <value>Časové pásmo</value>
+  </data>
+  <data name="Scheduler_Editor_TimezoneEditorTitle" xml:space="preserve">
+    <value>Časové pásma</value>
+  </data>
+  <data name="Scheduler_Editor_Title" xml:space="preserve">
+    <value>Nadpis</value>
+  </data>
+  <data name="Scheduler_Event" xml:space="preserve">
+    <value>Událost</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowOccurrence" xml:space="preserve">
+    <value>Smazat vybranou událost</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowSeries" xml:space="preserve">
+    <value>Smazat vše</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteWindowTitle" xml:space="preserve">
+    <value>Smazat opakovanou událost</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Daily_Interval" xml:space="preserve">
+    <value>dní</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Daily_RepeatEvery" xml:space="preserve">
+    <value>Opakovat každý:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_After" xml:space="preserve">
+    <value>Konec po</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_Occurrence" xml:space="preserve">
+    <value>opakování</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_Label" xml:space="preserve">
+    <value>Konec:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_Never" xml:space="preserve">
+    <value>Nikdy</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_End_On" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Daily" xml:space="preserve">
+    <value>Denně</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Monthly" xml:space="preserve">
+    <value>Měsíčně</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Never" xml:space="preserve">
+    <value>Nikdy</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Weekly" xml:space="preserve">
+    <value>Týdně</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Frequencies_Yearly" xml:space="preserve">
+    <value>Ročně</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_Day" xml:space="preserve">
+    <value>Den</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_Interval" xml:space="preserve">
+    <value>měsíc(e)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_RepeatEvery" xml:space="preserve">
+    <value>Opakovat každý:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Monthly_RepeatOn" xml:space="preserve">
+    <value>Opakovat v:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_First" xml:space="preserve">
+    <value>první</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Fourth" xml:space="preserve">
+    <value>čtvrtý</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Last" xml:space="preserve">
+    <value>poslední</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Second" xml:space="preserve">
+    <value>druhý</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_OffsetPositions_Third" xml:space="preserve">
+    <value>třetí</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_RepeatEvery" xml:space="preserve">
+    <value>Opakovat každý:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_RepeatOn" xml:space="preserve">
+    <value>Opakovat v:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekly_Interval" xml:space="preserve">
+    <value>týden(ny)</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_Of" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_RepeatEvery" xml:space="preserve">
+    <value>Opakovat každý:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_RepeatOn" xml:space="preserve">
+    <value>Opakovat v:</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Yearly_Interval" xml:space="preserve">
+    <value>rok(y)</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowOccurrence" xml:space="preserve">
+    <value>Upravit jen vybranou událost</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowSeries" xml:space="preserve">
+    <value>Upravit vše</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditWindowTitle" xml:space="preserve">
+    <value>Upravit opakující se událost</value>
+  </data>
+  <data name="Scheduler_Save" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="Scheduler_Time" xml:space="preserve">
+    <value>Čas</value>
+  </data>
+  <data name="Scheduler_Today" xml:space="preserve">
+    <value>Dnes</value>
+  </data>
+  <data name="Scheduler_View_Agenda" xml:space="preserve">
+    <value>Agenda</value>
+  </data>
+  <data name="Scheduler_View_Day" xml:space="preserve">
+    <value>Den</value>
+  </data>
+  <data name="Scheduler_View_Month" xml:space="preserve">
+    <value>Měsíc</value>
+  </data>
+  <data name="Scheduler_View_Week" xml:space="preserve">
+    <value>Týden</value>
+  </data>
+  <data name="Scheduler_Recurrence_DeleteRecurring" xml:space="preserve">
+    <value>Chcete smazat jen vybranou událost, nebo i všechny opakování?</value>
+  </data>
+  <data name="Scheduler_Recurrence_EditRecurring" xml:space="preserve">
+    <value>Chcete upravit jen vybranou událost, nebo i všechny opakování?</value>
+  </data>
+  <data name="Editor_CreateTable" xml:space="preserve">
+    <value>Vložit tabulku</value>
+  </data>
+  <data name="Editor_AddColumnLeft" xml:space="preserve">
+    <value>Přidat sloupec vlevo</value>
+  </data>
+  <data name="Editor_AddColumnRight" xml:space="preserve">
+    <value>Přidat sloupec vpravo</value>
+  </data>
+  <data name="Editor_AddRowAbove" xml:space="preserve">
+    <value>Přidat řádek nad</value>
+  </data>
+  <data name="Editor_AddRowBelow" xml:space="preserve">
+    <value>Přidat řádek pod</value>
+  </data>
+  <data name="Editor_DeleteColumn" xml:space="preserve">
+    <value>Smazat soupec</value>
+  </data>
+  <data name="Editor_DeleteRow" xml:space="preserve">
+    <value>Smazat řádek</value>
+  </data>
+  <data name="Scheduler_DeleteWindowTitle" xml:space="preserve">
+    <value>Smazat událost</value>
+  </data>
+  <data name="Scheduler_ShowFullDay" xml:space="preserve">
+    <value>Zobrazit celý den</value>
+  </data>
+  <data name="Scheduler_ShowWorkDay" xml:space="preserve">
+    <value>Zobrazit pracovní dobu</value>
+  </data>
+  <data name="Upload_HeaderStatusUploaded" xml:space="preserve">
+    <value>Hotovo</value>
+  </data>
+  <data name="Upload_HeaderStatusUploading" xml:space="preserve">
+    <value>Nahrávám...</value>
+  </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>Operátor</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>Hodnota</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>Nastavení sloupců</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Smazat</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>Hotovo</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Day" xml:space="preserve">
+    <value>den</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Weekday" xml:space="preserve">
+    <value>pracovní den</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
+    <value>víkend</value>
+  </data>
+  <data name="Editor_Formatting" xml:space="preserve">
+    <value>Formátování</value>
+  </data>
+  <data name="Pager_MorePages" xml:space="preserve">
+    <value>Další stránky</value>
+  </data>
+  <data name="Grid_Lock" xml:space="preserve">
+    <value>Zamknout</value>
+  </data>
+  <data name="Grid_Unlock" xml:space="preserve">
+    <value>Odemknout</value>
+  </data>
+</root>
