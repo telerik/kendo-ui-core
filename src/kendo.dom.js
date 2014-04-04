@@ -31,6 +31,15 @@ var __meta__ = {
 
     Element.prototype = new Node();
 
+    Element.prototype.clone = function() {
+        var children = [];
+        for (var index = 0; index < this.children.length; index ++) {
+            children[index] = this.children[index].clone();
+        }
+
+        return element(this.nodeName, kendo.deepExtend({}, this.attr), children);
+    }
+
     Element.prototype.create = function() {
         return document.createElement(this.nodeName);
     };
@@ -128,17 +137,17 @@ var __meta__ = {
         return document.createTextNode(this.nodeValue);
     };
 
+    TextNode.prototype.clone = function() {
+        return text(this.nodeValue);
+    };
+
     TextNode.prototype.render = function(node, cached) {
         if (!cached || cached.nodeName !== this.nodeName) {
             if (cached) {
-                cached.node.parentNode.removeChild(cached.node);
+                cached.remove();
             }
-        } else {
-            node = cached.node;
-
-            if (this.nodeValue !== cached.nodeValue) {
-                node.nodeValue = this.nodeValue;
-            }
+        } else if (this.nodeValue !== cached.nodeValue) {
+            node.nodeValue = this.nodeValue;
         }
 
         this.node = node;
@@ -177,18 +186,56 @@ var __meta__ = {
         cache[id] = node;
     }
 
-    function remove(root) {
-        var id = roots.indexOf(root);
+    function parse(node, callback) {
+        var result;
 
-        roots.splice(id, 1);
+        if (node.nodeName === "#text") {
+            result = text(node.nodeValue);
+        } else {
+            var children = [];
 
-        delete(cache[id]);
+            for (var childNode = node.firstChild; childNode; childNode = childNode.nextSibling) {
+                if (!callback || callback(childNode)) {
+                    children[children.length] = parse(childNode, callback);
+                }
+            }
+
+            var attributes = {};
+
+            for (var index = 0, length = node.attributes.length; index < length; index ++) {
+                var attribute = node.attributes[index];
+                if (attribute.specified) {
+                    var name = attribute.name;
+                    if (name === "class") {
+                        name = "className";
+                    }
+                    attributes[name] = attribute.value;
+                }
+            }
+
+            result = element(node.nodeName.toLowerCase(), attributes, children);
+        }
+
+        result.node = node;
+        return result;
+    }
+
+    function attach(node, tree) {
+        var id = indexOf(roots, node);
+
+        if (id < 0) {
+            id = roots.push(node) - 1;
+        }
+
+        cache[id] = tree;
     }
 
     kendo.dom = {
         element: element,
         text: text,
-        render: render
+        render: render,
+        parse: parse,
+        attach: attach
     };
 })(window.kendo);
 

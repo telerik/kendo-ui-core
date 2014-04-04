@@ -3,6 +3,7 @@
     var element = kendo.dom.element;
     var text = kendo.dom.text;
     var render = kendo.dom.render;
+    var parse = kendo.dom.parse;
 
     module("virtual dom", {
        setup: function() {
@@ -200,5 +201,71 @@
         render(root, element("div", null));
 
         equal(root.style.cssText, "");
+    });
+
+    test("parse creates a structure from a DOM element", function() {
+        var node = parse(root);
+        equal(node.nodeName, "div");
+    });
+
+    test("parse creates a structure from a text node", function() {
+        var node = parse(document.createTextNode("foo"));
+        equal(node.nodeName, "#text");
+        equal(node.nodeValue, "foo");
+    });
+
+    test("parse iterates through element children", function() {
+        var dom = $("<div><span /></div>");
+        var node = parse(dom[0]);
+
+        equal(node.children.length, 1);
+        equal(node.children[0].nodeName, "span");
+    });
+
+    test("parse parses element attributes", function() {
+        var dom = $("<div id=foo class=bar />");
+        var node = parse(dom[0]);
+        equal(node.attr.id, "foo");
+        equal(node.attr.className, "bar");
+    });
+
+    test("parse parses element class", function() {
+        var dom = $("<div class=foo />");
+        var node = parse(dom[0]);
+        equal(node.attr.className, "foo");
+    });
+
+    test("render skips nested readonly elements", function() {
+        var dom = $("<div><span>text</span></div>")[0];
+
+        var node = parse(dom, function(node) {
+            return node.nodeName !== "#text";
+        });
+
+        equal(node.children[0].children.length, 0);
+    });
+
+    test("render skips readonly elements", function() {
+        var dom = $("<div><span /></div>")[0];
+
+        var node = parse(dom, function(node) {
+            return node.nodeName.toLowerCase() !== "span";
+        });
+
+        render(dom, node);
+        render(dom, element("div", null, [ element("i") ]));
+        equal(dom.children.length, 2);
+    });
+
+    test("render skips nested readonly elements", function() {
+        var dom = $("<div><span>text</span></div>")[0];
+
+        var node = parse(dom, function(node) {
+            return node.nodeName !== "#text";
+        });
+
+        render(dom, node);
+        render(dom, element("div", null, [ element("span") ]));
+        equal(dom.firstChild.childNodes.length, 1);
     });
 }());
