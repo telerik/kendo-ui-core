@@ -257,6 +257,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.bg-BG.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Messages.cs-CZ.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.cs-CZ.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Messages.da-DK.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1619,6 +1624,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.bg-BG.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.cs-CZ.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.cs-CZ.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Messages.da-DK.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.da-DK.Designer.cs</LastGenOutput>
@@ -1969,4 +1978,13 @@
     <Compile Include="UI\Diagram\Fluent\DiagramShapeConnectorBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\MobileActionSheet\MobileActionSheetType.cs" /></ItemGroup><ItemGroup><Compile Include="UI\Diagram\Settings\DiagramShapeDefaultsContentSettings.cs" /><Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsContentSettingsBuilder.cs" /><Compile Include="UI\Diagram\Settings\DiagramShapeContentSettings.cs" /><Compile Include="UI\Diagram\Fluent\DiagramShapeContentSettingsBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\MobileActionSheet\MobileActionSheetType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Diagram\Settings\DiagramShapeDefaultsContentSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeDefaultsContentSettingsBuilder.cs" />
+    <Compile Include="UI\Diagram\Settings\DiagramShapeContentSettings.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramShapeContentSettingsBuilder.cs" />
+  </ItemGroup>
+</Project>
