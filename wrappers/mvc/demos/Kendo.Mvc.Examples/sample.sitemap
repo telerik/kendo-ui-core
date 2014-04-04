@@ -12,6 +12,8 @@
     <siteMapNode title="Menu">
       <siteMapNode controller="menu" action="index" title="First Look (Razor)" area="razor"/>
       <siteMapNode controller="menu" action="index" title="First Look (ASPX)" area="aspx"/>
+      <siteMapNode controller="menu" action="sitemapbinding" title="Sitemap binding (Razor)" area="razor"/>
+      <siteMapNode controller="menu" action="sitemapbinding" title="Sitemap binding (ASPX)" area="aspx"/>
       <siteMapNode controller="menu" action="events" title="Events (Razor)" area="razor"/>
       <siteMapNode controller="menu" action="events" title="Events (ASPX)" area="aspx"/>
       <siteMapNode controller="menu" action="api" title="API (Razor)" area="razor"/>
