@@ -285,28 +285,30 @@
             var ring = view.createRing({}, { strokeWidth: 2, align: true });
             ok(ring.options.align === true);
         });
-        
-        test("createClipPath returns a VMLClipRect", function() { 
+
+        test("createClipPath returns a VMLClipRect", function() {
             var clipPath = view.createClipPath("foo", Box2D());
-            
+
               ok(clipPath instanceof dataviz.VMLClipRect);
         });
-        
-        test("createClipPath adds a VMLClipRect with the specified box to the definitions", function() {            
+
+        test("createClipPath adds a VMLClipRect with the specified box to the definitions", function() {
             var id = "foo",
                 box = Box2D(1,1,100,100),
                 clipPath = view.createClipPath(id, box);
-            
+
             ok(view.definitions[id] instanceof dataviz.VMLClipRect);
             deepEqual(view.definitions[id].box, box);
-        }); 
+        });
 
-        test("createClipPath returns an already initialized clip path from the definitions", function() {            
+        test("createClipPath overrides clip path with the same id", function() {
             var id = "foo",
-               clipPath = view.createClipPath(id, Box2D());         
-            
-            ok(clipPath === view.createClipPath(id, Box2D()));
-        });          
+               clipPath = view.createClipPath(id, Box2D()),
+               newClipPath = view.createClipPath(id, Box2D());
+
+            ok(clipPath !== newClipPath);
+            equal(newClipPath, view.definitions[id]);
+        });
 
         test("renderTo returns DOM element", function() {
             var container = $("<div />").appendTo(document.body);
@@ -367,50 +369,50 @@
         });
 
     })();
-    
+
     (function() {
-        var view,            
+        var view,
             id = "foo",
-            element,            
+            element,
             decorator;
         module("VML View / Decorators / ClipDecorator", {
             setup: function() {
-                view = {definitions: {}};                
+                view = {definitions: {}};
                 view.definitions[id] = new dataviz.VMLClipRect(Box2D(), {});
                 element = {options: {clipPathId: id} };
                 decorator = new dataviz.VMLClipDecorator(view);
             }
         });
-        
+
         test("decorator returns a clip rect if the element has clipPathId", function() {
             var result = decorator.decorate(element);
-            ok(result instanceof dataviz.VMLClipRect);            
+            ok(result instanceof dataviz.VMLClipRect);
         });
-        
+
         test("decorator returns the element if the element does no have clipPathId", function() {
             element.options.clipPathId = undefined;
             var result = decorator.decorate(element);
-            ok(result === element);            
-        });      
+            ok(result === element);
+        });
 
         test("decorator returns the element if an element for the clipPathId is not found in the definitions", function() {
             view.definitions[id] = undefined;
             var result = decorator.decorate(element);
-            ok(result === element);            
-        });         
+            ok(result === element);
+        });
 
         test("decorator creates a copy of the definitions clip rect", function() {
-            var result = decorator.decorate(element);            
-            ok(result instanceof dataviz.VMLClipRect);            
-            ok(result !== view.definitions[id]);                        
-        });  
-
-        test("decorator sets the element as child of the clip rectangle", function() {            
             var result = decorator.decorate(element);
-            ok(result.children[0] === element);                        
-        });         
-        
-        
+            ok(result instanceof dataviz.VMLClipRect);
+            ok(result !== view.definitions[id]);
+        });
+
+        test("decorator sets the element as child of the clip rectangle", function() {
+            var result = decorator.decorate(element);
+            ok(result.children[0] === element);
+        });
+
+
     })();
 
     (function() {

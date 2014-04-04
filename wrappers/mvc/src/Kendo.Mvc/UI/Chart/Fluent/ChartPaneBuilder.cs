@@ -140,5 +140,15 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new ChartBorderBuilder(Pane.Border));
             return this;
         }
+
+        /// <summary>
+        /// Sets the pane clip option
+        /// </summary>
+        /// <param name="clip">The pane clip option value.</param>      
+        public ChartPaneBuilder Clip(bool clip)
+        {
+            Pane.Clip = clip;
+            return this;
+        }
     }
 }

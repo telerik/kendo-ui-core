@@ -96,5 +96,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Clip_should_return_builder()
+        {
+            builder.Clip(true).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Clip_sets_clip_value()
+        {
+            builder.Clip(true);
+            pane.Clip.ShouldEqual(true);
+        }
     }
 }
