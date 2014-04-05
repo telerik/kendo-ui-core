@@ -419,8 +419,17 @@
         }
     });
 
-    Matrix.fn.toString = function() {
-       return [this.a, this.b, this.c, this.d, this.e, this.f].join(",");
+    Matrix.fn.toString = function(precision, separator) {
+       var matrix = this,
+           arr = [matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f],
+           i;
+        if (defined(precision)) {
+            for (i = 0; i < 6; i++) {
+                arr[i] = round(arr[i], precision)
+            }
+        }
+
+        return arr.join(separator || ",");
     };
 
     deepExtend(Matrix, {
