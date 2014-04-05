@@ -444,15 +444,21 @@
     //utility =====================================================
     function elementsBoundingBox(elements) {
         var length = elements.length,
-            boundingBox, i;
-        if (length > 0) {
-            boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
-            for (i = 0; i < length; i++) {
-                boundingBox = boundingBox.wrap(elements[i].boundingBox());
+            boundingBox = new Rect(Point.maxPoint(), Point.minPoint()),
+            hasBoundingBox = false,
+            i, element;
+
+        for (i = 0; i < length; i++) {
+            element = elements[i];
+            if (element.isVisible()) {
+                hasBoundingBox = true;
+                boundingBox = boundingBox.wrap(element.boundingBox());
             }
         }
 
-        return boundingBox;
+        if(hasBoundingBox) {
+            return boundingBox;
+        }
     }
 
     function expandRect(rect, value) {
