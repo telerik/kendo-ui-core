@@ -60,6 +60,10 @@
         visible: function(visible) {
             this.options.set("visible", visible);
             return this;
+        },
+
+        isVisible: function() {
+            return this.options.get("visible") || false;
         }
     });
 
