@@ -107,8 +107,8 @@
             this.childrenChange("remove", items, 0);
         },
 
-        boundingBox: function() {
-            return elementsBoundingBox(this.children);
+        boundingBox: function(matrix) {
+            return elementsBoundingBox(this.children, this.combinedTransform(matrix));
         }
     });
 
@@ -442,7 +442,7 @@
 
 
     //utility =====================================================
-    function elementsBoundingBox(elements) {
+    function elementsBoundingBox(elements, matrix) {
         var length = elements.length,
             boundingBox = new Rect(Point.maxPoint(), Point.minPoint()),
             hasBoundingBox = false,
@@ -452,7 +452,7 @@
             element = elements[i];
             if (element.isVisible()) {
                 hasBoundingBox = true;
-                boundingBox = boundingBox.wrap(element.boundingBox());
+                boundingBox = boundingBox.wrap(element.boundingBox(matrix));
             }
         }
 
