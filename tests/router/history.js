@@ -82,6 +82,17 @@
         history.start({ pushState: true });
     });
 
+    test("requests hashbang adapter if given hashbang", 1, function() {
+        stub(history, {
+            createAdapter: function(options) {
+                equal(options.hashBang, true);
+                return adapter;
+            }
+        });
+
+        history.start({ hashBang: true });
+    });
+
     test("requests normalization of the state on start", 1, function() {
         stub(adapter, { normalizeCurrent: function(options) {
             equal(options.pushState, true);

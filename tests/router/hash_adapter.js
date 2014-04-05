@@ -127,5 +127,38 @@
     test("normalizeCurrent will not touch anything if started from the root", 1, function() {
         ok(!adapter.normalizeCurrent({ pushState: true, root: location.pathname }));
     });
-})();
 
+    module("History hash adapter (hashbang mode)", {
+        setup: function() {
+            adapter = new Adapter(true);
+        },
+
+        teardown: function() {
+            adapter.stop();
+        }
+    });
+
+    asyncTest("reads the current URL from the hash", 1, function() {
+        onHash(function() {
+            start();
+            equal(adapter.current(), "foo");
+        });
+        location.hash = "!foo";
+    });
+
+    asyncTest("navigating changes the location hash", 1, function() {
+        onHash(function() {
+            start();
+            equal(location.hash, "#!bar");
+        });
+        adapter.navigate("bar");
+    });
+
+    asyncTest("navigating accepts hash string too", 1, function() {
+        onHash(function() {
+            start();
+            equal(location.hash, "#!bar1");
+        });
+        adapter.navigate("#!bar1");
+    });
+})();

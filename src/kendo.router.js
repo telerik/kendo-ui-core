@@ -41,8 +41,12 @@ var __meta__ = {
         return location.protocol + '//' + (location.host + "/" + path).replace(/\/\/+/g, '/');
     }
 
-    function locationHash() {
-        return location.href.split("#")[1] || "";
+    function hashDelimiter(bang) {
+        return bang ? "#!" : "#";
+    }
+
+    function locationHash(hashDelimiter) {
+        return location.href.split(hashDelimiter)[1] || "";
     }
 
     function stripRoot(root, url) {
@@ -110,7 +114,7 @@ var __meta__ = {
             var fixedUrl,
                 root = options.root,
                 pathname = location.pathname,
-                hash = locationHash();
+                hash = locationHash(hashDelimiter(options.hashBang));
 
             if (root === pathname + "/") {
                 fixedUrl = root;
@@ -126,17 +130,27 @@ var __meta__ = {
         }
     });
 
+    function fixHash(url) {
+        return url.replace(/^(#)?/, "#");
+    }
+
+    function fixBang(url) {
+        return url.replace(/^(#!)?/, "#!");
+    }
+
     var HashAdapter = HistoryAdapter.extend({
-        init: function() {
+        init: function(bang) {
             this._id = kendo.guid();
+            this.prefix = hashDelimiter(bang);
+            this.fix = bang ? fixBang : fixHash;
         },
 
         navigate: function(to) {
-            location.hash = to;
+            location.hash = this.fix(to);
         },
 
         replace: function(to) {
-            this.replaceLocation("#" + to.replace(/^#/, ''));
+            this.replaceLocation(this.fix(to));
         },
 
         normalize: function(url) {
@@ -157,7 +171,7 @@ var __meta__ = {
         },
 
         current: function() {
-            return locationHash();
+            return locationHash(this.prefix);
         },
 
         normalizeCurrent: function(options) {
@@ -165,7 +179,7 @@ var __meta__ = {
                 root = options.root;
 
             if (options.pushState && root !== pathname) {
-                this.replaceLocation(root + '#' + stripRoot(root, pathname));
+                this.replaceLocation(root + this.prefix + stripRoot(root, pathname));
                 return true; // browser will reload at this point.
             }
 
@@ -209,7 +223,7 @@ var __meta__ = {
         },
 
         createAdapter:function(options) {
-           return support.pushState && options.pushState ? new PushStateAdapter(options.root) : new HashAdapter();
+           return support.pushState && options.pushState ? new PushStateAdapter(options.root) : new HashAdapter(options.hashBang);
         },
 
         stop: function() {
@@ -390,12 +404,17 @@ var __meta__ = {
 
     var Router = Observable.extend({
         init: function(options) {
-            Observable.fn.init.call(this);
-            this.routes = [];
-            this.pushState = options ? options.pushState : false;
-            if (options && options.root) {
-                this.root = options.root;
+            if (!options) {
+                options = {};
             }
+
+            Observable.fn.init.call(this);
+
+            this.routes = [];
+            this.pushState = options.pushState;
+            this.hashBang = options.hashBang;
+            this.root = options.root;
+
             this.bind([INIT, ROUTE_MISSING, CHANGE, SAME], options);
         },
 
@@ -417,6 +436,7 @@ var __meta__ = {
                 change: urlChangedProxy,
                 back: backProxy,
                 pushState: that.pushState,
+                hashBang: that.hashBang,
                 root: that.root
             });
 
