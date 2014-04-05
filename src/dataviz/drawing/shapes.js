@@ -226,7 +226,7 @@
                 other = other.transformInto(matrix);
             }
 
-            if (segment.controlOut && segment.controlIn) {
+            if (segment.controlOut && other.controlIn) {
                 rect = segment._curveBoundingBox(segment.anchor, segment.controlOut, other.controlIn, other.anchor);
             } else {
                 rect = segment._lineBoundingBox(segment.anchor, other.anchor);
@@ -240,7 +240,7 @@
             if (this.controlIn) {
                 controlIn = this.controlIn.transformInto(matrix);
             }
-            if (controlOut) {
+            if (this.controlOut) {
                 controlOut = this.controlOut.transformInto(matrix);
             }
             return new Segment(this.anchor.transformInto(matrix), controlIn, controlOut);
@@ -375,7 +375,7 @@
                 var anchor = segments[0].anchor.transformInto(combinedTransform);
                 boundingBox = new Rect(anchor, anchor);
             } else if (length > 0) {
-                boundingBox = new Rect(Point.maxPoint(), Point.minPoint())
+                boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
                 for (i = 1; i < length; i++) {
                     boundingBox = boundingBox.wrap(segments[i - 1].boundingBoxTo(segments[i], combinedTransform));
                 }
