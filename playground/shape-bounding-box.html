@@ -68,6 +68,7 @@
                 Circle = geometry.Circle,
                 drawing = dataviz.drawing,
                 Path = drawing.Path,
+                MultiPath = drawing.MultiPath,
                 Segment = drawing.Segment,
                 Surface = drawing.Surface,
                 surface = Surface.create(document.getElementById("container"), {width: 700, height: 700}),
@@ -107,8 +108,30 @@
                     return pathString;
                 }
             });
+            multipathTransformTest();
+            function multipathTransformTest() {
+                var curveTransform = new MultiPath($.extend({transform: transform().translate(100,400).rotate(-45, 100, 100).matrix()}, strokeOptions));
+                curveTransform.moveTo(100, 100);
+                curveTransform.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
+                curveTransform.lineTo(500, 150);
+                curveTransform.curveTo(Point.create(550, 200), Point.create(200, 300), Point.create(100, 200));
+                curveTransform.close();
+
+                curveTransform.moveTo(50, 200);
+                curveTransform.curveTo(Point.create(150, 190),
+                        Point.create(150, 130),
+                        Point.create(70, 80));
+                curveTransform.lineTo(50, 100);
+                curveTransform.lineTo(50, 200);
+                var group = new drawing.Group();
+                group.append(curveTransform, rectPath(curveTransform.boundingBox(), strokeOptions));
+                
+                surface.clear();
+                surface.draw(group);
+            }
             
-            circleTransformTest();
+            
+            //circleTransformTest();
             function circleTransformTest() {
                 var m = transform().rotate(-45).scale(2,1).matrix();
                 circleGeometry = new Circle(Point.create(150, 400), 100);
@@ -119,7 +142,7 @@
                 group = new drawing.Group({transform: transform().translate(0, 100).matrix()});
                 group.append(circle, circleCenter);
                 var mainGroup = new drawing.Group();
-                mainGroup.append(group, rectPath(group.boundingBox(), strokeOptions));
+                mainGroup.append(group, rectPath(group.boundingBox(), strokeOptions), original);
                 
                 surface.clear();
                 surface.draw(mainGroup);

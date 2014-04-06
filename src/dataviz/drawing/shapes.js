@@ -434,8 +434,8 @@
             return this;
         },
 
-        boundingBox: function() {
-            return elementsBoundingBox(this.paths);
+        boundingBox: function(matrix) {
+            return elementsBoundingBox(this.paths, this.combineTransform(matrix));
         }
     });
 
