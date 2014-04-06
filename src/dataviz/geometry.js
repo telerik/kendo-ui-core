@@ -235,27 +235,35 @@
         },
 
         pointAt: function(angle) {
-            var c = this.center,
-                r = this.radius,
-                a = rad(angle);
-
-            return new Point(
-                c.x - r * math.cos(a),
-                c.y - r * math.sin(a)
-            );
+            return this._pointAt(rad(angle));
         },
 
-        boundingBox: function() {
+        boundingBox: function(matrix) {
             var minPoint = Point.maxPoint(),
                 maxPoint = Point.minPoint(),
-                currentPoint, angle;
-            for (angle = 0; angle < 360; angle+=90) {
-                currentPoint = this.pointAt(angle);
+                extremeAngles = ellipseExtremeAngles(this.center, this.radius, this.radius, matrix),
+                halfPI = (math.PI / 2),
+                currentPoint, currentPointX, currentPointY,
+                i;
+            for (i = 0; i < 4; i++) {
+                currentPointX = this._pointAt(extremeAngles.x + i * halfPI).transformInto(matrix);
+                currentPointY = this._pointAt(extremeAngles.y + i * halfPI).transformInto(matrix);
+                currentPoint = new Point(currentPointX.x, currentPointY.y);
                 minPoint = minPoint.min(currentPoint);
                 maxPoint = maxPoint.max(currentPoint);
             }
 
             return new Rect(minPoint, maxPoint);
+        },
+
+        _pointAt: function(angle) {
+            var c = this.center,
+                r = this.radius;
+
+            return new Point(
+                c.x - r * math.cos(angle),
+                c.y - r * math.sin(angle)
+                );
         }
     });
 
@@ -498,6 +506,21 @@
 
     function transform(matrix) {
         return new Transformation(matrix);
+    }
+
+    function ellipseExtremeAngles(center, rx, ry, matrix) {
+        var extremeX = 0,
+            extremeY = 0;
+        if (matrix) {
+            extremeX = math.atan2(matrix.c * ry, matrix.a * rx);
+            if (matrix.b !== 0) {
+                extremeY = math.atan2(matrix.d * ry, matrix.b * rx);
+            }
+        }
+        return {
+            x: extremeX,
+            y: extremeY
+        };
     }
 
     // Exports ================================================================

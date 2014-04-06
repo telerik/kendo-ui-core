@@ -27,7 +27,7 @@
          -->
           <div id="container"></div>
       
-        <--
+        <!--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute;left: 300px;">
             <g transform = "translate(0, 300)">
                 <path d="M100,100 C200,200 300,200 400,100 L500,150 C450,200 200,300 100,200 z" transform = "rotate(-45 100 100) scale(1.1, 0.7)" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round"></path>
@@ -52,8 +52,8 @@
         -->
      <!--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="700px" height="700px" style="position: absolute;">
-            <g>
-                <circle cx="300" cy="300" r="100" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round" />
+            <g transform="scale(2,1)">
+                <circle cx="300" cy="300" r="100" transform="rotate(30)" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round" />
                 <circle cx="300" cy="300" r="3" stroke="black" stroke-width="2" stroke-linecap="square" fill="none"></circle>
             </g>
         </svg>
@@ -107,27 +107,48 @@
                     return pathString;
                 }
             });
-            var curveTransform = new Path($.extend({transform: transform().rotate(-45, 100, 100).scale(1.1, 0.7).matrix()}, strokeOptions)),
-                original = new Path({stroke: {color: "blue", width: 1}});
             
-            curveTransform.moveTo(100, 100);
-            curveTransform.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
-            curveTransform.lineTo(500, 150);
-            curveTransform.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
-            curveTransform.close();
+            circleTransformTest();
+            function circleTransformTest() {
+                var m = transform().rotate(-45).scale(2,1).matrix();
+                circleGeometry = new Circle(Point.create(150, 400), 100);
+                var original = new drawing.Circle(circleGeometry, {stroke: {color: "red", width: 3}});
+                circle = new drawing.Circle(circleGeometry, {stroke: {color: "red", width: 3}, transform: m});
+                circleCenter = new drawing.Circle(new Circle(Point.create(150, 400), 2), {stroke: {color: "red", width: 3}, transform: m})
+                    //});
+                group = new drawing.Group({transform: transform().translate(0, 100).matrix()});
+                group.append(circle, circleCenter);
+                var mainGroup = new drawing.Group();
+                mainGroup.append(group, rectPath(group.boundingBox(), strokeOptions));
+                
+                surface.clear();
+                surface.draw(mainGroup);
+            }
             
-            original.moveTo(100, 100);
-            original.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
-            original.lineTo(500, 150);
-            original.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
-            original.close(); 
-            group = new drawing.Group({transform: transform().translate(0, 300).matrix()});
-            group.append(curveTransform, rectPath(curveTransform.boundingBox(), strokeOptions));
-            surface.clear();
-            debugger;
-            var mainGroup = new drawing.Group();
-            mainGroup.append(group, original);
-            surface.draw(mainGroup);
+            //curveTransformTest();            
+            function curveTransformTest() {
+                var curveTransform = new Path($.extend({transform: transform().rotate(-45, 100, 100).scale(1.1, 0.7).matrix()}, strokeOptions)),
+                    original = new Path({stroke: {color: "blue", width: 1}});
+                
+                curveTransform.moveTo(100, 100);
+                curveTransform.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
+                curveTransform.lineTo(500, 150);
+                curveTransform.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
+                curveTransform.close();
+                
+                original.moveTo(100, 100);
+                original.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
+                original.lineTo(500, 150);
+                original.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
+                original.close(); 
+                group = new drawing.Group({transform: transform().translate(0, 300).matrix()});
+                group.append(curveTransform, rectPath(curveTransform.boundingBox(), strokeOptions));
+                surface.clear();
+               
+                var mainGroup = new drawing.Group();
+                mainGroup.append(group, original);
+                surface.draw(mainGroup);
+            }
             
             kendo.bind($("body"), viewModel);
 

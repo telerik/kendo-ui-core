@@ -63,7 +63,8 @@
         },
 
         isVisible: function() {
-            return this.options.get("visible") || false;
+            var visible = this.options.get("visible");
+            return defined(visible) ? visible : true;
         }
     });
 
@@ -108,7 +109,7 @@
         },
 
         boundingBox: function(matrix) {
-            return elementsBoundingBox(this.children, this.combinedTransform(matrix));
+            return elementsBoundingBox(this.children, this.combineTransform(matrix));
         }
     });
 
@@ -158,8 +159,9 @@
             circle.geometry.observer = this;
         },
 
-        boundingBox: function() {
-            var rect = this.geometry.boundingBox();
+        boundingBox: function(matrix) {
+            var combinedMatrix = this.combineTransform(matrix),
+                rect = this.geometry.boundingBox(combinedMatrix);
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);

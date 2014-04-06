@@ -488,7 +488,8 @@
             "r='#= this.srcElement.geometry.radius #' " +
             "#= d.renderVisibility() # " +
             "#= d.renderStroke() # " +
-            "#= d.renderFill() #></circle>"
+            "#= d.renderFill() # " +
+            "#= d.renderTransform() # ></circle>"
         )
     });
 
