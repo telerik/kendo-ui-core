@@ -170,7 +170,7 @@
     };
 
     Point.minPoint = function() {
-        return new Point(Number.MIN_VALUE, Number.MIN_VALUE);
+        return new Point(-Number.MAX_VALUE, -Number.MAX_VALUE);
     };
 
     Point.maxPoint = function() {
