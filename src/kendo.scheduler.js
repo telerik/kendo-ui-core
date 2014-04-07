@@ -2846,7 +2846,7 @@ var __meta__ = {
             var currentSize = this._size;
             var view = this.view();
 
-            if (!view.groups) {
+            if (!view || !view.groups) {
                 return;
             }
 
