@@ -7118,8 +7118,8 @@ var __meta__ = {
             reverse = (reverse) ? -1 : 1;
 
             return function(a, b) {
-                a = (round(a.parent.sector.middle()) + 270) % 360;
-                b = (round(b.parent.sector.middle()) + 270) % 360;
+                a = (a.parent.sector.middle() + 270) % 360;
+                b = (b.parent.sector.middle() + 270) % 360;
                 return (a - b) * reverse;
             };
         },
