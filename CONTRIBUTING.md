@@ -42,7 +42,7 @@ If you don't use a topic branch, we may ask you to re-do your pull request on a 
 #### Branch from "master" not "production"
 
 The "production" branch of the Kendo UI Core repository is for production maintenance code only. Never create a pull request from the production branch. Always create a branch for your work from the "master" branch.
-This will facilitate easier pull request management for the continuous work that is done in the master branch. If the issue is a bug fix that should be backported to a maintenance branch, the core maintainers will cherry-pick it.
+This will facilitate easier pull request management for the continuous work that is done in the master branch. If the issue is a bug fix that should be back ported to a maintenance branch, the core maintainers will cherry-pick it.
 
 ### 3. Include tests describing the bug or feature
 
