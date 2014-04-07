@@ -133,7 +133,7 @@
             return !(value === "" || !value);
         },
         number: function (input) {
-            return input.val() === "" || kendo.parseFloat(input.val()) !== null;
+            return input.val() === "" || input.val() == null || kendo.parseFloat(input.val()) !== null;
         },
         regex: function (input, params) {
             if (input.val() !== "") {
