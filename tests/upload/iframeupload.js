@@ -623,4 +623,55 @@ test("k-progress-status should have 100% width on successful upload", function()
     equal($(".k-file .k-progress", uploadInstance.wrapper)[0].style.width, "100%");
 });
 
+// -----------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------
+module("Upload / IframeUpload / Files prior to initialization", {
+    setup: function() {
+        moduleSetup();
+    },
+    teardown: function() {
+        moduleTeardown();
+        kendo.destroy($("form"));
+    }
+});
+
+test("files selected prior to initialization are added to the list", function(){
+    removeHTML();
+    copyUploadPrototype();
+
+    simulateFileSelect();
+
+    uploadInstance = $('#uploadInstance').kendoUpload({
+        async:{
+            "saveUrl":'javascript:;',
+            "removeUrl":"/removeAction",
+            autoUpload: false
+        }
+    }).data("kendoUpload");
+
+    equal($('.k-file', uploadInstance.wrapper).length, 1);
+});
+
+test("select event is fired when files are selected prior to initialization", function(){
+    var selectFired = false;
+
+    removeHTML();
+    copyUploadPrototype();
+
+    simulateFileSelect();
+
+    uploadInstance = $('#uploadInstance').kendoUpload({
+        async:{
+            "saveUrl":'javascript:;',
+            "removeUrl":"/removeAction",
+            autoUpload: false
+        },
+        select: function() {
+            selectFired = true;
+        }
+    }).data("kendoUpload");
+
+    ok(selectFired);
+});
+
 })();
