@@ -102,4 +102,4 @@ All code contributed to this project should adhere to a consistent style, so ple
 - Return early
 - Be JSHint Valid
 
-Beyond these, your best bet, when it doubt it to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js).
+Beyond these, your best bet, when in doubt is to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js).
