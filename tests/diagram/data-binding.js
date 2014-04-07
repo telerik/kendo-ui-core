@@ -101,4 +101,25 @@
             }
         });
     });
+
+    test("Provides access to data item", function() {
+        diagram = createDiagram({
+            dataSource: {
+                data: [{
+                    id: "1",
+                    items: [{
+                        id: "1.1",
+                        foo: true
+                    }]
+                }],
+                schema: {
+                    model: {
+                        children: "items"
+                    }
+                }
+            }
+        });
+
+        ok(diagram.shapes[0].dataItem.foo);
+    });
 })();

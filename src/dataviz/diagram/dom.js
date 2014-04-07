@@ -264,12 +264,12 @@
         }
 
         var DiagramElement = Observable.extend({
-            init: function (options, model) {
+            init: function (options, dataItem) {
                 var that = this;
                 Observable.fn.init.call(that);
                 that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
                 that.isSelected = false;
-                that.model = model;
+                that.dataItem = dataItem;
                 that.visual = new Group({
                     id: that.options.id
                 });
@@ -317,8 +317,8 @@
             serialize: function () {
                 // the options json object describes the shape perfectly. So this object can serve as shape serialization.
                 var json = deepExtend({}, {options: this.options});
-                if (this.model) {
-                    json.model = this.model.toString();
+                if (this.dataItem) {
+                    json.dataItem = this.dataItem.toString();
                 }
                 return json;
             },
@@ -357,7 +357,7 @@
             _template: function () {
                 var that = this;
                 if (that.options.content.template) {
-                    var data = that.model || {},
+                    var data = that.dataItem || {},
                         elementTemplate = kendo.template(that.options.content.template, {
                             paramName: "item"
                         });
@@ -411,11 +411,11 @@
         };
 
         var Shape = DiagramElement.extend({
-            init: function (options, model) {
+            init: function (options, dataItem) {
                 var that = this;
                 var diagram = options.diagram;
                 delete options.diagram; // avoid stackoverflow and reassign later on again
-                DiagramElement.fn.init.call(that, options, model);
+                DiagramElement.fn.init.call(that, options, dataItem);
                 that.options.diagram = diagram;
                 options = that.options;
                 that.connectors = [];
@@ -824,9 +824,9 @@
          * The visual link between two Shapes through the intermediate of Connectors.
          */
         var Connection = DiagramElement.extend({
-            init: function (from, to, options, model) {
+            init: function (from, to, options, dataItem) {
                 var that = this;
-                DiagramElement.fn.init.call(that, options, model);
+                DiagramElement.fn.init.call(that, options, dataItem);
                 that._router = new PolylineRouter(this);
                 that.path = new Path(that.options);
                 that.path.background(NONE);
@@ -1155,7 +1155,7 @@
                 return clone;
             },
             /**
-             * Returns a serialized connection in json format. Consist of the options and the model.
+             * Returns a serialized connection in json format. Consist of the options and the dataItem.
              * @returns {Connection}
              */
             serialize: function () {
@@ -1164,8 +1164,8 @@
                     from: this.from.toString(),
                     to: this.to.toString()
                 });
-                if (this.model) {
-                    json.model = this.model.toString();
+                if (this.dataItem) {
+                    json.dataItem = this.dataItem.toString();
                 }
                 json.options.points = this.points();
                 return json;
