@@ -46,7 +46,12 @@ var __meta__ = {
     }
 
     function locationHash(hashDelimiter) {
-        return location.href.split(hashDelimiter)[1] || "";
+        var href = location.href;
+
+        if (hashDelimiter === "#!" && href.indexOf(hashDelimiter) < 0) {
+            return null;
+        }
+        return href.split(hashDelimiter)[1] || "";
     }
 
     function stripRoot(root, url) {
@@ -290,7 +295,7 @@ var __meta__ = {
                 back = current === this.locations[this.locations.length - 2] && navigatingInExisting,
                 prev = this.current;
 
-            if (this.current === current || this.current === decodeURIComponent(current)) {
+            if (current === null || this.current === current || this.current === decodeURIComponent(current)) {
                 return true;
             }
 

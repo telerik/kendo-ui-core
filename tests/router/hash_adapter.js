@@ -161,4 +161,13 @@
         });
         adapter.navigate("#!bar1");
     });
+
+    asyncTest("navigating to non-hashbang url returns null", 1, function() {
+        adapter.change(function(e) {
+            start();
+            ok(adapter.current() === null);
+        });
+
+        location.hash = "qux";
+    });
 })();

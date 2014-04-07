@@ -274,5 +274,19 @@
         history.start();
         history.replace("foo");
     });
+
+    test("ignores null results", 1, function() {
+        history.start();
+        var called = false;
+
+        history.change(function(e) {
+            called = true;
+        });
+
+        adapter.url = null;
+        adapter.callback();
+        ok(!called);
+    });
+
 })();
 
