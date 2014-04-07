@@ -205,7 +205,7 @@
         schemas: {
             "aspnetmvc-ajax": {
                 groups: function(data) {
-                    return $.map(this.data(data), translateGroup);
+                    return $.map(this._dataAccessFunction(data), translateGroup);
                 },
                 aggregates: function(data) {
                     data = data.d || data;
