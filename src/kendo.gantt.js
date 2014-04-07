@@ -381,7 +381,6 @@ var __meta__ = {
                 task.set("summary", childCount > 0);
             }
         }
-
     });
 
     GanttDataSource.create = createDataSource(GanttDataSource, "GanttDataSource");
@@ -400,6 +399,8 @@ var __meta__ = {
             }
 
             Widget.fn.init.call(this, element, options);
+
+            this._wrapper();
 
             this._dataSource();
 
@@ -422,6 +423,26 @@ var __meta__ = {
         options: {
             name: "Gantt",
             autoBind: true
+        },
+
+        _wrapper: function() {
+            var options = this.options;
+            var height = options.height;
+            var width = options.width;
+
+            this.wrapper = this.element
+                            .addClass("k-widget k-gantt")
+                            .append("<div class='k-gantt-toolbar'>")
+                            .append("<div class='k-gantt-list'>")
+                            .append("<div class='k-gantt-timeline'>");
+
+            if (height) {
+                this.wrapper.height(height);
+            }
+
+            if (width) {
+                this.wrapper.width(width);
+            }
         },
 
         _dataSource: function() {
