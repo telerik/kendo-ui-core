@@ -544,11 +544,14 @@ namespace :type_script do
             desc "Test TypeScript generation"
             task :test do
                 sync_docs_submodule(branch)
-                path = "dist/kendo.all.d.ts"
 
-                File.write(path, get_type_script(path, md_api_suite("all"), false))
+                %w(all web dataviz mobile).each do |suite|
+                    path = "dist/kendo.#{suite}.d.ts"
 
-                sh "node_modules/typescript/bin/tsc --noImplicitAny #{path}"
+                    File.write(path, get_type_script(path, md_api_suite(suite), false))
+
+                    sh "node_modules/typescript/bin/tsc --noImplicitAny #{path}"
+                end
             end
         end
     end
