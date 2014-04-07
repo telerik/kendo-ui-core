@@ -1791,6 +1791,7 @@ var __meta__ = {
                     }
                 }
 
+                that._dataAccessFunction = dataFunction;
                 that.data = wrapDataAccess(dataFunction, model, convertRecords, getters, originalFieldNames, fieldNames);
                 that.groups = wrapDataAccess(groupsFunction, model, convertGroup, getters, originalFieldNames, fieldNames);
             }
