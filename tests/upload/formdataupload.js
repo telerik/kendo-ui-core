@@ -966,4 +966,86 @@ test("k-upload-pct text is '100%'  for each initially rendered file entry", func
     equal($(".k-upload-pct:first", uploadInstance.wrapper).text(), "100%");
 });
 
+// -----------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------
+module("Upload / FormDataUpload / Files prior to initialization", {
+    setup: function() {
+        moduleSetup();
+    },
+    teardown: moduleTeardown
+});
+
+test("select event is not fired when no files are selected prior to initialization", function(){
+    var selectFired = false;
+
+    uploadInstance = createUpload({
+        select: function(){
+            selectFired = true;
+        }
+    });
+
+    ok(!selectFired);
+});
+
+test("select event is fired when files are selected prior to initialization", function(){
+    var selectFired = false;
+    removeHTML();
+    copyUploadPrototype();
+
+    simulateFileSelect();
+
+    uploadInstance = $('#uploadInstance').kendoUpload({
+        async: {
+            autoUpload: false,
+            "saveUrl": 'javascript:;',
+            "removeUrl": 'javascript:;'
+        },
+        select: function(){
+            selectFired = true;
+        }
+    }).data("kendoUpload");
+
+    ok(selectFired);
+});
+
+test("files selected prior to initialization are added to the list", function(){
+    removeHTML();
+    copyUploadPrototype();
+
+    simulateFileSelect();
+
+    uploadInstance = $('#uploadInstance').kendoUpload({
+        async: {
+            autoUpload: false,
+            "saveUrl": 'javascript:;',
+            "removeUrl": 'javascript:;'
+        }
+    }).data("kendoUpload");
+
+    equal($('.k-file', uploadInstance.wrapper).length, 1);
+});
+
+test("files selected prior to initialization issue postFormData", function(){
+    var postFormDataCalled = false;
+
+    removeHTML();
+    copyUploadPrototype();
+
+    simulateFileSelect();
+
+    uploadInstance = $('#uploadInstance').kendoUpload({
+        async: {
+            autoUpload: false,
+            "saveUrl": 'javascript:;',
+            "removeUrl": 'javascript:;'
+        }
+    }).data("kendoUpload");
+
+    uploadInstance._module.postFormData = function() { postFormDataCalled = true; };
+
+    $(".k-upload-selected", uploadInstance.wrapper).trigger("click");
+
+    ok(postFormDataCalled);
+});
+
 })();
