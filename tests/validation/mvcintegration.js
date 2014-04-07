@@ -276,6 +276,22 @@
         ok(validator.validate());
     });
 
+    test("validate returns true if select value is number with no selected option", function() {
+        var input = $('<select data-val-number="message"><option>1</option></select>'),
+            validator = setup(input);
+
+        input[0].selectedIndex = 42;
+
+        ok(validator.validate());
+    });
+
+    test("validate returns true if select value is number with no selected option", function() {
+        var input = $('<select data-val-number="message"></select>'),
+            validator = setup(input);
+
+        ok(validator.validate());
+    });
+
     test("validate returns false if input with type=text value is not a number", function() {
         var input = $('<input type="text" value="foo" data-val-number="message" />'),
             validator = setup(input);
