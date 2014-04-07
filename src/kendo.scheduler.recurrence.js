@@ -1646,6 +1646,7 @@ var __meta__ = {
                 },
                 end: {
                     label: "End:",
+                    mobileLabel: "Ends",
                     never: "Never",
                     after: "After ",
                     occurrence: " occurrence(s)",
@@ -2400,7 +2401,7 @@ var __meta__ = {
         _initRepeatEnd: function() {
             var that = this;
 
-            var endLabelField = $('<div class="k-edit-label"><label>Ends</label></div>').insertAfter(that.element.parent(".k-edit-field"));
+            var endLabelField = $('<div class="k-edit-label"><label>' + that.options.messages.end.mobileLabel + '</label></div>').insertAfter(that.element.parent(".k-edit-field"));
 
             var endEditField = $('<div class="k-edit-field"><a href="#" class="k-button k-scheduler-recur-end"></a></div>')
                 .on(CLICK + that._namespace, function(e) {

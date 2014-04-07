@@ -410,6 +410,40 @@
         ok(view[0]);
     });
 
+    test("Mobile recurrenceEditor End label can be localized", function() {
+        var mobileEndMessage = "cusom",
+            scheduler = setup({
+                        messages: {
+                                recurrenceEditor: {
+                                    end: {
+                                        mobileLabel: mobileEndMessage
+                                    }
+                                }
+                            }
+                        }),
+            model = scheduler.dataSource.data()[0],
+            uid = model.uid;
+
+        scheduler.editEvent(uid);
+
+        var endLabel = $("[data-container-for=recurrenceRule]").next().children().text();
+
+        equal(mobileEndMessage, endLabel);
+    });
+
+    test("Mobile recurrenceEditor End label is loaded correctly", function() {
+        var scheduler = setup(),
+            model = scheduler.dataSource.data()[0],
+            uid = model.uid;
+
+        scheduler.editEvent(uid);
+
+        var endLabel = $("[data-container-for=recurrenceRule]").next().children().text();
+
+        equal("Ends", endLabel);
+    });
+
+
     test("Render popup editor with disabled checkbox", function() {
         var scheduler = setup(),
             model = scheduler.dataSource.data()[0],
