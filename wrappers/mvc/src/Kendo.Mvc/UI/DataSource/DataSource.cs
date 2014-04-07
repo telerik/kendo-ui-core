@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI
             {
                 if (Type == DataSourceType.Ajax || Type == DataSourceType.Server)
                 {
-                    json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
+                    json["type"] = new ClientHandlerDescriptor() { HandlerName = GenerateTypeFunction(true) };
                 }
                 else if (Type == DataSourceType.Custom)
                 {
@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI
                 }
                 else
                 {
-                    json["type"] = Type.ToString().ToLower();
+                    json["type"] = new ClientHandlerDescriptor() { HandlerName = GenerateTypeFunction(false) };
 
                     if (Type == DataSourceType.WebApi && Schema.Model.Id != null)
                     {
@@ -160,6 +160,21 @@ namespace Kendo.Mvc.UI
             else if (IsClientBinding && !IsClientOperationMode && Data != null)
             {
                 SerializeData(json, Data);
+            }
+        }
+
+        private string GenerateTypeFunction(bool isAspNetMvc)
+        {
+            string baseFunction = "(function(){{if(kendo.data.transports['{0}{1}']){{return '{0}{1}';}}" +
+                         " else{{throw new Error('The kendo.aspnetmvc.min.js script is not included.');}}}})()";
+
+            if (isAspNetMvc)
+            {
+                return string.Format(baseFunction, "aspnetmvc-", Type.ToString().ToLower());
+            }
+            else
+            {
+                return string.Format(baseFunction, "", Type.ToString().ToLower());
             }
         }
 

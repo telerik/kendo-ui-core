@@ -217,7 +217,8 @@ namespace Kendo.Mvc.UI.Tests.Chart
             chart.DataSource.Transport.Read.Url = "/Action";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("\"dataSource\":{\"type\":\"aspnetmvc-ajax\",\"transport\":{\"read\":{\"url\":\"/Action\",\"type\":\"POST\"},\"prefix\":\"\"}");
+            string dataSourceExample = "\"transport\":{\"read\":{\"url\":\"/Action\",\"type\":\"POST\"},\"prefix\":\"\"}";
+            output.ShouldContain(dataSourceExample);
         }
 
         [Fact]
@@ -248,13 +249,42 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void WebApi_data_source_type_should_be_serialized()
+        public void WebApi_data_source_type_should_be_serialized_as_function()
         {
             chart.DataSource.Type = DataSourceType.WebApi;
             chart.DataSource.Transport.Read.Url = "Test";
             chart.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{\"dataSource\":{\"type\":\"webapi\"");
+            string dataSourceExample = "\"dataSource\":{\"type\":(function(){if(kendo.data.transports['webapi']){return 'webapi';} " +
+                "else{throw new Error('The kendo.aspnetmvc.min.js script is not included.');}})(),\"transport\":{\"read\":{\"url\":\"Test\",\"type\":\"POST\"},\"prefix\":\"\"}";
+
+            output.ShouldContain(dataSourceExample);
+        }
+
+        [Fact]
+        public void Ajax_data_source_type_should_be_serialized_as_function()
+        {
+            chart.DataSource.Type = DataSourceType.Ajax;
+            chart.DataSource.Transport.Read.Url = "Test";
+            chart.WriteInitializationScript(textWriter.Object);
+
+            string dataSourceExample = "\"dataSource\":{\"type\":(function(){if(kendo.data.transports['aspnetmvc-ajax']){return 'aspnetmvc-ajax';} " +
+                "else{throw new Error('The kendo.aspnetmvc.min.js script is not included.');}})(),\"transport\":{\"read\":{\"url\":\"Test\",\"type\":\"POST\"},\"prefix\":\"\"}";
+
+            output.ShouldContain(dataSourceExample);
+        }
+
+        [Fact]
+        public void Server_data_source_type_should_be_serialized_as_function()
+        {
+            chart.DataSource.Type = DataSourceType.Server;
+            chart.DataSource.Transport.Read.Url = "Test";
+            chart.WriteInitializationScript(textWriter.Object);
+
+            string dataSourceExample = "\"dataSource\":{\"type\":(function(){if(kendo.data.transports['aspnetmvc-server']){return 'aspnetmvc-server';} " +
+                "else{throw new Error('The kendo.aspnetmvc.min.js script is not included.');}})(),\"transport\":{\"read\":{\"url\":\"Test\",\"type\":\"POST\"},\"prefix\":\"\"}";
+
+            output.ShouldContain(dataSourceExample);
         }
     }
 }
