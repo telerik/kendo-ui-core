@@ -1,0 +1,223 @@
+@import "../../mobile/common/base.less";
+
+@mobile-border-width: 1px;
+@main-border-radius: 3px;
+@mobile-inline-border-radius: @main-border-radius - 1px;
+@widget-text-color: #4c5356;
+@widget-background-color: #f4f4f4;
+@selected-text-color: #fff;
+@selected-background-color: #10c4b2;
+@mobile-button-background: rgba(0,0,0,.1);
+@mobile-border-color: rgba(0,0,0,.1);
+
+.km-widget
+{
+    font-size: 1em;
+}
+
+.km-root .km-pane,
+.km-root .km-view,
+.km-root .km-slider,
+.km-root .km-switch,
+.km-root .km-group-title,
+.km-root .km-filter-reset,
+.km-root .km-shim .k-animation-container
+{
+    -webkit-transform: none;
+}
+
+.km-widget,
+.km-widget *
+{
+    .box-sizing(border-box);
+    .background-clip(border-box);
+}
+
+.km-toolbar,
+.km-navbar,
+.km-tabstrip,
+.km-tabstrip .km-button
+{
+    border-radius: 0;
+}
+
+.km-touch-scrollbar
+{
+    border: 0;
+    .box-sizing(border-box);
+    border-radius: 1em;
+}
+
+.km-popup .k-popup
+{
+    font-size: 1em !important;
+}
+
+.km-popup-wrapper.k-popup
+{
+    .box-shadow(none);
+    background: none;
+}
+
+.km-popup .k-item,
+.km-actionsheet > li > a
+{
+    text-decoration: none;
+    padding: .5em 0 .5em .6em;
+    border: 0;
+    border-radius: 0;
+    border-bottom-width: @mobile-border-width;
+    border-bottom-style: solid;
+    .box-sizing(border-box);
+}
+
+.km-actionsheet-wrapper,
+.km-popup .k-list-container
+{
+    bottom: 0;
+    border: 0;
+    border-bottom-width: @mobile-border-width;
+    border-bottom-style: solid;
+    border-radius: 0;
+    .box-sizing(border-box);
+}
+
+.km-popup
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    .box-sizing(border-box);
+}
+
+.km-popup .k-list-container
+{
+    width: 100% !important;
+    height: auto !important;
+    max-height: 80%;
+}
+
+.km-shim .k-animation-container
+{
+    left: 0;
+    top: auto;
+    bottom: 0;
+}
+
+/* Loader & Pull-to-refresh */
+
+.km-loader,
+.km-scroller-refresh.km-load-more,
+.km-scroller-pull
+{
+    border-radius: 20em;
+    overflow: visible;
+}
+
+.km-loader
+{
+    margin-top: -2em;
+    margin-left: -2em;
+    width: 4em;
+    height: 4em;
+}
+
+.km-loader h1
+{
+    display: none;
+    font-size: 1em;
+    position: absolute;
+    left: -50%;
+    width: 200%;
+    top: auto;
+    bottom: -2em;
+}
+
+.km-loading,
+.km-loader .km-loading-left,
+.km-loader .km-loading-right,
+.km-load-more.km-scroller-refresh .km-icon,
+.km-scroller-pull.km-scroller-refresh .km-icon,
+.km-scroller-refresh .km-loading-left,
+.km-scroller-refresh .km-loading-right
+{
+    font-size: 1em;
+    display: block;
+    width: .36em;
+    height: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -.8em;
+    margin-top: -.5em;
+    border-radius: 1em;
+    .animation(km-webload .6s infinite linear);
+    -webkit-background-clip: none;
+}
+
+.km-load-more.km-scroller-refresh .km-icon,
+.km-scroller-pull.km-scroller-refresh .km-icon,
+.km-scroller-refresh .km-loading-left,
+.km-scroller-refresh .km-loading-right
+{
+    height: .6em;
+    margin-top: -.3em;
+    margin-left: -.6em;
+    width: .25em;
+    .animation(km-webrefresh .6s infinite linear);
+}
+
+.km-root .km-loading-left
+{
+    margin-left: -.2em;
+    .animation-delay(.2s);
+}
+
+.km-root .km-loading-right
+{
+    margin-left: .42em;
+    .animation-delay(.4s);
+}
+
+@keyframes km-webload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@-moz-keyframes km-webload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@-webkit-keyframes km-webload
+{
+    0% { height: 1em; margin-top: -.5em; }
+    33% { height: 2em; margin-top: -1em; }
+    66% { height: 1em; margin-top: -.5em; }
+}
+
+@keyframes km-webrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+@-moz-keyframes km-webrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
+
+@-webkit-keyframes km-webrefresh
+{
+    0% { height: .6em; margin-top: -.3em; }
+    33% { height: 1.2em; margin-top: -.6em; }
+    66% { height: .6em; margin-top: -.3em; }
+}
