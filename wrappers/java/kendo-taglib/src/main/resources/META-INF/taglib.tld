@@ -14074,6 +14074,12 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The width of the range indicators.</description>
+            <name>rangeSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>Reverses the axis direction - values increase from right to left and from top to bottom.</description>
             <name>reverse</name>
             <rtexprvalue>true</rtexprvalue>

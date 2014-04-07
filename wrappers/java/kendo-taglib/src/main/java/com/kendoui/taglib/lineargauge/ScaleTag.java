@@ -120,6 +120,14 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("rangePlaceholderColor", value);
     }
 
+    public float getRangeSize() {
+        return (float)getProperty("rangeSize");
+    }
+
+    public void setRangeSize(float value) {
+        setProperty("rangeSize", value);
+    }
+
     public boolean getReverse() {
         return (boolean)getProperty("reverse");
     }
