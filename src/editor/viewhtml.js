@@ -67,7 +67,7 @@ extend(ViewHtmlCommand, {
     template: "<div class='k-editor-dialog k-popup-edit-form k-edit-form-container k-viewhtml-dialog'>" +
                 "<textarea class='k-editor-textarea k-input'></textarea>" +
                 "<div class='k-edit-buttons k-state-default'>" +
-                    "<button class='k-dialog-update k-button'>#: dialogUpdate #</button>" +
+                    "<button class='k-dialog-update k-button k-primary'>#: dialogUpdate #</button>" +
                     "<button class='k-dialog-close k-button'>#: dialogCancel #</button>" +
                 "</div>" +
             "</div>",

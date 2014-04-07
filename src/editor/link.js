@@ -121,7 +121,7 @@ var LinkCommand = Command.extend({
                     "<label for='k-editor-link-target'>#: messages.linkOpenInNewWindow #</label>" +
                 "</div>" +
                 "<div class='k-edit-buttons k-state-default'>" +
-                    '<button class="k-dialog-insert k-button">#: messages.dialogInsert #</button>' +
+                    '<button class="k-dialog-insert k-button k-primary">#: messages.dialogInsert #</button>' +
                     '<button class="k-dialog-close k-button">#: messages.dialogCancel #</button>' +
                 "</div>" +
             "</div>"
