@@ -106,6 +106,15 @@ If the labels are normally on the left side of the scale, mirroring the scale wi
     }
 
     /**
+    * The width of the range indicators.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\LinearGaugeScale
+    */
+    public function rangeSize($value) {
+        return $this->setProperty('rangeSize', $value);
+    }
+
+    /**
     * Reverses the axis direction - values increase from right to left and from top to bottom.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\LinearGaugeScale
