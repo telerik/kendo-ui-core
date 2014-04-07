@@ -333,22 +333,43 @@
             return curvePoints;
         },
 
-        boundingBox: function() {
+        _boundingBoxStartAngle: function(angle, start) {
+            while(angle < start) {
+                angle+=90;
+            }
+
+            return angle;
+        },
+
+        boundingBox: function(matrix) {
             var arc = this,
                 interval = arc._arcInterval(),
                 startAngle = interval.startAngle,
                 endAngle = interval.endAngle,
-                currentPoint = arc.pointAt(startAngle),
-                endPoint = arc.pointAt(endAngle),
+                extremeAngles = ellipseExtremeAngles(this.center, this.radiusX, this.radiusY, matrix),
+                extremeX = deg(extremeAngles.x),
+                extremeY = deg(extremeAngles.y),
+                currentPoint = arc.pointAt(startAngle).transformInto(matrix),
+                endPoint = arc.pointAt(endAngle).transformInto(matrix),
                 minPoint = currentPoint.min(endPoint),
                 maxPoint = currentPoint.max(endPoint),
-                currentAngle = startAngle + 90 - startAngle % 90;
+                currentAngleX = arc._boundingBoxStartAngle(extremeX, startAngle),
+                currentAngleY = arc._boundingBoxStartAngle(extremeY, startAngle),
+                currentPointX, currentPointY;
 
-            while (currentAngle < endAngle) {
-                currentPoint = arc.pointAt(currentAngle);
+            while (currentAngleX < endAngle || currentAngleY < endAngle) {
+                if (currentAngleX < endAngle) {
+                    currentPointX = arc.pointAt(currentAngleX).transformInto(matrix);
+                    currentAngleX += 90;
+                }
+
+                if (currentAngleY < endAngle) {
+                    currentPointY = arc.pointAt(currentAngleY).transformInto(matrix);
+                    currentAngleY += 90;
+                }
+                currentPoint = new Point(currentPointX.x, currentPointY.y)
                 minPoint = minPoint.min(currentPoint);
                 maxPoint = maxPoint.max(currentPoint);
-                currentAngle += 90;
             }
 
             return new Rect(minPoint, maxPoint);

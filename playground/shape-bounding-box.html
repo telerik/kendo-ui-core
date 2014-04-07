@@ -108,7 +108,24 @@
                     return pathString;
                 }
             });
-            multipathTransformTest();
+            
+            arcTransformTest();
+            function arcTransformTest() {
+                arcGeometry = new geometry.Arc(Point.create(100, 100), {
+                    startAngle: 90,
+                    endAngle: 240,
+                    radiusX: 50,
+                    radiusY: 100,
+                    counterClockwise: false
+                });
+                arc = new drawing.Arc(arcGeometry, $.extend({transform: transform().scale(1,2).rotate(70, 50, 50).scale(2,1).matrix()}, strokeOptions));
+                var group = new drawing.Group({transform: transform().translate(100, -100).matrix()});
+                group.append(arc, rectPath(arc.boundingBox(), strokeOptions));
+                surface.clear();
+                surface.draw(group);
+            }
+            
+           // multipathTransformTest();
             function multipathTransformTest() {
                 var curveTransform = new MultiPath($.extend({transform: transform().translate(100,400).rotate(-45, 100, 100).matrix()}, strokeOptions));
                 curveTransform.moveTo(100, 100);

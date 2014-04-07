@@ -180,8 +180,9 @@
             arc.geometry.observer = this;
         },
 
-        boundingBox: function() {
-            var rect = this.geometry.boundingBox();
+        boundingBox: function(matrix) {
+            var combinedMatrix = this.combineTransform(matrix),
+                rect = this.geometry.boundingBox(combinedMatrix);
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
