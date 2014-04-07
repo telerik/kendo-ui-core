@@ -23,6 +23,13 @@
             return this;
         }
 
+        public SchedulerRecurrenceEditorEndMessagesBuilder MobileLabel(string message)
+        {
+            editorMessages.MobileLabel = message;
+
+            return this;
+        }
+
         public SchedulerRecurrenceEditorEndMessagesBuilder Never(string message)
         {
             editorMessages.Never = message;

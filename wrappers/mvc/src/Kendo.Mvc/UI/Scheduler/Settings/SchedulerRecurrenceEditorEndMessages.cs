@@ -7,6 +7,8 @@
     {
         private const string DefaultLabel = "End:";
 
+        private const string DefaultMobileLabel = "Ends";
+
         private const string DefaultNever = "Never";
 
         private const string DefaultAfter = "After ";
@@ -19,6 +21,8 @@
         {
             Label = Messages.Scheduler_Recurrence_Editor_End_Label;
 
+            MobileLabel = Messages.Scheduler_Recurrence_Editor_End_MobileLabel;
+
             Never = Messages.Scheduler_Recurrence_Editor_End_Never;
 
             After = Messages.Scheduler_Recurrence_Editor_End_After;
@@ -29,6 +33,8 @@
         }
 
         public string Label { get; set; }
+
+        public string MobileLabel { get; set; }
 
         public string Never { get; set; }
 
@@ -43,6 +49,11 @@
             if (Label != DefaultLabel)
             {
                 json["label"] = Label;
+            }
+
+            if (MobileLabel != DefaultMobileLabel)
+            {
+                json["mobileLabel"] = MobileLabel;
             }
 
             if (Never != DefaultNever)
