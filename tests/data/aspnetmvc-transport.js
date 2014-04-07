@@ -484,21 +484,21 @@ test("parameterMap transforms multiple nested levels or filters", function() {
 test("parameterMap includes additional data on read", function() {
     var transport = new Transport({}),
         result = transport.parameterMap({foo: {bar: 1}}, "read");
-    
+
     equal(result["foo.bar"], 1);
 });
 
 test("parameterMap returns only serialized values on read", function() {
     var transport = new Transport({}),
         result = transport.parameterMap({foo: {bar: 1}}, "read");
-    
+
     equal(result["foo"], undefined);
 });
 
 test("parameterMap includes additional data when using batch updates", function() {
     var transport = new Transport({}),
         result = transport.parameterMap({models: [{bar: 1}], foo: "test"}, "update");
- 
+
     equal(result.foo, "test");
     equal(result["models[0].bar"], 1);
 });
@@ -506,7 +506,7 @@ test("parameterMap includes additional data when using batch updates", function(
 test("parameterMap returns only the serialized values on update", function() {
     var transport = new Transport({}),
         result = transport.parameterMap({foo: {bar: 1}}, "update");
-    
+
     equal(result.foo, undefined);
 });
 
@@ -662,4 +662,100 @@ test("the transport is initialized when no options are passed", function (){
     ok(true);
 });
 
+test("group items are translated", function() {
+    var dataSource = new kendo.data.DataSource({
+        "type":"aspnetmvc-ajax",
+        "transport":{
+            "read":{
+                "url":"/Home/Read"
+            },
+            "prefix":""
+        },
+        "serverPaging":true,
+        "serverSorting":true,
+        "serverFiltering":true,
+        "serverGrouping":true,
+        "serverAggregates":true,
+        "group":[
+            {
+                "field":"Salary.Amount",
+                "dir":"asc"
+            }
+        ],
+        "filter":[
+
+        ],
+        "schema":{
+            "data":"Data",
+            "total":"Total",
+            "errors":"Errors",
+            "model":{
+                "id":"Id",
+                "fields":{
+                    "Id":{
+                        "type":"number"
+                    },
+                    "Name":{
+                        "type":"string"
+                    },
+                    "Salary":{
+                        "type":"object"
+                    },
+                    "Salary.Amount":{
+                        "type":"number"
+                    }
+                }
+            }
+        },
+        "data":{
+            "Data":[
+                {
+                    "Aggregates":{
+
+                    },
+                    "HasSubgroups":false,
+                    "Member":"Salary.Amount",
+                    "Subgroups":[
+
+                    ],
+                    "Items":[
+                        {
+                            "Id":1,
+                            "Name":"John Smith",
+                            "Salary":{
+                                "Amount":2000
+                            }
+                        }
+                    ],
+                    "Key":2000
+                },
+                {
+                    "Key":3000,
+                    "HasSubgroups":false,
+                    "Member":"Salary.Amount",
+                    "Items":[
+                        {
+                            "Id":2,
+                            "Name":"Jane Rottencrotch",
+                            "Salary":{
+                                "Amount":3000
+                            }
+                        }
+                    ],
+                    "Aggregates":{
+
+                    },
+                    "Subgroups":[
+
+                    ]
+                }
+            ],
+            "Total":2
+        }
+    });
+
+    dataSource.read();
+
+    equal(dataSource.data()[0].Salary, undefined);
+});
 }());
