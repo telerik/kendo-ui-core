@@ -1576,6 +1576,10 @@ var __meta__ = {
                 var button = e.button;
                 var isRight = which && which === 3 || button && button == 2;
 
+                if (kendo.support.mobileOS && e.isDefaultPrevented()) {
+                    return;
+                }
+
                 if (!isRight) {
                     that._createSelection(e.currentTarget);
                 }
