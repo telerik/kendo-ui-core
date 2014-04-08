@@ -80,8 +80,8 @@
         location.hash = "qux";
     });
 
-    test("normalize returns the same URL", 1, function() {
-        equal(adapter.normalize("foo"), "foo");
+    test("normalize strips the #", 1, function() {
+        equal(adapter.normalize("#foo"), "foo");
     });
 
     asyncTest("replace changes the location hash and keeps the history length", 2, function() {

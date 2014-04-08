@@ -11,6 +11,7 @@ module("Router", {
 
     teardown: function() {
         router.destroy();
+        kendo.history.stop();
     }
 });
 
@@ -44,6 +45,21 @@ test("supports multiple instances", 2, function(){
     router2 = new kendo.Router();
     router2.route("/", function() { ok(true); });
     router2.start();
+});
+
+asyncTest("hashBang accepts normal urls and normalizes them", 2, function(){
+    router = new kendo.Router({ hashBang: true });
+
+    router.route("/bar", function() {
+        ok(true);
+        setTimeout(function() {
+            start();
+            equal(location.hash, "#!/bar");
+        });
+    });
+
+    router.start({ hashBang: true });
+    router.navigate("#/bar");
 });
 
 module("Router params", {

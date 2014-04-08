@@ -112,8 +112,22 @@
         stub(adapter, { navigate: function(url) {
             equal(url, "foo");
         }});
+
         history.start();
         history.navigate("foo");
+    });
+
+    test("navigate works with hash bang", 1, function() {
+        stub(adapter, { normalize: function(url) {
+            return url.split("#!")[1];
+        }});
+
+        history.bind("change", function(e) {
+            equal(e.url, "foo");
+        });
+
+        history.start({ hashBang: true });
+        history.navigate("#!foo");
     });
 
     test("does not pushState if identical", 1, function() {

@@ -48,9 +48,11 @@ var __meta__ = {
     function locationHash(hashDelimiter) {
         var href = location.href;
 
-        if (hashDelimiter === "#!" && href.indexOf(hashDelimiter) < 0) {
+        // ignore normal anchors if in hashbang mode - however, still return "" if no hash present
+        if (hashDelimiter === "#!" && href.indexOf("#") > -1 && href.indexOf("#!") < 0) {
             return null;
         }
+
         return href.split(hashDelimiter)[1] || "";
     }
 
@@ -140,7 +142,7 @@ var __meta__ = {
     }
 
     function fixBang(url) {
-        return url.replace(/^(#!)?/, "#!");
+        return url.replace(/^(#(!)?)?/, "#!");
     }
 
     var HashAdapter = HistoryAdapter.extend({
@@ -159,7 +161,11 @@ var __meta__ = {
         },
 
         normalize: function(url) {
-            return url;
+            if (url.indexOf(this.prefix) < 0) {
+               return url;
+            } else {
+                return url.split(this.prefix)[1];
+            }
         },
 
         change: function(callback) {
@@ -267,7 +273,7 @@ var __meta__ = {
         _navigate: function(to, silent, callback) {
             var adapter = this.adapter;
 
-            to = to.replace(hashStrip, '');
+            to = adapter.normalize(to);
 
             if (this.current === to || this.current === decodeURIComponent(to)) {
                 this.trigger(SAME);
@@ -280,7 +286,7 @@ var __meta__ = {
                 }
             }
 
-            this.current = adapter.normalize(to);
+            this.current = to;
 
             callback.call(this, adapter);
 
