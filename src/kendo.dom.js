@@ -378,18 +378,6 @@ var __meta__ = {
                 }
                 return rx.exec(this.text.substr(this.pos));
             },
-            save: function() {
-                return {
-                    line: this.line,
-                    col: this.col,
-                    pos: this.pos
-                };
-            },
-            restore: function(state) {
-                this.pos = state.pos;
-                this.line = state.line;
-                this.col = state.col;
-            },
             readWhile: function(pred) {
                 var ret = "";
                 while (!this.eof() && pred(this.peek())) {
