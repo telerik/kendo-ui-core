@@ -28,15 +28,9 @@ var TMPL = (function(){
 
     var NAME_CHAR = NAME_START_CHAR.concat([ "\\-", ".", "0-9", "\\u00B7", "\\u0300-\\u036F", "\\u203F-\\u2040" ]);
 
-    var RX_NAME_START_CHAR = new RegExp("[" + NAME_START_CHAR.join("") + "]", "i");
-    var RX_NAME_CHAR = new RegExp("[" + NAME_CHAR.join("") + "]", "i");
-
-    var RX_NAME = new RegExp("^([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
     var RX_OPENTAG = new RegExp("^<([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
     var RX_CLOSETAG = new RegExp("^</([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
     var RX_CLOSETAG_SKIP_WS = new RegExp("^[" + WHITESPACE_CHARS + "]*</([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
-    var RX_CHAR_REF = /^&#([0-9]+|x[0-9a-fA-F]+);/;
-    var RX_ENTITY_REF = new RegExp("^&([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*);", "i");
 
     var NO_CONTENT_TAGS = ",area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr,";
 
