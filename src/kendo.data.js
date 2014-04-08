@@ -3068,9 +3068,9 @@ var __meta__ = {
 
         inRange: function(skip, take) {
             var that = this,
-            end = math.min(skip + take, that.total());
+                end = math.min(skip + take, that.total());
 
-            if (!that.options.serverPaging && that.data.length > 0) {
+            if (!that.options.serverPaging && that._data.length > 0) {
                 return true;
             }
 
