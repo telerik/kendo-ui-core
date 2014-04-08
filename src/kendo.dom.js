@@ -153,6 +153,45 @@ var __meta__ = {
         this.node = node;
     };
 
+    var HtmlNode = function(html) {
+        this.html = html;
+    };
+
+    HtmlNode.prototype = new Node();
+    HtmlNode.prototype.nodeName = "#document-fragment";
+
+    HtmlNode.prototype.create = function() {
+        var node = document.createDocumentFragment();
+
+        var container = document.createElement("div");
+
+        container.innerHTML = this.html;
+
+        while (container.firstChild) {
+           node.appendChild(container.firstChild);
+        }
+
+        return node;
+    };
+
+    HtmlNode.prototype.render = function(node, cached) {
+        if (!cached || cached.nodeName !== this.nodeName) {
+            if (cached) {
+                cached.remove();
+            }
+        } else if (this.html !== cached.html) {
+            var container = document.createElement("div");
+
+            container.innerHTML = this.html;
+
+            while (container.firstChild) {
+               node.appendChild(container.firstChild);
+            }
+        }
+
+        this.node = node;
+    };
+
     var cache = {};
     var roots = [];
 
@@ -162,6 +201,10 @@ var __meta__ = {
 
     function text(value) {
         return new TextNode(value);
+    }
+
+    function html(value) {
+        return new HtmlNode(value);
     }
 
     function indexOf(array, item) {
@@ -235,7 +278,8 @@ var __meta__ = {
         text: text,
         render: render,
         parse: parse,
-        attach: attach
+        attach: attach,
+        html: html
     };
 })(window.kendo);
 

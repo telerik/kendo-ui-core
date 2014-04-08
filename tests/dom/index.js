@@ -4,6 +4,7 @@
     var text = kendo.dom.text;
     var render = kendo.dom.render;
     var parse = kendo.dom.parse;
+    var html = kendo.dom.html;
 
     module("virtual dom", {
        setup: function() {
@@ -267,5 +268,14 @@
         render(dom, node);
         render(dom, element("div", null, [ element("span") ]));
         equal(dom.firstChild.childNodes.length, 1);
+    });
+
+    test("render outputs html child node", function() {
+        var node = element("div", null, [html("<b>foo</b>")]);
+
+        render(root, node);
+
+        equal(root.firstChild.nodeName, "B");
+        equal(root.firstChild.firstChild.nodeValue, "foo");
     });
 }());
