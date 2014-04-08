@@ -712,15 +712,14 @@ var __meta__ = {
             })
         );
 
-        valueAxes.push({
-            // TODO: Extend navigator.valueAxis
+        valueAxes.push(deepExtend({
             name: NAVIGATOR_AXIS,
             pane: NAVIGATOR_PANE,
             majorGridLines: {
                 visible: false
             },
             visible: false
-        });
+        }, naviOptions.valueAxis));
     };
 
     Navigator.attachSeries = function(options, naviOptions, themeOptions) {
