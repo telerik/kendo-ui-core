@@ -98,13 +98,16 @@
                 { field: "ShipName", title: "Ship Name" }
             ];
 
+            var prevDom = null;
+
             function redraw() {
                 console.time("runTemplate");
                 var dom = gridTemplate({ columns: columns, dataSource: dataSource });
                 console.timeEnd("runTemplate");
 
                 console.time("render");
-                dom.render(document.getElementById("m-grid"));
+                dom.render(document.getElementById("m-grid"), prevDom);
+                prevDom = dom;
                 console.timeEnd("render");
             }
 
