@@ -360,13 +360,6 @@ var __meta__ = {
             eof: function() {
                 return this.peek() === "";
             },
-            get: function(rx) {
-                var m = this.lookingAt(rx);
-                if (m) {
-                    this.forward(m[0].length);
-                    return m;
-                }
-            },
             forward: function(n) {
                 while (n-- > 0) {
                     this.next();
