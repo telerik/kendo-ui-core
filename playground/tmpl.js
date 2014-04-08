@@ -36,11 +36,11 @@ var TMPL = (function(){
 
     var NO_CONTENT_TAGS = ",area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr,";
 
-    function html_no_content(tagname) {
+    function emptyTag(tagname) {
         return NO_CONTENT_TAGS.indexOf("," + tagname.toLowerCase() + ",") >= 0;
     }
 
-    function is_whitespace(ch) {
+    function isWhitespace(ch) {
         return WHITESPACE_CHARS.indexOf(ch) >= 0;
     }
 
@@ -116,7 +116,7 @@ var TMPL = (function(){
             return ret;
         },
         skipWhitespace: function() {
-            return this.readWhile(is_whitespace);
+            return this.readWhile(isWhitespace);
         }
     };
 
@@ -155,14 +155,6 @@ var TMPL = (function(){
         }
         options = defaults(options, {
             noWhitespace  : true,
-            startEscaped1 : "#:",
-            closeEscaped1 : "#",
-            startEscaped2 : "${",
-            closeEscaped2 : "}",
-            startLiteral1 : "#=",
-            closeLiteral1 : "#",
-            startCode     : "#",
-            closeCode     : "#",
         });
         var output = new OutputStream();
         html();
@@ -188,13 +180,13 @@ var TMPL = (function(){
                 str = "";
             }
             while (!input.eof()) {
-                if (input.lookingAt(options.startEscaped1)) {
+                if (input.lookingAt("#:")) {
                     dump(escaped1, true);
-                } else if (input.lookingAt(options.startEscaped2)) {
+                } else if (input.lookingAt("${")) {
                     dump(escaped2, true);
-                } else if (input.lookingAt(options.startLiteral1)) {
+                } else if (input.lookingAt("#=")) {
                     dump(literal1, true);
-                } else if (input.lookingAt(options.startCode)) {
+                } else if (input.lookingAt("#")) {
                     dump(code);
                 } else if ((m = input.lookingAt(RX_OPENTAG))) {
                     dump(openTag, m);
@@ -214,14 +206,14 @@ var TMPL = (function(){
                 return ch != ">";
             });
             input.next();
-            if (!html_no_content(tagName))
+            if (!emptyTag(tagName))
                 return output.gat(tagName);
         }
 
         function openTag(m) {
             var tagName = m[1];
             input.forward(m[0].length);
-            var attrs = {}, closed = html_no_content(tagName);
+            var attrs = {}, closed = emptyTag(tagName);
             while (!input.eof()) {
                 input.skipWhitespace();
                 if ((m = input.lookingAt(/^\/?>/))) {
@@ -243,7 +235,7 @@ var TMPL = (function(){
             var attr = input.readWhile(function(ch){
                 if (ch == "#")
                     croak("Code not supported in attribute names");
-                return !is_whitespace(ch) && "<>'\"/=".indexOf(ch) < 0;
+                return !isWhitespace(ch) && "<>'\"/=".indexOf(ch) < 0;
             }), val = "";
             input.skipWhitespace();
             if (input.lookingAt("=")) {
@@ -274,13 +266,13 @@ var TMPL = (function(){
                     input.next();
                     break;
                 }
-                if (input.lookingAt(options.startEscaped1)) {
+                if (input.lookingAt("#:")) {
                     dump(escaped1, false);
-                } else if (input.lookingAt(options.startEscaped2)) {
+                } else if (input.lookingAt("${")) {
                     dump(escaped2, false);
-                } else if (input.lookingAt(options.startLiteral1)) {
+                } else if (input.lookingAt("#=")) {
                     dump(literal1, false);
-                } else if (input.lookingAt(options.startCode)) {
+                } else if (input.lookingAt("#")) {
                     croak("Statement # block # not allowed in attribute value");
                 } else {
                     str += input.next();
@@ -294,7 +286,7 @@ var TMPL = (function(){
             return JSON.stringify(input.readWhile(function(ch){
                 if (ch == "#")
                     croak("Code not supported in unquoted attribute value");
-                return !is_whitespace(ch) && "<>'\"/=".indexOf(ch) < 0;
+                return !isWhitespace(ch) && "<>'\"/=".indexOf(ch) < 0;
             }));
         }
 
@@ -317,26 +309,26 @@ var TMPL = (function(){
         }
 
         function escaped1(forStat) {
-            input.forward(options.startEscaped1.length);
-            var expr = readUntil(options.closeEscaped1);
+            input.forward(2);
+            var expr = readUntil("#");
             return forStat ? output.esc(expr) : expr;
         }
 
         function escaped2(forStat) {
-            input.forward(options.startEscaped2.length);
-            var expr = readUntil(options.closeEscaped2);
+            input.forward(2);
+            var expr = readUntil("}");
             return forStat ? output.esc(expr) : expr;
         }
 
         function literal1(forStat) {
-            input.forward(options.startLiteral1.length);
-            var expr = readUntil(options.closeLiteral1);
+            input.forward(2);
+            var expr = readUntil("#");
             return forStat ? output.raw(expr) : expr;
         }
 
         function code() {
-            input.forward(options.startCode.length);
-            return readUntil(options.closeCode);
+            input.forward(1);
+            return readUntil("#");
         }
     }
 
