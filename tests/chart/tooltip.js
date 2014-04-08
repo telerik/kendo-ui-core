@@ -70,8 +70,8 @@
             teardown: destroyTooltip
         });
 
-        test("attaches to chart element", function() {
-            ok(element[0].parentNode === document.getElementById("chart"));
+        test("attaches to body", function() {
+            ok(element[0].parentNode === document.body);
         });
 
         test("renders div with display none attribute", function() {
@@ -251,19 +251,19 @@
         });
 
         test("returns 0 if the tooltip fit in the window", function() {
-            var result = tooltip._currentPosition(200, 100, 400);
+            var result = tooltip._fit(200, 100, 400);
 
             equal(result, 0);
         });
 
         test("if element does not fit right should be position left", function() {
-            var result = tooltip._currentPosition(82, 42, 100);
+            var result = tooltip._fit(82, 42, 100);
 
             equal(result, -24);
         });
 
         test("if element does not fit right and does not fit left should be position right", function() {
-            var result = tooltip._currentPosition(42, 42, 100);
+            var result = tooltip._fit(42, 42, 100);
 
             equal(result, 0);
         });

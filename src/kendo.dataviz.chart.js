@@ -9421,7 +9421,7 @@ var __meta__ = {
                 );
             }
 
-            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(chartElement);
+            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(document.body);
             tooltip._moveProxy = proxy(tooltip.move, tooltip);
         },
 
@@ -9479,18 +9479,16 @@ var __meta__ = {
                 element = tooltip.element,
                 anchor = tooltip.anchor,
                 chartPadding = tooltip._padding(),
-                top = round(anchor.y + chartPadding.top),
-                left = round(anchor.x + chartPadding.left),
+                chartOffset = tooltip.chartElement.offset(),
+                top = round(anchor.y + chartPadding.top + chartOffset.top),
+                left = round(anchor.x + chartPadding.left + chartOffset.left),
                 zoomLevel = kendo.support.zoomLevel(),
                 viewport = $(window),
-                offsetTop = window.pageYOffset || document.documentElement.scrollTop || 0,
-                offsetLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
+                scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0,
+                scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
 
-            offsetTop = tooltip.chartElement.offset().top - offsetTop;
-            offsetLeft = tooltip.chartElement.offset().left - offsetLeft;
-
-            top += tooltip._currentPosition(top + offsetTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
-            left += tooltip._currentPosition(left + offsetLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
+            top += tooltip._fit(top - scrollTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
+            left += tooltip._fit(left - scrollLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
 
             return {
                 top: top,
@@ -9572,7 +9570,7 @@ var __meta__ = {
             return point.tooltipAnchor(element.outerWidth(), element.outerHeight());
         },
 
-        _currentPosition: function(offset, size, viewPortSize) {
+        _fit: function(offset, size, viewPortSize) {
             var output = 0;
 
             if (offset + size > viewPortSize) {
