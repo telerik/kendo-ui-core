@@ -95,6 +95,12 @@ test("inrange returns true if available", function() {
     ok(dataSource.inRange(0,2));
 });
 
+test("inrange returns false if no data is available", function() {
+    var dataSource = setup([]);
+
+    ok(!dataSource.inRange(0,2));
+});
+
 test("prefetch gets data for given range", function() {
     var dataSource = remoteDataSource();
 
