@@ -676,7 +676,7 @@ var __meta__ = {
                 minutes: [1],
                 hours: [1],
                 days: [1],
-                weeks: [],
+                weeks: [1],
                 months: [1],
                 years: [1]
             },
