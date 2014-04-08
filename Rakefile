@@ -41,8 +41,7 @@ end
 #end
 
 ADMIN_PASS = 'ultra'
-ADMIN_RELEASE_UPLOAD_PASS = "p75a80s"
-#ADMIN_RELEASE_UPLOAD_PASS = "t3l3r1k@dm1n"
+ADMIN_RELEASE_UPLOAD_PASS = "t3l3r1k@dm1n"
 
 ROOT_MAP = {
     '.' => /(dist\/js|dist\/styles\/.+?)\//,

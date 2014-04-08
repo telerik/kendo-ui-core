@@ -108,7 +108,7 @@ def prepare_files(bot, options)
     element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.msi')]")
     element.click
 
-    options[:file_name] = options[:title].sub! "commercial", "trial" + ".msi"
+    options[:file_name] = options[:title].sub "commercial", "trial" + ".msi"
     bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
 
     upload_file_and_go_back(bot, options)
@@ -128,7 +128,7 @@ def prepare_files(bot, options)
   element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.zip')]")
   element.click
 
-  options[:file_name] = options[:title].sub! "commercial", "trial" + ".zip"
+  options[:file_name] = options[:title].sub "commercial", "trial" + ".zip"
   bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
 
   upload_file_and_go_back(bot, options)
@@ -146,7 +146,7 @@ def prepare_files(bot, options)
       element = bot.driver.find_element(:xpath, "//a[contains(.,'hotfix') and contains (.,'trial')]")
       element.click
 
-      file_name = options[:title].sub! "commercial", "trial"
+      file_name = options[:title].sub "commercial", "trial"
       bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.hotfix.zip')" 
 
       upload_file_and_go_back(bot, options)
@@ -166,7 +166,7 @@ def prepare_files(bot, options)
       element = bot.driver.find_element(:xpath, "//a[contains(.,'NuGet') and contains(.,'trial')]")
       element.click
 
-      file_name = options[:title].sub! "commercial", "trial"
+      file_name = options[:title].sub "commercial", "trial"
       bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.nupkg.zip')" 
 
       upload_file_and_go_back(bot, options)
