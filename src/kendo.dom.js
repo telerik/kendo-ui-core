@@ -40,41 +40,43 @@ var __meta__ = {
         return element(this.nodeName, kendo.deepExtend({}, this.attr), children);
     }
 
-    Element.prototype.create = function() {
-        return document.createElement(this.nodeName);
-    };
+    Element.prototype.render = function(parent, cached) {
+        var node;
 
-    Element.prototype.render = function(node, cached) {
         var index;
-        var child;
 
         var children = this.children;
 
         var length = children.length;
 
-        if (!cached) {
-            cached = new Element();
-        }
-
-        for (index = 0; index < length; index++) {
-            child = children[index];
-            var cachedChild = cached.children[index];
-
-            if (cachedChild && cachedChild.nodeName !== child.nodeName) {
-                cachedChild.remove();
-                cachedChild = null;
+        if (!cached || cached.nodeName !== this.nodeName) {
+            if (cached) {
+                cached.remove();
             }
 
-            if (!cachedChild) {
-                child.render(child.create(), null);
-                node.appendChild(child.node);
-            } else {
-                child.render(cachedChild.node, cachedChild);
-            }
-        }
+            node = document.createElement(this.nodeName);
 
-        for (index = length; index < cached.children.length; index++) {
-            cached.children[index].remove();
+            for (index = 0; index < length; index++) {
+                children[index].render(node, null);
+            }
+
+            parent.appendChild(node);
+        } else {
+            node = cached.node;
+
+            if (cached.children.length > length) {
+                length = cached.children.length;
+            }
+
+            for (index = 0; index < length; index++) {
+                var child = children[index];
+
+                if (child) {
+                    child.render(node, cached.children[index]);
+                } else {
+                    cached.children[index].remove();
+                }
+            }
         }
 
         var attr = this.attr;
@@ -133,21 +135,26 @@ var __meta__ = {
     TextNode.prototype = new Node();
     TextNode.prototype.nodeName = "#text";
 
-    TextNode.prototype.create = function() {
-        return document.createTextNode(this.nodeValue);
-    };
-
     TextNode.prototype.clone = function() {
         return text(this.nodeValue);
     };
 
-    TextNode.prototype.render = function(node, cached) {
+      TextNode.prototype.render = function(parent, cached) {
+        var node;
+
         if (!cached || cached.nodeName !== this.nodeName) {
             if (cached) {
                 cached.remove();
             }
-        } else if (this.nodeValue !== cached.nodeValue) {
-            node.nodeValue = this.nodeValue;
+            node = document.createTextNode(this.nodeValue);
+
+            parent.appendChild(node);
+        } else {
+            node = cached.node;
+
+            if (this.nodeValue !== cached.nodeValue) {
+                node.nodeValue = this.nodeValue;
+            }
         }
 
         this.node = node;
@@ -157,40 +164,31 @@ var __meta__ = {
         this.html = html;
     };
 
-    HtmlNode.prototype = new Node();
-    HtmlNode.prototype.nodeName = "#document-fragment";
+    HtmlNode.prototype = {
+       nodeName: "#html",
+       remove: function() {
+           for (var index = 0; index < this.nodes.length; index++) {
+               this.nodes[index].parentNode.removeChild(this.nodes[index]);
+           }
+       },
+       render: function(parent, cached) {
+           if (!cached || cached.nodeName !== this.nodeName || cached.html !== this.html) {
+               if (cached) {
+                   cached.remove();
+               }
 
-    HtmlNode.prototype.create = function() {
-        var node = document.createDocumentFragment();
+               var lastChild = parent.lastChild;
 
-        var container = document.createElement("div");
+               parent.insertAdjacentHTML("beforeend", this.html);
 
-        container.innerHTML = this.html;
+               this.nodes = [];
 
-        while (container.firstChild) {
-           node.appendChild(container.firstChild);
-        }
-
-        return node;
-    };
-
-    HtmlNode.prototype.render = function(node, cached) {
-        if (!cached || cached.nodeName !== this.nodeName) {
-            if (cached) {
-                cached.remove();
-            }
-        } else if (this.html !== cached.html) {
-            var container = document.createElement("div");
-
-            container.innerHTML = this.html;
-
-            while (container.firstChild) {
-               node.appendChild(container.firstChild);
-            }
-        }
-
-        this.node = node;
-    };
+               for (var child = lastChild ? lastChild.nextSibling : parent.firstChild; child; child = child.nextSibling) {
+                   this.nodes.push(child);
+               }
+           }
+       }
+    }
 
     var cache = {};
     var roots = [];
@@ -217,16 +215,27 @@ var __meta__ = {
         return -1;
     }
 
-    function render(root, node) {
+    function render(root, children) {
         var id = indexOf(roots, root);
 
         if (id < 0) {
             id = roots.push(root) - 1;
         }
 
-        node.render(root, cache[id]);
+        var cachedChildren = cache[id] || [];
 
-        cache[id] = node;
+        var index;
+        var length;
+
+        for (index = 0, length = children.length; index < length; index++) {
+           children[index].render(root, cachedChildren[index]);
+        }
+
+        for (index = length; index < cachedChildren.length; index++) {
+            cachedChildren[index].remove();
+        }
+
+        cache[id] = children;
     }
 
     function parse(node, callback) {
@@ -620,55 +629,11 @@ var __meta__ = {
             }
         }
 
-        function MithrilTreeMaker() {
-            this.root = {
-                tag      : "HTML",
-                attrs    : {},
-                children : []
-            };
-            this.stack = [ this.root ];
-        }
-        MithrilTreeMaker.prototype = {
-            top: function() {
-                return this.stack[this.stack.length - 1];
-            },
-            push: function(thing) {
-                var tag = this.top();
-                if (!tag.children) {
-                    tag.children = [];
-                }
-                tag.children.push(thing);
-            },
-            raw: function(txt) {
-                txt = new String(txt);
-                txt.$trusted = true;
-                this.push(txt);
-            },
-            esc: function(txt) {
-                this.push(txt);
-            },
-            tag: function(tagName, attrs, closed) {
-                var tag = {
-                    tag: tagName,
-                    attrs: attrs
-                };
-                this.push(tag);
-                if (!closed) {
-                    this.stack.push(tag);
-                }
-            },
-            gat: function(tagName) {
-                // XXX: tagName is kinda pointless, but we could throw some
-                // errors on mismatch.
-                this.stack.pop();
-            }
-        };
-
-        function KendoTreeMaker() {
+        function TreeMaker() {
             this.root = new Element("HTML");
             this.stack = [ this.root ];
         }
-        KendoTreeMaker.prototype = {
+        TreeMaker.prototype = {
             top: function() {
                 return this.stack[this.stack.length - 1];
             },
@@ -695,16 +660,14 @@ var __meta__ = {
 
         kendo.dom.template = function(html, options) {
             var code = parse(html, options);
+
             code = "with(data){" + code + "}";
+
             var f = new Function("data", code);
+
             return function(data) {
-                var tm = new KendoTreeMaker();
-                try {
-                    f.call(tm, data);
-                } catch(ex) {
-                    console.log(ex);
-                    console.log(ex.stack);
-                }
+                var tm = new TreeMaker();
+                f.call(tm, data);
                 return tm.root;
             };
         };

@@ -13,45 +13,43 @@
     });
 
     test("render appends element to root", function() {
-        var div = element("div", null, [element("div")]);
-
-        render(root, div);
+        render(root, [element("div")]);
 
         equal(root.children.length, 1);
         equal(root.children[0].children.length, 0);
     });
 
     test("render creates text node", function() {
-        render(root, element("div", null, [text("foo")]));
+        render(root, [text("foo")]);
 
         equal(root.firstChild.nodeName, "#text");
     });
 
     test("render creates text node with specified text", function() {
-        render(root, element("div", null, [text("foo")]));
+        render(root, [text("foo")]);
 
         equal(root.firstChild.nodeValue, "foo");
     });
 
     test("renders children", function() {
-        var div = element("div", null, [ element("div"), element("div") ]);
+        render(root, [ element("div"), element("div") ]);
 
-        render(root, div);
         equal(root.children.length, 2);
     });
 
     test("render attributes", function() {
         var div = element("div", {id:"foo"});
 
-        render(root, div);
+        render(root, [div]);
 
-        equal(root.id, "foo");
+        equal(root.firstChild.id, "foo");
     });
 
     test("render doesn't replace existing element if no changes present", function() {
-        render(root, element("div", null, [ element("div") ]));
+        render(root, [ element("div") ]);
         var firstChild = root.children[0];
-        render(root, element("div", null, [ element("div") ]));
+
+        render(root, [ element("div") ]);
 
         equal(root.children.length, 1);
 
@@ -59,20 +57,20 @@
     });
 
     test("render changes tag name", function() {
-        render(root, element("div", null, [ element("div") ]));
-        render(root, element("div", null, [ element("span") ]));
+        render(root, [ element("div") ]);
+        render(root, [ element("span") ]);
 
         equal(root.children.length, 1);
 
-        equal(root.children[0].tagName, "SPAN");
+        equal(root.children[0].nodeName, "SPAN");
     });
 
     test("render changes attribute of existing element", function() {
-        render(root, element("div", null,  [ element("div", {id: "foo"}) ]));
+        render(root, [ element("div", {id: "foo"}) ]);
 
         var firstChild = root.children[0];
 
-        render(root, element("div", null,  [ element("div", {id: "bar"}) ]));
+        render(root, [ element("div", {id: "bar"}) ]);
 
         equal(root.children.length, 1);
 
@@ -83,29 +81,29 @@
 
     test("render doesn't change attribute with same value", 0, function() {
         var div = element("div", { "foo": "foo" });
-        render(root, div);
+        render(root, [div]);
 
         div.node.setAttribute = function() {
             ok(false);
         };
 
-        render(root, element("div", { "foo": "foo" }));
+        render(root, [element("div", { "foo": "foo" })]);
     });
 
     test("render inserts new children", function() {
-        render(root, element("div"));
+        render(root, []);
 
-        render(root, element("div", null, [ element("div") ]));
+        render(root, [ element("div") ]);
 
         equal(root.children.length, 1);
     });
 
     test("render updates existing text node", function() {
-        render(root, element("div", null, [text("foo")]));
+        render(root, [text("foo")]);
 
         var textNode = root.firstChild;
 
-        render(root, element("div", null, [text("bar")]));
+        render(root, [text("bar")]);
 
         equal(root.childNodes.length, 1);
 
@@ -115,9 +113,9 @@
     });
 
     test("render replaces text node with element", function() {
-        render(root, element("div", null, [text("foo")]));
+        render(root, [text("foo")]);
 
-        render(root, element("div", null, [element("div")]));
+        render(root, [element("div")]);
 
         equal(root.childNodes.length, 1);
 
@@ -125,9 +123,9 @@
     });
 
     test("render replaces element with text node", function() {
-        render(root, element("div", null, [element("div")]));
+        render(root, [element("div")]);
 
-        render(root, element("div", null, [text("foo")]));
+        render(root, [text("foo")]);
 
         equal(root.childNodes.length, 1);
 
@@ -135,53 +133,53 @@
     });
 
     test("render doesn't change text node with same value", 0, function() {
-        var div = element("div", null, [text("foo")]);
+        var node = text("foo");
 
-        render(root, div);
+        render(root, [node]);
 
-        Object.defineProperty(div.children[0].node, "nodeValue", {
+        Object.defineProperty(node, "nodeValue", {
             set: function() {
                 ok(false);
             }
         });
 
-        render(root, element("div", null, [text("foo")]));
+        render(root, [text("foo")]);
     });
 
     test("render removes existing nodes", function() {
-        render(root, element("div", null, [element("div"), element("div")]));
+        render(root, [element("div"), element("div")]);
 
-        render(root, element("div", null, [element("div")]));
+        render(root, [element("div")]);
 
         equal(root.childNodes.length, 1);
     });
 
     test("render removes attributes set via dirrect assignment", function() {
-        render(root, element("div", { id: "foo" }));
+        render(root, [element("div", { id: "foo" })]);
 
-        render(root, element("div", null));
+        render(root, [element("div", null)]);
 
-        equal(root.id, "");
+        equal(root.firstChild.id, "");
     });
 
     test("render removes attributes set via setAttribute", function() {
-        render(root, element("div", { foo: "foo" }));
+        render(root, [element("div", { foo: "foo" })]);
 
-        render(root, element("div", null));
+        render(root, [element("div", null)]);
 
-        equal(root.getAttribute("foo"), null);
+        equal(root.firstChild.getAttribute("foo"), null);
     });
 
     test("render adds style attributes", function() {
-        render(root, element("div", { style: { width: "100px" } }));
+        render(root, [element("div", { style: { width: "100px" } })]);
 
-        equal(root.style.width,"100px");
+        equal(root.firstChild.style.width,"100px");
     });
 
     test("render does not set style if same", 0, function() {
         var div = element("div", { style: { width: "100px" } });
 
-        render(root, div);
+        render(root, [div]);
 
         var cssText = div.node.style.cssText;
 
@@ -194,14 +192,14 @@
             }
         });
 
-        render(root, element("div", { style: { width: "100px" } }));
+        render(root, [element("div", { style: { width: "100px" } })]);
     });
 
     test("render removes style attribute", function() {
-        render(root, element("div", { style: { width: "100px" } }));
-        render(root, element("div", null));
+        render(root, [element("div", { style: { width: "100px" } })]);
+        render(root, [element("div", null)]);
 
-        equal(root.style.cssText, "");
+        equal(root.firstChild.style.cssText, "");
     });
 
     test("parse creates a structure from a DOM element", function() {
@@ -236,7 +234,7 @@
         equal(node.attr.className, "foo");
     });
 
-    test("render skips nested readonly elements", function() {
+    test("parse skips nested readonly elements", function() {
         var dom = $("<div><span>text</span></div>")[0];
 
         var node = parse(dom, function(node) {
@@ -253,8 +251,8 @@
             return node.nodeName.toLowerCase() !== "span";
         });
 
-        render(dom, node);
-        render(dom, element("div", null, [ element("i") ]));
+        render(dom, [node]);
+        render(dom, [element("div", null, [ element("i") ])]);
         equal(dom.children.length, 2);
     });
 
@@ -265,17 +263,57 @@
             return node.nodeName !== "#text";
         });
 
-        render(dom, node);
-        render(dom, element("div", null, [ element("span") ]));
+        render(dom, [node]);
+        render(dom, [element("div", null, [ element("span") ])]);
         equal(dom.firstChild.childNodes.length, 1);
     });
 
     test("render outputs html child node", function() {
-        var node = element("div", null, [html("<b>foo</b>")]);
-
-        render(root, node);
+        render(root, [html("<b>foo</b>")]);
 
         equal(root.firstChild.nodeName, "B");
         equal(root.firstChild.firstChild.nodeValue, "foo");
+    });
+
+    test("render removes html child node", function() {
+        render(root, [html("<b>foo</b>")]);
+
+        render(root, []);
+
+        equal(root.childNodes.length, 0);
+    });
+
+    test("render doesn't insert same html node", 0, function() {
+        render(root, [html("<b>foo</b>")]);
+
+        root.insertAdjacentHTML = function() {
+            ok(false);
+        };
+
+        render(root, [html("<b>foo</b>")]);
+    });
+
+    test("render updates html node", function() {
+        render(root, [html("<b>foo</b>")]);
+
+        render(root, [html("<i>bar</i>")]);
+        equal(root.firstChild.nodeName, "I");
+        equal(root.firstChild.firstChild.nodeValue, "bar");
+    });
+
+    test("render removes more than one html child nodes", function() {
+        render(root, [html("<b>foo</b><b>bar</b>")]);
+
+        render(root, []);
+
+        equal(root.childNodes.length, 0);
+    });
+
+    test("render leaves existing nodes", function() {
+        render(root, [element("div"), html("<b>foo</b>")]);
+
+        render(root, [element("div")]);
+
+        equal(root.childNodes.length, 1);
     });
 }());
