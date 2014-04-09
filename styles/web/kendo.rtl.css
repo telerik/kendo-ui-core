@@ -219,6 +219,12 @@
     border-width: 0;
 }
 
+.k-rtl .k-grid-header .k-with-icon .k-link
+{
+    margin-right: -0.6em;
+    margin-left: 1.3em;
+}
+
 /* Editing */
 
 .k-rtl .k-edit-label,
