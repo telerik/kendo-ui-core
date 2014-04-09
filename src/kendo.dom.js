@@ -322,7 +322,13 @@ var __meta__ = {
         var RX_CLOSETAG = new RegExp("^</([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
         var RX_CLOSETAG_SKIP_WS = new RegExp("^[" + WHITESPACE_CHARS + "]*</([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
 
+        var RX_ENTITY_REF = new RegExp("^&(#?[" + NAME_CHAR.join("") + "]+);", "i");
+
         var NO_CONTENT_TAGS = ",area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr,";
+
+        // hack to avoid writing a full entity parser;
+        // using innerHTML on this DIV.
+        var DIV = document.createElement("div");
 
         function emptyTag(tagname) {
             return NO_CONTENT_TAGS.indexOf("," + tagname.toLowerCase() + ",") >= 0;
@@ -437,7 +443,7 @@ var __meta__ = {
                 var str = "", m;
                 function dump(nextParser, arg) {
                     if (str) {
-                        output.stat(output.raw(JSON.stringify(str)));
+                        output.stat(output.esc(JSON.stringify(str)));
                     }
                     if (nextParser) {
                         var stat = nextParser(arg);
@@ -449,13 +455,19 @@ var __meta__ = {
                 }
                 while (!input.eof()) {
                     if (input.lookingAt("#:")) {
-                        dump(escaped1, true);
+                        dump(readEscaped1, true);
                     } else if (input.lookingAt("${")) {
-                        dump(escaped2, true);
+                        dump(readEscaped2, true);
                     } else if (input.lookingAt("#=")) {
-                        dump(literal1, true);
+                        dump(readLiteral, true);
                     } else if (input.lookingAt("#")) {
-                        dump(code);
+                        dump(readCode);
+                    } else if (input.lookingAt("<!--")) {
+                        skipComment();
+                    } else if (input.lookingAt("<![CDATA[")) {
+                        croak("CDATA sections not yet supported");
+                    } else if ((m = input.lookingAt(RX_ENTITY_REF))) {
+                        str += readEntity(m);
                     } else if ((m = input.lookingAt(RX_OPENTAG))) {
                         dump(openTag, m);
                     } else if ((m = input.lookingAt(options.noWhitespace ? RX_CLOSETAG_SKIP_WS : RX_CLOSETAG))) {
@@ -465,6 +477,23 @@ var __meta__ = {
                     }
                 }
                 dump();
+            }
+
+            function skipComment() {
+                input.forward(4);
+                input.readWhile(function(){
+                    return !input.lookingAt("-->");
+                });
+                input.forward(3);
+            }
+
+            function readEntity(m) {
+                DIV.innerHTML = m[0];
+                if (DIV.firstChild.nodeType != 3) {
+                    croak("Unrecognized entity " + str);
+                }
+                input.forward(m[0].length);
+                return DIV.firstChild.nodeValue;
             }
 
             function closeTag(m) {
@@ -527,7 +556,7 @@ var __meta__ = {
             }
 
             function valueQuoted(quote) {
-                var str = "", ret = [];
+                var str = "", ret = [], m;
                 function dump(nextParser, arg) {
                     if (str) {
                         ret.push(JSON.stringify(str));
@@ -544,13 +573,15 @@ var __meta__ = {
                         break;
                     }
                     if (input.lookingAt("#:")) {
-                        dump(escaped1, false);
+                        dump(readEscaped1, false);
                     } else if (input.lookingAt("${")) {
-                        dump(escaped2, false);
+                        dump(readEscaped2, false);
                     } else if (input.lookingAt("#=")) {
-                        dump(literal1, false);
+                        dump(readLiteral, false);
                     } else if (input.lookingAt("#")) {
                         croak("Statement # block # not allowed in attribute value");
+                    } else if ((m = input.lookingAt(RX_ENTITY_REF))) {
+                        str += readEntity(m);
                     } else {
                         str += input.next();
                     }
@@ -586,25 +617,25 @@ var __meta__ = {
                 return ret;
             }
 
-            function escaped1(forStat) {
+            function readEscaped1(forStat) {
                 input.forward(2);
                 var expr = readUntil("#");
                 return forStat ? output.esc(expr) : expr;
             }
 
-            function escaped2(forStat) {
+            function readEscaped2(forStat) {
                 input.forward(2);
                 var expr = readUntil("}");
                 return forStat ? output.esc(expr) : expr;
             }
 
-            function literal1(forStat) {
+            function readLiteral(forStat) {
                 input.forward(2);
                 var expr = readUntil("#");
                 return forStat ? output.raw(expr) : expr;
             }
 
-            function code() {
+            function readCode() {
                 input.forward(1);
                 return readUntil("#");
             }

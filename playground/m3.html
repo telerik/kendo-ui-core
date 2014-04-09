@@ -35,6 +35,8 @@
 
         <script type="x/new-template" id="gridTemplate">
           <table role="grid">
+            <!-- comment must be skipped -->
+            <!-- <![CDATA[ must throw ]]> -->
             <colgroup>
               # for (var i = 0; i < columns.length; ++i) { #
                 <col></col>
@@ -45,8 +47,8 @@
               # for (var i = 0; i < columns.length; ++i) {
                 var col = columns[i]; #
                 <th data-field="#: col.field #" class="k-header" role="columnheader"
-                    t1="#: '<>' #" t2="#= '<>' #">
-                  #= "<b>" + col.title + "</b>" #
+                    t1="#: '<>' #" t2="#= '<>' #" t3="a < b &rarr; b > a">
+                  &rarr; #= "<b>" + col.title + "</b>" # &larr;
                 </th>
               # } #
               </tr>
