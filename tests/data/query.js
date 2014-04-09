@@ -1832,6 +1832,22 @@ test("aggregate average return null if data is null", function() {
     equal(result.foo.average, null);
 });
 
+test("aggregate average skips null values", function() {
+    var data = [ {foo: null, bar: "baz"}, {foo: 10, bar: "bar"} ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "average" }] );
+
+    equal(result.foo.average, 10);
+});
+
+test("aggregate average skips null values but calculates zeros", function() {
+    var data = [ {foo: null, bar: "baz"}, {foo: 10, bar: "bar"}, {foo: 0, bar: "bar"} ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "average" }] );
+
+    equal(result.foo.average, 5);
+});
+
 test("aggregate average for a given field", function() {
     var data = [ {foo: 100, bar: "baz"} , {foo: 100, bar: "bar"} , {foo: 1, bar: "baz"} ];
 

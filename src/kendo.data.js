@@ -1328,12 +1328,13 @@ var __meta__ = {
 
         aggregate: function (aggregates) {
             var idx,
-            len,
-            result = {};
+                len,
+                result = {},
+                state = {};
 
             if (aggregates && aggregates.length) {
                 for(idx = 0, len = this.data.length; idx < len; idx++) {
-                    calculateAggregate(result, aggregates, this.data[idx], idx, len);
+                    calculateAggregate(result, aggregates, this.data[idx], idx, len, state);
                 }
             }
             return result;
@@ -1347,19 +1348,21 @@ var __meta__ = {
         return a === b;
     }
 
-    function calculateAggregate(accumulator, aggregates, item, index, length) {
+    function calculateAggregate(accumulator, aggregates, item, index, length, state) {
         aggregates = aggregates || [];
         var idx,
-        aggr,
-        functionName,
-        len = aggregates.length;
+            aggr,
+            functionName,
+            len = aggregates.length;
 
         for (idx = 0; idx < len; idx++) {
             aggr = aggregates[idx];
             functionName = aggr.aggregate;
             var field = aggr.field;
             accumulator[field] = accumulator[field] || {};
-            accumulator[field][functionName] = functions[functionName.toLowerCase()](accumulator[field][functionName], item, kendo.accessor(field), index, length);
+            state[field] = state[field] || {};
+            state[field][functionName] = state[field][functionName] || {};
+            accumulator[field][functionName] = functions[functionName.toLowerCase()](accumulator[field][functionName], item, kendo.accessor(field), index, length, state[field][functionName]);
         }
     }
 
@@ -1378,8 +1381,12 @@ var __meta__ = {
         count: function(accumulator) {
             return (accumulator || 0) + 1;
         },
-        average: function(accumulator, item, accessor, index, length) {
+        average: function(accumulator, item, accessor, index, length, state) {
             var value = accessor.get(item);
+
+            if (state.count === undefined) {
+                state.count = 0;
+            }
 
             if (!isNumber(accumulator)) {
                 accumulator = value;
@@ -1387,8 +1394,12 @@ var __meta__ = {
                 accumulator += value;
             }
 
+            if (isNumber(value)) {
+                state.count++;
+            }
+
             if(index == length - 1 && isNumber(accumulator)) {
-                accumulator = accumulator / length;
+                accumulator = accumulator / state.count;
             }
             return accumulator;
         },
