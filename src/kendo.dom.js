@@ -64,18 +64,20 @@ var __meta__ = {
         } else {
             node = cached.node;
 
-            if (cached.children.length > length) {
-                length = cached.children.length;
+            var cachedChildren = cached.children;
+
+            if (Math.abs(cachedChildren.length - length) > 2) {
+                cached.remove();
+                this.render(parent, null);
+                return;
             }
 
             for (index = 0; index < length; index++) {
-                var child = children[index];
+                children[index].render(node, cachedChildren[index]);
+            }
 
-                if (child) {
-                    child.render(node, cached.children[index]);
-                } else {
-                    cached.children[index].remove();
-                }
+            for (index = length, length = cachedChildren.length; index < length; index++) {
+                cachedChildren[index].remove();
             }
         }
 
@@ -139,7 +141,7 @@ var __meta__ = {
         return text(this.nodeValue);
     };
 
-      TextNode.prototype.render = function(parent, cached) {
+    TextNode.prototype.render = function(parent, cached) {
         var node;
 
         if (!cached || cached.nodeName !== this.nodeName) {

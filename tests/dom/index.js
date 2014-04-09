@@ -154,6 +154,14 @@
         equal(root.childNodes.length, 1);
     });
 
+    test("render removes existing child nodes", function() {
+        render(root, [element("div", null, [element("span"), element("span") ])]);
+
+        render(root, [element("div", null, [element("span") ])]);
+
+        equal(root.firstChild.childNodes.length, 1);
+    });
+
     test("render removes attributes set via dirrect assignment", function() {
         render(root, [element("div", { id: "foo" })]);
 
@@ -315,5 +323,12 @@
         render(root, [element("div")]);
 
         equal(root.childNodes.length, 1);
+    });
+
+    test("render destroys tree if there are more than two changed children", function() {
+        render(root, [element("div", null, [element("div"), element("div"), element("div"), element("div")])]);
+        var firstChild = root.firstChild.firstChild;
+        render(root, [element("div", null, [element("div")])]);
+        ok(firstChild !== root.firstChild.firstChild);
     });
 }());
