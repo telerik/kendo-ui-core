@@ -128,7 +128,7 @@ def bundle(options)
     xml_changelog_path = "dist/bundles/#{name}.changelog.xml"
     write_changelog(xml_changelog_path, changelog_suites, options[:changelog_exclude])
 
-    product_names = ['Kendo UI Core','Kendo UI Complete', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
+    product_names = ['Kendo UI Core','Kendo UI Professional', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
 
     if options[:upload_as_internal_build]
         versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, 'LIB Archive', VERSION, versioned_bundle_name(name) + ".zip")
@@ -149,47 +149,52 @@ def bundle(options)
         task "internal_builds:bundles:all" => "internal_builds:bundles:#{name}"
     end
     if options[:release_build]
+      if defined? SERVICE_PACK_NUMBER
+        destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}"
+      else
+        destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}"
+      end
 
-     if product_names.length > 0
-          product_names.each_with_index do |val, index| 
-            if val == options[:product]
-               p options[:product]
-               break product_names.delete_at(index)
-            end
-     end
+      versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, destination_folder_name)
+      versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, "Production")
+
+      FileUtils.mkdir_p(versioned_bundle_destination_path)
+
+        desc "Copy #{name} as release build on telerik.com"
+
+        task "release_builds:copy:#{name}" do
+            release_build_file_copy(options[:release_build], name, versioned_bundle_destination_path, versioned_bundle_archive_path)                                
+        end
 
         desc "Upload #{name} as release build on telerik.com"
 
-        task "release_builds:bundles:#{name}" do
-            source_folder = release_build_file_copy(options[:release_build], name) 
-                
-                case options[:product] 
+        task "release_builds:upload:#{name}" =>  "release_builds:copy:#{name}" do
+            p "starting version upload for #{name}"
+            case options[:product] 
                   when "Kendo UI Complete"
                     upload_release_build \
                     :title => versioned_bundle_name(name),
-                    :product => options[:product],
-                    :msi => true,
-                    :common_installer_complete => true,
-                    :archive_path => source_folder 
+                    #:product => options[:product],
+                    :product => "Kendo UI Professional",
+                    :params => options[:release_build],
+                    :archive_path => versioned_bundle_destination_path 
                   when "UI for ASP.NET MVC"
                     upload_release_build \
                     :title => versioned_bundle_name(name),
                     :product => options[:product],
-                    :msi => true,
-                    :common_installer_mvc => true,
+                    :params => options[:release_build],
                     :vs_extension => !!options[:vs_extension],
-                    :nuget => true,
-                    :archive_path => source_folder
+                    :archive_path => versioned_bundle_destination_path
                   else
                     upload_release_build \
                     :title => versioned_bundle_name(name),
                     :product => options[:product],
-                    :archive_path => source_folder 
-                end                            
+                    :params => options[:release_build],
+                    :archive_path => versioned_bundle_destination_path 
+            end   
         end
-     end
         # add bundle to bundles:all
-        task "release_builds:bundles:all" => "release_builds:bundles:#{name}"
+        task "release_builds:bundles:all" => "release_builds:upload:#{name}"
     end
     
 end

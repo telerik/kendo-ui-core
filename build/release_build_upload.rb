@@ -71,11 +71,11 @@ def create_version(bot, options)
       if defined? SERVICE_PACK_NUMBER
         bot.click_and_wait "New Minor","administration"
         fill_version_fields(bot)
-        prepare_files(bot, options)  
+        #prepare_files(bot, options)  
       else
         bot.click_and_wait "New Major","administration"
         fill_version_fields(bot)
-        prepare_files(bot, options)  
+        #prepare_files(bot, options)  
       end
 end
 def fill_version_fields(bot)
@@ -85,7 +85,7 @@ def fill_version_fields(bot)
        bot.driver.execute_script "$('[id$=\"_cbBeta\"]').prop('checked', true)"
 
        bot.find("[value='Save']").click
-       bot.click_and_wait "Copy Files and Save", "administration"
+       bot.click_and_wait "Save", "administration"
 
 end
 def prepare_files(bot, options)
@@ -233,8 +233,8 @@ def upload_file_and_go_back(bot, options)
 
   bot.find("[value='GO TO FILE LIST']").click
 end
-def release_build_file_copy(release_build_config, name)
-    if defined? SERVICE_PACK_NUMBER
+def release_build_file_copy(release_build_config, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
+=begin    if defined? SERVICE_PACK_NUMBER
         destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}"
     else
         destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}"
@@ -245,7 +245,7 @@ def release_build_file_copy(release_build_config, name)
 
 
     FileUtils.mkdir_p(versioned_bundle_destination_path)
-
+=end
     if release_build_config[:zip]
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
