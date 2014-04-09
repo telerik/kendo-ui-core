@@ -704,6 +704,8 @@
     <Compile Include="UI\DataSource\TransportSignalR.cs" />
     <Compile Include="UI\DataSource\WebApiDataSourceRequestAttribute.cs" />
     <Compile Include="UI\DataSource\WebApiDataSourceRequestModelBinder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramBuilder.cs" />
+    <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
     <Compile Include="UI\Diagram\Html\DiagramHtmlBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceModelDescriptorFactory.cs" />
@@ -711,6 +713,8 @@
     <Compile Include="UI\HierarchicalDataSource\Fluent\SignalRHierarchicalDataSourceBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\SignalRHierarchicalDataSourceModelDescriptorFactory.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\SignalRHierarchicalDataSourceSchemaBuilder.cs" />
+    <Compile Include="UI\Map\Fluent\MapBuilder.cs" />
+    <Compile Include="UI\Map\Fluent\MapEventBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxRulesBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxBuilder.cs" />
     <Compile Include="UI\MaskedTextBox\Fluent\MaskedTextBoxEventBuilder.cs" />
@@ -1867,7 +1871,6 @@
     <Compile Include="UI\MobileApplication\Fluent\MobileApplicationEventBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UI\Map\Fluent\MapBuilder.cs" />
     <Compile Include="UI\Map\Settings\MapControlsSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapControlsSettingsBuilder.cs" />
     <Compile Include="UI\Map\Settings\MapControlsNavigatorSettings.cs" />
@@ -1891,7 +1894,6 @@
     <Compile Include="UI\Map\Fluent\MapMarkerFactory.cs" />
     <Compile Include="UI\Map\MapMarker.cs" />
     <Compile Include="UI\Map\Fluent\MapMarkerBuilder.cs" />
-    <Compile Include="UI\Map\Fluent\MapEventBuilder.cs" />
     <Compile Include="UI\Map\Html\MapHtmlBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1926,7 +1928,6 @@
     <Compile Include="UI\Diagram\Diagram.cs" />
     <Compile Include="UI\Diagram\DiagramType.cs" />
     <Compile Include="UI\Diagram\DiagramSubtype.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramConnectionDefaultsSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramConnectionDefaultsSettingsBuilder.cs" />
     <Compile Include="UI\Diagram\Settings\DiagramConnectionDefaultsHoverSettings.cs" />
@@ -1976,7 +1977,6 @@
     <Compile Include="UI\Diagram\Fluent\DiagramShapeConnectorFactory.cs" />
     <Compile Include="UI\Diagram\DiagramShapeConnector.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramShapeConnectorBuilder.cs" />
-    <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\MobileActionSheet\MobileActionSheetType.cs" />
