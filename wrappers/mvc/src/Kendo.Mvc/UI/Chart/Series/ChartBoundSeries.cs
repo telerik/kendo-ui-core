@@ -3,6 +3,7 @@ namespace Kendo.Mvc.UI
     using System;
     using System.Collections;
     using System.Linq.Expressions;
+    using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
 
@@ -36,6 +37,12 @@ namespace Kendo.Mvc.UI
             if (noteTextExpression != null)
             {
                 NoteTextMember = noteTextExpression.MemberWithoutInstance();
+            }
+
+            if (typeof(TModel).IsPlainType())
+            {
+                var metadata = ModelMetadata.FromLambdaExpression(expression, new ViewDataDictionary<TModel>());
+                Name = metadata.DisplayName;
             }
 
             if (string.IsNullOrEmpty(Name))

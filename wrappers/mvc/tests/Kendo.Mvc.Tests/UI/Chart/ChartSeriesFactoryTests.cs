@@ -24,6 +24,20 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Bar_should_set_name_from_expression()
+        {
+            var builder = factory.Bar(s => s.RepSales, null);
+            builder.Series.Name.ShouldEqual("Rep Sales");
+        }
+
+        [Fact]
+        public void Bar_should_not_override_name_from_expression()
+        {
+            var builder = factory.Bar(s => s.RepSales, null).Name("Foo");
+            builder.Series.Name.ShouldEqual("Foo");
+        }
+
+        [Fact]
         public void Bar_should_create_bound_area_series_from_expression_and_category_expression()
         {
             var builder = factory.Bar(s => s.RepSales, null, s => s.Date);
