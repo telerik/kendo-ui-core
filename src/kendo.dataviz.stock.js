@@ -676,7 +676,7 @@ var __meta__ = {
                 minutes: [1],
                 hours: [1],
                 days: [1],
-                weeks: [],
+                weeks: [1],
                 months: [1],
                 years: [1]
             },
@@ -712,15 +712,14 @@ var __meta__ = {
             })
         );
 
-        valueAxes.push({
-            // TODO: Extend navigator.valueAxis
+        valueAxes.push(deepExtend({
             name: NAVIGATOR_AXIS,
             pane: NAVIGATOR_PANE,
             majorGridLines: {
                 visible: false
             },
             visible: false
-        });
+        }, naviOptions.valueAxis));
     };
 
     Navigator.attachSeries = function(options, naviOptions, themeOptions) {
