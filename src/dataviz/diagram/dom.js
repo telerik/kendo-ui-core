@@ -84,6 +84,8 @@
             DEFAULT_CONNECTION_BACKGROUND = "Yellow",
             DEFAULT_CONNECTOR_SIZE = 8,
             DEFAULT_HOVER_COLOR = "#70CAFF",
+            MAX_VALUE = Number.MAX_VALUE,
+            MIN_VALUE = -Number.MAX_VALUE,
             ALL = "all",
             ABSOLUTE = "absolute",
             TRANSFORMED = "transformed",
@@ -1777,11 +1779,11 @@
                 switch (direction.toLowerCase()) {
                     case "left":
                     case "top":
-                        val = Number.MAX_VALUE;
+                        val = MAX_VALUE;
                         break;
                     case "right":
                     case "bottom":
-                        val = Number.MIN_VALUE;
+                        val = MIN_VALUE;
                         break;
                 }
                 for (i = 0; i < items.length; i++) {
