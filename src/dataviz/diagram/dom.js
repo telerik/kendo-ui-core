@@ -2382,7 +2382,7 @@
                 }
 
                 if (!e.field) { // field means any field in the data source has changed - like selected, expanded... We don't have to update in that case.
-                    if (action === "add") {
+                    if (!action || action === "add") {
                         append(node, items);
                     } else if (action === "remove") {
                         //Remove
