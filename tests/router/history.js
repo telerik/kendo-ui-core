@@ -82,6 +82,17 @@
         history.start({ pushState: true });
     });
 
+    test("requests hashbang adapter if given hashbang", 1, function() {
+        stub(history, {
+            createAdapter: function(options) {
+                equal(options.hashBang, true);
+                return adapter;
+            }
+        });
+
+        history.start({ hashBang: true });
+    });
+
     test("requests normalization of the state on start", 1, function() {
         stub(adapter, { normalizeCurrent: function(options) {
             equal(options.pushState, true);
@@ -101,8 +112,22 @@
         stub(adapter, { navigate: function(url) {
             equal(url, "foo");
         }});
+
         history.start();
         history.navigate("foo");
+    });
+
+    test("navigate works with hash bang", 1, function() {
+        stub(adapter, { normalize: function(url) {
+            return url.split("#!")[1];
+        }});
+
+        history.bind("change", function(e) {
+            equal(e.url, "foo");
+        });
+
+        history.start({ hashBang: true });
+        history.navigate("#!foo");
     });
 
     test("does not pushState if identical", 1, function() {
@@ -263,5 +288,19 @@
         history.start();
         history.replace("foo");
     });
+
+    test("ignores null results", 1, function() {
+        history.start();
+        var called = false;
+
+        history.change(function(e) {
+            called = true;
+        });
+
+        adapter.url = null;
+        adapter.callback();
+        ok(!called);
+    });
+
 })();
 
