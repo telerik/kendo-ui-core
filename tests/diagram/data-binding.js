@@ -38,6 +38,18 @@
         equal(diagram.shapes.length, 2);
     });
 
+    test("Binds to flat data", function() {
+        diagram = createDiagram({
+            dataSource: {
+                data: [{
+                    id: "1"
+                }]
+            }
+        });
+
+        equal(diagram.shapes.length, 1);
+    });
+
     test("Binds to hierarchical data (custom field)", function() {
         diagram = createDiagram({
             dataSource: {
@@ -120,6 +132,6 @@
             }
         });
 
-        ok(diagram.shapes[0].dataItem.foo);
+        ok(diagram.shapes[1].dataItem.foo);
     });
 })();
