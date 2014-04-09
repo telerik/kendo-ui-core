@@ -212,6 +212,18 @@
             equal(chart._plotArea.axes[2].options.maxDateGroups, 100);
         });
 
+        test("extends valueAxis options", function() {
+            createStockChart({
+                navigator: {
+                    valueAxis: {
+                        min: 100
+                    }
+                }
+            });
+
+            equal(chart._plotArea.axes[5].options.min, 100);
+        });
+
         // ------------------------------------------------------------
         var support = deepExtend({}, kendo.support);
         var browserOptions = deepExtend({}, kendo.support.browser);
