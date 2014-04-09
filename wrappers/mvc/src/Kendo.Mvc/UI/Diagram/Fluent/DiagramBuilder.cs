@@ -164,6 +164,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="configurator">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Diagram()
+        ///             .Name("diagram")
+        ///             .Events(events => events
+        ///                 .Click("onClick")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DiagramBuilder Events(Action<DiagramEventBuilder> configurator)
+        {
+            configurator(new DiagramEventBuilder(Component.Events));
+
+            return this;
+        }
     }
 }
 
