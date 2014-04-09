@@ -74,6 +74,14 @@
             ok(element[0].parentNode === document.body);
         });
 
+        test("sets k-tooltip class", function(){
+            ok(element.hasClass("k-tooltip"));
+        });
+
+        test("sets k-chart-tooltip class", function(){
+            ok(element.hasClass("k-chart-tooltip"));
+        });
+
         test("renders div with display none attribute", function() {
             ok(element.css("display"), "none");
         });
@@ -200,9 +208,11 @@
             tooltip.options.offsetY = 0;
             tooltip.move();
 
-            deepEqual([parseInt(tooltip.element.css("left"), 10),
-                  parseInt(tooltip.element.css("top"), 10)],
-                  [10, 20]);
+            var chartOffset = chartElement.offset();
+            var tooltipOffset = tooltip.element.offset();
+
+            equal(tooltipOffset.left, chartOffset.left + tooltip.anchor.x);
+            equal(tooltipOffset.top, chartOffset.top + tooltip.anchor.y);
         });
 
         test("tooltipAnchor receives correct tooltip size", function() {
@@ -230,9 +240,11 @@
             tooltip.options.animation.duration = 0;
             tooltip.move();
 
-            deepEqual([parseInt(tooltip.element.css("left"), 10),
-                  parseInt(tooltip.element.css("top"), 10)],
-                  [20, 40]);
+            var chartOffset = chartElement.offset();
+            var tooltipOffset = tooltip.element.offset();
+
+            equal(tooltipOffset.left, chartOffset.left + tooltip.anchor.x + 10);
+            equal(tooltipOffset.top, chartOffset.top + tooltip.anchor.y + 20);
         });
 
         test("applies format from the series", function() {
@@ -280,13 +292,13 @@
         test("removes inverse css class if backgorund is bright", function() {
             tooltip._updateStyle({ background: "#000" }, {});
 
-            ok(!tooltip.element.hasClass("k-tooltip-inverse"));
+            ok(!tooltip.element.hasClass("k-chart-tooltip-inverse"));
         });
 
         test("sets inverse css class if backgorund is dark", function() {
             tooltip._updateStyle({ background: "#fff" }, {});
 
-            ok(tooltip.element.hasClass("k-tooltip-inverse"));
+            ok(tooltip.element.hasClass("k-chart-tooltip-inverse"));
         });
 
         // ------------------------------------------------------------

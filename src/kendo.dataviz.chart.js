@@ -200,7 +200,7 @@ var __meta__ = {
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
         TOOLTIP_HIDE_DELAY = 100,
-        TOOLTIP_INVERSE = "tooltip-inverse",
+        TOOLTIP_INVERSE = "chart-tooltip-inverse",
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
@@ -9413,7 +9413,7 @@ var __meta__ = {
             tooltip.template = BaseTooltip.template;
             if (!tooltip.template) {
                 tooltip.template = BaseTooltip.template = renderTemplate(
-                    "<div class='" + CSS_PREFIX + "tooltip' " +
+                    "<div class='" + CSS_PREFIX + "tooltip " + CSS_PREFIX + "chart-tooltip' " +
                     "style='display:none; position: absolute; font: #= d.font #;" +
                     "border: #= d.border.width #px solid;" +
                     "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);'>" +
