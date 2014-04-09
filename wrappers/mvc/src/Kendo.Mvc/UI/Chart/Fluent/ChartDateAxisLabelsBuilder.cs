@@ -56,7 +56,11 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .CategoryAxis(axis => axis
         ///                .Date()
         ///                .Categories(sale => sale.Date)
-        ///                .Labels(labels => labels.Culture(new CultureInfo("es-ES")))
+        ///                .Labels(labels => labels
+        ///                    .DateFormats(formats => formats
+        ///                        .Days("dd")
+        ///                    )
+        ///                )
         ///            )
         /// %&gt;
         /// </code>
