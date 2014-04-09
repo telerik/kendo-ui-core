@@ -276,7 +276,7 @@ var __meta__ = {
         },
 
         _startHistory: function() {
-            this.router = new kendo.Router({ pushState: this.options.pushState, root: this.options.root });
+            this.router = new kendo.Router({ pushState: this.options.pushState, root: this.options.root, hashBang: this.options.hashBang });
             this.pane.bindToRouter(this.router);
             this.router.start();
         },

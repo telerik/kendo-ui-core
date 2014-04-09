@@ -80,8 +80,8 @@
         location.hash = "qux";
     });
 
-    test("normalize returns the same URL", 1, function() {
-        equal(adapter.normalize("foo"), "foo");
+    test("normalize strips the #", 1, function() {
+        equal(adapter.normalize("#foo"), "foo");
     });
 
     asyncTest("replace changes the location hash and keeps the history length", 2, function() {
@@ -127,5 +127,47 @@
     test("normalizeCurrent will not touch anything if started from the root", 1, function() {
         ok(!adapter.normalizeCurrent({ pushState: true, root: location.pathname }));
     });
-})();
 
+    module("History hash adapter (hashbang mode)", {
+        setup: function() {
+            adapter = new Adapter(true);
+        },
+
+        teardown: function() {
+            adapter.stop();
+        }
+    });
+
+    asyncTest("reads the current URL from the hash", 1, function() {
+        onHash(function() {
+            start();
+            equal(adapter.current(), "foo");
+        });
+        location.hash = "!foo";
+    });
+
+    asyncTest("navigating changes the location hash", 1, function() {
+        onHash(function() {
+            start();
+            equal(location.hash, "#!bar");
+        });
+        adapter.navigate("bar");
+    });
+
+    asyncTest("navigating accepts hash string too", 1, function() {
+        onHash(function() {
+            start();
+            equal(location.hash, "#!bar1");
+        });
+        adapter.navigate("#!bar1");
+    });
+
+    asyncTest("navigating to non-hashbang url returns null", 1, function() {
+        adapter.change(function(e) {
+            start();
+            ok(adapter.current() === null);
+        });
+
+        location.hash = "qux";
+    });
+})();
