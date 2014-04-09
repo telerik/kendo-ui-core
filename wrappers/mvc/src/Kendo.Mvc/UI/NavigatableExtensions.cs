@@ -169,7 +169,7 @@ namespace Kendo.Mvc.UI
             var url = urlGenerator.Generate(viewContext.RequestContext, navigatable);
             var currentRoute = new UrlHelper(viewContext.RequestContext).RouteUrl(viewContext.RequestContext.RouteData.Values);
             
-            return url.IsCaseInsensitiveEqual(currentUrl) || url.IsCaseInsensitiveEqual(currentRoute);
+            return !string.IsNullOrEmpty(url) && (url.IsCaseInsensitiveEqual(currentUrl) || url.IsCaseInsensitiveEqual(currentRoute));
         }
 
         /// <summary>
