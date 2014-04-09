@@ -433,7 +433,7 @@ var __meta__ = {
                 noWhitespace  : true
             }, options);
             var output = new OutputStream();
-            html();
+            readHtml();
             return output.get();
 
             function croak(msg) {
@@ -441,7 +441,7 @@ var __meta__ = {
                 throw new Error(msg);
             }
 
-            function html() {
+            function readHtml() {
                 var str = "", m;
                 function dump(nextParser, arg) {
                     if (str) {
