@@ -132,6 +132,6 @@
             }
         });
 
-        ok(diagram.shapes[0].dataItem.foo);
+        ok(diagram.shapes[1].dataItem.foo);
     });
 })();
