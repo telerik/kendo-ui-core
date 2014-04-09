@@ -391,7 +391,7 @@ var __meta__ = {
         update: {
             text: "Update",
             imageClass: "k-update",
-            className: "k-grid-update",
+            className: "k-primary k-grid-update",
             iconClass: "k-icon"
         },
         canceledit: {
