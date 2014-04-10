@@ -597,10 +597,6 @@ var __meta__ = {
                 buffer,
                 footer;
 
-            if (this.dataSource) {
-                this._unbindDataSource();
-            }
-
             this.dataSource = dataSource;
 
             pageSize = dataSource.pageSize() || options.virtualViewSize;
@@ -669,10 +665,6 @@ var __meta__ = {
         reset: function() {
             this.buffer.range(0);
             this.list.refresh();
-        },
-
-        _unbindDataSource: function() {
-            // TODO:
         }
     });
 
@@ -697,7 +689,9 @@ var __meta__ = {
             });
         },
 
-        destroy: function() { },
+        destroy: function() {
+            this._unbindDataSource();
+        },
 
         reset: function() { },
 

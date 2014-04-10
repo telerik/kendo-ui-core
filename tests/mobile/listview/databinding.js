@@ -6,7 +6,9 @@
 
         },
         teardown: function() {
-            listView.destroy();
+            if (listView) {
+                listView.destroy();
+            }
         }
     });
 
@@ -18,6 +20,22 @@
         });
 
         equal(dom.children().length, 2);
+    });
+
+
+    test("destroy unbinds from datasource events", function() {
+        var dom = $("<ul/>"),
+            ds = new kendo.data.DataSource({ data: [1, 2]});
+
+        listView = new ListView(dom, {
+            dataSource: ds
+        });
+
+        listView.destroy();
+        ds.add(3);
+
+        equal(dom.children().length, 2);
+        listView = null;
     });
 
     test("binds to datasource referenced by data attribute", function() {
