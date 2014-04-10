@@ -20,7 +20,7 @@ border:0;
 html {
     font: 75% 'Droid Sans', sans-serif;
     height: 100%;
-    background: #0c0c0c url('images/background-image.png')repeat left top;
+    background: #0c0c0c url('images/background-image.png') repeat left top;
 }
 
 h1, h2, h3, #main-nav, #main-nav li, ul, ul li {
