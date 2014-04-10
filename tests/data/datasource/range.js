@@ -1251,6 +1251,19 @@ test("ranges are updated when model is removed after range is called - with loca
     equal(dataSource.data().length, 46);
 });
 
+test("grand total aggregates are calculated with local data", function() {
+    var dataSource = new DataSource( {
+        pageSize: 10,
+        aggregate: [ { field: "bar", aggregate: "count" } ],
+        data: [{ id:1, bar: "foo" },{ id: 2, bar: "foo" }]
+    } );
+
+    dataSource.read();
+    dataSource.range(0, 1);
+
+    equal(dataSource.aggregates().bar.count, 2);
+});
+
 /*test("ranges are updated when model is added after range is called - with local binding", function() {
     var totalCount = 47,
         dataSource = new DataSource({
