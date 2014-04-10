@@ -1635,12 +1635,12 @@
                             }
                         }
                     }
+
                     if (Utils.isBoolean(itemsOrRect)) {
                         if (itemsOrRect !== false) {
                             this.select(ALL);
                         }
-                    }
-                    else if (itemsOrRect instanceof Rect) {
+                    } else if (itemsOrRect instanceof Rect) {
                         rect = itemsOrRect;
                         items = this.shapes.concat(this.connections);
                         for (i = 0; i < items.length; i++) {
