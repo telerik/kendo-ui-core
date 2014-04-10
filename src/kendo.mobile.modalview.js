@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.mobile.shim" ], f);
+    define([ "./kendo.mobile.shim", "./kendo.mobile.view" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "ModalView",
     category: "mobile",
     description: "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
-    depends: [ "mobile.shim" ]
+    depends: [ "mobile.shim", "mobile.view" ]
 };
 
 (function($, undefined) {
