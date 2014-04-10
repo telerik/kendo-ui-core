@@ -28,20 +28,5 @@
         - longDashDotDot - a line consisting of a repeating pattern of long-dash-dot-dot
         - solid - a solid line
 
-    - :name: connectors.name
-      :type: String
-      :description:
-      :default: ConnectorName.Auto
-      :values:
-          - Auto - Connector positioned in the center of the shape.
-          - Top - Connector positioned in the middle of the topside of the shape.
-          - TopLeft - Connector positioned an the top-left corner of the shape.
-          - TopRight - Connector positioned an the top-right corner of the shape.
-          - Left - Connector positioned in the middle of the left side of the shape.
-          - Right - Connector positioned in the middle of the right side of the shape.
-          - Bottom - Connector positioned in the middle of the bottom side of the shape.
-          - BottomLeft - Connector positioned an the bottom-left corner of the shape.
-          - BottomRight - Connector positioned an the bottom-left corner of the shape.
-
     - :name: content
       :type: kendo.dataviz.diagram.Shape.Content

@@ -40,17 +40,6 @@
     - :name: from.connector
       :type: String
       :description: Defines a specific connector from the shape to connect to.
-      :default: ConnectorName.Auto
-      :values:
-          - Auto - Connector positioned in the center of the shape.
-          - Top - Connector positioned in the middle of the topside of the shape.
-          - TopLeft - Connector positioned an the top-left corner of the shape.
-          - TopRight - Connector positioned an the top-right corner of the shape.
-          - Left - Connector positioned in the middle of the left side of the shape.
-          - Right - Connector positioned in the middle of the right side of the shape.
-          - Bottom - Connector positioned in the middle of the bottom side of the shape.
-          - BottomLeft - Connector positioned an the bottom-left corner of the shape.
-          - BottomRight - Connector positioned an the bottom-left corner of the shape.
 
     - :name: to
       :type: Object
@@ -63,26 +52,9 @@
     - :name: to.connector
       :type: String
       :description: Defines a specific connector from the shape to connect to.
-      :default: ConnectorName.Auto
-      :values:
-          - Auto - Connector positioned in the center of the shape.
-          - Top - Connector positioned in the middle of the topside of the shape.
-          - TopLeft - Connector positioned an the top-left corner of the shape.
-          - TopRight - Connector positioned an the top-right corner of the shape.
-          - Left - Connector positioned in the middle of the left side of the shape.
-          - Right - Connector positioned in the middle of the right side of the shape.
-          - Bottom - Connector positioned in the middle of the bottom side of the shape.
-          - BottomLeft - Connector positioned an the bottom-left corner of the shape.
-          - BottomRight - Connector positioned an the bottom-left corner of the shape.
 
     - :name: from
       :type: kendo.dataviz.diagram.Connection.EndPoint
 
     - :name: to
       :type: kendo.dataviz.diagram.Connection.EndPoint
-
-    - :name: from.connector
-      :type: kendo.dataviz.diagram.Connector.Name
-
-    - :name: to.connector
-      :type: kendo.dataviz.diagram.Connector.Name
