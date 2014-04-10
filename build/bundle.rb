@@ -160,16 +160,23 @@ def bundle(options)
 
       FileUtils.mkdir_p(versioned_bundle_destination_path)
 
+      copy_done = nil
+
         desc "Copy #{name} as release build on telerik.com"
 
         task "release_builds:copy:#{name}" do
-            release_build_file_copy(options[:release_build], name, versioned_bundle_destination_path, versioned_bundle_archive_path)                                
+            p ">>starting file copy for #{name}"
+            release_build_file_copy(options[:release_build], name, versioned_bundle_destination_path, versioned_bundle_archive_path) 
+
+            if "#{name}" == "core"
+                copy_done = nil
+            end
         end
 
         desc "Upload #{name} as release build on telerik.com"
 
         task "release_builds:upload:#{name}" =>  "release_builds:copy:#{name}" do
-            p "starting version upload for #{name}"
+            p ">>starting version upload for #{name}"
             case options[:product] 
                   when "Kendo UI Complete"
                     upload_release_build \

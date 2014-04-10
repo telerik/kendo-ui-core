@@ -60,22 +60,30 @@ def upload_release_build(options)
     #bot.wait_for_title "product"
 
     #Thread.current.send :sleep, 3
+=begin
+    if TEMP_PRODUCT_NAME_REFERENCE == nil
+          TEMP_PRODUCT_NAME_REFERENCE = "#{name}".slice(0..(str.index('.')))
+          p TEMP_PRODUCT_NAME_REFERENCE
 
-    create_version(bot, options) 
-    
+          create_version(bot, options[:product]) 
+          prepare_files(bot, options)
+    else
+      TEMP_PRODUCT_NAME_REFERENCE = nil
+
+      prepare_files(bot, options)
+    end
+=end    
 end
-def create_version(bot, options)
-      bot.click_and_wait options[:product], "administration"
+def create_version(bot, product_name)
+      bot.click_and_wait product_name, "administration"
       bot.click_and_wait "Manage Versions", "administration"
 
       if defined? SERVICE_PACK_NUMBER
         bot.click_and_wait "New Minor","administration"
-        fill_version_fields(bot)
-        #prepare_files(bot, options)  
+        fill_version_fields(bot) 
       else
         bot.click_and_wait "New Major","administration"
-        fill_version_fields(bot)
-        #prepare_files(bot, options)  
+        fill_version_fields(bot)  
       end
 end
 def fill_version_fields(bot)
@@ -86,34 +94,48 @@ def fill_version_fields(bot)
 
        bot.find("[value='Save']").click
        bot.click_and_wait "Save", "administration"
+       bot.find("[value='Manage files']").click
 
 end
 def prepare_files(bot, options)
-  #todo
   #bot.driver.execute_script "window.location = $('a:contains(\"commercial.zip\")').attr(\"href\")"
 
   #msi files
-  if options[:msi]
-    element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.msi')]")
-    element.click
+  release_config = options[:params]
+  file_metadata = release_config[:file_metadata]
 
-    options[:file_name] = options[:title] + ".msi"
-    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
+  if file_metadata[:msi]
+    
+    file_fields = file_metadata[:msi]
+    bot.driver.click_and_wait "Add new file", "administration"
+
+    bot.driver.execute_script "$('[id$=\"_txtFieldText\"]').val('#{file_fields[:label]}')" 
+    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')" 
+    bot.fill_in('File Category:', '#{file_fields[:file_category]}')
 
     p "Setting filename..."
-    p "#{options[:file_name]}"
-    upload_file_and_go_back(bot, options)
+    upload_file_and_go_back(bot, options[:archive_path], file_fields[:download_name], true)
 
+    bot.fill_in('File type:', '#{file_fields[:file_type]}')
+    bot.fill_in('Extension:', '#{file_fields[:extension]}')
 
-    element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.msi')]")
-    element.click
+    file_markers = file_fields[:file_markers]
+    file_markers.each { |fn| bot.find("[text='" + fn + "']").click  }
+ 
+    websites = file_fields[:websites]
+    websites.each { |ws| bot.find("[text='" + ws + "']").click  }
 
-    options[:file_name] = options[:title].sub "commercial", "trial" + ".msi"
-    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
+    bot.driver.execute_script "$('[id$=\"_efDownloadMessage_reFieldText\"]').set_html('#{file_fields[:download_message]}')" 
+    bot.driver.execute_script "$('[id$=\"_efWhatsIncluded_reFieldText\"]').set_html('#{file_fields[:whats_included_message]}')" 
 
-    upload_file_and_go_back(bot, options)
+    bot.find("[value='Save']").click
 
-    options[:msi] = nil
+    p "Saving..."
+
+    #Thread.current.send :sleep, 10
+
+    bot.find("[value='GO TO FILE LIST']").click
+
   end
   
   #zip files
@@ -200,38 +222,24 @@ def prepare_files(bot, options)
   end
 
 end
-def upload_file_and_go_back(bot, options)
-  full_path = File.expand_path(options[:archive_path] + "/" + options[:file_name], File.join(File.dirname(__FILE__), ".."))
+def upload_file_and_go_back(bot, dirpath, filename, isMsi)
+  full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
   p "#{full_path}"
   element = bot.driver.find_element(:xpath, "//input[contains(@id,'rdFileUploadfile0')]")
   element.send_keys(full_path)
 
-  #p full_path
-
   p "msi uploaded"
 
-  if options[:msi]
-    #p full_path
-    options[:file_name] = options[:file_name].sub! "msi", "xml"
+  if isMsi
     p "Setting xml filename..."
-    p "#{options[:file_name]}"
 
-    full_path = File.expand_path(options[:archive_path] + "/" + options[:file_name], File.join(File.dirname(__FILE__), ".."))
+    full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
 
     p "#{full_path}"
     element = bot.driver.find_element(:xpath, "//input[contains(@id,'rdXMLConfigFileUploadfile0')]")
     element.send_keys(full_path)
     p "xml uploaded"   
   end
-  #Thread.current.send :sleep, 10
-
-  bot.find("[value='Save']").click
-
-  p "Saving..."
-
-  #Thread.current.send :sleep, 10
-
-  bot.find("[value='GO TO FILE LIST']").click
 end
 def release_build_file_copy(release_build_config, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
 =begin    if defined? SERVICE_PACK_NUMBER
