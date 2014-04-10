@@ -3116,12 +3116,16 @@ var __meta__ = {
                 var paging = that.options.serverPaging;
                 var sorting = that.options.serverSorting;
                 var filtering = that.options.serverFiltering;
+                var aggregates = that.options.serverAggregates;
                 try {
                     that.options.serverPaging = true;
                     if (!that._isServerGrouped() && !(that.group() && that.group().length)) {
                         that.options.serverSorting = true;
                     }
                     that.options.serverFiltering = true;
+                    that.options.serverPaging = true;
+                    that.options.serverAggregates = true;
+
                     if (paging) {
                         that._data = data = that._observe(data);
                     }
@@ -3130,6 +3134,7 @@ var __meta__ = {
                     that.options.serverPaging = paging;
                     that.options.serverSorting = sorting;
                     that.options.serverFiltering = filtering;
+                    that.options.serverAggregates = aggregates;
                 }
 
                 return;
