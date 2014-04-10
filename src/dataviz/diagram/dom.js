@@ -1620,20 +1620,14 @@
              * @returns {Array}
              */
             select: function (itemsOrRect, options) {
-                var i, item, items, rect, selected, deselected, valueString;
+                var i, item, items, rect, selected, valueString;
                 options = deepExtend({  addToSelection: false }, options);
                 var addToSelection = options.addToSelection;
                 if (itemsOrRect !== undefined) {
                     this._internalSelection = true;
-                    deselected = [];
                     selected = [];
                     if (!addToSelection) {
-                        while (this._selectedItems.length > 0) {
-                            item = this._selectedItems[0];
-                            if (item.select(false)) {
-                                deselected.push(item);
-                            }
-                        }
+                        this.deselect();
                     }
 
                     if (Utils.isBoolean(itemsOrRect)) {
@@ -1679,14 +1673,33 @@
                         }
                     }
 
-                    if (selected.length > 0 || deselected.length > 0) {
-                        this._selectionChanged(selected, deselected);
+                    if (selected.length > 0) {
+                        this._selectionChanged(selected, []);
                     }
 
                     this._internalSelection = false;
-                }
-                else {
+                } else {
                     return this._selectedItems; // returns all selected items.
+                }
+            },
+
+            deselect: function(item) {
+                var deselected = [];
+
+                if (item instanceof Array) {
+                    deselected = item;
+                } else if (item instanceof DiagramElement) {
+                    deselected.push(item);
+                } else if (!isDefined(item)) {
+                    deselected = this._selectedItems.slice(0);
+                }
+
+                if (deselected.length) {
+                    for (var i = 0; i < deselected.length; i++) {
+                        deselected[i].select(false);
+                    }
+
+                    this._selectionChanged([], deselected);
                 }
             },
             /**
@@ -2143,7 +2156,7 @@
                 }
             },
             _selectionChanged: function (selected, deselected) {
-                this.trigger(SELECT, {selected: selected, deselected: deselected});
+                this.trigger(SELECT, { selected: selected, deselected: deselected });
             },
             _getValidZoom: function (zoom) {
                 return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?

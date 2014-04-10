@@ -74,6 +74,8 @@
                     height: 100
                 }]
             }).getKendoDiagram();
+            // make all items selected
+            diagram.select(true);
         },
         teardown: function () {
             diagram.destroy();
@@ -81,7 +83,20 @@
     });
 
     test("deselect all array items", function () {
-        diagram.select(false);
+        diagram.deselect(diagram.shapes);
+        $.each(diagram.shapes, function() {
+            ok(this.isSelected === false);
+        });
+    });
+
+    test("deselect item", function () {
+        var item = diagram.shapes[0]
+        diagram.deselect(item);
+        ok(item.isSelected === false);
+    });
+
+    test("deselect all items", function () {
+        diagram.deselect();
         $.each(diagram.shapes, function() {
             ok(this.isSelected === false);
         });
