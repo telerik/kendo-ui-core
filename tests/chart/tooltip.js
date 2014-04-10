@@ -1,24 +1,33 @@
 (function() {
-    var dataviz = kendo.dataviz,
-        TOLERANCE = 1;
+    var dataviz = kendo.dataviz;
+    var chartElement;
+    var tooltip;
+    var TOLERANCE = 1;
+
+
+    function destroyTooltip() {
+        if (tooltip) {
+            tooltip.destroy();
+        }
+
+        if (chartElement) {
+            chartElement.remove();
+        }
+    }
 
     (function() {
-        var tooltip,
-            element,
-            chartElement,
+        var element,
             pointMock,
             RED = "rgb(255,0,0)",
             GREEN = "rgb(0,255,0)",
             BLUE = "rgb(0,0,255)";
 
         function createTooltip(options) {
+            destroyTooltip();
+
             chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
             tooltip = new dataviz.Tooltip(chartElement, options);
             element = tooltip.element;
-        }
-
-        function destroyTooltip() {
-            chartElement.remove();
         }
 
         function showTooltip() {
@@ -72,6 +81,12 @@
 
         test("attaches to body", function() {
             ok(element[0].parentNode === document.body);
+        });
+
+        test("detaches from body on destroy", function() {
+            tooltip.destroy();
+
+            equal($(".k-chart-tooltip").length, 0);
         });
 
         test("sets k-tooltip class", function(){
@@ -339,9 +354,7 @@
     })();
 
     (function() {
-        var tooltip,
-            chartElement,
-            plotArea,
+        var plotArea,
             point;
 
         function createPlotArea() {
@@ -368,12 +381,10 @@
             createPlotArea();
             createPoint();
 
+            destroyTooltip();
+
             chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
             tooltip = new dataviz.SharedTooltip(chartElement, plotArea, options);
-        }
-
-        function destroyTooltip() {
-            chartElement.remove();
         }
 
         function createPoint(options) {
@@ -404,7 +415,8 @@
         module("Shared Tooltip", {
             setup: function() {
                 createTooltip();
-            }
+            },
+            teardown: destroyTooltip
         });
 
         test("shows shared tooltip", function() {

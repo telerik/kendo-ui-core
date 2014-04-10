@@ -1305,6 +1305,10 @@ var __meta__ = {
                     selections.shift().destroy();
                 }
             }
+
+            if (chart._tooltip) {
+                chart._tooltip.destroy();
+            }
         }
     });
     deepExtend(Chart.fn, dataviz.ExportMixin);
@@ -9423,6 +9427,15 @@ var __meta__ = {
 
             tooltip.element = $(tooltip.template(tooltip.options)).appendTo(document.body);
             tooltip._moveProxy = proxy(tooltip.move, tooltip);
+        },
+
+        destroy: function() {
+            clearTimeout(this.showTimeout);
+
+            if (this.element) {
+                this.element.remove();
+                this.element = null;
+            }
         },
 
         options: {

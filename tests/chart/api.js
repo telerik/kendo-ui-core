@@ -234,6 +234,11 @@
             ok(!$("#container").data("kendoChart"));
         });
 
+        test("destroys tooltip", function() {
+            chart._tooltip = { destroy: function() { ok(true); }};
+            chart.destroy();
+        });
+
         test("unbinds click from DOM container", function() {
             chart.destroy();
             ok(!($("#container").data("events") || {}).click);
