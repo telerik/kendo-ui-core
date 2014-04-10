@@ -973,6 +973,34 @@
         ok(grid.lockedTable.find("tbody tr:eq(0)").hasClass("k-state-selected"));
         ok(grid.table.find("tbody tr:eq(0)").hasClass("k-state-selected"));
     });
+
+    test("select locked row selects not locked rows", function() {
+        var grid = setup({
+            selectable: "row",
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.select(grid.lockedTable.find("tbody tr:eq(0)"));
+
+        ok(grid.lockedTable.find("tbody tr:eq(0)").hasClass("k-state-selected"));
+        ok(grid.table.find("tbody tr:eq(0)").hasClass("k-state-selected"));
+    });
+
+    test("select unlocked row selects locked rows", function() {
+        var grid = setup({
+            selectable: "row",
+            columns: [
+                { field: "foo", locked: true }
+            ]
+        });
+
+        grid.select(grid.table.find("tbody tr:eq(0)"));
+
+        ok(grid.lockedTable.find("tbody tr:eq(0)").hasClass("k-state-selected"));
+        ok(grid.table.find("tbody tr:eq(0)").hasClass("k-state-selected"));
+    });
 })();
 
 /*
