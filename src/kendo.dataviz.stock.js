@@ -772,7 +772,7 @@ var __meta__ = {
                 hint.template = hint.template = renderTemplate(
                     "<div class='" + CSS_PREFIX + "navigator-hint' " +
                     "style='display: none; position: absolute; top: 1px; left: 1px;'>" +
-                        "<div class='" + CSS_PREFIX + "tooltip'>&nbsp;</div>" +
+                        "<div class='" + CSS_PREFIX + "tooltip " + CSS_PREFIX + "chart-tooltip'>&nbsp;</div>" +
                         "<div class='" + CSS_PREFIX + "scroll' />" +
                     "</div>"
                 );
