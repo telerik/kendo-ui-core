@@ -973,7 +973,7 @@ var __meta__ = {
                 highlight = chart._highlight,
                 i;
 
-            if (e.relatedTarget) {
+            if (e.relatedTarget && tooltip && e.relatedTarget !== tooltip.element[0]) {
                 for (i = 0; i < crosshairs.length; i++) {
                     crosshairs[i].hide();
                 }
