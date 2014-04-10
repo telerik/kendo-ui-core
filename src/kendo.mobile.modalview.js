@@ -56,6 +56,7 @@ var __meta__ = {
                 that.shim.shim.on("click", false);
             }
 
+            that._id();
             that._layout();
             that._scroller();
             that._model();
