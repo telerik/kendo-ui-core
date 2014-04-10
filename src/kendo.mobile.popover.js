@@ -204,6 +204,7 @@ var __meta__ = {
             }, this.options.popup);
 
             that.popup = new Popup(that.element, popupOptions);
+            that.popup.overlay.on("move", false);
 
             that.pane = new ui.Pane(that.element, this.options.pane);
             that.pane.navigateToInitial();
