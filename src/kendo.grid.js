@@ -2574,6 +2574,13 @@ var __meta__ = {
                     selectable.clear();
                     items = items.first();
                 }
+
+                if (that._isLocked()) {
+                    items = items.add(items.map(function() {
+                        return that._relatedRow(this);
+                    }));
+                }
+
                 selectable.value(items);
                 return;
             }
