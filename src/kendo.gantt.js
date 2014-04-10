@@ -1,13 +1,13 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.gantt.timeline"], f);
+    define([ "./kendo.data", "./kendo.gantt.timeline", "./kendo.gantt.list"], f);
 })(function(){
 
 var __meta__ = {
     id: "gantt",
     name: "Gantt",
     category: "web",
-    description: "The Gantt-chart component.",
-    depends: [ "data", "gantt.timeline" ]
+    description: "The Gantt component.",
+    depends: [ "data", "gantt.timeline", "gantt.list" ]
 };
 
 (function($, undefined) {
@@ -439,6 +439,7 @@ var __meta__ = {
             this._wrapper();
 
             this._timeline();
+            this._list();
 
             this._dataSource();
 
@@ -472,8 +473,8 @@ var __meta__ = {
             this.wrapper = this.element
                             .addClass("k-widget k-gantt")
                             .append("<div class='k-gantt-toolbar'>")
-                            .append("<div class='k-gantt-layout'>")
-                            .append("<div class='k-gantt-layout'><div class='k-widget k-gantt-timeline'></div></div>");
+                            .append("<div class='k-gantt-layout k-gantt-treelist'><div class='k-grid k-widget'></div></div>")
+                            .append("<div class='k-gantt-timeline'>");
 
             if (height) {
                 this.wrapper.height(height);
@@ -484,10 +485,27 @@ var __meta__ = {
             }
         },
 
-        _timeline: function() {
+        _list: function() {
+            var options = this.options;
+            var listOptions = options.list || { columns: [] };
+
+            this.list = new kendo.ui.GanttList(this.wrapper.find(".k-gantt-treelist > .k-grid"), listOptions);
+        },
+
+		_timeline: function() {
             var element = this.wrapper.find(".k-gantt-timeline");
 
             this.timeline = new kendo.ui.GanttTimeline(element, trimOptions(extend(true, {}, this.options)));
+        },
+
+        _bindWidgets: function() {
+            var list = this.list;
+
+            var updateHandler = function(e) {
+
+            };
+
+            list.bind("update", updateHandler);
         },
 
         _dataSource: function() {
@@ -534,6 +552,7 @@ var __meta__ = {
                 return;
             }
 
+            this.list._refresh(dataSource.taskTree());
             this.timeline.render(dataSource.taskTree(), dataSource._range());
 
             this.trigger("dataBound");

@@ -1,7 +1,8 @@
 (function() {
 
     var element;
-    var Gantt = kendo.ui.Gantt;
+    var ui = kendo.ui;
+    var Gantt = ui.Gantt;
 
     module("gantt initialization", {
         setup: function() {
@@ -16,6 +17,13 @@
         element.kendoGantt();
 
         ok(element.data("kendoGantt") instanceof Gantt);
+    });
+
+    test("kendoGantt creates GanttList widget", function() {
+        element.kendoGantt();
+
+        ok(element.data("kendoGantt").list);
+        ok(element.data("kendoGantt").list instanceof ui.GanttList);
     });
 
     test("css classes are added to the wrapper", function() {
