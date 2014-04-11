@@ -376,6 +376,28 @@
         equal(scheduler.dataSource.at(0).start.getDate(), 6);
     });
 
+    test("moving event in day view honours DST", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2014/3/30"),
+            startTime: new Date("2014/3/30"),
+            dataSource: [
+                { start: new Date("2014/3/30"), end: new Date("2014/3/30 00:30"), title: "" }
+            ]
+        });
+
+        var handle = div.find(".k-event");
+
+        var slots = div.find(".k-scheduler-content td");
+
+        dragdrop(scheduler, handle, slots.eq(5));
+
+        equal(scheduler.dataSource.at(0).start.getHours(), 2);
+        equal(scheduler.dataSource.at(0).start.getMinutes(), 30);
+
+        equal(scheduler.dataSource.at(0).end.getHours(), 4);
+        equal(scheduler.dataSource.at(0).end.getMinutes(), 00);
+    });
+
     test("moving event pass the end of the view when the view ends at 12:00 AM", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
