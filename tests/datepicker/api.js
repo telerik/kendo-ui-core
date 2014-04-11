@@ -218,6 +218,22 @@ test("value method should parse value", function() {
     equal(+datepicker.value(), +value);
 });
 
+test("value method can set 1/1/1970", function() {
+    var date = new Date(1970, 0, 1);
+    var hours = (date.getTimezoneOffset() / 60) * -1;
+    var minutes = hours % 1;
+    if (minutes) {
+        minutes = 60 * minutes;
+    }
+    date.setHours(hours, minutes, 0);
+
+    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+    datepicker.value(date);
+
+    deepEqual(datepicker.dateView._value, date);
+});
+
 test("_change should set value if it was changed", function() {
     datepicker = input.kendoDatePicker().data("kendoDatePicker");
     datepicker._change("10/22/2000");

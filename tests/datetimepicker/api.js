@@ -695,6 +695,22 @@ test("value method does not show text representation of invalid value", function
     equal(input.val(), "");
 });
 
+test("value method can set 1/1/1970", function() {
+    var date = new Date(1970, 0, 1);
+    var hours = (date.getTimezoneOffset() / 60) * -1;
+    var minutes = hours % 1;
+    if (minutes) {
+        minutes = 60 * minutes;
+    }
+    date.setHours(hours, minutes, 0);
+
+    datepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+    datepicker.value(date);
+
+    deepEqual(datepicker.dateView._value, date);
+});
+
 test("setOptions method sets correct timeView min/max values", function() {
     var date = new Date(2013, 10, 10, 1, 30);
     var min = new Date(2013, 10, 9, 23, 30);
