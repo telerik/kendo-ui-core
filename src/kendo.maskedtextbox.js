@@ -49,6 +49,7 @@ var __meta__ = {
 
                     if (!element.val()) {
                         DOMElement.value = that._old = that._emptyMask;
+                        caret(element, 0);
                     } else {
                         that._timeoutId = setTimeout(function() {
                             element.select();
