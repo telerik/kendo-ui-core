@@ -882,4 +882,30 @@
 
         ok(grid.table.find("tr:first td:last input").length);
     });
+
+    test("dirty flag is shown on locked columns", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "name" }
+            ],
+            dataSource: new DataSource({
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            foo: "foo"
+                        }
+                    }
+                },
+                data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+            })
+        }),
+        cell = grid.lockedTable.find("tr:first > td:first");
+
+        cell.click();
+        cell.find("input").val("baz").change();
+        grid.closeCell();
+        ok(cell.find("span.k-dirty").length);
+    });
 })();
