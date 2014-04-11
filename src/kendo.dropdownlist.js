@@ -174,7 +174,7 @@ var __meta__ = {
         },
 
         toggle: function(toggle) {
-            this._toggle(toggle);
+            this._toggle(toggle, true);
         },
 
         refresh: function() {
@@ -351,7 +351,7 @@ var __meta__ = {
                     .on("click" + ns, function(e) {
                             that._blured = false;
                             e.preventDefault();
-                            that.toggle();
+                            that._toggle();
                     })
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("keypress" + ns, proxy(that._keypress, that))

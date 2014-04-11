@@ -485,13 +485,13 @@ var __meta__ = {
             $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
-        _toggle: function(open) {
+        _toggle: function(open, preventFocus) {
             var that = this;
             var touchEnabled = support.touch && support.MSPointers && support.pointers;
 
             open = open !== undefined? open : !that.popup.visible();
 
-            if (!touchEnabled && that._focused[0] !== activeElement()) {
+            if (!preventFocus && !touchEnabled && that._focused[0] !== activeElement()) {
                 that._focused.focus();
             }
 
