@@ -123,4 +123,33 @@
         equal(multiselect.value().length, 0);
         equal(multiselect.element.val(), null);
     });
+
+    test("MultiSelect with autoBind:false binds only once datasource when filter", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            filter: "contains",
+            value: [{ text: "text", value: "value" }],
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            { text: "text", value: "1" },
+                            { text: "text2", value: "2" },
+                            { text: "text3", value: "3" },
+                            { text: "text4", value: "4" }
+                        ]);
+                    }
+                },
+                serverFiltering: true
+            }
+        });
+
+        multiselect.dataSource.bind("change", function() {
+            ok(true);
+        });
+
+        multiselect.search("te");
+    });
 })();
