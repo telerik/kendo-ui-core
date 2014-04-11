@@ -191,7 +191,7 @@ var __meta__ = {
         },
 
         outOfBounds: function(offset) {
-            return  offset > this.max || offset < this.min;
+            return offset > this.max || offset < this.min;
         },
 
         forceEnabled: function() {
@@ -272,6 +272,10 @@ var __meta__ = {
             var that = this;
             extend(that, options);
             Observable.fn.init.call(that);
+        },
+
+        outOfBounds: function() {
+            return this.dimension.outOfBounds(this.movable[this.axis]);
         },
 
         dragMove: function(delta) {
