@@ -382,6 +382,7 @@ var __meta__ = {
             if (word.length >= options.minLength) {
                 that._state = FILTER;
                 that._open = true;
+                that._retrieveData = false;
 
                 that._filterSource({
                     value: ignoreCase ? word.toLowerCase() : word,
