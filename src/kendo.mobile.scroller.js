@@ -103,7 +103,7 @@ var __meta__ = {
 
         onEnd: function() {
             var that = this;
-            if (that._outOfBounds()) {
+            if (that.paneAxis.outOfBounds()) {
                 that._snapBack();
             } else {
                 that._end();
@@ -121,7 +121,7 @@ var __meta__ = {
             if (!that.dimension.enabled) { return; }
 
 
-            if (that._outOfBounds()) {
+            if (that.paneAxis.outOfBounds()) {
                 that._snapBack();
             } else {
                 velocity = e.touch.id === MOUSE_WHEEL_ID ? 0 : e.touch[that.axis].velocity;
@@ -135,7 +135,7 @@ var __meta__ = {
         tick: function() {
             var that = this,
                 dimension = that.dimension,
-                friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : that.friction,
+                friction = that.paneAxis.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : that.friction,
                 delta = (that.velocity *= friction),
                 location = that.movable[that.axis] + delta;
 
@@ -150,10 +150,6 @@ var __meta__ = {
         _end: function() {
             this.tapCapture.cancelCapture();
             this.end();
-        },
-
-        _outOfBounds: function() {
-            return this.dimension.outOfBounds(this.movable[this.axis]);
         },
 
         _snapBack: function() {
@@ -456,9 +452,8 @@ var __meta__ = {
 
         _resize: function() {
             if (!this._native) {
-                this.dimensions.refresh();
+                this.contentResized();
             }
-            this.reset();
         },
 
         setOptions: function(options) {
@@ -475,6 +470,17 @@ var __meta__ = {
             } else {
                 this.movable.moveTo({x: 0, y: 0});
                 this._scale(1);
+            }
+        },
+
+        contentResized: function() {
+            this.dimensions.refresh();
+            if (this.pane.x.outOfBounds()) {
+                this.movable.moveAxis("x", this.dimensions.x.min);
+            }
+
+            if (this.pane.y.outOfBounds()) {
+                this.movable.moveAxis("y", this.dimensions.y.min);
             }
         },
 
@@ -590,6 +596,7 @@ var __meta__ = {
                 movable = that.movable,
                 dimension = that.dimensions[axis],
                 tapCapture = that.tapCapture,
+                paneAxis = that.pane[axis],
                 scrollBar = new ScrollBar({
                     axis: axis,
                     movable: movable,
@@ -597,12 +604,13 @@ var __meta__ = {
                     container: that.element
                 });
 
-            that.pane[axis].bind(CHANGE, function() {
+            paneAxis.bind(CHANGE, function() {
                 scrollBar.show();
             });
 
             that[axis + "inertia"] = new DragInertia({
                 axis: axis,
+                paneAxis: paneAxis,
                 movable: movable,
                 tapCapture: tapCapture,
                 userEvents: that.userEvents,
