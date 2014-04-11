@@ -825,7 +825,7 @@ var __meta__ = {
 
         var end = new Date(start.getTime());
 
-        kendo.date.setTime(end, duration);
+        kendo.date.setTime(end, duration, true);
 
         return {
             start: start,
