@@ -235,6 +235,7 @@
         });
 
         test("destroys tooltip", function() {
+            chart._tooltip.destroy();
             chart._tooltip = { destroy: function() { ok(true); }};
             chart.destroy();
         });
