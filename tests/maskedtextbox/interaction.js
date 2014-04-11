@@ -63,6 +63,17 @@
         equal(input.val(), "_-_");
     });
 
+    test("MaskedTextBox positions caret in the beginning", function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0-0"
+        });
+
+        input.focus();
+
+        equal(caret(input[0])[0], 0);
+        equal(caret(input[0])[1], 0);
+    });
+
     asyncTest("MaskedTextBox selects whole text if value", 3, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
