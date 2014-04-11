@@ -326,6 +326,10 @@ var __meta__ = {
 
             if (rangeStart && !that._fetching) { // we are rebound from outside local range should be reset
                 that._rangeStart = dataSource.skip();
+
+                if (dataSource.page() === 1) {// reset the scrollbar position if datasource is filtered
+                    that.verticalScrollbar[0].scrollTop = 0;
+                }
             }
             that._fetching = false;
         }
