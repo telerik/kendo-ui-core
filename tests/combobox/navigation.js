@@ -439,6 +439,18 @@ test("Empty combobox does not select first focused item on ENTER", 1, function()
     equal(combobox.value(), "");
 });
 
+test("ComboBox does not focus if refresh is called after blur", 1, function() {
+    combobox.destroy();
+    combobox = new ComboBox(input, {
+        autoBind: false,
+        dataSource: ["Item1", "Item2"],
+    });
+
+    combobox.open();
+
+    notEqual(document.activeElement, combobox.input[0]);
+});
+
 asyncTest("clearing custom value does not re-enter the old value", 1, function() {
     combobox.options.delay = 0;
     combobox.options.filter = "startswith";
