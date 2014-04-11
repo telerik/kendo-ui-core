@@ -200,7 +200,7 @@ var __meta__ = {
         TOOLTIP_OFFSET = 5,
         TOOLTIP_SHOW_DELAY = 100,
         TOOLTIP_HIDE_DELAY = 100,
-        TOOLTIP_INVERSE = "tooltip-inverse",
+        TOOLTIP_INVERSE = "chart-tooltip-inverse",
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
@@ -973,7 +973,7 @@ var __meta__ = {
                 highlight = chart._highlight,
                 i;
 
-            if (e.relatedTarget) {
+            if (e.relatedTarget && tooltip && e.relatedTarget !== tooltip.element[0]) {
                 for (i = 0; i < crosshairs.length; i++) {
                     crosshairs[i].hide();
                 }
@@ -1304,6 +1304,10 @@ var __meta__ = {
                 while (selections.length > 0) {
                     selections.shift().destroy();
                 }
+            }
+
+            if (chart._tooltip) {
+                chart._tooltip.destroy();
             }
         }
     });
@@ -9413,7 +9417,7 @@ var __meta__ = {
             tooltip.template = BaseTooltip.template;
             if (!tooltip.template) {
                 tooltip.template = BaseTooltip.template = renderTemplate(
-                    "<div class='" + CSS_PREFIX + "tooltip' " +
+                    "<div class='" + CSS_PREFIX + "tooltip " + CSS_PREFIX + "chart-tooltip' " +
                     "style='display:none; position: absolute; font: #= d.font #;" +
                     "border: #= d.border.width #px solid;" +
                     "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);'>" +
@@ -9421,8 +9425,17 @@ var __meta__ = {
                 );
             }
 
-            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(chartElement);
+            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(document.body);
             tooltip._moveProxy = proxy(tooltip.move, tooltip);
+        },
+
+        destroy: function() {
+            clearTimeout(this.showTimeout);
+
+            if (this.element) {
+                this.element.remove();
+                this.element = null;
+            }
         },
 
         options: {
@@ -9479,18 +9492,16 @@ var __meta__ = {
                 element = tooltip.element,
                 anchor = tooltip.anchor,
                 chartPadding = tooltip._padding(),
-                top = round(anchor.y + chartPadding.top),
-                left = round(anchor.x + chartPadding.left),
+                chartOffset = tooltip.chartElement.offset(),
+                top = round(anchor.y + chartPadding.top + chartOffset.top),
+                left = round(anchor.x + chartPadding.left + chartOffset.left),
                 zoomLevel = kendo.support.zoomLevel(),
                 viewport = $(window),
-                offsetTop = window.pageYOffset || document.documentElement.scrollTop || 0,
-                offsetLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
+                scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0,
+                scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
 
-            offsetTop = tooltip.chartElement.offset().top - offsetTop;
-            offsetLeft = tooltip.chartElement.offset().left - offsetLeft;
-
-            top += tooltip._currentPosition(top + offsetTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
-            left += tooltip._currentPosition(left + offsetLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
+            top += tooltip._fit(top - scrollTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
+            left += tooltip._fit(left - scrollLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
 
             return {
                 top: top,
@@ -9572,7 +9583,7 @@ var __meta__ = {
             return point.tooltipAnchor(element.outerWidth(), element.outerHeight());
         },
 
-        _currentPosition: function(offset, size, viewPortSize) {
+        _fit: function(offset, size, viewPortSize) {
             var output = 0;
 
             if (offset + size > viewPortSize) {

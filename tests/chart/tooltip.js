@@ -1,24 +1,33 @@
 (function() {
-    var dataviz = kendo.dataviz,
-        TOLERANCE = 1;
+    var dataviz = kendo.dataviz;
+    var chartElement;
+    var tooltip;
+    var TOLERANCE = 1;
+
+
+    function destroyTooltip() {
+        if (tooltip) {
+            tooltip.destroy();
+        }
+
+        if (chartElement) {
+            chartElement.remove();
+        }
+    }
 
     (function() {
-        var tooltip,
-            element,
-            chartElement,
+        var element,
             pointMock,
             RED = "rgb(255,0,0)",
             GREEN = "rgb(0,255,0)",
             BLUE = "rgb(0,0,255)";
 
         function createTooltip(options) {
+            destroyTooltip();
+
             chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
             tooltip = new dataviz.Tooltip(chartElement, options);
             element = tooltip.element;
-        }
-
-        function destroyTooltip() {
-            chartElement.remove();
         }
 
         function showTooltip() {
@@ -70,8 +79,22 @@
             teardown: destroyTooltip
         });
 
-        test("attaches to chart element", function() {
-            ok(element[0].parentNode === document.getElementById("chart"));
+        test("attaches to body", function() {
+            ok(element[0].parentNode === document.body);
+        });
+
+        test("detaches from body on destroy", function() {
+            tooltip.destroy();
+
+            equal($(".k-chart-tooltip").length, 0);
+        });
+
+        test("sets k-tooltip class", function(){
+            ok(element.hasClass("k-tooltip"));
+        });
+
+        test("sets k-chart-tooltip class", function(){
+            ok(element.hasClass("k-chart-tooltip"));
         });
 
         test("renders div with display none attribute", function() {
@@ -200,16 +223,18 @@
             tooltip.options.offsetY = 0;
             tooltip.move();
 
-            deepEqual([parseInt(tooltip.element.css("left"), 10),
-                  parseInt(tooltip.element.css("top"), 10)],
-                  [10, 20]);
+            var chartOffset = chartElement.offset();
+            var tooltipOffset = tooltip.element.offset();
+
+            equal(tooltipOffset.left, chartOffset.left + tooltip.anchor.x);
+            equal(tooltipOffset.top, chartOffset.top + tooltip.anchor.y);
         });
 
         test("tooltipAnchor receives correct tooltip size", function() {
             createPoint({
                 tooltipAnchor: function(width, height) {
-                    equal(width, 113);
-                    equal(height, 30);
+                    ok(width > 100);
+                    ok(height > 20);
                 }
             });
 
@@ -230,9 +255,11 @@
             tooltip.options.animation.duration = 0;
             tooltip.move();
 
-            deepEqual([parseInt(tooltip.element.css("left"), 10),
-                  parseInt(tooltip.element.css("top"), 10)],
-                  [20, 40]);
+            var chartOffset = chartElement.offset();
+            var tooltipOffset = tooltip.element.offset();
+
+            equal(tooltipOffset.left, chartOffset.left + tooltip.anchor.x + 10);
+            equal(tooltipOffset.top, chartOffset.top + tooltip.anchor.y + 20);
         });
 
         test("applies format from the series", function() {
@@ -251,19 +278,19 @@
         });
 
         test("returns 0 if the tooltip fit in the window", function() {
-            var result = tooltip._currentPosition(200, 100, 400);
+            var result = tooltip._fit(200, 100, 400);
 
             equal(result, 0);
         });
 
         test("if element does not fit right should be position left", function() {
-            var result = tooltip._currentPosition(82, 42, 100);
+            var result = tooltip._fit(82, 42, 100);
 
             equal(result, -24);
         });
 
         test("if element does not fit right and does not fit left should be position right", function() {
-            var result = tooltip._currentPosition(42, 42, 100);
+            var result = tooltip._fit(42, 42, 100);
 
             equal(result, 0);
         });
@@ -280,13 +307,13 @@
         test("removes inverse css class if backgorund is bright", function() {
             tooltip._updateStyle({ background: "#000" }, {});
 
-            ok(!tooltip.element.hasClass("k-tooltip-inverse"));
+            ok(!tooltip.element.hasClass("k-chart-tooltip-inverse"));
         });
 
         test("sets inverse css class if backgorund is dark", function() {
             tooltip._updateStyle({ background: "#fff" }, {});
 
-            ok(tooltip.element.hasClass("k-tooltip-inverse"));
+            ok(tooltip.element.hasClass("k-chart-tooltip-inverse"));
         });
 
         // ------------------------------------------------------------
@@ -327,9 +354,7 @@
     })();
 
     (function() {
-        var tooltip,
-            chartElement,
-            plotArea,
+        var plotArea,
             point;
 
         function createPlotArea() {
@@ -356,12 +381,10 @@
             createPlotArea();
             createPoint();
 
+            destroyTooltip();
+
             chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
             tooltip = new dataviz.SharedTooltip(chartElement, plotArea, options);
-        }
-
-        function destroyTooltip() {
-            chartElement.remove();
         }
 
         function createPoint(options) {
@@ -392,7 +415,8 @@
         module("Shared Tooltip", {
             setup: function() {
                 createTooltip();
-            }
+            },
+            teardown: destroyTooltip
         });
 
         test("shows shared tooltip", function() {
