@@ -54,6 +54,39 @@
     });
 
     /*-----------------------------------------------*/
+    module("api / selectArea", {
+        setup: function () {
+            var div = QUnit.fixture.html('<div id="diagram" />');
+            diagram = div.kendoDiagram({
+                shapes: [{
+                    id: "rect",
+                    type: "Rectangle",
+                    x: 0,
+                    y: 0,
+                    width: 100,
+                    height: 100
+                },{
+                    id: "rect1",
+                    type: "Rectangle",
+                    x: 200,
+                    y: 200,
+                    width: 100,
+                    height: 100
+                }]
+            }).getKendoDiagram();
+        },
+        teardown: function () {
+            diagram.destroy();
+        }
+    });
+
+    test("select all items in an area", function () {
+        diagram.selectArea(new Rect(0, 0, 100, 100));
+        ok(diagram.shapes[0].isSelected);
+        ok(!diagram.shapes[1].isSelected);
+    });
+
+    /*-----------------------------------------------*/
     module("api / deselect", {
         setup: function () {
             var div = QUnit.fixture.html('<div id="diagram" />');

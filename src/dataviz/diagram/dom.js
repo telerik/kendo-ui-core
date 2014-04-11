@@ -1634,17 +1634,6 @@
                         if (itemsOrRect !== false) {
                             this.select(ALL);
                         }
-                    } else if (itemsOrRect instanceof Rect) {
-                        rect = itemsOrRect;
-                        items = this.shapes.concat(this.connections);
-                        for (i = 0; i < items.length; i++) {
-                            item = items[i];
-                            if ((!rect || item._hitTest(rect)) && item.options.enable) {
-                                if (item.select(true)) {
-                                    selected.push(item);
-                                }
-                            }
-                        }
                     } else if (itemsOrRect instanceof Array) {
                         for (i = 0; i < itemsOrRect.length; i++) {
                             item = itemsOrRect[i];
@@ -1674,13 +1663,30 @@
                     }
 
                     if (selected.length > 0) {
-                        this._selectionChanged(selected, []);
+                        this._selectionChanged(selected);
                     }
 
                     this._internalSelection = false;
                 } else {
                     return this._selectedItems; // returns all selected items.
                 }
+            },
+
+            selectArea: function(rect) {
+                var selected = [];
+                if (rect instanceof Rect) {
+                    items = this.shapes.concat(this.connections);
+                    for (i = 0; i < items.length; i++) {
+                        item = items[i];
+                        if ((!rect || item._hitTest(rect)) && item.options.enable) {
+                            if (item.select(true)) {
+                                selected.push(item);
+                            }
+                        }
+                    }
+                }
+
+                this._selectionChanged(selected);
             },
 
             deselect: function(item) {
@@ -1694,13 +1700,11 @@
                     deselected = this._selectedItems.slice(0);
                 }
 
-                if (deselected.length) {
-                    for (var i = 0; i < deselected.length; i++) {
-                        deselected[i].select(false);
-                    }
-
-                    this._selectionChanged([], deselected);
+                for (var i = 0; i < deselected.length; i++) {
+                    deselected[i].select(false);
                 }
+
+                this._selectionChanged([], deselected);
             },
             /**
              * Brings to front the passed items.
@@ -2156,7 +2160,9 @@
                 }
             },
             _selectionChanged: function (selected, deselected) {
-                this.trigger(SELECT, { selected: selected, deselected: deselected });
+                if (selected.length || deselected.length) {
+                    this.trigger(SELECT, { selected: selected, deselected: deselected });
+                }
             },
             _getValidZoom: function (zoom) {
                 return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
