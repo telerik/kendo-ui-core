@@ -43,6 +43,8 @@ end
 ADMIN_PASS = 'ultra'
 ADMIN_RELEASE_UPLOAD_PASS = "t3l3r1k@dm1n"
 
+$shouldCreateVersion = true
+
 ROOT_MAP = {
     '.' => /(dist\/js|dist\/styles\/.+?)\//,
     'js' => DIST_JS_ROOT,
@@ -206,7 +208,7 @@ bundle :name => 'professional.commercial',
            :file_metadata => {
              :zip => {
               :label => "Manual Installation", 
-              :download_name => "telerik.kendoui.complete#{VERSION}.commercial.zip",
+              :download_name => "telerik.kendoui.complete.#{VERSION}.commercial.zip",
               :file_category => "Installation",
               :file_type => "Paid Files",
               :extension => "ZIP",
@@ -217,7 +219,7 @@ bundle :name => 'professional.commercial',
              },
              :msi => {
               :label => "Automatic Installation", 
-              :download_name => "telerik.kendoui.complete#{VERSION}.commercial.msi",
+              :download_name => "telerik.kendoui.complete.#{VERSION}.commercial.msi",
               :file_category => "Installation",
               :file_type => "Paid Files",
               :extension => "MSI",
@@ -269,7 +271,7 @@ bundle :name => 'professional.trial',
           :file_metadata => {
              :zip => {
               :label => "Manual Installation", 
-              :download_name => "telerik.kendoui.complete#{VERSION}.trial.zip",
+              :download_name => "telerik.kendoui.complete.#{VERSION}.trial.zip",
               :file_category => "Installation",
               :file_type => "Trial Files",
               :extension => "ZIP",
@@ -280,7 +282,7 @@ bundle :name => 'professional.trial',
              },
              :msi => {
               :label => "Automatic Installation", 
-              :download_name => "telerik.kendoui.complete#{VERSION}.trial.msi",
+              :download_name => "telerik.kendoui.complete.#{VERSION}.trial.msi",
               :file_category => "Installation",
               :file_type => "Trial Files",
               :extension => "MSI",

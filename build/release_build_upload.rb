@@ -35,7 +35,7 @@ class TelerikReleaseBot
     end
 
     def fill_in(title, contents)
-        element = driver.find_element(:xpath, "//a[text()='#{title}']/..//input")
+        element = driver.find_element(:xpath, "//label[text()='#{title}']/..//input")
         driver.execute_script 'arguments[0].focus()', element
         element.send_keys contents
         element.send_keys :tab
@@ -57,24 +57,21 @@ def upload_release_build(options)
          #masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
     #SCRIPT
 
-    #bot.wait_for_title "product"
+    p options[:title]
 
-    #Thread.current.send :sleep, 3
-=begin
-    if TEMP_PRODUCT_NAME_REFERENCE == nil
-          TEMP_PRODUCT_NAME_REFERENCE = "#{name}".slice(0..(str.index('.')))
-          p TEMP_PRODUCT_NAME_REFERENCE
-
+    if $shouldCreateVersion
           create_version(bot, options[:product]) 
           prepare_files(bot, options)
-    else
-      TEMP_PRODUCT_NAME_REFERENCE = nil
 
+          $shouldCreateVersion = false
+    else
       prepare_files(bot, options)
-    end
-=end    
+
+      $shouldCreateVersion = false
+    end    
 end
 def create_version(bot, product_name)
+      p ">>creating version"
       bot.click_and_wait product_name, "administration"
       bot.click_and_wait "Manage Versions", "administration"
 
@@ -99,7 +96,7 @@ def fill_version_fields(bot)
 end
 def prepare_files(bot, options)
   #bot.driver.execute_script "window.location = $('a:contains(\"commercial.zip\")').attr(\"href\")"
-
+  p ">>preparing files"
   #msi files
   release_config = options[:params]
   file_metadata = release_config[:file_metadata]
@@ -107,26 +104,26 @@ def prepare_files(bot, options)
   if file_metadata[:msi]
     
     file_fields = file_metadata[:msi]
-    bot.driver.click_and_wait "Add new file", "administration"
+    bot.click_and_wait "Add new file", "administration"
 
     bot.driver.execute_script "$('[id$=\"_txtFieldText\"]').val('#{file_fields[:label]}')" 
     bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')" 
     bot.fill_in('File Category:', '#{file_fields[:file_category]}')
 
     p "Setting filename..."
-    upload_file_and_go_back(bot, options[:archive_path], file_fields[:download_name], true)
+    #upload_file_and_go_back(bot, options[:archive_path], file_fields[:download_name], true)
 
     bot.fill_in('File type:', '#{file_fields[:file_type]}')
     bot.fill_in('Extension:', '#{file_fields[:extension]}')
 
     file_markers = file_fields[:file_markers]
-    file_markers.each { |fn| bot.find("[text='" + fn + "']").click  }
+    file_markers.each { |fm| bot.find("[text='#{fm}']").click  }
  
     websites = file_fields[:websites]
-    websites.each { |ws| bot.find("[text='" + ws + "']").click  }
+    websites.each { |ws| bot.find("[text='#{ws}']").click  }
 
-    bot.driver.execute_script "$('[id$=\"_efDownloadMessage_reFieldText\"]').set_html('#{file_fields[:download_message]}')" 
-    bot.driver.execute_script "$('[id$=\"_efWhatsIncluded_reFieldText\"]').set_html('#{file_fields[:whats_included_message]}')" 
+    bot.driver.execute_script "$find($telerik.$('[id$=\"_efDownloadMessage_reFieldText\"]').attr('id')).set_html('#{file_fields[:download_message]}')" 
+    bot.driver.execute_script "$find($telerik.$('[id$=\"_efWhatsIncluded_reFieldText\"]').attr('id')).set_html('#{file_fields[:whats_included_message]}')" 
 
     bot.find("[value='Save']").click
 
@@ -137,7 +134,7 @@ def prepare_files(bot, options)
     bot.find("[value='GO TO FILE LIST']").click
 
   end
-  
+=begin  
   #zip files
   element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.zip')]")
   element.click
@@ -220,7 +217,7 @@ def prepare_files(bot, options)
 
     upload_file_and_go_back(bot, options)    
   end
-
+=end
 end
 def upload_file_and_go_back(bot, dirpath, filename, isMsi)
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
@@ -232,7 +229,8 @@ def upload_file_and_go_back(bot, dirpath, filename, isMsi)
 
   if isMsi
     p "Setting xml filename..."
-
+    
+    filename = filename.sub "msi", "xml"
     full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
 
     p "#{full_path}"
