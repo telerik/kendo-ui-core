@@ -22,6 +22,7 @@
 
         util = dataviz.util,
         defined = util.defined,
+        deg = util.deg,
         rad = util.rad,
         round = util.round,
         sqr = util.sqr,
@@ -70,6 +71,23 @@
 
         distanceTo: function(dest, datum) {
             return this.greatCircleTo(dest, datum).distance;
+        },
+
+        destination: function(distance, bearing, datum) {
+            bearing = rad(bearing);
+            datum = datum || dataviz.map.datums.WGS84;
+
+            var fromLat = rad(this.lat);
+            var fromLng = rad(this.lng);
+            var dToR = distance / kendo.dataviz.map.datums.WGS84.a;
+
+            var lat = math.asin(sin(fromLat) * cos(dToR) +
+                                cos(fromLat) * sin(dToR) * cos(bearing));
+
+            var lng = fromLng + atan2(sin(bearing) * sin(dToR) * cos(fromLat),
+                                      cos(dToR) - sin(fromLat) * sin(lat));
+
+           return new Location(deg(lat), deg(lng));
         },
 
         greatCircleTo: function(dest, datum) {
@@ -153,8 +171,8 @@
 
             return {
                 distance: round(b * A * (sigma - deltao), this.DISTANCE_PRECISION),
-                azimuthFrom: util.deg(azimuthFrom),
-                azimuthTo: util.deg(azimuthTo)
+                azimuthFrom: deg(azimuthFrom),
+                azimuthTo: deg(azimuthTo)
             };
         }
     });

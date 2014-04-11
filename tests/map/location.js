@@ -199,8 +199,28 @@
         close(from.greatCircleTo(to).azimuthTo, 118.162, 1e-3);
     });
 
-    var extent;
     // ------------------------------------------------------------
+    module("Location / destination", {
+        setup: function() {
+            from = new Location(42.7000, 23.3333);
+        }
+    });
+
+    test("destination reports location", function() {
+        var dest = from.destination(100000 /* 100km */, 270 /* W */).round(4);
+        equal(dest.lat, 42.6935);
+        equal(dest.lng, 22.1110);
+    });
+
+    test("destination reports location (custom datum)", function() {
+        var dest = from.destination(100, 270, { a: 6371 }).round(4);
+        equal(dest.lat, 42.7000);
+        equal(dest.lng, 23.3321);
+    });
+
+    // ------------------------------------------------------------
+    var extent;
+
     module("Extent", {
         setup: function() {
             extent = new Extent(
