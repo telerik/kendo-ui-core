@@ -3266,15 +3266,21 @@ var __meta__ = {
             var that = this,
                 model = e.model,
                 row = that.tbody.find("tr[" + kendo.attr("uid") + "=" + model.uid +"]"),
+                relatedRow,
                 cell,
                 column,
                 isAlt = row.hasClass("k-alt"),
                 tmp,
                 idx = that.items().index(row),
+                isLocked = that.lockedContent,
                 length;
 
-            if (row.children(".k-edit-cell").length && !that.options.rowTemplate) {
-                row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
+            if (isLocked) {
+                relatedRow = that._relatedRow(row);
+            }
+
+            if (row.add(relatedRow).children(".k-edit-cell").length && !that.options.rowTemplate) {
+                row.add(relatedRow).children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                     cell = $(this);
                     column = that.columns[that.cellIndex(cell)];
 
@@ -3290,10 +3296,10 @@ var __meta__ = {
 
             } else if (!row.hasClass("k-grid-edit-row")) {
 
-                if (that.lockedContent) {
+                if (isLocked) {
                     tmp = (isAlt ? that.lockedAltRowTemplate : that.lockedRowTemplate)(model);
 
-                    that._relatedRow(row).replaceWith(tmp);
+                    relatedRow.replaceWith(tmp);
                 }
 
                 tmp = (isAlt ? that.altRowTemplate : that.rowTemplate)(model);
@@ -3302,11 +3308,11 @@ var __meta__ = {
 
                 tmp = that.items().eq(idx);
 
-                if (that.lockedContent) {
-                    var related = that._relatedRow(tmp)[0];
-                    adjustRowHeight(tmp[0], related);
+                if (isLocked) {
+                    relatedRow = that._relatedRow(tmp)[0];
+                    adjustRowHeight(tmp[0], relatedRow);
 
-                    tmp = tmp.add(related);
+                    tmp = tmp.add(relatedRow);
                 }
 
                 for (idx = 0, length = that.columns.length; idx < length; idx++) {
