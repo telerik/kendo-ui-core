@@ -192,7 +192,7 @@ var __meta__ = {
                      .attr(ARIA_DISABLED, false)
                      .attr(ARIA_READONLY, false);
 
-                arrow.on(CLICK, function() { that.toggle(); })
+                arrow.on(CLICK, function() { that._toggle(); })
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
                 that.input
@@ -253,7 +253,7 @@ var __meta__ = {
                 data = that._data(),
                 length = data.length,
                 keepState = true,
-                hasChild, open, custom;
+                hasChild, custom;
 
             that.trigger("dataBinding");
 
@@ -298,13 +298,13 @@ var __meta__ = {
 
             if (that._open) {
                 that._open = false;
-                open = !!length;
 
                 if (that._typing && that.input[0] !== activeElement()) {
-                    open = false;
+                    that.popup.close();
+                } else {
+                    that.toggle(!!length);
                 }
 
-                that.toggle(open);
                 that._typing = undefined;
             }
 
@@ -446,9 +446,7 @@ var __meta__ = {
         },
 
         toggle: function(toggle) {
-            var that = this;
-
-            that._toggle(toggle);
+            this._toggle(toggle, true);
         },
 
         value: function(value) {
