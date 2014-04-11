@@ -1574,6 +1574,7 @@ var __meta__ = {
             wrapper.on(selectEvent + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
                 var which = e.which;
                 var button = e.button;
+                var browser = kendo.support.browser;
                 var isRight = which && which === 3 || button && button == 2;
 
                 if (kendo.support.mobileOS && e.isDefaultPrevented()) {
@@ -1585,6 +1586,12 @@ var __meta__ = {
                 }
 
                 wrapper.focus();
+
+                if (browser.msie && browser.version < 9) {
+                    setTimeout(function() {
+                        wrapper.focus();
+                    });
+                }
             });
 
             var mouseMoveHandler = $.proxy(that._mouseMove, that);
