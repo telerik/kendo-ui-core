@@ -685,6 +685,36 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="TextBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TextBox()
+        ///             .Name("TextBox")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual TextBoxBuilder<string> TextBox()
+        {
+            return new TextBoxBuilder<string>(new TextBox<string>(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="TextBox{T}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TextBox&lt;double&gt;()
+        ///             .Name("TextBox")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual TextBoxBuilder<T> TextBox<T>()
+        {
+            return new TextBoxBuilder<T>(new TextBox<T>(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Window"/>.
         /// </summary>
         /// <example>
@@ -1692,6 +1722,24 @@ namespace Kendo.Mvc.UI.Fluent
                         .Name(GetName(expression))
                         .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
                         .Value(GetValue(expression));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="TextBox"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual TextBoxBuilder<TProperty> TextBoxFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
+        {
+            object model = ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model;
+
+            return TextBox<TProperty>()
+                        .Name(GetName(expression))
+                        .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
+                        .Value((TProperty)(model != null && model.GetType().IsPredefinedType() ? model : null));
         }
 
         /// <summary>

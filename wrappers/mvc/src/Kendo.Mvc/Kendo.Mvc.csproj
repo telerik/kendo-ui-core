@@ -1403,6 +1403,9 @@
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializer.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorHintSerializer.cs" />
     <Compile Include="UI\StockChart\StockChart.cs" />
+    <Compile Include="UI\TextBox\Fluent\TextBoxBuilder.cs" />
+    <Compile Include="UI\TextBox\Html\TextBoxHtmlBuilder.cs" />
+    <Compile Include="UI\TextBox\TextBox.cs" />
     <Compile Include="UI\TextNode.cs" />
     <Compile Include="Infrastructure\IUrlGenerator.cs" />
     <Compile Include="UI\Grid\Settings\GridGroupableSettings.cs" />

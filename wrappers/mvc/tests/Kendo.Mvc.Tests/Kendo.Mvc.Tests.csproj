@@ -292,6 +292,8 @@
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializerTests.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorHintSerializerTests.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartDateSelectionSerializerTests.cs" />
+    <Compile Include="UI\TextBox\TextBoxHtmlBuilderTests.cs" />
+    <Compile Include="UI\TextBox\TextBoxTestHelper.cs" />
     <Compile Include="UI\TimezoneEditor\TimezoneEditorHtmlBuilderTests.cs" />
     <Compile Include="UI\TimezoneEditor\TimezoneEditorTestHelper.cs" />
     <Compile Include="UI\ToolTip\TooltipSerializationTests.cs" />

@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI
             return instance.GetValue<T>(instance.Name, value);
         }
 
-        public static string GetValue<T>(this IWidget instance, string name, T value)
+        public static string GetValue<T>(this IWidget instance, string name, T value, string format = "{0}")
         {
             ModelState state;
             string formattedValue = string.Empty;
@@ -28,16 +28,16 @@ namespace Kendo.Mvc.UI
                 formattedValue = state.Value.AttemptedValue;
                 if (viewData.ModelState.IsValidField(name))
                 {
-                    formattedValue = "{0}".FormatWith(state.Value.ConvertTo(typeof(T), state.Value.Culture));
+                    formattedValue = format.FormatWith(state.Value.ConvertTo(typeof(T), state.Value.Culture));
                 }
             }
             else if (value != null)
             {
-                formattedValue = "{0}".FormatWith(value);
+                formattedValue = format.FormatWith(value);
             }
             else if (valueFromViewData != null && valueFromViewData.GetType().IsPredefinedType())
             {
-                formattedValue = "{0}".FormatWith(valueFromViewData);
+                formattedValue = format.FormatWith(valueFromViewData);
             }
 
             return formattedValue;
