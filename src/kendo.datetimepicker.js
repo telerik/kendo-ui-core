@@ -398,10 +398,12 @@ var __meta__ = {
                 max = options.max,
                 dates = options.dates,
                 timeView = that.timeView,
+                current = that._value,
                 date = parse(value, options.parseFormats, options.culture),
+                isSameType = (date === null && current === null) || (date instanceof Date && current instanceof Date),
                 rebind, timeViewOptions, old, skip, formattedValue;
 
-            if (+date === +that._value) {
+            if (+date === +current && isSameType) {
                 formattedValue = kendo.toString(date, options.format, options.culture);
 
                 if (formattedValue !== value) {

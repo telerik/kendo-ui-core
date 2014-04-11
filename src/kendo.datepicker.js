@@ -576,10 +576,12 @@ var __meta__ = {
                 options = that.options,
                 min = options.min,
                 max = options.max,
+                current = that._value,
                 date = parse(value, options.parseFormats, options.culture),
+                isSameType = (date === null && current === null) || (date instanceof Date && current instanceof Date),
                 formattedValue;
 
-            if (+date === +that._value) {
+            if (+date === +current && isSameType) {
                 formattedValue = kendo.toString(date, options.format, options.culture);
 
                 if (formattedValue !== value) {
