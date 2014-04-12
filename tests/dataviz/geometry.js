@@ -600,7 +600,105 @@
             close(points[i].y, expected[i].y, ARC_POINT_TOLERANCE);
         }
     });
-
+    
+    // ------------------------------------------------------------
+    (function() {
+        var matrix,
+            result;
+        
+        function compareMatrices(m1, m2, tolerance) {
+            tolerance = tolerance  || 0;
+            close(m1.a, m2.a, tolerance);
+            close(m1.b, m2.b, tolerance);
+            close(m1.c, m2.c, tolerance);
+            close(m1.d, m2.d, tolerance);
+            close(m1.e, m2.e, tolerance);
+            close(m1.f, m2.f, tolerance);
+        }
+        
+        function initMatrix(a,b,c,d,e,f) {
+            return {a: a, b: b, c: c, d: d, e: e, f: f};
+        }
+        
+        module("Matrix", {});
+        
+        test("sets passed parameters", function() {
+            matrix = new Matrix(2,2,2,2,2,2);
+            compareMatrices(matrix, initMatrix(2,2,2,2,2,2));
+        });
+        
+        test("sets undefined values to zero", function() {
+            matrix = new Matrix(undefined,2,2,undefined,2,2);
+            compareMatrices(matrix, initMatrix(0,2,2,0,2,2));
+        });
+        
+        test("times multiplies matrix", function() {
+            matrix = new Matrix(2,2,2,2,2,2);
+            compareMatrices(matrix.times(new Matrix(3,3,3,3,3,3)), initMatrix(12,12,12,12,14,14));
+        });
+        
+        test("times returns a new matrix", function() {
+            matrix = new Matrix(2,2,2,2,2,2);
+            result = matrix.times(new Matrix(3,3,3,3,3,3));
+            ok(result !== matrix);
+            ok(result instanceof Matrix);
+        });
+        
+        test("clone returns a new matrix with the same values", function() {
+            matrix = new Matrix(2,2,2,2,2,2);
+            result = matrix.clone();
+            compareMatrices(result, initMatrix(2,2,2,2,2,2));
+        });
+        
+        test("unit returns the identity matrix", function() {
+            matrix = Matrix.unit();           
+            compareMatrices(matrix, initMatrix(1,0,0,1,0,0));
+        });
+        
+        test("translate returns the identity matrix translated with x y", function() {
+            matrix = Matrix.translate(10, 20);           
+            compareMatrices(matrix, initMatrix(1,0,0,1,10,20));
+        });
+        
+        test("rotate returns the rotated matrix for the specified angle", function() {
+            matrix = Matrix.rotate(45);           
+            compareMatrices(matrix, initMatrix(0.7071067811865476,0.7071067811865475,-0.7071067811865475,0.7071067811865476,0,0), 0.000001);
+        });
+        
+        test("rotate returns the rotated around point matrix for the specified angle, x and y values", function() {
+            matrix = Matrix.rotate(45, 100, 100);
+         
+            compareMatrices(matrix, initMatrix(0.7071067811865476,0.7071067811865475,-0.7071067811865475,
+                0.7071067811865476, 100,-41.421356237309496), 0.000001);
+        });
+        
+        test("scale returns the identity matrix scaled by x y", function() {
+            matrix = Matrix.scale(1.5, 1.1);           
+            compareMatrices(matrix, initMatrix(1.5,0,0,1.1,0,0));
+        });
+        
+        module("Matrix / toString", {
+            setup: function() {
+                matrix = new Matrix(1.2345678,0,0,1.2345, 2, 3);
+            }
+        });
+        
+        test("returns a string with the values separated by comma", function() {           
+            result = matrix.toString();
+            equal(result, "1.2345678,0,0,1.2345,2,3");
+        });
+        
+        test("returns a string with the values separated by the specified separator", function() {           
+            result = matrix.toString(undefined, ";");
+            equal(result, "1.2345678;0;0;1.2345;2;3");
+        });
+        
+        test("returns a string with the values rounded to the specified precision", function() {           
+            result = matrix.toString(3);
+            equal(result, "1.235,0,0,1.235,2,3");
+        });
+        
+    })();
 
     // ------------------------------------------------------------
     (function() {
@@ -644,7 +742,7 @@
         });
 
         test("translate returns transformation", function() {
-            var result = transformation.translate(10, 20);
+            result = transformation.translate(10, 20);
             ok(result === transformation);
         });
 
@@ -654,7 +752,7 @@
         });
 
         test("scale returns transformation", function() {
-            var result = transformation.scale(1, 2);
+            result = transformation.scale(1, 2);
             ok(result === transformation);
         });
 
@@ -669,7 +767,7 @@
         });
 
         test("rotate returns transformation", function() {
-            var result = transformation.rotate(30);
+            result = transformation.rotate(30);
             ok(result === transformation);
         });
 
