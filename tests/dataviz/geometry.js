@@ -214,6 +214,26 @@
         deepEqual(point.transform(Matrix.unit), point);
     });
 
+    test("transformInto applies matrix to new point", function() {
+        var matrix = Matrix.translate(10, 10),
+            original = point.clone(),
+            transformedPoint = point.transformInto(Matrix.translate(10, 10));
+        deepEqual(point, original);
+        deepEqual(transformedPoint, new Point(20, 30));
+    });
+
+    test("transformInto returns new point", function() {
+        var transformedPoint = point.transformInto(Matrix.unit);
+        ok(transformedPoint instanceof Point);
+        ok(transformedPoint !== point);
+    });
+
+    test("transformInto returns clone of the point if no matrix is passed", function() {
+        var transformedPoint = point.transformInto();
+        ok(transformedPoint instanceof Point);
+        ok(transformedPoint  !== point);
+    });
+
     test("round rounds x", function() {
         point.x = 5.5;
         point.round();
@@ -580,5 +600,89 @@
             close(points[i].y, expected[i].y, ARC_POINT_TOLERANCE);
         }
     });
+
+
+    // ------------------------------------------------------------
+    (function() {
+        var Transformation = g.Transformation,
+            transform = g.transform,
+            transformation,
+            matrix = Matrix.rotate(30),
+            IDENTITY = new Matrix(1, 0, 0, 1, 0, 0);;
+
+        module("Transformation", {});
+
+        test("sets passed matrix", function() {
+            transformation = new Transformation(matrix);
+            deepEqual(transformation._matrix, matrix);
+        });
+
+        test("sets identity matrix if no matrix is passed", function() {
+            transformation = new Transformation();
+            deepEqual(transformation._matrix, IDENTITY);
+        });
+
+        test("matrix returns current matrix", function() {
+            transformation = new Transformation(matrix);
+            deepEqual(transformation.matrix(), matrix);
+        });
+
+        test("transform returns a new Transformation", function() {
+            transformation = transform();
+            ok(transformation instanceof Transformation);
+        });
+
+        test("transform returns new Transformation with the specified matrix set", function() {
+            transformation = transform(matrix);
+            deepEqual(transformation.matrix(), matrix);
+        });
+
+        module("Transformation / operations", {
+            setup: function() {
+                transformation = new Transformation();
+            }
+        });
+
+        test("translate returns transformation", function() {
+            var result = transformation.translate(10, 20);
+            ok(result === transformation);
+        });
+
+        test("translate applies translate to matrix", function() {
+            transformation.translate(10, 20);
+            deepEqual(transformation.matrix(), Matrix.translate(10, 20));
+        });
+
+        test("scale returns transformation", function() {
+            var result = transformation.scale(1, 2);
+            ok(result === transformation);
+        });
+
+        test("scale applies scale to matrix", function() {
+            transformation.scale(1, 2);
+            deepEqual(transformation.matrix(), Matrix.scale(1, 2));
+        });
+
+        test("scale applies scale to both x and y if only one parameter is passed", function() {
+            transformation.scale(2);
+            deepEqual(transformation.matrix(), Matrix.scale(2, 2));
+        });
+
+        test("rotate returns transformation", function() {
+            var result = transformation.rotate(30);
+            ok(result === transformation);
+        });
+
+        test("rotate applies rotation to matrix", function() {
+            transformation.rotate(30);
+            deepEqual(transformation.matrix(), Matrix.rotate(30));
+        });
+
+        test("rotate applies rotation around point to matrix if x and y are passed", function() {
+            transformation.rotate(30, 100, 100);
+            deepEqual(transformation.matrix(), Matrix.rotate(30, 100, 100));
+        });
+
+    })();
 
 })();
