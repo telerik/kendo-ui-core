@@ -3,8 +3,10 @@
 
         g = dataviz.geometry,
         Point = g.Point,
+        Matrix = g.Matrix,
 
         d = dataviz.drawing,
+        Element = d.Element,
         Group = d.Group,
         Segment = d.Segment,
         Shape = d.Shape,
@@ -14,6 +16,72 @@
         Path = d.Path,
         Arc = d.Arc,
         TOLERANCE = 0.1;
+
+    // ------------------------------------------------------------
+    (function() {
+        var element,
+            matrix;
+
+        function compareMatrices(m1, m2, tolerance) {
+            tolerance = tolerance  || 0;
+            close(m1.a, m2.a, tolerance);
+            close(m1.b, m2.b, tolerance);
+            close(m1.c, m2.c, tolerance);
+            close(m1.d, m2.d, tolerance);
+            close(m1.e, m2.e, tolerance);
+            close(m1.f, m2.f, tolerance);
+        }
+
+        module("Element", {
+            setup: function() {
+                element = new Element();
+            }
+        });
+
+        test("visible sets visible option", function() {
+            element.visible(false);
+            equal(element.options.visible, false);
+            element.visible(true);
+            equal(element.options.visible, true);
+        });
+
+        test("isVisible returns true if visible option is not defined", function() {
+            ok(element.isVisible());
+        });
+
+        test("isVisible returns visible option value", function() {
+            element.options.visible = false;
+            equal(element.isVisible(), false);
+        });
+
+        test("transform sets transform option", function() {
+            element.transform(Matrix.unit());
+            ok(element.options.transform);
+        });
+
+        test("combineTransform returns undefined if the element has no transformation and no matrix is passed", function() {
+            matrix = element.combineTransform();
+            equal(matrix, undefined);
+        });
+
+        test("combineTransform returns element transformation matrix if no matrix is passed", function() {
+            element.transform(Matrix.translate(10,20));
+            matrix = element.combineTransform();
+            compareMatrices(matrix, new Matrix(1,0,0,1,10,20));
+        });
+
+        test("combineTransform returns passed matrix if the element has no transformation", function() {
+            matrix = element.combineTransform(Matrix.translate(10,20));
+            compareMatrices(matrix, new Matrix(1,0,0,1,10,20));
+        });
+
+        test("combineTransform returns the passed matrix multiplied by the element matrix", function() {
+            element.transform(new Matrix(3,3,3,3,3,3));
+            matrix = element.combineTransform(new Matrix(2,2,2,2,2,2));
+            compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
+        });
+
+    })();
 
     // ------------------------------------------------------------
     var group;
@@ -249,7 +317,7 @@
         equal(boundingBox.p1.x, 152.5);
         equal(boundingBox.p1.y, 152.5);
     });
-    
+
     // ------------------------------------------------------------
     var arcGeometry,
         arc;
@@ -262,11 +330,11 @@
                 radiusX: 50,
                 radiusY: 100
             });
-            
+
             arc = new Arc(arcGeometry);
         }
     });
-    
+
     test("sets initial geometry", function() {
         deepEqual(arc.geometry, arcGeometry);
     });
@@ -286,14 +354,14 @@
 
         arc.geometry.center.set("x", 5);
     });
-    
+
     test("changing a geometry field triggers geometryChange", 2, function() {
         arc.observer = {
             geometryChange: function() {
                 ok(true);
             }
         };
-       
+
         arc.geometry.set("radiusX", 100);
         arc.geometry.set("counterClockwise", true);
     });
@@ -312,8 +380,8 @@
         equal(boundingBox.p0.y, 47.5);
         equal(boundingBox.p1.x, 152.5);
         equal(boundingBox.p1.y, 152.5);
-    });    
-    
+    });
+
     // ------------------------------------------------------------
     var segment;
 
@@ -600,10 +668,10 @@
 
         equal(multiPath.paths[1].segments.length, 2);
     });
-    
+
     test("curveTo returns multiPath", function() {
         deepEqual(multiPath.moveTo(0, 0).curveTo(new Point(), new Point(), new Point()), multiPath);
-    });    
+    });
 
     test("changing the control points triggers geometryChange", 2, function() {
         var controlOut = Point.create(10, 10),
