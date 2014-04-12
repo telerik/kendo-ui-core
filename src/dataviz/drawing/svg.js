@@ -223,9 +223,9 @@
         },
 
         renderTransform: function() {
-            var transform = this.srcElement.options.transform;
-            if (transform) {
-                return renderAttr("transform", "matrix(" + transform.toString() + ")");
+            var srcElement = this.srcElement;
+            if (srcElement && srcElement.options.transform) {
+                return renderAttr("transform", "matrix(" + srcElement.options.transform.toString() + ")");
             }
 
             return "";
@@ -242,7 +242,7 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g #= d.renderTransform() # >#= d.renderChildren() #</g>"
+            "<g#= d.renderTransform() #>#= d.renderChildren() #</g>"
         )
     });
 
