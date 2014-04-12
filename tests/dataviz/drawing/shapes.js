@@ -439,6 +439,16 @@
         equal(boundingBox.p1.y, 100);
     });
 
+    test("boundingBoxTo returns the transformed line bounding box", function() {
+        var other = new Segment(Point.create(100, 100)),
+            boundingBox = segment.boundingBoxTo(other, Matrix.scale(2,1));
+
+        equal(boundingBox.p0.x, 0);
+        equal(boundingBox.p0.y, 0);
+        equal(boundingBox.p1.x, 200);
+        equal(boundingBox.p1.y, 100);
+    });
+
     test("boundingBoxTo returns the curve bounding rect to the passed segment if all control points are specified", function() {
         var other = new Segment(Point.create(30, 50), Point.create(-20, 30)),
             boundingBox = segment.boundingBoxTo(other);
@@ -446,6 +456,16 @@
         close(boundingBox.p0.x, -8.2, TOLERANCE);
         close(boundingBox.p0.y, -1.6, TOLERANCE);
         close(boundingBox.p1.x, 30, TOLERANCE);
+        close(boundingBox.p1.y, 50, TOLERANCE);
+    });
+
+    test("boundingBoxTo returns the transformed curve bounding rect to the passed segment", function() {
+        var other = new Segment(Point.create(30, 50), Point.create(-20, 30)),
+            boundingBox = segment.boundingBoxTo(other, Matrix.scale(2,1));
+
+        close(boundingBox.p0.x, -16.3, TOLERANCE);
+        close(boundingBox.p0.y, -1.6, TOLERANCE);
+        close(boundingBox.p1.x, 60, TOLERANCE);
         close(boundingBox.p1.y, 50, TOLERANCE);
     });
 
