@@ -225,32 +225,19 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        boundingBoxTo: function(other, matrix) {
+        boundingBoxTo: function(toSegment, matrix) {
             var rect,
-                segment = this;
-            if (matrix) {
-                segment = segment.transformInto(matrix);
-                other = other.transformInto(matrix);
-            }
+                segment = this,
+                segmentAnchor = segment.anchor.transformInto(matrix),
+                toSegmentAnchor = toSegment.anchor.transformInto(matrix);
 
-            if (segment.controlOut && other.controlIn) {
-                rect = segment._curveBoundingBox(segment.anchor, segment.controlOut, other.controlIn, other.anchor);
+            if (segment.controlOut && toSegment.controlIn) {
+                rect = segment._curveBoundingBox(segmentAnchor, segment.controlOut.transformInto(matrix),
+                    toSegment.controlIn.transformInto(matrix), toSegmentAnchor);
             } else {
-                rect = segment._lineBoundingBox(segment.anchor, other.anchor);
+                rect = segment._lineBoundingBox(segmentAnchor, toSegmentAnchor);
             }
             return rect;
-        },
-
-        transformInto: function(matrix) {
-            var controlIn,
-                controlOut;
-            if (this.controlIn) {
-                controlIn = this.controlIn.transformInto(matrix);
-            }
-            if (this.controlOut) {
-                controlOut = this.controlOut.transformInto(matrix);
-            }
-            return new Segment(this.anchor.transformInto(matrix), controlIn, controlOut);
         },
 
         _lineBoundingBox: function(p1, p2) {
@@ -474,6 +461,7 @@
 
     // Exports ================================================================
     deepExtend(drawing, {
+        Element: Element,
         Group: Group,
         Shape: Shape,
 
