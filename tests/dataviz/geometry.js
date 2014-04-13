@@ -474,12 +474,12 @@
     });
 
     test("boundingBox returns the circle bounding Rect", function() {
-        var rect = circle.boundingBox();
+        var rect = circle.bBox();
         compareBoundingBox(rect, [-10,-10,10,10]);
     });
 
     test("boundingBox returns the transformed circle bounding Rect", function() {
-        var rect = circle.boundingBox(Matrix.scale(2,1));
+        var rect = circle.bBox(Matrix.scale(2,1));
         compareBoundingBox(rect, [-20,-10,20,10]);
     });
 
@@ -590,12 +590,12 @@
     });
 
     test("boundingBox returns the arc bounding Rect", function() {
-        var rect = arc.boundingBox();
+        var rect = arc.bBox();
         compareBoundingBox(rect, [50,100,150,200]);
     });
 
     test("boundingBox returns the transformed arc bounding Rect", function() {
-        var rect = arc.boundingBox(Matrix.scale(2,1));
+        var rect = arc.bBox(Matrix.scale(2,1));
         compareBoundingBox(rect, [100,100,300,200]);
     });
 

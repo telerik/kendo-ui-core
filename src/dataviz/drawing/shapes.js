@@ -108,7 +108,7 @@
             this.childrenChange("remove", items, 0);
         },
 
-        boundingBox: function(matrix) {
+        bBox: function(matrix) {
             return elementsBoundingBox(this.children, this.combineTransform(matrix));
         }
     });
@@ -159,9 +159,9 @@
             circle.geometry.observer = this;
         },
 
-        boundingBox: function(matrix) {
+        bBox: function(matrix) {
             var combinedMatrix = this.combineTransform(matrix),
-                rect = this.geometry.boundingBox(combinedMatrix);
+                rect = this.geometry.bBox(combinedMatrix);
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
@@ -180,9 +180,9 @@
             arc.geometry.observer = this;
         },
 
-        boundingBox: function(matrix) {
+        bBox: function(matrix) {
             var combinedMatrix = this.combineTransform(matrix),
-                rect = this.geometry.boundingBox(combinedMatrix);
+                rect = this.geometry.bBox(combinedMatrix);
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
@@ -225,7 +225,7 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        boundingBoxTo: function(toSegment, matrix) {
+        bBoxTo: function(toSegment, matrix) {
             var rect,
                 segment = this,
                 segmentAnchor = segment.anchor.transformInto(matrix),
@@ -357,7 +357,7 @@
             return this;
         },
 
-        boundingBox: function(matrix) {
+        bBox: function(matrix) {
             var segments = this.segments,
                 length = segments.length,
                 strokeWidth = this.options.get("stroke.width"),
@@ -371,7 +371,7 @@
             } else if (length > 0) {
                 boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
                 for (i = 1; i < length; i++) {
-                    boundingBox = boundingBox.wrap(segments[i - 1].boundingBoxTo(segments[i], combinedTransform));
+                    boundingBox = boundingBox.wrap(segments[i - 1].bBoxTo(segments[i], combinedTransform));
                 }
                 if (strokeWidth) {
                     expandRect(boundingBox, strokeWidth / 2);
@@ -422,7 +422,7 @@
             return this;
         },
 
-        boundingBox: function(matrix) {
+        bBox: function(matrix) {
             return elementsBoundingBox(this.paths, this.combineTransform(matrix));
         }
     });
@@ -442,7 +442,7 @@
             element = elements[i];
             if (element.isVisible()) {
                 hasBoundingBox = true;
-                boundingBox = boundingBox.wrap(element.boundingBox(matrix));
+                boundingBox = boundingBox.wrap(element.bBox(matrix));
             }
         }
 
