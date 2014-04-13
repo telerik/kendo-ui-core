@@ -68,6 +68,12 @@
             ok(element.options.transform);
         });
 
+        test("transform sets matrix if Transformation is passed", function() {
+            matrix = new Matrix(1,1,1,1,1,1);
+            element.transform(new g.Transformation(matrix));
+            compareMatrices(element.options.transform, matrix);
+        });
+
         test("parentTransform returns undefined if element has no parents", function() {
             ok(element.parentTransform() === undefined);
         });

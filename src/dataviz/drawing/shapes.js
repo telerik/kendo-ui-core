@@ -42,8 +42,11 @@
             }
         },
 
-        transform: function(matrix) {
-            this.options.set("transform", matrix);
+        transform: function(transform) {
+            if (transform instanceof g.Transformation) {
+                transform = transform.matrix();
+            }
+            this.options.set("transform", transform);
         },
 
         parentTransform: function() {
