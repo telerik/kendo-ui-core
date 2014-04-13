@@ -345,6 +345,13 @@
             this.matrix = matrix;
         },
 
+        optionsChange: function(e) {
+            if (e.field == "transform") {
+                this.allAttr(this.mapTransform(e.value));
+            }
+            this.invalidate();
+        },
+
         transformOrigin: function() {
             return "-0.5,-0.5";
         },
@@ -406,6 +413,8 @@
                 this.fill.optionsChange(e);
             } else if (e.field.indexOf("stroke") === 0) {
                 this.stroke.optionsChange(e);
+            } else if (e.field === "transform") {
+                this.transform.optionsChange(e);
             }
 
             this.invalidate();

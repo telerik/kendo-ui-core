@@ -633,6 +633,33 @@
         ok(transformNode.render().indexOf("origin") === -1);
     });
 
+    test("options change updates attributes", 4, function() {
+        var element = new d.Element(),
+            expectedValues = {
+                on: "true",
+                matrix: "1,3,2,4,0,0",
+                offset: "5px,6px",
+                origin: "-0.5,-0.5"
+            };
+        transformNode = new TransformNode(element);
+        transformNode.attr = function(key, value) {
+            equal(expectedValues[key], value);
+        };
+        element.options.set("transform", new Matrix(1,2,3,4,5,6));
+    });
+
+    test("clearing transform updates attributes", 1, function() {
+        var element = new d.Element(),
+            expectedValues = {
+                on: "false"
+            };
+        transformNode = new TransformNode(element);
+        transformNode.attr = function(key, value) {
+            equal(expectedValues[key], value);
+        };
+        element.options.set("transform", null);
+    });
+
     // ------------------------------------------------------------
     var path,
         pathNode,
@@ -797,6 +824,22 @@
         path.visible(true);
     });
 
+    test("optionsChange is forwarded to transform", function() {
+        pathNode.transform.optionsChange = function(e) {
+            ok(true);
+        };
+
+        path.options.set("transform", Matrix.unit());
+    });
+
+    test("optionsChange is not forwarded to transform", 0, function() {
+        pathNode.transform.optionsChange = function() {
+            ok(true);
+        };
+
+        path.options.set("foo", true);
+    });
+
     // ------------------------------------------------------------
     var multiPath,
         multiPathNode;
@@ -830,17 +873,41 @@
 
     // ------------------------------------------------------------
 
-    var circleTransformNode;
+    var circleTransformNode,
+        transformCircle;
 
     module("CircleTransformNode", {
         setup: function() {
-            var circle = new Circle(new g.Circle(new Point(600,400), 100));
-            circleTransformNode = new CircleTransformNode(circle, new Matrix(1,2,3,4,5,6));
+            transformCircle = new Circle(new g.Circle(new Point(600,400), 100));
+            circleTransformNode = new CircleTransformNode(transformCircle, new Matrix(1,2,3,4,5,6));
         }
     });
 
     test("circle transform origin is minus bBox center over bBox size", function() {
         ok(circleTransformNode.render().indexOf("origin='-3,-2'") !== -1);
+    });
+
+    test("options change updates attributes", 4, function() {
+        var expectedValues = {
+                on: "true",
+                matrix: "2,4,3,5,0,0",
+                offset: "6px,7px",
+                origin: "-3,-2"
+            };
+        circleTransformNode.attr = function(key, value) {
+            equal(expectedValues[key], value);
+        };
+        transformCircle.options.set("transform", new Matrix(2,3,4,5,6,7));
+    });
+
+    test("clearing transform updates attributes", 1, function() {
+        var expectedValues = {
+                on: "false"
+            };
+        circleTransformNode.attr = function(key, value) {
+            equal(expectedValues[key], value);
+        };
+        transformCircle.options.set("transform", null);
     });
 
     // ------------------------------------------------------------
@@ -887,6 +954,22 @@
         };
 
         circle.geometry.set("radius", 60);
+    });
+
+    test("optionsChange is forwarded to transform", function() {
+        circleNode.transform.optionsChange = function(e) {
+            ok(true);
+        };
+
+        circle.options.set("transform", Matrix.unit());
+    });
+
+    test("optionsChange is not forwarded to transform", 0, function() {
+        circleNode.transform.optionsChange = function() {
+            ok(true);
+        };
+
+        circle.options.set("foo", true);
     });
 
     // ------------------------------------------------------------
