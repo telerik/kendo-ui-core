@@ -3,6 +3,7 @@
 
         g = dataviz.geometry,
         Point = g.Point,
+        Matrix = g.Matrix,
 
         d = dataviz.drawing,
         Circle = d.Circle,
@@ -19,7 +20,8 @@
         PathNode = vml.PathNode,
         MultiPathNode = vml.MultiPathNode,
         Surface = vml.Surface,
-        StrokeNode = vml.StrokeNode;
+        StrokeNode = vml.StrokeNode,
+        TransformNode = vml.TransformNode;
 
     // ------------------------------------------------------------
     var container,
@@ -481,6 +483,62 @@
     });
 
     // ------------------------------------------------------------
+
+    var transformNode;
+
+    module("TransformNode", {
+        setup: function() {
+            transformNode = new TransformNode(new d.Element(), new Matrix(1,2,3,4,5,6));
+        }
+    });
+
+    test("renders skew element", function() {
+        equal(transformNode.render().indexOf("<kvml:skew"), 0);
+    });
+
+    test("sets on to true when matrix is available", function() {
+        ok(transformNode.render().indexOf("on='true'") !== -1);
+    });
+
+    test("sets on to false when matrix is not available", function() {
+        transformNode = new TransformNode(new d.Element());
+        ok(transformNode.render().indexOf("on='false'") !== -1);
+    });
+
+    test("renders matrix attribute", function() {
+        ok(transformNode.render().indexOf("matrix='1,3,2,4,0,0'") !== -1);
+    });
+
+    test("rounds matrix values to the MAX_PRECISION digit", function() {
+        var value = new Number("0." + new Array(TransformNode.fn.MAX_PRECISION + 1).join("5"));
+        transformNode = new TransformNode(new d.Element(), new Matrix(value, 0, 0, 1, 0, 0));
+        ok(/matrix='(\d\.\d+)/g.exec(transformNode.render())[1] == dataviz.util.round(value, TransformNode.fn.MAX_PRECISION));
+    });
+
+    test("does not render matrix attribute if there is no matrix", function() {
+        transformNode = new TransformNode(new d.Element());
+        ok(transformNode.render().indexOf("matrix") === -1);
+    });
+
+    test("renders offset attribute", function() {
+        ok(transformNode.render().indexOf("offset='5px,6px'") !== -1);
+    });
+
+    test("does not render offset attribute if there is no matrix", function() {
+        transformNode = new TransformNode(new d.Element());
+        ok(transformNode.render().indexOf("offset") === -1);
+    });
+
+    test("renders origin attribute", function() {
+        ok(transformNode.render().indexOf("origin='-0.5,-0.5'") !== -1);
+    });
+
+    test("does not render origin attribute if there is no matrix", function() {
+        transformNode = new TransformNode(new d.Element());
+        ok(transformNode.render().indexOf("origin") === -1);
+    });
+
+    // ------------------------------------------------------------
     var path,
         pathNode,
         container;
@@ -504,7 +562,7 @@
 
         ok(pathNode.render().indexOf("v='m 0,0 l 10,20 20,30 e'") !== -1);
     });
-    
+
     test("renders curve", function() {
         path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
 
@@ -521,7 +579,7 @@
         path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0)).lineTo(40, 10);
 
         ok(pathNode.render().indexOf("v='m 0,0 c 10,10 20,10 30,0 l 40,10 e'") !== -1);
-    });    
+    });
 
     test("renders closed paths", function() {
         path.moveTo(0, 0).lineTo(10, 20).close();
@@ -688,7 +746,7 @@
 
         circle.geometry.set("radius", 60);
     });
-    
+
     // ------------------------------------------------------------
     var arc,
         arcNode;
@@ -717,14 +775,14 @@
         ok(/kvml:fill.*?color='green'.*?kvml:fill/.test(result));
         ok(/kvml:fill.*?opacity='0.5'.*?kvml:fill/.test(result));
     });
-    
+
     test("renders arc stroke", function() {
         var result = arcNode.render();
 
         ok(/kvml:stroke.*?color='red'.*?kvml:stroke/.test(result));
         ok(/kvml:stroke.*?weight='4px'.*?kvml:stroke/.test(result));
     });
-    
+
     test("geometryChange updates path", function() {
         arcNode.attr = function(name, value) {
             equal(name, "v");
@@ -733,5 +791,5 @@
 
         arc.geometry.set("endAngle", 180);
     });
-    
+
 })();

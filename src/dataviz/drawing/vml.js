@@ -18,7 +18,8 @@
         BaseNode = d.BaseNode,
 
         util = dataviz.util,
-        renderAllAttr = util.renderAllAttr;
+        renderAllAttr = util.renderAllAttr,
+        round = util.round;
 
     // Constants ==============================================================
     var NONE = "none",
@@ -335,6 +336,46 @@
         )
     });
 
+    var TransformNode = Node.extend({
+        MAX_PRECISION: 15,
+        init: function(srcElement, matrix) {
+            Node.fn.init.call(this, srcElement);
+            this.matrix = matrix;
+        },
+
+        transformOrigin: function() {
+            return "-0.5,-0.5";
+        },
+
+        mapTransform: function(matrix) {
+            var attrs = [],
+                a, b, c, d,
+                MAX_PRECISION = this.MAX_PRECISION;
+
+            if (matrix) {
+                a = round(matrix.a, MAX_PRECISION);
+                b = round(matrix.b, MAX_PRECISION);
+                c = round(matrix.c, MAX_PRECISION);
+                d = round(matrix.d, MAX_PRECISION);
+                attrs.push(["on", "true"], ["matrix", [a, c, b, d, 0, 0].join(",")],
+                    ["offset", matrix.e + "px," + matrix.f + "px"],
+                    ["origin", this.transformOrigin()]);
+            } else {
+                attrs.push(["on", "false"]);
+            }
+
+            return attrs;
+        },
+
+        renderTranform: function() {
+            return renderAllAttr(this.mapTransform(this.matrix));
+        },
+
+        template: renderTemplate(
+            "<kvml:skew #=d.renderTranform()# ></kvml:skew>"
+        )
+    });
+
     var PathNode = Node.extend({
         init: function(srcElement) {
             this.fill = new FillNode(srcElement);
@@ -550,7 +591,8 @@
             PathNode: PathNode,
             RootNode: RootNode,
             StrokeNode: StrokeNode,
-            Surface: Surface
+            Surface: Surface,
+            TransformNode: TransformNode
         }
     });
 
