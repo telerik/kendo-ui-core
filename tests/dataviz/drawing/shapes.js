@@ -68,6 +68,20 @@
             ok(element.options.transform);
         });
 
+        test("parentTransform returns undefined if element has no parents", function() {
+            ok(element.parentTransform() === undefined);
+        });
+
+        test("parentTransform returns parents matrix", function() {
+            var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
+                group = new Group({transform: new Matrix(3,3,3,3,3,3)});
+
+            group.append(element);
+            mainGroup.append(group);
+
+            compareMatrices(element.parentTransform(), new Matrix(12,12,12,12,14,14));
+        });
+
         test("combineTransform returns undefined if the element has no transformation and no matrix is passed", function() {
             matrix = element.combineTransform();
             equal(matrix, undefined);
@@ -90,18 +104,26 @@
             compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
         });
 
-        test("parentTransform returns undefined if element has no parents", function() {
-            ok(element.parentTransform() === undefined);
-        });
-
-        test("parentTransform returns parents matrix", function() {
+        test("combineTransform gets matrix from parents if no matrix is passed", function() {
             var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
                 group = new Group({transform: new Matrix(3,3,3,3,3,3)});
 
             group.append(element);
             mainGroup.append(group);
+            matrix = element.combineTransform();
 
-            compareMatrices(element.parentTransform(), new Matrix(12,12,12,12,14,14));
+            compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
+        });
+
+        test("combineTransform returns element matrix if IDENTITY matrix is passed", function() {
+            var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
+                group = new Group({transform: new Matrix(3,3,3,3,3,3)});
+
+            group.append(element);
+            mainGroup.append(group);
+            matrix = new Matrix(1,1,1,1,1,1);
+            element.transform(matrix);
+            compareMatrices(element.combineTransform(Matrix.IDENTITY), matrix);
         });
 
     })();
@@ -271,6 +293,10 @@
         group.append(circle);
         group.append(path);
         group.bBox();
+    });
+
+    test("combineTransform returns IDENTITY matrix if group has no matrix and there is no parent matrix", function() {
+        ok(group.combineTransform() === Matrix.IDENTITY);
     });
 
     // ------------------------------------------------------------

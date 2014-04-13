@@ -61,6 +61,15 @@
         combineTransform: function(matrix) {
             var elementTransform = this.options.get("transform"),
                 combinedTransform;
+
+            if (matrix === Matrix.IDENTITY) {
+                return elementTransform;
+            }
+
+            if (!defined(matrix)) {
+                matrix = this.parentTransform();
+            }
+
             if (elementTransform && matrix) {
                 combinedTransform = matrix.times(elementTransform);
             } else {
@@ -127,6 +136,10 @@
 
         bBox: function(matrix) {
             return elementsBoundingBox(this.children, this.combineTransform(matrix));
+        },
+
+        combineTransform: function(matrix) {
+            return Element.fn.combineTransform.call(this, matrix) || Matrix.IDENTITY;
         }
     });
 
@@ -463,7 +476,7 @@
             }
         }
 
-        if(hasBoundingBox) {
+        if (hasBoundingBox) {
             return boundingBox;
         }
     }
