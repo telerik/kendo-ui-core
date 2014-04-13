@@ -15,6 +15,7 @@
         Node = vml.Node,
         ArcNode = vml.ArcNode,
         CircleNode = vml.CircleNode,
+        CircleTransformNode = vml.CircleTransformNode,
         FillNode = vml.FillNode,
         GroupNode = vml.GroupNode,
         PathNode = vml.PathNode,
@@ -182,6 +183,14 @@
         };
 
         node.load([new MultiPath()]);
+    });
+
+    test("load appends CircleNode", function() {
+        node.append = function(child) {
+            ok(child instanceof CircleNode);
+        };
+
+        node.load([new Circle(new g.Circle())]);
     });
 
     test("load appends child nodes", function() {
@@ -643,6 +652,10 @@
         equal(path.observer, pathNode);
     });
 
+    test("initializes a TransformNode", function() {
+        ok(pathNode.transform instanceof TransformNode);
+    });
+
     test("renders straight segments", function() {
         path.moveTo(0, 0).lineTo(10, 20).lineTo(20, 30);
 
@@ -816,6 +829,21 @@
     });
 
     // ------------------------------------------------------------
+
+    var circleTransformNode;
+
+    module("CircleTransformNode", {
+        setup: function() {
+            var circle = new Circle(new g.Circle(new Point(600,400), 100));
+            circleTransformNode = new CircleTransformNode(circle, new Matrix(1,2,3,4,5,6));
+        }
+    });
+
+    test("circle transform origin is minus bBox center over bBox size", function() {
+        ok(circleTransformNode.render().indexOf("origin='-3,-2'") !== -1);
+    });
+
+    // ------------------------------------------------------------
     var circle,
         circleNode;
 
@@ -825,6 +853,10 @@
             circle = new Circle(geometry);
             circleNode = new CircleNode(circle);
         }
+    });
+
+    test("initializes a CircleTransformNode", function() {
+        ok(circleNode.transform instanceof CircleTransformNode);
     });
 
     test("renders center", function() {

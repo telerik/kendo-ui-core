@@ -541,7 +541,21 @@
         }
     });
 
+    var CircleTransformNode = TransformNode.extend({
+        transformOrigin: function() {
+            var boundingBox = this.srcElement.geometry.bBox(),
+                center = boundingBox.center(),
+                originX = -center.x / boundingBox.width(),
+                originY = -center.y / boundingBox.height();
+            return originX + "," + originY;
+        }
+    });
+
     var CircleNode = PathNode.extend({
+        createTransformNode: function(srcElement, transform) {
+            return new CircleTransformNode(srcElement, transform);
+        },
+
         geometryChange: function() {
             var radius = this.radius();
             var center = this.center();
@@ -589,6 +603,7 @@
     deepExtend(d, {
         vml: {
             ArcNode: ArcNode,
+            CircleTransformNode: CircleTransformNode,
             CircleNode: CircleNode,
             FillNode: FillNode,
             GroupNode: GroupNode,

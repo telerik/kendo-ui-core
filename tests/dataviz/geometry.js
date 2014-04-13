@@ -370,6 +370,10 @@
         equal(wrap.p1.y, 20);
     });
 
+    test("center returns center point", function() {
+        deepEqual(rect.center(), new Point(5,10));
+    });
+
     // ------------------------------------------------------------
     var circle;
 

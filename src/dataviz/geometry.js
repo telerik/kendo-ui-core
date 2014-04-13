@@ -203,6 +203,10 @@
 
         wrap: function(targetRect) {
             return new Rect(this.p0.min(targetRect.p0), this.p1.max(targetRect.p1));
+        },
+
+        center: function() {
+            return new Point(this.p0.x  + this.width() / 2, this.p0.y  + this.height() / 2);
         }
     });
 
