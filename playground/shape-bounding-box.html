@@ -150,7 +150,7 @@
             
             //circleTransformTest();
             function circleTransformTest() {
-                var m = transform().scale(1,2).rotate(30).translate(100,0).matrix();
+                var m = transform().scale(1,2).rotate(30).translate(500,-500).matrix();
                 circleGeometry = new Circle(Point.create(250, 200), 100);
                 var original = new drawing.Circle(circleGeometry, {stroke: {color: "red", width: 3}});
                 circle = new drawing.Circle(circleGeometry, {stroke: {color: "red", width: 3}, transform: m});
