@@ -24,7 +24,8 @@
     // Constants ==============================================================
     var NONE = "none",
         SPACE = " ",
-        TRANSPARENT = "transparent";
+        TRANSPARENT = "transparent",
+        COORDINATE_MULTIPLE = 100;
 
     // VML rendering surface ==================================================
     var Surface = d.Surface.extend({
@@ -454,7 +455,7 @@
                 length = points.length,
                 i, result = [];
             for (i = 0; i < length; i++) {
-                result.push(points[i].toString(0, ","));
+                result.push(points[i].multiplyInto(COORDINATE_MULTIPLE).toString(0, ","));
             }
             return result.join(SPACE);
         },
@@ -494,13 +495,12 @@
         },
 
         renderCoordsize: function() {
-            var scale = this.srcElement.options.align === false ? 10000 : 1;
+            var scale = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE;
             return "coordsize='" + scale + " " + scale + "'";
         },
 
         renderSize: function() {
-            var scale = this.srcElement.options.align === false ? 100 : 1;
-            return "width:" + scale + "px;height:" + scale + "px;";
+            return "width:" + COORDINATE_MULTIPLE + "px;height:" + COORDINATE_MULTIPLE + "px;";
         },
 
         template: renderTemplate(

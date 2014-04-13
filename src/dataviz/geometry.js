@@ -88,6 +88,10 @@
             return this;
         },
 
+        multiplyInto: function(a) {
+            return new Point(this.x * a, this.y * a);
+        },
+
         transform: function(mx) {
             var x = this.x,
                 y = this.y;

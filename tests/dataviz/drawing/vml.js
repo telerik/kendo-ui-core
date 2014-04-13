@@ -560,31 +560,31 @@
     test("renders straight segments", function() {
         path.moveTo(0, 0).lineTo(10, 20).lineTo(20, 30);
 
-        ok(pathNode.render().indexOf("v='m 0,0 l 10,20 20,30 e'") !== -1);
+        ok(pathNode.render().indexOf("v='m 0,0 l 1000,2000 2000,3000 e'") !== -1);
     });
 
     test("renders curve", function() {
         path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
 
-        ok(pathNode.render().indexOf("v='m 0,0 c 10,10 20,10 30,0 e'") !== -1);
+        ok(pathNode.render().indexOf("v='m 0,0 c 1000,1000 2000,1000 3000,0 e'") !== -1);
     });
 
     test("switches between line and curve", function() {
         path.moveTo(0, 0).lineTo(5, 5).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
 
-        ok(pathNode.render().indexOf("v='m 0,0 l 5,5 c 10,10 20,10 30,0 e'") !== -1);
+        ok(pathNode.render().indexOf("v='m 0,0 l 500,500 c 1000,1000 2000,1000 3000,0 e'") !== -1);
     });
 
     test("switches between curve and line", function() {
         path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0)).lineTo(40, 10);
 
-        ok(pathNode.render().indexOf("v='m 0,0 c 10,10 20,10 30,0 l 40,10 e'") !== -1);
+        ok(pathNode.render().indexOf("v='m 0,0 c 1000,1000 2000,1000 3000,0 l 4000,1000 e'") !== -1);
     });
 
     test("renders closed paths", function() {
         path.moveTo(0, 0).lineTo(10, 20).close();
 
-        ok(pathNode.render().indexOf("v='m 0,0 l 10,20 x e'") !== -1);
+        ok(pathNode.render().indexOf("v='m 0,0 l 1000,2000 x e'") !== -1);
     });
 
     test("does not render segments for empty path", function() {
@@ -624,6 +624,18 @@
     test("does not render visibility if set to true", function() {
         path.visible(true);
         ok(pathNode.render().indexOf("display:none;") === -1);
+    });
+
+    test("renders coordsize", function() {
+        ok(pathNode.render().indexOf("coordsize='10000 10000'") !== -1);
+    });
+
+    test("renders width", function() {
+        ok(pathNode.render().indexOf("width:100px;") !== -1);
+    });
+
+    test("renders height", function() {
+        ok(pathNode.render().indexOf("height:100px;") !== -1);
     });
 
     test("geometryChange sets path", function() {
@@ -702,7 +714,19 @@
             .moveTo(0, 0).lineTo(10, 20)
             .moveTo(10, 10).lineTo(10, 20);
 
-        ok(multiPathNode.render().indexOf("v='m 0,0 l 10,20 m 10,10 l 10,20 e'") !== -1);
+        ok(multiPathNode.render().indexOf("v='m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e'") !== -1);
+    });
+
+    test("renders coordsize", function() {
+        ok(multiPathNode.render().indexOf("coordsize='10000 10000'") !== -1);
+    });
+
+    test("renders width", function() {
+        ok(multiPathNode.render().indexOf("width:100px;") !== -1);
+    });
+
+    test("renders height", function() {
+        ok(multiPathNode.render().indexOf("height:100px;") !== -1);
     });
 
     // ------------------------------------------------------------
@@ -766,7 +790,7 @@
 
     test("renders curve path", function() {
         var result = arcNode.render();
-        ok(result.indexOf("v='m 150,100 c 150,135 140,169 125,187 110,204 90,204 75,187 e'") !== -1);
+        ok(result.indexOf("v='m 15000,10000 c 15000,13491 14011,16915 12500,18660 10989,20406 9011,20406 7500,18660 e'") !== -1);
     });
 
     test("renders arc fill", function() {
@@ -783,10 +807,22 @@
         ok(/kvml:stroke.*?weight='4px'.*?kvml:stroke/.test(result));
     });
 
+    test("renders coordsize", function() {
+        ok(arcNode.render().indexOf("coordsize='10000 10000'") !== -1);
+    });
+
+    test("renders width", function() {
+        ok(arcNode.render().indexOf("width:100px;") !== -1);
+    });
+
+    test("renders height", function() {
+        ok(arcNode.render().indexOf("height:100px;") !== -1);
+    });
+
     test("geometryChange updates path", function() {
         arcNode.attr = function(name, value) {
             equal(name, "v");
-            equal(value, "m 150,100 c 150,152 126,200 100,200 74,200 50,152 50,100 e");
+            equal(value, "m 15000,10000 c 15000,15236 12618,20000 10000,20000 7382,20000 5000,15236 5000,10000 e");
         };
 
         arc.geometry.set("endAngle", 180);
