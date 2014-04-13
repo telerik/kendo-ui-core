@@ -505,6 +505,8 @@
         }
     });
 
+    Matrix.IDENTITY = Matrix.unit();
+
     var Transformation = Class.extend({
         init: function(matrix) {
             this._matrix = matrix || Matrix.unit();

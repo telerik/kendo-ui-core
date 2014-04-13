@@ -672,6 +672,10 @@
             compareMatrices(matrix, initMatrix(1,0,0,1,0,0));
         });
 
+        test("Matrix.IDENTITY is equal to the unit matrix", function() {
+            compareMatrices(Matrix.IDENTITY, Matrix.unit());
+        });
+
         test("translate returns the identity matrix translated with x y", function() {
             matrix = Matrix.translate(10, 20);
             compareMatrices(matrix, initMatrix(1,0,0,1,10,20));
