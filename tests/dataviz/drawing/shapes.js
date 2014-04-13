@@ -90,6 +90,20 @@
             compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
         });
 
+        test("parentTransform returns undefined if element has no parents", function() {
+            ok(element.parentTransform() === undefined);
+        });
+
+        test("parentTransform returns parents matrix", function() {
+            var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
+                group = new Group({transform: new Matrix(3,3,3,3,3,3)});
+
+            group.append(element);
+            mainGroup.append(group);
+
+            compareMatrices(element.parentTransform(), new Matrix(12,12,12,12,14,14));
+        });
+
     })();
 
     // ------------------------------------------------------------

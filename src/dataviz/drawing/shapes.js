@@ -15,6 +15,7 @@
         g = dataviz.geometry,
         Point = g.Point,
         Rect = g.Rect,
+        Matrix = g.Matrix,
 
         drawing = dataviz.drawing,
         OptionsStore = drawing.OptionsStore,
@@ -43,6 +44,18 @@
 
         transform: function(matrix) {
             this.options.set("transform", matrix);
+        },
+
+        parentTransform: function() {
+            var element = this,
+                result;
+            while (element.parent) {
+                element = element.parent;
+                if (element.options.transform) {
+                    result = element.options.transform.times(result || Matrix.unit());
+                }
+            }
+            return result;
         },
 
         combineTransform: function(matrix) {
