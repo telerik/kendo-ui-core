@@ -658,6 +658,23 @@
         element.options.set("transform", new Matrix(1,2,3,4,5,6));
     });
 
+    test("options change takes parents matrix into account", 4, function() {
+        var element = new d.Element(),
+            group = new d.Group({transform: new Matrix(1,0,0,1,10,10)}),
+            expectedValues = {
+                on: "true",
+                matrix: "1,3,2,4,0,0",
+                offset: "15px,16px",
+                origin: "-0.5,-0.5"
+            };
+        group.append(element);
+        transformNode = new TransformNode(element);
+        transformNode.attr = function(key, value) {
+            equal(expectedValues[key], value);
+        };
+        element.options.set("transform", new Matrix(1,2,3,4,5,6));
+    });
+
     test("clearing transform updates attributes", 1, function() {
         var element = new d.Element(),
             expectedValues = {

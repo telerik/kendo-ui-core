@@ -349,7 +349,8 @@
 
         optionsChange: function(e) {
             if (e.field == "transform") {
-                this.allAttr(this.mapTransform(e.value));
+                this.matrix = this.srcElement.combineTransform();
+                this.allAttr(this.mapTransform(this.matrix));
             }
             this.invalidate();
         },
