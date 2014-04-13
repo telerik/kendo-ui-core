@@ -222,6 +222,18 @@
             BaseNode.fn.clear.call(this);
         },
 
+        attr: function(name, value) {
+            if (this.element) {
+                this.element.setAttribute(name, value);
+            }
+        },
+
+        allAttr: function(attrs) {
+            for (var i = 0; i < attrs.length; i++) {
+                this.attr(attrs[i][0], attrs[i][1]);
+            }
+        },
+
         renderTransform: function() {
             var srcElement = this.srcElement;
             if (srcElement && srcElement.options.transform) {
@@ -286,18 +298,6 @@
             "stroke.color": "stroke",
             "stroke.width": "stroke-width",
             "stroke.opacity": "stroke-opacity"
-        },
-
-        attr: function(name, value) {
-            if (this.element) {
-                this.element.setAttribute(name, value);
-            }
-        },
-
-        allAttr: function(attrs) {
-            for (var i = 0; i < attrs.length; i++) {
-                this.attr(attrs[i][0], attrs[i][1]);
-            }
         },
 
         renderData: function() {
