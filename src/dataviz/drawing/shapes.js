@@ -99,12 +99,16 @@
 
         append: function() {
             append(this.children, arguments);
+            updateElementsParent(arguments, this);
+
             this.childrenChange("add", arguments);
         },
 
         clear: function() {
             var items = this.children;
             this.children = [];
+            updateElementsParent(items, null);
+
             this.childrenChange("remove", items, 0);
         },
 
@@ -448,6 +452,14 @@
 
         if(hasBoundingBox) {
             return boundingBox;
+        }
+    }
+
+    function updateElementsParent(elements, parent) {
+        var length = elements.length,
+            i;
+        for (i = 0; i < length; i++) {
+            elements[i].parent = parent;
         }
     }
 

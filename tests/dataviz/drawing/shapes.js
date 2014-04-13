@@ -108,6 +108,13 @@
         deepEqual(group.children[0], child);
     });
 
+    test("append sets children parent", function() {
+        var child = new Group();
+        group.append(child);
+
+        ok(child.parent === group);
+    });
+
     test("append triggers childrenChange", function() {
         var child = new Group();
 
@@ -131,6 +138,14 @@
         }
 
         group.clear();
+    });
+
+    test("clear sets children parent to null", function() {
+        var child = new Group();
+        group.append(child);
+        group.clear();
+
+        ok(child.parent === null);
     });
 
     test("visible triggers optionsChange", function() {
