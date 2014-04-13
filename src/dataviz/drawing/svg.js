@@ -234,13 +234,24 @@
             }
         },
 
-        renderTransform: function() {
-            var srcElement = this.srcElement;
-            if (srcElement && srcElement.options.transform) {
-                return renderAttr("transform", "matrix(" + srcElement.options.transform.toString() + ")");
+        removeAttr: function(name) {
+            if (this.element) {
+                this.element.removeAttribute(name);
+            }
+        },
+
+        mapTransform: function(transform) {
+            var attrs = [];
+            if (transform) {
+                attrs.push(["transform", "matrix(" + transform.toString() + ")"]);
             }
 
-            return "";
+            return attrs;
+        },
+
+        renderTransform: function() {
+            var transform = this.srcElement.options.transform;
+            return renderAllAttr(this.mapTransform(transform));
         }
     });
 

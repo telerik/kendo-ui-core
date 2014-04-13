@@ -3,6 +3,7 @@
 
         g = dataviz.geometry,
         Point = g.Point,
+        Matrix = g.Matrix,
 
         d = dataviz.drawing,
         Circle = d.Circle,
@@ -194,11 +195,13 @@
     });
 
     // ------------------------------------------------------------
-    var groupNode;
+    var groupNode,
+        group;
 
     module("GroupNode", {
         setup: function() {
-            groupNode = new GroupNode();
+            group = new Group();
+            groupNode = new GroupNode(group);
         }
     });
 
@@ -209,15 +212,15 @@
     });
 
     test("attachTo sets element for child nodes", function() {
-        groupNode.append(new GroupNode());
+        groupNode.append(new GroupNode(new Group()));
         groupNode.attachTo(document.createElement("div"));
 
         ok(groupNode.childNodes[0].element);
     });
 
     test("attachTo sets element for grandchild nodes", function() {
-        var child = new GroupNode();
-        var grandChild = new GroupNode();
+        var child = new GroupNode(new Group());
+        var grandChild = new GroupNode(new Group());
 
         child.append(grandChild);
         groupNode.append(child);
@@ -234,7 +237,7 @@
     });
 
     test("attachTo sets _kendoNode expando on child elements", function() {
-        var childGroup = new GroupNode();
+        var childGroup = new GroupNode(new Group());
         groupNode.append(childGroup);
         groupNode.attachTo(document.createElement("div"));
 
@@ -242,8 +245,8 @@
     });
 
     test("attachTo sets _kendoNode expando for grandchild nodes", function() {
-        var child = new GroupNode();
-        var grandChild = new GroupNode();
+        var child = new GroupNode(new Group());
+        var grandChild = new GroupNode(new Group());
 
         child.append(grandChild);
         groupNode.append(child);
@@ -279,6 +282,15 @@
 
     test("renders group tag", function() {
         equal(groupNode.render(), "<g></g>");
+    });
+
+    test("renders group transform", function() {
+        groupNode = new GroupNode(new Group({transform: new Matrix(1,1,1,1,1,1)}));
+        equal(groupNode.render(), "<g transform='matrix(1,1,1,1,1,1)' ></g>");
+    });
+
+    test("does not render transform if not set", function() {
+        ok(groupNode.render().indexOf("transform") === -1);
     });
 
     // ------------------------------------------------------------
@@ -602,7 +614,7 @@
 
         circle.geometry.set("radius", 60);
     });
-    
+
     // ------------------------------------------------------------
     var arc,
         arcNode;
@@ -621,7 +633,7 @@
     });
 
     test("renders curve path", function() {
-        var result = arcNode.render();        
+        var result = arcNode.render();
         ok(result.indexOf("d='M150 100 C 150 134.9 140.1 169.1 125 186.6 109.9 204.1 90.1 204.1 75 186.6'") !== -1);
     });
 
@@ -631,13 +643,13 @@
         ok(result.indexOf("fill='green'") !== -1);
         ok(result.indexOf("fill-opacity='0.5'") !== -1);
     });
-    
+
     test("renders arc stroke", function() {
         var result = arcNode.render();
         ok(result.indexOf("stroke-width='4'") !== -1);
         ok(result.indexOf("stroke='red'") !== -1);
     });
-    
+
     test("geometryChange updates path", function() {
         arcNode.attr = function(name, value) {
             equal(name, "d");
@@ -646,5 +658,5 @@
 
         arc.geometry.set("endAngle", 180);
     });
-    
+
 })();
