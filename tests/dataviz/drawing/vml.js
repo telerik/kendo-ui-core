@@ -23,6 +23,16 @@
         StrokeNode = vml.StrokeNode,
         TransformNode = vml.TransformNode;
 
+    function compareMatrices(m1, m2, tolerance) {
+        tolerance = tolerance  || 0;
+        close(m1.a, m2.a, tolerance);
+        close(m1.b, m2.b, tolerance);
+        close(m1.c, m2.c, tolerance);
+        close(m1.d, m2.d, tolerance);
+        close(m1.e, m2.e, tolerance);
+        close(m1.f, m2.f, tolerance);
+    }
+
     // ------------------------------------------------------------
     var container,
         surface;
@@ -136,6 +146,36 @@
         node.load([new Path()]);
     });
 
+    test("load appends PathNode with srcElement transformation", function() {
+        var matrix = new Matrix(2,2,2,2,2,2),
+            path = new Path({transform: matrix});
+        node.append = function(child) {
+            compareMatrices(child.transform.matrix, matrix);
+        };
+        node.load([path]);
+    });
+
+    test("load appends PathNode with current transformation", function() {
+        var matrix = new Matrix(2,2,2,2,2,2),
+            path = new Path();
+        node.append = function(child) {
+            compareMatrices(child.transform.matrix, matrix);
+        };
+        node.load([path], matrix);
+    });
+
+    test("load appends PathNode with combined transformation", function() {
+        var matrix = new Matrix(3,3,3,3,3,3),
+            currentMatrix = new Matrix(2,2,2,2,2,2),
+            combinedMatrix = currentMatrix.times(matrix),
+            path = new Path({transform: matrix});
+
+        node.append = function(child) {
+            compareMatrices(child.transform.matrix, combinedMatrix);
+        };
+        node.load([path], currentMatrix);
+    });
+
     test("load appends MultiPathNode", function() {
         node.append = function(child) {
             ok(child instanceof MultiPathNode);
@@ -170,6 +210,52 @@
 
         node.attachTo(document.createElement("div"));
     });
+
+    (function() {
+        var groupLoad = GroupNode.fn.load;
+
+        module("Node / group load transformations", {
+            teardown: function() {
+                GroupNode.fn.load = groupLoad;
+            }
+        });
+
+        test("load passes element transformation", function() {
+            var matrix = new Matrix(2,2,2,2,2,2),
+                group = new Group({transform: matrix});
+
+            group.append(new Group());
+            GroupNode.fn.load = function(children, transform) {
+                compareMatrices(transform, matrix);
+            };
+            node.load([group]);
+        });
+
+        test("load passes current transformation", function() {
+            var matrix = new Matrix(2,2,2,2,2,2),
+                group = new Group();
+
+            group.append(new Group());
+            GroupNode.fn.load = function(children, transform) {
+                compareMatrices(transform, matrix);
+            };
+            node.load([group], matrix);
+        });
+
+        test("load passes combined transformation", function() {
+            var matrix = new Matrix(3,3,3,3,3,3),
+                currentMatrix = new Matrix(2,2,2,2,2,2),
+                combinedMatrix = currentMatrix.times(matrix),
+                group = new Group({transform: matrix});
+
+            group.append(new Group());
+            GroupNode.fn.load = function(children, transform) {
+                compareMatrices(transform, combinedMatrix);
+            };
+            node.load([group], currentMatrix);
+        });
+
+    })();
 
     // ------------------------------------------------------------
     module("RootNode");

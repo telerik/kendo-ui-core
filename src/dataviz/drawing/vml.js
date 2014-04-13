@@ -95,32 +95,33 @@
 
     // SVG Node ================================================================
     var Node = BaseNode.extend({
-        load: function(elements) {
+        load: function(elements, transform) {
             var node = this,
                 element = node.element,
                 childNode,
                 srcElement,
                 children,
+                combinedTransform,
                 i;
 
             for (i = 0; i < elements.length; i++) {
                 srcElement = elements[i];
                 children = srcElement.children;
-
+                combinedTransform = srcElement.combineTransform(transform);
                 if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Path) {
-                    childNode = new PathNode(srcElement);
+                    childNode = new PathNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.MultiPath) {
-                    childNode = new MultiPathNode(srcElement);
+                    childNode = new MultiPathNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.Circle) {
-                    childNode = new CircleNode(srcElement);
+                    childNode = new CircleNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.Arc) {
-                    childNode = new ArcNode(srcElement);
+                    childNode = new ArcNode(srcElement, combinedTransform);
                 }
 
                 if (children && children.length > 0) {
-                    childNode.load(children);
+                    childNode.load(children, combinedTransform);
                 }
 
                 node.append(childNode);
@@ -378,14 +379,19 @@
     });
 
     var PathNode = Node.extend({
-        init: function(srcElement) {
+        init: function(srcElement, transform) {
             this.fill = new FillNode(srcElement);
             this.stroke = new StrokeNode(srcElement);
-
+            this.transform = this.createTransformNode(srcElement, transform);
             Node.fn.init.call(this, srcElement);
 
             this.append(this.fill);
             this.append(this.stroke);
+            this.append(this.transform);
+        },
+
+        createTransformNode: function(srcElement, transform) {
+            return new TransformNode(srcElement, transform);
         },
 
         geometryChange: function() {
