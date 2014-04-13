@@ -30,6 +30,7 @@
         SPACE = " ",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
+        TRANSFORM = "transform",
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
@@ -243,7 +244,7 @@
         mapTransform: function(transform) {
             var attrs = [];
             if (transform) {
-                attrs.push(["transform", "matrix(" + transform.toString() + ")"]);
+                attrs.push([TRANSFORM, "matrix(" + transform.toString() + ")"]);
             }
 
             return attrs;
@@ -252,6 +253,14 @@
         renderTransform: function() {
             var transform = this.srcElement.options.transform;
             return renderAllAttr(this.mapTransform(transform));
+        },
+
+        transformChange: function(value) {
+            if (value) {
+                this.allAttr(this.mapTransform(value));
+            } else {
+                this.removeAttr(TRANSFORM);
+            }
         }
     });
 
@@ -266,7 +275,14 @@
     var GroupNode = Node.extend({
         template: renderTemplate(
             "<g#= d.renderTransform() #>#= d.renderChildren() #</g>"
-        )
+        ),
+
+        optionsChange: function(e) {
+            if (e.field == TRANSFORM) {
+                this.transformChange(e.value);
+            }
+            this.invalidate();
+        }
     });
 
     var PathNode = Node.extend({
@@ -291,6 +307,10 @@
 
                 case "visible":
                     this.attr("visibility", e.value ? "visible" : "hidden");
+                    break;
+
+                case TRANSFORM:
+                    this.transformChange(e.value);
                     break;
 
                 default:

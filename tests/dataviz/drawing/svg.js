@@ -293,6 +293,22 @@
         ok(groupNode.render().indexOf("transform") === -1);
     });
 
+    test("options change renders transform", function() {
+        groupNode.attr = function(key, value) {
+            equal(key, "transform");
+            equal(value, "matrix(1,0,0,1,0,0)");
+        };
+        group.transform(Matrix.unit());
+
+    });
+
+    test("clearing transform removes transform attribute", function() {
+        groupNode.removeAttr = function(key) {
+            equal(key, "transform");
+        };
+        group.transform(null);
+    });
+
     // ------------------------------------------------------------
     var path,
         pathNode,
@@ -444,6 +460,15 @@
         ok(pathNode.render().indexOf("visibility") === -1);
     });
 
+    test("renders transform if set", function() {
+        path.transform(new Matrix(1,1,1,1,1,1));
+        ok(pathNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") !== -1);
+    });
+
+    test("does not render transform if not set", function() {
+        ok(pathNode.render().indexOf("transform") === -1);
+    });
+
     test("geometryChange sets path", function() {
         path.moveTo(0, 0);
         pathNode.attr = function(name, value) {
@@ -552,6 +577,21 @@
         };
 
         path.visible(true);
+    });
+
+    test("options change renders transform", function() {
+        pathNode.attr = function(key, value) {
+            equal(key, "transform");
+            equal(value, "matrix(1,0,0,1,0,0)");
+        };
+        path.transform(Matrix.unit());
+    });
+
+    test("clearing transform removes transform attribute", function() {
+        pathNode.removeAttr = function(key) {
+            equal(key, "transform");
+        };
+        path.transform(null);
     });
 
     // ------------------------------------------------------------
