@@ -17,6 +17,8 @@
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
 
+        Matrix = dataviz.geometry.Matrix,
+
         util = dataviz.util,
         renderAllAttr = util.renderAllAttr,
         round = util.round;
@@ -51,7 +53,7 @@
 
         draw: function(element) {
             var surface = this;
-            surface._root.load([element]);
+            surface._root.load([element], Matrix.IDENTITY);
 
             if (kendo.support.browser.version < 8) {
                 setTimeout(function() {
@@ -93,7 +95,7 @@
         }
     });
 
-    // SVG Node ================================================================
+    // VML Node ================================================================
     var Node = BaseNode.extend({
         load: function(elements, transform) {
             var node = this,

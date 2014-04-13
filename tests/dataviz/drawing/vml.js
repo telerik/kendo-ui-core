@@ -61,6 +61,16 @@
         deepEqual(surface._root.childNodes[0].srcElement, group);
     });
 
+    test("draw passes identity matrix to root load method", function() {
+        var group = new Group();
+
+        surface._root.load = function(elements, matrix) {
+            ok(matrix === Matrix.IDENTITY);
+        };
+
+        surface.draw(group);
+    });
+
     test("clear removes element from root node", function() {
         var group = new Group();
         surface.draw(group);
