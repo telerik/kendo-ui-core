@@ -8,6 +8,15 @@
         Matrix = g.Matrix,
         Arc = g.Arc;
 
+    function compareBoundingBox(bBox, values, tolerance) {
+        tolerance = tolerance || 0;
+
+        close(bBox.p0.x, values[0], tolerance);
+        close(bBox.p0.y, values[1], tolerance);
+        close(bBox.p1.x, values[2], tolerance);
+        close(bBox.p1.y, values[3], tolerance);
+    }
+
     // ------------------------------------------------------------
     var point;
 
@@ -466,10 +475,12 @@
 
     test("boundingBox returns the circle bounding Rect", function() {
         var rect = circle.boundingBox();
-        equal(rect.p0.x, -10);
-        equal(rect.p0.y, -10);
-        equal(rect.p1.x, 10);
-        equal(rect.p1.y, 10);
+        compareBoundingBox(rect, [-10,-10,10,10]);
+    });
+
+    test("boundingBox returns the transformed circle bounding Rect", function() {
+        var rect = circle.boundingBox(Matrix.scale(2,1));
+        compareBoundingBox(rect, [-20,-10,20,10]);
     });
 
     // ------------------------------------------------------------
@@ -580,10 +591,12 @@
 
     test("boundingBox returns the arc bounding Rect", function() {
         var rect = arc.boundingBox();
-        equal(rect.p0.x, 50);
-        equal(rect.p0.y, 100);
-        equal(rect.p1.x, 150);
-        equal(rect.p1.y, 200);
+        compareBoundingBox(rect, [50,100,150,200]);
+    });
+
+    test("boundingBox returns the transformed arc bounding Rect", function() {
+        var rect = arc.boundingBox(Matrix.scale(2,1));
+        compareBoundingBox(rect, [100,100,300,200]);
     });
 
     test("curvePoints returns points for a curve that approximate the arc", function() {
@@ -600,12 +613,12 @@
             close(points[i].y, expected[i].y, ARC_POINT_TOLERANCE);
         }
     });
-    
+
     // ------------------------------------------------------------
     (function() {
         var matrix,
             result;
-        
+
         function compareMatrices(m1, m2, tolerance) {
             tolerance = tolerance  || 0;
             close(m1.a, m2.a, tolerance);
@@ -615,89 +628,89 @@
             close(m1.e, m2.e, tolerance);
             close(m1.f, m2.f, tolerance);
         }
-        
+
         function initMatrix(a,b,c,d,e,f) {
             return {a: a, b: b, c: c, d: d, e: e, f: f};
         }
-        
+
         module("Matrix", {});
-        
+
         test("sets passed parameters", function() {
             matrix = new Matrix(2,2,2,2,2,2);
             compareMatrices(matrix, initMatrix(2,2,2,2,2,2));
         });
-        
+
         test("sets undefined values to zero", function() {
             matrix = new Matrix(undefined,2,2,undefined,2,2);
             compareMatrices(matrix, initMatrix(0,2,2,0,2,2));
         });
-        
+
         test("times multiplies matrix", function() {
             matrix = new Matrix(2,2,2,2,2,2);
             compareMatrices(matrix.times(new Matrix(3,3,3,3,3,3)), initMatrix(12,12,12,12,14,14));
         });
-        
+
         test("times returns a new matrix", function() {
             matrix = new Matrix(2,2,2,2,2,2);
             result = matrix.times(new Matrix(3,3,3,3,3,3));
             ok(result !== matrix);
             ok(result instanceof Matrix);
         });
-        
+
         test("clone returns a new matrix with the same values", function() {
             matrix = new Matrix(2,2,2,2,2,2);
             result = matrix.clone();
             compareMatrices(result, initMatrix(2,2,2,2,2,2));
         });
-        
+
         test("unit returns the identity matrix", function() {
-            matrix = Matrix.unit();           
+            matrix = Matrix.unit();
             compareMatrices(matrix, initMatrix(1,0,0,1,0,0));
         });
-        
+
         test("translate returns the identity matrix translated with x y", function() {
-            matrix = Matrix.translate(10, 20);           
+            matrix = Matrix.translate(10, 20);
             compareMatrices(matrix, initMatrix(1,0,0,1,10,20));
         });
-        
+
         test("rotate returns the rotated matrix for the specified angle", function() {
-            matrix = Matrix.rotate(45);           
+            matrix = Matrix.rotate(45);
             compareMatrices(matrix, initMatrix(0.7071067811865476,0.7071067811865475,-0.7071067811865475,0.7071067811865476,0,0), 0.000001);
         });
-        
+
         test("rotate returns the rotated around point matrix for the specified angle, x and y values", function() {
             matrix = Matrix.rotate(45, 100, 100);
-         
+
             compareMatrices(matrix, initMatrix(0.7071067811865476,0.7071067811865475,-0.7071067811865475,
                 0.7071067811865476, 100,-41.421356237309496), 0.000001);
         });
-        
+
         test("scale returns the identity matrix scaled by x y", function() {
-            matrix = Matrix.scale(1.5, 1.1);           
+            matrix = Matrix.scale(1.5, 1.1);
             compareMatrices(matrix, initMatrix(1.5,0,0,1.1,0,0));
         });
-        
+
         module("Matrix / toString", {
             setup: function() {
                 matrix = new Matrix(1.2345678,0,0,1.2345, 2, 3);
             }
         });
-        
-        test("returns a string with the values separated by comma", function() {           
+
+        test("returns a string with the values separated by comma", function() {
             result = matrix.toString();
             equal(result, "1.2345678,0,0,1.2345,2,3");
         });
-        
-        test("returns a string with the values separated by the specified separator", function() {           
+
+        test("returns a string with the values separated by the specified separator", function() {
             result = matrix.toString(undefined, ";");
             equal(result, "1.2345678;0;0;1.2345;2;3");
         });
-        
-        test("returns a string with the values rounded to the specified precision", function() {           
+
+        test("returns a string with the values rounded to the specified precision", function() {
             result = matrix.toString(3);
             equal(result, "1.235,0,0,1.235,2,3");
         });
-        
+
     })();
 
     // ------------------------------------------------------------
