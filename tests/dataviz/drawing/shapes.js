@@ -188,6 +188,42 @@
         compareBoundingBox(boundingBox, [30, 50, 150, 170]);
     });
 
+    test("boundingBox returns only visible children bounding rectangle", function() {
+        var path = new Path({visible: false}),
+            circle = new Circle(new g.Circle(new Point(), 10)),
+            boundingBox;
+        circle.boundingBox = function() {
+            return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+        };
+        path.boundingBox = function() {
+            return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+        };
+        group.append(circle);
+        group.append(path);
+        boundingBox = group.boundingBox();
+        compareBoundingBox(boundingBox, [50, 50, 150, 150]);
+    });
+
+    test("boundingBox returns undefined if group has no visible children", function() {
+        var path = new Path({visible: false}),
+            circle = new Circle(new g.Circle(new Point(), 10), {visible: false}),
+            boundingBox;
+        circle.boundingBox = function() {
+            return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+        };
+        path.boundingBox = function() {
+            return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+        };
+        group.append(circle);
+        group.append(path);
+        boundingBox = group.boundingBox();
+        equal(boundingBox, undefined);
+    });
+
+    test("boundingBox returns undefined if group has no children", function() {
+        equal(group.boundingBox(), undefined);
+    });
+
     test("boundingBox passes matrix to its children boundingBox methods", 2, function() {
         var path = new Path(),
             circle = new Circle(new g.Circle(new Point(), 10)),
