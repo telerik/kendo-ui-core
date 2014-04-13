@@ -339,6 +339,19 @@
         compareBoundingBox(boundingBox, [47.5, 47.5, 152.5, 152.5]);
     });
 
+    test("boundingBox passes matrix to geometry boundingBox method", function() {
+        var geometry = new g.Circle(new Point()),
+            circleMatrix;
+
+        geometry.boundingBox = function(matrix) {
+            ok(circleMatrix === matrix);
+            return new g.Rect();
+        };
+        circle = new Circle(geometry, {stroke: {width: 5}, transform: Matrix.unit()});
+        circleMatrix = circle.options.transform;
+        circle.boundingBox();
+    });
+
     // ------------------------------------------------------------
     var arcGeometry,
         arc;
@@ -398,6 +411,19 @@
         boundingBox = arc.boundingBox();
 
         compareBoundingBox(boundingBox, [47.5, 47.5, 152.5, 152.5]);
+    });
+
+    test("boundingBox passes matrix to geometry boundingBox method", function() {
+        var geometry = new g.Arc(new Point()),
+            arcMatrix;
+
+        geometry.boundingBox = function(matrix) {
+            ok(arcMatrix === matrix);
+            return new g.Rect();
+        };
+        arc = new Arc(geometry, {stroke: {width: 5}});
+        arcMatrix = arc.options.transform;
+        arc.boundingBox();
     });
 
     // ------------------------------------------------------------
