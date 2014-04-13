@@ -17,6 +17,15 @@
         Arc = d.Arc,
         TOLERANCE = 0.1;
 
+    function compareBoundingBox(bBox, values, tolerance) {
+        tolerance = tolerance || 0;
+
+        close(bBox.p0.x, values[0], tolerance);
+        close(bBox.p0.y, values[1], tolerance);
+        close(bBox.p1.x, values[2], tolerance);
+        close(bBox.p1.y, values[3], tolerance);
+    }
+
     // ------------------------------------------------------------
     (function() {
         var element,
@@ -176,11 +185,27 @@
         group.append(circle);
         group.append(path);
         boundingBox = group.boundingBox();
+        compareBoundingBox(boundingBox, [30, 50, 150, 170]);
+    });
 
-        equal(boundingBox.p0.x, 30);
-        equal(boundingBox.p0.y, 50);
-        equal(boundingBox.p1.x, 150);
-        equal(boundingBox.p1.y, 170);
+    test("boundingBox passes matrix to its children boundingBox methods", 2, function() {
+        var path = new Path(),
+            circle = new Circle(new g.Circle(new Point(), 10)),
+            boundingBox,
+            groupMatrix;
+        circle.boundingBox = function(matrix) {
+            ok(matrix === groupMatrix);
+            return new g.Rect();
+        };
+        path.boundingBox = function(matrix) {
+            ok(matrix === groupMatrix);
+            return new g.Rect();
+        };
+        group.transform(Matrix.unit());
+        groupMatrix = group.options.transform;
+        group.append(circle);
+        group.append(path);
+        group.boundingBox();
     });
 
     // ------------------------------------------------------------
@@ -311,11 +336,7 @@
         };
         circle = new Circle(geometry, {stroke: {width: 5}});
         boundingBox = circle.boundingBox();
-
-        equal(boundingBox.p0.x, 47.5);
-        equal(boundingBox.p0.y, 47.5);
-        equal(boundingBox.p1.x, 152.5);
-        equal(boundingBox.p1.y, 152.5);
+        compareBoundingBox(boundingBox, [47.5, 47.5, 152.5, 152.5]);
     });
 
     // ------------------------------------------------------------
@@ -376,10 +397,7 @@
         arc = new Arc(geometry, {stroke: {width: 5}});
         boundingBox = arc.boundingBox();
 
-        equal(boundingBox.p0.x, 47.5);
-        equal(boundingBox.p0.y, 47.5);
-        equal(boundingBox.p1.x, 152.5);
-        equal(boundingBox.p1.y, 152.5);
+        compareBoundingBox(boundingBox, [47.5, 47.5, 152.5, 152.5]);
     });
 
     // ------------------------------------------------------------
@@ -432,41 +450,25 @@
     test("boundingBoxTo returns the line bounding box to the passed segment if all control points are not specified", function() {
         var other = new Segment(Point.create(100, 100)),
             boundingBox = segment.boundingBoxTo(other);
-
-        equal(boundingBox.p0.x, 0);
-        equal(boundingBox.p0.y, 0);
-        equal(boundingBox.p1.x, 100);
-        equal(boundingBox.p1.y, 100);
+        compareBoundingBox(boundingBox, [0,0,100,100]);
     });
 
     test("boundingBoxTo returns the transformed line bounding box", function() {
         var other = new Segment(Point.create(100, 100)),
             boundingBox = segment.boundingBoxTo(other, Matrix.scale(2,1));
-
-        equal(boundingBox.p0.x, 0);
-        equal(boundingBox.p0.y, 0);
-        equal(boundingBox.p1.x, 200);
-        equal(boundingBox.p1.y, 100);
+        compareBoundingBox(boundingBox, [0,0,200,100]);
     });
 
     test("boundingBoxTo returns the curve bounding rect to the passed segment if all control points are specified", function() {
         var other = new Segment(Point.create(30, 50), Point.create(-20, 30)),
             boundingBox = segment.boundingBoxTo(other);
-
-        close(boundingBox.p0.x, -8.2, TOLERANCE);
-        close(boundingBox.p0.y, -1.6, TOLERANCE);
-        close(boundingBox.p1.x, 30, TOLERANCE);
-        close(boundingBox.p1.y, 50, TOLERANCE);
+        compareBoundingBox(boundingBox, [-8.2,-1.6,30,50], TOLERANCE);
     });
 
     test("boundingBoxTo returns the transformed curve bounding rect to the passed segment", function() {
         var other = new Segment(Point.create(30, 50), Point.create(-20, 30)),
             boundingBox = segment.boundingBoxTo(other, Matrix.scale(2,1));
-
-        close(boundingBox.p0.x, -16.3, TOLERANCE);
-        close(boundingBox.p0.y, -1.6, TOLERANCE);
-        close(boundingBox.p1.x, 60, TOLERANCE);
-        close(boundingBox.p1.y, 50, TOLERANCE);
+        compareBoundingBox(boundingBox, [-16.3,-1.6,60,50], TOLERANCE);
     });
 
     // ------------------------------------------------------------
@@ -595,10 +597,20 @@
     test("boundingBox returns a bounding rectangle with both points equal to the segment anchor if there is a single segment", function() {
         path.moveTo(10, 10);
         var boundingBox = path.boundingBox();
-        equal(boundingBox.p0.x, 10);
-        equal(boundingBox.p0.y, 10);
-        equal(boundingBox.p1.x, 10);
-        equal(boundingBox.p1.y, 10);
+        compareBoundingBox(boundingBox, [10,10,10,10]);
+    });
+
+    test("boundingBox returns the bounding rectangle of the transformed anchor if there is a single segment", function() {
+        path.moveTo(10, 10);
+        var boundingBox = path.boundingBox(Matrix.scale(1,2));
+        compareBoundingBox(boundingBox, [10,20,10,20]);
+    });
+
+    test("boundingBox returns the bounding rectangle of the anchor using the combined transformation", function() {
+        path.transform(Matrix.scale(2,1));
+        path.moveTo(10, 10);
+        var boundingBox = path.boundingBox(Matrix.scale(1,2));
+        compareBoundingBox(boundingBox, [20,20,20,20]);
     });
 
     test("boundingBox returns the bounding rect between the segments", function() {
@@ -606,10 +618,26 @@
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.lineTo(20, 70);
         var boundingBox = path.boundingBox();
-        close(boundingBox.p0.x, -8.2, TOLERANCE);
-        close(boundingBox.p0.y, -1.6, TOLERANCE);
-        close(boundingBox.p1.x, 30, TOLERANCE);
-        close(boundingBox.p1.y, 70, TOLERANCE);
+
+        compareBoundingBox(boundingBox, [-8.2,-1.6,30,70], TOLERANCE);
+    });
+
+    test("boundingBox returns the bounding rect between the transformed segments", function() {
+        path.moveTo(0, 0);
+        path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
+        path.lineTo(20, 70);
+        path.transform(Matrix.scale(2, 1));
+        var boundingBox = path.boundingBox();
+        compareBoundingBox(boundingBox, [-16.3,-1.6,60,70], TOLERANCE);
+    });
+
+    test("boundingBox returns the bounding rect between the segments using the combined transformation", function() {
+        path.moveTo(0, 0);
+        path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
+        path.lineTo(20, 70);
+        path.transform(Matrix.scale(2, 1));
+        var boundingBox = path.boundingBox(Matrix.scale(1, 2));
+        compareBoundingBox(boundingBox, [-16.3,-3.2,60,140], TOLERANCE);
     });
 
     test("boundingBox returns the bounding rect between the segments with stroke added", function() {
@@ -617,10 +645,7 @@
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.stroke("black", 5);
         var boundingBox = path.boundingBox();
-        close(boundingBox.p0.x, -10.7, TOLERANCE);
-        close(boundingBox.p0.y, -4.1, TOLERANCE);
-        close(boundingBox.p1.x, 32.5, TOLERANCE);
-        close(boundingBox.p1.y, 52.5, TOLERANCE);
+        compareBoundingBox(boundingBox, [-10.7,-4.1,32.5,52.5], TOLERANCE);
     });
 
     // ------------------------------------------------------------
@@ -732,10 +757,25 @@
         multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         multiPath.moveTo(20, 70);
         var boundingBox = multiPath.boundingBox();
-        close(boundingBox.p0.x, -8.2, TOLERANCE);
-        close(boundingBox.p0.y, -1.6, TOLERANCE);
-        close(boundingBox.p1.x, 30, TOLERANCE);
-        close(boundingBox.p1.y, 70, TOLERANCE);
+        compareBoundingBox(boundingBox, [-8.2,-1.6,30,70], TOLERANCE);
+    });
+
+    test("boundingBox returns the bounding rect for the transformed paths", function() {
+        multiPath.transform(Matrix.scale(2, 1));
+        multiPath.moveTo(0, 0);
+        multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
+        multiPath.moveTo(20, 70);
+        var boundingBox = multiPath.boundingBox();
+        compareBoundingBox(boundingBox, [-16.3,-1.6,60,70], TOLERANCE);
+    });
+
+    test("boundingBox returns the bounding rect for the paths using the combined transformation", function() {
+        multiPath.transform(Matrix.scale(2, 1));
+        multiPath.moveTo(0, 0);
+        multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
+        multiPath.moveTo(20, 70);
+        var boundingBox = multiPath.boundingBox(Matrix.scale(1, 2));
+        compareBoundingBox(boundingBox, [-16.3,-3.2,60,140], TOLERANCE);
     });
 
 })();
