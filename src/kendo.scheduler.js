@@ -100,28 +100,38 @@ var __meta__ = {
             var attr = { name: options.field };
             var datepicker_role = !input_support.date ? kendo.attr("role") + '="datepicker" ' : "";
             var datetimepicker_role = kendo.attr("role") + '="datetimepicker" ';
+            var isAllDay = options.model.isAllDay;
+            var dateTimeValidate = kendo.attr("validate") + "='" + (!isAllDay) + "'";
+            var dateValidate = kendo.attr("validate") + "='" + isAllDay + "'";
 
             appendTimezoneAttr(attr, options);
             appendDateCompareValidator(attr, options);
 
-            $('<input type="datetime-local" required ' + kendo.attr("type") + '="date" ' + datetimepicker_role + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
+            $('<input type="datetime-local" required ' + kendo.attr("type") + '="date" ' + datetimepicker_role + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" ' +
+                dateTimeValidate + '/>')
                 .attr(attr).appendTo(container);
 
-            $('<input type="date" required ' + kendo.attr("type") + '="date" ' + datepicker_role + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
+            $('<input type="date" required ' + kendo.attr("type") + '="date" ' + datepicker_role + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" ' +
+                dateValidate + '/>')
                 .attr(attr).appendTo(container);
 
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         DATERANGEEDITOR = function(container, options) {
-            var attr = { name: options.field };
+            var attr = { name: options.field },
+                isAllDay = options.model.isAllDay,
+                dateTimeValidate = kendo.attr("validate") + "='" + (!isAllDay) + "' ",
+                dateValidate = kendo.attr("validate") + "='" + isAllDay + "' ";
 
             appendTimezoneAttr(attr, options);
             appendDateCompareValidator(attr, options);
 
-            $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' ' + kendo.attr("role") + '="datetimepicker" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
+            $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' ' + kendo.attr("role") + '="datetimepicker" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" ' +
+                dateTimeValidate + '/>')
             .attr(attr).appendTo(container);
 
-            $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' '  + kendo.attr("role") + '="datepicker" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
+            $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' '  + kendo.attr("role") + '="datepicker" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" ' +
+                dateValidate + '/>')
             .attr(attr).appendTo(container);
 
             $('<span ' + kendo.attr("bind") + '="text: ' + options.field + 'Timezone"></span>').appendTo(container);

@@ -71,6 +71,21 @@
         ok(scheduler._editor.container.closest(kendo.roleSelector("view")).length);
     });
 
+    test("data-validate attribute value is set to the date/datetime pickers based on the isAllDay value", 4, function() {
+        var scheduler = setup();
+        scheduler.dataSource.view()[0].isAllDay = false;
+
+        scheduler.editEvent(scheduler.dataSource.at(0));
+
+        scheduler._editor.container.find("[type=date],[data-role=datepicker]").each(function() {
+            equal($(this).attr("data-validate"), "false");
+        });
+
+        scheduler._editor.container.find("[type*=datetime],[data-role=datetimepicker]").each(function() {
+            equal($(this).attr("data-validate"),"true");
+        });
+    });
+
     test("editor is close on cancel", 1, function() {
         var scheduler = setup();
 

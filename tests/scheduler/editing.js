@@ -542,6 +542,22 @@
         ok(elements.eq(1).hasClass("k-edit-field"));
     });
 
+    test("data-validate attribute value is set to the date/datetime pickers based on the isAllDay value", 4, function() {
+        var scheduler = setup();
+
+        scheduler.dataSource.view()[0].isAllDay = false;
+
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
+
+        scheduler._editor.container.find("[data-role=datepicker]").each(function() {
+            equal($(this).attr("data-validate"), "false");
+        });
+
+        scheduler._editor.container.find("[data-role=datetimepicker]").each(function() {
+            equal($(this).attr("data-validate"),"true");
+        });
+    });
+
     test("non editable field value is shown", function() {
         var scheduler = setup({
             dataSource: {
