@@ -507,6 +507,31 @@
         equal(validateInput.args("validateInput", 0)[0].data("bind"), "value:foo");
     });
 
+    test("changing model field does not validate the input if it has data-validate attribute set to false", function() {
+        var MyModel = Model.define({
+            fields: {
+                foo: {
+                    field: "foo",
+                    validation: {
+                        required: true
+                    }
+                }
+            }
+        }),
+        model = new MyModel({ foo: "bar" }),
+        editable = new Editable(div, { fields: [{
+            field: "foo",
+            editor: function(container) {
+                container.append($('<input data-bind="value:foo" data-validate="false" />'));
+            }
+        }], model: model }),
+        validateInput = stub(editable.validatable, "validateInput");
+
+        model.set("foo", "baz");
+
+        equal(validateInput.args("validateInput", 0)[0].length, 0);
+    });
+
     test("changing model field validates the input when it has other bindings besides value", function() {
         var MyModel = Model.define({
             fields: {
