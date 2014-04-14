@@ -88,9 +88,21 @@ Clone a copy of the repository by running
 git clone git@github.com:telerik/kendo-ui-core.git
 ```
 
-Enter the repository directory and run the build script:
+Enter the repository directory 
+
 ```bash
-cd kendo-ui-core && npm run build
+cd kendo-ui-core
+```
+
+Initialize the submodule repostitory
+
+```bash
+git submodule update --init
+```
+
+Run the build script:
+```bash
+npm run build
 ```
 The minified version of the scripts and styles of Kendo UI Core will be put in the `dist/` subdirectory.
 
@@ -102,7 +114,7 @@ npm install -g grunt-cli
 Make sure you have `grunt` installed by testing:
 
 ```
-grunt -v
+grunt --version
 ```
 
 Now by running `grunt` command in the Kendo UI Core directory, you can build full version of Kendo UI Core, just like with `npm run build` command:
