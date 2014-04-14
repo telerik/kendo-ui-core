@@ -132,6 +132,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void CategoryAxis_should_set_axisName()
+        {
+            builder.CategoryAxis("Secondary");
+            series.CategoryAxis.ShouldEqual("Secondary");
+        }
+
+        [Fact]
+        public void CategoryAxis_should_return_builder()
+        {
+            builder.CategoryAxis("Secondary").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Stack_should_set_Stacked()
         {
             builder.Stack(true);

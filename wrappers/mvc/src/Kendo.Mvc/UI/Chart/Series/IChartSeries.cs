@@ -68,6 +68,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets the category axis name to use for this series.
+        /// </summary>
+        string CategoryAxis
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Name template for auto-generated series when binding to grouped data.
         /// </summary>
         string GroupNameTemplate
