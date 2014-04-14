@@ -962,3 +962,12 @@ table tbody td:after{
     color: #bababa;
     width: 50%;
 }
+
+.k-ie7 #detail-info,
+.k-ie7 #nutrition-info,
+.k-ie7 #description,
+.k-ie7 #navigate-prev,
+.k-ie7 #navigate-next {
+    *display: inline;
+    zoom: 1;
+}
