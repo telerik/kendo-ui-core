@@ -9,6 +9,7 @@ namespace Kendo.Mvc.UI
         {
             Border = new ChartElementBorder();
             Line = new ChartAreaLine();
+            Markers = new ChartMarkers();
         }
 
         /// <summary>
@@ -42,6 +43,15 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the highlight line configuration
         /// </summary>
         public ChartAreaLine Line
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The highlight markers configuration.
+        /// </summary>
+        public ChartMarkers Markers
         {
             get;
             set;
