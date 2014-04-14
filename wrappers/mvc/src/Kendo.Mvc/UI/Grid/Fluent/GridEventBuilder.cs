@@ -760,5 +760,93 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+        
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the ColumnLock client-side event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///           .Name("Grid")
+        ///           .Events(events => events.ColumnLock(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder ColumnLock(Func<object, object> handler)
+        {
+            Handler("columnLock", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the ColumnLock client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///            .Name("Grid")
+        ///            .Events(events => events.ColumnLock("gridColumnLock"))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder ColumnLock(string handler)
+        {
+            Handler("columnLock", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the ColumnUnlock client-side event.
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///           .Name("Grid")
+        ///           .Events(events => events.ColumnUnlock(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    //event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder ColumnUnlock(Func<object, object> handler)
+        {
+            Handler("columnUnlock", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the ColumnUnlock client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// @(Html.Kendo().Grid()
+        ///            .Name("Grid")
+        ///            .Events(events => events.ColumnUnlock("gridColumnUnlock"))
+        /// )
+        /// </code>
+        /// </example>
+        public GridEventBuilder ColumnUnlock(string handler)
+        {
+            Handler("columnUnlock", handler);
+
+            return this;
+        }
     }
 }
