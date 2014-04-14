@@ -20,6 +20,7 @@ var __meta__ = {
         location = window.location,
         history = window.history,
         CHECK_URL_INTERVAL = 50,
+        BROKEN_BACK_NAV = kendo.support.browser.msie,
         hashStrip = /^#*/,
         document = window.document;
 
@@ -66,11 +67,19 @@ var __meta__ = {
 
     var HistoryAdapter = kendo.Class.extend({
         back: function() {
-            history.back();
+            if (BROKEN_BACK_NAV) {
+                setTimeout(function() { history.back(); });
+            } else {
+                history.back();
+            }
         },
 
         forward: function() {
-            history.forward();
+            if (BROKEN_BACK_NAV) {
+                setTimeout(function() { history.forward(); });
+            } else {
+                history.forward();
+            }
         },
 
         length: function() {
@@ -319,6 +328,7 @@ var __meta__ = {
                 if (back) {
                     adapter.forward();
                 } else {
+                    console.log("setting history back")
                     adapter.back();
                     this.historyLength --;
                 }
