@@ -1101,4 +1101,76 @@
         equal(grid.columns[3].field, "bax");
         equal(grid.columns[3].hidden, true);
     });
+
+    test("columnLock event is triggerd", 2, function() {
+        var grid = setup({
+            columnLock: function(args) {
+                ok(true);
+                equal(args.column, grid.columns[2]);
+            },
+            columns: [
+                { field: "foo", locked: true, hidden: false},
+                { field: "bar", locked: true, hidden: false },
+                "baz",
+                "bax"
+            ]
+        });
+
+        grid.lockColumn("baz");
+    });
+
+    test("columnUnlock event is triggerd", 2, function() {
+        var grid = setup({
+            columnUnlock: function(args) {
+                ok(true);
+                equal(args.column, grid.columns[1]);
+            },
+            columns: [
+                { field: "foo", locked: true, hidden: false },
+                { field: "bar", locked: true, hidden: false },
+                "baz",
+                "bax"
+            ]
+        });
+
+        grid.unlockColumn("bar");
+    });
+
+    test("lock event is not triggerd", function() {
+        var wasCalled = false;
+        var grid = setup({
+            columnLock: function(args) {
+                wasCalled = true;
+            },
+            columns: [
+                { field: "foo", locked: true, hidden: false },
+                { field: "bar", locked: true, hidden: false },
+                "baz",
+                "bax"
+            ]
+        });
+
+        grid.reorderColumn(0, grid.columns[1]);
+
+        ok(!wasCalled);
+    });
+
+    test("unlock event is not triggerd", function() {
+        var wasCalled = false;
+        var grid = setup({
+            columnUnlock: function(args) {
+                wasCalled = true;
+            },
+            columns: [
+                { field: "foo", locked: true, hidden: false },
+                { field: "bar", locked: true, hidden: false },
+                "baz",
+                "bax"
+            ]
+        });
+
+        grid.reorderColumn(2, grid.columns[3]);
+
+        ok(!wasCalled);
+    });
 })();

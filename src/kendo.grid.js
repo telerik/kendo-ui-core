@@ -103,6 +103,8 @@ var __meta__ = {
         SELECTED = "k-state-selected",
         COLUMNRESIZE = "columnResize",
         COLUMNREORDER = "columnReorder",
+        COLUMNLOCK = "columnLock",
+        COLUMNUNLOCK = "columnUnlock",
         CLICK = "click",
         HEIGHT = "height",
         TABINDEX = "tabIndex",
@@ -780,7 +782,9 @@ var __meta__ = {
            COLUMNRESIZE,
            COLUMNREORDER,
            COLUMNSHOW,
-           COLUMNHIDE
+           COLUMNHIDE,
+           COLUMNLOCK,
+           COLUMNUNLOCK
         ],
 
         setDataSource: function(dataSource) {
@@ -1362,6 +1366,7 @@ var __meta__ = {
                 rows,
                 idx,
                 length,
+                lockChanged,
                 isLocked = !!destColumn.locked,
                 lockedCount = lockedColumns(columns).length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer");
@@ -1390,6 +1395,8 @@ var __meta__ = {
                 }
             }
 
+            lockChanged = !!column.locked;
+            lockChanged = lockChanged != isLocked;
             column.locked = isLocked;
 
             that._hideResizeHandle();
@@ -1440,6 +1447,20 @@ var __meta__ = {
             that._updateTablesWidth();
             that._applyLockedContainersWidth();
             that._syncLockedContentHeight();
+
+            if(!lockChanged) {
+                return;
+            }
+
+            if (isLocked) {
+                that.trigger(COLUMNLOCK, {
+                    column: column
+                });
+            } else {
+                that.trigger(COLUMNUNLOCK, {
+                    column: column
+                });
+            }
         },
 
         lockColumn: function(column) {
