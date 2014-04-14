@@ -179,10 +179,10 @@ desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
 # Kendo UI Complete
-bundle :name => 'complete.commercial',
+bundle :name => 'professional.commercial',
        :license => 'src-license-complete',
        :eula => 'complete',
-       :readme => 'README.KendoUI.Complete',
+       :readme => 'README.KendoUI.Professional',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
@@ -191,7 +191,7 @@ bundle :name => 'complete.commercial',
            :suites => %w(web dataviz mobile),
            :dir => 'examples'
        },
-       :product => 'Kendo UI Complete',
+       :product => 'Kendo UI Professional',
        :upload_as_internal_build => true,
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
@@ -200,7 +200,7 @@ bundle :name => 'complete.commercial',
             'src/styles' => SRC_CSS
        }
 
-bundle :name => 'complete.trial',
+bundle :name => 'professional.trial',
        :license => 'src-license-complete',
        :eula => 'complete',
        :readme => 'README.KendoUI.Trial',
@@ -562,16 +562,12 @@ BUNDLES = [
     'aspnetmvc.hotfix.trial',
     'aspnetmvc.trial',
     'cdn.commercial',
-    'complete.commercial',
-    'complete.trial',
-    'dataviz.commercial',
+    'professional.commercial',
+    'professional.trial',
     'jsp.commercial',
     'jsp.trial',
-    'mobile.commercial',
     'php.commercial',
     'php.trial',
-    'web.commercial',
-    'web.open-source',
     'winjs.commercial',
     'appbuilder',
     'core'
