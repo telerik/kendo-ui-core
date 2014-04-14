@@ -507,6 +507,11 @@
         ok(arc.center.observer === arc);
     });
 
+    test("constructor inits center if not passed", function() {
+        arc = new Arc();
+        ok(arc.center instanceof Point);
+    });
+
     test("constructor sets options", function() {
         equal(arc.radiusX, 50);
         equal(arc.radiusY, 100);

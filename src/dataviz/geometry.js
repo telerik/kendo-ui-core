@@ -282,7 +282,7 @@
         init: function(center, options) {
             var arc = this;
 
-            arc.center = center;
+            arc.center = center || new Point();
             arc.observer = null;
             arc.center.observer = arc;
 
