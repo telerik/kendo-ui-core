@@ -16,7 +16,7 @@ var __meta__ = {
     var kendo = window.kendo;
     var kendoDom = kendo.dom;
     var ui = kendo.ui;
-    var Widget = ui.Widget
+    var Widget = ui.Widget;
     var extend = $.extend;
     var map = $.map;
     var titleFromField = function(field) {
@@ -42,7 +42,7 @@ var __meta__ = {
                 title = "ID";
                 break;
             case "orderId":
-                title = "Order ID"
+                title = "Order ID";
                 break;
         }
 
@@ -56,8 +56,6 @@ var __meta__ = {
             if (this.options.columns.length === 0) {
                 this.options.columns.push("title");
             }
-
-            this.levels = [{ field: null, value: 0 }];
 
             this._columns();
             this._layout();
@@ -108,7 +106,7 @@ var __meta__ = {
             kendoDom.render(wrapper[0], [table]);
         },
 
-        _refresh: function(tasks) {
+        _render: function(tasks) {
             var wrapper = this.content;
             var colgroup;
             var tbody;
@@ -155,7 +153,7 @@ var __meta__ = {
                 if (column.width) {
                     style = { style: { width: column.width + "px" } };
                 } else {
-                    style = null
+                    style = null;
                 }
 
                 cols.push(kendoDom.element("col", style, []));

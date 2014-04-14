@@ -42,7 +42,7 @@
     test("list is created", function() {
         var gantt = new Gantt(element);
 
-        ok(gantt.wrapper.find(".k-gantt-list").length);
+        ok(gantt.wrapper.find(".k-gantt-treelist").length);
     });
 
     test("timeline is created", function() {

@@ -77,7 +77,7 @@ var __meta__ = {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
-            this.content = this.element.find(".k-gantt-timeline-content")
+            this.content = this.element.find(".k-gantt-timeline-content");
 
             this.header = this.element.find(".k-gantt-timeline-header-wrap");
 
@@ -610,7 +610,7 @@ var __meta__ = {
             view.destroy();
         },
 
-        render: function(tasks, range) {
+        _render: function(tasks, range) {
             var view = this.view(this._selectedViewName);
 
             view.renderLayout(range);

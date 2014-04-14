@@ -1,5 +1,5 @@
 (function(f, define){
-    define(["./kendo.data", "./kendo.sorter", "./kendo.gantt.list"], f);
+    define(["./kendo.data", "./kendo.sorter", "./kendo.gantt.list", "./kendo.gantt.timeline"], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt",
     category: "web",
     description: "The Gantt component.",
-    depends: [ "data", "sorter", "gantt.list" ]
+    depends: [ "data", "sorter", "gantt.list", "gantt.timeline" ]
 };
 
 (function($, undefined) {
@@ -439,11 +439,14 @@ var __meta__ = {
             this._wrapper();
 
             this._timeline();
+
             this._list();
 
             this._dataSource();
 
             this._dependencies();
+
+            this._sortable();
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
@@ -487,10 +490,10 @@ var __meta__ = {
         _list: function () {
             var options = extend({}, { columns: this.options.columns || [] });
 
-            this.list = new kendo.ui.GanttList(this.wrapper.find(".k-gantt-treelist > .k-grid"), listOptions);
+            this.list = new kendo.ui.GanttList(this.wrapper.find(".k-gantt-treelist > .k-grid"), options);
         },
 
-		_timeline: function() {
+        _timeline: function() {
             var element = this.wrapper.find(".k-gantt-timeline");
 
             this.timeline = new kendo.ui.GanttTimeline(element, trimOptions(extend(true, {}, this.options)));
@@ -506,7 +509,7 @@ var __meta__ = {
             list.bind("update", updateHandler);
         },
 
-	 	_sortable: function () {
+        _sortable: function () {
             var list = this.list;
             var columns = list.columns;
             var column;
@@ -572,13 +575,14 @@ var __meta__ = {
 
         refresh: function(e) {
             var dataSource = this.dataSource;
+            var taskTree = dataSource.taskTree();
 
             if (this.trigger("dataBinding")) {
                 return;
             }
 
-            this.list._refresh(dataSource.taskTree());
-            this.timeline.render(dataSource.taskTree(), dataSource._range());
+            this.list._render(taskTree);
+            this.timeline._render(taskTree, dataSource._range());
 
             this.trigger("dataBound");
         },
