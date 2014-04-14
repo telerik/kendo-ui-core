@@ -209,7 +209,8 @@ var __meta__ = {
 
             values[e.field] = e.value;
 
-            input = $(':input[' + bindAttribute + '*="' + attributeValue + '"]', that.element);
+            input = $(':input[' + bindAttribute + '*="' + attributeValue + '"]', that.element)
+                .filter("[" + kendo.attr("validate") + "!='false']");
             if (input.length > 1) {
                 input = input.filter(function () {
                     return inArray(attributeValue, $(this).attr(bindAttribute).split(",")) >= 0;
