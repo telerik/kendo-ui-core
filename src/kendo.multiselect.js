@@ -306,6 +306,10 @@ var __meta__ = {
         open: function() {
             var that = this;
 
+            if (that._request) {
+                that._retrieveData = false;
+            }
+
             if (!that.ul[0].firstChild || that._state === ACCEPT || that._retrieveData) {
                 that._state = "";
                 that._open = true;
@@ -382,7 +386,6 @@ var __meta__ = {
             if (word.length >= options.minLength) {
                 that._state = FILTER;
                 that._open = true;
-                that._retrieveData = false;
 
                 that._filterSource({
                     value: ignoreCase ? word.toLowerCase() : word,
@@ -671,11 +674,14 @@ var __meta__ = {
             clearTimeout(that._busy);
             that.input.attr("aria-busy", false);
             that._loading.addClass(HIDDENCLASS);
+            that._request = false;
             that._busy = null;
         },
 
         _showBusy: function () {
             var that = this;
+
+            that._request = true;
 
             if (that._busy) {
                 return;
