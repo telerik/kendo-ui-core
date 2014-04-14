@@ -2920,7 +2920,7 @@ function pad(number, digits, end) {
 
         view: function() {
             var viewElement = this.element.closest(kendo.roleSelector("view splitview modalview drawer"));
-            return kendo.widgetInstance(viewElement, kendo.mobile.ui);
+            return kendo.widgetInstance(viewElement, kendo.mobile.ui) || ContainerNullObject;
         },
 
         viewHasNativeScrolling: function() {

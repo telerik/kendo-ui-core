@@ -163,4 +163,14 @@
         ok(root.find("#foo").data("kendoMobileActionSheet"));
         ok(root.find("#bar").data("kendoMobileActionSheet"));
     });
+
+    test("#3156 - actionsheet is destroyed when the mobile view is destroyed", 1, function() {
+        var markup = '<div data-role="view"><ul id="foo" data-role="actionsheet"></ul></div>';
+
+        root.html(markup);
+        var app = new kendo.mobile.Application(root);
+
+        app.view().destroy();
+        equal(root.find("#foo").length, 0);
+    });
 })();
