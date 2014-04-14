@@ -189,4 +189,27 @@
         equal(listA.children().last()[0], sortableB.placeholder[0], "Placeholder is moved in listA");
     });
 
+    test("Placeholder is appended after the hidden element when only one hidden element is left in the container", 1, function() {
+        QUnit.fixture.empty();
+        QUnit.fixture.append(
+            '<div id="sortable">' +
+                '<div class="filter" style="height: 20px;">A1</div>' +
+                '<div class="sort" style="height: 20px;">A2</div>' +
+                '<div class="filter" style="height: 20px;">A3</div>' +
+            '</div>'
+        );
+
+        var sortable = $("#sortable").kendoSortable({
+            filter: ".sort"
+        }).data("kendoSortable");
+
+        draggedElement = $("#sortable").children().eq(1);
+        draggableOffset = kendo.getOffset(draggedElement);
+
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, draggableOffset.left, draggableOffset.top + 15);
+
+        equal(draggedElement.next().text(), sortable.placeholder.text(), "Placeholder is appended after hidden element");
+    });
+
 })();
