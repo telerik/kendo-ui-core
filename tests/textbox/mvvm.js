@@ -95,6 +95,20 @@
         equal(dom.data("kendoNumericTextBox").value(), 42);
     });
 
+    test("binding to unexisting field clears widget value", function() {
+        dom = $('<input data-bind="value:test" />');
+
+        var observable = kendo.observable({ value: null });
+
+        dom.kendoNumericTextBox({
+            value: 10
+        });
+
+        kendo.bind(dom, observable);
+
+        equal(dom.data("kendoNumericTextBox").value(), null);
+    });
+
     test("bindings are removed if element is rebind", 1, function() {
         dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
 
