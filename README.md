@@ -70,6 +70,10 @@ Kendo UI Core has not been tested against any other versions of these libraries.
 
 ## Building Kendo UI Core
 
+There are two ways to get the source code for Kendo UI Core. You can either download a pre-built zip from [Telerk.com](http://telerik.com/kendo-ui-core), or build the source yourself using Grunt. The latter approch includes an option for building a distribtion of Kendo UI Core that includes only the widgets and framework features required by your app.
+
+### Installing Dependencies
+
 In order to build Kendo UI Core, you need to have Node.js/npm latest and git 1.7 or later.
 
 For Windows you have to download and install [git](http://git-scm.com/downloads) and [Node.js](http://nodejs.org/download/).
@@ -78,7 +82,6 @@ Mac OS users should install [Homebrew](http://mxcl.github.com/homebrew/). Once H
 and `brew install node` to install Node.js.
 
 Linux/BSD users should use their appropriate package managers to install git and Node.js, or build them from source.
-
 
 ### How to build Kendo UI Core
 
@@ -109,7 +112,7 @@ The minified version of the scripts and styles of Kendo UI Core will be put in t
 If you want to create custom build or help with Kendo UI Core development, it would be better to install [grunt command line interface](https://github.com/gruntjs/grunt-cli) as a global package:
 
 ```
-npm install -g grunt-cli
+[sudo] npm install -g grunt-cli
 ```
 Make sure you have `grunt` installed by testing:
 
@@ -137,7 +140,7 @@ grunt custom:autocomplete,dropdownlist
 
 ## Source Code and Downloads
 
-LINK TO ZIP DISTRIBUTION OF KENDO UI CORE HOSTED AT TELERIK.COM
+If you want to skip building Kendo UI Core yourself, head on over to [Telerik.com](http://telerik.com/kendo-ui-core) to grab the full source.
 
 ## Documentation
 
@@ -163,7 +166,7 @@ The Kendo UI team does *not* provide formal support for Kendo UI Core, except to
 
 ## Release Notes
 
-For change logs and release notes, see the [changelog](TBD) file. (TODO: What's the link to the Core changelog?)
+For change logs and release notes, see the [online release notes at Telerik.com](http://www.telerik.com/support/whats-new/kendo-ui) file.
 
 ## License Information
 
