@@ -16,11 +16,13 @@ var __meta__ = {
     var Widget = kendo.ui.Widget;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
-
-    DATA_TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 't')#");
-    DATA_DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(date, 'ddd')#");
-    DATA_WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(end, 'ddd M/dd')#");
-    DATA_MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MM')#");
+    var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
+    var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
+    var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
+    var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
+    var kendoDomElement = kendo.dom.element;
+    var kendoDomText = kendo.dom.text;
+    var kendoDomRender = kendo.dom.render;
 
     var defaultViews = {
         day: {
@@ -34,6 +36,14 @@ var __meta__ = {
         }
     };
 
+    function trimOptions(options) {
+        delete options.name;
+        delete options.prefix;
+        delete options.views;
+
+        return options;
+    }
+
     function getViewType(typeName) {
         switch (typeName) {
             case "DayView":
@@ -44,30 +54,34 @@ var __meta__ = {
                 return MonthView;
 
         }
-    };
+    }
 
-    function levels(columns) {
-        var result = [];
+    function getWorkDays(options) {
+        var workDays = [];
+        var dayIndex = options.workWeekStart;
 
-        function collect(depth, columns) {
-            if (columns) {
-                var level = result[depth] = result[depth] || [];
+        workDays.push(dayIndex);
 
-                for (var i = 0; i < columns.length; i++) {
-                    level.push(columns[i]);
-                    collect(depth + 1, columns[i].columns);
-                }
+        while (options.workWeekEnd != dayIndex) {
+            if (dayIndex > 6) {
+                dayIndex -= 7;
+            } else {
+                dayIndex++;
             }
+            workDays.push(dayIndex);
         }
-
-        collect(0, columns);
-
-        return result;
+        return workDays;
     }
 
     var View = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
+
+            this.content = this.element.find(".k-gantt-timeline-content")
+
+            this.header = this.element.find(".k-gantt-timeline-header-wrap");
+
+            this._workDays = getWorkDays(this.options);
 
             this._templates();
         },
@@ -75,57 +89,140 @@ var __meta__ = {
         destroy: function() {
             Widget.fn.destroy.call(this);
 
-            if (this.headerTable) {
-                kendo.destroy(this.headerTable);
-                this.headerTable.remove();
-            }
-
-            if (this.contentTable) {
-                kendo.destroy(this.contentTable);
-                this.contentTable.remove();
-            }
-
-            this.headerTable = null;
-            this.contentTable = null;
+            this.headerRow = null;
+            this.header = null;
+            this.content = null;
         },
 
         options: {
-            timeHeaderTemplate: DATA_TIME_HEADER_TEMPLATE,
-            dayHeaderTemplate: DATA_DAY_HEADER_TEMPLATE,
-            weekHeaderTemplate: DATA_WEEK_HEADER_TEMPLATE,
-            monthHeaderTemplate: DATA_MONTH_HEADER_TEMPLATE,
+            timeHeaderTemplate: TIME_HEADER_TEMPLATE,
+            dayHeaderTemplate: DAY_HEADER_TEMPLATE,
+            weekHeaderTemplate: WEEK_HEADER_TEMPLATE,
+            monthHeaderTemplate: MONTH_HEADER_TEMPLATE,
+            showWorkHours: true,
+            showWorkDays: true,
+            workDayStart: new Date(1980, 1, 1, 8, 0, 0),
+            workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
+            workWeekStart: 1,
+            workWeekEnd: 5,
+            hourSpan: 1
         },
 
         _templates: function() {
-            this.timeHeaderTemplate = kendo.template(this.options.timeHeaderTemplate, kendo.Template);
-            this.dayHeaderTemplate = kendo.template(this.options.dayHeaderTemplate, kendo.Template);
-            this.weekHeaderTemplate = kendo.template(this.options.weekHeaderTemplate, kendo.Template);
-            this.monthHeaderTemplate = kendo.template(this.options.monthHeaderTemplate, kendo.Template);
+            var options = this.options;
+
+            this.timeHeaderTemplate = kendo.template(options.timeHeaderTemplate, kendo.Template);
+            this.dayHeaderTemplate = kendo.template(options.dayHeaderTemplate, kendo.Template);
+            this.weekHeaderTemplate = kendo.template(options.weekHeaderTemplate, kendo.Template);
+            this.monthHeaderTemplate = kendo.template(options.monthHeaderTemplate, kendo.Template);
         },
 
         renderLayout: function(range) {
-            this.header = this.element.find(".k-gantt-timeline-header-wrap");
-
             this._range(range);
 
-            this.createLayout(this._columns());
+            this._createSlots();
+
+            this.createLayout(this._layout());
+        },
+
+        createLayout: function(rows) {
+            var headers = this._headers(rows);
+            var table;
+
+            table = kendoDomElement("table", null, headers);
+            kendoDomRender(this.header[0], [table]);
+
+            this.headerRow = this.header.find("table:first tr").last();
         },
 
         render: function(tasks) {
-            this.content = this.element.find(".k-gantt-timeline-content");
+            var rows = this._tasks(tasks);
+            var table;
 
-            this.contentTable = $("<table>");
-            this.content.append(this.contentTable);
+            table = kendoDomElement("table", null, rows);
+            kendoDomRender(this.content[0], [table]);
+        },
+        
+        _tasks: function(tasks) {
+            var rows = [];
+            var wrap;
+            var cell;
+            var row;
+
+            for (var i = 0, l = tasks.length; i < l; i++) {
+                wrap = kendoDomElement("div", { className: "taskWrap" }, [this._renderTask(tasks[i])]);
+                cell = kendoDomElement("td", null, [wrap]);
+                row = kendoDomElement("tr", null, [cell]);
+
+                rows.push(row);
+            }
+
+            return rows;
         },
 
-        createLayout: function(columns) {
-            var headers = this._headers(columns);
+        _renderTask: function(task) {
+            var position = this._taskPosition(task);
+            var task;
+            var title;
 
-            this.headerTable = $("<table>");
+            title = kendoDomText(task.title);
+            task = kendoDomElement("div", { className: "k-gantt-task", style: { left: position.left + "px", width: position.width + "px" } }, [title]);
 
-            this.headerTable.append(headers);
+            return task;
+        },
 
-            this.header.append(this.headerTable);
+        _taskPosition: function(task) {
+            var startLeft = this._offset(task.start);
+            var endLeft = this._offset(task.end);
+
+            return { left: startLeft, width: endLeft - startLeft };
+        },
+
+        _offset: function(date) {
+            var headers = this.headerRow[0].children;
+            var header;
+            var slots = this._slots[this._slots.length - 1];
+            var slot;
+            var startOffset;
+            var slotDuration;
+            var slotOffset;
+            var startIndex = this._slotIndex(date);
+
+            slot = slots[startIndex];
+            header = headers[startIndex];
+
+            if (slot.end < date) {
+                return header.offsetLeft + header.offsetWidth;
+            }
+
+            startOffset = date - slot.start;
+            slotDuration = slot.end - slot.start;
+            slotOffset = (startOffset / slotDuration) * header.offsetWidth;
+
+            return header.offsetLeft + slotOffset;
+        },
+
+        _slotIndex: function(date) {
+            var slots = this._slots[this._slots.length - 1];
+            var startIdx = 0;
+            var endIdx = slots.length - 1;
+            var middle;
+
+            do {
+                middle = Math.ceil((endIdx + startIdx) / 2);
+
+                if (slots[middle].start < date) {
+                    startIdx = middle;
+                } else {
+                    if (middle === endIdx) {
+                        middle--;
+                    }
+
+                    endIdx = middle;
+                }
+            } while (startIdx !== endIdx);
+
+            return startIdx;
         },
 
         _headers: function(columnLevels) {
@@ -133,6 +230,7 @@ var __meta__ = {
             var level;
             var headers;
             var column;
+            var headerText;
 
             for (var levelIndex = 0, levelCount = columnLevels.length; levelIndex < levelCount; levelIndex++) {
                 level = columnLevels[levelIndex];
@@ -141,70 +239,173 @@ var __meta__ = {
                 for (var columnIndex = 0, columnCount = level.length; columnIndex < columnCount; columnIndex++) {
                     column = level[columnIndex];
 
-                    headers.push("<th colspan='" + column.span + "'>" + column.text + "</th>");
+                    headerText = kendoDomText(column.text);
+                    headers.push(kendoDomElement("th", { colspan: column.span, className: "k-header" + (column.isNonWorking ? " nonWorking" : "") }, [headerText]));
                 }
 
-                rows.push(headers.join(""));
+                rows.push(kendoDomElement("tr", null, headers));
             }
 
-            return "<tr>" + rows.join("</tr><tr>") + "</tr>";
+            return rows;
         },
 
         _hours: function(start, end) {
-            var columns = [];
-            var column;
-            var endTime = end.getTime();
+            var start = new Date(start);
+            var end = new Date(end);
+            var slotEnd;
+            var slots = [];
+            var options = this.options;
+            var workDayStart = options.workDayStart.getHours();
+            var workDayEnd = options.workDayEnd.getHours();
+            var isWorkHour;
+            var hours;
+            var hourSpan = options.hourSpan;
 
-            while (start.getTime() < endTime) {
-                column = {
-                    text: this.timeHeaderTemplate({ date: start }),
-                    span: 1
-                };
+            while (start < end) {
+                slotEnd = new Date(start);
+                hours = slotEnd.getHours();
 
-                columns.push(column);
+                isWorkHour = hours >= workDayStart && hours < workDayEnd;
 
-                start.setHours(start.getHours() + 1);
+                slotEnd.setHours(slotEnd.getHours() + hourSpan);
+
+                if (hours == slotEnd.getHours()) {
+                    // Chrome DTS Fix
+                    slotEnd.setHours(slotEnd.getHours() + 2 * hourSpan);
+                }
+
+                if (!options.showWorkHours || isWorkHour) {
+                    slots.push({
+                        start: start,
+                        end: slotEnd,
+                        isNonWorking: !isWorkHour,
+                        span: 1
+                    });
+                }
+
+                start = slotEnd;
             }
 
-            return columns;
+            return slots;
         },
 
         _days: function(start, end, span) {
+            var start = new Date(start);
+            var end = new Date(end);
+            var slotEnd;
+            var slots = [];
+            var isWorkDay;
+
+            while (start < end) {
+                slotEnd = kendo.date.nextDay(start);
+
+                isWorkDay = this._isWorkDay(start);
+
+                if (!this.options.showWorkDays || isWorkDay) {
+                    slots.push({
+                        start: start,
+                        end: slotEnd,
+                        isNonWorking: !isWorkDay,
+                        span: span
+                    });
+                }
+
+                start = slotEnd;
+            }
+
+            return slots;
+        },
+
+        _weeks: function(start, end) {
+            var start = new Date(start);
+            var end = new Date(end);
+            var slotEnd;
+            var slots = [];
+            var firstDay = this.calendarInfo().firstDay;
+            var daySlots;
+            var span;
+
+            while (start < end) {
+                slotEnd = kendo.date.dayOfWeek(kendo.date.addDays(start, 1), firstDay, 1);
+
+                if (slotEnd > end) {
+                    slotEnd = end;
+                }
+
+                daySlots = this._days(start, slotEnd);
+                span = daySlots.length;
+
+                if (span > 0) {
+                    slots.push({
+                        start: daySlots[0].start,
+                        end: daySlots[span - 1].end,
+                        span: span
+                    });
+                }
+
+                start = slotEnd;
+            }
+
+            return slots;
+        },
+
+        _months: function(start, end) {
+            var start = new Date(start);
+            var end = new Date(end);
+            var slotEnd;
+            var slots = [];
+            var daySlots;
+            var span;
+
+            while (start < end) {
+                slotEnd = new Date(start);
+                slotEnd.setMonth(slotEnd.getMonth() + 1);
+
+                daySlots = this._days(start, slotEnd);
+                span = daySlots.length;
+
+                if (span > 0) {
+                    slots.push({
+                        start: daySlots[0].start,
+                        end: daySlots[span - 1].end,
+                        span: span
+                    });
+                }
+
+                start = slotEnd;
+            }
+
+            return slots;
+        },
+
+        _slotHeaders: function(slots, template) {
             var columns = [];
-            var column;
-            var endTime = end.getTime();
+            var slot;
 
-            while (start.getTime() < endTime) {
-                column = {
-                    text: this.timeHeaderTemplate({ date: start }),
-                    span: span
-                };
+            for (var i = 0, l = slots.length; i < l; i++) {
+                slot = slots[i];
 
-                columns.push(column);
-
-                start = kendo.date.addDays(start, 1);
+                columns.push({
+                    text: template(slot),
+                    isNonWorking: !!slot.isNonWorking,
+                    span: slot.span
+                });
             }
 
             return columns;
         },
 
-        _weeks: function(start, end, span) {
-            var columns = [];
-            var column;
-            var endTime = end.getTime();
+        _isWorkDay: function(date) {
+            var day = date.getDay();
+            var workDays = this._workDays;
 
-            while (start.getTime() < endTime) {
-                column = {
-                    text: this.timeHeaderTemplate({ date: start }),
-                    span: span
-                };
-
-                columns.push(column);
-
-                start = kendo.date.addDays(start, 1);
+            for (var i = 0, l = workDays.length; i < l; i++) {
+                if (workDays[i] === day) {
+                    return true;
+                }
             }
 
-            return columns;
+            return false;
         },
 
         calendarInfo: function() {
@@ -218,15 +419,40 @@ var __meta__ = {
             this.end = kendo.date.addDays(kendo.date.getDate(range.end), 1);
         },
 
-        _columns: function() {
-            var start = this.start;
-            var end = this.end;
-            var columns = [];
+        _createSlots: function() {
+            var span = 24;
+            var options = this.options;
+            var daySlots;
+            var hourSlots;
+            var hours;
+            var slots = this._slots = [];
 
-            columns.push(this._days(start, end, 24));
-            columns.push(this._hours(start, end));
+            if (options.showWorkHours) {
+                span = (options.workDayEnd.getHours() - options.workDayStart.getHours());
+            }
 
-            return columns;
+            span = Math.ceil(span / this.options.hourSpan);
+
+            daySlots = this._days(this.start, this.end, span);
+            hourSlots = [];
+
+            for (var i = 0, l = daySlots.length; i < l; i++) {
+                hours = this._hours(daySlots[i].start, daySlots[i].end);
+
+                hourSlots.push.apply(hourSlots, hours);
+            }
+
+            slots.push(daySlots);
+            slots.push(hourSlots);
+        },
+
+        _layout: function() {
+            var rows = [];
+
+            rows.push(this._slotHeaders(this._slots[0], this.dayHeaderTemplate));
+            rows.push(this._slotHeaders(this._slots[1], this.timeHeaderTemplate));
+
+            return rows;
         }
     });
 
@@ -239,35 +465,20 @@ var __meta__ = {
             this.end = kendo.date.getDate(kendo.date.dayOfWeek(range.end, firstDay, 1));
         },
 
-        _columns: function() {
-            var start = this.start;
-            var end = this.end;
-            var columns = [];
-            var column;
-            var innerColumn;
+        _createSlots: function() {
+            var slots = this._slots = [];
 
-            while (start.getTime() < end.getTime()) {
-                column = {
-                    text: this.weekHeaderTemplate({ start: start, end: kendo.date.addDays(start, 6) }),
-                    span: 7,
-                    columns: []
-                };
+            slots.push(this._weeks(this.start, this.end));
+            slots.push(this._days(this.start, this.end, 1));
+        },
 
-                for (var i = 0; i < 7; i++) {
-                    innerColumn = {
-                        text: this.dayHeaderTemplate({ date: kendo.date.addDays(start, i) }),
-                        span: 1
-                    }
+        _layout: function() {
+            var rows = [];
 
-                    column.columns.push(innerColumn);
-                }
+            rows.push(this._slotHeaders(this._slots[0], this.weekHeaderTemplate));
+            rows.push(this._slotHeaders(this._slots[1], this.dayHeaderTemplate));
 
-                columns.push(column);
-
-                start = kendo.date.addDays(start, 7);
-            }
-
-            return columns;
+            return rows;
         }
     });
 
@@ -275,12 +486,24 @@ var __meta__ = {
         _range: function(range) {
             this.start = kendo.date.firstDayOfMonth(range.start);
             this.end = kendo.date.lastDayOfMonth(range.end);
+        },
+
+        _createSlots: function() {
+            var slots = this._slots = [];
+
+            slots.push(this._months(this.start, this.end));
+            slots.push(this._weeks(this.start, this.end));
+        },
+
+        _layout: function() {
+            var rows = [];
+
+            rows.push(this._slotHeaders(this._slots[0], this.monthHeaderTemplate));
+            rows.push(this._slotHeaders(this._slots[1], this.weekHeaderTemplate));
+
+            return rows;
         }
     });
-
-    // For Testing
-    window.kendo.WeekView = WeekView;
-
 
     kendo.ui.GanttTimeline = Widget.extend({
         init: function(element, options) {
@@ -298,7 +521,7 @@ var __meta__ = {
         destroy: function() {
             Widget.fn.destroy.call(this);
 
-            kendo.destroy(that.wrapper);
+            kendo.destroy(this.wrapper);
         },
 
         _wrapper: function() {
@@ -374,7 +597,7 @@ var __meta__ = {
                 }
 
                 if (type) {
-                    view = new type(this.wrapper);
+                    view = new type(this.wrapper, trimOptions(this.options));
                 } else {
                     throw new Error("There is no such view");
                 }

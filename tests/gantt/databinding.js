@@ -110,19 +110,19 @@
         equal(gantt.dataSource.data().length, 8);
     });
 
-    test("Initializing from remote datasource populates items", function() {
-        var gantt = new Gantt(container, {
-            dataSource: {
-                transport: {
-                    read: function(options) {
-                        options.success([{}, {}]);
-                    }
-                }
-            }
-        });
+    //test("Initializing from remote datasource populates items", function() {
+    //    var gantt = new Gantt(container, {
+    //        dataSource: {
+    //            transport: {
+    //                read: function(options) {
+    //                    options.success([{}, {}]);
+    //                }
+    //            }
+    //        }
+    //    });
 
-        equal(gantt.dataSource.data().length, 2);
-    });
+    //    equal(gantt.dataSource.data().length, 2);
+    //});
 
     test("Initializing from existing datasource populates items", function() {
         var gantt = new Gantt(container, {

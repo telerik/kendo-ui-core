@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data"], f);
+    define([ "./kendo.data", "./kendo.gantt.timeline"], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt",
     category: "web",
     description: "The Gantt-chart component.",
-    depends: [ "data" ]
+    depends: [ "data", "gantt.timeline" ]
 };
 
 (function($, undefined) {
@@ -20,6 +20,18 @@ var __meta__ = {
     var proxy = $.proxy;
     var extend = $.extend;
     var map = $.map;
+
+    function trimOptions(options) {
+        delete options.name;
+        delete options.prefix;
+
+        delete options.remove;
+        delete options.edit;
+        delete options.add;
+        delete options.navigate;
+
+        return options;
+    }
 
     var createDataSource = function(type, name) {
         return function(options) {
@@ -44,7 +56,7 @@ var __meta__ = {
             id: { type: "number" },
             predecessorId: { type: "number" },
             successorId: { type: "number" },
-            type: { type: "number" },
+            type: { type: "number" }
         }
     });
 
@@ -342,6 +354,30 @@ var __meta__ = {
             }
         },
 
+        _range: function() {
+            var data = this.view();
+            var startOrder = {
+                field: "start",
+                dir: "asc"
+            };
+            var endOrder = {
+                field: "end",
+                dir: "desc"
+            };
+
+            if (!data.length) {
+                return { start: new Date(), end: new Date() };
+            }
+
+            var start = new Query(data).sort(startOrder).toArray()[0].start || new Date();
+            var end = new Query(data).sort(endOrder).toArray()[0].end || new Date();
+
+            return {
+                start: start,
+                end: end
+            };
+        },
+
         _childRemoved: function(parentId, index) {
             var parent = parentId === null ? null : this.get(parentId);
             var children = this.taskChildren(parent);
@@ -402,6 +438,8 @@ var __meta__ = {
 
             this._wrapper();
 
+            this._timeline();
+
             this._dataSource();
 
             this._dependencies();
@@ -422,7 +460,8 @@ var __meta__ = {
 
         options: {
             name: "Gantt",
-            autoBind: true
+            autoBind: true,
+            views: []
         },
 
         _wrapper: function() {
@@ -433,8 +472,8 @@ var __meta__ = {
             this.wrapper = this.element
                             .addClass("k-widget k-gantt")
                             .append("<div class='k-gantt-toolbar'>")
-                            .append("<div class='k-gantt-list'>")
-                            .append("<div class='k-gantt-timeline'>");
+                            .append("<div class='k-gantt-layout'>")
+                            .append("<div class='k-gantt-layout'><div class='k-widget k-gantt-timeline'></div></div>");
 
             if (height) {
                 this.wrapper.height(height);
@@ -443,6 +482,12 @@ var __meta__ = {
             if (width) {
                 this.wrapper.width(width);
             }
+        },
+
+        _timeline: function() {
+            var element = this.wrapper.find(".k-gantt-timeline");
+
+            this.timeline = new kendo.ui.GanttTimeline(element, trimOptions(extend(true, {}, this.options)));
         },
 
         _dataSource: function() {
@@ -483,9 +528,13 @@ var __meta__ = {
         },
 
         refresh: function(e) {
+            var dataSource = this.dataSource;
+
             if (this.trigger("dataBinding")) {
                 return;
             }
+
+            this.timeline.render(dataSource.taskTree(), dataSource._range());
 
             this.trigger("dataBound");
         },
