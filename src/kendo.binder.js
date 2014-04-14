@@ -1067,6 +1067,10 @@ var __meta__ = {
                               idx = 0, length,
                               values = [];
 
+                    if (value === undefined) {
+                        value = null;
+                    }
+
                     if (field) {
                         if (value instanceof ObservableArray) {
                             for (length = value.length; idx < length; idx++) {
@@ -1185,6 +1189,10 @@ var __meta__ = {
                             idx = 0, length,
                             values = [],
                             selectedValue;
+
+                        if (value === undefined) {
+                            value = null;
+                        }
 
                         if (field) {
                             if (value instanceof ObservableArray) {
