@@ -761,4 +761,19 @@
         equal(observable.data[0], 1);
         equal(observable.data[1], 3);
     });
+
+    test("Binding to unexisting field clears widget selection", 1, function() {
+        dom = $('<select data-bind="value: test"><option>Test</option></select>');
+        var observable = kendo.observable({
+            data: [1,2,3]
+        });
+
+        var multiselect = dom.kendoMultiSelect({
+            value: "Test"
+        }).data("kendoMultiSelect");
+
+        kendo.bind(dom, observable);
+
+        deepEqual(multiselect.value(), []);
+    });
 })();
