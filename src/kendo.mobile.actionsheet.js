@@ -59,6 +59,10 @@ var __meta__ = {
                 .on("up", BUTTONS, "_click")
                 .on("click", BUTTONS, kendo.preventDefault);
 
+            that.view().bind("destroy", function() {
+                that.destroy();
+            });
+
             that.wrapper = element.parent().addClass(type ? " km-actionsheet-" + type : "");
             that.shim = new ShimClass(that.wrapper, $.extend({modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root"}, that.options.popup) );
 

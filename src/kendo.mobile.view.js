@@ -26,6 +26,7 @@ var __meta__ = {
         AFTER_SHOW = "afterShow",
         BEFORE_HIDE = "beforeHide",
         HIDE = "hide",
+        DESTROY = "destroy",
         Z_INDEX = "z-index",
         attrValue = kendo.attrValue,
         roleSelector = kendo.roleSelector;
@@ -69,7 +70,8 @@ var __meta__ = {
             SHOW,
             AFTER_SHOW,
             BEFORE_HIDE,
-            HIDE
+            HIDE,
+            DESTROY
         ],
 
         options: {
@@ -102,11 +104,14 @@ var __meta__ = {
                 this.layout.detach(this);
             }
 
+            this.trigger(DESTROY);
+
             Widget.fn.destroy.call(this);
 
             if (this.scroller) {
                 this.scroller.destroy();
             }
+
 
             kendo.destroy(this.element);
         },
