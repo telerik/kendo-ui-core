@@ -10,7 +10,7 @@ Kendo UI is everything you need to build sites and apps with HTML5 & JavaScript 
 
 Kendo UI Core is a free and open-source distribution of Kendo UI. The following table details the widgets and features available in Kendo UI Core, as well as the additional features available via a commercial Kendo UI license.
 
-| Feature | Core | [Complete](http://www.telerik.com/kendo-ui) | UI for [MVC](http://www.telerik.com/aspnet-mvc)/[JSP](http://www.telerik.com/jsp-ui)/[PHP](http://www.telerik.com/php-ui) |
+| Feature | Core | [Professional](http://www.telerik.com/kendo-ui) | UI for [MVC](http://www.telerik.com/aspnet-mvc)/[JSP](http://www.telerik.com/jsp-ui)/[PHP](http://www.telerik.com/php-ui) |
 | ------- | :----: | :--------: | :------------------: |
 | **Framework** |
 | DataSource | Yes | Yes | Yes |
