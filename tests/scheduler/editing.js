@@ -558,6 +558,66 @@
         });
     });
 
+    test("addEvent binds toggleValidation change handler to model", function() {
+        var scheduler = setup();
+
+        scheduler.addEvent({ start: new Date(), end: new Date() });
+        var model = scheduler._editor.editable.options.model;
+        ok($.inArray(scheduler._editor.toggleDateValidationHandler, model._events.change) >= 0);
+    });
+
+    test("editEvent binds toggleValidation change handler to model", function() {
+        var scheduler = setup();
+        var model = scheduler.dataSource.at(0);
+        scheduler.editEvent(model.uid);
+        ok($.inArray(scheduler._editor.toggleDateValidationHandler, model._events.change) >= 0);
+    });
+
+    test("toggleValidation change handler is not bound if edit event is prevented", function() {
+        var scheduler = setup({
+            edit: function(e) {
+                e.preventDefault();
+            }
+        });
+        var model = scheduler.dataSource.at(0);
+        scheduler.editEvent(model.uid);
+        ok($.inArray(scheduler._editor.toggleDateValidationHandler, model._events.change) < 0);
+    });
+
+    test("cancleEvent unbinds toggleValidation change handler from model", function() {
+        var scheduler = setup();
+        var model = scheduler.dataSource.at(0);
+        scheduler.editEvent(model.uid);
+        scheduler.cancelEvent();
+        ok($.inArray(scheduler._editor.toggleDateValidationHandler, model._events.change) < 0);
+    });
+
+    test("changing isAllDay value updates pickers data-validation attribute", 8, function() {
+        var scheduler = setup();
+        var model = scheduler.dataSource.at(0);
+        model.isAllDay = false;
+        scheduler.editEvent(model.uid);
+        model.set("isAllDay", true);
+
+        scheduler._editor.container.find("[data-role=datepicker]").each(function() {
+            equal($(this).attr("data-validate"), "true");
+        });
+
+        scheduler._editor.container.find("[data-role=datetimepicker]").each(function() {
+            equal($(this).attr("data-validate"), "false");
+        });
+
+        model.set("isAllDay", false);
+
+        scheduler._editor.container.find("[data-role=datepicker]").each(function() {
+            equal($(this).attr("data-validate"), "false");
+        });
+
+        scheduler._editor.container.find("[data-role=datetimepicker]").each(function() {
+            equal($(this).attr("data-validate"), "true");
+        });
+    });
+
     test("non editable field value is shown", function() {
         var scheduler = setup({
             dataSource: {
