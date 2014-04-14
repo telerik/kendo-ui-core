@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Kendo.Models;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Text;
 
 namespace Kendo.Extensions
 {
@@ -91,15 +92,8 @@ namespace Kendo.Extensions
 
             var className = "";
 
-            if (widget.Beta)
-            {
-                className = "beta-widget";
-            }
-            else if (widget.New)
-            {
-                className = "new-widget";
-            }
-            else if (widget.Text == "Theme Builder")
+
+            if (widget.Text == "Theme Builder")
             {
                 className = "theme-builder";
             }
@@ -117,14 +111,40 @@ namespace Kendo.Extensions
                 target = "_blank";
             }
 
-            return html.Raw(
-                string.Format("<a class=\"{0}\" href=\"{1}\" target=\"{2}\">{3}</a>",
-                    className,
-                    href,
-                    target,
-                    text
-                )
-            );
+            StringBuilder a = new StringBuilder();
+
+            a.Append("<a ");
+
+            if (!string.IsNullOrEmpty(className))
+            {
+                a.AppendFormat("class=\"{0}\" ", className);
+            }
+
+            if (!string.IsNullOrEmpty(target))
+            {
+                a.AppendFormat("target=\"{0}\" ", target);
+            }
+
+            a.AppendFormat("href=\"{0}\">", href);
+            a.Append(text);
+            a.Append("</a>");
+
+            if (widget.Pro)
+            {
+                a.Append("<span class=\"pro-widget\"></span>");
+            }
+            
+            if (widget.Beta)
+            {
+                a.Append("<span class=\"beta-widget\"></span>");
+            }
+
+            if (widget.New)
+            {
+                a.Append("<span class=\"new-widget\"></span>");
+            }
+
+            return html.Raw(a.ToString());
         }
 
         public static bool MergesWithNext(this HtmlHelper html, string category)
