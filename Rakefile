@@ -646,16 +646,15 @@ namespace :build do
         zip_bundles
     end
 
-    def xml_changelogs(destination)
-        [ 'web.commercial', 'dataviz.commercial', 'mobile.commercial' ].map do |bundle|
-            xml_changelog = "dist/bundles/#{bundle}.changelog.xml"
-            xml_changelog_destination = File.join(ARCHIVE_ROOT, destination, 'changelogs', "#{bundle}.changelog.xml")
+    def xml_changelog(destination)
+        filename = 'professional.commercial.changelog.xml'
 
-            file_copy :to => xml_changelog_destination,
-                      :from => xml_changelog
+        destination_file = File.join(ARCHIVE_ROOT, destination, 'changelogs', filename)
 
-            xml_changelog_destination
-        end
+        file_copy :to => destination_file,
+                  :from => "dist/bundles/#{filename}"
+
+        destination_file
     end
 
     { :production => "Production", :master => "Stable" }.each do |env, destination|
@@ -703,7 +702,7 @@ namespace :build do
             'demos:production',
             'download_builder:bundle',
             zip_targets("Production"),
-            xml_changelogs("Production"),
+            xml_changelog("Production"),
             changelog
         ].flatten
     end
@@ -758,7 +757,7 @@ namespace :build do
             'demos:production',
             'download_builder:bundle',
             zip_targets("Stable"),
-            xml_changelogs("Stable")
+            xml_changelog("Stable")
         ].flatten
     end
 
