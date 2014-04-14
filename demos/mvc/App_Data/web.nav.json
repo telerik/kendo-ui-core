@@ -515,6 +515,7 @@
         {
             "text": "Editor",
             "name": "editor",
+            "pro": "true",
             "documentation": "web/editor",
             "spriteCssClass": "editorIcon",
             "items": [
@@ -602,6 +603,7 @@
         {
             "text": "Grid",
             "name": "grid",
+            "pro": "true",
             "documentation": "web/grid",
             "spriteCssClass": "gridIcon",
             "items": [
@@ -1448,6 +1450,7 @@
         {
             "text": "Scheduler",
             "name": "scheduler",
+            "pro": "true",
             "documentation": "web/scheduler",
             "spriteCssClass": "schedulerIcon",
             "items": [
@@ -1868,6 +1871,7 @@
         },
         {
             "text": "TreeView",
+            "pro": "true",
             "name": "treeview",
             "documentation": "web/treeview",
             "spriteCssClass": "treeViewIcon",
@@ -1962,6 +1966,7 @@
         {
             "text": "Upload",
             "name": "upload",
+            "pro": "true",
             "documentation": "web/upload",
             "spriteCssClass": "uploadIcon",
             "packages": [ "!offline" ],

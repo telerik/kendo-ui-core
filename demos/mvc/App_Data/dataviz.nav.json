@@ -2,6 +2,7 @@
     "chart": [
         {
             "text": "DataViz Widgets",
+            "pro": "true",
             "spriteCssClass": "overviewIcon",
             "documentation": "dataviz/chart",
             "expanded": "true",
@@ -15,6 +16,7 @@
             "name": "overview"
         }, {
             "text": "Area Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartAreaIcon",
             "items": [{
@@ -94,6 +96,7 @@
             "name": "area-charts"
         }, {
             "text": "Bar Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBarIcon",
             "items": [{
@@ -195,6 +198,7 @@
             "name": "bar-charts"
         }, {
             "text": "Box Plot Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBoxPlotIcon",
             "items": [{
@@ -222,6 +226,7 @@
             "name": "pie-charts"
         }, {
             "text": "Bubble Charts",
+            "pro": "true",
             "name": "bubble-charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBubbleIcon",
@@ -258,6 +263,7 @@
             ]
         }, {
             "text": "Bullet Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBulletIcon",
             "items": [{
@@ -287,6 +293,7 @@
             ]
         }, {
             "text": "Donut Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartDonutIcon",
             "items": [{
@@ -322,6 +329,7 @@
             "name": "donut-charts"
         }, {
             "text": "Funnel Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartFunnelIcon",
             "items": [{
@@ -359,6 +367,7 @@
             "name": "funnel-charts"
         }, {
             "text": "Line Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartLineIcon",
             "items": [{
@@ -443,6 +452,7 @@
             "name": "line-charts"
         },  {
             "text": "Pie Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPieIcon",
             "items": [{
@@ -478,6 +488,7 @@
             "name": "pie-charts"
         },  {
             "text": "Polar Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPolarIcon",
             "items": [{
@@ -523,6 +534,7 @@
             "name": "polar-charts"
         },  {
             "text": "Radar Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartRadarIcon",
             "items": [{
@@ -575,6 +587,7 @@
             "name": "radar-charts"
         },  {
             "text": "Scatter Charts",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartScatterIcon",
             "items": [{
@@ -638,6 +651,7 @@
             "name": "scatter-charts"
         },  {
             "text": "Sparklines",
+            "pro": "true",
             "documentation": "dataviz/sparkline",
             "spriteCssClass": "sparklineIcon",
             "items": [{
@@ -666,6 +680,7 @@
             "name": "sparklines"
         }, {
             "text": "API",
+            "pro": "true",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartIcon",
             "items": [{
@@ -695,6 +710,7 @@
     "gauges": [
         {
             "text": "Linear Gauge",
+            "pro": "true",
             "spriteCssClass": "gaugeLinearIcon",
             "documentation": "dataviz/lineargauge",
             "items": [{
@@ -718,6 +734,7 @@
             "name": "linear-gauge"
         },  {
             "text": "Radial Gauge",
+            "pro": "true",
             "spriteCssClass": "gaugeRadialIcon",
             "documentation": "dataviz/radialgauge",
             "items": [{
@@ -744,6 +761,7 @@
     "Bar & QR Codes": [
         {
             "text": "Barcode",
+            "pro": "true",
             "spriteCssClass": "barcodeIcon",
             "documentation": "dataviz/barcode",
             "items": [{
@@ -769,6 +787,7 @@
             "name": "barcode"
         }, {
             "text": "QR code",
+            "pro": "true",
             "spriteCssClass": "qrcodeIcon",
             "documentation": "dataviz/qrcode",
             "items": [{
@@ -795,6 +814,7 @@
     ],
     "financial": [{
             "text": "Stock Chart",
+            "pro": "true",
             "documentation": "dataviz/stock-chart",
             "spriteCssClass": "chartStockIcon",
             "items": [{
@@ -820,6 +840,7 @@
     ],
     "geoviz": [{
             "text": "Map",
+            "pro": "true",
             "name": "map",
             "documentation": "dataviz/map",
             "spriteCssClass": "mapIcon",
@@ -861,6 +882,7 @@
     "diagramming": [
         {
             "text": "Diagram",
+            "pro": "true",
             "name": "Diagram",
             "beta": "true",
             "documentation": "dataviz/diagram",
