@@ -31,6 +31,7 @@
         </section>
         <script>
             var rootDom = document.getElementById("root-dom");
+            var tree = new kendo.dom.Tree(rootDom);
             var rootHtml = document.getElementById("root-html");
             var largeDom = true;
             var largeHtml = true;
@@ -73,14 +74,14 @@
                     for (var columnIndex = 0, columnCount = level.length; columnIndex < columnCount; columnIndex++) {
                         column = level[columnIndex];
 
-                        headers.push(kendo.dom.element("th", { colspan: column.span }, [kendo.dom.text(column.text)]));
+                        headers.push(tree.element("th", { colspan: column.span }, [tree.text(column.text)]));
                     }
 
-                    rows.push(kendo.dom.element("tr", null, headers));
+                    rows.push(tree.element("tr", null, headers));
                 }
 
 
-                kendo.dom.render(rootDom, [kendo.dom.element("table", null, rows)]);
+                tree.render([tree.element("table", null, rows)]);
 
             }
 

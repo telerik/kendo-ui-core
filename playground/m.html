@@ -42,8 +42,10 @@
         </fieldset>
 
         <script>
-            var element = kendo.dom.element;
-            var text = kendo.dom.text;
+            var tree = new kendo.dom.Tree(document.getElementById("kv-grid"));
+
+            var element = tree.element;
+            var text = tree.text;
 
             function now() {
                 return window.performance && window.performance.now ? window.performance.now() : new window.Date().getTime()
@@ -74,7 +76,9 @@
                 { field: "OrderID", title: "Order ID" },
                 { field: "ShipName", title: "Ship Name" }
             ];
+
             // Kendo
+
 
             function kendo_table() {
                 return [ element("table", { role: "grid" }, [kendo_colgroup(), kendo_thead(), kendo_tbody()]) ];
@@ -288,7 +292,7 @@
                     data: this.data(),
                     change: function() {
                         var start = now();
-                        kendo.dom.render(kv, kendo_table());
+                        tree.render(kendo_table());
                         var end = now();
                         console.log("Kendo Virtual DOM", end-start);
                     }
@@ -306,7 +310,7 @@
                 });
 
                 var start = now();
-                kendo.dom.render(kv, kendo_table());
+                tree.render(kendo_table());
                 var end = now();
                 console.log("Kendo Virtual DOM", end-start);
 
