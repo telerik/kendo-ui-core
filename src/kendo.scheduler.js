@@ -60,6 +60,7 @@ var __meta__ = {
         SAVE = "save",
         ADD = "add",
         EDIT = "edit",
+        valueStartEndBoundRegex = /(?:value:start|value:end)(?:,|$)/,
         TODAY = getDate(new Date()),
         RECURRENCE_EXCEPTION = "recurrenceException",
         DELETECONFIRM = "Are you sure you want to delete this event?",
@@ -872,6 +873,25 @@ var __meta__ = {
             this.element = element;
             this.options = extend(true, {}, this.options, options);
             this.createButton = this.options.createButton;
+
+            this.toggleDateValidationHandler = proxy(this._toggleDateValidation, this);
+        },
+
+        _toggleDateValidation: function(e) {
+            if (e.field == "isAllDay") {
+                var container = this.container,
+                    isAllDay = this.editable.options.model.isAllDay,
+                    bindAttribute = kendo.attr("bind"),
+                    element, isDateTimeInput, shouldValidate;
+                container.find("[" + bindAttribute+ "*=end],[" + bindAttribute + "*=start]").each(function() {
+                    element = $(this);
+                    if (valueStartEndBoundRegex.test(element.attr(bindAttribute))) {
+                        isDateTimeInput = element.is("[" + kendo.attr("role") + "=datetimepicker],[type*=datetime]");
+                        shouldValidate = isAllDay !== isDateTimeInput;
+                        element.attr(kendo.attr("validate"), shouldValidate);
+                    }
+                });
+            }
         },
 
         fields: function(editors, model) {
@@ -1215,6 +1235,7 @@ var __meta__ = {
 
                 pane.navigate(view, that.options.animations.left);
 
+                model.bind("change", that.toggleDateValidationHandler);
             } else {
                 this.trigger("cancel", { container: container, model: model });
             }
@@ -1246,6 +1267,7 @@ var __meta__ = {
 
                 this.container = null;
                 if (this.editable) {
+                    this.editable.options.model.unbind("change", this.toggleDateValidationHandler);
                     this.editable.destroy();
                     this.editable = null;
                 }
@@ -1270,6 +1292,7 @@ var __meta__ = {
 
             var destroy = function() {
                 if (that.editable) {
+                    that.editable.options.model.unbind("change", that.toggleDateValidationHandler);
                     that.editable.destroy();
                     that.editable = null;
                     that.container = null;
@@ -1426,6 +1449,8 @@ var __meta__ = {
 
                     that.trigger(REMOVE, { container: container, model: model });
                 });
+
+                model.bind("change", that.toggleDateValidationHandler);
             } else {
                 that.trigger(CANCEL, { container: container, model: model });
             }
