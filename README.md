@@ -42,7 +42,7 @@ Kendo UI Core is a free and open-source distribution of Kendo UI. The following 
 | Color Picker | Yes | Yes | Yes |
 | Toolbar | Yes | Yes | Yes |
 | MultiSelect | Yes | Yes | Yes |
-| Mask Input | Yes | Yes | Yes |
+| MaskedTextBox | Yes | Yes | Yes |
 | Notification | Yes | Yes | Yes |
 | Editor | No | Yes | Yes |
 | Grid | No | Yes | Yes |
