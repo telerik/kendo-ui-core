@@ -675,8 +675,8 @@ var __meta__ = {
             autoBaseUnitSteps: {
                 minutes: [1],
                 hours: [1],
-                days: [1],
-                weeks: [1],
+                days: [1, 2],
+                weeks: [],
                 months: [1],
                 years: [1]
             },
