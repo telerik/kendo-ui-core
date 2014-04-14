@@ -81,7 +81,7 @@ var __meta__ = {
                     '#}#' +
                 '#}#'+
                 '<div>'+
-                '<button type="submit" class="k-button">#=messages.filter#</button>'+
+                '<button type="submit" class="k-button k-primary">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
                 '</div>'+
             '</div>';

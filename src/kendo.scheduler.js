@@ -721,7 +721,7 @@ var __meta__ = {
     var defaultCommands = {
         update: {
             text: "Save",
-            className: "k-scheduler-update"
+            className: "k-primary k-scheduler-update"
         },
         canceledit: {
             text: "Cancel",
@@ -730,7 +730,7 @@ var __meta__ = {
         destroy: {
             text: "Delete",
             imageClass: "k-delete",
-            className: "k-scheduler-delete",
+            className: "k-primary k-scheduler-delete",
             iconClass: "k-icon"
         }
     };

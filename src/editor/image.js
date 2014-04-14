@@ -107,7 +107,7 @@ var ImageCommand = Command.extend({
                     '<input type="text" class="k-input k-textbox" id="k-editor-image-height">' +
                 "</div>" +
                 '<div class="k-edit-buttons k-state-default">' +
-                    '<button class="k-dialog-insert k-button">#: messages.dialogInsert #</button>' +
+                    '<button class="k-dialog-insert k-button k-primary">#: messages.dialogInsert #</button>' +
                     '<button class="k-dialog-close k-button">#: messages.dialogCancel #</button>' +
                 '</div>' +
             '</div>'
