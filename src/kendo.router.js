@@ -328,7 +328,6 @@ var __meta__ = {
                 if (back) {
                     adapter.forward();
                 } else {
-                    console.log("setting history back")
                     adapter.back();
                     this.historyLength --;
                 }
