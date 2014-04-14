@@ -8,6 +8,8 @@ class TelerikReleaseBot
     attr_reader :driver
 
     def initialize
+        @versions_created = []
+        #todo implement version check with versions_created 
         @driver = Selenium::WebDriver.for(:firefox)
         @driver.navigate.to ADMIN_URL
 
@@ -57,8 +59,6 @@ def upload_release_build(options)
          #masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
     #SCRIPT
 
-    p options[:title]
-
     if $shouldCreateVersion
           create_version(bot, options[:product]) 
           prepare_files(bot, options)
@@ -67,7 +67,7 @@ def upload_release_build(options)
     else
       prepare_files(bot, options)
 
-      $shouldCreateVersion = false
+      $shouldCreateVersion = true
     end    
 end
 def create_version(bot, product_name)
@@ -97,7 +97,7 @@ end
 def prepare_files(bot, options)
   #bot.driver.execute_script "window.location = $('a:contains(\"commercial.zip\")').attr(\"href\")"
   p ">>preparing files"
-  #msi files
+
   release_config = options[:params]
   file_metadata = release_config[:file_metadata]
 
@@ -107,23 +107,26 @@ def prepare_files(bot, options)
     bot.click_and_wait "Add new file", "administration"
 
     bot.driver.execute_script "$('[id$=\"_txtFieldText\"]').val('#{file_fields[:label]}')" 
-    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')" 
-    bot.fill_in('File Category:', '#{file_fields[:file_category]}')
+    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')"
 
-    p "Setting filename..."
-    #upload_file_and_go_back(bot, options[:archive_path], file_fields[:download_name], true)
-
-    bot.fill_in('File type:', '#{file_fields[:file_type]}')
-    bot.fill_in('Extension:', '#{file_fields[:extension]}')
+    bot.driver.execute_script "$find($telerik.$('[id$=\"_cfFileCategory_rcbField\"]').attr('id')).set_text('#{file_fields[:file_category]}')"
+    bot.driver.execute_script "$find($telerik.$('[id$=\"_rcbFileType\"]').attr('id')).set_text('#{file_fields[:file_type]}')"
+    bot.driver.execute_script "$find($telerik.$('[id$=\"_cfExtension_rcbField\"]').attr('id')).set_text('#{file_fields[:extension]}')"
 
     file_markers = file_fields[:file_markers]
-    file_markers.each { |fm| bot.find("[text='#{fm}']").click  }
+    file_markers.each do |fm| 
+      bot.driver.find_element(:xpath, "//label[contains(.,'#{fm}')]").click  
+    end
  
     websites = file_fields[:websites]
-    websites.each { |ws| bot.find("[text='#{ws}']").click  }
+    websites.each do |ws| 
+      bot.driver.find_element(:xpath, "//label[contains(.,'#{ws}')]").click
+    end
 
     bot.driver.execute_script "$find($telerik.$('[id$=\"_efDownloadMessage_reFieldText\"]').attr('id')).set_html('#{file_fields[:download_message]}')" 
     bot.driver.execute_script "$find($telerik.$('[id$=\"_efWhatsIncluded_reFieldText\"]').attr('id')).set_html('#{file_fields[:whats_included_message]}')" 
+
+    #upload_file_and_go_back(bot, options[:archive_path], file_fields[:download_name], true)
 
     bot.find("[value='Save']").click
 
@@ -239,26 +242,15 @@ def upload_file_and_go_back(bot, dirpath, filename, isMsi)
     p "xml uploaded"   
   end
 end
-def release_build_file_copy(release_build_config, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
-=begin    if defined? SERVICE_PACK_NUMBER
-        destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}"
-    else
-        destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}"
-    end
+def release_build_file_copy(release_build, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
+    release_build_config = release_build[:file_metadata]
 
-    versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, destination_folder_name)
-    versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, "Production")
-
-
-    FileUtils.mkdir_p(versioned_bundle_destination_path)
-=end
     if release_build_config[:zip]
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
       :vbd => versioned_bundle_name(name),
       :extension => ".zip"
-
     end
     if release_build_config[:msi]
       build_path_and_copy \
@@ -267,14 +259,11 @@ def release_build_file_copy(release_build_config, name, versioned_bundle_destina
       :vbd => versioned_bundle_name(name),
       :extension => ".msi"
 
-    end
-    if release_build_config[:xml]
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
       :vbd => versioned_bundle_name(name),
       :extension => ".xml"
-
     end
     if release_build_config[:nuget]
       build_path_and_copy \
@@ -283,24 +272,24 @@ def release_build_file_copy(release_build_config, name, versioned_bundle_destina
       :vbd => versioned_bundle_name(name),
       :extension => ".nupkg.zip"
     end
-    if release_build_config[:download_builder]
+    if release_build[:download_builder]
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
       :static_name => "download-builder" 
       
     end
-    if release_build_config[:demos]
+    if release_build[:demos]
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
       :static_name => "online-examples.zip" 
 
     end
-    if release_build_config[:common_installer]
+    if release_build_config[:exe]
       archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikControlPanelSetup.exe")
       cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.MVC.#{VERSION}.exe")
-      cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.KUI.Complete.#{VERSION}.exe") 
+      cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.KUI.Professional.#{VERSION}.exe") 
 
       archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikUIForAspNetMvcSetup.exe")
       cp archive_file, File.join(versioned_bundle_destination_path, "TelerikUIForAspNetMvcSetup.#{VERSION}.exe")

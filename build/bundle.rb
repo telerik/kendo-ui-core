@@ -174,28 +174,11 @@ def bundle(options)
         task "release_builds:upload:#{name}" =>  "release_builds:copy:#{name}" do
             p ">>starting version upload for #{name}"
 
-            case options[:product] 
-                  when "Kendo UI Complete"
-                    upload_release_build \
-                    :title => name,
-                    #:product => options[:product],
-                    :product => "Kendo UI Professional",
-                    :params => options[:release_build],
-                    :archive_path => versioned_bundle_destination_path 
-                  when "UI for ASP.NET MVC"
                     upload_release_build \
                     :title => name,
                     :product => options[:product],
                     :params => options[:release_build],
-                    :vs_extension => !!options[:vs_extension],
-                    :archive_path => versioned_bundle_destination_path
-                  else
-                    upload_release_build \
-                    :title => name,
-                    :product => options[:product],
-                    :params => options[:release_build],
-                    :archive_path => versioned_bundle_destination_path 
-            end   
+                    :archive_path => versioned_bundle_destination_path  
         end
         # add bundle to bundles:all
         task "release_builds:bundles:all" => "release_builds:upload:#{name}"
