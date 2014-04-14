@@ -131,7 +131,7 @@ namespace Kendo.Extensions
 
             if (widget.Pro)
             {
-                a.Append("<span class=\"pro-widget\"></span>");
+                a.Append("<span title=\"Available only in Kendo UI Professional\" class=\"pro-widget\"></span>");
             }
             
             if (widget.Beta)
