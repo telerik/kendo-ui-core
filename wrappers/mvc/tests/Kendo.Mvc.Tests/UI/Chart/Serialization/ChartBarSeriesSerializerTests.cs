@@ -72,6 +72,19 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Serializes_category_axis()
+        {
+            series.CategoryAxis = "Axis";
+            GetJson(series)["categoryAxis"].ShouldEqual("Axis");
+        }
+
+        [Fact]
+        public void Should_not_serialize_empty_category_axis()
+        {
+            GetJson(series).ContainsKey("categoryAxis").ShouldBeFalse();
+        }
+
+        [Fact]
         public void Should_serialize_Tooltip()
         {
             series.Tooltip.Visible = true;

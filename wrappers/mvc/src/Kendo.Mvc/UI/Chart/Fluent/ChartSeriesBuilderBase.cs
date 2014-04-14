@@ -285,6 +285,17 @@ using Kendo.Mvc.Infrastructure;
         }
 
         /// <summary>
+        /// Sets the axis name to use for this series.
+        /// </summary>
+        /// <param name="categoryAxis">The category axis name for this series.</param>
+        public virtual TSeriesBuilder CategoryAxis(string categoryAxis)
+        {
+            Series.CategoryAxis = categoryAxis;
+
+            return this as TSeriesBuilder;
+        }
+
+        /// <summary>
         /// Configures the series highlight
         /// </summary>
         /// <param name="configurator">The configuration action.</param>

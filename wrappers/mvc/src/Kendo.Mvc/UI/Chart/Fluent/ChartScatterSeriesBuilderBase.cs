@@ -167,6 +167,15 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Not applicable to scatter series
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override TBuilder CategoryAxis(string categoryAxis)
+        {
+            return base.CategoryAxis(categoryAxis);
+        }
+
+        /// <summary>
         /// Sets the X field for the series
         /// </summary>
         /// <param name="xField">The value X field for the series</param>

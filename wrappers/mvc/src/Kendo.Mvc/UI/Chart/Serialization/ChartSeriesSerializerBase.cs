@@ -22,6 +22,7 @@ namespace Kendo.Mvc.UI
                   .Add("opacity", series.Opacity, () => series.Opacity.HasValue)
                   .Add("visible", series.Visible, () => series.Visible.HasValue)
                   .Add("axis", series.Axis, string.Empty)
+                  .Add("categoryAxis", series.CategoryAxis, string.Empty)
                   .Add("groupNameTemplate", series.GroupNameTemplate, string.Empty);
 
             var tooltipData = series.Tooltip.CreateSerializer().Serialize();

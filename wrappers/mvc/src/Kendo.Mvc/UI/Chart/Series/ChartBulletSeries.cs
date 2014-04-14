@@ -167,6 +167,16 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Gets or sets the category axis name to use for this series.
+        /// </summary>
+        /// <value>The category axis name.</value>
+        public string CategoryAxis
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Gets or sets the title of the series.
         /// </summary>
         /// <value>The title.</value>
