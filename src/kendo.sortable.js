@@ -179,6 +179,10 @@ var __meta__ = {
                     return;
                 }
 
+                if(target.appendAfterHidden) {
+                    this._movePlaceholder(target, "next", eventData);
+                }
+
                 if(this.floating) { //horizontal
                     if(axisDelta.x < 0 && offsetDelta.left < 0) {
                         direction = "prev";
@@ -289,8 +293,11 @@ var __meta__ = {
                 node = items.filter(element)[0] || items.has(element)[0];
 
                 return node ? { element: $(node), sortable: this } : null;
-            } else if (this.element[0] == element && this.isEmpty()) { //the sortable container is empty
+            } else if (this.element[0] == element && this._isEmpty()) {
                 return { element: this.element, sortable: this, appendToBottom: true };
+            } else if (this.element[0] == element && this._isLastHidden()) {
+                node = this.items().eq(0);
+                return { element: node , sortable: this, appendAfterHidden: true };
             } else if (connectWith) { //connected lists are present
                 return this._searchConnectedTargets(element, e);
             }
@@ -338,8 +345,11 @@ var __meta__ = {
                         }
                     }
                 } else if(connected[i] == element) {
-                    if((sortableInstance && sortableInstance.isEmpty()) || this._isCursorAfterLast(sortableInstance, e)) {
+                    if(sortableInstance && sortableInstance._isEmpty()) {
                         return { element: connected.eq(i), sortable: sortableInstance, appendToBottom: true };
+                    } else if (this._isCursorAfterLast(sortableInstance, e)) {
+                        node = sortableInstance.items().last();
+                        return { element: node, sortable: sortableInstance };
                     }
                 }
             }
@@ -487,8 +497,12 @@ var __meta__ = {
             return items;
         },
 
-        isEmpty: function() {
-            return !this.items().not(":hidden").length;
+        _isEmpty: function() {
+            return !this.items().length;
+        },
+
+        _isLastHidden: function() {
+            return this.items().length === 1 && this.items().is(":hidden");
         }
 
     });
