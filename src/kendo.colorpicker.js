@@ -593,7 +593,7 @@ var __meta__ = {
                 '<input class="k-transparency-slider" />' +
             '# } #' +
             '# if (buttons) { #' +
-                '<div unselectable="on" class="k-controls"><button class="k-button apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
+                '<div unselectable="on" class="k-controls"><button class="k-button k-primary apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
             '# } #'
         )
     });
