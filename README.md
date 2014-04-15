@@ -140,7 +140,7 @@ grunt custom:autocomplete,dropdownlist
 
 ## Source Code and Downloads
 
-If you want to skip building Kendo UI Core yourself, head on over to [Telerik.com](http://telerik.com/kendo-ui-core) to grab the full source.
+If you want to skip building Kendo UI Core yourself, head on over to [Telerik.com](http://www.telerik.com/kendo-ui/open-source-core) to grab the full source.
 
 ## Documentation
 
