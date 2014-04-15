@@ -92,7 +92,7 @@
                     contentUrls: [
                         @Html.Raw(String.Join(",", framework.Files.Select(file => "\"" + Url.Action("index", "source", new { path = file.Url } ) + "\"").ToArray()))
                     ],
-                   contentLoad: function (e) {
+                    contentLoad: function (e) {
                         var baseUrl = "http://@(Request.Headers["host"] + Url.Content("~/"))";
                         var content = $(e.contentElement);
                         if (content.is("#HTML-1")) {
@@ -105,10 +105,6 @@
                             var cs = $("#codeStrip");
                             cs.css("min-height", cs.height());
                         }
-                    },
-                    activate: function (e) {
-                        var isHtml = $(e.contentElement).is("#HTML-1");
-                        $(".try-kendo").toggleClass("k-state-disabled", !isHtml).prop('disabled' , !isHtml);               								
                     }
                });
 
@@ -140,6 +136,10 @@
                         if (tabstrip.select().length == 0) {
                             tabstrip.select(0);
                         }
+                    },
+                    activate: function (e) {
+                        var isHtml = $(e.contentElement).is("#codeStrip-1");
+                        $(".try-kendo").toggleClass("k-state-disabled", !isHtml).prop('disabled', !isHtml);
                     }
                 })
                 .data("kendoTabStrip")
