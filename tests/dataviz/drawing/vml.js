@@ -375,6 +375,83 @@
         equal(groupNode.render(), "<div></div>");
     });
 
+    test("refreshTranaform method calls childNodes refreshTranaform method", function() {
+        var group = new Group(),
+            path = new Path(),
+            childGroupNode;
+        group.append(path);
+        groupNode.load([group]);
+        childGroupNode = groupNode.childNodes[0];
+        childGroupNode.childNodes[0].refreshTransform = function() {
+            ok(true);
+        };
+
+        childGroupNode.refreshTransform(new Matrix());
+    });
+
+    test("refreshTranaform method calls childNodes refreshTranaform method with current matrix", function() {
+        var matrix = new Matrix(2,2,2,2,2,2),
+            parentMatrix = new Matrix(3,3,3,3,3,3),
+            currentMatrix = parentMatrix.times(matrix),
+            group = new Group({transform: matrix}),
+            path = new Path(),
+            childGroupNode,
+            parentGroup = new Group({transform: parentMatrix});
+        parentGroup.append(group);
+        group.append(path);
+        groupNode = new GroupNode(parentGroup);
+        groupNode.load([group]);
+        childGroupNode = groupNode.childNodes[0];
+        childGroupNode.childNodes[0].refreshTransform = function(transform) {
+            compareMatrices(transform, currentMatrix);
+        };
+
+        childGroupNode.refreshTransform();
+    });
+
+    test("options change for transform calls childNodes refreshTransform method", function() {
+        var group = new Group(),
+            path = new Path(),
+            childGroupNode;
+        group.append(path);
+        groupNode.load([group]);
+        childGroupNode = groupNode.childNodes[0];
+        childGroupNode.childNodes[0].refreshTransform = function() {
+            ok(true);
+        };
+
+        group.transform(new Matrix());
+    });
+
+    test("options change for transform calls childNodes refreshTransform method with the current matrix as argument", function() {
+        var group = new Group(),
+            path = new Path(),
+            childGroupNode,
+            matrix = new Matrix(1,1,1,1,1,1);
+        group.append(path);
+        groupNode.load([group]);
+        childGroupNode = groupNode.childNodes[0];
+        childGroupNode.childNodes[0].refreshTransform = function(transform) {
+            compareMatrices(transform, matrix);
+        };
+
+        group.transform(matrix);
+    });
+
+    test("options change for other field different than transform does not call childNodes refreshTransform method", 0, function() {
+        var group = new Group(),
+            path = new Path(),
+            childGroupNode;
+        group.append(path);
+        groupNode.load([group]);
+        childGroupNode = groupNode.childNodes[0];
+        childGroupNode.childNodes[0].refreshTransform = function() {
+            ok(false);
+        };
+
+        group.options.set("foo", 1);
+    });
+
     // ------------------------------------------------------------
     var path,
         strokeNode,

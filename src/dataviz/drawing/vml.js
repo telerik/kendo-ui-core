@@ -229,7 +229,25 @@
     var GroupNode = Node.extend({
         template: renderTemplate(
             "<div>#= d.renderChildren() #</div>"
-        )
+        ),
+
+        optionsChange: function(e) {
+            if (e.field === "transform") {
+                this.refreshTransform();
+            }
+
+            this.invalidate();
+        },
+
+        refreshTransform: function(transform) {
+            var currentTransform = this.srcElement.combineTransform(transform),
+                children = this.childNodes,
+                length = children.length,
+                i;
+            for (i = 0; i < length; i++) {
+                children[i].refreshTransform(currentTransform);
+            }
+        }
     });
 
     var StrokeNode = Node.extend({
