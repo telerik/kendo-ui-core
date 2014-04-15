@@ -439,7 +439,7 @@
     <value>Annuler</value>
   </data>
   <data name="Scheduler_Confirmation" xml:space="preserve">
-    <value>Are you sure you want to delete this event?</value>
+    <value>Etes-vous sûr de vouloir supprimer cet élément?</value>
   </data>
   <data name="Scheduler_Date" xml:space="preserve">
     <value>Date</value>
@@ -448,7 +448,7 @@
     <value>Effacer</value>
   </data>
   <data name="Scheduler_Editor_AllDayEvent" xml:space="preserve">
-    <value>All day event</value>
+    <value>Toute la journée</value>
   </data>
   <data name="Scheduler_Editor_Description" xml:space="preserve">
     <value>Description</value>
@@ -457,19 +457,19 @@
     <value>Event</value>
   </data>
   <data name="Scheduler_Editor_End" xml:space="preserve">
-    <value>Finir</value>
+    <value>Fin</value>
   </data>
   <data name="Scheduler_Editor_EndTimezone" xml:space="preserve">
     <value>End timezone</value>
   </data>
   <data name="Scheduler_Editor_Repeat" xml:space="preserve">
-    <value>Repeat</value>
+    <value>Répéter</value>
   </data>
   <data name="Scheduler_Editor_SeparateTimezones" xml:space="preserve">
     <value>Use separate start and end time zones</value>
   </data>
   <data name="Scheduler_Editor_Start" xml:space="preserve">
-    <value>Commencer</value>
+    <value>Début</value>
   </data>
   <data name="Scheduler_Editor_StartTimezone" xml:space="preserve">
     <value>Start timezone</value>
@@ -490,16 +490,16 @@
     <value>Event</value>
   </data>
   <data name="Scheduler_Recurrence_DeleteRecurring" xml:space="preserve">
-    <value>Do you want to delete only this event occurrence or the whole series?</value>
+    <value>Voulez-vous supprimer seulement cet événement ou toute la série?</value>
   </data>
   <data name="Scheduler_Recurrence_DeleteWindowOccurrence" xml:space="preserve">
-    <value>Delete current occurrence</value>
+    <value>Suppression de l'élément courant</value>
   </data>
   <data name="Scheduler_Recurrence_DeleteWindowSeries" xml:space="preserve">
-    <value>Delete the series</value>
+    <value>Suppression de toute la série</value>
   </data>
   <data name="Scheduler_Recurrence_DeleteWindowTitle" xml:space="preserve">
-    <value>Delete Recurring Item</value>
+    <value>Suppression d'un élément récurrent</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Daily_Interval" xml:space="preserve">
     <value>jour(s)</value>
@@ -640,13 +640,13 @@
     <value>Delete row</value>
   </data>
   <data name="Scheduler_DeleteWindowTitle" xml:space="preserve">
-    <value>Delete event</value>
+    <value>Suppression de l'élément</value>
   </data>
   <data name="Scheduler_ShowFullDay" xml:space="preserve">
-    <value>Show full day</value>
+    <value>Montrer toute la journée</value>
   </data>
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
-    <value>Show business hours</value>
+    <value>Montrer les heures ouvrables</value>
   </data>
   <data name="Filter_Cancel" xml:space="preserve">
     <value>Annuler</value>
