@@ -98,7 +98,7 @@ var __meta__ = {
 
                         that._click($(link));
                     })
-                    .on("mouseup" + ns, function() {
+                    .on("mouseup" + ns, "table.k-content, .k-footer", function() {
                         that._focusView(that.options.focusOnNav !== false);
                     })
                     .attr(ID);
