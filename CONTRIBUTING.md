@@ -39,14 +39,14 @@ See the previous item on creating a topic branch.
 
 If you don't use a topic branch, we may ask you to re-do your pull request on a topic branch. If your pull request contains commits or other changes that are not related to the pull request, we will ask you to re-do your pull request.
 
-#### Branch from "master" not "production"
+#### Branch from "master", not "production"
 
 The "production" branch of the Kendo UI Core repository is for production maintenance code only. Never create a pull request from the production branch. Always create a branch for your work from the "master" branch.
 This will facilitate easier pull request management for the continuous work that is done in the master branch. If the issue is a bug fix that should be back ported to a maintenance branch, the core maintainers will cherry-pick it.
 
 ### 3. Include tests describing the bug or feature
 
-Kendo UI uses [QUnit](https://qunitjs.com/) for a test framework and [karma](http://karma-runner.github.io/) as the test runner. You may browse the `tests` directory to gett a better idea of the structure and conventions used.
+Kendo UI uses [QUnit](https://qunitjs.com/) for a test framework and [karma](http://karma-runner.github.io/) as the test runner. You may browse the `tests` directory to get a better idea of the structure and conventions used.
 
 To run the tests, execute the following command:
 
@@ -74,11 +74,11 @@ When you've completed your work on a topic branch, you may squash your work down
 
 See [Github's documentation for pull requests](https://help.github.com/articles/using-pull-requests).
 
-Pull requests are the preferred way to contribute to Kendo Ui Core. Any time you can send us a pull request with the changes that you want, we will have an easier time seeing what you are trying to do. But a pull request in itself is not usually sufficient. There needs to be some context and purpose with it, and it should be done against specific branch.
+Pull requests are the preferred way to contribute to Kendo UI Core. Any time you can send us a pull request with the changes that you want, we will have an easier time seeing what you are trying to do. But a pull request in itself is not usually sufficient. There needs to be some context and purpose with it, and it should be done against specific branch.
 
 ### Provide A Meaningful Description
 
-It is very important to provide a meaningful description with your pull requests that alter any code. A good format for these descriptions will include three things:
+It is very important to provide a meaningful description with your pull requests that alter any code. A good format for these descriptions will include:
 
 1. Why: The problem you are facing (in as much detail as is necessary to describe the problem to someone who doesn't know anything about the system you're building)
 
@@ -95,11 +95,13 @@ Without at least the first 2 items in this list, we won't have any clue why you'
 All code contributed to this project should adhere to a consistent style, so please keep these in mind before you submit your Pull Requests:
 
 - Space indentation, size of 4
-- Semicolons are nice. Use them
+- Semicolons are nice. Use them.
 - Double quotes
 - No trailing whitespace
 - Declare variables at the top of a scope
 - Return early
 - Be JSHint Valid
 
-Beyond these, your best bet, when in doubt is to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js).
+You can verify if your code passes the project JSHint options by running `grunt jshint`.
+
+Beyond these, your best bet when in doubt is to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js).
