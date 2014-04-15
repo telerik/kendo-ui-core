@@ -19,6 +19,10 @@ These guidelines are here to facilitate your contribution and streamline the pro
 
 Do not submit a feature request on GitHub; all feature requests on GitHub will be closed. Instead, visit the [Kendo UI Feedback portal](http://kendoui-feedback.telerik.com/forums/127393-telerik-kendo-ui-feedback), and search this list for similar feature requests.
 
+## Asking for Help
+
+The Kendo UI team does *not* provide formal support for Kendo UI Core, except to those customers who have purchased a [commercial license for Kendo UI](http://www.telerik.com/kendo-ui) (Professional, UI for MVC, etc.) or a support-only package from Telerik.com. Please do not create support requests for this project in the issues list for this repo, as these will be immediately closed and you'll be directed to post your question on a community forum.
+
 ## Code Fixes and Enhancements
 
 ### 1. Log an Issue
