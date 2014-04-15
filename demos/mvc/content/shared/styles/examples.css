@@ -1733,23 +1733,29 @@ p#copy
 .widgetGrid .beta-widget,
 .widgetGrid .pro-widget
 {    
-   width:18px;
-   height: 9px; 
+  
    display: inline-block;
 }
 
 .widgetGrid .new-widget
 {
+   width: 18px;
+   height: 9px;  
    background: url(tag-new.png) no-repeat right center;
 }
 
 .widgetGrid .beta-widget
 {
+   width: 21px;
+   height: 9px;  
    background: url(tag-beta.png) no-repeat right center;
+   margin-left: 4px;
 }
 
 .widgetGrid .pro-widget
 {
+   width: 18px;
+   height: 9px;  
    background: url(tag-pro.png) no-repeat right center;
 }
 
