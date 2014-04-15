@@ -8422,6 +8422,11 @@ var __meta__ = {
                     pane
                 );
 
+                plotArea.createBulletChart(
+                    filterSeriesByType(filteredSeries, [BULLET, VERTICAL_BULLET]),
+                    pane
+                );
+
                 plotArea.createLineChart(
                     filterSeriesByType(filteredSeries, [LINE, VERTICAL_LINE]),
                     pane
@@ -8439,11 +8444,6 @@ var __meta__ = {
 
                 plotArea.createOHLCChart(
                     filterSeriesByType(filteredSeries, OHLC),
-                    pane
-                );
-
-                plotArea.createBulletChart(
-                    filterSeriesByType(filteredSeries, [BULLET, VERTICAL_BULLET]),
                     pane
                 );
             }
