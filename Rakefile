@@ -43,8 +43,6 @@ end
 ADMIN_PASS = 'ultra'
 ADMIN_RELEASE_UPLOAD_PASS = "t3l3r1k@dm1n"
 
-$shouldCreateVersion = true
-
 ROOT_MAP = {
     '.' => /(dist\/js|dist\/styles\/.+?)\//,
     'js' => DIST_JS_ROOT,
@@ -209,7 +207,7 @@ bundle :name => 'professional.commercial',
               :extension => "ZIP",
               :file_markers => ["Default File"],
               :websites => ["Telerik", "SiteFinity"],
-              :download_message => "You have successfully downloaded the Kendo UI Commercial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded the Kendo UI Commercial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />Complete Source Code</strong>"
              },
              :msi => {
@@ -220,7 +218,7 @@ bundle :name => 'professional.commercial',
               :extension => "MSI",
               :file_markers => ["Default File For Common Installer"],
               :websites => ["Telerik"],
-              :download_message => "You successfully downloaded the Kendo UI Professional installer. See <a href=\'http://docs.telerik.com/kendo-ui/getting-started/introduction\'>this article</a> on how to get started.",
+              :download_message => 'You successfully downloaded the Kendo UI Professional installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />Complete Source Code</strong>"
              },
              :exe => {
@@ -231,7 +229,7 @@ bundle :name => 'professional.commercial',
               :extension => "EXE",
               :file_markers => ["Is Bolded"],
               :websites => ["Telerik"],
-              :download_message => "You successfully downloaded the Kendo UI Professional installer. See <a href='http://docs.telerik.com/kendo-ui/getting-started/introduction'>this article</a> on how to get started.",
+              :download_message => 'You successfully downloaded the Kendo UI Professional installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Installer EXE package</strong>" 
              }
            },
@@ -270,7 +268,7 @@ bundle :name => 'professional.trial',
               :extension => "ZIP",
               :file_markers => ["Default File"],
               :websites => ["Telerik", "SiteFinity"],
-              :download_message => "You have successfully downloaded the Kendo UI Professional Trial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded the Kendo UI Professional Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles</strong>"
              },
              :msi => {
@@ -281,7 +279,7 @@ bundle :name => 'professional.trial',
               :extension => "MSI",
               :file_markers => ["Default File For Common Installer"],
               :websites => ["Telerik"],
-              :download_message => "You successfully downloaded the Kendo UI Professional Trial installer. See <a href='http://docs.telerik.com/kendo-ui/getting-started/introduction'>this article</a> on how to get started."
+              :download_message => 'You successfully downloaded the Kendo UI Professional Trial installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.'
              }
            }
        }
@@ -394,7 +392,7 @@ bundle :name => 'aspnetmvc.trial',
               :file_type => "Trial Files",
               :extension => "ZIP",
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for ASP.NET MVC Trial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
              },
              :msi => {
@@ -405,7 +403,7 @@ bundle :name => 'aspnetmvc.trial',
               :extension => "MSI",
               :file_markers => ["Default File", "Default File For Common Installer"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for ASP.NET MVC Trial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
              },
              :exe => {
@@ -416,7 +414,7 @@ bundle :name => 'aspnetmvc.trial',
               :extension => "EXE",
               :file_markers => ["Is Common Installer", "Is Bolded"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for ASP.NET MVC Trial installer. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Trial installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Installer EXE package</strong>"
              },
              :nuget => {
@@ -465,7 +463,7 @@ bundle :name => 'aspnetmvc.hotfix.trial',
               :extension => "ZIP",
               :file_markers=> ["Use this file in VS Extensions and license key generation"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for ASP.NET MVC Trial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
              }
           }
@@ -507,7 +505,7 @@ bundle :name => 'aspnetmvc.commercial',
               :file_type => "Paid Files",
               :extension => "ZIP",
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for ASP.NET MVC Commercial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Commercial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers <br />Complete Source Code</strong>"
              },
              :msi => {
@@ -518,7 +516,7 @@ bundle :name => 'aspnetmvc.commercial',
               :extension => "MSI",
               :file_markers => ["Default File", "Default File For Common Installer"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for ASP.NET MVC Commercial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Commercial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers <br />Complete Source Code</strong>"
              },
              :exe => {
@@ -529,7 +527,7 @@ bundle :name => 'aspnetmvc.commercial',
               :extension => "EXE",
               :file_markers => ["Is Bolded"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for ASP.NET MVC Commercial installer. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Commercial installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Installer EXE package</strong>"
              },
              :nuget => {
@@ -622,7 +620,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
               :extension => "ZIP",
               :file_markers => ["Use this file in VS Extensions and license key generation"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for ASP.NET MVC Commercial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Commercial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
              }
           }
@@ -674,13 +672,13 @@ bundle :name => 'jsp.trial',
           :file_metadata => {
              :zip => {
               :label => "Manual Installation", 
-              :download_name => "telerik.ui.for.jsp#{VERSION}.trial.zip",
+              :download_name => "telerik.ui.for.jsp.#{VERSION}.trial.zip",
               :file_category => "Installation",
               :file_type => "Trial Files",
               :extension => "ZIP",
               :file_markers => ["Default File"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for JSP Trial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for JSP Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />JSP Server Wrappers</strong>"
              }
           }
@@ -706,13 +704,13 @@ bundle :name => 'jsp.commercial',
          :file_metadata => {
              :zip => {
               :label => "Manual Installation", 
-              :download_name => "telerik.ui.for.jsp#{VERSION}.commercial.zip",
+              :download_name => "telerik.ui.for.jsp.#{VERSION}.commercial.zip",
               :file_category => "Installation",
               :file_type => "Paid Files",
               :extension => "ZIP",
               :file_markers => ["Default File"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for JSP Commercial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for JSP Commercial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />JSP Server Wrappers<br />Complete Source Code</strong>"
              }
           }
@@ -743,13 +741,13 @@ bundle :name => 'php.trial',
           :file_metadata => {
              :zip => {
               :label => "Manual Installation", 
-              :download_name => "telerik.ui.for.php#{VERSION}.trial.zip",
+              :download_name => "telerik.ui.for.php.#{VERSION}.trial.zip",
               :file_category => "Installation",
               :file_type => "Trial Files",
               :extension => "ZIP",
               :file_markers => ["Default File"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for PHP Trial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for PHP Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />PHP Server Wrappers</strong>"
              }
           }
@@ -773,13 +771,13 @@ bundle :name => 'php.commercial',
           :file_metadata => {
              :zip => {
               :label => "Manual Installation", 
-              :download_name => "telerik.ui.for.php#{VERSION}.commercial.zip",
+              :download_name => "telerik.ui.for.php.#{VERSION}.commercial.zip",
               :file_category => "Installation",
               :file_type => "Paid Files",
               :extension => "ZIP",
               :file_markers => ["Default File"],
               :websites => ["Telerik"],
-              :download_message => "You have successfully downloaded Telerik UI for PHP Commercial version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Telerik UI for PHP Commercial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />PHP Server Wrappers<br />Complete Source Code</strong>"
              }
           }
@@ -816,7 +814,7 @@ bundle :name => 'core',
               :extension => "ZIP",
               :file_markers => ["Default File"],
               :websites => ["Telerik", "SiteFinity"],
-              :download_message => "You have successfully downloaded Kendo UI Core OS version. See <a href='http://docs.telerik.com/kendo-ui/getting-started/introduction'>this article</a> on how to get started.",
+              :download_message => 'You have successfully downloaded Kendo UI Core OS version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />Complete Source Code</strong>"
              }
           }

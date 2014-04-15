@@ -8,14 +8,15 @@ class TelerikReleaseBot
     attr_reader :driver
 
     def initialize
-        @versions_created = []
-        #todo implement version check with versions_created 
+
         @driver = Selenium::WebDriver.for(:firefox)
         @driver.navigate.to ADMIN_URL
 
         driver.find_element(:name, "txtEmail").send_keys ADMIN_RELEASE_UPLOAD_LOGIN
         driver.find_element(:name, "txtPassword").send_keys ADMIN_RELEASE_UPLOAD_PASS
         driver.find_element(:name, "btnLogin").click
+
+        @versions_created = []
     end
 
     def find(selector)
@@ -33,7 +34,7 @@ class TelerikReleaseBot
     end
 
     def wait_for_title(title)
-        Selenium::WebDriver::Wait.new(:timeout => 10).until { driver.title.downcase.start_with? title }
+        Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.title.downcase.start_with? title }
     end
 
     def fill_in(title, contents)
@@ -46,31 +47,32 @@ class TelerikReleaseBot
     def quit
         driver.quit
     end
+    def version_created(product)
+       @versions_created.index(product) != nil 
+    end
+    def add_product(product)
+       @versions_created.push(product)
+    end
 end
 
 def upload_release_build(options)
+
     bot = TelerikReleaseBot.instance
 
-    bot.go_to_product_versions
-
+    bot.click_and_wait("Administration", "administration")
+    bot.click_and_wait("Product Versions", "product")
     bot.click_and_wait("Product Name", "product")
     #bot.driver.execute_script <<-SCRIPT
          #var masterTable = $find($telerik.$('[id$=\"_dgProducts\"]').attr('id')).get_masterTableView();
          #masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
     #SCRIPT
-
-    if $shouldCreateVersion
-          create_version(bot, options[:product]) 
-          prepare_files(bot, options)
-
-          $shouldCreateVersion = false
-    else
-      prepare_files(bot, options)
-
-      $shouldCreateVersion = true
-    end    
+    create_version(bot, options[:product])   
+    prepare_files(bot, options)  
 end
 def create_version(bot, product_name)
+      return if bot.version_created(product_name) 
+      bot.add_product(product_name)
+
       p ">>creating version"
       bot.click_and_wait product_name, "administration"
       bot.click_and_wait "Manage Versions", "administration"
@@ -123,10 +125,11 @@ def prepare_files(bot, options)
       bot.driver.find_element(:xpath, "//label[contains(.,'#{ws}')]").click
     end
 
+
     bot.driver.execute_script "$find($telerik.$('[id$=\"_efDownloadMessage_reFieldText\"]').attr('id')).set_html('#{file_fields[:download_message]}')" 
     bot.driver.execute_script "$find($telerik.$('[id$=\"_efWhatsIncluded_reFieldText\"]').attr('id')).set_html('#{file_fields[:whats_included_message]}')" 
 
-    #upload_file_and_go_back(bot, options[:archive_path], file_fields[:download_name], true)
+    upload_file_and_go_back(bot, options[:archive_path], file_fields[:download_name], true)
 
     bot.find("[value='Save']").click
 
@@ -223,10 +226,16 @@ def prepare_files(bot, options)
 =end
 end
 def upload_file_and_go_back(bot, dirpath, filename, isMsi)
+  Thread.current.send :sleep, 6
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
   p "#{full_path}"
+  
+  bot.driver.execute_script "$telerik.$('[id$=\"rdFileUploadfile0\"]').css({position:'static', 'z-index': 0, opacity: 1})[0].removeAttribute('tabindex')"
+
   element = bot.driver.find_element(:xpath, "//input[contains(@id,'rdFileUploadfile0')]")
   element.send_keys(full_path)
+
+  bot.driver.execute_script "$telerik.$('[id$=\"rdFileUploadfile0\"]').trigger('change')"
 
   p "msi uploaded"
 
@@ -239,6 +248,7 @@ def upload_file_and_go_back(bot, dirpath, filename, isMsi)
     p "#{full_path}"
     element = bot.driver.find_element(:xpath, "//input[contains(@id,'rdXMLConfigFileUploadfile0')]")
     element.send_keys(full_path)
+    bot.driver.execute_script "$telerik.$('[id$=\"rdXMLConfigFileUploadfile0\"]').trigger('change')"
     p "xml uploaded"   
   end
 end
