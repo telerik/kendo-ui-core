@@ -179,7 +179,18 @@ var __meta__ = {
                 anchorOffset = $(anchor).offset(),
                 elementOffset = $(popup.element).offset(),
                 cssClass = popup.flipped ? REVERSE[direction] : direction,
-                offsetAmount = anchorOffset[offset] - elementOffset[offset] + ($(anchor)[dimensions.size]() / 2);
+                min = that.arrow[dimensions.size]() * 2,
+                max = that.element[dimensions.size]() - that.arrow[dimensions.size](),
+                size = $(anchor)[dimensions.size](),
+                offsetAmount = anchorOffset[offset] - elementOffset[offset] + (size / 2);
+
+            if (offsetAmount < min) {
+                offsetAmount = min;
+            }
+
+            if (offsetAmount > max) {
+                offsetAmount = max;
+            }
 
             that.wrapper.removeClass(DIRECTION_CLASSES).addClass("km-" + cssClass);
             that.arrow.css(offset, offsetAmount).show();
