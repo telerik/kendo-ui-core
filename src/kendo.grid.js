@@ -806,6 +806,10 @@ var __meta__ = {
                 that.virtualScrollable.setDataSource(that.options.dataSource);
             }
 
+            if (that.selectable) {
+                that._selectable();
+            }
+
             if (that.options.autoBind) {
                 dataSource.fetch();
             }
@@ -2479,6 +2483,11 @@ var __meta__ = {
                 selectable = that.options.selectable;
 
             if (selectable) {
+
+                if (that.selectable) {
+                    that.selectable.destroy();
+                }
+
                 multi = typeof selectable === STRING && selectable.toLowerCase().indexOf("multiple") > -1;
                 cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
 
