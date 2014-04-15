@@ -427,6 +427,10 @@
             this.invalidate();
         },
 
+        refreshTransform: function(transform) {
+            this.transform.refresh(this.srcElement.combineTransform(transform));
+        },
+
         renderData: function() {
             return this.printPath(this.srcElement);
         },

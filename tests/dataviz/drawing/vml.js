@@ -882,6 +882,23 @@
         path.options.set("foo", true);
     });
 
+    test("refreshTransform calls transform refresh method with the srcElement transformation", 14, function() {
+        var srcMatrix = new Matrix(3,3,3,3,3,3),
+            parentMatrix = new Matrix(2,2,2,2,2,2),
+            currentTransform = parentMatrix.times(srcMatrix),
+            group = new Group({transform: parentMatrix});
+        path = new Path({transform: srcMatrix});
+        group.append(path);
+        pathNode = new PathNode(path);
+        pathNode.transform.refresh = function(matrix) {
+            ok(true);
+            compareMatrices(matrix, currentTransform);
+        };
+
+        pathNode.refreshTransform();
+        pathNode.refreshTransform(parentMatrix);
+    });
+
     // ------------------------------------------------------------
     var multiPath,
         multiPathNode;
