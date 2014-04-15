@@ -105,6 +105,10 @@
                             var cs = $("#codeStrip");
                             cs.css("min-height", cs.height());
                         }
+                    },
+                    activate: function (e) {
+                        var isHtml = $(e.contentElement).is("#HTML-1");
+                        $(".try-kendo").toggleClass("k-state-disabled", !isHtml).prop('disabled' , !isHtml);               								
                     }
                });
 
