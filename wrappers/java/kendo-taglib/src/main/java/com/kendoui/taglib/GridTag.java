@@ -116,6 +116,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("columnHide", value.getBody());
     }
 
+    public void setColumnLock(ColumnLockFunctionTag value) {
+        setEvent("columnLock", value.getBody());
+    }
+
     public void setColumnMenuInit(ColumnMenuInitFunctionTag value) {
         setEvent("columnMenuInit", value.getBody());
     }
@@ -130,6 +134,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setColumnShow(ColumnShowFunctionTag value) {
         setEvent("columnShow", value.getBody());
+    }
+
+    public void setColumnUnlock(ColumnUnlockFunctionTag value) {
+        setEvent("columnUnlock", value.getBody());
     }
 
     public void setDataBinding(DataBindingFunctionTag value) {
@@ -356,6 +364,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("columnHide", new Function(value));
     }
 
+    public String getColumnLock() {
+        Function property = ((Function)getProperty("columnLock"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setColumnLock(String value) {
+        setProperty("columnLock", new Function(value));
+    }
+
     public String getColumnMenuInit() {
         Function property = ((Function)getProperty("columnMenuInit"));
         if (property != null) {
@@ -402,6 +422,18 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 
     public void setColumnShow(String value) {
         setProperty("columnShow", new Function(value));
+    }
+
+    public String getColumnUnlock() {
+        Function property = ((Function)getProperty("columnUnlock"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setColumnUnlock(String value) {
+        setProperty("columnUnlock", new Function(value));
     }
 
     public String getDataBinding() {
