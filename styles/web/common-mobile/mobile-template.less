@@ -345,6 +345,11 @@
 
 /* Loader & Pull-to-refresh */
 
+.km-loader
+{
+    background: rgba(0,0,0,.05);
+}
+
 .km-loader h1
 {
     color: @widget-text-color;
@@ -399,10 +404,10 @@ li.km-state-active .km-listview-label,
     color: @selected-background-color;
 }
 
-.km-loader,
 .km-rowinsert,
 .km-state-active,
 .km-scroller-pull,
+.km-loader:before,
 .km-touch-scrollbar,
 .km-pages .km-current-page,
 .km-tabstrip .km-state-active,
