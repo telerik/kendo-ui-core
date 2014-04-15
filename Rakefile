@@ -178,7 +178,7 @@ end
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
-# Kendo UI Complete
+# Kendo UI Professional
 bundle :name => 'professional.commercial',
        :license => 'src-license-complete',
        :eula => 'complete',
@@ -186,7 +186,7 @@ bundle :name => 'professional.commercial',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
-       :changelog => %w(web mobile dataviz framework),
+       :changelog => %w(components),
        :demos => {
            :suites => %w(web dataviz mobile),
            :dir => 'examples'
@@ -207,7 +207,7 @@ bundle :name => 'professional.trial',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
-       :changelog => %w(web mobile dataviz framework),
+       :changelog => %w(components),
        :demos => {
            :suites => %w(web dataviz mobile),
            :dir => 'examples'
@@ -217,87 +217,7 @@ bundle :name => 'professional.trial',
             'styles' => MIN_CSS_RESOURCES,
        }
 
-# Kendo UI Web
-bundle :name => 'web.commercial',
-       :license => 'src-license-web',
-       :eula => 'web',
-       :vsdoc => %w(web),
-       :intellisense => %w(web),
-       :type_script => %w(web),
-       :changelog => %w(web framework),
-       :demos => {
-           :suites => %w(web),
-           :dir => 'examples'
-       },
-       :product => 'Kendo UI Web',
-       :upload_as_internal_build => true,
-       :contents => {
-            'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
-            'styles' => WEB_MIN_CSS,
-            'src/js' => WEB_SRC_JS,
-            'src/styles' => WEB_SRC_CSS
-       }
-
-bundle :name => 'web.open-source',
-       :license => 'src-license-web',
-       :vsdoc => %w(web),
-       :intellisense => %w(web),
-       :type_script => %w(web),
-       :changelog => %w(web framework),
-       :demos => {
-           :suites => %w(web),
-           :dir => 'examples'
-       },
-       :contents => {
-            'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
-            'styles' => WEB_MIN_CSS,
-            'src/js' => WEB_SRC_JS,
-            'src/styles' => WEB_SRC_CSS
-       }
-
-# Kendo UI Mobile
-bundle :name => 'mobile.commercial',
-       :license => 'src-license-mobile',
-       :vsdoc => %w(mobile),
-       :intellisense => %w(mobile),
-       :type_script => %w(mobile),
-       :changelog => %w(mobile framework),
-       :demos => {
-           :suites => %w(mobile),
-           :dir => 'examples'
-       },
-       :product => 'Kendo UI Mobile',
-       :upload_as_internal_build => true,
-       :eula => 'mobile',
-       :contents => {
-            'js' => MOBILE_MIN_JS + MOBILE_MIN_JS_MAP + JQUERY_MAP,
-            'styles' => MOBILE_MIN_CSS,
-            'src/js' => MOBILE_SRC_JS,
-            'src/styles' => MOBILE_SRC_CSS
-       }
-
-# Kendo UI DataViz
-bundle :name => 'dataviz.commercial',
-       :license => 'src-license-dataviz',
-       :vsdoc => %w(dataviz),
-       :intellisense => %w(dataviz),
-       :type_script => %w(dataviz),
-       :changelog => %w(dataviz framework),
-       :eula => 'dataviz',
-       :demos => {
-           :suites => %w(dataviz),
-           :dir => 'examples'
-       },
-       :product => 'Kendo UI DataViz',
-       :upload_as_internal_build => true,
-       :contents => {
-            'js' => DATAVIZ_MIN_JS + DATAVIZ_MIN_JS_MAP + JQUERY_MAP,
-            'styles' => DATAVIZ_MIN_CSS + WEB_MIN_CSS,
-            'src/js' => DATAVIZ_SRC_JS,
-            'src/styles' => DATAVIZ_SRC_CSS
-       }
-
-# Kendo Complete for ASP.NET MVC
+# UI for ASP.NET MVC
 bundle :name => 'aspnetmvc.trial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
@@ -305,7 +225,7 @@ bundle :name => 'aspnetmvc.trial',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
-       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :changelog => %w(components aspnetmvc),
        :demos => {
            :suites => %w(web dataviz mobile),
            :dir => [
@@ -337,7 +257,7 @@ bundle :name => 'aspnetmvc.hotfix.trial',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
-       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :changelog => %w(components aspnetmvc),
        :contents => {
             'js' => TRIAL_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -355,7 +275,7 @@ bundle :name => 'aspnetmvc.commercial',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
-       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :changelog => %w(components aspnetmvc),
        :demos => {
            :suites => %w(web dataviz mobile),
            :dir => [
@@ -399,7 +319,7 @@ bundle :name => 'aspnetmvc.internal.commercial',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
-       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :changelog => %w(components aspnetmvc),
        :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => true,
        :contents => {
@@ -430,7 +350,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
        :vsdoc => %w(all web mobile dataviz),
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
-       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :changelog => %w(components aspnetmvc),
        :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => true,
        :vs_extension => true,
@@ -474,7 +394,7 @@ bundle :name => 'jsp.trial',
        :license => 'src-license-complete',
        :eula => 'jsp',
        :readme => 'README.KendoUI.Trial',
-       :changelog => %w(web mobile dataviz framework jsp),
+       :changelog => %w(components jsp),
        :type_script => %w(all web mobile dataviz),
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
@@ -490,7 +410,7 @@ bundle :name => 'jsp.trial',
 bundle :name => 'jsp.commercial',
        :license => 'src-license-complete',
        :eula => 'jsp',
-       :changelog => %w(web mobile dataviz framework jsp),
+       :changelog => %w(components jsp),
        :product => 'UI for JSP',
        :upload_as_internal_build => true,
        :type_script => %w(all web mobile dataviz),
@@ -507,12 +427,13 @@ bundle :name => 'jsp.commercial',
            "dist/bundles/jsp.commercial/wrappers/jsp/spring-demos/pom.xml",
            "dist/bundles/jsp.commercial/src/kendo-taglib/pom.xml"
        ]
+
 # UI for PHP
 bundle :name => 'php.trial',
        :license => 'src-license-complete',
        :eula => 'php',
        :readme => 'README.KendoUI.Trial',
-       :changelog => %w(web mobile dataviz framework php),
+       :changelog => %w(components php),
        :type_script => %w(all web mobile dataviz),
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
@@ -526,7 +447,7 @@ bundle :name => 'php.trial',
 bundle :name => 'php.commercial',
        :license => 'src-license-complete',
        :eula => 'php',
-       :changelog => %w(web mobile dataviz framework php),
+       :changelog => %w(components php),
        :product => 'UI for PHP',
        :upload_as_internal_build => true,
        :type_script => %w(all web mobile dataviz),
@@ -545,8 +466,11 @@ bundle :name => 'php.commercial',
 bundle :name => 'core',
        :license => 'src-license-core',
        :product => 'Kendo UI Core',
-       :changelog => %w(web mobile framework),
-       :changelog_exclude => %(grid scheduler upload editor treeview),
+       :changelog => %w(components),
+       :changelog_exclude => %(
+            grid scheduler upload editor treeview
+            chart sparkline diagram map stockchart barcode qrcode lineargauge radialgauge
+        ),
        :readme => 'README.KendoUI.Core',
        :contents => {
             'js' => CORE_MIN_JS + CORE_MIN_JS_MAP + JQUERY_MAP,
@@ -692,7 +616,7 @@ namespace :build do
         end
 
         changelog = "#{WEB_ROOT}/changelog/index.html"
-        write_changelog changelog, %w(web mobile dataviz framework aspnetmvc)
+        write_changelog changelog, %w(components aspnetmvc)
 
         desc 'Package and publish bundles to the Production directory, and update the changelog'
         task :bundles => [

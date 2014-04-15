@@ -18,7 +18,7 @@ class Issue
 
         @suites = filtered_labels :s
 
-        @suites.push "Framework" if @suites.length == 0
+        @suites.push "components" if @suites.length == 0
 
         @components = filtered_labels(:w) | filtered_labels(:f)
     end
@@ -83,10 +83,7 @@ class ChangeLog
 
     def initialize
         @suites = [
-            Suite.new("Framework", "framework"),
-            Suite.new("Web", "web"),
-            Suite.new("DataViz", "dataviz"),
-            Suite.new("Mobile", "mobile"),
+            Suite.new("Components", "components"),
             Suite.new("ASP.NET MVC Wrappers", "aspnetmvc"),
             Suite.new("Java Wrappers", "java"),
             Suite.new("PHP Wrappers", "php")
@@ -116,7 +113,7 @@ class ChangeLog
     private
 
     def find_suite(key)
-        @suites.find { |s| s.title == key }
+        @suites.find { |s| s.title == key } || @suites[0]
     end
 
     def client
