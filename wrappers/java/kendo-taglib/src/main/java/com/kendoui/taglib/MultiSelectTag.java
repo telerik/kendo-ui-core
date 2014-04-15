@@ -217,6 +217,14 @@ public class MultiSelectTag extends WidgetTag /* interfaces */implements DataBou
         setProperty("value", value);
     }
 
+    public boolean getValuePrimitive() {
+        return (boolean)getProperty("valuePrimitive");
+    }
+
+    public void setValuePrimitive(boolean value) {
+        setProperty("valuePrimitive", value);
+    }
+
     public String getChange() {
         Function property = ((Function)getProperty("change"));
         if (property != null) {

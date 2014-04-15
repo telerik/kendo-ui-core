@@ -11672,7 +11672,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the value of the widget is changed via API or user interactionTriggered.</description>
+            <description>Fired when the value of the widget is changed via API or user interaction.</description>
             <name>cascade</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -11765,7 +11765,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the value of the widget is changed via API or user interactionTriggered.</description>
+        <description>Fired when the value of the widget is changed via API or user interaction.</description>
         <name>dropDownList-cascade</name>
         <tag-class>com.kendoui.taglib.dropdownlist.CascadeFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -11787,6 +11787,15 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Relaxes the same-origin policy when using the iframe-based editor.
+This is done automatically for all cases except when the policy is relaxed by document.domain = document.domain.
+In that case, this property must be used to allow the editor to function properly across browsers.
+This property has been introduced in internal builds after 2014.1.319.</description>
+            <name>domain</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Indicates whether the Editor should submit encoded HTML tags. By default, the submitted value is encoded.</description>
@@ -12727,6 +12736,16 @@ The grid uses same layout for both phone and tablet.</description>
             <name>saveChanges</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <description>Fired when the user lock a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>columnLock</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user unlock a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>columnUnlock</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
@@ -12930,7 +12949,7 @@ is displayed in the column header cell.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to true the column will be displayed as locked in the grid.</description>
+            <description>If set to true the column will be displayed as locked in the grid. Also see Frozen Columns.</description>
             <name>locked</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -13793,6 +13812,18 @@ This class can be used to obtain reference to the button after Grid initializati
         <description>Fired when the user clicks the "save" command button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>grid-saveChanges</name>
         <tag-class>com.kendoui.taglib.grid.SaveChangesFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user lock a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>grid-columnLock</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnLockFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user unlock a column.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>grid-columnUnlock</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnUnlockFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -16176,6 +16207,12 @@ The supported filter values are startswith, endswith and contains.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
+            <description>Specifies the value binding behavior for the widget. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.</description>
+            <name>valuePrimitive</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -18075,7 +18112,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The text similar to "all day" displayed in day/week views.</description>
+            <description>The text similar to "all day" displayed in day,week and agenda views.</description>
             <name>allDay</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -18277,6 +18314,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <attribute>
             <description>The text similar to "End:" displayed in the scheduler recurrence editor.</description>
             <name>label</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Ends" displayed in the adaptive version of the scheduler recurrence editor.</description>
+            <name>mobileLabel</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -19222,6 +19265,12 @@ The item will also be activated by pressing, holding and lifting the finger with
             <name>holdToDrag</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Selector that determines which elements inside the sorted item's container will be ignored. Useful if the sortable item contains input elements.</description>
+            <name>ignore</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Provides a way for customization of the sortable item placeholder. If a function is supplied, it receives one argument - the draggable element's jQuery object.

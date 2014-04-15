@@ -97,6 +97,14 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("content", value);
     }
 
+    public java.lang.String getDomain() {
+        return (java.lang.String)getProperty("domain");
+    }
+
+    public void setDomain(java.lang.String value) {
+        setProperty("domain", value);
+    }
+
     public boolean getEncoded() {
         return (boolean)getProperty("encoded");
     }

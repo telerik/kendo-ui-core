@@ -67,6 +67,14 @@ public class MessagesRecurrenceEditorEndTag extends  BaseTag  /* interfaces */ /
         setProperty("label", value);
     }
 
+    public java.lang.String getMobileLabel() {
+        return (java.lang.String)getProperty("mobileLabel");
+    }
+
+    public void setMobileLabel(java.lang.String value) {
+        setProperty("mobileLabel", value);
+    }
+
     public java.lang.String getNever() {
         return (java.lang.String)getProperty("never");
     }
