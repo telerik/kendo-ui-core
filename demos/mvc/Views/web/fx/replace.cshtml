@@ -27,6 +27,7 @@
                     if (currentEffect) {
                         currentEffect.stop();
                     }
+                    $("#home" + target).show();
                     currentEffect = kendo.fx("#home" + target).replace("#home" + index, "swap");
                     currentEffect.run();
                     index = target;
