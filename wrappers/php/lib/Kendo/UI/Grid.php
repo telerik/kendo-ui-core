@@ -477,6 +477,34 @@ The grid uses same layout for both phone and tablet.
         return $this->setProperty('saveChanges', $value);
     }
 
+    /**
+    * Sets the columnLock event of the Grid.
+    * Fired when the user lock a column.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Grid
+    */
+    public function columnLock($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('columnLock', $value);
+    }
+
+    /**
+    * Sets the columnUnlock event of the Grid.
+    * Fired when the user unlock a column.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Grid
+    */
+    public function columnUnlock($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('columnUnlock', $value);
+    }
+
 
 //<< Properties
 
