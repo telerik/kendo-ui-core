@@ -70,7 +70,7 @@ Kendo UI Core has not been tested against any other versions of these libraries.
 
 ## Building Kendo UI Core
 
-There are two ways to get the source code for Kendo UI Core. You can either download a pre-built zip from [Telerk.com](http://telerik.com/kendo-ui-core), or build the source yourself using Grunt. The latter approch includes an option for building a distribution of Kendo UI Core that includes only the widgets and framework features required by your app.
+There are two ways to get the source code for Kendo UI Core. You can either download a pre-built zip from [Telerk.com](http://www.telerik.com/kendo-ui/open-source-core), or build the source yourself using Grunt. The latter approch includes an option for building a distribution of Kendo UI Core that includes only the widgets and framework features required by your app.
 
 ### Installing Dependencies
 
