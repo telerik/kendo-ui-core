@@ -16,23 +16,19 @@ var __meta__ = {
     var Widget = kendo.ui.Widget;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
-    var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
-    var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
-    var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
-    var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
     var kendoDomElement = kendo.dom.element;
     var kendoDomText = kendo.dom.text;
     var kendoDomRender = kendo.dom.render;
 
     var defaultViews = {
         day: {
-            type: "DayView"
+            type: "kendo.ui.GanttDayView"
         },
         week: {
-            type: "WeekView"
+            type: "kendo.ui.GanttWeekView"
         },
         month: {
-            type: "MonthView"
+            type: "kendo.ui.GanttMonthView"
         }
     };
 
@@ -42,18 +38,6 @@ var __meta__ = {
         delete options.views;
 
         return options;
-    }
-
-    function getViewType(typeName) {
-        switch (typeName) {
-            case "DayView":
-                return DayView;
-            case "WeekView":
-                return WeekView;
-            case "MonthView":
-                return MonthView;
-
-        }
     }
 
     function getWorkDays(options) {
@@ -77,7 +61,9 @@ var __meta__ = {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
-            this.content = this.element.find(".k-gantt-timeline-content");
+            this.title = this.options.title || this.options.name;
+
+            this.content = this.element.find(".k-gantt-timeline-content")
 
             this.header = this.element.find(".k-gantt-timeline-header-wrap");
 
@@ -95,12 +81,12 @@ var __meta__ = {
         },
 
         options: {
-            timeHeaderTemplate: TIME_HEADER_TEMPLATE,
-            dayHeaderTemplate: DAY_HEADER_TEMPLATE,
-            weekHeaderTemplate: WEEK_HEADER_TEMPLATE,
-            monthHeaderTemplate: MONTH_HEADER_TEMPLATE,
-            showWorkHours: true,
-            showWorkDays: true,
+            timeHeaderTemplate: "",
+            dayHeaderTemplate: "",
+            weekHeaderTemplate: "",
+            monthHeaderTemplate: "",
+            showWorkHours: false,
+            showWorkDays: false,
             workDayStart: new Date(1980, 1, 1, 8, 0, 0),
             workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
             workWeekStart: 1,
@@ -120,16 +106,17 @@ var __meta__ = {
         renderLayout: function(range) {
             this._range(range);
 
-            this._createSlots();
+            this._slots = this._createSlots();
 
             this.createLayout(this._layout());
         },
 
         createLayout: function(rows) {
             var headers = this._headers(rows);
-            var table;
+            var colgroup = this._colgroup();
+            var header = kendoDomElement("thead", null, headers);
+            var table = kendoDomElement("table", null, [colgroup, header]);
 
-            table = kendoDomElement("table", null, headers);
             kendoDomRender(this.header[0], [table]);
 
             this.headerRow = this.header.find("table:first tr").last();
@@ -223,6 +210,17 @@ var __meta__ = {
             } while (startIdx !== endIdx);
 
             return startIdx;
+        },
+
+        _colgroup: function() {
+            var count = this._slots[this._slots.length - 1].length;
+            var cols = [];
+
+            for (var i = 0; i < count; i++) {
+                cols.push(kendoDomElement("col"));
+            }
+
+            return kendoDomElement("colgroup", null, cols);
         },
 
         _headers: function(columnLevels) {
@@ -413,10 +411,14 @@ var __meta__ = {
         }
     });
 
-    var DayView = View.extend({
+    kendo.ui.GanttDayView = View.extend({
         _range: function(range) {
             this.start = kendo.date.getDate(range.start);
-            this.end = kendo.date.addDays(kendo.date.getDate(range.end), 1);
+            this.end = kendo.date.getDate(range.end);
+
+            if (kendo.date.getMilliseconds(range.end) > 0) {
+                this.end = kendo.date.addDays(this.end, 1);
+            }
         },
 
         _createSlots: function() {
@@ -425,7 +427,7 @@ var __meta__ = {
             var daySlots;
             var hourSlots;
             var hours;
-            var slots = this._slots = [];
+            var slots = [];
 
             if (options.showWorkHours) {
                 span = (options.workDayEnd.getHours() - options.workDayStart.getHours());
@@ -444,6 +446,8 @@ var __meta__ = {
 
             slots.push(daySlots);
             slots.push(hourSlots);
+
+            return slots;
         },
 
         _layout: function() {
@@ -456,7 +460,7 @@ var __meta__ = {
         }
     });
 
-    var WeekView = View.extend({
+    kendo.ui.GanttWeekView = View.extend({
         _range: function(range) {
             var calendarInfo = this.calendarInfo();
             var firstDay = calendarInfo.firstDay;
@@ -466,10 +470,12 @@ var __meta__ = {
         },
 
         _createSlots: function() {
-            var slots = this._slots = [];
+            var slots = [];
 
             slots.push(this._weeks(this.start, this.end));
             slots.push(this._days(this.start, this.end, 1));
+
+            return slots;
         },
 
         _layout: function() {
@@ -482,17 +488,19 @@ var __meta__ = {
         }
     });
 
-    var MonthView = View.extend({
+    kendo.ui.GanttMonthView = View.extend({
         _range: function(range) {
             this.start = kendo.date.firstDayOfMonth(range.start);
-            this.end = kendo.date.lastDayOfMonth(range.end);
+            this.end = kendo.date.addDays(kendo.date.getDate(kendo.date.lastDayOfMonth(range.end)), 1);
         },
 
         _createSlots: function() {
-            var slots = this._slots = [];
+            var slots = [];
 
             slots.push(this._months(this.start, this.end));
             slots.push(this._weeks(this.start, this.end));
+
+            return slots;
         },
 
         _layout: function() {
@@ -507,6 +515,7 @@ var __meta__ = {
 
     kendo.ui.GanttTimeline = Widget.extend({
         init: function(element, options) {
+
             Widget.fn.init.call(this, element, options);
 
             if (!this.options.views || !this.options.views.length) {
@@ -517,8 +526,14 @@ var __meta__ = {
 
             this._views();
         },
+        
+        options: {
+            name: "GanttTimeline"
+        },
 
         destroy: function() {
+            this._unbindView(this._selectedView);
+
             Widget.fn.destroy.call(this);
 
             kendo.destroy(this.wrapper);
@@ -593,11 +608,11 @@ var __meta__ = {
                 var type = view.type;
 
                 if (typeof type === "string") {
-                    type = getViewType(view.type);
+                    type = kendo.getter(view.type)(window);
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(this.options));
+                    view = new type(this.wrapper, trimOptions(extend(true, {}, view, this.options)));
                 } else {
                     throw new Error("There is no such view");
                 }
@@ -607,7 +622,9 @@ var __meta__ = {
         },
 
         _unbindView: function(view) {
-            view.destroy();
+            if (view) {
+                view.destroy();
+            }
         },
 
         _render: function(tasks, range) {

@@ -20,6 +20,10 @@ var __meta__ = {
     var proxy = $.proxy;
     var extend = $.extend;
     var map = $.map;
+    var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
+    var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
+    var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
+    var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
 
     function trimOptions(options) {
         delete options.name;
@@ -464,7 +468,27 @@ var __meta__ = {
 
         options: {
             name: "Gantt",
-            autoBind: true
+            autoBind: true,
+            views: [],
+            timeHeaderTemplate: TIME_HEADER_TEMPLATE,
+            dayHeaderTemplate: DAY_HEADER_TEMPLATE,
+            weekHeaderTemplate: WEEK_HEADER_TEMPLATE,
+            monthHeaderTemplate: MONTH_HEADER_TEMPLATE,
+            showWorkHours: true,
+            showWorkDays: true,
+            workDayStart: new Date(1980, 1, 1, 8, 0, 0),
+            workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
+            workWeekStart: 1,
+            workWeekEnd: 5,
+            hourSpan: 1
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.timeline.destroy();
+
+            kendo.destroy(this.wrapper);
         },
 
         _wrapper: function() {
@@ -476,7 +500,7 @@ var __meta__ = {
                             .addClass("k-widget k-gantt")
                             .append("<div class='k-gantt-toolbar'>")
                             .append("<div class='k-gantt-layout k-gantt-treelist'><div class='k-grid k-widget'></div></div>")
-                            .append("<div class='k-gantt-timeline'>");
+                            .append("<div class='k-gantt-layout'><div class='k-widget k-gantt-timeline'></div></div>");
 
             if (height) {
                 this.wrapper.height(height);
