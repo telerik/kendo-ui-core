@@ -102,17 +102,6 @@
 
 /* Loader & Pull-to-refresh */
 
-.km-flat .km-loader:before
-{
-  position: absolute;
-  top: -5000px;
-  left: -5000px;
-  width: 10000px;
-  height: 10000px;
-  content: "\a0";
-  z-index: -1;
-}
-
 .km-flat .km-load-more
 {
     height: 3.4em;
@@ -124,7 +113,7 @@
     display: block;
 }
 
-.km-flat .km-loader,
+.km-flat .km-loader:before,
 .km-flat .km-scroller-refresh.km-load-more,
 .km-flat .km-scroller-pull
 {
@@ -132,12 +121,27 @@
     overflow: visible;
 }
 
-.km-flat .km-loader
+.km-flat .km-loader:before
 {
+    content: "\a0";
+    display: block;
+    position: absolute;
     margin-top: -2em;
     margin-left: -2em;
     width: 4em;
     height: 4em;
+    top: 50%;
+    left: 50%;
+    border-radius: 5em;
+}
+
+.km-flat .km-loader
+{
+    left: 0;
+    top: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .km-flat .km-scroller-refresh.km-load-more
@@ -170,8 +174,7 @@
     position: absolute;
     left: -50%;
     width: 200%;
-    top: auto;
-    bottom: -2em;
+    top: 55%;
 }
 
 .km-flat .km-scroller-pull .km-template
