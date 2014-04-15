@@ -4549,7 +4549,8 @@ var __meta__ = {
                     fill: "",
                     dashType: series.dashType,
                     data: { modelId: segment.modelId },
-                    zIndex: -1
+                    zIndex: -1,
+                    align: false
                 })
             ];
         },

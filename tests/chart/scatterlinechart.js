@@ -298,6 +298,10 @@
             equal(view.log.path[0].style.data.modelId, scatterLineChart._segments[0].modelId);
         });
 
+        test("line is not aligned", function() {
+            equal(view.log.path[0].style.align, false);
+        });
+
         test("renders line chart group", function() {
             equal(view.log.group.length, 1);
         });
