@@ -1720,6 +1720,7 @@ p#copy
     font-size: 12px;
     line-height: 13px;
     font-weight: bold;
+    margin-right: 4px;
 }
 
 .widgetGrid a:hover
@@ -1728,16 +1729,28 @@ p#copy
     text-decoration: underline;
 }
 
+.widgetGrid .new-widget,
+.widgetGrid .beta-widget,
+.widgetGrid .pro-widget
+{    
+   width:18px;
+   height: 9px; 
+   display: inline-block;
+}
+
 .widgetGrid .new-widget
 {
-    padding-right: 22px;
-    background: url(tag-new.png) no-repeat right center;
+   background: url(tag-new.png) no-repeat right center;
 }
 
 .widgetGrid .beta-widget
 {
-    padding-right: 25px;
-    background: url(tag-beta.png) no-repeat right center;
+   background: url(tag-beta.png) no-repeat right center;
+}
+
+.widgetGrid .pro-widget
+{
+   background: url(tag-pro.png) no-repeat right center;
 }
 
 /*DataViz dashboard navigation*/
