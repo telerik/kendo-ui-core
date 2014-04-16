@@ -169,7 +169,7 @@
         equal(options.get("foo.baz"), true);
     });
 
-    test("toJSON returns configuration options as plain object without prefix and observer", function() {
+    test("clone returns configuration options as plain object without prefix and observer", function() {
         var expected = {
             foo: {
                 bar: { },
@@ -178,6 +178,6 @@
             bar: true
         };
 
-        deepEqual(options.toJSON(), expected);
+        deepEqual(options.clone(), expected);
     });
 })();

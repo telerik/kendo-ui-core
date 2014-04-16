@@ -215,7 +215,7 @@
             return object;
         },
 
-        toJSON: function() {
+        clone: function() {
             var result = {}, value, field;
 
             for (field in this) {
@@ -223,7 +223,7 @@
                     value = this[field];
 
                     if (value instanceof OptionsStore) {
-                        value = value.toJSON();
+                        value = value.clone();
                     }
 
                     result[field] = value;
