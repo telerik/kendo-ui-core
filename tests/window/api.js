@@ -556,6 +556,20 @@
         equal(dialog.wrapper.css("position"), "fixed");
     });
 
+    test("centering a Window sets correct top and left styles", 2, function () {
+        var win = $(window),
+            dialog = createWindow({
+                animation: false,
+                width: "50%",
+                height: "50%"
+            });
+
+        dialog.center();
+
+        equal(parseInt(dialog.wrapper.css("top"), 10), (win.height() - parseInt(dialog.wrapper.outerHeight(), 10)) / 2);
+        equal(parseInt(dialog.wrapper.css("left"), 10), (win.width() - parseInt(dialog.wrapper.outerWidth(), 10)) / 2);
+    });
+
     test("centering a pinned Window sets correct top and left styles", 2, function() {
         var pageWidth = 6000,
             pageHeight = pageWidth,
