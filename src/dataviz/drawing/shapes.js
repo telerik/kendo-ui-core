@@ -61,7 +61,7 @@
             return result;
         },
 
-        combineTransform: function(matrix) {
+        currentTransform: function(matrix) {
             var elementTransform = this.options.get("transform"),
                 combinedTransform;
 
@@ -138,11 +138,11 @@
         },
 
         bBox: function(matrix) {
-            return elementsBoundingBox(this.children, this.combineTransform(matrix));
+            return elementsBoundingBox(this.children, this.currentTransform(matrix));
         },
 
-        combineTransform: function(matrix) {
-            return Element.fn.combineTransform.call(this, matrix) || Matrix.IDENTITY;
+        currentTransform: function(matrix) {
+            return Element.fn.currentTransform.call(this, matrix) || Matrix.IDENTITY;
         }
     });
 
@@ -193,7 +193,7 @@
         },
 
         bBox: function(matrix) {
-            var combinedMatrix = this.combineTransform(matrix),
+            var combinedMatrix = this.currentTransform(matrix),
                 rect = this.geometry.bBox(combinedMatrix);
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
@@ -214,7 +214,7 @@
         },
 
         bBox: function(matrix) {
-            var combinedMatrix = this.combineTransform(matrix),
+            var combinedMatrix = this.currentTransform(matrix),
                 rect = this.geometry.bBox(combinedMatrix);
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
@@ -394,7 +394,7 @@
             var segments = this.segments,
                 length = segments.length,
                 strokeWidth = this.options.get("stroke.width"),
-                combinedTransform = this.combineTransform(matrix),
+                combinedTransform = this.currentTransform(matrix),
                 boundingBox,
                 i;
 
@@ -456,7 +456,7 @@
         },
 
         bBox: function(matrix) {
-            return elementsBoundingBox(this.paths, this.combineTransform(matrix));
+            return elementsBoundingBox(this.paths, this.currentTransform(matrix));
         }
     });
 

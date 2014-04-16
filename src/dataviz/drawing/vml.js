@@ -109,7 +109,7 @@
             for (i = 0; i < elements.length; i++) {
                 srcElement = elements[i];
                 children = srcElement.children;
-                combinedTransform = srcElement.combineTransform(transform);
+                combinedTransform = srcElement.currentTransform(transform);
                 if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Path) {
@@ -240,7 +240,7 @@
         },
 
         refreshTransform: function(transform) {
-            var currentTransform = this.srcElement.combineTransform(transform),
+            var currentTransform = this.srcElement.currentTransform(transform),
                 children = this.childNodes,
                 length = children.length,
                 i;
@@ -367,7 +367,7 @@
 
         optionsChange: function(e) {
             if (e.field == "transform") {
-                this.refresh(this.srcElement.combineTransform());
+                this.refresh(this.srcElement.currentTransform());
             }
             this.invalidate();
         },
@@ -446,7 +446,7 @@
         },
 
         refreshTransform: function(transform) {
-            this.transform.refresh(this.srcElement.combineTransform(transform));
+            this.transform.refresh(this.srcElement.currentTransform(transform));
         },
 
         renderData: function() {

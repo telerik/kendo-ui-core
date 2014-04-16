@@ -88,40 +88,40 @@
             compareMatrices(element.parentTransform(), new Matrix(12,12,12,12,14,14));
         });
 
-        test("combineTransform returns undefined if the element has no transformation and no matrix is passed", function() {
-            matrix = element.combineTransform();
+        test("currentTransform returns undefined if the element has no transformation and no matrix is passed", function() {
+            matrix = element.currentTransform();
             equal(matrix, undefined);
         });
 
-        test("combineTransform returns element transformation matrix if no matrix is passed", function() {
+        test("currentTransform returns element transformation matrix if no matrix is passed", function() {
             element.transform(Matrix.translate(10,20));
-            matrix = element.combineTransform();
+            matrix = element.currentTransform();
             compareMatrices(matrix, new Matrix(1,0,0,1,10,20));
         });
 
-        test("combineTransform returns passed matrix if the element has no transformation", function() {
-            matrix = element.combineTransform(Matrix.translate(10,20));
+        test("currentTransform returns passed matrix if the element has no transformation", function() {
+            matrix = element.currentTransform(Matrix.translate(10,20));
             compareMatrices(matrix, new Matrix(1,0,0,1,10,20));
         });
 
-        test("combineTransform returns the passed matrix multiplied by the element matrix", function() {
+        test("currentTransform returns the passed matrix multiplied by the element matrix", function() {
             element.transform(new Matrix(3,3,3,3,3,3));
-            matrix = element.combineTransform(new Matrix(2,2,2,2,2,2));
+            matrix = element.currentTransform(new Matrix(2,2,2,2,2,2));
             compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
         });
 
-        test("combineTransform gets matrix from parents if no matrix is passed", function() {
+        test("currentTransform gets matrix from parents if no matrix is passed", function() {
             var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
                 group = new Group({transform: new Matrix(3,3,3,3,3,3)});
 
             group.append(element);
             mainGroup.append(group);
-            matrix = element.combineTransform();
+            matrix = element.currentTransform();
 
             compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
         });
 
-        test("combineTransform returns element matrix if IDENTITY matrix is passed", function() {
+        test("currentTransform returns element matrix if IDENTITY matrix is passed", function() {
             var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
                 group = new Group({transform: new Matrix(3,3,3,3,3,3)});
 
@@ -129,7 +129,7 @@
             mainGroup.append(group);
             matrix = new Matrix(1,1,1,1,1,1);
             element.transform(matrix);
-            compareMatrices(element.combineTransform(Matrix.IDENTITY), matrix);
+            compareMatrices(element.currentTransform(Matrix.IDENTITY), matrix);
         });
 
     })();
@@ -301,8 +301,8 @@
         group.bBox();
     });
 
-    test("combineTransform returns IDENTITY matrix if group has no matrix and there is no parent matrix", function() {
-        ok(group.combineTransform() === Matrix.IDENTITY);
+    test("currentTransform returns IDENTITY matrix if group has no matrix and there is no parent matrix", function() {
+        ok(group.currentTransform() === Matrix.IDENTITY);
     });
 
     // ------------------------------------------------------------
