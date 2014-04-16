@@ -16,7 +16,7 @@ class DiagramEditable extends \Kendo\SerializableObject {
 
     /**
     * Specifyes the rotate style.
-    * @param \Kendo\Dataviz\UI\DiagramEditableRotate|array $value
+    * @param boolean|\Kendo\Dataviz\UI\DiagramEditableRotate|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditable
     */
     public function rotate($value) {
@@ -25,7 +25,7 @@ class DiagramEditable extends \Kendo\SerializableObject {
 
     /**
     * Specifyes the select style.
-    * @param \Kendo\Dataviz\UI\DiagramEditableSelect|array $value
+    * @param boolean|\Kendo\Dataviz\UI\DiagramEditableSelect|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditable
     */
     public function select($value) {

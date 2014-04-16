@@ -73,6 +73,22 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("resize", value);
     }
 
+    public boolean getRotate() {
+        return (boolean)getProperty("rotate");
+    }
+
+    public void setRotate(boolean value) {
+        setProperty("rotate", value);
+    }
+
+    public boolean getSelect() {
+        return (boolean)getProperty("select");
+    }
+
+    public void setSelect(boolean value) {
+        setProperty("select", value);
+    }
+
 //<< Attributes
 
 }

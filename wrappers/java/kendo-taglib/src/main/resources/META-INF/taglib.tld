@@ -10896,6 +10896,18 @@ If zoomRate is less than 1, zooming will be reversed.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+        <attribute>
+            <description>Specifyes the rotate style.</description>
+            <name>rotate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifyes the select style.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
     </tag>
 
