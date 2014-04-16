@@ -20,39 +20,6 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies if the shape is editable by the user.
-        /// </summary>
-        /// <param name="value">The value that configures the editable.</param>
-        public DiagramShapeDefaultsSettingsBuilder Editable(bool value)
-        {
-            container.Editable = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies if the user is allowed to rotate the shape.
-        /// </summary>
-        /// <param name="value">The value that configures the rotatable.</param>
-        public DiagramShapeDefaultsSettingsBuilder Rotatable(bool value)
-        {
-            container.Rotatable = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies if the shape is resizable.
-        /// </summary>
-        /// <param name="value">The value that configures the resizable.</param>
-        public DiagramShapeDefaultsSettingsBuilder Resizable(bool value)
-        {
-            container.Resizable = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
         /// </summary>
         /// <param name="value">The value that configures the path.</param>

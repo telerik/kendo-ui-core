@@ -51,12 +51,10 @@
                 )
                 .Model(m => m.Children("Items"))
             )
+            .Editable(false)
             .Layout(l => l.Type(DiagramLayoutType.Layered))
             .ShapeDefaults(sd => sd
                 .Visual("visualTemplate")
-                .Editable(false)
-                .Rotatable(false)
-                .Resizable(false)
             )
             .ConnectionDefaults(cd => cd
                 .Stroke(s => s

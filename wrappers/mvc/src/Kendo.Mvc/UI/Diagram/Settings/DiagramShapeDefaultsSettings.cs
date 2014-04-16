@@ -29,12 +29,6 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public bool? Editable { get; set; }
-        
-        public bool? Rotatable { get; set; }
-        
-        public bool? Resizable { get; set; }
-        
         public string Path { get; set; }
         
         public DiagramShapeDefaultsStrokeSettings Stroke
@@ -91,21 +85,6 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Editable.HasValue)
-            {
-                json["editable"] = Editable;
-            }
-                
-            if (Rotatable.HasValue)
-            {
-                json["rotatable"] = Rotatable;
-            }
-                
-            if (Resizable.HasValue)
-            {
-                json["resizable"] = Resizable;
-            }
-                
             if (Path.HasValue())
             {
                 json["path"] = Path;

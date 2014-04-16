@@ -21,6 +21,10 @@ module CodeGen::MVC::Wrappers
     }
 
     SERIALIZATION_SKIP_LIST = [
+		'diagram.editable',
+		'diagram.editable.select',
+		'diagram.editable.rotate',
+		'diagram.editable.resize',
         'map.center',
         'map.controls.attribution',
         'map.controls.navigator',
@@ -243,8 +247,8 @@ module CodeGen::MVC::Wrappers
             FLUENT_FIELD_DECLARATION.result(binding)
         end
 
-	def is_csharp_array
-	    csharp_type.match(/\[\]$/)
+		def is_csharp_array
+			csharp_type.match(/\[\]$/)
         end
 
         def to_client_option

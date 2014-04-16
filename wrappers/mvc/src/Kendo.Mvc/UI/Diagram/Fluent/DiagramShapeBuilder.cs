@@ -20,45 +20,12 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies if the shape is editable by the user.
-        /// </summary>
-        /// <param name="value">The value that configures the editable.</param>
-        public DiagramShapeBuilder Editable(bool value)
-        {
-            container.Editable = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// The unique identifier for a Shape.
         /// </summary>
         /// <param name="value">The value that configures the id.</param>
         public DiagramShapeBuilder Id(string value)
         {
             container.Id = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies if the user is allowed to rotate the shape.
-        /// </summary>
-        /// <param name="value">The value that configures the rotatable.</param>
-        public DiagramShapeBuilder Rotatable(bool value)
-        {
-            container.Rotatable = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies if the shape is resizable.
-        /// </summary>
-        /// <param name="value">The value that configures the resizable.</param>
-        public DiagramShapeBuilder Resizable(bool value)
-        {
-            container.Resizable = value;
 
             return this;
         }

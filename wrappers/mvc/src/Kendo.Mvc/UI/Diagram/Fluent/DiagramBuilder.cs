@@ -47,6 +47,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Specifies the shape editable.
+        /// </summary>
+        /// <param name="configurator">The action that configures the editable.</param>
+        public DiagramBuilder Editable(Action<DiagramEditableSettingsBuilder> configurator)
+        {
+            configurator(new DiagramEditableSettingsBuilder(container.Editable));
+            return this;
+        }
+        
+        /// <summary>
         /// Defines whether items can be dropped on the diagram.
         /// </summary>
         /// <param name="value">The value that configures the draggable.</param>
@@ -74,28 +84,6 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramBuilder TemplateId(string value)
         {
             container.TemplateId = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// This defines whether the shapes can be resized. If set to false the adorner will not show the resizing thumbs, as can be seen below;
-        /// </summary>
-        /// <param name="value">The value that configures the resizable.</param>
-        public DiagramBuilder Resizable(bool value)
-        {
-            container.Resizable = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// This defines whether the shapes can be rotated. If set to false the adorner will not show the rotating thumb, as can be seen below;
-        /// </summary>
-        /// <param name="value">The value that configures the rotatable.</param>
-        public DiagramBuilder Rotatable(bool value)
-        {
-            container.Rotatable = value;
 
             return this;
         }
@@ -182,6 +170,20 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramBuilder Events(Action<DiagramEventBuilder> configurator)
         {
             configurator(new DiagramEventBuilder(Component.Events));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the shape editable.
+        /// </summary>
+        /// <param name="visible">A value indicating if the editable will be available.</param>
+        public DiagramBuilder Editable(bool visible)
+        {
+            if (!visible)
+            {
+                container.Editable = null;
+            }
 
             return this;
         }

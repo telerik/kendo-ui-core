@@ -27,6 +27,8 @@ namespace Kendo.Mvc.UI
                 
             Connections = new List<DiagramConnection>();
                 
+            Editable = new DiagramEditableSettings();
+                
             Layout = new DiagramLayoutSettings();
                 
             ShapeDefaults = new DiagramShapeDefaultsSettings();
@@ -48,6 +50,12 @@ namespace Kendo.Mvc.UI
         
         public double? ZoomRate { get; set; }
         
+        public DiagramEditableSettings Editable
+        {
+            get;
+            set;
+        }
+        
         public bool? Draggable { get; set; }
         
         public DiagramLayoutSettings Layout
@@ -57,10 +65,6 @@ namespace Kendo.Mvc.UI
         }
         
         public string TemplateId { get; set; }
-        
-        public bool? Resizable { get; set; }
-        
-        public bool? Rotatable { get; set; }
         
         public DiagramConnectionDefaultsSettings ConnectionDefaults
         {
@@ -129,16 +133,6 @@ namespace Kendo.Mvc.UI
                 json["template"] = TemplateId;
             }
             
-            if (Resizable.HasValue)
-            {
-                json["resizable"] = Resizable;
-            }
-                
-            if (Rotatable.HasValue)
-            {
-                json["rotatable"] = Rotatable;
-            }
-                
             var connectionDefaults = ConnectionDefaults.ToJson();
             if (connectionDefaults.Any())
             {
@@ -164,6 +158,19 @@ namespace Kendo.Mvc.UI
             }
                 
         //<< Serialization
+
+            if (Editable != null)
+            {
+                var editable = Editable.ToJson();
+                if (editable.Any())
+                {
+                    json["editable"] = editable;
+                }
+            }
+            else 
+            {
+                json["editable"] = false;
+            }
 
             writer.Write(Initializer.Initialize(Selector, "Diagram", json));
 
