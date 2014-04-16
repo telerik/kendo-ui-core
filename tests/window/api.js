@@ -566,8 +566,8 @@
 
         dialog.center();
 
-        equal(parseInt(dialog.wrapper.css("top"), 10), (win.height() - parseInt(dialog.wrapper.outerHeight(), 10)) / 2);
-        equal(parseInt(dialog.wrapper.css("left"), 10), (win.width() - parseInt(dialog.wrapper.outerWidth(), 10)) / 2);
+        QUnit.close(parseInt(dialog.wrapper.css("top"), 10), (win.height() - parseInt(dialog.wrapper.outerHeight(), 10)) / 2, 1);
+        QUnit.close(parseInt(dialog.wrapper.css("left"), 10), (win.width() - parseInt(dialog.wrapper.outerWidth(), 10)) / 2, 1);
     });
 
     test("centering a pinned Window sets correct top and left styles", 2, function() {
