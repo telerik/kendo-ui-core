@@ -583,7 +583,7 @@ var __meta__ = {
             }
 
             newLeft = scrollLeft + Math.max(0, (documentWindow.width() - wrapper.width()) / 2);
-            newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.height()) / 2);
+            newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.height() - parseInt(wrapper.css("paddingTop"), 10)) / 2);
 
             wrapper.css({
                 left: newLeft,
