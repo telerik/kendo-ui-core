@@ -224,6 +224,15 @@ The supported filter values are startswith, endswith and contains.
     }
 
     /**
+    * Specifies the value binding behavior for the widget. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.
+    * @param boolean $value
+    * @return \Kendo\UI\MultiSelect
+    */
+    public function valuePrimitive($value) {
+        return $this->setProperty('valuePrimitive', $value);
+    }
+
+    /**
     * Sets the change event of the MultiSelect.
     * Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.

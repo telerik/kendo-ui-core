@@ -297,7 +297,7 @@ Help topic showing how cascading functionality works
 
     /**
     * Sets the cascade event of the DropDownList.
-    * Fired when the value of the widget is changed via API or user interactionTriggered.
+    * Fired when the value of the widget is changed via API or user interaction.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\DropDownList
     */

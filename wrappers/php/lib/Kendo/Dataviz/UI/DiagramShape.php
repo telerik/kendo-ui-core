@@ -6,39 +6,12 @@ class DiagramShape extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifies if the shape is editable by the user.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\DiagramShape
-    */
-    public function editable($value) {
-        return $this->setProperty('editable', $value);
-    }
-
-    /**
     * The unique identifier for a Shape.
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramShape
     */
     public function id($value) {
         return $this->setProperty('id', $value);
-    }
-
-    /**
-    * Specifies if the user is allowed to rotate the shape.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\DiagramShape
-    */
-    public function rotatable($value) {
-        return $this->setProperty('rotatable', $value);
-    }
-
-    /**
-    * Specifies if the shape is resizable.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\DiagramShape
-    */
-    public function resizable($value) {
-        return $this->setProperty('resizable', $value);
     }
 
     /**

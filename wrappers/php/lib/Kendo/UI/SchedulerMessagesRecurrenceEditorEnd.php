@@ -42,6 +42,15 @@ class SchedulerMessagesRecurrenceEditorEnd extends \Kendo\SerializableObject {
     }
 
     /**
+    * The text similar to "Ends" displayed in the adaptive version of the scheduler recurrence editor.
+    * @param string $value
+    * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorEnd
+    */
+    public function mobileLabel($value) {
+        return $this->setProperty('mobileLabel', $value);
+    }
+
+    /**
     * The text similar to "On " displayed in the scheduler recurrence editor.
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorEnd

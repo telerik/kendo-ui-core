@@ -10647,14 +10647,8 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>This defines whether the shapes can be resized. If set to false the adorner will not show the resizing thumbs, as can be seen below;</description>
-            <name>resizable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>This defines whether the shapes can be rotated. If set to false the adorner will not show the rotating thumb, as can be seen below;</description>
-            <name>rotatable</name>
+            <description>Specifies the shape editable.</description>
+            <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -10891,6 +10885,231 @@ If zoomRate is less than 1, zooming will be reversed.</description>
 
 
     <tag>
+        <description>Specifies the shape editable.</description>
+        <name>diagram-editable</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies the shape resizing.</description>
+            <name>resize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Specifies the shape resizing.</description>
+        <name>diagram-editable-resize</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableResizeTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Specifies the handles style.</description>
+        <name>diagram-editable-resize-handles</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Set the handles backgorund.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The hangles height.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The hangles width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Set the handles hover styles.</description>
+        <name>diagram-editable-resize-handles-hover</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesHoverTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Set the handles backgorund.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Specifies the handles stroke styles.</description>
+        <name>diagram-editable-resize-handles-hover-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesHoverStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the handles stroke color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the handles stroke dash type.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the handles stroke width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>Specifies the handles stroke styles.</description>
+        <name>diagram-editable-resize-handles-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the handles stroke color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the handles stroke dash type.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the handles stroke width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>Specifyes the rotate style.</description>
+        <name>diagram-editable-rotate</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableRotateTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Specifyes the thumb style.</description>
+        <name>diagram-editable-rotate-thumb</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableRotateThumbTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Set the thumb backgorund.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Specifies the thumb stroke styles.</description>
+        <name>diagram-editable-rotate-thumb-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableRotateThumbStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the thumb stroke color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the thumb stroke dash type.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the thumb stroke width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>Specifyes the select style.</description>
+        <name>diagram-editable-select</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableSelectTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Set the thumb backgorund.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Specifies the select stroke styles.</description>
+        <name>diagram-editable-select-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableSelectStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the select stroke color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the select stroke dash type.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the select stroke width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+
+    <tag>
         <description>The layout of a diagram consists in arranging the shapes (sometimes also the connections) in some fashion in order to achieve an aesthetically pleasing experience to the user. It aims at giving a more direct insight in the information contained within the diagram and its relational structure.On a technical level, layout consists of a multitude of algorithms and optimizations:and various ad-hoc calculations which depend on the type of layout. The criteria on which an algorithm is based vary but the common denominator is:Kendo diagram includes three of the most used layout algorithms which should cover most of your layout needs - tree layout, force-directed layout and layered layout. Please, check the type property for more details regarding each type.The generic way to apply a layout is by calling the layout() method on the diagram. The method has a single parameter options. It is an object, which can contain parameters which are specific to the layout as well as parameters customizing the global grid layout. Parameters which apply to other layout algorithms can be included but are overlooked if not applicable to the chose layout type. This means that you can define a set of parameters which cover all possible layout types and simply pass it in the method whatever the layout define in the first parameter.</description>
         <name>diagram-layout</name>
         <tag-class>com.kendoui.taglib.diagram.LayoutTag</tag-class>
@@ -11039,12 +11258,6 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies if the shape is editable by the user.</description>
-            <name>editable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
             <description>Defines the height of the shape when added to the diagram.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11067,18 +11280,6 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <name>path</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies if the shape is resizable.</description>
-            <name>resizable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Specifies if the user is allowed to rotate the shape.</description>
-            <name>rotatable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
         </attribute>
         <attribute>
             <description>Specifies the type of the Shape using any of the built-in shape type.</description>
@@ -11263,12 +11464,6 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies if the shape is editable by the user.</description>
-            <name>editable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
             <description>Defines the height of the shape when added to the diagram.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11297,18 +11492,6 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <name>path</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies if the shape is resizable.</description>
-            <name>resizable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
-        <attribute>
-            <description>Specifies if the user is allowed to rotate the shape.</description>
-            <name>rotatable</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
         </attribute>
         <attribute>
             <description>Specifies the type of the Shape using any of the built-in shape type.</description>
@@ -13065,7 +13248,7 @@ be disabled for this column. By default all columns are sortable if sorting is e
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>A JavaScript function which is used to compare the values - should return -1 if first argument is less than second one, 0 if both are the same or +1 if the second one is greater that then first one.</description>
+            <description>A JavaScript function which is used to compare the values - should return -1 if first argument is less than second one, 0 if both are the same or +1 if the first one is greater than second one.</description>
             <name>compare</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -13075,7 +13258,7 @@ be disabled for this column. By default all columns are sortable if sorting is e
 
 
     <tag>
-        <description>A JavaScript function which is used to compare the values - should return -1 if first argument is less than second one, 0 if both are the same or +1 if the second one is greater that then first one.</description>
+        <description>A JavaScript function which is used to compare the values - should return -1 if first argument is less than second one, 0 if both are the same or +1 if the first one is greater than second one.</description>
         <name>grid-column-sortable-compare</name>
         <tag-class>com.kendoui.taglib.grid.ColumnSortableCompareFunctionTag</tag-class>
         <body-content>JSP</body-content>

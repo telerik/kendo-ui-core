@@ -33,6 +33,18 @@ class Editor extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
+    * Relaxes the same-origin policy when using the iframe-based editor.
+This is done automatically for all cases except when the policy is relaxed by document.domain = document.domain.
+In that case, this property must be used to allow the editor to function properly across browsers.
+This property has been introduced in internal builds after 2014.1.319.
+    * @param string $value
+    * @return \Kendo\UI\Editor
+    */
+    public function domain($value) {
+        return $this->setProperty('domain', $value);
+    }
+
+    /**
     * Indicates whether the Editor should submit encoded HTML tags. By default, the submitted value is encoded.
     * @param boolean $value
     * @return \Kendo\UI\Editor

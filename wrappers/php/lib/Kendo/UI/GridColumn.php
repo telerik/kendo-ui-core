@@ -197,7 +197,7 @@ is displayed in the column header cell.
     }
 
     /**
-    * If set to true the column will be displayed as locked in the grid.
+    * If set to true the column will be displayed as locked in the grid. Also see Frozen Columns.
     * @param boolean $value
     * @return \Kendo\UI\GridColumn
     */

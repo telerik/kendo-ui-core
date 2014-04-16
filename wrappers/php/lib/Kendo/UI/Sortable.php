@@ -130,6 +130,15 @@ The item will also be activated by pressing, holding and lifting the finger with
     }
 
     /**
+    * Selector that determines which elements inside the sorted item's container will be ignored. Useful if the sortable item contains input elements.
+    * @param string $value
+    * @return \Kendo\UI\Sortable
+    */
+    public function ignore($value) {
+        return $this->setProperty('ignore', $value);
+    }
+
+    /**
     * Provides a way for customization of the sortable item placeholder. If a function is supplied, it receives one argument - the draggable element's jQuery object.
 If placeholder function is not provided the widget will clone dragged item, remove its ID attribute, set its visibility to hidden and use it as a placeholder.
     * @param \Kendo\JavaScriptFunction|string $value

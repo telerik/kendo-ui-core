@@ -29,6 +29,15 @@ If zoomRate is less than 1, zooming will be reversed.
     }
 
     /**
+    * Specifies the shape editable.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramEditable|array $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function editable($value) {
+        return $this->setProperty('editable', $value);
+    }
+
+    /**
     * Sets the data source of the Diagram.
     * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\Dataviz\UI\Diagram
@@ -75,24 +84,6 @@ If zoomRate is less than 1, zooming will be reversed.
     */
     public function template($value) {
         return $this->setProperty('template', $value);
-    }
-
-    /**
-    * This defines whether the shapes can be resized. If set to false the adorner will not show the resizing thumbs, as can be seen below;
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function resizable($value) {
-        return $this->setProperty('resizable', $value);
-    }
-
-    /**
-    * This defines whether the shapes can be rotated. If set to false the adorner will not show the rotating thumb, as can be seen below;
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function rotatable($value) {
-        return $this->setProperty('rotatable', $value);
     }
 
     /**

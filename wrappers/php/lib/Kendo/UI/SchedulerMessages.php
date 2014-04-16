@@ -6,7 +6,7 @@ class SchedulerMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The text similar to "all day" displayed in day/week views.
+    * The text similar to "all day" displayed in day,week and agenda views.
     * @param string $value
     * @return \Kendo\UI\SchedulerMessages
     */

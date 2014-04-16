@@ -6,33 +6,6 @@ class DiagramShapeDefaults extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifies if the shape is editable by the user.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\DiagramShapeDefaults
-    */
-    public function editable($value) {
-        return $this->setProperty('editable', $value);
-    }
-
-    /**
-    * Specifies if the user is allowed to rotate the shape.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\DiagramShapeDefaults
-    */
-    public function rotatable($value) {
-        return $this->setProperty('rotatable', $value);
-    }
-
-    /**
-    * Specifies if the shape is resizable.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\DiagramShapeDefaults
-    */
-    public function resizable($value) {
-        return $this->setProperty('resizable', $value);
-    }
-
-    /**
     * The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramShapeDefaults

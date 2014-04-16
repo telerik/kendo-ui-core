@@ -53,6 +53,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     }
 
+    public void setEditable(com.kendoui.taglib.diagram.EditableTag value) {
+        setProperty("editable", value);
+    }
+
     public void setLayout(com.kendoui.taglib.diagram.LayoutTag value) {
         setProperty("layout", value);
     }
@@ -119,20 +123,12 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("draggable", value);
     }
 
-    public boolean getResizable() {
-        return (boolean)getProperty("resizable");
+    public boolean getEditable() {
+        return (boolean)getProperty("editable");
     }
 
-    public void setResizable(boolean value) {
-        setProperty("resizable", value);
-    }
-
-    public boolean getRotatable() {
-        return (boolean)getProperty("rotatable");
-    }
-
-    public void setRotatable(boolean value) {
-        setProperty("rotatable", value);
+    public void setEditable(boolean value) {
+        setProperty("editable", value);
     }
 
     public java.lang.String getTemplate() {
