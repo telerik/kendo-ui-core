@@ -1094,7 +1094,7 @@ function pad(number, digits, end) {
         shortTimeZoneRegExp = /[+|\-]\d{1,2}/,
         longTimeZoneRegExp = /[+|\-]\d{1,2}:\d{2}/,
         dateRegExp = /^\/Date\((.*?)\)\/$/,
-        signRegExp = /[+-]/,
+        offsetRegExp = /[+-]\d*/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"],
         numberRegExp = {
             2: /^\d{1,2}/,
@@ -1440,6 +1440,15 @@ function pad(number, digits, end) {
         return value;
     }
 
+    function parseMicrosoftFormatOffset(offset) {
+        var sign = offset.substr(0, 1) === "-" ? -1 : 1;
+
+        offset = offset.substring(1);
+        offset = (parseInt(offset.substr(0, 2), 10) * 60) + parseInt(offset.substring(2), 10);
+
+        return sign * offset;
+    }
+
     kendo.parseDate = function(value, formats, culture) {
         if (objectToString.call(value) === "[object Date]") {
             return value;
@@ -1449,21 +1458,23 @@ function pad(number, digits, end) {
         var date = null;
         var length, patterns;
         var tzoffset;
+        var sign;
 
         if (value && value.indexOf("/D") === 0) {
             date = dateRegExp.exec(value);
             if (date) {
-                tzoffset = date = date[1];
+                date = date[1];
+                tzoffset = offsetRegExp.exec(date.substring(1));
 
-                date = parseInt(date, 10);
-
-                tzoffset = tzoffset.substring(1).split(signRegExp)[1];
+                date = new Date(parseInt(date, 10));
 
                 if (tzoffset) {
-                    date -= (parseInt(tzoffset, 10) * kendo.date.MS_PER_MINUTE);
+                    tzoffset = parseMicrosoftFormatOffset(tzoffset[0]);
+                    date = kendo.timezone.apply(date, 0);
+                    date = kendo.timezone.convert(date, 0, -1 * tzoffset);
                 }
 
-                return new Date(date);
+                return date;
             }
         }
 
