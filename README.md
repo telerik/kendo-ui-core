@@ -91,7 +91,7 @@ Clone a copy of the repository by running
 git clone git@github.com:telerik/kendo-ui-core.git
 ```
 
-Enter the repository directory 
+Enter the repository directory
 
 ```bash
 cd kendo-ui-core
@@ -152,7 +152,7 @@ Kendo UI Core is free and open-source. We encourage and support an active, healt
 
 Before contributing to Kendo UI Core, please:
 
-1. Read and sign the [Kendo UI Core Contribution License Agreement](http://telerik.com/kendo-ui/cla), to confirm you've read and acknowledged the legal aspects of your contributions, and
+1. Read and sign the [Kendo UI Core Contribution License Agreement](http://www.telerik.com/kendo-ui/cla), to confirm you've read and acknowledged the legal aspects of your contributions, and
 2. Read our [contribution guide](CONTRIBUTING.md), which houses all of the necessary info to:
 	- submit bugs,
 	- request new features, and
