@@ -88,7 +88,7 @@
             return this;
         },
 
-        multiplyInto: function(a) {
+        multiplyCopy: function(a) {
             return new Point(this.x * a, this.y * a);
         },
 

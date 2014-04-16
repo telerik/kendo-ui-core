@@ -199,6 +199,25 @@
         deepEqual(point.multiply(2), point);
     });
 
+    test("multiplyCopy does not change point", function() {
+        var original = point.clone();
+        point.multiplyCopy(2);
+        deepEqual(point, original);
+    });
+
+    test("multiplyCopy does not trigger geometry change", 0, function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+        point.multiplyCopy(2);
+    });
+
+    test("multiplyCopy returns point with x and y multiplied", function() {
+        deepEqual(point.multiplyCopy(2), new Point(20, 40));
+    });
+
     test("subtract x and y", function() {
         deepEqual(point.subtract(new Point(5, 10)), new Point(5, 10));
     });

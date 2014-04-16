@@ -499,7 +499,7 @@
                 length = points.length,
                 i, result = [];
             for (i = 0; i < length; i++) {
-                result.push(points[i].multiplyInto(COORDINATE_MULTIPLE).toString(0, ","));
+                result.push(points[i].multiplyCopy(COORDINATE_MULTIPLE).toString(0, ","));
             }
             return result.join(SPACE);
         },
