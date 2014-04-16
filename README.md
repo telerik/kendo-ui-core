@@ -4,7 +4,7 @@
 
 Kendo UI is everything you need to build sites and apps with HTML5 & JavaScript & Kendo UI Core is the free and open-source version of Kendo UI that provides access to the web's best UI widgets and key framework features essential for developing great experiences for the web and mobile.
 
-[![Build Status](https://magnum.travis-ci.com/telerik/kendo-ui-core.png?token=nbtRakmoezwoQNQAZrxL&branch=master)](https://magnum.travis-ci.com/telerik/kendo-ui-core)
+[![Build Status](https://travis-ci.org/telerik/kendo-ui-core.svg?branch=master)](https://travis-ci.org/telerik/kendo-ui-core)
 
 ## Features of Kendo UI Core
 
