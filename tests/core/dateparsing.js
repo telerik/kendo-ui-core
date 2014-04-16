@@ -687,10 +687,29 @@ test("parseDate parses /Date(-milliseconds)/ string", function() {
 });
 
 test("parseDate parses /Date(milliseconds+offset)/ string", function() {
-    var result = new Date(1390386182022);
-    var dateString = "/Date(1390393382022+0120)/";
+    var date = new Date();
+    var utcDate = kendo.timezone.apply(date, 0);
+    var adjustedDate = kendo.timezone.convert(utcDate, 0, -150);
 
-    equal(+parse(dateString), +result);
+    var dateString = "/Date(" + date.getTime() + "+0230)/";
+
+    deepEqual(parse(dateString), adjustedDate);
+});
+
+test("parseDate parses /Date(milliseconds+offset)/ string (2)", function() {
+    var utcTime = 1376949210000;
+    var tzoffset = new Date().getTimezoneOffset();
+
+    var sign = tzoffset > 0 ? "-" : "+";
+    tzoffset = Math.abs(tzoffset);
+
+    var minutes = tzoffset % 60;
+    var hours = (tzoffset - minutes) / 60;
+
+    var msoffset = sign + kendo.toString(hours, "00") + kendo.toString(minutes, "00");
+    var dateString = "/Date(" + utcTime + msoffset + ")/";
+
+    deepEqual(parse(dateString), new Date(utcTime));
 });
 
 test("parseDate does not parse ISO8601 with format dd.MM.yyyy", function() {
