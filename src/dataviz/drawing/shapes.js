@@ -194,7 +194,7 @@
 
         bBox: function(matrix) {
             var combinedMatrix = this.currentTransform(matrix),
-                rect = this.geometry.bBox(combinedMatrix);
+                rect = this.geometry.bBox(combinedMatrix),
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
@@ -215,7 +215,7 @@
 
         bBox: function(matrix) {
             var combinedMatrix = this.currentTransform(matrix),
-                rect = this.geometry.bBox(combinedMatrix);
+                rect = this.geometry.bBox(combinedMatrix),
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
@@ -369,7 +369,7 @@
 
         curveTo: function(controlOut, controlIn, point) {
             if (this.segments.length > 0) {
-                var last = dataviz.last(this.segments);
+                var last = dataviz.last(this.segments),
                     segment = new Segment(point, controlIn);
 
                 segment.observer = this;

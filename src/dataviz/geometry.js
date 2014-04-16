@@ -375,7 +375,7 @@
                     currentPointY = arc.pointAt(currentAngleY).transformInto(matrix);
                     currentAngleY += 90;
                 }
-                currentPoint = new Point(currentPointX.x, currentPointY.y)
+                currentPoint = new Point(currentPointX.x, currentPointY.y);
                 minPoint = minPoint.min(currentPoint);
                 maxPoint = maxPoint.max(currentPoint);
             }
@@ -462,7 +462,7 @@
            i;
         if (defined(precision)) {
             for (i = 0; i < 6; i++) {
-                arr[i] = round(arr[i], precision)
+                arr[i] = round(arr[i], precision);
             }
         }
 
