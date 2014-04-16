@@ -223,22 +223,22 @@
         deepEqual(point.transform(Matrix.unit), point);
     });
 
-    test("transformInto applies matrix to new point", function() {
+    test("transformCopy applies matrix to new point", function() {
         var matrix = Matrix.translate(10, 10),
             original = point.clone(),
-            transformedPoint = point.transformInto(Matrix.translate(10, 10));
+            transformedPoint = point.transformCopy(Matrix.translate(10, 10));
         deepEqual(point, original);
         deepEqual(transformedPoint, new Point(20, 30));
     });
 
-    test("transformInto returns new point", function() {
-        var transformedPoint = point.transformInto(Matrix.unit);
+    test("transformCopy returns new point", function() {
+        var transformedPoint = point.transformCopy(Matrix.unit);
         ok(transformedPoint instanceof Point);
         ok(transformedPoint !== point);
     });
 
-    test("transformInto returns clone of the point if no matrix is passed", function() {
-        var transformedPoint = point.transformInto();
+    test("transformCopy returns clone of the point if no matrix is passed", function() {
+        var transformedPoint = point.transformCopy();
         ok(transformedPoint instanceof Point);
         ok(transformedPoint  !== point);
     });

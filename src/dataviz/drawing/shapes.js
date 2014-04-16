@@ -261,12 +261,12 @@
         bBoxTo: function(toSegment, matrix) {
             var rect,
                 segment = this,
-                segmentAnchor = segment.anchor.transformInto(matrix),
-                toSegmentAnchor = toSegment.anchor.transformInto(matrix);
+                segmentAnchor = segment.anchor.transformCopy(matrix),
+                toSegmentAnchor = toSegment.anchor.transformCopy(matrix);
 
             if (segment.controlOut && toSegment.controlIn) {
-                rect = segment._curveBoundingBox(segmentAnchor, segment.controlOut.transformInto(matrix),
-                    toSegment.controlIn.transformInto(matrix), toSegmentAnchor);
+                rect = segment._curveBoundingBox(segmentAnchor, segment.controlOut.transformCopy(matrix),
+                    toSegment.controlIn.transformCopy(matrix), toSegmentAnchor);
             } else {
                 rect = segment._lineBoundingBox(segmentAnchor, toSegmentAnchor);
             }
@@ -399,7 +399,7 @@
                 i;
 
             if (length === 1) {
-                var anchor = segments[0].anchor.transformInto(combinedTransform);
+                var anchor = segments[0].anchor.transformCopy(combinedTransform);
                 boundingBox = new Rect(anchor, anchor);
             } else if (length > 0) {
                 boundingBox = new Rect(Point.maxPoint(), Point.minPoint());

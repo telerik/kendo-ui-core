@@ -103,7 +103,7 @@
             return this;
         },
 
-        transformInto: function(mx) {
+        transformCopy: function(mx) {
             var point = this.clone();
             if (mx) {
                 point.transform(mx);
@@ -254,8 +254,8 @@
                 currentPoint, currentPointX, currentPointY,
                 i;
             for (i = 0; i < 4; i++) {
-                currentPointX = this._pointAt(extremeAngles.x + i * halfPI).transformInto(matrix);
-                currentPointY = this._pointAt(extremeAngles.y + i * halfPI).transformInto(matrix);
+                currentPointX = this._pointAt(extremeAngles.x + i * halfPI).transformCopy(matrix);
+                currentPointY = this._pointAt(extremeAngles.y + i * halfPI).transformCopy(matrix);
                 currentPoint = new Point(currentPointX.x, currentPointY.y);
                 minPoint = minPoint.min(currentPoint);
                 maxPoint = maxPoint.max(currentPoint);
@@ -357,8 +357,8 @@
                 extremeAngles = ellipseExtremeAngles(this.center, this.radiusX, this.radiusY, matrix),
                 extremeX = deg(extremeAngles.x),
                 extremeY = deg(extremeAngles.y),
-                currentPoint = arc.pointAt(startAngle).transformInto(matrix),
-                endPoint = arc.pointAt(endAngle).transformInto(matrix),
+                currentPoint = arc.pointAt(startAngle).transformCopy(matrix),
+                endPoint = arc.pointAt(endAngle).transformCopy(matrix),
                 minPoint = currentPoint.min(endPoint),
                 maxPoint = currentPoint.max(endPoint),
                 currentAngleX = arc._boundingBoxStartAngle(extremeX, startAngle),
@@ -367,12 +367,12 @@
 
             while (currentAngleX < endAngle || currentAngleY < endAngle) {
                 if (currentAngleX < endAngle) {
-                    currentPointX = arc.pointAt(currentAngleX).transformInto(matrix);
+                    currentPointX = arc.pointAt(currentAngleX).transformCopy(matrix);
                     currentAngleX += 90;
                 }
 
                 if (currentAngleY < endAngle) {
-                    currentPointY = arc.pointAt(currentAngleY).transformInto(matrix);
+                    currentPointY = arc.pointAt(currentAngleY).transformCopy(matrix);
                     currentAngleY += 90;
                 }
                 currentPoint = new Point(currentPointX.x, currentPointY.y);
