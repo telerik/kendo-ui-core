@@ -3,8 +3,8 @@ node_js:
 - '0.10'
 env:
   global:
-    secure: phfORHjutjEjyAmd8ADZD9sALN3xjZG/iSheyU16qRicG7EyaqKDLhX+eqETbqnJP+qQ6v8kJDtNRtqhpzmlgB8eMmioA0ieOgOPK1sElmm3KBoWbtcwel8Rr2/Qmz140mt+6ujYtEjOQ5HZIpAsvXouCSuJM5YmMB9o3Ky4pvE=
-
+  - secure: phfORHjutjEjyAmd8ADZD9sALN3xjZG/iSheyU16qRicG7EyaqKDLhX+eqETbqnJP+qQ6v8kJDtNRtqhpzmlgB8eMmioA0ieOgOPK1sElmm3KBoWbtcwel8Rr2/Qmz140mt+6ujYtEjOQ5HZIpAsvXouCSuJM5YmMB9o3Ky4pvE=
+  - secure: qZTdiGRaYEXcAeIDuheSlT170nLBL7sv1iJRWB0U1b+EqdpLngl19O/8QVFGGeh4khqeC0V+n4hhEJp4uhb6UCcXALz01gnQ+OAQDYSiYWiq8InEADez/l7VMJkgjMXUMFm6rrLBUNhm17EaTWZzB+cCxT1YDfS4eOF9h4QF6Cg=
 cache:
   directories:
-    - node_modules
+  - node_modules
