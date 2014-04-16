@@ -12,7 +12,22 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
-        Widget = kendo.ui.Widget;
+        Widget = kendo.ui.Widget,
+        template = kendo.template,
+
+        templates = {
+
+            buttonTemplate: kendo.template(
+                '<a href="" role="button" class="k-button" unselectable="on" title="#= text #">' +
+                '<span class=""></span>#: text #</a>'
+            ),
+
+            toggleButtonTemplate: kendo.template(
+                '<a href="" role="togglebutton" class="k-toggle-button" unselectable="on" title="#= text #">' +
+                '<span class=""></span>#: text #</a>'
+            )
+
+        };
 
         var ToolBar = Widget.extend({
             init: function(element, options) {
@@ -24,6 +39,10 @@ var __meta__ = {
                 element = that.element;
 
                 element.addClass("k-toolbar");
+
+                if(options.items && options.items.length) {
+                    that._renderItems(options.items);
+                }
             },
 
             events: [
@@ -37,7 +56,53 @@ var __meta__ = {
 
             destroy: function() {
                 Widget.fn.destroy.call(this);
+            },
+
+            _renderItems: function(items) {
+                this.element.empty();
+
+                for (var i = 0; i < items.length; i++) {
+                    var command = items[i];
+
+                    switch (command.type) {
+                        case 'button':
+                            this._renderButton(command);
+                            break;
+
+                        case 'toggleButton':
+                            this._renderToggleButton(command);
+                            break;
+
+                        case 'buttonGroup':
+                            this._renderButtonGroup(command);
+                            break;
+
+                        case 'separator':
+                            this._renderSeparator(command);
+                            break;
+
+                        default:
+                            throw new Error("Item does not have a valid type!");
+                    }
+                }
+            },
+
+            _renderButton: function(options) {
+                this.element.append(templates.buttonTemplate(options));
+            },
+
+            _renderToggleButton: function(options) {
+                this.element.append(templates.toggleButtonTemplate(options));
+            },
+
+            _renderButtonGroup: function(options) {
+                //todo
+            },
+
+            _renderSeparator: function(options) {
+                //todo
             }
+
         });
 
     kendo.ui.plugin(ToolBar);
