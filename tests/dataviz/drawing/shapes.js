@@ -54,13 +54,13 @@
             equal(element.options.visible, true);
         });
 
-        test("isVisible returns true if visible option is not defined", function() {
-            ok(element.isVisible());
+        test("visible returns true if visible option is not defined", function() {
+            ok(element.visible());
         });
 
-        test("isVisible returns visible option value", function() {
+        test("visible returns visible option value", function() {
             element.options.visible = false;
-            equal(element.isVisible(), false);
+            equal(element.visible(), false);
         });
 
         test("transform sets transform option", function() {

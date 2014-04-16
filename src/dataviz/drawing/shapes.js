@@ -83,13 +83,13 @@
         },
 
         visible: function(visible) {
-            this.options.set("visible", visible);
-            return this;
-        },
-
-        isVisible: function() {
-            var visible = this.options.get("visible");
-            return defined(visible) ? visible : true;
+            if (defined(visible)) {
+                this.options.set("visible", visible);
+                return this;
+            } else {
+                visible = this.options.get("visible");
+                return defined(visible) ? visible : true;
+            }
         }
     });
 
@@ -473,7 +473,7 @@
 
         for (i = 0; i < length; i++) {
             element = elements[i];
-            if (element.isVisible()) {
+            if (element.visible()) {
                 hasBoundingBox = true;
                 boundingBox = boundingBox.wrap(element.bBox(matrix));
             }
