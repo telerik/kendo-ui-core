@@ -3,8 +3,7 @@ node_js:
 - '0.10'
 env:
   global:
-    secure: phfORHjutjEjyAmd8ADZD9sALN3xjZG/iSheyU16qRicG7EyaqKDLhX+eqETbqnJP+qQ6v8kJDtNRtqhpzmlgB8eMmioA0ieOgOPK1sElmm3KBoWbtcwel8Rr2/Qmz140mt+6ujYtEjOQ5HZIpAsvXouCSuJM5YmMB9o3Ky4pvE=
-
+    secure: KM23I77lhAokpjoaaesgD5OdWMR+IbjI0rK3oSDqYxXeIxhggIFdw/0ya3tBnXRCx9H4QR0bBqE61xTP0ygnTsXmCxU6/MuJEHdjJDRxFl8G4GB9sVRfAl3bXn5EtG0L7yp95Jcdn5jRcRlqtC8cacEbFCFsYElMBqvYv89og+0=
 cache:
   directories:
     - node_modules
