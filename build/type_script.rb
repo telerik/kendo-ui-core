@@ -543,9 +543,7 @@ namespace :type_script do
         namespace branch do
             desc "Test TypeScript generation"
             task :test do
-                sync_docs_submodule(branch)
-
-                %w(all web dataviz mobile).each do |suite|
+                MD_API_SUITES.each do |suite|
                     path = "dist/kendo.#{suite}.d.ts"
 
                     File.write(path, get_type_script(path, md_api_suite(suite), false))
