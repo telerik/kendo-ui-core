@@ -258,7 +258,7 @@ var __meta__ = {
         },
 
         _hideElement: function() {
-            this.element.hide();
+            this.element.remove();
         }
     });
 

@@ -9529,8 +9529,8 @@ var __meta__ = {
                 );
             }
 
-            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(document.body);
-            tooltip._moveProxy = proxy(tooltip.move, tooltip);
+            tooltip.element = $(tooltip.template(tooltip.options));
+            tooltip.move = proxy(tooltip.move, tooltip);
         },
 
         destroy: function() {
@@ -9563,6 +9563,8 @@ var __meta__ = {
             }
 
             offset = tooltip._offset();
+
+            tooltip.element.appendTo(document.body);
 
             if (!tooltip.visible) {
                 element.css({ top: offset.top, left: offset.left });
@@ -9645,7 +9647,7 @@ var __meta__ = {
         show: function() {
             var tooltip = this;
 
-            tooltip.showTimeout = setTimeout(tooltip._moveProxy, TOOLTIP_SHOW_DELAY);
+            tooltip.showTimeout = setTimeout(tooltip.move, TOOLTIP_SHOW_DELAY);
         },
 
         hide: function() {
@@ -9663,7 +9665,11 @@ var __meta__ = {
         },
 
         _hideElement: function() {
-            this.element.fadeOut();
+            this.element.fadeOut({
+                always: function(){
+                    $(this).remove();
+                }
+            });
         },
 
         _pointContent: function(point) {
