@@ -168,7 +168,7 @@ The Kendo UI team does *not* provide formal support for Kendo UI Core, except to
 
 ## Release Notes
 
-For change logs and release notes, see the [online release notes at Telerik.com](http://www.telerik.com/support/whats-new/kendo-ui).
+For change logs and release notes, see the [online release notes at Telerik.com](http://www.telerik.com/support/whats-new/kendo-ui/release-history).
 
 ## License Information
 
