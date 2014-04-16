@@ -12,7 +12,7 @@ class Issue
         @title = issue.title
         @labels = issue.labels.map {|l| l.name }
 
-        @internal = @labels.join(" ") =~ /Documentation|Internal|Deleted/
+        @internal = @labels.join(" ") =~ /Documentation|Internal|Deleted|Invalid|Won't Fix/
         @bug = @labels.include? "Bug"
         @new_component = @labels.include? "New widget"
 
@@ -20,7 +20,7 @@ class Issue
 
         @suites.push "components" if @suites.length == 0
 
-        @components = filtered_labels(:w) | filtered_labels(:f)
+        @components = filtered_labels(:w) | filtered_labels(:f) | filtered_labels(:c)
     end
 
     def filtered_labels(prefix)
@@ -89,6 +89,8 @@ class ChangeLog
             Suite.new("PHP Wrappers", "php")
         ]
 
+        @milestones = {}
+
         fetch_issues
     end
 
@@ -116,16 +118,28 @@ class ChangeLog
         @suites.find { |s| s.title == key } || @suites[0]
     end
 
-    def client
-        @client ||= Github.new :oauth_token => "88b65b5ddb933dcff847eb9b148449283b22e3f2", :user => "telerik", :repo => "kendo"
+    def api_for(repo_name)
+        Github.new :oauth_token => "88b65b5ddb933dcff847eb9b148449283b22e3f2", :user => "telerik", :repo => repo_name
+    end
+
+    def private_repo
+        @private_repo ||= api_for "kendo"
+    end
+
+    def public_repo
+        @public_repo ||= api_for "kendo-ui-core"
+    end
+
+    def issues_from(milestones)
+        milestones.map { |milestone| milestone_issues(milestone) }.flatten
     end
 
     def closed_issues
-        current_milestones.map { |milestone| milestone_issues(milestone) }.flatten
+        issues_from(current_milestones(public_repo)) + issues_from(current_milestones(private_repo))
     end
 
-    def current_milestones
-        milestones.select { |milestone| current_milestone_names.include? milestone.title }
+    def current_milestones(repo)
+        milestones_for(repo).select { |milestone| current_milestone_names.include? milestone.title }
     end
 
     def milestone_issues(milestone)
@@ -141,21 +155,31 @@ class ChangeLog
         issues
     end
 
+    def repo_by(milestone)
+        public_repo if milestone.url =~ /kendo-ui-core/
+
+        private_repo
+    end
+
     def page_issues(milestone, page)
-        $stderr.puts "Fetching issues for #{milestone.title}, page #{page}..." if VERBOSE
-        client.issues.list_repo nil, nil,
+        repo_type = milestone.url =~ /kendo-ui-core/ ? 'public' : 'private'
+        repo = repo_by(milestone)
+
+        $stderr.puts "Fetching issues from #{repo_type} repo, #{milestone.title}, page #{page}..." if VERBOSE
+
+        repo.issues.list_repo nil, nil,
             :state => "closed",
             :milestone => milestone.number,
             :per_page => 100,
             :page => page
     end
 
-    def milestones
-        @milestones ||= client_milestones.list(nil, nil, :state => "open") + client_milestones.list(nil, nil, :state => "closed")
-    end
+    def milestones_for(repo)
+        repo_milestones = repo.issues.milestones
 
-    def client_milestones
-        client.issues.milestones
+        @milestones[repo] ||=
+            repo_milestones.list(nil, nil, :state => "open") +
+            repo_milestones.list(nil, nil, :state => "closed")
     end
 
     def current_milestone_names
