@@ -161,7 +161,7 @@
         e.preventDefault();
 
         dom.find("li:last").trigger(e);
-        equal(group.selectedIndex, -1);
+        equal(group.selectedIndex, undefined);
     });
 
 
@@ -298,6 +298,6 @@
 
         buttongroup.badge("li:last", 6);
 
-        equal(buttongroup.badge("li:last"), "6");
+        ok(buttongroup.badge("li:last") == "6");
     });
 })();
