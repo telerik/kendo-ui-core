@@ -262,6 +262,15 @@
         ok(transformedPoint  !== point);
     });
 
+    test("transformCopy does not trigger geometry change", 0, function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+        point.transformCopy(Matrix.unit);
+    });
+
     test("round rounds x", function() {
         point.x = 5.5;
         point.round();
