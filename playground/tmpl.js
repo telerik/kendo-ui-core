@@ -1,6 +1,10 @@
-"use strict";
+/*jshint eqnull:true, curly:true  */
+/*jshint -W053 */       // new String
+/*jshint -W054 */       // new Function
 
 var TMPL = (function(){
+
+    "use strict";
 
     var WHITESPACE_CHARS = " \u00a0\n\r\t\f\u000b\u200b\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u202f\u205f\u3000";
 
@@ -19,36 +23,33 @@ var TMPL = (function(){
         "\\u2C00-\\u2FEF",
         "\\u3001-\\uD7FF",
         "\\uF900-\\uFDCF",
-        "\\uFDF0-\\uFFFD",
+        "\\uFDF0-\\uFFFD"
     ];
 
     var NAME_CHAR = NAME_START_CHAR.concat([ "\\-", ".", "0-9", "\\u00B7", "\\u0300-\\u036F", "\\u203F-\\u2040" ]);
 
-    var RX_NAME_START_CHAR = new RegExp("[" + NAME_START_CHAR.join("") + "]", "i");
-    var RX_NAME_CHAR = new RegExp("[" + NAME_CHAR.join("") + "]", "i");
-
-    var RX_NAME = new RegExp("^([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
     var RX_OPENTAG = new RegExp("^<([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
     var RX_CLOSETAG = new RegExp("^</([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
     var RX_CLOSETAG_SKIP_WS = new RegExp("^[" + WHITESPACE_CHARS + "]*</([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*)");
-    var RX_CHAR_REF = /^&#([0-9]+|x[0-9a-fA-F]+);/;
-    var RX_ENTITY_REF = new RegExp("^&([" + NAME_START_CHAR.join("") + "][" + NAME_CHAR.join("") + "]*);", "i");
 
     var NO_CONTENT_TAGS = ",area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr,";
 
-    function html_no_content(tagname) {
+    function emptyTag(tagname) {
         return NO_CONTENT_TAGS.indexOf("," + tagname.toLowerCase() + ",") >= 0;
     }
 
-    function is_whitespace(ch) {
+    function isWhitespace(ch) {
         return WHITESPACE_CHARS.indexOf(ch) >= 0;
     }
 
     function defaults(args, defs) {
-        if (!args) args = {};
+        if (!args) {
+            args = {};
+        }
         Object.keys(defs).forEach(function(key){
-            if (args[key] === undefined)
+            if (args[key] === undefined) {
                 args[key] = defs[key];
+            }
         });
         return args;
     }
@@ -59,7 +60,7 @@ var TMPL = (function(){
         this.col = 0;
         this.text = text;
         this.len = text.length;
-    };
+    }
 
     InputStream.prototype = {
         peek: function() {
@@ -79,7 +80,7 @@ var TMPL = (function(){
             return null;
         },
         eof: function() {
-            return this.peek() == "";
+            return this.peek() === "";
         },
         get: function(rx) {
             var m = this.lookingAt(rx);
@@ -89,7 +90,9 @@ var TMPL = (function(){
             }
         },
         forward: function(n) {
-            while (n-- > 0) this.next();
+            while (n-- > 0) {
+                this.next();
+            }
         },
         lookingAt: function(rx) {
             if (typeof rx == "string") {
@@ -101,7 +104,7 @@ var TMPL = (function(){
             return {
                 line: this.line,
                 col: this.col,
-                pos: this.pos,
+                pos: this.pos
             };
         },
         restore: function(state) {
@@ -111,12 +114,13 @@ var TMPL = (function(){
         },
         readWhile: function(pred) {
             var ret = "";
-            while (!this.eof() && pred(this.peek()))
+            while (!this.eof() && pred(this.peek())) {
                 ret += this.next();
+            }
             return ret;
         },
         skipWhitespace: function() {
-            return this.readWhile(is_whitespace);
+            return this.readWhile(isWhitespace);
         }
     };
 
@@ -124,7 +128,7 @@ var TMPL = (function(){
         this.code = "";
     }
     OutputStream.prototype = {
-        get: function(){ return this.code },
+        get: function(){ return this.code; },
         stat: function(stat) {
             this.code += stat + ";\n";
         },
@@ -136,10 +140,15 @@ var TMPL = (function(){
         },
         tag: function(tagName, attrs, closed) {
             var ret = "this.tag(" + JSON.stringify(tagName) + ", {", first = true;
-            for (var i in attrs) if (attrs.hasOwnProperty(i)) {
-                if (first) first = false;
-                else ret += ", ";
-                ret += JSON.stringify(i) + " : " + attrs[i];
+            for (var i in attrs) {
+                if (attrs.hasOwnProperty(i)) {
+                    if (first) {
+                        first = false;
+                    } else {
+                        ret += ", ";
+                    }
+                    ret += JSON.stringify(i) + " : " + attrs[i];
+                }
             }
             ret += "}, " + (!!closed) + ")";
             return ret;
@@ -154,15 +163,7 @@ var TMPL = (function(){
             input = new InputStream(input);
         }
         options = defaults(options, {
-            noWhitespace  : true,
-            startEscaped1 : "#:",
-            closeEscaped1 : "#",
-            startEscaped2 : "${",
-            closeEscaped2 : "}",
-            startLiteral1 : "#=",
-            closeLiteral1 : "#",
-            startCode     : "#",
-            closeCode     : "#",
+            noWhitespace  : true
         });
         var output = new OutputStream();
         html();
@@ -188,13 +189,13 @@ var TMPL = (function(){
                 str = "";
             }
             while (!input.eof()) {
-                if (input.lookingAt(options.startEscaped1)) {
+                if (input.lookingAt("#:")) {
                     dump(escaped1, true);
-                } else if (input.lookingAt(options.startEscaped2)) {
+                } else if (input.lookingAt("${")) {
                     dump(escaped2, true);
-                } else if (input.lookingAt(options.startLiteral1)) {
+                } else if (input.lookingAt("#=")) {
                     dump(literal1, true);
-                } else if (input.lookingAt(options.startCode)) {
+                } else if (input.lookingAt("#")) {
                     dump(code);
                 } else if ((m = input.lookingAt(RX_OPENTAG))) {
                     dump(openTag, m);
@@ -214,14 +215,15 @@ var TMPL = (function(){
                 return ch != ">";
             });
             input.next();
-            if (!html_no_content(tagName))
+            if (!emptyTag(tagName)) {
                 return output.gat(tagName);
+            }
         }
 
         function openTag(m) {
             var tagName = m[1];
             input.forward(m[0].length);
-            var attrs = {}, closed = html_no_content(tagName);
+            var attrs = {}, closed = emptyTag(tagName);
             while (!input.eof()) {
                 input.skipWhitespace();
                 if ((m = input.lookingAt(/^\/?>/))) {
@@ -230,8 +232,9 @@ var TMPL = (function(){
                         closed = true;
                         input.next();
                     }
-                    if (options.noWhitespace)
+                    if (options.noWhitespace) {
                         input.skipWhitespace();
+                    }
                     break;
                 }
                 attribute(attrs);
@@ -241,19 +244,26 @@ var TMPL = (function(){
 
         function attribute(attrs) {
             var attr = input.readWhile(function(ch){
-                if (ch == "#")
+                if (ch == "#") {
                     croak("Code not supported in attribute names");
-                return !is_whitespace(ch) && "<>'\"/=".indexOf(ch) < 0;
+                }
+                return !isWhitespace(ch) && "<>'\"/=".indexOf(ch) < 0;
             }), val = "";
             input.skipWhitespace();
             if (input.lookingAt("=")) {
                 input.next();
                 input.skipWhitespace();
-                if (input.lookingAt("'")) val = valueQuoted("'");
-                else if (input.lookingAt('"')) val = valueQuoted('"');
-                else val = valueUnquoted();
+                if (input.lookingAt("'")) {
+                    val = valueQuoted("'");
+                } else if (input.lookingAt('"')) {
+                    val = valueQuoted('"');
+                } else {
+                    val = valueUnquoted();
+                }
             }
-            if (!val) val = '""';
+            if (!val) {
+                val = '""';
+            }
             attrs[attr] = "(" + val + ")";
         }
 
@@ -274,13 +284,13 @@ var TMPL = (function(){
                     input.next();
                     break;
                 }
-                if (input.lookingAt(options.startEscaped1)) {
+                if (input.lookingAt("#:")) {
                     dump(escaped1, false);
-                } else if (input.lookingAt(options.startEscaped2)) {
+                } else if (input.lookingAt("${")) {
                     dump(escaped2, false);
-                } else if (input.lookingAt(options.startLiteral1)) {
+                } else if (input.lookingAt("#=")) {
                     dump(literal1, false);
-                } else if (input.lookingAt(options.startCode)) {
+                } else if (input.lookingAt("#")) {
                     croak("Statement # block # not allowed in attribute value");
                 } else {
                     str += input.next();
@@ -292,9 +302,10 @@ var TMPL = (function(){
 
         function valueUnquoted() {
             return JSON.stringify(input.readWhile(function(ch){
-                if (ch == "#")
+                if (ch == "#") {
                     croak("Code not supported in unquoted attribute value");
-                return !is_whitespace(ch) && "<>'\"/=".indexOf(ch) < 0;
+                }
+                return !isWhitespace(ch) && "<>'\"/=".indexOf(ch) < 0;
             }));
         }
 
@@ -317,26 +328,26 @@ var TMPL = (function(){
         }
 
         function escaped1(forStat) {
-            input.forward(options.startEscaped1.length);
-            var expr = readUntil(options.closeEscaped1);
+            input.forward(2);
+            var expr = readUntil("#");
             return forStat ? output.esc(expr) : expr;
         }
 
         function escaped2(forStat) {
-            input.forward(options.startEscaped2.length);
-            var expr = readUntil(options.closeEscaped2);
+            input.forward(2);
+            var expr = readUntil("}");
             return forStat ? output.esc(expr) : expr;
         }
 
         function literal1(forStat) {
-            input.forward(options.startLiteral1.length);
-            var expr = readUntil(options.closeLiteral1);
+            input.forward(2);
+            var expr = readUntil("#");
             return forStat ? output.raw(expr) : expr;
         }
 
         function code() {
-            input.forward(options.startCode.length);
-            return readUntil(options.closeCode);
+            input.forward(1);
+            return readUntil("#");
         }
     }
 
@@ -347,15 +358,16 @@ var TMPL = (function(){
             children : []
         };
         this.stack = [ this.root ];
-    };
+    }
     TreeMaker.prototype = {
         top: function() {
             return this.stack[this.stack.length - 1];
         },
         push: function(thing) {
             var tag = this.top();
-            if (!tag.children)
+            if (!tag.children) {
                 tag.children = [];
+            }
             tag.children.push(thing);
         },
         raw: function(txt) {
@@ -372,8 +384,9 @@ var TMPL = (function(){
                 attrs: attrs
             };
             this.push(tag);
-            if (!closed)
+            if (!closed) {
                 this.stack.push(tag);
+            }
         },
         gat: function(tagName) {
             // XXX: tagName is kinda pointless, but we could throw some

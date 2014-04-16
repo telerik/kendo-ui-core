@@ -28,11 +28,43 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
+            this.vtree = kendo.dom.parse(that.element[0], function(node) {
+                return node.nodeName.toLowerCase() === "li";
+            });
+
+            kendo.dom.attach(that.element[0], this.vtree);
+
             that.element.addClass("km-buttongroup").find("li").each(that._button);
 
             that.element.on(that.options.selectOn, SELECTOR, "_select");
 
-            that.select(that.options.index);
+            that.selectedIndex = that.options.index;
+            that.refresh();
+        },
+
+        refresh: function() {
+            var tree = this.vtree.clone();
+
+            for (var index = 0; index < tree.children.length; index ++) {
+                var button = tree.children[index];
+                var className = "km-button";
+                if (button.attr.className) {
+                    className = button.attr.className + " km-button";
+                }
+                var badge = button.attr["data-badge"];
+
+                if (index === this.selectedIndex) {
+                    className += " " + ACTIVE;
+                }
+
+                button.attr.className = className;
+
+                if (badge !== undefined) {
+                    button.children = [ kendo.dom.element("span", {className: "km-badge"}, [ kendo.dom.text(badge) ]) ];
+                }
+            }
+
+            kendo.dom.render(this.element[0], tree);
         },
 
         events: [
@@ -57,18 +89,15 @@ var __meta__ = {
                 return;
             }
 
-            that.current().removeClass(ACTIVE);
-
             if (typeof li === "number") {
                 index = li;
-                li = $(that.element[0].children[li]);
-            } else if (li.nodeType) {
+            } else {
                 li = $(li);
                 index = li.index();
             }
 
-            li.addClass(ACTIVE);
             that.selectedIndex = index;
+            that.refresh();
         },
 
         badge: function(item, value) {
@@ -79,25 +108,23 @@ var __meta__ = {
             }
 
             item = buttongroup.find(item);
-            badge = $(item.children(".km-badge")[0] || createBadge(value).appendTo(item));
+            var node = this.vtree.children[item.index()];
 
-            if (value || value === 0) {
-                badge.html(value);
-                return this;
+            if (value !== undefined) {
+                if (value === false) {
+                    delete node.attr["data-badge"];
+                } else {
+                    node.attr["data-badge"] = value;
+                }
+                this.refresh();
             }
 
-            if (value === false) {
-                badge.empty().remove();
-                return this;
-            }
-
-            return badge.html();
+            return node.attr["data-badge"];
         },
 
         _button: function() {
             var button = $(this).addClass("km-button"),
                 icon = kendo.attrValue(button, "icon"),
-                badge = kendo.attrValue(button, "badge"),
                 span = button.children("span"),
                 image = button.find("img").addClass("km-image");
 
@@ -109,10 +136,6 @@ var __meta__ = {
 
             if (!image[0] && icon) {
                 button.prepend($('<span class="km-icon km-' + icon + '"/>'));
-            }
-
-            if (badge || badge === 0) {
-                createBadge(badge).appendTo(button);
             }
         },
 

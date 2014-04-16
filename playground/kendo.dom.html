@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="kendo.dom.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
+    </head>
+    <body>
+        <div id="grid" class="k-grid k-widget"></div>
+        <script>
+            function now() {
+                return window.performance && window.performance.now ? window.performance.now() : new window.Date().getTime()
+            }
+
+            var dataSource = new kendo.data.DataSource({
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+                        dataType: "jsonp"
+                    }
+                },
+                change: function() {
+                    var start = now();
+                    kendo.dom.render(document.getElementById("grid"), table());
+                    var end = now();
+                    console.log("Mithril", end-start);
+                }
+            });
+
+            var columns = [
+                { field: "OrderID", title: "Order ID" },
+                { field: "ShipName", title: "Ship Name" }
+            ];
+
+            // Mithril
+            function table() {
+                return kendo.dom.element("table", { role: "grid" }, [colgroup(), thead(), tbody()]);
+            }
+
+            function thead() {
+                return kendo.dom.element("thead", { role: "rowgroup", className: "k-grid-header" }, [theadrow()]);
+            }
+
+            function theadrow() {
+                return kendo.dom.element("tr", { role: "row" }, ths());
+            }
+
+            function ths() {
+                return columns.map(function(column) {
+                    return th(column);
+                });
+            }
+
+            function th(column) {
+                return kendo.dom.element("th", { "data-field": column.field, className: "k-header", role: "columnheader" }, column.title);
+            }
+
+            function tbody() {
+                return kendo.dom.element("tbody", rows());
+            }
+
+            function colgroup() {
+                return kendo.dom.element("colgroup", cols());
+            }
+
+            function cols() {
+                return columns.map(function() {
+                    return kendo.dom.element("col");
+                });
+            }
+
+            function rows() {
+                return dataSource.view().map(row);
+            }
+
+            function row(dataItem, index) {
+                var attr = {
+                    "data-uid": dataItem.uid
+                };
+
+                if (index % 2) {
+                    attr["className"] = "k-alt";
+                }
+
+                return kendo.dom.element("tr", attr, cells(dataItem));
+            }
+
+            function cells(dataItem) {
+                return columns.map(function(column) {
+                    return cell(column.field, dataItem);
+                });
+            }
+
+            function cell(field, dataItem) {
+                return kendo.dom.element("td", dataItem[field]);
+            }
+
+            /*
+            var dom = kendo.dom.element("div", "Foo");
+
+            kendo.dom.render(document.getElementById("grid"), dom);
+            */
+
+            var dom = kendo.dom.element("div", null, "Foo");
+
+            kendo.DOM.render(document.getElementById("grid"), dom);
+
+            /*
+            dataSource.fetch(function() {
+                kendo.dom.render(document.getElementById("grid"), table());
+
+                $("#grid").find("th").kendoSorter({ dataSource: dataSource });
+            });
+            */
+
+        </script>
+    </body>
+</html>

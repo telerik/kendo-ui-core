@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="http://fb.me/react-0.8.0.js"></script>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.dom.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+
+        <script src="./tmpl.js"></script>
+
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
+        <style>
+            fieldset {
+                width: 500px;
+                float:left;
+            }
+        </style>
+    </head>
+    <body>
+        <button>shuffle columns</button>
+
+        <fieldset>
+            <legend>kendo.dom.template</legend>
+            <div id="m-grid" class="k-grid k-widget"></div>
+        </fieldset>
+
+        <fieldset>
+           <legend>Kendo UI</legend>
+           <div id="k-grid"></div>
+        </fieldset>
+
+        <script type="x/new-template" id="gridTemplate">
+          <table role="grid">
+            <!-- comment must be skipped -->
+            <!-- <![CDATA[ must throw ]]> -->
+            <colgroup>
+              # for (var i = 0; i < columns.length; ++i) { #
+                <col></col>
+              # } #
+            </colgroup>
+            <thead role="rowgroup" class="k-grid-header">
+              <tr role="row">
+              # for (var i = 0; i < columns.length; ++i) {
+                var col = columns[i]; #
+                <th data-field="#: col.field #" class="k-header" role="columnheader"
+                    t1="#: '<>' #" t2="#= '<>' #" t3="a < b &rarr; b > a">
+                  &rarr; #= "<b>" + col.title + "</b>" # &larr;
+                </th>
+              # } #
+              </tr>
+            </thead>
+            <tbody>
+              # for (var view = dataSource.view(), i = 0; i < view.length; ++i) {
+                var dataItem = view[i]; #
+                <tr data-uid="#: dataItem.uid #" class="#= i % 2 ? 'k-alt' : '' #">
+                  # for (var j = 0; j < columns.length; ++j) {
+                    var column = columns[j]; #
+                    <td>${ dataItem[column.field] }</td>
+                  # } #
+                </tr>
+              # } #
+            </tbody>
+          </table>
+        </script>
+
+        <script>
+            function now() {
+                return window.performance && window.performance.now ? window.performance.now() : new window.Date().getTime()
+            }
+
+            $("button").click(function() {
+                columns.push(columns.shift());
+                dataSource.fetch();
+            });
+
+            var gridTemplate = $("#gridTemplate").html().trim();
+            console.time("compile");
+            gridTemplate = kendo.dom.template(gridTemplate);
+            console.timeEnd("compile");
+
+            var dataSource = new kendo.data.DataSource({
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders",
+                        dataType: "jsonp"
+                    }
+                },
+                change: function() {
+                    redraw();
+                }
+            });
+
+            var columns = [
+                { field: "OrderID", title: "Order ID" },
+                { field: "ShipName", title: "Ship Name" }
+            ];
+
+            var prevDom = null;
+
+            function redraw() {
+                console.time("runTemplate");
+                var dom = gridTemplate({ columns: columns, dataSource: dataSource });
+                console.timeEnd("runTemplate");
+
+                console.time("render");
+                dom.render(document.getElementById("m-grid"), prevDom);
+                prevDom = dom;
+                console.timeEnd("render");
+            }
+
+            dataSource.fetch(function() {
+                $("#k-grid").kendoGrid({
+                    dataSource: this.data(),
+                    columns: columns,
+                    scrollable: false,
+                    sortable: true,
+                    dataBinding: function() {
+                        this.__time__ = now();
+                    },
+                    dataBound: function() {
+                        console.log("kendo", now()-this.__time__);
+                    }
+                });
+
+                redraw();
+                $("#m-grid").find("th").kendoSorter({ dataSource: dataSource });
+            });
+
+        </script>
+    </body>
+</html>

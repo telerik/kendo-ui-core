@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.dom.js"></script>
+        <script src="dom.data.js"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
+        <style>
+            div {
+                width: 500px;
+                overflow: auto;
+            }
+            section {
+                width: 700px;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <section>
+            <h3>DOM</h3>
+            <button id="toggle-dom">toggle</button>
+            <div id="root-dom"></div>
+        </section>
+        <section>
+            <h3>innerHTML</h3>
+            <button id="toggle-html">toggle</button>
+            <div id="root-html"></div>
+        </section>
+        <script>
+            var rootDom = document.getElementById("root-dom");
+            var tree = new kendo.dom.Tree(rootDom);
+            var rootHtml = document.getElementById("root-html");
+            var largeDom = true;
+            var largeHtml = true;
+
+            function now() {
+                return window.performance && window.performance.now ? window.performance.now() : new window.Date().getTime()
+            }
+
+            document.getElementById("toggle-dom").onclick = function () {
+                largeDom = !largeDom;
+
+                var start = now();
+                renderDom(largeDom);
+                console.log(now() - start);
+
+                return false;
+            }
+
+            document.getElementById("toggle-html").onclick = function () {
+                largeHtml = !largeHtml;
+
+                var start = now();
+                renderHtml(largeHtml);
+                console.log(now() - start);
+
+                return false;
+            }
+
+            function renderDom(large) {
+                var data = large ? big : small;
+                var rows = [];
+                var level;
+                var headers;
+                var column;
+
+                for (var levelIndex = 0, levelCount = data.length; levelIndex < levelCount; levelIndex++) {
+                    level = data[levelIndex];
+                    headers = [];
+
+                    for (var columnIndex = 0, columnCount = level.length; columnIndex < columnCount; columnIndex++) {
+                        column = level[columnIndex];
+
+                        headers.push(tree.element("th", { colspan: column.span }, [tree.text(column.text)]));
+                    }
+
+                    rows.push(tree.element("tr", null, headers));
+                }
+
+
+                tree.render([tree.element("table", null, rows)]);
+
+            }
+
+            function renderHtml(large) {
+                var data = large ? big : small;
+                var rows = [];
+                var level;
+                var headers;
+                var column;
+
+                for (var levelIndex = 0, levelCount = data.length; levelIndex < levelCount; levelIndex++) {
+                    level = data[levelIndex];
+                    headers = [];
+
+                    for (var columnIndex = 0, columnCount = level.length; columnIndex < columnCount; columnIndex++) {
+                        column = level[columnIndex];
+
+                        headers.push("<th colspan='" + column.span + "'>" + column.text + "</th>");
+                    }
+
+                    rows.push(headers.join(""));
+                }
+
+                rootHtml.innerHTML = "<table><tr>" + rows.join("</tr><tr>") + "</tr></table>";
+            }
+
+            renderDom(largeDom);
+            renderHtml(largeHtml);
+        </script>
+    </body>
+</html>
