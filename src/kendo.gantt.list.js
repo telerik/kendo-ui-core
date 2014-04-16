@@ -132,7 +132,7 @@ var __meta__ = {
                 style = { "data-field": column.field, "data-title": column.title, className: "k-header k-with-icon" };
 
                 if (column.sortable) {
-                    extend(style, { "data-role": "sorter", "data-dir": "desc" });
+                    extend(style, { "data-role": "sorter" });
                 }
 
                 ths.push(kendoDom.element("th", style, [kendoDom.text(column.title)]));
@@ -171,7 +171,7 @@ var __meta__ = {
 
                 rows.push(this._tds({
                     task: task,
-                    style: i % 2 !== 0 ? { className: "k-alt", role:"row", "data-uid": task.uid } : null
+                    style: i % 2 !== 0 ? { className: "k-alt", role: "row", "data-uid": task.uid } : { role: "row", "data-uid": task.uid }
                 }));
             }
 
