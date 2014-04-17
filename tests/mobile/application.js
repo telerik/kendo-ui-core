@@ -286,6 +286,26 @@
         ok(!application.element.hasClass("km-ios"));
     });
 
+    test("Setting different skin than platform variant removes the variant classes", 2, function() {
+        setup('<div data-role="view" />', {
+            platform: "wp-light",
+            skin: "flat"
+        });
+
+        ok(application.element.hasClass("km-flat"));
+        ok(!application.element.hasClass("km-wp-light"));
+    });
+
+    test("Setting the same skin as the platform variant sets the variant classes", 2, function() {
+        setup('<div data-role="view" />', {
+            platform: "wp",
+            skin: "wp-light"
+        });
+
+        ok(application.element.hasClass("km-wp"));
+        ok(application.element.hasClass("km-wp-light"));
+    });
+
     /*
     if (navigator.__defineGetter__ && !kendo.support.browser.safari) {
         test("Forcing platform layout still reports correct device", 1, function() {

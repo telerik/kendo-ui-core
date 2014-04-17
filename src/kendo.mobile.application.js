@@ -79,7 +79,7 @@ var __meta__ = {
         classes.push("km-" + os.majorVersion);
         classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
 
-        if (os.variant) {
+        if (os.variant && ((os.skin && os.skin === os.name) || !os.skin)) {
             classes.push("km-" + (os.skin ? os.skin : os.name) + "-" + os.variant);
         }
 
