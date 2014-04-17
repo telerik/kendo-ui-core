@@ -92,8 +92,9 @@
             return new Point(this.x * a, this.y * a);
         },
 
-        transform: function(mx) {
-            var x = this.x,
+        transform: function(transformation) {
+            var mx = transformationMatrix(transformation),
+                x = this.x,
                 y = this.y;
             this.x = mx.a * x + mx.c * y + mx.e;
             this.y = mx.b * x + mx.d * y + mx.f;
@@ -103,10 +104,10 @@
             return this;
         },
 
-        transformCopy: function(mx) {
+        transformCopy: function(transformation) {
             var point = this.clone();
-            if (mx) {
-                point.transform(mx);
+            if (transformation) {
+                point.transform(transformation);
             }
             return point;
         },
@@ -531,10 +532,7 @@
         },
 
         multiply: function(transformation) {
-            var matrix = transformation;
-            if (matrix instanceof Transformation) {
-                matrix = transformation.matrix();
-            }
+            var matrix = transformationMatrix(transformation);
 
             this._matrix = this._matrix.times(matrix);
 
@@ -563,6 +561,13 @@
             x: extremeX,
             y: extremeY
         };
+    }
+
+    function transformationMatrix(transformation) {
+        if (transformation instanceof Transformation) {
+            transformation = transformation.matrix();
+        }
+        return transformation;
     }
 
     // Exports ================================================================

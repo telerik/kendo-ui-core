@@ -6,7 +6,8 @@
         Point = g.Point,
         Rect = g.Rect,
         Matrix = g.Matrix,
-        Arc = g.Arc;
+        Arc = g.Arc,
+        Transformation = g.Transformation;
 
     function compareBoundingBox(bBox, values, tolerance) {
         tolerance = tolerance || 0;
@@ -236,6 +237,10 @@
 
     test("transform applies matrix", function() {
         deepEqual(point.transform(Matrix.translate(10, 10)), new Point(20, 30));
+    });
+
+    test("transform applies transformation matrix", function() {
+        deepEqual(point.transform(new Transformation(Matrix.translate(10, 10))), new Point(20, 30));
     });
 
     test("transform returns point", function() {
@@ -756,8 +761,7 @@
 
     // ------------------------------------------------------------
     (function() {
-        var Transformation = g.Transformation,
-            transform = g.transform,
+        var transform = g.transform,
             transformation,
             matrix = Matrix.rotate(30),
             IDENTITY = new Matrix(1, 0, 0, 1, 0, 0);;
