@@ -103,33 +103,36 @@ var __meta__ = {
 
         _header: function() {
             var wrapper = this.header;
+            var domTree = this.headerTree = new kendoDom.Tree(wrapper[0]);
             var colgroup;
             var thead;
             var table;
 
-            colgroup = kendoDom.element("colgroup", null, this._cols());
-            thead = kendoDom.element("thead", { role: "rowgroup" }, [kendoDom.element("tr", null, this._ths())]);
-            table = kendoDom.element("table", { role: "grid" }, [colgroup, thead]);
+            colgroup = domTree.element("colgroup", null, this._cols(domTree));
+            thead = domTree.element("thead", { role: "rowgroup" }, [domTree.element("tr", null, this._ths())]);
+            table = domTree.element("table", { role: "grid" }, [colgroup, thead]);
 
-            kendoDom.render(wrapper[0], [table]);
+            domTree.render([table]);
         },
 
         _render: function(tasks) {
             var wrapper = this.content;
+            var domTree = this.contentTree = new kendoDom.Tree(wrapper[0]);
             var colgroup;
             var tbody;
             var table;
 
             this.levels = [{ field: null, value: 0 }];
 
-            colgroup = kendoDom.element("colgroup", null, this._cols());
-            tbody = kendoDom.element("tbody", { role: "rowgroup" }, this._trs(tasks));
-            table = kendoDom.element("table", { role: "grid" }, [colgroup, tbody]);
+            colgroup = domTree.element("colgroup", null, this._cols(domTree));
+            tbody = domTree.element("tbody", { role: "rowgroup" }, this._trs(tasks));
+            table = domTree.element("table", { role: "grid" }, [colgroup, tbody]);
 
-            kendoDom.render(wrapper[0], [table]);
+            domTree.render([table]);
         },
 
-        _ths: function () {
+        _ths: function() {
+            var domTree = this.headerTree
             var columns = this.columns;
             var column;
             var style;
@@ -143,13 +146,13 @@ var __meta__ = {
                     extend(style, { "data-role": "sorter" });
                 }
 
-                ths.push(kendoDom.element("th", style, [kendoDom.text(column.title)]));
+                ths.push(domTree.element("th", style, [domTree.text(column.title)]));
             }
 
             return ths;
         },
 
-        _cols: function() {
+        _cols: function(domTree) {
             var columns = this.columns;
             var column;
             var style;
@@ -164,7 +167,7 @@ var __meta__ = {
                     style = null;
                 }
 
-                cols.push(kendoDom.element("col", style, []));
+                cols.push(domTree.element("col", style, []));
             }
 
             return cols;
@@ -197,11 +200,12 @@ var __meta__ = {
                 children.push(this._td({ task: options.task, column: column }));
             }
 
-            return kendoDom.element("tr", options.style, children);
+            return this.contentTree.element("tr", options.style, children);
         },
 
         _td: function(options) {
             var children;
+            var domTree = this.contentTree;
             var task = options.task;
             var column = options.column;
             var value = task.get(column.field);
@@ -211,12 +215,12 @@ var __meta__ = {
 
             if (column.field == "title") {
                 style = this._level({ idx: task.get("parentId"), id: task.get("id"), summary: isSummary });
-                children = [kendoDom.element("span", { className: isSummary ? "k-icon k-i-collapse" : "k-icon k-i-none" }), kendoDom.text(formatedValue)];
+                children = [domTree.element("span", { className: isSummary ? "k-icon k-i-collapse" : "k-icon k-i-none" }), domTree.text(formatedValue)];
             } else {
-                children = [kendoDom.text(formatedValue)];
+                children = [domTree.text(formatedValue)];
             }
 
-            return kendoDom.element("td", style, children);
+            return domTree.element("td", style, children);
         },
 
         _level: function(options) {
