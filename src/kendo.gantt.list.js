@@ -59,6 +59,9 @@ var __meta__ = {
 
             this._columns();
             this._layout();
+            this.headerTree = new kendoDom.Tree(this.header[0]);
+            this.contentTree = new kendoDom.Tree(this.content[0]);
+            this._header();
         },
 
         destroy: function() {
@@ -97,13 +100,10 @@ var __meta__ = {
 
             this.header = element.find(".k-grid-header-wrap");
             this.content = element.find(".k-grid-content");
-
-            this._header();
         },
 
         _header: function() {
-            var wrapper = this.header;
-            var domTree = this.headerTree = new kendoDom.Tree(wrapper[0]);
+            var domTree = this.headerTree;
             var colgroup;
             var thead;
             var table;
@@ -116,8 +116,7 @@ var __meta__ = {
         },
 
         _render: function(tasks) {
-            var wrapper = this.content;
-            var domTree = this.contentTree = new kendoDom.Tree(wrapper[0]);
+            var domTree = this.contentTree;
             var colgroup;
             var tbody;
             var table;
