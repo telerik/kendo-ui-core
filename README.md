@@ -88,7 +88,7 @@ Linux/BSD users should use their appropriate package managers to install git and
 Clone a copy of the repository by running
 
 ```bash
-git clone git@github.com:telerik/kendo-ui-core.git
+git clone https://github.com/telerik/kendo-ui-core.git
 ```
 
 Enter the repository directory
