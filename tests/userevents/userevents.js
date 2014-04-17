@@ -393,19 +393,21 @@
         }
     });
 
-    test("raises select on mousedown", 1, function(){
-        userEvents.bind("select", function(e) {
-            ok(true);
+    if ("onselectstart" in document.body) {
+        test("raises select on selectstart", 1, function(){
+            userEvents.bind("select", function(e) {
+                ok(true);
+            });
+
+            element.trigger("selectstart");
         });
+    } else {
+        test("raises select on mousedown", 1, function(){
+            userEvents.bind("select", function(e) {
+                ok(true);
+            });
 
-        element.trigger("mousedown");
-    });
-
-    test("raises select on selectstart", 1, function(){
-        userEvents.bind("select", function(e) {
-            ok(true);
+            element.trigger("mousedown");
         });
-
-        element.trigger("selectstart");
-    });
+    }
 })();
