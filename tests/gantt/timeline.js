@@ -3,12 +3,15 @@
     var element;
     var timeline;
     var view;
+    var extend = $.extend;
     var Gantt = kendo.ui.Gantt;
     var Timeline = kendo.ui.GanttTimeline;
     var DayView = kendo.ui.GanttDayView;
     var WeekView = kendo.ui.GanttWeekView;
     var MonthView = kendo.ui.GanttMonthView;
 
+    var headerTree;
+    
     module("Initialization", {
         setup: function() {
             element = $("<div/>");
@@ -130,8 +133,16 @@
                         </div>\
                     </div>\
                     <div class='k-gantt-timeline-content'>\
+                        <div class='k-gantt-timeline-tasks'>\
+                        </div>\
+                        <div class='k-gantt-timeline-dependencies'>\
+                        </div>\
                     </div>\
                 </div>");
+
+            headerTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-header-wrap")[0]);
+            taskTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-tasks")[0]);
+            dependencyTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-dependencies")[0]);
         },
         teardown: function() {
             if (view) {
@@ -140,20 +151,30 @@
         }
     });
 
+    function dayView(options) {
+        var dayView = new DayView(element, extend(true, {
+            headerTree: headerTree,
+            taskTree: taskTree,
+            dependencyTree: dependencyTree
+        }, options));
+
+        return dayView;
+    }
+
     test("header field initialized", function() {
-        view = new DayView(element);
+        view = dayView();
 
         equal(view.header[0], element.find(".k-gantt-timeline-header-wrap")[0]);
     });
 
     test("content field initialized", function() {
-        view = new DayView(element);
+        view = dayView();
 
         equal(view.content[0], element.find(".k-gantt-timeline-content")[0]);
     });
 
     test("work days initialized", 4, function() {
-        view = new DayView(element, {
+        view = dayView({
             workWeekStart: 2,
             workWeekEnd: 4,
         });
@@ -165,7 +186,7 @@
     });
 
     test("renderLayout() sets view range", 2, function() {
-        view = new DayView(element);
+        view = dayView();
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/17")
@@ -178,7 +199,7 @@
     });
 
     test("renderLayout() view range has trimmed time", 2, function() {
-        view = new DayView(element);
+        view = dayView();
         var range = {
             start: new Date("2014/04/15 10:30:00"),
             end: new Date("2014/04/17 15:45:00")
@@ -191,7 +212,7 @@
     });
 
     test("renderLayout() view range end is set to next day start when time is not 0", function() {
-        view = new DayView(element);
+        view = dayView();
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/17 15:45:00")
@@ -203,7 +224,7 @@
     });
 
     test("renderLayout() view range end is set to day start when time is 0", function() {
-        view = new DayView(element);
+        view = dayView();
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/17")
@@ -216,12 +237,12 @@
 
 
     test("renderLayout() creates day and hour header rows", function() {
+        view = dayView();
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/23")
         };
 
-        view = new DayView(element);
         view.renderLayout(range);
 
         equal(view.header.find("tr").length, 2);
@@ -229,40 +250,40 @@
 
 
     test("renderLayout() creates hour headers with correct text", function() {
+        view = dayView({
+            timeHeaderTemplate: kendo.template("#=kendo.toString(start, 't')#")
+        });
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
-            timeHeaderTemplate: kendo.template("#=kendo.toString(start, 't')#")
-        });
         view.renderLayout(range);
 
         equal(view.header.find("tr:last th").eq(0).text(), "12:00 AM");
     });
     
     test("renderLayout() creates hour headers for each hour in range", function() {
+        view = dayView();
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element);
         view.renderLayout(range);
 
         equal(view.header.find("tr:last th").length, 48);
     });
 
     test("renderLayout() creates hour headers for each working hour in range when showWorkHours is true", function() {
+        view = dayView({
+            showWorkHours: true
+        });
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
-            showWorkHours: true
-        });
         view.renderLayout(range);
 
         equal(view.header.find("tr:last th").length, 18);
@@ -274,7 +295,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             showWorkHours: true,
             workDayStart: new Date(1980, 1, 1, 10, 0, 0),
             workDayEnd: new Date(1980, 1, 1, 14, 0, 0)
@@ -290,7 +311,7 @@
             end: new Date("2014/04/21")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             showWorkDays: true
         });
         view.renderLayout(range);
@@ -304,7 +325,7 @@
             end: new Date("2014/04/21")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             showWorkDays: true,
             workWeekStart: 5,
             workWeekEnd: 6
@@ -320,7 +341,7 @@
             end: new Date("2014/04/21")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             showWorkHours: true,
             showWorkDays: true
         });
@@ -335,7 +356,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             hourSpan: 5
         });
         view.renderLayout(range);
@@ -349,7 +370,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element);
+        view = dayView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:last th")[0].colSpan, 1);
@@ -361,7 +382,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             hourSpan: 5
         });
         view.renderLayout(range);
@@ -375,7 +396,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element);
+        view = dayView();
         view.renderLayout(range);
 
         ok(view.header.find("tr:last th").eq(0).hasClass("nonWorking"));
@@ -388,7 +409,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             dayHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')#")
         });
         view.renderLayout(range);
@@ -402,7 +423,7 @@
             end: new Date("2014/04/23")
         };
         
-        view = new DayView(element);
+        view = dayView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:first th").length, 8);
@@ -414,7 +435,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             showWorkDays: true
         });
         view.renderLayout(range);
@@ -428,7 +449,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             showWorkDays: true,
             workWeekStart: 2,
             workWeekEnd: 4
@@ -444,7 +465,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element);
+        view = dayView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:first th")[0].colSpan, 24);
@@ -456,7 +477,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             showWorkHours: true
         });
         view.renderLayout(range);
@@ -470,7 +491,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             hourSpan: 2
         });
         view.renderLayout(range);
@@ -484,7 +505,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             hourSpan: 7
         });
         view.renderLayout(range);
@@ -498,7 +519,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new DayView(element, {
+        view = dayView({
             showWorkHours: true,
             hourSpan: 4
         });
@@ -513,7 +534,7 @@
             end: new Date("2014/04/22")
         };
 
-        view = new DayView(element);
+        view = dayView();
         view.renderLayout(range);
 
         ok(view.header.find("tr:first th").eq(2).hasClass("nonWorking"));
@@ -529,8 +550,16 @@
                         </div>\
                     </div>\
                     <div class='k-gantt-timeline-content'>\
+                        <div class='k-gantt-timeline-tasks'>\
+                        </div>\
+                        <div class='k-gantt-timeline-dependencies'>\
+                        </div>\
                     </div>\
                 </div>");
+
+            headerTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-header-wrap")[0]);
+            taskTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-tasks")[0]);
+            dependencyTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-dependencies")[0]);
         },
         teardown: function() {
             if (view) {
@@ -539,20 +568,30 @@
         }
     });
 
+    function weekView(options) {
+        var dayView = new WeekView(element, extend(true, {
+            headerTree: headerTree,
+            taskTree: taskTree,
+            dependencyTree: dependencyTree
+        }, options));
+
+        return dayView;
+    }
+
     test("header field initialized", function() {
-        view = new WeekView(element);
+        view = weekView();
 
         equal(view.header[0], element.find(".k-gantt-timeline-header-wrap")[0]);
     });
 
     test("content field initialized", function() {
-        view = new WeekView(element);
+        view = weekView();
 
         equal(view.content[0], element.find(".k-gantt-timeline-content")[0]);
     });
 
     test("work days initialized", 4, function() {
-        view = new WeekView(element, {
+        view = weekView({
             workWeekStart: 2,
             workWeekEnd: 4,
         });
@@ -564,7 +603,7 @@
     });
 
     test("renderLayout() sets view range to containing weeks", 2, function() {
-        view = new WeekView(element);
+        view = weekView();
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/23")
@@ -583,7 +622,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element);
+        view = weekView();
         view.renderLayout(range);
 
         equal(view.header.find("tr").length, 2);
@@ -596,7 +635,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element, {
+        view = weekView({
             dayHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')#")
         });
         view.renderLayout(range);
@@ -610,7 +649,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element);
+        view = weekView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:last th").length, 14);
@@ -622,7 +661,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element, {
+        view = weekView({
             showWorkDays: true
         });
         view.renderLayout(range);
@@ -636,7 +675,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element, {
+        view = weekView({
             showWorkDays: true,
             workWeekStart: 2,
             workWeekEnd: 4
@@ -652,7 +691,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new WeekView(element);
+        view = weekView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:last th")[0].colSpan, 1);
@@ -664,7 +703,7 @@
             end: new Date("2014/04/22")
         };
 
-        view = new WeekView(element);
+        view = weekView();
         view.renderLayout(range);
 
         ok(view.header.find("tr:last th").eq(0).hasClass("nonWorking"));
@@ -677,7 +716,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element, {
+        view = weekView({
             weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#")
         });
         view.renderLayout(range);
@@ -691,7 +730,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element, {
+        view = weekView({
             weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#"),
             showWorkDays: true
         });
@@ -706,7 +745,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element);
+        view = weekView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:first th").length, 2);
@@ -718,7 +757,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element);
+        view = weekView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:first th")[0].colSpan, 7);
@@ -730,7 +769,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new WeekView(element, {
+        view = weekView({
             showWorkDays: true
         });
         view.renderLayout(range);
@@ -748,8 +787,16 @@
                         </div>\
                     </div>\
                     <div class='k-gantt-timeline-content'>\
+                        <div class='k-gantt-timeline-tasks'>\
+                        </div>\
+                        <div class='k-gantt-timeline-dependencies'>\
+                        </div>\
                     </div>\
                 </div>");
+
+            headerTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-header-wrap")[0]);
+            taskTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-tasks")[0]);
+            dependencyTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-dependencies")[0]);
         },
         teardown: function() {
             if (view) {
@@ -758,20 +805,30 @@
         }
     });
 
+    function monthView(options) {
+        var dayView = new MonthView(element, extend(true, {
+            headerTree: headerTree,
+            taskTree: taskTree,
+            dependencyTree: dependencyTree
+        }, options));
+
+        return dayView;
+    }
+
     test("header field initialized", function() {
-        view = new MonthView(element);
+        view = monthView();
 
         equal(view.header[0], element.find(".k-gantt-timeline-header-wrap")[0]);
     });
 
     test("content field initialized", function() {
-        view = new MonthView(element);
+        view = monthView();
 
         equal(view.content[0], element.find(".k-gantt-timeline-content")[0]);
     });
 
     test("work days initialized", 4, function() {
-        view = new MonthView(element, {
+        view = monthView({
             workWeekStart: 2,
             workWeekEnd: 4,
         });
@@ -783,7 +840,7 @@
     });
 
     test("renderLayout() sets view range to containing months", 2, function() {
-        view = new MonthView(element);
+        view = monthView();
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/17")
@@ -801,7 +858,7 @@
             end: new Date("2014/04/17")
         };
 
-        view = new MonthView(element);
+        view = monthView();
         view.renderLayout(range);
 
         equal(view.header.find("tr").length, 2);
@@ -814,7 +871,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new MonthView(element, {
+        view = monthView({
             weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#")
         });
         view.renderLayout(range);
@@ -828,7 +885,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new MonthView(element, {
+        view = monthView({
             weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#")
         });
         view.renderLayout(range);
@@ -842,7 +899,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = new MonthView(element, {
+        view = monthView({
             weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#")
         });
         view.renderLayout(range);
@@ -856,7 +913,7 @@
             end: new Date("2014/08/23")
         };
 
-        view = new MonthView(element);
+        view = monthView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:last th").length, 6);
@@ -868,7 +925,7 @@
             end: new Date("2014/08/23")
         };
 
-        view = new MonthView(element, {
+        view = monthView({
             workWeekStart: 0,
             workWeekEnd: 4,
             showWorkDays: true
@@ -884,7 +941,7 @@
             end: new Date("2014/08/23")
         };
 
-        view = new MonthView(element, {
+        view = monthView({
             workWeekStart: 1,
             workWeekEnd: 5,
             showWorkDays: true
@@ -900,7 +957,7 @@
             end: new Date("2014/08/23")
         };
 
-        view = new MonthView(element);
+        view = monthView();
         view.renderLayout(range);
 
         equal(view.header.find("tr:last th")[0].colSpan, 2);
@@ -917,7 +974,7 @@
             end: new Date("2014/08/23")
         };
 
-        view = new MonthView(element, {
+        view = monthView({
             showWorkDays: true
         });
         view.renderLayout(range);
@@ -936,7 +993,7 @@
             end: new Date("2014/08/23")
         };
 
-        view = new MonthView(element, {
+        view = monthView({
             monthHeaderTemplate: kendo.template("#=kendo.toString(start, 'MMM')#")
         });
         view.renderLayout(range);
@@ -950,7 +1007,7 @@
             end: new Date("2014/10/23")
         };
 
-        view = new MonthView(element);
+        view = monthView();
 
         view.renderLayout(range);
 
@@ -963,7 +1020,7 @@
             end: new Date("2014/10/23")
         };
 
-        view = new MonthView(element);
+        view = monthView();
 
         view.renderLayout(range);
 
@@ -978,7 +1035,7 @@
             end: new Date("2014/10/23")
         };
 
-        view = new MonthView(element, {
+        view = monthView({
             showWorkDays: true
         });
 
