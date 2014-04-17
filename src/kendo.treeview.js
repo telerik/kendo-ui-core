@@ -246,6 +246,8 @@ var __meta__ = {
             if (that.element[0].id) {
                 that._ariaId = kendo.format("{0}_tv_active", that.element[0].id);
             }
+
+            kendo.notify(that);
         },
 
         _attachEvents: function() {
