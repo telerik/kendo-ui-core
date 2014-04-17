@@ -1,7 +1,7 @@
 namespace :cdn do
     desc('Deploy assets to CloudFront')
 
-    task :deploy => 'bundles:cdn.commercial' do
+    task :deploy => [ 'bundles:cdn.commercial', 'bundles:core' ] do
         sh <<-SH
         if [ ! -d kendo-cdn ]
         then
@@ -11,6 +11,8 @@ namespace :cdn do
         fi
         git pull;
         mkdir -p #{VERSION};
+        rsync -av ../dist/bundles/core/js/ #{VERSION}/js/;
+        rsync -av ../dist/bundles/core/styles/ #{VERSION}/styles/;
         rsync -av ../dist/bundles/cdn.commercial/ #{VERSION}/;
         git add #{VERSION};
         git commit --message "Automatic CDN upload of #{VERSION}";
