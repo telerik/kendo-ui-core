@@ -23,8 +23,31 @@ var __meta__ = {
             ),
 
             toggleButtonTemplate: kendo.template(
-                '<a href="" role="togglebutton" class="k-toggle-button" unselectable="on" title="#= text #">' +
+                '<a href="" role="togglebutton" class="k-button k-toggle-button" unselectable="on" title="#= text #">' +
                 '<span class=""></span>#: text #</a>'
+            ),
+
+            buttonGroupTemplate: kendo.template(
+                '<div class="k-button-group">' +
+                    '# for(var i = 0; i < items.length; i++) { #' +
+                        '<a href="" role="button" class="k-button" unselectable="on" title="#= items[i].text #">' +
+                            '<span class=""></span>#: items[i].text #' +
+                        '</a>' +
+                    '# } #' +
+                '</div>'
+            ),
+
+            splitButtonTemplate: kendo.template(
+                '<div class="k-split-button">' +
+                    '<a href="" role="splitbutton" class="k-button k-split-button">' +
+                        '<span class="k-split-button-text">#= text #</span><span class="k-icon k-i-arrow-s"></span>' +
+                    '</a>' +
+                    '<ul class="k-split-button-dropdown">' +
+                        '# for(var i = 0; i < options.length; i++) { #' +
+                            '<li id="#=options[i].id#"><a>#=options[i].text#</a></li>' +
+                        '# } #' +
+                    '</ul>' +
+                '</div>'
             )
 
         };
@@ -77,6 +100,10 @@ var __meta__ = {
                             this._renderButtonGroup(command);
                             break;
 
+                        case 'splitButton':
+                            this._renderSplitButton(command);
+                            break;
+
                         case 'separator':
                             this._renderSeparator(command);
                             break;
@@ -96,7 +123,19 @@ var __meta__ = {
             },
 
             _renderButtonGroup: function(options) {
-                //todo
+                this.element.append(templates.buttonGroupTemplate(options));
+                //var html = "",
+                //    items = options.items;
+
+                //for (var i = 0; i < items.length; i++) {
+                //    html += templates.buttonTemplate(items[i]);
+                //}
+
+                //$(templates.buttonGroupWrapper).html(html).appendTo(this.element);
+            },
+
+            _renderSplitButton: function(options) {
+                this.element.append(templates.splitButtonTemplate(options));
             },
 
             _renderSeparator: function(options) {
