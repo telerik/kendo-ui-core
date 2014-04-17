@@ -224,7 +224,6 @@ var __meta__ = {
         },
 
         detach: function() {
-            console.log('detach', arguments);
         }
     });
 
