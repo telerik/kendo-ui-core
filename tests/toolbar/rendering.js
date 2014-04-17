@@ -69,4 +69,15 @@
         equal(container.find("div.k-split-button > .k-split-button-dropdown").children().length, 4, "SplitButton dropdown contains correct amount of items");
     });
 
+
+    test("renders separator from JSON", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "separator" }
+            ]
+        });
+
+        ok(container.children(".k-toolbar-separator").length, "Separator element is rendered");
+    });
+
 })();

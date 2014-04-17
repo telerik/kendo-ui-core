@@ -48,7 +48,9 @@ var __meta__ = {
                         '# } #' +
                     '</ul>' +
                 '</div>'
-            )
+            ),
+
+            separatorTemplate: '<span class="k-toolbar-separator"></span>'
 
         };
 
@@ -124,14 +126,6 @@ var __meta__ = {
 
             _renderButtonGroup: function(options) {
                 this.element.append(templates.buttonGroupTemplate(options));
-                //var html = "",
-                //    items = options.items;
-
-                //for (var i = 0; i < items.length; i++) {
-                //    html += templates.buttonTemplate(items[i]);
-                //}
-
-                //$(templates.buttonGroupWrapper).html(html).appendTo(this.element);
             },
 
             _renderSplitButton: function(options) {
@@ -139,7 +133,7 @@ var __meta__ = {
             },
 
             _renderSeparator: function(options) {
-                //todo
+                this.element.append(templates.separatorTemplate);
             }
 
         });
