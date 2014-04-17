@@ -90,7 +90,7 @@
             if (kendo.ui && kendo.ui.Draggable) {
                 that.draggable = dialog.kendoDraggable({
                     dragstart: function(e) {
-                        var initialPosition = dialog.position();
+                        var initialPosition = kendo.getOffset(dialog, "position");
 
                         start = {
                             left: e.pageX - initialPosition.left,

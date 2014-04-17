@@ -128,7 +128,7 @@
             "@primary-active-border-color":     constant(BORDERCOLOR, ".k-primary:active"),
             "@primary-active-gradient":         gradientConstant(".k-primary:active"),
             "@primary-active-background-color": constant(BGCOLOR, ".k-primary:active"),
-            "@primary-diabled-text-color":      constant(COLOR, ".k-primary.k-state-disabled"),
+            "@primary-disabled-text-color":      constant(COLOR, ".k-primary.k-state-disabled"),
             "@primary-disabled-border-color":   constant(BORDERCOLOR, ".k-primary.k-state-disabled"),
             "@primary-disabled-background-color":constant(BGCOLOR, ".k-primary.k-state-disabled"),
             "@primary-disabled-gradient":       gradientConstant(".k-primary.k-state-disabled"),
