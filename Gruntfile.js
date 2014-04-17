@@ -119,7 +119,7 @@ module.exports = function(grunt) {
 
                     singleRun: true,
 
-                    browsers: [ 'bs_chrome' ],
+                    browsers: [ 'Chrome' ],
 
                     files: [].concat(
                         TESTS.compiledStyleSheets,
