@@ -533,8 +533,8 @@ module CodeGen
                     write_class(component)
                     write_converter(component)
                     write_enums(component)
-                    write_properties(component)
                     write_events(component)
+                    write_properties(component)
                     write_viewstate(component)
                 end
 
@@ -580,7 +580,19 @@ module CodeGen
                 end
 
                 def write_events(component)
+                    register_events_as_property(component)
+                end
 
+                def register_events_as_property(component)
+                    if component.events.count > 0
+                        component.add_option({name: 'clientEvents', type: 'Object', description: 'Defines the client events handlers.' })
+
+                        component.events.each do |event|
+                            component.add_option({name: "clientEvents.OnClient#{event.name.pascalize}", type: 'String', description: event.description, remove_existing: true })
+                        end
+
+                        component.options.find{|o| o.name == 'clientEvents'}.type = "kendo.#{component.name.pascalize}ClientEvents"
+                    end
                 end
 
                 def write_options(options)
