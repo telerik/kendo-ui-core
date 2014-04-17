@@ -36,6 +36,9 @@ class TelerikReleaseBot
     def wait_for_title(title)
         Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.title.downcase.start_with? title }
     end
+    def wait_for_element(css)
+        Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.find_element(:css, css) }
+    end
 
     def fill_in(title, contents)
         element = driver.find_element(:xpath, "//label[text()='#{title}']/..//input")
@@ -96,18 +99,7 @@ def fill_version_fields(bot)
        bot.find("[value='Manage files']").click
 
 end
-def prepare_files(bot, options)
-  #bot.driver.execute_script "window.location = $('a:contains(\"commercial.zip\")').attr(\"href\")"
-  p ">>preparing files"
-
-  release_config = options[:params]
-  file_metadata = release_config[:file_metadata]
-
-  if file_metadata[:msi]
-    
-    file_fields = file_metadata[:msi]
-    bot.click_and_wait "Add new file", "administration"
-
+def set_fields_data(bot, file_fields)
     bot.driver.execute_script "$('[id$=\"_txtFieldText\"]').val('#{file_fields[:label]}')" 
     bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')"
 
@@ -128,36 +120,43 @@ def prepare_files(bot, options)
 
     bot.driver.execute_script "$find($telerik.$('[id$=\"_efDownloadMessage_reFieldText\"]').attr('id')).set_html('#{file_fields[:download_message]}')" 
     bot.driver.execute_script "$find($telerik.$('[id$=\"_efWhatsIncluded_reFieldText\"]').attr('id')).set_html('#{file_fields[:whats_included_message]}')" 
-
-    upload_file_and_go_back(bot, options[:archive_path], file_fields[:download_name], true)
-
-    bot.find("[value='Save']").click
-
-    p "Saving..."
-
-    #Thread.current.send :sleep, 10
-
-    bot.find("[value='GO TO FILE LIST']").click
-
-  end
-=begin  
-  #zip files
-  element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.zip')]")
-  element.click
-
-  options[:file_name] = options[:title]  + ".zip"
-  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
-
-  upload_file_and_go_back(bot, options)
-
-  element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.zip')]")
-  element.click
-
-  options[:file_name] = options[:title].sub "commercial", "trial" + ".zip"
-  bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
-
-  upload_file_and_go_back(bot, options)
   
+end
+def prepare_files(bot, options)
+  #bot.driver.execute_script "window.location = $('a:contains(\"commercial.zip\")').attr(\"href\")"
+  p ">>preparing files"
+
+  release_config = options[:params]
+  file_metadata = release_config[:file_metadata]
+ 
+  #zip files
+  if file_metadata[:zip]
+    file_fields = file_metadata[:zip]
+    bot.click_and_wait "Add new file", "administration"
+
+    set_fields_data(bot, file_fields)
+
+    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
+  end
+  #msi files 
+  if file_metadata[:msi]
+    
+    file_fields = file_metadata[:msi]
+    bot.click_and_wait "Add new file", "administration"
+
+    set_fields_data(bot, file_fields)
+
+    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], true)
+  end
+  if file_metadata[:exe]
+    file_fields = file_metadata[:exe]
+    bot.click_and_wait "Add new file", "administration"
+
+    set_fields_data(bot, file_fields)
+
+    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
+  end
+=begin
   #hotfix files
   if options[:vs_extension]
       element = bot.driver.find_element(:xpath, "//a[contains(.,'hotfix') and contains(.,'commercial')]")
@@ -166,15 +165,8 @@ def prepare_files(bot, options)
       file_name = options[:title]
       bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.hotfix.zip')" 
 
-      upload_file_and_go_back(bot, options)
+      upload_file_and_save(bot, options)
 
-      element = bot.driver.find_element(:xpath, "//a[contains(.,'hotfix') and contains (.,'trial')]")
-      element.click
-
-      file_name = options[:title].sub "commercial", "trial"
-      bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.hotfix.zip')" 
-
-      upload_file_and_go_back(bot, options)
   end
   #nuget files
   if options[:nuget]
@@ -196,17 +188,9 @@ def prepare_files(bot, options)
 
       upload_file_and_go_back(bot, options)
   end
-
+=end
   #installer files
-  if options[:common_installer_complete]
-    element = bot.driver.find_element(:xpath, "//a[contains(.,'ControlPanel')]")
-    element.click
-
-    options[:file_name] = "TelerikControlPanelSetup.KUI.Professional#{VERSION}.exe"
-    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{options[:file_name]}')" 
-
-    upload_file_and_go_back(bot, options)
-  end
+=begin
   if options[:common_installer_mvc]
     element = bot.driver.find_element(:xpath, "//a[contains(.,'ControlPanel')]")
     element.click
@@ -225,19 +209,15 @@ def prepare_files(bot, options)
   end
 =end
 end
-def upload_file_and_go_back(bot, dirpath, filename, isMsi)
-  Thread.current.send :sleep, 6
+def upload_file_and_save(bot, dirpath, filename, isMsi)
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
   p "#{full_path}"
-  
-  bot.driver.execute_script "$telerik.$('[id$=\"rdFileUploadfile0\"]').css({position:'static', 'z-index': 0, opacity: 1})[0].removeAttribute('tabindex')"
 
-  element = bot.driver.find_element(:xpath, "//input[contains(@id,'rdFileUploadfile0')]")
-  element.send_keys(full_path)
+  element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdFileUpload')]")
+  upload_id = element.attribute("id")
+  p upload_id
 
-  bot.driver.execute_script "$telerik.$('[id$=\"rdFileUploadfile0\"]').trigger('change')"
-
-  p "msi uploaded"
+  upload_file(bot, upload_id, full_path)
 
   if isMsi
     p "Setting xml filename..."
@@ -246,11 +226,39 @@ def upload_file_and_go_back(bot, dirpath, filename, isMsi)
     full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
 
     p "#{full_path}"
-    element = bot.driver.find_element(:xpath, "//input[contains(@id,'rdXMLConfigFileUploadfile0')]")
-    element.send_keys(full_path)
-    bot.driver.execute_script "$telerik.$('[id$=\"rdXMLConfigFileUploadfile0\"]').trigger('change')"
-    p "xml uploaded"   
+    element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdXMLConfigFileUpload')]")
+    upload_id = element.attribute("id")
+    p upload_id
+    
+    upload_file(bot, upload_id, full_path) 
   end
+end
+def upload_file(bot, upload_id, full_path)
+    bot.driver.execute_script("
+                (function (module, $) {
+                    var upload = $find('#{upload_id}');
+                    var plugins = ['Flash', 'Silverlight', 'FileApi'];
+
+                    $('##{upload_id}ListContainer').remove();
+                    $(upload.get_element()).off();
+                    upload._uploadModule.dispose();
+
+                    for (var i = 0; i < plugins.length; i++) {
+                        module[plugins[i]].isAvailable = function () { return false; };
+                    }
+                    upload.initialize();
+                })(Telerik.Web.UI.RadAsyncUpload.Modules, $telerik.$);")
+
+  bot.driver.find_element(:css, "##{upload_id} input[type=file]").send_keys(full_path.gsub('/', '\\'))
+  bot.wait_for_element("##{upload_id} .ruRemove")
+
+  bot.find("[value='Save']").click
+
+  p "Saving..."
+
+  #Thread.current.send :sleep, 10
+
+  bot.find("[value='GO TO FILE LIST']").click
 end
 def release_build_file_copy(release_build, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
     release_build_config = release_build[:file_metadata]
