@@ -60,52 +60,30 @@
                 return false;
             }
 
-            function renderDom(large) {
-                var data = large ? big : small;
+            function renderDom() {
                 var rows = [];
                 var level;
                 var headers;
                 var column;
 
-                for (var levelIndex = 0, levelCount = data.length; levelIndex < levelCount; levelIndex++) {
-                    level = data[levelIndex];
-                    headers = [];
-
-                    for (var columnIndex = 0, columnCount = level.length; columnIndex < columnCount; columnIndex++) {
-                        column = level[columnIndex];
-
-                        headers.push(tree.element("th", { colspan: column.span }, [tree.text(column.text)]));
-                    }
-
-                    rows.push(tree.element("tr", null, headers));
+                for (var i = 0; i < 7600; i++) {
+                    rows.push(tree.element("div", { style: { position:"absolute", background: "black", top: i + "px", height: "2px", width: "100px" } }));
                 }
 
-
-                tree.render([tree.element("table", null, rows)]);
-
+                tree.render([tree.element("div", { style: { position: "relative" } }, rows)]);
             }
 
-            function renderHtml(large) {
-                var data = large ? big : small;
+            function renderHtml() {
                 var rows = [];
                 var level;
                 var headers;
                 var column;
 
-                for (var levelIndex = 0, levelCount = data.length; levelIndex < levelCount; levelIndex++) {
-                    level = data[levelIndex];
-                    headers = [];
-
-                    for (var columnIndex = 0, columnCount = level.length; columnIndex < columnCount; columnIndex++) {
-                        column = level[columnIndex];
-
-                        headers.push("<th colspan='" + column.span + "'>" + column.text + "</th>");
-                    }
-
-                    rows.push(headers.join(""));
+                for (var i = 0; i < 7600; i++) {
+                    rows.push("<div style='position:absolute;background:black;top:" +  i + "px;height:2px;width:100px'></div>");
                 }
 
-                rootHtml.innerHTML = "<table><tr>" + rows.join("</tr><tr>") + "</tr></table>";
+                rootHtml.innerHTML = "<div style='position:relative'>" + rows.join("") + "</div>";
             }
 
             renderDom(largeDom);

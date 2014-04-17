@@ -26,6 +26,8 @@ var __meta__ = {
 
         this.attr = attr || {};
 
+        this.cssText = null;
+
         this.children = children || [];
     }
 
@@ -87,14 +89,16 @@ var __meta__ = {
 
                         for (var key in style) {
                             cssText += key;
-                            cssText += ": ";
+                            cssText += ":";
                             cssText += style[key];
                             cssText += ";";
                         }
 
-                        if (node.style.cssText !== cssText) {
+                        if (!cached || cached.cssText !== cssText) {
                             node.style.cssText = cssText;
                         }
+
+                        this.cssText = cssText;
                     }
                 } else {
                     node.setAttribute(attrName, attr[attrName]);

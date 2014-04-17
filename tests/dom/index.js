@@ -189,7 +189,7 @@
     });
 
     test("render does not set style if same", 0, function() {
-        var div = element("div", { style: { width: "100px" } });
+        var div = element("div", { style: { width: "100px", height: "100px" } });
 
         tree.render([div]);
 
@@ -204,7 +204,7 @@
             }
         });
 
-        tree.render([element("div", { style: { width: "100px" } })]);
+        tree.render([element("div", { style: { width: "100px", height: "100px" } })]);
     });
 
     test("render removes style attribute", function() {
