@@ -90,12 +90,11 @@
             if (kendo.ui && kendo.ui.Draggable) {
                 that.draggable = dialog.kendoDraggable({
                     dragstart: function(e) {
-                        var initialPosition = dialog.position(),
-                            scrollContainer = jQuery(window);
+                        var initialPosition = dialog.position();
 
                         start = {
-                            left: e.pageX - initialPosition.left + scrollContainer.scrollLeft(),
-                            top: e.pageY - initialPosition.top + scrollContainer.scrollTop()
+                            left: e.pageX - initialPosition.left,
+                            top: e.pageY - initialPosition.top
                         };
 
                         dialog.append("<div id='ktb-overlay'></div>");
