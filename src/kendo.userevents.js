@@ -16,6 +16,7 @@ var __meta__ = {
         document = window.document,
         Class = kendo.Class,
         Observable = kendo.Observable,
+        SELECT_START = "onselectstart" in document.documentElement,
         now = $.now,
         extend = $.extend,
         OS = support.mobileOS,
@@ -276,20 +277,6 @@ var __meta__ = {
         }
     });
 
-    function preventTrigger(e) {
-        e.preventDefault();
-
-        var target = $(e.data.root),   // Determine the correct parent to receive the event and bubble.
-            parent = target.closest(".k-widget").parent();
-
-        if (!parent[0]) {
-            parent = target.parent();
-        }
-
-        var fakeEventData = $.extend(true, {}, e, { target: target[0] });
-        parent.trigger($.Event(e.type, fakeEventData));
-    }
-
     function withEachUpEvent(callback) {
         var downEvents = kendo.eventMap.up.split(" "),
             idx = 0,
@@ -340,7 +327,11 @@ var __meta__ = {
                 element.on(kendo.applyEventMap("dragstart", ns), kendo.preventDefault);
             }
 
-            element.on(kendo.applyEventMap("mousedown selectstart", ns), filter, { root: element }, "_select");
+            if (SELECT_START) {
+                element.on(kendo.applyEventMap("selectstart", ns), filter, { root: element }, "_select");
+            } else {
+                element.on(kendo.applyEventMap("mousedown", ns), filter, { root: element }, "_select");
+            }
 
             if (that.captureUpIfMoved && support.eventCapture) {
                 var surfaceElement = that.surface[0],
@@ -431,6 +422,10 @@ var __meta__ = {
                 extend(data, {touches: touches}, touchDelta(touches[0], touches[1]));
             }
 
+            if (!SELECT_START && (eventName == CANCEL || eventName == END)) {
+                $(document.body).css("userSelect", "");
+            }
+
             return this.trigger(eventName, data);
         },
 
@@ -470,7 +465,12 @@ var __meta__ = {
 
         _select: function(e) {
            if (!this.allowSelection || this.trigger(SELECT, { event: e })) {
-                preventTrigger(e);
+                if (SELECT_START) {
+                    console.log("prevent default")
+                    e.preventDefault();
+                } else {
+                    $(document.body).css("userSelect", "none");
+                }
            }
         },
 
