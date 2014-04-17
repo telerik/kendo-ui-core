@@ -121,15 +121,12 @@
             compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
         });
 
-        test("currentTransform returns element matrix if IDENTITY matrix is passed", function() {
-            var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
-                group = new Group({transform: new Matrix(3,3,3,3,3,3)});
-
-            group.append(element);
-            mainGroup.append(group);
-            matrix = new Matrix(1,1,1,1,1,1);
+        test("currentTransform does not search for parent matrix if null is passed", 0, function() {
             element.transform(matrix);
-            compareMatrices(element.currentTransform(Matrix.IDENTITY), matrix);
+            element.parentTransform = function() {
+                ok(false);
+            }
+            element.currentTransform(null);
         });
 
     })();
@@ -301,8 +298,8 @@
         group.bBox();
     });
 
-    test("currentTransform returns IDENTITY matrix if group has no matrix and there is no parent matrix", function() {
-        ok(group.currentTransform() === Matrix.IDENTITY);
+    test("currentTransform returns null group has no matrix and there is no parent matrix", function() {
+        ok(group.currentTransform() === null);
     });
 
     // ------------------------------------------------------------

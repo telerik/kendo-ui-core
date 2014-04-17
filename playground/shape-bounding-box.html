@@ -65,9 +65,10 @@
                 geometry = dataviz.geometry,
                 transform = geometry.transform,
                 Point = geometry.Point,
-                Circle = geometry.Circle,
+                Circle = geometry.Circle,                
                 drawing = dataviz.drawing,
                 Path = drawing.Path,
+                Group = drawing.Group,
                 MultiPath = drawing.MultiPath,
                 Segment = drawing.Segment,
                 Surface = drawing.Surface,
@@ -123,6 +124,18 @@
                 group.append(arc, rectPath(arc.bBox(), strokeOptions));
                 surface.clear();
                 surface.draw(group);
+            }
+            
+            parentTransformationsTest();
+            function parentTransformationsTest() {
+                var group = new Group({transform: transform().scale(2,1).matrix()}),
+                    mainGroup = new Group({transform: transform().scale(1,2).matrix()}),
+                    path = new Path({transform: transform().translate(10,10).matrix()});
+                //path.moveTo(0,0);
+                mainGroup.append(group);
+                group.append(path);
+                debugger;
+                group.bBox();
             }
             
             //multipathTransformTest();

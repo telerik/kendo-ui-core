@@ -65,10 +65,6 @@
             var elementTransform = this.options.get("transform"),
                 combinedTransform;
 
-            if (matrix === Matrix.IDENTITY) {
-                return elementTransform;
-            }
-
             if (!defined(matrix)) {
                 matrix = this.parentTransform();
             }
@@ -142,7 +138,7 @@
         },
 
         currentTransform: function(matrix) {
-            return Element.fn.currentTransform.call(this, matrix) || Matrix.IDENTITY;
+            return Element.fn.currentTransform.call(this, matrix) || null;
         }
     });
 

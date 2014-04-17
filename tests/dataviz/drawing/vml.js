@@ -61,11 +61,11 @@
         deepEqual(surface._root.childNodes[0].srcElement, group);
     });
 
-    test("draw passes identity matrix to root load method", function() {
+    test("draw passes null to root load method", function() {
         var group = new Group();
 
         surface._root.load = function(elements, matrix) {
-            ok(matrix === Matrix.IDENTITY);
+            ok(matrix === null);
         };
 
         surface.draw(group);

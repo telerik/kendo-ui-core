@@ -53,7 +53,7 @@
 
         draw: function(element) {
             var surface = this;
-            surface._root.load([element], Matrix.IDENTITY);
+            surface._root.load([element], null);
 
             if (kendo.support.browser.version < 8) {
                 setTimeout(function() {
