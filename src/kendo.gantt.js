@@ -601,6 +601,10 @@ var __meta__ = {
         },
 
         refresh: function(e) {
+            if (this._preventRender) {
+                return;
+            }
+
             var dataSource = this.dataSource;
             var taskTree = dataSource.taskTree();
 
@@ -610,6 +614,7 @@ var __meta__ = {
 
             this.list._render(taskTree);
             this.timeline._render(taskTree, dataSource._range());
+            this.timeline._renderDependencies(this.dependencies.view());
 
             this.trigger("dataBound");
         },

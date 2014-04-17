@@ -19,6 +19,8 @@ var __meta__ = {
     var kendoDomElement = kendo.dom.element;
     var kendoDomText = kendo.dom.text;
     var kendoDomRender = kendo.dom.render;
+    var minDependencyWidth = 14;
+    var minDependencyHeight = 12;
 
     var defaultViews = {
         day: {
@@ -74,6 +76,8 @@ var __meta__ = {
 
         destroy: function() {
             Widget.fn.destroy.call(this);
+
+            this.content.find(".dependencies").remove();
 
             this.headerRow = null;
             this.header = null;
@@ -135,25 +139,41 @@ var __meta__ = {
             var wrap;
             var cell;
             var row;
+            var position;
+            var task;
+            var coordinates = this._taskCoordinates = {};
 
             for (var i = 0, l = tasks.length; i < l; i++) {
-                wrap = kendoDomElement("div", { className: "taskWrap" }, [this._renderTask(tasks[i])]);
+                task = tasks[i];
+
+                position = this._taskPosition(task);
+
+                wrap = kendoDomElement("div", { className: "taskWrap" }, [this._renderTask(tasks[i], position)]);
                 cell = kendoDomElement("td", null, [wrap]);
                 row = kendoDomElement("tr", null, [cell]);
 
                 rows.push(row);
+                
+                coordinates[task.id] = {
+                    start: position.left,
+                    end: position.left + position.width,
+                    top: i * 24 + 12
+                };
             }
 
             return rows;
         },
 
-        _renderTask: function(task) {
-            var position = this._taskPosition(task);
-            var task;
+        _renderTask: function(task, position) {
             var title;
+            var inner;
+            var middle;
+            var task;
 
             title = kendoDomText(task.title);
-            task = kendoDomElement("div", { className: "k-gantt-task", style: { left: position.left + "px", width: position.width + "px" } }, [title]);
+            inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
+            middle = kendoDomElement("div", { className: "k-gantt-summary-progress" }, [inner]);
+            task = kendoDomElement("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
 
             return task;
         },
@@ -211,6 +231,358 @@ var __meta__ = {
 
             return startIdx;
         },
+
+        //#region Dependencies
+
+        _renderDependencies: function(dependencies) {
+            var elements = [];
+
+            for (var j = 0; j < 100; j++) {
+                for (var i = 0, l = dependencies.length; i < l; i++) {
+                    elements.push(this._renderDependency(dependencies[i]));
+                }
+            }
+
+            this.content.append("<div class='dependencies'>" + elements.join("") + "</div>");
+        },
+
+        _renderDependenciesV: function(dependencies) {
+            var elements = [];
+
+            for (var j = 0; j < 100; j++) {
+                for (var i = 0, l = dependencies.length; i < l; i++) {
+                    elements.push.apply(elements, this._renderDependencyV(dependencies[i]));
+
+                }
+            }
+
+            kendoDomRender(this.content[0], [kendoDomElement("div", null, elements)]);
+        },
+
+        _renderDependency: function(dependency) {
+            var predecessor = this._taskCoordinates[dependency.predecessorId];
+            var successor = this._taskCoordinates[dependency.successorId];
+            var elements;
+
+            if (!predecessor || !successor) {
+                return "";
+            }
+
+            switch (dependency.type) {
+                case 0:
+                    elements = this._renderFS(predecessor, successor);
+                    break;
+                case 1:
+                    elements = this._renderSS(predecessor, successor);
+                    break;
+                case 2:
+                    elements = this._renderSF(predecessor, successor);
+                    break;
+                case 3:
+                    elements = this._renderFF(predecessor, successor);
+                    break;
+            }
+
+            return elements;
+        },
+
+        _renderDependencyV: function(dependency) {
+            var predecessor = this._taskCoordinates[dependency.predecessorId];
+            var successor = this._taskCoordinates[dependency.successorId];
+
+            if (!predecessor || !successor) {
+                return [];
+            }
+
+            var elements = this._dependencyFFV(predecessor, successor, false);
+
+            return elements;
+        },
+
+        _renderFF: function(from, to) {
+            return this._dependencyFF(from, to, false);
+        },
+
+        _renderSS: function(from, to) {
+            return this._dependencyFF(to, from, true);
+        },
+
+        _renderFS: function(from, to) {
+            return this._dependencyFS(from, to, false);
+        },
+
+        _renderSF: function(from, to) {
+            return this._dependencyFS(to, from, true);
+        },
+
+        _dependencyFF: function(from, to, reverse) {
+            var lines = [];
+            var left = 0;
+            var top = 0;
+            var width = 0;
+            var height = 0;
+            var that = this;
+            var dir = reverse ? "start" : "end";
+            var delta = to[dir] - from[dir];
+            var round = Math.round;
+
+            var addHorizontal = function() {
+                lines.push(that._line({ left: round(left), top: round(top), width: round(width) }));
+            }
+            var addVertical = function() {
+                lines.push(that._line({ left: round(left), top: round(top), height: round(height) }));
+            }
+
+            left = from[dir];
+            top = from.top;
+            width = minDependencyWidth;
+
+            if (delta > 0 != reverse) {
+                width = Math.abs(delta) + minDependencyWidth;
+            }
+
+            if (reverse) {
+                left = left - width;
+                addHorizontal();
+            } else {
+                addHorizontal();
+                left = left + width;
+            }
+
+            if (to.top < top) {
+                height = top - to.top;
+                top = to.top;
+                addVertical();
+            } else {
+                height = to.top - top;
+                addVertical();
+                top = top + height;
+            }
+
+            width = Math.abs(left - to[dir]);
+
+            if (!reverse) {
+                left = left - width;
+            }
+
+            addHorizontal();
+
+            return lines.join("");
+        },
+
+        _dependencyFS: function(from, to, reverse) {
+            var lines = [];
+            var left = 0;
+            var top = 0;
+            var width = 0;
+            var height = 0;
+            var that = this;
+            var minDistance = 2 * minDependencyWidth;
+            var delta = to.start - from.end;
+            var round = Math.round;
+
+            var addHorizontal = function() {
+                lines.push(that._line({ left: round(left), top: round(top), width: round(width) }));
+            }
+            var addVertical = function() {
+                lines.push(that._line({ left: round(left), top: round(top), height: round(height) }));
+            }
+
+            left = from.end;
+            top = from.top;
+            width = minDependencyWidth;
+
+            if (reverse && delta > minDistance) {
+                width = delta - minDependencyWidth;
+            }
+
+            addHorizontal();
+            left = left + width;
+
+            if (delta <= minDistance) {
+                height = reverse ? Math.abs(to.top - from.top) - minDependencyHeight : minDependencyHeight;
+
+                if (to.top < from.top) {
+                    top = top - height;
+                    addVertical();
+                } else {
+                    addVertical();
+                    top = top + height;
+                }
+
+                width = from.end - to.start + minDistance;
+                left -= width;
+
+                addHorizontal();
+            }
+
+
+            if (to.top < from.top) {
+                height = top - to.top;
+                top = to.top;
+                addVertical();
+            } else {
+                height = to.top - top;
+                addVertical();
+                top = top + height;
+            }
+
+            width = to.start - left;
+
+            addHorizontal();
+
+            return lines.join("");
+        },
+
+        _dependencyFFV: function(from, to, reverse) {
+            var lines = [];
+            var left = 0;
+            var top = 0;
+            var width = 0;
+            var height = 0;
+            var that = this;
+            var dir = reverse ? "start" : "end";
+            var delta;
+            var round = Math.round;
+
+            var addHorizontal = function() {
+                lines.push(that._lineV({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
+            }
+            var addVertical = function() {
+                lines.push(that._lineV({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
+            }
+
+            left = from[dir];
+            top = from.top;
+            width = minDependencyWidth;
+
+            delta = to[dir] - from[dir];
+
+            if ((delta) > 0 != reverse) {
+                width = Math.abs(delta) + minDependencyWidth;
+            }
+
+            if (reverse) {
+                left = left - width;
+                addHorizontal();
+            } else {
+                addHorizontal();
+                left = left + width;
+            }
+
+            if (to.top < top) {
+                height = top - to.top;
+                top = to.top;
+                addVertical();
+            } else {
+                height = to.top - top;
+                addVertical();
+                top = top + height;
+            }
+
+            width = Math.abs(left - to[dir]);
+
+            if (!reverse) {
+                left = left - width;
+            }
+
+            addHorizontal();
+
+            return lines;
+        },
+
+        _dependencyFSV: function(from, to, reverse) {
+            var lines = [];
+            var left = 0;
+            var top = 0;
+            var width = 0;
+            var height = 0;
+            var that = this;
+            var minDistance = 2 * minDependencyWidth;
+            var delta = to.start - from.end;
+            var round = Math.round;
+
+            var addHorizontal = function() {
+                lines.push(that._lineV({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
+            }
+            var addVertical = function() {
+                lines.push(that._lineV({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
+            }
+
+            left = from.end;
+            top = from.top;
+            width = minDependencyWidth;
+
+            if (reverse && delta > minDistance) {
+                width = delta - minDependencyWidth;
+            }
+
+            addHorizontal();
+            left = left + width;
+
+            if ((delta) <= minDistance) {
+                height = reverse ? Math.abs(to.top - from.top) - minDependencyHeight : minDependencyHeight;
+
+                if (to.top < from.top) {
+                    top = top - height;
+                    addVertical();
+                } else {
+                    addVertical();
+                    top = top + height;
+                }
+
+                width = from.end - to.start + minDistance;
+                left -= width;
+
+                addHorizontal();
+            }
+
+
+            if (to.top < from.top) {
+                height = top - to.top;
+                top = to.top;
+                addVertical();
+            } else {
+                height = to.top - top;
+                addVertical();
+                top = top + height;
+            }
+
+            width = to.start - left;
+
+            addHorizontal();
+
+            return lines;
+        },
+
+        _lineV: function(styles) {
+            return kendoDomElement("div", {className: "k-gantt-line", style: styles });
+        },
+
+        _line: function(styles) {
+            var html = [];
+
+            html.push("<div class='k-gantt-line' style='top: ");
+            html.push(styles.top);
+            html.push("px; left: ");
+            html.push(styles.left);
+
+            if (styles.width) {
+                html.push("px; width: ");
+                html.push(styles.width);
+            }
+            
+            if (styles.height) {
+                html.push("px; height: ");
+                html.push(styles.height);
+            }
+
+            html.push("px;'></div>");
+
+            return html.join("");
+        },
+
+        //#endregion
 
         _colgroup: function() {
             var count = this._slots[this._slots.length - 1].length;
@@ -628,12 +1000,23 @@ var __meta__ = {
         },
 
         _render: function(tasks, range) {
+
             var view = this.view(this._selectedViewName);
 
             view.renderLayout(range);
 
             view.render(tasks);
+        },
+
+        _renderDependencies: function(dependencies) {
+
+            var start = performance.now();
+
+            this.view()._renderDependencies(dependencies);
+
+            console.log("Rendering dependencies: " + (performance.now() - start));
         }
+
     });
 
 })(window.kendo.jQuery);
