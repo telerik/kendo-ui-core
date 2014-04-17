@@ -492,7 +492,6 @@ var __meta__ = {
             }
 
             if (startIndex > 0) {
-                console.log(startIndex);
                 index = 0;
                 for (; index <= startIndex; index++) {
                     text = that._text(data[index]);
