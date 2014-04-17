@@ -466,7 +466,6 @@ var __meta__ = {
         _select: function(e) {
            if (!this.allowSelection || this.trigger(SELECT, { event: e })) {
                 if (SELECT_START) {
-                    console.log("prevent default")
                     e.preventDefault();
                 } else {
                     $(document.body).css("userSelect", "none");
