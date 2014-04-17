@@ -530,6 +530,17 @@
             return this;
         },
 
+        multiply: function(transformation) {
+            var matrix = transformation;
+            if (matrix instanceof Transformation) {
+                matrix = transformation.matrix();
+            }
+
+            this._matrix = this._matrix.times(matrix);
+
+            return this;
+        },
+
         matrix: function() {
             return this._matrix;
         }

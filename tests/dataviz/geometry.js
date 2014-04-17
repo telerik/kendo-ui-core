@@ -835,6 +835,18 @@
             deepEqual(transformation.matrix(), Matrix.rotate(30, 100, 100));
         });
 
+        test("multiply multiplies matrix by the passed transformation matrix", function() {
+            transformation = new Transformation(new Matrix(2,2,2,2,2,2));
+            transformation.multiply(new Transformation(new Matrix(3,3,3,3,3,3)));
+            deepEqual(transformation.matrix(), new Matrix(12,12,12,12,14,14));
+        });
+
+        test("multiply multiplies matrix by the passed matrix", function() {
+            transformation = new Transformation(new Matrix(2,2,2,2,2,2));
+            transformation.multiply(new Matrix(3,3,3,3,3,3));
+            deepEqual(transformation.matrix(), new Matrix(12,12,12,12,14,14));
+        });
+
     })();
 
 })();
