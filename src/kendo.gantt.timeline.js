@@ -16,9 +16,6 @@ var __meta__ = {
     var Widget = kendo.ui.Widget;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
-    var kendoDomElement = kendo.dom.element;
-    var kendoDomText = kendo.dom.text;
-    var kendoDomRender = kendo.dom.render;
     var minDependencyWidth = 14;
     var minDependencyHeight = 12;
 
@@ -65,19 +62,23 @@ var __meta__ = {
 
             this.title = this.options.title || this.options.name;
 
-            this.content = this.element.find(".k-gantt-timeline-content")
-
             this.header = this.element.find(".k-gantt-timeline-header-wrap");
 
+            this.content = this.element.find(".k-gantt-timeline-content");
+
             this._workDays = getWorkDays(this.options);
+
+            this._headerTree = options.headerTree;
+
+            this._taskTree = options.taskTree;
+
+            this._dependencyTree = options.dependencyTree;
 
             this._templates();
         },
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-
-            this.content.find(".dependencies").remove();
 
             this.headerRow = null;
             this.header = null;
@@ -118,10 +119,11 @@ var __meta__ = {
         createLayout: function(rows) {
             var headers = this._headers(rows);
             var colgroup = this._colgroup();
-            var header = kendoDomElement("thead", null, headers);
-            var table = kendoDomElement("table", null, [colgroup, header]);
+            var tree = this._headerTree;
+            var header = tree.element("thead", null, headers);
+            var table = tree.element("table", null, [colgroup, header]);
 
-            kendoDomRender(this.header[0], [table]);
+            tree.render([table]);
 
             this.headerRow = this.header.find("table:first tr").last();
         },
@@ -129,9 +131,10 @@ var __meta__ = {
         render: function(tasks) {
             var rows = this._tasks(tasks);
             var table;
+            var tree = this._taskTree;
 
-            table = kendoDomElement("table", null, rows);
-            kendoDomRender(this.content[0], [table]);
+            table = tree.element("table", null, rows);
+            tree.render([table]);
         },
         
         _tasks: function(tasks) {
@@ -142,15 +145,16 @@ var __meta__ = {
             var position;
             var task;
             var coordinates = this._taskCoordinates = {};
+            var tree = this._taskTree;
 
             for (var i = 0, l = tasks.length; i < l; i++) {
                 task = tasks[i];
 
                 position = this._taskPosition(task);
 
-                wrap = kendoDomElement("div", { className: "taskWrap" }, [this._renderTask(tasks[i], position)]);
-                cell = kendoDomElement("td", null, [wrap]);
-                row = kendoDomElement("tr", null, [cell]);
+                wrap = tree.element("div", { className: "taskWrap" }, [this._renderTask(tasks[i], position)]);
+                cell = tree.element("td", null, [wrap]);
+                row = tree.element("tr", null, [cell]);
 
                 rows.push(row);
                 
@@ -169,11 +173,12 @@ var __meta__ = {
             var inner;
             var middle;
             var task;
+            var tree = this._taskTree;
 
-            title = kendoDomText(task.title);
-            inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
-            middle = kendoDomElement("div", { className: "k-gantt-summary-progress" }, [inner]);
-            task = kendoDomElement("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
+            title = tree.text(task.title);
+            inner = tree.element("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
+            middle = tree.element("div", { className: "k-gantt-summary-progress" }, [inner]);
+            task = tree.element("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
 
             return task;
         },
@@ -232,31 +237,16 @@ var __meta__ = {
             return startIdx;
         },
 
-        //#region Dependencies
-
         _renderDependencies: function(dependencies) {
             var elements = [];
+            var tree = this._dependencyTree;
 
-            for (var j = 0; j < 100; j++) {
-                for (var i = 0, l = dependencies.length; i < l; i++) {
-                    elements.push(this._renderDependency(dependencies[i]));
-                }
+            for (var i = 0, l = dependencies.length; i < l; i++) {
+                elements.push.apply(elements, this._renderDependency(dependencies[i]));
+
             }
 
-            this.content.append("<div class='dependencies'>" + elements.join("") + "</div>");
-        },
-
-        _renderDependenciesV: function(dependencies) {
-            var elements = [];
-
-            for (var j = 0; j < 100; j++) {
-                for (var i = 0, l = dependencies.length; i < l; i++) {
-                    elements.push.apply(elements, this._renderDependencyV(dependencies[i]));
-
-                }
-            }
-
-            kendoDomRender(this.content[0], [kendoDomElement("div", null, elements)]);
+            tree.render(elements);
         },
 
         _renderDependency: function(dependency) {
@@ -265,7 +255,7 @@ var __meta__ = {
             var elements;
 
             if (!predecessor || !successor) {
-                return "";
+                return [];
             }
 
             switch (dependency.type) {
@@ -282,19 +272,6 @@ var __meta__ = {
                     elements = this._renderFF(predecessor, successor);
                     break;
             }
-
-            return elements;
-        },
-
-        _renderDependencyV: function(dependency) {
-            var predecessor = this._taskCoordinates[dependency.predecessorId];
-            var successor = this._taskCoordinates[dependency.successorId];
-
-            if (!predecessor || !successor) {
-                return [];
-            }
-
-            var elements = this._dependencyFFV(predecessor, successor, false);
 
             return elements;
         },
@@ -323,133 +300,14 @@ var __meta__ = {
             var height = 0;
             var that = this;
             var dir = reverse ? "start" : "end";
-            var delta = to[dir] - from[dir];
-            var round = Math.round;
-
-            var addHorizontal = function() {
-                lines.push(that._line({ left: round(left), top: round(top), width: round(width) }));
-            }
-            var addVertical = function() {
-                lines.push(that._line({ left: round(left), top: round(top), height: round(height) }));
-            }
-
-            left = from[dir];
-            top = from.top;
-            width = minDependencyWidth;
-
-            if (delta > 0 != reverse) {
-                width = Math.abs(delta) + minDependencyWidth;
-            }
-
-            if (reverse) {
-                left = left - width;
-                addHorizontal();
-            } else {
-                addHorizontal();
-                left = left + width;
-            }
-
-            if (to.top < top) {
-                height = top - to.top;
-                top = to.top;
-                addVertical();
-            } else {
-                height = to.top - top;
-                addVertical();
-                top = top + height;
-            }
-
-            width = Math.abs(left - to[dir]);
-
-            if (!reverse) {
-                left = left - width;
-            }
-
-            addHorizontal();
-
-            return lines.join("");
-        },
-
-        _dependencyFS: function(from, to, reverse) {
-            var lines = [];
-            var left = 0;
-            var top = 0;
-            var width = 0;
-            var height = 0;
-            var that = this;
-            var minDistance = 2 * minDependencyWidth;
-            var delta = to.start - from.end;
-            var round = Math.round;
-
-            var addHorizontal = function() {
-                lines.push(that._line({ left: round(left), top: round(top), width: round(width) }));
-            }
-            var addVertical = function() {
-                lines.push(that._line({ left: round(left), top: round(top), height: round(height) }));
-            }
-
-            left = from.end;
-            top = from.top;
-            width = minDependencyWidth;
-
-            if (reverse && delta > minDistance) {
-                width = delta - minDependencyWidth;
-            }
-
-            addHorizontal();
-            left = left + width;
-
-            if (delta <= minDistance) {
-                height = reverse ? Math.abs(to.top - from.top) - minDependencyHeight : minDependencyHeight;
-
-                if (to.top < from.top) {
-                    top = top - height;
-                    addVertical();
-                } else {
-                    addVertical();
-                    top = top + height;
-                }
-
-                width = from.end - to.start + minDistance;
-                left -= width;
-
-                addHorizontal();
-            }
-
-
-            if (to.top < from.top) {
-                height = top - to.top;
-                top = to.top;
-                addVertical();
-            } else {
-                height = to.top - top;
-                addVertical();
-                top = top + height;
-            }
-
-            width = to.start - left;
-
-            addHorizontal();
-
-            return lines.join("");
-        },
-
-        _dependencyFFV: function(from, to, reverse) {
-            var lines = [];
-            var left = 0;
-            var top = 0;
-            var width = 0;
-            var height = 0;
-            var that = this;
-            var dir = reverse ? "start" : "end";
             var delta;
             var round = Math.round;
 
             var addHorizontal = function() {
-                lines.push(that._lineV({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
+                lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
             }
             var addVertical = function() {
-                lines.push(that._lineV({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
+                lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
             }
 
             left = from[dir];
@@ -491,7 +349,7 @@ var __meta__ = {
             return lines;
         },
 
-        _dependencyFSV: function(from, to, reverse) {
+        _dependencyFS: function(from, to, reverse) {
             var lines = [];
             var left = 0;
             var top = 0;
@@ -503,10 +361,10 @@ var __meta__ = {
             var round = Math.round;
 
             var addHorizontal = function() {
-                lines.push(that._lineV({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
+                lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
             }
             var addVertical = function() {
-                lines.push(that._lineV({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
+                lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
             }
 
             left = from.end;
@@ -555,44 +413,20 @@ var __meta__ = {
             return lines;
         },
 
-        _lineV: function(styles) {
-            return kendoDomElement("div", {className: "k-gantt-line", style: styles });
-        },
-
         _line: function(styles) {
-            var html = [];
-
-            html.push("<div class='k-gantt-line' style='top: ");
-            html.push(styles.top);
-            html.push("px; left: ");
-            html.push(styles.left);
-
-            if (styles.width) {
-                html.push("px; width: ");
-                html.push(styles.width);
-            }
-            
-            if (styles.height) {
-                html.push("px; height: ");
-                html.push(styles.height);
-            }
-
-            html.push("px;'></div>");
-
-            return html.join("");
+            return this._dependencyTree.element("div", { className: "k-gantt-line", style: styles });
         },
-
-        //#endregion
 
         _colgroup: function() {
             var count = this._slots[this._slots.length - 1].length;
             var cols = [];
+            var tree = this._headerTree;
 
             for (var i = 0; i < count; i++) {
-                cols.push(kendoDomElement("col"));
+                cols.push(tree.element("col"));
             }
 
-            return kendoDomElement("colgroup", null, cols);
+            return tree.element("colgroup", null, cols);
         },
 
         _headers: function(columnLevels) {
@@ -601,6 +435,7 @@ var __meta__ = {
             var headers;
             var column;
             var headerText;
+            var tree = this._headerTree;
 
             for (var levelIndex = 0, levelCount = columnLevels.length; levelIndex < levelCount; levelIndex++) {
                 level = columnLevels[levelIndex];
@@ -609,11 +444,11 @@ var __meta__ = {
                 for (var columnIndex = 0, columnCount = level.length; columnIndex < columnCount; columnIndex++) {
                     column = level[columnIndex];
 
-                    headerText = kendoDomText(column.text);
-                    headers.push(kendoDomElement("th", { colspan: column.span, className: "k-header" + (column.isNonWorking ? " nonWorking" : "") }, [headerText]));
+                    headerText = tree.text(column.text);
+                    headers.push(tree.element("th", { colspan: column.span, className: "k-header" + (column.isNonWorking ? " nonWorking" : "") }, [headerText]));
                 }
 
-                rows.push(kendoDomElement("tr", null, headers));
+                rows.push(tree.element("tr", null, headers));
             }
 
             return rows;
@@ -896,6 +731,8 @@ var __meta__ = {
 
             this._wrapper();
 
+            this._domTrees();
+
             this._views();
         },
         
@@ -914,9 +751,20 @@ var __meta__ = {
         _wrapper: function() {
             this.wrapper = this.element
                 .append("<div class='k-gantt-timeline-header'><div class='k-gantt-timeline-header-wrap'></div></div>")
-                .append("<div class='k-gantt-timeline-content'>");
+                .append("<div class='k-gantt-timeline-content'><div class='k-gantt-timeline-tasks'></div><div class='k-gantt-timeline-dependencies'></div></div>");
 
             this.element.append(this.wrapper);
+        },
+
+        _domTrees: function() {
+            var tree = kendo.dom.Tree;
+            var wrapper = this.wrapper;
+
+            this._headerTree = new tree(wrapper.find(".k-gantt-timeline-header-wrap")[0]);
+
+            this._taskTree = new tree(wrapper.find(".k-gantt-timeline-tasks")[0]);
+
+            this._dependencyTree = new tree(wrapper.find(".k-gantt-timeline-dependencies")[0]);
         },
 
         _views: function() {
@@ -984,7 +832,11 @@ var __meta__ = {
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(extend(true, {}, view, this.options)));
+                    view = new type(this.wrapper, trimOptions(extend(true, {
+                        headerTree: this._headerTree,
+                        taskTree: this._taskTree,
+                        dependencyTree: this._dependencyTree
+                    }, view, this.options)));
                 } else {
                     throw new Error("There is no such view");
                 }
@@ -1000,7 +852,6 @@ var __meta__ = {
         },
 
         _render: function(tasks, range) {
-
             var view = this.view(this._selectedViewName);
 
             view.renderLayout(range);
@@ -1009,12 +860,7 @@ var __meta__ = {
         },
 
         _renderDependencies: function(dependencies) {
-
-            var start = performance.now();
-
             this.view()._renderDependencies(dependencies);
-
-            console.log("Rendering dependencies: " + (performance.now() - start));
         }
 
     });
