@@ -61,6 +61,14 @@ var __meta__ = {
             this._layout();
         },
 
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.header = null;
+            this.content = null;
+            this.levels = null;
+        },
+
         _columns: function() {
             var columns = this.options.columns;
             var column;

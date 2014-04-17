@@ -9,7 +9,7 @@
             element = $("<div/>");
         },
         teardown: function() {
-
+            kendo.destroy(element);
         }
     });
 

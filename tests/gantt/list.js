@@ -10,22 +10,32 @@
     var paddingStep = 26;
 
     module("Gantt List", {
-        setup: function () {
+        setup: function() {
             element = $("div")
         },
-        teardown: function () {
+        teardown: function() {
             ganttList.destroy();
         }
     });
 
-    test("add default title column", 2, function () {
+    test("nullify properties when destroyed", function() {
+        ganttList = new GanttList(element, { columns: [] });
+
+        ganttList.destroy();
+
+        equal(ganttList.header, null);
+        equal(ganttList.content, null);
+        equal(ganttList.levels, null);
+    });
+
+    test("add default title column", 2, function() {
         ganttList = new GanttList(element, { columns: [] });
 
         equal(ganttList.options.columns.length, 1);
         equal(ganttList.options.columns[0], "title");
     });
 
-    test("creates column from options", 5, function () {
+    test("creates column from options", 5, function() {
         ganttList = new GanttList(element, {
             columns: [{
                 field: "end",
@@ -42,7 +52,7 @@
         ok(ganttList.columns[0].editable);
     });
 
-    test("creates column with default values from string", 4, function () {
+    test("creates column with default values from string", 4, function() {
         ganttList = new GanttList(element, {
             columns: ["end"]
         });
@@ -53,7 +63,7 @@
         ok(!ganttList.columns[0].editable);
     });
 
-    test("renders header's wrapping div", function () {
+    test("renders header's wrapping div", function() {
         ganttList = new GanttList(element, { columns: [] });
         var wrapper = ganttList.element;
 
@@ -61,7 +71,7 @@
 
     });
 
-    test("renders header's inner wrapping div", function () {
+    test("renders header's inner wrapping div", function() {
         ganttList = new GanttList(element, { columns: [] });
         var wrapper = ganttList.element;
 
@@ -69,7 +79,7 @@
 
     });
 
-    test("renders content's wrapping div", function () {
+    test("renders content's wrapping div", function() {
         ganttList = new GanttList(element, { columns: [] });
         var wrapper = ganttList.element;
 
@@ -78,7 +88,7 @@
     });
 
     module("Gantt List header renders", {
-        setup: function () {
+        setup: function() {
             element = $("div")
 
             columns = [
@@ -88,12 +98,12 @@
                 { field: "percentComplete", title: "Task Percentage" }
             ];
         },
-        teardown: function () {
+        teardown: function() {
             ganttList.destroy();
         }
     });
 
-    test("table element", function () {
+    test("table element", function() {
         ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
@@ -101,14 +111,14 @@
         equal(header.children("table").attr("role"), "grid");
     });
 
-    test("table colgroup", function () {
+    test("table colgroup", function() {
         ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
         equal(header.find("colgroup").length, 1);
     });
 
-    test("table head", function () {
+    test("table head", function() {
         ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
@@ -116,14 +126,14 @@
         equal(header.find("thead").attr("role"), "rowgroup");
     });
 
-    test("table col elements for each column", function () {
+    test("table col elements for each column", function() {
         ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
         equal(header.find("col").length, ganttList.columns.length);
     });
 
-    test("table col elements with style attr when column width set", 4, function () {
+    test("table col elements with style attr when column width set", 4, function() {
         ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
         var cols = header.find("col");
@@ -134,17 +144,17 @@
         ok(!cols.eq(3).attr("style"));
     });
 
-    test("table th elements for each column", function () {
+    test("table th elements for each column", function() {
         ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
         equal(header.find("th").length, ganttList.columns.length);
     });
 
-    test("table th elements data attr for each column", function () {
+    test("table th elements data attr for each column", function() {
         ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
-        var test = function (idx, th) {
+        var test = function(idx, th) {
             th = $(th);
             equal(th.attr("data-field"), ganttList.columns[idx].field);
             equal(th.attr("data-title"), ganttList.columns[idx].title);
@@ -153,7 +163,7 @@
         header.find("th").each(test);
     });
 
-    test("table th elements sorter attr for sortable column", 4, function () {
+    test("table th elements sorter attr for sortable column", 4, function() {
         ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
         var ths = header.find("th");
@@ -170,7 +180,7 @@
     });
 
     module("Gantt List content renders", {
-        setup: function () {
+        setup: function() {
             element = $("div")
 
             columns = [
@@ -207,46 +217,46 @@
             ganttList = new GanttList(element, { columns: columns });
             ganttList._render(taskTree);
         },
-        teardown: function () {
+        teardown: function() {
             ganttList.destroy();
         }
     });
 
-    test("table element", function () {
+    test("table element", function() {
         var content = ganttList.content;
 
         equal(content.children("table").length, 1);
         equal(content.children("table").attr("role"), "grid");
     });
 
-    test("table colgroup", function () {
+    test("table colgroup", function() {
         var content = ganttList.content;
 
         equal(content.find("colgroup").length, 1);
     });
 
-    test("table col elements for each column", function () {
+    test("table col elements for each column", function() {
         var content = ganttList.content;
 
         equal(content.find("col").length, ganttList.columns.length);
     });
 
-    test("table body", 2, function () {
+    test("table body", 2, function() {
         var content = ganttList.content;
 
         equal(content.find("tbody").length, 1);
         equal(content.find("tbody").attr("role"), "rowgroup");
     });
 
-    test("table tr elements for each task", function () {
+    test("table tr elements for each task", function() {
         var content = ganttList.content;
 
         equal(content.find("tr").length, dataSource.total());
     });
 
-    test("table tr elements attr", function () {
+    test("table tr elements attr", function() {
         var content = ganttList.content;
-        var test = function (idx, tr) {
+        var test = function(idx, tr) {
             tr = $(tr);
             equal(tr.attr("role"), "row");
             equal(tr.attr("data-uid"), taskTree[idx].get("uid"));
@@ -255,9 +265,9 @@
         content.find("tr").each(test);
     });
 
-    test("table even tr elements style", function () {
+    test("table even tr elements style", function() {
         var content = ganttList.content;
-        var test = function (idx, tr) {
+        var test = function(idx, tr) {
             tr = $(tr);
             if (idx % 2 !== 0) {
                 ok(tr.hasClass("k-alt"));
@@ -267,13 +277,13 @@
         content.find("tr").each(test);
     });
 
-    test("table td elements for each column", function () {
+    test("table td elements for each column", function() {
         var content = ganttList.content;
 
         equal(content.find("tr").eq(0).children("td").length, columns.length);
     });
 
-    test("table td element with span for title column", function () {
+    test("table td element with span for title column", function() {
         var content = ganttList.content;
         var span = content.find("tr").eq(0).children("td").eq(0).children("span");
 
@@ -281,9 +291,9 @@
         ok(span.hasClass("k-icon"));
     });
 
-    test("table td element with padding for title column", function () {
+    test("table td element with padding for title column", function() {
         var content = ganttList.content;
-        var test = function (idx, tr) {
+        var test = function(idx, tr) {
             tr = $(tr);
             var td = tr.children("td").eq(0);
             var padding = parseInt(td.css("padding-left"));
@@ -299,14 +309,14 @@
         content.find("tr").each(test);
     });
 
-    test("table td element with span with collapse icon summary tasks", function () {
+    test("table td element with span with collapse icon summary tasks", function() {
         var content = ganttList.content;
         var span = content.find("tr").eq(0).children("td").eq(0).children("span");
 
         ok(span.hasClass("k-i-collapse"));
     });
 
-    test("table td element with span with hidden icon non-summary tasks", function () {
+    test("table td element with span with hidden icon non-summary tasks", function() {
         var content = ganttList.content;
         var span = content.find("tr").eq(2).children("td").eq(0).children("span");
 

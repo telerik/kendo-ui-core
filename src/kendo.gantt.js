@@ -487,6 +487,7 @@ var __meta__ = {
             Widget.fn.destroy.call(this);
 
             this.timeline.destroy();
+            this.list.destroy();
 
             kendo.destroy(this.wrapper);
         },
@@ -513,14 +514,16 @@ var __meta__ = {
 
         _list: function () {
             var options = extend({}, { columns: this.options.columns || [] });
+            var element = this.wrapper.find(".k-gantt-treelist > .k-grid");
 
-            this.list = new kendo.ui.GanttList(this.wrapper.find(".k-gantt-treelist > .k-grid"), options);
+            this.list = new kendo.ui.GanttList(element, options);
         },
 
-        _timeline: function() {
+        _timeline: function () {
+            var options = trimOptions(extend(true, {}, this.options));
             var element = this.wrapper.find(".k-gantt-timeline");
 
-            this.timeline = new kendo.ui.GanttTimeline(element, trimOptions(extend(true, {}, this.options)));
+            this.timeline = new kendo.ui.GanttTimeline(element, options);
         },
 
         _bindWidgets: function() {
