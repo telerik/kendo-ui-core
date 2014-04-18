@@ -21,7 +21,6 @@
         "jquery": true,
         "globals": {
             "QUnit": true, "test": true, "asyncTest": true, "module": true, "start": true,
-            "console": true,
             "kendo": true,
             "define": true
         }
