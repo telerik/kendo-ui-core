@@ -636,6 +636,21 @@
         equal(rows.filter("[aria-selected=false]").length, rows.length);
     });
 
+    test("Name is the same case as the class name", function() {
+        var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+        agenda.render([
+            new Event({
+                start: new Date("2013/06/06 00:00"),
+                end: new Date("2013/06/06 00:00"),
+                title: ""
+            })
+        ]);
+
+        var viewName = "agenda";
+        equal(viewName, agenda.name);
+    });
+
     module("mobile phone agenda view", {
         teardown: function() {
             if (agenda) {

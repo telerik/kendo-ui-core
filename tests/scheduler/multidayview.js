@@ -1229,6 +1229,39 @@
         ok(view.content.find("td").last().hasClass("k-nonwork-hour"));
     });
 
+    test("WorkWeek view name is the same case as the class name", function() {
+        var viewName = "workWeek";
+        var scheduler = container.kendoScheduler({
+            views: [viewName],
+            dataSource: []
+        }).data("kendoScheduler");
+
+        var view = scheduler.view().name;
+        equal(viewName, view);
+    });
+
+    test("Day view name is the same case as the class name", function() {
+        var viewName = "day";
+        var scheduler = container.kendoScheduler({
+            views: [viewName],
+            dataSource: []
+        }).data("kendoScheduler");
+
+        var view = scheduler.view().name;
+        equal(viewName, view);
+    });
+
+    test("Week view name is the same case as the class name", function() {
+        var viewName = "week";
+        var scheduler = container.kendoScheduler({
+            views: [viewName],
+            dataSource: []
+        }).data("kendoScheduler");
+
+        var view = scheduler.view().name;
+        equal(viewName, view);
+    });
+
     module("Multi Day View event positioning", {
         setup: function() {
             container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
@@ -2325,6 +2358,4 @@
 
         equal(view.element.find("div.k-event>div").length, 0);
     });
-
-
 })();

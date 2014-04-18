@@ -576,6 +576,13 @@
         ok(group1 && group2 && group3 && group4);
     });
 
+   test("Name is the same case as the class name", function() {
+        var view = setup();
+
+        var viewName = "month";
+        equal(viewName, view.name);
+    });
+
     module("Month View ARIA rendering", {
         setup: function() {
             container = document.createElement("div");
