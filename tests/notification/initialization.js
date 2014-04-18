@@ -301,15 +301,11 @@
 
         notification.show("foo");
 
+
         setTimeout(function(){
             start();
             var notificationPopup = $(".k-notification");
             var closeIcon = notificationPopup.find(".k-i-close");
-            console.log("notificationPopup: " + notificationPopup[0].outerHTML);
-            console.log("closeIcon: " + closeIcon[0].outerHTML);
-            console.log("display: " + closeIcon.css("display"));
-            console.log("position: " + closeIcon.css("position"));
-            console.log("popup parent body tag length: " + notificationPopup.closest("body").length);
             ok(!closeIcon.is(":visible"));
         }, 400);
     });
