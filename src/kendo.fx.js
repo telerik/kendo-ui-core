@@ -1398,7 +1398,6 @@ var __meta__ = {
             var that = this,
                 element = that.element,
                 previous = that._previous,
-                direction = that._direction,
                 container = element.parents().filter(previous.parents()).first(),
                 both = that._both(),
                 deferred = $.Deferred(),
