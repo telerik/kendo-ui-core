@@ -171,10 +171,6 @@ task :less do
     grunt :styles
 end
 
-def sync_docs_submodule(branch)
-    sh "cd docs && git fetch && git reset --hard origin/#{branch}"
-end
-
 desc('Build all Kendo UI distributions')
 task :default => [:bundles]
 
@@ -606,10 +602,6 @@ namespace :build do
         desc 'Run tests and VSDoc'
         task :tests => ["tests:Production", "vsdoc:production:test"]
 
-        task :sync_docs do
-            sync_docs_submodule("production")
-        end
-
         desc 'Update the /production build machine web site'
         task :demos => [ :sync_docs, 'demos:staging', 'download_builder:staging' ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
@@ -634,10 +626,6 @@ namespace :build do
     namespace :master do
         desc 'Runs test suite over the master branch'
         task :tests => ["tests:CI", "vsdoc:master:test", "intellisense:master:test", "type_script:master:test"]
-
-        task :sync_docs do
-            sync_docs_submodule("master")
-        end
 
         desc 'Update the /staging build machine web site'
         task :demos => [

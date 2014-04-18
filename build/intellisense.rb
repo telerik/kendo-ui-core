@@ -99,7 +99,6 @@ namespace :intellisense do
         namespace branch do
             desc "Test .intellisense generation"
             task :test do
-                sync_docs_submodule(branch)
                 File.open("dist/kendo.intellisense-#{branch}.js", "w") do |f|
                     f.write get_intellisense(md_api_suite('all'))
                     sh "node_modules/jshint/bin/jshint #{f.path}"
