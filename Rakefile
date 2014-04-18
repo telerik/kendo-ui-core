@@ -21,7 +21,6 @@ KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
 PLATFORM = RbConfig::CONFIG['host_os']
 RELEASE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI"
-#RELEASE_ROOT = "K:\\DISTRIBUTIONS\\KendoUI"
 WEB_INSTALLER_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\Guidance\\CurrentWebInstaller"
 
 if PLATFORM =~ /linux|darwin/
@@ -258,6 +257,7 @@ bundle :name => 'professional.trial',
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
        },
+       :product => 'Kendo UI Professional',
        :release_build => {
           :file_metadata => {
              :zip => {
@@ -284,8 +284,7 @@ bundle :name => 'professional.trial',
            }
        }
 
-
-# Kendo UI Web
+# Kendo UI Web (obsolete)
 bundle :name => 'web.commercial',
        :license => 'src-license-web',
        :eula => 'web',
@@ -305,7 +304,7 @@ bundle :name => 'web.commercial',
             'src/js' => WEB_SRC_JS,
             'src/styles' => WEB_SRC_CSS
        }
-
+#Kendo UI Web GPL (obsolete)
 bundle :name => 'web.open-source',
        :license => 'src-license-web',
        :vsdoc => %w(web),
@@ -323,7 +322,7 @@ bundle :name => 'web.open-source',
             'src/styles' => WEB_SRC_CSS
        }
 
-# Kendo UI Mobile
+# Kendo UI Mobile (obsolete)
 bundle :name => 'mobile.commercial',
        :license => 'src-license-mobile',
        :vsdoc => %w(mobile),
@@ -344,7 +343,7 @@ bundle :name => 'mobile.commercial',
             'src/styles' => MOBILE_SRC_CSS
        }
 
-# Kendo UI DataViz
+# Kendo UI DataViz (obsolete)
 bundle :name => 'dataviz.commercial',
        :license => 'src-license-dataviz',
        :vsdoc => %w(dataviz),
@@ -365,7 +364,7 @@ bundle :name => 'dataviz.commercial',
             'src/styles' => DATAVIZ_SRC_CSS
        }
 
-# Kendo Complete for ASP.NET MVC
+# UI for ASP.NET MVC
 bundle :name => 'aspnetmvc.trial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
@@ -383,6 +382,7 @@ bundle :name => 'aspnetmvc.trial',
            ],
            :template_dir => 'mvc'
        },
+       :product => 'UI for ASP.NET MVC',
        :release_build => {
           :file_metadata => {
              :zip => {
@@ -453,6 +453,7 @@ bundle :name => 'aspnetmvc.hotfix.trial',
        :intellisense => %w(all web mobile dataviz),
        :type_script => %w(all web mobile dataviz),
        :changelog => %w(components aspnetmvc),
+       :product => 'UI for ASP.NET MVC',
        :release_build => {
          :file_metadata => {
              :zip => {
@@ -461,7 +462,8 @@ bundle :name => 'aspnetmvc.hotfix.trial',
               :file_category => "Installation",
               :file_type => "Trial Files",
               :extension => "ZIP",
-              :file_markers=> ["Use this file in VS Extensions and license key generation"],
+              :file_markers => ["Use this file in VS Extensions and license key generation"],
+              :vs_hotfix => true,
               :websites => ["Telerik"],
               :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
@@ -610,6 +612,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
        :changelog => %w(components aspnetmvc),
        :product => 'UI for ASP.NET MVC',
        :upload_as_internal_build => true,
+       :product => 'UI for ASP.NET MVC',
        :release_build => {
           :file_metadata => {
              :zip => {
@@ -619,6 +622,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
               :file_type => "Paid Files",
               :extension => "ZIP",
               :file_markers => ["Use this file in VS Extensions and license key generation"],
+              :vs_hotfix => true,
               :websites => ["Telerik"],
               :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Commercial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
@@ -668,6 +672,7 @@ bundle :name => 'jsp.trial',
        :readme => 'README.KendoUI.Trial',
        :changelog => %w(components jsp),
        :type_script => %w(all web mobile dataviz),
+       :product => 'UI for JSP',
        :release_build => {
           :file_metadata => {
              :zip => {
@@ -737,6 +742,7 @@ bundle :name => 'php.trial',
        :readme => 'README.KendoUI.Trial',
        :changelog => %w(components php),
        :type_script => %w(all web mobile dataviz),
+       :product => 'UI for PHP',
        :release_build => {
           :file_metadata => {
              :zip => {

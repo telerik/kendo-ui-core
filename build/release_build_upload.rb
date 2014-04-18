@@ -39,7 +39,8 @@ class TelerikReleaseBot
     def wait_for_element(css)
         Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.find_element(:css, css) }
     end
-
+    
+    #not used
     def fill_in(title, contents)
         element = driver.find_element(:xpath, "//label[text()='#{title}']/..//input")
         driver.execute_script 'arguments[0].focus()', element
@@ -51,24 +52,21 @@ class TelerikReleaseBot
         driver.quit
     end
     def version_created(product)
-       @versions_created.index(product) != nil 
+       p "Product Name:"
+       p product
+       return @versions_created.index(product) != nil 
     end
     def add_product(product)
        @versions_created.push(product)
+       p "Product name added: "
+       p @versions_created[@versions_created.length - 1]
     end
 end
 
 def upload_release_build(options)
 
-    bot = TelerikReleaseBot.instance
+    bot = TelerikReleaseBot.instance 
 
-    bot.click_and_wait("Administration", "administration")
-    bot.click_and_wait("Product Versions", "product")
-    bot.click_and_wait("Product Name", "product")
-    #bot.driver.execute_script <<-SCRIPT
-         #var masterTable = $find($telerik.$('[id$=\"_dgProducts\"]').attr('id')).get_masterTableView();
-         #masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
-    #SCRIPT
     create_version(bot, options[:product])   
     prepare_files(bot, options)  
 end
@@ -76,6 +74,16 @@ def create_version(bot, product_name)
       return if bot.version_created(product_name) 
       bot.add_product(product_name)
 
+      bot.click_and_wait("Administration", "administration")
+      bot.click_and_wait("Product Versions", "product")
+      bot.click_and_wait("Product Name", "product")
+
+=begin
+      bot.driver.execute_script <<-SCRIPT
+         var masterTable = $find($telerik.$('[id$=\"_dgProducts\"]').attr('id')).get_masterTableView();
+         masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
+      SCRIPT
+=end
       p ">>creating version"
       bot.click_and_wait product_name, "administration"
       bot.click_and_wait "Manage Versions", "administration"
@@ -109,7 +117,12 @@ def set_fields_data(bot, file_fields)
 
     file_markers = file_fields[:file_markers]
     file_markers.each do |fm| 
-      bot.driver.find_element(:xpath, "//label[contains(.,'#{fm}')]").click  
+      bot.driver.find_element(:xpath, "//label[contains(.,'#{fm}')]").click
+
+      if file_fields[:vs_hotfix] 
+        bot.driver.execute_script "$find($[id$=\"_txtFileVersionPrefix\"]').val('#{VERSION}')"
+        bot.driver.execute_script "$find($[id$=\"_txtFileVersionSuffix\"]').val('0')"
+      end  
     end
  
     websites = file_fields[:websites]
@@ -123,7 +136,6 @@ def set_fields_data(bot, file_fields)
   
 end
 def prepare_files(bot, options)
-  #bot.driver.execute_script "window.location = $('a:contains(\"commercial.zip\")').attr(\"href\")"
   p ">>preparing files"
 
   release_config = options[:params]
@@ -148,6 +160,7 @@ def prepare_files(bot, options)
 
     upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], true)
   end
+  #control panel files
   if file_metadata[:exe]
     file_fields = file_metadata[:exe]
     bot.click_and_wait "Add new file", "administration"
@@ -156,58 +169,16 @@ def prepare_files(bot, options)
 
     upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
   end
-=begin
-  #hotfix files
-  if options[:vs_extension]
-      element = bot.driver.find_element(:xpath, "//a[contains(.,'hotfix') and contains(.,'commercial')]")
-      element.click
-
-      file_name = options[:title]
-      bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.hotfix.zip')" 
-
-      upload_file_and_save(bot, options)
-
-  end
   #nuget files
-  if options[:nuget]
-      #element = bot.driver.find_element(:xpath, "//a[contains(.,'commercial.nupkg')]") - to replace after April 16th
-      element = bot.driver.find_element(:xpath, "//a[contains(.,'NuGet') and contains(.,'commercial')]")
-      element.click
+  if file_metadata[:nuget]
+    file_fields = file_metadata[:nuget]
+    bot.click_and_wait "Add new file", "administration"
 
-      file_name = options[:title] 
-      bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.nupkg.zip')" 
+    set_fields_data(bot, file_fields)
 
-      upload_file_and_go_back(bot, options)
-
-      #element = bot.driver.find_element(:xpath, "//a[contains(.,'trial.nupkg')]") - to replace after April 16th
-      element = bot.driver.find_element(:xpath, "//a[contains(.,'NuGet') and contains(.,'trial')]")
-      element.click
-
-      file_name = options[:title].sub "commercial", "trial"
-      bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_name}.nupkg.zip')" 
-
-      upload_file_and_go_back(bot, options)
+    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
   end
-=end
-  #installer files
-=begin
-  if options[:common_installer_mvc]
-    element = bot.driver.find_element(:xpath, "//a[contains(.,'ControlPanel')]")
-    element.click
 
-    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('TelerikControlPanelSetup.MVC.#{VERSION}.exe')" 
-
-    upload_file_and_go_back(bot, options)  
-
-    #element = bot.driver.find_element(:xpath, "//a[contains(.,'AspNetMvc')]") - to replace after April 16th
-    element = bot.driver.find_element(:xpath, "//a[contains(.,'ASPNETMVC')]")
-    element.click
-
-    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('TelerikUIForAspNetMvcSetup.#{VERSION}.exe')" 
-
-    upload_file_and_go_back(bot, options)    
-  end
-=end
 end
 def upload_file_and_save(bot, dirpath, filename, isMsi)
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
@@ -232,6 +203,12 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
     
     upload_file(bot, upload_id, full_path) 
   end
+
+  bot.find("[value='Save']").click
+
+  p "Saving..."
+
+  bot.find("[value='GO TO FILE LIST']").click
 end
 def upload_file(bot, upload_id, full_path)
     bot.driver.execute_script("
@@ -251,14 +228,6 @@ def upload_file(bot, upload_id, full_path)
 
   bot.driver.find_element(:css, "##{upload_id} input[type=file]").send_keys(full_path.gsub('/', '\\'))
   bot.wait_for_element("##{upload_id} .ruRemove")
-
-  bot.find("[value='Save']").click
-
-  p "Saving..."
-
-  #Thread.current.send :sleep, 10
-
-  bot.find("[value='GO TO FILE LIST']").click
 end
 def release_build_file_copy(release_build, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
     release_build_config = release_build[:file_metadata]
@@ -324,9 +293,4 @@ def build_path_and_copy(options)
     archive = File.join(options[:archive], options[:vbd] + options[:extension])
    end
    cp_r archive, destination
-end
-
-desc "Upload release builds"
-task "release_builds:upload" do
-    p "my task"
 end

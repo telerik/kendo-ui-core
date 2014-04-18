@@ -128,8 +128,6 @@ def bundle(options)
     xml_changelog_path = "dist/bundles/#{name}.changelog.xml"
     write_changelog(xml_changelog_path, changelog_suites, options[:changelog_exclude])
 
-    product_names = ['Kendo UI Core','Kendo UI Professional', 'UI for ASP.NET MVC', 'UI for JSP', 'UI for PHP']
-
     if options[:upload_as_internal_build]
         versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, 'LIB Archive', VERSION, versioned_bundle_name(name) + ".zip")
 
@@ -172,7 +170,7 @@ def bundle(options)
         desc "Upload #{name} as release build on telerik.com"
 
         task "release_builds:upload:#{name}" =>  "release_builds:copy:#{name}" do
-            p ">>starting version upload for #{name}"
+            p ">>starting version upload for #{name} -> #{options[:product]}"
 
                     upload_release_build \
                     :title => name,
