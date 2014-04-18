@@ -64,19 +64,6 @@ module.exports = function(grunt) {
         jshint: jshint,
         karma: {
             options: {
-                browserStack: {
-                  username: 'telerik1',
-                  accessKey: process.env.BS_ACCESS_KEY
-                },
-                customLaunchers: {
-                    bs_chrome: {
-                        base: 'BrowserStack',
-                        browser: 'chrome',
-                        browser_version: 'latest',
-                        os: 'OS X',
-                        os_version: 'Mavericks'
-                    }
-                },
                 reportSlowerThan: 500,
                 basePath: '',
                 frameworks: ['qunit'],
