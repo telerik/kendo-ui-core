@@ -11,7 +11,8 @@
 
     module("Gantt List", {
         setup: function() {
-            element = $("div")
+            element = $("div");
+            dataSource = new GanttDataSource();
         },
         teardown: function() {
             ganttList.destroy();
@@ -19,7 +20,7 @@
     });
 
     test("nullify properties when destroyed", function() {
-        ganttList = new GanttList(element, { columns: [] });
+        ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
 
         ganttList.destroy();
 
@@ -29,7 +30,7 @@
     });
 
     test("add default title column", 2, function() {
-        ganttList = new GanttList(element, { columns: [] });
+        ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
 
         equal(ganttList.options.columns.length, 1);
         equal(ganttList.options.columns[0], "title");
@@ -42,7 +43,8 @@
                 editable: true,
                 title: "My End Time",
                 sortable: true
-            }]
+            }],
+            dataSource: dataSource
         });
 
         equal(ganttList.columns.length, 1);
@@ -54,7 +56,8 @@
 
     test("creates column with default values from string", 4, function() {
         ganttList = new GanttList(element, {
-            columns: ["end"]
+            columns: ["end"],
+            dataSource: dataSource
         });
 
         equal(ganttList.columns[0].field, "end");
@@ -64,7 +67,7 @@
     });
 
     test("renders header's wrapping div", function() {
-        ganttList = new GanttList(element, { columns: [] });
+        ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
         var wrapper = ganttList.element;
 
         equal(wrapper.children(".k-grid-header").length, 1);
@@ -72,7 +75,7 @@
     });
 
     test("renders header's inner wrapping div", function() {
-        ganttList = new GanttList(element, { columns: [] });
+        ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
         var wrapper = ganttList.element;
 
         equal(wrapper.find(".k-grid-header-wrap").length, 1);
@@ -80,7 +83,7 @@
     });
 
     test("renders content's wrapping div", function() {
-        ganttList = new GanttList(element, { columns: [] });
+        ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
         var wrapper = ganttList.element;
 
         equal(wrapper.children(".k-grid-content").length, 1);
@@ -89,7 +92,7 @@
 
     module("Gantt List header renders", {
         setup: function() {
-            element = $("div")
+            element = $("div");
 
             columns = [
                 { field: "title", title: "Title", sortable: false },
@@ -97,6 +100,10 @@
                 { field: "end", title: "End Time", sortable: true, width: 150 },
                 { field: "percentComplete", title: "Task Percentage" }
             ];
+
+            dataSource = new GanttDataSource();
+
+            ganttList = new GanttList(element, { columns: columns, dataSource: dataSource });
         },
         teardown: function() {
             ganttList.destroy();
@@ -104,7 +111,6 @@
     });
 
     test("table element", function() {
-        ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
         equal(header.children("table").length, 1);
@@ -112,14 +118,12 @@
     });
 
     test("table colgroup", function() {
-        ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
         equal(header.find("colgroup").length, 1);
     });
 
     test("table head", function() {
-        ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
         equal(header.find("thead").length, 1);
@@ -127,14 +131,12 @@
     });
 
     test("table col elements for each column", function() {
-        ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
         equal(header.find("col").length, ganttList.columns.length);
     });
 
     test("table col elements with style attr when column width set", 4, function() {
-        ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
         var cols = header.find("col");
 
@@ -145,14 +147,12 @@
     });
 
     test("table th elements for each column", function() {
-        ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
 
         equal(header.find("th").length, ganttList.columns.length);
     });
 
     test("table th elements data attr for each column", function() {
-        ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
         var test = function(idx, th) {
             th = $(th);
@@ -164,7 +164,6 @@
     });
 
     test("table th elements sorter attr for sortable column", 4, function() {
-        ganttList = new GanttList(element, { columns: columns });
         var header = ganttList.header;
         var ths = header.find("th");
         var column;
@@ -181,7 +180,7 @@
 
     module("Gantt List content renders", {
         setup: function() {
-            element = $("div")
+            element = $("div");
 
             columns = [
                 { field: "title", title: "Title", sortable: false },
@@ -214,7 +213,7 @@
             dataSource.fetch();
             taskTree = dataSource.taskTree();
 
-            ganttList = new GanttList(element, { columns: columns });
+            ganttList = new GanttList(element, { columns: columns, dataSource: dataSource });
             ganttList._render(taskTree);
         },
         teardown: function() {

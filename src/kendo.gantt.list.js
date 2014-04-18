@@ -1,5 +1,5 @@
 ﻿(function(f, define) {
-    define(["./kendo.core"], f);
+    define(["./kendo.core", "./kendo.sorter"], f);
 })(function() {
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt List",
     category: "web",
     description: "The Gantt List",
-    depends: [ "core" ],
+    depends: [ "core", "sorter" ],
     hidden: true
 };
 
@@ -57,11 +57,13 @@ var __meta__ = {
                 this.options.columns.push("title");
             }
 
+            this.dataSource = this.options.dataSource;
+
             this._columns();
             this._layout();
-            this.headerTree = new kendoDom.Tree(this.header[0]);
-            this.contentTree = new kendoDom.Tree(this.content[0]);
+            this._dom();
             this._header();
+            this._sortable();
         },
 
         destroy: function() {
@@ -70,6 +72,13 @@ var __meta__ = {
             this.header = null;
             this.content = null;
             this.levels = null;
+
+            kendo.destroy(this.element);
+        },
+
+        _dom: function() {
+            this.headerTree = new kendoDom.Tree(this.header[0]);
+            this.contentTree = new kendoDom.Tree(this.content[0]);
         },
 
         _columns: function() {
@@ -241,6 +250,32 @@ var __meta__ = {
                     return idx !== null ? { style: { "padding-left": level.value + "px" } } : null;
                 }
             }
+        },
+
+        _sortable: function() {
+            var columns = this.columns;
+            var column;
+            var sortableInstance;
+            var cells = this.header.find("th");
+            var cell;
+
+            for (var idx = 0, length = cells.length; idx < length; idx++) {
+                column = columns[idx];
+
+                if (column.sortable) {
+                    cell = cells.eq(idx);
+
+                    sortableInstance = cell.data("kendoSorter");
+
+                    if (sortableInstance) {
+                        sortableInstance.destroy();
+                    }
+
+                    cell.attr("data-" + kendo.ns + "field", column.field)
+                        .kendoSorter({ dataSource: this.dataSource });
+                }
+            }
+            cells = null;
         }
     });
 
