@@ -301,6 +301,7 @@ var __meta__ = {
                 history.pop();
             }
 
+
             if (!current) {
                 view.showStart();
                 view.showEnd();
@@ -309,11 +310,15 @@ var __meta__ = {
             }
 
             current.hideStart();
-            view.showStart();
 
             if (!theTransition || !kendo.effects.enabled) {
+                view.showStart();
                 that.end();
             } else {
+                // hide the view element before init/show - prevents blinks on iPad
+                // the replace effect will remove this class
+                view.element.addClass("k-fx-hidden");
+                view.showStart();
                 // do not reverse the explicit transition
                 if (back && !transition) {
                     transitionData.reverse = !transitionData.reverse;
