@@ -3539,7 +3539,8 @@ var __meta__ = {
                     data: childrenField,
                     model: {
                         hasChildren: hasChildren,
-                        id: that.idField
+                        id: that.idField,
+                        fields: that.fields
                     }
                 }
             };
