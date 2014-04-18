@@ -1135,6 +1135,30 @@ asyncTest("child parameterMap gets called when fetching child nodes", function()
     dataSource.read();
 });
 
+test("child datasources inherit fields", function() {
+    var dataSource = new HierarchicalDataSource({
+        data: [
+            { id: 1, Text: "foo", items: [
+                { id: 2, Text: "bar" }
+            ] }
+        ],
+        schema: {
+            model: {
+                children: "items",
+                fields: {
+                    text: { from: "Text" }
+                }
+            }
+        }
+    });
+
+    dataSource.read();
+
+    dataSource.get(1).load();
+
+    equal(dataSource.get(2).text, "bar");
+});
+
 /*
 test("child datasources inherit model", function() {
     var CustomModel = kendo.data.Node.define({
