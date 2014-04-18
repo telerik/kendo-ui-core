@@ -603,7 +603,7 @@ namespace :build do
         task :tests => ["tests:Production", "vsdoc:production:test"]
 
         desc 'Update the /production build machine web site'
-        task :demos => [ :sync_docs, 'demos:staging', 'download_builder:staging' ] do
+        task :demos => [ 'demos:staging', 'download_builder:staging' ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/production/"
         end
 
@@ -613,7 +613,6 @@ namespace :build do
         desc 'Package and publish bundles to the Production directory, and update the changelog'
         task :bundles => [
             :get_binaries,
-            :sync_docs,
             'bundles:all',
             'demos:production',
             'download_builder:bundle',
@@ -630,7 +629,6 @@ namespace :build do
         desc 'Update the /staging build machine web site'
         task :demos => [
             :get_binaries,
-            :sync_docs,
             'demos:staging',
             'download_builder:staging',
             'demos:staging_java',
@@ -664,7 +662,6 @@ namespace :build do
         desc 'Package and publish bundles to the Stable directory'
         task :bundles => [
             :get_binaries,
-            :sync_docs,
             'bundles:all',
             'demos:production',
             'download_builder:bundle',
