@@ -108,7 +108,13 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.km-view
+.km-content
+{
+    display: block;
+}
+
+.km-view,
+.km-split-content
 {
     top: 0;
     left: 0;
@@ -148,7 +154,6 @@
     min-height: 1px;
     .flex(1);
     .flex-align(stretch);
-    display: block;
     width: auto;
     overflow: hidden;
     position: relative;

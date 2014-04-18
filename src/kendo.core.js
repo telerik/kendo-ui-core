@@ -2940,8 +2940,8 @@ function pad(number, digits, end) {
         },
 
         container: function() {
-            var element = this.element.closest(kendo.roleSelector("view layout modalview drawer"));
-            return kendo.widgetInstance(element, kendo.mobile.ui) || ContainerNullObject;
+            var element = this.element.closest(kendo.roleSelector("view layout modalview drawer splitview"));
+            return kendo.widgetInstance(element.eq(0), kendo.mobile.ui) || ContainerNullObject;
         }
     });
 

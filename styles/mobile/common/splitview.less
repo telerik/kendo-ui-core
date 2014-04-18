@@ -1,36 +1,37 @@
 /* SplitView */
-div.km-widget.km-splitview
+.km-splitview > .km-content
 {
     .box-orient(horizontal);
     .box-direction(normal);
     .flex-direction(row);
 }
 
-.km-widget.km-splitview.km-split-vertical
+.km-split-vertical > .km-content
 {
     .box-orient(vertical);
     .flex-direction(column);
 }
 
-.km-splitview > .km-pane
+.km-split-content > .km-pane
 {
     .flex(2);
     width: auto;
     height: auto;
 }
 
-.km-splitview > .km-pane:first-child
+.km-split-content > .km-pane:first-child
 {
     .flex(1);
 }
 
-.km-split-horizontal > .km-pane
+.km-split-horizontal > .km-content > .km-pane
 {
-    height: 100%;
+    top: 0;
+    bottom: 0;
 }
 
 // Hopefully temporary
-.km-split-vertical > .km-pane > .km-view
+.km-split-vertical > .km-content > .km-pane > .km-view
 {
     display: -webkit-box;
 }
