@@ -12,22 +12,32 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
+        Class = kendo.Class,
         Widget = kendo.ui.Widget,
-        template = kendo.template,
+        proxy = $.proxy,
+        K_TOOLBAR = "k-toolbar",
+        K_TOGGLE_BUTTON = "k-toggle-button",
+        K_STATE_ON = "k-state-on",
+        K_STATE_DISABLED = "k-state-disabled",
+        K_BUTTON_ICON = "k-button-icon",
+        K_BUTTON_ICON_TEXT = "k-button-icontext",
 
+        CLICK = "click",
+
+        template = kendo.template,
         templates = {
 
-            buttonTemplate: kendo.template(
-                '<a href="" role="button" class="k-button" unselectable="on" title="#= text #">' +
+            button: kendo.template(
+                '<a href="" role="button" class="k-button #= data.primary ? "k-primary" : "" #" unselectable="on"' +
+                'title="#= data.text ? data.text : "" #">#: data.text ? data.text : "" #</a>'
+            ),
+
+            toggleButton: kendo.template(
+                '<a href="" role="togglebutton" class="k-button k-toggle-button #= data.selected ? "k-state-on" : "" #" unselectable="on" title="#= text #">' +
                 '<span class=""></span>#: text #</a>'
             ),
 
-            toggleButtonTemplate: kendo.template(
-                '<a href="" role="togglebutton" class="k-button k-toggle-button" unselectable="on" title="#= text #">' +
-                '<span class=""></span>#: text #</a>'
-            ),
-
-            buttonGroupTemplate: kendo.template(
+            buttonGroup: kendo.template(
                 '<div class="k-button-group">' +
                     '# for(var i = 0; i < items.length; i++) { #' +
                         '<a href="" role="button" class="k-button" unselectable="on" title="#= items[i].text #">' +
@@ -37,7 +47,7 @@ var __meta__ = {
                 '</div>'
             ),
 
-            splitButtonTemplate: kendo.template(
+            splitButton: kendo.template(
                 '<div class="k-split-button">' +
                     '<a href="" role="splitbutton" class="k-button k-split-button">' +
                         '<span class="k-split-button-text">#= text #</span><span class="k-icon k-i-arrow-s"></span>' +
@@ -50,7 +60,77 @@ var __meta__ = {
                 '</div>'
             ),
 
-            separatorTemplate: '<span class="k-toolbar-separator"></span>'
+            separator: kendo.template('<span class="k-toolbar-separator"></span>')
+
+        },
+
+        initializers = {
+            button: function(element, options) {
+                if(options.enable === false) {
+                    element.addClass(K_STATE_DISABLED);
+                }
+
+                if(options.id) {
+                    element.attr("id", options.id);
+                }
+
+                if(options.click && kendo.isFunction(options.click)) {
+                    element.on("click", options.click);
+                }
+
+                var icon = options.icon,
+                    spriteCssClass = options.spriteCssClass,
+                    imageUrl = options.imageUrl,
+                    isEmpty, span, img;
+
+                if(spriteCssClass || imageUrl || icon) {
+                    isEmpty = true;
+
+                    element.contents().not("span.k-sprite").not("span.k-icon").not("img.k-image").each(function(idx, el){
+                        if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
+                            isEmpty = false;
+                        }
+                    });
+
+                    if (isEmpty) {
+                        element.addClass(K_BUTTON_ICON);
+                    } else {
+                        element.addClass(K_BUTTON_ICON_TEXT);
+                    }
+                }
+
+                if (icon) {
+                    span = element.children("span.k-icon").first();
+                    if (!span[0]) {
+                        span = $('<span class="k-icon"></span>').prependTo(element);
+                    }
+                    span.addClass("k-i-" + icon);
+                } else if (spriteCssClass) {
+                    span = element.children("span.k-sprite").first();
+                    if (!span[0]) {
+                        span = $('<span class="k-sprite"></span>').prependTo(element);
+                    }
+                    span.addClass(spriteCssClass);
+                } else if (imageUrl) {
+                    img = element.children("img.k-image").first();
+                    if (!img[0]) {
+                        img = $('<img alt="icon" class="k-image" />').prependTo(element);
+                    }
+                    img.attr("src", imageUrl);
+                }
+            },
+
+            toggleButton: function(element, options) {
+                initializers.button(element, options);
+            },
+
+            buttonGroup: function(element, options) {
+                //todo
+            },
+
+            splitButton: function(element, options) {
+                //todo
+            }
 
         };
 
@@ -61,13 +141,17 @@ var __meta__ = {
                 Widget.fn.init.call(that, element, options);
 
                 options = that.options;
-                element = that.element;
+                element = that.wrapper = that.element;
 
-                element.addClass("k-toolbar");
+                element.addClass(K_TOOLBAR);
 
                 if(options.items && options.items.length) {
                     that._renderItems(options.items);
                 }
+
+                element.on(CLICK, ".k-button", proxy(that._buttonClick, that));
+
+                kendo.notify(that);
             },
 
             events: [
@@ -87,53 +171,36 @@ var __meta__ = {
                 this.element.empty();
 
                 for (var i = 0; i < items.length; i++) {
-                    var command = items[i];
+                    var command = items[i],
+                        element;
 
-                    switch (command.type) {
-                        case 'button':
-                            this._renderButton(command);
-                            break;
+                    if(command.template) {
+                        if(kendo.isFunction(command.template)) {
+                            element = $(command.template(command));
+                        } else {
+                            element = $(command.template);
+                        }
+                        element.appendTo(this.element);
+                    } else {
+                        element = $(templates[command.type](command));
 
-                        case 'toggleButton':
-                            this._renderToggleButton(command);
-                            break;
-
-                        case 'buttonGroup':
-                            this._renderButtonGroup(command);
-                            break;
-
-                        case 'splitButton':
-                            this._renderSplitButton(command);
-                            break;
-
-                        case 'separator':
-                            this._renderSeparator(command);
-                            break;
-
-                        default:
-                            throw new Error("Item does not have a valid type!");
+                        (initializers[command.type] || $.noop)(element, command);
+                        element.appendTo(this.element);
                     }
+
                 }
             },
 
-            _renderButton: function(options) {
-                this.element.append(templates.buttonTemplate(options));
-            },
+            _buttonClick: function(e) {
+                var target = $(e.target);
 
-            _renderToggleButton: function(options) {
-                this.element.append(templates.toggleButtonTemplate(options));
-            },
+                e.preventDefault();
 
-            _renderButtonGroup: function(options) {
-                this.element.append(templates.buttonGroupTemplate(options));
-            },
+                if(target.hasClass(K_TOGGLE_BUTTON)) {
+                    target.toggleClass(K_STATE_ON);
+                }
 
-            _renderSplitButton: function(options) {
-                this.element.append(templates.splitButtonTemplate(options));
-            },
-
-            _renderSeparator: function(options) {
-                this.element.append(templates.separatorTemplate);
+                this.trigger(CLICK, { target: target });
             }
 
         });
