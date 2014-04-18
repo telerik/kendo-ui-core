@@ -1357,12 +1357,14 @@ var __meta__ = {
 
         for (idx = 0; idx < len; idx++) {
             aggr = aggregates[idx];
-            functionName = aggr.aggregate;
-            var field = aggr.field;
-            accumulator[field] = accumulator[field] || {};
-            state[field] = state[field] || {};
-            state[field][functionName] = state[field][functionName] || {};
-            accumulator[field][functionName] = functions[functionName.toLowerCase()](accumulator[field][functionName], item, kendo.accessor(field), index, length, state[field][functionName]);
+            if (aggr) {
+                functionName = aggr.aggregate;
+                var field = aggr.field;
+                accumulator[field] = accumulator[field] || {};
+                state[field] = state[field] || {};
+                state[field][functionName] = state[field][functionName] || {};
+                accumulator[field][functionName] = functions[functionName.toLowerCase()](accumulator[field][functionName], item, kendo.accessor(field), index, length, state[field][functionName]);
+            }
         }
     }
 
