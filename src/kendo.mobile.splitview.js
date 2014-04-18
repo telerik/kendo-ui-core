@@ -35,7 +35,7 @@ var __meta__ = {
             that.panes = [];
             that._paramsHistory = [];
 
-            that.element.children(kendo.roleSelector("pane")).each(function() {
+            that.content.children(kendo.roleSelector("pane")).each(function() {
                 pane = kendo.initWidget(this, {}, ui.roles);
                 that.panes.push(pane);
             });
@@ -67,10 +67,13 @@ var __meta__ = {
             var that = this,
                 element = that.element;
 
-            element.data("kendoView", that).addClass("km-view km-splitview");
+            element.data("kendoView", that).addClass("km-view");
 
             that.transition = kendo.attrValue(element, "transition");
-            $.extend(that, { header: [], footer: [], content: element });
+            kendo.mobile.ui.View.prototype._layout.call(this);
+            kendo.mobile.init(this.header.add(this.footer));
+            that.element.addClass("km-splitview");
+            that.content.addClass("km-split-content");
         },
 
         _style: function () {
