@@ -138,6 +138,9 @@
             padding-right: 10px;
             float: left;
         }
+        .k-diagram .km-scroll-wrapper {
+            overflow: auto !important;
+        }
     </style>
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
@@ -563,7 +566,7 @@ $(function () {
     }
 
     var slider = $("#slider").kendoSlider({
-        min: 0.6,
+        min: 0.1,
         value: 1,
         max: 2,
         smallStep: .1,

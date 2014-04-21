@@ -539,7 +539,7 @@
                         this.isSelected = value;
                         if (this.isSelected) {
                             if (type === SINGLE) {
-                                this.diagram.select(false);
+                                this.diagram.deselect();
                             }
                             diagram._selectedItems.push(this);
                             selected.push(this);
@@ -1012,7 +1012,7 @@
                         type = this.diagram.options.selectable.type;
                         if (this.isSelected) {
                             if (type === SINGLE) {
-                                this.diagram.select(false);
+                                this.diagram.deselect();
                             }
                             this.adorner = new ConnectionEditAdorner(this, this.options.select);
                             diagram._adorn(this.adorner, true);
@@ -1619,60 +1619,48 @@
              * @param options
              * @returns {Array}
              */
-            select: function (itemsOrRect, options) {
-                var i, item, items, rect, selected, valueString;
-                options = deepExtend({  addToSelection: false }, options);
-                var addToSelection = options.addToSelection;
-                if (itemsOrRect !== undefined) {
-                    this._internalSelection = true;
-                    selected = [];
+            select: function (item, options) {
+                if (isDefined(item)) {
+                    options = deepExtend({ addToSelection: false }, options);
+
+                    var addToSelection = options.addToSelection,
+                        items = [],
+                        selected = [],
+                        i, element;
+
                     if (!addToSelection) {
                         this.deselect();
                     }
 
-                    if (Utils.isBoolean(itemsOrRect)) {
-                        if (itemsOrRect !== false) {
-                            this.select(ALL);
-                        }
-                    } else if (itemsOrRect instanceof Array) {
-                        for (i = 0; i < itemsOrRect.length; i++) {
-                            item = itemsOrRect[i];
-                            if (item instanceof DiagramElement) {
-                                if (item.select(true)) {
-                                    selected.push(item);
-                                }
-                            }
-                        }
-                    } else if (itemsOrRect instanceof DiagramElement) {
-                        if (itemsOrRect.select(true)) {
-                            selected.push(itemsOrRect);
-                        }
-                    } else { // string with special meaning...
-                        valueString = itemsOrRect.toString().toLowerCase();
-                        if (valueString === NONE) {
-                            this.select(false);
-                        } else if (valueString === ALL) {
-                            items = this.shapes.concat(this.connections);
-                            for (i = 0; i < items.length; i++) {
-                                item = items[i];
-                                if (item.select(true)) {
-                                    selected.push(item);
-                                }
-                            }
+                    this._internalSelection = true;
+
+                    if (item instanceof Array) {
+                        items = item;
+                    } else if (item instanceof DiagramElement) {
+                        items = [ item ];
+                    }
+
+                    for (i = 0; i < items.length; i++) {
+                        element = items[i];
+                        if (element.select(true)) {
+                            selected.push(element);
                         }
                     }
 
-                    if (selected.length > 0) {
-                        this._selectionChanged(selected);
-                    }
+                    this._selectionChanged(selected, []);
 
                     this._internalSelection = false;
                 } else {
-                    return this._selectedItems; // returns all selected items.
+                    return this._selectedItems;
                 }
             },
 
+            selectAll: function() {
+                this.select(this.shapes.concat(this.connections));
+            },
+
             selectArea: function(rect) {
+                this._internalSelection = true;
                 var selected = [];
                 if (rect instanceof Rect) {
                     items = this.shapes.concat(this.connections);
@@ -1686,11 +1674,14 @@
                     }
                 }
 
-                this._selectionChanged(selected);
+                this._selectionChanged(selected, []);
+                this._internalSelection = false;
             },
 
             deselect: function(item) {
-                var deselected = [];
+                this._internalSelection = true;
+                var deselected = [],
+                    element, i;
 
                 if (item instanceof Array) {
                     deselected = item;
@@ -1700,11 +1691,15 @@
                     deselected = this._selectedItems.slice(0);
                 }
 
-                for (var i = 0; i < deselected.length; i++) {
-                    deselected[i].select(false);
+                for (i = 0; i < deselected.length; i++) {
+                    element = deselected[i];
+                    if (element.select(false)) {
+                        deselected.push(element);
+                    }
                 }
 
                 this._selectionChanged([], deselected);
+                this._internalSelection = false;
             },
             /**
              * Brings to front the passed items.
@@ -1790,9 +1785,11 @@
                     val,
                     item,
                     i;
+
                 if (items.length === 0) {
                     return;
                 }
+
                 switch (direction.toLowerCase()) {
                     case "left":
                     case "top":
@@ -1803,6 +1800,7 @@
                         val = MIN_VALUE;
                         break;
                 }
+
                 for (i = 0; i < items.length; i++) {
                     item = items[i];
                     if (item instanceof Shape) {
@@ -1916,7 +1914,7 @@
 
                     offsetX = this._copyOffset * this.options.copy.offsetX;
                     offsetY = this._copyOffset * this.options.copy.offsetY;
-                    this.select(false);
+                    this.deselect();
                     // first the shapes
                     for (i = 0; i < this._clipboard.length; i++) {
                         item = this._clipboard[i];

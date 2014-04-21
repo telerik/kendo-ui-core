@@ -5,6 +5,40 @@
         Rect = dataviz.diagram.Rect,
         diagram;
 
+        /*-----------------------------------------------*/
+    module("api / selectAll", {
+        setup: function () {
+            var div = QUnit.fixture.html('<div id="diagram" />');
+            diagram = div.kendoDiagram({
+                shapes: [{
+                    id: "rect",
+                    type: "Rectangle",
+                    x: 0,
+                    y: 0,
+                    width: 100,
+                    height: 100
+                },{
+                    id: "rect1",
+                    type: "Rectangle",
+                    x: 200,
+                    y: 200,
+                    width: 100,
+                    height: 100
+                }]
+            }).getKendoDiagram();
+        },
+        teardown: function () {
+            diagram.destroy();
+        }
+    });
+
+    test("select all items", function () {
+        diagram.selectAll();
+        $.each(diagram.shapes, function(index, item) {
+            ok(this.isSelected);
+        });
+    });
+
     /*-----------------------------------------------*/
     module("api / select", {
         setup: function () {
@@ -46,11 +80,11 @@
         ok(diagram.shapes[0].isSelected);
     });
 
-    test("select all items", function () {
-        diagram.select(true);
-        $.each(diagram.shapes, function(index, item) {
-            ok(this.isSelected);
-        });
+    test("without parametters return all selected items", function () {
+        diagram.select(diagram.shapes[0]);
+        var items = diagram.select();
+
+        deepEqual(diagram.shapes[0], items[0]);
     });
 
     /*-----------------------------------------------*/
@@ -108,7 +142,7 @@
                 }]
             }).getKendoDiagram();
             // make all items selected
-            diagram.select(true);
+            diagram.selectAll();
         },
         teardown: function () {
             diagram.destroy();
