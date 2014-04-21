@@ -181,14 +181,14 @@
 
             dataSource = new GanttDataSource({
                 data: [
-                { title: "Task1", parentId: null, id: 1, summary: true },
-                    { title: "Child 1.1", parentId: 1, id: 2, summary: true },
+                { title: "Task1", parentId: null, id: 1, summary: true , expanded: true },
+                    { title: "Child 1.1", parentId: 1, id: 2, summary: true, expanded: true },
                         { title: "Child 1.1.1", parentId: 2, id: 3, summary: false },
-                        { title: "Child 1.1.2", parentId: 2, id: 4, summary: true },
+                        { title: "Child 1.1.2", parentId: 2, id: 4, summary: true, expanded: true },
                             { title: "Child 1.1.2.1", parentId: 4, id: 11 },
                     { title: "Child 1.2", parentId: 1, id: 5, summary: false },
                     { title: "Child 1.3", parentId: 1, id: 6, summary: false },
-                { title: "Task2", parentId: null, id: 7, summary: true },
+                { title: "Task2", parentId: null, id: 7, summary: true, expanded: true },
                     { title: "Child 2.1", parentId: 7, id: 8, summary: false },
                     { title: "Child 2.2", parentId: 7, id: 9, summary: false },
                     { title: "Child 2.3", parentId: 7, id: 10, summary: false }

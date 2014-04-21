@@ -49,6 +49,7 @@ var __meta__ = {
         return title;
     };
     var NS = ".kendoGanttList";
+    var CLICK = "click";
 
     ui.GanttList = Widget.extend({
         init: function(element, options) {
@@ -66,13 +67,13 @@ var __meta__ = {
             this._header();
             this._sortable();
             this._editable();
+            this._attachEvents();
         },
 
         destroy: function() {
-            this.content.off(NS);
-
             Widget.fn.destroy.call(this);
 
+            this.content.off(NS);
             this.header = null;
             this.content = null;
             this.levels = null;
@@ -82,6 +83,22 @@ var __meta__ = {
 
         options: {
             name: "GanttList"
+        },
+
+        _attachEvents: function() {
+            var that = this;
+
+            that.content
+                .on(CLICK + NS, "td > span.k-icon:not(.k-i-none)", function(e) {
+                    var element = $(this);
+                    var model = that._modelFromElement(element);
+
+                    element.toggleClass("k-i-collapse k-i-expand");
+                    model.set("expanded", !model.get("expanded"));
+                })
+                .on("dblclick" + NS, "td > span.k-icon:not(.k-i-none)", function(e) {
+                    e.stopPropagation();
+                });
         },
 
         _dom: function() {
@@ -325,7 +342,7 @@ var __meta__ = {
             var that = this;
             var cell = options.cell;
             var column = options.column;
-            var model = this._modelFromContainer(cell);
+            var model = this._modelFromElement(cell);
 
             if (!this._modelChangeHandler) {
                 this._modelChangeHandler = function() {
@@ -352,7 +369,7 @@ var __meta__ = {
 
         _closeCell: function() {
             var cell = this._editableContainer;
-            var model = this._modelFromContainer(cell);
+            var model = this._modelFromElement(cell);
 
             model.unbind("change", this._modelChangeHandler);
             cell.empty()
@@ -370,8 +387,8 @@ var __meta__ = {
             }
         },
 
-        _modelFromContainer: function(container) {
-            var row = container.closest("tr");
+        _modelFromElement: function(element) {
+            var row = element.closest("tr");
             var model = this.dataSource.getByUid(row.attr(kendo.attr("uid")));
 
             return model;

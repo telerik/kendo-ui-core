@@ -189,9 +189,9 @@
 
         dataSource = new GanttDataSource({
             data: [
-            { title: "Task1", parentId: null, id: 1 },
-            { title: "Task2", parentId: null, id: 2 },
-            { title: "Child 1.1", parentId: 1, id: 3 },
+            { title: "Task1", parentId: null, id: 1, expanded: true },
+            { title: "Task2", parentId: null, id: 2, expanded: true },
+            { title: "Child 1.1", parentId: 1, id: 3, expanded: true },
             { title: "Child 2.1", parentId: 2, id: 4 },
             { title: "Child 1.1.1", parentId: 3, id: 5 },
             { title: "Child 1.1.2", parentId: 3, id: 6 }
@@ -212,6 +212,44 @@
         equal(tasks[3].id, 6);
         equal(tasks[4].id, 2);
         equal(tasks[5].id, 4);
+    });
+
+    test("taskTree() skips the children of collapsed tasks", function() {
+        /* 
+
+       Tasks should be returned in the following order:
+
+       Task1
+           Child 1.1
+       Task2
+           Child 2.1
+
+       */
+
+        dataSource = new GanttDataSource({
+            data: [
+            { title: "Task1", parentId: null, id: 1, expanded: true },
+            { title: "Task2", parentId: null, id: 2, expanded: true },
+            { title: "Child 1.1", parentId: 1, id: 3, expanded: false },
+            { title: "Child 2.1", parentId: 2, id: 4 },
+            { title: "Child 1.1.1", parentId: 3, id: 5 },
+            { title: "Child 1.1.2", parentId: 3, id: 6 }
+            ],
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+        dataSource.fetch();
+
+        var tasks = dataSource.taskTree();
+
+        equal(tasks[0].id, 1);
+        equal(tasks[1].id, 3);
+        equal(tasks[2].id, 2);
+        equal(tasks[3].id, 4);
+        equal(tasks.length, 4);
     });
 
     module("GanttDataSource update()", {

@@ -130,7 +130,8 @@ var __meta__ = {
             start: { type: "date", validation: { required: true } },
             end: { type: "date", validation: { required: true } },
             percentComplete: { type: "number" },
-            summary: { type: "boolean" }
+            summary: { type: "boolean" },
+            expanded: { type: "boolean", defaultValue: true }
         }
     });
 
@@ -244,14 +245,18 @@ var __meta__ = {
 
         taskTree: function(task) {
             var data = [];
+            var current;
             var tasks = this.taskChildren(task);
 
             for (var i = 0, l = tasks.length; i < l; i++) {
-                data.push(tasks[i]);
+                current = tasks[i];
+                data.push(current);
 
-                var children = this.taskTree(tasks[i]);
+                if (current.get("expanded")) {
+                    var children = this.taskTree(current);
 
-                data.push.apply(data, children);
+                    data.push.apply(data, children);
+                }
             }
 
             return data;
