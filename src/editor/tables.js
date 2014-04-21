@@ -335,7 +335,10 @@ var DeleteRowCommand = Command.extend({
             focusElement;
 
         if (rowCount == 1) {
-            focusElement = dom.next(table) || dom.prev(table);
+            focusElement = dom.next(table);
+            if (!focusElement || dom.insignificant(focusElement)) {
+                focusElement = dom.prev(table);
+            }
 
             dom.remove(table);
         } else {
@@ -366,7 +369,10 @@ var DeleteColumnCommand = Command.extend({
             focusElement, i;
 
         if (columnCount == 1) {
-            focusElement = dom.next(table) || dom.prev(table);
+            focusElement = dom.next(table);
+            if (!focusElement || dom.insignificant(focusElement)) {
+                focusElement = dom.prev(table);
+            }
 
             dom.remove(table);
         } else {
