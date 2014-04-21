@@ -19,16 +19,6 @@
         }
     });
 
-    test("nullify properties when destroyed", function() {
-        ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
-
-        ganttList.destroy();
-
-        equal(ganttList.header, null);
-        equal(ganttList.content, null);
-        equal(ganttList.levels, null);
-    });
-
     test("add default title column", 2, function() {
         ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
 
@@ -282,12 +272,12 @@
         equal(content.find("tr").eq(0).children("td").length, columns.length);
     });
 
-    test("table td element with span for title column", function() {
+    test("table td element with icon-span for title column", function() {
         var content = ganttList.content;
         var span = content.find("tr").eq(0).children("td").eq(0).children("span");
 
-        equal(span.length, 1);
-        ok(span.hasClass("k-icon"));
+        equal(span.length, 2);
+        ok(span.eq(0).hasClass("k-icon"));
     });
 
     test("table td element with padding for title column", function() {

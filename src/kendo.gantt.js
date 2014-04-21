@@ -452,7 +452,6 @@ var __meta__ = {
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
-
                 this.dependencies.fetch();
             }
 
@@ -514,8 +513,12 @@ var __meta__ = {
         _list: function () {
             var options = extend({}, { columns: this.options.columns || [], dataSource: this.dataSource });
             var element = this.wrapper.find(".k-gantt-treelist > .k-grid");
+            var that = this;
 
             this.list = new kendo.ui.GanttList(element, options);
+
+            this.list
+                .bind("update", function() { that.refresh(); });
         },
 
         _timeline: function () {
@@ -523,16 +526,6 @@ var __meta__ = {
             var element = this.wrapper.find(".k-gantt-timeline");
 
             this.timeline = new kendo.ui.GanttTimeline(element, options);
-        },
-
-        _bindWidgets: function() {
-            var list = this.list;
-
-            var updateHandler = function(e) {
-
-            };
-
-            list.bind("update", updateHandler);
         },
 
         _dataSource: function() {
@@ -573,7 +566,7 @@ var __meta__ = {
         },
 
         refresh: function(e) {
-            if (this._preventRender) {
+            if (this._preventRender || this.list.editable) {
                 return;
             }
 

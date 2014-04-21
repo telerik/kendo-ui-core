@@ -1,5 +1,5 @@
 ﻿(function(f, define) {
-    define(["./kendo.core", "./kendo.sorter"], f);
+    define(["./kendo.core", "./kendo.sorter", "./kendo.editable"], f);
 })(function() {
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt List",
     category: "web",
     description: "The Gantt List",
-    depends: [ "core", "sorter" ],
+    depends: [ "core", "sorter", "editable" ],
     hidden: true
 };
 
@@ -48,6 +48,7 @@ var __meta__ = {
 
         return title;
     };
+    var NS = ".kendoGanttList";
 
     ui.GanttList = Widget.extend({
         init: function(element, options) {
@@ -64,9 +65,12 @@ var __meta__ = {
             this._dom();
             this._header();
             this._sortable();
+            this._editable();
         },
 
         destroy: function() {
+            this.content.off(NS);
+
             Widget.fn.destroy.call(this);
 
             this.header = null;
@@ -74,6 +78,10 @@ var __meta__ = {
             this.levels = null;
 
             kendo.destroy(this.element);
+        },
+
+        options: {
+            name: "GanttList"
         },
 
         _dom: function() {
@@ -140,7 +148,7 @@ var __meta__ = {
         },
 
         _ths: function() {
-            var domTree = this.headerTree
+            var domTree = this.headerTree;
             var columns = this.columns;
             var column;
             var style;
@@ -223,9 +231,12 @@ var __meta__ = {
 
             if (column.field == "title") {
                 style = this._level({ idx: task.get("parentId"), id: task.get("id"), summary: isSummary });
-                children = [domTree.element("span", { className: isSummary ? "k-icon k-i-collapse" : "k-icon k-i-none" }), domTree.text(formatedValue)];
+                children = [
+                    domTree.element("span", { className: isSummary ? "k-icon k-i-collapse" : "k-icon k-i-none" }),
+                    domTree.element("span", null, [domTree.text(formatedValue)])
+                ];
             } else {
-                children = [domTree.text(formatedValue)];
+                children = [domTree.element("span", null, [domTree.text(formatedValue)])];
             }
 
             return domTree.element("td", style, children);
@@ -276,6 +287,94 @@ var __meta__ = {
                 }
             }
             cells = null;
+        },
+
+        _editable: function() {
+            var that = this;
+            var handler = function() {
+                if (that.editable.end()) {
+                    that._closeCell();
+                }
+            };
+
+            that.content
+                .on("dblclick" + NS, "td", function(e) {
+                    var td = $(this);
+                    var tr = td.parent();
+                    var idx = tr.children().index(td);
+                    var column = that.columns[idx];
+
+                    if (that.editable) {
+                        return;
+                    }
+
+                    if (column.editable) {
+                        that._editCell({ cell: td, column: column });
+                    }
+                })
+                .on("focusin" + NS, function() {
+                    clearTimeout(that.timer);
+                    that.timer = null;
+                })
+                .on("focusout" + NS, function() {
+                    that.timer = setTimeout(handler, 1);
+                });
+        },
+
+        _editCell: function(options) {
+            var that = this;
+            var cell = options.cell;
+            var column = options.column;
+            var model = this._modelFromContainer(cell);
+
+            if (!this._modelChangeHandler) {
+                this._modelChangeHandler = function() {
+                    that.updated = true;
+                };
+            }
+
+            this._editableContent = cell.children().detach();
+            this._editableContainer = cell;
+
+            model.bind("change", this._modelChangeHandler);
+
+            this.editable = cell.kendoEditable({
+                                fields: {
+                                    field: column.field,
+                                    format: column.format,
+                                    editor: column.editor,
+                                    values: column.values
+                                },
+                                model: model,
+                                clearContainer: false
+                            }).data("kendoEditable");
+        },
+
+        _closeCell: function() {
+            var cell = this._editableContainer;
+            var model = this._modelFromContainer(cell);
+
+            model.unbind("change", this._modelChangeHandler);
+            cell.empty()
+                .append(this._editableContent);
+
+            this.editable.destroy();
+            this.editable = null;
+
+            this._editableContainer = null;
+            this._editableContent = null;
+
+            if (this.updated) {
+                this.updated = false;
+                this.trigger("update");
+            }
+        },
+
+        _modelFromContainer: function(container) {
+            var row = container.closest("tr");
+            var model = this.dataSource.getByUid(row.attr(kendo.attr("uid")));
+
+            return model;
         }
     });
 
