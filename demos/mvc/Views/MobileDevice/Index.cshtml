@@ -75,7 +75,7 @@
         function changeSkin(e) {
             var nextSkin = e.sender.element.text() == "Flat" ? "flat" : "";
 
-            window.kendoMobileApplication.skin(nextSkin.toLowerCase());
+            window.app.skin(nextSkin.toLowerCase());
             e.sender.element.find(".km-text").text(nextSkin ? "Native" : "Flat");
 
             if (isAndroid) {
@@ -86,11 +86,11 @@
         function changeAndroidSkin(e) {
             var nextSkin = e.sender.element.text() == "Light" ? "android-light" : "android-dark";
 
-            window.kendoMobileApplication.skin(nextSkin.toLowerCase());
+            window.app.skin(nextSkin.toLowerCase());
             e.sender.element.find(".km-text").text(nextSkin == "android-light" ? "Dark" : "Light");
         }
 
-        window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
+        window.app = new kendo.mobile.Application($(document.body), {
             layout: "examples",
             transition: "slide",
             icon: {

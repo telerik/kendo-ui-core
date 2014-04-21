@@ -11,14 +11,14 @@
                         startLoading();
                      });
 
-        loaderElement = kendoMobileApplication.pane.loader.element.find("h1");
+        loaderElement = app.pane.loader.element.find("h1");
     }
 
 
     function hideLoader() {
         clearInterval(interval);
-        kendoMobileApplication.hideLoading(); //hide loading popup
-        kendoMobileApplication.changeLoadingMessage("Loading...");
+        app.hideLoading(); //hide loading popup
+        app.changeLoadingMessage("Loading...");
         loaderElement.removeClass("loaderHeading");
     }
 
@@ -32,12 +32,12 @@
         var seconds = 5;
 
         loaderElement.addClass("loaderHeading");
-        kendoMobileApplication.changeLoadingMessage(seconds + " seconds left!");
+        app.changeLoadingMessage(seconds + " seconds left!");
 
-        kendoMobileApplication.showLoading(); //show loading popup
+        app.showLoading(); //show loading popup
 
         interval = setInterval(function() {
-            kendoMobileApplication.changeLoadingMessage(--seconds + " seconds left!"); //update text of the loading popup
+            app.changeLoadingMessage(--seconds + " seconds left!"); //update text of the loading popup
 
             if (seconds == 0) {
                 showButton.animate({ opacity: 1 });
