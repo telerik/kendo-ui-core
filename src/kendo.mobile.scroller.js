@@ -220,14 +220,18 @@ var __meta__ = {
                 elementSize: 0,
                 movable: new Movable(element),
                 scrollMovable: options.movable,
+                alwaysVisible: options.alwaysVisible,
                 size: horizontal ? "width" : "height"
             });
 
-            that.scrollMovable.bind(CHANGE, proxy(that._move, that));
+            that.scrollMovable.bind(CHANGE, proxy(that.refresh, that));
             that.container.append(element);
+            if (options.alwaysVisible) {
+                that.show();
+            }
         },
 
-        _move: function() {
+        refresh: function() {
             var that = this,
                 axis = that.axis,
                 dimension = that.dimension,
@@ -236,6 +240,12 @@ var __meta__ = {
                 sizeRatio = paneSize / dimension.total,
                 position = Math.round(-scrollMovable[axis] * sizeRatio),
                 size = Math.round(paneSize * sizeRatio);
+
+                if (sizeRatio >= 1) {
+                    this.element.hide();
+                } else {
+                    this.element.show();
+                }
 
                 if (position + size > paneSize) {
                     size = paneSize - position;
@@ -257,7 +267,9 @@ var __meta__ = {
         },
 
         hide: function() {
-            this.element.css({opacity: 0});
+            if (!this.alwaysVisible) {
+                this.element.css({opacity: 0});
+            }
         }
     });
 
@@ -434,6 +446,7 @@ var __meta__ = {
             name: "Scroller",
             zoom: false,
             pullOffset: 140,
+            visibleScrollHints: false,
             elastic: true,
             useNative: false,
             mousewheelScrolling: true,
@@ -601,8 +614,13 @@ var __meta__ = {
                     axis: axis,
                     movable: movable,
                     dimension: dimension,
-                    container: that.element
+                    container: that.element,
+                    alwaysVisible: that.options.visibleScrollHints
                 });
+
+            dimension.bind(CHANGE, function() {
+                scrollBar.refresh();
+            });
 
             paneAxis.bind(CHANGE, function() {
                 scrollBar.show();

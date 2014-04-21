@@ -88,4 +88,12 @@
         view = kendo.initWidget($('<div data-role="view" />'), { defaultTransition: "overlay:up" }, kendo.mobile.ui.roles);
         equal(view.transition, 'overlay:up');
     });
+
+    test("passes scroller options to scroller", 3, function() {
+        view = kendo.initWidget($('<div data-role="view" data-zoom="true" data-use-native-scrolling="true" data-scroller="{&quot;visibleScrollHints&quot;: true}" />'), {}, kendo.mobile.ui.roles);
+        var scroller = view.scroller;
+        equal(scroller.options.zoom, true);
+        equal(scroller.options.useNative, true);
+        equal(scroller.options.visibleScrollHints, true);
+    });
 })();
