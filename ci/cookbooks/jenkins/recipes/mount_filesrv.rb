@@ -1,6 +1,6 @@
 package "cifs-utils"
 
-access_options = "username=TeamFoundationUser,password=voyant69,workgroup=telerik,uid=jenkins"
+access_options = "username=KendoBuildUser,password=Kend0Tf$UseR,workgroup=telerik,uid=jenkins"
 
 directory "/mnt/Resources"
 

@@ -28,7 +28,7 @@ when "windows"
     end
 
     execute "Set jenkins-slave user" do
-        command "sc.exe config jenkins-slave obj= telerik.com\\TeamFoundationUser password= voyant69"
+        command "sc.exe config jenkins-slave obj= telerik.com\\KendoBuildUser password= Kend0Tf$UseR"
     end
 else
     user "jenkins" do

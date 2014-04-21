@@ -1,11 +1,11 @@
 case node["platform"]
 when "windows"
-    directory "c:\\Users\\TeamFoundationUser\\.ssh" do
+    directory "c:\\Users\\KendoBuildUser\\.ssh" do
         action :create
     end
 
     %w[id_rsa id_rsa.pub authorized_keys known_hosts config].each do |file|
-        cookbook_file "c:\\Users\\TeamFoundationUser\\.ssh\\#{file}" do
+        cookbook_file "c:\\Users\\KendoBuildUser\\.ssh\\#{file}" do
             source "ssh/#{file}"
         end
     end
