@@ -84,6 +84,7 @@ var __meta__ = {
             stretch: false,
             zoom: false,
             model: null,
+            scroller: {},
             initWidgets: true
         },
 
@@ -193,7 +194,7 @@ var __meta__ = {
             if (that.options.stretch) {
                 that.content.addClass("km-stretched-view");
             } else {
-                that.content.kendoMobileScroller({ zoom: that.options.zoom, useNative: that.options.useNativeScrolling });
+                that.content.kendoMobileScroller($.extend(that.options.scroller, { zoom: that.options.zoom, useNative: that.options.useNativeScrolling }));
 
                 that.scroller = that.content.data("kendoMobileScroller");
                 that.scrollerContent = that.scroller.scrollElement;
