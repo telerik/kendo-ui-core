@@ -57,8 +57,8 @@
          "!doc": "Converts a JavaScript object to JSON. Uses JSON.stringify in browsers that support it."
      },
      "template": {
-         "!type": "fn() -> fn()",
-         "!doc": "Compiles a template to a function that builds HTML. Useful when a template will be used several times. Templates offer way of creating HTML chunks. Options such as HTML encoding and compilation for optimal performance are available."
+         "!type": "fn(template: string) -> fn(data: ?)",
+         "!doc": "Compiles a template to a function that builds HTML."
      },
      "touchScroller": {
          "!type": "fn()",
@@ -96,13 +96,9 @@
          },
          "version": "string"
      },
-     "ui": {<%= component_json_typedefs namespaces["kendo.ui"] %> }
-% if suite =~ /all|dataviz/
-    ,"dataviz": { "ui": { <%= component_json_typedefs namespaces["kendo.dataviz.ui"] %> } }
-% end
-% if suite =~ /all|mobile/
-     ,"mobile": { "ui": { <%= component_json_typedefs namespaces["kendo.mobile.ui"] %> } }
-% end
+     "ui": {<%= component_json_typedefs namespaces["kendo.ui"] %> },
+     "dataviz": { "ui": { <%= component_json_typedefs namespaces["kendo.dataviz.ui"] %> } },
+     "mobile": { "ui": { <%= component_json_typedefs namespaces["kendo.mobile.ui"] %> } }
   },
   "jQuery": {
     "fn": {<%=

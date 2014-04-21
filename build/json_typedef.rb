@@ -412,14 +412,9 @@ namespace :json_typedef do
         namespace branch do
             desc "Test JSON TypeDef generation"
             task :test do
-                #sh "cd docs && git fetch && git reset --hard origin/#{branch}"
+                path = "dist/kendo.all.json"
 
-                SUITES.each do |suite, dependencies|
-                    path = "dist/kendo.#{suite}.json"
-
-                    File.write(path, get_json_typedef(path, dependencies))
-                end
-
+                File.write(path, get_json_typedef(path, md_api_suite('all')))
             end
         end
     end
