@@ -407,7 +407,7 @@
                     var selector, object;
 
                     for (selector in widgets) {
-                        object = jQuery(selector, targetDocument).data(widgets[selector]);
+                        object = $(selector, targetDocument).data(widgets[selector]);
 
                         if (object) {
                             return object.options.theme;
