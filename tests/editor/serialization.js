@@ -463,6 +463,12 @@ test("removes whitespace after images", function() {
     equal(Serializer.toEditableHtml('<img src="foo">\nfoo'), '<img src="foo">foo');
     equal(Serializer.toEditableHtml('<img src="foo">\tfoo'), '<img src="foo">foo');
     equal(Serializer.toEditableHtml('<img src="foo">\r\n foo'), '<img src="foo">foo');
+
+    var table = '<table><tr><td>foo</td></tr></table>';
+    var blockquote = '<blockquote>foo</blockquote>';
+    var br = '<br _moz_dirty="">';
+    equal(Serializer.toEditableHtml(table), br + table + br);
+    equal(Serializer.toEditableHtml(blockquote), br + blockquote + br);
 });
 
 test("encodes scripts", function() {

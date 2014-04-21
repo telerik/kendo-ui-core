@@ -52,13 +52,20 @@
 
 </head>
 <body>
-    <textarea id="editor"></textarea>
+    <textarea id="editor">&lt;table&gt;&lt;tr&gt;&lt;td&gt;foo&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</textarea>
+
+    <button>Alert HTML</button>
 
     <script>
         $("#editor").kendoEditor({
             paste: function(e) {
                 console.log(e.html);
             }
+        });
+
+        $("button").click(function(e) {
+            e.preventDefault();
+            alert($("#editor").data("kendoEditor").value());
         });
     </script>
 </body>

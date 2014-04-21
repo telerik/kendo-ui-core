@@ -26,6 +26,8 @@ div = null;
 
 var Serializer = {
     toEditableHtml: function(html) {
+        var br = '<br _moz_dirty="">';
+
         html = html || "";
 
         return html
@@ -34,7 +36,9 @@ var Serializer = {
             .replace(/<img([^>]*)>/ig, function(match) {
                 return match.replace(onerrorRe, "");
             })
-            .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
+            .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1")
+            .replace(/^<(table|blockquote)/i, br + '<$1')
+            .replace(/<\/(table|blockquote)>$/i, '</$1>' + br);
     },
 
     _fillEmptyElements: function(body) {
