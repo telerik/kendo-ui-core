@@ -36,16 +36,6 @@ class NotificationTemplate extends \Kendo\SerializableObject {
         return $this->setProperty('template', $value);
     }
 
-    /**
-    * Defines a client ID of an external Kendo UI template to be used with the corresponding notification type. Do not include the # sign with the ID.
-Either templates.template or templates.templateId must be set.See the example above.
-    * @param string $value
-    * @return \Kendo\UI\NotificationTemplate
-    */
-    public function templateId($value) {
-        return $this->setProperty('templateId', $value);
-    }
-
 //<< Properties
 }
 
