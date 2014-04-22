@@ -184,21 +184,27 @@ var __meta__ = {
        }
     };
 
+    function html(value) {
+        return new HtmlNode(value);
+    }
+
+    function element(nodeName, attrs, children) {
+        return new Element(nodeName, attrs, children);
+    }
+
+    function text(value) {
+        return new TextNode(value);
+    }
+
     function Tree(root) {
        this.root = root;
        this.children = [];
     }
 
     Tree.prototype = {
-        html: function(value) {
-            return new HtmlNode(value);
-        },
-        element: function(nodeName, attrs, children) {
-            return new Element(nodeName, attrs, children);
-        },
-        text: function(value) {
-            return new TextNode(value);
-        },
+        html: html,
+        element: element,
+        text: text,
         render: function(children) {
             var cachedChildren = this.children;
 
@@ -219,6 +225,9 @@ var __meta__ = {
     };
 
     kendo.dom = {
+        html: html,
+        text: text,
+        element: element,
         Tree: Tree
     };
 })(window.kendo);
