@@ -343,10 +343,10 @@ var Keyboard = Class.extend({
     },
 
     stopTyping: function() {
-        this.typingInProgress = false;
-        if (this.onEndTyping) {
+        if (this.typingInProgress && this.onEndTyping) {
             this.onEndTyping();
         }
+        this.typingInProgress = false;
     },
 
     endTyping: function (force) {

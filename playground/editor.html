@@ -58,9 +58,9 @@
     </div>
 
     <script>
-        require([ "../src/kendo.editor" ], function(){
-            var editor;
+        var editor;
 
+        require([ "../src/kendo.editor" ], function(){
             function showHTML() {
                 $("#content").text(editor.value());
             }

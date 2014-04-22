@@ -168,6 +168,21 @@ test("end typing calls callback specified in start typing", function() {
     });
 });
 
+test("end typing does not call callback if typing is not in progress", function() {
+    var callbackInvoked = 0;
+
+    withMock(window, "setTimeout", function () { arguments[0](); }, function() {
+        keyboard.startTyping(function () {
+            callbackInvoked++;
+        });
+
+        keyboard.endTyping();
+        keyboard.endTyping();
+
+        equal(callbackInvoked, 1);
+    });
+});
+
 test("endTyping creates timeout", function() {
     var setTimeoutArgument;
 
