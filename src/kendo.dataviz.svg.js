@@ -778,7 +778,7 @@ var __meta__ = {
         refresh: function() {
             var element = doc.getElementById(this.options.id);
             if (element) {
-                element.innerHTML = this.renderContent();
+                $(element).children().attr("d", this.children[0].renderPoints());
             }
         }
     });

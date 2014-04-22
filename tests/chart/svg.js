@@ -1016,18 +1016,18 @@
         });
 
         test("refresh updates element content", function() {
-            var container = $("<div id='foo'>foo</div>").appendTo(QUnit.fixture),
-                content = "<span>bar</span>";
+            var container = $("<div id='foo'><div>a</div></div>").appendTo(QUnit.fixture);
+            var path = "path";
             clipPath.options.id = "foo";
             clipPath.children[0] = {
-                render: function() {
-                    return content;
+                renderPoints: function() {
+                    return path;
                 }
             };
 
             clipPath.refresh();
 
-            equal(container.html(), content);
+            equal(container.children().attr("d"), path);
             container.remove();
         });
 
