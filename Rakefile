@@ -391,6 +391,7 @@ bundle :name => 'aspnetmvc.trial',
               :file_category => "Installation",
               :file_type => "Trial Files",
               :extension => "ZIP",
+              :file_markers => ["Default File"],
               :websites => ["Telerik"],
               :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
@@ -506,6 +507,7 @@ bundle :name => 'aspnetmvc.commercial',
               :file_category => "Installation",
               :file_type => "Paid Files",
               :extension => "ZIP",
+              :file_markers => ["Default File"],
               :websites => ["Telerik"],
               :download_message => 'You have successfully downloaded Telerik UI for ASP.NET MVC Commercial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers <br />Complete Source Code</strong>"
@@ -820,7 +822,7 @@ bundle :name => 'core',
               :extension => "ZIP",
               :file_markers => ["Default File"],
               :websites => ["Telerik", "SiteFinity"],
-              :download_message => 'You have successfully downloaded Kendo UI Core OS version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
+              :download_message => 'You have successfully downloaded Kendo UI Core (Apache 2.0) version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />Complete Source Code</strong>"
              }
           }

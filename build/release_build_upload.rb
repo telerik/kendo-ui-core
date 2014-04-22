@@ -78,11 +78,17 @@ def create_version(bot, product_name)
       bot.click_and_wait("Product Versions", "product")
       bot.click_and_wait("Product Name", "product")
 
+      #needed for integrationadmin
+      if product_name.start_with?('UI')
+         bot.click_and_wait("Product Name", "product")
+      end
+
 =begin
       bot.driver.execute_script <<-SCRIPT
          var masterTable = $find($telerik.$('[id$=\"_dgProducts\"]').attr('id')).get_masterTableView();
-         masterTable.filter("ProductName", "ui", Telerik.Web.UI.GridFilterFunction.Contains);
-      SCRIPT
+         masterTable.filter("ProductName", "UI", Telerik.Web.UI.GridFilterFunction.Contains, true);
+      execute_script
+      Thread.current.send :sleep, 3
 =end
       p ">>creating version"
       bot.click_and_wait product_name, "administration"
@@ -115,14 +121,17 @@ def set_fields_data(bot, file_fields)
     bot.driver.execute_script "$find($telerik.$('[id$=\"_rcbFileType\"]').attr('id')).set_text('#{file_fields[:file_type]}')"
     bot.driver.execute_script "$find($telerik.$('[id$=\"_cfExtension_rcbField\"]').attr('id')).set_text('#{file_fields[:extension]}')"
 
-    file_markers = file_fields[:file_markers]
-    file_markers.each do |fm| 
-      bot.driver.find_element(:xpath, "//label[contains(.,'#{fm}')]").click
+    if file_fields[:file_markers]
+      file_markers = file_fields[:file_markers]
+      file_markers.each do |fm| 
+        bot.driver.find_element(:xpath, "//label[contains(.,'#{fm}')]").click
 
-      if file_fields[:vs_hotfix] 
-        bot.driver.execute_script "$find($[id$=\"_txtFileVersionPrefix\"]').val('#{VERSION}')"
-        bot.driver.execute_script "$find($[id$=\"_txtFileVersionSuffix\"]').val('0')"
-      end  
+        if file_fields[:vs_hotfix] 
+          bot.driver.execute_script "$('[id$=\"_txtFileVersionPrefix\"]').val('#{VERSION}')"
+          Thread.current.send :sleep, 1
+          bot.driver.execute_script "$('[id$=\"_txtFileVersionSuffix\"]').val('0')"
+        end  
+      end
     end
  
     websites = file_fields[:websites]
@@ -182,11 +191,9 @@ def prepare_files(bot, options)
 end
 def upload_file_and_save(bot, dirpath, filename, isMsi)
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
-  p "#{full_path}"
 
   element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdFileUpload')]")
   upload_id = element.attribute("id")
-  p upload_id
 
   upload_file(bot, upload_id, full_path)
 
@@ -196,10 +203,8 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
     filename = filename.sub "msi", "xml"
     full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
 
-    p "#{full_path}"
     element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdXMLConfigFileUpload')]")
     upload_id = element.attribute("id")
-    p upload_id
     
     upload_file(bot, upload_id, full_path) 
   end
