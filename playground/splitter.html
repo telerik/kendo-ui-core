@@ -9,42 +9,43 @@
         <script src="../src/kendo.resizable.js"></script>
         <script src="../src/kendo.splitter.js"></script>
 
-        <link rel="stylesheet" href="../styles/web/kendo.common.css" />
-        <link rel="stylesheet" href="../styles/web/kendo.default.css" />
-
-        <style>
-            .k-splitter .k-splitbar-horizontal { width: 15px; }
-        </style>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
     </head>
     <body>
-        <div id="splitter" style='width:300px;height:100px'><div>
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-            foo bar baz
-        </div><div>
-            baz qux cat
-        </div></div>
+        <script type="text/x-kendo-template" id="splitterTemplate">
+            <div id="splitter" style='width:300px;height:100px'>
+                <div>
+                    left pane
+                </div>
+                <div>
+                    right pane
+                </div>
+            </div>
+        </script>
+
+        <button id="init">Init</button>
+        <button id="destroy">Destroy</button>
+        <div id="container"></div>
 
         <script>
             $(document).ready(function() {
-                $("#splitter").kendoSplitter({panes: [
-                    { collapsible: true, resizable: true, size: "61px" },
-                    { collapsible: true, resizable: true }
-                ]});
+                var template = kendo.template($("#splitterTemplate").html());
+
+                $("#init").click(function() {
+                    $("#container").empty().html(template({}));
+
+                    $("#splitter").kendoSplitter({panes: [
+                        { collapsible: true, resizable: true, size: "61px" },
+                        { collapsible: true, resizable: true }
+                    ]});
+                });
+
+                $("#destroy").click(function() {
+                    $("#splitter").data("kendoSplitter").destroy();
+
+                    $("#container").empty();
+                });
             });
         </script>
     </body>
