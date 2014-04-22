@@ -86,9 +86,7 @@ var __meta__ = {
 
             that._marker = kendo.guid().substring(0, 8);
 
-            that._resizeHandler = function() {
-                that.resize();
-            };
+            that._resizeHandler = proxy(that.resize, that);
 
             that._initPanes();
 
@@ -152,17 +150,17 @@ var __meta__ = {
         },
 
         destroy: function() {
-            var that = this;
+            Widget.fn.destroy.call(this);
 
-            Widget.fn.destroy.call(that);
+            this._detachEvents();
 
-            that._detachEvents();
-
-            if (that.resizing) {
-                that.resizing.destroy();
+            if (this.resizing) {
+                this.resizing.destroy();
             }
 
-            kendo.destroy(that.element);
+            kendo.destroy(this.element);
+
+            this.wrapper = this.element = null;
         },
 
         _keydown: function(e) {
@@ -199,19 +197,19 @@ var __meta__ = {
         },
 
         _initPanes: function() {
-            var that = this,
-                panesConfig = that.options.panes || [];
+            var panesConfig = this.options.panes || [];
+            var that = this;
 
-            that.element
+            this.element
                 .addClass("k-widget").addClass("k-splitter")
-                .children(":not(script)")
-                .each(function (index, pane) {
-                    var config = panesConfig && panesConfig[index];
-                    that._initPane(pane, config);
-                })
-                .end();
+                .children()
+                    .each(function(i, pane) {
+                        if (pane.nodeName.toLowerCase() != "script") {
+                            that._initPane(pane, panesConfig[i]);
+                        }
+                    });
 
-            that.resize();
+            this.resize();
         },
 
         _initPane: function(pane, config) {
@@ -444,11 +442,13 @@ var __meta__ = {
                 lastNonCollapsedPane[sizingProperty](totalSize + lastNonCollapsedPane[0][sizingDomProperty]);
             }
 
-            element.children(":not(script)")
+            element.children()
                 .css(alternateSizingProperty, element[alternateSizingProperty]())
                 .each(function (i, child) {
-                    child.style[positioningProperty] = Math.floor(sum) + "px";
-                    sum += child[sizingDomProperty];
+                    if (child.tagName.toLowerCase() != "script") {
+                        child.style[positioningProperty] = Math.floor(sum) + "px";
+                        sum += child[sizingDomProperty];
+                    }
                 });
 
             that._detachEvents();
@@ -632,6 +632,7 @@ var __meta__ = {
 
         destroy: function() {
             this._resizable.destroy();
+            this._resizable = this._element = this.owner = null;
         },
 
         isResizing: function() {
