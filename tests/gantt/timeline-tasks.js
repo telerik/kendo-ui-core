@@ -91,14 +91,35 @@
         equal(timeline.wrapper.find(".k-gantt-columns td").length, slotCount);
     });
 
-    test("columns table populated with cols for each time slot", function() {
-        var slotCount;
+    test("columns table cells have colspan set to slot span", function() {
+        var slots;
 
+        timeline.view("month");
         timeline._render(tasks, range);
 
-        slotCount = timeline.view()._timeSlots().length;
+        slots = timeline.view()._timeSlots();
 
-        equal(timeline.wrapper.find(".k-gantt-columns col").length, slotCount);
+        equal(timeline.wrapper.find(".k-gantt-columns td")[0].colSpan, slots[0].span);
+        equal(timeline.wrapper.find(".k-gantt-columns td")[1].colSpan, slots[1].span);
+        equal(timeline.wrapper.find(".k-gantt-columns td")[2].colSpan, slots[2].span);
+        equal(timeline.wrapper.find(".k-gantt-columns td")[3].colSpan, slots[3].span);
+        equal(timeline.wrapper.find(".k-gantt-columns td")[4].colSpan, slots[4].span);
+    });
+
+    test("columns table populated with cols for each time slot combined span", function() {
+        var slots;
+        var totalCount = 0;
+
+        timeline.view("month");
+        timeline._render(tasks, range);
+
+        slots = timeline.view()._timeSlots();
+
+        for (var i = 0, length = slots.length; i < length; i++) {
+            totalCount += slots[i].span;
+        }
+
+        equal(timeline.wrapper.find(".k-gantt-columns col").length, totalCount);
     });
 
 

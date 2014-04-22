@@ -14,6 +14,8 @@ var __meta__ = {
 (function($) {
 
     var Widget = kendo.ui.Widget;
+    var kendoDomElement = kendo.dom.element;
+    var kendoTextElement = kendo.dom.text;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
     var minDependencyWidth = 14;
@@ -123,8 +125,8 @@ var __meta__ = {
             var headers = this._headers(rows);
             var colgroup = this._colgroup();
             var tree = this._headerTree;
-            var header = tree.element("thead", null, headers);
-            var table = tree.element("table", null, [colgroup, header]);
+            var header = kendoDomElement("thead", null, headers);
+            var table = kendoDomElement("table", null, [colgroup, header]);
 
             tree.render([table]);
 
@@ -144,11 +146,10 @@ var __meta__ = {
         _rowsTable: function(rowCount) {
             var rows = [];
             var row;
-            var tree = this._taskTree;
             var attributes = [null, { className: "k-alt" }];
 
             for (var i = 0; i < rowCount; i++) {
-                row = tree.element("tr", attributes[i % 2], [tree.element("td")]);
+                row = kendoDomElement("tr", attributes[i % 2], [kendoDomElement("td")]);
 
                 rows.push(row);
             }
@@ -159,17 +160,26 @@ var __meta__ = {
         _columnsTable: function(rowCount) {
             var cells = [];
             var row;
-            var cellCount = this._timeSlots().length;
-            var tree = this._taskTree;
+            var slots = this._timeSlots();
+            var slotsCount = slots.length
             var height = rowCount * rowHeight;
+            var slotSpan;
+            var totalSpan = 0;
+            var attributes;
 
-            for (var i = 0; i < cellCount; i++) {
-                cells.push(tree.element("td"));
+            for (var i = 0; i < slotsCount; i++) {
+                slotSpan = slots[i].span;
+
+                totalSpan += slotSpan;
+
+                attributes = (slotSpan !== 1) ? { colspan: slotSpan } : null;
+
+                cells.push(kendoDomElement("td", attributes));
             }
 
-            row = tree.element("tr", null, cells);
+            row = kendoDomElement("tr", null, cells);
 
-            return this._createTable(cellCount, [row], { className: "k-gantt-columns", style: { height: height + "px" } });
+            return this._createTable(totalSpan, [row], { className: "k-gantt-columns", style: { height: height + "px" } });
         },
 
         _tasksTable: function(tasks) {
@@ -180,16 +190,15 @@ var __meta__ = {
             var position;
             var task;
             var coordinates = this._taskCoordinates = {};
-            var tree = this._taskTree;
 
             for (var i = 0, l = tasks.length; i < l; i++) {
                 task = tasks[i];
 
                 position = this._taskPosition(task);
 
-                wrap = tree.element("div", { className: "taskWrap" }, [this._renderTask(tasks[i], position)]);
-                cell = tree.element("td", null, [wrap]);
-                row = tree.element("tr", null, [cell]);
+                wrap = kendoDomElement("div", { className: "taskWrap" }, [this._renderTask(tasks[i], position)]);
+                cell = kendoDomElement("td", null, [wrap]);
+                row = kendoDomElement("tr", null, [cell]);
 
                 rows.push(row);
                 
@@ -204,19 +213,19 @@ var __meta__ = {
         },
 
         _createTable: function(colspan, rows, styles) {
-            var tree = this._taskTree;
             var cols = [];
             var colgroup;
             var tbody;
 
             for (var i = 0; i < colspan; i++) {
-                cols.push(tree.element("col"));
+                cols.push(kendoDomElement("col"));
             }
 
-            colgroup = tree.element("colgroup", null, cols);
-            tbody = tree.element("tbody", null, rows);
+            colgroup = kendoDomElement("colgroup", null, cols);
 
-            return tree.element("table", styles, [colgroup, tbody]);
+            tbody = kendoDomElement("tbody", null, rows);
+
+            return kendoDomElement("table", styles, [colgroup, tbody]);
         },
 
         _renderTask: function(task, position) {
@@ -224,12 +233,11 @@ var __meta__ = {
             var inner;
             var middle;
             var taskElement;
-            var tree = this._taskTree;
 
-            title = tree.text(task.title);
-            inner = tree.element("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
-            middle = tree.element("div", { className: "k-gantt-summary-progress" }, [inner]);
-            taskElement = tree.element("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
+            title = kendoTextElement(task.title);
+            inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
+            middle = kendoDomElement("div", { className: "k-gantt-summary-progress" }, [inner]);
+            taskElement = kendoDomElement("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
 
             return taskElement;
         },
@@ -481,19 +489,21 @@ var __meta__ = {
         },
 
         _line: function(styles) {
-            return this._dependencyTree.element("div", { className: "k-gantt-line", style: styles });
+            return kendoDomElement("div", { className: "k-gantt-line", style: styles });
         },
 
         _colgroup: function() {
-            var count = this._timeSlots().length;
+            var slots = this._timeSlots();
+            var count = slots.length;
             var cols = [];
-            var tree = this._headerTree;
 
             for (var i = 0; i < count; i++) {
-                cols.push(tree.element("col"));
+                for (var j = 0, length = slots[i].span; j < length; j++) {
+                    cols.push(kendoDomElement("col"));
+                }
             }
 
-            return tree.element("colgroup", null, cols);
+            return kendoDomElement("colgroup", null, cols);
         },
 
         _timeSlots: function() {
@@ -506,7 +516,6 @@ var __meta__ = {
             var headers;
             var column;
             var headerText;
-            var tree = this._headerTree;
 
             for (var levelIndex = 0, levelCount = columnLevels.length; levelIndex < levelCount; levelIndex++) {
                 level = columnLevels[levelIndex];
@@ -515,11 +524,11 @@ var __meta__ = {
                 for (var columnIndex = 0, columnCount = level.length; columnIndex < columnCount; columnIndex++) {
                     column = level[columnIndex];
 
-                    headerText = tree.text(column.text);
-                    headers.push(tree.element("th", { colspan: column.span, className: "k-header" + (column.isNonWorking ? " nonWorking" : "") }, [headerText]));
+                    headerText = kendoTextElement(column.text);
+                    headers.push(kendoDomElement("th", { colspan: column.span, className: "k-header" + (column.isNonWorking ? " nonWorking" : "") }, [headerText]));
                 }
 
-                rows.push(tree.element("tr", null, headers));
+                rows.push(kendoDomElement("tr", null, headers));
             }
 
             return rows;
