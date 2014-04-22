@@ -18,6 +18,7 @@ var __meta__ = {
     var extend = $.extend;
     var minDependencyWidth = 14;
     var minDependencyHeight = 12;
+    var rowHeight = 24;
 
     var defaultViews = {
         day: {
@@ -83,6 +84,10 @@ var __meta__ = {
             this.headerRow = null;
             this.header = null;
             this.content = null;
+
+            this._headerTree = null;
+            this._taskTree = null;
+            this._dependencyTree = null;
         },
 
         options: {
@@ -108,9 +113,7 @@ var __meta__ = {
             this.monthHeaderTemplate = kendo.template(options.monthHeaderTemplate, kendo.Template);
         },
 
-        renderLayout: function(range) {
-            this._range(range);
-
+        renderLayout: function() {
             this._slots = this._createSlots();
 
             this.createLayout(this._layout());
@@ -129,15 +132,47 @@ var __meta__ = {
         },
 
         render: function(tasks) {
-            var rows = this._tasks(tasks);
-            var table;
-            var tree = this._taskTree;
+            var taskCount = tasks.length;
 
-            table = tree.element("table", null, rows);
-            tree.render([table]);
+            var rowsTable = this._rowsTable(taskCount);
+            var columnsTable = this._columnsTable(taskCount);
+            var tasksTable = this._tasksTable(tasks);
+
+            this._taskTree.render([rowsTable, columnsTable, tasksTable]);
         },
-        
-        _tasks: function(tasks) {
+
+        _rowsTable: function(rowCount) {
+            var rows = [];
+            var row;
+            var tree = this._taskTree;
+            var attributes = [null, { className: "k-alt" }];
+
+            for (var i = 0; i < rowCount; i++) {
+                row = tree.element("tr", attributes[i % 2], [tree.element("td")]);
+
+                rows.push(row);
+            }
+
+            return this._createTable(1, rows, { className: "k-gantt-rows" });
+        },
+
+        _columnsTable: function(rowCount) {
+            var cells = [];
+            var row;
+            var cellCount = this._timeSlots().length;
+            var tree = this._taskTree;
+            var height = rowCount * rowHeight;
+
+            for (var i = 0; i < cellCount; i++) {
+                cells.push(tree.element("td"));
+            }
+
+            row = tree.element("tr", null, cells);
+
+            return this._createTable(cellCount, [row], { className: "k-gantt-columns", style: { height: height + "px" } });
+        },
+
+        _tasksTable: function(tasks) {
             var rows = [];
             var wrap;
             var cell;
@@ -161,26 +196,42 @@ var __meta__ = {
                 coordinates[task.id] = {
                     start: position.left,
                     end: position.left + position.width,
-                    top: i * 24 + 12
+                    top: i * rowHeight + rowHeight/2
                 };
             }
 
-            return rows;
+            return this._createTable(1, rows, { className: "k-gantt-tasks" });
+        },
+
+        _createTable: function(colspan, rows, styles) {
+            var tree = this._taskTree;
+            var cols = [];
+            var colgroup;
+            var tbody;
+
+            for (var i = 0; i < colspan; i++) {
+                cols.push(tree.element("col"));
+            }
+
+            colgroup = tree.element("colgroup", null, cols);
+            tbody = tree.element("tbody", null, rows);
+
+            return tree.element("table", styles, [colgroup, tbody]);
         },
 
         _renderTask: function(task, position) {
             var title;
             var inner;
             var middle;
-            var task;
+            var taskElement;
             var tree = this._taskTree;
 
             title = tree.text(task.title);
             inner = tree.element("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
             middle = tree.element("div", { className: "k-gantt-summary-progress" }, [inner]);
-            task = tree.element("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
+            taskElement = tree.element("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
 
-            return task;
+            return taskElement;
         },
 
         _taskPosition: function(task) {
@@ -193,7 +244,7 @@ var __meta__ = {
         _offset: function(date) {
             var headers = this.headerRow[0].children;
             var header;
-            var slots = this._slots[this._slots.length - 1];
+            var slots = this._timeSlots();
             var slot;
             var startOffset;
             var slotDuration;
@@ -215,7 +266,7 @@ var __meta__ = {
         },
 
         _slotIndex: function(date) {
-            var slots = this._slots[this._slots.length - 1];
+            var slots = this._timeSlots();
             var startIdx = 0;
             var endIdx = slots.length - 1;
             var middle;
@@ -277,19 +328,35 @@ var __meta__ = {
         },
 
         _renderFF: function(from, to) {
-            return this._dependencyFF(from, to, false);
+            var lines = this._dependencyFF(from, to, false);
+
+            lines[lines.length - 1].attr.className += " k-arrow-w";
+
+            return lines;
         },
 
         _renderSS: function(from, to) {
-            return this._dependencyFF(to, from, true);
+            var lines = this._dependencyFF(to, from, true);
+
+            lines[0].attr.className += " k-arrow-e";
+
+            return lines;
         },
 
         _renderFS: function(from, to) {
-            return this._dependencyFS(from, to, false);
+            var lines = this._dependencyFS(from, to, false);
+
+            lines[lines.length - 1].attr.className += " k-arrow-e";
+
+            return lines;
         },
 
         _renderSF: function(from, to) {
-            return this._dependencyFS(to, from, true);
+            var lines = this._dependencyFS(to, from, true);
+
+            lines[0].attr.className += " k-arrow-w";
+
+            return lines;
         },
 
         _dependencyFF: function(from, to, reverse) {
@@ -305,10 +372,10 @@ var __meta__ = {
 
             var addHorizontal = function() {
                 lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
-            }
+            };
             var addVertical = function() {
                 lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
-            }
+            };
 
             left = from[dir];
             top = from.top;
@@ -362,10 +429,10 @@ var __meta__ = {
 
             var addHorizontal = function() {
                 lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
-            }
+            };
             var addVertical = function() {
                 lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
-            }
+            };
 
             left = from.end;
             top = from.top;
@@ -418,7 +485,7 @@ var __meta__ = {
         },
 
         _colgroup: function() {
-            var count = this._slots[this._slots.length - 1].length;
+            var count = this._timeSlots().length;
             var cols = [];
             var tree = this._headerTree;
 
@@ -427,6 +494,10 @@ var __meta__ = {
             }
 
             return tree.element("colgroup", null, cols);
+        },
+
+        _timeSlots: function() {
+            return this._slots[this._slots.length - 1];
         },
 
         _headers: function(columnLevels) {
@@ -455,8 +526,6 @@ var __meta__ = {
         },
 
         _hours: function(start, end) {
-            var start = new Date(start);
-            var end = new Date(end);
             var slotEnd;
             var slots = [];
             var options = this.options;
@@ -465,6 +534,9 @@ var __meta__ = {
             var isWorkHour;
             var hours;
             var hourSpan = options.hourSpan;
+
+            start = new Date(start);
+            end = new Date(end);
 
             while (start < end) {
                 slotEnd = new Date(start);
@@ -495,11 +567,12 @@ var __meta__ = {
         },
 
         _days: function(start, end, span) {
-            var start = new Date(start);
-            var end = new Date(end);
             var slotEnd;
             var slots = [];
             var isWorkDay;
+
+            start = new Date(start);
+            end = new Date(end);
 
             while (start < end) {
                 slotEnd = kendo.date.nextDay(start);
@@ -522,13 +595,14 @@ var __meta__ = {
         },
 
         _weeks: function(start, end) {
-            var start = new Date(start);
-            var end = new Date(end);
             var slotEnd;
             var slots = [];
             var firstDay = this.calendarInfo().firstDay;
             var daySlots;
             var span;
+
+            start = new Date(start);
+            end = new Date(end);
 
             while (start < end) {
                 slotEnd = kendo.date.dayOfWeek(kendo.date.addDays(start, 1), firstDay, 1);
@@ -555,12 +629,13 @@ var __meta__ = {
         },
 
         _months: function(start, end) {
-            var start = new Date(start);
-            var end = new Date(end);
             var slotEnd;
             var slots = [];
             var daySlots;
             var span;
+
+            start = new Date(start);
+            end = new Date(end);
 
             while (start < end) {
                 slotEnd = new Date(start);
@@ -619,7 +694,7 @@ var __meta__ = {
     });
 
     kendo.ui.GanttDayView = View.extend({
-        _range: function(range) {
+        range: function(range) {
             this.start = kendo.date.getDate(range.start);
             this.end = kendo.date.getDate(range.end);
 
@@ -668,7 +743,7 @@ var __meta__ = {
     });
 
     kendo.ui.GanttWeekView = View.extend({
-        _range: function(range) {
+        range: function(range) {
             var calendarInfo = this.calendarInfo();
             var firstDay = calendarInfo.firstDay;
 
@@ -696,7 +771,7 @@ var __meta__ = {
     });
 
     kendo.ui.GanttMonthView = View.extend({
-        _range: function(range) {
+        range: function(range) {
             this.start = kendo.date.firstDayOfMonth(range.start);
             this.end = kendo.date.addDays(kendo.date.getDate(kendo.date.lastDayOfMonth(range.end)), 1);
         },
@@ -746,6 +821,10 @@ var __meta__ = {
             Widget.fn.destroy.call(this);
 
             kendo.destroy(this.wrapper);
+
+            this._headerTree = null;
+            this._taskTree = null;
+            this._dependencyTree = null;
         },
 
         _wrapper: function() {
@@ -854,7 +933,9 @@ var __meta__ = {
         _render: function(tasks, range) {
             var view = this.view(this._selectedViewName);
 
-            view.renderLayout(range);
+            view.range(range);
+
+            view.renderLayout();
 
             view.render(tasks);
         },
