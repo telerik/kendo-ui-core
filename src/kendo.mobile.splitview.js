@@ -67,7 +67,7 @@ var __meta__ = {
             var that = this,
                 element = that.element;
 
-            element.data("kendoView", that).addClass("km-view km-splitview");
+            element.addClass("km-view km-splitview");
 
             that.transition = kendo.attrValue(element, "transition");
             $.extend(that, { header: [], footer: [], content: element });
