@@ -242,6 +242,15 @@ span.k-dropdown
     border-color: inherit; /* skin-related, inherit does not work in ie7- */
 }
 
+/* icon vertical alignment in XHTML Transitional DOCTYPE */
+.k-dropdown-wrap .k-select:after,
+.k-picker-wrap .k-select:after
+{
+	content: "\a0";
+	display: inline-block;
+	width: 0;
+}
+
 span.k-datetimepicker .k-select,
 span.k-datetimepicker .k-select+.k-select
 {
