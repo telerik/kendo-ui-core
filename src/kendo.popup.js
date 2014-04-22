@@ -433,14 +433,17 @@ var __meta__ = {
 
             if (siblingContainer[0]) {
                 parentZIndex = Number($(siblingContainer).css("zIndex"));
+
+                // set z-index to be more than that of the container/sibling
+                // compensate with more units for window z-stack
                 if (parentZIndex) {
-                    zIndex = parentZIndex + 1;
+                    zIndex = parentZIndex + 10;
                 } else {
                     parents = anchor.parentsUntil(siblingContainer);
                     for (length = parents.length; idx < length; idx++) {
                         parentZIndex = Number($(parents[idx]).css("zIndex"));
                         if (parentZIndex && zIndex < parentZIndex) {
-                            zIndex = parentZIndex + 1;
+                            zIndex = parentZIndex + 10;
                         }
                     }
                 }

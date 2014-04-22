@@ -25,7 +25,7 @@
         popup = new Popup(div, { anchor: anchor });
 
         popup.open();
-        equal(div.parent().css("zIndex"), "3");
+        equal(div.parent().css("zIndex"), "12");
     });
 
     asyncTest("mousedown outside the element should close it", function(){
