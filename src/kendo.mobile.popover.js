@@ -91,6 +91,8 @@ var __meta__ = {
 
             popupOptions = {
                 viewport: viewport,
+                copyAnchorStyles: false,
+                autosize: true,
                 open: function() {
                     that.overlay.show();
                 },
@@ -99,7 +101,11 @@ var __meta__ = {
 
                 deactivate: function() {
                     that.overlay.hide();
-                    that.trigger(HIDE);
+                    if (!that._apiCall) {
+                        that.trigger(HIDE);
+                    }
+
+                    that._apiCall = false;
                 }
             };
 
@@ -123,8 +129,6 @@ var __meta__ = {
 
             that.overlay = $(OVERLAY).appendTo(container).hide();
             popupOptions.appendTo = that.overlay;
-            popupOptions.copyAnchorStyles = false;
-            popupOptions.autosize = true;
 
             if (options.className) {
                 that.overlay.addClass(options.className);
@@ -143,23 +147,16 @@ var __meta__ = {
         },
 
         events: [
-            SHOW,
             HIDE
         ],
 
         show: function(target) {
-            var that = this,
-                popup = that.popup;
-
-            popup.options.anchor = $(target);
-            popup.open();
-        },
-
-        target: function() {
-            return this.popup.options.anchor;
+            this.popup.options.anchor = $(target);
+            this.popup.open();
         },
 
         hide: function() {
+            this._apiCall = true;
             this.popup.close();
         },
 
@@ -167,6 +164,10 @@ var __meta__ = {
             Widget.fn.destroy.call(this);
             this.popup.destroy();
             this.overlay.remove();
+        },
+
+        target: function() {
+            return this.popup.options.anchor;
         },
 
         _activate: function() {
@@ -194,8 +195,6 @@ var __meta__ = {
 
             that.wrapper.removeClass(DIRECTION_CLASSES).addClass("km-" + cssClass);
             that.arrow.css(offset, offsetAmount).show();
-
-            that.trigger(SHOW);
         }
     });
 
@@ -210,8 +209,7 @@ var __meta__ = {
 
             popupOptions = $.extend({
                 className: "km-popover-root",
-                "show": function() { that.trigger(OPEN, { target: that.popup.target() }); },
-                "hide": function() { that.trigger(CLOSE); }
+                hide: function() { that.trigger(CLOSE); }
             }, this.options.popup);
 
             that.popup = new Popup(that.element, popupOptions);
@@ -235,16 +233,18 @@ var __meta__ = {
         ],
 
         open: function(target) {
-            this.openFor(target);
-        },
-
-        openFor: function(target) {
             this.popup.show(target);
+
             if (!this.initialOpen) {
                 this.pane.navigate("");
                 this.popup.popup._position();
                 this.initialOpen = true;
             }
+        },
+
+        openFor: function(target) {
+            this.open(target);
+            this.trigger(OPEN, { target: this.popup.target() });
         },
 
         close: function() {

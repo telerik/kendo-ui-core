@@ -41,4 +41,37 @@
         ok(shim.popup.options.origin == "center center");
         a.destroy();
     });
+
+    asyncTest("triggers hide when popup is closed", 1, function(){
+        kendo.mobile.application = null;
+        shim = new kendo.mobile.ui.Shim(root.find("#shim"), { modal: false });
+        shim.show();
+
+        shim.bind("hide", function() {
+            start();
+            ok(!shim.shim.is(":visible"));
+        });
+
+        shim.popup._resize({});
+    });
+
+    asyncTest("does not trigger hide from the API", 2, function(){
+        kendo.mobile.application = null;
+        shim = new kendo.mobile.ui.Shim(root.find("#shim"), { modal: false });
+        shim.show();
+
+        var called = false;
+
+        shim.bind("hide", function() {
+            called = true;
+        });
+
+        setTimeout(function() {
+            start();
+            ok(!called);
+            ok(!shim.shim.is(":visible"));
+        }, 100);
+
+        shim.hide();
+    });
 })();

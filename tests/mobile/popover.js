@@ -84,12 +84,33 @@
         root.find("#fooAnchor").trigger("mouseup");
     });
 
-    test("is closed when closed", 1, function(){
+    test("is closed when close is called", 1, function(){
         setup(fixture);
         kendo.effects.disable();
         popOver.openFor(root.find("#fooAnchor"));
+
+        popOver.bind("close", function() {
+            ok(false);
+        });
+
         popOver.close();
         hidden("#foo");
+        kendo.effects.enable();
+    });
+
+    test("triggers close and closes when blurred", 1, function(){
+        setup(fixture);
+        kendo.effects.disable();
+
+        popOver.openFor(root.find("#fooAnchor"));
+
+        popOver.bind("close", function() {
+            ok(true);
+            hidden("#foo");
+        });
+
+        popOver.popup.popup._resize();
+
         kendo.effects.enable();
     });
 })();
