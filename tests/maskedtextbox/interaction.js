@@ -53,25 +53,31 @@
         return start;
     }
 
-    test("MaskedTextBox shows empty mask on focus", function() {
+    asyncTest("MaskedTextBox shows empty mask on focus", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
         input.focus();
 
-        equal(input.val(), "_-_");
+        setTimeout(function() {
+            start();
+            equal(input.val(), "_-_");
+        });
     });
 
-    test("MaskedTextBox positions caret in the beginning", function() {
+    asyncTest("MaskedTextBox positions caret in the beginning", 2, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
         input.focus();
 
-        equal(caret(input[0])[0], 0);
-        equal(caret(input[0])[1], 0);
+        setTimeout(function() {
+            start();
+            equal(caret(input[0])[0], 0);
+            equal(caret(input[0])[1], 0);
+        });
     });
 
     asyncTest("MaskedTextBox selects whole text if value", 3, function() {
@@ -91,68 +97,87 @@
         });
     });
 
-    test("MaskedTextBox does not remove input value on blur", function() {
+    asyncTest("MaskedTextBox does not remove input value on blur", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
         maskedtextbox.value("1-1");
 
-        input.focus().blur();
+        input.focus();
 
-        equal(input.val(), "1-1");
-    });
-
-    test("MaskedTextBox removes empty mask on blur", function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "0-0"
+        setTimeout(function() {
+            start();
+            input.blur();
+            equal(input.val(), "1-1");
         });
-
-        input.focus().blur();
-
-        equal(input.val(), "");
     });
 
-    test("MaskedTextBox does not remove widget value if an empty symbol is left", function() {
+    asyncTest("MaskedTextBox removes empty mask on blur", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-0"
         });
 
         input.focus();
-        input.val("1-_");
-        input.blur();
 
-        equal(input.val(), "1-_");
+        setTimeout(function() {
+            start();
+            input.blur();
+            equal(input.val(), "");
+        });
     });
 
-    test("MaskedTextBox persists empty mask on ENTER", function() {
+    asyncTest("MaskedTextBox does not remove widget value if an empty symbol is left", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0-0"
+        });
+
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            input.val("1-_");
+            input.blur();
+
+            equal(input.val(), "1-_");
+        });
+    });
+
+    asyncTest("MaskedTextBox persists empty mask on ENTER", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000-0000"
         });
 
         input.focus();
-        caret(input[0], 7);
-        input.trigger({
-            type: "keydown",
-            keyCode: kendo.keys.ENTER
-        });
+        setTimeout(function() {
+            start();
+            caret(input[0], 7);
+            input.trigger({
+                type: "keydown",
+                keyCode: kendo.keys.ENTER
+            });
 
-        equal(input.val(), "(___) ___-____");
+            equal(input.val(), "(___) ___-____");
+        });
     });
 
-    test("MaskedTextBox should not call mask if e.which is 0", 0, function() {
+    asyncTest("MaskedTextBox should not call mask if e.which is 0", 0, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000-0000"
         });
 
         input.focus();
-        caret(input[0], 7);
-        input.trigger({
-            type: "keypress",
-            which: 0,
-            preventDefault: function() {
-                ok(false);
-            }
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 7);
+            input.trigger({
+                type: "keypress",
+                which: 0,
+                preventDefault: function() {
+                    ok(false);
+                }
+            });
         });
     });
 })();
