@@ -19,8 +19,10 @@ var __meta__ = {
         K_TOGGLE_BUTTON = "k-toggle-button",
         K_STATE_ON = "k-state-on",
         K_STATE_DISABLED = "k-state-disabled",
+        K_BUTTON = "k-button",
         K_BUTTON_ICON = "k-button-icon",
         K_BUTTON_ICON_TEXT = "k-button-icontext",
+        K_PRIMARY = "k-primary",
 
         CLICK = "click",
 
@@ -28,20 +30,20 @@ var __meta__ = {
         templates = {
 
             button: kendo.template(
-                '<a href="" role="button" class="k-button #= data.primary ? "k-primary" : "" #" unselectable="on"' +
+                '<a href="" role="button" class="k-button" unselectable="on"' +
                 'title="#= data.text ? data.text : "" #">#: data.text ? data.text : "" #</a>'
             ),
 
             toggleButton: kendo.template(
-                '<a href="" role="togglebutton" class="k-button k-toggle-button #= data.selected ? "k-state-on" : "" #" unselectable="on" title="#= text #">' +
+                '<a href="" role="togglebutton" class="k-button k-toggle-button" unselectable="on" title="#= text #">' +
                 '<span class=""></span>#: text #</a>'
             ),
 
             buttonGroup: kendo.template(
                 '<div class="k-button-group">' +
                     '# for(var i = 0; i < items.length; i++) { #' +
-                        '<a href="" role="button" class="k-button" unselectable="on" title="#= items[i].text #">' +
-                            '<span class=""></span>#: items[i].text #' +
+                        '<a href="" role="button" class="k-button" unselectable="on" title="#= items[i].text ? items[i].text : "" #">' +
+                            '<span class=""></span>#= items[i].text ? items[i].text : "" #' +
                         '</a>' +
                     '# } #' +
                 '</div>'
@@ -68,6 +70,10 @@ var __meta__ = {
             button: function(element, options) {
                 if(options.enable === false) {
                     element.addClass(K_STATE_DISABLED);
+                }
+
+                if(options.primary === true) {
+                    element.addClass(K_PRIMARY);
                 }
 
                 if(options.id) {
@@ -122,10 +128,22 @@ var __meta__ = {
 
             toggleButton: function(element, options) {
                 initializers.button(element, options);
+
+                if(options.selected === true) {
+                    element.addClass(K_STATE_ON);
+                }
             },
 
             buttonGroup: function(element, options) {
-                //todo
+                var buttons = element.children("." + K_BUTTON);
+
+                for (var i = 0; i < buttons.length; i++) {
+                    initializers.button(buttons.eq(i), options.items[i]);
+                }
+
+                if(options.id) {
+                    element.attr("id", options.id);
+                }
             },
 
             splitButton: function(element, options) {

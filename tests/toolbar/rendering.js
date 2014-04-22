@@ -2,7 +2,7 @@
     var container,
         ToolBar = kendo.ui.ToolBar;
 
-    module("Toolbar: Button from JSON rendering", {
+    module("Toolbar: JSON rendering", {
         setup: function() {
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
         },
@@ -13,6 +13,8 @@
             }
         }
     });
+
+    /* BUTTON */
 
     test("button element has a k-button class", 1, function() {
         container.kendoToolBar({
@@ -212,17 +214,7 @@
         ok(button.hasClass("k-button-icontext"));
     });
 
-    module("Toolbar: ToggleButton from JSON rendering", {
-        setup: function() {
-            container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
-        },
-
-        teardown: function() {
-            if (container.data("kendoToolBar")) {
-                container.kendoToolBar("destroy");
-            }
-        }
-    });
+    /* TOGGLE BUTTON */
 
     test("toggleButton has k-toggle-button class", 2, function() {
         container.kendoToolBar({
@@ -235,13 +227,35 @@
         equal(container.children().text(), "foo", "ToggleButton has correct text");
     });
 
+    test("by default toggleButton does not have k-state-selected class", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "toggleButton", text: "foo" }
+            ]
+        });
+
+        ok(!container.find(".k-toggle-button.k-state-on").length);
+    });
+
+    test("toggleButton with selected: true receives k-state-selected class", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "toggleButton", text: "foo", selected: true }
+            ]
+        });
+
+        ok(container.find(".k-toggle-button.k-state-on").length);
+    });
+
+    /* BUTTON GROUP */
+
     test("renders buttonGroup from JSON", 2, function() {
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
-                        { type: "button", id: "btn1", text: "Btn1" },
-                        { type: "button", id: "btn2", text: "Btn2" },
-                        { type: "button", id: "btn3", text: "Btn3" }
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
                     ]
                 }
             ]
@@ -250,6 +264,20 @@
         ok(container.children("div.k-button-group").length, "ButtonGroup element is rendered");
         equal(container.find("div.k-button-group").children().length, 3, "Button group contains correct amount of items");
     });
+
+    test("buttonGroup applies ID option", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", id: "foo", items: [] }
+            ]
+        });
+
+        var buttonGroup = container.find("#foo");
+
+        ok(buttonGroup.length, "ID is applied");
+    });
+
+    /* SPLIT BUTTON */
 
     test("renders splitButton from JSON", 2, function() {
         container.kendoToolBar({
@@ -268,6 +296,7 @@
         equal(container.find("div.k-split-button > .k-split-button-dropdown").children().length, 4, "SplitButton dropdown contains correct amount of items");
     });
 
+    /* SEPARATOR */
 
     test("renders separator from JSON", 1, function() {
         container.kendoToolBar({
