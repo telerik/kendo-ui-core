@@ -215,6 +215,10 @@ var __meta__ = {
             dataSource.bind("change", function() {
                 handler._change();
             });
+
+            dataSource.bind("error", function() {
+                handler._change();
+            });
         },
 
         _change: function() {
