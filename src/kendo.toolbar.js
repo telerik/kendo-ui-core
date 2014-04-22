@@ -25,6 +25,7 @@ var __meta__ = {
         K_PRIMARY = "k-primary",
 
         CLICK = "click",
+        TOGGLE = "toggle",
 
         template = kendo.template,
         templates = {
@@ -173,7 +174,8 @@ var __meta__ = {
             },
 
             events: [
-                //event list
+                CLICK,
+                TOGGLE
             ],
 
             options: {
@@ -210,15 +212,25 @@ var __meta__ = {
             },
 
             _buttonClick: function(e) {
-                var target = $(e.target);
+                var target = $(e.target),
+                    isDisabled = target.hasClass(K_STATE_DISABLED),
+                    isChecked;
 
                 e.preventDefault();
 
-                if(target.hasClass(K_TOGGLE_BUTTON)) {
-                    target.toggleClass(K_CHECKED_STATE);
+                if(isDisabled) {
+                    return;
                 }
 
-                this.trigger(CLICK, { target: target });
+                if(target.hasClass(K_TOGGLE_BUTTON)) {
+                    isChecked = target.hasClass(K_CHECKED_STATE);
+
+                    if(!this.trigger(TOGGLE, { target: target, checked: isChecked })) {
+                        target.toggleClass(K_CHECKED_STATE);
+                    }
+                } else {
+                    this.trigger(CLICK, { target: target });
+                }
             }
 
         });
