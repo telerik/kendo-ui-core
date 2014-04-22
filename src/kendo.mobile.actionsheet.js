@@ -37,6 +37,7 @@ var __meta__ = {
 
             options = that.options;
             type = options.type;
+            element = that.element;
 
             if (type === "auto") {
                 tablet = os && os.tablet;
@@ -45,8 +46,6 @@ var __meta__ = {
             }
 
             ShimClass = tablet ? Popup : Shim;
-
-            element = that.element;
 
             if (options.cancelTemplate) {
                 cancelTemplate = kendo.template(options.cancelTemplate);
@@ -64,13 +63,17 @@ var __meta__ = {
             });
 
             that.wrapper = element.parent().addClass(type ? " km-actionsheet-" + type : "");
+
             that.shim = new ShimClass(that.wrapper, $.extend({modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root"}, that.options.popup) );
 
-            kendo.notify(that, ui);
+            that._closeProxy = $.proxy(that, "_close");
+            that.shim.bind("hide", that._closeProxy);
 
             if (tablet) {
-                kendo.onResize($.proxy(this, "_resize"));
+                kendo.onResize(that._closeProxy);
             }
+
+            kendo.notify(that, ui);
         },
 
         events: [
@@ -108,6 +111,7 @@ var __meta__ = {
 
         destroy: function() {
             Widget.fn.destroy.call(this);
+            kendo.unbindResize(this._closeProxy);
             this.shim.destroy();
         },
 
@@ -129,12 +133,12 @@ var __meta__ = {
             this.trigger(COMMAND, { target: this.target, context: this.context, currentTarget: currentTarget });
 
             e.preventDefault();
-            this.close();
-            this.trigger(CLOSE);
+            this._close();
         },
 
-        _resize: function() {
-            this.shim.hide();
+        _close: function() {
+            this.close();
+            this.trigger(CLOSE);
         }
     });
 

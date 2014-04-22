@@ -44,6 +44,15 @@
         isClosed();
     });
 
+    asyncTest("Triggers close when shim is tapped", 1, function() {
+        actionSheet.open();
+        actionSheet.bind("close", function() {
+            start();
+            ok(true);
+        })
+        root.find(".km-shim").trigger($.Event(kendo.support.mouseup));
+    });
+
     test("Calls click event handler", 1, function() {
         window.foo = function() {
             ok(true);

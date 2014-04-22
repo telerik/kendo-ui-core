@@ -44,7 +44,7 @@ var __meta__ = {
             }
 
             if (!options.modal) {
-                that.shim.on("up", "hide");
+                that.shim.on("up", "_hide");
             }
 
             (app ? app.element : $(document.body)).append(shim);
@@ -64,9 +64,16 @@ var __meta__ = {
                         duration: options.duration
                     }
                 },
+
                 deactivate: function() {
                     shim.hide();
+                    if (!that._apiCall) {
+                        that.trigger(HIDE);
+                    }
+
+                    that._apiCall = false;
                 },
+
                 open: function() {
                     shim.show();
                 }
@@ -75,7 +82,7 @@ var __meta__ = {
             kendo.notify(that);
         },
 
-        events: [ SHOW, HIDE ],
+        events: [ HIDE ],
 
         options: {
             name: "Shim",
@@ -88,14 +95,11 @@ var __meta__ = {
 
         show: function() {
             this.popup.open();
-            this.trigger(SHOW);
         },
 
-        hide: function(e) {
-            if (!e || !$.contains(this.shim.children().children(".k-popup")[0], e.target)) {
-                this.popup.close();
-                this.trigger(HIDE);
-            }
+        hide: function() {
+            this._apiCall = true;
+            this.popup.close();
         },
 
         destroy: function() {
@@ -103,6 +107,12 @@ var __meta__ = {
             this.shim.kendoDestroy();
             this.popup.destroy();
             this.shim.remove();
+        },
+
+        _hide: function(e) {
+            if (!e || !$.contains(this.shim.children().children(".k-popup")[0], e.target)) {
+                this.popup.close();
+            }
         }
     });
 
