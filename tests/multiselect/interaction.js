@@ -396,4 +396,21 @@ test("MultiSelect does not prevent default when click input", 0, function() {
     });
 });
 
+test("MultiSelect add focused class on focus", function() {
+    var multiselect = new MultiSelect(select);
+
+    multiselect.wrapper.mousedown();
+
+    ok(multiselect.wrapper.hasClass("k-state-focused"));
+});
+
+test("MultiSelect removes focused clas on blur", function() {
+    var multiselect = new MultiSelect(select);
+
+    multiselect.input.focus();
+    multiselect.input.blur();
+
+    ok(!multiselect.wrapper.hasClass("k-state-focused"));
+});
+
 })();
