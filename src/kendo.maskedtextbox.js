@@ -45,16 +45,17 @@ var __meta__ = {
                 .addClass("k-textbox")
                 .attr("autocomplete", "off")
                 .on("focus" + ns, function() {
-                    that._oldValue = DOMElement.value;
+                    var value = DOMElement.value;
 
-                    if (!element.val()) {
+                    that._oldValue = value;
+
+                    if (!value) {
                         DOMElement.value = that._old = that._emptyMask;
-                        caret(element, 0);
-                    } else {
-                        that._timeoutId = setTimeout(function() {
-                            element.select();
-                        });
                     }
+
+                    that._timeoutId = setTimeout(function() {
+                        caret(element, 0, value ? that._maskLength : 0);
+                    });
                 })
                 .on("blur" + ns, function() {
                     clearTimeout(that._timeoutId);

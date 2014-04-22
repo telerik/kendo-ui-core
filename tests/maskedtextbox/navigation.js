@@ -41,17 +41,20 @@
         equal(input.val(), "0-_");
     });
 
-    test("MaskedTextBox inserts after a static character", function() {
+    asyncTest("MaskedTextBox inserts after a static character", 2, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "-0"
         });
 
         input.focus();
-        caret(input[0], 0);
-        input.pressKey("0");
+        setTimeout(function() {
+            start();
+            caret(input[0], 0);
+            input.pressKey("0");
 
-        equal(caret(input[0])[0], 2);
-        equal(input.val(), "-0");
+            equal(caret(input[0])[0], 2);
+            equal(input.val(), "-0");
+        });
     });
 
     test("MaskedTextBox allows typing of an empty symbol", function() {
@@ -95,30 +98,36 @@
         equal(input.val(), "0-0_3");
     });
 
-    test("MaskedTextBox removes the selected text on keypress", function() {
+    asyncTest("MaskedTextBox removes the selected text on keypress", 2, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0-000"
         });
 
         input.focus();
-        input.val("0-123");
-        caret(input[0], 2, 5);
-        input.pressKey("0");
+        setTimeout(function() {
+            start();
+            input.val("0-123");
+            caret(input[0], 2, 5);
+            input.pressKey("0");
 
-        equal(caret(input[0])[0], 3);
-        equal(input.val(), "0-0__");
+            equal(caret(input[0])[0], 3);
+            equal(input.val(), "0-0__");
+        });
     });
 
-    test("MaskedTextBox prevents user input if end of mask is reached", function() {
+    asyncTest("MaskedTextBox prevents user input if end of mask is reached", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "-0"
         });
 
         input.focus();
-        caret(input[0], 2);
-        input.pressKey("0");
+        setTimeout(function() {
+            start();
+            caret(input[0], 2);
+            input.pressKey("0");
 
-        equal(caret(input[0])[0], 2);
+            equal(caret(input[0])[0], 2);
+        });
     });
 
     test("MaskedTextBox does not does not modify value on invalid symbol", function() {
@@ -305,14 +314,16 @@
         input.val("").focus();
         caret(input[0], 0);
 
-        input.trigger("paste");
-        input.val("1234____");
-        caret(input[0], 4);
-
         setTimeout(function() {
-            start();
-            equal(input.val(), "1234");
-            equal(caret(input[0])[0], 4);
+            input.trigger("paste");
+            input.val("1234____");
+            caret(input[0], 4);
+
+            setTimeout(function() {
+                start();
+                equal(input.val(), "1234");
+                equal(caret(input[0])[0], 4);
+            });
         });
     });
 
@@ -322,19 +333,20 @@
         });
 
         input.val("").focus();
-        input.val("12--34");
-        caret(input[0], 0, 4);
-
-        input.trigger("paste");
-        input.val("5634--__");
-        caret(input[0], 2);
-
         setTimeout(function() {
-            start();
-            equal(input.val(), "56--34");
-            equal(caret(input[0])[0], 4);
-        });
+            input.val("12--34");
+            caret(input[0], 0, 4);
 
+            input.trigger("paste");
+            input.val("5634--__");
+            caret(input[0], 2);
+
+            setTimeout(function() {
+                start();
+                equal(input.val(), "56--34");
+                equal(caret(input[0])[0], 4);
+            });
+        });
     });
 
     asyncTest("MaskedTextBox pastes correctly when caret is on static symbol", 2, function() {
@@ -342,18 +354,20 @@
             mask: "00--00"
         });
 
-        input.val("").focus();
-        input.val("12--34");
-        caret(input[0], 2);
-
-        input.trigger("paste");
-        input.val("1256--34");
-        caret(input[0], 4);
-
+        input.focus();
         setTimeout(function() {
-            start();
-            equal(input.val(), "12--56");
-            equal(caret(input[0])[0], 6);
+            input.val("12--34");
+            caret(input[0], 2);
+
+            input.trigger("paste");
+            input.val("1256--34");
+            caret(input[0], 4);
+
+            setTimeout(function() {
+                start();
+                equal(input.val(), "12--56");
+                equal(caret(input[0])[0], 6);
+            });
         });
     });
 
@@ -363,13 +377,15 @@
         });
 
         input.focus();
-        input.val("(123) 555");
-        caret(input[0], 3, 8);
-
-        input.trigger("paste");
         setTimeout(function() {
-            start();
-            equal(input.val(), "(125) ___");
+            input.val("(123) 555");
+            caret(input[0], 3, 8);
+
+            input.trigger("paste");
+            setTimeout(function() {
+                start();
+                equal(input.val(), "(125) ___");
+            });
         });
     });
 
@@ -378,18 +394,20 @@
             mask: "(000) 000"
         });
 
-        input.val("").focus();
-        input.val("(123) 555");
-        caret(input[0], 5, 8);
-
-        input.trigger("paste");
-        input.val("(123)77 555");
-        caret(input[0], 7);
-
+        input.focus();
         setTimeout(function() {
-            start();
-            equal(input.val(), "(123) 775");
-            equal(caret(input[0])[0], 8);
+            input.val("(123) 555");
+            caret(input[0], 5, 8);
+
+            input.trigger("paste");
+            input.val("(123)77 555");
+            caret(input[0], 7);
+
+            setTimeout(function() {
+                start();
+                equal(input.val(), "(123) 775");
+                equal(caret(input[0])[0], 8);
+            });
         });
     });
 
@@ -398,48 +416,56 @@
             mask: "(000) 000"
         });
 
-        input.val("").focus();
-        caret(input[0], 1);
-
-        input.trigger("paste");
-        input.val("(1234___) ___");
-        caret(input[0], 5);
-
-        input.trigger("input");
-
+        input.focus();
         setTimeout(function() {
-            start();
-            equal(input.val(), "(123) 4__");
-            equal(caret(input[0])[0], 7);
+            caret(input[0], 1);
+
+            input.trigger("paste");
+            input.val("(1234___) ___");
+            caret(input[0], 5);
+
+            input.trigger("input");
+
+            setTimeout(function() {
+                start();
+                equal(input.val(), "(123) 4__");
+                equal(caret(input[0])[0], 7);
+            });
         });
     });
 
-    test("MaskedTextBox supports cutting/delete through context menu", 1, function() {
+    asyncTest("MaskedTextBox supports cutting/delete through context menu", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 000"
         });
 
         input.focus();
-        maskedtextbox.value("123555");
+        setTimeout(function() {
+            start();
+            maskedtextbox.value("123555");
 
-        input.val("(123)");
-        caret(input[0], 5);
-        input.trigger("input");
+            input.val("(123)");
+            caret(input[0], 5);
+            input.trigger("input");
 
-        equal(input.val(), "(123) ___");
+            equal(input.val(), "(123) ___");
+        });
     });
 
-    test("MaskedTextBox allows space in middle of mask", 1, function() {
+    asyncTest("MaskedTextBox allows space in middle of mask", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "(000) 999"
         });
 
         input.focus();
-        caret(input[0], 6);
+        setTimeout(function() {
+            start();
+            caret(input[0], 6);
 
-        input.pressKey(" ");
+            input.pressKey(" ");
 
-        equal(input.val(), "(___)  __");
+            equal(input.val(), "(___)  __");
+        });
     });
 
     test("MaskedTextBox allows any character if no mask", 1, function() {
