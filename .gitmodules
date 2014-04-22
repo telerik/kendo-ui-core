@@ -10,6 +10,7 @@
 [submodule "docs"]
     path = docs
     url = git@github.com:telerik/kendo-docs.git
+    branch = master
 [submodule "ci/cookbooks/yum"]
     path = ci/cookbooks/yum
     url = git@github.com:cookbooks/yum.git
