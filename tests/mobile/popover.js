@@ -98,7 +98,7 @@
         kendo.effects.enable();
     });
 
-    test("triggers close and closes when blurred", 1, function(){
+    test("triggers close and closes when blurred", 2, function(){
         setup(fixture);
         kendo.effects.disable();
 
@@ -109,7 +109,7 @@
             hidden("#foo");
         });
 
-        popOver.popup.popup._resize();
+        popOver.popup.popup._resize({});
 
         kendo.effects.enable();
     });
