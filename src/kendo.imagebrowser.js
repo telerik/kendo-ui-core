@@ -247,10 +247,6 @@ var __meta__ = {
                 .add(that.toolbar)
                 .off(NS);
 
-            if (that.arrangeBy) {
-                that.arrangeBy.destroy();
-            }
-
             kendo.destroy(that.element);
         },
 
