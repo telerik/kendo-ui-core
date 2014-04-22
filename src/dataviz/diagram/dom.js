@@ -1660,6 +1660,7 @@
             },
 
             selectArea: function(rect) {
+                var i, items, item;
                 this._internalSelection = true;
                 var selected = [];
                 if (rect instanceof Rect) {

@@ -19,7 +19,7 @@
     });
 
     test("Select/Deselect all", function () {
-        d.select("all");
+        d.selectAll();
 
         equal(d.shapes.length + d.connections.length, d.select().length);
 
