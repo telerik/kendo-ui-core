@@ -288,4 +288,17 @@ function uploadAsync(createUpload, simulateUpload, simulateUploadWithResponse, s
 
         simulateUpload();
     });
+
+    test("k-file-error class is removed on upload retry", function() {
+        var uploadInstance = createUpload();
+        var performUploadCalled = false;
+
+        simulateUploadWithResponse(errorResponse);
+
+        uploadInstance._module.performUpload = function() { performUploadCalled = true; };
+
+        $(".k-retry", uploadInstance.wrapper).trigger("click");
+
+        ok(performUploadCalled);
+    });
 }

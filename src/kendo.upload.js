@@ -828,7 +828,7 @@ var __meta__ = {
 
                 upload._fileAction(fileEntry, CANCEL);
                 upload._fileState(fileEntry, "uploading");
-                $(fileEntry).addClass("k-file-progress");
+                $(fileEntry).removeClass("k-file-error").addClass("k-file-progress");
 
                 iframe
                     .one("load", $.proxy(this.onIframeLoad, this));
@@ -1071,7 +1071,7 @@ var __meta__ = {
                 this.populateFormData(formData, fileEntry.data("files"));
 
                 upload._fileState(fileEntry, "uploading");
-                $(fileEntry).addClass("k-file-progress");
+                $(fileEntry).removeClass("k-file-error").addClass("k-file-progress");
 
                 this.postFormData(upload.options.async.saveUrl, formData, fileEntry, xhr);
             } else {
