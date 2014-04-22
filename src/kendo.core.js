@@ -2785,10 +2785,12 @@ function pad(number, digits, end) {
 
     kendo.destroy = function(element) {
         $(element).find("[data-" + kendo.ns + "role]").addBack().each(function(){
-            var widget = kendo.widgetInstance($(this));
+            var data = $(this).data();
 
-            if (widget) {
-                widget.destroy();
+            for (var key in data) {
+                if (key.indexOf("kendo") === 0 && typeof data[key].destroy === FUNCTION) {
+                    data[key].destroy();
+                }
             }
         });
     };
