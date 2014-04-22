@@ -733,7 +733,7 @@
             },
             start: function (p) {
                 var diagram = this.toolService.diagram;
-                diagram.select(false);
+                diagram.deselect();
                 diagram.selector.start(p);
             },
             move: function (p) {
@@ -744,10 +744,10 @@
                 var diagram = this.toolService.diagram, hoveredItem = this.toolService.hoveredItem;
                 var rect = diagram.selector.bounds();
                 if ((!hoveredItem || !hoveredItem.isSelected) && !meta.ctrlKey) {
-                    diagram.select(false);
+                    diagram.deselect();
                 }
                 if (!rect.isEmpty()) {
-                    diagram.select(rect);
+                    diagram.selectArea(rect);
                 }
                 diagram.selector.end();
             },
@@ -901,7 +901,7 @@
                 meta = deepExtend({ ctrlKey: false, metaKey: false, altKey: false }, meta);
                 if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {// ctrl or option
                     if (testKey(key, "a")) {// A: select all
-                        diagram.select("All");
+                        diagram.selectAll();
                         return true;
                     } else if (testKey(key, "z")) {// Z: undo
                         diagram.undo();
@@ -926,7 +926,7 @@
                     return true;
                 } else if (key === 27) {// ESC: stop any action
                     this._discardNewConnection();
-                    diagram.select(false);
+                    diagram.deselect();
                     return true;
                 }
             },
