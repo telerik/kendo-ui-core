@@ -70,6 +70,12 @@
         ok(view.render().is("span"));
     });
 
+    test("evaluates template expressions against the passed view model", 1, function() {
+        var view = new kendo.View("#: foo #", {model: { foo: "foo" }});
+
+        equal(view.render().html(), "foo");
+    });
+
     test("can skip wrapping", 2, function() {
         var view = new kendo.View("<span id='foo'>Foo</span>", { wrap: false });
 
