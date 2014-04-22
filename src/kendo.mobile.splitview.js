@@ -67,8 +67,6 @@ var __meta__ = {
             var that = this,
                 element = that.element;
 
-            element.data("kendoView", that).addClass("km-view");
-
             that.transition = kendo.attrValue(element, "transition");
             kendo.mobile.ui.View.prototype._layout.call(this);
             kendo.mobile.init(this.header.add(this.footer));

@@ -51,6 +51,7 @@ var __meta__ = {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
+
             this.params = {};
 
             $.extend(this, options);
@@ -250,7 +251,7 @@ var __meta__ = {
                 contentSelector = roleSelector("content"),
                 element = that.element;
 
-            element.data("kendoView", that).addClass("km-view");
+            element.addClass("km-view");
 
             that.header = element.children(roleSelector("header")).addClass("km-header");
             that.footer = element.children(roleSelector("footer")).addClass("km-footer");
@@ -437,7 +438,7 @@ var __meta__ = {
                     return that.viewContainer.show(view, transition, url);
                 },
                 element = that._findViewElement(url),
-                view = element.data("kendoView");
+                view = kendo.widgetInstance(element);
 
             that.url = url;
             that.params = params;

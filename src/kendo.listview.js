@@ -649,10 +649,6 @@ var __meta__ = {
                that.pager.destroy();
            }
 
-           if (that.selectable) {
-               that.selectable.destroy();
-           }
-
            kendo.destroy(that.element);
        }
     });
