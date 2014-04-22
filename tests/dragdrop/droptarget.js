@@ -46,6 +46,21 @@
                 });
         });
 
+        test("drag is raised, passing the droptarget", 3, function() {
+            setup({
+                    dragenter: function(e) {
+                        equal(e.draggable, draggable);
+                    }
+                }, {
+                    drag: function(e) {
+                        equal(e.dropTarget, target);
+                    }
+                });
+
+            var offset = kendo.getOffset(targetElement);
+            trigger("mousemove", { pageX: offset.left + 1, pageY: offset.top + 1, clientX: offset.left + 1, clientY: offset.top + 1 });
+        });
+
         test("dragleave is raised, passing the draggable", 1, function() {
             setup({
                     dragleave: function(e) {
