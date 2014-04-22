@@ -23,6 +23,7 @@ var __meta__ = {
         INIT = "init",
         SHOW = "show",
         HIDE = "hide",
+        AFTER_HIDE = "afterHide",
         NULL_VIEW = { enable: $.noop };
 
     var Drawer = ui.View.extend({
@@ -105,6 +106,7 @@ var __meta__ = {
         events: [
             BEFORE_SHOW,
             HIDE,
+            AFTER_HIDE,
             INIT,
             SHOW
         ],
@@ -234,6 +236,7 @@ var __meta__ = {
                     if (movable[AXIS] === 0) {
                         element[0].style.cssText = "";
                         that.element.hide();
+                        that.trigger(AFTER_HIDE);
                         that.visible = false;
                     }
                 }
