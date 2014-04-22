@@ -17,7 +17,7 @@ var __meta__ = {
         proxy = $.proxy,
         K_TOOLBAR = "k-toolbar",
         K_TOGGLE_BUTTON = "k-toggle-button",
-        K_STATE_ON = "k-state-on",
+        K_CHECKED_STATE = "k-state-checked",
         K_STATE_DISABLED = "k-state-disabled",
         K_BUTTON = "k-button",
         K_BUTTON_ICON = "k-button-icon",
@@ -130,7 +130,7 @@ var __meta__ = {
                 initializers.button(element, options);
 
                 if(options.selected === true) {
-                    element.addClass(K_STATE_ON);
+                    element.addClass(K_CHECKED_STATE);
                 }
             },
 
@@ -215,7 +215,7 @@ var __meta__ = {
                 e.preventDefault();
 
                 if(target.hasClass(K_TOGGLE_BUTTON)) {
-                    target.toggleClass(K_STATE_ON);
+                    target.toggleClass(K_CHECKED_STATE);
                 }
 
                 this.trigger(CLICK, { target: target });

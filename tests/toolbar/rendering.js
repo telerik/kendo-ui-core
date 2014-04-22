@@ -234,7 +234,7 @@
             ]
         });
 
-        ok(!container.find(".k-toggle-button.k-state-on").length);
+        ok(!container.find(".k-toggle-button.k-state-checked").length);
     });
 
     test("toggleButton with selected: true receives k-state-selected class", 1, function() {
@@ -244,7 +244,7 @@
             ]
         });
 
-        ok(container.find(".k-toggle-button.k-state-on").length);
+        ok(container.find(".k-toggle-button.k-state-checked").length);
     });
 
     /* BUTTON GROUP */
