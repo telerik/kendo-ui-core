@@ -778,7 +778,7 @@ var __meta__ = {
                 lastDropTarget = extend(target, { targetElement: targetElement });
             });
 
-            that._trigger(DRAG, e);
+            that._trigger(DRAG, extend(e, { dropTarget: lastDropTarget }));
 
             if (that.hint) {
                 that._updateHint(e);
