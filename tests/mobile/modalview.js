@@ -35,6 +35,22 @@
         equal(root.find(".km-shim").css("display"), "block");
     });
 
+    test("triggers beforeOpen event when open", 1, function() {
+        modalView.bind("beforeOpen", function() {
+            ok(true);
+        });
+
+        modalView.openFor($("#source"));
+    });
+
+    test("preventing before open prevents opening", 1, function() {
+        modalView.bind("beforeOpen", function(e) {
+            e.preventDefault();
+        });
+
+        modalView.openFor($("#source"));
+        equal(root.find(".km-shim").css("display"), "none");
+    });
 
     test("Is hidden when closed", 1, function() {
         modalView.open();
