@@ -54,6 +54,20 @@
         ok(button.hasClass("k-state-checked"), "Button receives k-state-checked class after click");
     });
 
+    test("click on a toggleButton's icon changes the button state", 2, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "toggleButton", id: "foo", icon: "foo" }
+            ]
+        });
+
+        var button = container.find("#foo");
+        ok(!button.hasClass("k-state-checked"));
+
+        container.find("span.k-i-foo").trigger("click");
+        ok(button.hasClass("k-state-checked"), "Button receives k-state-checked class after click");
+    });
+
     test("click on selected toggleButton deselects it", 2, function() {
         container.kendoToolBar({
             items: [
@@ -127,6 +141,27 @@
 
         button.trigger("click");
         ok(!button.hasClass("k-state-checked"));
+    });
+
+    test("selecting toggle button that belongs to a group will deselect other buttons from the same group", 4, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "toggleButton", text: "foo", group: "foo" },
+                { type: "toggleButton", text: "bar", group: "foo", selected: true }
+            ]
+        });
+
+        var buttons = container.find(".k-toggle-button");
+
+        buttons.eq(0).trigger("click");
+
+        ok(buttons.eq(0).hasClass("k-state-checked"), "First button is selected");
+        ok(!buttons.eq(1).hasClass("k-state-checked"), "Second button is deselected");
+        
+        buttons.eq(1).trigger("click");
+
+        ok(!buttons.eq(0).hasClass("k-state-checked"), "First button is deselected");
+        ok(buttons.eq(1).hasClass("k-state-checked"), "Second button is selected");
     });
 
 })();

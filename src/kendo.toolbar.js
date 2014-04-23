@@ -20,9 +20,12 @@ var __meta__ = {
         K_CHECKED_STATE = "k-state-checked",
         K_STATE_DISABLED = "k-state-disabled",
         K_BUTTON = "k-button",
+        K_TOGGLE_BUTTON = "k-toggle-button",
         K_BUTTON_ICON = "k-button-icon",
         K_BUTTON_ICON_TEXT = "k-button-icontext",
         K_PRIMARY = "k-primary",
+        K_GROUP_START = "k-group-start",
+        K_GROUP_END = "k-group-end",
 
         CLICK = "click",
         TOGGLE = "toggle",
@@ -36,15 +39,15 @@ var __meta__ = {
             ),
 
             toggleButton: kendo.template(
-                '<a href="" role="togglebutton" class="k-button k-toggle-button" unselectable="on" title="#= text #">' +
-                '<span class=""></span>#: text #</a>'
+                '<a href="" role="togglebutton" class="k-button k-toggle-button" unselectable="on"' +
+                'title="#= data.text ? data.text : "" #">#: data.text ? data.text : "" #</a>'
             ),
 
             buttonGroup: kendo.template(
                 '<div class="k-button-group">' +
                     '# for(var i = 0; i < items.length; i++) { #' +
-                        '<a href="" role="button" class="k-button" unselectable="on" title="#= items[i].text ? items[i].text : "" #">' +
-                            '<span class=""></span>#= items[i].text ? items[i].text : "" #' +
+                        '<a href="" role="togglebutton" class="k-button k-toggle-button" unselectable="on" title="#= items[i].text ? items[i].text : "" #">' +
+                            '#= items[i].text ? items[i].text : "" #' +
                         '</a>' +
                     '# } #' +
                 '</div>'
@@ -133,14 +136,21 @@ var __meta__ = {
                 if(options.selected === true) {
                     element.addClass(K_CHECKED_STATE);
                 }
+
+                if(options.group) {
+                    element.attr("data-group", options.group);
+                }
             },
 
             buttonGroup: function(element, options) {
                 var buttons = element.children("." + K_BUTTON);
 
                 for (var i = 0; i < buttons.length; i++) {
-                    initializers.button(buttons.eq(i), options.items[i]);
+                    initializers.toggleButton(buttons.eq(i), options.items[i]);
                 }
+
+                buttons.first().addClass(K_GROUP_START);
+                buttons.last().addClass(K_GROUP_END);
 
                 if(options.id) {
                     element.attr("id", options.id);
@@ -212,9 +222,11 @@ var __meta__ = {
             },
 
             _buttonClick: function(e) {
-                var target = $(e.target),
+                var target = $(e.target).closest("." + K_BUTTON),
                     isDisabled = target.hasClass(K_STATE_DISABLED),
-                    isChecked;
+                    isChecked,
+                    group,
+                    current;
 
                 e.preventDefault();
 
@@ -224,8 +236,17 @@ var __meta__ = {
 
                 if(target.hasClass(K_TOGGLE_BUTTON)) {
                     isChecked = target.hasClass(K_CHECKED_STATE);
+                    group = target.data("group");
+
+                    if(group) { //find all buttons from the same group
+                        current = this.element.find("." + K_TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + K_CHECKED_STATE);
+                    }
 
                     if(!this.trigger(TOGGLE, { target: target, checked: isChecked })) {
+                        if(current && current.length) {
+                            current.removeClass(K_CHECKED_STATE);
+                        }
+
                         target.toggleClass(K_CHECKED_STATE);
                     }
                 } else {

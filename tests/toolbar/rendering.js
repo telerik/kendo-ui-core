@@ -247,6 +247,30 @@
         ok(container.find(".k-toggle-button.k-state-checked").length);
     });
 
+    test("by default toggleButton does not have group", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "toggleButton", text: "foo" }
+            ]
+        });
+
+        ok(!container.find(".k-toggle-button").data("group"));
+    });
+
+    test("toggle button with group has data-group attribute set", 2, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "toggleButton", text: "foo", group: "foo" },
+                { type: "toggleButton", text: "bar", group: "foo" }
+            ]
+        });
+
+        var buttons = container.find(".k-toggle-button");
+
+        equal(buttons.eq(0).data("group"), "foo");
+        equal(buttons.eq(1).data("group"), "foo");
+    });
+
     /* BUTTON GROUP */
 
     test("renders buttonGroup from JSON", 2, function() {
@@ -275,6 +299,38 @@
         var buttonGroup = container.find("#foo");
 
         ok(buttonGroup.length, "ID is applied");
+    });
+
+    test("first button in the group receives k-group-start class", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        });
+
+        var buttons = container.find(".k-button");
+        ok(buttons.first().hasClass("k-group-start"));
+    });
+
+    test("last button in the group receives k-group-end class", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        });
+
+        var buttons = container.find(".k-button");
+        ok(buttons.last().hasClass("k-group-end"));
     });
 
     /* SPLIT BUTTON */
