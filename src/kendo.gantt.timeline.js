@@ -161,7 +161,7 @@ var __meta__ = {
             var cells = [];
             var row;
             var slots = this._timeSlots();
-            var slotsCount = slots.length
+            var slotsCount = slots.length;
             var height = rowCount * rowHeight;
             var slotSpan;
             var totalSpan = 0;

@@ -15,10 +15,15 @@ var __meta__ = {
     var paddingStep = 26;
     var kendo = window.kendo;
     var kendoDom = kendo.dom;
+    var activeElement = kendo._activeElement;
+    var browser = kendo.support.browser;
+    var isIE = browser.msie;
+    var oldIE = isIE && browser.version < 9;
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var extend = $.extend;
     var map = $.map;
+    var keys = kendo.keys;
     var titleFromField = function(field) {
         var title;
 
@@ -308,8 +313,8 @@ var __meta__ = {
 
         _editable: function() {
             var that = this;
-            var handler = function() {
-                if (that.editable.end()) {
+            var finishEdit = function() {
+                if (that.editable && that.editable.end()) {
                     that._closeCell();
                 }
             };
@@ -317,9 +322,7 @@ var __meta__ = {
             that.content
                 .on("dblclick" + NS, "td", function(e) {
                     var td = $(this);
-                    var tr = td.parent();
-                    var idx = tr.children().index(td);
-                    var column = that.columns[idx];
+                    var column = that._columnFromElement(td);
 
                     if (that.editable) {
                         return;
@@ -334,45 +337,66 @@ var __meta__ = {
                     that.timer = null;
                 })
                 .on("focusout" + NS, function() {
-                    that.timer = setTimeout(handler, 1);
+                    that.timer = setTimeout(finishEdit, 1);
+                })
+                .on("keydown" + NS, function(e) {
+                    var key = e.keyCode;
+                    var active = $(activeElement());
+
+                    switch (key) {
+                        case keys.ENTER:
+                            if (browser.opera || oldIE) {
+                                active.change().triggerHandler("blur");
+                            } else {
+                                active.blur();
+                                if (isIE) {
+                                    //IE10 with jQuery 1.9.x does not trigger blur handler
+                                    //numeric textbox does trigger change
+                                    active.blur();
+                                }
+                            }
+                            finishEdit();
+                            break;
+                        case keys.ESC:
+                            that._closeCell(true);
+                            break;
+                    }
                 });
         },
 
         _editCell: function(options) {
-            var that = this;
             var cell = options.cell;
             var column = options.column;
             var model = this._modelFromElement(cell);
-
-            if (!this._modelChangeHandler) {
-                this._modelChangeHandler = function() {
-                    that.updated = true;
-                };
-            }
+            var modelCopy = this.dataSource._createNewModel(model.toJSON());
 
             this._editableContent = cell.children().detach();
             this._editableContainer = cell;
 
-            model.bind("change", this._modelChangeHandler);
+            cell.data("modelCopy", modelCopy);
 
             this.editable = cell.kendoEditable({
                                 fields: {
                                     field: column.field,
                                     format: column.format,
-                                    editor: column.editor,
-                                    values: column.values
+                                    editor: column.editor
                                 },
-                                model: model,
+                                model: modelCopy,
                                 clearContainer: false
                             }).data("kendoEditable");
         },
 
-        _closeCell: function() {
+        _closeCell: function(cancelUpdate) {
             var cell = this._editableContainer;
             var model = this._modelFromElement(cell);
+            var column = this._columnFromElement(cell);
+            var copy = cell.data("modelCopy");
+            var taskInfo = {};
 
-            model.unbind("change", this._modelChangeHandler);
+            taskInfo[column.field] = copy.get(column.field);
+
             cell.empty()
+                .removeData("modelCopy")
                 .append(this._editableContent);
 
             this.editable.destroy();
@@ -381,8 +405,8 @@ var __meta__ = {
             this._editableContainer = null;
             this._editableContent = null;
 
-            if (this.updated) {
-                this.updated = false;
+            if (!cancelUpdate) {
+                this.dataSource.update(model, taskInfo);
                 this.trigger("update");
             }
         },
@@ -392,6 +416,14 @@ var __meta__ = {
             var model = this.dataSource.getByUid(row.attr(kendo.attr("uid")));
 
             return model;
+        },
+
+        _columnFromElement: function(element) {
+            var td = element.closest("td");
+            var tr = td.parent();
+            var idx = tr.children().index(td);
+
+            return this.columns[idx];
         }
     });
 

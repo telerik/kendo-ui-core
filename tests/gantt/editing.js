@@ -44,12 +44,12 @@
         ok(targetCell.data("kendoEditable"));
     });
 
-    test("attaches 'change' handler to edited model", function() {
+    test("attaches model copy to the editable cell data", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
         targetCell.dblclick();
 
-        equal(dataSource.at(0)._events["change"].length, 2);
+        ok(targetCell.data("modelCopy"));
     });
 
     test("passes column settings to editable widget", 3, function() {
@@ -103,7 +103,7 @@
         equal(targetCell.children().eq(1).html(), "foo");
     });
 
-    asyncTest("call validate when cell leaves edit mode", function() {
+    asyncTest("calls validate when cell leaves edit mode", function() {
         expect(1);
         var targetCell = ganttList.content.find("td").eq(0);
         var validate;
@@ -132,34 +132,6 @@
         }, 2);
     });
 
-    test("trigger 'update' if the mode; is updated", function() {
-        var targetCell = ganttList.content.find("td").eq(0);
-
-        targetCell.dblclick();
-
-        ganttList.bind("update", function() {
-            ok(true);
-        });
-
-        ganttList.updated = true;
-        ganttList._closeCell();
-    });
-
-    test("does not trigger 'update' if the model is npt updated", function() {
-        var targetCell = ganttList.content.find("td").eq(0);
-        var flag;
-
-        targetCell.dblclick();
-
-        ganttList.bind("update", function() {
-            flag = true;
-        });
-
-        ganttList._closeCell();
-
-        ok(!flag);
-    });
-
     test("does not attach editable widget to non-editable cell on dblclick", function() {
         var targetCell = ganttList.content.find("td").eq(1);
 
@@ -168,7 +140,58 @@
         ok(!targetCell.data("kendoEditable"));
     });
 
-    test("destroys editable widget after cell exit edit mode", 3, function() {
+    test("triggers 'update' when edited cell closes", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ganttList.bind("update", function() {
+            ok(true);
+        });
+
+        ganttList._closeCell();
+    });
+
+    test("does not trigger 'update' when edited cell closes with cancelUpdate parameter", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var updateTriggered;
+
+        targetCell.dblclick();
+
+        ganttList.bind("update", function() {
+            updateTriggered = true;
+        });
+
+        ganttList._closeCell(true);
+
+        ok(!updateTriggered);
+    });
+
+    test("updates model when edited cell closes", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        stub(ganttList.dataSource, "update");
+
+        ganttList._closeCell();
+
+        ok(ganttList.dataSource.calls("update"));
+    });
+
+    test("does not update model when edited cell closes with cancelUpdate parameter", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        stub(ganttList.dataSource, "update");
+
+        ganttList._closeCell(true);
+
+        ok(!ganttList.dataSource.calls("update"));
+    });
+
+    test("destroys editable widget after cell exits edit mode", 3, function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
         targetCell.dblclick();
@@ -181,12 +204,49 @@
         ok(!ganttList.editable);
     });
 
-    test("detaches change handler from edited model after cell exit edit mode", 1, function() {
+    test("detaches model copy after cell exits edit mode", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
         targetCell.dblclick();
         ganttList._closeCell();
 
-        equal(dataSource.at(0)._events["change"].length, 1);
+        ok(!targetCell.data("modelCopy"));
+    });
+
+    test("ESC keydown closes edited cell", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var event = new $.Event('keydown');
+
+        event.keyCode = kendo.keys.ESC;
+
+        stub(ganttList, "_closeCell");
+        targetCell.dblclick();
+        targetCell.trigger(event);
+
+        ok(ganttList.calls("_closeCell"));
+    });
+
+    test("ESC keydown closes edited cell with cancelUpdate parameter", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var event = new $.Event('keydown');
+
+        event.keyCode = kendo.keys.ESC;
+
+        stub(ganttList, { _closeCell: function(cancelUpdate) { ok(cancelUpdate) } });
+        targetCell.dblclick();
+        targetCell.trigger(event);
+    });
+
+    test("Enter keydown closes edited cell", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var event = new $.Event('keydown');
+
+        event.keyCode = kendo.keys.ENTER;
+
+        stub(ganttList, "_closeCell");
+        targetCell.dblclick();
+        targetCell.trigger(event);
+
+        ok(ganttList.calls("_closeCell"));
     });
 })();

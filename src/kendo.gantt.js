@@ -135,10 +135,10 @@ var __meta__ = {
             id: { type: "number" },
             parentId: { type: "number", defaultValue: null, validation: { required: true } },
             orderId: { type: "number", validation: { required: true } },
-            title: { defaultValue: "", type: "string" },
+            title: { type: "string", defaultValue: "" },
             start: { type: "date", validation: { required: true } },
             end: { type: "date", validation: { required: true } },
-            percentComplete: { type: "number" },
+            percentComplete: { type: "number", validation: { required: true, min:0, max: 1, step: 0.01 } },
             summary: { type: "boolean" },
             expanded: { type: "boolean", defaultValue: true }
         }
@@ -336,40 +336,56 @@ var __meta__ = {
                 return percentComplete[field].average;
             };
 
-            if (taksInfo.parentId !== undefined) {
-                oldValue = task.get("parentId");
-                task.set("parentId", taksInfo.parentId);
-
-                this._childRemoved(oldValue, task.get("orderId"));
-
-                task.set("orderId", this.taskSiblings(task).length - 1);
-
-                this._updateSummary(this.taskParent(task));
-
-                delete taksInfo.parentId;
-            }
-
-            for (var field in taksInfo) {
-                oldValue = task.get(field);
-
-                task.set(field, taksInfo[field]);
+            var modelChangeHandler = function(e) {
+                var field = e.field;
+                var model = e.sender;
 
                 switch (field) {
                     case "start":
-                        updateParents(task, field, updateStartCallback);
-                        offsetChildren(task, task.get(field).getTime() - oldValue.getTime());
+                        updateParents(model, field, updateStartCallback);
+                        offsetChildren(model, model.get(field).getTime() - oldValue.getTime());
                         break;
                     case "end":
-                        updateParents(task, field, updateEndCallback);
+                        updateParents(model, field, updateEndCallback);
                         break;
                     case "percentComplete":
-                        updateParents(task, field, updatePercentCompleteCallback);
+                        updateParents(model, field, updatePercentCompleteCallback);
                         break;
                     case "orderId":
-                        this._reorderSiblings(task, oldValue);
+                        that._reorderSiblings(model, oldValue);
                         break;
                 }
+            };
+
+            var parentChangeHandler = function(e) {
+                var model = e.sender;
+                that._childRemoved(oldValue, model.get("orderId"));
+
+                model.set("orderId", that.taskSiblings(model).length - 1);
+
+                that._updateSummary(that.taskParent(model));
+            };
+
+            if (taksInfo.parentId !== undefined) {
+                oldValue = task.get("parentId");
+
+                task.bind("change", parentChangeHandler);
+
+                task.set("parentId", taksInfo.parentId);
+
+                delete taksInfo.parentId;
+
+                task.unbind("change", parentChangeHandler);
             }
+
+            task.bind("change", modelChangeHandler);
+
+            for (var field in taksInfo) {
+                oldValue = task.get(field);
+                task.set(field, taksInfo[field]);
+            }
+
+            task.unbind("change", modelChangeHandler);
         },
 
         _range: function() {
@@ -489,7 +505,7 @@ var __meta__ = {
                 views: {
                     day: "Day",
                     week: "Week",
-                    month: "Month",
+                    month: "Month"
                 }
             },
             timeHeaderTemplate: TIME_HEADER_TEMPLATE,
