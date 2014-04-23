@@ -20,10 +20,19 @@ var __meta__ = {
     var proxy = $.proxy;
     var extend = $.extend;
     var map = $.map;
+    var NS = ".kendoGantt";
+    var CLICK = "click";
     var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
     var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
     var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
     var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
+    var TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-gantt-toolbar k-scheduler-toolbar">' +
+            '<ul class="k-reset k-header k-toolbar">' +
+                '#for(var view in views){#' +
+                    '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="k-link">${views[view].title}</a></li>' +
+                '#}#' +
+            '</ul>' +
+            '</div>');
 
     function trimOptions(options) {
         delete options.name;
@@ -449,6 +458,10 @@ var __meta__ = {
 
             this._timeline();
 
+            this._toolbar();
+
+            this.timeline.view(this.timeline._selectedViewName);
+
             this._dataSource();
 
             this._list();
@@ -472,6 +485,13 @@ var __meta__ = {
             name: "Gantt",
             autoBind: true,
             views: [],
+            messages: {
+                views: {
+                    day: "Day",
+                    week: "Week",
+                    month: "Month",
+                }
+            },
             timeHeaderTemplate: TIME_HEADER_TEMPLATE,
             dayHeaderTemplate: DAY_HEADER_TEMPLATE,
             weekHeaderTemplate: WEEK_HEADER_TEMPLATE,
@@ -487,12 +507,20 @@ var __meta__ = {
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-
-            this.timeline.destroy();
+            
+            if (this.timeline) {
+                this.timeline.unbind();
+                this.timeline.destroy();
+            }
 
             if (this.list) {
+                this.list.unbind();
                 this.list.destroy();
             }
+
+            this.toolbar.off(NS);
+
+            this.toolbar = null;
         },
 
         _wrapper: function() {
@@ -502,9 +530,8 @@ var __meta__ = {
 
             this.wrapper = this.element
                             .addClass("k-widget k-gantt")
-                            .append("<div class='k-gantt-toolbar'>")
                             .append("<div class='k-gantt-layout k-gantt-treelist'><div class='k-grid k-widget'></div></div>")
-                            .append("<div class='k-gantt-layout'><div class='k-widget k-gantt-timeline'></div></div>");
+                            .append("<div class='k-gantt-layout k-gantt-grid'><div class='k-widget k-gantt-timeline'></div></div>");
 
             if (height) {
                 this.wrapper.height(height);
@@ -513,6 +540,28 @@ var __meta__ = {
             if (width) {
                 this.wrapper.width(width);
             }
+        },
+
+        _toolbar: function() {
+            var that = this;
+            var toolbar = $(TOOLBARTEMPLATE({
+                ns: kendo.ns,
+                views: this.timeline.views
+            }));
+
+            this.wrapper.prepend(toolbar);
+            this.toolbar = toolbar;
+
+            toolbar
+                .on(CLICK + NS, ".k-toolbar li", function(e) {
+                    e.preventDefault();
+
+                    var name = $(this).attr(kendo.attr("name"));
+
+                    that.timeline.view(name);
+
+                    that.refresh();
+                });
         },
 
         _list: function () {
@@ -526,11 +575,21 @@ var __meta__ = {
                 .bind("update", function() { that.refresh(); });
         },
 
-        _timeline: function () {
+        _timeline: function() {
+            var that = this;
             var options = trimOptions(extend(true, {}, this.options));
             var element = this.wrapper.find(".k-gantt-timeline");
 
             this.timeline = new kendo.ui.GanttTimeline(element, options);
+
+            this.timeline.bind("navigate", function(e) {
+                that.toolbar
+                    .find(".k-toolbar li")
+                    .removeClass("k-state-selected")
+                    .end()
+                    .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
+                    .addClass("k-state-selected");
+            });
         },
 
         _dataSource: function() {

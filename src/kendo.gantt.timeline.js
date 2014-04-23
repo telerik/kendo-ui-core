@@ -465,6 +465,11 @@ var __meta__ = {
                 }
 
                 width = from.end - to.start + minDistance;
+
+                if (width < minDependencyWidth) {
+                    width = minDependencyWidth;
+                }
+
                 left -= width;
 
                 addHorizontal();
@@ -703,6 +708,8 @@ var __meta__ = {
     });
 
     kendo.ui.GanttDayView = View.extend({
+        name: "day",
+
         range: function(range) {
             this.start = kendo.date.getDate(range.start);
             this.end = kendo.date.getDate(range.end);
@@ -752,6 +759,8 @@ var __meta__ = {
     });
 
     kendo.ui.GanttWeekView = View.extend({
+        name: "week",
+
         range: function(range) {
             var calendarInfo = this.calendarInfo();
             var firstDay = calendarInfo.firstDay;
@@ -780,6 +789,8 @@ var __meta__ = {
     });
 
     kendo.ui.GanttMonthView = View.extend({
+        name: "month",
+
         range: function(range) {
             this.start = kendo.date.firstDayOfMonth(range.start);
             this.end = kendo.date.addDays(kendo.date.getDate(kendo.date.lastDayOfMonth(range.end)), 1);
@@ -821,7 +832,14 @@ var __meta__ = {
         },
         
         options: {
-            name: "GanttTimeline"
+            name: "GanttTimeline",
+            messages: {
+                views: {
+                    day: "Day",
+                    week: "Week",
+                    month: "Month"
+                }
+            }
         },
 
         destroy: function() {
@@ -875,7 +893,7 @@ var __meta__ = {
                 defaultView = defaultViews[name];
 
                 if (defaultView) {
-                    view = extend({ title: name }, isSettings ? view : {}, defaultView);
+                    view = extend({ title: this.options.messages.views[name] }, isSettings ? view : {}, defaultView);
 
                     this.views[name] = view;
 
@@ -893,6 +911,8 @@ var __meta__ = {
         view: function(name) {
             if (name) {
                 this._selectView(name);
+
+                this.trigger("navigate", { view: name, action: "changeView" });
             }
 
             return this._selectedView;
@@ -940,7 +960,7 @@ var __meta__ = {
         },
 
         _render: function(tasks, range) {
-            var view = this.view(this._selectedViewName);
+            var view = this.view();
 
             view.range(range);
 

@@ -61,9 +61,9 @@
     test("day, week and month views are set by default", 3, function() {
         timeline = new Timeline(element);
 
-        equal(timeline.views.day.title, "day");
-        equal(timeline.views.week.title, "week");
-        equal(timeline.views.month.title, "month");
+        equal(timeline.views.day.title, "Day");
+        equal(timeline.views.week.title, "Week");
+        equal(timeline.views.month.title, "Month");
     });
 
     test("views are set from options", 3, function() {
@@ -71,9 +71,9 @@
             views: ["day", "month"]
         });
 
-        equal(timeline.views.day.title, "day");
+        equal(timeline.views.day.title, "Day");
         equal(timeline.views.week, undefined);
-        equal(timeline.views.month.title, "month");
+        equal(timeline.views.month.title, "Month");
     });
 
     test("view initialized from string", 2, function() {
@@ -81,7 +81,7 @@
             views: ["day"]
         });
 
-        equal(timeline.views.day.title, "day");
+        equal(timeline.views.day.title, "Day");
         equal(timeline.views.day.type, "kendo.ui.GanttDayView");
     });
 
@@ -99,7 +99,7 @@
             views: ["day", "invalidView"]
         });
 
-        equal(timeline.views.day.title, "day");
+        equal(timeline.views.day.title, "Day");
         equal(timeline.views.invalidView, undefined);
     });
 
