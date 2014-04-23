@@ -214,4 +214,15 @@
             ok(true);
         });
     });
+
+    test("Allow pasting with Ctrl+V", 0, function() {
+        var textbox = new NumericTextBox(input);
+
+        input.pressKey("v", {
+            ctrlKey: true,
+            preventDefault: function() {
+                ok(false);
+            }
+        });
+    });
 })();
