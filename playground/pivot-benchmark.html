@@ -1,0 +1,412 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.dom.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.xml.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
+        <style>
+            fieldset {
+                width: 45%;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <span id="loading">Loading...</span>
+        <button disabled id="drill">Drill</button>
+        <button disabled id="sort">Sort</button>
+        <button disabled id="reorder">Reorder</button>
+
+        <div>
+            <fieldset>
+               <legend>Kendo Pivot (Virtual DOM)</legend>
+               <div id="kv-pivot"></div>
+            </fieldset>
+
+            <fieldset>
+               <legend>Kendo Pivot (inner html)</legend>
+               <div id="k-pivot"></div>
+            </fieldset>
+        </div>
+
+        <script>
+            var regularPivot = document.getElementById("k-pivot");
+            var tree = new kendo.dom.Tree(document.getElementById("kv-pivot"));
+
+            var element = tree.element;
+            var text = tree.text;
+
+            function now() {
+                return window.performance && window.performance.now ? window.performance.now() : new window.Date().getTime()
+            }
+
+            function asArray(obj) {
+
+                if (!$.isArray(obj)) {
+                    return [obj]
+                }
+
+                return obj;
+            }
+
+            var empty = 0;
+
+            // Kendo Virtual DOM
+            function kendo_table(data) {
+                empty = 0;
+                return [ element("table", { border: 1 }, [kendo_thead(data), kendo_tbody(data)]) ];
+            }
+
+            function kendo_thead(data) {
+                return element("thead", null, kendo_theadrows(data));
+            }
+
+            function kendo_theadrows(data) {
+                var axes = data.axes0;
+                var membersLength = asArray(axes[0].Member).length;
+
+                var rows = [];
+
+                for (var i = 0; i < membersLength; i++) {
+                    var cells = [];
+
+                    for (var z = 0, memberLength = asArray(data.axes1[0].Member).length; z < memberLength; z++) {
+                        cells.push(element("th", null, [text("")]));
+                    }
+
+                    for (var j = 0, length = axes.length; j < length; j++) {
+                        var member = asArray(axes[j].Member);
+                        cells.push(kendo_th(member[i]));
+                    }
+
+                    rows.push(element("tr", null, cells));
+                }
+
+                return rows;
+            }
+
+            function kendo_th(member) {
+                return element("th", null, [text(member.Caption["#text"])]);
+            }
+
+            function kendo_tbody(data) {
+                return element("tbody", null, kendo_rows(data));
+            }
+
+            function kendo_rows(data) {
+                return data.axes1.map(function(member, index) {
+                    return kendo_row(member, index, data);
+                });
+            }
+
+            function kendo_row(member, index, data) {
+                return element("tr", null, kendo_cells(member, index, data));
+            }
+
+            function kendo_cells(member, index, data) {
+                member = asArray(member.Member);
+
+                var cells = [];
+
+                for (var i = 0, memberLength = member.length; i < memberLength; i++) {
+                    cells.push(kendo_th(member[i]));
+                }
+
+                var idx = 0;
+                var length = data.axes0.length;
+                var base = index * length;
+
+                for (; idx < length; idx++) {
+
+                    var value = "";
+                    var current = base + idx;
+                    var cell = data.cells[(current - empty)];
+
+                    if (cell) {
+                        var ordinal = +cell["@CellOrdinal"];
+
+                        if (ordinal === current) {
+                            value = cell.FmtValue["#text"];
+                        } else {
+                            empty += 1;
+                            value = "";
+                        }
+                    }
+
+                    cells.push(element("td", null, [text(value)]));
+                }
+
+                return cells;
+            }
+
+            //Inner Html
+            function renderPivot(element, data) {
+                empty = 0;
+                var html = '<table border="1"><thead>';
+
+                var axes = data.axes0;
+                var membersLength = asArray(axes[0].Member).length;
+
+                //render headers
+                for (var i = 0; i < membersLength; i++) {
+                    html += "<tr>";
+                    for (var z = 0, memberLength = asArray(data.axes1[0].Member).length; z < memberLength; z++) {
+                        html += "<th></th>";
+                    }
+
+                    for (var j = 0, length = axes.length; j < length; j++) {
+                        var member = asArray(axes[j].Member);
+
+                        html += "<th>" + member[i].Caption["#text"] + "</th>";
+                    }
+
+                    html += "</tr>";
+                }
+
+                html += "</thead><tbody>";
+
+                var axes1 = data.axes1;
+
+                for (var idx = 0, length = axes1.length; idx < length; idx++) {
+                    html += "<tr>";
+
+                    var member = asArray(axes1[idx].Member);
+
+                    for (var i = 0, memberLength = member.length; i < memberLength; i++) {
+                        html += "<th>" + member[i].Caption["#text"] + "</th>";
+                    }
+
+
+                    var j = 0;
+                    var axes0Length = data.axes0.length;
+                    var base = idx * axes0Length;
+
+                    for (; j < axes0Length; j++) {
+
+                        var value = "";
+                        var current = base + j;
+                        var cell = data.cells[(current - empty)];
+
+                        if (cell) {
+                            var ordinal = +cell["@CellOrdinal"];
+
+                            if (ordinal === current) {
+                                value = cell.FmtValue["#text"];
+                            } else {
+                                empty += 1;
+                                value = "";
+                            }
+                        }
+
+                        html += "<td>" + value + "</td>";
+                    }
+
+                    html += "</tr>";
+                }
+
+                html += "</tbody></table>";
+
+                element.innerHTML = html;
+            }
+
+            //fetch
+            function parse(xml) {
+                var reader = new kendo.data.XmlDataReader({});
+                var result = reader.parse(xml);
+                var root = kendo.getter("['soap:Envelope']['soap:Body'].ExecuteResponse.return.root")(result);
+
+                var axes = kendo.getter("Axes.Axis")(root);
+                var info = kendo.getter("OlapInfo")(root);
+                var cellData = asArray(kendo.getter("CellData.Cell")(root));
+
+                var axes0 = asArray(axes[0].Tuples.Tuple);
+                var axes1 = asArray(axes[1].Tuples.Tuple);
+
+                return {
+                    axes0: axes0,
+                    axes1: axes1,
+                    cells: cellData
+                };
+            }
+
+            function fetch(query) {
+                return $.ajax({
+                    url: "http://krustev:8080/olap/msmdpump.dll",
+                    data: query,
+                    type: 'POST',
+                    contentType: "text/xml",
+                    dataType: "text"
+                });
+            }
+
+            function render(data, info) {
+                //Virtual
+                var start = now();
+                tree.render(kendo_table(data));
+                var end = now();
+                console.log("Virtual (" + info + ")", end-start);
+
+                //Inner Html
+                var start = now();
+                renderPivot(regularPivot, data);
+                var end = now();
+                console.log("InnerHtml (" + info + ")", end-start);
+            }
+
+            $(function() {
+                //GET DATA AND PARSE XML
+                var sortTemplate = kendo.template($("#sortTemplate").html());
+
+                $.when(fetch($("#initialTemplate").html())).done(function(xml) {
+                    var initialData = parse(xml);
+
+                    $("button").attr("disabled", false);
+                    $("#loading").hide();
+
+                    render(initialData, "initial");
+                });
+
+                //BUTTON handlers
+                $("#drill").click(function() {
+                    $.when(fetch($("#drillTemplate").html())).done(function(xml) {
+                        render(parse(xml), "drill");
+                    });
+                });
+
+                var asc = true;
+                $("#sort").click(function() {
+                    var query = sortTemplate(asc ? "ASC" : "DESC");
+
+                    $.when(fetch(query)).done(function(xml) {
+                        render(parse(xml), "sort");
+                        asc = !asc;
+                    });
+                });
+
+                var reorder = true;
+                $("#reorder").click(function() {
+                    var query = reorder ? $("#reorderTemplate").html() : $("#drillTemplate").html();
+
+                    $.when(fetch(query)).done(function(xml) {
+                        render(parse(xml), "reorder");
+
+                        reorder = !reorder;
+                    });
+                });
+            });
+        </script>
+
+        <script id="initialTemplate" type="text/kendo-x-template">
+            <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Header/>
+                <Body>
+                    <Execute xmlns="urn:schemas-microsoft-com:xml-analysis">
+                        <Command>
+                            <Statement>
+                                SELECT  non empty {
+                                        [Geography].[Country Region Name].[Country Region Name].&amp;[Australia]
+                                    } on 0,
+                                    non empty {
+                                        [Product Subcategory].[Product Subcategory Name].Members
+                                    } on 1
+                                FROM [Adventure Works Internet Sales Model]
+                                Where {[Measures].[Internet Total Sales]}
+                            </Statement>
+                        </Command>
+                        <Properties>
+                            <PropertyList>
+                                <Catalog>Adventure Works Internet Sales Model</Catalog>
+                            </PropertyList>
+                        </Properties>
+                    </Execute>
+                </Body>
+            </Envelope>
+        </script>
+
+        <script id="drillTemplate" type="text/kendo-x-template">
+            <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Header/>
+                <Body>
+                    <Execute xmlns="urn:schemas-microsoft-com:xml-analysis">
+                        <Command>
+                            <Statement>
+                                Select  non empty {
+                                            CROSSJOIN([Geography].[Country Region Name].[Country Region Name].&amp;[Australia], [Geography].[City].CHILDREN)
+                                        } on 0,
+                                        non empty {
+                                            [Product Subcategory].[Product Subcategory Name].Members
+                                        } on 1
+                                FROM [Adventure Works Internet Sales Model]
+                                Where {[Measures].[Internet Total Sales]}
+                            </Statement>
+                        </Command>
+                        <Properties>
+                            <PropertyList>
+                                <Catalog>Adventure Works Internet Sales Model</Catalog>
+                            </PropertyList>
+                        </Properties>
+                    </Execute>
+                </Body>
+            </Envelope>
+        </script>
+
+        <script id="sortTemplate" type="text/kendo-x-template">
+            <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Header/>
+                <Body>
+                    <Execute xmlns="urn:schemas-microsoft-com:xml-analysis">
+                        <Command>
+                            <Statement>
+                                Select  non empty {
+                                    CROSSJOIN([Geography].[Country Region Name].[Country Region Name].&amp;[Australia], [Geography].[City].CHILDREN)
+                                } on 0,
+                                non empty {
+                                    Order([Product Subcategory].[Product Subcategory Name].Members, [Product Subcategory].[Product Subcategory Name].CURRENTMEMBER.MEMBER_CAPTION, #:data#)
+                                } on 1
+                                FROM [Adventure Works Internet Sales Model]
+                                Where {[Measures].[Internet Total Sales]}
+                            </Statement>
+                        </Command>
+                        <Properties>
+                            <PropertyList>
+                                <Catalog>Adventure Works Internet Sales Model</Catalog>
+                            </PropertyList>
+                        </Properties>
+                    </Execute>
+                </Body>
+            </Envelope>
+        </script>
+
+        <script id="reorderTemplate" type="text/kendo-x-template">
+            <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Header/>
+                <Body>
+                    <Execute xmlns="urn:schemas-microsoft-com:xml-analysis">
+                        <Command>
+                            <Statement>
+                                Select  non empty {
+                                            CROSSJOIN([Geography].[City].CHILDREN, [Geography].[Country Region Name].[Country Region Name].&amp;[Australia])
+                                        } on 0,
+                                        non empty {
+                                            [Product Subcategory].[Product Subcategory Name].Members
+                                        } on 1
+                                FROM [Adventure Works Internet Sales Model]
+                                Where {[Measures].[Internet Total Sales]}
+                            </Statement>
+                        </Command>
+                        <Properties>
+                            <PropertyList>
+                                <Catalog>Adventure Works Internet Sales Model</Catalog>
+                            </PropertyList>
+                        </Properties>
+                    </Execute>
+                </Body>
+            </Envelope>
+        </script>
+    </body>
+</html>
