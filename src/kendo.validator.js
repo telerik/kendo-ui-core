@@ -107,7 +107,8 @@ var __meta__ = {
     var Validator = Widget.extend({
         init: function(element, options) {
             var that = this,
-                resolved = resolveRules(element);
+                resolved = resolveRules(element),
+                validateAttributeSelector = "[" + kendo.attr("validate") + "!=false]";
 
             options = options || {};
 
@@ -121,6 +122,9 @@ var __meta__ = {
             if (that.element.is(FORM)) {
                 that.element.attr(NOVALIDATE, NOVALIDATE);
             }
+
+            that._inputSelector = INPUTSELECTOR + validateAttributeSelector;
+            that._checkboxSelector = CHECKBOXSELECTOR + validateAttributeSelector;
 
             that._errors = {};
             that._attachEvents();
@@ -230,11 +234,11 @@ var __meta__ = {
 
             if (that.options.validateOnBlur) {
                 if (!that.element.is(INPUTSELECTOR)) {
-                    that.element.on(BLUR + NS, INPUTSELECTOR, function() {
+                    that.element.on(BLUR + NS, that._inputSelector, function() {
                         that.validateInput($(this));
                     });
 
-                    that.element.on("click" + NS, CHECKBOXSELECTOR, function() {
+                    that.element.on("click" + NS, that._checkboxSelector, function() {
                         that.validateInput($(this));
                     });
                 } else {
@@ -262,7 +266,7 @@ var __meta__ = {
             if (!this.element.is(INPUTSELECTOR)) {
                 var invalid = false;
 
-                inputs = this.element.find(INPUTSELECTOR);
+                inputs = this.element.find(this._inputSelector);
 
                 for (idx = 0, length = inputs.length; idx < length; idx++) {
                     if (!this.validateInput(inputs.eq(idx))) {
