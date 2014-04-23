@@ -211,7 +211,7 @@ var __meta__ = {
                 i = 0, item, value;
 
             if ((1000 * options.largeStep) % (1000 * options.smallStep) === 0 || that._distance / options.largeStep >= 3) {
-                if (that._isHorizontal && !that._isRtl) {
+                if (!that._isHorizontal && !that._isRtl) {
                     items = $.makeArray(items).reverse();
                 }
 
