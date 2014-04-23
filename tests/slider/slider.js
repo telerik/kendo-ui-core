@@ -291,3 +291,11 @@ test("slider should render large ticks instead of small ticks", function () {
         ok($(this).hasClass("k-tick-large"));
     })
 });
+
+test("slider should render ", function () {
+    var slider = newSlider({ max: 23 }, $("<input />"));
+    var lastLargeTick = slider.wrapper.find(".k-tick-large span:last");
+    equal(lastLargeTick.html(), 20);
+    var lastSmallTick = slider.wrapper.find(".k-tick:last");
+    equal(lastSmallTick.attr("title"), 23);
+});
