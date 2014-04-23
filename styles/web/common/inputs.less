@@ -242,15 +242,6 @@ span.k-dropdown
     border-color: inherit; /* skin-related, inherit does not work in ie7- */
 }
 
-/* icon vertical alignment in XHTML Transitional DOCTYPE */
-.k-dropdown-wrap .k-select:after,
-.k-picker-wrap .k-select:after
-{
-	content: "\a0";
-	display: inline-block;
-	width: 0;
-}
-
 span.k-datetimepicker .k-select,
 span.k-datetimepicker .k-select+.k-select
 {
@@ -299,6 +290,18 @@ span.k-datetimepicker .k-select+.k-select
     text-indent: @input-indent;
     border: 0;
     margin: 0;
+}
+
+/* fix missing bottom border on browser zoom in Chrome */
+.k-webkit .k-dropdown-wrap:before,
+.k-webkit .k-picker-wrap:before,
+.k-webkit .k-numeric-wrap:before
+{
+    content: "\a0";
+    display: inline-block;
+    width: 0;
+    height: @input-height;
+    padding-bottom: 0.4em;
 }
 
 .k-ie7 .k-autocomplete .k-input,
