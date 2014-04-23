@@ -26,6 +26,7 @@ var __meta__ = {
         K_PRIMARY = "k-primary",
         K_GROUP_START = "k-group-start",
         K_GROUP_END = "k-group-end",
+        K_SPLIT_BUTTON_DROPDOWN = "k-split-button-dropdown",
 
         CLICK = "click",
         TOGGLE = "toggle",
@@ -158,7 +159,9 @@ var __meta__ = {
             },
 
             splitButton: function(element, options) {
-                //todo
+                element.find("." + K_SPLIT_BUTTON_DROPDOWN).kendoPopup({
+                    anchor: element
+                });
             }
 
         };

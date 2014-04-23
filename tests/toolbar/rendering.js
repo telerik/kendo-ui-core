@@ -349,7 +349,23 @@
         });
 
         ok(container.children("div.k-split-button").length, "SplitButton element is rendered");
-        equal(container.find("div.k-split-button > .k-split-button-dropdown").children().length, 4, "SplitButton dropdown contains correct amount of items");
+        equal($(document.body).find(".k-split-button-dropdown").children().length, 4, "SplitButton dropdown contains correct amount of items");
+    });
+
+    test("initializes kendoPopup", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", name: "splitButton", text: "Split Button", options: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" },
+                        { id: "option3", text: "Option 3" },
+                        { id: "option4", text: "Option 4" }
+                    ]
+                }
+            ]
+        });
+
+        ok($(document.body).find(".k-split-button-dropdown").data("kendoPopup") instanceof kendo.ui.Popup);
     });
 
     /* SEPARATOR */
