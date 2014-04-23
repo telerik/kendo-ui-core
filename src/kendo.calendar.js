@@ -681,9 +681,9 @@ var __meta__ = {
                            .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
                            .click(false);
 
-            that._title = links.eq(1).on(CLICK, function() { that._focusView(that.options.focusOnNav !== false); that.navigateUp(); });
-            that[PREVARROW] = links.eq(0).on(CLICK, function() { that._focusView(that.options.focusOnNav !== false); that.navigateToPast(); });
-            that[NEXTARROW] = links.eq(2).on(CLICK, function() { that._focusView(that.options.focusOnNav !== false); that.navigateToFuture(); });
+            that._title = links.eq(1).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateUp(); });
+            that[PREVARROW] = links.eq(0).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateToPast(); });
+            that[NEXTARROW] = links.eq(2).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateToFuture(); });
         },
 
         _navigate: function(arrow, modifier) {
