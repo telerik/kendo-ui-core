@@ -149,6 +149,28 @@
         ok(validator.validate());
     });
 
+    test("validate does not validate inputs with attribute data-validate set to false", function() {
+        container.append($('<input data-kendo-validate="false" required />'));
+        var validator = setup(container);
+        ok(validator.validate());
+    });
+
+    test("validate validates input with attribute data-validate set to false if it is initialized on the input", function() {
+        var validator = setup($('<input data-kendo-validate="false" required />'));
+        ok(!validator.validate());
+    });
+
+    test("validate does not validate checkboxes with attribute data-validate set to false", function() {
+        container.append($('<input type="checkbox" data-kendo-validate="false" required />'));
+        var validator = setup(container);
+        ok(validator.validate());
+    });
+
+    test("validate validates checkbox with attribute data-validate set to false if it is initialized on the checkbox", function() {
+        var validator = setup($('<input type="checkbox" data-kendo-validate="false" required />'));
+        ok(!validator.validate());
+    });
+
     test("errors returns empty array if validate is not executed", function() {
         var input = $('<input type="text" required  validationMessage="message" />'),
             validator = setup(input);
@@ -871,6 +893,37 @@
         container.find(":input").trigger("blur");
         ok(container.find(":input").eq(0).hasClass("k-invalid"));
         ok(container.find(":input").eq(1).hasClass("k-invalid"));
+    });
+
+    test("input is not validated on blur if it has the data-validate attribute set to false", function() {
+        var input = $('<input data-kendo-validate="false" required />').appendTo(container);
+        setup(container);
+
+        input.trigger("blur");
+        ok(!input.hasClass("k-invalid"));
+    });
+
+    test("input is validated on blur if it has the data-validate attribute set to false when the validator is initialized on the input", function() {
+        var input = $('<input data-kendo-validate="false" required />');
+        setup(input);
+
+        input.trigger("blur");
+        ok(input.hasClass("k-invalid"));
+    });
+
+    test("checkbox is not validated on click if it has the data-validate attribute set to false", function() {
+        var input = $('<input type="checkbox" data-kendo-validate="false" checked="checked" required />').appendTo(container);
+        setup(container);
+
+        input.trigger("click");
+        ok(!input.hasClass("k-invalid"));
+    });
+
+    test("checkbox is validated on click if it has the data-validate attribute set to false when the validator is initialized on the checkbox", function() {
+        var input = $('<input type="checkbox" data-kendo-validate="false" checked="checked" required />');
+        setup(input);
+        input.trigger("click");
+        ok(input.hasClass("k-invalid"));
     });
 
     test("message for required is applied", function() {
