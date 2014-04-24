@@ -37,7 +37,7 @@ class TelerikReleaseBot
         Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.title.downcase.start_with? title }
     end
     def wait_for_element(css)
-        Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.find_element(:css, css) }
+        Selenium::WebDriver::Wait.new(:timeout => 1000).until { driver.find_element(:css, css) }
     end
     
     #not used
@@ -47,7 +47,14 @@ class TelerikReleaseBot
         element.send_keys contents
         element.send_keys :tab
     end
+  def screenshot(failed_operation)
+    if failed_operation.nil?
+      failed_operation = "null"
+    end
 
+    Dir.mkdir("screenshots") if !File.directory?("screenshots")
+    @driver.save_screenshot(File.join("screenshots", "#$test_name.jpg"))
+end
     def quit
         driver.quit
     end
@@ -82,14 +89,7 @@ def create_version(bot, product_name)
       if product_name.start_with?('UI')
          bot.click_and_wait("Product Name", "product")
       end
-
-=begin
-      bot.driver.execute_script <<-SCRIPT
-         var masterTable = $find($telerik.$('[id$=\"_dgProducts\"]').attr('id')).get_masterTableView();
-         masterTable.filter("ProductName", "UI", Telerik.Web.UI.GridFilterFunction.Contains, true);
-      execute_script
-      Thread.current.send :sleep, 3
-=end
+      
       p ">>creating version"
       bot.click_and_wait product_name, "administration"
       bot.click_and_wait "Manage Versions", "administration"
@@ -286,8 +286,7 @@ def release_build_file_copy(release_build, name, versioned_bundle_destination_pa
       archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikUIForAspNetMvcSetup.exe")
       cp archive_file, File.join(versioned_bundle_destination_path, "TelerikUIForAspNetMvcSetup.#{VERSION}.exe")
     end
-
-    return versioned_bundle_destination_path    
+   
 end
 def build_path_and_copy(options)
    if options[:static_name]
