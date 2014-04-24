@@ -35,73 +35,46 @@
     @Html.Partial("Header")
     <div class="demos-nav widgetGrid @ViewBag.Suite">
         <div class="centerWrap floatWrap@(ViewBag.Suite.Contains("dataviz") ? " dataviz" : "")">
-        @{ var merging = false; }
-        @foreach (string category in ViewBag.Navigation.Keys)
-        {
-            if (ViewBag.Navigation.Keys.Count > 1)
-            {
-                if (merging)
-                {
-                    merging = false;
-                }
-                else
-                {
-                    @Html.Raw("<div class='" + Html.NavigationWrapperClass(category) + "'>");
-                }
-
-                <h2 class="@category.Trim().ToLower().Replace(" ", "-").Replace("&", "")-cat">@category</h2>
-
+        @{
                 var idx = 0;
                 var maxItemsPerColumn = 8;
 
                 if (ViewBag.suite == "mobile") {
                     maxItemsPerColumn = 5;
                 }
+        }
 
-                <ul>
-                    @foreach (NavigationWidget widget in ViewBag.Navigation[category])
-                    {
-                        if (!widget.ShouldInclude) { continue; }
+        <ul>
+            @foreach (NavigationWidget widget in ViewBag.Navigation)
+            {
+                if (!widget.ShouldInclude) { continue; }
 
-                        if (widget.Name != "overview")
-                        {
-                            var isActive = false;
-
-                            if (ViewBag.Section == "dashboards")
-                            {
-                                isActive = ViewBag.Example == widget.Name;
-                            }
-                            else
-                            {
-                                isActive = ViewBag.Section == widget.Name;
-                            }
-
-                            <li @Html.Raw(isActive ? "class=\"active\"" : "")>
-                                @Html.WidgetLink(widget, category)
-                            </li>
-
-                            idx++;
-                            if (idx > 0 && idx % maxItemsPerColumn == 0)
-                            {
-                                @Html.Raw("</ul><ul>")
-                            }
-                        }
-                    }
-                </ul>
-
-                merging = Html.MergesWithNext(category);
-
-                if (!merging)
+                if (widget.Name != "overview")
                 {
-                    @Html.Raw("</div>");
+                    var isActive = false;
+
+                    if (ViewBag.Section == "dashboards")
+                    {
+                        isActive = ViewBag.Example == widget.Name;
+                    }
+                    else
+                    {
+                        isActive = ViewBag.Section == widget.Name;
+                    }
+
+                    <li @Html.Raw(isActive ? "class=\"active\"" : "")>
+                        @Html.WidgetLink(widget)
+                    </li>
+
+                    idx++;
+                    if (idx > 0 && idx % maxItemsPerColumn == 0)
+                    {
+                        @Html.Raw("</ul><ul>")
+                    }
                 }
             }
-        }
+        </ul>
 
-        @if (!merging)
-        {
-            @Html.Raw("<div class='" + Html.NavigationWrapperClass("themes") + "'>");
-        }
 
         <h2 class="custom-themes-cat">Custom Themes</h2>
         <ul>

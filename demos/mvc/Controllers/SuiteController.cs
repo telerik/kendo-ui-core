@@ -127,29 +127,27 @@ namespace Kendo.Controllers
         {
            var found = false;
 
-            foreach (string category in ViewBag.Navigation.Keys)
-            {
-                foreach (NavigationWidget widget in ViewBag.Navigation[category])
-                {
-                    foreach (NavigationExample example in widget.Items)
-                    {
-                        if (!example.Url.Contains("overview") && example.ShouldInclude) {
-                            examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
-                        }
+           foreach (NavigationWidget widget in ViewBag.Navigation)
+           {
+               foreach (NavigationExample example in widget.Items)
+               {
+                   if (!example.Url.Contains("overview") && example.ShouldInclude)
+                   {
+                       examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
+                   }
 
-                        if (!found && (Request.Path.EndsWith("/" + example.Url) || (ViewBag.Example == "result" && example.Url == "upload/index.html")))
-                        {
-                            ViewBag.CurrentWidget = widget;
-                            ViewBag.CurrentExample = example;
-                            ViewBag.Title = example.Title ?? example.Text;
-                            ViewBag.Meta = example.Meta;
-                            ViewBag.Description = example.Description;
+                   if (!found && (Request.Path.EndsWith("/" + example.Url) || (ViewBag.Example == "result" && example.Url == "upload/index.html")))
+                   {
+                       ViewBag.CurrentWidget = widget;
+                       ViewBag.CurrentExample = example;
+                       ViewBag.Title = example.Title ?? example.Text;
+                       ViewBag.Meta = example.Meta;
+                       ViewBag.Description = example.Description;
 
-                            found = true;
-                        }
-                    }
-                }
-            }
+                       found = true;
+                   }
+               }
+           }
         }
 
         protected void FindSiblingExamples()

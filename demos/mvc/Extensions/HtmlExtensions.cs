@@ -78,7 +78,7 @@ namespace Kendo.Extensions
 #endif
         }
 
-        public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget, string category)
+        public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget)
         {
             var Url = new UrlHelper(html.ViewContext.RequestContext);
 
@@ -87,8 +87,6 @@ namespace Kendo.Extensions
             var href = Url.Content("~/" + (string)viewBag.Suite + "/" + widget.Items[0].Url);
 
             href = Url.ApplyProduct(href);
-
-            category = category.ToLower();
 
             var className = "";
 
@@ -105,11 +103,6 @@ namespace Kendo.Extensions
             }
 
             var target = "";
-
-            if (category.Contains("application") || category.Contains("custom themes"))
-            {
-                target = "_blank";
-            }
 
             StringBuilder a = new StringBuilder();
 
