@@ -14,6 +14,12 @@
                 width: 45%;
                 float: left;
             }
+
+            .pivot {
+                max-width: 900px;
+                max-height: 700px;
+                overflow: auto;
+            }
         </style>
     </head>
     <body>
@@ -21,16 +27,17 @@
         <button disabled id="drill">Drill</button>
         <button disabled id="sort">Sort</button>
         <button disabled id="reorder">Reorder</button>
+        <button disabled id="expanded">Fully expanded</button>
 
         <div>
             <fieldset>
                <legend>Kendo Pivot (Virtual DOM)</legend>
-               <div id="kv-pivot"></div>
+               <div id="kv-pivot" class="pivot k-grid k-widget"></div>
             </fieldset>
 
             <fieldset>
                <legend>Kendo Pivot (inner html)</legend>
-               <div id="k-pivot"></div>
+               <div id="k-pivot" class="pivot k-grid k-widget"></div>
             </fieldset>
         </div>
 
@@ -76,7 +83,7 @@
                     var cells = [];
 
                     for (var z = 0, memberLength = asArray(data.axes1[0].Member).length; z < memberLength; z++) {
-                        cells.push(element("th", null, [text("")]));
+                        cells.push(element("th", { class: "k-header" }, [text("")]));
                     }
 
                     for (var j = 0, length = axes.length; j < length; j++) {
@@ -91,7 +98,7 @@
             }
 
             function kendo_th(member) {
-                return element("th", null, [text(member.Caption["#text"])]);
+                return element("th", { class: "k-header" }, [text(member.Caption["#text"])]);
             }
 
             function kendo_tbody(data) {
@@ -105,7 +112,9 @@
             }
 
             function kendo_row(member, index, data) {
-                return element("tr", null, kendo_cells(member, index, data));
+                var attr = index % 2 !== 0 ? { class: "k-alt" } : null;
+
+                return element("tr", attr, kendo_cells(member, index, data));
             }
 
             function kendo_cells(member, index, data) {
@@ -156,13 +165,13 @@
                 for (var i = 0; i < membersLength; i++) {
                     html += "<tr>";
                     for (var z = 0, memberLength = asArray(data.axes1[0].Member).length; z < memberLength; z++) {
-                        html += "<th></th>";
+                        html += "<th class='k-header'></th>";
                     }
 
                     for (var j = 0, length = axes.length; j < length; j++) {
                         var member = asArray(axes[j].Member);
 
-                        html += "<th>" + member[i].Caption["#text"] + "</th>";
+                        html += "<th class='k-header'>" + member[i].Caption["#text"] + "</th>";
                     }
 
                     html += "</tr>";
@@ -173,14 +182,19 @@
                 var axes1 = data.axes1;
 
                 for (var idx = 0, length = axes1.length; idx < length; idx++) {
-                    html += "<tr>";
+                    html += "<tr";
+
+                    if (idx % 2 !== 0) {
+                        html += " class='k-alt'";
+                    }
+
+                    html += ">";
 
                     var member = asArray(axes1[idx].Member);
 
                     for (var i = 0, memberLength = member.length; i < memberLength; i++) {
-                        html += "<th>" + member[i].Caption["#text"] + "</th>";
+                        html += "<th class='k-header'>" + member[i].Caption["#text"] + "</th>";
                     }
-
 
                     var j = 0;
                     var axes0Length = data.axes0.length;
@@ -249,13 +263,54 @@
                 var start = now();
                 tree.render(kendo_table(data));
                 var end = now();
-                console.log("Virtual (" + info + ")", end-start);
+
+                var time = end-start;
+                console.log("Virtual (" + info + ")", time);
+                fileResult("virtual", info, time);
 
                 //Inner Html
                 var start = now();
                 renderPivot(regularPivot, data);
                 var end = now();
-                console.log("InnerHtml (" + info + ")", end-start);
+
+                var time = end-start;
+                console.log("InnerHtml (" + info + ")", time);
+                fileResult("innerhtml", info, time);
+            }
+
+            window.benchmark = {};
+            function fileResult(pivot, type, time) {
+                var pivotInfo = benchmark[pivot] || {};
+                var testInfo = pivotInfo[type] || [];
+
+                testInfo.push(time);
+
+                pivotInfo[type] = testInfo;
+                benchmark[pivot] = pivotInfo;
+            }
+
+            function getResult(pivot) {
+                var pivotInfo = benchmark[pivot];
+                var result = [];
+
+                if (pivotInfo) {
+                    result.push(average(pivotInfo["initial"]));
+                    result.push(average(pivotInfo["drill"]));
+                    result.push(average(pivotInfo["expanded"]));
+                    result.push(average(pivotInfo["sort"]));
+                    result.push(average(pivotInfo["reorder"]));
+                }
+
+                return result;
+            }
+
+            function average(data) {
+                var sum = 0;
+
+                for (var idx = 0, length = data.length; idx < length; idx++) {
+                    sum += data[idx];
+                }
+                return sum / length;
             }
 
             $(function() {
@@ -272,6 +327,12 @@
                 });
 
                 //BUTTON handlers
+                $("#expanded").click(function() {
+                    $.when(fetch($("#expandedTemplate").html())).done(function(xml) {
+                        render(parse(xml), "expanded");
+                    });
+                });
+
                 $("#drill").click(function() {
                     $.when(fetch($("#drillTemplate").html())).done(function(xml) {
                         render(parse(xml), "drill");
@@ -314,6 +375,33 @@
                                     non empty {
                                         [Product Subcategory].[Product Subcategory Name].Members
                                     } on 1
+                                FROM [Adventure Works Internet Sales Model]
+                                Where {[Measures].[Internet Total Sales]}
+                            </Statement>
+                        </Command>
+                        <Properties>
+                            <PropertyList>
+                                <Catalog>Adventure Works Internet Sales Model</Catalog>
+                            </PropertyList>
+                        </Properties>
+                    </Execute>
+                </Body>
+            </Envelope>
+        </script>
+
+        <script id="expandedTemplate" type="text/kendo-x-template">
+            <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+                <Header/>
+                <Body>
+                    <Execute xmlns="urn:schemas-microsoft-com:xml-analysis">
+                        <Command>
+                            <Statement>
+                                Select  non empty {
+                                    CROSSJOIN([Geography].[City].CHILDREN, [Geography].[Country Region Name].[Country Region Name].&amp;[Australia])
+                                } on 0,
+                                non empty {
+                                    CROSSJOIN([Product Category].[Product Category Name].Members, [Product Subcategory].[Product Subcategory Name].Members)
+                                } on 1
                                 FROM [Adventure Works Internet Sales Model]
                                 Where {[Measures].[Internet Total Sales]}
                             </Statement>
