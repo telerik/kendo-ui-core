@@ -1101,6 +1101,20 @@ asyncTest("query does not filter data if serverFiltering = true", 3, function() 
     dataSource.query( { filter: { field: "age", operator: "==", value: 2 } } );
 });
 
+test("total is correct after adding a removed item, when data is single item", function() {
+    var dataSource = new DataSource({
+        data: [{ id:1, bar: "foo" }]
+    });
+
+    dataSource.read();
+
+    var item = dataSource.at(0);
+    dataSource.remove(item);
+    dataSource.add(item);
+
+    equal(dataSource.total(), 1);
+});
+
 test("cancelChanges refresh the total if serverpaging is enabled", function() {
     var dataSource = new DataSource({
         transport: {

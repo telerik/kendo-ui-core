@@ -2783,7 +2783,10 @@ var __meta__ = {
             if (that.options.autoSync && (action === "add" || action === "remove" || action === "itemchange")) {
                 that.sync();
             } else {
-                var total = parseInt(that._total || that._pristineTotal, 10);
+                var total = parseInt(that._total, 10);
+                if (!isNumber(that._total)) {
+                    total = parseInt(that._pristineTotal, 10);
+                }
                 if (action === "add") {
                     total += e.items.length;
                 } else if (action === "remove") {
