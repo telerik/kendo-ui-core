@@ -25,26 +25,26 @@ namespace Kendo.Controllers
 
         //
         // GET: /Web/
-        public ActionResult Index(string suite, string section, string example, bool? nav)
+        public ActionResult Index(string product, string section, string example, bool? nav)
         {
             ViewBag.ShowCodeStrip = true;
-            ViewBag.Suite = suite;
+            ViewBag.Suite = product;
             ViewBag.Section = section;
             ViewBag.Example = example;
-            ViewBag.Frameworks = Frameworks(suite, section, example);
+            ViewBag.Frameworks = Frameworks(product, section, example);
 #if DEBUG
             ViewBag.Debug = true;
 #else
             ViewBag.Debug = false;
 #endif
 
-            LoadNavigation(suite);
+            LoadNavigation();
 
             FindCurrentExample();
             FindSiblingExamples();
             FindEdgeExamples();
 
-            if (suite == "mobile") {
+            if (product == "mobile") {
                 ViewBag.scripts = Kendo.Models.ScriptGroups.Mobile;
                 ViewBag.styles = Kendo.Models.StyleGroups.Mobile;
 
@@ -109,13 +109,13 @@ namespace Kendo.Controllers
             return Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
         }
 
-        public ActionResult SectionIndex(string suite, string section)
+        public ActionResult SectionIndex(string product, string section)
         {
             var isMobileDevice = IsMobileDevice();
 
-            var redirect = Redirect(Url.ApplyProduct(Url.Action("Index", new { suite = suite, section = section, example = "index" })));
+            var redirect = Redirect(Url.ApplyProduct(Url.Action("Index", new { product = product, section = section, example = "index" })));
 
-            if (suite == "mobile" && isMobileDevice)
+            if (product == "mobile" && isMobileDevice)
             {
                 redirect = RedirectPermanent(Url.RouteUrl("MobileDeviceIndex"));
             }
@@ -188,60 +188,6 @@ namespace Kendo.Controllers
                     ViewBag.NextWidgetUrl = examplesUrl[index + 1];
                 }
             }
-        }
-
-        protected string LoadDescription(string suite, string section) {
-            var content = LoadDocPage(suite, section);
-            var description = string.Empty;
-
-            if (!string.IsNullOrEmpty(content)) {
-                description = GetTopic(content, "description");
-            }
-
-            return description;
-        }
-
-        private string LoadDocPage(string suite, string section)
-        {
-            section = section.Replace("-", "").ToLower();
-
-            if (section.IndexOf("chart") > -1)
-            {
-                section = "chart";
-            }
-
-            if (section.IndexOf("drag") > -1)
-            {
-                section = "drag";
-            }
-
-            if (Docs.ContainsKey(section))
-            {
-                suite = Docs[section];
-            }
-
-            WebClient client = new WebClient();
-            return client.DownloadString(string.Format(docsURL, suite, section));
-        }
-
-        private string GetTopic(string html, string topic) {
-            var splits = html.Split(new string[] { "<h2" }, System.StringSplitOptions.None).ToList();
-            var content = string.Empty;
-
-            if (splits.Count > 0)
-            {
-                content = splits.Where(split => split.IndexOf(topic, StringComparison.OrdinalIgnoreCase) > -1).FirstOrDefault();
-
-                if (!string.IsNullOrEmpty(content))
-                {
-                    splits = content.Split('\n').ToList();
-                    splits.RemoveAt(0);
-
-                    content = string.Join("", splits);
-                }
-            }
-
-            return content;
         }
     }
 }

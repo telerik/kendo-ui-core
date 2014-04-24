@@ -25,7 +25,7 @@ namespace Kendo
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            var suiteConstraint = new { suite = "(web|dataviz|mobile)" };
+            var productConstraint = new { product = "(html|php-ui|jsp-ui|aspnet-mvc)" };
 
             routes.MapRoute(
                 "AsyncUpload",
@@ -96,23 +96,23 @@ namespace Kendo
 
            routes.MapRoute(
                "SectionIndex.html",
-               "{suite}/index.html",
+               "{product}/index.html",
                new { controller = "Suite", action = "SectionIndex", section = "overview" },
-               suiteConstraint
+               productConstraint
            );
 
             routes.MapRoute(
                 "Suite",
-                "{suite}/{section}/{example}.html",
+                "{product}/{section}/{example}.html",
                 new { controller = "Suite", action = "Index" },
-                suiteConstraint
+                productConstraint
             );
 
             routes.MapRoute(
                 "SectionIndex",
-                "{suite}/{section}",
+                "{product}/{section}",
                 new { controller = "Suite", action = "SectionIndex", section = "overview" },
-                suiteConstraint
+                productConstraint
             );
 
             routes.MapRoute(
@@ -124,7 +124,7 @@ namespace Kendo
 
             routes.MapRoute(
                 "ThemeBuilder",
-                "themebuilder/{suite}.html",
+                "themebuilder/{product}.html",
                 new { controller = "ThemeBuilder", action = "Index" }
             );
 

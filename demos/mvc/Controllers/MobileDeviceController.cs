@@ -15,7 +15,7 @@ namespace Kendo.Controllers
 #else
             ViewBag.Debug = false;
 #endif
-            LoadNavigation("mobile");
+            LoadNavigation();
             return View();
         }
 

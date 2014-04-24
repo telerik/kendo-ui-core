@@ -23,15 +23,15 @@ namespace Kendo.Extensions
             return ResourceUrl(url, "js", file);
         }
 
-        public static string Suite(this UrlHelper url, string suite)
+        public static string Suite(this UrlHelper url, string product)
         {
-            suite = suite.ToLowerInvariant();
+            product = product.ToLowerInvariant();
 
-            var href = "~/" + suite;
+            var href = "~/" + product;
 
-            if (suite != "mobile")
+            if (product != "mobile")
             {
-                href = "~/" + suite + "/overview/index.html";
+                href = "~/" + product + "/overview/index.html";
             }
 
             return url.Content(url.ApplyProduct(href));

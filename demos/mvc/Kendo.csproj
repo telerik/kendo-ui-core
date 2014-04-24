@@ -109,6 +109,7 @@
   <ItemGroup>
     <None Include="App_Data\dataviz.nav.json" />
     <None Include="App_Data\mobile.nav.json" />
+    <None Include="App_Data\nav.json" />
     <None Include="App_Data\web.nav.json" />
     <Content Include="bin\Kendo.dll" />
     <Content Include="bin\Kendo.pdb" />

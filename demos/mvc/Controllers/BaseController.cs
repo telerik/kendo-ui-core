@@ -52,7 +52,7 @@ namespace Kendo.Controllers
             return File(IOFile.ReadAllBytes(path), mimeType);
         }
 
-        protected void LoadNavigation(string suite)
+        protected void LoadNavigation()
         {
             var navigationJson = IOFile.ReadAllText(Server.MapPath("~/App_Data/nav.json"));
 
