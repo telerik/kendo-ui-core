@@ -26,7 +26,9 @@ var __meta__ = {
         K_PRIMARY = "k-primary",
         K_GROUP_START = "k-group-start",
         K_GROUP_END = "k-group-end",
+        K_SPLIT_BUTTON = "k-split-button",
         K_SPLIT_BUTTON_DROPDOWN = "k-split-button-dropdown",
+        K_SPLIT_BUTTON_ARROW = "k-split-button-arrow",
 
         CLICK = "click",
         TOGGLE = "toggle",
@@ -56,9 +58,8 @@ var __meta__ = {
 
             splitButton: kendo.template(
                 '<div class="k-split-button">' +
-                    '<a href="" role="splitbutton" class="k-button k-split-button">' +
-                        '<span class="k-split-button-text">#= text #</span><span class="k-icon k-i-arrow-s"></span>' +
-                    '</a>' +
+                    '<a href="" role="splitbutton" class="k-button">#= text #</a>' +
+                    '<a href="" class="k-button k-split-button-arrow"><span class="k-icon k-i-arrow-s"></span></a>' +
                     '<ul class="k-split-button-dropdown">' +
                         '# for(var i = 0; i < options.length; i++) { #' +
                             '<li id="#=options[i].id#"><a>#=options[i].text#</a></li>' +
@@ -159,9 +160,20 @@ var __meta__ = {
             },
 
             splitButton: function(element, options) {
-                element.find("." + K_SPLIT_BUTTON_DROPDOWN).kendoPopup({
+                var popupElement = element.find("." + K_SPLIT_BUTTON_DROPDOWN),
+                    popup,
+                    id = options.id || kendo.guid();
+
+                if(id) {
+                    element.attr("id", id);
+                    popupElement.attr("id", id + "_optionlist");
+                }
+
+                popup = popupElement.kendoPopup({
                     anchor: element
-                });
+                }).data("kendoPopup");
+
+                element.data({ kendoPopup: popup });
             }
 
         };
@@ -182,6 +194,7 @@ var __meta__ = {
                 }
 
                 element.on(CLICK, ".k-button", proxy(that._buttonClick, that));
+                element.on(CLICK, "." + K_SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
 
                 kendo.notify(that);
             },
@@ -197,6 +210,10 @@ var __meta__ = {
             },
 
             destroy: function() {
+                this.element.find("." + K_SPLIT_BUTTON).each(function(idx, element) {
+                    $(element).data("kendoPopup").destroy();
+                });
+
                 Widget.fn.destroy.call(this);
             },
 
@@ -255,6 +272,12 @@ var __meta__ = {
                 } else {
                     this.trigger(CLICK, { target: target });
                 }
+            },
+
+            _toggle: function(e) {
+                var popup = $(e.target).closest("." + K_SPLIT_BUTTON).data("kendoPopup");
+
+                popup.toggle();
             }
 
         });

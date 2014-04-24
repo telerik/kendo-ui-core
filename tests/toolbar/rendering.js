@@ -338,7 +338,7 @@
     test("renders splitButton from JSON", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "splitButton", name: "splitButton", text: "Split Button", options: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", options: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" },
                         { id: "option3", text: "Option 3" },
@@ -355,7 +355,7 @@
     test("initializes kendoPopup", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "splitButton", name: "splitButton", text: "Split Button", options: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", options: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" },
                         { id: "option3", text: "Option 3" },
@@ -366,6 +366,74 @@
         });
 
         ok($(document.body).find(".k-split-button-dropdown").data("kendoPopup") instanceof kendo.ui.Popup);
+    });
+
+    test("splitButton holds reference to its popup", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", options: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" },
+                        { id: "option3", text: "Option 3" },
+                        { id: "option4", text: "Option 4" }
+                    ]
+                }
+            ]
+        });
+
+        var splitButton = container.find(".k-split-button");
+        ok(splitButton.data("kendoPopup") instanceof kendo.ui.Popup);
+    });
+
+    test("splitButton applies ID and text options", 2, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", text: "foo", options: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" }
+                    ]
+                }
+            ]
+        });
+
+        var splitButton = container.find("#splitButton");
+
+        ok(splitButton.length, "ID is applied");
+        equal(splitButton.find("a").text(), "foo", "Text is applied");
+    });
+
+    test("SplitButton sets id to the popup element", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", text: "foo", options: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" }
+                    ]
+                }
+            ]
+        });
+
+        var popup = container.find("#splitButton").data("kendoPopup");
+
+        equal(popup.element.attr("id"), "splitButton_optionlist");
+    });
+
+    test("SplitButton and its popup receive auto generated ID if ID is not explicitly set", 2, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", text: "foo", options: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" }
+                    ]
+                }
+            ]
+        });
+
+        var splitButton = container.find(".k-split-button");
+        var popup = splitButton.data("kendoPopup").element;
+
+        ok(splitButton.attr("id"), "SplitButton has ID");
+        ok(popup.attr("id"), "Popup has ID");
     });
 
     /* SEPARATOR */
