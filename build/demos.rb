@@ -295,7 +295,7 @@ tree :to => 'dist/demos/staging/content/cdn/themebuilder',
      :root => 'dist/themebuilder/staging/'
 
 class PatchedWebConfigTask < Rake::FileTask
-    attr_accessor :cdn_root, :themebuilder_root, :scratchpad_root
+    attr_accessor :cdn_root, :themebuilder_root, :dojo_root
     def execute(args=nil)
         ensure_path(name)
 
@@ -304,7 +304,7 @@ class PatchedWebConfigTask < Rake::FileTask
             source
                 .sub!('$CDN_ROOT', cdn_root)
                 .sub!('$THEMEBUILDER_ROOT', themebuilder_root)
-                .sub!('$SCRATCHPAD_ROOT', scratchpad_root)
+                .sub!('$DOJO_ROOT', dojo_root)
             file.write(source)
         end
     end
@@ -316,11 +316,11 @@ class PatchedWebConfigTask < Rake::FileTask
     end
 end
 
-def patched_web_config(name, source, cdn_root, themebuilder_root, scratchpad_root)
+def patched_web_config(name, source, cdn_root, themebuilder_root, dojo_root)
     task = PatchedWebConfigTask.define_task(name => source)
     task.cdn_root = cdn_root
     task.themebuilder_root = themebuilder_root
-    task.scratchpad_root = scratchpad_root
+    task.dojo_root = dojo_root
     task
 end
 
@@ -374,7 +374,7 @@ namespace :demos do
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
         'dist/demos/staging/content/cdn/styles/telerik',
-        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', STAGING_CDN_ROOT + CURRENT_COMMIT, STAGING_CDN_ROOT + CURRENT_COMMIT + '/themebuilder', '/scratchpad-staging/')
+        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', STAGING_CDN_ROOT + CURRENT_COMMIT, STAGING_CDN_ROOT + CURRENT_COMMIT + '/themebuilder', '/dojo-staging/')
     ]
 
     zip 'dist/demos/staging.zip' => :staging_site

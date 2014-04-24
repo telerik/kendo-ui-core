@@ -69,12 +69,12 @@ namespace Kendo.Extensions
 #endif
         }
 
-        public static String ScratchpadRoot(this HtmlHelper html)
+        public static String DojoRoot(this HtmlHelper html)
         {
 #if DEBUG
             return "http://127.0.0.1:3000/";
 #else
-            return ConfigurationManager.AppSettings["SCRATCHPAD_ROOT"];
+            return ConfigurationManager.AppSettings["DOJO_ROOT"];
 #endif
         }
 
