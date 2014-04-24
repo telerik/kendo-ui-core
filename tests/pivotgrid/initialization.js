@@ -50,4 +50,21 @@
         ok(!fetch.calls("fetch"));
     });
 
+    test("PivotGrid creates column header virtual DOM node", function() {
+        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+
+        ok(pivotgrid.columnsHeaderTree instanceof kendo.dom.Tree);
+    });
+
+    test("PivotGrid creates row header virtual DOM node", function() {
+        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+
+        ok(pivotgrid.rowsHeaderTree instanceof kendo.dom.Tree);
+    });
+
+    test("PivotGrid creates content virtual DOM node", function() {
+        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+
+        ok(pivotgrid.contentTree instanceof kendo.dom.Tree);
+    });
 })();

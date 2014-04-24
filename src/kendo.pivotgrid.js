@@ -19,7 +19,9 @@ var __meta__ = {
         toString = {}.toString,
         identity = function(o) { return o; },
         map = $.map,
-        extend = $.extend;
+        extend = $.extend,
+        CHANGE = "change",
+        DIV = "<div/>";
 
     function normalizeMembers(member) {
         var descriptor = typeof member === "string" ? { name: member, expand: false } : member,
@@ -342,16 +344,21 @@ var __meta__ = {
        readers: {
            xmla: XmlaDataReader
        }
-    });
 
     var PivotGrid = Widget.extend({
         init: function(element, options) {
-            Widget.fn.init.call(this, element, options);
+            var that = this;
 
-            this._dataSource();
+            Widget.fn.init.call(that, element, options);
 
-            if (this.options.autoBind) {
-                this.dataSource.fetch();
+            that._wrapper();
+
+            that._header();
+
+            that._dataSource();
+
+            if (that.options.autoBind) {
+                that.dataSource.fetch();
             }
 
             kendo.notify(this);
@@ -383,7 +390,65 @@ var __meta__ = {
                 .bind("change", this._refreshHandler);
         },
 
+        _wrapper: function() {
+            this.wrapper = this.element.addClass("k-widget");
+        },
+
+        _header: function() {
+            var that = this;
+            var wrapper = that.wrapper;
+
+            var filtersSection = $(DIV).appendTo(wrapper);
+
+            var columnsSection = $(DIV);
+            var measuresSection = $(DIV);
+
+            var rowsSection = $(DIV);
+            var columnsHeader = $(DIV);
+
+            var rowsHeader = $(DIV);
+            var content = $(DIV);
+
+            var columnSectionWrapper = $(DIV).appendTo(wrapper)
+                                             .append(measuresSection)
+                                             .append(columnsSection);
+
+            var columnHeaderWrapper = $(DIV).appendTo(wrapper)
+                                            .append(rowsSection)
+                                            .append(columnsHeader);
+
+            var contentWrapper = $(DIV).appendTo(wrapper)
+                                       .append(rowsHeader)
+                                       .append(content);
+
+
+
+            that.filtersSection = filtersSection;
+            that.measuresSection = measuresSection;
+            that.columnsSection = columnsSection;
+            that.rowsSection = rowsSection;
+            that.columnsHeader = columnsHeader;
+            that.rowsHeader = rowsHeader;
+            that.content = content;
+
+            //VIRTUAL DOM
+            that.columnsHeaderTree = new kendo.dom.Tree(columnsHeader[0]);
+            that.rowsHeaderTree = new kendo.dom.Tree(rowsHeader[0]);
+            that.contentTree = new kendo.dom.Tree(content[0]);
+        },
+
+        //TODO: render measure table
+        //TODO: render horizontal axis table
+        //TODO: render vertical axis table
+        //TODO: render content table
+
         refresh: function() {
+            var that = this;
+            var dataSource = that.dataSource;
+            var axes = dataSource.axes();
+            var data = dataSource.view();
+
+            //TODO: perform rendering here
         }
     });
 
