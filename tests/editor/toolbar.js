@@ -360,9 +360,22 @@ test("hidden buttons do not end groups", function() {
     ]);
 
     dom.find(".k-unlink").addClass(".k-state-disabled");
-    toolbar._updateContext();
+    toolbar.update();
 
     ok(getTool("createLink").hasClass("k-group-end"));
+});
+
+test("shown groups do are the only group end", function() {
+    bindToMock([
+        "indent", "outdent"
+    ]);
+
+    getTool("outdent").addClass("k-state-disabled");
+    toolbar.update();
+    getTool("outdent").removeClass("k-state-disabled");
+    toolbar.update();
+
+    ok(!getTool("indent").hasClass("k-group-end"));
 });
 
 test("break tool renders row breaking element", function() {

@@ -111,7 +111,7 @@
 
             // detach from editor that was previously listened to
             if (that._editor) {
-                that._editor.unbind("select", proxy(that._update, that));
+                that._editor.unbind("select", proxy(that._updateTool, that));
             }
 
             that._editor = editor;
@@ -165,9 +165,9 @@
                 ui.closest(".k-colorpicker", that.element).next(".k-colorpicker").addClass("k-editor-widget");
             });
 
-            editor.bind("select", proxy(that._update, that));
+            editor.bind("select", proxy(that._updateTool, that));
 
-            that._updateContext();
+            that.update();
 
             if (window) {
                 window.wrapper.css({top: "", left: "", width: ""});
@@ -410,6 +410,7 @@
                 $(this).children().filter(function(){
                     return this.style.display !== "none";
                 })
+                    .removeClass("k-group-end")
                     .first().addClass("k-group-start").end()
                     .last().addClass("k-group-end").end();
             });
@@ -527,8 +528,7 @@
             return tool[0] ? tool[0].substring(tool[0].lastIndexOf("-") + 1) : "custom";
         },
 
-        // update tool state
-        _update: function() {
+        _updateTool: function() {
             var that = this,
                 editor = that._editor,
                 range = editor.getRange(),
@@ -545,10 +545,10 @@
                 }
             });
 
-            this._updateContext();
+            this.update();
         },
 
-        _updateContext: function() {
+        update: function() {
             this.element.children().children().each(function() {
                 var tool = $(this);
                 tool.css("display", tool.hasClass("k-state-disabled") ? "none" : "");
