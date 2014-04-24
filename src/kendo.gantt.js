@@ -547,7 +547,7 @@ var __meta__ = {
             this.wrapper = this.element
                             .addClass("k-widget k-gantt")
                             .append("<div class='k-gantt-layout k-gantt-treelist'><div class='k-grid k-widget'></div></div>")
-                            .append("<div class='k-gantt-layout k-gantt-grid'><div class='k-widget k-gantt-timeline'></div></div>");
+                            .append("<div class='k-gantt-layout k-gantt-grid'><div class='k-widget k-gantt-timeline k-grid'></div></div>");
 
             if (height) {
                 this.wrapper.height(height);
@@ -577,6 +577,14 @@ var __meta__ = {
                     that.timeline.view(name);
 
                     that.refresh();
+                });
+
+            toolbar
+                .find(".k-toolbar li")
+                .hover(function() {
+                    $(this).addClass("k-state-hover");
+                }, function() {
+                    $(this).removeClass("k-state-hover");
                 });
         },
 

@@ -19,8 +19,8 @@ var __meta__ = {
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
     var minDependencyWidth = 14;
-    var minDependencyHeight = 12;
-    var rowHeight = 24;
+    var rowHeight = 27;
+    var minDependencyHeight = Math.floor(rowHeight/2);
 
     var defaultViews = {
         day: {
@@ -205,7 +205,7 @@ var __meta__ = {
                 coordinates[task.id] = {
                     start: position.left,
                     end: position.left + position.width,
-                    top: i * rowHeight + rowHeight/2
+                    top: i * rowHeight + Math.floor(rowHeight/2)
                 };
             }
 
@@ -236,15 +236,16 @@ var __meta__ = {
 
             title = kendoTextElement(task.title);
             inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
-            middle = kendoDomElement("div", { className: "k-gantt-summary-progress" }, [inner]);
+            middle = kendoDomElement("div", { className: "k-gantt-summary-progress", style: { width: task.percentComplete + "%" } }, [inner]);
             taskElement = kendoDomElement("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
 
             return taskElement;
         },
 
         _taskPosition: function(task) {
-            var startLeft = this._offset(task.start);
-            var endLeft = this._offset(task.end);
+            var round = Math.round;
+            var startLeft = round(this._offset(task.start));
+            var endLeft = round(this._offset(task.end));
 
             return { left: startLeft, width: endLeft - startLeft };
         },
@@ -376,13 +377,12 @@ var __meta__ = {
             var that = this;
             var dir = reverse ? "start" : "end";
             var delta;
-            var round = Math.round;
 
             var addHorizontal = function() {
-                lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
+                lines.push(that._line({ left: left + "px", top: top + "px", width: width + "px" }));
             };
             var addVertical = function() {
-                lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
+                lines.push(that._line({ left: left + "px", top: top + "px", height: height + "px" }));
             };
 
             left = from[dir];
@@ -433,13 +433,12 @@ var __meta__ = {
             var that = this;
             var minDistance = 2 * minDependencyWidth;
             var delta = to.start - from.end;
-            var round = Math.round;
 
             var addHorizontal = function() {
-                lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", width: round(width) + "px" }));
+                lines.push(that._line({ left: left + "px", top: top + "px", width: width + "px" }));
             };
             var addVertical = function() {
-                lines.push(that._line({ left: round(left) + "px", top: round(top) + "px", height: round(height) + "px" }));
+                lines.push(that._line({ left: left + "px", top: top + "px", height: height + "px" }));
             };
 
             left = from.end;
@@ -856,8 +855,8 @@ var __meta__ = {
 
         _wrapper: function() {
             this.wrapper = this.element
-                .append("<div class='k-gantt-timeline-header'><div class='k-gantt-timeline-header-wrap'></div></div>")
-                .append("<div class='k-gantt-timeline-content'><div class='k-gantt-timeline-tasks'></div><div class='k-gantt-timeline-dependencies'></div></div>");
+                .append("<div class='k-gantt-timeline-header k-grid-header'><div class='k-gantt-timeline-header-wrap k-grid-header-wrap'></div></div>")
+                .append("<div class='k-gantt-timeline-content k-grid-content'><div class='k-gantt-timeline-tasks'></div><div class='k-gantt-timeline-dependencies'></div></div>");
 
             this.element.append(this.wrapper);
         },
