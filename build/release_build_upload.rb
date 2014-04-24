@@ -47,14 +47,7 @@ class TelerikReleaseBot
         element.send_keys contents
         element.send_keys :tab
     end
-  def screenshot(failed_operation)
-    if failed_operation.nil?
-      failed_operation = "null"
-    end
 
-    Dir.mkdir("screenshots") if !File.directory?("screenshots")
-    @driver.save_screenshot(File.join("screenshots", "#$test_name.jpg"))
-end
     def quit
         driver.quit
     end
@@ -89,7 +82,7 @@ def create_version(bot, product_name)
       if product_name.start_with?('UI')
          bot.click_and_wait("Product Name", "product")
       end
-      
+
       p ">>creating version"
       bot.click_and_wait product_name, "administration"
       bot.click_and_wait "Manage Versions", "administration"
