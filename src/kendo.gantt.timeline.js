@@ -119,6 +119,8 @@ var __meta__ = {
             this._slots = this._createSlots();
 
             this.createLayout(this._layout());
+
+            this._slotDimensions();
         },
 
         createLayout: function(rows) {
@@ -131,6 +133,21 @@ var __meta__ = {
             tree.render([table]);
 
             this.headerRow = this.header.find("table:first tr").last();
+        },
+
+        _slotDimensions: function() {
+            var headers = this.headerRow[0].children;
+            var slots = this._timeSlots();
+            var slot;
+            var header;
+
+            for (var i = 0, length = headers.length; i < length; i++) {
+                header = headers[i];
+                slot = slots[i];
+
+                slot.offsetLeft = header.offsetLeft;
+                slot.offsetWidth = header.offsetWidth;
+            }
         },
 
         render: function(tasks) {
@@ -251,30 +268,27 @@ var __meta__ = {
         },
 
         _offset: function(date) {
-            var headers = this.headerRow[0].children;
-            var header;
             var slots = this._timeSlots();
             var slot;
             var startOffset;
             var slotDuration;
             var slotOffset;
-            var startIndex = this._slotIndex(date);
+            var startIndex = this._slotIndex("start", date);
 
             slot = slots[startIndex];
-            header = headers[startIndex];
 
             if (slot.end < date) {
-                return header.offsetLeft + header.offsetWidth;
+                return slot.offsetLeft + slot.offsetWidth;
             }
 
             startOffset = date - slot.start;
             slotDuration = slot.end - slot.start;
-            slotOffset = (startOffset / slotDuration) * header.offsetWidth;
+            slotOffset = (startOffset / slotDuration) * slot.offsetWidth;
 
-            return header.offsetLeft + slotOffset;
+            return slot.offsetLeft + slotOffset;
         },
 
-        _slotIndex: function(date) {
+        _slotIndex: function(field, value) {
             var slots = this._timeSlots();
             var startIdx = 0;
             var endIdx = slots.length - 1;
@@ -283,7 +297,7 @@ var __meta__ = {
             do {
                 middle = Math.ceil((endIdx + startIdx) / 2);
 
-                if (slots[middle].start < date) {
+                if (slots[middle][field] < value) {
                     startIdx = middle;
                 } else {
                     if (middle === endIdx) {
@@ -295,6 +309,20 @@ var __meta__ = {
             } while (startIdx !== endIdx);
 
             return startIdx;
+        },
+
+        _timeByPosition: function(x) {
+            var slot = this._slotByPosition(x);
+            var duration = slot.end - slot.start;
+            var slotOffset = duration * ((x - slot.offsetLeft) / slot.offsetWidth);
+
+            return new Date(slot.start.getTime() + slotOffset);
+        },
+
+        _slotByPosition: function(x) {
+            var slotIndex = this._slotIndex("offsetLeft", x);
+
+            return this._timeSlots()[slotIndex];
         },
 
         _renderDependencies: function(dependencies) {
@@ -828,6 +856,8 @@ var __meta__ = {
             this._domTrees();
 
             this._views();
+
+            this._draggable();
         },
         
         options: {
@@ -838,19 +868,24 @@ var __meta__ = {
                     week: "Week",
                     month: "Month"
                 }
-            }
+            },
+            snap: true
         },
 
         destroy: function() {
-            this._unbindView(this._selectedView);
-
             Widget.fn.destroy.call(this);
 
-            kendo.destroy(this.wrapper);
+            this._unbindView(this._selectedView);
+
+            if (this._moveDraggable) {
+                this._moveDraggable.destroy();
+            }
 
             this._headerTree = null;
             this._taskTree = null;
             this._dependencyTree = null;
+
+            kendo.destroy(this.wrapper);
         },
 
         _wrapper: function() {
@@ -970,6 +1005,52 @@ var __meta__ = {
 
         _renderDependencies: function(dependencies) {
             this.view()._renderDependencies(dependencies);
+        },
+
+        _draggable: function() {
+            var that = this;
+            var element;
+            var originalStart;
+            var currentStart;
+
+            this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
+                distance: 0,
+                filter: ".k-gantt-summary",
+                holdToDrag: false
+            });
+
+            this._moveDraggable
+                .bind("dragstart", function(e) {
+                    element = e.currentTarget.clone();
+
+                    e.currentTarget[0].style.opacity = 0.5;
+                    element[0].style.cursor = "move";
+
+                    e.currentTarget.parent().append(element);
+
+                    originalStart = parseInt(e.currentTarget[0].style.left, 10);
+                })
+                .bind("drag", function(e) {
+                    currentStart = originalStart + e.x.initialDelta;
+
+                    if (that.options.snap) {
+                        currentStart = that.view()._slotByPosition(currentStart).offsetLeft;
+                    }
+
+                    element[0].style.left = currentStart + "px";
+                })
+                .bind("dragend", function(e) {
+                    var start = that.view()._timeByPosition(currentStart);
+
+                    that.trigger("move", { uid: e.currentTarget.attr("data-uid"), start: start });
+
+                    element.remove();
+                    element = null;
+                })
+                .bind("dragcancel", function(e) {
+                    element.remove();
+                    element = null;
+                });
         }
 
     });

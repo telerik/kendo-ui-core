@@ -518,7 +518,8 @@ var __meta__ = {
             workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
             workWeekStart: 1,
             workWeekEnd: 5,
-            hourSpan: 1
+            hourSpan: 1,
+            snap: true
         },
 
         destroy: function() {
@@ -606,14 +607,23 @@ var __meta__ = {
 
             this.timeline = new kendo.ui.GanttTimeline(element, options);
 
-            this.timeline.bind("navigate", function(e) {
-                that.toolbar
-                    .find(".k-toolbar li")
-                    .removeClass("k-state-selected")
-                    .end()
-                    .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
-                    .addClass("k-state-selected");
-            });
+            this.timeline
+                .bind("navigate", function(e) {
+                    that.toolbar
+                        .find(".k-toolbar li")
+                        .removeClass("k-state-selected")
+                        .end()
+                        .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
+                        .addClass("k-state-selected");
+                }).bind("move", function(e) {
+                    var task = that.dataSource.getByUid(e.uid);
+                    var newEnd = new Date(e.start.getTime() + task.duration());
+
+                    that.dataSource.update(task, {
+                        start: e.start,
+                        end: newEnd
+                    });
+                });
         },
 
         _dataSource: function() {
