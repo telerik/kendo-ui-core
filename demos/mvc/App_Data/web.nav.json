@@ -1533,6 +1533,12 @@
                     "title": "Adaptive Rendering of Kendo UI Scheduler",
                     "external": "true",
                     "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Binding to Telerik Backend Services",
+                    "url": "scheduler/backend-services.html",
+                    "title": "Kendo UI Scheduler bound to Telerik Backend Services",
+                    "meta": "This demo shows how to bind the scheduler widget to the backend provided by the Telerik Backend Services",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
