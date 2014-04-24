@@ -3,12 +3,19 @@ bash "install_forever" do
     creates "/usr/bin/forever"
 end
 
-cookbook_file '/etc/init/scratchpad.conf' do
-    source 'scratchpad.conf'
-end
+services = [
+    { name: 'dojo', port: 3300 },
+    { name: 'dojo-runner', port: 3301 }
+]
 
-service 'scratchpad' do
-    provider Chef::Provider::Service::Upstart
-    action :restart
-end
+services.each do |app|
+    template "/etc/init/#{app[:name]}.conf" do
+        variables( :app => app )
+        source "dojo.conf"
+    end
 
+    service app[:name] do
+        provider Chef::Provider::Service::Upstart
+        action [:enable,:restart]
+    end
+end
