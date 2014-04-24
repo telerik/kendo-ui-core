@@ -57,11 +57,7 @@ namespace Kendo.Extensions
         private static string ResourceUrl(UrlHelper url, string assetType, string file)
         {
 #if DEBUG
-            return url.Content(string.Format("{0}/src/{1}/{2}",
-                HostingEnvironment.ApplicationVirtualPath,
-                assetType,
-                file
-            ));
+            return url.Content(string.Format("~/src/{0}/{1}", assetType, file));
 #else
             if (IsAbsoluteUrl(file)) {
                 return file;

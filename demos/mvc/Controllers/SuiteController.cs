@@ -60,7 +60,7 @@ namespace Kendo.Controllers
             ViewBag.Documentation = ViewBag.CurrentExample.Documentation ?? ViewBag.CurrentWidget.Documentation;
 
             return View(
-                string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example)
+                string.Format("~/Views/demos/{0}/{1}.cshtml", section, example)
             );
         }
 
