@@ -4,6 +4,7 @@
 
     module("Toolbar: Events: ", {
         setup: function() {
+            kendo.effects.disable();
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
         },
 
@@ -162,6 +163,97 @@
 
         ok(!buttons.eq(0).hasClass("k-state-checked"), "First button is deselected");
         ok(buttons.eq(1).hasClass("k-state-checked"), "Second button is selected");
+    });
+
+    test("click on splitButton triggers click event", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ],
+            click: function(e) {
+                ok(true, "Click event is fired");
+            }
+        });
+
+        var button = container.find("#foo a:first");
+
+        button.trigger("click");
+    });
+
+    test("click on arrow button opens the popup", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ]
+        });
+
+        var button = container.find("#foo a.k-split-button-arrow");
+        var popup = container.find("#foo").data("kendoPopup");
+
+        button.trigger("click");
+
+        ok(popup.visible());
+    });
+
+    test("second click at the arrow button closes the popup", 2, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ]
+        });
+
+        var button = container.find("#foo a.k-split-button-arrow");
+        var popup = container.find("#foo").data("kendoPopup");
+
+        button.trigger("click");
+        ok(popup.visible());
+
+        button.trigger("click");
+        ok(!popup.visible());
+    });
+
+    test("click on the splitButton does NOT open the popup", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ]
+        });
+
+        var button = container.find("#foo a:first");
+        var popup = container.find("#foo").data("kendoPopup");
+
+        button.trigger("click");
+        ok(!popup.visible());
+    });
+
+    test("click on the arrow button does NOT fire the click event", 0, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ],
+            click: function() {
+                ok(false, "Click event should not trigger!");
+            }
+        });
+
+        var button = container.find("#foo a.k-split-button-arrow");
+
+        button.trigger("click");
     });
 
 })();

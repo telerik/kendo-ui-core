@@ -32,6 +32,8 @@ var __meta__ = {
 
         CLICK = "click",
         TOGGLE = "toggle",
+        OPEN = "open",
+        CLOSE = "close",
 
         template = kendo.template,
         templates = {
@@ -193,7 +195,7 @@ var __meta__ = {
                     that._renderItems(options.items);
                 }
 
-                element.on(CLICK, ".k-button", proxy(that._buttonClick, that));
+                element.on(CLICK, ".k-button:not(." + K_SPLIT_BUTTON_ARROW + ")", proxy(that._buttonClick, that));
                 element.on(CLICK, "." + K_SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
 
                 kendo.notify(that);
@@ -201,7 +203,9 @@ var __meta__ = {
 
             events: [
                 CLICK,
-                TOGGLE
+                TOGGLE,
+                OPEN,
+                CLOSE
             ],
 
             options: {
@@ -275,9 +279,21 @@ var __meta__ = {
             },
 
             _toggle: function(e) {
-                var popup = $(e.target).closest("." + K_SPLIT_BUTTON).data("kendoPopup");
+                var splitButton = $(e.target).closest("." + K_SPLIT_BUTTON),
+                    popup = splitButton.data("kendoPopup"),
+                    isDefaultPrevented;
 
-                popup.toggle();
+                e.preventDefault();
+
+                if(popup.visible()) {
+                    isDefaultPrevented = this.trigger(CLOSE, { target: splitButton, popup: popup });
+                } else {
+                    isDefaultPrevented = this.trigger(OPEN, { target: splitButton, popup: popup });
+                }
+
+                if(!isDefaultPrevented) {
+                    popup.toggle();
+                }
             }
 
         });
