@@ -16,15 +16,12 @@ namespace Kendo.Models
             }
         }
 
-        public IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string suite, string section)
+        public IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string section)
         {
-            if (suite.Equals("mobile"))
-                yield break;
-
             yield return new ExampleFile
             {
                 Name = example + ".jsp",
-                Url = String.Format("~/src/jsp/views/{0}/{1}/{2}.jsp", suite, section, example)
+                Url = String.Format("~/src/jsp/views/{0}/{1}.jsp", section, example)
             };
 
             var path = server.MapPath("~/src/jsp/controllers/");

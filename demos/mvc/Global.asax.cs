@@ -103,7 +103,7 @@ namespace Kendo
 
             routes.MapRoute(
                 "Suite",
-                "{product}/{section}/{example}.html",
+                "{product}/{section}/{example}",
                 new { controller = "Suite", action = "Index" },
                 productConstraint
             );

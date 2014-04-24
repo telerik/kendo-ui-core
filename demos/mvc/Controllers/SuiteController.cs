@@ -89,7 +89,7 @@ namespace Kendo.Controllers
 
             foreach (var framework in frameworkDescriptions)
             {
-                var files = framework.GetFiles(Server, example, suite, section).Where(file => file.Exists(Server));
+                var files = framework.GetFiles(Server, example, section).Where(file => file.Exists(Server));
 
                 if (files.Any())
                 {

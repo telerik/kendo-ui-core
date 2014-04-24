@@ -9,6 +9,6 @@ namespace Kendo.Models
     {
         string Name { get; }
 
-        IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string suite, string section);
+        IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string section);
     }
 }
