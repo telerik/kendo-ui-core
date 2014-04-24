@@ -59,7 +59,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
             var devicename = deviceSelector.value(),
                 head = $(document.getElementsByTagName("head")[0]),
                 deviceLink = head.find("link[href*='devices/']"),
-                location = window.location.href,
+                location = (/^.*?(?=\?|#)/.exec(window.location.href) || [ window.location.href ])[0],
                 url, newLink, matches;
 
             location += location[location.length-1] != "/" ? "/" : "";
