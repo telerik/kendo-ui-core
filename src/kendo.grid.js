@@ -796,11 +796,11 @@ var __meta__ = {
 
             that._pageable();
 
+            that._thead();
+
             if (that.options.groupable) {
                 that._groupable();
             }
-
-            that._thead();
 
             if (that.virtualScrollable) {
                 that.virtualScrollable.setDataSource(that.options.dataSource);
@@ -2398,7 +2398,7 @@ var __meta__ = {
             var that = this;
 
             if (that._groupableClickHandler) {
-                that.table.off(CLICK + NS, that._groupableClickHandler);
+                that.table.add(that.lockedTable).off(CLICK + NS, that._groupableClickHandler);
             } else {
                 that._groupableClickHandler = function(e) {
                     var element = $(this),

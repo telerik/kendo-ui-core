@@ -555,6 +555,39 @@
         equal(grid.items().first().css("display"), "none");
     });
 
+    test("clicking on the collapse button collapses the group", function () {
+
+        var dom = $("<div style=\"width:400px;height:300px\" data-role=\"grid\" data-scrollable=\"true\" data-groupable=\"true\" " +
+            "data-columns=\"[" +
+                "{ 'field': 'foo', 'width': 200, locked: true }," +
+                "{ 'field': 'bar', 'width': 150 }," +
+                "{ 'field': 'baz', 'width': 150 }" +
+            "]\" " +
+            "data-bind=\"source: items\"></div>")
+            .appendTo(QUnit.fixture);
+
+        var observable = kendo.observable({
+            items: new kendo.data.DataSource({
+                data: [
+                    { foo: "1", bar: "2", baz: "3" },
+                    { foo: "1", bar: "2", baz: "3" },
+                    { foo: "1", bar: "3", baz: "3" },
+                    { foo: "1", bar: "3", baz: "3" },
+                    { foo: "1", bar: "4", baz: "3" },
+                    { foo: "1", bar: "4", baz: "3" }
+                ]
+            })
+        });
+
+        kendo.bind(dom, observable);
+
+        var grid = dom.data("kendoGrid");
+        grid.dataSource.group({ field: "bar" });
+        grid.wrapper.find(".k-grid-content-locked tr.k-grouping-row:first > td:first a").click();
+
+        equal(grid.items().first().css("display"), "none");
+    });
+
     test("expand collapse handlers are not attached multiple times if bound through mvvm and groupable is false", 1, function() {
         var grid = new Grid(table(), { columns: ["text", "value"] });
 
