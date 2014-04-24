@@ -1839,6 +1839,13 @@ button:focus
     outline:none;
 }
 
+.k-editor .k-tool:focus
+{
+   outline: 0;
+   border-color: @button-focused-border-color;
+   .box-shadow(@button-focused-shadow);
+}
+
 // Retina sprite
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
        only screen and (min-device-pixel-ratio: 2) {
