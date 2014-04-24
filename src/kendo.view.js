@@ -134,9 +134,9 @@ var __meta__ = {
             }
 
             if (typeof content === "string") {
-                element = $(wrapper).append(kendo.template(content)(that.model || {}));
+                element = $(wrapper).append(content);
                 kendo.stripWhitespace(element[0]);
-                // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like this one for instance:
+                // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
                 // <script id="my-template">
                 // foo
                 // <span> Span </span>
