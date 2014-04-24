@@ -28,9 +28,17 @@ class TelerikReleaseBot
         click_and_wait "Product Versions", "product"
     end
 
+    def click_element(element)
+      element.click
+      rescue
+      screenshot("Click_Element_Failed_For_" + element.attribute("id"))
+    end
+
     def click_and_wait(link, title)
         driver.find_element(:link, link).click
         wait_for_title(title)
+        rescue
+        screenshot("Click_Element_Failed_For_" + element.attribute("id"))
     end
 
     def wait_for_title(title)
@@ -47,7 +55,27 @@ class TelerikReleaseBot
         element.send_keys contents
         element.send_keys :tab
     end
+    def screenshot(failed_operation)
+      if failed_operation.nil?
+        failed_operation = "null"
+      end
 
+      Dir.mkdir("\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\screenshots") if !File.directory?("\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\screenshots")
+      @driver.save_screenshot(File.join("\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\screenshots", "#{failed_operation}.jpg"))
+    end
+
+    def execute_script(script)
+      caller_array = caller.first.split(":")
+      file_name = caller_array[1].split("/")[6] 
+      driver.execute_script(script)
+      rescue 
+      screenshot("Script_Execution_Failed_In_" + file_name + "_line_" + caller_array[2])
+    end
+    def set_upload_path(element, path)
+      element.send_keys(path)
+      rescue
+      screenshot("Upload_Path_Setting_Failed_For_" + path)
+    end
     def quit
         driver.quit
     end
@@ -96,45 +124,45 @@ def create_version(bot, product_name)
       end
 end
 def fill_version_fields(bot)
-       bot.driver.execute_script "$('[id$=\"_txtMajorName\"]').val('#{VERSION_YEAR}.#{VERSION_Q}')"
+       bot.execute_script("$('[id$=\"_txtMajorName\"]').val('#{VERSION_YEAR}.#{VERSION_Q}')")
        last_numbers = VERSION.split(".")[2]
-       bot.driver.execute_script "$('[id$=\"_txtMinorName\"]').val('#{last_numbers}')"
-       bot.driver.execute_script "$('[id$=\"_cbBeta\"]').prop('checked', true)"
+       bot.execute_script("$('[id$=\"_txtMinorName\"]').val('#{last_numbers}')")
+       bot.execute_script("$('[id$=\"_cbBeta\"]').prop('checked', true)")
 
-       bot.find("[value='Save']").click
+       bot.click_element(bot.find("[value='Save']"))
        bot.click_and_wait "Save", "administration"
-       bot.find("[value='Manage files']").click
+       bot.click_element(bot.find("[value='Manage files']"))
 
 end
 def set_fields_data(bot, file_fields)
-    bot.driver.execute_script "$('[id$=\"_txtFieldText\"]').val('#{file_fields[:label]}')" 
-    bot.driver.execute_script "$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')"
+    bot.execute_script("$('[id$=\"_txtFieldText\"]').val('#{file_fields[:label]}')")
+    bot.execute_script("$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')")
 
-    bot.driver.execute_script "$find($telerik.$('[id$=\"_cfFileCategory_rcbField\"]').attr('id')).set_text('#{file_fields[:file_category]}')"
-    bot.driver.execute_script "$find($telerik.$('[id$=\"_rcbFileType\"]').attr('id')).set_text('#{file_fields[:file_type]}')"
-    bot.driver.execute_script "$find($telerik.$('[id$=\"_cfExtension_rcbField\"]').attr('id')).set_text('#{file_fields[:extension]}')"
+    bot.execute_script("$find($telerik.$('[id$=\"_cfFileCategory_rcbField\"]').attr('id')).set_text('#{file_fields[:file_category]}')")
+    bot.execute_script("$find($telerik.$('[id$=\"_rcbFileType\"]').attr('id')).set_text('#{file_fields[:file_type]}')")
+    bot.execute_script("$find($telerik.$('[id$=\"_cfExtension_rcbField\"]').attr('id')).set_text('#{file_fields[:extension]}')")
 
     if file_fields[:file_markers]
       file_markers = file_fields[:file_markers]
       file_markers.each do |fm| 
-        bot.driver.find_element(:xpath, "//label[contains(.,'#{fm}')]").click
+        bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'#{fm}')]"))
 
         if file_fields[:vs_hotfix] 
-          bot.driver.execute_script "$('[id$=\"_txtFileVersionPrefix\"]').val('#{VERSION}')"
+          bot.execute_script("$('[id$=\"_txtFileVersionPrefix\"]').val('#{VERSION}')")
           Thread.current.send :sleep, 1
-          bot.driver.execute_script "$('[id$=\"_txtFileVersionSuffix\"]').val('0')"
+          bot.execute_script("$('[id$=\"_txtFileVersionSuffix\"]').val('0')")
         end  
       end
     end
  
     websites = file_fields[:websites]
     websites.each do |ws| 
-      bot.driver.find_element(:xpath, "//label[contains(.,'#{ws}')]").click
+      bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'#{ws}')]"))
     end
 
 
-    bot.driver.execute_script "$find($telerik.$('[id$=\"_efDownloadMessage_reFieldText\"]').attr('id')).set_html('#{file_fields[:download_message]}')" 
-    bot.driver.execute_script "$find($telerik.$('[id$=\"_efWhatsIncluded_reFieldText\"]').attr('id')).set_html('#{file_fields[:whats_included_message]}')" 
+    bot.execute_script("$find($telerik.$('[id$=\"_efDownloadMessage_reFieldText\"]').attr('id')).set_html('#{file_fields[:download_message]}')") 
+    bot.execute_script("$find($telerik.$('[id$=\"_efWhatsIncluded_reFieldText\"]').attr('id')).set_html('#{file_fields[:whats_included_message]}')") 
   
 end
 def prepare_files(bot, options)
@@ -183,6 +211,7 @@ def prepare_files(bot, options)
 
 end
 def upload_file_and_save(bot, dirpath, filename, isMsi)
+  p "Setting filename..."
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
 
   element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdFileUpload')]")
@@ -202,14 +231,14 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
     upload_file(bot, upload_id, full_path) 
   end
 
-  bot.find("[value='Save']").click
+  bot.click_element(bot.find("[value='Save']"))
 
   p "Saving..."
 
-  bot.find("[value='GO TO FILE LIST']").click
+  bot.click_element(bot.find("[value='GO TO FILE LIST']"))
 end
 def upload_file(bot, upload_id, full_path)
-    bot.driver.execute_script("
+    bot.execute_script("
                 (function (module, $) {
                     var upload = $find('#{upload_id}');
                     var plugins = ['Flash', 'Silverlight', 'FileApi'];
@@ -224,7 +253,7 @@ def upload_file(bot, upload_id, full_path)
                     upload.initialize();
                 })(Telerik.Web.UI.RadAsyncUpload.Modules, $telerik.$);")
 
-  bot.driver.find_element(:css, "##{upload_id} input[type=file]").send_keys(full_path.gsub('/', '\\'))
+  bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id} input[type=file]"), full_path.gsub('/', '\\'))
   bot.wait_for_element("##{upload_id} .ruRemove")
 end
 def release_build_file_copy(release_build, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
