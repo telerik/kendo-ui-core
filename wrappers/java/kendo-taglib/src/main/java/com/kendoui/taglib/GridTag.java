@@ -25,17 +25,17 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
 //<< doEndTag        
         
         if (isSet("detailTemplate")) {
-            template = "kendo.template($(\"#" + getDetailTemplate() + "\").html())";
+            template = "kendo.template(jQuery(\"#" + getDetailTemplate() + "\").html())";
             setProperty("detailTemplate", new Function(template));
         }
         
         if (isSet("rowTemplate")) {
-            template = "kendo.template($(\"#" + getRowTemplate() + "\").html())";
+            template = "kendo.template(jQuery(\"#" + getRowTemplate() + "\").html())";
             setProperty("rowTemplate", new Function(template));
         }
         
         if (isSet("altRowTemplate")) {
-            template = "kendo.template($(\"#" + getAltRowTemplate() + "\").html())";
+            template = "kendo.template(jQuery(\"#" + getAltRowTemplate() + "\").html())";
             setProperty("altRowTemplate", new Function(template));
         }
         
