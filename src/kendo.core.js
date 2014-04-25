@@ -2938,7 +2938,7 @@ function pad(number, digits, end) {
 
         viewHasNativeScrolling: function() {
             var view = this.view();
-            return view && view.options.useNativeScrolling;
+            return view && (view.options ? view.options.useNativeScrolling : true);
         },
 
         container: function() {
