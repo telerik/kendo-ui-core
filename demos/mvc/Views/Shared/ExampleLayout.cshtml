@@ -1,16 +1,78 @@
 @{
-    // WebKit's back button caches ajax responses so we are not relying on IsAjaxRequest
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
-    if (Request.Params.AllKeys.Contains("nav"))
-    {
-        Layout = "~/Views/Shared/_LayoutWidget.cshtml";
-    }
-    else if (!Request.Params.AllKeys.Contains("partial"))
-    {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+    ViewBag.SuppressFooter = true;
+
+    string navProduct = ViewBag.NavProduct;
 }
+
+<script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>
+
+<script>
+    var path = "../";
+</script>
+@Html.Partial("WebSearchScript")
+<div id="example-search-wrapper" class="search-wrapper">
+    <div class="search">
+        <input id="example-search" placeholder="Search demos"/>
+  @*      <span id="icon-search" class="k-uniE600"></span>*@
+    </div>
+</div>
+
+<div id="nav-wrapper">
+
+    <div id="nav">
+        <div id="root-nav">
+    @foreach (IGrouping<string, NavigationWidget> category in ViewBag.Categories)
+    {
+        <ul class="root-nav-categories">
+            @if (category.Any(c => c.ShouldInclude((string)ViewBag.NavProduct)))
+            {
+            <li>
+                <h3>@category.Key</h3>
+                <ul class="root-nav-widgets">
+                @foreach (var widget in category)
+                {
+                    if (widget.ShouldInclude((string)ViewBag.NavProduct))
+                    {
+                    <li>@Html.WidgetLink(widget)</li>
+                    }
+                }
+                </ul>
+            </li>
+            }
+        </ul>
+    }
+        </div>
+
+        <div id="example-nav">
+            <a href="#" id="back-nav" class="k-uniE604"></a>
+
+        <h4>@ViewBag.CurrentWidget.Text</h4>
+        <ul>
+            @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
+            {
+                if (example.ShouldInclude(navProduct))
+                {
+                    <li>@Html.ExampleLink(example)</li>
+                }
+            }
+        </ul>
+        </div>
+    </div>
+
+    <script>
+        $("#back-nav").on("click", function(e) {
+            $("#nav").addClass("root");
+            e.preventDefault();
+        });
+
+        $(document).ready(resizeContainers);
+    </script>
+</div>
 <div id="main">
+    @Html.Partial("ThemeChooser")
+
     <h1 id="exampleTitle">
         @if (ViewBag.CurrentExample != null) {
             <span class="exampleIcon @ViewBag.CurrentWidget.SpriteCssClass"></span>
@@ -18,10 +80,8 @@
         }
     </h1>
 
-    <div id="theme-list-container"></div>
-
     <div id="exampleWrap">
-        <script>preventFOUC()</script>
+        <script>$("#exampleWrap").css("visibility", "hidden");</script>
 
         @if (ViewBag.Mobile) {
         <div id="example" class="k-content mobileExample @(ViewBag.CurrentWidget.Tablet ? "tablet km-tablet" : "")">
@@ -54,46 +114,49 @@
         } else {
             @RenderBody()
         }
+        <script>
+            $(function(){ $("#exampleWrap").css("visibility", ""); });
+        </script>
     </div>
 
     @if (ViewBag.ShowCodeStrip == true)
     {
-        <button class="try-kendo"><span class="k-icon"></span>Edit this example</button>
         <div id="codeStrip">
-            @if (!string.IsNullOrEmpty(ViewBag.Documentation))
+            @if (!string.IsNullOrEmpty(ViewBag.Api))
             {
-                <a class="documentation-link k-link" href="http://docs.telerik.com/kendo-ui/api/@ViewBag.Documentation">Documentation</a>
+                <a class="documentation-link k-link" href="@ViewBag.Api">API Reference</a>
             }
 
-            <ul>
-                @foreach (ExampleFramework framework in ViewBag.Frameworks)
-                {
-                    <li>@framework.Name</li>
-                }
-            </ul>
-            @foreach (ExampleFramework framework in ViewBag.Frameworks)
+            @if (ViewBag.Product == "kendo-ui")
             {
-               <div id="@framework.Name.Replace(".", "-").Replace(" ", "-")">
-               <ul>
-                    @foreach (ExampleFile file in framework.Files)
-                    {
-                        <li>@file.Name</li>
-                    }
-               </ul>
-               </div>
+                <button class="try-kendo"><span class="k-icon"></span>Edit this example</button>
+            }
+
+            @{
+                IEnumerable<ExampleFile> examples = ViewBag.ExampleFiles;
+            }
+
+            @if (examples.Any())
+            {
+                <div id="source-code">
+                    <ul>
+                        @foreach (ExampleFile file in examples)
+                        {
+                            <li>@file.Name</li>
+                        }
+                   </ul>
+                </div>
                <script>
-               var minHeightFlag = false;
-               $("#@framework.Name.Replace(".", "-").Replace(" ", "-")").kendoTabStrip({
+               $("#source-code").kendoTabStrip({
                     animation: {
                         open: {
                             effects: "fadeIn"
                         }
                     },
                     contentUrls: [
-                        @Html.Raw(String.Join(",", framework.Files.Select(file => "\"" + Url.Action("index", "source", new { path = file.Url } ) + "\"").ToArray()))
+                        @Html.Raw(String.Join(",", examples.Select(file => "\"" + Url.Action("index", "source", new { path = file.Url } ) + "\"").ToArray()))
                     ],
                     contentLoad: function (e) {
-                        var baseUrl = "http://@(Request.Headers["host"] + Url.Content("~/"))";
                         var content = $(e.contentElement);
                         if (content.is("#HTML-1")) {
                             var html = content.find('.prettyprint').text();
@@ -101,70 +164,98 @@
                         }
 
                         prettyPrint();
-                        if (!minHeightFlag) {
-                            var cs = $("#codeStrip");
-                            cs.css("min-height", cs.height());
-                        }
                     }
-               });
+               }).data("kendoTabStrip").select(0);
 
-                   dojo.configuration = {
-                       url: "@Html.DojoRoot()",
-                       cdnRoot: '@Html.CdnRoot()'
-                   };
+               dojo.configuration = {
+                   url: "@Html.ScratchpadRoot()",
+                   cdnRoot: '@Html.CdnRoot()'
+               };
                </script>
             }
         </div>
-
-        <script>
-            (function () {
-                var codeviewer = $("#codeStrip");
-                var selectedTabIndex = tabToSelect();
-
-                if (codeviewer.find(">ul>li").length - 1 < selectedTabIndex) {
-                    selectedTabIndex = 0;
-                }
-
-                codeviewer.kendoTabStrip({
-                    animation: {
-                        open: {
-                            effects: "fadeIn"
-                        }
-                    },
-                    select: function (e) {
-                        var tabstrip = $(e.contentElement).children(".k-tabstrip").data("kendoTabStrip");
-                        if (tabstrip.select().length == 0) {
-                            tabstrip.select(0);
-                        }
-                    },
-                    activate: function (e) {
-                        var isHtml = $(e.contentElement).children(".k-tabstrip").is("#HTML");
-                        $(".try-kendo").toggleClass("k-state-disabled", !isHtml).prop('disabled', !isHtml);
-                    }
-                })
-                .data("kendoTabStrip")
-                .select(selectedTabIndex);
-            } ());
-        </script>
     }
+    <div id="resources-technologies" class="box">
+        <div id="learning-resources" class="box-col">
+            <h4>Support & learning resources</h4>
+            <ul>
+                @if (ViewBag.Forum != null)
+                {
+                <li><a href="@ViewBag.Forum">Forums</a></li>
+                }
+                @if (ViewBag.CodeLibrary != null)
+                {
+                <li><a href="@ViewBag.CodeLibrary">Code Libraries</a></li>
+                }
+                @if (ViewBag.Documentation != null)
+                {
+                <li><a href="@ViewBag.Documentation">Documentation</a></li>
+                }
+            </ul>
+        </div>
+        <div id="technologies" class="box-col">
+            @{
+                NavigationExample currentExample = ViewBag.CurrentExample;
+                NavigationWidget currentWidget = ViewBag.CurrentWidget;
+                var html = currentWidget.ShouldInclude("online") && currentExample.ShouldInclude("online") && navProduct != "online";
+                var php = currentWidget.ShouldInclude("php") && currentExample.ShouldInclude("php") && navProduct != "php";
+                var mvc = currentWidget.ShouldInclude("mvc") && currentExample.ShouldInclude("mvc") && navProduct != "mvc";
+                var jsp = currentWidget.ShouldInclude("jsp") && currentExample.ShouldInclude("jsp") && navProduct != "jsp";
+            }
+
+            @if (html || php || jsp || mvc)
+            {
+                <h4>for other technologies</h4>
+                <ul>
+                    @if (php)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "php-ui")">PHP</a></li>
+                    }
+                    @if (jsp)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "jsp-ui")">JSP</a></li>
+                    }
+                    @if (html)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "kendo-ui")">HTML5 / JavaScript</a></li>
+                    }
+                    @if (mvc)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "aspnet-mvc")">ASP.NET MVC</a></li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    @Html.Partial("Footer")
 </div>
 
 <script>
     setTimeout(function(){ prettyPrint(); }, 100);
-
-    document.title = "@Html.Raw(ViewBag.Title)";
 
     @if (ViewBag.Mobile)
     {
         <text>
             kendo.history.stop();
 
+            window.kendoMobileOS = "ios7";
+
             $(function() {
-                applyCurrentMobileOS("#mobile-application-container");
+                var kendoMobileOS = window.kendoMobileOS;
+
+                if (window.sessionStorage) {
+                    window.kendoMobileOS = sessionStorage.getItem("kendoMobileOS") || kendoMobileOS;
+                }
+
+                $("#mobile-application-container").removeClass("km-ios km-ios4 km-ios5 km-ios6 km-ios7 km-android km-android-dark km-android-light km-blackberry km-wp km-wp-dark km-wp-light km-flat").addClass("km-" + kendoMobileOS + (" km-" + kendoMobileOS.replace(/-.*/, "")));
+                $("#device-wrapper").removeClass("ios7 android blackberry wp flat").addClass(kendoMobileOS);
+                $("#deviceList .selectedThumb").removeClass("selectedThumb");
+                $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
+
                 var skin = kendoMobileOS != "flat" ? {} : {
-                        platform: "ios7",
-                        skin: "flat"
-                    };
+                    platform: "ios7",
+                    skin: "flat"
+                };
 
                 if (!(kendo.support.browser.msie && kendo.support.browser.version < 10) && !kendo.support.browser.opera) {
                     window.app = new kendo.mobile.Application($("#mobile-application-container"),

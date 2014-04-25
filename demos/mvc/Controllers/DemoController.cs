@@ -39,7 +39,7 @@ namespace Kendo.Controllers
             ViewBag.Product = product;
             ViewBag.Section = section;
             ViewBag.Example = example;
-            ViewBag.Frameworks = Frameworks(section, example);
+            ViewBag.ExampleFiles = SourceCode(product, section, example);
 #if DEBUG
             ViewBag.Debug = true;
 #else
@@ -66,44 +66,19 @@ namespace Kendo.Controllers
             );
         }
 
-        private static readonly IFrameworkDescription[] frameworkDescriptions = new IFrameworkDescription []
+        private static readonly IDictionary<string, IFrameworkDescription> frameworkDescriptions = new Dictionary<string, IFrameworkDescription>
         {
-            new AspNetMvcDescription(),
-            new JspDescription(),
-            new PhpDescription()
+            { "kendo-ui", new HtmlDescription() },
+            { "aspnet-mvc", new AspNetMvcDescription() },
+            { "jsp-ui", new JspDescription() },
+            { "php-ui", new PhpDescription() },
         };
 
-        private IEnumerable<ExampleFramework> Frameworks(string section, string example)
+        private IEnumerable<ExampleFile> SourceCode(string product, string section, string example)
         {
-            var frameworks = new List<ExampleFramework>();
+            IFrameworkDescription framework = frameworkDescriptions[product];
 
-            frameworks.Add(new ExampleFramework
-            {
-                Name = "HTML",
-                Files = new [] {
-                    new ExampleFile
-                    {
-                        Name = example + ".html",
-                        Url = string.Format("~/Views/{0}/{1}.cshtml", section, example)
-                    }
-                }
-            });
-
-            foreach (var framework in frameworkDescriptions)
-            {
-                var files = framework.GetFiles(Server, example, section).Where(file => file.Exists(Server));
-
-                if (files.Any())
-                {
-                    frameworks.Add(new ExampleFramework
-                    {
-                        Name = framework.Name,
-                        Files = files
-                    });
-                }
-            }
-
-            return frameworks;
+            return framework.GetFiles(Server, example, section).Where(file => file.Exists(Server));
         }
 
         private bool IsMobileDevice()
@@ -129,10 +104,20 @@ namespace Kendo.Controllers
         {
            var found = false;
 
+           NavigationExample overview = null;
+           NavigationExample current = null;
+           NavigationWidget currentWidget = null;
+
            foreach (NavigationWidget widget in ViewBag.Navigation)
            {
                foreach (NavigationExample example in widget.Items)
                {
+                   if (!found && example.Url.Contains("overview"))
+                   {
+                       overview = example;
+                       currentWidget = widget;
+                   }
+
                    if (!example.Url.Contains("overview") && example.ShouldInclude)
                    {
                        examplesUrl.Add("~/" + example.Url);
@@ -140,26 +125,28 @@ namespace Kendo.Controllers
 
                    if (!found && IsCurrentExample(Request, example))
                    {
-                       ViewBag.CurrentWidget = widget;
-                       ViewBag.CurrentExample = example;
-                       ViewBag.Title = example.Title ?? example.Text;
-                       ViewBag.Meta = example.Meta;
-                       ViewBag.Description = example.Description;
-                       ViewBag.Mobile = widget.Mobile;
-
+                       current = example;
+                       currentWidget = widget;
                        found = true;
                    }
                }
            }
+
+           if (!found)
+           {
+               current = overview;
+           }
+
+           ViewBag.CurrentWidget = currentWidget;
+           ViewBag.Mobile = currentWidget.Mobile;
+           ViewBag.CurrentExample = current;
+           ViewBag.Title = current.Title ?? current.Text;
+           ViewBag.Meta = current.Meta;
+           ViewBag.Description = current.Description;
         }
 
         private bool IsCurrentExample(HttpRequestBase request, NavigationExample example)
         {
-            if (Request.Path == "/" && example.Url == "overview/index")
-            {
-                return true;
-            }
-
             return Request.Path.EndsWith("/" + example.Url) || (ViewBag.Example == "result" && example.Url == "upload/index.html");
         }
 

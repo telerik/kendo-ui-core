@@ -13,7 +13,7 @@
     <RootNamespace>Kendo</RootNamespace>
     <AssemblyName>Kendo</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <MvcBuildViews>true</MvcBuildViews>
+    <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -93,6 +93,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetMvcDescription.cs" />
+    <Compile Include="Models\HtmlDescription.cs" />
     <Compile Include="Models\PhpDescription.cs" />
     <Compile Include="Models\JspDescription.cs" />
     <Compile Include="Models\ExampleFile.cs" />
