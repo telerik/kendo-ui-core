@@ -198,6 +198,19 @@
         equal(kendo.toString(view.end, "yyyy/MM/dd"), "2014/04/17");
     });
 
+    test("range() with equal start and end", 2, function() {
+        view = dayView();
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2014/04/15")
+        };
+
+        view.range(range);
+
+        equal(kendo.toString(view.start, "yyyy/MM/dd"), "2014/04/15");
+        equal(kendo.toString(view.end, "yyyy/MM/dd"), "2014/04/16");
+    });
+
     test("range() view range has trimmed time", 2, function() {
         view = dayView();
         var range = {
@@ -235,6 +248,47 @@
         equal(kendo.toString(view.end, "yyyy/MM/dd"), "2014/04/17");
     });
 
+    test("_calculateTableWidth() honors slotSize property", function() {
+        view = dayView({
+            slotSize: 100
+        });
+
+        view._slots = [[
+            { span: 1 },
+            { span: 1 },
+            { span: 1 }
+        ]];
+
+        equal(view._calculateTableWidth(), 300);
+    });
+
+    test("_calculateTableWidth() for slots with different span", function() {
+        view = dayView({
+            slotSize: 100
+        });
+
+        view._slots = [[
+            { span: 2 },
+            { span: 1 },
+            { span: 1 }
+        ]];
+
+        equal(view._calculateTableWidth(), 200);
+    });
+
+
+    test("renderLayout() creates table with correct width", function() {
+        view = dayView();
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2014/04/23")
+        };
+
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("table").width(), view._tableWidth);
+    });
 
     test("renderLayout() creates day and hour header rows", function() {
         view = dayView();
@@ -637,6 +691,47 @@
         equal(kendo.toString(view.end, "yyyy/MM/dd"), "2014/04/27");
     });
 
+    test("_calculateTableWidth() honors slotSize property", function() {
+        view = weekView({
+            slotSize: 100
+        });
+
+        view._slots = [[
+            { span: 1 },
+            { span: 1 },
+            { span: 1 }
+        ]];
+
+        equal(view._calculateTableWidth(), 300);
+    });
+
+    test("_calculateTableWidth() for slots with different span", function() {
+        view = weekView({
+            slotSize: 100
+        });
+
+        view._slots = [[
+            { span: 2 },
+            { span: 1 },
+            { span: 1 }
+        ]];
+
+        equal(view._calculateTableWidth(), 200);
+    });
+
+
+    test("renderLayout() creates table with correct width", function() {
+        view = weekView();
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2014/04/23")
+        };
+
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("table").width(), view._tableWidth);
+    });
 
     test("renderLayout() creates week and day header rows", function() {
         var range = {
@@ -884,6 +979,48 @@
 
         equal(kendo.toString(view.start, "yyyy/MM/dd"), "2014/04/01");
         equal(kendo.toString(view.end, "yyyy/MM/dd"), "2014/05/01");
+    });
+
+    test("_calculateTableWidth() honors slotSize property", function() {
+        view = monthView({
+            slotSize: 100
+        });
+
+        view._slots = [[
+            { span: 1 },
+            { span: 1 },
+            { span: 1 }
+        ]];
+
+        equal(view._calculateTableWidth(), 300);
+    });
+
+    test("_calculateTableWidth() for slots with different span", function() {
+        view = monthView({
+            slotSize: 100
+        });
+
+        view._slots = [[
+            { span: 2 },
+            { span: 1 },
+            { span: 1 }
+        ]];
+
+        equal(view._calculateTableWidth(), 200);
+    });
+
+
+    test("renderLayout() creates table with correct width", function() {
+        view = monthView();
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2014/04/23")
+        };
+
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("table").width(), view._tableWidth);
     });
 
     test("renderLayout() creates month and week header rows", function() {

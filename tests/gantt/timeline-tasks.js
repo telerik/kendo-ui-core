@@ -42,6 +42,12 @@
         equal(timeline.wrapper.find(".k-gantt-rows").length, 1);
     });
 
+    test("rows table width set", function() {
+        timeline._render(tasks, range);
+
+        equal(timeline.wrapper.find(".k-gantt-rows").width(), timeline.view()._tableWidth);
+    });
+
     test("rows table populated with rows for each task", function() {
         timeline._render(tasks, range);
 
@@ -73,6 +79,12 @@
         timeline._render(tasks, range);
 
         equal(timeline.wrapper.find(".k-gantt-columns").length, 1);
+    });
+
+    test("columns table width set", function() {
+        timeline._render(tasks, range);
+
+        equal(timeline.wrapper.find(".k-gantt-columns").width(), timeline.view()._tableWidth);
     });
 
     test("columns table populated with only one row", function() {
@@ -127,6 +139,12 @@
         timeline._render(tasks, range);
 
         equal(timeline.wrapper.find(".k-gantt-tasks").length, 1);
+    });
+
+    test("tasks table width set", function() {
+        timeline._render(tasks, range);
+
+        equal(timeline.wrapper.find(".k-gantt-tasks").width(), timeline.view()._tableWidth);
     });
 
     test("tasks table populated with rows for each task", function() {

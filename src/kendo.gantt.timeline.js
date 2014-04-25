@@ -20,7 +20,7 @@ var __meta__ = {
     var extend = $.extend;
     var minDependencyWidth = 14;
     var rowHeight = 27;
-    var minDependencyHeight = Math.floor(rowHeight/2);
+    var minDependencyHeight = Math.floor(rowHeight / 2);
 
     var defaultViews = {
         day: {
@@ -103,7 +103,8 @@ var __meta__ = {
             workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
             workWeekStart: 1,
             workWeekEnd: 5,
-            hourSpan: 1
+            hourSpan: 1,
+            slotSize: 100
         },
 
         _templates: function() {
@@ -118,6 +119,8 @@ var __meta__ = {
         renderLayout: function() {
             this._slots = this._createSlots();
 
+            this._tableWidth = this._calculateTableWidth();
+
             this.createLayout(this._layout());
 
             this._slotDimensions();
@@ -128,7 +131,7 @@ var __meta__ = {
             var colgroup = this._colgroup();
             var tree = this._headerTree;
             var header = kendoDomElement("thead", null, headers);
-            var table = kendoDomElement("table", null, [colgroup, header]);
+            var table = kendoDomElement("table", { style: { width: this._tableWidth + "px"} }, [colgroup, header]);
 
             tree.render([table]);
 
@@ -242,7 +245,35 @@ var __meta__ = {
 
             tbody = kendoDomElement("tbody", null, rows);
 
+            if (!styles.style) {
+                styles.style = {};
+            }
+
+            styles.style.width = this._tableWidth + "px";
+
             return kendoDomElement("table", styles, [colgroup, tbody]);
+        },
+
+        _calculateTableWidth: function() {
+            var slots = this._timeSlots();
+            var maxSpan = 0;
+            var totalSpan = 0;
+            var currentSpan;
+            var tableWidth;
+
+            for (var i = 0, length = slots.length; i < length; i++) {
+                currentSpan = slots[i].span;
+
+                totalSpan += currentSpan;
+
+                if (currentSpan > maxSpan) {
+                    maxSpan = currentSpan;
+                }
+            }
+
+            tableWidth = Math.round((totalSpan * this.options.slotSize) / maxSpan);
+
+            return tableWidth;
         },
 
         _renderTask: function(task, position) {
@@ -741,7 +772,7 @@ var __meta__ = {
             this.start = kendo.date.getDate(range.start);
             this.end = kendo.date.getDate(range.end);
 
-            if (kendo.date.getMilliseconds(range.end) > 0) {
+            if (kendo.date.getMilliseconds(range.end) > 0 || this.end.getTime() === this.start.getTime()) {
                 this.end = kendo.date.addDays(this.end, 1);
             }
         },
