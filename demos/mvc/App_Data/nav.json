@@ -4009,6 +4009,7 @@
     "name": "actionsheet",
     "documentation": "mobile/actionsheet",
     "spriteCssClass": "mobileActionSheetIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
@@ -4024,6 +4025,7 @@
   {
     "text": "Adaptive Widgets",
     "name": "adaptive",
+    "mobile": true,
     "items": [
       {
         "text": "Scheduler",
@@ -4052,37 +4054,38 @@
   },
   {
     "text": "Button",
-    "name": "button",
+    "name": "mobile-button",
     "documentation": "mobile/button",
     "spriteCssClass": "mobileButtonIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
-        "url": "button/index",
+        "url": "mobile-button/index",
         "title": "jQuery-based Kendo UI Mobile Button demo",
         "meta": "This example shows the core functionality of the flexible Kendo UI jQuery-based mobile button which would perfectly blend into any app and on any mobile device."
       },
       {
         "text": "Badges",
-        "url": "button/badges",
+        "url": "mobile-button/badges",
         "title": "jQuery-based Kendo UI Mobile Button Badges demo",
         "meta": "This example shows how Kendo UI jQuery-based mobile button supports Badges."
       },
       {
         "text": "Events",
-        "url": "button/events",
+        "url": "mobile-button/events",
         "title": "Events in Kendo UI mobile button",
         "meta": "This sample demonstrates which events can be triggered in Kendo UI Mobile Button. The component has events enabled for your ease of use and flexibility."
       },
       {
         "text": "Customizing appearance",
-        "url": "button/appearance",
+        "url": "mobile-button/appearance",
         "title": "Customizing the appearance of Kendo UI mobile button",
         "meta": "This demo shows how you can easily customize the appearance and styling of Kendo UI Mobile Button to deliver rich experience for end users of the mobile app."
       },
       {
         "text": "MVVM",
-        "url": "button/mvvm",
+        "url": "mobile-button/mvvm",
         "title": "MVVM support in Kendo UI Mobile Button",
         "meta": "Enabled, events and visible MVVM binding support in Kendo UI Mobile Button",
         "packages": [
@@ -4101,6 +4104,7 @@
     "name": "buttongroup",
     "documentation": "mobile/buttongroup",
     "spriteCssClass": "mobileButtonGroupIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
@@ -4153,6 +4157,7 @@
     "name": "drawer",
     "documentation": "mobile/drawer",
     "spriteCssClass": "mobileDrawerIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
@@ -4173,91 +4178,92 @@
   },
   {
     "text": "ListView",
-    "name": "listview",
+    "name": "mobile-listview",
     "documentation": "mobile/listview",
     "spriteCssClass": "mobileListViewIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
-        "url": "listview/index",
+        "url": "mobile-listview/index",
         "title": "Features of Kendo UI Mobile ListView widget",
         "meta": "This demo illustrates the core functionality of Kendo UI jQuery List widget. It allows you to display flat or grouped list of items in your mobile application."
       },
       {
         "text": "Detail Buttons",
-        "url": "listview/detailbuttons",
+        "url": "mobile-listview/detailbuttons",
         "title": "Detail buttons, nested in Kendo UI Mobile ListView example",
         "meta": "This demo illustrates how nested DetailButton widgets can be integrated in Kendo UI Mobile ListView control in order to enable your users to execute more than one action on a given row."
       },
       {
         "text": "Data binding",
-        "url": "listview/databinding",
+        "url": "mobile-listview/databinding",
         "title": "Data Binding Demo for Kendo UI Mobile List View",
         "meta": "This example shows how Kendo UI Mobile ListView can be bound to remote data and local JS arrays by using Kendo UI DataSource component."
       },
       {
         "text": "Hierarchical data binding",
-        "url": "listview/hierarchical-databinding",
+        "url": "mobile-listview/hierarchical-databinding",
         "title": "Hierarchical Data Binding Demo for Kendo UI Mobile List View",
         "meta": "This example shows how Kendo UI Mobile ListView can be bound to hierarchical remote data using Kendo UI Hierarchical DataSource component."
       },
       {
         "text": "Pull to refresh",
-        "url": "listview/pull-to-refresh",
+        "url": "mobile-listview/pull-to-refresh",
         "title": "Kendo UI Mobile ListView Refresh Function Demo",
         "meta": "This demo shows how the refresh function in Kendo UI Mobile ListView actually works. Once the new elements are appended to the list, you simply invoke the function \"pull to refresh\"."
       },
       {
         "text": "Endless scrolling",
-        "url": "listview/endless-scrolling",
+        "url": "mobile-listview/endless-scrolling",
         "title": "Infinite scrolling demo for Kendo UI Mobile ListView",
         "meta": "This example shows the endless scrolling functionality which Kendo UI Mobile ListView supports. It illustrates how more list items are automatically loaded and displayed on the screen."
       },
       {
         "text": "Pull to refresh + Endless scrolling",
-        "url": "listview/pull-with-endless",
+        "url": "mobile-listview/pull-with-endless",
         "title": "Pull to refresh and endless scrolling demo | Kendo UI Mobile ListView widget",
         "meta": "This example shows how the pull to refresh function of Kendo UI Mobile ListView works out of the box with the endless scrolling feature."
       },
       {
         "text": "Press to load more",
-        "url": "listview/press-to-load-more",
+        "url": "mobile-listview/press-to-load-more",
         "title": "Demo for Load More option in Kendo UI Mobile ListView",
         "meta": "This example demonstrates how the load more option in Kendo UI ListView can be implemented for applications in which the user needs to pull much data."
       },
       {
         "text": "Fixed Headers",
-        "url": "listview/fixedheaders",
+        "url": "mobile-listview/fixedheaders",
         "title": "Fixed header option demo | Kendo UI Mobile ListView",
         "meta": "This demo shows how you can get a fixed header in Kendo UI Mobile ListView. It allows the native scrolling, but the header is always positioned on top."
       },
       {
         "text": "Custom templates",
-        "url": "listview/templates",
+        "url": "mobile-listview/templates",
         "title": "Custom templates for group items | Kendo UI Mobile List View",
         "meta": "This demo shows how custom templates can be applied to Kendo UI ListView widget to override the appearance of the group items."
       },
       {
         "text": "Editing",
-        "url": "listview/editing",
+        "url": "mobile-listview/editing",
         "title": "Editing operations in Kendo UI Mobile ListView | Kendo UI ListView demo",
         "meta": "In this example you will learn how you can easily use editing operations in Kendo UI Mobile ListView."
       },
       {
         "text": "Filtering",
-        "url": "listview/filtering",
+        "url": "mobile-listview/filtering",
         "title": "Filtering in Kendo UI Mobile ListView | Kendo UI ListView demo",
         "meta": "Play with Kendo UI Mobile ListView demo to see the filtering capability in action. Keyword-based filtering is perfomed against the content in each list item. "
       },
       {
         "text": "Local data virtualization",
-        "url": "listview/local-virtualization",
+        "url": "mobile-listview/local-virtualization",
         "title": "Local data virtualization in Kendo UI Mobile ListView | Kendo UI ListView demo",
         "meta": "Play with Kendo UI Mobile ListView demo to see the local data virtualization filtering capability in action. "
       },
       {
         "text": "MVVM",
-        "url": "listview/mvvm",
+        "url": "mobile-listview/mvvm",
         "title": "MVVM support in Kendo UI Mobile ListView",
         "meta": "Source, events and visible MVVM binding support in Kendo UI Mobile ListView",
         "packages": [
@@ -4276,6 +4282,7 @@
     "name": "modalview",
     "documentation": "mobile/modalview",
     "spriteCssClass": "mobileModalViewIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
@@ -4293,6 +4300,7 @@
     "name": "navbar",
     "documentation": "mobile/navbar",
     "spriteCssClass": "mobileNavBarIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
@@ -4317,6 +4325,7 @@
     "tablet": true,
     "documentation": "mobile/popover",
     "spriteCssClass": "mobilePopOverIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
@@ -4334,6 +4343,7 @@
     "name": "scroller",
     "documentation": "mobile/scroller",
     "spriteCssClass": "mobileScrollerIcon",
+    "mobile": true,
     "packages": [
       "!mvc"
     ],
@@ -4360,6 +4370,7 @@
     "name": "scrollview",
     "documentation": "mobile/scrollview",
     "spriteCssClass": "mobileScrollViewIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
@@ -4395,6 +4406,7 @@
     "name": "Switch",
     "documentation": "mobile/switch",
     "spriteCssClass": "mobileSwitchIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
@@ -4426,25 +4438,26 @@
   },
   {
     "text": "TabStrip",
-    "name": "tabstrip",
+    "name": "mobile-tabstrip",
     "documentation": "mobile/tabstrip",
     "spriteCssClass": "mobileTabStripIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Basic usage",
-        "url": "tabstrip/index",
+        "url": "mobile-tabstrip/index",
         "title": "Kendo UI Mobile TabStrip Demo",
         "meta": "This sample demonstrates how Kendo UI Mobile TabStrip widget is used inside a mobile view to show an application-wide group of navigation buttons."
       },
       {
         "text": "Badges",
-        "url": "tabstrip/badges",
+        "url": "mobile-tabstrip/badges",
         "title": "Kendo UI Mobile TabStrip Badge Demo",
         "meta": "This sample demonstrates how Kendo UI Mobile TabStrip widget can show badges on its buttons."
       },
       {
         "text": "Customizing appearance",
-        "url": "tabstrip/appearance",
+        "url": "mobile-tabstrip/appearance",
         "title": "Example of Kendo UI TabStrip Customized Appearance",
         "meta": "This demo shows how the application-wide group of navigation buttons in Kendo UI TabStrip can be easily customized by using custom icons."
       }
@@ -4458,6 +4471,7 @@
     "name": "application",
     "documentation": "mobile/application",
     "spriteCssClass": "mobileAppIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Overview",
@@ -4484,27 +4498,28 @@
   },
   {
     "text": "Forms",
-    "name": "forms",
+    "name": "mobile-forms",
     "spriteCssClass": "mobileAppIcon",
+    "mobile": true,
     "packages": [
       "!mvc"
     ],
     "items": [
       {
         "text": "Overview",
-        "url": "forms/index",
+        "url": "mobile-forms/index",
         "title": "Kendo UI Mobile Forms Demo",
         "meta": "This demo shows which form elements, added to a mobile view, are supported and styled in Kendo UI Mobile framework."
       },
       {
         "text": "Checks and Radios",
-        "url": "forms/checkboxes",
+        "url": "mobile-forms/checkboxes",
         "title": "Checkboxes example for Kendo UI Mobile Application",
         "meta": "This demo illustrates how checkboxes and radio buttons are enabled in Kendo UI Mobile Application."
       },
       {
         "text": "Customizing appearance",
-        "url": "forms/appearance",
+        "url": "mobile-forms/appearance",
         "title": "Kendo UI Mobile Customizing Form Appearance Demo",
         "meta": "This demo shows how you can style the labels and form elements in a Kendo UI Mobile application to appear on separate rows."
       }
@@ -4518,6 +4533,7 @@
     "name": "touchevents",
     "documentation": "mobile/touch",
     "spriteCssClass": "mobileAppIcon",
+    "mobile": true,
     "packages": [
       "!mvc"
     ],
@@ -4535,13 +4551,14 @@
   },
   {
     "text": "View",
-    "name": "view",
+    "name": "mobile-view",
     "documentation": "mobile/view",
     "spriteCssClass": "mobileAppIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Overview",
-        "url": "view/index",
+        "url": "mobile-view/index",
         "title": "Kendo UI Mobile View widget demo",
         "packages": [
           "!mvc"
@@ -4550,7 +4567,7 @@
       },
       {
         "text": "Zoomable View",
-        "url": "view/zoomable",
+        "url": "mobile-view/zoomable",
         "title": "Zoomable View in Kendo UI Mobile App Framework | Kendo UI Mobile Demo",
         "meta": "In this Kendo UI Mobile demo you will see how the contents of the mobile view can be zoomed by simply using pinch/zoom gestures."
       }
@@ -4564,6 +4581,7 @@
     "name": "SplitView",
     "documentation": "mobile/splitview",
     "spriteCssClass": "mobileSplitViewIcon",
+    "mobile": true,
     "tablet": true,
     "items": [
       {
@@ -4585,13 +4603,14 @@
   },
   {
     "text": "Layout",
-    "name": "layout",
+    "name": "mobile-layout",
     "documentation": "mobile/layout",
     "spriteCssClass": "mobileAppIcon",
+    "mobile": true,
     "items": [
       {
         "text": "Overview",
-        "url": "layout/index",
+        "url": "mobile-layout/index",
         "title": "Kendo UI jQuery-based Mobile Layout Demo",
         "meta": "This sample shows how Kendo UI Mobile Layout is used to share headers and footers between multiple views on different mobile devices."
       }
