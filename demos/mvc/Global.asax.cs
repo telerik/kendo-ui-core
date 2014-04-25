@@ -99,6 +99,12 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "DemoIndex",
+                "{section}",
+                new { controller = "Demo", action = "SectionIndex" }
+            );
+
+            routes.MapRoute(
                 "Debug",
                 "src/{assetType}/{*file}",
                 new { controller = "Debug", action = "Resource" },
