@@ -11,7 +11,6 @@ namespace Kendo.Models
         static ScriptGroups() {
 #if DEBUG
             All = System.IO.File.ReadAllLines(HttpContext.Current.Server.MapPath("~/content/all-scripts.txt"));
-            Mobile = All;
 #endif
         }
 
@@ -21,13 +20,6 @@ namespace Kendo.Models
         );
 
         public static IList<string> All = new string[]
-        {
-            jQueryPath,
-            "kendo.all.min.js",
-            "kendo.timezones.min.js"
-        };
-
-        public static IList<string> Mobile = new string[]
         {
             jQueryPath,
             "kendo.all.min.js",

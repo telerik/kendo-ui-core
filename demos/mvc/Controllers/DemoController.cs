@@ -52,17 +52,11 @@ namespace Kendo.Controllers
             FindSiblingExamples();
             FindEdgeExamples();
 
-            if (product == "mobile") {
-                ViewBag.scripts = Kendo.Models.ScriptGroups.Mobile;
-                ViewBag.styles = Kendo.Models.StyleGroups.Mobile;
-
+            if (ViewBag.Mobile) {
                 if (ViewBag.CurrentExample.Url.StartsWith("adaptive") && IsMobileDevice())
                 {
                     return Redirect(Url.RouteUrl("MobileDeviceIndex"));
                 }
-            } else {
-                ViewBag.scripts = Kendo.Models.ScriptGroups.All;
-                ViewBag.styles = Kendo.Models.StyleGroups.All;
             }
 
             ViewBag.Documentation = ViewBag.CurrentExample.Documentation ?? ViewBag.CurrentWidget.Documentation;
@@ -151,6 +145,7 @@ namespace Kendo.Controllers
                        ViewBag.Title = example.Title ?? example.Text;
                        ViewBag.Meta = example.Meta;
                        ViewBag.Description = example.Description;
+                       ViewBag.Mobile = widget.Mobile;
 
                        found = true;
                    }

@@ -16,7 +16,7 @@
     @if (ViewBag.Debug) {
         <script src="@Url.Content("~/content/shared/js/less.js")"></script>
     }
-    @foreach (string scriptName in Kendo.Models.ScriptGroups.Mobile) {
+    @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
         <script src="@Url.Script(scriptName)"></script>
     }
 

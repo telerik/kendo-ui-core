@@ -6,7 +6,7 @@
     <meta name="description" content="@ViewBag.Meta">
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")"/>
-    @foreach (string styleName in ViewBag.styles)
+    @foreach (string styleName in (ViewBag.Mobile? Kendo.Models.StyleGroups.Mobile : Kendo.Models.StyleGroups.All))
     {
     <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
@@ -20,7 +20,7 @@
     @Html.Partial("GoogleAnalytics")
     }
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
-    @foreach (string scriptName in ViewBag.scripts)
+    @foreach (string scriptName in Kendo.Models.ScriptGroups.All)
     {
     <script src="@Url.Script(scriptName)"></script>
     }
@@ -145,7 +145,7 @@
 
         $("#themeChooser").kendoThemeChooser(initialTheme);
 
-        @if (ViewBag.suite != "mobile")
+        @if (ViewBag.Mobile)
         {
             <text>
                 applyCurrentTheme();

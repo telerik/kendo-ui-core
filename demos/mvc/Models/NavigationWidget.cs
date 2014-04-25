@@ -13,6 +13,7 @@ namespace Kendo.Models
         public bool New { get; set; }
         public bool Beta { get; set; }
         public bool Pro { get; set; }
+        public bool Mobile { get; set; }
 
         public NavigationExample[] Items { get; set; }
     }

@@ -23,7 +23,7 @@
     <div id="exampleWrap">
         <script>preventFOUC()</script>
 
-        @if (ViewBag.suite == "mobile") {
+        @if (ViewBag.Mobile) {
         <div id="example" class="k-content mobileExample @(ViewBag.CurrentWidget.Tablet ? "tablet km-tablet" : "")">
 
             <div id="device-wrapper">
@@ -154,7 +154,7 @@
 
     document.title = "@Html.Raw(ViewBag.Title)";
 
-    @if (ViewBag.suite == "mobile")
+    @if (ViewBag.Mobile)
     {
         <text>
             kendo.history.stop();
