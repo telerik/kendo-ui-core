@@ -1,0 +1,52 @@
+
+<!doctype html>
+<html>
+    <head>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.dom.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.xml.js"></script>
+        <script src="../src/kendo.pivotgrid.js"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
+        <style>
+            fieldset {
+                width: 45%;
+                float: left;
+            }
+
+            .pivot {
+                max-width: 900px;
+                max-height: 700px;
+                overflow: auto;
+            }
+
+            .k-pivot-header-left {
+                width: 220px;
+                display: inline-block;
+                padding: .22em .2em .28em;
+                border-right: 1px solid red;
+            }
+
+            .k-pivot-header-right {
+                width: 630px;
+                display: inline-block;
+                padding: .22em .2em .28em;
+            }
+
+            .k-pivot-content {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="pivot"></div>
+
+        <script>
+            $(function() {
+                var pivot = new kendo.ui.PivotGrid($("#pivot"));
+            });
+        </script>
+    </body>
+</html>
