@@ -48,7 +48,8 @@ namespace :generate do
             markdown = FileList[
                 'docs/api/dataviz/diagram.md',
                 'docs/api/dataviz/diagram/connection.md',
-                'docs/api/dataviz/diagram/shape.md'
+                'docs/api/dataviz/diagram/shape.md',
+                'docs/api/dataviz/map.md'
             ]
 
 
@@ -56,7 +57,10 @@ namespace :generate do
 
             components.each do |component|
                 import_metadata(component, "lib/aspx/")
-                generator = CodeGen::ASPX::Wrappers::Generator.new('wrappers/aspx/src/')
+                folderName = component.widget? ? component.name : component.owner_namespace
+                folderPath = "wrappers/aspx/src/#{folderName}/"
+                sh "mkdir #{folderPath}" unless Dir.exists?(folderPath)
+                generator = CodeGen::ASPX::Wrappers::Generator.new(folderPath)
 
                 generator.component(component)
             end
