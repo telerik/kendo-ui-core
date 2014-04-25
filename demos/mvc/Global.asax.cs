@@ -99,12 +99,6 @@ namespace Kendo
             );
 
             routes.MapRoute(
-                "SectionIndex",
-                "{section}",
-                new { controller = "Suite", action = "SectionIndex", section = "overview" }
-            );
-
-            routes.MapRoute(
                 "Debug",
                 "src/{assetType}/{*file}",
                 new { controller = "Debug", action = "Resource" },
@@ -138,7 +132,7 @@ namespace Kendo
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}",
-                new { controller = "Home", action = "Index" }
+                new { controller = "Suite", action = "index", section="overview", example="index" }
             );
 
             routes.MapRoute(

@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using Kendo.Models;
 using Kendo.Extensions;
+using System.Web;
 
 namespace Kendo.Controllers
 {
@@ -143,7 +144,7 @@ namespace Kendo.Controllers
                        examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
                    }
 
-                   if (!found && (Request.Path.EndsWith("/" + example.Url) || (ViewBag.Example == "result" && example.Url == "upload/index.html")))
+                   if (!found && IsCurrentExample(Request, example))
                    {
                        ViewBag.CurrentWidget = widget;
                        ViewBag.CurrentExample = example;
@@ -155,6 +156,16 @@ namespace Kendo.Controllers
                    }
                }
            }
+        }
+
+        private bool IsCurrentExample(HttpRequestBase request, NavigationExample example)
+        {
+            if (Request.Path == "/" && example.Url == "overview/index")
+            {
+                return true;
+            }
+
+            return Request.Path.EndsWith("/" + example.Url) || (ViewBag.Example == "result" && example.Url == "upload/index.html");
         }
 
         protected void FindSiblingExamples()

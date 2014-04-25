@@ -84,7 +84,6 @@
     <Compile Include="Controllers\IntegrationController.cs" />
     <Compile Include="Controllers\SpaController.cs" />
     <Compile Include="Controllers\ThemeBuilderController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\SourceController.cs" />
     <Compile Include="Controllers\SuiteController.cs" />
