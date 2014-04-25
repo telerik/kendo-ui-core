@@ -26,6 +26,12 @@ namespace Kendo
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
+                "SourceView",
+                "source/index",
+                new { controller = "Source", action = "Index" }
+            );
+
+            routes.MapRoute(
                 "AsyncUpload",
                 "upload/{action}",
                 new { controller = "Upload" },
@@ -98,11 +104,6 @@ namespace Kendo
                 new { controller = "Demo", action = "Index" }
             );
 
-            routes.MapRoute(
-                "DemoIndex",
-                "{section}",
-                new { controller = "Demo", action = "SectionIndex" }
-            );
 
             routes.MapRoute(
                 "Debug",
@@ -136,15 +137,15 @@ namespace Kendo
             );
 
             routes.MapRoute(
-                "Default",
-                "{controller}/{action}",
-                new { controller = "Demo", action = "index", section="overview", example="index" }
+                "DemoIndex",
+                "{section}",
+                new { controller = "Demo", action = "SectionIndex" }
             );
 
             routes.MapRoute(
-                "SourceView",
-                "Source/SourceView",
-                new { controller = "Source", action = "SourceView" }
+                "Default",
+                "{controller}/{action}",
+                new { controller = "Demo", action = "index", section="overview", example="index" }
             );
         }
 
