@@ -1039,7 +1039,7 @@
       },
       {
         "text": "Adaptive Rendering",
-        "url": "../mobile/adaptive/grid",
+        "url": "adaptive/grid",
         "title": "Adaptive Rendering of Kendo UI Grid",
         "external": "true",
         "packages": [
@@ -1780,7 +1780,7 @@
       },
       {
         "text": "Adaptive Rendering",
-        "url": "../mobile/adaptive/scheduler",
+        "url": "adaptive/scheduler",
         "title": "Adaptive Rendering of Kendo UI Scheduler",
         "external": "true",
         "packages": [

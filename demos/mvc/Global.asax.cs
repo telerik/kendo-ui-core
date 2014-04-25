@@ -93,9 +93,9 @@ namespace Kendo
             );
 
             routes.MapRoute(
-                "Suite",
+                "Demo",
                 "{section}/{example}",
-                new { controller = "Suite", action = "Index" }
+                new { controller = "Demo", action = "Index" }
             );
 
             routes.MapRoute(
@@ -132,7 +132,7 @@ namespace Kendo
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}",
-                new { controller = "Suite", action = "index", section="overview", example="index" }
+                new { controller = "Demo", action = "index", section="overview", example="index" }
             );
 
             routes.MapRoute(

@@ -8,7 +8,7 @@
             if (!example.ShouldInclude) { continue; }
 
             <li class="@(Request.Path.EndsWith(example.Url) ? "active" : "")">
-                @Html.ExampleLink(example, (string)ViewBag.Suite)
+                @Html.ExampleLink(example)
             </li>
         }
     </ul>

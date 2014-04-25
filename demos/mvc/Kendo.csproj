@@ -13,7 +13,7 @@
     <RootNamespace>Kendo</RootNamespace>
     <AssemblyName>Kendo</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -86,7 +86,7 @@
     <Compile Include="Controllers\ThemeBuilderController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\SourceController.cs" />
-    <Compile Include="Controllers\SuiteController.cs" />
+    <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -821,8 +821,6 @@
     <Content Include="Views\Shared\SourceLayout.cshtml" />
     <Content Include="Views\Shared\ExampleLayout.cshtml" />
     <Content Include="Views\ThemeBuilder\Index.cshtml" />
-    <Content Include="Views\Shared\Header.cshtml" />
-    <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\demos\overview\index.cshtml" />
     <Content Include="content\web\panelbar\ajax\ajaxContent1.html" />
     <Content Include="content\web\panelbar\ajax\ajaxContent2.html" />
@@ -1028,9 +1026,6 @@
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\web\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="content\dataviz\js\price-performance.json" />

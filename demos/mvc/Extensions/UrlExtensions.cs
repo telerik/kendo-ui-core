@@ -23,20 +23,6 @@ namespace Kendo.Extensions
             return ResourceUrl(url, "js", file);
         }
 
-        public static string Suite(this UrlHelper url, string product)
-        {
-            product = product.ToLowerInvariant();
-
-            var href = "~/" + product;
-
-            if (product != "mobile")
-            {
-                href = "~/" + product + "/overview/index.html";
-            }
-
-            return url.Content(url.ApplyProduct(href));
-        }
-
         public static string ApplyProduct(this UrlHelper url, string href)
         {
             var product = url.RequestContext.HttpContext.Request.QueryString.ToString().Replace("&nav=true", "").Replace("nav=true", "");

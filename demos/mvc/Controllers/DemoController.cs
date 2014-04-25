@@ -10,7 +10,7 @@ using System.Web;
 
 namespace Kendo.Controllers
 {
-    public class SuiteController : BaseController
+    public class DemoController : BaseController
     {
         private List<string> examplesUrl = new List<string>();
         protected static readonly string docsURL = "http://docs.telerik.com/kendo-ui/api/{0}/{1}";
@@ -36,10 +36,10 @@ namespace Kendo.Controllers
             }
 
             ViewBag.ShowCodeStrip = true;
-            ViewBag.Suite = product;
+            ViewBag.Product = product;
             ViewBag.Section = section;
             ViewBag.Example = example;
-            ViewBag.Frameworks = Frameworks(product, section, example);
+            ViewBag.Frameworks = Frameworks(section, example);
 #if DEBUG
             ViewBag.Debug = true;
 #else
@@ -79,7 +79,7 @@ namespace Kendo.Controllers
             new PhpDescription()
         };
 
-        private IEnumerable<ExampleFramework> Frameworks(string suite, string section, string example)
+        private IEnumerable<ExampleFramework> Frameworks(string section, string example)
         {
             var frameworks = new List<ExampleFramework>();
 
@@ -90,7 +90,7 @@ namespace Kendo.Controllers
                     new ExampleFile
                     {
                         Name = example + ".html",
-                        Url = string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example)
+                        Url = string.Format("~/Views/{0}/{1}.cshtml", section, example)
                     }
                 }
             });
@@ -141,7 +141,7 @@ namespace Kendo.Controllers
                {
                    if (!example.Url.Contains("overview") && example.ShouldInclude)
                    {
-                       examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
+                       examplesUrl.Add("~/" + example.Url);
                    }
 
                    if (!found && IsCurrentExample(Request, example))
@@ -172,7 +172,7 @@ namespace Kendo.Controllers
         {
             if (ViewBag.CurrentExample != null)
             {
-                var url = string.Format("~/{0}/{1}", ViewBag.Suite, ViewBag.CurrentExample.Url);
+                var url = "~/" + ViewBag.CurrentExample.Url;
                 var index = examplesUrl.IndexOf(url);
 
                 if (index > 0)
@@ -193,8 +193,8 @@ namespace Kendo.Controllers
             {
                 var index = -1;
                 var items = ViewBag.CurrentWidget.Items;
-                var first = string.Format("~/{0}/{1}", ViewBag.Suite, items[0].Url);
-                var last = string.Format("~/{0}/{1}", ViewBag.Suite, items[items.Length - 1].Url);
+                var first = "~/" + items[0].Url;
+                var last = "~/" + items[items.Length - 1].Url;
 
                 index = examplesUrl.IndexOf(first);
                 if (index > 0) {

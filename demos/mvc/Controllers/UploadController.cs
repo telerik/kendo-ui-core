@@ -16,7 +16,7 @@ namespace Kendo.Controllers
                 TempData["UploadedFiles"] = GetFileInfo(files);
             }
 
-            return RedirectToAction("Index", "Suite", new { suite = "web", section = "upload", example = "result" });
+            return RedirectToAction("Index", "Demo", new { section = "upload", example = "result" });
         }
 
         public ActionResult Save(IEnumerable<HttpPostedFileBase> files)
