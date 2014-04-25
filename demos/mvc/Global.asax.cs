@@ -25,11 +25,9 @@ namespace Kendo
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            var productConstraint = new { product = "(html|php-ui|jsp-ui|aspnet-mvc)" };
-
             routes.MapRoute(
                 "AsyncUpload",
-                "web/upload/{action}",
+                "upload/{action}",
                 new { controller = "Upload" },
                 new { action = "(save|remove|submit)" }
             );
@@ -94,25 +92,16 @@ namespace Kendo
                 new { controller = "MobileDevice", action = "Example" }
             );
 
-           routes.MapRoute(
-               "SectionIndex.html",
-               "{product}/index.html",
-               new { controller = "Suite", action = "SectionIndex", section = "overview" },
-               productConstraint
-           );
-
             routes.MapRoute(
                 "Suite",
-                "{product}/{section}/{example}",
-                new { controller = "Suite", action = "Index" },
-                productConstraint
+                "{section}/{example}",
+                new { controller = "Suite", action = "Index" }
             );
 
             routes.MapRoute(
                 "SectionIndex",
-                "{product}/{section}",
-                new { controller = "Suite", action = "SectionIndex", section = "overview" },
-                productConstraint
+                "{section}",
+                new { controller = "Suite", action = "SectionIndex", section = "overview" }
             );
 
             routes.MapRoute(

@@ -48,7 +48,7 @@ namespace Kendo.Extensions
         {
             var Url = new UrlHelper(html.ViewContext.RequestContext);
 
-            var href = Url.Content("~/" + suite + "/" + example.Url);
+            var href = Url.Content("~/" + example.Url);
 
             href = Url.ApplyProduct(href);
 
@@ -84,7 +84,7 @@ namespace Kendo.Extensions
 
             var viewBag = html.ViewContext.Controller.ViewBag;
 
-            var href = Url.Content("~/" + (string)viewBag.Suite + "/" + widget.Items[0].Url);
+            var href = Url.Content("~/" + widget.Items[0].Url);
 
             href = Url.ApplyProduct(href);
 

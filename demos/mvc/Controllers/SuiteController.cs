@@ -25,8 +25,15 @@ namespace Kendo.Controllers
 
         //
         // GET: /Web/
-        public ActionResult Index(string product, string section, string example, bool? nav)
+        public ActionResult Index(string section, string example, bool? nav)
         {
+            var product = "kendo-ui";
+
+            if (!string.IsNullOrEmpty(Request.ServerVariables["X-KENDO"]))
+            {
+                product = Request.ServerVariables["X-KENDO"];
+            }
+
             ViewBag.ShowCodeStrip = true;
             ViewBag.Suite = product;
             ViewBag.Section = section;
