@@ -43,9 +43,13 @@ class TelerikReleaseBot
 
     def wait_for_title(title)
         Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.title.downcase.start_with? title }
+        rescue
+        screenshot("Browser_Timeout_On_Page_Title_Wait")
     end
     def wait_for_element(css)
         Selenium::WebDriver::Wait.new(:timeout => 1000).until { driver.find_element(:css, css) }
+        rescue
+        screenshot("Browser_Timeout_On_Element_Wait")
     end
     
     #not used
@@ -60,11 +64,12 @@ class TelerikReleaseBot
         failed_operation = "null"
       end
 
-      Dir.mkdir("\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\screenshots") if !File.directory?("\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\screenshots")
-      @driver.save_screenshot(File.join("\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\screenshots", "#{failed_operation}.jpg"))
+      Dir.mkdir("build/screenshots") if !File.directory?("build/screenshots")
+      @driver.save_screenshot(File.join("build/screenshots", "#{failed_operation}.jpg"))
     end
 
     def execute_script(script)
+      #output filename and code line number as part of the screenshot name
       caller_array = caller.first.split(":")
       file_name = caller_array[1].split("/")[6] 
       driver.execute_script(script)
@@ -95,10 +100,11 @@ def upload_release_build(options)
 
     bot = TelerikReleaseBot.instance 
 
-    create_version(bot, options[:product])   
+    create_version(bot, options)   
     prepare_files(bot, options)  
 end
-def create_version(bot, product_name)
+def create_version(bot, options)
+      product_name = options[:product]
       return if bot.version_created(product_name) 
       bot.add_product(product_name)
 
@@ -117,17 +123,34 @@ def create_version(bot, product_name)
 
       if defined? SERVICE_PACK_NUMBER
         bot.click_and_wait "New Minor","administration"
-        fill_version_fields(bot) 
+        fill_version_fields(bot, options) 
       else
         bot.click_and_wait "New Major","administration"
-        fill_version_fields(bot)  
+        fill_version_fields(bot, options)  
       end
 end
-def fill_version_fields(bot)
+def fill_version_fields(bot, options)
        bot.execute_script("$('[id$=\"_txtMajorName\"]').val('#{VERSION_YEAR}.#{VERSION_Q}')")
        last_numbers = VERSION.split(".")[2]
        bot.execute_script("$('[id$=\"_txtMinorName\"]').val('#{last_numbers}')")
        bot.execute_script("$('[id$=\"_cbBeta\"]').prop('checked', true)")
+
+       product_name = options[:product]
+       q_version = options[:archive_path].split("/")[2]
+       path_with_dashes = q_version.downcase.gsub " ", "-"
+       product_in_url = nil
+
+       if product_name.index('Kendo') != nil
+         product_in_url = "kendo-ui"
+       elsif product_name.index('MVC') != nil
+         product_in_url = "aspnet-mvc"
+       elsif product_name.index('JSP') != nil
+         product_in_url = "jsp-ui"
+       elsif product_name.index('PHP') != nil
+         product_in_url = "php-ui"
+       end
+
+       bot.execute_script("$find($telerik.$('[id$=\"_efVersionNotes_reFieldText\"]').attr('id')).set_html('<a href=\"http://www.telerik.com/support/whats-new/#{product_in_url}/release-history/#{path_with_dashes}\">#{q_version}</a>')") 
 
        bot.click_element(bot.find("[value='Save']"))
        bot.click_and_wait "Save", "administration"
