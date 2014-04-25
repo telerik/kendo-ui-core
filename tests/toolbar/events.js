@@ -256,4 +256,84 @@
         button.trigger("click");
     });
 
+    test("opening the splitButton popup triggers open event", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ],
+            open: function() {
+                ok(true, "Open event is triggered");
+            }
+        });
+
+        var button = container.find("#foo a.k-split-button-arrow");
+
+        button.trigger("click");
+    });
+
+    test("open event can be prevented", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ],
+            open: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        var button = container.find("#foo a.k-split-button-arrow");
+        var popup = container.find(".k-split-button").data("kendoPopup");
+
+        button.trigger("click");
+
+        ok(!popup.visible());
+    });
+
+    test("closing the splitButton popup triggers close event", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ],
+            close: function() {
+                ok(true, "Close event is triggered");
+            }
+        });
+
+        var button = container.find("#foo a.k-split-button-arrow");
+
+        button.trigger("click"); //open
+        button.trigger("click"); //close
+    });
+
+    test("close event can be prevented", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", options: [
+                    { id: "option1", text: "option1" },
+                    { id: "option2", text: "option2" }
+                ] }
+            ],
+            close: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        var button = container.find("#foo a.k-split-button-arrow");
+        var popup = container.find(".k-split-button").data("kendoPopup");
+
+        button.trigger("click"); //open
+        button.trigger("click"); //close
+
+        ok(popup.visible());
+    });
+
 })();
