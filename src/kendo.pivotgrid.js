@@ -368,7 +368,13 @@ var __meta__ = {
 
         options: {
             name: "PivotGrid",
-            autoBind: true
+            autoBind: true,
+            messages: {
+                filterFields: "Drop Filter Fields Here",
+                measureFields: "Drop Data Fields Here",
+                columnFields: "Drop Column Fields Here",
+                rowFields: "Drop Rows Fields Here"
+            }
         },
 
         setDataSource: function() {
@@ -396,28 +402,40 @@ var __meta__ = {
 
         _header: function() {
             var that = this;
+            var options = that.options;
+            var messages = options.messages;
             var wrapper = that.wrapper;
 
-            var filtersSection = $(DIV).appendTo(wrapper);
+            var filtersSection = $(DIV).addClass("k-grouping-header")
+                                       .text(messages.filterFields)
+                                       .appendTo(wrapper);
 
-            var columnsSection = $(DIV);
-            var measuresSection = $(DIV);
+            var measuresSection = $(DIV).addClass("k-pivot-header-left")
+                                        .text(messages.measureFields);
 
-            var rowsSection = $(DIV);
+            var columnsSection = $(DIV).addClass("k-pivot-header-right")
+                                       .text(messages.columnFields);
+
+            var rowsSection = $(DIV).addClass("k-pivot-header-left")
+                                    .text(messages.rowFields);
+
             var columnsHeader = $(DIV);
 
-            var rowsHeader = $(DIV);
-            var content = $(DIV);
+            var rowsHeader = $(DIV).addClass("k-pivot-header-left");
+            var content = $(DIV).addClass("k-pivot-content");
 
             var columnSectionWrapper = $(DIV).appendTo(wrapper)
+                                             .addClass("k-grid-header")
                                              .append(measuresSection)
                                              .append(columnsSection);
 
             var columnHeaderWrapper = $(DIV).appendTo(wrapper)
+                                            .addClass("k-grid-header")
                                             .append(rowsSection)
                                             .append(columnsHeader);
 
             var contentWrapper = $(DIV).appendTo(wrapper)
+                                       .addClass("k-grid-header")
                                        .append(rowsHeader)
                                        .append(content);
 
