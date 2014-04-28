@@ -63,63 +63,56 @@ def include_item?(item)
 end
 
 def find_demo_src (filename, path)
-
-    filename = filename.sub(path, 'demos/mvc/Views').pathmap('%X.cshtml')
+    filename = filename.sub(path, 'demos/mvc/Views/demos').pathmap('%X.cshtml')
 
     DEMOS_CSHTML.find { |file| file == filename }
-
 end
 
-def find_navigation_item(navigation, filename)
+def find_navigation_item(categories, filename)
     url = filename.pathmap('%-1d/%f')
 
-    navigation.each do |name, categories|
-        categories.each do |category|
-            category['items'].each do |item|
-                return item if item["url"] == url
-            end
+    categories.each do |category|
+        category['items'].each do |item|
+            return category, item if item["url"] + '.html' == url
         end
     end
+
+    return nil, nil
 end
 
-def offline_navigation(suite, path)
+def offline_navigation(path)
 
-    navigation = YAML.load(File.read("demos/mvc/App_Data/#{suite}.nav.json"))
+    categories = YAML.load(File.read("demos/mvc/content/nav.json"))
 
-    offline = {}
+    offline = []
 
-    navigation.each do |name, categories|
-        offline[name] = []
-        categories.each do |category|
+    categories.each do |category|
 
-            next if path.include?('mobile.commercial') && category['name'] == 'adaptive'
-            next if path.include?('web') && category['name'] == 'mobile'
+        next if path.include?('mobile.commercial') && category['name'] == 'adaptive'
+        next if path.include?('web') && category['name'] == 'mobile'
 
-            if include_item?(category)
-                category['items'] = category['items'].find_all do |item|
-                    include_item?(item) && !(item['external'] && path.include?('web.commercial'))
-                end
-
-                offline[name].push(category)
+        if include_item?(category)
+            category['items'] = category['items'].find_all do |item|
+                include_item?(item) && !(item['external'] && path.include?('web.commercial'))
             end
+
+            offline.push(category)
         end
     end
 
     offline
 end
 
-def offline_demos(navigation, path)
+def offline_demos(categories, path)
 
     demos = []
 
-    navigation.each do |name, categories|
-        categories.each do |category|
+    categories.each do |category|
 
-            category['items'].each do |item|
-                demos.push("#{path}/#{item['url']}") unless item['external']
-            end
-
+        category['items'].each do |item|
+            demos.push("#{path}/#{item['url']}.html") unless item['external']
         end
+
     end
 
     FileList[demos]
@@ -132,8 +125,6 @@ def demos(options)
     template_dir = (options[:template_dir] || '.')
 
     mkdir_p path, :verbose => false
-
-    suites = options[:suites]
 
     files = FileList["#{path}/index.html"].include("#{path}/content")
 
@@ -150,56 +141,52 @@ def demos(options)
 
     end
 
-    suites.each do |suite|
+    suite_path  = "#{path}"
 
-        suite_path  = "#{path}/#{suite}"
+    categories = offline_navigation(path)
 
-        navigation = offline_navigation(suite, path)
+    files = files + offline_demos(categories, suite_path).include("#{suite_path}/index.html");
 
-        files = files + offline_demos(navigation, suite_path).include("#{suite_path}/index.html");
+    # Build the index.html page of the suite
+    file "#{suite_path}/index.html" => DEMOS_BULDFILES.include("build/templates/#{template_dir}/suite-index.html.erb") do |t|
 
-        # Build the index.html page of the suite
-        file "#{suite_path}/index.html" => DEMOS_BULDFILES.include("build/templates/#{template_dir}/suite-index.html.erb") do |t|
+        template = ERB.new(File.read("build/templates/#{template_dir}/suite-index.html.erb"))
 
-            template = ERB.new(File.read("build/templates/#{template_dir}/suite-index.html.erb"))
+        File.write(t.name, template.result(binding))
 
-            File.open(t.name, 'w') do |file|
-                file.write template.result(binding) # 'binding' is the current scope
-            end
+    end
 
+    template = ERB.new(File.read("build/templates/#{template_dir}/example.html.erb"), 0, '%<>')
+
+    # Create offline demos by processing the corresponding .cshtml files
+    rule /#{path}\/.+\.html/ => lambda { |t| DEMOS_BULDFILES.include(find_demo_src(t, path)) } do |t|
+        body = ""
+
+        File.open(find_demo_src(t.name, path), 'r:bom|utf-8') do |file|
+            body = file.read
         end
 
-        template = ERB.new(File.read("build/templates/#{template_dir}/#{suite}-example.html.erb"), 0, '%<>')
+        body.gsub!(/@section \w+ {(.|\n|\r)+?}/, '')
+        body.gsub!(/@{(.|\n|\r)+?}/, '')
+        body.gsub!(/@@/, '')
 
-        # Create offline demos by processing the corresponding .cshtml files
-        rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| DEMOS_BULDFILES.include(find_demo_src(t, path)) } do |t|
-            body = ""
-            File.open(find_demo_src(t.name, path), 'r:bom|utf-8') do |file|
-                body = file.read
-            end
+        # if the example is an entire document, take only the body parts
+        body_contents = body.match(/<body>(.+)<\/body>/m)
+        body = body_contents[1] if body_contents
 
-            body.gsub!(/@section \w+ {(.|\n|\r)+?}/, '')
-            body.gsub!(/@{(.|\n|\r)+?}/, '')
-            body.gsub!(/@@/, '')
+        options = OFFLINE_DEMO_TEMPLATE_OPTIONS[t.name.sub(path, '')]
 
-            # if the example is an entire document, take only the body parts
-            body_contents = body.match(/<body>(.+)<\/body>/m)
-            body = body_contents[1] if body_contents
+        ensure_path(t.name)
 
-            options = OFFLINE_DEMO_TEMPLATE_OPTIONS[t.name.sub(path, '')]
+        category, item = find_navigation_item(categories, t.name)
 
-            ensure_path(t.name)
+        requiresServer = item['requiresServer'].nil? ? false : item['requiresServer']
 
-            item = find_navigation_item(navigation, t.name)
+        mobile = category['mobile'].nil? ? false : category['mobile']
 
-			requiresServer = item['requiresServer'].nil? ? false : item['requiresServer']
+        title = item['text'] # used by the template and passed via 'binding'
 
-            File.open(t.name, 'w') do |file|
-                title = item['text'] # used by the template and passed via 'binding'
-
-                file.write template.result(binding) # 'binding' is the current scope
-            end
-        end
+        File.write(t.name, template.result(binding));
     end
 
     files
