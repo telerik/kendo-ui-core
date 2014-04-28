@@ -662,19 +662,20 @@ test("ComboBox does not throw exception when try to search empty DS", function()
     ok(true);
 });
 
-test("ComboBox does not open popup if not active element", 1, function() {
+asyncTest("ComboBox does not open popup if not active element", 1, function() {
     combobox.destroy();
     combobox = input.kendoComboBox({
         delay: 0,
         autoBind: false,
         dataSource: ["bar", "baz"],
-        filter: "startswith"
+        filter: "startswith",
+        dataBound: function() {
+            start();
+            ok(!combobox.popup.visible());
+        }
     }).data("kendoComboBox");
 
-    combobox._typing = 2222;
-    combobox.search("b");
-
-    ok(!combobox.popup.visible());
+    combobox._search("b");
 });
 
 test("ComboBox opens popup on search", function() {
