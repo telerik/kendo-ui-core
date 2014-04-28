@@ -165,7 +165,7 @@ def set_fields_data(bot, file_fields)
 
         if file_fields[:vs_hotfix] 
           bot.execute_script("$('[id$=\"_txtFileVersionPrefix\"]').val('#{VERSION}')")
-          Thread.current.send :sleep, 1000
+          Thread.current.send :sleep, 3
           bot.execute_script("$('[id$=\"_txtFileVersionSuffix\"]').val('0')")
         end  
       end
