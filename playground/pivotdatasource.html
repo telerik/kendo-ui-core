@@ -13,6 +13,7 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
+        <button>Expand</button>
         <div class="k-grid k-widget" style="overflow: scroll;height: 1000px">
             <table id="container"></table>
         </div>
@@ -53,7 +54,7 @@
                 data: function(root) {
                     root = kendo.getter("ExecuteResponse.return.root", true)(root);
 
-                    var cells = kendo.getter("CellData.Cell", true)(root);
+                    var cells = asArray(kendo.getter("CellData.Cell", true)(root));
                     var result = [];
                     var ordinalGetter = kendo.getter("['@CellOrdinal']");
                     var valueGetter = kendo.getter("Value['#text']");
@@ -102,6 +103,7 @@
                     return this._axes;
                 },
                 _readData: function(data) {
+                    debugger;
                     var originalData = this._data;
                     var cellData = this.reader.data(data);
                     var axes = this.reader.axes(data);
@@ -267,7 +269,12 @@
                }
             });
 
-            dataSource.execute({ columns: [ { name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]", expand: true } ], rows: [{ name: "[Product].[Product Name]", expand: true }], filter: {}, values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Discount Amount]"] });
+            //dataSource.execute({ columns: [ { name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]", expand: true } ], rows: [{ name: "[Product].[Product Name]", expand: true }], filter: {}, values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Discount Amount]"] });
+            dataSource.execute({ columns: ["[Date].[Calendar]"], rows: ["[Product].[Product Name]"], filter: {}, values: ["[Measures].[Internet Order Lines Count]"] });
+
+            $("button").click(function() {
+                    dataSource.execute({ columns: [{ name: "[Date].[Calendar]", expand: true}], rows: ["[Product].[Product Name]"], filter: {}, values: ["[Measures].[Internet Order Lines Count]"] });
+            });
 
             function asArray(obj) {
 
