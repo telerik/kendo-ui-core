@@ -45,7 +45,7 @@
         ok(target.hasClass("k-i-expand"));
     });
 
-    test("clicking on icon toggles expanded/collapsed mddel field", 2, function() {
+    test("clicking on icon toggles expanded/collapsed model field", 2, function() {
         setup({ columns: [], data: [{ title: "foo", parentId: null, id: 1, summary: true, expanded: true }] })
         var target = ganttList.content.find(".k-icon:not(.k-i-none)").eq(0);
 
@@ -70,4 +70,51 @@
         ganttList.content.off();
     });
 
+    module("Selection", {
+        setup: function() {
+            element = $("<div/>").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            ganttList.destroy();
+            kendo.destroy(element);
+            element.remove();
+            ganttList = null;
+        }
+    });
+
+    test("clicking on a tr calls select(':selector')", function() {
+        setup({
+            columns: [],
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ]
+        });
+
+        var target = ganttList.content.find("tr:first");
+        stub(ganttList, "select");
+
+        target.click();
+
+        ok(ganttList.calls("select"));
+    });
+
+    test("clicking with Ctrl on a tr calls clearSelection()", function() {
+        setup({
+            columns: [],
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ]
+        });
+        var e = new $.Event("click");
+        var target = ganttList.content.find("tr:first")
+            .addClass(".k-state-selected");
+
+        e.ctrlKey = true;
+        stub(ganttList, "clearSelection");
+        target.trigger(e);
+
+        ok(ganttList.calls("clearSelection"));
+    });
 })();

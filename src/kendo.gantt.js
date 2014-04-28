@@ -494,12 +494,14 @@ var __meta__ = {
 
         events: [
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "change"
         ],
 
         options: {
             name: "Gantt",
             autoBind: true,
+            selectable: true,
             views: [],
             messages: {
                 views: {
@@ -520,6 +522,22 @@ var __meta__ = {
             workWeekEnd: 5,
             hourSpan: 1,
             snap: true
+        },
+
+        select: function(value) {
+            var list = this.list;
+
+            if (!value) {
+                return list.select();
+            }
+
+            list.select(value);
+
+            return;
+        },
+
+        clearSelection: function() {
+            this.list.clearSelection();
         },
 
         destroy: function() {
@@ -589,15 +607,24 @@ var __meta__ = {
                 });
         },
 
-        _list: function () {
-            var options = extend({}, { columns: this.options.columns || [], dataSource: this.dataSource });
-            var element = this.wrapper.find(".k-gantt-treelist > .k-grid");
+        _list: function() {
             var that = this;
+            var options = extend({}, {
+                columns: this.options.columns || [],
+                dataSource: this.dataSource,
+                selectable: this.options.selectable
+            });
+            var element = this.wrapper.find(".k-gantt-treelist > .k-grid");
 
             this.list = new kendo.ui.GanttList(element, options);
 
             this.list
-                .bind("update", function() { that.refresh(); });
+                .bind("update", function() {
+                    that.refresh();
+                })
+                .bind("change", function() {
+                    that.trigger("change");
+                });
         },
 
         _timeline: function() {

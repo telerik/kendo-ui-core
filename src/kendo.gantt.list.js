@@ -72,6 +72,7 @@ var __meta__ = {
             this._header();
             this._sortable();
             this._editable();
+            this._selectable();
             this._attachEvents();
         },
 
@@ -87,7 +88,8 @@ var __meta__ = {
         },
 
         options: {
-            name: "GanttList"
+            name: "GanttList",
+            selectable: true
         },
 
         _attachEvents: function() {
@@ -100,6 +102,8 @@ var __meta__ = {
 
                     element.toggleClass("k-i-collapse k-i-expand");
                     model.set("expanded", !model.get("expanded"));
+
+                    e.stopPropagation();
                 })
                 .on("dblclick" + NS, "td > span.k-icon:not(.k-i-none)", function(e) {
                     e.stopPropagation();
@@ -309,6 +313,49 @@ var __meta__ = {
                 }
             }
             cells = null;
+        },
+
+        _selectable: function() {
+            var that = this;
+            var selectable = this.options.selectable;
+
+            if (selectable) {
+                this.content
+                   .on(CLICK + NS, "tr", function(e) {
+                       var element = $(this);
+
+                       if (!e.ctrlKey) {
+                           that.select(element);
+                       } else {
+                           that.clearSelection();
+                       }
+                   });
+            }
+        },
+
+        select: function(value) {
+            var element = this.content.find(value);
+
+            if (element.length) {
+                element
+                    .addClass("k-state-selected")
+                    .siblings(".k-state-selected")
+                    .removeClass("k-state-selected");
+
+                this.trigger("change");
+
+                return;
+            }
+
+            return this.content.find(".k-state-selected");
+        },
+
+        clearSelection: function() {
+            var selected = this.select();
+
+            selected.removeClass("k-state-selected");
+
+            this.trigger("change");
         },
 
         _editable: function() {
