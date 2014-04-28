@@ -1140,7 +1140,52 @@ var __meta__ = {
         }
     });
 
-    kendo.ui.plugin(Menu);
+    var ContextMenu = Menu.extend({
+        init: function(element, options) {
+            var that = this;
+
+            Menu.fn.init.call(that, element, options);
+
+            element = that.element;
+            options = that.options;
+
+            var target = options.target;
+
+            that.popup = element
+                            .addClass("k-context-menu")
+                            .kendoPopup({
+                                anchor: target || "body",
+                                collision: "fit flip"
+                            }).data("kendoPopup");
+
+            if (target) {
+                $(target).on(options.event, function (e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    that.show(e.pageX, e.pageY);
+                });
+            }
+
+            $(document.body).on(kendo.support.click, function () { that.popup.close() });
+        },
+        options: {
+            name: "ContextMenu",
+            event: "contextmenu",
+            orientation: "vertical",
+            closeOnClick: true,
+            target: null
+        },
+
+        show: function(x, y) {
+            var that = this;
+
+            that.popup.wrapper.hide();
+            that.popup.open(x, y);
+        }
+    });
+
+    ui.plugin(Menu);
+    ui.plugin(ContextMenu);
 
 })(window.kendo.jQuery);
 
