@@ -21,6 +21,8 @@ var __meta__ = {
     var minDependencyWidth = 14;
     var rowHeight = 27;
     var minDependencyHeight = Math.floor(rowHeight / 2);
+    var NS = ".kendoGanttTimeline";
+    var CLICK = "click";
 
     var defaultViews = {
         day: {
@@ -902,6 +904,8 @@ var __meta__ = {
 
             this._views();
 
+            this._selectable();
+
             this._draggable();
 
             this._resizable();
@@ -916,7 +920,8 @@ var __meta__ = {
                     month: "Month"
                 }
             },
-            snap: true
+            snap: true,
+            selectable: true
         },
 
         destroy: function() {
@@ -935,6 +940,8 @@ var __meta__ = {
             this._headerTree = null;
             this._taskTree = null;
             this._dependencyTree = null;
+
+            this.wrapper.off(NS);
 
             kendo.destroy(this.wrapper);
         },
@@ -1195,6 +1202,41 @@ var __meta__ = {
                 .bind("dragcancel", function(e) {
                     cleanUp();
                 });
+        },
+
+        _selectable: function() {
+            var that = this;
+
+            if (this.options.selectable) {
+                this.wrapper
+                    .on(CLICK + NS, ".k-gantt-summary, .k-event ", function(e) {
+                        e.stopPropagation();
+                        that.trigger("select", { uid: $(this).attr("data-uid") });
+                    })
+                    .on(CLICK + NS, ".k-gantt-tasks tr", function(e) {
+                        that.trigger("clear");
+                    });
+            }
+        },
+
+        select: function(value) {
+            var element = this.wrapper.find(value);
+
+            if (element.length) {
+                this.clearSelection();
+
+                element.addClass("k-state-selected");
+
+                return;
+            }
+
+            return this.wrapper.find(".k-state-selected");
+        },
+
+        clearSelection: function() {
+            this.wrapper
+                .find(".k-state-selected")
+                .removeClass("k-state-selected");
         }
 
     });

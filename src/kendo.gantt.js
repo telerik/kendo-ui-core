@@ -624,6 +624,12 @@ var __meta__ = {
                 })
                 .bind("change", function() {
                     that.trigger("change");
+
+                    if (that.select().length) {
+                        that.timeline.select("[data-uid='" + that.select().attr("data-uid") + "']");
+                    } else {
+                        that.timeline.clearSelection();
+                    }
                 });
         },
 
@@ -661,6 +667,10 @@ var __meta__ = {
                     }
 
                     that.dataSource.update(task, updateInfo);
+                }).bind("select", function(e) {
+                    that.select("[data-uid='" + e.uid + "']");
+                }).bind("clear", function(e) {
+                    that.clearSelection();
                 });
         },
 

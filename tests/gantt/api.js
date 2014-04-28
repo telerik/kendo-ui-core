@@ -220,4 +220,66 @@
         ganttList.clearSelection();
     });
 
+    module("GanttTimeline", {
+        setup: function() {
+            element = $("<div />");
+            gantt = new Gantt(element);
+            range = {
+                start: new Date("2014/04/15"),
+                end: new Date("2014/04/17")
+            };
+            tasks = [{
+                uid: "UniqueId1",
+                start: new Date("2014/04/15"),
+                end: new Date("2014/04/16")
+            }, {
+                uid: "UniqueId2",
+                start: new Date("2014/04/16"),
+                end: new Date("2014/04/17")
+            }];
+        },
+        teardown: function() {
+            gantt.destroy();
+
+            kendo.destroy(element);
+        }
+    });
+
+    test("select(':selector') applies selected class to element", function() {
+        gantt.timeline._render(tasks, range);
+
+        gantt.timeline.select(".k-event:first");
+
+        ok(gantt.timeline.wrapper.find(".k-event:first").hasClass("k-state-selected"));
+    });
+
+    test("select(':selector') removes selected class from previously selected element", function() {
+        gantt.timeline._render(tasks, range);
+
+        gantt.timeline.wrapper.find(".k-event:last").addClass("k-state-selected");
+        gantt.timeline.select(".k-event:first");
+
+        ok(!gantt.timeline.wrapper.find(".k-event:last").hasClass("k-state-selected"));
+    });
+    
+    test("select() retrieves selected element", function() {
+        gantt.timeline._render(tasks, range);
+
+        var target = gantt.timeline.wrapper.find(".k-event:first").addClass("k-state-selected");
+
+        var selected = gantt.timeline.select();
+
+        equal(selected.length, 1);
+        equal(selected[0], target[0]);
+    });
+
+    test("clearSelection() removes selected class from element", function() {
+        gantt.timeline._render(tasks, range);
+
+        gantt.timeline.wrapper.find(".k-event:last").addClass("k-state-selected");
+        gantt.timeline.clearSelection();
+
+        ok(!gantt.timeline.wrapper.find(".k-event:last").hasClass("k-state-selected"));
+    });
+
 })();

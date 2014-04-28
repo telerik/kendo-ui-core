@@ -1,7 +1,9 @@
 ﻿(function() {
 
     var element;
+    var gantt;
     var ganttList;
+    var Gantt = kendo.ui.Gantt;
     var GanttList = kendo.ui.GanttList;
     var GanttDataSource = kendo.data.GanttDataSource;
     var setup = function(options) {
@@ -70,7 +72,7 @@
         ganttList.content.off();
     });
 
-    module("Selection", {
+    module("List Selection", {
         setup: function() {
             element = $("<div/>").appendTo(QUnit.fixture);
         },
@@ -117,4 +119,68 @@
 
         ok(ganttList.calls("clearSelection"));
     });
+
+    module("Timeline Selection", {
+        setup: function() {
+            element = $("<div />");
+            gantt = new Gantt(element);
+            range = {
+                start: new Date("2014/04/15"),
+                end: new Date("2014/04/17")
+            };
+            tasks = [{
+                uid: "UniqueId1",
+                start: new Date("2014/04/15"),
+                end: new Date("2014/04/16")
+            }, {
+                uid: "UniqueId2",
+                start: new Date("2014/04/16"),
+                end: new Date("2014/04/17")
+            }];
+        },
+        teardown: function() {
+            gantt.destroy();
+
+            kendo.destroy(element);
+        }
+    });
+
+    test("clicking on a task calls select(':selector')", function() {
+        gantt.timeline._render(tasks, range);
+
+        var target = gantt.timeline.wrapper.find(".k-event:first");
+
+        stub(gantt, "select");
+
+        target.click();
+
+        ok(gantt.calls("select"));
+    });
+
+    test("clicking on a task calls select(':selector') with correct parameter", 1, function() {
+        gantt.timeline._render(tasks, range);
+
+        var target = gantt.timeline.wrapper.find(".k-event:first");
+
+        stub(gantt, {
+            select: function(value) {
+                equal(value, "[data-uid='UniqueId1']");
+            }
+        });
+
+        target.click();
+    });
+
+    test("clicking on a task row calls clearSelection()", function() {
+        gantt.timeline._render(tasks, range);
+
+        var target = gantt.timeline.wrapper.find(".k-gantt-tasks tr:first");
+
+        stub(gantt, "clearSelection");
+
+        target.click();
+
+        ok(gantt.calls("clearSelection"));
+    });
+
 })();
