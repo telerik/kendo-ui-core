@@ -27,7 +27,7 @@
             <script id="rowTemplate" type="text/x-kendo-tmpl">
 	            <tr data-uid="#: uid #">
 		            <td class="photo">
-                       <img src="../../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+                       <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
 		            </td>
 		            <td class="details">
 			           <span class="title">#: Title #</span>
@@ -42,7 +42,7 @@
             <script id="altRowTemplate" type="text/x-kendo-tmpl">
 	            <tr class="k-alt" data-uid="#: uid #">
 		            <td class="photo">
-                       <img src="../../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
+                       <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
 		            </td>
 		            <td class="details">
 			           <span class="title">#: Title #</span>
@@ -60,7 +60,7 @@
                         dataSource: {
                           type: "odata",
                           transport: {
-                              read: {	
+                              read: {
                                   url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
                               }
                           }
@@ -73,14 +73,14 @@
             </script>
             <style scoped>
                 .photo {
-                    width: 140px;                    
+                    width: 140px;
                 }
                 .details {
                     width: 400px;
-                }                
+                }
                 .title {
                     display: block;
-                    font-size: 1.6em; 
+                    font-size: 1.6em;
                 }
                 .description {
                     display: block;

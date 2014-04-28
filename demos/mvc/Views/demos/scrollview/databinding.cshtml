@@ -5,8 +5,8 @@
             <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
         </div>
     </header>
-    <div data-role="scrollview" 
-        data-source="_500pxDS" 
+    <div data-role="scrollview"
+        data-source="_500pxDS"
         data-template="scrollview-binding-template"
         data-content-height="100%"
         data-enable-pager="false">
@@ -20,7 +20,7 @@
     </div>
 </script>
 
-<script src="../../content/spa/aeroviewr/js/500px.js"></script>
+<script src="../content/spa/aeroviewr/js/500px.js"></script>
 
 <script>
     _500px.init({
@@ -30,7 +30,7 @@
     var _500pxDS = new kendo.data.DataSource({
         transport: {
             read: function(options) {
-                var params = { 
+                var params = {
                     feature: "popular",
                     exclude: "Nude",
                     image_size: 3,

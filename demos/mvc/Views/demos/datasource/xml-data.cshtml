@@ -5,7 +5,7 @@
 
             <script id="template" type="text/x-kendo-template">
                 <li class="book">
-                    <a href="#= url #"><img src="../../content/web/datasource/xml-data/#= cover #" /></a>
+                    <a href="#= url #"><img src="../content/web/datasource/xml-data/#= cover #" /></a>
                     <h3>#= title #</h3>
                     by #= author #
                 </li>
@@ -23,7 +23,7 @@
                     var dataSource = new kendo.data.DataSource({
                         transport: {
                             // specify the XML file to read. The same as read: { url: "books.xml" }
-                            read: "../../content/web/datasource/books.xml"
+                            read: "../content/web/datasource/books.xml"
                         },
                         schema: {
                             // specify the the schema is XML
@@ -58,7 +58,7 @@
                     margin: 0;
                     padding: 0;
                 }
-                
+
                 #books:after {
                     content: ".";
                     display: block;
@@ -123,6 +123,6 @@
 &lt;/book&gt;</code></pre>
                 </div>
 
-                <a href="../../content/web/datasource/books.xml">see the full XML</a>
+                <a href="../content/web/datasource/books.xml">see the full XML</a>
             </div>
         </div>

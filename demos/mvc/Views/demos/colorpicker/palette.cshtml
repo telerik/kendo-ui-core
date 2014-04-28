@@ -2,7 +2,7 @@
 
     <div class="demo-section">
         <div class="product-display">
-            <img class="product-image" src="../../content/web/colorpicker/sofa-ffcc33.jpg" alt="" width="285" height="149">
+            <img class="product-image" src="../content/web/colorpicker/sofa-ffcc33.jpg" alt="" width="285" height="149">
 
             <div id="color-chooser"></div>
         </div>
@@ -32,7 +32,7 @@
             value: "#ffcc33",
             change: function() {
                 var colorId = this.value().substring(1);
-                $(".product-image").attr("src", "../../content/web/colorpicker/sofa-" + colorId + ".jpg");
+                $(".product-image").attr("src", "../content/web/colorpicker/sofa-" + colorId + ".jpg");
             }
         });
     </script>
