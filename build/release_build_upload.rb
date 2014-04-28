@@ -21,6 +21,9 @@ class TelerikReleaseBot
 
     def find(selector)
         driver.find_element(:css, selector)
+        rescue
+        Selenium::WebDriver::Error::NoSuchElementError
+        screenshot("No_such_element_" + selector)
     end
 
     def go_to_product_versions
@@ -162,7 +165,7 @@ def set_fields_data(bot, file_fields)
 
         if file_fields[:vs_hotfix] 
           bot.execute_script("$('[id$=\"_txtFileVersionPrefix\"]').val('#{VERSION}')")
-          Thread.current.send :sleep, 1
+          Thread.current.send :sleep, 1000
           bot.execute_script("$('[id$=\"_txtFileVersionSuffix\"]').val('0')")
         end  
       end
@@ -242,8 +245,9 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
   end
 
   bot.click_element(bot.find("[value='Save']"))
-
+  
   bot.click_element(bot.find("[value='GO TO FILE LIST']"))
+
 end
 def upload_file(bot, upload_id, full_path)
     bot.execute_script("
