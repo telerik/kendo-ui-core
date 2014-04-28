@@ -489,4 +489,30 @@ asyncTest("clearing custom value does not re-enter the old value (SELECT)", 1, f
     });
 });
 
+test("ComboBox selects an item on ENTER after search ", 1, function() {
+    var input = combobox.input;
+
+    input.focus();
+    //open
+    input.trigger({
+        type: "keydown",
+        altKey: true
+    });
+
+    input.trigger({
+        type: "keydown",
+        altKey: true,
+        keyCode: keys.DOWN
+    });
+
+    combobox.bind("change", function() {
+        equal(combobox.select(), 0);
+    });
+
+    input.trigger({
+        type: "keydown",
+        keyCode: keys.ENTER
+    });
+});
+
 })();
