@@ -107,10 +107,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Data\dataviz.nav.json" />
-    <None Include="App_Data\mobile.nav.json" />
-    <None Include="App_Data\nav.json" />
-    <None Include="App_Data\web.nav.json" />
     <Content Include="bin\Kendo.dll" />
     <Content Include="bin\Kendo.pdb" />
     <Content Include="bin\System.Web.Helpers.dll" />
@@ -125,6 +121,7 @@
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="content\nav.json" />
     <Content Include="content\dataviz\js\kendo.examples.nav.js" />
     <Content Include="content\dataviz\map\js\chroma.min.js" />
     <Content Include="content\dataviz\overview\bar.png" />

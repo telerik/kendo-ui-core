@@ -54,7 +54,7 @@ namespace Kendo.Controllers
 
         protected void LoadNavigation()
         {
-            var navigationJson = IOFile.ReadAllText(Server.MapPath("~/App_Data/nav.json"));
+            var navigationJson = IOFile.ReadAllText(Server.MapPath("~/content/nav.json"));
 
             ViewBag.Navigation = Serializer.Deserialize<NavigationWidget[]>(navigationJson);
         }
