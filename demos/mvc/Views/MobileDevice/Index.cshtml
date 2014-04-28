@@ -23,36 +23,47 @@
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
 </head>
 <body>
-    <div data-role="view" data-title="Kendo UI Mobile" id="index">
-    @foreach (string category in ViewBag.Navigation.Keys)
-    {
-        if (category == "Sample Applications")
-        {
-            continue;
-        }
-        <ul data-role="listview" data-type="group" data-style="inset">
-        @foreach (NavigationWidget widget in ViewBag.Navigation[category])
-        {
-            <li> @widget.Text
-                <ul>
-                    @foreach (NavigationExample example in widget.Items)
-                    {
-                        <li><a href="@Url.Content("~/mobile/m/" + example.Url)">@example.Text</a></li>
-                    }
-                </ul>
-            </li>
-        }
+    <div data-role="view" data-title="Kendo UI" id="index" data-layout="">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
+                <span data-role="view-title"></span>
+                <a id="androidLightChanger" class="index-button" data-align="right" data-role="button" data-click="changeAndroidSkin" style="display: none">Light</a>
+            </div>
+        </header>
+
+        <ul data-role="listview" data-source="navDataSource" data-template="nav-template">
+            <script type="text/x-kendo-template" id="nav-template">
+                <a href="\\#section?name=#: name #">#: text #</a>
+            </script>
         </ul>
-    }
     </div>
 
-    <div data-id="examples" data-role="layout" data-show="triggerIndexButton">
+    <div data-role="view" data-title="Kendo UI" id="section" data-show="loadSection" data-layout="">
         <header data-role="header">
             <div data-role="navbar">
                 <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
                 <a class="nav-button" data-align="left" data-role="backbutton" href="#/" data-transition="slide:left reverse">Back</a>
                 <span data-role="view-title"></span>
-                <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+                <a id="androidLightChanger" class="index-button" data-align="right" data-role="button" data-click="changeAndroidSkin" style="display: none">Light</a>
+            </div>
+        </header>
+
+        <ul data-role="listview" data-source="detailNavDataSource" data-template="detail-nav-template" data-auto-bind="false">
+            <script type="text/x-kendo-template" id="detail-nav-template">
+                <a href="#: url #">#: text #</a>
+            </script>
+        </ul>
+    </div>
+
+
+    <div data-id="examples" data-role="layout" data-show="triggerIndexButton">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
+                <a class="nav-button" data-align="left" data-role="backbutton" data-transition="slide:left reverse">Back</a>
+                <span data-role="view-title"></span>
+                <a data-align="right" data-role="button" class="nav-button" href="#/" data-transition="slide:left reverse">Index</a>
                 <a id="androidLightChanger" class="index-button" data-align="right" data-role="button" data-click="changeAndroidSkin" style="display: none">Light</a>
             </div>
         </header>
@@ -62,10 +73,72 @@
         document.title = "@ViewBag.Title";
         var isAndroid = kendo.support.mobileOS.android;
 
+
+        var navDataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "@Url.Content("~/content/nav.json")",
+                    dataType: "json"
+                }
+            },
+            schema: {
+                model: {
+                    id: "name"
+                }
+            }
+        });
+
+        var detailNavDataSource = new kendo.data.DataSource({
+            schema: {
+                model: {
+                    id: "url"
+                }
+            }
+        });
+
+        function onlineExamples(items) {
+            return $.grep(items, function(item) {
+                if (!item.packages) {
+                    return true;
+                }
+
+                var invert = false, match = false;
+
+                for (var i = 0; i < item.packages.length; i ++) {
+                    var packageName = item.packages[i];
+                    if (packageName[0] === "!") {
+                        invert = true;
+                    }
+
+                    if (packageName === "online") {
+                        match = true;
+                    }
+                }
+
+                return (!invert && match) || (invert && !match);
+            });
+        }
+
+        function loadSection(e) {
+            navDataSource.fetch(function() {
+                var item = navDataSource.get(e.view.params["name"]);
+                detailNavDataSource.data(onlineExamples(item.items));
+                e.view.element.find("[data-role=navbar]").data("kendoMobileNavBar").title(item.text);
+            });
+        }
+
         function triggerIndexButton(e) {
-            var viewID = e.view.element.attr("id");
-            e.layout.header.find(".index-button").css({display: viewID != "index" ? "none" : ""});
-            e.layout.header.find(".nav-button").css({display: viewID != "index" ? "" : "none"});
+            navDataSource.fetch(function() {
+                var url = e.view.id,
+                    element = e.view.element;
+
+                var section = navDataSource.get(url.split("/")[0]);
+                detailNavDataSource.data(onlineExamples(section.items));
+
+                var item = detailNavDataSource.get(url);
+                element.find("[data-role=navbar]").data("kendoMobileNavBar").title(item.text);
+                element.find("[data-role=backbutton]").attr("href", "#section?name=" + section.name);
+            });
 
             if (!isAndroid) {
                 $("#androidLightChanger").hide();

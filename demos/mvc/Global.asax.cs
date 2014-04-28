@@ -76,7 +76,7 @@ namespace Kendo
 
             routes.MapRoute(
                 "MobileDeviceIndex",
-                "mobile/m/index.html",
+                "m/index.html",
                 new { controller = "MobileDevice", action = "Index" }
             );
 
@@ -94,7 +94,7 @@ namespace Kendo
 
             routes.MapRoute(
                 "MobileDeviceExample",
-                "mobile/m/{section}/{example}.html",
+                "m/{section}/{example}",
                 new { controller = "MobileDevice", action = "Example" }
             );
 
