@@ -21,9 +21,9 @@ var __meta__ = {
         init: function(options) {
             DataSource.fn.init.call(this, options);
 
-            this._columns = options.columns || [];
-            this._rows = options.rows || [];
-            this._measures = options.measures || [];
+            this._columns = this.options.columns || [];
+            this._rows = this.options.rows || [];
+            this._measures = this.options.measures || [];
         },
 
         columns: function() {
@@ -66,8 +66,20 @@ var __meta__ = {
         return dataSource instanceof PivotDataSource ? dataSource : new PivotDataSource(dataSource);
     };
 
+    var XmlaTransport = kendo.data.RemoteTransport.extend({
+        setup: function(options, type) {
+            $.extend(true, options.data, { connection: this.options.connection });
+
+            return kendo.data.RemoteTransport.fn.setup.call(this, options, type);
+        }
+    });
+
     extend(true, kendo.data, {
-       PivotDataSource: PivotDataSource
+       PivotDataSource: PivotDataSource,
+       XmlaTransport: XmlaTransport,
+       transports: {
+           xmla: XmlaTransport
+       }
     });
 
     var PivotGrid = Widget.extend({

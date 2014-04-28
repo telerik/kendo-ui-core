@@ -1,6 +1,7 @@
 (function() {
     var PivotGrid = kendo.ui.PivotGrid,
         PivotDataSource = kendo.data.PivotDataSource,
+        XmlaTransport = kendo.data.XmlaTransport,
         div;
 
     module("PivotDataSource initialziation", { });
@@ -64,6 +65,24 @@
             }
         });
         dataSource.read();
+    });
+
+    module("XmlaTransport initialziation", { });
+
+    test("connection settings are passed to the parameterMap", function() {
+        var transport = new kendo.data.XmlaTransport({
+            connection: {
+                catalog: "catalogName",
+                cube: "cubeName"
+            },
+            read: {},
+            parameterMap: function(options, type) {
+                equal(options.connection.catalog, "catalogName");
+                equal(options.connection.cube, "cubeName");
+            }
+        });
+
+        transport.read({success: $.noop, data: {}});
     });
 
 })();
