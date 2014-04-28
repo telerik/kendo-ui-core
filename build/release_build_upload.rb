@@ -85,14 +85,10 @@ class TelerikReleaseBot
         driver.quit
     end
     def version_created(product)
-       p "Product Name:"
-       p product
        return @versions_created.index(product) != nil 
     end
     def add_product(product)
        @versions_created.push(product)
-       p "Product name added: "
-       p @versions_created[@versions_created.length - 1]
     end
 end
 
@@ -117,7 +113,6 @@ def create_version(bot, options)
          bot.click_and_wait("Product Name", "product")
       end
 
-      p ">>creating version"
       bot.click_and_wait product_name, "administration"
       bot.click_and_wait "Manage Versions", "administration"
 
@@ -140,16 +135,11 @@ def fill_version_fields(bot, options)
        path_with_dashes = q_version.downcase.gsub " ", "-"
        product_in_url = nil
 
-       if product_name.index('Kendo') != nil
-         product_in_url = "kendo-ui"
-       elsif product_name.index('MVC') != nil
-         product_in_url = "aspnet-mvc"
-       elsif product_name.index('JSP') != nil
-         product_in_url = "jsp-ui"
-       elsif product_name.index('PHP') != nil
-         product_in_url = "php-ui"
-       end
-
+       product_in_url = "kendo-ui" if product_name.index('Kendo') != nil
+       product_in_url = "aspnet-mvc" if product_name.index('MVC') != nil
+       product_in_url = "jsp-ui" if product_name.index('JSP') != nil
+       product_in_url = "php-ui" if product_name.index('PHP') != nil
+         
        bot.execute_script("$find($telerik.$('[id$=\"_efVersionNotes_reFieldText\"]').attr('id')).set_html('<a href=\"http://www.telerik.com/support/whats-new/#{product_in_url}/release-history/#{path_with_dashes}\">#{q_version}</a>')") 
 
        bot.click_element(bot.find("[value='Save']"))
@@ -189,7 +179,6 @@ def set_fields_data(bot, file_fields)
   
 end
 def prepare_files(bot, options)
-  p ">>preparing files"
 
   release_config = options[:params]
   file_metadata = release_config[:file_metadata]
@@ -234,7 +223,6 @@ def prepare_files(bot, options)
 
 end
 def upload_file_and_save(bot, dirpath, filename, isMsi)
-  p "Setting filename..."
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
 
   element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdFileUpload')]")
@@ -243,7 +231,6 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
   upload_file(bot, upload_id, full_path)
 
   if isMsi
-    p "Setting xml filename..."
     
     filename = filename.sub "msi", "xml"
     full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
@@ -255,8 +242,6 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
   end
 
   bot.click_element(bot.find("[value='Save']"))
-
-  p "Saving..."
 
   bot.click_element(bot.find("[value='GO TO FILE LIST']"))
 end
