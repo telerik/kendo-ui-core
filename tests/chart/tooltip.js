@@ -140,12 +140,18 @@
         });
 
         test("can override border color", function() {
-            createTooltip({ border: { color: RED } });
+            createTooltip({ border: { color: GREEN } });
+            showTooltip();
+            equal(element.css("border-top-color").replace(/\s/g, ''), GREEN);
+        });
+
+        test("sets border color to current point color", function() {
             showTooltip();
             equal(element.css("border-top-color").replace(/\s/g, ''), RED);
         });
 
-        test("sets border color to current point color", function() {
+        test("sets border color to current point color even if background is defined", function() {
+            createTooltip({ background: GREEN });
             showTooltip();
             equal(element.css("border-top-color").replace(/\s/g, ''), RED);
         });
@@ -296,7 +302,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Tooltip / _updateStyle", {
+        module("Tooltip / Inverse background", {
             setup: function() {
                 createTooltip();
                 createPoint();
@@ -305,13 +311,15 @@
         });
 
         test("removes inverse css class if backgorund is bright", function() {
-            tooltip._updateStyle({ background: "#000" }, {});
+            tooltip.options.background = "#000";
+            showTooltip();
 
             ok(!tooltip.element.hasClass("k-chart-tooltip-inverse"));
         });
 
         test("sets inverse css class if backgorund is dark", function() {
-            tooltip._updateStyle({ background: "#fff" }, {});
+            tooltip.options.background = "#fff";
+            showTooltip();
 
             ok(tooltip.element.hasClass("k-chart-tooltip-inverse"));
         });

@@ -9510,16 +9510,33 @@ var __meta__ = {
             };
         },
 
-        setStyle: function(options) {
-            this.element
-                    .css({
-                        backgroundColor: options.background,
-                        borderColor: options.border.color || options.background,
-                        font: options.font,
-                        color: options.color,
-                        opacity: options.opacity,
-                        borderWidth: options.border.width
-                    });
+        setStyle: function(options, point) {
+            var background = options.background;
+            var border = options.border.color;
+
+            if (point) {
+                var pointColor = point.color || point.options.color;
+                background = valueOrDefault(background, pointColor);
+                border = valueOrDefault(border, pointColor);
+            }
+
+            if (!defined(options.color)) {
+                var brightness = new Color(background).percBrightness();
+
+                this.element.toggleClass(
+                    CSS_PREFIX + TOOLTIP_INVERSE,
+                    brightness > 180
+                );
+            }
+
+            this.element.css({
+                backgroundColor: background,
+                borderColor: border,
+                font: options.font,
+                color: options.color,
+                opacity: options.opacity,
+                borderWidth: options.border.width
+            });
         },
 
         show: function() {
@@ -9596,24 +9613,6 @@ var __meta__ = {
             }
 
             return output;
-        },
-
-        _updateStyle: function(options, point) {
-            if (!defined(options.background)) {
-                options.background = point.color || point.options.color;
-            }
-
-            if (!defined(options.color)) {
-                var tooltip = this,
-                    element = tooltip.element,
-                    brightnessValue = new Color(options.background).percBrightness();
-
-                if (brightnessValue > 180) {
-                    element.addClass(CSS_PREFIX + TOOLTIP_INVERSE);
-                } else {
-                    element.removeClass(CSS_PREFIX + TOOLTIP_INVERSE);
-                }
-            }
         }
     });
 
@@ -9630,9 +9629,7 @@ var __meta__ = {
             tooltip.anchor = tooltip._pointAnchor(point);
 
             if (tooltip.anchor) {
-                tooltip._updateStyle(options, point);
-                tooltip.setStyle(options);
-
+                tooltip.setStyle(options, point);
                 BaseTooltip.fn.show.call(tooltip, point);
             } else {
                 tooltip.hide();
@@ -9687,8 +9684,7 @@ var __meta__ = {
                 content = tooltip._content(points, category);
                 tooltip.element.html(content);
                 tooltip.anchor = tooltip._slotAnchor(coords, slot);
-                tooltip._updateStyle(options, points[0]);
-                tooltip.setStyle(options);
+                tooltip.setStyle(options, points[0]);
 
                 BaseTooltip.fn.show.call(tooltip);
             }
@@ -9895,7 +9891,6 @@ var __meta__ = {
                 },
                 options));
 
-            tooltip._updateStyle(tooltip.options, {});
             tooltip.setStyle(tooltip.options);
         },
 
