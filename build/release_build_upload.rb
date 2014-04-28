@@ -22,8 +22,8 @@ class TelerikReleaseBot
     def find(selector)
         driver.find_element(:css, selector)
         rescue
-        Selenium::WebDriver::Error::NoSuchElementError
         screenshot("No_such_element_" + selector)
+        return false
     end
 
     def go_to_product_versions
@@ -134,7 +134,7 @@ def fill_version_fields(bot, options)
        bot.execute_script("$('[id$=\"_cbBeta\"]').prop('checked', true)")
 
        product_name = options[:product]
-       q_version = options[:archive_path].split("/")[2]
+       q_version = options[:archive_path].split("/")[3]
        path_with_dashes = q_version.downcase.gsub " ", "-"
        product_in_url = nil
 
@@ -246,7 +246,9 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
 
   bot.click_element(bot.find("[value='Save']"))
   
-  bot.click_element(bot.find("[value='GO TO FILE LIST']"))
+  if bot.find("[value='GO TO FILE LIST']")
+      bot.click_element(bot.find("[value='GO TO FILE LIST']"))
+  end 
 
 end
 def upload_file(bot, upload_id, full_path)
