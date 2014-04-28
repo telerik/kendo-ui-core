@@ -863,7 +863,7 @@ var __meta__ = {
                 return true;
             }
 
-            if (!that._fetch && !hasItems) {
+            if (!that._bound && !that._fetch && !hasItems) {
                 if (that.options.cascadeFrom) {
                     return !hasItems;
                 }

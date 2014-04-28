@@ -561,7 +561,9 @@ test("dataItem() returns dataItem depending on passed index", function() {
 });
 
 test("value(value) calls dataSource.fetch if no data", function() {
-    var combobox = new ComboBox(input);
+    var combobox = new ComboBox(input, {
+        autoBind: false
+    });
 
     stub(combobox.dataSource, {
         fetch: combobox.dataSource.fetch
@@ -573,7 +575,9 @@ test("value(value) calls dataSource.fetch if no data", function() {
 });
 
 test("value method with 0 argument calls dataSource.fetch if no data", function() {
-    var combobox = new ComboBox(input);
+    var combobox = new ComboBox(input, {
+        autoBind: false
+    });
 
     stub(combobox.dataSource, {
         fetch: combobox.dataSource.fetch
