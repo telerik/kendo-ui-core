@@ -8,6 +8,7 @@
         <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.xml.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivotgrid.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
         <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
@@ -98,7 +99,7 @@
                 }
             });
 
-            var PivotDataSource = kendo.data.DataSource.extend({
+            var PivotDataSource = kendo.data.PivotDataSource.extend({
                 axes: function() {
                     return this._axes;
                 },
@@ -114,10 +115,9 @@
                     return cellData;
                 },
                 execute: function(descriptors) {
-                    this.read($.extend({ columns: [], rows: [], values: [], filter: {}}, descriptors, { type: "execute" }));
+                    this.read($.extend({ columns: [], rows: [], measures: [], filter: {}}, descriptors));
                 },
                 discover: function(descriptors) {
-                    this.read($.extend({}, descriptors, { type: "discover" }));
                 }
             });
 
@@ -164,7 +164,7 @@
             }
 
             var converters = {
-                execute: function(options) {
+                read: function(options) {
                     var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>';
 
                     command += "SELECT NON EMPTY {";
@@ -173,18 +173,18 @@
                     var rows = expandMembers(options.rows);
 
                     if (options.columns.length) {
-                        if (options.columns.length > 1 || options.values.length > 1) {
+                        if (options.columns.length > 1 || options.measures.length > 1) {
                             var tmp = columns;
-                            if (options.values.length > 1) {
-                                tmp.push("{" + options.values.join(",") + "}");
+                            if (options.measures.length > 1) {
+                                tmp.push("{" + options.measures.join(",") + "}");
                             }
 
                             command += crossJoin(tmp);
                         } else {
                             command += columns.join(",");
                         }
-                    } else if (options.values.length) {
-                        command += options.values.join(",");
+                    } else if (options.measures.length) {
+                        command += options.measures.join(",");
                     }
 
                     command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS";
@@ -193,13 +193,13 @@
                         command += ", NON EMPTY {" + rows.join(",") + "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
                     }
 
-                    command += " FROM [" + options.cube + "]";
+                    command += " FROM [" + options.connection.cube + "]";
 
-                    if (options.values.length == 1 && options.columns.length) {
-                        command += " WHERE (" + options.values.join(",") + ")";
+                    if (options.measures.length == 1 && options.columns.length) {
+                        command += " WHERE (" + options.measures.join(",") + ")";
                     }
 
-                    command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.catalog + '</Catalog></PropertyList></Properties></Execute></Body></Envelope>';
+                    command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog></PropertyList></Properties></Execute></Body></Envelope>';
 
                     return command;
                 },
@@ -207,49 +207,24 @@
                 }
             };
 
-            var XmlaTransport = kendo.data.RemoteTransport.extend({
-                options: {
-                    parameterMap: function(data) {
-                        return converters[data.type](data);
-                    }
-                },
-                setup: function(options, type) {
-                    options = options || {};
-
-                    var that = this,
-                        parameters,
-                        operation = that.options[type],
-                        data = $.isFunction(operation.data) ? operation.data(options.data) : operation.data;
-
-                    options = $.extend(true, {}, operation, options);
-                    parameters = $.extend(true, {}, data, options.data, that.options.connection);
-
-                    options.data = that.parameterMap(parameters, type);
-
-                    if ($.isFunction(options.url)) {
-                        options.url = options.url(parameters);
-                    }
-
-                    return options;
-                }
-            });
-
             $.extend(true, kendo.data, {
                 readers: {
                     xmla: XmlaDataReader
-                },
-                transports: {
-                    xmla: XmlaTransport
                 }
             });
 
-
             var dataSource = new PivotDataSource({
                 type: "xmla",
+                columns: ["[Date].[Calendar]"],
+                rows: ["[Product].[Product Name]"],
+                measures: ["[Measures].[Internet Order Lines Count]"],
                 transport: {
                     connection: {
                         catalog: "Adventure Works Internet Sales Model",
                         cube: "Adventure Works Internet Sales Model"
+                    },
+                    parameterMap: function(data, type) {
+                        return converters[type](data);
                     },
                     read: {
                         url: "http://krustev:8080/olap/msmdpump.dll",
@@ -270,10 +245,12 @@
             });
 
             //dataSource.execute({ columns: [ { name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]", expand: true } ], rows: [{ name: "[Product].[Product Name]", expand: true }], filter: {}, values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Discount Amount]"] });
-            dataSource.execute({ columns: ["[Date].[Calendar]"], rows: ["[Product].[Product Name]"], filter: {}, values: ["[Measures].[Internet Order Lines Count]"] });
+           // dataSource.execute({ columns: ["[Date].[Calendar]"], rows: ["[Product].[Product Name]"], filter: {}, values: ["[Measures].[Internet Order Lines Count]"] });
+
+            dataSource.read();
 
             $("button").click(function() {
-                    dataSource.execute({ columns: [{ name: "[Date].[Calendar]", expand: true}], rows: ["[Product].[Product Name]"], filter: {}, values: ["[Measures].[Internet Order Lines Count]"] });
+                dataSource.execute({ columns: [{ name: "[Date].[Calendar]", expand: true}], rows: ["[Product].[Product Name]"], measures: ["[Measures].[Internet Order Lines Count]"] });
             });
 
             function asArray(obj) {
