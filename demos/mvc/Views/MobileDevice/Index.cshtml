@@ -57,7 +57,7 @@
     </div>
 
 
-    <div data-id="examples" data-role="layout" data-show="triggerIndexButton">
+    <div data-id="examples" data-role="layout" data-show="triggerIndexButton" data-hide="removeView">
         <header data-role="header">
             <div data-role="navbar">
                 <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
@@ -117,6 +117,10 @@
 
                 return (!invert && match) || (invert && !match);
             });
+        }
+
+        function removeView(e) {
+            e.view.purge();
         }
 
         function loadSection(e) {
