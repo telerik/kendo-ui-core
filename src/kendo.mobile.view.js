@@ -161,6 +161,10 @@ var __meta__ = {
             var that = this;
             that.element.hide();
             that.trigger(HIDE, {view: that});
+
+            if (that.layout) {
+                that.layout.trigger(HIDE, { view : that, layout: that.layout });
+            }
         },
 
         _padIfNativeScrolling: function() {
@@ -324,8 +328,6 @@ var __meta__ = {
             if (view.footer === that.footer && that.footer.length) {
                 view.element.append(that.footer.detach()[0].cloneNode(true));
             }
-
-            that.trigger(HIDE, {layout: that, view: view});
         },
 
         attach: function(view) {
