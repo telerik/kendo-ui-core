@@ -1,0 +1,118 @@
+:options:
+    - :name: layers.type
+      :type: String
+      :description: The layer type. Supported types are "tile" and "shape".
+      :values:
+          - bing
+          - tile
+          - shape
+          - marker
+    - :name: markers.shape
+      :type: String
+      :enum_type: MapMarkersShape
+      :description: The marker shape. Supported shapes are "pin" and "pinTarget".
+      :values:
+          - pin
+          - pinTarget
+    - :name: markerDefaults.shape
+      :type: String
+      :enum_type: MapMarkersShape
+      :description: The default marker shape. Supported shapes are "pin" and "pinTarget".
+      :values:
+          - pin
+          - pinTarget
+    - :name: layers.shape
+      :type: String
+      :enum_type: MapMarkersShape
+      :description: The marker shape. Supported shapes are "pin" and "pinTarget".
+      :values:
+          - pin
+          - pinTarget
+    - :name: layerDefaults.marker.shape
+      :type: String
+      :enum_type: MapMarkersShape
+      :description: The marker shape. Supported shapes are "pin" and "pinTarget".
+      :values:
+          - pin
+          - pinTarget
+    - :name: markers.tooltip.position
+      :type: String
+      :description: The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+      :values:
+          - bottom
+          - top
+          - left
+          - right
+    - :name: markerDefaults.tooltip.position
+      :type: String
+      :description: The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+      :values:
+          - bottom
+          - top
+          - left
+          - right
+    - :name: controls.attribution.position
+      :type: String
+      :description: The position of the attribution control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :values:
+          - topLeft
+          - topRight
+          - bottomRight
+          - bottomLeft
+    - :name: controls.navigator.position
+      :type: String
+      :description: The position of the navigator control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :values:
+          - topLeft
+          - topRight
+          - bottomRight
+          - bottomLeft
+    - :name: controls.zoom.position
+      :type: String
+      :description: The position of the zoom control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :values:
+          - topLeft
+          - topRight
+          - bottomRight
+          - bottomLeft
+
+
+
+
+    - :name: center
+      :default: 'null'
+      :type: kendo.dataviz.map.Location
+
+    - :name: center.latitude
+      :type: Number
+      :description: ==TBA==
+      :default: 0
+
+    - :name: center.longitude
+      :type: Number
+      :description: ==TBA==
+      :default: 0
+
+    - :name: markers.marker
+      :type: kendo.dataviz.map.Marker
+
+    - :name: markers.location.latitude
+      :type: Number
+      :description: ==TBA==
+      :default: 0
+
+    - :name: markers.location.longitude
+      :type: Number
+      :description: ==TBA==
+      :default: 0
+
+    - :name: markers.location
+      :type: kendo.dataviz.map.Location
+
+    - :name: layers.subdomains
+      :type: stringArray
+      :default: null
+
+    - :name: layerDefaults.tile.subdomains
+      :type: stringArray
+      :default: null
