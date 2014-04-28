@@ -817,7 +817,7 @@ var __meta__ = {
                     e.preventDefault();
                 }
 
-                if (that._typing || (!that.popup.visible() && (!current || !current.hasClass("k-state-selected")))) {
+                if (!that.popup.visible() && (!current || !current.hasClass("k-state-selected"))) {
                     current = null;
                 }
 

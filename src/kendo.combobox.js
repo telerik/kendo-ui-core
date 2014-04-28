@@ -204,6 +204,7 @@ var __meta__ = {
                     .on("blur" + ns, function() {
                         wrapper.removeClass(FOCUSED);
                         clearTimeout(that._typing);
+                        that._typing = null;
 
                         if (that.options.text !== that.input.val()) {
                             that.text(that.text());
@@ -305,7 +306,7 @@ var __meta__ = {
                     that.toggle(!!length);
                 }
 
-                that._typing = undefined;
+                that._typing = null;
             }
 
             if (that._touchScroller) {
@@ -659,6 +660,7 @@ var __meta__ = {
             that._last = key;
 
             clearTimeout(that._typing);
+            that._typing = null;
 
             if (key != keys.TAB && !that._move(e)) {
                that._search();
