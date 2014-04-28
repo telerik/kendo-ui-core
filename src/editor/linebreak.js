@@ -49,7 +49,11 @@ var ParagraphCommand = Command.extend({
             var textNode = RangeUtils.textNodes(range)[0];
 
             if (textNode) {
-                range.selectNodeContents(textNode);
+                if (dom.is(textNode, 'img')) {
+                    range.setStartBefore(textNode);
+                } else {
+                    range.selectNodeContents(textNode);
+                }
             } else {
                 while (next.childNodes.length && !dom.is(next.firstChild, "br")) {
                     next = next.firstChild;

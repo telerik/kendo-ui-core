@@ -455,4 +455,18 @@ test("paragraph at end of link does not transfer it", function() {
     equal(editor.value(), '<p><a href="#bar">foo</a></p><p><a></a></p>');
 });
 
+test("paragraph before img does not move focus within img", function() {
+    editor.value('<p><img></p>');
+
+    range = editor.createRange();
+    range.setStart(editor.body.firstChild, 0);
+    range.collapse(true);
+
+    createParagraphCommand(range).exec();
+
+    range = editor.getRange();
+
+    equal(range.commonAncestorContainer.nodeName.toLowerCase(), "p");
+});
+
 }());
