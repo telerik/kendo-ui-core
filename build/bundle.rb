@@ -157,26 +157,27 @@ def bundle(options)
       versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, destination_folder_name)
       versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, "Production")
 
-      FileUtils.mkdir_p(versioned_bundle_destination_path)
+      desc "Copy #{name} as release build on telerik.com"
+      task "release_builds:copy:#{name}" do
+          FileUtils.mkdir_p(versioned_bundle_destination_path)
 
-        desc "Copy #{name} as release build on telerik.com"
+          release_build_file_copy(options[:release_build], name, versioned_bundle_destination_path, versioned_bundle_archive_path) 
 
-        task "release_builds:copy:#{name}" do
-            release_build_file_copy(options[:release_build], name, versioned_bundle_destination_path, versioned_bundle_archive_path) 
+      end
 
-        end
+      desc "Upload #{name} as release build on telerik.com"
+      task "release_builds:upload:#{name}" =>  "release_builds:copy:#{name}" do
+          FileUtils.mkdir_p(versioned_bundle_destination_path)
 
-        desc "Upload #{name} as release build on telerik.com"
+          upload_release_build \
+                  :title => name,
+                  :product => options[:product],
+                  :params => options[:release_build],
+                  :archive_path => versioned_bundle_destination_path  
+      end
 
-        task "release_builds:upload:#{name}" =>  "release_builds:copy:#{name}" do
-                    upload_release_build \
-                    :title => name,
-                    :product => options[:product],
-                    :params => options[:release_build],
-                    :archive_path => versioned_bundle_destination_path  
-        end
-        # add bundle to bundles:all
-        task "release_builds:bundles:all" => "release_builds:upload:#{name}"
+      # add bundle to bundles:all
+      task "release_builds:bundles:all" => "release_builds:upload:#{name}"
     end
     
 end
