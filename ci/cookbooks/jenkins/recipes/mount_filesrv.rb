@@ -12,8 +12,12 @@ mount "/mnt/Resources" do
     action [:mount, :enable]
 end
 
-link "/kendo-builds" do
-    to "/mnt/Resources/Controls/DISTRIBUTIONS/KendoUI/BUILDS"
+link "/kendo-dist" do
+    to "/mnt/Resources/Controls/DISTRIBUTIONS/KendoUI"
+end
+
+link "/installers-dist" do
+    to "/mnt/Resources/Controls/DISTRIBUTIONS/Guidance/CurrentWebInstaller"
 end
 
 directory "/mnt/kendo-iis"

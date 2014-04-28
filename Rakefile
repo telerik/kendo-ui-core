@@ -20,14 +20,17 @@ DIST_STYLES_ROOT = "dist/styles/"
 KENDO_CONFIG_FILE = File.join("download-builder", "config", "kendo-config.json")
 
 PLATFORM = RbConfig::CONFIG['host_os']
-RELEASE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI"
-WEB_INSTALLER_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\Guidance\\CurrentWebInstaller"
 
 if PLATFORM =~ /linux|darwin/
-    ARCHIVE_ROOT = "/kendo-builds"
+    RELEASE_ROOT = "/kendo-dist"
+    WEB_INSTALLER_ROOT = "/installers-dist"
 else
-    ARCHIVE_ROOT = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS\\KendoUI\\Builds"
+    distributions = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS"
+    RELEASE_ROOT = File.join(distributions, "KendoUI")
+    WEB_INSTALLER_ROOT = File.join(distributions, "Guidance", "CurrentWebInstaller")
 end
+
+ARCHIVE_ROOT = File.join(RELEASE_ROOT, "Builds")
 
 if ENV['DRY_RUN']
     ADMIN_URL = 'http://integrationadmin.telerik.com/'
