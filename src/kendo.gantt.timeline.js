@@ -282,10 +282,24 @@ var __meta__ = {
             var middle;
             var taskElement;
 
-            title = kendoTextElement(task.title);
-            inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
-            middle = kendoDomElement("div", { className: "k-gantt-summary-progress", style: { width: task.percentComplete + "%" } }, [inner]);
-            taskElement = kendoDomElement("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
+            if (task.summary) {
+                title = kendoTextElement(task.title);
+                inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
+                middle = kendoDomElement("div", { className: "k-gantt-summary-progress", style: { width: task.percentComplete + "%" } }, [inner]);
+                taskElement = kendoDomElement("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
+            } else {
+                title = kendoTextElement(task.title);
+                var template = kendoDomElement("div", null, [kendoDomElement("div", { className: "k-event-template" }, [title])]);
+                var actions = kendoDomElement("span", { className: "k-event-actions" }, [
+                    kendoDomElement("a", { href: "#", className: "k-link k-event-delete" }, [
+                        kendoDomElement("span", { className: "k-icon k-si-close" }, [
+                        ])
+                    ])
+                ]);
+                var resizeW = kendoDomElement("span", { className: "k-resize-handle k-resize-w" });
+                var resizeE = kendoDomElement("span", { className: "k-resize-handle k-resize-e" });
+                taskElement = kendoDomElement("div", { "data-uid": task.uid, className: "k-event", style: { left: position.left + "px", width: position.width + "px" } }, [template, actions, resizeW, resizeE]);
+            }
 
             return taskElement;
         },
@@ -889,6 +903,8 @@ var __meta__ = {
             this._views();
 
             this._draggable();
+
+            this._resizable();
         },
         
         options: {
@@ -910,6 +926,10 @@ var __meta__ = {
 
             if (this._moveDraggable) {
                 this._moveDraggable.destroy();
+            }
+
+            if (this._resizeDraggable) {
+                this._resizeDraggable.destroy();
             }
 
             this._headerTree = null;
@@ -1041,25 +1061,38 @@ var __meta__ = {
         _draggable: function() {
             var that = this;
             var element;
+            var dragClue;
             var originalStart;
             var currentStart;
 
+            var cleanUp = function() {
+                if (dragClue) {
+                    dragClue.remove();
+                }
+
+                dragClue = null;
+            };
+
             this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
-                filter: ".k-gantt-summary",
+                filter: ".k-gantt-summary, .k-event",
                 holdToDrag: false
             });
 
             this._moveDraggable
                 .bind("dragstart", function(e) {
-                    element = e.currentTarget.clone();
+                    element = e.currentTarget;
 
-                    e.currentTarget[0].style.opacity = 0.5;
-                    element[0].style.cursor = "move";
+                    dragClue = element
+                        .clone()
+                        .css("cursor", "move");
 
-                    e.currentTarget.parent().append(element);
+                    element
+                        .css("opacity", 0.5)
+                        .parent()
+                        .append(dragClue);
 
-                    originalStart = parseInt(e.currentTarget[0].style.left, 10);
+                    originalStart = parseInt(element.css("left"), 10);
                 })
                 .bind("drag", function(e) {
                     currentStart = originalStart + e.x.initialDelta;
@@ -1068,19 +1101,99 @@ var __meta__ = {
                         currentStart = that.view()._slotByPosition(currentStart).offsetLeft;
                     }
 
-                    element[0].style.left = currentStart + "px";
+                    dragClue.css("left", currentStart);
                 })
                 .bind("dragend", function(e) {
                     var start = that.view()._timeByPosition(currentStart);
 
-                    that.trigger("move", { uid: e.currentTarget.attr("data-uid"), start: start });
+                    that.trigger("move", { uid: element.attr("data-uid"), start: start });
 
-                    element.remove();
-                    element = null;
+                    cleanUp();
                 })
                 .bind("dragcancel", function(e) {
-                    element.remove();
-                    element = null;
+                    cleanUp();
+                });
+        },
+
+        _resizable: function() {
+            var that = this;
+            var element;
+            var resizeClue;
+            var originalStart;
+            var originalWidth;
+            var currentStart;
+            var currentWidth;
+            var delta;
+            var resizeStart;
+            var snap = this.options.snap;
+
+            var cleanUp = function() {
+                if (resizeClue) {
+                    resizeClue.remove();
+                }
+
+                resizeClue = null;
+                element = null;
+            };
+
+            this._resizeDraggable = new kendo.ui.Draggable(this.wrapper, {
+                distance: 0,
+                filter: ".k-resize-handle",
+                holdToDrag: false
+            });
+
+            this._resizeDraggable
+                .bind("dragstart", function(e) {
+                    resizeStart = e.currentTarget.hasClass("k-resize-w");
+
+                    element = e.currentTarget.closest(".k-event");
+
+                    originalStart = parseInt(element.css("left"), 10);
+                    originalWidth = parseInt(element.css("width"), 10);
+
+                    resizeClue = $("<div class='resizeClue'>");
+
+                    element.closest(".k-gantt-timeline-content").append(resizeClue);
+                })
+                .bind("drag", function(e) {
+                    var targetSlot;
+
+                    delta = e.x.initialDelta;
+
+                    if (resizeStart) {
+                        currentStart = originalStart + delta;
+
+                        if (snap) {
+                            currentStart = that.view()._slotByPosition(currentStart).offsetLeft;
+                        }
+
+                        currentWidth = originalWidth + originalStart - currentStart;
+                    } else {
+                        currentStart = originalStart;
+                        currentWidth = originalWidth + delta;
+
+                        if (snap) {
+                            targetSlot = that.view()._slotByPosition(currentStart + currentWidth);
+
+                            currentWidth = targetSlot.offsetLeft + targetSlot.offsetWidth - currentStart;
+                        }
+                    }
+
+                    resizeClue
+                        .css({
+                            "left": currentStart,
+                            "width": currentWidth
+                        });
+                })
+                .bind("dragend", function(e) {
+                    var date = that.view()._timeByPosition(currentStart + (resizeStart ? 0 : currentWidth));
+
+                    that.trigger("resize", { uid: element.attr("data-uid"), resizeStart: resizeStart, date: date });
+
+                    cleanUp();
+                })
+                .bind("dragcancel", function(e) {
+                    cleanUp();
                 });
         }
 

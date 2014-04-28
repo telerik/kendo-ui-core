@@ -650,6 +650,17 @@ var __meta__ = {
                         start: e.start,
                         end: newEnd
                     });
+                }).bind("resize", function(e) {
+                    var task = that.dataSource.getByUid(e.uid);
+                    var updateInfo = {};
+
+                    if (e.resizeStart) {
+                        updateInfo.start = e.date;
+                    } else {
+                        updateInfo.end = e.date;
+                    }
+
+                    that.dataSource.update(task, updateInfo);
                 });
         },
 
