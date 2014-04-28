@@ -688,7 +688,18 @@ var __meta__ = {
             var dependencies = this.options.dependencies || {};
             var dataSource = isArray(dependencies) ? { data: dependencies } : dependencies;
 
-            this.dependencies = kendo.data.GanttDependencyDataSource.create(dataSource);
+            if (this.dependencies && this._dependencyRefreshHandler) {
+                this.dependencies
+                    .unbind("change", this._dependencyRefreshHandler)
+                    .unbind("error", this._dependencyErrorHandler);
+            } else {
+                this._dependencyRefreshHandler = proxy(this.refreshDependencies, this);
+                this._dependencyErrorHandler = proxy(this._error, this);
+            }
+
+            this.dependencies = kendo.data.GanttDependencyDataSource.create(dataSource)
+                .bind("change", this._dependencyRefreshHandler)
+                .bind("error", this._dependencyErrorHandler);
         },
 
         setDataSource: function(dataSource) {
@@ -718,6 +729,10 @@ var __meta__ = {
             this.timeline._renderDependencies(this.dependencies.view());
 
             this.trigger("dataBound");
+        },
+
+        refreshDependencies: function(e) {
+            this.timeline._renderDependencies(this.dependencies.view());
         },
 
         _error: function() {
