@@ -1,0 +1,354 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>pivot columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.xml.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+    </head>
+    <body>
+        <div class="k-grid k-widget" style="overflow: scroll;height: 1000px">
+            <table id="container"></table>
+        </div>
+
+        <script>
+            function translateAxis(axis) {
+                var result = { tuples: [] };
+                var tuples = asArray(kendo.getter("Tuples.Tuple", true)(axis));
+                var captionGetter = kendo.getter("Caption['#text']");
+                var unameGetter = kendo.getter("UName['#text']");
+                var childrenGetter = kendo.getter("CHILDREN_CARDINALITY['#text']", true);
+                var hierarchyGetter = kendo.getter("['Hierarchy']");
+                var parentNameGetter = kendo.getter("PARENT_UNIQUE_NAME['#text']", true);
+
+                for (var idx = 0; idx < tuples.length; idx++) {
+                    var members = [];
+                    var member = asArray(tuples[idx].Member);
+                    for (var memberIdx = 0; memberIdx < member.length; memberIdx++) {
+                        members.push({
+                            caption: captionGetter(member[memberIdx]),
+                            name: unameGetter(member[memberIdx]),
+                            hasChildren: parseInt(childrenGetter(member[memberIdx]), 10) > 0,
+                            parentName: parentNameGetter(member[memberIdx]),
+                            hierarchy: hierarchyGetter(member[memberIdx])
+                        });
+                    }
+
+                    result.tuples.push({ members: members });
+                }
+                return result;
+            }
+
+            var XmlaDataReader = kendo.data.XmlDataReader.extend({
+                parse: function(xml) {
+                    var result = kendo.data.XmlDataReader.fn.parse(xml);
+                    return kendo.getter("['soap:Envelope']['soap:Body']", true)(result);
+                },
+                data: function(root) {
+                    root = kendo.getter("ExecuteResponse.return.root", true)(root);
+
+                    var cells = kendo.getter("CellData.Cell", true)(root);
+                    var result = [];
+                    var ordinalGetter = kendo.getter("['@CellOrdinal']");
+                    var valueGetter = kendo.getter("Value['#text']");
+                    var fmtValueGetter = kendo.getter("FmtValue['#text']");
+
+                    for (var idx = 0; idx < cells.length; idx++) {
+                        result[parseInt(ordinalGetter(cells[idx]),10)] = {
+                            value: valueGetter(cells[idx]),
+                            fmtValue: fmtValueGetter(cells[idx])
+                        };
+                    }
+
+                    return result;
+                },
+                errors: function(root) {
+                    var fault = kendo.getter("['soap:Fault']", true)(root);
+                    if (fault) {
+                        return [kendo.getter("faultstring['#text']", true)(fault)];
+                    }
+                    return null;
+                },
+                axes: function(root) {
+                    root = kendo.getter("ExecuteResponse.return.root", true)(root);
+
+                    var axes = kendo.getter("Axes.Axis")(root);
+                    if (axes.length > 2) {
+                        return {
+                            columns: translateAxis(axes[0]),
+                            rows: translateAxis(axes[1])
+                        };
+                    } else {
+                        return {
+                            columns: translateAxis(axes[0]),
+                            rows: { tuples: [ ] }
+                        }
+                    }
+                },
+                info: function(root) {
+                    root = kendo.getter("ExecuteResponse.return.root", true)(root);
+                    return kendo.getter("OlapInfo")(root);
+                }
+            });
+
+            var PivotDataSource = kendo.data.DataSource.extend({
+                axes: function() {
+                    return this._axes;
+                },
+                _readData: function(data) {
+                    var originalData = this._data;
+                    var cellData = this.reader.data(data);
+                    var axes = this.reader.axes(data);
+
+                    this._axes = axes;
+
+                    //merge data with this._data;
+                    return cellData;
+                },
+                execute: function(descriptors) {
+                    this.read($.extend({ columns: [], rows: [], values: [], filter: {}}, descriptors, { type: "execute" }));
+                },
+                discover: function(descriptors) {
+                    this.read($.extend({}, descriptors, { type: "discover" }));
+                }
+            });
+
+            function crossJoin(names) {
+                var result = "CROSSJOIN({";
+                var r;
+                if (names.length > 2) {
+                    r = names.pop();
+                    result += crossJoin(names);
+                } else {
+                    result += names.shift();
+                    r = names.pop();
+                }
+                result += "},{";
+                result += r;
+                result += "})";
+                return result;
+            }
+
+           /* {
+                columns: [{ field: "[MemberPath]", expand: true}, { field: "[MemberPath2]", expand: false }],
+                values: ["Measure1"], // on which axes?
+                rows: [{ field: "[MemberPath]", expand: true}, { field: "[MemberPath2]", expand: false }],
+                filter: {}
+            }*/
+
+            function expandMembers(members) {
+                var result = [];
+                var name;
+
+                for (var idx = 0; idx < members.length; idx++) {
+                    if (typeof members[idx] == "string") {
+                        result.push(members[idx])
+                    } else {
+                        if (members[idx].expand) {
+                            result.push(members[idx].name + ".[ALL].Children");
+                        } else {
+                            result.push(members[idx].name);
+                        }
+                    }
+                }
+
+                return result;
+            }
+
+            var converters = {
+                execute: function(options) {
+                    var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>';
+
+                    command += "SELECT NON EMPTY {";
+
+                    var columns = expandMembers(options.columns);
+                    var rows = expandMembers(options.rows);
+
+                    if (options.columns.length) {
+                        if (options.columns.length > 1 || options.values.length > 1) {
+                            var tmp = columns;
+                            if (options.values.length > 1) {
+                                tmp.push("{" + options.values.join(",") + "}");
+                            }
+
+                            command += crossJoin(tmp);
+                        } else {
+                            command += columns.join(",");
+                        }
+                    } else if (options.values.length) {
+                        command += options.values.join(",");
+                    }
+
+                    command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS";
+
+                    if (rows.length) {
+                        command += ", NON EMPTY {" + rows.join(",") + "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
+                    }
+
+                    command += " FROM [" + options.cube + "]";
+
+                    if (options.values.length == 1 && options.columns.length) {
+                        command += " WHERE (" + options.values.join(",") + ")";
+                    }
+
+                    command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.catalog + '</Catalog></PropertyList></Properties></Execute></Body></Envelope>';
+
+                    return command;
+                },
+                discover: function(options) {
+                }
+            };
+
+            var XmlaTransport = kendo.data.RemoteTransport.extend({
+                options: {
+                    parameterMap: function(data) {
+                        return converters[data.type](data);
+                    }
+                },
+                setup: function(options, type) {
+                    options = options || {};
+
+                    var that = this,
+                        parameters,
+                        operation = that.options[type],
+                        data = $.isFunction(operation.data) ? operation.data(options.data) : operation.data;
+
+                    options = $.extend(true, {}, operation, options);
+                    parameters = $.extend(true, {}, data, options.data, that.options.connection);
+
+                    options.data = that.parameterMap(parameters, type);
+
+                    if ($.isFunction(options.url)) {
+                        options.url = options.url(parameters);
+                    }
+
+                    return options;
+                }
+            });
+
+            $.extend(true, kendo.data, {
+                readers: {
+                    xmla: XmlaDataReader
+                },
+                transports: {
+                    xmla: XmlaTransport
+                }
+            });
+
+
+            var dataSource = new PivotDataSource({
+                type: "xmla",
+                transport: {
+                    connection: {
+                        catalog: "Adventure Works Internet Sales Model",
+                        cube: "Adventure Works Internet Sales Model"
+                    },
+                    read: {
+                        url: "http://krustev:8080/olap/msmdpump.dll",
+                        dataType: "text",
+                        contentType: "text/xml",
+                        type: "POST"
+                    }
+                },
+                schema: {
+                    type: "xmla"
+                },
+                change: function() {
+                   renderPivot(this.data());
+               },
+               error: function(e) {
+                   alert("error: " + e.errors[0]);
+               }
+            });
+
+            dataSource.execute({ columns: [ { name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]", expand: true } ], rows: [{ name: "[Product].[Product Name]", expand: true }], filter: {}, values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Discount Amount]"] });
+
+            function asArray(obj) {
+
+                if (!$.isArray(obj)) {
+                    return [obj]
+                }
+
+                return obj;
+            }
+
+            function renderHeader(nodeName, tuples) {
+                var html = "";
+
+                for (var j = 0; j < tuples[0].members.length;j++) {
+                    html += "<tr>";
+                    html += "<th></th>";
+
+                    for (var idx = 0; idx < tuples.length; idx++) {
+                        var members = tuples[idx].members;
+
+                        html += kendo.format("<{0} class='k-header'>{1}</{0}>", nodeName, members[j].caption);
+                    }
+                    html += "</tr>";
+                }
+
+                return html;
+            }
+
+            function renderRowHeader(nodeName, axis) {
+                var html = "";
+
+                for (var idx = 0; idx < axis.length; idx++) {
+                    var members = axis[idx].members;
+
+                    for (var j = 0; j < members.length; j++) {
+                        html += kendo.format("<{0} class='k-header'>{1}</{0}>", nodeName, members[j].caption);
+                    }
+                }
+
+                return html;
+            }
+
+            function renderPivot(data) {
+                var html = '<thead class="k-grid-header">';
+
+                var columns = dataSource.axes().columns.tuples;
+                var rows = dataSource.axes().rows.tuples;
+
+
+                if (!rows.length) {
+                    rows.push({ members: [] });
+                }
+
+                html += renderHeader("th", columns);
+
+                html += "</thead>";
+
+                html +="<tbody>";
+
+                var cellData = data;
+
+                for (var axisIndex = 0; axisIndex < rows.length; axisIndex++) {
+                    html += "<tr>";
+
+                    html += renderRowHeader("td", [rows[axisIndex]]);
+
+                    var startIndex = axisIndex * columns.length;
+
+                    for (var j = 0; j < columns.length; j++) {
+                        html += "<td>" + (cellData[startIndex + j] || {}).fmtValue + "</td>";
+                    }
+
+                    html += "</tr>";
+                }
+
+                html +="</tbody>";
+
+
+                $("#container").append($(html));
+            }
+        </script>
+    </body>
+</html>
+
