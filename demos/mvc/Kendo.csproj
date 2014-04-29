@@ -282,6 +282,7 @@
     <Content Include="content\shared\js\dropdown.js" />
     <Content Include="content\shared\js\employees.js" />
     <Content Include="content\shared\js\examples.js" />
+    <Content Include="content\shared\js\mobile-examples.js" />
     <Content Include="content\shared\js\less.js" />
     <Content Include="content\shared\js\orders.js" />
     <Content Include="content\shared\js\people.js" />

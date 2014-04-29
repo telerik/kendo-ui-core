@@ -20,6 +20,18 @@
         <script src="@Url.Script(scriptName)"></script>
     }
 
+    <script>
+        document.title = "@ViewBag.Title";
+        var NAV_JSON_URL = "@Url.Content("~/content/nav.json")";
+    </script>
+
+    <style>
+        .section {
+            color: gray;
+        }
+    </style>
+
+    <script src="@Url.Content("~/content/shared/js/mobile-examples.js")"></script>
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
 </head>
 <body>
@@ -28,7 +40,7 @@
             <div data-role="navbar">
                 <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
                 <span data-role="view-title"></span>
-                <a id="androidLightChanger" class="index-button" data-align="right" data-role="button" data-click="changeAndroidSkin" style="display: none">Light</a>
+                <a data-align="right" data-role="button" href="#search" data-icon="search" data-transition="none"></a>
             </div>
         </header>
 
@@ -39,7 +51,23 @@
         </ul>
     </div>
 
-    <div data-role="view" data-title="Kendo UI" id="section" data-show="loadSection" data-layout="">
+    <div data-role="view" id="search" data-layout="" data-after-show="focusSearch" data-init="initSearch">
+        <header data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title">
+                    <input type="search" id="demos-search" style="width: 80%; font-size: 1.2em" />
+                </span>
+            </div>
+        </header>
+
+       <ul data-role="listview" data-source="searchDataSource" data-template="search-template" data-binding="checkSearch">
+            <script type="text/x-kendo-template" id="search-template">
+                <a href="#: url #"><span class="section">#: section # &gt;</span> #: text #</a>
+            </script>
+        </ul>
+    </div>
+
+    <div data-role="view" id="section" data-show="loadSection" data-layout="">
         <header data-role="header">
             <div data-role="navbar">
                 <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
@@ -69,116 +97,6 @@
         </header>
     </div>
 
-    <script>
-        document.title = "@ViewBag.Title";
-        var isAndroid = kendo.support.mobileOS.android;
-
-
-        var navDataSource = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: "@Url.Content("~/content/nav.json")",
-                    dataType: "json"
-                }
-            },
-            schema: {
-                model: {
-                    id: "name"
-                }
-            }
-        });
-
-        var detailNavDataSource = new kendo.data.DataSource({
-            schema: {
-                model: {
-                    id: "url"
-                }
-            }
-        });
-
-        function onlineExamples(items) {
-            return $.grep(items, function(item) {
-                if (!item.packages) {
-                    return true;
-                }
-
-                var invert = false, match = false;
-
-                for (var i = 0; i < item.packages.length; i ++) {
-                    var packageName = item.packages[i];
-                    if (packageName[0] === "!") {
-                        invert = true;
-                    }
-
-                    if (packageName === "online") {
-                        match = true;
-                    }
-                }
-
-                return (!invert && match) || (invert && !match);
-            });
-        }
-
-        function removeView(e) {
-            e.view.purge();
-        }
-
-        function loadSection(e) {
-            navDataSource.fetch(function() {
-                var item = navDataSource.get(e.view.params["name"]);
-                detailNavDataSource.data(onlineExamples(item.items));
-                e.view.element.find("[data-role=navbar]").data("kendoMobileNavBar").title(item.text);
-            });
-        }
-
-        function triggerIndexButton(e) {
-            navDataSource.fetch(function() {
-                var url = e.view.id,
-                    element = e.view.element;
-
-                var section = navDataSource.get(url.split("/")[0]);
-                detailNavDataSource.data(onlineExamples(section.items));
-
-                var item = detailNavDataSource.get(url);
-                element.find("[data-role=navbar]").data("kendoMobileNavBar").title(item.text);
-                element.find("[data-role=backbutton]").attr("href", "#section?name=" + section.name);
-            });
-
-            if (!isAndroid) {
-                $("#androidLightChanger").hide();
-            }
-        }
-
-        function changeSkin(e) {
-            var nextSkin = e.sender.element.text() == "Flat" ? "flat" : "";
-
-            window.app.skin(nextSkin.toLowerCase());
-            e.sender.element.find(".km-text").text(nextSkin ? "Native" : "Flat");
-
-            if (isAndroid) {
-                $("#androidLightChanger")[nextSkin ? "hide" : "show"]();
-            }
-        }
-
-        function changeAndroidSkin(e) {
-            var nextSkin = e.sender.element.text() == "Light" ? "android-light" : "android-dark";
-
-            window.app.skin(nextSkin.toLowerCase());
-            e.sender.element.find(".km-text").text(nextSkin == "android-light" ? "Dark" : "Light");
-        }
-
-        window.app = new kendo.mobile.Application($(document.body), {
-            layout: "examples",
-            transition: "slide",
-            icon: {
-                "" : '@Url.Content("~/content/mobile/AppIcon72x72.png")',
-                "72x72" : '@Url.Content("~/content/mobile/AppIcon72x72.png")',
-                "76x76" : '@Url.Content("~/content/mobile/AppIcon76x76.png")',
-                "114x114" : '@Url.Content("~/content/mobile/AppIcon72x72@2x.png")',
-                "120x120" : '@Url.Content("~/content/mobile/AppIcon76x76@2x.png")',
-                "152x152" : '@Url.Content("~/content/mobile/AppIcon76x76@2x.png")'
-            }
-        });
-    </script>
+    <script></script>
 </body>
 </html>
