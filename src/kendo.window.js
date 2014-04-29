@@ -238,12 +238,12 @@ var __meta__ = {
             kendo.notify(that);
         },
 
-        _buttonEnter: function() {
-            $(this).addClass(KHOVERSTATE);
+        _buttonEnter: function(e) {
+            $(e.currentTarget).addClass(KHOVERSTATE);
         },
 
-        _buttonLeave: function() {
-            $(this).removeClass(KHOVERSTATE);
+        _buttonLeave: function(e) {
+            $(e.currentTarget).removeClass(KHOVERSTATE);
         },
 
         _focus: function() {
