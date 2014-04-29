@@ -100,6 +100,17 @@
     text-decoration: none;
 }
 
+.k-button[disabled],
+.k-button.k-state-disabled,
+.k-state-disabled .k-button,
+.k-state-disabled .k-button:hover,
+.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:active,
+.k-button.k-state-disabled:active
+{
+    cursor: default;
+}
+
 .k-ie7 .k-button { line-height: normal; }
 
 a.k-button
