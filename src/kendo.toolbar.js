@@ -29,6 +29,9 @@ var __meta__ = {
         K_SPLIT_BUTTON = "k-split-button",
         K_SPLIT_BUTTON_DROPDOWN = "k-split-button-dropdown",
         K_SPLIT_BUTTON_ARROW = "k-split-button-arrow",
+        K_OVERFLOW_ANCHOR = "k-overflow-anchor",
+        K_OVERFLOW_CONTAINER = "k-overflow-container",
+        COMMAND_OVERFLOW_ELEMENT = '<span class="' + K_OVERFLOW_ANCHOR + '"><ul class="' + K_OVERFLOW_CONTAINER + '"></ul><span class="k-icon k-i-collapse"></span></span>',
 
         CLICK = "click",
         TOGGLE = "toggle",
@@ -182,7 +185,8 @@ var __meta__ = {
 
         var ToolBar = Widget.extend({
             init: function(element, options) {
-                var that = this;
+                var that = this,
+                    commandOverflow;
 
                 Widget.fn.init.call(that, element, options);
 
@@ -195,8 +199,18 @@ var __meta__ = {
                     that._renderItems(options.items);
                 }
 
+                if(options.resizable) {
+                    commandOverflow = $(COMMAND_OVERFLOW_ELEMENT);
+                    element.append(commandOverflow);
+
+                    that.commandOverflow = commandOverflow.find("." + K_OVERFLOW_CONTAINER).kendoPopup({
+                        anchor: commandOverflow
+                    }).data("kendoPopup");
+                }
+
                 element.on(CLICK, ".k-button:not(." + K_SPLIT_BUTTON_ARROW + ")", proxy(that._buttonClick, that));
                 element.on(CLICK, "." + K_SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
+                element.on(CLICK, "." + K_OVERFLOW_ANCHOR, proxy(that._toggleOverflowContainer, that));
 
                 kendo.notify(that);
             },
@@ -209,7 +223,8 @@ var __meta__ = {
             ],
 
             options: {
-                name: "ToolBar"
+                name: "ToolBar",
+                resizable: true
                 //option list
             },
 
@@ -217,6 +232,10 @@ var __meta__ = {
                 this.element.find("." + K_SPLIT_BUTTON).each(function(idx, element) {
                     $(element).data("kendoPopup").destroy();
                 });
+
+                if(this.commandOverflow) {
+                    this.commandOverflow.destroy();
+                }
 
                 Widget.fn.destroy.call(this);
             },
@@ -294,6 +313,15 @@ var __meta__ = {
                 if(!isDefaultPrevented) {
                     popup.toggle();
                 }
+            },
+
+            _toggleOverflowContainer: function() {
+                var popup = this.commandOverflow;
+                popup.toggle();
+            },
+
+            _moveToPopup: function(item) {
+                //todo
             }
 
         });

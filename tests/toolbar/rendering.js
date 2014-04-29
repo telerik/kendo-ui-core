@@ -448,4 +448,33 @@
         ok(container.children(".k-toolbar-separator").length, "Separator element is rendered");
     });
 
+    /* COMMAND OVERFLOW */
+
+    test("renders overflow anchor", 1, function() {
+        container.kendoToolBar();
+
+        ok(container.find(".k-overflow-anchor").length, "Anchor element is rendered");
+    });
+
+    test("does not renders overflow anchor if resizable is set to false", 1, function() {
+        container.kendoToolBar({ resizable: false });
+
+        ok(!container.find(".k-overflow-anchor").length);
+    });
+
+    test("initializes command overflow popup", 2, function() {
+        var toolbar = container.kendoToolBar().data("kendoToolBar");
+
+        ok(toolbar.commandOverflow instanceof kendo.ui.Popup);
+        ok(toolbar.commandOverflow.element.length);
+    });
+
+    test("does not initiaze popup if resizable is set to false", 1, function() {
+        var toolbar = container.kendoToolBar({
+            resizable: false
+        }).data("kendoToolBar");
+
+        ok(!toolbar.commandOverflow);
+    });
+
 })();
