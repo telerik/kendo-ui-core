@@ -152,6 +152,14 @@
         map.trigger("reset");
     });
 
+    test("re-draws all shapes on incremental change", function() {
+        layer._load = function(data) {
+            equal(data.length, 2);
+        };
+
+        layer.dataSource.add({});
+    });
+
     // ------------------------------------------------------------
     module("Shape Layer / API", {
         setup: function() {
