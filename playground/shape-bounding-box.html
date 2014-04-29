@@ -79,7 +79,8 @@
                 strokeOptions = {stroke: {color: "black", width: 2}},
                 //circleBoundingPath = rectPath(boundingRect, strokeOptions),
                 curve = new Path(strokeOptions),
-                group = new drawing.Group();
+                group = new drawing.Group(),
+                mainGroup;
 
             var arcGeometry = new geometry.Arc(Point.create(300, 300), {
                 startAngle: 120,
@@ -126,7 +127,7 @@
                 surface.draw(group);
             }
             
-            parentTransformationsTest();
+          //  parentTransformationsTest();
             function parentTransformationsTest() {
                 var group = new Group({transform: transform().scale(2,1).matrix()}),
                     mainGroup = new Group({transform: transform().scale(1,2).matrix()}),
@@ -134,11 +135,11 @@
                 //path.moveTo(0,0);
                 mainGroup.append(group);
                 group.append(path);
-                debugger;
+               // debugger;
                 group.bBox();
             }
             
-            //multipathTransformTest();
+           // multipathTransformTest();
             function multipathTransformTest() {
                 var curveTransform = new MultiPath($.extend({transform: transform().translate(100,400).scale(1.5,1).rotate(-90, 100, 100).matrix()}, strokeOptions));
                 curveTransform.moveTo(100, 100);
@@ -171,7 +172,7 @@
                     //});
                 group = new drawing.Group({});
                 group.append(circle);
-                var mainGroup = new drawing.Group();
+                mainGroup = new drawing.Group();
                 mainGroup.append(group, rectPath(group.bBox(), strokeOptions), original);
                 
                 surface.clear();
@@ -198,7 +199,7 @@
                 group.append(curveTransform, rectPath(curveTransform.bBox(), strokeOptions));
                 surface.clear();
                
-                var mainGroup = new drawing.Group();
+                mainGroup = new drawing.Group();
                 mainGroup.append(group, original);
                 surface.draw(mainGroup);
             }

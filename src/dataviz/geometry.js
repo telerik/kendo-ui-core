@@ -511,10 +511,22 @@
     var Transformation = Class.extend({
         init: function(matrix) {
             this._matrix = matrix || Matrix.unit();
+            this.observer = null;
+        },
+
+        _optionsChange: function() {
+            if (this.observer) {
+                this.observer.optionsChange({
+                    field: "transform",
+                    value: this
+                });
+            }
         },
 
         translate: function(x, y) {
             this._matrix = this._matrix.times(Matrix.translate(x, y));
+
+            this._optionsChange();
             return this;
         },
 
@@ -523,11 +535,15 @@
                y = x;
             }
             this._matrix = this._matrix.times(Matrix.scale(x, y));
+
+            this._optionsChange();
             return this;
         },
 
         rotate: function(angle, x, y) {
             this._matrix = this._matrix.times(Matrix.rotate(angle, x, y));
+
+            this._optionsChange();
             return this;
         },
 
@@ -536,6 +552,7 @@
 
             this._matrix = this._matrix.times(matrix);
 
+            this._optionsChange();
             return this;
         },
 
@@ -564,8 +581,8 @@
     }
 
     function transformationMatrix(transformation) {
-        if (transformation instanceof Transformation) {
-            transformation = transformation.matrix();
+        if (transformation && kendo.isFunction(transformation.matrix)) {
+            return transformation.matrix();
         }
         return transformation;
     }
@@ -579,7 +596,8 @@
             Point: Point,
             Rect: Rect,
             transform: transform,
-            Transformation: Transformation
+            Transformation: Transformation,
+            transformationMatrix: transformationMatrix
         }
     });
 

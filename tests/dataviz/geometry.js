@@ -764,7 +764,7 @@
         var transform = g.transform,
             transformation,
             matrix = Matrix.rotate(30),
-            IDENTITY = new Matrix(1, 0, 0, 1, 0, 0);;
+            IDENTITY = new Matrix(1, 0, 0, 1, 0, 0);
 
         module("Transformation", {});
 
@@ -809,6 +809,17 @@
             deepEqual(transformation.matrix(), Matrix.translate(10, 20));
         });
 
+        test("translate triggers observer optionsChange", function() {
+            transformation = new Transformation();
+            transformation.observer = {
+                optionsChange: function(e) {
+                    equal(e.field, "transform");
+                    equal(e.value, transformation);
+                }
+            };
+            transformation.translate(10, 20);
+        });
+
         test("scale returns transformation", function() {
             result = transformation.scale(1, 2);
             ok(result === transformation);
@@ -822,6 +833,17 @@
         test("scale applies scale to both x and y if only one parameter is passed", function() {
             transformation.scale(2);
             deepEqual(transformation.matrix(), Matrix.scale(2, 2));
+        });
+
+        test("scale triggers observer optionsChange", function() {
+            transformation = new Transformation();
+            transformation.observer = {
+                optionsChange: function(e) {
+                    equal(e.field, "transform");
+                    equal(e.value, transformation);
+                }
+            };
+            transformation.scale(1, 2);
         });
 
         test("rotate returns transformation", function() {
@@ -839,6 +861,17 @@
             deepEqual(transformation.matrix(), Matrix.rotate(30, 100, 100));
         });
 
+        test("rotate triggers observer optionsChange", function() {
+            transformation = new Transformation();
+            transformation.observer = {
+                optionsChange: function(e) {
+                    equal(e.field, "transform");
+                    equal(e.value, transformation);
+                }
+            };
+            transformation.rotate(30);
+        });
+
         test("multiply multiplies matrix by the passed transformation matrix", function() {
             transformation = new Transformation(new Matrix(2,2,2,2,2,2));
             transformation.multiply(new Transformation(new Matrix(3,3,3,3,3,3)));
@@ -851,6 +884,17 @@
             deepEqual(transformation.matrix(), new Matrix(12,12,12,12,14,14));
         });
 
+
+        test("multiply triggers observer optionsChange", function() {
+            transformation = new Transformation();
+            transformation.observer = {
+                optionsChange: function(e) {
+                    equal(e.field, "transform");
+                    equal(e.value, transformation);
+                }
+            };
+            transformation.multiply(new Matrix(3,3,3,3,3,3));
+        });
     })();
 
 })();
