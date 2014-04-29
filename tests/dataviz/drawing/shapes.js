@@ -26,20 +26,20 @@
         close(bBox.p1.y, values[3], tolerance);
     }
 
+    function compareMatrices(m1, m2, tolerance) {
+        tolerance = tolerance  || 0;
+        close(m1.a, m2.a, tolerance);
+        close(m1.b, m2.b, tolerance);
+        close(m1.c, m2.c, tolerance);
+        close(m1.d, m2.d, tolerance);
+        close(m1.e, m2.e, tolerance);
+        close(m1.f, m2.f, tolerance);
+    }
+
     // ------------------------------------------------------------
     (function() {
         var element,
             matrix;
-
-        function compareMatrices(m1, m2, tolerance) {
-            tolerance = tolerance  || 0;
-            close(m1.a, m2.a, tolerance);
-            close(m1.b, m2.b, tolerance);
-            close(m1.c, m2.c, tolerance);
-            close(m1.d, m2.d, tolerance);
-            close(m1.e, m2.e, tolerance);
-            close(m1.f, m2.f, tolerance);
-        }
 
         module("Element", {
             setup: function() {
@@ -63,60 +63,65 @@
             equal(element.visible(), false);
         });
 
+        test("constructor sets transformation when a matrix is passed through the options", function() {
+            element = new Element({transform: Matrix.unit()});
+            compareMatrices(element.options.transform.matrix(), Matrix.unit());
+        });
+
         test("transform sets transform option", function() {
-            element.transform(Matrix.unit());
+            element.transform(g.transform(Matrix.unit()));
             ok(element.options.transform);
         });
 
-        test("transform sets matrix if Transformation is passed", function() {
+        test("transform sets transformation if matrix is passed", function() {
             matrix = new Matrix(1,1,1,1,1,1);
-            element.transform(new g.Transformation(matrix));
-            compareMatrices(element.options.transform, matrix);
+            element.transform(matrix);
+            compareMatrices(element.options.transform.matrix(), matrix);
         });
 
         test("parentTransform returns undefined if element has no parents", function() {
             ok(element.parentTransform() === undefined);
         });
 
-        test("parentTransform returns parents matrix", function() {
+        test("parentTransform returns parents transformation", function() {
             var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
                 group = new Group({transform: new Matrix(3,3,3,3,3,3)});
 
             group.append(element);
             mainGroup.append(group);
 
-            compareMatrices(element.parentTransform(), new Matrix(12,12,12,12,14,14));
+            compareMatrices(element.parentTransform().matrix(), new Matrix(12,12,12,12,14,14));
         });
 
-        test("currentTransform returns undefined if the element has no transformation and no matrix is passed", function() {
+        test("currentTransform returns undefined if the element has no transformation and no transformation is passed", function() {
             matrix = element.currentTransform();
             equal(matrix, undefined);
         });
 
-        test("currentTransform returns element transformation matrix if no matrix is passed", function() {
+        test("currentTransform returns elements transformation if no transformation is passed", function() {
             element.transform(Matrix.translate(10,20));
-            matrix = element.currentTransform();
+            matrix = element.currentTransform().matrix();
             compareMatrices(matrix, new Matrix(1,0,0,1,10,20));
         });
 
-        test("currentTransform returns passed matrix if the element has no transformation", function() {
-            matrix = element.currentTransform(Matrix.translate(10,20));
+        test("currentTransform returns transformation with the passed matrix if the element has no transformation", function() {
+            matrix = element.currentTransform(g.transform(Matrix.translate(10,20))).matrix();
             compareMatrices(matrix, new Matrix(1,0,0,1,10,20));
         });
 
-        test("currentTransform returns the passed matrix multiplied by the element matrix", function() {
-            element.transform(new Matrix(3,3,3,3,3,3));
-            matrix = element.currentTransform(new Matrix(2,2,2,2,2,2));
+        test("currentTransform returns a transformation with the passed matrix multiplied by the element matrix", function() {
+            element.transform(g.transform(new Matrix(3,3,3,3,3,3)));
+            matrix = element.currentTransform(g.transform(new Matrix(2,2,2,2,2,2))).matrix();
             compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
         });
 
-        test("currentTransform gets matrix from parents if no matrix is passed", function() {
-            var mainGroup = new Group({transform: new Matrix(2,2,2,2,2,2)}),
-                group = new Group({transform: new Matrix(3,3,3,3,3,3)});
+        test("currentTransform gets transformation from parents if no parent transformation is passed", function() {
+            var mainGroup = new Group({transform: g.transform(new Matrix(2,2,2,2,2,2))}),
+                group = new Group({transform: g.transform(new Matrix(3,3,3,3,3,3))});
 
             group.append(element);
             mainGroup.append(group);
-            matrix = element.currentTransform();
+            matrix = element.currentTransform().matrix();
 
             compareMatrices(matrix, new Matrix(12,12,12,12,14,14));
         });
@@ -278,21 +283,21 @@
         equal(group.bBox(), undefined);
     });
 
-    test("boundingBox passes matrix to its children boundingBox methods", 2, function() {
+    test("boundingBox passes transformation to its children boundingBox methods", 12, function() {
         var path = new Path(),
             circle = new Circle(new g.Circle(new Point(), 10)),
             boundingBox,
             groupMatrix;
-        circle.bBox = function(matrix) {
-            ok(matrix === groupMatrix);
+        circle.bBox = function(transformation) {
+            compareMatrices(transformation.matrix(), groupMatrix);
             return new g.Rect();
         };
-        path.bBox = function(matrix) {
-            ok(matrix === groupMatrix);
+        path.bBox = function(transformation) {
+            compareMatrices(transformation.matrix(), groupMatrix);
             return new g.Rect();
         };
-        group.transform(Matrix.unit());
-        groupMatrix = group.options.transform;
+        group.transform(g.transform(Matrix.unit()));
+        groupMatrix = group.options.transform.matrix();
         group.append(circle);
         group.append(path);
         group.bBox();
@@ -441,8 +446,8 @@
             ok(circleMatrix === matrix);
             return new g.Rect();
         };
-        circle = new Circle(geometry, {stroke: {width: 5}, transform: Matrix.unit()});
-        circleMatrix = circle.options.transform;
+        circle = new Circle(geometry, {stroke: {width: 5}, transform: g.transform(Matrix.unit())});
+        circleMatrix = circle.options.transform.matrix();
         circle.bBox();
     });
 
@@ -722,14 +727,14 @@
 
     test("boundingBox returns the bounding rectangle of the transformed anchor if there is a single segment", function() {
         path.moveTo(10, 10);
-        var boundingBox = path.bBox(Matrix.scale(1,2));
+        var boundingBox = path.bBox(g.transform(Matrix.scale(1,2)));
         compareBoundingBox(boundingBox, [10,20,10,20]);
     });
 
     test("boundingBox returns the bounding rectangle of the anchor using the combined transformation", function() {
         path.transform(Matrix.scale(2,1));
         path.moveTo(10, 10);
-        var boundingBox = path.bBox(Matrix.scale(1,2));
+        var boundingBox = path.bBox(g.transform(Matrix.scale(1,2)));
         compareBoundingBox(boundingBox, [20,20,20,20]);
     });
 
@@ -746,7 +751,7 @@
         path.moveTo(0, 0);
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.lineTo(20, 70);
-        path.transform(Matrix.scale(2, 1));
+        path.transform(g.transform(Matrix.scale(2, 1)));
         var boundingBox = path.bBox();
         compareBoundingBox(boundingBox, [-16.3,-1.6,60,70], TOLERANCE);
     });
@@ -756,7 +761,7 @@
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.lineTo(20, 70);
         path.transform(Matrix.scale(2, 1));
-        var boundingBox = path.bBox(Matrix.scale(1, 2));
+        var boundingBox = path.bBox(g.transform(Matrix.scale(1, 2)));
         compareBoundingBox(boundingBox, [-16.3,-3.2,60,140], TOLERANCE);
     });
 
@@ -881,7 +886,7 @@
     });
 
     test("boundingBox returns the bounding rect for the transformed paths", function() {
-        multiPath.transform(Matrix.scale(2, 1));
+        multiPath.transform(g.transform(Matrix.scale(2, 1)));
         multiPath.moveTo(0, 0);
         multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         multiPath.moveTo(20, 70);
@@ -890,7 +895,7 @@
     });
 
     test("boundingBox returns the bounding rect for the paths using the combined transformation", function() {
-        multiPath.transform(Matrix.scale(2, 1));
+        multiPath.transform(g.transform(Matrix.scale(2, 1)));
         multiPath.moveTo(0, 0);
         multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         multiPath.moveTo(20, 70);

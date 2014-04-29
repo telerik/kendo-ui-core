@@ -17,7 +17,9 @@
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
 
-        Matrix = dataviz.geometry.Matrix,
+        g = dataviz.geometry,
+        Matrix = g.Matrix,
+        transformationMatrix = g.transformationMatrix,
 
         util = dataviz.util,
         renderAllAttr = util.renderAllAttr,
@@ -360,9 +362,9 @@
 
     var TransformNode = Node.extend({
         MAX_PRECISION: 15,
-        init: function(srcElement, matrix) {
+        init: function(srcElement, transform) {
             Node.fn.init.call(this, srcElement);
-            this.matrix = matrix;
+            this.transform = transform;
         },
 
         optionsChange: function(e) {
@@ -372,19 +374,20 @@
             this.invalidate();
         },
 
-        refresh: function(matrix) {
-            this.matrix = matrix;
-            this.allAttr(this.mapTransform(matrix));
+        refresh: function(transform) {
+            this.transform = transform;
+            this.allAttr(this.mapTransform(transform));
         },
 
         transformOrigin: function() {
             return "-0.5,-0.5";
         },
 
-        mapTransform: function(matrix) {
+        mapTransform: function(transform) {
             var attrs = [],
                 a, b, c, d,
-                MAX_PRECISION = this.MAX_PRECISION;
+                MAX_PRECISION = this.MAX_PRECISION,
+                matrix = transformationMatrix(transform);
 
             if (matrix) {
                 a = round(matrix.a, MAX_PRECISION);
@@ -402,7 +405,7 @@
         },
 
         renderTranform: function() {
-            return renderAllAttr(this.mapTransform(this.matrix));
+            return renderAllAttr(this.mapTransform(this.transform));
         },
 
         template: renderTemplate(

@@ -161,7 +161,7 @@
         var matrix = new Matrix(2,2,2,2,2,2),
             path = new Path({transform: matrix});
         node.append = function(child) {
-            compareMatrices(child.transform.matrix, matrix);
+            compareMatrices(child.transform.transform.matrix(), matrix);
         };
         node.load([path]);
     });
@@ -170,7 +170,7 @@
         var matrix = new Matrix(2,2,2,2,2,2),
             path = new Path();
         node.append = function(child) {
-            compareMatrices(child.transform.matrix, matrix);
+            compareMatrices(child.transform.transform.matrix(), matrix);
         };
         node.load([path], matrix);
     });
@@ -182,7 +182,7 @@
             path = new Path({transform: matrix});
 
         node.append = function(child) {
-            compareMatrices(child.transform.matrix, combinedMatrix);
+            compareMatrices(child.transform.transform.matrix(), combinedMatrix);
         };
         node.load([path], currentMatrix);
     });
@@ -241,11 +241,11 @@
 
         test("load passes element transformation", function() {
             var matrix = new Matrix(2,2,2,2,2,2),
-                group = new Group({transform: matrix});
+                group = new Group({transform: g.transform(matrix)});
 
             group.append(new Group());
             GroupNode.fn.load = function(children, transform) {
-                compareMatrices(transform, matrix);
+                compareMatrices(transform.matrix(), matrix);
             };
             node.load([group]);
         });
@@ -256,22 +256,22 @@
 
             group.append(new Group());
             GroupNode.fn.load = function(children, transform) {
-                compareMatrices(transform, matrix);
+                compareMatrices(transform.matrix(), matrix);
             };
-            node.load([group], matrix);
+            node.load([group], g.transform(matrix));
         });
 
         test("load passes combined transformation", function() {
             var matrix = new Matrix(3,3,3,3,3,3),
                 currentMatrix = new Matrix(2,2,2,2,2,2),
                 combinedMatrix = currentMatrix.times(matrix),
-                group = new Group({transform: matrix});
+                group = new Group({transform: g.transform(matrix)});
 
             group.append(new Group());
             GroupNode.fn.load = function(children, transform) {
-                compareMatrices(transform, combinedMatrix);
+                compareMatrices(transform.matrix(), combinedMatrix);
             };
-            node.load([group], currentMatrix);
+            node.load([group], g.transform(currentMatrix));
         });
 
     })();
@@ -389,21 +389,21 @@
         childGroupNode.refreshTransform(new Matrix());
     });
 
-    test("refreshTranaform method calls childNodes refreshTranaform method with current matrix", function() {
+    test("refreshTranaform method calls childNodes refreshTranaform method with current transformation", function() {
         var matrix = new Matrix(2,2,2,2,2,2),
             parentMatrix = new Matrix(3,3,3,3,3,3),
             currentMatrix = parentMatrix.times(matrix),
-            group = new Group({transform: matrix}),
+            group = new Group({transform: g.transform(matrix)}),
             path = new Path(),
             childGroupNode,
-            parentGroup = new Group({transform: parentMatrix});
+            parentGroup = new Group({transform: g.transform(parentMatrix)});
         parentGroup.append(group);
         group.append(path);
         groupNode = new GroupNode(parentGroup);
         groupNode.load([group]);
         childGroupNode = groupNode.childNodes[0];
-        childGroupNode.childNodes[0].refreshTransform = function(transform) {
-            compareMatrices(transform, currentMatrix);
+        childGroupNode.childNodes[0].refreshTransform = function(transformation) {
+            compareMatrices(transformation.matrix(), currentMatrix);
         };
 
         childGroupNode.refreshTransform();
@@ -420,10 +420,10 @@
             ok(true);
         };
 
-        group.transform(new Matrix());
+        group.transform(g.transform(new Matrix()));
     });
 
-    test("options change for transform calls childNodes refreshTransform method with the current matrix as argument", function() {
+    test("options change for transform calls childNodes refreshTransform method with the current transformation as argument", function() {
         var group = new Group(),
             path = new Path(),
             childGroupNode,
@@ -432,10 +432,10 @@
         groupNode.load([group]);
         childGroupNode = groupNode.childNodes[0];
         childGroupNode.childNodes[0].refreshTransform = function(transform) {
-            compareMatrices(transform, matrix);
+            compareMatrices(transform.matrix(), matrix);
         };
 
-        group.transform(matrix);
+        group.transform(g.transform(matrix));
     });
 
     test("options change for other field different than transform does not call childNodes refreshTransform method", 0, function() {
@@ -962,18 +962,18 @@
     test("refreshTransform calls transform refresh method with the srcElement transformation", 14, function() {
         var srcMatrix = new Matrix(3,3,3,3,3,3),
             parentMatrix = new Matrix(2,2,2,2,2,2),
-            currentTransform = parentMatrix.times(srcMatrix),
+            currentMatrix = parentMatrix.times(srcMatrix),
             group = new Group({transform: parentMatrix});
         path = new Path({transform: srcMatrix});
         group.append(path);
         pathNode = new PathNode(path);
-        pathNode.transform.refresh = function(matrix) {
+        pathNode.transform.refresh = function(transform) {
             ok(true);
-            compareMatrices(matrix, currentTransform);
+            compareMatrices(transform.matrix(), currentMatrix);
         };
 
         pathNode.refreshTransform();
-        pathNode.refreshTransform(parentMatrix);
+        pathNode.refreshTransform(g.transform(parentMatrix));
     });
 
     // ------------------------------------------------------------

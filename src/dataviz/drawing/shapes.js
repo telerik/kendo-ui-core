@@ -8,6 +8,7 @@
     var kendo = window.kendo,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
+        extend = $.extend,
 
         dataviz = kendo.dataviz,
         append = dataviz.append,
@@ -16,6 +17,7 @@
         Point = g.Point,
         Rect = g.Rect,
         Matrix = g.Matrix,
+        transformationMatrix = g.transformationMatrix,
 
         drawing = dataviz.drawing,
         OptionsStore = drawing.OptionsStore,
@@ -32,8 +34,17 @@
             var shape = this;
 
             shape.observer = null;
-            shape.options = new OptionsStore(options || {});
+            shape._initOptions(options);
             shape.options.observer = this;
+        },
+
+        _initOptions: function(options) {
+            options = extend({}, options);
+            var transform = options.transform;
+            if (transform && transform instanceof Matrix) {
+                options.transform = g.transform(transform);
+            }
+            this.options = new OptionsStore(options);
         },
 
         optionsChange: function(e) {
@@ -43,39 +54,56 @@
         },
 
         transform: function(transform) {
-            if (transform instanceof g.Transformation) {
-                transform = transform.matrix();
+            if (defined(transform)) {
+                if (transform instanceof Matrix) {
+                    transform = g.transform(transform);
+                }
+                this.options.set("transform", transform);
+            } else {
+                return this.options.get("transform");
             }
-            this.options.set("transform", transform);
         },
 
         parentTransform: function() {
             var element = this,
-                result;
+                transformation,
+                matrix,
+                parentMatrix;
             while (element.parent) {
                 element = element.parent;
-                if (element.options.transform) {
-                    result = element.options.transform.times(result || Matrix.unit());
+                transformation = element.transform();
+                matrix = transformationMatrix(transformation);
+                if (matrix) {
+                    parentMatrix = matrix.times(parentMatrix || Matrix.unit());
                 }
             }
-            return result;
+
+            if (parentMatrix) {
+                return g.transform(parentMatrix);
+            }
         },
 
-        currentTransform: function(matrix) {
-            var elementTransform = this.options.get("transform"),
-                combinedTransform;
+        currentTransform: function(parentTransform) {
+            var elementTransform = this.transform(),
+                elementMatrix = transformationMatrix(elementTransform),
+                parentMatrix,
+                combinedMatrix;
 
-            if (!defined(matrix)) {
-                matrix = this.parentTransform();
+            if (!defined(parentTransform)) {
+                parentTransform = this.parentTransform();
             }
 
-            if (elementTransform && matrix) {
-                combinedTransform = matrix.times(elementTransform);
+            parentMatrix = transformationMatrix(parentTransform);
+
+            if (elementMatrix && parentMatrix) {
+                combinedMatrix = parentMatrix.times(elementMatrix);
             } else {
-                combinedTransform = elementTransform || matrix;
+                combinedMatrix = elementMatrix || parentMatrix;
             }
 
-            return combinedTransform;
+            if (combinedMatrix) {
+                return g.transform(combinedMatrix);
+            }
         },
 
         visible: function(visible) {
@@ -133,12 +161,12 @@
             this.childrenChange("remove", items, 0);
         },
 
-        bBox: function(matrix) {
-            return elementsBoundingBox(this.children, this.currentTransform(matrix));
+        bBox: function(transformation) {
+            return elementsBoundingBox(this.children, this.currentTransform(transformation));
         },
 
-        currentTransform: function(matrix) {
-            return Element.fn.currentTransform.call(this, matrix) || null;
+        currentTransform: function(transformation) {
+            return Element.fn.currentTransform.call(this, transformation) || null;
         }
     });
 
@@ -188,8 +216,8 @@
             circle.geometry.observer = this;
         },
 
-        bBox: function(matrix) {
-            var combinedMatrix = this.currentTransform(matrix),
+        bBox: function(transformation) {
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation)),
                 rect = this.geometry.bBox(combinedMatrix),
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
@@ -209,8 +237,8 @@
             arc.geometry.observer = this;
         },
 
-        bBox: function(matrix) {
-            var combinedMatrix = this.currentTransform(matrix),
+        bBox: function(transformation) {
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation)),
                 rect = this.geometry.bBox(combinedMatrix),
                 strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
@@ -386,21 +414,21 @@
             return this;
         },
 
-        bBox: function(matrix) {
+        bBox: function(transformation) {
             var segments = this.segments,
                 length = segments.length,
                 strokeWidth = this.options.get("stroke.width"),
-                combinedTransform = this.currentTransform(matrix),
+                combinedMatrix = g.transformationMatrix(this.currentTransform(transformation)),
                 boundingBox,
                 i;
 
             if (length === 1) {
-                var anchor = segments[0].anchor.transformCopy(combinedTransform);
+                var anchor = segments[0].anchor.transformCopy(combinedMatrix);
                 boundingBox = new Rect(anchor, anchor);
             } else if (length > 0) {
                 boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
                 for (i = 1; i < length; i++) {
-                    boundingBox = boundingBox.wrap(segments[i - 1].bBoxTo(segments[i], combinedTransform));
+                    boundingBox = boundingBox.wrap(segments[i - 1].bBoxTo(segments[i], combinedMatrix));
                 }
                 if (strokeWidth) {
                     expandRect(boundingBox, strokeWidth / 2);
@@ -451,8 +479,8 @@
             return this;
         },
 
-        bBox: function(matrix) {
-            return elementsBoundingBox(this.paths, this.currentTransform(matrix));
+        bBox: function(transformation) {
+            return elementsBoundingBox(this.paths, this.currentTransform(transformation));
         }
     });
 
@@ -461,17 +489,21 @@
 
 
     //utility =====================================================
-    function elementsBoundingBox(elements, matrix) {
+    function elementsBoundingBox(elements, transformation) {
         var length = elements.length,
             boundingBox = new Rect(Point.maxPoint(), Point.minPoint()),
             hasBoundingBox = false,
+            elementBoundingBox,
             i, element;
 
         for (i = 0; i < length; i++) {
             element = elements[i];
             if (element.visible()) {
-                hasBoundingBox = true;
-                boundingBox = boundingBox.wrap(element.bBox(matrix));
+                elementBoundingBox = element.bBox(transformation);
+                if (elementBoundingBox) {
+                    hasBoundingBox = true;
+                    boundingBox = boundingBox.wrap(elementBoundingBox);
+                }
             }
         }
 

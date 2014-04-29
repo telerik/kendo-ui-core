@@ -244,15 +244,14 @@
         mapTransform: function(transform) {
             var attrs = [];
             if (transform) {
-                attrs.push([TRANSFORM, "matrix(" + transform.toString() + ")"]);
+                attrs.push([TRANSFORM, "matrix(" + transform.matrix().toString() + ")"]);
             }
 
             return attrs;
         },
 
         renderTransform: function() {
-            var transform = this.srcElement.options.transform;
-            return renderAllAttr(this.mapTransform(transform));
+            return renderAllAttr(this.mapTransform(this.srcElement.transform()));
         },
 
         transformChange: function(value) {
