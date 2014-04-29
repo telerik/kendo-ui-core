@@ -18,7 +18,8 @@
                 var index = 0,
                     currentEffect;
 
-                $("#homes a").click(function() {
+                $("#homes a").click(function(e) {
+                    e.preventDefault();
                     var target = parseInt($(this).data("index"));
                     if (target === index) {
                         return;
