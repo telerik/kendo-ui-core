@@ -212,6 +212,8 @@ var __meta__ = {
             if (this.observable) {
                 this.source.unbind(CHANGE, this._change);
             }
+
+            this.unbind();
         }
     });
 
