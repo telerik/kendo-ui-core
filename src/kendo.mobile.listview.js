@@ -30,8 +30,8 @@ var __meta__ = {
         SEARCH_TEMPLATE = kendo.template('<form class="km-filter-form"><div class="km-filter-wrap"><input type="search" placeholder="#=placeholder#"/><a href="\\#" class="km-filter-reset" title="Clear"><span class="km-icon km-clear"></span><span class="km-text">Clear</span></a></div></form>'),
         NS = ".kendoMobileListView",
         STYLED = "styled",
-        DATA_BOUND = "dataBound",
-        DATA_BINDING = "dataBinding",
+        DATABOUND = "dataBound",
+        DATABINDING = "dataBinding",
         ITEM_CHANGE = "itemChange",
         CLICK = "click",
         CHANGE = "change",
@@ -114,7 +114,7 @@ var __meta__ = {
             listView.bind("resize", cacheHeaders);
 
             listView.bind(STYLED, cacheHeaders);
-            listView.bind(DATA_BOUND, cacheHeaders);
+            listView.bind(DATABOUND, cacheHeaders);
 
             scroller.bind("scroll", function(e) {
                 headerFixer._fixHeader(e);
@@ -710,6 +710,13 @@ var __meta__ = {
                 groupedMode = groups && groups[0],
                 item;
 
+            if (listView.trigger(DATABINDING, { action: action || "rebind", items: dataItems, index: e && e.index })) {
+                if (this._shouldShowLoading()) {
+                    listView.hideLoading();
+                }
+                return;
+            }
+
             if (action === "itemchange") {
                 // the itemchange may come from a child collection
                 item = listView.findByDataItem(dataItems)[0];
@@ -718,8 +725,6 @@ var __meta__ = {
                 }
                 return;
             }
-
-            listView.trigger(DATA_BINDING);
 
             if (action === "add" && !groupedMode) {
                 var index = view.indexOf(dataItems[0]);
@@ -742,7 +747,7 @@ var __meta__ = {
                 listView.hideLoading();
             }
 
-            listView.trigger(DATA_BOUND, { ns: ui });
+            listView.trigger(DATABOUND, { ns: ui });
         },
 
         setDataSource: function(dataSource) {
@@ -915,8 +920,8 @@ var __meta__ = {
 
         events: [
             CLICK,
-            DATA_BINDING,
-            DATA_BOUND,
+            DATABINDING,
+            DATABOUND,
             ITEM_CHANGE
         ],
 
