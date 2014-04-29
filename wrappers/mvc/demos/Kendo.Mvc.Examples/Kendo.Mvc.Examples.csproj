@@ -720,411 +720,411 @@
     <Content Include="App_Data\Sample_log.ldf">
       <DependentUpon>Sample.mdf</DependentUpon>
     </Content>
-    <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\api\selection.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\logarithmic_axis.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\stacked100_area.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\smooth_area.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\error_bars.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\date_axis.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\grouped_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\multiple_axes.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\stacked_area.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\step_area.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\barcode\api.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\barcode\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\column.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_stacked100_bar.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\logarithmic_axis.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\stacked100_bar.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\date_axis.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\error_bars.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\gap_spacing.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_stacked_bar.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\multiple_axes.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\plotbands.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bar_charts\stacked_bar.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\box_plot_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\box_plot_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\box_plot_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bubble_charts\grouped_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bubble_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bubble_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bubble_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bullet_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bullet_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\bullet_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\dashboards\car_dashboard.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\diagram\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\donut_charts\donut_labels.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\donut_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\donut_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\donut_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\financial\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\financial\panes.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\financial\virtualization.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\logarithmic_axis.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked100_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\smooth_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\date_axis.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\error_bars.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\grouped_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\multiple_axes.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\notes.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\step_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\map\api.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\map\remote_markers.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\pie_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\pie_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\pie_charts\pie_labels.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\pie_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\polar_charts\smooth_polar_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\polar_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\polar_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\polar_charts\polar_area.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\polar_charts\polar_scatter.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\polar_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\qrcode\api.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\qrcode\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radar_charts\smooth_radar_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radar_charts\grouped_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radar_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radar_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radar_charts\radar_area.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radar_charts\radar_column.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radar_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radial_gauge\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\radial_gauge\scale_options.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\date_axis.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\grouped_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\multiple_axes.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\scatter_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\smooth_scatter_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\sparklines\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\sparklines\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\sparklines\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\actionsheet\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\application\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\application\loadingpopup.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\application\transitions.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\buttongroup\appearance.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\buttongroup\badges.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\buttongroup\events.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\buttongroup\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\buttongroup\navbar.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\button\appearance.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\button\badges.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\button\events.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\button\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\drawer\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\drawer\two_way_drawers.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\layout\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\databinding.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\detailbuttons.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\editdetails.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\editing.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\endless_scrolling.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\filtering.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\fixedheaders.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\hierarchical_databinding.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\press_to_load_more.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\pull_to_refresh.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\pull_with_endless.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\listview\templates.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\modalview\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\navbar\appearance.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\navbar\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\popover\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\scrollview\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\splitview\appearance.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\splitview\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\switch\events.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\switch\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\tabstrip\appearance.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\tabstrip\badges.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\tabstrip\index.aspx" />
-    <Content Include="Areas\aspx\Views\mobile\view\zoomable.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\clientfiltering.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\custom_datasource.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\serverfiltering.aspx" />
-    <Content Include="Areas\aspx\Views\web\autocomplete\template.aspx" />
-    <Content Include="Areas\aspx\Views\web\button\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\button\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\button\images.aspx" />
-    <Content Include="Areas\aspx\Views\web\button\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\button\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\button\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\calendar\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\calendar\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\calendar\globalization.aspx" />
-    <Content Include="Areas\aspx\Views\web\calendar\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\calendar\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\calendar\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\calendar\selectaction.aspx" />
-    <Content Include="Areas\aspx\Views\web\calendar\template.aspx" />
-    <Content Include="Areas\aspx\Views\web\colorpicker\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\colorpicker\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\colorpicker\flatcolorpicker.aspx" />
-    <Content Include="Areas\aspx\Views\web\colorpicker\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\colorpicker\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\colorpicker\palette.aspx" />
-    <Content Include="Areas\aspx\Views\web\colorpicker\palette_presets.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\cascadingcombobox.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\clientfiltering.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\custom_datasource.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\serverfiltering.aspx" />
-    <Content Include="Areas\aspx\Views\web\combobox\template.aspx" />
-    <Content Include="Areas\aspx\Views\web\datepicker\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\datepicker\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\datepicker\globalization.aspx" />
-    <Content Include="Areas\aspx\Views\web\datepicker\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\datepicker\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\datepicker\rangeselection.aspx" />
-    <Content Include="Areas\aspx\Views\web\datepicker\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\datepicker\template.aspx" />
-    <Content Include="Areas\aspx\Views\web\datetimepicker\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\datetimepicker\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\datetimepicker\globalization.aspx" />
-    <Content Include="Areas\aspx\Views\web\datetimepicker\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\datetimepicker\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\datetimepicker\rangeselection.aspx" />
-    <Content Include="Areas\aspx\Views\web\datetimepicker\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\datetimepicker\template.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\cascadingdropdownlist.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\custom_datasource.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\remotedatasource.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\dropdownlist\template.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\all_tools.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\custom_tools.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\globalization.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\imagebrowser.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\snippets.aspx" />
-    <Content Include="Areas\aspx\Views\web\editor\styles.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\aggregates.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\columnsettings.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\column_menu.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\column_reordering.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\column_resizing.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\frozen_columns.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\everlive.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\signalr.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\webapi.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\customajaxbinding.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\customserverbinding.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\custom_command.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\detailtemplate.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\editing.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\editing_custom_validation.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\editing_custom.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\editing_inline.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\editing_popup.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientCategory.ascx" />
-    <Content Include="Areas\aspx\Views\web\grid\EditorTemplates\ClientEmployee.ascx" />
-    <Content Include="Areas\aspx\Views\web\grid\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\filter_menu_customization.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\foreignkeycolumn.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\globalization.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\headertemplate.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\hierarchy.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\paging.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\rowtemplate.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\selection.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\serveraggregates.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\serverbinding.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\serverdetails.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\serverediting.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\serverhierarchy.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\serverrowtemplate.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\sorting.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\toolbar_template.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\virtualization_remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\web\listview\custom_datasource.aspx" />
-    <Content Include="Areas\aspx\Views\web\listview\editing.aspx" />
-    <Content Include="Areas\aspx\Views\web\listview\EditorTemplates\ProductViewModel.ascx" />
-    <Content Include="Areas\aspx\Views\web\listview\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\listview\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\listview\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\listview\selection.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\animation.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\direction.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\images.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\modelbinding.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\orientation.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\menu\sitemapbinding.aspx" />
-    <Content Include="Areas\aspx\Views\web\multiselect\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\multiselect\clientfiltering.aspx" />
-    <Content Include="Areas\aspx\Views\web\multiselect\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\multiselect\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\multiselect\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\multiselect\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\multiselect\serverfiltering.aspx" />
-    <Content Include="Areas\aspx\Views\web\multiselect\template.aspx" />
-    <Content Include="Areas\aspx\Views\web\notification\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\notification\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\notification\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\notification\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\notification\position_stacking.aspx" />
-    <Content Include="Areas\aspx\Views\web\notification\templates.aspx" />
-    <Content Include="Areas\aspx\Views\web\numerictextbox\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\numerictextbox\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\numerictextbox\globalization.aspx" />
-    <Content Include="Areas\aspx\Views\web\numerictextbox\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\numerictextbox\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\numerictextbox\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\panelbar\ajax.aspx" />
-    <Content Include="Areas\aspx\Views\web\panelbar\animation.aspx" />
-    <Content Include="Areas\aspx\Views\web\panelbar\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\panelbar\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\panelbar\images.aspx" />
-    <Content Include="Areas\aspx\Views\web\panelbar\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\panelbar\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\panelbar\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\progressbar\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\progressbar\chunk.aspx" />
-    <Content Include="Areas\aspx\Views\web\progressbar\customlabel.aspx" />
-    <Content Include="Areas\aspx\Views\web\progressbar\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\progressbar\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\progressbar\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\progressbar\vertical.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\custom_datasource.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\webapi.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\restriction.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\move_resize.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\resources_grouping_vertical.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\resources_grouping_horizontal.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\globalization.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\resources.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\selection.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\templates.aspx" />
-    <Content Include="Areas\aspx\Views\web\slider\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\slider\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\slider\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\slider\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\slider\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\constraints.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\filter_disable.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\handlers.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\integration_grid.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\integration_listview.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\integration_tabstrip.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\linkedlists.aspx" />
-    <Content Include="Areas\aspx\Views\web\sortable\sortable_panels.aspx" />
-    <Content Include="Areas\aspx\Views\web\splitter\ajax.aspx" />
-    <Content Include="Areas\aspx\Views\web\splitter\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\splitter\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\splitter\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\splitter\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\splitter\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\tabstrip\ajax.aspx" />
-    <Content Include="Areas\aspx\Views\web\tabstrip\animation.aspx" />
-    <Content Include="Areas\aspx\Views\web\tabstrip\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\tabstrip\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\tabstrip\images.aspx" />
-    <Content Include="Areas\aspx\Views\web\tabstrip\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\tabstrip\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\tabstrip\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\timepicker\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\timepicker\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\timepicker\globalization.aspx" />
-    <Content Include="Areas\aspx\Views\web\timepicker\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\timepicker\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\timepicker\rangeselection.aspx" />
-    <Content Include="Areas\aspx\Views\web\timepicker\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\tooltip\ajax.aspx" />
-    <Content Include="Areas\aspx\Views\web\tooltip\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\tooltip\details.ascx" />
-    <Content Include="Areas\aspx\Views\web\tooltip\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\tooltip\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\tooltip\template.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\animation.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\checkboxes.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\custom_data.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\dragdrop.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\images.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\local_data.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\remote_data.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\treeview\templates.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\async.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\initialfiles.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\result.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\upload\templates.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\actions.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\ajax.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\ajaxcontent.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\ajaxcontent1.ascx" />
-    <Content Include="Areas\aspx\Views\web\window\animation.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\api.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\events.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\index.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\navigation.aspx" />
-    <Content Include="Areas\aspx\Views\web\window\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\diagram\layout.aspx" />
-    <None Include="Areas\razor\Views\dataviz\diagram\index.cshtml" />
-    <None Include="Areas\razor\Views\dataviz\diagram\layout.cshtml" />
+    <Content Include="Areas\aspx\Views\api\events.aspx" />
+    <Content Include="Areas\aspx\Views\api\index.aspx" />
+    <Content Include="Areas\aspx\Views\api\selection.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\logarithmic_axis.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\stacked100_area.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\smooth_area.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\error_bars.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\date_axis.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\grouped_data.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\stacked_area.aspx" />
+    <Content Include="Areas\aspx\Views\area_charts\step_area.aspx" />
+    <Content Include="Areas\aspx\Views\barcode\api.aspx" />
+    <Content Include="Areas\aspx\Views\barcode\index.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\column.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\grouped_stacked100_bar.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\logarithmic_axis.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\stacked100_bar.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\date_axis.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\error_bars.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\gap_spacing.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\grouped_data.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\grouped_stacked_bar.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\plotbands.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\bar_charts\stacked_bar.aspx" />
+    <Content Include="Areas\aspx\Views\box_plot_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\box_plot_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\box_plot_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\bubble_charts\grouped_data.aspx" />
+    <Content Include="Areas\aspx\Views\bubble_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\bubble_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\bubble_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\bullet_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\bullet_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\bullet_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\dashboards\car_dashboard.aspx" />
+    <Content Include="Areas\aspx\Views\diagram\index.aspx" />
+    <Content Include="Areas\aspx\Views\donut_charts\donut_labels.aspx" />
+    <Content Include="Areas\aspx\Views\donut_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\donut_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\donut_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\financial\index.aspx" />
+    <Content Include="Areas\aspx\Views\financial\panes.aspx" />
+    <Content Include="Areas\aspx\Views\financial\virtualization.aspx" />
+    <Content Include="Areas\aspx\Views\linear_gauge\index.aspx" />
+    <Content Include="Areas\aspx\Views\linear_gauge\scale_options.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\logarithmic_axis.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\stacked100_line.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\smooth_line.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\date_axis.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\error_bars.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\grouped_data.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\notes.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\stacked_line.aspx" />
+    <Content Include="Areas\aspx\Views\line_charts\step_line.aspx" />
+    <Content Include="Areas\aspx\Views\map\api.aspx" />
+    <Content Include="Areas\aspx\Views\map\remote_markers.aspx" />
+    <Content Include="Areas\aspx\Views\pie_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\pie_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\pie_charts\pie_labels.aspx" />
+    <Content Include="Areas\aspx\Views\pie_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\polar_charts\smooth_polar_line.aspx" />
+    <Content Include="Areas\aspx\Views\polar_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\polar_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\polar_charts\polar_area.aspx" />
+    <Content Include="Areas\aspx\Views\polar_charts\polar_scatter.aspx" />
+    <Content Include="Areas\aspx\Views\polar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\qrcode\api.aspx" />
+    <Content Include="Areas\aspx\Views\qrcode\index.aspx" />
+    <Content Include="Areas\aspx\Views\radar_charts\smooth_radar_line.aspx" />
+    <Content Include="Areas\aspx\Views\radar_charts\grouped_data.aspx" />
+    <Content Include="Areas\aspx\Views\radar_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\radar_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\radar_charts\radar_area.aspx" />
+    <Content Include="Areas\aspx\Views\radar_charts\radar_column.aspx" />
+    <Content Include="Areas\aspx\Views\radar_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\radial_gauge\index.aspx" />
+    <Content Include="Areas\aspx\Views\radial_gauge\scale_options.aspx" />
+    <Content Include="Areas\aspx\Views\scatter_charts\date_axis.aspx" />
+    <Content Include="Areas\aspx\Views\scatter_charts\grouped_data.aspx" />
+    <Content Include="Areas\aspx\Views\scatter_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\scatter_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\scatter_charts\multiple_axes.aspx" />
+    <Content Include="Areas\aspx\Views\scatter_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\scatter_charts\scatter_line.aspx" />
+    <Content Include="Areas\aspx\Views\scatter_charts\smooth_scatter_line.aspx" />
+    <Content Include="Areas\aspx\Views\sparklines\index.aspx" />
+    <Content Include="Areas\aspx\Views\sparklines\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\sparklines\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\actionsheet\index.aspx" />
+    <Content Include="Areas\aspx\Views\application\index.aspx" />
+    <Content Include="Areas\aspx\Views\application\loadingpopup.aspx" />
+    <Content Include="Areas\aspx\Views\application\transitions.aspx" />
+    <Content Include="Areas\aspx\Views\buttongroup\appearance.aspx" />
+    <Content Include="Areas\aspx\Views\buttongroup\badges.aspx" />
+    <Content Include="Areas\aspx\Views\buttongroup\events.aspx" />
+    <Content Include="Areas\aspx\Views\buttongroup\index.aspx" />
+    <Content Include="Areas\aspx\Views\buttongroup\navbar.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_button\appearance.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_button\badges.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_button\events.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_button\index.aspx" />
+    <Content Include="Areas\aspx\Views\drawer\index.aspx" />
+    <Content Include="Areas\aspx\Views\drawer\two_way_drawers.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_layout\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\databinding.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\detailbuttons.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\editdetails.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\editing.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\endless_scrolling.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\filtering.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\fixedheaders.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\hierarchical_databinding.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\press_to_load_more.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\pull_to_refresh.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\pull_with_endless.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_listview\templates.aspx" />
+    <Content Include="Areas\aspx\Views\modalview\index.aspx" />
+    <Content Include="Areas\aspx\Views\navbar\appearance.aspx" />
+    <Content Include="Areas\aspx\Views\navbar\index.aspx" />
+    <Content Include="Areas\aspx\Views\popover\index.aspx" />
+    <Content Include="Areas\aspx\Views\scrollview\index.aspx" />
+    <Content Include="Areas\aspx\Views\splitview\appearance.aspx" />
+    <Content Include="Areas\aspx\Views\splitview\index.aspx" />
+    <Content Include="Areas\aspx\Views\switch\events.aspx" />
+    <Content Include="Areas\aspx\Views\switch\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_tabstrip\appearance.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_tabstrip\badges.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_tabstrip\index.aspx" />
+    <Content Include="Areas\aspx\Views\mobile_view\zoomable.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\api.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\clientfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\custom_datasource.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\events.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\index.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\serverfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\autocomplete\template.aspx" />
+    <Content Include="Areas\aspx\Views\button\api.aspx" />
+    <Content Include="Areas\aspx\Views\button\events.aspx" />
+    <Content Include="Areas\aspx\Views\button\images.aspx" />
+    <Content Include="Areas\aspx\Views\button\index.aspx" />
+    <Content Include="Areas\aspx\Views\button\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\button\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\calendar\api.aspx" />
+    <Content Include="Areas\aspx\Views\calendar\events.aspx" />
+    <Content Include="Areas\aspx\Views\calendar\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\calendar\index.aspx" />
+    <Content Include="Areas\aspx\Views\calendar\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\calendar\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\calendar\selectaction.aspx" />
+    <Content Include="Areas\aspx\Views\calendar\template.aspx" />
+    <Content Include="Areas\aspx\Views\colorpicker\api.aspx" />
+    <Content Include="Areas\aspx\Views\colorpicker\events.aspx" />
+    <Content Include="Areas\aspx\Views\colorpicker\flatcolorpicker.aspx" />
+    <Content Include="Areas\aspx\Views\colorpicker\index.aspx" />
+    <Content Include="Areas\aspx\Views\colorpicker\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\colorpicker\palette.aspx" />
+    <Content Include="Areas\aspx\Views\colorpicker\palette_presets.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\api.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\cascadingcombobox.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\clientfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\custom_datasource.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\events.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\index.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\serverfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\combobox\template.aspx" />
+    <Content Include="Areas\aspx\Views\datepicker\api.aspx" />
+    <Content Include="Areas\aspx\Views\datepicker\events.aspx" />
+    <Content Include="Areas\aspx\Views\datepicker\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\datepicker\index.aspx" />
+    <Content Include="Areas\aspx\Views\datepicker\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\datepicker\rangeselection.aspx" />
+    <Content Include="Areas\aspx\Views\datepicker\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\datepicker\template.aspx" />
+    <Content Include="Areas\aspx\Views\datetimepicker\api.aspx" />
+    <Content Include="Areas\aspx\Views\datetimepicker\events.aspx" />
+    <Content Include="Areas\aspx\Views\datetimepicker\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\datetimepicker\index.aspx" />
+    <Content Include="Areas\aspx\Views\datetimepicker\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\datetimepicker\rangeselection.aspx" />
+    <Content Include="Areas\aspx\Views\datetimepicker\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\datetimepicker\template.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\api.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\cascadingdropdownlist.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\custom_datasource.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\events.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\index.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\remotedatasource.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\template.aspx" />
+    <Content Include="Areas\aspx\Views\editor\all_tools.aspx" />
+    <Content Include="Areas\aspx\Views\editor\api.aspx" />
+    <Content Include="Areas\aspx\Views\editor\custom_tools.aspx" />
+    <Content Include="Areas\aspx\Views\editor\events.aspx" />
+    <Content Include="Areas\aspx\Views\editor\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\editor\imagebrowser.aspx" />
+    <Content Include="Areas\aspx\Views\editor\index.aspx" />
+    <Content Include="Areas\aspx\Views\editor\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\editor\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\editor\snippets.aspx" />
+    <Content Include="Areas\aspx\Views\editor\styles.aspx" />
+    <Content Include="Areas\aspx\Views\grid\aggregates.aspx" />
+    <Content Include="Areas\aspx\Views\grid\api.aspx" />
+    <Content Include="Areas\aspx\Views\grid\columnsettings.aspx" />
+    <Content Include="Areas\aspx\Views\grid\column_menu.aspx" />
+    <Content Include="Areas\aspx\Views\grid\column_reordering.aspx" />
+    <Content Include="Areas\aspx\Views\grid\column_resizing.aspx" />
+    <Content Include="Areas\aspx\Views\grid\frozen_columns.aspx" />
+    <Content Include="Areas\aspx\Views\grid\everlive.aspx" />
+    <Content Include="Areas\aspx\Views\grid\signalr.aspx" />
+    <Content Include="Areas\aspx\Views\grid\webapi.aspx" />
+    <Content Include="Areas\aspx\Views\grid\customajaxbinding.aspx" />
+    <Content Include="Areas\aspx\Views\grid\customserverbinding.aspx" />
+    <Content Include="Areas\aspx\Views\grid\custom_command.aspx" />
+    <Content Include="Areas\aspx\Views\grid\detailtemplate.aspx" />
+    <Content Include="Areas\aspx\Views\grid\editing.aspx" />
+    <Content Include="Areas\aspx\Views\grid\editing_custom_validation.aspx" />
+    <Content Include="Areas\aspx\Views\grid\editing_custom.aspx" />
+    <Content Include="Areas\aspx\Views\grid\editing_inline.aspx" />
+    <Content Include="Areas\aspx\Views\grid\editing_popup.aspx" />
+    <Content Include="Areas\aspx\Views\grid\EditorTemplates\ClientCategory.ascx" />
+    <Content Include="Areas\aspx\Views\grid\EditorTemplates\ClientEmployee.ascx" />
+    <Content Include="Areas\aspx\Views\grid\events.aspx" />
+    <Content Include="Areas\aspx\Views\grid\filter_menu_customization.aspx" />
+    <Content Include="Areas\aspx\Views\grid\foreignkeycolumn.aspx" />
+    <Content Include="Areas\aspx\Views\grid\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\grid\headertemplate.aspx" />
+    <Content Include="Areas\aspx\Views\grid\hierarchy.aspx" />
+    <Content Include="Areas\aspx\Views\grid\index.aspx" />
+    <Content Include="Areas\aspx\Views\grid\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\grid\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\grid\paging.aspx" />
+    <Content Include="Areas\aspx\Views\grid\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\grid\rowtemplate.aspx" />
+    <Content Include="Areas\aspx\Views\grid\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\grid\selection.aspx" />
+    <Content Include="Areas\aspx\Views\grid\serveraggregates.aspx" />
+    <Content Include="Areas\aspx\Views\grid\serverbinding.aspx" />
+    <Content Include="Areas\aspx\Views\grid\serverdetails.aspx" />
+    <Content Include="Areas\aspx\Views\grid\serverediting.aspx" />
+    <Content Include="Areas\aspx\Views\grid\serverhierarchy.aspx" />
+    <Content Include="Areas\aspx\Views\grid\serverrowtemplate.aspx" />
+    <Content Include="Areas\aspx\Views\grid\sorting.aspx" />
+    <Content Include="Areas\aspx\Views\grid\toolbar_template.aspx" />
+    <Content Include="Areas\aspx\Views\grid\virtualization_remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\listview\custom_datasource.aspx" />
+    <Content Include="Areas\aspx\Views\listview\editing.aspx" />
+    <Content Include="Areas\aspx\Views\listview\EditorTemplates\ProductViewModel.ascx" />
+    <Content Include="Areas\aspx\Views\listview\index.aspx" />
+    <Content Include="Areas\aspx\Views\listview\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\listview\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\listview\selection.aspx" />
+    <Content Include="Areas\aspx\Views\menu\animation.aspx" />
+    <Content Include="Areas\aspx\Views\menu\api.aspx" />
+    <Content Include="Areas\aspx\Views\menu\direction.aspx" />
+    <Content Include="Areas\aspx\Views\menu\events.aspx" />
+    <Content Include="Areas\aspx\Views\menu\images.aspx" />
+    <Content Include="Areas\aspx\Views\menu\index.aspx" />
+    <Content Include="Areas\aspx\Views\menu\modelbinding.aspx" />
+    <Content Include="Areas\aspx\Views\menu\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\menu\orientation.aspx" />
+    <Content Include="Areas\aspx\Views\menu\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\menu\sitemapbinding.aspx" />
+    <Content Include="Areas\aspx\Views\multiselect\api.aspx" />
+    <Content Include="Areas\aspx\Views\multiselect\clientfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\multiselect\events.aspx" />
+    <Content Include="Areas\aspx\Views\multiselect\index.aspx" />
+    <Content Include="Areas\aspx\Views\multiselect\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\multiselect\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\multiselect\serverfiltering.aspx" />
+    <Content Include="Areas\aspx\Views\multiselect\template.aspx" />
+    <Content Include="Areas\aspx\Views\notification\api.aspx" />
+    <Content Include="Areas\aspx\Views\notification\events.aspx" />
+    <Content Include="Areas\aspx\Views\notification\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\notification\index.aspx" />
+    <Content Include="Areas\aspx\Views\notification\position_stacking.aspx" />
+    <Content Include="Areas\aspx\Views\notification\templates.aspx" />
+    <Content Include="Areas\aspx\Views\numerictextbox\api.aspx" />
+    <Content Include="Areas\aspx\Views\numerictextbox\events.aspx" />
+    <Content Include="Areas\aspx\Views\numerictextbox\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\numerictextbox\index.aspx" />
+    <Content Include="Areas\aspx\Views\numerictextbox\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\numerictextbox\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\panelbar\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\panelbar\animation.aspx" />
+    <Content Include="Areas\aspx\Views\panelbar\api.aspx" />
+    <Content Include="Areas\aspx\Views\panelbar\events.aspx" />
+    <Content Include="Areas\aspx\Views\panelbar\images.aspx" />
+    <Content Include="Areas\aspx\Views\panelbar\index.aspx" />
+    <Content Include="Areas\aspx\Views\panelbar\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\panelbar\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\progressbar\api.aspx" />
+    <Content Include="Areas\aspx\Views\progressbar\chunk.aspx" />
+    <Content Include="Areas\aspx\Views\progressbar\customlabel.aspx" />
+    <Content Include="Areas\aspx\Views\progressbar\events.aspx" />
+    <Content Include="Areas\aspx\Views\progressbar\index.aspx" />
+    <Content Include="Areas\aspx\Views\progressbar\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\progressbar\vertical.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\api.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\custom_datasource.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\webapi.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\restriction.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\move_resize.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\resources_grouping_vertical.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\resources_grouping_horizontal.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\events.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\index.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\resources.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\selection.aspx" />
+    <Content Include="Areas\aspx\Views\scheduler\templates.aspx" />
+    <Content Include="Areas\aspx\Views\slider\api.aspx" />
+    <Content Include="Areas\aspx\Views\slider\events.aspx" />
+    <Content Include="Areas\aspx\Views\slider\index.aspx" />
+    <Content Include="Areas\aspx\Views\slider\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\slider\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\constraints.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\events.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\filter_disable.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\handlers.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\index.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\integration_grid.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\integration_listview.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\integration_tabstrip.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\linkedlists.aspx" />
+    <Content Include="Areas\aspx\Views\sortable\sortable_panels.aspx" />
+    <Content Include="Areas\aspx\Views\splitter\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\splitter\api.aspx" />
+    <Content Include="Areas\aspx\Views\splitter\events.aspx" />
+    <Content Include="Areas\aspx\Views\splitter\index.aspx" />
+    <Content Include="Areas\aspx\Views\splitter\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\splitter\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\tabstrip\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\tabstrip\animation.aspx" />
+    <Content Include="Areas\aspx\Views\tabstrip\api.aspx" />
+    <Content Include="Areas\aspx\Views\tabstrip\events.aspx" />
+    <Content Include="Areas\aspx\Views\tabstrip\images.aspx" />
+    <Content Include="Areas\aspx\Views\tabstrip\index.aspx" />
+    <Content Include="Areas\aspx\Views\tabstrip\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\tabstrip\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\timepicker\api.aspx" />
+    <Content Include="Areas\aspx\Views\timepicker\events.aspx" />
+    <Content Include="Areas\aspx\Views\timepicker\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\timepicker\index.aspx" />
+    <Content Include="Areas\aspx\Views\timepicker\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\timepicker\rangeselection.aspx" />
+    <Content Include="Areas\aspx\Views\timepicker\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\tooltip\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\tooltip\api.aspx" />
+    <Content Include="Areas\aspx\Views\tooltip\details.ascx" />
+    <Content Include="Areas\aspx\Views\tooltip\events.aspx" />
+    <Content Include="Areas\aspx\Views\tooltip\index.aspx" />
+    <Content Include="Areas\aspx\Views\tooltip\template.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\animation.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\api.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\checkboxes.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\custom_data.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\dragdrop.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\events.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\images.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\index.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\treeview\templates.aspx" />
+    <Content Include="Areas\aspx\Views\upload\api.aspx" />
+    <Content Include="Areas\aspx\Views\upload\async.aspx" />
+    <Content Include="Areas\aspx\Views\upload\events.aspx" />
+    <Content Include="Areas\aspx\Views\upload\index.aspx" />
+    <Content Include="Areas\aspx\Views\upload\initialfiles.aspx" />
+    <Content Include="Areas\aspx\Views\upload\result.aspx" />
+    <Content Include="Areas\aspx\Views\upload\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\upload\templates.aspx" />
+    <Content Include="Areas\aspx\Views\window\actions.aspx" />
+    <Content Include="Areas\aspx\Views\window\ajax.aspx" />
+    <Content Include="Areas\aspx\Views\window\ajaxcontent.aspx" />
+    <Content Include="Areas\aspx\Views\window\ajaxcontent1.ascx" />
+    <Content Include="Areas\aspx\Views\window\animation.aspx" />
+    <Content Include="Areas\aspx\Views\window\api.aspx" />
+    <Content Include="Areas\aspx\Views\window\events.aspx" />
+    <Content Include="Areas\aspx\Views\window\index.aspx" />
+    <Content Include="Areas\aspx\Views\window\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\window\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\diagram\layout.aspx" />
+    <None Include="Areas\razor\Views\diagram\index.cshtml" />
+    <None Include="Areas\razor\Views\diagram\layout.cshtml" />
     <Content Include="Content\dataviz\dashboards\area-chart.png" />
     <Content Include="Content\dataviz\dashboards\car-dashboard.png" />
     <Content Include="Content\dataviz\dashboards\car.gif" />
@@ -2458,12 +2458,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Areas\razor\Views\web\notification\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\notification\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\notification\api.cshtml" />
+    <Content Include="Areas\razor\Views\notification\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\notification\events.cshtml" />
+    <Content Include="Areas\razor\Views\notification\api.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\map\api.cshtml" />
+    <Content Include="Areas\razor\Views\map\api.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -2478,349 +2478,349 @@
     <Content Include="Areas\aspx\Views\Shared\Mobile.Master" />
     <Content Include="Areas\aspx\Views\Shared\Web.Master" />
     <Content Include="Areas\aspx\Views\Web.config" />
-    <Content Include="Areas\razor\Views\dataviz\api\events.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\api\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\api\selection.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_charts\date_axis.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_charts\grouped_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_charts\multiple_axes.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\area_charts\stacked_area.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\barcode\api.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\barcode\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\column.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\date_axis.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\gap_spacing.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_stacked_bar.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\multiple_axes.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\plotbands.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\stacked_bar.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bubble_charts\grouped_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bubble_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bubble_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bubble_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bullet_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bullet_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\bullet_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\customization\plotbands.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\dashboards\car_dashboard.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\donut_charts\donut_labels.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\donut_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\donut_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\donut_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\financial\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\financial\panes.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\financial\virtualization.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\linear_gauge\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\linear_gauge\scale_options.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\line_charts\date_axis.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\line_charts\grouped_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\line_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\line_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\line_charts\multiple_axes.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\line_charts\notes.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\line_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\line_charts\stacked_line.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\pie_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\pie_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\pie_charts\pie_labels.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\pie_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\polar_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\polar_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\polar_charts\polar_area.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\polar_charts\polar_scatter.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\polar_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\qrcode\api.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\qrcode\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radar_charts\grouped_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radar_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radar_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radar_charts\radar_area.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radar_charts\radar_column.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radar_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radial_gauge\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\radial_gauge\scale_options.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\scatter_charts\date_axis.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\scatter_charts\grouped_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\scatter_charts\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\scatter_charts\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\scatter_charts\multiple_axes.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\scatter_charts\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\scatter_charts\scatter_line.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\sparklines\index.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\sparklines\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\sparklines\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\actionsheet\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\application\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\application\loadingpopup.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\application\transitions.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\buttongroup\appearance.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\buttongroup\badges.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\buttongroup\events.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\buttongroup\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\buttongroup\navbar.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\button\appearance.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\button\badges.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\button\events.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\button\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\drawer\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\drawer\two_way_drawers.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\layout\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\databinding.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\detailbuttons.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\editdetails.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\editing.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\endless_scrolling.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\filtering.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\fixedheaders.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\hierarchical_databinding.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\press_to_load_more.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\pull_to_refresh.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\pull_with_endless.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\listview\templates.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\modalview\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\navbar\appearance.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\navbar\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\popover\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\scrollview\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\splitview\appearance.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\splitview\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\switch\events.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\switch\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\tabstrip\appearance.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\tabstrip\badges.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\tabstrip\index.cshtml" />
-    <Content Include="Areas\razor\Views\mobile\view\zoomable.cshtml" />
+    <Content Include="Areas\razor\Views\api\events.cshtml" />
+    <Content Include="Areas\razor\Views\api\index.cshtml" />
+    <Content Include="Areas\razor\Views\api\selection.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\date_axis.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\multiple_axes.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\stacked_area.cshtml" />
+    <Content Include="Areas\razor\Views\barcode\api.cshtml" />
+    <Content Include="Areas\razor\Views\barcode\index.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\column.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\date_axis.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\gap_spacing.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\grouped_stacked_bar.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\multiple_axes.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\plotbands.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\stacked_bar.cshtml" />
+    <Content Include="Areas\razor\Views\bubble_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\bubble_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\bubble_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\bubble_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\bullet_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\bullet_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\bullet_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\customization\plotbands.cshtml" />
+    <Content Include="Areas\razor\Views\dashboards\car_dashboard.cshtml" />
+    <Content Include="Areas\razor\Views\donut_charts\donut_labels.cshtml" />
+    <Content Include="Areas\razor\Views\donut_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\donut_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\donut_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\financial\index.cshtml" />
+    <Content Include="Areas\razor\Views\financial\panes.cshtml" />
+    <Content Include="Areas\razor\Views\financial\virtualization.cshtml" />
+    <Content Include="Areas\razor\Views\linear_gauge\index.cshtml" />
+    <Content Include="Areas\razor\Views\linear_gauge\scale_options.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\date_axis.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\multiple_axes.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\notes.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\stacked_line.cshtml" />
+    <Content Include="Areas\razor\Views\pie_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\pie_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\pie_charts\pie_labels.cshtml" />
+    <Content Include="Areas\razor\Views\pie_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\polar_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\polar_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\polar_charts\polar_area.cshtml" />
+    <Content Include="Areas\razor\Views\polar_charts\polar_scatter.cshtml" />
+    <Content Include="Areas\razor\Views\polar_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\qrcode\api.cshtml" />
+    <Content Include="Areas\razor\Views\qrcode\index.cshtml" />
+    <Content Include="Areas\razor\Views\radar_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\radar_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\radar_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\radar_charts\radar_area.cshtml" />
+    <Content Include="Areas\razor\Views\radar_charts\radar_column.cshtml" />
+    <Content Include="Areas\razor\Views\radar_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\radial_gauge\index.cshtml" />
+    <Content Include="Areas\razor\Views\radial_gauge\scale_options.cshtml" />
+    <Content Include="Areas\razor\Views\scatter_charts\date_axis.cshtml" />
+    <Content Include="Areas\razor\Views\scatter_charts\grouped_data.cshtml" />
+    <Content Include="Areas\razor\Views\scatter_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\scatter_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\scatter_charts\multiple_axes.cshtml" />
+    <Content Include="Areas\razor\Views\scatter_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\scatter_charts\scatter_line.cshtml" />
+    <Content Include="Areas\razor\Views\sparklines\index.cshtml" />
+    <Content Include="Areas\razor\Views\sparklines\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\sparklines\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\actionsheet\index.cshtml" />
+    <Content Include="Areas\razor\Views\application\index.cshtml" />
+    <Content Include="Areas\razor\Views\application\loadingpopup.cshtml" />
+    <Content Include="Areas\razor\Views\application\transitions.cshtml" />
+    <Content Include="Areas\razor\Views\buttongroup\appearance.cshtml" />
+    <Content Include="Areas\razor\Views\buttongroup\badges.cshtml" />
+    <Content Include="Areas\razor\Views\buttongroup\events.cshtml" />
+    <Content Include="Areas\razor\Views\buttongroup\index.cshtml" />
+    <Content Include="Areas\razor\Views\buttongroup\navbar.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_button\appearance.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_button\badges.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_button\events.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_button\index.cshtml" />
+    <Content Include="Areas\razor\Views\drawer\index.cshtml" />
+    <Content Include="Areas\razor\Views\drawer\two_way_drawers.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_layout\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\databinding.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\detailbuttons.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\editdetails.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\editing.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\endless_scrolling.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\filtering.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\fixedheaders.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\hierarchical_databinding.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\press_to_load_more.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\pull_to_refresh.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\pull_with_endless.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_listview\templates.cshtml" />
+    <Content Include="Areas\razor\Views\modalview\index.cshtml" />
+    <Content Include="Areas\razor\Views\navbar\appearance.cshtml" />
+    <Content Include="Areas\razor\Views\navbar\index.cshtml" />
+    <Content Include="Areas\razor\Views\popover\index.cshtml" />
+    <Content Include="Areas\razor\Views\scrollview\index.cshtml" />
+    <Content Include="Areas\razor\Views\splitview\appearance.cshtml" />
+    <Content Include="Areas\razor\Views\splitview\index.cshtml" />
+    <Content Include="Areas\razor\Views\switch\events.cshtml" />
+    <Content Include="Areas\razor\Views\switch\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_tabstrip\appearance.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_tabstrip\badges.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_tabstrip\index.cshtml" />
+    <Content Include="Areas\razor\Views\mobile_view\zoomable.cshtml" />
     <Content Include="Areas\razor\Views\Shared\_DataVizLayout.cshtml" />
     <Content Include="Areas\razor\Views\Shared\_MobileLayout.cshtml" />
     <Content Include="Areas\razor\Views\Shared\_WebLayout.cshtml" />
     <Content Include="Areas\razor\Views\Web.config" />
-    <Content Include="Areas\razor\Views\web\autocomplete\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\autocomplete\clientfiltering.cshtml" />
-    <Content Include="Areas\razor\Views\web\autocomplete\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\autocomplete\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\autocomplete\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\autocomplete\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\autocomplete\serverfiltering.cshtml" />
-    <Content Include="Areas\razor\Views\web\autocomplete\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\calendar\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\calendar\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\calendar\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\calendar\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\calendar\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\calendar\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\calendar\selectaction.cshtml" />
-    <Content Include="Areas\razor\Views\web\calendar\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\colorpicker\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\colorpicker\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\colorpicker\flatcolorpicker.cshtml" />
-    <Content Include="Areas\razor\Views\web\colorpicker\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\colorpicker\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\colorpicker\palette.cshtml" />
-    <Content Include="Areas\razor\Views\web\colorpicker\palette_presets.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\cascadingcombobox.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\clientfiltering.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\serverfiltering.cshtml" />
-    <Content Include="Areas\razor\Views\web\combobox\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\datepicker\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\datepicker\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\datepicker\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\datepicker\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\datepicker\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\datepicker\rangeselection.cshtml" />
-    <Content Include="Areas\razor\Views\web\datepicker\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\datepicker\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\rangeselection.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\datetimepicker\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\dropdownlist\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\dropdownlist\cascadingdropdownlist.cshtml" />
-    <Content Include="Areas\razor\Views\web\dropdownlist\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\dropdownlist\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\dropdownlist\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\dropdownlist\remotedatasource.cshtml" />
-    <Content Include="Areas\razor\Views\web\dropdownlist\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\dropdownlist\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\all_tools.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\custom_tools.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\imagebrowser.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\snippets.cshtml" />
-    <Content Include="Areas\razor\Views\web\editor\styles.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\aggregates.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\columnsettings.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\column_menu.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\column_reordering.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\column_resizing.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\customajaxbinding.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\customserverbinding.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\custom_command.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\detailtemplate.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\editing.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\editing_custom_validation.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\editing_custom.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\editing_inline.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\editing_popup.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\EditorTemplates\ClientCategory.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\EditorTemplates\ClientEmployee.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\filter_menu_customization.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\foreignkeycolumn.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\headertemplate.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\hierarchy.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\paging.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\rowtemplate.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\selection.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\serveraggregates.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\serverbinding.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\serverdetails.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\serverediting.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\serverhierarchy.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\serverrowtemplate.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\sorting.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\toolbar_template.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\virtualization_remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\web\listview\editing.cshtml" />
-    <Content Include="Areas\razor\Views\web\listview\EditorTemplates\ProductViewModel.cshtml" />
-    <Content Include="Areas\razor\Views\web\listview\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\listview\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\listview\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\listview\selection.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\animation.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\direction.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\images.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\modelbinding.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\orientation.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\menu\sitemapbinding.cshtml" />
-    <Content Include="Areas\razor\Views\web\multiselect\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\multiselect\clientfiltering.cshtml" />
-    <Content Include="Areas\razor\Views\web\multiselect\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\multiselect\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\multiselect\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\multiselect\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\multiselect\serverfiltering.cshtml" />
-    <Content Include="Areas\razor\Views\web\multiselect\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\numerictextbox\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\numerictextbox\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\numerictextbox\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\numerictextbox\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\numerictextbox\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\numerictextbox\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\panelbar\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\web\panelbar\animation.cshtml" />
-    <Content Include="Areas\razor\Views\web\panelbar\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\panelbar\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\panelbar\images.cshtml" />
-    <Content Include="Areas\razor\Views\web\panelbar\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\panelbar\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\panelbar\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\Index.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\resources.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\resources_grouping_horizontal.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\resources_grouping_vertical.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\selection.cshtml" />
-    <Content Include="Areas\razor\Views\web\scheduler\templates.cshtml" />
-    <Content Include="Areas\razor\Views\web\slider\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\slider\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\slider\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\slider\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\slider\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\splitter\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\web\splitter\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\splitter\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\splitter\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\splitter\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\splitter\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\tabstrip\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\web\tabstrip\animation.cshtml" />
-    <Content Include="Areas\razor\Views\web\tabstrip\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\tabstrip\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\tabstrip\images.cshtml" />
-    <Content Include="Areas\razor\Views\web\tabstrip\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\tabstrip\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\tabstrip\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\timepicker\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\timepicker\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\timepicker\globalization.cshtml" />
-    <Content Include="Areas\razor\Views\web\timepicker\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\timepicker\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\timepicker\rangeselection.cshtml" />
-    <Content Include="Areas\razor\Views\web\timepicker\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\tooltip\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\web\tooltip\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\tooltip\details.cshtml" />
-    <Content Include="Areas\razor\Views\web\tooltip\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\tooltip\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\tooltip\template.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\animation.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\checkboxes.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\custom_data.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\dragdrop.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\images.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\local_data.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\remote_data.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\treeview\templates.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\async.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\initialfiles.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\result.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\rtl.cshtml" />
-    <Content Include="Areas\razor\Views\web\upload\templates.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\actions.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\ajax.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\ajaxcontent.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\ajaxcontent1.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\animation.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\index.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\window\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\api.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\clientfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\events.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\index.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\serverfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\template.cshtml" />
+    <Content Include="Areas\razor\Views\calendar\api.cshtml" />
+    <Content Include="Areas\razor\Views\calendar\events.cshtml" />
+    <Content Include="Areas\razor\Views\calendar\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\calendar\index.cshtml" />
+    <Content Include="Areas\razor\Views\calendar\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\calendar\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\calendar\selectaction.cshtml" />
+    <Content Include="Areas\razor\Views\calendar\template.cshtml" />
+    <Content Include="Areas\razor\Views\colorpicker\api.cshtml" />
+    <Content Include="Areas\razor\Views\colorpicker\events.cshtml" />
+    <Content Include="Areas\razor\Views\colorpicker\flatcolorpicker.cshtml" />
+    <Content Include="Areas\razor\Views\colorpicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\colorpicker\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\colorpicker\palette.cshtml" />
+    <Content Include="Areas\razor\Views\colorpicker\palette_presets.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\api.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\cascadingcombobox.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\clientfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\events.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\index.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\serverfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\template.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\api.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\events.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\rangeselection.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\datepicker\template.cshtml" />
+    <Content Include="Areas\razor\Views\datetimepicker\api.cshtml" />
+    <Content Include="Areas\razor\Views\datetimepicker\events.cshtml" />
+    <Content Include="Areas\razor\Views\datetimepicker\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\datetimepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\datetimepicker\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\datetimepicker\rangeselection.cshtml" />
+    <Content Include="Areas\razor\Views\datetimepicker\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\datetimepicker\template.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\api.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\cascadingdropdownlist.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\events.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\index.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\remotedatasource.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\template.cshtml" />
+    <Content Include="Areas\razor\Views\editor\all_tools.cshtml" />
+    <Content Include="Areas\razor\Views\editor\api.cshtml" />
+    <Content Include="Areas\razor\Views\editor\custom_tools.cshtml" />
+    <Content Include="Areas\razor\Views\editor\events.cshtml" />
+    <Content Include="Areas\razor\Views\editor\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\editor\imagebrowser.cshtml" />
+    <Content Include="Areas\razor\Views\editor\index.cshtml" />
+    <Content Include="Areas\razor\Views\editor\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\editor\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\editor\snippets.cshtml" />
+    <Content Include="Areas\razor\Views\editor\styles.cshtml" />
+    <Content Include="Areas\razor\Views\grid\aggregates.cshtml" />
+    <Content Include="Areas\razor\Views\grid\api.cshtml" />
+    <Content Include="Areas\razor\Views\grid\columnsettings.cshtml" />
+    <Content Include="Areas\razor\Views\grid\column_menu.cshtml" />
+    <Content Include="Areas\razor\Views\grid\column_reordering.cshtml" />
+    <Content Include="Areas\razor\Views\grid\column_resizing.cshtml" />
+    <Content Include="Areas\razor\Views\grid\customajaxbinding.cshtml" />
+    <Content Include="Areas\razor\Views\grid\customserverbinding.cshtml" />
+    <Content Include="Areas\razor\Views\grid\custom_command.cshtml" />
+    <Content Include="Areas\razor\Views\grid\detailtemplate.cshtml" />
+    <Content Include="Areas\razor\Views\grid\editing.cshtml" />
+    <Content Include="Areas\razor\Views\grid\editing_custom_validation.cshtml" />
+    <Content Include="Areas\razor\Views\grid\editing_custom.cshtml" />
+    <Content Include="Areas\razor\Views\grid\editing_inline.cshtml" />
+    <Content Include="Areas\razor\Views\grid\editing_popup.cshtml" />
+    <Content Include="Areas\razor\Views\grid\EditorTemplates\ClientCategory.cshtml" />
+    <Content Include="Areas\razor\Views\grid\EditorTemplates\ClientEmployee.cshtml" />
+    <Content Include="Areas\razor\Views\grid\events.cshtml" />
+    <Content Include="Areas\razor\Views\grid\filter_menu_customization.cshtml" />
+    <Content Include="Areas\razor\Views\grid\foreignkeycolumn.cshtml" />
+    <Content Include="Areas\razor\Views\grid\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\grid\headertemplate.cshtml" />
+    <Content Include="Areas\razor\Views\grid\hierarchy.cshtml" />
+    <Content Include="Areas\razor\Views\grid\index.cshtml" />
+    <Content Include="Areas\razor\Views\grid\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\grid\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\grid\paging.cshtml" />
+    <Content Include="Areas\razor\Views\grid\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\grid\rowtemplate.cshtml" />
+    <Content Include="Areas\razor\Views\grid\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\grid\selection.cshtml" />
+    <Content Include="Areas\razor\Views\grid\serveraggregates.cshtml" />
+    <Content Include="Areas\razor\Views\grid\serverbinding.cshtml" />
+    <Content Include="Areas\razor\Views\grid\serverdetails.cshtml" />
+    <Content Include="Areas\razor\Views\grid\serverediting.cshtml" />
+    <Content Include="Areas\razor\Views\grid\serverhierarchy.cshtml" />
+    <Content Include="Areas\razor\Views\grid\serverrowtemplate.cshtml" />
+    <Content Include="Areas\razor\Views\grid\sorting.cshtml" />
+    <Content Include="Areas\razor\Views\grid\toolbar_template.cshtml" />
+    <Content Include="Areas\razor\Views\grid\virtualization_remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\listview\editing.cshtml" />
+    <Content Include="Areas\razor\Views\listview\EditorTemplates\ProductViewModel.cshtml" />
+    <Content Include="Areas\razor\Views\listview\index.cshtml" />
+    <Content Include="Areas\razor\Views\listview\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\listview\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\listview\selection.cshtml" />
+    <Content Include="Areas\razor\Views\menu\animation.cshtml" />
+    <Content Include="Areas\razor\Views\menu\api.cshtml" />
+    <Content Include="Areas\razor\Views\menu\direction.cshtml" />
+    <Content Include="Areas\razor\Views\menu\events.cshtml" />
+    <Content Include="Areas\razor\Views\menu\images.cshtml" />
+    <Content Include="Areas\razor\Views\menu\index.cshtml" />
+    <Content Include="Areas\razor\Views\menu\modelbinding.cshtml" />
+    <Content Include="Areas\razor\Views\menu\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\menu\orientation.cshtml" />
+    <Content Include="Areas\razor\Views\menu\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\menu\sitemapbinding.cshtml" />
+    <Content Include="Areas\razor\Views\multiselect\api.cshtml" />
+    <Content Include="Areas\razor\Views\multiselect\clientfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\multiselect\events.cshtml" />
+    <Content Include="Areas\razor\Views\multiselect\index.cshtml" />
+    <Content Include="Areas\razor\Views\multiselect\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\multiselect\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\multiselect\serverfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\multiselect\template.cshtml" />
+    <Content Include="Areas\razor\Views\numerictextbox\api.cshtml" />
+    <Content Include="Areas\razor\Views\numerictextbox\events.cshtml" />
+    <Content Include="Areas\razor\Views\numerictextbox\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\numerictextbox\index.cshtml" />
+    <Content Include="Areas\razor\Views\numerictextbox\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\numerictextbox\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\animation.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\api.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\events.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\images.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\index.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\panelbar\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\api.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\events.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\Index.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\resources.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\resources_grouping_horizontal.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\resources_grouping_vertical.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\selection.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\templates.cshtml" />
+    <Content Include="Areas\razor\Views\slider\api.cshtml" />
+    <Content Include="Areas\razor\Views\slider\events.cshtml" />
+    <Content Include="Areas\razor\Views\slider\index.cshtml" />
+    <Content Include="Areas\razor\Views\slider\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\slider\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\splitter\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\splitter\api.cshtml" />
+    <Content Include="Areas\razor\Views\splitter\events.cshtml" />
+    <Content Include="Areas\razor\Views\splitter\index.cshtml" />
+    <Content Include="Areas\razor\Views\splitter\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\splitter\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\tabstrip\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\tabstrip\animation.cshtml" />
+    <Content Include="Areas\razor\Views\tabstrip\api.cshtml" />
+    <Content Include="Areas\razor\Views\tabstrip\events.cshtml" />
+    <Content Include="Areas\razor\Views\tabstrip\images.cshtml" />
+    <Content Include="Areas\razor\Views\tabstrip\index.cshtml" />
+    <Content Include="Areas\razor\Views\tabstrip\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\tabstrip\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\timepicker\api.cshtml" />
+    <Content Include="Areas\razor\Views\timepicker\events.cshtml" />
+    <Content Include="Areas\razor\Views\timepicker\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\timepicker\index.cshtml" />
+    <Content Include="Areas\razor\Views\timepicker\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\timepicker\rangeselection.cshtml" />
+    <Content Include="Areas\razor\Views\timepicker\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\tooltip\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\tooltip\api.cshtml" />
+    <Content Include="Areas\razor\Views\tooltip\details.cshtml" />
+    <Content Include="Areas\razor\Views\tooltip\events.cshtml" />
+    <Content Include="Areas\razor\Views\tooltip\index.cshtml" />
+    <Content Include="Areas\razor\Views\tooltip\template.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\animation.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\api.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\checkboxes.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\custom_data.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\dragdrop.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\events.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\images.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\index.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\treeview\templates.cshtml" />
+    <Content Include="Areas\razor\Views\upload\api.cshtml" />
+    <Content Include="Areas\razor\Views\upload\async.cshtml" />
+    <Content Include="Areas\razor\Views\upload\events.cshtml" />
+    <Content Include="Areas\razor\Views\upload\index.cshtml" />
+    <Content Include="Areas\razor\Views\upload\initialfiles.cshtml" />
+    <Content Include="Areas\razor\Views\upload\result.cshtml" />
+    <Content Include="Areas\razor\Views\upload\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\upload\templates.cshtml" />
+    <Content Include="Areas\razor\Views\window\actions.cshtml" />
+    <Content Include="Areas\razor\Views\window\ajax.cshtml" />
+    <Content Include="Areas\razor\Views\window\ajaxcontent.cshtml" />
+    <Content Include="Areas\razor\Views\window\ajaxcontent1.cshtml" />
+    <Content Include="Areas\razor\Views\window\animation.cshtml" />
+    <Content Include="Areas\razor\Views\window\api.cshtml" />
+    <Content Include="Areas\razor\Views\window\events.cshtml" />
+    <Content Include="Areas\razor\Views\window\index.cshtml" />
+    <Content Include="Areas\razor\Views\window\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\window\rtl.cshtml" />
     <Content Include="Areas\razor\Views\_ViewStart.cshtml" />
     <Content Include="Content\dataviz\dashboards\stock-data-2007.json" />
     <Content Include="Content\dataviz\dashboards\stock-data-2008.json" />
@@ -2895,135 +2895,135 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\grid\webapi.cshtml" />
+    <Content Include="Areas\razor\Views\grid\webapi.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\scheduler\webapi.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\webapi.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\button\index.cshtml" />
+    <Content Include="Areas\razor\Views\button\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\button\images.cshtml" />
+    <Content Include="Areas\razor\Views\button\images.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\button\api.cshtml" />
-    <Content Include="Areas\razor\Views\web\button\events.cshtml" />
-    <Content Include="Areas\razor\Views\web\button\navigation.cshtml" />
-    <Content Include="Areas\razor\Views\web\button\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\button\api.cshtml" />
+    <Content Include="Areas\razor\Views\button\events.cshtml" />
+    <Content Include="Areas\razor\Views\button\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\button\rtl.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\progressbar\index.cshtml" />
+    <Content Include="Areas\razor\Views\progressbar\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\editor\inline_editing.cshtml" />
+    <Content Include="Areas\razor\Views\editor\inline_editing.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\editor\inline_editing.aspx" />
+    <Content Include="Areas\aspx\Views\editor\inline_editing.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\progressbar\events.cshtml" />
+    <Content Include="Areas\razor\Views\progressbar\events.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\progressbar\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\progressbar\rtl.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\area_charts\error_bars.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\error_bars.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\line_charts\error_bars.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\error_bars.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\error_bars.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\error_bars.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\scatter_charts\smooth_scatter_line.cshtml" />
+    <Content Include="Areas\razor\Views\scatter_charts\smooth_scatter_line.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\progressbar\api.cshtml">
+    <Content Include="Areas\razor\Views\progressbar\api.cshtml">
       <SubType>Code</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\progressbar\chunk.cshtml" />
+    <Content Include="Areas\razor\Views\progressbar\chunk.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\progressbar\customlabel.cshtml" />
+    <Content Include="Areas\razor\Views\progressbar\customlabel.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\area_charts\step_area.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\step_area.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\area_charts\smooth_area.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\smooth_area.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\line_charts\step_line.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\step_line.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\line_charts\smooth_line.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\smooth_line.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\radar_charts\smooth_radar_line.cshtml" />
+    <Content Include="Areas\razor\Views\radar_charts\smooth_radar_line.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\polar_charts\smooth_polar_line.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\funnel_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\polar_charts\smooth_polar_line.cshtml" />
+    <Content Include="Areas\razor\Views\funnel_charts\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\funnel_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\funnel_charts\local_data.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\funnel_charts\funnel_labels.cshtml" />
+    <Content Include="Areas\razor\Views\funnel_charts\funnel_labels.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\funnel_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\funnel_charts\remote_data.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\map\index.cshtml" />
+    <Content Include="Areas\razor\Views\map\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\box_plot_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\box_plot_charts\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\box_plot_charts\local_data.cshtml" />
+    <Content Include="Areas\razor\Views\box_plot_charts\local_data.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\box_plot_charts\remote_data.cshtml" />
+    <Content Include="Areas\razor\Views\box_plot_charts\remote_data.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\scheduler\move_resize.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\move_resize.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\scheduler\restriction.cshtml" />
-    <Content Include="Areas\razor\Views\dataviz\map\geojson.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\restriction.cshtml" />
+    <Content Include="Areas\razor\Views\map\geojson.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\map\events.cshtml" />
+    <Content Include="Areas\razor\Views\map\events.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\dataviz\map\events.aspx" />
+    <Content Include="Areas\aspx\Views\map\events.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\dataviz\map\geojson.aspx" />
+    <Content Include="Areas\aspx\Views\map\geojson.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\dataviz\map\index.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\funnel_charts\funnel_labels.aspx" />
+    <Content Include="Areas\aspx\Views\map\index.aspx" />
+    <Content Include="Areas\aspx\Views\funnel_charts\funnel_labels.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\dataviz\funnel_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\funnel_charts\index.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\dataviz\funnel_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\funnel_charts\local_data.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\dataviz\funnel_charts\remote_data.aspx" />
+    <Content Include="Areas\aspx\Views\funnel_charts\remote_data.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\progressbar\vertical.cshtml" />
+    <Content Include="Areas\razor\Views\progressbar\vertical.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
@@ -3040,140 +3040,141 @@
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\map\bing.cshtml" />
+    <Content Include="Areas\razor\Views\map\bing.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\dataviz\map\bing.aspx" />
+    <Content Include="Areas\aspx\Views\map\bing.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\sortable\index.cshtml" />
+    <Content Include="Areas\razor\Views\sortable\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\sortable\constraints.cshtml">
+    <Content Include="Areas\razor\Views\sortable\constraints.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\razor\Views\web\sortable\events.cshtml">
+    <Content Include="Areas\razor\Views\sortable\events.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\razor\Views\web\sortable\filter_disable.cshtml" />
-    <Content Include="Areas\razor\Views\web\sortable\handlers.cshtml" />
+    <Content Include="Areas\razor\Views\sortable\filter_disable.cshtml" />
+    <Content Include="Areas\razor\Views\sortable\handlers.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\sortable\linkedlists.cshtml" />
+    <Content Include="Areas\razor\Views\sortable\linkedlists.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\grid\everlive.cshtml" />
+    <Content Include="Areas\razor\Views\grid\everlive.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\grid\odata.cshtml" />
+    <Content Include="Areas\razor\Views\grid\odata.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\grid\odata.aspx" />
+    <Content Include="Areas\aspx\Views\grid\odata.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\grid\custom_datasource.cshtml" />
+    <Content Include="Areas\razor\Views\grid\custom_datasource.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\grid\custom_datasource.aspx" />
+    <Content Include="Areas\aspx\Views\grid\custom_datasource.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\area_charts\stacked100_area.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\stacked100_area.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\line_charts\stacked100_line.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\stacked100_line.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\stacked100_bar.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\stacked100_bar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\grouped_stacked100_bar.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\frozen_columns.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\grouped_stacked100_bar.cshtml" />
+    <Content Include="Areas\razor\Views\grid\frozen_columns.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\map\remote_markers.cshtml" />
+    <Content Include="Areas\razor\Views\map\remote_markers.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\area_charts\logarithmic_axis.cshtml" />
+    <Content Include="Areas\razor\Views\area_charts\logarithmic_axis.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\line_charts\logarithmic_axis.cshtml" />
+    <Content Include="Areas\razor\Views\line_charts\logarithmic_axis.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\bar_charts\logarithmic_axis.cshtml" />
+    <Content Include="Areas\razor\Views\bar_charts\logarithmic_axis.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\sortable\integration_grid.cshtml" />
+    <Content Include="Areas\razor\Views\sortable\integration_grid.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\sortable\integration_listview.cshtml" />
+    <Content Include="Areas\razor\Views\sortable\integration_listview.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\sortable\integration_tabstrip.cshtml" />
+    <Content Include="Areas\razor\Views\sortable\integration_tabstrip.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\sortable\sortable_panels.cshtml" />
+    <Content Include="Areas\razor\Views\sortable\sortable_panels.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\maskedtextbox\api.cshtml" />
+    <Content Include="Areas\razor\Views\maskedtextbox\api.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\maskedtextbox\events.cshtml" />
+    <Content Include="Areas\razor\Views\maskedtextbox\events.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\maskedtextbox\globalization.cshtml" />
+    <Content Include="Areas\razor\Views\maskedtextbox\globalization.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\maskedtextbox\index.cshtml" />
+    <Content Include="Areas\razor\Views\maskedtextbox\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\maskedtextbox\validation.cshtml" />
+    <Content Include="Areas\razor\Views\maskedtextbox\validation.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\maskedtextbox\rtl.cshtml" />
+    <Content Include="Areas\razor\Views\maskedtextbox\rtl.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\maskedtextbox\api.aspx" />
+    <Content Include="Areas\aspx\Views\maskedtextbox\api.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\maskedtextbox\events.aspx" />
+    <Content Include="Areas\aspx\Views\maskedtextbox\events.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\maskedtextbox\globalization.aspx" />
+    <Content Include="Areas\aspx\Views\maskedtextbox\globalization.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\maskedtextbox\index.aspx" />
+    <Content Include="Areas\aspx\Views\maskedtextbox\index.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\maskedtextbox\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\maskedtextbox\rtl.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\aspx\Views\web\maskedtextbox\validation.aspx" />
+    <Content Include="Areas\aspx\Views\maskedtextbox\validation.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\scheduler\custom_datasource.cshtml" />
+    <Content Include="Areas\razor\Views\scheduler\custom_datasource.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\listview\custom_datasource.cshtml" />
+    <Content Include="Areas\razor\Views\listview\custom_datasource.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\combobox\custom_datasource.cshtml" />
+    <Content Include="Areas\razor\Views\combobox\custom_datasource.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\dropdownlist\custom_datasource.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\custom_datasource.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\autocomplete\custom_datasource.cshtml" />
+    <Content Include="Areas\razor\Views\autocomplete\custom_datasource.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\notification\index.cshtml" />
+    <Content Include="Areas\razor\Views\notification\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\grid\signalr.cshtml" />
+    <Content Include="Areas\razor\Views\grid\signalr.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\web\notification\position_stacking.cshtml" />
-    <Content Include="Areas\razor\Views\web\notification\templates.cshtml" />
+    <Content Include="Areas\razor\Views\notification\position_stacking.cshtml" />
+    <Content Include="Areas\razor\Views\notification\templates.cshtml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

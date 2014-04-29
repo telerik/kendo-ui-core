@@ -89,7 +89,7 @@ MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                         .sub(DEMO_SHARED_ROOT + 'shared/images/photos/220', MVC_DEMOS_ROOT + 'Content/shared/images/photos/220')
                 )
                 .include(
-                    FileList['demos/mvc/App_Data/{dataviz,web,mobile}.nav.json']
+                    FileList['demos/mvc/content/nav.json']
                         .sub('demos/mvc/App_Data', MVC_DEMOS_ROOT + 'App_Data')
                 )
                 .include(MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll')
