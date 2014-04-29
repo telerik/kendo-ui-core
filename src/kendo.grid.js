@@ -2291,6 +2291,11 @@ var __meta__ = {
                 } else if (cell.length) {
                     that.editCell(cell);
                 }
+
+                if (createAt.toLowerCase() == "bottom" && that.lockedContent) {
+                    //scroll the containers to the bottom
+                    that.lockedContent[0].scrollTop = that.content[0].scrollTop = that.content[0].offsetHeight;
+                }
             }
         },
 

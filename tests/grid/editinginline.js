@@ -587,4 +587,31 @@
         ok(grid.table.find(".k-icon:first").hasClass("k-minus"));
         ok(!grid.table.find(".k-icon:first").hasClass("k-plus"));
     });
+
+    test("addrow with createAt=bottom scrolls the locked and unlocked content to the bottom", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true },
+                { field: "name" }
+            ],
+            height: 300,
+            editable: { createAt: "bottom", mode: "inline" },
+            dataSource: {
+                schema: {
+                    model: {
+                        id: "foo",
+                        fields: {
+                            foo: "foo"
+                        }
+                    }
+                },
+                data: $.map(new Array(300), function() { return { foo: "bar", name: "tom" }; })
+            }
+        });
+
+        grid.addRow();
+
+        equal(grid.content[0].scrollTop, grid.content[0].offsetHeight);
+    });
+
 })();
