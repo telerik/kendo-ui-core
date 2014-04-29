@@ -246,4 +246,21 @@
         ok(true);
     });
 
+    test("searching for nonexisting item when last item is selected does not raise error", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        input.press("z");
+        input.press("z");
+
+        ok(true);
+    });
 })();
