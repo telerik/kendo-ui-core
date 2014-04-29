@@ -180,4 +180,26 @@
             });
         });
     });
+
+    asyncTest("MaskedTextBox should not call mask on Ctrl + C", 0, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(000) 000-0000"
+        });
+
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            caret(input[0], 7);
+            input.trigger({
+                type: "keypress",
+                which: "c".charCodeAt(0),
+                keyCode: "c".charCodeAt(0),
+                ctrlKey: true,
+                preventDefault: function() {
+                    ok(false);
+                }
+            });
+        });
+    });
 })();

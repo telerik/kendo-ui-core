@@ -326,7 +326,7 @@ var __meta__ = {
         },
 
         _keypress: function(e) {
-            if (e.which === 0) {
+            if (e.which === 0 || e.ctrlKey) {
                 return;
             }
 
