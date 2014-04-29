@@ -67,6 +67,64 @@
         dataSource.read();
     });
 
+    test("read calls reader axes method", 1, function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: function() {
+                    ok(true);
+                },
+                data: function() {
+                    return [];
+                }
+            },
+            transport: {
+                read: function(options) {
+                    options.success({});
+                }
+            }
+        });
+        dataSource.read();
+    });
+
+    test("axes return axes", function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: function() {
+                  return { columns: {}, rows: {} };
+                },
+                data: function() {
+                    return [];
+                }
+            },
+            transport: {
+                read: function(options) {
+                    options.success({});
+                }
+            }
+        });
+        dataSource.read();
+        ok(dataSource.axes().columns);
+        ok(dataSource.axes().rows);
+    });
+
+    test("read calls reader data method", 1, function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                data: function() {
+                    ok(true);
+                    return [];
+                }
+            },
+            transport: {
+                read: function(options) {
+                    options.success({});
+                }
+            }
+        });
+        dataSource.read();
+    });
+
+
     module("XmlaTransport initialziation", { });
 
     test("connection settings are passed to the parameterMap", function() {

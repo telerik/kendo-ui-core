@@ -20,11 +20,20 @@ var __meta__ = {
 
     var PivotDataSource = DataSource.extend({
         init: function(options) {
-            DataSource.fn.init.call(this, options);
+            DataSource.fn.init.call(this, extend(true, {}, {
+                schema: {
+                    axes: $.noop
+                }
+            }, options));
 
             this._columns = this.options.columns || [];
             this._rows = this.options.rows || [];
             this._measures = this.options.measures || [];
+            this._axes = {};
+        },
+
+        axes: function() {
+            return this._axes;
         },
 
         columns: function() {
@@ -37,6 +46,11 @@ var __meta__ = {
 
         measures: function() {
             return this._measures;
+        },
+
+        _readData: function(data) {
+            this._axes = this.reader.axes(data);
+            return this.reader.data(data);
         },
 
         _params: function(data) {
