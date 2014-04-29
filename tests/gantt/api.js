@@ -45,6 +45,7 @@
             element = $("<div/>").appendTo(QUnit.fixture);
         },
         teardown: function() {
+            gantt.destroy();
             kendo.destroy(element);
             element.remove();
             gantt = null;

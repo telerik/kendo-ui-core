@@ -13,6 +13,7 @@ var __meta__ = {
 (function($, undefined) {
 
     var kendo = window.kendo;
+    var Observable = kendo.Observable;
     var Widget = kendo.ui.Widget;
     var DataSource = kendo.data.DataSource;
     var Query = kendo.data.Query;
@@ -22,17 +23,44 @@ var __meta__ = {
     var map = $.map;
     var NS = ".kendoGantt";
     var CLICK = "click";
+    var DIRECTIONS = {
+        "down": {
+            origin: "bottom center",
+            position: "top center"
+        },
+        "up": {
+            origin: "top center",
+            position: "bottom center"
+        }
+    };
+    var TOOLBAR_CLASS_NAMES = "k-floatwrap k-header k-gantt-toolbar k-scheduler-toolbar";
+    var FOOTER_CLASS_NAMES = "k-floatwrap k-header k-gantt-footer k-scheduler-footer";
     var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
     var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
     var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
     var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
-    var TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-gantt-toolbar k-scheduler-toolbar">' +
-            '<ul class="k-reset k-header k-toolbar">' +
+    var HEADER_TEMPLATE = kendo.template('<div class="#=styles#">' +
+            '<ul class="k-reset k-header k-toolbar k-gantt-actions">' +
+                '<li class="k-state-default" data-action="#=action.data#"><a href="\\#" class="k-link">#=action.title#</a></li>' +
+            '</ul>' +
+            '<ul class="k-reset k-header k-toolbar k-gantt-views">' +
                 '#for(var view in views){#' +
-                    '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="k-link">${views[view].title}</a></li>' +
+                    '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="k-link">#=views[view].title#</a></li>' +
                 '#}#' +
             '</ul>' +
-            '</div>');
+        '</div>');
+    var TASK_DROPDOWN_TEMPLATE = kendo.template('<div class="k-list-container">' +
+            '<ul class="k-list k-reset">' +
+                '#for(var i = 0, l = actions.length; i < l; i++){#' +
+                    '<li class="k-item" data-action="#=actions[i].data#">#=actions[i].text#</span>' +
+                '#}#' +
+            '</ul>' +
+        '</div>');
+    var FOOTER_TEMPLATE = kendo.template('<div class="#=styles#">' +
+            '<ul class="k-reset k-header k-toolbar k-gantt-actions">' +
+                '<li class="k-state-default" data-action="#=action.data#"><a href="\\#" class="k-link">#=action.title#</a></li>' +
+            '</ul>' +
+        '</div>');
 
     function trimOptions(options) {
         delete options.name;
@@ -45,6 +73,75 @@ var __meta__ = {
 
         return options;
     }
+
+    var TaskDropDown = Observable.extend({
+        init: function(element, options) {
+
+            Observable.fn.init.call(this);
+
+            this.element = element;
+            this.options = extend(true, {}, this.options, options);
+
+            this._popup();
+        },
+
+        options: {
+            direction: "down"
+        },
+
+        _popup: function() {
+            var that = this;
+            var actions = this.options.messages.actions;
+
+            this.list = $(TASK_DROPDOWN_TEMPLATE({
+                actions: [
+                    {
+                        data: "add",
+                        text: actions.addChild
+                    },
+                    {
+                        data: "insert-before",
+                        text: actions.insertBefore
+                    },
+                    {
+                        data: "insert-after",
+                        text: actions.insetAfter
+                    }
+                ]
+            }));
+
+            this.element.append(this.list);
+
+            this.popup = new kendo.ui.Popup(this.list,
+                extend({ anchor: this.element }, DIRECTIONS[this.options.direction])
+            );
+
+            this.element.on("click" + NS, "li", function(e) {
+                var target = $(this);
+                var action = target.attr(kendo.attr("action"));
+
+                e.preventDefault();
+
+                if (action) {
+                    that.trigger("command", { type: action });
+                } else {
+                    that.popup.open();
+                }
+            });
+
+            this.list.on("click" + NS, "li.k-item", function(e) {
+                that.trigger("command", { type: $(this).attr(kendo.attr("action")) });
+                that.popup.close();
+            });
+        },
+
+        destroy: function() {
+            this.popup.destroy();
+            this.element.off(NS);
+            this.list.off(NS);
+            this.unbind();
+        }
+    });
 
     var createDataSource = function(type, name) {
         return function(options) {
@@ -476,9 +573,13 @@ var __meta__ = {
 
             this._toolbar();
 
+            this._footer();
+
             this.timeline.view(this.timeline._selectedViewName);
 
             this._dataSource();
+
+            this._dropDowns();
 
             this._list();
 
@@ -495,8 +596,8 @@ var __meta__ = {
         events: [
             "dataBinding",
             "dataBound",
-            "change",
-            "navigate"
+            "add",
+            "change"
         ],
 
         options: {
@@ -509,6 +610,12 @@ var __meta__ = {
                     day: "Day",
                     week: "Week",
                     month: "Month"
+                },
+                actions: {
+                    append: "Add Task",
+                    addChild: "Add Child",
+                    insertBefore: "Add Above",
+                    insetAfter: "Add Below"
                 }
             },
             timeHeaderTemplate: TIME_HEADER_TEMPLATE,
@@ -554,9 +661,18 @@ var __meta__ = {
                 this.list.destroy();
             }
 
+            if (this.footerDropDown) {
+                this.footerDropDown.destroy();
+            }
+
+            if (this.headerDropDown) {
+                this.headerDropDown.destroy();
+            }
+
             this.toolbar.off(NS);
 
             this.toolbar = null;
+            this.footer = null;
         },
 
         _wrapper: function() {
@@ -580,16 +696,21 @@ var __meta__ = {
 
         _toolbar: function() {
             var that = this;
-            var toolbar = $(TOOLBARTEMPLATE({
+            var toolbar = $(HEADER_TEMPLATE({
                 ns: kendo.ns,
-                views: this.timeline.views
+                views: this.timeline.views,
+                styles: TOOLBAR_CLASS_NAMES,
+                action: {
+                    data: "add",
+                    title: this.options.messages.actions.append
+                }
             }));
 
             this.wrapper.prepend(toolbar);
             this.toolbar = toolbar;
 
             toolbar
-                .on(CLICK + NS, ".k-toolbar li", function(e) {
+                .on(CLICK + NS, ".k-gantt-views li", function(e) {
                     e.preventDefault();
 
                     var name = $(this).attr(kendo.attr("name"));
@@ -609,8 +730,85 @@ var __meta__ = {
                 });
         },
 
+        _footer: function() {
+            var footer = $(FOOTER_TEMPLATE({
+                styles: FOOTER_CLASS_NAMES,
+                action: {
+                    data: "add",
+                    title: this.options.messages.actions.append
+                }
+            }));
+
+            this.wrapper.append(footer);
+            this.footer = footer;
+        },
+
+        _dropDowns: function() {
+            var that = this;
+            var actionMessages = this.options.messages.actions;
+            var dataSource = this.dataSource;
+            var timeline = this.timeline;
+
+            var handler = function(e) {
+                var type = e.type;
+                var orderId;
+                var task = new GanttTask();
+                var selected = that.dataItem(that.select());
+                var parent = dataSource.taskParent(selected);
+                var firstSlot = timeline.view()._timeSlots()[0];
+                var target = type === "add" ? selected : parent;
+
+                task.set("title", "New task");
+
+                if (target) {
+                    task.set("parentId", target.get("id"));
+                    task.set("start", target.get("start"));
+                    task.set("end", target.get("end"));
+                } else {
+                    task.set("start", firstSlot.start);
+                    task.set("end", firstSlot.end);
+                }
+
+                if (that.trigger("add", { task: task })) {
+                    return;
+                }
+
+                that._preventRefresh = true;
+
+                if (type === "add") {
+                    dataSource.add(task);
+                } else {
+                    orderId = selected.get("orderId");
+                    orderId = type === "insert-before" ? orderId : orderId + 1;
+
+                    dataSource.insert(orderId, task);
+                }
+
+                that._preventRefresh = false;
+
+                that.refresh();
+            };
+
+            this.footerDropDown = new TaskDropDown(this.footer.children(".k-gantt-actions").eq(0), {
+                messages: {
+                    actions: actionMessages
+                },
+                direction: "up"
+            });
+
+            this.headerDropDown = new TaskDropDown(this.toolbar.children(".k-gantt-actions").eq(0), {
+                messages: {
+                    actions: actionMessages
+                }
+            });
+
+            this.footerDropDown.bind("command", handler);
+            this.headerDropDown.bind("command", handler);
+        },
+
         _list: function() {
             var that = this;
+            var toggleButtons = this.element.find(".k-gantt-actions > li");
             var options = extend({}, {
                 columns: this.options.columns || [],
                 dataSource: this.dataSource,
@@ -627,9 +825,13 @@ var __meta__ = {
                 .bind("change", function() {
                     that.trigger("change");
 
-                    if (that.select().length) {
-                        that.timeline.select("[data-uid='" + that.select().attr("data-uid") + "']");
+                    var selection = that.list.select();
+
+                    if (selection.length) {
+                        toggleButtons.removeAttr("data-action", "add");
+                        that.timeline.select("[data-uid='" + selection.attr("data-uid") + "']");
                     } else {
+                        toggleButtons.attr("data-action", "add");
                         that.timeline.clearSelection();
                     }
                 });
@@ -645,7 +847,7 @@ var __meta__ = {
             this.timeline
                 .bind("navigate", function(e) {
                     that.toolbar
-                        .find(".k-toolbar li")
+                        .find(".k-gantt-views > li")
                         .removeClass("k-state-selected")
                         .end()
                         .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
@@ -718,6 +920,14 @@ var __meta__ = {
                 .bind("error", this._dependencyErrorHandler);
         },
 
+        dataItem: function(element) {
+            if (!element) {
+                return null;
+            }
+
+            return this.list._modelFromElement(element);
+        },
+
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
 
@@ -748,6 +958,7 @@ var __meta__ = {
                 return;
             }
 
+            this.clearSelection();
             this.list._render(taskTree);
             this.timeline._render(taskTree, dataSource._range());
             this.timeline._renderDependencies(this.dependencies.view());
