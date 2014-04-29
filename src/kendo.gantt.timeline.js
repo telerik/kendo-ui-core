@@ -80,6 +80,8 @@ var __meta__ = {
             this._dependencyTree = options.dependencyTree;
 
             this._templates();
+
+            this._taskCoordinates = {};
         },
 
         destroy: function() {
@@ -285,8 +287,7 @@ var __meta__ = {
             var taskElement;
 
             if (task.summary) {
-                title = kendoTextElement(task.title);
-                inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } }, [title]);
+                inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } });
                 middle = kendoDomElement("div", { className: "k-gantt-summary-progress", style: { width: task.percentComplete + "%" } }, [inner]);
                 taskElement = kendoDomElement("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
             } else {
@@ -395,17 +396,21 @@ var __meta__ = {
 
             switch (dependency.type) {
                 case 0:
-                    elements = this._renderFS(predecessor, successor);
+                    elements = this._renderFF(predecessor, successor);
                     break;
                 case 1:
-                    elements = this._renderSS(predecessor, successor);
+                    elements = this._renderFS(predecessor, successor);
                     break;
                 case 2:
                     elements = this._renderSF(predecessor, successor);
                     break;
                 case 3:
-                    elements = this._renderFF(predecessor, successor);
+                    elements = this._renderSS(predecessor, successor);
                     break;
+            }
+
+            for (var i = 0, length = elements.length; i < length; i++) {
+                elements[i].attr["data-uid"] = dependency.uid;
             }
 
             return elements;
@@ -1215,6 +1220,11 @@ var __meta__ = {
                     })
                     .on(CLICK + NS, ".k-gantt-tasks tr", function(e) {
                         that.trigger("clear");
+                    })
+                    .on(CLICK + NS, ".k-gantt-line", function(e) {
+                        e.stopPropagation();
+
+                        that.selectDependency(this);
                     });
             }
         },
@@ -1231,6 +1241,23 @@ var __meta__ = {
             }
 
             return this.wrapper.find(".k-state-selected");
+        },
+
+        selectDependency: function(value) {
+            var element = this.wrapper.find(value);
+            var uid;
+
+            if (element.length) {
+                this.trigger("clear");
+
+                uid = $(element).attr("data-uid");
+
+                this.wrapper.find(".k-gantt-line[data-uid='" + uid + "']").addClass("k-state-selected");
+
+                return;
+            }
+
+            return this.wrapper.find(".k-gantt-line.k-state-selected");
         },
 
         clearSelection: function() {

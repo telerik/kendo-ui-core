@@ -2,7 +2,11 @@
 
     var element;
     var gantt;
+    var ganttTimeline;
     var ganttList;
+    var range;
+    var tasks
+    var dependencies;
     var Gantt = kendo.ui.Gantt;
     var GanttList = kendo.ui.GanttList;
     var GanttDataSource = kendo.data.GanttDataSource;
@@ -124,18 +128,37 @@
         setup: function() {
             element = $("<div />");
             gantt = new Gantt(element);
+            ganttTimeline = gantt.timeline;
             range = {
                 start: new Date("2014/04/15"),
                 end: new Date("2014/04/17")
             };
             tasks = [{
+                id: 1,
                 uid: "UniqueId1",
                 start: new Date("2014/04/15"),
                 end: new Date("2014/04/16")
             }, {
+                id: 2,
                 uid: "UniqueId2",
                 start: new Date("2014/04/16"),
                 end: new Date("2014/04/17")
+            }, {
+                id: 3,
+                uid: "UniqueId3",
+                start: new Date("2014/04/16"),
+                end: new Date("2014/04/17")
+            }];
+            dependencies = [{
+                uid: "DependencyUniqueId1",
+                predecessorId: 1,
+                successorId: 2,
+                type: 1
+            }, {
+                uid: "DependencyUniqueId2",
+                predecessorId: 2,
+                successorId: 3,
+                type: 1
             }];
         },
         teardown: function() {
@@ -146,9 +169,9 @@
     });
 
     test("clicking on a task calls select(':selector')", function() {
-        gantt.timeline._render(tasks, range);
+        ganttTimeline._render(tasks, range);
 
-        var target = gantt.timeline.wrapper.find(".k-event:first");
+        var target = ganttTimeline.wrapper.find(".k-event:first");
 
         stub(gantt, "select");
 
@@ -158,9 +181,9 @@
     });
 
     test("clicking on a task calls select(':selector') with correct parameter", 1, function() {
-        gantt.timeline._render(tasks, range);
+        ganttTimeline._render(tasks, range);
 
-        var target = gantt.timeline.wrapper.find(".k-event:first");
+        var target = ganttTimeline.wrapper.find(".k-event:first");
 
         stub(gantt, {
             select: function(value) {
@@ -171,10 +194,38 @@
         target.click();
     });
 
-    test("clicking on a task row calls clearSelection()", function() {
-        gantt.timeline._render(tasks, range);
+    test("clicking on a dependency calls selectDependency(':selector')", function() {
+        ganttTimeline._render(tasks, range);
+        ganttTimeline._renderDependencies(dependencies);
 
-        var target = gantt.timeline.wrapper.find(".k-gantt-tasks tr:first");
+        var target = ganttTimeline.wrapper.find(".k-gantt-line:first");
+
+        stub(ganttTimeline, "selectDependency");
+
+        target.click();
+
+        equal(ganttTimeline.calls("selectDependency"), 1);
+    });
+
+    test("clicking on a dependency calls selectDependency(':selector') with correct parameter", 1, function() {
+        ganttTimeline._render(tasks, range);
+        ganttTimeline._renderDependencies(dependencies);
+
+        var target = ganttTimeline.wrapper.find(".k-gantt-line:first");
+
+        stub(ganttTimeline, {
+            selectDependency: function(value) {
+                equal(value, target[0]);
+            }
+        });
+
+        target.click();
+    });
+
+    test("clicking on a task row calls clearSelection()", function() {
+        ganttTimeline._render(tasks, range);
+
+        var target = ganttTimeline.wrapper.find(".k-gantt-tasks tr:first");
 
         stub(gantt, "clearSelection");
 

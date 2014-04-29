@@ -1,7 +1,11 @@
 ﻿(function() {
     var element;
     var gantt;
+    var ganttTimeline;
     var ganttList;
+    var range;
+    var tasks;
+    var dependencies;
     var Gantt = kendo.ui.Gantt;
     var GanttList = kendo.ui.GanttList;
     var GanttDataSource = kendo.data.GanttDataSource;
@@ -224,18 +228,37 @@
         setup: function() {
             element = $("<div />");
             gantt = new Gantt(element);
+            ganttTimeline = gantt.timeline;
             range = {
                 start: new Date("2014/04/15"),
                 end: new Date("2014/04/17")
             };
             tasks = [{
+                id: 1,
                 uid: "UniqueId1",
                 start: new Date("2014/04/15"),
                 end: new Date("2014/04/16")
             }, {
+                id: 2,
                 uid: "UniqueId2",
                 start: new Date("2014/04/16"),
                 end: new Date("2014/04/17")
+            }, {
+                id: 3,
+                uid: "UniqueId3",
+                start: new Date("2014/04/16"),
+                end: new Date("2014/04/17")
+            }];
+            dependencies = [{
+                uid: "DependencyUniqueId1",
+                predecessorId: 1,
+                successorId: 2,
+                type: 1
+            }, {
+                uid: "DependencyUniqueId2",
+                predecessorId: 2,
+                successorId: 3,
+                type: 1
             }];
         },
         teardown: function() {
@@ -246,40 +269,86 @@
     });
 
     test("select(':selector') applies selected class to element", function() {
-        gantt.timeline._render(tasks, range);
+        ganttTimeline._render(tasks, range);
 
-        gantt.timeline.select(".k-event:first");
+        ganttTimeline.select(".k-event:first");
 
-        ok(gantt.timeline.wrapper.find(".k-event:first").hasClass("k-state-selected"));
+        ok(ganttTimeline.wrapper.find(".k-event:first").hasClass("k-state-selected"));
     });
 
     test("select(':selector') removes selected class from previously selected element", function() {
-        gantt.timeline._render(tasks, range);
+        ganttTimeline._render(tasks, range);
 
-        gantt.timeline.wrapper.find(".k-event:last").addClass("k-state-selected");
-        gantt.timeline.select(".k-event:first");
+        ganttTimeline.wrapper.find(".k-event:last").addClass("k-state-selected");
+        ganttTimeline.select(".k-event:first");
 
-        ok(!gantt.timeline.wrapper.find(".k-event:last").hasClass("k-state-selected"));
+        ok(!ganttTimeline.wrapper.find(".k-event:last").hasClass("k-state-selected"));
     });
     
     test("select() retrieves selected element", function() {
-        gantt.timeline._render(tasks, range);
+        ganttTimeline._render(tasks, range);
 
-        var target = gantt.timeline.wrapper.find(".k-event:first").addClass("k-state-selected");
+        var target = ganttTimeline.wrapper.find(".k-event:first").addClass("k-state-selected");
 
-        var selected = gantt.timeline.select();
+        var selected = ganttTimeline.select();
 
         equal(selected.length, 1);
         equal(selected[0], target[0]);
     });
 
-    test("clearSelection() removes selected class from element", function() {
-        gantt.timeline._render(tasks, range);
+    test("selectDependency() applies selected class to elements", function() {
+        ganttTimeline._render(tasks, range);
+        ganttTimeline._renderDependencies(dependencies);
 
-        gantt.timeline.wrapper.find(".k-event:last").addClass("k-state-selected");
-        gantt.timeline.clearSelection();
+        ganttTimeline.selectDependency(".k-gantt-line:first");
 
-        ok(!gantt.timeline.wrapper.find(".k-event:last").hasClass("k-state-selected"));
+        ok(ganttTimeline.wrapper.find(".k-gantt-line[data-uid='DependencyUniqueId1']").hasClass("k-state-selected"));
+    });
+
+    test("selectDependency() doesn't apply selected class to other dependencies elements", function() {
+        ganttTimeline._render(tasks, range);
+        ganttTimeline._renderDependencies(dependencies);
+
+        ganttTimeline.selectDependency(".k-gantt-line:first");
+
+        ok(!ganttTimeline.wrapper.find(".k-gantt-line[data-uid='DependencyUniqueId2']").hasClass("k-state-selected"));
+    });
+
+    test("selectDependency() retrieves selected elements", function() {
+        ganttTimeline._render(tasks, range);
+        ganttTimeline._renderDependencies(dependencies);
+
+        var targets = ganttTimeline.wrapper.find(".k-gantt-line[data-uid='DependencyUniqueId2']");
+
+        ganttTimeline.selectDependency(targets[0]);
+
+        var selected = ganttTimeline.selectDependency();
+
+        equal(selected.length, 5);
+        equal(selected[0], targets[0]);
+        equal(selected[1], targets[1]);
+        equal(selected[2], targets[2]);
+        equal(selected[3], targets[3]);
+        equal(selected[4], targets[4]);
+    });
+
+    test("clearSelection() removes selected class from task element", function() {
+        ganttTimeline._render(tasks, range);
+
+        ganttTimeline.wrapper.find(".k-event:last").addClass("k-state-selected");
+        ganttTimeline.clearSelection();
+
+        ok(!ganttTimeline.wrapper.find(".k-event:last").hasClass("k-state-selected"));
+    });
+
+    test("clearSelection() removes selected class from dependency elements", function() {
+        ganttTimeline._render(tasks, range);
+        ganttTimeline._renderDependencies(dependencies);
+
+        ganttTimeline.wrapper.find(".k-gantt-line:last").addClass("k-state-selected");
+        ganttTimeline.clearSelection();
+
+        ok(!ganttTimeline.wrapper.find(".k-gantt-line:last").hasClass("k-state-selected"));
     });
 
 })();

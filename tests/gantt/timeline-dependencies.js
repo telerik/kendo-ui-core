@@ -63,7 +63,7 @@
 
     test("dependency rendered", function() {
         var dependency = {
-            type: 0,
+            type: 1,
             predecessorId: 1,
             successorId: 2,
         };
