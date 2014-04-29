@@ -269,6 +269,7 @@ var __meta__ = {
 
         navigate: function(to, silent) {
             if (to === "#:back") {
+                this.backCalled = true;
                 this.adapter.back();
                 return;
             }
@@ -308,6 +309,7 @@ var __meta__ = {
                 newLength = adapter.length(),
                 navigatingInExisting = this.historyLength === newLength,
                 back = current === this.locations[this.locations.length - 2] && navigatingInExisting,
+                backCalled = this.backCalled,
                 prev = this.current;
 
             if (current === null || this.current === current || this.current === decodeURIComponent(current)) {
@@ -315,6 +317,7 @@ var __meta__ = {
             }
 
             this.historyLength = newLength;
+            this.backCalled = false;
 
             this.current = current;
 
@@ -324,7 +327,7 @@ var __meta__ = {
                 return;
             }
 
-            if (this.trigger(CHANGE, { url: current })) {
+            if (this.trigger(CHANGE, { url: current, backButtonPressed: !backCalled })) {
                 if (back) {
                     adapter.forward();
                 } else {
@@ -499,7 +502,7 @@ var __meta__ = {
                 url = "/";
             }
 
-            if (this.trigger(CHANGE, { url: e.url, params: kendo.parseQueryStringParams(e.url) })) {
+            if (this.trigger(CHANGE, { url: e.url, params: kendo.parseQueryStringParams(e.url), backButtonPressed: e.backButtonPressed })) {
                 e.preventDefault();
                 return;
             }
@@ -517,7 +520,7 @@ var __meta__ = {
                  }
             }
 
-            if (this.trigger(ROUTE_MISSING, { url: url, params: kendo.parseQueryStringParams(url) })) {
+            if (this.trigger(ROUTE_MISSING, { url: url, params: kendo.parseQueryStringParams(url), backButtonPressed: e.backButtonPressed })) {
                 e.preventDefault();
             }
         }

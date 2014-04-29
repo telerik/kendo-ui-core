@@ -28,6 +28,8 @@ var __meta__ = {
         NAVIGATE = "navigate",
         VIEW_SHOW = "viewShow",
         SAME_VIEW_REQUESTED = "sameViewRequested",
+        OS = kendo.support.mobileOS,
+        SKIP_TRANSITION_ON_BACK_BUTTON = OS.ios && !OS.appMode && OS.flatVersion >= 700,
 
         WIDGET_RELS = /popover|actionsheet|modalview|drawer/,
         BACK = "#:back",
@@ -54,9 +56,15 @@ var __meta__ = {
 
             this.history = [];
 
-            this.historyCallback = function(url, params) {
+            this.historyCallback = function(url, params, backButtonPressed) {
                 var transition = that.transition;
                 that.transition = null;
+
+                // swiping back in iOS leaves the app in a very broken state if we perform a transition
+                if (SKIP_TRANSITION_ON_BACK_BUTTON && backButtonPressed) {
+                    transition = "none";
+                }
+
                 return that.viewEngine.showView(url, transition, params);
             };
 
@@ -214,7 +222,7 @@ var __meta__ = {
             });
 
             router.bind("routeMissing", function(e) {
-                if (!that.historyCallback(e.url, e.params)) {
+                if (!that.historyCallback(e.url, e.params, e.backButtonPressed)) {
                     e.preventDefault();
                 }
             });
@@ -285,9 +293,10 @@ var __meta__ = {
                 rel = attrValue(link, "rel") || "",
                 target = attrValue(link, "target"),
                 href = link.attr(HREF),
+                delayedTouchEnd = SKIP_TRANSITION_ON_BACK_BUTTON && link[0].offsetHeight === 0,
                 remote = href && href[0] !== "#" && this.options.serverNavigation;
 
-            if (remote || rel === EXTERNAL || (typeof href === "undefined") || href === DUMMY_HREF) {
+            if (delayedTouchEnd || remote || rel === EXTERNAL || (typeof href === "undefined") || href === DUMMY_HREF) {
                 return;
             }
 
