@@ -8,31 +8,23 @@
 <body>
     <div id="page">
         <a class="offline-button" href="@(Url.RouteUrl("Default", new { controller = "" }))">Back to all suites</a>
-        @foreach (string category in ViewBag.Navigation.Keys)
-        {
-            <h1>@category</h1>
-            <ul>
-                @foreach (NavigationWidget widget in ViewBag.Navigation[category])
-                {
-                    if (!widget.ShouldInclude || widget.Items.All(x=>!x.ShouldInclude)) { continue; }
-                    <li>
-                        <h2>@widget.Text</h2>
-                        <ul>
-                            @foreach (NavigationExample example in widget.Items)
-                            {
-                                if (!example.ShouldInclude) { continue; }
-                                <li><a href='@(Url.Content("~/" +
-                                        ViewContext.RouteData.DataTokens["area"] + "/" +
-                                        ViewContext.RouteData.Values["suite"] + "/" +
-                                        example.Url.Replace(".html", "")
-                                    ))'>@example.Text</a></li>
-                            }
-                        </ul>
-                    </li>
-                }
-            </ul>
-        }
-    </div>
 
+        <ul>
+            @foreach (NavigationWidget widget in ViewBag.Navigation)
+            {
+                if (!widget.ShouldInclude || widget.Items.All(x=>!x.ShouldInclude)) { continue; }
+                <li>
+                    <h2>@widget.Text</h2>
+                    <ul>
+                        @foreach (NavigationExample example in widget.Items)
+                        {
+                            if (!example.ShouldInclude) { continue; }
+                            <li><a href='@(Url.Content("~/" + ViewContext.RouteData.DataTokens["area"] + "/" + example.Url))'>@example.Text</a></li>
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
 </body>
 </html>

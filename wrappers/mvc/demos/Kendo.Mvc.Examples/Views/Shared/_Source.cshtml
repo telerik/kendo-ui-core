@@ -3,10 +3,9 @@
     var viewSource = System.IO.File.ReadAllText(Server.MapPath(viewPath));
 
     var routeData = ViewContext.RouteData;
-    var suiteName = routeData.GetRequiredString("suite");
     var controllerName = routeData.GetRequiredString("controller");
     var viewName = routeData.GetRequiredString("action");
-    var controllerPath = Server.MapPath("~/Controllers/" + suiteName + "/" + controllerName + "/" + viewName + "Controller.cs");
+    var controllerPath = Server.MapPath("~/Controllers/" + controllerName + "/" + viewName + "Controller.cs");
     
     string controllerSource = "";
     if (System.IO.File.Exists(controllerPath)) {

@@ -18,7 +18,7 @@ namespace Kendo.Mvc.Examples.Areas.Razor
         public override void RegisterArea(AreaRegistrationContext context)
         {
             var razorRoute = new Route(
-                "razor/{suite}/{controller}/{action}",
+                "razor/{controller}/{action}",
                 new RouteValueDictionary { { "controller", "Suite" }, { "action", "Index" } },
                 new RouteValueDictionary(),
                 // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
