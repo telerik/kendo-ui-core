@@ -648,15 +648,17 @@ var __meta__ = {
                         .end()
                         .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
                         .addClass("k-state-selected");
-                }).bind("move", function(e) {
+                })
+                .bind("move", function(e) {
                     var task = that.dataSource.getByUid(e.uid);
                     var newEnd = new Date(e.start.getTime() + task.duration());
 
-                    that.dataSource.update(task, {
+                    that.updateTask(task, {
                         start: e.start,
                         end: newEnd
                     });
-                }).bind("resize", function(e) {
+                })
+                .bind("resize", function(e) {
                     var task = that.dataSource.getByUid(e.uid);
                     var updateInfo = {};
 
@@ -666,10 +668,12 @@ var __meta__ = {
                         updateInfo.end = e.date;
                     }
 
-                    that.dataSource.update(task, updateInfo);
-                }).bind("select", function(e) {
+                    that.updateTask(task, updateInfo);
+                })
+                .bind("select", function(e) {
                     that.select("[data-uid='" + e.uid + "']");
-                }).bind("clear", function(e) {
+                })
+                .bind("clear", function(e) {
                     that.clearSelection();
                 });
         },
@@ -722,8 +726,16 @@ var __meta__ = {
             }
         },
 
+        updateTask: function(task, updateInfo) {
+            this._preventRefresh = true;
+            this.dataSource.update(task, updateInfo);
+            this._preventRefresh = false;
+
+            this.refresh();
+        },
+
         refresh: function(e) {
-            if (this._preventRender || this.list.editable) {
+            if (this._preventRefresh || this.list.editable) {
                 return;
             }
 
