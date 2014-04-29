@@ -4958,7 +4958,7 @@ var __meta__ = {
        var msie = browser.msie;
        if (direct === true) {
            table = $(table);
-           var condition = msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),
+           var condition = true || msie && table.parent().is(".k-grid-content,.k-grid-header-wrap"),
                scrollTop, scrollLeft;
            if (condition) {
                scrollTop = table.parent().scrollTop();
