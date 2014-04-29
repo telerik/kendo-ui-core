@@ -246,9 +246,8 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
 
   bot.click_element(bot.find("[value='Save']"))
   
-  if bot.find("[value='GO TO FILE LIST']")
-      bot.click_element(bot.find("[value='GO TO FILE LIST']"))
-  end 
+  bot.wait_for_element("[value='GO TO FILE LIST']")
+  bot.click_element(bot.find("[value='GO TO FILE LIST']"))
 
 end
 def upload_file(bot, upload_id, full_path)
