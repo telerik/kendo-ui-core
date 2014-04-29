@@ -491,7 +491,7 @@ var __meta__ = {
                 }
             }
 
-            if (startIndex > 0) {
+            if (startIndex > 0 && startIndex < length) {
                 index = 0;
                 for (; index <= startIndex; index++) {
                     text = that._text(data[index]);
