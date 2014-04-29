@@ -469,4 +469,12 @@ test("paragraph before img does not move focus within img", function() {
     equal(range.commonAncestorContainer.nodeName.toLowerCase(), "p");
 });
 
+test("paragraph before link does not remove it", function() {
+    var range =  createRangeFromText(editor, '<p>||<a href="foo">foo</a></p>');
+
+    createParagraphCommand(range).exec();
+
+    equal(editor.value(), '<p></p><p><a href="foo">foo</a></p>');
+});
+
 }());

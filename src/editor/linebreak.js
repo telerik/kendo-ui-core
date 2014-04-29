@@ -185,7 +185,7 @@ var ParagraphCommand = Command.extend({
 
             if (options && options.links) {
                 while (node != root) {
-                    if (dom.is(node, "a")) {
+                    if (dom.is(node, "a") && dom.emptyNode(node)) {
                         dom.unwrap(node);
                         break;
                     }
