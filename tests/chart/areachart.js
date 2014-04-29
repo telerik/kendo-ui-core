@@ -299,6 +299,18 @@
             ]);
         });
 
+        test("renders stacked sparse series with interpolation", function() {
+            setupAreaChart(plotArea, {
+                series: [
+                    $.extend({ missingValues: "interpolate" }, sparseSeries),
+                    sparseSeries
+                ],
+                isStacked: true
+            });
+
+            equal(areaChart.points.length, 8);
+        });
+
         // ------------------------------------------------------------
         var polyline;
 

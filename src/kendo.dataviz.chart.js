@@ -3252,6 +3252,10 @@ var __meta__ = {
         },
 
         plotValue: function(point) {
+            if (!point) {
+                return 0;
+            }
+
             if (this.options.isStacked100 && isNumber(point.value)) {
                 var categoryIx = point.categoryIx;
                 var categoryPts = this.categoryPoints[categoryIx];
@@ -3272,9 +3276,9 @@ var __meta__ = {
                 }
 
                 return point.value / categorySum;
-            } else {
-                return point.value;
             }
+
+            return point.value;
         },
 
         plotRange: function(point, startValue) {
