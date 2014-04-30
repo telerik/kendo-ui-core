@@ -15,23 +15,27 @@ var __meta__ = {
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
-        K_TOOLBAR = "k-toolbar",
-        K_TOGGLE_BUTTON = "k-toggle-button",
-        K_CHECKED_STATE = "k-state-checked",
-        K_STATE_DISABLED = "k-state-disabled",
-        K_BUTTON = "k-button",
-        K_TOGGLE_BUTTON = "k-toggle-button",
-        K_BUTTON_ICON = "k-button-icon",
-        K_BUTTON_ICON_TEXT = "k-button-icontext",
-        K_PRIMARY = "k-primary",
-        K_GROUP_START = "k-group-start",
-        K_GROUP_END = "k-group-end",
-        K_SPLIT_BUTTON = "k-split-button",
-        K_SPLIT_BUTTON_DROPDOWN = "k-split-button-dropdown",
-        K_SPLIT_BUTTON_ARROW = "k-split-button-arrow",
-        K_OVERFLOW_ANCHOR = "k-overflow-anchor",
-        K_OVERFLOW_CONTAINER = "k-overflow-container",
-        COMMAND_OVERFLOW_ELEMENT = '<span class="' + K_OVERFLOW_ANCHOR + '"><ul class="' + K_OVERFLOW_CONTAINER + '"></ul><span class="k-icon k-i-collapse"></span></span>',
+
+        TOOLBAR = "k-toolbar",
+        BUTTON = "k-button",
+        TOGGLE_BUTTON = "k-toggle-button",
+        SPLIT_BUTTON = "k-split-button",
+        SEPARATOR = "k-toolbar-separator",
+
+        STATE_CHECKED = "k-state-checked",
+        STATE_DISABLED = "k-state-disabled",
+        GROUP_START = "k-group-start",
+        GROUP_END = "k-group-end",
+        PRIMARY = "k-primary",
+
+        BUTTON_ICON = "k-button-icon",
+        BUTTON_ICON_TEXT = "k-button-icontext",
+
+        SPLIT_BUTTON_DROPDOWN = "k-split-button-dropdown",
+        SPLIT_BUTTON_ARROW = "k-split-button-arrow",
+
+        OVERFLOW_ANCHOR = "k-overflow-anchor",
+        OVERFLOW_CONTAINER = "k-overflow-container",
 
         CLICK = "click",
         TOGGLE = "toggle",
@@ -73,18 +77,23 @@ var __meta__ = {
                 '</div>'
             ),
 
-            separator: kendo.template('<span class="k-toolbar-separator"></span>')
+            separator: kendo.template('<span class="k-toolbar-separator"></span>'),
+
+            commandOverflow: '<span class="k-overflow-anchor">' +
+                                '<ul class="k-overflow-container"></ul>'+
+                                '<span class="k-icon k-i-collapse"></span>' +
+                             '</span>'
 
         },
 
         initializers = {
             button: function(element, options) {
                 if(options.enable === false) {
-                    element.addClass(K_STATE_DISABLED);
+                    element.addClass(STATE_DISABLED);
                 }
 
                 if(options.primary === true) {
-                    element.addClass(K_PRIMARY);
+                    element.addClass(PRIMARY);
                 }
 
                 if(options.id) {
@@ -92,7 +101,7 @@ var __meta__ = {
                 }
 
                 if(options.click && kendo.isFunction(options.click)) {
-                    element.on("click", options.click);
+                    element.on(CLICK, options.click);
                 }
 
                 var icon = options.icon,
@@ -110,9 +119,9 @@ var __meta__ = {
                     });
 
                     if (isEmpty) {
-                        element.addClass(K_BUTTON_ICON);
+                        element.addClass(BUTTON_ICON);
                     } else {
-                        element.addClass(K_BUTTON_ICON_TEXT);
+                        element.addClass(BUTTON_ICON_TEXT);
                     }
                 }
 
@@ -141,7 +150,7 @@ var __meta__ = {
                 initializers.button(element, options);
 
                 if(options.selected === true) {
-                    element.addClass(K_CHECKED_STATE);
+                    element.addClass(STATE_CHECKED);
                 }
 
                 if(options.group) {
@@ -150,14 +159,14 @@ var __meta__ = {
             },
 
             buttonGroup: function(element, options) {
-                var buttons = element.children("." + K_BUTTON);
+                var buttons = element.children("." + BUTTON);
 
                 for (var i = 0; i < buttons.length; i++) {
                     initializers.toggleButton(buttons.eq(i), options.items[i]);
                 }
 
-                buttons.first().addClass(K_GROUP_START);
-                buttons.last().addClass(K_GROUP_END);
+                buttons.first().addClass(GROUP_START);
+                buttons.last().addClass(GROUP_END);
 
                 if(options.id) {
                     element.attr("id", options.id);
@@ -165,7 +174,7 @@ var __meta__ = {
             },
 
             splitButton: function(element, options) {
-                var popupElement = element.find("." + K_SPLIT_BUTTON_DROPDOWN),
+                var popupElement = element.find("." + SPLIT_BUTTON_DROPDOWN),
                     popup,
                     id = options.id || kendo.guid();
 
@@ -193,24 +202,24 @@ var __meta__ = {
                 options = that.options;
                 element = that.wrapper = that.element;
 
-                element.addClass(K_TOOLBAR);
+                element.addClass(TOOLBAR);
 
                 if(options.items && options.items.length) {
                     that._renderItems(options.items);
                 }
 
                 if(options.resizable) {
-                    commandOverflow = $(COMMAND_OVERFLOW_ELEMENT);
+                    commandOverflow = $(templates.commandOverflow);
                     element.append(commandOverflow);
 
-                    that.commandOverflow = commandOverflow.find("." + K_OVERFLOW_CONTAINER).kendoPopup({
+                    that.commandOverflow = commandOverflow.find("." + OVERFLOW_CONTAINER).kendoPopup({
                         anchor: commandOverflow
                     }).data("kendoPopup");
                 }
 
-                element.on(CLICK, ".k-button:not(." + K_SPLIT_BUTTON_ARROW + ")", proxy(that._buttonClick, that));
-                element.on(CLICK, "." + K_SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
-                element.on(CLICK, "." + K_OVERFLOW_ANCHOR, proxy(that._toggleOverflowContainer, that));
+                element.on(CLICK, "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")", proxy(that._buttonClick, that));
+                element.on(CLICK, "." + SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
+                element.on(CLICK, "." + OVERFLOW_ANCHOR, proxy(that._toggleOverflowContainer, that));
 
                 kendo.notify(that);
             },
@@ -229,7 +238,7 @@ var __meta__ = {
             },
 
             destroy: function() {
-                this.element.find("." + K_SPLIT_BUTTON).each(function(idx, element) {
+                this.element.find("." + SPLIT_BUTTON).each(function(idx, element) {
                     $(element).data("kendoPopup").destroy();
                 });
 
@@ -265,8 +274,8 @@ var __meta__ = {
             },
 
             _buttonClick: function(e) {
-                var target = $(e.target).closest("." + K_BUTTON),
-                    isDisabled = target.hasClass(K_STATE_DISABLED),
+                var target = $(e.target).closest("." + BUTTON),
+                    isDisabled = target.hasClass(STATE_DISABLED),
                     isChecked,
                     group,
                     current;
@@ -277,20 +286,20 @@ var __meta__ = {
                     return;
                 }
 
-                if(target.hasClass(K_TOGGLE_BUTTON)) {
-                    isChecked = target.hasClass(K_CHECKED_STATE);
+                if(target.hasClass(TOGGLE_BUTTON)) {
+                    isChecked = target.hasClass(STATE_CHECKED);
                     group = target.data("group");
 
                     if(group) { //find all buttons from the same group
-                        current = this.element.find("." + K_TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + K_CHECKED_STATE);
+                        current = this.element.find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_CHECKED);
                     }
 
                     if(!this.trigger(TOGGLE, { target: target, checked: isChecked })) {
                         if(current && current.length) {
-                            current.removeClass(K_CHECKED_STATE);
+                            current.removeClass(STATE_CHECKED);
                         }
 
-                        target.toggleClass(K_CHECKED_STATE);
+                        target.toggleClass(STATE_CHECKED);
                     }
                 } else {
                     this.trigger(CLICK, { target: target });
@@ -298,7 +307,7 @@ var __meta__ = {
             },
 
             _toggle: function(e) {
-                var splitButton = $(e.target).closest("." + K_SPLIT_BUTTON),
+                var splitButton = $(e.target).closest("." + SPLIT_BUTTON),
                     popup = splitButton.data("kendoPopup"),
                     isDefaultPrevented;
 
