@@ -34,6 +34,10 @@ class DataSourceSchemaModelField extends \Kendo\SerializableObject {
     public function defaultValue($value) {
         return $this->setProperty('defaultValue', $value);
     }
+
+    public function parse($value) {
+        return $this->setProperty('parse', $value);
+    }
 }
 
 ?>
