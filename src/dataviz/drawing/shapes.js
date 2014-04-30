@@ -40,10 +40,12 @@
 
         _initOptions: function(options) {
             options = extend({}, options);
+
             var transform = options.transform;
-            if (transform && transform instanceof Matrix) {
+            if (transform) {
                 options.transform = g.transform(transform);
             }
+
             this.options = new OptionsStore(options);
         },
 
@@ -55,10 +57,7 @@
 
         transform: function(transform) {
             if (defined(transform)) {
-                if (transform instanceof Matrix) {
-                    transform = g.transform(transform);
-                }
-                this.options.set("transform", transform);
+                this.options.set("transform", g.transform(transform));
             } else {
                 return this.options.get("transform");
             }
@@ -69,12 +68,12 @@
                 transformation,
                 matrix,
                 parentMatrix;
+
             while (element.parent) {
                 element = element.parent;
                 transformation = element.transform();
-                matrix = transformationMatrix(transformation);
-                if (matrix) {
-                    parentMatrix = matrix.times(parentMatrix || Matrix.unit());
+                if (transformation) {
+                    parentMatrix = transformation.matrix().times(parentMatrix || Matrix.unit());
                 }
             }
 
