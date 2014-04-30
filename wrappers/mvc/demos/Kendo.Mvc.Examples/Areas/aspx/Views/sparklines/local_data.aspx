@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master"
 Inherits="System.Web.Mvc.ViewPage<IList<Kendo.Mvc.Examples.Models.CompensationStats>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">

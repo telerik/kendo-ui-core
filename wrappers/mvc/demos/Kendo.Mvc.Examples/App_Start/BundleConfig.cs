@@ -11,31 +11,23 @@ namespace Kendo.Mvc.Examples
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/kendo-web").Include(
-                        "~/Scripts/kendo.web.min.js",
+            bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
+                        "~/Scripts/kendo.all.min.js",
                         "~/Scripts/kendo.aspnetmvc.min.js",
                         "~/Scripts/kendo.timezones.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/kendo-dataviz").Include(
-                        "~/Scripts/kendo.all.min.js",
-                        "~/Scripts/kendo.aspnetmvc.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/kendo-mobile").Include(
-                        "~/Scripts/kendo.all.min.js",
-                        "~/Scripts/kendo.aspnetmvc.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/demo").Include(
                         "~/Scripts/console.js",
                         "~/Scripts/prettify.js"));
 
-            bundles.Add(new StyleBundle("~/Content/web/css").Include(
+            bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
                         "~/Content/web/kendo.common.min.css",
                         "~/Content/web/kendo.rtl.min.css",
-                        "~/Content/web/kendo.default.min.css"));
-
-            bundles.Add(new StyleBundle("~/Content/dataviz/css").Include(
+                        "~/Content/web/kendo.default.min.css",
                         "~/Content/dataviz/kendo.dataviz.min.css",
-                        "~/Content/dataviz/kendo.dataviz.default.min.css"));
+                        "~/Content/dataviz/kendo.dataviz.default.min.css",
+                        "~/Content/mobile/kendo.mobile.all.min.css"));
+
 
             bundles.Add(new StyleBundle("~/Content/mobile/css").Include(
                         "~/Content/mobile/kendo.mobile.all.min.css"));

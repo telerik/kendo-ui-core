@@ -7,9 +7,9 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.Examples.Models;
 using Kendo.Mvc.UI;
 
-namespace Kendo.Mvc.Examples.Controllers.Mobile
+namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class ListViewController : Controller
+    public partial class Mobile_ListViewController : Controller
     {       
         public ActionResult Hierarchical_Databinding()
         {

@@ -4,11 +4,11 @@
 <head runat="server">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <%: Styles.Render("~/Content/web/css") %>
+    <%: Styles.Render("~/Content/kendo/css") %>
     <%: Styles.Render("~/Content/shared/css") %>
     
     <%: Scripts.Render("~/bundles/jquery") %>
-    <%: Scripts.Render("~/bundles/kendo-web") %>
+    <%: Scripts.Render("~/bundles/kendo") %>
     <%: Scripts.Render("~/bundles/demo") %>
 
     <%-- Include the JavaScript for the current culture --%>

@@ -10,14 +10,11 @@ namespace Kendo.Mvc.Examples
     {
         protected override IHttpHandler GetHttpHandler(System.Web.Routing.RequestContext requestContext)
         {
-            requestContext.RouteData.Values["controller"] = 
-                requestContext.RouteData.Values["controller"].ToString().Replace("-", "_");
+            requestContext.RouteData.Values["controller"] = requestContext.RouteData.Values["controller"].ToString().Replace("-", "_");
 
-            requestContext.RouteData.Values["action"] =
-                requestContext.RouteData.Values["action"].ToString().Replace("-", "_");
+            requestContext.RouteData.DataTokens["namespaces"] = new[] { "Kendo.Mvc.Examples.Controllers" };
 
-
-            requestContext.RouteData.DataTokens["namespaces"] = new[] { "Kendo.Mvc.Examples.Controllers", "Kendo.Mvc.Examples.Controllers.Mobile" };
+            requestContext.RouteData.Values["action"] = requestContext.RouteData.Values["action"].ToString().Replace("-", "_");
 
             return base.GetHttpHandler(requestContext);
         }

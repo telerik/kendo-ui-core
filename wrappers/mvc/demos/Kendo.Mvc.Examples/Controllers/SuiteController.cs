@@ -11,9 +11,12 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Navigation = NavigationProvider.SuiteWidgets().Where(widget => widget.ShouldInclude);
-            
+            var widgets = NavigationProvider.SuiteWidgets().Where(widget => widget.ShouldInclude);
+
+            ViewBag.Navigation = widgets;
+
             return View();
         }
+
     }
 }
