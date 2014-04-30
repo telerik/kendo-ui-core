@@ -213,28 +213,6 @@
             }
 
             return object;
-        },
-
-        clone: function() {
-            var result = {}, value, field;
-
-            for (field in this) {
-                if (this.shouldSerialize(field)) {
-                    value = this[field];
-
-                    if (value instanceof OptionsStore) {
-                        value = value.clone();
-                    }
-
-                    result[field] = value;
-                }
-            }
-
-            return result;
-        },
-
-        shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "observer" && field !== "prefix" && !kendo.isFunction(this[field]);
         }
     });
 
