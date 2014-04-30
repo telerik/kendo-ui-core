@@ -867,4 +867,9 @@ test("parseDate uses today's date when parse only time portion", function() {
     deepEqual(result, today);
 });
 
+test("parseDate supports UTC date without a timezone offset", function() {
+    var result = parse("2012-03-25T04:30:10.1234567");
+    deepEqual(result, new Date(2012, 2, 25, 4, 30, 10, 123));
+});
+
 }());
