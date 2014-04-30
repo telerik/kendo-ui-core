@@ -1,4 +1,5 @@
 require 'release_build_upload'
+require 'beta_build_upload'
 
 def description(name)
     name = name.split(/\W/).map { |c| c.capitalize }.join(' ')
@@ -151,7 +152,7 @@ def bundle(options)
       if defined? SERVICE_PACK_NUMBER
         destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}"
       else
-        destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}"
+        destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/Q#{VERSION_Q} #{VERSION_YEAR}"
       end
 
       versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, destination_folder_name)
@@ -178,6 +179,36 @@ def bundle(options)
 
       # add bundle to bundles:all
       task "release_builds:bundles:all" => "release_builds:upload:#{name}"
+    end
+
+    if options[:beta_build]
+      #destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/BETA"
+      destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/DRY_RUN_BETA"
+
+      versioned_bundle_destination_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, destination_folder_name)
+      versioned_bundle_archive_path = File.join(ARCHIVE_ROOT, "Stable")
+
+      desc "Copy #{name} as beta build on telerik.com"
+      task "beta_builds:copy:#{name}" do
+          FileUtils.mkdir_p(versioned_bundle_destination_path)
+
+          beta_build_file_copy(options[:beta_build], name, versioned_bundle_destination_path, versioned_bundle_archive_path) 
+
+      end
+
+      desc "Upload #{name} as beta build on telerik.com"
+      task "beta_builds:upload:#{name}" =>  "beta_builds:copy:#{name}" do
+          FileUtils.mkdir_p(versioned_bundle_destination_path)
+
+          upload_beta_build \
+                  :title => name,
+                  :product => options[:product],
+                  :params => options[:beta_build],
+                  :archive_path => versioned_bundle_destination_path  
+      end
+
+      # add bundle to bundles:all
+      task "beta_builds:bundles:all" => "beta_builds:upload:#{name}"
     end
     
 end
