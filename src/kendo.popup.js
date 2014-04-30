@@ -102,7 +102,7 @@ var __meta__ = {
             extend(options.animation.open, {
                 complete: function() {
                     that.wrapper.css({ overflow: VISIBLE }); // Forcing refresh causes flickering in mobile.
-                    that.trigger(ACTIVATE);
+                    that._trigger(ACTIVATE);
                 }
             });
 
@@ -132,7 +132,7 @@ var __meta__ = {
                     }
 
                     that._closing = false;
-                    that.trigger(DEACTIVATE);
+                    that._trigger(DEACTIVATE);
                 }
             });
 
@@ -229,7 +229,7 @@ var __meta__ = {
                     element.css(kendo.getComputedStyles(anchor[0], styles));
                 }
 
-                if (element.data("animating") || that.trigger(OPEN)) {
+                if (element.data("animating") || that._trigger(OPEN)) {
                     return;
                 }
 
@@ -303,7 +303,7 @@ var __meta__ = {
             if (that.visible()) {
                 wrap = (that.wrapper[0] ? that.wrapper : kendo.wrap(that.element).hide());
 
-                if (that._closing || that.trigger(CLOSE)) {
+                if (that._closing || that._trigger(CLOSE)) {
                     return;
                 }
 
@@ -339,6 +339,10 @@ var __meta__ = {
                 wrap.css({ overflow: HIDDEN }); // stop callback will remove hidden overflow
                 that.element.kendoAnimate(animation);
             }
+        },
+
+        _trigger: function(ev) {
+            return this.trigger(ev, { type: ev });
         },
 
         _resize: function(e) {

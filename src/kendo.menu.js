@@ -1161,6 +1161,13 @@ var __meta__ = {
             target: "body"
         },
 
+        events: [
+            OPEN,
+            CLOSE,
+            ACTIVATE,
+            DEACTIVATE
+        ],
+
         destroy: function() {
             var that = this;
 
@@ -1175,7 +1182,7 @@ var __meta__ = {
         show: function(x, y) {
             var that = this;
 
-            if (that.popup.visible()) {
+            if (that.popup.visible() && that.options.filter) {
                 that.popup.close(true);
             }
 
@@ -1200,7 +1207,7 @@ var __meta__ = {
             e.stopImmediatePropagation();
 
             if ((options.filter && kendo.support.matchesSelector.call(e.target, options.filter)) || !options.filter) {
-                if (that.options.alignToAnchor) {
+                if (options.alignToAnchor) {
                     that.show(e.target);
                 } else {
                     that.show(e.pageX, e.pageY);
@@ -1235,15 +1242,27 @@ var __meta__ = {
             }
         },
 
+        _triggerEvent: function(e) {
+            return this.trigger(e.type, { item: this.element[0] });
+        },
+
         _popup: function() {
             var that = this;
+
+            that._triggerProxy = proxy(that._triggerEvent, that);
 
             that.popup = that.element
                             .addClass("k-context-menu")
                             .kendoPopup({
                                 anchor: that.target || "body",
-                                collision: that.popupCollision
+                                collision: that.popupCollision,
+                                open: that._triggerProxy,
+                                close: that._triggerProxy,
+                                activate: that._triggerProxy,
+                                deactivate: that._triggerProxy
                             }).data("kendoPopup");
+
+            that.wrapper = that.popup.wrapper;
         }
     });
 
