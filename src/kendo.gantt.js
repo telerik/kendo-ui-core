@@ -495,7 +495,8 @@ var __meta__ = {
         events: [
             "dataBinding",
             "dataBound",
-            "change"
+            "change",
+            "navigate"
         ],
 
         options: {
@@ -593,9 +594,10 @@ var __meta__ = {
 
                     var name = $(this).attr(kendo.attr("name"));
 
-                    that.timeline.view(name);
-
-                    that.refresh();
+                    if (!that.trigger("navigate", { view: name })) {
+                        that.timeline.view(name);
+                        that.refresh();
+                    }
                 });
 
             toolbar
