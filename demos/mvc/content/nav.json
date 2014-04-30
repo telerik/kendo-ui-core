@@ -4,6 +4,7 @@
     "name": "overview",
     "spriteCssClass": "overviewIcon",
     "expanded": "true",
+    "disableInMobile": true,
     "packages": [
       "online"
     ],
@@ -71,12 +72,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "autocomplete/rtl",
         "title": "Right-to-left support in Kendo UI AutoComplete widget",
         "meta": "We will demonstrate how the right-to-left typing feature is implemented in the text input field of Kendo UI jQuery-powered AutoComplete control."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "autocomplete/navigation",
         "title": "Keyboard navigation in Kendo UI AutoComplete widget",
         "meta": "Look at this Kendo UI Web demo which illustrates how the keyboard navigation feature is supported in Kendo UI AutoComplete component."
@@ -138,12 +141,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "button/rtl",
         "title": "Kendo UI Button RTL Support",
         "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "button/navigation",
         "title": "Kendo UI Button Keyboard Navigation",
         "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
@@ -203,12 +208,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "calendar/rtl",
         "title": "Right-to-left functionality, enabled in Kendo UI Calendar widget",
         "meta": "Kendo UI Calendar component supports RTL functionality. Look at the demo to see how to easily apply RTL support to the widget."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "calendar/navigation",
         "title": "Keyboard navigation demo for Kendo UI Calendar widget",
         "meta": "You can easily navigate in Kendo UI Calendar by using the keyboard. This demo shows the functionality, just look at the notes and play with the example."
@@ -261,6 +268,7 @@
       },
       {
         "text": "Keyboard support",
+        "disableInMobile": true,
         "url": "colorpicker/navigation",
         "title": "Keyboard support enabled in Kendo UI ColorPicker widget",
         "meta": "In this demo we review the keyboard support that is enabled in Kendo UI ColorPicker."
@@ -352,12 +360,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "combobox/rtl",
         "title": "Right-to-left support in Kendo UI ComboBox widget",
         "meta": "Build your app with Kendo UI ComboBox. This demo shows how RTL feature is supported in the component."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "combobox/navigation",
         "title": "Keyboard nagivation in Kendo UI ComboBox | Kendo UI Web demos",
         "meta": "Kendo UI ComboBox widget for web app development supports easy keyboard navigation. Play with the demo to explore the functionality."
@@ -423,12 +433,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "datepicker/rtl",
         "title": "RTL support in Kendo UI DatePicker widget | Kendo UI Demo",
         "meta": "See how Kendo UI DatePicker component supports RTL functionality."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "datepicker/navigation",
         "title": "Keyboard navigation in Kendo UI DatePicker",
         "meta": "This example shows how the keyboard navigation functionality is supported in Kendo UI DatePicker widget."
@@ -494,12 +506,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "datetimepicker/rtl",
         "title": "Right-to-left support in Kendo UI DateTimePicker control | Kendo UI Demo",
         "meta": "Choose a date and see how the date and the time are displayed from right to left in Kendo UI DateTimePicker component."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "datetimepicker/navigation",
         "title": "Keyboard navigation in Kendo UI DateTimePicker widget",
         "meta": "By using the keyboard, you can easily select date and time in Kendo UI DateTimePicker, trigger an event or highlight a specific day."
@@ -571,12 +585,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "dropdownlist/rtl",
         "title": "RTL feature in Kendo UI DropDownList",
         "meta": "In this Kendo UI demo, we illustrate how the RTL support is enabled in Kendo UI DropDownList component."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "dropdownlist/navigation",
         "title": "Kendo UI DropdownList | Keyboard navigation demo",
         "meta": "Kendo UI DropDownList supports keyboard navigation that lets you effortlessly navigate in the dropdown widget by using the keyboard."
@@ -673,12 +689,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "editor/rtl",
         "title": "RTL support in Kendo UI Editor",
         "meta": "With Kendo UI Editor you can allow end users to edit HTML5 in a user-friendly way. Check out this demo to learn more about the RTL support in the widget."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "editor/navigation",
         "title": "Keyboard navigation in Kendo UI Editor",
         "meta": "Kendo UI Editor is another widget that supports keyboard navigation. Check out the demo to learn how to implement it in your app."
@@ -855,6 +873,7 @@
       },
       {
         "text": "Virtualization of local data",
+        "disableInMobile": true,
         "url": "grid/virtualization-local-data",
         "title": "Example of local data virtualization in Kendo UI Grid control",
         "meta": "This demo shows how built-in UI virtualization for highly optimized binding to large data sets is enabled in KendoGrid widget. Demo source code helps you reproduce and utilize the functionality.",
@@ -1016,12 +1035,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "grid/rtl",
         "title": "RTL support in Kendo UI Grid component",
         "meta": "In this example we will see how the Kendo UI Grid widget supports right-to-left spreadsheet grid for better user experience."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "grid/navigation",
         "title": "Keyboard navigation in Kendo UI Grid",
         "meta": "Look at this Kendo UI Grid demo to learn how different keyboard combinations could be used to navigate in the component."
@@ -1039,6 +1060,7 @@
       },
       {
         "text": "Adaptive Rendering",
+        "disableInMobile": true,
         "url": "adaptive/grid",
         "title": "Adaptive Rendering of Kendo UI Grid",
         "external": "true",
@@ -1095,12 +1117,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "listview/rtl",
         "title": "RTL support in Kendo UI ListView",
         "meta": "This demo shows how the right-to-left feature is supported in Kendo UI ListView component."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "listview/navigation",
         "title": "Keyboard navigation in Kendo UI ListView widget",
         "meta": "In this example we will look at the supported keys and user actions in Kendo UI ListView control."
@@ -1154,6 +1178,7 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "maskedtextbox/rtl",
         "title": "RTL support in Kendo UI MaskedTextBox widget",
         "meta": "This demo shows how right-to-left input is implemented in Kendo UI MaskedTextBox component to ensure the satisfaction of RTL language users."
@@ -1244,12 +1269,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "menu/rtl",
         "title": "Right-to-left support in Kendo UI Menu control | Kendo UI Web Demo",
         "meta": "Review how the RTL feature is enabled for the dropdown items in Kendo UI Menu and in the menu labels of the widget."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "menu/navigation",
         "title": "Keyboard navigation in Kendo UI Menu",
         "meta": "This example demonstrates how the keyboard navigation is a supported feature in Kendo UI Menu widget."
@@ -1278,6 +1305,7 @@
     ],
     "text": "Mobile",
     "name": "mobile",
+    "disableInMobile": true,
     "new": "true",
     "spriteCssClass": "mobileIcon",
     "items": [
@@ -1404,12 +1432,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "multiselect/rtl",
         "title": "RTL support in Kendo UI MultiSelect widget | Kendo UI Web demo",
         "meta": "This example shows how RTL support is enabled in Kendo UI MultiSelect. Any application or mobile website will be now intuitive for RTL language users."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "multiselect/navigation",
         "title": "Keyboard navigation in Kendo UI MultiSelect component | Kendo UI Web demo",
         "meta": "This demo shows how the keyboard navigation for Kendo UI MultiSelect widget works. Learn more how to use the keyboard shortcuts for easier navigation."
@@ -1469,6 +1499,7 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "notification/rtl",
         "title": "RTL Support of Kendo UI Notification | Kendo UI Web demo",
         "meta": "Demo about the RTL support of the Kendo UI Notification component."
@@ -1511,12 +1542,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "numerictextbox/rtl",
         "title": "RTL support in Kendo UI NumericTextBox widget",
         "meta": "This demo shows how right-to-left input is implemented in Kendo UI Numeric TextBox component to ensure the satisfaction of RTL language users."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "numerictextbox/navigation",
         "title": "Keyboard navigation in Kendo UI NumericTextBox",
         "meta": "The value in Kendo UI NumericTextBox can be increased or decreased by using keyboard navigation combinations. Take a look at the demo to learn how."
@@ -1583,12 +1616,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "panelbar/rtl",
         "title": "Keyboard navigation in Kendo UI PanelBar widget | Kendo UI Web demo",
         "meta": "See how directions of the arrows in Kendo UI PanelBar are easily changed when moving from right to left."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "panelbar/navigation",
         "title": "Demo for keyboard navigation feature in Kendo UI Collapsible Panel",
         "meta": "Users can navigate in Kendo UI PanelBar by using the keyboard and different keyboard combinations. Play with the demo and implement the feature in your app."
@@ -1653,6 +1688,7 @@
       },
       {
         "text": "RTL Support",
+        "disableInMobile": true,
         "url": "progressbar/rtl",
         "title": "Kendo UI ProgressBar RTL Support",
         "meta": ""
@@ -1763,6 +1799,7 @@
       },
       {
         "text": "RTL Support",
+        "disableInMobile": true,
         "url": "scheduler/rtl",
         "title": "Right-to-left (RTL) support of Kendo UI Scheduler",
         "meta": "This demo shows the Right-to-left (RTL) support of Kendo UI Scheduler."
@@ -1780,6 +1817,7 @@
       },
       {
         "text": "Adaptive Rendering",
+        "disableInMobile": true,
         "url": "adaptive/scheduler",
         "title": "Adaptive Rendering of Kendo UI Scheduler",
         "external": "true",
@@ -1820,12 +1858,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "slider/rtl",
         "title": "Right-to-left support in Kendo UI Slider | Kendo UI Web Demos",
         "meta": "This demo illustrates how the right-to-left feature is enabled in Kendo UI Slider widget."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "slider/navigation"
       },
       {
@@ -1951,12 +1991,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "splitter/rtl",
         "title": "Right-to-left support in Kendo UI Splitter control | Kendo UI Web demo",
         "meta": "In this demo we will play with the right-to-left text input and visualization which is enabled in Kendo UI Splitter widget."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "splitter/navigation",
         "title": "Keyboard navigation support in Kendo UI Slider",
         "meta": "Users can easily manipulate the behaviour of Kendo UI Slider by using different keyboard keys and combinations."
@@ -2023,12 +2065,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "tabstrip/rtl",
         "title": "RTL support in Kendo UI TabStrip widget | Kendo UI Web Demos",
         "meta": "This demo shows the right-to-left feature, enabled in Kendo UI TabStrip. Now users can easily reorder the tabs from right to left."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "tabstrip/navigation",
         "title": "Keyboard navigation in Kendo UI TabStrip",
         "meta": "This Kendo UI demo shows how end users of your app can intuitively use keyboard navigation in Kendo UI TabStrip."
@@ -2088,12 +2132,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "timepicker/rtl",
         "title": "Right-to-left time input in Kendo UI TimePicker",
         "meta": "See how end users of your webapp can type and change time values from the right to the left. Enhance the experience with RTL support in Kendo UI TimePicker."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "timepicker/navigation",
         "title": "Keyboard navigation in Kendo UI TimePicker",
         "meta": "Users can intuitively select time in Kendo UI TimePicker by simply using the keyboard support of the widget."
@@ -2245,12 +2291,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "treeview/rtl",
         "title": "RTL Support in Kendo UI TreeView component",
         "meta": "Get familiar with the RTL support in Kendo UI TreeView widget, look at the example and use the source code to play with the demo! "
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "treeview/navigation",
         "title": "Kendo UI TreeView control | Keyboard support demo",
         "meta": "Look at the source code and play with the demo to find out more about the keyboard support feature in Kendo UI TreeView."
@@ -2319,6 +2367,7 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "upload/rtl",
         "title": "RTL support in Kendo UI Upload",
         "meta": "This Kendo UI demo illustrates how you can facilitate your RTL app users by using the RTL feature of Kendo UI Upload widget."
@@ -2386,12 +2435,14 @@
       },
       {
         "text": "RTL support",
+        "disableInMobile": true,
         "url": "window/rtl",
         "title": "Right-to-Left window position of Kendo UI Window control",
         "meta": "This demo shows how Kendo UI Window widget supports right-to-left direction of the window to provide best end-user experience."
       },
       {
         "text": "Keyboard navigation",
+        "disableInMobile": true,
         "url": "window/navigation",
         "title": "Keyboard navigation support | Kendo UI Window Demo",
         "meta": "The sample demonstrates how the keyboard navigation feature is integrated in the powerful Kendo UI Window."
@@ -2567,6 +2618,7 @@
     "name": "spa",
     "documentation": "framework/kendo",
     "spriteCssClass": "spaIcon",
+    "disableInMobile": true,
     "items": [
       {
         "text": "Launch",
@@ -2799,6 +2851,7 @@
     "pro": "true",
     "spriteCssClass": "overviewIcon",
     "documentation": "dataviz/chart",
+    "disableInMobile": true,
     "expanded": "true",
     "packages": [
       "online"
