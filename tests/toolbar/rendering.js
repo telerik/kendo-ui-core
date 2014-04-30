@@ -465,8 +465,8 @@
     test("initializes command overflow popup", 2, function() {
         var toolbar = container.kendoToolBar().data("kendoToolBar");
 
-        ok(toolbar.commandOverflow instanceof kendo.ui.Popup);
-        ok(toolbar.commandOverflow.element.length);
+        ok(toolbar._overflow instanceof kendo.ui.Popup);
+        ok(toolbar._overflow.element.length);
     });
 
     test("does not initiaze popup if resizable is set to false", 1, function() {
@@ -474,7 +474,7 @@
             resizable: false
         }).data("kendoToolBar");
 
-        ok(!toolbar.commandOverflow);
+        ok(!toolbar._overflow);
     });
 
 })();

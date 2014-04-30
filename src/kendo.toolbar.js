@@ -19,6 +19,7 @@ var __meta__ = {
         TOOLBAR = "k-toolbar",
         BUTTON = "k-button",
         TOGGLE_BUTTON = "k-toggle-button",
+        BUTTON_GROUP = "k-button-group",
         SPLIT_BUTTON = "k-split-button",
         SEPARATOR = "k-toolbar-separator",
 
@@ -46,19 +47,19 @@ var __meta__ = {
         templates = {
 
             button: kendo.template(
-                '<a href="" role="button" class="k-button" unselectable="on"' +
+                '<a href="" class="k-button" unselectable="on"' +
                 'title="#= data.text ? data.text : "" #">#: data.text ? data.text : "" #</a>'
             ),
 
             toggleButton: kendo.template(
-                '<a href="" role="togglebutton" class="k-button k-toggle-button" unselectable="on"' +
+                '<a href="" class="k-button k-toggle-button" unselectable="on"' +
                 'title="#= data.text ? data.text : "" #">#: data.text ? data.text : "" #</a>'
             ),
 
             buttonGroup: kendo.template(
                 '<div class="k-button-group">' +
                     '# for(var i = 0; i < items.length; i++) { #' +
-                        '<a href="" role="togglebutton" class="k-button k-toggle-button" unselectable="on" title="#= items[i].text ? items[i].text : "" #">' +
+                        '<a href="" class="k-button k-toggle-button" unselectable="on" title="#= items[i].text ? items[i].text : "" #">' +
                             '#= items[i].text ? items[i].text : "" #' +
                         '</a>' +
                     '# } #' +
@@ -67,7 +68,7 @@ var __meta__ = {
 
             splitButton: kendo.template(
                 '<div class="k-split-button">' +
-                    '<a href="" role="splitbutton" class="k-button">#= text #</a>' +
+                    '<a href="" class="k-button">#= text #</a>' +
                     '<a href="" class="k-button k-split-button-arrow"><span class="k-icon k-i-arrow-s"></span></a>' +
                     '<ul class="k-split-button-dropdown">' +
                         '# for(var i = 0; i < options.length; i++) { #' +
@@ -79,10 +80,9 @@ var __meta__ = {
 
             separator: kendo.template('<span class="k-toolbar-separator"></span>'),
 
-            commandOverflow: '<span class="k-overflow-anchor">' +
-                                '<ul class="k-overflow-container"></ul>'+
-                                '<span class="k-icon k-i-collapse"></span>' +
-                             '</span>'
+            overflowAnchor: '<span class="k-overflow-anchor"></span>',
+
+            overflowContainer: '<ul class="k-overflow-container"></ul>'
 
         },
 
@@ -144,6 +144,8 @@ var __meta__ = {
                     }
                     img.attr("src", imageUrl);
                 }
+
+                element.data({ type: "button" });
             },
 
             toggleButton: function(element, options) {
@@ -156,6 +158,8 @@ var __meta__ = {
                 if(options.group) {
                     element.attr("data-group", options.group);
                 }
+
+                element.data({ type: "toggleButton" });
             },
 
             buttonGroup: function(element, options) {
@@ -171,6 +175,8 @@ var __meta__ = {
                 if(options.id) {
                     element.attr("id", options.id);
                 }
+
+                element.data({ type: "buttonGroup" });
             },
 
             splitButton: function(element, options) {
@@ -187,7 +193,14 @@ var __meta__ = {
                     anchor: element
                 }).data("kendoPopup");
 
-                element.data({ kendoPopup: popup });
+                element.data({
+                    type: "splitButton",
+                    kendoPopup: popup
+                });
+            },
+
+            separator: function(element, options) {
+                element.data({ type: "separator" });
             }
 
         };
@@ -195,7 +208,7 @@ var __meta__ = {
         var ToolBar = Widget.extend({
             init: function(element, options) {
                 var that = this,
-                    commandOverflow;
+                    overflowAnchor;
 
                 Widget.fn.init.call(that, element, options);
 
@@ -209,17 +222,36 @@ var __meta__ = {
                 }
 
                 if(options.resizable) {
-                    commandOverflow = $(templates.commandOverflow);
-                    element.append(commandOverflow);
+                    overflowAnchor = $(templates.overflowAnchor);
+                    element.append(overflowAnchor);
 
-                    that.commandOverflow = commandOverflow.find("." + OVERFLOW_CONTAINER).kendoPopup({
-                        anchor: commandOverflow
-                    }).data("kendoPopup");
+                    that._overflow = new kendo.ui.Popup(templates.overflowContainer, {
+                        anchor: overflowAnchor
+                    });
+
+                    that._anchorWidth = overflowAnchor.outerWidth();
                 }
+
+                that.bind("resize", function(e) {
+                    var containerWidth = e.width,
+                        childrenWidth = 0,
+                        anchorWidth = this._anchorWidth;
+
+                    this.element.children().each(function() {
+                        childrenWidth += $(this).outerWidth(true); 
+                    });
+
+                    containerWidth = containerWidth - anchorWidth;
+                    childrenWidth = Math.ceil(childrenWidth);
+
+                    if(containerWidth < childrenWidth) {
+                        this._hideItem(this.element.children(":not(." + OVERFLOW_ANCHOR + ")").last());
+                    }
+                });
 
                 element.on(CLICK, "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")", proxy(that._buttonClick, that));
                 element.on(CLICK, "." + SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
-                element.on(CLICK, "." + OVERFLOW_ANCHOR, proxy(that._toggleOverflowContainer, that));
+                element.on(CLICK, "." + OVERFLOW_ANCHOR, proxy(that._toggleOverflow, that));
 
                 kendo.notify(that);
             },
@@ -242,8 +274,8 @@ var __meta__ = {
                     $(element).data("kendoPopup").destroy();
                 });
 
-                if(this.commandOverflow) {
-                    this.commandOverflow.destroy();
+                if(this._overflow) {
+                    this._overflow.destroy();
                 }
 
                 Widget.fn.destroy.call(this);
@@ -324,12 +356,27 @@ var __meta__ = {
                 }
             },
 
-            _toggleOverflowContainer: function() {
-                var popup = this.commandOverflow;
+            _toggleOverflow: function() {
+                var popup = this._overflow;
                 popup.toggle();
             },
 
-            _moveToPopup: function(item) {
+            _hideItem: function(item) {
+                var wrapper = $("<li></li>"),
+                    type = item.data("type");
+
+                if(type === "button" || type === "toggleButton") {
+                    item.appendTo(wrapper);
+                } else if(type === "buttonGroup" || type === "splitButton") {
+                    //todo
+                } else {
+                    //todo
+                }
+
+                this._overflow.element.append(wrapper);
+            },
+
+            _showItem: function(item) {
                 //todo
             }
 
