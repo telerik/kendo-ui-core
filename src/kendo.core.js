@@ -2912,7 +2912,7 @@ function pad(number, digits, end) {
         }
     });
 
-    var ContainerNullObject = { bind: function () { return this; }, nullObject: true };
+    var ContainerNullObject = { bind: function () { return this; }, nullObject: true, options: {} };
 
     var MobileWidget = Widget.extend({
         init: function(element, options) {
