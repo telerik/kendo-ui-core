@@ -1,5 +1,6 @@
 (function() {
-    var PivotGrid = kendo.ui.PivotGrid,
+    var PivotDataSource = kendo.data.PivotDataSource,
+        PivotGrid = kendo.ui.PivotGrid,
         div;
 
     module("PivotGrid initial rendering", {
@@ -18,8 +19,28 @@
         }
     });
 
+    function createPivot(options) {
+        options = options || {};
+
+        if (!options.dataSource) {
+            var dataSource = new PivotDataSource();
+
+            //mock - axes method
+            dataSource.axes = function() {
+                return {
+                    columns: [],
+                    rows: []
+                }
+            }
+
+            options.dataSource = dataSource;
+        }
+
+        return new PivotGrid($(div), options);
+    }
+
     test("PivotGrid renders filter section", function() {
-        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+        var pivotgrid = createPivot();
 
         var filtersSection = pivotgrid.filtersSection;
 
@@ -31,7 +52,7 @@
     });
 
     test("PivotGrid renders measures section", function() {
-        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+        var pivotgrid = createPivot();
 
         var measuresSection = pivotgrid.measuresSection;
 
@@ -42,7 +63,7 @@
     });
 
     test("PivotGrid renders column fields section", function() {
-        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+        var pivotgrid = createPivot();
 
         var columnsSection = pivotgrid.columnsSection;
 
@@ -53,7 +74,7 @@
     });
 
     test("PivotGrid renders row fields section", function() {
-        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+        var pivotgrid = createPivot();
 
         var rowsSection = pivotgrid.rowsSection;
 
@@ -64,21 +85,28 @@
     });
 
     test("PivotGrid renders column header section", 2, function() {
-        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+        var pivotgrid = createPivot();
 
         ok(pivotgrid.columnsHeader.is("div"));
         ok(pivotgrid.columnsHeader.closest(".k-widget")[0]);
     });
 
     test("PivotGrid renders row header section", 2, function() {
-        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+        var pivotgrid = createPivot();
 
         ok(pivotgrid.rowsHeader.is("div"));
         ok(pivotgrid.rowsHeader.closest(".k-widget")[0]);
     });
 
     test("PivotGrid renders content section", 2, function() {
-        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
+        var pivotgrid = createPivot();
+
+        ok(pivotgrid.content.is("div"));
+        ok(pivotgrid.content.closest(".k-widget")[0]);
+    });
+
+    test("PivotGrid renders content section", 2, function() {
+        var pivotgrid = createPivot();
 
         ok(pivotgrid.content.is("div"));
         ok(pivotgrid.content.closest(".k-widget")[0]);
@@ -100,10 +128,4 @@
         }
     });
 
-    test("PivotGrid renders content section", 2, function() {
-        var pivotgrid = new PivotGrid($(div), { dataSource: [] });
-
-        ok(pivotgrid.content.is("div"));
-        ok(pivotgrid.content.closest(".k-widget")[0]);
-    });
 })();

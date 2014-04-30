@@ -344,6 +344,7 @@ var __meta__ = {
        readers: {
            xmla: XmlaDataReader
        }
+    });
 
     var PivotGrid = Widget.extend({
         init: function(element, options) {
@@ -461,11 +462,9 @@ var __meta__ = {
             var axes = dataSource.axes();
             var data = dataSource.view();
 
-            that.columnsHeaderTree.render(kendo_column_headers(axes));
-            that.rowsHeaderTree.render(kendo_row_headers(axes));
-            that.contentTree.render(kendo_content(data, axes[0].length));
-
-            //TODO: perform rendering here
+            that.columnsHeaderTree.render(kendo_column_headers(axes.columns));
+            that.rowsHeaderTree.render(kendo_row_headers(axes.rows));
+            that.contentTree.render(kendo_content(data, axes.columns.length || 1));
         }
     });
 
@@ -473,25 +472,36 @@ var __meta__ = {
     var text = kendo.dom.text;
 
     //column headers
-    function kendo_column_headers(axes) {
-        return [ element("table", null, [kendo_columns_thead(axes)]) ];
+    function kendo_column_headers(columns) {
+        return [ element("table", null, [kendo_columns_thead(columns)]) ];
     };
 
-    function kendo_columns_thead(axes) {
-        return element("thead", null, kendo_columns_thead_rows(axes));
+    function kendo_columns_thead(columns) {
+        return element("thead", null, kendo_columns_thead_rows(columns));
     }
 
-    function kendo_columns_thead_rows(axes) {
-        var axis = axes[0];
-        var membersLength = axis[0].members.length;
+    function kendo_columns_thead_rows(columns) {
+        var membersLength = columns[0] ? columns[0].members.length : 1;
 
         var rows = [];
 
         for (var i = 0; i < membersLength; i++) {
             var cells = [];
+            var j = 0;
+            var length = columns.length || 1;
 
-            for (var j = 0, length = axis.length; j < length; j++) {
-                var member = axis[j].members[i];
+            for (; j < length; j++) {
+                var column = columns[j];
+                var member;
+
+                if (!column) {
+                    member = {
+                        caption: ""
+                    };
+                } else {
+                    member = columns[j].members[i];
+                }
+
                 cells.push(kendo_th(member));
             }
 
@@ -506,31 +516,42 @@ var __meta__ = {
     }
 
     //row headers
-    function kendo_row_headers(axes) {
-        return [ element("table", null, [kendo_row_thead(axes)]) ];
+    function kendo_row_headers(rows) {
+        return [ element("table", null, [kendo_row_thead(rows)]) ];
     };
 
-    function kendo_row_thead(axes) {
-        return element("thead", null, kendo_row_thead_rows(axes));
+    function kendo_row_thead(rows) {
+        return element("thead", null, kendo_row_thead_rows(rows));
     }
 
-    function kendo_row_thead_rows(axes) {
-        var axis = axes[1];
-        var rows = [];
+    function kendo_row_thead_rows(rows) {
+        var elements = [];
+        var length = rows.length || 1;
 
-        for (var j = 0, length = axis.length; j < length; j++) {
+        for (var j = 0; j < length; j++) {
             var cells = [];
 
-            var tuple = axis[j];
+            var tuple = rows[j];
+            var member;
 
-            for (var i = 0; i < tuple.members.length; i++) {
-                cells.push(kendo_th(tuple.members[i]));
+            if (tuple) {
+                for (var i = 0; i < tuple.members.length; i++) {
+                    member = tuple.members[i];
+
+                    cells.push(kendo_th(member));
+                }
+            } else {
+                var member = {
+                    caption: ""
+                };
+
+                cells.push(kendo_th(member));
             }
 
-            rows.push(element("tr", null, cells));
+            elements.push(element("tr", null, cells));
         }
 
-        return rows;
+        return elements;
     }
 
     //content
