@@ -44,6 +44,7 @@ var __meta__ = {
         MOUSEENTER = pointers ? "pointerover" : (msPointers ? "MSPointerOver" : "mouseenter"),
         MOUSELEAVE = pointers ? "pointerout" : (msPointers ? "MSPointerOut" : "mouseleave"),
         mobile = touch || msPointers || pointers,
+        DOCUMENT_ELEMENT = $(document.documentElement),
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "k-state-default",
         HOVERSTATE = "k-state-hover",
@@ -1146,41 +1147,103 @@ var __meta__ = {
 
             Menu.fn.init.call(that, element, options);
 
-            element = that.element;
-            options = that.options;
+            that.target = $(that.options.target);
 
-            var target = options.target;
-
-            that.popup = element
-                            .addClass("k-context-menu")
-                            .kendoPopup({
-                                anchor: target || "body",
-                                collision: "fit flip"
-                            }).data("kendoPopup");
-
-            if (target) {
-                $(target).on(options.event, function (e) {
-                    e.preventDefault();
-                    e.stopImmediatePropagation();
-                    that.show(e.pageX, e.pageY);
-                });
-            }
-
-            $(document.body).on(kendo.support.click, function () { that.popup.close() });
+            that._popup();
+            that._wire();
         },
         options: {
             name: "ContextMenu",
-            event: "contextmenu",
+            filter: null,
+            showOn: "contextmenu",
             orientation: "vertical",
-            closeOnClick: true,
-            target: null
+            alignToAnchor: false,
+            target: "body"
+        },
+
+        destroy: function() {
+            var that = this;
+
+            that.target.off(that.showOn + NS, that._showProxy);
+            DOCUMENT_ELEMENT.on(MOUSEDOWN + NS, that._closeProxy);
+
+            if (that.popup) {
+                that.popup.destroy(that);
+            }
         },
 
         show: function(x, y) {
             var that = this;
 
-            that.popup.wrapper.hide();
-            that.popup.open(x, y);
+            if (that.popup.visible()) {
+                that.popup.close(true);
+            }
+
+            if (y !== undefined) {
+                that.popup.wrapper.hide();
+                that.popup.open(x, y);
+            } else {
+                that.popup.options.anchor = x ? x[0] || x : that.popup.anchor;
+                that.popup.open();
+            }
+
+            DOCUMENT_ELEMENT.off(MOUSEDOWN, that.popup._mousedownProxy);
+            DOCUMENT_ELEMENT
+                .on(MOUSEDOWN + NS, that._closeProxy);
+        },
+
+        _showHandler: function (e) {
+            var that = this,
+                options = that.options;
+
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            if ((options.filter && kendo.support.matchesSelector.call(e.target, options.filter)) || !options.filter) {
+                if (that.options.alignToAnchor) {
+                    that.show(e.target);
+                } else {
+                    that.show(e.pageX, e.pageY);
+                }
+            }
+        },
+
+        _closeHandler: function (e) {
+            var that = this;
+
+            DOCUMENT_ELEMENT.off(MOUSEDOWN + NS, that._closeProxy);
+
+            if (that.popup.visible() && e.which !== 3) {
+                that.popup.close();
+            }
+        },
+
+        _wire: function() {
+            var that = this,
+                options = that.options,
+                target = that.target;
+
+            that._showProxy = proxy(that._showHandler, that);
+            that._closeProxy = proxy(that._closeHandler, that);
+
+            if (target) {
+                if (options.filter) {
+                    $(target).on(options.showOn + NS, that._showProxy);
+                } else {
+                    $(target).on(options.showOn + NS, options.filter, that._showProxy);
+                }
+            }
+        },
+
+        _popup: function() {
+            var that = this;
+
+            that.popup = that.element
+                            .addClass("k-context-menu")
+                            .kendoPopup({
+                                anchor: that.target || "body",
+                                collision: that.popupCollision
+                            }).data("kendoPopup");
         }
     });
 
