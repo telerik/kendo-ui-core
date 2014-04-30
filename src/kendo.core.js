@@ -1499,6 +1499,8 @@ function pad(number, digits, end) {
                 "yyyy-MM-ddTHH:mm:ss.fffffffzzz",
                 "yyyy-MM-ddTHH:mm:ss.fffzzz",
                 "yyyy-MM-ddTHH:mm:sszzz",
+                "yyyy-MM-ddTHH:mm:ss.fffffff",
+                "yyyy-MM-ddTHH:mm:ss.fff",
                 "yyyy-MM-ddTHH:mmzzz",
                 "yyyy-MM-ddTHH:mmzz",
                 "yyyy-MM-ddTHH:mm:ss",
