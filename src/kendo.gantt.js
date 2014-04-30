@@ -597,7 +597,8 @@ var __meta__ = {
             "dataBinding",
             "dataBound",
             "add",
-            "change"
+            "change",
+            "navigate"
         ],
 
         options: {

@@ -162,45 +162,6 @@
         equal(gantt.toolbar.find(".k-view-day").text(), "My Custom Day View Title");
     });
 
-    test("clicking on the view navigation selects the view", function() {
-        var gantt = new Gantt(element);
-
-        gantt.toolbar.find(".k-view-week").click();
-
-        equal(gantt.timeline.view().name, "week");
-        ok(gantt.toolbar.find(".k-view-week").hasClass("k-state-selected"));
-    });
-
-    test("clicking on the view navigation deselects the other views", function() {
-        var gantt = new Gantt(element);
-
-        gantt.toolbar.find(".k-view-week").click();
-
-        equal(gantt.toolbar.find(".k-state-selected").length, 1);
-    });
-
-    test("clicking on the view navigation raises navigate event", 1, function() {
-        var gantt = new Gantt(element, {
-            navigate: function(e) {
-                equal(e.view, "week");
-            }
-        });
-
-        gantt.toolbar.find(".k-view-week").click();
-    });
-
-    test("canceling the navigate event prevents switching the view", function() {
-        var gantt = new Gantt(element, {
-            navigate: function(e) {
-                e.preventDefault();
-            }
-        });
-
-        gantt.toolbar.find(".k-view-week").click();
-
-        equal(gantt.timeline.view().name, "day");
-    });
-
     test("list is created", function() {
         var gantt = new Gantt(element);
 
