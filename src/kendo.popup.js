@@ -295,7 +295,7 @@ var __meta__ = {
             return this.element.is(":" + VISIBLE);
         },
 
-        close: function() {
+        close: function(skipEffects) {
             var that = this,
                 options = that.options, wrap,
                 animation, openEffects, closeEffects;
@@ -313,23 +313,27 @@ var __meta__ = {
                         popup = that.data("kendoPopup");
 
                     if (popup) {
-                        popup.close();
+                        popup.close(skipEffects);
                     }
                 });
 
                 DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
                 WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
 
-                animation = extend(true, {}, options.animation.close);
-                openEffects = that.element.data(EFFECTS);
-                closeEffects = animation.effects;
+                if (skipEffects) {
+                    animation = { hide: true, effects: {} };
+                } else {
+                    animation = extend(true, {}, options.animation.close);
+                    openEffects = that.element.data(EFFECTS);
+                    closeEffects = animation.effects;
 
-                if (!closeEffects && !kendo.size(closeEffects) && openEffects && kendo.size(openEffects)) {
-                    animation.effects = openEffects;
-                    animation.reverse = true;
+                    if (!closeEffects && !kendo.size(closeEffects) && openEffects && kendo.size(openEffects)) {
+                        animation.effects = openEffects;
+                        animation.reverse = true;
+                    }
+
+                    that._closing = true;
                 }
-
-                that._closing = true;
 
                 that.element.kendoStop(true);
                 wrap.css({ overflow: HIDDEN }); // stop callback will remove hidden overflow
