@@ -5484,24 +5484,7 @@ var __meta__ = {
         },
 
         addValue: function(value, fields) {
-            var chart = this,
-                color,
-                series = fields.series,
-                negativeValues = series.negativeValues,
-                seriesColors = chart.plotArea.options.seriesColors || [],
-                visible = true;
-
-            color = fields.color || series.color ||
-                seriesColors[fields.pointIx % seriesColors.length];
-
-            if (value.size < 0) {
-                color = negativeValues.color || color;
-                visible = negativeValues.visible;
-            }
-
-            fields.color = color;
-
-            if (visible) {
+            if (value.size >= 0 || fields.series.negativeValues.visible) {
                 ScatterChart.fn.addValue.call(this, value, fields);
             }
         },
@@ -5518,6 +5501,7 @@ var __meta__ = {
                 point,
                 pointOptions,
                 series = fields.series,
+                seriesColors = chart.plotArea.options.seriesColors || [],
                 pointsCount = series.data.length,
                 delay = fields.pointIx * (INITIAL_ANIMATION_DURATION / pointsCount),
                 animationOptions = {
@@ -5525,6 +5509,13 @@ var __meta__ = {
                     duration: INITIAL_ANIMATION_DURATION - delay,
                     type: BUBBLE
                 };
+
+            var color = fields.color || series.color ||
+                seriesColors[fields.pointIx % seriesColors.length];
+
+            if (value.size < 0) {
+                color = series.negativeValues.color || color;
+            }
 
             pointOptions = deepExtend({
                 tooltip: {
@@ -5536,10 +5527,10 @@ var __meta__ = {
                 }
             },
             series, {
-                color: fields.color,
+                color: color,
                 markers: {
                     type: CIRCLE,
-                    background: fields.color,
+                    background: color,
                     border: series.border,
                     opacity: series.opacity,
                     animation: animationOptions

@@ -455,6 +455,20 @@
             });
         });
 
+        test("evaluated color is set on point", function() {
+            createBubbleChart({
+                dataSource: null,
+                series: [{
+                    type: "bubble",
+                    name: "series 1",
+                    data: [[1, 10, 100]],
+                    color: function() { return "red"; }
+                }]
+            });
+
+            equal(points[0].color, "red");
+        });
+
         test("negative values are hidden by default", function() {
             createBubbleChart({
                 series: [{
