@@ -29,6 +29,18 @@
         .section {
             color: gray;
         }
+
+        #search-tooltip {
+            margin: 2em 1em;
+            color: gray;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        #demos-search {
+            visibility: visible;
+            width: 60%;
+        }
     </style>
 
     <script src="@Url.Content("~/content/shared/js/mobile-examples.js")"></script>
@@ -40,7 +52,7 @@
             <div data-role="navbar">
                 <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
                 <span data-role="view-title"></span>
-                <a data-align="right" data-role="button" href="#search" data-icon="search" data-transition="none"></a>
+                <a data-align="right" data-role="button" href="#search" data-icon="search"></a>
             </div>
         </header>
 
@@ -51,11 +63,12 @@
         </ul>
     </div>
 
-    <div data-role="view" id="search" data-layout="" data-after-show="focusSearch" data-init="initSearch">
+    <div data-role="view" id="search" data-layout="" data-after-show="focusSearch" data-init="initSearch" data-transition="none" data-hide="blurSearch">
         <header data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title">
-                    <input type="search" id="demos-search" style="width: 80%; font-size: 1.2em" />
+                    <input type="search" id="demos-search" />
+                    <a data-role="button" href="#:back" data-align="right" data-transition="none">Cancel</a>
                 </span>
             </div>
         </header>
@@ -65,6 +78,8 @@
                 <a href="#: url #"><span class="section">#: section # &gt;</span> #: text #</a>
             </script>
         </ul>
+
+        <div id="search-tooltip"> Search for demos and sample applications </div>
     </div>
 
     <div data-role="view" id="section" data-show="loadSection" data-layout="">

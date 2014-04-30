@@ -11,7 +11,8 @@ var navDataSource = new kendo.data.DataSource({
         model: {
             id: "name"
         }
-    }
+    },
+    filter: { field: "disableInMobile", operator: "neq", value: true }
 });
 
 var detailNavDataSource = new kendo.data.DataSource({
@@ -24,9 +25,13 @@ var detailNavDataSource = new kendo.data.DataSource({
 
 var searchDataSource = new kendo.data.DataSource();
 
-function onlineExamples(section) {
+function mobileExamples(section) {
     return $.grep(section.items, function(item) {
         item.section = section.text;
+
+        if (item.disableInMobile) {
+            return false;
+        }
 
         if (!item.packages) {
             return true;
@@ -56,13 +61,18 @@ function removeView(e) {
 function loadSection(e) {
     navDataSource.fetch(function() {
         var item = navDataSource.get(e.view.params["name"]);
-        detailNavDataSource.data(onlineExamples(item));
+        detailNavDataSource.data(mobileExamples(item));
         e.view.element.find("[data-role=navbar]").data("kendoMobileNavBar").title(item.text);
     });
 }
 
 function focusSearch(e) {
-    e.view.element.find("#demos-search").focus();
+    var search = e.view.element.find("#demos-search");
+    search.focus();
+}
+
+function blurSearch(e) {
+    e.view.element.find("#demos-search").blur();
 }
 
 function initSearch(e) {
@@ -70,7 +80,7 @@ function initSearch(e) {
         var items = [];
         var data = navDataSource.data();
         for (var i = 0; i < data.length; i ++) {
-            items = items.concat(onlineExamples(data[i]));
+            items = items.concat(mobileExamples(data[i]));
         }
 
         searchDataSource.data(items);
@@ -87,7 +97,7 @@ function initSearch(e) {
 
                 for (var i = 0; i < words.length; i ++) {
                     var word = words[i];
-                    filter.filters.push({ logic: "or", filters: [ { field: "text", operator: "contains", value: word }, { field: "title", operator: "contains", value: word } ] });
+                    filter.filters.push({ logic: "or", filters: [ { field: "section", operator: "contains", value: word }, { field: "text", operator: "contains", value: word }, { field: "title", operator: "contains", value: word } ] });
                 }
 
                 searchDataSource.filter(filter);
@@ -100,6 +110,9 @@ function checkSearch(e) {
     if (!searchDataSource.filter()) {
         e.preventDefault();
         this.replace([]);
+        $("#search-tooltip").show();
+    } else {
+        $("#search-tooltip").hide();
     }
 }
 
@@ -109,7 +122,7 @@ function triggerIndexButton(e) {
             element = e.view.element;
 
         var section = navDataSource.get(url.split("/")[0]);
-        detailNavDataSource.data(onlineExamples(section));
+        detailNavDataSource.data(mobileExamples(section));
 
         var item = detailNavDataSource.get(url);
         element.find("[data-role=navbar]").data("kendoMobileNavBar").title(item.text);
