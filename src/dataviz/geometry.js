@@ -430,8 +430,6 @@
         }
     });
 
-
-    // TODO: MERGE WITH DIAGRAM MATH
     var Matrix = Class.extend({
         init: function (a, b, c, d, e, f) {
             this.a = a || 0;
@@ -441,6 +439,7 @@
             this.e = e || 0;
             this.f = f || 0;
         },
+
         times: function (m) {
             return new Matrix(
                 this.a * m.a + this.c * m.b,
@@ -454,15 +453,24 @@
 
         clone: function() {
             return new Matrix(this.a, this.b, this.c, this.d, this.e, this.f);
+        },
+
+        equals: function(other) {
+            if (!other) {
+                return false;
+            }
+
+            return this.a === other.a && this.b === other.b
+                   this.c === other.c && this.d === other.d
+                   this.e === other.e && this.f === other.f;
         }
     });
 
     Matrix.fn.toString = function(precision, separator) {
-       var matrix = this,
-           arr = [matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f],
-           i;
+       var arr = [this.a, this.b, this.c, this.d, this.e, this.f];
+
         if (defined(precision)) {
-            for (i = 0; i < 6; i++) {
+            for (var i = 0; i < 6; i++) {
                 arr[i] = round(arr[i], precision);
             }
         }
@@ -470,41 +478,29 @@
         return arr.join(separator || ",");
     };
 
-    deepExtend(Matrix, {
-        translate: function (x, y) {
-            var m = new Matrix();
-            m.a = 1;
-            m.b = 0;
-            m.c = 0;
-            m.d = 1;
-            m.e = x;
-            m.f = y;
-            return m;
-        },
-        unit: function () {
-            return new Matrix(1, 0, 0, 1, 0, 0);
-        },
-        rotate: function (angle, x, y) {
-            var m = new Matrix();
-            m.a = math.cos(rad(angle));
-            m.b = math.sin(rad(angle));
-            m.c = -m.b;
-            m.d = m.a;
-            m.e = (x - x * m.a + y * m.b) || 0;
-            m.f = (y - y * m.a - x * m.b) || 0;
-            return m;
-        },
-        scale: function (scaleX, scaleY) {
-            var m = new Matrix();
-            m.a = scaleX;
-            m.b = 0;
-            m.c = 0;
-            m.d = scaleY;
-            m.e = 0;
-            m.f = 0;
-            return m;
-        }
-    });
+    Matrix.translate = function (x, y) {
+        return new Matrix(1, 0, 0, 1, x, y);
+    };
+
+    Matrix.unit = function () {
+        return new Matrix(1, 0, 0, 1, 0, 0);
+    };
+
+    Matrix.rotate = function (angle, x, y) {
+        var m = new Matrix();
+        m.a = math.cos(rad(angle));
+        m.b = math.sin(rad(angle));
+        m.c = -m.b;
+        m.d = m.a;
+        m.e = (x - x * m.a + y * m.b) || 0;
+        m.f = (y - y * m.a - x * m.b) || 0;
+
+        return m;
+    };
+
+    Matrix.scale = function (scaleX, scaleY) {
+        return new Matrix(scaleX, 0, 0, scaleY, 0, 0);
+    };
 
     Matrix.IDENTITY = Matrix.unit();
 
@@ -562,18 +558,28 @@
     });
 
     function transform(matrix) {
+        if (matrix === null) {
+            return null;
+        }
+
+        if (matrix instanceof Transformation) {
+            return matrix;
+        }
+
         return new Transformation(matrix);
     }
 
     function ellipseExtremeAngles(center, rx, ry, matrix) {
         var extremeX = 0,
             extremeY = 0;
+
         if (matrix) {
             extremeX = math.atan2(matrix.c * ry, matrix.a * rx);
             if (matrix.b !== 0) {
                 extremeY = math.atan2(matrix.d * ry, matrix.b * rx);
             }
         }
+
         return {
             x: extremeX,
             y: extremeY
@@ -584,6 +590,7 @@
         if (transformation && kendo.isFunction(transformation.matrix)) {
             return transformation.matrix();
         }
+
         return transformation;
     }
 

@@ -675,7 +675,11 @@
             return {a: a, b: b, c: c, d: d, e: e, f: f};
         }
 
-        module("Matrix", {});
+        module("Matrix", {
+              setup: function() {
+                  matrix = Matrix.unit();
+              }
+        });
 
         test("sets passed parameters", function() {
             matrix = new Matrix(2,2,2,2,2,2);
@@ -703,6 +707,22 @@
             matrix = new Matrix(2,2,2,2,2,2);
             result = matrix.clone();
             compareMatrices(result, initMatrix(2,2,2,2,2,2));
+        });
+
+        test("equals is falsy for null", function() {
+            ok(!matrix.equals(null));
+        });
+
+        test("equals is falsy for undefined", function() {
+            ok(!matrix.equals(null));
+        });
+
+        test("equals is true for same matrix", function() {
+            ok(matrix.equals(Matrix.IDENTITY));
+        });
+
+        test("equals is false for different matrix", function() {
+            ok(!matrix.equals(new Matrix()));
         });
 
         test("unit returns the identity matrix", function() {
@@ -736,6 +756,7 @@
             compareMatrices(matrix, initMatrix(1.5,0,0,1.1,0,0));
         });
 
+        // ------------------------------------------------------------
         module("Matrix / toString", {
             setup: function() {
                 matrix = new Matrix(1.2345678,0,0,1.2345, 2, 3);
@@ -766,7 +787,8 @@
             matrix = Matrix.rotate(30),
             IDENTITY = new Matrix(1, 0, 0, 1, 0, 0);
 
-        module("Transformation", {});
+        // ------------------------------------------------------------
+        module("Transformation");
 
         test("sets passed matrix", function() {
             transformation = new Transformation(matrix);
@@ -783,9 +805,25 @@
             deepEqual(transformation.matrix(), matrix);
         });
 
+        // ------------------------------------------------------------
+        module("Transformation / transform");
+
         test("transform returns a new Transformation", function() {
             transformation = transform();
             ok(transformation instanceof Transformation);
+        });
+
+        test("transform returns same Transformation", function() {
+            transformation = new Transformation();
+            equal(transform(transformation), transformation);
+        });
+
+        test("transform returns emptry transform", function() {
+            ok(transform().matrix().equals(Matrix.IDENTITY));
+        });
+
+        test("transform passes null through", function() {
+            equal(transform(null), null);
         });
 
         test("transform returns new Transformation with the specified matrix set", function() {
@@ -793,6 +831,7 @@
             deepEqual(transformation.matrix(), matrix);
         });
 
+        // ------------------------------------------------------------
         module("Transformation / operations", {
             setup: function() {
                 transformation = new Transformation();
