@@ -62,7 +62,11 @@ function loadSection(e) {
     navDataSource.fetch(function() {
         var item = navDataSource.get(e.view.params["name"]);
         detailNavDataSource.data(mobileExamples(item));
-        e.view.element.find("[data-role=navbar]").data("kendoMobileNavBar").title(item.text);
+
+        var navBar = e.view.element.find("[data-role=navbar]").data("kendoMobileNavBar");
+        if (navBar) {
+            navBar.title(item.text);
+        }
     });
 }
 
@@ -125,7 +129,12 @@ function triggerIndexButton(e) {
         detailNavDataSource.data(mobileExamples(section));
 
         var item = detailNavDataSource.get(url);
-        element.find("[data-role=navbar]").data("kendoMobileNavBar").title(item.text);
+        var navBar = element.find("[data-role=navbar]").data("kendoMobileNavBar");
+
+        if (navBar) {
+            navDataSource.title(item.text);
+        }
+
         element.find("[data-role=backbutton]").attr("href", "#section?name=" + section.name);
     });
 
