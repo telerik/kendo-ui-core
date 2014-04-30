@@ -372,6 +372,10 @@
         equal(view.log.line.length, 6);
     });
 
+    test("sets major grid lines default width", function() {
+        equal(view.log.line[0].options.strokeWidth, 1);
+    });
+
     test("major grid lines extend from axis center", function() {
         equal(view.log.line[0].x1, 300);
         equal(view.log.line[0].y1, 300);

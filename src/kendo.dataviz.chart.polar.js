@@ -581,7 +581,8 @@ var __meta__ = {
             },
             majorGridLines: {
                 color: BLACK,
-                visible: true
+                visible: true,
+                width: 1
             },
             minorGridLines: {
                 color: "#aaa"
