@@ -1898,6 +1898,7 @@ var __meta__ = {
             snap: true,
             mobile: false,
             timezone: "",
+            allDaySlot: true,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
             messages: {
