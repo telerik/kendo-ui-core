@@ -23,6 +23,9 @@ var __meta__ = {
     var minDependencyHeight = Math.floor(rowHeight / 2);
     var NS = ".kendoGanttTimeline";
     var CLICK = "click";
+    var RESIZE_HINT = '<div class="k-marquee k-gantt-marquee">' +
+                           '<div class="k-marquee-color"></div>' +
+                       '</div>';
 
     var defaultViews = {
         day: {
@@ -1163,7 +1166,10 @@ var __meta__ = {
                     originalStart = parseInt(element.css("left"), 10);
                     originalWidth = parseInt(element.css("width"), 10);
 
-                    resizeClue = $("<div class='resizeClue'>");
+                    resizeClue = $(RESIZE_HINT).css({
+                            "top": 0,
+                            "height": "100%"
+                        });
 
                     element.closest(".k-gantt-timeline-content").append(resizeClue);
                 })
