@@ -291,9 +291,16 @@ var __meta__ = {
                 field: "orderId",
                 dir: "asc"
             };
+            var taskId;
 
             if (!!task) {
-                filter.value = task.get("id");
+                taskId = task.get("id");
+
+                if (taskId === undefined || taskId === null) {
+                    return [];
+                }
+
+                filter.value = taskId;
             }
 
             data = new Query(data).filter(filter).sort(order).toArray();
@@ -598,7 +605,13 @@ var __meta__ = {
             "dataBound",
             "add",
             "change",
-            "navigate"
+            "navigate",
+            "moveStart",
+            "move",
+            "moveEnd",
+            "resizeStart",
+            "resize",
+            "resizeEnd"
         ],
 
         options: {
@@ -854,16 +867,47 @@ var __meta__ = {
                         .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
                         .addClass("k-state-selected");
                 })
+                .bind("moveStart", function(e) {
+                    var task = that.dataSource.getByUid(e.uid);
+
+                    if (that.trigger("moveStart", { task: task })) {
+                        e.preventDefault();
+                    }
+                })
                 .bind("move", function(e) {
                     var task = that.dataSource.getByUid(e.uid);
-                    var newEnd = new Date(e.start.getTime() + task.duration());
+                    var end = new Date(e.start.getTime() + task.duration());
 
-                    that.updateTask(task, {
-                        start: e.start,
-                        end: newEnd
-                    });
+                    if (that.trigger("move", { task: task, start: e.start, end: end })) {
+                        e.preventDefault();
+                    }
+                })
+                .bind("moveEnd", function(e) {
+                    var task = that.dataSource.getByUid(e.uid);
+                    var end = new Date(e.start.getTime() + task.duration());
+                    
+                    if (!that.trigger("moveEnd", { task: task, start: e.start, end: end })) {
+                        that.updateTask(task, {
+                            start: e.start,
+                            end: end
+                        });
+                    }
+                })
+                .bind("resizeStart", function(e) {
+                    var task = that.dataSource.getByUid(e.uid);
+
+                    if (that.trigger("resizeStart", { task: task })) {
+                        e.preventDefault();
+                    }
                 })
                 .bind("resize", function(e) {
+                    var task = that.dataSource.getByUid(e.uid);
+
+                    if (that.trigger("resize", { task: task, date: e.date })) {
+                        e.preventDefault();
+                    }
+                })
+                .bind("resizeEnd", function(e) {
                     var task = that.dataSource.getByUid(e.uid);
                     var updateInfo = {};
 
@@ -872,8 +916,10 @@ var __meta__ = {
                     } else {
                         updateInfo.end = e.date;
                     }
-
-                    that.updateTask(task, updateInfo);
+                    
+                    if (!that.trigger("resizeEnd", { task: task, date: e.date })) {
+                        that.updateTask(task, updateInfo);
+                    }
                 })
                 .bind("select", function(e) {
                     that.select("[data-uid='" + e.uid + "']");

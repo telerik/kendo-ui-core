@@ -1079,13 +1079,19 @@ var __meta__ = {
             var dragClue;
             var originalStart;
             var currentStart;
+            var newStart;
 
             var cleanUp = function() {
                 if (dragClue) {
                     dragClue.remove();
                 }
 
+                if (element) {
+                    element.css("opacity", 1);
+                }
+
                 dragClue = null;
+                element = null;
             };
 
             this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
@@ -1098,6 +1104,11 @@ var __meta__ = {
                 .bind("dragstart", function(e) {
                     element = e.currentTarget;
 
+                    if (that.trigger("moveStart", { uid: element.attr("data-uid") })) {
+                        e.preventDefault();
+                        return;
+                    }
+
                     dragClue = element
                         .clone()
                         .css("cursor", "move");
@@ -1107,21 +1118,27 @@ var __meta__ = {
                         .parent()
                         .append(dragClue);
 
-                    originalStart = parseInt(element.css("left"), 10);
+                    currentStart = originalStart = parseInt(element.css("left"), 10);
                 })
                 .bind("drag", function(e) {
-                    currentStart = originalStart + e.x.initialDelta;
+                    newStart = originalStart + e.x.initialDelta;
 
                     if (that.options.snap) {
-                        currentStart = that.view()._slotByPosition(currentStart).offsetLeft;
+                        newStart = that.view()._slotByPosition(currentStart).offsetLeft;
                     }
 
-                    dragClue.css("left", currentStart);
+                    var start = that.view()._timeByPosition(newStart);
+
+                    if (!that.trigger("move", { uid: element.attr("data-uid"), start: start })) {
+                        dragClue.css("left", newStart);
+
+                        currentStart = newStart;
+                    }
                 })
                 .bind("dragend", function(e) {
                     var start = that.view()._timeByPosition(currentStart);
 
-                    that.trigger("move", { uid: element.attr("data-uid"), start: start });
+                    that.trigger("moveEnd", { uid: element.attr("data-uid"), start: start });
 
                     cleanUp();
                 })
@@ -1138,6 +1155,8 @@ var __meta__ = {
             var originalWidth;
             var currentStart;
             var currentWidth;
+            var newStart;
+            var newWidth;
             var delta;
             var resizeStart;
             var snap = this.options.snap;
@@ -1163,8 +1182,13 @@ var __meta__ = {
 
                     element = e.currentTarget.closest(".k-event");
 
-                    originalStart = parseInt(element.css("left"), 10);
-                    originalWidth = parseInt(element.css("width"), 10);
+                    if (that.trigger("resizeStart", { uid: element.attr("data-uid") })) {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    currentStart = originalStart = parseInt(element.css("left"), 10);
+                    currentWidth = originalWidth = parseInt(element.css("width"), 10);
 
                     resizeClue = $(RESIZE_HINT).css({
                             "top": 0,
@@ -1179,34 +1203,41 @@ var __meta__ = {
                     delta = e.x.initialDelta;
 
                     if (resizeStart) {
-                        currentStart = originalStart + delta;
+                        newStart = originalStart + delta;
 
                         if (snap) {
-                            currentStart = that.view()._slotByPosition(currentStart).offsetLeft;
+                            newStart = that.view()._slotByPosition(newStart).offsetLeft;
                         }
 
-                        currentWidth = originalWidth + originalStart - currentStart;
+                        newWidth = originalWidth + originalStart - newStart;
                     } else {
-                        currentStart = originalStart;
-                        currentWidth = originalWidth + delta;
+                        newStart = originalStart;
+                        newWidth = originalWidth + delta;
 
                         if (snap) {
-                            targetSlot = that.view()._slotByPosition(currentStart + currentWidth);
+                            targetSlot = that.view()._slotByPosition(newStart + newWidth);
 
-                            currentWidth = targetSlot.offsetLeft + targetSlot.offsetWidth - currentStart;
+                            newWidth = targetSlot.offsetLeft + targetSlot.offsetWidth - newStart;
                         }
                     }
 
-                    resizeClue
-                        .css({
-                            "left": currentStart,
-                            "width": currentWidth
-                        });
+                    var date = that.view()._timeByPosition(newStart + (resizeStart ? 0 : newWidth));
+
+                    if (!that.trigger("resize", { uid: element.attr("data-uid"), date: date })) {
+                        resizeClue
+                            .css({
+                                "left": newStart,
+                                "width": newWidth
+                            });
+
+                        currentStart = newStart;
+                        currentWidth = newWidth;
+                    }
                 })
                 .bind("dragend", function(e) {
                     var date = that.view()._timeByPosition(currentStart + (resizeStart ? 0 : currentWidth));
 
-                    that.trigger("resize", { uid: element.attr("data-uid"), resizeStart: resizeStart, date: date });
+                    that.trigger("resizeEnd", { uid: element.attr("data-uid"), resizeStart: resizeStart, date: date });
 
                     cleanUp();
                 })
