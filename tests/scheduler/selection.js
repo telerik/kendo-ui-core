@@ -654,6 +654,30 @@
         });
     });
 
+    test("select event, slots argument is empty", 1, function() {
+        setupWidget();
+
+        var td = container.find(".k-scheduler-header td").eq(1);
+
+        td.trigger({
+            type: "mousedown",
+            currentTarget: td
+        });
+
+        scheduler.bind("change", function(e) {
+            var selection = e;
+
+            equal(selection.slots.length, 0);
+        });
+
+        var event = scheduler.wrapper.find(".k-event");
+
+        event.trigger({
+            type: "mousedown",
+            currentTarget: event
+        });
+    });
+
     test("Scheduler raises change event with resources", function() {
         var today = kendo.date.today();
         var end = new Date(today);

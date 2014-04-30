@@ -1343,6 +1343,7 @@ var __meta__ = {
             if (result[0]) {
                 result.addClass("k-state-selected").attr("aria-selected", true);
                 this.current(result.last()[0]);
+                this._selectedSlots = [];
                 found = true;
             }
 
