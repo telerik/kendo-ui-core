@@ -72,6 +72,7 @@
             schema: {
                 axes: function() {
                     ok(true);
+                    return {};
                 },
                 data: function() {
                     return [];
@@ -124,7 +125,40 @@
         dataSource.read();
     });
 
+    test("read missing data cells are filled with defaults", function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [ { members: [ { caption: "foo" } ] },  { members: [ { caption: "bar" } ] }, { members: [ { caption: "baz" } ] }, { members: [ { caption: "moo" } ] }]
+                            }
+                        },
+                        data: [ { ordinal: 0, value: 0, fmtValue: "0" }, { ordinal: 2, value: 2, fmtValue: "2" } ]
+                    });
+                }
+            }
+        });
 
+        dataSource.read();
+
+        var data = dataSource.data();
+
+        equal(data.length, 4);
+        equal(data[0].ordinal, 0);
+        equal(data[0].value, 0);
+        equal(data[1].ordinal, 1);
+        ok(!data[1].value);
+        equal(data[2].ordinal, 2);
+        equal(data[2].value, 2);
+        equal(data[3].ordinal, 3);
+        ok(!data[3].value);
+    });
     module("XmlaTransport initialziation", { });
 
     test("connection settings are passed to the parameterMap", function() {
@@ -205,6 +239,49 @@
         ok(!columnTuples[0].members[0].hierarchy);
 
         equal(rowTuples[0].members.length, 1);
+    });
+
+    test("data is read for response", function() {
+        var reader = new kendo.data.XmlaDataReader({});
+        var response = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> <soap:Body> <ExecuteResponse xmlns="urn:schemas-microsoft-com:xml-analysis"> <return> <root xmlns="urn:schemas-microsoft-com:xml-analysis:mddataset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msxmla="http://schemas.microsoft.com/analysisservices/2003/xmla">         <Axes> <Axis name="Axis0">                 </Axis> </Axes> <CellData> <Cell CellOrdinal="0"> <Value xsi:type="xsd:long">1013</Value> <FmtValue>1013</FmtValue> </Cell> <Cell CellOrdinal="1"> <Value xsi:type="xsd:long">1014</Value> <FmtValue>1014</FmtValue> </Cell></CellData> </root> </return> </ExecuteResponse> </soap:Body> </soap:Envelope>';
+
+        var body = reader.parse(response);
+        var data = reader.data(body);
+
+        equal(data.length, 2);
+        equal(data[0].value, 1013);
+        equal(data[0].ordinal, 0);
+        equal(data[0].fmtValue, "1013");
+        equal(data[1].value, 1014);
+        equal(data[1].ordinal, 1);
+        equal(data[1].fmtValue, "1014");
+    });
+
+    test("data is read for response - empty celldata", function() {
+        var reader = new kendo.data.XmlaDataReader({});
+        var response = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> <soap:Body> <ExecuteResponse xmlns="urn:schemas-microsoft-com:xml-analysis"> <return> <root xmlns="urn:schemas-microsoft-com:xml-analysis:mddataset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msxmla="http://schemas.microsoft.com/analysisservices/2003/xmla">         <Axes> <Axis name="Axis0">                 </Axis> </Axes> <CellData/> </root> </return> </ExecuteResponse> </soap:Body> </soap:Envelope>';
+
+        var body = reader.parse(response);
+        var data = reader.data(body);
+
+        equal(data.length, 0);
+    });
+
+    test("data with missing values", function() {
+        var reader = new kendo.data.XmlaDataReader({});
+        var response = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> <soap:Body> <ExecuteResponse xmlns="urn:schemas-microsoft-com:xml-analysis"> <return> <root xmlns="urn:schemas-microsoft-com:xml-analysis:mddataset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msxmla="http://schemas.microsoft.com/analysisservices/2003/xmla">         <Axes> <Axis name="Axis0">                 </Axis> </Axes> <CellData> <Cell CellOrdinal="0"> <Value xsi:type="xsd:long">1013</Value> <FmtValue>1013</FmtValue> </Cell> <Cell CellOrdinal="2"> <Value xsi:type="xsd:long">1014</Value> <FmtValue>1014</FmtValue> </Cell></CellData> </root> </return> </ExecuteResponse> </soap:Body> </soap:Envelope>';
+
+        var body = reader.parse(response);
+        var data = reader.data(body);
+
+        equal(data.length, 2);
+        equal(data[0].value, 1013);
+        equal(data[0].ordinal, 0);
+        equal(data[0].fmtValue, "1013");
+
+        equal(data[1].value, 1014);
+        equal(data[1].ordinal, 2);
+        equal(data[1].fmtValue, "1014");
     });
 
 })();

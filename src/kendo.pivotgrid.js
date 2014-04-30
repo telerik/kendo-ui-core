@@ -16,13 +16,14 @@ var __meta__ = {
         Widget = ui.Widget,
         DataSource = kendo.data.DataSource,
         toString = {}.toString,
+        identity = function(o) { return o; },
         extend = $.extend;
 
     var PivotDataSource = DataSource.extend({
         init: function(options) {
             DataSource.fn.init.call(this, extend(true, {}, {
                 schema: {
-                    axes: $.noop
+                    axes: identity
                 }
             }, options));
 
@@ -49,8 +50,39 @@ var __meta__ = {
         },
 
         _readData: function(data) {
-            this._axes = this.reader.axes(data);
-            return this.reader.data(data);
+            var axes = this.reader.axes(data);
+            var newData = this.reader.data(data);
+
+            newData = this._normalizeData(newData, axes);
+
+            this._axes = axes;
+
+            return newData;
+        },
+
+        _normalizeData: function(data, axes) {
+            var columns = (axes.columns || {}).tuples || [];
+            var rows = (axes.rows || {}).tuples || [];
+            var cell;
+            var axesLength = columns.length * (rows.length || 1);
+            var idx, length;
+
+            var result = new Array(axesLength);
+
+            if (data.length === axesLength) {
+                return data;
+            }
+
+            for (idx = 0, length = result.length; idx < length; idx++) {
+                result[idx] = { value: "", fmtValue: "", ordinal: idx };
+            }
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+               cell = data[idx];
+               result[cell.ordinal] = cell;
+            }
+
+            return result;
         },
 
         _params: function(data) {
@@ -163,6 +195,26 @@ var __meta__ = {
                 columns: columns,
                 rows: rows
             }
+        },
+        data: function(root) {
+            root = kendo.getter("ExecuteResponse.return.root", true)(root);
+
+            var cells = asArray(kendo.getter("CellData.Cell", true)(root));
+
+            var result = [];
+            var ordinalGetter = kendo.getter("['@CellOrdinal']");
+            var valueGetter = kendo.getter("Value['#text']");
+            var fmtValueGetter = kendo.getter("FmtValue['#text']");
+
+            for (var idx = 0; idx < cells.length; idx++) {
+                result.push({
+                    value: valueGetter(cells[idx]),
+                    fmtValue: fmtValueGetter(cells[idx]),
+                    ordinal: parseInt(ordinalGetter(cells[idx], 10))
+                });
+            }
+
+            return result;
         }
     });
 
