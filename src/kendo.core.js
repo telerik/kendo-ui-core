@@ -1816,7 +1816,7 @@ function pad(number, digits, end) {
             var div = document.createElement("div"),
                 result;
 
-            div.style.cssText = "overflow:scroll;overflow-x:hidden;zoom:1;clear:both";
+            div.style.cssText = "overflow:scroll;overflow-x:hidden;zoom:1;clear:both;display:block";
             div.innerHTML = "&nbsp;";
             document.body.appendChild(div);
 
