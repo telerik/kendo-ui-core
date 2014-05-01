@@ -55,6 +55,10 @@
         return value * value;
     }
 
+    function last(array) {
+        return array[array.length - 1];
+    }
+
     function arrayMinMax(arr) {
         var length = arr.length,
             i,
@@ -127,6 +131,7 @@
             defined: defined,
             deg: deg,
             isNumber: isNumber,
+            last: last,
             limitValue: limitValue,
             round: round,
             rad: rad,
