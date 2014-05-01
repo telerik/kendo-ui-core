@@ -26,6 +26,9 @@ end
 def versioned_bundle_name(bundle)
     prefix_bundle_name(bundle).sub(/\.[^\.]+$/, ".#{VERSION}\\0")
 end
+def versioned_bundle_beta_name(bundle)
+    prefix_bundle_name(bundle).sub(/\.[^\.]+$/, ".#{VERSION}.beta\\0")
+end
 
 def latest_bundle_name(bundle)
     prefix_bundle_name(bundle).sub(/\.[^\.]+$/, ".latest\\0")
