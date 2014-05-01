@@ -19,6 +19,8 @@
         deg = util.deg,
         round = util.round;
 
+    var PI_DIV_2 = math.PI / 2;
+
     // Geometrical primitives =================================================
     var Point = Class.extend({
         init: function(x, y) {
@@ -96,6 +98,7 @@
             var mx = transformationMatrix(transformation),
                 x = this.x,
                 y = this.y;
+
             this.x = mx.a * x + mx.c * y + mx.e;
             this.y = mx.b * x + mx.d * y + mx.f;
 
@@ -106,9 +109,11 @@
 
         transformCopy: function(transformation) {
             var point = this.clone();
+
             if (transformation) {
                 point.transform(transformation);
             }
+
             return point;
         },
 
@@ -175,11 +180,11 @@
     };
 
     Point.minPoint = function() {
-        return new Point(-Number.MAX_VALUE, -Number.MAX_VALUE);
+        return new Point(util.MIN_NUM, util.MIN_NUM);
     };
 
     Point.maxPoint = function() {
-        return new Point(Number.MAX_VALUE, Number.MAX_VALUE);
+        return new Point(util.MAX_NUM, util.MAX_NUM);
     };
 
     var Rect = Class.extend({
@@ -248,16 +253,15 @@
         },
 
         bbox: function(matrix) {
-            var minPoint = Point.maxPoint(),
-                maxPoint = Point.minPoint(),
-                extremeAngles = ellipseExtremeAngles(this.center, this.radius, this.radius, matrix),
-                halfPI = (math.PI / 2),
-                currentPoint, currentPointX, currentPointY,
-                i;
-            for (i = 0; i < 4; i++) {
-                currentPointX = this._pointAt(extremeAngles.x + i * halfPI).transformCopy(matrix);
-                currentPointY = this._pointAt(extremeAngles.y + i * halfPI).transformCopy(matrix);
-                currentPoint = new Point(currentPointX.x, currentPointY.y);
+            var minPoint = Point.maxPoint();
+            var maxPoint = Point.minPoint();
+            var extremeAngles = ellipseExtremeAngles(this.center, this.radius, this.radius, matrix);
+
+            for (var i = 0; i < 4; i++) {
+                var currentPointX = this._pointAt(extremeAngles.x + i * PI_DIV_2).transformCopy(matrix);
+                var currentPointY = this._pointAt(extremeAngles.y + i * PI_DIV_2).transformCopy(matrix);
+                var currentPoint = new Point(currentPointX.x, currentPointY.y);
+
                 minPoint = minPoint.min(currentPoint);
                 maxPoint = maxPoint.max(currentPoint);
             }
@@ -266,34 +270,33 @@
         },
 
         _pointAt: function(angle) {
-            var c = this.center,
-                r = this.radius;
+            var c = this.center;
+            var r = this.radius;
 
             return new Point(
                 c.x - r * math.cos(angle),
                 c.y - r * math.sin(angle)
-                );
+            );
         }
     });
 
     var Arc = Class.extend({
-        MAX_INTERVAL: 90,
-        _fields: ["radiusX", "radiusY", "startAngle", "endAngle", "counterClockwise"],
-
         init: function(center, options) {
-            var arc = this;
-
-            arc.center = center || new Point();
-            arc.observer = null;
-            arc.center.observer = arc;
+            this.center = center || new Point();
+            this.observer = null;
+            this.center.observer = this;
 
             options = options || {};
-            arc.radiusX = options.radiusX;
-            arc.radiusY = options.radiusY || options.radiusX;
-            arc.startAngle = options.startAngle;
-            arc.endAngle = options.endAngle;
-            arc.counterClockwise = options.counterClockwise || false;
+            this.radiusX = options.radiusX;
+            this.radiusY = options.radiusY || options.radiusX;
+            this.startAngle = options.startAngle;
+            this.endAngle = options.endAngle;
+            this.counterClockwise = options.counterClockwise || false;
         },
+
+        MAX_INTERVAL: 90,
+
+        _fields: ["radiusX", "radiusY", "startAngle", "endAngle", "counterClockwise"],
 
         geometryChange: util.mixins.geometryChange,
 
@@ -302,39 +305,37 @@
         },
 
         set: function(field, value) {
-            var arc = this;
-            if ($.inArray(field, arc._fields) !== -1 && arc[field] !== value) {
-                arc[field] = value;
-                arc.geometryChange();
+            if ($.inArray(field, this._fields) !== -1 && this[field] !== value) {
+                this[field] = value;
+                this.geometryChange();
             }
         },
 
         pointAt: function(angle) {
-            var arc = this,
-                center = this.center,
-                radian = rad(angle),
-                point = new Point(center.x + arc.radiusX * math.cos(radian),
-                    center.y + arc.radiusY * math.sin(radian));
+            var center = this.center;
+            var radian = rad(angle);
 
-            return point;
+            return new Point(
+                center.x + this.radiusX * math.cos(radian),
+                center.y + this.radiusY * math.sin(radian)
+            );
         },
 
         curvePoints: function() {
-            var arc = this,
-                i, points, nextAngle,
-                startAngle = arc.startAngle,
-                endAngle = arc.endAngle,
-                dir = arc.counterClockwise ? -1 : 1,
-                curvePoints = [arc.pointAt(startAngle)],
-                currentAngle = startAngle,
-                interval = arc._arcInterval(),
-                intervalAngle = interval.endAngle - interval.startAngle,
-                subIntervalsCount = math.ceil(intervalAngle / arc.MAX_INTERVAL),
-                subIntervalAngle = intervalAngle / subIntervalsCount;
+            var startAngle = this.startAngle;
+            var endAngle = this.endAngle;
+            var dir = this.counterClockwise ? -1 : 1;
+            var curvePoints = [this.pointAt(startAngle)];
+            var currentAngle = startAngle;
+            var interval = this._arcInterval();
+            var intervalAngle = interval.endAngle - interval.startAngle;
+            var subIntervalsCount = math.ceil(intervalAngle / this.MAX_INTERVAL);
+            var subIntervalAngle = intervalAngle / subIntervalsCount;
 
-            for (i = 1; i <= subIntervalsCount; i++) {
-                nextAngle = currentAngle + dir * subIntervalAngle;
-                points = arc._intervalCurvePoints(currentAngle, nextAngle);
+            for (var i = 1; i <= subIntervalsCount; i++) {
+                var nextAngle = currentAngle + dir * subIntervalAngle;
+                var points = this._intervalCurvePoints(currentAngle, nextAngle);
+
                 curvePoints.push(points.cp1, points.cp2, points.p2);
                 currentAngle = nextAngle;
             }
@@ -342,40 +343,34 @@
             return curvePoints;
         },
 
-        _boundingBoxStartAngle: function(angle, start) {
-            while(angle < start) {
-                angle+=90;
-            }
-
-            return angle;
-        },
-
         bbox: function(matrix) {
-            var arc = this,
-                interval = arc._arcInterval(),
-                startAngle = interval.startAngle,
-                endAngle = interval.endAngle,
-                extremeAngles = ellipseExtremeAngles(this.center, this.radiusX, this.radiusY, matrix),
-                extremeX = deg(extremeAngles.x),
-                extremeY = deg(extremeAngles.y),
-                currentPoint = arc.pointAt(startAngle).transformCopy(matrix),
-                endPoint = arc.pointAt(endAngle).transformCopy(matrix),
-                minPoint = currentPoint.min(endPoint),
-                maxPoint = currentPoint.max(endPoint),
-                currentAngleX = arc._boundingBoxStartAngle(extremeX, startAngle),
-                currentAngleY = arc._boundingBoxStartAngle(extremeY, startAngle),
-                currentPointX, currentPointY;
+            var arc = this;
+            var interval = arc._arcInterval();
+            var startAngle = interval.startAngle;
+            var endAngle = interval.endAngle;
+            var extremeAngles = ellipseExtremeAngles(this.center, this.radiusX, this.radiusY, matrix);
+            var extremeX = deg(extremeAngles.x);
+            var extremeY = deg(extremeAngles.y);
+            var currentPoint = arc.pointAt(startAngle).transformCopy(matrix);
+            var endPoint = arc.pointAt(endAngle).transformCopy(matrix);
+            var minPoint = currentPoint.min(endPoint);
+            var maxPoint = currentPoint.max(endPoint);
+            var currentAngleX = bboxStartAngle(extremeX, startAngle);
+            var currentAngleY = bboxStartAngle(extremeY, startAngle);
 
             while (currentAngleX < endAngle || currentAngleY < endAngle) {
+                var currentPointX;
                 if (currentAngleX < endAngle) {
                     currentPointX = arc.pointAt(currentAngleX).transformCopy(matrix);
                     currentAngleX += 90;
                 }
 
+                var currentPointY;
                 if (currentAngleY < endAngle) {
                     currentPointY = arc.pointAt(currentAngleY).transformCopy(matrix);
                     currentAngleY += 90;
                 }
+
                 currentPoint = new Point(currentPointX.x, currentPointY.y);
                 minPoint = minPoint.min(currentPoint);
                 maxPoint = maxPoint.max(currentPoint);
@@ -385,9 +380,9 @@
         },
 
         _arcInterval: function() {
-            var startAngle = this.startAngle,
-                endAngle = this.endAngle,
-                counterClockwise = this.counterClockwise;
+            var startAngle = this.startAngle;
+            var endAngle = this.endAngle;
+            var counterClockwise = this.counterClockwise;
 
             if (counterClockwise) {
                 var oldStart = startAngle;
@@ -406,14 +401,14 @@
         },
 
         _intervalCurvePoints: function(startAngle, endAngle) {
-            var arc = this,
-                p1 = arc.pointAt(startAngle),
-                p2 = arc.pointAt(endAngle),
-                p1Derivative = arc._derivativeAt(startAngle),
-                p2Derivative = arc._derivativeAt(endAngle),
-                t = (rad(endAngle) - rad(startAngle)) / 3,
-                cp1 = new Point(p1.x + t * p1Derivative.x, p1.y + t * p1Derivative.y),
-                cp2 = new Point(p2.x - t * p2Derivative.x, p2.y - t * p2Derivative.y);
+            var arc = this;
+            var p1 = arc.pointAt(startAngle);
+            var p2 = arc.pointAt(endAngle);
+            var p1Derivative = arc._derivativeAt(startAngle);
+            var p2Derivative = arc._derivativeAt(endAngle);
+            var t = (rad(endAngle) - rad(startAngle)) / 3;
+            var cp1 = new Point(p1.x + t * p1Derivative.x, p1.y + t * p1Derivative.y);
+            var cp2 = new Point(p2.x - t * p2Derivative.x, p2.y - t * p2Derivative.y);
 
             return {
                 p1: p1,
@@ -424,8 +419,9 @@
         },
 
         _derivativeAt: function(angle) {
-            var arc = this,
-                radian = rad(angle);
+            var arc = this;
+            var radian = rad(angle);
+
             return new Point(-arc.radiusX * math.sin(radian), arc.radiusY * math.cos(radian));
         }
     });
@@ -569,6 +565,15 @@
         return new Transformation(matrix);
     }
 
+    function transformationMatrix(transformation) {
+        if (transformation && kendo.isFunction(transformation.matrix)) {
+            return transformation.matrix();
+        }
+
+        return transformation;
+    }
+
+    // Helper functions =======================================================
     function ellipseExtremeAngles(center, rx, ry, matrix) {
         var extremeX = 0,
             extremeY = 0;
@@ -586,12 +591,12 @@
         };
     }
 
-    function transformationMatrix(transformation) {
-        if (transformation && kendo.isFunction(transformation.matrix)) {
-            return transformation.matrix();
+    function bboxStartAngle(angle, start) {
+        while(angle < start) {
+            angle += 90;
         }
 
-        return transformation;
+        return angle;
     }
 
     // Exports ================================================================
