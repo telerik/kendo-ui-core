@@ -422,7 +422,7 @@ var __meta__ = {
         _renderFF: function(from, to) {
             var lines = this._dependencyFF(from, to, false);
 
-            lines[lines.length - 1].attr.className += " k-arrow-w";
+            lines[lines.length - 1].children[0] = this._arrow(true);
 
             return lines;
         },
@@ -430,7 +430,7 @@ var __meta__ = {
         _renderSS: function(from, to) {
             var lines = this._dependencyFF(to, from, true);
 
-            lines[0].attr.className += " k-arrow-e";
+            lines[0].children[0] = this._arrow(false);
 
             return lines;
         },
@@ -438,7 +438,7 @@ var __meta__ = {
         _renderFS: function(from, to) {
             var lines = this._dependencyFS(from, to, false);
 
-            lines[lines.length - 1].attr.className += " k-arrow-e";
+            lines[lines.length - 1].children[0] = this._arrow(false);
 
             return lines;
         },
@@ -446,7 +446,7 @@ var __meta__ = {
         _renderSF: function(from, to) {
             var lines = this._dependencyFS(to, from, true);
 
-            lines[0].attr.className += " k-arrow-w";
+            lines[0].children[0] = this._arrow(true);
 
             return lines;
         },
@@ -462,10 +462,10 @@ var __meta__ = {
             var delta;
 
             var addHorizontal = function() {
-                lines.push(that._line({ left: left + "px", top: top + "px", width: width + "px" }));
+                lines.push(that._line("k-gantt-line k-gantt-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
             };
             var addVertical = function() {
-                lines.push(that._line({ left: left + "px", top: top + "px", height: height + "px" }));
+                lines.push(that._line("k-gantt-line k-gantt-line-v", { left: left + "px", top: top + "px", height: height + "px" }));
             };
 
             left = from[dir];
@@ -518,10 +518,10 @@ var __meta__ = {
             var delta = to.start - from.end;
 
             var addHorizontal = function() {
-                lines.push(that._line({ left: left + "px", top: top + "px", width: width + "px" }));
+                lines.push(that._line("k-gantt-line k-gantt-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
             };
             var addVertical = function() {
-                lines.push(that._line({ left: left + "px", top: top + "px", height: height + "px" }));
+                lines.push(that._line("k-gantt-line k-gantt-line-v", { left: left + "px", top: top + "px", height: height + "px" }));
             };
 
             left = from.end;
@@ -575,8 +575,12 @@ var __meta__ = {
             return lines;
         },
 
-        _line: function(styles) {
-            return kendoDomElement("div", { className: "k-gantt-line", style: styles });
+        _line: function(className, styles) {
+            return kendoDomElement("div", { className: className, style: styles });
+        },
+
+        _arrow: function(direction) {
+            return kendoDomElement("span", { className: direction ? "k-arrow-w" : "k-arrow-e" });
         },
 
         _colgroup: function() {
