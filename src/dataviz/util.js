@@ -15,8 +15,8 @@
 
     // Constants
     var DEG_TO_RAD = math.PI / 180,
-        MAX_VALUE = Number.MAX_VALUE,
-        MIN_VALUE = -Number.MAX_VALUE,
+        MAX_NUM = Number.MAX_VALUE,
+        MIN_NUM = -Number.MAX_VALUE,
         UNDEFINED = "undefined";
 
     // Generic utility functions ==============================================
@@ -61,8 +61,8 @@
     function arrayLimits(arr) {
         var length = arr.length,
             i,
-            min = Number.MAX_VALUE,
-            max = Number.MIN_VALUE;
+            min = MAX_NUM,
+            max = MIN_NUM;
 
         for (i = 0; i < length; i ++) {
             max = math.max(max, arr[i]);
@@ -92,8 +92,8 @@
     }
 
     function sparseArrayLimits(arr) {
-        var min = MAX_VALUE,
-            max = MIN_VALUE;
+        var min = MAX_NUM,
+            max = MIN_NUM;
 
         for (var i = 0, length = arr.length; i < length; i++) {
             var n = arr[i];
@@ -104,8 +104,8 @@
         }
 
         return {
-            min: min === MAX_VALUE ? undefined : min,
-            max: max === MIN_VALUE ? undefined : max
+            min: min === MAX_NUM ? undefined : min,
+            max: max === MIN_NUM ? undefined : max
         };
     }
 
@@ -159,6 +159,9 @@
     // Exports ================================================================
     deepExtend(dataviz, {
         util: {
+            MAX_NUM: MAX_NUM,
+            MIN_NUM: MIN_NUM,
+
             mixins: {
                 geometryChange: geometryChange
             },
