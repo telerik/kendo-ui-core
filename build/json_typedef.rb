@@ -298,22 +298,6 @@ module CodeGen::JsonTypeDef
 
             COMPONENT_PLUGIN.result(binding)
         end
-
-        def add_method(settings)
-            description = settings[:description]
-            result = settings[:result]
-
-            if description =~ /Gets?\/Sets?/i || description =~ /gets?\s+or\s+sets?/i
-
-                settings[:result] = nil
-
-                super(:description => description,
-                      :name => settings[:name],
-                      :result => result)
-            end
-
-            super(settings)
-        end
     end
 
     COMPOSITE = ERB.new(File.read("build/codegen/lib/json_typedef/composite_option.json.erb"), 0, '%<>')
@@ -415,6 +399,8 @@ namespace :json_typedef do
                 path = "dist/kendo.all.json"
 
                 File.write(path, get_json_typedef(path, md_api_suite('all')))
+
+                sh "node_modules/jshint/bin/jshint #{path}"
             end
         end
     end
