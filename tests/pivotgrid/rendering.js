@@ -3,7 +3,7 @@
         PivotGrid = kendo.ui.PivotGrid,
         div;
 
-    module("PivotGrid initial rendering", {
+    module("PivotGrid render layout", {
         setup: function() {
             kendo.ns = "kendo-";
             div = document.createElement("div");
@@ -23,17 +23,13 @@
         options = options || {};
 
         if (!options.dataSource) {
-            var dataSource = new PivotDataSource();
-
-            //mock - axes method
-            dataSource.axes = function() {
-                return {
-                    columns: [],
-                    rows: []
+            options.dataSource = new kendo.data.PivotDataSource({
+                schema: {
+                    axes: function() {
+                        return {};
+                    }
                 }
-            }
-
-            options.dataSource = dataSource;
+            });
         }
 
         return new PivotGrid($(div), options);
@@ -42,46 +38,43 @@
     test("PivotGrid renders filter section", function() {
         var pivotgrid = createPivot();
 
-        var filtersSection = pivotgrid.filtersSection;
+        var filterFields = pivotgrid.filterFields;
 
-        ok(filtersSection.is("div"));
-        ok(filtersSection.hasClass("k-grouping-header"));
-        equal(filtersSection.text(), pivotgrid.options.messages.filterFields);
-
-        equal(filtersSection[0], div.firstChild);
+        ok(filterFields.is("div"));
+        equal(filterFields.text(), pivotgrid.options.messages.filterFields);
     });
 
     test("PivotGrid renders measures section", function() {
         var pivotgrid = createPivot();
 
-        var measuresSection = pivotgrid.measuresSection;
+        var measureFields = pivotgrid.measureFields;
 
-        ok(measuresSection.is("div"));
-        equal(measuresSection.text(), pivotgrid.options.messages.measureFields);
+        ok(measureFields.is("div"));
+        equal(measureFields.text(), pivotgrid.options.messages.measureFields);
 
-        ok(measuresSection.closest(".k-widget")[0]);
+        ok(measureFields.closest(".k-widget")[0]);
     });
 
     test("PivotGrid renders column fields section", function() {
         var pivotgrid = createPivot();
 
-        var columnsSection = pivotgrid.columnsSection;
+        var columnFields = pivotgrid.columnFields;
 
-        ok(columnsSection.is("div"));
-        equal(columnsSection.text(), pivotgrid.options.messages.columnFields);
+        ok(columnFields.is("div"));
+        equal(columnFields.text(), pivotgrid.options.messages.columnFields);
 
-        ok(pivotgrid.columnsSection.closest(".k-widget")[0]);
+        ok(pivotgrid.columnFields.closest(".k-widget")[0]);
     });
 
     test("PivotGrid renders row fields section", function() {
         var pivotgrid = createPivot();
 
-        var rowsSection = pivotgrid.rowsSection;
+        var rowFields = pivotgrid.rowFields;
 
-        ok(rowsSection.is("div"));
-        equal(rowsSection.text(), pivotgrid.options.messages.rowFields);
+        ok(rowFields.is("div"));
+        equal(rowFields.text(), pivotgrid.options.messages.rowFields);
 
-        ok(rowsSection.closest(".k-widget")[0]);
+        ok(rowFields.closest(".k-widget")[0]);
     });
 
     test("PivotGrid renders column header section", 2, function() {
@@ -96,13 +89,6 @@
 
         ok(pivotgrid.rowsHeader.is("div"));
         ok(pivotgrid.rowsHeader.closest(".k-widget")[0]);
-    });
-
-    test("PivotGrid renders content section", 2, function() {
-        var pivotgrid = createPivot();
-
-        ok(pivotgrid.content.is("div"));
-        ok(pivotgrid.content.closest(".k-widget")[0]);
     });
 
     test("PivotGrid renders content section", 2, function() {

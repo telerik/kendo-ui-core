@@ -353,8 +353,7 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
 
             that._wrapper();
-
-            that._header();
+            that._createLayout();
 
             that._dataSource();
 
@@ -401,70 +400,89 @@ var __meta__ = {
             this.wrapper = this.element.addClass("k-widget");
         },
 
-        _header: function() {
+        _filterFields: function() {
+            var element = $(DIV).addClass("k-grouping-header") //TODO: render correct CSS class
+                                .text(this.options.messages.filterFields);
+
+            this.filterFields = element;
+        },
+
+        _measureFields: function() {
+            this.measureFields = $(DIV).text(this.options.messages.measureFields);
+        },
+
+        _columnFields: function() {
+            this.columnFields = $(DIV).text(this.options.messages.columnFields);
+        },
+
+        _rowFields: function() {
+            this.rowFields = $(DIV).text(this.options.messages.rowFields);
+        },
+
+        _columnsHeader: function() {
+            this.columnsHeader = $("<div/>");
+        },
+
+        _rowsHeader: function() {
+            this.rowsHeader = $("<div/>");
+        },
+
+        _contentTable: function() {
+            this.content = $("<div/>");
+        },
+
+        _createLayout: function() {
             var that = this;
-            var options = that.options;
-            var messages = options.messages;
-            var wrapper = that.wrapper;
+            var table = $("<table/>");
 
-            var filtersSection = $(DIV).addClass("k-grouping-header")
-                                       .text(messages.filterFields)
-                                       .appendTo(wrapper);
+            that._filterFields();
 
-            var measuresSection = $(DIV).addClass("k-pivot-header-left")
-                                        .text(messages.measureFields);
+            that._measureFields();
+            that._columnFields();
 
-            var columnsSection = $(DIV).addClass("k-pivot-header-right")
-                                       .text(messages.columnFields);
+            table.append($("<tr/>")
+                            .append($("<td/>").append(that.measureFields))
+                            .append($("<td/>").append(that.columnFields))
+                        );
 
-            var rowsSection = $(DIV).addClass("k-pivot-header-left")
-                                    .text(messages.rowFields);
+            that._rowFields();
+            that._columnsHeader();
 
-            var columnsHeader = $(DIV).addClass("k-pivot-header-right");
+            table.append($("<tr/>")
+                            .append($("<td/>").append(that.rowFields))
+                            .append($("<td/>").append(that.columnsHeader))
+                        );
 
-            var rowsHeader = $(DIV).addClass("k-pivot-header-left");
-            var content = $(DIV).addClass("k-pivot-content");
+            that._rowsHeader();
+            that._contentTable();
 
-            var columnSectionWrapper = $(DIV).appendTo(wrapper)
-                                             .addClass("k-grid-header")
-                                             .append(measuresSection)
-                                             .append(columnsSection);
+            table.append($("<tr/>")
+                            .append($("<td/>").append(that.rowsHeader))
+                            .append($("<td/>").append(that.content))
+                        );
 
-            var columnHeaderWrapper = $(DIV).appendTo(wrapper)
-                                            .addClass("k-grid-header")
-                                            .append(rowsSection)
-                                            .append(columnsHeader);
-
-            var contentWrapper = $(DIV).appendTo(wrapper)
-                                       .addClass("k-grid-header")
-                                       .append(rowsHeader)
-                                       .append(content);
-
-
-
-            that.filtersSection = filtersSection;
-            that.measuresSection = measuresSection;
-            that.columnsSection = columnsSection;
-            that.rowsSection = rowsSection;
-            that.columnsHeader = columnsHeader;
-            that.rowsHeader = rowsHeader;
-            that.content = content;
+            that.wrapper.append(that.filterFields);
+            that.wrapper.append(table);
 
             //VIRTUAL DOM
-            that.columnsHeaderTree = new kendo.dom.Tree(columnsHeader[0]);
-            that.rowsHeaderTree = new kendo.dom.Tree(rowsHeader[0]);
-            that.contentTree = new kendo.dom.Tree(content[0]);
+            that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0]);
+            that.rowsHeaderTree = new kendo.dom.Tree(that.rowsHeader[0]);
+            that.contentTree = new kendo.dom.Tree(that.content[0]);
         },
 
         refresh: function() {
             var that = this;
             var dataSource = that.dataSource;
+
             var axes = dataSource.axes();
+            var columns = axes.columns || [];
+            var rows = axes.rows || [];
+
             var data = dataSource.view();
 
-            that.columnsHeaderTree.render(kendo_column_headers(axes.columns));
-            that.rowsHeaderTree.render(kendo_row_headers(axes.rows));
-            that.contentTree.render(kendo_content(data, axes.columns.length || 1));
+            that.columnsHeaderTree.render(kendo_column_headers(columns));
+            that.rowsHeaderTree.render(kendo_row_headers(rows));
+            that.contentTree.render(kendo_content(data, columns.length || 1));
         }
     });
 

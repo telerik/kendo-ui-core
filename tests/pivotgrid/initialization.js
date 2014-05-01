@@ -22,27 +22,31 @@
         options = options || {};
 
         if (!options.dataSource) {
-            var dataSource = new kendo.data.PivotDataSource();
-
-            //mock - axes method
-            dataSource.axes = function() {
-                return {
-                    columns: [],
-                    rows: []
+            options.dataSource = new kendo.data.PivotDataSource({
+                schema: {
+                    axes: function() {
+                        return {};
+                    }
                 }
-            }
-
-            options.dataSource = dataSource;
+            });
         }
 
         return new PivotGrid($(div), options);
     }
 
-    /*test("kendoPivotGrid attaches a pivotgrid object to target", function() {
-        var pivotgrid = $(div).kendoPivotGrid();
+    test("kendoPivotGrid attaches a pivotgrid object to target", function() {
+        var pivotgrid = $(div).kendoPivotGrid({
+            dataSource: {
+                schema: {
+                    axes: function() {
+                        return {};
+                    }
+                }
+            }
+        });
 
         ok(pivotgrid.data("kendoPivotGrid") instanceof PivotGrid);
-    });*/
+    });
 
     test("creates a PivotDataSource", function() {
         var pivotgrid = createPivot();
