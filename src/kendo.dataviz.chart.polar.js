@@ -1021,7 +1021,9 @@ var __meta__ = {
                 defaultRange = tracker.query(),
                 range,
                 valueAxis,
-                axisOptions = plotArea.valueAxisOptions({ roundToMajorUnit: false }),
+                axisOptions = plotArea.valueAxisOptions({
+                    roundToMajorUnit: false, zIndex: -1
+                }),
                 axisType,
                 axisDefaultRange;
 
