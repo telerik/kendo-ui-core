@@ -168,7 +168,6 @@ def bundle(options)
 
       desc "Upload #{name} as release build on telerik.com"
       task "release_builds:upload:#{name}" =>  "release_builds:copy:#{name}" do
-          FileUtils.mkdir_p(versioned_bundle_destination_path)
 
           upload_release_build \
                   :title => name,
@@ -198,17 +197,17 @@ def bundle(options)
 
       desc "Upload #{name} as beta build on telerik.com"
       task "beta_builds:upload:#{name}" =>  "beta_builds:copy:#{name}" do
-          FileUtils.mkdir_p(versioned_bundle_destination_path)
 
           upload_beta_build \
                   :title => name,
                   :product => options[:product],
                   :params => options[:beta_build],
-                  :archive_path => versioned_bundle_destination_path  
+                  :archive_path => versioned_bundle_destination_path         
       end
 
       # add bundle to bundles:all
       task "beta_builds:bundles:all" => "beta_builds:upload:#{name}"
+
     end
     
 end
