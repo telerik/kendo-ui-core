@@ -138,11 +138,92 @@ var __meta__ = {
         return dataSource instanceof PivotDataSource ? dataSource : new PivotDataSource(dataSource);
     };
 
+    function expandMemberDescriptors(members) {
+        var result = [];
+        var name;
+
+        for (var idx = 0; idx < members.length; idx++) {
+            if (typeof members[idx] == "string") {
+                result.push(members[idx]);
+            } else {
+                if (members[idx].expand) {
+                    result.push(members[idx].name + ".[ALL].Children");
+                } else {
+                    result.push(members[idx].name);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    function crossJoin(names) {
+        var result = "CROSSJOIN({";
+        var r;
+        if (names.length > 2) {
+            r = names.pop();
+            result += crossJoin(names);
+        } else {
+            result += names.shift();
+            r = names.pop();
+        }
+        result += "},{";
+        result += r;
+        result += "})";
+        return result;
+    }
+
+    var convertersMap = {
+        read: function(options, type) {
+            var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>';
+
+            command += "SELECT NON EMPTY {";
+
+            var columns = expandMemberDescriptors(options.columns || []);
+            var rows = expandMemberDescriptors(options.rows || []);
+            var measures = options.measures || [];
+
+            if (columns.length) {
+                if (options.columns.length > 1 || measures.length > 1) {
+                    var tmp = columns;
+                    if (measures.length > 1) {
+                        tmp.push("{" + measures.join(",") + "}");
+                    }
+                    command += crossJoin(tmp);
+                } else {
+                    command += columns.join(",");
+                }
+            } else if (measures.length) {
+                command += measures.join(",");
+            }
+
+            command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS";
+
+            if (rows.length) {
+                command += ", NON EMPTY {" + rows.join(",") + "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
+            }
+
+            command += " FROM [" + options.connection.cube + "]";
+
+            if (measures.length == 1 && options.columns && options.columns.length) {
+                command += " WHERE (" + measures.join(",") + ")";
+            }
+
+            command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog></PropertyList></Properties></Execute></Body></Envelope>';
+            return command;
+        }
+    };
+
     var XmlaTransport = kendo.data.RemoteTransport.extend({
         setup: function(options, type) {
             $.extend(true, options.data, { connection: this.options.connection });
 
             return kendo.data.RemoteTransport.fn.setup.call(this, options, type);
+        },
+        options: {
+            parameterMap: function(options, type) {
+                return convertersMap[type](options,type);
+            }
         }
     });
 

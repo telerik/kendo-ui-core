@@ -242,6 +242,111 @@
         transport.read({success: $.noop, data: {}});
     });
 
+    test("parameterMap create empty statment wrap", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName" } }, "read");
+
+       ok(params.indexOf('<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>') == 0);
+       ok(params.indexOf('</Statement></Command><Properties><PropertyList><Catalog>catalogName</Catalog></PropertyList></Properties></Execute></Body></Envelope>') > -1);
+    });
+
+    test("parameterMap create empty select query", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" } }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap create single column select query", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[foo]" }] }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap columns are expanded", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[foo]", expand: true }] }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {[foo].[ALL].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap row is expanded", function() {
+       var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]", expand: true }] }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[foo].[ALL].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap create empty column and single row select query", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]" }] }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap create column and row select query", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[bar]" }], rows: [{ name: "[foo]" }] }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap create single measure is added to the where", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { catalog: "catalogName", cube: "cubeName" },
+           columns: [{ name: "[bar]" }],
+           rows: [{ name: "[foo]" }],
+           measures: ["[baz]"]
+       }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName] WHERE ([baz])') > -1);
+    });
+
+    test("parameterMap measure is added as column if no columns are set", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { catalog: "catalogName", cube: "cubeName" },
+           rows: [{ name: "[foo]" }],
+           measures: ["[baz]"]
+       }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {[baz]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap multiple columns are cross joined", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }, { name: "[bar]" }]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+           'FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap multiple measures are cross joined with columns", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"]
+        }, "read");
+
+        console.log(params);
+
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{{[bar],[baz]}})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+           'FROM [cubeName]') > -1);
+    });
+
     module("XmlaDataReader initialziation", { });
 
     test("parse returns the body tag content", function() {
