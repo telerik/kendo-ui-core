@@ -718,11 +718,14 @@
         });
 
         test("equals is true for same matrix", function() {
-            ok(matrix.equals(Matrix.IDENTITY));
+            matrix = new Matrix(1, 2, 3, 4, 5, 6);
+
+            ok(matrix.equals(matrix.clone()));
         });
 
         test("equals is false for different matrix", function() {
-            ok(!matrix.equals(new Matrix()));
+            matrix = new Matrix(1, 2, 3, 4, 5, 6);
+            ok(!matrix.equals(new Matrix(1, 2, 3, 4, 5, 0)));
         });
 
         test("unit returns the identity matrix", function() {

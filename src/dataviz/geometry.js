@@ -460,8 +460,8 @@
                 return false;
             }
 
-            return this.a === other.a && this.b === other.b
-                   this.c === other.c && this.d === other.d
+            return this.a === other.a && this.b === other.b &&
+                   this.c === other.c && this.d === other.d &&
                    this.e === other.e && this.f === other.f;
         }
     });
