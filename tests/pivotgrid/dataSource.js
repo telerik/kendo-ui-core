@@ -18,13 +18,13 @@
 
     test("setting columns during initialization", function() {
         var dataSource = new PivotDataSource({
-            columns: [{ member: "foo", expand: true }, "bar"]
+            columns: [{ name: "foo", expand: true }, "bar"]
         });
 
-        equal(dataSource.columns()[0].member, "foo");
+        equal(dataSource.columns()[0].name, "foo");
         ok(dataSource.columns()[0].expand);
 
-        equal(dataSource.columns()[1].member, "bar");
+        equal(dataSource.columns()[1].name, "bar");
         ok(!dataSource.columns()[1].expand);
     });
 
@@ -33,10 +33,10 @@
             columns: ["foo", "bar"]
         });
 
-        equal(dataSource.columns()[0].member, "foo");
+        equal(dataSource.columns()[0].name, "foo");
         ok(!dataSource.columns()[0].expand);
 
-        equal(dataSource.columns()[1].member, "bar");
+        equal(dataSource.columns()[1].name, "bar");
         ok(!dataSource.columns()[1].expand);
     });
 
@@ -51,13 +51,13 @@
 
     test("setting rows during initialization", function() {
         var dataSource = new PivotDataSource({
-            rows: [{ member: "foo", expand: true }, "bar"]
+            rows: [{ name: "foo", expand: true }, "bar"]
         });
 
-        equal(dataSource.rows()[0].member, "foo");
+        equal(dataSource.rows()[0].name, "foo");
         ok(dataSource.rows()[0].expand);
 
-        equal(dataSource.rows()[1].member, "bar");
+        equal(dataSource.rows()[1].name, "bar");
         ok(!dataSource.rows()[1].expand);
     });
 
@@ -66,10 +66,10 @@
             rows: ["foo", "bar"]
         });
 
-        equal(dataSource.rows()[0].member, "foo");
+        equal(dataSource.rows()[0].name, "foo");
         ok(!dataSource.rows()[0].expand);
 
-        equal(dataSource.rows()[1].member, "bar");
+        equal(dataSource.rows()[1].name, "bar");
         ok(!dataSource.rows()[1].expand);
     });
 
@@ -79,8 +79,8 @@
             rows: ["bar"],
             transport: {
                 read: function(options) {
-                    equal(options.data.columns[0].member, "foo");
-                    equal(options.data.rows[0].member, "bar"); }
+                    equal(options.data.columns[0].name, "foo");
+                    equal(options.data.rows[0].name, "bar"); }
             }
         });
         dataSource.read();
@@ -188,6 +188,40 @@
         equal(data[2].value, 2);
         equal(data[3].ordinal, 3);
         ok(!data[3].value);
+    });
+
+    test("expand sets the column as expanded", function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo", "bar", { name: "baz", expand: true } ]
+        });
+
+        dataSource.expand("foo");
+
+        equal(dataSource.columns()[0].name, "foo");
+        ok(dataSource.columns()[0].expand);
+    });
+
+    test("expand sets the row as expanded", function() {
+        var dataSource = new PivotDataSource({
+            rows: ["foo", "bar", { name: "baz", expand: true } ]
+        });
+
+        dataSource.expand("foo");
+
+        equal(dataSource.rows()[0].name, "foo");
+        ok(dataSource.rows()[0].expand);
+    });
+
+    test("expand issue an request", 1, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo", "bar", { name: "baz", expand: true } ]
+        });
+
+        dataSource.bind("requestStart", function() {
+            ok(true);
+        });
+
+        dataSource.expand("foo");
     });
 
     module("XmlaTransport initialziation", { });

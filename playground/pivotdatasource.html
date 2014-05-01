@@ -20,90 +20,8 @@
         </div>
 
         <script>
-            function translateAxis(axis) {
-                var result = { tuples: [] };
-                var tuples = asArray(kendo.getter("Tuples.Tuple", true)(axis));
-                var captionGetter = kendo.getter("Caption['#text']");
-                var unameGetter = kendo.getter("UName['#text']");
-                var childrenGetter = kendo.getter("CHILDREN_CARDINALITY['#text']", true);
-                var hierarchyGetter = kendo.getter("['Hierarchy']");
-                var parentNameGetter = kendo.getter("PARENT_UNIQUE_NAME['#text']", true);
-
-                for (var idx = 0; idx < tuples.length; idx++) {
-                    var members = [];
-                    var member = asArray(tuples[idx].Member);
-                    for (var memberIdx = 0; memberIdx < member.length; memberIdx++) {
-                        members.push({
-                            caption: captionGetter(member[memberIdx]),
-                            name: unameGetter(member[memberIdx]),
-                            hasChildren: parseInt(childrenGetter(member[memberIdx]), 10) > 0,
-                            parentName: parentNameGetter(member[memberIdx]),
-                            hierarchy: hierarchyGetter(member[memberIdx])
-                        });
-                    }
-
-                    result.tuples.push({ members: members });
-                }
-                return result;
-            }
-
-            var XmlaDataReader = kendo.data.XmlDataReader.extend({
-                parse: function(xml) {
-                    var result = kendo.data.XmlDataReader.fn.parse(xml);
-                    return kendo.getter("['soap:Envelope']['soap:Body']", true)(result);
-                },
-                data: function(root) {
-                    root = kendo.getter("ExecuteResponse.return.root", true)(root);
-
-                    var cells = asArray(kendo.getter("CellData.Cell", true)(root));
-                    var result = [];
-                    var ordinalGetter = kendo.getter("['@CellOrdinal']");
-                    var valueGetter = kendo.getter("Value['#text']");
-                    var fmtValueGetter = kendo.getter("FmtValue['#text']");
-
-                    for (var idx = 0; idx < cells.length; idx++) {
-                        result[parseInt(ordinalGetter(cells[idx]),10)] = {
-                            value: valueGetter(cells[idx]),
-                            fmtValue: fmtValueGetter(cells[idx])
-                        };
-                    }
-
-                    return result;
-                },
-                errors: function(root) {
-                    var fault = kendo.getter("['soap:Fault']", true)(root);
-                    if (fault) {
-                        return [kendo.getter("faultstring['#text']", true)(fault)];
-                    }
-                    return null;
-                },
-                axes: function(root) {
-                    root = kendo.getter("ExecuteResponse.return.root", true)(root);
-
-                    var axes = kendo.getter("Axes.Axis")(root);
-                    if (axes.length > 2) {
-                        return {
-                            columns: translateAxis(axes[0]),
-                            rows: translateAxis(axes[1])
-                        };
-                    } else {
-                        return {
-                            columns: translateAxis(axes[0]),
-                            rows: { tuples: [ ] }
-                        }
-                    }
-                },
-                info: function(root) {
-                    root = kendo.getter("ExecuteResponse.return.root", true)(root);
-                    return kendo.getter("OlapInfo")(root);
-                }
-            });
-
-            var PivotDataSource = kendo.data.PivotDataSource.extend({
-                axes: function() {
-                    return this._axes;
-                },
-                _readData: function(data) {
+/*           var PivotDataSource = kendo.data.PivotDataSource.extend({
+               _readData: function(data) {
                     debugger;
                     var originalData = this._data;
                     var cellData = this.reader.data(data);
@@ -121,6 +39,7 @@
                 }
             });
 
+*/
             function crossJoin(names) {
                 var result = "CROSSJOIN({";
                 var r;
@@ -207,13 +126,7 @@
                 }
             };
 
-            $.extend(true, kendo.data, {
-                readers: {
-                    xmla: XmlaDataReader
-                }
-            });
-
-            var dataSource = new PivotDataSource({
+            var dataSource = new kendo.data.PivotDataSource({
                 type: "xmla",
                 columns: ["[Date].[Calendar]"],
                 rows: ["[Product].[Product Name]"],
@@ -250,17 +163,8 @@
             dataSource.read();
 
             $("button").click(function() {
-                dataSource.execute({ columns: [{ name: "[Date].[Calendar]", expand: true}], rows: ["[Product].[Product Name]"], measures: ["[Measures].[Internet Order Lines Count]"] });
+                dataSource.expand("[Date].[Calendar]");
             });
-
-            function asArray(obj) {
-
-                if (!$.isArray(obj)) {
-                    return [obj]
-                }
-
-                return obj;
-            }
 
             function renderHeader(nodeName, tuples) {
                 var html = "";

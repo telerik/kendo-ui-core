@@ -22,14 +22,14 @@ var __meta__ = {
         extend = $.extend;
 
     function normalizeMembers(member) {
-        var descriptor = typeof member === "string" ? { member: member, expand: false } : member,
+        var descriptor = typeof member === "string" ? { name: member, expand: false } : member,
             descriptors = toString.call(descriptor) === "[object Array]" ? descriptor : (descriptor !== undefined ? [descriptor] : []);
 
         return map(descriptors, function(d) {
             if (typeof d === "string") {
-                return { member: d, expand: false };
+                return { name: d, expand: false };
             }
-            return { member: d.member, expand: d.expand };
+            return { name: d.name, expand: d.expand };
         });
     }
 
@@ -61,6 +61,17 @@ var __meta__ = {
 
         measures: function() {
             return this._measures;
+        },
+
+        expand: function(member) {
+            var members = this.columns().concat(this.rows());
+            for (var idx = 0; idx < members.length; idx++) {
+                if (members[idx].name === member) {
+                    members[idx].expand = true;
+                    break;
+                }
+            }
+            this.read();
         },
 
         _readData: function(data) {
