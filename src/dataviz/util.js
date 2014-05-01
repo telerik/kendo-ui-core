@@ -15,6 +15,8 @@
 
     // Constants
     var DEG_TO_RAD = math.PI / 180,
+        MAX_VALUE = Number.MAX_VALUE,
+        MIN_VALUE = -Number.MAX_VALUE,
         UNDEFINED = "undefined";
 
     // Generic utility functions ==============================================
@@ -55,11 +57,8 @@
         return value * value;
     }
 
-    function last(array) {
-        return array[array.length - 1];
-    }
-
-    function arrayMinMax(arr) {
+    // Array helpers ==========================================================
+    function arrayLimits(arr) {
         var length = arr.length,
             i,
             min = Number.MAX_VALUE,
@@ -74,6 +73,44 @@
             min: min,
             max: max
         };
+    }
+
+    function arrayMin(arr) {
+        return arrayLimits(arr).min;
+    }
+
+    function arrayMax(arr) {
+        return arrayLimits(arr).max;
+    }
+
+    function sparseArrayMin(arr) {
+        return sparseArrayLimits(arr).min;
+    }
+
+    function sparseArrayMax(arr) {
+        return sparseArrayLimits(arr).max;
+    }
+
+    function sparseArrayLimits(arr) {
+        var min = MAX_VALUE,
+            max = MIN_VALUE;
+
+        for (var i = 0, length = arr.length; i < length; i++) {
+            var n = arr[i];
+            if (n !== null && isFinite(n)) {
+                min = math.min(min, n);
+                max = math.max(max, n);
+            }
+        }
+
+        return {
+            min: min === MAX_VALUE ? undefined : min,
+            max: max === MIN_VALUE ? undefined : max
+        };
+    }
+
+    function last(array) {
+        return array[array.length - 1];
     }
 
     // Template helpers =======================================================
@@ -127,7 +164,9 @@
             },
 
             alignToPixel: alignToPixel,
-            arrayMinMax: arrayMinMax,
+            arrayLimits: arrayLimits,
+            arrayMin: arrayMin,
+            arrayMax: arrayMax,
             defined: defined,
             deg: deg,
             isNumber: isNumber,
@@ -139,6 +178,9 @@
             renderAllAttr: renderAllAttr,
             renderPos: renderPos,
             renderSize: renderSize,
+            sparseArrayLimits: sparseArrayLimits,
+            sparseArrayMin: sparseArrayMin,
+            sparseArrayMax: sparseArrayMax,
             sqr: sqr,
             valueOrDefault: valueOrDefault
         }
