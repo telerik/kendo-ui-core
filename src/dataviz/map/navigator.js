@@ -65,6 +65,7 @@
             }
 
             this._pan(x, y);
+            e.preventDefault();
         },
 
         _keydown: function(e) {

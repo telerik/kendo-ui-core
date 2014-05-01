@@ -59,6 +59,7 @@
             }
 
             this._change(dir);
+            e.preventDefault();
         },
 
         _keydown: function(e) {
