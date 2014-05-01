@@ -17,13 +17,13 @@
         Arc = d.Arc,
         TOLERANCE = 0.1;
 
-    function compareBoundingBox(bBox, values, tolerance) {
+    function compareBoundingBox(bbox, values, tolerance) {
         tolerance = tolerance || 0;
 
-        close(bBox.p0.x, values[0], tolerance);
-        close(bBox.p0.y, values[1], tolerance);
-        close(bBox.p1.x, values[2], tolerance);
-        close(bBox.p1.y, values[3], tolerance);
+        close(bbox.p0.x, values[0], tolerance);
+        close(bbox.p0.y, values[1], tolerance);
+        close(bbox.p1.x, values[2], tolerance);
+        close(bbox.p1.y, values[3], tolerance);
     }
 
     function compareMatrices(m1, m2, tolerance) {
@@ -235,15 +235,15 @@
         var path = new Path(),
             circle = new Circle(new g.Circle(new Point(), 10)),
             boundingBox;
-        circle.bBox = function() {
+        circle.bbox = function() {
             return new g.Rect(Point.create(50, 50), Point.create(150, 150));
         };
-        path.bBox = function() {
+        path.bbox = function() {
             return new g.Rect(Point.create(30, 70), Point.create(120, 170));
         };
         group.append(circle);
         group.append(path);
-        boundingBox = group.bBox();
+        boundingBox = group.bbox();
         compareBoundingBox(boundingBox, [30, 50, 150, 170]);
     });
 
@@ -251,15 +251,15 @@
         var path = new Path({visible: false}),
             circle = new Circle(new g.Circle(new Point(), 10)),
             boundingBox;
-        circle.bBox = function() {
+        circle.bbox = function() {
             return new g.Rect(Point.create(50, 50), Point.create(150, 150));
         };
-        path.bBox = function() {
+        path.bbox = function() {
             return new g.Rect(Point.create(30, 70), Point.create(120, 170));
         };
         group.append(circle);
         group.append(path);
-        boundingBox = group.bBox();
+        boundingBox = group.bbox();
         compareBoundingBox(boundingBox, [50, 50, 150, 150]);
     });
 
@@ -267,20 +267,20 @@
         var path = new Path({visible: false}),
             circle = new Circle(new g.Circle(new Point(), 10), {visible: false}),
             boundingBox;
-        circle.bBox = function() {
+        circle.bbox = function() {
             return new g.Rect(Point.create(50, 50), Point.create(150, 150));
         };
-        path.bBox = function() {
+        path.bbox = function() {
             return new g.Rect(Point.create(30, 70), Point.create(120, 170));
         };
         group.append(circle);
         group.append(path);
-        boundingBox = group.bBox();
+        boundingBox = group.bbox();
         equal(boundingBox, undefined);
     });
 
     test("boundingBox returns undefined if group has no children", function() {
-        equal(group.bBox(), undefined);
+        equal(group.bbox(), undefined);
     });
 
     test("boundingBox passes transformation to its children boundingBox methods", 12, function() {
@@ -288,11 +288,11 @@
             circle = new Circle(new g.Circle(new Point(), 10)),
             boundingBox,
             groupMatrix;
-        circle.bBox = function(transformation) {
+        circle.bbox = function(transformation) {
             compareMatrices(transformation.matrix(), groupMatrix);
             return new g.Rect();
         };
-        path.bBox = function(transformation) {
+        path.bbox = function(transformation) {
             compareMatrices(transformation.matrix(), groupMatrix);
             return new g.Rect();
         };
@@ -300,7 +300,7 @@
         groupMatrix = group.options.transform.matrix();
         group.append(circle);
         group.append(path);
-        group.bBox();
+        group.bbox();
     });
 
     test("currentTransform returns null group has no matrix and there is no parent matrix", function() {
@@ -430,11 +430,11 @@
         var boundingBox,
             geometry = new g.Circle(new Point());
 
-        geometry.bBox = function() {
+        geometry.bbox = function() {
             return new g.Rect(new Point(50, 50), new Point(150, 150));
         };
         circle = new Circle(geometry, {stroke: {width: 5}});
-        boundingBox = circle.bBox();
+        boundingBox = circle.bbox();
         compareBoundingBox(boundingBox, [47.5, 47.5, 152.5, 152.5]);
     });
 
@@ -442,13 +442,13 @@
         var geometry = new g.Circle(new Point()),
             circleMatrix;
 
-        geometry.bBox = function(matrix) {
+        geometry.bbox = function(matrix) {
             ok(circleMatrix === matrix);
             return new g.Rect();
         };
         circle = new Circle(geometry, {stroke: {width: 5}, transform: g.transform(Matrix.unit())});
         circleMatrix = circle.options.transform.matrix();
-        circle.bBox();
+        circle.bbox();
     });
 
     // ------------------------------------------------------------
@@ -503,11 +503,11 @@
         var boundingBox,
             geometry = new g.Arc(new Point());
 
-        geometry.bBox = function() {
+        geometry.bbox = function() {
             return new g.Rect(new Point(50, 50), new Point(150, 150));
         };
         arc = new Arc(geometry, {stroke: {width: 5}});
-        boundingBox = arc.bBox();
+        boundingBox = arc.bbox();
 
         compareBoundingBox(boundingBox, [47.5, 47.5, 152.5, 152.5]);
     });
@@ -516,13 +516,13 @@
         var geometry = new g.Arc(new Point()),
             arcMatrix;
 
-        geometry.bBox = function(matrix) {
+        geometry.bbox = function(matrix) {
             ok(arcMatrix === matrix);
             return new g.Rect();
         };
         arc = new Arc(geometry, {stroke: {width: 5}});
         arcMatrix = arc.options.transform;
-        arc.bBox();
+        arc.bbox();
     });
 
     // ------------------------------------------------------------
@@ -574,25 +574,25 @@
 
     test("boundingBoxTo returns the line bounding box to the passed segment if all control points are not specified", function() {
         var other = new Segment(Point.create(100, 100)),
-            boundingBox = segment.bBoxTo(other);
+            boundingBox = segment.bboxTo(other);
         compareBoundingBox(boundingBox, [0,0,100,100]);
     });
 
     test("boundingBoxTo returns the transformed line bounding box", function() {
         var other = new Segment(Point.create(100, 100)),
-            boundingBox = segment.bBoxTo(other, Matrix.scale(2,1));
+            boundingBox = segment.bboxTo(other, Matrix.scale(2,1));
         compareBoundingBox(boundingBox, [0,0,200,100]);
     });
 
     test("boundingBoxTo returns the curve bounding rect to the passed segment if all control points are specified", function() {
         var other = new Segment(Point.create(30, 50), Point.create(-20, 30)),
-            boundingBox = segment.bBoxTo(other);
+            boundingBox = segment.bboxTo(other);
         compareBoundingBox(boundingBox, [-8.2,-1.6,30,50], TOLERANCE);
     });
 
     test("boundingBoxTo returns the transformed curve bounding rect to the passed segment", function() {
         var other = new Segment(Point.create(30, 50), Point.create(-20, 30)),
-            boundingBox = segment.bBoxTo(other, Matrix.scale(2,1));
+            boundingBox = segment.bboxTo(other, Matrix.scale(2,1));
         compareBoundingBox(boundingBox, [-16.3,-1.6,60,50], TOLERANCE);
     });
 
@@ -715,26 +715,26 @@
     });
 
     test("boundingBox returns undefined if there are no segments", function() {
-        var boundingBox = path.bBox();
+        var boundingBox = path.bbox();
         ok(boundingBox === undefined);
     });
 
     test("boundingBox returns a bounding rectangle with both points equal to the segment anchor if there is a single segment", function() {
         path.moveTo(10, 10);
-        var boundingBox = path.bBox();
+        var boundingBox = path.bbox();
         compareBoundingBox(boundingBox, [10,10,10,10]);
     });
 
     test("boundingBox returns the bounding rectangle of the transformed anchor if there is a single segment", function() {
         path.moveTo(10, 10);
-        var boundingBox = path.bBox(g.transform(Matrix.scale(1,2)));
+        var boundingBox = path.bbox(g.transform(Matrix.scale(1,2)));
         compareBoundingBox(boundingBox, [10,20,10,20]);
     });
 
     test("boundingBox returns the bounding rectangle of the anchor using the combined transformation", function() {
         path.transform(Matrix.scale(2,1));
         path.moveTo(10, 10);
-        var boundingBox = path.bBox(g.transform(Matrix.scale(1,2)));
+        var boundingBox = path.bbox(g.transform(Matrix.scale(1,2)));
         compareBoundingBox(boundingBox, [20,20,20,20]);
     });
 
@@ -742,7 +742,7 @@
         path.moveTo(0, 0);
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.lineTo(20, 70);
-        var boundingBox = path.bBox();
+        var boundingBox = path.bbox();
 
         compareBoundingBox(boundingBox, [-8.2,-1.6,30,70], TOLERANCE);
     });
@@ -752,7 +752,7 @@
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.lineTo(20, 70);
         path.transform(g.transform(Matrix.scale(2, 1)));
-        var boundingBox = path.bBox();
+        var boundingBox = path.bbox();
         compareBoundingBox(boundingBox, [-16.3,-1.6,60,70], TOLERANCE);
     });
 
@@ -761,7 +761,7 @@
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.lineTo(20, 70);
         path.transform(Matrix.scale(2, 1));
-        var boundingBox = path.bBox(g.transform(Matrix.scale(1, 2)));
+        var boundingBox = path.bbox(g.transform(Matrix.scale(1, 2)));
         compareBoundingBox(boundingBox, [-16.3,-3.2,60,140], TOLERANCE);
     });
 
@@ -769,7 +769,7 @@
         path.moveTo(0, 0);
         path.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         path.stroke("black", 5);
-        var boundingBox = path.bBox();
+        var boundingBox = path.bbox();
         compareBoundingBox(boundingBox, [-10.7,-4.1,32.5,52.5], TOLERANCE);
     });
 
@@ -873,7 +873,7 @@
     });
 
     test("boundingBox returns undefined if there are no paths", function() {
-        var boundingBox = multiPath.bBox();
+        var boundingBox = multiPath.bbox();
         ok(boundingBox === undefined);
     });
 
@@ -881,7 +881,7 @@
         multiPath.moveTo(0, 0);
         multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         multiPath.moveTo(20, 70);
-        var boundingBox = multiPath.bBox();
+        var boundingBox = multiPath.bbox();
         compareBoundingBox(boundingBox, [-8.2,-1.6,30,70], TOLERANCE);
     });
 
@@ -890,7 +890,7 @@
         multiPath.moveTo(0, 0);
         multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         multiPath.moveTo(20, 70);
-        var boundingBox = multiPath.bBox();
+        var boundingBox = multiPath.bbox();
         compareBoundingBox(boundingBox, [-16.3,-1.6,60,70], TOLERANCE);
     });
 
@@ -899,7 +899,7 @@
         multiPath.moveTo(0, 0);
         multiPath.curveTo(Point.create(-10, -10), Point.create(-20, 30), Point.create(30, 50));
         multiPath.moveTo(20, 70);
-        var boundingBox = multiPath.bBox(Matrix.scale(1, 2));
+        var boundingBox = multiPath.bbox(Matrix.scale(1, 2));
         compareBoundingBox(boundingBox, [-16.3,-3.2,60,140], TOLERANCE);
     });
 

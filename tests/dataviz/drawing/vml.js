@@ -1019,7 +1019,7 @@
         }
     });
 
-    test("circle transform origin is minus bBox center over bBox size", function() {
+    test("circle transform origin is minus bbox center over bbox size", function() {
         ok(circleTransformNode.render().indexOf("origin='-3,-2'") !== -1);
     });
 

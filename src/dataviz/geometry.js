@@ -247,7 +247,7 @@
             return this._pointAt(rad(angle));
         },
 
-        bBox: function(matrix) {
+        bbox: function(matrix) {
             var minPoint = Point.maxPoint(),
                 maxPoint = Point.minPoint(),
                 extremeAngles = ellipseExtremeAngles(this.center, this.radius, this.radius, matrix),
@@ -350,7 +350,7 @@
             return angle;
         },
 
-        bBox: function(matrix) {
+        bbox: function(matrix) {
             var arc = this,
                 interval = arc._arcInterval(),
                 startAngle = interval.startAngle,

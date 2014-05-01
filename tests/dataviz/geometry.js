@@ -9,13 +9,13 @@
         Arc = g.Arc,
         Transformation = g.Transformation;
 
-    function compareBoundingBox(bBox, values, tolerance) {
+    function compareBoundingBox(bbox, values, tolerance) {
         tolerance = tolerance || 0;
 
-        close(bBox.p0.x, values[0], tolerance);
-        close(bBox.p0.y, values[1], tolerance);
-        close(bBox.p1.x, values[2], tolerance);
-        close(bBox.p1.y, values[3], tolerance);
+        close(bbox.p0.x, values[0], tolerance);
+        close(bbox.p0.y, values[1], tolerance);
+        close(bbox.p1.x, values[2], tolerance);
+        close(bbox.p1.y, values[3], tolerance);
     }
 
     // ------------------------------------------------------------
@@ -511,12 +511,12 @@
     });
 
     test("boundingBox returns the circle bounding Rect", function() {
-        var rect = circle.bBox();
+        var rect = circle.bbox();
         compareBoundingBox(rect, [-10,-10,10,10]);
     });
 
     test("boundingBox returns the transformed circle bounding Rect", function() {
-        var rect = circle.bBox(Matrix.scale(2,1));
+        var rect = circle.bbox(Matrix.scale(2,1));
         compareBoundingBox(rect, [-20,-10,20,10]);
     });
 
@@ -632,12 +632,12 @@
     });
 
     test("boundingBox returns the arc bounding Rect", function() {
-        var rect = arc.bBox();
+        var rect = arc.bbox();
         compareBoundingBox(rect, [50,100,150,200]);
     });
 
     test("boundingBox returns the transformed arc bounding Rect", function() {
-        var rect = arc.bBox(Matrix.scale(2,1));
+        var rect = arc.bbox(Matrix.scale(2,1));
         compareBoundingBox(rect, [100,100,300,200]);
     });
 
