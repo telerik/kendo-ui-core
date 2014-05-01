@@ -17,7 +17,20 @@ var __meta__ = {
         DataSource = kendo.data.DataSource,
         toString = {}.toString,
         identity = function(o) { return o; },
+        map = $.map,
         extend = $.extend;
+
+    function normalizeMembers(member) {
+        var descriptor = typeof member === "string" ? { member: member, expand: false } : member,
+            descriptors = toString.call(descriptor) === "[object Array]" ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+
+        return map(descriptors, function(d) {
+            if (typeof d === "string") {
+                return { member: d, expand: false };
+            }
+            return { member: d.member, expand: d.expand };
+        });
+    }
 
     var PivotDataSource = DataSource.extend({
         init: function(options) {
@@ -27,8 +40,8 @@ var __meta__ = {
                 }
             }, options));
 
-            this._columns = this.options.columns || [];
-            this._rows = this.options.rows || [];
+            this._columns = normalizeMembers(this.options.columns);
+            this._rows = normalizeMembers(this.options.rows);
             this._measures = this.options.measures || [];
             this._axes = {};
         },

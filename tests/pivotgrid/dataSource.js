@@ -18,11 +18,26 @@
 
     test("setting columns during initialization", function() {
         var dataSource = new PivotDataSource({
+            columns: [{ member: "foo", expand: true }, "bar"]
+        });
+
+        equal(dataSource.columns()[0].member, "foo");
+        ok(dataSource.columns()[0].expand);
+
+        equal(dataSource.columns()[1].member, "bar");
+        ok(!dataSource.columns()[1].expand);
+    });
+
+    test("columns descriptors are normalized during initialization", function() {
+        var dataSource = new PivotDataSource({
             columns: ["foo", "bar"]
         });
 
-        equal(dataSource.columns()[0], "foo");
-        equal(dataSource.columns()[1], "bar");
+        equal(dataSource.columns()[0].member, "foo");
+        ok(!dataSource.columns()[0].expand);
+
+        equal(dataSource.columns()[1].member, "bar");
+        ok(!dataSource.columns()[1].expand);
     });
 
     test("setting measures during initialization", function() {
@@ -36,11 +51,26 @@
 
     test("setting rows during initialization", function() {
         var dataSource = new PivotDataSource({
+            rows: [{ member: "foo", expand: true }, "bar"]
+        });
+
+        equal(dataSource.rows()[0].member, "foo");
+        ok(dataSource.rows()[0].expand);
+
+        equal(dataSource.rows()[1].member, "bar");
+        ok(!dataSource.rows()[1].expand);
+    });
+
+    test("rows descriptors are normalized during initialization", function() {
+        var dataSource = new PivotDataSource({
             rows: ["foo", "bar"]
         });
 
-        equal(dataSource.rows()[0], "foo");
-        equal(dataSource.rows()[1], "bar");
+        equal(dataSource.rows()[0].member, "foo");
+        ok(!dataSource.rows()[0].expand);
+
+        equal(dataSource.rows()[1].member, "bar");
+        ok(!dataSource.rows()[1].expand);
     });
 
     test("columns and rows are pass to the transport read", function() {
@@ -49,8 +79,8 @@
             rows: ["bar"],
             transport: {
                 read: function(options) {
-                    equal(options.data.columns[0], "foo");
-                    equal(options.data.rows[0], "bar"); }
+                    equal(options.data.columns[0].member, "foo");
+                    equal(options.data.rows[0].member, "bar"); }
             }
         });
         dataSource.read();
@@ -159,6 +189,7 @@
         equal(data[3].ordinal, 3);
         ok(!data[3].value);
     });
+
     module("XmlaTransport initialziation", { });
 
     test("connection settings are passed to the parameterMap", function() {
