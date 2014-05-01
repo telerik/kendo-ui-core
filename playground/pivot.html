@@ -1,56 +1,55 @@
-
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
     <head>
-        <script src="../src/jquery.js"></script>
-        <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.dom.js"></script>
-        <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.data.xml.js"></script>
-        <script src="../src/kendo.pivotgrid.js"></script>
-        <link rel="stylesheet" href="../dist/styles/web/kendo.common.min.css">
-        <link rel="stylesheet" href="../dist/styles/web/kendo.default.min.css">
-        <style>
-            fieldset {
-                width: 45%;
-                float: left;
-            }
-
-            .pivot {
-                max-width: 900px;
-                max-height: 700px;
-                overflow: auto;
-            }
-
-            .k-pivot-header-left {
-                width: 220px;
-                display: inline-block;
-                padding: .22em .2em .28em;
-                border-right: 1px solid red;
-            }
-
-            .k-pivot-header-right {
-                width: 630px;
-                display: inline-block;
-                padding: .22em .2em .28em;
-            }
-
-            .k-pivot-content {
-                display: inline-block;
-            }
-
-            table {
-                border: 1px solid black;
-            }
-        </style>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>pivot columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dom.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.xml.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivotgrid.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
-        <div id="pivot"></div>
+        <div id="pivotgrid"></div>
 
-        <script>
-            $(function() {
-                var pivot = new kendo.ui.PivotGrid($("#pivot"));
+    <script>
+        $("button").click(function() {
+            dataSource.expand("[Date].[Calendar]");
+        });
+
+        $(function() {
+            $("#pivotgrid").kendoPivotGrid({
+                dataSource: {
+                    type: "xmla",
+                    columns: [{ name: "[Geography].[City]" }, { name: "[Date].[Calendar]", expand: true }],
+                    rows: [ { name: "[Product].[Category]", expand: true }, { name: "[Product].[Product Name]" }],
+                    measures: ["[Measures].[Internet Order Lines Count]"],
+                    transport: {
+                        connection: {
+                            catalog: "Adventure Works Internet Sales Model",
+                            cube: "Adventure Works Internet Sales Model"
+                        },
+                        read: {
+                            url: "http://krustev:8080/olap/msmdpump.dll",
+                            dataType: "text",
+                            contentType: "text/xml",
+                            type: "POST"
+                        }
+                    },
+                    schema: {
+                       type: "xmla"
+                    },
+                    error: function(e) {
+                       alert("error: " + kendo.stringify(e.errors[0]));
+                    }
+                }
             });
-        </script>
+        });
+    </script>
     </body>
 </html>

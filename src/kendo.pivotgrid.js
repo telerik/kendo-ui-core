@@ -475,14 +475,15 @@ var __meta__ = {
             var dataSource = that.dataSource;
 
             var axes = dataSource.axes();
-            var columns = axes.columns || [];
-            var rows = axes.rows || [];
+            var columns = axes.columns || {};
+            var tuples = columns.tuples || [];
+            var rows = axes.rows || {};
 
             var data = dataSource.view();
 
-            that.columnsHeaderTree.render(kendo_column_headers(columns));
-            that.rowsHeaderTree.render(kendo_row_headers(rows));
-            that.contentTree.render(kendo_content(data, columns.length || 1));
+            that.columnsHeaderTree.render(kendo_column_headers(tuples || []));
+            that.rowsHeaderTree.render(kendo_row_headers(rows.tuples || []));
+            that.contentTree.render(kendo_content(data, tuples.length || 1));
         }
     });
 
@@ -597,9 +598,11 @@ var __meta__ = {
 
         var start = rowIndex * columnsLength;
         var end = start + columnsLength;
+        var dataItem;
 
         for (; start < end; start++) {
-            cells.push(element("td", null, [text(data[start])]));
+            dataItem = data[start];
+            cells.push(element("td", null, [text(dataItem ? dataItem.value : "")]));
         }
 
         return element("tr", null, cells);
