@@ -10,6 +10,7 @@ var __meta__ = {
     depends: [ "dom", "data" ]
 };
 
+/*jshint eqnull: true*/
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -141,7 +142,7 @@ var __meta__ = {
 
         var type = toString.call(object);
         if (type !== "[object Array]") {
-            return [object]
+            return [object];
         }
 
         return object;
@@ -188,7 +189,7 @@ var __meta__ = {
             if (fault) {
                 return [{
                     faultstring: kendo.getter("faultstring['#text']", true)(fault),
-                    faultcode: kendo.getter("faultcode['#text']", true)(fault),
+                    faultcode: kendo.getter("faultcode['#text']", true)(fault)
                 }];
             }
             return null;
@@ -207,7 +208,7 @@ var __meta__ = {
             return {
                 columns: columns,
                 rows: rows
-            }
+            };
         },
         data: function(root) {
             root = kendo.getter("ExecuteResponse.return.root", true)(root);
@@ -223,7 +224,7 @@ var __meta__ = {
                 result.push({
                     value: valueGetter(cells[idx]),
                     fmtValue: fmtValueGetter(cells[idx]),
-                    ordinal: parseInt(ordinalGetter(cells[idx], 10))
+                    ordinal: parseInt(ordinalGetter(cells[idx]), 10)
                 });
             }
 
@@ -273,13 +274,13 @@ var __meta__ = {
             dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
 
             if (this.dataSource && this._refreshHandler) {
-                this.dataSource.unbind("change", this._refreshHandler)
+                this.dataSource.unbind("change", this._refreshHandler);
             } else {
                 this._refreshHandler = $.proxy(this.refresh, this);
             }
 
             this.dataSource = kendo.data.PivotDataSource.create(dataSource)
-                .bind("change", this._refreshHandler)
+                .bind("change", this._refreshHandler);
         },
 
         refresh: function() {
