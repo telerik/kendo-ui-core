@@ -23,10 +23,12 @@
         OptionsStore = drawing.OptionsStore,
 
         math = Math,
+        pow = math.pow,
 
         util = dataviz.util,
+        arrayLimits = util.arrayLimits,
         defined = util.defined,
-        arrayMinMax = util.arrayMinMax;
+        last = util.last;
 
     // Drawing primitives =====================================================
     var Element = Class.extend({
@@ -216,9 +218,9 @@
         },
 
         bbox: function(transformation) {
-            var combinedMatrix = transformationMatrix(this.currentTransform(transformation)),
-                rect = this.geometry.bbox(combinedMatrix),
-                strokeWidth = this.options.get("stroke.width");
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            var rect = this.geometry.bbox(combinedMatrix);
+            var strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
             }
@@ -237,9 +239,10 @@
         },
 
         bbox: function(transformation) {
-            var combinedMatrix = transformationMatrix(this.currentTransform(transformation)),
-                rect = this.geometry.bbox(combinedMatrix),
-                strokeWidth = this.options.get("stroke.width");
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            var rect = this.geometry.bbox(combinedMatrix);
+            var strokeWidth = this.options.get("stroke.width");
+
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
             }
@@ -248,12 +251,15 @@
         },
 
         toPath: function() {
-            var path = new Path(),
-                curvePoints = this.geometry.curvePoints(),
-                i, length = curvePoints.length;
-            path.moveTo(curvePoints[0].x, curvePoints[0].y);
-            for (i = 1; i < length; i+=3) {
-                path.curveTo(curvePoints[i], curvePoints[i + 1], curvePoints[i + 2]);
+            var path = new Path();
+            var curvePoints = this.geometry.curvePoints();
+
+            if (curvePoints.length > 0) {
+                path.moveTo(curvePoints[0].x, curvePoints[0].y);
+
+                for (var i = 1; i < curvePoints.length; i+=3) {
+                    path.curveTo(curvePoints[i], curvePoints[i + 1], curvePoints[i + 2]);
+                }
             }
 
             return path;
@@ -264,35 +270,37 @@
         init: function(anchor, controlIn, controlOut) {
             var segment = this;
 
-            segment.anchor = anchor || new Point();
-            segment.anchor.observer = this;
-            segment.observer = null;
+            this.anchor = anchor || new Point();
+            this.anchor.observer = this;
+            this.observer = null;
 
             if (controlIn) {
-                segment.controlIn = controlIn;
-                segment.controlIn.observer = this;
+                this.controlIn = controlIn;
+                this.controlIn.observer = this;
             }
 
             if (controlOut) {
-                segment.controlOut = controlOut;
-                segment.controlOut.observer = this;
+                this.controlOut = controlOut;
+                this.controlOut.observer = this;
             }
         },
 
         geometryChange: util.mixins.geometryChange,
 
         bboxTo: function(toSegment, matrix) {
-            var rect,
-                segment = this,
-                segmentAnchor = segment.anchor.transformCopy(matrix),
-                toSegmentAnchor = toSegment.anchor.transformCopy(matrix);
+            var rect;
+            var segmentAnchor = this.anchor.transformCopy(matrix);
+            var toSegmentAnchor = toSegment.anchor.transformCopy(matrix);
 
-            if (segment.controlOut && toSegment.controlIn) {
-                rect = segment._curveBoundingBox(segmentAnchor, segment.controlOut.transformCopy(matrix),
-                    toSegment.controlIn.transformCopy(matrix), toSegmentAnchor);
+            if (this.controlOut && toSegment.controlIn) {
+                rect = this._curveBoundingBox(
+                    segmentAnchor, this.controlOut.transformCopy(matrix),
+                    toSegment.controlIn.transformCopy(matrix), toSegmentAnchor
+                );
             } else {
-                rect = segment._lineBoundingBox(segmentAnchor, toSegmentAnchor);
+                rect = this._lineBoundingBox(segmentAnchor, toSegmentAnchor);
             }
+
             return rect;
         },
 
@@ -304,15 +312,17 @@
             var points = [p1, cp1, cp2, p2],
                 extremesX = this._curveExtremesFor(points, "x"),
                 extremesY = this._curveExtremesFor(points, "y"),
-                xMinMax = arrayMinMax([extremesX.min, extremesX.max, p1.x, p2.x]),
-                yMinMax = arrayMinMax([extremesY.min, extremesY.max, p1.y, p2.y]);
+                xLimits = arrayLimits([extremesX.min, extremesX.max, p1.x, p2.x]),
+                yLimits = arrayLimits([extremesY.min, extremesY.max, p1.y, p2.y]);
 
-            return new Rect(Point.create(xMinMax.min, yMinMax.min), Point.create(xMinMax.max, yMinMax.max));
+            return new Rect(Point.create(xLimits.min, yLimits.min), Point.create(xLimits.max, yLimits.max));
         },
 
         _curveExtremesFor: function(points, field) {
-            var extremes = this._curveExtremes(points[0][field], points[1][field],
-                points[2][field], points[3][field]);
+            var extremes = this._curveExtremes(
+                points[0][field], points[1][field],
+                points[2][field], points[3][field]
+            );
 
             return {
                 min: this._calculateCurveAt(extremes.min, field, points),
@@ -322,20 +332,21 @@
 
         _calculateCurveAt: function (t, field, points) {
             var t1 = 1- t;
-            return math.pow(t1, 3) * points[0][field] +
-                3 * math.pow(t1, 2) * t * points[1][field] +
-                3 * math.pow(t, 2) * t1 * points[2][field] +
-                math.pow(t, 3) * points[3][field];
+
+            return pow(t1, 3) * points[0][field] +
+                   3 * pow(t1, 2) * t * points[1][field] +
+                   3 * pow(t, 2) * t1 * points[2][field] +
+                   pow(t, 3) * points[3][field];
         },
 
         _curveExtremes: function (x1, x2, x3, x4) {
-            var a = x1 - 3 * x2 + 3 * x3 - x4,
-                b = - 2 * (x1 - 2 * x2 + x3),
-                c = x1 - x2,
-                sqrt = math.sqrt(b * b - 4 * a * c),
-                t1 = 0, t2 = 1,
-                min,
-                max;
+            var a = x1 - 3 * x2 + 3 * x3 - x4;
+            var b = - 2 * (x1 - 2 * x2 + x3);
+            var c = x1 - x2;
+            var sqrt = math.sqrt(b * b - 4 * a * c);
+            var t1 = 0;
+            var t2 = 1;
+
             if (a === 0) {
                 if (b !== 0) {
                     t1 = t2 = -c / b;
@@ -345,11 +356,12 @@
                 t2 = (- b - sqrt) / (2 * a);
             }
 
-            min = math.max(math.min(t1, t2), 0);
+            var min = math.max(math.min(t1, t2), 0);
             if (min < 0 || min > 1) {
                 min = 0;
             }
-            max = math.min(math.max(t1, t2), 1);
+
+            var max = math.min(math.max(t1, t2), 1);
             if (max > 1 || max < 0) {
                 max = 1;
             }
@@ -392,13 +404,13 @@
 
         curveTo: function(controlOut, controlIn, point) {
             if (this.segments.length > 0) {
-                var last = dataviz.last(this.segments),
-                    segment = new Segment(point, controlIn);
+                var lastSegment = last(this.segments);
+                var segment = new Segment(point, controlIn);
 
                 segment.observer = this;
 
-                last.controlOut = controlOut;
-                controlOut.observer = last;
+                lastSegment.controlOut = controlOut;
+                controlOut.observer = lastSegment;
 
                 this.segments.push(segment);
             }
@@ -414,21 +426,21 @@
         },
 
         bbox: function(transformation) {
-            var segments = this.segments,
-                length = segments.length,
-                strokeWidth = this.options.get("stroke.width"),
-                combinedMatrix = g.transformationMatrix(this.currentTransform(transformation)),
-                boundingBox,
-                i;
+            var segments = this.segments;
+            var length = segments.length;
+            var combinedMatrix = g.transformationMatrix(this.currentTransform(transformation));
+            var boundingBox;
 
             if (length === 1) {
                 var anchor = segments[0].anchor.transformCopy(combinedMatrix);
                 boundingBox = new Rect(anchor, anchor);
             } else if (length > 0) {
                 boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
-                for (i = 1; i < length; i++) {
+                for (var i = 1; i < length; i++) {
                     boundingBox = boundingBox.wrap(segments[i - 1].bboxTo(segments[i], combinedMatrix));
                 }
+
+                var strokeWidth = this.options.get("stroke.width");
                 if (strokeWidth) {
                     expandRect(boundingBox, strokeWidth / 2);
                 }
@@ -456,7 +468,7 @@
 
         lineTo: function(x, y) {
             if (this.paths.length > 0) {
-                dataviz.last(this.paths).lineTo(x, y);
+                last(this.paths).lineTo(x, y);
             }
 
             return this;
@@ -464,7 +476,7 @@
 
         curveTo: function(controlOut, controlIn, point) {
             if (this.paths.length > 0) {
-                dataviz.last(this.paths).curveTo(controlOut, controlIn, point);
+                last(this.paths).curveTo(controlOut, controlIn, point);
             }
 
             return this;
@@ -472,7 +484,7 @@
 
         close: function() {
             if (this.paths.length > 0) {
-                dataviz.last(this.paths).close();
+                last(this.paths).close();
             }
 
             return this;
@@ -483,22 +495,15 @@
         }
     });
 
-    // Sector
-    // Ring
-
-
-    //utility =====================================================
+    // Helper functions ===========================================
     function elementsBoundingBox(elements, transformation) {
-        var length = elements.length,
-            boundingBox = new Rect(Point.maxPoint(), Point.minPoint()),
-            hasBoundingBox = false,
-            elementBoundingBox,
-            i, element;
+        var boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
+        var hasBoundingBox = false;
 
-        for (i = 0; i < length; i++) {
-            element = elements[i];
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
             if (element.visible()) {
-                elementBoundingBox = element.bbox(transformation);
+                var elementBoundingBox = element.bbox(transformation);
                 if (elementBoundingBox) {
                     hasBoundingBox = true;
                     boundingBox = boundingBox.wrap(elementBoundingBox);
@@ -512,9 +517,7 @@
     }
 
     function updateElementsParent(elements, parent) {
-        var length = elements.length,
-            i;
-        for (i = 0; i < length; i++) {
+        for (var i = 0; i < elements.length; i++) {
             elements[i].parent = parent;
         }
     }
