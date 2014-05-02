@@ -55,6 +55,7 @@ var __meta__ = {
     };
     var NS = ".kendoGanttList";
     var CLICK = "click";
+    var DROPPOSITIONS = "k-insert-top k-insert-bottom k-add";
 
     ui.GanttList = Widget.extend({
         init: function(element, options) {
@@ -73,11 +74,20 @@ var __meta__ = {
             this._sortable();
             this._editable();
             this._selectable();
+            this._draggable();
             this._attachEvents();
         },
 
         destroy: function() {
             Widget.fn.destroy.call(this);
+
+            if (this._reorderDraggable) {
+                this._reorderDraggable.destroy();
+            }
+
+            if (this._dropTargetArea) {
+                this._dropTargetArea.destroy();
+            }
 
             this.content.off(NS);
             this.header = null;
@@ -456,6 +466,126 @@ var __meta__ = {
                 this.dataSource.update(model, taskInfo);
                 this.trigger("update");
             }
+        },
+
+        _draggable: function() {
+            var that = this;
+            var draggedTask = null;
+            var dropAllowed = true;
+            var dropTarget;
+            var action = {};
+            var clear = function() {
+                draggedTask = null;
+                dropTarget = null;
+                dropAllowed = true;
+            };
+            var allowDrop = function(task) {
+                if (task.get("id") === draggedTask.get("id")) {
+                    dropAllowed = false;
+                    return;
+                }
+
+                var parent = that.dataSource.taskParent(task);
+
+                while (parent) {
+                    if (draggedTask.get("id") === parent.get("id")) {
+                        dropAllowed = false;
+                        break;
+                    }
+                    parent = that.dataSource.taskParent(parent);
+                }
+            };
+            var defineLimits = function() {
+                var height = $(dropTarget).height();
+                var offsetTop = kendo.getOffset(dropTarget).top;
+
+                extend(dropTarget, { 
+                    beforeLimit: offsetTop + height * 0.25,
+                    afterLimit: offsetTop + height * 0.75
+                });
+            };
+            var defineAction = function(coordinate) {
+                var location = coordinate.location;
+                var className = "k-add";
+                var command = "add";
+
+                if (location <= dropTarget.beforeLimit) {
+                    className = "k-insert-top";
+                    command = "insert-before";
+                } else if (location >= dropTarget.afterLimit) {
+                    className = "k-insert-bottom";
+                    command = "insert-after";
+                }
+
+                action.className = className;
+                action.command = command;
+            };
+            var status = function() {
+                return that._reorderDraggable.hint
+                            .children(".k-drag-status");
+            };
+
+            this._reorderDraggable = this.content
+                .kendoDraggable({
+                    distance: 0,
+                    filter: "tr[data-uid]",
+                    hint: function(target) {
+                        return $('<div class="k-header k-drag-clue"/>')
+                                .css({
+                                    width: 300,
+                                    paddingLeft: target.css("paddingLeft"),
+                                    paddingRight: target.css("paddingRight"),
+                                    lineHeight: target.height() + "px",
+                                    paddingTop: target.css("paddingTop"),
+                                    paddingBottom: target.css("paddingBottom")
+                                })
+                                .append('<span class="k-icon k-drag-status" /><span class="k-clue-text"/>');
+                    },
+                    cursorOffset: { top: 10, left: 0 },
+                    container: this.content,
+                    "dragstart": function(e) {
+                        draggedTask = that._modelFromElement(e.currentTarget);
+                        this.hint.children(".k-clue-text")
+                            .text(draggedTask.get("title"));
+                    },
+                    "drag": function(e) {
+                        if (dropAllowed) {
+                            defineAction(e.y);
+                            status().addClass(action.className);
+                        }
+                    },
+                    "dragend": function(e) {
+                        clear();
+                    },
+                    "dragcancel": function(e) {
+                        clear();
+                    }
+                }).data("kendoDraggable");
+
+            this._dropTargetArea = this.content
+                .kendoDropTargetArea({
+                    distance: 0,
+                    filter: "tr[data-uid]",
+                    "dragenter": function(e) {
+                        dropTarget = e.dropTarget;
+                        allowDrop(that._modelFromElement(dropTarget));
+                        defineLimits();
+                        status().toggleClass("k-denied", !dropAllowed);
+                    },
+                    "dragleave": function(e) {
+                        dropAllowed = true;
+                        status().removeClass(DROPPOSITIONS);
+                    },
+                    "drop": function(e) {
+                        if (dropAllowed) {
+                            that.trigger("command", {
+                                type: action.command,
+                                updated: draggedTask,
+                                target: that._modelFromElement(dropTarget)
+                            });
+                        }
+                    }
+                }).data("kendoDropTargetArea");
         },
 
         _modelFromElement: function(element) {
