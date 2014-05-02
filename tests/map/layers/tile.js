@@ -179,7 +179,7 @@
         });
 
         test("createTile should render tile from a tile index", function() {
-            view.options.urlTemplate = "javascript:void('#= subdomain #/#= zoom #/#= x #/#= y #'.png)";
+            view.options.urlTemplate = "javascript:void('#= subdomain #/#= zoom #/#= x #/#= y #.png')";
             var index = { x: 1, y:1 };
             var tile = view.createTile(index);
             ok(tile.options.point.equals(new Point(256, 256)));
