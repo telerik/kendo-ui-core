@@ -14,11 +14,11 @@
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
+        defined = dataviz.defined,
 
         Extent = dataviz.map.Extent,
         Location = dataviz.map.Location,
         Layer = dataviz.map.layers.Layer,
-
         TileLayer = dataviz.map.layers.TileLayer,
         TileView = dataviz.map.layers.TileView;
 
@@ -38,10 +38,10 @@
             var options = this.options;
 
             if (options.key && options.settingsUrl) {
-                var settingsTemplate = template(this.options.settingsUrl);
+                var settingsTemplate = template(options.settingsUrl);
                 var settingsUrl = settingsTemplate({
-                        key: this.options.key,
-                        imagerySet: this.options.imagerySet
+                        key: options.key,
+                        imagerySet: options.imagerySet
                     });
 
                 $.ajax({
@@ -63,10 +63,16 @@
                         .replace("{subdomain}", "#= subdomain #")
                         .replace("{quadkey}", "#= quadkey #")
                         .replace("{culture}", "#= culture #"),
-                    subdomains: resource.imageUrlSubdomains,
-                    maxZoom: resource.zoomMax,
-                    minZoom: resource.zoomMin
+                    subdomains: resource.imageUrlSubdomains
                 });
+
+                var options = this.options;
+                if (!defined(options.minZoom)) {
+                    options.minZoom = resource.zoomMin;
+                }
+                if (!defined(options.maxZoom)) {
+                    options.maxZoom = resource.zoomMax;
+                }
 
                 this._addAttribution();
                 this.reset();
