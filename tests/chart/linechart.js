@@ -55,9 +55,9 @@
     baseLineChartTests("line", dataviz.LineChart);
 
     (function() {
-        var positiveSeries = { data: [1, 2], labels: {} },
-            negativeSeries = { data: [-1, -2], labels: {} },
-            sparseSeries = { data: [1, 2, undefined, 2], width: 0 },
+        var positiveSeries = { type: "line", data: [1, 2], labels: {} },
+            negativeSeries = { type: "line", data: [-1, -2], labels: {} },
+            sparseSeries = { type: "line", data: [1, 2, undefined, 2], width: 0 },
             VALUE_AXIS_MAX = 2,
             CATEGORY_AXIS_Y = 2;
 
@@ -177,7 +177,8 @@
                 setupLineChart(plotArea, {
                     series: [ sparseSeries ]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("ignores null values when reporting minimum series value", function() {
@@ -199,6 +200,20 @@
             });
 
             equal(lineChart.points[2].value, 0);
+        });
+
+        test("missing points are plotted at 0", function() {
+            var chart = createChart({
+                series: [
+                    $.extend({ missingValues: "zero" }, sparseSeries)
+                ],
+                valueAxis: {
+                    axisCrossingValue: -1000
+                }
+            });
+
+            lineChart = chart._model._plotArea.charts[0];
+            deepEqual(lineChart.plotRange(lineChart.points[2]), [0, 0]);
         });
 
         test("getNearestPoint returns nearest series point (left)", function() {

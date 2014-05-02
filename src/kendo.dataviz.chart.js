@@ -4723,11 +4723,11 @@ var __meta__ = {
         },
 
         plotRange: function(point) {
-            var categoryIx = point.categoryIx;
-            var categoryPts = this.categoryPoints[categoryIx];
+            var plotValue = this.plotValue(point);
 
             if (this.options.isStacked) {
-                var plotValue = this.plotValue(point);
+                var categoryIx = point.categoryIx;
+                var categoryPts = this.categoryPoints[categoryIx];
 
                 for (var i = 0; i < categoryPts.length; i++) {
                     var other = categoryPts[i];
@@ -4739,11 +4739,9 @@ var __meta__ = {
                     plotValue += this.plotValue(other);
                 }
 
-                return [plotValue, plotValue];
-            } else {
-                var plotRange = CategoricalChart.fn.plotRange.call(this, point);
-                return [plotRange[1], plotRange[1]];
             }
+
+            return [plotValue, plotValue];
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
