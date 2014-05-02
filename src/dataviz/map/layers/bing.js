@@ -26,27 +26,32 @@
     var BingLayer = TileLayer.extend({
         init: function(map, options) {
             TileLayer.fn.init.call(this, map, options);
-
-            var settingsTemplate = template(this.options.settingsUrl),
-                settingsUrl = settingsTemplate({
-                    key: this.options.key,
-                    imagerySet: this.options.imagerySet
-                });
-
-            this.map = map;
-
-            $.ajax({
-                url: settingsUrl,
-                type: "get",
-                dataType: "jsonp",
-                jsonpCallback: "bingTileParams",
-                success: proxy(this._success, this)
-            });
+            this._initView();
         },
 
         options: {
             settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= imagerySet #?output=json&jsonp=bingTileParams&include=ImageryProviders&key=#= key #",
             imagerySet: "road"
+        },
+
+        _initView: function() {
+            var options = this.options;
+
+            if (options.key && options.settingsUrl) {
+                var settingsTemplate = template(this.options.settingsUrl);
+                var settingsUrl = settingsTemplate({
+                        key: this.options.key,
+                        imagerySet: this.options.imagerySet
+                    });
+
+                $.ajax({
+                    url: settingsUrl,
+                    type: "get",
+                    dataType: "jsonp",
+                    jsonpCallback: "bingTileParams",
+                    success: proxy(this._success, this)
+                });
+            }
         },
 
         _success: function(data) {
