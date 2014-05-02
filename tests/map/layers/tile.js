@@ -114,6 +114,7 @@
                             .appendTo(document.body);
 
             view = new TileView(element, {
+                urlTemplate: "javascript:void(0)",
                 tileSize: options.tileSize || 256
             });
 
@@ -178,14 +179,14 @@
         });
 
         test("createTile should render tile from a tile index", function() {
-            view.options.urlTemplate = "#= subdomain #/#= zoom #/#= x #/#= y #.png";
+            view.options.urlTemplate = "javascript:void('#= subdomain #/#= zoom #/#= x #/#= y #'.png)";
             var index = { x: 1, y:1 };
             var tile = view.createTile(index);
             ok(tile.options.point.equals(new Point(256, 256)));
             ok(tile.options.offset.equals(new Point(-1704, -954)));
             equal(tile.options.index.x, index.x);
             equal(tile.options.index.y, index.y);
-            equal(tile.url(), "a/4/1/1.png");
+            equal(tile.url(), "javascript:void('a/4/1/1.png')");
             ok(!tile.options.visible);
         });
 
@@ -304,7 +305,7 @@
 
         test("should render url", function() {
             tile = createImageTile({
-                urlTemplate: "url"
+                urlTemplate: "javascript:void(0)"
             });
 
             equal(tile.element.attr("src"), tile.url());
@@ -328,18 +329,18 @@
 
         test("urlTemplate", function() {
             tile = createImageTile({
-                urlTemplate: "sudomain: #= s #, zoom: #= z #, x: #= x #, y: #= y #"
+                urlTemplate: "javascript:void('#= s # #= z # #= x # #= y #')"
             });
 
-            equal(tile.url(), "sudomain: a, zoom: 1, x: 0, y: 0");
+            equal(tile.url(), "javascript:void('a 1 0 0')");
         });
 
         test("errorUrlTemplate", function() {
             tile = createImageTile({
-                errorUrlTemplate: "sudomain: #= s #, zoom: #= z #, x: #= x #, y: #= y #"
+                errorUrlTemplate: "javascript:void('#= s # #= z # #= x # #= y #')"
             });
 
-            equal(tile.errorUrl(), "sudomain: a, zoom: 1, x: 0, y: 0");
+            equal(tile.errorUrl(), "javascript:void('a 1 0 0')");
         });
 
         test("should have id", function() {
