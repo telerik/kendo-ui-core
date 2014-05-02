@@ -8,20 +8,24 @@
         deepExtend = kendo.deepExtend,
         Point = dataviz.geometry.Point;
 
+    var VOID_URL = "javascript: void(0);";
+
     (function() {
         var map,
             layer;
 
         function createBingLayer(options) {
             map = new MapMock();
-            layer = new BingLayer(map, options);
+            layer = new BingLayer(map, deepExtend({
+                settingsUrl: null
+            }, options));
         }
 
         function setResource(res) {
             layer._success({
                 resourceSets: [{
                     resources: [deepExtend({
-                        imageUrl: "javascript: void(0)"
+                        imageUrl: VOID_URL
                     }, res)]
                 }]
             });
@@ -39,7 +43,7 @@
         });
 
         test("sets custom z-index", function() {
-            layer = new BingLayer(map, { zIndex: 100 });
+            createBingLayer({ zIndex: 100 });
             equal(layer.element.css("zIndex"), 100);
         });
 
@@ -87,7 +91,18 @@
             equal(layer._view.options.urlTemplate, "javascript:void('#= subdomain #/#= quadkey #/#= culture #')");
         });
 
+        test("error is thrown if no key is defined", function() {
+            raises(function() {
+                    createBingLayer({ key: null, settingsUrl: VOID_URL });
+                },
+                Error
+            );
+        });
     })();
 
-    baseLayerTests("Bing Layer", BingLayer);
+    var DummyBingLayer = BingLayer.extend({
+        _initView: $.noop
+    });
+
+    baseLayerTests("Bing Layer", DummyBingLayer);
 })();

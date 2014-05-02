@@ -37,21 +37,27 @@
         _initView: function() {
             var options = this.options;
 
-            if (options.key && options.settingsUrl) {
-                var settingsTemplate = template(options.settingsUrl);
-                var settingsUrl = settingsTemplate({
-                        key: options.key,
-                        imagerySet: options.imagerySet
-                    });
-
-                $.ajax({
-                    url: settingsUrl,
-                    type: "get",
-                    dataType: "jsonp",
-                    jsonpCallback: "bingTileParams",
-                    success: proxy(this._success, this)
-                });
+            if (!options.settingsUrl) {
+                return;
             }
+
+            if (!options.key) {
+                throw new Error("Bing tile layer: API key is required");
+            }
+
+            var settingsTemplate = template(options.settingsUrl);
+            var settingsUrl = settingsTemplate({
+                    key: options.key,
+                    imagerySet: options.imagerySet
+                });
+
+            $.ajax({
+                url: settingsUrl,
+                type: "get",
+                dataType: "jsonp",
+                jsonpCallback: "bingTileParams",
+                success: proxy(this._success, this)
+            });
         },
 
         _success: function(data) {
