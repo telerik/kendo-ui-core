@@ -142,6 +142,18 @@ grunt custom:autocomplete,dropdownlist
 
 If you want to skip building Kendo UI Core yourself, head on over to [Telerik.com](http://www.telerik.com/kendo-ui/open-source-core) to grab the full source.
 
+## Using Kendo UI Core via the Kendo Static CDN
+
+You can also easily include Kendo UI Core into your site or application using the Kendo CDN:
+
+```
+<link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.default.min.css" rel="stylesheet" />
+<script src="http://cdn.kendostatic.com/2014.1.416/js/jquery.min.js"></script>    
+<script src="http://cdn.kendostatic.com/2014.1.416/js/kendo.ui.core.min.js"></script> 
+```
+The main advantage to this is that your users may be able to leverage a primed cache version of Kendo UI Core if they've visited other sites using the framework.
+
 ## Documentation
 
 For complete Kendo UI Documentation, including Kendo UI Core, please visit http://docs.telerik.com/kendo-ui.
