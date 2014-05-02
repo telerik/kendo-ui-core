@@ -191,7 +191,9 @@
                 { title: "Task2", parentId: null, id: 7, summary: true, expanded: true },
                     { title: "Child 2.1", parentId: 7, id: 8, summary: false },
                     { title: "Child 2.2", parentId: 7, id: 9, summary: false },
-                    { title: "Child 2.3", parentId: 7, id: 10, summary: false }
+                    { title: "Child 2.3", parentId: 7, id: 10, summary: false },
+                { title: "Task3", parentId: null, id: 11, summary: true, expanded: false },
+                    { title: "Child 3.1", parentId: 11, id: 12, summary: false }
                 ],
                 schema: {
                     model: {
@@ -237,10 +239,10 @@
         equal(content.find("tbody").attr("role"), "rowgroup");
     });
 
-    test("table tr elements for each task", function() {
+    test("table tr elements for each visible task", function() {
         var content = ganttList.content;
 
-        equal(content.find("tr").length, dataSource.total());
+        equal(content.find("tr").length, dataSource.taskTree().length);
     });
 
     test("table tr elements attr", function() {
@@ -298,11 +300,20 @@
         content.find("tr").each(test);
     });
 
-    test("table td element with span with collapse icon summary tasks", function() {
+    test("table td element with span with collapse icon expanded summary tasks", function() {
         var content = ganttList.content;
-        var span = content.find("tr").eq(0).children("td").eq(0).children("span");
+        var span = content.find("tr").eq(0)
+            .children("td").eq(0).children("span");
 
         ok(span.hasClass("k-i-collapse"));
+    });
+
+    test("table td element with span with expand icon collapsed summary tasks", function() {
+        var content = ganttList.content;
+        var span = content.find("tr").eq(11)
+            .children("td").eq(0).children("span");
+
+        ok(span.hasClass("k-i-expand"));
     });
 
     test("table td element with span with hidden icon non-summary tasks", function() {

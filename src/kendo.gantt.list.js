@@ -15,6 +15,8 @@ var __meta__ = {
     var paddingStep = 26;
     var kendo = window.kendo;
     var kendoDom = kendo.dom;
+    var kendoDomElement = kendoDom.element;
+    var kendoTextElement = kendoDom.text;
     var activeElement = kendo._activeElement;
     var browser = kendo.support.browser;
     var isIE = browser.msie;
@@ -69,7 +71,7 @@ var __meta__ = {
 
             this._columns();
             this._layout();
-            this._dom();
+            this._domTrees();
             this._header();
             this._sortable();
             this._editable();
@@ -120,7 +122,7 @@ var __meta__ = {
                 });
         },
 
-        _dom: function() {
+        _domTrees: function() {
             this.headerTree = new kendoDom.Tree(this.header[0]);
             this.contentTree = new kendoDom.Tree(this.content[0]);
         },
@@ -161,30 +163,28 @@ var __meta__ = {
             var thead;
             var table;
 
-            colgroup = domTree.element("colgroup", null, this._cols(domTree));
-            thead = domTree.element("thead", { role: "rowgroup" }, [domTree.element("tr", null, this._ths())]);
-            table = domTree.element("table", { role: "grid" }, [colgroup, thead]);
+            colgroup = kendoDomElement("colgroup", null, this._cols());
+            thead = kendoDomElement("thead", { role: "rowgroup" }, [kendoDomElement("tr", null, this._ths())]);
+            table = kendoDomElement("table", { role: "grid" }, [colgroup, thead]);
 
             domTree.render([table]);
         },
 
         _render: function(tasks) {
-            var domTree = this.contentTree;
             var colgroup;
             var tbody;
             var table;
 
             this.levels = [{ field: null, value: 0 }];
 
-            colgroup = domTree.element("colgroup", null, this._cols(domTree));
-            tbody = domTree.element("tbody", { role: "rowgroup" }, this._trs(tasks));
-            table = domTree.element("table", { role: "grid" }, [colgroup, tbody]);
+            colgroup = kendoDomElement("colgroup", null, this._cols());
+            tbody = kendoDomElement("tbody", { role: "rowgroup" }, this._trs(tasks));
+            table = kendoDomElement("table", { role: "grid" }, [colgroup, tbody]);
 
-            domTree.render([table]);
+            this.contentTree.render([table]);
         },
 
         _ths: function() {
-            var domTree = this.headerTree;
             var columns = this.columns;
             var column;
             var style;
@@ -198,13 +198,13 @@ var __meta__ = {
                     extend(style, { "data-role": "sorter" });
                 }
 
-                ths.push(domTree.element("th", style, [domTree.text(column.title)]));
+                ths.push(kendoDomElement("th", style, [kendoTextElement(column.title)]));
             }
 
             return ths;
         },
 
-        _cols: function(domTree) {
+        _cols: function() {
             var columns = this.columns;
             var column;
             var style;
@@ -219,7 +219,7 @@ var __meta__ = {
                     style = null;
                 }
 
-                cols.push(domTree.element("col", style, []));
+                cols.push(kendoDomElement("col", style, []));
             }
 
             return cols;
@@ -234,7 +234,8 @@ var __meta__ = {
 
                 rows.push(this._tds({
                     task: task,
-                    style: i % 2 !== 0 ? { className: "k-alt", role: "row", "data-uid": task.uid } : { role: "row", "data-uid": task.uid }
+                    style: i % 2 !== 0 ? { className: "k-alt", role: "row", "data-uid": task.uid } :
+                        { role: "row", "data-uid": task.uid }
                 }));
             }
 
@@ -252,30 +253,33 @@ var __meta__ = {
                 children.push(this._td({ task: options.task, column: column }));
             }
 
-            return this.contentTree.element("tr", options.style, children);
+            return kendoDomElement("tr", options.style, children);
         },
 
         _td: function(options) {
             var children;
-            var domTree = this.contentTree;
             var task = options.task;
             var column = options.column;
             var value = task.get(column.field);
             var formatedValue = column.format ? kendo.format(column.format, value) : value;
-            var isSummary = task.get("summary");
+            var isSummary;
             var style = null;
 
-            if (column.field == "title") {
-                style = this._level({ idx: task.get("parentId"), id: task.get("id"), summary: isSummary });
+            if (column.field === "title") {
+                isSummary = task.summary;
+                style = this._level({ idx: task.parentId, id: task.id, summary: isSummary });
                 children = [
-                    domTree.element("span", { className: isSummary ? "k-icon k-i-collapse" : "k-icon k-i-none" }),
-                    domTree.element("span", null, [domTree.text(formatedValue)])
+                    kendoDomElement("span", {
+                        className: "k-icon" + (isSummary ? (task.expanded ? " k-i-collapse" : " k-i-expand")
+                            : " k-i-none")
+                    }),
+                    kendoDomElement("span", null, [kendoTextElement(formatedValue)])
                 ];
             } else {
-                children = [domTree.element("span", null, [domTree.text(formatedValue)])];
+                children = [kendoDomElement("span", null, [kendoTextElement(formatedValue)])];
             }
 
-            return domTree.element("td", style, children);
+            return kendoDomElement("td", style, children);
         },
 
         _level: function(options) {

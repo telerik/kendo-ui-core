@@ -83,7 +83,7 @@
     });
 
     test("clicking on icon toggles expanded/collapsed classes", 2, function() {
-        setup({ columns: [], data: [{ title: "foo", parentId: null, id: 1, summary: true }] })
+        setup({ columns: [], data: [{ title: "foo", parentId: null, id: 1, summary: true, expanded: true }] })
         var target = ganttList.content.find(".k-icon:not(.k-i-none)").eq(0);
 
         target.click();
