@@ -25,7 +25,7 @@
     // Bing tile layer =============================================================
     var BingLayer = TileLayer.extend({
         init: function(map, options) {
-            this._initOptions(options);
+            TileLayer.fn.init.call(this, map, options);
 
             var settingsTemplate = template(this.options.settingsUrl),
                 settingsUrl = settingsTemplate({
@@ -53,7 +53,7 @@
             if (data && data.resourceSets.length) {
                 var resource = this.resource = data.resourceSets[0].resources[0];
 
-                TileLayer.fn.init.call(this, this.map, {
+                deepExtend(this._view.options, {
                     urlTemplate: resource.imageUrl
                         .replace("{subdomain}", "#= subdomain #")
                         .replace("{quadkey}", "#= quadkey #")
@@ -99,7 +99,7 @@
 
     var BingView = TileView.extend({
         options: {
-            culture: "en-Us"
+            culture: "en-US"
         },
 
         tileOptions: function(currentIndex) {
