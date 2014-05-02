@@ -366,3 +366,56 @@ test("visualBase should render stroke", function() {
     equal(element.domElement.getAttribute("stroke-width"), 20);
     equal(element.domElement.getAttribute("stroke-dasharray"), "30 70");
 });
+
+/*-----------------------------------------------*/
+var image;
+
+module("Image / redraw", {
+    setup: function() {
+        image = new diagram.Image({ });
+    },
+    teardown: function() {
+        $(image.domElement).remove();
+        delete image;
+    }
+});
+
+test("should set correct width", function() {
+    var width = 20;
+
+    image.redraw({
+        width: width
+    });
+
+    equal(image.domElement.getAttribute("width"), width);
+});
+
+test("should set correct height", function() {
+    var height = 20;
+
+    image.redraw({
+        height: height
+    });
+
+    equal(image.domElement.getAttribute("height"), height);
+});
+
+test("should set correct x", function() {
+    var x = 1;
+
+    image.redraw({
+        x: x
+    });
+
+    equal(image.domElement.getAttribute("x"), x);
+});
+
+test("should set correct y", function() {
+    var y = 1;
+
+    image.redraw({
+        y: y
+    });
+
+    equal(image.domElement.getAttribute("y"), y);
+});

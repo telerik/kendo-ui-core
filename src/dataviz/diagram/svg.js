@@ -746,7 +746,7 @@
             this.setAtr("width", "width");
             this.setAtr("height", "height");
             this.setAtr("x", "x");
-            this.setAtr("y", "x");
+            this.setAtr("y", "y");
         }
     });
 
