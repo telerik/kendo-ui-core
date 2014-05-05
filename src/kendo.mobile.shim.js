@@ -65,10 +65,17 @@ var __meta__ = {
                     }
                 },
 
-                deactivate: function() {
-                    shim.hide();
+                deactivate: function(e) {
+                    var prevented = false;
+
                     if (!that._apiCall) {
-                        that.trigger(HIDE);
+                        prevented = that.trigger(HIDE);
+                    }
+
+                    if (!prevented) {
+                        shim.hide();
+                    } else {
+                        e.preventDefault();
                     }
 
                     that._apiCall = false;
