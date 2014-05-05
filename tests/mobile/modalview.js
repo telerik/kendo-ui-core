@@ -65,6 +65,13 @@
         equal(root.find(".km-shim").css("display"), "none");
     });
 
+    test("Preventing the event keeps the modalview open", 1, function() {
+        modalView.open();
+        modalView.bind("close", function(e) { e.preventDefault(); });
+        tap(root.find(".km-shim"));
+        equal(root.find(".km-shim").css("display"), "block");
+    });
+
     test("data-rel=modalview widget opens the modalview", 1, function() {
         root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
         equal(root.find(".km-shim").css("display"), "block");

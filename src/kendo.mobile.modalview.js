@@ -49,7 +49,9 @@ var __meta__ = {
                 effect: "fade:in",
                 className: "km-modalview-root",
                 hide: function(e) {
-                    that.trigger(CLOSE);
+                    if (that.trigger(CLOSE)) {
+                        e.preventDefault();
+                    };
                 }
             });
 
@@ -102,8 +104,9 @@ var __meta__ = {
         },
 
         close: function() {
-            this.shim.hide();
-            this.trigger(CLOSE);
+            if (this.trigger(CLOSE)) {
+                this.shim.hide();
+            }
         }
     });
 
