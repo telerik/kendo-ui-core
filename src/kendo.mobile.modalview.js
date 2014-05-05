@@ -51,7 +51,7 @@ var __meta__ = {
                 hide: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
-                    };
+                    }
                 }
             });
 
