@@ -3,6 +3,7 @@ namespace Kendo.Mvc.Infrastructure
     using System;
     using System.Globalization;
 
+    [Serializable]
     public class AggregateResult
     {
         private object aggregateValue;
