@@ -296,8 +296,9 @@
 }
 
 /* Overlay */
-.k-fx-overlay {
-    &.k-fx-start .k-fx-next {
+.k-fx.k-fx-overlay {
+    &.k-fx-start .k-fx-next,
+    &.k-fx-left.k-fx-start .k-fx-next, {
         .transform(translatex(100%));
     }
 
@@ -322,7 +323,8 @@
             .transform(none);
         }
 
-        &.k-fx-end .k-fx-current {
+        &.k-fx-end .k-fx-current,
+        &.k-fx-left.k-fx-end .k-fx-current {
             .transform(translatex(100%));
         }
 
