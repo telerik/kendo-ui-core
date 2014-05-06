@@ -3793,7 +3793,7 @@ var __meta__ = {
             } else if (type === STRING) {
                 html += template;
             } else if (columnValues && columnValues.length && isPlainObject(columnValues[0]) && "value" in columnValues[0] && field) {
-                html += "#var v =" + kendo.stringify(convertToObject(columnValues)) + "#";
+                html += "#var v =" + kendo.stringify(convertToObject(columnValues)).replace(templateHashRegExp, "\\#") + "#";
                 html += "#var f = v[";
 
                 if (!settings.useWithBlock) {

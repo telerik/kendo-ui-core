@@ -1146,6 +1146,15 @@
         equal(grid.items().first().find("td:first").text(), "custom text1");
     });
 
+    test("column displays value from values with #", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}],
+            columns: [ { field: "foo", values: [ { value: 0, text: "custom text" }, { value: 1, text: "custom # text1" },{ value: 2, text: "custom text2" }] } ]
+        });
+
+        equal(grid.items().first().find("td:first").text(), "custom # text1");
+    });
+
     test("column displays field defined via array access", function() {
         var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
