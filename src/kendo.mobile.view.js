@@ -230,7 +230,7 @@ var __meta__ = {
             that.element.css("display", "");
             if (that.options.initWidgets) {
                 if (model) {
-                    kendo.bind(element.children(), model, ui, kendo.ui, kendo.dataviz.ui);
+                    kendo.bind(element, model, ui, kendo.ui, kendo.dataviz.ui);
                 } else {
                     mobile.init(element.children());
                 }
