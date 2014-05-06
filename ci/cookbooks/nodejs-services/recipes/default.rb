@@ -1,6 +1,6 @@
-bash "install_forever" do
-    code "npm install -g forever"
-    creates "/usr/bin/forever"
+bash "Install supervisor from NPM" do
+    code "npm install -g supervisor"
+    creates "/usr/bin/supervisor"
 end
 
 services = [
