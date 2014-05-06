@@ -2097,7 +2097,8 @@ function pad(number, digits, end) {
         })();
 
         support.matchesSelector = elementProto.webkitMatchesSelector || elementProto.mozMatchesSelector ||
-                                  elementProto.msMatchesSelector || elementProto.oMatchesSelector || elementProto.matchesSelector ||
+                                  elementProto.msMatchesSelector || elementProto.oMatchesSelector ||
+                                  elementProto.matchesSelector || elementProto.matches ||
           function( selector ) {
               var nodeList = document.querySelectorAll ? ( this.parentNode || document ).querySelectorAll( selector ) || [] : $(selector),
                   i = nodeList.length;
