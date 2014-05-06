@@ -44,6 +44,17 @@
         equal(root.find("i").text(), "bar");
     });
 
+    test("binds to init event to model", 1, function() {
+        window.vm = {
+            onInit: function() {
+                ok(true);
+            }
+        };
+
+        setup('<div data-model="vm" data-role="view" data-bind="events: {init: onInit}"></div>');
+        view.trigger("init");
+    });
+
     test("initializes web widgets when binding", 1, function() {
         setup('<div data-model="viewModel" data-role="view"><select data-role="dropdownlist" id="foo"><option></option></select></div>');
         ok(root.find("#foo").data("kendoDropDownList"));
