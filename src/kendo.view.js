@@ -34,6 +34,7 @@ var __meta__ = {
             that.tagName = options.tagName || "div";
             that.model = options.model;
             that._wrap = options.wrap !== false;
+            this._evalTemplate = options.evalTemplate || false;
             that._fragments = {};
 
             that.bind([ INIT, SHOW, HIDE ], options);
@@ -116,7 +117,6 @@ var __meta__ = {
 
         _createElement: function() {
             var that = this,
-                wrap = that._wrap,
                 wrapper = "<" + that.tagName + " />",
                 element,
                 content;
@@ -134,19 +134,23 @@ var __meta__ = {
             }
 
             if (typeof content === "string") {
-                element = $(wrapper).append(kendo.template(content)(that.model || {}));
+                if (that._evalTemplate) {
+                    content = kendo.template(content)(that.model || {});
+                }
+
+                element = $(wrapper).append(content);
                 kendo.stripWhitespace(element[0]);
                 // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like this one for instance:
                 // <script id="my-template">
                 // foo
                 // <span> Span </span>
                 // </script>
-                if (!wrap) {
+                if (!that._wrap) {
                    element = element.contents();
                 }
             } else {
                 element = content;
-                if (wrap) {
+                if (that._wrap) {
                     element = element.wrapAll(wrapper).parent();
                 }
             }
