@@ -94,6 +94,9 @@ var __meta__ = {
             this.header = null;
             this.content = null;
 
+            this._dragHint = null;
+            this._resizeHint = null;
+
             this._headerTree = null;
             this._taskTree = null;
             this._dependencyTree = null;
@@ -362,16 +365,23 @@ var __meta__ = {
             return startIdx;
         },
 
-        _timeByPosition: function(x) {
+        _timeByPosition: function(x, snap, snapToEnd) {
             var slot = this._slotByPosition(x);
+
+            if (snap) {
+                return snapToEnd ? slot.end : slot.start;
+            }
+
+            var offsetLeft = x - (this.content.offset().left - this.content.scrollLeft());
             var duration = slot.end - slot.start;
-            var slotOffset = duration * ((x - slot.offsetLeft) / slot.offsetWidth);
+            var slotOffset = duration * ((offsetLeft - slot.offsetLeft) / slot.offsetWidth);
 
             return new Date(slot.start.getTime() + slotOffset);
         },
 
         _slotByPosition: function(x) {
-            var slotIndex = this._slotIndex("offsetLeft", x);
+            var offsetLeft = x - (this.content.offset().left - this.content.scrollLeft());
+            var slotIndex = this._slotIndex("offsetLeft", offsetLeft);
 
             return this._timeSlots()[slotIndex];
         },
@@ -595,6 +605,56 @@ var __meta__ = {
             }
 
             return kendoDomElement("colgroup", null, cols);
+        },
+
+        _createDragHint: function(element) {
+            this._dragHint = element
+                .clone()
+                .css("cursor", "move");
+
+            element
+                .parent()
+                .append(this._dragHint);
+        },
+
+        _updateDragHint: function(start) {
+            var left = this._offset(start);
+
+            this._dragHint
+                .css({
+                    "left": left
+                });
+        },
+
+        _removeDragHint: function() {
+            this._dragHint.remove();
+            this._dragHint = null;
+        },
+
+        _createResizeHint: function() {
+            this._resizeHint = $(RESIZE_HINT).css({
+                "top": 0,
+                "height": "100%"
+            });
+
+            this.content.append(this._resizeHint);
+        },
+
+        _updateResizeHint: function(start, end) {
+            var left = this._offset(start);
+            var right = this._offset(end);
+            var width = right - left;
+
+            this._resizeHint
+                .css({
+                    "left": left,
+                    "width": width
+                });
+        },
+
+        _removeResizeHint: function() {
+            this._resizeHint.remove();
+            this._resizeHint = null;
         },
 
         _timeSlots: function() {
@@ -1080,21 +1140,17 @@ var __meta__ = {
         _draggable: function() {
             var that = this;
             var element;
-            var dragClue;
-            var originalStart;
             var currentStart;
-            var newStart;
+            var startOffset;
+            var snap = this.options.snap;
 
             var cleanUp = function() {
-                if (dragClue) {
-                    dragClue.remove();
-                }
+                that.view()._removeDragHint();
 
                 if (element) {
                     element.css("opacity", 1);
                 }
 
-                dragClue = null;
                 element = null;
             };
 
@@ -1106,6 +1162,7 @@ var __meta__ = {
 
             this._moveDraggable
                 .bind("dragstart", function(e) {
+                    var view = that.view();
                     element = e.currentTarget;
 
                     if (that.trigger("moveStart", { uid: element.attr("data-uid") })) {
@@ -1113,36 +1170,25 @@ var __meta__ = {
                         return;
                     }
 
-                    dragClue = element
-                        .clone()
-                        .css("cursor", "move");
+                    currentStart = view._timeByPosition(element.offset().left);
+                    startOffset = view._timeByPosition(e.x.location, snap) - currentStart;
 
-                    element
-                        .css("opacity", 0.5)
-                        .parent()
-                        .append(dragClue);
+                    element.css("opacity", 0.5);
 
-                    currentStart = originalStart = parseInt(element.css("left"), 10);
+                    view._createDragHint(element);
                 })
                 .bind("drag", function(e) {
-                    newStart = originalStart + e.x.initialDelta;
+                    var view = that.view();
+                    var date = new Date(view._timeByPosition(e.x.location, snap) - startOffset);
+                    
+                    if (!that.trigger("move", { uid: element.attr("data-uid"), start: date })) {
+                        currentStart = date;
 
-                    if (that.options.snap) {
-                        newStart = that.view()._slotByPosition(currentStart).offsetLeft;
-                    }
-
-                    var start = that.view()._timeByPosition(newStart);
-
-                    if (!that.trigger("move", { uid: element.attr("data-uid"), start: start })) {
-                        dragClue.css("left", newStart);
-
-                        currentStart = newStart;
+                        view._updateDragHint(currentStart);
                     }
                 })
                 .bind("dragend", function(e) {
-                    var start = that.view()._timeByPosition(currentStart);
-
-                    that.trigger("moveEnd", { uid: element.attr("data-uid"), start: start });
+                    that.trigger("moveEnd", { uid: element.attr("data-uid"), start: currentStart });
 
                     cleanUp();
                 })
@@ -1154,23 +1200,13 @@ var __meta__ = {
         _resizable: function() {
             var that = this;
             var element;
-            var resizeClue;
-            var originalStart;
-            var originalWidth;
             var currentStart;
-            var currentWidth;
-            var newStart;
-            var newWidth;
-            var delta;
+            var currentEnd;
             var resizeStart;
             var snap = this.options.snap;
 
             var cleanUp = function() {
-                if (resizeClue) {
-                    resizeClue.remove();
-                }
-
-                resizeClue = null;
+                that.view()._removeResizeHint();
                 element = null;
             };
 
@@ -1182,6 +1218,9 @@ var __meta__ = {
 
             this._resizeDraggable
                 .bind("dragstart", function(e) {
+                    var elementLeft;
+                    var view = that.view();
+
                     resizeStart = e.currentTarget.hasClass("k-resize-w");
 
                     element = e.currentTarget.closest(".k-event");
@@ -1191,55 +1230,32 @@ var __meta__ = {
                         return;
                     }
 
-                    currentStart = originalStart = parseInt(element.css("left"), 10);
-                    currentWidth = originalWidth = parseInt(element.css("width"), 10);
+                    elementLeft = element.offset().left;
+                    currentStart = view._timeByPosition(elementLeft);
+                    currentEnd = view._timeByPosition(elementLeft + element.width());
 
-                    resizeClue = $(RESIZE_HINT).css({
-                            "top": 0,
-                            "height": "100%"
-                        });
-
-                    element.closest(".k-gantt-timeline-content").append(resizeClue);
+                    view._createResizeHint();
                 })
                 .bind("drag", function(e) {
-                    var targetSlot;
-
-                    delta = e.x.initialDelta;
+                    var view = that.view();
+                    var date = view._timeByPosition(e.x.location, snap, !resizeStart);
 
                     if (resizeStart) {
-                        newStart = originalStart + delta;
-
-                        if (snap) {
-                            newStart = that.view()._slotByPosition(newStart).offsetLeft;
+                        if (date <= currentEnd) {
+                            currentStart = date;
                         }
-
-                        newWidth = originalWidth + originalStart - newStart;
                     } else {
-                        newStart = originalStart;
-                        newWidth = originalWidth + delta;
-
-                        if (snap) {
-                            targetSlot = that.view()._slotByPosition(newStart + newWidth);
-
-                            newWidth = targetSlot.offsetLeft + targetSlot.offsetWidth - newStart;
+                        if (date >= currentStart) {
+                            currentEnd = date;
                         }
                     }
 
-                    var date = that.view()._timeByPosition(newStart + (resizeStart ? 0 : newWidth));
-
-                    if (!that.trigger("resize", { uid: element.attr("data-uid"), date: date })) {
-                        resizeClue
-                            .css({
-                                "left": newStart,
-                                "width": newWidth
-                            });
-
-                        currentStart = newStart;
-                        currentWidth = newWidth;
+                    if (!that.trigger("resize", { uid: element.attr("data-uid"), date: resizeStart ? currentStart : currentEnd })) {
+                        view._updateResizeHint(currentStart, currentEnd);
                     }
                 })
                 .bind("dragend", function(e) {
-                    var date = that.view()._timeByPosition(currentStart + (resizeStart ? 0 : currentWidth));
+                    var date = resizeStart ? currentStart : currentEnd;
 
                     that.trigger("resizeEnd", { uid: element.attr("data-uid"), resizeStart: resizeStart, date: date });
 
