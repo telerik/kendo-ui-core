@@ -104,7 +104,7 @@ var __meta__ = {
         },
 
         close: function() {
-            if (this.trigger(CLOSE)) {
+            if (!this.trigger(CLOSE)) {
                 this.shim.hide();
             }
         }
