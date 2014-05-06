@@ -70,8 +70,14 @@
         ok(view.render().is("span"));
     });
 
-    test("evaluates template expressions against the passed view model", 1, function() {
+    test("skips template expressions unless flag is enabled", 1, function() {
         var view = new kendo.View("#: foo #", {model: { foo: "foo" }});
+
+        equal(view.render().html(), "#: foo #");
+    });
+
+    test("evaluates template expressions against the passed view model", 1, function() {
+        var view = new kendo.View("#: foo #", {model: { foo: "foo" }, evalTemplate: true });
 
         equal(view.render().html(), "foo");
     });
