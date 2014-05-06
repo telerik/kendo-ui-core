@@ -44,6 +44,13 @@
         equal(root.find("i").text(), "bar");
     });
 
+    test("binds to scoped model", 1, function() {
+        root = $('<div data-model="scopedViewModel" data-role="view"><i data-bind="text: foo"></i></div>');
+
+        view = kendo.initWidget(root, { modelScope: { scopedViewModel: window.viewModel } }, kendo.mobile.ui.roles);
+        equal(root.find("i").text(), "bar");
+    });
+
     test("binds to init event to model", 1, function() {
         window.vm = {
             onInit: function() {

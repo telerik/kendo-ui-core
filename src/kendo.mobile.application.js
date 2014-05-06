@@ -140,6 +140,7 @@ var __meta__ = {
                 statusBarStyle: "black",
                 transition: "",
                 historyTransition: HISTORY_TRANSITION,
+                modelScope: window,
                 updateDocumentTitle: true
             }, options);
 

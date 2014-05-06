@@ -85,6 +85,7 @@ var __meta__ = {
             stretch: false,
             zoom: false,
             model: null,
+            modelScope: window,
             scroller: {},
             initWidgets: true
         },
@@ -220,7 +221,7 @@ var __meta__ = {
                 model = that.options.model;
 
             if (typeof model === "string") {
-                model = kendo.getter(model)(window);
+                model = kendo.getter(model)(that.options.modelScope);
             }
 
             that.model = model;
@@ -542,6 +543,7 @@ var __meta__ = {
                 loader: that.loader,
                 container: that.container,
                 layout: layout,
+                modelScope: that.modelScope,
                 reload: attrValue(element, "reload")
             };
 
