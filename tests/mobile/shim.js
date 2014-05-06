@@ -48,8 +48,10 @@
         shim.show();
 
         shim.bind("hide", function() {
-            start();
-            ok(!shim.shim.is(":visible"));
+            setTimeout(function() {
+                start();
+                ok(!shim.shim.is(":visible"));
+            });
         });
 
         shim.popup._resize({});
