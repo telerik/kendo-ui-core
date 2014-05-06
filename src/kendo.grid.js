@@ -3087,6 +3087,7 @@ var __meta__ = {
 
                     var touchScroller = kendo.touchScroller(that.content);
                     if (touchScroller && touchScroller.movable) {
+                        that.touchScroller = touchScroller;
                         touchScroller.movable.bind("change", function(e) {
                             that.scrollables.scrollLeft(-e.sender.x);
                             if (that.lockedContent) {
@@ -4801,6 +4802,10 @@ var __meta__ = {
                 if (that._current) {
                     focusTable(that._current.closest("table")[0], true);
                 }
+            }
+
+            if (that.touchScroller) {
+                that.touchScroller.contentResized();
             }
 
             that.trigger(DATABOUND);
