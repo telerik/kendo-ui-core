@@ -96,6 +96,7 @@ var __meta__ = {
             that.viewEngine = new ViewEngine({
                 container: element,
                 transition: options.transition,
+                modelScope: options.modelScope,
                 rootNeeded: !options.initial,
                 serverNavigation: options.serverNavigation,
                 remoteViewURLPrefix: options.root || "",
@@ -165,6 +166,7 @@ var __meta__ = {
             layout: "",
             collapsible: false,
             initial: null,
+            modelScope: window,
             loading: "<h1>Loading...</h1>"
         },
 

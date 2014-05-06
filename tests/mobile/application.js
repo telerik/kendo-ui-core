@@ -65,6 +65,7 @@
 
         equal(transitionDone.calls("transitionDone"), 1);
     });
+
     asyncTest("Syncs pane and browser history", 1, function() {
         setup('<div data-role="view" id="foo">foo</div><div id="bar" data-role="view">bar</div><div id="baz" data-role="view">baz</div>');
 
@@ -142,25 +143,6 @@
         });
     }
 
-    test("triggers pull when pulled", 1, function() {
-        ok(true); return;
-        setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div>');
-
-        var el = $("#page1 .km-scroll-wrapper");
-
-        application.scroller().setOptions({
-            pullToRefresh: true,
-            pullOffset: 100,
-            pull: function() {
-                ok(true);
-            }
-        });
-
-        el.trigger($.Event("touchstart", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
-        el.trigger($.Event("touchmove", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 200, identifier: 1}] }}));
-        el.trigger($.Event("touchend", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 200, identifier: 1}] }}));
-    });
-
     test("triggers scroll when scrolled", 1, function() {
         setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div>');
 
@@ -188,6 +170,18 @@
 
         equal(location.hash, "#page2");
         equal(application.view().id, "#page2");
+    });
+
+    test("Supports scope for view models", 1, function() {
+        setup('<div data-role="view" data-model="foo" data-bind="events: { init: onInit }"></div>', {
+            modelScope: {
+                foo: {
+                    onInit: function(e) {
+                        ok(true);
+                    }
+                }
+            }
+        });
     });
 
     test("Omits options.initial if location.hash", function() {
