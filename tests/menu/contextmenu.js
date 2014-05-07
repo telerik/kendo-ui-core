@@ -39,7 +39,7 @@ module("menu api", {
         menu = new kendo.ui.ContextMenu("#menu", { animation: false });
     },
     teardown: function() {
-        kendo.destroy(QUnit.fixture);
+        kendo.destroy(menu.element);
     }
 });
 
