@@ -548,6 +548,7 @@ var __meta__ = {
             this._reorderDraggable = this.content
                 .kendoDraggable({
                     distance: 0,
+                    group: "listGroup",
                     filter: "tr[data-uid]",
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue"/>')
@@ -585,6 +586,7 @@ var __meta__ = {
             this._dropTargetArea = this.content
                 .kendoDropTargetArea({
                     distance: 0,
+                    group: "listGroup",
                     filter: "tr[data-uid]",
                     "dragenter": function(e) {
                         dropTarget = e.dropTarget;

@@ -177,6 +177,10 @@
         }
     });
 
+    test("list draggable and dropTargetArea have same group", function() {
+        ok(draggable.options.group === dropTargetArea.options.group);
+    });
+
     test("drag start append task title to hint", function() {
         dragstart(ganttList.content.find("tr:first"));
         equal(draggable
