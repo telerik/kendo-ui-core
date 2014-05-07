@@ -16,7 +16,7 @@
         "meta": "Kendo UI Web Demos will show you specific examples of jQuery Widgets and framework components."
       }
     ],
-    "categories": [
+    "category": [
       "UI Widgets"
     ]
   },
@@ -96,9 +96,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "Button",
@@ -165,9 +163,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Navigation"
   },
   {
     "text": "Calendar",
@@ -232,9 +228,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Scheduling"
   },
   {
     "text": "ColorPicker",
@@ -297,9 +291,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "ComboBox",
@@ -384,9 +376,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "DatePicker",
@@ -457,9 +447,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "DateTimePicker",
@@ -530,9 +518,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "DropDownList",
@@ -609,9 +595,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "Editor",
@@ -713,9 +697,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "Grid",
@@ -1071,9 +1053,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Data Management"
   },
   {
     "text": "ListView",
@@ -1141,9 +1121,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Data Management"
   },
   {
     "text": "MaskedTextBox",
@@ -1201,9 +1179,7 @@
         "meta": "This demo shows how to validate an incomplete widget value"
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "Menu",
@@ -1293,9 +1269,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Navigation"
   },
   {
     "packages": [
@@ -1382,9 +1356,7 @@
         "meta": "This example demonstrates how the Mobile Tabstrip may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "TBD"
   },
   {
     "text": "MultiSelect",
@@ -1456,9 +1428,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "Notification",
@@ -1505,9 +1475,7 @@
         "meta": "Demo about the RTL support of the Kendo UI Notification component."
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Layout"
   },
   {
     "text": "NumericTextBox",
@@ -1566,9 +1534,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "PanelBar",
@@ -1640,9 +1606,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Navigation"
   },
   {
     "text": "ProgressBar",
@@ -1705,9 +1669,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Interactivity & UX"
   },
   {
     "text": "Scheduler",
@@ -1828,9 +1790,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Scheduling"
   },
   {
     "text": "Slider",
@@ -1880,9 +1840,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "Sortable",
@@ -1952,9 +1910,7 @@
         "meta": "This example demonstrates Kendo UI TabStrip integration with Sortable Component."
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Interactivity & UX"
   },
   {
     "text": "Splitter",
@@ -2015,9 +1971,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Layout"
   },
   {
     "text": "TabStrip",
@@ -2089,9 +2043,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Navigation"
   },
   {
     "text": "TimePicker",
@@ -2156,9 +2108,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "Tooltip",
@@ -2209,9 +2159,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Layout"
   },
   {
     "text": "TreeView",
@@ -2315,9 +2263,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Navigation"
   },
   {
     "text": "Upload",
@@ -2384,9 +2330,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Editors"
   },
   {
     "text": "Window",
@@ -2459,9 +2403,7 @@
         ]
       }
     ],
-    "categories": [
-      "UI Widgets"
-    ]
+    "category": "Layout"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2509,9 +2451,7 @@
         "requiresServer": "true"
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "Framework"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2533,9 +2473,7 @@
         "meta": "These examples show different expressions of Kendo UI Templates which can be represented as a basic template, script elements, encoding HTML and JS code inside the template definition."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "Framework"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2599,9 +2537,7 @@
         "meta": "This example demonstrates how custom bindings can be created in Kendo UI MVVM. Try the demo to see how a custom binding is declared in the View."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "Framework"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php", "!offline" ],
@@ -2618,9 +2554,8 @@
         "meta": "In this example we will demonstrate the basic usage and functionality of Kendo UI Web for building single-page applications."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "Framework"
+
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2691,9 +2626,7 @@
         "meta": "This demo shows how different combined effects can be used while building apps with Kendo UI Web framework in order to deliver rich end-user experience."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "Interactivity & UX"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2727,9 +2660,7 @@
         "meta": "Learn more about draggable interaction with this events example for Kendo UI Draggable in Kendo UI MVVM."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "Interactivity & UX"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2751,9 +2682,7 @@
         "meta": "This demo illustrates how to implement a custom validation rule for the Kendo UI Validator component in Kendo UI Web framework."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "Editors"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2769,9 +2698,7 @@
         "meta": "This is an example of globalization which is supported in Kendo UI Web framework."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "Framework"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2798,9 +2725,7 @@
         "meta": "This example shows how different styling can be applied to icons by using Kendo UI Web framework."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "TBD"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
@@ -2821,9 +2746,7 @@
         "meta": "This demo illustrates how Twitter Bootstrap can be integrated with the Kendo UI framework into a responsive web application."
       }
     ],
-    "categories": [
-      "Framework"
-    ]
+    "category": "TBD"
   },
   {
     "text": "DataViz Widgets",
@@ -2844,9 +2767,7 @@
       }
     ],
     "name": "overview",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Area Charts",
@@ -2945,9 +2866,7 @@
       }
     ],
     "name": "area-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Bar Charts",
@@ -3074,9 +2993,7 @@
       }
     ],
     "name": "bar-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Box Plot Charts",
@@ -3114,9 +3031,7 @@
       }
     ],
     "name": "pie-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Bubble Charts",
@@ -3164,9 +3079,7 @@
         "requiresServer": "true"
       }
     ],
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Bullet Charts",
@@ -3206,9 +3119,7 @@
         "requiresServer": "true"
       }
     ],
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Donut Charts",
@@ -3255,9 +3166,7 @@
       }
     ],
     "name": "donut-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Funnel Charts",
@@ -3310,9 +3219,7 @@
       }
     ],
     "name": "funnel-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Line Charts",
@@ -3417,9 +3324,7 @@
       }
     ],
     "name": "line-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Pie Charts",
@@ -3466,9 +3371,7 @@
       }
     ],
     "name": "pie-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Polar Charts",
@@ -3527,9 +3430,7 @@
       }
     ],
     "name": "polar-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Radar Charts",
@@ -3596,9 +3497,7 @@
       }
     ],
     "name": "radar-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Scatter Charts",
@@ -3680,9 +3579,7 @@
       }
     ],
     "name": "scatter-charts",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Sparklines",
@@ -3721,9 +3618,7 @@
       }
     ],
     "name": "sparklines",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "API",
@@ -3759,9 +3654,7 @@
       }
     ],
     "name": "api",
-    "categories": [
-      "chart"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Linear Gauge",
@@ -3794,9 +3687,7 @@
       }
     ],
     "name": "linear-gauge",
-    "categories": [
-      "gauges"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Radial Gauge",
@@ -3829,9 +3720,7 @@
       }
     ],
     "name": "radial-gauge",
-    "categories": [
-      "gauges"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Barcode",
@@ -3867,9 +3756,7 @@
       }
     ],
     "name": "barcode",
-    "categories": [
-      "Bar & QR Codes"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "QR code",
@@ -3905,9 +3792,7 @@
       }
     ],
     "name": "qrcode",
-    "categories": [
-      "Bar & QR Codes"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Stock Chart",
@@ -3937,9 +3822,7 @@
       }
     ],
     "name": "stock-chart",
-    "categories": [
-      "financial"
-    ]
+    "category": "Data Visualization"
   },
   {
     "text": "Map",
@@ -3987,9 +3870,7 @@
         "requiresServer": "true"
       }
     ],
-    "categories": [
-      "geoviz"
-    ]
+    "category": "Geo Visualization"
   },
   {
     "text": "Diagram",
@@ -4012,9 +3893,8 @@
         "meta": "This sample demonstrates the built-in layouts which are specific to Kendo UI Diagram component."
       }
     ],
-    "categories": [
-      "diagramming"
-    ]
+    "category": "Diagramming"
+
   },
   {
     "text": "Mobile Widgets",
@@ -4030,9 +3910,7 @@
         "meta": "Get instantly familiar with Kendo UI Mobile web framework and a suite of jQuery-based mobile widgets by exploring Kendo UI Mobile demos."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "ActionSheet",
@@ -4049,9 +3927,7 @@
         "meta": "This demo shows how Mobile ActionSheet component in Kendo UI Mobile framework works in your app in order to provide iOS-like experience."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "Adaptive Widgets",
@@ -4080,9 +3956,8 @@
         ]
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "TBD"
+
   },
   {
     "text": "Button",
@@ -4128,9 +4003,8 @@
         ]
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
+
   },
   {
     "text": "ButtonGroup",
@@ -4182,9 +4056,7 @@
         ]
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "Drawer",
@@ -4207,9 +4079,7 @@
         "meta": "This demo shows the two drawers (left and right) applied to the same application."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "ListView",
@@ -4309,9 +4179,7 @@
         ]
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "ModalView",
@@ -4328,9 +4196,7 @@
         "meta": "The demo shows how Kendo UI ModalView widget can be opened when any other mobile navigational widget is tapped."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "NavBar",
@@ -4353,9 +4219,7 @@
         "meta": "This demo shows how the background color of jQuery-based Kendo UI Mobile NavBar can be customized by setting the CSS properties of the background color."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "PopOver",
@@ -4373,9 +4237,7 @@
         "meta": "This demo shows the core function of Kendo UI Popover which is a transient view, displayed when the user taps on a navigational jQuery-based mobile widget or area on the screen."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "Scroller",
@@ -4398,9 +4260,7 @@
         "meta": "This example shows the option \"Pull to Refresh\" in Kendo UI Scroller. If the value is true, then the scroller will display a hint when user pulls the container beyond the top limit."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "ScrollView",
@@ -4435,9 +4295,7 @@
         "meta": "This demo illustrates the data virtualization on a touch device by using Kendo UI ScrollView widget in your HTML5 app."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "Switch",
@@ -4471,9 +4329,7 @@
         ]
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "TabStrip",
@@ -4502,9 +4358,7 @@
         "meta": "This demo shows how the application-wide group of navigation buttons in Kendo UI TabStrip can be easily customized by using custom icons."
       }
     ],
-    "categories": [
-      "Mobile Widgets"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "Application",
@@ -4533,9 +4387,7 @@
         "meta": "This example shows which transition needs to be applied when navigating in Kendo UI Mobile Application."
       }
     ],
-    "categories": [
-      "Mobile Framework"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "Forms",
@@ -4563,9 +4415,7 @@
         "meta": "This demo shows how you can style the labels and form elements in a Kendo UI Mobile application to appear on separate rows."
       }
     ],
-    "categories": [
-      "Mobile Framework"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "Touch Events",
@@ -4582,9 +4432,7 @@
         "meta": "Play with this Kendo UI Mobile demo to explore the touch events in Kendo UI Mobile advanced mobile app framework."
       }
     ],
-    "categories": [
-      "Mobile Framework"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "View",
@@ -4610,9 +4458,7 @@
         "meta": "In this Kendo UI Mobile demo you will see how the contents of the mobile view can be zoomed by simply using pinch/zoom gestures."
       }
     ],
-    "categories": [
-      "Mobile Framework"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "SplitView",
@@ -4636,9 +4482,7 @@
         "meta": "This demo shows how the appearance of Kendo UI SplitView widget can be easily customized."
       }
     ],
-    "categories": [
-      "Mobile Framework"
-    ]
+    "category": "Mobile"
   },
   {
     "text": "Layout",
@@ -4655,8 +4499,6 @@
         "meta": "This sample shows how Kendo UI Mobile Layout is used to share headers and footers between multiple views on different mobile devices."
       }
     ],
-    "categories": [
-      "Mobile Framework"
-    ]
+    "category": "Mobile"
   }
 ]

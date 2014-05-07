@@ -12,7 +12,8 @@ var navDataSource = new kendo.data.DataSource({
             id: "name"
         }
     },
-    filter: { field: "disableInMobile", operator: "neq", value: true }
+    filter: { field: "disableInMobile", operator: "neq", value: true },
+    group: { field: "category" }
 });
 
 var detailNavDataSource = new kendo.data.DataSource({
@@ -132,7 +133,7 @@ function triggerIndexButton(e) {
         var navBar = element.find("[data-role=navbar]").data("kendoMobileNavBar");
 
         if (navBar) {
-            navDataSource.title(item.text);
+            navBar.title(item.text);
         }
 
         element.find("[data-role=backbutton]").attr("href", "#section?name=" + section.name);
