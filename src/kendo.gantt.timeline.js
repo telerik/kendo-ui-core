@@ -1126,6 +1126,8 @@ var __meta__ = {
         _render: function(tasks, range) {
             var view = this.view();
 
+            this._tasks = tasks;
+
             view.range(range);
 
             view.renderLayout();
@@ -1137,9 +1139,24 @@ var __meta__ = {
             this.view()._renderDependencies(dependencies);
         },
 
+        _taskByUid: function(uid) {
+            var tasks = this._tasks;
+            var length = tasks.length;
+            var task;
+
+            for (var i = 0; i < length; i++) {
+                task = tasks[i];
+
+                if (task.uid === uid) {
+                    return task;
+                }
+            }
+        },
+
         _draggable: function() {
             var that = this;
             var element;
+            var task;
             var currentStart;
             var startOffset;
             var snap = this.options.snap;
@@ -1152,6 +1169,7 @@ var __meta__ = {
                 }
 
                 element = null;
+                task = null;
             };
 
             this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
@@ -1164,13 +1182,14 @@ var __meta__ = {
                 .bind("dragstart", function(e) {
                     var view = that.view();
                     element = e.currentTarget;
+                    task = that._taskByUid(element.attr("data-uid"));
 
-                    if (that.trigger("moveStart", { uid: element.attr("data-uid") })) {
+                    if (that.trigger("moveStart", { task: task })) {
                         e.preventDefault();
                         return;
                     }
 
-                    currentStart = view._timeByPosition(element.offset().left);
+                    currentStart = task.start;
                     startOffset = view._timeByPosition(e.x.location, snap) - currentStart;
 
                     element.css("opacity", 0.5);
@@ -1181,14 +1200,14 @@ var __meta__ = {
                     var view = that.view();
                     var date = new Date(view._timeByPosition(e.x.location, snap) - startOffset);
                     
-                    if (!that.trigger("move", { uid: element.attr("data-uid"), start: date })) {
+                    if (!that.trigger("move", { task: task, start: date })) {
                         currentStart = date;
 
                         view._updateDragHint(currentStart);
                     }
                 })
                 .bind("dragend", function(e) {
-                    that.trigger("moveEnd", { uid: element.attr("data-uid"), start: currentStart });
+                    that.trigger("moveEnd", { task: task, start: currentStart });
 
                     cleanUp();
                 })
@@ -1200,6 +1219,7 @@ var __meta__ = {
         _resizable: function() {
             var that = this;
             var element;
+            var task;
             var currentStart;
             var currentEnd;
             var resizeStart;
@@ -1208,6 +1228,7 @@ var __meta__ = {
             var cleanUp = function() {
                 that.view()._removeResizeHint();
                 element = null;
+                task = null;
             };
 
             this._resizeDraggable = new kendo.ui.Draggable(this.wrapper, {
@@ -1218,23 +1239,21 @@ var __meta__ = {
 
             this._resizeDraggable
                 .bind("dragstart", function(e) {
-                    var elementLeft;
-                    var view = that.view();
-
                     resizeStart = e.currentTarget.hasClass("k-resize-w");
 
                     element = e.currentTarget.closest(".k-event");
 
-                    if (that.trigger("resizeStart", { uid: element.attr("data-uid") })) {
+                    task = that._taskByUid(element.attr("data-uid"));
+
+                    if (that.trigger("resizeStart", { task: task })) {
                         e.preventDefault();
                         return;
                     }
 
-                    elementLeft = element.offset().left;
-                    currentStart = view._timeByPosition(elementLeft);
-                    currentEnd = view._timeByPosition(elementLeft + element.width());
+                    currentStart = task.start;
+                    currentEnd = task.end;
 
-                    view._createResizeHint();
+                    that.view()._createResizeHint();
                 })
                 .bind("drag", function(e) {
                     var view = that.view();
@@ -1250,14 +1269,14 @@ var __meta__ = {
                         }
                     }
 
-                    if (!that.trigger("resize", { uid: element.attr("data-uid"), date: resizeStart ? currentStart : currentEnd })) {
+                    if (!that.trigger("resize", { task: task, date: resizeStart ? currentStart : currentEnd })) {
                         view._updateResizeHint(currentStart, currentEnd);
                     }
                 })
                 .bind("dragend", function(e) {
                     var date = resizeStart ? currentStart : currentEnd;
 
-                    that.trigger("resizeEnd", { uid: element.attr("data-uid"), resizeStart: resizeStart, date: date });
+                    that.trigger("resizeEnd", { task: task, resizeStart: resizeStart, date: date });
 
                     cleanUp();
                 })

@@ -868,47 +868,43 @@ var __meta__ = {
                         .addClass("k-state-selected");
                 })
                 .bind("moveStart", function(e) {
-                    var task = that.dataSource.getByUid(e.uid);
-
-                    if (that.trigger("moveStart", { task: task })) {
+                    if (that.trigger("moveStart", { task: e.task })) {
                         e.preventDefault();
                     }
                 })
                 .bind("move", function(e) {
-                    var task = that.dataSource.getByUid(e.uid);
-                    var end = new Date(e.start.getTime() + task.duration());
+                    var task = e.task;
+                    var start = e.start;
+                    var end = new Date(start.getTime() + task.duration());
 
-                    if (that.trigger("move", { task: task, start: e.start, end: end })) {
+                    if (that.trigger("move", { task: task, start: start, end: end })) {
                         e.preventDefault();
                     }
                 })
                 .bind("moveEnd", function(e) {
-                    var task = that.dataSource.getByUid(e.uid);
-                    var end = new Date(e.start.getTime() + task.duration());
+                    var task = e.task;
+                    var start = e.start;
+                    var end = new Date(start.getTime() + task.duration());
                     
-                    if (!that.trigger("moveEnd", { task: task, start: e.start, end: end })) {
-                        that.updateTask(task, {
-                            start: e.start,
+                    if (!that.trigger("moveEnd", { task: task, start: start, end: end })) {
+                        that.updateTask(that.dataSource.getByUid(task.uid), {
+                            start: start,
                             end: end
                         });
                     }
                 })
                 .bind("resizeStart", function(e) {
-                    var task = that.dataSource.getByUid(e.uid);
-
-                    if (that.trigger("resizeStart", { task: task })) {
+                    if (that.trigger("resizeStart", { task: e.task })) {
                         e.preventDefault();
                     }
                 })
                 .bind("resize", function(e) {
-                    var task = that.dataSource.getByUid(e.uid);
-
-                    if (that.trigger("resize", { task: task, date: e.date })) {
+                    if (that.trigger("resize", { task: e.task, date: e.date })) {
                         e.preventDefault();
                     }
                 })
                 .bind("resizeEnd", function(e) {
-                    var task = that.dataSource.getByUid(e.uid);
+                    var task = e.task;
                     var updateInfo = {};
 
                     if (e.resizeStart) {
@@ -918,7 +914,7 @@ var __meta__ = {
                     }
                     
                     if (!that.trigger("resizeEnd", { task: task, date: e.date })) {
-                        that.updateTask(task, updateInfo);
+                        that.updateTask(that.dataSource.getByUid(task.uid), updateInfo);
                     }
                 })
                 .bind("select", function(e) {
