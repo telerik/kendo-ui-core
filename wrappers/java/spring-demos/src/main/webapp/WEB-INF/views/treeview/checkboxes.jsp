@@ -43,7 +43,7 @@
         }
 
         #treeview .k-sprite {
-            background-image: url("../../resources/web/treeview/coloricons-sprite.png");
+            background-image: url("../resources/web/treeview/coloricons-sprite.png");
         }
 
         .rootfolder { background-position: 0 0; }

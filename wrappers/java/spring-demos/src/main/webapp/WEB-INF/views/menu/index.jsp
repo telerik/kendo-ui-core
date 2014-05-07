@@ -65,7 +65,7 @@
 		                    <li>Canada</li>
 		                    <li>Australia</li>
 		                </ol>
-		                <img src="../../resources/web/menu/map.png" alt="Stores Around the Globe" />
+		                <img src="../resources/web/menu/map.png" alt="Stores Around the Globe" />
 		                <button class="k-button">See full list</button>
 		            </kendo:menu-item-content>
 	            </kendo:menu-item>
@@ -84,7 +84,7 @@
         width: 600px;
         margin: 30px auto;
         padding-top: 120px;
-        background: url('../../resources/web/menu/header.jpg') no-repeat 0 0;
+        background: url('../resources/web/menu/header.jpg') no-repeat 0 0;
     }
     #menu h2 {
         font-size: 1em;

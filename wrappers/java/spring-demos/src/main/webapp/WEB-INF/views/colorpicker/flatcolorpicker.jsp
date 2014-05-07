@@ -40,11 +40,11 @@
 
     #bike {
         margin: -10px -10px 0;
-        background: url(../../resources/colorpicker/background.png);
+        background: url(../resources/colorpicker/background.png);
     }
 
     #bike-head, #bike-tail {
-        background: url(../../resources/web/colorpicker/motor.png);
+        background: url(../resources/web/colorpicker/motor.png);
         height: 299px;
         width: 241px;
     }

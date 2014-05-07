@@ -5,11 +5,11 @@
 
 <demo:header />
 
-<kendo:sortable name="#sortable-listA" connectWith="#sortable-listB" placeholder="placeholder" cursor="url('../../resources/web/sortable/grabbing.cur'), default"></kendo:sortable>
-<kendo:sortable name="#sortable-listB" placeholder="placeholder" cursor="url('../../resources/web/sortable/grabbing.cur'), default"></kendo:sortable>
+<kendo:sortable name="#sortable-listA" connectWith="#sortable-listB" placeholder="placeholder" cursor="url('../resources/web/sortable/grabbing.cur'), default"></kendo:sortable>
+<kendo:sortable name="#sortable-listB" placeholder="placeholder" cursor="url('../resources/web/sortable/grabbing.cur'), default"></kendo:sortable>
 
-<kendo:sortable name="#sortable-listC" connectWith="#sortable-listD" placeholder="placeholder" cursor="url('../../resources/web/sortable/grabbing.cur'), default"></kendo:sortable>
-<kendo:sortable name="#sortable-listD" connectWith="#sortable-listC" placeholder="placeholder" cursor="url('../../resources/web/sortable/grabbing.cur'), default"></kendo:sortable>
+<kendo:sortable name="#sortable-listC" connectWith="#sortable-listD" placeholder="placeholder" cursor="url('../resources/web/sortable/grabbing.cur'), default"></kendo:sortable>
+<kendo:sortable name="#sortable-listD" connectWith="#sortable-listC" placeholder="placeholder" cursor="url('../resources/web/sortable/grabbing.cur'), default"></kendo:sortable>
 
 <div class="demo-section one-way">
 	<div class="list-wrapper">
@@ -62,12 +62,12 @@
 }
 
 .one-way {
-	background: url('../../resources/web/sortable/one-way.png') no-repeat 50%
+	background: url('../resources/web/sortable/one-way.png') no-repeat 50%
 		50%;
 }
 
 .two-way {
-	background: url('../../resources/web/sortable/two-way.png') no-repeat 50%
+	background: url('../resources/web/sortable/two-way.png') no-repeat 50%
 		50%;
 }
 
@@ -101,7 +101,7 @@
 	background-color: #222222;
 	color: #ffffff;
 	border-radius: 3px;
-	cursor: url('../../resources/web/sortable/grab.cur'), default;
+	cursor: url('../resources/web/sortable/grab.cur'), default;
 }
 
 #sortable-listA .list-item {

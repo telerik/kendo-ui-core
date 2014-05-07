@@ -34,7 +34,7 @@
     }
 
     #background {
-        background-image: url(../../resources/web/colorpicker/interior-bg.png);
+        background-image: url(../resources/web/colorpicker/interior-bg.png);
         background-color: transparent;
         width: 100%;
         height: 100%;

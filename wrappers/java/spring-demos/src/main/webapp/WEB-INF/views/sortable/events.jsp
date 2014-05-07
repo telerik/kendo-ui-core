@@ -6,13 +6,13 @@
 <demo:header />
 
 <kendo:sortable name="#sortable-left" connectWith="#sortable-right"
-	cursor="url('../../resources/web/sortable/grabbing.cur'), default"
+	cursor="url('../resources/web/sortable/grabbing.cur'), default"
 	hint="hint" placeholder="placeholder" start="onStart" move="onMove"
 	end="onEnd" change="onChange" cancel="onCancel">
 </kendo:sortable>
 
 <kendo:sortable name="#sortable-right" connectWith="#sortable-left"
-	cursor="url('../../resources/web/sortable/grabbing.cur'), default"
+	cursor="url('../resources/web/sortable/grabbing.cur'), default"
 	hint="hint" placeholder="placeholder" start="onStart" move="onMove"
 	end="onEnd" change="onChange" cancel="onCancel">
 </kendo:sortable>
@@ -120,7 +120,7 @@
 	color: #ffffff;
 	border: 1px solid transparent;
 	border-radius: 4px;
-	cursor: url('../../resources/web/sortable/grab.cur'), default;
+	cursor: url('../resources/web/sortable/grab.cur'), default;
 }
 
 .list-left {

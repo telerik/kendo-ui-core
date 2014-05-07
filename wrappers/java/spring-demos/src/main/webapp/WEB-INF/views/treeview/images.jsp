@@ -10,20 +10,20 @@
     	
         <kendo:treeView name="treeview-images">
             <kendo:treeView-items>
-                <kendo:treeView-item text="Inbox" imageUrl="../../resources/web/treeview/mail.png">
+                <kendo:treeView-item text="Inbox" imageUrl="../resources/web/treeview/mail.png">
                     <kendo:treeView-items>
-                        <kendo:treeView-item text="Read Mail" imageUrl="../../resources/web/treeview/readmail.png" />
+                        <kendo:treeView-item text="Read Mail" imageUrl="../resources/web/treeview/readmail.png" />
                     </kendo:treeView-items>
                 </kendo:treeView-item>
-                <kendo:treeView-item text="Drafts" imageUrl="../../resources/web/treeview/edit.png" />
-                <kendo:treeView-item text="Search Folders" imageUrl="../../resources/web/treeview/search.png" expanded="true">
+                <kendo:treeView-item text="Drafts" imageUrl="../resources/web/treeview/edit.png" />
+                <kendo:treeView-item text="Search Folders" imageUrl="../resources/web/treeview/search.png" expanded="true">
                     <kendo:treeView-items>
-                        <kendo:treeView-item text="Categorized Mail" imageUrl="../../resources/web/treeview/search.png" />
-                        <kendo:treeView-item text="Large Mail" imageUrl="../../resources/web/treeview/search.png" />
-                        <kendo:treeView-item text="Unread Mail" imageUrl="../../resources/web/treeview/search.png" />
+                        <kendo:treeView-item text="Categorized Mail" imageUrl="../resources/web/treeview/search.png" />
+                        <kendo:treeView-item text="Large Mail" imageUrl="../resources/web/treeview/search.png" />
+                        <kendo:treeView-item text="Unread Mail" imageUrl="../resources/web/treeview/search.png" />
                     </kendo:treeView-items>
                 </kendo:treeView-item>
-           		<kendo:treeView-item text="Settings" imageUrl="../../resources/web/treeview/settings.png" />
+           		<kendo:treeView-item text="Settings" imageUrl="../resources/web/treeview/settings.png" />
             </kendo:treeView-items>
         </kendo:treeView>
     </div>
@@ -79,7 +79,7 @@
         }
 
         #treeview-sprites .k-sprite {
-            background-image: url("../../resources/web/treeview/coloricons-sprite.png");
+            background-image: url("../resources/web/treeview/coloricons-sprite.png");
         }
 
         .rootfolder { background-position: 0 0; }

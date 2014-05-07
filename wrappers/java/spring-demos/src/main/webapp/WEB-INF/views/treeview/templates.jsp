@@ -23,7 +23,7 @@
 	    }
 	    
 		#treeview .k-sprite {
-		    background-image: url("../../resources/web/treeview/coloricons-sprite.png");
+		    background-image: url("../resources/web/treeview/coloricons-sprite.png");
 		}
 		
 		.rootfolder { background-position: 0 0; }
@@ -35,7 +35,7 @@
 		.delete-link {
 	         width: 12px;
 	         height: 12px;
-	         background: transparent url("../../resources/web/treeview/close.png") no-repeat 50% 50%;
+	         background: transparent url("../resources/web/treeview/close.png") no-repeat 50% 50%;
 	         overflow: hidden;
 	         display: inline-block;
 	         font-size: 0;

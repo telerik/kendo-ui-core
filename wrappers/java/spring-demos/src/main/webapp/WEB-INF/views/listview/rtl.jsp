@@ -27,7 +27,7 @@
 
 <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-        <img src="../../resources/web/foods/#=productId#.jpg" alt="#=productName# image" />
+        <img src="../resources/web/foods/#=productId#.jpg" alt="#=productName# image" />
         <h3>#=productName#</h3>
     </div>
 </script>

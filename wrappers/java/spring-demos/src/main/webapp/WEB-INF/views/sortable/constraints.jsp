@@ -13,11 +13,11 @@
 </div>
 <div class="demo-section" style="margin-bottom: 50px;">
 	<div id="sortable-horizontal">
-		<img src="../../resources/web/sortable/1.jpg" /><img
-			src="../../resources/web/sortable/2.jpg" /><img
-			src="../../resources/web/sortable/3.jpg" /><img
-			src="../../resources/web/sortable/4.jpg" /><img
-			src="../../resources/web/sortable/5.jpg" />
+		<img src="../resources/web/sortable/1.jpg" /><img
+			src="../resources/web/sortable/2.jpg" /><img
+			src="../resources/web/sortable/3.jpg" /><img
+			src="../resources/web/sortable/4.jpg" /><img
+			src="../resources/web/sortable/5.jpg" />
 	</div>
 </div>
 

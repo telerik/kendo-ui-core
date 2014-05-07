@@ -4,7 +4,7 @@
 
 <div class="demo-section">
     <div class="product-display">
-        <img class="product-image" src="../../resources/web/colorpicker/sofa-ffcc33.jpg" alt="" width="285" height="149">
+        <img class="product-image" src="../resources/web/colorpicker/sofa-ffcc33.jpg" alt="" width="285" height="149">
 
         <div id="color-chooser"></div>
         <kendo:colorPalette name="color-chooser" value="#ffcc33" tileSize="30" change="change"
@@ -33,7 +33,7 @@
 <script>
     function change() {
         var colorId = this.value().substring(1);
-        $(".product-image").attr("src", "../../resources/web/colorpicker/sofa-" + colorId + ".jpg");
+        $(".product-image").attr("src", "../resources/web/colorpicker/sofa-" + colorId + ".jpg");
     }
 </script>
 

@@ -12,10 +12,10 @@
                 "<span class=\"k-widget k-header\">Contact info</span>" +
             "</div>";
 
-        String template = "<span class=\"k-state-default\"><img src=\"../../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" /></span>" +
+        String template = "<span class=\"k-state-default\"><img src=\"../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" /></span>" +
                           "<span class=\"k-state-default\"><h3>#: data.contactName #</h3><p>#: data.companyName #</p></span>";
 
-        String valueTemplate = "<img class=\"selected-value\" src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
+        String valueTemplate = "<img class=\"selected-value\" src=\"../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
                 "<span>#:data.contactName#</span>";
         %>
 

@@ -30,19 +30,19 @@
 			</h3>
 			<div>
 				<div class="team-mate">
-					<img src="../../resources/web/panelbar/andrew.jpg"
+					<img src="../resources/web/panelbar/andrew.jpg"
 						alt="Andrew Fuller">
 					<h4>Andrew Fuller</h4>
 					<p>Team Lead</p>
 				</div>
 				<div class="team-mate">
-					<img src="../../resources/web/panelbar/nancy.jpg"
+					<img src="../resources/web/panelbar/nancy.jpg"
 						alt="Nancy Leverling">
 					<h4>Nancy Leverling</h4>
 					<p>Sales Associate</p>
 				</div>
 				<div class="team-mate">
-					<img src="../../resources/web/panelbar/robert.jpg" alt="Robert King">
+					<img src="../resources/web/panelbar/robert.jpg" alt="Robert King">
 					<h4>Robert King</h4>
 					<p>Business System Analyst</p>
 				</div>
@@ -157,7 +157,7 @@
 .dash-head {
 	width: 910px;
 	height: 80px;
-	background: url('../../resources/web/sortable/dashboard-head.png')
+	background: url('../resources/web/sortable/dashboard-head.png')
 		no-repeat 50% 50% #222222;
 }
 
@@ -234,7 +234,7 @@
 	margin: 10px auto;
 	border-radius: 100px;
 	border: 1px solid #e7e7e7;
-	background: url('../../resources/web/Customers/ISLAT.jpg') no-repeat 50% 50%;
+	background: url('../resources/web/Customers/ISLAT.jpg') no-repeat 50% 50%;
 }
 
 #profile div {

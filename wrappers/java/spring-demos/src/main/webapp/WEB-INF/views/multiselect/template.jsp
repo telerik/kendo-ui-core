@@ -11,10 +11,10 @@
             "<span class=\"k-widget k-header\">Contact info</span>" +
         "</div>";
 
-    String itemTemplate = "<span class=\"k-state-default\"><img src=\"../../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" /></span>" +
+    String itemTemplate = "<span class=\"k-state-default\"><img src=\"../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" /></span>" +
                           "<span class=\"k-state-default\"><h3>#: data.contactName #</h3><p>#: data.companyName #</p></span>";
 
-    String tagTemplate = "<img class=\"tag-image\" src=\"../../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
+    String tagTemplate = "<img class=\"tag-image\" src=\"../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
                           "#: data.contactName #";
     %>
 

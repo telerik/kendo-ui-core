@@ -54,27 +54,27 @@
 	}
 	
 	.img-file {
-		background-image: url(../../resources/web/upload/jpg.png)
+		background-image: url(../resources/web/upload/jpg.png)
 	}
 	
 	.doc-file {
-		background-image: url(../../resources/web/upload/doc.png)
+		background-image: url(../resources/web/upload/doc.png)
 	}
 	
 	.pdf-file {
-		background-image: url(../../resources/web/upload/pdf.png)
+		background-image: url(../resources/web/upload/pdf.png)
 	}
 	
 	.xls-file {
-		background-image: url(../../resources/web/upload/xls.png)
+		background-image: url(../resources/web/upload/xls.png)
 	}
 	
 	.zip-file {
-		background-image: url(../../resources/web/upload/zip.png)
+		background-image: url(../resources/web/upload/zip.png)
 	}
 	
 	.default-file {
-		background-image: url(../../resources/web/upload/default.png)
+		background-image: url(../resources/web/upload/default.png)
 	}
 	
 	#example .file-heading {

@@ -83,7 +83,7 @@
     	padding-bottom: 10px;
     }
     #menuSprites .k-sprite {
-        background-image: url('../../resources/shared/styles/flags.png');
+        background-image: url('../resources/shared/styles/flags.png');
     }
     .brazilFlag {
     	background-position: 0 0;
