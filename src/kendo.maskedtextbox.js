@@ -19,6 +19,7 @@ var __meta__ = {
     var ns = ".kendoMaskedTextBox";
     var proxy = $.proxy;
 
+    var DOCUMENT_ELEMENT = $(document.documentElement);
     var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertychange" : "input") + ns;
     var STATEDISABLED = "k-state-disabled";
     var DISABLED = "disabled";
@@ -41,13 +42,18 @@ var __meta__ = {
             that._tokenize();
             that._reset();
 
+            that._mousedownProxy = function(e) {
+                that._mousedown(e);
+            };
+
             that.element
                 .addClass("k-textbox")
                 .attr("autocomplete", "off")
                 .on("focus" + ns, function() {
                     var value = DOMElement.value;
-
                     that._oldValue = value;
+
+                    DOCUMENT_ELEMENT.on("mousedown" + ns, that._mousedownProxy);
 
                     if (!value) {
                         DOMElement.value = that._old = that._emptyMask;
@@ -59,6 +65,7 @@ var __meta__ = {
                 })
                 .on("blur" + ns, function() {
                     clearTimeout(that._timeoutId);
+                    DOCUMENT_ELEMENT.off("mousedown" + ns, that._mousedownProxy);
 
                     if (element.val() === that._emptyMask) {
                         DOMElement.value = that._old = "";
@@ -168,6 +175,12 @@ var __meta__ = {
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+        },
+
+        _mousedown: function(e) {
+            if (e.currentTarget !== this.element[0]) {
+                caret(this.element, 0);
+            }
         },
 
         _bindInput: function() {
