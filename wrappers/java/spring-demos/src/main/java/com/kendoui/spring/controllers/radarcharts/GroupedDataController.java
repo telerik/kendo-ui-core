@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.WindDataItem;
 
 @Controller("dataviz-radar_charts-grouped_data-controller")
-@RequestMapping(value="/dataviz/radar-charts/")
+@RequestMapping(value="/radar-charts/")
 public class GroupedDataController {
     @RequestMapping(value = "/grouped-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/radar-charts/grouped-data";
+        return "/radar-charts/grouped-data";
     }
     
     @RequestMapping(value = "/grouped-data/read", method = RequestMethod.POST)

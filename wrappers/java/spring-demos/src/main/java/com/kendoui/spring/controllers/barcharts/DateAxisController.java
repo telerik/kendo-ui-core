@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-bar_charts-date_axis-controller")
-@RequestMapping(value="/dataviz/bar-charts/")
+@RequestMapping(value="/bar-charts/")
 public class DateAxisController {
     @RequestMapping(value = "/date-axis", method = RequestMethod.GET)
     public String index(Model model) throws ParseException {
         model.addAttribute("stats", ChartDataRepository.DatePoints());
         
-        return "/dataviz/bar-charts/date-axis";
+        return "/bar-charts/date-axis";
     }
 }

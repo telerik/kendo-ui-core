@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.StockDataPoint;
 
 @Controller("dataviz-scatter_charts-grouped_data-controller")
-@RequestMapping(value="/dataviz/scatter-charts/")
+@RequestMapping(value="/scatter-charts/")
 public class GroupedDataController {
     @RequestMapping(value = "/grouped-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/scatter-charts/grouped-data";
+        return "/scatter-charts/grouped-data";
     }
     
     @RequestMapping(value = "/grouped-data/read", method = RequestMethod.POST)

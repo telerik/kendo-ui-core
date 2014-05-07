@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-rtl-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class RtlController {
     @Autowired 
     private ProductDao product;
@@ -20,6 +20,6 @@ public class RtlController {
     public String index(Locale locale, Model model) {
         model.addAttribute("products", product.getList());
         
-        return "web/grid/rtl";
+        return "grid/rtl";
     }
 }

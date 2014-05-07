@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-donut_chart-local_data-controller")
-@RequestMapping(value="/dataviz/donut-charts/")
+@RequestMapping(value="/donut-charts/")
 public class LocalDataController {
     @RequestMapping(value = "/local-data", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("spainElectricityBreakdown", ChartDataRepository.SpainElectricityBreakdown());
      
-        return "/dataviz/donut-charts/local-data";
+        return "/donut-charts/local-data";
     }
 }

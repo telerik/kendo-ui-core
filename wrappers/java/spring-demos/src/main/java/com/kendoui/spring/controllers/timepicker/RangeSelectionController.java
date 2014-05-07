@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("timepicker-rangeselection-controller")
-@RequestMapping(value="/web/timepicker/")
+@RequestMapping(value="/timepicker/")
 public class RangeSelectionController {
     
     @RequestMapping(value = {"/rangeselection"}, method = RequestMethod.GET)
@@ -23,7 +23,7 @@ public class RangeSelectionController {
         model.addAttribute("endMin", time(8, 0));
         model.addAttribute("endMax", time(7, 30));
         
-        return "web/timepicker/rangeselection";
+        return "timepicker/rangeselection";
     }
     
     private Date time(int hours, int minutes) {

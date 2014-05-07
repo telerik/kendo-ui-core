@@ -16,7 +16,7 @@ import com.kendoui.spring.models.ScreenResolutionRemoteDataViewModel;
 import com.kendoui.spring.models.ScreenResolution;
 
 @Controller("dataviz-pie_charts_remote_data-controller")
-@RequestMapping(value="/dataviz/pie-charts/")
+@RequestMapping(value="/pie-charts/")
 public class RemoteDataController {
     private Map<Integer, String> resolutionColors = new HashMap<Integer, String>(){{
         put(1,"#ccc");
@@ -27,7 +27,7 @@ public class RemoteDataController {
     public String index(Model model) {
         String [] years = { "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009" };
         model.addAttribute("years", years);
-        return "/dataviz/pie-charts/remote-data";
+        return "/pie-charts/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

@@ -14,7 +14,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-editing-custom-validation-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class EditingCustomValidationController {
     
     @Autowired 
@@ -22,7 +22,7 @@ public class EditingCustomValidationController {
     
     @RequestMapping(value = "/editing-custom-validation", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/editing-custom-validation";
+        return "grid/editing-custom-validation";
     }
     
     @RequestMapping(value = "/editing-custom-validation/read", method = RequestMethod.POST)

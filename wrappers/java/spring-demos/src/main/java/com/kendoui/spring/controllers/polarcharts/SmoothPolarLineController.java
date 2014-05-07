@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-polar_chart-smooth_polar_line-controller")
-@RequestMapping(value="/dataviz/polar-charts/")
+@RequestMapping(value="/polar-charts/")
 public class SmoothPolarLineController {
     @RequestMapping(value = "/smooth-polar-line", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("sunPosition", ChartDataRepository.SunPositionData());
      
-        return "/dataviz/polar-charts/smooth-polar-line";
+        return "/polar-charts/smooth-polar-line";
     }
 }

@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("panelbar-home-controller")
-@RequestMapping(value="/web/panelbar/")
+@RequestMapping(value="/panelbar/")
 public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/panelbar/index";
+        return "panelbar/index";
     }    
 }

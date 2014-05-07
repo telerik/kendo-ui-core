@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("maskedtextbox-rtl-controller")
-@RequestMapping(value="/web/maskedtextbox/")
+@RequestMapping(value="/maskedtextbox/")
 public class RtlController {
 
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
     public String index() {
-        return "web/maskedtextbox/rtl";
+        return "maskedtextbox/rtl";
     }
 }

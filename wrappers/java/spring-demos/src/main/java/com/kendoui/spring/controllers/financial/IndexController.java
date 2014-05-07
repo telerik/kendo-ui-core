@@ -16,7 +16,7 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.StockDataPoint;
 
 @Controller("dataviz-financial-index-controller")
-@RequestMapping(value="/dataviz/financial/")
+@RequestMapping(value="/financial/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) throws ParseException {      
@@ -25,7 +25,7 @@ public class IndexController {
         Date to = (Date)formatter.parse("2011/10/07");
         model.addAttribute("from", from);
         model.addAttribute("to", to);
-        return "/dataviz/financial/index";
+        return "/financial/index";
     }
     
     @RequestMapping(value = "/index/read", method = RequestMethod.POST)

@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("panelbar-events-controller")
-@RequestMapping(value="/web/panelbar/")
+@RequestMapping(value="/panelbar/")
 public class EventsController {
     
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String index() {        
-        return "web/panelbar/events";
+        return "panelbar/events";
     } 
 }

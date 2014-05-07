@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ElectricityProduction;
 
 @Controller("dataviz-area_charts_remote_data-controller")
-@RequestMapping(value="/dataviz/area-charts/")
+@RequestMapping(value="/area-charts/")
 public class RemoteDataController {
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/area-charts/remote-data";
+        return "/area-charts/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

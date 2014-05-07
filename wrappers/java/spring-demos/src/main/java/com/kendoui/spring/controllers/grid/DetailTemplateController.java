@@ -14,7 +14,7 @@ import com.kendoui.spring.models.EmployeeDao;
 import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-detailtemplate-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class DetailTemplateController {
     @Autowired 
     private EmployeeDao employee;
@@ -24,7 +24,7 @@ public class DetailTemplateController {
     
     @RequestMapping(value = "/detailtemplate", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/detailtemplate";
+        return "grid/detailtemplate";
     }
     
     @RequestMapping(value = "/detailtemplate/employees", method = RequestMethod.POST)

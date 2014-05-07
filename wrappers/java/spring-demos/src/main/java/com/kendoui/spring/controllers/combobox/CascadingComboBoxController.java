@@ -16,7 +16,7 @@ import com.kendoui.spring.models.OrderDao;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("combobox-cascadingcombobox-controller")
-@RequestMapping(value="/web/combobox/")
+@RequestMapping(value="/combobox/")
 public class CascadingComboBoxController {
     
     @Autowired 
@@ -30,7 +30,7 @@ public class CascadingComboBoxController {
     
     @RequestMapping(value = {"/cascadingcombobox"}, method = RequestMethod.GET)
     public String index() {
-        return "web/combobox/cascadingcombobox";
+        return "combobox/cascadingcombobox";
     }
     
     @RequestMapping(value = "/cascadingcombobox/categories", method = RequestMethod.POST)

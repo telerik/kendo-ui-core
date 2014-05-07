@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DonutChartsBasicUsageViewModel;
 
 @Controller("dataviz-donut_charts-home-controller")
-@RequestMapping(value="/dataviz/donut-charts/")
+@RequestMapping(value="/donut-charts/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -33,6 +33,6 @@ public class IndexController {
         donutData2012.add(new DonutChartsBasicUsageViewModel("NorthAmerica",3.6,"#033939"));        
         model.addAttribute("donutData2012", donutData2012);
         
-        return "/dataviz/donut-charts/index";
+        return "/donut-charts/index";
     }
 }

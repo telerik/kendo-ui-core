@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-polar_chart-local_data-controller")
-@RequestMapping(value="/dataviz/polar-charts/")
+@RequestMapping(value="/polar-charts/")
 public class LocalDataController {
     @RequestMapping(value = "/local-data", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("sunPosition", ChartDataRepository.SunPositionData());
      
-        return "/dataviz/polar-charts/local-data";
+        return "/polar-charts/local-data";
     }
 }

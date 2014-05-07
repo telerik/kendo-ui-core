@@ -16,7 +16,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("listview-navigation-controller")
-@RequestMapping(value="/web/listview/")
+@RequestMapping(value="/listview/")
 public class NavigationController {
     @Autowired 
     private ProductDao product;
@@ -24,7 +24,7 @@ public class NavigationController {
     @RequestMapping(value = "navigation", method = RequestMethod.GET)
     public String index() {        
         
-        return "web/listview/navigation";
+        return "listview/navigation";
     }
     
     @RequestMapping(value = "/navigation/read", method = RequestMethod.POST)

@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.AntennaGainItem;
 
 @Controller("dataviz-polar_charts_remote_data-controller")
-@RequestMapping(value="/dataviz/polar-charts/")
+@RequestMapping(value="/polar-charts/")
 public class RemoteDataController {
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/polar-charts/remote-data";
+        return "/polar-charts/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

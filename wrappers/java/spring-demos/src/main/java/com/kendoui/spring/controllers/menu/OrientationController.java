@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("menu-orientation-controller")
-@RequestMapping(value="/web/menu/")
+@RequestMapping(value="/menu/")
 public class OrientationController {
     
     @RequestMapping(value = {"/orientation"}, method = RequestMethod.GET)
@@ -17,7 +17,7 @@ public class OrientationController {
         model.addAttribute("orientation", "horizontal");
         model.addAttribute("orientations", getOrientations());
                
-        return "web/menu/orientation";
+        return "menu/orientation";
     }
     
     @RequestMapping(value = {"/orientation"}, method = RequestMethod.POST)
@@ -26,7 +26,7 @@ public class OrientationController {
         model.addAttribute("orientation", orientation);
         model.addAttribute("orientations", getOrientations());
                
-        return "web/menu/orientation";
+        return "menu/orientation";
     }
     
     private DropDownListItem[] getOrientations() {

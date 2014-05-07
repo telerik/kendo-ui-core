@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("datepicker-rangeselection-controller")
-@RequestMapping(value="/web/datepicker/")
+@RequestMapping(value="/datepicker/")
 public class RangeSelectionController {
     
     @RequestMapping(value = {"/rangeselection"}, method = RequestMethod.GET)
@@ -18,6 +18,6 @@ public class RangeSelectionController {
         cal.set(2012,9,10);
         model.addAttribute("end", cal.getTime());        
         
-        return "web/datepicker/rangeselection";
+        return "datepicker/rangeselection";
     }
 }

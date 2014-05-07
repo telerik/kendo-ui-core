@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("multiselect-home-controller")
-@RequestMapping(value="/web/multiselect/")
+@RequestMapping(value="/multiselect/")
 public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
@@ -36,6 +36,6 @@ public class IndexController {
             "Laura Fuller"
         });
         
-        return "web/multiselect/index";
+        return "multiselect/index";
     }    
 }

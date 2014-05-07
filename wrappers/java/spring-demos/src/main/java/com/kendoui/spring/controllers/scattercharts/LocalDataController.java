@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-scatter_chart-local_data-controller")
-@RequestMapping(value="/dataviz/scatter-charts/")
+@RequestMapping(value="/scatter-charts/")
 public class LocalDataController {
     @RequestMapping(value = "/local-data", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("pricePerfomance", ChartDataRepository.PricePerformanceData());
      
-        return "/dataviz/scatter-charts/local-data";
+        return "/scatter-charts/local-data";
     }
 }

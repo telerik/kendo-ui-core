@@ -15,7 +15,7 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ScreenResolution;
 
 @Controller("dataviz-donut_charts_remote_data-controller")
-@RequestMapping(value="/dataviz/donut-charts/")
+@RequestMapping(value="/donut-charts/")
 public class RemoteDataController {
     private Map<Integer, String> resolutionColors = new HashMap<Integer, String>(){{
         put(1,"#ccc");
@@ -24,7 +24,7 @@ public class RemoteDataController {
     
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/donut-charts/remote-data";
+        return "/donut-charts/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("timepicker-navigation-controller")
-@RequestMapping(value="/web/timepicker/")
+@RequestMapping(value="/timepicker/")
 public class NavigationController {
     
     @RequestMapping(value = {"/navigation"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/timepicker/navigation";
+        return "timepicker/navigation";
     }    
 }

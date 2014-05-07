@@ -11,11 +11,11 @@ import com.kendoui.spring.models.DiagramDataRepository;
 import com.kendoui.spring.models.OrgChartItem;
 
 @Controller("dataviz-diagram-home-controller")
-@RequestMapping(value="/dataviz/diagram/")
+@RequestMapping(value="/diagram/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/diagram/index";
+        return "/diagram/index";
     }
     
     @RequestMapping(value = "/index/read", method = RequestMethod.POST)

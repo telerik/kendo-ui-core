@@ -11,11 +11,11 @@ import com.kendoui.spring.models.DiagramDataRepository;
 import com.kendoui.spring.models.DiagramNode;
 
 @Controller("dataviz-diagram-layout-controller")
-@RequestMapping(value="/dataviz/diagram/")
+@RequestMapping(value="/diagram/")
 public class LayoutController {
     @RequestMapping(value = {"/layout"}, method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/diagram/layout";
+        return "/diagram/layout";
     }
     
     @RequestMapping(value = "/layout/read", method = RequestMethod.POST)

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("menu-animation-controller")
-@RequestMapping(value="/web/menu/")
+@RequestMapping(value="/menu/")
 public class AnimationController {
     
     @RequestMapping(value = "/animation", method = RequestMethod.GET)
@@ -17,7 +17,7 @@ public class AnimationController {
         model.addAttribute("delay", 100);
         model.addAttribute("animationConfig", "fadeIn");
         
-        return "web/menu/animation";
+        return "menu/animation";
     }     
     
     @RequestMapping(value = "/animation", method = RequestMethod.POST)
@@ -41,6 +41,6 @@ public class AnimationController {
         model.addAttribute("delay", delay);
         model.addAttribute("opacity", opacity);
         
-        return "web/menu/animation";
+        return "menu/animation";
     } 
 }

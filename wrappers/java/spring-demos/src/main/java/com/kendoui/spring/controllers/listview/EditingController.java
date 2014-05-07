@@ -16,7 +16,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("listview-editing-controller")
-@RequestMapping(value="/web/listview/")
+@RequestMapping(value="/listview/")
 public class EditingController {
     @Autowired 
     private ProductDao product;
@@ -24,7 +24,7 @@ public class EditingController {
     @RequestMapping(value = "editing", method = RequestMethod.GET)
     public String index() {        
         
-        return "web/listview/editing";
+        return "listview/editing";
     }
     
     @RequestMapping(value = "/editing/read", method = RequestMethod.POST)

@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-api-selection-controller")
-@RequestMapping(value="/dataviz/api/")
+@RequestMapping(value="/api/")
 public class SelectionController {
     @RequestMapping(value = "/selection", method = RequestMethod.GET)
     public String index() {       
-        return "/dataviz/api/selection";
+        return "/api/selection";
     }
 }

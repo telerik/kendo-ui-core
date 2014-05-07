@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("upload-rtl-controller")
-@RequestMapping(value="/web/upload/")
+@RequestMapping(value="/upload/")
 public class RtlController {
     
     @RequestMapping(value = "/rtl", method = RequestMethod.GET)
     public String index() {
-        return "web/upload/rtl";
+        return "upload/rtl";
     }
 }

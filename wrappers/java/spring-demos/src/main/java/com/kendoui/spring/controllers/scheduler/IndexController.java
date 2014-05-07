@@ -20,14 +20,14 @@ import com.kendoui.spring.models.Task;
 import com.kendoui.spring.models.TaskDao;
 
 @Controller("scheduler-home-controller")
-@RequestMapping(value="/web/scheduler/")
+@RequestMapping(value="/scheduler/")
 public class IndexController {
     @Autowired 
     private TaskDao task;
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Locale locale, Model model) {        
-        return "web/scheduler/index";
+        return "scheduler/index";
     }
     
     @RequestMapping(value = "/index/read", method = RequestMethod.POST)

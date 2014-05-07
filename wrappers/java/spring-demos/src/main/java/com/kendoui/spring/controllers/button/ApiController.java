@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("button-api-controller")
-@RequestMapping(value="/web/button/")
+@RequestMapping(value="/button/")
 public class ApiController {
     
     @RequestMapping(value = {"/api"}, method = RequestMethod.GET)
     public String index() {
-        return "web/button/api";
+        return "button/api";
     }
 }

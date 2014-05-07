@@ -15,7 +15,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-editing-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class EditingController {
     
     @Autowired 
@@ -23,7 +23,7 @@ public class EditingController {
     
     @RequestMapping(value = "/editing", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/editing";
+        return "grid/editing";
     }
     
     @RequestMapping(value = "/editing/read", method = RequestMethod.POST)

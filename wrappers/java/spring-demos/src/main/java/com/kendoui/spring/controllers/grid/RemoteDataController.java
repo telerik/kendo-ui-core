@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-remote-data-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class RemoteDataController {
     @Autowired 
     private OrderDao order;
 
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/remote-data";
+        return "grid/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

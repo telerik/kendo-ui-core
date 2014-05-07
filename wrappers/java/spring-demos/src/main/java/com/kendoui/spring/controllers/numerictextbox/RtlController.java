@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("numerictextbox-rtl-controller")
-@RequestMapping(value="/web/numerictextbox/")
+@RequestMapping(value="/numerictextbox/")
 public class RtlController {
     
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/numerictextbox/rtl";
+        return "numerictextbox/rtl";
     }    
 }

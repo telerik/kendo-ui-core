@@ -15,7 +15,7 @@ import com.kendoui.spring.models.BlogComments;
 import com.kendoui.spring.models.BarChartsLocalDataViewModel;
 
 @Controller("dataviz-bar_chart-local_data-controller")
-@RequestMapping(value="/dataviz/bar-charts/")
+@RequestMapping(value="/bar-charts/")
 public class LocalDataController {
     private Map<Integer, String> userColors = new HashMap<Integer, String>(){{
         put(1,"#ffd600");
@@ -42,6 +42,6 @@ public class LocalDataController {
         }
         model.addAttribute("viewModel", viewModel);
      
-        return "/dataviz/bar-charts/local-data";
+        return "/bar-charts/local-data";
     }
 }

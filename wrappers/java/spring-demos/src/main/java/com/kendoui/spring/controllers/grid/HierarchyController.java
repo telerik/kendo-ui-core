@@ -14,7 +14,7 @@ import com.kendoui.spring.models.EmployeeDao;
 import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-hierarchy-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class HierarchyController {
     @Autowired 
     private EmployeeDao employee;
@@ -24,7 +24,7 @@ public class HierarchyController {
     
     @RequestMapping(value = "/hierarchy", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/hierarchy";
+        return "grid/hierarchy";
     }
     
     @RequestMapping(value = "/employees", method = RequestMethod.POST)

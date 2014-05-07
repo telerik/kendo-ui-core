@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("sortable-handlers-controller")
-@RequestMapping(value="/web/sortable/")
+@RequestMapping(value="/sortable/")
 public class HandlersController {    
     
     @RequestMapping(value = {"/", "/handlers"}, method = RequestMethod.GET)
     public String index() {
-        return "web/sortable/handlers";
+        return "sortable/handlers";
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.BubblePoint;
 
 @Controller("dataviz-bubble_charts-home-controller")
-@RequestMapping(value="/dataviz/bubble-charts/")
+@RequestMapping(value="/bubble-charts/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -27,6 +27,6 @@ public class IndexController {
         bubbleData.add(new BubblePoint(3000, 55000, 900000, "Whole Foods Market"));
         model.addAttribute("bubbleData", bubbleData);
         
-        return "/dataviz/bubble-charts/index";
+        return "/bubble-charts/index";
     }
 }

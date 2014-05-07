@@ -12,7 +12,7 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("listview-rtl-controller")
-@RequestMapping(value="/web/listview/")
+@RequestMapping(value="/listview/")
 public class RtlController {
     @Autowired 
     private ProductDao product;
@@ -20,7 +20,7 @@ public class RtlController {
     @RequestMapping(value = "/rtl", method = RequestMethod.GET)
     public String index() {        
         
-        return "web/listview/rtl";
+        return "listview/rtl";
     }
     
     @RequestMapping(value = "/rtl_read", method = RequestMethod.POST)

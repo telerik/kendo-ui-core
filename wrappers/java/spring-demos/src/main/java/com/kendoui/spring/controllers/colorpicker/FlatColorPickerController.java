@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("colorpicker-flatcolorpicker-controller")
-@RequestMapping(value="/web/colorpicker/")
+@RequestMapping(value="/colorpicker/")
 public class FlatColorPickerController {
     
     @RequestMapping(value = {"/flatcolorpicker"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/colorpicker/flatcolorpicker";
+        return "colorpicker/flatcolorpicker";
     }    
 }

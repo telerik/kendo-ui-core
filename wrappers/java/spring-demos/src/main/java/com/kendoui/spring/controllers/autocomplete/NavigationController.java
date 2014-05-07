@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("autocomplete-navigation-controller")
-@RequestMapping(value="/web/autocomplete/")
+@RequestMapping(value="/autocomplete/")
 public class NavigationController {
     
     @RequestMapping(value = {"/navigation"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/autocomplete/navigation";
+        return "autocomplete/navigation";
     }    
 }

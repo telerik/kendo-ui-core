@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("window-rtl-controller")
-@RequestMapping(value="/web/window/")
+@RequestMapping(value="/window/")
 public class RtlController {    
     
     @RequestMapping(value = "/rtl", method = RequestMethod.GET)
     public String index() {
-        return "web/window/rtl";
+        return "window/rtl";
     }
 }
 

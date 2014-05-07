@@ -12,7 +12,7 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 
 @Controller("combobox-template-controller")
-@RequestMapping(value="/web/combobox/")
+@RequestMapping(value="/combobox/")
 public class TemplateController {
     
     @Autowired 
@@ -20,7 +20,7 @@ public class TemplateController {
     
     @RequestMapping(value = {"/template"}, method = RequestMethod.GET)
     public String index() {
-        return "web/combobox/template";
+        return "combobox/template";
     }
     
     @RequestMapping(value = "/template/read", method = RequestMethod.POST)

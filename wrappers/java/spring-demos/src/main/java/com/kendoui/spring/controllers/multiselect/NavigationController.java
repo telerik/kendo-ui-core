@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("multiselect-navigation-controller")
-@RequestMapping(value="/web/multiselect/")
+@RequestMapping(value="/multiselect/")
 public class NavigationController {
     
     @RequestMapping(value = {"/navigation"}, method = RequestMethod.GET)
@@ -21,6 +21,6 @@ public class NavigationController {
                 new DropDownListItem("X-Large", "5"),
                 new DropDownListItem("2X-Large", "6"),
         });
-        return "web/multiselect/navigation";
+        return "multiselect/navigation";
     }    
 }

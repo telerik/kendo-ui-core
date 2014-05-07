@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-column-menu-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class ColumnMenuController {
     @Autowired 
     private OrderDao order;
 
     @RequestMapping(value = "/column-menu", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/column-menu";
+        return "grid/column-menu";
     }
     
     @RequestMapping(value = "/column-menu/read", method = RequestMethod.POST)

@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("datetimepicker-rtl-controller")
-@RequestMapping(value="/web/datetimepicker/")
+@RequestMapping(value="/datetimepicker/")
 public class RtlController {
     
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/datetimepicker/rtl";
+        return "datetimepicker/rtl";
     }    
 }

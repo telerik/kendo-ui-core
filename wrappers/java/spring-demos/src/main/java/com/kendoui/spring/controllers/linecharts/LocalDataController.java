@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-line_chart-local_data-controller")
-@RequestMapping(value="/dataviz/line-charts/")
+@RequestMapping(value="/line-charts/")
 public class LocalDataController {
     @RequestMapping(value = "/local-data", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("internetUsers", ChartDataRepository.InternetUsers());
      
-        return "/dataviz/line-charts/local-data";
+        return "/line-charts/local-data";
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("combobox-api-controller")
-@RequestMapping(value="/web/combobox/")
+@RequestMapping(value="/combobox/")
 public class ApiController {
     
     @RequestMapping(value = {"api"}, method = RequestMethod.GET)
@@ -27,6 +27,6 @@ public class ApiController {
                 new DropDownListItem("The Shawshank Redemption 2", "10")
         });
        
-        return "web/combobox/api";
+        return "combobox/api";
     }
 }

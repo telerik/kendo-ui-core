@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-barcode-api-controller")
-@RequestMapping(value="/dataviz/barcode/")
+@RequestMapping(value="/barcode/")
 public class ApiController {
     @RequestMapping(value = "api", method = RequestMethod.GET)
     public String index() {
         
-        return "/dataviz/barcode/api";
+        return "/barcode/api";
     }
 }

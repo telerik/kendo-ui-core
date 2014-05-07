@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("menu-images-controller")
-@RequestMapping(value="/web/menu/")
+@RequestMapping(value="/menu/")
 public class ImagesController {
     
     @RequestMapping(value = {"/images"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/menu/images";
+        return "menu/images";
     }    
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("multiselect-rtl-controller")
-@RequestMapping(value="/web/multiselect/")
+@RequestMapping(value="/multiselect/")
 public class RtlController {
     
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
@@ -22,6 +22,6 @@ public class RtlController {
                 new DropDownListItem("Antarctica", "1"),
                 new DropDownListItem("Australia", "1")
         });       
-        return "web/multiselect/rtl";
+        return "multiselect/rtl";
     }    
 }

@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("editor-snippets-controller")
-@RequestMapping(value="/web/editor/")
+@RequestMapping(value="/editor/")
 public class SnippetsController {
     
     @RequestMapping(value = "/snippets", method = RequestMethod.GET)
     public String index() {       
-        return "web/editor/snippets";
+        return "editor/snippets";
     }    
 }
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("maskedtextbox-globalization-controller")
-@RequestMapping(value="/web/maskedtextbox/")
+@RequestMapping(value="/maskedtextbox/")
 public class GlobalizationController {
 
     @RequestMapping(value = {"/globalization"}, method = RequestMethod.GET)
@@ -21,6 +21,6 @@ public class GlobalizationController {
                 new DropDownListItem("bg-BG", "bg-BG")
         });
         
-        return "web/maskedtextbox/globalization";
+        return "maskedtextbox/globalization";
     }
 }

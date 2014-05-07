@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ElectricityProduction;
 
 @Controller("dataviz-api-events-controller")
-@RequestMapping(value="/dataviz/api/")
+@RequestMapping(value="/api/")
 public class EventsController {
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/api/events";
+        return "/api/events";
     }
     
     @RequestMapping(value = "/events/read", method = RequestMethod.POST)

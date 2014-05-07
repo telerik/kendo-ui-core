@@ -15,7 +15,7 @@ import com.kendoui.spring.models.ImageBrowserDao;
 import com.kendoui.spring.models.ImageBrowserEntry;
 
 @Controller("editor-imagebrowser-controller")
-@RequestMapping(value="/web/editor/")
+@RequestMapping(value="/editor/")
 public class ImageBrowserController {
     
     @Autowired 
@@ -23,7 +23,7 @@ public class ImageBrowserController {
     
     @RequestMapping(value = {"/imagebrowser"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/editor/imagebrowser";
+        return "editor/imagebrowser";
     }    
     
     @RequestMapping(value = {"/imagebrowser/read"}, method = RequestMethod.POST)

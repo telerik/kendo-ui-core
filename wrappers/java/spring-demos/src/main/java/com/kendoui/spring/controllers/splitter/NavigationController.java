@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("splitter-navigation-controller")
-@RequestMapping(value="/web/splitter/")
+@RequestMapping(value="/splitter/")
 public class NavigationController {
     
     @RequestMapping(value = "/navigation", method = RequestMethod.GET)
     public String index() {       
-        return "web/splitter/navigation";
+        return "splitter/navigation";
     }    
 }

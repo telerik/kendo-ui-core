@@ -20,14 +20,14 @@ import com.kendoui.spring.models.Task;
 import com.kendoui.spring.models.TaskDao;
 
 @Controller("scheduler-rtl-controller")
-@RequestMapping(value="/web/scheduler/")
+@RequestMapping(value="/scheduler/")
 public class RtlController {
     @Autowired 
     private TaskDao task;
     
     @RequestMapping(value = "/rtl", method = RequestMethod.GET)
     public String index(Locale locale, Model model) {        
-        return "web/scheduler/rtl";
+        return "scheduler/rtl";
     }
     
     @RequestMapping(value = "/rtl/read", method = RequestMethod.POST)

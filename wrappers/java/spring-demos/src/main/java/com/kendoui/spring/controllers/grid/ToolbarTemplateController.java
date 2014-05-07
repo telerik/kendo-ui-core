@@ -15,7 +15,7 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-toolbar-template-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class ToolbarTemplateController {
     @Autowired    
     private ProductDao product;
@@ -25,7 +25,7 @@ public class ToolbarTemplateController {
 
     @RequestMapping(value = "/toolbar-template", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/toolbar-template";
+        return "grid/toolbar-template";
     }
     
     @RequestMapping(value = "/toolbar-template/read", method = RequestMethod.POST)

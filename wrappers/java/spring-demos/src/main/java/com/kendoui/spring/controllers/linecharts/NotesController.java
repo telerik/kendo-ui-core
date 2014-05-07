@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-line_chart-notes-controller")
-@RequestMapping(value="/dataviz/line-charts/")
+@RequestMapping(value="/line-charts/")
 public class NotesController {
     @RequestMapping(value = "/notes", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("grandSlam", ChartDataRepository.GrandSlam());
      
-        return "/dataviz/line-charts/notes";
+        return "/line-charts/notes";
     }
 }

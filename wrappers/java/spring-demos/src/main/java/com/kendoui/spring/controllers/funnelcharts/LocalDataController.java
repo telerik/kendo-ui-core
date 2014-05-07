@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.WebSiteStats;
 
 @Controller("dataviz-funnel_chart-local_data-controller")
-@RequestMapping(value="/dataviz/funnel-charts/")
+@RequestMapping(value="/funnel-charts/")
 public class LocalDataController {
     @RequestMapping(value = "/local-data", method = RequestMethod.GET)
     public String index(Model model) {
@@ -32,6 +32,6 @@ public class LocalDataController {
         dataAfter.add(new WebSiteStats("Purchased", 9697));
         model.addAttribute("dataAfter", dataAfter);        
         
-        return "/dataviz/funnel-charts/local-data";
+        return "/funnel-charts/local-data";
     }
 }

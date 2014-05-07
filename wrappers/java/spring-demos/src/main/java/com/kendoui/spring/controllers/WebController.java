@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kendoui.spring.navigation.Widget;
 
 @Controller
-@RequestMapping(value="/web/")
+@RequestMapping(value="/")
 public class WebController {
     @Autowired
     private HttpServletRequest request;
@@ -46,7 +46,7 @@ public class WebController {
                 List<Example> examples = new ArrayList<Example>();
                 
                 for (Example example : widget.getItems()) {
-                    path = context.getRealPath("WEB-INF/views/web/" +example.getUrl().replace(".html", ".jsp"));
+                    path = context.getRealPath("WEB-INF/views/" +example.getUrl().replace(".html", ".jsp"));
                     
                     if (new File(path).exists()) {
                         examples.add(example);
@@ -59,6 +59,6 @@ public class WebController {
         
         model.addAttribute("navigation", navigation); 
         
-        return "web/index";
+        return "index";
     }
 }

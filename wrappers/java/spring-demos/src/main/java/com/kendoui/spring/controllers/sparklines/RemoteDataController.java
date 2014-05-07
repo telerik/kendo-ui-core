@@ -12,14 +12,14 @@ import com.kendoui.spring.models.Weather;
 import com.kendoui.spring.models.WeatherDao;
 
 @Controller("dataviz-sparklines_remote_data-controller")
-@RequestMapping(value="/dataviz/sparklines/")
+@RequestMapping(value="/sparklines/")
 public class RemoteDataController {
     @Autowired 
     private WeatherDao weather;
 
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/sparklines/remote-data";
+        return "/sparklines/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

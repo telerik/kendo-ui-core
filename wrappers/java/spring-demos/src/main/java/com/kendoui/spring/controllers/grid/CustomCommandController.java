@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.EmployeeDao;
 
 @Controller("grid-custom-command-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class CustomCommandController {
     @Autowired 
     private EmployeeDao employee;
     
     @RequestMapping(value = "/custom-command", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/custom-command";
+        return "grid/custom-command";
     }
     @RequestMapping(value = "/custom-command/read", method = RequestMethod.POST)
     public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {

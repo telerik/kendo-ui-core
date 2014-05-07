@@ -14,14 +14,14 @@ import com.kendoui.spring.models.DetailedEmployee;
 import com.kendoui.spring.models.EmployeeDao;
 
 @Controller("treeview-remote-binding-controller")
-@RequestMapping(value="/web/treeview/")
+@RequestMapping(value="/treeview/")
 public class RemoteBindingController {
     @Autowired 
     private EmployeeDao employee;
 
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "web/treeview/remote-data";
+        return "treeview/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("sortable-sortable-panels-controller")
-@RequestMapping(value="/web/sortable/")
+@RequestMapping(value="/sortable/")
 public class SortablePanelsController {    
     
     @RequestMapping(value = {"/", "/sortable-panels"}, method = RequestMethod.GET)
     public String index() {
-        return "web/sortable/sortable-panels";
+        return "sortable/sortable-panels";
     }
     
 }

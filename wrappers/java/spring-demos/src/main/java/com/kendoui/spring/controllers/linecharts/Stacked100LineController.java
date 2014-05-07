@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-line_charts-stacked100_line-controller")
-@RequestMapping(value="/dataviz/line-charts/")
+@RequestMapping(value="/line-charts/")
 public class Stacked100LineController {
     @RequestMapping(value = "/stacked100-line", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/line-charts/stacked100-line";
+        return "/line-charts/stacked100-line";
     }
 }

@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("editor-rtl-controller")
-@RequestMapping(value="/web/editor/")
+@RequestMapping(value="/editor/")
 public class RtlController {
     
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/editor/rtl";
+        return "editor/rtl";
     }    
 }

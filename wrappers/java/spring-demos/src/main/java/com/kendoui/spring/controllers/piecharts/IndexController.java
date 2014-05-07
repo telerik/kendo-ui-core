@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.PieChartsBasicUsageViewModel;
 
 @Controller("dataviz-pie_charts-home-controller")
-@RequestMapping(value="/dataviz/pie-charts/")
+@RequestMapping(value="/pie-charts/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -25,6 +25,6 @@ public class IndexController {
 
         model.addAttribute("pieData", pieChartData);
         
-        return "/dataviz/pie-charts/index";
+        return "/pie-charts/index";
     }
 }

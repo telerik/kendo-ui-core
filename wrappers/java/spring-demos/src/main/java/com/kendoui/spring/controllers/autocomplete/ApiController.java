@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("autocomplete-api-controller")
-@RequestMapping(value="/web/autocomplete/")
+@RequestMapping(value="/autocomplete/")
 public class ApiController {
     
     @RequestMapping(value = {"api"}, method = RequestMethod.GET)
@@ -28,6 +28,6 @@ public class ApiController {
         
         model.addAttribute("colors", colors);
         
-        return "web/autocomplete/api";
+        return "autocomplete/api";
     }
 }

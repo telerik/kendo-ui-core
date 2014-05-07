@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-scatter_charts-multiple_axes-controller")
-@RequestMapping(value="/dataviz/scatter-charts/")
+@RequestMapping(value="/scatter-charts/")
 public class MultipleAxesController {
     @RequestMapping(value = "/multiple-axes", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("engineData", ChartDataRepository.EngineData());
         
-        return "/dataviz/scatter-charts/multiple-axes";
+        return "/scatter-charts/multiple-axes";
     }
 }

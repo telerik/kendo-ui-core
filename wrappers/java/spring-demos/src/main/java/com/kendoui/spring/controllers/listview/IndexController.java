@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("listview-home-controller")
-@RequestMapping(value="/web/listview/")
+@RequestMapping(value="/listview/")
 public class IndexController {
     @Autowired 
     private ProductDao product;
@@ -20,7 +20,7 @@ public class IndexController {
     public String index(Locale locale, Model model) {        
         model.addAttribute("products", product.getList());
         
-        return "web/listview/index";
+        return "listview/index";
     }      
 }
 

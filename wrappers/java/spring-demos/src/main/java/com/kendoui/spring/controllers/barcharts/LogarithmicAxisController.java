@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller("dataviz-bar_chart-logarithmic_axis-controller")
-@RequestMapping(value="/dataviz/bar-charts/")
+@RequestMapping(value="/bar-charts/")
 public class LogarithmicAxisController {
     
     @RequestMapping(value = "/logarithmic-axis", method = RequestMethod.GET)
@@ -25,6 +25,6 @@ public class LogarithmicAxisController {
         
         model.addAttribute("data", data);
      
-        return "/dataviz/bar-charts/logarithmic-axis";
+        return "/bar-charts/logarithmic-axis";
     }
 }

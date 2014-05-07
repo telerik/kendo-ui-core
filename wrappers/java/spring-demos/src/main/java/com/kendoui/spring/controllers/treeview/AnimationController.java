@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("treeview-animation-controller")
-@RequestMapping(value="/web/treeview/")
+@RequestMapping(value="/treeview/")
 public class AnimationController {
     
     @RequestMapping(value = "/animation", method = RequestMethod.GET)
@@ -16,7 +16,7 @@ public class AnimationController {
         model.addAttribute("opacity", true);
         model.addAttribute("animationConfig", "fadeIn");
         
-        return "web/treeview/animation";
+        return "treeview/animation";
     }  
     
     @RequestMapping(value = "/animation", method = RequestMethod.POST)
@@ -34,6 +34,6 @@ public class AnimationController {
         model.addAttribute("animationConfig", animationConfig);
         model.addAttribute("opacity", opacity);
         
-        return "web/treeview/animation";
+        return "treeview/animation";
     } 
 }

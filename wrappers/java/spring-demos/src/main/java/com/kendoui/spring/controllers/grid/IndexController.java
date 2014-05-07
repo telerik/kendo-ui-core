@@ -13,14 +13,14 @@ import com.kendoui.spring.models.CustomerDao;
 
 
 @Controller("grid-home-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class IndexController {
     @Autowired 
     private CustomerDao customer;
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
-        return "web/grid/index";
+        return "grid/index";
     }
     
     @RequestMapping(value = "/customers", method = RequestMethod.GET)

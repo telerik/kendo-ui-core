@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.PiePoint;
 
 @Controller("dataviz-donut_charts-pie_labels-controller")
-@RequestMapping(value="/dataviz/donut-charts/")
+@RequestMapping(value="/donut-charts/")
 public class PieLabelsController {
     @RequestMapping(value = {"/donut-labels"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -23,6 +23,6 @@ public class PieLabelsController {
         pieChartData.add(new PiePoint("Tennis",10));
         model.addAttribute("donutData", pieChartData);
         
-        return "/dataviz/donut-charts/donut-labels";
+        return "/donut-charts/donut-labels";
     }
 }

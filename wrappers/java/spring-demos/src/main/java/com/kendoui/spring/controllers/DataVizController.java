@@ -24,7 +24,7 @@ import com.kendoui.spring.navigation.Example;
 import com.kendoui.spring.navigation.Widget;
 
 @Controller
-@RequestMapping(value="/dataviz/")
+@RequestMapping(value="/")
 public class DataVizController {
     @Autowired
     private HttpServletRequest request;
@@ -46,7 +46,7 @@ public class DataVizController {
                 List<Example> examples = new ArrayList<Example>();
                 
                 for (Example example : widget.getItems()) {
-                    path = context.getRealPath("WEB-INF/views/dataviz/" +example.getUrl().replace(".html", ".jsp"));
+                    path = context.getRealPath("WEB-INF/views/" +example.getUrl().replace(".html", ".jsp"));
                     
                     if (new File(path).exists()) {
                         examples.add(example);
@@ -59,6 +59,6 @@ public class DataVizController {
         
         model.addAttribute("navigation", navigation);
         
-        return "dataviz/index";
+        return "index";
     }
 }

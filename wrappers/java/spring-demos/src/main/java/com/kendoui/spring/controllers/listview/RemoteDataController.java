@@ -12,7 +12,7 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("listview-remote-data-controller")
-@RequestMapping(value="/web/listview/")
+@RequestMapping(value="/listview/")
 public class RemoteDataController {
     @Autowired 
     private ProductDao product;
@@ -20,7 +20,7 @@ public class RemoteDataController {
     @RequestMapping(value = "remote-data", method = RequestMethod.GET)
     public String index() {        
         
-        return "web/listview/remote-data";
+        return "listview/remote-data";
     }
     
     @RequestMapping(value = "/products", method = RequestMethod.POST)

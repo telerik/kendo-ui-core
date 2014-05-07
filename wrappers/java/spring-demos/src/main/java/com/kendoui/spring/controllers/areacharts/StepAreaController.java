@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-area_chart-step_area-controller")
-@RequestMapping(value="/dataviz/area-charts/")
+@RequestMapping(value="/area-charts/")
 public class StepAreaController {
     @RequestMapping(value = "/step-area", method = RequestMethod.GET)
     public String index(Model model) {
-        return "/dataviz/area-charts/step-area";
+        return "/area-charts/step-area";
     }
 }

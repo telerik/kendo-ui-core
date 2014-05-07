@@ -12,11 +12,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.StockDataPoint;
 
 @Controller("dataviz-scatter_charts-date_axis-controller")
-@RequestMapping(value="/dataviz/scatter-charts/")
+@RequestMapping(value="/scatter-charts/")
 public class DateAxisController {
     @RequestMapping(value = "/date-axis", method = RequestMethod.GET)
     public String index(Model model) {
-        return "/dataviz/scatter-charts/date-axis";
+        return "/scatter-charts/date-axis";
     }
     
     @RequestMapping(value = "/date-axis/read", method = RequestMethod.POST)

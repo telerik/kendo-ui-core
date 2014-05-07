@@ -14,14 +14,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.EmployeeDao;
 
 @Controller("grid-filter-menu--customization-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class FilterMenuCustomizationController {
     @Autowired 
     private EmployeeDao employee;
 
     @RequestMapping(value = "/filter-menu-customization", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/filter-menu-customization";
+        return "grid/filter-menu-customization";
     }
     
     @RequestMapping(value = "/filter-menu-customization/read", method = RequestMethod.POST)

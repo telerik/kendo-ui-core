@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("calendar-events-controller")
-@RequestMapping(value="/web/calendar/")
+@RequestMapping(value="/calendar/")
 public class EventsController {
     
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/calendar/events";
+        return "calendar/events";
     }
 }

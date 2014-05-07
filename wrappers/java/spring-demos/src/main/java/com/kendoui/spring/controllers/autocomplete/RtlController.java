@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("autocomplete-rtl-controller")
-@RequestMapping(value="/web/autocomplete/")
+@RequestMapping(value="/autocomplete/")
 public class RtlController {
     
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("states", getStates());
         
-        return "web/autocomplete/rtl";
+        return "autocomplete/rtl";
     }
     
     private String[] getStates() {

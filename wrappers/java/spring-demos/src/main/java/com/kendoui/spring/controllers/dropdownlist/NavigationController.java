@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("dropdownlist-navigation-controller")
-@RequestMapping(value="/web/dropdownlist/")
+@RequestMapping(value="/dropdownlist/")
 public class NavigationController {
     
     @RequestMapping(value = {"/navigation"}, method = RequestMethod.GET)
@@ -22,6 +22,6 @@ public class NavigationController {
                 new DropDownListItem("2X-Large", "6"),
         });
         
-        return "web/dropdownlist/navigation";
+        return "dropdownlist/navigation";
     }    
 }

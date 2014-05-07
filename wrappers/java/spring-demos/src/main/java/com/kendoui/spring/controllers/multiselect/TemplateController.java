@@ -12,7 +12,7 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 
 @Controller("multiselect-template-controller")
-@RequestMapping(value="/web/multiselect/")
+@RequestMapping(value="/multiselect/")
 public class TemplateController {
     
     @Autowired 
@@ -20,7 +20,7 @@ public class TemplateController {
     
     @RequestMapping(value = {"/template"}, method = RequestMethod.GET)
     public String index() {
-        return "web/multiselect/template";
+        return "multiselect/template";
     }
     
     @RequestMapping(value = "/template/read", method = RequestMethod.POST)

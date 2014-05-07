@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("combobox-rtl-controller")
-@RequestMapping(value="/web/combobox/")
+@RequestMapping(value="/combobox/")
 public class RtlController {
     
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
@@ -18,6 +18,6 @@ public class RtlController {
                 new DropDownListItem("Item 2", "2"),
                 new DropDownListItem("Item 3", "3")
         });       
-        return "web/combobox/rtl";
+        return "combobox/rtl";
     }    
 }

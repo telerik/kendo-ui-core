@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("combobox-clientfiltering-controller")
-@RequestMapping(value="/web/combobox/")
+@RequestMapping(value="/combobox/")
 public class ClientFilteringController {
     @Autowired 
     private ProductDao product;
@@ -17,6 +17,6 @@ public class ClientFilteringController {
     @RequestMapping(value = "/clientfiltering", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("products", product.getList());
-        return "web/combobox/clientfiltering";
+        return "combobox/clientfiltering";
     }
 }

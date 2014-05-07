@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-local-data-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class LocalDataController {
     @Autowired 
     private ProductDao product;
@@ -20,6 +20,6 @@ public class LocalDataController {
     public String index(Locale locale, Model model) {
         model.addAttribute("products", product.getList());
         
-        return "web/grid/local-data";
+        return "grid/local-data";
     }
 }

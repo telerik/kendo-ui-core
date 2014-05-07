@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("dropdownlist-remotedatasource-controller")
-@RequestMapping(value="/web/dropdownlist/")
+@RequestMapping(value="/dropdownlist/")
 public class RemoteDataSourceController {
     @Autowired 
     private ProductDao product;
 
     @RequestMapping(value = "/remotedatasource", method = RequestMethod.GET)
     public String index() {
-        return "web/dropdownlist/remotedatasource";
+        return "dropdownlist/remotedatasource";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

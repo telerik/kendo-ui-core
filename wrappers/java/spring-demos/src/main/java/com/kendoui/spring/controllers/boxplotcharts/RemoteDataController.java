@@ -11,11 +11,11 @@ import com.kendoui.spring.models.BoxPlotCategoryPoint;
 import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-box_plot_charts_remote_data-controller")
-@RequestMapping(value="/dataviz//box-plot-charts/")
+@RequestMapping(value="//box-plot-charts/")
 public class RemoteDataController {
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz//box-plot-charts/remote-data";
+        return "//box-plot-charts/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

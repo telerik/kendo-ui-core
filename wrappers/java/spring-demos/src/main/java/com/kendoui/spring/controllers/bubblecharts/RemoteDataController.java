@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.CrimeData;
 
 @Controller("dataviz-bubble_charts_remote_data-controller")
-@RequestMapping(value="/dataviz/bubble-charts/")
+@RequestMapping(value="/bubble-charts/")
 public class RemoteDataController {
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/bubble-charts/remote-data";
+        return "/bubble-charts/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

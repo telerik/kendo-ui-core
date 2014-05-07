@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("splitter-rtl-controller")
-@RequestMapping(value="/web/splitter/")
+@RequestMapping(value="/splitter/")
 public class RtlController {
     
     @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
     public String index() {
-        return "web/splitter/rtl";
+        return "splitter/rtl";
     }
 }

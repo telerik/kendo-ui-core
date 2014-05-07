@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("numerictextbox-events-controller")
-@RequestMapping(value="/web/numerictextbox/")
+@RequestMapping(value="/numerictextbox/")
 public class EventsController {
     
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/numerictextbox/events";
+        return "numerictextbox/events";
     }
 }

@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.AprilSales;
 
 @Controller("dataviz-bullet_charts_remote_data-controller")
-@RequestMapping(value="/dataviz/bullet-charts/")
+@RequestMapping(value="/bullet-charts/")
 public class RemoteDataController {
     @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/bullet-charts/remote-data";
+        return "/bullet-charts/remote-data";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
