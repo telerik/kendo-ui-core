@@ -2464,9 +2464,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "DataSource",
     "name": "datasource",
     "documentation": "framework/datasource",
@@ -2516,9 +2514,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Templates",
     "name": "templates",
     "documentation": "framework/kendo",
@@ -2542,9 +2538,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "MVVM",
     "name": "mvvm",
     "documentation": "framework/kendo",
@@ -2610,10 +2604,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc",
-      "!offline"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php", "!offline" ],
     "text": "Single-Page App",
     "name": "spa",
     "documentation": "framework/kendo",
@@ -2632,9 +2623,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Effects",
     "name": "fx",
     "documentation": "framework/kendo",
@@ -2707,9 +2696,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Drag & Drop",
     "name": "dragdrop",
     "documentation": "framework/draggable",
@@ -2745,9 +2732,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Validator",
     "name": "validator",
     "documentation": "framework/validator",
@@ -2771,9 +2756,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Globalization",
     "name": "globalization",
     "documentation": "framework/kendo",
@@ -2791,9 +2774,7 @@
     ]
   },
   {
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Styling",
     "name": "styling",
     "spriteCssClass": "stylingIcon",
@@ -2822,12 +2803,10 @@
     ]
   },
   {
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Integration",
     "name": "integration",
     "spriteCssClass": "integrationIcon",
-    "packages": [
-      "online"
-    ],
     "items": [
       {
         "text": "Kendo UI + jQuery templates",
@@ -4042,9 +4021,7 @@
     "name": "overview",
     "documentation": "mobile",
     "spriteCssClass": "overviewIcon",
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Overview",
@@ -4063,6 +4040,7 @@
     "documentation": "mobile/actionsheet",
     "spriteCssClass": "mobileActionSheetIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4079,6 +4057,7 @@
     "text": "Adaptive Widgets",
     "name": "adaptive",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Scheduler",
@@ -4111,6 +4090,7 @@
     "documentation": "mobile/button",
     "spriteCssClass": "mobileButtonIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4158,6 +4138,7 @@
     "documentation": "mobile/buttongroup",
     "spriteCssClass": "mobileButtonGroupIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4211,6 +4192,7 @@
     "documentation": "mobile/drawer",
     "spriteCssClass": "mobileDrawerIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4235,6 +4217,7 @@
     "documentation": "mobile/listview",
     "spriteCssClass": "mobileListViewIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4333,6 +4316,7 @@
   {
     "text": "ModalView",
     "name": "modalview",
+    "packages": [ "!jsp", "!php" ],
     "documentation": "mobile/modalview",
     "spriteCssClass": "mobileModalViewIcon",
     "mobile": true,
@@ -4354,6 +4338,7 @@
     "documentation": "mobile/navbar",
     "spriteCssClass": "mobileNavBarIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4379,6 +4364,7 @@
     "documentation": "mobile/popover",
     "spriteCssClass": "mobilePopOverIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4397,9 +4383,7 @@
     "documentation": "mobile/scroller",
     "spriteCssClass": "mobileScrollerIcon",
     "mobile": true,
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4424,6 +4408,7 @@
     "documentation": "mobile/scrollview",
     "spriteCssClass": "mobileScrollViewIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4460,6 +4445,7 @@
     "documentation": "mobile/switch",
     "spriteCssClass": "mobileSwitchIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4495,6 +4481,7 @@
     "documentation": "mobile/tabstrip",
     "spriteCssClass": "mobileTabStripIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Basic usage",
@@ -4525,6 +4512,7 @@
     "documentation": "mobile/application",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Overview",
@@ -4554,9 +4542,7 @@
     "name": "mobile-forms",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Overview",
@@ -4587,9 +4573,7 @@
     "documentation": "mobile/touch",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
-    "packages": [
-      "!mvc"
-    ],
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Touch Events",
@@ -4608,6 +4592,7 @@
     "documentation": "mobile/view",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Overview",
@@ -4636,6 +4621,7 @@
     "spriteCssClass": "mobileSplitViewIcon",
     "mobile": true,
     "tablet": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Overview",
@@ -4660,6 +4646,7 @@
     "documentation": "mobile/layout",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
+    "packages": [ "!jsp", "!php" ],
     "items": [
       {
         "text": "Overview",

@@ -2,21 +2,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Kendo UI for JSP - Spring MVC Offline Examples</title>
+    <title>Kendo UI Web Examples</title>
     <link href="<c:url value='/resources/shared/styles/suite.css'/>" rel="stylesheet">
 </head>
 <body>
     <div id="page">
-        <h2>Kendo UI for JSP</h2>
-         <ul id="suites">
-             <li class="box">
-                <a href="<c:url value='/web/'/>" class="imgPlate"><img src="<c:url value='/resources/shared/styles/demos-web.png'/>" /></a>
-                <h2><a href="<c:url value='/web/'/>">Web examples</a></h2>
-            </li>
-             <li class="box">
-                <a href="<c:url value='/dataviz/'/>" class="imgPlate"><img src="<c:url value='/resources/shared/styles/demos-dataviz.png'/>" /></a>
-                <h2><a href="<c:url value='/dataviz/'/>">DataViz examples</a></h2>
-            </li>
+     <ul>
+        <c:forEach var="widget" items="${navigation}">
+       		<c:if test="${widget.include()}">
+	       		<li>
+	       			<h2>${widget.text}</h2>
+	       			<ul>
+	       			<c:forEach var="example" items="${widget.items}">
+	       				<c:if test="${example.include()}">
+	       					<li><a href="<c:url value='${example.url.replaceAll(".html", "")}'/>">${example.text}</a></li>
+	       				</c:if>
+	       			</c:forEach>
+	       			</ul>
+	       		</li>
+       		</c:if>
+       </c:forEach>
         </ul>
     </div>
 </body>
