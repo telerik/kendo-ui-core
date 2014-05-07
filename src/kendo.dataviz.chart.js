@@ -128,6 +128,8 @@ var __meta__ = {
         Y_ERROR_LOW_FIELD = "yErrorLow",
         Y_ERROR_HIGH_FIELD = "yErrorHigh",
         FADEIN = "fadeIn",
+        FIRST = "first",
+        FROM = "from",
         FUNNEL = "funnel",
         GLASS = "glass",
         HORIZONTAL = "horizontal",
@@ -142,8 +144,10 @@ var __meta__ = {
         LINE = "line",
         LINE_MARKER_SIZE = 8,
         LOGARITHMIC = "log",
+        MAX = "max",
         MAX_EXPAND_DEPTH = 5,
         MAX_VALUE = Number.MAX_VALUE,
+        MIN = "min",
         MIN_VALUE = -Number.MAX_VALUE,
         MINUTES = "minutes",
         MONTHS = "months",
@@ -166,6 +170,7 @@ var __meta__ = {
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
         POINTER = "pointer",
+        RANGE_COLUMN = "rangeColumn",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
         ROUNDED_GLASS = "roundedGlass",
@@ -198,6 +203,7 @@ var __meta__ = {
             "minutes": TIME_PER_MINUTE,
             "seconds": TIME_PER_SECOND
         },
+        TO = "to",
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
@@ -223,7 +229,7 @@ var __meta__ = {
             SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ],
         EQUALLY_SPACED_SERIES = [
-            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET
+            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN
         ];
 
     var DateLabelFormats = {
@@ -3691,7 +3697,6 @@ var __meta__ = {
         }
     });
 
-
     var BarChart = CategoricalChart.extend({
         init: function(plotArea, options) {
             var chart = this;
@@ -3728,7 +3733,8 @@ var __meta__ = {
 
         createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
-                value = data.valueFields.value,
+                // TODO: Range Column value is an object
+                value = chart.pointValue(data),
                 options = chart.options,
                 children = chart.children,
                 isStacked = chart.options.isStacked,
@@ -3838,6 +3844,41 @@ var __meta__ = {
 
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
+            }
+        }
+    });
+
+    var RangeBarChart = BarChart.extend({
+        pointValue: function(data) {
+            return data.valueFields;
+        },
+
+        plotLimits: CategoricalChart.fn.plotLimits,
+
+        plotRange: function(point) {
+            if (!point) {
+                return 0;
+            }
+
+            return [point.value.from, point.value.to];
+        },
+
+        updateRange: function(value, categoryIx, series) {
+            var chart = this,
+                axisName = series.axis,
+                from = value.from,
+                to = value.to,
+                axisRange = chart.valueAxisRanges[axisName];
+
+            if (value !== null && isNumber(from) && isNumber(to)) {
+                axisRange = chart.valueAxisRanges[axisName] =
+                    axisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                axisRange.min = math.min(axisRange.min, from);
+                axisRange.max = math.max(axisRange.max, from);
+
+                axisRange.min = math.min(axisRange.min, to);
+                axisRange.max = math.max(axisRange.max, to);
             }
         }
     });
@@ -8525,6 +8566,11 @@ var __meta__ = {
                     pane
                 );
 
+                plotArea.createRangeBarChart(
+                    filterSeriesByType(filteredSeries, [RANGE_COLUMN]),
+                    pane
+                );
+
                 plotArea.createBulletChart(
                     filterSeriesByType(filteredSeries, [BULLET, VERTICAL_BULLET]),
                     pane
@@ -8700,6 +8746,23 @@ var __meta__ = {
                 }, plotArea.stackableChartOptions(firstSeries, pane)));
 
             plotArea.appendChart(barChart, pane);
+        },
+
+        createRangeBarChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                rangeColumnChart = new RangeBarChart(plotArea, {
+                    series: series,
+                    invertAxes: plotArea.invertAxes,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing,
+                });
+
+            plotArea.appendChart(rangeColumnChart, pane);
         },
 
         createBulletChart: function(series, pane) {
@@ -10935,6 +10998,7 @@ var __meta__ = {
     function cleanupNestedSeriesDefaults(seriesDefaults) {
         delete seriesDefaults.bar;
         delete seriesDefaults.column;
+        delete seriesDefaults.rangeColumn;
         delete seriesDefaults.line;
         delete seriesDefaults.verticalLine;
         delete seriesDefaults.pie;
@@ -11552,7 +11616,8 @@ var __meta__ = {
 
     PlotAreaFactory.current.register(CategoricalPlotArea, [
         BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
-        CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET, BOX_PLOT
+        CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET, BOX_PLOT,
+        RANGE_COLUMN
     ]);
 
     PlotAreaFactory.current.register(XYPlotArea, [
@@ -11567,9 +11632,19 @@ var __meta__ = {
         [VALUE], [CATEGORY, COLOR, NOTE_TEXT, ERROR_LOW_FIELD, ERROR_HIGH_FIELD]
     );
 
+    SeriesBinder.current.register(
+        [RANGE_COLUMN],
+        [FROM, TO], [CATEGORY, COLOR, NOTE_TEXT]
+    );
+
     DefaultAggregates.current.register(
         [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
-        { value: "max", color: "first", noteText: "first", errorLow: "min", errorHigh: "max" }
+        { value: MAX, color: FIRST, noteText: FIRST, errorLow: MIN, errorHigh: MAX }
+    );
+
+    DefaultAggregates.current.register(
+        [RANGE_COLUMN],
+        { from: MIN, to: MAX, color: FIRST, noteText: FIRST }
     );
 
     SeriesBinder.current.register(
@@ -11588,8 +11663,8 @@ var __meta__ = {
 
     DefaultAggregates.current.register(
         [CANDLESTICK, OHLC],
-        { open: "max", high: "max", low: "min", close: "max",
-          color: "first", downColor: "first", noteText: "first" }
+        { open: MAX, high: MAX, low: MIN, close: MAX,
+          color: FIRST, downColor: FIRST, noteText: FIRST }
     );
 
     SeriesBinder.current.register(
@@ -11599,8 +11674,8 @@ var __meta__ = {
 
     DefaultAggregates.current.register(
         [BOX_PLOT],
-        { lower: "max", q1: "max", median: "max", q3: "max", upper: "max", mean: "max", outliers: "first",
-          color: "first", noteText: "first" }
+        { lower: MAX, q1: MAX, median: MAX, q3: MAX, upper: MAX, mean: MAX, outliers: FIRST,
+          color: FIRST, noteText: FIRST }
     );
 
     SeriesBinder.current.register(
@@ -11610,7 +11685,7 @@ var __meta__ = {
 
     DefaultAggregates.current.register(
         [BULLET, VERTICAL_BULLET],
-        { current: "max", target: "max", color: "first", noteText: "first" }
+        { current: MAX, target: MAX, color: FIRST, noteText: FIRST }
     );
 
     SeriesBinder.current.register(
@@ -11667,6 +11742,7 @@ var __meta__ = {
         PlotAreaBase: PlotAreaBase,
         PlotAreaFactory: PlotAreaFactory,
         PointEventsMixin: PointEventsMixin,
+        RangeBarChart: RangeBarChart,
         ScatterChart: ScatterChart,
         ScatterErrorBar: ScatterErrorBar,
         ScatterLineChart: ScatterLineChart,
