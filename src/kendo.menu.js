@@ -1171,11 +1171,13 @@ var __meta__ = {
         destroy: function() {
             var that = this;
 
+            Menu.fn.destroy.call(that);
+
             that.target.off(that.showOn + NS, that._showProxy);
             DOCUMENT_ELEMENT.on(MOUSEDOWN + NS, that._closeProxy);
 
             if (that.popup) {
-                that.popup.destroy(that);
+                kendo.destroy(that.popup.wrapper);
             }
         },
 
