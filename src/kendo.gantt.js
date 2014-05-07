@@ -833,8 +833,8 @@ var __meta__ = {
             this.list = new kendo.ui.GanttList(element, options);
 
             this.list
-                .bind("update", function() {
-                    that.refresh();
+                .bind("update", function(e) {
+                    that.updateTask(e.task, e.updateInfo);
                 })
                 .bind("change", function() {
                     that.trigger("change");

@@ -167,30 +167,6 @@
         ok(!updateTriggered);
     });
 
-    test("updates model when edited cell closes", function() {
-        var targetCell = ganttList.content.find("td").eq(0);
-
-        targetCell.dblclick();
-
-        stub(ganttList.dataSource, "update");
-
-        ganttList._closeCell();
-
-        ok(ganttList.dataSource.calls("update"));
-    });
-
-    test("does not update model when edited cell closes with cancelUpdate parameter", function() {
-        var targetCell = ganttList.content.find("td").eq(0);
-
-        targetCell.dblclick();
-
-        stub(ganttList.dataSource, "update");
-
-        ganttList._closeCell(true);
-
-        ok(!ganttList.dataSource.calls("update"));
-    });
-
     test("destroys editable widget after cell exits edit mode", 3, function() {
         var targetCell = ganttList.content.find("td").eq(0);
 

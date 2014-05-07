@@ -214,8 +214,8 @@
         ok(!statusHint.hasClass("k-add"));
     });
 
-    test("drop on possible target trigger command event", 1, function() {
-        ganttList.bind("command", function() {
+    test("drop on possible target trigger update event", 1, function() {
+        ganttList.bind("update", function() {
             ok(true);
         });
         dragstart(ganttList.content.find("tr:first"));
@@ -223,26 +223,10 @@
         drop();
     });
 
-    test("drop on possible target trigger command event with correct arguments", 2, function() {
-        var target = ganttList.content.find("tr:last"),
-            height = target.height(),
-            offsetY = kendo.getOffset(target).top;
-
-        ganttList.bind("command", function(e) {
-            equal(e.updated.get("title"), "foo");
-            equal(e.target.get("title"), "bar");
-        });
-
-        dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
-        drag(target, (offsetY + height * 0.20));
-        drop();
-    });
-
-    test("drop on child does not trigger command event", 1, function() {
+    test("drop on child does not trigger update event", 1, function() {
         var flag = true;
 
-        ganttList.bind("command", function() {
+        ganttList.bind("update", function() {
             flag = false;
         });
         dragstart(ganttList.content.find("tr:first"));
@@ -252,10 +236,10 @@
         ok(flag);
     });
 
-    test("drop on grand child does not trigger command event", 1, function() {
+    test("drop on grand child does not trigger update event", 1, function() {
         var flag = true;
 
-        ganttList.bind("command", function() {
+        ganttList.bind("update", function() {
             flag = false;
         });
         dragstart(ganttList.content.find("tr:first"));
@@ -265,10 +249,10 @@
         ok(flag);
     });
 
-    test("drop on self does not trigger command event", 1, function() {
+    test("drop on self does not trigger update event", 1, function() {
         var flag = true;
 
-        ganttList.bind("command", function() {
+        ganttList.bind("update", function() {
             flag = false;
         });
         dragstart(ganttList.content.find("tr:first"));
@@ -278,10 +262,10 @@
         ok(flag);
     });
 
-    test("drag on upper part of target set appropriate class", function() {
-        var target = ganttList.content.find("tr:last"),
-            height = target.height(),
-            offsetY = kendo.getOffset(target).top;
+    test("drag on upper part of target set drop position class", function() {
+        var target = ganttList.content.find("tr:last");
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
 
         dragstart(ganttList.content.find("tr:first"));
         dragenter(ganttList.content.find("tr:last"));
@@ -293,13 +277,16 @@
             .hasClass("k-insert-top"));
     });
 
-    test("drag on upper part of target set appropriate command type", 1, function() {
-        var target = ganttList.content.find("tr:last"),
-            height = target.height(),
-            offsetY = kendo.getOffset(target).top;
+    test("drag on upper part of target set update arguments", 3, function() {
+        var target = ganttList.content.find("tr:last");
+        var targetTask = ganttList._modelFromElement(target);
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
 
-        ganttList.bind("command", function(e) {
-            equal(e.type, "insert-before");
+        ganttList.bind("update", function(e) {
+            equal(e.task.get("title"), "foo");
+            equal(e.updateInfo.parentId, targetTask.get("parentId"));
+            equal(e.updateInfo.orderId, targetTask.get("orderId"));
         });
 
         dragstart(ganttList.content.find("tr:first"));
@@ -308,10 +295,10 @@
         drop();
     });
 
-    test("drag on middle part of target set appropriate class", function() {
-        var target = ganttList.content.find("tr:last"),
-            height = target.height(),
-            offsetY = kendo.getOffset(target).top;
+    test("drag on middle part of target set drop position class", function() {
+        var target = ganttList.content.find("tr:last");
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
 
         dragstart(ganttList.content.find("tr:first"));
         dragenter(ganttList.content.find("tr:last"));
@@ -323,13 +310,15 @@
             .hasClass("k-add"));
     });
 
-    test("drag on middle part of target set appropriate command type", 1, function() {
-        var target = ganttList.content.find("tr:last"),
-            height = target.height(),
-            offsetY = kendo.getOffset(target).top;
+    test("drag on middle part of target set update arguments", 2, function() {
+        var target = ganttList.content.find("tr:last");
+        var targetTask = ganttList._modelFromElement(target);
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
 
-        ganttList.bind("command", function(e) {
-            equal(e.type, "add");
+        ganttList.bind("update", function(e) {
+            equal(e.task.get("title"), "foo");
+            equal(e.updateInfo.parentId, targetTask.get("id"));
         });
 
         dragstart(ganttList.content.find("tr:first"));
@@ -338,10 +327,10 @@
         drop();
     });
 
-    test("drag on bottom part of target set appropriate class", function() {
-        var target = ganttList.content.find("tr:last"),
-            height = target.height(),
-            offsetY = kendo.getOffset(target).top;
+    test("drag on bottom part of target set drop position class", function() {
+        var target = ganttList.content.find("tr:last");
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
 
         dragstart(ganttList.content.find("tr:first"));
         dragenter(ganttList.content.find("tr:last"));
@@ -353,13 +342,16 @@
             .hasClass("k-insert-bottom"));
     });
 
-    test("drag on bottom part of target set appropriate command type", 1, function() {
-        var target = ganttList.content.find("tr:last"),
-            height = target.height(),
-            offsetY = kendo.getOffset(target).top;
+    test("drag on bottom part of target set update arguments", 3, function() {
+        var target = ganttList.content.find("tr:last");
+        var targetTask = ganttList._modelFromElement(target);
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
 
-        ganttList.bind("command", function(e) {
-            equal(e.type, "insert-after");
+        ganttList.bind("update", function(e) {
+            equal(e.task.get("title"), "foo");
+            equal(e.updateInfo.parentId, targetTask.get("parentId"));
+            equal(e.updateInfo.orderId, targetTask.get("orderId") + 1);
         });
 
         dragstart(ganttList.content.find("tr:first"));

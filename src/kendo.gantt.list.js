@@ -467,8 +467,7 @@ var __meta__ = {
             this._editableContent = null;
 
             if (!cancelUpdate) {
-                this.dataSource.update(model, taskInfo);
-                this.trigger("update");
+                this.trigger("update", { task: model, updateInfo: taskInfo });
             }
         },
 
@@ -482,14 +481,10 @@ var __meta__ = {
                 draggedTask = null;
                 dropTarget = null;
                 dropAllowed = true;
+                action = {};
             };
             var allowDrop = function(task) {
-                if (task.get("id") === draggedTask.get("id")) {
-                    dropAllowed = false;
-                    return;
-                }
-
-                var parent = that.dataSource.taskParent(task);
+                var parent = task;
 
                 while (parent) {
                     if (draggedTask.get("id") === parent.get("id")) {
@@ -525,8 +520,10 @@ var __meta__ = {
                 action.command = command;
             };
             var status = function() {
-                return that._reorderDraggable.hint
-                            .children(".k-drag-status");
+                return that._reorderDraggable
+                            .hint
+                            .children(".k-drag-status")
+                            .removeClass(DROPPOSITIONS);
             };
 
             this._reorderDraggable = this.content
@@ -578,14 +575,29 @@ var __meta__ = {
                     },
                     "dragleave": function(e) {
                         dropAllowed = true;
-                        status().removeClass(DROPPOSITIONS);
+                        status();
                     },
                     "drop": function(e) {
+                        var target = that._modelFromElement(dropTarget);
+                        var taskInfo = {
+                            parentId: target.parentId
+                        };
+
                         if (dropAllowed) {
-                            that.trigger("command", {
-                                type: action.command,
-                                updated: draggedTask,
-                                target: that._modelFromElement(dropTarget)
+                            switch (action.command) {
+                                case "add":
+                                    taskInfo.parentId = target.id;
+                                    break;
+                                case "insert-before":
+                                    taskInfo.orderId = target.orderId;
+                                    break;
+                                case "insert-after":
+                                    taskInfo.orderId = target.orderId + 1;
+                                    break;
+                            }
+                            that.trigger("update", {
+                                task: draggedTask,
+                                updateInfo: taskInfo
                             });
                         }
                     }
