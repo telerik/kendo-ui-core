@@ -11,7 +11,7 @@
         }
     });
 
-    test("MaskedTextBox raises widget change event", 1, function() {
+    asyncTest("MaskedTextBox raises widget change event", 1, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             change: function() {
                 ok(true);
@@ -19,8 +19,11 @@
         });
 
         input.focus();
-        input.val("test");
-        input.blur();
+        setTimeout(function() {
+            start();
+            input.val("test");
+            input.blur();
+        });
     });
 
     test("MaskedTextBox raises input change event", 1, function() {
