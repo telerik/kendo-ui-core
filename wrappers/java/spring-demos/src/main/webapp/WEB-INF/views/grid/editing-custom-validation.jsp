@@ -3,10 +3,10 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/editing-inline/create" var="createUrl" />
-<c:url value="/web/grid/editing-inline/read" var="readUrl" />
-<c:url value="/web/grid/editing-inline/update" var="updateUrl" />
-<c:url value="/web/grid/editing-inline/destroy" var="destroyUrl" />
+<c:url value="/grid/editing-inline/create" var="createUrl" />
+<c:url value="/grid/editing-inline/read" var="readUrl" />
+<c:url value="/grid/editing-inline/update" var="updateUrl" />
+<c:url value="/grid/editing-inline/destroy" var="destroyUrl" />
 
 
 <demo:header />

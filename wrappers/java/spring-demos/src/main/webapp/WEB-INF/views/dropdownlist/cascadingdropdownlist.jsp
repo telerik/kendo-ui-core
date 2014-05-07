@@ -3,9 +3,9 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/dropdownlist/cascadingdropdownlist/categories" var="categoriesUrl" />
-<c:url value="/web/dropdownlist/cascadingdropdownlist/products" var="productsUrl" />
-<c:url value="/web/dropdownlist/cascadingdropdownlist/orders" var="ordersUrl" />
+<c:url value="/dropdownlist/cascadingdropdownlist/categories" var="categoriesUrl" />
+<c:url value="/dropdownlist/cascadingdropdownlist/products" var="productsUrl" />
+<c:url value="/dropdownlist/cascadingdropdownlist/orders" var="ordersUrl" />
 
 <demo:header />
     <div class="demo-section">

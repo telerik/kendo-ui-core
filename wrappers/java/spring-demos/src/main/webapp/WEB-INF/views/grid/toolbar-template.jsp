@@ -3,8 +3,8 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/toolbar-template/read" var="transportReadUrl" />
-<c:url value="/web/grid/toolbar-template/categories" var="categoriesReadUrl" />
+<c:url value="/grid/toolbar-template/read" var="transportReadUrl" />
+<c:url value="/grid/toolbar-template/categories" var="categoriesReadUrl" />
 
 <demo:header />
     <kendo:grid name="grid" pageable="true" height="430px">

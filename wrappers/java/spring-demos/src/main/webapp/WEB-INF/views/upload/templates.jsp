@@ -5,8 +5,8 @@
 
 <demo:header />
 
-<c:url value="/web/upload/async/save" var="saveUrl" />
-<c:url value="/web/upload/async/remove" var="removeUrl" />
+<c:url value="/upload/async/save" var="saveUrl" />
+<c:url value="/upload/async/remove" var="removeUrl" />
 
 <kendo:upload name="files" 
 		      template="<span class='k-progress'></span><div class='file-wrapper'>

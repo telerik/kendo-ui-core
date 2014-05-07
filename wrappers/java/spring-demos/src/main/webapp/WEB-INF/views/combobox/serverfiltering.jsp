@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/combobox/remote-data/read" var="readUrl" />
+<c:url value="/combobox/remote-data/read" var="readUrl" />
 
 <demo:header />
     <div class="demo-section">

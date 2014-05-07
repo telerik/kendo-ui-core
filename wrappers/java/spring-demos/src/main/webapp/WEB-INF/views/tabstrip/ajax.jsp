@@ -4,9 +4,9 @@
 
 <demo:header />
 
-<c:url value="/web/tabstrip/content/1" var="ajaxContent1" />
-<c:url value="/web/tabstrip/content/2" var="ajaxContent2" />
-<c:url value="/web/tabstrip/content/3" var="ajaxContent3" />
+<c:url value="/tabstrip/content/1" var="ajaxContent1" />
+<c:url value="/tabstrip/content/2" var="ajaxContent2" />
+<c:url value="/tabstrip/content/3" var="ajaxContent3" />
 
 <div class="wrapper">
 	<kendo:tabStrip name="tabstrip">

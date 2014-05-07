@@ -4,7 +4,7 @@
 
 <demo:header />
     <div>
-        <c:url value="/web/combobox/template/read" var="readUrl" />
+        <c:url value="/combobox/template/read" var="readUrl" />
 
         <%
         String headerTemplate = "<div class=\"dropdown-header\">" +

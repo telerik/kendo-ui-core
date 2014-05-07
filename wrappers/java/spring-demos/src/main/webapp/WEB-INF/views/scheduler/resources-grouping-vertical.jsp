@@ -8,10 +8,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<c:url value="/web/scheduler/resources-grouping-vertical/read" var="readUrl" />
-<c:url value="/web/scheduler/resources-grouping-vertical/create" var="createUrl" />
-<c:url value="/web/scheduler/resources-grouping-vertical/update" var="updateUrl" />
-<c:url value="/web/scheduler/resources-grouping-vertical/destroy" var="destroyUrl" />
+<c:url value="/scheduler/resources-grouping-vertical/read" var="readUrl" />
+<c:url value="/scheduler/resources-grouping-vertical/create" var="createUrl" />
+<c:url value="/scheduler/resources-grouping-vertical/update" var="updateUrl" />
+<c:url value="/scheduler/resources-grouping-vertical/destroy" var="destroyUrl" />
 
 <%
 	Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2013/6/13");

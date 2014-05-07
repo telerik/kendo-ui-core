@@ -4,8 +4,8 @@
 
 <demo:header />
 
-<c:url value="/web/tabstrip/content/1" var="ajaxContent1" />
-<c:url value="/web/tabstrip/content/error" var="error" />
+<c:url value="/tabstrip/content/1" var="ajaxContent1" />
+<c:url value="/tabstrip/content/error" var="error" />
 
 <kendo:tabStrip name="tabstrip" select="onSelect" activate="onActivate" contentLoad="onContentLoad" error="onError">
     <kendo:tabStrip-items>

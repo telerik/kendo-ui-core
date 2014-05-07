@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/aggregates/read" var="transportReadUrl" />
+<c:url value="/grid/aggregates/read" var="transportReadUrl" />
 
 <demo:header />
   

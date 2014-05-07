@@ -4,11 +4,11 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/editing-custom/create" var="createUrl" />
-<c:url value="/web/grid/editing-custom/read" var="readUrl" />
-<c:url value="/web/grid/editing-custom/update" var="updateUrl" />
-<c:url value="/web/grid/editing-custom/destroy" var="destroyUrl" />
-<c:url value="/web/grid/editing-custom/categories" var="categoriesUrl" />
+<c:url value="/grid/editing-custom/create" var="createUrl" />
+<c:url value="/grid/editing-custom/read" var="readUrl" />
+<c:url value="/grid/editing-custom/update" var="updateUrl" />
+<c:url value="/grid/editing-custom/destroy" var="destroyUrl" />
+<c:url value="/grid/editing-custom/categories" var="categoriesUrl" />
 
 <demo:header />
     <kendo:grid name="grid" pageable="true" sortable="true" scrollable="true" editable="true" height="430px">

@@ -4,7 +4,7 @@
 
 <demo:header />
 
-<c:url value="/web/splitter/content/1" var="ajaxContent1" />
+<c:url value="/splitter/content/1" var="ajaxContent1" />
 
 <kendo:splitter name="splitter" expand="onExpand" collapse="onCollapse" contentLoad="onContentLoad" resize="onResize">
     <kendo:splitter-panes>

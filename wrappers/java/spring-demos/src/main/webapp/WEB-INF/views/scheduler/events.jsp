@@ -6,10 +6,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-<c:url value="/web/scheduler/events/read" var="readUrl" />
-<c:url value="/web/scheduler/events/create" var="createUrl" />
-<c:url value="/web/scheduler/events/update" var="updateUrl" />
-<c:url value="/web/scheduler/events/destroy" var="destroyUrl" />
+<c:url value="/scheduler/events/read" var="readUrl" />
+<c:url value="/scheduler/events/create" var="createUrl" />
+<c:url value="/scheduler/events/update" var="updateUrl" />
+<c:url value="/scheduler/events/destroy" var="destroyUrl" />
 
 <%
     Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2013/6/13");

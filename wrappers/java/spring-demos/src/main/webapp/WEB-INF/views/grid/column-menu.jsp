@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/column-menu/read" var="transportReadUrl" />
+<c:url value="/grid/column-menu/read" var="transportReadUrl" />
 
 <demo:header />
     <kendo:grid name="grid" pageable="true" sortable="true" filterable="true" columnMenu="true">

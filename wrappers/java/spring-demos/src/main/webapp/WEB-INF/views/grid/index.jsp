@@ -4,7 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:url value="/resources/web/grid/clientsDb.png" var="backgroundUrl" />
-<c:url value="/web/grid/customers/" var="transportReadUrl" />
+<c:url value="/grid/customers/" var="transportReadUrl" />
 
 <demo:header />
 

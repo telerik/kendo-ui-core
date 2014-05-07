@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/listview/products/" var="transportReadUrl" />
+<c:url value="/listview/products/" var="transportReadUrl" />
 
 <demo:header />
 <kendo:listView name="listView" template="template" pageable="true">

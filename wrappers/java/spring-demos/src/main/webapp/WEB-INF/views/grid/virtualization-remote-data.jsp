@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/virtualization-remote-data/read" var="transportReadUrl" />
+<c:url value="/grid/virtualization-remote-data/read" var="transportReadUrl" />
 
 <demo:header />
     <kendo:grid name="grid" sortable="true" height="430px">

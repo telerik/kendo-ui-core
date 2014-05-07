@@ -4,8 +4,8 @@
 
 <demo:header />
 
-<c:url value="/web/splitter/content/1" var="ajaxContent1" />
-<c:url value="/web/splitter/content/2" var="ajaxContent2" />
+<c:url value="/splitter/content/1" var="ajaxContent1" />
+<c:url value="/splitter/content/2" var="ajaxContent2" />
 
 <kendo:splitter name="splitter">
     <kendo:splitter-panes>

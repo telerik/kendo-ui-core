@@ -3,8 +3,8 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/employees/" var="transportReadUrl" />
-<c:url value="/web/grid/orders/" var="transportNestedReadUrl" />
+<c:url value="/grid/employees/" var="transportReadUrl" />
+<c:url value="/grid/orders/" var="transportNestedReadUrl" />
 
 <demo:header />
 

@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/dataviz/api/events/read" var="readUrl" />
+<c:url value="/api/events/read" var="readUrl" />
 
 <demo:header />
     <div class="chart-wrapper">

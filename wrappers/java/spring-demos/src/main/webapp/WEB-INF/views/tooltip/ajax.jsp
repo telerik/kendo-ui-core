@@ -6,7 +6,7 @@
 <demo:header />
 
 	<c:url value="/resources/web/foods/" var="imageFolderUrl" />
-	<c:url value="/web/tooltip/ajax/details" var="detailsUrl" />
+	<c:url value="/tooltip/ajax/details" var="detailsUrl" />
 	
     <kendo:tooltip name="#products" filter="a" width="220" height="280" position="top" requestStart="requestStart">
     	<kendo:tooltip-content>

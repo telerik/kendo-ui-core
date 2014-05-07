@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/sorting/read" var="transportReadUrl" />
+<c:url value="/grid/sorting/read" var="transportReadUrl" />
 
 <demo:header />
 	<div class="demo-section">

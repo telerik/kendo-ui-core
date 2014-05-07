@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <demo:header />
-    <c:url value="/web/multiselect/template/read" var="readUrl" />
+    <c:url value="/multiselect/template/read" var="readUrl" />
 
     <%
     String headerTemplate = "<div class=\"dropdown-header\">" +

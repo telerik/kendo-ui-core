@@ -38,7 +38,7 @@
     </ul>
 </div>
 
-<c:url value="/web/splitter/content/1" var="ajaxContent1" />
+<c:url value="/splitter/content/1" var="ajaxContent1" />
 
 <kendo:splitter name="splitter" style="height: 300px; width: 72%" orientation="horizontal">
     <kendo:splitter-panes>

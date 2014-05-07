@@ -12,8 +12,8 @@
     </p>
 </div>
 
-<c:url value="/web/upload/events/save" var="saveUrl" />
-<c:url value="/web/upload/events/remove" var="removeUrl" />
+<c:url value="/upload/events/save" var="saveUrl" />
+<c:url value="/upload/events/remove" var="removeUrl" />
 
 <div style="width:45%">
     <div class="demo-section">

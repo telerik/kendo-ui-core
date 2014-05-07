@@ -3,7 +3,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/rowtemplate/read" var="transportReadUrl" />
+<c:url value="/grid/rowtemplate/read" var="transportReadUrl" />
 
 <demo:header />
     <kendo:grid name="grid" height="430" style="width:750px;" rowTemplate="row-template" altRowTemplate="alt-row-template">

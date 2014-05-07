@@ -3,9 +3,9 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/filter-menu-customization/read" var="transportReadUrl" />
-<c:url value="/web/grid/filter-menu-customization/cities" var="citiesUrl" />
-<c:url value="/web/grid/filter-menu-customization/titles" var="titlesUrl" />
+<c:url value="/grid/filter-menu-customization/read" var="transportReadUrl" />
+<c:url value="/grid/filter-menu-customization/cities" var="citiesUrl" />
+<c:url value="/grid/filter-menu-customization/titles" var="titlesUrl" />
 
 <demo:header />
     <kendo:grid name="grid" filterable="true">

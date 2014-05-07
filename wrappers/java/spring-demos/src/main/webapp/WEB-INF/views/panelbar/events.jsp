@@ -4,7 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <demo:header />
-<c:url value="/web/panelbar/content/1" var="contentUrl" />
+<c:url value="/panelbar/content/1" var="contentUrl" />
 
 <kendo:panelBar name="panelbar" expandMode="single" select="select" expand="expand" collapse="collapse" 
 	activate="activate" contentLoad="contentLoad" error="error" style="width:250px;">	

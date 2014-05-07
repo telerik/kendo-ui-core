@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/web/window/content" var="remoteUrl" />
+<c:url value="/window/content" var="remoteUrl" />
 
 <demo:header />
 	<kendo:window name="window" title="Rams's Ten Principles of Good Design" draggable="true" resizable="true" 

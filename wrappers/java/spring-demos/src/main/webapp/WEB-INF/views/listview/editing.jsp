@@ -3,10 +3,10 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:url value="/web/listview/editing/create" var="createUrl" />
-<c:url value="/web/listview/editing/read" var="readUrl" />
-<c:url value="/web/listview/editing/update" var="updateUrl" />
-<c:url value="/web/listview/editing/destroy" var="destroyUrl" />
+<c:url value="/listview/editing/create" var="createUrl" />
+<c:url value="/listview/editing/read" var="readUrl" />
+<c:url value="/listview/editing/update" var="updateUrl" />
+<c:url value="/listview/editing/destroy" var="destroyUrl" />
 
 <demo:header />
 

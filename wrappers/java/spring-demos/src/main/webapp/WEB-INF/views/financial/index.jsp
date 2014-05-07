@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:url value="/dataviz/financial/index/read" var="readUrl" />
+<c:url value="/financial/index/read" var="readUrl" />
 
 <demo:header />
      <kendo:stockChart name="stockChart" dateField="date">

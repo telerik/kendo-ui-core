@@ -4,10 +4,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <demo:header />
-<c:url value="/web/panelbar/content/1" var="ajaxContent1" />
-<c:url value="/web/panelbar/content/2" var="ajaxContent2" />
-<c:url value="/web/panelbar/content/3" var="ajaxContent3" />
-<c:url value="/web/panelbar/content/4" var="ajaxContent4" />
+<c:url value="/panelbar/content/1" var="ajaxContent1" />
+<c:url value="/panelbar/content/2" var="ajaxContent2" />
+<c:url value="/panelbar/content/3" var="ajaxContent3" />
+<c:url value="/panelbar/content/4" var="ajaxContent4" />
 <c:url value="/resources/web/panelbar/astonmartin.png" var="astonmartin" />
 
 <div class="wrapper">

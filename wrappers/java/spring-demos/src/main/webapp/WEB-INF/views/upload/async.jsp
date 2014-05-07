@@ -18,8 +18,8 @@
     </p>
 </div>
 
-<c:url value="/web/upload/async/save" var="saveUrl" />
-<c:url value="/web/upload/async/remove" var="removeUrl" />
+<c:url value="/upload/async/save" var="saveUrl" />
+<c:url value="/upload/async/remove" var="removeUrl" />
 
 <div style="width:45%">
 	<div class="demo-section">

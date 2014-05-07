@@ -2,7 +2,7 @@
 <%@taglib prefix="demo" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/dataviz/diagram/index/read" var="readUrl" />
+<c:url value="/diagram/index/read" var="readUrl" />
 <c:url value="/resources/dataviz/diagram/people" var="imageRootUrl" />
 
 <demo:header />

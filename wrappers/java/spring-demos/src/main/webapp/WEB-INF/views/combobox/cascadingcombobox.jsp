@@ -3,9 +3,9 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/combobox/cascadingcombobox/categories" var="categoriesUrl" />
-<c:url value="/web/combobox/cascadingcombobox/products" var="productsUrl" />
-<c:url value="/web/combobox/cascadingcombobox/orders" var="ordersUrl" />
+<c:url value="/combobox/cascadingcombobox/categories" var="categoriesUrl" />
+<c:url value="/combobox/cascadingcombobox/products" var="productsUrl" />
+<c:url value="/combobox/cascadingcombobox/orders" var="ordersUrl" />
 
 <demo:header />
 <div class="demo-section">

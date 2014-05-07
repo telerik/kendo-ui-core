@@ -16,8 +16,8 @@
     </p>
 </div>
 
-<c:url value="/web/upload/initialfiles/saveAndPersist" var="saveAndPersistUrl" />
-<c:url value="/web/upload/initialfiles/removeAndPersist" var="removeAndPersistUrl" />
+<c:url value="/upload/initialfiles/saveAndPersist" var="saveAndPersistUrl" />
+<c:url value="/upload/initialfiles/removeAndPersist" var="removeAndPersistUrl" />
 
 <div style="width:45%">
 	<div class="demo-section">

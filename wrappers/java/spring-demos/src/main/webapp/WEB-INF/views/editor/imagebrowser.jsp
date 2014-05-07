@@ -4,11 +4,11 @@
 
 <demo:header />
 
-<c:url value="/web/editor/imagebrowser/read" var="transportReadUrl" />
-<c:url value="/web/editor/imagebrowser/thumbnail" var="transportThumbnailUrl" />
-<c:url value="/web/editor/imagebrowser/upload" var="transportUploadUrl" />
-<c:url value="/web/editor/imagebrowser/create" var="transportCreateUrl" />
-<c:url value="/web/editor/imagebrowser/destroy" var="transportDestroyUrl" />
+<c:url value="/editor/imagebrowser/read" var="transportReadUrl" />
+<c:url value="/editor/imagebrowser/thumbnail" var="transportThumbnailUrl" />
+<c:url value="/editor/imagebrowser/upload" var="transportUploadUrl" />
+<c:url value="/editor/imagebrowser/create" var="transportCreateUrl" />
+<c:url value="/editor/imagebrowser/destroy" var="transportDestroyUrl" />
 <c:url value="/resources/shared/imagebrowser/{0}" var="transportImageUrl" />
 
 

@@ -3,10 +3,10 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/web/grid/foreignkeycolumn/create" var="createUrl" />
-<c:url value="/web/grid/foreignkeycolumn/read" var="readUrl" />
-<c:url value="/web/grid/foreignkeycolumn/update" var="updateUrl" />
-<c:url value="/web/grid/foreignkeycolumn/destroy" var="destroyUrl" />
+<c:url value="/grid/foreignkeycolumn/create" var="createUrl" />
+<c:url value="/grid/foreignkeycolumn/read" var="readUrl" />
+<c:url value="/grid/foreignkeycolumn/update" var="updateUrl" />
+<c:url value="/grid/foreignkeycolumn/destroy" var="destroyUrl" />
 
 
 <demo:header />
