@@ -66,9 +66,9 @@
         dataSource.fetch();
         ganttList._render(dataSource.taskTree());
     };
-    var setupDataSource = function(data) {
+    var setupDataSource = function(testData) {
         return new GanttDataSource({
-            data: data,
+            data: testData,
             schema: {
                 model: {
                     id: "id"

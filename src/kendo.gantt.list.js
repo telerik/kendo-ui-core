@@ -430,17 +430,36 @@ var __meta__ = {
             var column = options.column;
             var model = this._modelFromElement(cell);
             var modelCopy = this.dataSource._createNewModel(model.toJSON());
+            var field = modelCopy.fields[column.field] || modelCopy[column.field];
+            var DATATYPE = kendo.attr("type");
+            var BINDING = kendo.attr("bind");
+            var attr = {
+                "name": column.field,
+                "required": field.validation ?
+                    field.validation.required === true : false
+            };
+            var editor;
 
             this._editableContent = cell.children().detach();
             this._editableContainer = cell;
 
             cell.data("modelCopy", modelCopy);
+            
+            if ((field.type === "date" || $.type(field) === "date") &&
+                /H|m|s|F|g|u/.test(column.format)) {
+                attr[BINDING] = "value:" + column.field;
+                attr[DATATYPE] = "date";
+                editor = function(container, options) {
+                    $('<input type="text"/>').attr(attr)
+                        .appendTo(container).kendoDateTimePicker({ format: options.format });
+                };
+            }
 
             this.editable = cell.kendoEditable({
                                 fields: {
                                     field: column.field,
                                     format: column.format,
-                                    editor: column.editor
+                                    editor: column.editor || editor
                                 },
                                 model: modelCopy,
                                 clearContainer: false

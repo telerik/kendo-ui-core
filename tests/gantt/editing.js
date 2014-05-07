@@ -4,6 +4,7 @@
     var ganttList;
     var element;
     var columns;
+    var extend = $.extend;
 
     module("Gantt inline editing", {
         setup: function() {
@@ -225,4 +226,254 @@
 
         ok(ganttList.calls("_closeCell"));
     });
+
+    var setup = function(options) {
+        columns = [
+            extend({ editable: true }, options.column)
+        ];
+
+        dataSource = new GanttDataSource({
+            data: options.data,
+            schema: {
+                model: extend({
+                    id: "id",
+                    }, options.fields)
+            }
+        });
+
+        dataSource.fetch();
+        taskTree = dataSource.taskTree();
+
+        ganttList = new GanttList(element, { columns: columns, dataSource: dataSource });
+        ganttList._render(taskTree);
+    };
+
+    module("Gantt custom date time editor", {
+        setup: function() {
+            element = $("<div/>");
+        },
+        teardown: function() {
+            ganttList.destroy();
+        }
+    });
+
+    test("edit date field with no type creates DateTimePicker", function() {
+        setup({
+            column: { field: "start" },
+            data: [{ start: new Date()}]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("custom date time editor has binding attributes", function() {
+        setup({
+            column: { field: "start" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+        var input;
+
+        targetCell.dblclick();
+
+        input = targetCell.find("input");
+
+        equal(input.attr("data-type"), "date");
+        equal(input.attr("data-bind"), "value:start");
+        equal(input.attr("name"), "start");
+        equal(input.attr("required"), "required");
+    });
+
+    test("edit custom date field with no type creates DateTimePicker", function() {
+        setup({
+            column: { field: "customField" },
+            data: [{ customField: new Date() }]
+        });
+
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("edit custom field with date type creates DateTimePicker", function() {
+        setup({
+            column: { field: "customField" },
+            data: [{ CustomField: new Date() }],
+            fields: {
+                fields: {
+                    customField: { from: "CustomField", type: "date" }
+                }
+            }
+        });
+
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("custom date field has required attribute", function() {
+        setup({
+            column: { field: "customField" },
+            data: [{ CustomField: new Date() }],
+            fields: {
+                fields: {
+                    customField: { from: "CustomField", type: "date", validation: { required: true } }
+                }
+            }
+        });
+
+        var targetCell = ganttList.content.find("td").eq(0);
+        var input;
+
+        targetCell.dblclick();
+
+        input = targetCell.find("input");
+
+        equal(input.attr("required"), "required");
+    });
+
+    test("user defined editor is created for data fields", 1, function() {
+        setup({
+            column: {
+                field: "start", editor: function() {
+                    ok(true);
+                }
+            },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+    });
+
+    test("user defined editor is created for custom data fields", 1, function() {
+        setup({
+            column: { field: "customField", editor: function() { ok(true); } },
+            data: [{ CustomField: new Date() }],
+            fields: {
+                fields: {
+                    customField: { from: "CustomField", type: "date" }
+                }
+            }
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+    });
+
+    test("format yyyy/MM/dd HH:mm:ss creates DateTimePicker", function() {
+        setup({
+            column: { field: "start", format: "yyyy/MM/dd HH:mm:ss" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("format yyyy/MM/dd creates DatePicker", function() {
+        setup({
+            column: { field: "start", format: "yyyy/MM/dd" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDatePicker"));
+    });
+
+    test("format yyyy/MM/dd HH:mm creates DateTimePicker", function() {
+        setup({
+            column: { field: "start", format: "yyyy/MM/dd HH:mm" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("format ddd MMM dd yyyy HH:mm:ss creates DateTimePicker", function() {
+        setup({
+            column: { field: "start", format: "ddd MMM dd yyyy HH:mm:ss" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("format ddd MMM dd yyyy creates DatePicker", function() {
+        setup({
+            column: { field: "start", format: "ddd MMM dd yyyy" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDatePicker"));
+    });
+
+    test("format yyyy-MM-ddTHH:mm creates DateTimePicker", function() {
+        setup({
+            column: { field: "start", format: "yyyy-MM-ddTHH:mm" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("format g creates DateTimePicker", function() {
+        setup({
+            column: { field: "start", format: "g" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("format u creates DateTimePicker", function() {
+        setup({
+            column: { field: "start", format: "u" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    test("format F creates DateTimePicker", function() {
+        setup({
+            column: { field: "start", format: "F" },
+            data: [{ start: new Date() }]
+        });
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        targetCell.dblclick();
+
+        ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
 })();
