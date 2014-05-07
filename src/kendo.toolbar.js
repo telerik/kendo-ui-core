@@ -23,6 +23,7 @@ var __meta__ = {
         SPLIT_BUTTON = "k-split-button",
         SEPARATOR = "k-toolbar-separator",
 
+        RESIZABLE_TOOLBAR = "k-toolbar-resizable",
         STATE_CHECKED = "k-state-checked",
         STATE_DISABLED = "k-state-disabled",
         GROUP_START = "k-group-start",
@@ -222,14 +223,8 @@ var __meta__ = {
                 }
 
                 if(options.resizable) {
-                    overflowAnchor = $(templates.overflowAnchor);
-                    element.append(overflowAnchor);
-
-                    that._overflow = new kendo.ui.Popup(templates.overflowContainer, {
-                        anchor: overflowAnchor
-                    });
-
-                    that._anchorWidth = overflowAnchor.outerWidth();
+                    that._renderOverflow();
+                    element.addClass(RESIZABLE_TOOLBAR);
                 }
 
                 that.bind("resize", function(e) {
@@ -305,6 +300,18 @@ var __meta__ = {
                 }
             },
 
+            _renderOverflow: function() {
+                var overflowAnchor = $(templates.overflowAnchor);
+
+                this.element.append(overflowAnchor);
+
+                this._overflow = new kendo.ui.Popup(templates.overflowContainer, {
+                    anchor: overflowAnchor
+                });
+
+                this._anchorWidth = overflowAnchor.outerWidth();
+            },
+
             _buttonClick: function(e) {
                 var target = $(e.target).closest("." + BUTTON),
                     isDisabled = target.hasClass(STATE_DISABLED),
@@ -373,7 +380,7 @@ var __meta__ = {
                     //todo
                 }
 
-                this._overflow.element.append(wrapper);
+                this._overflow.element.prepend(wrapper);
             },
 
             _showItem: function(item) {

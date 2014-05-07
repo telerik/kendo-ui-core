@@ -32,7 +32,7 @@
                 { type: "button", id: "foo", text: "foo" }
             ]
         });
-        
+
         var button = container.find("#foo");
 
         ok(button.length, "ID is applied");
@@ -449,6 +449,18 @@
     });
 
     /* COMMAND OVERFLOW */
+
+    test("resizable toolbar receives k-toolbar-resizable class", 1, function() {
+        container.kendoToolBar();
+
+        ok(container.hasClass("k-toolbar-resizable"));
+    });
+
+    test("non resizable toolbar does not receive k-toolbar-resizable class", 1, function() {
+        container.kendoToolBar({ resizable: false });
+
+        ok(!container.hasClass("k-toolbar-resizable"));
+    });
 
     test("renders overflow anchor", 1, function() {
         container.kendoToolBar();
