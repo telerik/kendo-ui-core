@@ -29,8 +29,9 @@ new_items = suites.collect(&:new_components).flatten.each { |issue| issue.title 
     </releaseNoteItem>
 
 % suites.each do |suite|
+% name_prefix = suite.title =~ /MVC|JSP|PHP/i ? "#{suite.title}: " : ""
 % suite.components.each do |component_title, component|
-    <releaseNoteItem Title="<%= encode(component_title) %>">
+    <releaseNoteItem Title="<%= encode(name_prefix + component_title) %>">
       <%= output("newItems", component.features) %>
       <%= output("fixedItems", component.bugs) %>
     </releaseNoteItem>

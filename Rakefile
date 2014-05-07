@@ -1005,15 +1005,22 @@ namespace :build do
         zip_bundles
     end
 
-    def xml_changelog(destination)
-        filename = 'professional.commercial.changelog.xml'
+    def xml_changelogs(destination)
+        [
+            'professional.commercial',
+            'aspnetmvc.commercial',
+            'php.commercial',
+            'jsp.commercial'
+        ].map do |bundle|
+            filename = "#{bundle}.#{VERSION}.changelog.xml"
 
-        destination_file = File.join(ARCHIVE_ROOT, destination, 'changelogs', filename)
+            destination_file = File.join(ARCHIVE_ROOT, destination, 'changelogs', filename)
 
-        file_copy :to => destination_file,
-                  :from => "dist/bundles/#{filename}"
+            file_copy :to => destination_file,
+                      :from => "dist/bundles/#{bundle}.changelog.xml"
 
-        destination_file
+            destination_file
+        end
     end
 
     { :production => "Production", :master => "Stable" }.each do |env, destination|
@@ -1056,7 +1063,7 @@ namespace :build do
             'demos:production',
             'download_builder:bundle',
             zip_targets("Production"),
-            xml_changelog("Production"),
+            xml_changelogs("Production"),
             changelog
         ].flatten
     end
@@ -1105,7 +1112,7 @@ namespace :build do
             'demos:production',
             'download_builder:bundle',
             zip_targets("Stable"),
-            xml_changelog("Stable")
+            xml_changelogs("Stable")
         ].flatten
     end
 
