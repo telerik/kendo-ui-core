@@ -295,32 +295,33 @@ tree :to => 'dist/demos/staging/content/cdn/themebuilder',
      :root => 'dist/themebuilder/staging/'
 
 class PatchedWebConfigTask < Rake::FileTask
-    attr_accessor :cdn_root, :themebuilder_root, :dojo_root
+    attr_accessor :options
     def execute(args=nil)
         ensure_path(name)
 
         File.open(name, "w") do |file|
             source = File.read(prerequisites[0])
-            source
-                .sub!('$CDN_ROOT', cdn_root)
-                .sub!('$THEMEBUILDER_ROOT', themebuilder_root)
-                .sub!('$DOJO_ROOT', dojo_root)
+
+            options.each do |name, value|
+                source.sub!('$' + name.to_s.upcase, value)
+            end
+
             file.write(source)
         end
     end
 
     def needed?
         return true if super
+
         contents = File.read(name)
-        !contents.include?(cdn_root) || !contents.include?(themebuilder_root)
+
+        !options.map { |param, value| contents.include? value }.reduce { |r,e| r && e }
     end
 end
 
-def patched_web_config(name, source, cdn_root, themebuilder_root, dojo_root)
+def patched_web_config(name, source, options)
     task = PatchedWebConfigTask.define_task(name => source)
-    task.cdn_root = cdn_root
-    task.themebuilder_root = themebuilder_root
-    task.dojo_root = dojo_root
+    task.options = options
     task
 end
 
@@ -374,7 +375,12 @@ namespace :demos do
         'dist/demos/staging/content/cdn/themebuilder',
         'dist/demos/staging/content/cdn/styles',
         'dist/demos/staging/content/cdn/styles/telerik',
-        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', STAGING_CDN_ROOT + CURRENT_COMMIT, STAGING_CDN_ROOT + CURRENT_COMMIT + '/themebuilder', '/dojo-staging/')
+        patched_web_config('dist/demos/staging/Web.config', 'demos/mvc/Web.config', {
+            :cdn_root => STAGING_CDN_ROOT + CURRENT_COMMIT,
+            :themebuilder_root => STAGING_CDN_ROOT + CURRENT_COMMIT + '/themebuilder',
+            :dojo_root => '/dojo-staging/',
+            :dojo_runner => 'http://kendobuild'
+        })
     ]
 
     zip 'dist/demos/staging.zip' => :staging_site
@@ -419,7 +425,12 @@ namespace :demos do
         'dist/demos/production/src/aspnetmvc/controllers/mobile',
         'dist/demos/production/src/aspnetmvc/views/aspx',
         'dist/demos/production/src/aspnetmvc/views/razor',
-        patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', CDN_ROOT + VERSION, THEME_BUILDER_ROOT, 'http://trykendoui.telerik.com/')
+        patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', {
+            :cdn_root => CDN_ROOT + VERSION,
+            :themebuilder_root => THEME_BUILDER_ROOT,
+            :dojo_root => 'http://trykendoui.telerik.com/',
+            :dojo_runner => 'http://runner.telerik.io'
+        })
     ]
 
     zip 'dist/demos/production.zip' => :production_site
