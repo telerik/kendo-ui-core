@@ -1029,6 +1029,8 @@ var __meta__ = {
             this._draggable();
 
             this._resizable();
+
+            this._attachEvents();
         },
         
         options: {
@@ -1388,8 +1390,16 @@ var __meta__ = {
             this.wrapper
                 .find(".k-state-selected")
                 .removeClass("k-state-selected");
-        }
+        },
 
+        _attachEvents: function() {
+            var that = this;
+
+            this.wrapper
+                .on(CLICK + NS, ".k-event-delete", function(e) {
+                    that.trigger("remove", { uid: $(this).closest(".k-event").attr("data-uid") });
+                });
+        }
     });
 
 })(window.kendo.jQuery);

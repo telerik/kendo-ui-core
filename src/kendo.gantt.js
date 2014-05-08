@@ -604,6 +604,7 @@ var __meta__ = {
             "dataBinding",
             "dataBound",
             "add",
+            "remove",
             "change",
             "navigate",
             "moveStart",
@@ -922,6 +923,9 @@ var __meta__ = {
                 })
                 .bind("clear", function(e) {
                     that.clearSelection();
+                })
+                .bind("remove", function(e) {
+                    that.removeTask(that.dataSource.getByUid(e.uid));
                 });
         },
 
@@ -987,6 +991,12 @@ var __meta__ = {
             this._preventRefresh = false;
 
             this.refresh();
+        },
+
+        removeTask: function(task) {
+            if (!this.trigger("remove", { task: task })) {
+                this.dataSource.remove(task);
+            }
         },
 
         refresh: function(e) {

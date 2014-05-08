@@ -164,7 +164,7 @@
         ok(ganttList.calls("clearSelection"));
     });
 
-    module("Timeline Selection", {
+    module("Timeline Interaction", {
         setup: function() {
             element = $("<div />");
             gantt = new Gantt(element);
@@ -273,6 +273,19 @@
 
         ok(gantt.calls("clearSelection"));
     });
+
+    test("clicking on a task delete icon calls removeTask()", function() {
+        ganttTimeline._render(tasks, range);
+
+        var target = ganttTimeline.wrapper.find(".k-gantt-tasks .k-event-delete");
+
+        stub(gantt, "removeTask");
+
+        target.click();
+
+        ok(gantt.calls("removeTask"));
+    });
+
 
     module("TaskDropDown", {
         setup: function() {

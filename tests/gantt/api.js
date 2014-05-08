@@ -104,6 +104,72 @@
         ok(ganttList.calls("clearSelection"));
     });
 
+    test("removeTask() triggers remove event", 1, function() {
+        setupGantt({
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ]
+        });
+
+        gantt.bind("remove", function() {
+            ok(true);
+        });
+
+        gantt.removeTask(gantt.dataSource.at(0));
+    });
+
+    test("removeTask() calls dataSource remove method", function() {
+        setupGantt({
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ]
+        });
+
+        stub(gantt.dataSource, "remove");
+
+        gantt.removeTask(gantt.dataSource.at(0));
+
+        ok(gantt.dataSource.calls("remove"));
+    });
+
+    test("removeTask() calls dataSource remove method with argument", 1, function() {
+        setupGantt({
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ]
+        });
+
+        stub(gantt.dataSource, {
+            remove: function(task) {
+                equal(task.title, "foo");
+            }
+        });
+
+        gantt.removeTask(gantt.dataSource.at(0));
+    });
+
+    test("removeTask() canceling remove event prevents calling dataSource remove method", 1, function() {
+        setupGantt({
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ]
+        });
+
+        gantt.bind("remove", function(e) {
+            e.preventDefault();
+        });
+
+        stub(gantt.dataSource, "remove");
+
+        gantt.removeTask(gantt.dataSource.at(0));
+
+        ok(!gantt.dataSource.calls("remove"));
+    });
+
     module("GanttList", {
         setup: function() {
             element = $("<div/>").appendTo(QUnit.fixture);
