@@ -338,6 +338,26 @@
             equal(dateAxis.categoryIndex(), -1);
         });
 
+        test("categoryAxis returns -1 if value is smaller then min axis value", function() {
+            createDateCategoryAxis({
+                categories: [
+                    new Date("2012/02/01"), new Date("2012/02/03")
+                ]
+            });
+
+            equal(dateAxis.categoryIndex(new Date("2012/01/01")), -1);
+        });
+
+        test("categoryAxis returns 2 if value is larger then max axis value", function() {
+            createDateCategoryAxis({
+                categories: [
+                    new Date("2012/02/01"), new Date("2012/02/03")
+                ]
+            });
+
+            equal(dateAxis.categoryIndex(new Date("2012/02/04")), 3);
+        });
+
         // ------------------------------------------------------------
         module("Date Category Axis / Min-Max values", {
             setup: function() {
@@ -1662,14 +1682,14 @@
             deepEqual(dateAxis.getSlot("2012/02/01", "2012/02/02"),
                  dateAxis.getSlot(new Date("2012/02/01"), new Date("2012/02/02")));
         });
-        
+
         test("limits slots depending on the limit parameter", function() {
             createDateValueAxis(new Date("2012/02/01"), new Date("2012/02/10"));
             var limited = dateAxis.getSlot("2012/02/20", "2012/02/20", true),
                 unlimited = dateAxis.getSlot("2012/02/20", "2012/02/20", false);
             close(limited.x1, 781.5, 1, 1, "value is limited");
             close(unlimited.x1, 1217.5, 1, "value is not limited");
-        });       
+        });
 
         // ------------------------------------------------------------
         module("Date Value Axis / Range manipulation", {
@@ -2278,6 +2298,92 @@
 
             ok(notes[0].options.visible);
             ok(notes[1].options.visible);
+        });
+    })();
+
+    (function() {
+        var plotArea,
+            plotBands,
+            lineSeriesData = [{
+                name: "Value A",
+                type: "line",
+                data: [100, 200, 300]
+            }],
+            barSeriesData =  [{
+                name: "Value A",
+                type: "bar",
+                data: [100, 20, 30]
+            }];
+
+        function createPlotArea(series, chartOptions) {
+            plotArea = new dataviz.CategoricalPlotArea(series, kendo.deepExtend({
+                categoryAxis: {
+                    categories: [new Date("2012/01/01"), new Date("2012/01/02")],
+                    plotBands: [{
+                        from: new Date("2012/01/01"),
+                        to: new Date("2012/01/03"),
+                        color: "red"
+                    }]
+                }
+            }, chartOptions));
+
+            view = new ViewStub();
+
+            plotArea.reflow(chartBox);
+            plotArea.getViewElements(view);
+            plotBands = view.log.rect[0];
+        }
+
+        // ------------------------------------------------------------
+        module("Category Axis / Plot Bands / Horizontal", {
+            setup: function() {
+                createPlotArea(lineSeriesData);
+            }
+        });
+
+        test("renders box", function() {
+            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                 [ 30, 7.5, 799, 577 ], TOLERANCE);
+        });
+
+        // ------------------------------------------------------------
+        module("Category Axis / Plot Bands / Horizontal / Justified", {
+            setup: function() {
+                createPlotArea(lineSeriesData, { categoryAxis: { justified: true } });
+            }
+        });
+
+        test("renders box", function() {
+            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                 [ 30, 7.5, 791.5, 577 ], TOLERANCE);
+        });
+
+        // ------------------------------------------------------------
+        module("Category Axis / Plot Bands / Vertical", {
+            setup: function() {
+                createPlotArea(barSeriesData);
+            }
+        });
+
+        test("renders box", function() {
+            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                 [ 26, 0, 789.5, 576 ], TOLERANCE);
+        });
+
+        // ------------------------------------------------------------
+        module("Category Axis / Plot Bands / Vertical / Justified", {
+            setup: function() {
+                createPlotArea([{
+                    name: "Value A",
+                    type: "verticalLine",
+                    data: [100, 200, 300]
+                }], { categoryAxis: { justified: true } });
+            }
+        });
+
+        test("renders box", function() {
+            arrayClose([plotBands.x1, plotBands.y1, plotBands.x2, plotBands.y2],
+                 [ 26, 7, 789.5, 576 ], TOLERANCE);
         });
     })();
 })();

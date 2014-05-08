@@ -2533,7 +2533,9 @@ var __meta__ = {
             value = toDate(value);
             range = range || axis.range();
             equalsRoundedMax = options.roundToBaseUnit && dateEquals(range.max, value);
-            if (!value || (value > range.max) || (value < range.min) || equalsRoundedMax) {
+            if (value && (value > range.max || equalsRoundedMax)) {
+                return categories.length;
+            } else if (!value || value < range.min) {
                 return -1;
             }
 
