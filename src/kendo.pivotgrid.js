@@ -210,7 +210,7 @@ var __meta__ = {
             }
 
             command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog></PropertyList></Properties></Execute></Body></Envelope>';
-            return command;
+            return command.replace(/\&/g, "&amp;");
         }
     };
 

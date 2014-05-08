@@ -320,6 +320,21 @@
            'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
+    test("parameterMap & is encoded", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo].&[1]" }],
+            rows: [{ name: "[baz].&[2]" }],
+            measures: ["[bar].&[3]"]
+        }, "read");
+
+        console.log(params);
+
+        ok(params.indexOf('SELECT NON EMPTY {[foo].&amp;[1]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+        'NON EMPTY {[baz].&amp;[2]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName] WHERE ([bar].&amp;[3])') > -1);
+    });
+
     test("parameterMap multiple columns are cross joined", function() {
         var transport = new kendo.data.XmlaTransport({ });
 
