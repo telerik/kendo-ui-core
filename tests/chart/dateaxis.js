@@ -2335,7 +2335,7 @@
         }
 
         // ------------------------------------------------------------
-        module("Category Axis / Plot Bands / Horizontal", {
+        module("Date Axis / Plot Bands / Horizontal", {
             setup: function() {
                 createPlotArea(lineSeriesData);
             }
