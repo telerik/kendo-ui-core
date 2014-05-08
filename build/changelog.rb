@@ -84,9 +84,9 @@ class ChangeLog
     def initialize
         @suites = [
             Suite.new("Components", "components"),
-            Suite.new("ASP.NET MVC Wrappers", "aspnetmvc"),
-            Suite.new("Java Wrappers", "java"),
-            Suite.new("PHP Wrappers", "php")
+            Suite.new("Wrappers (ASP.NET MVC)", "aspnetmvc"),
+            Suite.new("Wrappers (Java)", "java"),
+            Suite.new("Wrappers (PHP)", "php")
         ]
 
         @milestones = {}
