@@ -561,6 +561,17 @@
             equal(chart.options.series[0].data.length, 1);
         });
 
+        test("does not extend data source", 0, function() {
+            setupChart();
+
+            var ds = { data: [{ "foo": 1 }], foo: { } };
+            ds.foo.bar = ds.foo;
+
+            chart.setOptions({
+                dataSource: ds
+            });
+        });
+
         test("gets the data from the dataSource when it is set with the setDataSource method and the setOptions method is used", function(){
             var dataSource = new kendo.data.DataSource({
                 data: [{foo: 1}]

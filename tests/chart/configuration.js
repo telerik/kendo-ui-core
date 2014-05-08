@@ -1510,10 +1510,17 @@
         ok($("#container").hasClass("k-chart"));
     });
 
-    test("DataSource is not mangled", function() {
+    test("kendo DataSource is not cloned", function() {
         var ds = new kendo.data.DataSource();
 
         setupChart({ dataSource: ds });
-        ok(chart.options.dataSource instanceof kendo.data.DataSource);
+        equal(chart.dataSource, ds);
+    });
+
+    test("custom DataSource is not cloned", 0, function() {
+        var ds = { foo: { } };
+        ds.foo.bar = ds.foo;
+
+        setupChart({ dataSource: ds });
     });
 })();

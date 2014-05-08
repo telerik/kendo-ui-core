@@ -236,26 +236,31 @@ var __meta__ = {
     var Chart = Widget.extend({
         init: function(element, userOptions) {
             var chart = this,
-                options;
+                options,
+                dataSource;
 
             kendo.destroy(element);
 
             Widget.fn.init.call(chart, element);
-            options = deepExtend({}, chart.options, userOptions);
 
             chart.element
-                .addClass(CSS_PREFIX + options.name.toLowerCase())
+                .addClass(CSS_PREFIX + this.options.name.toLowerCase())
                 .css("position", "relative");
 
-            chart._originalOptions = deepExtend({}, options);
+            if (userOptions) {
+                dataSource = userOptions.dataSource;
+                userOptions.dataSource = undefined;
+            }
 
+            options = deepExtend({}, chart.options, userOptions);
+            chart._originalOptions = deepExtend({}, options);
             chart._initTheme(options);
 
             chart.bind(chart.events, chart.options);
 
             chart.wrapper = chart.element;
 
-            chart._initDataSource(userOptions);
+            chart._initDataSource(dataSource);
 
             kendo.notify(chart, dataviz.ui);
         },
@@ -287,14 +292,13 @@ var __meta__ = {
             applySeriesColors(chart.options);
         },
 
-        _initDataSource: function(userOptions) {
-            var chart = this,
-                dataSourceOptions = (userOptions || {}).dataSource;
+        _initDataSource: function(dataSource) {
+            var chart = this;
 
             chart._dataChangeHandler = proxy(chart._onDataChanged, chart);
 
             chart.dataSource = DataSource
-                .create(dataSourceOptions)
+                .create(dataSource)
                 .bind(CHANGE, chart._dataChangeHandler);
 
             chart._bindCategories();
@@ -302,8 +306,11 @@ var __meta__ = {
             chart._redraw();
             chart._attachEvents();
 
-            if (dataSourceOptions && chart.options.autoBind) {
-                chart.dataSource.fetch();
+            if (dataSource) {
+                chart._hasDataSource = true;
+                if (chart.options.autoBind) {
+                    chart.dataSource.fetch();
+                }
             }
         },
 
@@ -311,7 +318,8 @@ var __meta__ = {
             var chart = this;
 
             chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
-            chart.dataSource = chart._originalOptions.dataSource = dataSource;
+            chart.dataSource = dataSource;
+            chart._hasDataSource = true;
 
             dataSource.bind(CHANGE, chart._dataChangeHandler);
 
@@ -1240,7 +1248,10 @@ var __meta__ = {
         },
 
         setOptions: function(options) {
-            var chart = this;
+            var chart = this,
+                dataSource = options.dataSource;
+
+            options.dataSource = undefined;
 
             chart._originalOptions = deepExtend(chart._originalOptions, options);
             chart.options = deepExtend({}, chart._originalOptions);
@@ -1251,16 +1262,17 @@ var __meta__ = {
 
             chart._initTheme(chart.options);
 
-            if (options.dataSource) {
+            if (dataSource) {
                 chart.setDataSource(
-                    DataSource.create(options.dataSource)
+                    DataSource.create(dataSource)
                 );
             }
+
             if (chart._shouldAttachMouseMove()) {
                 chart.element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
 
-            if (chart.options.dataSource) {
+            if (chart._hasDataSource) {
                 chart.refresh();
             }  else {
                 chart.redraw();
