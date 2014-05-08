@@ -2,8 +2,8 @@
     $php = file_get_contents($_SERVER['SCRIPT_FILENAME']);
     $php = trim(preg_replace('/(<php\?)?.*require_once.*?(header|footer).*\r?\n?\r?\n?/', '', $php));
     $knownFiles = array(
-        'DataSourceResult.php' => '../../lib/DataSourceResult.php',
-        'chart_data.php' => '../../include/chart_data.php'
+        'DataSourceResult.php' => '../lib/DataSourceResult.php',
+        'chart_data.php' => '../include/chart_data.php'
     )
 ?>
             </div>

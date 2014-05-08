@@ -1,17 +1,12 @@
 <?php
-
     function read_navigation($filename) {
         $navigation = json_decode(file_get_contents($filename), true);
-
-        unset($navigation['Framework']);
-
-        unset($navigation['Sample Dashboards']);
 
         return $navigation;
     }
 
     function example_url($example) {
-        return str_replace('html', 'php', $example['url']);
+        return $example['url'] . '.php';
     }
 
     function example_exists($example) {
@@ -47,46 +42,32 @@
         return $result;
     }
 
-    $categories = read_navigation($jsonFilename);
+    $widgets = read_navigation($jsonFilename);
 
-    foreach($categories as $category => $subcategory) {
-
-        $hasChildren = false;
-        foreach ($subcategory as $widget) {
-            if (include_in_navigation($widget)) {
-                $hasChildren = true;
-                break;
-            }
-        }
-        if ($hasChildren == false) {
-            continue;
-        }
 ?>
-        <h1><?= $category ?></h1>
-        <ul>
+    <ul>
 <?php
-            foreach($subcategory as $widget) {
-                if (include_in_navigation($widget)) {
+    foreach ($widgets as $widget) {
 ?>
-            <li>
-                <h2><?= $widget['text'] ?></h2>
-                <ul>
 <?php
-                    foreach($widget['items'] as $example) {
-                        if (include_in_navigation($example) && example_exists($example)) {
+        if (include_in_navigation($widget)) {
 ?>
-                    <li><a href="<?= example_url($example) ?>"><?= $example['text'] ?></a></li>
+        <li>
+            <h2><?= $widget['text'] ?></h2>
+            <ul>
 <?php
-                        }
+                foreach($widget['items'] as $example) {
+                    if (include_in_navigation($example) && example_exists($example)) {
+?>
+                <li><a href="<?= example_url($example) ?>"><?= $example['text'] ?></a></li>
+<?php
                     }
-?>
-                </ul>
-            </li>
-<?php
                 }
-            }
 ?>
-        </ul>
+            </ul>
+        </li>
 <?php
+        }
     }
 ?>
+    </ul>
