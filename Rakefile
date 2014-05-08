@@ -37,14 +37,14 @@ if ENV['DRY_RUN']
     ADMIN_LOGIN = 'petyo.ivanov@telerik.local'
     ADMIN_RELEASE_UPLOAD_LOGIN = 'stefan.rahnev@telerik.local'
 
-    SITE_URL = "http://wwwsit.telerik.com/"
+    SITE_URL = "http://wwwsit.telerik.com"
     SITE_LOGIN = "stefan.rahnev@telerik.local"
 else
     ADMIN_URL = 'http://admin.telerik.com/'
     ADMIN_LOGIN = 'petyo.ivanov@telerik.com'
     ADMIN_RELEASE_UPLOAD_LOGIN = 'stefan.rahnev@telerik.com'
 
-    SITE_URL = "http://www1.telerik.com/"
+    SITE_URL = "http://www1.telerik.com"
     SITE_LOGIN = "stefan.rahnev@telerik.com"
 end
 

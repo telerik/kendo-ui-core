@@ -96,7 +96,7 @@ namespace :download_builder do
     task :staging => :build_staging
 
     desc "Upload download builder files on telerik.com"
-    task "download_builder:upload" do
+    task :upload do
         upload_download_builder_files \
     end  
 end
