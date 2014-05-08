@@ -2233,21 +2233,27 @@ var __meta__ = {
             }
 
             var pushed = [];
+            var autoSync = this.options.autoSync;
+            this.options.autoSync = false;
 
-            for (var idx = 0; idx < items.length; idx ++) {
-                var item = items[idx];
+            try {
+                for (var idx = 0; idx < items.length; idx ++) {
+                    var item = items[idx];
 
-                var result = this.add(item);
+                    var result = this.add(item);
 
-                pushed.push(result);
+                    pushed.push(result);
 
-                var pristine = result.toJSON();
+                    var pristine = result.toJSON();
 
-                if (this._isServerGrouped()) {
-                    pristine = wrapInEmptyGroup(this.group(), pristine);
+                    if (this._isServerGrouped()) {
+                        pristine = wrapInEmptyGroup(this.group(), pristine);
+                    }
+
+                    this._pristineData.push(pristine);
                 }
-
-                this._pristineData.push(pristine);
+            } finally {
+                this.options.autoSync = autoSync;
             }
 
             if (pushed.length) {
