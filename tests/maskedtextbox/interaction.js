@@ -203,20 +203,4 @@
         });
     });
 
-    test("MaskedTextBox clears selection on blur", 2, function() {
-        var maskedtextbox = new MaskedTextBox(input, {
-            mask: "(000) 000-0000",
-            value: "(123) 123-4567"
-        });
-
-        input.focus();
-        kendo.caret(input, 0, input.val().length);
-
-        $(document.documentElement).mousedown();
-
-        var selection = kendo.caret(input);
-
-        equal(selection[0], 0);
-        equal(selection[1], 0);
-    });
 })();
