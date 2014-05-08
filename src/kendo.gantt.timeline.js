@@ -26,6 +26,14 @@ var __meta__ = {
     var RESIZE_HINT = '<div class="k-marquee k-gantt-marquee">' +
                            '<div class="k-marquee-color"></div>' +
                        '</div>';
+    var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div class="k-animation-container" style="width: 220px; height: 40px; margin-left: -2px; padding-left: 2px; padding-right: 2px; padding-bottom: 4px; overflow: hidden; position: absolute; z-index: 10002; box-sizing: content-box;">' +
+                              '<div role="tooltip" class="k-widget k-tooltip k-popup k-group k-reset" data-role="popup" aria-hidden="true">' +
+                                   '<div class="k-tooltip-content">' +
+                                        '<div class="k-tooltip-content-start">Start: #=kendo.toString(start, "ddd M/dd, HH:mm")#</div>' +
+                                        '<div class="k-tooltip-content-end">End: #=kendo.toString(end, "ddd M/dd, HH:mm")#</div>' +
+                                   '</div>' +
+                              '</div>' +
+                         '</div>');
 
     var defaultViews = {
         day: {
@@ -73,6 +81,8 @@ var __meta__ = {
             this.header = this.element.find(".k-gantt-timeline-header-wrap");
 
             this.content = this.element.find(".k-gantt-timeline-content");
+
+            this.contentWidth = this.content.width();
 
             this._workDays = getWorkDays(this.options);
 
@@ -631,7 +641,16 @@ var __meta__ = {
             this._dragHint = null;
         },
 
-        _createResizeHint: function() {
+        _createResizeHint: function(task) {
+            var taskTop = this._taskCoordinates[task.id].top;
+            var top = taskTop - 70;
+
+            if (top < 20) {
+                top = taskTop + 50;
+            }
+
+            this._resizeTooltipTop = top;
+
             this._resizeHint = $(RESIZE_HINT).css({
                 "top": 0,
                 "height": "100%"
@@ -640,21 +659,48 @@ var __meta__ = {
             this.content.append(this._resizeHint);
         },
 
-        _updateResizeHint: function(start, end) {
+        _updateResizeHint: function(start, end, resizeStart) {
             var left = this._offset(start);
             var right = this._offset(end);
             var width = right - left;
+            var tooltipLeft = resizeStart ? left : right;
+            var contentWidth = this.contentWidth - 17;
+            var tooltipWidth;
 
             this._resizeHint
                 .css({
                     "left": left,
                     "width": width
                 });
+
+            if (this._resizeTooltip) {
+                this._resizeTooltip.remove();
+            }
+
+            tooltipWidth = 200;
+            tooltipLeft -= (tooltipWidth / 2);
+
+            if (tooltipLeft < 0) {
+                tooltipLeft = 0;
+            } else if (tooltipLeft + tooltipWidth > contentWidth) {
+                tooltipLeft = contentWidth - tooltipWidth;
+            }
+
+            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ start: start, end: end }))
+                .css({
+                    "top": this._resizeTooltipTop,
+                    "left": tooltipLeft
+                });
+
+            this.content.append(this._resizeTooltip);
         },
 
         _removeResizeHint: function() {
             this._resizeHint.remove();
             this._resizeHint = null;
+
+            this._resizeTooltip.remove();
+            this._resizeTooltip = null;
         },
 
         _timeSlots: function() {
@@ -1253,7 +1299,7 @@ var __meta__ = {
                     currentStart = task.start;
                     currentEnd = task.end;
 
-                    that.view()._createResizeHint();
+                    that.view()._createResizeHint(task);
                 })
                 .bind("drag", function(e) {
                     var view = that.view();
@@ -1270,7 +1316,7 @@ var __meta__ = {
                     }
 
                     if (!that.trigger("resize", { task: task, date: resizeStart ? currentStart : currentEnd })) {
-                        view._updateResizeHint(currentStart, currentEnd);
+                        view._updateResizeHint(currentStart, currentEnd, resizeStart);
                     }
                 })
                 .bind("dragend", function(e) {
