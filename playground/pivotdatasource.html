@@ -14,7 +14,7 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
-        <button>Expand</button>
+        <!--button>Expand</button-->
         <div class="k-grid k-widget" style="overflow: scroll;height: 1000px">
             <table id="container"></table>
         </div>
@@ -40,104 +40,15 @@
             });
 
 */
-            function crossJoin(names) {
-                var result = "CROSSJOIN({";
-                var r;
-                if (names.length > 2) {
-                    r = names.pop();
-                    result += crossJoin(names);
-                } else {
-                    result += names.shift();
-                    r = names.pop();
-                }
-                result += "},{";
-                result += r;
-                result += "})";
-                return result;
-            }
-
-           /* {
-                columns: [{ field: "[MemberPath]", expand: true}, { field: "[MemberPath2]", expand: false }],
-                values: ["Measure1"], // on which axes?
-                rows: [{ field: "[MemberPath]", expand: true}, { field: "[MemberPath2]", expand: false }],
-                filter: {}
-            }*/
-
-            function expandMembers(members) {
-                var result = [];
-                var name;
-
-                for (var idx = 0; idx < members.length; idx++) {
-                    if (typeof members[idx] == "string") {
-                        result.push(members[idx])
-                    } else {
-                        if (members[idx].expand) {
-                            result.push(members[idx].name + ".[ALL].Children");
-                        } else {
-                            result.push(members[idx].name);
-                        }
-                    }
-                }
-
-                return result;
-            }
-
-            var converters = {
-                read: function(options) {
-                    var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>';
-
-                    command += "SELECT NON EMPTY {";
-
-                    var columns = expandMembers(options.columns);
-                    var rows = expandMembers(options.rows);
-
-                    if (options.columns.length) {
-                        if (options.columns.length > 1 || options.measures.length > 1) {
-                            var tmp = columns;
-                            if (options.measures.length > 1) {
-                                tmp.push("{" + options.measures.join(",") + "}");
-                            }
-
-                            command += crossJoin(tmp);
-                        } else {
-                            command += columns.join(",");
-                        }
-                    } else if (options.measures.length) {
-                        command += options.measures.join(",");
-                    }
-
-                    command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS";
-
-                    if (rows.length) {
-                        command += ", NON EMPTY {" + rows.join(",") + "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
-                    }
-
-                    command += " FROM [" + options.connection.cube + "]";
-
-                    if (options.measures.length == 1 && options.columns.length) {
-                        command += " WHERE (" + options.measures.join(",") + ")";
-                    }
-
-                    command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog></PropertyList></Properties></Execute></Body></Envelope>';
-
-                    return command;
-                },
-                discover: function(options) {
-                }
-            };
-
             var dataSource = new kendo.data.PivotDataSource({
                 type: "xmla",
-                columns: ["[Date].[Calendar]"],
-                rows: ["[Product].[Product Name]"],
+                columns: [{ name: "[Geography].[City]", expand: true }, { name: "[Date].[Calendar]", expand: true }],
+                rows: [ { name: "[Product].[Product Name]", expand: true }, { name: "[Product].[Category]", expand: true }],
                 measures: ["[Measures].[Internet Order Lines Count]"],
                 transport: {
                     connection: {
                         catalog: "Adventure Works Internet Sales Model",
                         cube: "Adventure Works Internet Sales Model"
-                    },
-                    parameterMap: function(data, type) {
-                        return converters[type](data);
                     },
                     read: {
                         url: "http://krustev:8080/olap/msmdpump.dll",
@@ -153,7 +64,7 @@
                    renderPivot(this.data());
                },
                error: function(e) {
-                   alert("error: " + e.errors[0]);
+                   alert("error: " + kendo.stringify(e.errors[0]));
                }
             });
 
@@ -169,9 +80,9 @@
             function renderHeader(nodeName, tuples) {
                 var html = "";
 
-                for (var j = 0; j < tuples[0].members.length;j++) {
+                for (var j = 0; j < dataSource.columns().length;j++) {
                     html += "<tr>";
-                    html += "<th></th>";
+                    html += new Array(dataSource.rows().length + 1).join("<th class='k-header'></th>");
 
                     for (var idx = 0; idx < tuples.length; idx++) {
                         var members = tuples[idx].members;
