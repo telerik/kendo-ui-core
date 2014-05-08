@@ -2647,8 +2647,11 @@ var __meta__ = {
 
                     if(element.length && scrollable) {
                         var content = element.closest("table").parent();
-                        if (content.is(".k-grid-content,.k-grid-content-locked")) {
+                        if (content.is(".k-grid-content")) {
                             that._scrollTo(element.parent()[0], that.content[0]);
+                        } else if (content.is(".k-grid-content-locked")) {
+                            that._scrollTo(that._relatedRow(element.parent())[0], that.content[0]);
+                            that.lockedContent[0].scrollTop = that.content[0].scrollTop;
                         }
 
                         if (!content.is(".k-grid-content-locked,.k-grid-header-locked")) {
