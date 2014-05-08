@@ -3770,6 +3770,42 @@ function pad(number, digits, end) {
         return delta;
     };
 
+    kendo.throttle = function(fn, delay) {
+        var timeout;
+        var lastExecTime = 0;
+
+        if (!delay || delay <= 0) {
+            return fn;
+        }
+
+        return function() {
+            var that = this;
+            var elapsed = +new Date() - lastExecTime;
+            var args = arguments;
+
+            function exec() {
+                lastExecTime = +new Date();
+                fn.apply(that, args);
+            }
+
+            // first execution
+            if (!lastExecTime) {
+                return exec();
+            }
+
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+
+            if (elapsed > delay) {
+                exec();
+            } else {
+                timeout = setTimeout(exec, delay - elapsed);
+            }
+        };
+    };
+
+
     kendo.caret = function (element, start, end) {
         var rangeElement;
         var isPosition = start !== undefined;
