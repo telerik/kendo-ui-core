@@ -42,9 +42,9 @@
 */
             var dataSource = new kendo.data.PivotDataSource({
                 type: "xmla",
-                columns: [{ name: "[Geography].[City]", expand: true }, { name: "[Date].[Calendar]", expand: true }],
+                columns: [{ name: "[Geography].[City]", expand: true }, { name: "[Date].[Calendar]", expand: false }],
                 rows: [ { name: "[Product].[Product Name]", expand: true }, { name: "[Product].[Category]", expand: true }],
-                measures: ["[Measures].[Internet Order Lines Count]"],
+                measures: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Product Cost]"],
                 transport: {
                     connection: {
                         catalog: "Adventure Works Internet Sales Model",
@@ -80,7 +80,7 @@
             function renderHeader(nodeName, tuples) {
                 var html = "";
 
-                for (var j = 0; j < dataSource.columns().length;j++) {
+                for (var j = 0; j < tuples[0].members.length;j++) {
                     html += "<tr>";
                     html += new Array(dataSource.rows().length + 1).join("<th class='k-header'></th>");
 
@@ -113,7 +113,7 @@
                 var html = '<thead class="k-grid-header">';
 
                 var columns = dataSource.axes().columns.tuples;
-                var rows = dataSource.axes().rows.tuples;
+                var rows = dataSource.axes().rows.tuples || [];
 
 
                 if (!rows.length) {
