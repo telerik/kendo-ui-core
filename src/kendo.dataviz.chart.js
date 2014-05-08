@@ -260,7 +260,11 @@ var __meta__ = {
 
             chart.wrapper = chart.element;
 
-            chart._initDataSource(dataSource);
+            if (userOptions) {
+                userOptions.dataSource = dataSource;
+            }
+
+            chart._initDataSource(userOptions);
 
             kendo.notify(chart, dataviz.ui);
         },
@@ -292,8 +296,9 @@ var __meta__ = {
             applySeriesColors(chart.options);
         },
 
-        _initDataSource: function(dataSource) {
-            var chart = this;
+        _initDataSource: function(userOptions) {
+            var chart = this,
+                dataSource = (userOptions || {}).dataSource;
 
             chart._dataChangeHandler = proxy(chart._onDataChanged, chart);
 
