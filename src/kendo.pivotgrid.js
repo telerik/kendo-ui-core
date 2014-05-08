@@ -397,11 +397,11 @@ var __meta__ = {
         },
 
         _wrapper: function() {
-            this.wrapper = this.element.addClass("k-widget");
+            this.wrapper = this.element.addClass("k-widget k-pivot");
         },
 
         _filterFields: function() {
-            var element = $(DIV).addClass("k-grouping-header") //TODO: render correct CSS class
+            var element = $(DIV).addClass("k-pivot-filters")
                                 .text(this.options.messages.filterFields);
 
             this.filterFields = element;
@@ -420,20 +420,21 @@ var __meta__ = {
         },
 
         _columnsHeader: function() {
-            this.columnsHeader = $("<div/>");
+            this.columnsHeader = $('<div class="k-pivot-header" />')
+                                    .append('<div class="k-pivot-header-wrap" />');
         },
 
         _rowsHeader: function() {
-            this.rowsHeader = $("<div/>");
+            this.rowsHeader = $('<div class="k-pivot-rowheaders"/>');
         },
 
         _contentTable: function() {
-            this.content = $("<div/>");
+            this.content = $('<div class="k-pivot-content" />');
         },
 
         _createLayout: function() {
             var that = this;
-            var table = $("<table/>");
+            var table = $('<table class="k-pivot-layout"/>');
 
             that._filterFields();
 
@@ -448,24 +449,23 @@ var __meta__ = {
             that._rowFields();
             that._columnsHeader();
 
-            table.append($("<tr/>")
-                            .append($("<td/>").append(that.rowFields))
-                            .append($("<td/>").append(that.columnsHeader))
-                        );
-
             that._rowsHeader();
             that._contentTable();
 
+            var pivotTable = $('<div class="k-pivot-table" />')
+                                .append(that.columnsHeader)
+                                .append(that.content);
+
             table.append($("<tr/>")
-                            .append($("<td/>").append(that.rowsHeader))
-                            .append($("<td/>").append(that.content))
+                            .append($("<td/>").append(that.rowFields).append(that.rowsHeader))
+                            .append($("<td/>").append(pivotTable))
                         );
 
             that.wrapper.append(that.filterFields);
             that.wrapper.append(table);
 
             //VIRTUAL DOM
-            that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0]);
+            that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0].firstChild);
             that.rowsHeaderTree = new kendo.dom.Tree(that.rowsHeader[0]);
             that.contentTree = new kendo.dom.Tree(that.content[0]);
         },

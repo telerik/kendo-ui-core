@@ -35,13 +35,30 @@
         return new PivotGrid($(div), options);
     }
 
+    test("PivotGrid adds CSS classes to the wrapper elements", function() {
+        var pivotgrid = createPivot();
+
+        var wrapper = pivotgrid.wrapper;
+
+        ok(wrapper.hasClass("k-widget"));
+        ok(wrapper.hasClass("k-pivot"));
+    });
+
     test("PivotGrid renders filter section", function() {
         var pivotgrid = createPivot();
 
-        var filterFields = pivotgrid.filterFields;
+        var filterFields = pivotgrid.wrapper.find(".k-pivot-filters");
 
         ok(filterFields.is("div"));
         equal(filterFields.text(), pivotgrid.options.messages.filterFields);
+    });
+
+    test("PivotGrid renders layout table", function() {
+        var pivotgrid = createPivot();
+
+        var layout = pivotgrid.wrapper.find(".k-pivot-layout");
+
+        ok(layout[0]);
     });
 
     test("PivotGrid renders measures section", function() {
@@ -77,28 +94,52 @@
         ok(rowFields.closest(".k-widget")[0]);
     });
 
-    test("PivotGrid renders column header section", 2, function() {
+    test("PivotGrid renders pivot content column", 1, function() {
         var pivotgrid = createPivot();
 
-        ok(pivotgrid.columnsHeader.is("div"));
-        ok(pivotgrid.columnsHeader.closest(".k-widget")[0]);
+        ok(pivotgrid.wrapper.find(".k-pivot-table")[0]);
+    });
+
+    test("PivotGrid renders header outer wrapper", 1, function() {
+        var pivotgrid = createPivot();
+
+        var header = pivotgrid.wrapper
+                              .find(".k-pivot-table")
+                              .find(".k-pivot-header");
+
+        ok(header[0]);
+    });
+
+    test("PivotGrid renders header inner wrapper", 1, function() {
+        var pivotgrid = createPivot();
+
+        var header = pivotgrid.wrapper
+                              .find(".k-pivot-table")
+                              .find(".k-pivot-header")
+                              .find(".k-pivot-header-wrap");
+
+        ok(header[0]);
     });
 
     test("PivotGrid renders row header section", 2, function() {
         var pivotgrid = createPivot();
 
-        ok(pivotgrid.rowsHeader.is("div"));
-        ok(pivotgrid.rowsHeader.closest(".k-widget")[0]);
+        var rowheaders = pivotgrid.wrapper.find(".k-pivot-rowheaders");
+
+        ok(rowheaders.is("div"));
+        ok(rowheaders.closest(".k-pivot-layout")[0]);
     });
 
     test("PivotGrid renders content section", 2, function() {
         var pivotgrid = createPivot();
 
-        ok(pivotgrid.content.is("div"));
-        ok(pivotgrid.content.closest(".k-widget")[0]);
+        var contentElement = pivotgrid.wrapper.find(".k-pivot-content");
+
+        ok(contentElement.is("div"));
+        ok(contentElement.closest(".k-pivot-layout")[0]);
     });
 
-    module("PivotGrid virtual DOM rendering", {
+    /*module("PivotGrid virtual DOM rendering", {
         setup: function() {
             kendo.ns = "kendo-";
             div = document.createElement("div");
@@ -112,6 +153,6 @@
             kendo.destroy(QUnit.fixture);
             kendo.ns = "";
         }
-    });
+    });*/
 
 })();
