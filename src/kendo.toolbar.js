@@ -218,35 +218,22 @@ var __meta__ = {
 
                 element.addClass(TOOLBAR);
 
+                if(options.resizable) {
+                    that._renderOverflow();
+                    element.addClass(RESIZABLE_TOOLBAR);
+                    element.on(CLICK, "." + OVERFLOW_ANCHOR, proxy(that._toggleOverflow, that));
+                }
+
                 if(options.items && options.items.length) {
                     that._renderItems(options.items);
                 }
 
-                if(options.resizable) {
-                    that._renderOverflow();
-                    element.addClass(RESIZABLE_TOOLBAR);
-                }
-
-                that.bind("resize", function(e) {
-                    var containerWidth = e.width,
-                        childrenWidth = 0,
-                        anchorWidth = this._anchorWidth;
-
-                    this.element.children().each(function() {
-                        childrenWidth += $(this).outerWidth(true); 
-                    });
-
-                    containerWidth = containerWidth - anchorWidth;
-                    childrenWidth = Math.ceil(childrenWidth);
-
-                    if(containerWidth < childrenWidth) {
-                        this._hideItem(this.element.children(":not(." + OVERFLOW_ANCHOR + ")").last());
-                    }
-                });
-
                 element.on(CLICK, "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")", proxy(that._buttonClick, that));
                 element.on(CLICK, "." + SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
-                element.on(CLICK, "." + OVERFLOW_ANCHOR, proxy(that._toggleOverflow, that));
+
+                if(options.resizable) {
+                    element.height(element.height());
+                }
 
                 kendo.notify(that);
             },
@@ -277,8 +264,6 @@ var __meta__ = {
             },
 
             _renderItems: function(items) {
-                this.element.empty();
-
                 for (var i = 0; i < items.length; i++) {
                     var command = items[i],
                         element;
@@ -289,12 +274,22 @@ var __meta__ = {
                         } else {
                             element = $(command.template);
                         }
-                        element.appendTo(this.element);
                     } else {
                         element = $(templates[command.type](command));
 
                         (initializers[command.type] || $.noop)(element, command);
-                        element.appendTo(this.element);
+                    }
+
+                    if(element.length) {
+                        element.appendTo(this.element).css("visibility", "hidden");
+
+                        var containerWidth = this.element.innerWidth();
+
+                        if(containerWidth < this._childrenWidth()) {
+                            this._hideItem(element, true);
+                        }
+
+                        element.css("visibility", "visible");
                     }
 
                 }
@@ -309,7 +304,7 @@ var __meta__ = {
                     anchor: overflowAnchor
                 });
 
-                this._anchorWidth = overflowAnchor.outerWidth();
+                this._anchorWidth = overflowAnchor.outerWidth(true);
             },
 
             _buttonClick: function(e) {
@@ -368,7 +363,32 @@ var __meta__ = {
                 popup.toggle();
             },
 
-            _hideItem: function(item) {
+            _resize: function(e) {
+                var containerWidth = e.width,
+                    commandElement;
+
+                if(containerWidth < this._childrenWidth()) {
+                    commandElement = this.element.children(":not(." + OVERFLOW_ANCHOR + ")").last();
+                    this._hideItem(commandElement);
+                } else {
+                    commandElement = this._overflow.element.children("li").first();
+                    this._showItem(commandElement, containerWidth);
+                }
+            },
+
+            _childrenWidth: function() {
+                var childrenWidth = 0;
+
+                this.element.children().each(function() {
+                    childrenWidth += $(this).outerWidth(true);
+                });
+
+                childrenWidth = Math.ceil(childrenWidth);
+
+                return childrenWidth;
+            },
+
+            _hideItem: function(item, append) {
                 var wrapper = $("<li></li>"),
                     type = item.data("type");
 
@@ -380,11 +400,30 @@ var __meta__ = {
                     //todo
                 }
 
-                this._overflow.element.prepend(wrapper);
+                if(append) {
+                    this._overflow.element.append(wrapper);
+                } else {
+                    this._overflow.element.prepend(wrapper);
+                }
             },
 
-            _showItem: function(item) {
-                //todo
+            _showItem: function(item, containerWidth) {
+                var element = item.children();
+
+                element.unwrap();
+                element.css({
+                    "visibility": "hidden"
+                });
+
+                element.insertAfter(this.element.children(":not(." + OVERFLOW_ANCHOR + ")").last());
+
+                if(containerWidth < this._childrenWidth()) {
+                    this._hideItem(element);
+                }
+
+                element.css({
+                    "visibility": "visible"
+                });
             }
 
         });
