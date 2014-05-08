@@ -772,7 +772,7 @@ var __meta__ = {
             return slots;
         },
 
-        _days: function(start, end, span) {
+        _days: function(start, end) {
             var slotEnd;
             var slots = [];
             var isWorkDay;
@@ -790,7 +790,7 @@ var __meta__ = {
                         start: start,
                         end: slotEnd,
                         isNonWorking: !isWorkDay,
-                        span: span
+                        span: 1
                     });
                 }
 
@@ -915,6 +915,7 @@ var __meta__ = {
             var span = 24;
             var options = this.options;
             var daySlots;
+            var daySlot;
             var hourSlots;
             var hours;
             var slots = [];
@@ -923,13 +924,14 @@ var __meta__ = {
                 span = (options.workDayEnd.getHours() - options.workDayStart.getHours());
             }
 
-            span = Math.ceil(span / this.options.hourSpan);
-
-            daySlots = this._days(this.start, this.end, span);
+            daySlots = this._days(this.start, this.end);
             hourSlots = [];
 
             for (var i = 0, l = daySlots.length; i < l; i++) {
-                hours = this._hours(daySlots[i].start, daySlots[i].end);
+                daySlot = daySlots[i];
+                hours = this._hours(daySlot.start, daySlot.end);
+
+                daySlot.span = hours.length;
 
                 hourSlots.push.apply(hourSlots, hours);
             }
@@ -965,7 +967,7 @@ var __meta__ = {
             var slots = [];
 
             slots.push(this._weeks(this.start, this.end));
-            slots.push(this._days(this.start, this.end, 1));
+            slots.push(this._days(this.start, this.end));
 
             return slots;
         },
