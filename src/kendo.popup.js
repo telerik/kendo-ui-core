@@ -432,7 +432,7 @@ var __meta__ = {
             siblingContainer = anchor.parents().filter(wrapper.siblings());
 
             if (siblingContainer[0]) {
-                parentZIndex = Number($(siblingContainer).css("zIndex"));
+                parentZIndex = Math.max(Number(siblingContainer.css("zIndex")), 0);
 
                 // set z-index to be more than that of the container/sibling
                 // compensate with more units for window z-stack
