@@ -347,6 +347,20 @@
            'FROM [cubeName]') > -1);
     });
 
+    test("parameterMap multiple rows are cross joined", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            rows: [{ name: "[foo]" }, { name: "[bar]" }],
+            measures: ["[baz]"]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {[baz]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+            'NON EMPTY {CROSSJOIN({[foo]},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS ' +
+           'FROM [cubeName]') > -1);
+    });
+
     test("parameterMap multiple measures are cross joined with columns", function() {
         var transport = new kendo.data.XmlaTransport({ });
 

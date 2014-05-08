@@ -200,7 +200,15 @@ var __meta__ = {
             command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS";
 
             if (rows.length) {
-                command += ", NON EMPTY {" + rows.join(",") + "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
+                command += ", NON EMPTY {";
+
+                if (options.rows.length > 1) {
+                    command += crossJoin(rows);
+                } else {
+                    command += rows.join(",");
+                }
+
+                command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
             }
 
             command += " FROM [" + options.connection.cube + "]";
