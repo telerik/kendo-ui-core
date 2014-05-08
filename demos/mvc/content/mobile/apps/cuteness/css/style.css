@@ -328,21 +328,21 @@
     margin: 0;
 }
 
-.km-comments:after,
-.km-comments:before
+.km-root .km-comments:after,
+.km-root .km-comments:before
 {
     content: "\E091";
     color: #d4d4d4;
 }
 
-.km-canvas:after,
-.km-canvas:before
+.km-root .km-canvas:after,
+.km-root .km-canvas:before
 {
     content: "\E0AC";
 }
 
-.km-list-icon:after,
-.km-list-icon:before
+.km-root .km-list-icon:after,
+.km-root .km-list-icon:before
 {
     content: "\E055";
 }
@@ -375,7 +375,7 @@
     background-size: auto 25%;
 }
 
-.km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
+.km-root .km-drawer-button:before, .km-root .km-drawer-button:after  { content: "\E077"; }
 
 .account-info {
     float: right;

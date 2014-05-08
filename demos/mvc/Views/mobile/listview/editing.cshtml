@@ -199,7 +199,7 @@
         view.element.find("#done").data("kendoMobileButton").bind("click", function() {
             dataSource.one("change", function() {
                 view.loader.hide();
-                window.kendoMobileApplication.navigate("#:back");
+                kendo.mobile.application.navigate("#:back");
             });
 
             view.loader.show();
@@ -210,7 +210,7 @@
             e.preventDefault();
             dataSource.one("change", function() {
                 view.loader.hide();
-                window.kendoMobileApplication.navigate("#:back");
+                kendo.mobile.application.navigate("#:back");
             });
 
             view.loader.show();
