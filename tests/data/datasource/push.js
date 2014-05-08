@@ -139,6 +139,16 @@ test("pushCreate inserts a new item in the data source", function() {
     equal(dataSource.at(0).foo, "foo");
 });
 
+test("pushCreate updates the total when autoSync is set to true", function() {
+    var dataSource = new DataSource({
+       autoSync: true
+    });
+
+    dataSource.pushCreate({ foo: "foo" });
+
+    equal(dataSource.total(), 1);
+});
+
 test("hasChanges returns false after pushCreate", function() {
     var dataSource = new DataSource({
         schema: { model: { id: "id" } }
@@ -283,6 +293,16 @@ test("pushUpdate fires the push event", 5, function() {
     ]);
 });
 
+test("pushUpdate updates the total when autoSync is set to true", function() {
+    var dataSource = new DataSource({
+       autoSync: true
+    });
+
+    dataSource.pushUpdate({ foo: "foo" });
+
+    equal(dataSource.total(), 1);
+});
+
 test("pushDestroy removes an existing item", function() {
     var dataSource = new DataSource({
         schema: { model: { id: "id" } },
@@ -294,6 +314,18 @@ test("pushDestroy removes an existing item", function() {
     dataSource.pushDestroy({ id: 1 });
 
     equal(dataSource.data().length, 0);
+});
+
+test("pushDestroy updates the total when autoSync is set to true", function() {
+    var dataSource = new DataSource({
+        schema: { model: { id: "id" } },
+        data: [ { id: 1, foo: "foo" }]
+    });
+
+    dataSource.read();
+    dataSource.pushDestroy({ id: 1 });
+
+    equal(dataSource.total(), 0);
 });
 
 test("hasChanges returns false after pushDestroy", function() {
