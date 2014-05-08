@@ -862,8 +862,8 @@
     <Content Include="Views\Shared\Products.cshtml" />
     <Content Include="Views\Shared\Telerik-Navigation.cshtml" />
     <Content Include="Views\demos\actionsheet\index.cshtml" />
-    <Content Include="Views\demos\adaptive\grid.cshtml" />
-    <Content Include="Views\demos\adaptive\scheduler.cshtml" />
+    <Content Include="Views\demos\grid\adaptive.cshtml" />
+    <Content Include="Views\demos\scheduler\adaptive.cshtml" />
     <Content Include="Views\demos\application\loadingpopup.cshtml" />
     <Content Include="Views\demos\application\transitions.cshtml" />
     <Content Include="Views\demos\autocomplete\mvvm.cshtml" />

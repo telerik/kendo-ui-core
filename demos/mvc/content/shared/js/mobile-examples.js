@@ -63,6 +63,7 @@ function loadSection(e) {
     navDataSource.fetch(function() {
         var item = navDataSource.get(e.view.params["name"]);
         detailNavDataSource.data(mobileExamples(item));
+        e.view.scroller.reset();
 
         var navBar = e.view.element.find("[data-role=navbar]").data("kendoMobileNavBar");
         if (navBar) {

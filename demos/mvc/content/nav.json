@@ -1042,8 +1042,7 @@
       },
       {
         "text": "Adaptive Rendering",
-        "disableInMobile": true,
-        "url": "adaptive/grid",
+        "url": "grid/adaptive",
         "title": "Adaptive Rendering of Kendo UI Grid",
         "external": "true",
         "packages": [
@@ -1270,93 +1269,6 @@
       }
     ],
     "category": "Navigation"
-  },
-  {
-    "packages": [
-      "!mvc",
-      "!jsp",
-      "!php"
-    ],
-    "text": "Mobile",
-    "name": "mobile",
-    "disableInMobile": true,
-    "new": "true",
-    "spriteCssClass": "mobileIcon",
-    "items": [
-      {
-        "text": "Actionsheet",
-        "url": "mobile/actionsheet",
-        "title": "Mobile ActionSheet widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile Actionsheet may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "Button",
-        "url": "mobile/button",
-        "title": "Mobile Button widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile Button may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "ButtonGroup",
-        "url": "mobile/buttongroup",
-        "title": "Mobile ButtonGroup widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile ButtonGroup may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "Drawer",
-        "url": "mobile/drawer",
-        "title": "Mobile Drawer widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile Drawer may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "ListView",
-        "url": "mobile/listview",
-        "title": "Mobile ListView widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile ListView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "ModalView",
-        "url": "mobile/modalview",
-        "title": "Mobile ModalView widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile ModalView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "Navbar",
-        "url": "mobile/navbar",
-        "title": "Mobile NavBar widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile Navbar may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "Popover",
-        "url": "mobile/popover",
-        "title": "Mobile PopOver widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile PopOver may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "Scroller",
-        "url": "mobile/scroller",
-        "title": "Mobile Scroller widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile Scroller may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "ScrollView",
-        "url": "mobile/scrollview",
-        "title": "Mobile ScrollView widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile ScrollView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "Switch",
-        "url": "mobile/switch",
-        "title": "Mobile Switch widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile Switch may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      },
-      {
-        "text": "Tabstrip",
-        "url": "mobile/tabstrip",
-        "title": "Mobile Tabstrip widget demo | Kendo UI Demos",
-        "meta": "This example demonstrates how the Mobile Tabstrip may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-      }
-    ],
-    "category": "TBD"
   },
   {
     "text": "MultiSelect",
@@ -1779,8 +1691,7 @@
       },
       {
         "text": "Adaptive Rendering",
-        "disableInMobile": true,
-        "url": "adaptive/scheduler",
+        "url": "scheduler/adaptive",
         "title": "Adaptive Rendering of Kendo UI Scheduler",
         "external": "true",
         "packages": [
@@ -3915,7 +3826,7 @@
   {
     "text": "ActionSheet",
     "name": "actionsheet",
-    "documentation": "mobile/actionsheet",
+    "documentation": "actionsheet/adaptive",
     "spriteCssClass": "mobileActionSheetIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -3925,44 +3836,21 @@
         "url": "actionsheet/index",
         "title": "Kendo UI Mobile ActionSheet Demo",
         "meta": "This demo shows how Mobile ActionSheet component in Kendo UI Mobile framework works in your app in order to provide iOS-like experience."
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "actionsheet/adaptive",
+        "title": "Mobile ActionSheet widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile Actionsheet may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
   },
   {
-    "text": "Adaptive Widgets",
-    "name": "adaptive",
-    "mobile": true,
-    "packages": [ "!jsp", "!php" ],
-    "items": [
-      {
-        "text": "Scheduler",
-        "url": "adaptive/scheduler",
-        "title": "Adaptive Rendering of Kendo UI Scheduler",
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "Grid",
-        "url": "adaptive/grid",
-        "title": "Adaptive Rendering of Kendo UI Grid",
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      }
-    ],
-    "category": "TBD"
-
-  },
-  {
     "text": "Button",
     "name": "mobile-button",
-    "documentation": "mobile/button",
+    "documentation": "button/adaptive",
     "spriteCssClass": "mobileButtonIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4001,6 +3889,13 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "button/adaptive",
+        "title": "Mobile Button widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile Button may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4009,7 +3904,7 @@
   {
     "text": "ButtonGroup",
     "name": "buttongroup",
-    "documentation": "mobile/buttongroup",
+    "documentation": "buttongroup/adaptive",
     "spriteCssClass": "mobileButtonGroupIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4054,6 +3949,13 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "buttongroup/adaptive",
+        "title": "Mobile ButtonGroup widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile ButtonGroup may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4061,7 +3963,7 @@
   {
     "text": "Drawer",
     "name": "drawer",
-    "documentation": "mobile/drawer",
+    "documentation": "drawer/adaptive",
     "spriteCssClass": "mobileDrawerIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4077,6 +3979,13 @@
         "url": "drawer/two-way-drawers",
         "title": "Example of left and right drawers",
         "meta": "This demo shows the two drawers (left and right) applied to the same application."
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "drawer/adaptive",
+        "title": "Mobile Drawer widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile Drawer may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4084,7 +3993,7 @@
   {
     "text": "ListView",
     "name": "mobile-listview",
-    "documentation": "mobile/listview",
+    "documentation": "listview/adaptive",
     "spriteCssClass": "mobileListViewIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4177,6 +4086,13 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "listview/adaptive",
+        "title": "Mobile ListView widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile ListView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4185,7 +4101,7 @@
     "text": "ModalView",
     "name": "modalview",
     "packages": [ "!jsp", "!php" ],
-    "documentation": "mobile/modalview",
+    "documentation": "modalview/adaptive",
     "spriteCssClass": "mobileModalViewIcon",
     "mobile": true,
     "items": [
@@ -4194,6 +4110,13 @@
         "url": "modalview/index",
         "title": "Kendo UI Mobile ModalView Demo",
         "meta": "The demo shows how Kendo UI ModalView widget can be opened when any other mobile navigational widget is tapped."
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "modalview/adaptive",
+        "title": "Mobile ModalView widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile ModalView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4201,7 +4124,7 @@
   {
     "text": "NavBar",
     "name": "navbar",
-    "documentation": "mobile/navbar",
+    "documentation": "navbar/adaptive",
     "spriteCssClass": "mobileNavBarIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4217,6 +4140,13 @@
         "url": "navbar/appearance",
         "title": "Example of customizing Kendo UI Mobile NavBar appearance",
         "meta": "This demo shows how the background color of jQuery-based Kendo UI Mobile NavBar can be customized by setting the CSS properties of the background color."
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "navbar/adaptive",
+        "title": "Mobile NavBar widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile Navbar may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4225,7 +4155,7 @@
     "text": "PopOver",
     "name": "popover",
     "tablet": true,
-    "documentation": "mobile/popover",
+    "documentation": "popover/adaptive",
     "spriteCssClass": "mobilePopOverIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4235,6 +4165,13 @@
         "url": "popover/index",
         "title": "Kendo UI Mobile Layout demo | Kendo UI PopOver widget demo",
         "meta": "This demo shows the core function of Kendo UI Popover which is a transient view, displayed when the user taps on a navigational jQuery-based mobile widget or area on the screen."
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "popover/adaptive",
+        "title": "Mobile PopOver widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile PopOver may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4242,7 +4179,7 @@
   {
     "text": "Scroller",
     "name": "scroller",
-    "documentation": "mobile/scroller",
+    "documentation": "scroller/adaptive",
     "spriteCssClass": "mobileScrollerIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4258,6 +4195,13 @@
         "url": "scroller/pull-to-refresh",
         "title": "Pull to Refresh function | Kendo UI Mobile Content Scrolling widget demo",
         "meta": "This example shows the option \"Pull to Refresh\" in Kendo UI Scroller. If the value is true, then the scroller will display a hint when user pulls the container beyond the top limit."
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "scroller/adaptive",
+        "title": "Mobile Scroller widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile Scroller may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4265,7 +4209,7 @@
   {
     "text": "ScrollView",
     "name": "scrollview",
-    "documentation": "mobile/scrollview",
+    "documentation": "scrollview/adaptive",
     "spriteCssClass": "mobileScrollViewIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4293,6 +4237,13 @@
           "!mvc"
         ],
         "meta": "This demo illustrates the data virtualization on a touch device by using Kendo UI ScrollView widget in your HTML5 app."
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "scrollview/adaptive",
+        "title": "Mobile ScrollView widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile ScrollView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4300,7 +4251,7 @@
   {
     "text": "Switch",
     "name": "Switch",
-    "documentation": "mobile/switch",
+    "documentation": "switch/adaptive",
     "spriteCssClass": "mobileSwitchIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4327,6 +4278,13 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "switch/adaptive",
+        "title": "Mobile Switch widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile Switch may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4334,7 +4292,7 @@
   {
     "text": "TabStrip",
     "name": "mobile-tabstrip",
-    "documentation": "mobile/tabstrip",
+    "documentation": "tabstrip/adaptive",
     "spriteCssClass": "mobileTabStripIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4356,6 +4314,13 @@
         "url": "mobile-tabstrip/appearance",
         "title": "Example of Kendo UI TabStrip Customized Appearance",
         "meta": "This demo shows how the application-wide group of navigation buttons in Kendo UI TabStrip can be easily customized by using custom icons."
+      },
+      {
+        "text": "Adaptive Usage",
+        "disableInMobile": true,
+        "url": "tabstrip/adaptive",
+        "title": "Mobile Tabstrip widget demo | Kendo UI Demos",
+        "meta": "This example demonstrates how the Mobile Tabstrip may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
       }
     ],
     "category": "Mobile"
@@ -4363,7 +4328,7 @@
   {
     "text": "Application",
     "name": "application",
-    "documentation": "mobile/application",
+    "documentation": "application/adaptive",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4420,7 +4385,7 @@
   {
     "text": "Touch Events",
     "name": "touchevents",
-    "documentation": "mobile/touch",
+    "documentation": "touch/adaptive",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4437,7 +4402,7 @@
   {
     "text": "View",
     "name": "mobile-view",
-    "documentation": "mobile/view",
+    "documentation": "view/adaptive",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -4463,7 +4428,7 @@
   {
     "text": "SplitView",
     "name": "SplitView",
-    "documentation": "mobile/splitview",
+    "documentation": "splitview/adaptive",
     "spriteCssClass": "mobileSplitViewIcon",
     "mobile": true,
     "tablet": true,
@@ -4487,7 +4452,7 @@
   {
     "text": "Layout",
     "name": "mobile-layout",
-    "documentation": "mobile/layout",
+    "documentation": "layout/adaptive",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
