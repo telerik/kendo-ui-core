@@ -753,7 +753,8 @@ var __meta__ = {
 
             if (!that.options.openOnClick && !touch && !((pointers || msPointers) &&
                 e.originalEvent.pointerType == e.originalEvent.MSPOINTER_TYPE_TOUCH) &&
-                !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren) {
+                !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren &&
+                !contains(e.currentTarget, kendo._activeElement())) {
                     that.close(element);
             }
         },
