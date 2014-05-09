@@ -100,20 +100,15 @@
         ok(!ganttList.dataSource.at(0).get("expanded"));
     });
 
-    test("dblclick on icon stops event propagation", function() {
-        setup({ columns: [], data: [{ title: "foo", parentId: null, id: 1, summary: true, expanded: true }] })
+    test("dblclick on icon does not enter edit mode", function() {
+        setup({ columns: [{ field: "title", editable: true }], data: [{ title: "foo", parentId: null, id: 1, summary: true, expanded: true }] })
         var target = ganttList.content.find(".k-icon:not(.k-i-none)").eq(0);
-        var flag;
+        var targetCell = ganttList.content.find("td").eq(0);
 
-        ganttList.content.on("dblclick", "td", function() {
-            flag = true;
-        });
+        tap(target);
+        tap(target);
 
-        target.dblclick();
-
-        ok(!flag);
-
-        ganttList.content.off();
+        ok(!targetCell.data("kendoEditable"));
     });
 
     module("List Selection", {

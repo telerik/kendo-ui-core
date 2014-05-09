@@ -5,6 +5,10 @@
     var element;
     var columns;
     var extend = $.extend;
+    var doubleTap = function(target) {
+        tap(target);
+        tap(target);
+    };
 
     module("Gantt inline editing", {
         setup: function() {
@@ -37,10 +41,14 @@
         }
     });
 
+    test("attaches touch widget to the list content", function() {
+        ok(ganttList.content.data("kendoTouch"));
+    });
+
     test("attaches editable widget to editable cell on dblclick", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.data("kendoEditable"));
     });
@@ -48,7 +56,7 @@
     test("attaches model copy to the editable cell data", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.data("modelCopy"));
     });
@@ -57,7 +65,7 @@
         var targetCell = ganttList.content.find("td").eq(0);
         var editable;
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
         editable = targetCell.data("kendoEditable");
 
         equal(editable.options.fields.field, ganttList.columns[0].field);
@@ -69,7 +77,7 @@
         var targetCell = ganttList.content.find("td").eq(0);
         var editable;
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
         editable = targetCell.data("kendoEditable");
 
         ok(!editable.options.clearContainer);
@@ -78,7 +86,7 @@
     test("sets list's editable field", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(ganttList.editable instanceof kendo.ui.Editable);
     });
@@ -86,7 +94,7 @@
     test("detaches cell content before initializing the editable", 3, function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(ganttList._editableContent.eq(0).is("span"));
         ok(ganttList._editableContent.eq(1).is("span"));
@@ -96,7 +104,7 @@
     test("re-attaches cell content before initializing the editable", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
         ganttList._closeCell();
 
         ok(targetCell.children().eq(0).is("span"));
@@ -109,7 +117,7 @@
         var targetCell = ganttList.content.find("td").eq(0);
         var validate;
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
         validate = stub(targetCell.data("kendoValidator"), "validate");
         targetCell.focusout();
 
@@ -123,7 +131,7 @@
         expect(1);
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
         stub(targetCell.data("kendoValidator"), { validate: function() { return false } });
         targetCell.focusout();
 
@@ -136,7 +144,7 @@
     test("does not attach editable widget to non-editable cell on dblclick", function() {
         var targetCell = ganttList.content.find("td").eq(1);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(!targetCell.data("kendoEditable"));
     });
@@ -144,7 +152,7 @@
     test("triggers 'update' when edited cell closes", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ganttList.bind("update", function() {
             ok(true);
@@ -157,7 +165,7 @@
         var targetCell = ganttList.content.find("td").eq(0);
         var updateTriggered;
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ganttList.bind("update", function() {
             updateTriggered = true;
@@ -171,7 +179,7 @@
     test("destroys editable widget after cell exits edit mode", 3, function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.data("kendoEditable"));
 
@@ -184,7 +192,7 @@
     test("detaches model copy after cell exits edit mode", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
         ganttList._closeCell();
 
         ok(!targetCell.data("modelCopy"));
@@ -197,7 +205,7 @@
         event.keyCode = kendo.keys.ESC;
 
         stub(ganttList, "_closeCell");
-        targetCell.dblclick();
+        doubleTap(targetCell);
         targetCell.trigger(event);
 
         ok(ganttList.calls("_closeCell"));
@@ -210,7 +218,7 @@
         event.keyCode = kendo.keys.ESC;
 
         stub(ganttList, { _closeCell: function(cancelUpdate) { ok(cancelUpdate) } });
-        targetCell.dblclick();
+        doubleTap(targetCell);
         targetCell.trigger(event);
     });
 
@@ -221,7 +229,7 @@
         event.keyCode = kendo.keys.ENTER;
 
         stub(ganttList, "_closeCell");
-        targetCell.dblclick();
+        doubleTap(targetCell);
         targetCell.trigger(event);
 
         ok(ganttList.calls("_closeCell"));
@@ -264,7 +272,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -277,7 +285,7 @@
         var targetCell = ganttList.content.find("td").eq(0);
         var input;
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         input = targetCell.find("input");
 
@@ -295,7 +303,7 @@
 
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -313,7 +321,7 @@
 
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -332,7 +340,7 @@
         var targetCell = ganttList.content.find("td").eq(0);
         var input;
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         input = targetCell.find("input");
 
@@ -350,7 +358,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
     });
 
     test("user defined editor is created for custom data fields", 1, function() {
@@ -365,7 +373,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
     });
 
     test("format yyyy/MM/dd HH:mm:ss creates DateTimePicker", function() {
@@ -375,7 +383,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -387,7 +395,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDatePicker"));
     });
@@ -399,7 +407,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -411,7 +419,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -423,7 +431,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDatePicker"));
     });
@@ -435,7 +443,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -447,7 +455,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -459,7 +467,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
@@ -471,7 +479,7 @@
         });
         var targetCell = ganttList.content.find("td").eq(0);
 
-        targetCell.dblclick();
+        doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });

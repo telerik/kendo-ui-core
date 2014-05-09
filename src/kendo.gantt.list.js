@@ -1,5 +1,5 @@
 ﻿(function(f, define) {
-    define(["./kendo.core", "./kendo.sorter", "./kendo.editable"], f);
+    define(["./kendo.core", "./kendo.touch", "./kendo.sorter", "./kendo.editable"], f);
 })(function() {
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt List",
     category: "web",
     description: "The Gantt List",
-    depends: [ "core", "sorter", "editable" ],
+    depends: [ "core", "touch" , "sorter", "editable" ],
     hidden: true
 };
 
@@ -23,6 +23,7 @@ var __meta__ = {
     var oldIE = isIE && browser.version < 9;
     var ui = kendo.ui;
     var Widget = ui.Widget;
+    var Touch = ui.Touch;
     var extend = $.extend;
     var map = $.map;
     var keys = kendo.keys;
@@ -91,6 +92,7 @@ var __meta__ = {
                 this._dropTargetArea.destroy();
             }
 
+            this.touch.destroy();
             this.content.off(NS);
             this.header = null;
             this.content = null;
@@ -115,9 +117,6 @@ var __meta__ = {
                     element.toggleClass("k-i-collapse k-i-expand");
                     model.set("expanded", !model.get("expanded"));
 
-                    e.stopPropagation();
-                })
-                .on("dblclick" + NS, "td > span.k-icon:not(.k-i-none)", function(e) {
                     e.stopPropagation();
                 });
         },
@@ -380,19 +379,7 @@ var __meta__ = {
                 }
             };
 
-            that.content
-                .on("dblclick" + NS, "td", function(e) {
-                    var td = $(this);
-                    var column = that._columnFromElement(td);
-
-                    if (that.editable) {
-                        return;
-                    }
-
-                    if (column.editable) {
-                        that._editCell({ cell: td, column: column });
-                    }
-                })
+            that.touch = that.content
                 .on("focusin" + NS, function() {
                     clearTimeout(that.timer);
                     that.timer = null;
@@ -422,7 +409,28 @@ var __meta__ = {
                             that._closeCell(true);
                             break;
                     }
-                });
+                })
+                .kendoTouch({
+                    filter: "td",
+                    doubletap: function(e) {
+                        var event = e.touch;
+
+                        if ($(event.initialTouch).is("span.k-icon:not(.k-i-none)")) {
+                            return;
+                        }
+
+                        var td = $(event.currentTarget);
+                        var column = that._columnFromElement(td);
+
+                        if (that.editable) {
+                            return;
+                        }
+
+                        if (column.editable) {
+                            that._editCell({ cell: td, column: column });
+                        }
+                    }
+                }).data("kendoTouch");
         },
 
         _editCell: function(options) {
