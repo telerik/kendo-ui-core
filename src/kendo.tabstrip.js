@@ -194,9 +194,14 @@ var __meta__ = {
 
             that.wrapper
                 .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
-                .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, $.proxy(that._active, that))
                 .on("blur" + NS, function() { that._current(null); });
+
+            that._keyDownProxy = $.proxy(that._keydown, that);
+
+            if (options.navigatable) {
+                that.wrapper.on("keydown" + NS, that._keyDownProxy);
+            }
 
             that.wrapper.children(".k-tabstrip-items")
                 .on(CLICK + NS, ".k-state-disabled .k-link", false)
@@ -453,13 +458,20 @@ var __meta__ = {
         },
 
         setOptions: function(options) {
-            var animation = this.options.animation;
+            var that = this,
+                animation = that.options.animation;
 
-            this._animations(options);
+            that._animations(options);
 
             options.animation = extend(true, animation, options.animation);
 
-            Widget.fn.setOptions.call(this, options);
+            if (options.navigatable) {
+                that.wrapper.on("keydown" + NS,  that._keyDownProxy);
+            } else {
+                that.wrapper.off("keydown" + NS,  that._keyDownProxy);
+            }
+
+            Widget.fn.setOptions.call(that, options);
         },
 
         events: [
@@ -489,7 +501,8 @@ var __meta__ = {
                     duration: 200
                 }
             },
-            collapsible: false
+            collapsible: false,
+            navigatable: true
         },
 
         destroy: function() {
