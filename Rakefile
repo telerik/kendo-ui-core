@@ -324,7 +324,6 @@ bundle :name => 'web.commercial',
            :dir => 'examples'
        },
        :product => 'Kendo UI Web',
-       :upload_as_internal_build => true,
        :contents => {
             'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
             'styles' => WEB_MIN_CSS,
@@ -361,7 +360,6 @@ bundle :name => 'mobile.commercial',
            :dir => 'examples'
        },
        :product => 'Kendo UI Mobile',
-       :upload_as_internal_build => true,
        :eula => 'mobile',
        :contents => {
             'js' => MOBILE_MIN_JS + MOBILE_MIN_JS_MAP + JQUERY_MAP,
@@ -383,7 +381,6 @@ bundle :name => 'dataviz.commercial',
            :dir => 'examples'
        },
        :product => 'Kendo UI DataViz',
-       :upload_as_internal_build => true,
        :contents => {
             'js' => DATAVIZ_MIN_JS + DATAVIZ_MIN_JS_MAP + JQUERY_MAP,
             'styles' => DATAVIZ_MIN_CSS + WEB_MIN_CSS,
