@@ -7,7 +7,7 @@ var __meta__ = {
     name: "NavBar",
     category: "mobile",
     description: "The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.",
-    depends: [ "mobile.core" ]
+    depends: [ "core" ]
 };
 
 (function($, undefined) {
