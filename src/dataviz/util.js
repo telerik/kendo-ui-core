@@ -195,6 +195,10 @@
             renderAllAttr: renderAllAttr,
             renderPos: renderPos,
             renderSize: renderSize,
+            renderStyle: renderStyle,
+            sparseArrayLimits: sparseArrayLimits,
+            sparseArrayMin: sparseArrayMin,
+            sparseArrayMax: sparseArrayMax,
             sqr: sqr,
             valueOrDefault: valueOrDefault
         }

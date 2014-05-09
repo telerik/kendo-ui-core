@@ -694,7 +694,7 @@
     var text;
     var textNode;
 
-    baseNodeTests(Text, TextNode, "TextNode");
+    nodeTests(Text, TextNode, "TextNode");
 
     module("TextNode", {
         setup: function() {
@@ -736,7 +736,7 @@
     var textSpan;
     var textSpanNode;
 
-    baseNodeTests(TextSpan, TextSpanNode, "TextNode");
+    nodeTests(TextSpan, TextSpanNode, "TextNode");
 
     module("TextSpanNode", {
         setup: function() {

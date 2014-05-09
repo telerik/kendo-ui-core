@@ -306,7 +306,8 @@
             if (e.field == TRANSFORM) {
                 this.transformChange(e.value);
             }
-            this.invalidate();
+
+            Node.fn.optionsChange.call(this, e);
         }
     });
 
