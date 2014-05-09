@@ -174,6 +174,12 @@
         ok(gantt.wrapper.find(".k-gantt-timeline").length);
     });
 
+    test("resize handle is created", function() {
+        var gantt = new Gantt(element, { height: 400 });
+
+        ok(gantt.wrapper.find(".k-splitbar"));
+    });
+
     module("TaskDropDown", {
         setup: function() {
             element = $("<div/>");

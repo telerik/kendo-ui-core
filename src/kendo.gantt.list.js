@@ -149,7 +149,7 @@ var __meta__ = {
             var element = this.element;
 
             element
-                .append("<div class='k-grid-header'><div class='k-grid-header-wrap' style='padding-right: 15px;'></div></div>")
+                .append("<div class='k-grid-header'><div class='k-grid-header-wrap'></div></div>")
                 .append("<div class='k-grid-content'></div>");
 
             this.header = element.find(".k-grid-header-wrap");

@@ -592,6 +592,8 @@ var __meta__ = {
 
             this._dependencies();
 
+            this._resizable();
+
             if (this.options.autoBind) {
                 this.dataSource.fetch();
                 this.dependencies.fetch();
@@ -684,6 +686,10 @@ var __meta__ = {
                 this.headerDropDown.destroy();
             }
 
+            if (this._resizeDraggable) {
+                this._resizeDraggable.destroy();
+            }
+
             this.toolbar.off(NS);
 
             this.toolbar = null;
@@ -698,6 +704,7 @@ var __meta__ = {
             this.wrapper = this.element
                             .addClass("k-widget k-gantt")
                             .append("<div class='k-gantt-layout k-gantt-treelist'><div class='k-grid k-widget'></div></div>")
+                            .append("<div class='k-splitbar k-state-default k-splitbar-horizontal k-splitbar-draggable-horizontal k-gantt-layout' role='separator'><div class='k-icon k-resize-handle'></div></div>")
                             .append("<div class='k-gantt-layout k-gantt-grid'><div class='k-widget k-gantt-timeline k-grid'></div></div>");
 
             if (height) {
@@ -1029,6 +1036,48 @@ var __meta__ = {
 
         _error: function() {
 
+        },
+
+        _resizable: function() {
+            var wrapper = this.wrapper;
+            var treeListWrapper = wrapper.find(".k-gantt-treelist");
+            var timelineWrapper = wrapper.find(".k-gantt-grid");
+            var treeListWidth;
+            var timelineWidth;
+            var timelineScroll;
+
+            wrapper
+                .find(".k-splitbar")
+                .height(treeListWrapper.height())
+                .hover(function(e) {
+                        $(this).addClass("k-splitbar-horizontal-hover");
+                    },
+                    function(e) {
+                        $(this).removeClass("k-splitbar-horizontal-hover");
+                    });
+
+            this._resizeDraggable = new kendo.ui.Resizable(wrapper, {
+                orientation: "horizontal",
+                handle: ".k-splitbar"
+            });
+
+            this._resizeDraggable
+                .bind("start", function(e) {
+                    treeListWidth = treeListWrapper.width();
+                    timelineWidth = timelineWrapper.width();
+                    timelineScroll = timelineWrapper.find(".k-grid-content").scrollLeft();
+                })
+                .bind("resize", function(e) {
+                    var delta = e.x.initialDelta;
+
+                    if (treeListWidth + delta < 0 || timelineWidth - delta < 0) {
+                        return;
+                    }
+
+                    treeListWrapper.width(treeListWidth + delta);
+                    timelineWrapper.width(timelineWidth - delta);
+                    timelineWrapper.find(".k-grid-content").scrollLeft(timelineScroll + delta);
+                });
         }
     });
 
