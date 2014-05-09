@@ -1,5 +1,7 @@
 require 'erb'
 require 'tasks'
+require 'download_builder_upload'
+
 BUILDER_STAGING_SERVICE =  'http://mvc-kendobuild/staging/download-builder-service'
 BUILDER_DEPLOY_SERVICE = 'http://www.telerik.com/services/kendo-download'
 BUILDER_SOURCE_PATH = 'download-builder'
@@ -92,4 +94,10 @@ namespace :download_builder do
 
     desc 'Build staging download builder site'
     task :staging => :build_staging
+
+    desc "Upload download builder files on telerik.com"
+    task :upload do
+        upload_download_builder_files \
+    end  
 end
+

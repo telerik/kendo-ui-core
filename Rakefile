@@ -36,14 +36,21 @@ if ENV['DRY_RUN']
     ADMIN_URL = 'http://integrationadmin.telerik.com/'
     ADMIN_LOGIN = 'petyo.ivanov@telerik.local'
     ADMIN_RELEASE_UPLOAD_LOGIN = 'stefan.rahnev@telerik.local'
+
+    SITE_URL = "http://wwwsit.telerik.com"
+    SITE_LOGIN = "stefan.rahnev@telerik.local"
 else
     ADMIN_URL = 'http://admin.telerik.com/'
     ADMIN_LOGIN = 'petyo.ivanov@telerik.com'
     ADMIN_RELEASE_UPLOAD_LOGIN = 'stefan.rahnev@telerik.com'
+
+    SITE_URL = "http://www1.telerik.com"
+    SITE_LOGIN = "stefan.rahnev@telerik.com"
 end
 
 ADMIN_PASS = 'ultra'
 ADMIN_RELEASE_UPLOAD_PASS = "t3l3r1k@dm1n"
+SITE_DOWNLOAD_BUILDER_UPLOAD_PASS = "p75a80s"
 
 ROOT_MAP = {
     '.' => /(dist\/js|dist\/styles\/.+?)\//,
