@@ -145,15 +145,13 @@ var __meta__ = {
         var name;
 
         for (var idx = 0; idx < members.length; idx++) {
-            if (typeof members[idx] == "string") {
-                result.push(members[idx]);
-            } else {
-                if (members[idx].expand) {
-                    result.push(members[idx].name + ".[ALL].Children");
-                } else {
-                    result.push(members[idx].name);
-                }
+            var name = members[idx].name;
+
+            if (members[idx].expand && name.indexOf("&") == -1) {
+                name += ".[ALL].Children";
             }
+
+            result.push(name);
         }
 
         return result;

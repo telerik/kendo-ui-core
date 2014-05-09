@@ -8,6 +8,7 @@
         <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.xml.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dom.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.pivotgrid.js" type="text/javascript" charset="utf-8"></script>
         <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
         <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
@@ -52,7 +53,7 @@
                     },
                     read: {
                         url: "http://krustev:8080/olap/msmdpump.dll",
-                        dataType: "text",
+                        dataType: "xml",
                         contentType: "text/xml",
                         type: "POST"
                     }

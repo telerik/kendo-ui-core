@@ -271,6 +271,13 @@
        ok(params.indexOf('SELECT NON EMPTY {[foo].[ALL].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 
+    test("parameterMap leafs are not expanded", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[foo].&[bar]", expand: true }] }, "read");
+
+       ok(params.indexOf('SELECT NON EMPTY {[foo].&amp;[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+    });
+
     test("parameterMap row is expanded", function() {
        var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]", expand: true }] }, "read");
