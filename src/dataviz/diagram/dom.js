@@ -1541,16 +1541,16 @@
                     shapeDefaults = deepExtend({}, shapeDefaults, options);
                     item.redraw(options);
                     shape = item;
-                }
-                else { // consider it a point
+                } else if (!(item instanceof kendo.Class)) {
                     shapeDefaults = deepExtend({}, shapeDefaults, item);
                     shape = new Shape(shapeDefaults);
+                } else {
+                    return;
                 }
 
                 if (shapeDefaults.undoable) {
                     this.undoRedoService.add(new diagram.AddShapeUnit(shape, this));
-                }
-                else {
+                } else {
                     this.shapes.push(shape);
                     shape.diagram = this;
                     this.mainLayer.append(shape.visual);
