@@ -801,7 +801,7 @@ var __meta__ = {
 
                 that._preventRefresh = false;
 
-                that.refresh();
+                dataSource.sync();
             };
 
             this.footerDropDown = new TaskDropDown(this.footer.children(".k-gantt-actions").eq(0), {
@@ -987,15 +987,19 @@ var __meta__ = {
 
         updateTask: function(task, updateInfo) {
             this._preventRefresh = true;
+
             this.dataSource.update(task, updateInfo);
+
             this._preventRefresh = false;
 
-            this.refresh();
+            this.dataSource.sync();
         },
 
         removeTask: function(task) {
             if (!this.trigger("remove", { task: task })) {
-                this.dataSource.remove(task);
+                if (this.dataSource.remove(task)) {
+                    this.dataSource.sync();
+                }
             }
         },
 
