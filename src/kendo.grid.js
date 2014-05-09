@@ -808,6 +808,10 @@ var __meta__ = {
                 that.virtualScrollable.setDataSource(that.options.dataSource);
             }
 
+            if (that.options.navigatable) {
+                that._navigatable();
+            }
+
             if (that.selectable) {
                 that._selectable();
             }
@@ -2720,6 +2724,8 @@ var __meta__ = {
                 dataTable = table.add(headerTable);
                 headerTable.attr(TABINDEX, -1);
             }
+
+            dataTable.off("mousedown" + NS + " focus" + NS + " focusout" + NS + " keydown" + NS);
 
             headerTable.on("keydown" + NS, function(e) {
                 if (e.altKey && e.keyCode == keys.DOWN) {
