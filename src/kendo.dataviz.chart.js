@@ -3582,14 +3582,13 @@ var __meta__ = {
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
                 categoryAxis = chart.categoryAxis,
-                value, valueAxis, axisCrossingValue,
+                value, valueAxis,
                 point;
 
             chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
                 value = chart.pointValue(data);
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
-                axisCrossingValue = chart.categoryAxisCrossingValue(valueAxis);
                 point = chartPoints[pointIx++];
 
                 var categorySlot = categorySlots[categoryIx];
@@ -3603,10 +3602,8 @@ var __meta__ = {
                     var valueSlot = valueAxis.getSlot(plotRange[0], plotRange[1], !chart.options.clip);
                     if (valueSlot) {
                         var pointSlot = chart.pointSlot(categorySlot, valueSlot);
-                        var aboveAxis = valueAxis.options.reverse ?
-                                            value < axisCrossingValue : value >= axisCrossingValue;
 
-                        point.aboveAxis = aboveAxis;
+                        point.aboveAxis = chart.aboveAxis(value, valueAxis);
                         if (chart.options.isStacked100) {
                             point.percentage = chart.plotValue(point);
                         }
@@ -3621,6 +3618,13 @@ var __meta__ = {
             chart.reflowCategories(categorySlots);
 
             chart.box = targetBox;
+        },
+
+        aboveAxis: function(value, valueAxis) {
+            var axisCrossingValue = this.categoryAxisCrossingValue(valueAxis);
+
+            return valueAxis.options.reverse ?
+                value < axisCrossingValue : value >= axisCrossingValue;
         },
 
         categoryAxisCrossingValue: function(valueAxis) {
@@ -3880,6 +3884,10 @@ var __meta__ = {
                 axisRange.min = math.min(axisRange.min, to);
                 axisRange.max = math.max(axisRange.max, to);
             }
+        },
+
+        aboveAxis: function(value){
+            return value.from < value.to;
         }
     });
 
