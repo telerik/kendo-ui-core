@@ -102,6 +102,18 @@
         ok(table.find("tr>td>input:first")[0] === document.activeElement);
     });
 
+    test("pressing enter key when active element is not within current", function() {
+        var grid = setup({
+            sortable: true
+        });
+
+        grid.thead.find("th:first").click();
+        grid.addRow();
+        grid.table.find("input:first").press(kendo.keys.ENTER);
+
+        equal(grid.current()[0], table.find("tr>td")[0]);
+    });
+
     test("pressing navigation key action is skipped if cell is edited", function() {
         var grid = setup();
 

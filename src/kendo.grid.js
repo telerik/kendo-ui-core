@@ -2797,6 +2797,10 @@ var __meta__ = {
                     handled = true;
                 } else if (key == keys.ENTER || keys.F2 == key) {
                     current = current ? current : table.find(FIRSTNAVITEM);
+                    if (!$(e.target).is("table") && !$.contains(current[0], e.target)) {
+                        current = $(e.target).closest("[role=gridcell]");
+                    }
+
                     if (current.is("th")) {
                         current.find(".k-link").click();
                         handled = true;
