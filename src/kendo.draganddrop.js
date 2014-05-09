@@ -619,12 +619,7 @@ var __meta__ = {
             });
 
             that._afterEndHandler = proxy(that._afterEnd, that);
-            that.captureEscape = function(e) {
-                if (e.keyCode === kendo.keys.ESC) {
-                    that._trigger(DRAGCANCEL, {event: e});
-                    that.userEvents.cancel();
-                }
-            };
+            that._captureEscape = proxy(that._captureEscape, that);
         },
 
         events: [
@@ -650,6 +645,15 @@ var __meta__ = {
 
         cancelHold: function() {
             this._activated = false;
+        },
+
+        _captureEscape: function(e) {
+            var that = this;
+
+            if (e.keyCode === kendo.keys.ESC) {
+                that._trigger(DRAGCANCEL, { event: e });
+                that.userEvents.cancel();
+            }
         },
 
         _updateHint: function(e) {
@@ -739,7 +743,7 @@ var __meta__ = {
                 that._afterEnd();
             }
 
-            $(document).on(KEYUP, that.captureEscape);
+            $(document).on(KEYUP, that._captureEscape);
         },
 
         _hold: function(e) {
@@ -883,7 +887,7 @@ var __meta__ = {
             delete draggables[that.options.group];
 
             that.trigger("destroy");
-            $(document).off(KEYUP, that.captureEscape);
+            $(document).off(KEYUP, that._captureEscape);
         }
     });
 
