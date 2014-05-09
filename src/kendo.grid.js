@@ -211,6 +211,8 @@ var __meta__ = {
 
             if (delta) {
                 e.preventDefault();
+                //In Firefox DOMMouseScroll event cannot be canceled
+                $(e.currentTarget).one("wheel" + NS, false);
                 this.verticalScrollbar.scrollTop(scrollTop + (-delta));
             }
         },
@@ -4298,6 +4300,9 @@ var __meta__ = {
 
             if (delta) {
                 e.preventDefault();
+                //In Firefox DOMMouseScroll event cannot be canceled
+                $(e.currentTarget).one("wheel" + NS, false);
+
                 content.scrollTop(scrollTop + (-delta));
             }
         },
