@@ -27,4 +27,14 @@ test("the wrapper has k-widget and k-tabstrip css classes", function() {
     ok(tabstrip.wrapper.is(".k-widget,.k-tabstrip"), "CSS classes are applied");
 });
 
+test("navigatable should attach the keydown handler only if true", 2, function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, { navigatable: false });
+
+    ok(!$._data( tabstrip.wrapper[0], "events" ).keydown, "No keydown event attached");
+
+    tabstrip.setOptions({ navigatable: true });
+
+    ok($._data( tabstrip.wrapper[0], "events" ).keydown, "Keydown event attached");
+});
+
 })();
