@@ -27,8 +27,10 @@
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
         NONE = "none",
         SOLID = "solid",
+        SPACE = " ",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
+        TRANSFORM = "transform",
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
@@ -141,6 +143,8 @@
                     childNode = new MultiPathNode(srcElement);
                 } else if (srcElement instanceof d.Circle) {
                     childNode = new CircleNode(srcElement);
+                } else if (srcElement instanceof d.Arc) {
+                    childNode = new ArcNode(srcElement);
                 }
 
                 if (children && children.length > 0) {
@@ -217,6 +221,45 @@
             }
 
             BaseNode.fn.clear.call(this);
+        },
+
+        attr: function(name, value) {
+            if (this.element) {
+                this.element.setAttribute(name, value);
+            }
+        },
+
+        allAttr: function(attrs) {
+            for (var i = 0; i < attrs.length; i++) {
+                this.attr(attrs[i][0], attrs[i][1]);
+            }
+        },
+
+        removeAttr: function(name) {
+            if (this.element) {
+                this.element.removeAttribute(name);
+            }
+        },
+
+        mapTransform: function(transform) {
+            var attrs = [];
+            if (transform) {
+                attrs.push([TRANSFORM, "matrix(" + transform.matrix().toString() + ")"]);
+            }
+
+            return attrs;
+        },
+
+        renderTransform: function() {
+            return renderAllAttr(this.mapTransform(this.srcElement.transform()));
+        },
+
+        transformChange: function(value) {
+            if (value) {
+                this.allAttr(this.mapTransform(value));
+            } else {
+                this.removeAttr(TRANSFORM);
+            }
         }
     });
 
@@ -230,8 +273,15 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g>#= d.renderChildren() #</g>"
-        )
+            "<g#= d.renderTransform() #>#= d.renderChildren() #</g>"
+        ),
+
+        optionsChange: function(e) {
+            if (e.field == TRANSFORM) {
+                this.transformChange(e.value);
+            }
+            this.invalidate();
+        }
     });
 
     var PathNode = Node.extend({
@@ -258,6 +308,10 @@
                     this.attr("visibility", e.value ? "visible" : "hidden");
                     break;
 
+                case TRANSFORM:
+                    this.transformChange(e.value);
+                    break;
+
                 default:
                     var name = this.attributeMap[e.field];
                     if (name) {
@@ -276,40 +330,55 @@
             "stroke.opacity": "stroke-opacity"
         },
 
-        attr: function(name, value) {
-            if (this.element) {
-                this.element.setAttribute(name, value);
-            }
-        },
-
-        allAttr: function(attrs) {
-            for (var i = 0; i < attrs.length; i++) {
-                this.attr(attrs[i][0], attrs[i][1]);
-            }
-        },
-
         renderData: function() {
             return this.printPath(this.srcElement);
         },
 
         printPath: function(path) {
-            var segments = path.segments;
-            if (segments.length > 0) {
+            var segments = path.segments,
+                length = segments.length;
+            if (length > 0) {
                 var parts = [],
                     output,
+                    segmentType,
+                    currentType,
                     i;
 
-                for (i = 0; i < segments.length; i++) {
-                    parts.push(segments[i].anchor.toString(1));
+                for (i = 1; i < length; i++) {
+                    segmentType = this.segmentType(segments[i - 1], segments[i]);
+                    if (segmentType !== currentType) {
+                        currentType = segmentType;
+                        parts.push(segmentType);
+                    }
+
+                    if (segmentType === "L") {
+                        parts.push(this.printPoints(segments[i].anchor));
+                    } else {
+                        parts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
+                    }
                 }
 
-                output = "M" + parts.join(" ");
+                output = "M" + this.printPoints(segments[0].anchor) + SPACE + parts.join(SPACE);
                 if (path.options.closed) {
                     output += "Z";
                 }
 
                 return output;
             }
+        },
+
+        printPoints: function() {
+            var points = arguments,
+                length = points.length,
+                i, result = [];
+            for (i = 0; i < length; i++) {
+                result.push(points[i].toString(1));
+            }
+            return result.join(SPACE);
+        },
+
+        segmentType: function(segmentStart, segmentEnd) {
+            return segmentStart.controlOut && segmentEnd.controlIn ? "C" : "L";
         },
 
         mapStroke: function(stroke) {
@@ -406,8 +475,15 @@
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
+            "#= d.renderTransform() #" +
             "stroke-linejoin='round'></path>"
         )
+    });
+
+    var ArcNode = PathNode.extend({
+        renderData: function() {
+            return this.printPath(this.srcElement.toPath());
+        }
     });
 
     var MultiPathNode = PathNode .extend({
@@ -442,7 +518,8 @@
             "r='#= this.srcElement.geometry.radius #' " +
             "#= d.renderVisibility() # " +
             "#= d.renderStroke() # " +
-            "#= d.renderFill() #></circle>"
+            "#= d.renderFill() # " +
+            "#= d.renderTransform() # ></circle>"
         )
     });
 
@@ -497,6 +574,7 @@
 
     deepExtend(d, {
         svg: {
+            ArcNode: ArcNode,
             CircleNode: CircleNode,
             GroupNode: GroupNode,
             MultiPathNode: MultiPathNode,

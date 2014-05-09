@@ -15,6 +15,8 @@
 
     // Constants
     var DEG_TO_RAD = math.PI / 180,
+        MAX_NUM = Number.MAX_VALUE,
+        MIN_NUM = -Number.MAX_VALUE,
         UNDEFINED = "undefined";
 
     // Generic utility functions ==============================================
@@ -53,6 +55,62 @@
 
     function sqr(value) {
         return value * value;
+    }
+
+    // Array helpers ==========================================================
+    function arrayLimits(arr) {
+        var length = arr.length,
+            i,
+            min = MAX_NUM,
+            max = MIN_NUM;
+
+        for (i = 0; i < length; i ++) {
+            max = math.max(max, arr[i]);
+            min = math.min(min, arr[i]);
+        }
+
+        return {
+            min: min,
+            max: max
+        };
+    }
+
+    function arrayMin(arr) {
+        return arrayLimits(arr).min;
+    }
+
+    function arrayMax(arr) {
+        return arrayLimits(arr).max;
+    }
+
+    function sparseArrayMin(arr) {
+        return sparseArrayLimits(arr).min;
+    }
+
+    function sparseArrayMax(arr) {
+        return sparseArrayLimits(arr).max;
+    }
+
+    function sparseArrayLimits(arr) {
+        var min = MAX_NUM,
+            max = MIN_NUM;
+
+        for (var i = 0, length = arr.length; i < length; i++) {
+            var n = arr[i];
+            if (n !== null && isFinite(n)) {
+                min = math.min(min, n);
+                max = math.max(max, n);
+            }
+        }
+
+        return {
+            min: min === MAX_NUM ? undefined : min,
+            max: max === MIN_NUM ? undefined : max
+        };
+    }
+
+    function last(array) {
+        return array[array.length - 1];
     }
 
     // Template helpers =======================================================
@@ -101,14 +159,21 @@
     // Exports ================================================================
     deepExtend(dataviz, {
         util: {
+            MAX_NUM: MAX_NUM,
+            MIN_NUM: MIN_NUM,
+
             mixins: {
                 geometryChange: geometryChange
             },
 
             alignToPixel: alignToPixel,
+            arrayLimits: arrayLimits,
+            arrayMin: arrayMin,
+            arrayMax: arrayMax,
             defined: defined,
             deg: deg,
             isNumber: isNumber,
+            last: last,
             limitValue: limitValue,
             round: round,
             rad: rad,
@@ -116,6 +181,9 @@
             renderAllAttr: renderAllAttr,
             renderPos: renderPos,
             renderSize: renderSize,
+            sparseArrayLimits: sparseArrayLimits,
+            sparseArrayMin: sparseArrayMin,
+            sparseArrayMax: sparseArrayMax,
             sqr: sqr,
             valueOrDefault: valueOrDefault
         }

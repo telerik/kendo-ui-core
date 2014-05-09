@@ -107,7 +107,8 @@
                     bar: { },
                     baz: true
                 },
-                bar: true
+                bar: true,
+                obj: new kendo.Class()
             });
         }
     });
@@ -118,6 +119,14 @@
 
     test("wraps nested fields", function() {
         ok(options.foo.bar instanceof OptionsStore);
+    });
+
+    test("doesn't wrap kendo classes", function() {
+        ok(!(options.obj instanceof OptionsStore));
+    });
+
+    test("sets observer on functions", function() {
+        equal(options.obj.observer, options);
     });
 
     test("set", function() {

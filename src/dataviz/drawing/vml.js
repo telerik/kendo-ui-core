@@ -17,12 +17,19 @@
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
 
+        g = dataviz.geometry,
+        Matrix = g.Matrix,
+        transformationMatrix = g.transformationMatrix,
+
         util = dataviz.util,
-        renderAllAttr = util.renderAllAttr;
+        renderAllAttr = util.renderAllAttr,
+        round = util.round;
 
     // Constants ==============================================================
     var NONE = "none",
-        TRANSPARENT = "transparent";
+        SPACE = " ",
+        TRANSPARENT = "transparent",
+        COORDINATE_MULTIPLE = 100;
 
     // VML rendering surface ==================================================
     var Surface = d.Surface.extend({
@@ -48,7 +55,7 @@
 
         draw: function(element) {
             var surface = this;
-            surface._root.load([element]);
+            surface._root.load([element], null);
 
             if (kendo.support.browser.version < 8) {
                 setTimeout(function() {
@@ -90,32 +97,35 @@
         }
     });
 
-    // SVG Node ================================================================
+    // VML Node ================================================================
     var Node = BaseNode.extend({
-        load: function(elements) {
+        load: function(elements, transform) {
             var node = this,
                 element = node.element,
                 childNode,
                 srcElement,
                 children,
+                combinedTransform,
                 i;
 
             for (i = 0; i < elements.length; i++) {
                 srcElement = elements[i];
                 children = srcElement.children;
-
+                combinedTransform = srcElement.currentTransform(transform);
                 if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Path) {
-                    childNode = new PathNode(srcElement);
+                    childNode = new PathNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.MultiPath) {
-                    childNode = new MultiPathNode(srcElement);
+                    childNode = new MultiPathNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.Circle) {
-                    childNode = new CircleNode(srcElement);
+                    childNode = new CircleNode(srcElement, combinedTransform);
+                } else if (srcElement instanceof d.Arc) {
+                    childNode = new ArcNode(srcElement, combinedTransform);
                 }
 
                 if (children && children.length > 0) {
-                    childNode.load(children);
+                    childNode.load(children, combinedTransform);
                 }
 
                 node.append(childNode);
@@ -221,7 +231,25 @@
     var GroupNode = Node.extend({
         template: renderTemplate(
             "<div>#= d.renderChildren() #</div>"
-        )
+        ),
+
+        optionsChange: function(e) {
+            if (e.field === "transform") {
+                this.refreshTransform();
+            }
+
+            this.invalidate();
+        },
+
+        refreshTransform: function(transform) {
+            var currentTransform = this.srcElement.currentTransform(transform),
+                children = this.childNodes,
+                length = children.length,
+                i;
+            for (i = 0; i < length; i++) {
+                children[i].refreshTransform(currentTransform);
+            }
+        }
     });
 
     var StrokeNode = Node.extend({
@@ -332,15 +360,73 @@
         )
     });
 
+    var TransformNode = Node.extend({
+        MAX_PRECISION: 15,
+        init: function(srcElement, transform) {
+            Node.fn.init.call(this, srcElement);
+            this.transform = transform;
+        },
+
+        optionsChange: function(e) {
+            if (e.field == "transform") {
+                this.refresh(this.srcElement.currentTransform());
+            }
+            this.invalidate();
+        },
+
+        refresh: function(transform) {
+            this.transform = transform;
+            this.allAttr(this.mapTransform(transform));
+        },
+
+        transformOrigin: function() {
+            return "-0.5,-0.5";
+        },
+
+        mapTransform: function(transform) {
+            var attrs = [],
+                a, b, c, d,
+                MAX_PRECISION = this.MAX_PRECISION,
+                matrix = transformationMatrix(transform);
+
+            if (matrix) {
+                a = round(matrix.a, MAX_PRECISION);
+                b = round(matrix.b, MAX_PRECISION);
+                c = round(matrix.c, MAX_PRECISION);
+                d = round(matrix.d, MAX_PRECISION);
+                attrs.push(["on", "true"], ["matrix", [a, c, b, d, 0, 0].join(",")],
+                    ["offset", matrix.e + "px," + matrix.f + "px"],
+                    ["origin", this.transformOrigin()]);
+            } else {
+                attrs.push(["on", "false"]);
+            }
+
+            return attrs;
+        },
+
+        renderTranform: function() {
+            return renderAllAttr(this.mapTransform(this.transform));
+        },
+
+        template: renderTemplate(
+            "<kvml:skew #=d.renderTranform()# ></kvml:skew>"
+        )
+    });
+
     var PathNode = Node.extend({
-        init: function(srcElement) {
+        init: function(srcElement, transform) {
             this.fill = new FillNode(srcElement);
             this.stroke = new StrokeNode(srcElement);
-
+            this.transform = this.createTransformNode(srcElement, transform);
             Node.fn.init.call(this, srcElement);
 
             this.append(this.fill);
             this.append(this.stroke);
+            this.append(this.transform);
+        },
+
+        createTransformNode: function(srcElement, transform) {
+            return new TransformNode(srcElement, transform);
         },
 
         geometryChange: function() {
@@ -355,9 +441,15 @@
                 this.fill.optionsChange(e);
             } else if (e.field.indexOf("stroke") === 0) {
                 this.stroke.optionsChange(e);
+            } else if (e.field === "transform") {
+                this.transform.optionsChange(e);
             }
 
             this.invalidate();
+        },
+
+        refreshTransform: function(transform) {
+            this.transform.refresh(this.srcElement.currentTransform(transform));
         },
 
         renderData: function() {
@@ -365,17 +457,30 @@
         },
 
         printPath: function(path, open) {
-            var segments = path.segments;
-            if (segments.length > 0) {
+            var segments = path.segments,
+                length = segments.length;
+            if (length > 0) {
                 var parts = [],
                     output,
+                    segmentType,
+                    currentType,
                     i;
 
-                for (i = 0; i < segments.length; i++) {
-                    parts.push(segments[i].anchor.toString(0, ","));
+                for (i = 1; i < length; i++) {
+                    segmentType = this.segmentType(segments[i - 1], segments[i]);
+                    if (segmentType !== currentType) {
+                        currentType = segmentType;
+                        parts.push(segmentType);
+                    }
+
+                    if (segmentType === "l") {
+                        parts.push(this.printPoints(segments[i].anchor));
+                    } else {
+                        parts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
+                    }
                 }
 
-                output = "m " + parts.shift() + " l " + parts.join(" ");
+                output = "m " + this.printPoints(segments[0].anchor) + SPACE + parts.join(SPACE);
                 if (path.options.closed) {
                     output += " x";
                 }
@@ -386,6 +491,20 @@
 
                 return output;
             }
+        },
+
+        segmentType: function(segmentStart, segmentEnd) {
+            return segmentStart.controlOut && segmentEnd.controlIn ? "c" : "l";
+        },
+
+        printPoints: function() {
+            var points = arguments,
+                length = points.length,
+                i, result = [];
+            for (i = 0; i < length; i++) {
+                result.push(points[i].multiplyCopy(COORDINATE_MULTIPLE).toString(0, ","));
+            }
+            return result.join(SPACE);
         },
 
         mapFill: function(fill) {
@@ -423,13 +542,12 @@
         },
 
         renderCoordsize: function() {
-            var scale = this.srcElement.options.align === false ? 10000 : 1;
+            var scale = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE;
             return "coordsize='" + scale + " " + scale + "'";
         },
 
         renderSize: function() {
-            var scale = this.srcElement.options.align === false ? 100 : 1;
-            return "width:" + scale + "px;height:" + scale + "px;";
+            return "width:" + COORDINATE_MULTIPLE + "px;height:" + COORDINATE_MULTIPLE + "px;";
         },
 
         template: renderTemplate(
@@ -464,7 +582,21 @@
         }
     });
 
+    var CircleTransformNode = TransformNode.extend({
+        transformOrigin: function() {
+            var boundingBox = this.srcElement.geometry.bbox(),
+                center = boundingBox.center(),
+                originX = -center.x / boundingBox.width(),
+                originY = -center.y / boundingBox.height();
+            return originX + "," + originY;
+        }
+    });
+
     var CircleNode = PathNode.extend({
+        createTransformNode: function(srcElement, transform) {
+            return new CircleTransformNode(srcElement, transform);
+        },
+
         geometryChange: function() {
             var radius = this.radius();
             var center = this.center();
@@ -498,6 +630,12 @@
         )
     });
 
+    var ArcNode = PathNode.extend({
+        renderData: function() {
+            return this.printPath(this.srcElement.toPath());
+        }
+    });
+
     // Exports ================================================================
     if (kendo.support.browser.msie) {
         d.SurfaceFactory.current.register("vml", Surface, 20);
@@ -505,6 +643,8 @@
 
     deepExtend(d, {
         vml: {
+            ArcNode: ArcNode,
+            CircleTransformNode: CircleTransformNode,
             CircleNode: CircleNode,
             FillNode: FillNode,
             GroupNode: GroupNode,
@@ -513,7 +653,8 @@
             PathNode: PathNode,
             RootNode: RootNode,
             StrokeNode: StrokeNode,
-            Surface: Surface
+            Surface: Surface,
+            TransformNode: TransformNode
         }
     });
 

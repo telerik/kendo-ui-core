@@ -205,7 +205,7 @@
             var type = toString.call(object);
 
             if (object !== null && type === "[object Object]") {
-                if (!(object instanceof OptionsStore)) {
+                if (!(object instanceof OptionsStore) && !(object instanceof Class)) {
                     object = new OptionsStore(object, this.prefix + field + ".");
                 }
 
