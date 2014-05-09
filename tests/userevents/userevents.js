@@ -393,7 +393,7 @@
         }
     });
 
-    if ("onselectstart" in document.body) {
+    if ("onselectstart" in document.body && kendo.support.browser.msie) {
         test("raises select on selectstart", 1, function(){
             userEvents.bind("select", function(e) {
                 ok(true);
