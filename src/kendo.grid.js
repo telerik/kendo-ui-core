@@ -1617,6 +1617,8 @@ var __meta__ = {
                 column = that.columns[that.cellIndex(cell)],
                 model = that._modelForContainer(cell);
 
+            that.closeCell();
+
             if (model && (!model.editable || model.editable(column.field)) && !column.command && column.field) {
 
                 that._attachModelChange(model);

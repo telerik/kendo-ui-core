@@ -934,4 +934,27 @@
 
         equal(grid.content[0].scrollTop, grid.content[0].offsetHeight);
     });
+
+    test("editCell destroyes previous editor", function() {
+        var grid = setup();
+
+        grid.editCell(table.find("td:first"));
+        grid.editCell(table.find("td:last"));
+
+        equal(grid.table.find(".k-edit-cell").length, 1);
+    });
+
+    test("calling editCell multiple times doesn't trigger cancel event", function() {
+        var wasCalled = false;
+        var grid = setup({
+            cancel: function() {
+                wasCalled = true;
+            }
+        });
+
+        grid.editCell(table.find("td:first"));
+        grid.editCell(table.find("td:last"));
+
+        ok(!wasCalled);
+    });
 })();
