@@ -53,13 +53,6 @@ class TelerikDownloadBuilderBot
         rescue
         screenshot("Browser_Timeout_On_Validation")
     end
-    #not used
-    def fill_in(title, contents)
-        element = driver.find_element(:xpath, "//label[text()='#{title}']/..//input")
-        driver.execute_script 'arguments[0].focus()', element
-        element.send_keys contents
-        element.send_keys :tab
-    end
     def screenshot(failed_operation)
       if failed_operation.nil?
         failed_operation = "null"
@@ -80,9 +73,6 @@ class TelerikDownloadBuilderBot
       element.send_keys(path)
       rescue
       screenshot("Upload_Path_Setting_Failed_For_" + path)
-    end
-    def quit
-        driver.quit
     end
 end
 
@@ -106,39 +96,32 @@ def upload_download_builder_files()
 end
 def upload_files_and_test(bot, archive_path)
 
-  version_string = VERSION.split(".")
-  version_for_db = version_string[0] + "." + version_string[1] + " " + version_string[2]
+  if bot.execute_script("$find($telerik.$('[id$=\"_ddlAvailableVersions\"]').attr('id')).get_text() == #{VERSION}")
 
-  #upload zip file  
-  full_path = File.expand_path(archive_path + "/#{version_for_db}.zip", File.join(File.dirname(__FILE__), ".."))
+      version_string = VERSION.split(".")
+      version_for_db = version_string[0] + "." + version_string[1] + " " + version_string[2]
 
-  element = bot.driver.find_element(:xpath, "//div[contains(@id,'ruUploadPackage')]")
-  upload_id = element.attribute("id")
+      #upload zip file  
+      full_path = File.expand_path(archive_path + "/#{version_for_db}.zip", File.join(File.dirname(__FILE__), ".."))
 
-  p "uploading with>>" + upload_id + " file: " + full_path
+      element = bot.driver.find_element(:xpath, "//div[contains(@id,'ruUploadPackage')]")
+      upload_id = element.attribute("id")
 
-  upload_file(bot, upload_id, full_path)
+      upload_file(bot, upload_id, full_path)
 
-  #upload js config file 
-  full_path = File.expand_path(archive_path + "/kendo-config.#{version_for_db}.js", File.join(File.dirname(__FILE__), ".."))
+      #upload js config file 
+      full_path = File.expand_path(archive_path + "/kendo-config.#{version_for_db}.js", File.join(File.dirname(__FILE__), ".."))
 
-  element = bot.driver.find_element(:xpath, "//div[contains(@id,'ruUploadJsConfigs')]")
-  upload_id = element.attribute("id")
+      element = bot.driver.find_element(:xpath, "//div[contains(@id,'ruUploadJsConfigs')]")
+      upload_id = element.attribute("id")
 
-  p "uploading with>>" + upload_id + " file: " + full_path
+      upload_file(bot, upload_id, full_path)
 
-  upload_file(bot, upload_id, full_path)
+      bot.click_element(bot.find("[value='Upload']"))
+      bot.wait_for_validation("//div[contains(text(), 'successfully')]")
 
-  p "uploading files in CMS>>"
-  bot.click_element(bot.find("[value='Upload']"))
-  bot.wait_for_validation("//div[contains(text(), 'successfully')]")
-
-  p "testing custom builder download>>"
-  bot.click_element(bot.driver.find_element(:xpath, "//input[contains(@id, '_btnDownload')]"))
-
-  p "success!"
-  #bot.quit
-
+      bot.click_element(bot.driver.find_element(:xpath, "//input[contains(@id, '_btnDownload')]"))
+  end
 end
 def upload_file(bot, upload_id, full_path)
     bot.execute_script("
@@ -155,7 +138,7 @@ def upload_file(bot, upload_id, full_path)
                     }
                     upload.initialize();
                 })(Telerik.Web.UI.RadAsyncUpload.Modules, $telerik.$);")
-    p "uploading file>>"
+
     full_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/
     bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id} input[type=file]"), full_path)
     bot.wait_for_element("##{upload_id} .ruRemove")
