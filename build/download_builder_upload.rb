@@ -95,9 +95,9 @@ def upload_download_builder_files()
     upload_files_and_test(bot, versioned_bundle_archive_path)
 end
 def upload_files_and_test(bot, archive_path)
-
-  if bot.execute_script("$find($telerik.$('[id$=\"_ddlAvailableVersions\"]').attr('id')).get_text() == #{VERSION}")
-
+  if bot.execute_script("if($find($telerik.$('[id$=\"_ddlAvailableVersions\"]').attr('id')).get_text() == '2014.1 318'){ return true;}")
+  #on live
+  #if bot.execute_script("if($find($telerik.$('[id$=\"_ddlAvailableVersions\"]').attr('id')).get_text() == '#{VERSION}'){ return true;}")
       version_string = VERSION.split(".")
       version_for_db = version_string[0] + "." + version_string[1] + " " + version_string[2]
 
