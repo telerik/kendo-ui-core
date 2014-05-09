@@ -237,6 +237,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Enable/disable TabStrip keyboard navigation.
+        /// </summary>
+        /// <param name="value">If true the TabStrip will have keyboard navigation.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TabStrip()
+        ///             .Name("TabStrip")
+        ///             .Navigatable(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TabStripBuilder Navigatable(bool value)
+        {
+            Component.Navigatable = value;
+
+            return this;
+        }
+
+        /// <summary>
         /// Enable/disable security trimming functionality of the component.
         /// </summary>
         /// <param name="value">If true security trimming is enabled.</param>

@@ -24,6 +24,7 @@ namespace Kendo.Mvc.UI
 
             Items = new List<TabStripItem>();
             SelectedIndex = -1;
+            Navigatable = true;
             HighlightPath = true;
             SecurityTrimming = new SecurityTrimming();
         }
@@ -70,6 +71,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool Navigatable
+        {
+            get;
+            set;
+        }
+
         public bool HighlightPath
         {
             get;
@@ -91,6 +98,11 @@ namespace Kendo.Mvc.UI
             if (animation.Keys.Any())
             {
                 options["animation"] = animation["animation"];
+            }
+
+            if (!Navigatable)
+            {
+                options["navigatable"] = Navigatable;
             }
 
             var urls = Items.Where(item => item.Visible && item.IsAccessible(this.Authorization, this.ViewContext)).Select(item =>
