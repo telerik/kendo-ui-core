@@ -44,9 +44,13 @@ var __meta__ = {
         OPEN = "open",
         CLOSE = "close",
 
+        OVERFLOW_NEVER = "never",
+        OVERFLOW_AUTO = "auto",
+        OVERFLOW_ALWAYS = "always",
+        OVERFLOW_HIDDEN = "k-overflow-hidden",
+
         template = kendo.template,
         templates = {
-
             button: kendo.template(
                 '<a href="" class="k-button" unselectable="on"' +
                 'title="#= data.text ? data.text : "" #">#: data.text ? data.text : "" #</a>'
@@ -81,10 +85,31 @@ var __meta__ = {
 
             separator: kendo.template('<span class="k-toolbar-separator"></span>'),
 
-            overflowAnchor: '<span class="k-overflow-anchor"></span>',
+            overflowAnchor: '<div class="k-overflow-anchor"></div>',
 
             overflowContainer: '<ul class="k-overflow-container"></ul>'
+        },
 
+        overflowTemplates = {
+            button: kendo.template(
+                '<li><a href="" class="k-button k-overflow-button" unselectable="on">#: data.text ? data.text : "" #</a>'
+            ),
+
+            toggleButton: kendo.template(
+                '<li><a href="" class="k-button k-toggle-button k-overflow-button" unselectable="on">#: data.text ? data.text : "" #</a>'
+            ),
+
+            buttonGroup: kendo.template(""
+                //todo
+            ),
+
+            splitButton: kendo.template(""
+                //todo
+            ),
+
+            separator: kendo.template(""
+                //todo
+            )
         },
 
         initializers = {
@@ -101,9 +126,12 @@ var __meta__ = {
                     element.attr("id", options.id);
                 }
 
+                //user events tap
                 if(options.click && kendo.isFunction(options.click)) {
                     element.on(CLICK, options.click);
                 }
+
+                element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
 
                 var icon = options.icon,
                     spriteCssClass = options.spriteCssClass,
@@ -221,19 +249,18 @@ var __meta__ = {
                 if(options.resizable) {
                     that._renderOverflow();
                     element.addClass(RESIZABLE_TOOLBAR);
+                    //user events tap
                     element.on(CLICK, "." + OVERFLOW_ANCHOR, proxy(that._toggleOverflow, that));
                 }
 
                 if(options.items && options.items.length) {
-                    that._renderItems(options.items);
+                    that._renderOverflowItems(options.items);
+                    that._renderToolbarItems(options.items);
                 }
 
+                //user events tap
                 element.on(CLICK, "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")", proxy(that._buttonClick, that));
                 element.on(CLICK, "." + SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
-
-                if(options.resizable) {
-                    element.height(element.height());
-                }
 
                 kendo.notify(that);
             },
@@ -256,43 +283,11 @@ var __meta__ = {
                     $(element).data("kendoPopup").destroy();
                 });
 
-                if(this._overflow) {
+                if (this._overflow) {
                     this._overflow.destroy();
                 }
 
                 Widget.fn.destroy.call(this);
-            },
-
-            _renderItems: function(items) {
-                for (var i = 0; i < items.length; i++) {
-                    var command = items[i],
-                        element;
-
-                    if(command.template) {
-                        if(kendo.isFunction(command.template)) {
-                            element = $(command.template(command));
-                        } else {
-                            element = $(command.template);
-                        }
-                    } else {
-                        element = $(templates[command.type](command));
-
-                        (initializers[command.type] || $.noop)(element, command);
-                    }
-
-                    if(element.length) {
-                        element.appendTo(this.element).css("visibility", "hidden");
-
-                        var containerWidth = this.element.innerWidth();
-
-                        if(containerWidth < this._childrenWidth()) {
-                            this._hideItem(element, true);
-                        }
-
-                        element.css("visibility", "visible");
-                    }
-
-                }
             },
 
             _renderOverflow: function() {
@@ -303,8 +298,73 @@ var __meta__ = {
                 this._overflow = new kendo.ui.Popup(templates.overflowContainer, {
                     anchor: overflowAnchor
                 });
+            },
 
-                this._anchorWidth = overflowAnchor.outerWidth(true);
+            _renderOverflowItems: function(items) {
+                for (var i = 0; i < items.length; i++) {
+                    var command = items[i],
+                        element;
+
+                    if(command.overflow === OVERFLOW_NEVER) { //skip items that will NOT appear in the overflow
+                        continue;
+                    }
+
+                    if(command.overflowTemplate) {
+                        if(kendo.isFunction(command.overflowTemplate)) {
+                            element = $(command.overflowTemplate(command));
+                        } else {
+                            element = $(command.overflowTemplate);
+                        }
+                    } else {
+                        element = $(overflowTemplates[command.type](command));
+
+                        (initializers[command.type] || $.noop)(element, command);
+                    }
+
+                    if(element.length) {
+                        element.appendTo(this._overflow.element);
+
+                        if(command.overflow === OVERFLOW_AUTO) {
+                            element.addClass(OVERFLOW_HIDDEN);
+                        }
+                    }
+
+                }
+            },
+
+            _renderToolbarItems: function(items) {
+                for (var i = 0; i < items.length; i++) {
+                    var command = items[i],
+                        element;
+
+                    if(command.overflow === OVERFLOW_ALWAYS) { //skip items that will appear only in the overflow
+                        continue;
+                    }
+
+                    if(command.template) {
+                        if(kendo.isFunction(command.template)) {
+                            element = $(command.template(command));
+                        } else {
+                            element = $(command.template);
+                        }
+                    } else {
+                        element = $(templates[command.type](command));
+                        (initializers[command.type] || $.noop)(element, command);
+                    }
+
+                    if(element.length) {
+                        element.appendTo(this.element).css("visibility", "hidden");
+
+                        var containerWidth = this.element.innerWidth();
+
+                        if(containerWidth < this._childrenWidth()) {
+                            this._hideItem(element);
+                        }
+
+                        element.css("visibility", "visible");
+                    }
+
+                }
             },
 
             _buttonClick: function(e) {
@@ -316,15 +376,15 @@ var __meta__ = {
 
                 e.preventDefault();
 
-                if(isDisabled) {
+                if (isDisabled) {
                     return;
                 }
 
-                if(target.hasClass(TOGGLE_BUTTON)) {
+                if (target.hasClass(TOGGLE_BUTTON)) {
                     isChecked = target.hasClass(STATE_CHECKED);
                     group = target.data("group");
 
-                    if(group) { //find all buttons from the same group
+                    if (group) { //find all buttons from the same group
                         current = this.element.find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_CHECKED);
                     }
 
@@ -364,66 +424,46 @@ var __meta__ = {
             },
 
             _resize: function(e) {
+                //does not work with rotation, I should be able to hide multiple items with a while loop
+                //add a test case with 4 visible items > 1 visible item
                 var containerWidth = e.width,
                     commandElement;
 
                 if(containerWidth < this._childrenWidth()) {
-                    commandElement = this.element.children(":not(." + OVERFLOW_ANCHOR + ")").last();
+                    commandElement = this.element.children(":visible:not(." + OVERFLOW_ANCHOR + ")").last();
                     this._hideItem(commandElement);
                 } else {
-                    commandElement = this._overflow.element.children("li").first();
-                    this._showItem(commandElement, containerWidth);
+                    commandElement = this.element.children(":hidden").first();
+                    if(commandElement.length) {
+                        this._showItem(commandElement, containerWidth);
+                    }
                 }
             },
 
             _childrenWidth: function() {
                 var childrenWidth = 0;
 
-                this.element.children().each(function() {
+                this.element.children(":visible").each(function() {
                     childrenWidth += $(this).outerWidth(true);
                 });
 
-                childrenWidth = Math.ceil(childrenWidth);
-
-                return childrenWidth;
+                return Math.ceil(childrenWidth);
             },
 
             _hideItem: function(item, append) {
-                var wrapper = $("<li></li>"),
-                    type = item.data("type");
-
-                if(type === "button" || type === "toggleButton") {
-                    item.appendTo(wrapper);
-                } else if(type === "buttonGroup" || type === "splitButton") {
-                    //todo
-                } else {
-                    //todo
-                }
-
-                if(append) {
-                    this._overflow.element.append(wrapper);
-                } else {
-                    this._overflow.element.prepend(wrapper);
+                if(item.data("overflow") !== OVERFLOW_NEVER) {
+                    item.hide();
+                    //connect commands with uids
+                    this._overflow.element.find(">li.k-overflow-hidden").last().removeClass(OVERFLOW_HIDDEN);
                 }
             },
 
             _showItem: function(item, containerWidth) {
-                var element = item.children();
-
-                element.unwrap();
-                element.css({
-                    "visibility": "hidden"
-                });
-
-                element.insertAfter(this.element.children(":not(." + OVERFLOW_ANCHOR + ")").last());
-
-                if(containerWidth < this._childrenWidth()) {
-                    this._hideItem(element);
+                if(containerWidth > this._childrenWidth() + item.outerWidth(true)) {
+                    item.show();
+                    //connect commands with uids
+                    this._overflow.element.find(">li:not(.k-overflow-hidden)").first().addClass(OVERFLOW_HIDDEN);
                 }
-
-                element.css({
-                    "visibility": "visible"
-                });
             }
 
         });

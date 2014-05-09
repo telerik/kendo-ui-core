@@ -14,6 +14,29 @@
         }
     });
 
+    /* TOOLBAR */
+
+    test("toolbar element has a k-toolbar class", 1, function() {
+        container.kendoToolBar();
+
+        ok(container.hasClass("k-toolbar"));
+    });
+
+    test("toolbar is resizable by default", 1, function() {
+        container.kendoToolBar();
+        ok(container.data("kendoToolBar").options.resizable);
+    });
+
+    test("resizable toolbar has k-toolbar-resizable class", 1, function() {
+        container.kendoToolBar();
+        ok(container.hasClass("k-toolbar-resizable"));
+    });
+
+    test("non resizable toolbar does not have k-toolbar-resizable class", 1, function() {
+        container.kendoToolBar({ resizable: false });
+        ok(!container.hasClass("k-toolbar-resizable"));
+    });
+
     /* BUTTON */
 
     test("button element has a k-button class", 1, function() {
@@ -22,7 +45,7 @@
                 { type: "button", text: "foo" }
             ]
         });
-        
+
         ok(container.find(".k-button").length);
     });
 
@@ -45,7 +68,7 @@
                 { type: "button", text: "foo" }
             ]
         });
-        
+
         var button = container.find(".k-button");
 
         ok(!button.hasClass("k-state-disabled"));
@@ -57,7 +80,7 @@
                 { type: "button", text: "foo", enable: false }
             ]
         });
-        
+
         var button = container.find(".k-button");
 
         ok(button.hasClass("k-state-disabled"));
@@ -69,7 +92,7 @@
                 { type: "button", text: "foo" }
             ]
         });
-        
+
         var button = container.find(".k-button");
 
         ok(!button.hasClass("k-primary"));
@@ -81,7 +104,7 @@
                 { type: "button", text: "foo", primary: true }
             ]
         });
-        
+
         var button = container.find(".k-button");
 
         ok(button.hasClass("k-primary"));
@@ -97,7 +120,7 @@
                 }
             }]
         });
-        
+
         var button = container.find(".k-button");
         button.trigger("click");
     });
@@ -212,6 +235,85 @@
         var button = container.find(".k-button");
 
         ok(button.hasClass("k-button-icontext"));
+    });
+
+    test("button receives data-overflow='auto' attribute if no overflow is specified", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" }
+            ]
+        });
+
+        var button = container.find(".k-button");
+
+        equal(button.attr("data-overflow"), "auto");
+    });
+
+    test("button overflow is set as data attribute to the HTML element", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", overflow: "never" }
+            ]
+        });
+
+        var button = container.find(".k-button");
+
+        equal(button.attr("data-overflow"), "never");
+    });
+
+    test("button element with overflow: auto is rendered both in the toolbar and in the overflow popup", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        ok(container.find(".k-button").length);
+        ok(toolbar._overflow.element.find(".k-button").length);
+    });
+
+    test("button element with overflow: never is not rendered in the overflow popup", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", overflow: "never" }
+            ]
+        }).data("kendoToolBar");
+
+        ok(container.find(".k-button").length);
+        ok(!toolbar._overflow.element.find(".k-button").length);
+    });
+
+    test("button element with overflow: always is not rendered in the toolbar container", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", overflow: "always" }
+            ]
+        }).data("kendoToolBar");
+
+        ok(!container.find(".k-button").length);
+        ok(toolbar._overflow.element.find(".k-button").length);
+    });
+
+    test("button element in overflow popup has class k-overflow-button", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", overflow: "always" }
+            ]
+        }).data("kendoToolBar");
+
+        ok(toolbar._overflow.element.find(".k-overflow-button").length);
+    });
+
+    test("botton element in overflow popup is wrapped inside a <li> tag", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", overflow: "always" }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar._overflow.element.find(".k-overflow-button");
+
+        equal(button.parent().prop("tagName"), "LI");
     });
 
     /* TOGGLE BUTTON */
@@ -333,6 +435,38 @@
         ok(buttons.last().hasClass("k-group-end"));
     });
 
+    test("button group element receives data-overflow attribute with default value", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        });
+
+        var buttonGroup = container.find(".k-button-group");
+        equal(buttonGroup.attr("data-overflow"), "auto");
+    });
+
+    test("button group element receives data-overflow attribute with set value", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", overflow: "always", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        });
+
+        var buttonGroup = container.find(".k-button-group");
+        equal(buttonGroup.attr("data-overflow"), "always");
+    });
+
     /* SPLIT BUTTON */
 
     test("renders splitButton from JSON", 2, function() {
@@ -436,6 +570,36 @@
         ok(popup.attr("id"), "Popup has ID");
     });
 
+    test("SplitButton element receives data-overflow attribute with default value", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", text: "foo", options: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" }
+                    ]
+                }
+            ]
+        });
+
+        var splitButton = container.find(".k-split-button");
+        equal(splitButton.attr("data-overflow"), "auto");
+    });
+
+    test("button group element receives data-overflow attribute with set value", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", overflow: "never", text: "foo", options: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" }
+                    ]
+                }
+            ]
+        });
+
+        var splitButton = container.find(".k-split-button");
+        equal(splitButton.attr("data-overflow"), "never");
+    });
+
     /* SEPARATOR */
 
     test("renders separator from JSON", 1, function() {
@@ -487,6 +651,29 @@
         }).data("kendoToolBar");
 
         ok(!toolbar._overflow);
+    });
+
+    test("button's wrapper with overflow: auto has k-overflow-hidden class", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        var wrapper = toolbar._overflow.element.find(".k-button").parent();
+        ok(wrapper.hasClass("k-overflow-hidden"));
+        ok(wrapper.is(":hidden"));
+    });
+
+    test("button's wrapper with overflow: always does not have k-overflow-hidden class", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", overflow: "always" }
+            ]
+        }).data("kendoToolBar");
+
+        var wrapper = toolbar._overflow.element.find(".k-button").parent();
+        ok(!wrapper.hasClass("k-overflow-hidden"));
     });
 
 })();
