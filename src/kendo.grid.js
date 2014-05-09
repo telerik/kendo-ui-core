@@ -4264,6 +4264,8 @@ var __meta__ = {
 
                 that._appendLockedColumnContent();
 
+                that.lockedContent.bind("DOMMouseScroll" + NS + " mousewheel" + NS, proxy(that._wheelScroll, that));
+
                 that._applyLockedContainersWidth();
             }
 
@@ -4275,6 +4277,22 @@ var __meta__ = {
 
             if (that.groupable) {
                 that._attachGroupable();
+            }
+        },
+
+        _wheelScroll: function(e) {
+            var content = this.content;
+
+            if (this.options.scrollable.virtual) {
+                content = this.virtualScrollable.verticalScrollbar;
+            }
+
+            var scrollTop = content.scrollTop(),
+                delta = kendo.wheelDeltaY(e);
+
+            if (delta) {
+                e.preventDefault();
+                content.scrollTop(scrollTop + (-delta));
             }
         },
 
