@@ -314,6 +314,12 @@ def release_build_file_copy(release_build, name, versioned_bundle_destination_pa
       :static_name => "online-examples.zip"
 
     end
+    if release_build[:changelog]
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :static_name => "changelogs/" + versioned_bundle_name(name) + "changelog.xml" 
+    end 
     if release_build_config[:exe]
       if release_build_config[:download_name].index("TelerikControlPanelSetup.MVC")!= nil 
         archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikControlPanelSetup.exe")

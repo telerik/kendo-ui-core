@@ -95,9 +95,11 @@ def upload_download_builder_files()
     upload_files_and_test(bot, versioned_bundle_archive_path)
 end
 def upload_files_and_test(bot, archive_path)
-  if bot.execute_script("if($find($telerik.$('[id$=\"_ddlAvailableVersions\"]').attr('id')).get_text() == '2014.1 318'){ return true;}")
-  #on live
-  #if bot.execute_script("if($find($telerik.$('[id$=\"_ddlAvailableVersions\"]').attr('id')).get_text() == '#{VERSION}'){ return true;}")
+  if ENV["DRY_RUN"]
+    return if !bot.execute_script("if($find($telerik.$('[id$=\"_ddlAvailableVersions\"]').attr('id')).get_text() == '2014.1 318'){ return true;}")
+  else
+    return if !bot.execute_script("if($find($telerik.$('[id$=\"_ddlAvailableVersions\"]').attr('id')).get_text() == '#{VERSION}'){ return true;}")
+  end
       version_string = VERSION.split(".")
       version_for_db = version_string[0] + "." + version_string[1] + " " + version_string[2]
 
@@ -121,7 +123,6 @@ def upload_files_and_test(bot, archive_path)
       bot.wait_for_validation("//div[contains(text(), 'successfully')]")
 
       bot.click_element(bot.driver.find_element(:xpath, "//input[contains(@id, '_btnDownload')]"))
-  end
 end
 def upload_file(bot, upload_id, full_path)
     bot.execute_script("

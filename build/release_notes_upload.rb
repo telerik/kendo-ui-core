@@ -16,6 +16,8 @@ class TelerikReleaseNotesBot
         driver.find_element(:xpath, "//input[contains(@id,'_Password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
         click_and_wait("Log in with Telerik", "Legacy Dashboard")
 
+        @products = ["Kendo UI", "UI for ASP.NET MVC", "UI for JSP", "UI for PHP"]
+
     end
 
     def find(selector)
@@ -74,76 +76,105 @@ class TelerikReleaseNotesBot
       rescue
       screenshot("Upload_Path_Setting_Failed_For_" + path)
     end
+    def get_select(title)
+        element = driver.find_element(:xpath, "//label[text()='#{title}']/..//select")  
+        option = Selenium::WebDriver::Support::Select.new(element)
+        return option
+    end
 end
 
-def upload_release_notes_files()
+def set_upload_configuration()
 
     bot = TelerikReleaseNotesBot.instance
- 
-    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Administration')]"))
-    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Import Release Notes')]"))
-    bot.wait_for_title("Import Release Notes")
 
-    #todo: copy changelogs to release folders 
-    if defined? SERVICE_PACK_NUMBER
-        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}/changelog"
-    else
-        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/Q#{VERSION_Q} #{VERSION_YEAR}/changelog"
+    #Beta release
+    if defined? Beta
+      if ENV["DRY_RUN"]
+        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/DRY_RUN_BETA/changelogs"
+      else
+        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/BETA/changelogs"
+      end    
     end
-
-    if defined? BETA
-        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/BETA/changelog"    
+    else
+      #official release
+      if defined? SERVICE_PACK_NUMBER
+        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}/changelogs"
+      else
+        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/Q#{VERSION_Q} #{VERSION_YEAR}/changelogs"
+      end
     end 
 
     versioned_bundle_archive_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, archive_folder_name)
 
-    upload_files_and_validate(bot, versioned_bundle_archive_path)
+    navigate_to_import_form()
+    upload_files_and_validate(bot, versioned_bundle_archive_path, @products.pop())
 end
-def upload_files_and_validate(bot, archive_path)
+def navigate_to_import_form
+    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Administration')]"))
+    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Import Release Notes')]"))
+    bot.wait_for_title("Import Release Notes")
+end
+def upload_files_and_validate(bot, archive_path, productName)
 
-      #upload Kendo UI Professional release notes  
-      set_fields_data("Kendo UI")
-      full_path = File.expand_path(archive_path + "/professional.commercial.#{VERSION}.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+    set_fields_data(productName)
+    full_path = String.new
 
-      element = bot.driver.find_element(:xpath, "//input[contains(@id,'ReleaseNoteFileUploader')]")
-      upload_id = element.attribute("id")
+    case productName
+      when "Kendo UI"
+         full_path = File.expand_path(archive_path + "/telerik.kendoui.professional.#{VERSION}.trial.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+      when "UI for ASP.NET MVC"
+        full_path = File.expand_path(archive_path + "/telerik.ui.for.aspnetmvc.#{VERSION}.trial.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+      when "UI for JSP"
+        full_path = File.expand_path(archive_path + "/telerik.ui.for.jsp.#{VERSION}.trial.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+      when "UI for PHP"
+        full_path = File.expand_path(archive_path + "/telerik.ui.for.php.#{VERSION}.trial.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+    end
+    
+    element = bot.driver.find_element(:xpath, "//div[contains(@id,'ReleaseNoteFileUploader')]")
+    upload_id = element.attribute("id")
+    upload_file(bot, upload_id, full_path)
 
-      upload_file(bot, upload_id, full_path)
+    bot.click_element(bot.driver.find_element(:xpath, "//a[contains(@id,'ImportReleaseNotesButton')]"))
+    bot.wait_for_validation("//div[contains(text(), 'successfully')]")
 
-      #upload UI for ASP.NET MVC release notes
-      set_fields_data("UI for ASP.NET MVC")
-      full_path = File.expand_path(archive_path + "/aspnetmvc.commercial.#{VERSION}.changelog.xml", File.join(File.dirname(__FILE__), ".."))
-
-      element = bot.driver.find_element(:xpath, "//input[contains(@id,'ReleaseNoteFileUploader')]")
-      upload_id = element.attribute("id")
-
-      upload_file(bot, upload_id, full_path)
-
-      #upload UI for JSP release notes
-      set_fields_data("UI for JSP")
-      full_path = File.expand_path(archive_path + "/jsp.commercial.#{VERSION}.changelog.xml", File.join(File.dirname(__FILE__), ".."))
-
-      element = bot.driver.find_element(:xpath, "//input[contains(@id,'ReleaseNoteFileUploader')]")
-      upload_id = element.attribute("id")
-
-      upload_file(bot, upload_id, full_path)
-
-      #upload UI for PHP release notes
-      set_fields_data("UI for PHP")
-      full_path = File.expand_path(archive_path + "/php.commercial.#{VERSION}.changelog.xml", File.join(File.dirname(__FILE__), ".."))
-
-      element = bot.driver.find_element(:xpath, "//input[contains(@id,'ReleaseNoteFileUploader')]")
-      upload_id = element.attribute("id")
-
-      upload_file(bot, upload_id, full_path)
-
-      bot.click_element(bot.driver.find_element(:xpath, "//a[contains(@id,'ImportReleaseNotesButton')]"))
-      #bot.wait_for_validation("//div[contains(text(), 'successfully')]")
-
+    if @products.length > 0
+      navigate_to_import_form()
+      upload_files_and_validate(bot, versioned_bundle_archive_path, @products.pop())
+    else
+       bot.driver.quit
+    end
   end
 end
 def set_fields_data(productName)
-  #todo
+    #Beta release notes
+    if defined? Beta
+      bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} Beta')")
+      #due to mandatory non-empty value requirement
+      bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('11')")
+      bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'Beta Version')]"))   
+    end
+    else
+    #official release notes
+      if defined? SERVICE_PACK_NUMBER
+        bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}')")
+        bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('#{SERVICE_PACK_NUMBER}')")
+        bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'Minor Version')]"))
+      else
+        bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR}')")
+        #due to mandatory non-empty value requirement
+        bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('11')")
+        bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'Major Version')]"))
+      end
+    end 
+    bot.execute_script("$('[id$=\"_ReleaseVersionTb\"]').val('#{VERSION}')") 
+
+    date = DateTime.now.strftime('%m/%d/%Y')
+    p date
+    bot.execute_script("$find($telerik.$('[id$=\"_ReleaseDateDatePicker_dateInput\"]').attr('id')).set_value('#{date}')")
+
+    option_select = get_select("Product")
+    option_select.select_by(:text, productName)
+
 end
 def upload_file(bot, upload_id, full_path)
     full_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/

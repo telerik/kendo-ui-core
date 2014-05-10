@@ -234,7 +234,13 @@ def beta_build_file_copy(beta_build, name, versioned_bundle_destination_path, ve
       :archive => versioned_bundle_archive_path,
       :static_name => "online-examples.zip" 
 
-    end 
+    end
+    if beta_build[:changelog]
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :static_name => "changelogs/" + versioned_bundle_beta_name(name) + "changelog.xml" 
+    end  
 end
 def build_path_and_copy(options)
    if options[:static_name]

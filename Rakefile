@@ -291,7 +291,8 @@ bundle :name => 'professional.trial',
               :websites => ["Telerik"],
               :download_message => 'You successfully downloaded the Kendo UI Professional Trial installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.'
              }
-           }
+           },
+           :changelog => true,
        },
        :beta_build => {
           :file_metadata => {
@@ -315,7 +316,8 @@ bundle :name => 'professional.trial',
               :download_message => 'You have successfully downloaded Kendo UI Professional Q#{VERSION_Q} #{VERSION_YEAR} Beta release. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles</strong>"
              }
-           }
+           },
+          :changelog => true,
        }
 
 # Kendo UI Web (obsolete)
@@ -460,7 +462,8 @@ bundle :name => 'aspnetmvc.trial',
               :whats_included_message => "<strong>Trial NuGet package for Telerik UI for ASP.NET MVC</strong>"
              }
           },
-          :demos => true
+          :demos => true,
+          :changelog => true,
        },
        :beta_build => {
           :file_metadata => {
@@ -485,7 +488,8 @@ bundle :name => 'aspnetmvc.trial',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
              }
           },
-          :demos => true
+          :demos => true,
+          :changelog => true,
        },
        :contents => {
             'js' => TRIAL_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
@@ -744,7 +748,8 @@ bundle :name => 'jsp.trial',
               :download_message => 'You have successfully downloaded Telerik UI for JSP Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />JSP Server Wrappers</strong>"
              }
-          }
+          },
+          :changelog => true,
         },
         :beta_build => {
           :file_metadata => {
@@ -758,7 +763,8 @@ bundle :name => 'jsp.trial',
               :download_message => 'You have successfully downloaded Telerik UI for JSP Q#{VERSION_Q} #{VERSION_YEAR} Beta release. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />JSP Server Wrappers</strong>"
              }
-          }
+          },
+          :changelog => true,
         },    
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
@@ -828,7 +834,8 @@ bundle :name => 'php.trial',
               :download_message => 'You have successfully downloaded Telerik UI for PHP Trial version. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />PHP Server Wrappers</strong>"
              }
-          }
+          },
+          :changelog => true,
         },
         :beta_build => {
           :file_metadata => {
@@ -842,7 +849,8 @@ bundle :name => 'php.trial',
               :download_message => 'You have successfully downloaded Telerik UI for PHP Q#{VERSION_Q} #{VERSION_YEAR} Beta release. See <a href="http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />PHP Server Wrappers</strong>"
              }
-          }
+          },
+          :changelog => true,
         },  
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
