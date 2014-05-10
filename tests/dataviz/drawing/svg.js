@@ -11,7 +11,6 @@
         MultiPath = d.MultiPath,
         Path = d.Path,
         Text = d.Text,
-        TextSpan = d.TextSpan,
 
         svg = d.svg,
         Node = svg.Node,
@@ -21,8 +20,7 @@
         PathNode = svg.PathNode,
         MultiPathNode = svg.MultiPathNode,
         Surface = svg.Surface,
-        TextNode = svg.TextNode,
-        TextSpanNode = svg.TextSpanNode;
+        TextNode = svg.TextNode;
 
     // ------------------------------------------------------------
     var container,
@@ -707,6 +705,10 @@
         ok(textNode.render().indexOf("x='10' y='20'") > -1);
     });
 
+    test("renders content", function() {
+        ok(textNode.render().indexOf("Foo") > -1);
+    });
+
     test("renders font", function() {
         ok(textNode.render().indexOf("font:arial;") > -1);
     });
@@ -732,41 +734,11 @@
         text.options.set("font", "foo");
     });
 
-    // ------------------------------------------------------------
-    var textSpan;
-    var textSpanNode;
-
-    nodeTests(TextSpan, TextSpanNode, "TextNode");
-
-    module("TextSpanNode", {
-        setup: function() {
-            textSpan = new d.TextSpan("Foo", { font: "arial" });
-            textSpanNode = new svg.TextSpanNode(textSpan);
-        }
-    });
-
-    test("renders content", function() {
-        ok(textSpanNode.render().indexOf("Foo") > -1);
-    });
-
-    test("renders font", function() {
-        ok(textSpanNode.render().indexOf("font:arial;") > -1);
-    });
-
     test("contentChange sets content", function() {
-        textSpanNode.content = function(value) {
+        textNode.content = function(value) {
             equal(value, "Bar");
         };
 
-        textSpan.content("Bar");
-    });
-
-    test("optionsChange sets font", function() {
-        textSpanNode.attr = function(name, value) {
-            equal(name, "style");
-            equal(value, "font:foo;");
-        };
-
-        textSpan.options.set("font", "foo");
+        text.content("Bar");
     });
 })();

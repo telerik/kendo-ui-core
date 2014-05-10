@@ -11,7 +11,6 @@
         Segment = d.Segment,
         Shape = d.Shape,
         Text = d.Text,
-        TextSpan = d.TextSpan,
         Circle = d.Circle,
         MultiPath = d.MultiPath,
         Path = d.Path,
@@ -373,44 +372,6 @@
     });
 
     // ------------------------------------------------------------
-    var tspan;
-
-    shapeBaseTests(TextSpan, "TextSpan");
-
-    module("TextSpan", {
-        setup: function() {
-            tspan = new TextSpan("Foo");
-        }
-    });
-
-    test("sets initial content", function() {
-        equal(tspan.content(), "Foo");
-    });
-
-    test("sets initial options", function() {
-        tspan = new TextSpan("Foo", { foo: true });
-
-        ok(tspan.options.foo);
-    });
-
-    test("setting content triggers contentChange", function() {
-        tspan.observer = {
-            contentChange: function() { ok(true); }
-        };
-
-        tspan.content("Bar");
-    });
-
-    test("clears content", function() {
-        tspan.content("");
-        equal(tspan.content(), "");
-    });
-
-    test("content setter is chainable", function() {
-        equal(tspan.content("Bar"), tspan);
-    });
-
-    // ------------------------------------------------------------
     var text;
 
     shapeBaseTests(Text, "Text");
@@ -421,14 +382,18 @@
         }
     });
 
-    test("sets initial options", function() {
-        text = new Text("Foo", new g.Point(), { foo: true });
-
-        ok(text.options.foo);
+    test("sets initial content", function() {
+        equal(text.content(), "Foo");
     });
 
     test("sets initial origin", function() {
         equal(text.origin.x, 100);
+    });
+
+    test("sets initial options", function() {
+        text = new Text("Foo", new g.Point(), { foo: true });
+
+        ok(text.options.foo);
     });
 
     test("changing the origin triggers geometryChange", function() {
@@ -441,40 +406,21 @@
         text.origin.set("x", 5);
     });
 
-    test("appends initial content", function() {
-        equal(text.children[0].content(), "Foo");
-    });
-
-    test("append accepts TextSpan", function() {
-        var tspan = new TextSpan("Bar");
-        text.append(tspan);
-        equal(text.children[1], tspan);
-    });
-
-    test("append accepts text", function() {
-        text.append("Bar");
-        equal(text.children[1].content(), "Bar");
-    });
-
-    test("append sets options on TextSpan", function() {
-        text.append("Bar", { foo: true });
-        equal(text.children[1].options.foo, true);
-    });
-
-    test("appending content triggers childrenChange", function() {
+    test("setting content triggers contentChange", function() {
         text.observer = {
-            childrenChange: function() { ok(true); }
+            contentChange: function() { ok(true); }
         };
 
-        text.append("Bar");
+        text.content("Bar");
     });
 
-    test("clear triggers childrenChange", function() {
-        text.observer = {
-            childrenChange: function() { ok(true); }
-        };
+    test("clears content", function() {
+        text.content("");
+        equal(text.content(), "");
+    });
 
-        text.clear();
+    test("content setter is chainable", function() {
+        equal(text.content("Bar"), text);
     });
 
     // ------------------------------------------------------------

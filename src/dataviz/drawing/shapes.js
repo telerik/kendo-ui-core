@@ -171,7 +171,9 @@
         }
     });
 
-    var shapeMixin = {
+    var Shape = Element.extend({
+        geometryChange: util.mixins.geometryChange,
+
         fill: function(color, opacity) {
             this.options.set("fill.color", color);
 
@@ -195,20 +197,16 @@
 
             return this;
         }
-    };
-
-    var Shape = Element.extend({
-        geometryChange: util.mixins.geometryChange,
-
-        fill: shapeMixin.fill,
-        stroke: shapeMixin.stroke
     });
 
-    var TextSpan = Shape.extend({
-        init: function(content, options) {
+    var Text = Shape.extend({
+        init: function(content, origin, options) {
+            Shape.fn.init.call(this, options);
+
             this._content = content;
 
-            Shape.fn.init.call(this, options);
+            this.origin = origin || new g.Point();
+            this.origin.observer = this;
         },
 
         content: function(value) {
@@ -225,36 +223,9 @@
             if (this.observer) {
                 this.observer.contentChange();
             }
-        }
-    });
-
-    var Text = Group.extend({
-        init: function(content, origin, options) {
-            Group.fn.init.call(this, options);
-
-            this.origin = origin || new g.Point();
-            this.origin.observer = this;
-
-            this.append(content);
-        },
-
-        append: function(content, options) {
-            var tspan;
-
-            if (content instanceof TextSpan) {
-                tspan = content;
-            } else {
-                tspan = new TextSpan(content, options);
-            }
-
-            Group.fn.append.call(this, tspan);
         },
 
         // TODO: Bounding box
-
-        geometryChange: util.mixins.geometryChange,
-        fill: shapeMixin.fill,
-        stroke: shapeMixin.stroke
     });
 
     var Circle = Shape.extend({
@@ -590,8 +561,7 @@
         Path: Path,
         MultiPath: MultiPath,
         Segment: Segment,
-        Text: Text,
-        TextSpan: TextSpan
+        Text: Text
     });
 
 })(window.kendo.jQuery);

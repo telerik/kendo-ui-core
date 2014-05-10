@@ -137,8 +137,6 @@
 
                 if (srcElement instanceof d.Text) {
                     childNode = new TextNode(srcElement);
-                } else if (srcElement instanceof d.TextSpan) {
-                    childNode = new TextSpanNode(srcElement);
                 } else if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Path) {
@@ -560,6 +558,11 @@
             PathNode.fn.optionsChange.call(this, e);
         },
 
+        contentChange: function() {
+            this.content(this.srcElement.content());
+            this.invalidate();
+        },
+
         mapStyle: function() {
             var style = PathNode.fn.mapStyle.call(this);
             style.push(["font", this.srcElement.options.font]);
@@ -572,36 +575,7 @@
             "x='#= this.srcElement.origin.x #' y='#= this.srcElement.origin.y #' " +
             "#= d.renderVisibility() # " +
             "#= d.renderStroke() # " +
-            "#= d.renderFill() #>#= d.renderChildren() #</text>"
-        )
-    });
-
-    var TextSpanNode = PathNode.extend({
-        contentChange: function() {
-            this.content(this.srcElement.content());
-            this.invalidate();
-        },
-
-        optionsChange: function(e) {
-            if(e.field == "font") {
-                this.attr("style", util.renderStyle(this.mapStyle()));
-            }
-
-            PathNode.fn.optionsChange.call(this, e);
-        },
-
-        mapStyle: function() {
-            var style = PathNode.fn.mapStyle.call(this);
-            style.push(["font", this.srcElement.options.font]);
-
-            return style;
-        },
-
-        template: renderTemplate(
-            "<tspan #= d.renderStyle() # " +
-            "#= d.renderVisibility() # " +
-            "#= d.renderStroke() # " +
-            "#= d.renderFill() #>#= this.srcElement.content() #</text>"
+            "#= d.renderFill() #><tspan>#= this.srcElement.content() #</tspan></text>"
         )
     });
 
@@ -664,8 +638,7 @@
             PathNode: PathNode,
             RootNode: RootNode,
             Surface: Surface,
-            TextNode: TextNode,
-            TextSpanNode: TextSpanNode
+            TextNode: TextNode
         }
     });
 
