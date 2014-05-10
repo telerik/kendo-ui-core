@@ -4106,11 +4106,16 @@ var __meta__ = {
                 cols = colgroup.find("col:not(.k-group-col,.k-hierarchy-col)"),
                 length,
                 lockedCols = $(),
+                skipHiddenCount = 0,
                 container;
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
-                if (columns[idx].locked && !columns[idx].hidden) {
-                    lockedCols = lockedCols.add(cols.eq(idx));
+                if (columns[idx].locked) {
+                    if (!columns[idx].hidden) {
+                        lockedCols = lockedCols.add(cols.eq(idx - skipHiddenCount));
+                    } else {
+                        skipHiddenCount ++;
+                    }
                 }
             }
 

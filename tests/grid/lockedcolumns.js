@@ -951,6 +951,46 @@
         equal(grid.columns[2].field, "baz");
     });
 
+    test("header col elements first locked column hidden", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, hidden: true, width: 10 },
+                { field: "bar", locked: true, width: 20 },
+                { field: "baz", width: 30 },
+                { field: "bax", width: 40 }
+            ]
+        });
+
+        var lockedHeader = grid.lockedHeader.find("col");
+        equal(lockedHeader.length, 1);
+        equal(lockedHeader[0].style.width, "20px");
+
+        var header = grid.thead.parent().find("col");
+        equal(header.length, 2);
+        equal(header[0].style.width, "30px");
+        equal(header[1].style.width, "40px");
+    });
+
+    test("table col elements first locked column hidden", function() {
+        var grid = setup({
+            columns: [
+                { field: "foo", locked: true, hidden: true, width: 10 },
+                { field: "bar", locked: true, width: 20 },
+                { field: "baz", width: 30 },
+                { field: "bax", width: 40 }
+            ]
+        });
+
+        var lockedTable = grid.lockedTable.find("col");
+        equal(lockedTable.length, 1);
+        equal(lockedTable[0].style.width, "20px");
+
+        var table = grid.table.find("col");
+        equal(table.length, 2);
+        equal(table[0].style.width, "30px");
+        equal(table[1].style.width, "40px");
+    });
+
     test("lock column with hidden locked columns", function() {
         var grid = setup({
             columns: [
