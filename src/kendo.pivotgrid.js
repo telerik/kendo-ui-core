@@ -140,21 +140,57 @@ var __meta__ = {
         return dataSource instanceof PivotDataSource ? dataSource : new PivotDataSource(dataSource);
     };
 
-    function expandMemberDescriptors(members) {
+    function transformDescriptors(members, mapFunction) {
         var result = [];
-        var name;
 
         for (var idx = 0; idx < members.length; idx++) {
-            var name = members[idx].name;
-
-            if (members[idx].expand && name.indexOf("&") == -1) {
-                name += ".[ALL].Children";
-            }
-
-            result.push(name);
+            result.push(mapFunction(members[idx]));
         }
 
         return result;
+    }
+
+    function expandMemberDescriptor(members, memberName) {
+        return transformDescriptors(members, function(member) {
+            var name = member.name;
+
+            if (name.indexOf("&") == -1) {
+                if (member.expand && name === memberName) {
+                    name += ".[ALL].Children";
+                } else {
+                    name += ".[(ALL)].MEMBERS";
+                }
+            }
+
+            return name;
+        });
+    }
+
+    function expandDescriptors(members) {
+        return transformDescriptors(members, function(member) {
+            var name = member.name;
+
+            if (name.indexOf("&") == -1) {
+                if (member.expand) {
+                    name += ".[ALL].Children";
+                } else {
+                    name += ".[(ALL)].MEMBERS";
+                }
+            }
+            return name;
+        });
+    }
+
+    function convertMemberDescriptors(members) {
+        return transformDescriptors(members, function(member) {
+            var name = member.name;
+
+            if (name.indexOf("&") == -1) {
+                name += ".[(ALL)].MEMBERS";
+            }
+
+            return name;
+        });
     }
 
     function crossJoin(names) {
@@ -173,26 +209,69 @@ var __meta__ = {
         return result;
     }
 
+    function crossJoinCommand(members, measures) {
+        var tmp = members;
+        if (measures.length > 1) {
+            tmp.push("{" + measures.join(",") + "}");
+        }
+        return crossJoin(tmp);
+    }
+
+    function expandedMembers(members) {
+        var result = [];
+
+        for (var idx = 0; idx < members.length; idx++) {
+            if (members[idx].name.indexOf("&") == -1 && members[idx].expand) {
+                result.push(members[idx]);
+            }
+        }
+
+        return result;
+    }
+
+    function serializeMembers(members, measures) {
+        var command = "";
+
+        members = members || [];
+
+        var memberNames = convertMemberDescriptors(members);
+        var expandedColumns = expandedMembers(members);
+
+        if (members.length > 1 || measures.length > 1) {
+            command += crossJoinCommand(memberNames, measures);
+
+            if (expandedColumns.length) {
+                command += ",";
+                for (var idx = 1; idx < expandedColumns.length; idx++) {
+                    command += crossJoinCommand(expandMemberDescriptor(members, expandedColumns[idx].name), measures);
+                    command += ",";
+                }
+
+                command += crossJoinCommand(expandDescriptors(members), measures);
+            }
+        } else {
+            if (expandedColumns.length) {
+                memberNames = memberNames.concat(expandDescriptors(members));
+            }
+            command += memberNames.join(",");
+        }
+
+        return command;
+    }
+
     var convertersMap = {
         read: function(options, type) {
             var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>';
 
             command += "SELECT NON EMPTY {";
 
-            var columns = expandMemberDescriptors(options.columns || []);
-            var rows = expandMemberDescriptors(options.rows || []);
+            var columns = options.columns || [];
+            var rows = options.rows || [];
+
             var measures = options.measures || [];
 
             if (columns.length) {
-                if (options.columns.length > 1 || measures.length > 1) {
-                    var tmp = columns;
-                    if (measures.length > 1) {
-                        tmp.push("{" + measures.join(",") + "}");
-                    }
-                    command += crossJoin(tmp);
-                } else {
-                    command += columns.join(",");
-                }
+                command += serializeMembers(columns, measures);
             } else if (measures.length) {
                 command += measures.join(",");
             }
@@ -202,18 +281,14 @@ var __meta__ = {
             if (rows.length) {
                 command += ", NON EMPTY {";
 
-                if (options.rows.length > 1) {
-                    command += crossJoin(rows);
-                } else {
-                    command += rows.join(",");
-                }
+                command += serializeMembers(rows, []/*, measures*/);
 
                 command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
             }
 
             command += " FROM [" + options.connection.cube + "]";
 
-            if (measures.length == 1 && options.columns && options.columns.length) {
+            if (measures.length == 1 && columns.length) {
                 command += " WHERE (" + measures.join(",") + ")";
             }
 

@@ -43,9 +43,9 @@
 */
             var dataSource = new kendo.data.PivotDataSource({
                 type: "xmla",
-                columns: [{ name: "[Geography].[City]", expand: true }, { name: "[Date].[Calendar]", expand: false }],
+                columns: [{ name: "[Date].[Calendar]", expand: false },{ name: "[Geography].[City]", expand: true }/*, { name: "[Customer].[Gender]", expand: false }*/],
                 rows: [ { name: "[Product].[Product Name]", expand: true }, { name: "[Product].[Category]", expand: true }],
-                measures: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Product Cost]"],
+                measures: ["[Measures].[Internet Order Lines Count]"/*, "[Measures].[Internet Total Product Cost]"*/],
                 transport: {
                     connection: {
                         catalog: "Adventure Works Internet Sales Model",
