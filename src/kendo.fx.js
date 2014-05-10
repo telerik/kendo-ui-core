@@ -1558,6 +1558,33 @@ var __meta__ = {
     fx.Animation = Animation;
     fx.Transition = Transition;
     fx.createEffect = createEffect;
+
+    function box(element) {
+        element = $(element);
+        var result = element.offset();
+        result.width = element.outerWidth();
+        result.height = element.outerHeight();
+        return result;
+    };
+
+    function transformOrigin(inner, outer) {
+        var x = (inner.left - outer.left) * outer.width / (outer.width - inner.width),
+            y = (inner.top - outer.top) * outer.height / (outer.height - inner.height);
+
+        return {
+            x: isNaN(x) ? 0 : x,
+            y: isNaN(y) ? 0 : y
+        };
+    }
+
+    function fillScale(inner, outer) {
+        return Math.max(outer.width / inner.width, outer.height / inner.height);
+    }
+
+    fx.box = box;
+    fx.transformOrigin = transformOrigin;
+    fx.fillScale = fillScale;
+
 })(window.kendo.jQuery);
 
 return window.kendo;
