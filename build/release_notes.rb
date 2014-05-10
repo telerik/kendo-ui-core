@@ -1,4 +1,4 @@
-require release_notes_upload
+require 'release_notes_upload'
 
 namespace :release_notes do
     desc "Upload release notes on telerik.com"

@@ -81,9 +81,12 @@ class TelerikReleaseNotesBot
         option = Selenium::WebDriver::Support::Select.new(element)
         return option
     end
+    def get_product()
+      return @products.pop()
+    end
 end
 
-def set_upload_configuration()
+def set_configuration_and_upload()
 
     bot = TelerikReleaseNotesBot.instance
 
@@ -94,7 +97,6 @@ def set_upload_configuration()
       else
         archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/BETA/changelogs"
       end    
-    end
     else
       #official release
       if defined? SERVICE_PACK_NUMBER
@@ -107,7 +109,7 @@ def set_upload_configuration()
     versioned_bundle_archive_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, archive_folder_name)
 
     navigate_to_import_form()
-    upload_files_and_validate(bot, versioned_bundle_archive_path, @products.pop())
+    upload_files_and_validate(bot, versioned_bundle_archive_path, bot.get_product())
 end
 def navigate_to_import_form
     bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Administration')]"))
@@ -143,7 +145,6 @@ def upload_files_and_validate(bot, archive_path, productName)
     else
        bot.driver.quit
     end
-  end
 end
 def set_fields_data(productName)
     #Beta release notes
@@ -152,7 +153,6 @@ def set_fields_data(productName)
       #due to mandatory non-empty value requirement
       bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('11')")
       bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'Beta Version')]"))   
-    end
     else
     #official release notes
       if defined? SERVICE_PACK_NUMBER
