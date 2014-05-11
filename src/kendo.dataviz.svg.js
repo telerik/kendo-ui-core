@@ -181,6 +181,12 @@ var __meta__ = {
             );
         },
 
+        createTextBox: function(options) {
+            return this.decorate(
+                new SVGTextBox(options)
+            );
+        },
+
         createRect: function(box, style) {
             return this.decorate(
                 new SVGLine(box.points(), true, this.setDefaults(style))
@@ -353,6 +359,32 @@ var __meta__ = {
             }
 
            return content;
+        }
+    });
+
+    var SVGTextBox = SVGViewElement.extend({
+        init: function(options) {
+            var textbox = this;
+            ViewElement.fn.init.call(textbox, options);
+
+            textbox.template = SVGTextBox.template;
+            if (!textbox.template) {
+                textbox.template = SVGTextBox.template =
+                renderTemplate(
+                    "#if (d.options.matrix) {#" +
+                        "<g #= d.renderRotation()#>" +
+                        "#= d.renderContent() #</g>" +
+                    "#} else {#" +
+                        "#=d.renderContent() #" +
+                    "#}#"
+                );
+            }
+        },
+
+        renderRotation: function() {
+            var matrix = this.options.matrix,
+                values = [matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f];
+            return "transform='matrix(" + values.join(",") + ")'";
         }
     });
 
@@ -1114,6 +1146,7 @@ var __meta__ = {
         SVGRing: SVGRing,
         SVGSector: SVGSector,
         SVGText: SVGText,
+        SVGTextBox: SVGTextBox,
         SVGView: SVGView
     });
 

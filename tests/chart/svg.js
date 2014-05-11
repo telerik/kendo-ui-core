@@ -68,6 +68,11 @@
             ok(text instanceof dataviz.SVGText);
         });
 
+        test("createTextBox returns SVGTextBox", function() {
+            var textbox = view.createTextBox();
+            ok(textbox instanceof dataviz.SVGTextBox);
+        });
+
         test("createText sets content", function() {
             var text = view.createText("Text");
             equal(text.content, "Text");
@@ -660,6 +665,39 @@
             equal(domElement.attr("fill-opacity"), "0.4");
         });
 
+    })();
+
+    (function() {
+        var TextBox = dataviz.SVGTextBox;
+        var matrix = new dataviz.Matrix(1,1,1,1,1,1);
+        var textbox;
+
+        module("SVGTextBox", {});
+
+        test("renders group with transformation when transformation matrix is passed", function() {
+            textbox = new TextBox({matrix: matrix});
+            equal(textbox.render(), "<g transform='matrix(1,1,1,1,1,1)'></g>");
+        });
+
+        test("renders children in group group with transformation when transformation matrix is passed", function() {
+            textbox = new TextBox({matrix: matrix});
+            textbox.children = [{
+                render: function() {
+                    return "foo";
+                }
+            }];
+            equal(textbox.render(), "<g transform='matrix(1,1,1,1,1,1)'>foo</g>");
+        });
+
+        test("renders only children when no transformation matrix is passed", function() {
+            textbox = new TextBox();
+            textbox.children = [{
+                render: function() {
+                    return "foo";
+                }
+            }];
+            equal(textbox.render(), "foo");
+        });
     })();
 
     (function() {
