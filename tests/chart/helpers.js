@@ -269,6 +269,14 @@
         ]);
     });
 
+    test("rotate rotates box", function() {
+        box = Box2D(10, 10, 30, 40).rotate(45);
+        equal(box.x1, 10);
+        equal(box.y1, 10);
+        close(box.x2, 45.4, 0.1);
+        close(box.y2, 45.4, 0.1);
+    });
+
     // ------------------------------------------------------------
     var point;
 

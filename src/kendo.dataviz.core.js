@@ -429,6 +429,25 @@ var __meta__ = {
 
         overlaps: function(box) {
             return !(box.y2 < this.y1 || this.y2 < box.y1 || box.x2 < this.x1 || this.x2 < box.x1);
+        },
+
+        rotate: function(rotation) {
+            var box = this;
+            var width = box.width();
+            var height = box.height();
+            var center = box.center();
+            var cx = center.x;
+            var cy = center.y;
+            var r1 = rotatePoint(0, 0, cx, cy, rotation);
+            var r2 = rotatePoint(width, 0, cx, cy, rotation);
+            var r3 = rotatePoint(width, height, cx, cy, rotation);
+            var r4 = rotatePoint(0, height, cx, cy, rotation);
+            var width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
+            var height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
+            box.x2 =  box.x1 + width;
+            box.y2 = box.y1 + height;
+
+            return box;
         }
     };
 
@@ -4062,17 +4081,13 @@ var __meta__ = {
             if (rotation) {
                 var width = size.width,
                     height = size.height,
-                    cx = width / 2,
-                    cy = height / 2,
-                    r1 = rotatePoint(0, 0, cx, cy, rotation),
-                    r2 = rotatePoint(width, 0, cx, cy, rotation),
-                    r3 = rotatePoint(width, height, cx, cy, rotation),
-                    r4 = rotatePoint(0, height, cx, cy, rotation);
+                    box = Box2D(0, 0, width, height);
+                box.rotate(rotation);
 
                 size.normalWidth = width;
                 size.normalHeight = height;
-                size.width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
-                size.height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
+                size.width = box.width();
+                size.height = box.height();
             }
 
             this._cache.put(cacheKey, size);
