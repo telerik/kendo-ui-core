@@ -21,6 +21,7 @@ function ViewStub() {
     log.cubicCurve = [];
     log.multiLine = [];
     log.clipPath = [];
+    log.textbox = [];
 }
 
 ViewStub.prototype = {
@@ -55,6 +56,13 @@ ViewStub.prototype = {
         });
 
         return new kendo.dataviz.ViewElement(style);
+    },
+
+    createTextBox: function(options) {
+        this.log.textbox.push({
+            options: options
+        });
+        return new kendo.dataviz.ViewElement(options);
     },
 
     createGroup: function(options) {

@@ -22,6 +22,7 @@ var __meta__ = {
         map = $.map,
         noop = $.noop,
         indexOf = $.inArray,
+        trim = $.trim,
         math = Math,
         deepExtend = kendo.deepExtend;
 
@@ -1200,23 +1201,119 @@ var __meta__ = {
     });
 
     var TextBox = BoxElement.extend({
+        ROWS_SPLIT_REGEX: /\n/m,
+
         init: function(content, options) {
-            var textBox = this,
-                text;
+            var textbox = this;
+            textbox.content = content;
 
-            BoxElement.fn.init.call(textBox, options);
-            options = textBox.options;
+            BoxElement.fn.init.call(textbox, options);
 
-            text = new Text(content, deepExtend({ }, options, { align: LEFT, vAlign: TOP }));
-            textBox.append(text);
-            textBox.content = content;
+            textbox._initContainer();
 
-            if (textBox.hasBox()) {
-                text.id = uniqueId();
+            textbox.reflow(Box2D());
+        },
+
+        _initContainer: function() {
+            var textbox = this;
+            var options = textbox.options;
+            var rows = (textbox.content + "").split(textbox.ROWS_SPLIT_REGEX);
+            var floatElement = new FloatElement({vertical: true, align: options.align, wrap: false});
+            var textOptions = deepExtend({ }, options, { align: LEFT, vAlign: TOP, rotation: 0});
+            var hasBox = textbox.hasBox();
+            var text;
+            var rowIdx;
+
+            textbox.container = floatElement;
+            textbox.append(floatElement);
+
+            for (rowIdx = 0; rowIdx < rows.length; rowIdx++) {
+                text = new Text(trim(rows[rowIdx]), textOptions);
+                if (hasBox) {
+                    text.id = uniqueId();
+                }
+                floatElement.children.push(text);
+            }
+        },
+
+        reflow: function(targetBox) {
+            var textbox = this;
+            var options = textbox.options;
+            var rotation = options.rotation;
+            var borderWidth = options.border.width;
+            var padding = getSpacing(options.padding);
+            var margin = getSpacing(options.margin);
+            var box = textbox.box;
+            var vAlign = options.vAlign;
+
+            targetBox = targetBox.clone();
+            if (vAlign && box) {
+                textbox.align(targetBox, Y, vAlign);
+                targetBox.snapTo(box, Y);
             }
 
-            // Calculate size
-            textBox.reflow(new Box2D());
+            textbox.container.reflow(targetBox.unpad(borderWidth).unpad(padding).unpad(margin));
+            var containerBox = textbox.container.box.clone();
+
+            if (rotation) {
+                textbox.normalBox = containerBox.clone();
+                containerBox.rotate(rotation);
+            }
+
+            textbox.contentBox = containerBox;
+            textbox.paddingBox = containerBox.clone().pad(borderWidth).pad(padding);
+            textbox.box = textbox.paddingBox.clone().pad(margin);
+        },
+
+        getViewElements: function(view, renderOptions) {
+            var textbox = this;
+            var options = textbox.options;
+            var elements = [];
+            var zIndex;
+            var matrix;
+            var element;
+
+            if (!options.visible) {
+                return [];
+            }
+
+            if (textbox.hasBox()) {
+                var boxOptions = deepExtend(textbox.elementStyle(), renderOptions);
+                zIndex = boxOptions.zIndex;
+                elements.push(
+                    view.createRect(textbox.paddingBox, boxOptions)
+                );
+            }
+
+            if (options.rotation) {
+                matrix = textbox.rotationMatrix();
+            }
+
+            element = view.createTextBox({
+                matrix: matrix,
+                zIndex: zIndex
+            });
+
+            elements.push(element);
+            element.children = ChartElement.fn.getViewElements.call(textbox, view);
+
+            return elements;
+        },
+
+        rotationMatrix: function() {
+            var textbox = this;
+            var options = textbox.options;
+            var normalBox = textbox.normalBox;
+            var center = normalBox.center();
+            var cx = center.x;
+            var cy = center.y;
+            var boxCenter = textbox.box.center();
+            var offsetX = boxCenter.x - cx;
+            var offsetY = boxCenter.y - cy;
+            var matrix = Matrix.translate(offsetX, offsetY)
+                    .times(Matrix.rotate(options.rotation, cx, cy));
+
+            return matrix;
         }
     });
 
