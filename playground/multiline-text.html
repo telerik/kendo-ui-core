@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>MultiLine Text</title>
+        <link href="../dist/styles/dataviz/kendo.dataviz.min.css" rel="stylesheet" />
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+         <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+         <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+    </head>
+    <body>
+  
+    <div id="chart" ></div>
+    <div id="chart1" ></div>
+    <script>
+    $("#chart").kendoChart({
+       // renderAs: "canvas",
+        title: {
+            text: "Site Visitors Stats /thousands/",//text: "Site Visitors \n Stats /thousands/ \n asdasdas \n asdasdasd \n aaaaaaaaaaaa",
+            rotation: 45,
+            //font: "30px arial",
+            padding: 10,
+            margin: 10,
+            border: {
+                width: 3,
+                color: "red"  
+            }
+        },
+        
+        legend: {
+            visible: true,                
+            labels: {
+                border: {
+                    width: 2,
+                    color: "blue"
+                },
+                 padding: 10,
+                // margin: 5,
+                rotation: 30
+            },
+            border: {
+                width: 5,
+                color: "blue"
+            },
+            padding: 50,
+            margin: 50,
+            position: "rigth"
+        },
+        
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                rotation: 30
+            }
+        },
+
+        series: [{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        },{
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        }],   
+        valueAxis: {
+           visible: true,
+           labels: {
+                 rotation: -30,
+                // font: "20px arial"
+            }
+        },
+        categoryAxis: {
+            visible: true,
+            categories: ["ggggggggggGgggggggg \n bbbbbbbbbbbbb", "cccccccc \n ddddddddddd \n eeeeee", "fffffff", "aaaaaaaaaa \n bbbbbbbbbbbbb", "aaaaaaaaaa \n bbbbbbbbbbbbb" ],
+            majorGridLines: {
+                visible: false
+            },
+            labels: {
+                rotation: -30,
+                font: "15px arial",
+                padding: 0,
+                margin: 0,
+                border: {
+                    width: 3,
+                    color: "red"  
+                }
+            }
+        }
+    });
+    
+    $("#chart1").kendoChart({
+        legend: {
+            visible: true,                
+            labels: {
+                rotation: 30
+            },
+            border: {
+                width: 5,
+                color: "blue"
+            },
+            position: "bottom",
+            padding: 5,
+            margin: 5
+        },
+        
+        seriesDefaults: {
+            labels: {
+                visible: false,
+                rotation: 30
+            }
+        },
+
+        series: [{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        },{
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        }],   
+        valueAxis: {
+           visible: true
+        }       
+    });
+
+    </script>
+    </body>
+</html>
