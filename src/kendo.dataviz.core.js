@@ -220,12 +220,13 @@ var __meta__ = {
         },
 
         transform: function(mx) {
-            var point = this;
+            var x = this.x,
+                y = this.y;
 
-            point.x = mx.a * point.x + mx.c * point.y + mx.e;
-            point.y = mx.b * point.x + mx.d * point.y + mx.f;
+            this.x = mx.a * x + mx.c * y + mx.e;
+            this.y = mx.b * x + mx.d * y + mx.f;
 
-            return point;
+            return this;
         }
     };
 

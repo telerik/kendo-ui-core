@@ -345,8 +345,9 @@
     });
 
     test("transform applies matrix", function() {
-        deepEqual(point.transform(Matrix.translate(10, 10)), new Point2D(20, 30));
+        deepEqual(point.transform(new Matrix(1,1,1,1,1,1)), new Point2D(31, 31));
     });
+
 
     test("transform returns point", function() {
         deepEqual(point.transform(Matrix.unit), point);
