@@ -3,11 +3,40 @@
         util = dataviz.util;
 
     // ------------------------------------------------------------
-    module("Helpers");
+    module("Generic Helpers");
 
     test("sqr returns a * a", function() {
         equal(util.sqr(2), 4);
     });
+
+    // ------------------------------------------------------------
+    module("Hashing");
+
+    test("objectKey serializes object key/values", function() {
+        equal(util.objectKey({ foo: true }), "footrue");
+    });
+
+    test("objectKey sorts keys", function() {
+        equal(util.objectKey({ foo: true, bar: false }), "barfalsefootrue");
+    });
+
+    test("hashKey matches pre-computed FNV-1 hashes", function() {
+        equal(util.hashKey("footrue"), 0xBFE48FAB, "Case #1");
+        equal(util.hashKey("barfalse"), 0xEC55C421, "Case #2");
+    });
+
+    test("hashObject matches pre-computed FNV-1 hashes", function() {
+        equal(util.hashObject({ foo: true }), 0xBFE48FAB, "Case #1");
+        equal(util.hashObject({ bar: false }), 0xEC55C421, "Case #2");
+    });
+
+    test("hashObject ignores key order", function() {
+        equal(util.hashObject({ foo: true, bar: false }),
+              util.hashObject({ bar: false, foo: true }));
+    });
+
+    // ------------------------------------------------------------
+    module("Array Helpers");
 
     test("arrayLimits returns the minimum and maximum number in an array", function() {
         var result = util.arrayLimits([5, -1, 4, 7, 2]);
