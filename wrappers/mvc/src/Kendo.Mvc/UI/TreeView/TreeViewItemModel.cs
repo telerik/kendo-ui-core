@@ -27,6 +27,8 @@ namespace Kendo.Mvc.UI
 
         public string Text { get; set; }
 
+        public string SpriteCssClass { get; set; }
+
         public string Id { get; set; }
 
         public string Url { get; set; }

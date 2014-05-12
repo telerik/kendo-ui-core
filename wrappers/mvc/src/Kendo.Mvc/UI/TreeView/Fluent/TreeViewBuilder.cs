@@ -263,6 +263,7 @@ namespace Kendo.Mvc.UI.Fluent
                         item.Id = node.Id;
                         item.Checked = node.Checked;
                         item.Selected = node.Selected;
+                        item.SpriteCssClasses = node.SpriteCssClass;
 
                         item.Url = node.Url;
                         item.ImageUrl = node.ImageUrl;
