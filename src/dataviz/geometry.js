@@ -179,6 +179,14 @@
         }
     };
 
+    Point.min = function(p0, p1) {
+        return new Point(math.min(p0.x, p1.x), math.min(p0.y, p1.y));
+    };
+
+    Point.max = function(p0, p1) {
+        return new Point(math.max(p0.x, p1.x), math.max(p0.y, p1.y));
+    }
+
     Point.minPoint = function() {
         return new Point(util.MIN_NUM, util.MIN_NUM);
     };
@@ -213,6 +221,13 @@
 
         center: function() {
             return new Point(this.p0.x  + this.width() / 2, this.p0.y  + this.height() / 2);
+        },
+
+        bbox: function(matrix) {
+            var p0 = this.p0.transformCopy(matrix);
+            var p1 = this.p1.transformCopy(matrix);
+
+            return new Rect(Point.min(p0, p1), Point.max(p0, p1));
         }
     });
 

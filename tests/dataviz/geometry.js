@@ -12,10 +12,10 @@
     function compareBoundingBox(bbox, values, tolerance) {
         tolerance = tolerance || 0;
 
-        close(bbox.p0.x, values[0], tolerance);
-        close(bbox.p0.y, values[1], tolerance);
-        close(bbox.p1.x, values[2], tolerance);
-        close(bbox.p1.y, values[3], tolerance);
+        close(bbox.p0.x, values[0], tolerance, "p0.x");
+        close(bbox.p0.y, values[1], tolerance, "p0.y");
+        close(bbox.p1.x, values[2], tolerance, "p1.x");
+        close(bbox.p1.y, values[3], tolerance, "p1.y");
     }
 
     // ------------------------------------------------------------
@@ -326,21 +326,17 @@
         equal(point.toString(1), "10.6 20.6");
     });
 
-    test("min returns a new point with minmum x y", function() {
-        point.x = 10;
-        point.y = 20;
-        var other = new Point(20, 10),
-            minPoint = point.min(other);
+    test("Point.min returns a new point with minmum x y", function() {
+        var other = new Point(20, 10);
+        var minPoint = Point.min(point, other);
 
         equal(minPoint.x, 10);
         equal(minPoint.y, 10);
     });
 
-    test("max returns a new point with maximum x y", function() {
-        point.x = 10;
-        point.y = 20;
-        var other = new Point(20, 10),
-            maxPoint = point.max(other);
+    test("Point.max returns a new point with maximum x y", function() {
+        var other = new Point(20, 10);
+        var maxPoint = Point.max(point, other);
 
         equal(maxPoint.x, 20);
         equal(maxPoint.y, 20);
@@ -405,6 +401,16 @@
 
     test("center returns center point", function() {
         deepEqual(rect.center(), new Point(5,10));
+    });
+
+    test("boundingBox returns the bounding Rect", function() {
+        var bbox = rect.bbox();
+        compareBoundingBox(rect, [0, 0, 10, 20]);
+    });
+
+    test("boundingBox returns the transformed bounding Rect", function() {
+        var bbox = rect.bbox(Matrix.scale(2,1));
+        compareBoundingBox(bbox, [0, 0, 20, 20]);
     });
 
     // ------------------------------------------------------------
