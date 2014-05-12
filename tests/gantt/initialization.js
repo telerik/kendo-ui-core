@@ -48,8 +48,8 @@
     test("footer is created", 2, function() {
         var gantt = new Gantt(element);
 
-        ok(gantt.wrapper.find(".k-gantt-footer").length);
-        equal(gantt.wrapper.find(".k-gantt-footer")[0], gantt.footer[0]);
+        ok(gantt.wrapper.find(".k-gantt-toolbar").length);
+        equal(gantt.wrapper.find(".k-gantt-toolbar")[1], gantt.footer[0]);
     });
 
     test("view buttons are added to the toolbar", 2, function() {

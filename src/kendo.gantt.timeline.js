@@ -79,9 +79,9 @@ var __meta__ = {
 
             this.title = this.options.title || this.options.name;
 
-            this.header = this.element.find(".k-gantt-timeline-header-wrap");
+            this.header = this.element.find(".k-grid-header-wrap");
 
-            this.content = this.element.find(".k-gantt-timeline-content");
+            this.content = this.element.find(".k-grid-content");
 
             this.contentWidth = this.content.width();
 
@@ -1060,8 +1060,8 @@ var __meta__ = {
 
         _wrapper: function() {
             this.wrapper = this.element
-                .append("<div class='k-gantt-timeline-header k-grid-header'><div class='k-gantt-timeline-header-wrap k-grid-header-wrap'></div></div>")
-                .append("<div class='k-gantt-timeline-content k-grid-content'><div class='k-gantt-timeline-tasks'></div><div class='k-gantt-timeline-dependencies'></div></div>");
+                .append("<div class='k-grid-header'><div class='k-grid-header-wrap'></div></div>")
+                .append("<div class='k-grid-content'><div class='k-gantt-timeline-tasks'></div><div class='k-gantt-timeline-dependencies'></div></div>");
 
             this.element.append(this.wrapper);
         },
@@ -1070,7 +1070,7 @@ var __meta__ = {
             var tree = kendo.dom.Tree;
             var wrapper = this.wrapper;
 
-            this._headerTree = new tree(wrapper.find(".k-gantt-timeline-header-wrap")[0]);
+            this._headerTree = new tree(wrapper.find(".k-grid-header-wrap")[0]);
 
             this._taskTree = new tree(wrapper.find(".k-gantt-timeline-tasks")[0]);
 

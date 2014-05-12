@@ -48,14 +48,14 @@
     test("header wrap added to wrapper", 2, function() {
         timeline = new Timeline(element);
 
-        ok(timeline.wrapper.find(".k-gantt-timeline-header".length));
-        ok(timeline.wrapper.find(".k-gantt-timeline-header-wrap".length));
+        ok(timeline.wrapper.find(".k-grid-header").length);
+        ok(timeline.wrapper.find(".k-grid-header-wrap").length);
     });
 
     test("content wrap added to wrapper", function() {
         timeline = new Timeline(element);
 
-        ok(timeline.wrapper.find(".k-gantt-timeline-content".length));
+        ok(timeline.wrapper.find(".k-grid-content").length);
     });
 
     test("day, week and month views are set by default", 3, function() {
@@ -128,11 +128,11 @@
         setup: function() {
             element = $(
                 "<div>\
-                    <div class='k-gantt-timeline-header'>\
-                        <div class='k-gantt-timeline-header-wrap'>\
+                    <div class='k-grid-header'>\
+                        <div class='k-grid-header-wrap'>\
                         </div>\
                     </div>\
-                    <div class='k-gantt-timeline-content'>\
+                    <div class='k-grid-content'>\
                         <div class='k-gantt-timeline-tasks'>\
                         </div>\
                         <div class='k-gantt-timeline-dependencies'>\
@@ -140,7 +140,7 @@
                     </div>\
                 </div>");
 
-            headerTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-header-wrap")[0]);
+            headerTree = new kendo.dom.Tree(element.find(".k-grid-header-wrap")[0]);
             taskTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-tasks")[0]);
             dependencyTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-dependencies")[0]);
         },
@@ -164,13 +164,13 @@
     test("header field initialized", function() {
         view = dayView();
 
-        equal(view.header[0], element.find(".k-gantt-timeline-header-wrap")[0]);
+        equal(view.header[0], element.find(".k-grid-header-wrap")[0]);
     });
 
     test("content field initialized", function() {
         view = dayView();
 
-        equal(view.content[0], element.find(".k-gantt-timeline-content")[0]);
+        equal(view.content[0], element.find(".k-grid-content")[0]);
     });
 
     test("work days initialized", 4, function() {
@@ -621,11 +621,11 @@
         setup: function() {
             element = $(
                 "<div>\
-                    <div class='k-gantt-timeline-header'>\
-                        <div class='k-gantt-timeline-header-wrap'>\
+                    <div class='k-grid-header'>\
+                        <div class='k-grid-header-wrap'>\
                         </div>\
                     </div>\
-                    <div class='k-gantt-timeline-content'>\
+                    <div class='k-grid-content'>\
                         <div class='k-gantt-timeline-tasks'>\
                         </div>\
                         <div class='k-gantt-timeline-dependencies'>\
@@ -633,7 +633,7 @@
                     </div>\
                 </div>");
 
-            headerTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-header-wrap")[0]);
+            headerTree = new kendo.dom.Tree(element.find(".k-grid-header-wrap")[0]);
             taskTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-tasks")[0]);
             dependencyTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-dependencies")[0]);
         },
@@ -657,13 +657,13 @@
     test("header field initialized", function() {
         view = weekView();
 
-        equal(view.header[0], element.find(".k-gantt-timeline-header-wrap")[0]);
+        equal(view.header[0], element.find(".k-grid-header-wrap")[0]);
     });
 
     test("content field initialized", function() {
         view = weekView();
 
-        equal(view.content[0], element.find(".k-gantt-timeline-content")[0]);
+        equal(view.content[0], element.find(".k-grid-content")[0]);
     });
 
     test("work days initialized", 4, function() {
@@ -911,11 +911,11 @@
         setup: function() {
             element = $(
                 "<div>\
-                    <div class='k-gantt-timeline-header'>\
-                        <div class='k-gantt-timeline-header-wrap'>\
+                    <div class='k-grid-header'>\
+                        <div class='k-grid-header-wrap'>\
                         </div>\
                     </div>\
-                    <div class='k-gantt-timeline-content'>\
+                    <div class='k-grid-content'>\
                         <div class='k-gantt-timeline-tasks'>\
                         </div>\
                         <div class='k-gantt-timeline-dependencies'>\
@@ -923,7 +923,7 @@
                     </div>\
                 </div>");
 
-            headerTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-header-wrap")[0]);
+            headerTree = new kendo.dom.Tree(element.find(".k-grid-header-wrap")[0]);
             taskTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-tasks")[0]);
             dependencyTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-dependencies")[0]);
         },
@@ -947,13 +947,13 @@
     test("header field initialized", function() {
         view = monthView();
 
-        equal(view.header[0], element.find(".k-gantt-timeline-header-wrap")[0]);
+        equal(view.header[0], element.find(".k-grid-header-wrap")[0]);
     });
 
     test("content field initialized", function() {
         view = monthView();
 
-        equal(view.content[0], element.find(".k-gantt-timeline-content")[0]);
+        equal(view.content[0], element.find(".k-grid-content")[0]);
     });
 
     test("work days initialized", 4, function() {

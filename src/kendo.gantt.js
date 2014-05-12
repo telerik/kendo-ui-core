@@ -33,8 +33,7 @@ var __meta__ = {
             position: "bottom center"
         }
     };
-    var TOOLBAR_CLASS_NAMES = "k-floatwrap k-header k-gantt-toolbar k-scheduler-toolbar";
-    var FOOTER_CLASS_NAMES = "k-floatwrap k-header k-gantt-footer k-scheduler-footer";
+    var TOOLBAR_CLASS_NAMES = "k-floatwrap k-header k-gantt-toolbar";
     var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
     var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
     var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
@@ -679,9 +678,9 @@ var __meta__ = {
 
             this.wrapper = this.element
                             .addClass("k-widget k-gantt")
-                            .append("<div class='k-gantt-layout k-gantt-treelist'><div class='k-grid k-widget'></div></div>")
+                            .append("<div class='k-gantt-layout k-gantt-treelist'><div class='k-treelist k-grid k-widget'></div></div>")
                             .append("<div class='k-splitbar k-state-default k-splitbar-horizontal k-splitbar-draggable-horizontal k-gantt-layout' role='separator'><div class='k-icon k-resize-handle'></div></div>")
-                            .append("<div class='k-gantt-layout k-gantt-grid'><div class='k-widget k-gantt-timeline k-grid'></div></div>");
+                            .append("<div class='k-gantt-layout k-gantt-timeline'><div class='k-timeline k-grid k-widget'></div></div>");
 
             if (height) {
                 this.wrapper.height(height);
@@ -730,7 +729,7 @@ var __meta__ = {
 
         _footer: function() {
             var footer = $(FOOTER_TEMPLATE({
-                styles: FOOTER_CLASS_NAMES,
+                styles: TOOLBAR_CLASS_NAMES,
                 action: {
                     data: "add",
                     title: this.options.messages.actions.append
@@ -838,7 +837,7 @@ var __meta__ = {
         _timeline: function() {
             var that = this;
             var options = trimOptions(extend(true, {}, this.options));
-            var element = this.wrapper.find(".k-gantt-timeline");
+            var element = this.wrapper.find(".k-timeline");
 
             this.timeline = new kendo.ui.GanttTimeline(element, options);
 
