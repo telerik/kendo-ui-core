@@ -50,6 +50,12 @@ namespace Kendo.Mvc.UI
         
         public double? ZoomRate { get; set; }
         
+        public double? Zoom { get; set; }
+        
+        public double? ZoomMin { get; set; }
+        
+        public double? ZoomMax { get; set; }
+        
         public DiagramEditableSettings Editable
         {
             get;
@@ -115,6 +121,21 @@ namespace Kendo.Mvc.UI
             if (ZoomRate.HasValue)
             {
                 json["zoomRate"] = ZoomRate;
+            }
+                
+            if (Zoom.HasValue)
+            {
+                json["zoom"] = Zoom;
+            }
+                
+            if (ZoomMin.HasValue)
+            {
+                json["zoomMin"] = ZoomMin;
+            }
+                
+            if (ZoomMax.HasValue)
+            {
+                json["zoomMax"] = ZoomMax;
             }
                 
             if (Draggable.HasValue)

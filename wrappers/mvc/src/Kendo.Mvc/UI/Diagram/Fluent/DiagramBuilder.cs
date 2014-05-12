@@ -35,13 +35,45 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The scaling factor or the zoom when using the mouse-wheel to zoom in or out.
-		/// If zoomRate is less than 1, zooming will be reversed.
+        /// The zoom step when using the mouse-wheel to zoom in or out.
         /// </summary>
         /// <param name="value">The value that configures the zoomrate.</param>
         public DiagramBuilder ZoomRate(double value)
         {
             container.ZoomRate = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The zoom level in percentages.
+        /// </summary>
+        /// <param name="value">The value that configures the zoom.</param>
+        public DiagramBuilder Zoom(double value)
+        {
+            container.Zoom = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The zoom min level in percentages.
+        /// </summary>
+        /// <param name="value">The value that configures the zoommin.</param>
+        public DiagramBuilder ZoomMin(double value)
+        {
+            container.ZoomMin = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The zoom max level in percentages.
+        /// </summary>
+        /// <param name="value">The value that configures the zoommax.</param>
+        public DiagramBuilder ZoomMax(double value)
+        {
+            container.ZoomMax = value;
 
             return this;
         }
