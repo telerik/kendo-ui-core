@@ -43,7 +43,7 @@
 */
             var dataSource = new kendo.data.PivotDataSource({
                 type: "xmla",
-                columns: [{ name: "[Date].[Calendar]", expand: false },{ name: "[Geography].[City]", expand: true }/*, { name: "[Customer].[Gender]", expand: false }*/],
+                columns: [{ name: "[Date].[Calendar].[Year].&[2006]", expand: true },{ name: "[Geography].[City]", expand: true }/*, { name: "[Customer].[Gender]", expand: false }*/],
                 rows: [ { name: "[Product].[Product Name]", expand: true }, { name: "[Product].[Category]", expand: true }],
                 measures: ["[Measures].[Internet Order Lines Count]"/*, "[Measures].[Internet Total Product Cost]"*/],
                 transport: {

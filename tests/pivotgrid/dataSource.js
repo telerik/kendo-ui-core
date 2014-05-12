@@ -271,13 +271,6 @@
        ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS,[foo].[ALL].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 
-    test("parameterMap leafs are not expanded", function() {
-        var transport = new kendo.data.XmlaTransport({ });
-       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[foo].&[bar]", expand: true }] }, "read");
-
-       ok(params.indexOf('SELECT NON EMPTY {[foo].&amp;[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
-    });
-
     test("parameterMap row is expanded", function() {
        var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]", expand: true }] }, "read");
@@ -362,6 +355,19 @@
 
         ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[(ALL)].MEMBERS}),' +
             'CROSSJOIN({[foo].[ALL].Children},{[bar].[(ALL)].MEMBERS})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+            'FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap leaf is cross joined with one expanded", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo].&[baz]", expand: true }, { name: "[bar]" }]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].&amp;[baz]},{[bar].[(ALL)].MEMBERS}),' +
+            'CROSSJOIN({[foo].&amp;[baz].Children},{[bar].[(ALL)].MEMBERS})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
             'FROM [cubeName]') > -1);
     });
 

@@ -154,12 +154,14 @@ var __meta__ = {
         return transformDescriptors(members, function(member) {
             var name = member.name;
 
-            if (name.indexOf("&") == -1) {
-                if (member.expand && name === memberName) {
-                    name += ".[ALL].Children";
-                } else {
-                    name += ".[(ALL)].MEMBERS";
+            if (member.expand && name === memberName) {
+                if (name.indexOf("&") == -1) {
+                    name += ".[ALL]";
                 }
+                name += ".Children";
+
+            } else if (name.indexOf("&") == -1) {
+                name += ".[(ALL)].MEMBERS";
             }
 
             return name;
@@ -170,12 +172,13 @@ var __meta__ = {
         return transformDescriptors(members, function(member) {
             var name = member.name;
 
-            if (name.indexOf("&") == -1) {
-                if (member.expand) {
-                    name += ".[ALL].Children";
-                } else {
-                    name += ".[(ALL)].MEMBERS";
+            if (member.expand) {
+                if (name.indexOf("&") == -1) {
+                    name += ".[ALL]";
                 }
+                name += ".Children";
+            } else if (name.indexOf("&") == -1) {
+                name += ".[(ALL)].MEMBERS";
             }
             return name;
         });
@@ -221,7 +224,7 @@ var __meta__ = {
         var result = [];
 
         for (var idx = 0; idx < members.length; idx++) {
-            if (members[idx].name.indexOf("&") == -1 && members[idx].expand) {
+            if (members[idx].expand) {
                 result.push(members[idx]);
             }
         }
