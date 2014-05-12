@@ -122,12 +122,11 @@
     @if (ViewBag.ShowCodeStrip == true)
     {
         <div id="codeStrip">
-            @if (!string.IsNullOrEmpty(ViewBag.Api))
+            @if(ViewBag.Product == "kendo-ui")
             {
-                <a class="documentation-link k-link" href="@ViewBag.Api">API Reference</a>
+                <button class="try-kendo"><span class="k-icon"></span>Edit this example</button>
             }
-
-            @if (ViewBag.Product == "kendo-ui")
+            @if (!string.IsNullOrEmpty(ViewBag.Documentation))
             {
                 <button class="try-kendo"><span class="k-icon"></span>Edit this example</button>
             }
