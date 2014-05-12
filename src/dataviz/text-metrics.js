@@ -91,11 +91,7 @@
                 return cachedResult;
             }
 
-            var size = {
-                width: 0,
-                height: 0,
-                baseline: 0
-            };
+            var size = { width: 0, height: 0, baseline: 0 };
 
             var measureBox = this._measureBox,
                 baselineMarker = this._baselineMarker.cloneNode(false);
@@ -109,11 +105,9 @@
             doc.body.appendChild(measureBox);
 
             if ((text + "").length) {
-                size = {
-                    width: measureBox.offsetWidth - BASELINE_MARKER_SIZE,
-                    height: measureBox.offsetHeight,
-                    baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
-                };
+                size.width = measureBox.offsetWidth - BASELINE_MARKER_SIZE;
+                size.height = measureBox.offsetHeight;
+                size.baseline = baselineMarker.offsetTop + BASELINE_MARKER_SIZE;
             }
 
             this._cache.put(cacheKey, size);
