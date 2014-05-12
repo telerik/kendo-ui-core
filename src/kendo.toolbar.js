@@ -240,8 +240,7 @@ var __meta__ = {
 
         var ToolBar = Widget.extend({
             init: function(element, options) {
-                var that = this,
-                    overflowAnchor;
+                var that = this;
 
                 Widget.fn.init.call(that, element, options);
 
@@ -287,8 +286,8 @@ var __meta__ = {
                     $(element).data("kendoPopup").destroy();
                 });
 
-                if (this._overflow) {
-                    this._overflow.destroy();
+                if (this.popup) {
+                    this.popup.destroy();
                 }
 
                 Widget.fn.destroy.call(this);
@@ -299,7 +298,7 @@ var __meta__ = {
 
                 this.element.append(overflowAnchor);
 
-                this._overflow = new kendo.ui.Popup(templates.overflowContainer, {
+                this.popup = new kendo.ui.Popup(templates.overflowContainer, {
                     anchor: overflowAnchor
                 });
             },
@@ -326,7 +325,7 @@ var __meta__ = {
                     }
 
                     if (element.length) {
-                        element.appendTo(this._overflow.element);
+                        element.appendTo(this.popup.element);
 
                         if (element.data("overflow") === OVERFLOW_AUTO) {
                             element.addClass(OVERFLOW_HIDDEN);
@@ -423,8 +422,7 @@ var __meta__ = {
             },
 
             _toggleOverflow: function() {
-                var popup = this._overflow;
-                popup.toggle();
+                this.popup.toggle();
             },
 
             _resize: function(e) {
@@ -458,7 +456,7 @@ var __meta__ = {
                 if(item.data("overflow") !== OVERFLOW_NEVER) {
                     item.hide();
                     //connect commands with uids
-                    this._overflow.element.find(">li.k-overflow-hidden").last().removeClass(OVERFLOW_HIDDEN);
+                    this.popup.element.find(">li.k-overflow-hidden").last().removeClass(OVERFLOW_HIDDEN);
                 }
             },
 
@@ -466,7 +464,7 @@ var __meta__ = {
                 if(containerWidth > this._childrenWidth() + item.outerWidth(true)) {
                     item.show();
                     //connect commands with uids
-                    this._overflow.element.find(">li:not(.k-overflow-hidden)").first().addClass(OVERFLOW_HIDDEN);
+                    this.popup.element.find(">li:not(.k-overflow-hidden)").first().addClass(OVERFLOW_HIDDEN);
                 }
             }
 

@@ -269,7 +269,7 @@
         }).data("kendoToolBar");
 
         ok(container.find(".k-button").length);
-        ok(toolbar._overflow.element.find(".k-button").length);
+        ok(toolbar.popup.element.find(".k-button").length);
     });
 
     test("button element with overflow: never is not rendered in the overflow popup", 2, function() {
@@ -280,7 +280,7 @@
         }).data("kendoToolBar");
 
         ok(container.find(".k-button").length);
-        ok(!toolbar._overflow.element.find(".k-button").length);
+        ok(!toolbar.popup.element.find(".k-button").length);
     });
 
     test("button element with overflow: always is not rendered in the toolbar container", 2, function() {
@@ -291,7 +291,7 @@
         }).data("kendoToolBar");
 
         ok(!container.find(".k-button").length);
-        ok(toolbar._overflow.element.find(".k-button").length);
+        ok(toolbar.popup.element.find(".k-button").length);
     });
 
     test("button element in overflow popup has class k-overflow-button", 1, function() {
@@ -301,7 +301,7 @@
             ]
         }).data("kendoToolBar");
 
-        ok(toolbar._overflow.element.find(".k-overflow-button").length);
+        ok(toolbar.popup.element.find(".k-overflow-button").length);
     });
 
     test("botton element in overflow popup is wrapped inside a <li> tag", 1, function() {
@@ -311,7 +311,7 @@
             ]
         }).data("kendoToolBar");
 
-        var button = toolbar._overflow.element.find(".k-overflow-button");
+        var button = toolbar.popup.element.find(".k-overflow-button");
 
         equal(button.parent().prop("tagName"), "LI");
     });
@@ -641,8 +641,8 @@
     test("initializes command overflow popup", 2, function() {
         var toolbar = container.kendoToolBar().data("kendoToolBar");
 
-        ok(toolbar._overflow instanceof kendo.ui.Popup);
-        ok(toolbar._overflow.element.length);
+        ok(toolbar.popup instanceof kendo.ui.Popup);
+        ok(toolbar.popup.element.length);
     });
 
     test("does not initiaze popup if resizable is set to false", 1, function() {
@@ -650,7 +650,7 @@
             resizable: false
         }).data("kendoToolBar");
 
-        ok(!toolbar._overflow);
+        ok(!toolbar.popup);
     });
 
     test("button's wrapper with overflow: auto has k-overflow-hidden class", 2, function() {
@@ -660,7 +660,7 @@
             ]
         }).data("kendoToolBar");
 
-        var wrapper = toolbar._overflow.element.find(".k-button").parent();
+        var wrapper = toolbar.popup.element.find(".k-button").parent();
         ok(wrapper.hasClass("k-overflow-hidden"));
         ok(wrapper.is(":hidden"));
     });
@@ -672,7 +672,7 @@
             ]
         }).data("kendoToolBar");
 
-        var wrapper = toolbar._overflow.element.find(".k-button").parent();
+        var wrapper = toolbar.popup.element.find(".k-button").parent();
         ok(!wrapper.hasClass("k-overflow-hidden"));
     });
 
