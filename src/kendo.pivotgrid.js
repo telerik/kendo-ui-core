@@ -336,7 +336,7 @@ var __meta__ = {
         var levelNameGetter = kendo.getter("LName['#text']");
         var levelNumGetter = kendo.getter("LNum['#text']");
         var childrenGetter = kendo.getter("CHILDREN_CARDINALITY['#text']", true);
-        var hierarchyGetter = kendo.getter("['Hierarchy']");
+        var hierarchyGetter = kendo.getter("['@Hierarchy']");
         var parentNameGetter = kendo.getter("PARENT_UNIQUE_NAME['#text']", true);
 
         for (var idx = 0; idx < tuples.length; idx++) {
