@@ -69,7 +69,9 @@ data source is fired. By default the widget will bind to the data source specifi
 
     /**
     * Sets the dateHeaderTemplate option of the Scheduler.
-    * The template used to render the date header cells.By default the scheduler renders the date using the current culture date format.The fields which can be used in the template are:
+    * The template used to render the date header cells.By default the scheduler renders the date using a custom date format - "ddd M/dd".
+The "ddd" specifier, a.k.a abbreviated name of the week day, will be localized using the current Kendo UI culture.
+If the developer wants to control the day and month order then one needs to define a custom template.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\Scheduler
     */
@@ -81,7 +83,9 @@ data source is fired. By default the widget will bind to the data source specifi
 
     /**
     * Sets the dateHeaderTemplate option of the Scheduler.
-    * The template used to render the date header cells.By default the scheduler renders the date using the current culture date format.The fields which can be used in the template are:
+    * The template used to render the date header cells.By default the scheduler renders the date using a custom date format - "ddd M/dd".
+The "ddd" specifier, a.k.a abbreviated name of the week day, will be localized using the current Kendo UI culture.
+If the developer wants to control the day and month order then one needs to define a custom template.The fields which can be used in the template are:
     * @param string $value The template content.
     * @return \Kendo\UI\Scheduler
     */
@@ -478,7 +482,7 @@ That way all users would see the same dates and times no matter their configured
 
     /**
     * Sets the navigate event of the Scheduler.
-    * Fired when the user changes selected date, view or of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.
+    * Fired when the user changes the selected date, or view of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Scheduler
     */

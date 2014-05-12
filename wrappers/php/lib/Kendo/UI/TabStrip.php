@@ -144,6 +144,15 @@ tab.
     }
 
     /**
+    * Specifies whether the TabStrip should be keyboard navigatable.
+    * @param boolean $value
+    * @return \Kendo\UI\TabStrip
+    */
+    public function navigatable($value) {
+        return $this->setProperty('navigatable', $value);
+    }
+
+    /**
     * Adds TabStripItem to the TabStrip.
     * @param \Kendo\UI\TabStripItem|array,... $value one or more TabStripItem to add.
     * @return \Kendo\UI\TabStrip

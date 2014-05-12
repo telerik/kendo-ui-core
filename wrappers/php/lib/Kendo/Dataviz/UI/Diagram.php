@@ -19,13 +19,39 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The scaling factor or the zoom when using the mouse-wheel to zoom in or out.
-If zoomRate is less than 1, zooming will be reversed.
+    * The zoom step when using the mouse-wheel to zoom in or out.
     * @param float $value
     * @return \Kendo\Dataviz\UI\Diagram
     */
     public function zoomRate($value) {
         return $this->setProperty('zoomRate', $value);
+    }
+
+    /**
+    * The zoom level in percentages.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function zoom($value) {
+        return $this->setProperty('zoom', $value);
+    }
+
+    /**
+    * The zoom min level in percentages.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function zoomMin($value) {
+        return $this->setProperty('zoomMin', $value);
+    }
+
+    /**
+    * The zoom max level in percentages.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function zoomMax($value) {
+        return $this->setProperty('zoomMax', $value);
     }
 
     /**

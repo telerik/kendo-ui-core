@@ -16,7 +16,7 @@ class NotificationTemplate extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the NotificationTemplate.
-    * Defines a Kendo UI template to be used with the corresponding notification type. Either templates.template or templates.templateId must be set.See the example above.
+    * Defines a Kendo UI template to be used with the corresponding notification type.See the example above.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\NotificationTemplate
     */
@@ -28,7 +28,7 @@ class NotificationTemplate extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the NotificationTemplate.
-    * Defines a Kendo UI template to be used with the corresponding notification type. Either templates.template or templates.templateId must be set.See the example above.
+    * Defines a Kendo UI template to be used with the corresponding notification type.See the example above.
     * @param string $value The template content.
     * @return \Kendo\UI\NotificationTemplate
     */

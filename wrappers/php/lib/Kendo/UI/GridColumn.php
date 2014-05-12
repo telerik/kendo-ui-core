@@ -109,6 +109,15 @@ custom number format, standard date format or a custom date format.
     }
 
     /**
+    * If set to false the column will not be groupable (requires Grid groupable property to be enabled). By default all columns are groupable
+    * @param boolean $value
+    * @return \Kendo\UI\GridColumn
+    */
+    public function groupable($value) {
+        return $this->setProperty('groupable', $value);
+    }
+
+    /**
     * Sets the groupHeaderTemplate option of the GridColumn.
     * The template which renders the group header when the grid is grouped by the column field. By default the name of the field
 and the current group value is displayed.The fields which can be used in the template are:

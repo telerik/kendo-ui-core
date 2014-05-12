@@ -20,7 +20,7 @@ This class can be used to obtain reference to the button after Grid initializati
 
     /**
     * Sets the template option of the GridToolbarItem.
-    * The template which renders the command. Be default renders a button.
+    * The template which renders the command. By default renders a button.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridToolbarItem
     */
@@ -32,7 +32,7 @@ This class can be used to obtain reference to the button after Grid initializati
 
     /**
     * Sets the template option of the GridToolbarItem.
-    * The template which renders the command. Be default renders a button.
+    * The template which renders the command. By default renders a button.
     * @param string $value The template content.
     * @return \Kendo\UI\GridToolbarItem
     */
