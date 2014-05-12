@@ -72,7 +72,7 @@ var __meta__ = {
         return workDays;
     }
 
-    var View = Widget.extend({
+    var GanttView = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
@@ -130,10 +130,10 @@ var __meta__ = {
         _templates: function() {
             var options = this.options;
 
-            this.timeHeaderTemplate = kendo.template(options.timeHeaderTemplate, kendo.Template);
-            this.dayHeaderTemplate = kendo.template(options.dayHeaderTemplate, kendo.Template);
-            this.weekHeaderTemplate = kendo.template(options.weekHeaderTemplate, kendo.Template);
-            this.monthHeaderTemplate = kendo.template(options.monthHeaderTemplate, kendo.Template);
+            this.timeHeaderTemplate = kendo.template(options.timeHeaderTemplate);
+            this.dayHeaderTemplate = kendo.template(options.dayHeaderTemplate);
+            this.weekHeaderTemplate = kendo.template(options.weekHeaderTemplate);
+            this.monthHeaderTemplate = kendo.template(options.monthHeaderTemplate);
         },
 
         renderLayout: function() {
@@ -412,25 +412,14 @@ var __meta__ = {
             var predecessor = this._taskCoordinates[dependency.predecessorId];
             var successor = this._taskCoordinates[dependency.successorId];
             var elements;
+            var method;
 
             if (!predecessor || !successor) {
                 return [];
             }
 
-            switch (dependency.type) {
-                case 0:
-                    elements = this._renderFF(predecessor, successor);
-                    break;
-                case 1:
-                    elements = this._renderFS(predecessor, successor);
-                    break;
-                case 2:
-                    elements = this._renderSF(predecessor, successor);
-                    break;
-                case 3:
-                    elements = this._renderSS(predecessor, successor);
-                    break;
-            }
+            method = "_render" + ["FF", "FS", "SF", "SS"][dependency.type];
+            elements = this[method](predecessor, successor);
 
             for (var i = 0, length = elements.length; i < length; i++) {
                 elements[i].attr["data-uid"] = dependency.uid;
@@ -899,7 +888,7 @@ var __meta__ = {
         }
     });
 
-    kendo.ui.GanttDayView = View.extend({
+    kendo.ui.GanttDayView = GanttView.extend({
         name: "day",
 
         range: function(range) {
@@ -952,7 +941,7 @@ var __meta__ = {
         }
     });
 
-    kendo.ui.GanttWeekView = View.extend({
+    kendo.ui.GanttWeekView = GanttView.extend({
         name: "week",
 
         range: function(range) {
@@ -982,7 +971,7 @@ var __meta__ = {
         }
     });
 
-    kendo.ui.GanttMonthView = View.extend({
+    kendo.ui.GanttMonthView = GanttView.extend({
         name: "month",
 
         range: function(range) {
