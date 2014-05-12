@@ -242,7 +242,9 @@ var __meta__ = {
 
             if (expandedColumns.length) {
                 command += ",";
-                for (var idx = 1; idx < expandedColumns.length; idx++) {
+                var start = expandedColumns.length > 1 ? 0 : 1;
+
+                for (var idx = start; idx < expandedColumns.length; idx++) {
                     command += crossJoinCommand(expandMemberDescriptor(members, expandedColumns[idx].name), measures);
                     command += ",";
                 }
