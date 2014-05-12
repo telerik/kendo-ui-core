@@ -128,7 +128,7 @@
             }
             @if (!string.IsNullOrEmpty(ViewBag.Documentation))
             {
-                <button class="try-kendo"><span class="k-icon"></span>Edit this example</button>
+                <a class="documentation-link k-link" href="@ViewBag.Documentation">Documentation</a>
             }
 
             @{

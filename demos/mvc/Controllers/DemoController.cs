@@ -59,7 +59,27 @@ namespace Kendo.Controllers
                 }
             }
 
-            ViewBag.Documentation = ViewBag.CurrentExample.Documentation ?? ViewBag.CurrentWidget.Documentation;
+            var documentation = ViewBag.CurrentExample.Documentation ?? ViewBag.CurrentWidget.Documentation;
+
+            if (!string.IsNullOrEmpty(documentation))
+            {
+                if (product == "kendo-ui")
+                {
+                    ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/api/" + documentation;
+                }
+                else if (product == "php-ui")
+                {
+                    ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/api/wrappers/php/kendo/ui" + Regex.Replace(documentation, "(web|dataviz|mobile)", "");
+                }
+                else if (product == "jsp-ui")
+                {
+                    ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/api/wrappers/jsp" + Regex.Replace(documentation, "(web|dataviz|mobile)", "");
+                }
+                else if (product == "aspnet-mvc")
+                {
+                    ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/api/wrappers/aspnet-mvc/kendo.mvc.ui.fluent" + Regex.Replace(documentation, "(web|dataviz|mobile)", "") + "builder";
+                }
+            }
 
             return View(
                 string.Format("~/Views/demos/{0}/{1}.cshtml", section, example)
