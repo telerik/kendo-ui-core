@@ -142,14 +142,6 @@
             this.x = round(this.x, precision);
             this.y = round(this.y, precision);
             return this;
-        },
-
-        min: function(point) {
-            return new Point(math.min(this.x, point.x), math.min(this.y, point.y));
-        },
-
-        max: function(point) {
-            return new Point(math.max(this.x, point.x), math.max(this.y, point.y));
         }
     });
 
@@ -216,7 +208,7 @@
         },
 
         wrap: function(targetRect) {
-            return new Rect(this.p0.min(targetRect.p0), this.p1.max(targetRect.p1));
+            return new Rect(Point.min(this.p0, targetRect.p0), Point.max(this.p1, targetRect.p1));
         },
 
         center: function() {
@@ -277,8 +269,8 @@
                 var currentPointY = this._pointAt(extremeAngles.y + i * PI_DIV_2).transformCopy(matrix);
                 var currentPoint = new Point(currentPointX.x, currentPointY.y);
 
-                minPoint = minPoint.min(currentPoint);
-                maxPoint = maxPoint.max(currentPoint);
+                minPoint = Point.min(minPoint, currentPoint);
+                maxPoint = Point.max(maxPoint, currentPoint);
             }
 
             return new Rect(minPoint, maxPoint);
@@ -368,8 +360,8 @@
             var extremeY = deg(extremeAngles.y);
             var currentPoint = arc.pointAt(startAngle).transformCopy(matrix);
             var endPoint = arc.pointAt(endAngle).transformCopy(matrix);
-            var minPoint = currentPoint.min(endPoint);
-            var maxPoint = currentPoint.max(endPoint);
+            var minPoint = Point.min(currentPoint, endPoint);
+            var maxPoint = Point.max(currentPoint, endPoint);
             var currentAngleX = bboxStartAngle(extremeX, startAngle);
             var currentAngleY = bboxStartAngle(extremeY, startAngle);
 
@@ -387,8 +379,8 @@
                 }
 
                 currentPoint = new Point(currentPointX.x, currentPointY.y);
-                minPoint = minPoint.min(currentPoint);
-                maxPoint = maxPoint.max(currentPoint);
+                minPoint = Point.min(minPoint, currentPoint);
+                maxPoint = Point.max(maxPoint, currentPoint);
             }
 
             return new Rect(minPoint, maxPoint);

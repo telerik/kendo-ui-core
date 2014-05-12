@@ -325,7 +325,7 @@
         },
 
         _lineBoundingBox: function(p1, p2) {
-            return new Rect(p1.min(p2), p1.max(p2));
+            return new Rect(Point.min(p1, p2), Point.max(p1, p2));
         },
 
         _curveBoundingBox: function(p1, cp1, cp2, p2) {
