@@ -340,11 +340,11 @@ var __meta__ = {
                     var command = items[i],
                         element;
 
-                    if(command.overflow === OVERFLOW_ALWAYS) { //skip items that will appear only in the overflow
+                    if (command.overflow === OVERFLOW_ALWAYS) { //skip items that will appear only in the overflow
                         continue;
                     }
 
-                    if(command.template) {
+                    if (command.template) {
                         if(kendo.isFunction(command.template)) {
                             element = $(command.template(command));
                         } else {
@@ -355,7 +355,7 @@ var __meta__ = {
                         (initializers[command.type] || $.noop)(element, command);
                     }
 
-                    if(element.length) {
+                    if (element.length) {
                         element.appendTo(this.element).css("visibility", "hidden");
 
                         var containerWidth = this.element.innerWidth();
@@ -391,7 +391,7 @@ var __meta__ = {
                         current = this.element.find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_CHECKED);
                     }
 
-                    if(!this.trigger(TOGGLE, { target: target, checked: isChecked })) {
+                    if (!this.trigger(TOGGLE, { target: target, checked: isChecked })) {
                         if(current && current.length) {
                             current.removeClass(STATE_CHECKED);
                         }
@@ -410,13 +410,13 @@ var __meta__ = {
 
                 e.preventDefault();
 
-                if(popup.visible()) {
+                if (popup.visible()) {
                     isDefaultPrevented = this.trigger(CLOSE, { target: splitButton, popup: popup });
                 } else {
                     isDefaultPrevented = this.trigger(OPEN, { target: splitButton, popup: popup });
                 }
 
-                if(!isDefaultPrevented) {
+                if (!isDefaultPrevented) {
                     popup.toggle();
                 }
             },
@@ -427,8 +427,7 @@ var __meta__ = {
 
             _resize: function(e) {
                 var containerWidth = e.width,
-                    commandElement,
-                    showSuccess;
+                    commandElement;
 
                 this.popup.close();
 
@@ -441,10 +440,11 @@ var __meta__ = {
                     }
                 } else if (containerWidth > this._childrenWidth()) {
                     commandElement = this.element.children(":hidden").first();
-                    showSuccess = true;
 
-                    while (containerWidth > this._childrenWidth() && commandElement.length && showSuccess) {
-                        showSuccess = this._showItem(commandElement, containerWidth);
+                    while (containerWidth > this._childrenWidth() && commandElement.length) {
+                        if (!this._showItem(commandElement, containerWidth)) {
+                            break;
+                        };
                         commandElement = this.element.children(":hidden").first();
                     }
                 }
@@ -461,7 +461,7 @@ var __meta__ = {
             },
 
             _hideItem: function(item, append) {
-                if(item.data("overflow") !== OVERFLOW_NEVER) {
+                if (item.data("overflow") !== OVERFLOW_NEVER) {
                     item.hide();
                     //connect commands with uids
                     this.popup.element.find(">li.k-overflow-hidden").last().removeClass(OVERFLOW_HIDDEN);
@@ -469,7 +469,7 @@ var __meta__ = {
             },
 
             _showItem: function(item, containerWidth) {
-                if(containerWidth > this._childrenWidth() + item.outerWidth(true)) {
+                if (containerWidth > this._childrenWidth() + item.outerWidth(true)) {
                     item.show();
                     //connect commands with uids
                     this.popup.element.find(">li:not(.k-overflow-hidden)").first().addClass(OVERFLOW_HIDDEN);
