@@ -1314,6 +1314,7 @@
             },
             options: {
                 name: "Diagram",
+                theme: "default",
                 zoomRate: 0.1,
                 zoom: 1,
                 minZoom: 0,

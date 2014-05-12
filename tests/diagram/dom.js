@@ -24,6 +24,10 @@
         }
     });
 
+    test("Diagram should have default theme", function () {
+        equal(diagram.options.theme, "default");
+    });
+
     test("Basic tests", function () {
         var found = document.getElementById('SVGRoot');
         ok(found != null, "The Diagram should add an <SVG/> element with name 'SVGRoot'.");
@@ -767,6 +771,4 @@
         d.paste();
         equal(cons, d.connections.length);
     });
-
-
 })();
