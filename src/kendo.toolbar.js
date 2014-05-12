@@ -426,18 +426,26 @@ var __meta__ = {
             },
 
             _resize: function(e) {
-                //does not work with rotation, I should be able to hide multiple items with a while loop
-                //add a test case with 4 visible items > 1 visible item
                 var containerWidth = e.width,
-                    commandElement;
+                    commandElement,
+                    showSuccess;
 
-                if(containerWidth < this._childrenWidth()) {
+                this.popup.close();
+
+                if (containerWidth < this._childrenWidth()) {
                     commandElement = this.element.children(":visible:not(." + OVERFLOW_ANCHOR + ")").last();
-                    this._hideItem(commandElement);
-                } else {
+
+                    while (containerWidth < this._childrenWidth() && commandElement.length) {
+                        this._hideItem(commandElement);
+                        commandElement = this.element.children(":visible:not(." + OVERFLOW_ANCHOR + ")").last();
+                    }
+                } else if (containerWidth > this._childrenWidth()) {
                     commandElement = this.element.children(":hidden").first();
-                    if(commandElement.length) {
-                        this._showItem(commandElement, containerWidth);
+                    showSuccess = true;
+
+                    while (containerWidth > this._childrenWidth() && commandElement.length && showSuccess) {
+                        showSuccess = this._showItem(commandElement, containerWidth);
+                        commandElement = this.element.children(":hidden").first();
                     }
                 }
             },
@@ -465,6 +473,7 @@ var __meta__ = {
                     item.show();
                     //connect commands with uids
                     this.popup.element.find(">li:not(.k-overflow-hidden)").first().addClass(OVERFLOW_HIDDEN);
+                    return true;
                 }
             }
 
