@@ -431,22 +431,19 @@ var __meta__ = {
 
                 this.popup.close();
 
-                if (containerWidth < this._childrenWidth()) {
+                while (containerWidth < this._childrenWidth()) {
                     commandElement = this.element.children(":visible:not(." + OVERFLOW_ANCHOR + ")").last();
-
-                    while (containerWidth < this._childrenWidth() && commandElement.length) {
-                        this._hideItem(commandElement);
-                        commandElement = this.element.children(":visible:not(." + OVERFLOW_ANCHOR + ")").last();
+                    if (!commandElement.length) {
+                        break;
                     }
-                } else if (containerWidth > this._childrenWidth()) {
+                    this._hideItem(commandElement);
+                }
+
+                while (containerWidth > this._childrenWidth()) {
                     commandElement = this.element.children(":hidden").first();
-
-                    while (containerWidth > this._childrenWidth() && commandElement.length) {
-                        if (!this._showItem(commandElement, containerWidth)) {
-                            break;
-                        };
-                        commandElement = this.element.children(":hidden").first();
-                    }
+                    if (!commandElement.length || !this._showItem(commandElement, containerWidth)) {
+                        break;
+                    };
                 }
             },
 
@@ -469,12 +466,14 @@ var __meta__ = {
             },
 
             _showItem: function(item, containerWidth) {
-                if (containerWidth > this._childrenWidth() + item.outerWidth(true)) {
+                if (item.length && containerWidth > this._childrenWidth() + item.outerWidth(true)) {
                     item.show();
                     //connect commands with uids
                     this.popup.element.find(">li:not(.k-overflow-hidden)").first().addClass(OVERFLOW_HIDDEN);
                     return true;
                 }
+
+                return false;
             }
 
         });
