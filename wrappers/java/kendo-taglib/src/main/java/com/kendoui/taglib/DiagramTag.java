@@ -139,6 +139,30 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("template", value);
     }
 
+    public float getZoom() {
+        return (float)getProperty("zoom");
+    }
+
+    public void setZoom(float value) {
+        setProperty("zoom", value);
+    }
+
+    public float getZoomMax() {
+        return (float)getProperty("zoomMax");
+    }
+
+    public void setZoomMax(float value) {
+        setProperty("zoomMax", value);
+    }
+
+    public float getZoomMin() {
+        return (float)getProperty("zoomMin");
+    }
+
+    public void setZoomMin(float value) {
+        setProperty("zoomMin", value);
+    }
+
     public float getZoomRate() {
         return (float)getProperty("zoomRate");
     }

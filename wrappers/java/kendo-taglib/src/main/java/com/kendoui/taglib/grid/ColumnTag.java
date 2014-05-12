@@ -177,6 +177,14 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("groupHeaderTemplate", value);
     }
 
+    public boolean getGroupable() {
+        return (boolean)getProperty("groupable");
+    }
+
+    public void setGroupable(boolean value) {
+        setProperty("groupable", value);
+    }
+
     public java.lang.Object getHeaderAttributes() {
         return (java.lang.Object)getProperty("headerAttributes");
     }

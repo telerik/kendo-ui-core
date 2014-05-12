@@ -155,6 +155,14 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
         setProperty("dataUrlField", value);
     }
 
+    public boolean getNavigatable() {
+        return (boolean)getProperty("navigatable");
+    }
+
+    public void setNavigatable(boolean value) {
+        setProperty("navigatable", value);
+    }
+
     public String getActivate() {
         Function property = ((Function)getProperty("activate"));
         if (property != null) {

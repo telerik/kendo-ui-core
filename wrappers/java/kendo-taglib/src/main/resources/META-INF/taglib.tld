@@ -10659,8 +10659,25 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The scaling factor or the zoom when using the mouse-wheel to zoom in or out.
-If zoomRate is less than 1, zooming will be reversed.</description>
+            <description>The zoom level in percentages.</description>
+            <name>zoom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The zoom max level in percentages.</description>
+            <name>zoomMax</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The zoom min level in percentages.</description>
+            <name>zoomMin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The zoom step when using the mouse-wheel to zoom in or out.</description>
             <name>zoomRate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13119,6 +13136,12 @@ and the current group value is displayed.The fields which can be used in the tem
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>If set to false the column will not be groupable (requires Grid groupable property to be enabled). By default all columns are groupable</description>
+            <name>groupable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>HTML attributes of the column header. The grid renders a table header cell (&lt;th&gt;) for every column. The headerAttributes option can be used to set the HTML attributes of that th.</description>
             <name>headerAttributes</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13886,7 +13909,7 @@ This class can be used to obtain reference to the button after Grid initializati
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template which renders the command. Be default renders a button.</description>
+            <description>The template which renders the command. By default renders a button.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -13901,7 +13924,7 @@ This class can be used to obtain reference to the button after Grid initializati
 
 
     <tag>
-        <description>The template which renders the command. Be default renders a button.</description>
+        <description>The template which renders the command. By default renders a button.</description>
         <name>grid-toolbarItem-template</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -16657,15 +16680,8 @@ top takes precedence over bottom and left takes precedence over right.</descript
 
         <body-content>empty</body-content>
         <attribute>
-            <description>Defines a Kendo UI template to be used with the corresponding notification type. Either templates.template or templates.templateId must be set.See the example above.</description>
+            <description>Defines a Kendo UI template to be used with the corresponding notification type.See the example above.</description>
             <name>template</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Defines a client ID of an external Kendo UI template to be used with the corresponding notification type. Do not include the # sign with the ID.
-Either templates.template or templates.templateId must be set.See the example above.</description>
-            <name>templateId</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -17982,7 +17998,9 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.util.Date</type>
         </attribute>
         <attribute>
-            <description>The template used to render the date header cells.By default the scheduler renders the date using the current culture date format.The fields which can be used in the template are:</description>
+            <description>The template used to render the date header cells.By default the scheduler renders the date using a custom date format - "ddd M/dd".
+The "ddd" specifier, a.k.a abbreviated name of the week day, will be localized using the current Kendo UI culture.
+If the developer wants to control the day and month order then one needs to define a custom template.The fields which can be used in the template are:</description>
             <name>dateHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -18167,7 +18185,7 @@ That way all users would see the same dates and times no matter their configured
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user changes selected date, view or of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <description>Fired when the user changes the selected date, or view of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>navigate</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -19225,7 +19243,7 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user changes selected date, view or of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <description>Fired when the user changes the selected date, or view of the schedulerThe event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>scheduler-navigate</name>
         <tag-class>com.kendoui.taglib.scheduler.NavigateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -30422,6 +30440,12 @@ tab.</description>
             <name>dataUrlField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the TabStrip should be keyboard navigatable.</description>
+            <name>navigatable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>Triggered just after a tab is being made visible, but before the end of the animation</description>

@@ -57,14 +57,6 @@ public class TemplateTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("template", value);
     }
 
-    public java.lang.String getTemplateId() {
-        return (java.lang.String)getProperty("templateId");
-    }
-
-    public void setTemplateId(java.lang.String value) {
-        setProperty("templateId", value);
-    }
-
     public java.lang.String getType() {
         return (java.lang.String)getProperty("type");
     }
