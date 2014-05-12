@@ -934,18 +934,19 @@
                 var diagram = this.diagram,
                     delta = meta.delta,
                     z = diagram.zoom(),
-                    zoomRate = diagram.options.zoomRate,
-                    zoomOptions = {location: p, meta: meta, zoom: z};
+                    options = diagram.options,
+                    zoomRate = options.zoomRate,
+                    zoomOptions = { location: p, meta: meta, zoom: z };
 
                 diagram.trigger(ZOOMSTART, zoomOptions);
 
                 if (delta < 0) {
-                    z *= zoomRate;
+                    z += zoomRate;
                 } else {
-                    z /= zoomRate;
+                    z -= zoomRate;
                 }
 
-                z = Math.round(Math.max(0.7, Math.min(2.0, z)) * 10) / 10;
+                z = kendo.dataviz.round(Math.max(options.minZoom, Math.min(options.maxZoom, z)), 2);
                 zoomOptions.zoom = z;
 
                 diagram.zoom(z, zoomOptions);

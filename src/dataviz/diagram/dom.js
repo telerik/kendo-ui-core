@@ -1271,7 +1271,6 @@
                 });
                 this.canvas.append(this.mainLayer);
 
-                this._zoom = 1.0;
                 this._pan = new Point();
                 this._adorners = [];
                 this.adornerLayer = new Group({
@@ -1302,7 +1301,6 @@
                 that._clipboard = [];
                 that._drop();
                 that._initEditor();
-                that._autosizeCanvas();
 
                 if (that.options.layout) {
                     that.layout(that.options.layout);
@@ -1311,10 +1309,15 @@
 
                 that._createShapes();
                 that._createConnections();
+                that.zoom(that.options.zoom);
+                that._autosizeCanvas();
             },
             options: {
                 name: "Diagram",
-                zoomRate: 1.1,
+                zoomRate: 0.1,
+                zoom: 1,
+                minZoom: 0,
+                maxZoom: 2,
                 dataSource: {},
                 draggable: true,
                 template: "",
@@ -1838,12 +1841,12 @@
                                 item.position(new Point(item.options.x, val));
                                 break;
                         }
-                        //item.refresh();
                     }
                 }
                 var unit = new diagram.TransformUnit(shapes, undoStates);
                 this.undoRedoService.add(unit, false);
             },
+
             zoom: function (zoom, options) {
                 if (zoom) {
                     var staticPoint = options ? options.location : new diagram.Point(0, 0);
@@ -1857,6 +1860,7 @@
                         var raw = viewportVector.minus(zoomedPoint);//pan + zoomed point = viewpoint vector
                         this._storePan(new diagram.Point(Math.round(raw.x), Math.round(raw.y)));
                     }
+
                     if (options) {
                         options.zoom = zoom;
                     }
@@ -1866,8 +1870,10 @@
                     this._autosizeCanvas();
                     this._updateAdorners();
                 }
+
                 return this._zoom;
             },
+
             pan: function (pan, options) {
                 options = options || {animated: false};
                 var animated = options.animated;
@@ -2164,7 +2170,7 @@
                 }
             },
             _getValidZoom: function (zoom) {
-                return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
+                return Math.min(Math.max(zoom, this.options.minZoom), this.options.maxZoom);
             },
             _panTransform: function (pos) {
                 var diagram = this,
@@ -2184,13 +2190,11 @@
 
                 if (skipAnimation) {
                     this._panTransform(pan);
-                }
-                else {
+                } else {
                     if (diagram.scroller) {
                         diagram.scroller.animatedScrollTo(pan.x, pan.y);
                         diagram._zoomMainLayer();
-                    }
-                    else {
+                    } else {
                         var t = new Ticker();
                         t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
                         t.onStep = function () {
