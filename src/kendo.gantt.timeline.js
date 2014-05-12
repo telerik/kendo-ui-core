@@ -18,6 +18,7 @@ var __meta__ = {
     var kendoTextElement = kendo.dom.text;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
+    var Query = kendo.data.Query;
     var minDependencyWidth = 14;
     var rowHeight = 27;
     var minDependencyHeight = Math.floor(rowHeight / 2);
@@ -1162,8 +1163,32 @@ var __meta__ = {
             }
         },
 
-        _render: function(tasks, range) {
+        _range: function(tasks) {
+            var startOrder = {
+                field: "start",
+                dir: "asc"
+            };
+            var endOrder = {
+                field: "end",
+                dir: "desc"
+            };
+
+            if (!tasks || !tasks.length) {
+                return { start: new Date(), end: new Date() };
+            }
+
+            var start = new Query(tasks).sort(startOrder).toArray()[0].start || new Date();
+            var end = new Query(tasks).sort(endOrder).toArray()[0].end || new Date();
+
+            return {
+                start: start,
+                end: end
+            };
+        },
+
+        _render: function(tasks) {
             var view = this.view();
+            var range = this._range(tasks);
 
             this._tasks = tasks;
 

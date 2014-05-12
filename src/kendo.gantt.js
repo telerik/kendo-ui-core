@@ -492,30 +492,6 @@ var __meta__ = {
             task.unbind("change", modelChangeHandler);
         },
 
-        _range: function() {
-            var data = this.view();
-            var startOrder = {
-                field: "start",
-                dir: "asc"
-            };
-            var endOrder = {
-                field: "end",
-                dir: "desc"
-            };
-
-            if (!data.length) {
-                return { start: new Date(), end: new Date() };
-            }
-
-            var start = new Query(data).sort(startOrder).toArray()[0].start || new Date();
-            var end = new Query(data).sort(endOrder).toArray()[0].end || new Date();
-
-            return {
-                start: start,
-                end: end
-            };
-        },
-
         _childRemoved: function(parentId, index) {
             var parent = parentId === null ? null : this.get(parentId);
             var children = this.taskChildren(parent);
@@ -1024,7 +1000,7 @@ var __meta__ = {
 
             this.clearSelection();
             this.list._render(taskTree);
-            this.timeline._render(taskTree, dataSource._range());
+            this.timeline._render(taskTree);
             this.timeline._renderDependencies(this.dependencies.view());
 
             this.trigger("dataBound");
