@@ -205,6 +205,8 @@ var __meta__ = {
                     element.attr("id", options.id);
                 }
 
+                element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
+
                 element.data({ type: "buttonGroup" });
             },
 
@@ -217,6 +219,8 @@ var __meta__ = {
                     element.attr("id", id);
                     popupElement.attr("id", id + "_optionlist");
                 }
+
+                element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
 
                 popup = popupElement.kendoPopup({
                     anchor: element
@@ -305,12 +309,12 @@ var __meta__ = {
                     var command = items[i],
                         element;
 
-                    if(command.overflow === OVERFLOW_NEVER) { //skip items that will NOT appear in the overflow
+                    if (command.overflow === OVERFLOW_NEVER) { //skip items that will NOT appear in the overflow
                         continue;
                     }
 
-                    if(command.overflowTemplate) {
-                        if(kendo.isFunction(command.overflowTemplate)) {
+                    if (command.overflowTemplate) {
+                        if (kendo.isFunction(command.overflowTemplate)) {
                             element = $(command.overflowTemplate(command));
                         } else {
                             element = $(command.overflowTemplate);
@@ -321,10 +325,10 @@ var __meta__ = {
                         (initializers[command.type] || $.noop)(element, command);
                     }
 
-                    if(element.length) {
+                    if (element.length) {
                         element.appendTo(this._overflow.element);
 
-                        if(command.overflow === OVERFLOW_AUTO) {
+                        if (element.data("overflow") === OVERFLOW_AUTO) {
                             element.addClass(OVERFLOW_HIDDEN);
                         }
                     }

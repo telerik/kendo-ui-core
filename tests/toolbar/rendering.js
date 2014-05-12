@@ -375,7 +375,7 @@
 
     /* BUTTON GROUP */
 
-    test("renders buttonGroup from JSON", 2, function() {
+    test("renders ButtonGroup from JSON", 2, function() {
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
@@ -391,7 +391,7 @@
         equal(container.find("div.k-button-group").children().length, 3, "Button group contains correct amount of items");
     });
 
-    test("buttonGroup applies ID option", 1, function() {
+    test("ButtonGroup applies ID option", 1, function() {
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", id: "foo", items: [] }
@@ -435,7 +435,7 @@
         ok(buttons.last().hasClass("k-group-end"));
     });
 
-    test("button group element receives data-overflow attribute with default value", 1, function() {
+    test("ButtonGroup element receives data-overflow attribute with default value", 1, function() {
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
@@ -451,10 +451,10 @@
         equal(buttonGroup.attr("data-overflow"), "auto");
     });
 
-    test("button group element receives data-overflow attribute with set value", 1, function() {
+    test("ButtonGroup element receives data-overflow attribute with set value", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "buttonGroup", overflow: "always", items: [
+                { type: "buttonGroup", overflow: "never", items: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -464,7 +464,7 @@
         });
 
         var buttonGroup = container.find(".k-button-group");
-        equal(buttonGroup.attr("data-overflow"), "always");
+        equal(buttonGroup.attr("data-overflow"), "never");
     });
 
     /* SPLIT BUTTON */
@@ -585,7 +585,7 @@
         equal(splitButton.attr("data-overflow"), "auto");
     });
 
-    test("button group element receives data-overflow attribute with set value", 1, function() {
+    test("SplitButton element receives data-overflow attribute with set value", 1, function() {
         container.kendoToolBar({
             items: [
                 { type: "splitButton", overflow: "never", text: "foo", options: [
