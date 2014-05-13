@@ -1,0 +1,556 @@
+﻿/* Gantt Chart start */
+
+/* Gantt Main Layout */
+
+.k-gantt
+{
+	white-space: nowrap
+}
+
+.k-gantt-layout
+{
+	display: inline-block;
+	white-space: normal;
+	vertical-align: top;
+}
+
+.k-gantt .k-splitbar
+{
+    position: relative;
+    cursor: e-resize;
+    width: 5px;
+    border-width: 0 1px;
+    background-repeat: repeat-y;
+}
+
+.k-gantt .k-gantt-layout th
+{
+	vertical-align: bottom;
+}
+
+.k-gantt td
+{
+	overflow: visible;
+	vertical-align: top;
+}
+
+.k-gantt-treelist > .k-treelist,
+.k-gantt-timeline > .k-timeline
+{
+    border-width: 0;
+    height: 100%;
+}
+
+/* Gantt Toolbar, footer */
+
+.k-gantt-toolbar
+{
+    border-style: solid;
+    line-height: 2.4em;
+    padding: .5em;
+}
+
+.k-gantt-toolbar:first-child
+{
+    border-width: 0 0 1px;
+}
+
+.k-gantt-layout + .k-gantt-toolbar
+{
+    border-width: 1px 0 0;
+}
+
+.k-gantt-toolbar > ul
+{
+    float: right;
+    margin-left: .6em;
+}
+
+.k-gantt-toolbar > ul:first-child
+{
+    float: left;
+    margin-left: 0;
+}
+
+.k-gantt-toolbar > ul > li
+{
+    display: inline-block;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+}
+
+.k-gantt-toolbar > ul > li:first-child
+{
+    border-left-width: 1px;
+}
+
+.k-gantt-toolbar .k-link
+{
+    display: inline-block;
+    padding: 0 1.1em;
+}
+
+.k-gantt-toolbar li:first-child,
+.k-gantt-toolbar li:first-child > .k-link
+{
+	border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.k-gantt-toolbar li:last-child,
+.k-gantt-toolbar li:last-child > .k-link
+{
+	border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.k-gantt-toolbar li.k-button
+{
+    line-height: inherit;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* Gantt TreeList */
+
+.k-gantt-treelist .k-grid-header tr
+{
+	height: 5em;
+}
+
+.k-gantt .k-treelist .k-grid-header
+{
+	padding: 0 !important;
+}
+
+.k-gantt .k-treelist .k-grid-content
+{
+	overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.k-treelist-group
+{
+	font-weight: bold;
+}
+
+/* Gantt TimeLine */
+
+.k-gantt-timeline .k-grid-header tr
+{
+	height: 2.5em;
+}
+
+.k-gantt-rows tr,
+.k-gantt-tasks tr,
+.k-gantt .k-grid-content tr
+{
+	height: 2.3em;
+}
+
+.k-gantt-timeline
+{
+	background: transparent;
+}
+
+.k-gantt-rows,
+.k-gantt-columns,
+.k-gantt-dependencies
+{
+	position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.k-gantt-tables
+{
+	position: relative;
+}
+
+.k-gantt .k-gantt-timeline th
+{
+	text-align: center;
+}
+
+.k-gantt .k-gantt-timeline tr:first-child th
+{
+	border-bottom-width: 1px;
+}
+
+/* Gantt TimeLine objects */
+
+/* Summary */
+
+.k-task-summary
+{
+    height: 10px;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.k-task-summary-complete
+{
+    height: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.k-task-summary-progress
+{
+    height: 15px;
+    overflow: hidden;
+}
+
+.k-task-summary:before,
+.k-task-summary-complete:before,
+.k-task-summary:after,
+.k-task-summary-complete:after
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+    border-color: transparent;
+}
+
+.k-task-summary:before,
+.k-task-summary-complete:before
+{
+    left: 0;
+    border-left-color: inherit;
+}
+
+.k-task-summary:after,
+.k-task-summary-complete:after
+{
+    right: 0;
+    border-right-color: inherit;
+}
+
+/* Lines */
+
+.k-line-h,
+.k-line-v
+{
+	position: absolute;
+}
+
+.k-line-h
+{
+	height: 2px;
+}
+
+.k-line-v
+{
+	width: 2px;
+}
+
+.k-arrow-e,
+.k-arrow-w
+{
+	position: absolute;
+	top: -4px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 5px;
+}
+
+.k-arrow-e
+{
+	right: -6px;
+	border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+
+.k-arrow-w
+{
+	left: -6px;
+	border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+
+/* Milestone */
+
+.k-task-milestone
+{
+	width: 13px;
+	height: 13px;
+	border-style: solid;
+    border-width: 1px;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.k-ie8 .k-task-milestone,
+.k-ie7 .k-task-milestone
+{
+	margin-left: 1px;
+}
+
+/* Button */
+
+.k-gantt .k-gantt-treelist .k-button,
+.k-gantt .k-gantt-tasks .k-button-icon
+{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.k-gantt .k-gantt-tasks .k-button-icon
+{
+	margin-top: 4px;
+}
+
+.k-gantt .k-gantt-treelist .k-button
+{
+	margin-top: -4px;
+	margin-bottom: -2px;
+}
+
+.k-gantt .k-gantt-tasks .k-button-icon
+{
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.k-gantt .k-gantt-treelist .k-button .k-icon,
+.k-gantt .k-gantt-tasks .k-button .k-icon
+{
+	vertical-align: text-top;
+}
+
+.k-rel .k-button-icon
+{
+	position: absolute;
+	left: 200px;
+}
+
+/* Tasks */
+
+.k-rel
+{
+	position: relative;
+	height: 0;
+	top: -.3em;
+}
+
+.k-task-wrap
+{
+	position: absolute;
+    padding: 0 20px 5px;
+    margin: 0 -20px;
+    z-index: 2;
+}
+
+.k-task-content
+{
+    position: relative;
+    z-index: 2;
+}
+
+.k-task-complete
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 20%;
+    z-index: 1;
+}
+
+.k-task-dot
+{
+	position: absolute;
+    top: 0;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+    display: none;
+    cursor: pointer;
+}
+
+.k-task-single + .k-task-dot,
+.k-task-single + .k-task-dot + .k-task-dot
+{
+    top: .3em;
+}
+
+.k-task-wrap:hover .k-task-dot
+{
+    display: block;
+}
+
+.k-task-dot:before
+{
+    content: "\a0";
+    display: inline-block;
+    width: 0;
+	height: 16px;
+}
+
+.k-task-dot:after
+{
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	width: 7px;
+	height: 7px;
+	border-radius: 4px;
+	margin-left: 4px;
+}
+
+.k-task-dot:hover:after
+{
+	border-style: solid;
+    border-width: 1px;
+	margin-left: 3px;
+}
+
+.k-task-start
+{
+    left: 0;
+}
+
+.k-task-end
+{
+    right: 0;
+}
+
+.k-task-single
+{
+    border-style: solid;
+    border-width: 1px;
+    text-align: left;
+    overflow: hidden;
+    cursor: default;
+    min-height: 1.3em;
+    white-space: nowrap;
+}
+
+.k-task-template
+{
+    padding: .3em 1.4em .3em .6em;
+}
+
+.k-task-actions,
+.k-task-content > .k-link
+{
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    white-space: nowrap;
+}
+
+.k-task-actions
+{
+    z-index: 1;
+}
+
+.k-task-actions:first-child
+{
+    position: static;
+    float: left;
+    margin: 4px 2px 0 4px;
+}
+
+.k-webkit .k-task-actions:first-child
+{
+    margin-top: 3px;
+}
+
+.k-task-actions:first-child > .k-link
+{
+    display: inline-block;
+}
+
+.k-task-delete
+{
+    display: none;
+}
+
+.k-task-wrap:hover .k-task-delete
+{
+    display: inline-block;
+}
+
+.k-task-single .k-resize-handle
+{
+    position: absolute;
+    visibility: hidden;
+    z-index: 2;
+	height: auto;
+}
+
+.k-task-single:hover .k-resize-handle
+{
+    visibility: visible;
+}
+
+.k-task-single .k-resize-handle:after
+{
+    content: "";
+    position: absolute;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+.k-task-content > .k-resize-e
+{
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: .4em;
+}
+
+.k-task-content > .k-resize-w
+{
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: .4em;
+}
+
+.k-task-content > .k-resize-e:after,
+.k-task-content > .k-resize-w:after
+{
+    left: 1px;
+    top: 50%;
+    margin-top: -.7em;
+    height: 1.4em;
+    width: 1px;
+}
+
+.k-task-content > .k-resize-e:after
+{
+    left: auto;
+    right: 1px;
+}
+
+.k-task-draghandle
+{
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-width: 5px;
+    border-style: solid;
+	border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    display: none;
+    cursor: e-resize;
+}
+
+.k-task-wrap:hover .k-task-draghandle
+{
+    display: block;
+}
+
+/* Gantt Chart end */
