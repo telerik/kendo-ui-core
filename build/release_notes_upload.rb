@@ -123,13 +123,13 @@ def upload_files_and_validate(bot, archive_path, productName)
 
     case productName
       when "Kendo UI"
-         full_path = File.expand_path(archive_path + "/telerik.kendoui.professional.#{VERSION}.trial.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+         full_path = File.expand_path(archive_path + "/telerik.kendoui.professional.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
       when "UI for ASP.NET MVC"
-        full_path = File.expand_path(archive_path + "/telerik.ui.for.aspnetmvc.#{VERSION}.trial.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+        full_path = File.expand_path(archive_path + "/telerik.ui.for.aspnetmvc.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
       when "UI for JSP"
-        full_path = File.expand_path(archive_path + "/telerik.ui.for.jsp.#{VERSION}.trial.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+        full_path = File.expand_path(archive_path + "/telerik.ui.for.jsp.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
       when "UI for PHP"
-        full_path = File.expand_path(archive_path + "/telerik.ui.for.php.#{VERSION}.trial.changelog.xml", File.join(File.dirname(__FILE__), ".."))
+        full_path = File.expand_path(archive_path + "/telerik.ui.for.php.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
     end
     
     element = bot.driver.find_element(:xpath, "//div[contains(@id,'ReleaseNoteFileUploader')]")
