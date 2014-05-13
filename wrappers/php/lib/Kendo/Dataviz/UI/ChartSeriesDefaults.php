@@ -159,6 +159,15 @@ class ChartSeriesDefaults extends \Kendo\SerializableObject {
     }
 
     /**
+    * The default type of the series.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
+    }
+
+    /**
     * The chart series tooltip configuration options.
     * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsTooltip|array $value
     * @return \Kendo\Dataviz\UI\ChartSeriesDefaults
