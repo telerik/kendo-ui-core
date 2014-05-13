@@ -131,6 +131,17 @@
             equal(text.content, "Text");
         });
 
+        test("createTextBox returns CanvasTextBox", function() {
+            var textbox = view.createTextBox();
+            ok(textbox instanceof dataviz.CanvasTextBox);
+        });
+
+        test("createTextBox sets options", function() {
+            var matrix = dataviz.Matrix.unit();
+            var text = view.createTextBox({matrix: matrix});
+            ok(text.options.matrix);
+        });
+
         test("createRect returns CanvasLine", function() {
             var rect = view.createRect(new Box2D(10, 20, 110, 120));
             ok(rect instanceof dataviz.CanvasLine);
@@ -620,6 +631,61 @@
             equal(ctx.log.restore.length, 1);
         });
 
+    })();
+
+    (function() {
+        var CanvasTextBox = dataviz.CanvasTextBox,
+            textbox;
+
+        module("CanvasTextBox", {});
+
+        test("renders content", function() {
+            textbox = new CanvasTextBox();
+            textbox.children = [{
+                render: function(context) {
+                    ok(context);
+                }
+            }];
+
+            textbox.render(new ContextStub());
+        });
+
+        test("applies transformation to children", function() {
+            var matrix = new dataviz.Matrix(1,1,1,1,1,1);
+
+            var savedContext = false;
+            var setTransform = false;
+            var renderedChildren = false;
+            var appliedTransformation = false;
+
+            textbox = new CanvasTextBox({matrix: matrix});
+            textbox.children = [{
+                render: function(context) {
+                    renderedChildren = appliedTransform;
+                }
+            }];
+            var context = {
+                save: function() {
+                    savedContext = true;
+                },
+                transform: function(a,b,c,d,e,f) {
+                    equal(a, matrix.a);
+                    equal(b, matrix.b);
+                    equal(c, matrix.c);
+                    equal(d, matrix.d);
+                    equal(e, matrix.e);
+                    equal(f, matrix.f);
+                    appliedTransform = savedContext;
+                },
+                restore: function() {
+                   appliedTransformation = renderedChildren;
+                }
+            };
+
+            textbox.render(context);
+
+            ok(appliedTransformation);
+        });
     })();
 
     (function() {

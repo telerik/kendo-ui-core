@@ -146,6 +146,10 @@ var __meta__ = {
             return new CanvasText(content, options);
         },
 
+        createTextBox: function(options) {
+             return new CanvasTextBox(options);
+        },
+
         createRect: function(box, style) {
             return new CanvasLine(box.points(), true, this.setDefaults(style));
         },
@@ -604,6 +608,25 @@ var __meta__ = {
         }
     });
 
+    var CanvasTextBox = ViewElement.extend({
+        render: function(context) {
+            var matrix = this.options.matrix;
+
+            if (matrix) {
+                context.save();
+                context.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
+            }
+
+            this.renderContent(context);
+
+            if (matrix) {
+                context.restore();
+            }
+        },
+
+        renderContent: CanvasView.fn.renderContent
+    });
+
     // Helpers ================================================================
     function toRadians(degrees) {
         return ((degrees + 540) % 360) * DEG_TO_RAD;
@@ -643,6 +666,7 @@ var __meta__ = {
         CanvasPath: CanvasPath,
         CanvasRing: CanvasRing,
         CanvasText: CanvasText,
+        CanvasTextBox: CanvasTextBox,
         CanvasView: CanvasView
     });
 
