@@ -1,4 +1,6 @@
-﻿/* MAIN LAYOUT */
+﻿/* Gantt Chart */
+
+/* Gantt Main Layout */
 
 .k-gantt
 {
@@ -17,7 +19,7 @@
     position: relative;
     cursor: e-resize;
     width: 5px;
-    border-width: 0;
+    border-width: 0 1px;
     background-repeat: repeat-y;
 }
 
@@ -45,12 +47,36 @@
 	border-top-width: 0;
 }
 
-/* TOOLBAR, FOOTER */
+.k-gantt-tables,
+.k-gantt-dependencies
+{
+    position: relative;
+}
+
+.k-gantt-treelist > .k-treelist,
+.k-gantt-timeline > .k-timeline
+{
+    border-width: 0;
+    height: 100%;
+}
+
+/* Gantt Toolbar, footer */
 
 .k-gantt-toolbar
 {
+    border-style: solid;
     line-height:28px;
     padding:6px;
+}
+
+.k-gantt-toolbar:first-child
+{
+    border-width: 0 0 1px;
+}
+
+.k-gantt-layout + .k-gantt-toolbar
+{
+    border-width: 1px 0 0;
 }
 
 .k-gantt-toolbar > ul
@@ -104,12 +130,11 @@
     padding-bottom: 0;
 }
 
-
-/* TREELIST */
+/* Gantt TreeList */
 
 .k-gantt-treelist th
 {
-	height: 60px;
+	height: 5.2em;
 }
 
 .k-gantt .k-treelist .k-grid-header
@@ -128,7 +153,7 @@
 }
 
 
-/* TIMELINE */
+/* Gantt TimeLine */
 
 .k-gantt-rows tr,
 .k-gantt-tasks tr,
@@ -156,11 +181,11 @@
 .k-gantt .k-gantt-timeline th
 {
 	text-align: center;
-	height: 24px;
+	height: 2.1em;
 	border-bottom-width: 1px;
 }
 
-/* TIMELINE OBJECTS */
+/* Gantt TimeLine objects */
 
 /* Summary */
 
