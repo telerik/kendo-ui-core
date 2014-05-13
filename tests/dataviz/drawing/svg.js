@@ -697,12 +697,18 @@
     module("TextNode", {
         setup: function() {
             text = new d.Text("Foo", new Point(10, 20), { font: "arial" });
+            text.measure = function() {
+                return {
+                    width: 20, height: 10, baseline: 15
+                };
+            }
+
             textNode = new svg.TextNode(text);
         }
     });
 
-    test("renders origin", function() {
-        ok(textNode.render().indexOf("x='10' y='20'") > -1);
+    test("renders origin accounting for baseline", function() {
+        ok(textNode.render().indexOf("x='10' y='35'") > -1);
     });
 
     test("renders content", function() {
@@ -718,7 +724,7 @@
             if (name === "x") {
                 equal(value, 20);
             } else if (name === "y") {
-                equal(value, 40);
+                equal(value, 55);
             }
         };
 
@@ -727,8 +733,9 @@
 
     test("optionsChange sets font", function() {
         textNode.attr = function(name, value) {
-            equal(name, "style");
-            equal(value, "font:foo;");
+            if (name == "style") {
+                equal(value, "font:foo;");
+            }
         };
 
         text.options.set("font", "foo");

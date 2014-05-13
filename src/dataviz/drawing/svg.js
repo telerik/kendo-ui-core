@@ -14,6 +14,8 @@
         defined = dataviz.defined,
         renderTemplate = dataviz.renderTemplate,
 
+        g = dataviz.geometry,
+
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
 
@@ -544,15 +546,16 @@
 
     var TextNode = PathNode.extend({
         geometryChange: function() {
-            var origin = this.srcElement.origin;
-            this.attr("x", origin.x);
-            this.attr("y", origin.y);
+            var pos = this.pos();
+            this.attr("x", pos.x);
+            this.attr("y", pos.y);
             this.invalidate();
         },
 
         optionsChange: function(e) {
             if(e.field == "font") {
                 this.attr("style", util.renderStyle(this.mapStyle()));
+                this.geometryChange();
             }
 
             PathNode.fn.optionsChange.call(this, e);
@@ -570,9 +573,15 @@
             return style;
         },
 
+        pos: function() {
+            var origin = this.srcElement.origin;
+            var size = this.srcElement.measure();
+            return origin.clone().set("y", origin.y + size.baseline);
+        },
+
         template: renderTemplate(
             "<text #= d.renderStyle() # " +
-            "x='#= this.srcElement.origin.x #' y='#= this.srcElement.origin.y #' " +
+            "x='#= this.pos().x #' y='#= this.pos().y #' " +
             "#= d.renderVisibility() # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() #><tspan>#= this.srcElement.content() #</tspan></text>"
