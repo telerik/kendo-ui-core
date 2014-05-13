@@ -9,6 +9,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
 
     <link href="@Url.Content("~/content/shared/styles/console.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/content/mobile/examples.css")" rel="stylesheet" />
 
     @foreach (string styleName in Kendo.Models.StyleGroups.Mobile) {
         <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
@@ -25,32 +26,15 @@
         var NAV_JSON_URL = "@Url.Content("~/content/nav.json")";
     </script>
 
-    <style>
-        .section {
-            color: gray;
-        }
-
-        #search-tooltip {
-            margin: 2em 1em;
-            color: gray;
-            font-size: 1.2em;
-            text-align: center;
-        }
-
-        #demos-search {
-            visibility: visible;
-            width: 60%;
-        }
-    </style>
-
     <script src="@Url.Content("~/content/shared/js/mobile-examples.js")"></script>
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
 </head>
-<body>
+
+<body id="examples">
     <div data-role="view" data-title="Kendo UI" id="index" data-layout="">
         <header data-role="header">
             <div data-role="navbar">
-                <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
+                <a data-align="left" data-role="button" href="#about" data-rel="drawer" data-icon="drawer-icon"></a>
                 <span data-role="view-title"></span>
                 <a data-align="right" data-role="button" href="#search" data-icon="search"></a>
             </div>
@@ -63,32 +47,56 @@
         </ul>
     </div>
 
+    <div data-role="drawer" id="about">
+        <div data-role="header">
+            <div data-role="navbar">
+                <img src="@Url.Content("~/content/mobile/logos/kendo.png")" data-align="left" style="width: 198px; height: 15px" id="logo">
+            </div>
+        </div>
+
+        <ul data-role="listview" id="external-resources">
+            <li><a data-role="external" href="http://www.telerik.com">Product Overview</a></li>
+            <li><a data-role="external" href="http://www.telerik.com">Pricing</a></li>
+            <li><a data-role="external" href="http://www.telerik.com">Try Now</a></li>
+        </ul>
+
+        <div data-role="footer">
+            <ul data-role="listview">
+                <li><a data-role="external" href="http://www.telerik.com">Terms of Use</a></li>
+                <li><a data-role="external" href="http://www.telerik.com">Product Improvement program</a></li>
+                <li><a data-role="external" href="http://www.telerik.com">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+
     <div data-role="view" id="search" data-layout="" data-after-show="focusSearch" data-init="initSearch" data-transition="none" data-hide="blurSearch">
         <header data-role="header">
             <div data-role="navbar">
-                <span data-role="view-title">
+                <a data-role="button" href="#:back" data-align="left" data-transition="none" data-icon="arrow-w"></a>
+                <div data-align="right" id="demos-search-container" data-align="right">
                     <input type="search" id="demos-search" />
-                    <a data-role="button" href="#:back" data-align="right" data-transition="none">Cancel</a>
-                </span>
+                </div>
             </div>
         </header>
 
-       <ul data-role="listview" data-source="searchDataSource" data-template="search-template" data-binding="checkSearch">
+       <ul data-role="listview" data-source="searchDataSource" data-template="search-template" data-binding="checkSearch" id="search-results">
             <script type="text/x-kendo-template" id="search-template">
-                <a href="#: url #"><span class="section">#: section # &gt;</span> #: text #</a>
+                <a href="#: url #">
+                    #: text #
+                    <span class="section">#: section #</span>
+                </a>
             </script>
         </ul>
 
-        <div id="search-tooltip"> Search for demos and sample applications </div>
+        <div id="search-tooltip">Search for demos and sample applications.</div>
     </div>
 
     <div data-role="view" id="section" data-show="loadSection" data-layout="">
         <header data-role="header">
             <div data-role="navbar">
-                <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
-                <a class="nav-button" data-align="left" data-role="backbutton" href="#/" data-transition="slide:left reverse">Back</a>
+                <a data-role="button" href="#" data-align="left" data-icon="arrow-w"></a>
                 <span data-role="view-title"></span>
-                <a id="androidLightChanger" class="index-button" data-align="right" data-role="button" data-click="changeAndroidSkin" style="display: none">Light</a>
+                <a data-align="right" data-role="button" href="#search" data-icon="search"></a>
             </div>
         </header>
 
@@ -103,11 +111,8 @@
     <div data-id="examples" data-role="layout" data-show="triggerIndexButton" data-hide="removeView">
         <header data-role="header">
             <div data-role="navbar">
-                <a class="index-button" data-align="left" data-role="button" data-click="changeSkin">Flat</a>
-                <a class="nav-button" data-align="left" data-role="backbutton" data-transition="slide:left reverse">Back</a>
+                <a data-align="left" data-icon="arrow-w" data-role="backbutton"></a>
                 <span data-role="view-title"></span>
-                <a data-align="right" data-role="button" class="nav-button" href="#/" data-transition="slide:left reverse">Index</a>
-                <a id="androidLightChanger" class="index-button" data-align="right" data-role="button" data-click="changeAndroidSkin" style="display: none">Light</a>
             </div>
         </header>
     </div>
