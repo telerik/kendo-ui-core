@@ -1,12 +1,12 @@
 
-package com.kendoui.taglib.sparkline;
+package com.kendoui.taglib.chart;
 
 
 import com.kendoui.taglib.BaseTag;
 
 
 
-import com.kendoui.taglib.SparklineTag;
+import com.kendoui.taglib.ChartTag;
 
 
 
@@ -21,7 +21,7 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 //>> doEndTag
 
 
-        SparklineTag parent = (SparklineTag)findParentWithClass(SparklineTag.class);
+        ChartTag parent = (ChartTag)findParentWithClass(ChartTag.class);
 
 
         parent.setSeriesDefaults(this);
@@ -50,22 +50,30 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 //>> Attributes
 
     public static String tagName() {
-        return "sparkline-seriesDefaults";
+        return "chart-seriesDefaults";
     }
 
-    public void setBorder(com.kendoui.taglib.sparkline.SeriesDefaultsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.SeriesDefaultsBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setLabels(com.kendoui.taglib.sparkline.SeriesDefaultsLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.chart.SeriesDefaultsLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setStack(com.kendoui.taglib.sparkline.SeriesDefaultsStackTag value) {
+    public void setNotes(com.kendoui.taglib.chart.SeriesDefaultsNotesTag value) {
+        setProperty("notes", value);
+    }
+
+    public void setOverlay(com.kendoui.taglib.chart.SeriesDefaultsOverlayTag value) {
+        setProperty("overlay", value);
+    }
+
+    public void setStack(com.kendoui.taglib.chart.SeriesDefaultsStackTag value) {
         setProperty("stack", value);
     }
 
-    public void setTooltip(com.kendoui.taglib.sparkline.SeriesDefaultsTooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.chart.SeriesDefaultsTooltipTag value) {
         setProperty("tooltip", value);
     }
 
@@ -85,12 +93,36 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
         setProperty("bar", value);
     }
 
+    public java.lang.Object getBubble() {
+        return (java.lang.Object)getProperty("bubble");
+    }
+
+    public void setBubble(java.lang.Object value) {
+        setProperty("bubble", value);
+    }
+
+    public java.lang.Object getCandlestick() {
+        return (java.lang.Object)getProperty("candlestick");
+    }
+
+    public void setCandlestick(java.lang.Object value) {
+        setProperty("candlestick", value);
+    }
+
     public java.lang.Object getColumn() {
         return (java.lang.Object)getProperty("column");
     }
 
     public void setColumn(java.lang.Object value) {
         setProperty("column", value);
+    }
+
+    public java.lang.Object getDonut() {
+        return (java.lang.Object)getProperty("donut");
+    }
+
+    public void setDonut(java.lang.Object value) {
+        setProperty("donut", value);
     }
 
     public float getGap() {
@@ -109,12 +141,12 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
         setProperty("line", value);
     }
 
-    public java.lang.Object getOverlay() {
-        return (java.lang.Object)getProperty("overlay");
+    public java.lang.Object getOhlc() {
+        return (java.lang.Object)getProperty("ohlc");
     }
 
-    public void setOverlay(java.lang.Object value) {
-        setProperty("overlay", value);
+    public void setOhlc(java.lang.Object value) {
+        setProperty("ohlc", value);
     }
 
     public java.lang.Object getPie() {
@@ -123,6 +155,22 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 
     public void setPie(java.lang.Object value) {
         setProperty("pie", value);
+    }
+
+    public java.lang.Object getScatter() {
+        return (java.lang.Object)getProperty("scatter");
+    }
+
+    public void setScatter(java.lang.Object value) {
+        setProperty("scatter", value);
+    }
+
+    public java.lang.Object getScatterLine() {
+        return (java.lang.Object)getProperty("scatterLine");
+    }
+
+    public void setScatterLine(java.lang.Object value) {
+        setProperty("scatterLine", value);
     }
 
     public float getSpacing() {
@@ -147,6 +195,22 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 
     public void setType(java.lang.String value) {
         setProperty("type", value);
+    }
+
+    public java.lang.Object getVerticalArea() {
+        return (java.lang.Object)getProperty("verticalArea");
+    }
+
+    public void setVerticalArea(java.lang.Object value) {
+        setProperty("verticalArea", value);
+    }
+
+    public java.lang.Object getVerticalLine() {
+        return (java.lang.Object)getProperty("verticalLine");
+    }
+
+    public void setVerticalLine(java.lang.Object value) {
+        setProperty("verticalLine", value);
     }
 
 //<< Attributes

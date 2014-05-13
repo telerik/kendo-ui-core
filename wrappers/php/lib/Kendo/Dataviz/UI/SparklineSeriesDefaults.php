@@ -109,6 +109,15 @@ The default options for all pie series. For more details see the series options.
     }
 
     /**
+    * The type of the series. Available types:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\SparklineSeriesDefaults
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
+    }
+
+    /**
     * The data point tooltip configuration options.
     * @param \Kendo\Dataviz\UI\SparklineSeriesDefaultsTooltip|array $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesDefaults

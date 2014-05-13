@@ -120,6 +120,15 @@ The default options for all pie series. For more details see the series options.
     }
 
     /**
+    * The default type of the series.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesDefaults
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
+    }
+
+    /**
     * The data point tooltip configuration options.
     * @param \Kendo\Dataviz\UI\StockChartSeriesDefaultsTooltip|array $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaults
