@@ -25,7 +25,6 @@
 
 .k-gantt .k-gantt-layout th
 {
-	border-bottom-width: 1px;
 	vertical-align: bottom;
 }
 
@@ -33,24 +32,6 @@
 {
 	overflow: visible;
 	vertical-align: top;
-}
-
-.k-gantt th:first-child,
-.k-gantt td:first-child
-{
-	border-left-width: 0;
-}
-
-.k-gantt tr:first-child th,
-.k-gantt tr:first-child td
-{
-	border-top-width: 0;
-}
-
-.k-gantt-tables,
-.k-gantt-dependencies
-{
-    position: relative;
 }
 
 .k-gantt-treelist > .k-treelist,
@@ -65,8 +46,8 @@
 .k-gantt-toolbar
 {
     border-style: solid;
-    line-height:28px;
-    padding:6px;
+    line-height: 2.4em;
+    padding: .5em;
 }
 
 .k-gantt-toolbar:first-child
@@ -81,26 +62,26 @@
 
 .k-gantt-toolbar > ul
 {
-    float:right;
+    float: right;
     margin-left: .6em;
 }
 
 .k-gantt-toolbar > ul:first-child
 {
-    float:left;
+    float: left;
     margin-left: 0;
 }
 
 .k-gantt-toolbar > ul > li
 {
-    display:inline-block;
-    border-style:solid;
-    border-width:1px 1px 1px 0;
+    display: inline-block;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
 }
 
 .k-gantt-toolbar > ul > li:first-child
 {
-    border-left-width:1px;
+    border-left-width: 1px;
 }
 
 .k-gantt-toolbar .k-link
@@ -132,9 +113,9 @@
 
 /* Gantt TreeList */
 
-.k-gantt-treelist th
+.k-gantt-treelist .k-grid-header tr
 {
-	height: 5.2em;
+	height: 5em;
 }
 
 .k-gantt .k-treelist .k-grid-header
@@ -145,6 +126,7 @@
 .k-gantt .k-treelist .k-grid-content
 {
 	overflow-y: hidden;
+    overflow-x: scroll;
 }
 
 .k-treelist-group
@@ -152,14 +134,18 @@
 	font-weight: bold;
 }
 
-
 /* Gantt TimeLine */
+
+.k-gantt-timeline .k-grid-header tr
+{
+	height: 2.5em;
+}
 
 .k-gantt-rows tr,
 .k-gantt-tasks tr,
 .k-gantt .k-grid-content tr
 {
-	height: 2.1em;
+	height: 2.2em;
 }
 
 .k-gantt-timeline
@@ -168,12 +154,15 @@
 }
 
 .k-gantt-rows,
-.k-gantt-columns
+.k-gantt-columns,
+.k-gantt-dependencies
 {
 	position: absolute;
+    top: 0;
+    left: 0;
 }
 
-.k-gantt-tasks
+.k-gantt-tables
 {
 	position: relative;
 }
@@ -181,7 +170,10 @@
 .k-gantt .k-gantt-timeline th
 {
 	text-align: center;
-	height: 2.1em;
+}
+
+.k-gantt .k-gantt-timeline tr:first-child th
+{
 	border-bottom-width: 1px;
 }
 
@@ -216,7 +208,7 @@
 .k-task-summary-complete:after
 {
     content: "";
-    position:absolute;
+    position: absolute;
     top: 0;
     width: 0;
     height: 0;
@@ -288,12 +280,12 @@
 
 .k-task-milestone
 {
-	width:13px;
-	height:13px;
+	width: 13px;
+	height: 13px;
 	border-style: solid;
     border-width: 1px;
-	-webkit-transform:rotate(45deg);
-	transform:rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 .k-ie8 .k-task-milestone,
@@ -336,7 +328,7 @@
 
 .k-rel .k-button-icon
 {
-	position:absolute;
+	position: absolute;
 	left: 200px;
 }
 
@@ -400,7 +392,7 @@
     content: "\a0";
     display: inline-block;
     width: 0;
-	height:	16px;
+	height: 16px;
 }
 
 .k-task-dot:after
@@ -433,9 +425,9 @@
 
 .k-task-single
 {
-    border-style:solid;
-    border-width:1px;
-    text-align:left;
+    border-style: solid;
+    border-width: 1px;
+    text-align: left;
     overflow: hidden;
     cursor: default;
     min-height: 1.3em;
@@ -444,7 +436,7 @@
 
 .k-task-template
 {
-    padding:.3em 1.4em .3em .6em;
+    padding: .3em 1.4em .3em .6em;
 }
 
 .k-task-actions,
@@ -452,7 +444,7 @@
 {
     position: absolute;
     top: 3px;
-    right:4px;
+    right: 4px;
     white-space: nowrap;
 }
 
