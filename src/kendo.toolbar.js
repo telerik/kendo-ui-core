@@ -50,193 +50,192 @@ var __meta__ = {
         OVERFLOW_HIDDEN = "k-overflow-hidden",
 
         template = kendo.template,
-        templates = {
-            button: kendo.template(
-                '<a href="" class="k-button" unselectable="on"' +
-                'title="#= data.text ? data.text : "" #">#: data.text ? data.text : "" #</a>'
-            ),
+        components = {
+            button: {
+                template: kendo.template(
+                    '<a href="" class="k-button">#: data.text ? data.text : "" #</a>'
+                ),
+                overflowTemplate: kendo.template(
+                    '<li><a href="" class="k-button k-overflow-button">#: data.text ? data.text : "" #</a>'
+                ),
+                init: initButton
+            },
 
-            toggleButton: kendo.template(
-                '<a href="" class="k-button k-toggle-button" unselectable="on"' +
-                'title="#= data.text ? data.text : "" #">#: data.text ? data.text : "" #</a>'
-            ),
+            toggleButton: {
+                template: kendo.template(
+                    '<a href="" class="k-button k-toggle-button">#: data.text ? data.text : "" #</a>'
+                ),
+                overflowTemplate: kendo.template(
+                    '<li><a href="" class="k-button k-toggle-button k-overflow-button">#: data.text ? data.text : "" #</a>'
+                ),
+                init: initToggleButton
+            },
 
-            buttonGroup: kendo.template(
-                '<div class="k-button-group">' +
-                    '# for(var i = 0; i < items.length; i++) { #' +
-                        '<a href="" class="k-button k-toggle-button" unselectable="on" title="#= items[i].text ? items[i].text : "" #">' +
-                            '#= items[i].text ? items[i].text : "" #' +
-                        '</a>' +
-                    '# } #' +
-                '</div>'
-            ),
-
-            splitButton: kendo.template(
-                '<div class="k-split-button">' +
-                    '<a href="" class="k-button">#= text #</a>' +
-                    '<a href="" class="k-button k-split-button-arrow"><span class="k-icon k-i-arrow-s"></span></a>' +
-                    '<ul class="k-split-button-dropdown">' +
-                        '# for(var i = 0; i < options.length; i++) { #' +
-                            '<li id="#=options[i].id#"><a>#=options[i].text#</a></li>' +
+            buttonGroup: {
+                template: kendo.template(
+                    '<div class="k-button-group">' +
+                        '# for(var i = 0; i < items.length; i++) { #' +
+                            '<a href="" class="k-button k-toggle-button">#: items[i].text ? items[i].text : "" #</a>' +
                         '# } #' +
-                    '</ul>' +
-                '</div>'
-            ),
+                    '</div>'
+                ),
+                overflowTemplate: kendo.template(
+                    ""//to do
+                ),
+                init: initButtonGroup
+            },
 
-            separator: kendo.template('<span class="k-toolbar-separator"></span>'),
+            splitButton: {
+                template: kendo.template(
+                    '<div class="k-split-button">' +
+                        '<a href="" class="k-button">#: data.text ? data.text : "" #</a>' +
+                        '<a href="" class="k-button k-split-button-arrow"><span class="k-icon k-i-arrow-s"></span></a>' +
+                        '<ul class="k-split-button-dropdown">' +
+                            '# for(var i = 0; i < options.length; i++) { #' +
+                                '<li id="#=options[i].id#"><a>#=options[i].text#</a></li>' +
+                            '# } #' +
+                        '</ul>' +
+                    '</div>'
+                ),
+                overflowTemplate: kendo.template(
+                    ""//to do
+                ),
+                init: initSplitButton
+            },
+
+            separator: {
+                template: kendo.template('<span class="k-toolbar-separator"></span>'),
+                overflowTemplate: kendo.template('<li><span class="k-toolbar-separator"></span></li>'),
+                init: initSeparator
+            },
 
             overflowAnchor: '<div class="k-overflow-anchor"></div>',
 
             overflowContainer: '<ul class="k-overflow-container"></ul>'
-        },
+        }
 
-        overflowTemplates = {
-            button: kendo.template(
-                '<li><a href="" class="k-button k-overflow-button" unselectable="on">#: data.text ? data.text : "" #</a>'
-            ),
-
-            toggleButton: kendo.template(
-                '<li><a href="" class="k-button k-toggle-button k-overflow-button" unselectable="on">#: data.text ? data.text : "" #</a>'
-            ),
-
-            buttonGroup: kendo.template(""
-                //todo
-            ),
-
-            splitButton: kendo.template(""
-                //todo
-            ),
-
-            separator: kendo.template(""
-                //todo
-            )
-        },
-
-        initializers = {
-            button: function(element, options) {
-                if(options.enable === false) {
-                    element.addClass(STATE_DISABLED);
-                }
-
-                if(options.primary === true) {
-                    element.addClass(PRIMARY);
-                }
-
-                if(options.id) {
-                    element.attr("id", options.id);
-                }
-
-                //user events tap
-                if(options.click && kendo.isFunction(options.click)) {
-                    element.on(CLICK, options.click);
-                }
-
-                element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
-
-                var icon = options.icon,
-                    spriteCssClass = options.spriteCssClass,
-                    imageUrl = options.imageUrl,
-                    isEmpty, span, img;
-
-                if(spriteCssClass || imageUrl || icon) {
-                    isEmpty = true;
-
-                    element.contents().not("span.k-sprite").not("span.k-icon").not("img.k-image").each(function(idx, el){
-                        if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
-                            isEmpty = false;
-                        }
-                    });
-
-                    if (isEmpty) {
-                        element.addClass(BUTTON_ICON);
-                    } else {
-                        element.addClass(BUTTON_ICON_TEXT);
-                    }
-                }
-
-                if (icon) {
-                    span = element.children("span.k-icon").first();
-                    if (!span[0]) {
-                        span = $('<span class="k-icon"></span>').prependTo(element);
-                    }
-                    span.addClass("k-i-" + icon);
-                } else if (spriteCssClass) {
-                    span = element.children("span.k-sprite").first();
-                    if (!span[0]) {
-                        span = $('<span class="k-sprite"></span>').prependTo(element);
-                    }
-                    span.addClass(spriteCssClass);
-                } else if (imageUrl) {
-                    img = element.children("img.k-image").first();
-                    if (!img[0]) {
-                        img = $('<img alt="icon" class="k-image" />').prependTo(element);
-                    }
-                    img.attr("src", imageUrl);
-                }
-
-                element.data({ type: "button" });
-            },
-
-            toggleButton: function(element, options) {
-                initializers.button(element, options);
-
-                if(options.selected === true) {
-                    element.addClass(STATE_CHECKED);
-                }
-
-                if(options.group) {
-                    element.attr("data-group", options.group);
-                }
-
-                element.data({ type: "toggleButton" });
-            },
-
-            buttonGroup: function(element, options) {
-                var buttons = element.children("." + BUTTON);
-
-                for (var i = 0; i < buttons.length; i++) {
-                    initializers.toggleButton(buttons.eq(i), options.items[i]);
-                }
-
-                buttons.first().addClass(GROUP_START);
-                buttons.last().addClass(GROUP_END);
-
-                if(options.id) {
-                    element.attr("id", options.id);
-                }
-
-                element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
-
-                element.data({ type: "buttonGroup" });
-            },
-
-            splitButton: function(element, options) {
-                var popupElement = element.find("." + SPLIT_BUTTON_DROPDOWN),
-                    popup,
-                    id = options.id || kendo.guid();
-
-                if(id) {
-                    element.attr("id", id);
-                    popupElement.attr("id", id + "_optionlist");
-                }
-
-                element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
-
-                popup = popupElement.kendoPopup({
-                    anchor: element
-                }).data("kendoPopup");
-
-                element.data({
-                    type: "splitButton",
-                    kendoPopup: popup
-                });
-            },
-
-            separator: function(element, options) {
-                element.data({ type: "separator" });
+        function initButton(element, options) {
+            if (options.enable === false) {
+                element.addClass(STATE_DISABLED);
             }
 
-        };
+            if (options.primary === true) {
+                element.addClass(PRIMARY);
+            }
+
+            if (options.id) {
+                element.attr("id", options.id);
+            }
+
+            //user events tap
+            if (options.click && kendo.isFunction(options.click)) {
+                element.on(CLICK, options.click);
+            }
+
+            element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
+
+            var icon = options.icon,
+                spriteCssClass = options.spriteCssClass,
+                imageUrl = options.imageUrl,
+                isEmpty, span, img;
+
+            if (spriteCssClass || imageUrl || icon) {
+                isEmpty = true;
+
+                element.contents().not("span.k-sprite").not("span.k-icon").not("img.k-image").each(function(idx, el){
+                    if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
+                        isEmpty = false;
+                    }
+                });
+
+                if (isEmpty) {
+                    element.addClass(BUTTON_ICON);
+                } else {
+                    element.addClass(BUTTON_ICON_TEXT);
+                }
+            }
+
+            if (icon) {
+                span = element.children("span.k-icon").first();
+                if (!span[0]) {
+                    span = $('<span class="k-icon"></span>').prependTo(element);
+                }
+                span.addClass("k-i-" + icon);
+            } else if (spriteCssClass) {
+                span = element.children("span.k-sprite").first();
+                if (!span[0]) {
+                    span = $('<span class="k-sprite"></span>').prependTo(element);
+                }
+                span.addClass(spriteCssClass);
+            } else if (imageUrl) {
+                img = element.children("img.k-image").first();
+                if (!img[0]) {
+                    img = $('<img alt="icon" class="k-image" />').prependTo(element);
+                }
+                img.attr("src", imageUrl);
+            }
+
+            element.data({ type: "button" });
+        }
+
+        function initToggleButton(element, options) {
+            initButton(element, options);
+
+            if (options.selected === true) {
+                element.addClass(STATE_CHECKED);
+            }
+
+            if (options.group) {
+                element.attr("data-group", options.group);
+            }
+
+            element.data({ type: "toggleButton" });
+        }
+
+        function initButtonGroup(element, options) {
+            var buttons = element.children("." + BUTTON);
+
+            for (var i = 0; i < buttons.length; i++) {
+                initToggleButton(buttons.eq(i), options.items[i]);
+            }
+
+            buttons.first().addClass(GROUP_START);
+            buttons.last().addClass(GROUP_END);
+
+            if (options.id) {
+                element.attr("id", options.id);
+            }
+
+            element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
+
+            element.data({ type: "buttonGroup" });
+        }
+
+        function initSplitButton(element, options) {
+            var popupElement = element.find("." + SPLIT_BUTTON_DROPDOWN),
+                popup,
+                id = options.id || kendo.guid();
+
+            if (id) {
+                element.attr("id", id);
+                popupElement.attr("id", id + "_optionlist");
+            }
+
+            element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
+
+            popup = popupElement.kendoPopup({
+                anchor: element
+            }).data("kendoPopup");
+
+            element.data({
+                type: "splitButton",
+                kendoPopup: popup
+            });
+        }
+
+        function initSeparator(element, options) {
+            element.data({ type: "separator" });
+        }
 
         var ToolBar = Widget.extend({
             init: function(element, options) {
@@ -257,8 +256,12 @@ var __meta__ = {
                 }
 
                 if(options.items && options.items.length) {
-                    that._renderOverflowItems(options.items);
-                    that._renderToolbarItems(options.items);
+                    for (var i = 0; i < options.items.length; i++) {
+                        that.add(options.items[i]);
+                    }
+
+                    //that._renderOverflowItems(options.items);
+                    //that._renderToolbarItems(options.items);
                 }
 
                 //user events tap
@@ -293,12 +296,73 @@ var __meta__ = {
                 Widget.fn.destroy.call(this);
             },
 
+            add: function(options) {
+                var component = components[options.type],
+                    toolbarElement,
+                    overflowElement;
+
+                if(!component) {
+                    //not a build-in command!
+                }
+
+                $.extend(options, {
+                    uid: kendo.guid()
+                });
+
+                if (options.overflow !== OVERFLOW_NEVER) {
+                    if (options.overflowTemplate) {
+                        if (kendo.isFunction(options.overflowTemplate)) {
+                            overflowElement = $(options.overflowTemplate(options));
+                        } else {
+                            overflowElement = $(options.overflowTemplate);
+                        }
+                    } else {
+                        overflowElement = $(components[options.type].overflowTemplate(options));
+
+                        (components[options.type].init || $.noop)(overflowElement, options);
+                    }
+
+                    if (overflowElement.length) {
+                        overflowElement.appendTo(this.popup.element);
+
+                        if (overflowElement.data("overflow") === OVERFLOW_AUTO) {
+                            overflowElement.addClass(OVERFLOW_HIDDEN);
+                        }
+                    }
+                }
+
+                if (options.overflow !== OVERFLOW_ALWAYS) {
+                    if (options.template) {
+                        if(kendo.isFunction(options.template)) {
+                            toolbarElement = $(options.template(options));
+                        } else {
+                            toolbarElement = $(options.template);
+                        }
+                    } else {
+                        toolbarElement = $(components[options.type].template(options));
+                        (components[options.type].init || $.noop)(toolbarElement, options);
+                    }
+
+                    if (toolbarElement.length) {
+                        toolbarElement.appendTo(this.element).css("visibility", "hidden");
+
+                        var containerWidth = this.element.innerWidth();
+
+                        if(containerWidth < this._childrenWidth()) {
+                            this._hideItem(toolbarElement);
+                        }
+
+                        toolbarElement.css("visibility", "visible");
+                    }
+                }
+            },
+
             _renderOverflow: function() {
-                var overflowAnchor = $(templates.overflowAnchor);
+                var overflowAnchor = $(components.overflowAnchor);
 
                 this.element.append(overflowAnchor);
 
-                this.popup = new kendo.ui.Popup(templates.overflowContainer, {
+                this.popup = new kendo.ui.Popup(components.overflowContainer, {
                     anchor: overflowAnchor
                 });
             },
@@ -319,9 +383,9 @@ var __meta__ = {
                             element = $(command.overflowTemplate);
                         }
                     } else {
-                        element = $(overflowTemplates[command.type](command));
+                        element = $(components[command.type].overflowTemplate(command));
 
-                        (initializers[command.type] || $.noop)(element, command);
+                        (components[command.type].init || $.noop)(element, command);
                     }
 
                     if (element.length) {
@@ -351,8 +415,8 @@ var __meta__ = {
                             element = $(command.template);
                         }
                     } else {
-                        element = $(templates[command.type](command));
-                        (initializers[command.type] || $.noop)(element, command);
+                        element = $(components[command.type].template(command));
+                        (components[command.type].init || $.noop)(element, command);
                     }
 
                     if (element.length) {
