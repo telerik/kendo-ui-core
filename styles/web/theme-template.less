@@ -536,7 +536,8 @@ html .km-pane-wrapper .k-header
     background-color: @current-time-color;
 }
 
-.k-event
+.k-event,
+.k-task-complete
 {
     border-color: @event-background-color;
     background: @event-background-color 0 -257px @tooltip-texture repeat-x;
@@ -553,7 +554,9 @@ html .km-pane-wrapper .k-header
 }
 
 .k-ie7 .k-event .k-resize-handle,
-.k-event .k-resize-handle:after
+.k-event .k-resize-handle:after,
+.k-ie7 .k-task-single .k-resize-handle,
+.k-task-single .k-resize-handle:after
 {
     background-color: @resize-background-color;
 }
@@ -1200,6 +1203,74 @@ div.k-imagebrowser-dropzone em
     border-color: @notification-error-border-color;
 }
 
+/* Gantt */
+
+.k-gantt .k-treelist
+{
+	background: @alt-background-color;
+}
+
+.k-gantt .k-treelist .k-alt
+{
+	background-color: darken(@alt-background-color, 10%);
+}
+
+.k-gantt .k-treelist .k-alt.k-state-selected
+{
+	background-color: @selected-background-color;
+}
+
+.k-task-dot:after
+{
+    background-color: @widget-text-color;
+    border-color: @widget-text-color;
+}
+
+.k-task-dot:hover:after
+{
+    background-color: @active-background-color;
+}
+
+.k-task-summary
+{
+    border-color: lighten(@widget-text-color, 35%);
+    background: lighten(@widget-text-color, 35%);
+}
+
+.k-task-milestone,
+.k-task-summary-complete
+{
+    border-color: @widget-text-color;
+    background: @widget-text-color;
+}
+
+.k-state-selected.k-task-summary
+{
+    border-color: lighten(@selected-background-color, 35%);
+    background: lighten(@selected-background-color, 35%);
+}
+
+.k-state-selected.k-task-milestone,
+.k-state-selected .k-task-summary-complete
+{
+    border-color: @selected-background-color;
+    background: @selected-background-color;
+}
+
+.k-task-single
+{
+    background-color: lighten(@event-background-color, 12%);
+    border-color: @event-background-color;
+    color: @event-text-color;
+}
+
+.k-line-h,
+.k-line-v
+{
+	background-color: @widget-text-color;
+    color: @widget-text-color;
+}
+
 /* Border radius */
 .k-block,
 .k-button,
@@ -1467,6 +1538,8 @@ div.k-imagebrowser-dropzone em
 
 .k-more-events,
 .k-event,
+.k-task-single,
+.k-task-complete,
 .k-event .k-link
 {
     border-radius: @inner-border-radius;
