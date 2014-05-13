@@ -1,12 +1,12 @@
 
-package com.kendoui.taglib.sparkline;
+package com.kendoui.taglib.stockchart;
 
 
 import com.kendoui.taglib.BaseTag;
 
 
 
-import com.kendoui.taglib.SparklineTag;
+import com.kendoui.taglib.StockChartTag;
 
 
 
@@ -21,7 +21,7 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 //>> doEndTag
 
 
-        SparklineTag parent = (SparklineTag)findParentWithClass(SparklineTag.class);
+        StockChartTag parent = (StockChartTag)findParentWithClass(StockChartTag.class);
 
 
         parent.setSeriesDefaults(this);
@@ -50,22 +50,22 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 //>> Attributes
 
     public static String tagName() {
-        return "sparkline-seriesDefaults";
+        return "stockChart-seriesDefaults";
     }
 
-    public void setBorder(com.kendoui.taglib.sparkline.SeriesDefaultsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.stockchart.SeriesDefaultsBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setLabels(com.kendoui.taglib.sparkline.SeriesDefaultsLabelsTag value) {
+    public void setLabels(com.kendoui.taglib.stockchart.SeriesDefaultsLabelsTag value) {
         setProperty("labels", value);
     }
 
-    public void setStack(com.kendoui.taglib.sparkline.SeriesDefaultsStackTag value) {
+    public void setStack(com.kendoui.taglib.stockchart.SeriesDefaultsStackTag value) {
         setProperty("stack", value);
     }
 
-    public void setTooltip(com.kendoui.taglib.sparkline.SeriesDefaultsTooltipTag value) {
+    public void setTooltip(com.kendoui.taglib.stockchart.SeriesDefaultsTooltipTag value) {
         setProperty("tooltip", value);
     }
 
@@ -77,12 +77,12 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
         setProperty("area", value);
     }
 
-    public java.lang.Object getBar() {
-        return (java.lang.Object)getProperty("bar");
+    public java.lang.Object getCandlestick() {
+        return (java.lang.Object)getProperty("candlestick");
     }
 
-    public void setBar(java.lang.Object value) {
-        setProperty("bar", value);
+    public void setCandlestick(java.lang.Object value) {
+        setProperty("candlestick", value);
     }
 
     public java.lang.Object getColumn() {
@@ -107,6 +107,14 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 
     public void setLine(java.lang.Object value) {
         setProperty("line", value);
+    }
+
+    public java.lang.Object getOhlc() {
+        return (java.lang.Object)getProperty("ohlc");
+    }
+
+    public void setOhlc(java.lang.Object value) {
+        setProperty("ohlc", value);
     }
 
     public java.lang.Object getOverlay() {

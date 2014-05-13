@@ -11,8 +11,8 @@ module CodeGen::Java
     }
 
     IGNORED = {
-        'chart' => ['axisDefaults', 'seriesDefaults'],
-        'stockchart' => ['axisDefaults', 'seriesDefaults'],
+        'chart' => ['axisDefaults'],
+        'stockchart' => ['axisDefaults'],
         'tooltip' => ['content'],
         'map' => ['markers.tooltip.content', 'markerDefaults.tooltip.content',
                   'layers.tooltip.content', 'layerDefaults.marker.tooltip.content'],

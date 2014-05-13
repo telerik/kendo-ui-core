@@ -78,6 +78,10 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
+    public void setSeriesDefaults(com.kendoui.taglib.chart.SeriesDefaultsTag value) {
+        setProperty("seriesDefaults", value);
+    }
+
     public void setTitle(com.kendoui.taglib.chart.TitleTag value) {
         setProperty("title", value);
     }

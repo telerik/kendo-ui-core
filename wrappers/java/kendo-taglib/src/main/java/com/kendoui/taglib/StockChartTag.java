@@ -77,6 +77,10 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
 
     }
 
+    public void setSeriesDefaults(com.kendoui.taglib.stockchart.SeriesDefaultsTag value) {
+        setProperty("seriesDefaults", value);
+    }
+
     public void setTitle(com.kendoui.taglib.stockchart.TitleTag value) {
         setProperty("title", value);
     }
