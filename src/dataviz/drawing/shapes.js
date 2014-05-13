@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./core" ], f);
+    define([ "./core", "../text-metrics" ], f);
 })(function(){
 
 (function () {
@@ -225,7 +225,21 @@
             }
         },
 
-        // TODO: Bounding box
+        measure: function() {
+            var metrics = util.measureText(this.content(), {
+                font: this.options.get("font")
+            });
+
+            return metrics;
+        },
+
+        bbox: function(transformation) {
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            var size = this.measure();
+            var rect = new g.Rect(this.origin, this.origin.clone().add(new g.Point(size.width, size.height)));
+
+            return rect.bbox(transformation);
+        }
     });
 
     var Circle = Shape.extend({

@@ -5,6 +5,8 @@
         Point = g.Point,
         Matrix = g.Matrix,
 
+        util = dataviz.util,
+
         d = dataviz.drawing,
         Element = d.Element,
         Group = d.Group,
@@ -402,6 +404,33 @@
 
     test("content setter is chainable", function() {
         equal(text.content("Bar"), text);
+    });
+
+    test("bbox returns text bounding box", function() {
+        text.measure = function() {
+            return { width: 20, height: 10 };
+        };
+
+        var bbox = text.bbox();
+        compareBoundingBox(bbox, [100, 100, 120, 110]);
+    });
+
+    test("bbox returns transformed bounding box", function() {
+        text.measure = function() {
+            return { width: 20, height: 10 };
+        };
+
+        var bbox = text.bbox(g.transform().scale(2, 1, text.origin));
+        compareBoundingBox(bbox, [100, 100, 140, 110]);
+    });
+
+    test("measure returns text metrics", function() {
+        deepEqual(text.measure(), util.measureText("Foo"));
+    });
+
+    test("measure takes font in consideration", function() {
+        text.options.set("font", "15px sans-serif");
+        deepEqual(text.measure(), util.measureText("Foo", { font: "15px arial" }));
     });
 
     // ------------------------------------------------------------
