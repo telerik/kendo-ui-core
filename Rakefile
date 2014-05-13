@@ -25,7 +25,7 @@ if PLATFORM =~ /linux|darwin/
     RELEASE_ROOT = "/kendo-dist"
     WEB_INSTALLER_ROOT = "/installers-dist"
 else
-    distributions = "//telerik.com/resources/Controls/DISTRIBUTIONS"
+    distributions = "\\\\telerik.com\\resources\\Controls\\DISTRIBUTIONS"
     RELEASE_ROOT = File.join(distributions, "KendoUI")
     WEB_INSTALLER_ROOT = File.join(distributions, "Guidance", "CurrentWebInstaller")
 end
@@ -122,7 +122,7 @@ require 'demos'
 require 'download_builder'
 require 'internal_build_upload'
 require 'release_build_upload'
-require 'release_notes_upload'
+require 'release_notes'
 require 'cdn'
 require 'tests'
 require 'codegen'

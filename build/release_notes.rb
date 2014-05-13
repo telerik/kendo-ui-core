@@ -6,4 +6,3 @@ namespace :release_notes do
         set_configuration_and_upload \
     end  
 end
-end

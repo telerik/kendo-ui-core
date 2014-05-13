@@ -108,17 +108,17 @@ def set_configuration_and_upload()
 
     versioned_bundle_archive_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, archive_folder_name)
 
-    navigate_to_import_form()
+    navigate_to_import_form(bot)
     upload_files_and_validate(bot, versioned_bundle_archive_path, bot.get_product())
 end
-def navigate_to_import_form
+def navigate_to_import_form(bot)
     bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Administration')]"))
     bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Import Release Notes')]"))
     bot.wait_for_title("Import Release Notes")
 end
 def upload_files_and_validate(bot, archive_path, productName)
 
-    set_fields_data(productName)
+    set_fields_data(bot, productName)
     full_path = String.new
 
     case productName
@@ -132,21 +132,21 @@ def upload_files_and_validate(bot, archive_path, productName)
         full_path = File.expand_path(archive_path + "/telerik.ui.for.php.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
     end
     
-    element = bot.driver.find_element(:xpath, "//div[contains(@id,'ReleaseNoteFileUploader')]")
+    element = bot.driver.find_element(:xpath, "//input[contains(@id,'ReleaseNoteFileUploader')]")
     upload_id = element.attribute("id")
     upload_file(bot, upload_id, full_path)
 
     bot.click_element(bot.driver.find_element(:xpath, "//a[contains(@id,'ImportReleaseNotesButton')]"))
     bot.wait_for_validation("//div[contains(text(), 'successfully')]")
 
-    if @products.length > 0
-      navigate_to_import_form()
+    if bot.products.size > 0
+      navigate_to_import_form(bot)
       upload_files_and_validate(bot, versioned_bundle_archive_path, @products.pop())
     else
        bot.driver.quit
     end
 end
-def set_fields_data(productName)
+def set_fields_data(bot, productName)
     #Beta release notes
     if defined? Beta
       bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} Beta')")
@@ -159,6 +159,7 @@ def set_fields_data(productName)
         bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}')")
         bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('#{SERVICE_PACK_NUMBER}')")
         bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'Minor Version')]"))
+        p "label clicked"
       else
         bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR}')")
         #due to mandatory non-empty value requirement
@@ -169,15 +170,15 @@ def set_fields_data(productName)
     bot.execute_script("$('[id$=\"_ReleaseVersionTb\"]').val('#{VERSION}')") 
 
     date = DateTime.now.strftime('%m/%d/%Y')
-    p date
     bot.execute_script("$find($telerik.$('[id$=\"_ReleaseDateDatePicker_dateInput\"]').attr('id')).set_value('#{date}')")
 
-    option_select = get_select("Product")
+    option_select = bot.get_select("Product")
     option_select.select_by(:text, productName)
 
 end
 def upload_file(bot, upload_id, full_path)
     full_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/
-    bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id} input[type=file]"), full_path)
+    p "file upload path>>" + full_path
+    bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id}"), full_path)
    #bot.wait_for_element("##{upload_id} .ruRemove")
 end
