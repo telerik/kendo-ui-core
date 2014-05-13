@@ -443,8 +443,8 @@ var __meta__ = {
             var r2 = rotatePoint(width, 0, cx, cy, rotation);
             var r3 = rotatePoint(width, height, cx, cy, rotation);
             var r4 = rotatePoint(0, height, cx, cy, rotation);
-            var width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
-            var height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
+            width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
+            height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
             box.x2 =  box.x1 + width;
             box.y2 = box.y1 + height;
 
@@ -1239,30 +1239,19 @@ var __meta__ = {
         reflow: function(targetBox) {
             var textbox = this;
             var options = textbox.options;
+            var align = options.align;
             var rotation = options.rotation;
-            var borderWidth = options.border.width;
-            var padding = getSpacing(options.padding);
-            var margin = getSpacing(options.margin);
-            var box = textbox.box;
-            var vAlign = options.vAlign;
-
-            targetBox = targetBox.clone();
-            if (vAlign && box) {
-                textbox.align(targetBox, Y, vAlign);
-                targetBox.snapTo(box, Y);
-            }
-
-            textbox.container.reflow(targetBox.unpad(borderWidth).unpad(padding).unpad(margin));
-            var containerBox = textbox.container.box.clone();
-
+            textbox.container.options.align = align;
+            BoxElement.fn.reflow.call(textbox, targetBox);
             if (rotation) {
-                textbox.normalBox = containerBox.clone();
-                containerBox.rotate(rotation);
+                var margin = getSpacing(options.margin);
+                var box = textbox.box.unpad(margin);
+                textbox.normalBox = box.clone();
+                box.rotate(rotation);
+                box.pad(margin);
+                textbox.align(targetBox, X, align);
+                textbox.align(targetBox, Y, options.vAlign);
             }
-
-            textbox.contentBox = containerBox;
-            textbox.paddingBox = containerBox.clone().pad(borderWidth).pad(padding);
-            textbox.box = textbox.paddingBox.clone().pad(margin);
         },
 
         getViewElements: function(view, renderOptions) {
@@ -1294,10 +1283,9 @@ var __meta__ = {
                 zIndex: zIndex
             });
 
-            elements.push(element);
-            element.children = ChartElement.fn.getViewElements.call(textbox, view);
+            element.children = elements.concat(ChartElement.fn.getViewElements.call(textbox, view));
 
-            return elements;
+            return [element];
         },
 
         rotationMatrix: function() {
