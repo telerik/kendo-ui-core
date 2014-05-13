@@ -1606,12 +1606,14 @@ var __meta__ = {
                 }
             }
 
-            if (vertical) {
-                padding.left = padding.right =
-                    (targetBox.width() - text.contentBox.width()) / 2;
-            } else {
-                padding.top = padding.bottom =
-                    (targetBox.height() - text.contentBox.height()) / 2;
+            if (!options.rotation) {
+                if (vertical) {
+                    padding.left = padding.right =
+                        (targetBox.width() - text.contentBox.width()) / 2;
+                } else {
+                    padding.top = padding.bottom =
+                        (targetBox.height() - text.contentBox.height()) / 2;
+                }
             }
 
             text.reflow(targetBox);

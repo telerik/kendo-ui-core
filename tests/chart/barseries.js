@@ -1131,6 +1131,62 @@
             equal(view.log.rect.length, 0);
         });
 
+        module("BarLabel / reflow / vertical", {});
+
+        test("sets left and right padding to its textbox to fill the bar width", function() {
+            barLabel = new BarLabel("content", {vertical: true, padding: {
+                left: 0,
+                right: 0
+            }, margin: 0});
+            text = barLabel.children[0];
+            text.contentBox = Box2D(0, 0, 50, 50);
+            barLabel.reflow(Box2D(0, 0, 100, 100));
+
+            equal(text.options.padding.left, 25);
+            equal(text.options.padding.right, 25);
+        });
+
+        test("does not set left and right padding to its textbox if its rotated", function() {
+            barLabel = new BarLabel("content", {vertical: true, rotation: 45, padding: {
+                left: 0,
+                right: 0
+            }, margin: 0});
+            text = barLabel.children[0];
+            text.contentBox = Box2D(0, 0, 50, 50);
+            barLabel.reflow(Box2D(0, 0, 100, 100));
+
+            equal(text.options.padding.left, 0);
+            equal(text.options.padding.right, 0);
+        });
+
+        module("BarLabel / reflow / horizontal", {});
+
+        test("sets top and bottom padding to its textbox to fill the bar height", function() {
+            barLabel = new BarLabel("content", {vertical: false, padding: {
+                top: 0,
+                bottom: 0
+            }, margin: 0});
+            text = barLabel.children[0];
+            text.contentBox = Box2D(0, 0, 50, 50);
+            barLabel.reflow(Box2D(0, 0, 100, 100));
+
+            equal(text.options.padding.top, 25);
+            equal(text.options.padding.bottom, 25);
+        });
+
+        test("does not set top and bottom padding to its textbox if its rotated", function() {
+            barLabel = new BarLabel("content", {vertical: false, rotation: 45, padding: {
+                top: 0,
+                bottom: 0
+            }, margin: 0});
+            text = barLabel.children[0];
+            text.contentBox = Box2D(0, 0, 50, 50);
+            barLabel.reflow(Box2D(0, 0, 100, 100));
+
+            equal(text.options.padding.top, 0);
+            equal(text.options.padding.bottom, 0);
+        });
+
         module("BarLabel / Align to clip box / vertical", {
             setup: function() {
                 barLabel = new BarLabel("content", {vertical: true, padding: 0, margin: 0});
