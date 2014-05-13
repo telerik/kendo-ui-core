@@ -1311,11 +1311,11 @@
         });
 
         test("creates labels for 0 values", function() {
-            equal(series.points[1].label.children[0].children[0].content, "0");
+            equal(series.points[1].label.children[0].content, "0");
         });
 
         test("creates empty labels for null values", function() {
-            equal(series.points[2].label.children[0].children[0].content, "");
+            equal(series.points[2].label.children[0].content, "");
         });
 
         // ------------------------------------------------------------
@@ -1392,7 +1392,7 @@
             }] });
 
             deepEqual($.map(series.points, function(bar) {
-                return bar.children[0].children[0].children[0].content }
+                return bar.children[0].children[0].content }
             ), ["$100.00", "$150.00"]);
         });
 
@@ -1406,7 +1406,7 @@
             }] });
 
             deepEqual($.map(series.points, function(bar) {
-                return bar.children[0].children[0].children[0].content }
+                return bar.children[0].children[0].content }
             ), ["$100.00", "$150.00"]);
         });
 
@@ -1418,7 +1418,7 @@
         });
 
         test("labels have zIndex", function() {
-            equal(series.points[0].children[0].children[0].options.zIndex, 1);
+            equal(series.points[0].children[0].options.zIndex, 1);
         });
 
         // ------------------------------------------------------------
@@ -1495,7 +1495,7 @@
             }] });
 
             deepEqual($.map(series.points, function(bar) {
-                return bar.children[0].children[0].children[0].content }
+                return bar.children[0].children[0].content }
             ), ["$100.00", "$150.00"]);
         });
 
@@ -2469,7 +2469,7 @@
 
         function assertTemplate(template, value, format) {
             createBar({ labels: { visible: true, template: template, format: format } });
-            equal(label.children[0].children[0].content, value);
+            equal(label.children[0].content, value);
         }
 
         test("renders template", function() {
@@ -2559,7 +2559,7 @@
         });
 
         test("dataItem sent to label template", function() {
-            equal(label.children[0].children[0].content, "Alpha");
+            equal(label.children[0].content, "Alpha");
         });
 
     })();

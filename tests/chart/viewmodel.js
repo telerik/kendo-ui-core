@@ -864,7 +864,7 @@
                 padding: PADDING }, options));
             title.reflow(chartBox);
             titleTextBox = title.children[0],
-            titleText = titleTextBox.children[0];
+            titleText = titleTextBox.children[0].children[0];
         }
 
         module("Title", {

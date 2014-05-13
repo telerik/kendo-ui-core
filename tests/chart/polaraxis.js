@@ -45,7 +45,7 @@
 
     test("creates labels", 1, function() {
         deepEqual($.map(view.log.text, function(text) { return text.content }),
-             [0, 60, 120, 180, 240, 300]);
+             ["0", "60", "120", "180", "240", "300"]);
     });
 
     test("creates labels with full format", 1, function() {
