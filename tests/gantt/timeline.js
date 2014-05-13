@@ -164,7 +164,7 @@
     test("header field initialized", function() {
         view = dayView();
 
-        equal(view.header[0], element.find(".k-grid-header-wrap")[0]);
+        equal(view.header[0], element.find(".k-grid-header")[0]);
     });
 
     test("content field initialized", function() {
@@ -657,7 +657,7 @@
     test("header field initialized", function() {
         view = weekView();
 
-        equal(view.header[0], element.find(".k-grid-header-wrap")[0]);
+        equal(view.header[0], element.find(".k-grid-header")[0]);
     });
 
     test("content field initialized", function() {
@@ -947,7 +947,7 @@
     test("header field initialized", function() {
         view = monthView();
 
-        equal(view.header[0], element.find(".k-grid-header-wrap")[0]);
+        equal(view.header[0], element.find(".k-grid-header")[0]);
     });
 
     test("content field initialized", function() {

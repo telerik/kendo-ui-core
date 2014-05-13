@@ -79,6 +79,8 @@ var __meta__ = {
             this._selectable();
             this._draggable();
             this._attachEvents();
+
+            this.content.height(this.element.height() - this.header.parent().outerHeight());
         },
 
         destroy: function() {

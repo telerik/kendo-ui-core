@@ -233,7 +233,7 @@
         ganttTimeline._render(tasks, range);
         ganttTimeline._renderDependencies(dependencies);
 
-        var target = ganttTimeline.wrapper.find(".k-gantt-line:first");
+        var target = ganttTimeline.wrapper.find(".k-line:first");
 
         stub(ganttTimeline, "selectDependency");
 
@@ -246,7 +246,7 @@
         ganttTimeline._render(tasks, range);
         ganttTimeline._renderDependencies(dependencies);
 
-        var target = ganttTimeline.wrapper.find(".k-gantt-line:first");
+        var target = ganttTimeline.wrapper.find(".k-line:first");
 
         stub(ganttTimeline, {
             selectDependency: function(value) {

@@ -367,25 +367,25 @@
         ganttTimeline._render(tasks, range);
         ganttTimeline._renderDependencies(dependencies);
 
-        ganttTimeline.selectDependency(".k-gantt-line:first");
+        ganttTimeline.selectDependency(".k-line:first");
 
-        ok(ganttTimeline.wrapper.find(".k-gantt-line[data-uid='DependencyUniqueId1']").hasClass("k-state-selected"));
+        ok(ganttTimeline.wrapper.find(".k-line[data-uid='DependencyUniqueId1']").hasClass("k-state-selected"));
     });
 
     test("selectDependency() doesn't apply selected class to other dependencies elements", function() {
         ganttTimeline._render(tasks, range);
         ganttTimeline._renderDependencies(dependencies);
 
-        ganttTimeline.selectDependency(".k-gantt-line:first");
+        ganttTimeline.selectDependency(".k-line:first");
 
-        ok(!ganttTimeline.wrapper.find(".k-gantt-line[data-uid='DependencyUniqueId2']").hasClass("k-state-selected"));
+        ok(!ganttTimeline.wrapper.find(".k-line[data-uid='DependencyUniqueId2']").hasClass("k-state-selected"));
     });
 
     test("selectDependency() retrieves selected elements", function() {
         ganttTimeline._render(tasks, range);
         ganttTimeline._renderDependencies(dependencies);
 
-        var targets = ganttTimeline.wrapper.find(".k-gantt-line[data-uid='DependencyUniqueId2']");
+        var targets = ganttTimeline.wrapper.find(".k-line[data-uid='DependencyUniqueId2']");
 
         ganttTimeline.selectDependency(targets[0]);
 
@@ -412,10 +412,10 @@
         ganttTimeline._render(tasks, range);
         ganttTimeline._renderDependencies(dependencies);
 
-        ganttTimeline.wrapper.find(".k-gantt-line:last").addClass("k-state-selected");
+        ganttTimeline.wrapper.find(".k-line:last").addClass("k-state-selected");
         ganttTimeline.clearSelection();
 
-        ok(!ganttTimeline.wrapper.find(".k-gantt-line:last").hasClass("k-state-selected"));
+        ok(!ganttTimeline.wrapper.find(".k-line:last").hasClass("k-state-selected"));
     });
 
 })();

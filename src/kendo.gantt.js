@@ -557,6 +557,8 @@ var __meta__ = {
 
             this._footer();
 
+            this._adjustHeight();
+
             this.timeline.view(this.timeline._selectedViewName);
 
             this._dataSource();
@@ -568,6 +570,8 @@ var __meta__ = {
             this._dependencies();
 
             this._resizable();
+
+            this._scrollable();
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
@@ -621,7 +625,8 @@ var __meta__ = {
             workWeekStart: 1,
             workWeekEnd: 5,
             hourSpan: 1,
-            snap: true
+            snap: true,
+            listWidth: 500
         },
 
         select: function(value) {
@@ -682,6 +687,8 @@ var __meta__ = {
                             .append("<div class='k-splitbar k-state-default k-splitbar-horizontal k-splitbar-draggable-horizontal k-gantt-layout' role='separator'><div class='k-icon k-resize-handle'></div></div>")
                             .append("<div class='k-gantt-layout k-gantt-timeline'><div class='k-timeline k-grid k-widget'></div></div>");
 
+            this.wrapper.find(".k-gantt-treelist").width(options.listWidth);
+
             if (height) {
                 this.wrapper.height(height);
             }
@@ -738,6 +745,20 @@ var __meta__ = {
 
             this.wrapper.append(footer);
             this.footer = footer;
+        },
+
+        _adjustHeight: function() {
+            var element = this.element;
+            var toolbarHeight = this.toolbar.outerHeight();
+            var footerHeight = this.footer.outerHeight();
+            var totalHeight = element.height();
+            var totalWidth = element.width();
+            var splitBarWidth = element.find(".k-splitbar").outerWidth();
+            var treeListWidth = element.find(".k-treelist").outerWidth();
+
+            element.find(".k-gantt-treelist, .k-splitbar, .k-gantt-timeline").height(totalHeight - (toolbarHeight + footerHeight));
+
+            element.find(".k-gantt-timeline").width(totalWidth - (splitBarWidth + treeListWidth));
         },
 
         _dropDowns: function() {
@@ -1016,7 +1037,7 @@ var __meta__ = {
         _resizable: function() {
             var wrapper = this.wrapper;
             var treeListWrapper = wrapper.find(".k-gantt-treelist");
-            var timelineWrapper = wrapper.find(".k-gantt-grid");
+            var timelineWrapper = wrapper.find(".k-gantt-timeline");
             var treeListWidth;
             var timelineWidth;
             var timelineScroll;
@@ -1053,6 +1074,21 @@ var __meta__ = {
                     timelineWrapper.width(timelineWidth - delta);
                     timelineWrapper.find(".k-grid-content").scrollLeft(timelineScroll + delta);
                 });
+        },
+
+        _scrollable: function() {
+            var wrapper = this.wrapper;
+            var timelineWrapper = wrapper.find(".k-timeline");
+            var treeListWrapper = wrapper.find(".k-treelist");
+
+            timelineWrapper.find(".k-grid-content").on("scroll", function(e) {
+                timelineWrapper.find(".k-grid-header-wrap").scrollLeft($(this).scrollLeft());
+                treeListWrapper.find(".k-grid-content").scrollTop($(this).scrollTop());
+            });
+
+            treeListWrapper.find(".k-grid-content").on("scroll", function(e) {
+                treeListWrapper.find(".k-grid-header-wrap").scrollLeft($(this).scrollLeft());
+            });
         }
     });
 

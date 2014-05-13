@@ -79,7 +79,7 @@ var __meta__ = {
 
             this.title = this.options.title || this.options.name;
 
-            this.header = this.element.find(".k-grid-header-wrap");
+            this.header = this.element.find(".k-grid-header");
 
             this.content = this.element.find(".k-grid-content");
 
@@ -145,6 +145,8 @@ var __meta__ = {
             this.createLayout(this._layout());
 
             this._slotDimensions();
+
+            this.content.height(this.element.height() - this.header.outerHeight());
         },
 
         createLayout: function(rows) {
@@ -182,6 +184,8 @@ var __meta__ = {
             var tasksTable = this._tasksTable(tasks);
 
             this._taskTree.render([rowsTable, columnsTable, tasksTable]);
+
+            this.content.find(".k-gantt-columns").first().height(this.content.find(".k-gantt-rows").first().height());
         },
 
         _rowsTable: function(rowCount) {
@@ -203,7 +207,6 @@ var __meta__ = {
             var row;
             var slots = this._timeSlots();
             var slotsCount = slots.length;
-            var height = rowCount * rowHeight;
             var slotSpan;
             var totalSpan = 0;
             var attributes;
@@ -220,7 +223,7 @@ var __meta__ = {
 
             row = kendoDomElement("tr", null, cells);
 
-            return this._createTable(totalSpan, [row], { className: "k-gantt-columns", style: { height: height + "px" } });
+            return this._createTable(totalSpan, [row], { className: "k-gantt-columns" });
         },
 
         _tasksTable: function(tasks) {
@@ -472,10 +475,10 @@ var __meta__ = {
             var delta;
 
             var addHorizontal = function() {
-                lines.push(that._line("k-gantt-line k-gantt-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
+                lines.push(that._line("k-line k-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
             };
             var addVertical = function() {
-                lines.push(that._line("k-gantt-line k-gantt-line-v", { left: left + "px", top: top + "px", height: height + "px" }));
+                lines.push(that._line("k-line k-line-v", { left: left + "px", top: top + "px", height: height + "px" }));
             };
 
             left = from[dir];
@@ -528,10 +531,10 @@ var __meta__ = {
             var delta = to.start - from.end;
 
             var addHorizontal = function() {
-                lines.push(that._line("k-gantt-line k-gantt-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
+                lines.push(that._line("k-line k-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
             };
             var addVertical = function() {
-                lines.push(that._line("k-gantt-line k-gantt-line-v", { left: left + "px", top: top + "px", height: height + "px" }));
+                lines.push(that._line("k-line k-line-v", { left: left + "px", top: top + "px", height: height + "px" }));
             };
 
             left = from.end;
@@ -1061,7 +1064,7 @@ var __meta__ = {
         _wrapper: function() {
             this.wrapper = this.element
                 .append("<div class='k-grid-header'><div class='k-grid-header-wrap'></div></div>")
-                .append("<div class='k-grid-content'><div class='k-gantt-timeline-tasks'></div><div class='k-gantt-timeline-dependencies'></div></div>");
+                .append("<div class='k-grid-content'><div class='k-gantt-tables'></div><div class='k-gantt-dependencies'></div></div>");
 
             this.element.append(this.wrapper);
         },
@@ -1072,9 +1075,9 @@ var __meta__ = {
 
             this._headerTree = new tree(wrapper.find(".k-grid-header-wrap")[0]);
 
-            this._taskTree = new tree(wrapper.find(".k-gantt-timeline-tasks")[0]);
+            this._taskTree = new tree(wrapper.find(".k-gantt-tables")[0]);
 
-            this._dependencyTree = new tree(wrapper.find(".k-gantt-timeline-dependencies")[0]);
+            this._dependencyTree = new tree(wrapper.find(".k-gantt-dependencies")[0]);
         },
 
         _views: function() {
@@ -1361,7 +1364,7 @@ var __meta__ = {
                     .on(CLICK + NS, ".k-gantt-tasks tr", function(e) {
                         that.trigger("clear");
                     })
-                    .on(CLICK + NS, ".k-gantt-line", function(e) {
+                    .on(CLICK + NS, ".k-line", function(e) {
                         e.stopPropagation();
 
                         that.selectDependency(this);
@@ -1392,12 +1395,12 @@ var __meta__ = {
 
                 uid = $(element).attr("data-uid");
 
-                this.wrapper.find(".k-gantt-line[data-uid='" + uid + "']").addClass("k-state-selected");
+                this.wrapper.find(".k-line[data-uid='" + uid + "']").addClass("k-state-selected");
 
                 return;
             }
 
-            return this.wrapper.find(".k-gantt-line.k-state-selected");
+            return this.wrapper.find(".k-line.k-state-selected");
         },
 
         clearSelection: function() {

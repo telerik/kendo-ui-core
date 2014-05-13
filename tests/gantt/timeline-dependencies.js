@@ -44,7 +44,7 @@
 
         timeline._renderDependencies([dependency]);
 
-        equal(timeline.wrapper.find(".k-gantt-timeline-dependencies k-gantt-line").length, 0);
+        equal(timeline.wrapper.find(".k-gantt-timeline-dependencies k-line").length, 0);
     });
 
     test("dependency not rendered when one of related tasks is not rendered", function() {
@@ -58,7 +58,7 @@
 
         timeline._renderDependencies([dependency]);
 
-        equal(timeline.wrapper.find(".k-gantt-timeline-dependencies .k-gantt-line").length, 0);
+        equal(timeline.wrapper.find(".k-gantt-timeline-dependencies .k-line").length, 0);
     });
 
     test("dependency rendered", function() {
@@ -72,7 +72,7 @@
 
         timeline._renderDependencies([dependency]);
 
-        equal(timeline.wrapper.find(".k-gantt-timeline-dependencies .k-gantt-line").length, 5);
+        equal(timeline.wrapper.find(".k-gantt-dependencies .k-line").length, 5);
     });
 
 }());
