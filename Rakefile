@@ -1016,7 +1016,7 @@ namespace :build do
             'php.commercial',
             'jsp.commercial'
         ].map do |bundle|
-            filename = "#{bundle}.#{VERSION}.changelog.xml"
+            filename = versioned_bundle_name(bundle) + ".xml"
 
             destination_file = File.join(ARCHIVE_ROOT, destination, 'changelogs', filename)
 
