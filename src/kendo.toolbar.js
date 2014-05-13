@@ -323,6 +323,7 @@ var __meta__ = {
                     }
 
                     if (overflowElement.length) {
+                        overflowElement.attr("data-uid", options.uid);
                         overflowElement.appendTo(this.popup.element);
 
                         if (overflowElement.data("overflow") === OVERFLOW_AUTO) {
@@ -344,6 +345,7 @@ var __meta__ = {
                     }
 
                     if (toolbarElement.length) {
+                        toolbarElement.attr("data-uid", options.uid);
                         toolbarElement.appendTo(this.element).css("visibility", "hidden");
 
                         var containerWidth = this.element.innerWidth();
@@ -365,73 +367,6 @@ var __meta__ = {
                 this.popup = new kendo.ui.Popup(components.overflowContainer, {
                     anchor: overflowAnchor
                 });
-            },
-
-            _renderOverflowItems: function(items) {
-                for (var i = 0; i < items.length; i++) {
-                    var command = items[i],
-                        element;
-
-                    if (command.overflow === OVERFLOW_NEVER) { //skip items that will NOT appear in the overflow
-                        continue;
-                    }
-
-                    if (command.overflowTemplate) {
-                        if (kendo.isFunction(command.overflowTemplate)) {
-                            element = $(command.overflowTemplate(command));
-                        } else {
-                            element = $(command.overflowTemplate);
-                        }
-                    } else {
-                        element = $(components[command.type].overflowTemplate(command));
-
-                        (components[command.type].init || $.noop)(element, command);
-                    }
-
-                    if (element.length) {
-                        element.appendTo(this.popup.element);
-
-                        if (element.data("overflow") === OVERFLOW_AUTO) {
-                            element.addClass(OVERFLOW_HIDDEN);
-                        }
-                    }
-
-                }
-            },
-
-            _renderToolbarItems: function(items) {
-                for (var i = 0; i < items.length; i++) {
-                    var command = items[i],
-                        element;
-
-                    if (command.overflow === OVERFLOW_ALWAYS) { //skip items that will appear only in the overflow
-                        continue;
-                    }
-
-                    if (command.template) {
-                        if(kendo.isFunction(command.template)) {
-                            element = $(command.template(command));
-                        } else {
-                            element = $(command.template);
-                        }
-                    } else {
-                        element = $(components[command.type].template(command));
-                        (components[command.type].init || $.noop)(element, command);
-                    }
-
-                    if (element.length) {
-                        element.appendTo(this.element).css("visibility", "hidden");
-
-                        var containerWidth = this.element.innerWidth();
-
-                        if(containerWidth < this._childrenWidth()) {
-                            this._hideItem(element);
-                        }
-
-                        element.css("visibility", "visible");
-                    }
-
-                }
             },
 
             _buttonClick: function(e) {
@@ -524,16 +459,19 @@ var __meta__ = {
             _hideItem: function(item, append) {
                 if (item.data("overflow") !== OVERFLOW_NEVER) {
                     item.hide();
-                    //connect commands with uids
-                    this.popup.element.find(">li.k-overflow-hidden").last().removeClass(OVERFLOW_HIDDEN);
+                    this.popup.element
+                        .find(">li[data-uid='" + item.data("uid") + "']")
+                        .removeClass(OVERFLOW_HIDDEN);
                 }
             },
 
             _showItem: function(item, containerWidth) {
                 if (item.length && containerWidth > this._childrenWidth() + item.outerWidth(true)) {
                     item.show();
-                    //connect commands with uids
-                    this.popup.element.find(">li:not(.k-overflow-hidden)").first().addClass(OVERFLOW_HIDDEN);
+                    this.popup.element
+                        .find(">li[data-uid='" + item.data("uid") + "']")
+                        .addClass(OVERFLOW_HIDDEN);
+
                     return true;
                 }
 

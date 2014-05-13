@@ -304,7 +304,7 @@
         ok(toolbar.popup.element.find(".k-overflow-button").length);
     });
 
-    test("botton element in overflow popup is wrapped inside a <li> tag", 1, function() {
+    test("button element in overflow popup is wrapped inside a <li> tag", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", text: "foo", overflow: "always" }
@@ -314,6 +314,21 @@
         var button = toolbar.popup.element.find(".k-overflow-button");
 
         equal(button.parent().prop("tagName"), "LI");
+    });
+
+    test("button receives data-uid attribute", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find(".k-button");
+        var overflowButton = toolbar.popup.element.children().eq(0);
+
+        ok(button.data("uid"));
+        ok(overflowButton.data("uid"));
+        equal(button.data("uid"), overflowButton.data("uid"));
     });
 
     /* TOGGLE BUTTON */
