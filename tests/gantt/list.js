@@ -161,7 +161,7 @@
         for (var idx = 0; idx < ganttList.columns.length; idx++) {
             column = ganttList.columns[idx];
             if (column.sortable) {
-                equal(ths.eq(idx).attr("data-role"), "sorter");
+                equal(ths.eq(idx).attr("data-role"), "columnsorter");
             } else {
                 ok(!ths.eq(idx).attr("data-role"));
             }

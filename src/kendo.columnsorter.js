@@ -3,8 +3,8 @@
 })(function(){
 
 var __meta__ = {
-    id: "sorter",
-    name: "Sorter",
+    id: "columnsorter",
+    name: "Column Sorter",
     category: "framework",
     depends: ["core"]
 };
@@ -18,12 +18,12 @@ var __meta__ = {
     var SINGLE = "single";
     var FIELD = "field";
     var DESC = "desc";
-    var sorterNS = ".kendoSorter";
+    var sorterNS = ".kendoColumnSorter";
     var TLINK = ".k-link";
     var ARIASORT = "aria-sort";
     var proxy = $.proxy;
 
-    var Sorter = Widget.extend({
+    var ColumnSorter = Widget.extend({
         init: function (element, options) {
 
             var that = this, link;
@@ -46,7 +46,7 @@ var __meta__ = {
         },
 
         options: {
-            name: "Sorter",
+            name: "ColumnSorter",
             mode: SINGLE,
             allowUnsort: true,
             compare: null,
@@ -139,7 +139,7 @@ var __meta__ = {
         }
     });
 
-    ui.plugin(Sorter);
+    ui.plugin(ColumnSorter);
 
 })(window.kendo.jQuery);
 

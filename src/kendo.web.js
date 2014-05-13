@@ -32,6 +32,7 @@
         "./kendo.multiselect",
         "./kendo.colorpicker",
         "./kendo.columnmenu",
+        "./kendo.columnsorter",
         "./kendo.grid",
         "./kendo.listview",
         "./kendo.imagebrowser",

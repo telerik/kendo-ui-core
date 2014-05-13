@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.sorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane" ], f);
+    define([ "./kendo.data", "./kendo.columnsorter", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane" ], f);
 })(function(){
 
 var __meta__ = {
@@ -968,7 +968,7 @@ var __meta__ = {
             that.thead.find("th").each(function(){
                 var th = $(this),
                     filterMenu = th.data("kendoFilterMenu"),
-                    sortable = th.data("kendoSorter"),
+                    sortable = th.data("kendoColumnSorter"),
                     columnMenu = th.data("kendoColumnMenu");
 
                 if (filterMenu) {
@@ -3598,7 +3598,7 @@ var __meta__ = {
             var that = this,
                 columns = that.columns,
                 column,
-                sortableInstance,
+                sorterInstance,
                 cell,
                 sortable = that.options.sortable;
 
@@ -3611,15 +3611,19 @@ var __meta__ = {
                     if (column.sortable !== false && !column.command && column.field) {
                         cell = cells.eq(idx);
 
-                        sortableInstance = cell.data("kendoSorter");
+                        sorterInstance = cell.data("kendoColumnSorter");
 
-                        if (sortableInstance) {
-                            sortableInstance.destroy();
+                        if (sorterInstance) {
+                            sorterInstance.destroy();
                         }
 
                         cell.attr("data-" + kendo.ns +"field", column.field)
-                            .kendoSorter(
-                                extend({}, sortable, column.sortable, { dataSource: that.dataSource, aria: true, filter: ":not(.k-column-active)" })
+                            .kendoColumnSorter(
+                                extend({}, sortable, column.sortable, {
+                                    dataSource: that.dataSource,
+                                    aria: true,
+                                    filter: ":not(.k-column-active)"
+                                })
                             );
                     }
                 }

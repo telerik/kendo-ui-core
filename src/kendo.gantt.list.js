@@ -1,5 +1,5 @@
 ﻿(function(f, define) {
-    define(["./kendo.core", "./kendo.touch", "./kendo.sorter", "./kendo.editable"], f);
+    define(["./kendo.core", "./kendo.touch", "./kendo.columnsorter", "./kendo.editable"], f);
 })(function() {
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt List",
     category: "web",
     description: "The Gantt List",
-    depends: [ "core", "touch" , "sorter", "editable" ],
+    depends: [ "core", "touch" , "columnsorter", "editable" ],
     hidden: true
 };
 
@@ -196,7 +196,7 @@ var __meta__ = {
                 style = { "data-field": column.field, "data-title": column.title, className: "k-header k-with-icon" };
 
                 if (column.sortable) {
-                    extend(style, { "data-role": "sorter" });
+                    extend(style, { "data-role": "columnsorter" });
                 }
 
                 ths.push(kendoDomElement("th", style, [kendoTextElement(column.title)]));
@@ -317,14 +317,14 @@ var __meta__ = {
                 if (column.sortable) {
                     cell = cells.eq(idx);
 
-                    sortableInstance = cell.data("kendoSorter");
+                    sortableInstance = cell.data("kendoColumnSorter");
 
                     if (sortableInstance) {
                         sortableInstance.destroy();
                     }
 
                     cell.attr("data-" + kendo.ns + "field", column.field)
-                        .kendoSorter({ dataSource: this.dataSource });
+                        .kendoColumnSorter({ dataSource: this.dataSource });
                 }
             }
             cells = null;

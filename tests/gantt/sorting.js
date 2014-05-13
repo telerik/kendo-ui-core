@@ -31,9 +31,9 @@
         var test = function(idx, element) {
             var th = $(element);
             if (list.columns[idx].sortable) {
-                ok(th.data("kendoSorter"));
+                ok(th.data("kendoColumnSorter"));
             } else {
-                ok(!th.data("kendoSorter"));
+                ok(!th.data("kendoColumnSorter"));
             }
         };
 
@@ -44,7 +44,7 @@
         var test = function() {
             var th = $(arguments[1]);
 
-            ok(!th.data("kendoSorter"));
+            ok(!th.data("kendoColumnSorter"));
         };
 
         gantt.destroy()
