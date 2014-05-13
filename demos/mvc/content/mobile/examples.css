@@ -68,6 +68,12 @@
     content: "\e602";
 }
 
+#examples .km-themechooser:before,
+#examples .km-themechooser:after {
+    font: 1em/1em "KendoMobileDemos" normal;
+    content: "\e601";
+}
+
 #examples .km-arrow-w:after,
 #examples .km-arrow-w:before
 {
@@ -166,4 +172,33 @@
 
 #logo {
     margin-left: 33px;
+}
+
+#themechooser li {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+#themechooser .km-content,
+#themechooser .km-listview-wrapper {
+    background: #2a2d33;
+}
+
+#themechooser a {
+    margin: 0;
+    padding:.8em 2em;
+    border-left-width: 9px;
+    border-left-style: solid;
+    color: white;
+}
+
+#themechooser .current a {
+    border-left-width: 20px;
+    background: #0f1011;
+}
+
+#themechooser a:after {
+    box-shadow: none;
 }

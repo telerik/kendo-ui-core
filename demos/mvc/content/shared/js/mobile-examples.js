@@ -24,6 +24,20 @@ var detailNavDataSource = new kendo.data.DataSource({
     }
 });
 
+var themes = [
+    { text: "Default", value: "default", color: "#ef6f1c" },
+    { text: "Blue Opal", value: "blueopal", color: "#076186" },
+    { text: "Bootstrap", value: "bootstrap", color: "#3276b1" },
+    { text: "Silver", value: "silver", color: "#298bc8" },
+    { text: "Uniform", value: "uniform", color: "#666666" },
+    { text: "Metro", value: "metro", color: "#8ebc00" },
+    { text: "Black", value: "black", color: "#0167cc" },
+    { text: "Metro Black", value: "metroblack", color: "#00aba9" },
+    { text: "High Contrast", value: "highcontrast", color: "#b11e9c" },
+    { text: "Moonlight", value: "moonlight", color: "#ee9f05" },
+    { text: "Flat", value: "flat", color: "#363940" }
+];
+
 var searchDataSource = new kendo.data.DataSource();
 
 function mobileExamples(section) {
@@ -145,22 +159,11 @@ function triggerIndexButton(e) {
     }
 }
 
-function changeSkin(e) {
-    var nextSkin = e.sender.element.text() == "Flat" ? "flat" : "";
-
-    window.app.skin(nextSkin.toLowerCase());
-    e.sender.element.find(".km-text").text(nextSkin ? "Native" : "Flat");
-
-    if (isAndroid) {
-        $("#androidLightChanger")[nextSkin ? "hide" : "show"]();
-    }
-}
-
-function changeAndroidSkin(e) {
-    var nextSkin = e.sender.element.text() == "Light" ? "android-light" : "android-dark";
-
-    window.app.skin(nextSkin.toLowerCase());
-    e.sender.element.find(".km-text").text(nextSkin == "android-light" ? "Dark" : "Light");
+function selectTheme(e) {
+    e.preventDefault();
+    e.sender.element.find("li").removeClass("current");
+    e.item.addClass("current");
+    console.log(e);
 }
 
 window.app = new kendo.mobile.Application($(document.body), {
