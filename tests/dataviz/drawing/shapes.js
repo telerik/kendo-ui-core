@@ -17,25 +17,6 @@
         Arc = d.Arc,
         TOLERANCE = 0.1;
 
-    function compareBoundingBox(bbox, values, tolerance) {
-        tolerance = tolerance || 0;
-
-        close(bbox.p0.x, values[0], tolerance);
-        close(bbox.p0.y, values[1], tolerance);
-        close(bbox.p1.x, values[2], tolerance);
-        close(bbox.p1.y, values[3], tolerance);
-    }
-
-    function compareMatrices(m1, m2, tolerance) {
-        tolerance = tolerance  || 0;
-        close(m1.a, m2.a, tolerance);
-        close(m1.b, m2.b, tolerance);
-        close(m1.c, m2.c, tolerance);
-        close(m1.d, m2.d, tolerance);
-        close(m1.e, m2.e, tolerance);
-        close(m1.f, m2.f, tolerance);
-    }
-
     // ------------------------------------------------------------
     (function() {
         var element,

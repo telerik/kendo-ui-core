@@ -187,6 +187,8 @@
         return new Point(util.MAX_NUM, util.MAX_NUM);
     };
 
+    Point.ZERO = new Point(0, 0);
+
     var Rect = Class.extend({
         init: function(p0, p1) {
             this.p0 = p0 || new Point();
@@ -529,18 +531,30 @@
             return this;
         },
 
-        scale: function(x, y) {
-            if (!defined(y)) {
-               y = x;
+        scale: function(scaleX, scaleY, origin) {
+            if (!defined(scaleY)) {
+               scaleY = scaleX;
             }
-            this._matrix = this._matrix.times(Matrix.scale(x, y));
+
+            if (origin) {
+                origin = Point.create(origin);
+                this._matrix = this._matrix.times(Matrix.translate(origin.x, origin.y));
+            }
+
+            this._matrix = this._matrix.times(Matrix.scale(scaleX, scaleY));
+
+            if (origin) {
+                this._matrix = this._matrix.times(Matrix.translate(-origin.x, -origin.y));
+            }
 
             this._optionsChange();
             return this;
         },
 
-        rotate: function(angle, x, y) {
-            this._matrix = this._matrix.times(Matrix.rotate(angle, x, y));
+        rotate: function(angle, origin) {
+            origin = Point.create(origin) || Point.ZERO;
+
+            this._matrix = this._matrix.times(Matrix.rotate(angle, origin.x, origin.y));
 
             this._optionsChange();
             return this;
