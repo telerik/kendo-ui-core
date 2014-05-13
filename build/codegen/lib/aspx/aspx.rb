@@ -11,6 +11,8 @@ module CodeGen
             OPTIONS_TO_SKIP = %w{
                 dataSource
                 autoBind
+                layers.dataSource
+                layers.autoBind
             }
 
             TYPES_MAP = {

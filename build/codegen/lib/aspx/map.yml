@@ -7,69 +7,84 @@
           - tile
           - shape
           - marker
+
     - :name: markers.shape
       :type: String
-      :enum_type: MapMarkersShape
+      :default: MarkerShape.PinTarget
       :description: The marker shape. Supported shapes are "pin" and "pinTarget".
       :values:
           - pin
           - pinTarget
-    - :name: markerDefaults.shape
-      :type: String
-      :enum_type: MapMarkersShape
-      :description: The default marker shape. Supported shapes are "pin" and "pinTarget".
-      :values:
-          - pin
-          - pinTarget
-    - :name: layers.shape
-      :type: String
-      :enum_type: MapMarkersShape
-      :description: The marker shape. Supported shapes are "pin" and "pinTarget".
-      :values:
-          - pin
-          - pinTarget
+
     - :name: layerDefaults.marker.shape
-      :type: String
-      :enum_type: MapMarkersShape
-      :description: The marker shape. Supported shapes are "pin" and "pinTarget".
-      :values:
-          - pin
-          - pinTarget
-    - :name: markers.tooltip.position
-      :type: String
+      :type: kendo.dataviz.map.Marker.Shape
+      :default: MarkerShape.PinTarget
+
+    - :name: markerDefaults.shape
+      :type: kendo.dataviz.map.Marker.Shape
+      :default: MarkerShape.PinTarget
+
+    - :name: layers.shape
+      :type: kendo.dataviz.map.Marker.Shape
+      :default: MarkerShape.PinTarget
+
+
+    - :name: layers.tooltip.position
+      :type: kendo.dataviz.map.TooltipPosition
       :description: The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+      :default: TooltipPosition.Top
+      :values:
+          - bottom -
+          - top
+          - left
+          - right
+
+    - :name: markers.tooltip.position
+      :type: kendo.dataviz.map.TooltipPosition
+      :description: The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+      :default: TooltipPosition.Top
       :values:
           - bottom
           - top
           - left
           - right
+
     - :name: markerDefaults.tooltip.position
-      :type: String
-      :description: The position relative to the target element, at which the tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+      :type: kendo.dataviz.map.TooltipPosition
+      :description: The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+      :default: TooltipPosition.Top
       :values:
           - bottom
           - top
           - left
           - right
+
+
+
     - :name: controls.attribution.position
       :type: String
       :description: The position of the attribution control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :default: AttributionPosition.TopLeft
       :values:
           - topLeft
           - topRight
           - bottomRight
           - bottomLeft
+
     - :name: controls.navigator.position
       :type: String
       :description: The position of the navigator control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :default: NavigatorPosition.TopLeft
       :values:
           - topLeft
           - topRight
           - bottomRight
           - bottomLeft
+
     - :name: controls.zoom.position
       :type: String
       :description: The position of the zoom control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
+      :default: ZoomPosition.TopLeft
       :values:
           - topLeft
           - topRight
@@ -78,10 +93,6 @@
 
 
 
-
-    - :name: center
-      :default: 'null'
-      :type: kendo.dataviz.map.Location
 
     - :name: center.latitude
       :type: Number
@@ -92,6 +103,10 @@
       :type: Number
       :description: ==TBA==
       :default: 0
+
+    - :name: center
+      :default: 'null'
+      :type: kendo.dataviz.map.Location
 
     - :name: markers.marker
       :type: kendo.dataviz.map.Marker
@@ -112,6 +127,9 @@
     - :name: layers.subdomains
       :type: stringArray
       :default: null
+
+    - :name: layers.extent
+      :type: kendo.dataviz.map.Location
 
     - :name: layerDefaults.tile.subdomains
       :type: stringArray
