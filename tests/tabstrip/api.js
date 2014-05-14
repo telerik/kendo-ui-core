@@ -32,7 +32,7 @@ function Load(e) {
 module('tabstrip api', {
     setup: function() {
         QUnit.fixture.append(
-            ' <div class="k-widget k-tabstrip k-header" id="tabstrip" style="visibility: hidden; position: absolute;">' +
+            ' <div class="k-widget k-tabstrip k-header" id="tabstrip" style="visibility: hidden;">' +
             '    <ul class="k-reset k-tabstrip-items">' +
             '        <li class="k-item k-state-default k-state-active"><a class="k-link" href="#tabstrip-1">ASP.NET MVC</a></li>' +
             '        <li class="k-item k-state-default"><a class="k-link" href="#tabstrip-2">Silverlight</a></li>' +
@@ -181,16 +181,18 @@ test('clicking should raise onSelect event', function() {
     ok(isRaised);
 });
 
-asyncTest('clicking should raise onActivate event when the new contentElement is visible', function() {
-
+asyncTest('clicking should raise onActivate event when the new contentElement is visible and scrollWrap should be sized accordingly', function() {
+    var tabstrip = getTabStrip();
     var item = getRootItem(3);
 
     isActivateRaised = false;
 
+    var height = tabstrip.scrollWrap.height();
     item.find('> .k-link').trigger('click');
 
     setTimeout(function () {
         ok(isActivateRaised);
+        equal(height, tabstrip.scrollWrap.height());
         start();
     }, 10);
 });

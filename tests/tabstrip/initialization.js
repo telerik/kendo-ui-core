@@ -37,4 +37,19 @@ test("navigatable should attach the keydown handler only if true", 2, function()
     ok($._data( tabstrip.wrapper[0], "events" ).keydown, "Keydown event attached");
 });
 
+test("adds a scroll stopping wrapper around itself", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom);
+
+    ok(tabstrip.scrollWrap.is(".k-tabstrip-wrapper"), "Adds wrapper class");
+    ok(tabstrip.wrapper.parent(".k-tabstrip-wrapper").length, "Wraps around the TabStrip");
+});
+
+test("removes its scrolling wrapper on destroy", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom);
+
+    tabstrip.destroy();
+
+    ok(!tabstrip.wrapper.parent().is(".km-tabstrip-wrapper"), "Unwraps the wrapper");
+});
+
 })();
