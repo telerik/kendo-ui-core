@@ -495,7 +495,7 @@
                         var body = editor.body;
                         var toolbar = editor.toolbar;
 
-                        if (active != body && !$.contains(body, active) && !toolbar.focused()) {
+                        if (active != body && !$.contains(body, active) && !$(active).is(".k-editortoolbar-dragHandle") && !toolbar.focused()) {
                             $(body).removeClass("k-state-active");
                             toolbar.hide();
                         }
