@@ -131,7 +131,7 @@
 
             if (!string.IsNullOrEmpty(HeaderTemplateId))
             {
-                options["headerTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, HeaderTemplateId) };
+                options["headerTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, HeaderTemplateId) };
             }
             else if (!string.IsNullOrEmpty(HeaderTemplate))
             {

@@ -143,7 +143,7 @@ namespace Kendo.Mvc.UI.Tests
             tooltip.ContentTemplateId = "foo";
             tooltip.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{\"content\":kendo.template($('#foo').html())}");
+            output.ShouldContain("{\"content\":kendo.template(jQuery('#foo').html())}");
         }
 
         [Fact]
@@ -153,7 +153,7 @@ namespace Kendo.Mvc.UI.Tests
             tooltip.Content = "bar";
             tooltip.WriteInitializationScript(textWriter.Object);
 
-            output.ShouldContain("{\"content\":kendo.template($('#foo').html())}");
+            output.ShouldContain("{\"content\":kendo.template(jQuery('#foo').html())}");
         }
 
         [Fact]

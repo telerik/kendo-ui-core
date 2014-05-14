@@ -63,7 +63,7 @@
             {
                 var idPrefix = "#";
 
-                json["template"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, TemplateId) };    
+                json["template"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, TemplateId) };
             }
 
             SerializeEditTemplate(json);

@@ -46,7 +46,7 @@
 
             if (!string.IsNullOrEmpty(EventDateTemplateId))
             {
-                json["eventDateTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, EventDateTemplateId) };
+                json["eventDateTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, EventDateTemplateId) };
             }
 
             if (!string.IsNullOrEmpty(EventTimeTemplate))
@@ -56,7 +56,7 @@
 
             if (!string.IsNullOrEmpty(EventTimeTemplateId))
             {
-                json["eventTimeTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, EventTimeTemplateId) };
+                json["eventTimeTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, EventTimeTemplateId) };
             }
 
         }

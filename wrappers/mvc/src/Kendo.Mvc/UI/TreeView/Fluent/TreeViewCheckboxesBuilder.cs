@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public TreeViewCheckboxesBuilder TemplateId(string templateId)
         {
-            settings.Template = new ClientHandlerDescriptor { HandlerName = string.Format("$('#{0}').html()", templateId) };
+            settings.Template = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('#{0}').html()", templateId) };
 
             return this;
         }

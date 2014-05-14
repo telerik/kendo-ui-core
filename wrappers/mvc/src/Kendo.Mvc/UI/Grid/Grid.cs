@@ -800,7 +800,7 @@ namespace Kendo.Mvc.UI
 
             if (!String.IsNullOrEmpty(ClientDetailTemplateId))
             {
-                options["detailTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ClientDetailTemplateId) };                                
+                options["detailTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, ClientDetailTemplateId) };
             }
 
             if (!String.IsNullOrEmpty(ClientRowTemplate))

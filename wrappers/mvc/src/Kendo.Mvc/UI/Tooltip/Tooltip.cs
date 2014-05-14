@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI
                 {
                     idPrefix = "\\" + idPrefix;
                 }
-                options["content"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, ContentTemplateId) };
+                options["content"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, ContentTemplateId) };
             }
             else if (Content.HasValue())
             {

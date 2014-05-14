@@ -182,7 +182,7 @@
 
             if (!string.IsNullOrEmpty(DateHeaderTemplateId))
             {
-                json["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
+                json["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
             }
 
             if (MajorTick != null)
@@ -197,7 +197,7 @@
 
             if (!string.IsNullOrEmpty(MajorTimeHeaderTemplateId))
             {
-                json["majorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MajorTimeHeaderTemplateId) };
+                json["majorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, MajorTimeHeaderTemplateId) };
             }
 
             if (MinorTickCount != null)
@@ -212,7 +212,7 @@
 
             if (!string.IsNullOrEmpty(MinorTimeHeaderTemplateId))
             {
-                json["minorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MinorTimeHeaderTemplateId) };
+                json["minorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, MinorTimeHeaderTemplateId) };
             }
 
             if (!string.IsNullOrEmpty(SlotTemplate))
@@ -222,7 +222,7 @@
 
             if (!string.IsNullOrEmpty(SlotTemplateId))
             {
-                json["slotTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, SlotTemplateId) };
+                json["slotTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, SlotTemplateId) };
             }
  
             if (!string.IsNullOrEmpty(AllDaySlotTemplate))
@@ -232,7 +232,7 @@
 
             if (!string.IsNullOrEmpty(AllDaySlotTemplateId))
             {
-                json["allDaySlotTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, AllDaySlotTemplateId) };
+                json["allDaySlotTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, AllDaySlotTemplateId) };
             }           
             if (StartTime != null)
             {
