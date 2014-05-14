@@ -161,9 +161,14 @@ function triggerIndexButton(e) {
 
 function selectTheme(e) {
     e.preventDefault();
-    e.sender.element.find("li").removeClass("current");
-    e.item.addClass("current");
-    console.log(e);
+    if (!e.item.hasClass("current")) {
+        e.sender.element.find("li").removeClass("current");
+        e.item.addClass("current");
+        kendo.mobile.application.showLoading();
+        window.kendoThemeChooser.changeTheme(e.dataItem.value, true, function() {
+            kendo.mobile.application.hideLoading();
+        });
+    }
 }
 
 window.app = new kendo.mobile.Application($(document.body), {
