@@ -191,7 +191,7 @@ def prepare_release_files(bot, options)
     file_fields = file_metadata[:zip]
     bot.click_and_wait "Add new file", "administration"
 
-    set_fields_data(bot, file_fields)
+    set_release_fields_data(bot, file_fields)
 
     upload_release_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
   end
@@ -201,7 +201,7 @@ def prepare_release_files(bot, options)
     file_fields = file_metadata[:msi]
     bot.click_and_wait "Add new file", "administration"
 
-    set_fields_data(bot, file_fields)
+    set_release_fields_data(bot, file_fields)
 
     upload_release_file_and_save(bot, options[:archive_path], file_fields[:download_name], true)
   end
@@ -210,7 +210,7 @@ def prepare_release_files(bot, options)
     file_fields = file_metadata[:exe]
     bot.click_and_wait "Add new file", "administration"
 
-    set_fields_data(bot, file_fields)
+    set_release_fields_data(bot, file_fields)
 
     upload_release_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
   end
@@ -219,7 +219,7 @@ def prepare_release_files(bot, options)
     file_fields = file_metadata[:nuget]
     bot.click_and_wait "Add new file", "administration"
 
-    set_fields_data(bot, file_fields)
+    set_release_fields_data(bot, file_fields)
 
     upload_release_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
   end
