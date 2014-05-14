@@ -2411,10 +2411,10 @@
             "packages": [ "online" ],
             "items": [
                 {
-                    "text": "Kendo UI + jQuery templates",
-                    "url": "integration/jquery-templates.html",
-                    "title": "Integrating jQuery templates with Kendo UI Web examples",
-                    "meta": "This demo illustrates how jQuery templates can be integrated with the robust Kendo UI framework for web app development."
+                    "text": "Kendo UI + Handlebars",
+                    "url": "integration/handlebars.html",
+                    "title": "Integrating Handlebars templates with Kendo UI ",
+                    "meta": "This demo illustrates how Handlebar templates can be integrated with the robust Kendo UI framework for web app development."
                 },
                 {
                     "text": "Kendo UI + Twitter Bootstrap",
