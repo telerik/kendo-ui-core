@@ -179,6 +179,8 @@ var __meta__ = {
         render: function(tasks) {
             var taskCount = tasks.length;
 
+            this._milestoneWidth = this._calculateMilestoneWidth();
+
             var rowsTable = this._rowsTable(taskCount);
             var columnsTable = this._columnsTable(taskCount);
             var tasksTable = this._tasksTable(tasks);
@@ -228,8 +230,6 @@ var __meta__ = {
 
         _tasksTable: function(tasks) {
             var rows = [];
-            var wrap;
-            var cell;
             var row;
             var position;
             var task;
@@ -240,9 +240,11 @@ var __meta__ = {
 
                 position = this._taskPosition(task);
 
-                wrap = kendoDomElement("div", { className: "taskWrap" }, [this._renderTask(tasks[i], position)]);
-                cell = kendoDomElement("td", null, [wrap]);
-                row = kendoDomElement("tr", null, [cell]);
+                row = kendoDomElement("tr", null, [
+                    kendoDomElement("td", null, [
+                        this._renderTask(tasks[i], position)
+                    ])
+                ]);
 
                 rows.push(row);
                 
@@ -300,31 +302,85 @@ var __meta__ = {
             return tableWidth;
         },
 
+        _calculateMilestoneWidth: function() {
+            var milestone = $("<div class='k-task k-task-milestone' style='display: block; visibility: hidden; position: absolute'></div>");
+            var milestoneWidth;
+
+            this.content.append(milestone);
+
+            milestoneWidth = milestone.width();
+
+            milestone.remove();
+
+            return milestoneWidth;
+        },
+
         _renderTask: function(task, position) {
-            var title;
-            var inner;
-            var middle;
+            var taskWrapper;
             var taskElement;
+            var progressHandleLeft;
+            var taskLeft = position.left;
 
             if (task.summary) {
-                inner = kendoDomElement("div", { className: "k-gantt-summary-complete", style: { width: position.width + "px" } });
-                middle = kendoDomElement("div", { className: "k-gantt-summary-progress", style: { width: task.percentComplete + "%" } }, [inner]);
-                taskElement = kendoDomElement("div", { "data-uid": task.uid, className: "k-gantt-summary", style: { left: position.left + "px", width: position.width + "px" } }, [middle]);
+                taskElement = this._renderSummary(task, position);
+            } else if (task.isMilestone()) {
+                taskElement = this._renderMilestone(task, position);
+                taskLeft = taskLeft - (Math.round(this._milestoneWidth / 2));
             } else {
-                title = kendoTextElement(task.title);
-                var template = kendoDomElement("div", null, [kendoDomElement("div", { className: "k-event-template" }, [title])]);
-                var actions = kendoDomElement("span", { className: "k-event-actions" }, [
-                    kendoDomElement("a", { href: "#", className: "k-link k-event-delete" }, [
-                        kendoDomElement("span", { className: "k-icon k-si-close" }, [
-                        ])
-                    ])
-                ]);
-                var resizeW = kendoDomElement("span", { className: "k-resize-handle k-resize-w" });
-                var resizeE = kendoDomElement("span", { className: "k-resize-handle k-resize-e" });
-                taskElement = kendoDomElement("div", { "data-uid": task.uid, className: "k-event", style: { left: position.left + "px", width: position.width + "px" } }, [template, actions, resizeW, resizeE]);
+                taskElement = this._renderSingleTask(task, position);
             }
 
-            return taskElement;
+            taskWrapper = kendoDomElement("div", { className: "k-task-wrap", style: { left: taskLeft + "px" } }, [
+                taskElement,
+                kendoDomElement("div", { className: "k-task-dot k-task-start" }),
+                kendoDomElement("div", { className: "k-task-dot k-task-end" })
+            ]);
+
+            if (!task.summary && !task.isMilestone()) {
+                progressHandleLeft = Math.round(position.width * task.percentComplete / 100);
+
+                taskWrapper.children.push(kendoDomElement("div", { className: "k-task-draghandle", style: { left: progressHandleLeft + "px" } }));
+            }
+
+            return taskWrapper;
+        },
+
+        _renderSingleTask: function(task, position) {
+            var progressWidth = Math.round(position.width * task.percentComplete / 100);
+
+            var element = kendoDomElement("div", { className: "k-task k-task-single", style: { width: position.width + "px" } }, [
+                kendoDomElement("div", { className: "k-task-complete", style: { width: progressWidth + "px" } }),
+                kendoDomElement("div", { className: "k-task-content" }, [
+                    kendoDomElement("div", { className: "k-task-template" }, [
+                        kendoTextElement(task.title)
+                    ]),
+                    kendoDomElement("span", { className: "k-task-actions" }, [
+                        kendoDomElement("a", { className: "k-link k-task-delete", href: "#" }, [
+                            kendoDomElement("span", { className: "k-icon k-si-close" })
+                        ])
+                    ]),
+                    kendoDomElement("span", { className: "k-resize-handle k-resize-w" }),
+                    kendoDomElement("span", { className: "k-resize-handle k-resize-e" })
+                ])
+            ]);
+
+            return element;
+        },
+
+        _renderMilestone: function(task, position) {
+            var element = kendoDomElement("div", { className: "k-task k-task-milestone" });
+
+            return element;
+        },
+
+        _renderSummary: function(task, position) {
+            var element = kendoDomElement("div", { className: "k-task k-task-summary", style: { width: position.width + "px" } }, [
+                kendoDomElement("div", { className: "k-task-summary-progress", style: { width: task.percentComplete + "%" } }, [
+                    kendoDomElement("div", { className: "k-task-summary-complete", style: { width: position.width + "px" } })
+                ])
+            ]);
+
+            return element;
         },
 
         _taskPosition: function(task) {
@@ -347,6 +403,10 @@ var __meta__ = {
 
             if (slot.end < date) {
                 return slot.offsetLeft + slot.offsetWidth;
+            }
+
+            if (slot.start > date) {
+                return slot.offsetLeft;
             }
 
             startOffset = date - slot.start;

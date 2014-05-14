@@ -3,7 +3,9 @@
     var element;
     var gantt;
     var timeline;
+    var extend = $.extend;
     var Gantt = kendo.ui.Gantt;
+    var GanttTask = kendo.data.GanttTask;
     var Timeline = kendo.ui.GanttTimeline;
     var tasks;
 
@@ -12,16 +14,16 @@
             element = $("<div />");
             timeline = new Timeline(element);
             timeline.view("week");
-            tasks = [{
+            tasks = [new GanttTask({
                 start: new Date("2014/04/15"),
                 end: new Date("2014/04/16")
-            }, {
+            }), new GanttTask({
                 start: new Date("2014/04/16"),
                 end: new Date("2014/04/17")
-            }, {
+            }), new GanttTask({
                 start: new Date("2014/04/15"),
                 end: new Date("2014/04/17")
-            }];
+            })];
         },
         teardown: function() {
             if (timeline) {
@@ -210,58 +212,946 @@
 
     module("Single Task Rendering", {
         setup: function() {
-            element = $("<div />");
+            element = $("<div />").appendTo(QUnit.fixture);
             gantt = new Gantt(element);
             timeline = gantt.timeline;
         },
         teardown: function() {
             kendo.destroy(element);
+            element.remove();
         }
     });
 
-    function renderTask() {
-        timeline._render([{
+    function renderTask(taskProperties) {
+        timeline._render([new GanttTask(extend({}, {
             start: new Date("2014/04/17"),
             end: new Date("2014/04/18")
-        }]);
+        }, taskProperties))]);
     }
 
-    function renderMilestone() {
-        timeline._render([{
-            start: new Date("2014/04/17"),
-            end: new Date("2014/04/17")
-        }]);
-    }
+    test("wrapper rendered", function() {
+        renderTask();
 
-    function renderSummary() {
-        timeline._render([{
-            start: new Date("2014/04/17"),
-            end: new Date("2014/04/19"),
-            summary: true
-        }]);
-    }
+        ok(timeline.view().content.find(".k-task-wrap").length);
+    });
+
+    test("dependency drag handles rendered", function() {
+        var taskWrap;
+
+        renderTask();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-start").length);
+        ok(taskWrap.find(".k-task-end").length);
+    });
+
+    test("task element rendered", function() {
+        var taskWrap;
+
+        renderTask();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-single").length);
+    });
+
+    test("title rendered", function() {
+        var taskWrap;
+
+        renderTask({ title: "Task 1" });
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-content .k-task-template").length);
+        equal(taskWrap.find(".k-task-content .k-task-template").text(), "Task 1");
+    });
+
+    test("delete button rendered", function() {
+        var taskWrap;
+
+        renderTask();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-content .k-task-actions .k-task-delete").length);
+        ok(taskWrap.find(".k-task-content .k-task-actions .k-task-delete .k-si-close").length);
+    });
+
+    test("resize handles rendered", function() {
+        var taskWrap;
+
+        renderTask();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-content .k-resize-handle.k-resize-w").length);
+        ok(taskWrap.find(".k-task-content .k-resize-handle.k-resize-e").length);
+    });
+
+    test("progress rendered", function() {
+        var taskWrap;
+
+        renderTask();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-complete").length);
+    });
+
+    test("progress drag handle rendered", function() {
+        var taskWrap;
+
+        renderTask();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-draghandle").length);
+    });
+
+
+    test("width of one hour task is equal to one slot in DayView", function() {
+        var taskElement;
+        var taskSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 11:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        taskSlot = timeline.view()._timeSlots()[2];
+
+        equal(taskElement.width(), taskSlot.offsetWidth);
+    });
+
+    test("width of two hour task", function() {
+        var taskElement;
+        var firstSlot;
+        var secondSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 12:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        firstSlot = timeline.view()._timeSlots()[2];
+        secondSlot = timeline.view()._timeSlots()[3];
+
+        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+    });
+
+    test("width of task when not snapped to slot", function() {
+        var taskElement;
+        var taskSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 10:30")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        taskSlot = timeline.view()._timeSlots()[2];
+
+        equal(taskElement.width(), taskSlot.offsetWidth / 2);
+    });
+
+    test("width of one day task is equal to one slot in WeekView", function() {
+        var taskElement;
+        var taskSlot;
+
+        timeline.view("week");
+
+        renderTask({
+            start: new Date("2014/05/13"),
+            end: new Date("2014/05/14")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        taskSlot = timeline.view()._timeSlots()[2];
+
+        equal(taskElement.width(), taskSlot.offsetWidth);
+    });
+
+    test("width of one week task is equal to one slot in MonthView", function() {
+        var taskElement;
+        var taskSlot;
+
+        timeline.view("month");
+
+        renderTask({
+            start: new Date("2014/05/11"),
+            end: new Date("2014/05/17")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        taskSlot = timeline.view()._timeSlots()[2];
+
+        equal(taskElement.width(), taskSlot.offsetWidth);
+    });
+
+
+    test("width of task when end is in non working hours and showWorkHours is true", function() {
+        var taskElement;
+        var taskSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 16:00"),
+            end: new Date("2014/05/13 19:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        taskSlot = timeline.view()._timeSlots()[8];
+
+        equal(taskElement.width(), taskSlot.offsetWidth);
+    });
+
+    test("width of task when end is in non working hours and showWorkHours is false", function() {
+        var taskElement;
+        var firstSlot;
+        var secondSlot;
+        var thirdSlot;
+
+        timeline.options.showWorkHours = false;
+        timeline.view("day");
+
+        renderTask({
+            start: new Date("2014/05/13 16:00"),
+            end: new Date("2014/05/13 19:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        firstSlot = timeline.view()._timeSlots()[16];
+        secondSlot = timeline.view()._timeSlots()[17];
+        thirdSlot = timeline.view()._timeSlots()[18];
+
+        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth + thirdSlot.offsetWidth);
+    });
+
+    test("width of task when start is in non working hours and showWorkHours is true", function() {
+        var taskElement;
+        var taskSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 06:00"),
+            end: new Date("2014/05/13 09:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        taskSlot = timeline.view()._timeSlots()[0];
+
+        equal(taskElement.width(), taskSlot.offsetWidth);
+    });
+
+    test("width of task when start is in non working hours and showWorkHours is false", function() {
+        var taskElement;
+        var firstSlot;
+        var secondSlot;
+        var thirdSlot;
+
+        timeline.options.showWorkHours = false;
+        timeline.view("day");
+
+        renderTask({
+            start: new Date("2014/05/13 06:00"),
+            end: new Date("2014/05/13 09:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        firstSlot = timeline.view()._timeSlots()[6];
+        secondSlot = timeline.view()._timeSlots()[7];
+        thirdSlot = timeline.view()._timeSlots()[8];
+
+        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth + thirdSlot.offsetWidth);
+    });
+
+    test("width of task when start and end are in non working hours and showWorkHours is true", function() {
+        var taskElement;
+
+        renderTask({
+            start: new Date("2014/05/13 02:00"),
+            end: new Date("2014/05/13 04:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+
+        equal(taskElement.width(), 0);
+    });
+
+    test("width of task when start and end are in non working hours and showWorkHours is false", function() {
+        var taskElement;
+        var firstSlot;
+        var secondSlot;
+
+        timeline.options.showWorkHours = false;
+        timeline.view("day");
+
+        renderTask({
+            start: new Date("2014/05/13 02:00"),
+            end: new Date("2014/05/13 04:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        firstSlot = timeline.view()._timeSlots()[2];
+        secondSlot = timeline.view()._timeSlots()[3];
+
+        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+    });
+
+    test("width of task with non working hours in the middle and showWorkHours is true", function() {
+        var taskElement;
+        var firstSlot;
+        var secondSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 16:00"),
+            end: new Date("2014/05/14 09:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        firstSlot = timeline.view()._timeSlots()[8];
+        secondSlot = timeline.view()._timeSlots()[9];
+
+        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+    });
+
+    test("width of task with non working hours in the middle and showWorkHours is false", function() {
+        var taskElement;
+        var firstSlot;
+        var lastSlot;
+
+        timeline.options.showWorkHours = false;
+        timeline.view("day");
+
+        renderTask({
+            start: new Date("2014/05/13 16:00"),
+            end: new Date("2014/05/14 09:00")
+        });
+
+        taskElement = timeline.wrapper.find(".k-task");
+        firstSlot = timeline.view()._timeSlots()[16];
+        lastSlot = timeline.view()._timeSlots()[32];
+
+        equal(taskElement.width(), (lastSlot.offsetLeft - firstSlot.offsetLeft) + lastSlot.offsetWidth);
+    });
+
+
+    test("position of one hour task at beginning of view range", function() {
+        var taskWrapper;
+        var taskSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 08:00"),
+            end: new Date("2014/05/13 09:00")
+        });
+
+        taskWrapper = timeline.wrapper.find(".k-task-wrap");
+        taskSlot = timeline.view()._timeSlots()[0];
+
+        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft);
+    });
+
+    test("position of one hour task at middle of view range", function() {
+        var taskWrapper;
+        var taskSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 11:00")
+        });
+
+        taskWrapper = timeline.wrapper.find(".k-task-wrap");
+        taskSlot = timeline.view()._timeSlots()[2];
+
+        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft);
+    });
+
+    test("position of one hour task not snapped to slot", function() {
+        var taskWrapper;
+        var taskSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 10:30"),
+            end: new Date("2014/05/13 11:00")
+        });
+
+        taskWrapper = timeline.wrapper.find(".k-task-wrap");
+        taskSlot = timeline.view()._timeSlots()[2];
+
+        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft + taskSlot.offsetWidth / 2);
+    });
+
+    test("position of one hour task starting in non working hours", function() {
+        var taskWrapper;
+        var taskSlot;
+
+        renderTask({
+            start: new Date("2014/05/13 06:00"),
+            end: new Date("2014/05/13 09:00")
+        });
+
+        taskWrapper = timeline.wrapper.find(".k-task-wrap");
+        taskSlot = timeline.view()._timeSlots()[0];
+
+        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft);
+    });
+
+
+    test("width of progress when 0", function() {
+        var progressElement;
+
+        renderTask({
+            start: new Date("2014/05/13"),
+            end: new Date("2014/05/14"),
+            percentComplete: 0
+        });
+
+        progressElement = timeline.wrapper.find(".k-task-complete");
+
+        equal(progressElement.width(), 0);
+    });
+
+    test("width of progress when not 0", function() {
+        var progressElement;
+        var taskElement;
+
+        renderTask({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 11:00"),
+            percentComplete: 50
+        });
+
+        progressElement = timeline.wrapper.find(".k-task-complete");
+        taskElement = timeline.wrapper.find(".k-task");
+
+        equal(progressElement.width(), taskElement.width() / 2);
+    });
+
+    test("position of progress drag handle when progress is 0", function() {
+        var handleElement;
+
+        renderTask({
+            start: new Date("2014/05/13"),
+            end: new Date("2014/05/14"),
+            percentComplete: 0
+        });
+
+        handleElement = timeline.wrapper.find(".k-task-draghandle");
+
+        equal(parseFloat(handleElement.css("left"), 10), 0);
+    });
+
+    test("position of progress drag handle when progress is not 0", function() {
+        var handleElement;
+        var taskElement;
+
+        renderTask({
+            start: new Date("2014/05/13"),
+            end: new Date("2014/05/14"),
+            percentComplete: 50
+        });
+
+        handleElement = timeline.wrapper.find(".k-task-draghandle");
+        taskElement = timeline.wrapper.find(".k-task");
+
+        equal(parseFloat(handleElement.css("left"), 10), taskElement.width() / 2);
+    });
+
 
     module("Summary Task Rendering", {
         setup: function() {
-            element = $("<div />");
+            element = $("<div />").appendTo(QUnit.fixture);
             gantt = new Gantt(element);
             timeline = gantt.timeline;
         },
         teardown: function() {
             kendo.destroy(element);
+            element.remove();
         }
     });
+
+    function renderSummary(taskProperties) {
+        timeline._render([new GanttTask(extend({}, {
+            start: new Date("2014/04/17"),
+            end: new Date("2014/04/19"),
+            summary: true
+        }, taskProperties))]);
+    }
+
+    test("wrapper rendered", function() {
+        renderSummary();
+
+        ok(timeline.view().content.find(".k-task-wrap").length);
+    });
+
+    test("dependency drag handles rendered", function() {
+        var taskWrap;
+
+        renderSummary();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-start").length);
+        ok(taskWrap.find(".k-task-end").length);
+    });
+
+    test("summary element rendered", function() {
+        var taskWrap;
+
+        renderSummary();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-summary").length);
+    });
+
+    test("progress rendered", function() {
+        var taskWrap;
+
+        renderSummary();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-summary-progress").length);
+        ok(taskWrap.find(".k-task-summary-progress .k-task-summary-complete").length);
+    });
+
+    test("progress drag handle not rendered", function() {
+        var taskWrap;
+
+        renderSummary();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(!taskWrap.find(".k-task-draghandle").length);
+    });
+
+
+    test("width of one hour summary is equal to one slot in DayView", function() {
+        var summaryElement;
+        var summaryCompleteElement;
+        var summarySlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 11:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        summaryCompleteElement = timeline.wrapper.find(".k-task-summary-complete");
+        summarySlot = timeline.view()._timeSlots()[2];
+
+        equal(summaryElement.width(), summarySlot.offsetWidth);
+        equal(summaryCompleteElement.width(), summarySlot.offsetWidth);
+    });
+
+    test("width of two hour summary", function() {
+        var summaryElement;
+        var summaryCompleteElement;
+        var firstSlot;
+        var secondSlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 12:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        summaryCompleteElement = timeline.wrapper.find(".k-task-summary-complete");
+        firstSlot = timeline.view()._timeSlots()[2];
+        secondSlot = timeline.view()._timeSlots()[3];
+
+        equal(summaryElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+        equal(summaryCompleteElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+    });
+
+    test("width of summary when not snapped to slot", function() {
+        var summaryElement;
+        var summaryCompleteElement;
+        var summarySlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 10:30")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        summaryCompleteElement = timeline.wrapper.find(".k-task-summary-complete");
+        summarySlot = timeline.view()._timeSlots()[2];
+
+        equal(summaryElement.width(), summarySlot.offsetWidth / 2);
+        equal(summaryCompleteElement.width(), summarySlot.offsetWidth / 2);
+    });
+
+    test("width of one day summary is equal to one slot in WeekView", function() {
+        var summaryElement;
+        var summaryCompleteElement;
+        var summarySlot;
+
+        timeline.view("week");
+
+        renderSummary({
+            start: new Date("2014/05/13"),
+            end: new Date("2014/05/14")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        summaryCompleteElement = timeline.wrapper.find(".k-task-summary-complete");
+        summarySlot = timeline.view()._timeSlots()[2];
+        
+        equal(summaryElement.width(), summarySlot.offsetWidth);
+        equal(summaryCompleteElement.width(), summarySlot.offsetWidth);
+    });
+
+    test("width of one week summary is equal to one slot in MonthView", function() {
+        var summaryElement;
+        var summaryCompleteElement;
+        var summarySlot;
+
+        timeline.view("month");
+
+        renderSummary({
+            start: new Date("2014/05/11"),
+            end: new Date("2014/05/17")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        summaryCompleteElement = timeline.wrapper.find(".k-task-summary-complete");
+        summarySlot = timeline.view()._timeSlots()[2];
+
+        equal(summaryElement.width(), summarySlot.offsetWidth);
+        equal(summaryCompleteElement.width(), summarySlot.offsetWidth);
+    });
+
+
+    test("width of summary when end is in non working hours and showWorkHours is true", function() {
+        var summaryElement;
+        var summarySlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 16:00"),
+            end: new Date("2014/05/13 19:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        summarySlot = timeline.view()._timeSlots()[8];
+
+        equal(summaryElement.width(), summarySlot.offsetWidth);
+    });
+
+    test("width of summary when end is in non working hours and showWorkHours is false", function() {
+        var summaryElement;
+        var firstSlot;
+        var secondSlot;
+        var thirdSlot;
+
+        timeline.options.showWorkHours = false;
+        timeline.view("day");
+
+        renderSummary({
+            start: new Date("2014/05/13 16:00"),
+            end: new Date("2014/05/13 19:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        firstSlot = timeline.view()._timeSlots()[16];
+        secondSlot = timeline.view()._timeSlots()[17];
+        thirdSlot = timeline.view()._timeSlots()[18];
+
+        equal(summaryElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth + thirdSlot.offsetWidth);
+    });
+
+    test("width of summary when start is in non working hours and showWorkHours is true", function() {
+        var summaryElement;
+        var summarySlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 06:00"),
+            end: new Date("2014/05/13 09:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        summarySlot = timeline.view()._timeSlots()[0];
+
+        equal(summaryElement.width(), summarySlot.offsetWidth);
+    });
+
+    test("width of summary when start is in non working hours and showWorkHours is false", function() {
+        var summaryElement;
+        var firstSlot;
+        var secondSlot;
+        var thirdSlot;
+
+        timeline.options.showWorkHours = false;
+        timeline.view("day");
+
+        renderSummary({
+            start: new Date("2014/05/13 06:00"),
+            end: new Date("2014/05/13 09:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        firstSlot = timeline.view()._timeSlots()[6];
+        secondSlot = timeline.view()._timeSlots()[7];
+        thirdSlot = timeline.view()._timeSlots()[8];
+
+        equal(summaryElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth + thirdSlot.offsetWidth);
+    });
+
+    test("width of summary when start and end are in non working hours and showWorkHours is true", function() {
+        var summaryElement;
+
+        renderSummary({
+            start: new Date("2014/05/13 02:00"),
+            end: new Date("2014/05/13 04:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+
+        equal(summaryElement.width(), 0);
+    });
+
+    test("width of summary when start and end are in non working hours and showWorkHours is false", function() {
+        var summaryElement;
+        var firstSlot;
+        var secondSlot;
+
+        timeline.options.showWorkHours = false;
+        timeline.view("day");
+
+        renderSummary({
+            start: new Date("2014/05/13 02:00"),
+            end: new Date("2014/05/13 04:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        firstSlot = timeline.view()._timeSlots()[2];
+        secondSlot = timeline.view()._timeSlots()[3];
+
+        equal(summaryElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+    });
+
+    test("width of summary with non working hours in the middle and showWorkHours is true", function() {
+        var summaryElement;
+        var firstSlot;
+        var secondSlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 16:00"),
+            end: new Date("2014/05/14 09:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        firstSlot = timeline.view()._timeSlots()[8];
+        secondSlot = timeline.view()._timeSlots()[9];
+
+        equal(summaryElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+    });
+
+    test("width of summary with non working hours in the middle and showWorkHours is false", function() {
+        var summaryElement;
+        var firstSlot;
+        var lastSlot;
+
+        timeline.options.showWorkHours = false;
+        timeline.view("day");
+
+        renderSummary({
+            start: new Date("2014/05/13 16:00"),
+            end: new Date("2014/05/14 09:00")
+        });
+
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+        firstSlot = timeline.view()._timeSlots()[16];
+        lastSlot = timeline.view()._timeSlots()[32];
+
+        equal(summaryElement.width(), (lastSlot.offsetLeft - firstSlot.offsetLeft) + lastSlot.offsetWidth);
+    });
+
+
+
+    test("position of one hour summary at beginning of view range", function() {
+        var summaryWrapper;
+        var summarySlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 08:00"),
+            end: new Date("2014/05/13 09:00")
+        });
+
+        summaryWrapper = timeline.wrapper.find(".k-task-wrap");
+        summarySlot = timeline.view()._timeSlots()[0];
+
+        equal(parseFloat(summaryWrapper.css("left"), 10), summarySlot.offsetLeft);
+    });
+
+    test("position of one hour task at middle of view range", function() {
+        var summaryWrapper;
+        var summarySlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 11:00")
+        });
+
+        summaryWrapper = timeline.wrapper.find(".k-task-wrap");
+        summarySlot = timeline.view()._timeSlots()[2];
+
+        equal(parseFloat(summaryWrapper.css("left"), 10), summarySlot.offsetLeft);
+    });
+
+    test("position of one hour task not snapped to slot", function() {
+        var summaryWrapper;
+        var summarySlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 10:30"),
+            end: new Date("2014/05/13 11:00")
+        });
+
+        summaryWrapper = timeline.wrapper.find(".k-task-wrap");
+        summarySlot = timeline.view()._timeSlots()[2];
+
+        equal(parseFloat(summaryWrapper.css("left"), 10), summarySlot.offsetLeft + summarySlot.offsetWidth / 2);
+    });
+
+    test("position of one hour summary starting in non working hours", function() {
+        var summaryWrapper;
+        var summarySlot;
+
+        renderSummary({
+            start: new Date("2014/05/13 06:00"),
+            end: new Date("2014/05/13 09:00")
+        });
+
+        summaryWrapper = timeline.wrapper.find(".k-task-wrap");
+        summarySlot = timeline.view()._timeSlots()[0];
+
+        equal(parseFloat(summaryWrapper.css("left"), 10), summarySlot.offsetLeft);
+    });
+
+
+    test("width of progress when 0", function() {
+        var progressElement;
+
+        renderSummary({
+            start: new Date("2014/05/13"),
+            end: new Date("2014/05/14"),
+            percentComplete: 0
+        });
+
+        progressElement = timeline.wrapper.find(".k-task-summary-progress");
+
+        equal(progressElement.width(), 0);
+    });
+
+    test("width of progress when not 0", function() {
+        var progressElement;
+        var summaryElement;
+
+        renderSummary({
+            start: new Date("2014/05/13 10:00"),
+            end: new Date("2014/05/13 11:00"),
+            percentComplete: 50
+        });
+
+        progressElement = timeline.wrapper.find(".k-task-summary-progress");
+        summaryElement = timeline.wrapper.find(".k-task-summary");
+
+        equal(progressElement.width(), summaryElement.width() / 2);
+    });
+
 
 
     module("Milestone Task Rendering", {
         setup: function() {
-            element = $("<div />");
+            element = $("<div />").appendTo(QUnit.fixture);
             gantt = new Gantt(element);
             timeline = gantt.timeline;
         },
         teardown: function() {
             kendo.destroy(element);
+            element.remove();
         }
+    });
+
+    function renderMilestone(taskProperties) {
+        timeline._render([new GanttTask(extend({}, {
+            start: new Date("2014/04/17"),
+            end: new Date("2014/04/17")
+        }, taskProperties))]);
+    }
+
+    test("wrapper rendered", function() {
+        renderMilestone();
+
+        ok(timeline.view().content.find(".k-task-wrap").length);
+    });
+
+    test("dependency drag handles rendered", function() {
+        var taskWrap;
+
+        renderMilestone();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-start").length);
+        ok(taskWrap.find(".k-task-end").length);
+    });
+
+    test("milestone element rendered", function() {
+        var taskWrap;
+
+        renderMilestone();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(taskWrap.find(".k-task-milestone").length);
+    });
+
+    test("progress drag handle not rendered", function() {
+        var taskWrap;
+
+        renderMilestone();
+
+        taskWrap = timeline.view().content.find(".k-task-wrap");
+
+        ok(!taskWrap.find(".k-task-draghandle").length);
+    });
+
+    test("position of milestone takes into account milestone width", function() {
+        var taskWrapper;
+        var taskSlot;
+        var mileStoneWidth;
+
+        renderMilestone({
+            start: new Date("2014/05/13 11:00"),
+            end: new Date("2014/05/13 11:00")
+        });
+
+        taskWrapper = timeline.wrapper.find(".k-task-wrap");
+        taskSlot = timeline.view()._timeSlots()[3];
+        mileStoneWidth = timeline.view()._milestoneWidth;
+
+        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft - Math.round(mileStoneWidth / 2));
+    });
+
+    test("position of milestone starting in non working hours", function() {
+        var taskWrapper;
+        var taskSlot;
+        var mileStoneWidth;
+
+        renderMilestone({
+            start: new Date("2014/05/13 06:00"),
+            end: new Date("2014/05/13 06:00")
+        });
+
+        taskWrapper = timeline.wrapper.find(".k-task-wrap");
+        taskSlot = timeline.view()._timeSlots()[0];
+        mileStoneWidth = timeline.view()._milestoneWidth;
+
+        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft - Math.round(mileStoneWidth / 2));
     });
 
 }());

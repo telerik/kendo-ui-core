@@ -626,6 +626,7 @@ var __meta__ = {
             workWeekEnd: 5,
             hourSpan: 1,
             snap: true,
+            height: 600,
             listWidth: 500
         },
 

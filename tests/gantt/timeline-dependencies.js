@@ -4,7 +4,7 @@
     var gantt;
     var timeline;
     var Gantt = kendo.ui.Gantt;
-    var range;
+    var GanttTask = kendo.data.GanttTask;
     var tasks;
 
     module("Rendering", {
@@ -12,19 +12,15 @@
             element = $("<div />");
             gantt = new Gantt(element);
             timeline = gantt.timeline;
-            range = {
-                start: new Date("2014/04/15"),
-                end: new Date("2014/04/17")
-            };
-            tasks = [{
+            tasks = [new GanttTask({
                 id: 1,
                 start: new Date("2014/04/15"),
                 end: new Date("2014/04/16")
-            }, {
+            }), new GanttTask({
                 id: 2,
                 start: new Date("2014/04/16"),
                 end: new Date("2014/04/17")
-            }];
+            })];
         },
         teardown: function() {
             if (timeline) {
@@ -54,7 +50,7 @@
             successorId: 5,
         };
 
-        timeline._render(tasks, range);
+        timeline._render(tasks);
 
         timeline._renderDependencies([dependency]);
 
@@ -68,7 +64,7 @@
             successorId: 2,
         };
 
-        timeline._render(tasks, range);
+        timeline._render(tasks);
 
         timeline._renderDependencies([dependency]);
 
