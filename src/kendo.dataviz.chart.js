@@ -519,6 +519,8 @@ var __meta__ = {
                 height = math.floor(element.height()),
                 width = math.floor(element.width());
 
+            chart._size = null;
+
             return deepExtend({
                 width: width || DEFAULT_WIDTH,
                 height: height || DEFAULT_HEIGHT,

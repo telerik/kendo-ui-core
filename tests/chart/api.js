@@ -222,6 +222,19 @@
             equal(chart.options.categoryAxis.categories.length, 0);
         });
 
+        test("redraw clears cached size", function() {
+            chart.element.css("width", 1000);
+            chart.resize();
+
+            chart.element.css("width", 0);
+            chart.redraw();
+
+            chart.element.css("width", 1000);
+            chart.resize();
+
+            equal(chart._model.options.width, 1000);
+        });
+
         // ------------------------------------------------------------
         module("destroy", {
             setup: function() {
