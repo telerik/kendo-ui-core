@@ -1153,7 +1153,6 @@ namespace :build do
 
     namespace :update do
         task :demos => [
-            :get_binaries,
             'demos:staging'
         ] do
             sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/update/"
