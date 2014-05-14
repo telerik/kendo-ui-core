@@ -143,6 +143,10 @@ var __meta__ = {
             );
         },
 
+        createTextBox: function(options) {
+            return this.decorate(new VMLTextBox(options));
+        },
+
         createRect: function(box, style) {
             return this.decorate(
                 new VMLLine(
@@ -306,6 +310,40 @@ var __meta__ = {
                    "v='m " + round(p1.x) + "," + round(p1.y) +
                    " l " + round(p2.x) + "," + round(p2.y) +
                    "' />";
+        }
+    });
+
+    var VMLTextBox = ViewElement.extend({
+        init: function(options) {
+            var textbox = this;
+            ViewElement.fn.init.call(textbox, options);
+
+            textbox.template = VMLTextBox.template;
+            if (!textbox.template) {
+                textbox.template = VMLTextBox.template = renderTemplate(
+                    "# if (d.options.matrix) {#" +
+                        "#= d.renderRotatedChildren() #" +
+                    "#} else {#" +
+                        "#= d.renderContent() #" +
+                    "#}#"
+                );
+            }
+        },
+
+        renderRotatedChildren: function() {
+            var textbox = this,
+                matrix = textbox.options.matrix,
+                output = "",
+                sortedChildren = textbox.sortChildren(),
+                childrenCount = sortedChildren.length,
+                i;
+
+            for (i = 0; i < childrenCount; i++) {
+                sortedChildren[i].options.matrix = matrix;
+                output += sortedChildren[i].render();
+            }
+
+            return output;
         }
     });
 
@@ -1073,6 +1111,7 @@ var __meta__ = {
         VMLSector: VMLSector,
         VMLStroke: VMLStroke,
         VMLText: VMLText,
+        VMLTextBox: VMLTextBox,
         VMLView: VMLView,
 
         blendColors: blendColors,

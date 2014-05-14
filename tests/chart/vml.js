@@ -90,9 +90,14 @@
             equal(text.content, "Text");
         });
 
-        test("createText sets options", function() {
-            var text = view.createText("Text", { matrix: dataviz.Matrix.unit() });
-            ok(text.options.matrix);
+        test("createTextBox returns VMLTextBox", function() {
+            var textbox = view.createTextBox();
+            ok(textbox instanceof dataviz.VMLTextBox);
+        });
+
+        test("createTextBox sets options", function() {
+            var textbox = view.createTextBox({ matrix: dataviz.Matrix.unit() });
+            ok(textbox.options.matrix);
         });
 
         test("createRect returns VMLLine", function() {
@@ -633,6 +638,59 @@
         test("renders data attributes", function() {
             text.options.data = { testId: 1 };
             ok(text.render().indexOf("data-test-id='1'") > -1);
+        });
+
+    })();
+
+    (function() {
+        var VMLTextBox = dataviz.VMLTextBox,
+            textbox;
+
+        module("VMLTextBox", {});
+
+        test("calls renderContent if there no matrix", function() {
+            textbox = new VMLTextBox();
+            textbox.renderContent = function() {
+                ok(true);
+            };
+            textbox.render();
+        });
+
+        test("sets matrix to children if matrix is available", function() {
+            var child = {
+                options: {},
+                render: function() {}
+            };
+            textbox = new VMLTextBox({matrix: dataviz.Matrix.unit()});
+            textbox.children = [child];
+
+            textbox.render();
+            ok(child.options.matrix);
+        });
+
+        test("renders children in sorted order when matrix is available", 2, function() {
+            var renderedFirstChild = false;
+            var child1 = {
+                options: {
+                    zIndex:2
+                },
+                render: function() {
+                    ok(renderedFirstChild);
+                }
+            };
+            var child2 = {
+                options: {
+                    zIndex:1
+                },
+                render: function() {
+                    ok(true);
+                    renderedFirstChild = true;
+                }
+            };
+            textbox = new VMLTextBox({matrix: dataviz.Matrix.unit()});
+            textbox.children = [child1, child2];
+
+            textbox.render();
         });
 
     })();
