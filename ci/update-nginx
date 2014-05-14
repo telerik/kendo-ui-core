@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./deploy nginx.json root@kendobuild

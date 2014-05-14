@@ -1,0 +1,5 @@
+{
+"run_list": [
+    "recipe[nginx]",
+    "recipe[mono-fcgi]"
+]}
