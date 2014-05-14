@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Tests.ListView
 
             serializer.Serialize(json);
 
-            Assert.Equal("kendo.template($('#foo').html())", ((ClientHandlerDescriptor)json["template"]).HandlerName);
+            Assert.Equal("kendo.template(jQuery('#foo').html())", ((ClientHandlerDescriptor)json["template"]).HandlerName);
         }
 
         [Fact]

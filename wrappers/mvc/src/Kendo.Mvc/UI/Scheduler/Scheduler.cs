@@ -342,7 +342,7 @@
 
             if (!string.IsNullOrEmpty(EventTemplateId))
             {
-                options["eventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, EventTemplateId) };
+                options["eventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, EventTemplateId) };
             }
 
             if (!string.IsNullOrEmpty(AllDayEventTemplate))
@@ -352,7 +352,7 @@
 
             if (!string.IsNullOrEmpty(AllDayEventTemplateId))
             {
-                options["allDayEventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, AllDayEventTemplateId) };
+                options["allDayEventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, AllDayEventTemplateId) };
             }
 
             if (!AllDaySlot)
@@ -372,7 +372,7 @@
 
             if (!string.IsNullOrEmpty(DateHeaderTemplateId))
             {
-                options["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
+                options["dateHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, DateHeaderTemplateId) };
             }
 
             if (MajorTick != null)
@@ -392,7 +392,7 @@
 
             if (!string.IsNullOrEmpty(MajorTimeHeaderTemplateId))
             {
-                options["majorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MajorTimeHeaderTemplateId) };
+                options["majorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, MajorTimeHeaderTemplateId) };
             }
 
             if (!string.IsNullOrEmpty(MinorTimeHeaderTemplate))
@@ -402,7 +402,7 @@
 
             if (!string.IsNullOrEmpty(MinorTimeHeaderTemplateId))
             {
-                options["minorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MinorTimeHeaderTemplateId) };
+                options["minorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, MinorTimeHeaderTemplateId) };
             }
 
             if (MinorTickCount != null)

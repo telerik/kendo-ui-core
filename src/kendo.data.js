@@ -3581,17 +3581,12 @@ var __meta__ = {
             that._loaded = !!(value && (value[childrenField] || value._loaded));
         },
 
-        _getDataSourceType: function() {
-            return HierarchicalDataSource;
-        },
-
         _initChildren: function() {
             var that = this;
             var children, transport, parameterMap;
-            var dataSourceType = this._getDataSourceType();
 
-            if (!(that.children instanceof dataSourceType)) {
-                children = that.children = new dataSourceType(that._childrenOptions);
+            if (!(that.children instanceof HierarchicalDataSource)) {
+                children = that.children = new HierarchicalDataSource(that._childrenOptions);
 
                 transport = children.transport;
                 parameterMap = transport.parameterMap;
@@ -3722,7 +3717,9 @@ var __meta__ = {
 
     var HierarchicalDataSource = DataSource.extend({
         init: function(options) {
-            var node = this._defineNode(options);
+            var node = Node.define({
+                children: options
+            });
 
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
 
@@ -3798,14 +3795,6 @@ var __meta__ = {
                     return node;
                 }
             }
-        },
-
-        _defineNode: function(options) {
-            var node = Node.define({
-                children: options
-            });
-
-            return node;
         },
 
         get: function(id) {

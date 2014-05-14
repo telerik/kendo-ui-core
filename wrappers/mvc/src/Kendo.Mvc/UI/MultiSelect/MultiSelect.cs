@@ -115,7 +115,7 @@
 
             if (!string.IsNullOrEmpty(ItemTemplateId))
             {
-                options["itemTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, ItemTemplateId) };
+                options["itemTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, ItemTemplateId) };
             }
             else if (!string.IsNullOrEmpty(ItemTemplate))
             {
@@ -124,7 +124,7 @@
 
             if (!string.IsNullOrEmpty(TagTemplateId))
             {
-                options["tagTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, TagTemplateId) };
+                options["tagTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, TagTemplateId) };
             }
             else if (!string.IsNullOrEmpty(TagTemplate))
             {

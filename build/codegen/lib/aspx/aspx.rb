@@ -11,6 +11,8 @@ module CodeGen
             OPTIONS_TO_SKIP = %w{
                 dataSource
                 autoBind
+                layers.dataSource
+                layers.autoBind
             }
 
             TYPES_MAP = {
@@ -19,7 +21,8 @@ module CodeGen
                 'Boolean' => 'bool',
                 'Object' => 'object',
                 'Function' => 'string',
-                'Date' => 'DateTime'
+                'Date' => 'DateTime',
+                'stringArray' => 'string[]'
             }
 
             TYPES_DEFAULT_MAP = {
@@ -28,7 +31,9 @@ module CodeGen
                 'Boolean' => 'false',
                 'Object' => 'null',
                 'Function' => '""',
-                'Date' => 'null'
+                'Date' => 'null',
+                'Array' => 'null',
+                'stringArray' => 'null'
             }
 
             CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/class.template.erb'))
@@ -121,6 +126,7 @@ module CodeGen
                 def add_option(settings)
                     return if OPTIONS_TO_SKIP.include?(settings[:name])
 
+                    #if !settings[:type].nil? && settings[:type].instance_of?(String) && settings[:type].start_with?('kendo.')
                     if !settings[:type].nil? && settings[:type].include?('kendo.')
 
                         name = settings[:name].strip
@@ -138,6 +144,9 @@ module CodeGen
                         default = settings[:default]
 
                         type = settings[:type]
+
+                        #type = type.split('|').find{ |t| t.include?('kendo.') } #asdf
+                        type = type
 
                         values = settings[:values]
 
@@ -218,7 +227,8 @@ module CodeGen
                 def csharp_class
                     return strip_kendo_type(type) if type.include?('kendo.')
                     return "#{owner.csharp_name.sub('Settings', '').sub('Collection', '')}#{name.pascalize}" if enum?
-                    return TYPES_MAP[type[0]]
+                    return TYPES_MAP[type[0]] if type.instance_of?([].class)
+                    return TYPES_MAP[type]
                 end
 
                 def to_declaration
@@ -232,8 +242,9 @@ module CodeGen
                 end
 
                 def csharp_default
-                    return TYPES_DEFAULT_MAP[type[0]] if !default
-                    return default.to_f if type[0] == 'Number'
+                    type_value = type.instance_of?([].class) ? type[0] : type
+                    return TYPES_DEFAULT_MAP[type_value] if !default
+                    return default.to_f if type_value == 'Number'
                     default
                 end
 
@@ -404,7 +415,7 @@ module CodeGen
                         existing_option = find_option_by_name(option[:name], self)
 
                         if !existing_option.nil?
-                            existing_option.type = option[:type] if option[:type].include?('kendo.')
+                            existing_option.type = option[:type] unless option[:type].nil?
                             existing_option.values = option[:values] unless option[:values].nil?
                             existing_option.description = option[:description] unless option[:description].nil? || option[:description] == ''
                             existing_option.default = option[:default] unless option[:default].nil? || option[:default] == ''

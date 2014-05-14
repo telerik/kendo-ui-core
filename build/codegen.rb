@@ -75,7 +75,7 @@ namespace :generate do
                     content += ",\n" unless index >= converters[widget_name].length - 1
                 end
 
-                file_path = "wrappers/aspx/src/Rad#{widget_name}.cs"
+                file_path = "wrappers/aspx/src/#{widget_name}/Rad#{widget_name}.cs"
 
                 CodeGen::ASPX::Wrappers::Generator.write_file(file_path, content, '[ Converters Declaration ]')
             end

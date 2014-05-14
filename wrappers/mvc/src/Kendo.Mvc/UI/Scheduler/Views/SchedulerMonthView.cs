@@ -40,7 +40,7 @@
 
             if (!string.IsNullOrEmpty(DayTemplateId))
             {
-                json["dayTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, DayTemplateId) };
+                json["dayTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, DayTemplateId) };
             }
 
             if (EventHeight != null)

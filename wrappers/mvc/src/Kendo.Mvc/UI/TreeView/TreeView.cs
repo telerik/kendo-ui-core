@@ -247,7 +247,7 @@ namespace Kendo.Mvc.UI
 
             if (!string.IsNullOrEmpty(TemplateId))
             {
-                options["template"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", idPrefix, TemplateId) };
+                options["template"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, TemplateId) };
             }
             else if (!string.IsNullOrEmpty(Template))
             {

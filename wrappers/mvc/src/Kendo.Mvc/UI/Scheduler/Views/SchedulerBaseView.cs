@@ -97,7 +97,7 @@
 
             if (!string.IsNullOrEmpty(EventTemplateId))
             {
-                json["eventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, EventTemplateId) };
+                json["eventTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, EventTemplateId) };
             }
 
             if (!string.IsNullOrEmpty(SelectedDateFormat))

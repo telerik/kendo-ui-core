@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI
         {         
             if (ContentId.HasValue())
             {
-                json["content"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", IdPrefix, ContentId) };
+                json["content"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", IdPrefix, ContentId) };
             }
             else if (Content.HasValue())
             {
@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
 
             if (EmptyId.HasValue())
             {
-                json["empty"] = new ClientHandlerDescriptor { HandlerName = string.Format("$('{0}{1}').html()", IdPrefix, EmptyId) };
+                json["empty"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", IdPrefix, EmptyId) };
             }
             else if (Empty.HasValue())
             {

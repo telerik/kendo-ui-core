@@ -1011,12 +1011,12 @@ namespace :build do
 
     def xml_changelogs(destination)
         [
-            'professional.commercial',
-            'aspnetmvc.commercial',
-            'php.commercial',
-            'jsp.commercial'
+            'professional.trial',
+            'aspnetmvc.trial',
+            'php.trial',
+            'jsp.trial'
         ].map do |bundle|
-            filename = "#{bundle}.#{VERSION}.changelog.xml"
+            filename = versioned_bundle_name(bundle) + ".xml"
 
             destination_file = File.join(ARCHIVE_ROOT, destination, 'changelogs', filename)
 
