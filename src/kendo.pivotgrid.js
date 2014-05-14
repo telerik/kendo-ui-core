@@ -87,7 +87,7 @@ var __meta__ = {
 
             newData = this._normalizeData(newData, axes);
 
-            this._axes = axes;
+            this._axes = mergeAxes(this._axes, axes);
 
             return newData;
         },
@@ -129,6 +129,75 @@ var __meta__ = {
             return options;
         }
     });
+
+    function mergeAxes(target, source) {
+        if (!target.columns) {
+            target.columns = {
+                tuples: []
+            };
+        }
+
+        var result = {
+            columns: target.columns,
+            rows: source.rows
+        };
+
+        var columnTuples = result.columns.tuples;
+        var sourceTuples = parseSource(source.columns.tuples);
+        result.columns.tuples = sourceTuples;
+
+        return result;
+    }
+
+    function findTuple(children, memberIndex, memberName) {
+        for (var i = 0, length = children.length; i < length; i++) {
+            var tuple = children[i];
+
+            if (tuple.members[memberIndex].name === memberName) {
+                return tuple;
+            }
+        }
+    }
+
+    function parseSource(tuples) {
+        if (tuples.length < 1) {
+            return [];
+        }
+        var result = [];
+        var root = tuples[0];
+        result.push(root);
+        var membersLength = root.members.length;
+
+        for (var i = 1; i < tuples.length; i ++) {
+            var current = tuples[i];
+            var found = false;
+            for (var m = 0; m < membersLength; m ++) {
+                var member = current.members[m];
+                var rootMember = root.members[m];
+
+                if (found) {
+                    if (member.name == rootMember.name) {
+                        root.members[m-1].children.push(current);
+                    } else if (member.parentName == rootMember.name) {
+                        //rootMember.children.push(current);
+                        var index = m - 1;
+                        root = findTuple(root.members[index].children, index, current.members[index].name);
+                        root.members[m].children.push(current);
+                    }
+
+                    break;
+                } else if (member.parentName == rootMember.name) {
+                    found = true;
+
+                    if (m == membersLength - 1) {
+                        rootMember.children.push(current);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
 
     PivotDataSource.create = function(options) {
         options = options && options.push ? { data: options } : options;
@@ -349,6 +418,7 @@ var __meta__ = {
             var member = asArray(tuples[idx].Member);
             for (var memberIdx = 0; memberIdx < member.length; memberIdx++) {
                 members.push({
+                    children: [],
                     caption: captionGetter(member[memberIdx]),
                     name: unameGetter(member[memberIdx]),
                     levelName: levelNameGetter(member[memberIdx]),
