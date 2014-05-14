@@ -92,7 +92,7 @@ def upload_beta_build(options)
     bot = TelerikReleaseBot.instance 
 
     navigate_to_latest_version(bot, options)   
-    prepare_files(bot, options)  
+    prepare_beta_files(bot, options)  
 end
 def navigate_to_latest_version(bot, options)
       product_name = options[:product]
@@ -111,7 +111,7 @@ def navigate_to_latest_version(bot, options)
       bot.click_element(bot.find("[id$=\"_hlVersionNumber\"]"))
       bot.click_element(bot.find("[value='Manage files']"))
 end
-def set_fields_data(bot, file_fields)
+def set_beta_fields_data(bot, file_fields)
     bot.execute_script("$('[id$=\"_txtFieldText\"]').val('#{file_fields[:label]}')")
     bot.execute_script("$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')")
 
@@ -142,7 +142,7 @@ def set_fields_data(bot, file_fields)
     bot.execute_script("$find($telerik.$('[id$=\"_efWhatsIncluded_reFieldText\"]').attr('id')).set_html('#{file_fields[:whats_included_message]}')") 
   
 end
-def prepare_files(bot, options)
+def prepare_beta_files(bot, options)
 
   release_config = options[:params]
   file_metadata = release_config[:file_metadata]
@@ -152,9 +152,9 @@ def prepare_files(bot, options)
     file_fields = file_metadata[:zip]
     bot.click_and_wait "Add new file", "administration"
 
-    set_fields_data(bot, file_fields)
+    set_beta_fields_data(bot, file_fields)
 
-    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name])
+    upload_beta_file_and_save(bot, options[:archive_path], file_fields[:download_name])
   end
   #msi files 
   if file_metadata[:msi]
@@ -162,19 +162,19 @@ def prepare_files(bot, options)
     file_fields = file_metadata[:msi]
     bot.click_and_wait "Add new file", "administration"
 
-    set_fields_data(bot, file_fields)
+    set_beta_fields_data(bot, file_fields)
 
-    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name])
+    upload_beta_file_and_save(bot, options[:archive_path], file_fields[:download_name])
   end
 
 end
-def upload_file_and_save(bot, dirpath, filename)
+def upload_beta_file_and_save(bot, dirpath, filename)
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
 
   element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdFileUpload')]")
   upload_id = element.attribute("id")
 
-  upload_file(bot, upload_id, full_path)
+  upload_beta_file(bot, upload_id, full_path)
 
   bot.click_element(bot.find("[value='Save']"))
   
@@ -182,7 +182,7 @@ def upload_file_and_save(bot, dirpath, filename)
   bot.click_element(bot.find("[value='GO TO FILE LIST']"))
 
 end
-def upload_file(bot, upload_id, full_path)
+def upload_beta_file(bot, upload_id, full_path)
     bot.execute_script("
                 (function (module, $) {
                     var upload = $find('#{upload_id}');
@@ -234,15 +234,11 @@ def beta_build_file_copy(beta_build, name, versioned_bundle_destination_path, ve
       :archive => versioned_bundle_archive_path,
       :static_name => "online-examples.zip" 
 
-    end 
-end
-def build_path_and_copy(options)
-   if options[:static_name]
-    destination = File.join(options[:destination], options[:static_name])
-    archive = File.join(options[:archive], options[:static_name])
-   else
-    destination = File.join(options[:destination], options[:vbdb] + options[:extension])
-    archive = File.join(options[:archive], options[:vbd] + options[:extension])
-   end
-   cp_r archive, destination
+    end
+    if beta_build[:changelog]
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :static_name => "changelogs/" + versioned_bundle_name(name) + ".xml" 
+    end  
 end
