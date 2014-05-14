@@ -1011,10 +1011,10 @@ namespace :build do
 
     def xml_changelogs(destination)
         [
-            'professional.commercial',
-            'aspnetmvc.commercial',
-            'php.commercial',
-            'jsp.commercial'
+            'professional.trial',
+            'aspnetmvc.trial',
+            'php.trial',
+            'jsp.trial'
         ].map do |bundle|
             filename = versioned_bundle_name(bundle) + ".xml"
 
