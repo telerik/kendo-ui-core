@@ -78,15 +78,18 @@ class TelerikReleaseNotesBot
     end
     def get_select(title)
         element = driver.find_element(:xpath, "//label[text()='#{title}']/..//select")  
-        option = Selenium::WebDriver::Support::Select.new(element)
-        return option
+        select_element = Selenium::WebDriver::Support::Select.new(element)
+        return select_element
     end
-    def get_product()
+    def fetch_product()
       return @products.pop()
+    end
+    def products()
+      return @products
     end
 end
 
-def set_configuration_and_upload()
+def set_path_and_upload()
 
     bot = TelerikReleaseNotesBot.instance
 
@@ -106,10 +109,17 @@ def set_configuration_and_upload()
       end
     end 
 
-    versioned_bundle_archive_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, archive_folder_name)
+    archive_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, archive_folder_name)
 
-    navigate_to_import_form(bot)
-    upload_files_and_validate(bot, versioned_bundle_archive_path, bot.get_product())
+    upload_release_notes(bot, archive_path) 
+end
+def upload_release_notes(bot, archive_path)
+    if bot.products.size > 0
+      navigate_to_import_form(bot)
+      upload_files_and_validate(bot, archive_path, bot.fetch_product)
+    else
+       bot.driver.quit
+    end
 end
 def navigate_to_import_form(bot)
     bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Administration')]"))
@@ -135,36 +145,35 @@ def upload_files_and_validate(bot, archive_path, productName)
     element = bot.driver.find_element(:xpath, "//input[contains(@id,'ReleaseNoteFileUploader')]")
     upload_id = element.attribute("id")
     upload_file(bot, upload_id, full_path)
+    
+    sleep(5)
 
     bot.click_element(bot.driver.find_element(:xpath, "//a[contains(@id,'ImportReleaseNotesButton')]"))
+
+    sleep(3)
     bot.wait_for_validation("//div[contains(text(), 'successfully')]")
 
-    if bot.products.size > 0
-      navigate_to_import_form(bot)
-      upload_files_and_validate(bot, versioned_bundle_archive_path, @products.pop())
-    else
-       bot.driver.quit
-    end
+    upload_release_notes(bot, archive_path)
+
 end
 def set_fields_data(bot, productName)
     #Beta release notes
     if defined? Beta
       bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} Beta')")
-      #due to mandatory non-empty value requirement
+      #due to mandatory non-empty value requirement (form validation bug)
       bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('11')")
-      bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'Beta Version')]"))   
+      bot.execute_script("$('[id$=\"_ReleaseTypeRadioButtons_2\"]').click()")  
     else
     #official release notes
       if defined? SERVICE_PACK_NUMBER
         bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}')")
         bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('#{SERVICE_PACK_NUMBER}')")
-        bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'Minor Version')]"))
-        p "label clicked"
+        bot.execute_script("$('[id$=\"_ReleaseTypeRadioButtons_1\"]').click()")
       else
         bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR}')")
-        #due to mandatory non-empty value requirement
+        #due to mandatory non-empty value requirement (form validation bug)
         bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('11')")
-        bot.click_element(bot.driver.find_element(:xpath, "//label[contains(.,'Major Version')]"))
+        bot.execute_script("$('[id$=\"_ReleaseTypeRadioButtons_0\"]').click()")
       end
     end 
     bot.execute_script("$('[id$=\"_ReleaseVersionTb\"]').val('#{VERSION}')") 
@@ -178,7 +187,5 @@ def set_fields_data(bot, productName)
 end
 def upload_file(bot, upload_id, full_path)
     full_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/
-    p "file upload path>>" + full_path
     bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id}"), full_path)
-   #bot.wait_for_element("##{upload_id} .ruRemove")
 end
