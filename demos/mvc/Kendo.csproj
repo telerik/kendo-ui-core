@@ -402,7 +402,6 @@
     <Content Include="content\web\globalization\cultures\kendo.culture.en-US.js" />
     <Content Include="content\web\globalization\cultures\kendo.culture.fr-FR.js" />
     <Content Include="content\web\grid\clientsDb.png" />
-    <Content Include="content\web\integration\jquery.tmpl.js" />
     <Content Include="content\web\integration\knockout-1.2.1.js" />
     <Content Include="content\web\mail.gif" />
     <Content Include="content\web\mailDeletedItems.gif" />

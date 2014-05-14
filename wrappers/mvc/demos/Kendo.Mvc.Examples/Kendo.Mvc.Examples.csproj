@@ -1754,7 +1754,6 @@
     <Content Include="Content\web\HighContrast\sprite.png" />
     <Content Include="Content\web\HighContrast\sprite_2x.png" />
     <Content Include="Content\web\integration\boardingPass.png" />
-    <Content Include="Content\web\integration\jquery.tmpl.js" />
     <Content Include="Content\web\integration\knockout-1.2.1.js" />
     <Content Include="Content\web\kendo.black.min.css" />
     <Content Include="Content\web\kendo.blueopal.min.css" />
