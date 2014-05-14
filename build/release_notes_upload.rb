@@ -144,7 +144,7 @@ def upload_files_and_validate(bot, archive_path, productName)
     
     element = bot.driver.find_element(:xpath, "//input[contains(@id,'ReleaseNoteFileUploader')]")
     upload_id = element.attribute("id")
-    upload_file(bot, upload_id, full_path)
+    upload_relnotes_file(bot, upload_id, full_path)
     
     sleep(5)
 
@@ -185,7 +185,7 @@ def set_fields_data(bot, productName)
     option_select.select_by(:text, productName)
 
 end
-def upload_file(bot, upload_id, full_path)
+def upload_relnotes_file(bot, upload_id, full_path)
     full_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/
     bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id}"), full_path)
 end
