@@ -239,6 +239,6 @@ def beta_build_file_copy(beta_build, name, versioned_bundle_destination_path, ve
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
-      :static_name => "changelogs/" + versioned_bundle_beta_name(name) + "changelog.xml" 
+      :static_name => "changelogs/" + versioned_bundle_name(name) + ".xml" 
     end  
 end
