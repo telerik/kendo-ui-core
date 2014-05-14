@@ -136,6 +136,10 @@ function checkSearch(e) {
     }
 }
 
+function pickInitialTheme(e) {
+    e.sender.items().filter(":contains(Silver)").addClass("current");
+}
+
 function triggerIndexButton(e) {
     navDataSource.fetch(function() {
         var url = e.view.id,
@@ -170,18 +174,3 @@ function selectTheme(e) {
         });
     }
 }
-
-window.app = new kendo.mobile.Application($(document.body), {
-    layout: "examples",
-    transition: "slide",
-    skin: "flat",
-    icon: {
-        "" : '@Url.Content("~/content/mobile/AppIcon72x72.png")',
-        "72x72" : '@Url.Content("~/content/mobile/AppIcon72x72.png")',
-        "76x76" : '@Url.Content("~/content/mobile/AppIcon76x76.png")',
-        "114x114" : '@Url.Content("~/content/mobile/AppIcon72x72@2x.png")',
-        "120x120" : '@Url.Content("~/content/mobile/AppIcon76x76@2x.png")',
-        "152x152" : '@Url.Content("~/content/mobile/AppIcon76x76@2x.png")'
-    }
-});
-
