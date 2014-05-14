@@ -160,15 +160,13 @@ def bundle(options)
 
       desc "Copy #{name} as release build on telerik.com"
       task "release_builds:copy:#{name}" do
-          FileUtils.mkdir_p(versioned_bundle_release_destination_path)
-
+          FileUtils.mkdir_p(versioned_bundle_release_destination_path) 
           release_build_file_copy(options[:release_build], name, versioned_bundle_release_destination_path, versioned_bundle_release_archive_path) 
 
       end
 
       desc "Upload #{name} as release build on telerik.com"
       task "release_builds:upload:#{name}" =>  "release_builds:copy:#{name}" do
-
           upload_release_build \
                   :title => name,
                   :product => options[:product],

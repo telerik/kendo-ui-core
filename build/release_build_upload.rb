@@ -150,7 +150,7 @@ def fill_version_fields(bot, options)
        bot.click_element(bot.find("[value='Manage files']"))
 
 end
-def set_fields_data(bot, file_fields)
+def set_release_fields_data(bot, file_fields)
     bot.execute_script("$('[id$=\"_txtFieldText\"]').val('#{file_fields[:label]}')")
     bot.execute_script("$('[id$=\"_txtFileName\"]').val('#{file_fields[:download_name]}')")
 
@@ -181,7 +181,7 @@ def set_fields_data(bot, file_fields)
     bot.execute_script("$find($telerik.$('[id$=\"_efWhatsIncluded_reFieldText\"]').attr('id')).set_html('#{file_fields[:whats_included_message]}')")
 
 end
-def prepare_files(bot, options)
+def prepare_release_files(bot, options)
 
   release_config = options[:params]
   file_metadata = release_config[:file_metadata]
@@ -193,7 +193,7 @@ def prepare_files(bot, options)
 
     set_fields_data(bot, file_fields)
 
-    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
+    upload_release_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
   end
   #msi files
   if file_metadata[:msi]
@@ -203,7 +203,7 @@ def prepare_files(bot, options)
 
     set_fields_data(bot, file_fields)
 
-    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], true)
+    upload_release_file_and_save(bot, options[:archive_path], file_fields[:download_name], true)
   end
   #control panel files
   if file_metadata[:exe]
@@ -212,7 +212,7 @@ def prepare_files(bot, options)
 
     set_fields_data(bot, file_fields)
 
-    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
+    upload_release_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
   end
   #nuget files
   if file_metadata[:nuget]
@@ -221,17 +221,17 @@ def prepare_files(bot, options)
 
     set_fields_data(bot, file_fields)
 
-    upload_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
+    upload_release_file_and_save(bot, options[:archive_path], file_fields[:download_name], false)
   end
 
 end
-def upload_file_and_save(bot, dirpath, filename, isMsi)
+def upload_release_file_and_save(bot, dirpath, filename, isMsi)
   full_path = File.expand_path(dirpath + "/" + filename, File.join(File.dirname(__FILE__), ".."))
 
   element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdFileUpload')]")
   upload_id = element.attribute("id")
 
-  upload_file(bot, upload_id, full_path)
+  upload_release_file(bot, upload_id, full_path)
 
   if isMsi
 
@@ -241,7 +241,7 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
     element = bot.driver.find_element(:xpath, "//div[contains(@id,'rdXMLConfigFileUpload')]")
     upload_id = element.attribute("id")
 
-    upload_file(bot, upload_id, full_path)
+    upload_release_file(bot, upload_id, full_path)
   end
 
   bot.click_element(bot.find("[value='Save']"))
@@ -250,7 +250,7 @@ def upload_file_and_save(bot, dirpath, filename, isMsi)
   bot.click_element(bot.find("[value='GO TO FILE LIST']"))
 
 end
-def upload_file(bot, upload_id, full_path)
+def upload_release_file(bot, upload_id, full_path)
     bot.execute_script("
                 (function (module, $) {
                     var upload = $find('#{upload_id}');
@@ -274,6 +274,9 @@ def release_build_file_copy(release_build, name, versioned_bundle_destination_pa
     release_build_config = release_build[:file_metadata]
 
     if release_build_config[:zip]
+      p versioned_bundle_name(name)
+      p versioned_bundle_destination_path
+      p versioned_bundle_archive_path
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
@@ -315,21 +318,22 @@ def release_build_file_copy(release_build, name, versioned_bundle_destination_pa
 
     end
     if release_build[:changelog]
+      p "changelogs/" + versioned_bundle_name(name) + "changelog.xml"
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
       :static_name => "changelogs/" + versioned_bundle_name(name) + "changelog.xml" 
     end 
     if release_build_config[:exe]
-      if release_build_config[:download_name].index("TelerikControlPanelSetup.MVC")!= nil 
+      if release_build_config[:download_name].to_s.index("TelerikControlPanelSetup.MVC")!= nil 
         archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikControlPanelSetup.exe")
         cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.MVC.#{VERSION}.exe")
       end 
-      if release_build_config[:download_name].index("TelerikControlPanelSetup.KUI")!= nil 
+      if release_build_config[:download_name].to_s.index("TelerikControlPanelSetup.KUI")!= nil 
         archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikControlPanelSetup.exe")
         cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.KUI.Professional.#{VERSION}.exe") 
       end
-      if release_build_config[:download_name].index("TelerikUIForAspNetMvcSetup")!= nil
+      if release_build_config[:download_name].to_s.index("TelerikUIForAspNetMvcSetup")!= nil
           archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikUIForAspNetMvcSetup.exe")
           cp archive_file, File.join(versioned_bundle_destination_path, "TelerikUIForAspNetMvcSetup.#{VERSION}.exe")
       end
@@ -341,7 +345,8 @@ def build_path_and_copy(options)
     destination = File.join(options[:destination], options[:static_name])
     archive = File.join(options[:archive], options[:static_name])
    else
-    destination = File.join(options[:destination], options[:vbd] + options[:extension])
+    #prefer vbdb option for Beta build and vbd option for official release
+    destination = File.join(options[:destination], (options[:vbdb] || options[:vbd]) + options[:extension])
     archive = File.join(options[:archive], options[:vbd] + options[:extension])
    end
    cp_r archive, destination
