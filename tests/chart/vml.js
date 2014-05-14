@@ -90,14 +90,9 @@
             equal(text.content, "Text");
         });
 
-        test("createText with rotation returns VMLRotatedText", function() {
-            var text = view.createText("", { rotation: 45 });
-            ok(text instanceof dataviz.VMLRotatedText);
-        });
-
-        test("createText with rotation angle sets content", function() {
-            var text = view.createText("Text", { rotation: 45 });
-            equal(text.content, "Text");
+        test("createText sets options", function() {
+            var text = view.createText("Text", { matrix: dataviz.Matrix.unit() });
+            ok(text.options.matrix);
         });
 
         test("createRect returns VMLLine", function() {
@@ -540,19 +535,21 @@
 
         function createRotatedText(options) {
             options = $.extend({
-                    rotation: 0
+                    matrix: dataviz.Matrix.unit(),
+                    size: {
+                    }
                 }, options
             );
 
-            text = new dataviz.VMLRotatedText(
+            text = new dataviz.VMLText(
                 "test",
                 options
             );
         }
 
-        module("VMLRotatedText", {
+        module("VMLText / rotation / ", {
             setup: function() {
-                createRotatedText({ rotation: 45 });
+                createRotatedText();
             }
         });
 
@@ -575,70 +572,36 @@
             ok(text.render().indexOf("<kvml:path textpathok='true'") != -1);
         });
 
-        test("renders path for 45 degrees rotation", function() {
+        test("transforms points with the matrix", function() {
+            var matrix = new dataviz.Matrix(1,1,1,1,1,1);
             createRotatedText({
-                rotation: 45,
+                matrix: matrix,
+                x: 10,
+                y: 10,
                 size: {
-                    baseline: 12,
-                    height: 28,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 28
+                    height: 20,
+                    width: 20
                 }
             });
             ok(text.render().indexOf(
-                "<kvml:path textpathok='true' v='m 4,4 l 24,24' />")
+                "<kvml:path textpathok='true' v='m 31,31 l 51,51' />")
                 != -1
             );
         });
 
-        test("renders path for 90 degrees rotation", function() {
+        test("rounds coordinates after transformation", function() {
+            var matrix = new kendo.dataviz.Matrix(1.5,1.5,1.5,1.5,1.5,1.5);
             createRotatedText({
-                rotation: 90,
+                matrix: matrix,
+                x: 10,
+                y: 10,
                 size: {
-                    baseline: 12,
-                    height: 27,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 14
+                    height: 20,
+                    width: 20
                 }
             });
             ok(text.render().indexOf(
-                "<kvml:path textpathok='true' v='m 7,7 l 7,21' />")
-                != -1
-            );
-        });
-
-        test("renders path for -45 degrees rotation", function() {
-            createRotatedText({
-                rotation: -45,
-                size: {
-                    baseline: 12,
-                    height: 28,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 28
-                }
-            });
-            ok(text.render().indexOf(
-                "<kvml:path textpathok='true' v='m 4,24 l 24,4' />")
-                != -1
-            );
-        });
-
-        test("renders path for -90 degrees rotation", function() {
-            createRotatedText({
-                rotation: -90,
-                size: {
-                    baseline: 12,
-                    height: 27,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 14
-                }
-            });
-            ok(text.render().indexOf(
-                "<kvml:path textpathok='true' v='m 7,21 l 7,7' />")
+                "<kvml:path textpathok='true' v='m 47,47 l 77,77' />")
                 != -1
             );
         });

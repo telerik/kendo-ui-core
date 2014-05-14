@@ -139,9 +139,7 @@ var __meta__ = {
 
         createText: function(content, options) {
             return this.decorate(
-                (options && options.rotation) ?
-                    new VMLRotatedText(content, options) :
-                    new VMLText(content, options)
+                new VMLText(content, options)
             );
         },
 
@@ -235,14 +233,25 @@ var __meta__ = {
             text.template = VMLText.template;
             if (!text.template) {
                 text.template = VMLText.template = renderTemplate(
-                    "<kvml:textbox #= d.renderId() # " +
-                    "#= d.renderDataAttributes() #" +
-                    "style='position: absolute; " +
-                    "left: #= d.options.x #px; top: #= d.options.y #px; " +
-                    "font: #= d.options.font #; color: #= d.options.color #; " +
-                    "visibility: #= d.renderVisibility() #; white-space: nowrap; " +
-                    "#= d.renderCursor() #'>" +
-                    "#= d.content #</kvml:textbox>"
+                    "#if (d.options.matrix) {#" +
+                        "<kvml:shape #= d.renderId() # " +
+                        "#= d.renderDataAttributes() #" +
+                        "style='position: absolute; top: 0px; left: 0px; " +
+                        "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
+                        "#= d.renderPath() #" +
+                        "<kvml:fill color='#= d.options.color #' />" +
+                        "<kvml:textpath on='true' style='font: #= d.options.font #;' " +
+                        "fitpath='false' string='#= d.content #' /></kvml:shape>" +
+                    "#} else {#" +
+                        "<kvml:textbox #= d.renderId() # " +
+                        "#= d.renderDataAttributes() #" +
+                        "style='position: absolute; " +
+                        "left: #= d.options.x #px; top: #= d.options.y #px; " +
+                        "font: #= d.options.font #; color: #= d.options.color #; " +
+                        "visibility: #= d.renderVisibility() #; white-space: nowrap; " +
+                        "#= d.renderCursor() #'>" +
+                        "#= d.content #</kvml:textbox>" +
+                    "#}#"
                 );
             }
         },
@@ -278,55 +287,24 @@ var __meta__ = {
             }
 
             return result;
-        }
-    });
-
-    var VMLRotatedText = ViewElement.extend({
-        init: function(content, options) {
-            var text = this;
-            ViewElement.fn.init.call(text, options);
-
-            text.content = content;
-            text.template = VMLRotatedText.template;
-            if (!text.template) {
-                text.template = VMLRotatedText.template = renderTemplate(
-                    "<kvml:shape #= d.renderId() # " +
-                    "#= d.renderDataAttributes() #" +
-                    "style='position: absolute; top: 0px; left: 0px; " +
-                    "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
-                    "#= d.renderPath() #" +
-                    "<kvml:fill color='#= d.options.color #' />" +
-                    "<kvml:textpath on='true' style='font: #= d.options.font #;' " +
-                    "fitpath='false' string='#= d.content #' /></kvml:shape>"
-                );
-            }
-        },
-
-        options: {
-            x: 0,
-            y: 0,
-            font: DEFAULT_FONT,
-            color: BLACK,
-            size: {
-                width: 0,
-                height: 0
-            }
         },
 
         renderPath: function() {
             var text = this,
                 options = text.options,
-                width = options.size.width,
-                height = options.size.height,
-                cx = options.x + width / 2,
-                cy = options.y + height / 2,
-                angle = -options.rotation,
-                r1 = rotatePoint(options.x, cy, cx, cy, angle),
-                r2 = rotatePoint(options.x + width, cy, cx, cy, angle);
+                matrix = options.matrix,
+                size = options.size,
+                x = options.x,
+                y = options.y + size.height / 2,
+                p1 = Point2D(x, y),
+                p2 = Point2D(x + size.width, y);
+
+            p1.transform(matrix);
+            p2.transform(matrix);
 
             return "<kvml:path textpathok='true' " +
-                   "v='m " + round(r1.x) + "," + round(r1.y) +
-                   " l " + round(r2.x) + "," + round(r2.y) +
+                   "v='m " + round(p1.x) + "," + round(p1.y) +
+                   " l " + round(p2.x) + "," + round(p2.y) +
                    "' />";
         }
     });
@@ -1087,7 +1065,6 @@ var __meta__ = {
         VMLPath: VMLPath,
         VMLRadialGradient: VMLRadialGradient,
         VMLRing: VMLRing,
-        VMLRotatedText: VMLRotatedText,
         VMLSector: VMLSector,
         VMLStroke: VMLStroke,
         VMLText: VMLText,
