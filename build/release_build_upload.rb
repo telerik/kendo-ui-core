@@ -315,7 +315,6 @@ def release_build_file_copy(release_build, name, versioned_bundle_destination_pa
 
     end
     if release_build[:changelog]
-      p "changelogs/" + versioned_bundle_name(name) + ".xml"
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
