@@ -166,17 +166,14 @@
             ganttTimeline = gantt.timeline;
             tasks = [new GanttTask({
                 id: 1,
-                uid: "UniqueId1",
                 start: new Date("2014/04/15"),
                 end: new Date("2014/04/16")
             }), new GanttTask({
                 id: 2,
-                uid: "UniqueId2",
                 start: new Date("2014/04/16"),
                 end: new Date("2014/04/17")
             }), new GanttTask({
                 id: 3,
-                uid: "UniqueId3",
                 start: new Date("2014/04/16"),
                 end: new Date("2014/04/17")
             })];
@@ -199,31 +196,31 @@
         }
     });
 
-    //test("clicking on a task calls select(':selector')", function() {
-    //    ganttTimeline._render(tasks);
+    test("clicking on a task calls select(':selector')", function() {
+        ganttTimeline._render(tasks);
 
-    //    var target = ganttTimeline.wrapper.find(".k-event:first");
+        var target = ganttTimeline.wrapper.find(".k-task:first");
 
-    //    stub(gantt, "select");
+        stub(gantt, "select");
 
-    //    target.click();
+        target.click();
 
-    //    ok(gantt.calls("select"));
-    //});
+        ok(gantt.calls("select"));
+    });
 
-    //test("clicking on a task calls select(':selector') with correct parameter", 1, function() {
-    //    ganttTimeline._render(tasks);
+    test("clicking on a task calls select(':selector') with correct parameter", 1, function() {
+        ganttTimeline._render(tasks);
 
-    //    var target = ganttTimeline.wrapper.find(".k-event:first");
+        var target = ganttTimeline.wrapper.find(".k-task:first");
 
-    //    stub(gantt, {
-    //        select: function(value) {
-    //            equal(value, "[data-uid='UniqueId1']");
-    //        }
-    //    });
+        stub(gantt, {
+            select: function(value) {
+                equal(value, "[data-uid='" + tasks[0].uid + "']");
+            }
+        });
 
-    //    target.click();
-    //});
+        target.click();
+    });
 
     test("clicking on a dependency calls selectDependency(':selector')", function() {
         ganttTimeline._render(tasks);
@@ -253,10 +250,10 @@
         target.click();
     });
 
-    test("clicking on a task row calls clearSelection()", function() {
+    test("clicking on the tasks table calls clearSelection()", function() {
         ganttTimeline._render(tasks);
 
-        var target = ganttTimeline.wrapper.find(".k-gantt-tasks tr:first");
+        var target = ganttTimeline.wrapper.find(".k-gantt-tables");
 
         stub(gantt, "clearSelection");
 

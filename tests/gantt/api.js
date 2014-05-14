@@ -331,33 +331,33 @@
         }
     });
 
-    //test("select(':selector') applies selected class to element", function() {
-    //    ganttTimeline._render(tasks);
+    test("select(':selector') applies selected class to element", function() {
+        ganttTimeline._render(tasks);
 
-    //    ganttTimeline.select(".k-event:first");
+        ganttTimeline.select(".k-task:first");
 
-    //    ok(ganttTimeline.wrapper.find(".k-event:first").hasClass("k-state-selected"));
-    //});
+        ok(ganttTimeline.wrapper.find(".k-task:first").hasClass("k-state-selected"));
+    });
 
-    //test("select(':selector') removes selected class from previously selected element", function() {
-    //    ganttTimeline._render(tasks);
+    test("select(':selector') removes selected class from previously selected element", function() {
+        ganttTimeline._render(tasks);
 
-    //    ganttTimeline.wrapper.find(".k-event:last").addClass("k-state-selected");
-    //    ganttTimeline.select(".k-event:first");
+        ganttTimeline.wrapper.find(".k-task:last").addClass("k-state-selected");
+        ganttTimeline.select(".k-task:first");
 
-    //    ok(!ganttTimeline.wrapper.find(".k-event:last").hasClass("k-state-selected"));
-    //});
+        ok(!ganttTimeline.wrapper.find(".k-task:last").hasClass("k-state-selected"));
+    });
     
-    //test("select() retrieves selected element", function() {
-    //    ganttTimeline._render(tasks);
+    test("select() retrieves selected element", function() {
+        ganttTimeline._render(tasks);
 
-    //    var target = ganttTimeline.wrapper.find(".k-event:first").addClass("k-state-selected");
+        var target = ganttTimeline.wrapper.find(".k-task:first").addClass("k-state-selected");
 
-    //    var selected = ganttTimeline.select();
+        var selected = ganttTimeline.select();
 
-    //    equal(selected.length, 1);
-    //    equal(selected[0], target[0]);
-    //});
+        equal(selected.length, 1);
+        equal(selected[0], target[0]);
+    });
 
     test("selectDependency() applies selected class to elements", function() {
         ganttTimeline._render(tasks);

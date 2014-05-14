@@ -1417,11 +1417,11 @@ var __meta__ = {
 
             if (this.options.selectable) {
                 this.wrapper
-                    .on(CLICK + NS, ".k-gantt-summary, .k-event ", function(e) {
+                    .on(CLICK + NS, ".k-task", function(e) {
                         e.stopPropagation();
                         that.trigger("select", { uid: $(this).attr("data-uid") });
                     })
-                    .on(CLICK + NS, ".k-gantt-tasks tr", function(e) {
+                    .on(CLICK + NS, ".k-gantt-tables", function(e) {
                         that.trigger("clear");
                     })
                     .on(CLICK + NS, ".k-line", function(e) {
@@ -1443,7 +1443,7 @@ var __meta__ = {
                 return;
             }
 
-            return this.wrapper.find(".k-state-selected");
+            return this.wrapper.find(".k-task.k-state-selected");
         },
 
         selectDependency: function(value) {
