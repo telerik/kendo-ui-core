@@ -274,9 +274,6 @@ def release_build_file_copy(release_build, name, versioned_bundle_destination_pa
     release_build_config = release_build[:file_metadata]
 
     if release_build_config[:zip]
-      p versioned_bundle_name(name)
-      p versioned_bundle_destination_path
-      p versioned_bundle_archive_path
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
@@ -318,22 +315,24 @@ def release_build_file_copy(release_build, name, versioned_bundle_destination_pa
 
     end
     if release_build[:changelog]
-      p "changelogs/" + versioned_bundle_name(name) + "changelog.xml"
+      p "changelogs/" + versioned_bundle_name(name) + ".xml"
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
-      :static_name => "changelogs/" + versioned_bundle_name(name) + "changelog.xml" 
+      :static_name => "changelogs/" + versioned_bundle_name(name) + ".xml" 
     end 
     if release_build_config[:exe]
-      if release_build_config[:download_name].to_s.index("TelerikControlPanelSetup.MVC")!= nil 
+      exe_config = release_build_config[:exe]
+      
+      if exe_config[:download_name].to_s.index("TelerikControlPanelSetup.MVC")!= nil 
         archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikControlPanelSetup.exe")
         cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.MVC.#{VERSION}.exe")
       end 
-      if release_build_config[:download_name].to_s.index("TelerikControlPanelSetup.KUI")!= nil 
+      if exe_config[:download_name].to_s.index("TelerikControlPanelSetup.KUI")!= nil 
         archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikControlPanelSetup.exe")
         cp archive_file, File.join(versioned_bundle_destination_path, "TelerikControlPanelSetup.KUI.Professional.#{VERSION}.exe") 
       end
-      if release_build_config[:download_name].to_s.index("TelerikUIForAspNetMvcSetup")!= nil
+      if exe_config[:download_name].to_s.index("TelerikUIForAspNetMvcSetup")!= nil
           archive_file = File.join(WEB_INSTALLER_ROOT, "TelerikUIForAspNetMvcSetup.exe")
           cp archive_file, File.join(versioned_bundle_destination_path, "TelerikUIForAspNetMvcSetup.#{VERSION}.exe")
       end
