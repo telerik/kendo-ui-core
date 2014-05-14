@@ -270,14 +270,19 @@
         mapTransform: function(transform) {
             var attrs = [];
             if (transform) {
-                attrs.push([TRANSFORM, "matrix(" + transform.matrix().toString() + ")"]);
+                attrs.push([
+                   TRANSFORM,
+                   "matrix(" + transform.matrix().toString(3) + ")"
+                ]);
             }
 
             return attrs;
         },
 
         renderTransform: function() {
-            return renderAllAttr(this.mapTransform(this.srcElement.transform()));
+            return renderAllAttr(
+                this.mapTransform(this.srcElement.transform())
+            );
         },
 
         transformChange: function(value) {
