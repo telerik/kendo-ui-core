@@ -100,7 +100,7 @@ def upload_release_build(options)
     bot = TelerikReleaseBot.instance
 
     create_version(bot, options)
-    prepare_files(bot, options)
+    prepare_release_files(bot, options)
 end
 def create_version(bot, options)
       product_name = options[:product]
