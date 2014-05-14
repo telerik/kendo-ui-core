@@ -1166,7 +1166,6 @@
     test("position of milestone takes into account milestone width", function() {
         var taskWrapper;
         var taskSlot;
-        var mileStoneWidth;
 
         renderMilestone({
             start: new Date("2014/05/13 11:00"),
@@ -1175,15 +1174,13 @@
 
         taskWrapper = timeline.wrapper.find(".k-task-wrap");
         taskSlot = timeline.view()._timeSlots()[3];
-        mileStoneWidth = timeline.view()._milestoneWidth;
 
-        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft - Math.round(mileStoneWidth / 2));
+        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft);
     });
 
     test("position of milestone starting in non working hours", function() {
         var taskWrapper;
         var taskSlot;
-        var mileStoneWidth;
 
         renderMilestone({
             start: new Date("2014/05/13 06:00"),
@@ -1192,9 +1189,8 @@
 
         taskWrapper = timeline.wrapper.find(".k-task-wrap");
         taskSlot = timeline.view()._timeSlots()[0];
-        mileStoneWidth = timeline.view()._milestoneWidth;
 
-        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft - Math.round(mileStoneWidth / 2));
+        equal(parseFloat(taskWrapper.css("left"), 10), taskSlot.offsetLeft);
     });
 
 }());

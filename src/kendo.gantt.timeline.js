@@ -179,8 +179,6 @@ var __meta__ = {
         render: function(tasks) {
             var taskCount = tasks.length;
 
-            this._milestoneWidth = this._calculateMilestoneWidth();
-
             var rowsTable = this._rowsTable(taskCount);
             var columnsTable = this._columnsTable(taskCount);
             var tasksTable = this._tasksTable(tasks);
@@ -302,35 +300,23 @@ var __meta__ = {
             return tableWidth;
         },
 
-        _calculateMilestoneWidth: function() {
-            var milestone = $("<div class='k-task k-task-milestone' style='display: block; visibility: hidden; position: absolute'></div>");
-            var milestoneWidth;
-
-            this.content.append(milestone);
-
-            milestoneWidth = milestone.width();
-
-            milestone.remove();
-
-            return milestoneWidth;
-        },
-
         _renderTask: function(task, position) {
             var taskWrapper;
             var taskElement;
             var progressHandleLeft;
             var taskLeft = position.left;
+            var wrapClassName = "k-task-wrap";
 
             if (task.summary) {
                 taskElement = this._renderSummary(task, position);
             } else if (task.isMilestone()) {
                 taskElement = this._renderMilestone(task, position);
-                taskLeft = taskLeft - (Math.round(this._milestoneWidth / 2));
+                wrapClassName += " k-milestone-wrap";
             } else {
                 taskElement = this._renderSingleTask(task, position);
             }
 
-            taskWrapper = kendoDomElement("div", { className: "k-task-wrap", style: { left: taskLeft + "px" } }, [
+            taskWrapper = kendoDomElement("div", { className: wrapClassName, style: { left: taskLeft + "px" } }, [
                 taskElement,
                 kendoDomElement("div", { className: "k-task-dot k-task-start" }),
                 kendoDomElement("div", { className: "k-task-dot k-task-end" })
@@ -1301,15 +1287,15 @@ var __meta__ = {
 
             this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
-                filter: ".k-gantt-summary, .k-event",
+                filter: ".k-task",
                 holdToDrag: false
             });
 
             this._moveDraggable
                 .bind("dragstart", function(e) {
                     var view = that.view();
-                    element = e.currentTarget;
-                    task = that._taskByUid(element.attr("data-uid"));
+                    element = e.currentTarget.parent();
+                    task = that._taskByUid(e.currentTarget.attr("data-uid"));
 
                     if (that.trigger("moveStart", { task: task })) {
                         e.preventDefault();
