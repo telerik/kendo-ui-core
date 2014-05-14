@@ -1217,6 +1217,7 @@ var __meta__ = {
         _initContainer: function() {
             var textbox = this;
             var options = textbox.options;
+            var id = options.id;
             var rows = (textbox.content + "").split(textbox.ROWS_SPLIT_REGEX);
             var floatElement = new FloatElement({vertical: true, align: options.align, wrap: false});
             var textOptions = deepExtend({ }, options, { align: LEFT, vAlign: TOP, rotation: 0});
@@ -1229,7 +1230,7 @@ var __meta__ = {
 
             for (rowIdx = 0; rowIdx < rows.length; rowIdx++) {
                 text = new Text(trim(rows[rowIdx]), textOptions);
-                if (hasBox) {
+                if (hasBox || (id && rowIdx > 0)) {
                     text.id = uniqueId();
                 }
                 floatElement.children.push(text);
