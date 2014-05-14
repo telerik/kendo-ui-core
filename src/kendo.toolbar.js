@@ -252,21 +252,44 @@ var __meta__ = {
                     that._renderOverflow();
                     element.addClass(RESIZABLE_TOOLBAR);
                     //user events tap
-                    element.on(CLICK, "." + OVERFLOW_ANCHOR, proxy(that._toggleOverflow, that));
+                    that.overflowUserEvents = new kendo.UserEvents(that.element, {
+                        filter: "." + OVERFLOW_ANCHOR,
+                        tap: proxy(that._toggleOverflow, that)
+                    });
+
+                    //click event cannot be prevented from the UserEvents
+                    element.on(CLICK, "." + OVERFLOW_ANCHOR, function(e) {
+                        e.preventDefault();
+                    });
                 }
 
                 if(options.items && options.items.length) {
                     for (var i = 0; i < options.items.length; i++) {
                         that.add(options.items[i]);
                     }
-
-                    //that._renderOverflowItems(options.items);
-                    //that._renderToolbarItems(options.items);
                 }
 
                 //user events tap
-                element.on(CLICK, "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")", proxy(that._buttonClick, that));
-                element.on(CLICK, "." + SPLIT_BUTTON_ARROW, proxy(that._toggle, that));
+                that.userEvents = new kendo.UserEvents(that.element, {
+                    filter: "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")",
+                    tap: proxy(that._buttonClick, that)
+                });
+
+                //click event cannot be prevented from the UserEvents
+                element.on(CLICK, "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")", function(e) {
+                    e.preventDefault();
+                });
+
+                //user events tap
+                that.splitButtonUserEvents = new kendo.UserEvents(that.element, {
+                    filter: "." + SPLIT_BUTTON_ARROW,
+                    tap: proxy(that._toggle, that)
+                });
+
+                //click event cannot be prevented from the UserEvents
+                element.on(CLICK, "." + SPLIT_BUTTON_ARROW, function(e) {
+                    e.preventDefault();
+                });
 
                 kendo.notify(that);
             },
@@ -289,7 +312,11 @@ var __meta__ = {
                     $(element).data("kendoPopup").destroy();
                 });
 
-                if (this.popup) {
+                this.userEvents.destroy();
+                this.splitButtonUserEvents.destroy();
+
+                if (this.options.resizable) {
+                    this.overflowUserEvents.destroy();
                     this.popup.destroy();
                 }
 

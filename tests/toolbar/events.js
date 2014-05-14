@@ -1,6 +1,13 @@
 (function() {
     var container,
-        ToolBar = kendo.ui.ToolBar;
+        ToolBar = kendo.ui.ToolBar,
+        MOUSEDOWN = kendo.support.mousedown,
+        MOUSEUP = kendo.support.mouseup;
+
+    function click(element) {
+        element.trigger(MOUSEDOWN);
+        element.trigger(MOUSEUP);
+    }
 
     module("Toolbar: Events: ", {
         setup: function() {
@@ -25,7 +32,7 @@
             }
         });
 
-        container.find("#foo").trigger("click");
+        click(container.find("#foo"));
     });
 
     test("click event is not fired for disabled buttons", 0, function() {
@@ -38,7 +45,7 @@
             }
         });
 
-        container.find("#foo").trigger("click");
+        click(container.find("#foo"));
     });
 
     test("click on toggleButton changes its state", 2, function() {
@@ -51,7 +58,7 @@
         var button = container.find("#foo");
 
         ok(!button.hasClass("k-state-checked"));
-        button.trigger("click");
+        click(button);
         ok(button.hasClass("k-state-checked"), "Button receives k-state-checked class after click");
     });
 
@@ -65,7 +72,7 @@
         var button = container.find("#foo");
         ok(!button.hasClass("k-state-checked"));
 
-        container.find("span.k-i-foo").trigger("click");
+        click(container.find("span.k-i-foo"));
         ok(button.hasClass("k-state-checked"), "Button receives k-state-checked class after click");
     });
 
@@ -78,10 +85,10 @@
 
         var button = container.find("#foo");
 
-        button.trigger("click");
+        click(button);
         ok(button.hasClass("k-state-checked"));
 
-        button.trigger("click");
+        click(button);
         ok(!button.hasClass("k-state-checked"));
     });
 
@@ -94,7 +101,7 @@
 
         var button = container.find("#foo");
 
-        button.trigger("click");
+        click(button);
         ok(!button.hasClass("k-state-checked"), "Button state is not changed");
     });
 
@@ -110,7 +117,7 @@
 
         var button = container.find("#foo");
 
-        button.trigger("click");
+        click(button);
     });
 
     test("click on toggleButton triggers toggle event", 1, function() {
@@ -125,7 +132,7 @@
         
         var button = container.find("#foo");
 
-        button.trigger("click");
+        click(button);
     });
 
     test("preventng the toggle event does not change button state", 1, function() {
@@ -140,7 +147,7 @@
         
         var button = container.find("#foo");
 
-        button.trigger("click");
+        click(button);
         ok(!button.hasClass("k-state-checked"));
     });
 
@@ -154,12 +161,12 @@
 
         var buttons = container.find(".k-toggle-button");
 
-        buttons.eq(0).trigger("click");
+        click(buttons.eq(0));
 
         ok(buttons.eq(0).hasClass("k-state-checked"), "First button is selected");
         ok(!buttons.eq(1).hasClass("k-state-checked"), "Second button is deselected");
         
-        buttons.eq(1).trigger("click");
+        click(buttons.eq(1));
 
         ok(!buttons.eq(0).hasClass("k-state-checked"), "First button is deselected");
         ok(buttons.eq(1).hasClass("k-state-checked"), "Second button is selected");
@@ -180,7 +187,7 @@
 
         var button = container.find("#foo a:first");
 
-        button.trigger("click");
+        click(button);
     });
 
     test("click on arrow button opens the popup", 1, function() {
@@ -196,7 +203,7 @@
         var button = container.find("#foo a.k-split-button-arrow");
         var popup = container.find("#foo").data("kendoPopup");
 
-        button.trigger("click");
+        click(button);
 
         ok(popup.visible());
     });
@@ -214,10 +221,10 @@
         var button = container.find("#foo a.k-split-button-arrow");
         var popup = container.find("#foo").data("kendoPopup");
 
-        button.trigger("click");
+        click(button);
         ok(popup.visible());
 
-        button.trigger("click");
+        click(button);
         ok(!popup.visible());
     });
 
@@ -234,7 +241,7 @@
         var button = container.find("#foo a:first");
         var popup = container.find("#foo").data("kendoPopup");
 
-        button.trigger("click");
+        click(button);
         ok(!popup.visible());
     });
 
@@ -253,7 +260,7 @@
 
         var button = container.find("#foo a.k-split-button-arrow");
 
-        button.trigger("click");
+        click(button);
     });
 
     test("opening the splitButton popup triggers open event", 1, function() {
@@ -271,7 +278,7 @@
 
         var button = container.find("#foo a.k-split-button-arrow");
 
-        button.trigger("click");
+        click(button);
     });
 
     test("open event can be prevented", 1, function() {
@@ -290,7 +297,7 @@
         var button = container.find("#foo a.k-split-button-arrow");
         var popup = container.find(".k-split-button").data("kendoPopup");
 
-        button.trigger("click");
+        click(button);
 
         ok(!popup.visible());
     });
@@ -310,8 +317,8 @@
 
         var button = container.find("#foo a.k-split-button-arrow");
 
-        button.trigger("click"); //open
-        button.trigger("click"); //close
+        click(button); //open
+        click(button); //close
     });
 
     test("close event can be prevented", 1, function() {
@@ -330,8 +337,8 @@
         var button = container.find("#foo a.k-split-button-arrow");
         var popup = container.find(".k-split-button").data("kendoPopup");
 
-        button.trigger("click"); //open
-        button.trigger("click"); //close
+        click(button); //open
+        click(button); //close
 
         ok(popup.visible());
     });
