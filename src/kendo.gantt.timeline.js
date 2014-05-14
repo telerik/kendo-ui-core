@@ -348,7 +348,7 @@ var __meta__ = {
         _renderSingleTask: function(task, position) {
             var progressWidth = Math.round(position.width * task.percentComplete / 100);
 
-            var element = kendoDomElement("div", { className: "k-task k-task-single", style: { width: position.width + "px" } }, [
+            var element = kendoDomElement("div", { className: "k-task k-task-single", "data-uid": task.uid, style: { width: position.width + "px" } }, [
                 kendoDomElement("div", { className: "k-task-complete", style: { width: progressWidth + "px" } }),
                 kendoDomElement("div", { className: "k-task-content" }, [
                     kendoDomElement("div", { className: "k-task-template" }, [
@@ -368,13 +368,13 @@ var __meta__ = {
         },
 
         _renderMilestone: function(task, position) {
-            var element = kendoDomElement("div", { className: "k-task k-task-milestone" });
+            var element = kendoDomElement("div", { className: "k-task k-task-milestone", "data-uid": task.uid });
 
             return element;
         },
 
         _renderSummary: function(task, position) {
-            var element = kendoDomElement("div", { className: "k-task k-task-summary", style: { width: position.width + "px" } }, [
+            var element = kendoDomElement("div", { className: "k-task k-task-summary", "data-uid": task.uid, style: { width: position.width + "px" } }, [
                 kendoDomElement("div", { className: "k-task-summary-progress", style: { width: task.percentComplete + "%" } }, [
                     kendoDomElement("div", { className: "k-task-summary-complete", style: { width: position.width + "px" } })
                 ])
@@ -1473,8 +1473,8 @@ var __meta__ = {
             var that = this;
 
             this.wrapper
-                .on(CLICK + NS, ".k-event-delete", function(e) {
-                    that.trigger("remove", { uid: $(this).closest(".k-event").attr("data-uid") });
+                .on(CLICK + NS, ".k-task-delete", function(e) {
+                    that.trigger("remove", { uid: $(this).closest(".k-task").attr("data-uid") });
                 });
         }
     });

@@ -265,17 +265,17 @@
         ok(gantt.calls("clearSelection"));
     });
 
-    //test("clicking on a task delete icon calls removeTask()", function() {
-    //    ganttTimeline._render(tasks);
+    test("clicking on a task delete icon calls removeTask()", function() {
+        ganttTimeline._render(tasks);
 
-    //    var target = ganttTimeline.wrapper.find(".k-gantt-tasks .k-event-delete");
+        var target = ganttTimeline.wrapper.find(".k-gantt-tasks .k-task-delete").first();
 
-    //    stub(gantt, "removeTask");
+        stub(gantt, "removeTask");
 
-    //    target.click();
+        target.click();
 
-    //    ok(gantt.calls("removeTask"));
-    //});
+        ok(gantt.calls("removeTask"));
+    });
 
 
     module("TaskDropDown", {

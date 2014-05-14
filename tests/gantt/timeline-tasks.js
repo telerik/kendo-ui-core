@@ -256,6 +256,20 @@
         ok(taskWrap.find(".k-task-single").length);
     });
 
+    test("task element has data-uid attribute set", function() {
+        var taskElement;
+        var task = new GanttTask({
+            start: new Date("2014/04/17"),
+            end: new Date("2014/04/18")
+        });
+
+        timeline._render([task]);
+        
+        taskElement = timeline.view().content.find(".k-task-single");
+
+        equal(taskElement.attr("data-uid"), task.uid);
+    });
+
     test("title rendered", function() {
         var taskWrap;
 
@@ -706,6 +720,21 @@
         ok(taskWrap.find(".k-task-summary").length);
     });
 
+    test("summary element has data-uid attribute set", function() {
+        var summaryElement;
+        var task = new GanttTask({
+            start: new Date("2014/04/17"),
+            end: new Date("2014/04/18"),
+            summary: true
+        });
+
+        timeline._render([task]);
+
+        summaryElement = timeline.view().content.find(".k-task-summary");
+
+        equal(summaryElement.attr("data-uid"), task.uid);
+    });
+
     test("progress rendered", function() {
         var taskWrap;
 
@@ -1108,6 +1137,20 @@
         taskWrap = timeline.view().content.find(".k-task-wrap");
 
         ok(taskWrap.find(".k-task-milestone").length);
+    });
+
+    test("milestone element has data-uid attribute set", function() {
+        var milestoneElement;
+        var task = new GanttTask({
+            start: new Date("2014/04/17"),
+            end: new Date("2014/04/17")
+        });
+
+        timeline._render([task]);
+
+        milestoneElement = timeline.view().content.find(".k-task-milestone");
+
+        equal(milestoneElement.attr("data-uid"), task.uid);
     });
 
     test("progress drag handle not rendered", function() {
