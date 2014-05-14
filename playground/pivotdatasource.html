@@ -15,36 +15,17 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
-        <!--button>Expand</button-->
+        <button id="expand-one">Expand Calendar</button>
+        <button id="expand-two">Expand 2005</button>
         <div class="k-grid k-widget" style="overflow: scroll;height: 1000px">
             <table id="container"></table>
         </div>
 
         <script>
-/*           var PivotDataSource = kendo.data.PivotDataSource.extend({
-               _readData: function(data) {
-                    debugger;
-                    var originalData = this._data;
-                    var cellData = this.reader.data(data);
-                    var axes = this.reader.axes(data);
-
-                    this._axes = axes;
-
-                    //merge data with this._data;
-                    return cellData;
-                },
-                execute: function(descriptors) {
-                    this.read($.extend({ columns: [], rows: [], measures: [], filter: {}}, descriptors));
-                },
-                discover: function(descriptors) {
-                }
-            });
-
-*/
-            var dataSource = new kendo.data.PivotDataSource({
+           var dataSource = new kendo.data.PivotDataSource({
                 type: "xmla",
-                columns: [{ name: "[Date].[Calendar].[Year].&[2006]", expand: true },{ name: "[Geography].[City]", expand: true }/*, { name: "[Customer].[Gender]", expand: false }*/],
-                rows: [ { name: "[Product].[Product Name]", expand: true }, { name: "[Product].[Category]", expand: true }],
+                columns: [{ name: "[Date].[Calendar]", expand: false },{ name: "[Geography].[City]", expand: false }/*, { name: "[Date].[Calendar Semester]", expand: false }, { name: "[Customer].[Gender]", expand: false }*/],
+                rows: [ { name: "[Product].[Product Name]", expand: false }, { name: "[Product].[Category]", expand: false }],
                 measures: ["[Measures].[Internet Order Lines Count]"/*, "[Measures].[Internet Total Product Cost]"*/],
                 transport: {
                     connection: {
@@ -74,8 +55,14 @@
 
             dataSource.read();
 
-            $("button").click(function() {
-                dataSource.expand("[Date].[Calendar]");
+            $("#expand-one").click(function() {
+                dataSource.expandRow("[Product].[Product Name]");
+            });
+
+            $("#expand-two").click(function() {
+               // dataSource.expandColumn(["[Date].[Calendar].[Year].&[2005]"]);
+                dataSource.expandColumn("[Date].[Calendar].[Year].&[2005].&[2]");
+                //dataSource.expand("[Geography].[City]");
             });
 
             function renderHeader(nodeName, tuples) {
@@ -146,7 +133,7 @@
                 html +="</tbody>";
 
 
-                $("#container").append($(html));
+                $("#container").empty().append($(html));
             }
         </script>
     </body>

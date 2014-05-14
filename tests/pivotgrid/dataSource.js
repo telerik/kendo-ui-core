@@ -189,7 +189,7 @@
         equal(data[3].ordinal, 3);
         ok(!data[3].value);
     });
-
+/*
     test("expand sets the column as expanded", function() {
         var dataSource = new PivotDataSource({
             columns: ["foo", "bar", { name: "baz", expand: true } ]
@@ -211,8 +211,9 @@
         equal(dataSource.rows()[0].name, "foo");
         ok(dataSource.rows()[0].expand);
     });
+    */
 
-    test("expand issue an request", 1, function() {
+    test("expandColumn issue an request", 1, function() {
         var dataSource = new PivotDataSource({
             columns: ["foo", "bar", { name: "baz", expand: true } ]
         });
@@ -221,8 +222,22 @@
             ok(true);
         });
 
-        dataSource.expand("foo");
+        dataSource.expandColumn("foo");
     });
+
+    test("expandRow issue an request", 1, function() {
+        var dataSource = new PivotDataSource({
+            columns: "bar",
+            rows: ["foo"]
+        });
+
+        dataSource.bind("requestStart", function() {
+            ok(true);
+        });
+
+        dataSource.expandRow("foo");
+    });
+
 
     module("XmlaTransport initialziation", { });
 

@@ -65,15 +65,20 @@ var __meta__ = {
             return this._measures;
         },
 
-        expand: function(member) {
-            var members = this.columns().concat(this.rows());
-            for (var idx = 0; idx < members.length; idx++) {
-                if (members[idx].name === member) {
-                    members[idx].expand = true;
-                    break;
-                }
-            }
-            this.read();
+        expandColumn: function(path) {
+            var members = normalizeMembers(path);
+
+            members[members.length - 1].expand = true;
+
+            this.read({ columns: members });
+        },
+
+        expandRow: function(path) {
+            var members = normalizeMembers(path);
+
+            members[members.length - 1].expand = true;
+
+            this.read({ rows: members });
         },
 
         _readData: function(data) {
