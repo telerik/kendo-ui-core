@@ -224,12 +224,6 @@
             return "";
         },
 
-        attr: function(name, value) {
-            if (this.element) {
-                this.element.setAttribute(name, value);
-            }
-        },
-
         optionsChange: function(e) {
             if (e.field === "visible") {
                 this.attr("display", e.value ? "" : "none");

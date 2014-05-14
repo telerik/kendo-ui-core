@@ -177,7 +177,7 @@
 
     Point.max = function(p0, p1) {
         return new Point(math.max(p0.x, p1.x), math.max(p0.y, p1.y));
-    }
+    };
 
     Point.minPoint = function() {
         return new Point(util.MIN_NUM, util.MIN_NUM);
