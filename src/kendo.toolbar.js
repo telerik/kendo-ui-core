@@ -15,6 +15,7 @@ var __meta__ = {
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
+        isFunction = kendo.isFunction,
 
         TOOLBAR = "k-toolbar",
         BUTTON = "k-button",
@@ -251,7 +252,7 @@ var __meta__ = {
                 if(options.resizable) {
                     that._renderOverflow();
                     element.addClass(RESIZABLE_TOOLBAR);
-                    //user events tap
+
                     that.overflowUserEvents = new kendo.UserEvents(that.element, {
                         filter: "." + OVERFLOW_ANCHOR,
                         tap: proxy(that._toggleOverflow, that)
@@ -269,7 +270,6 @@ var __meta__ = {
                     }
                 }
 
-                //user events tap
                 that.userEvents = new kendo.UserEvents(that.element, {
                     filter: "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")",
                     tap: proxy(that._buttonClick, that)
@@ -280,7 +280,6 @@ var __meta__ = {
                     e.preventDefault();
                 });
 
-                //user events tap
                 that.splitButtonUserEvents = new kendo.UserEvents(that.element, {
                     filter: "." + SPLIT_BUTTON_ARROW,
                     tap: proxy(that._toggle, that)
@@ -325,7 +324,9 @@ var __meta__ = {
 
             add: function(options) {
                 var component = components[options.type],
-                    toolbarElement,
+                    template = options.template,
+                    element,
+                    overflowTemplate = options.overflowTemplate,
                     overflowElement;
 
                 if(!component) {
@@ -336,17 +337,13 @@ var __meta__ = {
                     uid: kendo.guid()
                 });
 
+                //add the command in the overflow popup
                 if (options.overflow !== OVERFLOW_NEVER) {
-                    if (options.overflowTemplate) {
-                        if (kendo.isFunction(options.overflowTemplate)) {
-                            overflowElement = $(options.overflowTemplate(options));
-                        } else {
-                            overflowElement = $(options.overflowTemplate);
-                        }
-                    } else {
-                        overflowElement = $(components[options.type].overflowTemplate(options));
-
-                        (components[options.type].init || $.noop)(overflowElement, options);
+                    if (overflowTemplate) { //template command
+                        overflowElement = isFunction(overflowTemplate) ? $(overflowTemplate(options)) : $(overflowTemplate);
+                    } else if (component) { //build-in command
+                        overflowElement = $(component.overflowTemplate(options));
+                        (component.init || $.noop)(overflowElement, options);
                     }
 
                     if (overflowElement.length) {
@@ -359,29 +356,26 @@ var __meta__ = {
                     }
                 }
 
+                //add the command in the toolbar container
                 if (options.overflow !== OVERFLOW_ALWAYS) {
-                    if (options.template) {
-                        if(kendo.isFunction(options.template)) {
-                            toolbarElement = $(options.template(options));
-                        } else {
-                            toolbarElement = $(options.template);
-                        }
-                    } else {
-                        toolbarElement = $(components[options.type].template(options));
-                        (components[options.type].init || $.noop)(toolbarElement, options);
+                    if (template) {
+                        element = isFunction(template) ? $(template(options)) : $(template);
+                    } else if (component) {
+                        element = $(component.template(options));
+                        (component.init || $.noop)(element, options);
                     }
 
-                    if (toolbarElement.length) {
-                        toolbarElement.attr("data-uid", options.uid);
-                        toolbarElement.appendTo(this.element).css("visibility", "hidden");
+                    if (element.length) {
+                        element.attr("data-uid", options.uid);
+                        element.appendTo(this.element).css("visibility", "hidden");
 
                         var containerWidth = this.element.innerWidth();
 
                         if(containerWidth < this._childrenWidth()) {
-                            this._hideItem(toolbarElement);
+                            this._hideItem(element);
                         }
 
-                        toolbarElement.css("visibility", "visible");
+                        element.css("visibility", "visible");
                     }
                 }
             },
