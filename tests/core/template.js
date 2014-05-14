@@ -5,16 +5,16 @@ var template = kendo.Template;
 module("Template", {
     setup: function() {
         QUnit.fixture.append(
-        '<script id="encoded" type="text/x-jquery-template">' +
+        '<script id="encoded" type="text/x-kendo-template">' +
         '    <strong>${foo}</strong>' +
         '</script>' +
-        '<script id="raw" type="text/x-jquery-template">' +
+        '<script id="raw" type="text/x-kendo-template">' +
         '    <strong>#= foo #</strong>' +
         '</script>' +
-        '<script id="code" type="text/x-jquery-template">' +
+        '<script id="code" type="text/x-kendo-template">' +
         '    # var foo = "foo"; ##= foo #' +
         '</script>' +
-        '<script type="text/x-jquery-template" id="multiline-expression">' +
+        '<script type="text/x-kendo-template" id="multiline-expression">' +
         '  # var a = "a",' +
         '    b = "b" #' +
         '  #= a + b #' +
@@ -35,19 +35,6 @@ test("function template returns the same function", function() {
     var t = $.noop;
 
     ok(template.compile(t) === t);
-});
-
-test("function with 2 parameters is treated as jQuery template", function() {
-    var data;
-
-    var t = function(foo, bar) {
-        data = bar.data;
-        return [];
-    };
-
-    template.compile(t)({ foo: "bar" });
-
-    equal(data.foo, "bar");
 });
 
 test("default paramName is 'data'", function() {

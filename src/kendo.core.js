@@ -263,12 +263,6 @@ var __meta__ = {
                 idx;
 
             if (isFunction(template)) {
-                if (template.length === 2) {
-                    //looks like jQuery.template
-                    return function(d) {
-                        return template($, { data: d }).join("");
-                    };
-                }
                 return template;
             }
 
