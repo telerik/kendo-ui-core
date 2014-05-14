@@ -821,6 +821,16 @@
             equal(line.renderPoints(), "m 10,20 l 20,30 x");
         });
 
+        test("applies rotation", function() {
+            line.options.rotation = [-45, 15, 15];
+            equal(line.renderPoints(), "m 15,22 l 29,22");
+        });
+
+        test("transforms point with matrix", function() {
+            line.options.matrix = new dataviz.Matrix(1,1,1,1,1,1);
+            equal(line.renderPoints(), "m 31,31 l 51,51");
+        });
+
         test("refresh updates path v attribute", function() {
             line.refresh(domElement);
             ok(domElement.find("path")[0].v.length > 0);

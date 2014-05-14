@@ -514,7 +514,12 @@ var __meta__ = {
                 i,
                 count = points.length,
                 rotate = function(point) {
-                    var rotation = line.options.rotation;
+                    var options = line.options;
+                    var rotation = options.rotation;
+                    var matrix = options.matrix;
+                    if (matrix) {
+                        return point.clone().transform(matrix);
+                    }
                     return rotatePoint(point.x, point.y, rotation[1], rotation[2], -rotation[0]);
                 },
                 result = "m " + line._print(rotate(points[0]));
