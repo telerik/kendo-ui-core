@@ -1370,7 +1370,7 @@ var __meta__ = {
         },
 
         complete: function(e) {
-            if (!this.deferred || $(e.target).is(IGNORE_TRANSITION_EVENT_SELECTOR)) {
+            if (!this.deferred || (e && $(e.target).is(IGNORE_TRANSITION_EVENT_SELECTOR))) {
                 return;
             }
 
