@@ -19,9 +19,6 @@ var __meta__ = {
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
     var Query = kendo.data.Query;
-    var minDependencyWidth = 14;
-    var rowHeight = 27;
-    var minDependencyHeight = Math.floor(rowHeight / 2);
     var NS = ".kendoGanttTimeline";
     var CLICK = "click";
     var RESIZE_HINT = '<div class="k-marquee k-gantt-marquee">' +
@@ -185,7 +182,10 @@ var __meta__ = {
 
             this._taskTree.render([rowsTable, columnsTable, tasksTable]);
 
-            this.content.find(".k-gantt-columns").first().height(this.content.find(".k-gantt-rows").first().height());
+            this._contentHeight = this.content.find(".k-gantt-rows").height();
+            this._rowHeight = this.content.find(".k-gantt-rows tr").height();
+
+            this.content.find(".k-gantt-columns").height(this._contentHeight);
         },
 
         _rowsTable: function(rowCount) {
@@ -245,11 +245,11 @@ var __meta__ = {
                 ]);
 
                 rows.push(row);
-                
+
                 coordinates[task.id] = {
                     start: position.left,
                     end: position.left + position.width,
-                    top: i * rowHeight + Math.floor(rowHeight/2)
+                    rowIndex: i
                 };
             }
 
@@ -511,14 +511,20 @@ var __meta__ = {
         },
 
         _dependencyFF: function(from, to, reverse) {
+            var that = this;
             var lines = [];
             var left = 0;
             var top = 0;
             var width = 0;
             var height = 0;
-            var that = this;
             var dir = reverse ? "start" : "end";
             var delta;
+            var overlap = 2;
+            var arrowOverlap = 1;
+            var rowHeight = this._rowHeight;
+            var minLineLength = Math.floor(rowHeight / 2);
+            var fromTop = from.rowIndex * rowHeight + Math.floor(rowHeight / 2);
+            var toTop = to.rowIndex * rowHeight + Math.floor(rowHeight / 2);
 
             var addHorizontal = function() {
                 lines.push(that._line("k-line k-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
@@ -528,36 +534,40 @@ var __meta__ = {
             };
 
             left = from[dir];
-            top = from.top;
-            width = minDependencyWidth;
+            top = fromTop;
+            width = minLineLength;
 
             delta = to[dir] - from[dir];
 
-            if ((delta) > 0 != reverse) {
-                width = Math.abs(delta) + minDependencyWidth;
+            if ((delta) > 0 !== reverse) {
+                width = Math.abs(delta) + minLineLength;
             }
 
             if (reverse) {
                 left = left - width;
+                width -= arrowOverlap;
                 addHorizontal();
             } else {
                 addHorizontal();
                 left = left + width;
             }
 
-            if (to.top < top) {
-                height = top - to.top;
-                top = to.top;
+            if (toTop < top) {
+                height = top - toTop;
+                height += overlap;
+                top = toTop;
                 addVertical();
             } else {
-                height = to.top - top;
+                height = toTop - top;
+                height += overlap;
                 addVertical();
-                top = top + height;
+                top = top + height - overlap;
             }
 
             width = Math.abs(left - to[dir]);
 
             if (!reverse) {
+                width -= arrowOverlap;
                 left = left - width;
             }
 
@@ -567,14 +577,20 @@ var __meta__ = {
         },
 
         _dependencyFS: function(from, to, reverse) {
+            var that = this;
             var lines = [];
             var left = 0;
             var top = 0;
             var width = 0;
             var height = 0;
-            var that = this;
-            var minDistance = 2 * minDependencyWidth;
+            var rowHeight = this._rowHeight;
+            var minLineLength = Math.floor(rowHeight / 2);
+            var minDistance = 2 * minLineLength;
             var delta = to.start - from.end;
+            var overlap = 2;
+            var arrowOverlap = 1;
+            var fromTop = from.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
+            var toTop = to.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
 
             var addHorizontal = function() {
                 lines.push(that._line("k-line k-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
@@ -584,50 +600,65 @@ var __meta__ = {
             };
 
             left = from.end;
-            top = from.top;
-            width = minDependencyWidth;
+            top = fromTop;
+            width = minLineLength;
 
-            if (reverse && delta > minDistance) {
-                width = delta - minDependencyWidth;
+            if (reverse) {
+                left += arrowOverlap;
+
+                if (delta > minDistance) {
+                    width = delta - minLineLength;
+                }
             }
 
             addHorizontal();
             left = left + width;
 
             if ((delta) <= minDistance) {
-                height = reverse ? Math.abs(to.top - from.top) - minDependencyHeight : minDependencyHeight;
+                height = reverse ? Math.abs(toTop - fromTop) - minLineLength : minLineLength;
 
-                if (to.top < from.top) {
+                if (toTop < fromTop) {
                     top = top - height;
+
+                    height += overlap;
+
                     addVertical();
                 } else {
                     addVertical();
                     top = top + height;
                 }
 
-                width = from.end - to.start + minDistance;
+                width = (from.end - to.start) + minDistance;
 
-                if (width < minDependencyWidth) {
-                    width = minDependencyWidth;
+                if (width < minLineLength) {
+                    width = minLineLength;
                 }
 
                 left -= width;
 
+                width += overlap;
+
                 addHorizontal();
             }
 
+            if (toTop < fromTop) {
+                height = top - toTop;
+                top = toTop;
 
-            if (to.top < from.top) {
-                height = top - to.top;
-                top = to.top;
+                height += overlap;
+
                 addVertical();
             } else {
-                height = to.top - top;
+                height = toTop - top;
                 addVertical();
                 top = top + height;
             }
 
             width = to.start - left;
+
+            if (!reverse) {
+                width -= arrowOverlap;
+            }
 
             addHorizontal();
 
@@ -681,8 +712,8 @@ var __meta__ = {
         },
 
         _createResizeHint: function(task) {
-            var taskTop = this._taskCoordinates[task.id].top;
-            var tablesHeight = this.content.find(".k-gantt-tables").height();
+            var rowHeight = this._rowHeight;
+            var taskTop = this._taskCoordinates[task.id].rowIndex * rowHeight + Math.floor(rowHeight / 2);
             var top = taskTop - 70;
 
             if (top < 20) {
@@ -693,7 +724,7 @@ var __meta__ = {
 
             this._resizeHint = $(RESIZE_HINT).css({
                 "top": 0,
-                "height": tablesHeight
+                "height": this._contentHeight
             });
 
             this.content.append(this._resizeHint);
