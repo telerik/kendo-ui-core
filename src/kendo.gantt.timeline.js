@@ -682,6 +682,7 @@ var __meta__ = {
 
         _createResizeHint: function(task) {
             var taskTop = this._taskCoordinates[task.id].top;
+            var tablesHeight = this.content.find(".k-gantt-tables").height();
             var top = taskTop - 70;
 
             if (top < 20) {
@@ -692,7 +693,7 @@ var __meta__ = {
 
             this._resizeHint = $(RESIZE_HINT).css({
                 "top": 0,
-                "height": "100%"
+                "height": tablesHeight
             });
 
             this.content.append(this._resizeHint);
@@ -1305,9 +1306,9 @@ var __meta__ = {
                     currentStart = task.start;
                     startOffset = view._timeByPosition(e.x.location, snap) - currentStart;
 
-                    element.css("opacity", 0.5);
-
                     view._createDragHint(element);
+
+                    element.css("opacity", 0.5);
                 })
                 .bind("drag", function(e) {
                     var view = that.view();
@@ -1354,7 +1355,7 @@ var __meta__ = {
                 .bind("dragstart", function(e) {
                     resizeStart = e.currentTarget.hasClass("k-resize-w");
 
-                    element = e.currentTarget.closest(".k-event");
+                    element = e.currentTarget.closest(".k-task");
 
                     task = that._taskByUid(element.attr("data-uid"));
 
