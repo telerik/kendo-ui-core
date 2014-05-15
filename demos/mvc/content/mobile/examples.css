@@ -117,6 +117,7 @@
 #about {
     background: transparent url("backgrounds/kendo.jpg") left top no-repeat;
 }
+
 #about .km-navbar {
     background: rgba(28, 31, 35, 0.4);
 }
@@ -201,4 +202,15 @@
 
 #themechooser a:after {
     box-shadow: none;
+}
+
+#desktop-footer {
+    background-color: #2a2d33;
+    padding: 2em;
+}
+
+#desktop-link {
+    display: block;
+    text-align: center;
+    color: #38c0ff;
 }

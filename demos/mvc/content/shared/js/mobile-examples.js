@@ -140,7 +140,7 @@ function pickInitialTheme(e) {
     e.sender.items().filter(":contains(Silver)").addClass("current");
 }
 
-function triggerIndexButton(e) {
+function showDemoLayout(e) {
     navDataSource.fetch(function() {
         var url = e.view.id,
             element = e.view.element;
@@ -155,12 +155,11 @@ function triggerIndexButton(e) {
             navBar.title(item.text);
         }
 
+        e.view.footer.find("#desktop-footer").toggle(!section.mobile);
+        e.view.footer.find("#desktop-link").attr("href", "../" + url);
+
         element.find("[data-role=backbutton]").attr("href", "#section?name=" + section.name);
     });
-
-    if (!isAndroid) {
-        $("#androidLightChanger").hide();
-    }
 }
 
 function selectTheme(e) {

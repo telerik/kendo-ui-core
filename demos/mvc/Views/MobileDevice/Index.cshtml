@@ -32,10 +32,6 @@
 </head>
 
 <body id="examples">
-    <pre>
-    @(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.ServerVariables));
-    @Request.ServerVariables["HTTP_X_KENDO"];
-</pre>
     <div data-role="view" data-title="Kendo UI" id="index" data-layout="">
         <header data-role="header">
             <div data-role="navbar">
@@ -90,7 +86,7 @@
         </ul>
     </div>
 
-    <div data-id="examples" data-role="layout" data-show="triggerIndexButton" data-hide="removeView">
+    <div data-id="examples" data-role="layout" data-show="showDemoLayout" data-hide="removeView">
         <header data-role="header">
             <div data-role="navbar">
                 <a data-align="left" data-icon="arrow-w" data-role="backbutton"></a>
@@ -98,8 +94,13 @@
                 <a data-align="right" data-icon="themechooser" href="#themechooser" data-rel="drawer" data-role="button"></a>
             </div>
         </header>
-    </div>
 
+        <footer data-role="footer">
+            <div id="desktop-footer">
+                <a id="desktop-link" data-rel="external">View desktop website</a>
+            </div>
+        </footer>
+    </div>
 
     <div data-role="drawer" id="about" style="background-image: url(@Url.Content("~/content/mobile/backgrounds/" + ViewBag.product + ".jpg"))">
         <div data-role="header">
@@ -122,7 +123,6 @@
             </ul>
         </div>
     </div>
-
 
     <div data-role="drawer" id="themechooser" data-position="right">
         <header data-role="header">
