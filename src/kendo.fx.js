@@ -1337,6 +1337,7 @@ var __meta__ = {
     });
 
     var RESTORE_OVERFLOW = !support.mobileOS.android;
+    var IGNORE_TRANSITION_EVENT_SELECTOR = ".km-touch-scrollbar";
 
     createEffect("replace", {
         init: function(element, previous, transitionClass) {
@@ -1368,13 +1369,18 @@ var __meta__ = {
             return containerClass;
         },
 
-        complete: function() {
-            if (!this.deferred) {
+        complete: function(e) {
+            if (!this.deferred || $(e.target).is(IGNORE_TRANSITION_EVENT_SELECTOR)) {
                 return;
             }
+
             var container = this.container;
 
-            container.removeClass("k-fx-end").removeClass(this._containerClass());
+            container
+                .removeClass("k-fx-end")
+                .removeClass(this._containerClass())
+                .off(transitions.event, this.completeProxy);
+
             this._previous.hide().removeClass("k-fx-current");
             this.element.removeClass("k-fx-next");
 
@@ -1429,7 +1435,8 @@ var __meta__ = {
 
                 container.addClass(this._containerClass());
 
-                container.one(transitions.event, $.proxy(this, "complete"));
+                this.completeProxy = $.proxy(this, "complete");
+                container.on(transitions.event, this.completeProxy);
 
                 kendo.animationFrame(function() {
                     element.removeClass("k-fx-hidden").addClass("k-fx-next");
