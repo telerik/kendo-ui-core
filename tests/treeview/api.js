@@ -441,20 +441,6 @@
             }
         });
 
-        test("append() after detaching node", function() {
-            createTreeView({
-                dataSource: [
-                    { text: "foo" }
-                ]
-            });
-
-            treeviewObject.detach(".k-item");
-
-            treeviewObject.append({ text: "bar" });
-
-            equal(treeview.text(), "bar");
-        });
-
         var timeout = setTimeout(start, 1000);
 
         treeviewObject.append(
@@ -467,6 +453,20 @@
                 equal(treeview.find(".k-item .k-item").length, 2);
             }
         );
+    });
+
+    test("append() after detaching node", function() {
+        createTreeView({
+            dataSource: [
+                { text: "foo" }
+            ]
+        });
+
+        treeviewObject.detach(".k-item");
+
+        treeviewObject.append({ text: "bar" });
+
+        equal(treeview.text(), "bar");
     });
 
     test("detach() removes node and persists data", function() {
