@@ -500,7 +500,7 @@
         equal(columnTuples[0].members[0].hasChildren, true);
         equal(columnTuples[0].members[0].parentName, "[Date].[Calendar].[All]");
         equal(columnTuples[0].members[0].name, "[Date].[Calendar].[Year].&[2005]");
-        ok(!columnTuples[0].members[0].hierarchy);
+        equal(columnTuples[0].members[0].hierarchy, "[Date].[Calendar]");
 
         equal(rowTuples[0].members.length, 1);
     });

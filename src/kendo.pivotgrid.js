@@ -137,13 +137,19 @@ var __meta__ = {
             };
         }
 
+        if (!source.columns) {
+            source.columns = {
+                tuples: []
+            };
+        }
+
         var result = {
             columns: target.columns,
             rows: source.rows
         };
 
         var columnTuples = result.columns.tuples;
-        var sourceTuples = parseSource(source.columns.tuples);
+        var sourceTuples = parseSource(source.columns.tuples || []);
         result.columns.tuples = sourceTuples;
 
         return result;
@@ -159,41 +165,72 @@ var __meta__ = {
         }
     }
 
+    function addMembers(members, map) {
+        var member, i, len, path = "";
+        for (i = 0, len = members.length; i < len; i++) {
+            member = members[i];
+            path += member.name;
+            map[path] = member;
+        }
+    }
+
+    function findParentMember(tuple, map) {
+        var members = tuple.members;
+        var i, len, member, path = "";
+        var parentPath = "";
+        var parentMember;
+
+        for (i = 0, len = members.length; i < len; i++) {
+            member = members[i];
+            if (parentMember) {
+                if (map[path + member.name]) {
+                    path += member.name;
+                    parentMember = map[path];
+                    continue;
+                } else if (map[path + member.parentName]) {
+                    return map[path + member.parentName];
+                } else {
+                    if (member.parentName) {
+                        parentPath += member.parentName;
+                    }
+                    return map[parentPath];
+                }
+            }
+
+            path += member.name;
+            parentMember = map[member.parentName];
+
+            if (!parentMember) {
+                parentMember = map[path];
+                if (!parentMember) {
+                    return null;
+                }
+            }
+
+            if (parentMember) {
+                parentPath += parentMember.name;
+            }
+        }
+    }
+
     function parseSource(tuples) {
         if (tuples.length < 1) {
             return [];
         }
         var result = [];
-        var root = tuples[0];
-        result.push(root);
-        var membersLength = root.members.length;
+        var map = { };
 
-        for (var i = 1; i < tuples.length; i ++) {
-            var current = tuples[i];
-            var found = false;
-            for (var m = 0; m < membersLength; m ++) {
-                var member = current.members[m];
-                var rootMember = root.members[m];
+        for (var i = 0; i < tuples.length; i++) {
+            var tuple = tuples[i];
+            var parentMember = findParentMember(tuple, map);
 
-                if (found) {
-                    if (member.name == rootMember.name) {
-                        root.members[m-1].children.push(current);
-                    } else if (member.parentName == rootMember.name) {
-                        //rootMember.children.push(current);
-                        var index = m - 1;
-                        root = findTuple(root.members[index].children, index, current.members[index].name);
-                        root.members[m].children.push(current);
-                    }
-
-                    break;
-                } else if (member.parentName == rootMember.name) {
-                    found = true;
-
-                    if (m == membersLength - 1) {
-                        rootMember.children.push(current);
-                    }
-                }
+            if (parentMember) {
+                parentMember.children.push(tuple);
+            } else {
+                result.push(tuple);
             }
+
+            addMembers(tuple.members, map);
         }
 
         return result;
