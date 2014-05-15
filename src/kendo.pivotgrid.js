@@ -261,11 +261,20 @@ var __meta__ = {
         return result;
     }
 
-    function expandMemberDescriptor(members, memberName) {
+    function expandMemberDescriptor(members, memberNames) {
         return transformDescriptors(members, function(member) {
             var name = member.name;
 
-            if (member.expand && name === memberName) {
+            var found = false;
+
+            for (var idx = 0; idx < memberNames.length; idx++) {
+                if (name === memberNames[idx]) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (member.expand && found) {
                 if (name.indexOf("&") == -1) {
                     name += ".[ALL]";
                 }
@@ -355,15 +364,23 @@ var __meta__ = {
             command += crossJoinCommand(memberNames, measures);
 
             if (expandedColumns.length) {
-                command += ",";
-                var start = expandedColumns.length > 1 ? 0 : 1;
+                var start = 0;
+                var idx;
 
-                for (var idx = start; idx < expandedColumns.length; idx++) {
-                    command += crossJoinCommand(expandMemberDescriptor(members, expandedColumns[idx].name), measures);
+                var expandedMemberNames = [];
+
+                for (idx = 0; idx < expandedColumns.length; idx++) {
                     command += ",";
-                }
 
-                command += crossJoinCommand(expandDescriptors(members), measures);
+                    for (j=start; j < expandedColumns.length; j++) {
+                        command += crossJoinCommand(expandMemberDescriptor(members, expandedMemberNames.concat(expandedColumns[j].name)), measures);
+                        if (j < expandedColumns.length - 1) {
+                            command += ",";
+                        }
+                    }
+                    start++;
+                    expandedMemberNames.push(expandedColumns[idx].name);
+                }
             }
         } else {
             if (expandedColumns.length) {
