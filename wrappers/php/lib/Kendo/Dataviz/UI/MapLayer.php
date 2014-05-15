@@ -84,7 +84,7 @@ Requires the dataSource option to be set.
 
     /**
     * The the opacity for the layer.
-    * @param string $value
+    * @param float $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
     public function opacity($value) {

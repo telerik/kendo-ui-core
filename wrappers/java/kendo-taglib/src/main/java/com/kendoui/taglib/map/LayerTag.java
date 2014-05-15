@@ -99,11 +99,11 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("locationField", value);
     }
 
-    public java.lang.String getOpacity() {
-        return (java.lang.String)getProperty("opacity");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setOpacity(java.lang.String value) {
+    public void setOpacity(float value) {
         setProperty("opacity", value);
     }
 

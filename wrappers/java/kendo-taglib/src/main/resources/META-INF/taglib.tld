@@ -16069,7 +16069,7 @@ The field should be an array with two numbers - latitude and longitude.Requires 
             <description>The the opacity for the layer.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>float</type>
         </attribute>
         <attribute>
             <description>The marker shape. Supported shapes are "pin" and "pinTarget".</description>
@@ -22721,6 +22721,12 @@ The default options for all pie series. For more details see the series options.
             <name>stack</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The type of the series. Available types:</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The type of the series. Available types:</description>
