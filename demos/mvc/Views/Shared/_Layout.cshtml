@@ -26,9 +26,10 @@
     }
     <script src="@Url.Content("~/content/shared/js/trykendo.js")"></script>
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
-    <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>   
 </head>
 <body>
+    @Html.Partial("Header")
     @Html.Partial("GoogleTagManager")
     <div class="demos-nav widgetGrid">
         <div class="centerWrap floatWrap">
@@ -96,5 +97,6 @@
             @RenderBody()
             </div>
         </div>
+    @Html.Partial("Footer")
 </body>
 </html>

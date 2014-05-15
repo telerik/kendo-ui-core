@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Header";
+}
+
+<div id="header">
+    <div id="logo-bar">
+      @*  <img alt="Telerik logo" class="logo" src="@Url.Content("~/content/shared/styles/telerik-logo.png")">*@
+        @if (ViewBag.Product == "kendo-ui")
+        {
+            
+            <text><a href="#"><img alt="Telerik logo" class="logo" src="@Url.Content("~/content/shared/styles/telerik-logo.png")"/>Kendo UI<span class="product-subtitle">Demos and sample applications</span></a></text>
+        }
+        else if (ViewBag.Product == "php-ui")
+        {
+            <text><a href="#"><img alt="Telerik logo" class="logo" src="@Url.Content("~/content/shared/styles/telerik-logo.png")"/>UI for PHP<span class="product-subtitle">Demos and sample applications</span></a></text>
+        }
+        else if (ViewBag.Product == "aspnet-mvc")
+        {
+            <text><a href="#"><img alt="Telerik logo" class="logo" src="@Url.Content("~/content/shared/styles/telerik-logo.png")"/>UI for ASP.NET MVC<span class="product-subtitle">Demos and sample applications</span></a></text> 
+        }
+        else if (ViewBag.Product == "jsp-ui")
+        {
+            <text><a href="#"><img alt="Telerik logo" class="logo" src="@Url.Content("~/content/shared/styles/telerik-logo.png")"/>UI for JSP<span class="product-subtitle">Demos and sample applications</span></a></text> 
+        }         
+    </div>       
+    <div class="nav-buttons">
+        <a id="about" href="#" class="btn">About</a>
+        <a id="pricing" href="#" class="btn">Pricing</a>
+        <a id="get-kendoui" href="#" class="btn btn-primary">Try now</a>
+    </div>
+</div>
