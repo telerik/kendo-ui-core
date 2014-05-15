@@ -336,7 +336,7 @@
         taskElement = timeline.wrapper.find(".k-task");
         taskSlot = timeline.view()._timeSlots()[2];
 
-        equal(taskElement.width(), taskSlot.offsetWidth);
+        equal(taskElement.outerWidth(), taskSlot.offsetWidth);
     });
 
     test("width of two hour task", function() {
@@ -353,7 +353,7 @@
         firstSlot = timeline.view()._timeSlots()[2];
         secondSlot = timeline.view()._timeSlots()[3];
 
-        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+        equal(taskElement.outerWidth(), firstSlot.offsetWidth + secondSlot.offsetWidth);
     });
 
     test("width of task when not snapped to slot", function() {
@@ -368,7 +368,7 @@
         taskElement = timeline.wrapper.find(".k-task");
         taskSlot = timeline.view()._timeSlots()[2];
 
-        equal(taskElement.width(), taskSlot.offsetWidth / 2);
+        equal(taskElement.outerWidth(), taskSlot.offsetWidth / 2);
     });
 
     test("width of one day task is equal to one slot in WeekView", function() {
@@ -385,7 +385,7 @@
         taskElement = timeline.wrapper.find(".k-task");
         taskSlot = timeline.view()._timeSlots()[2];
 
-        equal(taskElement.width(), taskSlot.offsetWidth);
+        equal(taskElement.outerWidth(), taskSlot.offsetWidth);
     });
 
     test("width of one week task is equal to one slot in MonthView", function() {
@@ -402,7 +402,7 @@
         taskElement = timeline.wrapper.find(".k-task");
         taskSlot = timeline.view()._timeSlots()[2];
 
-        equal(taskElement.width(), taskSlot.offsetWidth);
+        equal(taskElement.outerWidth(), taskSlot.offsetWidth);
     });
 
 
@@ -418,7 +418,7 @@
         taskElement = timeline.wrapper.find(".k-task");
         taskSlot = timeline.view()._timeSlots()[8];
 
-        equal(taskElement.width(), taskSlot.offsetWidth);
+        equal(taskElement.outerWidth(), taskSlot.offsetWidth);
     });
 
     test("width of task when end is in non working hours and showWorkHours is false", function() {
@@ -440,7 +440,7 @@
         secondSlot = timeline.view()._timeSlots()[17];
         thirdSlot = timeline.view()._timeSlots()[18];
 
-        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth + thirdSlot.offsetWidth);
+        equal(taskElement.outerWidth(), firstSlot.offsetWidth + secondSlot.offsetWidth + thirdSlot.offsetWidth);
     });
 
     test("width of task when start is in non working hours and showWorkHours is true", function() {
@@ -455,7 +455,7 @@
         taskElement = timeline.wrapper.find(".k-task");
         taskSlot = timeline.view()._timeSlots()[0];
 
-        equal(taskElement.width(), taskSlot.offsetWidth);
+        equal(taskElement.outerWidth(), taskSlot.offsetWidth);
     });
 
     test("width of task when start is in non working hours and showWorkHours is false", function() {
@@ -477,7 +477,7 @@
         secondSlot = timeline.view()._timeSlots()[7];
         thirdSlot = timeline.view()._timeSlots()[8];
 
-        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth + thirdSlot.offsetWidth);
+        equal(taskElement.outerWidth(), firstSlot.offsetWidth + secondSlot.offsetWidth + thirdSlot.offsetWidth);
     });
 
     test("width of task when start and end are in non working hours and showWorkHours is true", function() {
@@ -510,7 +510,7 @@
         firstSlot = timeline.view()._timeSlots()[2];
         secondSlot = timeline.view()._timeSlots()[3];
 
-        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+        equal(taskElement.outerWidth(), firstSlot.offsetWidth + secondSlot.offsetWidth);
     });
 
     test("width of task with non working hours in the middle and showWorkHours is true", function() {
@@ -527,7 +527,7 @@
         firstSlot = timeline.view()._timeSlots()[8];
         secondSlot = timeline.view()._timeSlots()[9];
 
-        equal(taskElement.width(), firstSlot.offsetWidth + secondSlot.offsetWidth);
+        equal(taskElement.outerWidth(), firstSlot.offsetWidth + secondSlot.offsetWidth);
     });
 
     test("width of task with non working hours in the middle and showWorkHours is false", function() {
@@ -547,7 +547,7 @@
         firstSlot = timeline.view()._timeSlots()[16];
         lastSlot = timeline.view()._timeSlots()[32];
 
-        equal(taskElement.width(), (lastSlot.offsetLeft - firstSlot.offsetLeft) + lastSlot.offsetWidth);
+        equal(taskElement.outerWidth(), (lastSlot.offsetLeft - firstSlot.offsetLeft) + lastSlot.offsetWidth);
     });
 
 
@@ -639,7 +639,7 @@
         progressElement = timeline.wrapper.find(".k-task-complete");
         taskElement = timeline.wrapper.find(".k-task");
 
-        equal(progressElement.width(), taskElement.width() / 2);
+        equal(progressElement.width(), taskElement.outerWidth() / 2);
     });
 
     test("position of progress drag handle when progress is 0", function() {
@@ -669,7 +669,7 @@
         handleElement = timeline.wrapper.find(".k-task-draghandle");
         taskElement = timeline.wrapper.find(".k-task");
 
-        equal(parseFloat(handleElement.css("left"), 10), taskElement.width() / 2);
+        equal(parseFloat(handleElement.css("left"), 10), taskElement.outerWidth() / 2);
     });
 
 

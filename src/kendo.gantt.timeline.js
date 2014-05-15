@@ -334,7 +334,7 @@ var __meta__ = {
         _renderSingleTask: function(task, position) {
             var progressWidth = Math.round(position.width * task.percentComplete / 100);
 
-            var element = kendoDomElement("div", { className: "k-task k-task-single", "data-uid": task.uid, style: { width: position.width + "px" } }, [
+            var element = kendoDomElement("div", { className: "k-task k-task-single", "data-uid": task.uid, style: { width: Math.max((position.width - 2), 0) + "px" } }, [
                 kendoDomElement("div", { className: "k-task-complete", style: { width: progressWidth + "px" } }),
                 kendoDomElement("div", { className: "k-task-content" }, [
                     kendoDomElement("div", { className: "k-task-template" }, [
