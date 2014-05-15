@@ -10,6 +10,7 @@ namespace Kendo.Controllers
         // GET: /m
         public ActionResult Index()
         {
+            ViewBag.product = CurrentProduct();
 #if DEBUG
             ViewBag.Debug = true;
 #else

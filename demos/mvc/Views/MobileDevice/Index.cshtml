@@ -32,6 +32,10 @@
 </head>
 
 <body id="examples">
+    <pre>
+    @(new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(Request.ServerVariables));
+    @Request.ServerVariables["HTTP_X_KENDO"];
+</pre>
     <div data-role="view" data-title="Kendo UI" id="index" data-layout="">
         <header data-role="header">
             <div data-role="navbar">
@@ -96,24 +100,25 @@
         </header>
     </div>
 
-    <div data-role="drawer" id="about">
+
+    <div data-role="drawer" id="about" style="background-image: url(@Url.Content("~/content/mobile/backgrounds/" + ViewBag.product + ".jpg"))">
         <div data-role="header">
             <div data-role="navbar">
-                <img src="@Url.Content("~/content/mobile/logos/kendo.png")" data-align="left" style="width: 198px; height: 15px" id="logo">
+                <img src="@Url.Content("~/content/mobile/logos/" + ViewBag.product + ".png")" data-align="left" style="width: 198px; height: 15px" id="logo">
             </div>
         </div>
 
         <ul data-role="listview" id="external-resources">
-            <li><a data-role="external" href="http://www.telerik.com">Product Overview</a></li>
-            <li><a data-role="external" href="http://www.telerik.com">Pricing</a></li>
-            <li><a data-role="external" href="http://www.telerik.com">Try Now</a></li>
+            <li><a data-rel="external" href="http://www.telerik.com">Product Overview</a></li>
+            <li><a data-rel="external" href="http://www.telerik.com">Pricing</a></li>
+            <li><a data-rel="external" href="http://www.telerik.com">Try Now</a></li>
         </ul>
 
         <div data-role="footer">
             <ul data-role="listview">
-                <li><a data-role="external" href="http://www.telerik.com">Terms of Use</a></li>
-                <li><a data-role="external" href="http://www.telerik.com">Product Improvement program</a></li>
-                <li><a data-role="external" href="http://www.telerik.com">Contact Us</a></li>
+                <li><a data-rel="external" href="http://www.telerik.com">Terms of Use</a></li>
+                <li><a data-rel="external" href="http://www.telerik.com">Product Improvement program</a></li>
+                <li><a data-rel="external" href="http://www.telerik.com">Contact Us</a></li>
             </ul>
         </div>
     </div>

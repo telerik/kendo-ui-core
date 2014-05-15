@@ -52,6 +52,23 @@ namespace Kendo.Controllers
             return File(IOFile.ReadAllBytes(path), mimeType);
         }
 
+        public String CurrentProduct() {
+            string product = "kendo-ui";
+
+            // Mono/FastCGI Nginx support
+            if (!string.IsNullOrEmpty(Request.ServerVariables["HTTP_X_KENDO"]))
+            {
+                product = Request.ServerVariables["HTTP_X_KENDO"];
+            }
+
+            if (!string.IsNullOrEmpty(Request.ServerVariables["X-KENDO"]))
+            {
+                product = Request.ServerVariables["X-KENDO"];
+            }
+
+            return product;
+        }
+
         protected void LoadNavigation()
         {
             var navigationJson = IOFile.ReadAllText(Server.MapPath("~/content/nav.json"));
