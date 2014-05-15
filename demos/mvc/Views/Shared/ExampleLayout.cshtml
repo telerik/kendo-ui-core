@@ -132,13 +132,13 @@
                         }
                     },
                     select: function (e) {
-                        var tabstrip = $(e.contentElement).data("kendoTabStrip");
+                        var tabstrip = $(e.contentElement).children(".k-tabstrip").data("kendoTabStrip");
                         if (tabstrip.select().length == 0) {
                             tabstrip.select(0);
                         }
                     },
                     activate: function (e) {
-                        var isHtml = $(e.contentElement).is("#codeStrip-1");
+                        var isHtml = $(e.contentElement).children(".k-tabstrip").is("#codeStrip-1");
                         $(".try-kendo").toggleClass("k-state-disabled", !isHtml).prop('disabled', !isHtml);
                     }
                 })
