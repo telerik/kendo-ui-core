@@ -281,14 +281,12 @@
     <Content Include="content\shared\js\dbd26eaf.vendor.js" />
     <Content Include="content\shared\js\dropdown.js" />
     <Content Include="content\shared\js\employees.js" />
-    <Content Include="content\shared\js\examples.js" />
     <Content Include="content\shared\js\mobile-examples.js" />
     <Content Include="content\shared\js\less.js" />
     <Content Include="content\shared\js\orders.js" />
     <Content Include="content\shared\js\people.js" />
     <Content Include="content\shared\js\prettify.js" />
     <Content Include="content\shared\js\products.js" />
-    <Content Include="content\shared\js\telerik-navigation.js" />
     <Content Include="content\shared\styles\aeroviewr.png" />
     <Content Include="content\shared\styles\bg-glossy.png" />
     <Content Include="content\shared\styles\blackberrySkin.png" />
@@ -860,7 +858,6 @@
     <Content Include="Views\Shared\ThemeBuilderLayout.cshtml" />
     <Content Include="Views\Shared\SourceCode.cshtml" />
     <Content Include="Views\Shared\Products.cshtml" />
-    <Content Include="Views\Shared\Telerik-Navigation.cshtml" />
     <Content Include="Views\demos\actionsheet\index.cshtml" />
     <Content Include="Views\demos\grid\adaptive.cshtml" />
     <Content Include="Views\demos\scheduler\adaptive.cshtml" />

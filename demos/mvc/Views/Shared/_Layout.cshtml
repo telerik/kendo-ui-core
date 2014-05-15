@@ -25,13 +25,11 @@
     <script src="@Url.Script(scriptName)"></script>
     }
     <script src="@Url.Content("~/content/shared/js/trykendo.js")"></script>
-    <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
     <script src="@Url.Content("~/content/shared/js/console.js")"></script>
     <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
-    <script src="@Url.Content("~/content/shared/js/telerik-navigation.js")"></script>
 </head>
 <body>
-    @Html.Partial("Telerik-Navigation")
+    @Html.Partial("GoogleTagManager")
     <div class="demos-nav widgetGrid">
         <div class="centerWrap floatWrap">
         @{
@@ -89,7 +87,6 @@
                 <span id="themeChooser"></span>
                 <a href="http://docs.telerik.com/kendo-ui/api/@ViewBag.Documentation" class="get-kendoui" style="display:@(ignored || string.IsNullOrEmpty(ViewBag.Documentation) ? "none" : "inline-block")">Documentation</a>
             </div>
-
             <div id="mainWrapInner" class="floatWrap clear">
             @if (ViewBag.CurrentWidget.Name != "overview")
             {
@@ -97,61 +94,7 @@
             }
 
             @RenderBody()
-
             </div>
-
         </div>
-
-
-    <script>
-
-        if ("pushState" in history) {
-            $(".demos-nav").on("click", "a", function(e) {
-                var a = $(this),
-                    li = a.parent();
-
-                if (a.attr("target")) {
-                    return;
-                }
-
-                e.preventDefault();
-
-                if (li.hasClass("active")) {
-                    return;
-                }
-
-                Application.loadWidget(a.attr("href"));
-            });
-        }
-
-        Application.isMobile = !!$("#mobile-application-container").length;
-
-        if (Application.isMobile) {
-            var initialTheme = {
-                label: "Choose skin:",
-                theme: "ios7",
-                themes: [
-                    { text: "iOS7", value: "ios7" },
-                    { text: "iOS6", value: "ios" },
-                    { text: "Android Light", value: "android-light" },
-                    { text: "Android Dark", value: "android-dark" },
-                    { text: "BlackBerry", value: "blackberry" },
-                    { text: "WP8 Light", value: "wp-light" },
-                    { text: "WP8 Dark", value: "wp-dark" },
-                    { text: "Flat Skin", value: "flat" }
-                ]
-            }
-        }
-
-        $("#themeChooser").kendoThemeChooser(initialTheme);
-
-        @if (ViewBag.Mobile)
-        {
-            <text>
-                applyCurrentTheme();
-            </text>
-        }
-
-    </script>
 </body>
 </html>
