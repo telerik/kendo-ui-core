@@ -1138,42 +1138,331 @@
 
     (function() {
         var textBox,
-            TEXT = "text";
+            TextBox = dataviz.TextBox,
+            FloatElement = dataviz.FloatElement,
+            Text = dataviz.Text,
+            TEXT = "text",
+            floatElement,
+            floatElementStub,
+            targetBox = Box2D(0, 0, 100, 100),
+            texts;
 
-        function createTextBox(options) {
-            textBox = new dataviz.TextBox(TEXT, options);
-            textBox.reflow(new Box2D());
-            textBox.getViewElements(view);
+        function createTextBox(options, text) {
+            textBox = new TextBox(text || TEXT, options);
+            floatElement = textBox.children[0];
+            texts = floatElement.children;
         }
 
         // ------------------------------------------------------------
-        module("TextBox", {
-            setup: function() {
-                moduleSetup();
-                createTextBox();
-            }
-        });
-
-        test("sets unique id on text", function() {
-            notEqual(textBox.children[0].id, "");
-        });
+        module("TextBox", {});
 
         test("retains id", function() {
             createTextBox({ id: "1" });
             equal(textBox.id, "1");
         });
 
-        test("moves id to box when background or border are set", function() {
-            createTextBox({ id: "1", border: { width: 1 }});
-            equal(view.log.rect[0].style.id, "1");
+        test("appends float element", function() {
+            createTextBox();
+            ok(floatElement instanceof FloatElement);
+            ok(floatElement.parent === textBox);
+        });
+
+        test("sets align to float element from its options", function() {
+            createTextBox({align: "right"});
+            equal(floatElement.options.align, "right");
+        });
+
+        test("sets float element wrap to false", function() {
+            createTextBox();
+            equal(floatElement.options.wrap, false);
+        });
+
+        test("sets float element direction to vertical", function() {
+            createTextBox();
+            equal(floatElement.options.vertical, true);
+        });
+
+        test("appends text to float element", function() {
+            createTextBox();
+            ok(texts[0] instanceof Text);
+            ok(texts[0].parent === floatElement);
+        });
+
+        test("passes text options", function() {
+            createTextBox({font: "foo", color: "bar", cursor: {style: "baz"}});
+            var options = texts[0].options;
+            equal(options.font, "foo");
+            equal(options.color, "bar");
+            equal(options.cursor.style, "baz");
+        });
+
+        test("sets text vertical align to top", function() {
+            createTextBox();
+            equal(texts[0].options.vAlign, "top");
+        });
+
+        test("sets text align to left", function() {
+            createTextBox();
+            equal(texts[0].options.align, "left");
+        });
+
+        test("sets text rotation to zero", function() {
+            createTextBox({rotation: 30});
+            equal(texts[0].options.rotation, 0);
+        });
+
+        test("sets options id on text", function() {
+            createTextBox({ id: "1" });
+            equal(texts[0].id, "1");
         });
 
         test("assigns unique id to text when background or border is set", function() {
             createTextBox({ id: "1", border: { width: 1 }});
 
-            var id = textBox.children[0].id;
+            var id = texts[0].id;
             notEqual(id, "1");
-            notEqual(id, "");
+            ok(id);
+        });
+
+        test("creates text when passed content is a number", function() {
+            createTextBox({}, 1);
+            ok(texts[0]);
+        });
+
+        test("splits text by line feed and creates a appends text to float element for each line", function() {
+            createTextBox({}, "line1 \n line2");
+            ok(texts[0] instanceof Text);
+            equal(texts[0].content, "line1");
+            ok(texts[1] instanceof Text);
+            equal(texts[1].content, "line2");
+        });
+
+        test("multiline text assigns unique id to each text if textbox has box", function() {
+            createTextBox({id: "1", background: "red"}, "line1 \n line2");
+            ok(texts[0].id);
+            notEqual(texts[0].id, "1");
+            ok(texts[1].id);
+            notEqual(texts[1].id, "1");
+        });
+
+        test("multiline assigns id from options to first text and a unique one to each subsequent text when textbox has no box", function() {
+            createTextBox({id: "1"}, "line1 \n line2");
+            equal(texts[0].id, "1");
+            ok(texts[1].id);
+            notEqual(texts[1].id, "1");
+        });
+
+        test("has box after the initialization", function() {
+            textBox = new TextBox(TEXT, {});
+            ok(textBox.box);
+        });
+
+        // ------------------------------------------------------------
+
+        function FloatElementStub(box) {
+            this.box = box;
+            this.reflow = function(target) {
+                //this.box = target.clone();
+            };
+            this.options = {};
+        }
+
+        function createTextBoxMock(options, floatBox) {
+            createTextBox($.extend({
+                align: "left",
+                vAlign: "top"
+            }, options));
+            floatElementStub = new FloatElementStub(floatBox || Box2D(0,0,30,30));
+            textBox.children = [floatElementStub];
+            textBox.container = floatElementStub;
+        }
+
+        function compareBoxes(box1, box2) {
+            equal(box1.x1, box2.x1);
+            equal(box1.x2, box2.x2);
+            equal(box1.y1, box2.y1);
+            equal(box1.y2, box2.y2);
+        }
+
+        // ------------------------------------------------------------
+        module("TextBox / reflow", {});
+
+        test("updates float element align option", function() {
+            createTextBoxMock();
+            textBox.options.align = "right";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.options.align, "right");
+        });
+
+        test("applies margin", function() {
+            createTextBoxMock({margin: 5});
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, floatElementStub.box.pad(5));
+        });
+
+        test("applies padding", function() {
+            createTextBoxMock({padding: 10});
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, floatElementStub.box.pad(10));
+        });
+
+        test("applies border", function() {
+            createTextBoxMock({border: {width: 15}});
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, floatElementStub.box.pad(15));
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / reflow / align", {
+            setup: function() {
+                createTextBoxMock();
+            }
+        });
+
+        test("top", function() {
+            textBox.options.vAlign = "top";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.y1, 0);
+            equal(floatElementStub.box.y2, 30);
+            equal(textBox.box.y1, 0);
+            equal(textBox.box.y2, 30);
+        });
+
+        test("bottom", function() {
+            textBox.options.vAlign = "bottom";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.y1, 70);
+            equal(floatElementStub.box.y2, 100);
+            equal(textBox.box.y1, 70);
+            equal(textBox.box.y2, 100);
+        });
+
+        test("vertical center", function() {
+            textBox.options.vAlign = "center";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.y1, 35);
+            equal(floatElementStub.box.y2, 65);
+            equal(textBox.box.y1, 35);
+            equal(textBox.box.y2, 65);
+        });
+
+        test("left", function() {
+            textBox.options.align = "left";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.x1, 0);
+            equal(floatElementStub.box.x2, 30);
+            equal(textBox.box.x1, 0);
+            equal(textBox.box.x2, 30);
+        });
+
+        test("right", function() {
+            textBox.options.align = "right";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.x1, 70);
+            equal(floatElementStub.box.x2, 100);
+            equal(textBox.box.x1, 70);
+            equal(textBox.box.x2, 100);
+        });
+
+        test("horizontal center", function() {
+            textBox.options.align = "center";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.x1, 35);
+            equal(floatElementStub.box.x2, 65);
+            equal(textBox.box.x1, 35);
+            equal(textBox.box.x2, 65);
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / reflow / rotation", {
+            setup: function() {
+                createTextBoxMock({rotation: 90}, Box2D(0,0,20,30));
+            }
+        });
+
+        test("rotates box", function() {
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, Box2D(0,0, 30, 20));
+        });
+
+        test("sets normal box to box prior to rotation", function() {
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.normalBox, Box2D(0,0, 20, 30));
+        });
+
+        test("sets normal box to box prior to rotation without margin", function() {
+            textBox.options.margin = 5;
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.normalBox, Box2D(5,5, 25, 35));
+        });
+
+        test("rotates box without margin and applies margin to the rotated box", function() {
+            textBox.options.margin = 5;
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, Box2D(0,0, 40, 30));
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / reflow / rotation / align", {
+            setup: function() {
+                createTextBoxMock({rotation: 90}, Box2D(0,0,20,30));
+            }
+        });
+
+        test("top", function() {
+            textBox.options.vAlign = "top";
+            textBox.reflow(targetBox);
+            equal(textBox.box.y1, 0);
+            equal(textBox.box.y2, 20);
+        });
+
+        test("bottom", function() {
+            textBox.options.vAlign = "bottom";
+            textBox.reflow(targetBox);
+            equal(textBox.box.y1, 80);
+            equal(textBox.box.y2, 100);
+        });
+
+        test("vertical center", function() {
+            textBox.options.vAlign = "center";
+            textBox.reflow(targetBox);
+            equal(textBox.box.y1, 40);
+            equal(textBox.box.y2, 60);
+        });
+
+        test("left", function() {
+            textBox.options.align = "left";
+            textBox.reflow(targetBox);
+            equal(textBox.box.x1, 0);
+            equal(textBox.box.x2, 30);
+        });
+
+        test("right", function() {
+            textBox.options.align = "right";
+            textBox.reflow(targetBox);
+            equal(textBox.box.x1, 70);
+            equal(textBox.box.x2, 100);
+        });
+
+        test("horizontal center", function() {
+            textBox.options.align = "center";
+            textBox.reflow(targetBox);
+            equal(textBox.box.x1, 35);
+            equal(textBox.box.x2, 65);
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / view elements", {
+            setup: function() {
+                moduleSetup();
+                createTextBox();
+            }
+        });
+
+        test("moves id to box when background or border are set", function() {
+            createTextBox({ id: "1", border: { width: 1 }});
+            textBox.getViewElements(view);
+            equal(view.log.rect[0].style.id, "1");
         });
 
     })();

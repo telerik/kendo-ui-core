@@ -1233,7 +1233,7 @@ var __meta__ = {
                 if (hasBox || (id && rowIdx > 0)) {
                     text.id = uniqueId();
                 }
-                floatElement.children.push(text);
+                floatElement.append(text);
             }
         },
 

@@ -22,8 +22,9 @@
   <div id="pie" style="margin-top: 100px;"></div>
     <div id="chart" ></div>
     <div id="chart1" ></div>
-    
+    <div id="dateChart"></div>
     <script>
+        dateChart();
     $("#chart").kendoChart({
        // renderAs: "canvas",
         title: {
@@ -81,7 +82,7 @@
         valueAxis: {
            visible: true,
            labels: {
-                 rotation: -30,
+                 rotation: -30
                 // font: "20px arial"
             }
         },
@@ -274,7 +275,50 @@
             visible: true,
             format: "{0}%"
         }
-    });    
+    });
+    
+    function dateChart() {
+     var stats = [
+            { value: 30, date: new Date("2011/12/20") },
+            { value: 50, date: new Date("2011/12/21") },
+            { value: 45, date: new Date("2011/12/22") },
+            { value: 40, date: new Date("2011/12/23") },
+            { value: 35, date: new Date("2011/12/24") },
+            { value: 40, date: new Date("2011/12/25") },
+            { value: 42, date: new Date("2011/12/26") },
+            { value: 40, date: new Date("2011/12/27") },
+            { value: 35, date: new Date("2011/12/28") },
+            { value: 43, date: new Date("2011/12/29") },
+            { value: 38, date: new Date("2011/12/30") },
+            { value: 30, date: new Date("2011/12/31") },
+            { value: 48, date: new Date("2012/01/01") },
+            { value: 50, date: new Date("2012/01/02") },
+            { value: 55, date: new Date("2012/01/03") },
+            { value: 35, date: new Date("2012/01/04") },
+            { value: 30, date: new Date("2012/01/05") }
+        ];
+
+        $("#dateChart").kendoChart({
+            title: {
+                text: "aaaaaaaaaaaaa\n bbbbbbbbbbbb \n dddddddddddddddd"
+            },
+            dataSource: {
+                data: stats
+            },
+            series: [{
+                type: "line",
+                aggregate: "avg",
+                field: "value",
+                categoryField: "date"
+            }],
+            categoryAxis: {                
+                labels: {
+                    template: "#:kendo.toString(value, 'd')# \n  text"
+                }
+            }
+        });
+
+    }
 
     </script>
     </body>
