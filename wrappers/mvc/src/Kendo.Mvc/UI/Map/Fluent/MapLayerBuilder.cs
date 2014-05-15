@@ -118,7 +118,7 @@ using System.Web.Mvc;
         /// The the opacity for the layer.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public MapLayerBuilder Opacity(string value)
+        public MapLayerBuilder Opacity(double value)
         {
             container.Opacity = value;
 

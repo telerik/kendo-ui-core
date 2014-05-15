@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI
         
         public string TitleField { get; set; }
         
-        public string Opacity { get; set; }
+        public double? Opacity { get; set; }
         
         public MapLayerStyleSettings Style
         {
@@ -119,11 +119,11 @@ namespace Kendo.Mvc.UI
                 json["titleField"] = TitleField;
             }
             
-            if (Opacity.HasValue())
+            if (Opacity.HasValue)
             {
                 json["opacity"] = Opacity;
             }
-            
+                
             var style = Style.ToJson();
             if (style.Any())
             {
