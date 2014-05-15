@@ -24,14 +24,12 @@ var __meta__ = {
     var RESIZE_HINT = '<div class="k-marquee k-gantt-marquee">' +
                            '<div class="k-marquee-color"></div>' +
                        '</div>';
-    var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div class="k-animation-container" style="width: 220px; height: 40px; margin-left: -2px; padding-left: 2px; padding-right: 2px; padding-bottom: 4px; overflow: hidden; position: absolute; z-index: 10002; box-sizing: content-box;">' +
-                              '<div role="tooltip" class="k-widget k-tooltip k-popup k-group k-reset" data-role="popup" aria-hidden="true">' +
+    var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div role="tooltip" style="z-index: 100002;" class="k-widget k-tooltip k-popup k-group k-reset" data-role="popup" aria-hidden="true">' +
                                    '<div class="k-tooltip-content">' +
-                                        '<div class="k-tooltip-content-start">Start: #=kendo.toString(start, "ddd M/dd, HH:mm")#</div>' +
-                                        '<div class="k-tooltip-content-end">End: #=kendo.toString(end, "ddd M/dd, HH:mm")#</div>' +
+                                        '<div class="k-start">Start: #=kendo.toString(start, "ddd M/dd, HH:mm")#</div>' +
+                                        '<div class="k-end">End: #=kendo.toString(end, "ddd M/dd, HH:mm")#</div>' +
                                    '</div>' +
-                              '</div>' +
-                         '</div>');
+                              '</div>');
 
     var defaultViews = {
         day: {
@@ -712,15 +710,9 @@ var __meta__ = {
         },
 
         _createResizeHint: function(task) {
-            var rowHeight = this._rowHeight;
-            var taskTop = this._taskCoordinates[task.id].rowIndex * rowHeight + Math.floor(rowHeight / 2);
-            var top = taskTop - 70;
-
-            if (top < 20) {
-                top = taskTop + 50;
-            }
-
-            this._resizeTooltipTop = top;
+            var taskTop = this._taskCoordinates[task.id].rowIndex * this._rowHeight;
+            var tooltipHeight;
+            var tooltipTop;
 
             this._resizeHint = $(RESIZE_HINT).css({
                 "top": 0,
@@ -728,6 +720,25 @@ var __meta__ = {
             });
 
             this.content.append(this._resizeHint);
+
+            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ start: task.start, end: task.end }))
+                .css({
+                    "top": 0,
+                    "left": 0
+                });
+
+            this.content.append(this._resizeTooltip);
+
+            this._resizeTooltipWidth = this._resizeTooltip.outerWidth();
+            tooltipHeight = this._resizeTooltip.outerHeight();
+
+            tooltipTop = taskTop - tooltipHeight;
+
+            if (tooltipTop < 0) {
+                tooltipTop = taskTop + this._rowHeight;
+            }
+
+            this._resizeTooltipTop = tooltipTop;
         },
 
         _updateResizeHint: function(start, end, resizeStart) {
@@ -735,8 +746,8 @@ var __meta__ = {
             var right = this._offset(end);
             var width = right - left;
             var tooltipLeft = resizeStart ? left : right;
-            var contentWidth = this.contentWidth - 17;
-            var tooltipWidth;
+            var tablesWidth = this._tableWidth - 17;
+            var tooltipWidth = this._resizeTooltipWidth;
 
             this._resizeHint
                 .css({
@@ -748,19 +759,19 @@ var __meta__ = {
                 this._resizeTooltip.remove();
             }
 
-            tooltipWidth = 200;
-            tooltipLeft -= (tooltipWidth / 2);
+            tooltipLeft -= Math.round(tooltipWidth / 2);
 
             if (tooltipLeft < 0) {
                 tooltipLeft = 0;
-            } else if (tooltipLeft + tooltipWidth > contentWidth) {
-                tooltipLeft = contentWidth - tooltipWidth;
+            } else if (tooltipLeft + tooltipWidth > tablesWidth) {
+                tooltipLeft = tablesWidth - tooltipWidth;
             }
 
             this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ start: start, end: end }))
                 .css({
                     "top": this._resizeTooltipTop,
-                    "left": tooltipLeft
+                    "left": tooltipLeft,
+                    "min-width": tooltipWidth
                 });
 
             this.content.append(this._resizeTooltip);
