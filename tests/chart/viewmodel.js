@@ -1145,7 +1145,8 @@
             floatElement,
             floatElementStub,
             targetBox = Box2D(0, 0, 100, 100),
-            texts;
+            texts,
+            rect;
 
         function createTextBox(options, text) {
             textBox = new TextBox(text || TEXT, options);
@@ -1264,6 +1265,9 @@
             this.reflow = function(target) {
                 //this.box = target.clone();
             };
+            this.getViewElements = function() {
+                return [];
+            };
             this.options = {};
         }
 
@@ -1284,7 +1288,6 @@
             equal(box1.y2, box2.y2);
         }
 
-        // ------------------------------------------------------------
         module("TextBox / reflow", {});
 
         test("updates float element align option", function() {
@@ -1452,17 +1455,119 @@
         });
 
         // ------------------------------------------------------------
+        function setupViewElementsTextBox(options, text) {
+            createTextBox(options, text);
+            textBox.modelId = "modelId";
+            textBox.getViewElements(view);
+        }
+
         module("TextBox / view elements", {
             setup: function() {
                 moduleSetup();
-                createTextBox();
             }
         });
 
-        test("moves id to box when background or border are set", function() {
-            createTextBox({ id: "1", border: { width: 1 }});
+        test("creates a TextBox", function() {
+            setupViewElementsTextBox();
+            equal(view.log.textbox.length, 1);
+        });
+
+        test("sets a matrix if rotation is set", function() {
+            moduleSetup();
+            createTextBoxMock({rotation: 90}, Box2D(0,0,20,30));
+            textBox.reflow(targetBox);
             textBox.getViewElements(view);
-            equal(view.log.rect[0].style.id, "1");
+            var matrix = view.log.textbox[0].options.matrix;
+            equal(matrix.a, 0);
+            equal(matrix.b, 1);
+            equal(matrix.c, -1);
+            equal(matrix.d, 0);
+            equal(matrix.e, 30);
+            equal(matrix.f, 0);
+        });
+
+        test("assigns zIndex from the options to textbox", function() {
+            setupViewElementsTextBox({zIndex: 1});
+            equal(view.log.textbox[0].options.zIndex, 1);
+        });
+
+        test("creates rect when background is set", function() {
+            setupViewElementsTextBox({background: "foo"});
+            equal(view.log.rect.length, 1);
+        });
+
+        test("creates rect when border is set", function() {
+            setupViewElementsTextBox({border: { width: 1 }});
+            equal(view.log.rect.length, 1);
+        });
+
+        test("creates text", function() {
+            setupViewElementsTextBox();
+            equal(view.log.text.length, 1);
+        });
+
+        test("creates text for each line", function() {
+            setupViewElementsTextBox({}, "line1 \n line2");
+            equal(view.log.text.length, 2);
+        });
+
+        test("sets zIndex from the options to text", function() {
+            setupViewElementsTextBox({ zIndex: 1});
+            equal(view.log.text[0].style.zIndex, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / view elements / rect options", {
+            setup: function() {
+                moduleSetup();
+                setupViewElementsTextBox({
+                    id: "1",
+                    zIndex: 1,
+                    border: {
+                        width: 2,
+                        color: "red",
+                        opacity: 0.5,
+                        dashType: "foo"
+                    },
+                    background: "green",
+                    opacity: 0.7,
+                    animation: {
+                        type: "foo",
+                        duration: 100
+                    }
+                });
+
+                rect = view.log.rect[0];
+            }
+        });
+
+        test("sets id", function() {
+            equal(rect.style.id, "1");
+        });
+
+        test("sets zIndex", function() {
+            equal(rect.style.zIndex, 1);
+        });
+
+        test("sets stroke options", function() {
+            equal(rect.style.stroke, "red");
+            equal(rect.style.strokeWidth, 2);
+            equal(rect.style.strokeOpacity, 0.5);
+            equal(rect.style.dashType, "foo");
+        });
+
+        test("sets fill", function() {
+            equal(rect.style.fill, "green");
+            equal(rect.style.fillOpacity, 0.7);
+        });
+
+        test("sets animation", function() {
+            equal(rect.style.animation.type, "foo");
+            equal(rect.style.animation.duration, 100);
+        });
+
+        test("sets model id", function() {
+            equal(rect.style.data.modelId, "modelId");
         });
 
     })();

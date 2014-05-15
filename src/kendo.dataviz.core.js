@@ -1258,8 +1258,9 @@ var __meta__ = {
         getViewElements: function(view, renderOptions) {
             var textbox = this;
             var options = textbox.options;
+            var boxOptions = deepExtend(textbox.elementStyle(), renderOptions);
             var elements = [];
-            var zIndex;
+            var zIndex = boxOptions.zIndex;
             var matrix;
             var element;
 
@@ -1268,8 +1269,6 @@ var __meta__ = {
             }
 
             if (textbox.hasBox()) {
-                var boxOptions = deepExtend(textbox.elementStyle(), renderOptions);
-                zIndex = boxOptions.zIndex;
                 elements.push(
                     view.createRect(textbox.paddingBox, boxOptions)
                 );
