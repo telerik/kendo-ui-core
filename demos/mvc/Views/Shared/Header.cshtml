@@ -4,25 +4,25 @@
 
 <div id="header">
     <div id="logo-bar">
-        <a href="http://www.telerik.com/@ViewBag.Product"><img alt="Telerik logo" class="logo" src="@Url.Content("~/content/shared/styles/telerik-logo.png")"/>
+        <a href="http://www.telerik.com/@ViewBag.Product">
         @if (ViewBag.Product == "kendo-ui")
         {
-            <text>Kendo UI</text>
+           <img alt="Kendo UI logo" class="logo" src="@Url.Content("~/content/shared/styles/kendo-ui-logo.png")"/>
         }
         else if (ViewBag.Product == "php-ui")
         {
-            <text>UI for PHP</text>
+           <img alt="PHP for UI logo" class="logo" src="@Url.Content("~/content/shared/styles/php-ui-logo.png")"/>
         }
         else if (ViewBag.Product == "aspnet-mvc")
         {
-            <text>UI for ASP.NET MVC</text> 
+               <img alt="ASP.NET MVC for UI logo" class="logo" src="@Url.Content("~/content/shared/styles/aspnet-mvc-logo.png")"/>
         }
         else if (ViewBag.Product == "jsp-ui")
         {
-            <text>UI for JSP</text> 
-        }   
-        <span class="product-subtitle">Demos and sample applications</span></a>      
-    </div>       
+           <img alt="JSP for UI logo" class="logo" src="@Url.Content("~/content/shared/styles/jsp-ui-logo.png")"/>
+        }  
+    </a>   
+  </div>       
     <div class="nav-buttons">
         <a id="about" href="#" class="btn">About</a>
         <a id="pricing" href="#" class="btn">Pricing</a>

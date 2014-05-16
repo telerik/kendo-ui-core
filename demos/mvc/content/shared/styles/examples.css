@@ -2270,13 +2270,13 @@ pre.prettyprint
 
 #codeStrip .k-link:hover
 {
-    text-decoration:underline;
+    /*text-decoration:underline;*/
 }
 
 #codeStrip .k-link:active
 {
-    color:#000;
-    text-decoration: none;
+    /*color:#000;
+    text-decoration: none;*/
 }
 
 #codeStrip li.k-state-active
@@ -3414,22 +3414,6 @@ ul.keyboard-legend li a {
     margin-left: 1.833em;  
 }
 
-#logo-bar a {
-    color: #00b312;
-    font-size: 28px;
-}
-
-.logo {
-    margin-right: 4px;
-}
-
-.product-subtitle {
-    color: #fff;
-    font-size: 11px;
-    text-transform: uppercase;
-    display: block;
-}
-
 .nav-buttons {
     float: right;    
 }
@@ -3516,6 +3500,27 @@ a.footer-links:hover {
     font-size: 11px;
     margin-left: 35px;
 } 
+
+/* Demos */
+#codeStrip .documentation-link {
+    
+    background-color: #015991;
+    color:#fff; 
+    padding: 11px 22px;
+    transition-property: background-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+   /*margin: 0.769em;*/
+}
+
+#codeStrip .documentation-link:hover {
+    background-color: #013a5e;
+}
 
 /* Clear floats */
 #header:after {
