@@ -12,7 +12,8 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        util = dataviz.util;
+        util = dataviz.util,
+        defined = util.defined;
 
     // Constants ===============================================================
     var BASELINE_MARKER_SIZE = 1;
@@ -97,7 +98,10 @@
                 baselineMarker = this._baselineMarker.cloneNode(false);
 
             for (var key in style) {
-                measureBox.style[key] = style[key];
+                var value = style[key];
+                if (defined(value)) {
+                    measureBox.style[key] = value;
+                }
             }
 
             measureBox.innerHTML = text;
