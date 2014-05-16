@@ -147,15 +147,15 @@
     display: inline-block;
 }
 #about #external-resources a:after {
-    font: 1em/1em "Kendo UI" normal;
-    content: "\e010";
-    color: white;
+    font: .5em/.5em "KendoMobileDemos" normal;
+    content: "\e605";
+    color: rgba(255, 255, 255, 0.5);
     display: inline;
     position: absolute;
     right: auto;
     top: auto;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
+    margin: 1.3em 0.8em;
+    -webkit-transform: none;
 }
 
 #about .km-footer .km-listview {
