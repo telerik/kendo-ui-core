@@ -324,8 +324,8 @@
 
         resizeHint = content.find(".k-gantt-marquee");
 
-        equal(resizeHint.height(), contentTablesWrapper.height());
-        equal(resizeHint.offset().top, contentTablesWrapper.offset().top);
+        equalWithRound(resizeHint.height(), contentTablesWrapper.height());
+        equalWithRound(resizeHint.offset().top, contentTablesWrapper.offset().top);
     });
 
     test("resize hint position", 2, function() {
@@ -343,8 +343,8 @@
 
         resizeHint = content.find(".k-gantt-marquee");
 
-        equal(resizeHint.offset().left, contentLeft + startSlot.offsetLeft);
-        equal(resizeHint.width(), targetSlot.offsetLeft - startSlot.offsetLeft);
+        equalWithRound(resizeHint.offset().left, contentLeft + startSlot.offsetLeft);
+        equalWithRound(resizeHint.width(), targetSlot.offsetLeft - startSlot.offsetLeft);
     });
 
     test("resize hint width when dragging east handle before west handle", function() {
@@ -402,7 +402,7 @@
 
         tooltip = content.find(".k-tooltip");
 
-        equal(tooltip.offset().top, elementRow.offset().top - tooltip.outerHeight());
+        equalWithRound(tooltip.offset().top, elementRow.offset().top - tooltip.outerHeight());
     });
 
     test("resize tooltip top when space above task is not available", function() {
@@ -418,7 +418,7 @@
 
         tooltip = content.find(".k-tooltip");
 
-        equal(tooltip.offset().top, elementRow.offset().top + elementRow.outerHeight());
+        equalWithRound(tooltip.offset().top, elementRow.offset().top + elementRow.outerHeight());
     });
 
     test("resize tooltip position when dragging east handle", function() {
@@ -436,7 +436,7 @@
         resizeHint = content.find(".k-gantt-marquee");
         tooltip = content.find(".k-tooltip");
 
-        equal(tooltip.offset().left, resizeHint.offset().left + resizeHint.width() - (Math.round(timeline.view()._resizeTooltipWidth / 2)));
+        equalWithRound(tooltip.offset().left, resizeHint.offset().left + resizeHint.width() - (Math.round(timeline.view()._resizeTooltipWidth / 2)));
     });
 
     test("resize tooltip position when dragging east handle near end of content", function() {
@@ -453,7 +453,7 @@
 
         tooltip = content.find(".k-tooltip");
 
-        equal(tooltip.offset().left, (contentWrapper.offset().left + contentWrapper.width() - 17) - timeline.view()._resizeTooltipWidth);
+        equalWithRound(tooltip.offset().left, (contentWrapper.offset().left + contentWrapper.width() - 17) - timeline.view()._resizeTooltipWidth);
     });
 
     test("resize tooltip position when dragging west handle", function() {
@@ -471,7 +471,7 @@
         resizeHint = content.find(".k-gantt-marquee");
         tooltip = content.find(".k-tooltip");
 
-        equal(tooltip.offset().left, resizeHint.offset().left - (Math.round(timeline.view()._resizeTooltipWidth / 2)));
+        equalWithRound(tooltip.offset().left, resizeHint.offset().left - (Math.round(timeline.view()._resizeTooltipWidth / 2)));
     });
 
     test("resize tooltip position when dragging west handle near start of content", function() {
@@ -489,7 +489,7 @@
         resizeHint = content.find(".k-gantt-marquee");
         tooltip = content.find(".k-tooltip");
 
-        equal(tooltip.offset().left, contentWrapper.offset().left);
+        equalWithRound(tooltip.offset().left, contentWrapper.offset().left);
     });
 
     test("resize tooltip text is set", 2, function() {
@@ -509,6 +509,10 @@
         equal(tooltip.find(".k-end").text(), "End: Tue 4/15 16:00");
     });
 
+
+    function equalWithRound(value, expected) {
+        QUnit.close(value, expected, 3);
+    }
 
     function setupGantt(userOptions) {
         task = new kendo.data.GanttTask({
