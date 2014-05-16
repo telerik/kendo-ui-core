@@ -45,7 +45,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>DRY_RUN=true xvfb-run -e xvfb-run.log -a ./build/run-build-task release_notes:upload</command>
+      <command>xvfb-run -e xvfb-run.log -a ./build/run-build-task release_notes:upload</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

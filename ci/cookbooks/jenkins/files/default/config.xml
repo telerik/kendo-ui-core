@@ -2,6 +2,9 @@
 <hudson>
   <disabledAdministrativeMonitors>
     <string>jenkins.diagnostics.SecurityIsOffMonitor</string>
+    <string>hudson.node_monitors.MonitorMarkedNodeOffline</string>
+    <string>hudsonHomeIsFull</string>
+    <string>jenkins.security.RekeySecretAdminMonitor</string>
   </disabledAdministrativeMonitors>
   <version>1.552</version>
   <numExecutors>3</numExecutors>
@@ -87,6 +90,9 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>stable-upload-release</string>
+        <string>sync-from-core-production</string>
+        <string>update-demos</string>
       </jobNames>
       <jobFilters/>
       <columns>
@@ -143,6 +149,57 @@
         <hudson.views.BuildButtonColumn/>
       </columns>
       <includeRegex>.+demos</includeRegex>
+      <recurse>false</recurse>
+    </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>Sync</name>
+      <description>Sync jobs</description>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>core-production-sync-status</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
+      <includeRegex>.*sync.*</includeRegex>
+      <recurse>false</recurse>
+    </listView>
+    <listView>
+      <owner class="hudson" reference="../../.."/>
+      <name>Release</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[5]/jobNames/comparator"/>
+        <string>internal-build-upload</string>
+        <string>production-upload-download-builder</string>
+        <string>production-upload-release</string>
+        <string>production-upload-release-notes</string>
+        <string>stable-themebuilder-upload</string>
+        <string>stable-upload-release</string>
+      </jobNames>
+      <jobFilters/>
+      <columns>
+        <hudson.views.StatusColumn/>
+        <hudson.views.WeatherColumn/>
+        <hudson.views.JobColumn/>
+        <hudson.views.LastSuccessColumn/>
+        <hudson.views.LastFailureColumn/>
+        <hudson.views.LastDurationColumn/>
+        <hudson.views.BuildButtonColumn/>
+      </columns>
       <recurse>false</recurse>
     </listView>
   </views>
