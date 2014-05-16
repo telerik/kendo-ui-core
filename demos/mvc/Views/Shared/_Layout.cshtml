@@ -6,7 +6,7 @@
     <meta name="description" content="@ViewBag.Meta">
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")"/>
-    @foreach (string styleName in (ViewBag.Mobile? Kendo.Models.StyleGroups.Mobile : Kendo.Models.StyleGroups.All))
+    @foreach (string styleName in (ViewBag.Mobile == true? Kendo.Models.StyleGroups.Mobile : Kendo.Models.StyleGroups.All))
     {
     <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
@@ -31,72 +31,7 @@
 <body>
     @Html.Partial("Header")
     @Html.Partial("GoogleTagManager")
-    <div class="demos-nav widgetGrid">
-        <div class="centerWrap floatWrap">
-        @{
-                var idx = 0;
-                var maxItemsPerColumn = 8;
-        }
-
-        <ul>
-            @foreach (NavigationWidget widget in ViewBag.Navigation)
-            {
-                if (!widget.ShouldInclude) { continue; }
-
-                if (widget.Name != "overview")
-                {
-                    var isActive = false;
-
-                    if (ViewBag.Section == "dashboards")
-                    {
-                        isActive = ViewBag.Example == widget.Name;
-                    }
-                    else
-                    {
-                        isActive = ViewBag.Section == widget.Name;
-                    }
-
-                    <li @Html.Raw(isActive ? "class=\"active\"" : "")>
-                        @Html.WidgetLink(widget)
-                    </li>
-
-                    idx++;
-                    if (idx > 0 && idx % maxItemsPerColumn == 0)
-                    {
-                        @Html.Raw("</ul><ul>")
-                    }
-                }
-            }
-        </ul>
-
-
-        <h2 class="custom-themes-cat">Custom Themes</h2>
-        <ul>
-            <li><a class="theme-builder" href="@Url.Content("~/themebuilder/web.html")" target="_blank">Theme Builder</a> </li>
-        </ul>
-
-       @Html.Raw("</div>")
-
-        </div>
-    </div>
-
-@{
-    var ignored = Request.Path.IndexOf("overview") > -1 || Request.Path.IndexOf("dashboard") > -1;
-}
-        <div class='centerWrap floatWrap@(ignored ? " widgetOverview" : "")' id="mainWrap">
-            <div id="themeWrap" style="@(ignored  ? "display:none" : "")">
-                <span id="themeChooser"></span>
-                <a href="http://docs.telerik.com/kendo-ui/api/@ViewBag.Documentation" class="get-kendoui" style="display:@(ignored || string.IsNullOrEmpty(ViewBag.Documentation) ? "none" : "inline-block")">Documentation</a>
-            </div>
-            <div id="mainWrapInner" class="floatWrap clear">
-            @if (ViewBag.CurrentWidget.Name != "overview")
-            {
-                @Html.Partial("Navigation")
-            }
-
-            @RenderBody()
-            </div>
-        </div>
+    @RenderBody()
     @Html.Partial("Footer")
 </body>
 </html>

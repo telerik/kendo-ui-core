@@ -145,7 +145,7 @@ namespace Kendo
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}",
-                new { controller = "Demo", action = "index", section="overview", example="index" }
+                new { controller = "Home", action = "Index" }
             );
         }
 

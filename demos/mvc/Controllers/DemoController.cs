@@ -42,6 +42,7 @@ namespace Kendo.Controllers
 #endif
 
             LoadNavigation();
+            LoadCategories();
 
             FindCurrentExample();
             FindSiblingExamples();

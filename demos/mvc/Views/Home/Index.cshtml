@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var columns = new[] {
+        new [] {
+            "Data Management",
+            "Editors",
+            "Layout"
+        },
+        new [] {
+            "Data Visualization",
+            "Diagramming",
+            "Geo Visualization"
+        },
+        new [] {
+            "Scheduling",
+            "Navigation",
+            "Interactivity & UX",
+            "Framework"
+        },
+        new [] {
+            "Mobile"
+        }
+    };
+
+    var categories = (IEnumerable<IGrouping<string, NavigationWidget>>)ViewBag.Categories;
+}
+
+@foreach (var column in columns)
+{
+    <ul>
+    @foreach (var columnCategory in column)
+    {
+        var category = categories.FirstOrDefault(c => c.Key == columnCategory);
+        <li>
+            <h3>@category.Key</h3>
+            <ul>
+            @foreach (var widget in category)
+            {
+                <li>@Html.WidgetLink(widget)</li>
+            }
+            </ul>
+        </li>
+    }
+    </ul>
+}

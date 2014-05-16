@@ -1,26 +1,5 @@
 [
   {
-    "text": "UI Widgets",
-    "name": "overview",
-    "spriteCssClass": "overviewIcon",
-    "expanded": "true",
-    "disableInMobile": true,
-    "packages": [
-      "online"
-    ],
-    "items": [
-      {
-        "text": "Overview",
-        "url": "overview/index",
-        "title": "jQuery framework for building HTML5 web apps | Kendo UI Web Demos",
-        "meta": "Kendo UI Web Demos will show you specific examples of jQuery Widgets and framework components."
-      }
-    ],
-    "category": [
-      "UI Widgets"
-    ]
-  },
-  {
     "text": "AutoComplete",
     "name": "autocomplete",
     "documentation": "web/autocomplete",

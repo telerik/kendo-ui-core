@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MobileThemeBuilderController.cs" />
     <Compile Include="Controllers\MobileAppsController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -458,10 +459,6 @@
     <Content Include="obj\Debug\Kendo.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\Kendo.dll" />
     <Content Include="obj\Debug\Kendo.pdb" />
-    <Content Include="Views\dataviz\api\benchmark.cshtml" />
-    <Content Include="Views\dataviz\api\events.cshtml" />
-    <Content Include="Views\dataviz\api\index.cshtml" />
-    <Content Include="Views\dataviz\api\selection.cshtml" />
     <Content Include="Views\demos\application\index.cshtml" />
     <Content Include="Views\demos\area-charts\date-axis.cshtml" />
     <Content Include="Views\demos\area-charts\error-bars.cshtml" />
@@ -827,7 +824,6 @@
     <Content Include="Views\Shared\SourceLayout.cshtml" />
     <Content Include="Views\Shared\ExampleLayout.cshtml" />
     <Content Include="Views\ThemeBuilder\Index.cshtml" />
-    <Content Include="Views\demos\overview\index.cshtml" />
     <Content Include="content\web\panelbar\ajax\ajaxContent1.html" />
     <Content Include="content\web\panelbar\ajax\ajaxContent2.html" />
     <Content Include="content\web\panelbar\ajax\ajaxContent3.html" />
@@ -836,8 +832,6 @@
     <Content Include="content\web\splitter\ajax\ajaxContent1.html" />
     <Content Include="content\web\splitter\ajax\ajaxContent2.html" />
     <Content Include="content\web\window\ajax\ajaxContent.html" />
-    <Content Include="Views\dataviz\overview\high-performance.cshtml" />
-    <Content Include="Views\dataviz\overview\index.cshtml" />
     <Content Include="content\web\tabstrip\ajax\ajaxContent1.html" />
     <Content Include="content\web\tabstrip\ajax\ajaxContent2.html" />
     <Content Include="content\web\tabstrip\ajax\ajaxContent3.html" />
@@ -862,7 +856,6 @@
     <Content Include="Views\Shared\Navigation.cshtml" />
     <Content Include="Views\Shared\GoogleAnalytics.cshtml" />
     <Content Include="Views\Shared\Pager.cshtml" />
-    <Content Include="Views\Shared\_LayoutWidget.cshtml" />
     <Content Include="Views\Shared\SourceView.cshtml" />
     <Content Include="Views\Shared\ThemeBuilderLayout.cshtml" />
     <Content Include="Views\Shared\SourceCode.cshtml" />
@@ -1029,10 +1022,15 @@
     <Content Include="Views\demos\window\rtl.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\demos\api\benchmark.cshtml" />
+    <Content Include="Views\demos\api\events.cshtml" />
+    <Content Include="Views\demos\api\index.cshtml" />
+    <Content Include="Views\demos\api\selection.cshtml" />
+    <Content Include="Views\demos\actionsheet\adaptive.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Views\web\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="content\dataviz\js\price-performance.json" />

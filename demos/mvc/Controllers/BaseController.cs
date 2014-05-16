@@ -71,9 +71,17 @@ namespace Kendo.Controllers
 
         protected void LoadNavigation()
         {
-            var navigationJson = IOFile.ReadAllText(Server.MapPath("~/content/nav.json"));
+            ViewBag.Navigation = LoadWidgets();
+        }
 
-            ViewBag.Navigation = Serializer.Deserialize<NavigationWidget[]>(navigationJson);
+        protected IEnumerable<NavigationWidget> LoadWidgets()
+        {
+            return Serializer.Deserialize<NavigationWidget[]>(IOFile.ReadAllText(Server.MapPath("~/content/nav.json")));
+        }
+
+        protected void LoadCategories()
+        {
+            ViewBag.Categories = LoadWidgets().GroupBy(w => w.Category).ToList();
         }
     }
 }
