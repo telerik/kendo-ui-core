@@ -28,7 +28,6 @@
 
     // Constants ==============================================================
     var NONE = "none",
-        SPACE = " ",
         TRANSPARENT = "transparent",
         COORDINATE_MULTIPLE = 100;
 
@@ -113,8 +112,11 @@
                 srcElement = elements[i];
                 children = srcElement.children;
                 combinedTransform = srcElement.currentTransform(transform);
+
                 if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
+                } else if (srcElement instanceof d.Text) {
+                    childNode = new TextNode(srcElement);
                 } else if (srcElement instanceof d.Path) {
                     childNode = new PathNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.MultiPath) {
@@ -217,6 +219,12 @@
         css: function(name, value) {
             if (this.element) {
                 this.element.style[name] = value;
+            }
+        },
+
+        allCss: function(styles) {
+            for (var i = 0; i < styles.length; i++) {
+                this.css(styles[i][0], styles[i][1]);
             }
         }
     });
@@ -476,13 +484,17 @@
                     }
 
                     if (segmentType === "l") {
-                        parts.push(this.printPoints(segments[i].anchor));
+                        parts.push(printPoints([segments[i].anchor]));
                     } else {
-                        parts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
+                        parts.push(printPoints([
+                            segments[i - 1].controlOut,
+                            segments[i].controlIn,
+                            segments[i].anchor
+                        ]));
                     }
                 }
 
-                output = "m " + this.printPoints(segments[0].anchor) + SPACE + parts.join(SPACE);
+                output = "m " + printPoints([segments[0].anchor]) + " " + parts.join(" ");
                 if (path.options.closed) {
                     output += " x";
                 }
@@ -497,16 +509,6 @@
 
         segmentType: function(segmentStart, segmentEnd) {
             return segmentStart.controlOut && segmentEnd.controlIn ? "c" : "l";
-        },
-
-        printPoints: function() {
-            var points = arguments,
-                length = points.length,
-                i, result = [];
-            for (i = 0; i < length; i++) {
-                result.push(points[i].multiplyCopy(COORDINATE_MULTIPLE).toString(0, ","));
-            }
-            return result.join(SPACE);
         },
 
         mapFill: function(fill) {
@@ -650,6 +652,104 @@
         }
     });
 
+    var TextPathDataNode = Node.extend({
+        geometryChange: function() {
+            this.attr("v", this.renderData());
+        },
+
+        renderData: function() {
+            var bbox = this.srcElement.bbox();
+            var center = bbox.center();
+            return "m " + printPoints([new g.Point(bbox.p0.x, center.y)]) +
+                   " l " + printPoints([new g.Point(bbox.p1.x, center.y)]);
+        },
+
+        template: renderTemplate(
+            "<kvml:path textpathok='true' v='#= d.renderData() #' />"
+        )
+    });
+
+    var TextPathNode = Node.extend({
+        optionsChange: function(e) {
+            if(e.field == "font") {
+                this.allCss(this.mapStyle());
+                this.geometryChange();
+            }
+
+            this.invalidate();
+        },
+
+        contentChange: function() {
+            this.attr("string", this.srcElement.content());
+            this.invalidate();
+        },
+
+        mapStyle: function() {
+            return [["font", this.srcElement.options.font]];
+        },
+
+        renderStyle: function() {
+            return renderAttr("style", util.renderStyle(this.mapStyle()));
+        },
+
+        template: renderTemplate(
+            "<kvml:textpath on='true' #= d.renderStyle() # " +
+            "fitpath='false' string='#= d.srcElement.content() #' />"
+        )
+    });
+
+    var TextNode = PathNode.extend({
+        init: function(srcElement, transform) {
+            this.pathData = new TextPathDataNode(srcElement);
+            this.path = new TextPathNode(srcElement);
+
+            PathNode.fn.init.call(this, srcElement, transform);
+
+            this.append(this.pathData);
+            this.append(this.path);
+        },
+
+        geometryChange: function() {
+            this.pathData.geometryChange();
+        },
+
+        optionsChange: function(e) {
+            if(e.field == "font") {
+                this.path.optionsChange(e);
+                this.pathData.geometryChange(e);
+            }
+
+            PathNode.fn.optionsChange.call(this, e);
+        },
+
+        contentChange: function() {
+            this.path.contentChange();
+        },
+
+        template: renderTemplate(
+            "<kvml:shape " +
+            "#= d.renderStyle() # " +
+            "stroked='false' coordorigin='0 0' #= d.renderCoordsize() #>" +
+                "#= d.renderChildren() #" +
+            "</kvml:shape>"
+        )
+    });
+
+    // Helper functions =======================================================
+    function printPoints(points) {
+        var length = points.length;
+        var result = [];
+
+        for (var i = 0; i < length; i++) {
+            result.push(points[i]
+                .multiplyCopy(COORDINATE_MULTIPLE)
+                .toString(0, ",")
+           );
+        }
+
+        return result.join(" ");
+    }
+
     // Exports ================================================================
     if (kendo.support.browser.msie) {
         d.SurfaceFactory.current.register("vml", Surface, 20);
@@ -668,6 +768,9 @@
             RootNode: RootNode,
             StrokeNode: StrokeNode,
             Surface: Surface,
+            TextNode: TextNode,
+            TextPathNode: TextPathNode,
+            TextPathDataNode: TextPathDataNode,
             TransformNode: TransformNode
         }
     });
