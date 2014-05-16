@@ -415,6 +415,11 @@
         compareBoundingBox(bbox, [100, 100, 120, 110]);
     });
 
+    test("retrieving bbox doesn't change origin observer", function() {
+        text.bbox();
+        equal(text.origin.observer, text);
+    });
+
     test("bbox returns transformed bounding box", function() {
         text.measure = function() {
             return { width: 20, height: 10 };
