@@ -26,8 +26,8 @@ var __meta__ = {
                        '</div>';
     var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div role="tooltip" style="z-index: 100002;" class="k-widget k-tooltip k-popup k-group k-reset" data-role="popup" aria-hidden="true">' +
                                    '<div class="k-tooltip-content">' +
-                                        '<div class="k-start">Start: #=kendo.toString(start, "ddd M/dd, HH:mm")#</div>' +
-                                        '<div class="k-end">End: #=kendo.toString(end, "ddd M/dd, HH:mm")#</div>' +
+                                        '<div class="k-start">Start: #=kendo.toString(start, "ddd M/dd HH:mm")#</div>' +
+                                        '<div class="k-end">End: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
                                    '</div>' +
                               '</div>');
 
@@ -1416,12 +1416,16 @@ var __meta__ = {
                     var date = view._timeByPosition(e.x.location, snap, !resizeStart);
 
                     if (resizeStart) {
-                        if (date <= currentEnd) {
+                        if (date < currentEnd) {
                             currentStart = date;
+                        } else {
+                            currentStart = currentEnd;
                         }
                     } else {
-                        if (date >= currentStart) {
+                        if (date > currentStart) {
                             currentEnd = date;
+                        } else {
+                            currentEnd = currentStart;
                         }
                     }
 
