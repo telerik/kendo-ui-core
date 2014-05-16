@@ -155,16 +155,6 @@ var __meta__ = {
         return result;
     }
 
-    function findTuple(children, memberIndex, memberName) {
-        for (var i = 0, length = children.length; i < length; i++) {
-            var tuple = children[i];
-
-            if (tuple.members[memberIndex].name === memberName) {
-                return tuple;
-            }
-        }
-    }
-
     function addMembers(members, map) {
         var member, i, len, path = "";
         for (i = 0, len = members.length; i < len; i++) {
@@ -211,6 +201,8 @@ var __meta__ = {
                 parentPath += parentMember.name;
             }
         }
+
+        return parentMember;
     }
 
     function parseSource(tuples) {

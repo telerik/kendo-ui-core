@@ -24,9 +24,9 @@
         <script>
            var dataSource = new kendo.data.PivotDataSource({
                 type: "xmla",
-                columns: [{ name: "[Date].[Calendar]", expand: true },{ name: "[Date].[Calendar Quarter]", expand: true }, { name: "[Geography].[City]", expand: true }/*, { name: "[Date].[Calendar Semester]", expand: false }, { name: "[Customer].[Gender]", expand: false }*/],
+                columns: [{ name: "[Date].[Calendar]", expand:  false }/*,{ name: "[Date].[Calendar Quarter]", expand: true }, { name: "[Geography].[City]", expand: true }*//*, { name: "[Date].[Calendar Semester]", expand: false }, { name: "[Customer].[Gender]", expand: false }*/],
                 rows: [ { name: "[Product].[Product Name]", expand: false }, { name: "[Product].[Category]", expand: false }],
-                measures: ["[Measures].[Internet Order Lines Count]"/*, "[Measures].[Internet Total Product Cost]"*/],
+                measures: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Product Cost]"],
                 transport: {
                     connection: {
                         catalog: "Adventure Works Internet Sales Model",

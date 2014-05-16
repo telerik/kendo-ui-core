@@ -219,5 +219,36 @@
 
         equal(axes.columns.tuples.length, 2);
     });
+
+    test("add children from single member tuple", function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 1", parentName: "level 0", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+
+        equal(axes.columns.tuples.length, 1);
+        equal(axes.columns.tuples[0].members[0].children.length, 1);
+    });
 })();
 
