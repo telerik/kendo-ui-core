@@ -266,7 +266,7 @@
             if (transform) {
                 attrs.push([
                    TRANSFORM,
-                   "matrix(" + transform.matrix().toString(3) + ")"
+                   "matrix(" + transform.matrix().toString(6) + ")"
                 ]);
             }
 

@@ -361,7 +361,7 @@
     });
 
     var TransformNode = Node.extend({
-        MAX_PRECISION: 15,
+        MAX_PRECISION: 6,
         init: function(srcElement, transform) {
             Node.fn.init.call(this, srcElement);
             this.transform = transform;
