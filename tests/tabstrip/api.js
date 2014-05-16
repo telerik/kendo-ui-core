@@ -55,7 +55,7 @@ module('tabstrip api', {
             '    <div class="k-content" id="tabstrip-2">' +
             '        <ul>' +
             '            <li>Built on Silverlight 3</li>' +
-            '            <!--<li>RIA services support</li>-->' +
+            '            <li>RIA services support</li>' +
             '            <li>Validation support</li>' +
             '            <li>Out of browser support</li>' +
             '            <li>The first commercial 3D chart</li>' +
