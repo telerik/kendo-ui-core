@@ -14,7 +14,7 @@ var kendo = window.kendo,
     registerTool = Editor.EditorUtils.registerTool;
 
 
-var FormattingTool = DelayedExecutionTool.extend({
+var FormattingTool = Editor.FormattingTool = DelayedExecutionTool.extend({
     init: function(options) {
         var that = this;
         Tool.fn.init.call(that, kendo.deepExtend({}, that.options, options));
@@ -186,58 +186,7 @@ var FormattingTool = DelayedExecutionTool.extend({
     }
 });
 
-function deprecatedFormattingTool(name, property, finder) {
-    return FormattingTool.extend({
-        init: function(options) {
-            FormattingTool.fn.init.call(this, options);
-
-            this.finder = finder;
-        },
-
-        command: function(args) {
-            var item = args.value;
-
-            // pre-process value for backwards compatibility
-            if ($.isPlainObject(item)) {
-                item[property] = item.value;
-            } else {
-                args.value = {};
-                args.value[property] = item;
-            }
-
-            return FormattingTool.fn.command.call(this, args);
-        },
-
-        initialize: function(ui, initOptions) {
-            var console = window.console,
-                i, items = this.options.items;
-
-            for (i = 0; i < items.length; i++) {
-                items[i][property] = items[i].value;
-            }
-
-            if (console) {
-                console.warn("The `" + this.options.name + "` tool has been deprecated in favor of the `formatting` tool. See http://docs.telerik.com/kendo-ui/getting-started/changes-and-backward-compatibility for more information");
-            }
-
-            FormattingTool.fn.initialize.call(this, ui, initOptions);
-        }
-    });
-}
-
-var StyleTool = deprecatedFormattingTool("style", "className", new Editor.GreedyInlineFormatFinder([{ tags: ["span"] }], "className"));
-var FormatBlockTool = deprecatedFormattingTool("formatBlock", "tag", new Editor.BlockFormatFinder([{ tags: dom.blockElements }]));
-
-$.extend(Editor, {
-    FormattingTool: FormattingTool,
-    StyleTool: StyleTool,
-    FormatBlockTool: FormatBlockTool
-});
-
 registerTool("formatting", new FormattingTool({template: new ToolTemplate({template: dropDownListTemplate, title: "Format"})}));
-
-registerTool("style", new StyleTool({template: new ToolTemplate({template: dropDownListTemplate, title: "Styles"})}));
-registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: dropDownListTemplate})}));
 
 })(window.kendo.jQuery);
 
