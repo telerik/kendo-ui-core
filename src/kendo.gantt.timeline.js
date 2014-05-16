@@ -30,6 +30,10 @@ var __meta__ = {
                                         '<div class="k-end">End: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
                                    '</div>' +
                               '</div>');
+    var PERCENT_RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div role="tooltip" style="z-index: 100002;" class="k-widget k-tooltip k-popup k-group k-reset" data-role="popup" aria-hidden="true">' +
+                                   '<div class="k-tooltip-content">#=text#%</div>' +
+                                   '<div class="k-callout k-callout-s" style="left:13px;"></div>' +
+                              '</div>');
 
     var defaultViews = {
         day: {
@@ -785,6 +789,32 @@ var __meta__ = {
             this._resizeTooltip = null;
         },
 
+        _updatePercentCompleteTooltip: function(top, left, text) {
+            this._removePercentCompleteTooltip();
+
+            var tooltip = this._percentCompleteResizeTooltip = $(PERCENT_RESIZE_TOOLTIP_TEMPLATE({ text: text }))
+                .appendTo(this.element);
+
+            var tooltipMiddle = Math.round(tooltip.outerWidth() / 2);
+            var arrow = tooltip.find('.k-callout');
+            var arrowHeight = Math.round(arrow.outerWidth() / 2);
+
+            tooltip.css({
+                "top": top - (tooltip.outerHeight() + arrowHeight),
+                "left": left - tooltipMiddle
+            });
+
+            arrow.css("left", tooltipMiddle - arrowHeight);
+        },
+
+        _removePercentCompleteTooltip: function() {
+            if (this._percentCompleteResizeTooltip) {
+                this._percentCompleteResizeTooltip.remove();
+            }
+
+            this._percentCompleteResizeTooltip = null;
+        },
+
         _timeSlots: function() {
             return this._slots[this._slots.length - 1];
         },
@@ -1112,6 +1142,8 @@ var __meta__ = {
 
             this._resizable();
 
+            this._percentResizeDraggable();
+
             this._attachEvents();
         },
         
@@ -1139,6 +1171,10 @@ var __meta__ = {
 
             if (this._resizeDraggable) {
                 this._resizeDraggable.destroy();
+            }
+
+            if (this._percentDraggable) {
+                this._percentDraggable.destroy();
             }
 
             this._headerTree = null;
@@ -1352,7 +1388,7 @@ var __meta__ = {
 
                     element.css("opacity", 0.5);
                 })
-                .bind("drag", function(e) {
+                .bind("drag", kendo.throttle(function(e) {
                     var view = that.view();
                     var date = new Date(view._timeByPosition(e.x.location, snap) - startOffset);
                     
@@ -1361,7 +1397,7 @@ var __meta__ = {
 
                         view._updateDragHint(currentStart);
                     }
-                })
+                }, 15))
                 .bind("dragend", function(e) {
                     that.trigger("moveEnd", { task: task, start: currentStart });
 
@@ -1380,11 +1416,13 @@ var __meta__ = {
             var currentEnd;
             var resizeStart;
             var snap = this.options.snap;
+            var dragInProgress;
 
             var cleanUp = function() {
                 that.view()._removeResizeHint();
                 element = null;
                 task = null;
+                dragInProgress = false;
             };
 
             this._resizeDraggable = new kendo.ui.Draggable(this.wrapper, {
@@ -1410,8 +1448,14 @@ var __meta__ = {
                     currentEnd = task.end;
 
                     that.view()._createResizeHint(task);
+
+                    dragInProgress = true;
                 })
-                .bind("drag", function(e) {
+                .bind("drag", kendo.throttle(function(e) {
+                    if (!dragInProgress) {
+                        return;
+                    }
+
                     var view = that.view();
                     var date = view._timeByPosition(e.x.location, snap, !resizeStart);
 
@@ -1432,7 +1476,7 @@ var __meta__ = {
                     if (!that.trigger("resize", { task: task, date: resizeStart ? currentStart : currentEnd })) {
                         view._updateResizeHint(currentStart, currentEnd, resizeStart);
                     }
-                })
+                }, 15))
                 .bind("dragend", function(e) {
                     var date = resizeStart ? currentStart : currentEnd;
 
@@ -1441,6 +1485,85 @@ var __meta__ = {
                     cleanUp();
                 })
                 .bind("dragcancel", function(e) {
+                    cleanUp();
+                });
+        },
+
+        _percentResizeDraggable: function() {
+            var that = this;
+            var task;
+            var taskElement;
+            var taskElementOffset;
+            var timelineOffset;
+            var originalPercentWidth;
+            var maxPercentWidth;
+            var currentPercentComplete;
+            var tooltipTop;
+            var tooltipLeft;
+            var dragInProgress;
+
+            var cleanUp = function() {
+                that.view()._removePercentCompleteTooltip();
+                taskElement = null;
+                task = null;
+                dragInProgress = false;
+            };
+
+            var updateElement = function(width) {
+                taskElement
+                    .find(".k-task-complete")
+                    .width(width)
+                    .end()
+                    .siblings(".k-task-draghandle")
+                    .css("left", width);
+            };
+
+            this._percentDraggable = new kendo.ui.Draggable(this.wrapper, {
+                distance: 0,
+                filter: ".k-task-draghandle",
+                holdToDrag: false
+            });
+
+            this._percentDraggable
+                .bind("dragstart", function(e) {
+                    taskElement = e.currentTarget.siblings(".k-task");
+
+                    task = that._taskByUid(taskElement.attr("data-uid"));
+
+                    currentPercentComplete = task.percentComplete;
+
+                    taskElementOffset = taskElement.offset();
+                    timelineOffset = this.element.offset();
+
+                    originalPercentWidth = taskElement.find(".k-task-complete").width();
+                    maxPercentWidth = taskElement.outerWidth();
+
+                    dragInProgress = true;
+                })
+                .bind("drag", kendo.throttle(function(e) {
+                    if (!dragInProgress) {
+                        return;
+                    }
+
+                    var currentWidth = Math.max(0, Math.min(maxPercentWidth, originalPercentWidth + e.x.initialDelta));
+
+                    currentPercentComplete = Math.round((currentWidth / maxPercentWidth) * 100);
+
+                    updateElement(currentWidth);
+
+                    tooltipTop = taskElementOffset.top - timelineOffset.top;
+                    tooltipLeft = taskElementOffset.left + currentWidth - timelineOffset.left;
+
+                    that.view()._updatePercentCompleteTooltip(tooltipTop, tooltipLeft, currentPercentComplete);
+                }, 15))
+                .bind("dragend", function(e) {
+                    that.trigger("percentResizeEnd", { task: task, percentComplete: currentPercentComplete });
+
+                    cleanUp();
+                })
+                .bind("dragcancel", function(e) {
+                    updateElement(originalPercentWidth);
+
                     cleanUp();
                 });
         },

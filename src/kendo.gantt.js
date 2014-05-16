@@ -922,6 +922,9 @@ var __meta__ = {
                         that.updateTask(that.dataSource.getByUid(task.uid), updateInfo);
                     }
                 })
+                .bind("percentResizeEnd", function(e) {
+                    that.updateTask(that.dataSource.getByUid(e.task.uid), { percentComplete: e.percentComplete });
+                })
                 .bind("select", function(e) {
                     that.select("[data-uid='" + e.uid + "']");
                 })

@@ -47,7 +47,7 @@
         timeline.trigger("resizeEnd", { task: task, date: new Date("2014/04/15 16:00") });
     });
 
-    test("updateEvent called on timeline resizeEnd", function() {
+    test("updateTask called on timeline resizeEnd", function() {
         setupGantt();
 
         stub(gantt, "updateTask");
@@ -57,7 +57,7 @@
         ok(gantt.calls("updateTask"));
     });
 
-    test("updateEvent not called when preventDefault is called on resizeEnd", function() {
+    test("updateTask not called when preventDefault is called on resizeEnd", function() {
         setupGantt();
 
         gantt.bind("resizeEnd", function(e) {
@@ -71,7 +71,7 @@
         ok(!gantt.calls("updateTask"));
     });
 
-    test("updateEvent called with correct parameter on timeline resizeEnd from start", 3, function() {
+    test("updateTask called with correct parameter on timeline resizeEnd from start", 3, function() {
         setupGantt();
 
         stub(gantt, {
@@ -85,7 +85,7 @@
         timeline.trigger("resizeEnd", { task: task, resizeStart: true, date: new Date("2014/04/15 08:00") });
     });
 
-    test("updateEvent called with correct parameter on timeline resizeEnd from end", 3, function() {
+    test("updateTask called with correct parameter on timeline resizeEnd from end", 3, function() {
         setupGantt();
 
         stub(gantt, {
@@ -517,13 +517,13 @@
     function setupGantt(userOptions) {
         task = new kendo.data.GanttTask({
             title: "Task",
-            views: ["day"],
             start: new Date("2014/04/15 12:00"),
             end: new Date("2014/04/15 14:00")
         });
 
         var options = extend({}, {
             snap: false,
+            views: ["day"],
             showWorkHours: false,
             dataSource: [task]
         }, userOptions);
