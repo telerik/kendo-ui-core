@@ -6,18 +6,15 @@
 
     <meta name="viewport" content="width=device-width,user-scalable=1,initial-scale=1.0" />
 
-    <link rel="stylesheet" href="../styles/web/kendo.common.css" />
-    <link rel="stylesheet" href="../styles/web/kendo.default.css">
-    <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css">
-
-    <script src="../demos/mvc/content/shared/js/less.js"></script>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css">
 
     <script src="../src/jquery.js"></script>
     <script src="require.js"></script>
 
     <style>
         html {
-            font: 75% Arial,Helvetica,sans-serif;
+            font: 12px/2 Arial,Helvetica,sans-serif;
         }
 
         #content {
@@ -27,7 +24,7 @@
         }
 
         #page {
-            width: 800px;
+            width: 1000px;
             margin: 0 auto;
             padding-top: 8em;
         }
@@ -70,8 +67,8 @@
             editor = $("#comment")
                 .html("<p>foo bar baz</p>")
                 .kendoEditor({
-                    select: showHTML
-                    /*tools: [
+                    select: showHTML,
+                    tools: [
                         "bold", "italic", "underline", "strikethrough",
                         "justifyLeft", "justifyCenter", "justifyRight", "justifyFull",
                         "insertUnorderedList", "insertOrderedList", "indent", "outdent",
@@ -81,9 +78,9 @@
                         "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight",
                         "deleteRow", "deleteColumn",
                         "viewHtml",
-                        "formatting", "fontName", "fontSize",
+                        { name: "formatting", width: 120 }, "cleanFormatting", "fontName", "fontSize",
                         "foreColor", "backColor"
-                    ]*/
+                    ]
                 }).data("kendoEditor");
 
             showHTML();

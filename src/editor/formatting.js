@@ -9,12 +9,13 @@ var kendo = window.kendo,
     Tool = Editor.Tool,
     ToolTemplate = Editor.ToolTemplate,
     DelayedExecutionTool = Editor.DelayedExecutionTool,
+    Command = Editor.Command,
     dom = Editor.Dom,
-    dropDownListTemplate = Editor.EditorUtils.dropDownListTemplate,
-    registerTool = Editor.EditorUtils.registerTool;
+    EditorUtils = Editor.EditorUtils,
+    registerTool = EditorUtils.registerTool;
 
 
-var FormattingTool = Editor.FormattingTool = DelayedExecutionTool.extend({
+var FormattingTool = DelayedExecutionTool.extend({
     init: function(options) {
         var that = this;
         Tool.fn.init.call(that, kendo.deepExtend({}, that.options, options));
@@ -186,7 +187,36 @@ var FormattingTool = Editor.FormattingTool = DelayedExecutionTool.extend({
     }
 });
 
-registerTool("formatting", new FormattingTool({template: new ToolTemplate({template: dropDownListTemplate, title: "Format"})}));
+var CleanFormatTool = Tool.extend({
+    options: {
+        remove: "strong,em".split(",")
+    }
+});
+
+var CleanFormatCommand = Command.extend({
+    exec: function() {
+        var range = this.lockRange(true);
+        var iterator = new Editor.RangeIterator(range)
+        var remove = this.options.remove;
+        var node;
+
+        while (node = iterator.next()) {
+            if (remove.indexOf(dom.name(node)) > -1) {
+                dom.unwrap(node);
+            }
+        }
+
+        this.releaseRange(range);
+    }
+});
+
+$.extend(Editor, {
+    FormattingTool: FormattingTool,
+    CleanFormatCommand: CleanFormatCommand
+});
+
+registerTool("formatting", new FormattingTool({ template: new ToolTemplate({ template: EditorUtils.dropDownListTemplate, title: "Format" }) }));
+registerTool("cleanFormatting", new Tool({ command: CleanFormatCommand, template: new ToolTemplate({ template: EditorUtils.buttonTemplate, title: "Clean formatting" }) }));
 
 })(window.kendo.jQuery);
 

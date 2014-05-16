@@ -57,6 +57,7 @@
 
     <script>
         $("#editor").kendoEditor({
+            tools: kendo.ui.Editor.fn.options.tools.concat(["cleanFormatting"]),
             paste: function(e) {
                 console.log(e.html);
             }
