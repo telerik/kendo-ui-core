@@ -218,12 +218,28 @@
         deepEqual(point.subtract(new Point(5, 10)), point);
     });
 
+    test("subtract triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() { ok(true); }
+        };
+
+        point.subtract(new Point(5, 10));
+    });
+
     test("add x and y", function() {
         deepEqual(point.add(new Point(5, 10)), new Point(15, 30));
     });
 
     test("add returns point", function() {
         deepEqual(point.add(new Point(5, 10)), point);
+    });
+
+    test("add triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() { ok(true); }
+        };
+
+        point.add(new Point(5, 10));
     });
 
     test("transform applies matrix", function() {
@@ -297,6 +313,14 @@
 
     test("round returns point", function() {
         deepEqual(point.round(), point);
+    });
+
+    test("round triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() { ok(true); }
+        };
+
+        point.round();
     });
 
     test("toString concatenates x and y", function() {

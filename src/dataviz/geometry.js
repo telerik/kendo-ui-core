@@ -121,12 +121,16 @@
             this.x += other.x;
             this.y += other.y;
 
+            this.geometryChange();
+
             return this;
         },
 
         subtract: function(other) {
             this.x -= other.x;
             this.y -= other.y;
+
+            this.geometryChange();
 
             return this;
         },
@@ -141,6 +145,9 @@
         round: function(precision) {
             this.x = round(this.x, precision);
             this.y = round(this.y, precision);
+
+            this.geometryChange();
+
             return this;
         }
     });
