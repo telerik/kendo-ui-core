@@ -183,7 +183,7 @@ test('clicking should raise onSelect event', function() {
 
 asyncTest('clicking should raise onActivate event when the new contentElement is visible and scrollWrap should be sized accordingly', function() {
     var tabstrip = getTabStrip();
-    var item = getRootItem(3);
+    var item = getRootItem(1);
 
     isActivateRaised = false;
 
