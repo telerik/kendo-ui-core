@@ -139,7 +139,7 @@
         ok(contentElement.closest(".k-pivot-layout")[0]);
     });
 
-    /*module("PivotGrid virtual DOM rendering", {
+    module("PivotGrid column headers rendering", {
         setup: function() {
             kendo.ns = "kendo-";
             div = document.createElement("div");
@@ -153,6 +153,140 @@
             kendo.destroy(QUnit.fixture);
             kendo.ns = "";
         }
-    });*/
+    });
 
+    function createDataSource(tuples) {
+        return new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: tuples || []
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+    }
+
+    test("PivotGrid renders column header for 1 dimension with one tuple", function() {
+        var tuples = [
+            { members: [ { name: "level 0", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var tr = headerTable.find("tr");
+        var th = headerTable.find("th");
+
+        equal(tr.length, 1);
+        equal(th.length, 1);
+        equal(th.text(), "level 0");
+    });
+
+    test("PivotGrid renders column header for 2 dimension with one tuple each", function() {
+        var tuples = [
+            { members: [ { name: "dim 1", children: [] }, { name: "dim 2", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var tr = headerTable.find("tr");
+        var th = headerTable.find("th");
+
+        equal(tr.length, 2);
+        equal(th.length, 2);
+        equal(th.eq(0).text(), "dim 1");
+        equal(th.eq(1).text(), "dim 2");
+    });
+
+    test("PivotGrid renders one expanded dimension", function() {
+        var tuples = [
+            { members: [{ name: "dim 1", children: [] }] },
+            { members: [{ name: "child 1", parentName: "dim 1", children: [] }] },
+            { members: [{ name: "child 2", parentName: "dim 1", children: [] }] },
+            { members: [{ name: "child 3", parentName: "dim 1", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var tr = headerTable.find("tr");
+        equal(tr.length, 2);
+
+        var row_1 = tr.eq(0);
+        var cells_row1 = row_1.find("th");
+
+        equal(cells_row1.length, 2);
+        equal(cells_row1.eq(0).attr("colspan"), 3);
+        equal(cells_row1.eq(1).attr("rowspan"), 2);
+
+        var row_2 = tr.eq(1);
+        var cells_row2 = row_2.find("th");
+
+        equal(cells_row2.length, 3);
+        equal(cells_row2.eq(0).text(), "child 1");
+        equal(cells_row2.eq(1).text(), "child 2");
+        equal(cells_row2.eq(2).text(), "child 3");
+    });
+
+    test("PivotGrid renders one expanded dimension of two", function() {
+        var tuples = [
+            { members: [{ name: "dim 1", children: [] }, { name: "dim 2", children: [] }] },
+            { members: [{ name: "child 1", parentName: "dim 1", children: [] }, { name: "dim 2", children: [] }] },
+            { members: [{ name: "child 2", parentName: "dim 1", children: [] }, { name: "dim 2", children: [] }] },
+            { members: [{ name: "child 3", parentName: "dim 1", children: [] }, { name: "dim 2", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var tr = headerTable.find("tr");
+        equal(tr.length, 3);
+
+        var row_1 = tr.eq(0);
+        var cells_row1 = row_1.find("th");
+
+        equal(cells_row1.length, 2);
+        equal(cells_row1.eq(0).attr("colspan"), 3);
+        equal(cells_row1.eq(1).attr("rowspan"), 2);
+
+        var row_2 = tr.eq(1);
+        var cells_row2 = row_2.find("th");
+
+        equal(cells_row2.length, 3);
+        equal(cells_row2.eq(0).text(), "child 1");
+        equal(cells_row2.eq(1).text(), "child 2");
+        equal(cells_row2.eq(2).text(), "child 3");
+
+        var row_3 = tr.eq(2);
+        var cells_row3 = row_3.find("th");
+
+        equal(cells_row3.length, 4);
+        equal(cells_row3.eq(0).text(), "dim 2");
+        equal(cells_row3.eq(1).text(), "dim 2");
+        equal(cells_row3.eq(2).text(), "dim 2");
+        equal(cells_row3.eq(3).text(), "dim 2");
+    });
 })();

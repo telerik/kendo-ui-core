@@ -680,9 +680,12 @@ var __meta__ = {
 
             var data = dataSource.view();
 
-            that.columnsHeaderTree.render(kendo_column_headers(tuples || []));
-            that.rowsHeaderTree.render(kendo_row_headers(rows.tuples || []));
-            that.contentTree.render(kendo_content(data, tuples.length || 1));
+            var columnsTree = kendo_column_headers(tuples || []);
+            var rowsTree = kendo_row_headers(rows.tuples || []);
+
+            that.columnsHeaderTree.render(columnsTree);
+            that.rowsHeaderTree.render(rowsTree);
+            that.contentTree.render(kendo_content(data, columnsTree, rowsTree));
         }
     });
 
@@ -698,39 +701,101 @@ var __meta__ = {
         return element("thead", null, kendo_columns_thead_rows(columns));
     }
 
-    function kendo_columns_thead_rows(columns) {
-        var membersLength = columns[0] ? columns[0].members.length : 1;
-
+    function kendo_columns_thead_rows(columns, parentMember) {
+        var cellsCount = 1;
         var rows = [];
+        var index = 0;
+        var row;
 
-        for (var i = 0; i < membersLength; i++) {
-            var cells = [];
-            var j = 0;
-            var length = columns.length || 1;
+        //TODO: Mark last row of a root tuple
+        //TODO: Mark all cells that are ALL
 
-            for (; j < length; j++) {
-                var column = columns[j];
-                var member;
+        for (var colIdx = 0, length = columns.length; colIdx < length; colIdx++) {
+            var column = columns[colIdx];
+            var members = column.members;
 
-                if (!column) {
-                    member = {
-                        caption: ""
-                    };
-                } else {
-                    member = columns[j].members[i];
+            for (var memberIdx = 0, l = members.length; memberIdx < l; memberIdx++) {
+
+                var member = members[memberIdx];
+                var childrenTuples = member.children;
+
+                if (!parentMember || member.parentName === parentMember.name) {
+                    row = rows[index];
+
+                    if (!row) {
+                        row = element("tr", null, []);
+                        rows.push(row);
+                    }
+
+                    while(cellsCount) {
+                        row.children.push(kendo_th(member));
+                        cellsCount -= 1;
+                    }
+
+                    index += 1;
                 }
 
-                cells.push(kendo_th(member));
+                if (childrenTuples[0]) {
+                    row.children.push(kendo_th(member));
+
+                    var childrenRows = kendo_columns_thead_rows(childrenTuples, member);
+
+                    row.children[0].attr.colspan = maxValue(childrenRows);
+                    row.children[1].attr.rowspan = childrenRows.length + 1;
+
+                    rows = rows.concat(childrenRows);
+
+                    index = rows.length;
+                    cellsCount = getCellsCount(row);
+                } else {
+                    cellsCount = 1;
+                }
             }
 
-            rows.push(element("tr", null, cells));
+            index = 0;
         }
 
         return rows;
     }
 
+    function maxValue(rows) {
+        var row;
+        var count = 1;
+
+        for (var i = 0, length = rows.length; i < length; i++) {
+            row = rows[i];
+
+            if (row.children.length > count) {
+                count = row.children.length;
+            }
+        }
+
+        return count;
+    }
+
+    function getCellsCount(row) {
+        if (!row) {
+            return 1;
+        }
+
+        var cells = row.children;
+        var length = cells.length;
+        var idx = 0;
+        var cell;
+
+        var count = 0;
+
+        for (; idx < length; idx++) {
+            cell = cells[idx];
+
+            count += cell.attr.colspan || 1;
+        }
+
+        return count;
+    }
+
     function kendo_th(member) {
-        return element("th", null, [text(member.caption)]);
+        return element("th", null, [text(member.caption || member.name)]);
     }
 
     //row headers
@@ -773,27 +838,36 @@ var __meta__ = {
     }
 
     //content
-    function kendo_content(data, columnsLength) {
-        return [ element("table", null, [kendo_tbody(data, columnsLength)]) ];
+    function kendo_content(data, columnsTree, rowsTree) {
+        return [ element("table", null, [kendo_tbody(data, columnsTree, rowsTree)]) ];
     };
 
-    function kendo_tbody(data, columnsLength) {
-        return element("tbody", null, kendo_rows(data, columnsLength));
+    function kendo_tbody(data, columnsTree, rowsTree) {
+        return element("tbody", null, kendo_rows(data, columnsTree, rowsTree));
     }
 
-    function kendo_rows(data, columnsLength) {
+    function kendo_rows(data, columnsTree, rowsTree) {
+        var columnRows = columnsTree[0].children[0].children;
+
+        var columnLastRow = columnRows[columnRows.length - 1];
+
+        var columnsLength = columnLastRow ? columnLastRow.children.length : 1;
+
         var length = Math.ceil((data.length || 1) / columnsLength);
         var rows = [];
 
         for (var i = 0; i < length; i++) {
-            rows.push(kendo_row(data, i, columnsLength));
+            rows.push(kendo_row(data, i, columnLastRow));
         }
         return rows;
     }
 
-    function kendo_row(data, rowIndex, columnsLength) {
+    function kendo_row(data, rowIndex, columnLastRow) {
         //render cells
         var cells = [];
+
+        var columns = columnLastRow ? columnLastRow.children : [];
+        var columnsLength = columns.length;
 
         var start = rowIndex * columnsLength;
         var end = start + columnsLength;

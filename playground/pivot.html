@@ -26,8 +26,8 @@
             $("#pivotgrid").kendoPivotGrid({
                 dataSource: {
                     type: "xmla",
-                    columns: [{ name: "[Geography].[City]" }, { name: "[Date].[Calendar]", expand: true }],
-                    rows: [ { name: "[Product].[Category]", expand: true }, { name: "[Product].[Product Name]" }],
+                    columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+                    rows: [ { name: "[Product].[Category]" }, { name: "[Product].[Product Name]" }],
                     measures: ["[Measures].[Internet Order Lines Count]"],
                     transport: {
                         connection: {
