@@ -22,6 +22,7 @@
         transformationMatrix = g.transformationMatrix,
 
         util = dataviz.util,
+        renderAttr = util.renderAttr,
         renderAllAttr = util.renderAllAttr,
         round = util.round;
 
@@ -418,6 +419,7 @@
             this.fill = new FillNode(srcElement);
             this.stroke = new StrokeNode(srcElement);
             this.transform = this.createTransformNode(srcElement, transform);
+
             Node.fn.init.call(this, srcElement);
 
             this.append(this.fill);
@@ -523,6 +525,25 @@
             return attrs;
         },
 
+        mapStyle: function() {
+            var style = [
+                ["position", "absolute"],
+                ["width", COORDINATE_MULTIPLE + "px"],
+                ["height", COORDINATE_MULTIPLE + "px"],
+                ["cursor", this.srcElement.options.cursor]
+            ];
+
+            if (this.srcElement.options.visible === false) {
+                style.push(["display", "none"]);
+            }
+
+            return style;
+        },
+
+        renderStyle: function() {
+            return renderAttr("style", util.renderStyle(this.mapStyle()));
+        },
+
         renderCursor: function() {
             var cursor = this.srcElement.options.cursor;
 
@@ -546,16 +567,9 @@
             return "coordsize='" + scale + " " + scale + "'";
         },
 
-        renderSize: function() {
-            return "width:" + COORDINATE_MULTIPLE + "px;height:" + COORDINATE_MULTIPLE + "px;";
-        },
-
         template: renderTemplate(
             "<kvml:shape " +
-            "style='position:absolute;" +
-            "#= d.renderSize() # " +
-            "#= d.renderVisibility() # " +
-            "#= d.renderCursor() #' " +
+            "#= d.renderStyle() # " +
             "coordorigin='0 0' #= d.renderCoordsize() #>" +
                 "#= d.renderChildren() #" +
                 "<kvml:path #= kendo.dataviz.util.renderAttr('v', d.renderData()) # />" +
