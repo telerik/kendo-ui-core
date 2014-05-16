@@ -187,24 +187,23 @@ var FormattingTool = DelayedExecutionTool.extend({
     }
 });
 
-var CleanFormatTool = Tool.extend({
-    options: {
-        remove: "strong,em".split(",")
-    }
-});
-
 var CleanFormatCommand = Command.extend({
     exec: function() {
         var range = this.lockRange(true);
-        var iterator = new Editor.RangeIterator(range)
         var remove = this.options.remove;
-        var node;
 
-        while (node = iterator.next()) {
+        var iterator = new Editor.RangeIterator(range);
+
+        iterator.traverse(function (node) {
+            if (dom.isMarker(node)) {
+                return;
+            }
+
             if (remove.indexOf(dom.name(node)) > -1) {
                 dom.unwrap(node);
+            } else if (!node.nodeType == 3) {
             }
-        }
+        });
 
         this.releaseRange(range);
     }

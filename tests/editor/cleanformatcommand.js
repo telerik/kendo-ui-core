@@ -14,22 +14,42 @@ editor_module("editor clean format command", {
 function cleanCommand(range) {
     var command = new CleanFormatCommand({
         range: range,
-        remove: "strong,em".split(",")
+        remove: "strong,em,span".split(",")
     });
     command.editor = editor;
     return command;
 }
 
-test('removes strong tag', function() {
-    editor.value('<strong>foo</strong>');
+function cleanedContent(html) {
+    editor.value(html);
 
     var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
+    range.selectNodeContents(editor.body);
 
     var command = cleanCommand(range);
     command.exec();
 
-    equal(editor.value(), 'foo');
+    return editor.value();
+}
+
+test("removes strong tag", function() {
+    equal(cleanedContent('<strong>foo</strong>'), 'foo');
+});
+
+test("removes multiple elements", function() {
+    equal(cleanedContent('<strong>foo</strong><em>bar</em>'), 'foobar');
+});
+
+test("removes span tags", function() {
+    equal(cleanedContent('<span style="color: #f00">foo</span>'), 'foo');
+});
+
+test("removes nested formatting", function() {
+    equal(cleanedContent('<strong>foo<em>bar</em></strong>'), 'foobar');
+});
+
+test("keeps paragraphs", function() {
+    equal(cleanedContent('<p>foo<em>bar</em></p>'), '<p>foobar</p>');
 });
 
 }());
