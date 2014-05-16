@@ -216,17 +216,9 @@
             return output;
         },
 
-        renderVisibility: function() {
-            if (this.srcElement.options.visible === false) {
-                return renderAttr("display", "none");
-            }
-
-            return "";
-        },
-
         optionsChange: function(e) {
             if (e.field === "visible") {
-                this.attr("display", e.value ? "" : "none");
+                this.css("display", e.value ? "" : "none");
             }
 
             BaseNode.fn.optionsChange.call(this, e);
@@ -252,6 +244,18 @@
         allAttr: function(attrs) {
             for (var i = 0; i < attrs.length; i++) {
                 this.attr(attrs[i][0], attrs[i][1]);
+            }
+        },
+
+        css: function(name, value) {
+            if (this.element) {
+                this.element.style[name] = value;
+            }
+        },
+
+        allCss: function(styles) {
+            for (var i = 0; i < styles.length; i++) {
+                this.css(styles[i][0], styles[i][1]);
             }
         },
 
@@ -285,6 +289,20 @@
             } else {
                 this.removeAttr(TRANSFORM);
             }
+        },
+
+        mapStyle: function() {
+            var style = [["cursor", this.srcElement.options.cursor]];
+
+            if (this.srcElement.options.visible === false) {
+                style.push(["display", "none"]);
+            }
+
+            return style;
+        },
+
+        renderStyle: function() {
+            return renderAttr("style", util.renderStyle(this.mapStyle()));
         }
     });
 
@@ -298,7 +316,7 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g#= d.renderTransform() + d.renderVisibility() #>#= d.renderChildren() #</g>"
+            "<g#= d.renderTransform() + d.renderStyle() #>#= d.renderChildren() #</g>"
         ),
 
         optionsChange: function(e) {
@@ -481,17 +499,8 @@
             );
         },
 
-        mapStyle: function() {
-            return [["cursor", this.srcElement.options.cursor]];
-        },
-
-        renderStyle: function() {
-            return renderAttr("style", util.renderStyle(this.mapStyle()));
-        },
-
         template: renderTemplate(
             "<path #= d.renderStyle() # " +
-            "#= d.renderVisibility() # " +
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
@@ -536,7 +545,6 @@
             "<circle #= d.renderStyle() # " +
             "cx='#= this.srcElement.geometry.center.x #' cy='#= this.srcElement.geometry.center.y #' " +
             "r='#= this.srcElement.geometry.radius #' " +
-            "#= d.renderVisibility() # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
             "#= d.renderTransform() # ></circle>"
@@ -581,7 +589,6 @@
         template: renderTemplate(
             "<text #= d.renderStyle() # " +
             "x='#= this.pos().x #' y='#= this.pos().y #' " +
-            "#= d.renderVisibility() # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() #><tspan>#= this.srcElement.content() #</tspan></text>"
         )

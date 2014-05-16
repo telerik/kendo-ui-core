@@ -203,7 +203,7 @@
 
         test("renders visibility", function() {
             shape.visible(false);
-            ok(node.render().indexOf("display='none'") !== -1);
+            ok(node.render().indexOf("display:none;") !== -1);
         });
 
         test("does not render visibility if not set", function() {
@@ -216,7 +216,7 @@
         });
 
         test("optionsChange sets visibility to hidden", function() {
-            node.attr = function(name, value) {
+            node.css = function(name, value) {
                 equal(name, "display");
                 equal(value, "none");
             };
@@ -225,7 +225,7 @@
         });
 
         test("optionsChange sets visibility to visible", function() {
-            node.attr = function(name, value) {
+            node.css = function(name, value) {
                 equal(name, "display");
                 equal(value, "");
             };
