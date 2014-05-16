@@ -436,7 +436,7 @@
 
         optionsChange: function(e) {
             if (e.field === "visible") {
-                this.css("display", e.value ? "block" : "none");
+                this.css("display", e.value ? "" : "none");
             } else if (e.field.indexOf("fill") === 0) {
                 this.fill.optionsChange(e);
             } else if (e.field.indexOf("stroke") === 0) {

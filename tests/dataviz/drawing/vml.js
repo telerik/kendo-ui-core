@@ -24,14 +24,49 @@
         StrokeNode = vml.StrokeNode,
         TransformNode = vml.TransformNode;
 
-    function compareMatrices(m1, m2, tolerance) {
-        tolerance = tolerance  || 0;
-        close(m1.a, m2.a, tolerance);
-        close(m1.b, m2.b, tolerance);
-        close(m1.c, m2.c, tolerance);
-        close(m1.d, m2.d, tolerance);
-        close(m1.e, m2.e, tolerance);
-        close(m1.f, m2.f, tolerance);
+    // ------------------------------------------------------------
+    function basePathNodeTests(TShape, TNode, name) {
+        var shape,
+            node;
+
+        module("Base Node tests / " + name, {
+            setup: function() {
+                shape = new TShape();
+                node = new TNode(shape);
+            }
+        });
+
+        test("renders visibility", function() {
+            shape.visible(false);
+            ok(node.render().indexOf("display:none;") !== -1);
+        });
+
+        test("does not render visibility if not set", function() {
+            ok(node.render().indexOf("display:none;") === -1);
+        });
+
+        test("does not render visibility if set to true", function() {
+            shape.visible(true);
+            ok(node.render().indexOf("display:none;") === -1);
+        });
+
+        test("optionsChange sets visibility to hidden", function() {
+            node.css = function(name, value) {
+                equal(name, "display");
+                equal(value, "none");
+            };
+
+            shape.visible(false);
+        });
+
+        test("optionsChange sets visibility to visible", function() {
+            node.css = function(name, value) {
+                equal(name, "display");
+                equal(value, "");
+            };
+
+            shape.visible(true);
+        });
     }
 
     // ------------------------------------------------------------
@@ -857,20 +892,6 @@
         ok(pathNode.render().indexOf("cursor") === -1);
     });
 
-    test("renders visibility attribute", function() {
-        path.visible(false);
-        ok(pathNode.render().indexOf("display:none;") !== -1);
-    });
-
-    test("does not render visibility if not set", function() {
-        ok(pathNode.render().indexOf("display:none;") === -1);
-    });
-
-    test("does not render visibility if set to true", function() {
-        path.visible(true);
-        ok(pathNode.render().indexOf("display:none;") === -1);
-    });
-
     test("renders coordsize", function() {
         ok(pathNode.render().indexOf("coordsize='10000 10000'") !== -1);
     });
@@ -923,24 +944,6 @@
         };
 
         path.options.set("foo", true);
-    });
-
-    test("optionsChange sets visibility to hidden", function() {
-        pathNode.css = function(name, value) {
-            equal(name, "display");
-            equal(value, "none");
-        };
-
-        path.visible(false);
-    });
-
-    test("optionsChange sets visibility to visible", function() {
-        pathNode.css = function(name, value) {
-            equal(name, "display");
-            equal(value, "block");
-        };
-
-        path.visible(true);
     });
 
     test("optionsChange is forwarded to transform", function() {
@@ -1108,6 +1111,8 @@
         circle.options.set("foo", true);
     });
 
+    basePathNodeTests(d.Circle, vml.CircleNode, "CircleNode");
+
     // ------------------------------------------------------------
     var arc,
         arcNode;
@@ -1164,5 +1169,7 @@
 
         arc.geometry.set("endAngle", 180);
     });
+
+    basePathNodeTests(d.Arc, vml.ArcNode, "ArcNode");
 
 })();
