@@ -187,12 +187,12 @@ asyncTest('clicking should raise onActivate event when the new contentElement is
 
     isActivateRaised = false;
 
-    var height = tabstrip.scrollWrap.height();
+    var height = Math.round(tabstrip.scrollWrap.height());
     item.find('> .k-link').trigger('click');
 
     setTimeout(function () {
         ok(isActivateRaised);
-        equal(height, tabstrip.scrollWrap.height());
+        equal(height, Math.round(tabstrip.scrollWrap.height()));
         start();
     }, 10);
 });
