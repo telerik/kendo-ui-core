@@ -1091,9 +1091,6 @@ p#copy
     letter-spacing: -0.04em;
     display: block;
     font-weight: 400;
-    position: absolute;
-    top: 23px;
-    left: 0;
     z-index: 100;
 }
 
@@ -1187,7 +1184,6 @@ p#copy
 .sortableIcon{background-position:-60px -160px;}
 .notificationIcon{background-position:-80px -160px;}
 .mobileIcon{background-position:-100px -160px;}
-
 
 #examples-nav
 {
@@ -1383,12 +1379,12 @@ p#copy
 
 #nav-pager a
 {
-   
+
     text-transform:uppercase;
     display: inline-block;
     position:relative;
     color:#0487c4;
- 
+
     vertical-align:middle;
 }
 
@@ -1732,22 +1728,22 @@ p#copy
 .widgetGrid .new-widget,
 .widgetGrid .beta-widget,
 .widgetGrid .pro-widget
-{    
-  
+{
+
    display: inline-block;
 }
 
 .widgetGrid .new-widget
 {
    width: 18px;
-   height: 9px;  
+   height: 9px;
    background: url(tag-new.png) no-repeat right center;
 }
 
 .widgetGrid .beta-widget
 {
    width: 21px;
-   height: 9px;  
+   height: 9px;
    background: url(tag-beta.png) no-repeat right center;
    margin-left: 4px;
 }
@@ -1755,7 +1751,7 @@ p#copy
 .widgetGrid .pro-widget
 {
    width: 18px;
-   height: 9px;  
+   height: 9px;
    background: url(tag-pro.png) no-repeat right center;
 }
 
@@ -3369,18 +3365,18 @@ ul.keyboard-legend li a {
 }
 
 .try-kendo
-{  
+{
    color: #fff;
    font-size: 15px;
    line-height: 14px;
    font-weight: bold;
-   background-color: #015991; 
+   background-color: #015991;
    display: block;
-   min-width:189px;   
+   min-width:189px;
    border-radius:3px;
    padding: 13px 22px 13px;
-   margin: 20px auto;  
-   border: none;  
+   margin: 20px auto;
+   border: none;
 }
 
 .try-kendo .k-icon
@@ -3396,11 +3392,9 @@ ul.keyboard-legend li a {
 }
 
 
-
-
 /* Demos-update */
 #header {
-    background-color: #2a2d33;    
+    background-color: #2a2d33;
 }
 
 #header a:hover {
@@ -3408,19 +3402,19 @@ ul.keyboard-legend li a {
 }
 
 #logo-bar {
-    float: left;  
+    float: left;
     margin-top: 1.417em;
     margin-bottom: 1.917em;
-    margin-left: 1.833em;  
+    margin-left: 1.833em;
 }
 
 .nav-buttons {
-    float: right;    
+    float: right;
 }
 
 .btn {
     color: #fff;
-    background-color: #2a2d33; 
+    background-color: #2a2d33;
     border: 1px solid #505156;
     background-clip: padding-box;
     position: relative;
@@ -3439,7 +3433,7 @@ ul.keyboard-legend li a {
 }
 
 .btn:hover {
-   background-color: #505156;  
+   background-color: #505156;
 }
 
 .btn-primary {
@@ -3463,9 +3457,8 @@ ul.keyboard-legend li a {
     background-color: #2a2d33;
     position:relative;
     width: 100%;
-   left:0px;
-   bottom:0px;
-    
+    left:0px;
+    bottom:0px;
 }
 
 .footer-links {
@@ -3499,13 +3492,13 @@ a.footer-links:hover {
 .copyright p {
     font-size: 11px;
     margin-left: 35px;
-} 
+}
 
 /* Demos */
 #codeStrip .documentation-link {
-    
+
     background-color: #015991;
-    color:#fff; 
+    color:#fff;
     padding: 11px 22px;
     transition-property: background-color, color;
     transition-duration: 0.2s;
@@ -3526,5 +3519,47 @@ a.footer-links:hover {
 #header:after {
     display: block;
     content:"";
+    clear: both;
+}
+
+#nav-wrapper {
+    width: 250px;
+    overflow: hidden;
+    float: left;
+}
+
+#nav {
+    width: 500px;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-transform: translatex(-250px);
+    -webkit-transition: all 0.3s ease-out;
+}
+
+#root-nav, #example-nav {
+    width: 250px;
+    float: left;
+}
+
+#nav #root-nav {
+    height: 10px;
+    overflow: hidden;
+}
+
+#nav.root {
+    -webkit-transform: translatex(0);
+}
+
+#nav.root #root-nav {
+    height: auto;
+    overflow: visible;
+}
+
+/* Experiment */
+#main {
+    float: left;
+}
+
+#footer {
     clear: both;
 }

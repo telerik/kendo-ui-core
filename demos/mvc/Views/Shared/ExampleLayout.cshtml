@@ -1,31 +1,46 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div id="nav">
-@foreach (IGrouping<string, NavigationWidget> category in ViewBag.Categories)
-{
-    <ul>
-        <li>
-            <h3>@category.Key</h3>
-            <ul>
-            @foreach (var widget in category)
-            {
-                <li>
-                    @Html.WidgetLink(widget)
-                </li>
-            }
-            </ul>
-        </li>
-    </ul>
-}
-<h4>@ViewBag.CurrentWidget.Text</h4>
-<ul>
-    @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
+<div id="nav-wrapper">
+    <div id="nav">
+        <div id="root-nav">
+    @foreach (IGrouping<string, NavigationWidget> category in ViewBag.Categories)
     {
-        <li>@Html.ExampleLink(example)</li>
+        <ul>
+            <li>
+                <h3>@category.Key</h3>
+                <ul>
+                @foreach (var widget in category)
+                {
+                    <li>
+                        @Html.WidgetLink(widget)
+                    </li>
+                }
+                </ul>
+            </li>
+        </ul>
     }
-</ul>
+        </div>
 
+        <div id="example-nav">
+            <a href="#" id="back-nav">Back</a>
+
+        <h4>@ViewBag.CurrentWidget.Text</h4>
+        <ul>
+            @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
+            {
+                <li>@Html.ExampleLink(example)</li>
+            }
+        </ul>
+        </div>
+    </div>
+
+    <script>
+        $("#back-nav").on("click", function(e) {
+            $("#nav").addClass("root");
+            e.preventDefault();
+        });
+    </script>
 </div>
 <div id="main">
     @Html.Partial("ThemeChooser")
