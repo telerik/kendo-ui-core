@@ -944,6 +944,7 @@ var __meta__ = {
                 fillOpacity: options.opacity,
                 animation: options.animation,
                 zIndex: options.zIndex,
+                cursor: options.cursor,
                 data: { modelId: boxElement.modelId }
             };
         }

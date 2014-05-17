@@ -878,6 +878,16 @@
             equal(view.log.rect[0].style.zIndex, 100);
         });
 
+        test("renders cursor", function() {
+            boxElement.options.cursor = {
+                style: "pointer"
+            };
+            boxElement.reflow(targetBox);
+            boxElement.getViewElements(view);
+
+            equal(view.log.rect[0].style.cursor.style, "pointer");
+        });
+
     })();
 
     (function() {
