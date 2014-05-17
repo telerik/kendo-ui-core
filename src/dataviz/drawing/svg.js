@@ -638,7 +638,6 @@
     }
 
     // Exports ================================================================
-
     if (kendo.support.svg) {
         d.SurfaceFactory.current.register("svg", Surface, 10);
     }

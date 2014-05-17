@@ -752,7 +752,7 @@
 
     // Exports ================================================================
     if (kendo.support.browser.msie) {
-        d.SurfaceFactory.current.register("vml", Surface, 20);
+        d.SurfaceFactory.current.register("vml", Surface, 30);
     }
 
     deepExtend(d, {

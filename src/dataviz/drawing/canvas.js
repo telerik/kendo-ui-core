@@ -26,12 +26,12 @@
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
 
-        drawing = dataviz.drawing,
-        BaseNode = drawing.BaseNode,
-        Group = drawing.Group,
+        d = dataviz.drawing,
+        BaseNode = d.BaseNode,
+        Group = d.Group,
         Box2D = dataviz.Box2D,
         Color = dataviz.Color,
-        Path = drawing.Path;
+        Path = d.Path;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -145,6 +145,8 @@
 
                 if (srcElement instanceof Path) {
                     childNode = new PathNode(srcElement);
+                } else if (srcElement instanceof d.Text) {
+                    childNode = new TextNode(srcElement);
                 } else {
                     childNode = new Node(srcElement);
                 }
@@ -179,19 +181,8 @@
             path.setLineDash(ctx);
             path.setLineCap(ctx);
 
-            if (options.fill && options.fill !== "transparent") {
-                path.setFill(ctx);
-                ctx.globalAlpha = options.fillOpacity;
-                ctx.fill();
-            }
-
-            if (options.stroke && options.stroke.width) {
-                ctx.strokeStyle = options.stroke.color;
-                ctx.lineWidth = options.stroke.width;
-                ctx.lineJoin = "round";
-                ctx.globalAlpha = options.stroke.opacity;
-                ctx.stroke();
-            }
+            path.setFill(ctx);
+            path.setStroke(ctx);
 
             path.renderOverlay(ctx);
 
@@ -226,7 +217,23 @@
             var options = this.srcElement.options,
                 fill = options.fill;
 
-            ctx.fillStyle = fill;
+            if (options.fill && options.fill !== "transparent") {
+                ctx.fillStyle = fill;
+                ctx.globalAlpha = options.fillOpacity;
+                ctx.fill();
+            }
+        },
+
+        setStroke: function(ctx) {
+            var stroke = this.srcElement.options.stroke;
+
+            if (stroke && stroke.width) {
+                ctx.strokeStyle = stroke.color;
+                ctx.lineWidth = stroke.width;
+                ctx.lineJoin = "round";
+                ctx.globalAlpha = stroke.opacity;
+                ctx.stroke();
+            }
         },
 
         renderOverlay: function(ctx) {
@@ -309,6 +316,26 @@
         }
     });
 
+    var TextNode = PathNode.extend({
+        renderTo: function(ctx) {
+            var text = this.srcElement;
+            var origin = text.origin;
+            var size = text.measure();
+
+            ctx.save();
+            this.setFill(ctx);
+
+            ctx.font = text.options.font;
+            ctx.fillText(text.content(), origin.x, origin.y + size.baseline);
+
+            ctx.restore();
+        },
+
+        contentChange: function() {
+            this.invalidate();
+        }
+    });
+
     // Helpers ================================================================
     function addGradientStops(gradient, stops) {
         var i,
@@ -327,6 +354,10 @@
     }
 
     // Exports ================================================================
+    if (kendo.support.canvas) {
+        d.SurfaceFactory.current.register("canvas", Surface, 20);
+    }
+
     deepExtend(dataviz.drawing, {
         canvas: {
             Surface: Surface,
