@@ -340,6 +340,14 @@
             boxElement,
             childElements;
 
+        function ChildElementStub() {
+            this.boxes = []
+            this.reflow = function(box) {
+                this.box = box;
+                this.boxes.push(box.clone());
+            }
+        };
+
         // ------------------------------------------------------------
         module("BoxElement", {
             setup: function() {
@@ -465,6 +473,18 @@
             equal(boxElement.contentBox.height(), HEIGHT);
         });
 
+        test("reflows children in box with the actual size", function() {
+            boxElement.options.padding = PADDING;
+            boxElement.options.border.width = BORDER;
+            boxElement.options.margin = MARGIN;
+            var stubElement = new ChildElementStub();
+            boxElement.children = [stubElement];
+            boxElement.reflow(targetBox);
+
+            equal(stubElement.boxes[0].width(), WIDTH);
+            equal(stubElement.boxes[0].height(), HEIGHT);
+        });
+
         // ------------------------------------------------------------
         module("BoxElement / Shrink to fit", {
             setup: function() {
@@ -536,6 +556,20 @@
 
             equal(boxElement.contentBox.width(), WIDTH - nonContent);
             equal(boxElement.contentBox.height(), HEIGHT - nonContent);
+        });
+
+        test("reflows children in box with the actual size", function() {
+            boxElement.options.padding = PADDING;
+            boxElement.options.border.width = BORDER;
+            boxElement.options.margin = MARGIN;
+            boxElement.options.width = 50;
+            boxElement.options.height = 50;
+            var stubElement = new ChildElementStub();
+            boxElement.children = [stubElement];
+            boxElement.reflow(targetBox);
+
+            equal(stubElement.boxes[0].width(), 38);
+            equal(stubElement.boxes[0].height(), 38);
         });
 
         // ------------------------------------------------------------

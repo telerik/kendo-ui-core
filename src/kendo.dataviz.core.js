@@ -827,6 +827,10 @@ var __meta__ = {
                 box,
                 contentBox,
                 options = element.options,
+                width = options.width,
+                height = options.height,
+                hasSetSize = width && height,
+                shrinkToFit = options.shrinkToFit,
                 margin = getSpacing(options.margin),
                 padding = getSpacing(options.padding),
                 borderWidth = options.border.width,
@@ -839,15 +843,25 @@ var __meta__ = {
                 element.paddingBox = box.clone().unpad(margin).unpad(borderWidth);
             }
 
-            ChartElement.fn.reflow.call(element, targetBox);
+            contentBox = targetBox.clone();
+            if (hasSetSize) {
+                contentBox.x2 = contentBox.x1 + width;
+                contentBox.y2 = contentBox.y1 + height;
+            }
 
-            if (options.width && options.height) {
-                box = element.box = new Box2D(0, 0, options.width, options.height);
+            if (shrinkToFit) {
+                contentBox.unpad(margin).unpad(borderWidth).unpad(padding);
+            }
+
+            ChartElement.fn.reflow.call(element, contentBox);
+
+            if (hasSetSize) {
+                box = element.box = Box2D(0, 0, width, height);
             } else {
                 box = element.box;
             }
 
-            if (options.shrinkToFit) {
+            if (shrinkToFit && hasSetSize) {
                 reflowPaddingBox();
                 contentBox = element.contentBox = element.paddingBox.clone().unpad(padding);
             } else {
