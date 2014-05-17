@@ -1478,12 +1478,13 @@
             textBox.reflow(targetBox);
             textBox.getViewElements(view);
             var matrix = view.log.textbox[0].options.matrix;
-            equal(matrix.a, 0);
-            equal(matrix.b, 1);
-            equal(matrix.c, -1);
-            equal(matrix.d, 0);
-            equal(matrix.e, 30);
-            equal(matrix.f, 0);
+            var tolerance = 0.01;
+            close(matrix.a, 0, tolerance);
+            close(matrix.b, 1, tolerance);
+            close(matrix.c, -1, tolerance);
+            close(matrix.d, 0, tolerance);
+            close(matrix.e, 30, tolerance);
+            close(matrix.f, 0, tolerance);
         });
 
         test("assigns zIndex from the options to textbox", function() {
