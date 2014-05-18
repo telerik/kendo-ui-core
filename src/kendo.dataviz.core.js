@@ -1260,7 +1260,7 @@ var __meta__ = {
             textbox.container.options.align = align;
             BoxElement.fn.reflow.call(textbox, targetBox);
             if (rotation) {
-                var margin = getSpacing(options.margin);
+                var margin = options.margin;
                 var box = textbox.box.unpad(margin);
                 textbox.normalBox = box.clone();
                 box.rotate(rotation);
