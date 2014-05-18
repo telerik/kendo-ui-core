@@ -2,6 +2,7 @@
     var dataviz = kendo.dataviz,
         IDPool = dataviz.IDPool,
         Box2D = dataviz.Box2D,
+        Point2D = dataviz.Point2D,
         getElement = dataviz.getElement,
         chartBox = new Box2D(5, 5, 1000, 1000),
         uniqueId = dataviz.uniqueId,
@@ -2609,6 +2610,21 @@
             deepEqual(circle.c.x, SIZE / 2);
             deepEqual(circle.c.y, SIZE / 2);
             deepEqual(circle.r, SIZE / 2);
+        });
+
+        test("renders cross", function() {
+            createShape({ type: "cross" });
+            var cross1 = view.log.path[0];
+            var cross2 = view.log.path[1];
+            deepEqual(cross1.points, [Point2D(0, 0), Point2D(SIZE, SIZE)]);
+            deepEqual(cross2.points, [Point2D(0, SIZE), Point2D(SIZE, 0)]);
+            equal(view.log.group.length, 1);
+        });
+
+        test("sets cross group zIndex", function() {
+            createShape({ type: "cross", zIndex: 1 });
+
+            equal(view.log.group[0].options.zIndex, 1);
         });
 
         test("renders id", function() {

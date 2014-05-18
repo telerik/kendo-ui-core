@@ -2320,7 +2320,10 @@ var __meta__ = {
                     Point2D(box.x2, box.y2)
                 ];
             } else if (type === CROSS) {
-                element = view.createGroup();
+                element = view.createGroup({
+                    zIndex: elementOptions.zIndex
+                });
+
                 element.children.push(view.createPolyline(
                     [Point2D(box.x1, box.y1), Point2D(box.x2, box.y2)], true, elementOptions
                 ));
