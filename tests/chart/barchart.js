@@ -101,7 +101,7 @@
 
         test("legend is positioned at right", function() {
             equal(legend.box.x1,
-                model.box.width() - legend.box.width() -MARGIN);
+                model.box.width() - legend.box.width());
         });
 
         test("legend is positioned at vertical center", function() {

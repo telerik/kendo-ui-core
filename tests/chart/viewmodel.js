@@ -1661,45 +1661,6 @@
             equal(legend.options.zIndex, 1);
         });
 
-        test("creates labels for series", 1, function() {
-            legend.getViewElements(view);
-            equal(view.log.text[0].content, "Series 1");
-        });
-
-        test("second label is below the first", function() {
-            createLegend({
-                items: [
-                    { text: "Series 1" },
-                    { text: "Series 2" }
-                ]
-            });
-
-            var label1 = legend.children[0],
-                label2 = legend.children[1];
-
-            equal(label2.box.y1, label1.box.y2);
-        });
-
-        test("labels have set font", function() {
-            createLegend({
-                labels: {
-                    font: "10px sans-serif"
-                }
-            });
-
-            equal(legend.children[0].options.font, legend.options.labels.font);
-        });
-
-        test("labels have set color", function() {
-            createLegend({
-                labels: {
-                    color: "#cf0"
-                }
-            });
-
-            equal(legend.children[0].options.color, legend.options.labels.color);
-        });
-
         test("positions legend to absolute vertical center (relative to y=0)", function() {
             legend = new dataviz.Legend({
                 items: [ { text: "Series 1" } ]
@@ -1767,7 +1728,7 @@
 
             var legendBox = legend.children[0].box;
 
-            sameBox(legendBox, new Box2D(485, 975, 531.75, 990), TOLERANCE);
+            sameBox(legendBox, new Box2D(455, 955, 551, 1000), TOLERANCE);
         });
 
         test("positions legend to the top should have correct box", function() {
@@ -1777,7 +1738,7 @@
 
             var legendBox = legend.children[0].box;
 
-            sameBox(legendBox, new Box2D(485.75, 15, 532.75, 30), TOLERANCE);
+            sameBox(legendBox, new Box2D(455, 5, 551, 50), TOLERANCE);
         });
 
         test("positions legend to the bottom", function() {
@@ -1823,57 +1784,6 @@
             equal(legend.box.y1, chartBox.y2 - baseHeight - 2 * MARGIN);
         });
 
-
-        //--------------------------------------------------------------
-        var marker, label;
-        module("Legend / Markers", {
-            setup: function() {
-                moduleSetup();
-
-                legend = new dataviz.Legend({
-                    items: [ { text: "Series 1", markerColor: "#f00", labelColor: "#f00" } ],
-                    labels: {
-                        font: SANS12
-                    }
-                });
-
-                legend.reflow(chartBox);
-                legend.getViewElements(view);
-
-                marker = view.log.rect[0];
-                label = view.log.text[0];
-            },
-            teardown: moduleTeardown
-        });
-
-        test("creates markers for series", function() {
-            equal(view.log.rect.length, 2);
-        });
-
-        test("sets marker color", function() {
-            equal(marker.style.fill, "#f00");
-        });
-
-        test("markers have margin on the left", function() {
-            close(marker.x1, legend.box.x1 + MARGIN, TOLERANCE);
-        });
-
-        test("markers have set width", function() {
-            close(marker.x2 - marker.x1, MARKER_SIZE, TOLERANCE);
-        });
-
-        test("markers have margin on the right", function() {
-            close(marker.x2, label.style.x - MARKER_MARGIN, TOLERANCE);
-        });
-
-        test("markers are aligned to text center", function() {
-            close(marker.y1, label.style.y + MARKER_SIZE / 2, TOLERANCE);
-        });
-
-        test("markers are 1/2 of label size", function() {
-            equal(marker.y2 - marker.y1, legend.children[0].box.height() / 2);
-        });
-
         // ------------------------------------------------------------
         var legendBox,
             BORDER_WIDTH = 2,
@@ -1903,13 +1813,13 @@
                 legend.reflow(chartBox);
                 legend.getViewElements(view);
 
-                legendBox = view.log.rect[1];
+                legendBox = view.log.rect[0];
             },
             teardown: moduleTeardown
         });
 
         test("renders box with padding", function() {
-            sameBox(legendBox, new Box2D(919, 482, 1000, 517), TOLERANCE);
+            sameBox(legendBox, new Box2D(902, 483, 988, 518), TOLERANCE);
         });
 
         test("renders border width", function() {
@@ -1928,53 +1838,382 @@
             deepEqual(legendBox.style.fill, BACKGROUND);
         });
 
-        var chart,s
-            label,
-            legend;
+        // ------------------------------------------------------------
 
-        function legendItemClick(clickHandler, options) {
+        var legendSeries = [{name: "item1"}, {name: "item2"}],
+            legendItems;
+
+        function createLegendWithItems(options) {
+            createLegend($.extend({
+                items: [{
+                    active: true,
+                    text: "item1",
+                    labelColor: "blue",
+                    markerColor: "red",
+                    series: legendSeries
+                },{
+                    active: false,
+                    text: "item2",
+                    labelColor: "green",
+                    markerColor: "pink",
+                    series: legendSeries
+                }],
+                labels: {
+                    color: "cyan",
+                    font: SANS12,
+                    margin: 5
+                },
+                markers: {
+                    border: {
+                        width: 2,
+                        color: "yellow"
+                    },
+                    size: 10,
+                    margin: 5,
+                    type: "circle",
+                    padding: 5
+                }
+            }, options));
+            legendItems = legend.container.children[0].children;
+        }
+
+        module("Legend / items", {
+            setup: function() {
+                createLegendWithItems();
+            },
+            teardown: destroyChart
+        });
+
+        test("uses float element to align items", function() {
+            ok(legend.container.children[0] instanceof dataviz.FloatElement);
+        });
+
+        test("sets float element options", function() {
+            var floatElementOptions = legend.container.children[0].options;
+            equal(floatElementOptions.wrap, true);
+            equal(floatElementOptions.vertical, true);
+            createLegendWithItems({position: "top"});
+            floatElementOptions = legend.container.children[0].options;
+            equal(floatElementOptions.wrap, true);
+            equal(floatElementOptions.vertical, false);
+        });
+
+        test("appends items to float element", function() {
+            equal(legendItems.length, 2);
+        });
+
+        test("sets active state", function() {
+            equal(legendItems[0].options.active, true);
+            equal(legendItems[1].options.active, false);
+        });
+
+        test("sets labelColor", function() {
+            equal(legendItems[0].options.labelColor, "blue");
+            equal(legendItems[1].options.labelColor, "green");
+        });
+
+        test("sets markerColor", function() {
+            equal(legendItems[0].options.markerColor, "red");
+            equal(legendItems[1].options.markerColor, "pink");
+        });
+
+        test("sets text", function() {
+            equal(legendItems[0].options.text, "item1");
+            equal(legendItems[1].options.text, "item2");
+        });
+
+        test("sets series", function() {
+            deepEqual(legendItems[0].options.series, legendSeries);
+            deepEqual(legendItems[1].options.series, legendSeries);
+        });
+
+        test("sets labels color", function() {
+            equal(legendItems[0].options.labels.color, "cyan");
+            equal(legendItems[1].options.labels.color, "cyan");
+        });
+
+        test("sets labels font", function() {
+            equal(legendItems[0].options.labels.font, SANS12);
+            equal(legendItems[1].options.labels.font, SANS12);
+        });
+
+        test("sets labels margin", function() {
+            equal(legendItems[0].options.labels.margin, 5);
+            equal(legendItems[1].options.labels.margin, 5);
+        });
+
+       test("sets markers border", function() {
+            var border = legendItems[0].options.markers.border;
+            equal(border.width, 2);
+            equal(border.color, "yellow");
+            border = legendItems[1].options.markers.border;
+            equal(border.width, 2);
+            equal(border.color, "yellow");
+        });
+
+        test("sets markers size", function() {
+            equal(legendItems[0].options.markers.size, 10);
+            equal(legendItems[1].options.markers.size, 10);
+        });
+
+        test("sets markers margin", function() {
+            equal(legendItems[0].options.markers.margin, 5);
+            equal(legendItems[1].options.markers.margin, 5);
+        });
+
+        test("sets markers padding", function() {
+            equal(legendItems[0].options.markers.padding, 5);
+            equal(legendItems[1].options.markers.padding, 5);
+        });
+
+        test("sets markers type", function() {
+            equal(legendItems[0].options.markers.padding, 5);
+            equal(legendItems[1].options.markers.padding, 5);
+        });
+
+        // ------------------------------------------------------------
+
+        var legendItem,
+            container,
+            marker,
+            textbox;
+
+        function createLegendItem(options) {
+            legendItem = new dataviz.LegendItem($.extend({
+                active: true,
+                text: "item1",
+                labelColor: "blue",
+                markerColor: "red",
+                series: legendSeries,
+                labels: {
+                    color: "cyan",
+                    font: SANS12,
+                    margin: 5
+                },
+                markers: {
+                    border: {
+                        width: 2
+                    },
+                    size: 10,
+                    margin: 5,
+                    type: "triangle",
+                    padding: 5
+                }
+            }, options));
+
+            container = legendItem.children[0];
+            marker = container.children[0];
+            textbox = container.children[1];
+        }
+
+        module("LegendItem", {
+            setup: function() {
+                createLegendItem();
+            }
+        });
+
+        test("uses float element to align children", function() {
+            ok(container instanceof dataviz.FloatElement);
+        });
+
+        test("sets float element options", function() {
+            equal(container.options.wrap, false);
+            equal(container.options.vertical, false);
+            equal(container.options.align, "center");
+        });
+
+        test("appends marker to container", function() {
+            ok(marker instanceof dataviz.ShapeElement);
+        });
+
+        test("sets marker color to border color and background", function() {
+            equal(marker.options.border.color, "red");
+            equal(marker.options.background, "red");
+        });
+
+        test("sets marker type", function() {
+            equal(marker.options.type, "triangle");
+        });
+
+        test("sets marker width and height from size", function() {
+            equal(marker.options.width, 10);
+            equal(marker.options.height, 10);
+        });
+
+        test("sets marker border width", function() {
+            equal(marker.options.border.width, 2);
+        });
+
+        test("sets marker margin", function() {
+            equal(marker.options.margin, 5);
+        });
+
+        test("sets marker padding", function() {
+            equal(marker.options.padding, 5);
+        });
+
+        test("appends textbox to container", function() {
+            ok(textbox instanceof dataviz.TextBox);
+        });
+
+        test("sets textbox text", function() {
+            equal(textbox.content, "item1");
+        });
+
+        test("sets textbox color to labelColor", function() {
+            equal(textbox.options.color, "blue");
+        });
+
+        test("sets textbox font", function() {
+            equal(textbox.options.font, SANS12);
+        });
+
+        test("sets textbox margin", function() {
+            equal(textbox.options.margin, 5);
+        });
+
+        // ------------------------------------------------------------
+        var chart,
+            legend,
+            legendItemMarker,
+            legendItemLabel;
+
+        function setupLegendItemEvent(options, itemIndex) {
             chart = createChart($.extend(true, {
                 series: [{
                     type: "line",
                     data: [1,2,3],
                     name: "test",
                     color: "color"
-                }],
-                legendItemClick: clickHandler
+                }]
             }, options));
 
             legend = chart._model.children[0];
-            label = legend.children[0];
-            clickChart(chart, getElement(label.id));
+            legendItem = legend.children[0].children[0].children[itemIndex || 0];
+            var legendItemElements = QUnit.fixture.find("[data-model-id='" + legendItem.modelId +"']");
+            legendItemMarker = legendItemElements.filter("path");
+            legendItemLabel = legendItemElements.filter("text");
         }
 
-        // ------------------------------------------------------------
-        module("Legend / Events / legendItemClick", {
+
+        module("LegendItem / Events / click", {
             teardown: destroyChart
         });
 
-        test("fires when clicking axis labels", 1, function() {
-            legendItemClick(function() { ok(true); });
+        test("fires when clicking item label", 1, function() {
+            setupLegendItemEvent({
+                legendItemClick: function() { ok(true); }
+            });
+            clickChart(chart, legendItemLabel);
+        });
+
+        test("fires when clicking item marker", 1, function() {
+            setupLegendItemEvent({
+                legendItemClick: function() { ok(true); }
+            });
+            clickChart(chart, legendItemMarker);
         });
 
         test("event arguments contain DOM element", 1, function() {
-            legendItemClick(function(e) {
-                equal(e.element.length, 1);
+            setupLegendItemEvent({
+                legendItemClick: function(e) {
+                    equal(e.element.length, 1);
+                }
             });
+            clickChart(chart, legendItemLabel);
         });
 
         test("event arguments contain series name as text", 1, function() {
-            legendItemClick(function(e) {
-                equal(e.text, "test");
+            setupLegendItemEvent({
+                legendItemClick: function(e) {
+                    equal(e.text, "test");
+                }
             });
+            clickChart(chart, legendItemLabel);
         });
 
         test("event arguments contain series", 1, function() {
-            legendItemClick(function(e) {
-                equal(e.series.type, "line");
+            setupLegendItemEvent({
+                legendItemClick: function(e) {
+                    equal(e.series.type, "line");
+                }
             });
+            clickChart(chart, legendItemLabel);
         });
 
+        test("event arguments contain seriesIndex", 1, function() {
+            setupLegendItemEvent({
+                series: [{
+                    name: "series1"
+                }, {
+                    name: "series2"
+                }],
+                legendItemClick: function(e) {
+                    equal(e.seriesIndex, 1);
+                }
+            }, 1);
+            clickChart(chart, legendItemLabel);
+        });
+
+        // ------------------------------------------------------------
+        module("LegendItem / Events / hover", {
+            teardown: destroyChart
+        });
+
+        test("fires when hovering item label", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function() { ok(true); }
+            });
+            triggerEvent("mouseover", legendItemLabel);
+        });
+
+        test("fires when hovering item marker", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function() { ok(true); }
+            });
+            triggerEvent("mouseover", legendItemMarker);
+        });
+
+        test("event arguments contain DOM element", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function(e) {
+                    equal(e.element.length, 1);
+                }
+            });
+            triggerEvent("mouseover", legendItemLabel);
+        });
+
+        test("event arguments contain series name as text", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function(e) {
+                    equal(e.text, "test");
+                }
+            });
+            triggerEvent("mouseover", legendItemLabel);
+        });
+
+        test("event arguments contain series", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function(e) {
+                    equal(e.series.type, "line");
+                }
+            });
+            triggerEvent("mouseover", legendItemLabel);
+        });
+
+        test("event arguments contain seriesIndex", 1, function() {
+            setupLegendItemEvent({
+                series: [{
+                    name: "series1"
+                }, {
+                    name: "series2"
+                }],
+                legendItemHover: function(e) {
+                    equal(e.seriesIndex, 1);
+                }
+            }, 1);
+            triggerEvent("mouseover", legendItemLabel);
+        });
     })();
 
     (function() {

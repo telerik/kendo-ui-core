@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
         <title>MultiLine Text</title>
-        <link href="../dist/styles/dataviz/kendo.common.min.css" rel="stylesheet" />
-        <link href="../dist/styles/dataviz/kendo.default.min.css" rel="stylesheet" />
+        <link href="../dist/styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../dist/styles/web/kendo.default.min.css" rel="stylesheet" />
         <link href="../dist/styles/dataviz/kendo.dataviz.min.css" rel="stylesheet" />        
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
@@ -72,24 +72,38 @@
                     width: 2,
                     color: "blue"
                 },
-                 padding: 10,
-                // margin: 5,
-                rotation: 30
+               // font: "15px arial, sans-serif",
+                 padding: 5,
+                 margin: 5,
+                //rotation: 30
+            },
+            inactiveItems: {
+                labels: {                    
+                    color: "yellow",
+                    font: "30px arial, sans-serif",
+                    template: "KUR"                    
+                }
+            },      
+            markers: {
+              //  size: 15
             },
             border: {
                 width: 5,
                 color: "blue"
             },
-            padding: 5,
-            margin: {
-                right: 50
-            },
-            position: "rigth"
+            // padding: 5,
+            // margin: {
+                // bottom: 200
+            // },
+            background: "cyan",
+             offsetX: 200,
+             offsetY: 20,
+             position: "custom"
         },
         
         seriesDefaults: {
             labels: {
-                visible: true,
+                visible: true,               
                 background: "green"
             }
         },
@@ -126,6 +140,64 @@
             labels: {
                 rotation: 30
             }
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000],
+            visibleInLegend: false
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            }
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            }
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            }
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            }
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                //rotation: 30
+            }
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+              //  rotation: 30
+            }
         }],   
         valueAxis: {
            visible: true,
@@ -157,7 +229,7 @@
         legend: {
             visible: true,                
             labels: {
-                rotation: 30
+                //rotation: 30
             },
             border: {
                 width: 5,
@@ -287,20 +359,15 @@
             text: "Share of Internet Population Growth, 2007 - 2012"
         },
         legend: {
-            visible: false
+            visible: true
         },
         chartArea: {
-            background: ""
-        },
-        panes: [{
+            background: "",
             border: {
-                color: "red",
-                width: 2
-            },
-            height: 200,
-            margin: 3,
-            padding: 5
-        }],        
+                width: 1,
+                color: "black"
+            }
+        },      
         seriesDefaults: {
             labels: {
                 visible: true,

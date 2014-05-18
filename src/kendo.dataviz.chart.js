@@ -52,6 +52,7 @@ var __meta__ = {
         Color = dataviz.Color,
         CurveProcessor = dataviz.CurveProcessor,
         ElementAnimation = dataviz.ElementAnimation,
+        FloatElement = dataviz.FloatElement,
         Note = dataviz.Note,
         LogarithmicAxis = dataviz.LogarithmicAxis,
         NumericAxis = dataviz.NumericAxis,
@@ -106,6 +107,7 @@ var __meta__ = {
         COORD_PRECISION = dataviz.COORD_PRECISION,
         CROSS = "cross",
         CSS_PREFIX = "k-",
+        CUSTOM = "custom",
         DATABOUND = "dataBound",
         DATE = "date",
         DAYS = "days",
@@ -1652,17 +1654,54 @@ var __meta__ = {
         }
     });
 
-    var LegendLabel = Text.extend({
-        init: function(item, options) {
-            var label = this;
+    var LegendItem = BoxElement.extend({
+        init: function(options) {
+            var item = this;
 
-            label.item = item;
+            BoxElement.fn.init.call(item, options);
 
-            Text.fn.init.call(label, item.text,
-                deepExtend({ id: uniqueId(), cursor: { style: POINTER } }, options)
-            );
+            item.createContainer();
+            item.createMarker();
+            item.createLabel();
 
-            label.enableDiscovery();
+            item.enableDiscovery();
+        },
+
+        createContainer: function() {
+            var item = this;
+
+            item.container = new FloatElement({ vertical: false, wrap: false, align: CENTER });
+            item.append(item.container);
+        },
+
+        createMarker: function() {
+            var item = this,
+                options = item.options,
+                markerColor = options.markerColor,
+                markers = options.markers,
+                size = markers.size,
+                markerOptions = deepExtend({}, markers, {
+                    background: markerColor,
+                    border: {
+                        color: markerColor
+                    },
+                    width: size,
+                    height: size
+                });
+
+            item.container.append(new ShapeElement(markerOptions));
+        },
+
+        createLabel: function() {
+            var item = this,
+                options = item.options,
+                labelOptions = deepExtend({}, options.labels, {
+                        color: options.labelColor,
+                        id: uniqueId()
+                    }
+                );
+
+            item.container.append(new TextBox(options.text, labelOptions));
         },
 
         click: function(widget, e) {
@@ -1688,14 +1727,14 @@ var __meta__ = {
         },
 
         eventArgs: function(e) {
-            var item = this.item;
+            var options = this.options;
 
             return {
                 element: $(e.target),
-                text: item.text,
-                series: item.series,
-                seriesIndex: item.series.index,
-                pointIndex: item.pointIndex
+                text: options.text,
+                series: options.series,
+                seriesIndex: options.series.index,
+                pointIndex: options.pointIndex
             };
         }
     });
@@ -1706,13 +1745,24 @@ var __meta__ = {
 
             ChartElement.fn.init.call(legend, options);
 
-            legend.createLabels();
+            if (!inArray(legend.options.position, [TOP, RIGHT, BOTTOM, LEFT, CUSTOM])) {
+                legend.options.position = RIGHT;
+            }
+
+            legend.createContainer();
+
+            legend.createItems();
         },
 
         options: {
             position: RIGHT,
             items: [],
-            labels: {},
+            labels: {
+                cursor: {
+                    style: POINTER
+                },
+                zIndex: 1
+            },
             offsetX: 0,
             offsetY: 0,
             margin: getSpacing(10),
@@ -1726,231 +1776,149 @@ var __meta__ = {
             markers: {
                 border: {
                     width: 1
-                }
+                },
+                width: 7,
+                height: 7,
+                margin: {
+                    left: 5,
+                    right: 5
+                },
+                type: "rect",
+                align: LEFT,
+                vAlign: CENTER,
+                cursor: {
+                    style: POINTER
+                },
+                zIndex: 1
             }
         },
 
-        createLabels: function() {
+        createContainer: function() {
             var legend = this,
-                items = legend.options.items,
+                options = legend.options,
+                position = options.position,
+                align = position,
+                vAlign = CENTER;
+
+            if (position == CUSTOM) {
+                align = RIGHT;
+            } else if (inArray(position, [TOP, BOTTOM])) {
+                align = CENTER;
+                vAlign = position;
+            }
+
+            legend.container = new BoxElement(deepExtend({}, {
+                margin: options.margin,
+                padding: options.padding,
+                vAlign: vAlign,
+                align: align,
+                zIndex: options.zIndex,
+                shrinkToFit: true
+            }, options));
+
+            legend.append(legend.container);
+        },
+
+        createItems: function() {
+            var legend = this,
+                options = legend.options,
+                items = options.items,
                 count = items.length,
-                i, item;
+                vertical = legend.isVertical(),
+                innerElement, i, item;
+
+            innerElement = new FloatElement({
+                vertical: vertical
+            });
 
             for (i = 0; i < count; i++) {
                 item = items[i];
-                legend.append(new LegendLabel(item, deepExtend({},
-                    legend.options.labels, item.labels )));
+
+                innerElement.append(new LegendItem(deepExtend({}, item, {
+                    markers: options.markers,
+                    labels: options.labels
+                })));
             }
+            legend.container.append(innerElement);
+        },
+
+        isVertical: function() {
+            var legend = this,
+                options = legend.options,
+                vertical = inArray(options.position, [ LEFT, RIGHT, CUSTOM ]);
+
+            if (defined(options.vertical)) {
+                vertical = options.vertical;
+            }
+
+            return vertical;
         },
 
         reflow: function(targetBox) {
             var legend = this,
                 options = legend.options,
-                childrenCount = legend.children.length;
+                container = legend.container,
+                vertical = legend.isVertical(),
+                containerBox = targetBox.clone();
 
-            if (childrenCount === 0) {
+            if (container.children[0].children.length === 0) {
                 legend.box = targetBox.clone();
                 return;
             }
 
-            if (options.position == "custom") {
-                legend.customLayout(targetBox);
-                return;
+            if (vertical) {
+                containerBox.y1 = 0;
             }
 
-            if (options.position == TOP || options.position == BOTTOM) {
-                legend.horizontalLayout(targetBox);
+            container.reflow(containerBox);
+
+            if (options.position === CUSTOM) {
+                legend.containerCustomReflow(targetBox);
             } else {
-                legend.verticalLayout(targetBox);
+                legend.containerReflow(targetBox);
             }
         },
 
-        getViewElements: function(view) {
-            var legend = this,
-                children = legend.children,
-                options = legend.options,
-                items = options.items,
-                count = items.length,
-                markerSize = legend.markerSize(),
-                group = view.createGroup({ zIndex: options.zIndex }),
-                border = options.border || {},
-                padding, markerBox, labelBox, color,
-                label, box, i;
-
-            append(group.children, ChartElement.fn.getViewElements.call(legend, view));
-
-            for (i = 0; i < count; i++) {
-                color = items[i].markerColor;
-                label = children[i];
-                markerBox = Box2D();
-                box = label.box;
-
-                labelBox = labelBox ? labelBox.wrap(box) : box.clone();
-
-                markerBox.x1 = box.x1 - markerSize * 2;
-                markerBox.x2 = markerBox.x1 + markerSize;
-
-                if (options.position == TOP || options.position == BOTTOM) {
-                    markerBox.y1 = box.y1 + markerSize / 2;
-                } else {
-                    markerBox.y1 = box.y1 + (box.height() - markerSize) / 2;
-                }
-
-                markerBox.y2 = markerBox.y1 + markerSize;
-
-                group.children.push(view.createRect(markerBox, {
-                    fill: color,
-                    stroke: color,
-                    strokeWidth: options.markers.border.width,
-                    data: { modelId: label.modelId },
-                    cursor: {
-                        style: POINTER
-                    }
-                }));
-            }
-
-            if (children.length > 0) {
-                padding = getSpacing(options.padding);
-                padding.left += markerSize * 2;
-                labelBox.pad(padding);
-                group.children.unshift(view.createRect(labelBox, {
-                    stroke: border.width ? border.color : "",
-                    strokeWidth: border.width,
-                    dashType: border.dashType,
-                    fill: options.background
-                }));
-            }
-
-            return [ group ];
-        },
-
-        verticalLayout: function(targetBox) {
+        containerReflow: function(targetBox) {
             var legend = this,
                 options = legend.options,
-                children = legend.children,
-                childrenCount = children.length,
-                labelBox = children[0].box.clone(),
-                margin = getSpacing(options.margin),
-                markerSpace = legend.markerSize() * 2,
-                offsetX, offsetY, label, i;
+                pos = options.position == TOP || options.position == BOTTOM ? X : Y,
+                containerBox = legend.container.box,
+                box = containerBox.clone();
 
-            // Position labels below each other
-            for (i = 1; i < childrenCount; i++) {
-                label = legend.children[i];
-                label.box.alignTo(legend.children[i - 1].box, BOTTOM);
-                labelBox.wrap(label.box);
+            if (options.offsetX || options.offsetY) {
+                containerBox.translate(options.offsetX, options.offsetY);
+                legend.container.reflow(containerBox);
             }
 
-            // Vertical center is calculated relative to the container, not the parent!
-            if (options.position == LEFT) {
-                offsetX = targetBox.x1 + markerSpace + margin.left;
-                offsetY = (targetBox.y2 - labelBox.height()) / 2;
-                labelBox.x2 += markerSpace + margin.left + margin.right;
-            } else {
-                offsetX = targetBox.x2 - labelBox.width() - margin.right;
-                offsetY = (targetBox.y2 - labelBox.height()) / 2;
-                labelBox.translate(offsetX, offsetY);
-                labelBox.x1 -= markerSpace + margin.left;
-            }
-
-            legend.translateChildren(offsetX + options.offsetX,
-                    offsetY + options.offsetY);
-
-            var labelBoxWidth = labelBox.width();
-            labelBox.x1 = math.max(targetBox.x1, labelBox.x1);
-            labelBox.x2 = labelBox.x1 + labelBoxWidth;
-
-            labelBox.y1 = targetBox.y1;
-            labelBox.y2 = targetBox.y2;
-
-            legend.box = labelBox;
-        },
-
-        horizontalLayout: function(targetBox) {
-            var legend = this,
-                options = legend.options,
-                children = legend.children,
-                childrenCount = children.length,
-                box = children[0].box.clone(),
-                markerWidth = legend.markerSize() * 3,
-                offsetX,
-                offsetY,
-                margin = getSpacing(options.margin),
-                boxWidth = children[0].box.width() + markerWidth,
-                plotAreaWidth = targetBox.width(),
-                label,
-                labelY = 0,
-                i;
-
-            // Position labels next to each other
-            for (i = 1; i < childrenCount; i++) {
-                label = children[i];
-
-                boxWidth += label.box.width() + markerWidth;
-                if (boxWidth > plotAreaWidth - markerWidth) {
-                    label.box = Box2D(box.x1, box.y2,
-                        box.x1 + label.box.width(), box.y2 + label.box.height());
-                    boxWidth = label.box.width() + markerWidth;
-                    labelY = label.box.y1;
-                } else {
-                    label.box.alignTo(children[i - 1].box, RIGHT);
-                    label.box.y2 = labelY + label.box.height();
-                    label.box.y1 = labelY;
-                    label.box.translate(markerWidth, 0);
-                }
-                box.wrap(label.box);
-            }
-
-            offsetX = (targetBox.width() - box.width() + markerWidth) / 2;
-            if (options.position === TOP) {
-                offsetY = targetBox.y1 + margin.top;
-                box.y2 = targetBox.y1 + box.height() + margin.top + margin.bottom;
-                box.y1 = targetBox.y1;
-            } else {
-                offsetY = targetBox.y2 - box.height() - margin.bottom;
-                box.y1 = targetBox.y2 - box.height() - margin.top - margin.bottom;
-                box.y2 = targetBox.y2;
-            }
-
-            legend.translateChildren(offsetX + options.offsetX,
-                    offsetY + options.offsetY);
-
-            box.x1 = targetBox.x1;
-            box.x2 = targetBox.x2;
+            box[pos + 1] = targetBox[pos + 1];
+            box[pos + 2] = targetBox[pos + 2];
 
             legend.box = box;
         },
 
-        customLayout: function (targetBox) {
+        containerCustomReflow: function (targetBox) {
             var legend = this,
                 options = legend.options,
-                children = legend.children,
-                childrenCount = children.length,
-                labelBox = children[0].box.clone(),
-                markerWidth = legend.markerSize() * 2,
-                i;
+                offsetX = options.offsetX,
+                offsetY = options.offsetY,
+                container = legend.container;
 
-            // Position labels next to each other
-            for (i = 1; i < childrenCount; i++) {
-                labelBox = legend.children[i].box;
-                labelBox.alignTo(legend.children[i - 1].box, BOTTOM);
-                labelBox.wrap(labelBox);
-            }
-
-            legend.translateChildren(options.offsetX + markerWidth, options.offsetY);
+            container.reflow(Box2D(
+                offsetX, offsetY,
+                offsetX + container.box.width(), offsetY + container.box.height()
+            ));
 
             legend.box = targetBox;
         },
 
-        markerSize: function() {
+        getViewElements: function(view) {
             var legend = this,
-                children = legend.children;
+                group = view.createGroup({ zIndex: legend.options.zIndex });
 
-            if (children.length > 0) {
-                return children[0].box.height() / 2;
-            } else {
-                return 0;
-            }
+            append(group.children, ChartElement.fn.getViewElements.call(legend, view));
+
+            return [group];
         }
     });
 
@@ -11648,6 +11616,7 @@ var __meta__ = {
         Highlight: Highlight,
         SharedTooltip: SharedTooltip,
         Legend: Legend,
+        LegendItem: LegendItem,
         LineChart: LineChart,
         LinePoint: LinePoint,
         LineSegment: LineSegment,
