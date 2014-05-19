@@ -6,17 +6,8 @@
         Matrix = g.Matrix,
 
         d = dataviz.drawing,
-        Circle = d.Circle,
-        Group = d.Group,
-        MultiPath = d.MultiPath,
-        Path = d.Path,
-        Text = d.Text,
-
         canv = d.canvas,
-        Node = canv.Node,
-        PathNode = canv.PathNode,
-        Surface = canv.Surface,
-        TextNode = canv.TextNode;
+        Surface = canv.Surface;
 
     function mockContext(members) {
         return kendo.deepExtend({
@@ -92,7 +83,7 @@
 
     module("Node", {
         setup: function() {
-            node = new Node();
+            node = new canv.Node();
         }
     });
 
@@ -456,5 +447,56 @@
         });
 
         pathNode.renderTo(ctx);
+    });
+
+    // ------------------------------------------------------------
+    var text;
+    var textNode;
+
+    module("TextNode", {
+        setup: function() {
+            text = new d.Text("Foo", new Point(10, 20), { font: "arial" });
+            text.measure = function() {
+                return {
+                    width: 20, height: 10, baseline: 15
+                };
+            }
+
+            textNode = new canv.TextNode(text);
+        }
+    });
+
+    test("renders origin accounting for baseline", function() {
+        textNode.renderTo(mockContext({
+            fillText: function(content, x, y) {
+                deepEqual([x, y], [10, 35]);
+            }
+        }));
+    });
+
+    test("renders content", function() {
+        textNode.renderTo(mockContext({
+            fillText: function(content) {
+                equal(content, "Foo");
+            }
+        }));
+    });
+
+    test("sets font", function() {
+        var ctx = mockContext({
+            fillText: function(content) {
+                equal(ctx.font, "arial");
+            }
+        });
+
+        textNode.renderTo(ctx);
+    });
+
+    test("contentChange invalidates node", function() {
+        textNode.invalidate = function() {
+            ok(true);
+        };
+
+        text.content("Bar");
     });
 })();
