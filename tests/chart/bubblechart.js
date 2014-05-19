@@ -408,7 +408,7 @@
             equal(points[0].options.color, "#f00");
         });
 
-        test("applies color function for each point", 2, function() {
+        test("applies color function for each point", 1, function() {
             createBubbleChart({
                 dataSource: null,
                 series: [{
@@ -419,7 +419,7 @@
             });
         });
 
-        test("color fn argument contains value", 2, function() {
+        test("color fn argument contains value", 1, function() {
             createBubbleChart({
                 dataSource: null,
                 series: [{
@@ -430,7 +430,7 @@
             });
         });
 
-        test("color fn argument contains dataItem", 2, function() {
+        test("color fn argument contains dataItem", 1, function() {
             createBubbleChart({
                 dataSource: null,
                 series: [{
@@ -443,7 +443,7 @@
             });
         });
 
-        test("color fn argument contains series", 2, function() {
+        test("color fn argument contains series", 1, function() {
             createBubbleChart({
                 dataSource: null,
                 series: [{
@@ -479,6 +479,23 @@
             });
 
             equal(points.length, 0);
+        });
+
+        test("color function should be with bigger priority negative values color", function() {
+            createBubbleChart({
+                series: [{
+                    type: "bubble",
+                    name: "series 1",
+                    data: [[1, 10, -100]],
+                    color: function() { return "red" },
+                    negativeValues: {
+                        color: "blue",
+                        visible: true
+                    }
+                }]
+            });
+
+            equal(points[0].color, "red");
         });
 
     })();
@@ -557,11 +574,11 @@
             equal(note.label.content, "name");
         });
     })();
-    
+
     // ------------------------------------------------------------
-    
-    (function() {      
-                       
+
+    (function() {
+
         module("Bubble Chart / Values exceeding axis min or max options ", {});
 
         test("values are not limited", 2, function() {
@@ -580,8 +597,8 @@
                 },
                 options: {}
             };
-            
-            setupBubbleChart(plotArea, { series: [ {data: [{x: 1, y: 1, size: 100}], type: "bubble"} ] });          
+
+            setupBubbleChart(plotArea, { series: [ {data: [{x: 1, y: 1, size: 100}], type: "bubble"} ] });
         });
     })();
 })();

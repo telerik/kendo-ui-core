@@ -5529,11 +5529,11 @@ var __meta__ = {
                     type: BUBBLE
                 };
 
-            var color = fields.color || series.color ||
+            var color = fields.color ||
                 seriesColors[fields.pointIx % seriesColors.length];
 
-            if (value.size < 0) {
-                color = series.negativeValues.color || color;
+            if (kendo.isFunction(series.color)) {
+                color = series.color;
             }
 
             pointOptions = deepExtend({
@@ -5549,7 +5549,6 @@ var __meta__ = {
                 color: color,
                 markers: {
                     type: CIRCLE,
-                    background: color,
                     border: series.border,
                     opacity: series.opacity,
                     animation: animationOptions
@@ -5557,6 +5556,15 @@ var __meta__ = {
             });
 
             chart.evalPointOptions(pointOptions, value, fields);
+
+            if (value.size < 0 && series.negativeValues.visible && !kendo.isFunction(series.color)) {
+                pointOptions.color = valueOrDefault(series.negativeValues.color, pointOptions.color);
+            }
+
+            pointOptions.markers.background = valueOrDefault(
+                pointOptions.markers.background,
+                pointOptions.color
+            );
 
             point = new Bubble(value, pointOptions);
 
