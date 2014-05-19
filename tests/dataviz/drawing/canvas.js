@@ -150,6 +150,17 @@
         }
     });
 
+    test("saves and restores context", 2, function() {
+        pathNode.renderTo(mockContext({
+            save: function() {
+                ok(true);
+            },
+            restore: function() {
+                ok(true);
+            }
+        }));
+    });
+
     test("renders straight segments", 5, function() {
         path.moveTo(0, 0).lineTo(10, 20);
 
@@ -178,25 +189,63 @@
         }));
     });
 
-    /*
-    test("renders curve", function() {
+    test("renders curve", 4, function() {
         path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
 
-        ok(pathNode.render().indexOf("d='M0 0 C 10 10 20 10 30 0'") !== -1);
+        var order = 0;
+        pathNode.renderTo(mockContext({
+            moveTo: function(x, y) {
+                equal(order++, 0, "#");
+                deepEqual([x, y], [0, 0]);
+            },
+            bezierCurveTo: function(cp1x, cp1y, cp2x, cp2y, x, y) {
+                equal(order++, 1, "#");
+                deepEqual([cp1x, cp1y, cp2x, cp2y, x, y], [10, 10, 20, 10, 30, 0]);
+            }
+        }));
     });
 
-    test("switches between line and curve", function() {
+    test("switches between line and curve", 6, function() {
         path.moveTo(0, 0).lineTo(5, 5).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
 
-        ok(pathNode.render().indexOf("d='M0 0 L 5 5 C 10 10 20 10 30 0'") !== -1);
+        var order = 0;
+        pathNode.renderTo(mockContext({
+            moveTo: function(x, y) {
+                equal(order++, 0, "#");
+                deepEqual([x, y], [0, 0]);
+            },
+            lineTo: function(x, y) {
+                equal(order++, 1, "#");
+                deepEqual([x, y], [5, 5]);
+            },
+            bezierCurveTo: function(cp1x, cp1y, cp2x, cp2y, x, y) {
+                equal(order++, 2, "#");
+                deepEqual([cp1x, cp1y, cp2x, cp2y, x, y],
+                          [10, 10, 20, 10, 30, 0]);
+            }
+        }));
     });
 
-    test("switches between curve and line", function() {
+    test("switches between curve and line", 6, function() {
         path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0)).lineTo(40, 10);
 
-        ok(pathNode.render().indexOf("d='M0 0 C 10 10 20 10 30 0 L 40 10'") !== -1);
+        var order = 0;
+        pathNode.renderTo(mockContext({
+            moveTo: function(x, y) {
+                equal(order++, 0, "#");
+                deepEqual([x, y], [0, 0]);
+            },
+            bezierCurveTo: function(cp1x, cp1y, cp2x, cp2y, x, y) {
+                equal(order++, 1, "#");
+                deepEqual([cp1x, cp1y, cp2x, cp2y, x, y],
+                          [10, 10, 20, 10, 30, 0]);
+            },
+            lineTo: function(x, y) {
+                equal(order++, 2, "#");
+                deepEqual([x, y], [40, 10]);
+            }
+        }));
     });
-    */
 
     test("does not render empty path", 0, function() {
         pathNode.renderTo(mockContext({

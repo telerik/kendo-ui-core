@@ -246,8 +246,15 @@
             ctx.moveTo(s.anchor.x, s.anchor.y);
 
             for (var i = 1; i < segments.length; i++) {
+                var ps = segments[i - 1];
                 s = segments[i];
-                ctx.lineTo(s.anchor.x, s.anchor.y);
+                if (ps.controlOut && s.controlIn) {
+                    ctx.bezierCurveTo(ps.controlOut.x, ps.controlOut.y,
+                                      s.controlIn.x, s.controlIn.y,
+                                      s.anchor.x, s.anchor.y);
+                } else {
+                    ctx.lineTo(s.anchor.x, s.anchor.y);
+                }
             }
 
             if (src.options.closed) {
