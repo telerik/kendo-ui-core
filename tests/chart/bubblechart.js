@@ -228,6 +228,28 @@
 
             equal(outline.options.strokeOpacity, 0.5);
         });
+
+        // ------------------------------------------------------------
+        module("Bubble Chart / Rendering", {
+            setup: function() {
+                plotArea = new PlotAreaStub();
+                setupBubbleChart(plotArea, { series: [ series ] });
+            }
+        });
+
+        test("generates unique id", function() {
+            ok(bubbleChart.id);
+        });
+
+        test("renders group with bubblechart id and no animations", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === bubbleChart.id;
+            });
+
+            ok(group && !group.options.animation);
+            equal(group.options.id, bubbleChart.id);
+        });
+
     })();
 
     (function() {

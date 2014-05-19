@@ -57,6 +57,35 @@
         );
 
         // ------------------------------------------------------------
+        module("Bullet Chart", {
+            setup: function() {
+                view = new ViewStub();
+                bulletChart = new dataviz.BulletChart(plotArea, {
+                    series: [{
+                        data: [[0, 0]],
+                        notes: { label: { } }
+                    }]
+                });
+
+                bulletChart.reflow(chartBox);
+                bulletChart.getViewElements(view);
+            }
+        });
+
+        test("generates unique id", function() {
+            ok(bulletChart.id);
+        });
+
+        test("renders group with bulletChart id and no animations", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === bulletChart.id;
+            });
+
+            ok(group && !group.options.animation);
+            equal(group.options.id, bulletChart.id);
+        });
+
+        // ------------------------------------------------------------
         module("Bullet Chart / Rendering", {
             setup: function() {
                 bulletChart = new dataviz.BulletChart(plotArea, {

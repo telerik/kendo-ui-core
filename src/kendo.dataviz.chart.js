@@ -455,7 +455,7 @@ var __meta__ = {
                 view.load(model);
                 chart._viewElement = chart._renderView(view);
                 chart._tooltip = chart._createTooltip();
-                chart._highlight = new Highlight(view);
+                chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
             }
         },
@@ -3231,6 +3231,7 @@ var __meta__ = {
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
+            chart.id = uniqueId();
 
             chart.plotArea = plotArea;
             chart.categoryAxis = plotArea.seriesCategoryAxis(options.series[0]);
@@ -3657,6 +3658,17 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.value;
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                elements = ChartElement.fn.getViewElements.call(chart, view),
+                highlightGroup = view.createGroup({
+                    id: chart.id
+                });
+
+            highlightGroup.children = elements;
+            return [highlightGroup];
         }
     });
 
@@ -4787,11 +4799,15 @@ var __meta__ = {
                     animation: {
                         type: CLIP
                     }
+                }),
+                highlightGroup = view.createGroup({
+                    id: chart.id
                 });
 
             group.children = elements;
+            highlightGroup.children = [group];
 
-            return [group];
+            return [highlightGroup];
         }
     });
     deepExtend(LineChart.fn, LineChartMixin);
@@ -5171,6 +5187,7 @@ var __meta__ = {
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
+            chart.id = uniqueId();
 
             chart.plotArea = plotArea;
 
@@ -5420,10 +5437,14 @@ var __meta__ = {
                     animation: {
                         type: CLIP
                     }
+                }),
+                highlightGroup = view.createGroup({
+                    id: chart.id
                 });
 
             group.children = elements;
-            return [group];
+            highlightGroup.children = [group];
+            return [highlightGroup];
         },
 
         traverseDataPoints: function(callback) {
@@ -5629,7 +5650,9 @@ var __meta__ = {
         getViewElements: function(view) {
             var chart = this,
                 elements = ChartElement.fn.getViewElements.call(chart, view),
-                group = view.createGroup();
+                group = view.createGroup({
+                     id: chart.id
+                });
 
             group.children = elements;
             return [group];
@@ -5958,10 +5981,15 @@ var __meta__ = {
                     animation: {
                         type: CLIP
                     }
-                });
+                }),
+            highlightGroup = view.createGroup({
+                id: chart.id
+            });
 
             group.children = elements;
-            return [group];
+            highlightGroup.children = [group];
+
+            return [highlightGroup];
         }
     });
 
@@ -9344,10 +9372,11 @@ var __meta__ = {
         BubbleAnimationDecorator = animationDecorator(BUBBLE, BubbleAnimation);
 
     var Highlight = Class.extend({
-        init: function(view) {
+        init: function(view, viewElement) {
             var highlight = this;
 
             highlight.view = view;
+            highlight.viewElement = viewElement;
             highlight._overlays = [];
         },
 
@@ -9384,10 +9413,11 @@ var __meta__ = {
                                 overlayElement = view.renderElement(overlay);
                                 overlays.push(overlayElement);
 
-                                if (point.owner && point.owner.pane) {
-                                    container = getElement(point.owner.pane.chartContainer.id);
-                                    container.appendChild(overlayElement);
+                                if (point.owner && point.owner.id) {
+                                    container = getElement(point.owner.id);
                                 }
+
+                                (container || highlight.viewElement).appendChild(overlayElement);
                             }
                         }
 

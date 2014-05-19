@@ -3,7 +3,8 @@
         highlight,
         viewMock,
         element,
-        clipGroup,
+        ownerGroup,
+        viewElement,
         RED = "rgb(255,0,0)",
         GREEN = "rgb(0,255,0)",
         BLUE = "rgb(0,0,255)";
@@ -13,17 +14,20 @@
         return uniqueId.id++;
     }
 
-    function createHighlight(options) {
+    function createHighlight() {
         viewMock = {
             renderElement: function(element) {
                 return $("<div class='" + element.type + "'></div>")[0];
             }
         };
 
-        highlight = new dataviz.Highlight(viewMock, options);
+        viewElement = $("<div id='viewelement'></div>");
+        QUnit.fixture.append(viewElement);
 
-        clipGroup = $("<div id='clipgroup'></div>");
-        QUnit.fixture.append(clipGroup);
+        highlight = new dataviz.Highlight(viewMock, viewElement[0]);
+
+        ownerGroup = $("<div id='ownergroup'></div>");
+        QUnit.fixture.append(ownerGroup);
     }
 
     function destroyHighlight() {
@@ -35,11 +39,7 @@
             return { type: "overlay" };
         },
         owner: {
-            pane: {
-                chartContainer: {
-                    id: "clipgroup"
-                }
-            }
+            id: "ownergroup"
         },
         toggleHighlight: function () {}
     };
@@ -77,9 +77,15 @@
             equal($(".overlay").length, 1);
         });
 
-        test("Appends overlay element to clip group", function() {
+        test("Appends overlay element to owner group", function() {
             highlight.show(elementStub);
-            ok(clipGroup.children().last().is(".overlay"));
+            ok(ownerGroup.children().last().is(".overlay"));
+        });
+
+        test("Appends overlay element to view element if owner group is not found", function() {
+            ownerGroup.remove();
+            highlight.show(elementStub);
+            ok(viewElement.children().last().is(".overlay"));
         });
 
         test("Does not render overlay if no overlay element exists", function() {
@@ -120,10 +126,17 @@
             equal($(".overlay").length, 2);
         });
 
-        test("Appends overlay elements to clip group", function() {
+        test("Appends overlay elements to owner group", function() {
             highlight.show([elementStub, elementStub]);
 
-            equal(clipGroup.find(".overlay").length, 2);
+            equal(ownerGroup.find(".overlay").length, 2);
+        });
+
+        test("Appends overlay elements to view element if owner group is not found", function() {
+            ownerGroup.remove();
+            highlight.show([elementStub, elementStub]);
+
+            equal(viewElement.find(".overlay").length, 2);
         });
 
         test("Removes overlay elements", function() {
@@ -138,10 +151,7 @@
 
         module("Highlight / Toggle", {
             setup: function() {
-                createHighlight({
-                    fill: "#cf0",
-                    fillOpacity: 0.5
-                });
+                createHighlight();
             },
             teardown: function() {
                 QUnit.fixture.empty();

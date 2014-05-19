@@ -87,6 +87,27 @@
             );
 
         // ------------------------------------------------------------
+        module("Bar Chart", {
+            setup: function() {
+                setupBarChart(plotArea, { series: [ positiveSeries ] });
+                series.getViewElements(view);
+            }
+        });
+
+        test("generates unique id", function() {
+            ok(series.id);
+        });
+
+        test("renders group with series id and no animations", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === series.id;
+            });
+
+            ok(group && !group.options.animation);
+            equal(group.options.id, series.id);
+        });
+
+        // ------------------------------------------------------------
         module("Bar Chart / Positive Values", {
             setup: function() {
                 setupBarChart(plotArea, { series: [ positiveSeries ] });

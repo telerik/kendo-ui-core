@@ -169,11 +169,11 @@
         test("sets point dataItem", function() {
             equal(typeof candlestickChart.points[0].dataItem, "object");
         });
-        
+
         // ------------------------------------------------------------
-                       
+
         module("Candlestick Chart / Values exceeding value axis min or max options ", {});
-        
+
         test("values are not limited", 5, function() {
             var plotArea = stubPlotArea(
                 function(categoryIndex) {
@@ -189,9 +189,9 @@
                     }
                 }
             );
- 
-            setupCandlestickChart(plotArea, { series: [ {data: [[1,2,3,4]], type: "candlestick"} ] });           
-        });        
+
+            setupCandlestickChart(plotArea, { series: [ {data: [[1,2,3,4]], type: "candlestick"} ] });
+        });
 
         // ------------------------------------------------------------
         module("Candlestick Chart / Rendering", {
@@ -274,12 +274,31 @@
             equal(view.log.rect[1].style.data.modelId, candlestickChart.points[0].modelId);
         });
 
+        test("generates unique id", function() {
+            ok(candlestickChart.id);
+        });
+
+        test("renders group with CandlestickChart id and no animations", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === candlestickChart.id;
+            });
+
+            ok(group && !group.options.animation);
+            equal(group.options.id, candlestickChart.id);
+        });
+
         test("renders chart group", function() {
-            equal(view.log.group.length, 1);
+            var group = view.findInLog("group", function(item) {
+                return item.options.animation;
+            });
+            ok(group);
         });
 
         test("sets group animation", function() {
-            equal(view.log.group[0].options.animation.type, "clip");
+            var group = view.findInLog("group", function(item) {
+                return item.options.animation;
+            });
+            equal(group.options.animation.type, "clip");
         });
 
         // ------------------------------------------------------------
@@ -582,14 +601,14 @@
             deepEqual([anchor.x, anchor.y],
                  [point.box.x2 + TOOLTIP_OFFSET, point.box.y1 + TOOLTIP_OFFSET], TOLERANCE)
         });
-        
+
         test("tooltipAnchor is limited to the clip box", function() {
             createPoint({}, Box2D(0,2,100,4));
-           
+
             var anchor = point.tooltipAnchor(10, 10);
             deepEqual([anchor.x, anchor.y],
                  [point.box.x2 + TOOLTIP_OFFSET, 2 + TOOLTIP_OFFSET], TOLERANCE)
-        });        
+        });
 
     })();
 
