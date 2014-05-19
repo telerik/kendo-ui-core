@@ -103,6 +103,14 @@
         node.load([new d.Path()]);
     });
 
+    test("load appends MultiPathNode", function() {
+        node.append = function(child) {
+            ok(child instanceof canv.MultiPathNode);
+        };
+
+        node.load([new d.MultiPath()]);
+    });
+
     test("load appends TextNode", function() {
         node.append = function(child) {
             ok(child instanceof canv.TextNode);
@@ -152,7 +160,7 @@
         }));
     });
 
-    test("renders straight segments", 5, function() {
+    test("renders straight segments", 3, function() {
         path.moveTo(0, 0).lineTo(10, 20);
 
         pathNode.renderTo(mockContext({
@@ -160,12 +168,10 @@
                 ok(true);
             },
             moveTo: function(x, y) {
-                equal(x, 0);
-                equal(y, 0);
+                deepEqual([x, y], [0, 0]);
             },
             lineTo: function(x, y) {
-                equal(x, 10);
-                equal(y, 20);
+                deepEqual([x, y], [10, 20]);
             }
         }));
     });
@@ -447,6 +453,41 @@
         });
 
         pathNode.renderTo(ctx);
+    });
+
+    // ------------------------------------------------------------
+    var multiPath,
+        multiPathNode;
+
+    module("MultiPathNode", {
+        setup: function() {
+            multiPath = new d.MultiPath();
+            multiPathNode = new canv.MultiPathNode(multiPath);
+        }
+    });
+
+    test("renders composite paths", 4, function() {
+        multiPath
+            .moveTo(0, 0).lineTo(10, 20)
+            .moveTo(10, 10).lineTo(10, 20);
+
+        var order = 0;
+        multiPathNode.renderTo(mockContext({
+            moveTo: function(x, y) {
+                if (order === 0) {
+                    deepEqual([x, y], [0, 0]);
+                } else if (order === 2) {
+                    deepEqual([x, y], [10, 10]);
+                }
+
+                order++;
+            },
+            lineTo: function(x, y) {
+                deepEqual([x, y], [10, 20]);
+
+                order++;
+            }
+        }));
     });
 
     // ------------------------------------------------------------

@@ -127,6 +127,8 @@
 
                 if (srcElement instanceof Path) {
                     childNode = new PathNode(srcElement);
+                } else if (srcElement instanceof d.MultiPath) {
+                    childNode = new MultiPathNode(srcElement);
                 } else if (srcElement instanceof d.Text) {
                     childNode = new TextNode(srcElement);
                 } else {
@@ -163,7 +165,7 @@
             ctx.beginPath();
 
             this.setTransform(ctx);
-            this.renderPoints(ctx);
+            this.renderPoints(ctx, this.srcElement);
 
             this.setLineDash(ctx);
             this.setLineCap(ctx);
@@ -216,10 +218,10 @@
 
         setLineCap: function(ctx) {
             var dashType = this.dashType();
+            var stroke = this.srcElement.options.stroke;
             if (dashType && dashType !== SOLID) {
                 ctx.lineCap = BUTT;
-            } else {
-                var stroke = this.srcElement.options.stroke;
+            } else if (stroke) {
                 ctx.lineCap = valueOrDefault(stroke.lineCap, "square");
             }
         },
@@ -231,9 +233,8 @@
             }
         },
 
-        renderPoints: function(ctx) {
-            var src = this.srcElement;
-            var segments = src.segments;
+        renderPoints: function(ctx, path) {
+            var segments = path.segments;
 
             if (segments.length === 0) {
                 return;
@@ -254,8 +255,17 @@
                 }
             }
 
-            if (src.options.closed) {
+            if (path.options.closed) {
                 ctx.closePath();
+            }
+        }
+    });
+
+    var MultiPathNode = PathNode.extend({
+        renderPoints: function(ctx) {
+            var paths = this.srcElement.paths;
+            for (var i = 0; i < paths.length; i++) {
+                PathNode.fn.renderPoints(ctx, paths[i]);
             }
         }
     });
@@ -291,6 +301,7 @@
         canvas: {
             Surface: Surface,
             Node: Node,
+            MultiPathNode: MultiPathNode,
             PathNode: PathNode,
             TextNode: TextNode
         }
