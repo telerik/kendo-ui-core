@@ -771,6 +771,23 @@
         });
 
         // ------------------------------------------------------------
+        module("Matrix / toArray", {
+            setup: function() {
+                matrix = new Matrix(1.2345678,0,0,1.2345, 2, 3);
+            }
+        });
+
+        test("returns an array with the values", function() {
+            result = matrix.toArray();
+            deepEqual(result, [1.2345678,0,0,1.2345,2,3]);
+        });
+
+        test("returns an array with the values rounded to the specified precision", function() {
+            result = matrix.toArray(3);
+            deepEqual(result, [1.235,0,0,1.235,2,3]);
+        });
+
+        // ------------------------------------------------------------
         module("Matrix / toString", {
             setup: function() {
                 matrix = new Matrix(1.2345678,0,0,1.2345, 2, 3);

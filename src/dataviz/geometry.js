@@ -442,7 +442,16 @@
         }
     });
 
+    // TODO: Consider renaming to TransformMatrix
     var Matrix = Class.extend({
+        /* Transformation matrix
+         *
+         *   a c e
+         * ( b d f )
+         *   0 0 1
+         *
+         */
+
         init: function (a, b, c, d, e, f) {
             this.a = a || 0;
             this.b = b || 0;
@@ -475,19 +484,23 @@
             return this.a === other.a && this.b === other.b &&
                    this.c === other.c && this.d === other.d &&
                    this.e === other.e && this.f === other.f;
+        },
+
+        toArray: function(precision) {
+            var arr = [this.a, this.b, this.c, this.d, this.e, this.f];
+
+            if (defined(precision)) {
+                for (var i = 0; i < arr.length; i++) {
+                    arr[i] = round(arr[i], precision);
+                }
+            }
+
+            return arr;
         }
     });
 
     Matrix.fn.toString = function(precision, separator) {
-       var arr = [this.a, this.b, this.c, this.d, this.e, this.f];
-
-        if (defined(precision)) {
-            for (var i = 0; i < 6; i++) {
-                arr[i] = round(arr[i], precision);
-            }
-        }
-
-        return arr.join(separator || ",");
+        return this.toArray(precision).join(separator || ",");
     };
 
     Matrix.translate = function (x, y) {
