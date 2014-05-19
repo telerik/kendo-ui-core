@@ -56,9 +56,6 @@
 
             this.options = deepExtend({}, this.options, options);
 
-            this._root = new Node();
-            this._root.parent = this;
-
             this._appendTo(container);
         },
 
@@ -91,12 +88,11 @@
         ),
 
         _appendTo: function(container) {
-            var surface = this,
-                options = surface.options,
+            var options = this.options,
                 canvas = container.firstElementChild;
 
             if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
-                container.innerHTML = surface._template(surface);
+                container.innerHTML = this._template(this);
                 canvas = container.firstElementChild;
             } else {
                 $(canvas).css({
@@ -108,19 +104,10 @@
             canvas.width = $(canvas).width();
             canvas.height = $(canvas).height();
 
-            surface.element = canvas;
-            surface.ctx = canvas.getContext("2d");
+            this.element = canvas;
 
-            surface.invalidate();
-        },
-
-        invalidate: function() {
-            var surface = this,
-                canvas = surface.element;
-
-            canvas.width = canvas.width;
-
-            surface._root.renderTo(surface.ctx);
+            this._root = new RootNode(canvas);
+            this._root.invalidate();
         }
     });
 
@@ -160,6 +147,20 @@
 
                 node.append(childNode);
             }
+        }
+    });
+
+    var RootNode = Node.extend({
+        init: function(canvas) {
+            Node.fn.init.call(this);
+
+            this.canvas = canvas;
+            this.ctx = canvas.getContext("2d");
+        },
+
+        invalidate: function() {
+            this.canvas.width = this.canvas.width;
+            this.renderTo(this.ctx);
         }
     });
 
