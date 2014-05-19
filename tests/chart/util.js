@@ -24,6 +24,18 @@ function ViewStub() {
 }
 
 ViewStub.prototype = {
+    findInLog: function(elementsName, callback) {
+        var elements = this.log[elementsName];
+        var element;
+        if (elements) {
+            for (var i = 0; i < elements.length; i++) {
+                if (callback(elements[i])) {
+                    return elements[i];
+                }
+            }
+        }
+    },
+
     createRect: function(box, style) {
         this.log.rect.push({
             x1: box.x1,
@@ -49,7 +61,7 @@ ViewStub.prototype = {
         this.log.group.push({options: options});
         return new kendo.dataviz.ViewElement(options);
     },
-    
+
     createClipPath: function(id, box) {
         this.log.clipPath.push({id: id, box: box});
         return new kendo.dataviz.ViewElement({});
@@ -59,7 +71,7 @@ ViewStub.prototype = {
         this.log.line.push({ x1: x1, y1: y1, x2: x2, y2: y2, options: options });
         return new kendo.dataviz.ViewElement(options);
     },
-    
+
     createMultiLine: function(elements, options) {
         this.log.multiLine.push({lines: elements, options: options});
         return new kendo.dataviz.ViewElement(options);

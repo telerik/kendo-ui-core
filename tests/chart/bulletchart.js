@@ -77,14 +77,10 @@
         });
 
         test("renders group with bulletChart id and no animations", function() {
-            var groups = view.log.group;
-            var group;
-            for (var i = 0; i < groups.length; i++) {
-                if (groups[i].options.id === bulletChart.id) {
-                    group = groups[i];
-                    break;
-                }
-            }
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === bulletChart.id;
+            });
+
             ok(group && !group.options.animation);
             equal(group.options.id, bulletChart.id);
         });
