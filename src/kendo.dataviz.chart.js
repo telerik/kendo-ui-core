@@ -455,7 +455,7 @@ var __meta__ = {
                 view.load(model);
                 chart._viewElement = chart._renderView(view);
                 chart._tooltip = chart._createTooltip();
-                chart._highlight = new Highlight(view);
+                chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
             }
         },
@@ -9344,10 +9344,11 @@ var __meta__ = {
         BubbleAnimationDecorator = animationDecorator(BUBBLE, BubbleAnimation);
 
     var Highlight = Class.extend({
-        init: function(view) {
+        init: function(view, viewElement) {
             var highlight = this;
 
             highlight.view = view;
+            highlight.viewElement = viewElement;
             highlight._overlays = [];
         },
 

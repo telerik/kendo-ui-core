@@ -235,6 +235,12 @@
             equal(chart._model.options.width, 1000);
         });
 
+        test("redraw creates a new overlay with the view and viewElement", function() {
+            var highlight = chart._highlight;
+            ok(highlight.view === chart._view);
+            ok(highlight.viewElement === chart._viewElement);
+        });
+
         // ------------------------------------------------------------
         module("destroy", {
             setup: function() {
