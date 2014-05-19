@@ -9,7 +9,7 @@
         "./drawing/parser",
         "./drawing/svg",
         "./drawing/canvas",
-        "./drawing/vml",
+        "./drawing/vml"
     ], f);
 })(function(){
 
