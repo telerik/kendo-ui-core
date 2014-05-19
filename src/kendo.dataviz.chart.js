@@ -5650,7 +5650,9 @@ var __meta__ = {
         getViewElements: function(view) {
             var chart = this,
                 elements = ChartElement.fn.getViewElements.call(chart, view),
-                group = view.createGroup();
+                group = view.createGroup({
+                     id: chart.id
+                });
 
             group.children = elements;
             return [group];
