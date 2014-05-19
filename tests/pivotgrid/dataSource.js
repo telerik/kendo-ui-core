@@ -213,7 +213,7 @@
     });
     */
 
-    test("expandColumn issue an request", 1, function() {
+    test("expandColumn issue a request", 1, function() {
         var dataSource = new PivotDataSource({
             columns: ["foo", "bar", { name: "baz", expand: true } ]
         });
@@ -225,7 +225,58 @@
         dataSource.expandColumn("foo");
     });
 
-    test("expandRow issue an request", 1, function() {
+    test("expandColumn pass current row state", 2, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo", "bar"],
+            rows: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: {},
+                read: function(options) {
+                    equal(options.data.rows.length, 1);
+                    equal(options.data.rows[0].name, "baz");
+
+                    options.success({
+                        axes: { columns: {}},
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.expandColumn("foo");
+    });
+
+    test("expandRow pass current columns state", 3, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo", "bar"],
+            rows: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: {},
+                read: function(options) {
+                    equal(options.data.columns.length, 2);
+                    equal(options.data.columns[0].name, "foo");
+                    equal(options.data.columns[1].name, "bar");
+
+                    options.success({
+                        axes: { columns: {}},
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.expandRow("baz");
+    });
+
+    test("expandRow issue a request", 1, function() {
         var dataSource = new PivotDataSource({
             columns: "bar",
             rows: ["foo"]

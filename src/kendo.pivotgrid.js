@@ -35,6 +35,31 @@ var __meta__ = {
         });
     }
 
+    function descriptorsForAxes(axes) {
+        var tuples = axes.tuples || [];
+
+        var result = {};
+        var members;
+        var name;
+
+        for (var idx = 0; idx < tuples.length; idx++) {
+            members = tuples[idx].members;
+
+            for (var memberIdx = 0; memberIdx < members.length; memberIdx++) {
+                name = members[memberIdx].name.replace(/\.\[all\]$/i, "");
+
+                result[name] = members[memberIdx].children.length > 0;
+            }
+        }
+
+        var descriptors = [];
+        for (var k in result) {
+            descriptors.push({ name: k, expand: result[k] });
+        }
+
+        return descriptors;
+    }
+
     var PivotDataSource = DataSource.extend({
         init: function(options) {
             DataSource.fn.init.call(this, extend(true, {}, {
@@ -70,7 +95,15 @@ var __meta__ = {
 
             members[members.length - 1].expand = true;
 
-            this.read({ columns: members });
+            var axes = this.axes();
+
+            var rows = this.rows() || [];
+
+            if (axes && axes.rows) {
+                rows = descriptorsForAxes(axes.rows);
+            }
+
+            this.read({ columns: members, rows: rows });
         },
 
         expandRow: function(path) {
@@ -78,7 +111,14 @@ var __meta__ = {
 
             members[members.length - 1].expand = true;
 
-            this.read({ rows: members });
+            var axes = this.axes();
+            var columns = this.columns() || [];
+
+            if (axes && axes.columns) {
+                columns = descriptorsForAxes(axes.columns);
+            }
+
+            this.read({ rows: members, columns: columns });
         },
 
         _readData: function(data) {
@@ -151,6 +191,10 @@ var __meta__ = {
         var columnTuples = result.columns.tuples;
         var sourceTuples = parseSource(source.columns.tuples || [], measures);
         result.columns.tuples = sourceTuples;
+
+        if (source.rows) {
+            result.rows.tuples = parseSource(source.rows.tuples || []);
+        }
 
         return result;
     }
