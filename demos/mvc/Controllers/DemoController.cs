@@ -44,7 +44,7 @@ namespace Kendo.Controllers
             LoadNavigation();
             LoadCategories();
 
-            FindCurrentExample();
+            FindCurrentExample(product);
             FindSiblingExamples();
             FindEdgeExamples();
 
@@ -116,7 +116,7 @@ namespace Kendo.Controllers
             return redirect;
         }
 
-        protected void FindCurrentExample()
+        protected void FindCurrentExample(string product)
         {
            var found = false;
 
@@ -156,9 +156,34 @@ namespace Kendo.Controllers
            ViewBag.CurrentWidget = currentWidget;
            ViewBag.Mobile = currentWidget.Mobile;
            ViewBag.CurrentExample = current;
-           ViewBag.Title = current.Title ?? current.Text;
-           ViewBag.Meta = current.Meta;
-           ViewBag.Description = current.Description;
+
+           if (current.Title != null)
+           {
+               if (current.Title.ContainsKey(product))
+               {
+                   ViewBag.Title = current.Title[product];
+               }
+               else
+               {
+                   ViewBag.Title = current.Title["kendo-ui"];
+               }
+           }
+           else
+           {
+               ViewBag.Title = current.Text;
+           }
+
+           if (current.Meta != null)
+           {
+               if (current.Meta.ContainsKey(product))
+               {
+                   ViewBag.Meta = current.Meta[product];
+               }
+               else
+               {
+                   ViewBag.Meta = current.Meta["kendo-ui"];
+               }
+           }
         }
 
         private bool IsCurrentExample(HttpRequestBase request, NavigationExample example)

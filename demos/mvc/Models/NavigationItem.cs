@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Kendo.Models
 {
@@ -7,9 +8,8 @@ namespace Kendo.Models
     {
         public string Name { get; set; }
         public string Text { get; set; }
-        public string Title { get; set; }
-        public string Meta { get; set; }
-        public string Description { get; set; }
+        public IDictionary<string,string> Title { get; set; }
+        public IDictionary<string, string> Meta { get; set; }
         public string[] Packages { get; set; }
 
         public bool ShouldInclude
