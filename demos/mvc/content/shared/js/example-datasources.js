@@ -39,7 +39,7 @@ var themes = [
 var searchDataSource = new kendo.data.DataSource();
 
 function onlineExamples(section, product, reject) {
-    return $.grep(section.items, function(item) {
+    return $.grep(section.items, function (item) {
         item.section = section.text;
 
         if (reject(item)) {
@@ -52,7 +52,7 @@ function onlineExamples(section, product, reject) {
 
         var invert = false, match = false;
 
-        for (var i = 0; i < item.packages.length; i ++) {
+        for (var i = 0; i < item.packages.length; i++) {
             var packageName = item.packages[i];
             if (packageName[0] === "!") {
                 invert = true;
@@ -60,6 +60,10 @@ function onlineExamples(section, product, reject) {
 
             if (packageName === product) {
                 match = true;
+            }
+
+            if (packageName === "offline") {
+                return false;
             }
         }
 
@@ -92,7 +96,19 @@ function populateSearchDataSource(filter) {
     });
 }
 
-function searchExamplesFor(value) {
+function searchExamplesFor(value, product) {
+    function titleContains(value) {
+        return function (title) {
+            var text = "";
+
+            if (title) {
+                text = title[product] || title["kendo-ui"];
+            }
+
+            return text.indexOf(value) >= 0;
+        };
+    }
+
     if (value.length < 3) {
         searchDataSource.filter(null);
     } else {
@@ -101,7 +117,14 @@ function searchExamplesFor(value) {
 
         for (var i = 0; i < words.length; i ++) {
             var word = words[i];
-            filter.filters.push({ logic: "or", filters: [ { field: "section", operator: "contains", value: word }, { field: "text", operator: "contains", value: word }, { field: "title", operator: "contains", value: word } ] });
+            filter.filters.push({ 
+                logic: "or", 
+                filters: [
+                    { field: "section", operator: "contains", value: word },
+                    { field: "text", operator: "contains", value: word },
+                    { field: "title", operator: titleContains(word) }
+                ] 
+            });
         }
 
         searchDataSource.filter(filter);

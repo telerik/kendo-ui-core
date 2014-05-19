@@ -2,7 +2,7 @@ $(function() {
     populateSearchDataSource(desktopExamples);
 
     $("#search").on("input", function() {
-        searchExamplesFor($(this).val());
+        searchExamplesFor($(this).val(), product);
     });
 
     $("#search-results").kendoMobileListView({

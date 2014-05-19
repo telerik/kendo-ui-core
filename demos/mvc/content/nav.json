@@ -29,7 +29,8 @@
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "Client filtering",
         "url": "autocomplete/clientfiltering"
@@ -48,7 +49,8 @@
         "text": "Custom data source",
         "url": "autocomplete/custom-datasource",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -258,7 +260,8 @@
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "Globalization",
         "url": "calendar/globalization"
@@ -456,7 +459,8 @@
         "text": "Custom data source",
         "url": "combobox/custom-datasource",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -577,7 +581,8 @@
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "Globalization",
         "url": "datepicker/globalization"
@@ -680,7 +685,8 @@
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "Globalization",
         "url": "datetimepicker/globalization"
@@ -775,7 +781,8 @@
         "text": "Custom data source",
         "url": "dropdownlist/custom-datasource",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -933,7 +940,8 @@
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "Globalization",
         "url": "editor/globalization"
@@ -1016,6 +1024,7 @@
         },
         "packages": [
           "!mvc",
+          "!php",
           "!jsp"
         ]
       },
@@ -1088,42 +1097,48 @@
         "text": "Custom ajax binding",
         "url": "grid/customajaxbinding",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
         "text": "Custom data source",
         "url": "grid/custom-datasource",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
         "text": "OData binding",
         "url": "grid/odata",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
         "text": "Web API binding",
         "url": "grid/webapi",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
         "text": "Server binding",
         "url": "grid/serverbinding",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
         "text": "Custom server binding",
         "url": "grid/customserverbinding",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1170,7 +1185,8 @@
         "text": "Server editing",
         "url": "grid/serverediting",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1187,7 +1203,8 @@
         "text": "Paging",
         "url": "grid/paging",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1228,7 +1245,8 @@
         "text": "Server hierarchy",
         "url": "grid/serverhierarchy",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1245,7 +1263,8 @@
         "text": "Server detail template",
         "url": "grid/serverdetails",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1262,7 +1281,8 @@
         "text": "Column header template",
         "url": "grid/headertemplate",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1299,7 +1319,8 @@
         "text": "Server aggregates",
         "url": "grid/serveraggregates",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1377,7 +1398,8 @@
         "text": "Column Settings",
         "url": "grid/columnsettings",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1394,7 +1416,8 @@
         "text": "Server row template",
         "url": "grid/serverrowtemplate",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1421,7 +1444,8 @@
         "text": "Globalization",
         "url": "grid/globalization",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1510,7 +1534,8 @@
         "text": "Custom data source",
         "url": "listview/custom-datasource",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -1707,14 +1732,16 @@
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "SiteMapBinding",
         "url": "menu/sitemapbinding"
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "ModelBinding",
         "url": "menu/modelbinding"
@@ -2002,7 +2029,8 @@
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "Globalization",
         "url": "numerictextbox/globalization"
@@ -2271,7 +2299,8 @@
         "text": "Custom data source",
         "url": "scheduler/custom-datasource",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -2308,7 +2337,8 @@
         "text": "Web API binding",
         "url": "scheduler/webapi",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -2345,7 +2375,8 @@
         "text": "Globalization",
         "url": "scheduler/globalization",
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ]
       },
       {
@@ -2845,7 +2876,8 @@
       },
       {
         "packages": [
-          "mvc"
+          "mvc",
+          "offline"
         ],
         "text": "Globalization",
         "url": "timepicker/globalization"

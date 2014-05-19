@@ -290,13 +290,16 @@
     <Content Include="content\shared\js\dataloader.js" />
     <Content Include="content\shared\js\dbd26eaf.vendor.js" />
     <Content Include="content\shared\js\dropdown.js" />
-    <Content Include="content\shared\js\employees.js" />
+    <Content Include="content\shared\js\example-datasources.js" />
     <Content Include="content\shared\js\mobile-examples.js" />
     <Content Include="content\shared\js\less.js" />
     <Content Include="content\shared\js\orders.js" />
     <Content Include="content\shared\js\people.js" />
     <Content Include="content\shared\js\prettify.js" />
     <Content Include="content\shared\js\products.js" />
+    <Content Include="content\shared\js\theme-chooser.js" />
+    <Content Include="content\shared\js\trykendo.js" />
+    <Content Include="content\shared\js\web-examples.js" />
     <Content Include="content\shared\styles\aeroviewr.png" />
     <Content Include="content\shared\styles\bg-glossy.png" />
     <Content Include="content\shared\styles\blackberrySkin.png" />

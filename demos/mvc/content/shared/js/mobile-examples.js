@@ -32,7 +32,7 @@ function initSearch(e) {
 
     var searchBox = e.view.element.find("#demos-search");
     searchBox.on("input", function() {
-        searchExamplesFor(searchBox.val());
+        searchExamplesFor(searchBox.val(), product);
     });
 }
 

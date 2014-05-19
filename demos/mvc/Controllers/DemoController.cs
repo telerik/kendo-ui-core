@@ -134,7 +134,7 @@ namespace Kendo.Controllers
                        currentWidget = widget;
                    }
 
-                   if (!example.Url.Contains("overview") && example.ShouldInclude)
+                   if (!example.Url.Contains("overview") && example.ShouldInclude(product))
                    {
                        examplesUrl.Add("~/" + example.Url);
                    }
