@@ -180,14 +180,14 @@
                             dashType: "dot"
                         },
                         color: "lineColor",
-                        opacity: 0.5                        
+                        opacity: 0.5
                     },
                     series)]
                 });
             }
         });
 
-        test("sets line width", function() {            
+        test("sets line width", function() {
             equal(view.log.path[0].style.strokeWidth, 4);
         });
 
@@ -207,12 +207,31 @@
             equal(view.log.rect[0].style.data.modelId, ohlcChart.points[0].modelId);
         });
 
-        test("renders chart group", function() {          
-            equal(view.log.group.length, 1);
+        test("generates unique id", function() {
+            ok(ohlcChart.id);
+        });
+
+        test("renders group with OhlcChart id and no animations", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === ohlcChart.id;
+            });
+
+            ok(group && !group.options.animation);
+            equal(group.options.id, ohlcChart.id);
+        });
+
+        test("renders chart group", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.animation;
+            });
+            ok(group);
         });
 
         test("sets group animation", function() {
-            equal(view.log.group[0].options.animation.type, "clip");
+            var group = view.findInLog("group", function(item) {
+                return item.options.animation;
+            });
+            equal(group.options.animation.type, "clip");
         });
 
         // ------------------------------------------------------------

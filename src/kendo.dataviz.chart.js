@@ -5981,10 +5981,15 @@ var __meta__ = {
                     animation: {
                         type: CLIP
                     }
-                });
+                }),
+            highlightGroup = view.createGroup({
+                id: chart.id
+            });
 
             group.children = elements;
-            return [group];
+            highlightGroup.children = [group];
+
+            return [highlightGroup];
         }
     });
 
