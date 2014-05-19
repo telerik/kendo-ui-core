@@ -26,6 +26,9 @@
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
 
+        util = dataviz.util,
+        valueOrDefault = util.valueOrDefault,
+
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
         Group = d.Group,
@@ -35,19 +38,9 @@
 
     // Constants ==============================================================
     var BUTT = "butt",
-        CLIP = dataviz.CLIP,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
-        DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
-        DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
-        DEFAULT_FONT = dataviz.DEFAULT_FONT,
-        NONE = "none",
         LINEAR = "linear",
-        RADIAL = "radial",
-        SOLID = "solid",
-        SQUARE = "square",
-        SVG_NS = "http://www.w3.org/2000/svg",
-        TRANSPARENT = "transparent",
-        UNDEFINED = "undefined";
+        SOLID = "solid";
 
     // Canvas Surface ==========================================================
     var Surface = d.Surface.extend({
@@ -166,32 +159,55 @@
 
     var PathNode = Node.extend({
         renderTo: function(ctx) {
-            var path = this,
-                options = path.srcElement.options;
-
             ctx.save();
 
             ctx.beginPath();
-            path.renderPoints(ctx);
 
-            path.setLineDash(ctx);
-            path.setLineCap(ctx);
+            this.setTransform(ctx);
+            this.renderPoints(ctx);
 
-            path.setFill(ctx);
-            path.setStroke(ctx);
+            this.setLineDash(ctx);
+            this.setLineCap(ctx);
 
-            path.renderOverlay(ctx);
+            this.setFill(ctx);
+            this.setStroke(ctx);
+
+            this.renderOverlay(ctx);
 
             ctx.restore();
         },
 
-        setLineDash: function(ctx) {
-            var dashType = this.srcElement.options.dashType,
-                dashArray;
+        setFill: function(ctx) {
+            var fill = this.srcElement.options.fill;
+            if (fill && fill.color !== "transparent") {
+                ctx.fillStyle = fill.color;
+                ctx.globalAlpha = fill.opacity;
+                ctx.fill();
+            }
+        },
 
-            dashType = dashType ? dashType.toLowerCase() : null;
+        setStroke: function(ctx) {
+            var stroke = this.srcElement.options.stroke;
+            if (stroke) {
+                ctx.strokeStyle = stroke.color;
+                ctx.lineWidth = valueOrDefault(stroke.width, 1);
+                ctx.lineJoin = "round";
+                ctx.globalAlpha = stroke.opacity;
+                ctx.stroke();
+            }
+        },
+
+        dashType: function() {
+            var stroke = this.srcElement.options.stroke;
+            if (stroke && stroke.dashType) {
+                return stroke.dashType.toLowerCase();
+            }
+        },
+
+        setLineDash: function(ctx) {
+            var dashType = this.dashType();
             if (dashType && dashType != SOLID) {
-                dashArray = DASH_ARRAYS[dashType];
+                var dashArray = DASH_ARRAYS[dashType];
                 if (ctx.setLineDash) {
                     ctx.setLineDash(dashArray);
                 } else {
@@ -202,33 +218,40 @@
         },
 
         setLineCap: function(ctx) {
-            var options = this.srcElement.options,
-                dashType = options.dashType;
-
-            ctx.lineCap = (dashType && dashType !== SOLID) ?
-                BUTT : options.strokeLineCap;
-        },
-
-        setFill: function(ctx) {
-            var options = this.srcElement.options,
-                fill = options.fill;
-
-            if (options.fill && options.fill !== "transparent") {
-                ctx.fillStyle = fill;
-                ctx.globalAlpha = options.fillOpacity;
-                ctx.fill();
+            var dashType = this.dashType();
+            if (dashType && dashType !== SOLID) {
+                ctx.lineCap = BUTT;
+            } else {
+                var stroke = this.srcElement.options.stroke;
+                ctx.lineCap = valueOrDefault(stroke.lineCap, "square");
             }
         },
 
-        setStroke: function(ctx) {
-            var stroke = this.srcElement.options.stroke;
+        setTransform: function(ctx) {
+            var transform = this.srcElement.transform();
+            if (transform) {
+                ctx.transform.apply(ctx, transform.matrix().toArray(6));
+            }
+        },
 
-            if (stroke && stroke.width) {
-                ctx.strokeStyle = stroke.color;
-                ctx.lineWidth = stroke.width;
-                ctx.lineJoin = "round";
-                ctx.globalAlpha = stroke.opacity;
-                ctx.stroke();
+        renderPoints: function(ctx) {
+            var src = this.srcElement;
+            var segments = src.segments;
+
+            if (segments.length === 0) {
+                return;
+            }
+
+            var s = segments[0];
+            ctx.moveTo(s.anchor.x, s.anchor.y);
+
+            for (var i = 1; i < segments.length; i++) {
+                s = segments[i];
+                ctx.lineTo(s.anchor.x, s.anchor.y);
+            }
+
+            if (src.options.closed) {
+                ctx.closePath();
             }
         },
 
@@ -245,34 +268,6 @@
                     ctx.fillStyle = gradient;
                     ctx.fill();
                 }
-            }
-        },
-
-        renderPoints: function(ctx) {
-            var path = this,
-                segments = path.srcElement.segments,
-                i,
-                s,
-                options = path.srcElement.options,
-                rotation = options.rotation,
-                strokeWidth = options.stroke.width,
-                shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
-                align = shouldAlign ? alignToPixel : round;
-
-            if (segments.length === 0 || !(options.fill || options.stroke)) {
-                return;
-            }
-
-            s = segments[0];
-            ctx.moveTo(s.anchor.x, s.anchor.y);
-
-            for (i = 1; i < segments.length; i++) {
-                s = segments[i];
-                ctx.lineTo(s.anchor.x, s.anchor.y);
-            }
-
-            if (path.closed) {
-                ctx.closePath();
             }
         },
 
@@ -319,7 +314,9 @@
             var size = text.measure();
 
             ctx.save();
+
             this.setFill(ctx);
+            this.setTransform(ctx);
 
             ctx.font = text.options.font;
             ctx.fillText(text.content(), origin.x, origin.y + size.baseline);
