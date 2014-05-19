@@ -1,33 +1,5 @@
 var isAndroid = kendo.support.mobileOS.android;
 
-function mobileExamples(section) {
-    return $.grep(section.items, function(item) {
-        item.section = section.text;
-
-        if (item.disableInMobile) {
-            return false;
-        }
-
-        if (!item.packages) {
-            return true;
-        }
-
-        var invert = false, match = false;
-
-        for (var i = 0; i < item.packages.length; i ++) {
-            var packageName = item.packages[i];
-            if (packageName[0] === "!") {
-                invert = true;
-            }
-
-            if (packageName === "online") {
-                match = true;
-            }
-        }
-
-        return (!invert && match) || (invert && !match);
-    });
-}
 
 function removeView(e) {
     e.view.purge();
@@ -56,7 +28,7 @@ function blurSearch(e) {
 }
 
 function initSearch(e) {
-    populateSearchDataSource();
+    populateSearchDataSource(mobileExamples);
 
     var searchBox = e.view.element.find("#demos-search");
     searchBox.on("input", function() {

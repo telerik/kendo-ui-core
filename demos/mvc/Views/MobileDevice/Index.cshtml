@@ -24,6 +24,12 @@
     <script>
         document.title = "@ViewBag.Title";
         var NAV_JSON_URL = "@Url.Content("~/content/nav.json")";
+        var navProduct = {
+            "aspnet-mvc": "mvc",
+            "kendo-ui": "online",
+            "php-ui": "php",
+            "jsp-ui": "jsp"
+        }["@ViewBag.product"];
     </script>
 
     <script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>

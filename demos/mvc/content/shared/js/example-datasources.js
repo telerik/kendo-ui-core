@@ -38,12 +38,54 @@ var themes = [
 
 var searchDataSource = new kendo.data.DataSource();
 
-function populateSearchDataSource() {
+function onlineExamples(section, product, reject) {
+    return $.grep(section.items, function(item) {
+        item.section = section.text;
+
+        if (reject(item)) {
+            return false;
+        }
+
+        if (!item.packages) {
+            return true;
+        }
+
+        var invert = false, match = false;
+
+        for (var i = 0; i < item.packages.length; i ++) {
+            var packageName = item.packages[i];
+            if (packageName[0] === "!") {
+                invert = true;
+            }
+
+            if (packageName === product) {
+                match = true;
+            }
+        }
+
+        return (!invert && match) || (invert && !match);
+    });
+
+}
+
+function mobileExamples(section) {
+    return onlineExamples(section, navProduct, function(item) {
+        return item.disableInMobile;
+    });
+}
+
+function desktopExamples(section) {
+    return onlineExamples(section, navProduct, function(item) {
+        return false;
+    });
+}
+
+function populateSearchDataSource(filter) {
     navDataSource.fetch(function() {
         var items = [];
         var data = navDataSource.data();
         for (var i = 0; i < data.length; i ++) {
-            items = items.concat(mobileExamples(data[i]));
+            items = items.concat(filter(data[i]));
         }
 
         searchDataSource.data(items);

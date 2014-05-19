@@ -3563,3 +3563,9 @@ a.footer-links:hover {
 #footer {
     clear: both;
 }
+
+#search-results {
+    positon: absolute;
+    z-index: 10;
+    width: 250px;
+}
