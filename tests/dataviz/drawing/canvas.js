@@ -74,4 +74,47 @@
         });
     });
 
+    // ------------------------------------------------------------
+    var node;
+
+    module("Node", {
+        setup: function() {
+            node = new Node();
+        }
+    });
+
+    test("load appends Node for Group", function() {
+        node.append = function(child) {
+            ok(child instanceof canv.Node);
+        };
+
+        node.load([new d.Group()]);
+    });
+
+    test("load appends PathNode", function() {
+        node.append = function(child) {
+            ok(child instanceof canv.PathNode);
+        };
+
+        node.load([new d.Path()]);
+    });
+
+    test("load appends TextNode", function() {
+        node.append = function(child) {
+            ok(child instanceof canv.TextNode);
+        };
+
+        node.load([new d.Text()]);
+    });
+
+    test("load appends child nodes", function() {
+        var parentGroup = new d.Group()
+        var childGroup = new d.Group();
+        parentGroup.append(childGroup);
+
+        node.load([parentGroup]);
+
+        ok(node.childNodes[0].childNodes[0] instanceof canv.Node);
+    });
+
 })();

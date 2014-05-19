@@ -160,14 +160,6 @@
 
                 node.append(childNode);
             }
-        },
-
-        unload: function(index, count) {
-            for (var i = index; i < count; i++) {
-                this.childNodes[i].parent = null;
-            }
-
-            this.childNodes.splice(index, count);
         }
     });
 
@@ -365,7 +357,8 @@
         canvas: {
             Surface: Surface,
             Node: Node,
-            PathNode: PathNode
+            PathNode: PathNode,
+            TextNode: TextNode
         }
     });
 
