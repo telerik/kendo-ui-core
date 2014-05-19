@@ -190,13 +190,79 @@ var __meta__ = {
 
         var columnTuples = result.columns.tuples;
         var sourceTuples = parseSource(source.columns.tuples || [], measures);
-        result.columns.tuples = sourceTuples;
+        result.columns.tuples = mergeTuples(columnTuples, sourceTuples);
 
         if (source.rows) {
             result.rows.tuples = parseSource(source.rows.tuples || []);
         }
 
         return result;
+    }
+
+    function mergeTuples(target, source) {
+        if (!source[0]) {
+            return target;
+        }
+
+        var result = findExistingMember(target, source[0]);
+
+        if (!result) {
+            return source;
+        }
+
+        for (var idx = 0, len = source.length; idx < len; idx ++) {
+            [].push.apply(result.member.children, source[idx].members[result.index].children);
+        }
+
+        return target;
+    }
+
+    function findExistingMember(tuples, current) {
+        var members = current.members;
+        var tuple;
+        for (var i = 0; i < members.length; i ++) {
+            tuple = findTuple(tuples, members[i].name, i);
+            if (!tuple) {
+                return null;
+            }
+            if (equalMembers(tuple.members, members)) {
+                return {
+                    member: tuple.members[i],
+                    index: i
+                };
+            }
+        }
+
+        return null;
+    }
+
+    function equalMembers(first, second) {
+        var result = true;
+        var length = first.length;
+        for (var i = 0; i < length && result; i ++) {
+            result = result && (first[i].name == second[i].name);
+        }
+
+        return result;
+    }
+
+    function findTuple(tuples, name, index) {
+        var tuple, member;
+        var idx , length;
+        for (var idx = 0, length = tuples.length; idx < length; idx ++) {
+            tuple = tuples[idx];
+            member = tuple.members[index];
+            if (member.name == name) {
+                return tuple;
+            }
+
+            tuple = findTuple(member.children, name, index);
+            if (tuple) {
+                return tuple;
+            }
+        }
+
+        return tuple;
     }
 
     function addMembers(members, map) {

@@ -289,5 +289,50 @@
         equal(tuple.members[1].children[0].name, "measure 1");
         equal(tuple.members[1].children[1].name, "measure 2");
     });
+
+    test("merging to existing axes", function() {
+        var axes = [
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] } ] }
+                    ]
+                }
+            },
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] } ] },
+                        { members: [ { name: "level 2", parentName: "level 1", children: [] } ] }
+                    ]
+                }
+            }
+        ]
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: axes.shift(),
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn("level 1");
+
+        var tuples = dataSource.axes().columns.tuples;
+        equal(tuples.length, 1, "one root tuple");
+        equal(tuples[0].members[0].children.length, 1, "one tuple on second level");
+        equal(tuples[0].members[0].children[0].members[0].children.length, 1, "one tuple on third level");
+        equal(tuples[0].members[0].children[0].members[0].children[0].members[0].name, "level 2");
+    });
 })();
 
