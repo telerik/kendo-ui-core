@@ -190,18 +190,25 @@ var FormattingTool = DelayedExecutionTool.extend({
 var CleanFormatCommand = Command.extend({
     exec: function() {
         var range = this.lockRange(true);
-        var remove = this.options.remove;
+        var remove = this.options.remove || "strong,em,span".split(",");
 
         var iterator = new Editor.RangeIterator(range);
 
-        iterator.traverse(function (node) {
-            if (dom.isMarker(node)) {
+        iterator.traverse(function clean(node) {
+            if (!node || dom.isMarker(node)) {
                 return;
+            }
+
+            if (node.nodeType == 1) {
+                for (var i = node.childNodes.length-1; i >= 0; i--) {
+                    clean(node.childNodes[i]);
+                }
+
+                node.removeAttribute("style");
             }
 
             if (remove.indexOf(dom.name(node)) > -1) {
                 dom.unwrap(node);
-            } else if (!node.nodeType == 3) {
             }
         });
 

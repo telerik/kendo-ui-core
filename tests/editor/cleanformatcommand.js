@@ -48,8 +48,16 @@ test("removes nested formatting", function() {
     equal(cleanedContent('<strong>foo<em>bar</em></strong>'), 'foobar');
 });
 
+test("removes deeply nested formatting", function() {
+    equal(cleanedContent('<strong>foo<em>bar<span style="color: #f00">baz</span></em></strong>'), 'foobarbaz');
+});
+
 test("keeps paragraphs", function() {
     equal(cleanedContent('<p>foo<em>bar</em></p>'), '<p>foobar</p>');
+});
+
+test("removes style attributes", function() {
+    equal(cleanedContent('<p style="color: #f00;">foo</p>'), '<p>foo</p>');
 });
 
 }());
