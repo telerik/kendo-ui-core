@@ -250,5 +250,44 @@
         equal(axes.columns.tuples.length, 1);
         equal(axes.columns.tuples[0].members[0].children.length, 1);
     });
+
+    test("multiple measures merged in single member", function() {
+        var dataSource = new PivotDataSource({
+            measures: [ "measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+
+        equal(axes.columns.tuples.length, 1);
+
+        var tuple = axes.columns.tuples[0];
+        equal(tuple.members[0].name, "level 0");
+        equal(tuple.members[1].measure, true);
+        equal(tuple.members[1].name, "Measures");
+        equal(tuple.members[1].children.length, 2);
+        equal(tuple.members[1].children[0].name, "measure 1");
+        equal(tuple.members[1].children[1].name, "measure 2");
+    });
 })();
 

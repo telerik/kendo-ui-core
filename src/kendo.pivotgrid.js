@@ -87,7 +87,7 @@ var __meta__ = {
 
             newData = this._normalizeData(newData, axes);
 
-            this._axes = mergeAxes(this._axes, axes);
+            this._axes = mergeAxes(this._axes, axes, this.measures());
 
             return newData;
         },
@@ -130,7 +130,7 @@ var __meta__ = {
         }
     });
 
-    function mergeAxes(target, source) {
+    function mergeAxes(target, source, measures) {
         if (!target.columns) {
             target.columns = {
                 tuples: []
@@ -149,7 +149,7 @@ var __meta__ = {
         };
 
         var columnTuples = result.columns.tuples;
-        var sourceTuples = parseSource(source.columns.tuples || []);
+        var sourceTuples = parseSource(source.columns.tuples || [], measures);
         result.columns.tuples = sourceTuples;
 
         return result;
@@ -160,7 +160,9 @@ var __meta__ = {
         for (i = 0, len = members.length; i < len; i++) {
             member = members[i];
             path += member.name;
-            map[path] = member;
+            if (!map[path]) {
+                map[path] = member;
+            }
         }
     }
 
@@ -205,19 +207,53 @@ var __meta__ = {
         return parentMember;
     }
 
-    function parseSource(tuples) {
+    function measurePosition(tuple, measures) {
+        if (measures.length < 2) {
+            return -1;
+        }
+
+        var measure = measures[0];
+        var members = tuple.members;
+        for (var idx = 0, len = members.length; idx < len; idx ++) {
+            if (members[idx].name == measure) {
+                return idx;
+            }
+        }
+    }
+
+    function normalizeMeasures(tuple, index) {
+        if (index < 0) {
+            return;
+        }
+        var member = {
+            name: "Measures",
+            measure: true,
+            children: [
+                tuple.members[index]
+            ]
+        };
+        tuple.members.splice(index, 1, member);
+    }
+
+    function parseSource(tuples, measures) {
         if (tuples.length < 1) {
             return [];
         }
         var result = [];
         var map = { };
+        var measureIndex = measurePosition(tuples[0], measures);
 
         for (var i = 0; i < tuples.length; i++) {
             var tuple = tuples[i];
+            normalizeMeasures(tuple, measureIndex);
             var parentMember = findParentMember(tuple, map);
 
             if (parentMember) {
-                parentMember.children.push(tuple);
+                if (measureIndex < 0 || !parentMember.measure) {
+                    parentMember.children.push(tuple);
+                } else {
+                    parentMember.children.push(tuple.members[measureIndex].children[0]);
+                }
             } else {
                 result.push(tuple);
             }
