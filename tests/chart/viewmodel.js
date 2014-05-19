@@ -1624,7 +1624,7 @@
             MARGIN = 10;
 
         function createLegend(options) {
-            legend = new dataviz.Legend($.extend(true,{
+            legend = new dataviz.Legend($.extend({
                 items: [ { text: "Series 1" } ],
                 labels: {
                     font: SANS12
@@ -1647,6 +1647,17 @@
         test("renders legend in a group", function() {
             legend.getViewElements(view);
             equal(view.log.group.length, 1);
+        });
+
+        test("renders no elements if legend has no items", function() {
+            moduleSetup();
+
+            createLegend({items: []});
+            legend.getViewElements(view);
+
+            equal(view.log.group.length, 0);
+            equal(view.log.textbox.length, 0);
+            equal(view.log.path.length, 0);
         });
 
         test("sets zIndex on group", function() {

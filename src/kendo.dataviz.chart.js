@@ -1854,6 +1854,10 @@ var __meta__ = {
             return vertical;
         },
 
+        hasItems: function() {
+            return this.container.children[0].children.length > 0;
+        },
+
         reflow: function(targetBox) {
             var legend = this,
                 options = legend.options,
@@ -1861,7 +1865,7 @@ var __meta__ = {
                 vertical = legend.isVertical(),
                 containerBox = targetBox.clone();
 
-            if (container.children[0].children.length === 0) {
+            if (!legend.hasItems()) {
                 legend.box = targetBox.clone();
                 return;
             }
@@ -1914,11 +1918,17 @@ var __meta__ = {
 
         getViewElements: function(view) {
             var legend = this,
+                elements = [],
+                group;
+
+            if (legend.hasItems()) {
                 group = view.createGroup({ zIndex: legend.options.zIndex });
+                append(group.children, ChartElement.fn.getViewElements.call(legend, view));
 
-            append(group.children, ChartElement.fn.getViewElements.call(legend, view));
+                elements.push(group);
+            }
 
-            return [group];
+            return elements;
         }
     });
 

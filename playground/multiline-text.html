@@ -96,9 +96,9 @@
                 // bottom: 200
             // },
             background: "cyan",
-             offsetX: 200,
-             offsetY: 20,
-             position: "custom"
+             // offsetX: 200,
+             // offsetY: 20,
+             // position: "custom"
         },
         
         seriesDefaults: {
@@ -108,6 +108,7 @@
             }
         },
         panes: [{
+            name: "top",
             border: {
                 color: "red",
                 width: 2
@@ -124,6 +125,8 @@
                  margin: 10,
                  position: "center"
             }
+        }, {
+            name: "bottom",
         }],
         chartArea: {
             border: {
@@ -133,17 +136,42 @@
         },
         series: [{
             name: "Total \n Visits",
-            data: [56000, 63000, 74000, 10000, 10000]
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "top"
         }, {
             name: "Unique \n visitor",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 rotation: 30
-            }
+            },
+            axis: "top"
         },{
             name: "Total \n Visits",
             data: [56000, 63000, 74000, 10000, 10000],
-            visibleInLegend: false
+            visibleInLegend: false,
+            axis: "top"
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "top"
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            },
+            axis: "top"
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "top"
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            },
+            axis: "top"
         },{
             name: "Total \n Visits",
             data: [56000, 63000, 74000, 10000, 10000]
@@ -152,7 +180,8 @@
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 rotation: 30
-            }
+            },
+            axis: "bottom"
         },{
             name: "Total \n Visits",
             data: [56000, 63000, 74000, 10000, 10000]
@@ -161,51 +190,38 @@
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 rotation: 30
-            }
+            },
+            axis: "bottom"
         },{
             name: "Total \n Visits",
-            data: [56000, 63000, 74000, 10000, 10000]
-        }, {
-            name: "Unique \n visitor",
-            data: [52000, 34000, 23000, 10000, 10000],
-            labels: {
-                rotation: 30
-            }
-        },{
-            name: "Total \n Visits",
-            data: [56000, 63000, 74000, 10000, 10000]
-        }, {
-            name: "Unique \n visitor",
-            data: [52000, 34000, 23000, 10000, 10000],
-            labels: {
-                rotation: 30
-            }
-        },{
-            name: "Total \n Visits",
-            data: [56000, 63000, 74000, 10000, 10000]
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "bottom"
         }, {
             name: "Unique \n visitor",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 //rotation: 30
-            }
+            },
+            axis: "bottom"
         },{
             name: "Total \n Visits",
-            data: [56000, 63000, 74000, 10000, 10000]
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "bottom"
         }, {
             name: "Unique \n visitor",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
               //  rotation: 30
-            }
+            },
+            axis: "bottom"
         }],   
-        valueAxis: {
-           visible: true,
-           labels: {
-                 rotation: -30
-                // font: "20px arial"
-            }
-        },
+        valueAxis: [{
+            pane: "top",
+            name: "top"                      
+        }, {
+            pane: "bottom",
+            name: "bottom"
+        }],
         categoryAxis: {
             visible: true,
             categories: ["ggggggggggGgggggggg \n bbbbbbbbbbbbb", "cccccccc \n ddddddddddd \n eeeeee", "fffffff", "aaaaaaaaaa \n bbbbbbbbbbbbb", "aaaaaaaaaa \n bbbbbbbbbbbbb" ],
@@ -213,7 +229,7 @@
                 visible: false
             },
             labels: {
-                rotation: -30,
+                //rotation: -30,
                // font: "15px arial",
                 padding: 0,
                 margin: 0,
