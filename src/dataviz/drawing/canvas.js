@@ -39,7 +39,6 @@
     // Constants ==============================================================
     var BUTT = "butt",
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
-        LINEAR = "linear",
         SOLID = "solid";
 
     // Canvas Surface ==========================================================
@@ -172,8 +171,6 @@
             this.setFill(ctx);
             this.setStroke(ctx);
 
-            this.renderOverlay(ctx);
-
             ctx.restore();
         },
 
@@ -260,57 +257,6 @@
             if (src.options.closed) {
                 ctx.closePath();
             }
-        },
-
-        renderOverlay: function(ctx) {
-            var options = this.srcElement.options,
-                overlay = options.overlay,
-                gradient,
-                def;
-
-            if (overlay && overlay.gradient) {
-                def = dataviz.Gradients[overlay.gradient];
-                gradient = this.buildGradient(ctx, def);
-                if (gradient) {
-                    ctx.fillStyle = gradient;
-                    ctx.fill();
-                }
-            }
-        },
-
-        buildGradient: function(ctx, definition) {
-            var bbox = this.bbox(),
-                rotation = this.srcElement.options.overlay.rotation,
-                x = bbox.x2,
-                y = bbox.y1,
-                gradient;
-
-            if (rotation === 90) {
-                x = bbox.x1;
-                y = bbox.y2;
-            }
-
-            if (definition && definition.type === LINEAR) {
-                gradient = ctx.createLinearGradient(bbox.x1, bbox.y1, x, y);
-                addGradientStops(gradient, definition.stops);
-            }
-
-            return gradient;
-        },
-
-        bbox: function() {
-            var points = this.points,
-                bbox = new Box2D(),
-                i;
-
-            if (points.length > 0) {
-                bbox.move(points[0].x, points[0].y);
-                for (i = 1; i < points.length; i++) {
-                    bbox.wrapPoint(points[i]);
-                }
-            }
-
-            return bbox;
         }
     });
 
@@ -335,23 +281,6 @@
             this.invalidate();
         }
     });
-
-    // Helpers ================================================================
-    function addGradientStops(gradient, stops) {
-        var i,
-            length = stops.length,
-            currentStop,
-            color;
-
-        for (i = 0; i < length; i++) {
-            currentStop = stops[i];
-            color = new Color(currentStop.color);
-            gradient.addColorStop(
-                currentStop.offset,
-                "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")"
-            );
-        }
-    }
 
     // Exports ================================================================
     if (kendo.support.canvas) {
