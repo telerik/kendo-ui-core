@@ -33,6 +33,11 @@
     padding-left: 1.9em;
 }
 
+.k-rtl .k-numeric-wrap.k-expand-padding
+{
+    padding-left: 0;
+}
+
 .k-rtl .k-datetimepicker .k-picker-wrap {
     padding-right: 0;
     padding-left: 3.8em;
