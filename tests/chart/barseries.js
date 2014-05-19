@@ -90,6 +90,7 @@
         module("Bar Chart", {
             setup: function() {
                 setupBarChart(plotArea, { series: [ positiveSeries ] });
+                series.getViewElements(view);
             }
         });
 
@@ -98,9 +99,9 @@
         });
 
         test("renders group with series id and no animations", function() {
-            series.getViewElements(view);
             var groups = view.log.group;
             var group;
+            
             for (var i = 0; i < groups.length; i++) {
                 if (groups[i].options.id === series.id) {
                     group = groups[i];
