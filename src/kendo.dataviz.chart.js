@@ -9385,10 +9385,11 @@ var __meta__ = {
                                 overlayElement = view.renderElement(overlay);
                                 overlays.push(overlayElement);
 
-                                if (point.owner && point.owner.pane) {
-                                    container = getElement(point.owner.pane.chartContainer.id);
-                                    container.appendChild(overlayElement);
+                                if (point.owner && point.owner.id) {
+                                    container = getElement(point.owner.id);
                                 }
+
+                                (container || highlight.viewElement).appendChild(overlayElement);
                             }
                         }
 
