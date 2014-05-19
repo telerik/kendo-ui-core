@@ -6,16 +6,10 @@
         {"kendo-ui", "online"},
         {"php-ui", "php"},
         {"jsp-ui", "jsp"}
-    }[ViewBag.product];
+    }[ViewBag.Product];
 }
 
-<script>
-    var NAV_JSON_URL = "@Url.Content("~/content/nav.json")";
-    var navProduct = "@navProduct";
-    var product = "@ViewBag.Product";
-</script>
-<script src="@Url.Content("~/content/shared/js/example-datasources.js")"></script>
-<script src="@Url.Content("~/content/shared/js/web-examples.js")"></script>
+@Html.Partial("WebSearchScript")
 
 <div id="nav-wrapper">
     <input type="search" id="search" />

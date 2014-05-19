@@ -1031,6 +1031,7 @@
     <Content Include="Views\demos\api\selection.cshtml" />
     <Content Include="Views\demos\actionsheet\adaptive.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\WebSearchScript.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

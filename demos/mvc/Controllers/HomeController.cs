@@ -10,6 +10,7 @@ namespace Kendo.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Product = CurrentProduct();
             LoadNavigation();
             LoadCategories();
 #if DEBUG

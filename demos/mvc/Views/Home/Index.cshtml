@@ -1,7 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
+
+}
+@Html.Partial("WebSearchScript")
+<input type="search" id="search" />
+<ul id="search-results"></ul>
 @{
     var columns = new[] {
         new [] {
