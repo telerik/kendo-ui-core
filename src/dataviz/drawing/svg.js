@@ -417,9 +417,11 @@
             var points = arguments,
                 length = points.length,
                 i, result = [];
+
             for (i = 0; i < length; i++) {
-                result.push(points[i].toString(1));
+                result.push(points[i].toString(3));
             }
+
             return result.join(SPACE);
         },
 

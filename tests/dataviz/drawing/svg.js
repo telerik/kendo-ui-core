@@ -386,6 +386,12 @@
         ok(pathNode.render().indexOf("d='M0 0 L 10 20'") !== -1);
     });
 
+    test("renders points with precision to the third sign", function() {
+        path.moveTo(0, 0).lineTo(10.001, 20.0005);
+
+        ok(pathNode.render().indexOf("d='M0 0 L 10.001 20.001'") !== -1);
+    });
+
     test("renders closed paths", function() {
         path.moveTo(0, 0).lineTo(10, 20).close();
 
