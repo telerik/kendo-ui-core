@@ -51,7 +51,7 @@
     test("click on toggleButton changes its state", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "toggleButton", id: "foo", text: "foo" }
+                { type: "button", toggle: true, id: "foo", text: "foo" }
             ]
         });
 
@@ -65,7 +65,7 @@
     test("click on a toggleButton's icon changes the button state", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "toggleButton", id: "foo", icon: "foo" }
+                { type: "button", toggle: true, id: "foo", icon: "foo" }
             ]
         });
 
@@ -79,7 +79,7 @@
     test("click on selected toggleButton deselects it", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "toggleButton", id: "foo", text: "foo" }
+                { type: "button", toggle: true, id: "foo", text: "foo" }
             ]
         });
 
@@ -95,7 +95,7 @@
     test("click on disabled toggleButton does not change its state", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "toggleButton", id: "foo", text: "foo", enable: false }
+                { type: "button", toggle: true, id: "foo", text: "foo", enable: false }
             ]
         });
 
@@ -108,7 +108,7 @@
     test("click on disabled toggleButton does not trigger the toggle event", 0, function() {
         container.kendoToolBar({
             items: [
-                { type: "toggleButton", id: "foo", text: "foo", enable: false }
+                { type: "button", toggle: true, id: "foo", text: "foo", enable: false }
             ],
             toggle: function(e) {
                 ok(false, "Toggle event should not fire for disabled buttons");
@@ -123,7 +123,7 @@
     test("click on toggleButton triggers toggle event", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "toggleButton", id: "foo", text: "foo" }
+                { type: "button", toggle: true, id: "foo", text: "foo" }
             ],
             toggle: function(e) {
                 ok(true, "Toggle event is clicked");
@@ -138,7 +138,7 @@
     test("preventng the toggle event does not change button state", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "toggleButton", id: "foo", text: "foo" }
+                { type: "button", toggle: true, id: "foo", text: "foo" }
             ],
             toggle: function(e) {
                 e.preventDefault();
@@ -154,8 +154,8 @@
     test("selecting toggle button that belongs to a group will deselect other buttons from the same group", 4, function() {
         container.kendoToolBar({
             items: [
-                { type: "toggleButton", text: "foo", group: "foo" },
-                { type: "toggleButton", text: "bar", group: "foo", selected: true }
+                { type: "button", toggle: true, text: "foo", group: "foo" },
+                { type: "button", toggle: true, text: "bar", group: "foo", selected: true }
             ]
         });
 
@@ -175,7 +175,7 @@
     test("click on splitButton triggers click event", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -193,7 +193,7 @@
     test("click on arrow button opens the popup", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -211,7 +211,7 @@
     test("second click at the arrow button closes the popup", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -231,7 +231,7 @@
     test("click on the splitButton does NOT open the popup", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -248,7 +248,7 @@
     test("click on the arrow button does NOT fire the click event", 0, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -266,7 +266,7 @@
     test("opening the splitButton popup triggers open event", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -284,7 +284,7 @@
     test("open event can be prevented", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -305,7 +305,7 @@
     test("closing the splitButton popup triggers close event", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -324,7 +324,7 @@
     test("close event can be prevented", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", options: [
+                { type: "splitButton", id: "foo", text: "foo", items: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
