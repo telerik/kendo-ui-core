@@ -60,20 +60,23 @@ var __meta__ = {
             },
 
             buttonGroup: {
-                toolbar: function (options) {
-                    var element = $('<div class="' + BUTTON_GROUP + '"></div>'),
-                        items = options.items,
-                        item;
-
+                base: function (element, items, initializer) {
                     element.data({ type: "buttonGroup" });
 
                     for (var i = 0; i < items.length; i++) {
-                        item = components.button.toolbar(items[i]);
+                        item = initializer(items[i]);
                         item.appendTo(element);
                     }
 
                     element.children("." + BUTTON).first().addClass(GROUP_START);
                     element.children("." + BUTTON).last().addClass(GROUP_END);
+                },
+                toolbar: function (options) {
+                    var element = $('<div class="' + BUTTON_GROUP + '"></div>'),
+                        items = options.items,
+                        item;
+
+                    components.buttonGroup.base(element, items, components.button.toolbar);
 
                     if (options.id) {
                         element.attr("id", options.id);
@@ -86,15 +89,7 @@ var __meta__ = {
                         items = options.items,
                         item;
 
-                    element.data({ type: "buttonGroup" });
-
-                    for (var i = 0; i < items.length; i++) {
-                        item = components.button.overflow(items[i]);
-                        item.appendTo(element);
-                    }
-
-                    element.find("." + BUTTON).first().addClass(GROUP_START);
-                    element.find("." + BUTTON).last().addClass(GROUP_END);
+                    components.buttonGroup.base(element, items, components.button.overflow);
 
                     if (options.id) {
                         element.attr("id", options.id + "_overflow");
@@ -122,7 +117,7 @@ var __meta__ = {
                     popupElement.appendTo(element);
 
                     for (var i = 0; i < items.length; i++) {
-                        item = $('<li id="' + items[i].id + '"><a class="' + BUTTON + '">' + items[i].text + '</a></li>');
+                        item = components.button.toolbar(items[i]).wrap("<li></li>").parent();
                         item.appendTo(popupElement);
                     }
 
@@ -174,9 +169,9 @@ var __meta__ = {
                     return element;
                 },
                 overflow: function(options) {
-                    var element = $('<span class="k-overflow-separator"></span>');
+                    var element = $('<li><span class="k-overflow-separator"></span></li>');
                     element.data({ type: "separator" });
-                    return element.wrap("<li></li>").parent();
+                    return element;
                 }
             },
 
@@ -409,6 +404,7 @@ var __meta__ = {
                 if (options.overflow !== OVERFLOW_NEVER) {
                     if (overflowTemplate) { //template command
                         overflowElement = isFunction(overflowTemplate) ? $(overflowTemplate(options)) : $(overflowTemplate);
+                        overflowElement = overflowElement.wrap("<li></li>").parent();
                     } else if (component) { //build-in command
                         overflowElement = (component.overflow || $.noop)(options);
                     }

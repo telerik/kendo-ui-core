@@ -331,6 +331,100 @@
         equal(button.data("uid"), overflowButton.data("uid"));
     });
 
+    test("button with showText: both has text both in toolbar and overflow popup", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", showText: "both" }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find(".k-button");
+        var overflowButton = toolbar.popup.element.children().eq(0);
+
+        equal(button.text(), "foo");
+        equal(overflowButton.text(), "foo");
+    });
+
+    test("button with showText: toolbar has text only in toolbar", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", showText: "toolbar" }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find(".k-button");
+        var overflowButton = toolbar.popup.element.children().eq(0);
+
+        equal(button.text(), "foo");
+        equal(overflowButton.text(), "");
+    });
+
+    test("button with showText: overflow has text only in overflow popup", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo", showText: "overflow" }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find(".k-button");
+        var overflowButton = toolbar.popup.element.children().eq(0);
+
+        equal(button.text(), "");
+        equal(overflowButton.text(), "foo");
+    });
+
+    test("button with showIcon: both has icon both in toolbar and overflow popup", 4, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", icon: "foo", showIcon: "both" }
+            ]
+        }).data("kendoToolBar");
+
+        var icon = toolbar.element.find(".k-button").children("span.k-icon");
+
+        equal(icon.length, 1);
+        ok(icon.hasClass("k-i-foo"));
+
+        icon = toolbar.popup.element.find(".k-button").children("span.k-icon");
+
+        equal(icon.length, 1);
+        ok(icon.hasClass("k-i-foo"));
+    });
+
+    test("button with showIcon: toolbar has icon only in toolbar", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", icon: "foo", showIcon: "toolbar" }
+            ]
+        }).data("kendoToolBar");
+
+        var icon = toolbar.element.find(".k-button").children("span.k-icon");
+
+        equal(icon.length, 1);
+        ok(icon.hasClass("k-i-foo"));
+
+        icon = toolbar.popup.element.find(".k-button").children("span.k-icon");
+
+        equal(icon.length, 0);
+    });
+
+    test("button with showIcon: overflow has icon only in overflow container", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", icon: "foo", showIcon: "overflow" }
+            ]
+        }).data("kendoToolBar");
+
+        var icon = toolbar.element.find(".k-button").children("span.k-icon");
+
+        equal(icon.length, 0);
+
+        icon = toolbar.popup.element.find(".k-button").children("span.k-icon");
+
+        equal(icon.length, 1);
+        ok(icon.hasClass("k-i-foo"));
+    });
+
     /* TOGGLE BUTTON */
 
     test("toggleButton has k-toggle-button class", 2, function() {
@@ -482,6 +576,61 @@
         equal(buttonGroup.attr("data-overflow"), "never");
     });
 
+    test("ButtonGroup with overflow auto is rendered both in toolbar and in overflow container", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", overflow: "auto", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var component = toolbar.element.find(".k-button-group");
+        ok(component.length);
+
+        component = toolbar.popup.element.find(".k-button-group");
+        ok(component.length);
+    });
+
+    test("Overflow ButtonGroup renders ul list with li items", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        component = toolbar.popup.element.find(".k-button-group");
+        equal(component.prop("tagName"), "UL");
+        equal(component.children("li").length, 3);
+    });
+
+    test("Overflow ButtonGroup is wrapped in li element and has uid + overflow data", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", overflow: "always", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        component = toolbar.popup.element.find(".k-button-group");
+        equal(component.parent().prop("tagName"), "LI");
+        ok(component.parent().data("uid"));
+        equal(component.parent().data("overflow"), "always");
+    });
+
+
     /* SPLIT BUTTON */
 
     test("renders splitButton from JSON", 2, function() {
@@ -615,6 +764,42 @@
         equal(splitButton.attr("data-overflow"), "never");
     });
 
+    test("Overflow SplitButton renders ul list with li items", 2, function() {
+        var splitButton = container.kendoToolBar({
+            items: [
+                { type: "splitButton", text: "foo", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        component = splitButton.popup.element.find(".k-split-button");
+
+        equal(component.prop("tagName"), "UL");
+        equal(component.children("li").length, 4); //3 items + 1 main button
+    });
+
+    test("Overflow SplitButton element is wrapped in a li tag and receives data attribute", 2, function() {
+        var splitButton = container.kendoToolBar({
+            items: [
+                { type: "splitButton", text: "foo", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        component = splitButton.popup.element.find(".k-split-button");
+
+        equal(component.parent().prop("tagName"), "UL");
+        ok(component.parent().data("uid"));
+    });
+
     /* SEPARATOR */
 
     test("renders separator from JSON", 1, function() {
@@ -625,6 +810,10 @@
         });
 
         ok(container.children(".k-toolbar-separator").length, "Separator element is rendered");
+    });
+
+    test("Overflow separator is wrapped inside a li tag", 1, function() {
+
     });
 
     /* COMMAND OVERFLOW */
