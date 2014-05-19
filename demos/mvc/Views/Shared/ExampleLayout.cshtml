@@ -21,10 +21,10 @@
         <div id="root-nav">
     @foreach (IGrouping<string, NavigationWidget> category in ViewBag.Categories)
     {
-        <ul>
+        <ul class="root-nav-categories">
             <li>
                 <h3>@category.Key</h3>
-                <ul>
+                <ul class="root-nav-widgets">
                 @foreach (var widget in category)
                 {
                     <li>
@@ -108,14 +108,15 @@
 
     @if (ViewBag.ShowCodeStrip == true)
     {
-        <div id="codeStrip">
-            @if(ViewBag.Product == "kendo-ui")
-            {
-                <button class="try-kendo"><span class="k-icon"></span>Edit this example</button>
-            }
+        <div id="codeStrip">           
             @if (!string.IsNullOrEmpty(ViewBag.Documentation))
             {
                 <a class="documentation-link k-link" href="@ViewBag.Documentation">API Reference</a>
+            }
+
+             @if(ViewBag.Product == "kendo-ui")
+            {
+                <button class="try-kendo"><span class="k-icon"></span>Edit this example</button>
             }
 
             @{
