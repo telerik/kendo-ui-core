@@ -50,18 +50,16 @@
         UNDEFINED = "undefined";
 
     // Canvas Surface ==========================================================
-    var Surface = Observable.extend({
-        init: function(wrap, options) {
-            var surface = this;
+    var Surface = d.Surface.extend({
+        init: function(container, options) {
+            d.Surface.fn.init.call(this);
 
-            Observable.fn.init.call(surface);
+            this.options = deepExtend({}, this.options, options);
 
-            surface._display = surface.options.inline ? "inline" : "block";
+            this._root = new Node();
+            this._root.parent = this;
 
-            surface._root = new Node();
-            surface._root.parent = this;
-
-            surface._appendTo(wrap);
+            this._appendTo(container);
         },
 
         options: {
@@ -69,32 +67,37 @@
             height: "100%"
         },
 
-        events: [
-            "click"
-        ],
+        events: [],
 
-        draw: function() {
-            this._root.load(arguments);
+        draw: function(element) {
+            this._root.load([element]);
         },
 
         clear: function() {
             this._root.clear();
         },
 
+        setSize: function(size) {
+            this.element.width = size.width;
+            this.element.height = size.height;
+
+            d.Surface.fn.setSize.call(this, size);
+        },
+
         _template: renderTemplate(
-            "<canvas style='position: relative; display: #= d._display #; " +
+            "<canvas style='position: absolute; " +
             "width: #= kendo.dataviz.util.renderSize(d.options.width) #; " +
-            "height: #= kendo.dataviz.util.renderSize(d.options.width) #;'></canvas>"
+            "height: #= kendo.dataviz.util.renderSize(d.options.height) #;'></canvas>"
         ),
 
-        _appendTo: function(wrap) {
+        _appendTo: function(container) {
             var surface = this,
                 options = surface.options,
-                canvas = wrap.firstElementChild;
+                canvas = container.firstElementChild;
 
             if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
-                wrap.innerHTML = surface._template(surface);
-                canvas = wrap.firstElementChild;
+                container.innerHTML = surface._template(surface);
+                canvas = container.firstElementChild;
             } else {
                 $(canvas).css({
                     width: options.width,
