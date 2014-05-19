@@ -23,38 +23,17 @@ var __meta__ = {
     var oldIE = isIE && browser.version < 9;
     var ui = kendo.ui;
     var Widget = ui.Widget;
-    var Touch = ui.Touch;
     var extend = $.extend;
     var map = $.map;
     var keys = kendo.keys;
-    var titleFromField = function(field) {
-        var title;
-
-        switch(field) {
-            case "title":
-                title = "Title";
-                break;
-            case "start":
-                title = "Start Time";
-                break;
-            case "end":
-                title = "End Time";
-                break;
-            case "percentComplete":
-                title = "% Done";
-                break;
-            case "parentId":
-                title = "Predecessor ID";
-                break;
-            case "id":
-                title = "ID";
-                break;
-            case "orderId":
-                title = "Order ID";
-                break;
-        }
-
-        return title;
+    var titleFromField = {
+        "title": "Title",
+        "start": "Start Time",
+        "end": "End Time",
+        "percentComplete": "% Done",
+        "parentId": "Predecessor ID",
+        "id": "ID",
+        "orderId": "Order ID"
     };
     var NS = ".kendoGanttList";
     var CLICK = "click";
@@ -140,7 +119,7 @@ var __meta__ = {
 
             this.columns = map(columns, function(column) {
                 column = typeof column === "string" ? {
-                    field: column, title: titleFromField(column)
+                    field: column, title: titleFromField[column]
                 } : column;
 
                 return extend(new model(), column);
