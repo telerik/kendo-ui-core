@@ -379,6 +379,10 @@
         ok(text.options.foo);
     });
 
+    test("sets default font", function() {
+        equal(text.options.font, "12px sans-serif");
+    });
+
     test("changing the origin triggers geometryChange", function() {
         text.observer = {
             geometryChange: function() {

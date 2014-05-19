@@ -207,6 +207,10 @@
 
             this.origin = origin || new g.Point();
             this.origin.observer = this;
+
+            if (!this.options.font) {
+                this.options.font = "12px sans-serif";
+            }
         },
 
         content: function(value) {
