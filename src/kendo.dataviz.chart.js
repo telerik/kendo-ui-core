@@ -5187,6 +5187,7 @@ var __meta__ = {
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
+            chart.id = uniqueId();
 
             chart.plotArea = plotArea;
 
@@ -5436,10 +5437,14 @@ var __meta__ = {
                     animation: {
                         type: CLIP
                     }
+                }),
+                highlightGroup = view.createGroup({
+                    id: chart.id
                 });
 
             group.children = elements;
-            return [group];
+            highlightGroup.children = [group];
+            return [highlightGroup];
         },
 
         traverseDataPoints: function(callback) {

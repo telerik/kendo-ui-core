@@ -135,7 +135,7 @@
 
         test("renders empty and non-empty scatter line series", 0, function() {
             setupScatterChart(plotArea, { series: [ { data: [] }, series ] });
-        });             
+        });
 
         // ------------------------------------------------------------
         module("Scatter Chart / Multiple Axes", {
@@ -263,8 +263,24 @@
             }
         });
 
+        test("generates unique id", function() {
+            ok(scatterChart.id);
+        });
+
+        test("renders group with ScatterChart id and no animations", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === scatterChart.id;
+            });
+
+            ok(group && !group.options.animation);
+            equal(group.options.id, scatterChart.id);
+        });
+
         test("sets group animation", function() {
-            equal(view.log.group[0].options.animation.type, "clip");
+            var group = view.findInLog("group", function(item) {
+                return item.options.animation;
+            });
+            equal(group.options.animation.type, "clip");
         });
 
         // ------------------------------------------------------------
@@ -577,10 +593,10 @@
             equal(note.label.content, "name");
         });
     })();
-    
+
     // ------------------------------------------------------------
-                           
-    (function() {      
+
+    (function() {
         module("Scatter Chart / Values exceeding axis min or max options ", {});
 
         test("values are not limited", 2, function() {
@@ -598,9 +614,9 @@
                     }
                 }
             };
-           
-            setupScatterChart(plotArea, { series: [ {data: [[1, 2]], type: "scatter"} ] });          
-        });          
+
+            setupScatterChart(plotArea, { series: [ {data: [[1, 2]], type: "scatter"} ] });
+        });
     })();
-    
+
 })();
