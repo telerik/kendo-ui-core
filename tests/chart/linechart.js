@@ -87,15 +87,6 @@
             ok(lineChart.id);
         });
 
-        test("renders group with LineChart id and no animations", function() {
-            var group = view.findInLog("group", function(item) {
-                return item.options.id === lineChart.id;
-            });
-
-            ok(group && !group.options.animation);
-            equal(group.options.id, lineChart.id);
-        });
-
         // ------------------------------------------------------------
         module("Line Chart / Values exceeding value axis min or max options ", {});
 
@@ -394,6 +385,15 @@
 
         test("line has same model id as its segment", function() {
             equal(view.log.path[0].style.data.modelId, lineChart._segments[0].modelId);
+        });
+
+        test("renders group with LineChart id and no animations", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === lineChart.id;
+            });
+
+            ok(group && !group.options.animation);
+            equal(group.options.id, lineChart.id);
         });
 
         test("renders line chart group", function() {

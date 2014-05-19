@@ -82,6 +82,17 @@
         );
 
         // ------------------------------------------------------------
+        module("Area Chart", {
+            setup: function() {
+                setupAreaChart(plotArea, { series: [ positiveSeries ] });
+            }
+        });
+
+        test("generates unique id", function() {
+            ok(areaChart.id);
+        });
+
+        // ------------------------------------------------------------
         module("Area Chart / Positive Values", {
             setup: function() {
                 setupAreaChart(plotArea, { series: [ positiveSeries ] });
@@ -120,7 +131,7 @@
 
         // ------------------------------------------------------------
         module("Area Chart / Values exceeding value axis min or max options ", {});
-        
+
         test("values are not limited", 2, function() {
             var plotArea = stubPlotArea(
                 function(categoryIndex) {
@@ -132,8 +143,8 @@
                     return Box2D();
                 }
             );
-            
-            setupAreaChart(plotArea, { series: [ {data: [1, 2]} ] });          
+
+            setupAreaChart(plotArea, { series: [ {data: [1, 2]} ] });
         });
 
         // ------------------------------------------------------------
@@ -381,12 +392,28 @@
             equal(polyline.style.data.modelId, areaChart._segments[0].modelId);
         });
 
+        test("renders group with AreaChart id and no animations", function() {
+            var group = view.findInLog("group", function(item) {
+                return item.options.id === areaChart.id;
+            });
+
+            ok(group && !group.options.animation);
+            equal(group.options.id, areaChart.id);
+        });
+
         test("renders area chart group", function() {
-            equal(view.log.group.length, 1);
+            var group = view.findInLog("group", function(item) {
+                return item.options.animation;
+            });
+
+            ok(group);
         });
 
         test("sets group animation", function() {
-            equal(view.log.group[0].options.animation.type, "clip");
+            var group = view.findInLog("group", function(item) {
+                return item.options.animation;
+            });
+            equal(group.options.animation.type, "clip");
         });
 
         test("area shape is open", function() {

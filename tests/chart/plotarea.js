@@ -856,7 +856,7 @@
                         name: "secondary"
                     }]
                 });
-       
+
             ok($.inArray(secondaryCategoryAxis, plotArea.panes[0].content.children) >= 0);
         });
 
@@ -3327,7 +3327,7 @@
         test("clears pane", function() {
             plotArea.panes[0].chartContainer.children[0].dirty = true;
             plotArea.redraw(plotArea.panes[0]);
-            
+
             ok(!plotArea.panes[0].chartContainer.children[0].dirty);
         });
 
@@ -3387,7 +3387,7 @@
 
             sameBox(plotArea.namedCategoryAxes.cAxisB.box, box);
         });
-        
+
         test("recreates crosshairs for the panes", function() {
             createPlotArea({
                 panes: [{
@@ -3408,14 +3408,14 @@
                     }
                 }
             });
-            
+
             plotArea.crosshairs[0].dirty = true;
             plotArea.crosshairs[1].dirty = true;
             plotArea.redraw(plotArea.panes[1]);
             ok(!plotArea.crosshairs[0].dirty);
             ok(!plotArea.crosshairs[1].dirty);
         });
-        
+
         test("destroys crosshairs", function() {
             createPlotArea({
                 valueAxis: {
@@ -3424,7 +3424,7 @@
                     }
                 }
             });
-            
+
             var crosshair = plotArea.crosshairs[0];
             stub(crosshair, "destroy");
             plotArea.redraw(plotArea.panes[0]);
@@ -3745,7 +3745,7 @@
             });
 
             plotArea = chart._model.children[1];
-
+            plotAreaElement = getElement(plotArea.id);
             clickChart(chart, plotAreaElement, 300, 300);
         });
 
