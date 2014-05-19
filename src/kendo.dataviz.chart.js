@@ -3231,6 +3231,7 @@ var __meta__ = {
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
+            chart.id = uniqueId();
 
             chart.plotArea = plotArea;
             chart.categoryAxis = plotArea.seriesCategoryAxis(options.series[0]);
@@ -3657,6 +3658,17 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.value;
+        },
+
+        getViewElements: function(view) {
+            var chart = this,
+                elements = ChartElement.fn.getViewElements.call(chart, view),
+                highlightGroup = view.createGroup({
+                    id: chart.id
+                });
+
+            highlightGroup.children = elements;
+            return [highlightGroup];
         }
     });
 
