@@ -1201,13 +1201,13 @@ p#copy
     height: 100%;
 }
 
-#main
+/*#main
 {
     float:left;
     width:970px;
     margin-right:30px;
     border-top: 1px solid #dfdfdf;
-}
+}*/
 
 .widgetOverview #main
 {
@@ -1989,9 +1989,7 @@ a.theme-builder:hover
 
 pre.prettyprint
 {
-    overflow: auto;
     font-family:courier,monospace;
-    height:400px;
 }
 
 /*console*/
@@ -3428,8 +3426,8 @@ ul.keyboard-legend li a {
 /* Footer */
 #footer
 {
-    padding-left: 36px;
-    padding-bottom: 24px;
+   
+   
     background-color: #2a2d33;
     position:relative;
     width: 100%;
@@ -3459,10 +3457,20 @@ a.footer-links:hover {
 .quick-links {
      padding-top: 1.917em;
      padding-bottom: 1em;
+     padding-left: 36px;
+}
+
+#telerik-logo {
+    background: transparent url(icon-telerik-badge.png) 0 0 no-repeat;
+    width: 30px;
+    height: 27px;
+    float: left;
 }
 
 .copyright {
-    background: transparent url(icon-telerik-badge.png) 0 0 no-repeat;
+    
+    padding-left: 36px;
+    padding-bottom: 24px;
 }
 
 .copyright p {
@@ -3516,8 +3524,12 @@ a.footer-links:hover {
 }
 
 /* Demos */
-#main {
-    padding: 4.583em 0 0 6.667em;
+#exampleTitle,
+#exampleWrap,
+#codeStrip
+{
+    padding: 4.583em 7.500em 0 7.500em;
+ 
 }
 
 #codeStrip .documentation-link,
@@ -3541,6 +3553,7 @@ a.footer-links:hover {
 
 .try-kendo{
     margin-right: 0;
+    padding: 10px 22px 9px;
 }
 
 .try-kendo .k-icon
@@ -3565,7 +3578,9 @@ a.footer-links:hover {
 
 #nav-wrapper {
     width: 299px;
+    border-top: 1px solid #e2e4e7;
     border-right: 1px solid #e2e4e7;
+    
     overflow-x: hidden;
     overflow-y: auto;
     float: left;
@@ -3603,7 +3618,8 @@ a.footer-links:hover {
 
 /* Experiment */
 #main {
-    float: left;
+    float: none;
+    width: auto;
 }
 
 #footer {
@@ -3611,20 +3627,77 @@ a.footer-links:hover {
 }
 
 #search-results {
-    positon: absolute;
+    position: absolute;
     z-index: 10;
     width: 250px;
 }
 
-#example-nav,
+.example-search-wrapper {
+    
+    background-color: #f5f7f8;
+    border-right: 1px solid #ebecee;
+    text-align: center;
+}
+
+#example-search-wrapper {
+    width: 299px;
+
+}
+
+
+
+#layout-search-wrapper {
+    font-size: 16px;
+    border-bottom: 1px solid #ebecee;
+}
+
+#example-search-wrapper input {
+    font-size: 14px;
+    margin: 1em;
+    padding: 0.5em;
+}
+
+
+#layout-search-wrapper input {
+    font-size: 16px;
+    width: 44%;
+    margin: 2.125em auto;
+    padding: 0.875em;
+}
+
+#search {
+    color: #aaaaaa;
+    line-height: 10px;
+    /*font-size: 14px;
+    padding: 0.643em;*/
+    border: 1px solid #d7dbdf;
+    /*margin: 1.071em;*/
+}
+
+/*#example-nav,
 #root-nav,
 #nav,
-#nav-wrapper,
+#nav-wrapper,*/
 body,
 html {
-    height: 100% !important;
-    margin: 0;
+  height: 100%;
+      /*margin: 0;
     padding: 0;
-    border: 0;
+    border: 0;*/
+    overflow: hidden;
+}
 
+#main {
+    height: calc(100% - 79px);
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+
+#nav-wrapper {
+    padding-bottom: 200px;
+    height: calc(100% - 139px)
+}
+#footer {
+    margin-bottom: 200px;
 }

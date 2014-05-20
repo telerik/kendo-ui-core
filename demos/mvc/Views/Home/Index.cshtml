@@ -4,49 +4,140 @@
 
 }
 @Html.Partial("WebSearchScript")
-<input type="search" id="search" />
-<ul id="search-results"></ul>
-@{
-    var columns = new[] {
-        new [] {
-            "Data Management",
-            "Editors",
-            "Layout"
-        },
-        new [] {
-            "Data Visualization",
-            "Diagramming",
-            "Geo Visualization"
-        },
-        new [] {
-            "Scheduling",
-            "Navigation",
-            "Interactivity & UX",
-            "Framework"
-        },
-        new [] {
-            "Mobile"
-        }
-    };
+<div id="layout-search-wrapper" class="search-wrapper">
+    <input type="search" id="search" />
+    <ul id="search-results"></ul>
+</div>
 
-    var categories = (IEnumerable<IGrouping<string, NavigationWidget>>)ViewBag.Categories;
-}
+<div id="overview">
+    <h2>@ViewBag.Product</h2>    
+    <div id="overview-widgets">
+  
+        <ul id="most-popular">
+            <li>
+                <h3>Most popular</h3>
+                <ul>
+                    <li><a href="#">Grid</a></li>
+                    <li><a href="#">Editor</a></li>
+                    <li><a href="#">Scheduler</a></li>
+                    <li><a href="#">DropDownList</a></li>
+                    <li><a href="#">Window</a></li>
+                    <li><a href="#">DatePicker</a></li>
+                    <li><a href="#">Upload</a></li>
+                    <li><a href="#">TreeView</a></li>
+                    <li><a href="#">TabStrip</a></li>
+                    <li><a href="#">Bar Charts</a></li>
+                    <li><a href="#">Line Charts</a></li>
+                    <li><a href="#">Pie Charts</a></li>
+                    <li><a href="#">Stock Charts</a></li>
+                    <li><a href="#">Drawer</a></li>
+                    <li><a href="#">Switch</a></li>
+                </ul>
+            </li>
+        </ul>
 
-@foreach (var column in columns)
-{
-    <ul>
-    @foreach (var columnCategory in column)
-    {
-        var category = categories.FirstOrDefault(c => c.Key == columnCategory);
-        <li>
-            <h3>@category.Key</h3>
-            <ul>
-            @foreach (var widget in category)
-            {
-                <li>@Html.WidgetLink(widget)</li>
+    @{
+        var columns = new[] {
+            new [] {
+                "Data Management",
+                "Editors",
+                "Layout"
+            },
+            new [] {
+                "Data Visualization",
+                "Diagramming",
+                "Geo Visualization"
+            },
+            new [] {
+                "Scheduling",
+                "Navigation",
+                "Interactivity & UX",
+                "Framework"
+            },
+            new [] {
+                "Mobile"
             }
-            </ul>
-        </li>
+        };
+
+        var categories = (IEnumerable<IGrouping<string, NavigationWidget>>)ViewBag.Categories;
     }
-    </ul>
+
+    @foreach (var column in columns)
+    {
+        <ul>
+        @foreach (var columnCategory in column)
+        {
+            var category = categories.FirstOrDefault(c => c.Key == columnCategory);
+            <li class="widget">
+                <h3>@category.Key</h3>
+                <ul>
+                @foreach (var widget in category)
+                {
+                    <li>@Html.WidgetLink(widget)</li>
+                }
+                </ul>
+            </li>
+        }
+        </ul>
+    }
+
+    </div>
+</div>
+
+<style>
+    #overview-widgets {
+        width: auto;
+        margin:auto;
+        text-align: center;
+    }
+
+    #overview h2 {
+        color: #000;
+        font: 400 40px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
+        text-align: left;
+        padding: 1.725em 0 0.700em;
+        margin: auto;
+        text-align: center;
+    }
+
+    #overview-widgets ul {
+        display: inline-block;
+        text-align: left;
+       padding-right: 50px;
+       vertical-align: top;
+ 
+    }
+
+
+#overview-widgets > ul > li{
+    border-right: 1px solid #ebecee;
 }
+
+#overview-widgets > ul > li:last-child{
+  
+}
+
+#overview-widgets ul li {
+        font-size: 13px;
+        color: #0487c4;
+        line-height: 13px;
+        padding: 0.462em 0;
+}
+
+#overview-widgets ul li ul {
+    padding-bottom: 1.615em;
+}
+
+#overview-widgets ul h3 {
+        font-size: 12px;
+        color: #000;
+        font-weight: bold;
+        text-transform: uppercase;        
+}
+
+#most-popular a{
+    font-size: 24px;
+    line-height: 22px;
+    padding: 0.259em 0;
+}
+</style>

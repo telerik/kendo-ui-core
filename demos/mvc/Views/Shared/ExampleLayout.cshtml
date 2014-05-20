@@ -1,41 +1,52 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    string navProduct = new Dictionary<string, string> {
-        {"aspnet-mvc", "mvc"},
-        {"kendo-ui", "online"},
-        {"php-ui", "php"},
-        {"jsp-ui", "jsp"}
-    }[ViewBag.Product];
+    ViewBag.SuppressFooter = true;
+
+    string navProduct = ViewBag.NavProduct;
 }
 
+<script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>
+
+<script>
+    var path = "../";
+</script>
 @Html.Partial("WebSearchScript")
+<div id="example-search-wrapper" class="search-wrapper">
+    <div class="search">
+        <input id="example-search" placeholder="Search demos"/>
+  @*      <span id="icon-search" class="k-uniE600"></span>*@
+    </div>
+</div>
 
 <div id="nav-wrapper">
-    <input type="search" id="search" />
-    <ul id="search-results"></ul>
+
     <div id="nav">
         <div id="root-nav">
     @foreach (IGrouping<string, NavigationWidget> category in ViewBag.Categories)
     {
         <ul class="root-nav-categories">
+            @if (category.Any(c => c.ShouldInclude((string)ViewBag.NavProduct)))
+            {
             <li>
                 <h3>@category.Key</h3>
                 <ul class="root-nav-widgets">
                 @foreach (var widget in category)
                 {
-                    <li>
-                        @Html.WidgetLink(widget)
-                    </li>
+                    if (widget.ShouldInclude((string)ViewBag.NavProduct))
+                    {
+                    <li>@Html.WidgetLink(widget)</li>
+                    }
                 }
                 </ul>
             </li>
+            }
         </ul>
     }
         </div>
 
         <div id="example-nav">
-            <a href="#" id="back-nav">Back</a>
+            <a href="#" id="back-nav" class="k-uniE604"></a>
 
         <h4>@ViewBag.CurrentWidget.Text</h4>
         <ul>
@@ -55,6 +66,8 @@
             $("#nav").addClass("root");
             e.preventDefault();
         });
+
+        $(document).ready(resizeContainers);
     </script>
 </div>
 <div id="main">
@@ -108,13 +121,13 @@
 
     @if (ViewBag.ShowCodeStrip == true)
     {
-        <div id="codeStrip">           
-            @if (!string.IsNullOrEmpty(ViewBag.Documentation))
+        <div id="codeStrip">
+            @if (!string.IsNullOrEmpty(ViewBag.Api))
             {
-                <a class="documentation-link k-link" href="@ViewBag.Documentation">API Reference</a>
+                <a class="documentation-link k-link" href="@ViewBag.Api">API Reference</a>
             }
 
-             @if(ViewBag.Product == "kendo-ui")
+            @if (ViewBag.Product == "kendo-ui")
             {
                 <button class="try-kendo"><span class="k-icon"></span>Edit this example</button>
             }
