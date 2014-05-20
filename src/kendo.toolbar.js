@@ -56,11 +56,13 @@ var __meta__ = {
             button: {
                 base: createButton,
                 toolbar: createToolbarButton,
-                overflow: createOverflowButton,
+                overflow: createOverflowButton
             },
 
             buttonGroup: {
                 base: function (element, items, initializer) {
+                    var item;
+
                     element.data({ type: "buttonGroup" });
 
                     for (var i = 0; i < items.length; i++) {
@@ -178,7 +180,7 @@ var __meta__ = {
             overflowAnchor: '<div class="k-overflow-anchor"></div>',
 
             overflowContainer: '<ul class="k-overflow-container"></ul>'
-        }
+        };
 
         function createButton(options, button) {
             var element = button ? $('<button class="' + BUTTON + '"></button>') : $('<a href="" class="' + BUTTON + '"></a>');
@@ -410,7 +412,7 @@ var __meta__ = {
                     }
 
                     if (overflowElement.length) {
-                        this._attributes(overflowElement, options)
+                        this._attributes(overflowElement, options);
                         overflowElement.appendTo(this.popup.element);
 
                         if (overflowElement.data("overflow") === OVERFLOW_AUTO) {
@@ -530,7 +532,7 @@ var __meta__ = {
                     commandElement = this.element.children(":hidden").first();
                     if (!commandElement.length || !this._showItem(commandElement, containerWidth)) {
                         break;
-                    };
+                    }
                 }
             },
 

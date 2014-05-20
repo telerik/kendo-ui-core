@@ -796,7 +796,7 @@
 
         component = splitButton.popup.element.find(".k-split-button");
 
-        equal(component.parent().prop("tagName"), "UL");
+        equal(component.parent().prop("tagName"), "LI");
         ok(component.parent().data("uid"));
     });
 
@@ -813,7 +813,15 @@
     });
 
     test("Overflow separator is wrapped inside a li tag", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "separator" }
+            ]
+        }).data("kendoToolBar");
 
+        var separator = toolbar.popup.element.find(".k-overflow-separator");
+
+        equal(separator.parent().prop("tagName"), "LI");
     });
 
     /* COMMAND OVERFLOW */
