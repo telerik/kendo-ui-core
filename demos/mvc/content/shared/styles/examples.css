@@ -14,7 +14,7 @@
 }
 
 
-body,h1,h2,h3,p,ul,li,a,button,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#nav-pager,#examples-list,#themeChooser,.widgetGrid ul
+body,h1,h2,h3,h4,p,ul,li,a,button,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#nav-pager,#examples-list,#themeChooser,.widgetGrid ul
 {
     margin:0;
     padding:0;
@@ -591,6 +591,10 @@ div.submenu-box ol {
     border:1px solid #dfdfdf;
     border-top: none;
     background: #fbfbfc;
+}
+
+#source-code {
+    background: #fff;
 }
 
 .demos-nav
@@ -3487,9 +3491,10 @@ a.footer-links:hover {
 .root-nav-categories h3,
 #example-nav h4 {
     color: #000;
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 14px;
     text-transform: uppercase;
-    padding: 0.500em 0 0.833em 4.167em;
+    padding: 0.5em 0 0.5em 3.571em;
 }
 
 .root-nav-categories {
@@ -3503,11 +3508,11 @@ a.footer-links:hover {
 
 #root-nav li a,
 #example-nav li a {
-    font-size: 13px;
-    line-height: 13px;
+    font-size: 14px;
+    line-height: 14px;
     color: #2d3e50;
     display: block;
-    padding: 0.538em 0 0.538em 3.846em;
+    padding: 0.5em 0 0.5em 3.571em;
     transition: all .2s ease;
 }
 
@@ -3526,10 +3531,18 @@ a.footer-links:hover {
 /* Demos */
 #exampleTitle,
 #exampleWrap,
-#codeStrip
-{
-    padding: 4.583em 7.500em 0 7.500em;
- 
+#codeStrip,
+#resources-technologies {
+    margin: 4.583em 7.500em 5.000em 7.500em; 
+}
+
+#resources-technologies {
+    background-color: #f5f7f8;
+    border: 1px solid #ebecee;
+}
+
+#resources-technologies ul {
+    display: inline-block;    
 }
 
 #codeStrip .documentation-link,
@@ -3644,11 +3657,11 @@ a.footer-links:hover {
 
 }
 
-
-
 #layout-search-wrapper {
     font-size: 16px;
     border-bottom: 1px solid #ebecee;
+    text-align: center;
+    background-color: #f5f7f8;
 }
 
 #example-search-wrapper input {
@@ -3656,7 +3669,6 @@ a.footer-links:hover {
     margin: 1em;
     padding: 0.5em;
 }
-
 
 #layout-search-wrapper input {
     font-size: 16px;
@@ -3699,5 +3711,5 @@ html {
     /*height: calc(100% - 140px)*/
 }
 #footer {
-    margin-bottom: 200px;
+    /*margin-bottom: 200px;*/
 }

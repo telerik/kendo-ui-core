@@ -29,12 +29,12 @@
     <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
     <script>
         $(document).ready(function () {
-            debugger;
             var headerHeight = $("#header").height(),
                 searchWrapper = $("#example-search-wrapper").height(),
                 htmlHeight = $('html').height();
             navHeight = htmlHeight - (headerHeight + searchWrapper);
             $("#nav-wrapper").height(navHeight);
+            $("#main").height(navHeight);
         });
     </script>
 

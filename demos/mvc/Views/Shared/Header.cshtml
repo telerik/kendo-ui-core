@@ -11,7 +11,7 @@
 
 <div id="header">
     <div id="logo-bar">
-        <a href="http://www.telerik.com/@ViewBag.Product">
+        <a href="@Url.Content("~")">
             <img alt="@(ProductNames[ViewBag.Product]) logo" class="logo" src="@Url.Content("~/content/shared/images/logos/" + ViewBag.Product + ".png")"/>
         </a>
     </div>
