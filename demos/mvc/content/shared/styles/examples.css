@@ -3632,7 +3632,7 @@ a.footer-links:hover {
     width: 250px;
 }
 
-.example-search-wrapper {
+#example-search-wrapper {
     
     background-color: #f5f7f8;
     border-right: 1px solid #ebecee;
@@ -3696,7 +3696,7 @@ html {
 
 #nav-wrapper {
     padding-bottom: 200px;
-    height: calc(100% - 139px)
+    /*height: calc(100% - 140px)*/
 }
 #footer {
     margin-bottom: 200px;
