@@ -23,6 +23,8 @@ var __meta__ = {
         CHANGE = "change",
         NS = ".kendoSelectable",
         UNSELECTING = "k-state-unselecting",
+        INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select",
+        msie = kendo.support.browser.msie,
         supportEventDelegation = false;
 
         (function($) {
@@ -108,6 +110,10 @@ var __meta__ = {
                 return;
             }
 
+            if (!this._allowSelection(e.event.target)) {
+                return;
+            }
+
             selected = target.hasClass(SELECTED);
             if (!multiple || !ctrlKey) {
                 that.clear();
@@ -135,6 +141,10 @@ var __meta__ = {
                 selected = target.hasClass(SELECTED),
                 currentElement,
                 ctrlKey = e.event.ctrlKey || e.event.metaKey;
+
+            if (!this._allowSelection(e.event.target)) {
+                return;
+            }
 
             that._downTarget = target;
 
@@ -298,14 +308,21 @@ var __meta__ = {
         },
 
         _select: function(e) {
-            var selector = "input,a,textarea,.k-multiselect-wrap,select",
-                msie = kendo.support.browser.msie;
-            if ($(e.event.target).is(selector)) {
+            if (this._allowSelection(e.event.target)) {
+                if (!msie || (msie && !$(kendo._activeElement()).is(INPUTSELECTOR))) {
+                    e.preventDefault();
+                }
+            }
+        },
+
+        _allowSelection: function(target) {
+            if ($(target).is(INPUTSELECTOR)) {
                 this.userEvents.cancel();
                 this._downTarget = null;
-            } else if (!msie || (msie && !$(kendo._activeElement()).is(selector))) {
-                e.preventDefault();
+                return false;
             }
+
+            return true;
         },
 
         clear: function() {
