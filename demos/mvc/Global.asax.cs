@@ -94,13 +94,13 @@ namespace Kendo
 
             routes.MapRoute(
                 "MobileApplication",
-                "mobile/apps/{app}",
+                "mobile-apps/{app}",
                 new { controller = "MobileApps", action = "Index" }
             );
 
             routes.MapRoute(
                 "MobileApplicationInstance",
-                "mobile/apps/{app}/contents",
+                "mobile-apps/{app}/contents",
                 new { controller = "MobileApps", action = "App" }
             );
 

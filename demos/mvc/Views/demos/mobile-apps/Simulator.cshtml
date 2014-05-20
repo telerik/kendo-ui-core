@@ -23,7 +23,7 @@
     }
     <script>
         if (kendo.support.mobileOS) {
-            top.location.href = "@Url.Content(String.Format("~/mobile/apps/{0}/contents", ViewBag.App))";
+            top.location.href = "@Url.Content(String.Format("~/mobile-apps/{0}/contents", ViewBag.App))";
         }
     </script>
 </head>
@@ -52,7 +52,7 @@
             <div class="device-skin"></div>
             <input id="address-bar" type="text" onchange="frame.src = 'http://' + this.value.replace('http://', '')" />
             <button id="navigate-back"></button>
-            <iframe id="simulator" src="@Url.Content(String.Format("~/mobile/apps/{0}/contents", ViewBag.App))"></iframe>
+            <iframe id="simulator" src="@Url.Content(String.Format("~/mobile-apps/{0}/contents", ViewBag.App))"></iframe>
         </div>
     </div>
     <div class="fake3d"></div>

@@ -15,7 +15,7 @@ namespace Kendo.Controllers
 #endif
 
             @ViewBag.App = app;
-            return View("~/Views/mobile/apps/Simulator.cshtml");
+            return View("~/Views/demos/mobile-apps/Simulator.cshtml");
         }
 
         public ActionResult App(string app)
@@ -27,7 +27,7 @@ namespace Kendo.Controllers
 #endif
 
             return View(
-                string.Format("~/Views/mobile/apps/{0}.cshtml", app)
+                string.Format("~/Views/demos/mobile-apps/{0}.cshtml", app)
             );
         }
     }
