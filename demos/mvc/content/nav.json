@@ -1030,7 +1030,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "grid/local-data",
+        "url": "grid/local-data-binding",
         "title": {
             "kendo-ui": "Binding to local data in Kendo UI Grid | Kendo UI Web"
         },
@@ -1210,7 +1210,7 @@
       {
         "text": "Virtualization of local data",
         "disableInMobile": true,
-        "url": "grid/virtualization-local-data",
+        "url": "grid/virtualization-local-data-binding",
         "title": {
             "kendo-ui": "Example of local data virtualization in Kendo UI Grid control"
         },
@@ -3056,7 +3056,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "treeview/local-data",
+        "url": "treeview/local-data-binding",
         "title": {
             "kendo-ui": "Binding to local data demo for Kendo UI TreeView control"
         },
@@ -3980,7 +3980,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "area-charts/local-data",
+        "url": "area-charts/local-data-binding",
         "title": {
             "kendo-ui": "Kendo UI Area Charts binding to local data example"
         },
@@ -4175,7 +4175,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "bar-charts/local-data",
+        "url": "bar-charts/local-data-binding",
         "title": {
             "kendo-ui": "Local data-binding example | Kendo UI Bar Charts"
         },
@@ -4237,7 +4237,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "box-plot-charts/local-data",
+        "url": "box-plot-charts/local-data-binding",
         "title": {
             "kendo-ui": "Kendo UI jQuery Box Plot Charts binding to local data demo"
         }
@@ -4292,7 +4292,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "bubble-charts/local-data",
+        "url": "bubble-charts/local-data-binding",
         "title": {
             "kendo-ui": "Local data binding mode in Kendo UI Bubble chart widget"
         },
@@ -4348,7 +4348,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "bullet-charts/local-data",
+        "url": "bullet-charts/local-data-binding",
         "title": {
             "kendo-ui": "Local Data Binding in Bullet Charts | Kendo UI Bullet charts demo"
         },
@@ -4425,7 +4425,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "donut-charts/local-data",
+        "url": "donut-charts/local-data-binding",
         "title": {
             "kendo-ui": "Local data binding in Kendo UI Donut Charts"
         },
@@ -4498,7 +4498,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "funnel-charts/local-data",
+        "url": "funnel-charts/local-data-binding",
         "title": {
             "kendo-ui": "Local data binding in Kendo UI Funnel Charts"
         },
@@ -4648,7 +4648,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "line-charts/local-data",
+        "url": "line-charts/local-data-binding",
         "title": {
             "kendo-ui": "Binding to local data example | Kendo UI Line Charts"
         },
@@ -4726,7 +4726,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "pie-charts/local-data",
+        "url": "pie-charts/local-data-binding",
         "title": {
             "kendo-ui": "Kendo UI jQuery Pie Charts binding to local data demo"
         },
@@ -4813,7 +4813,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "polar-charts/local-data",
+        "url": "polar-charts/local-data-binding",
         "title": {
             "kendo-ui": "Kendo UI Polar Charts binding to local data example"
         },
@@ -4901,7 +4901,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "radar-charts/local-data",
+        "url": "radar-charts/local-data-binding",
         "title": {
             "kendo-ui": "Kendo UI Radar Charts binding to local data example"
         },
@@ -5010,7 +5010,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "scatter-charts/local-data",
+        "url": "scatter-charts/local-data-binding",
         "title": {
             "kendo-ui": "Example of binding to local data in Kendo UI jQuery Scatter Charts"
         },
@@ -5090,7 +5090,7 @@
       },
       {
         "text": "Binding to local data",
-        "url": "sparklines/local-data",
+        "url": "sparklines/local-data-binding",
         "title": {
             "kendo-ui": "Local data binding in Kendo UI Sparkline Chart | Kendo UI Sparklines"
         },
