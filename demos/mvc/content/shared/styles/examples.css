@@ -30,7 +30,8 @@ body {
 
 body,
 html {
-    height: 100%;
+   height: 100%;
+   overflow: hidden;
 }
 
 img
@@ -56,7 +57,6 @@ a,
 
 html
 {
-    overflow-y:scroll;
     font:75% Arial,Helvetica,sans-serif;
 }
 
@@ -3639,6 +3639,12 @@ a.footer-links:hover {
     clear: both;
 }
 
+#search {
+    background-image: url("");
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
 #search-results {
     position: absolute;
     z-index: 10;
@@ -3654,7 +3660,6 @@ a.footer-links:hover {
 
 #example-search-wrapper {
     width: 299px;
-
 }
 
 #layout-search-wrapper {
@@ -3666,12 +3671,16 @@ a.footer-links:hover {
 
 #example-search-wrapper input {
     font-size: 14px;
+    line-height: 14px;
+    vertical-align: middle;
     margin: 1em;
     padding: 0.5em;
 }
 
 #layout-search-wrapper input {
     font-size: 16px;
+    line-height: 16px;
+    vertical-align: middle;
     width: 44%;
     margin: 2.125em auto;
     padding: 0.875em;
@@ -3686,30 +3695,8 @@ a.footer-links:hover {
     /*margin: 1.071em;*/
 }
 
-/*#example-nav,
-#root-nav,
-#nav,
-#nav-wrapper,*/
-body,
-html {
-  height: 100%;
-      /*margin: 0;
-    padding: 0;
-    border: 0;*/
-    overflow: hidden;
-}
 
 #main {
-    height: calc(100% - 79px);
     overflow-x: hidden;
     overflow-y: auto;
-
-}
-
-#nav-wrapper {
-    padding-bottom: 200px;
-    /*height: calc(100% - 140px)*/
-}
-#footer {
-    /*margin-bottom: 200px;*/
 }
