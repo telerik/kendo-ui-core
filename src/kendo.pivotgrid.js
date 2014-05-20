@@ -193,7 +193,7 @@ var __meta__ = {
         result.columns.tuples = mergeTuples(columnTuples, sourceTuples);
 
         if (source.rows) {
-            result.rows.tuples = parseSource(source.rows.tuples || []);
+            result.rows.tuples = parseSource(source.rows.tuples || [], measures);
         }
 
         return result;
