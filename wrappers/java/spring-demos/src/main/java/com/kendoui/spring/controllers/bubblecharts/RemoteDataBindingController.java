@@ -12,13 +12,13 @@ import com.kendoui.spring.models.CrimeData;
 
 @Controller("dataviz-bubble_charts_remote_data-controller")
 @RequestMapping(value="/bubble-charts/")
-public class RemoteDataController {
-    @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
+public class RemoteDataBindingController {
+    @RequestMapping(value = "/remote-data-binding", method = RequestMethod.GET)
     public String index() {
-        return "/bubble-charts/remote-data";
+        return "/bubble-charts/remote-data-binding";
     }
     
-    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/remote-data-binding/read", method = RequestMethod.POST)
     public @ResponseBody List<CrimeData> read() {
         return ChartDataRepository.CrimeStats();
     }

@@ -12,13 +12,13 @@ import com.kendoui.spring.models.AntennaGainItem;
 
 @Controller("dataviz-polar_charts_remote_data-controller")
 @RequestMapping(value="/polar-charts/")
-public class RemoteDataController {
-    @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
+public class RemoteDataBindingController {
+    @RequestMapping(value = "/remote-data-binding", method = RequestMethod.GET)
     public String index() {
-        return "/polar-charts/remote-data";
+        return "/polar-charts/remote-data-binding";
     }
     
-    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/remote-data-binding/read", method = RequestMethod.POST)
     public @ResponseBody List<AntennaGainItem> read() {
         return ChartDataRepository.AntennaGain();
     }

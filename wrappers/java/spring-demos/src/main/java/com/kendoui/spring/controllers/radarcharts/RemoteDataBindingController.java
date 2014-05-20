@@ -12,13 +12,13 @@ import com.kendoui.spring.models.BudgetReportItem;
 
 @Controller("dataviz-radar_charts_remote_data-controller")
 @RequestMapping(value="/radar-charts/")
-public class RemoteDataController {
-    @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
+public class RemoteDataBindingController {
+    @RequestMapping(value = "/remote-data-binding", method = RequestMethod.GET)
     public String index() {
-        return "/radar-charts/remote-data";
+        return "/radar-charts/remote-data-binding";
     }
     
-    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/remote-data-binding/read", method = RequestMethod.POST)
     public @ResponseBody List<BudgetReportItem> read() {
         return ChartDataRepository.BudgetReport();
     }

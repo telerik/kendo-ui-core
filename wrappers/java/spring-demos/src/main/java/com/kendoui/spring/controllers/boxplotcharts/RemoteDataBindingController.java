@@ -12,13 +12,13 @@ import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-box_plot_charts_remote_data-controller")
 @RequestMapping(value="//box-plot-charts/")
-public class RemoteDataController {
-    @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
+public class RemoteDataBindingController {
+    @RequestMapping(value = "/remote-data-binding", method = RequestMethod.GET)
     public String index() {
-        return "//box-plot-charts/remote-data";
+        return "//box-plot-charts/remote-data-binding";
     }
     
-    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/remote-data-binding/read", method = RequestMethod.POST)
     public @ResponseBody List<BoxPlotCategoryPoint> read() {
         return ChartDataRepository.OzoneConcentrationRemote();
     }

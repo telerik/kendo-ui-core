@@ -1,4 +1,4 @@
-package com.kendoui.spring.controllers.linecharts;
+package com.kendoui.spring.controllers.areacharts;
 
 import java.util.List;
 
@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ElectricityProduction;
 
-@Controller("dataviz-line_charts_remote_data-controller")
-@RequestMapping(value="/line-charts/")
-public class RemoteDataController {
-    @RequestMapping(value = "/remote-data", method = RequestMethod.GET)
+@Controller("dataviz-area_charts_remote_data-controller")
+@RequestMapping(value="/area-charts/")
+public class RemoteDataBindingController {
+    @RequestMapping(value = "/remote-data-binding", method = RequestMethod.GET)
     public String index() {
-        return "/line-charts/remote-data";
+        return "/area-charts/remote-data-binding";
     }
     
-    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/remote-data-binding/read", method = RequestMethod.POST)
     public @ResponseBody List<ElectricityProduction> read() {
         return ChartDataRepository.SpainElectricityProduction();
     }
