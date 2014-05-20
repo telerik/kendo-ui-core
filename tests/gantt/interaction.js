@@ -287,6 +287,23 @@
         }
     });
 
+    test("applies hover state to list item on mouseenter", function () {
+        var dropDown = gantt.headerDropDown;
+
+        dropDown.list.find("li.k-item").eq(0).mouseenter();
+
+        ok(dropDown.list.find("li.k-item").hasClass("k-state-hover"));
+    });
+
+    test("removes hover state to list item on mouseleave", function () {
+        var dropDown = gantt.headerDropDown;
+
+        dropDown.list.find("li.k-item").eq(0).mouseenter();
+        dropDown.list.find("li.k-item").eq(0).mouseleave();
+
+        ok(!dropDown.list.find("li.k-item").hasClass("k-state-hover"));
+    });
+
     test("triggers command upon click", 2, function() {
         var dropDown = gantt.headerDropDown;
 

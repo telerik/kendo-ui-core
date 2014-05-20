@@ -23,6 +23,7 @@ var __meta__ = {
     var map = $.map;
     var NS = ".kendoGantt";
     var CLICK = "click";
+    var WIDTH = "width";
     var DIRECTIONS = {
         "down": {
             origin: "bottom center",
@@ -40,7 +41,7 @@ var __meta__ = {
     var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles#">' +
             '<ul class="k-reset k-header k-toolbar k-gantt-actions">' +
-                '<li class="k-state-default" data-action="#=action.data#"><a href="\\#" class="k-link">#=action.title#</a></li>' +
+                '<li class="k-button k-button-icontext" data-action="#=action.data#"><span class="k-icon k-i-plus"></span>#=action.title#</li>' +
             '</ul>' +
             '<ul class="k-reset k-header k-toolbar k-gantt-views">' +
                 '#for(var view in views){#' +
@@ -57,7 +58,7 @@ var __meta__ = {
         '</div>');
     var FOOTER_TEMPLATE = kendo.template('<div class="#=styles#">' +
             '<ul class="k-reset k-header k-toolbar k-gantt-actions">' +
-                '<li class="k-state-default" data-action="#=action.data#"><a href="\\#" class="k-link">#=action.title#</a></li>' +
+                '<li class="k-button k-button-icontext" data-action="#=action.data#"><span class="k-icon k-i-plus"></span>#=action.title#</li>' +
             '</ul>' +
         '</div>');
 
@@ -112,7 +113,12 @@ var __meta__ = {
             this.element.append(this.list);
 
             this.popup = new kendo.ui.Popup(this.list,
-                extend({ anchor: this.element }, DIRECTIONS[this.options.direction])
+                extend({
+                    anchor: this.element,
+                    open: function (e) {
+                        that._adjustListWidth();
+                    }
+                }, DIRECTIONS[this.options.direction])
             );
 
             this.element.on("click" + NS, "li", function(e) {
@@ -128,10 +134,50 @@ var __meta__ = {
                 }
             });
 
-            this.list.on("click" + NS, "li.k-item", function(e) {
-                that.trigger("command", { type: $(this).attr(kendo.attr("action")) });
-                that.popup.close();
-            });
+            this.list
+                .find("li.k-item")
+                .hover(function() {
+                    $(this).addClass("k-state-hover");
+                }, function() {
+                    $(this).removeClass("k-state-hover");
+                })
+                .end()
+                .on("click" + NS, "li.k-item", function (e) {
+                    that.trigger("command", { type: $(this).attr(kendo.attr("action")) });
+                    that.popup.close();
+                });
+        },
+
+        _adjustListWidth: function() {
+            var list = this.list;
+            var width = list[0].style.width;
+            var wrapper = this.element;
+            var browser = kendo.support.browser;
+            var computedStyle;
+            var computedWidth;
+
+            if (!list.data(WIDTH) && width) {
+                return;
+            }
+
+            computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
+            computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
+
+            if (computedStyle && (browser.mozilla || browser.msie)) { // getComputedStyle returns different box in FF and IE.
+                computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
+            }
+
+            if (list.css("box-sizing") !== "border-box") {
+                width = computedWidth - (list.outerWidth() - list.width());
+            } else {
+                width = computedWidth;
+            }
+
+            list.css({
+                fontFamily: wrapper.css("font-family"),
+                width: width
+            })
+            .data(WIDTH, width);
         },
 
         destroy: function() {

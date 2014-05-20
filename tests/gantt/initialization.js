@@ -48,15 +48,27 @@
     test("toolbar is created", 2, function() {
         var gantt = new Gantt(element);
 
-        ok(gantt.wrapper.find(".k-gantt-toolbar").length);
-        equal(gantt.wrapper.find(".k-gantt-toolbar")[0], gantt.toolbar[0]);
+        ok(gantt.toolbar);
+        equal(gantt.wrapper.children(".k-gantt-toolbar")[0], gantt.toolbar[0]);
+    });
+
+    test("css classes added to the toolbar", function () {
+        var gantt = new Gantt(element);
+
+        ok(gantt.toolbar.hasClass("k-floatwrap k-header"));
     });
 
     test("footer is created", 2, function() {
         var gantt = new Gantt(element);
 
-        ok(gantt.wrapper.find(".k-gantt-toolbar").length);
-        equal(gantt.wrapper.find(".k-gantt-toolbar")[1], gantt.footer[0]);
+        ok(gantt.footer);
+        equal(gantt.wrapper.children(".k-gantt-toolbar")[1], gantt.footer[0]);
+    });
+
+    test("css classes added to the footer", function () {
+        var gantt = new Gantt(element);
+
+        ok(gantt.footer.hasClass("k-floatwrap k-header"));
     });
 
     test("view buttons are added to the toolbar", 2, function() {
@@ -68,20 +80,62 @@
         equal(gantt.toolbar.find(".k-gantt-views .k-link").text(), "Day");
     });
 
-    test("default action button is added to the toolbar", 3, function() {
+    test("toolbar action button is added", 2, function () {
         var gantt = new Gantt(element);
 
         ok(gantt.toolbar.find(".k-gantt-actions").length);
-        equal(gantt.toolbar.find(".k-gantt-actions li").attr("data-action"), "add");
-        equal(gantt.toolbar.find(".k-gantt-actions li").text(), "Add Task");
+        ok(gantt.toolbar.find(".k-gantt-actions").hasClass("k-reset k-header k-toolbar"));
     });
 
-    test("default action button is added to the footer", 3, function() {
+    test("toolbar action button's elements are rendered", 4, function () {
+        var gantt = new Gantt(element);
+
+        ok(gantt.toolbar.find(".k-gantt-actions > li").length);
+        ok(gantt.toolbar.find(".k-gantt-actions > li").hasClass("k-button k-button-icontext"));
+
+        ok(gantt.toolbar.find(".k-gantt-actions span").length);
+        ok(gantt.toolbar.find(".k-gantt-actions span").hasClass("k-icon k-i-plus"));
+    });
+
+    test("toolbar action button data attributes are rendered", function () {
+        var gantt = new Gantt(element);
+
+        equal(gantt.toolbar.find(".k-gantt-actions > li").attr("data-action"), "add");
+    });
+
+    test("toolbar action button text is rendered", function () {
+        var gantt = new Gantt(element);
+
+        equal(gantt.toolbar.find(".k-gantt-actions > li").text(), "Add Task");
+    });
+
+    test("footer action button is added", 2, function () {
         var gantt = new Gantt(element);
 
         ok(gantt.footer.find(".k-gantt-actions").length);
-        equal(gantt.footer.find(".k-gantt-actions li").attr("data-action"), "add");
-        equal(gantt.footer.find(".k-gantt-actions li").text(), "Add Task");
+        ok(gantt.footer.find(".k-gantt-actions").hasClass("k-reset k-header k-toolbar"));
+    });
+
+    test("footer action button's elements are rendered", 4, function () {
+        var gantt = new Gantt(element);
+
+        ok(gantt.footer.find(".k-gantt-actions > li").length);
+        ok(gantt.footer.find(".k-gantt-actions > li").hasClass("k-button k-button-icontext"));
+
+        ok(gantt.footer.find(".k-gantt-actions span").length);
+        ok(gantt.footer.find(".k-gantt-actions span").hasClass("k-icon k-i-plus"));
+    });
+
+    test("footer action button data attributes are rendered", function () {
+        var gantt = new Gantt(element);
+
+        equal(gantt.footer.find(".k-gantt-actions > li").attr("data-action"), "add");
+    });
+
+    test("footer action button text is rendered", function () {
+        var gantt = new Gantt(element);
+
+        equal(gantt.footer.find(".k-gantt-actions > li").text(), "Add Task");
     });
 
     test("default action toolbar button is localized", function() {
@@ -93,7 +147,7 @@
             }
         });
 
-        equal(gantt.toolbar.find(".k-gantt-actions a").text(), "bar");
+        equal(gantt.toolbar.find(".k-gantt-actions > li").text(), "bar");
     });
 
     test("default action footer button is localized", function() {
@@ -105,7 +159,7 @@
             }
         });
 
-        equal(gantt.footer.find(".k-gantt-actions a").text(), "bar");
+        equal(gantt.footer.find(".k-gantt-actions > li").text(), "bar");
     });
 
     test("toolbar action dropDown is created", 2, function() {
@@ -213,24 +267,42 @@
         equal(dropDown.options.direction, "down");
     });
 
-    test("renders popup content", 2, function() {
+    test("css classes added to popup container", function () {
+        var dropDown = setup();
+
+        ok(dropDown.list.hasClass("k-list-container"));
+    });
+
+    test("renders popup content list", 2, function() {
         var dropDown = setup();
 
         ok(dropDown.list.children("ul").length);
-        equal(dropDown.list.find("li").length, 3);
+        ok(dropDown.list.children("ul").hasClass("k-list k-reset"));
     });
 
-    test("renders action items", 6, function() {
+    test("renders popup list's content", 7, function () {
         var dropDown = setup();
         var actions = dropDown.options.messages.actions;
 
-        equal(dropDown.list.find("li").eq(0).attr("data-action"), "add");
+        equal(dropDown.list.find("li").length, 3);
+
+        ok(dropDown.list.find("li").eq(0).hasClass("k-item"));
         equal(dropDown.list.find("li").eq(0).text(), actions.addChild);
 
-        equal(dropDown.list.find("li").eq(1).attr("data-action"), "insert-before");
+        ok(dropDown.list.find("li").eq(1).hasClass("k-item"));
         equal(dropDown.list.find("li").eq(1).text(), actions.insertBefore);
 
-        equal(dropDown.list.find("li").eq(2).attr("data-action"), "insert-after");
+        ok(dropDown.list.find("li").eq(2).hasClass("k-item"));
         equal(dropDown.list.find("li").eq(2).text(), actions.insetAfter);
+    });
+
+    test("renders list's item data attributes", 3, function() {
+        var dropDown = setup();
+
+        equal(dropDown.list.find("li").eq(0).attr("data-action"), "add");
+
+        equal(dropDown.list.find("li").eq(1).attr("data-action"), "insert-before");
+
+        equal(dropDown.list.find("li").eq(2).attr("data-action"), "insert-after");
     });
 }());
