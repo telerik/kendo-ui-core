@@ -557,7 +557,7 @@ var __meta__ = {
 
             this._footer();
 
-            this._adjustHeight();
+            this._adjustDimensions();
 
             this.timeline.view(this.timeline._selectedViewName);
 
@@ -684,9 +684,9 @@ var __meta__ = {
 
             this.wrapper = this.element
                             .addClass("k-widget k-gantt")
-                            .append("<div class='k-gantt-layout k-gantt-treelist'><div class='k-treelist k-grid k-widget'></div></div>")
+                            .append("<div class='k-gantt-layout k-gantt-treelist'><div></div></div>")
                             .append("<div class='k-splitbar k-state-default k-splitbar-horizontal k-splitbar-draggable-horizontal k-gantt-layout' role='separator'><div class='k-icon k-resize-handle'></div></div>")
-                            .append("<div class='k-gantt-layout k-gantt-timeline'><div class='k-timeline k-grid k-widget'></div></div>");
+                            .append("<div class='k-gantt-layout k-gantt-timeline'><div></div></div>");
 
             this.wrapper.find(".k-gantt-treelist").width(options.listWidth);
 
@@ -748,18 +748,21 @@ var __meta__ = {
             this.footer = footer;
         },
 
-        _adjustHeight: function() {
+        _adjustDimensions: function() {
             var element = this.element;
             var toolbarHeight = this.toolbar.outerHeight();
             var footerHeight = this.footer.outerHeight();
             var totalHeight = element.height();
             var totalWidth = element.width();
             var splitBarWidth = element.find(".k-splitbar").outerWidth();
-            var treeListWidth = element.find(".k-treelist").outerWidth();
+            var treeListWidth = element.find(".k-gantt-treelist").outerWidth();
 
-            element.find(".k-gantt-treelist, .k-splitbar, .k-gantt-timeline").height(totalHeight - (toolbarHeight + footerHeight));
-
-            element.find(".k-gantt-timeline").width(totalWidth - (splitBarWidth + treeListWidth));
+            element
+                .children(".k-gantt-treelist, .k-splitbar, .k-gantt-timeline")
+                .height(totalHeight - (toolbarHeight + footerHeight))
+                .end()
+                .children(".k-gantt-timeline")
+                .width(totalWidth - (splitBarWidth + treeListWidth));
         },
 
         _dropDowns: function() {
@@ -827,13 +830,13 @@ var __meta__ = {
 
         _list: function() {
             var that = this;
-            var toggleButtons = this.element.find(".k-gantt-actions > li");
+            var element = this.wrapper.find(".k-gantt-treelist > div");
+            var toggleButtons = this.wrapper.find(".k-gantt-actions > li");
             var options = extend({}, {
                 columns: this.options.columns || [],
                 dataSource: this.dataSource,
                 selectable: this.options.selectable
             });
-            var element = this.wrapper.find(".k-gantt-treelist > .k-grid");
 
             this.list = new kendo.ui.GanttList(element, options);
 
@@ -859,7 +862,7 @@ var __meta__ = {
         _timeline: function() {
             var that = this;
             var options = trimOptions(extend(true, {}, this.options));
-            var element = this.wrapper.find(".k-timeline");
+            var element = this.wrapper.find(".k-gantt-timeline > div");
 
             this.timeline = new kendo.ui.GanttTimeline(element, options);
 

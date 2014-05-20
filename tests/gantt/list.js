@@ -56,6 +56,14 @@
         ok(!ganttList.columns[0].editable);
     });
 
+    test("adds css classes to wrapper", function () {
+        ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
+
+        ok(ganttList.element.hasClass("k-widget"));
+        ok(ganttList.element.hasClass("k-grid"));
+        ok(ganttList.element.hasClass("k-treelist"));
+    });
+
     test("renders header's wrapping div", function() {
         ganttList = new GanttList(element, { columns: [], dataSource: dataSource });
         var wrapper = ganttList.element;
@@ -104,7 +112,6 @@
         var header = ganttList.header;
 
         equal(header.children("table").length, 1);
-        equal(header.children("table").attr("role"), "grid");
     });
 
     test("table colgroup", function() {
@@ -117,7 +124,6 @@
         var header = ganttList.header;
 
         equal(header.find("thead").length, 1);
-        equal(header.find("thead").attr("role"), "rowgroup");
     });
 
     test("table col elements for each column", function() {
@@ -140,6 +146,15 @@
         var header = ganttList.header;
 
         equal(header.find("th").length, ganttList.columns.length);
+    });
+
+    test("table th element class", 4, function () {
+        var header = ganttList.header;
+        var test = function(idx, th) {
+            ok($(th).hasClass("k-header"));
+        };
+
+        header.find("th").each(test);
     });
 
     test("table th elements data attr for each column", function() {
@@ -217,7 +232,6 @@
         var content = ganttList.content;
 
         equal(content.children("table").length, 1);
-        equal(content.children("table").attr("role"), "grid");
     });
 
     test("table colgroup", function() {
@@ -232,11 +246,20 @@
         equal(content.find("col").length, ganttList.columns.length);
     });
 
-    test("table body", 2, function() {
+    test("table col elements with style attr when column width set", 4, function () {
+        var content = ganttList.content;
+        var cols = content.find("col");
+
+        ok(!cols.eq(0).attr("style"));
+        ok(cols.eq(1).attr("style"));
+        ok(cols.eq(2).attr("style"));
+        ok(!cols.eq(3).attr("style"));
+    });
+
+    test("table body", function() {
         var content = ganttList.content;
 
         equal(content.find("tbody").length, 1);
-        equal(content.find("tbody").attr("role"), "rowgroup");
     });
 
     test("table tr elements for each visible task", function() {
@@ -249,7 +272,6 @@
         var content = ganttList.content;
         var test = function(idx, tr) {
             tr = $(tr);
-            equal(tr.attr("role"), "row");
             equal(tr.attr("data-uid"), taskTree[idx].get("uid"));
         };
 
@@ -268,10 +290,33 @@
         content.find("tr").each(test);
     });
 
+    test("table summary tr elements style", function () {
+        var content = ganttList.content;
+        var test = function (idx, tr) {
+            tr = $(tr);
+            
+            if (taskTree[idx].get("summary")) {
+                ok(tr.hasClass("k-treelist-group"));
+            } else {
+                ok(!tr.hasClass("k-treelist-group"));
+            }
+        };
+
+        content.find("tr").each(test);
+    })
+
     test("table td elements for each column", function() {
         var content = ganttList.content;
 
         equal(content.find("tr").eq(0).children("td").length, columns.length);
+    });
+
+    test("table td element with span as text container", function () {
+        var content = ganttList.content;
+        var test = function (idx, td) {
+            ok($(td).children("span:not(.k-icon)").length);
+        };
+        content.find("tr").eq(0).children("td").each(test);
     });
 
     test("table td element with icon-span for title column", function() {
@@ -282,19 +327,15 @@
         ok(span.eq(0).hasClass("k-icon"));
     });
 
-    test("table td element with padding for title column", function() {
+    test("table td element with span placeholders for title column", function() {
         var content = ganttList.content;
         var test = function(idx, tr) {
             tr = $(tr);
             var td = tr.children("td").eq(0);
-            var padding = parseInt(td.css("padding-left"));
-            var level = dataSource.taskLevel(taskTree[idx]);
-            
-            if (level > 0) {
-                equal(padding, level * paddingStep);
-            } else {
-                ok(!td.attr("style"));
-            }
+            var task = taskTree[idx];
+            var level = dataSource.taskLevel(task);
+
+            equal(td.children("span.k-i-none").length, task.summary ? level : level + 1);
         };
 
         content.find("tr").each(test);
@@ -303,7 +344,7 @@
     test("table td element with span with collapse icon expanded summary tasks", function() {
         var content = ganttList.content;
         var span = content.find("tr").eq(0)
-            .children("td").eq(0).children("span");
+            .children("td").eq(0).children("span.k-icon");
 
         ok(span.hasClass("k-i-collapse"));
     });
@@ -311,15 +352,8 @@
     test("table td element with span with expand icon collapsed summary tasks", function() {
         var content = ganttList.content;
         var span = content.find("tr").eq(11)
-            .children("td").eq(0).children("span");
+            .children("td").eq(0).children("span.k-icon");
 
         ok(span.hasClass("k-i-expand"));
-    });
-
-    test("table td element with span with hidden icon non-summary tasks", function() {
-        var content = ganttList.content;
-        var span = content.find("tr").eq(2).children("td").eq(0).children("span");
-
-        ok(span.hasClass("k-i-none"));
     });
 })();

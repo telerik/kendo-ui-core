@@ -25,12 +25,6 @@
         }
     });
 
-    test("timeline is initialized", function() {
-        var gantt = new Gantt(element);
-
-        ok(gantt.timeline instanceof Timeline);
-    });
-
     test("gantt options are merged", function() {
         var gantt = new Gantt(element, {
             workWeekEnd: 4
@@ -43,6 +37,14 @@
         timeline = new Timeline(element);
 
         equal(timeline.wrapper[0], element[0]);
+    });
+
+    test("css classes added to wrapper", function () {
+        timeline = new Timeline(element);
+
+        ok(timeline.wrapper.hasClass("k-widget"));
+        ok(timeline.wrapper.hasClass("k-grid"));
+        ok(timeline.wrapper.hasClass("k-timeline"));
     });
 
     test("header wrap added to wrapper", 2, function() {

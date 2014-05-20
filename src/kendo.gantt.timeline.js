@@ -1186,12 +1186,11 @@ var __meta__ = {
             kendo.destroy(this.wrapper);
         },
 
-        _wrapper: function() {
+        _wrapper: function () {
             this.wrapper = this.element
+                .addClass("k-timeline k-grid k-widget")
                 .append("<div class='k-grid-header'><div class='k-grid-header-wrap'></div></div>")
                 .append("<div class='k-grid-content'><div class='k-gantt-tables'></div><div class='k-gantt-dependencies'></div></div>");
-
-            this.element.append(this.wrapper);
         },
 
         _domTrees: function() {

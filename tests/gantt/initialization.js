@@ -31,6 +31,13 @@
         ok(element.data("kendoGantt").list instanceof ui.GanttList);
     });
 
+    test("kendoGantt creates GanttTimeline widget", function () {
+        element.kendoGantt();
+
+        ok(element.data("kendoGantt").timeline);
+        ok(element.data("kendoGantt").timeline instanceof ui.GanttTimeline);
+    });
+
     test("css classes are added to the wrapper", 2, function() {
         var gantt = new Gantt(element);
 
@@ -162,16 +169,20 @@
         equal(gantt.toolbar.find(".k-view-day").text(), "My Custom Day View Title");
     });
 
-    test("list is created", function() {
+    test("list's wrapper is created", function () {
         var gantt = new Gantt(element);
+        var listWrapper = gantt.wrapper.children(".k-gantt-treelist");
 
-        ok(gantt.wrapper.find(".k-gantt-treelist").length);
+        ok(listWrapper.length);
+        ok(listWrapper.hasClass("k-gantt-layout"));
     });
 
-    test("timeline is created", function() {
+    test("timeline's wrapper is created", function() {
         var gantt = new Gantt(element);
+        var timelineWrapper = gantt.wrapper.children(".k-gantt-timeline");
 
-        ok(gantt.wrapper.find(".k-gantt-timeline").length);
+        ok(timelineWrapper.length);
+        ok(timelineWrapper.hasClass("k-gantt-layout"));
     });
 
     test("resize handle is created", function() {
