@@ -1,4 +1,4 @@
-package com.kendoui.spring.controllers.api;
+package com.kendoui.spring.controllers.chartapi;
 
 import java.util.List;
 
@@ -11,15 +11,16 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ElectricityProduction;
 
 @Controller("dataviz-api-events-controller")
-@RequestMapping(value="/api/")
+@RequestMapping(value = "/chart-api/")
 public class EventsController {
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String index() {
-        return "/api/events";
+        return "/chart-api/events";
     }
-    
+
     @RequestMapping(value = "/events/read", method = RequestMethod.POST)
-    public @ResponseBody List<ElectricityProduction> read() {
+    public @ResponseBody
+    List<ElectricityProduction> read() {
         return ChartDataRepository.SpainElectricityProduction();
     }
 }
