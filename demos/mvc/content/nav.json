@@ -5118,14 +5118,14 @@
     "category": "Data Visualization"
   },
   {
-    "text": "API",
+    "text": "Chart API",
     "pro": "true",
     "documentation": "dataviz/chart",
     "spriteCssClass": "chartIcon",
     "items": [
       {
         "text": "Methods",
-        "url": "api/index",
+        "url": "chart-api/index",
         "title": {
             "kendo-ui": "Kendo UI Charts API methods"
         },
@@ -5135,7 +5135,7 @@
       },
       {
         "text": "Events",
-        "url": "api/events",
+        "url": "chart-api/events",
         "title": {
             "kendo-ui": "Events API for Kendo UI HTML5 charting components | Kendo UI DataViz Demos"
         },
@@ -5146,7 +5146,7 @@
       },
       {
         "text": "Selection",
-        "url": "api/selection",
+        "url": "chart-api/selection",
         "title": {
             "kendo-ui": "Axis selection in Kendo UI charting components | Kendo UI DataViz demo"
         },
@@ -5159,7 +5159,7 @@
         "packages": [
           "!mvc"
         ],
-        "url": "api/benchmark"
+        "url": "chart-api/benchmark"
       }
     ],
     "name": "api",

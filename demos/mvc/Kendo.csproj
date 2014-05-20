@@ -536,7 +536,6 @@
     <Content Include="Views\demos\combobox\template.cshtml" />
     <Content Include="Views\demos\customization\plotbands.cshtml" />
     <Content Include="Views\demos\dashboards\car-dashboard.cshtml" />
-    <Content Include="Views\demos\dashboards\high-performance.cshtml" />
     <Content Include="Views\demos\dashboards\stock-history.cshtml" />
     <Content Include="Views\demos\datasource\index.cshtml" />
     <Content Include="Views\demos\datasource\local-operations.cshtml" />
@@ -1024,10 +1023,10 @@
     <Content Include="Views\demos\window\rtl.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
-    <Content Include="Views\demos\api\benchmark.cshtml" />
-    <Content Include="Views\demos\api\events.cshtml" />
-    <Content Include="Views\demos\api\index.cshtml" />
-    <Content Include="Views\demos\api\selection.cshtml" />
+    <Content Include="Views\demos\chart-api\benchmark.cshtml" />
+    <Content Include="Views\demos\chart-api\events.cshtml" />
+    <Content Include="Views\demos\chart-api\index.cshtml" />
+    <Content Include="Views\demos\chart-api\selection.cshtml" />
     <Content Include="Views\demos\actionsheet\adaptive.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\WebSearchScript.cshtml" />
