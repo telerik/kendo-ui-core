@@ -21,21 +21,21 @@ import com.kendoui.spring.models.TaskDao;
 
 @Controller("scheduler-rtl-controller")
 @RequestMapping(value="/scheduler/")
-public class RtlController {
+public class RightToLeftSupportController {
     @Autowired 
     private TaskDao task;
     
-    @RequestMapping(value = "/rtl", method = RequestMethod.GET)
+    @RequestMapping(value = "/right-to-left-support", method = RequestMethod.GET)
     public String index(Locale locale, Model model) {        
-        return "scheduler/rtl";
+        return "scheduler/right-to-left-support";
     }
     
-    @RequestMapping(value = "/rtl/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/right-to-left-support/read", method = RequestMethod.POST)
     public @ResponseBody List<Task> read() {
         return task.getList();
     }
     
-    @RequestMapping(value = "/rtl/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/right-to-left-support/create", method = RequestMethod.POST)
     public @ResponseBody List<Task> create(@RequestBody ArrayList<Map<String, Object>> models) throws ParseException {
         List<Task> tasks = new ArrayList<Task>();
         
@@ -64,7 +64,7 @@ public class RtlController {
         return tasks;
     }
     
-    @RequestMapping(value = "/rtl/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/right-to-left-support/update", method = RequestMethod.POST)
     public @ResponseBody List<Task> update(@RequestBody ArrayList<Map<String, Object>> models) throws ParseException {
         List<Task> tasks = new ArrayList<Task>();
         
@@ -94,7 +94,7 @@ public class RtlController {
         return tasks;
     }
     
-    @RequestMapping(value = "/rtl/destroy", method = RequestMethod.POST)
+    @RequestMapping(value = "/right-to-left-support/destroy", method = RequestMethod.POST)
     public @ResponseBody List<Task> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
         List<Task> tasks = new ArrayList<Task>();
         
