@@ -14,11 +14,7 @@ namespace Kendo.Extensions
     {
         public static IHtmlString ExampleLink(this HtmlHelper html, NavigationExample example)
         {
-            var Url = new UrlHelper(html.ViewContext.RequestContext);
-
-            var href = Url.Content("~/" + example.Url);
-
-            href = Url.ApplyProduct(href);
+            var href = html.ExampleUrl(example);
 
             return html.Raw(string.Format("<a {0} {1} href=\"{2}\">{3}</a>",
                     example.New ? "class=\"new-example\"" : "",
@@ -26,6 +22,13 @@ namespace Kendo.Extensions
                     href,
                     example.Text
             ));
+        }
+
+        private static string ExampleUrl(this HtmlHelper html, NavigationExample example)
+        {
+            var sectionAndExample = example.Url.Split('/');
+
+            return new UrlHelper(html.ViewContext.RequestContext).Action("Index", "Demo", new { section = sectionAndExample[0], example = sectionAndExample[1] });
         }
 
         public static String CdnRoot(this HtmlHelper html)
@@ -48,13 +51,9 @@ namespace Kendo.Extensions
 
         public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget)
         {
-            var Url = new UrlHelper(html.ViewContext.RequestContext);
-
             var viewBag = html.ViewContext.Controller.ViewBag;
 
-            var href = Url.Content("~/" + widget.Items[0].Url);
-
-            href = Url.ApplyProduct(href);
+            var href = html.ExampleUrl(widget.Items[0]);
 
             var className = "";
 

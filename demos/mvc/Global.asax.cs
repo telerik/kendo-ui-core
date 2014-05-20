@@ -76,7 +76,7 @@ namespace Kendo
 
             routes.MapRoute(
                 "MobileDeviceIndex",
-                "m/index",
+                "m/{action}",
                 new { controller = "MobileDevice", action = "Index" }
             );
 
@@ -99,15 +99,15 @@ namespace Kendo
             );
 
             routes.MapRoute(
-                "Demo",
-                "{section}/{example}",
-                new { controller = "Demo", action = "Index" }
-            );
-
-            routes.MapRoute(
                 "DemoIndex",
                 "{section}",
                 new { controller = "Demo", action = "Index", example = "index" }
+            );
+
+            routes.MapRoute(
+                "Demo",
+                "{section}/{example}",
+                new { controller = "Demo", action = "Index" }
             );
 
             routes.MapRoute(
@@ -141,9 +141,8 @@ namespace Kendo
                 new { controller = "MobileThemeBuilder", action = "MobileThemeBuilderIndex" }
             );
 
-            // /
             routes.MapRoute(
-                "Home",
+                "Root",
                 "",
                 new { controller = "Home", action = "Index" }
             );
