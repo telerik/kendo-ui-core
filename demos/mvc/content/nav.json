@@ -2,7 +2,7 @@
   {
     "text": "AutoComplete",
     "name": "autocomplete",
-    "documentation": "web/autocomplete",
+    "api": "web/autocomplete",
     "spriteCssClass": "autoCompleteIcon",
     "items": [
       {
@@ -116,7 +116,7 @@
   {
     "text": "Button",
     "name": "button",
-    "documentation": "web/button",
+    "api": "web/button",
     "spriteCssClass": "buttonIcon",
     "items": [
       {
@@ -215,7 +215,7 @@
   {
     "text": "Calendar",
     "name": "calendar",
-    "documentation": "web/calendar",
+    "api": "web/calendar",
     "spriteCssClass": "calendarIcon",
     "items": [
       {
@@ -309,7 +309,7 @@
   {
     "text": "ColorPicker",
     "name": "colorpicker",
-    "documentation": "web/colorpicker",
+    "api": "web/colorpicker",
     "spriteCssClass": "colorPickerIcon",
     "items": [
       {
@@ -404,7 +404,7 @@
   {
     "text": "ComboBox",
     "name": "combobox",
-    "documentation": "web/combobox",
+    "api": "web/combobox",
     "spriteCssClass": "comboBoxIcon",
     "items": [
       {
@@ -526,7 +526,7 @@
   {
     "text": "DatePicker",
     "name": "datepicker",
-    "documentation": "web/datepicker",
+    "api": "web/datepicker",
     "spriteCssClass": "datePickerIcon",
     "items": [
       {
@@ -630,7 +630,7 @@
   {
     "text": "DateTimePicker",
     "name": "datetimepicker",
-    "documentation": "web/datetimepicker",
+    "api": "web/datetimepicker",
     "spriteCssClass": "dateTimePickerIcon",
     "items": [
       {
@@ -734,7 +734,7 @@
   {
     "text": "DropDownList",
     "name": "dropdownlist",
-    "documentation": "web/dropdownlist",
+    "api": "web/dropdownlist",
     "spriteCssClass": "dropDownListIcon",
     "items": [
       {
@@ -849,7 +849,7 @@
     "text": "Editor",
     "name": "editor",
     "pro": "true",
-    "documentation": "web/editor",
+    "api": "web/editor",
     "spriteCssClass": "editorIcon",
     "items": [
       {
@@ -1000,7 +1000,7 @@
     "text": "Grid",
     "name": "grid",
     "pro": "true",
-    "documentation": "web/grid",
+    "api": "web/grid",
     "spriteCssClass": "gridIcon",
     "items": [
       {
@@ -1504,7 +1504,7 @@
   {
     "text": "ListView",
     "name": "listview",
-    "documentation": "web/listview",
+    "api": "web/listview",
     "spriteCssClass": "listViewIcon",
     "items": [
       {
@@ -1602,7 +1602,7 @@
     "text": "MaskedTextBox",
     "name": "maskedtextbox",
     "new": "true",
-    "documentation": "web/maskedtextbox",
+    "api": "web/maskedtextbox",
     "spriteCssClass": "maskedtextboxIcon",
     "items": [
       {
@@ -1687,7 +1687,7 @@
   {
     "text": "Menu",
     "name": "menu",
-    "documentation": "web/menu",
+    "api": "web/menu",
     "spriteCssClass": "menuIcon",
     "items": [
       {
@@ -1819,7 +1819,7 @@
   {
     "text": "MultiSelect",
     "name": "multiselect",
-    "documentation": "web/multiselect",
+    "api": "web/multiselect",
     "spriteCssClass": "multiselectIcon",
     "items": [
       {
@@ -1924,7 +1924,7 @@
     "text": "Notification",
     "name": "notification",
     "new": true,
-    "documentation": "web/notification",
+    "api": "web/notification",
     "spriteCssClass": "notificationIcon",
     "items": [
       {
@@ -1994,7 +1994,7 @@
   {
     "text": "NumericTextBox",
     "name": "numerictextbox",
-    "documentation": "web/numerictextbox",
+    "api": "web/numerictextbox",
     "spriteCssClass": "numericTextBoxIcon",
     "items": [
       {
@@ -2078,7 +2078,7 @@
   {
     "text": "PanelBar",
     "name": "panelbar",
-    "documentation": "web/panelbar",
+    "api": "web/panelbar",
     "spriteCssClass": "panelBarIcon",
     "items": [
       {
@@ -2186,7 +2186,7 @@
   {
     "text": "ProgressBar",
     "name": "progressbar",
-    "documentation": "web/progressbar",
+    "api": "web/progressbar",
     "spriteCssClass": "progressBarIcon",
     "items": [
       {
@@ -2282,7 +2282,7 @@
     "text": "Scheduler",
     "name": "scheduler",
     "pro": "true",
-    "documentation": "web/scheduler",
+    "api": "web/scheduler",
     "spriteCssClass": "schedulerIcon",
     "items": [
       {
@@ -2454,7 +2454,7 @@
   {
     "text": "Slider",
     "name": "slider",
-    "documentation": "web/slider",
+    "api": "web/slider",
     "spriteCssClass": "sliderIcon",
     "items": [
       {
@@ -2524,7 +2524,7 @@
   {
     "text": "Sortable",
     "name": "sortable",
-    "documentation": "web/sortable",
+    "api": "web/sortable",
     "spriteCssClass": "sortableIcon",
     "new": true,
     "items": [
@@ -2634,7 +2634,7 @@
   {
     "text": "Splitter",
     "name": "splitter",
-    "documentation": "web/splitter",
+    "api": "web/splitter",
     "spriteCssClass": "splitterIcon",
     "items": [
       {
@@ -2723,7 +2723,7 @@
   {
     "text": "TabStrip",
     "name": "tabstrip",
-    "documentation": "web/tabstrip",
+    "api": "web/tabstrip",
     "spriteCssClass": "tabStripIcon",
     "items": [
       {
@@ -2831,7 +2831,7 @@
   {
     "text": "TimePicker",
     "name": "timepicker",
-    "documentation": "web/timepicker",
+    "api": "web/timepicker",
     "spriteCssClass": "timePickerIcon",
     "items": [
       {
@@ -2925,7 +2925,7 @@
   {
     "text": "Tooltip",
     "name": "tooltip",
-    "documentation": "web/tooltip",
+    "api": "web/tooltip",
     "spriteCssClass": "tooltipIcon",
     "items": [
       {
@@ -3001,7 +3001,7 @@
     "text": "TreeView",
     "pro": "true",
     "name": "treeview",
-    "documentation": "web/treeview",
+    "api": "web/treeview",
     "spriteCssClass": "treeViewIcon",
     "items": [
       {
@@ -3161,7 +3161,7 @@
     "text": "Upload",
     "name": "upload",
     "pro": "true",
-    "documentation": "web/upload",
+    "api": "web/upload",
     "spriteCssClass": "uploadIcon",
     "packages": [
       "!offline"
@@ -3259,7 +3259,7 @@
   {
     "text": "Window",
     "name": "window",
-    "documentation": "web/window",
+    "api": "web/window",
     "spriteCssClass": "windowIcon",
     "items": [
       {
@@ -3369,7 +3369,7 @@
     "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "DataSource",
     "name": "datasource",
-    "documentation": "framework/datasource",
+    "api": "framework/datasource",
     "spriteCssClass": "dataSourceIcon",
     "items": [
       {
@@ -3441,7 +3441,7 @@
     "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Templates",
     "name": "templates",
-    "documentation": "framework/kendo",
+    "api": "framework/kendo",
     "spriteCssClass": "templatesIcon",
     "items": [
       {
@@ -3471,7 +3471,7 @@
     "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "MVVM",
     "name": "mvvm",
-    "documentation": "framework/kendo",
+    "api": "framework/kendo",
     "spriteCssClass": "mvvmIcon",
     "items": [
       {
@@ -3571,7 +3571,7 @@
     "packages": [ "!mvc", "!jsp", "!php", "!offline" ],
     "text": "Single-Page App",
     "name": "spa",
-    "documentation": "framework/kendo",
+    "api": "framework/kendo",
     "spriteCssClass": "spaIcon",
     "disableInMobile": true,
     "items": [
@@ -3593,7 +3593,7 @@
     "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Effects",
     "name": "fx",
-    "documentation": "framework/kendo",
+    "api": "framework/kendo",
     "spriteCssClass": "mvvmIcon",
     "items": [
       {
@@ -3704,7 +3704,7 @@
     "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Drag & Drop",
     "name": "dragdrop",
-    "documentation": "framework/draggable",
+    "api": "framework/draggable",
     "spriteCssClass": "dragDropIcon",
     "items": [
       {
@@ -3754,7 +3754,7 @@
     "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Validator",
     "name": "validator",
-    "documentation": "framework/validator",
+    "api": "framework/validator",
     "spriteCssClass": "validatorIcon",
     "items": [
       {
@@ -3784,7 +3784,7 @@
     "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Globalization",
     "name": "globalization",
-    "documentation": "framework/kendo",
+    "api": "framework/kendo",
     "spriteCssClass": "globalizationIcon",
     "items": [
       {
@@ -3871,7 +3871,7 @@
   {
     "text": "Area Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartAreaIcon",
     "items": [
       {
@@ -4022,7 +4022,7 @@
   {
     "text": "Bar Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartBarIcon",
     "items": [
       {
@@ -4217,7 +4217,7 @@
   {
     "text": "Box Plot Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartBoxPlotIcon",
     "items": [
       {
@@ -4266,7 +4266,7 @@
     "text": "Bubble Charts",
     "pro": "true",
     "name": "bubble-charts",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartBubbleIcon",
     "items": [
       {
@@ -4333,7 +4333,7 @@
   {
     "text": "Bullet Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartBulletIcon",
     "items": [
       {
@@ -4389,7 +4389,7 @@
   {
     "text": "Donut Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartDonutIcon",
     "items": [
       {
@@ -4456,7 +4456,7 @@
   {
     "text": "Funnel Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartFunnelIcon",
     "items": [
       {
@@ -4529,7 +4529,7 @@
   {
     "text": "Line Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartLineIcon",
     "items": [
       {
@@ -4690,7 +4690,7 @@
   {
     "text": "Pie Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartPieIcon",
     "items": [
       {
@@ -4757,7 +4757,7 @@
   {
     "text": "Polar Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartPolarIcon",
     "items": [
       {
@@ -4844,7 +4844,7 @@
   {
     "text": "Radar Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartRadarIcon",
     "items": [
       {
@@ -4943,7 +4943,7 @@
   {
     "text": "Scatter Charts",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartScatterIcon",
     "items": [
       {
@@ -5065,7 +5065,7 @@
   {
     "text": "Sparklines",
     "pro": "true",
-    "documentation": "dataviz/sparkline",
+    "api": "dataviz/sparkline",
     "spriteCssClass": "sparklineIcon",
     "items": [
       {
@@ -5120,7 +5120,7 @@
   {
     "text": "Chart API",
     "pro": "true",
-    "documentation": "dataviz/chart",
+    "api": "dataviz/chart",
     "spriteCssClass": "chartIcon",
     "items": [
       {
@@ -5169,7 +5169,7 @@
     "text": "Linear Gauge",
     "pro": "true",
     "spriteCssClass": "gaugeLinearIcon",
-    "documentation": "dataviz/lineargauge",
+    "api": "dataviz/lineargauge",
     "items": [
       {
         "text": "Basic usage",
@@ -5214,7 +5214,7 @@
     "text": "Radial Gauge",
     "pro": "true",
     "spriteCssClass": "gaugeRadialIcon",
-    "documentation": "dataviz/radialgauge",
+    "api": "dataviz/radialgauge",
     "items": [
       {
         "text": "Basic usage",
@@ -5274,7 +5274,7 @@
     "text": "Barcode",
     "pro": "true",
     "spriteCssClass": "barcodeIcon",
-    "documentation": "dataviz/barcode",
+    "api": "dataviz/barcode",
     "items": [
       {
         "text": "Basic usage",
@@ -5322,7 +5322,7 @@
     "text": "QR code",
     "pro": "true",
     "spriteCssClass": "qrcodeIcon",
-    "documentation": "dataviz/qrcode",
+    "api": "dataviz/qrcode",
     "items": [
       {
         "text": "Basic usage",
@@ -5369,7 +5369,7 @@
   {
     "text": "Stock Chart",
     "pro": "true",
-    "documentation": "dataviz/stock-chart",
+    "api": "dataviz/stock-chart",
     "spriteCssClass": "chartStockIcon",
     "items": [
       {
@@ -5427,7 +5427,7 @@
     "text": "Map",
     "pro": "true",
     "name": "map",
-    "documentation": "dataviz/map",
+    "api": "dataviz/map",
     "spriteCssClass": "mapIcon",
     "items": [
       {
@@ -5496,7 +5496,7 @@
     "pro": "true",
     "name": "Diagram",
     "beta": "true",
-    "documentation": "dataviz/diagram",
+    "api": "dataviz/diagram",
     "spriteCssClass": "diagramIcon",
     "items": [
       {
@@ -5526,7 +5526,7 @@
   {
     "text": "ActionSheet",
     "name": "actionsheet",
-    "documentation": "actionsheet/adaptive",
+    "api": "actionsheet/adaptive",
     "spriteCssClass": "mobileActionSheetIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -5558,7 +5558,7 @@
   {
     "text": "Button",
     "name": "mobile-button",
-    "documentation": "button/adaptive",
+    "api": "button/adaptive",
     "spriteCssClass": "mobileButtonIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -5636,7 +5636,7 @@
   {
     "text": "ButtonGroup",
     "name": "buttongroup",
-    "documentation": "buttongroup/adaptive",
+    "api": "buttongroup/adaptive",
     "spriteCssClass": "mobileButtonGroupIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -5723,7 +5723,7 @@
   {
     "text": "Drawer",
     "name": "drawer",
-    "documentation": "drawer/adaptive",
+    "api": "drawer/adaptive",
     "spriteCssClass": "mobileDrawerIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -5765,7 +5765,7 @@
   {
     "text": "ListView",
     "name": "mobile-listview",
-    "documentation": "listview/adaptive",
+    "api": "listview/adaptive",
     "spriteCssClass": "mobileListViewIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -5933,7 +5933,7 @@
     "text": "ModalView",
     "name": "modalview",
     "packages": [ "!jsp", "!php" ],
-    "documentation": "modalview/adaptive",
+    "api": "modalview/adaptive",
     "spriteCssClass": "mobileModalViewIcon",
     "mobile": true,
     "items": [
@@ -5964,7 +5964,7 @@
   {
     "text": "NavBar",
     "name": "navbar",
-    "documentation": "navbar/adaptive",
+    "api": "navbar/adaptive",
     "spriteCssClass": "mobileNavBarIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6007,7 +6007,7 @@
     "text": "PopOver",
     "name": "popover",
     "tablet": true,
-    "documentation": "popover/adaptive",
+    "api": "popover/adaptive",
     "spriteCssClass": "mobilePopOverIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6039,7 +6039,7 @@
   {
     "text": "Scroller",
     "name": "scroller",
-    "documentation": "scroller/adaptive",
+    "api": "scroller/adaptive",
     "spriteCssClass": "mobileScrollerIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6081,7 +6081,7 @@
   {
     "text": "ScrollView",
     "name": "scrollview",
-    "documentation": "scrollview/adaptive",
+    "api": "scrollview/adaptive",
     "spriteCssClass": "mobileScrollViewIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6139,7 +6139,7 @@
   {
     "text": "Switch",
     "name": "Switch",
-    "documentation": "switch/adaptive",
+    "api": "switch/adaptive",
     "spriteCssClass": "mobileSwitchIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6196,7 +6196,7 @@
   {
     "text": "TabStrip",
     "name": "mobile-tabstrip",
-    "documentation": "tabstrip/adaptive",
+    "api": "tabstrip/adaptive",
     "spriteCssClass": "mobileTabStripIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6248,7 +6248,7 @@
   {
     "text": "Application",
     "name": "application",
-    "documentation": "application/adaptive",
+    "api": "application/adaptive",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6329,7 +6329,7 @@
   {
     "text": "Touch Events",
     "name": "touchevents",
-    "documentation": "touch/adaptive",
+    "api": "touch/adaptive",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6350,7 +6350,7 @@
   {
     "text": "View",
     "name": "mobile-view",
-    "documentation": "view/adaptive",
+    "api": "view/adaptive",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],
@@ -6384,7 +6384,7 @@
   {
     "text": "SplitView",
     "name": "SplitView",
-    "documentation": "splitview/adaptive",
+    "api": "splitview/adaptive",
     "spriteCssClass": "mobileSplitViewIcon",
     "mobile": true,
     "tablet": true,
@@ -6416,7 +6416,7 @@
   {
     "text": "Layout",
     "name": "mobile-layout",
-    "documentation": "layout/adaptive",
+    "api": "layout/adaptive",
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
     "packages": [ "!jsp", "!php" ],

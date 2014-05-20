@@ -57,25 +57,25 @@ namespace Kendo.Controllers
                 }
             }
 
-            var documentation = ViewBag.CurrentExample.Documentation ?? ViewBag.CurrentWidget.Documentation;
+            var api = ViewBag.CurrentExample.Api ?? ViewBag.CurrentWidget.Api;
 
-            if (!string.IsNullOrEmpty(documentation))
+            if (!string.IsNullOrEmpty(api))
             {
                 if (product == "kendo-ui")
                 {
-                    ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/api/" + documentation;
+                    ViewBag.Api = "http://docs.telerik.com/kendo-ui/api/" + api;
                 }
                 else if (product == "php-ui")
                 {
-                    ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/api/wrappers/php/kendo/ui" + Regex.Replace(documentation, "(web|dataviz|mobile)", "");
+                    ViewBag.Api = "http://docs.telerik.com/kendo-ui/api/wrappers/php/kendo/ui" + Regex.Replace(api, "(web|dataviz|mobile)", "");
                 }
                 else if (product == "jsp-ui")
                 {
-                    ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/api/wrappers/jsp" + Regex.Replace(documentation, "(web|dataviz|mobile)", "");
+                    ViewBag.Api = "http://docs.telerik.com/kendo-ui/api/wrappers/jsp" + Regex.Replace(api, "(web|dataviz|mobile)", "");
                 }
                 else if (product == "aspnet-mvc")
                 {
-                    ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/api/wrappers/aspnet-mvc/kendo.mvc.ui.fluent" + Regex.Replace(documentation, "(web|dataviz|mobile)", "") + "builder";
+                    ViewBag.Api = "http://docs.telerik.com/kendo-ui/api/wrappers/aspnet-mvc/kendo.mvc.ui.fluent" + Regex.Replace(api, "(web|dataviz|mobile)", "") + "builder";
                 }
             }
 
