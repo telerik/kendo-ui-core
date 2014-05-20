@@ -164,7 +164,7 @@ namespace Kendo.Controllers
 
             var components = url.Split('/');
 
-            return section == components[0] && example == components[1];
+            return (section == components[0] && example == components[1]) || (section == "upload" && example == "result" && components[0] == "upload" && components[1] == "index");
         }
 
         protected void FindSiblingExamples()

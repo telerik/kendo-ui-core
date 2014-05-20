@@ -9,6 +9,7 @@ namespace Kendo.Controllers
 {
     public class UploadController : Controller
     {
+        [HttpPost]
         public ActionResult Submit(IEnumerable<HttpPostedFileBase> files)
         {
             if (files != null)
@@ -16,7 +17,7 @@ namespace Kendo.Controllers
                 TempData["UploadedFiles"] = GetFileInfo(files);
             }
 
-            return RedirectToAction("Index", "Demo", new { section = "upload", example = "result" });
+            return RedirectToRoute("Demo", new { section = "upload", example = "result" });
         }
 
         public ActionResult Save(IEnumerable<HttpPostedFileBase> files)

@@ -26,16 +26,16 @@ namespace Kendo
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
-                "SourceView",
-                "source/index",
-                new { controller = "Source", action = "Index" }
-            );
-
-            routes.MapRoute(
                 "AsyncUpload",
                 "upload/{action}",
                 new { controller = "Upload" },
                 new { action = "(save|remove|submit)" }
+            );
+
+            routes.MapRoute(
+                "SourceView",
+                "source/index",
+                new { controller = "Source", action = "Index" }
             );
 
             routes.MapRoute(
