@@ -87,7 +87,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "autocomplete/navigation",
+        "url": "autocomplete/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI AutoComplete widget"
         },
@@ -186,7 +186,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "button/navigation",
+        "url": "button/keyboard-navigation",
         "title": {
             "kendo-ui": "Kendo UI Button Keyboard Navigation"
         },
@@ -280,7 +280,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "calendar/navigation",
+        "url": "calendar/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation demo for Kendo UI Calendar widget"
         },
@@ -355,7 +355,7 @@
       {
         "text": "Keyboard support",
         "disableInMobile": true,
-        "url": "colorpicker/navigation",
+        "url": "colorpicker/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard support enabled in Kendo UI ColorPicker widget"
         },
@@ -497,7 +497,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "combobox/navigation",
+        "url": "combobox/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard nagivation in Kendo UI ComboBox | Kendo UI Web demos"
         },
@@ -601,7 +601,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "datepicker/navigation",
+        "url": "datepicker/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI DatePicker"
         },
@@ -705,7 +705,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "datetimepicker/navigation",
+        "url": "datetimepicker/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI DateTimePicker widget"
         },
@@ -819,7 +819,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "dropdownlist/navigation",
+        "url": "dropdownlist/keyboard-navigation",
         "title": {
             "kendo-ui": "Kendo UI DropdownList | Keyboard navigation demo"
         },
@@ -970,7 +970,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "editor/navigation",
+        "url": "editor/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI Editor"
         },
@@ -1462,7 +1462,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "grid/navigation",
+        "url": "grid/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI Grid"
         },
@@ -1572,7 +1572,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "listview/navigation",
+        "url": "listview/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI ListView widget"
         },
@@ -1790,7 +1790,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "menu/navigation",
+        "url": "menu/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI Menu"
         },
@@ -1894,7 +1894,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "multiselect/navigation",
+        "url": "multiselect/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI MultiSelect component | Kendo UI Web demo"
         },
@@ -2049,7 +2049,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "numerictextbox/navigation",
+        "url": "numerictextbox/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI NumericTextBox"
         },
@@ -2157,7 +2157,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "panelbar/navigation",
+        "url": "panelbar/keyboard-navigation",
         "title": {
             "kendo-ui": "Demo for keyboard navigation feature in Kendo UI Collapsible Panel"
         },
@@ -2501,7 +2501,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "slider/navigation"
+        "url": "slider/keyboard-navigation"
       },
       {
         "text": "MVVM",
@@ -2694,7 +2694,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "splitter/navigation",
+        "url": "splitter/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation support in Kendo UI Slider"
         },
@@ -2802,7 +2802,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "tabstrip/navigation",
+        "url": "tabstrip/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI TabStrip"
         },
@@ -2896,7 +2896,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "timepicker/navigation",
+        "url": "timepicker/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI TimePicker"
         },
@@ -3131,7 +3131,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "treeview/navigation",
+        "url": "treeview/keyboard-navigation",
         "title": {
             "kendo-ui": "Kendo UI TreeView control | Keyboard support demo"
         },
@@ -3339,7 +3339,7 @@
       {
         "text": "Keyboard navigation",
         "disableInMobile": true,
-        "url": "window/navigation",
+        "url": "window/keyboard-navigation",
         "title": {
             "kendo-ui": "Keyboard navigation support | Kendo UI Window Demo"
         },
