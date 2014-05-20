@@ -60,25 +60,25 @@ var __meta__ = {
             },
 
             buttonGroup: {
-                base: function (element, items, initializer) {
-                    var item;
+                base: function (options, initializer) {
+                    var element = $('<ul class="' + BUTTON_GROUP + '"></ul>'),
+                        items = options.items,
+                        item;
 
                     element.data({ type: "buttonGroup" });
 
                     for (var i = 0; i < items.length; i++) {
                         item = initializer(items[i]);
-                        item.appendTo(element);
+                        item.wrap("<li></li>").parent().appendTo(element);
                     }
 
-                    element.children("." + BUTTON).first().addClass(GROUP_START);
-                    element.children("." + BUTTON).last().addClass(GROUP_END);
+                    element.find(">li ." + BUTTON).first().addClass(GROUP_START);
+                    element.find(">li ." + BUTTON).last().addClass(GROUP_END);
+
+                    return element;
                 },
                 toolbar: function (options) {
-                    var element = $('<div class="' + BUTTON_GROUP + '"></div>'),
-                        items = options.items,
-                        item;
-
-                    components.buttonGroup.base(element, items, components.button.toolbar);
+                    var element = components.buttonGroup.base(options, components.button.toolbar);
 
                     if (options.id) {
                         element.attr("id", options.id);
@@ -87,40 +87,33 @@ var __meta__ = {
                     return element;
                 },
                 overflow: function (options) {
-                    var element = $('<ul class="' + BUTTON_GROUP + '"></ul>'),
-                        items = options.items,
-                        item;
-
-                    components.buttonGroup.base(element, items, components.button.overflow);
+                    var element = components.buttonGroup.base(options, components.button.overflow);
 
                     if (options.id) {
                         element.attr("id", options.id + "_overflow");
                     }
 
-                    return element.wrap("<li></li>").parent();
+                    return element;
                 }
             },
 
             splitButton: {
                 toolbar: function(options) {
                     var element = $('<div class="' + SPLIT_BUTTON + '"></div>'),
-                        mainButton,
+                        mainButton = components.button.toolbar(options),
                         arrowButton = $('<a href="" class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="k-icon k-i-arrow-s"></span></a>'),
                         popupElement = $('<ul class="' + SPLIT_BUTTON_DROPDOWN + '"></ul>'),
                         popup,
                         items = options.items,
                         item;
 
-                    element.data({ type: "splitButton" });
-
-                    mainButton = components.button.toolbar(options);
                     mainButton.appendTo(element);
                     arrowButton.appendTo(element);
                     popupElement.appendTo(element);
 
                     for (var i = 0; i < items.length; i++) {
-                        item = components.button.toolbar(items[i]).wrap("<li></li>").parent();
-                        item.appendTo(popupElement);
+                        item = components.button.toolbar(items[i]);
+                        item.wrap("<li></li>").parent().appendTo(popupElement);
                     }
 
                     if (!options.id) {
@@ -143,24 +136,24 @@ var __meta__ = {
                 },
                 overflow: function(options) {
                     var element = $('<ul class="' + SPLIT_BUTTON + '"></ul>'),
+                        mainButton = components.button.overflow(options).wrap("<li></li>").parent(),
                         items = options.items,
                         item;
 
-                    element.data({ type: "splitButton" });
-
-                    item = components.button.overflow(options);
-                    item.appendTo(element);
+                    mainButton.appendTo(element);
 
                     for (var i = 0; i < items.length; i++) {
                         item = components.button.overflow(items[i]);
-                        item.appendTo(element);
+                        item.wrap("<li></li>").parent().appendTo(element);
                     }
 
                     if (options.id) {
                         element.attr("id", options.id + "_overflow");
                     }
 
-                    return element.wrap("<li></li>").parent();
+                    element.data({ type: "splitButton" });
+
+                    return element;
                 }
             },
 
@@ -171,7 +164,7 @@ var __meta__ = {
                     return element;
                 },
                 overflow: function(options) {
-                    var element = $('<li><span class="k-overflow-separator"></span></li>');
+                    var element = $('<span class="k-overflow-separator"></span>');
                     element.data({ type: "separator" });
                     return element;
                 }
@@ -261,7 +254,7 @@ var __meta__ = {
                 element.on(CLICK, options.click);
             }
 
-            return element.wrap("<li></li>").parent();
+            return element;
         }
 
         function addIcon(options, element) {
@@ -406,12 +399,12 @@ var __meta__ = {
                 if (options.overflow !== OVERFLOW_NEVER) {
                     if (overflowTemplate) { //template command
                         overflowElement = isFunction(overflowTemplate) ? $(overflowTemplate(options)) : $(overflowTemplate);
-                        overflowElement = overflowElement.wrap("<li></li>").parent();
                     } else if (component) { //build-in command
                         overflowElement = (component.overflow || $.noop)(options);
                     }
 
                     if (overflowElement.length) {
+                        overflowElement = overflowElement.wrap("<li></li>").parent();
                         this._attributes(overflowElement, options);
                         overflowElement.appendTo(this.popup.element);
 

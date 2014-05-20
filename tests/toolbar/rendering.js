@@ -484,7 +484,7 @@
 
     /* BUTTON GROUP */
 
-    test("renders ButtonGroup from JSON", 2, function() {
+    test("renders ButtonGroup from JSON", 3, function() {
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
@@ -496,8 +496,9 @@
             ]
         });
 
-        ok(container.children("div.k-button-group").length, "ButtonGroup element is rendered");
-        equal(container.find("div.k-button-group").children().length, 3, "Button group contains correct amount of items");
+        ok(container.children(".k-button-group").length, "ButtonGroup element is rendered");
+        equal(container.find(".k-button-group").prop("tagName"), "UL", "ButtonGroup renders UL element");
+        equal(container.find(".k-button-group").children().length, 3, "Button group contains correct amount of items");
     });
 
     test("ButtonGroup applies ID option", 1, function() {
@@ -782,7 +783,7 @@
         equal(component.children("li").length, 4); //3 items + 1 main button
     });
 
-    test("Overflow SplitButton element is wrapped in a li tag and receives data attribute", 2, function() {
+    test("Overflow SplitButton element is wrapped in a li tag and receives data-uid attribute", 2, function() {
         var splitButton = container.kendoToolBar({
             items: [
                 { type: "splitButton", text: "foo", items: [
@@ -812,7 +813,7 @@
         ok(container.children(".k-toolbar-separator").length, "Separator element is rendered");
     });
 
-    test("Overflow separator is wrapped inside a li tag", 1, function() {
+    test("Overflow separator is wrapped inside a li tag and received data-uid attribute", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "separator" }
@@ -822,6 +823,7 @@
         var separator = toolbar.popup.element.find(".k-overflow-separator");
 
         equal(separator.parent().prop("tagName"), "LI");
+        ok(separator.parent().data("uid"));
     });
 
     /* COMMAND OVERFLOW */
@@ -887,5 +889,19 @@
         var wrapper = toolbar.popup.element.find(".k-button").parent();
         ok(!wrapper.hasClass("k-overflow-hidden"));
     });
+
+    test("Same uid is attached to the toolbar component and corresponding overflow popup element", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find(".k-button");
+        var overflowButton = toolbar.popup.element.find(">li:first");
+
+        ok(button.data("uid") === overflowButton.data("uid"));
+    });
+
 
 })();
