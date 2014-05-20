@@ -76,7 +76,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "autocomplete/rtl",
+        "url": "autocomplete/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left support in Kendo UI AutoComplete widget"
         },
@@ -175,7 +175,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "button/rtl",
+        "url": "button/right-to-left-support",
         "title": {
             "kendo-ui": "Kendo UI Button RTL Support"
         },
@@ -269,7 +269,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "calendar/rtl",
+        "url": "calendar/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left functionality, enabled in Kendo UI Calendar widget"
         },
@@ -486,7 +486,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "combobox/rtl",
+        "url": "combobox/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left support in Kendo UI ComboBox widget"
         },
@@ -536,7 +536,7 @@
             "kendo-ui": "Kendo UI jQuery DatePicker Demo"
         },
         "meta": {
-            "kendo-ui": "The demo shows how users can effortlessly edit and select dates in the calendar. Combine date editing functionality and animated dropdown in a jQuery Datepicker control for your web app."
+            "kendo-ui": "The demo shows how users can efforight-to-left-supportessly edit and select dates in the calendar. Combine date editing functionality and animated dropdown in a jQuery Datepicker control for your web app."
         }
       },
       {
@@ -590,7 +590,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "datepicker/rtl",
+        "url": "datepicker/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI DatePicker widget | Kendo UI Demo"
         },
@@ -694,7 +694,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "datetimepicker/rtl",
+        "url": "datetimepicker/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left support in Kendo UI DateTimePicker control | Kendo UI Demo"
         },
@@ -808,7 +808,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "dropdownlist/rtl",
+        "url": "dropdownlist/right-to-left-support",
         "title": {
             "kendo-ui": "RTL feature in Kendo UI DropDownList"
         },
@@ -824,7 +824,7 @@
             "kendo-ui": "Kendo UI DropdownList | Keyboard navigation demo"
         },
         "meta": {
-            "kendo-ui": "Kendo UI DropDownList supports keyboard navigation that lets you effortlessly navigate in the dropdown widget by using the keyboard."
+            "kendo-ui": "Kendo UI DropDownList supports keyboard navigation that lets you efforight-to-left-supportessly navigate in the dropdown widget by using the keyboard."
         }
       },
       {
@@ -959,7 +959,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "editor/rtl",
+        "url": "editor/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI Editor"
         },
@@ -1451,7 +1451,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "grid/rtl",
+        "url": "grid/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI Grid component"
         },
@@ -1561,7 +1561,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "listview/rtl",
+        "url": "listview/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI ListView"
         },
@@ -1648,7 +1648,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "maskedtextbox/rtl",
+        "url": "maskedtextbox/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI MaskedTextBox widget"
         },
@@ -1779,7 +1779,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "menu/rtl",
+        "url": "menu/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left support in Kendo UI Menu control | Kendo UI Web Demo"
         },
@@ -1883,7 +1883,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "multiselect/rtl",
+        "url": "multiselect/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI MultiSelect widget | Kendo UI Web demo"
         },
@@ -1980,7 +1980,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "notification/rtl",
+        "url": "notification/right-to-left-support",
         "title": {
             "kendo-ui": "RTL Support of Kendo UI Notification | Kendo UI Web demo"
         },
@@ -2038,7 +2038,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "numerictextbox/rtl",
+        "url": "numerictextbox/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI NumericTextBox widget"
         },
@@ -2146,7 +2146,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "panelbar/rtl",
+        "url": "panelbar/right-to-left-support",
         "title": {
             "kendo-ui": "Keyboard navigation in Kendo UI PanelBar widget | Kendo UI Web demo"
         },
@@ -2252,7 +2252,7 @@
       {
         "text": "RTL Support",
         "disableInMobile": true,
-        "url": "progressbar/rtl",
+        "url": "progressbar/right-to-left-support",
         "title": {
             "kendo-ui": "Kendo UI ProgressBar RTL Support"
         },
@@ -2412,7 +2412,7 @@
       {
         "text": "RTL Support",
         "disableInMobile": true,
-        "url": "scheduler/rtl",
+        "url": "scheduler/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left (RTL) support of Kendo UI Scheduler"
         },
@@ -2490,7 +2490,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "slider/rtl",
+        "url": "slider/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left support in Kendo UI Slider | Kendo UI Web Demos"
         },
@@ -2683,7 +2683,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "splitter/rtl",
+        "url": "splitter/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left support in Kendo UI Splitter control | Kendo UI Web demo"
         },
@@ -2791,7 +2791,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "tabstrip/rtl",
+        "url": "tabstrip/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI TabStrip widget | Kendo UI Web Demos"
         },
@@ -2885,7 +2885,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "timepicker/rtl",
+        "url": "timepicker/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-left time input in Kendo UI TimePicker"
         },
@@ -3120,7 +3120,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "treeview/rtl",
+        "url": "treeview/right-to-left-support",
         "title": {
             "kendo-ui": "RTL Support in Kendo UI TreeView component"
         },
@@ -3230,7 +3230,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "upload/rtl",
+        "url": "upload/right-to-left-support",
         "title": {
             "kendo-ui": "RTL support in Kendo UI Upload"
         },
@@ -3328,7 +3328,7 @@
       {
         "text": "RTL support",
         "disableInMobile": true,
-        "url": "window/rtl",
+        "url": "window/right-to-left-support",
         "title": {
             "kendo-ui": "Right-to-Left window position of Kendo UI Window control"
         },
