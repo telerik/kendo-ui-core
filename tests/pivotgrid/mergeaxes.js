@@ -290,7 +290,7 @@
         equal(tuple.members[1].children[1].name, "measure 2");
     });
 
-    test("merging to existing axes", function() {
+    test("merge to existing axes on expand with single dimention", function() {
         var axes = [
             {
                 columns: {
@@ -333,6 +333,149 @@
         equal(tuples[0].members[0].children.length, 1, "one tuple on second level");
         equal(tuples[0].members[0].children[0].members[0].children.length, 1, "one tuple on third level");
         equal(tuples[0].members[0].children[0].members[0].children[0].members[0].name, "level 2");
+    });
+
+    test("merge to existing axes on expand on root level of first dimention", function() {
+        var axes = [
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }  ] }
+                    ]
+                }
+            },
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }  ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] }  ] }
+                    ]
+                }
+            }
+        ]
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: axes.shift(),
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn("level 0");
+
+        var tuples = dataSource.axes().columns.tuples;
+        equal(tuples.length, 1, "one root tuple");
+        equal(tuples[0].members[0].children.length, 1, "one tuple on second level of first memeber");
+        equal(tuples[0].members[0].children[0].members[0].name, "level 1");
+        equal(tuples[0].members[1].children.length, 0, "zero tuples on second level of second member");
+    });
+
+    test("merge to existing axes on expand on root level of second dimention", function() {
+        var axes = [
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }  ] }
+                    ]
+                }
+            },
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }  ] },
+                        { members: [ { name: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] }  ] }
+                    ]
+                }
+            }
+        ]
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: axes.shift(),
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn([
+            {name: "level 0", expand: false },
+            {name: "level 0", expand: true }
+        ]);
+
+        var tuples = dataSource.axes().columns.tuples;
+        equal(tuples.length, 1, "one root tuple");
+        equal(tuples[0].members[0].children.length, 0, "zero tuples on second level of first memeber");
+        equal(tuples[0].members[1].children.length, 1, "one tuple on second level of second member");
+        equal(tuples[0].members[1].children[0].members[0].name, "level 0");
+        equal(tuples[0].members[1].children[0].members[1].name, "level 1");
+    });
+
+    test("merge to existing axes with multuiple measures", function() {
+        var axes = [
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+                        { members: [ { name: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+                    ]
+                }
+            },
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+                        { members: [ { name: "level 0", children: [] }, { name: "measure 2", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+                    ]
+                }
+            }
+        ];
+
+        var dataSource = new PivotDataSource({
+            measures: [ "measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: axes.shift(),
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn("level 0");
+
+        var tuples = dataSource.axes().columns.tuples;
+        equal(tuples.length, 1, "one root tuple");
+        equal(tuples[0].members[0].children.length, 1, "one tuple on second level of first memeber");
+        equal(tuples[0].members[1].children.length, 2, "two measures on root level");
+
+        equal(tuples[0].members[0].children[0].members[0].name, "level 1");
+        equal(tuples[0].members[0].children[0].members[1].measure, true);
+        equal(tuples[0].members[0].children[0].members[1].children.length, 2, "two measures on second level");
     });
 })();
 

@@ -220,20 +220,26 @@ var __meta__ = {
             return target;
         }
 
-        var result = findExistingMember(target, source[0]);
+        var result = findExistingTuple(target, source[0]);
 
         if (!result) {
             return source;
         }
 
+        var targetMembers = result.members;
         for (var idx = 0, len = source.length; idx < len; idx ++) {
-            [].push.apply(result.member.children, source[idx].members[result.index].children);
+            var sourceMembers = source[idx].members;
+            for (var memberIndex = 0, memberLen = targetMembers.length; memberIndex < memberLen; memberIndex ++) {
+                if (!targetMembers[memberIndex].measure) {
+                    [].push.apply(targetMembers[memberIndex].children, sourceMembers[memberIndex].children);
+                }
+            }
         }
 
         return target;
     }
 
-    function findExistingMember(tuples, current) {
+    function findExistingTuple(tuples, current) {
         var members = current.members;
         var tuple;
         for (var i = 0; i < members.length; i ++) {
@@ -242,10 +248,7 @@ var __meta__ = {
                 return null;
             }
             if (equalMembers(tuple.members, members)) {
-                return {
-                    member: tuple.members[i],
-                    index: i
-                };
+                return tuple;
             }
         }
 
@@ -265,7 +268,7 @@ var __meta__ = {
     function findTuple(tuples, name, index) {
         var tuple, member;
         var idx , length;
-        for (var idx = 0, length = tuples.length; idx < length; idx ++) {
+        for (idx = 0, length = tuples.length; idx < length; idx ++) {
             tuple = tuples[idx];
             member = tuple.members[index];
             if (member.name == name) {
