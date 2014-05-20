@@ -968,6 +968,7 @@ var __meta__ = {
 
             for (var memberIdx = 0, l = members.length; memberIdx < l; memberIdx++) {
 
+                var attr = {};
                 var member = members[memberIdx];
                 var childrenTuples = member.children;
 
@@ -1001,6 +1002,14 @@ var __meta__ = {
                     cellsCount = getCellsCount(row);
                 } else {
                     cellsCount = 1;
+                }
+
+                if (childrenTuples[0]) {
+                    var cell = row.children[row.children.length - 1];
+
+                    cell.attr[kendo.attr("master-cell")] = true;
+
+                    row.attr[kendo.attr("master-row")] = true;
                 }
             }
 
@@ -1046,8 +1055,8 @@ var __meta__ = {
         return count;
     }
 
-    function kendo_th(member) {
-        return element("th", null, [text(member.caption || member.name)]);
+    function kendo_th(member, attr) {
+        return element("th", attr, [text(member.caption || member.name)]);
     }
 
     //row headers

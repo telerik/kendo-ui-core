@@ -289,4 +289,88 @@
         equal(cells_row3.eq(2).text(), "dim 2");
         equal(cells_row3.eq(3).text(), "dim 2");
     });
+
+    test("PivotGrid does not add  master-cell attr to the ALL tuple column without children", function() {
+        var tuples = [
+            { members: [ { name: "level 0", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var tr = headerTable.find("tr");
+        var th = headerTable.find("th");
+
+        ok(!th.attr("data-kendo-master-cell"));
+    });
+
+    test("PivotGrid adds master-cell attr to the expanded ALL tuples", function() {
+        var tuples = [
+            { members: [ { name: "level 0", children: [] }] },
+            { members: [ { name: "level 1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1", parentName: "level 0", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var tr = headerTable.find("tr");
+        var th_level0 = tr.eq(0).find("th");
+        var th_level1 = tr.eq(1).find("th");
+
+        equal(th_level0.last().attr("data-kendo-master-cell"), "true");
+        ok(!th_level1.last().attr("data-kendo-master-cell"));
+    });
+
+    test("PivotGrid adds master-row attr to the row with children", function() {
+        var tuples = [
+            { members: [ { name: "level 0", children: [] }] },
+            { members: [ { name: "level 1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1", parentName: "level 0", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var tr0 = rows.eq(0);
+        var tr1 = rows.eq(1);
+
+        equal(tr0.attr("data-kendo-master-row"), "true");
+        ok(!tr1.attr("data-kendo-master-row"));
+    });
+
+    test("PivotGrid adds master-row attr to every row with children", function() {
+        var tuples = [
+            { members: [ { name: "level 0", children: [] }] },
+            { members: [ { name: "level 1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2", parentName: "level 1", children: [] }] },
+            { members: [ { name: "level 2", parentName: "level 1", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var tr0 = rows.eq(0);
+        var tr1 = rows.eq(1);
+        var tr2 = rows.eq(2);
+
+        equal(tr0.attr("data-kendo-master-row"), "true");
+        equal(tr1.attr("data-kendo-master-row"), "true");
+        ok(!tr2.attr("data-kendo-master-row"));
+    });
 })();
