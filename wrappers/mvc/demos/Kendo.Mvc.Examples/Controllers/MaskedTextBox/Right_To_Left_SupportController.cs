@@ -2,9 +2,9 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class PanelBarController : Controller
+    public partial class MaskedTextBoxController : Controller
     {
-        public ActionResult Rtl()
+        public ActionResult Right_To_Left_Support()
         {
             return View();
         }

@@ -2,9 +2,9 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class TabStripController : Controller
+    public partial class TimePickerController : Controller
     {
-        public ActionResult Rtl()
+        public ActionResult Right_To_Left_Support()
         {
             return View();
         }

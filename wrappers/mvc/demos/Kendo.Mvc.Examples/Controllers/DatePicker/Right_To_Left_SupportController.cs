@@ -2,9 +2,9 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class WindowController : Controller
+    public partial class DatePickerController : Controller
     {
-        public ActionResult Rtl()
+        public ActionResult Right_To_Left_Support()
         {
             return View();
         }
