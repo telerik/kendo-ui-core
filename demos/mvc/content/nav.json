@@ -1040,7 +1040,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "grid/remote-data",
+        "url": "grid/remote-data-binding",
         "title": {
             "kendo-ui": "Remote data binding example in KendoGrid"
         },
@@ -1223,7 +1223,7 @@
       },
       {
         "text": "Virtualization of remote data",
-        "url": "grid/virtualization-remote-data",
+        "url": "grid/virtualization-remote-data-binding",
         "title": {
             "kendo-ui": "Demo for Kendo UI Grid virtualization to remote data"
         },
@@ -1519,7 +1519,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "listview/remote-data",
+        "url": "listview/remote-data-binding",
         "title": {
             "kendo-ui": "Example for Jquery Listview binding to remote data | Kendo UI demos"
         },
@@ -3066,7 +3066,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "treeview/remote-data",
+        "url": "treeview/remote-data-binding",
         "title": {
             "kendo-ui": "Binding Kendo UI tree component to remote data"
         },
@@ -3384,7 +3384,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "datasource/remote-data",
+        "url": "datasource/remote-data-binding",
         "title": {
             "kendo-ui": "Kendo UI DataSource binding to a remote data service"
         },
@@ -3969,7 +3969,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "area-charts/remote-data",
+        "url": "area-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Example of jQuery & HTML5 Kendo UI Area Chart bound to remote data"
         },
@@ -4164,7 +4164,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "bar-charts/remote-data",
+        "url": "bar-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Binding to remote data demo | Kendo UI HTML5 jQuery Bar Charts"
         },
@@ -4229,7 +4229,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "box-plot-charts/remote-data",
+        "url": "box-plot-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Binding to remote data example | Kendo UI Box Plot Charts"
         },
@@ -4281,7 +4281,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "bubble-charts/remote-data",
+        "url": "bubble-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Binding to remote data example | Kendo UI Bubble Chart demo"
         },
@@ -4358,7 +4358,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "bullet-charts/remote-data",
+        "url": "bullet-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Binding Kendo UI Bullet Chart to remote data"
         },
@@ -4414,7 +4414,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "donut-charts/remote-data",
+        "url": "donut-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Binding to remote data demo for Kendo UI Donut Charts"
         },
@@ -4487,7 +4487,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "funnel-charts/remote-data",
+        "url": "funnel-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Binding to remote data demo for Kendo UI Funnel Charts"
         },
@@ -4637,7 +4637,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "line-charts/remote-data",
+        "url": "line-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Binding to remote data example | Kendo UI Line Charts features"
         },
@@ -4715,7 +4715,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "pie-charts/remote-data",
+        "url": "pie-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Binding to remote data example | Kendo UI Pie Charts"
         },
@@ -4802,7 +4802,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "polar-charts/remote-data",
+        "url": "polar-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Example of jQuery & HTML5 Kendo UI Polar Chart bound to remote data"
         },
@@ -4890,7 +4890,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "radar-charts/remote-data",
+        "url": "radar-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Example of jQuery & HTML5 Kendo UI Radar Charts bound to remote data"
         },
@@ -4999,7 +4999,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "scatter-charts/remote-data",
+        "url": "scatter-charts/remote-data-binding",
         "title": {
             "kendo-ui": "Remote data-bound scatter series example | Kendo UI Scatter Charts"
         },
@@ -5080,7 +5080,7 @@
       },
       {
         "text": "Binding to remote data",
-        "url": "sparklines/remote-data",
+        "url": "sparklines/remote-data-binding",
         "title": {
             "kendo-ui": "Binding to remote data in Kendo UI Sparkline Chart | Kendo UI Sparklines"
         },
