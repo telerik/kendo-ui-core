@@ -2,9 +2,9 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class SplitterController : Controller
+    public partial class TimePickerController : Controller
     {
-        public ActionResult Navigation()
+        public ActionResult Keyboard_Navigation()
         {
             return View();
         }

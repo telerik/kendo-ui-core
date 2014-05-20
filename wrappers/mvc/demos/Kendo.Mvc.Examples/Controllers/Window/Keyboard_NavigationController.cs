@@ -2,9 +2,9 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class TreeViewController : Controller
+    public partial class WindowController : Controller
     {
-        public ActionResult Navigation()
+        public ActionResult Keyboard_Navigation()
         {
             return View();
         }

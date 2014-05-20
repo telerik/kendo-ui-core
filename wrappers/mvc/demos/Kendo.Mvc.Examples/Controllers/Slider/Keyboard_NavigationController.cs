@@ -2,9 +2,9 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class TabStripController : Controller
+    public partial class SliderController : Controller
     {
-        public ActionResult Navigation()
+        public ActionResult Keyboard_Navigation()
         {
             return View();
         }

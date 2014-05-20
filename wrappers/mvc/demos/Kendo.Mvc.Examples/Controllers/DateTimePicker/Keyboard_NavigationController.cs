@@ -2,9 +2,9 @@
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class PanelBarController : Controller
+    public partial class DateTimePickerController : Controller
     {
-        public ActionResult Navigation()
+        public ActionResult Keyboard_Navigation()
         {
             return View();
         }
