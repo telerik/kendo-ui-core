@@ -13,8 +13,8 @@ import com.kendoui.spring.models.WebSiteStats;
 
 @Controller("dataviz-funnel_chart-local_data-controller")
 @RequestMapping(value="/funnel-charts/")
-public class LocalDataController {
-    @RequestMapping(value = "/local-data", method = RequestMethod.GET)
+public class LocalDataBindingController {
+    @RequestMapping(value = "/local-data-binding", method = RequestMethod.GET)
     public String index(Model model) {
         List<WebSiteStats> dataBefore = new ArrayList<WebSiteStats>();
         dataBefore.add(new WebSiteStats("All Visitors", 23945));
@@ -32,6 +32,6 @@ public class LocalDataController {
         dataAfter.add(new WebSiteStats("Purchased", 9697));
         model.addAttribute("dataAfter", dataAfter);        
         
-        return "/funnel-charts/local-data";
+        return "/funnel-charts/local-data-binding";
     }
 }

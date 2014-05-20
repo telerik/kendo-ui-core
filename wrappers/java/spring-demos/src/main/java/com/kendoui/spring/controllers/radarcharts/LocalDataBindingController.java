@@ -9,11 +9,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-radar_chart-local_data-controller")
 @RequestMapping(value="/radar-charts/")
-public class LocalDataController {
-    @RequestMapping(value = "/local-data", method = RequestMethod.GET)
+public class LocalDataBindingController {
+    @RequestMapping(value = "/local-data-binding", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("proteinQuality", ChartDataRepository.ProteinQualityData());
      
-        return "/radar-charts/local-data";
+        return "/radar-charts/local-data-binding";
     }
 }

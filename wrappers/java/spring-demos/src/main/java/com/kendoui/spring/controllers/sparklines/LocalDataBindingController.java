@@ -9,11 +9,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-sparklines_local_data-controller")
 @RequestMapping(value="/sparklines/")
-public class LocalDataController {
-    @RequestMapping(value = "/local-data", method = RequestMethod.GET)
+public class LocalDataBindingController {
+    @RequestMapping(value = "/local-data-binding", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("compensationData", ChartDataRepository.CompensationData());
         
-        return "/sparklines/local-data";
+        return "/sparklines/local-data-binding";
     }
 }

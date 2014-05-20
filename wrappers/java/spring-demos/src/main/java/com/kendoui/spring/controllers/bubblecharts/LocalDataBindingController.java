@@ -9,11 +9,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-bubble_chart-local_data-controller")
 @RequestMapping(value="/bubble-charts/")
-public class LocalDataController {
-    @RequestMapping(value = "/local-data", method = RequestMethod.GET)
+public class LocalDataBindingController {
+    @RequestMapping(value = "/local-data-binding", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("jobGrowth", ChartDataRepository.JobGrowthData());
      
-        return "/bubble-charts/local-data";
+        return "/bubble-charts/local-data-binding";
     }
 }

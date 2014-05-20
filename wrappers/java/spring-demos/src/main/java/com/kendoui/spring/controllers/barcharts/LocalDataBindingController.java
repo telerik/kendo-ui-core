@@ -16,13 +16,13 @@ import com.kendoui.spring.models.BarChartsLocalDataViewModel;
 
 @Controller("dataviz-bar_chart-local_data-controller")
 @RequestMapping(value="/bar-charts/")
-public class LocalDataController {
+public class LocalDataBindingController {
     private Map<Integer, String> userColors = new HashMap<Integer, String>(){{
         put(1,"#ffd600");
         put(2,"#565656");
     }};
     
-    @RequestMapping(value = "/local-data", method = RequestMethod.GET)
+    @RequestMapping(value = "/local-data-binding", method = RequestMethod.GET)
     public String index(Model model) {
         List<BlogComments> blogComments = ChartDataRepository.BlogComments();
         List<BarChartsLocalDataViewModel> viewModel =  new ArrayList<BarChartsLocalDataViewModel>();
@@ -42,6 +42,6 @@ public class LocalDataController {
         }
         model.addAttribute("viewModel", viewModel);
      
-        return "/bar-charts/local-data";
+        return "/bar-charts/local-data-binding";
     }
 }

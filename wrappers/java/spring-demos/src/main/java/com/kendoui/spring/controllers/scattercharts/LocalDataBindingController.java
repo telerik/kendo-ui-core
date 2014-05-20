@@ -9,11 +9,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-scatter_chart-local_data-controller")
 @RequestMapping(value="/scatter-charts/")
-public class LocalDataController {
-    @RequestMapping(value = "/local-data", method = RequestMethod.GET)
+public class LocalDataBindingController {
+    @RequestMapping(value = "/local-data-binding", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("pricePerfomance", ChartDataRepository.PricePerformanceData());
      
-        return "/scatter-charts/local-data";
+        return "/scatter-charts/local-data-binding";
     }
 }
