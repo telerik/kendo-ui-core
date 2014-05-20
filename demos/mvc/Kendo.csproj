@@ -840,7 +840,6 @@
     <Content Include="content\web\tabstrip\ajax\ajaxContent3.html" />
     <Content Include="content\web\tabstrip\ajax\ajaxContent4.html" />
     <Content Include="content\web\tabstrip\ajax\ajaxContent5.html" />
-    <Content Include="Views\mobile\overview\index.cshtml" />
     <Content Include="Views\MobileDevice\Index.cshtml" />
     <Content Include="Views\Shared\NoLayout.cshtml" />
     <None Include="content\dataviz\js\april-sales.json" />

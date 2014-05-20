@@ -10,6 +10,11 @@ namespace Kendo.Controllers
     {
         public ActionResult Index()
         {
+            if (IsMobileDevice())
+            {
+                return Redirect(Url.RouteUrl("MobileDeviceIndex"));
+            }
+
             ViewBag.Product = CurrentProduct();
             LoadNavigation();
             LoadCategories();

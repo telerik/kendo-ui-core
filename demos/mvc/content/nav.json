@@ -3869,31 +3869,6 @@
     "category": "TBD"
   },
   {
-    "text": "DataViz Widgets",
-    "pro": "true",
-    "spriteCssClass": "overviewIcon",
-    "documentation": "dataviz/chart",
-    "disableInMobile": true,
-    "expanded": "true",
-    "packages": [
-      "online"
-    ],
-    "items": [
-      {
-        "text": "Overview",
-        "url": "overview/index",
-        "title": {
-            "kendo-ui": "jQuery and HTML5 Data Visualization Demos | Kendo UI DataViz widgets"
-        },
-        "meta": {
-            "kendo-ui": "Find demos for Kendo UI jQuery data visualization widgets, included in Kendo UI DataViz. Learn how to create sleek business apps with HTML5 charts, Kendo UI Gauge widgets, etc."
-        }
-      }
-    ],
-    "name": "overview",
-    "category": "Data Visualization"
-  },
-  {
     "text": "Area Charts",
     "pro": "true",
     "documentation": "dataviz/chart",
@@ -5517,26 +5492,6 @@
     ],
     "category": "Diagramming"
 
-  },
-  {
-    "text": "Mobile Widgets",
-    "name": "overview",
-    "documentation": "mobile",
-    "spriteCssClass": "overviewIcon",
-    "packages": [ "!jsp", "!php" ],
-    "items": [
-      {
-        "text": "Overview",
-        "url": "overview/index",
-        "title": {
-            "kendo-ui": "jQuery-powered mobile app framework demos | Kendo UI Mobile widgets demos"
-        },
-        "meta": {
-            "kendo-ui": "Get instantly familiar with Kendo UI Mobile web framework and a suite of jQuery-based mobile widgets by exploring Kendo UI Mobile demos."
-        }
-      }
-    ],
-    "category": "Mobile"
   },
   {
     "text": "ActionSheet",

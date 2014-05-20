@@ -104,6 +104,11 @@ namespace Kendo
                 new { controller = "Demo", action = "Index" }
             );
 
+            routes.MapRoute(
+                "DemoIndex",
+                "{section}",
+                new { controller = "Demo", action = "Index", example = "index" }
+            );
 
             routes.MapRoute(
                 "Debug",
@@ -136,15 +141,10 @@ namespace Kendo
                 new { controller = "MobileThemeBuilder", action = "MobileThemeBuilderIndex" }
             );
 
+            // /
             routes.MapRoute(
-                "DemoIndex",
-                "{section}",
-                new { controller = "Demo", action = "SectionIndex" }
-            );
-
-            routes.MapRoute(
-                "Default",
-                "{controller}/{action}",
+                "Home",
+                "",
                 new { controller = "Home", action = "Index" }
             );
         }

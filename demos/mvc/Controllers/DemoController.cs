@@ -26,9 +26,11 @@ namespace Kendo.Controllers
 
         //
         // GET: /Web/
-        public ActionResult Index(string section, string example, bool? nav)
+        public ActionResult Index(string section, string example)
         {
             var product = CurrentProduct();
+
+            example = example ?? "index";
 
             ViewBag.ShowCodeStrip = true;
             ViewBag.Product = product;
@@ -97,30 +99,10 @@ namespace Kendo.Controllers
             return framework.GetFiles(Server, example, section).Where(file => file.Exists(Server));
         }
 
-        private bool IsMobileDevice()
-        {
-            return Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
-        }
-
-        public ActionResult SectionIndex(string product, string section)
-        {
-            var isMobileDevice = IsMobileDevice();
-
-            var redirect = Redirect(Url.ApplyProduct(Url.Action("Index", new { product = product, section = section, example = "index" })));
-
-            if (product == "mobile" && isMobileDevice)
-            {
-                redirect = RedirectPermanent(Url.RouteUrl("MobileDeviceIndex"));
-            }
-
-            return redirect;
-        }
-
         protected void FindCurrentExample(string product)
         {
            var found = false;
 
-           NavigationExample overview = null;
            NavigationExample current = null;
            NavigationWidget currentWidget = null;
 
@@ -128,29 +110,18 @@ namespace Kendo.Controllers
            {
                foreach (NavigationExample example in widget.Items)
                {
-                   if (!found && example.Url.Contains("overview"))
-                   {
-                       overview = example;
-                       currentWidget = widget;
-                   }
-
-                   if (!example.Url.Contains("overview") && example.ShouldInclude(product))
+                   if (example.ShouldInclude(product))
                    {
                        examplesUrl.Add("~/" + example.Url);
                    }
 
-                   if (!found && IsCurrentExample(Request, example))
+                   if (!found && IsCurrentExample(example.Url))
                    {
                        current = example;
                        currentWidget = widget;
                        found = true;
                    }
                }
-           }
-
-           if (!found)
-           {
-               current = overview;
            }
 
            ViewBag.CurrentWidget = currentWidget;
@@ -186,9 +157,14 @@ namespace Kendo.Controllers
            }
         }
 
-        private bool IsCurrentExample(HttpRequestBase request, NavigationExample example)
+        private bool IsCurrentExample(string url)
         {
-            return Request.Path.EndsWith("/" + example.Url) || (ViewBag.Example == "result" && example.Url == "upload/index.html");
+            var section = ControllerContext.RouteData.GetRequiredString("section");
+            var example = ControllerContext.RouteData.GetRequiredString("example");
+
+            var components = url.Split('/');
+
+            return section == components[0] && example == components[1];
         }
 
         protected void FindSiblingExamples()

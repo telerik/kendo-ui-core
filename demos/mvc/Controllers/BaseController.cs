@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Kendo.Models;
 using IOFile = System.IO.File;
+using System.Text.RegularExpressions;
 
 namespace Kendo.Controllers
 {
@@ -82,6 +83,11 @@ namespace Kendo.Controllers
         protected void LoadCategories()
         {
             ViewBag.Categories = LoadWidgets().GroupBy(w => w.Category).ToList();
+        }
+
+        protected bool IsMobileDevice()
+        {
+            return Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
         }
     }
 }
