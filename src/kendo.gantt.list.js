@@ -469,15 +469,16 @@ var __meta__ = {
                 };
             }
 
-            this.editable = cell.kendoEditable({
-                                fields: {
-                                    field: column.field,
-                                    format: column.format,
-                                    editor: column.editor || editor
-                                },
-                                model: modelCopy,
-                                clearContainer: false
-                            }).data("kendoEditable");
+            this.editable = cell.addClass("k-edit-cell")
+                                .kendoEditable({
+                                    fields: {
+                                        field: column.field,
+                                        format: column.format,
+                                        editor: column.editor || editor
+                                    },
+                                    model: modelCopy,
+                                    clearContainer: false
+                                }).data("kendoEditable");
         },
 
         _closeCell: function(cancelUpdate) {
@@ -491,6 +492,7 @@ var __meta__ = {
 
             cell.empty()
                 .removeData("modelCopy")
+                .removeClass("k-edit-cell")
                 .append(this._editableContent);
 
             this.editable.destroy();

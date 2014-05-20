@@ -53,6 +53,14 @@
         ok(targetCell.data("kendoEditable"));
     });
 
+    test("applies css class to editable cell on dblclick", function () {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        doubleTap(targetCell);
+
+        ok(targetCell.hasClass("k-edit-cell"));
+    });
+
     test("attaches model copy to the editable cell data", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
@@ -196,6 +204,15 @@
         ganttList._closeCell();
 
         ok(!targetCell.data("modelCopy"));
+    });
+
+    test("removes css class after cell exists edit mode", function () {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        doubleTap(targetCell);
+        ganttList._closeCell();
+
+        ok(!targetCell.hasClass("k-edit-cell"));
     });
 
     test("ESC keydown closes edited cell", function() {
