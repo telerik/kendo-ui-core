@@ -1,28 +1,20 @@
 ﻿@{
-    ViewBag.Title = "Header";
+    var ProductNames = new Dictionary<string, string> {
+        { "kendo-ui", "Kendo UI" },
+        { "php-ui", "UI for PHP" },
+        { "aspnet-mvc", "UI for ASP.NET MVC" },
+        { "jsp-ui", "UI for JSP" },
+        { "themebuilder", "ThemeBuilder" },
+        { "mobile-themebuilder", "Mobile ThemeBuilder" }
+    };
 }
 
 <div id="header">
     <div id="logo-bar">
-        <a href="#">
-        @if (ViewBag.Product == "kendo-ui")
-        {
-           <img alt="Kendo UI logo" class="logo" src="@Url.Content("~/content/shared/styles/kendo-ui-logo.png")"/>
-        }
-        else if (ViewBag.Product == "php-ui")
-        {
-           <img alt="PHP for UI logo" class="logo" src="@Url.Content("~/content/shared/styles/php-ui-logo.png")"/>
-        }
-        else if (ViewBag.Product == "aspnet-mvc")
-        {
-               <img alt="ASP.NET MVC for UI logo" class="logo" src="@Url.Content("~/content/shared/styles/aspnet-mvc-logo.png")"/>
-        }
-        else if (ViewBag.Product == "jsp-ui")
-        {
-           <img alt="JSP for UI logo" class="logo" src="@Url.Content("~/content/shared/styles/jsp-ui-logo.png")"/>
-        }  
-    </a>   
-  </div>       
+        <a href="http://www.telerik.com/@ViewBag.Product">
+            <img alt="@(ProductNames[ViewBag.Product]) logo" class="logo" src="@Url.Content("~/content/shared/images/logos/" + ViewBag.Product + ".png")"/>
+        </a>
+    </div>
     <div class="nav-buttons">
         <a id="about" href="http://www.telerik.com/@ViewBag.Product" class="btn">About</a>
         <a id="pricing" href="http://www.telerik.com/purchase.aspx" class="btn">Pricing</a>

@@ -16,38 +16,12 @@
     {
     <script src="@Url.Script(scriptName)"></script>
     }
-    <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
 </head>
 <body>
-    @Html.Partial("Telerik-Navigation")
     @Html.Partial("Header")
-    <div class="brand-line"></div>
-    <div id="example" class="themebuilder-layout">
 
-        <div id="themebuilder-chooser">
-            <a href="web.html"><img src="@Url.Content("~/content/shared/images/themebuilder-web-logo.png")" alt="ThemeBuilder for Kendo UI Web"></a>
-            <a href="dataviz.html"><img src="@Url.Content("~/content/shared/images/themebuilder-dataviz-logo.png")" alt="ThemeBuilder for Kendo UI DataViz"></a>
-            <a href="mobile.html"><img src="@Url.Content("~/content/shared/images/themebuilder-mobile-logo.png")" alt="ThemeBuilder for Kendo UI Mobile"></a>
-        </div>
-
-        @RenderBody()
-    </div>
+    @RenderBody()
 
     @Html.Partial("Footer")
-    <script src="@Url.Content("~/content/shared/js/telerik-navigation.js")"></script>
-
-    <style>
-   #instructions-box,
-   .themebuilder-layout>.k-content,
-   #mobile-landing {
-       width: 1170px;
-       margin: 0 auto;
-       padding: 0 0 15px 12px;
-    }
-        
-   #example.themebuilder-layout {
-       padding: 0;
-   }
-    </style>
 </body>
 </html>

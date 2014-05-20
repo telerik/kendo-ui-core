@@ -87,7 +87,6 @@
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MobileThemeBuilderController.cs" />
     <Compile Include="Controllers\MobileAppsController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\MobileDeviceController.cs" />

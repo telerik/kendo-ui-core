@@ -63,6 +63,18 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "ThemeBuilder",
+                "themebuilder",
+                new { controller = "ThemeBuilder", action = "Index" }
+            );
+
+            routes.MapRoute(
+                "MobileThemeBuilder",
+                "mobilethemebuilder",
+                new { controller = "ThemeBuilder", action = "MobileIndex" }
+            );
+
+            routes.MapRoute(
                 "AeroviewrCallback",
                 "aeroviewr/callback.html",
                 new { controller = "Spa", action = "AeroviewrCallback" }
@@ -115,30 +127,6 @@ namespace Kendo
                 "src/{assetType}/{*file}",
                 new { controller = "Debug", action = "Resource" },
                 new { assetType = "(js|styles)" }
-            );
-
-            routes.MapRoute(
-                "ThemeBuilder",
-                "themebuilder/{product}.html",
-                new { controller = "ThemeBuilder", action = "Index" }
-            );
-
-            routes.MapRoute(
-                "ThemeBuilderIndex",
-                "themebuilder",
-                new { controller = "ThemeBuilder", action = "ThemeBuilderIndex" }
-            );
-
-            routes.MapRoute(
-                "MobileThemeBuilder",
-                "mobilethemebuilder/index.html",
-                new { controller = "MobileThemeBuilder", action = "Index" }
-            );
-
-            routes.MapRoute(
-                "MobileThemeBuilderIndex",
-                "mobilethemebuilder",
-                new { controller = "MobileThemeBuilder", action = "MobileThemeBuilderIndex" }
             );
 
             routes.MapRoute(
