@@ -27,7 +27,7 @@ $tooltip->visible(true)
         ->template('Target: #= value.target # items<br /> Actual: #= value.current # items');
 
 $transport = new \Kendo\Data\DataSourceTransport();
-$transport->read(array('url' => 'remote-data.php', 'type' => 'POST', 'dataType' => 'json'));
+$transport->read(array('url' => 'remote-data-binding.php', 'type' => 'POST', 'dataType' => 'json'));
 
 $dataSource = new \Kendo\Data\DataSource();
 

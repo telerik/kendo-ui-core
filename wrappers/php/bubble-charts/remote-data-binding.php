@@ -26,7 +26,7 @@ $tooltip->visible(true)
         ->format('{3}: Population {2:N0}');
 
 $transport = new \Kendo\Data\DataSourceTransport();
-$transport->read(array('url' => 'remote-data.php', 'type' => 'POST', 'dataType' => 'json'));
+$transport->read(array('url' => 'remote-data-binding.php', 'type' => 'POST', 'dataType' => 'json'));
 
 $dataSource = new \Kendo\Data\DataSource();
 

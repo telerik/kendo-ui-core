@@ -22,7 +22,7 @@ require_once '../include/header.php';
            ->segmentSpacing(2);
 
     $transport = new \Kendo\Data\DataSourceTransport();
-    $transport->read(array('url' => 'remote-data.php', 'type' => 'POST', 'dataType' => 'json'));
+    $transport->read(array('url' => 'remote-data-binding.php', 'type' => 'POST', 'dataType' => 'json'));
 
     $dataSource = new \Kendo\Data\DataSource();
 

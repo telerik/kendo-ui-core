@@ -21,7 +21,7 @@ $series->field('share')
        ->padding(10);
 
 $transport = new \Kendo\Data\DataSourceTransport();
-$transport->read(array('url' => 'remote-data.php', 'type' => 'POST', 'dataType' => 'json'));
+$transport->read(array('url' => 'remote-data-binding.php', 'type' => 'POST', 'dataType' => 'json'));
 
 $dataSource = new \Kendo\Data\DataSource();
 

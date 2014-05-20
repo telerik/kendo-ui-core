@@ -51,7 +51,7 @@ $read = new \Kendo\Data\DataSourceTransportRead();
 //     ->dataType('jsonp');
 
 // Bind to self
-$read->url('remote-data.php')
+$read->url('remote-data-binding.php')
      ->contentType('application/json')
      ->type('POST');
 

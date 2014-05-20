@@ -35,14 +35,16 @@ $valueAxis->labels(array('format' => 'N0'))
 $categoryAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
 
 $categoryAxis->field('year')
-             ->labels(array('rotation' => -90));
+             ->labels(array('rotation' => -90))
+			 ->crosshair(array('visible' => true));
 
 $tooltip = new \Kendo\Dataviz\UI\ChartTooltip();
 $tooltip->visible(true)
-        ->format('N0');
+        ->format('N0')
+		->shared(true);
 
 $transport = new \Kendo\Data\DataSourceTransport();
-$transport->read(array('url' => 'remote-data.php', 'type' => 'POST', 'dataType' => 'json'));
+$transport->read(array('url' => 'remote-data-binding.php', 'type' => 'POST', 'dataType' => 'json'));
 
 $dataSource = new \Kendo\Data\DataSource();
 
@@ -56,7 +58,7 @@ $chart->title(array('text' => 'Spain electricity production (GWh)'))
       ->addSeriesItem($nuclear, $hydro, $wind)
       ->addValueAxisItem($valueAxis)
       ->addCategoryAxisItem($categoryAxis)
-      ->seriesDefaults(array('type' => 'column'))
+      ->seriesDefaults(array('type' => 'line'))
       ->tooltip($tooltip);
 
 echo $chart->render();

@@ -20,7 +20,7 @@ $transport = new \Kendo\Data\DataSourceTransport();
 
 $read = new \Kendo\Data\DataSourceTransportRead();
 
-$read->url('virtualization-remote-data.php')
+$read->url('virtualization-remote-data-binding.php')
      ->contentType('application/json')
      ->type('POST');
 

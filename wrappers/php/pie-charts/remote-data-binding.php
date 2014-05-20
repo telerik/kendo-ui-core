@@ -24,7 +24,7 @@ for ($year = 2000; $year <= 2009; $year++) {
            ->padding(0);
 
     $transport = new \Kendo\Data\DataSourceTransport();
-    $transport->read(array('url' => 'remote-data.php', 'type' => 'POST', 'dataType' => 'json'));
+    $transport->read(array('url' => 'remote-data-binding.php', 'type' => 'POST', 'dataType' => 'json'));
 
     $dataSource = new \Kendo\Data\DataSource();
 
