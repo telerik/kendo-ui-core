@@ -24,11 +24,20 @@ namespace Kendo.Extensions
             ));
         }
 
-        private static string ExampleUrl(this HtmlHelper html, NavigationExample example)
+        public static string ExampleUrl(this HtmlHelper html, NavigationExample example)
         {
             var sectionAndExample = example.Url.Split('/');
 
             return new UrlHelper(html.ViewContext.RequestContext).Action("Index", "Demo", new { section = sectionAndExample[0], example = sectionAndExample[1] });
+        }
+
+        public static string ProductExampleUrl(this HtmlHelper html, NavigationExample example, string product)
+        {
+            var viewBag = html.ViewContext.Controller.ViewBag;
+
+            var currentProduct = (string)viewBag.Product;
+
+            return html.ExampleUrl(example).Replace(currentProduct, product);
         }
 
         public static String CdnRoot(this HtmlHelper html)
