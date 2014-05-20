@@ -15,12 +15,25 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
+        <button id="expand-one">Expand Calendar</button>
+        <button id="expand-two">Expand 2005</button>
+
         <div id="pivotgrid"></div>
 
     <script>
-        $("button").click(function() {
-            dataSource.expand("[Date].[Calendar]");
+        $("#expand-one").click(function() {
+            var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+
+//            dataSource.expandColumn("[Date].[Calendar].[Year].&[2005].&[2]");
+            dataSource.expandRow("[Product].[Product Name]");
         });
+
+        $("#expand-two").click(function() {
+            var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+
+            dataSource.expandColumn("[Date].[Calendar].[Year].&[2005]");
+        });
+
 
         $(function() {
             $("#pivotgrid").kendoPivotGrid({

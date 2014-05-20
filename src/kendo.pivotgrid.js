@@ -90,35 +90,51 @@ var __meta__ = {
             return this._measures;
         },
 
-        expandColumn: function(path) {
-            var members = normalizeMembers(path);
+        _expandPath: function(path, axis) {
+            var origin = axis === "columns" ? "columns" : "rows";
+            var other = axis === "columns" ? "rows" : "columns";
 
+            var members = normalizeMembers(path);
             members[members.length - 1].expand = true;
 
-            var axes = this.axes();
+            var axis1 = this[origin]();
 
-            var rows = this.rows() || [];
+            if (members.length < axis1.length) {
+                for (var idx = 0; idx < axis1.length; idx++) {
+                    var found = false;
+                    for (var j = 0; j < members.length; j++) {
+                        if (members[j].name.indexOf(axis1[idx].name) == 0) {
+                            found = true;
+                            break;
+                        }
+                    }
 
-            if (axes && axes.rows) {
-                rows = descriptorsForAxes(axes.rows);
+                    if (!found) {
+                        members.push(axis1[idx]);
+                    }
+                }
             }
 
-            this.read({ columns: members, rows: rows });
+            var axes = this.axes();
+            var axis2 = this[other]() || [];
+
+            if (axes && axes[other]) {
+                axis2 = descriptorsForAxes(axes[other]);
+            }
+
+            var descriptors = {};
+            descriptors[origin] = members;
+            descriptors[other] = axis2;
+
+            this.read(descriptors);
+        },
+
+        expandColumn: function(path) {
+            this._expandPath(path, "columns");
         },
 
         expandRow: function(path) {
-            var members = normalizeMembers(path);
-
-            members[members.length - 1].expand = true;
-
-            var axes = this.axes();
-            var columns = this.columns() || [];
-
-            if (axes && axes.columns) {
-                columns = descriptorsForAxes(axes.columns);
-            }
-
-            this.read({ rows: members, columns: columns });
+            this._expandPath(path, "rows");
         },
 
         _readData: function(data) {

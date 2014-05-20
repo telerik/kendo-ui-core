@@ -234,7 +234,6 @@
                 data: "data"
             },
             transport: {
-                read: {},
                 read: function(options) {
                     equal(options.data.rows.length, 1);
                     equal(options.data.rows[0].name, "baz");
@@ -249,6 +248,86 @@
 
         dataSource.expandColumn("foo");
     });
+
+    test("expandColumn pass current columns state when expanding top member", 4, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo", "bar"],
+            rows: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    equal(options.data.columns.length, 2);
+                    equal(options.data.columns[0].name, "foo");
+                    ok(options.data.columns[0].expand);
+                    equal(options.data.columns[1].name, "bar");
+
+                    options.success({
+                        axes: { columns: {}},
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.expandColumn("foo");
+    });
+
+    test("expandColumn pass current columns state when expanding bottom member", 4, function() {
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[foo]", expand: true}, "[bar]"],
+            rows: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    equal(options.data.columns.length, 2);
+                    equal(options.data.columns[0].name, "[foo].&[1]");
+                    equal(options.data.columns[1].name, "[bar].&[1]");
+                    ok(options.data.columns[1].expand);
+
+                    options.success({
+                        axes: { columns: {}},
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.expandColumn(["[foo].&[1]", "[bar].&[1]"]);
+    });
+
+    test("expandColumn pass current columns state when expanding bottom member multiple members", 5, function() {
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[foo]", expand: true}, "[bar]", "[moo]"],
+            rows: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    equal(options.data.columns.length, 3);
+                    equal(options.data.columns[0].name, "[foo].&[1]");
+                    equal(options.data.columns[1].name, "[bar].&[1]");
+                    ok(options.data.columns[1].expand);
+                    equal(options.data.columns[2].name, "[moo]");
+
+                    options.success({
+                        axes: { columns: {}},
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.expandColumn(["[foo].&[1]", "[bar].&[1]"]);
+    });
+
 
     test("expandRow pass current columns state", 3, function() {
         var dataSource = new PivotDataSource({
@@ -274,6 +353,85 @@
         });
 
         dataSource.expandRow("baz");
+    });
+
+    test("expandRow pass current row state when expanding top member", 4, function() {
+        var dataSource = new PivotDataSource({
+            rows: ["foo", "bar"],
+            columns: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    equal(options.data.rows.length, 2);
+                    equal(options.data.rows[0].name, "foo");
+                    ok(options.data.rows[0].expand);
+                    equal(options.data.rows[1].name, "bar");
+
+                    options.success({
+                        axes: { columns: {}},
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.expandRow("foo");
+    });
+
+    test("expandRow pass current row state when expanding bottom member", 4, function() {
+        var dataSource = new PivotDataSource({
+            rows: [{ name:"[foo]", expand: true}, "[bar]"],
+            columns: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    equal(options.data.rows.length, 2);
+                    equal(options.data.rows[0].name, "[foo].&[1]");
+                    equal(options.data.rows[1].name, "[bar].&[1]");
+                    ok(options.data.rows[1].expand);
+
+                    options.success({
+                        axes: { columns: {}},
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.expandRow(["[foo].&[1]", "[bar].&[1]"]);
+    });
+
+    test("expandRow pass current row state when expanding bottom member multiple members", 5, function() {
+        var dataSource = new PivotDataSource({
+            rows: [{ name:"[foo]", expand: true}, "[bar]", "[moo]"],
+            columns: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    equal(options.data.rows.length, 3);
+                    equal(options.data.rows[0].name, "[foo].&[1]");
+                    equal(options.data.rows[1].name, "[bar].&[1]");
+                    ok(options.data.rows[1].expand);
+                    equal(options.data.rows[2].name, "[moo]");
+
+                    options.success({
+                        axes: { columns: {}},
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.expandRow(["[foo].&[1]", "[bar].&[1]"]);
     });
 
     test("expandRow issue a request", 1, function() {
