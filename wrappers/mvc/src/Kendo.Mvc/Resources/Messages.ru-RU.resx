@@ -651,9 +651,6 @@
   <data name="Editor_DeleteFile" xml:space="preserve">
     <value>Are you sure you want to delete "{0}"?</value>
   </data>
-  <data name="Editor_DialogButtonSeparator1" xml:space="preserve">
-    <value>or</value>
-  </data>
   <data name="Editor_DirectoryNotFound" xml:space="preserve">
     <value>A directory with this name was not found.</value>
   </data>
@@ -663,17 +660,11 @@
   <data name="Editor_EmptyFolder" xml:space="preserve">
     <value>Empty Folder</value>
   </data>
-  <data name="Editor_FontNameInherit1" xml:space="preserve">
-    <value>(inherited font)</value>
-  </data>
   <data name="Editor_ForeColor" xml:space="preserve">
     <value>Color</value>
   </data>
   <data name="Editor_InvalidFileType" xml:space="preserve">
     <value>The selected file "{0}" is not valid. Supported file types are {1}.</value>
-  </data>
-  <data name="Editor_Italic1" xml:space="preserve">
-    <value>Italic</value>
   </data>
   <data name="Editor_OrderBy" xml:space="preserve">
     <value>Arrange by:</value>
