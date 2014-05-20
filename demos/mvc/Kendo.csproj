@@ -535,8 +535,8 @@
     <Content Include="Views\demos\combobox\index.cshtml" />
     <Content Include="Views\demos\combobox\template.cshtml" />
     <Content Include="Views\demos\customization\plotbands.cshtml" />
-    <Content Include="Views\demos\dashboards\car-dashboard.cshtml" />
-    <Content Include="Views\demos\dashboards\stock-history.cshtml" />
+    <Content Include="Views\demos\radial-gauge\car-dashboard.cshtml" />
+    <Content Include="Views\demos\financial\stock-history.cshtml" />
     <Content Include="Views\demos\datasource\index.cshtml" />
     <Content Include="Views\demos\datasource\local-operations.cshtml" />
     <Content Include="Views\demos\datasource\remote-data.cshtml" />

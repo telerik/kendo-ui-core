@@ -5250,6 +5250,21 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "Car Dashboard",
+        "url": "radial-gauge/car-dashboard",
+        "title": {
+            "kendo-ui": "Sample car dashboard, built with Kendo UI DataViz components"
+        },
+        "meta": {
+            "kendo-ui": "This sample demonstrates the use of Kendo UI Gauges"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "name": "radial-gauge",
@@ -5388,6 +5403,21 @@
         "meta": {
             "kendo-ui": "In this example we show you how the virtualization works in Kendo UI Stock Chart for rich data visualization."
         }
+      },
+      {
+        "text": "Stock History",
+        "url": "financial/stock-history",
+        "title": {
+            "kendo-ui": "Kendo UI Chart controls application sample | Stock History"
+        },
+        "meta": {
+            "kendo-ui": "The Stock History Dashboard demonstrates how the charting components in Kendo UI DataViz HTML5 framework are used to build a complex finance application."
+        },
+        packages: [
+            "!mvc",
+            "!jsp",
+            "!php"
+        ]
       }
     ],
     "name": "stock-chart",
