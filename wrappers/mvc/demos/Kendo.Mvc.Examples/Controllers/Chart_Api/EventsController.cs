@@ -5,7 +5,7 @@ using Kendo.Mvc.Examples.Models;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class ApiController : Controller
+    public partial class Chart_ApiController : Controller
     {
         public ActionResult Events()
         {

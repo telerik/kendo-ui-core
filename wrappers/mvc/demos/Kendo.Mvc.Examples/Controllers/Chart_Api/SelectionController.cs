@@ -4,9 +4,9 @@ using System.Web.Mvc;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class ApiController : Controller
+    public partial class Chart_ApiController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Selection()
         {
             return View();
         }
