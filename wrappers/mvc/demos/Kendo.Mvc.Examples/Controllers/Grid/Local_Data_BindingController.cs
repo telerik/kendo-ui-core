@@ -4,7 +4,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class GridController : Controller
     {        
-        public ActionResult Local_Data()
+        public ActionResult Local_Data_Binding()
         {
             var model = productService.Read();
 

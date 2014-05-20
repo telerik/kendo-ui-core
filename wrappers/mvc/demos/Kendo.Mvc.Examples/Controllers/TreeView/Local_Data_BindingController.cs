@@ -9,7 +9,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class TreeViewController : Controller
     {
-        public ActionResult Local_Data()
+        public ActionResult Local_Data_Binding()
         {
             ViewBag.inlineDefault = GetDefaultInlineData();
             ViewBag.inline = GetInlineData();

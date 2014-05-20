@@ -7,7 +7,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class Radar_ChartsController : Controller
     {
-        public ActionResult Local_Data()
+        public ActionResult Local_Data_Binding()
         {
             return View(ChartDataRepository.ProteinQualityData());
         }
