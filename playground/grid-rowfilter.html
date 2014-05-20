@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+    </head>
+    <body>
+        <table id="grid">
+            <thead>
+                <tr>
+                    <th data-field="Id">
+                        Id
+                    </th>
+                    <th data-field="Name">
+                        Name
+                    </th>
+                    <th data-field="ContractDate">
+                        ContractDate
+                    </th>
+                </tr>
+                <tr>
+                    <th data-field="Id">
+                        <input type="text" name="some_name" />
+                    </th>
+                    <th data-field="Name">
+                        <input type="text" name="some_name" />
+                    </th>
+                    <th data-field="ContractDate">
+                        <input type="text" name="some_name" />
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <script>
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: [
+                        {
+                            Id: 1,
+                            Name: "Decision 1",
+                            Position: 1 ,
+                            ContractDate : new Date('1996/12/12')
+                        },
+                        {
+                            Id: 2,
+                            Name: "Decision 2",
+                            Position: 2 ,
+                            ContractDate : new Date('2012/5/4')
+                        },
+                        {
+                            Id: 3,
+                            Name: "Decision 3",
+                            Position: 3 ,
+                            ContractDate : new Date('1998/12/30')
+                        }
+                    ]
+
+                }
+            });
+        </script>
+        </body>
+    </html>

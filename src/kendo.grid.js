@@ -29,9 +29,14 @@ var __meta__ = {
         description: "Support for grid grouping",
         depends: [ "groupable" ]
     }, {
+        id: "grid-rowfilter",
+        name: "Row filter",
+        description: "Support for grid header filtering",
+        depends: [ "rowfilter" ]
+    }, {
         id: "grid-paging",
         name: "Paging",
-        description: "Suppot for grid paging",
+        description: "Support for grid paging",
         depends: [ "pager" ]
     }, {
         id: "grid-selection",
