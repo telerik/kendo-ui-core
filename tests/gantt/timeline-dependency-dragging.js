@@ -67,11 +67,11 @@
         });
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, secondTaskHandle.offset());
+        drag(timeline, handleLocation(secondTaskHandle));
         dragEnd(timeline);
     });
 
-    test("dragging and dropping start-finish triggers dependencyDragEnd with correct type", 3, function() {
+    test("dragging and dropping start-finish triggers dependencyDragEnd with correct parameters", 3, function() {
         setupTimeline();
 
         var firstTaskHandle = timeline.view().content.find(".k-task-wrap:first .k-task-start").show();
@@ -84,11 +84,11 @@
         });
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, secondTaskHandle.offset());
+        drag(timeline, handleLocation(secondTaskHandle));
         dragEnd(timeline);
     });
 
-    test("dragging and dropping finish-start triggers dependencyDragEnd with correct type", 3, function() {
+    test("dragging and dropping finish-start triggers dependencyDragEnd with correct parameters", 3, function() {
         setupTimeline();
 
         var firstTaskHandle = timeline.view().content.find(".k-task-wrap:first .k-task-end").show();
@@ -101,11 +101,11 @@
         });
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, secondTaskHandle.offset());
+        drag(timeline, handleLocation(secondTaskHandle));
         dragEnd(timeline);
     });
 
-    test("dragging and dropping finish-finish triggers dependencyDragEnd with correct type", 3, function() {
+    test("dragging and dropping finish-finish triggers dependencyDragEnd with correct parameters", 3, function() {
         setupTimeline();
 
         var firstTaskHandle = timeline.view().content.find(".k-task-wrap:first .k-task-end").show();
@@ -118,7 +118,7 @@
         });
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, secondTaskHandle.offset());
+        drag(timeline, handleLocation(secondTaskHandle));
         dragEnd(timeline);
     });
 
@@ -132,7 +132,7 @@
         });
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, firstTaskHandle.offset());
+        drag(timeline, handleLocation(firstTaskHandle));
         dragEnd(timeline);
     });
 
@@ -172,7 +172,7 @@
         var secondTaskHandle = content.find(".k-task-wrap:last .k-task-start").show();
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, secondTaskHandle.offset());
+        drag(timeline, handleLocation(secondTaskHandle));
 
         ok(content.find(".k-dependency-hint").length);
     });
@@ -185,7 +185,7 @@
         var secondTaskHandle = content.find(".k-task-wrap:last .k-task-start").show();
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, secondTaskHandle.offset());
+        drag(timeline, handleLocation(secondTaskHandle));
         dragEnd(timeline);
 
         ok(!content.find(".k-dependency-hint").length);
@@ -199,7 +199,7 @@
         var secondTaskHandle = content.find(".k-task-wrap:last .k-task-start").show();
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, secondTaskHandle.offset());
+        drag(timeline, handleLocation(secondTaskHandle));
         dragCancel(timeline);
 
         ok(!content.find(".k-dependency-hint").length);
@@ -215,7 +215,7 @@
         stub(timeline.view(), "_updateDependencyDragHint");
 
         dragStart(timeline, firstTaskHandle);
-        drag(timeline, secondTaskHandle.offset());
+        drag(timeline, handleLocation(secondTaskHandle));
 
         ok(timeline.view().calls("_updateDependencyDragHint"));
     });
@@ -229,17 +229,29 @@
 
         stub(timeline.view(), {
             _updateDependencyDragHint: function(from, to) {
-                equalWithRound(from.x, firstTaskHandle.offset().left + firstTaskHandle.outerWidth() / 2 - content.offset().left);
-                equalWithRound(from.y, firstTaskHandle.offset().top + firstTaskHandle.outerHeight() / 2 - content.offset().top);
+                var firstHandleOffset = handleLocation(firstTaskHandle);
+                var secondHandleOffset = handleLocation(secondTaskHandle);
+                var contentOffset = content.offset();
 
-                equalWithRound(to.x, secondTaskHandle.offset().left - content.offset().left);
-                equalWithRound(to.y, secondTaskHandle.offset().top - content.offset().top);
+                equalWithRound(from.x, firstHandleOffset.left - contentOffset.left);
+                equalWithRound(from.y, firstHandleOffset.top - contentOffset.top);
+
+                equalWithRound(to.x, secondHandleOffset.left - contentOffset.left);
+                equalWithRound(to.y, secondHandleOffset.top - contentOffset.top);
             }
         });
 
         dragStart(timeline, firstTaskHandle);
         drag(timeline, secondTaskHandle.offset());
     });
+
+    function handleLocation(element) {
+        var offset = element.offset();
+        var width = element.outerWidth();
+        var height = element.outerHeight();
+
+        return { left: offset.left + width / 2, top: offset.top + height / 2 };
+    }
 
     function equalWithRound(value, expected) {
         QUnit.close(value, expected, 3);
@@ -310,8 +322,8 @@
         }
 
         draggable.trigger("drag", {
-            x: { location: location.left, client: location.left },
-            y: { location: location.top, client: location.top }
+            x: { location: location.left + 5, client: location.left + 5 },
+            y: { location: location.top + 5, client: location.top + 5 }
         });
     }
 

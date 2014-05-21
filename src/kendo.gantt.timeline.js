@@ -198,7 +198,11 @@ var __meta__ = {
             var attributes = [null, { className: "k-alt" }];
 
             for (var i = 0; i < rowCount; i++) {
-                row = kendoDomElement("tr", attributes[i % 2], [kendoDomElement("td")]);
+                row = kendoDomElement("tr", attributes[i % 2], [
+                    kendoDomElement("td", null, [
+                        kendoTextElement("\u00a0")
+                    ])
+                ]);
 
                 rows.push(row);
             }
@@ -222,7 +226,9 @@ var __meta__ = {
 
                 attributes = (slotSpan !== 1) ? { colspan: slotSpan } : null;
 
-                cells.push(kendoDomElement("td", attributes));
+                cells.push(kendoDomElement("td", attributes, [
+                    kendoTextElement("\u00a0")
+                ]));
             }
 
             row = kendoDomElement("tr", null, cells);
