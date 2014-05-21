@@ -390,6 +390,34 @@
         ok(wasCalled);
     });
 
+    test("change event is triggered once after refresh is called", 1, function() {
+        var MyModel = Model.define({
+                fields: {
+                    foo: {
+                        field: "foo",
+                        validation: {
+                            foo: function() {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            });
+
+        var model = new MyModel({ foo: "bar" });
+
+        var editable = new Editable(div, {
+            fields: "foo",
+            model: model,
+            change: function() {
+                ok(true);
+            } });
+
+        editable.refresh();
+
+        div.find(":input").val("foo").trigger("change");
+    });
+
     test("change event is not triggered if validation fails", function() {
         var MyModel = Model.define({
             fields: {
