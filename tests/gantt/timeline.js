@@ -126,6 +126,30 @@
         equal(timeline.view().options.dayHeaderTemplate, "customTemplate");
     });
 
+    test("editable false does not initialize task draggable", function() {
+        timeline = new Timeline(element, { editable: false });
+
+        ok(!timeline._moveDraggable);
+    });
+
+    test("editable false does not initialize resize draggable", function() {
+        timeline = new Timeline(element, { editable: false });
+
+        ok(!timeline._resizeDraggable);
+    });
+
+    test("editable false does not initialize percent resize draggable", function() {
+        timeline = new Timeline(element, { editable: false });
+
+        ok(!timeline._percentDraggable);
+    });
+
+    test("editable false does not initialize dependency draggable", function() {
+        timeline = new Timeline(element, { editable: false });
+
+        ok(!timeline._dependencyDraggable);
+    });
+
     module("Day View", {
         setup: function() {
             element = $(

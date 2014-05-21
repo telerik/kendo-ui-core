@@ -646,6 +646,7 @@ var __meta__ = {
             name: "Gantt",
             autoBind: true,
             selectable: true,
+            editable: true,
             views: [],
             messages: {
                 views: {
@@ -882,6 +883,7 @@ var __meta__ = {
                 columns: this.options.columns || [],
                 dataSource: this.dataSource,
                 selectable: this.options.selectable,
+                editable: this.options.editable,
                 listWidth: this.options.listWidth
             });
 

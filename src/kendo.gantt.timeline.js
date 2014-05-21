@@ -1216,7 +1216,8 @@ var __meta__ = {
                 }
             },
             snap: true,
-            selectable: true
+            selectable: true,
+            editable: true
         },
 
         destroy: function() {
@@ -1426,6 +1427,10 @@ var __meta__ = {
                 task = null;
             };
 
+            if (this.options.editable !== true) {
+                return;
+            }
+
             this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
                 filter: ".k-task",
@@ -1486,6 +1491,10 @@ var __meta__ = {
                 task = null;
                 dragInProgress = false;
             };
+
+            if (this.options.editable !== true) {
+                return;
+            }
 
             this._resizeDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
@@ -1580,6 +1589,10 @@ var __meta__ = {
                     .css("left", width);
             };
 
+            if (this.options.editable !== true) {
+                return;
+            }
+
             this._percentDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
                 filter: ".k-task-draghandle",
@@ -1642,16 +1655,6 @@ var __meta__ = {
             var contentOffset;
             var useVML = kendo.support.browser.msie && kendo.support.browser.version < 9;
 
-            if (useVML && document.namespaces) {
-                document.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
-            }
-
-            this._dependencyDraggable = new kendo.ui.Draggable(this.wrapper, {
-                distance: 0,
-                filter: ".k-task-dot",
-                holdToDrag: false
-            });
-
             var cleanUp = function() {
                 originalHandle
                     .css("display", "")
@@ -1676,6 +1679,20 @@ var __meta__ = {
                     hoveredHandle.toggleClass("k-state-hover", value);
                 }
             };
+
+            if (this.options.editable !== true) {
+                return;
+            }
+
+            if (useVML && document.namespaces) {
+                document.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
+            }
+
+            this._dependencyDraggable = new kendo.ui.Draggable(this.wrapper, {
+                distance: 0,
+                filter: ".k-task-dot",
+                holdToDrag: false
+            });
 
             this._dependencyDraggable
                 .bind("dragstart", function(e) {
@@ -1795,10 +1812,12 @@ var __meta__ = {
         _attachEvents: function() {
             var that = this;
 
-            this.wrapper
-                .on(CLICK + NS, ".k-task-delete", function(e) {
-                    that.trigger("remove", { uid: $(this).closest(".k-task").attr("data-uid") });
-                });
+            if (this.options.editable === true) {
+                this.wrapper
+                    .on(CLICK + NS, ".k-task-delete", function (e) {
+                        that.trigger("remove", { uid: $(this).closest(".k-task").attr("data-uid") });
+                    });
+            }
         }
     });
 

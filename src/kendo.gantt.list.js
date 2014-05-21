@@ -82,7 +82,10 @@ var __meta__ = {
                 this._dropTargetArea.destroy();
             }
 
-            this.touch.destroy();
+            if (this.touch) {
+                this.touch.destroy();
+            }
+
             this.content.off(NS);
             this.header = null;
             this.content = null;
@@ -93,7 +96,8 @@ var __meta__ = {
 
         options: {
             name: "GanttList",
-            selectable: true
+            selectable: true,
+            editable: true
         },
 
         _attachEvents: function() {
@@ -385,6 +389,10 @@ var __meta__ = {
                 }
             };
 
+            if (this.options.editable !== true) {
+                return;
+            }
+
             that.touch = that.content
                 .on("focusin" + NS, function() {
                     clearTimeout(that.timer);
@@ -560,6 +568,10 @@ var __meta__ = {
                             .children(".k-drag-status")
                             .removeClass(DROPPOSITIONS);
             };
+
+            if (this.options.editable !== true) {
+                return;
+            }
 
             this._reorderDraggable = this.content
                 .kendoDraggable({

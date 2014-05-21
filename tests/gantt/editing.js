@@ -1,6 +1,8 @@
-﻿(function() {
+﻿(function () {
+    var Gantt = kendo.ui.Gantt;
     var GanttList = kendo.ui.GanttList;
     var GanttDataSource = kendo.data.GanttDataSource;
+    var gantt;
     var ganttList;
     var element;
     var columns;
@@ -499,6 +501,21 @@
         doubleTap(targetCell);
 
         ok(targetCell.find("input").data("kendoDateTimePicker"));
+    });
+
+    module("Gantt non-editable", {
+        setup: function() {
+            element = $("<div/>");
+            
+            gantt = new Gantt(element, { editable: false });
+        },
+        teardown: function() {
+            gantt.destroy();
+        }
+    });
+
+    test("does not attach touch widget to the list content", function() {
+        ok(!gantt.list.content.data("kendoTouch"));
     });
 
 })();

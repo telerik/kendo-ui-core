@@ -1,6 +1,6 @@
 ﻿(function() {
-
     var element;
+    var gantt;
     var ganttList;
     var Gantt = kendo.ui.Gantt;
     var GanttList = kendo.ui.GanttList;
@@ -364,4 +364,22 @@
         drop();
     });
 
+    module("Gantt non-editable", {
+        setup: function () {
+            element = $("<div/>");
+
+            gantt = new Gantt(element, { editable: false });
+        },
+        teardown: function () {
+            gantt.destroy();
+        }
+    });
+
+    test("does not attach draggable widget to the list content", function () {
+        ok(!gantt.list.content.data("kendoDraggable"));
+    });
+
+    test("does not attach dropTargetArea widget to the list content", function () {
+        ok(!gantt.list.content.data("kendoDropTargetArea"));
+    });
 }());
