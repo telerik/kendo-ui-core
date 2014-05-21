@@ -162,7 +162,7 @@
         });
 
         test("load appends child nodes", function() {
-            var parentGroup = new Group()
+            var parentGroup = new Group();
             var childGroup = new Group();
             parentGroup.append(childGroup);
 
@@ -254,8 +254,7 @@
     // ------------------------------------------------------------
     (function() {
         var group;
-        var groupNode,
-            group;
+        var groupNode;
 
         nodeTests(Group, GroupNode, "GroupNode");
 
@@ -722,7 +721,7 @@
                     return {
                         width: 20, height: 10, baseline: 15
                     };
-                }
+                };
 
                 textNode = new svg.TextNode(text);
             }

@@ -123,7 +123,7 @@
         });
 
         test("load appends child nodes", function() {
-            var parentGroup = new d.Group()
+            var parentGroup = new d.Group();
             var childGroup = new d.Group();
             parentGroup.append(childGroup);
 
@@ -533,7 +533,7 @@
                     return {
                         width: 20, height: 10, baseline: 15
                     };
-                }
+                };
 
                 textNode = new canv.TextNode(text);
             }

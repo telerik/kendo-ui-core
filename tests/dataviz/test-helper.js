@@ -8,7 +8,7 @@ function compareBoundingBox(bbox, values, tolerance) {
 }
 
 function compareMatrices(m1, m2, tolerance) {
-    tolerance = tolerance  || 0;
+    tolerance = tolerance || 0;
     close(m1.a, m2.a, tolerance, "a");
     close(m1.b, m2.b, tolerance, "b");
     close(m1.c, m2.c, tolerance, "c");

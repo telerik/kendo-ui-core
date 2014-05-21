@@ -242,7 +242,7 @@
         });
 
         test("load appends child nodes", function() {
-            var parentGroup = new Group()
+            var parentGroup = new Group();
             var childGroup = new Group();
             parentGroup.append(childGroup);
 
@@ -743,7 +743,7 @@
         });
 
         test("rounds matrix values to the MAX_PRECISION digit", function() {
-            var value = new Number("0." + new Array(TransformNode.fn.MAX_PRECISION + 1).join("5"));
+            var value = parseFloat("0." + new Array(TransformNode.fn.MAX_PRECISION + 1).join("5"));
             transformNode = new TransformNode(new d.Element(), new Matrix(value, 0, 0, 1, 0, 0));
             ok(/matrix='(\d\.\d+)/g.exec(transformNode.render())[1] == dataviz.util.round(value, TransformNode.fn.MAX_PRECISION));
         });
@@ -1238,6 +1238,7 @@
 
     // ------------------------------------------------------------
     (function() {
+        var text;
         var textPathNode;
 
         module("TextPathNode", {
@@ -1276,6 +1277,7 @@
 
     // ------------------------------------------------------------
     (function() {
+        var text;
         var textNode;
 
         module("TextNode", {
@@ -1286,22 +1288,22 @@
         });
 
         test("forwards font change to path node", function() {
-            textNode.path.optionsChange = function() { ok(true) };
+            textNode.path.optionsChange = function() { ok(true); };
             text.options.set("font", "10pt Arial");
         });
 
         test("forwards font change to path data node", function() {
-            textNode.pathData.geometryChange = function() { ok(true) };
+            textNode.pathData.geometryChange = function() { ok(true); };
             text.options.set("font", "10pt Arial");
         });
 
         test("forwards contentChange to path node", function() {
-            textNode.path.contentChange = function() { ok(true) };
+            textNode.path.contentChange = function() { ok(true); };
             text.content("Bar");
         });
 
         test("geometryChange is forwarded to path data node", function() {
-            textNode.pathData.geometryChange = function() { ok(true) };
+            textNode.pathData.geometryChange = function() { ok(true); };
             text.origin.set("x", 1);
         });
 
