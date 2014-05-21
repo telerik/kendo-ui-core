@@ -283,7 +283,7 @@
     }
 
     function setupTimeline(userOptions) {
-        var options = extend({}, { snap: false, slotSize: 100 }, userOptions);
+        var options = extend({}, { snap: false, slotSize: 50 }, userOptions);
         timeline = new kendo.ui.GanttTimeline(element, options);
         timeline.view("day");
         task1 = new kendo.data.GanttTask({

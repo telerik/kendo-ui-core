@@ -511,7 +511,7 @@
 
 
     function equalWithRound(value, expected) {
-        QUnit.close(value, expected, 3);
+        QUnit.close(value, expected, 5);
     }
 
     function setupGantt(userOptions) {
