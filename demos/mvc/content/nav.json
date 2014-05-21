@@ -7425,7 +7425,7 @@
     "name": "touchevents",
     "api": "touch/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/touch",
+       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/touch"
     },
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
