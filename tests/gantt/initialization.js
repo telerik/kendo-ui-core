@@ -302,6 +302,19 @@
         equal(gantt.wrapper.find(".k-splitbar").height(), totalHeight - (toolbarHeight + footerHeight));
     });
 
+    test("attaches Resizable widget to gantt wrapper", function () {
+        var gantt = new Gantt(element);
+
+        ok(gantt.wrapper.data("kendoResizable") instanceof ui.Resizable);
+    });
+
+    test("resizable initialized with correct options", function () {
+        var gantt = new Gantt(element);
+
+        equal(gantt._resizeDraggable.options.orientation, "horizontal");
+        equal(gantt._resizeDraggable.options.handle, ".k-splitbar");
+    });
+
     module("TaskDropDown", {
         setup: function() {
             element = $("<div/>");

@@ -274,7 +274,6 @@
         ok(gantt.calls("removeTask"));
     });
 
-
     module("TaskDropDown", {
         setup: function() {
             element = $("<div/>");
@@ -563,6 +562,179 @@
         gantt.toolbar.find(".k-view-week").click();
 
         equal(gantt.timeline.view().name, "day");
+    });
+
+    module("Resizable", {
+        setup: function () {
+            element = $("<div/>").appendTo(QUnit.fixture);
+            gantt = new Gantt(element, {
+                dataSource: setupDataSource(data)
+            });
+        },
+        teardown: function () {
+            gantt.destroy();
+            kendo.destroy(element);
+            element.remove();
+        }
+    });
+
+    test("hover state applied on mouseenter", function () {
+        gantt.wrapper.find(".k-splitbar").eq(0).mouseenter();
+
+        ok(gantt.wrapper.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
+    });
+
+    test("hover state removed on mouseleave", function () {
+        gantt.wrapper.find(".k-splitbar").eq(0).mouseenter();
+        gantt.wrapper.find(".k-splitbar").eq(0).mouseleave();
+
+        ok(!gantt.wrapper.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
+    });
+
+    test("resize decrease timeline size when resized right", function () {
+        var resizable = gantt._resizeDraggable;
+        var timelineWrapper = gantt.wrapper.find(".k-gantt-timeline");
+        var timelineWidth = timelineWrapper.width();
+        var delta = 30;
+
+        resizable.trigger("start");
+        resizable.trigger("resize", {
+            x: {
+                initialDelta: delta
+            }
+        });
+
+        equal(timelineWrapper.width(), timelineWidth - delta);
+    });
+
+    test("resize increase timeline size when resized left", function () {
+        var resizable = gantt._resizeDraggable;
+        var timelineWrapper = gantt.wrapper.find(".k-gantt-timeline");
+        var timelineWidth = timelineWrapper.width();
+        var delta = -30;
+
+        resizable.trigger("start");
+        resizable.trigger("resize", {
+            x: {
+                initialDelta: delta
+            }
+        });
+
+        equal(timelineWrapper.width(), timelineWidth - delta);
+    });
+
+    test("resize change scroll upon resize", function () {
+        var resizable = gantt._resizeDraggable;
+        var timelineWrapper = gantt.wrapper.find(".k-gantt-timeline");
+        var timelineContent = timelineWrapper.find(".k-grid-content");
+        var timelineScroll = timelineContent.scrollLeft();
+        var delta = 30;
+
+        resizable.trigger("start");
+        resizable.trigger("resize", {
+            x: {
+                initialDelta: delta
+            }
+        });
+
+        equal(timelineContent.scrollLeft(), timelineScroll + delta);
+    });
+
+    test("resize increase treelist size when resized right", function () {
+        var resizable = gantt._resizeDraggable;
+        var treelistWrapper = gantt.wrapper.find(".k-gantt-treelist");
+        var treelistWidth = treelistWrapper.width();
+        var delta = 30;
+
+        resizable.trigger("start");
+        resizable.trigger("resize", {
+            x: {
+                initialDelta: delta
+            }
+        });
+
+        equal(treelistWrapper.width(), treelistWidth + delta);
+    });
+
+    test("resize decrease treelist size when resized left", function () {
+        var resizable = gantt._resizeDraggable;
+        var treelistWrapper = gantt.wrapper.find(".k-gantt-treelist");
+        var treelistWidth = treelistWrapper.width();
+        var delta = -30;
+
+        resizable.trigger("start");
+        resizable.trigger("resize", {
+            x: {
+                initialDelta: delta
+            }
+        });
+
+        equal(treelistWrapper.width(), treelistWidth + delta);
+    });
+
+    module("Content Scrollable", {
+        setup: function () {
+            element = $("<div/>").appendTo(QUnit.fixture);
+            gantt = new Gantt(element, {
+                dataSource: setupDataSource(data),
+                height: 300,
+                width: 700,
+                listWidth: 60
+            });
+        },
+        teardown: function () {
+            gantt.destroy();
+            kendo.destroy(element);
+            element.remove();
+        }
+    });
+
+    asyncTest("timeline scroll top scroll treelist", function () {
+        expect(1);
+        var timelineContent = gantt.timeline.wrapper.find(".k-grid-content");
+        var treelistContent = gantt.list.element.find(".k-grid-content");
+
+        timelineContent.scrollTop(20);
+
+        setTimeout(function () {
+            equal(treelistContent.scrollTop(), timelineContent.scrollTop());
+            start();
+        }, 2);
+    });
+
+    asyncTest("timeline scroll left scroll header", function () {
+        expect(1);
+        var timelineContent = gantt.timeline.wrapper.find(".k-grid-content");
+        var headerWrap = gantt.timeline.wrapper.find(".k-grid-header-wrap");
+
+        timelineContent.scrollLeft(20);
+
+        setTimeout(function () {
+            equal(headerWrap.scrollLeft(), timelineContent.scrollLeft());
+            start();
+        }, 2);
+    });
+
+    asyncTest("treelist scroll left scroll header", function () {
+        expect(1);
+        var treelistContent = gantt.list.element.find(".k-grid-content");
+        var headerWrap = gantt.list.element.find(".k-grid-header-wrap");
+        var resizable = gantt._resizeDraggable;
+        var delta = -30;
+
+        resizable.trigger("start");
+        resizable.trigger("resize", {
+            x: {
+                initialDelta: delta
+            }
+        });
+
+        treelistContent.scrollLeft(20);
+
+        setTimeout(function () {
+            equal(headerWrap.scrollLeft(), treelistContent.scrollLeft());
+            start();
+        }, 2);
     });
 
 })();

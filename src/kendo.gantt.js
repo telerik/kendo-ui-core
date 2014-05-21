@@ -1151,11 +1151,10 @@ var __meta__ = {
         },
 
         _scrollable: function() {
-            var wrapper = this.wrapper;
-            var timelineWrapper = wrapper.find(".k-timeline");
-            var treeListWrapper = wrapper.find(".k-treelist");
+            var timelineWrapper = this.timeline.element;
+            var treeListWrapper = this.list.element;
 
-            timelineWrapper.find(".k-grid-content").on("scroll", function(e) {
+            timelineWrapper.find(".k-grid-content").on("scroll", function (e) {
                 timelineWrapper.find(".k-grid-header-wrap").scrollLeft($(this).scrollLeft());
                 treeListWrapper.find(".k-grid-content").scrollTop($(this).scrollTop());
             });
