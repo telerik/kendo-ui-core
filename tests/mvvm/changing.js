@@ -778,6 +778,19 @@ test("removing an item from the source destroys the binder objects", 1, function
     viewModel.foo.splice(0, 1);
 });
 
+test("the click binding is destroyed", function() {
+    var dom = $('<div data-bind="click: handler">');
+
+    var viewModel = kendo.observable({
+        handler: function() {}
+    });
+
+    kendo.bind(dom, viewModel);
+    equal(viewModel._events.change.length, 1);
+    kendo.bind(dom, viewModel);
+    equal(viewModel._events.change.length, 1);
+});
+
 test("does not attach multiple event handlers to nested object", function() {
     var parent = kendo.observable({});
     var child = kendo.observable({});
