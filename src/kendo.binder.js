@@ -1512,6 +1512,7 @@ var __meta__ = {
             if (bindings.click) {
                 bind.events = bind.events || {};
                 bind.events.click = bind.click;
+                bindings.click.destroy();
                 delete bindings.click;
             }
 
