@@ -31,7 +31,7 @@ body {
 body,
 html {
    height: 100%;
-   overflow: hidden;
+  
 }
 
 img
@@ -3597,6 +3597,7 @@ a.footer-links:hover {
     overflow-x: hidden;
     overflow-y: auto;
     float: left;
+    clear: left;
     background-color: #f5f7f8;
     height: 100%;
 }
@@ -3656,10 +3657,8 @@ a.footer-links:hover {
     background-color: #f5f7f8;
     border-right: 1px solid #ebecee;
     text-align: center;
-}
-
-#example-search-wrapper {
     width: 299px;
+    float: left;
 }
 
 #layout-search-wrapper {
