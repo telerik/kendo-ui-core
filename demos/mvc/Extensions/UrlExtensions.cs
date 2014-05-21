@@ -18,6 +18,11 @@ namespace Kendo.Extensions
             return url.Content(contentUrl);
         }
 
+        public static string Widget(this UrlHelper url, string widget)
+        {
+            return url.RouteUrl("Demo", new { section = widget, example="index" });
+        }
+
         public static string Script(this UrlHelper url, string file)
         {
             return ResourceUrl(url, "js", file);

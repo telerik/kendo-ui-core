@@ -111,15 +111,9 @@ namespace Kendo
             );
 
             routes.MapRoute(
-                "DemoIndex",
-                "{section}",
-                new { controller = "Demo", action = "Index", example = "index" }
-            );
-
-            routes.MapRoute(
                 "Demo",
                 "{section}/{example}",
-                new { controller = "Demo", action = "Index" }
+                new { controller = "Demo", action = "Index", example = "index" }
             );
 
             routes.MapRoute(
