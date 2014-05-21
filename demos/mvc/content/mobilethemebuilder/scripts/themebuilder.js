@@ -987,8 +987,8 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                 skin: that,
                 platform: that,
                 icon: {
-                  "72x72" : "../content/mobilethemebuilder/images/Icon-72.png",
-                  "144x144" : "../content/mobilethemebuilder/images/Icon2x.png"
+                  "72x72" : "content/mobilethemebuilder/images/Icon-72.png",
+                  "144x144" : "content/mobilethemebuilder/images/Icon2x.png"
                 },
                 updateDocumentTitle: false
             });
