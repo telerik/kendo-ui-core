@@ -959,9 +959,6 @@ var __meta__ = {
         var index = 0;
         var row;
 
-        //TODO: Mark last row of a root tuple
-        //TODO: Mark all cells that are ALL
-
         for (var colIdx = 0, length = columns.length; colIdx < length; colIdx++) {
             var column = columns[colIdx];
             var members = column.members;
@@ -971,52 +968,93 @@ var __meta__ = {
                 var attr = {};
                 var member = members[memberIdx];
                 var childrenTuples = member.children;
+                var hasChildren = !!childrenTuples[0];
+                var rowLength;
 
                 if (!parentMember || member.parentName === parentMember.name) {
                     row = rows[index];
 
+                    if (!parentMember) { //move after (!row) check
+                        cellsCount = getCellsCount(rows[0]);
+                    } else {
+                        cellsCount = 1;
+                    }
+
                     if (!row) {
                         row = element("tr", null, []);
+                        row._maxRowSpan = 1;
                         rows.push(row);
                     }
 
-                    while(cellsCount) {
-                        row.children.push(kendo_th(member));
-                        cellsCount -= 1;
+                    rowLength = row.children.length;
+
+                    if (cellsCount === 1 && hasChildren) {
+                        row.children.push(kendo_th(member, { rowspan: 1 }));
+                    } else {
+                        while(cellsCount) {
+                            row.children.push(kendo_th(member));
+                            cellsCount -= 1;
+                        }
                     }
 
                     index += 1;
                 }
 
-                if (childrenTuples[0]) {
+                if (hasChildren) {
                     row.children.push(kendo_th(member));
 
                     var childrenRows = kendo_columns_thead_rows(childrenTuples, member);
+                    var rowspan = childrenRows.length + 1;
 
-                    row.children[0].attr.colspan = maxValue(childrenRows);
-                    row.children[1].attr.rowspan = childrenRows.length + 1;
+                    if (rowspan > row._maxRowSpan) {
+                        row._maxRowSpan = rowspan;
+                    }
+
+                    row.children[rowLength].attr.colspan = getCellsCount(childrenRows[0]);
+                    row.children[rowLength + 1].attr.rowspan = rowspan;
 
                     rows = rows.concat(childrenRows);
 
                     index = rows.length;
-                    cellsCount = getCellsCount(row);
                 } else {
                     cellsCount = 1;
                 }
 
-                if (childrenTuples[0]) {
+                if (hasChildren) {
                     var cell = row.children[row.children.length - 1];
 
                     cell.attr[kendo.attr("master-cell")] = true;
 
                     row.attr[kendo.attr("master-row")] = true;
                 }
+
+            //end members loop
             }
 
             index = 0;
+
+        //end tuples loop
+        }
+
+        if (row && row._maxRowSpan > 1) {
+            normalizeRowSpan(row.children, row._maxRowSpan);
         }
 
         return rows;
+    }
+
+    function normalizeRowSpan(cells, rowspan) {
+        var length = cells.length;
+        var idx = 0;
+        var cell;
+
+        for (; idx < length; idx++) {
+            cell = cells[idx];
+
+            if (!cell.attr.rowspan) {
+                cell.attr.rowspan = rowspan;
+            }
+        }
     }
 
     function maxValue(rows) {
