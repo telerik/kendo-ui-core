@@ -14,6 +14,51 @@
 }
 
 
+/* New font */
+@font-face {
+	font-family: 'demos';
+	src:url('fonts/demos.eot?9wdv67');
+	src:url('fonts/demos.eot?#iefix9wdv67') format('embedded-opentype'),
+		url('fonts/demos.woff?9wdv67') format('woff'),
+		url('fonts/demos.ttf?9wdv67') format('truetype'),
+		url('fonts/demos.svg?9wdv67#demos') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="k-"], [class*=" k-"] {
+	font-family: 'demos';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.k-uniE600:before {
+	content: "\e600";
+}
+.k-uniE601:before {
+	content: "\e601";
+}
+.k-uniE602:before {
+	content: "\e602";
+}
+.k-uniE603:before {
+	content: "\e603";
+}
+.k-uniE604:before {
+	content: "\e604";
+}
+.k-external:before {
+	content: "\e605";
+}
+
 body,h1,h2,h3,h4,p,ul,li,a,button,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#nav-pager,#examples-list,#themeChooser,.widgetGrid ul
 {
     margin:0;
@@ -3497,8 +3542,12 @@ a.footer-links:hover {
     padding: 0.5em 0 0.5em 3.571em;
 }
 
+#example-nav h4 {
+    margin-top: -1.429em;
+}
+
 .root-nav-categories {
-    margin-top: 1.750em;
+    margin-top: 1.917em;
 }
 
 #root-nav li,
@@ -3525,7 +3574,14 @@ a.footer-links:hover {
 }
 
 #back-nav {
-    color: 
+    color: #2d3e50;
+    display: inline-block;
+    margin-top: 1.583em;
+    margin-left: 1.917em;
+}
+
+#back-nav:hover {
+    text-decoration: none;
 }
 
 /* Demos */
@@ -3536,13 +3592,40 @@ a.footer-links:hover {
     margin: 4.583em 7.500em 5.000em 7.500em; 
 }
 
+#learning-resources,
+#technologies {
+    display: inline-block;
+    width: 49%;
+  
+}
+
+#learning-resources {
+    border-right: 1px solid #e2e4e7;
+}
+
 #resources-technologies {
     background-color: #f5f7f8;
     border: 1px solid #ebecee;
+    padding: 2.500em 1.250em;
 }
 
-#resources-technologies ul {
-    display: inline-block;    
+#resources-technologies h4 {
+   font-size: 12px;
+   text-transform: uppercase;
+   font-weight: bold;
+   line-height: 2.167em;
+    padding-left: 2.500em; 
+}
+
+#resources-technologies a {
+    font-size: 13px;
+    line-height: 13px;
+    padding-left: 2.308em;
+   
+}
+#resources-technologies li {
+      /*padding: 0.538em 0;*/
+       line-height: 2.250em;
 }
 
 #codeStrip .documentation-link,
