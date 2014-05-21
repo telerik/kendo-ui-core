@@ -113,7 +113,7 @@ namespace Kendo
             routes.MapRoute(
                 "Demo",
                 "{section}/{example}",
-                new { controller = "Demo", action = "Index", example = "index" }
+                new { controller = "Demo", action = "Index", example = UrlParameter.Optional }
             );
 
             routes.MapRoute(

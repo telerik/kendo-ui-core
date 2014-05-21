@@ -20,7 +20,12 @@ namespace Kendo.Extensions
 
         public static string Widget(this UrlHelper url, string widget)
         {
-            return url.RouteUrl("Demo", new { section = widget, example="index" });
+            return url.ExampleUrl(widget, "index");
+        }
+
+        public static string ExampleUrl(this UrlHelper url, string widget, string example)
+        {
+            return url.RouteUrl("Demo", new { section = widget, example = example });
         }
 
         public static string Script(this UrlHelper url, string file)

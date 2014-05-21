@@ -28,7 +28,7 @@ namespace Kendo.Extensions
         {
             var sectionAndExample = example.Url.Split('/');
 
-            return new UrlHelper(html.ViewContext.RequestContext).Action("Index", "Demo", new { section = sectionAndExample[0], example = sectionAndExample[1] });
+            return new UrlHelper(html.ViewContext.RequestContext).ExampleUrl(sectionAndExample[0], sectionAndExample[1]);
         }
 
         public static string ProductExampleUrl(this HtmlHelper html, NavigationExample example, string product)

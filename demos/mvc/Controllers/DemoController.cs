@@ -30,7 +30,10 @@ namespace Kendo.Controllers
         {
             var product = CurrentProduct();
 
-            example = example ?? "index";
+            if (example == null)
+            {
+                return RedirectToRoutePermanent("Demo", new { section = section, example = "index" });
+            }
 
             ViewBag.ShowCodeStrip = true;
             ViewBag.Product = product;
