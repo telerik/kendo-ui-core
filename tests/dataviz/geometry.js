@@ -9,15 +9,6 @@
         Arc = g.Arc,
         Transformation = g.Transformation;
 
-    function compareBoundingBox(bbox, values, tolerance) {
-        tolerance = tolerance || 0;
-
-        close(bbox.p0.x, values[0], tolerance);
-        close(bbox.p0.y, values[1], tolerance);
-        close(bbox.p1.x, values[2], tolerance);
-        close(bbox.p1.y, values[3], tolerance);
-    }
-
     // ------------------------------------------------------------
     var point;
 
@@ -227,12 +218,28 @@
         deepEqual(point.subtract(new Point(5, 10)), point);
     });
 
+    test("subtract triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() { ok(true); }
+        };
+
+        point.subtract(new Point(5, 10));
+    });
+
     test("add x and y", function() {
         deepEqual(point.add(new Point(5, 10)), new Point(15, 30));
     });
 
     test("add returns point", function() {
         deepEqual(point.add(new Point(5, 10)), point);
+    });
+
+    test("add triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() { ok(true); }
+        };
+
+        point.add(new Point(5, 10));
     });
 
     test("transform applies matrix", function() {
@@ -308,6 +315,14 @@
         deepEqual(point.round(), point);
     });
 
+    test("round triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() { ok(true); }
+        };
+
+        point.round();
+    });
+
     test("toString concatenates x and y", function() {
         equal(point.toString(), "10 20");
     });
@@ -326,21 +341,17 @@
         equal(point.toString(1), "10.6 20.6");
     });
 
-    test("min returns a new point with minmum x y", function() {
-        point.x = 10;
-        point.y = 20;
-        var other = new Point(20, 10),
-            minPoint = point.min(other);
+    test("Point.min returns a new point with minmum x y", function() {
+        var other = new Point(20, 10);
+        var minPoint = Point.min(point, other);
 
         equal(minPoint.x, 10);
         equal(minPoint.y, 10);
     });
 
-    test("max returns a new point with maximum x y", function() {
-        point.x = 10;
-        point.y = 20;
-        var other = new Point(20, 10),
-            maxPoint = point.max(other);
+    test("Point.max returns a new point with maximum x y", function() {
+        var other = new Point(20, 10);
+        var maxPoint = Point.max(point, other);
 
         equal(maxPoint.x, 20);
         equal(maxPoint.y, 20);
@@ -405,6 +416,16 @@
 
     test("center returns center point", function() {
         deepEqual(rect.center(), new Point(5,10));
+    });
+
+    test("boundingBox returns the bounding Rect", function() {
+        var bbox = rect.bbox();
+        compareBoundingBox(rect, [0, 0, 10, 20]);
+    });
+
+    test("boundingBox returns the transformed bounding Rect", function() {
+        var bbox = rect.bbox(Matrix.scale(2,1));
+        compareBoundingBox(bbox, [0, 0, 20, 20]);
     });
 
     // ------------------------------------------------------------
@@ -661,16 +682,6 @@
         var matrix,
             result;
 
-        function compareMatrices(m1, m2, tolerance) {
-            tolerance = tolerance  || 0;
-            close(m1.a, m2.a, tolerance);
-            close(m1.b, m2.b, tolerance);
-            close(m1.c, m2.c, tolerance);
-            close(m1.d, m2.d, tolerance);
-            close(m1.e, m2.e, tolerance);
-            close(m1.f, m2.f, tolerance);
-        }
-
         function initMatrix(a,b,c,d,e,f) {
             return {a: a, b: b, c: c, d: d, e: e, f: f};
         }
@@ -757,6 +768,23 @@
         test("scale returns the identity matrix scaled by x y", function() {
             matrix = Matrix.scale(1.5, 1.1);
             compareMatrices(matrix, initMatrix(1.5,0,0,1.1,0,0));
+        });
+
+        // ------------------------------------------------------------
+        module("Matrix / toArray", {
+            setup: function() {
+                matrix = new Matrix(1.2345678,0,0,1.2345, 2, 3);
+            }
+        });
+
+        test("returns an array with the values", function() {
+            result = matrix.toArray();
+            deepEqual(result, [1.2345678,0,0,1.2345,2,3]);
+        });
+
+        test("returns an array with the values rounded to the specified precision", function() {
+            result = matrix.toArray(3);
+            deepEqual(result, [1.235,0,0,1.235,2,3]);
         });
 
         // ------------------------------------------------------------
@@ -872,6 +900,24 @@
             deepEqual(transformation.matrix(), Matrix.scale(1, 2));
         });
 
+        test("scale accepts [x, y] as origin", function() {
+            transformation.scale(1, 2, [10, 20]);
+            deepEqual(transformation.matrix(),
+                      Matrix.translate(10, 20).
+                          times(Matrix.scale(1, 2)).
+                          times(Matrix.translate(-10, -20))
+            );
+        });
+
+        test("scale accepts Point as origin", function() {
+            transformation.scale(1, 2, new Point(10, 20));
+            deepEqual(transformation.matrix(),
+                      Matrix.translate(10, 20).
+                          times(Matrix.scale(1, 2)).
+                          times(Matrix.translate(-10, -20))
+            );
+        });
+
         test("scale applies scale to both x and y if only one parameter is passed", function() {
             transformation.scale(2);
             deepEqual(transformation.matrix(), Matrix.scale(2, 2));
@@ -898,8 +944,13 @@
             deepEqual(transformation.matrix(), Matrix.rotate(30));
         });
 
-        test("rotate applies rotation around point to matrix if x and y are passed", function() {
-            transformation.rotate(30, 100, 100);
+        test("rotate accepts [x, y] array as center", function() {
+            transformation.rotate(30, [100, 100]);
+            deepEqual(transformation.matrix(), Matrix.rotate(30, 100, 100));
+        });
+
+        test("rotate accepts Point as center", function() {
+            transformation.rotate(30, new Point(100, 100));
             deepEqual(transformation.matrix(), Matrix.rotate(30, 100, 100));
         });
 

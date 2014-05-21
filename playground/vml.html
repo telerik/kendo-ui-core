@@ -1,6 +1,6 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:v">
     <head>
-        <title>VML Oval</title>
+        <title>VML</title>
         <style type="text/css">
             v\:* {
                 behavior: url(#default#VML);
@@ -8,29 +8,13 @@
         </style>
     </head>
     <body>
-        <div>
-            <div style="position: absolute; top: 0px; left: 0px;">
-                <v:shape id="line" strokecolor="blue" fillcolor="blue" coordorigin="0 0" coordsize="100 100"
-                         style="position: absolute; width:100px;height:100px">
-                    <v:path v="m 50,50 l 50,0 e" />
-                </v:shape>
-            </div>
-
-            <script>
-                window.onload = function () {
-                    var path = document.getElementById("line").childNodes[0];
-
-                    var angle = 0;
-                    setInterval(function() {
-                        var x = Math.round(50 - 50 * Math.cos(angle));
-                        var y = Math.round(50 - 50 * Math.sin(angle));
-                        angle += (Math.PI / 180);
-
-                        path.v = "m 50,50 l " + x + "," + y + " e";
-                    }, 50);
-                };
-            </script>
-       </div>
+        <v:shape style="position:absolute;width:100px;height:100px;"
+                 stroked='false' coordsize="100 100">
+            <v:fill color='red' />
+            <v:path textpathok='true' v='m 30,20 l 50,20' />
+            <v:textpath on='true' style='font: 14px arial;'
+                        fitpath='false' string='Hoy' />
+        </v:shape>
     </body>
 </html>
 

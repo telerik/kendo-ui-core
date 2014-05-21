@@ -14,6 +14,8 @@
         defined = dataviz.defined,
         renderTemplate = dataviz.renderTemplate,
 
+        g = dataviz.geometry,
+
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
 
@@ -135,7 +137,9 @@
                 srcElement = elements[i];
                 children = srcElement.children;
 
-                if (srcElement instanceof d.Group) {
+                if (srcElement instanceof d.Text) {
+                    childNode = new TextNode(srcElement);
+                } else if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Path) {
                     childNode = new PathNode(srcElement);
@@ -212,6 +216,14 @@
             return output;
         },
 
+        optionsChange: function(e) {
+            if (e.field === "visible") {
+                this.css("display", e.value ? "" : "none");
+            }
+
+            BaseNode.fn.optionsChange.call(this, e);
+        },
+
         clear: function() {
             var element = this.element;
 
@@ -235,6 +247,18 @@
             }
         },
 
+        css: function(name, value) {
+            if (this.element) {
+                this.element.style[name] = value;
+            }
+        },
+
+        allCss: function(styles) {
+            for (var i = 0; i < styles.length; i++) {
+                this.css(styles[i][0], styles[i][1]);
+            }
+        },
+
         removeAttr: function(name) {
             if (this.element) {
                 this.element.removeAttribute(name);
@@ -244,14 +268,19 @@
         mapTransform: function(transform) {
             var attrs = [];
             if (transform) {
-                attrs.push([TRANSFORM, "matrix(" + transform.matrix().toString() + ")"]);
+                attrs.push([
+                   TRANSFORM,
+                   "matrix(" + transform.matrix().toString(6) + ")"
+                ]);
             }
 
             return attrs;
         },
 
         renderTransform: function() {
-            return renderAllAttr(this.mapTransform(this.srcElement.transform()));
+            return renderAllAttr(
+                this.mapTransform(this.srcElement.transform())
+            );
         },
 
         transformChange: function(value) {
@@ -260,6 +289,20 @@
             } else {
                 this.removeAttr(TRANSFORM);
             }
+        },
+
+        mapStyle: function() {
+            var style = [["cursor", this.srcElement.options.cursor]];
+
+            if (this.srcElement.options.visible === false) {
+                style.push(["display", "none"]);
+            }
+
+            return style;
+        },
+
+        renderStyle: function() {
+            return renderAttr("style", util.renderStyle(this.mapStyle()));
         }
     });
 
@@ -273,14 +316,15 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g#= d.renderTransform() #>#= d.renderChildren() #</g>"
+            "<g#= d.renderTransform() + d.renderStyle() #>#= d.renderChildren() #</g>"
         ),
 
         optionsChange: function(e) {
             if (e.field == TRANSFORM) {
                 this.transformChange(e.value);
             }
-            this.invalidate();
+
+            Node.fn.optionsChange.call(this, e);
         }
     });
 
@@ -304,10 +348,6 @@
                     this.allAttr(this.mapStroke(e.value));
                     break;
 
-                case "visible":
-                    this.attr("visibility", e.value ? "visible" : "hidden");
-                    break;
-
                 case TRANSFORM:
                     this.transformChange(e.value);
                     break;
@@ -320,7 +360,7 @@
                     break;
             }
 
-            this.invalidate();
+            Node.fn.optionsChange.call(this, e);
         },
 
         attributeMap: {
@@ -328,6 +368,12 @@
             "stroke.color": "stroke",
             "stroke.width": "stroke-width",
             "stroke.opacity": "stroke-opacity"
+        },
+
+        content: function(value) {
+            if (this.element) {
+                this.element.textContent = this.srcElement.content();
+            }
         },
 
         renderData: function() {
@@ -371,9 +417,11 @@
             var points = arguments,
                 length = points.length,
                 i, result = [];
+
             for (i = 0; i < length; i++) {
-                result.push(points[i].toString(1));
+                result.push(points[i].toString(3));
             }
+
             return result.join(SPACE);
         },
 
@@ -453,25 +501,8 @@
             );
         },
 
-        renderCursor: function() {
-            var cursor = this.srcElement.options.cursor;
-
-            if (cursor) {
-                return "cursor:" + cursor + ";";
-            }
-        },
-
-        renderVisibility: function() {
-            if (this.srcElement.options.visible === false) {
-                return renderAttr("visibility", "hidden");
-            }
-
-            return "";
-        },
-
         template: renderTemplate(
-            "<path #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
-            "#= d.renderVisibility() # " +
+            "<path #= d.renderStyle() # " +
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
@@ -513,13 +544,55 @@
         },
 
         template: renderTemplate(
-            "<circle #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
+            "<circle #= d.renderStyle() # " +
             "cx='#= this.srcElement.geometry.center.x #' cy='#= this.srcElement.geometry.center.y #' " +
             "r='#= this.srcElement.geometry.radius #' " +
-            "#= d.renderVisibility() # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
             "#= d.renderTransform() # ></circle>"
+        )
+    });
+
+    var TextNode = PathNode.extend({
+        geometryChange: function() {
+            var pos = this.pos();
+            this.attr("x", pos.x);
+            this.attr("y", pos.y);
+            this.invalidate();
+        },
+
+        optionsChange: function(e) {
+            if(e.field == "font") {
+                this.attr("style", util.renderStyle(this.mapStyle()));
+                this.geometryChange();
+            }
+
+            PathNode.fn.optionsChange.call(this, e);
+        },
+
+        contentChange: function() {
+            this.content(this.srcElement.content());
+            this.invalidate();
+        },
+
+        mapStyle: function() {
+            var style = PathNode.fn.mapStyle.call(this);
+            style.push(["font", this.srcElement.options.font]);
+
+            return style;
+        },
+
+        pos: function() {
+            var origin = this.srcElement.origin;
+            var size = this.srcElement.measure();
+            return origin.clone().set("y", origin.y + size.baseline);
+        },
+
+        template: renderTemplate(
+            "<text #= d.renderStyle() # " +
+            "x='#= this.pos().x #' y='#= this.pos().y #' " +
+            "#= d.renderStroke() # " +
+            "#= d.renderFill() #><tspan>#= this.srcElement.content() #</tspan></text>"
         )
     });
 
@@ -567,7 +640,6 @@
     }
 
     // Exports ================================================================
-
     if (kendo.support.svg) {
         d.SurfaceFactory.current.register("svg", Surface, 10);
     }
@@ -581,7 +653,8 @@
             Node: Node,
             PathNode: PathNode,
             RootNode: RootNode,
-            Surface: Surface
+            Surface: Surface,
+            TextNode: TextNode
         }
     });
 

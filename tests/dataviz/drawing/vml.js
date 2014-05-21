@@ -24,14 +24,49 @@
         StrokeNode = vml.StrokeNode,
         TransformNode = vml.TransformNode;
 
-    function compareMatrices(m1, m2, tolerance) {
-        tolerance = tolerance  || 0;
-        close(m1.a, m2.a, tolerance);
-        close(m1.b, m2.b, tolerance);
-        close(m1.c, m2.c, tolerance);
-        close(m1.d, m2.d, tolerance);
-        close(m1.e, m2.e, tolerance);
-        close(m1.f, m2.f, tolerance);
+    // ------------------------------------------------------------
+    function basePathNodeTests(TShape, TNode, name) {
+        var shape,
+            node;
+
+        module("Base Node tests / " + name, {
+            setup: function() {
+                shape = new TShape();
+                node = new TNode(shape);
+            }
+        });
+
+        test("renders visibility", function() {
+            shape.visible(false);
+            ok(node.render().indexOf("display:none;") !== -1);
+        });
+
+        test("does not render visibility if not set", function() {
+            ok(node.render().indexOf("display:none;") === -1);
+        });
+
+        test("does not render visibility if set to true", function() {
+            shape.visible(true);
+            ok(node.render().indexOf("display:none;") === -1);
+        });
+
+        test("optionsChange sets visibility to hidden", function() {
+            node.css = function(name, value) {
+                equal(name, "display");
+                equal(value, "none");
+            };
+
+            shape.visible(false);
+        });
+
+        test("optionsChange sets visibility to visible", function() {
+            node.css = function(name, value) {
+                equal(name, "display");
+                equal(value, "");
+            };
+
+            shape.visible(true);
+        });
     }
 
     // ------------------------------------------------------------
@@ -857,20 +892,6 @@
         ok(pathNode.render().indexOf("cursor") === -1);
     });
 
-    test("renders visibility attribute", function() {
-        path.visible(false);
-        ok(pathNode.render().indexOf("display:none;") !== -1);
-    });
-
-    test("does not render visibility if not set", function() {
-        ok(pathNode.render().indexOf("display:none;") === -1);
-    });
-
-    test("does not render visibility if set to true", function() {
-        path.visible(true);
-        ok(pathNode.render().indexOf("display:none;") === -1);
-    });
-
     test("renders coordsize", function() {
         ok(pathNode.render().indexOf("coordsize='10000 10000'") !== -1);
     });
@@ -923,24 +944,6 @@
         };
 
         path.options.set("foo", true);
-    });
-
-    test("optionsChange sets visibility to hidden", function() {
-        pathNode.css = function(name, value) {
-            equal(name, "display");
-            equal(value, "none");
-        };
-
-        path.visible(false);
-    });
-
-    test("optionsChange sets visibility to visible", function() {
-        pathNode.css = function(name, value) {
-            equal(name, "display");
-            equal(value, "block");
-        };
-
-        path.visible(true);
     });
 
     test("optionsChange is forwarded to transform", function() {
@@ -1108,6 +1111,8 @@
         circle.options.set("foo", true);
     });
 
+    basePathNodeTests(d.Circle, vml.CircleNode, "CircleNode");
+
     // ------------------------------------------------------------
     var arc,
         arcNode;
@@ -1164,5 +1169,111 @@
 
         arc.geometry.set("endAngle", 180);
     });
+
+    basePathNodeTests(d.Arc, vml.ArcNode, "ArcNode");
+
+    // ------------------------------------------------------------
+    var text;
+    var textPathDataNode;
+
+    module("TextPathDataNode", {
+        setup: function() {
+            text = new d.Text("Foo", new g.Point(100, 100));
+            text.measure = function() {
+                return { width: 40, height: 20, baseline: 15 };
+            };
+
+            textPathDataNode = new vml.TextPathDataNode(text);
+        }
+    });
+
+    test("renders text path", function() {
+        ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+    });
+
+    test("geometryChange updates path", function() {
+        textPathDataNode.attr = function(name, value) {
+            equal(name, "v");
+            equal(value, "m 0,11000 l 4000,11000");
+        };
+
+        text.origin.set("x", 0);
+    });
+
+    test("rounds path coordinates", function() {
+        textPathDataNode.attr = function(name, value) {
+            equal(value, "m 10001,11001 l 14001,11001");
+        };
+
+        text.origin.add(new g.Point(0.005, 0.005));
+    });
+
+    // ------------------------------------------------------------
+    var textPathNode;
+
+    module("TextPathNode", {
+        setup: function() {
+            text = new d.Text("Foo", new g.Point(), { font: "4pt Arial" });
+            textPathNode = new vml.TextPathNode(text);
+        }
+    });
+
+    test("renders style", function() {
+        ok(textPathNode.render().indexOf("style='font:4pt Arial;'") > -1);
+    });
+
+    test("renders string", function() {
+        ok(textPathNode.render().indexOf("string='Foo'") > -1);
+    });
+
+    test("optionsChange updates style", function() {
+        textPathNode.css = function(name, value) {
+            equal(name, "font");
+            equal(value, "10pt Arial");
+        };
+
+        text.options.set("font", "10pt Arial");
+    });
+
+    test("contentChange updates string", function() {
+        textPathNode.attr = function(name, value) {
+            equal(name, "string");
+            equal(value, "Bar");
+        };
+
+        text.content("Bar");
+    });
+
+    // ------------------------------------------------------------
+    var textNode;
+
+    module("TextNode", {
+        setup: function() {
+            text = new d.Text("Foo", new g.Point());
+            textNode = new vml.TextNode(text);
+        }
+    });
+
+    test("forwards font change to path node", function() {
+        textNode.path.optionsChange = function() { ok(true) };
+        text.options.set("font", "10pt Arial");
+    });
+
+    test("forwards font change to path data node", function() {
+        textNode.pathData.geometryChange = function() { ok(true) };
+        text.options.set("font", "10pt Arial");
+    });
+
+    test("forwards contentChange to path node", function() {
+        textNode.path.contentChange = function() { ok(true) };
+        text.content("Bar");
+    });
+
+    test("geometryChange is forwarded to path data node", function() {
+        textNode.pathData.geometryChange = function() { ok(true) };
+        text.origin.set("x", 1);
+    });
+
+    basePathNodeTests(d.Text, vml.TextNode, "TextNode");
 
 })();

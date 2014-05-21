@@ -10,6 +10,7 @@
         Group = d.Group,
         MultiPath = d.MultiPath,
         Path = d.Path,
+        Text = d.Text,
 
         svg = d.svg,
         Node = svg.Node,
@@ -18,7 +19,8 @@
         GroupNode = svg.GroupNode,
         PathNode = svg.PathNode,
         MultiPathNode = svg.MultiPathNode,
-        Surface = svg.Surface;
+        Surface = svg.Surface,
+        TextNode = svg.TextNode;
 
     // ------------------------------------------------------------
     var container,
@@ -184,6 +186,55 @@
     });
 
     // ------------------------------------------------------------
+    function nodeTests(TShape, TNode, name) {
+        var shape,
+            node,
+            container;
+
+        module("Base Node tests / " + name, {
+            setup: function() {
+                container = document.createElement("div");
+
+                shape = new TShape();
+                node = new TNode(shape);
+                node.attachTo(container);
+            }
+        });
+
+        test("renders visibility", function() {
+            shape.visible(false);
+            ok(node.render().indexOf("display:none;") !== -1);
+        });
+
+        test("does not render visibility if not set", function() {
+            ok(node.render().indexOf("display") === -1);
+        });
+
+        test("does not render visibility if set to true", function() {
+            shape.visible(true);
+            ok(node.render().indexOf("display") === -1);
+        });
+
+        test("optionsChange sets visibility to hidden", function() {
+            node.css = function(name, value) {
+                equal(name, "display");
+                equal(value, "none");
+            };
+
+            shape.visible(false);
+        });
+
+        test("optionsChange sets visibility to visible", function() {
+            node.css = function(name, value) {
+                equal(name, "display");
+                equal(value, "");
+            };
+
+            shape.visible(true);
+        });
+    }
+
+    // ------------------------------------------------------------
     module("RootNode");
 
     test("attachTo directly sets element", function() {
@@ -195,8 +246,11 @@
     });
 
     // ------------------------------------------------------------
+    var group;
     var groupNode,
         group;
+
+    nodeTests(Group, GroupNode, "GroupNode");
 
     module("GroupNode", {
         setup: function() {
@@ -314,6 +368,8 @@
         pathNode,
         container;
 
+    nodeTests(Path, PathNode, "PathNode");
+
     module("PathNode", {
         setup: function() {
             container = document.createElement("div");
@@ -328,6 +384,12 @@
         path.moveTo(0, 0).lineTo(10, 20);
 
         ok(pathNode.render().indexOf("d='M0 0 L 10 20'") !== -1);
+    });
+
+    test("renders points with precision to the third sign", function() {
+        path.moveTo(0, 0).lineTo(10.001, 20.0005);
+
+        ok(pathNode.render().indexOf("d='M0 0 L 10.001 20.001'") !== -1);
     });
 
     test("renders closed paths", function() {
@@ -433,6 +495,11 @@
         ok(pathNode.render().indexOf("fill='none'") !== -1);
     });
 
+    test("renders empty fill if set to null", function() {
+        path.options.set("fill", null);
+        ok(pathNode.render().indexOf("fill='none'") !== -1);
+    });
+
     test("renders cursor", function() {
         path.options.set("cursor", "hand");
         ok(pathNode.render().indexOf("cursor:hand;") !== -1);
@@ -444,20 +511,6 @@
 
     test("does not render style if not set", function() {
         ok(pathNode.render().indexOf("style") === -1);
-    });
-
-    test("renders visibility attribute", function() {
-        path.visible(false);
-        ok(pathNode.render().indexOf("visibility='hidden'") !== -1);
-    });
-
-    test("does not render visibility if not set", function() {
-        ok(pathNode.render().indexOf("visibility") === -1);
-    });
-
-    test("does not render visibility if set to true", function() {
-        path.visible(true);
-        ok(pathNode.render().indexOf("visibility") === -1);
     });
 
     test("renders transform if set", function() {
@@ -561,24 +614,6 @@
         path.options.set("stroke", { color: "red", opacity: 0.4, width: 4 });
     });
 
-    test("optionsChange sets visibility to hidden", function() {
-        pathNode.attr = function(name, value) {
-            equal(name, "visibility");
-            equal(value, "hidden");
-        };
-
-        path.visible(false);
-    });
-
-    test("optionsChange sets visibility to visible", function() {
-        pathNode.attr = function(name, value) {
-            equal(name, "visibility");
-            equal(value, "visible");
-        };
-
-        path.visible(true);
-    });
-
     test("options change renders transform", function() {
         pathNode.attr = function(key, value) {
             equal(key, "transform");
@@ -598,6 +633,8 @@
     var multiPath,
         multiPathNode;
 
+    nodeTests(MultiPath, MultiPathNode, "MultiPathNode");
+
     module("MultiPathNode", {
         setup: function() {
             multiPath = new MultiPath();
@@ -616,6 +653,8 @@
     // ------------------------------------------------------------
     var circle,
         circleNode;
+
+    nodeTests(Circle, CircleNode, "CircleNode");
 
     module("CircleNode", {
         setup: function() {
@@ -656,47 +695,63 @@
     });
 
     // ------------------------------------------------------------
-    var arc,
-        arcNode;
+    var text;
+    var textNode;
 
-    module("ArcNode", {
+    nodeTests(Text, TextNode, "TextNode");
+
+    module("TextNode", {
         setup: function() {
-            var geometry = new g.Arc(new Point(100, 100), {
-                startAngle: 0,
-                endAngle: 120,
-                radiusX: 50,
-                radiusY: 100
-            });
-            arc = new d.Arc(geometry, {stroke: {color: "red", width: 4}, fill: {color: "green", opacity: 0.5}});
-            arcNode = new ArcNode(arc);
+            text = new d.Text("Foo", new Point(10, 20), { font: "arial" });
+            text.measure = function() {
+                return {
+                    width: 20, height: 10, baseline: 15
+                };
+            }
+
+            textNode = new svg.TextNode(text);
         }
     });
 
-    test("renders curve path", function() {
-        var result = arcNode.render();
-        ok(result.indexOf("d='M150 100 C 150 134.9 140.1 169.1 125 186.6 109.9 204.1 90.1 204.1 75 186.6'") !== -1);
+    test("renders origin accounting for baseline", function() {
+        ok(textNode.render().indexOf("x='10' y='35'") > -1);
     });
 
-    test("renders arc fill", function() {
-        var result = arcNode.render();
-
-        ok(result.indexOf("fill='green'") !== -1);
-        ok(result.indexOf("fill-opacity='0.5'") !== -1);
+    test("renders content", function() {
+        ok(textNode.render().indexOf("Foo") > -1);
     });
 
-    test("renders arc stroke", function() {
-        var result = arcNode.render();
-        ok(result.indexOf("stroke-width='4'") !== -1);
-        ok(result.indexOf("stroke='red'") !== -1);
+    test("renders font", function() {
+        ok(textNode.render().indexOf("font:arial;") > -1);
     });
 
-    test("geometryChange updates path", function() {
-        arcNode.attr = function(name, value) {
-            equal(name, "d");
-            equal(value, "M150 100 C 150 152.4 126.2 200 100 200 73.8 200 50 152.4 50 100");
+    test("geometryChange sets origin", 2, function() {
+        textNode.attr = function(name, value) {
+            if (name === "x") {
+                equal(value, 20);
+            } else if (name === "y") {
+                equal(value, 55);
+            }
         };
 
-        arc.geometry.set("endAngle", 180);
+        text.origin.multiply(2);
     });
 
+    test("optionsChange sets font", function() {
+        textNode.attr = function(name, value) {
+            if (name == "style") {
+                equal(value, "font:foo;");
+            }
+        };
+
+        text.options.set("font", "foo");
+    });
+
+    test("contentChange sets content", function() {
+        textNode.content = function(value) {
+            equal(value, "Bar");
+        };
+
+        text.content("Bar");
+    });
 })();

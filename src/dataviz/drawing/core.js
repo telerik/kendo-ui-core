@@ -258,7 +258,7 @@
             kendo.logToConsole(
                 "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
                 "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
-                "- The kendo.dataviz.(svg|vml|canvas).js scripts are not loaded");
+                "- The Kendo UI scripts are not fully loaded");
         }
     };
 

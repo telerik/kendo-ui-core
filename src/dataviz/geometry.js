@@ -121,12 +121,16 @@
             this.x += other.x;
             this.y += other.y;
 
+            this.geometryChange();
+
             return this;
         },
 
         subtract: function(other) {
             this.x -= other.x;
             this.y -= other.y;
+
+            this.geometryChange();
 
             return this;
         },
@@ -141,15 +145,10 @@
         round: function(precision) {
             this.x = round(this.x, precision);
             this.y = round(this.y, precision);
+
+            this.geometryChange();
+
             return this;
-        },
-
-        min: function(point) {
-            return new Point(math.min(this.x, point.x), math.min(this.y, point.y));
-        },
-
-        max: function(point) {
-            return new Point(math.max(this.x, point.x), math.max(this.y, point.y));
         }
     });
 
@@ -179,6 +178,14 @@
         }
     };
 
+    Point.min = function(p0, p1) {
+        return new Point(math.min(p0.x, p1.x), math.min(p0.y, p1.y));
+    };
+
+    Point.max = function(p0, p1) {
+        return new Point(math.max(p0.x, p1.x), math.max(p0.y, p1.y));
+    };
+
     Point.minPoint = function() {
         return new Point(util.MIN_NUM, util.MIN_NUM);
     };
@@ -186,6 +193,8 @@
     Point.maxPoint = function() {
         return new Point(util.MAX_NUM, util.MAX_NUM);
     };
+
+    Point.ZERO = new Point(0, 0);
 
     var Rect = Class.extend({
         init: function(p0, p1) {
@@ -208,11 +217,18 @@
         },
 
         wrap: function(targetRect) {
-            return new Rect(this.p0.min(targetRect.p0), this.p1.max(targetRect.p1));
+            return new Rect(Point.min(this.p0, targetRect.p0), Point.max(this.p1, targetRect.p1));
         },
 
         center: function() {
             return new Point(this.p0.x  + this.width() / 2, this.p0.y  + this.height() / 2);
+        },
+
+        bbox: function(matrix) {
+            var p0 = this.p0.transformCopy(matrix);
+            var p1 = this.p1.transformCopy(matrix);
+
+            return new Rect(Point.min(p0, p1), Point.max(p0, p1));
         }
     });
 
@@ -262,8 +278,8 @@
                 var currentPointY = this._pointAt(extremeAngles.y + i * PI_DIV_2).transformCopy(matrix);
                 var currentPoint = new Point(currentPointX.x, currentPointY.y);
 
-                minPoint = minPoint.min(currentPoint);
-                maxPoint = maxPoint.max(currentPoint);
+                minPoint = Point.min(minPoint, currentPoint);
+                maxPoint = Point.max(maxPoint, currentPoint);
             }
 
             return new Rect(minPoint, maxPoint);
@@ -353,8 +369,8 @@
             var extremeY = deg(extremeAngles.y);
             var currentPoint = arc.pointAt(startAngle).transformCopy(matrix);
             var endPoint = arc.pointAt(endAngle).transformCopy(matrix);
-            var minPoint = currentPoint.min(endPoint);
-            var maxPoint = currentPoint.max(endPoint);
+            var minPoint = Point.min(currentPoint, endPoint);
+            var maxPoint = Point.max(currentPoint, endPoint);
             var currentAngleX = bboxStartAngle(extremeX, startAngle);
             var currentAngleY = bboxStartAngle(extremeY, startAngle);
 
@@ -372,8 +388,8 @@
                 }
 
                 currentPoint = new Point(currentPointX.x, currentPointY.y);
-                minPoint = minPoint.min(currentPoint);
-                maxPoint = maxPoint.max(currentPoint);
+                minPoint = Point.min(minPoint, currentPoint);
+                maxPoint = Point.max(maxPoint, currentPoint);
             }
 
             return new Rect(minPoint, maxPoint);
@@ -426,7 +442,16 @@
         }
     });
 
+    // TODO: Consider renaming to TransformMatrix
     var Matrix = Class.extend({
+        /* Transformation matrix
+         *
+         *   a c e
+         * ( b d f )
+         *   0 0 1
+         *
+         */
+
         init: function (a, b, c, d, e, f) {
             this.a = a || 0;
             this.b = b || 0;
@@ -459,19 +484,23 @@
             return this.a === other.a && this.b === other.b &&
                    this.c === other.c && this.d === other.d &&
                    this.e === other.e && this.f === other.f;
+        },
+
+        toArray: function(precision) {
+            var arr = [this.a, this.b, this.c, this.d, this.e, this.f];
+
+            if (defined(precision)) {
+                for (var i = 0; i < arr.length; i++) {
+                    arr[i] = round(arr[i], precision);
+                }
+            }
+
+            return arr;
         }
     });
 
     Matrix.fn.toString = function(precision, separator) {
-       var arr = [this.a, this.b, this.c, this.d, this.e, this.f];
-
-        if (defined(precision)) {
-            for (var i = 0; i < 6; i++) {
-                arr[i] = round(arr[i], precision);
-            }
-        }
-
-        return arr.join(separator || ",");
+        return this.toArray(precision).join(separator || ",");
     };
 
     Matrix.translate = function (x, y) {
@@ -522,18 +551,30 @@
             return this;
         },
 
-        scale: function(x, y) {
-            if (!defined(y)) {
-               y = x;
+        scale: function(scaleX, scaleY, origin) {
+            if (!defined(scaleY)) {
+               scaleY = scaleX;
             }
-            this._matrix = this._matrix.times(Matrix.scale(x, y));
+
+            if (origin) {
+                origin = Point.create(origin);
+                this._matrix = this._matrix.times(Matrix.translate(origin.x, origin.y));
+            }
+
+            this._matrix = this._matrix.times(Matrix.scale(scaleX, scaleY));
+
+            if (origin) {
+                this._matrix = this._matrix.times(Matrix.translate(-origin.x, -origin.y));
+            }
 
             this._optionsChange();
             return this;
         },
 
-        rotate: function(angle, x, y) {
-            this._matrix = this._matrix.times(Matrix.rotate(angle, x, y));
+        rotate: function(angle, origin) {
+            origin = Point.create(origin) || Point.ZERO;
+
+            this._matrix = this._matrix.times(Matrix.rotate(angle, origin.x, origin.y));
 
             this._optionsChange();
             return this;

@@ -26,42 +26,29 @@
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
 
-        drawing = dataviz.drawing,
-        BaseNode = drawing.BaseNode,
-        Group = drawing.Group,
+        util = dataviz.util,
+        valueOrDefault = util.valueOrDefault,
+
+        d = dataviz.drawing,
+        BaseNode = d.BaseNode,
+        Group = d.Group,
         Box2D = dataviz.Box2D,
         Color = dataviz.Color,
-        Path = drawing.Path;
+        Path = d.Path;
 
     // Constants ==============================================================
     var BUTT = "butt",
-        CLIP = dataviz.CLIP,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
-        DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
-        DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
-        DEFAULT_FONT = dataviz.DEFAULT_FONT,
-        NONE = "none",
-        LINEAR = "linear",
-        RADIAL = "radial",
-        SOLID = "solid",
-        SQUARE = "square",
-        SVG_NS = "http://www.w3.org/2000/svg",
-        TRANSPARENT = "transparent",
-        UNDEFINED = "undefined";
+        SOLID = "solid";
 
     // Canvas Surface ==========================================================
-    var Surface = Observable.extend({
-        init: function(wrap, options) {
-            var surface = this;
+    var Surface = d.Surface.extend({
+        init: function(container, options) {
+            d.Surface.fn.init.call(this);
 
-            Observable.fn.init.call(surface);
+            this.options = deepExtend({}, this.options, options);
 
-            surface._display = surface.options.inline ? "inline" : "block";
-
-            surface._root = new Node();
-            surface._root.parent = this;
-
-            surface._appendTo(wrap);
+            this._appendTo(container);
         },
 
         options: {
@@ -69,32 +56,36 @@
             height: "100%"
         },
 
-        events: [
-            "click"
-        ],
+        events: [],
 
-        draw: function() {
-            this._root.load(arguments);
+        draw: function(element) {
+            this._root.load([element]);
         },
 
         clear: function() {
             this._root.clear();
         },
 
+        setSize: function(size) {
+            this.element.width = size.width;
+            this.element.height = size.height;
+
+            d.Surface.fn.setSize.call(this, size);
+        },
+
         _template: renderTemplate(
-            "<canvas style='position: relative; display: #= d._display #; " +
+            "<canvas style='position: absolute; " +
             "width: #= kendo.dataviz.util.renderSize(d.options.width) #; " +
-            "height: #= kendo.dataviz.util.renderSize(d.options.width) #;'></canvas>"
+            "height: #= kendo.dataviz.util.renderSize(d.options.height) #;'></canvas>"
         ),
 
-        _appendTo: function(wrap) {
-            var surface = this,
-                options = surface.options,
-                canvas = wrap.firstElementChild;
+        _appendTo: function(container) {
+            var options = this.options,
+                canvas = container.firstElementChild;
 
             if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
-                wrap.innerHTML = surface._template(surface);
-                canvas = wrap.firstElementChild;
+                container.innerHTML = this._template(this);
+                canvas = container.firstElementChild;
             } else {
                 $(canvas).css({
                     width: options.width,
@@ -105,19 +96,10 @@
             canvas.width = $(canvas).width();
             canvas.height = $(canvas).height();
 
-            surface.element = canvas;
-            surface.ctx = canvas.getContext("2d");
+            this.element = canvas;
 
-            surface.invalidate();
-        },
-
-        invalidate: function() {
-            var surface = this,
-                canvas = surface.element;
-
-            canvas.width = canvas.width;
-
-            surface._root.renderTo(surface.ctx);
+            this._root = new RootNode(canvas);
+            this._root.invalidate();
         }
     });
 
@@ -145,6 +127,10 @@
 
                 if (srcElement instanceof Path) {
                     childNode = new PathNode(srcElement);
+                } else if (srcElement instanceof d.MultiPath) {
+                    childNode = new MultiPathNode(srcElement);
+                } else if (srcElement instanceof d.Text) {
+                    childNode = new TextNode(srcElement);
                 } else {
                     childNode = new Node(srcElement);
                 }
@@ -155,56 +141,72 @@
 
                 node.append(childNode);
             }
+        }
+    });
+
+    var RootNode = Node.extend({
+        init: function(canvas) {
+            Node.fn.init.call(this);
+
+            this.canvas = canvas;
+            this.ctx = canvas.getContext("2d");
         },
 
-        unload: function(index, count) {
-            for (var i = index; i < count; i++) {
-                this.childNodes[i].parent = null;
-            }
-
-            this.childNodes.splice(index, count);
+        invalidate: function() {
+            this.canvas.width = this.canvas.width;
+            this.renderTo(this.ctx);
         }
     });
 
     var PathNode = Node.extend({
         renderTo: function(ctx) {
-            var path = this,
-                options = path.srcElement.options;
-
             ctx.save();
 
             ctx.beginPath();
-            path.renderPoints(ctx);
 
-            path.setLineDash(ctx);
-            path.setLineCap(ctx);
+            this.setTransform(ctx);
+            this.renderPoints(ctx, this.srcElement);
 
-            if (options.fill && options.fill !== "transparent") {
-                path.setFill(ctx);
-                ctx.globalAlpha = options.fillOpacity;
-                ctx.fill();
-            }
+            this.setLineDash(ctx);
+            this.setLineCap(ctx);
 
-            if (options.stroke && options.stroke.width) {
-                ctx.strokeStyle = options.stroke.color;
-                ctx.lineWidth = options.stroke.width;
-                ctx.lineJoin = "round";
-                ctx.globalAlpha = options.stroke.opacity;
-                ctx.stroke();
-            }
-
-            path.renderOverlay(ctx);
+            this.setFill(ctx);
+            this.setStroke(ctx);
 
             ctx.restore();
         },
 
-        setLineDash: function(ctx) {
-            var dashType = this.srcElement.options.dashType,
-                dashArray;
+        setFill: function(ctx) {
+            var fill = this.srcElement.options.fill;
+            if (fill && fill.color !== "transparent") {
+                ctx.fillStyle = fill.color;
+                ctx.globalAlpha = fill.opacity;
+                ctx.fill();
+            }
+        },
 
-            dashType = dashType ? dashType.toLowerCase() : null;
+        setStroke: function(ctx) {
+            var stroke = this.srcElement.options.stroke;
+            if (stroke) {
+                ctx.strokeStyle = stroke.color;
+                ctx.lineWidth = valueOrDefault(stroke.width, 1);
+                ctx.lineJoin = "round";
+                ctx.globalAlpha = stroke.opacity;
+                ctx.stroke();
+            }
+        },
+
+        dashType: function() {
+            var stroke = this.srcElement.options.stroke;
+            if (stroke && stroke.dashType) {
+                return stroke.dashType.toLowerCase();
+            }
+        },
+
+        setLineDash: function(ctx) {
+            var dashType = this.dashType();
             if (dashType && dashType != SOLID) {
-                dashArray = DASH_ARRAYS[dashType];
+                var dashArray = DASH_ARRAYS[dashType];
                 if (ctx.setLineDash) {
                     ctx.setLineDash(dashArray);
                 } else {
@@ -215,123 +217,93 @@
         },
 
         setLineCap: function(ctx) {
-            var options = this.srcElement.options,
-                dashType = options.dashType;
-
-            ctx.lineCap = (dashType && dashType !== SOLID) ?
-                BUTT : options.strokeLineCap;
-        },
-
-        setFill: function(ctx) {
-            var options = this.srcElement.options,
-                fill = options.fill;
-
-            ctx.fillStyle = fill;
-        },
-
-        renderOverlay: function(ctx) {
-            var options = this.srcElement.options,
-                overlay = options.overlay,
-                gradient,
-                def;
-
-            if (overlay && overlay.gradient) {
-                def = dataviz.Gradients[overlay.gradient];
-                gradient = this.buildGradient(ctx, def);
-                if (gradient) {
-                    ctx.fillStyle = gradient;
-                    ctx.fill();
-                }
+            var dashType = this.dashType();
+            var stroke = this.srcElement.options.stroke;
+            if (dashType && dashType !== SOLID) {
+                ctx.lineCap = BUTT;
+            } else if (stroke) {
+                ctx.lineCap = valueOrDefault(stroke.lineCap, "square");
             }
         },
 
-        renderPoints: function(ctx) {
-            var path = this,
-                segments = path.srcElement.segments,
-                i,
-                s,
-                options = path.srcElement.options,
-                rotation = options.rotation,
-                strokeWidth = options.stroke.width,
-                shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
-                align = shouldAlign ? alignToPixel : round;
+        setTransform: function(ctx) {
+            var transform = this.srcElement.transform();
+            if (transform) {
+                ctx.transform.apply(ctx, transform.matrix().toArray(6));
+            }
+        },
 
-            if (segments.length === 0 || !(options.fill || options.stroke)) {
+        renderPoints: function(ctx, path) {
+            var segments = path.segments;
+
+            if (segments.length === 0) {
                 return;
             }
 
-            s = segments[0];
+            var s = segments[0];
             ctx.moveTo(s.anchor.x, s.anchor.y);
 
-            for (i = 1; i < segments.length; i++) {
+            for (var i = 1; i < segments.length; i++) {
+                var ps = segments[i - 1];
                 s = segments[i];
-                ctx.lineTo(s.anchor.x, s.anchor.y);
-            }
-
-            if (path.closed) {
-                ctx.closePath();
-            }
-        },
-
-        buildGradient: function(ctx, definition) {
-            var bbox = this.bbox(),
-                rotation = this.srcElement.options.overlay.rotation,
-                x = bbox.x2,
-                y = bbox.y1,
-                gradient;
-
-            if (rotation === 90) {
-                x = bbox.x1;
-                y = bbox.y2;
-            }
-
-            if (definition && definition.type === LINEAR) {
-                gradient = ctx.createLinearGradient(bbox.x1, bbox.y1, x, y);
-                addGradientStops(gradient, definition.stops);
-            }
-
-            return gradient;
-        },
-
-        bbox: function() {
-            var points = this.points,
-                bbox = new Box2D(),
-                i;
-
-            if (points.length > 0) {
-                bbox.move(points[0].x, points[0].y);
-                for (i = 1; i < points.length; i++) {
-                    bbox.wrapPoint(points[i]);
+                if (ps.controlOut && s.controlIn) {
+                    ctx.bezierCurveTo(ps.controlOut.x, ps.controlOut.y,
+                                      s.controlIn.x, s.controlIn.y,
+                                      s.anchor.x, s.anchor.y);
+                } else {
+                    ctx.lineTo(s.anchor.x, s.anchor.y);
                 }
             }
 
-            return bbox;
+            if (path.options.closed) {
+                ctx.closePath();
+            }
         }
     });
 
-    // Helpers ================================================================
-    function addGradientStops(gradient, stops) {
-        var i,
-            length = stops.length,
-            currentStop,
-            color;
-
-        for (i = 0; i < length; i++) {
-            currentStop = stops[i];
-            color = new Color(currentStop.color);
-            gradient.addColorStop(
-                currentStop.offset,
-                "rgba(" + color.r + "," + color.g + "," + color.b + "," + currentStop.opacity + ")"
-            );
+    var MultiPathNode = PathNode.extend({
+        renderPoints: function(ctx) {
+            var paths = this.srcElement.paths;
+            for (var i = 0; i < paths.length; i++) {
+                PathNode.fn.renderPoints(ctx, paths[i]);
+            }
         }
-    }
+    });
+
+    var TextNode = PathNode.extend({
+        renderTo: function(ctx) {
+            var text = this.srcElement;
+            var origin = text.origin;
+            var size = text.measure();
+
+            ctx.save();
+
+            this.setFill(ctx);
+            this.setTransform(ctx);
+
+            ctx.font = text.options.font;
+            ctx.fillText(text.content(), origin.x, origin.y + size.baseline);
+
+            ctx.restore();
+        },
+
+        contentChange: function() {
+            this.invalidate();
+        }
+    });
 
     // Exports ================================================================
+    if (kendo.support.canvas) {
+        d.SurfaceFactory.current.register("canvas", Surface, 20);
+    }
+
     deepExtend(dataviz.drawing, {
         canvas: {
             Surface: Surface,
             Node: Node,
-            PathNode: PathNode
+            MultiPathNode: MultiPathNode,
+            PathNode: PathNode,
+            TextNode: TextNode
         }
     });
 

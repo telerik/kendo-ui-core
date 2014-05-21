@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./core" ], f);
+    define([ "./core", "../text-metrics" ], f);
 })(function(){
 
 (function () {
@@ -200,11 +200,50 @@
     });
 
     var Text = Shape.extend({
-        init: function(content, options) {
-            var text = this;
-            text.content = content;
+        init: function(content, origin, options) {
+            Shape.fn.init.call(this, options);
 
-            Shape.fn.init.call(text, options);
+            this._content = content;
+
+            this.origin = origin || new g.Point();
+            this.origin.observer = this;
+
+            if (!this.options.font) {
+                this.options.font = "12px sans-serif";
+            }
+        },
+
+        content: function(value) {
+            if (defined(value)) {
+                this._content = value;
+                this.contentChange();
+                return this;
+            } else {
+                return this._content;
+            }
+        },
+
+        contentChange: function() {
+            if (this.observer) {
+                this.observer.contentChange();
+            }
+        },
+
+        measure: function() {
+            var metrics = util.measureText(this.content(), {
+                font: this.options.get("font")
+            });
+
+            return metrics;
+        },
+
+        bbox: function(transformation) {
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            var size = this.measure();
+            var origin = this.origin.clone();
+            var rect = new g.Rect(origin, origin.clone().add(new g.Point(size.width, size.height)));
+
+            return rect.bbox(transformation);
         }
     });
 
@@ -305,7 +344,7 @@
         },
 
         _lineBoundingBox: function(p1, p2) {
-            return new Rect(p1.min(p2), p1.max(p2));
+            return new Rect(Point.min(p1, p2), Point.max(p1, p2));
         },
 
         _curveBoundingBox: function(p1, cp1, cp2, p2) {

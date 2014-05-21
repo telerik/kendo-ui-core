@@ -5,6 +5,8 @@
         Point = g.Point,
         Matrix = g.Matrix,
 
+        util = dataviz.util,
+
         d = dataviz.drawing,
         Element = d.Element,
         Group = d.Group,
@@ -16,25 +18,6 @@
         Path = d.Path,
         Arc = d.Arc,
         TOLERANCE = 0.1;
-
-    function compareBoundingBox(bbox, values, tolerance) {
-        tolerance = tolerance || 0;
-
-        close(bbox.p0.x, values[0], tolerance);
-        close(bbox.p0.y, values[1], tolerance);
-        close(bbox.p1.x, values[2], tolerance);
-        close(bbox.p1.y, values[3], tolerance);
-    }
-
-    function compareMatrices(m1, m2, tolerance) {
-        tolerance = tolerance  || 0;
-        close(m1.a, m2.a, tolerance);
-        close(m1.b, m2.b, tolerance);
-        close(m1.c, m2.c, tolerance);
-        close(m1.d, m2.d, tolerance);
-        close(m1.e, m2.e, tolerance);
-        close(m1.f, m2.f, tolerance);
-    }
 
     // ------------------------------------------------------------
     (function() {
@@ -308,86 +291,162 @@
     });
 
     // ------------------------------------------------------------
-    var shape;
+    function shapeBaseTests(TShape, name) {
+        var shape;
 
-    module("Shape", {
-        setup: function() {
-            shape = new Shape();
-        }
-    });
+        module("Shape base tests / " + name, {
+            setup: function() {
+                shape = new TShape();
+            }
+        });
+
+        test("fill sets fill", function() {
+            shape.fill("red", 1);
+
+            equal(shape.options.fill.color, "red");
+            equal(shape.options.fill.opacity, 1);
+        });
+
+        test("fill triggers optionsChange", function() {
+            shape.observer = {
+                optionsChange: function() {
+                    ok(true);
+                }
+            }
+
+            shape.fill("red");
+        });
+
+        test("fill returns shape", function() {
+            deepEqual(shape.fill("red"), shape);
+        });
+
+        test("stroke sets stroke", function() {
+            shape.stroke("red", 2, 1);
+
+            equal(shape.options.stroke.color, "red");
+            equal(shape.options.stroke.width, 2);
+            equal(shape.options.stroke.opacity, 1);
+        });
+
+        test("stroke triggers optionsChange", function() {
+            shape.observer = {
+                optionsChange: function() {
+                    ok(true);
+                }
+            }
+
+            shape.stroke("red");
+        });
+
+        test("stroke returns shape", function() {
+            deepEqual(shape.stroke("red"), shape);
+        });
+    }
+
+    shapeBaseTests(Shape, "Shape");
+
+    // ------------------------------------------------------------
+    module("Shape");
 
     test("sets initial options", function() {
         shape = new Shape({ foo: true });
         ok(shape.options.foo);
     });
 
-    test("fill sets fill", function() {
-        shape.fill("red", 1);
-
-        equal(shape.options.fill.color, "red");
-        equal(shape.options.fill.opacity, 1);
-    });
-
-    test("fill triggers optionsChange", function() {
-        shape.observer = {
-            optionsChange: function() {
-                ok(true);
-            }
-        }
-
-        shape.fill("red");
-    });
-
-    test("fill returns shape", function() {
-        deepEqual(shape.fill("red"), shape);
-    });
-
-    test("stroke sets stroke", function() {
-        shape.stroke("red", 2, 1);
-
-        equal(shape.options.stroke.color, "red");
-        equal(shape.options.stroke.width, 2);
-        equal(shape.options.stroke.opacity, 1);
-    });
-
-    test("stroke triggers optionsChange", function() {
-        shape.observer = {
-            optionsChange: function() {
-                ok(true);
-            }
-        }
-
-        shape.stroke("red");
-    });
-
-    test("stroke returns shape", function() {
-        deepEqual(shape.stroke("red"), shape);
-    });
-
     // ------------------------------------------------------------
-    module("Text");
+    var text;
+
+    shapeBaseTests(Text, "Text");
+
+    module("Text", {
+        setup: function() {
+            text = new Text("Foo", new g.Point(100, 100));
+        }
+    });
 
     test("sets initial content", function() {
-        var text = new Text("Foo");
+        equal(text.content(), "Foo");
+    });
 
-        equal(text.content, "Foo");
+    test("sets initial origin", function() {
+        equal(text.origin.x, 100);
     });
 
     test("sets initial options", function() {
-        var text = new Text("Foo", { foo: true });
+        text = new Text("Foo", new g.Point(), { foo: true });
 
         ok(text.options.foo);
     });
 
-    test("setting content triggers change", function() {
-        var text = new Text("Foo", { foo: true });
+    test("sets default font", function() {
+        equal(text.options.font, "12px sans-serif");
+    });
 
-        ok(text.options.foo);
+    test("changing the origin triggers geometryChange", function() {
+        text.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        text.origin.set("x", 5);
+    });
+
+    test("setting content triggers contentChange", function() {
+        text.observer = {
+            contentChange: function() { ok(true); }
+        };
+
+        text.content("Bar");
+    });
+
+    test("clears content", function() {
+        text.content("");
+        equal(text.content(), "");
+    });
+
+    test("content setter is chainable", function() {
+        equal(text.content("Bar"), text);
+    });
+
+    test("bbox returns text bounding box", function() {
+        text.measure = function() {
+            return { width: 20, height: 10 };
+        };
+
+        var bbox = text.bbox();
+        compareBoundingBox(bbox, [100, 100, 120, 110]);
+    });
+
+    test("retrieving bbox doesn't change origin observer", function() {
+        text.bbox();
+        equal(text.origin.observer, text);
+    });
+
+    test("bbox returns transformed bounding box", function() {
+        text.measure = function() {
+            return { width: 20, height: 10 };
+        };
+
+        var bbox = text.bbox(g.transform().scale(2, 1, text.origin));
+        compareBoundingBox(bbox, [100, 100, 140, 110]);
+    });
+
+    test("measure returns text metrics", function() {
+        deepEqual(text.measure(), util.measureText("Foo"));
+    });
+
+    test("measure takes font in consideration", function() {
+        text.options.set("font", "15px sans-serif");
+        deepEqual(text.measure(), util.measureText("Foo", { font: "15px arial" }));
     });
 
     // ------------------------------------------------------------
     var circleGeometry,
         circle;
+
+    shapeBaseTests(Circle, "Circle");
 
     module("Circle", {
         setup: function() {
@@ -599,6 +658,8 @@
     // ------------------------------------------------------------
     var path;
 
+    shapeBaseTests(Path, "Path");
+
     module("Path", {
         setup: function() {
             path = new Path();
@@ -775,6 +836,8 @@
 
     // ------------------------------------------------------------
     var multiPath;
+
+    shapeBaseTests(MultiPath, "MultiPath");
 
     module("MultiPath", {
         setup: function() {
