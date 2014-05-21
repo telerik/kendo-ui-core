@@ -502,11 +502,16 @@ body > label
     -webkit-box-shadow: inset 0 0 0 1px #fff, inset 0 0 6px rgba(255,255,255,.8);
 }
 
+.branding
+{
+    background-color: #2a2d33;
+    padding: 17px;
+}
+
 .header
 {
+    position: relative;
     min-width: 950px;
-    padding-left: 20px;
-    font-size: 24px;
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
     background: -moz-linear-gradient(top, #fff, #eee);
     background: linear-gradient(to bottom, #fff, #eee);
@@ -517,22 +522,6 @@ body > label
     vertical-align: middle;
 }
 
-.header span
-{
-    color: #222;
-    position: relative;
-    display: inline-block;
-}
-
-.header .underTitle
-{
-    position: absolute;
-    bottom: -14px;
-    right: 0;
-    font-size: 8px;
-    text-transform: uppercase;
-}
-
 .tools
 {
     border: 0;
@@ -541,9 +530,7 @@ body > label
 
 .tools .menu
 {
-    position: absolute;
-    top: 10px;
-    left: 200px;
+    margin: 10px 0 0 10px;
     font-size: 14px;
     display: inline-block;
     text-transform: uppercase;
@@ -586,6 +573,7 @@ body > label
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow: hidden;
 }
 
 .tools.k-tabstrip .k-loading
@@ -595,13 +583,11 @@ body > label
 
 .box
 {
-    position: absolute;
+    position: relative;
     z-index: 0;
     padding: 40px 0 40px 30px;
     min-width: 940px;
     width: 100%;
-    top: 198px;
-    bottom: 0;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-box-sizing: border-box;
