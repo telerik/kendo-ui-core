@@ -491,6 +491,27 @@
     });
 
     // ------------------------------------------------------------
+    var circle,
+        circleNode;
+
+    module("CircleNode", {
+        setup: function() {
+            var geometry = new g.Circle(new Point(10, 20), 30);
+            circle = new d.Circle(geometry);
+            circleNode = new canv.CircleNode(circle);
+        }
+    });
+
+    test("renders arc", function() {
+        circleNode.renderTo(mockContext({
+            arc: function(x, y, r, start, end) {
+                deepEqual([x, y, r, start, end],
+                          [10, 20, 30, 0, Math.PI * 2]);
+            }
+        }));
+    });
+
+    // ------------------------------------------------------------
     var text;
     var textNode;
 
