@@ -64,7 +64,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
 
             location += location[location.length-1] != "/" ? "/" : "";
 
-            url = location + "../../content/integration/simulator/devices/" + devicename + "/styles.css";
+            url = location + "../../../content/integration/simulator/devices/" + devicename + "/styles.css";
 
             if (kendo.support.browser.msie && kendo.support.browser.version < 11) {
                 newLink = document.createStyleSheet(url);
@@ -80,7 +80,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
             matches = deviceSelector.text().match(/(^\w+)\s(.*)/m);
             $(".description .device")
                     .html(matches[1] + "<span class='model'>" + matches[2] + "</span>")
-                    .css("background-image", "url('" + location + "../../content/integration/simulator/images/" + devicename + ".png')");
+                    .css("background-image", "url('" + location + "../../../content/integration/simulator/images/" + devicename + ".png')");
 
             setTimeout(function () {
                 deviceLink.remove();
