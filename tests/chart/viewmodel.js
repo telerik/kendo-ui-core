@@ -1772,7 +1772,7 @@
 
     (function() {
         var Pane = dataviz.Pane,
-            pane, rect;
+            pane, rect, paneTitle;
 
         function createPaneRect(options) {
             pane = new Pane(options);
@@ -1784,7 +1784,6 @@
             rect = view.log.rect[0];
         }
 
-
         // ------------------------------------------------------------
         module("Pane");
 
@@ -1793,24 +1792,67 @@
             ok(pane.id);
         });
 
-        test("Title shrinks content box", function() {
-            pane = new Pane( { title: "Title", width: 600, height: 400 } );
-            pane.reflow(chartBox);
-
-            equal(pane.contentBox.height(), 365);
-        });
-
-        test("Sets background color", function() {            
+        test("Sets background color", function() {
             createPaneRect({ background: "color", width: 600, height: 400 });
             equal(rect.style.fill, "color");
         });
 
-        test("Sets border", function() {            
+        test("Sets border", function() {
             createPaneRect({ border: { color: "color", width: 1, dashType: "dashType" }, width: 600, height: 400 });
             equal(rect.style.stroke, "color");
             equal(rect.style.strokeWidth, 1);
             equal(rect.style.dashType, "dashType");
         });
+
+        // ------------------------------------------------------------
+
+        function createPaneWithTitle(options) {
+            pane = new Pane($.extend(true, { title: {
+                text: "Title"
+            }, width: 600, height: 400 }, options));
+            pane.reflow(chartBox);
+            paneTitle = pane.title;
+        }
+
+        module("Pane / Title");
+
+        test("positions title to the top", function() {
+            createPaneWithTitle();
+
+            equal(paneTitle.options.position, "top");
+        });
+
+        test("Title shrinks content box", function() {
+            createPaneWithTitle();
+
+            equal(pane.contentBox.height(), 365);
+        });
+
+        test("aligns Title to the left", function() {
+            createPaneWithTitle();
+            equal(paneTitle.options.align, "left");
+        });
+
+        test("aligns Title to the center", function() {
+            createPaneWithTitle({
+                title: {
+                    position: "center"
+                }
+            });
+
+            equal(paneTitle.options.align, "center");
+        });
+
+        test("aligns Title to the right", function() {
+            createPaneWithTitle({
+                title: {
+                    position: "right"
+                }
+            });
+
+            equal(paneTitle.options.align, "right");
+        });
+
     })();
 
     (function() {

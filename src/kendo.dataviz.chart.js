@@ -7352,7 +7352,7 @@ var __meta__ = {
             options = pane.options;
             pane.id = uniqueId();
 
-            pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
+            pane.createTitle();
 
             pane.content = new ChartElement();
             pane.chartContainer = new ChartContainer({}, pane);
@@ -7369,6 +7369,18 @@ var __meta__ = {
                 align: LEFT
             },
             visible: true
+        },
+
+        createTitle: function() {
+            var pane = this;
+            var titleOptions = pane.options.title;
+            if (typeof titleOptions === OBJECT) {
+                titleOptions = deepExtend({}, titleOptions, {
+                    align: titleOptions.position,
+                    position: TOP
+                });
+            }
+            pane.title = Title.buildTitle(titleOptions, pane, Pane.fn.options.title);
         },
 
         appendAxis: function(axis) {
