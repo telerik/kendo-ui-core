@@ -1740,7 +1740,7 @@
 
             var legendBox = legend.children[0].box;
 
-            sameBox(legendBox, new Box2D(455, 955, 551, 1000), TOLERANCE);
+            sameBox(legendBox, new Box2D(460, 965, 545, 1000), TOLERANCE);
         });
 
         test("positions legend to the top should have correct box", function() {
@@ -1750,7 +1750,7 @@
 
             var legendBox = legend.children[0].box;
 
-            sameBox(legendBox, new Box2D(455, 5, 551, 50), TOLERANCE);
+            sameBox(legendBox, new Box2D(460, 5, 545, 40), TOLERANCE);
         });
 
         test("positions legend to the bottom", function() {
@@ -1831,7 +1831,7 @@
         });
 
         test("renders box with padding", function() {
-            sameBox(legendBox, new Box2D(902, 483, 988, 518), TOLERANCE);
+            sameBox(legendBox, new Box2D(908, 482.5, 993, 517.5), TOLERANCE);
         });
 
         test("renders border width", function() {

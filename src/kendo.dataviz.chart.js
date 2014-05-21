@@ -1765,7 +1765,7 @@ var __meta__ = {
             },
             offsetX: 0,
             offsetY: 0,
-            margin: getSpacing(10),
+            margin: getSpacing(5),
             padding: getSpacing(5),
             border: {
                 color: BLACK,
