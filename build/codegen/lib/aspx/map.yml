@@ -144,3 +144,7 @@
       :type: Number
       :description: The maximum zoom level at which to show this layer.
       :default: 0
+
+    - :name: layers.clientDataSourceID
+      :type: String
+      :description: The ID of RadClientDataSource control to which the layer will be data bound.

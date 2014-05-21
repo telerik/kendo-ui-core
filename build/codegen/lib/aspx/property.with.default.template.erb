@@ -2,8 +2,8 @@
         /// <summary>
         /// <%= description %>
         /// </summary>
-        <% if type == "stringArray" %>[TypeConverter(typeof(Telerik.Web.Design.ListConverter))]<% end %>
-        [DefaultValue(<%= csharp_default %>)]
+<% if type == "stringArray" %>        [TypeConverter(typeof(Telerik.Web.Design.ListConverter))]
+<% end %>        [DefaultValue(<%= csharp_default %>)]
         public <%= csharp_class %> <%= csharp_name %>
         {
             get
