@@ -486,8 +486,8 @@
         ok(svg.indexOf("fill-opacity='0.5'") !== -1);
     });
 
-    test("does not render fill if not set", function() {
-        ok(pathNode.render().indexOf("fill") === -1);
+    test("renders empty fill if not set", function() {
+        ok(pathNode.render().indexOf("fill='none'") !== -1);
     });
 
     test("renders empty fill if set to transparent", function() {
