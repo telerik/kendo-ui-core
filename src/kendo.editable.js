@@ -290,6 +290,7 @@ var __meta__ = {
 
             kendo.bind(container, that.options.model);
 
+            that.options.model.unbind("set", that._validateProxy);
             that.options.model.bind("set", that._validateProxy);
 
             that.validatable = new kendo.ui.Validator(container, {
