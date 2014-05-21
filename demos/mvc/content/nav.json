@@ -1210,7 +1210,7 @@
       {
         "text": "Virtualization of local data",
         "disableInMobile": true,
-        "url": "grid/virtualization-local-data-binding",
+        "url": "grid/virtualization-local-data",
         "title": {
             "kendo-ui": "Example of local data virtualization in Kendo UI Grid control"
         },
@@ -1223,7 +1223,7 @@
       },
       {
         "text": "Virtualization of remote data",
-        "url": "grid/virtualization-remote-data-binding",
+        "url": "grid/virtualization-remote-data",
         "title": {
             "kendo-ui": "Demo for Kendo UI Grid virtualization to remote data"
         },
