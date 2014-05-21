@@ -372,7 +372,7 @@
 
         content: function(value) {
             if (this.element) {
-                this.element.innerHTML = this.srcElement.content();
+                this.element.textContent = this.srcElement.content();
             }
         },
 
