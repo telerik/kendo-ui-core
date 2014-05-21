@@ -7,7 +7,7 @@ $(function() {
 
     $("#search-results").kendoMobileListView({
        dataSource: searchDataSource,
-       template: '<a href="../#: url #"> #: text # <span class="section">#: section #</span> </a>',
+       template: '<a href="#: path + url #"> #: text # <span class="section">#: section #</span> </a>',
        dataBinding: function(e) {
             if (!searchDataSource.filter()) {
                 e.preventDefault();
