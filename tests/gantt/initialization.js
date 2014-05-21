@@ -38,6 +38,24 @@
         ok(element.data("kendoGantt").timeline instanceof ui.GanttTimeline);
     });
 
+    test("initialized with default height", function () {
+        var gantt = new Gantt(element);
+
+        equal(element.height(), gantt.options.height);
+    });
+
+    test("initialized with height from options", function () {
+        element.kendoGantt({ height: 800 });
+
+        equal(element.height(), 800);
+    });
+
+    test("initialized with width from options", function () {
+        element.kendoGantt({ width: 800 });
+
+        equal(element.width(), 800);
+    });
+
     test("css classes are added to the wrapper", 2, function() {
         var gantt = new Gantt(element);
 
@@ -231,6 +249,27 @@
         ok(listWrapper.hasClass("k-gantt-layout"));
     });
 
+    test("list's wrapper is created with default width", function () {
+        var gantt = new Gantt(element);
+
+        equal(gantt.wrapper.find(".k-gantt-treelist").width(), gantt.options.listWidth);
+    });
+
+    test("list's wrapper is created with width from options", function () {
+        var gantt = new Gantt(element, { listWidth: 800 });
+
+        equal(gantt.wrapper.find(".k-gantt-treelist").width(), 800);
+    });
+
+    test("list's wrapper height is total height without the toolbar & footer", function () {
+        var gantt = new Gantt(element, { listWidth: 800 });
+        var toolbarHeight = gantt.toolbar.outerHeight();
+        var footerHeight = gantt.footer.outerHeight();
+        var totalHeight = element.height();
+
+        equal(gantt.wrapper.find(".k-gantt-treelist").height(), totalHeight - (toolbarHeight + footerHeight));
+    });
+
     test("timeline's wrapper is created", function() {
         var gantt = new Gantt(element);
         var timelineWrapper = gantt.wrapper.children(".k-gantt-timeline");
@@ -239,10 +278,28 @@
         ok(timelineWrapper.hasClass("k-gantt-layout"));
     });
 
-    test("resize handle is created", function() {
+    test("timeline's wrapper height is total height without the toolbar & footer", function () {
+        var gantt = new Gantt(element, { listWidth: 800 });
+        var toolbarHeight = gantt.toolbar.outerHeight();
+        var footerHeight = gantt.footer.outerHeight();
+        var totalHeight = element.height();
+
+        equal(gantt.wrapper.find(".k-gantt-timeline").height(), totalHeight - (toolbarHeight + footerHeight));
+    });
+
+    test("resizable wrapper is created", function () {
         var gantt = new Gantt(element, { height: 400 });
 
         ok(gantt.wrapper.find(".k-splitbar"));
+    });
+
+    test("resizable wrapper height is total height without the toolbar & footer", function () {
+        var gantt = new Gantt(element, { listWidth: 800 });
+        var toolbarHeight = gantt.toolbar.outerHeight();
+        var footerHeight = gantt.footer.outerHeight();
+        var totalHeight = element.height();
+
+        equal(gantt.wrapper.find(".k-splitbar").height(), totalHeight - (toolbarHeight + footerHeight));
     });
 
     module("TaskDropDown", {

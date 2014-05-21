@@ -155,7 +155,7 @@ var __meta__ = {
 
             colgroup = kendoDomElement("colgroup", null, this._cols());
             thead = kendoDomElement("thead", null, [kendoDomElement("tr", null, this._ths())]);
-            table = kendoDomElement("table", null, [colgroup, thead]);
+            table = kendoDomElement("table", { "style": { "min-width": this.options.listWidth + "px" } }, [colgroup, thead]);
 
             domTree.render([table]);
         },
@@ -169,7 +169,7 @@ var __meta__ = {
 
             colgroup = kendoDomElement("colgroup", null, this._cols());
             tbody = kendoDomElement("tbody", null, this._trs(tasks));
-            table = kendoDomElement("table", null, [colgroup, tbody]);
+            table = kendoDomElement("table", { "style": { "min-width": this.options.listWidth + "px" } }, [colgroup, tbody]);
 
             this.contentTree.render([table]);
         },

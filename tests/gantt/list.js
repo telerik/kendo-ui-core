@@ -101,7 +101,7 @@
 
             dataSource = new GanttDataSource();
 
-            ganttList = new GanttList(element, { columns: columns, dataSource: dataSource });
+            ganttList = new GanttList(element, { columns: columns, dataSource: dataSource, listWidth: 500 });
         },
         teardown: function() {
             ganttList.destroy();
@@ -112,6 +112,12 @@
         var header = ganttList.header;
 
         equal(header.children("table").length, 1);
+    });
+
+    test("table element min-width", function () {
+        var header = ganttList.header;
+
+        equal(parseInt(header.children("table").css("min-width")), ganttList.options.listWidth);
     });
 
     test("table colgroup", function() {
@@ -220,7 +226,7 @@
             dataSource.fetch();
             taskTree = dataSource.taskTree();
 
-            ganttList = new GanttList(element, { columns: columns, dataSource: dataSource });
+            ganttList = new GanttList(element, { columns: columns, dataSource: dataSource, listWidth: 500 });
             ganttList._render(taskTree);
         },
         teardown: function() {
@@ -232,6 +238,12 @@
         var content = ganttList.content;
 
         equal(content.children("table").length, 1);
+    });
+
+    test("table element min-width", function () {
+        var content = ganttList.content;
+
+        equal(parseInt(content.children("table").css("min-width")), ganttList.options.listWidth);
     });
 
     test("table colgroup", function() {

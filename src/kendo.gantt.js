@@ -881,7 +881,8 @@ var __meta__ = {
             var options = extend({}, {
                 columns: this.options.columns || [],
                 dataSource: this.dataSource,
-                selectable: this.options.selectable
+                selectable: this.options.selectable,
+                listWidth: this.options.listWidth
             });
 
             this.list = new kendo.ui.GanttList(element, options);
@@ -1095,38 +1096,35 @@ var __meta__ = {
             var timelineWidth;
             var timelineScroll;
 
-            wrapper
+            this._resizeDraggable = wrapper
                 .find(".k-splitbar")
                 .height(treeListWrapper.height())
-                .hover(function(e) {
-                        $(this).addClass("k-splitbar-horizontal-hover");
-                    },
-                    function(e) {
-                        $(this).removeClass("k-splitbar-horizontal-hover");
-                    });
-
-            this._resizeDraggable = new kendo.ui.Resizable(wrapper, {
-                orientation: "horizontal",
-                handle: ".k-splitbar"
-            });
-
-            this._resizeDraggable
-                .bind("start", function(e) {
-                    treeListWidth = treeListWrapper.width();
-                    timelineWidth = timelineWrapper.width();
-                    timelineScroll = timelineWrapper.find(".k-grid-content").scrollLeft();
+                .hover(function (e) {
+                    $(this).addClass("k-splitbar-horizontal-hover");
+                }, function (e) {
+                    $(this).removeClass("k-splitbar-horizontal-hover");
                 })
-                .bind("resize", function(e) {
-                    var delta = e.x.initialDelta;
+                .end()
+                .kendoResizable({
+                    orientation: "horizontal",
+                    handle: ".k-splitbar",
+                    "start": function (e) {
+                        treeListWidth = treeListWrapper.width();
+                        timelineWidth = timelineWrapper.width();
+                        timelineScroll = timelineWrapper.find(".k-grid-content").scrollLeft();
+                    },
+                    "resize": function(e) {
+                        var delta = e.x.initialDelta;
 
-                    if (treeListWidth + delta < 0 || timelineWidth - delta < 0) {
-                        return;
+                        if (treeListWidth + delta < 0 || timelineWidth - delta < 0) {
+                            return;
+                        }
+
+                        treeListWrapper.width(treeListWidth + delta);
+                        timelineWrapper.width(timelineWidth - delta);
+                        timelineWrapper.find(".k-grid-content").scrollLeft(timelineScroll + delta);
                     }
-
-                    treeListWrapper.width(treeListWidth + delta);
-                    timelineWrapper.width(timelineWidth - delta);
-                    timelineWrapper.find(".k-grid-content").scrollLeft(timelineScroll + delta);
-                });
+                }).data("kendoResizable");
         },
 
         _scrollable: function() {
