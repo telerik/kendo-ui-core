@@ -128,9 +128,19 @@
       :type: stringArray
       :default: null
 
-    - :name: layers.extent
-      :type: kendo.dataviz.map.Location
-
     - :name: layerDefaults.tile.subdomains
       :type: stringArray
       :default: null
+
+    - :name: layers.extent
+      :type: kendo.dataviz.map.Extent
+
+    - :name: layers.minZoom
+      :type: Number
+      :description: The minimum zoom level at which to show this layer.
+      :default: 0
+
+    - :name: layers.maxZoom
+      :type: Number
+      :description: The maximum zoom level at which to show this layer.
+      :default: 0
