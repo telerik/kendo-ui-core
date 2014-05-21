@@ -5,6 +5,7 @@
     "src/dataviz/**/*.js",
     "tests/map/layers/helpers.js",
     "tests/**/test-helper.js",
+    "tests/dataviz/drawing/*.js",
     "demos/mvc/content/shared/js/examples.js",
     "demos/mvc/content/shared/js/console.js",
     "themebuilder/bootstrap.js",
@@ -20,9 +21,10 @@
         "browser": true,
         "jquery": true,
         "globals": {
-            "QUnit": true, "test": true, "asyncTest": true, "module": true, "start": true,
+            "QUnit": true, "test": true, "asyncTest": true, "module": true, "start": true, "equal": true, "deepEqual": true, "ok": true,
             "kendo": true,
-            "define": true
+            "define": true,
+            "compareMatrices": true, "compareBoundingBox": true
         }
     }
 }

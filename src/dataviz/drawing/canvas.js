@@ -125,10 +125,13 @@
                 srcElement = elements[i];
                 children = srcElement.children;
 
+                // TODO: Node registration
                 if (srcElement instanceof Path) {
                     childNode = new PathNode(srcElement);
                 } else if (srcElement instanceof d.MultiPath) {
                     childNode = new MultiPathNode(srcElement);
+                } else if (srcElement instanceof d.Circle) {
+                    childNode = new CircleNode(srcElement);
                 } else if (srcElement instanceof d.Text) {
                     childNode = new TextNode(srcElement);
                 } else {
@@ -270,6 +273,16 @@
         }
     });
 
+    var CircleNode = PathNode.extend({
+        renderPoints: function(ctx) {
+            var geometry = this.srcElement.geometry;
+            var c = geometry.center;
+            var r = geometry.radius;
+
+            ctx.arc(c.x, c.y, r, 0, Math.PI * 2);
+        }
+    });
+
     var TextNode = PathNode.extend({
         renderTo: function(ctx) {
             var text = this.srcElement;
@@ -299,6 +312,7 @@
 
     deepExtend(dataviz.drawing, {
         canvas: {
+            CircleNode: CircleNode,
             Surface: Surface,
             Node: Node,
             MultiPathNode: MultiPathNode,

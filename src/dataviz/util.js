@@ -25,8 +25,17 @@
     }
 
     function round(value, precision) {
-        var power = math.pow(10, precision || 0);
+        var power = pow(precision);
         return math.round(value * power) / power;
+    }
+
+    // Extracted from round to get on the V8 "fast path"
+    function pow(p) {
+        if (p) {
+            return math.pow(10, p);
+        } else {
+            return 1;
+        }
     }
 
     function limitValue(value, min, max) {

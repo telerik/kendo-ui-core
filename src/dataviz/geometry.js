@@ -442,7 +442,7 @@
         }
     });
 
-    // TODO: Consider renaming to TransformMatrix
+    // TODO: Consider renaming to TransformMatrix or Transform
     var Matrix = Class.extend({
         /* Transformation matrix
          *
